@@ -1,0 +1,37 @@
+{
+    "x":0,
+    "type":"dota2Panel",
+    "selectedBox":1,
+    "selecteID":2,
+    "props":{"width":500,"vertical-align":"center","sceneColor":"#000000","horizontal-align":"center","height":100,"bg-color":"#000000"},
+    "nodeParent":-1,
+    "label":"dota2Panel",
+    "isOpen":true,
+    "isDirectory":true,
+    "isAniNode":true,
+    "hasChild":true,
+    "compId":1,
+    "child":[
+        {
+            "x":15,
+            "type":"dota2Label",
+            "props":{"vertical-align":"center","text":"ssss","ref":"this.lbl","horizontal-align":"center","height":76,"font-size":50,"color":"#f8f4f4","centerY":0,"centerX":0},
+            "nodeParent":1,
+            "label":"dota2Label",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":2,
+            "child":[
+                ]
+        }],
+    "animations":[
+        {
+            "nodes":[
+                ],
+            "name":"ani1",
+            "id":1,
+            "frameRate":24,
+            "action":0
+        }]
+}

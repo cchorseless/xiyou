@@ -1,0 +1,7 @@
+// generate with PIPIXIA's kv generator 
+
+"DOTAAbilities" {
+	"Version" "1"
+	"item_blink" "REMOVE"
+
+}

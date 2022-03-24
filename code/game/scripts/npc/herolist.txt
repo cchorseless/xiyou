@@ -1,0 +1,6 @@
+// generate with PIPIXIA's kv generator 
+
+"CustomHeroList" {
+	"npc_dota_hero_phoenix" "1"
+
+}

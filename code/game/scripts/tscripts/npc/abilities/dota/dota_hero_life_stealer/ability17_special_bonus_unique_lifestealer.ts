@@ -1,0 +1,15 @@
+
+import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
+import { registerAbility } from "../../../entityPlus/Base_Plus";
+
+/** dota原技能数据 */
+export const Data_special_bonus_unique_lifestealer = {"ID":"6173","AbilityType":"DOTA_ABILITY_TYPE_ATTRIBUTES","AbilityBehavior":"DOTA_ABILITY_BEHAVIOR_PASSIVE","AbilitySpecial":{"01":{"var_type":"FIELD_FLOAT","value":"1.5","ad_linked_ability":"life_stealer_rage"}}} ;
+
+@registerAbility()
+export class ability17_special_bonus_unique_lifestealer extends BaseAbility_Plus {
+    /**对应dota内的名字 */
+    __IN_DOTA_NAME__ = "special_bonus_unique_lifestealer";
+    /**对应dota内的数据 */
+    __IN_DOTA_DATA__: typeof Data_special_bonus_unique_lifestealer = Data_special_bonus_unique_lifestealer ;
+}
+    

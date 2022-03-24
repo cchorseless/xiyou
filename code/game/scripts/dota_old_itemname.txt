@@ -1,0 +1,252 @@
+强袭装甲 Assault Cuirass
+　　希瓦之看守保护 Shiva's Guard
+　　刃甲 Blade Mail
+　　魔龙之心 Heart of Tarrasque
+　　血精石 Bloodstone
+　　镇魂石 Soul Booster
+　　黑皇杖 Black King Bar
+　　林肯法球 Linken'sphere
+　　挑战帽子 Hood of Defiance
+　　前锋盾 Vanguard
+　　永不磨灭之看守保护 Aegis of the immortal
+　　秘法圣所Arcane Sanctum
+　　羊刀 Guinsoo's Scythe of Vyse
+　　紫苑 Orchid Malevolence
+　　风杖 Eul's Scepter of Divinity
+　　弹射法杖 Force Staff
+　　红杖 Dagon
+　　死灵书 Necronomicon
+　　蓝杖 Aghanim's Scepter
+　　刷新球 Refresher Orb
+　　支援法衣 Supportive Vestments
+　　梅肯 Mekansm
+　　吸血鬼披风 Vladmir's Offering
+　　秘法指环 Arcane Ring
+　　卡嘉之洞察长笛 Khadgar's pipe of insight
+　　玄冥盾牌 Nathrezim Buckler
+　　回复帽子 Headdress of rejuvenation
+　　圣殿指环 Ring of Basilius
+　　飞行信使 Flying Courier
+　　史前兵器 Ancient Weaponry
+　　圣剑 Divine Rapier
+　　金箍棒 Monkey King Bar
+　　辉耀 Radiance
+　　胡蝶 the Butterfly
+　　大炮 Buriza-Dokyanon
+　　碎骨锤 Cranium Basher
+　　狂战斧 Battlefury
+　　幻影斧 Manta Style
+　　透明水晶剑 Crystalys
+　　食尸鬼王的臂章 Armlet of Mordiggian
+　　洛萨之锋 Lothar's Edge
+　　诱惑遗物 Enchanted Artifacts
+　　散夜对剑 Sange and Yasha
+　　散华 Sange
+　　夜叉 Yasha
+　　撒旦之邪力 Satanic
+　　支配偶盔 Helm of the Dominator
+　　疯狂面具 Mask of Madness
+　　雷神之锤 Mjollnir
+　　旋涡 Maelstrom
+　　散失之刃 Diffusal Blade
+　　冰眼 Eye of Skadi
+　　黯灭 Stygian Desolator
+　　圣物关口 Gateway Relics
+　　远行鞋 Boots of Travel
+　　相位鞋 Phase Boots
+　　动力鞋 Power Treads
+　　点金手 Hand of Midas
+　　空明杖 Oblivion Staff
+　　坚韧球 Perseverance
+　　穷苦人盾 Poor Man's shield
+　　护腕 Bracer
+　　幽灵系带 Braith Band
+　　无用挂件 Null Talisman
+　　魔杖 Magic Wand
+　　奎尔瑟兰的密室（恶魔遗物）Cache of Quel-thelan
+　　加速手套儿 Gloves of Haste
+　　吸血面具 Mask of Death
+　　恢复指环 Ring of Regeneration
+　　跳刀 Kelen's Dagger
+　　艺人面具 Sobi Mask
+　　速率之鞋 Boots of Speed
+　　真实宝石 Gem of ture sight
+　　旅法师大氅 Planeswalker's Cloak
+　　魔棒 Magic Stick
+　　闪避护符 Talisman of Evasion
+　　幽魂法杖 Ghost Scepter
+　　奇迹古树（坟场）Ancient of Wonders
+　　净化药水儿 Clarity Potion
+　　治疗膏药 Healing Salve
+　　艾西菲的史前祭祀Ancient Tango of Essifation
+　　魔瓶 Bottle
+　　侦查保卫（假眼）Observer Ward
+　　岗哨保卫（真眼）Sentry Ward
+　　显影之尘 Dust of Appearance
+　　动物信使 Animal Courier
+　　回程卷轴 Scroll of Town Portal
+　　饰品商人 Sena the Accesorizer
+　　铁树枝干 Ironwood Branch
+　　贵族圆环 Circlet of Nobility
+　　极限法球 Ultimate Orb
+　　智力大氅 Mantle of Intelligence
+　　法师长袍 Robe of the Magi
+　　魔力法杖 Staff of Wizardry
+　　火速便鞋 Slippers of Agility
+　　精灵皮靴 Boots of Elvenskin
+　　欢欣之刃 Blade of Alacrity
+　　力量手套儿 Gauntlets of Ogre Strength
+　　伟人腰带 Belt of Giant Strength
+　　食人魔之斧 Ogre Axe
+　　武器商人 Weapons Dealer
+　　攻击之爪 Claws of Attack
+　　阔剑 Broadsword
+　　短棍 Quarterstaff
+　　大剑 Claymore
+　　看守保护指环 Ring of Protection
+　　小圆盾 Stout Shield
+　　标枪 Javelin
+　　秘银锤 Mithril Hammer
+　　锁子甲 Chain Mail
+　　铁艺头盔 Helm of Iron Will
+　　板甲 Plate Mail
+　　压抑之刃 Quelling Blade
+　　暗盘商人 Marketplace
+　　恶魔刀锋 Demon Edge
+　　鹰角弓 Eaglehorn
+　　希梅斯特的掠夺 Messerschmidt's Reaver
+　　神秘法杖 Mystic Staff
+　　圣者遗物 Sacred Relic
+　　治疗指环 Ring of Health
+　　虚无宝石 Void Stone
+　　振奋宝石 Hyperstone
+　　精气之球 Point Booster
+　　能+量之球 Energy Booster
+　　活力之球 Vitality Booster
+　　========最后是全物品设备引得表，以首字母排序========
+　　Aegis of the immortal 永不磨灭之看守保护
+　　Aghanim's Scepter 蓝杖
+　　Ancient of Wonders 奇迹古树（坟场）
+　　Ancient Tango of Essifation 艾西菲的史前祭祀
+　　Ancient Weaponry 史前兵器
+　　Animal Courier 动物信使
+　　Arcane Ring 秘法指环
+　　Arcane Sanctum 秘法圣所
+　　Armlet of Mordiggian 食尸鬼王的臂章
+　　Assault Cuirass 强袭装甲
+　　Battlefury 狂战斧
+　　Belt of Giant Strength 伟人腰带
+　　Black King Bar 黑皇杖
+　　Blade Mail 刃甲
+　　Blade of Alacrity 欢欣之刃
+　　Bloodstone 血精石
+　　Boots of Elvenskin 精灵皮靴
+　　Boots of Speed 速率之鞋
+　　Boots of Travel 远行鞋
+　　Bottle 魔瓶
+　　the Butterfly 胡蝶
+　　Bracer 护腕
+　　Braith Band 幽灵系带
+　　Broadsword 阔剑
+　　Buriza-Dokyanon 大炮
+　　Cache of Quel-thelan 奎尔瑟兰的密室（恶魔遗物）
+　　Chain Mail 锁子甲
+　　Circlet of Nobility 贵族圆环
+　　Clarity Potion 净化药水儿
+　　Claws of Attack 攻击之爪
+　　Claymore 大剑
+　　Cranium Basher 碎骨锤
+　　Crystalys 透明水晶剑
+　　Dagon 红杖
+　　Demon Edge 恶魔刀锋
+　　Diffusal Blade 散失之刃
+　　Divine Rapier 圣剑
+　　Dust of Appearance 显影之尘
+　　Eaglehorn 鹰角弓
+　　Enchanted Artifacts 诱惑遗物
+　　Energy Booster 能+量之球
+　　Eul's Scepter of Divinity 风杖
+　　Eye of Skadi 冰眼
+　　Flying Courier 飞行信使
+　　Force Staff 弹射法杖
+　　Gateway Relics 圣物关口
+　　Gauntlets of Ogre Strength 力量手套儿
+　　Gem of ture sight 真实宝石
+　　Ghost Scepter 幽魂法杖
+　　Gloves of Haste 加速手套儿
+　　Guinsoo's Scythe of Vyse 羊刀
+　　Hand of Midas 点金手
+　　Headdress of rejuvenation 回复帽子
+　　Healing Salve 治疗膏药
+　　Heart of Tarrasque 魔龙之心
+　　Helm of Iron Will 铁艺头盔
+　　Helm of the Dominator 支配偶盔
+　　Hood of Defiance 挑战帽子
+　　Hyperstone 振奋宝石
+　　Ironwood Branch 铁树枝干
+　　Javelin 标枪
+　　Kelen's Dagger 跳刀
+　　Khadgar's pipe of insight 卡嘉之洞察长笛
+　　Linken'sphere 林肯法球
+　　Lothar's Edge 洛萨之锋
+　　Maelstrom 旋涡
+　　Magic Stick 魔棒
+　　Magic Wand 魔杖
+　　Manta Style 幻影斧
+　　Mantle of Intelligence 智力大氅
+　　Marketplace 暗盘商人
+　　Mask of Death 吸血面具
+　　Mask of Madness 疯狂面具
+　　Mekansm 梅肯
+　　Messerschmidt's Reaver 希梅斯特的掠夺
+　　Mithril Hammer 秘银锤
+　　Mjollnir 雷神之锤
+　　Monkey King Bar 金箍棒
+　　Mystic Staff 神秘法杖
+　　Nathrezim Buckler 玄冥盾牌
+　　Necronomicon 死灵书
+　　Null Talisman 无用挂件
+　　Oblivion Staff 空明杖
+　　Observer Ward 侦查保卫（假眼）
+　　Ogre Axe 食人魔之斧
+　　Orchid Malevolence 紫苑
+　　Perseverance 坚韧球
+　　Phase Boots 相位鞋
+　　Planeswalker's Cloak 旅法师大氅
+　　Plate Mail 板甲
+　　Point Booster 精气之球
+　　Poor Man's shield 穷苦人盾
+　　Power Treads 动力鞋
+　　Protectorate 掩衬领地
+　　Quarterstaff 短棍
+　　Quelling Blade 压抑之刃
+　　Radiance 辉耀
+　　Refresher Orb 刷新球
+　　Ring of Basilius 圣殿指环
+　　Ring of Health 治疗指环
+　　Ring of Protection 看守保护指环
+　　Ring of Regeneration 恢复戒指
+　　Robe of the Magi 法师长袍
+　　Sacred Relic 圣者遗物
+　　Sange 散华
+　　Sange and Yasha 散夜对剑
+　　Satanic 撒旦之邪力
+　　Scroll of Town Portal 回程卷轴
+　　Sena the Accesorizer 饰品商人
+　　Sentry Ward 岗哨保卫（真眼）
+　　Shiva's Guard 希瓦之看守保护
+　　Slippers of Agility 火速便鞋
+　　Sobi Mask 艺人面具
+　　Soul Booster 镇魂石
+　　Staff of Wizardry 魔力法杖
+　　Stout Shield 小圆盾
+　　Stygian Desolator 黯灭
+　　Supportive Vestments 支援法衣
+　　Talisman of Evasion 闪避护符
+　　Ultimate Orb 极限法球
+　　Vanguard 前锋盾
+　　Vitality Booster 活力之球
+　　Vladmir's Offering 吸血鬼披风
+　　Void Stone 虚无宝石
+　　Weapons Dealer 武器商人
+　　Yasha 夜叉

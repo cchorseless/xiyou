@@ -1,0 +1,60 @@
+// generate with PIPIXIA's kv generator 
+export namespace enemy_units { 
+export interface OBJ_0_1 {
+"DOTAUnits" ?:OBJ_1_1 ,
+}
+export interface OBJ_1_1 {
+"uint_creature_roamer" ?:OBJ_2_1 ,
+"unit_1001" ?:OBJ_2_1 ,
+"unit_1002" ?:OBJ_2_1 ,
+"unit_red_tp" ?:OBJ_2_1 ,
+"unit_blue_tp" ?:OBJ_2_1 ,
+"unit_remote_mine" ?:OBJ_2_1 ,
+}
+export interface OBJ_2_1 {
+"UnitLabel" ?:string ,
+"vscripts" ?:string ,
+"BaseClass" ?:string ,
+"Model" ?:string ,
+"ModelScale" ?:string ,
+"SoundSet" ?:string ,
+"HeroSelectSoundEffect" ?:string ,
+"GameSoundsFile" ?:string ,
+"AbilityLayout" ?:string ,
+"HealthBarOffset" ?:string ,
+"MovementSpeed" ?:string ,
+"MovementCapabilities" ?:string ,
+"MovementTurnRate" ?:string ,
+"HasAggressiveStance" ?:string ,
+"ArmorPhysical" ?:string ,
+"MagicalResistance" ?:string ,
+"StatusHealth" ?:string ,
+"StatusHealthRegen" ?:string ,
+"StatusMana" ?:string ,
+"StatusManaRegen" ?:string ,
+"AttackCapabilities" ?:string ,
+"AttackDamageMin" ?:string ,
+"AttackDamageMax" ?:string ,
+"AttackRate" ?:string ,
+"AttackAnimationPoint" ?:string ,
+"AttackRange" ?:string ,
+"AttackAcquisitionRange" ?:string ,
+"ProjectileModel" ?:string ,
+"ProjectileSpeed" ?:string ,
+"AttributePrimary" ?:string ,
+"AttributeBaseStrength" ?:string ,
+"AttributeStrengthGain" ?:string ,
+"AttributeBaseAgility" ?:string ,
+"AttributeAgilityGain" ?:string ,
+"AttributeBaseIntelligence" ?:string ,
+"AttributeIntelligenceGain" ?:string ,
+"HasInventory" ?:string ,
+"InventorySlots" ?:string ,
+"ConsideredHero" ?:string ,
+"CombatClassAttack" ?:string ,
+"CombatClassDefend" ?:string ,
+"Creature" ?:OBJ_3_1 ,
+}
+export interface OBJ_3_1 {
+}
+}

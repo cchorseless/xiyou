@@ -1,0 +1,85 @@
+// -@class modifier_wave.eom_modifier
+@registerModifier()
+export class modifier_wave extends BaseModifier_Plus {
+
+let public = modifier_wave
+
+ IsHidden() {
+	return true
+}
+ IsDebuff() {
+	return false
+}
+ IsPurgable() {
+	return false
+}
+ IsPurgeException() {
+	return false
+}
+ AllowIllusionDuplicate() {
+	return false
+}
+ GetPriority() {
+	return MODIFIER_PRIORITY_SUPER_ULTRA
+}
+ OnCreated(params: ModifierTable) {
+	if ( IsServer() ) {
+		let hParent = this.GetParentPlus()
+
+		//  基础护甲
+		let fArmorPhyMult = type(params.fArmorPhyMult) == "number" && params.fArmorPhyMult || 1
+		let fArmorMagMult = type(params.fArmorMagMult) == "number" && params.fArmorMagMult || 1
+		let fArmorPhyAdd = type(params.fArmorPhyAdd) == "number" && params.fArmorPhyAdd || 0
+		let fArmorMagAdd = type(params.fArmorMagAdd) == "number" && params.fArmorMagAdd || 0
+		if ( hParent._BasePhysicalArmor == null || hParent._BaseMagicalArmor == null ) {
+			let sUnitName = hParent.GetUnitName()
+			let tData = hParent.IsHero() && KeyValues.HeroesKv[sUnitName] || KeyValues.UnitsKv[sUnitName]
+			if ( tData ) {
+				hParent._BasePhysicalArmor = tonumber(tData.ArmorPhysical) || 0
+				hParent._BaseMagicalArmor = tonumber(tData.MagicalArmor) || 0
+			}
+		}
+		this.PhysicalArmor = fArmorPhyMult * hParent._BasePhysicalArmor + fArmorPhyAdd
+		this.MagicalArmor = fArmorMagMult * hParent._BaseMagicalArmor + fArmorMagAdd
+		this.SetHasCustomTransmitterData(true)
+	}
+}
+//  Server
+ AddCustomTransmitterData() {
+	return {
+		PhysicalArmor = this.PhysicalArmor,
+		MagicalArmor = this.MagicalArmor,
+	}
+}
+//  Client
+ HandleCustomTransmitterData(data) {
+	//  将server端的数值同步到client端
+	this.PhysicalArmor = data.PhysicalArmor
+	this.MagicalArmor = data.MagicalArmor
+	this.OnRefresh({}) //  测试下来HandleCustomTransmitterData比客户端的Oncreate早一些被调用，但是还是保险一下
+}
+ CheckState() {
+	return {
+		[modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION] : true,
+		[modifierstate.MODIFIER_STATE_NO_HEALTH_BAR] : true
+	}
+}
+ EDeclareFunctions() {
+	return {
+		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE = this.PhysicalArmor,
+		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BASE = this.MagicalArmor,
+	}
+}
+ DeclareFunctions() {
+	return {
+		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_SCALE
+	}
+}
+ GetModelScale() {
+	if ( IsServer() ) {
+		let hParent = this.GetParentPlus()
+		if ( hParent._round_type == "basic" ) {
+			return RemapValClamped(CandyMode.GetCandy(hParent._iSpawnerPlayerID), 0, 200, 0, 100)
+		}
+	}
+}

@@ -1,0 +1,12 @@
+"ValveResourceFormat"
+{
+	"backgroundColor"	"#3C3C3C"
+	"GameSearchPaths"
+	{
+	}
+	"openDirectory"	"C:\Users\74180\Desktop\dotaimgRes"
+	"SavedCameras"
+	{
+	}
+	"saveDirectory"	""
+}

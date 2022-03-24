@@ -1,0 +1,13 @@
+<root>
+    <scripts>
+        <include src="./game_main.tsx" />
+    </scripts>
+    <styles>
+        <include src="s2r://panorama/styles/dotastyles.vcss_c" />
+        <include src="./game_main.less" />
+        <include src="./res_image.less" />
+
+
+    </styles>
+    <Panel class="root" hittest="false" />
+</root>

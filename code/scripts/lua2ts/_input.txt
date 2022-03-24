@@ -1,0 +1,84 @@
+---@class modifier_wave:eom_modifier
+modifier_wave = eom_modifier({})
+
+local public = modifier_wave
+
+function public:IsHidden()
+	return true
+end
+function public:IsDebuff()
+	return false
+end
+function public:IsPurgable()
+	return false
+end
+function public:IsPurgeException()
+	return false
+end
+function public:AllowIllusionDuplicate()
+	return false
+end
+function public:GetPriority()
+	return MODIFIER_PRIORITY_SUPER_ULTRA
+end
+function public:OnCreated(params)
+	if IsServer() then
+		local hParent = self:GetParent()
+
+		-- 基础护甲
+		local fArmorPhyMult = type(params.fArmorPhyMult) == "number" and params.fArmorPhyMult or 1
+		local fArmorMagMult = type(params.fArmorMagMult) == "number" and params.fArmorMagMult or 1
+		local fArmorPhyAdd = type(params.fArmorPhyAdd) == "number" and params.fArmorPhyAdd or 0
+		local fArmorMagAdd = type(params.fArmorMagAdd) == "number" and params.fArmorMagAdd or 0
+		if hParent._BasePhysicalArmor == nil or hParent._BaseMagicalArmor == nil then
+			local sUnitName = hParent:GetUnitName()
+			local tData = hParent:IsHero() and KeyValues.HeroesKv[sUnitName] or KeyValues.UnitsKv[sUnitName]
+			if tData then
+				hParent._BasePhysicalArmor = tonumber(tData.ArmorPhysical) or 0
+				hParent._BaseMagicalArmor = tonumber(tData.MagicalArmor) or 0
+			end
+		end
+		self.PhysicalArmor = fArmorPhyMult * hParent._BasePhysicalArmor + fArmorPhyAdd
+		self.MagicalArmor = fArmorMagMult * hParent._BaseMagicalArmor + fArmorMagAdd
+		self:SetHasCustomTransmitterData(true)
+	end
+end
+-- Server
+function public:AddCustomTransmitterData()
+	return {
+		PhysicalArmor = self.PhysicalArmor,
+		MagicalArmor = self.MagicalArmor,
+	}
+end
+-- Client
+function public:HandleCustomTransmitterData(data)
+	-- 将server端的数值同步到client端
+	self.PhysicalArmor = data.PhysicalArmor
+	self.MagicalArmor = data.MagicalArmor
+	self:OnRefresh({}) -- 测试下来HandleCustomTransmitterData比客户端的Oncreate早一些被调用，但是还是保险一下
+end
+function public:CheckState()
+	return {
+		[MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+		[MODIFIER_STATE_NO_HEALTH_BAR] = true
+	}
+end
+function public:EDeclareFunctions()
+	return {
+		EOM_MODIFIER_PROPERTY_PHYSICAL_ARMOR_BASE = self.PhysicalArmor,
+		EOM_MODIFIER_PROPERTY_MAGICAL_ARMOR_BASE = self.MagicalArmor,
+	}
+end
+function public:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_MODEL_SCALE
+	}
+end
+function public:GetModifierModelScale()
+	if IsServer() then
+		local hParent = self:GetParent()
+		if hParent._round_type == "basic" then
+			return RemapValClamped(CandyMode:GetCandy(hParent._iSpawnerPlayerID), 0, 200, 0, 100)
+		end
+	end
+end

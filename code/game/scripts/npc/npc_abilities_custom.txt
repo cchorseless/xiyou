@@ -1,0 +1,8 @@
+// generate with PIPIXIA's kv generator 
+
+#base  "abilities/courier_abilities.kv"
+#base  "building/building_ability_tower.kv"
+"DOTAAbilities" {
+	"version" "1"
+
+}

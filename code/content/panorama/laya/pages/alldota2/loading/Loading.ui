@@ -1,0 +1,25 @@
+{
+    "x":0,
+    "type":"dota2Panel",
+    "selectedBox":1,
+    "selecteID":1,
+    "props":{"width":1600,"sceneColor":"#000000","id":"Loading","height":900,"className":"root","bg-repeat":"no-repeat","bg-image":"backgrounds/radient_tower_bg.png"},
+    "nodeParent":-1,
+    "label":"dota2Panel",
+    "isOpen":true,
+    "isDirectory":false,
+    "isAniNode":true,
+    "hasChild":false,
+    "compId":1,
+    "child":[
+        ],
+    "animations":[
+        {
+            "nodes":[
+                ],
+            "name":"ani1",
+            "id":1,
+            "frameRate":24,
+            "action":0
+        }]
+}

@@ -1,0 +1,8 @@
+// generate with PIPIXIA's kv generator 
+
+#base  "building/building_unit_enemy.kv"
+#base  "building/building_unit_tower.kv"
+#base  "building/building_unit_summoned.kv"
+"DOTAUnits" {
+
+}
