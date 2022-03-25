@@ -42,20 +42,22 @@ export class courier_base extends BaseNpc_Hero_Plus {
         // this.ETRoot.AddComponent(CombinationManagerComponent);
         // this.ETRoot.AddComponent(EnemyManagerComponent);
         // this.ETRoot.AddComponent(BuildingManagerComponent);
-        
+
         // modifier_task.apply(this, this);
         // modifier_test.apply(this, this);
 
         // 延遲1帧
         TimerHelper.addFrameTimer(1, () => {
+            let playerid = this.GetPlayerID();
             // 设置出生点
-            let startPoint = PlayerState.HeroSpawnPoint[this.GetPlayerID()];
+            let startPoint = PlayerState.HeroSpawnPoint[playerid];
             let a = GetGroundPosition(startPoint, this);
             this.SetAbsOrigin(a);
+            CenterCameraOnUnit(playerid, this)
         })
 
         // TimerHelper.addTimer(2, () => {
-            // MiniMapHelper.updatePlayerOnMiniForPlayer(this.GetPlayerID(), this.GetPlayerID())
+        // MiniMapHelper.updatePlayerOnMiniForPlayer(this.GetPlayerID(), this.GetPlayerID())
         // }, this)
     }
 
