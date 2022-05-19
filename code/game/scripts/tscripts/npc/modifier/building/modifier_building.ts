@@ -32,7 +32,7 @@ export class modifier_building extends BaseModifier_Plus {
         // super.OnCreated(params);
         if (IsServer()) {
             let hParent = this.GetParentPlus()
-            let vColor = PlayerSystem.GetPlayer(hParent.GetPlayerOwnerID()).playerColor;
+            let vColor = PlayerSystem.GetPlayer(hParent.GetPlayerOwnerID()).PlayerComp().playerColor;
             let info: ResHelper.ParticleInfo = {
                 resPath: "particles/player_color.vpcf",
                 iAttachment: ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,

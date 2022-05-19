@@ -1,28 +1,20 @@
-/*
- * @Author: Jaxh
- * @Date: 2021-04-30 15:18:16
- * @LastEditors: your name
- * @LastEditTime: 2021-04-30 15:18:42
- * @Description: file content
- */
+import { GameEnum } from "../../../GameEnum";
+import { GameSetting } from "../../../GameSetting";
+import { EventHelper } from "../../../helper/EventHelper";
+import { LogHelper } from "../../../helper/LogHelper";
+import { GameProtocol } from "../../../service/GameProtocol";
+import { GameRequest } from "../../../service/GameRequest";
+import { PlayerSystem } from "./PlayerSystem";
 
-import { GameEnum } from "../GameEnum";
-import { EventHelper } from "../helper/EventHelper";
-import { LogHelper } from "../helper/LogHelper";
-import { SingletonClass } from "../helper/SingletonHelper";
-import { TimerHelper } from "../helper/TimerHelper";
-import { PlayerSystem } from "../rules/System/Player/PlayerSystem";
+export class PlayerEventHandler {
+    private static System: typeof PlayerSystem;
 
-export class GameService extends SingletonClass {
-    public init() {
-        this.addEvent();
-    }
-
-    public addEvent() {
+    public static startListen(sys: typeof PlayerSystem) {
+        PlayerEventHandler.System = sys;
         EventHelper.addGameEvent(GameEnum.Event.GameEvent.game_rules_state_change, this.OnGameRulesStateChange, this);
     }
 
-    public OnGameRulesStateChange(e: any) {
+    private static OnGameRulesStateChange(e: any) {
         const nNewState = GameRules.State_Get();
         LogHelper.print("OnGameRulesStateChange", nNewState);
         switch (nNewState) {
@@ -32,7 +24,7 @@ export class GameService extends SingletonClass {
                 break;
             // -- 游戏初始化
             case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
-                this.GetPlayerServerData();
+                PlayerEventHandler.System.CreateAllPlayer();
                 break;
             // 	-- 选择英雄
             case DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION:
@@ -47,22 +39,5 @@ export class GameService extends SingletonClass {
             case DOTA_GameState.DOTA_GAMERULES_STATE_GAME_IN_PROGRESS:
                 break;
         }
-    }
-
-    public GetPlayerServerData() {
-        PlayerSystem.GetAllPlayerid().forEach((playerid) => {
-
-        });
-    }
-
-    
-
-
-    public Sleep(fTime: number) {
-        let co = coroutine.running();
-        TimerHelper.addTimer(fTime, () => {
-            coroutine.resume(co);
-        });
-        coroutine.yield();
     }
 }

@@ -27,11 +27,10 @@ export class bot_base extends BaseNpc_Hero_Plus {
 
         TimerHelper.addFrameTimer(1, () => {
             if (GameRules.State_Get() > DOTA_GameState.DOTA_GAMERULES_STATE_STRATEGY_TIME) {
-                ET.EntityRoot.Active(this);
+                PlayerSystem.GetPlayer(this.GetPlayerID()).Active(this);
                 this.ETRoot.AddComponent(AvalonComponent);
                 this.ETRoot.AddComponent(PlayerComponent);
                 this.ETRoot.AddComponent(AvalonBotComponent);
-
                 modifier_task.apply(this, this)
                 modifier_test.apply(this, this);
             }

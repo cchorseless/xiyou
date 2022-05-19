@@ -24,11 +24,15 @@ export class GameDebugger extends SingletonClass {
     /**打印游戏时间顺序 */
     private printGameEvent() {
         for (let k in GameEnum.Event.GameEvent) {
-            let eventName = (GameEnum.Event.GameEvent as any)[k]
+            let eventName = (GameEnum.Event.GameEvent as any)[k];
             if (eventName) {
-                EventHelper.addGameEvent(eventName, (e) => {
-                    LogHelper.print(k, '|', eventName)
-                }, this)
+                EventHelper.addGameEvent(
+                    eventName,
+                    (e) => {
+                        LogHelper.print(k, "|", eventName);
+                    },
+                    this
+                );
             }
         }
     }
@@ -43,25 +47,33 @@ export class GameDebugger extends SingletonClass {
      * @param inter 时间间隔（秒）
      */
     private debugger_LuaMemory(inter: number = 60) {
-        TimerHelper.addTimer(inter,
+        TimerHelper.addTimer(
+            inter,
             () => {
-                this.luaMemory = collectgarbage('count');
-                this.server_fps = parseFloat('' + 1 / FrameTime())
+                this.luaMemory = collectgarbage("count");
+                this.server_fps = parseFloat("" + 1 / FrameTime());
                 LogHelper.print(string.format("[Lua Memory]:  %.3f MB   [server FPS]:  %.1f", this.luaMemory / 1024, this.server_fps));
                 return inter;
-            }, this, false);
+            },
+            this,
+            false
+        );
     }
     /**
      * 客户端FPS
      * @param inter
      */
     public debugger_ClientFps(inter: number = 60) {
-        TimerHelper.addTimer(inter,
+        TimerHelper.addTimer(
+            inter,
             () => {
-                this.client_fps = parseFloat('' + 1 / GameRules.GetGameFrameTime())
+                this.client_fps = parseFloat("" + 1 / GameRules.GetGameFrameTime());
                 LogHelper.print(string.format("[client FPS]:  %.1f ", this.client_fps));
                 return inter;
-            }, this, false);
+            },
+            this,
+            false
+        );
     }
 
     /**
@@ -73,71 +85,77 @@ export class GameDebugger extends SingletonClass {
             let c = 0;
             obj.forEach((arr) => {
                 c += arr.length;
-            })
+            });
             return c;
         };
         let countSet = (obj: Set<any>[]) => {
             let c = 0;
             obj.forEach((arr) => {
                 c += arr.size;
-            })
+            });
             return c;
-        }
-        TimerHelper.addTimer(inter,
+        };
+        TimerHelper.addTimer(
+            inter,
             () => {
-                LogHelper.print('-------------------')
-                LogHelper.print(string.format("[Globalcache]: allGameEvent => event:  %.1f | listener:  %.1f ",
-                    Object.keys(globalData.allGameEvent).length,
-                    count(Object.values(globalData.allGameEvent))
-                ));
-                LogHelper.print(string.format("[Globalcache]: allCustomEvent => event:  %.1f | listener:  %.1f ",
-                    Object.keys(globalData.allCustomEvent).length,
-                    count(Object.values(globalData.allCustomEvent))
-                ));
-                LogHelper.print(string.format("[Globalcache]: allCustomProtocolEvent => event:  %.1f | listener:  %.1f",
-                    Object.keys(globalData.allCustomProtocolEvent).length,
-                    count(Object.values(globalData.allCustomProtocolEvent))
-                ));
-                LogHelper.print(string.format("[Globalcache]: allCustomServerEvent => event:  %.1f | listener:  %.1f",
-                    Object.keys(globalData.allCustomServerEvent).length,
-                    count(Object.values(globalData.allCustomServerEvent))
-                ));
-                LogHelper.print(string.format("[Globalcache]: allRegisterEvent => event:  %.1f | listener:  %.1f",
-                    Object.keys(globalData.allRegisterEvent).length,
-                    countSet(Object.values(globalData.allRegisterEvent))
-                ));
-                LogHelper.print(string.format("[Globalcache]: allTimers => event:  %.1f | listener:  %.1f",
-                    Object.keys(globalData.allTimers).length,
-                    Object.values(globalData.allTimers).length
-                ));
-                LogHelper.print(string.format("[Globalcache]: allFrameTimers => event:  %.1f | listener:  %.1f ",
-                    Object.keys(globalData.allFrameTimers).length,
-                    Object.values(globalData.allFrameTimers).length
-                ));
-                LogHelper.print('-------------------');
+                LogHelper.print("-------------------");
+                LogHelper.print(
+                    string.format("[Globalcache]: allGameEvent => event:  %.1f | listener:  %.1f ", Object.keys(globalData.allGameEvent).length, count(Object.values(globalData.allGameEvent)))
+                );
+                LogHelper.print(
+                    string.format("[Globalcache]: allCustomEvent => event:  %.1f | listener:  %.1f ", Object.keys(globalData.allCustomEvent).length, count(Object.values(globalData.allCustomEvent)))
+                );
+                LogHelper.print(
+                    string.format(
+                        "[Globalcache]: allCustomProtocolEvent => event:  %.1f | listener:  %.1f",
+                        Object.keys(globalData.allCustomProtocolEvent).length,
+                        count(Object.values(globalData.allCustomProtocolEvent))
+                    )
+                );
+                LogHelper.print(
+                    string.format(
+                        "[Globalcache]: allCustomServerEvent => event:  %.1f | listener:  %.1f",
+                        Object.keys(globalData.allCustomServerEvent).length,
+                        count(Object.values(globalData.allCustomServerEvent))
+                    )
+                );
+                LogHelper.print(
+                    string.format(
+                        "[Globalcache]: allRegisterEvent => event:  %.1f | listener:  %.1f",
+                        Object.keys(globalData.allRegisterEvent).length,
+                        countSet(Object.values(globalData.allRegisterEvent))
+                    )
+                );
+                LogHelper.print(string.format("[Globalcache]: allTimers => event:  %.1f | listener:  %.1f", Object.keys(globalData.allTimers).length, Object.values(globalData.allTimers).length));
+                LogHelper.print(
+                    string.format("[Globalcache]: allFrameTimers => event:  %.1f | listener:  %.1f ", Object.keys(globalData.allFrameTimers).length, Object.values(globalData.allFrameTimers).length)
+                );
+                LogHelper.print("-------------------");
                 return inter;
-            }, this, false);
+            },
+            this,
+            false
+        );
     }
-
-
-
-
 
     /**
      * 監聽玩家斷綫自動失敗
      * @param inter
      */
     public debugger_OnPlayerDisconnect(inter: number = 5) {
-        TimerHelper.addTimer(inter,
+        TimerHelper.addTimer(
+            inter,
             () => {
-                PlayerSystem.GetAllPlayeridByTeam().forEach(
-                    (iPlayerID) => {
-                        if (PlayerResource.GetConnectionState(iPlayerID) == DOTAConnectionState_t.DOTA_CONNECTION_STATE_ABANDONED) {
-                            this.MakePlayerLose(iPlayerID)
-                        }
-                    })
+                PlayerSystem.GetAllPlayeridByTeam().forEach((iPlayerID) => {
+                    if (PlayerResource.GetConnectionState(iPlayerID) == DOTAConnectionState_t.DOTA_CONNECTION_STATE_ABANDONED) {
+                        this.MakePlayerLose(iPlayerID);
+                    }
+                });
                 return inter;
-            }, this, false);
+            },
+            this,
+            false
+        );
     }
 
     public addDebugEvent() {
@@ -181,19 +199,19 @@ export class GameDebugger extends SingletonClass {
     /**聊天添加GM指令 */
     OnPlayerChat(events: PlayerChatEvent) {
         let iPlayerID = events.playerid;
-        let player = PlayerResource.GetPlayer(iPlayerID)
+        let player = PlayerResource.GetPlayer(iPlayerID);
         let hero = player.GetAssignedHero();
-        let sText = events.text.toLowerCase()
-        let bTeamOnly = events.teamonly == 1
+        let sText = events.text.toLowerCase();
+        let bTeamOnly = events.teamonly == 1;
         let tokens = sText.split(" ");
         switch (tokens[0]) {
             case "-sendkey":
                 let serverkey = GetDedicatedServerKeyV2(tokens[1]);
-                GameRequest.GetInstance().SendServerKey(serverkey, 'c2', tokens[1])
+                GameRequest.GetInstance().SendServerKey(GameSetting.GAME_Name, tokens[1], serverkey);
                 break;
-            case '-addbot':
+            case "-addbot":
                 let botCount = tonumber(tokens[1] || 1);
-                BotHelper.addBot(botCount)
+                BotHelper.addBot(botCount);
                 break;
             case "-clear":
                 break;
@@ -208,44 +226,42 @@ export class GameDebugger extends SingletonClass {
             case "-test":
                 break;
             case "-additem":
-                hero.AddItemByName(tokens[1])
+                hero.AddItemByName(tokens[1]);
                 break;
             case "-b":
-                hero.AddItemByName('item_building_' + tokens[1])
+                hero.AddItemByName("item_building_" + tokens[1]);
                 break;
         }
     }
     //#region  自定义事件
     /**游戏结束 */
-    onDebugGameOver(event: JS_TO_LUA_DATA) {
-    }
+    onDebugGameOver(event: JS_TO_LUA_DATA) {}
     /**reload */
     onDebugReload(event: JS_TO_LUA_DATA) {
-        SendToConsole("clearall")
-        SendToConsole("cl_script_reload")
-        SendToConsole("script_reload")
+        SendToConsole("clearall");
+        SendToConsole("cl_script_reload");
+        SendToConsole("script_reload");
     }
     onDebugRestart(event: JS_TO_LUA_DATA) {
-        SendToConsole("clearall")
-        SendToConsole("restart")
+        SendToConsole("clearall");
+        SendToConsole("restart");
     }
     onDebugClearAll(event: JS_TO_LUA_DATA) {
-        SendToConsole("clearall")
+        SendToConsole("clearall");
     }
     /**添加机器人 */
     onreq_addBot(event: JS_TO_LUA_DATA) {
         if (event.PlayerID) {
-            let player = PlayerResource.GetPlayer(event.PlayerID)
+            let player = PlayerResource.GetPlayer(event.PlayerID);
             event.state = GameRules.PlayerHasCustomGameHostPrivileges(player);
             if (event.state) {
                 BotHelper.addBot();
-                EventHelper.fireProtocolEventToClient(event.protocol as any, event)
+                EventHelper.fireProtocolEventToClient(event.protocol as any, event);
             }
         }
     }
     //#endregion
     //#region 功能性接口
-  
 
     /**
      * 讓玩家失敗
@@ -257,19 +273,17 @@ export class GameDebugger extends SingletonClass {
             // -- 数据存储
             // this.UpdatePlayerEndData(hHero)
             if (IsInToolsMode()) {
-                hHero.ForceKill(false)
+                hHero.ForceKill(false);
             }
             let allLose = true;
-            PlayerSystem.GetAllPlayeridByTeam().forEach(
-                (playerId) => {
-                    let _hHero = PlayerResource.GetSelectedHeroEntity(playerId);
-                    if (_hHero && _hHero.IsAlive()) {
-                        allLose = false;
-                    }
+            PlayerSystem.GetAllPlayeridByTeam().forEach((playerId) => {
+                let _hHero = PlayerResource.GetSelectedHeroEntity(playerId);
+                if (_hHero && _hHero.IsAlive()) {
+                    allLose = false;
                 }
-            );
+            });
             if (allLose && !IsInToolsMode()) {
-                GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS)
+                GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
             }
         }
     }
@@ -278,7 +292,7 @@ export class GameDebugger extends SingletonClass {
 /**debug 數據 */
 interface debuggerData {
     /**游戲全局數據 */
-    globalData?: any,
+    globalData?: any;
     /**游戲實時更新數據 */
-    updateData?: any
+    updateData?: any;
 }

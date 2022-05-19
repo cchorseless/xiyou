@@ -1,10 +1,10 @@
-
 /**
  * 解决循环引用折中方案，出现循环应用，这里添加引用后，再引用该模块。
  * 弃用，采用缓存类的形式
  */
 
 import { SingletonClass } from "./helper/SingletonHelper";
+import { AllEntity } from "./rules/AllEntity";
 import { BuildingSystem } from "./rules/System/Building/BuildingSystem";
 import { CombinationSystem } from "./rules/System/Combination/CombinationSystem";
 import { EnemySystem } from "./rules/System/Enemy/EnemySystem";
@@ -26,9 +26,7 @@ import { RoundSystem } from "./rules/System/Round/RoundSystem";
 //     return requirePlus<typeof item_towerchange_custom>("npc/items/avalon/item_towerchange_custom")
 // };
 
-
 export class GameModule extends SingletonClass {
-
     init() {
         PlayerSystem.init();
         // EnemySystem.init();

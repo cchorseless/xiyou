@@ -111,7 +111,7 @@ export module TimerHelper {
 
     /**
      * 固定时间计时器
-     * @param delay
+     * @param delay 秒
      * @param cb 返回下次循环时间
      * @param context 上下文
      * @param useGameTime 是否使用游戏时间，true=>游戏暂停，计时器停止；false=>无视游戏是否暂停

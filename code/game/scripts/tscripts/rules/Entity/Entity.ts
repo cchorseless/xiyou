@@ -3,7 +3,6 @@ import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 
 export module ET {
-
     interface IEntityProperty {
         InstanceId: string;
         Id: string;
@@ -51,21 +50,23 @@ export module ET {
             return this;
         }
         run() {
-            if (this.method == null)
-                return null;
+            if (this.method == null) return null;
             let id = this._id;
-            let [status, nextCall] = xpcall(this.method, (msg: any) => {
-                return '\n' + LogHelper.traceFunc(msg) + '\n'
-            }, this.caller);
+            let [status, nextCall] = xpcall(
+                this.method,
+                (msg: any) => {
+                    return "\n" + LogHelper.traceFunc(msg) + "\n";
+                },
+                this.caller
+            );
             if (!status) {
-                LogHelper.error(nextCall)
+                LogHelper.error(nextCall);
             }
             this._id === id && this.once && this.recover();
             return nextCall;
         }
         runWith(data: any[]) {
-            if (this.method == null)
-                return null;
+            if (this.method == null) return null;
             let id = this._id;
             let arg: any[] = [];
             if (this.args) {
@@ -74,11 +75,16 @@ export module ET {
             if (data) {
                 arg = arg.concat(data);
             }
-            let [status, nextCall] = xpcall(this.method, (msg: any) => {
-                return '\n' + LogHelper.traceFunc(msg) + '\n'
-            }, this.caller, ...arg);
+            let [status, nextCall] = xpcall(
+                this.method,
+                (msg: any) => {
+                    return "\n" + LogHelper.traceFunc(msg) + "\n";
+                },
+                this.caller,
+                ...arg
+            );
             if (!status) {
-                LogHelper.error(nextCall)
+                LogHelper.error(nextCall);
             }
             this._id === id && this.once && this.recover();
             return nextCall;
@@ -96,23 +102,20 @@ export module ET {
             }
         }
         static create(caller: any, method: any, args: any[] = null, once = true) {
-            if (Handler._pool.length > 0)
-                return Handler._pool.pop().setTo(caller, method, args, once);
+            if (Handler._pool.length > 0) return Handler._pool.pop().setTo(caller, method, args, once);
             return new Handler();
         }
     }
 
     export class EntityEventSystem {
-
-        private static AllEntity: { [instanceId: string]: Entity } = {};
+        public static AllEntity: { [instanceId: string]: Entity } = {};
         static RegisterSystem(entity: Entity, b: boolean) {
             if (b) {
                 if (entity.InstanceId == null || EntityEventSystem.AllEntity[entity.InstanceId] != null) {
                     throw new Error("RegisterSystem error");
                 }
                 EntityEventSystem.AllEntity[entity.InstanceId] = entity;
-            }
-            else {
+            } else {
                 if (entity.InstanceId == null || EntityEventSystem.AllEntity[entity.InstanceId] == null) {
                     throw new Error("UnRegisterSystem error");
                 }
@@ -129,10 +132,8 @@ export module ET {
         }
         static Destroy(entity: Entity) {
             entity.onDestroy && entity.onDestroy();
-
         }
     }
-
 
     export class Entity implements IEntityFunc {
         public readonly InstanceId: string;
@@ -152,19 +153,22 @@ export module ET {
         onUpdate?(): void;
         onDestroy?(): void;
 
-
         /**
          *开启服务器每帧刷新
-        *@param frame 刷新帧数
-        */
+         *@param frame 刷新帧数
+         */
         public startServerUpdate(frame = 1) {
             if (this.IsRegister && IsServer()) {
-                TimerHelper.addTimer(0, () => {
-                    this.onUpdate()
-                    if (this.IsRegister) {
-                        return FrameTime() * frame
-                    }
-                }, this)
+                TimerHelper.addTimer(
+                    0,
+                    () => {
+                        this.onUpdate();
+                        if (this.IsRegister) {
+                            return FrameTime() * frame;
+                        }
+                    },
+                    this
+                );
             }
         }
         /**
@@ -173,15 +177,18 @@ export module ET {
          */
         public startClientUpdate(frame = 1) {
             if (this.IsRegister && IsClient()) {
-                TimerHelper.addTimer(0, () => {
-                    this.onUpdate && this.onUpdate();
-                    if (this.IsRegister) {
-                        return GameRules.GetGameFrameTime() * frame
-                    }
-                }, this);
+                TimerHelper.addTimer(
+                    0,
+                    () => {
+                        this.onUpdate && this.onUpdate();
+                        if (this.IsRegister) {
+                            return GameRules.GetGameFrameTime() * frame;
+                        }
+                    },
+                    this
+                );
             }
         }
-
 
         public GetType() {
             return this.constructor.name;
@@ -193,7 +200,7 @@ export module ET {
             if (this.IsRegister == value) {
                 return;
             }
-            (this as IEntityProperty).IsRegister = value
+            (this as IEntityProperty).IsRegister = value;
             EntityEventSystem.RegisterSystem(this, value);
         }
 
@@ -211,8 +218,8 @@ export module ET {
                 throw new Error("cant set parent because parent domain is null: {this.GetType().Name} {value.GetType().Name}");
             }
 
-            if (this.Parent != null) // 之前有parent
-            {
+            if (this.Parent != null) {
+                // 之前有parent
                 // parent相同，不设置
                 if (this.Parent == value) {
                     LogHelper.error("重复设置了Parent: {this.GetType().Name} parent: {this.parent.GetType().Name}");
@@ -220,18 +227,15 @@ export module ET {
                 }
                 if (this.IsComponent) {
                     this.Parent.RemoveFromComponents(this as Component);
-                }
-                else {
+                } else {
                     this.Parent.RemoveFromChildren(this);
-
                 }
             }
 
             (this as IEntityProperty).Parent = value;
             if (this.IsComponent) {
                 this.Parent.AddToComponents(this as Component);
-            }
-            else {
+            } else {
                 this.Parent.AddToChildren(this);
             }
             this.setDomain(this.Parent.Domain);
@@ -257,7 +261,7 @@ export module ET {
             let preDomain = this.Domain;
             (this as IEntityProperty).Domain = value;
             if (preDomain == null) {
-                (this as IEntityProperty).InstanceId = GameFunc.GenerateUUID();
+                (this as IEntityProperty).InstanceId = this.GetType() + this.Id;
                 this.setRegister(true);
             }
 
@@ -274,7 +278,7 @@ export module ET {
                 }
             }
         }
-        private AddToChildren(entity: Entity) {
+        protected AddToChildren(entity: Entity) {
             if (this.Children == null) {
                 (this as IEntityProperty).Children = {};
             }
@@ -290,8 +294,6 @@ export module ET {
                 (this as IEntityProperty).Children = null;
             }
         }
-
-
 
         public Dispose() {
             if (this.IsDisposed()) {
@@ -323,17 +325,15 @@ export module ET {
             if (this.Parent != null && !this.Parent.IsDisposed()) {
                 if (this.IsComponent) {
                     this.Parent.RemoveComponent(this as any);
-                }
-                else {
+                } else {
                     this.Parent.RemoveFromChildren(this);
                 }
             }
 
             (this as IEntityProperty).Parent = null;
-
         }
 
-        private AddToComponents(component: Component) {
+        protected AddToComponents(component: Component) {
             if (this.Components == null) {
                 (this as IEntityProperty).Components = {};
             }
@@ -352,7 +352,6 @@ export module ET {
             if (Object.keys(this.Components).length == 0) {
                 (this as IEntityProperty).Components = null;
             }
-
         }
 
         public GetChild<K extends Entity>(id: string): K {
@@ -381,7 +380,7 @@ export module ET {
             }
             if (this.Components == null) {
                 return;
-            };
+            }
             let c = this.GetComponent(type);
             if (c == null) {
                 return;
@@ -459,7 +458,6 @@ export module ET {
             return component;
         }
 
-
         public AddOneChild(entity: Entity) {
             entity.setParent(this);
             return entity;
@@ -481,7 +479,6 @@ export module ET {
             EntityEventSystem.Awake(component, ...args);
             return component;
         }
-
     }
     export class Component extends Entity {
         public readonly IsComponent: boolean = true;
@@ -490,20 +487,66 @@ export module ET {
     export class EntityRoot extends Entity {
         public readonly DomainParent: EntityRoot;
         public readonly DomainChildren: { [uuid: string]: EntityRoot };
-        constructor(etroot: IEntityRoot) {
+        public readonly PreAwakeArgs: { [uuid: string]: any[] };
+        constructor(etroot: IEntityRoot = null) {
             super();
-            let _id = GameFunc.GenerateUUID();
-            (this as IEntityProperty).InstanceId = _id;
-            (this as IEntityProperty).Id = _id;
-            (this as IEntityProperty).Domain = etroot;
+            (this as IEntityProperty).Id = GameFunc.GenerateUUID();
             (this as IEntityProperty).Parent = this;
-            this.setRegister(true);
+            if (etroot) {
+                this.setDomain(etroot);
+            }
         }
+
         static Active(etroot: IEntityRoot) {
             if (etroot.ETRoot == null) {
                 etroot.ETRoot = new EntityRoot(etroot);
             }
         }
+
+        public Active(etroot: IEntityRoot) {
+            if (etroot.ETRoot == null) {
+                this.setDomain(etroot);
+                etroot.ETRoot = this;
+                for (let k in this.PreAwakeArgs) {
+                    let unawake = EntityEventSystem.GetEntity(k);
+                    if (unawake != null) {
+                        EntityEventSystem.Awake(unawake, ...this.PreAwakeArgs[k]);
+                    }
+                }
+                (this.PreAwakeArgs as any) = null;
+            } else {
+                LogHelper.error("cant active");
+            }
+        }
+
+        public AddPreAwakeComponent<K extends typeof Component>(type: K, ...args: any[]) {
+            if (this.Components != null && this.Components[type.name] != null) {
+                throw new Error("entity already has component: {type.FullName}");
+            }
+            let component = Entity.Create(type) as InstanceType<K>;
+            if (!component.IsComponent) {
+                throw new Error("is not component: " + type.name);
+            }
+            (component as IEntityProperty).Id = this.Id;
+            (component as IEntityProperty).Parent = this;
+            this.AddToComponents(component as Component);
+            if (this.PreAwakeArgs == null) {
+                (this.PreAwakeArgs as any) = {};
+            }
+            this.PreAwakeArgs[component.GetType() + component.Id] = args;
+            return component;
+        }
+        public AddPreAwakeChild<T extends typeof Entity>(type: T, ...args: any[]) {
+            let component = Entity.Create(type);
+            (component as IEntityProperty).Parent = this;
+            this.AddToChildren(component as Component);
+            if (this.PreAwakeArgs == null) {
+                (this.PreAwakeArgs as any) = {};
+            }
+            this.PreAwakeArgs[component.GetType() + component.Id] = args;
+            return component;
+        }
+
         public GetDomainChild(id: string) {
             return this.DomainChildren[id];
         }
@@ -533,20 +576,18 @@ export module ET {
             return r;
         }
 
-
         public AddDomainChild(_entityRoot: EntityRoot) {
             if (_entityRoot.DomainParent != null) {
-                throw new Error("setDomainParent error")
+                throw new Error("setDomainParent error");
             }
             _entityRoot.setDomainParent(this);
         }
         private setDomainParent(_domainParent: EntityRoot) {
             if (this.DomainParent != null) {
-                throw new Error("setDomainParent error")
+                throw new Error("setDomainParent error");
             }
             (this as any).DomainParent = _domainParent;
-            this.DomainParent.addDomainChildrens(this)
-
+            this.DomainParent.addDomainChildrens(this);
         }
         private addDomainChildrens(child: EntityRoot) {
             if (this.DomainChildren == null) {
@@ -556,7 +597,7 @@ export module ET {
         }
         private removeDomainChildrens(child: EntityRoot) {
             if (this.DomainChildren == null) {
-                return
+                return;
             }
             delete this.DomainChildren[child.Id];
             if (Object.keys(this.DomainChildren).length == 0) {
@@ -568,7 +609,6 @@ export module ET {
             if (this.DomainParent != null && !this.DomainParent.IsDisposed()) {
                 this.DomainParent.removeDomainChildrens(this);
                 (this as any).DomainParent = null;
-
             }
         }
     }

@@ -155,9 +155,9 @@ export class modifier_event extends BaseModifier_Plus {
                     }
                 };
                 // 检查位置是否改变
-                let changeData = PlayerSystem.GetPlayer(playerid).CheckItemSlotChange(r);
+                let changeData = PlayerSystem.GetPlayer(playerid).PlayerComp().CheckItemSlotChange(r);
                 // 同步位置数据
-                PlayerSystem.GetPlayer(playerid).itemSlotData = r;
+                PlayerSystem.GetPlayer(playerid).PlayerComp().itemSlotData = r;
                 if (changeData) {
                     let _event: EventData = {};
                     (_event as EventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;

@@ -15,24 +15,26 @@ import { RoundManagerComponent } from "../../rules/Components/Round/RoundManager
 import { CombinationManagerComponent } from "../../rules/Components/Combination/CombinationManagerComponent";
 import { PlayerState } from "../../rules/System/Player/PlayerState";
 import { BuildingManagerComponent } from "../../rules/Components/Building/BuildingManagerComponent";
+import { PlayerSystem } from "../../rules/System/Player/PlayerSystem";
 @registerUnit()
 export class courier_base extends BaseNpc_Hero_Plus {
-
     Spawn(entityKeyValues: CScriptKeyValues) {
-        LogHelper.print('ADD PLAYER => PLAYERID :' + this.GetPlayerOwnerID());
+        LogHelper.print("ADD PLAYER => PLAYERID :" + this.GetPlayerOwnerID());
         // 设置技能点数
-        this.SetAbilityPoints(0)
+        this.SetAbilityPoints(0);
         let len = this.GetAbilityCount();
         for (let i = 0; i < len; i++) {
-            let ability = this.GetAbilityByIndex(i)
+            let ability = this.GetAbilityByIndex(i);
             if (ability) ability.UpgradeAbility(true);
         }
         this.SetIdleAcquire(false);
     }
 
     onSpawned() {
-        if (!IsServer()) { return }
-        ET.EntityRoot.Active(this);
+        if (!IsServer()) {
+            return;
+        }
+        PlayerSystem.GetPlayer(this.GetPlayerID()).Active(this);
         //#region  添加组件
         // 阿瓦隆组件
         // Component_Avalon.addComponent(this);
@@ -42,7 +44,6 @@ export class courier_base extends BaseNpc_Hero_Plus {
         // this.ETRoot.AddComponent(CombinationManagerComponent);
         // this.ETRoot.AddComponent(EnemyManagerComponent);
         // this.ETRoot.AddComponent(BuildingManagerComponent);
-
         // modifier_task.apply(this, this);
         // modifier_test.apply(this, this);
 
@@ -53,8 +54,8 @@ export class courier_base extends BaseNpc_Hero_Plus {
             let startPoint = PlayerState.HeroSpawnPoint[playerid];
             let a = GetGroundPosition(startPoint, this);
             this.SetAbsOrigin(a);
-            CenterCameraOnUnit(playerid, this)
-        })
+            CenterCameraOnUnit(playerid, this);
+        });
 
         // TimerHelper.addTimer(2, () => {
         // MiniMapHelper.updatePlayerOnMiniForPlayer(this.GetPlayerID(), this.GetPlayerID())
@@ -62,7 +63,6 @@ export class courier_base extends BaseNpc_Hero_Plus {
     }
 
     Activate() {
-        LogHelper.print('courier_base')
+        LogHelper.print("courier_base");
     }
 }
-

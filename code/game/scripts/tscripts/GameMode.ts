@@ -1,4 +1,3 @@
-
 import { LogHelper } from "./helper/LogHelper";
 import { PrecacheHelper } from "./helper/PrecacheHelper";
 import { GameSetting } from "./GameSetting";
@@ -13,9 +12,8 @@ import { BaseModifier } from "./npc/entityPlus/Base_Plus";
 import { Assert_Sounds } from "./helper/ResHelper";
 import { PlayerSystem } from "./rules/System/Player/PlayerSystem";
 import { GameModule } from "./GameModule";
-
 declare global {
-    interface CDOTAGamerules {
+    interface CDOTAGameRules {
         Addon: GameMode;
     }
 }
@@ -26,7 +24,7 @@ export class GameMode {
         PrecacheHelper.init(context);
     }
     public static Activate(this: void) {
-        LogHelper.print('Activate-------------')
+        LogHelper.print("Activate-------------");
         GameRules.Addon = new GameMode();
         GameRules.Addon.InitGameMode();
     }
@@ -46,7 +44,7 @@ export class GameMode {
         // 启动模块
         GameModule.GetInstance().init();
         // 初始化全局对象
-        this.InitGlobalBaseNPC()
+        this.InitGlobalBaseNPC();
     }
 
     /**全局战斗伤害记录 */
@@ -58,15 +56,17 @@ export class GameMode {
      */
     private InitGlobalBaseNPC() {
         if (this.globalNpc_MODIFIER_EVENTS) {
-            UTIL_Remove(this.globalNpc_MODIFIER_EVENTS)
+            UTIL_Remove(this.globalNpc_MODIFIER_EVENTS);
             this.globalNpc_MODIFIER_EVENTS = null;
         }
-        this.globalNpc_MODIFIER_EVENTS = modifier_event.applyThinker(Vector(0, 0, 0), this.Instance  as any, null, null, DOTATeam_t.DOTA_TEAM_NOTEAM, false)
+        this.globalNpc_MODIFIER_EVENTS = modifier_event.applyThinker(Vector(0, 0, 0), this.Instance as any, null, null, DOTATeam_t.DOTA_TEAM_NOTEAM, false);
     }
     // Called on script_reload
     public Reload() {
         // debug
-        if (!IsInToolsMode()) { return }
+        if (!IsInToolsMode()) {
+            return;
+        }
         let state = GameRules.State_Get();
         if (state <= DOTA_GameState.DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD) return;
         LogHelper.print("Script reloaded start!");
@@ -100,39 +100,32 @@ export class GameMode {
     public bGameEnd = false;
     public Victory() {
         if (this.bGameEnd == true) return;
-        PlayerSystem.GetAllPlayeridByTeam().forEach(
-            (iPlayerID) => {
-                let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
-                if (_hHero && _hHero.IsAlive()) {
-                    // this.UpdatePlayerEndData(hHero)
-                }
+        PlayerSystem.GetAllPlayeridByTeam().forEach((iPlayerID) => {
+            let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
+            if (_hHero && _hHero.IsAlive()) {
+                // this.UpdatePlayerEndData(hHero)
             }
-        )
-        this.bGameEnd = true
-        EmitAnnouncerSound(Assert_Sounds.Announcer.end_02)
-        EmitGlobalSound(Assert_Sounds.Game.Victory)
-        GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_GOODGUYS)
+        });
+        this.bGameEnd = true;
+        EmitAnnouncerSound(Assert_Sounds.Announcer.end_02);
+        EmitGlobalSound(Assert_Sounds.Game.Victory);
+        GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_GOODGUYS);
     }
     public Defeat() {
         if (this.bGameEnd == true) return;
-        PlayerSystem.GetAllPlayeridByTeam().forEach(
-            (iPlayerID) => {
-                let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
-                if (_hHero && _hHero.IsAlive()) {
-                    // this.UpdatePlayerEndData(hHero)
-                    if (!IsInToolsMode()) {
-                        _hHero.ForceKill(false)
-                    }
+        PlayerSystem.GetAllPlayeridByTeam().forEach((iPlayerID) => {
+            let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
+            if (_hHero && _hHero.IsAlive()) {
+                // this.UpdatePlayerEndData(hHero)
+                if (!IsInToolsMode()) {
+                    _hHero.ForceKill(false);
                 }
             }
-        )
-        this.bGameEnd = true
-        EmitAnnouncerSound(Assert_Sounds.Announcer.end_08)
-        EmitGlobalSound(Assert_Sounds.Game.Defeat)
-        GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS)
+        });
+        this.bGameEnd = true;
+        EmitAnnouncerSound(Assert_Sounds.Announcer.end_08);
+        EmitGlobalSound(Assert_Sounds.Game.Defeat);
+        GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
     }
+
 }
-
-
-
-

@@ -1,26 +1,32 @@
 import { GameEnum } from "../../../GameEnum";
+import { ClassHelper } from "../../../helper/ClassHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
-import { PlayerComponent } from "../../Components/Player/PlayerComponent";
-import { PlayerConfig } from "./PlayerConfig";
+import { PlayerEntityRoot } from "../../Components/Player/PlayerEntityRoot";
+import { PlayerHttpComponent } from "../../Components/Player/PlayerHttpComponent";
+import { PlayerEventHandler } from "./PlayerEventHandler";
 import { PlayerState } from "./PlayerState";
 
 export class PlayerSystem {
+    private static AllPlayer: { [k: string]: PlayerEntityRoot } = {};
 
-    static AllPlayer: { [k: string]: PlayerComponent } = {};
-
-    public static RegComponent(comp: PlayerComponent) {
-        (comp as any).playerColor = PlayerConfig.playerColor[comp.PlayerID];
-        PlayerSystem.AllPlayer[comp.PlayerID] = comp;
-    }
-
-    public static GetPlayer(playerid: PlayerID | number | string) {
-        return PlayerSystem.AllPlayer[playerid];
+    public static GetPlayer(playerid: PlayerID | number | string): PlayerEntityRoot {
+        return PlayerSystem.AllPlayer[playerid + ""];
     }
 
     public static init() {
         PlayerState.init();
+        PlayerEventHandler.startListen(PlayerSystem);
     }
 
+    public static CreateAllPlayer() {
+        let allPlayer = PlayerSystem.GetAllPlayerid();
+        allPlayer.forEach(async (playerid) => {
+            let playerRoot = new PlayerEntityRoot();
+            PlayerSystem.AllPlayer[playerid + ""] = playerRoot;
+            let playerhttp = playerRoot.AddPreAwakeComponent(ClassHelper.getRegClass<typeof PlayerHttpComponent>("PlayerHttpComponent"));
+            await playerhttp.PlayerLogin(playerid);
+        });
+    }
 
     /**
      * 獲取
@@ -33,7 +39,18 @@ export class PlayerSystem {
         for (let i = 0; i < count; i++) {
             let playerid = PlayerResource.GetNthPlayerIDOnTeam(team, i);
             if (PlayerResource.IsValidPlayerID(playerid)) {
-                r.push(playerid)
+                r.push(playerid);
+            }
+        }
+        return r;
+    }
+
+    public static GetAllPlayerid(): Array<PlayerID> {
+        let count = PlayerResource.GetPlayerCount();
+        let r: Array<PlayerID> = [];
+        for (let playerid = 0; playerid < count; playerid++) {
+            if (PlayerResource.IsValidPlayerID(playerid)) {
+                r.push(playerid);
             }
         }
         return r;
@@ -47,15 +64,31 @@ export class PlayerSystem {
     public static SteamID2PlayerID(sSteamid: Uint64): PlayerID {
         let retPlayerID = -1;
         let _sSteamid = sSteamid.ToHexString();
-        PlayerSystem.GetAllPlayeridByTeam().forEach(
-            (iPlayerID) => {
-                let sPlayerSteamid = PlayerResource.GetSteamID(iPlayerID).ToHexString();
-                if (sPlayerSteamid == _sSteamid) {
-                    retPlayerID = iPlayerID
-                }
+        PlayerSystem.GetAllPlayeridByTeam().forEach((iPlayerID) => {
+            let sPlayerSteamid = PlayerResource.GetSteamID(iPlayerID).ToHexString();
+            if (sPlayerSteamid == _sSteamid) {
+                retPlayerID = iPlayerID;
             }
-        )
-        return retPlayerID as PlayerID
+        });
+        return retPlayerID as PlayerID;
+    }
+
+    /**
+     * steamid
+     * @param sSteamid
+     * @returns
+     */
+    public static GetSteamID(iPlayerID: PlayerID): string {
+        return PlayerResource.GetSteamID(iPlayerID).ToHexString();
+    }
+
+    /**
+     * AccountID
+     * @param sSteamid
+     * @returns
+     */
+    public static GetAccountID(iPlayerID: PlayerID): string {
+        return PlayerResource.GetSteamAccountID(iPlayerID).toString();
     }
 
     /**
@@ -64,7 +97,7 @@ export class PlayerSystem {
      * @returns
      */
     public static GetHero(playerid: PlayerID) {
-        return PlayerResource.GetPlayer(playerid).GetAssignedHero() as BaseNpc_Hero_Plus
+        return PlayerResource.GetPlayer(playerid).GetAssignedHero() as BaseNpc_Hero_Plus;
     }
 
     /**
@@ -74,18 +107,19 @@ export class PlayerSystem {
     public static getHeroReSpawnPoint(playerid: PlayerID) {
         if (PlayerState.HeroReSpawnPoint == null) {
             PlayerState.HeroReSpawnPoint = {
-                playerid: [], Vector: []
+                playerid: [],
+                Vector: [],
             };
             let allE = Entities.FindAllByClassname(GameEnum.Unit.UnitClass.info_player_start_goodguys);
             allE.forEach((e) => {
-                PlayerState.HeroReSpawnPoint.Vector.push(e.GetAbsOrigin())
-            })
+                PlayerState.HeroReSpawnPoint.Vector.push(e.GetAbsOrigin());
+            });
         }
-        let index = PlayerState.HeroReSpawnPoint.playerid.indexOf(playerid)
+        let index = PlayerState.HeroReSpawnPoint.playerid.indexOf(playerid);
         if (index == -1) {
-            PlayerState.HeroReSpawnPoint.playerid.push(playerid)
-            index = PlayerState.HeroReSpawnPoint.playerid.length - 1
+            PlayerState.HeroReSpawnPoint.playerid.push(playerid);
+            index = PlayerState.HeroReSpawnPoint.playerid.length - 1;
         }
-        return PlayerState.HeroReSpawnPoint.Vector[index]
+        return PlayerState.HeroReSpawnPoint.Vector[index];
     }
 }

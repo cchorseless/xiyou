@@ -7,6 +7,7 @@ import { LogHelper } from "./helper/LogHelper";
 import { SingletonClass } from "./helper/SingletonHelper";
 import { BaseNpc_Hero_Plus } from "./npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
+import { AllEntity } from "./rules/AllEntity";
 
 class GameMode_Client extends SingletonClass {
 
@@ -48,6 +49,7 @@ class GameMode_Client extends SingletonClass {
 }
 
 LogHelper.print('IsClient start ----------------------');
+AllEntity.init();
 GameMode_Client.GetInstance().Init();
 // (_G as any).EntityFramework.CreateCppClassProxy('dota_hero_zuus');
 
