@@ -147,7 +147,7 @@ export module EventHelper {
      * @param context
      * @returns
      */
-    export function addProtocolEvent(eventName: GameEnum.Event.CustomProtocol, func: (event: JS_TO_LUA_DATA) => void, context: any = null) {
+    export function addProtocolEvent(eventName: string, func: (event: JS_TO_LUA_DATA) => void, context: any = null) {
         if (!IsServer()) { return }
 
         if (eventName == null) { return };
@@ -161,7 +161,7 @@ export module EventHelper {
      * @param context
      * @returns
      */
-    export function removeProtocolEvent(eventName: GameEnum.Event.CustomProtocol, func: (event: JS_TO_LUA_DATA) => void, context: any = null) {
+    export function removeProtocolEvent(eventName: string, func: (event: JS_TO_LUA_DATA) => void, context: any = null) {
         if (!IsServer()) { return }
         if (eventName == null) { return };
         if (globalData.allCustomProtocolEvent[eventName]) {
@@ -181,7 +181,7 @@ export module EventHelper {
      * @param cb
      * @param context
      */
-    export function fireProtocolEventOnServer(protocol: GameEnum.Event.CustomProtocol, data: JS_TO_LUA_DATA = null) {
+    export function fireProtocolEventOnServer(protocol: string, data: JS_TO_LUA_DATA = null) {
         if (!IsServer()) { return }
         if (protocol == null) { return };
         if (data == null) { data = {} };
@@ -207,7 +207,7 @@ export module EventHelper {
      * @param eventName
      * @param eventData
      */
-    export function fireProtocolEventToClient(eventName: GameEnum.Event.CustomProtocol, eventData: JS_TO_LUA_DATA) {
+    export function fireProtocolEventToClient(eventName: string, eventData: JS_TO_LUA_DATA) {
         if (!IsServer()) { return }
         let _event: JS_TO_LUA_DATA = {} as any;
         Object.assign(_event, eventData);
@@ -222,7 +222,7 @@ export module EventHelper {
      * @param eventData
      * @param team
      */
-    export function fireProtocolEventToTeam(eventName: GameEnum.Event.CustomProtocol, eventData: JS_TO_LUA_DATA, team: DOTATeam_t = null) {
+    export function fireProtocolEventToTeam(eventName: string, eventData: JS_TO_LUA_DATA, team: DOTATeam_t = null) {
         if (!IsServer()) { return }
         let _event: JS_TO_LUA_DATA = {} as any;
         Object.assign(_event, eventData);
@@ -237,7 +237,7 @@ export module EventHelper {
      * @param eventData
      * @param playerid
      */
-    export function fireProtocolEventToPlayer(eventName: GameEnum.Event.CustomProtocol, eventData: JS_TO_LUA_DATA, playerid: PlayerID) {
+    export function fireProtocolEventToPlayer(eventName: string, eventData: JS_TO_LUA_DATA, playerid: PlayerID) {
         if (!IsServer()) { return }
         let _event: JS_TO_LUA_DATA = {} as any;
         Object.assign(_event, eventData);
@@ -277,7 +277,7 @@ export module EventHelper {
     /**
      * 删除所有协议事件监听
      */
-    export function removeAllProtocolEvent(eventName: GameEnum.Event.CustomProtocol) {
+    export function removeAllProtocolEvent(eventName: string) {
         if (eventName == null) { return };
         if (globalData.allCustomProtocolEvent[eventName]) {
             delete globalData.allCustomProtocolEvent[eventName]

@@ -8,11 +8,11 @@ import { RoundSystem } from "./RoundSystem";
 export class RoundEventHandler {
 
 
-    private static System: typeof RoundSystem;
+    public static System: typeof RoundSystem;
 
     /**添加协议事件 */
     public static startListen(System: typeof RoundSystem) {
-        this.System = System;
+        RoundEventHandler.System = System;
         EventHelper.addGameEvent(GameEnum.Event.GameEvent.EntityHurtEvent, this.OnEntityHurtEvent, this);
     }
 

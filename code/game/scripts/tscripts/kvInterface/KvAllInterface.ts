@@ -1,4 +1,6 @@
 // generate with PIPIXIA's kv generator 
+import { pool_config } from "./kvConfig/pool_config" 
+import { pool_group_config } from "./kvConfig/pool_group_config" 
 import { building_combination } from "./building/building_combination" 
 import { building_item_card } from "./building/building_item_card" 
 import { building_round } from "./building/building_round" 
@@ -9,6 +11,8 @@ import { building_round_challenge } from "./building/building_round_challenge"
 import { building_unit_summoned } from "./building/building_unit_summoned" 
 import { building_ability_tower } from "./building/building_ability_tower" 
 export interface KvAllInterface  {
+"pool_config": pool_config.OBJ_1_1,
+"pool_group_config": pool_group_config.OBJ_1_1,
 "building_combination": building_combination.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
 "building_round": building_round.OBJ_1_1,
@@ -20,6 +24,8 @@ export interface KvAllInterface  {
 "building_ability_tower": building_ability_tower.OBJ_1_1,
 }
 export const KvAllPath = {
+"pool_config": "scripts/npc/kvConfig/pool_config.kv",
+"pool_group_config": "scripts/npc/kvConfig/pool_group_config.kv",
 "building_combination": "scripts/npc/building/building_combination.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
 "building_round": "scripts/npc/building/building_round.kv",
@@ -31,6 +37,8 @@ export const KvAllPath = {
 "building_ability_tower": "scripts/npc/building/building_ability_tower.kv",
 }
 export interface KvServerInterface   {
+"pool_config": pool_config.OBJ_1_1,
+"pool_group_config": pool_group_config.OBJ_1_1,
 "building_combination": building_combination.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
 "building_round": building_round.OBJ_1_1,
@@ -42,6 +50,8 @@ export interface KvServerInterface   {
 "building_ability_tower": building_ability_tower.OBJ_1_1,
 }
 export const KvServer = {
+"pool_config": "scripts/npc/kvConfig/pool_config.kv",
+"pool_group_config": "scripts/npc/kvConfig/pool_group_config.kv",
 "building_combination": "scripts/npc/building/building_combination.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
 "building_round": "scripts/npc/building/building_round.kv",
@@ -53,6 +63,8 @@ export const KvServer = {
 "building_ability_tower": "scripts/npc/building/building_ability_tower.kv",
 }
 export interface KvClientInterface   {
+"pool_config": pool_config.OBJ_1_1,
+"pool_group_config": pool_group_config.OBJ_1_1,
 "building_combination": building_combination.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
 "building_round": building_round.OBJ_1_1,
@@ -64,6 +76,8 @@ export interface KvClientInterface   {
 "building_ability_tower": building_ability_tower.OBJ_1_1,
 }
 export const KvClient = {
+"pool_config": "scripts/npc/kvConfig/pool_config.kv",
+"pool_group_config": "scripts/npc/kvConfig/pool_group_config.kv",
 "building_combination": "scripts/npc/building/building_combination.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
 "building_round": "scripts/npc/building/building_round.kv",

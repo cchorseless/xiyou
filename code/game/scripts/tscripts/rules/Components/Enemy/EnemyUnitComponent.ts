@@ -4,6 +4,7 @@ import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { building_unit_enemy } from "../../../kvInterface/building/building_unit_enemy";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
+import { PlayerSystem } from "../../System/Player/PlayerSystem";
 import { RoundSystem } from "../../System/Round/RoundSystem";
 import { ERound } from "../Round/ERound";
 import { EnemyKillPrizeComponent } from "./EnemyKillPrizeComponent";
@@ -20,7 +21,6 @@ export enum EEnemyUnitType {
 }
 
 export class EnemyUnitComponent extends ET.Component {
-
     configid: string;
     config: building_unit_enemy.OBJ_2_1;
     readonly PlayerID: number;
@@ -43,12 +43,11 @@ export class EnemyUnitComponent extends ET.Component {
     }
 
     get Round(): ERound {
-        return RoundSystem.AllManager[this.PlayerID].RoundInfo[this.RoundID];
+        return PlayerSystem.GetPlayer(this.PlayerID).RoundManagerComp().RoundInfo[this.RoundID];
     }
 
-
     get EnemyUnitType() {
-        return this.config.UnitLabel
+        return this.config.UnitLabel;
     }
 
     get IsWave() {

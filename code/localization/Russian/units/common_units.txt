@@ -1,0 +1,3 @@
+"unit_ward_observer"       "侦查守卫单位"
+"unit_remote_mine"       "遥控炸弹"
+"unit_dummy"       "目标伤害点"

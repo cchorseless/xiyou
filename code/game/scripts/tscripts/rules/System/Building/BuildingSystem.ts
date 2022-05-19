@@ -7,15 +7,10 @@ import { BuildingState } from "./BuildingState"
 
 export class BuildingSystem {
 
-
     public static init() {
         BuildingState.init();
     };
-    static readonly AllManager: { [k: string]: BuildingManagerComponent } = {};
 
-    public static RegComponent(comp: BuildingManagerComponent) {
-        BuildingSystem.AllManager[comp.PlayerID] = comp;
-    }
     /**
      * 地块坐标
      * @param location 

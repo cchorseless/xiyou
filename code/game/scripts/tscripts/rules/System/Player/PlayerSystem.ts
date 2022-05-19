@@ -7,7 +7,7 @@ import { PlayerEventHandler } from "./PlayerEventHandler";
 import { PlayerState } from "./PlayerState";
 
 export class PlayerSystem {
-    private static AllPlayer: { [k: string]: PlayerEntityRoot } = {};
+    public static readonly AllPlayer: { [k: string]: PlayerEntityRoot } = {};
 
     public static GetPlayer(playerid: PlayerID | number | string): PlayerEntityRoot {
         return PlayerSystem.AllPlayer[playerid + ""];
@@ -17,11 +17,15 @@ export class PlayerSystem {
         PlayerState.init();
         PlayerEventHandler.startListen(PlayerSystem);
     }
+    public static PlayerList() {
+        return Object.values(PlayerSystem.AllPlayer);
+    }
 
     public static CreateAllPlayer() {
         let allPlayer = PlayerSystem.GetAllPlayerid();
         allPlayer.forEach(async (playerid) => {
             let playerRoot = new PlayerEntityRoot();
+            (playerRoot as any).Playerid = playerid;
             PlayerSystem.AllPlayer[playerid + ""] = playerRoot;
             let playerhttp = playerRoot.AddPreAwakeComponent(ClassHelper.getRegClass<typeof PlayerHttpComponent>("PlayerHttpComponent"));
             await playerhttp.PlayerLogin(playerid);

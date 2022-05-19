@@ -24,14 +24,11 @@ export class BuildingManagerComponent extends ET.Component {
     population_level: number = 0;
     /**是否建造过一个建筑 */
     bHasBuild: boolean = false;
-    readonly PlayerID: number;
 
     tGlobalBuffs: BuildingConfig.IBuffInfo[] = [];
 
     onAwake() {
-        let domain = this.GetDomain<BaseNpc_Hero_Plus>();
-        (this as any).PlayerID = domain.GetPlayerID();
-        BuildingSystem.RegComponent(this);
+
     }
 
     /**

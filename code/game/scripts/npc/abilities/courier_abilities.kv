@@ -221,5 +221,229 @@
 		}
 
 	}
+	"courier_draw_card_v1" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_base/courier_draw_card_v1"
+		"AbilityTextureName" "card01"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "0"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"draw_count" "3"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"wood_cost" "5"
+
+			}
+
+		}
+
+	}
+	"courier_draw_card_v2" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_base/courier_draw_card_v2"
+		"AbilityTextureName" "card02"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "0"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"draw_count" "3"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"wood_cost" "10"
+
+			}
+
+		}
+
+	}
+	"courier_draw_card_v3" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_base/courier_draw_card_v3"
+		"AbilityTextureName" "card03"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE|DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "0"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"draw_count" "3"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"wood_cost" "20"
+
+			}
+
+		}
+
+	}
+	"courier_auto_gold" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_base/courier_auto_gold"
+		"AbilityTextureName" "auto_gold"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "0"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"radius" "350"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"movespeed_bonus" "-50"
+
+			}
+			"03" {
+				"var_type" "FIELD_FLOAT"
+				"slow_duration" "2"
+
+			}
+			"04" {
+				"var_type" "FIELD_FLOAT"
+				"stun_duration" "2"
+
+			}
+
+		}
+
+	}
+	"courier_fire_chess" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_base/courier_fire_chess"
+		"AbilityTextureName" "fire_chess"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "0"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"radius" "350"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"movespeed_bonus" "-50"
+
+			}
+			"03" {
+				"var_type" "FIELD_FLOAT"
+				"slow_duration" "2"
+
+			}
+			"04" {
+				"var_type" "FIELD_FLOAT"
+				"stun_duration" "2"
+
+			}
+
+		}
+
+	}
+	"courier_recovery_chess" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_base/courier_recovery_chess"
+		"AbilityTextureName" "recovery_chess"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "0"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"radius" "350"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"movespeed_bonus" "-50"
+
+			}
+			"03" {
+				"var_type" "FIELD_FLOAT"
+				"slow_duration" "2"
+
+			}
+			"04" {
+				"var_type" "FIELD_FLOAT"
+				"stun_duration" "2"
+
+			}
+
+		}
+
+	}
+	"courier_upgrade_chess" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_base/courier_upgrade_chess"
+		"AbilityTextureName" "upgrade_chess"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "0"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"radius" "350"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"movespeed_bonus" "-50"
+
+			}
+			"03" {
+				"var_type" "FIELD_FLOAT"
+				"slow_duration" "2"
+
+			}
+			"04" {
+				"var_type" "FIELD_FLOAT"
+				"stun_duration" "2"
+
+			}
+
+		}
+
+	}
 
 }

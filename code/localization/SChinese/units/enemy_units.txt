@@ -1,0 +1,6 @@
+"uint_creature_roamer"       "钻地怪物"
+"unit_1001"       "蘑菇"
+"unit_1002"       "头颅"
+"unit_red_tp"       "传送出生点"
+"unit_blue_tp"       "传送出生点"
+"unit_remote_mine"       "遥控炸弹"

@@ -1,6 +1,7 @@
 import { GameFunc } from "../../GameFunc";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
+import { PlayerEntityRoot } from "../Components/Player/PlayerEntityRoot";
 
 export module ET {
     interface IEntityProperty {
@@ -503,6 +504,9 @@ export module ET {
             }
         }
 
+        public AsPlayer() {
+            return this as any as PlayerEntityRoot;
+        }
         public Active(etroot: IEntityRoot) {
             if (etroot.ETRoot == null) {
                 this.setDomain(etroot);

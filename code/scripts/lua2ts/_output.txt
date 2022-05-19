@@ -1,85 +1,369 @@
-// -@class modifier_wave.eom_modifier
-@registerModifier()
-export class modifier_wave extends BaseModifier_Plus {
+if ( Draw == null ) {
+	// - @class Draw
+	Draw = class({})
+}
 
-let public = modifier_wave
+ init(bReload) {
+	if ( !bReload ) {
+		this.tPlayerCards = {}
+		this.tLastCards = {} //  抽卡防黑池
+		this.tReDrawChance = {}
+		this.tWishList = {} //  愿望单
+	}
 
- IsHidden() {
+	this.hReservoirs = {}
+	for (let v of ( KeyValues.ReservoirsKv)) {
+	 
+
+		this.hReservoirs[k] = WeightPool(deepcopy(v))
+	}
+	this.hPools = {}
+	for (let v of ( KeyValues.PoolsKv)) {
+	 
+
+		this.hPools[k] = WeightPool(deepcopy(v))
+	}
+
+	GameEvent("game_rules_state_change", Dynamic_Wrap(Draw, "OnGameRulesStateChange"), Draw)
+	GameEvent("custom_npc_first_spawned", Dynamic_Wrap(Draw, "OnNPCFirstSpawned"), Draw)
+
+	CustomUIEvent("CardSelected", Dynamic_Wrap(Draw, "OnCardSelected"), Draw)
+	CustomUIEvent("StartCardSelected", Dynamic_Wrap(Draw, "OnStartCardSelected"), Draw)
+	CustomUIEvent("SelectCard2Public", Dynamic_Wrap(Draw, "OnSelectCard2Public"), Draw)
+	CustomUIEvent("RedrawStartCard", Dynamic_Wrap(Draw, "OnRedrawStartCard"), Draw)
+	CustomUIEvent("Add2WishList", Dynamic_Wrap(Draw, "OnAdd2WishList"), Draw)
+	CustomUIEvent("RemoveWishList", Dynamic_Wrap(Draw, "OnRemoveWishList"), Draw)
+	CustomUIEvent("ToggleWishList", Dynamic_Wrap(Draw, "OnToggleWishList"), Draw)
+
+	//  this.UpdateNetTables()
+}
+
+ UpdateNetTables() {
+	for (let v of ( this.tPlayerCards)) {
+	 
+
+		CustomNetTables.SetTableValue("common", "card_selection_list" + iPlayerID, v)
+	}
+
+	CustomNetTables.SetTableValue("common", "player_redraw", this.tReDrawChance)
+	CustomNetTables.SetTableValue("common", "player_card_wish_list", this.tWishList)
+}
+// // // // // // // // // // // // // // // // // // // -utils// // // // // // // // // // // // // // // // // // // -
+//  抽奖后根据返回结果找到池子再抽奖
+//  @params Reservoir 抽奖池名字或者抽奖信息的table
+ DrawDouble(Reservoir) {
+	let hReservoir
+	if ( type(Reservoir) == "string" ) {
+		assert(this.hReservoirs[Reservoir], tostring(Reservoir) + " is a invalid reservoir name!")
+		hReservoir = this.hReservoirs[Reservoir]
+	} else if ( type(Reservoir) == "table" ) {
+		hReservoir = WeightPool(Reservoir)
+	}
+
+	return this.Draw(hReservoir.Random())
+}
+//  抽奖池
+ Draw(DrawPool) {
+	let hPool
+	if ( type(DrawPool) == "string" ) {
+		assert(!(this.hReservoirs[DrawPool] == null && this.hPools[DrawPool] == null), DrawPool + " is a invalid pool name!")
+		hPool = this.hReservoirs[DrawPool] || this.hPools[DrawPool]
+	} else if ( type(DrawPool) == "table" ) {
+		hPool = WeightPool(DrawPool)
+	}
+
+	return hPool.Random()
+}
+// // // // // // // // // // // // // // // // // // // -各种抽卡// // // // // // // // // // // // // // // // // // // -
+//  开局抽卡
+ DrawStartCard(iPlayerID) {
+	let sReservoirName = "draw_card_start"
+	let iNum = START_DRAW_CARD_NUM
+
+	let tTowers = {}
+
+	let tVipCards = {}
+	let vipReservoir = "draw_card_start_vip"
+	for (let i = 1; i <= VIP_Start_Draw_Card; i++) {
+		let sCardName = this.DrawDouble(vipReservoir)
+		let sTowerName = Card.Card2TowerName(sCardName)
+		while ( TableFindKey(tTowers, sTowerName) != null ){ 
+			sCardName = this.DrawDouble(vipReservoir)
+			sTowerName = Card.Card2TowerName(sCardName)
+		}
+		table.insert(tTowers, sTowerName)
+		tVipCards[tTowers.length] = 1
+	}
+
+	for (let i = 1; i <= iNum; i++) {
+		let sCardName = this.DrawDouble(sReservoirName)
+		let sTowerName = Card.Card2TowerName(sCardName)
+		while ( TableFindKey(tTowers, sTowerName) != null ){ 
+			sCardName = this.DrawDouble(sReservoirName)
+			sTowerName = Card.Card2TowerName(sCardName)
+		}
+		table.insert(tTowers, sTowerName)
+	}
+
+	this.tPlayerCards[iPlayerID] = { tTower = tTowers, tVipCards = tVipCards, bFreeTake = true }
+
+	this.UpdateNetTables()
+}
+//  抽卡
+ DrawCard(iPlayerID, sReservoirName, iNum) {
+	if ( type(this.tPlayerCards[iPlayerID]) == "table" && type(this.tPlayerCards[iPlayerID].tTower) == "table" ) {
+		if ( this.tLastCards[iPlayerID] == null ) {
+			this.tLastCards[iPlayerID] = {}
+		}
+		for k, v in pairs(this.tPlayerCards[iPlayerID].tTower) do
+			table.insert(this.tLastCards[iPlayerID], v)
+		}
+		//  保险防止死循环
+		if ( DRAW_CARD_BLACK_LIST_NUM == null || DRAW_CARD_BLACK_LIST_NUM <= 0 ) {
+			DRAW_CARD_BLACK_LIST_NUM = 5
+		}
+		while ( this.tLastCards.length[iPlayerID] > DRAW_CARD_BLACK_LIST_NUM ){ 
+			table.remove(this.tLastCards[iPlayerID], 1)
+		}
+	}
+
+	let tTowers = {}
+	for (let i = 1; i <= iNum; i++) {
+		let sCardName = this.DrawDouble(sReservoirName)
+		let sTowerName = Card.Card2TowerName(sCardName)
+		while ( (TableFindKey(tTowers, sTowerName) != null || TableFindKey(this.tLastCards[iPlayerID], sTowerName) != null) ){ 
+			sCardName = this.DrawDouble(sReservoirName)
+			sTowerName = Card.Card2TowerName(sCardName)
+		}
+		table.insert(tTowers, sTowerName)
+	}
+
+	this.tPlayerCards[iPlayerID] = { tTower = tTowers }
+
+	this.UpdateNetTables()
+}
+//  选卡
+ SelectCard(iPlayerID, sTowerName, b2Public) {
+	if ( !PlayerResource.IsValidPlayer(iPlayerID) ) {
+		return
+	}
+	let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+	if ( !(GameFunc.IsValid(hHero) && hHero.IsAlive()) ) {
+		return
+	}
+
+	let bFreeTake = this.tPlayerCards[iPlayerID].bFreeTake
+	let index = TableFindKey(this.tPlayerCards[iPlayerID].tTower, sTowerName)
+	if ( index != null ) {
+		//  VIP限定卡牌
+		if ( this.tPlayerCards[iPlayerID].tVipCards && this.tPlayerCards[iPlayerID].tVipCards[index] == 1 && !PlayerProperty.HasPlus(iPlayerID) ) {
+			ErrorMessage(iPlayerID, "dota_hud_error_card_need_VIP")
+			return
+		}
+		let sCardName = Card.Tower2CardName(sTowerName)
+		let iCost = GetItemCost(sCardName)
+		if ( !bFreeTake && PlayerData.GetGold(iPlayerID) < iCost ) {
+			ErrorMessage(iPlayerID, "DOTA_Hud_NeedMoreGold")
+			return
+		}
+		if ( !bFreeTake ) {
+			PlayerData.ModifyGold(iPlayerID, -iCost)
+		}
+
+		let hItem = hHero.GiveItem(sCardName)
+		if ( GameFunc.IsValid(hItem) && b2Public ) {
+			Items.TryMoveEmptyPublic(iPlayerID, hHero, hItem)
+		}
+
+		//  if ( Card.GetCardRarity(sCardName) == "ssr" ) {
+		//  	CustomGameEventManager.Send_ServerToAllClients("show_drawing", { name = sCardName })
+		//  } else if ( Card.GetCardRarity(sCardName) == "sr" ) {
+		//  	CustomGameEventManager.Send_ServerToPlayer(PlayerResource.GetPlayer(iPlayerID), "show_drawing", { name = sCardName })
+		//  }
+		this.tPlayerCards[iPlayerID] = {}
+		this.tReDrawChance[iPlayerID] = 0
+		this.tLastCards[iPlayerID] = {}
+		this.UpdateNetTables()
+	}
+}
+
+ CommonDraw(hUnit, sReservoirName, iNum, bForce2BackPack) {
+	for (let i = 1; i <= iNum ; i++) {
+		let sItemName = this.DrawDouble(sReservoirName)
+		let iPlayerID = hUnit.GetPlayerOwnerID()
+		if ( Shop.tBuy2BackPack[iPlayerID] || bForce2BackPack ) {
+			Items.GiveItem2PlayerBackPack(iPlayerID, sItemName)
+		} else {
+			hUnit.GiveItem(sItemName)
+		}
+	}
+}
+//  打开箱子
+ OpenChest(hKeyUnit, sName, sReservoirName, iNum) {
+	let iKeyPlayerID = hKeyUnit.GetPlayerOwnerID()
+
+	let bIsKeyUsed = false
+	let sItemNameCost = GetKV("", "ItemsKv", sName, "ItemCostChest")
+	for (let i = DOTA_ITEM_SLOT_1; i <= DOTA_ITEM_SLOT_9; i++) {
+		let hItem = hKeyUnit.GetItemInSlot(i)
+		if ( hItem != null && hItem.GetName() == sItemNameCost ) {
+			hItem.SpendCharge()
+			bIsKeyUsed = true
+			break
+		}
+	}
+	if ( !bIsKeyUsed ) {
+		ErrorMessage(iKeyPlayerID, "dota_hud_error_no_chest")
+		return false
+	}
+	for (let i = 1; i <= iNum ; i++) {
+		let sItemName = this.DrawDouble(sReservoirName)
+		hKeyUnit.GiveItem(sItemName)
+	}
+	//  let tRewardUnit = {
+	//  	[0] : { iPlayerID : iKeyPlayerID, hHero : PlayerResource.GetSelectedHeroEntity(iKeyPlayerID), hUnit : hKeyUnit },
+	//  	[2] : { iPlayerID : iChestPlayerID, hHero : PlayerResource.GetSelectedHeroEntity(iChestPlayerID), hUnit : hChestUnit }
+	//  }
+	//  for (let tUnitInfo of ( tRewardUnit )) {
+
+	//  	let sDrawedItemName = this.DrawDouble(sReservoirName)
+	//  	let hItem = CreateItem(sDrawedItemName, tUnitInfo.hUnit, tUnitInfo.hHero)
+	//  	hItem.SetPurchaseTime(0)
+	//  	tUnitInfo.hUnit.AddItem(hItem)
+	//  	if ( hItem.GetParentPlus() != tUnitInfo.hUnit && hItem.GetContainer() == null ) {
+	//  		hItem.SetParent(tUnitInfo.hUnit, "")
+	//  		CreateItemOnPosition(tUnitInfo.hUnit.GetAbsOrigin() + Vector(RandomFloat(-50, 50), RandomFloat(-50, 50), 0), hItem)
+	//  	}
+	//  	//  Notification.Combat({
+	//  	//  	player_id : tUnitInfo.iPlayerID,
+	//  	//  	string_chest : "DOTA_Tooltip_Ability_" + sName,
+	//  	//  	string_itemname : sDrawedItemName,
+	//  	//  	message : "Custom_OpenChest.length"
+	//  	//  })
+	//  	//  if ( Items.GetItemRarity(hItem) >= 4 ) {
+	//  	//  	Notification.Upper({
+	//  	//  		player_id : tUnitInfo.iPlayerID,
+	//  	//  		string_chest : "DOTA_Tooltip_Ability_" + sName,
+	//  	//  		string_itemname : sDrawedItemName,
+	//  	//  		message : "Custom_OpenChest.length"
+	//  	//  	})
+	//  	//  }
+	//  }
 	return true
 }
- IsDebuff() {
-	return false
+// // // // // // // // // // // // // // // // // // // -各个UI事件// // // // // // // // // // // // // // // // // // // -
+ OnCardSelected(eventSourceIndex, events) {
+	let iPlayerID = events.PlayerID
+	let cardName = events.card_name || ""
+	this.SelectCard(iPlayerID, cardName)
 }
- IsPurgable() {
-	return false
-}
- IsPurgeException() {
-	return false
-}
- AllowIllusionDuplicate() {
-	return false
-}
- GetPriority() {
-	return MODIFIER_PRIORITY_SUPER_ULTRA
-}
- OnCreated(params: ModifierTable) {
-	if ( IsServer() ) {
-		let hParent = this.GetParentPlus()
+ OnStartCardSelected(i, events) {
+	let iPlayerID = events.PlayerID
+	let sCardName = events.card_name
 
-		//  基础护甲
-		let fArmorPhyMult = type(params.fArmorPhyMult) == "number" && params.fArmorPhyMult || 1
-		let fArmorMagMult = type(params.fArmorMagMult) == "number" && params.fArmorMagMult || 1
-		let fArmorPhyAdd = type(params.fArmorPhyAdd) == "number" && params.fArmorPhyAdd || 0
-		let fArmorMagAdd = type(params.fArmorMagAdd) == "number" && params.fArmorMagAdd || 0
-		if ( hParent._BasePhysicalArmor == null || hParent._BaseMagicalArmor == null ) {
-			let sUnitName = hParent.GetUnitName()
-			let tData = hParent.IsHero() && KeyValues.HeroesKv[sUnitName] || KeyValues.UnitsKv[sUnitName]
-			if ( tData ) {
-				hParent._BasePhysicalArmor = tonumber(tData.ArmorPhysical) || 0
-				hParent._BaseMagicalArmor = tonumber(tData.MagicalArmor) || 0
-			}
+	if ( !PlayerResource.IsValidPlayer(iPlayerID) ) {
+		return
+	}
+	let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+	if ( !(GameFunc.IsValid(hHero) && hHero.IsAlive()) ) {
+		return
+	}
+
+	let bFreeTake = this.tPlayerCards[iPlayerID].bFreeTake
+	if ( !bFreeTake ) {
+		return
+	}
+	this.tPlayerCards[iPlayerID].bFreeTake = false
+
+	let hItem = hHero.GiveItem(sCardName)
+
+	Service.UseConsumable(iPlayerID, "410009", 1)
+
+	this.tPlayerCards[iPlayerID] = {}
+	this.tReDrawChance[iPlayerID] = 0
+	this.tLastCards[iPlayerID] = {}
+	this.UpdateNetTables()
+}
+ OnSelectCard2Public(eventSourceIndex, events) {
+	let iPlayerID = events.PlayerID
+	let cardName = events.card_name || ""
+	this.SelectCard(iPlayerID, cardName, true)
+}
+ OnRedrawStartCard(i, events) {
+	let iPlayerID = events.PlayerID
+	let iRedraw = this.tReDrawChance[iPlayerID] || 0
+	if ( iRedraw > 0 ) {
+		this.tReDrawChance[iPlayerID] = iRedraw - 1
+		this.DrawStartCard(iPlayerID)
+	}
+}
+ OnAdd2WishList(i, events) {
+	let iPlayerID = events.PlayerID
+	let sTowerName = events.tower
+	if ( this.tWishList[iPlayerID] == null ) {
+		this.tWishList[iPlayerID] = {}
+	}
+	if ( TableFindKey(this.tWishList[iPlayerID], sTowerName) ) {
+		return
+	}
+	table.insert(this.tWishList[iPlayerID], sTowerName)
+	if ( MaxWishCard == null ) {
+		MaxWishCard = 5
+	}
+	while ( this.tWishList.length[iPlayerID] > MaxWishCard ){ 
+		table.remove(this.tWishList[iPlayerID], 1)
+	}
+	this.UpdateNetTables()
+}
+ OnRemoveWishList(i, events) {
+	let iPlayerID = events.PlayerID
+	let sTowerName = events.tower
+	if ( this.tWishList[iPlayerID] == null ) {
+		this.tWishList[iPlayerID] = {}
+	}
+	ArrayRemove(this.tWishList[iPlayerID], sTowerName)
+	this.UpdateNetTables()
+}
+ OnToggleWishList(i, events) {
+	let iPlayerID = events.PlayerID
+	let sTowerName = events.tower
+	if ( this.tWishList[iPlayerID] == null ) {
+		this.tWishList[iPlayerID] = {}
+	}
+	if ( TableFindKey(this.tWishList[iPlayerID], sTowerName) ) {
+		ArrayRemove(this.tWishList[iPlayerID], sTowerName)
+	} else {
+		table.insert(this.tWishList[iPlayerID], sTowerName)
+		if ( MaxWishCard == null ) {
+			MaxWishCard = 5
 		}
-		this.PhysicalArmor = fArmorPhyMult * hParent._BasePhysicalArmor + fArmorPhyAdd
-		this.MagicalArmor = fArmorMagMult * hParent._BaseMagicalArmor + fArmorMagAdd
-		this.SetHasCustomTransmitterData(true)
-	}
-}
-//  Server
- AddCustomTransmitterData() {
-	return {
-		PhysicalArmor = this.PhysicalArmor,
-		MagicalArmor = this.MagicalArmor,
-	}
-}
-//  Client
- HandleCustomTransmitterData(data) {
-	//  将server端的数值同步到client端
-	this.PhysicalArmor = data.PhysicalArmor
-	this.MagicalArmor = data.MagicalArmor
-	this.OnRefresh({}) //  测试下来HandleCustomTransmitterData比客户端的Oncreate早一些被调用，但是还是保险一下
-}
- CheckState() {
-	return {
-		[modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION] : true,
-		[modifierstate.MODIFIER_STATE_NO_HEALTH_BAR] : true
-	}
-}
- EDeclareFunctions() {
-	return {
-		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE = this.PhysicalArmor,
-		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BASE = this.MagicalArmor,
-	}
-}
- DeclareFunctions() {
-	return {
-		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_SCALE
-	}
-}
- GetModelScale() {
-	if ( IsServer() ) {
-		let hParent = this.GetParentPlus()
-		if ( hParent._round_type == "basic" ) {
-			return RemapValClamped(CandyMode.GetCandy(hParent._iSpawnerPlayerID), 0, 200, 0, 100)
+		while ( this.tWishList.length[iPlayerID] > MaxWishCard ){ 
+			table.remove(this.tWishList[iPlayerID], 1)
 		}
 	}
+	this.UpdateNetTables()
 }
+// // // // // // // // // // // // // // // // // // // -Game Events// // // // // // // // // // // // // // // // // // // -
+ OnGameRulesStateChange() {
+	let state = GameRules.State_Get()
+
+	if ( state == DOTA_GAMERULES_STATE_HERO_SELECTION ) {
+	} else if ( state == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS ) {
+		//  开局抽卡
+		GameMain.EachPlayer( (n, iPlayerID) => {
+			this.tReDrawChance[iPlayerID] = PlayerProperty.HasPlus(iPlayerID) && VIP_Redraw_Add || 0
+			this.DrawStartCard(iPlayerID)
+		})
+	}
+}
+ OnNPCFirstSpawned(events) {
+	let spawnedUnit = EntIndexToHScript(events.entindex)
+	if ( spawnedUnit == null ) {
+		return
+	}
+
+	if ( spawnedUnit.IsRealHero() && spawnedUnit.GetUnitLabel() == "builder" ) {
+	}
+}
+
+return Draw

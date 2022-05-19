@@ -1,84 +1,362 @@
----@class modifier_wave:eom_modifier
-modifier_wave = eom_modifier({})
+if Draw == nil then
+	--- @class Draw
+	Draw = class({})
+end
 
-local public = modifier_wave
+function Draw:init(bReload)
+	if not bReload then
+		self.tPlayerCards = {}
+		self.tLastCards = {} -- 抽卡防黑池
+		self.tReDrawChance = {}
+		self.tWishList = {} -- 愿望单
+	end
 
-function public:IsHidden()
+	self.hReservoirs = {}
+	for k, v in pairs(KeyValues.ReservoirsKv) do
+		self.hReservoirs[k] = WeightPool(deepcopy(v))
+	end
+	self.hPools = {}
+	for k, v in pairs(KeyValues.PoolsKv) do
+		self.hPools[k] = WeightPool(deepcopy(v))
+	end
+
+	GameEvent("game_rules_state_change", Dynamic_Wrap(Draw, "OnGameRulesStateChange"), Draw)
+	GameEvent("custom_npc_first_spawned", Dynamic_Wrap(Draw, "OnNPCFirstSpawned"), Draw)
+
+	CustomUIEvent("CardSelected", Dynamic_Wrap(Draw, "OnCardSelected"), Draw)
+	CustomUIEvent("StartCardSelected", Dynamic_Wrap(Draw, "OnStartCardSelected"), Draw)
+	CustomUIEvent("SelectCard2Public", Dynamic_Wrap(Draw, "OnSelectCard2Public"), Draw)
+	CustomUIEvent("RedrawStartCard", Dynamic_Wrap(Draw, "OnRedrawStartCard"), Draw)
+	CustomUIEvent("Add2WishList", Dynamic_Wrap(Draw, "OnAdd2WishList"), Draw)
+	CustomUIEvent("RemoveWishList", Dynamic_Wrap(Draw, "OnRemoveWishList"), Draw)
+	CustomUIEvent("ToggleWishList", Dynamic_Wrap(Draw, "OnToggleWishList"), Draw)
+
+	-- self:UpdateNetTables()
+end
+
+function Draw:UpdateNetTables()
+	for iPlayerID, v in pairs(self.tPlayerCards) do
+		CustomNetTables:SetTableValue("common", "card_selection_list" .. iPlayerID, v)
+	end
+
+	CustomNetTables:SetTableValue("common", "player_redraw", self.tReDrawChance)
+	CustomNetTables:SetTableValue("common", "player_card_wish_list", self.tWishList)
+end
+---------------------------------------utils---------------------------------------
+-- 抽奖后根据返回结果找到池子再抽奖
+-- @params Reservoir 抽奖池名字或者抽奖信息的table
+function Draw:DrawDouble(Reservoir)
+	local hReservoir
+	if type(Reservoir) == "string" then
+		assert(self.hReservoirs[Reservoir], tostring(Reservoir) .. " is a invalid reservoir name!")
+		hReservoir = self.hReservoirs[Reservoir]
+	elseif type(Reservoir) == "table" then
+		hReservoir = WeightPool(Reservoir)
+	end
+
+	return self:Draw(hReservoir:Random())
+end
+-- 抽奖池
+function Draw:Draw(DrawPool)
+	local hPool
+	if type(DrawPool) == "string" then
+		assert(not (self.hReservoirs[DrawPool] == nil and self.hPools[DrawPool] == nil), DrawPool .. " is a invalid pool name!")
+		hPool = self.hReservoirs[DrawPool] or self.hPools[DrawPool]
+	elseif type(DrawPool) == "table" then
+		hPool = WeightPool(DrawPool)
+	end
+
+	return hPool:Random()
+end
+---------------------------------------各种抽卡---------------------------------------
+-- 开局抽卡
+function Draw:DrawStartCard(iPlayerID)
+	local sReservoirName = "draw_card_start"
+	local iNum = START_DRAW_CARD_NUM
+
+	local tTowers = {}
+
+	local tVipCards = {}
+	local vipReservoir = "draw_card_start_vip"
+	for i = 1, VIP_Start_Draw_Card, 1 do
+		local sCardName = self:DrawDouble(vipReservoir)
+		local sTowerName = Card:Card2TowerName(sCardName)
+		while TableFindKey(tTowers, sTowerName) ~= nil do
+			sCardName = self:DrawDouble(vipReservoir)
+			sTowerName = Card:Card2TowerName(sCardName)
+		end
+		table.insert(tTowers, sTowerName)
+		tVipCards[#tTowers] = 1
+	end
+
+	for i = 1, iNum, 1 do
+		local sCardName = self:DrawDouble(sReservoirName)
+		local sTowerName = Card:Card2TowerName(sCardName)
+		while TableFindKey(tTowers, sTowerName) ~= nil do
+			sCardName = self:DrawDouble(sReservoirName)
+			sTowerName = Card:Card2TowerName(sCardName)
+		end
+		table.insert(tTowers, sTowerName)
+	end
+
+	self.tPlayerCards[iPlayerID] = { tTower = tTowers, tVipCards = tVipCards, bFreeTake = true }
+
+	self:UpdateNetTables()
+end
+-- 抽卡
+function Draw:DrawCard(iPlayerID, sReservoirName, iNum)
+	if type(self.tPlayerCards[iPlayerID]) == "table" and type(self.tPlayerCards[iPlayerID].tTower) == "table" then
+		if self.tLastCards[iPlayerID] == nil then
+			self.tLastCards[iPlayerID] = {}
+		end
+		for k, v in pairs(self.tPlayerCards[iPlayerID].tTower) do
+			table.insert(self.tLastCards[iPlayerID], v)
+		end
+		-- 保险防止死循环
+		if DRAW_CARD_BLACK_LIST_NUM == nil or DRAW_CARD_BLACK_LIST_NUM <= 0 then
+			DRAW_CARD_BLACK_LIST_NUM = 5
+		end
+		while #self.tLastCards[iPlayerID] > DRAW_CARD_BLACK_LIST_NUM do
+			table.remove(self.tLastCards[iPlayerID], 1)
+		end
+	end
+
+	local tTowers = {}
+	for i = 1, iNum, 1 do
+		local sCardName = self:DrawDouble(sReservoirName)
+		local sTowerName = Card:Card2TowerName(sCardName)
+		while (TableFindKey(tTowers, sTowerName) ~= nil or TableFindKey(self.tLastCards[iPlayerID], sTowerName) ~= nil) do
+			sCardName = self:DrawDouble(sReservoirName)
+			sTowerName = Card:Card2TowerName(sCardName)
+		end
+		table.insert(tTowers, sTowerName)
+	end
+
+	self.tPlayerCards[iPlayerID] = { tTower = tTowers }
+
+	self:UpdateNetTables()
+end
+-- 选卡
+function Draw:SelectCard(iPlayerID, sTowerName, b2Public)
+	if not PlayerResource:IsValidPlayer(iPlayerID) then
+		return
+	end
+	local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
+	if not (IsValid(hHero) and hHero:IsAlive()) then
+		return
+	end
+
+	local bFreeTake = self.tPlayerCards[iPlayerID].bFreeTake
+	local index = TableFindKey(self.tPlayerCards[iPlayerID].tTower, sTowerName)
+	if index ~= nil then
+		-- VIP限定卡牌
+		if self.tPlayerCards[iPlayerID].tVipCards and self.tPlayerCards[iPlayerID].tVipCards[index] == 1 and not PlayerProperty:HasPlus(iPlayerID) then
+			ErrorMessage(iPlayerID, "dota_hud_error_card_need_VIP")
+			return
+		end
+		local sCardName = Card:Tower2CardName(sTowerName)
+		local iCost = GetItemCost(sCardName)
+		if not bFreeTake and PlayerData:GetGold(iPlayerID) < iCost then
+			ErrorMessage(iPlayerID, "DOTA_Hud_NeedMoreGold")
+			return
+		end
+		if not bFreeTake then
+			PlayerData:ModifyGold(iPlayerID, -iCost)
+		end
+
+		local hItem = hHero:GiveItem(sCardName)
+		if IsValid(hItem) and b2Public then
+			Items:TryMoveEmptyPublic(iPlayerID, hHero, hItem)
+		end
+
+		-- if Card:GetCardRarity(sCardName) == "ssr" then
+		-- 	CustomGameEventManager:Send_ServerToAllClients("show_drawing", { name = sCardName })
+		-- elseif Card:GetCardRarity(sCardName) == "sr" then
+		-- 	CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(iPlayerID), "show_drawing", { name = sCardName })
+		-- end
+		self.tPlayerCards[iPlayerID] = {}
+		self.tReDrawChance[iPlayerID] = 0
+		self.tLastCards[iPlayerID] = {}
+		self:UpdateNetTables()
+	end
+end
+
+function Draw:CommonDraw(hUnit, sReservoirName, iNum, bForce2BackPack)
+	for i = 1, iNum do
+		local sItemName = self:DrawDouble(sReservoirName)
+		local iPlayerID = hUnit:GetPlayerOwnerID()
+		if Shop.tBuy2BackPack[iPlayerID] or bForce2BackPack then
+			Items:GiveItem2PlayerBackPack(iPlayerID, sItemName)
+		else
+			hUnit:GiveItem(sItemName)
+		end
+	end
+end
+-- 打开箱子
+function Draw:OpenChest(hKeyUnit, sName, sReservoirName, iNum)
+	local iKeyPlayerID = hKeyUnit:GetPlayerOwnerID()
+
+	local bIsKeyUsed = false
+	local sItemNameCost = GetKV("", "ItemsKv", sName, "ItemCostChest")
+	for i = DOTA_ITEM_SLOT_1, DOTA_ITEM_SLOT_9, 1 do
+		local hItem = hKeyUnit:GetItemInSlot(i)
+		if hItem ~= nil and hItem:GetName() == sItemNameCost then
+			hItem:SpendCharge()
+			bIsKeyUsed = true
+			break
+		end
+	end
+	if not bIsKeyUsed then
+		ErrorMessage(iKeyPlayerID, "dota_hud_error_no_chest")
+		return false
+	end
+	for i = 1, iNum do
+		local sItemName = self:DrawDouble(sReservoirName)
+		hKeyUnit:GiveItem(sItemName)
+	end
+	-- local tRewardUnit = {
+	-- 	[1] = { iPlayerID = iKeyPlayerID, hHero = PlayerResource:GetSelectedHeroEntity(iKeyPlayerID), hUnit = hKeyUnit },
+	-- 	[2] = { iPlayerID = iChestPlayerID, hHero = PlayerResource:GetSelectedHeroEntity(iChestPlayerID), hUnit = hChestUnit }
+	-- }
+	-- for _, tUnitInfo in ipairs(tRewardUnit) do
+	-- 	local sDrawedItemName = self:DrawDouble(sReservoirName)
+	-- 	local hItem = CreateItem(sDrawedItemName, tUnitInfo.hUnit, tUnitInfo.hHero)
+	-- 	hItem:SetPurchaseTime(0)
+	-- 	tUnitInfo.hUnit:AddItem(hItem)
+	-- 	if hItem:GetParent() ~= tUnitInfo.hUnit and hItem:GetContainer() == nil then
+	-- 		hItem:SetParent(tUnitInfo.hUnit, "")
+	-- 		CreateItemOnPosition(tUnitInfo.hUnit:GetAbsOrigin() + Vector(RandomFloat(-50, 50), RandomFloat(-50, 50), 0), hItem)
+	-- 	end
+	-- 	-- Notification:Combat({
+	-- 	-- 	player_id = tUnitInfo.iPlayerID,
+	-- 	-- 	string_chest = "DOTA_Tooltip_Ability_" .. sName,
+	-- 	-- 	string_itemname = sDrawedItemName,
+	-- 	-- 	message = "#Custom_OpenChest"
+	-- 	-- })
+	-- 	-- if Items:GetItemRarity(hItem) >= 4 then
+	-- 	-- 	Notification:Upper({
+	-- 	-- 		player_id = tUnitInfo.iPlayerID,
+	-- 	-- 		string_chest = "DOTA_Tooltip_Ability_" .. sName,
+	-- 	-- 		string_itemname = sDrawedItemName,
+	-- 	-- 		message = "#Custom_OpenChest"
+	-- 	-- 	})
+	-- 	-- end
+	-- end
 	return true
 end
-function public:IsDebuff()
-	return false
+---------------------------------------各个UI事件---------------------------------------
+function Draw:OnCardSelected(eventSourceIndex, events)
+	local iPlayerID = events.PlayerID
+	local cardName = events.card_name or ""
+	self:SelectCard(iPlayerID, cardName)
 end
-function public:IsPurgable()
-	return false
-end
-function public:IsPurgeException()
-	return false
-end
-function public:AllowIllusionDuplicate()
-	return false
-end
-function public:GetPriority()
-	return MODIFIER_PRIORITY_SUPER_ULTRA
-end
-function public:OnCreated(params)
-	if IsServer() then
-		local hParent = self:GetParent()
+function Draw:OnStartCardSelected(i, events)
+	local iPlayerID = events.PlayerID
+	local sCardName = events.card_name
 
-		-- 基础护甲
-		local fArmorPhyMult = type(params.fArmorPhyMult) == "number" and params.fArmorPhyMult or 1
-		local fArmorMagMult = type(params.fArmorMagMult) == "number" and params.fArmorMagMult or 1
-		local fArmorPhyAdd = type(params.fArmorPhyAdd) == "number" and params.fArmorPhyAdd or 0
-		local fArmorMagAdd = type(params.fArmorMagAdd) == "number" and params.fArmorMagAdd or 0
-		if hParent._BasePhysicalArmor == nil or hParent._BaseMagicalArmor == nil then
-			local sUnitName = hParent:GetUnitName()
-			local tData = hParent:IsHero() and KeyValues.HeroesKv[sUnitName] or KeyValues.UnitsKv[sUnitName]
-			if tData then
-				hParent._BasePhysicalArmor = tonumber(tData.ArmorPhysical) or 0
-				hParent._BaseMagicalArmor = tonumber(tData.MagicalArmor) or 0
-			end
-		end
-		self.PhysicalArmor = fArmorPhyMult * hParent._BasePhysicalArmor + fArmorPhyAdd
-		self.MagicalArmor = fArmorMagMult * hParent._BaseMagicalArmor + fArmorMagAdd
-		self:SetHasCustomTransmitterData(true)
+	if not PlayerResource:IsValidPlayer(iPlayerID) then
+		return
+	end
+	local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
+	if not (IsValid(hHero) and hHero:IsAlive()) then
+		return
+	end
+
+	local bFreeTake = self.tPlayerCards[iPlayerID].bFreeTake
+	if not bFreeTake then
+		return
+	end
+	self.tPlayerCards[iPlayerID].bFreeTake = false
+
+	local hItem = hHero:GiveItem(sCardName)
+
+	Service:UseConsumable(iPlayerID, "410009", 1)
+
+	self.tPlayerCards[iPlayerID] = {}
+	self.tReDrawChance[iPlayerID] = 0
+	self.tLastCards[iPlayerID] = {}
+	self:UpdateNetTables()
+end
+function Draw:OnSelectCard2Public(eventSourceIndex, events)
+	local iPlayerID = events.PlayerID
+	local cardName = events.card_name or ""
+	self:SelectCard(iPlayerID, cardName, true)
+end
+function Draw:OnRedrawStartCard(i, events)
+	local iPlayerID = events.PlayerID
+	local iRedraw = self.tReDrawChance[iPlayerID] or 0
+	if iRedraw > 0 then
+		self.tReDrawChance[iPlayerID] = iRedraw - 1
+		self:DrawStartCard(iPlayerID)
 	end
 end
--- Server
-function public:AddCustomTransmitterData()
-	return {
-		PhysicalArmor = self.PhysicalArmor,
-		MagicalArmor = self.MagicalArmor,
-	}
+function Draw:OnAdd2WishList(i, events)
+	local iPlayerID = events.PlayerID
+	local sTowerName = events.tower
+	if self.tWishList[iPlayerID] == nil then
+		self.tWishList[iPlayerID] = {}
+	end
+	if TableFindKey(self.tWishList[iPlayerID], sTowerName) then
+		return
+	end
+	table.insert(self.tWishList[iPlayerID], sTowerName)
+	if MaxWishCard == nil then
+		MaxWishCard = 5
+	end
+	while #self.tWishList[iPlayerID] > MaxWishCard do
+		table.remove(self.tWishList[iPlayerID], 1)
+	end
+	self:UpdateNetTables()
 end
--- Client
-function public:HandleCustomTransmitterData(data)
-	-- 将server端的数值同步到client端
-	self.PhysicalArmor = data.PhysicalArmor
-	self.MagicalArmor = data.MagicalArmor
-	self:OnRefresh({}) -- 测试下来HandleCustomTransmitterData比客户端的Oncreate早一些被调用，但是还是保险一下
+function Draw:OnRemoveWishList(i, events)
+	local iPlayerID = events.PlayerID
+	local sTowerName = events.tower
+	if self.tWishList[iPlayerID] == nil then
+		self.tWishList[iPlayerID] = {}
+	end
+	ArrayRemove(self.tWishList[iPlayerID], sTowerName)
+	self:UpdateNetTables()
 end
-function public:CheckState()
-	return {
-		[MODIFIER_STATE_NO_UNIT_COLLISION] = true,
-		[MODIFIER_STATE_NO_HEALTH_BAR] = true
-	}
-end
-function public:EDeclareFunctions()
-	return {
-		EOM_MODIFIER_PROPERTY_PHYSICAL_ARMOR_BASE = self.PhysicalArmor,
-		EOM_MODIFIER_PROPERTY_MAGICAL_ARMOR_BASE = self.MagicalArmor,
-	}
-end
-function public:DeclareFunctions()
-	return {
-		MODIFIER_PROPERTY_MODEL_SCALE
-	}
-end
-function public:GetModifierModelScale()
-	if IsServer() then
-		local hParent = self:GetParent()
-		if hParent._round_type == "basic" then
-			return RemapValClamped(CandyMode:GetCandy(hParent._iSpawnerPlayerID), 0, 200, 0, 100)
+function Draw:OnToggleWishList(i, events)
+	local iPlayerID = events.PlayerID
+	local sTowerName = events.tower
+	if self.tWishList[iPlayerID] == nil then
+		self.tWishList[iPlayerID] = {}
+	end
+	if TableFindKey(self.tWishList[iPlayerID], sTowerName) then
+		ArrayRemove(self.tWishList[iPlayerID], sTowerName)
+	else
+		table.insert(self.tWishList[iPlayerID], sTowerName)
+		if MaxWishCard == nil then
+			MaxWishCard = 5
+		end
+		while #self.tWishList[iPlayerID] > MaxWishCard do
+			table.remove(self.tWishList[iPlayerID], 1)
 		end
 	end
+	self:UpdateNetTables()
 end
+---------------------------------------Game Events---------------------------------------
+function Draw:OnGameRulesStateChange()
+	local state = GameRules:State_Get()
+
+	if state == DOTA_GAMERULES_STATE_HERO_SELECTION then
+	elseif state == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+		-- 开局抽卡
+		GameMain:EachPlayer(function(n, iPlayerID)
+			self.tReDrawChance[iPlayerID] = PlayerProperty:HasPlus(iPlayerID) and VIP_Redraw_Add or 0
+			self:DrawStartCard(iPlayerID)
+		end)
+	end
+end
+function Draw:OnNPCFirstSpawned(events)
+	local spawnedUnit = EntIndexToHScript(events.entindex)
+	if spawnedUnit == nil then
+		return
+	end
+
+	if spawnedUnit:IsRealHero() and spawnedUnit:GetUnitLabel() == "builder" then
+	end
+end
+
+return Draw

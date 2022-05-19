@@ -20,19 +20,23 @@ export module KVHelper {
         // 服务器
         if (IsServer()) {
             let k: keyof KvServerInterface;
-            if (Object.keys(KvServer).length == 0) { return };
-            for ((k as any) in KvServer) {
+            if (Object.keys(KvServer).length == 0) {
+                return;
+            }
+            for (k as any in KvServer) {
                 (KvServerConfig as any)[k] = LoadKeyValues(KvServer[k]);
-                LogHelper.print('Server LoadKeyValues Finish:', k);
+                LogHelper.print("Server LoadKeyValues Finish:", k);
             }
         }
         // 客户端
         else {
             let k: keyof KvClientInterface;
-            if (Object.keys(KvClient).length == 0) { return };
-            for ((k as any) in KvClient) {
+            if (Object.keys(KvClient).length == 0) {
+                return;
+            }
+            for (k as any in KvClient) {
                 (KvClientConfig as any)[k] = LoadKeyValues(KvClient[k]);
-                LogHelper.print('Client LoadKeyValues Finish:', k);
+                LogHelper.print("Client LoadKeyValues Finish:", k);
             }
         }
     }
@@ -59,7 +63,6 @@ export module KVHelper {
         //         }
         //     }
         // }
-
     }
 
     /**
@@ -75,7 +78,7 @@ export module KVHelper {
         //         r.push(k)
         //     }
         // }
-        return r
+        return r;
     }
 
     /**
@@ -84,16 +87,44 @@ export module KVHelper {
      * @return [[道具id,道具数量]，[道具id,道具数量]，]
      */
     export function DealItemPrizeStr(str: string) {
-        let [s, n] = string.gsub(str, '：', ':');
-        let list = s.split('|');
+        let [s, n] = string.gsub(str, "：", ":");
+        let list = s.split("|");
         let r: number[][] = [];
-        list.forEach(
-            (ss) => {
-                let _s_list = ss.split(':');
-                r.push([tonumber(_s_list[0]), tonumber(_s_list[1])])
-            }
-        )
+        list.forEach((ss) => {
+            let _s_list = ss.split(":");
+            r.push([tonumber(_s_list[0]), tonumber(_s_list[1])]);
+        });
         return r;
     }
 
+    export function RandomPoolGroupConfig(str: string): string {
+        let _config = KvServerConfig.pool_group_config[str as "1001"];
+        if (_config == null) {
+            LogHelper.error("cant find in pool group : key=> " + str);
+            return;
+        }
+        let r_arr = [];
+        let weight_arr = [];
+        for (let k in _config) {
+            r_arr.push(k);
+            weight_arr.push(_config[k as "1001"].PoolWeight);
+        }
+        return GameFunc.ArrayFunc.RandomArrayByWeight(r_arr, weight_arr)[0];
+    }
+
+
+    export function RandomPoolConfig(str: string): string {
+        let _config = KvServerConfig.pool_config[str as "1001"];
+        if (_config == null) {
+            LogHelper.error("cant find in pool  : key=> " + str);
+            return;
+        }
+        let r_arr = [];
+        let weight_arr = [];
+        for (let k in _config) {
+            r_arr.push(k);
+            weight_arr.push(_config[k as "1001"].ItemWeight);
+        }
+        return GameFunc.ArrayFunc.RandomArrayByWeight(r_arr, weight_arr)[0];
+    }
 }

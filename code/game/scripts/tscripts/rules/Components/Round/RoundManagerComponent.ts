@@ -9,13 +9,9 @@ import { ERoundChallenge } from "./ERoundChallenge";
 
 export class RoundManagerComponent extends ET.Component {
 
-    readonly PlayerID: number;
     readonly RoundInfo: { [k: string]: ERound } = {};
     private CurRoundId: string;
     onAwake() {
-        let domain = this.GetDomain<BaseNpc_Hero_Plus>();
-        (this as any).PlayerID = domain.GetPlayerID();
-        RoundSystem.RegComponent(this);
         this.initBasicRound();
     }
 
