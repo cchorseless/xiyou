@@ -31,13 +31,13 @@ export enum EventDataType {
 
 interface EventData {
     /**主动 */
-    attacker?: BaseNpc_Plus,
-    unit?: BaseNpc_Plus,
+    attacker?: BaseNpc_Plus;
+    unit?: BaseNpc_Plus;
     /**目标对象 */
-    target?: BaseNpc_Plus,
+    target?: BaseNpc_Plus;
     /**那种类型的事件 */
-    eventType?: EventDataType,
-    [k: string]: any
+    eventType?: EventDataType;
+    [k: string]: any;
 }
 
 @registerModifier()
@@ -49,17 +49,15 @@ export class modifier_event extends BaseModifier_Plus {
      * @returns
      */
     static FireEvent(event: EventData, ...k: Array<Enum_MODIFIER_EVENT>) {
-        if (!IsServer()) { return };
+        if (!IsServer()) {
+            return;
+        }
         let a, b, c;
         if (event) {
             if (event.eventType == null) {
                 event.eventType = EventDataType.attackerIsSelf;
             }
-            [a, b, c] = GameFunc.IncludeArgs(event.eventType,
-                EventDataType.attackerIsSelf,
-                EventDataType.unitIsSelf,
-                EventDataType.OtherCanBeAnyOne
-            )
+            [a, b, c] = GameFunc.IncludeArgs(event.eventType, EventDataType.attackerIsSelf, EventDataType.unitIsSelf, EventDataType.OtherCanBeAnyOne);
         }
         while (k.length > 0) {
             let _k = k.shift();
@@ -69,31 +67,24 @@ export class modifier_event extends BaseModifier_Plus {
                 if (m == null || m.IsNull() || m.UUID == null) {
                     continue;
                 }
-                let parent = m.GetParent()
+                let parent = m.GetParent();
                 if (parent == null) {
                     continue;
                 }
-                let _Event = m.__AllRegisterEvent
+                let _Event = m.__AllRegisterEvent;
                 if (_Event && _Event[_k]) {
                     // 自己事件
-                    if (event == null || a && event.attacker == parent || b && event.unit == parent) {
-                        _Event[_k][0].forEach(
-                            (func) => {
-                                pcall(func, m, event)
-                            }
-                        )
+                    if (event == null || (a && event.attacker == parent) || (b && event.unit == parent)) {
+                        _Event[_k][0].forEach((func) => {
+                            pcall(func, m, event);
+                        });
                     }
                     // 他人事件
                     if (event) {
-                        if (a && event.target == parent ||
-                            a && event.unit == parent ||
-                            b && event.attacker == parent ||
-                            c) {
-                            _Event[_k][1].forEach(
-                                (func) => {
-                                    pcall(func, m, event)
-                                }
-                            )
+                        if ((a && event.target == parent) || (a && event.unit == parent) || (b && event.attacker == parent) || c) {
+                            _Event[_k][1].forEach((func) => {
+                                pcall(func, m, event);
+                            });
                         }
                     }
                 }
@@ -102,15 +93,16 @@ export class modifier_event extends BaseModifier_Plus {
     }
 
     OnCreated() {
-        if (!IsServer()) { return };
+        if (!IsServer()) {
+            return;
+        }
         // this.addGameEvent();
     }
-
 
     /**监听游戏事件 */
     addGameEvent() {
         // 道具获取事件
-        EventHelper.addGameEvent(GameEnum.Event.GameEvent.DotaInventoryItemAddedEvent, (event) => {
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaInventoryItemAddedEvent, (event) => {
             // 17 表示 无效
             if (event.item_slot < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM) {
                 (event as EventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
@@ -120,11 +112,11 @@ export class modifier_event extends BaseModifier_Plus {
                 if (item.GetPurchaser() == null) {
                     item.SetPurchaser((event as EventData).unit);
                 }
-                modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_GET)
+                modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_GET);
             }
-        }, this);
+        });
         // 道具缺失事件
-        EventHelper.addGameEvent(GameEnum.Event.GameEvent.DotaHeroInventoryItemChangeEvent, (event: DotaHeroInventoryItemChangeEvent) => {
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaHeroInventoryItemChangeEvent, (event: DotaHeroInventoryItemChangeEvent) => {
             let item = EntIndexToHScript(event.item_entindex) as BaseItem_Plus;
             let state = item.GetItemState();
             let slot = item.GetItemSlot();
@@ -138,9 +130,9 @@ export class modifier_event extends BaseModifier_Plus {
             else if (state == 1 && slot == DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1) {
                 modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_DESTROY);
             }
-        }, this)
+        });
         // 道具位置改变
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_ITEM_SLOT_CHANGE, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_ITEM_SLOT_CHANGE, (event: JS_TO_LUA_DATA) => {
             let playerid = event.PlayerID;
             let hero = PlayerResource.GetPlayer(playerid).GetAssignedHero();
             if (hero != null) {
@@ -148,12 +140,11 @@ export class modifier_event extends BaseModifier_Plus {
                 for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM; i++) {
                     let itemEnity = hero.GetItemInSlot(i);
                     if (itemEnity != null) {
-                        r.push(itemEnity.entindex())
-                    }
-                    else {
+                        r.push(itemEnity.entindex());
+                    } else {
                         r.push(-1 as EntityIndex);
                     }
-                };
+                }
                 // 检查位置是否改变
                 let changeData = PlayerSystem.GetPlayer(playerid).PlayerComp().CheckItemSlotChange(r);
                 // 同步位置数据
@@ -166,13 +157,9 @@ export class modifier_event extends BaseModifier_Plus {
                     (_event as EventData).state = changeData[1];
                     modifier_event.FireEvent(_event, Enum_MODIFIER_EVENT.ON_ITEM_SLOT_CHANGE);
                 }
-
             }
-
-        }, this)
+        });
     }
-
-
 
     DeclareFunctions() {
         // LogHelper.print('DeclareFunctions', modifier_event.DeclareEvent.length);
@@ -326,9 +313,8 @@ export class modifier_event extends BaseModifier_Plus {
             modifierfunction.MODIFIER_EVENT_ON_ATTACK_FINISHED,
             modifierfunction.MODIFIER_EVENT_ON_ATTACK_RECORD_DESTROY,
             modifierfunction.MODIFIER_EVENT_ON_PROJECTILE_OBSTRUCTION_HIT,
-            modifierfunction.MODIFIER_EVENT_ON_ATTACK_CANCELLED
-
-        ]
+            modifierfunction.MODIFIER_EVENT_ON_ATTACK_CANCELLED,
+        ];
     }
 
     /**
@@ -337,8 +323,7 @@ export class modifier_event extends BaseModifier_Plus {
      */
     OnAbilityEndChannel(event: ModifierAbilityEvent): void {
         (event as EventData).eventType = EventDataType.unitIsSelf;
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ABILITY_END_CHANNEL)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ABILITY_END_CHANNEL);
     }
     /**
      *
@@ -346,8 +331,7 @@ export class modifier_event extends BaseModifier_Plus {
      */
     OnAbilityExecuted(event: ModifierAbilityEvent): void {
         (event as EventData).eventType = EventDataType.unitIsSelf;
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED);
     }
     /**
      * 技能|道具使用完成
@@ -366,8 +350,7 @@ export class modifier_event extends BaseModifier_Plus {
      */
     OnAbilityStart(event: ModifierAbilityEvent): void {
         (event as EventData).eventType = EventDataType.unitIsSelf;
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ABILITY_START)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ABILITY_START);
     }
     /**
      *
@@ -375,8 +358,7 @@ export class modifier_event extends BaseModifier_Plus {
      */
     OnAttack(event: ModifierAttackEvent): void {
         (event as EventData).eventType = EventDataType.attackerIsSelf;
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK);
     }
     /**
      * Happens even if attack can't be issued.
@@ -385,117 +367,106 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnAttackAllied(event: ModifierAttackEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_ALLIED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_ALLIED);
     }
     /**
      *
      *
      */
     OnAttackCancelled(event: ModifierAttackEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_CANCELLED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_CANCELLED);
     }
     /**
      *
      *
      */
     OnAttacked(event: ModifierAttackEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACKED)
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACKED);
     }
     /**
      *
      *
      */
     OnAttackFail(event: ModifierAttackEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_FAIL)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_FAIL);
     }
     /**
      *
      *
      */
     OnAttackFinished(event: ModifierAttackEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_FINISHED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_FINISHED);
     }
     /**
      *
      *
      */
     OnAttackLanded(event: ModifierAttackEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_LANDED);
     }
     /**
      *
      *
      */
     OnAttackRecord(event: ModifierAttackEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_RECORD)
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_RECORD);
     }
     /**
      *
      *
      */
     OnAttackRecordDestroy(event: ModifierAttackEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_RECORD_DESTROY)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_RECORD_DESTROY);
     }
     /**
      *
      *攻击开始
      */
     OnAttackStart(event: ModifierAttackEvent): void {
-        event.record = BattleHelper.GetNextRecord()
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_START)
+        event.record = BattleHelper.GetNextRecord();
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK_START);
     }
     /**
      *
      *
      */
     OnBreakInvisibility(): void {
-        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_BREAK_INVISIBILITY)
-
+        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_BREAK_INVISIBILITY);
     }
     /**
      *
      *
      */
     OnBuildingKilled(event: ModifierInstanceEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_BUILDING_KILLED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_BUILDING_KILLED);
     }
     /**
      *
      *
      */
     OnDamageCalculated(event: ModifierAttackEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_DAMAGE_CALCULATED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_DAMAGE_CALCULATED);
     }
     /**
      *
      *
      */
     OnDamagePrevented(): void {
-        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_DEATH_PREVENTED)
-
+        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_DEATH_PREVENTED);
     }
     /**
      * 怪物死亡
      */
     OnDeath(event: ModifierInstanceEvent): void {
         (event as EventData).eventType = EventDataType.unitIsSelf;
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_DEATH)
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_DEATH);
     }
     /**
      *
      *
      */
     OnDominated(event: ModifierUnitEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_DOMINATED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_DOMINATED);
     }
     /**
      *
@@ -503,79 +474,69 @@ export class modifier_event extends BaseModifier_Plus {
      */
     OnHealReceived(event: ModifierUnitEvent): void {
         // modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_HEAL_RECEIVED)
-
     }
     /**
      *
      *
      */
     OnHealthGained(event: ModifierUnitEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_HEALTH_GAINED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_HEALTH_GAINED);
     }
     /**
      *
      *
      */
     OnHeroKilled(event: ModifierAttackEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_HERO_KILLED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_HERO_KILLED);
     }
     /**
      *
      *
      */
     OnManaGained(event: ModifierUnitEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_MANA_GAINED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_MANA_GAINED);
     }
     /**
      *
      *
      */
     OnModelChanged(event: ModifierUnitEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_MODEL_CHANGED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_MODEL_CHANGED);
     }
     /**
      *
      *
      */
     OnModifierAdded(): void {
-        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_MODIFIER_ADDED)
-
+        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_MODIFIER_ADDED);
     }
     /**
      *
      *
      */
     OnOrder(event: ModifierUnitEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ORDER)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ORDER);
     }
     /**
      *
      *
      */
     OnProcessCleave(): void {
-        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_PROCESS_CLEAVE)
-
+        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_PROCESS_CLEAVE);
     }
     /**
      *
      *
      */
     OnProjectileDodge(event: ModifierAttackEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_PROJECTILE_DODGE)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_PROJECTILE_DODGE);
     }
     /**
      *
      *
      */
     OnProjectileObstructionHit(): void {
-        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_PROJECTILE_OBSTRUCTION_HIT)
-
+        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_PROJECTILE_OBSTRUCTION_HIT);
     }
     /**
      *
@@ -584,8 +545,7 @@ export class modifier_event extends BaseModifier_Plus {
     OnRespawn(event: ModifierUnitEvent): void {
         LogHelper.print(event, 111111);
         (event as EventData).eventType = EventDataType.unitIsSelf;
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_RESPAWN)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_RESPAWN);
     }
     /**
      *
@@ -593,15 +553,14 @@ export class modifier_event extends BaseModifier_Plus {
      */
     OnSetLocation(event: ModifierUnitEvent): void {
         (event as EventData).eventType = EventDataType.unitIsSelf;
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_SET_LOCATION)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_SET_LOCATION);
     }
     /**
      *
      *
      */
     OnSpellTargetReady(): void {
-        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_SPELL_TARGET_READY)
+        modifier_event.FireEvent(null, Enum_MODIFIER_EVENT.ON_SPELL_TARGET_READY);
     }
     /**
      *
@@ -610,8 +569,7 @@ export class modifier_event extends BaseModifier_Plus {
     OnSpentMana(event: ModifierAbilityEvent): void {
         (event as EventData).eventType = EventDataType.unitIsSelf;
 
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_SPENT_MANA)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_SPENT_MANA);
     }
     /**
      *
@@ -619,8 +577,7 @@ export class modifier_event extends BaseModifier_Plus {
      */
     OnStateChanged(event: ModifierUnitEvent): void {
         (event as EventData).eventType = EventDataType.unitIsSelf;
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_STATE_CHANGED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_STATE_CHANGED);
     }
     /**
      *造成伤害
@@ -628,16 +585,14 @@ export class modifier_event extends BaseModifier_Plus {
      */
     OnTakeDamage(event: ModifierInstanceEvent): void {
         (event as EventData).eventType = EventDataType.attackerIsSelf;
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TAKEDAMAGE);
     }
     /**
      *
      *
      */
     OnTakeDamageKillCredit(event: ModifierAttackEvent): void {
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TAKEDAMAGE_KILLCREDIT)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TAKEDAMAGE_KILLCREDIT);
     }
     /**
      *
@@ -646,8 +601,7 @@ export class modifier_event extends BaseModifier_Plus {
     OnTeleported(event: ModifierUnitEvent): void {
         (event as EventData).eventType = EventDataType.unitIsSelf;
 
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TELEPORTED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TELEPORTED);
     }
     /**
      *
@@ -655,8 +609,7 @@ export class modifier_event extends BaseModifier_Plus {
      */
     OnTeleporting(event: ModifierUnitEvent): void {
         (event as EventData).eventType = EventDataType.unitIsSelf;
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TELEPORTING)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TELEPORTING);
     }
 
     /**
@@ -664,8 +617,7 @@ export class modifier_event extends BaseModifier_Plus {
      */
     OnUnitMoved(event: ModifierUnitEvent): void {
         (event as EventData).eventType = EventDataType.unitIsSelf;
-        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_UNIT_MOVED)
-
+        modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_UNIT_MOVED);
     }
 }
 /**
@@ -676,8 +628,10 @@ export class modifier_event extends BaseModifier_Plus {
  * @returns
  */
 export function registerEvent(params: Enum_MODIFIER_EVENT, onSelf = true, onOther = false) {
-    if (!IsServer()) { return }
-    LogHelper.print(GameRules.State_Get(), 'registerEvent')
+    if (!IsServer()) {
+        return;
+    }
+    LogHelper.print(GameRules.State_Get(), "registerEvent");
 
     // 动态添加监听事件
     // if (Modifier_Event.DeclareEvent.indexOf(params as any) == -1) {
@@ -688,25 +642,22 @@ export function registerEvent(params: Enum_MODIFIER_EVENT, onSelf = true, onOthe
     // if (GameRules.State_Get() < DOTA_GameState.DOTA_GAMERULES_STATE_TEAM_SHOWCASE) { return }
     return (target: BaseModifier_Plus, methodName: string, desc: any) => {
         if (target.__AllRegisterEvent == null) {
-            target.__AllRegisterEvent = {}
+            target.__AllRegisterEvent = {};
         }
         if (target.__AllRegisterEvent[params] == null) {
-            target.__AllRegisterEvent[params] = [new Set(), new Set()]
+            target.__AllRegisterEvent[params] = [new Set(), new Set()];
         }
         if (onSelf) {
             // 针对自己的监听，自己是施法者
-            target.__AllRegisterEvent[params][0].add(desc.value)
+            target.__AllRegisterEvent[params][0].add(desc.value);
         }
         if (onOther) {
             // 针对其他人的监听，其他人是施法者
-            target.__AllRegisterEvent[params][1].add(desc.value)
+            target.__AllRegisterEvent[params][1].add(desc.value);
         }
-        LogHelper.print(target.constructor.name, methodName)
-    }
+        LogHelper.print(target.constructor.name, methodName);
+    };
 }
-
-
-
 
 /**BUFF事件枚举 */
 export enum Enum_MODIFIER_EVENT {
@@ -882,7 +833,6 @@ export enum Enum_MODIFIER_EVENT {
      * Method Name: `OnAttackCancelled`
      */
     ON_ATTACK_CANCELLED = modifierfunction.MODIFIER_EVENT_ON_ATTACK_CANCELLED,
-
 
     //#region 自定义事件
     /**攻击暴击事件 ModifierAttackEvent */

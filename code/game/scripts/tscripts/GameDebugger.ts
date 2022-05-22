@@ -14,10 +14,10 @@ import { PlayerSystem } from "./rules/System/Player/PlayerSystem";
 export class GameDebugger extends SingletonClass {
     public init(): void {
         if (GameSetting.GAME_ISDEBUG) {
-            this.debugger_LuaMemory(5);
+            // this.debugger_LuaMemory(5);
             // this.debuger_globalcache(5);
             this.addDebugEvent();
-            this.printGameEvent();
+            // this.printGameEvent();
             // Todo 数据埋点上报
         }
     }
@@ -27,11 +27,11 @@ export class GameDebugger extends SingletonClass {
             let eventName = (GameEnum.Event.GameEvent as any)[k];
             if (eventName) {
                 EventHelper.addGameEvent(
+                    this,
                     eventName,
                     (e) => {
                         LogHelper.print(k, "|", eventName);
                     },
-                    this
                 );
             }
         }
@@ -160,19 +160,21 @@ export class GameDebugger extends SingletonClass {
 
     public addDebugEvent() {
         //#region  游戏内事件
-        EventHelper.addGameEvent(GameEnum.Event.GameEvent.PlayerChatEvent, this.OnPlayerChat, this);
+        EventHelper.addGameEvent(
+            this,
+            GameEnum.Event.GameEvent.PlayerChatEvent, this.OnPlayerChat);
         //#endregion
 
         //#region  自定义事件
         // 游戏结束
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_DebugGameOver, this.onDebugGameOver, this);
+        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_DebugGameOver, this.onDebugGameOver, );
         // 游戏重载
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_DebugReload, this.onDebugReload, this);
+        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_DebugReload, this.onDebugReload, );
         // 游戏重新开始
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_DebugRestart, this.onDebugRestart, this);
+        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_DebugRestart, this.onDebugRestart, );
         // 清除打印
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_DebugClearAll, this.onDebugClearAll, this);
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_addBot, this.onreq_addBot, this);
+        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_DebugClearAll, this.onDebugClearAll, );
+        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_addBot, this.onreq_addBot, );
 
         //#endregion
     }
@@ -229,7 +231,7 @@ export class GameDebugger extends SingletonClass {
                 hero.AddItemByName(tokens[1]);
                 break;
             case "-b":
-                hero.AddItemByName("item_building_" + tokens[1]);
+                hero.AddItemByName("item_building_hero_" + tokens[1]);
                 break;
         }
     }

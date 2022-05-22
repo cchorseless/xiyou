@@ -150,11 +150,11 @@ export class ControlComponent extends ET.Component {
         // 摄像机跟随
         PlayerResource.SetCameraTarget(domain.GetPlayerOwnerID(), domain);
         // 键盘输入
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_KEY_DOWN, this.onKey_Down, this);
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_KEY_UP, this.onKey_Up, this);
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_Camera_Yaw_Change, this.onCamera_Yaw_Change, this);
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_Mouse_Event, this.onMouse_Event, this);
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_Mouse_Position, this.onMouse_Position, this);
+        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_KEY_DOWN, this.onKey_Down, );
+        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_KEY_UP, this.onKey_Up, );
+        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_Camera_Yaw_Change, this.onCamera_Yaw_Change, );
+        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_Mouse_Event, this.onMouse_Event, );
+        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_Mouse_Position, this.onMouse_Position, );
         this.startServerUpdate();
     }
 

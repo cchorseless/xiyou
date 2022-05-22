@@ -1,0 +1,2 @@
+"DOTA_Tooltip_ability_ability_empty"       "空技能"
+"DOTA_Tooltip_ability_ability_tp"       "传送"

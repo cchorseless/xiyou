@@ -1,7 +1,12 @@
 import { GameFunc } from "../../GameFunc";
 import { LogHelper } from "../../helper/LogHelper";
+import { PrecacheHelper } from "../../helper/PrecacheHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { PlayerEntityRoot } from "../Components/Player/PlayerEntityRoot";
+
+export const registerET = () => (entity: typeof ET.Entity) => {
+    PrecacheHelper.RegClass([entity as any]);
+};
 
 export module ET {
     interface IEntityProperty {
@@ -136,7 +141,7 @@ export module ET {
         }
     }
 
-    export class Entity implements IEntityFunc {
+    export class Entity  implements IEntityFunc {
         public readonly InstanceId: string;
         public readonly Id: string;
         public readonly IsRegister: boolean = false;

@@ -11,15 +11,15 @@ import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus
 // 高级抽卡
 @registerAbility()
 export class courier_auto_gold extends BaseAbility_Plus {
-    GetBehavior() {
-        let hCaster = this.GetCasterPlus();
-        let iCount = modifier_builder_gold.GetStackIn(hCaster);
-        if (iCount == 1) {
-            return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AUTOCAST + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE;
-        } else {
-            return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE;
-        }
-    }
+    // GetBehavior() {
+    //     let hCaster = this.GetOwnerPlus();
+    //     let iCount = modifier_builder_gold.GetStackIn(hCaster);
+    //     if (iCount == 1) {
+    //         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AUTOCAST + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE;
+    //     } else {
+    //         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE;
+    //     }
+    // }
     OnSpellStart() {
         let hCaster = this.GetCasterPlus();
         let basic_gold = this.GetSpecialValueFor("basic_gold");
@@ -36,16 +36,16 @@ export class courier_auto_gold extends BaseAbility_Plus {
         //     iGold = iGold * RandomInt(this.GetSpecialValueFor("crit_min"), this.GetSpecialValueFor("crit_max")) * 0.01
         // }
         // PlayerData.ModifyGold(iPlayerID, iGold, true)
-        SendOverheadEventMessage(hCaster.GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hCaster, iGold, null);
+        // SendOverheadEventMessage(hCaster.GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hCaster, iGold, null);
     }
-    GetIntrinsicModifierName() {
-        return "modifier_builder_gold";
-    }
-    OnUpgrade() {
-        if (this.GetLevel() == 1) {
-            this.ToggleAutoCast();
-        }
-    }
+    // GetIntrinsicModifierName() {
+    //     return "modifier_builder_gold";
+    // }
+    // OnUpgrade() {
+    //     if (this.GetLevel() == 1) {
+    //         this.ToggleAutoCast();
+    //     }
+    // }
 }
 
 @registerModifier()

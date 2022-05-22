@@ -5,12 +5,6 @@ export class CombinationSystem {
 
     /**是否工作 */
     public static IsWorking: boolean = true;
-
-    static readonly AllManager: { [k: string]: CombinationManagerComponent } = {};
-
-    public static RegComponent(comp: CombinationManagerComponent) {
-        CombinationSystem.AllManager[comp.PlayerID] = comp;
-    }
     /**初始化 */
     public static init() {
 

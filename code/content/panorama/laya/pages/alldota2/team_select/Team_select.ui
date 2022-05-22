@@ -15,7 +15,7 @@
         {
             "x":15,
             "type":"dota2Panel",
-            "props":{"y":0,"x":5,"width":595,"top":0,"right":0,"className":"only_y","bg-repeat":"no-repeat","bg-image":"card/card_shenfen_5.png","bg-color":"#565252"},
+            "props":{"width":897,"top":47,"right":650,"height":770,"className":"only_y","bg-repeat":"no-repeat","bg-image":"backgrounds/community_challenge_lina.png","bg-color":"#565252"},
             "nodeParent":1,
             "label":"dota2Panel",
             "isDirectory":false,
@@ -63,7 +63,6 @@
             "compId":6,
             "child":[
                 {
-                    "x":30,
                     "type":"dota2Label",
                     "props":{"y":37,"x":43,"text":"添加机器人","height":40,"font-weight":"bold","font-size":30,"color":"#f9f4f4"},
                     "nodeParent":6,

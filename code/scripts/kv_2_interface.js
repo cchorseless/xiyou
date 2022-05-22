@@ -223,8 +223,21 @@ function buildTsStr(obj) {
             r += "export interface " + _k + " {\n";
         }
         let inobj = outObj[_k];
+        let temp = "";
         for (let k in inobj) {
-            r += "\"" + k + "\" ?:" + inobj[k] + ' ,\n'
+            if (!temp.includes(inobj[k])) {
+                if (temp != "") {
+                    temp += " | ";
+                }
+                temp += inobj[k];
+            }
+            r += '"' + k + '" :' + inobj[k] + " ,\n";
+        }
+        if (temp == "") {
+            temp="any"
+        }
+        if (_k !== "OBJ_0_1") {
+            r += `[k:string] : ${temp} `;
         }
         r += '}\n';
     }

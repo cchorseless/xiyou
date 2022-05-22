@@ -31,7 +31,7 @@ export class BuildingComponent extends ET.Component {
         (this as any).towerID = towerID;
         this.vLocation = vLocation;
         this.fAngle = fAngle;
-        let kvConfig = KVHelper.KvServerConfig.building_unit_tower[towerID as "npc_dota_hero_lina_custom"];
+        let kvConfig = KVHelper.KvServerConfig.building_unit_tower[towerID as "building_hero_lina"];
         this.Domain.ETRoot.AddComponent(KVConfigComponment, towerID, kvConfig);
     }
 

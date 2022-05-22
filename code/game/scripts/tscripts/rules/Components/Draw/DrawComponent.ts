@@ -1,10 +1,14 @@
+import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
-import { ET } from "../../Entity/Entity";
+import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
+import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
+import { ET, registerET } from "../../Entity/Entity";
 import { DrawConfig } from "../../System/Draw/DrawConfig";
 import { PlayerEntityRoot } from "../Player/PlayerEntityRoot";
 
+@registerET()
 export class DrawComponent extends ET.Component {
     tLastCards: string[];
 
@@ -38,6 +42,7 @@ export class DrawComponent extends ET.Component {
         // }
         // this.tPlayerCards[iPlayerID] = { tTower = tTowers, tVipCards = tVipCards, bFreeTake = true };
         // this.UpdateNetTables();
+        this.DrawCard(DrawConfig.EDrawCardType.DrawCardV1, 4);
     }
 
     //  抽卡
@@ -67,7 +72,6 @@ export class DrawComponent extends ET.Component {
             }
         }
         this.tLastCards = [].concat(r_arr);
-
         EventHelper.fireProtocolEventToPlayer(
             DrawConfig.EProtocol.DrawCardResult,
             {
@@ -78,11 +82,20 @@ export class DrawComponent extends ET.Component {
     }
 
     //  选卡
-    OnSelectCard(sTowerName: string, b2Public: boolean): [boolean, string] {
+    OnSelectCard(index: number, unitName: string, b2Public: boolean = false, isfree: boolean = false): [boolean, string] {
         if (!this.Domain.ETRoot.AsPlayer().CheckIsAlive()) {
             return [false, "hero is death"];
         }
-        return [true, ""];
+        if (this.tLastCards[index] !== unitName) {
+            return [false, "index error"];
+        }
+        let cardItemName = KVHelper.KvServerConfig.building_unit_tower[unitName].CardName;
+        // let hItem = BaseItem_Plus.CreateOneToUnit(this.GetDomain<BaseNpc_Hero_Plus>(), cardItemName);
+        let hItem = this.GetDomain<BaseNpc_Hero_Plus>().AddItemByName(cardItemName);
+        // hItem.OnSpellStart()
+        if (GameFunc.IsValid(hItem) && b2Public) {
+            // Items.TryMoveEmptyPublic(iPlayerID, hHero, hItem);
+        }
         // let bFreeTake = this.tPlayerCards[iPlayerID].bFreeTake;
         // let index = TableFindKey(this.tPlayerCards[iPlayerID].tTower, sTowerName);
         // if (index != null) {
@@ -116,6 +129,7 @@ export class DrawComponent extends ET.Component {
         //     this.tLastCards[iPlayerID] = {};
         //     this.UpdateNetTables();
         // }
+        return [true, ""];
     }
     // 开局选卡
     OnStartCardSelected(index: number, sCardName: string): [boolean, string] {

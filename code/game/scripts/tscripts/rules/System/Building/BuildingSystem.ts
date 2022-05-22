@@ -69,7 +69,7 @@ export class BuildingSystem {
     * @param buildingName
     */
     public static GetBuildingPopulation(towerID: string) {
-        let config = KVHelper.KvServerConfig.building_unit_tower[towerID as "npc_dota_hero_lina_custom"];
+        let config = KVHelper.KvServerConfig.building_unit_tower[towerID];
         if (config) {
             return parseInt(config.Population)
         }

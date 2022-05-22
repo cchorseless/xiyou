@@ -23,7 +23,7 @@ this.allplayer = createRef<Button>();
 
     };
 CSS_0_0 : Partial<VCSSStyleDeclaration>  = {}
-CSS_1_0 : Partial<VCSSStyleDeclaration>  = {"y":"0px","width":"595px","marginTop":"0px","marginRight":"0px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/card/card_shenfen_5.png\")","backgroundColor":"#565252","backgroundSize":"100% 100%","horizontalAlign":"right"}
+CSS_1_0 : Partial<VCSSStyleDeclaration>  = {"width":"897px","marginTop":"47px","marginRight":"650px","height":"770px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/backgrounds/community_challenge_lina.png\")","backgroundColor":"#565252","backgroundSize":"100% 100%","horizontalAlign":"right"}
 CSS_1_1 : Partial<VCSSStyleDeclaration>  = {"width":"246px","marginRight":"30px","height":"114px","marginBottom":"30px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/btn_gold.png\")","backgroundSize":"100% 100%","horizontalAlign":"right","verticalAlign":"bottom"}
 CSS_2_0 : Partial<VCSSStyleDeclaration>  = {"y":"37px","x":"58px","width":"130px","height":"40px","fontWeight":"bold","fontSize":"30","color":"#f9f4f4"}
 CSS_1_2 : Partial<VCSSStyleDeclaration>  = {"width":"246px","marginRight":"300px","height":"114px","marginBottom":"30px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/btn_green.png\")","backgroundSize":"100% 100%","horizontalAlign":"right","verticalAlign":"bottom"}

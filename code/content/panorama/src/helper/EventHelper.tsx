@@ -6,19 +6,14 @@ import { TimerHelper } from "./TimerHelper";
 import { TipsHelper } from "./TipsHelper";
 
 export module EventHelper {
-
     export function Init() {
         addEvent();
     }
 
     function addEvent() {
-
         GameEvents.Subscribe(GameEnum.GameEvent.game_rules_state_change, (e) => {
-            // TimerHelper.addTimer(1, () => {
-            //     LogHelper.print(e, $.GetContextPanel().id)
-            // })
+            $.Msg("Game Enter State", Game.GetState());
         });
-
 
         /**物品位置变动 */
         GameEvents.Subscribe(GameEnum.GameEvent.dota_inventory_changed, (e) => {
@@ -27,15 +22,15 @@ export module EventHelper {
             NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_SLOT_CHANGE, e);
         });
         /**监听错误信息 */
-        NetHelper.ListenOnLua(GameEnum.CustomProtocol.push_error_message, (event) => {
-            if (event.data != null) {
-
-                switch (event.data) {
-
+        NetHelper.ListenOnLua(
+            GameEnum.CustomProtocol.push_error_message,
+            (event) => {
+                if (event.data != null) {
+                    switch (event.data) {
+                    }
                 }
-            }
-        }, EventHelper)
-
+            },
+            EventHelper
+        );
     }
-
 }

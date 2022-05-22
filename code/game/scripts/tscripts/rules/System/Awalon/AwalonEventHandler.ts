@@ -13,12 +13,12 @@ export class AwalonEventHandler {
     public static startListen(System: typeof AwalonSystem) {
         AwalonEventHandler.System = System;
         /**获取自己身份信息 */
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_get_self_shen_fen_info, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(AwalonEventHandler,GameEnum.Event.CustomProtocol.req_get_self_shen_fen_info, (event: JS_TO_LUA_DATA) => {
             event.data = AwalonState.AllPlayerRoleConfig[event.PlayerID];
             event.state = true;
-        }, AwalonEventHandler);
+        }, );
         /**获取他人身份信息 */
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_get_know_other_shen_fen_info, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(AwalonEventHandler,GameEnum.Event.CustomProtocol.req_get_know_other_shen_fen_info, (event: JS_TO_LUA_DATA) => {
             let selfRoleInfo = AwalonState.AllPlayerRoleConfig[event.PlayerID];
             let data: AwalonConfig.OtherRoleInfo = {
                 CampInfo: {},
@@ -35,9 +35,9 @@ export class AwalonEventHandler {
             }
             event.data = data;
             event.state = true;
-        }, AwalonEventHandler);
+        });
         /**请求数据，用于断线重连 */
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_get_current_reconnect_data, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(AwalonEventHandler,GameEnum.Event.CustomProtocol.req_get_current_reconnect_data, (event: JS_TO_LUA_DATA) => {
             event.state = true;
             let data: JS_TO_LUA_DATA = {} as any;
             // 同步回合信息
@@ -82,35 +82,35 @@ export class AwalonEventHandler {
                 data.data = AwalonState.currentTaskIdea;
                 EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.req_send_to_finish_task_idea, data);
             }
-        }, AwalonEventHandler);
+        });
         /**请求创建队伍 */
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_send_to_make_team, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(AwalonEventHandler,GameEnum.Event.CustomProtocol.req_send_to_make_team, (event: JS_TO_LUA_DATA) => {
             AwalonEventHandler.onreq_send_to_make_team(event)
-        }, AwalonEventHandler);
+        }, );
         /**提交发言顺序 */
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_send_to_sure_chat_turn, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(AwalonEventHandler,GameEnum.Event.CustomProtocol.req_send_to_sure_chat_turn, (event: JS_TO_LUA_DATA) => {
             AwalonEventHandler.onreq_send_to_sure_chat_turn(event)
-        }, AwalonEventHandler);
+        }, );
         /**结束本轮发言 */
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_end_current_player_chat, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(AwalonEventHandler,GameEnum.Event.CustomProtocol.req_end_current_player_chat, (event: JS_TO_LUA_DATA) => {
             AwalonEventHandler.onreq_end_current_player_chat(event)
-        }, AwalonEventHandler);
+        }, );
         /**投票組隊意见 */
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_send_to_make_team_idea, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(AwalonEventHandler,GameEnum.Event.CustomProtocol.req_send_to_make_team_idea, (event: JS_TO_LUA_DATA) => {
             AwalonEventHandler.onreq_send_to_make_team_idea(event)
-        }, AwalonEventHandler);
+        }, );
         /**任务记录 */
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_send_to_sync_task_record, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(AwalonEventHandler,GameEnum.Event.CustomProtocol.req_send_to_sync_task_record, (event: JS_TO_LUA_DATA) => {
             AwalonEventHandler.onreq_send_to_sync_task_record(event)
-        }, AwalonEventHandler);
+        }, );
         /**投票任务意见 */
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_send_to_finish_task_idea, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(AwalonEventHandler,GameEnum.Event.CustomProtocol.req_send_to_finish_task_idea, (event: JS_TO_LUA_DATA) => {
             AwalonEventHandler.onreq_send_to_finish_task_idea(event)
-        }, AwalonEventHandler);
+        }, );
         /**投票刺杀 */
-        EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_send_to_goto_ci_sha, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(AwalonEventHandler,GameEnum.Event.CustomProtocol.req_send_to_goto_ci_sha, (event: JS_TO_LUA_DATA) => {
             AwalonEventHandler.onreq_send_to_goto_ci_sha(event)
-        }, AwalonEventHandler);
+        }, );
     }
     /**请求创建队伍 */
     public static onreq_send_to_make_team(event: JS_TO_LUA_DATA) {

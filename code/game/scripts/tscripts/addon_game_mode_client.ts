@@ -7,25 +7,28 @@ import { LogHelper } from "./helper/LogHelper";
 import { SingletonClass } from "./helper/SingletonHelper";
 import { BaseNpc_Hero_Plus } from "./npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
-import { AllEntity } from "./rules/AllEntity";
+import { AllEntity } from "./AllEntity";
 
 class GameMode_Client extends SingletonClass {
-
     public Init() {
         this.addEvent();
         KVHelper.initKVFile();
     }
 
     public addEvent() {
-        for (let k in GameEnum.Event.GameEvent) {
-            let eventName = (GameEnum.Event.GameEvent as any)[k]
-            if (eventName) {
-                ListenToGameEvent(eventName, (e) => {
-                    LogHelper.print(k, '|', eventName)
-                }, null);
-            }
-        }
-        EventHelper.addClientGameEvent(GameEnum.Event.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned, this);
+        // for (let k in GameEnum.Event.GameEvent) {
+        //     let eventName = (GameEnum.Event.GameEvent as any)[k];
+        //     if (eventName) {
+        //         ListenToGameEvent(
+        //             eventName,
+        //             (e) => {
+        //                 LogHelper.print(k, "|", eventName);
+        //             },
+        //             null
+        //         );
+        //     }
+        // }
+        EventHelper.addClientGameEvent(this, GameEnum.Event.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned);
     }
 
     public OnNPCSpawned(e: NpcSpawnedEvent) {
@@ -33,22 +36,23 @@ class GameMode_Client extends SingletonClass {
         if (spawnedUnit == null) return;
         let sUnitName = spawnedUnit.GetUnitName();
         if (sUnitName == GameEnum.Unit.UnitNames.npc_dota_thinker) {
-            return
+            return;
         }
         if (EntityHelper.checkIsFirstSpawn(spawnedUnit)) {
             let className = spawnedUnit.GetClassname();
             if (className == GameEnum.Unit.UnitClass.npc_dota_creature) {
                 GameFunc.BindInstanceToCls(spawnedUnit, BaseNpc_Plus);
                 // (_G as any).EntityFramework.CreateCppClassProxy(className);
+            } else {
             }
-            else {
+            if (spawnedUnit.onSpawned) {
+                spawnedUnit.onSpawned(e);
             }
-            if (spawnedUnit.onSpawned) { spawnedUnit.onSpawned(e) };
         }
     }
 }
 
-LogHelper.print('IsClient start ----------------------');
+LogHelper.print("IsClient start ----------------------");
 AllEntity.init();
 GameMode_Client.GetInstance().Init();
 // (_G as any).EntityFramework.CreateCppClassProxy('dota_hero_zuus');
@@ -68,4 +72,3 @@ GameMode_Client.GetInstance().Init();
 // LogHelper.print('EntityFramework:', (_G as any).EntityFramework)
 // LogHelper.print('GameDataObj:', (_G as any).GameDataObj)
 // LogHelper.print('EntityUtils:', (_G as any).dota_hero_zuus, 11);
-

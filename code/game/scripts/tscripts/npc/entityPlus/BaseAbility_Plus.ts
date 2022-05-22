@@ -211,6 +211,9 @@ export class BaseAbility_Plus extends BaseAbility {
         return this.GetCaster() as BaseNpc_Plus
     }
 
+    public GetOwnerPlus() {
+        return this.GetOwner() as BaseNpc_Plus
+    }
     /**
      * 自动施法后，调AI
      */

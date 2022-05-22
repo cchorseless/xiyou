@@ -1,24 +1,60 @@
 // generate with PIPIXIA's kv generator 
 export namespace pool_config { 
 export interface OBJ_0_1 {
-"pooldata" ?:OBJ_1_1 ,
+"pooldata" :OBJ_1_1 ,
 }
 export interface OBJ_1_1 {
-"1000" ?:OBJ_2_1 ,
-"1001" ?:OBJ_2_1 ,
-"1002" ?:OBJ_2_1 ,
-}
+"1000" :OBJ_2_1 ,
+"1001" :OBJ_2_1 ,
+"1002" :OBJ_2_1 ,
+[k:string] : OBJ_2_1 }
 export interface OBJ_2_1 {
-"1001" ?:OBJ_3_1 ,
-"1002" ?:OBJ_3_1 ,
-"1003" ?:OBJ_3_1 ,
-"1004" ?:OBJ_3_1 ,
-"1005" ?:OBJ_3_1 ,
-}
+"building_hero_axe" :OBJ_3_1 ,
+"building_hero_crystal_maiden" :OBJ_3_1 ,
+"building_hero_juggernaut" :OBJ_3_1 ,
+"building_hero_mirana" :OBJ_3_1 ,
+"building_hero_storm_spirit" :OBJ_3_1 ,
+"building_hero_sven" :OBJ_3_1 ,
+"building_hero_zuus" :OBJ_3_1 ,
+"building_hero_lina" :OBJ_3_1 ,
+"building_hero_slardar" :OBJ_3_1 ,
+"building_hero_tinker" :OBJ_3_1 ,
+"building_hero_sniper" :OBJ_3_1 ,
+"building_hero_venomancer" :OBJ_3_1 ,
+"building_hero_death_prophet" :OBJ_3_1 ,
+"building_hero_phantom_assassin" :OBJ_3_1 ,
+"building_hero_pugna" :OBJ_3_1 ,
+"building_hero_templar_assassin" :OBJ_3_1 ,
+"building_hero_viper" :OBJ_3_1 ,
+"building_hero_luna" :OBJ_3_1 ,
+"building_hero_dragon_knight" :OBJ_3_1 ,
+"building_hero_leshrac" :OBJ_3_1 ,
+"building_hero_furion" :OBJ_3_1 ,
+"building_hero_omniknight" :OBJ_3_1 ,
+"building_hero_huskar" :OBJ_3_1 ,
+"building_hero_bounty_hunter" :OBJ_3_1 ,
+"building_hero_ursa" :OBJ_3_1 ,
+"building_hero_gyrocopter" :OBJ_3_1 ,
+"building_hero_alchemist" :OBJ_3_1 ,
+"building_hero_lycan" :OBJ_3_1 ,
+"building_hero_lone_druid" :OBJ_3_1 ,
+"building_hero_chaos_knight" :OBJ_3_1 ,
+"building_hero_ogre_magi" :OBJ_3_1 ,
+"building_hero_disruptor" :OBJ_3_1 ,
+"building_hero_slark" :OBJ_3_1 ,
+"building_hero_medusa" :OBJ_3_1 ,
+"building_hero_centaur" :OBJ_3_1 ,
+"building_hero_shredder" :OBJ_3_1 ,
+"building_hero_ember_spirit" :OBJ_3_1 ,
+"building_hero_earth_spirit" :OBJ_3_1 ,
+"building_hero_winter_wyvern" :OBJ_3_1 ,
+"building_hero_pangolier" :OBJ_3_1 ,
+"building_hero_void_spirit" :OBJ_3_1 ,
+[k:string] : OBJ_3_1 }
 export interface OBJ_3_1 {
-"ItemName" ?:string ,
-"ItemCount" ?:string ,
-"ItemWeight" ?:string ,
-"isVaild" ?:string ,
-}
+"ItemName" :string ,
+"ItemCount" :string ,
+"ItemWeight" :string ,
+"isVaild" :string ,
+[k:string] : string }
 }

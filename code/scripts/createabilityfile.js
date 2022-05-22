@@ -3,10 +3,12 @@ const keyvalues = require('keyvalues-node');
 const old_npc_path = 'game/scripts/dota2_old_npc_heroes.txt';
 const old_ability_path = 'game/scripts/dota2_old_npc_abilities.txt';
 const old_item_path = 'game/scripts/dota2_old_npc_items.txt';
+const building_item_path = 'game/scripts/npc/building/building_item_card.kv';
 
 const ts_path = 'game/scripts/tscripts/npc/abilities/dota/';
 const unit_path = 'game/scripts/tscripts/npc/units/dota';
 const item_path = 'game/scripts/tscripts/npc/items/dota';
+const building_item_ts_path = 'game/scripts/tscripts/npc/items/building';
 const unit_item_path = 'game/scripts/tscripts/npc/items/building'
 
 function main() {
@@ -166,12 +168,45 @@ export class $1 extends BaseItem_Plus {
 
 }
 
+function itembuildingCreate() {
+    let kv_s = fs.readFileSync(building_item_path, "utf8");
+    let obj = keyvalues.decode(kv_s);
+    let info = obj.building_item_card;
+    const _str_start = 'item_';
+    const unit_file_str = `
+import { LogHelper } from "../../../helper/LogHelper";
+import { registerAbility } from "../../entityPlus/Base_Plus";
+import { item_building_base } from "./item_building_base";
 
+@registerAbility()
+export class $1 extends item_building_base {
+};
+    `
+    if (!fs.existsSync(building_item_ts_path)) fs.mkdirSync(building_item_ts_path);
+    // let txt_itemname = '';
+    for (let k in info) {
+        if (k.indexOf(_str_start) > -1) {
+            let _item_file_name = k ;
+            let unit_file_path = building_item_ts_path + '/' + _item_file_name + '.ts';
+            // txt_itemname += k + '\n';
+            if (!fs.existsSync(unit_file_path)) {
+                let str_1 = unit_file_str.replace(/\$1/g, _item_file_name);
+                // str_1 = str_1.replace('$0', JSON.stringify(info[k] || {}));
+                // str_1 = str_1.replace('$3', k);
+                fs.writeFileSync(unit_file_path, str_1);
+                console.log(k + ' create finish')
+            }
+        }
+    }
+    // let txtpath = item_path + '/txt_itemname.txt';
+    // fs.writeFileSync(txtpath, txt_itemname);
+
+}
 
 
 (async () => {
-    main();
-    // itemCreate();
+    // main();
+    itembuildingCreate();
 })().catch((error) => {
     console.error(error);
     process.exit(1);

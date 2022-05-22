@@ -10,25 +10,19 @@ import { EnemyKillPrizeComponent } from "../Enemy/EnemyKillPrizeComponent";
 import { EnemyManagerComponent } from "../Enemy/EnemyManagerComponent";
 import { EnemyMoveComponent } from "../Enemy/EnemyMoveComponent";
 
-
-
-
-
 export class ERound extends ET.Entity {
-
     configID: string;
     config: building_round.OBJ_2_1;
     unitSpawned: number = 0;
-    bRunning: boolean = false
+    bRunning: boolean = false;
 
     tTotalDamage: number = 0; // 回合总伤害
     tTowerDamage: { [entityIndex: string]: number } = {}; // 回合伤害
 
     onAwake(configid: string): void {
         this.configID = configid;
-        this.config = KVHelper.KvServerConfig.building_round["" + configid as "1"];
+        this.config = KVHelper.KvServerConfig.building_round["" + configid];
     }
-
 
     OnStart() {
         this.unitSpawned = 0;
@@ -37,21 +31,25 @@ export class ERound extends ET.Entity {
         let spawn_interval = tonumber(this.config.spawn_interval) || 1;
         let spawn_num = tonumber(this.config.spawn_num);
         let enemyManager = domain.ETRoot.GetComponent(EnemyManagerComponent);
-        TimerHelper.addTimer(spawn_interval, () => {
-            if (this.bRunning && this.config.unit && this.unitSpawned <= spawn_num) {
-                this.unitSpawned += 1;
-                let enemy = enemyManager.addEnemy(this.config.unit, this.configID);
-                this.onEntitySpawn(enemy);
-                return spawn_interval;
-            }
-        }, this, true)
+        TimerHelper.addTimer(
+            spawn_interval,
+            () => {
+                if (this.bRunning && this.config.unit && this.unitSpawned <= spawn_num) {
+                    this.unitSpawned += 1;
+                    let enemy = enemyManager.addEnemy(this.config.unit, this.configID);
+                    this.onEntitySpawn(enemy);
+                    return spawn_interval;
+                }
+            },
+            this,
+            true
+        );
     }
 
     OnEnd() {
         this.bRunning = false;
     }
-    private onEntitySpawn(enemy: BaseNpc_Plus) {
-    }
+    private onEntitySpawn(enemy: BaseNpc_Plus) {}
     onEntityHurt(entindex: EntityIndex, damage: number) {
         this.tTowerDamage[entindex] = this.tTowerDamage[entindex] || 0;
         this.tTowerDamage[entindex] += damage;
@@ -76,5 +74,4 @@ export class ERound extends ET.Entity {
     get IsChallenge() {
         return this.config.round_type == RoundConfig.EERoundType.challenge;
     }
-
 }

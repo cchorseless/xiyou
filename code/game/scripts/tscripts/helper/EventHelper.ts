@@ -13,7 +13,6 @@ import { GameRequest } from "../service/GameRequest";
 import { LogHelper } from "./LogHelper";
 
 export module EventHelper {
-
     /**
      * 添加客户端lua监听事件
      * @param eventName
@@ -21,8 +20,10 @@ export module EventHelper {
      * @param context
      * @param isOnce
      */
-    export function addClientGameEvent<TName extends keyof GameEventDeclarations>(eventName: TName, func: (event: GameEventDeclarations[TName]) => void, context: any, isOnce: boolean = false) {
-        if (!IsClient()) { return }
+    export function addClientGameEvent<TName extends keyof GameEventDeclarations>(context: any, eventName: TName, func: (event: GameEventDeclarations[TName]) => void, isOnce: boolean = false) {
+        if (!IsClient()) {
+            return;
+        }
         // let _eventName = eventName as any;
         let _eventid;
         //#region 支持监听一次  TODO
@@ -37,11 +38,10 @@ export module EventHelper {
         if (_eventid) {
             if (globalData.allGameEvent[eventName] == null) {
                 globalData.allGameEvent[eventName] = [];
-            };
+            }
             globalData.allGameEvent[eventName].push(_eventid);
         }
     }
-
 
     /**
      * 添加监听事件
@@ -50,8 +50,10 @@ export module EventHelper {
      * @param context
      * @param isOnce
      */
-    export function addGameEvent<TName extends keyof GameEventDeclarations>(eventName: TName, func: (event: GameEventDeclarations[TName]) => void, context: any, isOnce: boolean = false) {
-        if (!IsServer()) { return }
+    export function addGameEvent<TName extends keyof GameEventDeclarations>(context: any, eventName: TName, func: (event: GameEventDeclarations[TName]) => void, isOnce: boolean = false) {
+        if (!IsServer()) {
+            return;
+        }
         // let _eventName = eventName as any;
         let _eventid;
         //#region 支持监听一次  TODO
@@ -66,7 +68,7 @@ export module EventHelper {
         if (_eventid) {
             if (globalData.allGameEvent[eventName] == null) {
                 globalData.allGameEvent[eventName] = [];
-            };
+            }
             globalData.allGameEvent[eventName].push(_eventid);
         }
     }
@@ -74,12 +76,14 @@ export module EventHelper {
      * 移除所有事件监听
      * @param eventName
      */
-    export function removeGameEvent(eventName: keyof GameEventDeclarations, context: any) {
-        if (!IsServer()) { return }
+    export function removeGameEvent(context: any, eventName: keyof GameEventDeclarations) {
+        if (!IsServer()) {
+            return;
+        }
         if (globalData.allGameEvent[eventName] != null) {
             globalData.allGameEvent[eventName].forEach((_eventid) => {
                 StopListeningToGameEvent(_eventid);
-            })
+            });
             globalData.allGameEvent[eventName].length = 0;
             globalData.allGameEvent[eventName] = null;
         }
@@ -91,8 +95,10 @@ export module EventHelper {
      * @param func
      * @param context
      */
-    export function addCustomEvent(eventName: keyof CustomGameEventDeclarations, func: (userId: EntityIndex, event: any) => void, context: any) {
-        if (!IsServer()) { return }
+    export function addCustomEvent(context: any, eventName: keyof CustomGameEventDeclarations, func: (userId: EntityIndex, event: any) => void) {
+        if (!IsServer()) {
+            return;
+        }
         // let _eventName = eventName as any;
         let _eventid;
         //#region 支持监听一次  TODO
@@ -103,24 +109,27 @@ export module EventHelper {
         //     _eventid = ListenToGameEvent(_eventName, func, context);
         // }
         //#endregion
-        _eventid = CustomGameEventManager.RegisterListener(eventName,
-            (userId: EntityIndex, event: any) => {
-                let [status, nextCall] = xpcall(func, (msg) => {
-                    return '\n' + LogHelper.traceFunc(msg) + '\n'
-                }, context, userId, event);
-                if (!status) {
-                    LogHelper.error(`===============protocol error : ${eventName} ===================`)
-                    LogHelper.error(nextCall)
-                    GameRequest.GetInstance().SendErrorLog(nextCall)
-
-                }
-                return
+        _eventid = CustomGameEventManager.RegisterListener(eventName, (userId: EntityIndex, event: any) => {
+            let [status, nextCall] = xpcall(
+                func,
+                (msg) => {
+                    return "\n" + LogHelper.traceFunc(msg) + "\n";
+                },
+                context,
+                userId,
+                event
+            );
+            if (!status) {
+                LogHelper.error(`===============protocol error : ${eventName} ===================`);
+                LogHelper.error(nextCall);
+                GameRequest.GetInstance().SendErrorLog(nextCall);
             }
-        )
+            return;
+        });
         if (_eventid) {
             if (globalData.allCustomEvent[eventName] == null) {
                 globalData.allCustomEvent[eventName] = [];
-            };
+            }
             globalData.allCustomEvent[eventName].push(_eventid);
         }
     }
@@ -128,13 +137,15 @@ export module EventHelper {
      * 移除所有事件监听
      * @param eventName
      */
-    export function removeCustomEvent(eventName: keyof CustomGameEventDeclarations, context: any) {
-        if (!IsServer()) { return }
+    export function removeCustomEvent(context: any, eventName: keyof CustomGameEventDeclarations) {
+        if (!IsServer()) {
+            return;
+        }
 
         if (globalData.allCustomEvent[eventName] != null) {
             globalData.allCustomEvent[eventName].forEach((_eventid) => {
                 CustomGameEventManager.UnregisterListener(_eventid);
-            })
+            });
             globalData.allCustomEvent[eventName].length = 0;
             globalData.allCustomEvent[eventName] = null;
         }
@@ -147,12 +158,20 @@ export module EventHelper {
      * @param context
      * @returns
      */
-    export function addProtocolEvent(eventName: string, func: (event: JS_TO_LUA_DATA) => void, context: any = null) {
-        if (!IsServer()) { return }
-
-        if (eventName == null) { return };
-        globalData.allCustomProtocolEvent[eventName] = globalData.allCustomProtocolEvent[eventName] || [];
-        table.insert(globalData.allCustomProtocolEvent[eventName], { context: context, cb: func })
+    export function addProtocolEvent(context: any, eventName: string, func: (event: JS_TO_LUA_DATA) => void) {
+        if (!IsServer()) {
+            return;
+        }
+        if (context == null) {
+            return;
+        }
+        if (eventName == null) {
+            return;
+        }
+        if (globalData.allCustomProtocolEvent[eventName] == null) {
+            globalData.allCustomProtocolEvent[eventName] = [];
+        }
+        globalData.allCustomProtocolEvent[eventName].push({ context: context, cb: func });
     }
     /**
      * 移除协议事件监听
@@ -161,9 +180,13 @@ export module EventHelper {
      * @param context
      * @returns
      */
-    export function removeProtocolEvent(eventName: string, func: (event: JS_TO_LUA_DATA) => void, context: any = null) {
-        if (!IsServer()) { return }
-        if (eventName == null) { return };
+    export function removeProtocolEvent(context: any, eventName: string, func: (event: JS_TO_LUA_DATA) => void) {
+        if (!IsServer()) {
+            return;
+        }
+        if (eventName == null) {
+            return;
+        }
         if (globalData.allCustomProtocolEvent[eventName]) {
             let len = globalData.allCustomProtocolEvent[eventName].length;
             for (let i = len - 1; i >= 0; i--) {
@@ -182,24 +205,35 @@ export module EventHelper {
      * @param context
      */
     export function fireProtocolEventOnServer(protocol: string, data: JS_TO_LUA_DATA = null) {
-        if (!IsServer()) { return }
-        if (protocol == null) { return };
-        if (data == null) { data = {} };
+        if (!IsServer()) {
+            return;
+        }
+        if (protocol == null) {
+            return;
+        }
+        if (data == null) {
+            data = {};
+        }
         let allCB = globalData.allCustomProtocolEvent[protocol];
         data.IsfromServer = true;
         if (allCB && allCB.length > 0) {
             allCB.forEach((cbinfo) => {
-                let [status, nextCall] = xpcall(cbinfo.cb, (msg) => {
-                    return '\n' + LogHelper.traceFunc(msg) + '\n'
-                }, cbinfo.context, data);
+                let [status, nextCall] = xpcall(
+                    cbinfo.cb,
+                    (msg) => {
+                        return "\n" + LogHelper.traceFunc(msg) + "\n";
+                    },
+                    cbinfo.context,
+                    data
+                );
                 if (!status) {
-                    LogHelper.error(`===============protocol error : ${protocol} ===================`)
-                    LogHelper.error(nextCall)
-                    GameRequest.GetInstance().SendErrorLog(nextCall)
+                    LogHelper.error(`===============protocol error : ${protocol} ===================`);
+                    LogHelper.error(nextCall);
+                    GameRequest.GetInstance().SendErrorLog(nextCall);
 
-                    return
+                    return;
                 }
-            })
+            });
         }
     }
     /**
@@ -208,7 +242,9 @@ export module EventHelper {
      * @param eventData
      */
     export function fireProtocolEventToClient(eventName: string, eventData: JS_TO_LUA_DATA) {
-        if (!IsServer()) { return }
+        if (!IsServer()) {
+            return;
+        }
         let _event: JS_TO_LUA_DATA = {} as any;
         Object.assign(_event, eventData);
         _event.protocol = eventName;
@@ -223,7 +259,9 @@ export module EventHelper {
      * @param team
      */
     export function fireProtocolEventToTeam(eventName: string, eventData: JS_TO_LUA_DATA, team: DOTATeam_t = null) {
-        if (!IsServer()) { return }
+        if (!IsServer()) {
+            return;
+        }
         let _event: JS_TO_LUA_DATA = {} as any;
         Object.assign(_event, eventData);
         _event.protocol = eventName;
@@ -238,7 +276,9 @@ export module EventHelper {
      * @param playerid
      */
     export function fireProtocolEventToPlayer(eventName: string, eventData: JS_TO_LUA_DATA, playerid: PlayerID) {
-        if (!IsServer()) { return }
+        if (!IsServer()) {
+            return;
+        }
         let _event: JS_TO_LUA_DATA = {} as any;
         Object.assign(_event, eventData);
         _event.protocol = eventName;
@@ -249,38 +289,37 @@ export module EventHelper {
     }
 
     /**
-      * 推送錯誤信息給玩家
-      * @param message
-      * @param sound
-      * @param playerID
-      */
+     * 推送錯誤信息給玩家
+     * @param message
+     * @param sound
+     * @param playerID
+     */
     export function ErrorMessage(errorcode: GameEnum.Event.ErrorCode, ...playerID: Array<PlayerID>) {
-
-        if (!IsServer()) { return }
+        if (!IsServer()) {
+            return;
+        }
         let event: JS_TO_LUA_DATA = {};
         event.state = true;
         event.data = errorcode;
         // 全部玩家
         if (playerID == null || playerID.length == 0) {
-            EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_error_message, event)
+            EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_error_message, event);
+        } else {
+            playerID.forEach((_id) => {
+                EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_error_message, event, _id as PlayerID);
+            });
         }
-        else {
-            playerID.forEach(
-                (_id) => {
-                    EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_error_message, event, _id as PlayerID)
-                }
-            )
-        }
-
     }
 
     /**
      * 删除所有协议事件监听
      */
     export function removeAllProtocolEvent(eventName: string) {
-        if (eventName == null) { return };
+        if (eventName == null) {
+            return;
+        }
         if (globalData.allCustomProtocolEvent[eventName]) {
-            delete globalData.allCustomProtocolEvent[eventName]
+            delete globalData.allCustomProtocolEvent[eventName];
         }
     }
 
@@ -291,12 +330,16 @@ export module EventHelper {
      * @param context
      * @returns
      */
-    export function addServerEvent(eventName: GameEnum.Event.CustomServer, func: (event: LUA_TO_LUA_DATA) => void, context: any = null) {
-        if (!IsServer()) { return }
+    export function addServerEvent(context: any, eventName: GameEnum.Event.CustomServer, func: (event: LUA_TO_LUA_DATA) => void) {
+        if (!IsServer()) {
+            return;
+        }
 
-        if (eventName == null) { return };
+        if (eventName == null) {
+            return;
+        }
         globalData.allCustomServerEvent[eventName] = globalData.allCustomServerEvent[eventName] || [];
-        table.insert(globalData.allCustomServerEvent[eventName], { context: context, cb: func })
+        table.insert(globalData.allCustomServerEvent[eventName], { context: context, cb: func });
     }
     /**
      * 移除协议事件监听
@@ -305,10 +348,14 @@ export module EventHelper {
      * @param context
      * @returns
      */
-    export function removeServerEvent(eventName: GameEnum.Event.CustomServer, func: (event: LUA_TO_LUA_DATA) => void, context: any = null) {
-        if (!IsServer()) { return }
+    export function removeServerEvent(context: any, eventName: GameEnum.Event.CustomServer, func: (event: LUA_TO_LUA_DATA) => void) {
+        if (!IsServer()) {
+            return;
+        }
 
-        if (eventName == null) { return };
+        if (eventName == null) {
+            return;
+        }
         if (globalData.allCustomServerEvent[eventName]) {
             let len = globalData.allCustomServerEvent[eventName].length;
             for (let i = len - 1; i >= 0; i--) {
@@ -326,25 +373,34 @@ export module EventHelper {
      * @param eventData
      */
     export function fireServerEvent(eventName: GameEnum.Event.CustomServer, eventData: LUA_TO_LUA_DATA = null) {
-        if (!IsServer()) { return }
+        if (!IsServer()) {
+            return;
+        }
 
-        if (eventName == null) { return };
-        if (eventData == null) { eventData = {} };
+        if (eventName == null) {
+            return;
+        }
+        if (eventData == null) {
+            eventData = {};
+        }
         let allCB = globalData.allCustomServerEvent[eventName];
         if (allCB && allCB.length > 0) {
             allCB.forEach((cbinfo) => {
-                let [status, nextCall] = xpcall(cbinfo.cb, (msg) => {
-                    return '\n' + LogHelper.traceFunc(msg) + '\n'
-                }, cbinfo.context, eventData);
+                let [status, nextCall] = xpcall(
+                    cbinfo.cb,
+                    (msg) => {
+                        return "\n" + LogHelper.traceFunc(msg) + "\n";
+                    },
+                    cbinfo.context,
+                    eventData
+                );
                 if (!status) {
-                    LogHelper.error(`===============protocol error : ${eventName} ===================`)
-                    LogHelper.error(nextCall)
-                    GameRequest.GetInstance().SendErrorLog(nextCall)
-                    return
+                    LogHelper.error(`===============protocol error : ${eventName} ===================`);
+                    LogHelper.error(nextCall);
+                    GameRequest.GetInstance().SendErrorLog(nextCall);
+                    return;
                 }
-            })
+            });
         }
     }
 }
-
-

@@ -98,7 +98,7 @@ export module KVHelper {
     }
 
     export function RandomPoolGroupConfig(str: string): string {
-        let _config = KvServerConfig.pool_group_config[str as "1001"];
+        let _config = KvServerConfig.pool_group_config[str as "10001"];
         if (_config == null) {
             LogHelper.error("cant find in pool group : key=> " + str);
             return;
@@ -123,7 +123,7 @@ export module KVHelper {
         let weight_arr = [];
         for (let k in _config) {
             r_arr.push(k);
-            weight_arr.push(_config[k as "1001"].ItemWeight);
+            weight_arr.push(_config[k as "building_hero_axe"].ItemWeight);
         }
         return GameFunc.ArrayFunc.RandomArrayByWeight(r_arr, weight_arr)[0];
     }

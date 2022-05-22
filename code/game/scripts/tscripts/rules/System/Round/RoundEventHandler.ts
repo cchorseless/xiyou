@@ -13,7 +13,8 @@ export class RoundEventHandler {
     /**添加协议事件 */
     public static startListen(System: typeof RoundSystem) {
         RoundEventHandler.System = System;
-        EventHelper.addGameEvent(GameEnum.Event.GameEvent.EntityHurtEvent, this.OnEntityHurtEvent, this);
+        EventHelper.addGameEvent(this,
+            GameEnum.Event.GameEvent.EntityHurtEvent, this.OnEntityHurtEvent);
     }
 
     public static OnEntityHurtEvent(events: EntityHurtEvent) {

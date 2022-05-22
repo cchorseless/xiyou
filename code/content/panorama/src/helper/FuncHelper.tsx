@@ -1,19 +1,26 @@
-
 export module FuncHelper {
-
     /**
      * 获取全局唯一UUID
      * @returns
      */
     export function generateUUID() {
         let d = new Date().getTime();
-        let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        let uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
             let r = (d + Math.random() * 16) % 16 | 0;
             d = Math.floor(d / 16);
-            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
         });
         return uuid;
-    };
+    }
+
+    export function toArray<T>(a: ArrayLikeObject<T>) {
+        let r: T[] = [];
+        let keys = Object.keys(a).sort();
+        for (let k of keys) {
+            r.push((a as any)[k] as T);
+        }
+        return r;
+    }
 
     /**
      * 获取本局玩家数量
@@ -22,10 +29,10 @@ export module FuncHelper {
         let playerCount = Players.GetMaxTeamPlayers();
         for (let i = 0; i < playerCount; i++) {
             if (!Players.IsValidPlayerID(i as PlayerID)) {
-                return i
+                return i;
             }
         }
-        return playerCount
+        return playerCount;
     }
     /**
      * 向量距离
@@ -34,7 +41,7 @@ export module FuncHelper {
      * @returns
      */
     export function Vector_distance(v1: [number, number, number], v2: [number, number, number]) {
-        return ((v1[0] - v2[0]) ^ 2 + (v1[1] - v2[1]) ^ 2 + (v1[2] - v2[2]) ^ 2) ^ (0.5)
+        return (v1[0] - v2[0]) ^ (2 + (v1[1] - v2[1])) ^ (2 + (v1[2] - v2[2])) ^ 2 ^ 0.5;
     }
 
     /**
@@ -43,7 +50,7 @@ export module FuncHelper {
      * @param v2
      */
     export function IsValidDiatance(v1: [number, number, number], v2: [number, number, number]) {
-        return Vector_distance(v1, v2) <= 300
+        return Vector_distance(v1, v2) <= 300;
     }
 
     /**
@@ -53,27 +60,25 @@ export module FuncHelper {
     export function StringToVector(s: string): Vector {
         if (s == null) return new Vector();
         let d = s.split(" ");
-        return new Vector(parseFloat(d[0] || "0"), parseFloat(d[1] || "0"), parseFloat(d[2] || "0"),)
+        return new Vector(parseFloat(d[0] || "0"), parseFloat(d[1] || "0"), parseFloat(d[2] || "0"));
     }
 
     export class Vector {
-        x: number = 0; y: number = 0; z: number = 0;
+        x: number = 0;
+        y: number = 0;
+        z: number = 0;
         constructor(x?: number, y?: number, z?: number) {
-            if (x != null)
-                this.x = x;
-            if (y != null)
-                this.y = y;
-            if (z != null)
-                this.z = z;
+            if (x != null) this.x = x;
+            if (y != null) this.y = y;
+            if (z != null) this.z = z;
         }
         toArray() {
-            return [this.x, this.y, this.z] as [number, number, number]
+            return [this.x, this.y, this.z] as [number, number, number];
         }
     }
 
-
     export function Clamp(num: number, min: number, max: number) {
-        return num <= min ? min : (num >= max ? max : num);
+        return num <= min ? min : num >= max ? max : num;
     }
 
     export function Lerp(percent: number, a: number, b: number) {
@@ -81,8 +86,7 @@ export module FuncHelper {
     }
 
     export function RemapValClamped(num: number, a: number, b: number, c: number, d: number) {
-        if (a == b)
-            return c;
+        if (a == b) return c;
         let percent = (num - a) / (b - a);
         percent = Clamp(percent, 0.0, 1.0);
         return Lerp(percent, c, d);
@@ -95,22 +99,21 @@ export module FuncHelper {
          * @param isRepeat 是否重复
          */
         export function RandomArray<T>(arr: Array<T>, count: number = 1, isRepeat: boolean = false) {
-            if (arr == null) return
+            if (arr == null) return;
             let len = arr.length;
             count = Math.min(count, len);
             let r: T[] = [];
             if (count <= 0) {
-                return r
+                return r;
             }
-            Math.random
+            Math.random;
             let index = [];
             if (isRepeat) {
                 while (count > 0) {
                     count -= 1;
-                    index.push(RandomInt(0, len - 1))
+                    index.push(RandomInt(0, len - 1));
                 }
-            }
-            else {
+            } else {
                 let _arr = Object.keys(arr);
                 while (count > 0) {
                     count -= 1;
@@ -120,20 +123,19 @@ export module FuncHelper {
                 }
             }
             for (let k of index) {
-                r.push(arr[k])
+                r.push(arr[k]);
             }
             if (r.length != index.length) {
-                throw new Error('RandomArray out of range')
+                throw new Error("RandomArray out of range");
             }
             return r;
-        };
+        }
 
         /**
          * 随机整数
          */
         export function RandomInt(min: number, max: number): number {
-            return Math.round(Math.random() * (max - min) + min)
+            return Math.round(Math.random() * (max - min) + min);
         }
     }
-
 }

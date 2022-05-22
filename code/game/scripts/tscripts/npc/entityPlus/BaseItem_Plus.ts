@@ -1,4 +1,3 @@
-
 import { ResHelper } from "../../helper/ResHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { BaseItem } from "./Base_Plus";
@@ -13,15 +12,15 @@ export class BaseItem_Plus extends BaseItem {
     /**使用报错提示信息 */
     public errorStr: string;
 
-
-
     public GetAbilityTextureName(): string {
         // 默认使用dota默认技能ICON
-        if (this.__IN_DOTA_NAME__) { return this.__IN_DOTA_NAME__ };
+        if (this.__IN_DOTA_NAME__) {
+            return this.__IN_DOTA_NAME__;
+        }
         return super.GetAbilityTextureName();
-        let iconpath = ResHelper.GetAbilityTextureReplacement("", this.GetCaster())
+        let iconpath = ResHelper.GetAbilityTextureReplacement("", this.GetCaster());
         if (iconpath == null) {
-            iconpath = super.GetAbilityTextureName()
+            iconpath = super.GetAbilityTextureName();
         }
         return iconpath;
     }
@@ -34,9 +33,12 @@ export class BaseItem_Plus extends BaseItem {
     GetParentPlus() {
         return this.GetParent() as BaseNpc_Plus;
     }
+    GetOwnerPlus() {
+        return this.GetOwner() as BaseNpc_Plus;
+    }
     /**自己给自己施法的 */
     IsCastBySelf() {
-        return this.GetCasterPlus().GetEntityIndex() == this.GetParentPlus().GetEntityIndex()
+        return this.GetCasterPlus().GetEntityIndex() == this.GetOwnerPlus().GetEntityIndex();
     }
 
     /**
@@ -45,27 +47,24 @@ export class BaseItem_Plus extends BaseItem {
      * @param hUnit
      * @returns
      */
-    static CreateOneToUnit<T extends typeof BaseItem_Plus>(
-        this: T,
-        hUnit: BaseNpc_Plus,
-    ): InstanceType<T> {
-        let player = hUnit.GetPlayerOwner()
-        let hItem = CreateItem(this.name, player, player) as BaseItem_Plus;
-        hItem.SetPurchaseTime(0)
-        hUnit.AddItem(hItem)
-        if (GameFunc.IsValid(hItem) && hItem.GetParentPlus() != hUnit && hItem.GetContainer() == null) {
-            hItem.SetParent(hUnit, "")
-            hItem.CreateItemOnPositionRandom(hUnit.GetAbsOrigin())
+    static CreateOneToUnit<T extends typeof BaseItem_Plus>(this: T, hUnit: BaseNpc_Plus, itemname: string = null): InstanceType<T> {
+        let player = hUnit.GetPlayerOwner();
+        if (itemname == null) {
+            itemname = this.name;
         }
-        return hItem as InstanceType<T>
+        let hItem = CreateItem(itemname, player, player) as BaseItem_Plus;
+        hItem.SetPurchaseTime(0);
+        hUnit.AddItem(hItem);
+        if (GameFunc.IsValid(hItem) && hItem.GetParent() != hUnit && hItem.GetContainer() == null) {
+            hItem.SetParent(hUnit, "");
+            hItem.CreateItemOnPositionRandom(hUnit.GetAbsOrigin());
+        }
+        return hItem as InstanceType<T>;
     }
 
-    static findInUnit<T extends typeof BaseItem_Plus>(
-        this: T,
-        hUnit: BaseNpc_Plus,
-    ): InstanceType<T> {
-        let item = hUnit.FindItemInInventory(this.name)
-        return item as InstanceType<T>
+    static findInUnit<T extends typeof BaseItem_Plus>(this: T, hUnit: BaseNpc_Plus): InstanceType<T> {
+        let item = hUnit.FindItemInInventory(this.name);
+        return item as InstanceType<T>;
     }
 
     /**
@@ -75,12 +74,8 @@ export class BaseItem_Plus extends BaseItem {
      * @returns
      */
     CreateItemOnPositionRandom(vCenter: Vector) {
-        let vPosition = (vCenter + RandomVector(125)) as Vector
-        let hContainer = CreateItemOnPositionForLaunch(vPosition, this)
-        return hContainer
+        let vPosition = (vCenter + RandomVector(125)) as Vector;
+        let hContainer = CreateItemOnPositionForLaunch(vPosition, this);
+        return hContainer;
     }
 }
-
-
-
-

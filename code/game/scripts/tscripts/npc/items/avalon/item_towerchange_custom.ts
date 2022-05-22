@@ -12,8 +12,6 @@ export class item_towerchange_custom extends BaseItem_Plus {
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_CHANNELLED
     }
 
-
-
     CastFilterResultTarget(hTarget: BaseNpc_Plus) {
         let hCaster = this.GetCasterPlus()
         if (hTarget.IsBuilding() && hTarget.GetTeamNumber() != hCaster.GetTeamNumber()) {

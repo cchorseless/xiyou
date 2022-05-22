@@ -1,5 +1,5 @@
 import { GameEnum } from "../../../GameEnum";
-import { ClassHelper } from "../../../helper/ClassHelper";
+import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { PlayerEntityRoot } from "../../Components/Player/PlayerEntityRoot";
 import { PlayerHttpComponent } from "../../Components/Player/PlayerHttpComponent";
@@ -27,7 +27,7 @@ export class PlayerSystem {
             let playerRoot = new PlayerEntityRoot();
             (playerRoot as any).Playerid = playerid;
             PlayerSystem.AllPlayer[playerid + ""] = playerRoot;
-            let playerhttp = playerRoot.AddPreAwakeComponent(ClassHelper.getRegClass<typeof PlayerHttpComponent>("PlayerHttpComponent"));
+            let playerhttp = playerRoot.AddPreAwakeComponent(PrecacheHelper.GetRegClass<typeof PlayerHttpComponent>("PlayerHttpComponent"));
             await playerhttp.PlayerLogin(playerid);
         });
     }

@@ -2440,6 +2440,7 @@ export module GameEnum {
             req_DebugReload = 'req_DebugReload',
             req_DebugRestart = "req_DebugRestart",
             req_DebugClearAll = "req_DebugClearAll",
+            req_LoginGame = "req_LoginGame",
             req_KEY_DOWN = 'req_KEY_DOWN',
             req_KEY_UP = 'req_KEY_UP',
             /**道具位置改变 */

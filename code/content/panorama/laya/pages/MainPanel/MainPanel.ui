@@ -2,7 +2,7 @@
     "x":0,
     "type":"dota2Panel",
     "selectedBox":1,
-    "selecteID":10,
+    "selecteID":16,
     "props":{"y":0,"x":0,"width":1600,"sceneColor":"#000000","ref":"this.panel_0","height":900,"className":"root"},
     "nodeParent":-1,
     "label":"dota2Panel",
@@ -27,107 +27,29 @@
         },
         {
             "x":15,
-            "type":"dota2Button",
-            "props":{"x":0,"width":64,"top":262,"ref":"this.btn_showInfo","onactivate":"this.onbtn_showInfo","height":64,"className":"CommonButton","bg-repeat":"no-repeat","bg-image":"control_icons/friend_large.png"},
+            "type":"dota2Panel",
+            "props":{"width":1600,"ref":"this.panel_allpanel","height":900,"className":"root","centerY":0,"centerX":0},
             "nodeParent":1,
-            "label":"dota2Button",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":3,
-            "child":[
-                {
-                    "x":30,
-                    "type":"dota2Label",
-                    "props":{"x":12,"width":40,"text":"身份","height":20,"font-weight":"bold","font-size":20,"color":"#000000","bottom":5},
-                    "nodeParent":3,
-                    "label":"dota2Label",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":6,
-                    "child":[
-                        ]
-                }]
-        },
-        {
-            "x":15,
-            "type":"dota2Button",
-            "props":{"width":80,"right":5,"ref":"this.btn_showAllInfo","onactivate":"this.onbtn_showAllInfo","height":80,"className":"CommonButton","bottom":0,"bg-repeat":"no-repeat","bg-image":"control_icons/icon_multiple_styles.png"},
-            "nodeParent":1,
-            "label":"dota2Button",
-            "isOpen":true,
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":4,
-            "child":[
-                {
-                    "x":30,
-                    "type":"dota2Button",
-                    "props":{"y":8,"x":10,"width":60,"ref":"this.btn_showAllInfo_close","height":60,"bg-repeat":"no-repeat","bg-image":"control_icons/purgatory.png"},
-                    "nodeParent":4,
-                    "label":"dota2Button",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":5,
-                    "child":[
-                        ]
-                }]
-        },
-        {
-            "x":15,
-            "type":"dota2Button",
-            "props":{"x":0,"width":64,"top":362,"ref":"this.btn_showtsak","onactivate":"this.onbtn_showtask","height":64,"className":"CommonButton","bg-repeat":"no-repeat","bg-image":"custom_game/icons/container_mail.png"},
-            "nodeParent":1,
-            "label":"dota2Button",
+            "label":"dota2Panel",
             "isOpen":true,
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":7,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"dota2Label",
-            "props":{"y":382,"x":67,"text":"任务:","font-weight":"bold","font-size":30,"color":"#ffffff"},
-            "nodeParent":1,
-            "label":"dota2Label",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":10,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"dota2Button",
-            "props":{"x":0,"width":64,"top":179,"ref":"this.btn_showgamepanel","onactivate":"this.onbtn_showgamepanel","height":64,"className":"CommonButton","bg-repeat":"no-repeat","bg-image":"common/task_ising.png"},
-            "nodeParent":1,
-            "label":"dota2Button",
-            "isOpen":true,
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":11,
+            "compId":13,
             "child":[
                 ]
         },
         {
             "x":15,
             "type":"dota2Panel",
-            "props":{"width":1600,"ref":"this.panel_allpanel","height":900,"className":"root","centerY":0,"centerX":0},
+            "props":{"width":1600,"ref":"this.panel_alldialog","height":900,"className":"root","centerY":0,"centerX":0},
             "nodeParent":1,
             "label":"dota2Panel",
+            "isOpen":true,
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":13,
+            "compId":16,
             "child":[
                 ]
         }],

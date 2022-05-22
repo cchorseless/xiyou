@@ -16,6 +16,7 @@ import { CombinationManagerComponent } from "../../rules/Components/Combination/
 import { PlayerState } from "../../rules/System/Player/PlayerState";
 import { BuildingManagerComponent } from "../../rules/Components/Building/BuildingManagerComponent";
 import { PlayerSystem } from "../../rules/System/Player/PlayerSystem";
+import { DrawComponent } from "../../rules/Components/Draw/DrawComponent";
 @registerUnit()
 export class courier_base extends BaseNpc_Hero_Plus {
     Spawn(entityKeyValues: CScriptKeyValues) {
@@ -40,10 +41,11 @@ export class courier_base extends BaseNpc_Hero_Plus {
         // Component_Avalon.addComponent(this);
         // 移动组件
         this.ETRoot.AddComponent(PlayerComponent);
+        this.ETRoot.AddComponent(DrawComponent);
         // this.ETRoot.AddComponent(RoundManagerComponent);
-        // this.ETRoot.AddComponent(CombinationManagerComponent);
+        this.ETRoot.AddComponent(CombinationManagerComponent);
         // this.ETRoot.AddComponent(EnemyManagerComponent);
-        // this.ETRoot.AddComponent(BuildingManagerComponent);
+        this.ETRoot.AddComponent(BuildingManagerComponent);
         // modifier_task.apply(this, this);
         // modifier_test.apply(this, this);
 

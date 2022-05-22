@@ -2,18 +2,17 @@ import { FuncHelper } from "./FuncHelper";
 import { LogHelper } from "./LogHelper";
 
 export module TimerHelper {
-
     interface ITimerContent {
         InstanceId: string;
     }
 
     interface timerInfo {
         /**计时器ID */
-        timerid: ScheduleID,
+        timerid: ScheduleID;
         /**结束时间 */
-        finishtime: number,
+        finishtime: number;
         /**处理函数 */
-        handler: () => void,
+        handler: () => void;
     }
     /**所有计时器 */
     export let AllTimer: { [uuid: string]: Array<timerInfo> } = {};
@@ -25,36 +24,46 @@ export module TimerHelper {
      * @param useGameTime 是否使用游戏时间，true=>游戏暂停，计时器停止；false=>无视游戏是否暂停
      */
     export function addTimer(delay: number, handler: () => number | void, content: ITimerContent | null = null, useGameTime = true) {
-        if (delay < 0) { return };
+        if (delay < 0) {
+            return;
+        }
         let cb = () => {
             let repeatTime = handler.call(content);
             if (repeatTime && repeatTime > 0) {
                 TimerHelper.addTimer(repeatTime, handler, content);
             }
-        }
+        };
         let timerID = $.Schedule(delay, cb);
         let uuid = FuncHelper.generateUUID();
         if (content) {
             uuid = content.InstanceId;
             if (uuid == null) {
-                throw Error(content.constructor.name + 'dont have UUID')
+                throw Error(content.constructor.name + "dont have UUID");
             }
-        };
+        }
         let timerInfo: timerInfo = {
             timerid: timerID,
             finishtime: new Date().getTime() + delay * 1000,
             handler: handler,
-        }
+        };
         TimerHelper.AllTimer[uuid] = TimerHelper.AllTimer[uuid] || [];
         // 控制队列长度，移除失效时间ID
         if (TimerHelper.AllTimer[uuid].length > 50) {
             let now = new Date().getTime();
             TimerHelper.AllTimer[uuid] = TimerHelper.AllTimer[uuid].filter((v, index, array) => {
-                return v.finishtime > now
-            })
+                return v.finishtime > now;
+            });
         }
         TimerHelper.AllTimer[uuid].push(timerInfo);
-        return timerID
+        return timerID;
+    }
+
+    export async function delayTime(delay: number, useGameTime = true) {
+        return new Promise<boolean>((resolve, reject) => {
+            TimerHelper.addTimer(delay, () => {
+                resolve(true);
+            }, null, useGameTime);
+        });
     }
 
     /**
@@ -65,7 +74,7 @@ export module TimerHelper {
     export function removeTimer(content: ITimerContent, handler: () => void) {
         let uuid = content.InstanceId;
         if (uuid == null) {
-            throw Error(content.constructor.name + 'dont have UUID')
+            throw Error(content.constructor.name + "dont have UUID");
         }
         if (TimerHelper.AllTimer[uuid]) {
             let now = new Date().getTime();
@@ -74,8 +83,8 @@ export module TimerHelper {
                     // 只能删除没有触发的计时器，否则会报错
                     TimerHelper.safeCancelScheduled(v.timerid);
                 }
-                return v.handler != handler
-            })
+                return v.handler != handler;
+            });
         }
     }
 
@@ -89,13 +98,13 @@ export module TimerHelper {
         if (content) {
             let uuid = content.InstanceId;
             if (uuid == null) {
-                throw Error(content.constructor.name + 'dont have UUID')
+                throw Error(content.constructor.name + "dont have UUID");
             }
             let AllTimer = TimerHelper.AllTimer[uuid];
             if (AllTimer) {
                 let now = new Date().getTime();
                 TimerHelper.AllTimer[uuid] = TimerHelper.AllTimer[uuid].filter((v, index, array) => {
-                    return v.finishtime >= now && v.timerid != timerID
+                    return v.finishtime >= now && v.timerid != timerID;
                 });
             }
         }
@@ -109,7 +118,7 @@ export module TimerHelper {
     export function removeAllTimer(content: ITimerContent) {
         let uuid = content.InstanceId;
         if (uuid == null) {
-            throw Error(content.constructor.name + 'dont have UUID')
+            throw Error(content.constructor.name + "dont have UUID");
         }
         let AllTimer = TimerHelper.AllTimer[uuid];
         if (AllTimer) {
@@ -119,7 +128,7 @@ export module TimerHelper {
                 if (timerInfo.finishtime + 1000 >= now) {
                     TimerHelper.safeCancelScheduled(timerInfo.timerid);
                 }
-            })
+            });
             AllTimer.length = 0;
             delete TimerHelper.AllTimer[uuid];
         }
@@ -132,10 +141,8 @@ export module TimerHelper {
     export function safeCancelScheduled(timerID: ScheduleID) {
         try {
             $.CancelScheduled(timerID);
-        }
-        catch (e) {
-            LogHelper.warn('timer del repeat')
+        } catch (e) {
+            LogHelper.warn("timer del repeat");
         }
     }
-
 }

@@ -2,6 +2,7 @@ import React, { createElement, createRef, PureComponent } from "react";
 import { CSSHelper } from "../helper/CSSHelper";
 import { FuncHelper } from "../helper/FuncHelper";
 import { LogHelper } from "../helper/LogHelper";
+import { TimerHelper } from "../helper/TimerHelper";
 import { ET } from "./Entity";
 import { GameEnum } from "./GameEnum";
 
@@ -18,17 +19,15 @@ interface NodeData extends Partial<VCSSStyleDeclaration> {
     [k: string]: any;
 }
 
-interface ReactElement extends React.CElement<NodeData, BasePureComponent> {
-}
+interface ReactElement extends React.CElement<NodeData, BasePureComponent> {}
 
 interface ReactElementNodeInfo {
-    Node: ReactElement,
-    Domain: BasePureComponent,
-    NodeParentName: string,
+    Node: ReactElement;
+    Domain: BasePureComponent;
+    NodeParentName: string;
 }
 
 export class BasePureComponentSystem {
-
     public static AllBasePureComp: { [instanceId: string]: BasePureComponent } = {};
     public static AllReactElement: { [instanceId: string]: ReactElementNodeInfo } = {};
     // 异步函数
@@ -45,37 +44,27 @@ export class BasePureComponentSystem {
                 resolve(entity);
                 delete BasePureComponentSystem.AllAsyacResolve[entity.InstanceId];
             }
-        }
-        else {
+        } else {
             if (entity.InstanceId == null || BasePureComponentSystem.AllBasePureComp[entity.InstanceId] == null) {
                 throw new Error("UnRegisterSystem error");
             }
             delete BasePureComponentSystem.AllBasePureComp[entity.InstanceId];
         }
     }
-    static RegisterReactElement(
-        entity: ReactElement,
-        b: boolean,
-        Domain: BasePureComponent | null = null,
-        NodeParentName: string | null = null) {
+    static RegisterReactElement(entity: ReactElement, b: boolean, Domain: BasePureComponent | null = null, NodeParentName: string | null = null) {
         if (b) {
-            if (entity.key == null ||
-                BasePureComponentSystem.AllReactElement[entity.key] != null ||
-                Domain == null ||
-                NodeParentName == null
-            ) {
-                throw new Error("RegisterReactElement error"
-                );
+            if (entity.key == null || BasePureComponentSystem.AllReactElement[entity.key] != null || Domain == null || NodeParentName == null) {
+                LogHelper.error("RegisterReactElement error");
+                return;
             }
             BasePureComponentSystem.AllReactElement[entity.key] = {
                 Node: entity,
                 Domain: Domain,
                 NodeParentName: NodeParentName,
             };
-        }
-        else {
+        } else {
             if (entity.key == null || BasePureComponentSystem.AllBasePureComp[entity.key] == null) {
-                throw new Error("UnRegisterReactElement error");
+                return;
             }
             delete BasePureComponentSystem.AllReactElement[entity.key];
         }
@@ -88,8 +77,8 @@ export class BasePureComponentSystem {
     }
 }
 
-
 export class BasePureComponent extends PureComponent<NodeData> implements ET.IEntityRoot {
+    static PanelZorder = 1;
     ETRoot?: ET.EntityRoot;
     /**根节点 */
     __root__: React.RefObject<Panel>;
@@ -97,7 +86,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     readonly InstanceId: string;
     readonly IsRegister: boolean = false;
     /**所有子节点名称数据 */
-    NODENAME = { __root__: '__root__' };
+    NODENAME = { __root__: "__root__" };
     /**所有注册的事件毁掉函数 */
     FUNCNAME = {};
     /**根节点样式 */
@@ -106,8 +95,8 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     constructor(props: NodeData) {
         super(props);
         this.__root__ = null as any;
-        LogHelper.print("add BasePureComponent :", this.constructor.name)
-    };
+        LogHelper.print("add BasePureComponent :", this.constructor.name);
+    }
 
     private setRegister(value: boolean) {
         if (this.IsRegister == value) {
@@ -117,12 +106,12 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         BasePureComponentSystem.RegisterBasePureComp(this, value);
     }
     /**
-      * 获取节点管理子节点数据对象变量名称
-      * @param nodeName
-      * @returns
-      */
+     * 获取节点管理子节点数据对象变量名称
+     * @param nodeName
+     * @returns
+     */
     private getNode_childs_Name(nodeName: string): string {
-        return nodeName + '_childs'
+        return nodeName + "_childs";
     }
     /**
      * 获取节点管理本节点属性变量名称
@@ -130,7 +119,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
      * @returns
      */
     private getNode_attrs_Name(nodeName: string): string {
-        return nodeName + '_attrs'
+        return nodeName + "_attrs";
     }
     /**
      * 获取节点管理本节点是否销毁
@@ -138,45 +127,51 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
      * @returns
      */
     private getNode_isValid_Name(nodeName: string): string {
-        return nodeName + '_isValid'
+        return nodeName + "_isValid";
     }
-
+    /**创建前，指定属性，添加事件 */
+    // public onAwake(props: NodeData) {}
     /**每一帧刷新 */
-    public onUpdate() {
-    }
+    public onUpdate() {}
+    public onRefreshUI(data?: NodeData) {}
+
+   
 
     /**
      *开启每frame帧刷新
      */
     public startUpdate = (frame = 1) => {
         if (this.IsRegister) {
-            this.onUpdate()
-            $.Schedule(Game.GetGameFrameTime() * frame, () => { this.startUpdate() });
+            this.onUpdate();
+            $.Schedule(Game.GetGameFrameTime() * frame, () => {
+                this.startUpdate();
+            });
         }
-    }
+    };
     /**
-    * 向_childs中添加子节点
-    * @param nodeName 添加的父节点名称，在 this.nodeName中
-    * @param nodeType 子节点类型
-    * @param nodeData 子节点数据，相当于this.props
-    * @param index 添加的索引，默认在父节点最后添加
-    * @returns
-    */
+     * 向_childs中添加子节点
+     * @param nodeName 添加的父节点名称，在 this.nodeName中
+     * @param nodeType 子节点类型
+     * @param nodeData 子节点数据，相当于this.props
+     * @param index 添加的索引，默认在父节点最后添加
+     * @returns
+     */
     public addNodeChildAt<T extends typeof BasePureComponent>(nodeName: string, nodeType: T, nodeData: NodeData = {}, index: number = -1): ReactElement | void {
         let instanceId = FuncHelper.generateUUID();
         // 添加唯一Key
-        nodeData.key = instanceId
+        nodeData.key = instanceId;
         // 复制一份存起来
         nodeData.__onlykey__ = instanceId;
         let _childsName = this.getNode_childs_Name(nodeName);
         let parentNode: Array<JSX.Element> = (this as any)[_childsName];
         if (parentNode == null) {
-            throw Error(this.constructor.name + " dont have node : " + nodeName)
+            throw Error(this.constructor.name + " dont have node : " + nodeName);
         }
         let node = createElement(nodeType, nodeData) as ReactElement;
         BasePureComponentSystem.RegisterReactElement(node, true, this, _childsName);
-        if (index == -1) { parentNode = parentNode.concat([node]) }
-        else {
+        if (index == -1) {
+            parentNode = parentNode.concat([node]);
+        } else {
             parentNode.splice(index, 0, node);
             parentNode = parentNode.concat([]);
         }
@@ -188,13 +183,18 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     public removeNodeChild(_childsName: string, node: ReactElement) {
         let parentNode: Array<JSX.Element> = (this as any)[_childsName];
         if (parentNode == null) {
-            throw Error(this.constructor.name + " dont have node : " + _childsName)
+            throw Error(this.constructor.name + " dont have node : " + _childsName);
         }
-        let index = parentNode.indexOf(node);
+        let index = 0;
+        for (let i = 0; i < parentNode.length; i++) {
+            if (parentNode[i].key == node.key) {
+                index = i;
+                break;
+            }
+        }
         if (index == -1) {
-            throw Error(_childsName + " dont have this node")
-        }
-        else {
+            throw Error(_childsName + " dont have this node");
+        } else {
             parentNode.splice(index, 1);
             parentNode = parentNode.concat([]);
         }
@@ -204,9 +204,15 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     }
 
     public async addOrShowOnlyNodeChild<T extends typeof BasePureComponent>(nodeName: string, nodeType: T, nodeData: NodeData = {}) {
-        let comp: any = this.GetOneNodeChild(nodeName, nodeType);
+        let comp = this.GetOneNodeChild(nodeName, nodeType);
         if (comp == null) {
-            comp = await this.addNodeChildAsyacAt(nodeName, nodeType, nodeData);
+            comp = await this.addNodeChildAsyncAt(nodeName, nodeType, nodeData);
+        } else {
+            comp.__root__.current!.visible = true;
+            if (Object.keys(nodeData).length > 0) {
+                comp.onRefreshUI(nodeData);
+            }
+            comp.updateSelf();
         }
         return comp as InstanceType<T>;
     }
@@ -215,7 +221,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         let _childsName = this.getNode_childs_Name(nodeName);
         let parentNode: Array<JSX.Element> = (this as any)[_childsName];
         if (parentNode == null) {
-            throw Error(this.constructor.name + " dont have node : " + nodeName)
+            throw Error(this.constructor.name + " dont have node : " + nodeName);
         }
         let len = parentNode.length;
         let r: InstanceType<T>[] = [];
@@ -233,7 +239,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         let _childsName = this.getNode_childs_Name(nodeName);
         let parentNode: Array<JSX.Element> = (this as any)[_childsName];
         if (parentNode == null) {
-            throw Error(this.constructor.name + " dont have node : " + nodeName)
+            throw Error(this.constructor.name + " dont have node : " + nodeName);
         }
         let len = parentNode.length;
         for (let i = 0; i < len; i++) {
@@ -268,28 +274,32 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     public static GetInstance<T extends typeof BasePureComponent>(this: T): InstanceType<T> | void {
         let r = this.GetAllNode();
         if (r && r.length == 1) {
-            return r[0] as InstanceType<T>
-        }
-        else if (r && r.length > 1) {
-            throw new Error('NodeComponent is not only')
+            return r[0] as InstanceType<T>;
+        } else if (r && r.length > 1) {
+            throw new Error("NodeComponent is not only");
         }
     }
 
 
-    public async addNodeChildAsyacAt<T extends typeof BasePureComponent>(nodeName: string, nodeType: T, nodeData: NodeData = {}, index: number = -1) {
-        let node = this.addNodeChildAt(nodeName, nodeType, nodeData, index);
-        if (node) {
-            return new Promise<InstanceType<T>>((resolve, reject) => {
+    public async addNodeChildAsyncAt<T extends typeof BasePureComponent>(nodeName: string, nodeType: T, nodeData: NodeData = {}, index: number = -1) {
+        return new Promise<InstanceType<T>>((resolve, reject) => {
+            let node = this.addNodeChildAt(nodeName, nodeType, nodeData, index);
+            if (node) {
                 BasePureComponentSystem.AllAsyacResolve[(node as ReactElement).key as string] = resolve;
                 this.updateSelf();
-            })
-        }
+            } else {
+                this.updateSelf();
+                reject(node);
+            }
+        });
     }
 
+
+
     /**
-   * 同步删除自己（组件类，触发组件的销毁事件）
-   * @param time 时间
-   */
+     * 同步删除自己（组件类，触发组件的销毁事件）
+     * @param time 时间
+     */
     public destroy() {
         if (this.__root__ && this.__root__.current) {
             // 优先从父节点删除
@@ -304,10 +314,9 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
             }
             // 无法从父节点删除，就直接删除自己
             // 警告：并没有销毁组件实例，可能有内存泄漏
-            LogHelper.warn('destroy by self, not by parent , maybe cause Memory Leak : ' + this.constructor.name)
+            LogHelper.warn("destroy by self, not by parent , maybe cause Memory Leak : " + this.constructor.name);
             this.closeNode();
             this.componentWillUnmount();
-
         }
     }
     public showNode(nodeName: string) {
@@ -315,10 +324,19 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         let _isValidName = this.getNode_isValid_Name(nodeName);
         let nodeisValid: Array<JSX.Element> = (this as any)[_isValidName];
         if (nodeisValid == null) {
-            throw Error(this.constructor.name + " dont have node : " + nodeName)
+            throw new Error(this.constructor.name + " dont have node : " + nodeName);
         }
         // 清除节点显示逻辑
         (this as any)[_isValidName] = true;
+    }
+    public clearNode(nodeName: string) {
+        // 清理节点
+        let _childsName = this.getNode_childs_Name(nodeName);
+        let parentNode: Array<JSX.Element> = (this as any)[_childsName];
+        if (parentNode == null) {
+            throw new Error(this.constructor.name + " dont have node : " + nodeName);
+        }
+        (this as any)[_childsName] = [];
     }
 
     public closeNode(nodeName: string = this.NODENAME.__root__, isDestroy: boolean = true) {
@@ -326,18 +344,19 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
             let _childsName = this.getNode_childs_Name(nodeName);
             let parentNode: Array<JSX.Element> = (this as any)[_childsName];
             if (parentNode == null) {
-                throw Error(this.constructor.name + " dont have node : " + nodeName)
+                throw Error(this.constructor.name + " dont have node : " + nodeName);
             }
-            parentNode = [];
+            (this as any)[_childsName] = [];
         }
         // 清理节点
         let _isValidName = this.getNode_isValid_Name(nodeName);
         let nodeisValid: Array<JSX.Element> = (this as any)[_isValidName];
         if (nodeisValid == null) {
-            throw Error(this.constructor.name + " dont have node : " + nodeName)
+            throw Error(this.constructor.name + " dont have node : " + nodeName);
         }
         // 清除节点显示逻辑
         (this as any)[_isValidName] = false;
+        this.updateSelf()
     }
 
     /**
@@ -346,29 +365,39 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
      */
     public close(destroy = true) {
         if (this.__root__ && this.__root__.current) {
-            this.__root__.current.visible = false
-            this.updateSelf()
+            this.__root__.current.visible = false;
+            this.updateSelf();
         }
         if (destroy) {
-            this.destroy()
+            this.destroy();
         }
     }
-
 
     private allGameEventID: GameEventListenerID[] = [];
     /**添加游戏事件 */
     public addGameEvent(eventName: GameEnum.GameEvent, handler: (e?: any) => void) {
-        let eventid = GameEvents.Subscribe(eventName, handler)
+        let eventid = GameEvents.Subscribe(eventName, handler);
         this.allGameEventID.push(eventid);
-        return eventid
+        return eventid;
     }
     private _updateSelf = 0;
     /**刷新自己 */
     public updateSelf = () => {
         this._updateSelf += 1;
-        this.setState({ _updateSelf: this._updateSelf })
-    }
+        this.setState({ _updateSelf: this._updateSelf });
+    };
 
+    public delayUpdateSelf = () => {
+        TimerHelper.addTimer(
+            0.1,
+            () => {
+                if (this.IsRegister) {
+                    this.updateSelf();
+                }
+            },
+            this
+        );
+    };
     // 初始化数据
     public componentDidMount() {
         // this.syncRootDataByProps();
@@ -381,18 +410,21 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         }
         // 不遮挡tooltip
         this.__root__.current!.hittest = false;
-        if (this.props.__onlykey__) { (this as any).InstanceId = this.props.__onlykey__; }
-        else { (this as any).InstanceId = FuncHelper.generateUUID() }
+        if (this.props.__onlykey__) {
+            (this as any).InstanceId = this.props.__onlykey__;
+        } else {
+            (this as any).InstanceId = FuncHelper.generateUUID();
+        }
         this.setRegister(true);
-    };
+    }
     public componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
         // LogHelper.warn(this.constructor.name)
         // this.syncRootDataByProps()
-    };
+    }
     public componentWillUnmount() {
         this.setRegister(false);
         // 移除所有监听事件
-        this.allGameEventID.forEach(e => {
+        this.allGameEventID.forEach((e) => {
             GameEvents.Unsubscribe(e);
         });
         this.allGameEventID = [];

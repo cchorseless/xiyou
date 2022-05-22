@@ -58,19 +58,19 @@ export class BuildingManagerComponent extends ET.Component {
             return
         }
         //  人口判断
-        let iPopulationAdd = BuildingSystem.GetBuildingPopulation(towerID);
-        let freePopulation = this.getFreePopulation();
-        if (iPopulationAdd > freePopulation) {
-            EventHelper.ErrorMessage(GameEnum.Event.ErrorCode.dota_hud_error_population_limit)
-            return false
-        }
+        // let iPopulationAdd = BuildingSystem.GetBuildingPopulation(towerID);
+        // let freePopulation = this.getFreePopulation();
+        // if (iPopulationAdd > freePopulation) {
+        //     EventHelper.ErrorMessage(GameEnum.Event.ErrorCode.dota_hud_error_population_limit)
+        //     return false
+        // }
         let building = EntityHelper.CreateEntityByName(towerID, location, domain.GetTeamNumber(), false, domain, domain) as BaseNpc_Plus;
         if (!building) { return };
         ET.EntityRoot.Active(building);
         domain.ETRoot.AddDomainChild(building.ETRoot);
         building.ETRoot.AddComponent(BuildingComponent, towerID, location, angle);
         building.ETRoot.AddComponent(CombinationComponent, towerID);
-        domain.ETRoot.GetComponent(CombinationManagerComponent).add(domain.ETRoot);
+        // domain.ETRoot.GetComponent(CombinationManagerComponent).add(domain.ETRoot);
         /**互相绑定 */
         building.SetControllableByPlayer(playerID, true);
         building.addSpawnedHandler(ET.Handler.create(this, () => {
@@ -78,14 +78,14 @@ export class BuildingManagerComponent extends ET.Component {
             // modifier_test.apply(this.createUnit, domain)
         }));
         // 全场buff
-        if (this.tGlobalBuffs.length > 0) {
-            for (let info of this.tGlobalBuffs) {
-                let cls = PrecacheHelper.GetRegClass<typeof BaseModifier_Plus>(info.sBuffName);
-                cls.apply(domain, domain, info.hAbility, info.tParams);
-            }
-        }
+        // if (this.tGlobalBuffs.length > 0) {
+        //     for (let info of this.tGlobalBuffs) {
+        //         let cls = PrecacheHelper.GetRegClass<typeof BaseModifier_Plus>(info.sBuffName);
+        //         cls.apply(domain, domain, info.hAbility, info.tParams);
+        //     }
+        // }
         // 改变人口
-        this.curPopulation += iPopulationAdd;
+        // this.curPopulation += iPopulationAdd;
         this.bHasBuild = true;
         // FireLeftPopulationChanged(playerID, this.GetMaxPopulation(playerID) - this.tPlayerBuildings[playerID].population)
         return building

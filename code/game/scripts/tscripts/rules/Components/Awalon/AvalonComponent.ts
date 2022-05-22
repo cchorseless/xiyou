@@ -29,7 +29,9 @@ export class AvalonComponent extends ET.Component {
     }
 
     addEvent() {
-        EventHelper.addGameEvent(GameEnum.Event.GameEvent.game_rules_state_change, () => {
+        EventHelper.addGameEvent(
+            this,
+            GameEnum.Event.GameEvent.game_rules_state_change, () => {
             const nNewState = GameRules.State_Get();
             switch (nNewState) {
                 // 设置玩家阵营
@@ -38,7 +40,7 @@ export class AvalonComponent extends ET.Component {
                     this.setTeamnumber()
                     break
             }
-        }, this);
+        });
 
     }
 

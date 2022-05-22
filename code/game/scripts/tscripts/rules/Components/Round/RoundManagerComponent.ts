@@ -1,14 +1,14 @@
 import { KVHelper } from "../../../helper/KVHelper";
 import { building_round_challenge } from "../../../kvInterface/building/building_round_challenge";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
-import { ET } from "../../Entity/Entity";
+import { ET, registerET } from "../../Entity/Entity";
 import { RoundState } from "../../System/Round/RoundState";
 import { RoundSystem } from "../../System/Round/RoundSystem";
 import { ERound } from "./ERound";
 import { ERoundChallenge } from "./ERoundChallenge";
 
+@registerET()
 export class RoundManagerComponent extends ET.Component {
-
     readonly RoundInfo: { [k: string]: ERound } = {};
     private CurRoundId: string;
     onAwake() {
@@ -26,7 +26,7 @@ export class RoundManagerComponent extends ET.Component {
         let round = this.getCurrentBasicRound();
         round && round.OnEnd();
         let next = this.RoundInfo[roundid];
-        this.CurRoundId = '' + roundid;
+        this.CurRoundId = "" + roundid;
         next.OnStart();
     }
 

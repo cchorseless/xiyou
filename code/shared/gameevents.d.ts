@@ -1,4 +1,4 @@
-interface LUA_TO_LUA_DATA {
+declare interface LUA_TO_LUA_DATA {
     /**玩家ID */
     PlayerID?: PlayerID;
     /**实体ID */
@@ -10,7 +10,7 @@ interface LUA_TO_LUA_DATA {
     /**数据发送完成标记 todo */
     isFinish?: boolean;
 }
-interface JS_TO_LUA_DATA extends LUA_TO_LUA_DATA {
+declare interface JS_TO_LUA_DATA extends LUA_TO_LUA_DATA {
     /**是否成功 */
     state?: boolean;
     /**报错描述 */
@@ -21,10 +21,13 @@ interface JS_TO_LUA_DATA extends LUA_TO_LUA_DATA {
     IsfromServer?: boolean;
 }
 
-interface CLIENT_DATA<T> extends JS_TO_LUA_DATA {
+declare interface CLIENT_DATA<T> extends JS_TO_LUA_DATA {
     data?: T;
 }
 
+declare interface ArrayLikeObject<T> {
+    [k: string]: T;
+}
 /**
  * 自定义游戏事件
  */

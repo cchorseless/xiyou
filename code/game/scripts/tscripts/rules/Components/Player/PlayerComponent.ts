@@ -13,12 +13,10 @@ export class PlayerComponent extends ET.Component {
     itemSlotData: EntityIndex[] = [];
 
     readonly playerColor: Vector;
-    readonly PlayerID: number;
 
     onAwake() {
         let domain = this.GetDomain<BaseNpc_Hero_Plus>();
-        (this as any).PlayerID = domain.GetPlayerID();
-        (this as any).playerColor = PlayerConfig.playerColor[this.PlayerID];
+        (this as any).playerColor = PlayerConfig.playerColor[domain.ETRoot.AsPlayer().Playerid];
         this.firstSpawnPoint = domain.GetAbsOrigin();
     }
 

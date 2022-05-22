@@ -6,12 +6,11 @@ import { CombinationComponent } from "./CombinationComponent";
 import { ECombination } from "./ECombination";
 
 export class CombinationManagerComponent extends ET.Component {
-    readonly PlayerID: number;
 
     onAwake(): void {
         let config = KVHelper.KvServerConfig.building_combination;
         for (let key in config) {
-            let info = config[key as "1001"];
+            let info = config[key];
             let combina = this.allCombination[info.relation];
             if (combina == null) {
                 combina =  this.AddChild(ECombination);
@@ -19,9 +18,6 @@ export class CombinationManagerComponent extends ET.Component {
             }
             combina.addConfig(info);
         }
-        let domain = this.GetDomain<BaseNpc_Hero_Plus>();
-        (this as any).PlayerID = domain.GetPlayerID();
-        CombinationSystem.RegComponent(this);
     }
 
     private allCombination: { [k: string]: ECombination } = {};

@@ -5,10 +5,10 @@ import { GameFunc } from "./GameFunc";
 import { GameSetting } from "./GameSetting";
 import { BotHelper } from "./helper/BotHelper";
 import { EntityHelper } from "./helper/EntityHelper";
-import { EventHelper } from "./helper/EventHelper"
+import { EventHelper } from "./helper/EventHelper";
 import { KVHelper } from "./helper/KVHelper";
 import { LogHelper } from "./helper/LogHelper";
-import { SingletonClass } from "./helper/SingletonHelper"
+import { SingletonClass } from "./helper/SingletonHelper";
 import { TimerHelper } from "./helper/TimerHelper";
 import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
 import { modifier_property } from "./npc/modifier/modifier_property";
@@ -22,15 +22,15 @@ export class GameEvent extends SingletonClass {
     }
 
     public addEvent() {
-        EventHelper.addGameEvent(GameEnum.Event.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned, this);
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned);
         // EventHelper.addGameEvent(GameEnum.Event.GameEvent.ServerSpawnEvent, this.onServerSpawnEvent, this);
         // EventHelper.addGameEvent(GameEnum.Event.GameEvent.DotaOnHeroFinishSpawnEvent, this.onHeroFinishSpawn, this);
-        EventHelper.addGameEvent(GameEnum.Event.GameEvent.game_rules_state_change, this.OnGameRulesStateChange, this);
-        EventHelper.addGameEvent(GameEnum.Event.GameEvent.EntityKilledEvent, this.OnEntityKilled, this);
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, this.OnGameRulesStateChange);
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityKilledEvent, this.OnEntityKilled);
         // EventHelper.addGameEvent(GameEnum.Event.GameEvent.DotaPlayerUsedAbilityEvent, this.OnAbilityUsed, this);
         // EventHelper.addGameEvent(EventInfo.ServerSpawnEvent, this.onServerSpawnEvent, this);
         /**JS 请求LUA 事件 */
-        EventHelper.addCustomEvent("JS_TO_LUA_EVENT", this.onJS_TO_LUA_EVENT, this);
+        EventHelper.addCustomEvent(this, "JS_TO_LUA_EVENT", this.onJS_TO_LUA_EVENT);
     }
 
     public OnNPCSpawned(event: NpcSpawnedEvent) {
@@ -38,14 +38,18 @@ export class GameEvent extends SingletonClass {
         if (spawnedUnit == null) return;
         let sUnitName = spawnedUnit.GetUnitName();
         if (sUnitName == GameEnum.Unit.UnitNames.npc_dota_thinker) {
-            return
+            return;
         }
         if (EntityHelper.checkIsFirstSpawn(spawnedUnit)) {
             modifier_property.apply(spawnedUnit, spawnedUnit);
-            spawnedUnit.SetPhysicalArmorBaseValue(0)
-            spawnedUnit.SetBaseMagicalResistanceValue(0)
-            if (spawnedUnit.InitActivityModifier) { spawnedUnit.InitActivityModifier() };
-            if (spawnedUnit.onSpawned) { spawnedUnit.onSpawned(event) };
+            spawnedUnit.SetPhysicalArmorBaseValue(0);
+            spawnedUnit.SetBaseMagicalResistanceValue(0);
+            if (spawnedUnit.InitActivityModifier) {
+                spawnedUnit.InitActivityModifier();
+            }
+            if (spawnedUnit.onSpawned) {
+                spawnedUnit.onSpawned(event);
+            }
             spawnedUnit.runSpawnedHandler();
             // --技能添加事件
             // let abilityCount = spawnedUnit.GetAbilityCount();
@@ -67,7 +71,6 @@ export class GameEvent extends SingletonClass {
             // end
             // return ability
         }
-
     }
 
     public OnGameRulesStateChange(): void {
@@ -75,41 +78,41 @@ export class GameEvent extends SingletonClass {
         LogHelper.print("OnGameRulesStateChange", nNewState);
         switch (nNewState) {
             case DOTA_GameState.DOTA_GAMERULES_STATE_INIT:
-                GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_INIT, GetSystemTimeMS() / 1000)
+                GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_INIT, GetSystemTimeMS() / 1000);
                 break;
             case DOTA_GameState.DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD:
-                GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD, GetSystemTimeMS() / 1000)
+                GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD, GetSystemTimeMS() / 1000);
                 break;
             // -- 游戏初始化
             case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
-                GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP, GetSystemTimeMS() / 1000)
-                GameDebugger.GetInstance().debugger_OnPlayerDisconnect()
+                GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP, GetSystemTimeMS() / 1000);
+                GameDebugger.GetInstance().debugger_OnPlayerDisconnect();
                 break;
             // 	-- 选择英雄,可以获取玩家数量
             case DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION:
-                this.StartGameMode_HERO_SELECTION()
+                this.StartGameMode_HERO_SELECTION();
                 break;
             // 	-- 策略时间 创建初始英雄，调用初始英雄脚本
             case DOTA_GameState.DOTA_GAMERULES_STATE_STRATEGY_TIME:
                 break;
             // 	队伍阵容调整阶段
             case DOTA_GameState.DOTA_GAMERULES_STATE_TEAM_SHOWCASE:
-                this.StartGameMode_TEAM_SHOWCASE()
+                this.StartGameMode_TEAM_SHOWCASE();
                 break;
             // 	地图加载阶段
             case DOTA_GameState.DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD:
                 break;
             // 	-- 准备阶段(进游戏，刷怪前)
             case DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME:
-                this.StartPreGame()
+                this.StartPreGame();
                 break;
             // -- 游戏准备开始
             case DOTA_GameState.DOTA_GAMERULES_STATE_GAME_IN_PROGRESS:
-                break
+                break;
             //  --游戏正式开始
             case DOTA_GameState.DOTA_GAMERULES_STATE_POST_GAME:
-                this.startGame()
-                break
+                this.startGame();
+                break;
         }
     }
     public StartGameMode_HERO_SELECTION() {
@@ -123,8 +126,7 @@ export class GameEvent extends SingletonClass {
         // System_Task.Init();
         // System_PlayerData.Init();
     }
-    public StartGameMode_TEAM_SHOWCASE() {
-    }
+    public StartGameMode_TEAM_SHOWCASE() {}
     public StartPreGame() {
         // // 创建NPC
         // let config = KVHelper.KvServerConfig.npc_position_config;
@@ -156,30 +158,27 @@ export class GameEvent extends SingletonClass {
      * 英雄创建完成事件
      * @param event
      */
-    public onHeroFinishSpawn(event: DotaOnHeroFinishSpawnEvent) {
-    }
+    public onHeroFinishSpawn(event: DotaOnHeroFinishSpawnEvent) {}
 
     /**游戏正式开始 */
-    public startGame() {
-    }
+    public startGame() {}
 
     public OnEntityKilled(events: EntityKilledEvent) {
         let hUnit = EntIndexToHScript(events.entindex_killed) as BaseNpc_Plus;
         if (!GameFunc.IsValid(hUnit)) {
-            return
+            return;
         }
         if (!hUnit.ETRoot) {
-            return
+            return;
         }
         let enemyUnit = hUnit.ETRoot.GetComponent(EnemyUnitComponent);
         if (!enemyUnit) {
-            return
+            return;
         }
         enemyUnit.EnemyUnitManager.killEnemy(hUnit.ETRoot);
     }
 
-    public OnAbilityUsed(event: DotaPlayerUsedAbilityEvent) {
-    }
+    public OnAbilityUsed(event: DotaPlayerUsedAbilityEvent) {}
 
     /**
      * JS 请求 LUA 事件
@@ -187,35 +186,38 @@ export class GameEvent extends SingletonClass {
      *
      * */
     public onJS_TO_LUA_EVENT(entindex: EntityIndex, event: JS_TO_LUA_DATA) {
-        if (event.protocol == null) { return };
+        if (event.protocol == null) {
+            return;
+        }
         let allCB = globalData.allCustomProtocolEvent[event.protocol];
         if (allCB && allCB.length > 0) {
-            allCB.forEach(
-                (cbinfo) => {
-                    let [status, nextCall] = xpcall(cbinfo.cb, (msg: any) => {
-                        return '\n' + LogHelper.traceFunc(msg) + '\n'
-                    }, cbinfo.context, event);
-                    if (!status) {
-                        LogHelper.error(`===============protocol error : ${event.protocol} ===================`)
-                        LogHelper.error(nextCall)
-                        GameRequest.GetInstance().SendErrorLog(nextCall)
-                        return
-                    }
-                    if (event.hasCB) {
-                        let player = PlayerResource.GetPlayer(event.PlayerID)
-                        if (player) {
-                            delete event['hasCB'];
-                            delete event['PlayerID'];
-                            // 处理复杂数据类型，数据类型
-                            if (event.data != null) { };
-                            CustomGameEventManager.Send_ServerToPlayer<JS_TO_LUA_DATA>(player, event.protocol, event);
+            allCB.forEach((cbinfo) => {
+                let [status, nextCall] = xpcall(
+                    cbinfo.cb,
+                    (msg: any) => {
+                        return "\n" + LogHelper.traceFunc(msg) + "\n";
+                    },
+                    cbinfo.context,
+                    event
+                );
+                if (!status) {
+                    LogHelper.error(`===============protocol error : ${event.protocol} ===================`);
+                    LogHelper.error(nextCall);
+                    GameRequest.GetInstance().SendErrorLog(nextCall);
+                    return;
+                }
+                if (event.hasCB) {
+                    let player = PlayerResource.GetPlayer(event.PlayerID);
+                    if (player) {
+                        delete event["hasCB"];
+                        delete event["PlayerID"];
+                        // 处理复杂数据类型，数据类型
+                        if (event.data != null) {
                         }
+                        CustomGameEventManager.Send_ServerToPlayer<JS_TO_LUA_DATA>(player, event.protocol, event);
                     }
                 }
-            )
+            });
         }
     }
-
-
-
 }

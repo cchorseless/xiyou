@@ -4,9 +4,9 @@
  */
 
 import { SingletonClass } from "./helper/SingletonHelper";
-import { AllEntity } from "./rules/AllEntity";
 import { BuildingSystem } from "./rules/System/Building/BuildingSystem";
 import { CombinationSystem } from "./rules/System/Combination/CombinationSystem";
+import { DrawSystem } from "./rules/System/Draw/DrawSystem";
 import { EnemySystem } from "./rules/System/Enemy/EnemySystem";
 import { PlayerSystem } from "./rules/System/Player/PlayerSystem";
 import { RoundSystem } from "./rules/System/Round/RoundSystem";
@@ -29,6 +29,7 @@ import { RoundSystem } from "./rules/System/Round/RoundSystem";
 export class GameModule extends SingletonClass {
     init() {
         PlayerSystem.init();
+        DrawSystem.init();
         // EnemySystem.init();
         // RoundSystem.init();
         // BuildingSystem.init();

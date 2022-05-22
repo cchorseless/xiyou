@@ -1,14 +1,15 @@
+import { LogHelper } from "./LogHelper";
 
 export module CSSHelper {
     export enum VCSSStyle {
         /**
-             * Controls blending mode for the panel. See CSS mix-blend-mode docs on web, except normal for us is with alpha blending.
-             *
-             * Examples:
-             * -s2-mix-blend-mode: normal;
-             * -s2-mix-blend-mode: multiply;
-             * -s2-mix-blend-mode: screen;
-             */
+         * Controls blending mode for the panel. See CSS mix-blend-mode docs on web, except normal for us is with alpha blending.
+         *
+         * Examples:
+         * -s2-mix-blend-mode: normal;
+         * -s2-mix-blend-mode: multiply;
+         * -s2-mix-blend-mode: screen;
+         */
         S2MixBlendMode,
 
         align,
@@ -873,22 +874,40 @@ export module CSSHelper {
     }
 
     export enum enumColor {
-        White = '#FFFFFFFF',
-        Red = '#ff0000FF',
-        Green = '#00ff00FF',
-        Blue = '#00ffffFF',
-        Purple = '#990099FF',
-        Yellow = '#ffff00FF'
+        White = "#FFFFFFFF",
+        Red = "#ff0000FF",
+        Green = "#00ff00FF",
+        Blue = "#00ffffFF",
+        Purple = "#990099FF",
+        Yellow = "#ffff00FF",
     }
     export enum enumColorDes {
-        White = 'white',
-        Red = 'red',
-        Green = 'green',
-        Blue = 'blue',
-        Purple = 'purple',
-        Yellow = 'yellow'
+        White = "white",
+        Red = "red",
+        Green = "green",
+        Blue = "blue",
+        Purple = "purple",
+        Yellow = "yellow",
     }
 
+    export function setLocalText(node: React.RefObject<LabelPanel>, str: string) {
+        if (node.current == null) {
+            return;
+        }
+        node.current.text = $.Localize("#" + str);
+    }
+    export function setFlowChildren(node: React.RefObject<Panel>, str: "right-wrap" | "right" | "down" = "right-wrap") {
+        if (node.current == null) {
+            return;
+        }
+        node.current.style.flowChildren = str;
+    }
+    export function setBgImageUrl(node: React.RefObject<Panel>, str: string) {
+        if (node.current == null) {
+            return;
+        }
+        node.current.style.backgroundImage = `url("file://{images}/${str}")`;
+    }
 
     /**
      * 添加边框
@@ -897,8 +916,10 @@ export module CSSHelper {
      * @returns
      */
     export function addBorderStyle(node: React.RefObject<any>, color: enumColor = enumColor.White) {
-        if (node == null) { return }
-        node.current!.style.border = `2px solid ${color}`
+        if (node == null) {
+            return;
+        }
+        node.current!.style.border = `2px solid ${color}`;
     }
     /**
      *取消边框
@@ -906,28 +927,28 @@ export module CSSHelper {
      * @returns
      */
     export function removeBorderStyle(node: React.RefObject<any>) {
-        if (node == null) { return }
-        node.current!.style.border = null
+        if (node == null) {
+            return;
+        }
+        node.current!.style.border = null;
     }
 
     export namespace HtmlTxt {
         interface HtmlTxtStyle {
-            color?: enumColorDes,
-            fontSize?: number,
+            color?: enumColorDes;
+            fontSize?: number;
         }
         export function createHtmlTxt(string: string, style: HtmlTxtStyle | null = null) {
-            let s = '';
+            let s = "";
             if (style != null) {
                 if (style.color) {
-                    s += `color="${style.color}" `
+                    s += `color="${style.color}" `;
                 }
                 if (style.fontSize) {
-                    s += `fontSize=${style.fontSize} `
+                    s += `fontSize=${style.fontSize} `;
                 }
             }
-            return `<font ${s}>${string}</font>`
-
+            return `<font ${s}>${string}</font>`;
         }
     }
-
 }

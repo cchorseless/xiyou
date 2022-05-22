@@ -1,6 +1,6 @@
 import { GameMode } from "./GameMode";
 import { TimerHelper } from "./helper/TimerHelper";
-import { AllEntity } from "./rules/AllEntity";
+import { AllEntity } from "./AllEntity";
 AllEntity.init();
 TimerHelper.TimeWorker.Start();
 Object.assign(getfenv(), {

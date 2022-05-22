@@ -1,0 +1,21 @@
+// generate with PIPIXIA's kv generator 
+
+"common_abilities" {
+	"ability_empty" {
+		"BaseClass" "ability_datadriven"
+		"AbilityTextureName" "empty"
+		"MaxLevel" "0"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+
+	}
+	"ability_tp" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/common/ability_tp"
+		"AbilityTextureName" "furion_teleportation"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilityCooldown" "1"
+
+	}
+
+}

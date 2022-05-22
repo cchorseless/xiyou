@@ -10,23 +10,21 @@ import { GameRequest } from "../../service/GameRequest";
 import { ET } from "../../rules/Entity/Entity";
 import { PrecacheHelper } from "../../helper/PrecacheHelper";
 
-export interface BaseAbility extends CDOTA_Ability_Lua { }
+export interface BaseAbility extends CDOTA_Ability_Lua {}
 export class BaseAbility {
-
     /**查找技能 */
     static findIn<T extends typeof BaseAbility>(this: T, target: CDOTA_BaseNPC) {
         return target.FindAbilityByName(this.name) as InstanceType<T>;
     }
 }
 
-export interface BaseItem extends CDOTA_Item_Lua { }
-export class BaseItem { }
+export interface BaseItem extends CDOTA_Item_Lua {}
+export class BaseItem {}
 
-export interface BaseModifier extends CDOTA_Modifier_Lua { }
+export interface BaseModifier extends CDOTA_Modifier_Lua {}
 export class BaseModifier {
-
     /**本地特效时间 */
-    public static LOCAL_PARTICLE_MODIFIER_DURATION = 3 / 30
+    public static LOCAL_PARTICLE_MODIFIER_DURATION = 3 / 30;
 
     /**
      * 新增BUFF,只能在服务器运行
@@ -36,20 +34,14 @@ export class BaseModifier {
      * @param modifierTable 注意：不会同步到客户端,这里最好不要传数据
      * @returns
      */
-    public static apply<T extends typeof BaseModifier>(
-        this: T,
-        target: BaseNpc_Plus,
-        caster?: BaseNpc_Plus,
-        ability?: BaseAbility_Plus,
-        modifierTable?: ModifierTable,
-    ): InstanceType<T> {
+    public static apply<T extends typeof BaseModifier>(this: T, target: BaseNpc_Plus, caster?: BaseNpc_Plus, ability?: BaseAbility_Plus, modifierTable?: ModifierTable): InstanceType<T> {
         if (IsServer()) {
             let m = target.AddNewModifier(caster, ability, this.name, modifierTable) as InstanceType<T>;
             if (m && m.UUID) {
                 globalData.allModifiersIntance[this.name] = globalData.allModifiersIntance[this.name] || {};
                 globalData.allModifiersIntance[this.name][m.UUID] = m;
             }
-            return m
+            return m;
         }
     }
 
@@ -62,24 +54,15 @@ export class BaseModifier {
      * @param modifierTable
      * @returns
      */
-    public static applyOnly<T extends typeof BaseModifier>(
-        this: T,
-        target: BaseNpc_Plus,
-        caster?: BaseNpc_Plus,
-        ability?: BaseAbility_Plus,
-        modifierTable?: ModifierTable,
-    ): InstanceType<T> {
+    public static applyOnly<T extends typeof BaseModifier>(this: T, target: BaseNpc_Plus, caster?: BaseNpc_Plus, ability?: BaseAbility_Plus, modifierTable?: ModifierTable): InstanceType<T> {
         if (IsServer()) {
             if (this.exist(target)) {
-                return this.findIn(target, caster)
-            }
-            else {
-                return this.apply(target, caster, ability, modifierTable)
+                return this.findIn(target, caster);
+            } else {
+                return this.apply(target, caster, ability, modifierTable);
             }
         }
     }
-
-
 
     /**
      * 创造一个单位，并给他加BUFF
@@ -103,7 +86,7 @@ export class BaseModifier {
     ): BaseNpc_Plus {
         if (IsServer()) {
             if (teamNumber == null) {
-                teamNumber = caster.GetTeamNumber()
+                teamNumber = caster.GetTeamNumber();
             }
             let n = CreateModifierThinker(caster, ability, this.name, modifierTable, position, teamNumber, phantomBlocker) as BaseNpc;
             GameFunc.BindInstanceToCls(n, BaseNpc);
@@ -111,11 +94,10 @@ export class BaseModifier {
             if (m && m.UUID) {
                 globalData.allModifiersIntance[this.name] = globalData.allModifiersIntance[this.name] || {};
                 globalData.allModifiersIntance[this.name][m.UUID] = m;
-            };
-            return n as BaseNpc_Plus
+            }
+            return n as BaseNpc_Plus;
         }
     }
-
 
     /**
      * 移除BUFF
@@ -126,10 +108,9 @@ export class BaseModifier {
     public static remove<T extends typeof BaseModifier>(this: T, target: CDOTA_BaseNPC, caster?: CDOTA_BaseNPC) {
         if (IsServer()) {
             if (caster) {
-                target.RemoveModifierByNameAndCaster(this.name, caster)
-            }
-            else {
-                target.RemoveModifierByName(this.name)
+                target.RemoveModifierByNameAndCaster(this.name, caster);
+            } else {
+                target.RemoveModifierByName(this.name);
             }
         }
     }
@@ -137,19 +118,21 @@ export class BaseModifier {
     /**获取所有的实例数据 */
     public static GetAllInstance<T extends typeof BaseModifier>(this: T) {
         if (globalData.allModifiersIntance[this.name]) {
-            return globalData.allModifiersIntance[this.name] as Readonly<{ [UUID: string]: InstanceType<T> }>
+            return globalData.allModifiersIntance[this.name] as Readonly<{ [UUID: string]: InstanceType<T> }>;
         }
     }
     /**重载 */
     public static reload<T extends typeof BaseModifier>(this: T) {
-        if (!IsServer()) { return };
+        if (!IsServer()) {
+            return;
+        }
         let _instanceArr = this.GetAllInstance();
         if (_instanceArr) {
             for (let uuid in _instanceArr) {
                 let m = _instanceArr[uuid] as any;
-                let _ma = (getmetatable(m).__index) as any
+                let _ma = getmetatable(m).__index as any;
                 Object.assign(_ma, this.prototype);
-                m.SendBuffRefreshToClients()
+                m.SendBuffRefreshToClients();
                 // LogHelper.print(m.aaa())
                 break;
             }
@@ -163,7 +146,7 @@ export class BaseModifier {
      */
     public static exist<T extends typeof BaseModifier>(this: T, target: CDOTA_BaseNPC) {
         if (target) {
-            return target.HasModifier(this.name)
+            return target.HasModifier(this.name);
         }
     }
 
@@ -176,9 +159,9 @@ export class BaseModifier {
     public static findIn<T extends typeof BaseModifier>(this: T, target: CDOTA_BaseNPC, caster: CDOTA_BaseNPC = null): InstanceType<T> | null {
         if (target && this.exist(target)) {
             if (caster) {
-                return target.FindModifierByNameAndCaster(this.name, caster) as InstanceType<T>
+                return target.FindModifierByNameAndCaster(this.name, caster) as InstanceType<T>;
             }
-            return target.FindModifierByName(this.name) as InstanceType<T>
+            return target.FindModifierByName(this.name) as InstanceType<T>;
         }
     }
 
@@ -186,16 +169,15 @@ export class BaseModifier {
         if (target && this.exist(target)) {
             let m;
             if (caster) {
-                m = target.FindModifierByNameAndCaster(this.name, caster) as InstanceType<T>
-            }
-            else {
-                m = target.FindModifierByName(this.name) as InstanceType<T>
+                m = target.FindModifierByNameAndCaster(this.name, caster) as InstanceType<T>;
+            } else {
+                m = target.FindModifierByName(this.name) as InstanceType<T>;
             }
             if (m) {
-                return m.GetStackCount()
+                return m.GetStackCount();
             }
         }
-        return 0
+        return 0;
     }
 
     /**
@@ -204,11 +186,13 @@ export class BaseModifier {
      * @returns
      */
     public static GetAllModifiersInfo<T extends BaseModifier>(hCaster: BaseNpc_Plus): { [v: string]: Array<T> } {
-        if (hCaster == null) { return }
-        if (hCaster.__allModifiersInfo__ == null) {
-            hCaster.__allModifiersInfo__ = {}
+        if (hCaster == null) {
+            return;
         }
-        return hCaster.__allModifiersInfo__
+        if (hCaster.__allModifiersInfo__ == null) {
+            hCaster.__allModifiersInfo__ = {};
+        }
+        return hCaster.__allModifiersInfo__;
     }
     /**所有注册的属性 */
     public __AllRegisterProperty: { [v: string]: Set<string> };
@@ -218,21 +202,33 @@ export class BaseModifier {
     public __AllRegisterEvent: { [v: string]: [Set<(...args: any[]) => void>, Set<(...args: any[]) => void>] };
 
     /**是否隐藏 */
-    public IsHidden() { return true }
+    public IsHidden() {
+        return true;
+    }
     /**是否是debuff */
-    public IsDebuff() { return false }
+    public IsDebuff() {
+        return false;
+    }
     /**是否可以驱散 */
-    public IsPurgable() { return false }
-    public IsPurgeException() { return false }
+    public IsPurgable() {
+        return false;
+    }
+    public IsPurgeException() {
+        return false;
+    }
     /**是否是眩晕BUFF */
-    public IsStunDebuff() { return false }
-    public AllowIllusionDuplicate() { return false }
+    public IsStunDebuff() {
+        return false;
+    }
+    public AllowIllusionDuplicate() {
+        return false;
+    }
     /**初始化自己，OnCreated和OnRefresh都会调用 */
-    public Init(params?: object) { }
+    public Init(params?: object) {}
     /**  计时器 */
     public addTimer(n: number, cb: (this: any) => void | number) {
         let s = TimerHelper.addTimer(n, cb, this);
-        return s
+        return s;
     }
     /**
      * 帧数计时器
@@ -242,7 +238,7 @@ export class BaseModifier {
      */
     public addFrameTimer(delayFrame: number, cb: (this: any) => void | number) {
         let s = TimerHelper.addFrameTimer(delayFrame, cb, this);
-        return s
+        return s;
     }
     public DeclareFunctions?(): modifierfunction[] {
         let _all_set = new Set<modifierfunction>();
@@ -250,27 +246,25 @@ export class BaseModifier {
         let _Function = this.__AllRegisterFunction;
         let _hasExit = GameEnum.Property.CustomDeclarePropertyEvent;
         if (_Function != null) {
-            Object.keys(_Function).forEach(
-                (s: string) => {
-                    let _s = tonumber(s);
-                    if (!_hasExit.has(_s) && _s <= modifierfunction.MODIFIER_FUNCTION_INVALID) {
-                        _all_set.add(_s)
-                    }
+            Object.keys(_Function).forEach((s: string) => {
+                let _s = tonumber(s);
+                if (!_hasExit.has(_s) && _s <= modifierfunction.MODIFIER_FUNCTION_INVALID) {
+                    _all_set.add(_s);
                 }
-            )
+            });
         }
         if (_Property != null) {
-            Object.keys(_Property).forEach(
-                (s: string) => {
-                    let _s = tonumber(s);
-                    if (!_hasExit.has(_s) && _s <= modifierfunction.MODIFIER_FUNCTION_INVALID) {
-                        _all_set.add(_s)
-                    }
+            Object.keys(_Property).forEach((s: string) => {
+                let _s = tonumber(s);
+                if (!_hasExit.has(_s) && _s <= modifierfunction.MODIFIER_FUNCTION_INVALID) {
+                    _all_set.add(_s);
                 }
-            )
+            });
         }
         _all_set.forEach((params) => {
-            if (_hasExit.has(params as any)) { return };
+            if (_hasExit.has(params as any)) {
+                return;
+            }
             let propName = GameEnum.Property.Enum_MODIFIER_PROPERTY[params];
             if (propName != null) {
                 let funcName = (GameEnum.Property.Enum_MODIFIER_PROPERTY_FUNC as any)[propName];
@@ -280,60 +274,54 @@ export class BaseModifier {
                         let _r_ = "";
                         let _Property = this.__AllRegisterProperty;
                         let _Function = this.__AllRegisterFunction;
-                        let _sum = (GameEnum.Property.UNIQUE_PROPERTY.indexOf(params as any) == -1);
+                        let _sum = GameEnum.Property.UNIQUE_PROPERTY.indexOf(params as any) == -1;
                         if (_Property && _Property[params]) {
-                            _Property[params].forEach(
-                                (attr: string) => {
-                                    let r = (this as any)[attr];
-                                    if (r) {
-                                        switch (typeof r) {
-                                            case 'number':
-                                                if (_sum) {
-                                                    _r += r
-                                                }
-                                                else {
-                                                    _r = math.max(_r, r)
-                                                }
-                                                break;
-                                            case 'string':
-                                                _r_ = r
-                                                break;
-                                        }
+                            _Property[params].forEach((attr: string) => {
+                                let r = (this as any)[attr];
+                                if (r) {
+                                    switch (typeof r) {
+                                        case "number":
+                                            if (_sum) {
+                                                _r += r;
+                                            } else {
+                                                _r = math.max(_r, r);
+                                            }
+                                            break;
+                                        case "string":
+                                            _r_ = r;
+                                            break;
                                     }
                                 }
-                            );
+                            });
                         }
                         if (_Function && _Function[params]) {
-                            _Function[params].forEach(
-                                (func) => {
-                                    let [func_finish, r] = pcall(func, this, event)
-                                    if (func_finish && r) {
-                                        switch (typeof r) {
-                                            case 'number':
-                                                if (_sum) {
-                                                    _r += r
-                                                }
-                                                else {
-                                                    _r = math.max(_r, r)
-                                                }
-                                                break;
-                                            case 'string':
-                                                _r_ = r
-                                                break;
-                                        }
+                            _Function[params].forEach((func) => {
+                                let [func_finish, r] = pcall(func, this, event);
+                                if (func_finish && r) {
+                                    switch (typeof r) {
+                                        case "number":
+                                            if (_sum) {
+                                                _r += r;
+                                            } else {
+                                                _r = math.max(_r, r);
+                                            }
+                                            break;
+                                        case "string":
+                                            _r_ = r;
+                                            break;
                                     }
                                 }
-                            )
+                            });
                         }
                         // 优先返回字符串
                         if (_r_.length != 0) {
-                            return _r_
+                            return _r_;
                         }
                         return _r;
-                    }
+                    };
                 }
             }
-        })
+        });
         return GameFunc.ArrayFunc.FromSet(_all_set);
     }
     /**唯一识别ID */
@@ -345,20 +333,22 @@ export class BaseModifier {
         }
         (params as ModifierTable).IsOnCreated = true;
         (params as ModifierTable).IsOnRefresh = false;
-        LogHelper.print('OnCreated :' + this.GetName());
+        LogHelper.print("OnCreated :" + this.GetName());
         this.Init(params);
-        if (this.__AllRegisterProperty == null && this.__AllRegisterFunction == null && this.__AllRegisterEvent == null) { return }
-        let info = BaseModifier.GetAllModifiersInfo(this.GetParentPlus())
+        if (this.__AllRegisterProperty == null && this.__AllRegisterFunction == null && this.__AllRegisterEvent == null) {
+            return;
+        }
+        let info = BaseModifier.GetAllModifiersInfo(this.GetParentPlus());
         if (info == null) return;
         if (info[this.GetName()] == null) {
-            info[this.GetName()] = []
+            info[this.GetName()] = [];
         }
         info[this.GetName()].push(this);
         // 同步事件
         if (this.__AllRegisterEvent) {
             for (let k in this.__AllRegisterEvent) {
                 globalData.allRegisterEvent[k] = globalData.allRegisterEvent[k] || new Set();
-                globalData.allRegisterEvent[k].add(this)
+                globalData.allRegisterEvent[k].add(this);
             }
         }
     }
@@ -370,23 +360,25 @@ export class BaseModifier {
         this.Init(params);
     }
     /**是否被销毁 */
-    public IsNull() { return this.__destroyed }
+    public IsNull() {
+        return this.__destroyed;
+    }
     private __destroyed: boolean = true;
     public OnDestroy() {
-        let info = BaseModifier.GetAllModifiersInfo(this.GetParentPlus())
-        let classname = this.GetName()
+        let info = BaseModifier.GetAllModifiersInfo(this.GetParentPlus());
+        let classname = this.GetName();
         // 删除数据
         if (info && info[classname]) {
             let len = info[classname].length;
             for (let i = 0; i < len; i++) {
                 if (this.UUID == info[classname][i].UUID) {
                     // 删除元素
-                    info[classname].splice(i, 1)
-                    break
+                    info[classname].splice(i, 1);
+                    break;
                 }
             }
             if (info[classname].length == 0) {
-                delete info[classname]
+                delete info[classname];
             }
         }
         this.__AllRegisterFunction = null;
@@ -395,7 +387,7 @@ export class BaseModifier {
         if (this.__AllRegisterEvent) {
             for (let k in this.__AllRegisterEvent) {
                 if (globalData.allRegisterEvent[k]) {
-                    globalData.allRegisterEvent[k].delete(this)
+                    globalData.allRegisterEvent[k].delete(this);
                 }
             }
         }
@@ -405,17 +397,15 @@ export class BaseModifier {
         this.StartIntervalThink(-1);
         if (this.UUID && globalData.allModifiersIntance[classname]) {
             if (globalData.allModifiersIntance[classname][this.UUID]) {
-                delete globalData.allModifiersIntance[classname][this.UUID]
+                delete globalData.allModifiersIntance[classname][this.UUID];
             }
             if (Object.keys(globalData.allModifiersIntance[classname]).length == 0) {
-                delete globalData.allModifiersIntance[classname]
+                delete globalData.allModifiersIntance[classname];
             }
         }
         this.__destroyed = true;
-        LogHelper.print(this.GetName() + ' destroy ')
+        LogHelper.print(this.GetName() + " destroy ");
     }
-
-
 
     /**
      * 圆形范围找敌方单位
@@ -425,7 +415,9 @@ export class BaseModifier {
      */
     FindEnemyInRadius(radius: number, p: Vector = null) {
         if (IsServer()) {
-            if (p == null) { p = this.GetCaster().GetAbsOrigin() }
+            if (p == null) {
+                p = this.GetCaster().GetAbsOrigin();
+            }
             let teamNumber = this.GetCaster().GetTeamNumber();
             return AoiHelper.FindEntityInRadius(teamNumber, p, radius);
         }
@@ -444,7 +436,7 @@ export class BaseModifier {
     }
     /**自己给自己施法的 */
     IsCastBySelf() {
-        return this.GetCasterPlus().GetEntityIndex() == this.GetParentPlus().GetEntityIndex()
+        return this.GetCasterPlus().GetEntityIndex() == this.GetParentPlus().GetEntityIndex();
     }
 
     /**
@@ -454,33 +446,31 @@ export class BaseModifier {
      * @returns
      */
     GetSpecialValueFor(s: string, default_V = 0): number {
-        let r = 0
+        let r = 0;
         if (this.GetAbility() == null) {
             r = (this as any)[s];
+        } else {
+            r = this.GetAbilityPlus().GetSpecialValueFor(s) || 0;
         }
-        else {
-            r = this.GetAbilityPlus().GetSpecialValueFor(s) || 0
-        };
         if (r && r != 0) {
-            return r
-        }
-        else {
-            return default_V
+            return r;
+        } else {
+            return default_V;
         }
     }
 
     GetLevelSpecialValueFor(s: string, lvl: number) {
         if (this.GetAbility() == null) {
             let r = (this as any)[s];
-            return r || 0
+            return r || 0;
         }
-        return this.GetAbility().GetLevelSpecialValueFor(s, lvl)
+        return this.GetAbility().GetLevelSpecialValueFor(s, lvl);
     }
     GetAbilityLevel() {
         if (this.GetAbility() == null) {
-            return -1
+            return -1;
         }
-        return this.GetAbility().GetLevel()
+        return this.GetAbility().GetLevel();
     }
     /**
      * 更改BUFF层数
@@ -488,13 +478,13 @@ export class BaseModifier {
      * @returns
      */
     changeStackCount(iCount: number) {
-        let oldCount = this.GetStackCount()
-        this.SetStackCount(Math.max(0, oldCount + iCount))
-        return this.GetStackCount()
+        let oldCount = this.GetStackCount();
+        this.SetStackCount(Math.max(0, oldCount + iCount));
+        return this.GetStackCount();
     }
 }
 
-export interface BaseNpc extends CDOTA_BaseNPC { }
+export interface BaseNpc extends CDOTA_BaseNPC {}
 export class BaseNpc implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
     /**对应dota内的名字 */
@@ -506,44 +496,45 @@ export class BaseNpc implements ET.IEntityRoot {
     /**所有的BUFF信息 */
     __allModifiersInfo__?: { [v: string]: Array<any> };
 
-    private __SpawnedHandler__?: Array<ET.Handler>
+    private __SpawnedHandler__?: Array<ET.Handler>;
     /**是否已经被安全销毁 */
     __safedestroyed__?: boolean = false;
     /**缓存 */
-    Precache?(context: CScriptPrecacheContext) { };
+    Precache?(context: CScriptPrecacheContext) {}
     /**出生 */
-    Spawn?(entityKeyValues: CScriptKeyValues) { };
+    Spawn?(entityKeyValues: CScriptKeyValues) {}
     /**Spawn事件后执行
      * @both
      */
-    onSpawned?(event: NpcSpawnedEvent) { };
+    onSpawned?(event: NpcSpawnedEvent) {}
     /**onSpawned之后执行，激活 */
-    Activate?() { };
+    Activate?() {}
     /**
      * @override
      * 删除
      * */
-    UpdateOnRemove?() { };
+    UpdateOnRemove?() {}
     addSpawnedHandler?(handler: ET.Handler) {
         if (this.__bIsFirstSpawn) {
             handler.run();
-        }
-        else {
+        } else {
             this.__SpawnedHandler__ = this.__SpawnedHandler__ || [];
-            this.__SpawnedHandler__.push(handler)
+            this.__SpawnedHandler__.push(handler);
         }
-    };
+    }
 
     runSpawnedHandler?() {
         if (this.__SpawnedHandler__ && this.__SpawnedHandler__.length > 0) {
-            this.__SpawnedHandler__.forEach((handler) => { handler.run() });
+            this.__SpawnedHandler__.forEach((handler) => {
+                handler.run();
+            });
             this.__SpawnedHandler__ = null;
-        };
+        }
     }
     /**  计时器 */
     addTimer?(n: number, cb: (this: any) => void | number) {
         let s = TimerHelper.addTimer(n, cb, this);
-        return s
+        return s;
     }
     /**
      * 帧数计时器
@@ -553,30 +544,34 @@ export class BaseNpc implements ET.IEntityRoot {
      */
     addFrameTimer?(delayFrame: number, cb: (this: any) => void | number) {
         let s = TimerHelper.addFrameTimer(delayFrame, cb, this);
-        return s
+        return s;
     }
 
     /**
      * 是否是真实单位
      */
     IsRealUnit?() {
-        return !(this.IsIllusion() || this.IsClone() || this.IsTempestDouble())
+        return !(this.IsIllusion() || this.IsClone() || this.IsTempestDouble());
     }
     /**
      * 安全销毁实体
      */
     SafeDestroy?() {
-        if (!IsServer()) { return }
+        if (!IsServer()) {
+            return;
+        }
         if (GameFunc.IsValid(this)) {
-            if (this.__safedestroyed__) { return };
+            if (this.__safedestroyed__) {
+                return;
+            }
             this.__safedestroyed__ = true;
-            LogHelper.print(this.GetUnitName(), 'SafeDestroy')
+            LogHelper.print(this.GetUnitName(), "SafeDestroy");
             let allm = this.FindAllModifiers();
             for (let m of allm) {
-                m.Destroy()
+                m.Destroy();
             }
             TimerHelper.removeAllTimer(this);
-            UTIL_Remove(this)
+            UTIL_Remove(this);
         }
     }
     //#region 天赋
@@ -586,19 +581,19 @@ export class BaseNpc implements ET.IEntityRoot {
      * @returns
      */
     HasTalent?(sTalentName: string | number): BaseAbility_Plus {
-        if (this == null) return
+        if (this == null) return;
         let hTalent;
         switch (typeof sTalentName) {
-            case 'number':
-                hTalent = this.GetAbilityByIndex(sTalentName)
-                break
-            case 'string':
-                hTalent = this.FindAbilityByName(sTalentName)
-                break
+            case "number":
+                hTalent = this.GetAbilityByIndex(sTalentName);
+                break;
+            case "string":
+                hTalent = this.FindAbilityByName(sTalentName);
+                break;
         }
-        if (hTalent == null) return
-        if (hTalent.GetLevel() <= 0) return
-        return hTalent as BaseAbility_Plus
+        if (hTalent == null) return;
+        if (hTalent.GetLevel() <= 0) return;
+        return hTalent as BaseAbility_Plus;
     }
 
     /**
@@ -606,12 +601,12 @@ export class BaseNpc implements ET.IEntityRoot {
      * @param sTalentName 天赋的名字或者索引
      * @returns
      */
-    GetTalentValue?(sTalentName: string | number, sSpecialName: string = 'value', default_V: number = 0): number {
+    GetTalentValue?(sTalentName: string | number, sSpecialName: string = "value", default_V: number = 0): number {
         let hTalent = this.HasTalent(sTalentName);
         if (hTalent) {
-            return hTalent.GetSpecialValueFor(sSpecialName, default_V)
+            return hTalent.GetSpecialValueFor(sSpecialName, default_V);
         }
-        return default_V
+        return default_V;
     }
     //#endregion
 
@@ -621,7 +616,7 @@ export class BaseNpc implements ET.IEntityRoot {
      */
     HasShard?() {
         // return hCaster.HasModifier()
-        return false
+        return false;
     }
     /**
      * 异常状态抵抗百分比，用于异常状态持续时间
@@ -629,12 +624,11 @@ export class BaseNpc implements ET.IEntityRoot {
      * @returns
      */
     GetStatusResistanceFactor?(n: CDOTA_BaseNPC) {
-        return 1
+        return 1;
     }
 
-
     IsFriendly?(hTarget: BaseNpc) {
-        return this.GetTeamNumber() == hTarget.GetTeamNumber()
+        return this.GetTeamNumber() == hTarget.GetTeamNumber();
     }
     ModifyMaxHealth?(fChanged: number) {
         // let fHealthPercent = this.GetHealth() / this.GetMaxHealth()
@@ -648,21 +642,21 @@ export class BaseNpc implements ET.IEntityRoot {
         // this.SetMaxHealth(fCorrectHealth)
         // this.ModifyHealth(fHealthPercent * fCorrectHealth, null, false, 0)
     }
-};
+}
 
-export interface BaseNpc_Hero extends CDOTA_BaseNPC_Hero { }
-export class BaseNpc_Hero extends BaseNpc { };
+export interface BaseNpc_Hero extends CDOTA_BaseNPC_Hero {}
+export class BaseNpc_Hero extends BaseNpc {}
 
-export interface BaseModifierMotionHorizontal extends CDOTA_Modifier_Lua_Horizontal_Motion { }
-export class BaseModifierMotionHorizontal extends BaseModifier { }
+export interface BaseModifierMotionHorizontal extends CDOTA_Modifier_Lua_Horizontal_Motion {}
+export class BaseModifierMotionHorizontal extends BaseModifier {}
 
-export interface BaseModifierMotionVertical extends CDOTA_Modifier_Lua_Vertical_Motion { }
-export class BaseModifierMotionVertical extends BaseModifier { }
+export interface BaseModifierMotionVertical extends CDOTA_Modifier_Lua_Vertical_Motion {}
+export class BaseModifierMotionVertical extends BaseModifier {}
 
-export interface BaseModifierMotionBoth extends CDOTA_Modifier_Lua_Motion_Both { }
-export class BaseModifierMotionBoth extends BaseModifier { }
+export interface BaseModifierMotionBoth extends CDOTA_Modifier_Lua_Motion_Both {}
+export class BaseModifierMotionBoth extends BaseModifier {}
 
-LogHelper.print('------------------------', "setmetatable", '------------------------------')
+LogHelper.print("------------------------", "setmetatable", "------------------------------");
 // Add standard base classes to prototype chain to make `super.*` work as `self.BaseClass.*`
 setmetatable(BaseAbility.prototype, { __index: IsServer() ? CDOTA_Ability_Lua : C_DOTA_Ability_Lua });
 setmetatable(BaseItem.prototype, { __index: IsServer() ? CDOTA_Item_Lua : C_DOTA_Item_Lua });
@@ -670,11 +664,7 @@ setmetatable(BaseModifier.prototype, { __index: IsServer() ? CDOTA_Modifier_Lua 
 setmetatable(BaseNpc.prototype, { __index: IsServer() ? CDOTA_BaseNPC : C_DOTA_BaseNPC });
 setmetatable(BaseNpc_Hero.prototype, { __index: IsServer() ? CDOTA_BaseNPC_Hero : C_DOTA_BaseNPC_Hero });
 
-export const registerAbility = (
-    abilityName?: string,
-    localizationTokens?: { [x: string]: string; },
-    name?: string,
-) => (ability: new () => CDOTA_Ability_Lua | CDOTA_Item_Lua) => {
+export const registerAbility = (name?: string) => (ability: new () => CDOTA_Ability_Lua | CDOTA_Item_Lua) => {
     if (name !== undefined) {
         // @ts-ignore
         ability.name = name;
@@ -684,6 +674,7 @@ export const registerAbility = (
     const [env] = getFileScope();
     if (env[name]) {
         clearTable(env[name]);
+    } else {
     }
     env[name] = {} as any;
     toDotaClassInstance(env[name], ability);
@@ -715,7 +706,7 @@ export const registerModifier = (modifierName?: string, modifierDescription?: st
     env[name].OnCreated = function (parameters: any) {
         this.____constructor();
         if (originalOnCreated) {
-            pcall(originalOnCreated, this, parameters)
+            pcall(originalOnCreated, this, parameters);
         }
     };
     let type = LuaModifierType.LUA_MODIFIER_MOTION_NONE;
@@ -739,12 +730,8 @@ export const registerModifier = (modifierName?: string, modifierDescription?: st
 };
 
 /**注册单位 */
-export const registerUnit = (
-    unitName?: string,
-    localizationTokens?: { [x: string]: string; },
-    _name?: string,
-) => (unit: new () => BaseNpc | BaseNpc_Hero) => {
-    let name = 'thisEntity';
+export const registerUnit = (unitName?: string, localizationTokens?: { [x: string]: string }, _name?: string) => (unit: new () => BaseNpc | BaseNpc_Hero) => {
+    let name = "thisEntity";
     const [env] = getFileScope();
     env[name] = env[name] || {};
     toDotaClassInstance(env[name], unit);
@@ -762,9 +749,7 @@ export const registerUnit = (
         env[name].UpdateOnRemove && env[name].UpdateOnRemove();
     };
     PrecacheHelper.RegClass([unit]);
-
 };
-
 
 function clearTable(table: any) {
     for (const key in table) {

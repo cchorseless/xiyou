@@ -19,7 +19,7 @@ export class GameService extends SingletonClass {
     }
 
     public addEvent() {
-        EventHelper.addGameEvent(GameEnum.Event.GameEvent.game_rules_state_change, this.OnGameRulesStateChange, this);
+        EventHelper.addGameEvent(this,GameEnum.Event.GameEvent.game_rules_state_change, this.OnGameRulesStateChange);
     }
 
     public OnGameRulesStateChange(e: any) {
