@@ -78,8 +78,6 @@ import { BasePureComponent } from "../../libs/BasePureComponent";
 import { GameEnum } from "../../libs/GameEnum";
 import { RootPanel } from "../../view/game_main";
 import { MainPanel } from "../../view/MainPanel/MainPanel";
-import { TeamAgreeGoForTaskDialog } from "../../view/TeamPanel/TeamAgreeGoForTaskDialog";
-import { TeamPanel } from "../../view/TeamPanel/TeamPanel";
 import { TopBarPanel } from "../../view/TopBarPanel/TopBarPanel";
 export module System_Avalon {
 
@@ -242,8 +240,6 @@ export module System_Avalon {
                     // 刷新顶部条
                     TopBarPanel.GetInstance()?.updateUI()
                     // 刷新主界面
-                    MainPanel.GetInstance()?.updateRoundUI();
-                    MainPanel.GetInstance()?.updateshowAllInfo();
                 }
             }, System_Avalon);
             // 监听服务器推送创建队伍

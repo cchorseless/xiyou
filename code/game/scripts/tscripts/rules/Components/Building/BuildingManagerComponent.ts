@@ -15,7 +15,6 @@ import { BuildingComponent } from "./BuildingComponent";
 
 /**塔防组件 */
 export class BuildingManagerComponent extends ET.Component {
-
     /**当前人口数量 */
     curPopulation: number = 0;
     /**当前人口上限 */
@@ -27,9 +26,7 @@ export class BuildingManagerComponent extends ET.Component {
 
     tGlobalBuffs: BuildingConfig.IBuffInfo[] = [];
 
-    onAwake() {
-
-    }
+    onAwake() {}
 
     /**
      * 获取空闲人口数量
@@ -41,12 +38,12 @@ export class BuildingManagerComponent extends ET.Component {
     }
 
     /**
-       * 放置建築
-       * @param hero
-       * @param name
-       * @param location
-       * @param angle
-       */
+     * 放置建築
+     * @param hero
+     * @param name
+     * @param location
+     * @param angle
+     */
     public placeBuilding(towerID: string, location: Vector, angle: number = BuildingConfig.BUILDING_ANGLE) {
         let domain = this.GetDomain<BaseNpc_Plus>();
         let playerID = domain.GetPlayerOwnerID();
@@ -55,7 +52,7 @@ export class BuildingManagerComponent extends ET.Component {
         let bHasCount = this.getBuildingCount(towerID);
         if (bHasCount >= BuildingConfig.MAX_SAME_TOWER) {
             EventHelper.ErrorMessage(GameEnum.Event.ErrorCode.dota_hud_error_has_same_tower, playerID);
-            return
+            return;
         }
         //  人口判断
         // let iPopulationAdd = BuildingSystem.GetBuildingPopulation(towerID);
@@ -65,7 +62,9 @@ export class BuildingManagerComponent extends ET.Component {
         //     return false
         // }
         let building = EntityHelper.CreateEntityByName(towerID, location, domain.GetTeamNumber(), false, domain, domain) as BaseNpc_Plus;
-        if (!building) { return };
+        if (!building) {
+            return;
+        }
         ET.EntityRoot.Active(building);
         domain.ETRoot.AddDomainChild(building.ETRoot);
         building.ETRoot.AddComponent(BuildingComponent, towerID, location, angle);
@@ -73,10 +72,12 @@ export class BuildingManagerComponent extends ET.Component {
         // domain.ETRoot.GetComponent(CombinationManagerComponent).add(domain.ETRoot);
         /**互相绑定 */
         building.SetControllableByPlayer(playerID, true);
-        building.addSpawnedHandler(ET.Handler.create(this, () => {
-            // modifier_building.apply(this.createUnit, domain)
-            // modifier_test.apply(this.createUnit, domain)
-        }));
+        building.addSpawnedHandler(
+            ET.Handler.create(this, () => {
+                // modifier_building.apply(this.createUnit, domain)
+                // modifier_test.apply(this.createUnit, domain)
+            })
+        );
         // 全场buff
         // if (this.tGlobalBuffs.length > 0) {
         //     for (let info of this.tGlobalBuffs) {
@@ -88,7 +89,7 @@ export class BuildingManagerComponent extends ET.Component {
         // this.curPopulation += iPopulationAdd;
         this.bHasBuild = true;
         // FireLeftPopulationChanged(playerID, this.GetMaxPopulation(playerID) - this.tPlayerBuildings[playerID].population)
-        return building
+        return building;
     }
 
     /**
@@ -107,10 +108,28 @@ export class BuildingManagerComponent extends ET.Component {
         if (building == null) {
             return;
         }
-        let iGoldCost = building.GetGoldCost()
-        let iGoldReturn = math.floor(iGoldCost * fGoldReturn)
+        let iGoldCost = building.GetGoldCost();
+        let iGoldReturn = math.floor(iGoldCost * fGoldReturn);
         domain.ETRoot.GetComponent(CombinationManagerComponent).remove(target);
+    }
 
+    public moveBuilding(target: ET.EntityRoot, v: Vector): [boolean, string] {
+        let r: [boolean, string] = [true, ""];
+        if (!this.Domain.ETRoot.AsPlayer().CheckIsAlive()) {
+            r = [false, "hero is death"];
+        }
+        if (target == null) {
+            r = [false, "EntityRoot is null"];
+        }
+        if (this.Domain.ETRoot!.GetDomainChild(target.Id) == null) {
+            r = [false, "EntityRoot is not my"];
+        }
+        if (!r[0]) {
+            EmitSoundOn("General.CastFail_NoMana", this.GetDomain<BaseNpc_Hero_Plus>());
+            return r;
+        }
+
+        return [true, ""];
     }
 
     /**
@@ -122,13 +141,11 @@ export class BuildingManagerComponent extends ET.Component {
         let domain = this.GetDomain<BaseNpc_Plus>();
         let buildings = domain.ETRoot.GetDomainChildComponents(BuildingComponent);
         let r = 0;
-        buildings.forEach(
-            (c) => {
-                if (c.towerID === towerID) {
-                    r += 1
-                }
+        buildings.forEach((c) => {
+            if (c.towerID === towerID) {
+                r += 1;
             }
-        )
-        return r
+        });
+        return r;
     }
 }

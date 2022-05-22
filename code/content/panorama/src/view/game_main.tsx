@@ -1,5 +1,6 @@
 import React, { createRef } from "react";
 import { PanelAttributes, render } from "react-panorama-eom";
+import { ChessControlComponent } from "../game/components/ChessControlComponent";
 import { DrawComponent } from "../game/components/DrawComponent";
 import { PlayerComponent } from "../game/components/PlayerComponent";
 import { DebugHelper } from "../helper/DebugHelper";
@@ -29,6 +30,7 @@ export class RootPanel extends BasePureComponent {
         ET.EntityRoot.Active(this);
         RootPanel.instance.ETRoot?.AddComponent(DrawComponent);
         RootPanel.instance.ETRoot?.AddComponent(PlayerComponent);
+        RootPanel.instance.ETRoot?.AddComponent(ChessControlComponent);
         // 添加移动组件
         // RootPanel.instance.ETRoot?.AddComponent(ControlComponent);
         // RootPanel.instance.ETRoot?.AddComponent(CameraComponent);
@@ -76,6 +78,12 @@ export class RootPanel extends BasePureComponent {
     get PlayerComp() {
         return this.ETRoot!.GetComponent(PlayerComponent)!;
     }
+    
+    get ChessControlComp() {
+        return this.ETRoot!.GetComponent(ChessControlComponent)!;
+    }
+    
+
 }
 
 function StartRenderGameUI() {

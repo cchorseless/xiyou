@@ -66,6 +66,7 @@ export class MainPanel extends MainPanel_UI {
         return panel;
     }
     async addOnlyDialog<T extends typeof BasePureComponent>(nodeType: T, nodeData: { [k: string]: any } = {}) {
-        return await this.addOrShowOnlyNodeChild(this.NODENAME.panel_alldialog, nodeType, nodeData);
+        let panel = await this.addOrShowOnlyNodeChild(this.NODENAME.panel_alldialog, nodeType, nodeData);
+        return panel;
     }
 }

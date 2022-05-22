@@ -4,6 +4,7 @@ import { render } from "react-panorama-eom";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { GameEnum } from "../../../libs/GameEnum";
 import { Hero_select } from "../hero_select/hero_select";
 import { Team_select } from "../team_select/team_select";
@@ -18,7 +19,7 @@ export class Loading extends Loading_UI {
     }
 }
 
-const eventid = GameEvents.Subscribe(GameEnum.GameEvent.game_rules_state_change, (e: any) => {
+const eventid = GameEvents.Subscribe(GameEnum.GameEvent.game_rules_state_change, async (e: any) => {
     let state = Game.GetState();
     LogHelper.print("current state :", state);
     switch (state) {
@@ -28,6 +29,9 @@ const eventid = GameEvents.Subscribe(GameEnum.GameEvent.game_rules_state_change,
             break;
         // 队伍选择界面
         case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
+            while (Loading.GetInstance() == null) {
+                await TimerHelper.delayTime(0.1, true);
+            }
             let load = Loading.GetInstance()!;
             load.addNodeChildAsyncAt(load.NODENAME.__root__, Team_select, {
                 isActive: true,
