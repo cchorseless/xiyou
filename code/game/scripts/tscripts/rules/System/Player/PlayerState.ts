@@ -1,10 +1,7 @@
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 
 export class PlayerState {
-    /**出生点信息 */
-    static HeroReSpawnPoint: { playerid: PlayerID[], Vector: Vector[] };
-    
-    static HeroSpawnPoint: Vector[] = [];
+    static readonly HeroSpawnPoint: Vector[] = [];
     
     static init() {
         this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint0").GetAbsOrigin());

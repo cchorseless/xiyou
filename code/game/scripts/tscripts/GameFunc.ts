@@ -5,10 +5,10 @@ import { NetTablesHelper } from "./helper/NetTablesHelper";
 import { BaseModifier_Plus } from "./npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
 
-
 export module GameFunc {
-
-
+    export function AsVector(obj: any) {
+        return obj as Vector;
+    }
 
     /**
      * 位运算判断参数是否包含
@@ -26,11 +26,9 @@ export module GameFunc {
             n >>= 1;
         }
         let r: Array<boolean> = [];
-        arg.forEach(
-            (_a) => {
-                r.push(arr.indexOf(_a) > -1)
-            }
-        )
+        arg.forEach((_a) => {
+            r.push(arr.indexOf(_a) > -1);
+        });
         return r;
     }
     /**
@@ -38,20 +36,20 @@ export module GameFunc {
      * @returns
      */
     export function GenerateUUID() {
-        let d = GameRules.GetGameTime()
-        let t = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
-        t = string.gsub(t, 'x', (c: string) => {
+        let d = GameRules.GetGameTime();
+        let t = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
+        t = string.gsub(t, "x", (c: string) => {
             let r = (d + Math.random() * 16) % 16 | 0;
             d = Math.floor(d / 16);
-            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
         })[0];
-        t = string.gsub(t, 'y', (c: string) => {
+        t = string.gsub(t, "y", (c: string) => {
             let r = (d + Math.random() * 16) % 16 | 0;
             d = Math.floor(d / 16);
-            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
         })[0];
         return t;
-    };
+    }
 
     /**
      * 获取服务器serverKey
@@ -59,10 +57,9 @@ export module GameFunc {
      */
     export function GetServerKey() {
         if (IsServer()) {
-            return (_G as any).__ServerKeyV2__
-        }
-        else {
-            return NetTablesHelper.GetData("common", "encrypt_key")._ || ""
+            return (_G as any).__ServerKeyV2__;
+        } else {
+            return NetTablesHelper.GetData("common", "encrypt_key")._ || "";
         }
     }
     /**
@@ -90,16 +87,15 @@ export module GameFunc {
      * @returns
      */
     export function GetmetatableIndex(s: Object) {
-        return (getmetatable(s).__index) as Object
+        return getmetatable(s).__index as Object;
     }
-
 
     /**测量对象内存大小 todo */
     export function memSize(o: any) {
         collectgarbage("stop");
-        let before = collectgarbage("count")
-        let after = collectgarbage("count")
-        return (after - before) * 1024
+        let before = collectgarbage("count");
+        let after = collectgarbage("count");
+        return (after - before) * 1024;
     }
 
     /**
@@ -108,10 +104,8 @@ export module GameFunc {
      * @returns
      */
     export function IsValid(obj: CEntityInstance | BaseModifier_Plus) {
-        return obj && !obj.IsNull()
+        return obj && !obj.IsNull();
     }
-
-
 
     export namespace mathUtil {
         /**
@@ -120,7 +114,7 @@ export module GameFunc {
          * @returns
          */
         export function PRD(fChance: number, entity: BaseNpc_Plus = null, sign: string = null) {
-            return RandomInt(1, 100) <= fChance
+            return RandomInt(1, 100) <= fChance;
         }
         /**
          * 越界检查
@@ -130,7 +124,7 @@ export module GameFunc {
          * @returns
          */
         export function Clamp(num: number, min: number, max: number) {
-            return num <= min ? min : (num >= max ? max : num);
+            return num <= min ? min : num >= max ? max : num;
         }
 
         export function Lerp(percent: number, a: number, b: number) {
@@ -138,16 +132,14 @@ export module GameFunc {
         }
 
         export function RemapVal(num: number, a: number, b: number, c: number, d: number) {
-            if (a == b)
-                return c;
+            if (a == b) return c;
 
             let percent = (num - a) / (b - a);
             return Lerp(percent, c, d);
         }
 
         export function RemapValClamped(num: number, a: number, b: number, c: number, d: number) {
-            if (a == b)
-                return c;
+            if (a == b) return c;
 
             let percent = (num - a) / (b - a);
             percent = Clamp(percent, 0.0, 1.0);
@@ -156,12 +148,8 @@ export module GameFunc {
         }
     }
 
-
-
-
     /**向量 */
     export namespace VectorFunctions {
-
         /**
          * 逆時針旋轉
          * @param vVector
@@ -169,11 +157,11 @@ export module GameFunc {
          * @returns
          */
         export function Rotation2D(vVector: Vector, radian: number): Vector {
-            const fLength2D = vVector.Length2D()
-            const vUnitVector2D = vVector / fLength2D as Vector;
-            const fCos = math.cos(radian)
-            const fSin = math.sin(radian)
-            return Vector(vUnitVector2D.x * fCos - vUnitVector2D.y * fSin, vUnitVector2D.x * fSin + vUnitVector2D.y * fCos, vUnitVector2D.z) * fLength2D as Vector;
+            const fLength2D = vVector.Length2D();
+            const vUnitVector2D = (vVector / fLength2D) as Vector;
+            const fCos = math.cos(radian);
+            const fSin = math.sin(radian);
+            return (Vector(vUnitVector2D.x * fCos - vUnitVector2D.y * fSin, vUnitVector2D.x * fSin + vUnitVector2D.y * fCos, vUnitVector2D.z) * fLength2D) as Vector;
         }
         /**
          * 向量加法
@@ -182,13 +170,15 @@ export module GameFunc {
          */
         export function Add(...arg: Array<Vector>): Vector {
             let r = Vector(0, 0, 0);
-            arg.forEach((v) => { r = (r + v) as Vector })
+            arg.forEach((v) => {
+                r = (r + v) as Vector;
+            });
             return r;
         }
 
         export function VectorToString(s: Vector): string {
             if (s == null) return;
-            return s.x + ' ' + s.y + ' ' + s.z;
+            return s.x + " " + s.y + " " + s.z;
         }
 
         /**
@@ -198,12 +188,12 @@ export module GameFunc {
         export function StringToVector(s: string): Vector {
             if (s == null) return;
             let d = s.split(" ");
-            return Vector(parseFloat(d[0] || "0"), parseFloat(d[1] || "0"), parseFloat(d[2] || "0"))
+            return Vector(parseFloat(d[0] || "0"), parseFloat(d[1] || "0"), parseFloat(d[2] || "0"));
         }
 
         export function HorizonVector(vec: Vector) {
-            vec.z = 0
-            return vec.Normalized()
+            vec.z = 0;
+            return vec.Normalized();
         }
         /**
          *
@@ -213,7 +203,7 @@ export module GameFunc {
          * @returns
          */
         export function VectorLerp(pect: number, v1: Vector, v2: Vector) {
-            return ((v2 - v1) * pect + v1) as Vector
+            return ((v2 - v1) * pect + v1) as Vector;
         }
         /**
          * 是否是交互有效距离
@@ -222,9 +212,8 @@ export module GameFunc {
          * @returns
          */
         export function IsValidDiatance(v1: Vector, v2: Vector) {
-            return ((v1 - v2) as Vector).Length() <= 300
+            return ((v1 - v2) as Vector).Length() <= 300;
         }
-
 
         /**
          * 判斷是否是零坐標
@@ -232,7 +221,7 @@ export module GameFunc {
          * @returns
          */
         export function VectorIsZero(v: Vector) {
-            return v.x == 0 && v.y == 0 && v.z == 0
+            return v.x == 0 && v.y == 0 && v.z == 0;
         }
         export class Vector2D {
             public x: number;
@@ -246,11 +235,9 @@ export module GameFunc {
         export class Polygon2D {
             data: Array<GameFunc.VectorFunctions.Vector2D> = [];
             constructor(polygon: Array<Vector>) {
-                polygon.forEach(
-                    (v) => {
-                        this.data.push(new GameFunc.VectorFunctions.Vector2D(v))
-                    }
-                )
+                polygon.forEach((v) => {
+                    this.data.push(new GameFunc.VectorFunctions.Vector2D(v));
+                });
             }
         }
 
@@ -263,24 +250,29 @@ export module GameFunc {
          * @returns
          */
         export function IsLineCross(pt1_1: Vector2D, pt1_2: Vector2D, pt2_1: Vector2D, pt2_2: Vector2D) {
-            return math.min(pt1_1.x, pt1_2.x) <= math.max(pt2_1.x, pt2_2.x)
-                && math.min(pt2_1.x, pt2_2.x) <= math.max(pt1_1.x, pt1_2.x)
-                && math.min(pt1_1.y, pt1_2.y) <= math.max(pt2_1.y, pt2_2.y)
-                && math.min(pt2_1.y, pt2_2.y) <= math.max(pt1_1.y, pt1_2.y);
+            return (
+                math.min(pt1_1.x, pt1_2.x) <= math.max(pt2_1.x, pt2_2.x) &&
+                math.min(pt2_1.x, pt2_2.x) <= math.max(pt1_1.x, pt1_2.x) &&
+                math.min(pt1_1.y, pt1_2.y) <= math.max(pt2_1.y, pt2_2.y) &&
+                math.min(pt2_1.y, pt2_2.y) <= math.max(pt1_1.y, pt1_2.y)
+            );
         }
         //  判断点是否在不规则图形里（不规则图形里是点集，点集每个都是固定住的）
         export function IsPointInPolygon(point: Vector, polygonPoints: Vector[]) {
-            let j = polygonPoints.length
-            let bool = 0
+            let j = polygonPoints.length;
+            let bool = 0;
             for (let i = 0; i < polygonPoints.length; i++) {
-                let polygonPoint1 = polygonPoints[j]
-                let polygonPoint2 = polygonPoints[i]
-                if (((polygonPoint2.y < point.y && polygonPoint1.y >= point.y) || (polygonPoint1.y < point.y && polygonPoint2.y >= point.y)) && (polygonPoint2.x <= point.x || polygonPoint1.x <= point.x)) {
-                    bool = bit.bxor(bool, ((polygonPoint2.x + (point.y - polygonPoint2.y) / (polygonPoint1.y - polygonPoint2.y) * (polygonPoint1.x - polygonPoint2.x)) < point.x && 1 || 0))
+                let polygonPoint1 = polygonPoints[j];
+                let polygonPoint2 = polygonPoints[i];
+                if (
+                    ((polygonPoint2.y < point.y && polygonPoint1.y >= point.y) || (polygonPoint1.y < point.y && polygonPoint2.y >= point.y)) &&
+                    (polygonPoint2.x <= point.x || polygonPoint1.x <= point.x)
+                ) {
+                    bool = bit.bxor(bool, (polygonPoint2.x + ((point.y - polygonPoint2.y) / (polygonPoint1.y - polygonPoint2.y)) * (polygonPoint1.x - polygonPoint2.x) < point.x && 1) || 0);
                 }
-                j = i
+                j = i;
             }
-            return bool == 1
+            return bool == 1;
         }
     }
 
@@ -296,16 +288,12 @@ export module GameFunc {
         ExecuteOrderFromTable({
             UnitIndex: hUnit.entindex(),
             OrderType: iOrder,
-            TargetIndex: hTarget && hTarget.entindex() || null,
-            AbilityIndex: hAbility && hAbility.entindex() || null,
+            TargetIndex: (hTarget && hTarget.entindex()) || null,
+            AbilityIndex: (hAbility && hAbility.entindex()) || null,
             Position: vPosition,
-            Queue: false
-        })
+            Queue: false,
+        });
     }
-
-
-
-
 
     export namespace ArrayFunc {
         /**
@@ -319,16 +307,15 @@ export module GameFunc {
             count = math.min(count, len);
             let r: T[] = [];
             if (count <= 0) {
-                return r
+                return r;
             }
             let index = [];
             if (isRepeat) {
                 while (count > 0) {
                     count -= 1;
-                    index.push(RandomInt(0, len - 1))
+                    index.push(RandomInt(0, len - 1));
                 }
-            }
-            else {
+            } else {
                 let _arr = Object.keys(arr);
                 while (count > 0) {
                     count -= 1;
@@ -339,13 +326,13 @@ export module GameFunc {
             }
             // 这里需要-1 适配
             for (let k of index) {
-                r.push(arr[k - 1])
+                r.push(arr[k - 1]);
             }
             if (r.length != index.length) {
-                throw new Error('RandomArray out of range')
+                throw new Error("RandomArray out of range");
             }
             return r;
-        };
+        }
 
         /**
          * 根据权重随机数组
@@ -356,40 +343,44 @@ export module GameFunc {
         export function RandomArrayByWeight<T>(arr: Array<T>, weight: Array<number | string>, count: number = 1) {
             let _arr = [].concat(arr);
             let _weight: number[] = [];
-            weight.forEach((v) => { _weight.push(tonumber(v)) })
-            if (_arr.length == count || _arr.length == 0) { return _arr };
+            weight.forEach((v) => {
+                _weight.push(tonumber(v));
+            });
+            if (_arr.length == count || _arr.length == 0) {
+                return _arr;
+            }
             if (_arr.length < count) {
-                throw new Error('our of range')
+                throw new Error("our of range");
             }
             let _count = count;
             let he = 0;
             let i = 0;
             for (let _k of _weight) {
-                i += 1
+                i += 1;
                 if (i > _arr.length) {
-                    break
+                    break;
                 }
-                he += math.abs(_k)
+                he += math.abs(_k);
             }
             let r = [];
             while (he > 0 && _count > 0) {
                 _count -= 1;
                 let _rand = RandomInt(1, he);
-                let index = 0
+                let index = 0;
                 while (_weight[index] != null && _rand > _weight[index]) {
-                    index += 1
-                    _rand -= _weight[index]
+                    index += 1;
+                    _rand -= _weight[index];
                 }
-                r.push(_arr[index])
-                he -= _weight[index]
-                _arr.splice(index, 1)
-                _weight.splice(index, 1)
+                r.push(_arr[index]);
+                he -= _weight[index];
+                _arr.splice(index, 1);
+                _weight.splice(index, 1);
             }
-            if (r.length != count) { throw new Error('our of range') }
-            return r
+            if (r.length != count) {
+                throw new Error("our of range");
+            }
+            return r;
         }
-
-
 
         /**
          * 移除數組内所有元素
@@ -402,7 +393,7 @@ export module GameFunc {
             let len = t.length;
             for (let i = len - 1; i > -1; i--) {
                 if (t[i] == v) {
-                    t.splice(i, 1)
+                    t.splice(i, 1);
                 }
             }
         }
@@ -414,7 +405,9 @@ export module GameFunc {
          * @returns
          */
         export function ArrayRemove(t: Array<any>, v: any, isall = false) {
-            if (!t) { return }
+            if (!t) {
+                return;
+            }
             let index = t.indexOf(v);
             if (index > -1) {
                 t.splice(index, 1);
@@ -433,20 +426,11 @@ export module GameFunc {
          * @returns
          */
         export function FromSet<T>(set: Set<T>): T[] {
-            let r = [] as T[]
+            let r = [] as T[];
             set.forEach((i) => {
-                r.push(i)
-            })
-            return r
+                r.push(i);
+            });
+            return r;
         }
-
-
     }
-
-
-
-
-
-
-
 }

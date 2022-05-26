@@ -15,6 +15,8 @@ export class RoundManagerComponent extends ET.Component {
         this.initBasicRound();
     }
 
+    
+
     private initBasicRound() {
         let keys = Object.keys(KVHelper.KvServerConfig.building_round);
         for (let configid of keys) {

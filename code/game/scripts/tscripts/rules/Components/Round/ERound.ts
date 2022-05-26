@@ -6,13 +6,10 @@ import { building_round } from "../../../kvInterface/building/building_round";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
 import { RoundConfig } from "../../System/Round/RoundConfig";
-import { EnemyKillPrizeComponent } from "../Enemy/EnemyKillPrizeComponent";
-import { EnemyManagerComponent } from "../Enemy/EnemyManagerComponent";
-import { EnemyMoveComponent } from "../Enemy/EnemyMoveComponent";
 
 export class ERound extends ET.Entity {
     configID: string;
-    config: building_round.OBJ_2_1;
+    config: building_round.OBJ_2_1 | any;
     unitSpawned: number = 0;
     bRunning: boolean = false;
 
@@ -30,7 +27,7 @@ export class ERound extends ET.Entity {
         let domain = this.GetDomain<BaseNpc_Plus>();
         let spawn_interval = tonumber(this.config.spawn_interval) || 1;
         let spawn_num = tonumber(this.config.spawn_num);
-        let enemyManager = domain.ETRoot.GetComponent(EnemyManagerComponent);
+        let enemyManager = domain.ETRoot.AsPlayer().EnemyManagerComp();
         TimerHelper.addTimer(
             spawn_interval,
             () => {

@@ -14,6 +14,7 @@ import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
 import { modifier_property } from "./npc/modifier/modifier_property";
 import { modifier_task_npc } from "./npc/modifier/modifier_task";
 import { EnemyUnitComponent } from "./rules/Components/Enemy/EnemyUnitComponent";
+import { EnemyUnitEntityRoot } from "./rules/Components/Enemy/EnemyUnitEntityRoot";
 import { GameRequest } from "./service/GameRequest";
 
 export class GameEvent extends SingletonClass {
@@ -168,14 +169,14 @@ export class GameEvent extends SingletonClass {
         if (!GameFunc.IsValid(hUnit)) {
             return;
         }
-        if (!hUnit.ETRoot) {
+        if (!hUnit.ETRoot || !hUnit.ETRoot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
             return;
         }
-        let enemyUnit = hUnit.ETRoot.GetComponent(EnemyUnitComponent);
+        let enemyUnit = hUnit.ETRoot.As<EnemyUnitEntityRoot>().EnemyUnitComp();
         if (!enemyUnit) {
             return;
         }
-        enemyUnit.EnemyUnitManager.killEnemy(hUnit.ETRoot);
+        hUnit.ETRoot.As<EnemyUnitEntityRoot>().GetPlayer().EnemyManagerComp().killEnemy(hUnit.ETRoot);
     }
 
     public OnAbilityUsed(event: DotaPlayerUsedAbilityEvent) {}

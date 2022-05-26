@@ -1,53 +1,85 @@
 import { EntityHelper } from "../../../helper/EntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { ISpawnEffectInfo, ResHelper, SpawnEffectModifier } from "../../../helper/ResHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET } from "../../Entity/Entity";
+import { modifier_spawn_breaksoil } from "../../../npc/modifier/spawn/modifier_spawn_breaksoil";
+import { modifier_spawn_fall } from "../../../npc/modifier/spawn/modifier_spawn_fall";
+import { ET, registerET } from "../../Entity/Entity";
 import { EnemyState } from "../../System/Enemy/EnemyState";
 import { EnemySystem } from "../../System/Enemy/EnemySystem";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
+import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
 
+@registerET()
 export class EnemyManagerComponent extends ET.Component {
-
     tPlayerKills: number = 0;
     tPlayerMissing: number = 0;
     tAllEnemy: string[] = [];
 
     iMaxEnemyBonus: number = 0;
     iMaxEnemyBonusEach: number = 0;
-    readonly PlayerID: number;
 
     onAwake(...args: any[]): void {
         let domain = this.GetDomain<BaseNpc_Hero_Plus>();
         (this as any).PlayerID = domain.GetPlayerID();
         this.iMaxEnemyBonus = tonumber(KVHelper.KvServerConfig.building_config.MAX_ENERMY_EACH_PLAYER.configValue);
-        EnemySystem.RegComponent(this);
     }
     GetEnemySpawnPos() {
-        return EnemyState.SpawnEnemyPoint[this.PlayerID];
+        let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
+        return EnemyState.SpawnEnemyPoint[playerid];
     }
-    addEnemy(enemyName: string, roundid: string, pos: Vector = null) {
+
+    addEnemy(enemyName: string, roundid: string, pos: Vector = null, spawnEffect: ISpawnEffectInfo = null) {
         if (enemyName == "" || enemyName == null) {
             throw new Error("cant find emeny name");
         }
-        if (pos == null) { pos = this.GetEnemySpawnPos() };
+        if (pos == null) {
+            pos = this.GetEnemySpawnPos();
+        }
         if (pos == null) {
             throw new Error("cant find emeny spawn pos");
         }
+        let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
         let enemy = EntityHelper.CreateEntityByName(enemyName, pos, DOTATeam_t.DOTA_TEAM_BADGUYS) as BaseNpc_Plus;
         enemy.SetNeverMoveToClearSpace(false);
-        ET.EntityRoot.Active(enemy);
-        enemy.ETRoot.AddComponent(EnemyUnitComponent, this.PlayerID, roundid, enemyName);
+        EnemyUnitEntityRoot.Active(enemy);
+        enemy.ETRoot.As<EnemyUnitEntityRoot>().SetConfigId(playerid, enemyName, roundid);
+        enemy.ETRoot.AddComponent(EnemyUnitComponent);
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.ETRoot.AddDomainChild(enemy.ETRoot);
-        this.tAllEnemy.push(enemy.ETRoot.Id)
+        this.tAllEnemy.push(enemy.ETRoot.Id);
+        if (spawnEffect != null) {
+            enemy.addSpawnedHandler(
+                ET.Handler.create(this, () => {
+                    if (spawnEffect.tp_sound != null) {
+                        EmitSoundOn(spawnEffect.tp_sound, enemy);
+                    }
+                    if (spawnEffect.modifier != null) {
+                        switch (spawnEffect.modifier) {
+                            case SpawnEffectModifier.spawn_breaksoil:
+                                modifier_spawn_breaksoil.applyOnly(enemy, enemy, null, {
+                                    vx: pos.x,
+                                    vy: pos.y,
+                                });
+                                break;
+                            case SpawnEffectModifier.spawn_fall:
+                                modifier_spawn_fall.applyOnly(enemy, enemy, null, {
+                                    vx: pos.x,
+                                    vy: pos.y,
+                                });
+                                break;
+                            case SpawnEffectModifier.spawn_torrent:
+                                break;
+                        }
+                    }
+                })
+            );
+        }
         return enemy;
     }
-    killAllEnemy() {
-
-    }
-
+    killAllEnemy() {}
 
     killEnemy(etroot: ET.EntityRoot) {
         this.tPlayerKills += 1;
@@ -66,5 +98,4 @@ export class EnemyManagerComponent extends ET.Component {
         etroot.Dispose();
         domain.SafeDestroy();
     }
-
 }

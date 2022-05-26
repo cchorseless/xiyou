@@ -1,11 +1,11 @@
 import { KVHelper } from "../../../helper/KVHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_wave } from "../../../npc/modifier/building/modifier_wave";
-import { ET } from "../../Entity/Entity";
+import { ET, registerET } from "../../Entity/Entity";
 import { DifficultyConfig } from "../../System/Difficulty/DifficultyConfig";
 import { DifficultyState } from "../../System/Difficulty/DifficultyState";
-import { EnemyUnitComponent } from "./EnemyUnitComponent";
-
+import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
+@registerET()
 export class EnemyPropsComponent extends ET.Component {
 
     fHPMult: number = 0;
@@ -21,8 +21,7 @@ export class EnemyPropsComponent extends ET.Component {
 
     onAwake(...args: any[]): void {
         let domain = this.GetDomain<BaseNpc_Plus>();
-        let unitComp = domain.ETRoot.GetComponentByName<EnemyUnitComponent>("EnemyUnitComponent");
-        let round = unitComp.Round;
+        let round = domain.ETRoot.As<EnemyUnitEntityRoot>().GetRound();
         let Roundconfig = round.config;
         switch (DifficultyState.DifficultyChapter) {
             case DifficultyConfig.EDifficultyChapter.Difficulty_0:
@@ -57,7 +56,7 @@ export class EnemyPropsComponent extends ET.Component {
 
     private addPropsBuff() {
         let domain = this.GetDomain<BaseNpc_Plus>();
-        let unitComp = domain.ETRoot.GetComponentByName<EnemyUnitComponent>("EnemyUnitComponent");
+        let unitComp = domain.ETRoot.As<EnemyUnitEntityRoot>().EnemyUnitComp();
         let hpBouns = tonumber(unitComp.config.StatusHealth || "0") * this.fHPMult + this.fHPAdd;
         let mpBouns = tonumber(unitComp.config.StatusMana || "0") * this.fMPMult + this.fMPAdd;
         let armorPhyBouns = tonumber(unitComp.config.ArmorPhysical || "0") * this.fArmorPhyMult + this.fArmorPhyAdd;

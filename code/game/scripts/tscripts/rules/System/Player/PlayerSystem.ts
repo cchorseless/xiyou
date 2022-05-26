@@ -8,6 +8,9 @@ import { PlayerState } from "./PlayerState";
 
 export class PlayerSystem {
     public static readonly AllPlayer: { [k: string]: PlayerEntityRoot } = {};
+    public static IsValidPlayer(playerid: PlayerID | number | string): boolean {
+        return PlayerSystem.AllPlayer[playerid + ""] != null;
+    }
 
     public static GetPlayer(playerid: PlayerID | number | string): PlayerEntityRoot {
         return PlayerSystem.AllPlayer[playerid + ""];
@@ -102,28 +105,5 @@ export class PlayerSystem {
      */
     public static GetHero(playerid: PlayerID) {
         return PlayerResource.GetPlayer(playerid).GetAssignedHero() as BaseNpc_Hero_Plus;
-    }
-
-    /**
-     * 获取英雄出生点
-     * @returns
-     */
-    public static getHeroReSpawnPoint(playerid: PlayerID) {
-        if (PlayerState.HeroReSpawnPoint == null) {
-            PlayerState.HeroReSpawnPoint = {
-                playerid: [],
-                Vector: [],
-            };
-            let allE = Entities.FindAllByClassname(GameEnum.Unit.UnitClass.info_player_start_goodguys);
-            allE.forEach((e) => {
-                PlayerState.HeroReSpawnPoint.Vector.push(e.GetAbsOrigin());
-            });
-        }
-        let index = PlayerState.HeroReSpawnPoint.playerid.indexOf(playerid);
-        if (index == -1) {
-            PlayerState.HeroReSpawnPoint.playerid.push(playerid);
-            index = PlayerState.HeroReSpawnPoint.playerid.length - 1;
-        }
-        return PlayerState.HeroReSpawnPoint.Vector[index];
     }
 }

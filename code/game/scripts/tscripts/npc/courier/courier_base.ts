@@ -17,6 +17,7 @@ import { PlayerState } from "../../rules/System/Player/PlayerState";
 import { BuildingManagerComponent } from "../../rules/Components/Building/BuildingManagerComponent";
 import { PlayerSystem } from "../../rules/System/Player/PlayerSystem";
 import { DrawComponent } from "../../rules/Components/Draw/DrawComponent";
+import { ChessControlComponent } from "../../rules/Components/ChessControl/ChessControlComponent";
 @registerUnit()
 export class courier_base extends BaseNpc_Hero_Plus {
     Spawn(entityKeyValues: CScriptKeyValues) {
@@ -42,10 +43,11 @@ export class courier_base extends BaseNpc_Hero_Plus {
         // 移动组件
         this.ETRoot.AddComponent(PlayerComponent);
         this.ETRoot.AddComponent(DrawComponent);
-        // this.ETRoot.AddComponent(RoundManagerComponent);
+        this.ETRoot.AddComponent(RoundManagerComponent);
         this.ETRoot.AddComponent(CombinationManagerComponent);
-        // this.ETRoot.AddComponent(EnemyManagerComponent);
+        this.ETRoot.AddComponent(EnemyManagerComponent);
         this.ETRoot.AddComponent(BuildingManagerComponent);
+        this.ETRoot.AddComponent(ChessControlComponent);
         // modifier_task.apply(this, this);
         // modifier_test.apply(this, this);
 

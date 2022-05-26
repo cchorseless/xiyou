@@ -22,7 +22,6 @@ export class ability4_courier_base extends BaseAbility_Plus {
     }
 
     OnSpellStart() {
-        RoundSystem.runSingleRound("2");
      
     }
 

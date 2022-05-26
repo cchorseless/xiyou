@@ -6,6 +6,7 @@ import { AvalonBotComponent } from "../../rules/Components/Awalon/AvalonBotCompo
 import { AvalonComponent } from "../../rules/Components/Awalon/AvalonComponent";
 import { PlayerComponent } from "../../rules/Components/Player/PlayerComponent";
 import { ET } from "../../rules/Entity/Entity";
+import { PlayerState } from "../../rules/System/Player/PlayerState";
 import { PlayerSystem } from "../../rules/System/Player/PlayerSystem";
 import { BaseNpc_Hero_Plus } from "../entityPlus/BaseNpc_Hero_Plus";
 import { registerUnit } from "../entityPlus/Base_Plus";
@@ -16,14 +17,16 @@ import { modifier_test } from "../modifier/modifier_test";
 export class bot_base extends BaseNpc_Hero_Plus {
     Spawn(entityKeyValues: CScriptKeyValues) {
         this.GetPlayerOwner().SetAssignedHeroEntity(this);
-        let startPoint = PlayerSystem.getHeroReSpawnPoint(this.GetPlayerID()) || Vector(0, 0, 284);
-        let a = GetGroundPosition(startPoint, this)
-        LogHelper.print('ADD BOT => PLAYERID :' + this.GetPlayerOwnerID(), this.GetPlayerOwner().GetModelName(), a);
+        let startPoint = PlayerState.HeroSpawnPoint[this.GetPlayerID() as number] || Vector(0, 0, 284);
+        let a = GetGroundPosition(startPoint, this);
+        LogHelper.print("ADD BOT => PLAYERID :" + this.GetPlayerOwnerID(), this.GetPlayerOwner().GetModelName(), a);
         this.SetAbsOrigin(a);
     }
 
     onSpawned() {
-        if (!IsServer()) { return }
+        if (!IsServer()) {
+            return;
+        }
 
         TimerHelper.addFrameTimer(1, () => {
             if (GameRules.State_Get() > DOTA_GameState.DOTA_GAMERULES_STATE_STRATEGY_TIME) {
@@ -31,13 +34,11 @@ export class bot_base extends BaseNpc_Hero_Plus {
                 this.ETRoot.AddComponent(AvalonComponent);
                 this.ETRoot.AddComponent(PlayerComponent);
                 this.ETRoot.AddComponent(AvalonBotComponent);
-                modifier_task.apply(this, this)
+                modifier_task.apply(this, this);
                 modifier_test.apply(this, this);
+            } else {
+                return 5;
             }
-            else {
-                return 5
-            }
-        })
+        });
     }
-
 }

@@ -7,6 +7,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BuildingComponent } from "../../../rules/Components/Building/BuildingComponent";
 import { BuildingState } from "../../../rules/System/Building/BuildingState";
 import { BuildingSystem } from "../../../rules/System/Building/BuildingSystem";
+import { ChessControlSystem } from "../../../rules/System/ChessControl/ChessControlSystem";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility } from "../../entityPlus/Base_Plus";
@@ -30,8 +31,9 @@ export class item_building_base extends BaseItem_Plus {
                 this.errorStr = GameEnum.Event.ErrorCode.dota_hud_error_only_hero_can_use;
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
-            BuildingSystem.SnapToGrid(vLocation);
-            if (!BuildingState.IsValidPosition(vLocation)) {
+            let hCaster = this.GetCasterPlus();
+            let boardPos = ChessControlSystem.GetBoardLocalVector2(vLocation, false);
+            if (boardPos.playerid != hCaster.ETRoot.AsPlayer().Playerid || boardPos.x < 0 || boardPos.y < 0) {
                 this.errorStr = GameEnum.Event.ErrorCode.dota_hud_error_cant_build_at_location;
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
@@ -92,15 +94,27 @@ export class item_building_base extends BaseItem_Plus {
         let hCaster = this.GetCasterPlus();
         let hTarget = this.GetCursorTarget() as BaseNpc_Plus;
         let buildM = hCaster.ETRoot.AsPlayer().BuildingManager();
-        if (buildM == null) {
+        let chessM = hCaster.ETRoot.AsPlayer().ChessControlComp();
+        if (buildM == null || chessM == null) {
             return;
         }
         //  场上还没有这个单位，种下新的
         if (!GameFunc.IsValid(hTarget)) {
             let sTowerName = this.GetCreateUnitName();
             let location = this.GetCursorPosition();
-            BuildingSystem.SnapToGrid(location);
-            let result = buildM.placeBuilding(sTowerName, location);
+            let boardPos = ChessControlSystem.GetBoardLocalVector2(location, false);
+            if (boardPos.playerid != hCaster.ETRoot.AsPlayer().Playerid) {
+                return;
+            }
+            let trueLocal = ChessControlSystem.GetBoardGirdCenterVector3(boardPos);
+            // BuildingSystem.SnapToGrid(location);
+            let result = buildM.placeBuilding(sTowerName, trueLocal);
+            ResHelper.CreateParticle(
+                new ResHelper .ParticleInfo().set_resPath("particles/econ/items/antimage/antimage_ti7/antimage_blink_start_ti7_ribbon_bright.vpcf")
+                    .set_owner(result)
+                    .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
+                    .set_validtime(5)
+             )
             if (result) {
                 this.SpendCharge();
             }
@@ -114,7 +128,7 @@ export class item_building_base extends BaseItem_Plus {
             //  判断星级和升星
             if (hBuilding && hBuilding.checkCanStarUp()) {
                 hBuilding.AddStar(1);
-                let resinfo: ResHelper.ParticleInfo = {
+                let resinfo: ResHelper.IParticleInfo = {
                     resPath: "particles/prime/hero_spawn_hero_level.vpcf",
                     iAttachment: ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,
                     owner: hTarget,

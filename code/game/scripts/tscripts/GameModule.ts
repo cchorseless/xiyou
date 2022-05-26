@@ -5,6 +5,7 @@
 
 import { SingletonClass } from "./helper/SingletonHelper";
 import { BuildingSystem } from "./rules/System/Building/BuildingSystem";
+import { ChessControlSystem } from "./rules/System/ChessControl/ChessControlSystem";
 import { CombinationSystem } from "./rules/System/Combination/CombinationSystem";
 import { DrawSystem } from "./rules/System/Draw/DrawSystem";
 import { EnemySystem } from "./rules/System/Enemy/EnemySystem";
@@ -30,6 +31,7 @@ export class GameModule extends SingletonClass {
     init() {
         PlayerSystem.init();
         DrawSystem.init();
+        ChessControlSystem.init();
         // EnemySystem.init();
         // RoundSystem.init();
         // BuildingSystem.init();

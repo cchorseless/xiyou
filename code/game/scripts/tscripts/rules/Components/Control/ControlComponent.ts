@@ -1,4 +1,4 @@
-import { ET } from "../../Entity/Entity";
+import { ET, registerET } from "../../Entity/Entity";
 import { GameEnum } from "../../../GameEnum";
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
@@ -94,6 +94,7 @@ interface KeyboardData {
     }
 }
 /**移动控制组件 */
+@registerET()
 export class ControlComponent extends ET.Component {
     /**玩家按键信息 */
     tKeyboardData: KeyboardData = {};

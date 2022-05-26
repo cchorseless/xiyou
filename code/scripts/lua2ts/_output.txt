@@ -1,70 +1,123 @@
-if ( TPCommon == null ) {
-	// - @class TPCommon
-	TPCommon = {}
-}
- CastFilterResultLocation(vLocation) {
-	let hCaster = this.GetCasterPlus()
-	if ( GameFunc.IsValid(hCaster) ) {
-		if ( IsServer() ) {
-			if ( !this.ValidPosition(vLocation) ) {
-				this.error = "dota_hud_error_cant_build_at_location"
-				return UF_FAIL_CUSTOM
-			}
-		}
-		return  UnitFilterResult.UF_SUCCESS
-	}
-	this.error = "dota_hud_error_only_building_can_use"
-	return UF_FAIL_CUSTOM
-}
- ValidPosition(vPosition) {
-	let hCaster = this.GetCasterPlus()
-	let sUnique = null
-	if ( hCaster.GetBuilding ) {
-		let hBuilding = hCaster.GetBuilding()
-		if ( hBuilding ) {
-			sUnique = hBuilding.GetBlockerEntity()
-		}
-	}
-	SnapToGrid(BUILDING_SIZE, vPosition)
-	if ( !BuildSystem.ValidPosition(BUILDING_SIZE, vPosition, sUnique) ) {
-		return false
-	}
-	return true
-}
- OnSpellStart() {
-	let hCaster = this.GetCasterPlus()
-	let vPosition = this.GetCursorPosition()
-	if ( !this.ValidPosition(vPosition) ) {
-		return false
-	}
+modifier_fall = class({})
 
-	CreateModifierThinker(hCaster, this, "modifier_tp_thinker", { duration = this.GetTPDuration() }, vPosition, hCaster.GetTeamNumber(), false)
+animation = GameActivity_t.ACT_DOTA_FLAIL
 
-	return true
-}
- GetTPDuration() {
-	return 1
-}
- ShowGrid() {
-	return 1
+ IsStunDebuff() {
+    return true
 }
 
-// -@class TPCommon_Ability : TPCommon
-if ( TPCommon_Ability == null ) {
-	TPCommon_Ability = class({})
-}
-for (let v of ( TPCommon)) {
-	 
-
-	TPCommon_Ability[k] = v
+ IsHidden() {
+    return true
 }
 
-// -@class TPCommon_Item : TPCommon
-if ( TPCommon_Item == null ) {
-	TPCommon_Item = class({})
+ IsPurgable() {
+    return false
 }
-for (let v of ( TPCommon)) {
-	 
 
-	TPCommon_Item[k] = v
+ RemoveOnDeath() {
+    return false
+}
+
+ OnCreated(kv) {
+    if ( IsServer() ) {
+        if ( this.ApplyVerticalMotionController() == false ) {
+            this.Destroy()
+            return
+        }
+
+        // 初始化高度
+        this.vStartPosition    = GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus()) + Vector(0,0,1000)
+        this.GetParentPlus().SetOrigin(this.vStartPosition)
+
+        //  play_particle("particles/econ/items/natures_prophet/natures_prophet_weapon_sufferwood/furion_teleport_end_team_sufferwood.vpcf",ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,this.GetParentPlus(),5)
+        //  let pos = keys.pos || ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
+        //  let pp = ParticleManager.CreateParticle("particles/econ/items/natures_prophet/natures_prophet_weapon_sufferwood/furion_teleport_end_team_sufferwood.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus())
+        //  ParticleManager.SetParticleControlEnt( pp, 0, this.GetParentPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, null, this.GetParentPlus().GetAbsOrigin(), true );
+        //  ParticleManager.SetParticleControlEnt( pp, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, null, this.GetParentPlus().GetAbsOrigin(), true );
+
+        //  Timers.CreateTimer(5, () => {
+        //      if ( pp != null ) {
+        //          ParticleManager.DestroyParticle(pp,true)
+        //      }
+        //  })
+
+        // 目标点
+        this.vTargetPosition   = GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus())
+
+    }
+}
+
+ OnDestroy() {
+    if ( IsServer() ) {
+        this.GetParentPlus().RemoveHorizontalMotionController(this)
+        this.GetParentPlus().RemoveVerticalMotionController(this)
+        //  this.GetParentPlus().SetForwardVector(Vector(0,-1,0))
+    }
+}
+
+ DeclareFunctions() {
+    let funcs = {
+        @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION,
+    }
+    return funcs
+}
+
+ CheckState() {
+    let state = {
+    }
+    return state
+}
+
+ GetOverrideAnimation() {
+    return GameActivity_t.ACT_DOTA_FLAIL
+}
+
+ UpdateVerticalMotion(me:BaseNpc_Plus, dt:number) {
+    if ( IsServer() ) {
+        let curr_position = this.GetParentPlus().GetOrigin() + Vector(0,0,-60)
+        me.SetAbsOrigin(curr_position)
+
+        //  判断是否到达了地面
+        if ( (me.GetOrigin()-this.vTargetPosition).Length() < 30 ) {
+            // 到终点了
+            me.SetAbsOrigin(this.vTargetPosition)
+            me.is_moving = false
+            me.InterruptMotionControllers(true)
+            play_particle("particles/dev/library/base_dust_hit_shockwave.vpcf",ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,me,3)
+            EmitSoundOn("Hero_OgreMagi.Idle.Headbutt",me)
+
+            this.Destroy()
+        }
+    }
+}
+
+function play_particle(p, pos, u, d)
+    //  if ( u == null ) {
+    //   return
+    //  }
+    let pp = ParticleManager.CreateParticle(p, pos, u)
+    //  Timers.CreateTimer( () => {
+    //   if ( u.IsNull() != false || u.IsAlive() != false ) {
+    //       ParticleManager.DestroyParticle(pp,true)
+    //       return
+    //   }
+    //   return 1
+    //  })
+    Timers.CreateTimer(d, () => {
+        if ( pp != null ) {
+            ParticleManager.DestroyParticle(pp,true)
+        }
+    })
+}
+function RemoveAbilityAndModifier(u,a)
+    if ( u == null || u.IsNull() == true ) {
+        return
+    }
+    if ( u.FindAbilityByName(a) != null ) {
+        u.RemoveAbility(a)
+        u.RemoveModifierByName('modifier_'+a)
+    }
+}
+function prt(t)
+    GameRules.SendCustomMessage(''+t,0,0)
 }

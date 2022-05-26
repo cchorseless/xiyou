@@ -1,19 +1,23 @@
 import { GameEnum } from "../../../GameEnum";
 import { EntityHelper } from "../../../helper/EntityHelper";
 import { EventHelper } from "../../../helper/EventHelper";
+import { LogHelper } from "../../../helper/LogHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET } from "../../Entity/Entity";
+import { ET, registerET } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { BuildingState } from "../../System/Building/BuildingState";
 import { BuildingSystem } from "../../System/Building/BuildingSystem";
+import { PlayerSystem } from "../../System/Player/PlayerSystem";
+import { ChessComponent } from "../ChessControl/ChessComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
-import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";
 import { BuildingComponent } from "./BuildingComponent";
+import { BuildingEntityRoot } from "./BuildingEntityRoot";
 
 /**塔防组件 */
+@registerET()
 export class BuildingManagerComponent extends ET.Component {
     /**当前人口数量 */
     curPopulation: number = 0;
@@ -65,10 +69,12 @@ export class BuildingManagerComponent extends ET.Component {
         if (!building) {
             return;
         }
-        ET.EntityRoot.Active(building);
+        BuildingEntityRoot.Active(building);
+        building.ETRoot.As<BuildingEntityRoot>().SetConfigId(playerID, towerID);
         domain.ETRoot.AddDomainChild(building.ETRoot);
-        building.ETRoot.AddComponent(BuildingComponent, towerID, location, angle);
-        building.ETRoot.AddComponent(CombinationComponent, towerID);
+        building.ETRoot.AddComponent(BuildingComponent, location, angle);
+        building.ETRoot.AddComponent(CombinationComponent);
+        building.ETRoot.AddComponent(ChessComponent);
         // domain.ETRoot.GetComponent(CombinationManagerComponent).add(domain.ETRoot);
         /**互相绑定 */
         building.SetControllableByPlayer(playerID, true);
@@ -99,38 +105,21 @@ export class BuildingManagerComponent extends ET.Component {
      * @param fGoldReturn 金币返还比例
      * @returns
      */
-    public sellBuilding(target: ET.EntityRoot, fGoldReturn = 0.5) {
+    public sellBuilding(target: BuildingEntityRoot, fGoldReturn = 0.5) {
         let domain = this.GetDomain<BaseNpc_Plus>();
         if (target.DomainParent && target.DomainParent != domain.ETRoot) {
             return;
         }
-        let building = target.GetComponent(BuildingComponent);
+        let building = target.BuildingComp();
         if (building == null) {
             return;
         }
         let iGoldCost = building.GetGoldCost();
         let iGoldReturn = math.floor(iGoldCost * fGoldReturn);
-        domain.ETRoot.GetComponent(CombinationManagerComponent).remove(target);
+        domain.ETRoot.AsPlayer().CombinationManager().remove(target);
+        target.Dispose();
     }
 
-    public moveBuilding(target: ET.EntityRoot, v: Vector): [boolean, string] {
-        let r: [boolean, string] = [true, ""];
-        if (!this.Domain.ETRoot.AsPlayer().CheckIsAlive()) {
-            r = [false, "hero is death"];
-        }
-        if (target == null) {
-            r = [false, "EntityRoot is null"];
-        }
-        if (this.Domain.ETRoot!.GetDomainChild(target.Id) == null) {
-            r = [false, "EntityRoot is not my"];
-        }
-        if (!r[0]) {
-            EmitSoundOn("General.CastFail_NoMana", this.GetDomain<BaseNpc_Hero_Plus>());
-            return r;
-        }
-
-        return [true, ""];
-    }
 
     /**
      * 建筑物数量
@@ -139,10 +128,10 @@ export class BuildingManagerComponent extends ET.Component {
      */
     public getBuildingCount(towerID: string) {
         let domain = this.GetDomain<BaseNpc_Plus>();
-        let buildings = domain.ETRoot.GetDomainChildComponents(BuildingComponent);
+        let buildings = domain.ETRoot.GetDomainChilds(BuildingEntityRoot);
         let r = 0;
         buildings.forEach((c) => {
-            if (c.towerID === towerID) {
+            if (c.ConfigID === towerID) {
                 r += 1;
             }
         });

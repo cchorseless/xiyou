@@ -10,7 +10,7 @@ export class GameSetting {
 
     public static readonly GAME_ISDEBUG: boolean = true;
     /**最大玩家数量 */
-    public static readonly GAME_MAX_PLAYER: number = 10;
+    public static readonly GAME_MAX_PLAYER: number = 5;
     /**每队最大玩家数量 */
     public static readonly TEAM_MAX_PLAYER: number = 1;
     /**开局金币数量 */

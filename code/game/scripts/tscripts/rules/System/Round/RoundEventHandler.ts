@@ -2,7 +2,7 @@ import { GameEnum } from "../../../GameEnum";
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { EnemyUnitComponent } from "../../Components/Enemy/EnemyUnitComponent";
+import { EnemyUnitEntityRoot } from "../../Components/Enemy/EnemyUnitEntityRoot";
 import { RoundSystem } from "./RoundSystem";
 
 export class RoundEventHandler {
@@ -22,13 +22,9 @@ export class RoundEventHandler {
         if (!GameFunc.IsValid(hUnit)) {
             return
         }
-        if (!hUnit.ETRoot) {
+        if (!hUnit.ETRoot || !hUnit.ETRoot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
             return
         }
-        let unitComp = hUnit.ETRoot.GetComponentByName<EnemyUnitComponent>("EnemyUnitComponent");
-        if (!unitComp) {
-            return
-        }
-        unitComp.Round.onEntityHurt(events.entindex_attacker, events.damage);
+        hUnit.ETRoot.As<EnemyUnitEntityRoot>().GetRound().onEntityHurt(events.entindex_attacker, events.damage);
     }
 }

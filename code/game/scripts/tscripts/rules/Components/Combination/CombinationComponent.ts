@@ -1,12 +1,10 @@
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET } from "../../Entity/Entity";
-import { KVConfigComponment } from "../KVConfig/KVConfigComponment";
+import { ET, registerET } from "../../Entity/Entity";
 
+@registerET()
 export class CombinationComponent extends ET.Component {
 
-    configID: number;
-    onAwake(towerID: number): void {
-        this.configID = towerID;
+    onAwake(): void {
         let domain = this.GetDomain<BaseNpc_Plus>();
 
     }

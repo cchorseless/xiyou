@@ -23,7 +23,7 @@ export class modifier_tp extends BaseModifier_Plus {
         }
         else {
             let vColor = Vector(255, 255, 255)
-            let info: ResHelper.ParticleInfo = {
+            let info: ResHelper.IParticleInfo = {
                 // resPath: "particles/items2_fx/teleport_start.vpcf",
                 resPath: "particles/econ/events/fall_major_2015/teleport_start_fallmjr_2015.vpcf",
                 iAttachment: ParticleAttachment_t.PATTACH_CUSTOMORIGIN,

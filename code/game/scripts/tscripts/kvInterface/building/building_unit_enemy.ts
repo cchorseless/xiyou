@@ -113,9 +113,6 @@ export interface OBJ_2_1 {
 "CombatClassAttack" :string ,
 "ProjectileModel" :string ,
 "ProjectileSpeed" :string ,
-"Ability1" :string ,
-"Ability2" :string ,
-"Ability3" :string ,
 [k:string] : string | OBJ_3_1 }
 export interface OBJ_3_1 {
 [k:string] : any }

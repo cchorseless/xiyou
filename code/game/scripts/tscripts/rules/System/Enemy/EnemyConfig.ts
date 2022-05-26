@@ -1,5 +1,4 @@
 export module EnemyConfig {
-
     export const ENEMY_CORNERS = [
         [
             "player_0_start",
@@ -18,7 +17,8 @@ export module EnemyConfig {
             "player_0_12",
             "player_0_13",
             "player_0_10",
-        ], [
+        ],
+        [
             "player_1_start",
             "player_1_1",
             "player_1_2",
@@ -35,7 +35,8 @@ export module EnemyConfig {
             "player_0_12",
             "player_0_13",
             "player_0_10",
-        ], [
+        ],
+        [
             "player_2_start",
             "player_2_1",
             "player_2_2",
@@ -51,7 +52,8 @@ export module EnemyConfig {
             "player_0_10",
             "player_0_11",
             "player_0_12",
-        ], [
+        ],
+        [
             "player_3_start",
             "player_3_1",
             "player_3_2",
@@ -70,77 +72,7 @@ export module EnemyConfig {
         ],
     ];
     // 挑战怪
-    export const CHALLENGE_CORNERS =
-        [
-            ["player_0_start",
-                "player_0_1",
-                "player_0_2",
-                "player_0_3",
-                "player_0_4",
-                "player_0_5",
-                "player_0_6",
-                "player_0_7",
-                "player_0_8",
-                "player_0_9",
-                "player_0_10",
-                "player_0_11",
-                "player_0_12",
-                "player_0_13",
-                "player_0_10",
-
-            ],
-            ["player_1_start",
-                "player_1_1",
-                "player_1_2",
-                "player_1_3",
-                "player_1_4",
-                "player_0_6",
-                "player_0_5",
-                "player_3_5",
-                "player_0_8",
-                "player_0_9",
-                "player_0_10",
-                "player_0_11",
-                "player_0_12",
-                "player_0_13",
-                "player_0_10",
-
-            ],
-            ["player_2_start",
-                "player_2_1",
-                "player_2_2",
-                "player_2_3",
-                "player_2_4",
-                "player_0_7",
-                "player_3_5",
-                "player_0_5",
-                "player_3_8",
-                "player_3_9",
-                "player_0_12",
-                "player_0_13",
-                "player_0_10",
-                "player_0_11",
-                "player_0_12",
-            ],
-            ["player_3_start",
-                "player_3_1",
-                "player_3_2",
-                "player_3_3",
-                "player_3_4",
-                "player_3_5",
-                "player_0_7",
-                "player_0_6",
-                "player_2_8",
-                "player_2_9",
-                "player_0_12",
-                "player_0_13",
-                "player_0_10",
-                "player_0_11",
-                "player_0_12",
-            ],
-        ];
-    // BOSS
-    export const BOSS_CORNERS = [
+    export const CHALLENGE_CORNERS = [
         [
             "player_0_start",
             "player_0_1",
@@ -150,8 +82,13 @@ export module EnemyConfig {
             "player_0_5",
             "player_0_6",
             "player_0_7",
-            "player_3_5",
-            "player_0_5",
+            "player_0_8",
+            "player_0_9",
+            "player_0_10",
+            "player_0_11",
+            "player_0_12",
+            "player_0_13",
+            "player_0_10",
         ],
         [
             "player_1_start",
@@ -162,8 +99,13 @@ export module EnemyConfig {
             "player_0_6",
             "player_0_5",
             "player_3_5",
-            "player_0_7",
-            "player_0_6",
+            "player_0_8",
+            "player_0_9",
+            "player_0_10",
+            "player_0_11",
+            "player_0_12",
+            "player_0_13",
+            "player_0_10",
         ],
         [
             "player_2_start",
@@ -174,8 +116,13 @@ export module EnemyConfig {
             "player_0_7",
             "player_3_5",
             "player_0_5",
-            "player_0_6",
-            "player_0_7",
+            "player_3_8",
+            "player_3_9",
+            "player_0_12",
+            "player_0_13",
+            "player_0_10",
+            "player_0_11",
+            "player_0_12",
         ],
         [
             "player_3_start",
@@ -186,27 +133,34 @@ export module EnemyConfig {
             "player_3_5",
             "player_0_7",
             "player_0_6",
-            "player_0_5",
-            "player_3_5",
+            "player_2_8",
+            "player_2_9",
+            "player_0_12",
+            "player_0_13",
+            "player_0_10",
+            "player_0_11",
+            "player_0_12",
         ],
     ];
-    export const CANDY_BOSS_CORNERS =
-        [
-            ["player_0_start",
-                "player_0_5",
-                "player_2_8"
-            ],
-            ["player_1_start",
-                "player_0_6",
-                "player_3_8"
-            ],
-            ["player_2_start",
-                "player_0_7",
-                "player_0_8"
-            ],
-            ["player_3_start",
-                "player_3_5",
-                "player_1_8"
-            ],
-        ];
+    // BOSS
+    export const BOSS_CORNERS = [
+        ["player_0_start", "player_0_1", "player_0_2", "player_0_3", "player_0_4", "player_0_5", "player_0_6", "player_0_7", "player_3_5", "player_0_5"],
+        ["player_1_start", "player_1_1", "player_1_2", "player_1_3", "player_1_4", "player_0_6", "player_0_5", "player_3_5", "player_0_7", "player_0_6"],
+        ["player_2_start", "player_2_1", "player_2_2", "player_2_3", "player_2_4", "player_0_7", "player_3_5", "player_0_5", "player_0_6", "player_0_7"],
+        ["player_3_start", "player_3_1", "player_3_2", "player_3_3", "player_3_4", "player_3_5", "player_0_7", "player_0_6", "player_0_5", "player_3_5"],
+    ];
+    export const CANDY_BOSS_CORNERS = [
+        ["player_0_start", "player_0_5", "player_2_8"],
+        ["player_1_start", "player_0_6", "player_3_8"],
+        ["player_2_start", "player_0_7", "player_0_8"],
+        ["player_3_start", "player_3_5", "player_1_8"],
+    ];
+
+    export enum EEnemyUnitType {
+        wave = "wave",
+        BOSS = "BOSS",
+        GOLD_BOSS = "GOLD_BOSS",
+        CANDY_BOSS = "CANDY_BOSS",
+        CANDY_WAVE = "CANDY_WAVE",
+    }
 }

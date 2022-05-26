@@ -1,6 +1,6 @@
 import { building_combination } from "../../../kvInterface/building/building_combination";
 import { ET } from "../../Entity/Entity";
-import { CombinationComponent } from "./CombinationComponent";
+import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 
 export class ECombination extends ET.Entity {
 
@@ -27,13 +27,13 @@ export class ECombination extends ET.Entity {
         return Object.keys(this.config).length <= this.activeNeedCount;
     }
 
-    addCombination(entity: ET.EntityRoot) {
-        let comp = entity.GetComponent(CombinationComponent);
+    addCombination(entity: BuildingEntityRoot) {
+        let comp = entity.CombinationComp();
         if (comp == null) { return };
         if (this.entityArr.indexOf(entity.Id) == -1) {
             this.entityArr.push(entity.Id);
         };
-        let c = comp.configID;
+        let c = entity.ConfigID;
         if (this.isInCombination(c)) {
             this.combination[c] = this.combination[c] || 0;
             this.combination[c] += 1;
@@ -47,14 +47,14 @@ export class ECombination extends ET.Entity {
         }
     }
 
-    removeCombination(entity: ET.EntityRoot) {
-        let comp = entity.GetComponent(CombinationComponent);
+    removeCombination(entity: BuildingEntityRoot) {
+        let comp = entity.CombinationComp();
         if (comp == null) { return };
         let index = this.entityArr.indexOf(entity.Id);
         if (index > -1) {
             this.entityArr.splice(index, 1);
         }
-        let c = comp.configID;
+        let c = entity.ConfigID;
         if (this.isInCombination(c)) {
             this.combination[c] && (this.combination[c] -= 1);
             if (this.combination[c] == 0) {

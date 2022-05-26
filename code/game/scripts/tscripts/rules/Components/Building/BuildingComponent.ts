@@ -3,13 +3,12 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_test } from "../../../npc/modifier/modifier_test";
-import { ET } from "../../Entity/Entity";
+import { ET, registerET } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { KVConfigComponment } from "../KVConfig/KVConfigComponment";
 /**塔防组件 */
+@registerET()
 export class BuildingComponent extends ET.Component {
-    /**创建的单位名称 */
-    public readonly towerID: string;
     public vLocation: Vector;
     public fAngle: number;
     public iLevel: number;
@@ -26,15 +25,10 @@ export class BuildingComponent extends ET.Component {
     /**星级 */
     public iStar: number;
 
-
-    onAwake(towerID: string, vLocation: Vector, fAngle: number) {
-        (this as any).towerID = towerID;
+    onAwake(vLocation: Vector, fAngle: number) {
         this.vLocation = vLocation;
         this.fAngle = fAngle;
-        let kvConfig = KVHelper.KvServerConfig.building_unit_tower[towerID as "building_hero_lina"];
-        this.Domain.ETRoot.AddComponent(KVConfigComponment, towerID, kvConfig);
     }
-
 
     updateNetTable() {
         // CustomNetTables.SetTableValue("buildings", this.GetComponentEntityIndex(), {
@@ -55,23 +49,21 @@ export class BuildingComponent extends ET.Component {
     }
 
     GetAbilityPoints() {
-        return this.iAbilityPoints
+        return this.iAbilityPoints;
     }
     /**金币价格 */
     GetGoldCost() {
-        return this.iGoldCost || 0
+        return this.iGoldCost || 0;
     }
 
     /**是否可以升星 */
     checkCanStarUp() {
-        return this.iStar < BuildingConfig.MAX_STAR
+        return this.iStar < BuildingConfig.MAX_STAR;
     }
 
     /**
      * 升星
      * @param n
      */
-    AddStar(n: number) {
-    }
-
+    AddStar(n: number) {}
 }

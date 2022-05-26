@@ -51,7 +51,7 @@ export class modifier_shock extends BaseModifier_Plus {
     OnCreated(params: ModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
-            let info: ResHelper.ParticleInfo = {
+            let info: ResHelper.IParticleInfo = {
                 resPath: "particles/econ/items/zeus/lightning_weapon_fx/zues_immortal_lightning_weapon_energy.vpcf",
                 level: ResHelper.PARTICLE_DETAIL_LEVEL.PARTICLE_DETAIL_LEVEL_MEDIUM,
                 owner: this.GetParentPlus(),

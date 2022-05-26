@@ -141,7 +141,7 @@ export module ET {
         }
     }
 
-    export class Entity  implements IEntityFunc {
+    export class Entity implements IEntityFunc {
         public readonly InstanceId: string;
         public readonly Id: string;
         public readonly IsRegister: boolean = false;
@@ -503,10 +503,18 @@ export module ET {
             }
         }
 
-        static Active(etroot: IEntityRoot) {
+        static Active<T extends typeof EntityRoot>(this: T, etroot: IEntityRoot) {
             if (etroot.ETRoot == null) {
-                etroot.ETRoot = new EntityRoot(etroot);
+                etroot.ETRoot = new this(etroot);
             }
+        }
+
+        public As<T extends EntityRoot>() {
+            return this as any as T;
+        }
+
+        public AsValid<T extends EntityRoot>(str: string) {
+            return this.GetType() === str;
         }
 
         public AsPlayer() {
@@ -559,14 +567,14 @@ export module ET {
         public GetDomainChild(id: string) {
             return this.DomainChildren[id];
         }
-        public GetDomainChilds<K extends typeof Component>(type: K): EntityRoot[] {
-            let r: EntityRoot[] = [];
+        public GetDomainChilds<K extends typeof EntityRoot>(type: K): InstanceType<K>[] {
+            let r: InstanceType<K>[] = [];
             if (this.DomainChildren == null) {
                 return r;
             }
             for (let k in this.DomainChildren) {
-                if (this.DomainChildren[k].GetComponent(type) != null) {
-                    r.push(this.DomainChildren[k]);
+                if (this.DomainChildren[k].GetType() == type.name) {
+                    r.push(this.DomainChildren[k] as InstanceType<K>);
                 }
             }
             return r;

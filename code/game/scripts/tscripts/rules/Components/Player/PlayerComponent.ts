@@ -1,10 +1,11 @@
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
-import { ET } from "../../Entity/Entity";
+import { ET, registerET } from "../../Entity/Entity";
 import { PlayerConfig } from "../../System/Player/PlayerConfig";
 import { PlayerState } from "../../System/Player/PlayerState";
 import { PlayerSystem } from "../../System/Player/PlayerSystem";
 
 /**玩家数据组件 */
+@registerET()
 export class PlayerComponent extends ET.Component {
     /**出生点 */
     firstSpawnPoint: Vector;
