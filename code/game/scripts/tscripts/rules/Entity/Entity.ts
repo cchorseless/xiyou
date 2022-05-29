@@ -7,8 +7,27 @@ import { PlayerEntityRoot } from "../Components/Player/PlayerEntityRoot";
 export const registerET = () => (entity: typeof ET.Entity) => {
     PrecacheHelper.RegClass([entity as any]);
 };
+export const serializeETProps =
+    (params: string = null) =>
+    (target: ET.Entity, attr: string) => {
+        // 处理属性
+        if (target.SerializeETProps == null) {
+            (target as any).SerializeETProps = [];
+        }
+        if (params != null) {
+            attr = params;
+        }
+        target.SerializeETProps.push(attr);
+    };
 
 export module ET {
+    export interface IEntityJson {
+        _t: string;
+        _id: string;
+        Children?: { [k: string]: IEntityJson };
+        C?: { [k: string]: IEntityJson };
+        [K: string]: any;
+    }
     interface IEntityProperty {
         InstanceId: string;
         Id: string;
@@ -47,7 +66,7 @@ export module ET {
             this._id = 0;
             this.setTo(null, null, null);
         }
-        setTo(caller: any, method: any, args: any[], once = false) {
+        setTo(caller: any, method: any, args: any[], once = true) {
             this._id = Handler._gid++;
             this.caller = caller;
             this.method = method;
@@ -109,7 +128,7 @@ export module ET {
         }
         static create(caller: any, method: any, args: any[] = null, once = true) {
             if (Handler._pool.length > 0) return Handler._pool.pop().setTo(caller, method, args, once);
-            return new Handler();
+            return new Handler().setTo(caller, method, args, once);
         }
     }
 
@@ -150,7 +169,7 @@ export module ET {
         public readonly Domain: IEntityRoot;
         public readonly Children: { [uuid: string]: Entity };
         public readonly Components: { [name: string]: Component };
-
+        public readonly SerializeETProps: string[];
         /**初始化 */
         onAwake?(...args: any[]): void;
         /**重载组件 */
@@ -159,6 +178,44 @@ export module ET {
         onUpdate?(): void;
         onDestroy?(): void;
 
+        public toJsonPartObject(props: string[]) {
+            let obj: IEntityJson = {} as any;
+            obj._t = this.GetType();
+            obj._id = this.Id;
+            if (this.SerializeETProps != null) {
+                for (let k of this.SerializeETProps) {
+                    if (props.includes(k)) {
+                        obj[k] = (this as any)[k];
+                    }
+                }
+            }
+            return obj;
+        }
+        public toJsonObject(ignoreChild: boolean = false) {
+            let obj: IEntityJson = {} as any;
+            obj._t = this.GetType();
+            obj._id = this.Id;
+            if (this.SerializeETProps != null) {
+                for (let k of this.SerializeETProps) {
+                    obj[k] = (this as any)[k];
+                }
+            }
+            if (!ignoreChild) {
+                if (this.Children != null) {
+                    obj.Children = {} as any;
+                    for (let k in this.Children) {
+                        obj.Children[k] = this.Children[k].toJsonObject();
+                    }
+                }
+                if (this.Components != null) {
+                    obj.C = {};
+                    for (let k in this.Components) {
+                        obj.C[k] = this.Components[k].toJsonObject();
+                    }
+                }
+            }
+            return obj;
+        }
         /**
          *开启服务器每帧刷新
          *@param frame 刷新帧数

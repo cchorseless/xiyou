@@ -1,4 +1,65 @@
 export module FuncHelper {
+
+    export class Handler {
+        private static _pool: Handler[] = [];
+        private static _gid: number = 0;
+        public _id = Handler._gid++;
+        public caller: any;
+        public method: Function | null;
+        public args: any[];
+        public once: boolean;
+        constructor() {
+            this.once = false;
+            this._id = 0;
+            this.setTo(null, null, []);
+        }
+        setTo(caller: any, method: any, args: any[], once = false) {
+            this._id = Handler._gid++;
+            this.caller = caller;
+            this.method = method;
+            this.args = args;
+            this.once = once;
+            return this;
+        }
+        run() {
+            if (this.method == null) return null;
+            let id = this._id;
+            let nextCall = this.method.apply(this.caller);
+            this._id === id && this.once && this.recover();
+            return nextCall;
+        }
+        runWith(data: any[]) {
+            if (this.method == null) return null;
+            let id = this._id;
+            let arg: any[] = [];
+            if (this.args) {
+                arg = arg.concat(this.args);
+            }
+            if (data) {
+                arg = arg.concat(data);
+            }
+            let nextCall = this.method.apply(this.caller, ...arg);
+            this._id === id && this.once && this.recover();
+            return nextCall;
+        }
+        clear() {
+            this.caller = null;
+            this.method = null;
+            this.args = [];
+            return this;
+        }
+        recover() {
+            if (this._id > 0) {
+                this._id = 0;
+                Handler._pool.push(this.clear());
+            }
+        }
+        static create(caller: any, method: any, args: any[] = [], once = true) {
+            if (Handler._pool.length > 0) return (Handler._pool.pop() as Handler).setTo(caller, method, args, once);
+            return new Handler().setTo(caller, method, args, once);
+        }
+    }
+
     /**
      * 获取全局唯一UUID
      * @returns

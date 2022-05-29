@@ -42,6 +42,7 @@
         "prod:ts": "tstl --project game/scripts/tsconfig.json",
         "prod:kv": "node scripts/excel_2_kv.js",
         "prod:createability": "node scripts/createabilityfile.js",
+        "prod:soundkv": "node scripts/soundexcel_2_kv.js",
         "prod:kv2ts": "node scripts/kv_2_ts.js",
         "prod:localization": "node scripts/localization.js",
         "publish": "node scripts/publish.js true true",

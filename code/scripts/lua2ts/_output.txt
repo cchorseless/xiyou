@@ -1,123 +1,15 @@
-modifier_fall = class({})
-
-animation = GameActivity_t.ACT_DOTA_FLAIL
-
- IsStunDebuff() {
-    return true
-}
-
- IsHidden() {
-    return true
-}
-
- IsPurgable() {
-    return false
-}
-
- RemoveOnDeath() {
-    return false
-}
-
- OnCreated(kv) {
-    if ( IsServer() ) {
-        if ( this.ApplyVerticalMotionController() == false ) {
-            this.Destroy()
-            return
-        }
-
-        // 初始化高度
-        this.vStartPosition    = GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus()) + Vector(0,0,1000)
-        this.GetParentPlus().SetOrigin(this.vStartPosition)
-
-        //  play_particle("particles/econ/items/natures_prophet/natures_prophet_weapon_sufferwood/furion_teleport_end_team_sufferwood.vpcf",ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,this.GetParentPlus(),5)
-        //  let pos = keys.pos || ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
-        //  let pp = ParticleManager.CreateParticle("particles/econ/items/natures_prophet/natures_prophet_weapon_sufferwood/furion_teleport_end_team_sufferwood.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus())
-        //  ParticleManager.SetParticleControlEnt( pp, 0, this.GetParentPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, null, this.GetParentPlus().GetAbsOrigin(), true );
-        //  ParticleManager.SetParticleControlEnt( pp, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, null, this.GetParentPlus().GetAbsOrigin(), true );
-
-        //  Timers.CreateTimer(5, () => {
-        //      if ( pp != null ) {
-        //          ParticleManager.DestroyParticle(pp,true)
-        //      }
-        //  })
-
-        // 目标点
-        this.vTargetPosition   = GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus())
-
-    }
-}
-
- OnDestroy() {
-    if ( IsServer() ) {
-        this.GetParentPlus().RemoveHorizontalMotionController(this)
-        this.GetParentPlus().RemoveVerticalMotionController(this)
-        //  this.GetParentPlus().SetForwardVector(Vector(0,-1,0))
-    }
-}
-
- DeclareFunctions() {
-    let funcs = {
-        @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION,
-    }
-    return funcs
-}
-
- CheckState() {
-    let state = {
-    }
-    return state
-}
-
- GetOverrideAnimation() {
-    return GameActivity_t.ACT_DOTA_FLAIL
-}
-
- UpdateVerticalMotion(me:BaseNpc_Plus, dt:number) {
-    if ( IsServer() ) {
-        let curr_position = this.GetParentPlus().GetOrigin() + Vector(0,0,-60)
-        me.SetAbsOrigin(curr_position)
-
-        //  判断是否到达了地面
-        if ( (me.GetOrigin()-this.vTargetPosition).Length() < 30 ) {
-            // 到终点了
-            me.SetAbsOrigin(this.vTargetPosition)
-            me.is_moving = false
-            me.InterruptMotionControllers(true)
-            play_particle("particles/dev/library/base_dust_hit_shockwave.vpcf",ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,me,3)
-            EmitSoundOn("Hero_OgreMagi.Idle.Headbutt",me)
-
-            this.Destroy()
-        }
-    }
-}
-
-function play_particle(p, pos, u, d)
-    //  if ( u == null ) {
-    //   return
-    //  }
-    let pp = ParticleManager.CreateParticle(p, pos, u)
-    //  Timers.CreateTimer( () => {
-    //   if ( u.IsNull() != false || u.IsAlive() != false ) {
-    //       ParticleManager.DestroyParticle(pp,true)
-    //       return
-    //   }
-    //   return 1
-    //  })
-    Timers.CreateTimer(d, () => {
-        if ( pp != null ) {
-            ParticleManager.DestroyParticle(pp,true)
-        }
-    })
-}
-function RemoveAbilityAndModifier(u,a)
-    if ( u == null || u.IsNull() == true ) {
-        return
-    }
-    if ( u.FindAbilityByName(a) != null ) {
-        u.RemoveAbility(a)
-        u.RemoveModifierByName('modifier_'+a)
-    }
-}
-function prt(t)
-    GameRules.SendCustomMessage(''+t,0,0)
+// -创建一个传送门
+// -@param vPortalPosition Vector 传送门的位置
+// -@param vTargetPosition Vector 目的地位置
+// -@param vForward Vector 传送门的朝向
+// -@return CDOTA_BaseNPC 传送门单位
+ CreatePortal(vPortalPosition, vTargetPosition, vForward, sPortalName, bHasArrow) {
+	bHasArrow = bHasArrow || false
+	let hPortal = CreateUnitByNameWithNewData("npc_portal", vPortalPosition, true, null, null, DOTA_TEAM_GOODGUYS, { UnitLabel : sPortalName || "" })
+	hPortal.SetForwardVector(vForward)
+	let sPosition = vTargetPosition.x + "," + vTargetPosition.y + "," + vTargetPosition.z
+	let hModifier = hPortal.AddNewModifier(hPortal, null, "modifier_portal", { vPosition = sPosition, iHasArrow = bHasArrow && 1 || 0 })
+	hModifier.callback = this.OnPortalTrigger
+	hModifier.context = this
+	return hPortal
 }

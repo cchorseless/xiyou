@@ -95,6 +95,7 @@ export class DrawComponent extends ET.Component {
         // hItem.OnSpellStart()
         if (GameFunc.IsValid(hItem) && b2Public) {
             // Items.TryMoveEmptyPublic(iPlayerID, hHero, hItem);
+            this.tLastCards = [];
         }
         // let bFreeTake = this.tPlayerCards[iPlayerID].bFreeTake;
         // let index = TableFindKey(this.tPlayerCards[iPlayerID].tTower, sTowerName);

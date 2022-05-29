@@ -1,12 +1,13 @@
+import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
-import { ET } from "../../libs/Entity";
+import { ET, registerET } from "../../libs/Entity";
 import { GameEnum } from "../../libs/GameEnum";
 import { CardSamllIconItem } from "../../view/Card/CardSamllIconItem";
 import { MainPanel } from "../../view/MainPanel/MainPanel";
 import { ChessControlConfig } from "../system/ChessControl/ChessControlConfig";
-
+@registerET()
 export class ChessControlComponent extends ET.Component {
     onAwake() {
         this.addEvent();
@@ -23,14 +24,14 @@ export class ChessControlComponent extends ET.Component {
         GameEvents.Subscribe(GameEnum.GameEvent.dota_player_update_selected_unit, async (e) => {
             await this.OnPlayerQueryUnit(e);
         });
-        TimerHelper.addTimer(
-            0.02,
-            () => {
+        TimerHelper.AddIntervalFrameTimer(
+            1,
+            1,
+            FuncHelper.Handler.create(this, () => {
                 this.UpdateHeroIcon();
-                return 0.02;
-            },
-            this,
-            true
+            }),
+            -1,
+            false
         );
     }
 

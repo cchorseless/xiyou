@@ -16,14 +16,14 @@ export class EnemySystem {
 
     public static GetEnemyCounts() {
         let index = 0;
-        PlayerSystem.PlayerList().forEach((player) => {
+        PlayerSystem.GetAllPlayer().forEach((player) => {
             index += player.EnemyManagerComp().tAllEnemy.length;
         });
         return index;
     }
     public static GetMaxEnemy() {
         let index = 0;
-        let allplayer = PlayerSystem.PlayerList();
+        let allplayer = PlayerSystem.GetAllPlayer();
         let playerCount = allplayer.length;
         allplayer.forEach((player) => {
             index += player.EnemyManagerComp().iMaxEnemyBonus + player.EnemyManagerComp().iMaxEnemyBonusEach * playerCount;

@@ -3,6 +3,8 @@ export module ChessControlConfig {
     export const Gird_Height = 256;
     export const Gird_Max_X = 8;
     export const Gird_Max_Y = 10;
+    export const ChessValid_Max_Y = 5;
+
 
     export class ChessVector {
         public x = -1;

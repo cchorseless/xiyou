@@ -1,6 +1,5 @@
 import { GameEnum } from "./GameEnum";
 import { GameSetting } from "./GameSetting";
-import { Assert_Sounds } from "./helper/ResHelper";
 import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { SingletonClass } from "./helper/SingletonHelper";
@@ -20,19 +19,30 @@ export class GameDebugger extends SingletonClass {
             // this.printGameEvent();
             // Todo 数据埋点上报
         }
+        this.checkCheatMode();
     }
+    private checkCheatMode() {
+        TimerHelper.addTimer(
+            1,
+            () => {
+                if (!IsInToolsMode() && GameRules.IsCheatMode()) {
+                    GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
+                }
+                return 5;
+            },
+            this,
+            false
+        );
+    }
+
     /**打印游戏时间顺序 */
     private printGameEvent() {
         for (let k in GameEnum.Event.GameEvent) {
             let eventName = (GameEnum.Event.GameEvent as any)[k];
             if (eventName) {
-                EventHelper.addGameEvent(
-                    this,
-                    eventName,
-                    (e) => {
-                        LogHelper.print(k, "|", eventName);
-                    },
-                );
+                EventHelper.addGameEvent(this, eventName, (e) => {
+                    LogHelper.print(k, "|", eventName);
+                });
             }
         }
     }
@@ -160,21 +170,19 @@ export class GameDebugger extends SingletonClass {
 
     public addDebugEvent() {
         //#region  游戏内事件
-        EventHelper.addGameEvent(
-            this,
-            GameEnum.Event.GameEvent.PlayerChatEvent, this.OnPlayerChat);
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.PlayerChatEvent, this.OnPlayerChat);
         //#endregion
 
         //#region  自定义事件
         // 游戏结束
-        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_DebugGameOver, this.onDebugGameOver, );
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_DebugGameOver, this.onDebugGameOver);
         // 游戏重载
-        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_DebugReload, this.onDebugReload, );
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_DebugReload, this.onDebugReload);
         // 游戏重新开始
-        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_DebugRestart, this.onDebugRestart, );
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_DebugRestart, this.onDebugRestart);
         // 清除打印
-        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_DebugClearAll, this.onDebugClearAll, );
-        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_addBot, this.onreq_addBot, );
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_DebugClearAll, this.onDebugClearAll);
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_addBot, this.onreq_addBot);
 
         //#endregion
     }

@@ -2,6 +2,7 @@
 import React, { createRef, useState } from "react";
 import { render } from "react-panorama-eom";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
+import { FuncHelper } from "../../../helper/FuncHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
@@ -13,53 +14,56 @@ import { Team_select_UI } from "./Team_select_UI";
 export class Team_select extends Team_select_UI {
     // 初始化数据
     componentDidMount() {
-        super.componentDidMount()
+        super.componentDidMount();
         if (this.props.isActive) {
-            this.allplayer.current!.style.flowChildren = "right-wrap"
-            this.updatePlayerInfo()
+            this.allplayer.current!.style.flowChildren = "right-wrap";
+            this.updatePlayerInfo();
         }
         this.btn_addbot.current!.visible = false;
         this.btn_startgame.current!.visible = false;
-        let playerID = Game.GetLocalPlayerID()
+        let playerID = Game.GetLocalPlayerID();
         if (Players.IsValidPlayerID(playerID)) {
             let ishost = Game.GetPlayerInfo(playerID).player_has_host_privileges;
             this.btn_addbot.current!.visible = ishost;
             this.btn_startgame.current!.visible = ishost;
         }
         Game.SetAutoLaunchEnabled(false);
-        this.addEvent()
-    };
+        this.addEvent();
+    }
 
     updatePlayerInfo() {
         this.closeNode(this.NODENAME.allplayer);
-        let allplayer = Game.GetAllPlayerIDs()
-        allplayer.forEach(playerID => {
+        let allplayer = Game.GetAllPlayerIDs();
+        allplayer.forEach((playerID) => {
             this.addNodeChildAt(this.NODENAME.allplayer, PlayerInTeamItem, {
-                playerID: playerID
-            })
-        })
-        Game.AutoAssignPlayersToTeams()
+                playerID: playerID,
+            });
+        });
+        Game.AutoAssignPlayersToTeams();
         this.updateSelf();
     }
 
-
     // 销毁
     componentWillUnmount() {
-        super.componentWillUnmount()
-    };
+        super.componentWillUnmount();
+    }
 
     onbtn_startgame = () => {
         this.OnLockAndStartPressed();
-    }
+    };
 
     addEvent = () => {
-        NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_addBot, (e) => {
-            if (e.state) {
-                this.updatePlayerInfo()
-                this.isAdding = false
-            }
-        }, this)
-    }
+        NetHelper.ListenOnLua(
+            GameEnum.CustomProtocol.req_addBot,
+            (e) => {
+                if (e.state) {
+                    this.updatePlayerInfo();
+                    this.isAdding = false;
+                }
+            },
+            this
+        );
+    };
 
     isAdding = false;
     onbtn_addbot = () => {
@@ -74,7 +78,7 @@ export class Team_select extends Team_select_UI {
         // }
         // this.isAdding = true
         // NetHelper.SendToLua(GameEnum.CustomProtocol.req_addBot)
-    }
+    };
 
     OnLockAndStartPressed = () => {
         // Don't allow a forced start if there are unassigned players
@@ -87,14 +91,16 @@ export class Team_select extends Team_select_UI {
         Game.SetAutoLaunchEnabled(false);
         // Set the remaining time before the game starts
         Game.SetRemainingSetupTime(0);
-        TimerHelper.addTimer(3, () => {
-            let loading = Loading.GetInstance()
-            if (loading) {
-                loading!.destroy()
-
-            }
-        })
-    }
+        TimerHelper.AddTimer(
+            3,
+            FuncHelper.Handler.create(this, () => {
+                let loading = Loading.GetInstance();
+                if (loading) {
+                    loading!.destroy();
+                }
+            })
+        );
+    };
 
     //--------------------------------------------------------------------------------------------------
     // Handler for when the Cancel and Unlock button is pressed
@@ -105,6 +111,4 @@ export class Team_select extends Team_select_UI {
         // Stop the countdown timer
         Game.SetRemainingSetupTime(-1);
     }
-
-
 }

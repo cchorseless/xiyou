@@ -1,148 +1,238 @@
 import { FuncHelper } from "./FuncHelper";
 import { LogHelper } from "./LogHelper";
+import { SingletonClass } from "./SingletonHelper";
 
 export module TimerHelper {
-    interface ITimerContent {
-        InstanceId: string;
+    export const Offtime = new Date().getTimezoneOffset() * 60 * 1000;
+    export const UpdateInterval = 0.02;
+
+    export function Init() {
+        $.Schedule(UpdateInterval, Update);
+    }
+    function Update() {
+        TimeHelper.GetInstance().Update();
+        Init();
     }
 
-    interface timerInfo {
-        /**计时器ID */
-        timerid: ScheduleID;
-        /**结束时间 */
-        finishtime: number;
-        /**处理函数 */
-        handler: () => void;
-    }
-    /**所有计时器 */
-    export let AllTimer: { [uuid: string]: Array<timerInfo> } = {};
-    /**
-     * 添加计时器
-     * @param delay 秒
-     * @param handler =>重复间隔时间（秒）
-     * @param content
-     * @param useGameTime 是否使用游戏时间，true=>游戏暂停，计时器停止；false=>无视游戏是否暂停
-     */
-    export function addTimer(delay: number, handler: () => number | void, content: ITimerContent | null = null, useGameTime = true) {
-        if (delay < 0) {
-            return;
-        }
-        let cb = () => {
-            let repeatTime = handler.call(content);
-            if (repeatTime && repeatTime > 0) {
-                TimerHelper.addTimer(repeatTime, handler, content);
-            }
-        };
-        let timerID = $.Schedule(delay, cb);
-        let uuid = FuncHelper.generateUUID();
-        if (content) {
-            uuid = content.InstanceId;
-            if (uuid == null) {
-                throw Error(content.constructor.name + "dont have UUID");
+    export class TimerTask {
+        // 帧事件
+        public isFrameTask: boolean;
+        //持续时间
+        private mDelay: number;
+        //重复间隔
+        private mInterval: number;
+        //重复次数
+        private looptime: number;
+        //结束回调
+        private mEndCallBack: FuncHelper.Handler | null;
+        //是否忽略时间
+        private isIgnorePauseTime: boolean;
+        //计时器
+        private mRunTime: number;
+        public IsInPool = false;
+
+        //初始化
+        public Init(_isFrameTask: boolean, _delay: number, _endCallBack: FuncHelper.Handler, _interval = -1, _looptime = 0, _isIgnorePauseTime = false) {
+            this.isFrameTask = _isFrameTask;
+            this.mDelay = Math.floor(_delay * 1000);
+            this.mEndCallBack = _endCallBack;
+            this.mInterval = Math.floor(_interval * 1000);
+            this.looptime = _looptime;
+            this.isIgnorePauseTime = _isIgnorePauseTime;
+            this.mRunTime = 0;
+            this.mEndCallBack!.once = false;
+            if (this.mDelay == 0) {
+                this.mEndCallBack?.run();
+                this.mDelay = this.mInterval;
             }
         }
-        let timerInfo: timerInfo = {
-            timerid: timerID,
-            finishtime: new Date().getTime() + delay * 1000,
-            handler: handler,
-        };
-        TimerHelper.AllTimer[uuid] = TimerHelper.AllTimer[uuid] || [];
-        // 控制队列长度，移除失效时间ID
-        if (TimerHelper.AllTimer[uuid].length > 50) {
-            let now = new Date().getTime();
-            TimerHelper.AllTimer[uuid] = TimerHelper.AllTimer[uuid].filter((v, index, array) => {
-                return v.finishtime > now;
-            });
+
+        //更新
+        public Update(): boolean {
+            if (!this.isIgnorePauseTime && Game.IsGamePaused()) {
+                return true;
+            }
+            let deltaTime;
+            if (this.isFrameTask) {
+                deltaTime = 1000;
+            } else {
+                // UpdateInterval * 1000
+                deltaTime = 20;
+            }
+            this.mRunTime += deltaTime;
+            let isFinish = this.mRunTime >= this.mDelay;
+            if (isFinish) {
+                this.mEndCallBack?.run();
+                this.mRunTime = 0;
+                if (this.mInterval <= 0 || this.looptime == 0) {
+                    this.Clear();
+                    return false;
+                } else {
+                    this.mDelay = this.mInterval;
+                    if (this.looptime > 0) {
+                        this.looptime -= 1;
+                    }
+                }
+            }
+            return true;
         }
-        TimerHelper.AllTimer[uuid].push(timerInfo);
-        return timerID;
+        IsBind(obj: any) {
+            if (obj == null) {
+                return false;
+            } else {
+                return this.mEndCallBack!.caller == obj;
+            }
+        }
+        public Clear() {
+            if (this.IsInPool) {
+                return;
+            }
+            this.mDelay = 0;
+            this.mInterval = 0;
+            this.looptime = 0;
+            this.mEndCallBack!.once = true;
+            this.mEndCallBack!.recover();
+            this.mEndCallBack = null;
+            this.mRunTime = 0;
+            TimeHelper.GetInstance().Clear(this);
+        }
     }
 
-    export async function delayTime(delay: number, useGameTime = true) {
+    class TimeHelper extends SingletonClass {
+        //正在使用的TimerTask
+        mUseTimerTasks = new Array<TimerTask>();
+        //空闲的TimerTask
+        mNotUseTimerTasks = new Array<TimerTask>();
+
+        //尝试从空闲池中取一个TimerTask
+        GetTimerTask() {
+            let data = null;
+            if (this.mNotUseTimerTasks.length == 0) {
+                data = new TimerTask();
+            } else {
+                data = this.mNotUseTimerTasks[0];
+                this.mNotUseTimerTasks.shift();
+            }
+            this.mUseTimerTasks.push(data);
+            data.IsInPool = false;
+            return data;
+        }
+
+        //创建一个计时器
+        public AddTimer(_delay: number, endCallBack: FuncHelper.Handler, _isIgnorePauseTime = false) {
+            let data = this.GetTimerTask();
+            data.Init(false, _delay, endCallBack, -1, 0, _isIgnorePauseTime);
+            return data;
+        }
+        public AddTimerTask(task: TimerTask, _delay: number, endCallBack: FuncHelper.Handler, _isIgnorePauseTime = false) {
+            if (task == null) {
+                LogHelper.warn("TimerTask IS NULL");
+                return;
+            }
+            task.Init(false, _delay, endCallBack, -1, 0, _isIgnorePauseTime);
+        }
+
+        public AddFrameTimer(delayframeCount: number, endCallBack: FuncHelper.Handler, _isIgnorePauseTime = false): TimerTask {
+            let data = this.GetTimerTask();
+            data.Init(true, delayframeCount, endCallBack, -1, 0, _isIgnorePauseTime);
+            return data;
+        }
+        public AddFrameTimerTask(task: TimerTask, delayframeCount: number, endCallBack: FuncHelper.Handler, _isIgnorePauseTime = false) {
+            if (task == null) {
+                LogHelper.warn("TimerTask IS NULL");
+                return;
+            }
+            task.Init(true, delayframeCount, endCallBack, -1, 0, _isIgnorePauseTime);
+        }
+        /// <summary>
+        /// 创建一个重复型计时器
+        /// </summary>
+        /// <param name="_delay">秒</param>
+        /// <param name="_interval">秒</param>
+        /// <param name="_endCallBack"></param>
+        /// <param name="looptime"></param>  小于0 无限循环
+        /// <param name="_isIgnorePauseTime"></param>
+        /// <returns></returns>
+        public AddIntervalTimer(_delay: number, _interval: number, _endCallBack: FuncHelper.Handler, looptime: number, _isIgnorePauseTime = false) {
+            let data = this.GetTimerTask();
+            data.Init(false, _delay, _endCallBack, _interval, looptime, _isIgnorePauseTime);
+            return data;
+        }
+        public AddIntervalTimerTask(task: TimerTask, _delay: number, _interval: number, _endCallBack: FuncHelper.Handler, looptime: number, _isIgnorePauseTime = false) {
+            if (task == null) {
+                LogHelper.warn("TimerTask IS NULL");
+                return;
+            }
+            task.Init(false, _delay, _endCallBack, _interval, looptime, _isIgnorePauseTime);
+        }
+
+        public AddIntervalFrameTimer(delayframeCount: number, _interval: number, _endCallBack: FuncHelper.Handler, looptime: number, _isIgnorePauseTime = false) {
+            let data = this.GetTimerTask();
+            data.Init(true, delayframeCount, _endCallBack, _interval, looptime, _isIgnorePauseTime);
+            return data;
+        }
+
+        public AddIntervalFrameTimerTask(task: TimerTask, delayframeCount: number, _interval: number, _endCallBack: FuncHelper.Handler, looptime: number, _isIgnorePauseTime = false) {
+            if (task == null) {
+                LogHelper.warn("TimerTask IS NULL");
+                return;
+            }
+            task.Init(true, delayframeCount, _endCallBack, _interval, looptime, _isIgnorePauseTime);
+        }
+
+        public Clear(data: TimerTask) {
+            if (data == null) {
+                return;
+            }
+            let index = this.mUseTimerTasks.indexOf(data);
+            if (index > -1) {
+                this.mUseTimerTasks.splice(index, 1);
+                data.IsInPool = true;
+                this.mNotUseTimerTasks.push(data);
+            }
+        }
+        public ClearAll(bindObj: any) {
+            if (bindObj == null) {
+                return;
+            }
+            for (let i = this.mNotUseTimerTasks.length - 1; i > -1; i--) {
+                if (this.mNotUseTimerTasks[i].IsBind(bindObj)) {
+                    this.mNotUseTimerTasks[i].Clear();
+                }
+            }
+        }
+        public Update() {
+            for (let i = 0; i < this.mUseTimerTasks.length; ++i) {
+                if (!this.mUseTimerTasks[i].Update()) {
+                    //没更新成功，mUseTimerTasks长度减1，所以需要--i
+                    --i;
+                }
+            }
+        }
+    }
+
+    export function AddTimer(delay: number, handler: FuncHelper.Handler, isIgnorePauseTime = true) {
+        return TimeHelper.GetInstance().AddTimer(delay, handler, isIgnorePauseTime);
+    }
+    export function AddIntervalTimer(delay: number, _interval: number, handler: FuncHelper.Handler, looptime: number, _isIgnorePauseTime = true) {
+        return TimeHelper.GetInstance().AddIntervalTimer(delay, _interval, handler, looptime, _isIgnorePauseTime);
+    }
+    export function AddFrameTimer(delay: number, handler: FuncHelper.Handler, isIgnorePauseTime = true) {
+        return TimeHelper.GetInstance().AddFrameTimer(delay, handler, isIgnorePauseTime);
+    }
+    export function AddIntervalFrameTimer(delay: number, _interval: number, handler: FuncHelper.Handler, looptime: number, isIgnorePauseTime = true) {
+        return TimeHelper.GetInstance().AddIntervalFrameTimer(delay, _interval, handler, looptime, isIgnorePauseTime);
+    }
+
+    export async function DelayTime(delay: number, useGameTime = true) {
         return new Promise<boolean>((resolve, reject) => {
-            TimerHelper.addTimer(delay, () => {
-                resolve(true);
-            }, null, useGameTime);
+            TimerHelper.AddTimer(
+                delay,
+                FuncHelper.Handler.create(null, () => {
+                    resolve(true);
+                }),
+                useGameTime
+            );
         });
-    }
-
-    /**
-     * 移除计时器
-     * @param content 组件，上下文
-     * @param handler 函数
-     */
-    export function removeTimer(content: ITimerContent, handler: () => void) {
-        let uuid = content.InstanceId;
-        if (uuid == null) {
-            throw Error(content.constructor.name + "dont have UUID");
-        }
-        if (TimerHelper.AllTimer[uuid]) {
-            let now = new Date().getTime();
-            TimerHelper.AllTimer[uuid] = TimerHelper.AllTimer[uuid].filter((v, index, array) => {
-                if (v.handler == handler && v.finishtime > now) {
-                    // 只能删除没有触发的计时器，否则会报错
-                    TimerHelper.safeCancelScheduled(v.timerid);
-                }
-                return v.handler != handler;
-            });
-        }
-    }
-
-    /**
-     * 删除计时器
-     * @param content 组件，上下文
-     * @param timerID 计时器ID
-     * @returns
-     */
-    export function removeTimerByID(content: ITimerContent, timerID: ScheduleID) {
-        if (content) {
-            let uuid = content.InstanceId;
-            if (uuid == null) {
-                throw Error(content.constructor.name + "dont have UUID");
-            }
-            let AllTimer = TimerHelper.AllTimer[uuid];
-            if (AllTimer) {
-                let now = new Date().getTime();
-                TimerHelper.AllTimer[uuid] = TimerHelper.AllTimer[uuid].filter((v, index, array) => {
-                    return v.finishtime >= now && v.timerid != timerID;
-                });
-            }
-        }
-        TimerHelper.safeCancelScheduled(timerID);
-    }
-
-    /**
-     * 移除所有计时器
-     * @param content
-     */
-    export function removeAllTimer(content: ITimerContent) {
-        let uuid = content.InstanceId;
-        if (uuid == null) {
-            throw Error(content.constructor.name + "dont have UUID");
-        }
-        let AllTimer = TimerHelper.AllTimer[uuid];
-        if (AllTimer) {
-            let now = new Date().getTime();
-            AllTimer.forEach((timerInfo) => {
-                // 加了200毫秒的延迟，防止极限情况
-                if (timerInfo.finishtime + 1000 >= now) {
-                    TimerHelper.safeCancelScheduled(timerInfo.timerid);
-                }
-            });
-            AllTimer.length = 0;
-            delete TimerHelper.AllTimer[uuid];
-        }
-    }
-
-    /**
-     * 安全删除定时器
-     * @param timerID
-     */
-    export function safeCancelScheduled(timerID: ScheduleID) {
-        try {
-            $.CancelScheduled(timerID);
-        } catch (e) {
-            LogHelper.warn("timer del repeat");
-        }
     }
 }

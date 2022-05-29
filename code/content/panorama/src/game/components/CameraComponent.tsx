@@ -1,7 +1,7 @@
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
-import { ET } from "../../libs/Entity";
+import { ET, registerET } from "../../libs/Entity";
 import { GameEnum } from "../../libs/GameEnum";
 
 const MIN_CAMERA_DISTANCE = 1300;
@@ -21,6 +21,8 @@ const START_OFFSET_SCREEN = 1 / 4;
 const END_OFFSET_SCREEN = 1 / 3;
 
 /**摄像机控制组件 */
+
+@registerET()
 export class CameraComponent extends ET.Component {
 
     fCameraDistance: number = 1300;

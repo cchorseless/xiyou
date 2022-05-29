@@ -5,6 +5,7 @@
  * @LastEditTime: 2021-05-20 16:50:28
  * @Description: 预加载资源
  */
+import { Assert_Precache } from "../assert/Assert_Precache";
 import { KVHelper } from "./KVHelper";
 import { LogHelper } from "./LogHelper";
 
@@ -49,7 +50,7 @@ export class PrecacheHelper {
         // 加载音频文件
         PrecacheHelper.precacheAllSound(context);
         // 加载资源文件
-        PrecacheHelper.precachAllResource();
+        PrecacheHelper.precachAllResource(context);
         // 加载道具
         PrecacheHelper.precachAllItems();
         // 加载单位
@@ -65,30 +66,16 @@ export class PrecacheHelper {
 
     private static precacheAllSound(context: CScriptPrecacheContext) {
         // 需要加载音频的资源文件
-        [
-            // PrecacheHelper.KvConfig.ChargeCounterKv,
-        ].forEach((v: any) => {
-            [v.GameSoundsFile, v.VoiceFile].forEach((soundPath: string) => {
-                if (soundPath && typeof soundPath == "string") {
-                    PrecacheHelper.precachRes(ResType.soundfile, soundPath, context);
-                }
-            });
+        Assert_Precache.soundfile.forEach((v) => {
+            if (v && v.endsWith("vsndevts")) {
+                PrecacheHelper.precachRes(ResType.soundfile, v, context);
+            }
         });
     }
 
-    private static precachAllResource() {
-        [
-            // PrecacheHelper.KvConfig.ChargeCounterKv,
-        ].forEach((v: any) => {
-            [v.precache].forEach((precacheInfo: any) => {
-                if (precacheInfo) {
-                    for (let sPrecacheMode in precacheInfo) {
-                        // PrecacheHelper.precachRes(sPrecacheMode, precacheInfo[sPrecacheMode])
-                    }
-                }
-                return;
-            });
-            return;
+    private static precachAllResource(context: CScriptPrecacheContext) {
+        Object.keys(Assert_Precache.particle).forEach((k) => {
+            PrecacheHelper.precachRes(ResType.particle, (Assert_Precache.particle as any)[k].effect, context);
         });
     }
     /**
@@ -122,9 +109,6 @@ export class PrecacheHelper {
      * @param resPath
      */
     public static precachRes(resType: ResType, resPath: string, context: CScriptPrecacheContext) {
-        if (!IsClient()) {
-            return;
-        }
         PrecacheHelper.allRes[resType] = PrecacheHelper.allRes[resType] || [];
         let resdata = PrecacheHelper.allRes[resType];
         if (!resdata.includes(resPath)) {

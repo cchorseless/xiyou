@@ -1,15 +1,16 @@
 import React from "react";
-import { LogHelper } from "../../helper/LogHelper";
-import { NetHelper } from "../../helper/NetHelper";
-import { TimerHelper } from "../../helper/TimerHelper";
-import { ET } from "../../libs/Entity";
-import { GameEnum } from "../../libs/GameEnum";
-import { MainPanel } from "../../view/MainPanel/MainPanel";
+import { LogHelper } from "../../../helper/LogHelper";
+import { NetHelper } from "../../../helper/NetHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
+import { ET, registerET } from "../../../libs/Entity";
+import { GameEnum } from "../../../libs/GameEnum";
+import { MainPanel } from "../../../view/MainPanel/MainPanel";
 
 /**玩家 */
+@registerET()
 export class PlayerComponent extends ET.Component {
     onAwake() {
-        this.NoticeServerReady();
+        this.addEvent();
     }
 
     NoticeServerReady() {
@@ -23,12 +24,20 @@ export class PlayerComponent extends ET.Component {
                 if (playerInfo) {
                     if (playerInfo.player_id == event.playerid) {
                         NetHelper.SendToLua(GameEnum.CustomProtocol.req_LoginGame, null, (e) => {
-                            LogHelper.print(e)
+                            LogHelper.print(e);
                         });
                         GameEvents.Unsubscribe(eventid2);
                     }
                 }
             });
         }
+    }
+
+    addEvent() {
+        this.NoticeServerReady();
+        NetHelper.ListenOnLua(GameEnum.CustomProtocol.push_sync_et_entity, (event) => {
+            let entity = ET.Entity.FromJson(event.data);
+            
+        });
     }
 }

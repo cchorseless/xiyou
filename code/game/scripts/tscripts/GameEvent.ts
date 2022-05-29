@@ -172,11 +172,12 @@ export class GameEvent extends SingletonClass {
         if (!hUnit.ETRoot || !hUnit.ETRoot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
             return;
         }
-        let enemyUnit = hUnit.ETRoot.As<EnemyUnitEntityRoot>().EnemyUnitComp();
+
+        let enemyUnit = hUnit.ETRoot.As<EnemyUnitEntityRoot>();
         if (!enemyUnit) {
             return;
         }
-        hUnit.ETRoot.As<EnemyUnitEntityRoot>().GetPlayer().EnemyManagerComp().killEnemy(hUnit.ETRoot);
+        enemyUnit.GetPlayer().EnemyManagerComp().killEnemy(enemyUnit);
     }
 
     public OnAbilityUsed(event: DotaPlayerUsedAbilityEvent) {}

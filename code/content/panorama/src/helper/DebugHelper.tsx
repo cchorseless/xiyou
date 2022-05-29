@@ -1,5 +1,6 @@
 import { BasePureComponent, BasePureComponentSystem } from "../libs/BasePureComponent";
 import { GameEnum } from "../libs/GameEnum";
+import { FuncHelper } from "./FuncHelper";
 import { LogHelper } from "./LogHelper";
 import { TimerHelper } from "./TimerHelper";
 
@@ -13,7 +14,7 @@ export module DebugHelper {
      */
     function debug_LoggerComponentinfo() {
         if (!DebugHelper.IsDebug) { return }
-        TimerHelper.addTimer(1, () => {
+        TimerHelper.AddIntervalTimer(1, 10, FuncHelper.Handler.create(DebugHelper, () => {
             let data = {} as any;
             let count = 0;
             for (let k in BasePureComponentSystem.AllBasePureComp) {
@@ -24,8 +25,7 @@ export module DebugHelper {
             }
             LogHelper.warn("AllComponentCount:", count)
             LogHelper.warn("AllComponentInfo:", data)
-            return 10
-        })
+        }), -1);
     }
 
     /**

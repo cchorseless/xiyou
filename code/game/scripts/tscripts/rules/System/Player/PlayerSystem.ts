@@ -1,4 +1,5 @@
 import { GameEnum } from "../../../GameEnum";
+import { EventHelper } from "../../../helper/EventHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { PlayerEntityRoot } from "../../Components/Player/PlayerEntityRoot";
@@ -20,9 +21,11 @@ export class PlayerSystem {
         PlayerState.init();
         PlayerEventHandler.startListen(PlayerSystem);
     }
-    public static PlayerList() {
+
+    public static GetAllPlayer() {
         return Object.values(PlayerSystem.AllPlayer);
     }
+
 
     public static CreateAllPlayer() {
         let allPlayer = PlayerSystem.GetAllPlayerid();
@@ -33,6 +36,14 @@ export class PlayerSystem {
             let playerhttp = playerRoot.AddPreAwakeComponent(PrecacheHelper.GetRegClass<typeof PlayerHttpComponent>("PlayerHttpComponent"));
             await playerhttp.PlayerLogin(playerid);
         });
+    }
+
+    public static OnAllPlayerClientLogin() {
+        let allPlayer = PlayerSystem.GetAllPlayer();
+        allPlayer.forEach((player) => {
+            EventHelper.SyncETEntity(player.PlayerDataComp().toJsonObject(), player.Playerid);
+        });
+        EventHelper.fireServerEvent(GameEnum.Event.CustomServer.onserver_allplayer_loginfinish);
     }
 
     /**

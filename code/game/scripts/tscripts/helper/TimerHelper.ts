@@ -129,6 +129,10 @@ export module TimerHelper {
         handler: () => void | number;
     }
 
+    export function now() {
+        return  GetSystemDate() +" "+ GetSystemTime();
+    }
+   
     export async function delayTimer(delay: number, useGameTime = true) {
         return new Promise((resolve, reject) => {
             addTimer(delay, () => {

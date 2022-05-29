@@ -1,24 +1,24 @@
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
-import { ET, registerET } from "../../Entity/Entity";
+import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
+import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { PlayerConfig } from "../../System/Player/PlayerConfig";
-import { PlayerState } from "../../System/Player/PlayerState";
-import { PlayerSystem } from "../../System/Player/PlayerSystem";
+import { PlayerDataComponent } from "./PlayerDataComponent";
 
-/**玩家数据组件 */
+/**玩家组件 */
 @registerET()
 export class PlayerComponent extends ET.Component {
     /**出生点 */
     firstSpawnPoint: Vector;
-
     /**玩家物品信息 */
     itemSlotData: EntityIndex[] = [];
-
     readonly playerColor: Vector;
 
     onAwake() {
         let domain = this.GetDomain<BaseNpc_Hero_Plus>();
         (this as any).playerColor = PlayerConfig.playerColor[domain.ETRoot.AsPlayer().Playerid];
         this.firstSpawnPoint = domain.GetAbsOrigin();
+        domain.ETRoot.AddComponent(PlayerDataComponent);
+        modifier_wait_portal.applyOnly(domain, domain);
     }
 
     /**
@@ -65,13 +65,5 @@ export class PlayerComponent extends ET.Component {
             }
         }
         return r;
-    }
-    /**
-     * 获取玩家颜色
-     * @param playerid
-     * @returns
-     */
-    GetPlayerColorVector() {
-        // return Sys_config.playerColor[playerid - 1] || Vector(255, 255, 255)
     }
 }

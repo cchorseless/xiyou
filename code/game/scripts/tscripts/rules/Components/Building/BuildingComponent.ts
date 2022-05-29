@@ -2,10 +2,8 @@ import { EntityHelper } from "../../../helper/EntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { modifier_test } from "../../../npc/modifier/modifier_test";
 import { ET, registerET } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
-import { KVConfigComponment } from "../KVConfig/KVConfigComponment";
 /**塔防组件 */
 @registerET()
 export class BuildingComponent extends ET.Component {
@@ -26,8 +24,10 @@ export class BuildingComponent extends ET.Component {
     public iStar: number;
 
     onAwake(vLocation: Vector, fAngle: number) {
+        let domain = this.GetDomain<BaseNpc_Plus>();
         this.vLocation = vLocation;
         this.fAngle = fAngle;
+
     }
 
     updateNetTable() {

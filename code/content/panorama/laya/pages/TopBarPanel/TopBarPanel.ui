@@ -1,9 +1,9 @@
 {
     "x":0,
     "type":"dota2Panel",
-    "selectedBox":2,
-    "selecteID":16,
-    "props":{"width":1400,"top":0,"sceneColor":"#000000","ref":"this.lbl_round","height":180,"centerX":0,"bg-color":"#606060"},
+    "selectedBox":1,
+    "selecteID":2,
+    "props":{"width":1400,"top":0,"sceneColor":"#000000","ref":"this.lbl_round","height":140,"centerX":0},
     "nodeParent":-1,
     "label":"dota2Panel",
     "isOpen":true,
@@ -15,7 +15,7 @@
         {
             "x":15,
             "type":"dota2Image",
-            "props":{"y":55,"width":1400,"height":50,"centerX":0,"bg-repeat":"no-repeat","bg-image":"common/gallery_background.png"},
+            "props":{"y":35,"width":1400,"height":50,"centerX":0,"bg-repeat":"no-repeat","bg-image":"common/gallery_background.png"},
             "nodeParent":1,
             "label":"dota2Image",
             "isOpen":true,
@@ -27,7 +27,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":6,"x":735,"width":48,"height":48,"bg-image":"common/money.png"},
+                    "props":{"y":6,"x":820,"width":48,"height":48,"bg-image":"common/money.png"},
                     "nodeParent":2,
                     "label":"dota2Image",
                     "isDirectory":false,
@@ -40,7 +40,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":6,"x":249,"width":48,"height":48,"bg-image":"common/population_png.png"},
+                    "props":{"y":6,"x":400,"width":48,"height":48,"bg-image":"common/population_png.png"},
                     "nodeParent":2,
                     "label":"dota2Image",
                     "isDirectory":false,
@@ -53,7 +53,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":10,"x":1198,"width":48,"height":48,"bg-image":"common/food_png.png"},
+                    "props":{"y":6,"x":1220,"width":48,"height":48,"bg-repeat":"no-repeat","bg-image":"common/food_png.png"},
                     "nodeParent":2,
                     "label":"dota2Image",
                     "isDirectory":false,
@@ -66,7 +66,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":6,"x":971,"width":48,"height":48,"bg-image":"common/wood_png.png"},
+                    "props":{"y":6,"x":1020,"width":48,"height":48,"bg-image":"common/wood_png.png"},
                     "nodeParent":2,
                     "label":"dota2Image",
                     "isDirectory":false,
@@ -79,7 +79,7 @@
                 {
                     "x":30,
                     "type":"dota2Label",
-                    "props":{"y":9,"x":500,"width":169,"text":"准备回合","ref":"this.lbl_roundstagedes","height":42,"font-weight":"bold","font-size":40,"color":"#39f909"},
+                    "props":{"y":9,"x":615,"width":169,"text":"准备回合","ref":"this.lbl_roundstagedes","height":42,"font-weight":"bold","font-size":40,"color":"#39f909"},
                     "nodeParent":2,
                     "label":"dota2Label",
                     "isDirectory":false,
@@ -92,7 +92,7 @@
                 {
                     "x":30,
                     "type":"dota2Label",
-                    "props":{"y":9,"x":303,"width":115,"text":"10/10","ref":"this.lbl_population","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
+                    "props":{"y":9,"x":454,"width":115,"text":"10/10","ref":"this.lbl_population","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
                     "nodeParent":2,
                     "label":"dota2Label",
                     "isDirectory":false,
@@ -105,7 +105,7 @@
                 {
                     "x":30,
                     "type":"dota2Label",
-                    "props":{"y":9,"x":792,"text":"1000000","ref":"this.lbl_gold","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
+                    "props":{"y":9,"x":877,"text":"10000","ref":"this.lbl_gold","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
                     "nodeParent":2,
                     "label":"dota2Label",
                     "isDirectory":false,
@@ -118,7 +118,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":6,"x":16,"width":48,"height":48,"bg-image":"common/rank_active_png.png"},
+                    "props":{"y":6,"x":206,"width":48,"height":48,"bg-image":"common/rank_active_png.png"},
                     "nodeParent":2,
                     "label":"dota2Image",
                     "isDirectory":false,
@@ -131,7 +131,7 @@
                 {
                     "x":30,
                     "type":"dota2Label",
-                    "props":{"y":9,"x":71,"width":115,"text":"10/10","ref":"this.lbl_round","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
+                    "props":{"y":9,"x":261,"width":115,"text":"10/10","ref":"this.lbl_round","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
                     "nodeParent":2,
                     "label":"dota2Label",
                     "isDirectory":false,
@@ -144,7 +144,7 @@
                 {
                     "x":30,
                     "type":"dota2Label",
-                    "props":{"y":9,"x":1024,"text":"1000000","ref":"this.lbl_food","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
+                    "props":{"y":9,"x":1073,"text":"10000","ref":"this.lbl_food","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
                     "nodeParent":2,
                     "label":"dota2Label",
                     "isDirectory":false,
@@ -157,7 +157,7 @@
                 {
                     "x":30,
                     "type":"dota2Label",
-                    "props":{"y":9,"x":1237,"text":"1000000","ref":"this.lbl_wood","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
+                    "props":{"y":9,"x":1270,"text":"10000","ref":"this.lbl_wood","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
                     "nodeParent":2,
                     "label":"dota2Label",
                     "isDirectory":false,
@@ -171,7 +171,7 @@
         {
             "x":15,
             "type":"dota2Label",
-            "props":{"y":9,"x":56,"text":"回合","ref":"this.lbl_roundDes","height":42,"font-weight":"bold","font-size":30,"color":"#ffffff"},
+            "props":{"y":5,"x":206,"text":"回合","ref":"this.lbl_roundDes","height":42,"font-weight":"bold","font-size":25,"color":"#ffffff"},
             "nodeParent":1,
             "label":"dota2Label",
             "isDirectory":false,
@@ -184,7 +184,7 @@
         {
             "x":15,
             "type":"dota2Label",
-            "props":{"y":9,"x":287,"text":"人口","ref":"this.lbl_populationDes","height":42,"font-weight":"bold","font-size":30,"color":"#ffffff"},
+            "props":{"y":5,"x":437,"text":"人口","ref":"this.lbl_populationDes","height":42,"font-weight":"bold","font-size":25,"color":"#ffffff"},
             "nodeParent":1,
             "label":"dota2Label",
             "isDirectory":false,
@@ -197,7 +197,7 @@
         {
             "x":15,
             "type":"dota2Label",
-            "props":{"y":9,"x":738,"text":"金币","ref":"this.lbl_goldDes","height":42,"font-weight":"bold","font-size":30,"color":"#ffffff"},
+            "props":{"y":5,"x":825,"text":"金币","ref":"this.lbl_goldDes","height":42,"font-weight":"bold","font-size":25,"color":"#ffffff"},
             "nodeParent":1,
             "label":"dota2Label",
             "isDirectory":false,
@@ -210,7 +210,7 @@
         {
             "x":15,
             "type":"dota2Label",
-            "props":{"y":9,"x":975,"text":"粮食","ref":"this.lbl_foodDes","height":42,"font-weight":"bold","font-size":30,"color":"#ffffff"},
+            "props":{"y":5,"x":1025,"text":"粮食","ref":"this.lbl_foodDes","height":42,"font-weight":"bold","font-size":25,"color":"#ffffff"},
             "nodeParent":1,
             "label":"dota2Label",
             "isDirectory":false,
@@ -223,7 +223,7 @@
         {
             "x":15,
             "type":"dota2Label",
-            "props":{"y":9,"x":1200,"text":"木材","ref":"this.lbl_woodDes","height":42,"font-weight":"bold","font-size":30,"color":"#ffffff"},
+            "props":{"y":5,"x":1229,"text":"木材","ref":"this.lbl_woodDes","height":42,"font-weight":"bold","font-size":25,"color":"#ffffff"},
             "nodeParent":1,
             "label":"dota2Label",
             "isDirectory":false,
@@ -236,7 +236,7 @@
         {
             "x":15,
             "type":"dota2Label",
-            "props":{"y":115,"x":524,"width":101,"text":"600","ref":"this.lbl_lefttime","height":66,"font-weight":"bold","font-size":60,"color":"#ffffff"},
+            "props":{"y":82,"text":"600","ref":"this.lbl_lefttime","font-weight":"bold","font-size":50,"color":"#ffffff","centerX":0},
             "nodeParent":1,
             "label":"dota2Label",
             "isDirectory":false,
@@ -249,13 +249,26 @@
         {
             "x":15,
             "type":"dota2Label",
-            "props":{"y":9,"x":506,"text":"00:11:11","ref":"this.lbl_gametime","height":42,"font-weight":"bold","font-size":30,"color":"#ffffff"},
+            "props":{"y":5,"x":641,"text":"00:11:11","ref":"this.lbl_gametime","height":42,"font-weight":"bold","font-size":30,"color":"#ffffff"},
             "nodeParent":1,
             "label":"dota2Label",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
             "compId":6,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"dota2Image",
+            "props":{"y":5,"x":14,"width":147,"ref":"this.btn_drawcard","onmouseactivate":"this.onbtn_click","height":93,"bg-repeat":"no-repeat","bg-image":"common/5chess_png.png"},
+            "nodeParent":1,
+            "label":"dota2Image",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":24,
             "child":[
                 ]
         }],

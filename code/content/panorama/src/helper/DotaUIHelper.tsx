@@ -13,7 +13,7 @@ export module DotaUIHelper {
 
     export async function isLongTimeMouseOver() {
         let oldmouse = GameUI.GetCursorPosition();
-        await TimerHelper.delayTime(0.3);
+        await TimerHelper.DelayTime(0.3);
         let newmouse = GameUI.GetCursorPosition();
         let dis = (newmouse[0] - oldmouse[0]) * (newmouse[0] - oldmouse[0]) + (newmouse[1] - oldmouse[1]) * (newmouse[1] - oldmouse[1]);
         return dis <= 1000;

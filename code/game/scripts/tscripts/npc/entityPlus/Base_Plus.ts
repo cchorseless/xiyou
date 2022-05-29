@@ -515,10 +515,12 @@ export class BaseNpc implements ET.IEntityRoot {
      * */
     UpdateOnRemove?() {}
     addSpawnedHandler?(handler: ET.Handler) {
-        if (this.__bIsFirstSpawn) {
+        if (this.__bIsFirstSpawn == true) {
             handler.run();
         } else {
-            this.__SpawnedHandler__ = this.__SpawnedHandler__ || [];
+            if (this.__SpawnedHandler__ == null) {
+                this.__SpawnedHandler__ = [];
+            }
             this.__SpawnedHandler__.push(handler);
         }
     }

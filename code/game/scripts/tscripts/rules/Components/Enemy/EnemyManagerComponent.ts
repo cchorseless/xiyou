@@ -1,11 +1,12 @@
+import { ISpawnEffectInfo, SpawnEffectModifier } from "../../../assert/Assert_SpawnEffect";
 import { EntityHelper } from "../../../helper/EntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
-import { ISpawnEffectInfo, ResHelper, SpawnEffectModifier } from "../../../helper/ResHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_spawn_breaksoil } from "../../../npc/modifier/spawn/modifier_spawn_breaksoil";
 import { modifier_spawn_fall } from "../../../npc/modifier/spawn/modifier_spawn_fall";
+import { modifier_spawn_torrent } from "../../../npc/modifier/spawn/modifier_spawn_torrent";
 import { ET, registerET } from "../../Entity/Entity";
 import { EnemyState } from "../../System/Enemy/EnemyState";
 import { EnemySystem } from "../../System/Enemy/EnemySystem";
@@ -31,7 +32,11 @@ export class EnemyManagerComponent extends ET.Component {
         return EnemyState.SpawnEnemyPoint[playerid];
     }
 
-    addEnemy(enemyName: string, roundid: string, pos: Vector = null, spawnEffect: ISpawnEffectInfo = null) {
+    public getAllEnemy() {
+        return this.GetDomain<BaseNpc_Plus>().ETRoot.GetDomainChilds(EnemyUnitEntityRoot)
+    }
+
+    addEnemy(enemyName: string, roundid: string, onlykey: string = null, pos: Vector = null, spawnEffect: ISpawnEffectInfo = null) {
         if (enemyName == "" || enemyName == null) {
             throw new Error("cant find emeny name");
         }
@@ -45,7 +50,7 @@ export class EnemyManagerComponent extends ET.Component {
         let enemy = EntityHelper.CreateEntityByName(enemyName, pos, DOTATeam_t.DOTA_TEAM_BADGUYS) as BaseNpc_Plus;
         enemy.SetNeverMoveToClearSpace(false);
         EnemyUnitEntityRoot.Active(enemy);
-        enemy.ETRoot.As<EnemyUnitEntityRoot>().SetConfigId(playerid, enemyName, roundid);
+        enemy.ETRoot.As<EnemyUnitEntityRoot>().SetConfigId(playerid, enemyName, roundid, onlykey);
         enemy.ETRoot.AddComponent(EnemyUnitComponent);
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.ETRoot.AddDomainChild(enemy.ETRoot);
@@ -71,6 +76,10 @@ export class EnemyManagerComponent extends ET.Component {
                                 });
                                 break;
                             case SpawnEffectModifier.spawn_torrent:
+                                modifier_spawn_torrent.applyOnly(enemy, enemy, null, {
+                                    vx: pos.x,
+                                    vy: pos.y,
+                                });
                                 break;
                         }
                     }
@@ -79,23 +88,27 @@ export class EnemyManagerComponent extends ET.Component {
         }
         return enemy;
     }
-    killAllEnemy() {}
+    killAllEnemy() {
 
-    killEnemy(etroot: ET.EntityRoot) {
+    }
+
+    
+    killEnemy(etroot: EnemyUnitEntityRoot) {
         this.tPlayerKills += 1;
         this.removeEnemy(etroot);
     }
 
-    missEnemy(etroot: ET.EntityRoot) {
+    missEnemy(etroot: EnemyUnitEntityRoot) {
         this.tPlayerMissing += 1;
         this.removeEnemy(etroot);
     }
 
-    private removeEnemy(etroot: ET.EntityRoot) {
+    private removeEnemy(etroot: EnemyUnitEntityRoot) {
         let index = this.tAllEnemy.indexOf(etroot.Id);
         this.tAllEnemy.splice(index, 1);
-        let domain = etroot.GetDomain<BaseNpc_Plus>();
         etroot.Dispose();
-        domain.SafeDestroy();
+        if (this.tAllEnemy.length == 0) {
+            this.Domain.ETRoot.AsPlayer().RoundManagerComp().getCurrentBoardRound().OnPrize();
+        }
     }
 }

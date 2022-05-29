@@ -9,6 +9,7 @@ import { ChessControlSystem } from "./rules/System/ChessControl/ChessControlSyst
 import { CombinationSystem } from "./rules/System/Combination/CombinationSystem";
 import { DrawSystem } from "./rules/System/Draw/DrawSystem";
 import { EnemySystem } from "./rules/System/Enemy/EnemySystem";
+import { MapSystem } from "./rules/System/Map/MapSystem";
 import { PlayerSystem } from "./rules/System/Player/PlayerSystem";
 import { RoundSystem } from "./rules/System/Round/RoundSystem";
 
@@ -30,11 +31,14 @@ import { RoundSystem } from "./rules/System/Round/RoundSystem";
 export class GameModule extends SingletonClass {
     init() {
         PlayerSystem.init();
+        MapSystem.init()
         DrawSystem.init();
         ChessControlSystem.init();
-        // EnemySystem.init();
-        // RoundSystem.init();
-        // BuildingSystem.init();
-        // CombinationSystem.init();
+        RoundSystem.init();
+        EnemySystem.init();
+        BuildingSystem.init();
+        CombinationSystem.init();
+        
+
     }
 }

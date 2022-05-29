@@ -25,6 +25,10 @@ export class ChessComponent extends ET.Component {
         domain.SetForwardVector(((position - domain.GetAbsOrigin()) as Vector).Normalized());
         domain.MoveToPosition(position);
     }
+    isBattle() {
+        return this.ChessVector.y >= 1;
+    }
+
     blink_start_p: Vector;
     blink_stop_count: number;
     is_moving: boolean;

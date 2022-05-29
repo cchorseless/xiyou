@@ -1,15 +1,16 @@
 export module DifficultyConfig {
 
     export enum EDifficultyChapter {
-        Difficulty_0 = 0,
-        Difficulty_1,
-        Difficulty_2,
-        Difficulty_3,
-        Difficulty_4,
-        Difficulty_5,
-        Difficulty_6,
-        Difficulty_Endless = 888,
-        
+        n1 = "n1",
+        n2 = "n2",
+        n3 = "n3",
+        n4 = "n4",
+        n5 = "n5",
+        n6 = "n6",
+        n7 = "n7",
+        n8 = "n8",
+        n9 = "n9",
+        n10 = "n10",
     }
 
     export const ENDLESS_ENEMEY_fHPMult = {

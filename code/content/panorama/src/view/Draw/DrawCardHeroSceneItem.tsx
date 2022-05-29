@@ -1,11 +1,13 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
 import { KV_DATA } from "../../config/KvAllInterface";
+import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { LogHelper } from "../../helper/LogHelper";
+import { PrecacheHelper } from "../../helper/PrecacheHelper";
 import { GameEnum } from "../../libs/GameEnum";
-import { RootPanel } from "../game_main";
 import { DrawCardBottomItem } from "./DrawCardBottomItem";
 import { DrawCardHeroSceneItem_UI } from "./DrawCardHeroSceneItem_UI";
+import { DrawCardPanel } from "./DrawCardPanel";
 
 interface IProps {
     itemname: string;
@@ -68,15 +70,9 @@ export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI {
         }
         this.playPickSound();
         let data = this.props as IProps;
-        let r = await RootPanel.instance.DrawComp.SelectCard(data.index, data.itemname);
+        let r = await PlayerScene.DrawComp.SelectCard(data.index, data.itemname);
         if (r) {
-            this.closeNode(this.NODENAME.heroscene, true);
-            let arr = DrawCardBottomItem.GetAllNode()!;
-            for (let node of arr) {
-                if (node.props.index == this.props.index) {
-                    node.closeNode(node.NODENAME.box_all, true);
-                }
-            }
+            PrecacheHelper.GetRegClass<typeof DrawCardPanel>("DrawCardPanel").GetInstance()!.close();
         }
     }
 }

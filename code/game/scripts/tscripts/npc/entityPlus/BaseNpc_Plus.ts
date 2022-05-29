@@ -31,6 +31,7 @@ export class BaseNpc_Plus extends BaseNpc {
         return EntityHelper.CreateEntityByName(this.name, v, team,  findClearSpace, npcOwner, entityOwner) as InstanceType<T>;
     }
 
+
     /**
     *
     * @param entityKeyValues

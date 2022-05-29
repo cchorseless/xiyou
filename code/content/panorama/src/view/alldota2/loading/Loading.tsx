@@ -30,7 +30,7 @@ const eventid = GameEvents.Subscribe(GameEnum.GameEvent.game_rules_state_change,
         // 队伍选择界面
         case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
             while (Loading.GetInstance() == null) {
-                await TimerHelper.delayTime(0.1, true);
+                await TimerHelper.DelayTime(0.1, true);
             }
             let load = Loading.GetInstance()!;
             load.addNodeChildAsyncAt(load.NODENAME.__root__, Team_select, {

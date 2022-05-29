@@ -9,9 +9,9 @@ import { globalData, reloadable } from "./GameCache";
 import { GameEnum } from "./GameEnum";
 import { SingletonClass } from "./helper/SingletonHelper";
 import { BaseModifier } from "./npc/entityPlus/Base_Plus";
-import { Assert_Sounds } from "./helper/ResHelper";
 import { PlayerSystem } from "./rules/System/Player/PlayerSystem";
 import { GameModule } from "./GameModule";
+import { Assert_Sounds } from "./assert/Assert_Sounds";
 declare global {
     interface CDOTAGameRules {
         Addon: GameMode;

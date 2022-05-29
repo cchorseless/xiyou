@@ -4,16 +4,19 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { building_round } from "../../../kvInterface/building/building_round";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET } from "../../Entity/Entity";
+import { ET, serializeETProps } from "../../Entity/Entity";
 import { RoundConfig } from "../../System/Round/RoundConfig";
 
 export class ERound extends ET.Entity {
+    @serializeETProps()
     configID: string;
     config: building_round.OBJ_2_1 | any;
+    @serializeETProps()
     unitSpawned: number = 0;
     bRunning: boolean = false;
-
+    @serializeETProps()
     tTotalDamage: number = 0; // 回合总伤害
+    @serializeETProps()
     tTowerDamage: { [entityIndex: string]: number } = {}; // 回合伤害
 
     onAwake(configid: string): void {

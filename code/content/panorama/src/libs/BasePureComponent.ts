@@ -2,6 +2,7 @@ import React, { createElement, createRef, PureComponent } from "react";
 import { CSSHelper } from "../helper/CSSHelper";
 import { FuncHelper } from "../helper/FuncHelper";
 import { LogHelper } from "../helper/LogHelper";
+import { PrecacheHelper } from "../helper/PrecacheHelper";
 import { TimerHelper } from "../helper/TimerHelper";
 import { ET } from "./Entity";
 import { GameEnum } from "./GameEnum";
@@ -26,6 +27,10 @@ interface ReactElementNodeInfo {
     Domain: BasePureComponent;
     NodeParentName: string;
 }
+
+export const registerUI = () => (entity: typeof BasePureComponent) => {
+    PrecacheHelper.RegClass([entity as any]);
+};
 
 export class BasePureComponentSystem {
     public static AllBasePureComp: { [instanceId: string]: BasePureComponent } = {};
@@ -278,6 +283,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         } else if (r && r.length > 1) {
             throw new Error("NodeComponent is not only");
         }
+        return null as any;
     }
 
 
@@ -388,14 +394,13 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     };
 
     public delayUpdateSelf = () => {
-        TimerHelper.addTimer(
+        TimerHelper.AddTimer(
             0.1,
-            () => {
+            FuncHelper.Handler.create(this,() => {
                 if (this.IsRegister) {
                     this.updateSelf();
                 }
-            },
-            this
+            })
         );
     };
     // 初始化数据

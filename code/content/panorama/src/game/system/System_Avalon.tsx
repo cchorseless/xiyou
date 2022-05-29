@@ -255,7 +255,7 @@ export module System_Avalon {
             NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_send_to_sure_chat_turn, (event) => {
                 if (event.state) {
                     Sys_state._currentChatTurn = event.data;
-                    MainPanel.GetInstance()?.updateRoundUI();
+                    // MainPanel.GetInstance()?.updateRoundUI();
                 }
                 else {
                     TipsHelper.showTips('发言顺序设置失败',RootPanel.instance);
@@ -266,8 +266,8 @@ export module System_Avalon {
                 if (event.state) {
                     Sys_state._currentChatTurn = event.data;
                     // 刷新主界面
-                    MainPanel.GetInstance()?.updateRoundUI();
-                    MainPanel.GetInstance()?.updateshowAllInfo();
+                    // MainPanel.GetInstance()?.updateRoundUI();
+                    // MainPanel.GetInstance()?.updateshowAllInfo();
                 }
                 else {
                     TipsHelper.showTips('发言顺序设置失败',RootPanel.instance);
@@ -277,7 +277,7 @@ export module System_Avalon {
             NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_send_to_make_team_idea, (event) => {
                 if (event.state) {
                     Sys_state._currentTeamIdea = event.data;
-                    TeamAgreeGoForTaskDialog.GetInstance()?.updateAgreeInfo();
+                    // TeamAgreeGoForTaskDialog.GetInstance()?.updateAgreeInfo();
                 }
                 else {
                     TipsHelper.showTips('本轮已投票',RootPanel.instance);
@@ -287,7 +287,7 @@ export module System_Avalon {
             NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_send_to_make_team_idea_result, (event) => {
                 if (event.state && event.data) {
                     let data: { success: boolean, agreeCount: number, disagreeCount: number } = event.data;
-                    MainPanel.GetInstance()?.showTeamResult(data);
+                    // MainPanel.GetInstance()?.showTeamResult(data);
                 }
             }, System_Avalon);
             // 监听服务器推送任务记录
@@ -307,7 +307,7 @@ export module System_Avalon {
                 if (event.state && event.data) {
                     Sys_state._currentTaskIdea = Sys_state._currentTaskIdea || {};
                     Sys_state._currentTaskIdea.info = Object.values(event.data);
-                    MainPanel.GetInstance()?.showTaskResult()
+                    // MainPanel.GetInstance()?.showTaskResult()
                 }
                 else {
                     TipsHelper.showTips('本轮已投票',RootPanel.instance);
@@ -320,7 +320,7 @@ export module System_Avalon {
                     Sys_state._currentTaskIdea.success = event.data.success;
                     Sys_state._currentTaskIdea.agreeCount = event.data.agreeCount;
                     Sys_state._currentTaskIdea.disagreeCount = event.data.disagreeCount;
-                    MainPanel.GetInstance()?.showTaskResult()
+                    // MainPanel.GetInstance()?.showTaskResult()
                 }
                 else {
                     TipsHelper.showTips('本轮已投票',RootPanel.instance);
@@ -331,7 +331,7 @@ export module System_Avalon {
                 if (event.state && event.data) {
                     Sys_state._otherRoleInfo.CampInfo = event.data.campInfo;
                     Sys_state._otherRoleInfo.RoleType = event.data.roleInfo;
-                    MainPanel.GetInstance()?.showGameOver(event.data);
+                    // MainPanel.GetInstance()?.showGameOver(event.data);
 
                 }
                 else {

@@ -2423,6 +2423,8 @@ export module GameEnum {
 
         /**自定义服务器事件 */
         export enum CustomServer {
+            /**所有玩家登陆完成 */
+            onserver_allplayer_loginfinish = 'onserver_allplayer_loginfinish',
             /**服务器完成任务 */
             onserver_finish_task = 'onserver_finish_task',
             /**请求产生协作任务 */
@@ -2432,6 +2434,8 @@ export module GameEnum {
         }
         /**JS 请求 LUA 的协议 */
         export enum CustomProtocol {
+            /**同步et 实体 */
+            push_sync_et_entity = 'push_sync_et_entity',
             /**推送错误信息 */
             push_error_message = 'push_error_message',
             push_update_minimap = 'push_update_minimap',

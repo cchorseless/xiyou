@@ -1,15 +1,14 @@
 import React, { createRef } from "react";
 import { PanelAttributes, render } from "react-panorama-eom";
-import { ChessControlComponent } from "../game/components/ChessControlComponent";
-import { DrawComponent } from "../game/components/DrawComponent";
-import { PlayerComponent } from "../game/components/PlayerComponent";
+import { AllEntity } from "../game/AllEntity";
+import { PlayerScene } from "../game/components/Player/PlayerScene";
 import { DebugHelper } from "../helper/DebugHelper";
 import { DotaUIHelper } from "../helper/DotaUIHelper";
 import { EventHelper } from "../helper/EventHelper";
 import { LogHelper } from "../helper/LogHelper";
+import { PrecacheHelper } from "../helper/PrecacheHelper";
 import { TimerHelper } from "../helper/TimerHelper";
 import { BasePureComponent } from "../libs/BasePureComponent";
-import { ET } from "../libs/Entity";
 import { GameEnum } from "../libs/GameEnum";
 import { Minimap_plus } from "./alldota2/minimap_plus/Minimap_plus";
 import { HeroDebugItem } from "./HeroPanel/HeroDebugItem";
@@ -27,13 +26,6 @@ export class RootPanel extends BasePureComponent {
     componentDidMount() {
         super.componentDidMount();
         RootPanel.instance = this;
-        ET.EntityRoot.Active(this);
-        RootPanel.instance.ETRoot?.AddComponent(DrawComponent);
-        RootPanel.instance.ETRoot?.AddComponent(PlayerComponent);
-        RootPanel.instance.ETRoot?.AddComponent(ChessControlComponent);
-        // 添加移动组件
-        // RootPanel.instance.ETRoot?.AddComponent(ControlComponent);
-        // RootPanel.instance.ETRoot?.AddComponent(CameraComponent);
         // 小地图
         // RootPanel.instance.showOnlyNodeComponent(this.NODENAME.__root__, Minimap_plus)
         // if (Game.IsInToolsMode()) {
@@ -54,8 +46,7 @@ export class RootPanel extends BasePureComponent {
     }
 
     __root___isValid: boolean = true;
-    __root___attrs: PanelAttributes = {
-    };
+    __root___attrs: PanelAttributes = {};
     __root___childs: Array<JSX.Element> = [];
     render() {
         return (
@@ -67,23 +58,7 @@ export class RootPanel extends BasePureComponent {
                 </Panel>
             )
         );
-    };
-
-    /**组件 */
-
-    get DrawComp() {
-        return this.ETRoot!.GetComponent(DrawComponent)!;
     }
-
-    get PlayerComp() {
-        return this.ETRoot!.GetComponent(PlayerComponent)!;
-    }
-    
-    get ChessControlComp() {
-        return this.ETRoot!.GetComponent(ChessControlComponent)!;
-    }
-    
-
 }
 
 function StartRenderGameUI() {
@@ -100,9 +75,11 @@ function StartRenderGameUI() {
     // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_ACTION_PANEL, false);
     // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_QUICK_STATS, false);
     /**初始化系统 */
+    AllEntity.Init();
+    TimerHelper.Init();
+    PlayerScene.Init();
     DebugHelper.Init();
     EventHelper.Init();
     render(<RootPanel />, $.GetContextPanel());
 }
-
 StartRenderGameUI();

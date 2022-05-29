@@ -9,6 +9,7 @@
 import { globalData } from "../GameCache";
 import { GameEnum } from "../GameEnum";
 import { GameFunc } from "../GameFunc";
+import { ET } from "../rules/Entity/Entity";
 import { GameRequest } from "../service/GameRequest";
 import { LogHelper } from "./LogHelper";
 
@@ -310,6 +311,24 @@ export module EventHelper {
             });
         }
     }
+
+    export function SyncETEntity(obj: ET.IEntityJson, ...playerID: Array<PlayerID>) {
+        if (!IsServer()) {
+            return;
+        }
+        let event: JS_TO_LUA_DATA = {};
+        event.state = true;
+        event.data = obj;
+        // 全部玩家
+        if (playerID == null || playerID.length == 0) {
+            EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_sync_et_entity, event);
+        } else {
+            playerID.forEach((_id) => {
+                EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_sync_et_entity, event, _id as PlayerID);
+            });
+        }
+    }
+
 
     /**
      * 删除所有协议事件监听

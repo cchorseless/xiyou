@@ -8,12 +8,17 @@ import { DrawComponent } from "../Draw/DrawComponent";
 import { EnemyManagerComponent } from "../Enemy/EnemyManagerComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerComponent } from "./PlayerComponent";
+import { PlayerDataComponent } from "./PlayerDataComponent";
 import { PlayerHttpComponent } from "./PlayerHttpComponent";
 
 export class PlayerEntityRoot extends ET.EntityRoot {
     readonly Playerid: PlayerID;
+    IsLogin: boolean;
     PlayerComp() {
         return this.GetComponentByName<PlayerComponent>("PlayerComponent");
+    }
+    PlayerDataComp() {
+        return this.GetComponentByName<PlayerDataComponent>("PlayerDataComponent");
     }
     PlayerHttpComp() {
         return this.GetComponentByName<PlayerHttpComponent>("PlayerHttpComponent");
@@ -36,10 +41,8 @@ export class PlayerEntityRoot extends ET.EntityRoot {
     EnemyManagerComp() {
         return this.GetComponentByName<EnemyManagerComponent>("EnemyManagerComponent");
     }
-    
 
     CheckIsAlive() {
         return this.GetDomain<BaseNpc_Hero_Plus>().IsAlive();
     }
-
 }

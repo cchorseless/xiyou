@@ -1,31 +1,39 @@
+import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET } from "../../Entity/Entity";
-import { PlayerSystem } from "../../System/Player/PlayerSystem";
+import { ChessComponent } from "../ChessControl/ChessComponent";
+import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
 import { ERound } from "../Round/ERound";
+import { ERoundBoard } from "../Round/ERoundBoard";
+import { RoundEnemyComponent } from "../Round/RoundEnemyComponent";
 import { EnemyKillPrizeComponent } from "./EnemyKillPrizeComponent";
 import { EnemyMoveComponent } from "./EnemyMoveComponent";
 import { EnemyPropsComponent } from "./EnemyPropsComponent";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
 
-export class EnemyUnitEntityRoot extends ET.EntityRoot {
-    readonly Playerid: PlayerID;
-    readonly ConfigID: string;
+export class EnemyUnitEntityRoot extends PlayerCreateUnitEntityRoot {
     readonly RoundID: string;
+    readonly OnlyKey: string;
 
-    SetConfigId(playerid: PlayerID, confid: string, roundid: string) {
+    SetConfigId(playerid: PlayerID, confid: string, roundid: string, onlyKey: string = null) {
         (this as any).Playerid = playerid;
         (this as any).ConfigID = confid;
         (this as any).RoundID = roundid;
+        (this as any).OnlyKey = onlyKey;
     }
 
-    GetPlayer() {
-        return PlayerSystem.GetPlayer(this.Playerid);
+
+    GetRound<T extends ERound>(): T {
+        return this.GetPlayer().RoundManagerComp().RoundInfo[this.RoundID] as T;
     }
 
-    GetRound(): ERound {
-        return this.GetPlayer().RoundManagerComp().RoundInfo[this.RoundID];
+    GetRoundUnitConfig() {
+        if (this.OnlyKey != null) {
+            return this.GetRound<ERoundBoard>().config.unitinfo[this.OnlyKey];
+        }
     }
-    
+
+
+
     EnemyUnitComp() {
         return this.GetComponentByName<EnemyUnitComponent>("EnemyUnitComponent");
     }
@@ -39,10 +47,11 @@ export class EnemyUnitEntityRoot extends ET.EntityRoot {
     EnemyPropsComp() {
         return this.GetComponentByName<EnemyPropsComponent>("EnemyPropsComponent");
     }
-
-    public Dispose(): void {
-        let npc = this.GetDomain<BaseNpc_Plus>();
-        super.Dispose();
-        npc.SafeDestroy();
+    ChessComp() {
+        return this.GetComponentByName<ChessComponent>("ChessComponent");
     }
+    RoundEnemyComp() {
+        return this.GetComponentByName<RoundEnemyComponent>("RoundEnemyComponent");
+    }
+ 
 }

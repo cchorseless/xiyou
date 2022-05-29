@@ -48,7 +48,7 @@ export class EnemyMoveComponent extends ET.Component {
         // 最后一个 miss
         else if (index == myway.length - 1) {
             this.MoveOrder(false);
-            this.Domain.ETRoot.As<EnemyUnitEntityRoot>().GetPlayer().EnemyManagerComp().missEnemy(this.Domain.ETRoot);
+            this.Domain.ETRoot.As<EnemyUnitEntityRoot>().GetPlayer().EnemyManagerComp().missEnemy(this.Domain.ETRoot.As<EnemyUnitEntityRoot>());
             return;
         }
         this.lastCornerName = cornerName;

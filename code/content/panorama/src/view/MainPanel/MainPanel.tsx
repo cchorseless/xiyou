@@ -14,19 +14,12 @@ export class MainPanel extends MainPanel_UI {
         super.componentDidMount();
         this.panel_allpanel.current!.hittest = false;
         this.panel_alldialog.current!.hittest = false;
-        this.updateSelf();
-    }
-    // 更新渲染
-    /**
-     *
-     * @param prevProps 上一个状态的 props
-     * @param prevState
-     * @param snapshot
-     */
-    componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
-        super.componentDidUpdate(prevProps, prevState, snapshot);
+        this.onRefreshUI();
     }
 
+    onRefreshUI() {
+        // this.addOrShowOnlyNodeChild(this.NODENAME.__root__, TopBarPanel);
+    }
     /**debug */
     onbtn_click = () => {
         this.addOrShowOnlyNodeChild(this.NODENAME.__root__, DebugPanel);
@@ -40,14 +33,6 @@ export class MainPanel extends MainPanel_UI {
             position.y += panel.actualyoffset;
             panel = panel.GetParent()!;
         }
-        // this.__root__.current!.measure( (fx, fy, width, height, px, py) => {
-        //     console.log('Component width is: ' + width)
-        //     console.log('Component height is: ' + height)
-        //     console.log('X offset to frame: ' + fx)
-        //     console.log('Y offset to frame: ' + fy)
-        //     console.log('X offset to page: ' + px)
-        //     console.log('Y offset to page: ' + py)
-        // })
         return position;
     }
     public allPanelInMain: { [k: string]: BasePureComponent } = {};

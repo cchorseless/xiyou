@@ -11,32 +11,22 @@ export class BuildingState {
 
     public static tPlayerExtraSlot = {}
     public static init() {
-        let building_allow = Entities.FindAllByName("build_allow");
-        for (let v of building_allow) {
-            let origin = v.GetAbsOrigin()
-            let angles = v.GetAngles()
-            let bounds = v.GetBounds()
-            let vMin = (RotatePosition(Vector(0, 0, 0), angles, bounds.Mins) + origin) as Vector;
-            let vMax = (RotatePosition(Vector(0, 0, 0), angles, bounds.Maxs) + origin) as Vector;
-            BuildingState.tAllowsPosition.push([
-                Vector(vMin.x, vMin.y, 0),
-                Vector(vMax.x, vMin.y, 0),
-                Vector(vMax.x, vMax.y, 0),
-                Vector(vMin.x, vMax.y, 0),
-            ]);
-        }
+        // let building_allow = Entities.FindAllByName("build_allow");
+        // for (let v of building_allow) {
+        //     let origin = v.GetAbsOrigin()
+        //     let angles = v.GetAngles()
+        //     let bounds = v.GetBounds()
+        //     let vMin = (RotatePosition(Vector(0, 0, 0), angles, bounds.Mins) + origin) as Vector;
+        //     let vMax = (RotatePosition(Vector(0, 0, 0), angles, bounds.Maxs) + origin) as Vector;
+        //     BuildingState.tAllowsPosition.push([
+        //         Vector(vMin.x, vMin.y, 0),
+        //         Vector(vMax.x, vMin.y, 0),
+        //         Vector(vMax.x, vMax.y, 0),
+        //         Vector(vMin.x, vMax.y, 0),
+        //     ]);
+        // }
     }
 
-
-    /**
-     * 获取创建npc的建造组件
-     * @param npc
-     */
-    // public static GetBelong_Component_Building(npc: BaseNpc_Plus): Component_Building | null {
-    // if (npc.__createBy__) {
-    //     return npc.__createBy__ as Component_Building;
-    // }
-    // }
 
 
     /**

@@ -2,6 +2,7 @@
 import React, { createRef, useState } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
+import { registerUI } from "../../libs/BasePureComponent";
 import { DrawCardBottomItem } from "./DrawCardBottomItem";
 import { DrawCardHeroSceneItem } from "./DrawCardHeroSceneItem";
 import { DrawCardPanel_UI } from "./DrawCardPanel_UI";
@@ -9,7 +10,7 @@ import { DrawCardPanel_UI } from "./DrawCardPanel_UI";
 interface IProps {
     cards: string[];
 }
-
+@registerUI()
 export class DrawCardPanel extends DrawCardPanel_UI {
     // 初始化数据
     componentDidMount() {

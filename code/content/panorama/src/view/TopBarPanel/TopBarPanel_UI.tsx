@@ -1,7 +1,7 @@
 
 import React, { createRef, PureComponent } from "react";
 import { BasePureComponent } from "../../libs/BasePureComponent";
-import { PanelAttributes,LabelAttributes } from "react-panorama-eom";
+import { PanelAttributes,LabelAttributes,ImageAttributes } from "react-panorama-eom";
 
 
 export class TopBarPanel_UI extends BasePureComponent {
@@ -19,8 +19,10 @@ lbl_foodDes: React.RefObject<LabelPanel>;
 lbl_woodDes: React.RefObject<LabelPanel>;
 lbl_lefttime: React.RefObject<LabelPanel>;
 lbl_gametime: React.RefObject<LabelPanel>;
-NODENAME = {  __root__: '__root__',  lbl_roundstagedes: 'lbl_roundstagedes',  lbl_population: 'lbl_population',  lbl_gold: 'lbl_gold',  lbl_round: 'lbl_round',  lbl_food: 'lbl_food',  lbl_wood: 'lbl_wood',  lbl_roundDes: 'lbl_roundDes',  lbl_populationDes: 'lbl_populationDes',  lbl_goldDes: 'lbl_goldDes',  lbl_foodDes: 'lbl_foodDes',  lbl_woodDes: 'lbl_woodDes',  lbl_lefttime: 'lbl_lefttime',  lbl_gametime: 'lbl_gametime',  };
-FUNCNAME = {  };
+btn_drawcard: React.RefObject<ImagePanel>;
+onbtn_click = (...args: any[]) => { };
+NODENAME = {  __root__: '__root__',  lbl_roundstagedes: 'lbl_roundstagedes',  lbl_population: 'lbl_population',  lbl_gold: 'lbl_gold',  lbl_round: 'lbl_round',  lbl_food: 'lbl_food',  lbl_wood: 'lbl_wood',  lbl_roundDes: 'lbl_roundDes',  lbl_populationDes: 'lbl_populationDes',  lbl_goldDes: 'lbl_goldDes',  lbl_foodDes: 'lbl_foodDes',  lbl_woodDes: 'lbl_woodDes',  lbl_lefttime: 'lbl_lefttime',  lbl_gametime: 'lbl_gametime',  btn_drawcard: 'btn_drawcard',  };
+FUNCNAME = {  onbtn_click: {nodeName:"btn_drawcard",type:"onmouseactivate"}, };
 
     constructor(props: any) {
 		super(props);
@@ -38,28 +40,30 @@ this.lbl_foodDes = createRef<LabelPanel>();
 this.lbl_woodDes = createRef<LabelPanel>();
 this.lbl_lefttime = createRef<LabelPanel>();
 this.lbl_gametime = createRef<LabelPanel>();
+this.btn_drawcard = createRef<ImagePanel>();
 
     };
-CSS_0_0 : Partial<VCSSStyleDeclaration>  = {"width":"1400px","marginTop":"0px","height":"180px","backgroundColor":"#606060","x":"0px","horizontalAlign":"middle"}
-CSS_1_0 : Partial<VCSSStyleDeclaration>  = {"y":"55px","width":"1400px","height":"50px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/gallery_background.png\")","backgroundSize":"100% 100%","x":"0px","horizontalAlign":"middle"}
-CSS_2_0 : Partial<VCSSStyleDeclaration>  = {"y":"6px","x":"735px","width":"48px","height":"48px","backgroundImage":"url(\"file://{images}/common/money.png\")"}
-CSS_2_1 : Partial<VCSSStyleDeclaration>  = {"y":"6px","x":"249px","width":"48px","height":"48px","backgroundImage":"url(\"file://{images}/common/population_png.png\")"}
-CSS_2_2 : Partial<VCSSStyleDeclaration>  = {"y":"10px","x":"1198px","width":"48px","height":"48px","backgroundImage":"url(\"file://{images}/common/food_png.png\")"}
-CSS_2_3 : Partial<VCSSStyleDeclaration>  = {"y":"6px","x":"971px","width":"48px","height":"48px","backgroundImage":"url(\"file://{images}/common/wood_png.png\")"}
-CSS_2_4 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"500px","width":"169px","height":"42px","fontWeight":"bold","fontSize":"40","color":"#39f909"}
-CSS_2_5 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"303px","width":"115px","height":"42px","fontWeight":"bold","fontSize":"40","color":"#ffffff"}
-CSS_2_6 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"792px","height":"42px","fontWeight":"bold","fontSize":"40","color":"#ffffff"}
-CSS_2_7 : Partial<VCSSStyleDeclaration>  = {"y":"6px","x":"16px","width":"48px","height":"48px","backgroundImage":"url(\"file://{images}/common/rank_active_png.png\")"}
-CSS_2_8 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"71px","width":"115px","height":"42px","fontWeight":"bold","fontSize":"40","color":"#ffffff"}
-CSS_2_9 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"1024px","height":"42px","fontWeight":"bold","fontSize":"40","color":"#ffffff"}
-CSS_2_10 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"1237px","height":"42px","fontWeight":"bold","fontSize":"40","color":"#ffffff"}
-CSS_1_1 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"56px","height":"42px","fontWeight":"bold","fontSize":"30","color":"#ffffff"}
-CSS_1_2 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"287px","height":"42px","fontWeight":"bold","fontSize":"30","color":"#ffffff"}
-CSS_1_3 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"738px","height":"42px","fontWeight":"bold","fontSize":"30","color":"#ffffff"}
-CSS_1_4 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"975px","height":"42px","fontWeight":"bold","fontSize":"30","color":"#ffffff"}
-CSS_1_5 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"1200px","height":"42px","fontWeight":"bold","fontSize":"30","color":"#ffffff"}
-CSS_1_6 : Partial<VCSSStyleDeclaration>  = {"y":"115px","x":"524px","width":"101px","height":"66px","fontWeight":"bold","fontSize":"60","color":"#ffffff"}
-CSS_1_7 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"506px","height":"42px","fontWeight":"bold","fontSize":"30","color":"#ffffff"}
+CSS_0_0 : Partial<VCSSStyleDeclaration>  = {"width":"1400px","marginTop":"0px","height":"140px","x":"0px","horizontalAlign":"middle"}
+CSS_1_0 : Partial<VCSSStyleDeclaration>  = {"y":"35px","width":"1400px","height":"50px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/gallery_background.png\")","backgroundSize":"100% 100%","x":"0px","horizontalAlign":"middle"}
+CSS_2_0 : Partial<VCSSStyleDeclaration>  = {"y":"6px","x":"820px","width":"48px","height":"48px","backgroundImage":"url(\"file://{images}/common/money.png\")"}
+CSS_2_1 : Partial<VCSSStyleDeclaration>  = {"y":"6px","x":"400px","width":"48px","height":"48px","backgroundImage":"url(\"file://{images}/common/population_png.png\")"}
+CSS_2_2 : Partial<VCSSStyleDeclaration>  = {"y":"6px","x":"1220px","width":"48px","height":"48px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/food_png.png\")","backgroundSize":"100% 100%"}
+CSS_2_3 : Partial<VCSSStyleDeclaration>  = {"y":"6px","x":"1020px","width":"48px","height":"48px","backgroundImage":"url(\"file://{images}/common/wood_png.png\")"}
+CSS_2_4 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"615px","width":"169px","height":"42px","fontWeight":"bold","fontSize":"40","color":"#39f909"}
+CSS_2_5 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"454px","width":"115px","height":"42px","fontWeight":"bold","fontSize":"40","color":"#ffffff"}
+CSS_2_6 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"877px","height":"42px","fontWeight":"bold","fontSize":"40","color":"#ffffff"}
+CSS_2_7 : Partial<VCSSStyleDeclaration>  = {"y":"6px","x":"206px","width":"48px","height":"48px","backgroundImage":"url(\"file://{images}/common/rank_active_png.png\")"}
+CSS_2_8 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"261px","width":"115px","height":"42px","fontWeight":"bold","fontSize":"40","color":"#ffffff"}
+CSS_2_9 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"1073px","height":"42px","fontWeight":"bold","fontSize":"40","color":"#ffffff"}
+CSS_2_10 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"1270px","height":"42px","fontWeight":"bold","fontSize":"40","color":"#ffffff"}
+CSS_1_1 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"206px","height":"42px","fontWeight":"bold","fontSize":"25","color":"#ffffff"}
+CSS_1_2 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"437px","height":"42px","fontWeight":"bold","fontSize":"25","color":"#ffffff"}
+CSS_1_3 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"825px","height":"42px","fontWeight":"bold","fontSize":"25","color":"#ffffff"}
+CSS_1_4 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"1025px","height":"42px","fontWeight":"bold","fontSize":"25","color":"#ffffff"}
+CSS_1_5 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"1229px","height":"42px","fontWeight":"bold","fontSize":"25","color":"#ffffff"}
+CSS_1_6 : Partial<VCSSStyleDeclaration>  = {"y":"82px","x":"641px","fontWeight":"bold","fontSize":"50","color":"#ffffff"}
+CSS_1_7 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"612px","height":"42px","fontWeight":"bold","fontSize":"30","color":"#ffffff"}
+CSS_1_8 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"14px","width":"147px","height":"93px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/5chess_png.png\")","backgroundSize":"100% 100%"}
 
 __root___isValid:boolean = true;
 __root___attrs:PanelAttributes={};
@@ -103,6 +107,9 @@ lbl_lefttime_childs: Array<JSX.Element> = [];
 lbl_gametime_isValid:boolean = true;
 lbl_gametime_attrs:LabelAttributes={};
 lbl_gametime_childs: Array<JSX.Element> = [];
+btn_drawcard_isValid:boolean = true;
+btn_drawcard_attrs:ImageAttributes={};
+btn_drawcard_childs: Array<JSX.Element> = [];
 
 render() {
     return(
@@ -128,7 +135,7 @@ render() {
 </Label>
 }
         {this.lbl_gold_isValid && 
-<Label text="1000000" ref={this.lbl_gold} key="compId_15" style={this.CSS_2_6}  {...this.lbl_gold_attrs} >
+<Label text="10000" ref={this.lbl_gold} key="compId_15" style={this.CSS_2_6}  {...this.lbl_gold_attrs} >
 {this.lbl_gold_childs}
 </Label>
 }
@@ -140,12 +147,12 @@ render() {
 </Label>
 }
         {this.lbl_food_isValid && 
-<Label text="1000000" ref={this.lbl_food} key="compId_19" style={this.CSS_2_9}  {...this.lbl_food_attrs} >
+<Label text="10000" ref={this.lbl_food} key="compId_19" style={this.CSS_2_9}  {...this.lbl_food_attrs} >
 {this.lbl_food_childs}
 </Label>
 }
         {this.lbl_wood_isValid && 
-<Label text="1000000" ref={this.lbl_wood} key="compId_20" style={this.CSS_2_10}  {...this.lbl_wood_attrs} >
+<Label text="10000" ref={this.lbl_wood} key="compId_20" style={this.CSS_2_10}  {...this.lbl_wood_attrs} >
 {this.lbl_wood_childs}
 </Label>
 }
@@ -182,9 +189,14 @@ render() {
 </Label>
 }
     {this.lbl_gametime_isValid && 
-<Label text="00:11:11" ref={this.lbl_gametime} key="compId_6" style={this.CSS_1_7}  {...this.lbl_gametime_attrs} >
+<Label text="00:11:11|n1" ref={this.lbl_gametime} key="compId_6" style={this.CSS_1_7}  {...this.lbl_gametime_attrs} >
 {this.lbl_gametime_childs}
 </Label>
+}
+    {this.btn_drawcard_isValid && 
+<Image ref={this.btn_drawcard} onmouseactivate={this.onbtn_click} key="compId_24" style={this.CSS_1_8}  {...this.btn_drawcard_attrs} >
+{this.btn_drawcard_childs}
+</Image>
 }
 
 {this.props.children}

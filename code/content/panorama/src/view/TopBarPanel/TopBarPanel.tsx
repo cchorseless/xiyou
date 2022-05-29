@@ -1,48 +1,132 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { System_Avalon } from "../../game/system/System_Avalon";
+import { KV_DATA } from "../../config/KvAllInterface";
+import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { RoundConfig } from "../../game/system/Round/RoundConfig";
+import { CSSHelper } from "../../helper/CSSHelper";
+import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { TopBarPanel_UI } from "./TopBarPanel_UI";
 export class TopBarPanel extends TopBarPanel_UI {
-	// 初始化数据
-	componentDidMount() {
-		super.componentDidMount();
-		// this.panel_0.current!.style.flowChildren = 'right'
-		// for (let i = 0; i < 5; i++) {
-		// 	this.addNodeChildAt(this.NODENAME.panel_0, TeamNeedInfoItem, { marginLeft: '20px', uiScale: '40%', index: i })
-		// }
-		this.updateUI()
-	};
+    // 初始化数据
+    componentDidMount() {
+        super.componentDidMount();
+        // this.panel_0.current!.style.flowChildren = 'right'
+        // for (let i = 0; i < 5; i++) {
+        // 	this.addNodeChildAt(this.NODENAME.panel_0, TeamNeedInfoItem, { marginLeft: '20px', uiScale: '40%', index: i })
+        // }
+        CSSHelper.setLocalText(this.lbl_foodDes, KV_DATA.lang_config.lang_config.food.Des);
+        CSSHelper.setLocalText(this.lbl_goldDes, KV_DATA.lang_config.lang_config.gold.Des);
+        CSSHelper.setLocalText(this.lbl_populationDes, KV_DATA.lang_config.lang_config.population.Des);
+        this.onRefreshUI();
+    }
 
-	updateUI = () => {
-		TimerHelper.removeAllTimer(this);
-		let roundInfo = System_Avalon.Sys_GetData.GetCurrentRoundInfo() as System_Avalon.RoundInfo;
-		if (roundInfo == null) { return };
-		let stageDes = ['组队阶段', '发言顺序', '发言阶段', '投票组队', '任务阶段', '', '刺杀阶段', '', '', '', '', '']
-		// this.lbl_chooseteam.current!.text = '阶段:' + stageDes[roundInfo.stage];
-		this.lbl_lefttime.current!.text = '倒计时:' + roundInfo.duration;
-		this.lbl_round.current!.text = 'ROUND:' + roundInfo.currentRound;
-		// 历史记录
-		let _allTaskRecord = System_Avalon.Sys_GetData.Get_allTaskRecord() as System_Avalon.TaskRecord;
-		if (_allTaskRecord != null) {
-			// let _c_l = this.GetNodeChild(this.NODENAME.panel_0, TeamNeedInfoItem);
-			// if (_c_l) {
-			// 	_c_l.forEach((c) => {
-			// 		c.updateUI()
-			// 	})
-			// }
-		}
-		TimerHelper.addTimer(1,
-			() => {
-				if (roundInfo.duration > 1) {
-					roundInfo.duration -= 1;
-					this.lbl_lefttime.current!.text = '倒计时:' + roundInfo.duration;
-					this.updateSelf()
-					return 1
-				}
-			}, this);
-		this.updateSelf()
-	}
+    onRefreshUI() {
+        this.setroundlabel();
+        this.setroundState();
+        this.setdifficulty();
+        this.setstartTime();
+        this.setPopulation();
+        this.setGold();
+        this.setFood();
+        this.setWood();
+        LogHelper.print(11111);
+    }
 
+    setroundlabel() {
+        this.lbl_round.current!.text = PlayerScene.RoundManagerComp.getCurrentBoardRound().config.round_show;
+        this.updateSelf();
+    }
+
+    setdifficulty() {
+        CSSHelper.setLocalText(this.lbl_roundDes, KV_DATA.lang_config.lang_config.turn.Des);
+        this.lbl_roundDes.current!.text += `[${PlayerScene.PlayerDataComp.difficulty}]`;
+        this.updateSelf();
+    }
+    timerid: any;
+    setstartTime() {
+        if (this.timerid != null) {
+            return;
+        }
+        this.lbl_gametime.current!.text = "00:00:00";
+        this.timerid = TimerHelper.AddIntervalTimer(
+            1,
+            1,
+            FuncHelper.Handler.create(this, () => {
+                let gametime = Math.floor(Game.GetDOTATime(false, true) * 1000);
+                let date = new Date(gametime + TimerHelper.Offtime);
+                this.lbl_gametime.current!.text = date.toTimeString().substring(0, 8);
+                this.updateSelf();
+            }),
+            -1,
+            false
+        );
+    }
+
+    setPopulation() {
+        this.lbl_population.current!.text = `${PlayerScene.PlayerDataComp.population}/${PlayerScene.PlayerDataComp.populationRoof}`;
+        this.updateSelf();
+    }
+
+    setGold() {
+        this.lbl_gold.current!.text = "" + PlayerScene.PlayerDataComp.gold;
+        this.updateSelf();
+    }
+    setFood() {
+        this.lbl_food.current!.text = "" + PlayerScene.PlayerDataComp.food;
+        this.updateSelf();
+    }
+    setWood() {
+        this.lbl_wood.current!.text = "" + PlayerScene.PlayerDataComp.wood;
+        this.updateSelf();
+    }
+
+    lefttimeTask: TimerHelper.TimerTask | null;
+    setroundState() {
+        let currentround = PlayerScene.RoundManagerComp.getCurrentBoardRound();
+        this.lbl_roundstagedes.current!.text = "" + currentround.getCurStateDes();
+        if (currentround.roundStartTime != null) {
+            if (this.lefttimeTask != null) {
+                this.lefttimeTask.Clear();
+                this.lefttimeTask = null;
+            }
+            let lefttime = 0;
+            switch (currentround.roundState) {
+                case RoundConfig.ERoundBoardState.start:
+                    lefttime = Number(currentround.config.round_readytime);
+                    break;
+                case RoundConfig.ERoundBoardState.battle:
+                    lefttime = Number(currentround.config.round_time);
+                    break;
+                case RoundConfig.ERoundBoardState.prize:
+                case RoundConfig.ERoundBoardState.waiting_next:
+                case RoundConfig.ERoundBoardState.end:
+                    break;
+            }
+            if (lefttime == 0) {
+                this.lbl_lefttime.current!.text = "";
+            } else {
+                this.lbl_lefttime.current!.text = "" + lefttime;
+                this.lefttimeTask = TimerHelper.AddIntervalTimer(
+                    1,
+                    1,
+                    FuncHelper.Handler.create(this, () => {
+                        lefttime -= 1;
+                        if (lefttime <= 0) {
+                            this.lbl_lefttime.current!.text = "";
+                            this.lefttimeTask?.Clear();
+                            this.lefttimeTask = null;
+                        } else {
+                            this.lbl_lefttime.current!.text = "" + lefttime;
+                        }
+                        this.updateSelf();
+                    }),
+                    -1,
+                    true
+                );
+            }
+        }
+        this.updateSelf();
+    }
 }

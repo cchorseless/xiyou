@@ -78,6 +78,7 @@ export interface OBJ_1_1 {
 export interface OBJ_2_1 {
 "CardName" :string ,
 "HeroId" :string ,
+"vscripts" :string ,
 "Rarity" :string ,
 "Population" :string ,
 "Relation_1" :string ,

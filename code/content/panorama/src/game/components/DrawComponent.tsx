@@ -3,12 +3,13 @@ import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
-import { ET } from "../../libs/Entity";
+import { ET, registerET } from "../../libs/Entity";
 import { DrawCardPanel } from "../../view/Draw/DrawCardPanel";
 import { MainPanel } from "../../view/MainPanel/MainPanel";
 import { DrawConfig } from "../system/Draw/DrawConfig";
 
 /**抽卡 */
+@registerET()
 export class DrawComponent extends ET.Component {
     onAwake() {
         this.startListen();
@@ -28,7 +29,6 @@ export class DrawComponent extends ET.Component {
     }
 
     async SelectCard(index: number, sTowerName: string, b2Public: boolean = false) {
-        LogHelper.print("SelectCard");
         let cbmsg = await NetHelper.SendToLuaAsync<DrawConfig.I.ICardSelected>(DrawConfig.EProtocol.CardSelected, {
             index: index,
             itemName: sTowerName,

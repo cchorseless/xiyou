@@ -13,6 +13,7 @@ import { BuildingSystem } from "../../System/Building/BuildingSystem";
 import { PlayerSystem } from "../../System/Player/PlayerSystem";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
+import { RoundBuildingComponent } from "../Round/RoundBuildingComponent";
 import { BuildingComponent } from "./BuildingComponent";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
 
@@ -75,6 +76,7 @@ export class BuildingManagerComponent extends ET.Component {
         building.ETRoot.AddComponent(BuildingComponent, location, angle);
         building.ETRoot.AddComponent(CombinationComponent);
         building.ETRoot.AddComponent(ChessComponent);
+        building.ETRoot.AddComponent(RoundBuildingComponent);
         // domain.ETRoot.GetComponent(CombinationManagerComponent).add(domain.ETRoot);
         /**互相绑定 */
         building.SetControllableByPlayer(playerID, true);
@@ -120,6 +122,16 @@ export class BuildingManagerComponent extends ET.Component {
         target.Dispose();
     }
 
+    public getAllBuilding() {
+        return this.GetDomain<BaseNpc_Plus>().ETRoot.GetDomainChilds(BuildingEntityRoot);
+    }
+    public getAllBattleBuilding() {
+        return this.GetDomain<BaseNpc_Plus>()
+            .ETRoot.GetDomainChilds(BuildingEntityRoot)
+            .filter((b) => {
+                return b.ChessComp().isBattle();
+            });
+    }
 
     /**
      * 建筑物数量

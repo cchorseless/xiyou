@@ -7,10 +7,10 @@ export class EnemyState {
     private static readonly EnemyWayPoint: { [k: string]: Vector } = {};
 
     public static init() {
-        this.SpawnEnemyPoint.push(this.getEnemyWayPos("player_0_start"));
-        this.SpawnEnemyPoint.push(this.getEnemyWayPos("player_1_start"));
-        this.SpawnEnemyPoint.push(this.getEnemyWayPos("player_2_start"));
-        this.SpawnEnemyPoint.push(this.getEnemyWayPos("player_3_start"));
+        // this.SpawnEnemyPoint.push(this.getEnemyWayPos("player_0_start"));
+        // this.SpawnEnemyPoint.push(this.getEnemyWayPos("player_1_start"));
+        // this.SpawnEnemyPoint.push(this.getEnemyWayPos("player_2_start"));
+        // this.SpawnEnemyPoint.push(this.getEnemyWayPos("player_3_start"));
     }
 
     public static getEnemyWayPos(pointName: string) {

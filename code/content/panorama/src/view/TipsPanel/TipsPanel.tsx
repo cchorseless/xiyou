@@ -1,5 +1,6 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
+import { FuncHelper } from "../../helper/FuncHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { TipsPanel_UI } from "./TipsPanel_UI";
 export class TipsPanel extends TipsPanel_UI {
@@ -10,9 +11,9 @@ export class TipsPanel extends TipsPanel_UI {
 		if (s) {
 			this.lbl.current!.text = s;
 		}
-		TimerHelper.addTimer(1, () => {
+		TimerHelper.AddTimer(1, FuncHelper.Handler.create(this, () => {
 			this.destroy()
-		}, this)
+		}))
 	};
 
 }

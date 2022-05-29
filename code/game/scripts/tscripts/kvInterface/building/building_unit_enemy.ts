@@ -105,6 +105,7 @@ export interface OBJ_2_1 {
 "MovementCapabilities" :string ,
 "CombatClassDefend" :string ,
 "BaseClass" :string ,
+"vscripts" :string ,
 "Creature" :OBJ_3_1 ,
 "HasInventory" :string ,
 "RingRadius" :string ,

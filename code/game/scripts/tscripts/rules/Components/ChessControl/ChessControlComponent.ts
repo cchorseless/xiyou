@@ -9,7 +9,6 @@ import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 
 @registerET()
 export class ChessControlComponent extends ET.Component {
-
     public moveChess(target: BuildingEntityRoot, v: Vector): [boolean, string] {
         let r: [boolean, string] = [true, ""];
         if (!this.Domain.ETRoot.AsPlayer().CheckIsAlive()) {
@@ -22,7 +21,9 @@ export class ChessControlComponent extends ET.Component {
             r = [false, "EntityRoot is not my"];
         }
         let boardVec = ChessControlSystem.GetBoardLocalVector2(v);
-        if (boardVec.playerid != this.Domain.ETRoot.AsPlayer().Playerid || boardVec.x < 0 || boardVec.y < 0) {
+        if (boardVec.playerid != this.Domain.ETRoot.AsPlayer().Playerid ||
+            boardVec.x < 0 || boardVec.y < 0 ||
+            boardVec.y > ChessControlConfig.ChessValid_Max_Y) {
             r = [false, "not  vaild vector"];
         }
         if (target.ChessComp().ChessVector.isSame(boardVec)) {

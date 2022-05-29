@@ -7,6 +7,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BuildingComponent } from "../../../rules/Components/Building/BuildingComponent";
 import { BuildingState } from "../../../rules/System/Building/BuildingState";
 import { BuildingSystem } from "../../../rules/System/Building/BuildingSystem";
+import { ChessControlConfig } from "../../../rules/System/ChessControl/ChessControlConfig";
 import { ChessControlSystem } from "../../../rules/System/ChessControl/ChessControlSystem";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
@@ -33,7 +34,7 @@ export class item_building_base extends BaseItem_Plus {
             }
             let hCaster = this.GetCasterPlus();
             let boardPos = ChessControlSystem.GetBoardLocalVector2(vLocation, false);
-            if (boardPos.playerid != hCaster.ETRoot.AsPlayer().Playerid || boardPos.x < 0 || boardPos.y < 0) {
+            if (boardPos.playerid != hCaster.ETRoot.AsPlayer().Playerid || boardPos.x < 0 || boardPos.y < 0 || boardPos.y > ChessControlConfig.ChessValid_Max_Y) {
                 this.errorStr = GameEnum.Event.ErrorCode.dota_hud_error_cant_build_at_location;
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
@@ -103,18 +104,19 @@ export class item_building_base extends BaseItem_Plus {
             let sTowerName = this.GetCreateUnitName();
             let location = this.GetCursorPosition();
             let boardPos = ChessControlSystem.GetBoardLocalVector2(location, false);
-            if (boardPos.playerid != hCaster.ETRoot.AsPlayer().Playerid) {
+            if (boardPos.playerid != hCaster.ETRoot.AsPlayer().Playerid || boardPos.y > ChessControlConfig.ChessValid_Max_Y) {
                 return;
             }
             let trueLocal = ChessControlSystem.GetBoardGirdCenterVector3(boardPos);
             // BuildingSystem.SnapToGrid(location);
             let result = buildM.placeBuilding(sTowerName, trueLocal);
             ResHelper.CreateParticle(
-                new ResHelper .ParticleInfo().set_resPath("particles/econ/items/antimage/antimage_ti7/antimage_blink_start_ti7_ribbon_bright.vpcf")
+                new ResHelper.ParticleInfo()
+                    .set_resPath("particles/econ/items/antimage/antimage_ti7/antimage_blink_start_ti7_ribbon_bright.vpcf")
                     .set_owner(result)
                     .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
                     .set_validtime(5)
-             )
+            );
             if (result) {
                 this.SpendCharge();
             }

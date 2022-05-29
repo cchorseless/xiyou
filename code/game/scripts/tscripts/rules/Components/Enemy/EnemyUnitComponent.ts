@@ -7,7 +7,9 @@ import { ET, registerET } from "../../Entity/Entity";
 import { EnemyConfig } from "../../System/Enemy/EnemyConfig";
 import { PlayerSystem } from "../../System/Player/PlayerSystem";
 import { RoundSystem } from "../../System/Round/RoundSystem";
+import { ChessComponent } from "../ChessControl/ChessComponent";
 import { ERound } from "../Round/ERound";
+import { RoundEnemyComponent } from "../Round/RoundEnemyComponent";
 import { EnemyKillPrizeComponent } from "./EnemyKillPrizeComponent";
 import { EnemyMoveComponent } from "./EnemyMoveComponent";
 import { EnemyPropsComponent } from "./EnemyPropsComponent";
@@ -21,10 +23,15 @@ export class EnemyUnitComponent extends ET.Component {
         let domain = this.GetDomain<BaseNpc_Plus>();
         let configid = domain.ETRoot.As<EnemyUnitEntityRoot>().ConfigID;
         this.config = KVHelper.KvServerConfig.building_unit_enemy[configid];
-        domain.ETRoot.AddComponent(EnemyMoveComponent);
+        // domain.ETRoot.AddComponent(EnemyMoveComponent);
         domain.ETRoot.AddComponent(EnemyKillPrizeComponent);
         domain.ETRoot.AddComponent(EnemyPropsComponent);
+        domain.ETRoot.AddComponent(ChessComponent);
+        domain.ETRoot.AddComponent(RoundEnemyComponent);
+        domain.SetForwardVector(Vector(0, -1, 0));
     }
+
+
 
     GetPlayerId() {
         return this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Playerid;
