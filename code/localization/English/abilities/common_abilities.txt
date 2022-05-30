@@ -1,2 +1,3 @@
 "DOTA_Tooltip_ability_ability_empty"       "空技能"
 "DOTA_Tooltip_ability_ability_tp"       "传送"
+"DOTA_Tooltip_ability_building_auto_findtreasure"       "寻宝"

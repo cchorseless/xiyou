@@ -11,7 +11,6 @@ import { GameFunc } from "../../GameFunc";
 import { BattleHelper } from "../../helper/BattleHelper";
 import { EventHelper } from "../../helper/EventHelper";
 import { LogHelper } from "../../helper/LogHelper";
-import { PlayerSystem } from "../../rules/System/Player/PlayerSystem";
 import { BaseItem_Plus } from "../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, Modifier_Plus } from "../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../entityPlus/BaseNpc_Plus";
@@ -146,9 +145,9 @@ export class modifier_event extends BaseModifier_Plus {
                     }
                 }
                 // 检查位置是否改变
-                let changeData = PlayerSystem.GetPlayer(playerid).PlayerComp().CheckItemSlotChange(r);
+                let changeData = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(playerid).PlayerComp().CheckItemSlotChange(r);
                 // 同步位置数据
-                PlayerSystem.GetPlayer(playerid).PlayerComp().itemSlotData = r;
+                GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(playerid).PlayerComp().itemSlotData = r;
                 if (changeData) {
                     let _event: EventData = {};
                     (_event as EventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;

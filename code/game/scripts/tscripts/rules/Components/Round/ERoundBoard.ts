@@ -11,8 +11,6 @@ import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { serializeETProps } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
-import { ChessControlSystem } from "../../System/ChessControl/ChessControlSystem";
-import { PlayerSystem } from "../../System/Player/PlayerSystem";
 import { RoundConfig } from "../../System/Round/RoundConfig";
 import { ERound } from "./ERound";
 
@@ -136,7 +134,7 @@ export class ERoundBoard extends ERound {
         let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
         let allenemy = this.config.unitinfo;
         let _boardVec = new ChessControlConfig.ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
-        let pos = ChessControlSystem.GetBoardGirdVector3(_boardVec);
+        let pos = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardGirdVector3(_boardVec);
         let angle = Vector(Number(allenemy[unit_index].angles_x), Number(allenemy[unit_index].angles_y), Number(allenemy[unit_index].angles_z));
         let enemyName = allenemy[unit_index].unit;
         let delay = 0;

@@ -9,7 +9,6 @@ import { modifier_spawn_fall } from "../../../npc/modifier/spawn/modifier_spawn_
 import { modifier_spawn_torrent } from "../../../npc/modifier/spawn/modifier_spawn_torrent";
 import { ET, registerET } from "../../Entity/Entity";
 import { EnemyState } from "../../System/Enemy/EnemyState";
-import { EnemySystem } from "../../System/Enemy/EnemySystem";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
 

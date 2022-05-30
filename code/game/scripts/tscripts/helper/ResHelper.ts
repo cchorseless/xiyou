@@ -115,7 +115,7 @@ export module ResHelper {
             resInfo.level = PARTICLE_DETAIL_LEVEL.PARTICLE_DETAIL_LEVEL_ULTRA;
         }
         let p_id = ParticleManager.CreateParticle(ResHelper.GetParticleReplacement(resInfo.resPath, resInfo.resNpc), resInfo.iAttachment, resInfo.owner);
-        if (resInfo.validtime != null || resInfo.validtime > 0) {
+        if (resInfo.validtime != null && resInfo.validtime > 0) {
             TimerHelper.addTimer(resInfo.validtime, () => {
                 ParticleManager.DestroyParticle(p_id, resInfo.isimmediately);
                 ParticleManager.ReleaseParticleIndex(p_id);
@@ -123,5 +123,4 @@ export module ResHelper {
         }
         return p_id;
     }
-
 }

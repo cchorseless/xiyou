@@ -1,16 +1,17 @@
 import { KVHelper } from "../../../helper/KVHelper";
-import { CombinationManagerComponent } from "../../Components/Combination/CombinationManagerComponent";
+import { ET, registerET } from "../../Entity/Entity";
 
-export class CombinationSystem {
+@registerET()
+export class CombinationSystemComponent extends ET.Component {
 
     /**是否工作 */
-    public static IsWorking: boolean = true;
+    public  IsWorking: boolean = true;
     /**初始化 */
-    public static init() {
-
+    public  onAwake(...args: any[]): void {
+        
     }
 
-    public static LoadConfig() {
+    public  LoadConfig() {
         let config = KVHelper.KvServerConfig.building_combination;
         for (let key in config) {
             let info = config[key as "1001"];

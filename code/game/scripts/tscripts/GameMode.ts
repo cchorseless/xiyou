@@ -7,11 +7,10 @@ import { modifier_event } from "./npc/modifier/modifier_event";
 import { KVHelper } from "./helper/KVHelper";
 import { globalData, reloadable } from "./GameCache";
 import { GameEnum } from "./GameEnum";
-import { SingletonClass } from "./helper/SingletonHelper";
 import { BaseModifier } from "./npc/entityPlus/Base_Plus";
-import { PlayerSystem } from "./rules/System/Player/PlayerSystem";
-import { GameModule } from "./GameModule";
+import { GameEntityRoot } from "./GameEntityRoot";
 import { Assert_Sounds } from "./assert/Assert_Sounds";
+import { ET } from "./rules/Entity/Entity";
 declare global {
     interface CDOTAGameRules {
         Addon: GameMode;
@@ -19,13 +18,15 @@ declare global {
 }
 
 @reloadable
-export class GameMode {
+export class GameMode implements ET.IEntityRoot {
+    ETRoot: GameEntityRoot;
     public static Precache(this: void, context: CScriptPrecacheContext) {
         PrecacheHelper.init(context);
     }
     public static Activate(this: void) {
         LogHelper.print("Activate-------------");
         GameRules.Addon = new GameMode();
+        GameEntityRoot.Active(GameRules.Addon);
         GameRules.Addon.InitGameMode();
     }
     public Instance: CDOTABaseGameMode;
@@ -42,7 +43,7 @@ export class GameMode {
         // 添加監聽事件
         GameEvent.GetInstance().init();
         // 启动模块
-        GameModule.GetInstance().init();
+        this.ETRoot.init();
         // 初始化全局对象
         this.InitGlobalBaseNPC();
     }
@@ -100,7 +101,7 @@ export class GameMode {
     public bGameEnd = false;
     public Victory() {
         if (this.bGameEnd == true) return;
-        PlayerSystem.GetAllPlayeridByTeam().forEach((iPlayerID) => {
+        this.ETRoot.PlayerSystem().GetAllPlayeridByTeam().forEach((iPlayerID) => {
             let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
             if (_hHero && _hHero.IsAlive()) {
                 // this.UpdatePlayerEndData(hHero)
@@ -113,7 +114,7 @@ export class GameMode {
     }
     public Defeat() {
         if (this.bGameEnd == true) return;
-        PlayerSystem.GetAllPlayeridByTeam().forEach((iPlayerID) => {
+        this.ETRoot.PlayerSystem().GetAllPlayeridByTeam().forEach((iPlayerID) => {
             let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
             if (_hHero && _hHero.IsAlive()) {
                 // this.UpdatePlayerEndData(hHero)
@@ -127,5 +128,4 @@ export class GameMode {
         EmitGlobalSound(Assert_Sounds.Game.Defeat);
         GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
     }
-
 }

@@ -6,7 +6,6 @@ import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { GameProtocol } from "../../../service/GameProtocol";
 import { ET, registerET } from "../../Entity/Entity";
 import { PlayerState } from "../../System/Player/PlayerState";
-import { PlayerSystem } from "../../System/Player/PlayerSystem";
 import { md5 } from "../../../lib/md5";
 
 /**玩家数据组件 */
@@ -30,6 +29,7 @@ export class PlayerHttpComponent extends ET.Component {
     }
 
     public async PlayerLogin(playerid: PlayerID) {
+        let PlayerSystem = GameRules.Addon.ETRoot.PlayerSystem();
         let steamid = PlayerSystem.GetSteamID(playerid);
         let accountid = PlayerSystem.GetAccountID(playerid);
         let loginUrl = GameProtocol.LoginUrl();
@@ -71,6 +71,5 @@ export class PlayerHttpComponent extends ET.Component {
             false
         );
     }
-    public onAwake() {
-    }
+    public onAwake() {}
 }

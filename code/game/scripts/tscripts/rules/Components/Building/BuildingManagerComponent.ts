@@ -6,11 +6,10 @@ import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { ET, registerET } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { BuildingState } from "../../System/Building/BuildingState";
-import { BuildingSystem } from "../../System/Building/BuildingSystem";
-import { PlayerSystem } from "../../System/Player/PlayerSystem";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { RoundBuildingComponent } from "../Round/RoundBuildingComponent";
@@ -82,6 +81,7 @@ export class BuildingManagerComponent extends ET.Component {
         building.SetControllableByPlayer(playerID, true);
         building.addSpawnedHandler(
             ET.Handler.create(this, () => {
+                modifier_wait_portal.applyOnly(building, domain);
                 // modifier_building.apply(this.createUnit, domain)
                 // modifier_test.apply(this.createUnit, domain)
             })
@@ -129,7 +129,7 @@ export class BuildingManagerComponent extends ET.Component {
         return this.GetDomain<BaseNpc_Plus>()
             .ETRoot.GetDomainChilds(BuildingEntityRoot)
             .filter((b) => {
-                return b.ChessComp().isBattle();
+                return b.ChessComp().isInBattle();
             });
     }
 

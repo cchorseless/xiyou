@@ -1,6 +1,5 @@
 import { GameEnum } from "../../../GameEnum";
 import { ResHelper } from "../../../helper/ResHelper";
-import { PlayerSystem } from "../../../rules/System/Player/PlayerSystem";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
@@ -32,7 +31,7 @@ export class modifier_building extends BaseModifier_Plus {
         // super.OnCreated(params);
         if (IsServer()) {
             let hParent = this.GetParentPlus()
-            let vColor = PlayerSystem.GetPlayer(hParent.GetPlayerOwnerID()).PlayerComp().playerColor;
+            let vColor = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(hParent.GetPlayerOwnerID()).PlayerComp().playerColor;
             let info: ResHelper.IParticleInfo = {
                 resPath: "particles/player_color.vpcf",
                 iAttachment: ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,

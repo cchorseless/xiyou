@@ -61,8 +61,8 @@ CSS_1_2 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"437px","height":"42px
 CSS_1_3 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"825px","height":"42px","fontWeight":"bold","fontSize":"25","color":"#ffffff"}
 CSS_1_4 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"1025px","height":"42px","fontWeight":"bold","fontSize":"25","color":"#ffffff"}
 CSS_1_5 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"1229px","height":"42px","fontWeight":"bold","fontSize":"25","color":"#ffffff"}
-CSS_1_6 : Partial<VCSSStyleDeclaration>  = {"y":"82px","x":"641px","fontWeight":"bold","fontSize":"50","color":"#ffffff"}
-CSS_1_7 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"612px","height":"42px","fontWeight":"bold","fontSize":"30","color":"#ffffff"}
+CSS_1_6 : Partial<VCSSStyleDeclaration>  = {"y":"82px","fontWeight":"bold","fontSize":"50","color":"#ffffff","x":"0px","horizontalAlign":"middle"}
+CSS_1_7 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"641px","height":"42px","fontWeight":"bold","fontSize":"30","color":"#ffffff"}
 CSS_1_8 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"14px","width":"147px","height":"93px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/5chess_png.png\")","backgroundSize":"100% 100%"}
 
 __root___isValid:boolean = true;
@@ -189,7 +189,7 @@ render() {
 </Label>
 }
     {this.lbl_gametime_isValid && 
-<Label text="00:11:11|n1" ref={this.lbl_gametime} key="compId_6" style={this.CSS_1_7}  {...this.lbl_gametime_attrs} >
+<Label text="00:11:11" ref={this.lbl_gametime} key="compId_6" style={this.CSS_1_7}  {...this.lbl_gametime_attrs} >
 {this.lbl_gametime_childs}
 </Label>
 }

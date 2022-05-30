@@ -1,29 +1,32 @@
 import { KVHelper } from "../../../helper/KVHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { EnemyManagerComponent } from "../../Components/Enemy/EnemyManagerComponent";
-import { PlayerSystem } from "../Player/PlayerSystem";
+import { ET, registerET } from "../../Entity/Entity";
 import { RoundState } from "../Round/RoundState";
 import { EnemyState } from "./EnemyState";
 
-export class EnemySystem {
+@registerET()
+export class EnemySystemComponent extends ET.Component {
     /**是否工作 */
-    public static IsWorking: boolean = true;
+    public IsWorking: boolean = true;
     /**初始化 */
-    public static init() {
+    public onAwake() {
         EnemyState.init();
     }
-    static readonly AllManager: { [k: string]: EnemyManagerComponent } = {};
+    readonly AllManager: { [k: string]: EnemyManagerComponent } = {};
 
-    public static GetEnemyCounts() {
+    public GetEnemyCounts() {
         let index = 0;
-        PlayerSystem.GetAllPlayer().forEach((player) => {
-            index += player.EnemyManagerComp().tAllEnemy.length;
-        });
+        GameRules.Addon.ETRoot.PlayerSystem()
+            .GetAllPlayer()
+            .forEach((player) => {
+                index += player.EnemyManagerComp().tAllEnemy.length;
+            });
         return index;
     }
-    public static GetMaxEnemy() {
+    public GetMaxEnemy() {
         let index = 0;
-        let allplayer = PlayerSystem.GetAllPlayer();
+        let allplayer = GameRules.Addon.ETRoot.PlayerSystem().GetAllPlayer();
         let playerCount = allplayer.length;
         allplayer.forEach((player) => {
             index += player.EnemyManagerComp().iMaxEnemyBonus + player.EnemyManagerComp().iMaxEnemyBonusEach * playerCount;
@@ -31,7 +34,7 @@ export class EnemySystem {
         return index;
     }
 
-    public static CheckEnemyIsFull() {
+    public CheckEnemyIsFull() {
         if (GameRules.State_Get() < DOTA_GameState.DOTA_GAMERULES_STATE_GAME_IN_PROGRESS) {
             return;
         }
@@ -49,8 +52,8 @@ export class EnemySystem {
         // CustomNetTables.SetTableValue("common", "player_missing", this.tPlayerMissing)
     }
 
-    private static warnTimer: string;
-    public static SetWarnState(b: boolean) {
+    private warnTimer: string;
+    public SetWarnState(b: boolean) {
         if (b) {
             if (this.warnTimer == null) {
                 let fWarningDefeatTime = GameRules.GetGameTime() + tonumber(KVHelper.KvServerConfig.building_config.WARNING_TIME.configValue);

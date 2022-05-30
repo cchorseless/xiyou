@@ -5,7 +5,6 @@ import { building_round_challenge } from "../../../kvInterface/building/building
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { RoundState } from "../../System/Round/RoundState";
-import { RoundSystem } from "../../System/Round/RoundSystem";
 import { ERound } from "./ERound";
 import { ERoundBoard } from "./ERoundBoard";
 import { ERoundChallenge } from "./ERoundChallenge";

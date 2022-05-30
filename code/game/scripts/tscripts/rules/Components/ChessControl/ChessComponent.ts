@@ -3,7 +3,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_jump } from "../../../npc/modifier/modifier_jump";
 import { ET, registerET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
-import { ChessControlSystem } from "../../System/ChessControl/ChessControlSystem";
+import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
 
 @registerET()
 export class ChessComponent extends ET.Component {
@@ -17,7 +17,7 @@ export class ChessComponent extends ET.Component {
     }
     updateBoardPos() {
         let location = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
-        this.ChessVector = ChessControlSystem.GetBoardLocalVector2(location);
+        this.ChessVector = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardLocalVector2(location);
     }
 
     updateForward(position: Vector) {
@@ -25,8 +25,18 @@ export class ChessComponent extends ET.Component {
         domain.SetForwardVector(((position - domain.GetAbsOrigin()) as Vector).Normalized());
         domain.MoveToPosition(position);
     }
-    isBattle() {
+    isInBattle() {
         return this.ChessVector.y >= 1;
+    }
+
+    isInBoard() {
+        let location = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
+        let playerid = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateUnitEntityRoot>().Playerid;
+        return GameRules.Addon.ETRoot.ChessControlSystem().IsInBoard(playerid, location);
+    }
+    isInBaseRoom() {
+        let location = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
+        return GameRules.Addon.ETRoot.ChessControlSystem().IsInBaseRoom(location);
     }
 
     blink_start_p: Vector;

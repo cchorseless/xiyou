@@ -11,7 +11,6 @@ import { EventHelper } from "../helper/EventHelper";
 import { LogHelper } from "../helper/LogHelper";
 import { SingletonClass } from "../helper/SingletonHelper";
 import { TimerHelper } from "../helper/TimerHelper";
-import { PlayerSystem } from "../rules/System/Player/PlayerSystem";
 
 export class GameService extends SingletonClass {
     public init() {
@@ -19,7 +18,7 @@ export class GameService extends SingletonClass {
     }
 
     public addEvent() {
-        EventHelper.addGameEvent(this,GameEnum.Event.GameEvent.game_rules_state_change, this.OnGameRulesStateChange);
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, this.OnGameRulesStateChange);
     }
 
     public OnGameRulesStateChange(e: any) {
@@ -50,13 +49,10 @@ export class GameService extends SingletonClass {
     }
 
     public GetPlayerServerData() {
-        PlayerSystem.GetAllPlayerid().forEach((playerid) => {
-
-        });
+        GameRules.Addon.ETRoot.PlayerSystem()
+            .GetAllPlayerid()
+            .forEach((playerid) => {});
     }
-
-    
-
 
     public Sleep(fTime: number) {
         let co = coroutine.running();

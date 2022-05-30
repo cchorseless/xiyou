@@ -15,7 +15,6 @@ import { RoundManagerComponent } from "../../rules/Components/Round/RoundManager
 import { CombinationManagerComponent } from "../../rules/Components/Combination/CombinationManagerComponent";
 import { PlayerState } from "../../rules/System/Player/PlayerState";
 import { BuildingManagerComponent } from "../../rules/Components/Building/BuildingManagerComponent";
-import { PlayerSystem } from "../../rules/System/Player/PlayerSystem";
 import { DrawComponent } from "../../rules/Components/Draw/DrawComponent";
 import { ChessControlComponent } from "../../rules/Components/ChessControl/ChessControlComponent";
 @registerUnit()
@@ -36,7 +35,7 @@ export class courier_base extends BaseNpc_Hero_Plus {
         if (!IsServer()) {
             return;
         }
-        PlayerSystem.GetPlayer(this.GetPlayerID()).Active(this);
+        GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.GetPlayerID()).Active(this);
         //#region  添加组件
         // 阿瓦隆组件
         // Component_Avalon.addComponent(this);

@@ -1,29 +1,46 @@
+import { GameFunc } from "../../../GameFunc";
 import { GameSetting } from "../../../GameSetting";
 import { AoiHelper } from "../../../helper/AoiHelper";
+import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { BuildingEntityRoot } from "../../Components/Building/BuildingEntityRoot";
+import { ET, registerET } from "../../Entity/Entity";
+import { MapState } from "../Map/MapState";
 import { PlayerState } from "../Player/PlayerState";
-import { PlayerSystem } from "../Player/PlayerSystem";
 import { ChessControlConfig } from "./ChessControlConfig";
-import { ChessControlEventHandler } from "./ChessControlEventHandler";
 
-export class ChessControlSystem {
-    public static init() {
-        ChessControlEventHandler.startListen(ChessControlSystem);
+@registerET()
+export class ChessControlSystemComponent extends ET.Component {
+    public onAwake(...args: any[]): void {
+        this.addEvent();
     }
 
-    public static BoardMaxVector3: { [playerid: string]: Vector } = {};
-    public static BoardMinVector3: { [playerid: string]: Vector } = {};
-    public static Board8x10MaxVector3: { [playerid: string]: Vector } = {};
-    public static Board8x10MinVector3: { [playerid: string]: Vector } = {};
-    public static BoardStandbyMaxVector3: { [playerid: string]: Vector } = {};
-    public static BoardStandbyMinVector3: { [playerid: string]: Vector } = {};
+    private addEvent() {
+        /**移动棋子 */
+        EventHelper.addProtocolEvent(this, ChessControlConfig.EProtocol.pick_chess_position, (event: CLIENT_DATA<ChessControlConfig.I.pick_chess_position>) => {
+            let v = Vector(event.data.x, event.data.y, event.data.z);
+            let entity = EntIndexToHScript(event.data.entityid as EntityIndex) as BaseNpc_Plus;
+            if (!GameFunc.IsValid(entity) || entity.ETRoot == null || !entity.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
+                [event.state, event.message] = [false, "cant find entity"];
+            } else {
+                [event.state, event.message] = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(event.PlayerID).ChessControlComp().moveChess(entity.ETRoot.As<BuildingEntityRoot>(), v);
+            }
+        });
+    }
 
-    public static GetPlayerfirstSpawnPoint(playerid: PlayerID) {
+    public BoardMaxVector3: { [playerid: string]: Vector } = {};
+    public BoardMinVector3: { [playerid: string]: Vector } = {};
+    public Board8x10MaxVector3: { [playerid: string]: Vector } = {};
+    public Board8x10MinVector3: { [playerid: string]: Vector } = {};
+    public BoardStandbyMaxVector3: { [playerid: string]: Vector } = {};
+    public BoardStandbyMinVector3: { [playerid: string]: Vector } = {};
+
+    public GetPlayerfirstSpawnPoint(playerid: PlayerID) {
         return PlayerState.HeroSpawnPoint[playerid];
     }
 
-    public static GetBoardMaxVector3(playerid: PlayerID) {
+    public GetBoardMaxVector3(playerid: PlayerID) {
         if (this.BoardMaxVector3[playerid + ""]) {
             return this.BoardMaxVector3[playerid + ""];
         }
@@ -33,7 +50,7 @@ export class ChessControlSystem {
         this.BoardMaxVector3[playerid + ""] = Vector(spawn.x + max_x, spawn.y + max_y, 128);
         return this.BoardMaxVector3[playerid + ""];
     }
-    public static GetBoardMinVector3(playerid: PlayerID) {
+    public GetBoardMinVector3(playerid: PlayerID) {
         if (this.BoardMinVector3[playerid + ""]) {
             return this.BoardMinVector3[playerid + ""];
         }
@@ -43,7 +60,7 @@ export class ChessControlSystem {
         this.BoardMinVector3[playerid + ""] = Vector(spawn.x - min_x, spawn.y - min_y, 128);
         return this.BoardMinVector3[playerid + ""];
     }
-    public static GetBoard8x10MaxVector3(playerid: PlayerID) {
+    public GetBoard8x10MaxVector3(playerid: PlayerID) {
         if (this.Board8x10MaxVector3[playerid + ""]) {
             return this.Board8x10MaxVector3[playerid + ""];
         }
@@ -53,7 +70,7 @@ export class ChessControlSystem {
         this.Board8x10MaxVector3[playerid + ""] = Vector(spawn.x + max_x, spawn.y + 1600 - 1152 + max_y, 128);
         return this.Board8x10MaxVector3[playerid + ""];
     }
-    public static GetBoard8x10MinVector3(playerid: PlayerID) {
+    public GetBoard8x10MinVector3(playerid: PlayerID) {
         if (this.Board8x10MinVector3[playerid + ""]) {
             return this.Board8x10MinVector3[playerid + ""];
         }
@@ -64,7 +81,7 @@ export class ChessControlSystem {
         return this.Board8x10MinVector3[playerid + ""];
     }
 
-    public static GetBoardStandbyMaxVector3(playerid: PlayerID) {
+    public GetBoardStandbyMaxVector3(playerid: PlayerID) {
         if (this.BoardStandbyMaxVector3[playerid + ""]) {
             return this.BoardStandbyMaxVector3[playerid + ""];
         }
@@ -74,7 +91,7 @@ export class ChessControlSystem {
         this.BoardStandbyMaxVector3[playerid + ""] = Vector(spawn.x + max_x, spawn.y + max_y, 128);
         return this.BoardStandbyMaxVector3[playerid + ""];
     }
-    public static GetBoardStandbyMinVector3(playerid: PlayerID) {
+    public GetBoardStandbyMinVector3(playerid: PlayerID) {
         if (this.BoardStandbyMinVector3[playerid + ""]) {
             return this.BoardStandbyMinVector3[playerid + ""];
         }
@@ -84,7 +101,7 @@ export class ChessControlSystem {
         this.BoardStandbyMinVector3[playerid + ""] = Vector(spawn.x - min_x, spawn.y - min_y, 128);
         return this.BoardStandbyMinVector3[playerid + ""];
     }
-    public static GetBoardGirdVector3(v: ChessControlConfig.ChessVector) {
+    public GetBoardGirdVector3(v: ChessControlConfig.ChessVector) {
         let playerid = v.playerid as PlayerID;
         let minv: Vector;
         let x: number;
@@ -102,7 +119,7 @@ export class ChessControlSystem {
     }
 
     // x ,y playerid
-    public static GetBoardGirdCenterVector3(v: ChessControlConfig.ChessVector) {
+    public GetBoardGirdCenterVector3(v: ChessControlConfig.ChessVector) {
         let playerid = v.playerid as PlayerID;
         let minv: Vector;
         let x: number;
@@ -119,9 +136,9 @@ export class ChessControlSystem {
         return Vector(x, y, 128);
     }
 
-    public static FindBoardInGirdChess(v: ChessControlConfig.ChessVector) {
+    public FindBoardInGirdChess(v: ChessControlConfig.ChessVector) {
         let playerid = v.playerid as PlayerID;
-        if (!PlayerSystem.IsValidPlayer(playerid)) {
+        if (!GameRules.Addon.ETRoot.PlayerSystem().IsValidPlayer(playerid)) {
             return;
         }
         let v3 = this.GetBoardGirdCenterVector3(v);
@@ -135,32 +152,37 @@ export class ChessControlSystem {
         return r;
     }
 
-    public static IsBoardEmptyGird(v: ChessControlConfig.ChessVector) {
+    public IsBoardEmptyGird(v: ChessControlConfig.ChessVector) {
         return this.FindBoardInGirdChess(v).length === 0;
     }
+    public IsInBaseRoom(v: Vector) {
+        let minv = MapState.BaseRoomMinPoint;
+        let maxv = MapState.BaseRoomMaxPoint;
+        return v.x >= minv.x && v.x <= maxv.x && v.y >= minv.y && v.y <= maxv.y;
+    }
 
-    public static IsInBoard(playerid: PlayerID, v: Vector) {
+    public IsInBoard(playerid: PlayerID, v: Vector) {
         let minv = this.GetBoardMinVector3(playerid);
         let maxv = this.GetBoardMaxVector3(playerid);
         return v.x >= minv.x && v.x <= maxv.x && v.y >= minv.y && v.y <= maxv.y;
     }
 
-    public static IsInBoard8x10(playerid: PlayerID, v: Vector) {
+    public IsInBoard8x10(playerid: PlayerID, v: Vector) {
         let minv = this.GetBoard8x10MinVector3(playerid);
         let maxv = this.GetBoard8x10MaxVector3(playerid);
         return v.x >= minv.x && v.x <= maxv.x && v.y >= minv.y && v.y <= maxv.y;
     }
 
-    public static IsInBoardStandby(playerid: PlayerID, v: Vector) {
+    public IsInBoardStandby(playerid: PlayerID, v: Vector) {
         let minv = this.GetBoardStandbyMinVector3(playerid);
         let maxv = this.GetBoardStandbyMaxVector3(playerid);
         return v.x >= minv.x && v.x <= maxv.x && v.y >= minv.y && v.y <= maxv.y;
     }
 
-    public static GetBoardLocalVector2(v: Vector, IsValidPlayer: boolean = true) {
+    public GetBoardLocalVector2(v: Vector, IsValidPlayer: boolean = true) {
         let playerlist: PlayerID[] = [];
         if (IsValidPlayer) {
-            playerlist = PlayerSystem.GetAllPlayerid();
+            playerlist = GameRules.Addon.ETRoot.PlayerSystem().GetAllPlayerid();
         } else {
             for (let i = 0; i < GameSetting.GAME_MAX_PLAYER; i++) {
                 playerlist.push(i as PlayerID);
@@ -170,14 +192,14 @@ export class ChessControlSystem {
         let x = -1;
         let y = -1;
         for (let _player of playerlist) {
-            if (ChessControlSystem.IsInBoard(_player, v)) {
+            if (this.IsInBoard(_player, v)) {
                 playerid = _player;
-                if (ChessControlSystem.IsInBoard8x10(_player, v)) {
-                    let minv = ChessControlSystem.GetBoard8x10MinVector3(_player);
+                if (this.IsInBoard8x10(_player, v)) {
+                    let minv = this.GetBoard8x10MinVector3(_player);
                     x = math.floor((v.x - minv.x) / ChessControlConfig.Gird_Width);
                     y = math.floor((v.y - minv.y) / ChessControlConfig.Gird_Height) + 1;
-                } else if (ChessControlSystem.IsInBoardStandby(_player, v)) {
-                    let minv = ChessControlSystem.GetBoardStandbyMinVector3(_player);
+                } else if (this.IsInBoardStandby(_player, v)) {
+                    let minv = this.GetBoardStandbyMinVector3(_player);
                     x = math.floor((v.x - minv.x) / ChessControlConfig.Gird_Width);
                     y = 0;
                 }

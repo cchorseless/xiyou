@@ -3,8 +3,6 @@ import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
-import { ChessControlSystem } from "../../System/ChessControl/ChessControlSystem";
-import { PlayerSystem } from "../../System/Player/PlayerSystem";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 
 @registerET()
@@ -20,6 +18,7 @@ export class ChessControlComponent extends ET.Component {
         if (this.Domain.ETRoot!.GetDomainChild(target.Id) == null) {
             r = [false, "EntityRoot is not my"];
         }
+        let ChessControlSystem = GameRules.Addon.ETRoot.ChessControlSystem();
         let boardVec = ChessControlSystem.GetBoardLocalVector2(v);
         if (boardVec.playerid != this.Domain.ETRoot.AsPlayer().Playerid ||
             boardVec.x < 0 || boardVec.y < 0 ||

@@ -9,7 +9,6 @@ import { AwalonEventHandler } from "./AwalonEventHandler";
 import { AwalonConfig } from "./AwalonConfig";
 import { AwalonState } from "./AwalonState";
 import { PlayerComponent } from "../../Components/Player/PlayerComponent";
-import { PlayerSystem } from "../Player/PlayerSystem";
 
 export class AwalonSystem {
 
@@ -70,7 +69,7 @@ export class AwalonSystem {
                 for (let playerid in allPlayerinfo) {
                     let _playerid = tonumber(playerid) as PlayerID;
                     let point: Vector = null;
-                    let hero = PlayerSystem.GetHero(_playerid)
+                    let hero = GameRules.Addon.ETRoot.PlayerSystem().GetHero(_playerid)
                     // 队伍内
                     if (AwalonState.CheckPlayerInTeam(_playerid)) {
                         point = redPoints.shift();
@@ -116,7 +115,7 @@ export class AwalonSystem {
         // 传送回出生点
         for (let playerid in allPlayerinfo) {
             let _playerid = tonumber(playerid) as PlayerID;
-            let hero = PlayerSystem.GetHero(_playerid)
+            let hero = GameRules.Addon.ETRoot.PlayerSystem().GetHero(_playerid)
             let firstSpawnPoint = hero.ETRoot.GetComponent(PlayerComponent).firstSpawnPoint;
             let istp = GameFunc.VectorFunctions.IsValidDiatance(hero.GetAbsOrigin(), firstSpawnPoint)
             if (!istp) {

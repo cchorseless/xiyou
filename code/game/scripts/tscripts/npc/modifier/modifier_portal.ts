@@ -40,6 +40,13 @@ export class modifier_portal extends BaseModifier_Plus {
     tParticleID: EntityIndex[];
     targetname: string;
     Init(params: ModifierTable) {
+        let iParticleID = ResHelper.CreateParticle(
+            new ResHelper.ParticleInfo()
+                .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
+                .set_resPath("particles/units/heroes/heroes_underlord/abbysal_underlord_portal_ambient.vpcf")
+                .set_owner(this.GetParent())
+        );
+        this.AddParticle(iParticleID, false, false, -1, false, false);
         if (IsServer()) {
             this.vPosition = GameFunc.VectorFunctions.StringToVector(params.vPosition);
             this.iHasArrow = params.iHasArrow;
@@ -64,14 +71,6 @@ export class modifier_portal extends BaseModifier_Plus {
                 this,
                 true
             );
-        } else {
-            let iParticleID = ResHelper.CreateParticle(
-                new ResHelper.ParticleInfo()
-                    .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
-                    .set_resPath("particles/units/heroes/heroes_underlord/abbysal_underlord_portal_ambient.vpcf")
-                    .set_owner(this.GetParent())
-            );
-            ParticleManager.SetParticleControl(iParticleID, 2, this.GetParentPlus().GetAbsOrigin());
         }
     }
     checkTelepoart() {
@@ -91,7 +90,7 @@ export class modifier_portal extends BaseModifier_Plus {
         for (let hUnit of tTargets) {
             hUnit.Hold();
             let modifier = modifier_wait_portal.findIn(hUnit);
-            if (modifier.CanPortal()) modifier.TeleportToPoint(this.vPosition);
+            if (modifier != null && modifier.CanPortal()) modifier.TeleportToPoint(this.vPosition);
             // modifier_tp.TeleportToPoint(hUnit, null, this.vPosition);
             // if (this.iHasArrow  && this.tParticleID[hUnit.entindex()]) {
             //     ParticleManager.DestroyParticle(this.tParticleID[hUnit.entindex()], false);

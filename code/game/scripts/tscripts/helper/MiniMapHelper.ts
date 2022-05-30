@@ -1,5 +1,4 @@
 import { GameEnum } from "../GameEnum";
-import { PlayerSystem } from "../rules/System/Player/PlayerSystem";
 import { EventHelper } from "./EventHelper";
 import { LogHelper } from "./LogHelper";
 import { TimerHelper } from "./TimerHelper";
@@ -18,7 +17,7 @@ export module MiniMapHelper {
      */
     export function showPlayerOnMiniForPlayer(showplayerid: PlayerID, forplayerid: PlayerID) {
         if (!IsServer()) { return }
-        let hero = PlayerSystem.GetHero(showplayerid);
+        let hero = GameRules.Addon.ETRoot.PlayerSystem().GetHero(showplayerid);
         let v = hero.GetAbsOrigin();
         let offx = math.abs(v.x + 7680) / 7680 / 2;
         let offy = math.abs(v.y - 7680) / 7680 / 2;

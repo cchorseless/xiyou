@@ -5,8 +5,6 @@ import { building_unit_enemy } from "../../../kvInterface/building/building_unit
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { EnemyConfig } from "../../System/Enemy/EnemyConfig";
-import { PlayerSystem } from "../../System/Player/PlayerSystem";
-import { RoundSystem } from "../../System/Round/RoundSystem";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { ERound } from "../Round/ERound";
 import { RoundEnemyComponent } from "../Round/RoundEnemyComponent";

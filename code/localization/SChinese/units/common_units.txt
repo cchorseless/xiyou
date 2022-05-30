@@ -2,3 +2,7 @@
 "unit_remote_mine"       "遥控炸弹"
 "unit_dummy"       "目标伤害点"
 "unit_portal"       "传送门"
+"unit_base_baoxiang"       "基地宝箱"
+"unit_base_bossbaoxiang"       "基地统领宝箱"
+"unit_base_gold_bag"       "基地金币袋子"
+"unit_base_equip_bag"       "装备箱子"

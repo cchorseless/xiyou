@@ -77,6 +77,7 @@ export class PrecacheHelper {
         Object.keys(Assert_Precache.particle).forEach((k) => {
             PrecacheHelper.precachRes(ResType.particle, (Assert_Precache.particle as any)[k].effect, context);
         });
+        // PrecacheHelper.precachRes(ResType.particle_folder, "particles/units/heroes/heroes_underlord", context);
     }
     /**
      * 根据名字加载道具
@@ -129,7 +130,7 @@ export class PrecacheHelper {
      * 处理KV实体的资源加载
      * @param entityKeyValues
      */
-    public static precachResByKV(entityKeyValues: CScriptKeyValues, context: CScriptPrecacheContext) {
+    public static precachResByKV(entityKeyValues: CScriptKeyValues, context: CScriptPrecacheContext ) {
         // 加载粒子
         for (let k in PrecacheHelper.KVfile_Key) {
             let v = (PrecacheHelper.KVfile_Key as any)[k];

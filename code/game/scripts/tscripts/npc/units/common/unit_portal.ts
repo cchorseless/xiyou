@@ -1,3 +1,4 @@
+import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ET } from "../../../rules/Entity/Entity";
@@ -7,9 +8,11 @@ import { modifier_portal } from "../../modifier/modifier_portal";
 /**传送门 */
 @registerUnit()
 export class unit_portal extends BaseNpc_Plus {
-    Spawn(entityKeyValues: CScriptKeyValues) {
+    Precache(context: CScriptPrecacheContext) {
         // PrecacheHelper.precachResByKV(entityKeyValues);
     }
+
+    Spawn(entityKeyValues: CScriptKeyValues) {}
     onSpawned(event: NpcSpawnedEvent) {
         if (!IsServer()) {
             return;

@@ -7,7 +7,6 @@ import { TimerHelper } from "./helper/TimerHelper";
 import { globalData, reloadable } from "./GameCache";
 import { GameRequest } from "./service/GameRequest";
 import { BotHelper } from "./helper/BotHelper";
-import { PlayerSystem } from "./rules/System/Player/PlayerSystem";
 
 @reloadable
 export class GameDebugger extends SingletonClass {
@@ -156,11 +155,13 @@ export class GameDebugger extends SingletonClass {
         TimerHelper.addTimer(
             inter,
             () => {
-                PlayerSystem.GetAllPlayeridByTeam().forEach((iPlayerID) => {
-                    if (PlayerResource.GetConnectionState(iPlayerID) == DOTAConnectionState_t.DOTA_CONNECTION_STATE_ABANDONED) {
-                        this.MakePlayerLose(iPlayerID);
-                    }
-                });
+                GameRules.Addon.ETRoot.PlayerSystem()
+                    .GetAllPlayeridByTeam()
+                    .forEach((iPlayerID) => {
+                        if (PlayerResource.GetConnectionState(iPlayerID) == DOTAConnectionState_t.DOTA_CONNECTION_STATE_ABANDONED) {
+                            this.MakePlayerLose(iPlayerID);
+                        }
+                    });
                 return inter;
             },
             this,
@@ -286,12 +287,14 @@ export class GameDebugger extends SingletonClass {
                 hHero.ForceKill(false);
             }
             let allLose = true;
-            PlayerSystem.GetAllPlayeridByTeam().forEach((playerId) => {
-                let _hHero = PlayerResource.GetSelectedHeroEntity(playerId);
-                if (_hHero && _hHero.IsAlive()) {
-                    allLose = false;
-                }
-            });
+            GameRules.Addon.ETRoot.PlayerSystem()
+                .GetAllPlayeridByTeam()
+                .forEach((playerId) => {
+                    let _hHero = PlayerResource.GetSelectedHeroEntity(playerId);
+                    if (_hHero && _hHero.IsAlive()) {
+                        allLose = false;
+                    }
+                });
             if (allLose && !IsInToolsMode()) {
                 GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
             }

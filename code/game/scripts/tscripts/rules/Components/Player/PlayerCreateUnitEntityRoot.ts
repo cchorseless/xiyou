@@ -1,13 +1,12 @@
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
-import { PlayerSystem } from "../../System/Player/PlayerSystem";
 
 export class PlayerCreateUnitEntityRoot extends ET.EntityRoot {
     readonly Playerid: PlayerID;
     readonly ConfigID: string;
     public GetPlayer() {
-        return PlayerSystem.GetPlayer(this.Playerid);
+        return GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.Playerid);
     }
     public Dispose(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
