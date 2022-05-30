@@ -93,7 +93,8 @@ export class ERoundBoard extends ERound {
         this.roundState = RoundConfig.ERoundBoardState.prize;
         EventHelper.SyncETEntity(this.toJsonObject(), this.Domain.ETRoot.AsPlayer().Playerid);
         let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllEnemy();
-        if (aliveEnemy.length > 0) {
+        let isWin = (aliveEnemy.length == 0);
+        if (!isWin) {
             let damage = 0;
             let delay_time = 0.5;
             aliveEnemy.forEach((b) => {
@@ -109,13 +110,14 @@ export class ERoundBoard extends ERound {
                 this,
                 true
             );
-        }
+        };
         this.Domain.ETRoot.AsPlayer()
             .BuildingManager()
             .getAllBuilding()
             .forEach((b) => {
-                b.RoundBuildingComp().OnBoardRound_Prize();
+                b.RoundBuildingComp().OnBoardRound_Prize(isWin);
             });
+       
     }
 
     ApplyDamageHero(damage: number) {

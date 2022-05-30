@@ -1,5 +1,7 @@
+import { building_auto_findtreasure } from "../../../npc/abilities/common/building_auto_findtreasure";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/modifier_jiaoxie_wudi";
+import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { modifier_remnant } from "../../../npc/modifier/modifier_remnant";
 import { ET, registerET } from "../../Entity/Entity";
 import { RoundConfig } from "../../System/Round/RoundConfig";
@@ -32,8 +34,18 @@ export class RoundBuildingComponent extends ET.Component {
         modifier_remnant.applyOnly(domain, domain);
     }
 
-    OnBoardRound_Prize() {
+    OnBoardRound_Prize(isWin: boolean) {
         let domain = this.GetDomain<BaseNpc_Plus>();
-        modifier_jiaoxie_wudi.applyOnly(domain, domain);
+        if (isWin) {
+            building_auto_findtreasure.findIn(domain).StartFindTreasure();
+            modifier_wait_portal.applyOnly(domain, domain, null, { duration: 60 });
+        } else {
+            modifier_remnant.remove(domain);
+        }
     }
+
+    OnBackBoardFromBaseRoom() {
+        
+    }
+
 }

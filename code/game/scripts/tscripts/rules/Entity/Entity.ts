@@ -563,6 +563,7 @@ export module ET {
         static Active<T extends typeof EntityRoot>(this: T, etroot: IEntityRoot) {
             if (etroot.ETRoot == null) {
                 etroot.ETRoot = new this(etroot);
+                etroot.ETRoot.OnActive();
             }
         }
 
@@ -577,6 +578,9 @@ export module ET {
         public AsPlayer() {
             return this as any as PlayerEntityRoot;
         }
+
+        public OnActive() {
+        }
         public Active(etroot: IEntityRoot) {
             if (etroot.ETRoot == null) {
                 this.setDomain(etroot);
@@ -588,6 +592,7 @@ export module ET {
                     }
                 }
                 (this.PreAwakeArgs as any) = null;
+                this.OnActive();
             } else {
                 LogHelper.error("cant active");
             }

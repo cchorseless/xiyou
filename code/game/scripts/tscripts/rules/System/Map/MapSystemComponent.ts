@@ -18,7 +18,6 @@ export class MapSystemComponent extends ET.Component {
         EventHelper.addServerEvent(this, GameEnum.Event.CustomServer.onserver_allplayer_loginfinish, () => {
             this.CreateAllMapUnit();
         });
-        
     }
 
     public CreateAllMapUnit() {
@@ -27,7 +26,7 @@ export class MapSystemComponent extends ET.Component {
             let t_v = MapState.BaseTpDoorPoint[i];
             let forvard = MapState.BaseVForwardPoint[i];
             unit_portal.CreatePortal(f_v, t_v, Vector(0, -1, 0), "player_" + i);
-            unit_portal.CreatePortal(t_v, f_v, MapState.BaseVForwardPoint[i], "base_" + i);
+            unit_portal.CreatePortal(t_v, f_v, MapState.BaseVForwardPoint[i], "base_" + i, DOTATeam_t.DOTA_TEAM_BADGUYS);
             let baoxiang = unit_base_baoxiang.CreateOne(MapState.BaseBaoXiangPoint[i], DOTATeam_t.DOTA_TEAM_GOODGUYS, true, null, null);
             baoxiang.SetForwardVector(forvard);
         }

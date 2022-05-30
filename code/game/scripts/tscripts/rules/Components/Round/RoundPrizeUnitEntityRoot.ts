@@ -1,24 +1,25 @@
 import { LogHelper } from "../../../helper/LogHelper";
+import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ChessComponent } from "../ChessControl/ChessComponent";
-import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
-import { ERound } from "../Round/ERound";
+import { ET } from "../../Entity/Entity";
+import { RoundPrizeUnitKillPrizeComponent } from "./RoundPrizeUnitKillPrizeComponent";
 
-
-
-export class RoundPrizeUnitEntityRoot extends PlayerCreateUnitEntityRoot {
+export class RoundPrizeUnitEntityRoot extends ET.EntityRoot {
     readonly RoundID: string;
     readonly OnlyKey: string;
+    readonly ConfigID: string;
 
-    SetConfigId(playerid: PlayerID, confid: string, roundid: string, onlyKey: string = null) {
-        (this as any).Playerid = playerid;
+    public OnActive(): void {
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundPrizeUnitKillPrizeComponent>("RoundPrizeUnitKillPrizeComponent"));
+    }
+
+    SetConfigId(confid: string, roundid: string, onlyKey: string = null) {
         (this as any).ConfigID = confid;
         (this as any).RoundID = roundid;
         (this as any).OnlyKey = onlyKey;
     }
 
-    EnemyKillPrize() {
-        // return this.GetComponentByName<EnemyKillPrizeComponent>("EnemyKillPrizeComponent");
+    KillPrizeComp() {
+        return this.GetComponentByName<RoundPrizeUnitKillPrizeComponent>("RoundPrizeUnitKillPrizeComponent");
     }
- 
 }

@@ -8,7 +8,6 @@ import { TimerHelper } from "../../helper/TimerHelper";
 import { BaseModifier_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "./modifier_event";
-import { modifier_tp } from "./modifier_tp";
 
 @registerModifier()
 export class modifier_portal extends BaseModifier_Plus {
@@ -46,6 +45,9 @@ export class modifier_portal extends BaseModifier_Plus {
                 .set_resPath("particles/units/heroes/heroes_underlord/abbysal_underlord_portal_ambient.vpcf")
                 .set_owner(this.GetParent())
         );
+        if (this.GetParentPlus().GetTeamNumber() == DOTATeam_t.DOTA_TEAM_BADGUYS) {
+            ParticleManager.SetParticleControl(iParticleID, 62, Vector(10, 0, 0));
+        }
         this.AddParticle(iParticleID, false, false, -1, false, false);
         if (IsServer()) {
             this.vPosition = GameFunc.VectorFunctions.StringToVector(params.vPosition);
@@ -66,7 +68,7 @@ export class modifier_portal extends BaseModifier_Plus {
                 0.1,
                 () => {
                     this.checkTelepoart();
-                    return 0.1;
+                    return 1;
                 },
                 this,
                 true
@@ -77,20 +79,13 @@ export class modifier_portal extends BaseModifier_Plus {
         if (!this.iWorking) {
             return;
         }
-        let tTargets = AoiHelper.FindUnitsInRadiusByModifierName(
-            modifier_wait_portal.name,
-            DOTATeam_t.DOTA_TEAM_GOODGUYS,
-            this.GetParentPlus().GetAbsOrigin(),
-            75,
-            DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY,
-            DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO,
-            DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE,
-            FindOrder.FIND_ANY_ORDER
-        );
+        let tTargets = AoiHelper.FindEntityInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), 100, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY);
         for (let hUnit of tTargets) {
-            hUnit.Hold();
             let modifier = modifier_wait_portal.findIn(hUnit);
-            if (modifier != null && modifier.CanPortal()) modifier.TeleportToPoint(this.vPosition);
+            if (modifier != null && modifier.CanPortal()) {
+                // hUnit.Hold();
+                modifier.TeleportToPoint(this.vPosition);
+            }
             // modifier_tp.TeleportToPoint(hUnit, null, this.vPosition);
             // if (this.iHasArrow  && this.tParticleID[hUnit.entindex()]) {
             //     ParticleManager.DestroyParticle(this.tParticleID[hUnit.entindex()], false);
@@ -141,7 +136,9 @@ export class modifier_wait_portal extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false;
     }
-
+    public Init(params?: object): void {
+        this.SetWorking(true);
+    }
     iWorking: boolean = true;
     SetWorking(b: boolean) {
         this.iWorking = b;
@@ -161,8 +158,12 @@ export class modifier_wait_portal extends BaseModifier_Plus {
         v.y = v.y + RandomFloat(64, 128) * y_xishu;
         let a = GetGroundPosition(v, this.GetParentPlus());
         this.GetParentPlus().SetAbsOrigin(a);
-        TimerHelper.addTimer(5, () => {
-            this.SetWorking(true);
-        });
+        TimerHelper.addTimer(
+            5,
+            () => {
+                this.SetWorking(true);
+            },
+            this
+        );
     }
 }

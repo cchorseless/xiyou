@@ -13,8 +13,6 @@ export class EnemySystemComponent extends ET.Component {
     public onAwake() {
         EnemyState.init();
     }
-    readonly AllManager: { [k: string]: EnemyManagerComponent } = {};
-
     public GetEnemyCounts() {
         let index = 0;
         GameRules.Addon.ETRoot.PlayerSystem()

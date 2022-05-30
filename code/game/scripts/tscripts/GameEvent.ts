@@ -15,6 +15,7 @@ import { modifier_property } from "./npc/modifier/modifier_property";
 import { modifier_task_npc } from "./npc/modifier/modifier_task";
 import { EnemyUnitComponent } from "./rules/Components/Enemy/EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./rules/Components/Enemy/EnemyUnitEntityRoot";
+import { RoundPrizeUnitEntityRoot } from "./rules/Components/Round/RoundPrizeUnitEntityRoot";
 import { GameRequest } from "./service/GameRequest";
 
 export class GameEvent extends SingletonClass {
@@ -169,15 +170,16 @@ export class GameEvent extends SingletonClass {
         if (!GameFunc.IsValid(hUnit)) {
             return;
         }
-        if (!hUnit.ETRoot || !hUnit.ETRoot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
+        if (!hUnit.ETRoot) {
             return;
         }
-
-        let enemyUnit = hUnit.ETRoot.As<EnemyUnitEntityRoot>();
-        if (!enemyUnit) {
-            return;
+        if (hUnit.ETRoot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
+            let enemyUnit = hUnit.ETRoot.As<EnemyUnitEntityRoot>();
+            enemyUnit.GetPlayer().EnemyManagerComp().killEnemy(enemyUnit);
+        } else if (hUnit.ETRoot.AsValid<RoundPrizeUnitEntityRoot>("RoundPrizeUnitEntityRoot")) {
+            let enemyUnit = hUnit.ETRoot.As<RoundPrizeUnitEntityRoot>();
+            enemyUnit.KillPrizeComp().OnKillByEntity(events.entindex_attacker);
         }
-        enemyUnit.GetPlayer().EnemyManagerComp().killEnemy(enemyUnit);
     }
 
     public OnAbilityUsed(event: DotaPlayerUsedAbilityEvent) {}

@@ -26,6 +26,7 @@ import { RoundEnemyComponent } from "./rules/Components/Round/RoundEnemyComponen
 import { RoundManagerComponent } from "./rules/Components/Round/RoundManagerComponent";
 import { PlayerDataComponent } from "./rules/Components/Player/PlayerDataComponent";
 import { RoundBuildingComponent } from "./rules/Components/Round/RoundBuildingComponent";
+import { RoundPrizeUnitKillPrizeComponent } from "./rules/Components/Round/RoundPrizeUnitKillPrizeComponent";
 
 
 MapSystemComponent;
@@ -44,6 +45,7 @@ DrawComponent;
 RoundManagerComponent;
 RoundEnemyComponent;
 RoundBuildingComponent;
+RoundPrizeUnitKillPrizeComponent;
 CombinationManagerComponent;
 BuildingManagerComponent;
 ChessControlComponent;

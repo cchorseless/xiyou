@@ -19,8 +19,8 @@ export class unit_portal extends BaseNpc_Plus {
         }
     }
     sPortalName: string;
-    static CreatePortal(vPortalPosition: Vector, vTargetPosition: Vector, vForward: Vector, sPortalName: string, bHasArrow: boolean = false) {
-        let hPortal = unit_portal.CreateOne(vPortalPosition, DOTATeam_t.DOTA_TEAM_GOODGUYS, true, null, null);
+    static CreatePortal(vPortalPosition: Vector, vTargetPosition: Vector, vForward: Vector, sPortalName: string, team: DOTATeam_t = DOTATeam_t.DOTA_TEAM_GOODGUYS, bHasArrow: boolean = false) {
+        let hPortal = unit_portal.CreateOne(vPortalPosition, team, true, null, null);
         hPortal.sPortalName = sPortalName;
         hPortal.SetForwardVector(vForward);
         hPortal.addSpawnedHandler(

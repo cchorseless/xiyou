@@ -8,6 +8,7 @@ import { unit_base_equip_bag } from "../../../npc/units/common/unit_base_equip_b
 import { unit_base_gold_bag } from "../../../npc/units/common/unit_base_gold_bag";
 import { EnemyUnitEntityRoot } from "../../Components/Enemy/EnemyUnitEntityRoot";
 import { RoundManagerComponent } from "../../Components/Round/RoundManagerComponent";
+import { RoundPrizeUnitEntityRoot } from "../../Components/Round/RoundPrizeUnitEntityRoot";
 import { ET, registerET } from "../../Entity/Entity";
 import { MapState } from "../Map/MapState";
 import { RoundState } from "./RoundState";
@@ -15,7 +16,7 @@ import { RoundState } from "./RoundState";
 @registerET()
 export class RoundSystemComponent extends ET.Component {
     public onAwake() {
-        this.addEvent()
+        this.addEvent();
     }
     public addEvent() {
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityHurtEvent, this.OnEntityHurtEvent);
@@ -42,7 +43,38 @@ export class RoundSystemComponent extends ET.Component {
             .forEach((player) => {
                 player.RoundManagerComp().runBoardRound(round);
             });
-        RoundState.createRoundMapUnit(round);
+        this.createRoundPrizeUnit(round);
+    }
+
+    private createRoundPrizeUnit(round: string) {
+        this.clearRoundPrizeUnit();
+        let posinfo = MapState.BaseRoomPrizeUnitRefreshZone;
+        let minx = posinfo[0];
+        let miny = posinfo[1];
+        let maxx = posinfo[2];
+        let maxy = posinfo[3];
+        for (let i = 0; i < 30; i++) {
+            let vv = Vector(RandomFloat(minx, maxx), RandomFloat(miny, maxy), 64);
+            let a = unit_base_gold_bag.CreateOne(vv, DOTATeam_t.DOTA_TEAM_BADGUYS, true);
+            RoundPrizeUnitEntityRoot.Active(a);
+            this.Domain.ETRoot.AddDomainChild(a.ETRoot);
+            let vv1 = Vector(RandomFloat(minx, maxx), RandomFloat(miny, maxy), 64);
+            let b = unit_base_equip_bag.CreateOne(vv1, DOTATeam_t.DOTA_TEAM_BADGUYS, true);
+            RoundPrizeUnitEntityRoot.Active(b);
+            this.Domain.ETRoot.AddDomainChild(b.ETRoot);
+            
+        }
+    }
+    public clearRoundPrizeUnit() {
+        let allunit = this.Domain.ETRoot.GetDomainChilds(RoundPrizeUnitEntityRoot);
+        allunit.forEach((unit) => {
+            unit.Dispose();
+        });
+    }
+
+    public randomRoundPrizeUnit() {
+        let allunit = this.Domain.ETRoot.GetDomainChilds(RoundPrizeUnitEntityRoot);
+        return GameFunc.ArrayFunc.RandomArray(allunit);
     }
 
     public runBasicRound(round: string) {
