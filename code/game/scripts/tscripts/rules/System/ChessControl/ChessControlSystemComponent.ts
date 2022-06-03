@@ -118,6 +118,54 @@ export class ChessControlSystemComponent extends ET.Component {
         return Vector(x, y, 128);
     }
 
+    public GetBoardEmptyGirdRandom(v: ChessControlConfig.ChessVector) {
+        let distance = 1;
+        while (distance <= 10) {
+            let circle = this.GetBoardGirdAroundCircle(v, ChessControlConfig.Gird_Width * distance);
+            for (let k of circle) {
+                if (this.IsBoardEmptyGird(k) && !this.IsBlinkTargetGird(k)) {
+                    return k;
+                }
+            }
+            distance++;
+        }
+    }
+
+    public GetBoardGirdAroundCircle(v: ChessControlConfig.ChessVector, distance: number) {
+        let r: ChessControlConfig.ChessVector[] = [];
+        let centerX = math.floor(v.x);
+        let centerY = math.floor(v.y);
+        let playerid = v.playerid;
+        let circle = math.floor(distance / ChessControlConfig.Gird_Width);
+        while (circle > 0) {
+            if (centerX - circle > 0) {
+                if (centerY - circle >= 1) {
+                    r.push(new ChessControlConfig.ChessVector(centerX - circle, centerY - circle, playerid));
+                }
+                r.push(new ChessControlConfig.ChessVector(centerX - circle, centerY, playerid));
+                if (centerY + circle < ChessControlConfig.Gird_Max_Y) {
+                    r.push(new ChessControlConfig.ChessVector(centerX - circle, centerY + circle, playerid));
+                }
+            }
+            if (centerY - circle >= 1) {
+                r.push(new ChessControlConfig.ChessVector(centerX, centerY - circle, playerid));
+            }
+            if (centerY + circle < ChessControlConfig.Gird_Max_Y) {
+                r.push(new ChessControlConfig.ChessVector(centerX, centerY + circle, playerid));
+            }
+            if (centerX + circle < ChessControlConfig.Gird_Max_X) {
+                if (centerY - circle >= 1) {
+                    r.push(new ChessControlConfig.ChessVector(centerX + circle, centerY - circle, playerid));
+                }
+                r.push(new ChessControlConfig.ChessVector(centerX + circle, centerY, playerid));
+                if (centerY + circle < ChessControlConfig.Gird_Max_Y) {
+                    r.push(new ChessControlConfig.ChessVector(centerX + circle, centerY + circle, playerid));
+                }
+            }
+            circle--;
+        }
+        return r;
+    }
     // x ,y playerid
     public GetBoardGirdCenterVector3(v: ChessControlConfig.ChessVector) {
         let playerid = v.playerid as PlayerID;
@@ -142,7 +190,15 @@ export class ChessControlSystemComponent extends ET.Component {
             return;
         }
         let v3 = this.GetBoardGirdCenterVector3(v);
-        let npcarr = AoiHelper.FindEntityInRadius(DOTATeam_t.DOTA_TEAM_GOODGUYS, v3, ChessControlConfig.Gird_Width / 2, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY);
+        let npcarr = AoiHelper.FindEntityInRadius(
+            DOTATeam_t.DOTA_TEAM_GOODGUYS,
+            v3,
+            ChessControlConfig.Gird_Width / 2,
+            null,
+            DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH
+            // DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
+            // DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS
+        );
         let r: BuildingEntityRoot[] = [];
         npcarr.forEach((npc) => {
             if (npc.ETRoot != null && npc.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
@@ -150,6 +206,30 @@ export class ChessControlSystemComponent extends ET.Component {
             }
         });
         return r;
+    }
+
+    private BlinkTargetGird: ChessControlConfig.ChessVector[] = [];
+    public IsBlinkTargetGird(v: ChessControlConfig.ChessVector) {
+        for (let k of this.BlinkTargetGird) {
+            if (k.isSame(v)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public RegistBlinkTargetGird(v: ChessControlConfig.ChessVector, isadd: boolean) {
+        if (isadd) {
+            if (!this.IsBlinkTargetGird(v)) {
+                this.BlinkTargetGird.push(v);
+            }
+        } else {
+            for (let i = 0; i < this.BlinkTargetGird.length; i++) {
+                if (this.BlinkTargetGird[i].isSame(v)) {
+                    this.BlinkTargetGird.splice(i, 1);
+                    i--;
+                }
+            }
+        }
     }
 
     public IsBoardEmptyGird(v: ChessControlConfig.ChessVector) {

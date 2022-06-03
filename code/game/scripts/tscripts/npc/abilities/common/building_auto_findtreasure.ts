@@ -28,6 +28,30 @@ export class building_auto_findtreasure extends BaseAbility_Plus {
         let owner = this.GetOwnerPlus();
         modifier_auto_findtreasure.applyOnly(owner, owner, this);
     }
+
+    IsFinding() {
+        let hParent = this.GetOwnerPlus();
+        return modifier_auto_findtreasure.exist(hParent);
+    }
+
+    GoBackBoard() {
+        let hParent = this.GetOwnerPlus();
+        let modifier = modifier_auto_findtreasure.findIn(hParent);
+        modifier.StopFindTreasure();
+        let building = hParent.ETRoot.As<BuildingEntityRoot>();
+        let boardV = building.ChessComp().ChessVector;
+        let t_p = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardGirdCenterVector3(boardV);
+        modifier_tp.TeleportToPoint(hParent, null, GetGroundPosition(t_p, hParent));
+        modifier_remnant.remove(hParent);
+        modifier.Destroy();
+        TimerHelper.addTimer(
+            1.1,
+            () => {
+                building.RoundBuildingComp().OnBackBoardFromBaseRoom();
+            },
+            building
+        );
+    }
 }
 
 @registerModifier()
@@ -92,6 +116,7 @@ export class modifier_auto_findtreasure extends BaseModifier_Plus {
             this.findTimer == null;
         }
         let hParent = this.GetParentPlus();
+        let ability = this.GetAbilityPlus() as building_auto_findtreasure;
         let building = hParent.ETRoot.As<BuildingEntityRoot>();
         let playerid = building.Playerid;
         let moveto = MapState.PlayerTpDoorPoint[playerid];
@@ -108,7 +133,7 @@ export class modifier_auto_findtreasure extends BaseModifier_Plus {
                         let targetnpc = this.FindOneTarget();
                         this.attackTarget = targetnpc;
                         if (targetnpc == null) {
-                            this.GoBackBoard();
+                            ability.GoBackBoard();
                             return;
                         } else {
                             GameFunc.ExecuteOrder(hParent, dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_TARGET, targetnpc.GetDomain<BaseNpc_Plus>(), null);
@@ -144,22 +169,9 @@ export class modifier_auto_findtreasure extends BaseModifier_Plus {
         if (count > 1) {
             this.DecrementStackCount();
         } else {
-            this.GoBackBoard();
-            this.Destroy();
+            let ability = this.GetAbilityPlus() as building_auto_findtreasure;
+            ability.GoBackBoard();
         }
-    }
-
-    GoBackBoard() {
-        this.StopFindTreasure();
-        let hParent = this.GetParentPlus();
-        let building = hParent.ETRoot.As<BuildingEntityRoot>();
-        let boardV = building.ChessComp().ChessVector;
-        let t_p = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardGirdCenterVector3(boardV);
-        modifier_tp.TeleportToPoint(hParent, null, GetGroundPosition(t_p, hParent));
-        modifier_remnant.remove(hParent);
-        TimerHelper.addTimer(1.1, () => {
-            building.RoundBuildingComp().OnBackBoardFromBaseRoom();
-        }, building);
     }
 
     StopFindTreasure() {

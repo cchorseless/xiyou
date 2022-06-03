@@ -4,6 +4,7 @@ import { GameFunc } from "../../GameFunc";
 import { LogHelper } from "../../helper/LogHelper";
 import { ResHelper } from "../../helper/ResHelper";
 import { BuildingEntityRoot } from "../../rules/Components/Building/BuildingEntityRoot";
+import { EnemyUnitEntityRoot } from "../../rules/Components/Enemy/EnemyUnitEntityRoot";
 import { BaseModifierMotionBoth_Plus, BaseModifier_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../entityPlus/BaseNpc_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
@@ -58,15 +59,12 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
-            let chessComp = this.GetParentPlus().ETRoot.As<BuildingEntityRoot>().ChessComp();
-            if (chessComp != null && chessComp.transfer_chess == true) {
-                chessComp.transfer_chess = false;
-                if (chessComp.ChessVector.y > 4) {
-                    this.GetParentPlus().SetForwardVector(Vector(0, -1, 0));
-                    this.GetParentPlus().MoveToPosition(GameFunc.AsVector(this.GetParentPlus().GetOrigin() + Vector(0, -100, 0)));
-                } else {
+            let etroot = this.GetParentPlus().ETRoot;
+            if (etroot != null) {
+                if (etroot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
                     this.GetParentPlus().SetForwardVector(Vector(0, 1, 0));
-                    this.GetParentPlus().MoveToPosition(GameFunc.AsVector(this.GetParentPlus().GetOrigin() + Vector(0, 100, 0)));
+                } else if (etroot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
+                    this.GetParentPlus().SetForwardVector(Vector(0, -1, 0));
                 }
             }
         }
@@ -100,8 +98,6 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
                 // 到终点了
                 me.SetAbsOrigin(this.vTargetPosition);
                 let chessComp = me.ETRoot.As<BuildingEntityRoot>().ChessComp();
-                chessComp.is_moving = false;
-                chessComp.updateBoardPos();
                 // RemoveAbilityAndModifier(me, "jiaoxie");
                 me.InterruptMotionControllers(true);
                 ResHelper.CreateParticle(
@@ -113,9 +109,7 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
                 );
                 EmitSoundOn("Hero_OgreMagi.Idle.Headbutt", me);
                 this.Destroy();
-                chessComp.is_removing = false;
-                chessComp.blink_start_p = null;
-                chessComp.blink_stop_count = 0;
+                chessComp.OnblinkChessFinish();
             }
         }
     }

@@ -9,6 +9,12 @@ export class RoundPrizeUnitEntityRoot extends ET.EntityRoot {
     readonly OnlyKey: string;
     readonly ConfigID: string;
 
+    public Dispose(): void {
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        super.Dispose();
+        npc.SafeDestroy();
+    }
+    
     public OnActive(): void {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundPrizeUnitKillPrizeComponent>("RoundPrizeUnitKillPrizeComponent"));
     }

@@ -22,7 +22,7 @@ export class TopBarPanel extends TopBarPanel_UI {
         this.onRefreshUI();
     }
 
-    onRefreshUI() {
+    onRefreshUI(p?: { configID: string }) {
         this.setroundlabel();
         this.setroundState();
         this.setdifficulty();
@@ -31,7 +31,7 @@ export class TopBarPanel extends TopBarPanel_UI {
         this.setGold();
         this.setFood();
         this.setWood();
-        LogHelper.print(11111);
+        LogHelper.print(222222);
     }
 
     setroundlabel() {

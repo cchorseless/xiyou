@@ -17,7 +17,7 @@ export class modifier_jiaoxie_wudi extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_DISARMED]: true,
             [modifierstate.MODIFIER_STATE_MAGIC_IMMUNE]: true,
             [modifierstate.MODIFIER_STATE_ATTACK_IMMUNE]: true,
-            [modifierstate.MODIFIER_STATE_INVULNERABLE]: true,
+            // [modifierstate.MODIFIER_STATE_INVULNERABLE]: true,
         };
         return state;
     }

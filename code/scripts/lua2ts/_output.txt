@@ -1,15 +1,29 @@
-// -创建一个传送门
-// -@param vPortalPosition Vector 传送门的位置
-// -@param vTargetPosition Vector 目的地位置
-// -@param vForward Vector 传送门的朝向
-// -@return CDOTA_BaseNPC 传送门单位
- CreatePortal(vPortalPosition, vTargetPosition, vForward, sPortalName, bHasArrow) {
-	bHasArrow = bHasArrow || false
-	let hPortal = CreateUnitByNameWithNewData("npc_portal", vPortalPosition, true, null, null, DOTA_TEAM_GOODGUYS, { UnitLabel : sPortalName || "" })
-	hPortal.SetForwardVector(vForward)
-	let sPosition = vTargetPosition.x + "," + vTargetPosition.y + "," + vTargetPosition.z
-	let hModifier = hPortal.AddNewModifier(hPortal, null, "modifier_portal", { vPosition = sPosition, iHasArrow = bHasArrow && 1 || 0 })
-	hModifier.callback = this.OnPortalTrigger
-	hModifier.context = this
-	return hPortal
+function IsCanAttackTarget(attacker,target,x,y)
+	if ( IsUnitExist(attacker) == false ) {
+		return false
+	}
+	if ( target == null ) {
+		target = attacker.GetAttackTarget()
+		if ( IsUnitExist(target) == false ) {
+			return false
+		}
+	}
+	let team_id = attacker.at_team_id || attacker.team_id
+	if ( x == null ) {
+		x = attacker.x
+	}
+	if ( y == null ) {
+		y = attacker.y
+	}
+	if ( x && y && target.x && target.y ) {
+		let p = XY2Vector(x,y,team_id)
+		let p2 = XY2Vector(target.x,target.y,team_id)
+		if ( target.IsInvisible() == false && target.HasModifier('modifier_skeleton_king_reincarnation_scepter_active') == false && (p - p2).Length2D() < attacker.Script_GetAttackRange() + target.GetHullRadius() + attacker.GetHullRadius() ) {
+			return true
+		} else {
+			return false
+		}
+	} else {
+		return false
+	}
 }

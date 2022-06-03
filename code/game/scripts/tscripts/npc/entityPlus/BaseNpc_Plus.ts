@@ -99,14 +99,6 @@ export class BaseNpc_Plus extends BaseNpc {
         return this
     }
 
-    /**todo */
-    GetBuilding?() {
-        return this
-    }
-
-    GetStar?() {
-        return 1
-    }
     /**
       * 创建幻象
       * @param vLocation

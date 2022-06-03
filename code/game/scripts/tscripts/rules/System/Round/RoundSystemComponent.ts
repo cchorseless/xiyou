@@ -21,7 +21,7 @@ export class RoundSystemComponent extends ET.Component {
     public addEvent() {
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityHurtEvent, this.OnEntityHurtEvent);
         EventHelper.addServerEvent(this, GameEnum.Event.CustomServer.onserver_allplayer_loginfinish, () => {
-            this.runBoardRound(RoundState.GetFirstRoundid());
+            this.runBoardRound(RoundState.GetFirstBoardRoundid());
         });
     }
 
@@ -46,6 +46,29 @@ export class RoundSystemComponent extends ET.Component {
         this.createRoundPrizeUnit(round);
     }
 
+    public endBoardRound() {
+        let allWaiting = true;
+        GameRules.Addon.ETRoot.PlayerSystem()
+            .GetAllPlayer()
+            .forEach((player) => {
+                if (!player.RoundManagerComp().getCurrentBoardRound().IsWaitingEnd()) {
+                    allWaiting = false;
+                }
+            });
+        if (allWaiting) {
+            TimerHelper.addTimer(
+                3,
+                () => {
+                    let nextid = RoundState.GetNextBoardRoundid();
+                    if (nextid != null) {
+                        this.runBoardRound(nextid);
+                    }
+                },
+                this
+            );
+        }
+    }
+
     private createRoundPrizeUnit(round: string) {
         this.clearRoundPrizeUnit();
         let posinfo = MapState.BaseRoomPrizeUnitRefreshZone;
@@ -62,7 +85,6 @@ export class RoundSystemComponent extends ET.Component {
             let b = unit_base_equip_bag.CreateOne(vv1, DOTATeam_t.DOTA_TEAM_BADGUYS, true);
             RoundPrizeUnitEntityRoot.Active(b);
             this.Domain.ETRoot.AddDomainChild(b.ETRoot);
-            
         }
     }
     public clearRoundPrizeUnit() {

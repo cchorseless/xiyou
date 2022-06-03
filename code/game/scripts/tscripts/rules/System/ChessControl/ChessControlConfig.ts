@@ -27,6 +27,9 @@ export module ChessControlConfig {
         isSamePlayer(v: ChessControlConfig.ChessVector) {
             return this.playerid - v.playerid < 0.1 && this.playerid - v.playerid > -0.1;
         }
+        distance(v: ChessControlConfig.ChessVector) {
+            return (this.x - v.x)*(this.x - v.x) + (this.y - v.y)*(this.y - v.y);
+       }
     }
 
     export enum EProtocol {

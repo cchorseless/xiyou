@@ -43,4 +43,7 @@ export class ChessControlComponent extends ET.Component {
         target.ChessComp().blinkChessX(targetPos);
         return [true, ""];
     }
+
+
+
 }

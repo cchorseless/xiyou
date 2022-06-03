@@ -8,16 +8,18 @@ export class RoundState {
     static iRound: string;
 
     static GetCurrentRoundType() {
-        return KVHelper.KvServerConfig.building_round[this.iRound as "10"].round_type;
+        return KVHelper.KvServerConfig.building_round[this.iRound].round_type;
     }
     // - 判断是否是无尽
     static IsEndlessRound() {
         return this.GetCurrentRoundType() == "endless";
     }
 
-    static GetFirstRoundid() {
+    static GetFirstBoardRoundid() {
         return DifficultyState.DifficultyChapter + "_1";
     }
 
-
+    static GetNextBoardRoundid() {
+        return KVHelper.KvServerConfig.building_round_board[this.iRound].round_nextid;
+    }
 }

@@ -93,7 +93,7 @@ export class ERoundBoard extends ERound {
         this.roundState = RoundConfig.ERoundBoardState.prize;
         EventHelper.SyncETEntity(this.toJsonObject(), this.Domain.ETRoot.AsPlayer().Playerid);
         let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllEnemy();
-        let isWin = (aliveEnemy.length == 0);
+        let isWin = aliveEnemy.length == 0;
         if (!isWin) {
             let damage = 0;
             let delay_time = 0.5;
@@ -110,15 +110,47 @@ export class ERoundBoard extends ERound {
                 this,
                 true
             );
-        };
+        }
         this.Domain.ETRoot.AsPlayer()
             .BuildingManager()
             .getAllBuilding()
             .forEach((b) => {
                 b.RoundBuildingComp().OnBoardRound_Prize(isWin);
             });
-       
+        this.waitingEndTimer = TimerHelper.addTimer(
+            20,
+            () => {
+                this.OnWaitingEnd();
+            },
+            this
+        );
     }
+
+    waitingEndTimer: string;
+    OnWaitingEnd() {
+        if (this.waitingEndTimer != null) {
+            TimerHelper.removeTimer(this.waitingEndTimer);
+            this.waitingEndTimer = null;
+        }
+        if (this.roundState == RoundConfig.ERoundBoardState.waiting_next) {
+            return;
+        }
+        this.roundState = RoundConfig.ERoundBoardState.waiting_next;
+        EventHelper.SyncETEntity(this.toJsonObject(), this.Domain.ETRoot.AsPlayer().Playerid);
+        this.Domain.ETRoot.AsPlayer()
+        .BuildingManager()
+        .getAllBuilding()
+        .forEach((b) => {
+            b.RoundBuildingComp().OnBoardRound_WaitingEnd();
+        });
+        GameRules.Addon.ETRoot.RoundSystem().endBoardRound();
+    }
+
+
+    IsWaitingEnd() {
+        return this.roundState == RoundConfig.ERoundBoardState.waiting_next;
+    }
+
 
     ApplyDamageHero(damage: number) {
         if (damage > 0) {

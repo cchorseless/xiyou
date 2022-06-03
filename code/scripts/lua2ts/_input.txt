@@ -1,15 +1,29 @@
----创建一个传送门
----@param vPortalPosition Vector 传送门的位置
----@param vTargetPosition Vector 目的地位置
----@param vForward Vector 传送门的朝向
----@return CDOTA_BaseNPC 传送门单位
-function public:CreatePortal(vPortalPosition, vTargetPosition, vForward, sPortalName, bHasArrow)
-	bHasArrow = bHasArrow or false
-	local hPortal = CreateUnitByNameWithNewData("npc_portal", vPortalPosition, true, nil, nil, DOTA_TEAM_GOODGUYS, { UnitLabel = sPortalName or "" })
-	hPortal:SetForwardVector(vForward)
-	local sPosition = vTargetPosition.x .. "," .. vTargetPosition.y .. "," .. vTargetPosition.z
-	local hModifier = hPortal:AddNewModifier(hPortal, nil, "modifier_portal", { vPosition = sPosition, iHasArrow = bHasArrow and 1 or 0 })
-	hModifier.callback = self.OnPortalTrigger
-	hModifier.context = self
-	return hPortal
+function IsCanAttackTarget(attacker,target,x,y)
+	if IsUnitExist(attacker) == false then
+		return false
+	end
+	if target == nil then
+		target = attacker:GetAttackTarget()
+		if IsUnitExist(target) == false then
+			return false
+		end
+	end
+	local team_id = attacker.at_team_id or attacker.team_id
+	if x == nil then
+		x = attacker.x
+	end
+	if y == nil then
+		y = attacker.y
+	end
+	if x and y and target.x and target.y then
+		local p = XY2Vector(x,y,team_id)
+		local p2 = XY2Vector(target.x,target.y,team_id)
+		if target:IsInvisible() == false and target:HasModifier('modifier_skeleton_king_reincarnation_scepter_active') == false and (p - p2):Length2D() < attacker:Script_GetAttackRange() + target:GetHullRadius() + attacker:GetHullRadius() then
+			return true
+		else
+			return false
+		end
+	else
+		return false
+	end
 end

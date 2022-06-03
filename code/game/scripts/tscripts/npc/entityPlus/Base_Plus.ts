@@ -108,9 +108,15 @@ export class BaseModifier {
     public static remove<T extends typeof BaseModifier>(this: T, target: CDOTA_BaseNPC, caster?: CDOTA_BaseNPC) {
         if (IsServer()) {
             if (caster) {
-                target.RemoveModifierByNameAndCaster(this.name, caster);
+                let modef = this.findIn(target, caster);
+                if (modef) {
+                    modef.Destroy();
+                }
             } else {
-                target.RemoveModifierByName(this.name);
+                let modef = this.findIn(target);
+                if (modef) {
+                    modef.Destroy();
+                }
             }
         }
     }
@@ -484,7 +490,8 @@ export class BaseModifier {
     }
 }
 
-export interface BaseNpc extends CDOTA_BaseNPC {}
+export interface BaseNpc extends CDOTA_BaseNPC {
+}
 export class BaseNpc implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
     /**对应dota内的名字 */

@@ -178,7 +178,7 @@ export class GameEvent extends SingletonClass {
             enemyUnit.GetPlayer().EnemyManagerComp().killEnemy(enemyUnit);
         } else if (hUnit.ETRoot.AsValid<RoundPrizeUnitEntityRoot>("RoundPrizeUnitEntityRoot")) {
             let enemyUnit = hUnit.ETRoot.As<RoundPrizeUnitEntityRoot>();
-            enemyUnit.KillPrizeComp().OnKillByEntity(events.entindex_attacker);
+            enemyUnit.KillPrizeComp()?.OnKillByEntity(events.entindex_attacker);
         }
     }
 
