@@ -1,5 +1,8 @@
 export module FuncHelper {
 
+
+
+
     export class Handler {
         private static _pool: Handler[] = [];
         private static _gid: number = 0;

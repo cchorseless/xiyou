@@ -2,9 +2,11 @@
 import React, { createRef, useState } from "react";
 import { System_Avalon } from "../../game/system/System_Avalon";
 import { DotaUIHelper } from "../../helper/DotaUIHelper";
+import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { BasePureComponent } from "../../libs/BasePureComponent";
+import { ChallengeShopItem } from "../Challenge/ChallengeShopItem";
 import { DebugPanel } from "../debugPanel/DebugPanel";
 import { TopBarPanel } from "../TopBarPanel/TopBarPanel";
 import { MainPanel_UI } from "./MainPanel_UI";
@@ -18,7 +20,18 @@ export class MainPanel extends MainPanel_UI {
     }
 
     onRefreshUI() {
-        // this.addOrShowOnlyNodeChild(this.NODENAME.__root__, TopBarPanel);
+        TimerHelper.AddTimer(
+            1,
+            FuncHelper.Handler.create(this, () => {
+                this.addOrShowOnlyNodeChild(this.NODENAME.__root__, ChallengeShopItem, {
+                    uiScale: "70% 70% 100%",
+                    marginRight: "0px",
+                    marginBottom: "0px",
+                    horizontalAlign: "right",
+                    verticalAlign: "bottom",
+                });
+            })
+        );
     }
     /**debug */
     onbtn_click = () => {

@@ -27,7 +27,7 @@ export module NetHelper {
                 GameEvents.Unsubscribe(eventID);
                 resolve(event);
             });
-            LogHelper.print(protocol,data);
+            LogHelper.print(protocol, data);
             GameEvents.SendCustomGameEventToServer("JS_TO_LUA_EVENT", {
                 protocol: protocol,
                 data: data,
@@ -61,4 +61,12 @@ export module NetHelper {
     }
 
     export function OffListenOnLua() {}
+
+    export function GetTableValue(tableName: string, key?: string) {
+        if (key == null) {
+            return CustomNetTables.GetAllTableValues(tableName as never) as any;
+        } else {
+            return CustomNetTables.GetTableValue(tableName as never, key) as any;
+        }
+    }
 }

@@ -4,7 +4,9 @@ declare interface CustomNetTableInfo extends CustomNetTableDeclarations {
         encrypt_key: {
             _: string
         }
-    }
+    };
+    building: Record<string, string>;
+   
 
     game_timer: {
         game_timer: {
