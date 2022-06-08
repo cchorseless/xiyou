@@ -62,11 +62,19 @@ export module NetHelper {
 
     export function OffListenOnLua() {}
 
-    export function GetTableValue(tableName: string, key?: string) {
-        if (key == null) {
-            return CustomNetTables.GetAllTableValues(tableName as never) as any;
-        } else {
-            return CustomNetTables.GetTableValue(tableName as never, key) as any;
-        }
+    export function GetTableValue(tableName: ENetTables, key: string) {
+        return CustomNetTables.GetTableValue(tableName as never, key) as any;
+
+    }
+    export function GetOneTable(tableName: ENetTables) {
+        return CustomNetTables.GetAllTableValues(tableName as never) as { key: string; value: any }[];
+    }
+
+    export enum ENetTables {
+        building = "building",
+        common = "common",
+        etentity = "etentity",
+        enemy = "enemy",
+        test="test",
     }
 }

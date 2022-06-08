@@ -61,11 +61,13 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
-            let chessComp = this.GetParentPlus().ETRoot.As<EnemyUnitEntityRoot>().ChessComp();
-
-            if (chessComp != null ) {
-                this.GetParentPlus().SetForwardVector(Vector(0, 1, 0));
+            if (this.GetParentPlus().ETRoot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
+                let EnemyUnit = this.GetParentPlus().ETRoot.As<EnemyUnitEntityRoot>().EnemyUnitComp();
+                if (EnemyUnit != null ) {
+                    EnemyUnit.OnSpawnAnimalFinish();
+                }
             }
+           
         }
     }
 
@@ -95,9 +97,9 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
                 me.SetAbsOrigin(this.vTargetPosition);
                 let chessComp = me.ETRoot.As<EnemyUnitEntityRoot>().ChessComp();
                 chessComp.is_moving = false;
+                chessComp.blink_start_p = null;
                 me.InterruptMotionControllers(true);
                 this.Destroy();
-                chessComp.blink_start_p = null;
             }
         }
     }

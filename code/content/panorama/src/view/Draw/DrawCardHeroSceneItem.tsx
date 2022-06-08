@@ -25,22 +25,11 @@ export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI {
         this.heroscene_attrs.onactivate = async (e) => {
             await this.selectCard();
         };
+    }
+    onStartUI() {
         this.onRefreshUI(this.props as any);
-        this.delayUpdateSelf();
-    }
-    /**
-     *更新渲染
-     * @param prevProps 上一个状态的 props
-     * @param prevState
-     * @param snapshot
-     */
-    componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
-        super.componentDidUpdate(prevProps, prevState, snapshot);
-    }
-    // 销毁
-    componentWillUnmount() {
-        super.componentWillUnmount();
-    }
+       
+   }
 
     onRefreshUI(k: IProps) {
         if (!k.itemname) {
@@ -53,6 +42,7 @@ export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI {
             heroid = 1;
         }
         this.heroscene.current!.SetScenePanelToLocalHero(heroid as HeroID);
+        this.updateSelf();
     }
 
     playPickSound() {

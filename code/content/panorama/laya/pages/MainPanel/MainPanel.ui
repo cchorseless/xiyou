@@ -2,7 +2,7 @@
     "x":0,
     "type":"dota2Panel",
     "selectedBox":1,
-    "selecteID":18,
+    "selecteID":17,
     "props":{"y":0,"x":0,"width":1600,"sceneColor":"#000000","ref":"this.panel_0","height":900,"className":"root"},
     "nodeParent":-1,
     "label":"dota2Panel",

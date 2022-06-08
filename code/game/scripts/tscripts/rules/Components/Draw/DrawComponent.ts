@@ -2,14 +2,16 @@ import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { DrawConfig } from "../../System/Draw/DrawConfig";
 import { PlayerEntityRoot } from "../Player/PlayerEntityRoot";
 
 @registerET()
 export class DrawComponent extends ET.Component {
+    @serializeETProps()
     tLastCards: string[];
 
     onAwake(...args: any[]): void {}
@@ -72,13 +74,9 @@ export class DrawComponent extends ET.Component {
             }
         }
         this.tLastCards = [].concat(r_arr);
-        EventHelper.fireProtocolEventToPlayer(
-            DrawConfig.EProtocol.DrawCardResult,
-            {
-                data: r_arr,
-            },
-            this.Domain.ETRoot.AsPlayer().Playerid
-        );
+        let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
+        NetTablesHelper.SetETEntity(this, false, playerid);
+        EventHelper.fireProtocolEventToPlayer(DrawConfig.EProtocol.DrawCardResult, null, playerid);
     }
 
     //  选卡
@@ -130,6 +128,8 @@ export class DrawComponent extends ET.Component {
         //     this.tLastCards[iPlayerID] = {};
         //     this.UpdateNetTables();
         // }
+        let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
+        NetTablesHelper.SetETEntity(this, false, playerid);
         return [true, ""];
     }
     // 开局选卡

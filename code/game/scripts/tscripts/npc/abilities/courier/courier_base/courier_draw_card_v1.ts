@@ -25,10 +25,13 @@ export class courier_draw_card_v1 extends BaseAbility_Plus {
         return false;
     }
     GetCooldown(iLevel: number) {
-        if (IsServer()) {
-            return (this.GetAutoCastState() && 0) || 0.5;
-        } else {
-            return super.GetCooldown(iLevel);
-        }
+        // if (IsServer()) {
+        //     return (this.GetAutoCastState() && 0) || 0.5;
+        // } else {
+        //     // return super.GetCooldown(iLevel);
+        //     return 10
+        // }
+        return 10
+
     }
 }

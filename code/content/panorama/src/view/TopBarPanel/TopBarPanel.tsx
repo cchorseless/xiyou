@@ -19,9 +19,10 @@ export class TopBarPanel extends TopBarPanel_UI {
         CSSHelper.setLocalText(this.lbl_foodDes, KV_DATA.lang_config.lang_config.food.Des);
         CSSHelper.setLocalText(this.lbl_goldDes, KV_DATA.lang_config.lang_config.gold.Des);
         CSSHelper.setLocalText(this.lbl_populationDes, KV_DATA.lang_config.lang_config.population.Des);
+    }
+    onStartUI() {
         this.onRefreshUI();
     }
-
     onRefreshUI(p?: { configID: string }) {
         this.setroundlabel();
         this.setroundState();
@@ -31,7 +32,6 @@ export class TopBarPanel extends TopBarPanel_UI {
         this.setGold();
         this.setFood();
         this.setWood();
-        LogHelper.print(222222);
     }
 
     setroundlabel() {

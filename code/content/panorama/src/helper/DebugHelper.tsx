@@ -52,5 +52,10 @@ export module DebugHelper {
             debug_LoggerComponentinfo();
             printGameEvent();
         }
+       
     }
 }
+
+Entities.NoHealthBar = (iUnitEntIndex) => {
+    return true;
+};

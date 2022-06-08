@@ -38,8 +38,10 @@ export class ERoundBoard extends ERound {
     onSerializeToEntity() {
         this.config = KV_DATA.building_round_board.building_round_board["" + this.configID];
         PlayerScene.RoundManagerComp.addRound(this);
-        let panel = MainPanel.GetInstance()!;
-        panel.addOrShowOnlyNodeChild(panel.NODENAME.__root__, TopBarPanel, { configID: this.configID });
+        let panel = MainPanel.GetInstance();
+        if (panel) {
+            panel.addOrShowOnlyNodeChild(panel.NODENAME.__root__, TopBarPanel, { configID: this.configID });
+        }
     }
 
     isCurrentRound() {

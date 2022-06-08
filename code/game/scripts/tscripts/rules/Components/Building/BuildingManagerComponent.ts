@@ -6,6 +6,7 @@ import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health_bar";
 import { ET, registerET } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { BuildingState } from "../../System/Building/BuildingState";
@@ -81,6 +82,7 @@ export class BuildingManagerComponent extends ET.Component {
         building.SetControllableByPlayer(playerID, true);
         building.addSpawnedHandler(
             ET.Handler.create(this, () => {
+                modifier_no_health_bar.applyOnly(building, building);
                 // modifier_building.apply(this.createUnit, domain)
                 // modifier_test.apply(this.createUnit, domain)
             })

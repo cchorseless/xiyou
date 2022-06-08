@@ -1,5 +1,6 @@
 import { GameEnum } from "../../../GameEnum";
 import { EventHelper } from "../../../helper/EventHelper";
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
@@ -57,7 +58,7 @@ export class PlayerSystemComponent extends ET.Component {
     private OnAllPlayerClientLogin() {
         let allPlayer = this.GetAllPlayer();
         allPlayer.forEach((player) => {
-            EventHelper.SyncETEntity(player.PlayerDataComp().toJsonObject(), player.Playerid);
+            NetTablesHelper.SetETEntity(player.PlayerDataComp(), false, player.Playerid);
         });
         EventHelper.fireServerEvent(GameEnum.Event.CustomServer.onserver_allplayer_loginfinish);
     }
@@ -84,8 +85,6 @@ export class PlayerSystemComponent extends ET.Component {
             await playerhttp.PlayerLogin(playerid);
         });
     }
-
-
 
     /**
      * 獲取

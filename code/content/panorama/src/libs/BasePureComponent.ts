@@ -136,23 +136,10 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     }
     /**创建前，指定属性，添加事件 */
     // public onAwake(props: NodeData) {}
-    /**每一帧刷新 */
-    public onUpdate() {}
-    public onRefreshUI(data?: NodeData) {}
+    /**渲染后一帧执行 */
+    public onStartUI() {}
+    public onRefreshUI(data?: NodeData, ...args: any[]) {}
 
-   
-
-    /**
-     *开启每frame帧刷新
-     */
-    public startUpdate = (frame = 1) => {
-        if (this.IsRegister) {
-            this.onUpdate();
-            $.Schedule(Game.GetGameFrameTime() * frame, () => {
-                this.startUpdate();
-            });
-        }
-    };
     /**
      * 向_childs中添加子节点
      * @param nodeName 添加的父节点名称，在 this.nodeName中
@@ -206,6 +193,13 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         BasePureComponentSystem.RegisterReactElement(node, false);
         // 新的数组内存位置改变才能刷新UI
         (this as any)[_childsName] = parentNode;
+    }
+
+    public getPureCompByNode<T extends BasePureComponent>(node: ReactElement): T | null {
+        if (node.key) {
+            return BasePureComponentSystem.GetBasePureComp(node.key as string) as T;
+        }
+        return null;
     }
 
     public async addOrShowOnlyNodeChild<T extends typeof BasePureComponent>(nodeName: string, nodeType: T, nodeData: NodeData = {}) {
@@ -286,7 +280,6 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         return null as any;
     }
 
-
     public async addNodeChildAsyncAt<T extends typeof BasePureComponent>(nodeName: string, nodeType: T, nodeData: NodeData = {}, index: number = -1) {
         return new Promise<InstanceType<T>>((resolve, reject) => {
             let node = this.addNodeChildAt(nodeName, nodeType, nodeData, index);
@@ -299,8 +292,6 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
             }
         });
     }
-
-
 
     /**
      * 同步删除自己（组件类，触发组件的销毁事件）
@@ -362,7 +353,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         }
         // 清除节点显示逻辑
         (this as any)[_isValidName] = false;
-        this.updateSelf()
+        this.updateSelf();
     }
 
     /**
@@ -394,9 +385,9 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     };
 
     public delayUpdateSelf = () => {
-        TimerHelper.AddTimer(
-            0.1,
-            FuncHelper.Handler.create(this,() => {
+        TimerHelper.AddFrameTimer(
+            1,
+            FuncHelper.Handler.create(this, () => {
                 if (this.IsRegister) {
                     this.updateSelf();
                 }
@@ -421,7 +412,17 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
             (this as any).InstanceId = FuncHelper.generateUUID();
         }
         this.setRegister(true);
+        // 下一帧开始刷新
+        TimerHelper.AddFrameTimer(
+            1,
+            FuncHelper.Handler.create(this, () => {
+                if (this.IsRegister) {
+                    this.onStartUI();
+                }
+            })
+        );
     }
+
     public componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
         // LogHelper.warn(this.constructor.name)
         // this.syncRootDataByProps()
@@ -437,5 +438,8 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         if (nodeinfo) {
             BasePureComponentSystem.RegisterReactElement(nodeinfo.Node, false);
         }
+        this.setState = (state, callback) => {
+            return;
+        };
     }
 }

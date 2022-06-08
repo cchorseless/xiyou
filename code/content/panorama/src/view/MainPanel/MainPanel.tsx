@@ -1,5 +1,6 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
+import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { System_Avalon } from "../../game/system/System_Avalon";
 import { DotaUIHelper } from "../../helper/DotaUIHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
@@ -16,22 +17,20 @@ export class MainPanel extends MainPanel_UI {
         super.componentDidMount();
         this.panel_allpanel.current!.hittest = false;
         this.panel_alldialog.current!.hittest = false;
+    }
+    onStartUI() {
+        PlayerScene.Init();
         this.onRefreshUI();
     }
 
     onRefreshUI() {
-        TimerHelper.AddTimer(
-            1,
-            FuncHelper.Handler.create(this, () => {
-                this.addOrShowOnlyNodeChild(this.NODENAME.__root__, ChallengeShopItem, {
-                    uiScale: "70% 70% 100%",
-                    marginRight: "0px",
-                    marginBottom: "0px",
-                    horizontalAlign: "right",
-                    verticalAlign: "bottom",
-                });
-            })
-        );
+        this.addOrShowOnlyNodeChild(this.NODENAME.__root__, ChallengeShopItem, {
+            uiScale: "70% 70% 100%",
+            marginRight: "0px",
+            marginBottom: "0px",
+            horizontalAlign: "right",
+            verticalAlign: "bottom",
+        });
     }
     /**debug */
     onbtn_click = () => {

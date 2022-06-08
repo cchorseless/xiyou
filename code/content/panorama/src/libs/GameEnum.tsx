@@ -365,6 +365,8 @@ export module GameEnum {
     export enum CustomProtocol {
         /**同步et 实体 */
         push_sync_et_entity = "push_sync_et_entity",
+        push_update_nettable_etentity = 'push_update_nettable_etentity',
+        push_update_nettable_partprop_etentity='push_update_nettable_partprop_etentity',
         /**推送错误信息 */
         push_error_message = "push_error_message",
         push_update_minimap = "push_update_minimap",

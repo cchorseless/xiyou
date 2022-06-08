@@ -7,20 +7,30 @@ import { ET, registerET } from "../../libs/Entity";
 import { DrawCardPanel } from "../../view/Draw/DrawCardPanel";
 import { MainPanel } from "../../view/MainPanel/MainPanel";
 import { DrawConfig } from "../system/Draw/DrawConfig";
+import { PlayerScene } from "./Player/PlayerScene";
 
 /**抽卡 */
 @registerET()
 export class DrawComponent extends ET.Component {
-    onAwake() {
+    onSerializeToEntity() {
+        PlayerScene.Scene.AddOneComponent(this);
         this.startListen();
     }
+    private _tLastCards: string[];
+    get tLastCards() {
+        return this._tLastCards;
+    }
+    set tLastCards(v: string[]) {
+        this._tLastCards = FuncHelper.toArray(v as any);
+    }
+
     startListen() {
         // 监听服务器数据推送
         NetHelper.ListenOnLua(
             DrawConfig.EProtocol.DrawCardResult,
             (event: CLIENT_DATA<ArrayLikeObject<string>>) => {
-                if (event.state && event.data) {
-                    let card = FuncHelper.toArray(event.data);
+                if (event.state) {
+                    let card = Array<string>().concat(this.tLastCards);
                     MainPanel.GetInstance()!.addOnlyDialog(DrawCardPanel, { cards: card });
                 }
             },

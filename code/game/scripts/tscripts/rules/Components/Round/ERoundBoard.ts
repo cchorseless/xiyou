@@ -5,6 +5,7 @@ import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_Spa
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { building_round_board } from "../../../kvInterface/building/building_round_board";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
@@ -53,7 +54,7 @@ export class ERoundBoard extends ERound {
     ProjectileInfo: IProjectileEffectInfo = Assert_ProjectileEffect.p000;
     OnBattle() {
         this.roundState = RoundConfig.ERoundBoardState.battle;
-        EventHelper.SyncETEntity(this.toJsonObject(), this.Domain.ETRoot.AsPlayer().Playerid);
+        NetTablesHelper.SetETEntity(this,false, this.Domain.ETRoot.AsPlayer().Playerid);
         this.Domain.ETRoot.AsPlayer()
             .EnemyManagerComp()
             .getAllEnemy()
@@ -91,7 +92,7 @@ export class ERoundBoard extends ERound {
             return;
         }
         this.roundState = RoundConfig.ERoundBoardState.prize;
-        EventHelper.SyncETEntity(this.toJsonObject(), this.Domain.ETRoot.AsPlayer().Playerid);
+        NetTablesHelper.SetETEntity(this,false, this.Domain.ETRoot.AsPlayer().Playerid);
         let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllEnemy();
         let isWin = aliveEnemy.length == 0;
         if (!isWin) {
@@ -136,7 +137,7 @@ export class ERoundBoard extends ERound {
             return;
         }
         this.roundState = RoundConfig.ERoundBoardState.waiting_next;
-        EventHelper.SyncETEntity(this.toJsonObject(), this.Domain.ETRoot.AsPlayer().Playerid);
+        NetTablesHelper.SetETEntity(this,false, this.Domain.ETRoot.AsPlayer().Playerid);
         this.Domain.ETRoot.AsPlayer()
         .BuildingManager()
         .getAllBuilding()

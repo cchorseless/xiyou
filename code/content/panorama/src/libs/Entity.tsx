@@ -92,7 +92,7 @@ export module ET {
         onRemove?(): void;
         onDestroy?(): void;
 
-        private updateFromJson(json: IEntityJson) {
+        public updateFromJson(json: IEntityJson) {
             let ignoreKey = ["_t", "_id", "Children", "C"];
             for (let k in json) {
                 if (ignoreKey.indexOf(k) == -1) {

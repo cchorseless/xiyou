@@ -31,7 +31,7 @@ export class PlayerScene {
     }
 
     static Init() {
-        this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof DrawComponent>("DrawComponent"));
+        // this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof DrawComponent>("DrawComponent"));
         this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerComponent>("PlayerComponent"));
         this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
         // 添加移动组件

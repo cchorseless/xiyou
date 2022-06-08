@@ -281,7 +281,9 @@ export module EventHelper {
             return;
         }
         let _event: JS_TO_LUA_DATA = {} as any;
-        Object.assign(_event, eventData);
+        if (eventData) {
+            Object.assign(_event, eventData);
+        }
         _event.protocol = eventName;
         _event.state = true;
         let player = PlayerResource.GetPlayer(playerid);
@@ -328,7 +330,6 @@ export module EventHelper {
             });
         }
     }
-
 
     /**
      * 删除所有协议事件监听

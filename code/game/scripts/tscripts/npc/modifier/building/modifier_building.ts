@@ -1,5 +1,6 @@
 import { GameEnum } from "../../../GameEnum";
 import { ResHelper } from "../../../helper/ResHelper";
+import { BuildingEntityRoot } from "../../../rules/Components/Building/BuildingEntityRoot";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
@@ -7,55 +8,48 @@ import { registerModifier } from "../../entityPlus/Base_Plus";
 @registerModifier()
 export class modifier_building extends BaseModifier_Plus {
     IsHidden() {
-        return true
+        return true;
     }
     IsDebuff() {
-        return false
+        return false;
     }
     IsPurgable() {
-        return false
+        return false;
     }
     IsPurgeException() {
-        return false
+        return false;
     }
     AllowIllusionDuplicate() {
-        return false
+        return false;
     }
     DestroyOnExpire() {
-        return false
+        return false;
     }
     IsPermanent() {
-        return true
+        return true;
     }
-    OnCreated(params: ModifierTable) {
-        // super.OnCreated(params);
+    Init(params: ModifierTable) {
         if (IsServer()) {
-            let hParent = this.GetParentPlus()
-            let vColor = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(hParent.GetPlayerOwnerID()).PlayerComp().playerColor;
+            let hParent = this.GetParentPlus();
+            let vColor = hParent.ETRoot.As<BuildingEntityRoot>().GetPlayer().PlayerComp().playerColor;
             let info: ResHelper.IParticleInfo = {
                 resPath: "particles/player_color.vpcf",
                 iAttachment: ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,
-                owner: hParent
-            }
+                owner: hParent,
+            };
             let iParticleID = ResHelper.CreateParticle(info);
-            ParticleManager.SetParticleControl(iParticleID, 1, vColor)
-            this.AddParticle(iParticleID, false, false, -1, false, false)
+            ParticleManager.SetParticleControl(iParticleID, 1, vColor);
+            this.AddParticle(iParticleID, false, false, -1, false, false);
         }
     }
     CheckState() {
         return {
-            [modifierstate.MODIFIER_STATE_DISARMED]: true,
-            [modifierstate.MODIFIER_STATE_INVULNERABLE]: true,
             [modifierstate.MODIFIER_STATE_NO_HEALTH_BAR]: true,
-            [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true,
-            [modifierstate.MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY]: true,
-        }
+        };
     }
 
     @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IS_SCEPTER)
     GetScepter() {
-        return 1
+        return 1;
     }
-
 }
-

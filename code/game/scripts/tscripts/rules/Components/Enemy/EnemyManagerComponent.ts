@@ -32,7 +32,7 @@ export class EnemyManagerComponent extends ET.Component {
     }
 
     public getAllEnemy() {
-        return this.GetDomain<BaseNpc_Plus>().ETRoot.GetDomainChilds(EnemyUnitEntityRoot)
+        return this.GetDomain<BaseNpc_Plus>().ETRoot.GetDomainChilds(EnemyUnitEntityRoot);
     }
 
     addEnemy(enemyName: string, roundid: string, onlykey: string = null, pos: Vector = null, spawnEffect: ISpawnEffectInfo = null) {
@@ -54,9 +54,9 @@ export class EnemyManagerComponent extends ET.Component {
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.ETRoot.AddDomainChild(enemy.ETRoot);
         this.tAllEnemy.push(enemy.ETRoot.Id);
-        if (spawnEffect != null) {
-            enemy.addSpawnedHandler(
-                ET.Handler.create(this, () => {
+        enemy.addSpawnedHandler(
+            ET.Handler.create(this, () => {
+                if (spawnEffect != null) {
                     if (spawnEffect.tp_sound != null) {
                         EmitSoundOn(spawnEffect.tp_sound, enemy);
                     }
@@ -82,16 +82,16 @@ export class EnemyManagerComponent extends ET.Component {
                                 break;
                         }
                     }
-                })
-            );
-        }
+                }
+                else {
+                    enemy.ETRoot.As<EnemyUnitEntityRoot>().EnemyUnitComp().OnSpawnAnimalFinish();
+                }
+            })
+        );
         return enemy;
     }
-    killAllEnemy() {
+    killAllEnemy() {}
 
-    }
-
-    
     killEnemy(etroot: EnemyUnitEntityRoot) {
         this.tPlayerKills += 1;
         this.removeEnemy(etroot);

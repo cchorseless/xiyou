@@ -8,8 +8,7 @@ interface IProps {
 }
 export class CardSamllIconItem extends CardSamllIconItem_UI {
     // 初始化数据
-    componentDidMount() {
-        super.componentDidMount();
+    onStartUI() {
         this.onRefreshUI(this.props as IProps);
     }
 

@@ -11,6 +11,7 @@ import { TimerHelper } from "../helper/TimerHelper";
 import { BasePureComponent } from "../libs/BasePureComponent";
 import { GameEnum } from "../libs/GameEnum";
 import { Minimap_plus } from "./alldota2/minimap_plus/Minimap_plus";
+import { EntityOverHeadPanel } from "./Common/EntityOverHeadPanel";
 import { HeroDebugItem } from "./HeroPanel/HeroDebugItem";
 import { MainPanel } from "./MainPanel/MainPanel";
 
@@ -52,6 +53,7 @@ export class RootPanel extends BasePureComponent {
         return (
             this.__root___isValid && (
                 <Panel ref={this.__root__} key="compId_1" className="root" {...this.__root___attrs}>
+                    <EntityOverHeadPanel />
                     <MainPanel />
                     {this.props.children}
                     {this.__root___childs}
@@ -78,7 +80,6 @@ function StartRenderGameUI() {
     /**初始化系统 */
     AllEntity.Init();
     TimerHelper.Init();
-    PlayerScene.Init();
     DebugHelper.Init();
     EventHelper.Init();
     render(<RootPanel />, $.GetContextPanel());

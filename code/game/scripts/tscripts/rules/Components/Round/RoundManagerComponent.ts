@@ -1,5 +1,6 @@
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { building_round_board } from "../../../kvInterface/building/building_round_board";
 import { building_round_challenge } from "../../../kvInterface/building/building_round_challenge";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
@@ -17,26 +18,6 @@ export class RoundManagerComponent extends ET.Component {
     }
     @serializeETProps()
     curRoundBoard: string;
-    // private initBasicRound() {
-    //     let keys = Object.keys(KVHelper.KvServerConfig.building_round);
-    //     for (let configid of keys) {
-    //         this.RoundInfo[configid] = this.AddChild(ERound, configid);
-    //     }
-    // }
-
-    // runBasicRound(roundid: string) {
-    //     let round = this.getCurrentBasicRound();
-    //     round && round.OnEnd();
-    //     let next = this.RoundInfo[roundid];
-    //     this.CurRoundId = "" + roundid;
-    //     next.OnStart();
-    // }
-
-    // private getCurrentBasicRound() {
-    //     if (this.CurRoundId) {
-    //         return this.RoundInfo[this.CurRoundId];
-    //     }
-    // }
 
     private initChallengeRound() {
         let keys = Object.keys(KVHelper.KvServerConfig.building_round_challenge);
@@ -65,8 +46,8 @@ export class RoundManagerComponent extends ET.Component {
         this.curRoundBoard = roundid as string;
         (this.RoundInfo[roundid] as ERoundBoard).OnStart();
         let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
-        EventHelper.SyncETEntity(this.toJsonObject(true), playerid);
-        EventHelper.SyncETEntity(this.RoundInfo[roundid].toJsonObject(), playerid);
+        NetTablesHelper.SetETEntity(this, true, playerid);
+        NetTablesHelper.SetETEntity(this.RoundInfo[roundid], false, playerid);
     }
     public getCurrentBoardRound() {
         return this.RoundInfo[this.curRoundBoard] as ERoundBoard;

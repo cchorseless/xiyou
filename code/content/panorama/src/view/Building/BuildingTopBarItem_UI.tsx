@@ -15,7 +15,8 @@ img_star2: React.RefObject<ImagePanel>;
 img_star1: React.RefObject<ImagePanel>;
 img_star3: React.RefObject<ImagePanel>;
 img_star5: React.RefObject<ImagePanel>;
-NODENAME = {  __root__: '__root__',  img_nameng: 'img_nameng',  img_prop: 'img_prop',  lbl_name: 'lbl_name',  img_rare: 'img_rare',  img_star4: 'img_star4',  img_star2: 'img_star2',  img_star1: 'img_star1',  img_star3: 'img_star3',  img_star5: 'img_star5',  };
+panel_hpbar: React.RefObject<Panel>;
+NODENAME = {  __root__: '__root__',  img_nameng: 'img_nameng',  img_prop: 'img_prop',  lbl_name: 'lbl_name',  img_rare: 'img_rare',  img_star4: 'img_star4',  img_star2: 'img_star2',  img_star1: 'img_star1',  img_star3: 'img_star3',  img_star5: 'img_star5',  panel_hpbar: 'panel_hpbar',  };
 FUNCNAME = {  };
 
     constructor(props: any) {
@@ -30,19 +31,21 @@ this.img_star2 = createRef<ImagePanel>();
 this.img_star1 = createRef<ImagePanel>();
 this.img_star3 = createRef<ImagePanel>();
 this.img_star5 = createRef<ImagePanel>();
+this.panel_hpbar = createRef<Panel>();
 
     };
-CSS_0_0 : Partial<VCSSStyleDeclaration>  = {"width":"300px","height":"90px"}
-CSS_1_0 : Partial<VCSSStyleDeclaration>  = {"y":"41px","x":"47px","width":"257px","height":"45px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/building/building_name_bg_5.png\")","backgroundSize":"100% 100%"}
-CSS_2_0 : Partial<VCSSStyleDeclaration>  = {"y":"2px","x":"16px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/building/icon_agility.png\")","backgroundSize":"100% 100%"}
-CSS_2_1 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"57px","width":"153px","height":"34px","fontWeight":"bold","fontSize":"25","color":"#ffffff"}
-CSS_1_1 : Partial<VCSSStyleDeclaration>  = {"y":"39px","x":"0px","width":"50px","height":"50px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/building/building_lv5.png\")","backgroundSize":"100% 100%"}
+CSS_0_0 : Partial<VCSSStyleDeclaration>  = {"width":"300px","height":"140px"}
+CSS_1_0 : Partial<VCSSStyleDeclaration>  = {"y":"40px","x":"33px","width":"270px","height":"50px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/rarity/btn_orange.png\")","backgroundSize":"100% 100%"}
+CSS_2_0 : Partial<VCSSStyleDeclaration>  = {"y":"8px","x":"28px","width":"30px","height":"30px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/building/icon_agility.png\")","backgroundSize":"100% 100%"}
+CSS_2_1 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"63px","width":"153px","height":"34px","fontWeight":"bold","fontSize":"25","color":"#ffffff"}
+CSS_1_1 : Partial<VCSSStyleDeclaration>  = {"y":"35px","x":"0px","width":"50px","height":"55px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/rarity/A.png\")","backgroundSize":"100% 100%"}
 CSS_1_2 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"50px","width":"200px","height":"41px"}
-CSS_2_0_0 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"0px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/star.png\")","backgroundSize":"100% 100%"}
-CSS_2_1_0 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"40px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/star.png\")","backgroundSize":"100% 100%"}
-CSS_2_2 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"80px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/star.png\")","backgroundSize":"100% 100%"}
-CSS_2_3 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"120px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/star.png\")","backgroundSize":"100% 100%"}
-CSS_2_4 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"160px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/star.png\")","backgroundSize":"100% 100%"}
+CSS_2_0_0 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"0px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/overhead/star.png\")","backgroundSize":"100% 100%"}
+CSS_2_1_0 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"40px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/overhead/star.png\")","backgroundSize":"100% 100%"}
+CSS_2_2 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"80px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/overhead/star.png\")","backgroundSize":"100% 100%"}
+CSS_2_3 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"120px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/overhead/star.png\")","backgroundSize":"100% 100%"}
+CSS_2_4 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"160px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/overhead/star.png\")","backgroundSize":"100% 100%"}
+CSS_1_3 : Partial<VCSSStyleDeclaration>  = {"y":"90px","x":"52px","width":"246px","height":"50px"}
 
 __root___isValid:boolean = true;
 __root___attrs:PanelAttributes={};
@@ -74,6 +77,9 @@ img_star3_childs: Array<JSX.Element> = [];
 img_star5_isValid:boolean = true;
 img_star5_attrs:ImageAttributes={};
 img_star5_childs: Array<JSX.Element> = [];
+panel_hpbar_isValid:boolean = true;
+panel_hpbar_attrs:PanelAttributes={};
+panel_hpbar_childs: Array<JSX.Element> = [];
 
 render() {
     return(
@@ -128,6 +134,11 @@ render() {
 }
     
 </Panel>
+    {this.panel_hpbar_isValid && 
+<Panel ref={this.panel_hpbar} key="compId_18" style={this.CSS_1_3}  {...this.panel_hpbar_attrs} >
+{this.panel_hpbar_childs}
+</Panel>
+}
 
 {this.props.children}
 {this.__root___childs}

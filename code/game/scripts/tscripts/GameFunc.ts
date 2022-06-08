@@ -59,7 +59,7 @@ export module GameFunc {
         if (IsServer()) {
             return (_G as any).__ServerKeyV2__;
         } else {
-            return NetTablesHelper.GetData("common", "encrypt_key")._ || "";
+            return NetTablesHelper.GetData(NetTablesHelper.ENetTables.common , "encrypt_key")._ || "";
         }
     }
     /**

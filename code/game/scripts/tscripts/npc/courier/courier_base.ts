@@ -17,6 +17,7 @@ import { PlayerState } from "../../rules/System/Player/PlayerState";
 import { BuildingManagerComponent } from "../../rules/Components/Building/BuildingManagerComponent";
 import { DrawComponent } from "../../rules/Components/Draw/DrawComponent";
 import { ChessControlComponent } from "../../rules/Components/ChessControl/ChessControlComponent";
+import { ability1_courier_base } from "../abilities/courier/courier_base/ability1_courier_base";
 @registerUnit()
 export class courier_base extends BaseNpc_Hero_Plus {
     Spawn(entityKeyValues: CScriptKeyValues) {
@@ -28,6 +29,7 @@ export class courier_base extends BaseNpc_Hero_Plus {
             let ability = this.GetAbilityByIndex(i);
             if (ability) ability.UpgradeAbility(true);
         }
+        this.AddAbility(ability1_courier_base.name).SetHidden(true);
         this.SetIdleAcquire(false);
     }
 

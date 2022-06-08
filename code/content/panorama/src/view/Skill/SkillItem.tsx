@@ -17,28 +17,16 @@ export class SkillItem extends SkillItem_UI {
         this.img_skillicon_attrs.showtooltip = true;
     }
     // 初始化数据
-    componentDidMount() {
-        super.componentDidMount();
+    onStartUI() {
+        this.img_skillicon.current!.style.borderRadius = "15px";
         this.onRefreshUI(this.props as IProps);
     }
-    /**
-     *更新渲染
-     * @param prevProps 上一个状态的 props
-     * @param prevState
-     * @param snapshot
-     */
-    componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
-        super.componentDidUpdate(prevProps, prevState, snapshot);
-    }
-    // 销毁
-    componentWillUnmount() {
-        super.componentWillUnmount();
-    }
-
+   
     onRefreshUI(p: IProps) {
         this.__root__.current!.hittest = true;
         this.img_skillicon.current!.hittest = true;
         // let config = KV_DATA.building_ability_tower.building_ability_tower[p.itemname];
         this.img_skillicon.current!.abilityname = p.itemname;
+        this.updateSelf();
     }
 }

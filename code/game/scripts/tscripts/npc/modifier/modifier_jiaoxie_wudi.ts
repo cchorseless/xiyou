@@ -13,7 +13,6 @@ export class modifier_jiaoxie_wudi extends BaseModifier_Plus {
 
     CheckState() {
         let state = {
-            [modifierstate.MODIFIER_STATE_NO_HEALTH_BAR]: true,
             [modifierstate.MODIFIER_STATE_DISARMED]: true,
             [modifierstate.MODIFIER_STATE_MAGIC_IMMUNE]: true,
             [modifierstate.MODIFIER_STATE_ATTACK_IMMUNE]: true,

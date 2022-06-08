@@ -5,6 +5,7 @@ import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
+import { BuildingEntityRoot } from "./BuildingEntityRoot";
 /**塔防组件 */
 @registerET()
 export class BuildingComponent extends ET.Component {
@@ -16,7 +17,6 @@ export class BuildingComponent extends ET.Component {
     public iQualificationLevel: number;
     public iBaseGoldCost: number;
     private iGoldCost: number;
-    public iBuildRound: number;
     /**累计造成伤害 */
     public fDamage: number;
     public hBlocker: CBaseEntity;
@@ -28,25 +28,23 @@ export class BuildingComponent extends ET.Component {
         let domain = this.GetDomain<BaseNpc_Plus>();
         this.vLocation = vLocation;
         this.fAngle = fAngle;
-
+        this.iStar = 1;
+        this.updateNetTable();
     }
 
     updateNetTable() {
-        // NetTablesHelper.SetData( "building", this.GetComponentEntityIndex(), {
-        //     sName: this.GetComponentEntityName(),
-        //     iBuildingIndex: this.getIndex(),
-        //     iCurrentXP: this.GetCurrentXP(),
-        //     iNeededXPToLevel: this.GetNeededXPToLevel(),
-        //     iLevel: this.GetLevel(),
-        //     iMaxLevel: this.GetMaxLevel(),
-        //     iAbilityPoints: this.GetAbilityPoints(),
-        //     tUpgrades: this.GetUpgradeInfos(),
-        //     iGoldCost: this.GetGoldCost(),
-        //     iQualificationLevel: this.GetQualificationLevel(),
-        //     tQualificationAbilities: this.tQualificationAbilities,
-        //     sQualificationComponentName: this.QualificationComponentName,
-        //     bIsHero: this.ComponentEntityIsHero()
-        // })
+        let domain = this.GetDomain<BaseNpc_Plus>();
+        NetTablesHelper.SetData<IBuildingInfo>(NetTablesHelper.ENetTables.building, "" + domain.GetEntityIndex(), {
+            configid: domain.ETRoot.As<BuildingEntityRoot>().ConfigID,
+            iStar: this.iStar,
+            entityid: domain.GetEntityIndex() as number,
+            showhealthbar: 1,
+        });
+    }
+
+    onDestroy(): void {
+        let domain = this.GetDomain<BaseNpc_Plus>();
+        NetTablesHelper.SetData<IEntityInfo>(NetTablesHelper.ENetTables.building, "" + domain.GetEntityIndex(), null);
     }
 
     GetAbilityPoints() {

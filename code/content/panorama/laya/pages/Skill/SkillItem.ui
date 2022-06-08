@@ -1,7 +1,7 @@
 {
     "x":0,
     "type":"dota2Panel",
-    "selectedBox":5,
+    "selectedBox":1,
     "selecteID":5,
     "props":{"width":140,"sceneColor":"#000000","ref":"this.skill_icon","height":140},
     "nodeParent":-1,
@@ -15,7 +15,7 @@
         {
             "x":15,
             "type":"dota2Image",
-            "props":{"width":140,"ref":"this.img_bg","height":140,"bg-repeat":"no-repeat","bg-image":"skill/skill_border_3.png"},
+            "props":{"width":140,"ref":"this.img_bg","height":140,"bg-repeat":"no-repeat","bg-image":"skill/frame_SS.png"},
             "nodeParent":1,
             "label":"dota2Image",
             "isDirectory":false,
@@ -27,21 +27,8 @@
         },
         {
             "x":15,
-            "type":"dota2Image",
-            "props":{"y":6,"x":6,"width":128,"visible":false,"height":128,"bg-repeat":"no-repeat","bg-image":"spellicons/fire_chess.png"},
-            "nodeParent":1,
-            "label":"dota2Image",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":4,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
             "type":"DOTAAbilityImage",
-            "props":{"y":6,"x":6,"width":128,"ref":"this.img_skillicon","height":128},
+            "props":{"y":10,"x":14,"width":112,"ref":"this.img_skillicon","height":112},
             "nodeParent":1,
             "label":"DOTAAbilityImage",
             "isDirectory":false,
@@ -49,7 +36,8 @@
             "hasChild":false,
             "compId":5,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         }],
     "animations":[
         {

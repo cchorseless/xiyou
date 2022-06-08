@@ -12,17 +12,16 @@ export class PlayerComponent extends ET.Component {
     onAwake() {
         this.addEvent();
     }
-
+     playerId: PlayerID;
     NoticeServerReady() {
         let playerInfo = Game.GetLocalPlayerInfo();
         if (playerInfo == null || playerInfo.player_selected_hero_entity_index <= 0) {
             /**玩家英雄创建绑定 */
             let eventid2 = GameEvents.Subscribe(GameEnum.GameEvent.dota_player_update_assigned_hero, (event: DotaPlayerUpdateAssignedHeroEvent) => {
-                LogHelper.print(event);
                 let playerInfo = Game.GetLocalPlayerInfo();
-                LogHelper.print(playerInfo);
                 if (playerInfo) {
                     if (playerInfo.player_id == event.playerid) {
+                        this.playerId = playerInfo.player_id;
                         NetHelper.SendToLua(GameEnum.CustomProtocol.req_LoginGame, null, (e) => {
                             LogHelper.print(e);
                         });
@@ -31,13 +30,45 @@ export class PlayerComponent extends ET.Component {
                 }
             });
         }
+        else {
+            this.LoadNetTableData();
+        }
+    }
+
+    LoadNetTableData() {
+        let data = NetHelper.GetOneTable(NetHelper.ENetTables.etentity);
+        if (data) {
+            for (let info of data) {
+                ET.Entity.FromJson(info.value);
+            }
+        }
     }
 
     addEvent() {
         this.NoticeServerReady();
         NetHelper.ListenOnLua(GameEnum.CustomProtocol.push_sync_et_entity, (event) => {
-            let entity = ET.Entity.FromJson(event.data);
-            
+            ET.Entity.FromJson(event.data);
+        });
+        NetHelper.ListenOnLua(GameEnum.CustomProtocol.push_update_nettable_etentity, (event) => {
+            let instanceid = event.data;
+            let data = NetHelper.GetTableValue(NetHelper.ENetTables.etentity, instanceid);
+            if (data) {
+                ET.Entity.FromJson(data);
+            } else {
+                ET.EntityEventSystem.GetEntity(instanceid)?.Dispose();
+            }
+        });
+        NetHelper.ListenOnLua(GameEnum.CustomProtocol.push_update_nettable_partprop_etentity, (event) => {
+            let instanceid = event.data.instanceId;
+            let props=  event.data.props;
+            let data = NetHelper.GetTableValue(NetHelper.ENetTables.etentity, instanceid);
+            if (data) {
+                let json = {} as any;
+                for (let k of props) {
+                    json[k] = data[k];
+                }
+                ET.EntityEventSystem.GetEntity(instanceid)?.updateFromJson(json);
+            }
         });
     }
 }

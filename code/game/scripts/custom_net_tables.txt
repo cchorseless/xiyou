@@ -4,6 +4,9 @@
     custom_net_tables =
     [
 		"common",// 大杂烩，待整理
+		"building",// 
+        "etentity",
+        "enemy",
         "hero_list",
         "game_timer",
         // 阿瓦隆

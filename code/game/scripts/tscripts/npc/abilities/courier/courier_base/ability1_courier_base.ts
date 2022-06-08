@@ -10,7 +10,17 @@ import { modifier_test } from "../../../modifier/modifier_test";
 @registerAbility()
 export class ability1_courier_base extends BaseAbility_Plus {
     GetBehavior() {
-        return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT
+        // let hCaster = this.GetOwnerPlus();
+        // let iCount = modifier_builder_gold.GetStackIn(hCaster);
+        // if (iCount == 1) {
+        //     return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AUTOCAST + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE;
+        // } else {
+        //     return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE;
+        // }
+        return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_HIDDEN;
+    }
+    IsHidden(): boolean {
+        return true;
     }
     GetCooldown() {
         return 5

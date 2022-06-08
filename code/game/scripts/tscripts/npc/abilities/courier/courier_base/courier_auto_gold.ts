@@ -10,20 +10,22 @@ import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus
 // 高级抽卡
 @registerAbility()
 export class courier_auto_gold extends BaseAbility_Plus {
-    // GetBehavior() {
-    //     let hCaster = this.GetOwnerPlus();
-    //     let iCount = modifier_builder_gold.GetStackIn(hCaster);
-    //     if (iCount == 1) {
-    //         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AUTOCAST + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE;
-    //     } else {
-    //         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE;
-    //     }
-    // }
+    GetBehavior() {
+        // let hCaster = this.GetOwnerPlus();
+        // let iCount = modifier_builder_gold.GetStackIn(hCaster);
+        // if (iCount == 1) {
+        //     return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AUTOCAST + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE;
+        // } else {
+        //     return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NO_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE;
+        // }
+        return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_HIDDEN;
+    }
+   
     OnSpellStart() {
         let hCaster = this.GetCasterPlus();
         let basic_gold = this.GetSpecialValueFor("basic_gold");
         let gold_inc_round = this.GetSpecialValueFor("gold_inc_round");
-
+        // this.SetHidden(true);
         // let iRound = Rounds.GetCurrentRound()
         // let iPlayerID = hCaster.GetPlayerOwnerID()
         let iGold = 100;

@@ -1,6 +1,7 @@
 import { GameEnum } from "../../../GameEnum";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
+import { EnemyUnitEntityRoot } from "../../../rules/Components/Enemy/EnemyUnitEntityRoot";
 import { BaseModifierMotionVertical_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
@@ -53,10 +54,17 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
     }
 
     OnDestroy() {
+        super.Destroy();
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
             //  this.GetParentPlus().SetForwardVector(Vector(0,-1,0))
+            if (this.GetParentPlus().ETRoot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
+                let EnemyUnit = this.GetParentPlus().ETRoot.As<EnemyUnitEntityRoot>().EnemyUnitComp();
+                if (EnemyUnit != null ) {
+                    EnemyUnit.OnSpawnAnimalFinish();
+                }
+            }
         }
     }
 
