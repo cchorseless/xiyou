@@ -14,7 +14,8 @@ FUNCNAME = {  };
 this.__root__ = createRef<Panel>();
 
     };
-CSS_0_0 : Partial<VCSSStyleDeclaration>  = {}
+CSS_0_0 : Partial<VCSSStyleDeclaration>  = {"width":"400px","height":"400px"}
+CSS_1_0 : Partial<VCSSStyleDeclaration>  = {"backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/map/minimap_42.png\")","backgroundSize":"100% 100%"}
 
 __root___isValid:boolean = true;
 __root___attrs:PanelAttributes={};
@@ -23,7 +24,10 @@ __root___childs: Array<JSX.Element> = [];
 render() {
     return(
         this.__root___isValid && 
-<Panel className="root" key="compId_1" ref={this.__root__} style={this.CSS_0_0}  {...this.props}   {...this.__root___attrs} >
+<Panel key="compId_1" ref={this.__root__} style={this.CSS_0_0}  {...this.props}   {...this.__root___attrs}>
+    <Image className="root" key="compId_2" style={this.CSS_1_0} >
+</Image>
+
 {this.props.children}
 {this.__root___childs}
  </Panel>

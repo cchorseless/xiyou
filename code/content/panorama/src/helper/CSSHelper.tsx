@@ -908,6 +908,18 @@ export module CSSHelper {
         }
         node.current.style.backgroundImage = `url("file://{images}/${str}")`;
     }
+    export function setPanelBgImageUrl(panel: Panel, str: string) {
+        if (panel && !panel.IsValid()) {
+            return;
+        }
+        panel.style.backgroundImage = `url("file://{images}/${str}")`;
+    }
+    export function setImagePanelUrl(panel: ImagePanel, str: string) {
+        if (panel && !panel.IsValid()) {
+            return;
+        }
+        panel.SetImage(`file://{images}/${str}`);
+    }
 
     /**
      * 添加边框

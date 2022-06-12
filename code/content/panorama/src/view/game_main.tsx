@@ -27,18 +27,9 @@ export class RootPanel extends BasePureComponent {
     componentDidMount() {
         super.componentDidMount();
         RootPanel.instance = this;
-        // 小地图
-        // RootPanel.instance.showOnlyNodeComponent(this.NODENAME.__root__, Minimap_plus)
-        // if (Game.IsInToolsMode()) {
-        //     RootPanel.instance.showOnlyNodeComponent(this.NODENAME.__root__, HeroDebugItem, {
-        //         horizontalAlign: 'middle',
-        //         verticalAlign: 'middle',
-        //         y: '120px'
-        //     })
-        // }
-        // GameUI.SetCameraPitchMax(55);
         // 摄像机高度
         GameUI.SetCameraDistance(1500);
+        // GameUI.SetCameraPitchMax(55);
         this.updateSelf();
     }
     componentWillUnmount() {
@@ -68,7 +59,6 @@ function StartRenderGameUI() {
     GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_BAR, false);
     GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_KILLCAM, false);
     // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_PREGAME_STRATEGYUI, false);
-    // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_CUSTOMUI_BEHIND_HUD_ELEMENTS, true);
     GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_FLYOUT_SCOREBOARD, false);
     GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_SHOP, false);
     // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_PREGAME_STRATEGYUI, false);
@@ -76,12 +66,16 @@ function StartRenderGameUI() {
     // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_TEAMS, false);
     // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_CLOCK, false);
     GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_QUICK_STATS, false);
-    // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_QUICK_STATS, false);
+    GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_ACTION_PANEL, false);
+    GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_ACTION_MINIMAP, false);
+
     /**初始化系统 */
     AllEntity.Init();
     TimerHelper.Init();
     DebugHelper.Init();
     EventHelper.Init();
+    DotaUIHelper.Init();
     render(<RootPanel />, $.GetContextPanel());
 }
 StartRenderGameUI();
+// $.Msg(DOTAHUDHeroViewClicked==null)

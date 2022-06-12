@@ -1,13 +1,29 @@
 <root>
-    <scripts>
-        <include src="./game_main.tsx" />
-    </scripts>
     <styles>
         <include src="s2r://panorama/styles/dotastyles.vcss_c" />
+        <include src="s2r://panorama/styles/hudstyles.vcss_c"></include>
+        <include src="s2r://panorama/styles/hud/hud_reborn.vcss_c"></include>
+        <include src="s2r://panorama/styles/custom_ui.vcss_c"></include>
+        <include src="s2r://panorama/styles/hud/dota_hud_portrait.vcss_c" />
+        <include src="s2r://panorama/styles/hud/dota_hud_xp.vcss_c"></include>
+        <include src="s2r://panorama/styles/hud/dota_hud_inventory.vcss_c"></include>
+        <!-- <include src="s2r://panorama/styles/hud/dota_hud_stats_region.vcss_c"></include> -->
+        <!-- <include src="s2r://panorama/styles/hud/dota_hud_str_agi_int.vcss_c"></include> -->
+        <include src="s2r://panorama/styles/hud/dota_hud_aghs_status_display.vcss_c"></include>
         <include src="./game_main.less" />
         <include src="./res_image.less" />
-
-
     </styles>
-    <Panel class="root" hittest="false" />
+    <scripts>
+        <!-- <include src="s2r://panorama/scripts/util.vjs_c" /> -->
+        <include src="s2r://panorama/scripts/sequence_actions.vjs_c" />
+        <!-- <include src="s2r://panorama/scripts/dota_sequence_actions.vjs_c" /> -->
+        <include src="./game_main.tsx" />
+    </scripts>
+
+
+    <Panel id="custom_ui_group" class="root" hittest="false">
+        <Panel id="custom_event_group" hittest="true">
+            <Panel id="Event_DOTAHUDHeroViewClicked" hittest="true" onfocus="DOTAHUDHeroViewClicked();"/>
+        </Panel>
+    </Panel>
 </root>

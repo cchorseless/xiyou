@@ -15,34 +15,42 @@ interface IProps {
 }
 
 export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI {
-    constructor(prop: any) {
+    constructor(prop: IProps) {
         super(prop);
-    }
-
-    // 初始化数据
-    componentDidMount() {
-        super.componentDidMount();
+        this.heroscene_attrs.className = "hero_draw_card_box";
+        this.heroscene_attrs.camera = "default_camera";
+        this.heroscene_attrs.allowrotation = true;
+        this.heroscene_attrs.rotateonmousemove = true;
+        this.heroscene_attrs.antialias = true;
+        this.heroscene_attrs.renderdeferred = false;
+        this.heroscene_attrs.particleonly = false;
+        this.heroscene_attrs.light = "global_light";
+        if (!prop.itemname) {
+            return;
+        }
+        let heroname = prop.itemname.replace("building_hero_", "npc_dota_hero_");
+        this.heroscene_attrs.unit = heroname;
         this.heroscene_attrs.onactivate = async (e) => {
             await this.selectCard();
         };
     }
-    onStartUI() {
-        this.onRefreshUI(this.props as any);
-       
-   }
 
+   
     onRefreshUI(k: IProps) {
-        if (!k.itemname) {
-            return;
-        }
-        let heroname = k.itemname.replace("building_hero_", "");
-        this.playPickSound();
-        let heroid = GameEnum.Unit.enum_HeroID[heroname as any] as any;
-        if (heroid == null) {
-            heroid = 1;
-        }
-        this.heroscene.current!.SetScenePanelToLocalHero(heroid as HeroID);
-        this.updateSelf();
+        // if (!k.itemname) {
+        //     return;
+        // }
+        // let heroname = k.itemname.replace("building_hero_", "");
+        // this.playPickSound();
+        // let heroid = GameEnum.Unit.enum_HeroID[heroname as any] as any;
+        // if (heroid == null) {
+        //     heroid = 1;
+        // }
+        // this.heroscene.current!.SetScenePanelToLocalHero(heroid as HeroID);
+        // this.heroscene_attrs.unit = "dota_npc_hero_" + heroname;
+        // this.heroscene.current!.SetScenePanelToLocalHero(heroid as HeroID);
+
+        // this.updateSelf();
     }
 
     playPickSound() {

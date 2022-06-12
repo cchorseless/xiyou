@@ -213,4 +213,17 @@ export module DotaUIHelper {
         LogHelper.print(str);
         LogHelper.print("------------");
     }
+
+    export enum EDotaUIId {
+        lower_hud = "lower_hud",
+    }
+
+
+    export function Init() {
+
+        //小地图
+        FindDotaHudElement("GlyphScanContainer")!.style.opacity = "0";
+        FindDotaHudElement("RoshanTimerContainer")!.style.opacity = "0";
+        FindDotaHudElement("HUDSkinMinimap")!.style.opacity = "0";
+    }
 }

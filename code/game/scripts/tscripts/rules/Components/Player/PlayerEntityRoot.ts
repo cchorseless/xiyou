@@ -14,6 +14,17 @@ import { PlayerHttpComponent } from "./PlayerHttpComponent";
 export class PlayerEntityRoot extends ET.EntityRoot {
     readonly Playerid: PlayerID;
     IsLogin: boolean;
+
+    public OnActive(): void {
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerComponent>("PlayerComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof DrawComponent>("DrawComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundManagerComponent>("RoundManagerComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationManagerComponent>("CombinationManagerComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyManagerComponent>("EnemyManagerComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingManagerComponent>("BuildingManagerComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
+    }
+
     PlayerComp() {
         return this.GetComponentByName<PlayerComponent>("PlayerComponent");
     }

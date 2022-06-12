@@ -339,7 +339,7 @@ export class BaseModifier {
         }
         (params as ModifierTable).IsOnCreated = true;
         (params as ModifierTable).IsOnRefresh = false;
-        LogHelper.print("OnCreated :" + this.GetName());
+        // LogHelper.print("OnCreated :" + this.GetName());
         this.Init(params);
         if (this.__AllRegisterProperty == null && this.__AllRegisterFunction == null && this.__AllRegisterEvent == null) {
             return;
@@ -410,7 +410,7 @@ export class BaseModifier {
             }
         }
         this.__destroyed = true;
-        LogHelper.print(this.GetName() + " destroy ");
+        // LogHelper.print(this.GetName() + " destroy ");
     }
 
     /**

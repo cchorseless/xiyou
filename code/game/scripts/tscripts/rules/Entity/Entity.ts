@@ -579,16 +579,20 @@ export module ET {
             return this as any as PlayerEntityRoot;
         }
 
-        public OnActive() {
-        }
+        public OnActive() {}
         public Active(etroot: IEntityRoot) {
+            if (this.Domain != null) {
+                return;
+            }
             if (etroot.ETRoot == null) {
                 this.setDomain(etroot);
                 etroot.ETRoot = this;
-                for (let k in this.PreAwakeArgs) {
-                    let unawake = EntityEventSystem.GetEntity(k);
-                    if (unawake != null) {
-                        EntityEventSystem.Awake(unawake, ...this.PreAwakeArgs[k]);
+                if (this.PreAwakeArgs) {
+                    for (let k in this.PreAwakeArgs) {
+                        let unawake = EntityEventSystem.GetEntity(k);
+                        if (unawake != null) {
+                            EntityEventSystem.Awake(unawake, ...this.PreAwakeArgs[k]);
+                        }
                     }
                 }
                 (this.PreAwakeArgs as any) = null;

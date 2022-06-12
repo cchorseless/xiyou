@@ -7,7 +7,17 @@ import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { BasePureComponent } from "../../libs/BasePureComponent";
+import { CustomMiniMap } from "../alldota2/minimap_plus/CustomMiniMap";
+import { Minimap_plus } from "../alldota2/minimap_plus/Minimap_plus";
+import { CustomAbilityList } from "../alldota2/ui_element/CustomAbilityList";
+import { CustomAbilityPanel } from "../alldota2/ui_element/CustomAbilityPanel";
+import { CustomHealthMana } from "../alldota2/ui_element/CustomHealthMana";
+import { CustomInventory } from "../alldota2/ui_element/CustomInventory";
+import { CustomPortrait } from "../alldota2/ui_element/CustomPortrait";
+import { CustomPortraitGroup } from "../alldota2/ui_element/CustomPortraitGroup";
+import { CustomStats } from "../alldota2/ui_element/CustomStats";
 import { ChallengeShopItem } from "../Challenge/ChallengeShopItem";
+import { DacBoardPanelV0 } from "../Common/DacBoardPanelV0";
 import { DebugPanel } from "../debugPanel/DebugPanel";
 import { TopBarPanel } from "../TopBarPanel/TopBarPanel";
 import { MainPanel_UI } from "./MainPanel_UI";
@@ -20,7 +30,12 @@ export class MainPanel extends MainPanel_UI {
     }
     onStartUI() {
         PlayerScene.Init();
-        this.onRefreshUI();
+        TimerHelper.AddTimer(
+            1,
+            FuncHelper.Handler.create(this, () => {
+                this.onRefreshUI();
+            })
+        );
     }
 
     onRefreshUI() {
@@ -31,6 +46,27 @@ export class MainPanel extends MainPanel_UI {
             horizontalAlign: "right",
             verticalAlign: "bottom",
         });
+        // 小地图
+        // this.addOrShowOnlyNodeChild(this.NODENAME.__root__, Minimap_plus, {
+        //     horizontalAlign: "left",
+        //     verticalAlign: "bottom",
+        //     marginBottom: "-10px",
+        //     marginLeft: "-5px",
+        // });
+
+        this.addOrShowOnlyNodeChild(this.NODENAME.__root__, CustomMiniMap, {
+            horizontalAlign: "left",
+            verticalAlign: "bottom",
+            // marginBottom: "10px",
+            // marginLeft: "10px",
+        });
+        this.addOrShowOnlyNodeChild(this.NODENAME.__root__, DacBoardPanelV0, {
+            horizontalAlign: "center",
+            verticalAlign: "bottom",
+            // marginBottom: "10px",
+            // marginLeft: "10px",
+        });
+        this.updateSelf();
     }
     /**debug */
     onbtn_click = () => {

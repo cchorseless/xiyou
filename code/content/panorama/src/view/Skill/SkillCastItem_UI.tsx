@@ -11,8 +11,7 @@ img_skillicon: React.RefObject<AbilityImage>;
 onbtn_castability = (...args: any[]) => { };
 panel_cd: React.RefObject<Panel>;
 lbl_lefttime: React.RefObject<LabelPanel>;
-panel_shine: React.RefObject<Panel>;
-NODENAME = {  __root__: '__root__',  img_bg: 'img_bg',  img_skillicon: 'img_skillicon',  panel_cd: 'panel_cd',  lbl_lefttime: 'lbl_lefttime',  panel_shine: 'panel_shine',  };
+NODENAME = {  __root__: '__root__',  img_bg: 'img_bg',  img_skillicon: 'img_skillicon',  panel_cd: 'panel_cd',  lbl_lefttime: 'lbl_lefttime',  };
 FUNCNAME = {  onbtn_castability: {nodeName:"img_skillicon",type:"onmouseactivate"}, };
 
     constructor(props: any) {
@@ -22,7 +21,6 @@ this.img_bg = createRef<ImagePanel>();
 this.img_skillicon = createRef<AbilityImage>();
 this.panel_cd = createRef<Panel>();
 this.lbl_lefttime = createRef<LabelPanel>();
-this.panel_shine = createRef<Panel>();
 
     };
 CSS_0_0 : Partial<VCSSStyleDeclaration>  = {"width":"140px","height":"140px"}
@@ -30,7 +28,6 @@ CSS_1_0 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"0px","width":"140px",
 CSS_1_1 : Partial<VCSSStyleDeclaration>  = {"y":"10px","x":"14px","width":"112px","height":"112px"}
 CSS_2_0 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"0px","width":"112px","height":"112px"}
 CSS_2_1 : Partial<VCSSStyleDeclaration>  = {"y":"31px","x":"0px","fontWeight":"bold","fontSize":"50","color":"#ffffff","horizontalAlign":"middle"}
-CSS_2_2 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"0px","width":"112px","height":"112px"}
 
 __root___isValid:boolean = true;
 __root___attrs:PanelAttributes={};
@@ -47,9 +44,6 @@ panel_cd_childs: Array<JSX.Element> = [];
 lbl_lefttime_isValid:boolean = true;
 lbl_lefttime_attrs:LabelAttributes={};
 lbl_lefttime_childs: Array<JSX.Element> = [];
-panel_shine_isValid:boolean = true;
-panel_shine_attrs:PanelAttributes={};
-panel_shine_childs: Array<JSX.Element> = [];
 
 render() {
     return(
@@ -71,11 +65,6 @@ render() {
 <Label text="600" ref={this.lbl_lefttime} key="compId_8" style={this.CSS_2_1}  {...this.lbl_lefttime_attrs} >
 {this.lbl_lefttime_childs}
 </Label>
-}
-        {this.panel_shine_isValid && 
-<Panel ref={this.panel_shine} className="Shine" key="compId_9" style={this.CSS_2_2}  {...this.panel_shine_attrs} >
-{this.panel_shine_childs}
-</Panel>
 }
     
 {this.img_skillicon_childs}

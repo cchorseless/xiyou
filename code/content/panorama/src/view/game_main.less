@@ -2,111 +2,101 @@
     width: 100%;
     height: 100%;
 }
-.only_x{
+.only_x {
     width: 100%;
 }
 
 .only_y {
     height: 100%;
 }
-/**
-* animation
-*/
-.keyframes (@prefix,@name,@content) when (@prefix=def) {
-	@keyframes @name {
-	  @content();
-	}
-  }
-  .keyframes (@prefix,@name,@content) when (@prefix=moz) {
-	@-moz-keyframes @name {
-	  @content();
-	}
-  }
-  .keyframes (@prefix,@name,@content) when (@prefix=o) {
-	@-o-keyframes @name {
-	  @content();
-	}
-  }
-  .keyframes (@prefix,@name,@content) when (@prefix=webkit) {
-	@-webkit-keyframes  @name{
-	  @content();
-	}
-  }
-  .keyframes (@prefix,@name,@content) when (@prefix=all) {
-	.keyframes(moz,@name,@content);
-	.keyframes(o,@name,@content);
-	.keyframes(webkit,@name,@content);
-	.keyframes(def,@name,@content);
-  }
-@keyframes 'shine-sweep' {
-	0% {
-	  transform: translateX(-32px) translateY(32px);
-	  opacity: 1;
-	}
-	100% {
-	  transform: translateX(32px) translateY(-32px);
-	  opacity: 1;
-	}
-  }
+
+
 #Shine {
-	background-color: gradient(linear, 100% 0%, 0% 100%, from(#00000000), color-stop(0.3, #00000000), color-stop(0.45, #ffffffff), color-stop(0.55, #ffffffff), color-stop(0.7, #00000000), to(#00000000));
-	background-size: 100% 100%;
-	width: 100%;
-	height: 100%;
-	opacity: 0.00001;
-	animation-name: none;
-	animation-duration: 0.4s;
-	animation-timing-function: ease-in-out;
-  }
-  #Shine.do_shine {
-	animation-name: shine-sweep;
-	animation-duration: 0.4s;
-  }
-
-
-
-
+    background-color: gradient(
+        linear,
+        100% 0%,
+        0% 100%,
+        from(#00000000),
+        color-stop(0.3, #00000000),
+        color-stop(0.45, #ffffffff),
+        color-stop(0.55, #ffffffff),
+        color-stop(0.7, #00000000),
+        to(#00000000)
+    );
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    opacity: 0.00001;
+    animation-name: none;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
+}
+#Shine.do_shine {
+    animation-name: shinesweep;
+    animation-duration: 0.4s;
+}
+@keyframes 'shinesweep' {
+    from {
+        transform: translateX(-32px) translateY(32px);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(32px) translateY(-32px);
+        opacity: 1;
+    }
+}
+.hero_draw_card_box {
+    // width: 300px;
+    // height: 300px;
+    transition-property: transform;
+    transition-duration: 0.2s;
+    z-index: 500;
+    // margin-top: -45px;
+}
+.hero_draw_card_box:hover {
+    transform: scale3d(1.2, 1.2, 1.2);
+}
 .CommonButton {
     &:hover {
-		background-color: gradient(linear, 0% 0%, 0% 100%, from(#444444), to(#555555));
-	}
+        background-color: gradient(linear, 0% 0%, 0% 100%, from(#444444), to(#555555));
+    }
 
-	&:active {
-		background-color: gradient(linear, 0% 0%, 0% 100%, from(#888888), to(#aaaaaa));
-		pre-transform-scale2d: 1.02;
-	}
+    &:active {
+        background-color: gradient(linear, 0% 0%, 0% 100%, from(#888888), to(#aaaaaa));
+        pre-transform-scale2d: 1.02;
+    }
 }
 
 .DebugButton {
-	background-color: gradient(linear, 0% 0%, 0% 100%, from(#333333), to(#444444));
+    background-color: gradient(linear, 0% 0%, 0% 100%, from(#333333), to(#444444));
 
-	border-style: solid;
-	border-width: 1px;
+    border-style: solid;
+    border-width: 1px;
 
-	border-top-color: #444444;
-	border-left-color: #494949;
-	border-bottom-color: #111111;
-	border-right-color: #404040;
+    border-top-color: #444444;
+    border-left-color: #494949;
+    border-bottom-color: #111111;
+    border-right-color: #404040;
 
-	transition-property: background-color;
-	transition-duration: 0.15s;
-	transition-timing-function: linear;
+    transition-property: background-color;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
 
-	&:hover {
-		background-color: gradient(linear, 0% 0%, 0% 100%, from(#444444), to(#555555));
-	}
+    &:hover {
+        background-color: gradient(linear, 0% 0%, 0% 100%, from(#444444), to(#555555));
+    }
 
-	&:active {
-		background-color: gradient(linear, 0% 0%, 0% 100%, from(#888888), to(#aaaaaa));
-		pre-transform-scale2d: 1.02;
-	}
+    &:active {
+        background-color: gradient(linear, 0% 0%, 0% 100%, from(#888888), to(#aaaaaa));
+        pre-transform-scale2d: 1.02;
+    }
 
-	&>Label {
-		align: center center;
-		padding: 4px;
-		color: #cccccc;
-		font-size: 18px;
-		text-transform: none;
-		text-align: center;
-	}
+    & > Label {
+        align: center center;
+        padding: 4px;
+        color: #cccccc;
+        font-size: 18px;
+        text-transform: none;
+        text-align: center;
+    }
 }

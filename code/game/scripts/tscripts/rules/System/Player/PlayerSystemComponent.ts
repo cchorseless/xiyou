@@ -1,5 +1,6 @@
 import { GameEnum } from "../../../GameEnum";
 import { EventHelper } from "../../../helper/EventHelper";
+import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
@@ -82,6 +83,7 @@ export class PlayerSystemComponent extends ET.Component {
             (playerRoot as any).Playerid = playerid;
             this.AllPlayer[playerid + ""] = playerRoot;
             let playerhttp = playerRoot.AddPreAwakeComponent(PrecacheHelper.GetRegClass<typeof PlayerHttpComponent>("PlayerHttpComponent"));
+            LogHelper.print(playerRoot.PreAwakeArgs == null, playerRoot.Id);
             await playerhttp.PlayerLogin(playerid);
         });
     }

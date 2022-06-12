@@ -1,0 +1,31 @@
+import React, { createRef, PureComponent } from "react";
+import { BasePureComponent } from "../../../libs/BasePureComponent";
+import { DOTAParticleScenePanelAttributes, PanelAttributes } from "react-panorama-eom";
+
+export class CustomPortrait_UI extends BasePureComponent {
+    __root__: React.RefObject<Panel>;
+    NODENAME = { __root__: "__root__" };
+    FUNCNAME = {};
+
+    constructor(props: any) {
+        super(props);
+        this.__root__ = createRef<Panel>();
+    }
+    CSS_0_0: Partial<VCSSStyleDeclaration> = {};
+
+    __root___isValid: boolean = true;
+    __root___attrs: PanelAttributes = {};
+    __root___childs: Array<JSX.Element> = [];
+    __particle___attrs: DOTAParticleScenePanelAttributes = {};
+
+    render() {
+        return (
+            this.__root___isValid && (
+                <Panel key="compId_1" className="root" ref={this.__root__} style={this.CSS_0_0} {...this.props} {...this.__root___attrs}>
+                    {this.props.children}
+                    {this.__root___childs}
+                </Panel>
+            )
+        );
+    }
+}

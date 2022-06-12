@@ -3,6 +3,8 @@ import React, { createRef, useState } from "react";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
+import { CustomAbilityButton } from "../alldota2/ui_element/CustomAbilityButton";
+import { Effect_ShineItem } from "../Effect/Effect_ShineItem";
 import { SkillCastItem_UI } from "./SkillCastItem_UI";
 interface IProps {
     abilityname: string;
@@ -19,6 +21,7 @@ export class SkillCastItem extends SkillCastItem_UI {
         this.__root__.current!.hittest = true;
         this.img_skillicon.current!.hittest = true;
         this.panel_cd.current!.style.backgroundColor = "#000000DD";
+        // this.addNodeChildAt(this.NODENAME.img_skillicon,CustomAbilityButton)
     }
     abilityname: string;
     castEntityIndex: EntityIndex;
@@ -72,10 +75,9 @@ export class SkillCastItem extends SkillCastItem_UI {
                 if (count <= 0) {
                     this.panel_cd.current!.visible = false;
                     this.lbl_lefttime.current!.visible = false;
-                    this.panel_shine.current!.TriggerClass("do_shine")
                     this.lefttimewprk!.Clear();
                     this.lefttimewprk = null;
-                    
+                    this.addOrShowOnlyNodeChild(this.NODENAME.img_skillicon, Effect_ShineItem);
                 } else {
                     this.panel_cd.current!.visible = true;
                     this.lbl_lefttime.current!.visible = true;

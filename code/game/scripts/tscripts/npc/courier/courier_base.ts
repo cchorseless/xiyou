@@ -21,6 +21,10 @@ import { ability1_courier_base } from "../abilities/courier/courier_base/ability
 @registerUnit()
 export class courier_base extends BaseNpc_Hero_Plus {
     Spawn(entityKeyValues: CScriptKeyValues) {
+        // 开局会创建多个英雄，系统一会删除掉
+        if (!this.IsValidHero()) {
+            return;
+        }
         LogHelper.print("ADD PLAYER => PLAYERID :" + this.GetPlayerOwnerID());
         // 设置技能点数
         this.SetAbilityPoints(0);
@@ -37,21 +41,11 @@ export class courier_base extends BaseNpc_Hero_Plus {
         if (!IsServer()) {
             return;
         }
+        // 开局会创建多个英雄，系统一会删除掉
+        if (!this.IsValidHero()) {
+            return;
+        }
         GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.GetPlayerID()).Active(this);
-        //#region  添加组件
-        // 阿瓦隆组件
-        // Component_Avalon.addComponent(this);
-        // 移动组件
-        this.ETRoot.AddComponent(PlayerComponent);
-        this.ETRoot.AddComponent(DrawComponent);
-        this.ETRoot.AddComponent(RoundManagerComponent);
-        this.ETRoot.AddComponent(CombinationManagerComponent);
-        this.ETRoot.AddComponent(EnemyManagerComponent);
-        this.ETRoot.AddComponent(BuildingManagerComponent);
-        this.ETRoot.AddComponent(ChessControlComponent);
-        // modifier_task.apply(this, this);
-        // modifier_test.apply(this, this);
-
         // 延遲1帧
         TimerHelper.addFrameTimer(1, () => {
             let playerid = this.GetPlayerID();
@@ -61,7 +55,6 @@ export class courier_base extends BaseNpc_Hero_Plus {
             this.SetAbsOrigin(a);
             CenterCameraOnUnit(playerid, this);
         });
-
         // TimerHelper.addTimer(2, () => {
         // MiniMapHelper.updatePlayerOnMiniForPlayer(this.GetPlayerID(), this.GetPlayerID())
         // }, this)
@@ -69,5 +62,9 @@ export class courier_base extends BaseNpc_Hero_Plus {
 
     Activate() {
         LogHelper.print("courier_base");
+    }
+
+    IsValidHero() {
+        return GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.GetPlayerID()).Domain == null;
     }
 }

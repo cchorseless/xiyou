@@ -35,7 +35,7 @@ export module GameFunc {
      * 获取全局唯一UUID
      * @returns
      */
-    export function GenerateUUID() {
+    function GenerateUUID2() {
         let d = GameRules.GetGameTime();
         let t = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
         t = string.gsub(t, "x", (c: string) => {
@@ -50,7 +50,18 @@ export module GameFunc {
         })[0];
         return t;
     }
-
+    function GenerateUUID1() {
+        let S4 = () => {
+            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+        };
+        return S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4();
+    }
+    const uuidSeed = "GenerateUUID";
+    let uuidCount: number = 0;
+    export function GenerateUUID() {
+        uuidCount++;
+        return DoUniqueString(uuidSeed) + "_" + uuidCount;
+    }
     /**
      * 获取服务器serverKey
      * @returns
@@ -59,7 +70,7 @@ export module GameFunc {
         if (IsServer()) {
             return (_G as any).__ServerKeyV2__;
         } else {
-            return NetTablesHelper.GetData(NetTablesHelper.ENetTables.common , "encrypt_key")._ || "";
+            return NetTablesHelper.GetData(NetTablesHelper.ENetTables.common, "encrypt_key")._ || "";
         }
     }
     /**

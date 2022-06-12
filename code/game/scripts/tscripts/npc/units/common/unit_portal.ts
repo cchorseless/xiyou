@@ -12,7 +12,9 @@ export class unit_portal extends BaseNpc_Plus {
         // PrecacheHelper.precachResByKV(entityKeyValues);
     }
 
-    Spawn(entityKeyValues: CScriptKeyValues) {}
+    Spawn(entityKeyValues: CScriptKeyValues) {
+        LogHelper.print("Spawn", this.entindex(),this.GetUnitName());
+    }
     onSpawned(event: NpcSpawnedEvent) {
         if (!IsServer()) {
             return;

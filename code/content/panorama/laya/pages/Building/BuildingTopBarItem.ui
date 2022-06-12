@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"dota2Panel",
-    "selectedBox":1,
-    "selecteID":12,
+    "selectedBox":11,
+    "selecteID":7,
     "props":{"width":300,"sceneColor":"#000000","height":140},
     "nodeParent":-1,
     "label":"dota2Panel",
@@ -18,15 +18,16 @@
             "props":{"y":40,"x":33,"width":270,"ref":"this.img_nameng","height":50,"bg-repeat":"no-repeat","bg-image":"common/rarity/titlebg_A.png"},
             "nodeParent":1,
             "label":"dota2Image",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":11,
             "child":[
                 {
+                    "x":30,
                     "type":"dota2Image",
-                    "props":{"y":8,"x":28,"width":30,"ref":"this.img_prop","height":30,"bg-repeat":"no-repeat","bg-image":"building/icon_agility.png"},
+                    "props":{"y":8,"x":22,"width":36,"ref":"this.img_prop","height":36,"bg-repeat":"no-repeat","bg-image":"common/pip_agi.png"},
                     "nodeParent":11,
                     "label":"dota2Image",
                     "isDirectory":false,
@@ -37,6 +38,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"dota2Label",
                     "props":{"y":9,"x":63,"width":153,"text":"虚空罗多这啊","ref":"this.lbl_name","height":34,"font-weight":"bold","font-size":25,"color":"#ffffff"},
                     "nodeParent":11,
@@ -70,13 +72,14 @@
             "props":{"y":0,"x":50,"width":200,"height":41},
             "nodeParent":1,
             "label":"dota2Panel",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":13,
             "child":[
                 {
+                    "x":30,
                     "type":"dota2Image",
                     "props":{"y":0,"x":0,"width":40,"ref":"this.img_star4","height":40,"bg-repeat":"no-repeat","bg-image":"common/overhead/star.png"},
                     "nodeParent":13,
@@ -89,6 +92,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"dota2Image",
                     "props":{"y":0,"x":40,"width":40,"ref":"this.img_star2","height":40,"bg-repeat":"no-repeat","bg-image":"common/overhead/star.png"},
                     "nodeParent":13,
@@ -101,6 +105,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"dota2Image",
                     "props":{"y":0,"x":80,"width":40,"ref":"this.img_star1","height":40,"bg-repeat":"no-repeat","bg-image":"common/overhead/star.png"},
                     "nodeParent":13,
@@ -113,6 +118,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"dota2Image",
                     "props":{"y":0,"x":120,"width":40,"ref":"this.img_star3","height":40,"bg-repeat":"no-repeat","bg-image":"common/overhead/star.png"},
                     "nodeParent":13,
@@ -125,6 +131,7 @@
                         ]
                 },
                 {
+                    "x":30,
                     "type":"dota2Image",
                     "props":{"y":0,"x":160,"width":40,"ref":"this.img_star5","height":40,"bg-repeat":"no-repeat","bg-image":"common/overhead/star.png"},
                     "nodeParent":13,
