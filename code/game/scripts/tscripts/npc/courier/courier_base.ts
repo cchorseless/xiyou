@@ -17,7 +17,11 @@ import { PlayerState } from "../../rules/System/Player/PlayerState";
 import { BuildingManagerComponent } from "../../rules/Components/Building/BuildingManagerComponent";
 import { DrawComponent } from "../../rules/Components/Draw/DrawComponent";
 import { ChessControlComponent } from "../../rules/Components/ChessControl/ChessControlComponent";
-import { ability1_courier_base } from "../abilities/courier/courier_base/ability1_courier_base";
+import { courier_challenge_wood } from "../abilities/courier/courier_base/courier_challenge_wood";
+import { courier_challenge_gold } from "../abilities/courier/courier_base/courier_challenge_gold";
+import { courier_challenge_equip } from "../abilities/courier/courier_base/courier_challenge_equip";
+import { courier_challenge_artifact } from "../abilities/courier/courier_base/courier_challenge_artifact";
+import { BaseAbility_Plus } from "../entityPlus/BaseAbility_Plus";
 @registerUnit()
 export class courier_base extends BaseNpc_Hero_Plus {
     Spawn(entityKeyValues: CScriptKeyValues) {
@@ -33,8 +37,21 @@ export class courier_base extends BaseNpc_Hero_Plus {
             let ability = this.GetAbilityByIndex(i);
             if (ability) ability.UpgradeAbility(true);
         }
-        this.AddAbility(ability1_courier_base.name).SetHidden(true);
+        let ability1 = this.AddAbility(courier_challenge_gold.name);
+        let ability2 = this.AddAbility(courier_challenge_wood.name);
+        let ability3 = this.AddAbility(courier_challenge_equip.name);
+        let ability4 = this.AddAbility(courier_challenge_artifact.name);
+        this.ActiveHiddenAbility(ability1);
+        this.ActiveHiddenAbility(ability2);
+        this.ActiveHiddenAbility(ability3);
+        this.ActiveHiddenAbility(ability4);
         this.SetIdleAcquire(false);
+    }
+
+    ActiveHiddenAbility(ability: CDOTABaseAbility) {
+        ability.SetActivated(true);
+        ability.SetLevel(1);
+        // ability.SetHidden(true);
     }
 
     onSpawned() {

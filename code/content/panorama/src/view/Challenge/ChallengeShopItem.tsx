@@ -75,11 +75,21 @@ export class ChallengeShopItem extends ChallengeShopItem_UI {
         CSSHelper.setFlowChildren(this.panel_bossall);
         this.panel_lvpop1.current!.visible = false;
         this.panel_lvtec1.current!.visible = false;
-        this.addNodeChildAt(this.NODENAME.panel_bossall, ChallengeIconItem, { marginLeft: "5px" });
-        this.addNodeChildAt(this.NODENAME.panel_bossall, ChallengeIconItem, { marginLeft: "5px" });
-        this.addNodeChildAt(this.NODENAME.panel_bossall, ChallengeIconItem, { marginLeft: "5px" });
         this.addNodeChildAt(this.NODENAME.panel_bossall, ChallengeIconItem, {
-            marginLeft: "5px"
+            marginLeft: "5px",
+            abilityname:"courier_challenge_gold"
+        });
+        this.addNodeChildAt(this.NODENAME.panel_bossall, ChallengeIconItem, {
+            marginLeft: "5px",
+            abilityname:"courier_challenge_wood"
+        });
+        this.addNodeChildAt(this.NODENAME.panel_bossall, ChallengeIconItem, {
+            marginLeft: "5px",
+            abilityname:"courier_challenge_equip"
+        });
+        this.addNodeChildAt(this.NODENAME.panel_bossall, ChallengeIconItem, {
+            marginLeft: "5px",
+            abilityname:"courier_challenge_artifact"
         });
         this.delayUpdateSelf();
     }

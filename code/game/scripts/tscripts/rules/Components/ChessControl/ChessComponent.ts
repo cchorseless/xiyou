@@ -88,6 +88,9 @@ export class ChessComponent extends ET.Component {
 
     FindClosePosToEnemy(enemy: PlayerCreateUnitEntityRoot): Vector {
         let targetUnit = enemy.GetDomain<BaseNpc_Plus>();
+        if (!targetUnit) {
+            return;
+        }
         let targetpos = targetUnit.GetAbsOrigin();
         let sys = GameRules.Addon.ETRoot.ChessControlSystem();
         let enemyChessVector = sys.GetBoardLocalVector2(targetpos);
@@ -113,6 +116,9 @@ export class ChessComponent extends ET.Component {
         let attacker = this.GetDomain<BaseNpc_Plus>();
         let targetUnit = target.GetDomain<BaseNpc_Plus>();
         if (!GameFunc.IsValid(attacker) || !GameFunc.IsValid(targetUnit)) {
+            return false;
+        }
+        if (!attacker.IsAlive() || !targetUnit.IsAlive()) {
             return false;
         }
         if (x == null || y == null) {

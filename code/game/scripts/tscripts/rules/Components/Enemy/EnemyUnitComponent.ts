@@ -1,5 +1,6 @@
 import { EntityHelper } from "../../../helper/EntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
+import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { building_unit_enemy } from "../../../kvInterface/building/building_unit_enemy";
@@ -31,14 +32,13 @@ export class EnemyUnitComponent extends ET.Component {
         domain.addSpawnedHandler(
             ET.Handler.create(this, () => {
                 modifier_no_health_bar.applyOnly(domain, domain);
-            }));
+            })
+        );
     }
-
 
     OnSpawnAnimalFinish() {
         this.updateNetTable();
     }
-
 
     updateNetTable() {
         let domain = this.GetDomain<BaseNpc_Plus>();
@@ -49,12 +49,12 @@ export class EnemyUnitComponent extends ET.Component {
         });
     }
 
-
     onDestroy(): void {
         let domain = this.GetDomain<BaseNpc_Plus>();
         NetTablesHelper.SetData<IEntityInfo>(NetTablesHelper.ENetTables.enemy, "" + domain.GetEntityIndex(), null);
+        LogHelper.print("EnemyUnitComponent remove NetTables");
     }
-    
+
     GetPlayerId() {
         return this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Playerid;
     }

@@ -21,7 +21,6 @@ export class SkillCastItem extends SkillCastItem_UI {
         this.__root__.current!.hittest = true;
         this.img_skillicon.current!.hittest = true;
         this.panel_cd.current!.style.backgroundColor = "#000000DD";
-        // this.addNodeChildAt(this.NODENAME.img_skillicon,CustomAbilityButton)
     }
     abilityname: string;
     castEntityIndex: EntityIndex;

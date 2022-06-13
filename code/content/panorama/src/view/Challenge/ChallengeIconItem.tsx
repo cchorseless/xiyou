@@ -9,11 +9,15 @@ export class ChallengeIconItem extends ChallengeIconItem_UI {
     }
     abilityindex: AbilityEntityIndex;
     onStartUI() {
-        this.abilityindex = Entities.GetAbilityByName(Game.GetLocalPlayerInfo().player_selected_hero_entity_index, "courier_draw_card_v1");
+        let abilityname = this.props.abilityname;
+        if (!abilityname) {
+            return;
+        }
+        this.abilityindex = Entities.GetAbilityByName(Game.GetLocalPlayerInfo().player_selected_hero_entity_index, abilityname);
         let castentity = Game.GetLocalPlayerInfo().player_selected_hero_entity_index;
-        this.abilityindex = Entities.GetAbilityByName(castentity, "courier_draw_card_v1");
+        this.abilityindex = Entities.GetAbilityByName(castentity, abilityname);
         this.skillitem.current!.onRefreshUI({
-            abilityname: "courier_draw_card_v1",
+            abilityname: abilityname,
             castEntityIndex: castentity,
         });
         this.updateSelf();

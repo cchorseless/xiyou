@@ -1,155 +1,9 @@
 // generate with PIPIXIA's kv generator 
 
 "courier_abilities" {
-	"ability1_courier_base" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_base/ability1_courier_base"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"AbilitySound" "Ability.Torrent"
-		"HasScepterUpgrade" "1"
-		"AbilityCastRange" "1500"
-		"AbilityCooldown" "0"
-		"AbilityManaCost" "0"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"radius" "350"
-
-			}
-			"02" {
-				"var_type" "FIELD_INTEGER"
-				"movespeed_bonus" "-50"
-
-			}
-			"03" {
-				"var_type" "FIELD_FLOAT"
-				"slow_duration" "2"
-
-			}
-			"04" {
-				"var_type" "FIELD_FLOAT"
-				"stun_duration" "2"
-
-			}
-
-		}
-
-	}
-	"ability2_courier_base" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_base/ability2_courier_base"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_BOTH"
-		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_BASIC"
-		"AbilitySound" "Ability.Torrent"
-		"HasScepterUpgrade" "1"
-		"AbilityCastRange" "1500"
-		"AbilityCooldown" "0"
-		"AbilityManaCost" "0"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"radius" "350"
-
-			}
-			"02" {
-				"var_type" "FIELD_INTEGER"
-				"movespeed_bonus" "-50"
-
-			}
-			"03" {
-				"var_type" "FIELD_FLOAT"
-				"slow_duration" "2"
-
-			}
-			"04" {
-				"var_type" "FIELD_FLOAT"
-				"stun_duration" "2"
-
-			}
-
-		}
-
-	}
 	"ability3_courier_base" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/courier/courier_base/ability3_courier_base"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"AbilitySound" "Ability.Torrent"
-		"HasScepterUpgrade" "1"
-		"AbilityCastRange" "1500"
-		"AbilityCooldown" "0"
-		"AbilityManaCost" "0"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"radius" "350"
-
-			}
-			"02" {
-				"var_type" "FIELD_INTEGER"
-				"movespeed_bonus" "-50"
-
-			}
-			"03" {
-				"var_type" "FIELD_FLOAT"
-				"slow_duration" "2"
-
-			}
-			"04" {
-				"var_type" "FIELD_FLOAT"
-				"stun_duration" "2"
-
-			}
-
-		}
-
-	}
-	"ability4_courier_base" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_base/ability4_courier_base"
-		"AbilityTextureName" "kunkka_torrent"
-		"MaxLevel" "1"
-		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-		"AbilitySound" "Ability.Torrent"
-		"HasScepterUpgrade" "1"
-		"AbilityCastRange" "1500"
-		"AbilityCooldown" "0"
-		"AbilityManaCost" "0"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_INTEGER"
-				"radius" "350"
-
-			}
-			"02" {
-				"var_type" "FIELD_INTEGER"
-				"movespeed_bonus" "-50"
-
-			}
-			"03" {
-				"var_type" "FIELD_FLOAT"
-				"slow_duration" "2"
-
-			}
-			"04" {
-				"var_type" "FIELD_FLOAT"
-				"stun_duration" "2"
-
-			}
-
-		}
-
-	}
-	"ability5_courier_base" {
-		"BaseClass" "ability_lua"
-		"ScriptFile" "npc/abilities/courier/courier_base/ability5_courier_base"
 		"AbilityTextureName" "kunkka_torrent"
 		"MaxLevel" "1"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
@@ -439,6 +293,110 @@
 			"04" {
 				"var_type" "FIELD_FLOAT"
 				"stun_duration" "2"
+
+			}
+
+		}
+
+	}
+	"courier_challenge_gold" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_base/courier_challenge_gold"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"draw_count" "3"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"wood_cost" "5"
+
+			}
+
+		}
+
+	}
+	"courier_challenge_wood" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_base/courier_challenge_wood"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "20"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"draw_count" "3"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"wood_cost" "5"
+
+			}
+
+		}
+
+	}
+	"courier_challenge_equip" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_base/courier_challenge_equip"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "30"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"draw_count" "3"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"wood_cost" "5"
+
+			}
+
+		}
+
+	}
+	"courier_challenge_artifact" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/courier/courier_base/courier_challenge_artifact"
+		"AbilityTextureName" "kunkka_torrent"
+		"MaxLevel" "1"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET|DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"AbilitySound" "Ability.Torrent"
+		"HasScepterUpgrade" "1"
+		"AbilityCastRange" "1500"
+		"AbilityCooldown" "40"
+		"AbilityManaCost" "0"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_INTEGER"
+				"draw_count" "3"
+
+			}
+			"02" {
+				"var_type" "FIELD_INTEGER"
+				"wood_cost" "5"
 
 			}
 

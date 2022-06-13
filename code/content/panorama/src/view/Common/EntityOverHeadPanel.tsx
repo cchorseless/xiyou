@@ -28,10 +28,12 @@ export class EntityOverHeadPanel extends EntityOverHeadPanel_UI {
         this.updateBuilding();
         for (let k in this.allOverHeadUI) {
             let entityid = Number(k) as EntityIndex;
-            if (this.allOverHeadUI[k] && !Entities.IsValidEntity(entityid)) {
-                this.getPureCompByNode<BuildingTopBarItem>(this.allOverHeadUI[k] as any)?.close();
-                delete this.allOverHeadUI[k];
-            }
+            if (this.allOverHeadUI[k])
+                // !NetHelper.GetTableValue(NetHelper.ENetTables.enemy, k) ||
+                if ( !Entities.IsValidEntity(entityid) || !Entities.IsAlive(entityid)) {
+                    this.getPureCompByNode<BuildingTopBarItem>(this.allOverHeadUI[k] as any)?.close();
+                    delete this.allOverHeadUI[k];
+                }
         }
         this.updateSelf();
     }
@@ -49,7 +51,7 @@ export class EntityOverHeadPanel extends EntityOverHeadPanel_UI {
                 if (this.allOverHeadUI[info.key] == null) {
                     this.allOverHeadUI[info.key] = this.addNodeChildAt(this.NODENAME.__root__, EnemyTopBarItem, info.value)!;
                 } else {
-                    this.getPureCompByNode<EnemyTopBarItem>(this.allOverHeadUI[info.key] as any)?.onRefreshUI(info.value,scale);
+                    this.getPureCompByNode<EnemyTopBarItem>(this.allOverHeadUI[info.key] as any)?.onRefreshUI(info.value, scale);
                 }
             }
         }

@@ -8,23 +8,15 @@ import { modifier_test } from "../../../modifier/modifier_test";
 import { modifier_tp } from "../../../modifier/modifier_tp";
 
 @registerAbility()
-export class ability4_courier_base extends BaseAbility_Plus {
-    GetBehavior() {
-        return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT
-    }
-    GetCooldown() {
-        return 0
-    }
-
-    GetManaCost() {
-        return 0
-    }
-
+export class courier_challenge_artifact extends BaseAbility_Plus {
+   
     OnSpellStart() {
-     
+       
     }
 
-
+    ProcsMagicStick() {
+        return false;
+    }
 }
 
 

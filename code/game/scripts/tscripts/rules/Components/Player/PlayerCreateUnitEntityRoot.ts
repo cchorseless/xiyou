@@ -1,3 +1,4 @@
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
@@ -11,7 +12,14 @@ export class PlayerCreateUnitEntityRoot extends ET.EntityRoot {
     public Dispose(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
         super.Dispose();
-        npc.SafeDestroy();
+        npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
+        TimerHelper.addTimer(
+            3,
+            () => {
+                npc.SafeDestroy();
+            },
+            this
+        );
     }
 
     public GetDistance2Player() {
