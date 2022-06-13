@@ -1,5 +1,6 @@
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
+import { TCharacter } from "../../../service/account/TCharacter";
 import { ET } from "../../Entity/Entity";
 import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
 import { ChessControlComponent } from "../ChessControl/ChessControlComponent";
@@ -23,8 +24,13 @@ export class PlayerEntityRoot extends ET.EntityRoot {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyManagerComponent>("EnemyManagerComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingManagerComponent>("BuildingManagerComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
+        this.PlayerHttpComp().Ping();
     }
+    public OnLoginFinish(): void {
+        this.IsLogin = true;
+        this.TCharacter()?.SyncClient();
 
+    }
     PlayerComp() {
         return this.GetComponentByName<PlayerComponent>("PlayerComponent");
     }
@@ -53,6 +59,9 @@ export class PlayerEntityRoot extends ET.EntityRoot {
         return this.GetComponentByName<EnemyManagerComponent>("EnemyManagerComponent");
     }
 
+    TCharacter() {
+        return this.GetComponentByName<TCharacter>("TCharacter");
+    }
     CheckIsAlive() {
         return this.GetDomain<BaseNpc_Hero_Plus>().IsAlive();
     }

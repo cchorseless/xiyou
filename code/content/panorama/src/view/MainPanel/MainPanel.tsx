@@ -19,6 +19,7 @@ import { CustomStats } from "../alldota2/ui_element/CustomStats";
 import { ChallengeShopItem } from "../Challenge/ChallengeShopItem";
 import { DacBoardPanelV0 } from "../Common/DacBoardPanelV0";
 import { DebugPanel } from "../debugPanel/DebugPanel";
+import { ShopTopRightPanel } from "../Shop/ShopTopRightPanel";
 import { TopBarPanel } from "../TopBarPanel/TopBarPanel";
 import { MainPanel_UI } from "./MainPanel_UI";
 export class MainPanel extends MainPanel_UI {
@@ -39,28 +40,27 @@ export class MainPanel extends MainPanel_UI {
     }
 
     onRefreshUI() {
-        this.addOrShowOnlyNodeChild(this.NODENAME.__root__, ChallengeShopItem, {
+        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, ChallengeShopItem, {
             uiScale: "70% 70% 100%",
             marginRight: "0px",
             marginBottom: "0px",
             horizontalAlign: "right",
             verticalAlign: "bottom",
         });
+        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, ShopTopRightPanel, {
+            horizontalAlign: "left",
+            verticalAlign: "top",
+            marginTop: "100px",
+            marginLeft: "10px",
+        });
         // 小地图
-        // this.addOrShowOnlyNodeChild(this.NODENAME.__root__, Minimap_plus, {
-        //     horizontalAlign: "left",
-        //     verticalAlign: "bottom",
-        //     marginBottom: "-10px",
-        //     marginLeft: "-5px",
-        // });
-
-        this.addOrShowOnlyNodeChild(this.NODENAME.__root__, CustomMiniMap, {
+        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, CustomMiniMap, {
             horizontalAlign: "left",
             verticalAlign: "bottom",
             // marginBottom: "10px",
             // marginLeft: "10px",
         });
-        this.addOrShowOnlyNodeChild(this.NODENAME.__root__, DacBoardPanelV0, {
+        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, DacBoardPanelV0, {
             horizontalAlign: "center",
             verticalAlign: "bottom",
             // marginBottom: "10px",
@@ -70,7 +70,7 @@ export class MainPanel extends MainPanel_UI {
     }
     /**debug */
     onbtn_click = () => {
-        this.addOrShowOnlyNodeChild(this.NODENAME.__root__, DebugPanel);
+        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, DebugPanel);
         this.updateSelf();
     };
 

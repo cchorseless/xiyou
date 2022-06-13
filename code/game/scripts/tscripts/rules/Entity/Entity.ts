@@ -28,6 +28,14 @@ export module ET {
         C?: { [k: string]: IEntityJson };
         [K: string]: any;
     }
+    export interface IETEntityJson {
+        _t: string;
+        _id: string;
+        Children?: IETEntityJson[];
+        C?: IETEntityJson[];
+        [K: string]: any;
+    }
+
     interface IEntityProperty {
         InstanceId: string;
         Id: string;
@@ -155,6 +163,9 @@ export module ET {
         static Awake(entity: Entity, ...args: any[]) {
             entity.onAwake && entity.onAwake(...args);
         }
+        static SerializeToEntity(entity: Entity) {
+            entity.onSerializeToEntity && entity.onSerializeToEntity();
+        }
         static Destroy(entity: Entity) {
             entity.onDestroy && entity.onDestroy();
         }
@@ -177,6 +188,7 @@ export module ET {
         /**每一帧刷新 */
         onUpdate?(): void;
         onDestroy?(): void;
+        onSerializeToEntity?(): void;
 
         public toJsonPartObject(props: string[]) {
             let obj: IEntityJson = {} as any;
@@ -216,6 +228,104 @@ export module ET {
             }
             return obj;
         }
+
+        public updateFromJson(json: IETEntityJson) {
+            let ignoreKey = ["_t", "_id", "Children", "C"];
+            for (let k in json) {
+                if (ignoreKey.indexOf(k) == -1) {
+                    (this as any)[k] = json[k];
+                }
+            }
+            if (json.Children) {
+                if (this.Children != null) {
+                    let keys = Object.keys(this.Children);
+                    for (let k of keys) {
+                        let isdrop = true;
+                        for (let _child of json.Children) {
+                            if (k == _child._id) {
+                                this.GetChild(k)!.updateFromJson(_child);
+                                isdrop = false;
+                                break;
+                            }
+                        }
+                        if (isdrop) {
+                            this.Children[k].Dispose();
+                        }
+                    }
+                }
+                for (let info of json.Children) {
+                    if (this.GetChild(info._id) == null) {
+                        let entity = Entity.FromJson(info);
+                        if (this.IsRegister) {
+                            this.AddOneChild(entity);
+                        } else {
+                            (entity as IEntityProperty).Parent = this;
+                            this.AddToChildren(entity);
+                        }
+                    }
+                }
+            }
+            if (json.C) {
+                if (this.Components != null) {
+                    let keys = Object.keys(this.Components);
+                    for (let k of keys) {
+                        let isdrop = true;
+                        for (let _child of json.C) {
+                            if (k == _child._t) {
+                                this.Components[k].updateFromJson(_child);
+                                isdrop = false;
+                                break;
+                            }
+                        }
+                        if (isdrop) {
+                            this.Components[k].Dispose();
+                        }
+                    }
+                }
+                for (let info of json.C) {
+                    if (this.Components == null || this.Components[info._t] == null) {
+                        let entity = Entity.FromJson(info);
+                        if (this.IsRegister) {
+                            this.AddOneComponent(entity);
+                        } else {
+                            (entity as IEntityProperty).Parent = this;
+                            this.AddToComponents(entity);
+                        }
+                    }
+                }
+            }
+        }
+        static FromJson(json: IETEntityJson) {
+            let entity = EntityEventSystem.GetEntity(json._id + json._t);
+            if (entity != null) {
+                entity.updateFromJson(json);
+                return entity;
+            }
+            let type: typeof Entity = PrecacheHelper.GetRegClass(json._t);
+            if (type == null) {
+                LogHelper.error("cant find class" + json._t);
+                return;
+            }
+            entity = EntityEventSystem.GetEntity(json._id + json._t);
+            if (entity == null) {
+                entity = Entity.Create(type);
+                (entity as IEntityProperty).Id = json._id;
+                entity.setDomain(GameRules.Addon);
+            }
+            entity.updateFromJson(json);
+            EntityEventSystem.SerializeToEntity(entity);
+            return entity;
+        }
+
+        static UpdateFromJson(json: IETEntityJson) {
+            let entity = EntityEventSystem.GetEntity(json._id + json._t);
+            if (entity == null) {
+                throw new Error("cant find entity to update");
+            }
+            entity.updateFromJson(json);
+            return entity;
+        }
+
         /**
          *开启服务器每帧刷新
          *@param frame 刷新帧数
@@ -324,7 +434,7 @@ export module ET {
             let preDomain = this.Domain;
             (this as IEntityProperty).Domain = value;
             if (preDomain == null) {
-                (this as IEntityProperty).InstanceId = this.GetType() + this.Id;
+                (this as IEntityProperty).InstanceId = this.Id + this.GetType();
                 this.setRegister(true);
             }
 
@@ -500,7 +610,7 @@ export module ET {
         public AddOneComponent(component: Component) {
             let type = component.GetType();
             if (this.Components != null && this.Components[type] != null) {
-                throw new Error("entity already has component: {type.FullName}");
+                throw new Error("entity already has component: " + type);
             }
             component.setParent(this);
             return component;
@@ -508,7 +618,7 @@ export module ET {
 
         public AddComponent<K extends typeof Component>(type: K, ...args: any[]) {
             if (this.Components != null && this.Components[type.name] != null) {
-                throw new Error("entity already has component: {type.FullName}");
+                throw new Error("entity already has component: " + type.name);
             }
             let component = Entity.Create(type) as InstanceType<K>;
             if (!component.IsComponent) {
@@ -616,7 +726,7 @@ export module ET {
             if (this.PreAwakeArgs == null) {
                 (this.PreAwakeArgs as any) = {};
             }
-            this.PreAwakeArgs[component.GetType() + component.Id] = args;
+            this.PreAwakeArgs[component.Id + component.GetType()] = args;
             return component;
         }
         public AddPreAwakeChild<T extends typeof Entity>(type: T, ...args: any[]) {
@@ -626,7 +736,7 @@ export module ET {
             if (this.PreAwakeArgs == null) {
                 (this.PreAwakeArgs as any) = {};
             }
-            this.PreAwakeArgs[component.GetType() + component.Id] = args;
+            this.PreAwakeArgs[component.Id + component.GetType()] = args;
             return component;
         }
 

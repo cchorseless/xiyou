@@ -47,7 +47,7 @@ export module NetTablesHelper {
         if (!IsServer()) {
             return;
         }
-        if (obj.IsDisposed()) {
+        if (obj == null || obj.IsDisposed()) {
             return;
         }
         NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, obj.toJsonObject(ignoreChild));

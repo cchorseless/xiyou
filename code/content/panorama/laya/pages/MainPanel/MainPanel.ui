@@ -28,6 +28,20 @@
         {
             "x":15,
             "type":"dota2Panel",
+            "props":{"y":0,"x":0,"width":1600,"ref":"this.panel_base","height":900,"className":"root","centerY":0,"centerX":0},
+            "nodeParent":1,
+            "label":"dota2Panel",
+            "isOpen":true,
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":16,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"dota2Panel",
             "props":{"width":1600,"ref":"this.panel_allpanel","height":900,"className":"root","centerY":0,"centerX":0},
             "nodeParent":1,
             "label":"dota2Panel",
@@ -49,7 +63,7 @@
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":16,
+            "compId":17,
             "child":[
                 ]
         }],

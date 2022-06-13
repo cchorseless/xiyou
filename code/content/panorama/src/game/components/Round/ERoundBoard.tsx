@@ -40,7 +40,7 @@ export class ERoundBoard extends ERound {
         PlayerScene.RoundManagerComp.addRound(this);
         let panel = MainPanel.GetInstance();
         if (panel) {
-            panel.addOrShowOnlyNodeChild(panel.NODENAME.__root__, TopBarPanel, { configID: this.configID });
+            panel.addOrShowOnlyNodeChild(panel.NODENAME.panel_base, TopBarPanel, { configID: this.configID });
         }
     }
 

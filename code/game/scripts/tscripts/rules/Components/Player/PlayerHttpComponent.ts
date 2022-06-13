@@ -48,28 +48,43 @@ export class PlayerHttpComponent extends ET.Component {
             let cbmsg2: GameProtocol.H2C_CommonResponse = await this.PostAsync(GameProtocol.Config.LoginGate, { UserId: cbmsg1.UserId, Key: cbmsg1.Key });
             if (cbmsg2.Error == 0) {
                 this.TOKEN = "Bearer " + cbmsg2.Message;
-                this.StartLoopPing();
+                // this.StartLoopPing();
                 return;
             }
         }
         LogHelper.error(`Login error => steamid:${steamid}  playerid:${playerid}`);
     }
 
-    public StartLoopPing() {
-        TimerHelper.addTimer(
-            10,
-            () => {
-                if (this.IsDisposed()) {
-                    return;
-                }
-                if (this.TOKEN != null && this.TOKEN.length > 0) {
-                    this.GetAsync(GameProtocol.Config.Ping);
-                }
-                return 10;
-            },
-            this,
-            false
-        );
+
+    public Ping() {
+        if (this.IsDisposed()) {
+            return;
+        }
+        if (this.TOKEN != null && this.TOKEN.length > 0) {
+            HttpHelper.GetRequest(
+                GameProtocol.Config.Ping,
+                (a, b, r) => {
+                    if (a == 200) {
+                        LogHelper.print("http cb=>", GameProtocol.Config.Ping, a, b);
+                        let msg: GameProtocol.G2C_Ping = json.decode(b)[0];
+                        if (msg.Message) {
+                            let msgcb: any[] = json.decode(msg.Message)[0];
+                            for (let entitystr of msgcb) {
+                                try {
+                                    ET.Entity.FromJson(entitystr);
+                                } catch (e) {
+                                    LogHelper.error(e);
+                                }
+                            }
+                        }
+                        this.Ping();
+                    }
+                },
+                this.getAdressPort(),
+                this.TOKEN
+            );
+        }
     }
+
     public onAwake() {}
 }

@@ -27,6 +27,11 @@ import { RoundManagerComponent } from "./rules/Components/Round/RoundManagerComp
 import { PlayerDataComponent } from "./rules/Components/Player/PlayerDataComponent";
 import { RoundBuildingComponent } from "./rules/Components/Round/RoundBuildingComponent";
 import { RoundPrizeUnitKillPrizeComponent } from "./rules/Components/Round/RoundPrizeUnitKillPrizeComponent";
+import { CharacterDataComponent } from "./service/account/CharacterDataComponent";
+import { TCharacter } from "./service/account/TCharacter";
+import { BagComponent } from "./service/bag/BagComponent";
+import { TItem } from "./service/bag/TItem";
+import { SeedRandomComponent } from "./service/account/SeedRandomComponent";
 
 
 MapSystemComponent;
@@ -60,6 +65,14 @@ EnemyUnitComponent;
 EnemyKillPrizeComponent;
 EnemyMoveComponent;
 EnemyPropsComponent;
+
+
+// service -----------
+CharacterDataComponent;
+SeedRandomComponent;
+TCharacter;
+BagComponent;
+TItem;
 
 export class AllEntity {
     static init() {

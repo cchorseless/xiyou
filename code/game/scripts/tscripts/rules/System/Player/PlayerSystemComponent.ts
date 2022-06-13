@@ -46,7 +46,7 @@ export class PlayerSystemComponent extends ET.Component {
         TimerHelper.addTimer(1, () => {
             playerroot.DrawComp().DrawStartCard();
         });
-        playerroot.IsLogin = true;
+        playerroot.OnLoginFinish();
         for (let player of this.GetAllPlayer()) {
             if (!player.IsLogin) {
                 return;

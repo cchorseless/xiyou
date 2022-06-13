@@ -1,5 +1,6 @@
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ET } from "../../../libs/Entity";
+import { TCharacter } from "../../service/account/TCharacter";
 import { ChessControlComponent } from "../ChessControlComponent";
 import { DrawComponent } from "../DrawComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
@@ -29,6 +30,10 @@ export class PlayerScene {
     static get RoundManagerComp() {
         return this.Scene.GetComponentByName<typeof RoundManagerComponent>("RoundManagerComponent")!;
     }
+    static get TCharacter() {
+        return this.Scene.GetComponentByName<typeof TCharacter>("TCharacter")!;
+    }
+    
 
     static Init() {
         // this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof DrawComponent>("DrawComponent"));
