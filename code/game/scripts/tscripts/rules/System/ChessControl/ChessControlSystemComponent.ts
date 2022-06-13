@@ -118,7 +118,30 @@ export class ChessControlSystemComponent extends ET.Component {
         return Vector(x, y, 128);
     }
 
-    public GetBoardEmptyGirdRandom(v: ChessControlConfig.ChessVector) {
+    public GetBoardEmptyGirdRandomAround(v: ChessControlConfig.ChessVector) {
+        let distance = 1;
+        while (distance <= 10) {
+            let circle = this.GetBoardGirdAroundCircle(v, ChessControlConfig.Gird_Width * distance);
+            for (let k of circle) {
+                if (this.IsBoardEmptyGird(k) && !this.IsBlinkTargetGird(k)) {
+                    return k;
+                }
+            }
+            distance++;
+        }
+    }
+    public GetBoardEmptyGirdRandom(playerid: PlayerID, isincludeEnemy: boolean, isincludeplayer: boolean) {
+        let max_y = ChessControlConfig.Gird_Max_Y;
+        if (!isincludeEnemy) {
+            max_y = ChessControlConfig.ChessValid_Max_Y;
+        }
+        let min_y = 1;
+        if (!isincludeplayer) {
+            min_y = ChessControlConfig.ChessValid_Max_Y;
+        }
+        let x = RandomInt(0, ChessControlConfig.Gird_Max_X);
+        let y = RandomInt(min_y, max_y);
+        let v = new ChessControlConfig.ChessVector(x, y, playerid);
         let distance = 1;
         while (distance <= 10) {
             let circle = this.GetBoardGirdAroundCircle(v, ChessControlConfig.Gird_Width * distance);

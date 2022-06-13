@@ -17,6 +17,9 @@ export class RoundEnemyComponent extends ET.Component {
             case RoundConfig.ERoundBoardState.start:
                 this.OnBoardRound_Start();
                 break;
+            case RoundConfig.ERoundBoardState.battle:
+                this.OnBoardRound_Battle();
+                break;
         }
     }
     OnBoardRound_Start() {

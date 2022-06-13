@@ -10,9 +10,20 @@ import { modifier_task } from "../../../modifier/modifier_task";
 /**删除 */
 @registerAbility()
 export class courier_challenge_wood extends BaseAbility_Plus {
-    // GetBehavior(): DOTA_ABILITY_BEHAVIOR {
-    //     return tonumber(super.GetBehavior()) + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_HIDDEN;
-    // }
+    CastFilterResult(): UnitFilterResult {
+        let caster = this.GetCasterPlus();
+        if (IsServer()) {
+            let round = caster.ETRoot.AsPlayer().RoundManagerComp().getCurrentBoardRound();
+            if (round.IsBattle()) {
+                return UnitFilterResult.UF_SUCCESS;
+            } else {
+                this.errorStr = "not in battle";
+                return UnitFilterResult.UF_FAIL_CUSTOM;
+            }
+        }
+        return UnitFilterResult.UF_SUCCESS;
+    }
+
 
     OnSpellStart() {}
 

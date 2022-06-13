@@ -67,25 +67,23 @@ export class EnemyManagerComponent extends ET.Component {
                                     vx: pos.x,
                                     vy: pos.y,
                                 });
-                                break;
+                                return;
                             case SpawnEffectModifier.spawn_fall:
                                 modifier_spawn_fall.applyOnly(enemy, enemy, null, {
                                     vx: pos.x,
                                     vy: pos.y,
                                 });
-                                break;
+                                return;
                             case SpawnEffectModifier.spawn_torrent:
                                 modifier_spawn_torrent.applyOnly(enemy, enemy, null, {
                                     vx: pos.x,
                                     vy: pos.y,
                                 });
-                                break;
+                                return;
                         }
                     }
-                }
-                else {
-                    enemy.ETRoot.As<EnemyUnitEntityRoot>().EnemyUnitComp().OnSpawnAnimalFinish();
-                }
+                }; 
+                enemy.ETRoot.As<EnemyUnitEntityRoot>().EnemyUnitComp().OnSpawnAnimalFinish();
             })
         );
         return enemy;

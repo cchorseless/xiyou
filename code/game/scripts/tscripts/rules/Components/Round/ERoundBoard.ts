@@ -32,7 +32,7 @@ export class ERoundBoard extends ERound {
         this.roundStartTime = TimerHelper.now();
         let allenemy = this.config.unitinfo;
         for (let unit_index in allenemy) {
-            this.CreateOneEnemy(unit_index, Assert_SpawnEffect.Effect.Spawn_fall);
+            this.CreateBasicEnemy(unit_index, Assert_SpawnEffect.Effect.Spawn_fall);
         }
         this.Domain.ETRoot.AsPlayer()
             .BuildingManager()
@@ -100,7 +100,7 @@ export class ERoundBoard extends ERound {
             let delay_time = 0.5;
             aliveEnemy.forEach((b) => {
                 b.RoundEnemyComp().OnBoardRound_Prize(this.ProjectileInfo);
-                damage += Number(b.GetRoundUnitConfig().failure_count || "0");
+                damage += Number(b.GetRoundBasicUnitConfig().failure_count || "0");
                 delay_time = math.min(delay_time, b.GetDistance2Player() / 1000);
             });
             TimerHelper.addTimer(
@@ -147,6 +147,9 @@ export class ERoundBoard extends ERound {
         GameRules.Addon.ETRoot.RoundSystem().endBoardRound();
     }
 
+    IsBattle() {
+        return this.roundState == RoundConfig.ERoundBoardState.battle;
+    }
 
     IsWaitingEnd() {
         return this.roundState == RoundConfig.ERoundBoardState.waiting_next;
@@ -165,7 +168,7 @@ export class ERoundBoard extends ERound {
         }
     }
 
-    CreateOneEnemy(unit_index: string, spawnEffect: ISpawnEffectInfo = null) {
+    CreateBasicEnemy(unit_index: string, spawnEffect: ISpawnEffectInfo = null) {
         let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
         let allenemy = this.config.unitinfo;
         let _boardVec = new ChessControlConfig.ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
@@ -191,4 +194,7 @@ export class ERoundBoard extends ERound {
             enemyManager.addEnemy(enemyName, this.configID, unit_index, pos, spawnEffect);
         }
     }
+
+
+   
 }

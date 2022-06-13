@@ -2,33 +2,36 @@ import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { building_round_board } from "../../../kvInterface/building/building_round_board";
-import { building_round_challenge } from "../../../kvInterface/building/building_round_challenge";
+import { building_round_board_challenge } from "../../../kvInterface/building/building_round_board_challenge";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
+import { DifficultyState } from "../../System/Difficulty/DifficultyState";
 import { RoundState } from "../../System/Round/RoundState";
 import { ERound } from "./ERound";
 import { ERoundBoard } from "./ERoundBoard";
-import { ERoundChallenge } from "./ERoundChallenge";
+import { ERoundBoardChallenge } from "./ERoundBoardChallenge";
 
 @registerET()
 export class RoundManagerComponent extends ET.Component {
     readonly RoundInfo: { [k: string]: ERound } = {};
     onAwake() {
         this.initBoardRound();
+        this.initChallengeRound();
     }
     @serializeETProps()
     curRoundBoard: string;
 
     private initChallengeRound() {
-        let keys = Object.keys(KVHelper.KvServerConfig.building_round_challenge);
-        for (let configid of keys) {
-            this.RoundInfo[configid] = this.AddChild(ERound, configid);
+        for (let k in KVHelper.KvServerConfig.building_round_board_challenge) {
+            if (KVHelper.KvServerConfig.building_round_board_challenge[k].round_label == DifficultyState.DifficultyChapter) {
+                this.RoundInfo[k] = this.AddChild(ERoundBoardChallenge, k);
+            }
         }
     }
 
-    runChallengeRound(roundid: keyof building_round_challenge.OBJ_1_1) {
+    runChallengeRound(roundid: keyof building_round_board_challenge.OBJ_1_1) {
         if (this.RoundInfo[roundid] == null) {
-            this.RoundInfo[roundid] = this.AddChild(ERoundChallenge, roundid);
+            this.RoundInfo[roundid] = this.AddChild(ERoundBoardChallenge, roundid);
         }
         this.RoundInfo[roundid].OnStart();
     }
@@ -51,5 +54,9 @@ export class RoundManagerComponent extends ET.Component {
     }
     public getCurrentBoardRound() {
         return this.RoundInfo[this.curRoundBoard] as ERoundBoard;
+    }
+
+    public getBoardChallengeRound(id: string) {
+        return this.RoundInfo[id] as ERoundBoardChallenge;
     }
 }

@@ -78,7 +78,7 @@ export class ChessComponent extends ET.Component {
         this.is_moving = false;
         let chess = sys.FindBoardInGirdChess(chessPos);
         if (chess.length > 1) {
-            let pos = sys.GetBoardEmptyGirdRandom(chessPos);
+            let pos = sys.GetBoardEmptyGirdRandomAround(chessPos);
             if (pos != null) {
                 this.blinkChessX(sys.GetBoardGirdCenterVector3(pos));
                 return;

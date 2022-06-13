@@ -26,13 +26,11 @@ export class EnemyUnitEntityRoot extends PlayerCreateUnitEntityRoot {
         return this.GetPlayer().RoundManagerComp().RoundInfo[this.RoundID] as T;
     }
 
-    GetRoundUnitConfig() {
-        if (this.OnlyKey != null) {
+    GetRoundBasicUnitConfig() {
+        if (this.OnlyKey != null ) {
             return this.GetRound<ERoundBoard>().config.unitinfo[this.OnlyKey];
         }
     }
-
-
 
     EnemyUnitComp() {
         return this.GetComponentByName<EnemyUnitComponent>("EnemyUnitComponent");

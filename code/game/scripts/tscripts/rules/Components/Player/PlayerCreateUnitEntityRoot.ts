@@ -10,16 +10,19 @@ export class PlayerCreateUnitEntityRoot extends ET.EntityRoot {
         return GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.Playerid);
     }
     public Dispose(): void {
+        if (this.IsDisposed()) { return };
         let npc = this.GetDomain<BaseNpc_Plus>();
         super.Dispose();
-        npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
-        TimerHelper.addTimer(
-            3,
-            () => {
-                npc.SafeDestroy();
-            },
-            this
-        );
+        if (npc && !npc.__safedestroyed__) {
+            npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
+            TimerHelper.addTimer(
+                3,
+                () => {
+                    npc.SafeDestroy();
+                },
+                this
+            );
+        }
     }
 
     public GetDistance2Player() {
