@@ -19,6 +19,18 @@ export const serializeETProps =
         }
         target.SerializeETProps.push(attr);
     };
+export const serializeDomainProps =
+    (params: string = null) =>
+    (target: ET.IEntityRoot, attr: string) => {
+        // 处理属性
+        if (target.SerializeDomainProps == null) {
+            target.SerializeDomainProps = [];
+        }
+        if (params != null) {
+            attr = params;
+        }
+        target.SerializeDomainProps.push(attr);
+    };
 
 export module ET {
     export interface IEntityJson {
@@ -59,6 +71,7 @@ export module ET {
 
     export interface IEntityRoot {
         ETRoot?: EntityRoot;
+        SerializeDomainProps?: string[];
     }
 
     export class Handler {
@@ -201,6 +214,13 @@ export module ET {
                     }
                 }
             }
+            if (this.Domain.SerializeDomainProps != null) {
+                for (let k of this.Domain.SerializeDomainProps) {
+                    if (props.includes(k)) {
+                        obj[k] = (this.Domain as any)[k];
+                    }
+                }
+            }
             return obj;
         }
         public toJsonObject(ignoreChild: boolean = false) {
@@ -210,6 +230,11 @@ export module ET {
             if (this.SerializeETProps != null) {
                 for (let k of this.SerializeETProps) {
                     obj[k] = (this as any)[k];
+                }
+            }
+            if (this.Domain.SerializeDomainProps != null) {
+                for (let k of this.Domain.SerializeDomainProps) {
+                    obj[k] = (this.Domain as any)[k];
                 }
             }
             if (!ignoreChild) {

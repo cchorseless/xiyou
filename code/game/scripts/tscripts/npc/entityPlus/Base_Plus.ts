@@ -11,7 +11,8 @@ import { ET } from "../../rules/Entity/Entity";
 import { PrecacheHelper } from "../../helper/PrecacheHelper";
 
 export interface BaseAbility extends CDOTA_Ability_Lua {}
-export class BaseAbility {
+export class BaseAbility implements ET.IEntityRoot{
+    ETRoot?: ET.EntityRoot;
     /**查找技能 */
     static findIn<T extends typeof BaseAbility>(this: T, target: CDOTA_BaseNPC) {
         return target.FindAbilityByName(this.name) as InstanceType<T>;
@@ -19,7 +20,9 @@ export class BaseAbility {
 }
 
 export interface BaseItem extends CDOTA_Item_Lua {}
-export class BaseItem {}
+export class BaseItem implements ET.IEntityRoot{
+    ETRoot?: ET.EntityRoot;
+}
 
 export interface BaseModifier extends CDOTA_Modifier_Lua {}
 export class BaseModifier {

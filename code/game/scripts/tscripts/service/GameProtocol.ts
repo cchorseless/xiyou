@@ -12,8 +12,8 @@ export module GameProtocol {
     export const HTTP_URL = "http://139.196.182.10:8080";
 
     export function LoginUrl() {
-        return "http://127.0.0.1:10002";
-        // return "http://139.196.182.10:10002";
+        // return "http://127.0.0.1:10002";
+        return "http://139.196.182.10:10002";
     }
 
     export interface H2C_CommonResponse {
