@@ -1,3 +1,4 @@
+import { NetHelper } from "../../../helper/NetHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { PlayerConfig } from "../../system/Player/PlayerConfig";
 import { PlayerScene } from "./PlayerScene";
@@ -15,5 +16,9 @@ export class PlayerETEntityComponent extends ET.Component {
             return entity as T;
         }
         delete this.allEntity[entityindex];
+    }
+
+    onAwake() {
+       
     }
 }

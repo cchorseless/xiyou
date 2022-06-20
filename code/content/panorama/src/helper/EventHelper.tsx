@@ -73,6 +73,23 @@ export module EventHelper {
             }
         }
     }
+    export function RemoveCaller(context: any) {
+        if (context == null) {
+            return;
+        }
+        for (let eventName in AllEventInfo) {
+            for (let i = 0, len = AllEventInfo[eventName].length; i < len; i++) {
+                let info = AllEventInfo[eventName][i];
+                if (info && info.handler && info.handler._id > 0) {
+                    if (context == info.handler.caller) {
+                        AllEventInfo[eventName].splice(i, 1);
+                        info.handler.recover();
+                        i--;
+                    }
+                }
+            }
+        }
+    }
 
     export function RemoveClientEvent(eventName: string, context: any) {
         if (AllEventInfo[eventName] == null) {

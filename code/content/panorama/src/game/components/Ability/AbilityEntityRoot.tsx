@@ -9,6 +9,6 @@ export class AbilityEntityRoot extends ET.Entity implements PlayerConfig.I.INetT
     costCount: number;
 
     onSerializeToEntity() {
-        PlayerScene.PlayerETEntityComp.addNetTableETEntity(this);
+        PlayerScene.PlayerComp.addNetTableETEntity(this);
     }
 }

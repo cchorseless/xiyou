@@ -6,7 +6,6 @@ import { DrawComponent } from "../DrawComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerComponent } from "./PlayerComponent";
 import { PlayerDataComponent } from "./PlayerDataComponent";
-import { PlayerETEntityComponent } from "./PlayerETEntityComponent";
 
 export class PlayerScene {
     /**组件 */
@@ -24,9 +23,9 @@ export class PlayerScene {
     static get PlayerDataComp() {
         return this.Scene.GetComponentByName<typeof PlayerDataComponent>("PlayerDataComponent")!;
     }
-    static get PlayerETEntityComp() {
-        return this.Scene.GetComponentByName<typeof PlayerETEntityComponent>("PlayerETEntityComponent")!;
-    }
+    // static get PlayerETEntityComp() {
+    //     return this.Scene.GetComponentByName<typeof PlayerETEntityComponent>("PlayerETEntityComponent")!;
+    // }
     
     static get ChessControlComp() {
         return this.Scene.GetComponentByName<typeof ChessControlComponent>("ChessControlComponent")!;
@@ -44,7 +43,7 @@ export class PlayerScene {
         // this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof DrawComponent>("DrawComponent"));
         this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerComponent>("PlayerComponent"));
         this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
-        this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerETEntityComponent>("PlayerETEntityComponent"));
+        // this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerETEntityComponent>("PlayerETEntityComponent"));
         // 添加移动组件
         //  PlayerScene.Scene.AddComponent(ControlComponent);
         //  PlayerScene.Scene.AddComponent(CameraComponent);

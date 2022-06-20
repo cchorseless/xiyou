@@ -5,6 +5,7 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { GameEnum } from "../../../libs/GameEnum";
 import { MainPanel } from "../../../view/MainPanel/MainPanel";
+import { PlayerConfig } from "../../system/Player/PlayerConfig";
 
 /**玩家 */
 @registerET()
@@ -12,7 +13,20 @@ export class PlayerComponent extends ET.Component {
     onAwake() {
         this.addEvent();
     }
-     playerId: PlayerID;
+    allEntity: { [entityindex: string]: ET.Entity } = {};
+    addNetTableETEntity(entity: PlayerConfig.I.INetTableETEntity) {
+        this.allEntity["" + entity.EntityId] = entity as any;
+    }
+
+    getNetTableETEntity<T extends ET.Entity>(entityindex: string) {
+        let entity = this.allEntity[entityindex];
+        if (entity && !entity.IsDisposed()) {
+            return entity as T;
+        }
+        delete this.allEntity[entityindex];
+    }
+
+    playerId: PlayerID;
     NoticeServerReady() {
         let playerInfo = Game.GetLocalPlayerInfo();
         if (playerInfo == null || playerInfo.player_selected_hero_entity_index <= 0) {
@@ -29,8 +43,7 @@ export class PlayerComponent extends ET.Component {
                     }
                 }
             });
-        }
-        else {
+        } else {
             this.LoadNetTableData();
         }
     }
@@ -60,7 +73,7 @@ export class PlayerComponent extends ET.Component {
         });
         NetHelper.ListenOnLua(GameEnum.CustomProtocol.push_update_nettable_partprop_etentity, (event) => {
             let instanceid = event.data.instanceId;
-            let props=  event.data.props;
+            let props = event.data.props;
             let data = NetHelper.GetTableValue(NetHelper.ENetTables.etentity, instanceid);
             if (data) {
                 let json = {} as any;

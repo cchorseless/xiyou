@@ -1,3 +1,5 @@
+import { LogHelper } from "./LogHelper";
+
 export module FuncHelper {
 
 
@@ -41,7 +43,7 @@ export module FuncHelper {
             if (data) {
                 arg = arg.concat(data);
             }
-            let nextCall = this.method.apply(this.caller, ...arg);
+            let nextCall = this.method.apply(this.caller, arg);
             this._id === id && this.once && this.recover();
             return nextCall;
         }

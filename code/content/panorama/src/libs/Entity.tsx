@@ -1,3 +1,4 @@
+import { EventHelper } from "../helper/EventHelper";
 import { FuncHelper } from "../helper/FuncHelper";
 import { LogHelper } from "../helper/LogHelper";
 import { PrecacheHelper } from "../helper/PrecacheHelper";
@@ -81,6 +82,9 @@ export module ET {
         public readonly Domain: IEntityRoot;
         public readonly Children: { [uuid: string]: Entity };
         public readonly Components: { [name: string]: Component };
+        public get updateEventName() {
+            return "updateEntity_" + this.InstanceId;
+        }
         onSerializeToEntity?(): void;
 
         /**初始化 */
@@ -157,6 +161,12 @@ export module ET {
                     }
                 }
             }
+            TimerHelper.AddFrameTimer(
+                1,
+                FuncHelper.Handler.create(this, () => {
+                    EventHelper.FireClientEvent(this.updateEventName, null, this);
+                })
+            );
         }
         static FromJson(json: IEntityJson) {
             let entity = EntityEventSystem.GetEntity(json._id + json._t);
@@ -444,10 +454,10 @@ export module ET {
         }
         public GetComponentByName<K extends typeof Component>(str: string) {
             if (this.Components == null) {
-              return null;
+                return null;
             }
             return this.Components[str] as InstanceType<K>;
-          }
+        }
         public static Create<K extends typeof Entity>(type: K) {
             let component = new type();
             (component as IEntityProperty).Id = FuncHelper.generateUUID();

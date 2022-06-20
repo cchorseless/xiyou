@@ -2,6 +2,9 @@
 import React, { createRef, useState } from "react";
 import { AbilityEntityRoot } from "../../game/components/Ability/AbilityEntityRoot";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { EventHelper } from "../../helper/EventHelper";
+import { FuncHelper } from "../../helper/FuncHelper";
+import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { ChallengeIconItem_UI } from "./ChallengeIconItem_UI";
 export class ChallengeIconItem extends ChallengeIconItem_UI {
@@ -18,19 +21,27 @@ export class ChallengeIconItem extends ChallengeIconItem_UI {
         }
         let castentity = Game.GetLocalPlayerInfo().player_selected_hero_entity_index;
         this.abilityindex = Entities.GetAbilityByName(castentity, abilityname);
+        let entity = PlayerScene.PlayerComp.getNetTableETEntity<AbilityEntityRoot>("" + this.abilityindex);
+        if (entity) {
+            EventHelper.AddClientEvent(
+                entity.updateEventName,
+                FuncHelper.Handler.create(this, (entity: any) => {
+                    this.onRefreshUI(entity);
+                })
+            );
+        }
         this.skillitem.current!.onRefreshUI({
             abilityname: abilityname,
             castEntityIndex: castentity,
         });
-       this.onRefreshUI()
+        this.onRefreshUI(entity!);
     }
 
     onbtn_castability = () => {
         Abilities.ExecuteAbility(this.abilityindex, Game.GetLocalPlayerInfo().player_selected_hero_entity_index, false);
     };
-    onRefreshUI() {
+    onRefreshUI(entity: AbilityEntityRoot) {
         this.lbl_lv.current!.text = "Lv." + Abilities.GetLevel(this.abilityindex);
-        let entity = PlayerScene.PlayerETEntityComp.getNetTableETEntity<AbilityEntityRoot>("" + this.abilityindex);
         if (entity) {
             this.lbl_cost.current!.text = entity.costCount + "";
         }

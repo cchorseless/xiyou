@@ -19,7 +19,7 @@ ChessControlComponent;
 DrawComponent;
 PlayerComponent;
 PlayerDataComponent;
-PlayerETEntityComponent;
+// PlayerETEntityComponent;
 RoundManagerComponent;
 ERoundBoard;
 

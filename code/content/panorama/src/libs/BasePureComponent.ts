@@ -1,5 +1,6 @@
 import React, { createElement, createRef, PureComponent } from "react";
 import { CSSHelper } from "../helper/CSSHelper";
+import { EventHelper } from "../helper/EventHelper";
 import { FuncHelper } from "../helper/FuncHelper";
 import { LogHelper } from "../helper/LogHelper";
 import { PrecacheHelper } from "../helper/PrecacheHelper";
@@ -434,6 +435,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
             GameEvents.Unsubscribe(e);
         });
         this.allGameEventID = [];
+        EventHelper.RemoveCaller(this);
         let nodeinfo = BasePureComponentSystem.GetReactElement(this.InstanceId);
         if (nodeinfo) {
             BasePureComponentSystem.RegisterReactElement(nodeinfo.Node, false);

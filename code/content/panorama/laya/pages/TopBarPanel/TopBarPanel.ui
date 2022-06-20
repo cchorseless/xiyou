@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"dota2Panel",
-    "selectedBox":1,
-    "selecteID":2,
+    "selectedBox":2,
+    "selecteID":16,
     "props":{"width":1400,"top":0,"sceneColor":"#000000","ref":"this.lbl_round","height":140,"centerX":0},
     "nodeParent":-1,
     "label":"dota2Panel",
@@ -27,7 +27,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":6,"x":820,"width":48,"height":48,"bg-image":"common/money.png"},
+                    "props":{"y":6,"x":820,"width":48,"height":48,"bg-repeat":"no-repeat","bg-image":"common/money.png"},
                     "nodeParent":2,
                     "label":"dota2Image",
                     "isDirectory":false,
@@ -40,7 +40,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":6,"x":400,"width":48,"height":48,"bg-image":"common/population_png.png"},
+                    "props":{"y":6,"x":395,"width":55,"height":48,"bg-repeat":"no-repeat","bg-image":"common/population_png.png"},
                     "nodeParent":2,
                     "label":"dota2Image",
                     "isDirectory":false,
@@ -66,7 +66,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":6,"x":1020,"width":48,"height":48,"bg-image":"common/wood_png.png"},
+                    "props":{"y":6,"x":1014,"width":55,"height":48,"bg-repeat":"no-repeat","bg-image":"common/wood_png.png"},
                     "nodeParent":2,
                     "label":"dota2Image",
                     "isDirectory":false,
@@ -118,7 +118,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":6,"x":206,"width":48,"height":48,"bg-image":"common/rank_active_png.png"},
+                    "props":{"y":6,"x":206,"width":48,"height":48,"bg-repeat":"no-repeat","bg-image":"common/rank_active_png.png"},
                     "nodeParent":2,
                     "label":"dota2Image",
                     "isDirectory":false,
@@ -144,7 +144,7 @@
                 {
                     "x":30,
                     "type":"dota2Label",
-                    "props":{"y":9,"x":1073,"text":"10000","ref":"this.lbl_food","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
+                    "props":{"y":9,"x":1270,"text":"10000","ref":"this.lbl_food","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
                     "nodeParent":2,
                     "label":"dota2Label",
                     "isDirectory":false,
@@ -157,7 +157,7 @@
                 {
                     "x":30,
                     "type":"dota2Label",
-                    "props":{"y":9,"x":1270,"text":"10000","ref":"this.lbl_wood","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
+                    "props":{"y":9,"x":1070,"text":"10000","ref":"this.lbl_wood","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
                     "nodeParent":2,
                     "label":"dota2Label",
                     "isDirectory":false,
@@ -210,7 +210,7 @@
         {
             "x":15,
             "type":"dota2Label",
-            "props":{"y":5,"x":1025,"text":"粮食","ref":"this.lbl_foodDes","height":42,"font-weight":"bold","font-size":25,"color":"#ffffff"},
+            "props":{"y":5,"x":1225,"text":"粮食","ref":"this.lbl_foodDes","height":42,"font-weight":"bold","font-size":25,"color":"#ffffff"},
             "nodeParent":1,
             "label":"dota2Label",
             "isDirectory":false,
@@ -223,7 +223,7 @@
         {
             "x":15,
             "type":"dota2Label",
-            "props":{"y":5,"x":1229,"text":"木材","ref":"this.lbl_woodDes","height":42,"font-weight":"bold","font-size":25,"color":"#ffffff"},
+            "props":{"y":5,"x":1025,"text":"木材","ref":"this.lbl_woodDes","height":42,"font-weight":"bold","font-size":25,"color":"#ffffff"},
             "nodeParent":1,
             "label":"dota2Label",
             "isDirectory":false,
