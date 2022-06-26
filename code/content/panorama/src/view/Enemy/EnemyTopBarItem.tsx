@@ -10,7 +10,7 @@ export class EnemyTopBarItem extends EnemyTopBarItem_UI {
         });
     }
 
-    onRefreshUI(p: IBuildingInfo, scale: number) {
+    onRefreshUI(p: { entityid: number }, scale: number) {
         let entityid = p.entityid as EntityIndex;
         if (!this.HasOverhead(entityid)) {
             this.close(false);

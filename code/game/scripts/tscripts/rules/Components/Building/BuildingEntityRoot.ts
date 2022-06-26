@@ -1,3 +1,5 @@
+import { KVHelper } from "../../../helper/KVHelper";
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
 import { ChessComponent } from "../ChessControl/ChessComponent";
@@ -8,18 +10,26 @@ import { BuildingComponent } from "./BuildingComponent";
 import { BuildingPropsComponent } from "./BuildingPropsComponent";
 
 export class BuildingEntityRoot extends PlayerCreateUnitEntityRoot {
-
     SetConfigId(playerid: PlayerID, conf: string) {
         (this as any).Playerid = playerid;
         (this as any).ConfigID = conf;
+        (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
     }
+    Config() {
+        return KVHelper.KvConfig().building_unit_tower["" + this.ConfigID];
+    }
+
+    updateNetTable() {
+        NetTablesHelper.SetETEntity(this, false, this.Playerid);
+    }
+
     BuildingComp() {
         return this.GetComponentByName<BuildingComponent>("BuildingComponent");
     }
     BuildingPropComp() {
         return this.GetComponentByName<BuildingPropsComponent>("BuildingPropsComponent");
     }
-    
+
     CombinationComp() {
         return this.GetComponentByName<CombinationComponent>("CombinationComponent");
     }
@@ -29,5 +39,4 @@ export class BuildingEntityRoot extends PlayerCreateUnitEntityRoot {
     RoundBuildingComp() {
         return this.GetComponentByName<RoundBuildingComponent>("RoundBuildingComponent");
     }
-  
 }

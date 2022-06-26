@@ -10,6 +10,22 @@ export module GameFunc {
         return obj as Vector;
     }
 
+    export function AsAttribute(obj: string) {
+        switch (obj) {
+            case "DOTA_ATTRIBUTE_STRENGTH":
+                return Attributes.DOTA_ATTRIBUTE_STRENGTH;
+            case "DOTA_ATTRIBUTE_AGILITY":
+                return Attributes.DOTA_ATTRIBUTE_AGILITY;
+            case "DOTA_ATTRIBUTE_INTELLECT":
+                return Attributes.DOTA_ATTRIBUTE_INTELLECT;
+            case "DOTA_ATTRIBUTE_MAX":
+                return Attributes.DOTA_ATTRIBUTE_MAX;
+            case "DOTA_ATTRIBUTE_INVALID":
+                return Attributes.DOTA_ATTRIBUTE_INVALID;
+        }
+        return Attributes.DOTA_ATTRIBUTE_INVALID;
+    }
+
     /**
      * 位运算判断参数是否包含
      * @param n

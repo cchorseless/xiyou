@@ -27,4 +27,15 @@ export module BuildingConfig {
     /**最高星级 */
     export const MAX_STAR = 5;
 
+
+      /**错误信息 */
+      export enum ErrorCode {
+        /**相同塔限制 */
+        dota_hud_error_has_same_tower = "dota_hud_error_has_same_tower",
+        /**人口限制 */
+        dota_hud_error_population_limit = "dota_hud_error_population_limit",
+
+        dota_hud_error_only_hero_can_use = "dota_hud_error_only_hero_can_use",
+        dota_hud_error_cant_build_at_location = "dota_hud_error_cant_build_at_location",
+    }
 }

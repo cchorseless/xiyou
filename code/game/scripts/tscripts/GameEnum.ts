@@ -1,10 +1,5 @@
 export module GameEnum {
     export namespace Property {
-        export enum PrimaryAttribute {
-            DOTA_ATTRIBUTE_AGILITY,
-            DOTA_ATTRIBUTE_STRENGTH,
-            DOTA_ATTRIBUTE_INTELLECT,
-        }
         /**
          *属性枚举统计标记
          */
@@ -2428,6 +2423,7 @@ export module GameEnum {
             /**同步et 实体 */
             push_sync_et_entity = "push_sync_et_entity",
             push_update_nettable_etentity = "push_update_nettable_etentity",
+            push_del_nettable_etentity = "push_del_nettable_etentity",
             push_update_nettable_partprop_etentity = "push_update_nettable_partprop_etentity",
 
             /**推送错误信息 */
@@ -2495,16 +2491,7 @@ export module GameEnum {
             req_collect_entity = "req_collect_entity",
             //#endregion
         }
-        /**错误信息 */
-        export enum ErrorCode {
-            /**相同塔限制 */
-            dota_hud_error_has_same_tower = "dota_hud_error_has_same_tower",
-            /**人口限制 */
-            dota_hud_error_population_limit = "dota_hud_error_population_limit",
-
-            dota_hud_error_only_hero_can_use = "dota_hud_error_only_hero_can_use",
-            dota_hud_error_cant_build_at_location = "dota_hud_error_cant_build_at_location",
-        }
+       
     }
 
     /**玩家行为 */

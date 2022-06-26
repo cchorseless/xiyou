@@ -27,7 +27,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":8,"x":22,"width":36,"ref":"this.img_prop","height":36,"bg-repeat":"no-repeat","bg-image":"common/pip_agi.png"},
+                    "props":{"y":5,"x":22,"width":40,"ref":"this.img_prop","height":40,"bg-repeat":"no-repeat","bg-image":"common/icon_prop_0.png"},
                     "nodeParent":11,
                     "label":"dota2Image",
                     "isDirectory":false,

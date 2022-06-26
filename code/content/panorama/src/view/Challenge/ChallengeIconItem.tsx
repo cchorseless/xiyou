@@ -24,7 +24,7 @@ export class ChallengeIconItem extends ChallengeIconItem_UI {
         }
         let castentity = Game.GetLocalPlayerInfo().player_selected_hero_entity_index;
         this.abilityindex = Entities.GetAbilityByName(castentity, abilityname);
-        let entity = PlayerScene.PlayerComp.getNetTableETEntity<AbilityEntityRoot>("" + this.abilityindex);
+        let entity = PlayerScene.PlayerEntityRootComp.getNetTableETEntity<AbilityEntityRoot>("" + this.abilityindex);
         if (entity) {
             EventHelper.AddClientEvent(
                 entity.updateEventName,

@@ -1,5 +1,6 @@
 /** Create By Editor*/
 import React, { createRef, ReactElement, useState } from "react";
+import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
@@ -29,8 +30,8 @@ export class EntityOverHeadPanel extends EntityOverHeadPanel_UI {
         for (let k in this.allOverHeadUI) {
             let entityid = Number(k) as EntityIndex;
             if (this.allOverHeadUI[k])
-                // !NetHelper.GetTableValue(NetHelper.ENetTables.enemy, k) ||
-                if ( !Entities.IsValidEntity(entityid) || !Entities.IsAlive(entityid)) {
+                if (!Entities.IsValidEntity(entityid) || !Entities.IsAlive(entityid)) {
+                    // !NetHelper.GetTableValue(NetHelper.ENetTables.enemy, k) ||
                     this.getPureCompByNode<BuildingTopBarItem>(this.allOverHeadUI[k] as any)?.close();
                     delete this.allOverHeadUI[k];
                 }
@@ -41,34 +42,34 @@ export class EntityOverHeadPanel extends EntityOverHeadPanel_UI {
     private allOverHeadUI: { [k: string]: ReactElement } = {};
     updateEnemy() {
         // 所有的怪物
-        let allenemy = NetHelper.GetOneTable(NetHelper.ENetTables.enemy);
-        if (allenemy == null) {
+        let PlayerETEntityComp = PlayerScene.PlayerEntityRootComp;
+        if (PlayerETEntityComp == null) {
             return;
         }
         let scale = 800 / GameUI.GetCameraPosition()[2];
-        for (let info of allenemy) {
-            if (info.value) {
-                if (this.allOverHeadUI[info.key] == null) {
-                    this.allOverHeadUI[info.key] = this.addNodeChildAt(this.NODENAME.__root__, EnemyTopBarItem, info.value)!;
+        for (let entityid in PlayerETEntityComp.AllEnemy) {
+            if (PlayerETEntityComp.AllEnemy[entityid]) {
+                if (this.allOverHeadUI[entityid] == null) {
+                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, EnemyTopBarItem, { "entityid":  Number(entityid) })!;
                 } else {
-                    this.getPureCompByNode<EnemyTopBarItem>(this.allOverHeadUI[info.key] as any)?.onRefreshUI(info.value, scale);
+                    this.getPureCompByNode<EnemyTopBarItem>(this.allOverHeadUI[entityid] as any)?.onRefreshUI({ "entityid": Number(entityid) }, scale);
                 }
             }
         }
     }
 
     updateBuilding() {
-        let allbuilding = NetHelper.GetOneTable(NetHelper.ENetTables.building);
-        if (allbuilding == null) {
+        let PlayerETEntityComp = PlayerScene.PlayerEntityRootComp;
+        if (PlayerETEntityComp == null) {
             return;
         }
         let scale = 800 / GameUI.GetCameraPosition()[2];
-        for (let info of allbuilding) {
-            if (info.value) {
-                if (this.allOverHeadUI[info.key] == null) {
-                    this.allOverHeadUI[info.key] = this.addNodeChildAt(this.NODENAME.__root__, BuildingTopBarItem, info.value)!;
+        for (let entityid in PlayerETEntityComp.AllBuilding) {
+            if (PlayerETEntityComp.AllBuilding[entityid]) {
+                if (this.allOverHeadUI[entityid] == null) {
+                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, BuildingTopBarItem, { "entityid":  Number(entityid) })!;
                 } else {
-                    this.getPureCompByNode<BuildingTopBarItem>(this.allOverHeadUI[info.key] as any)?.onRefreshUI(info.value, scale);
+                    this.getPureCompByNode<BuildingTopBarItem>(this.allOverHeadUI[entityid] as any)?.onRefreshUI({ "entityid": Number(entityid) }, scale);
                 }
             }
         }

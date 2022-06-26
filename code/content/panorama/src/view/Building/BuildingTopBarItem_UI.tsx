@@ -36,7 +36,7 @@ this.panel_hpbar = createRef<Panel>();
     };
 CSS_0_0 : Partial<VCSSStyleDeclaration>  = {"width":"300px","height":"140px"}
 CSS_1_0 : Partial<VCSSStyleDeclaration>  = {"y":"40px","x":"33px","width":"270px","height":"50px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/rarity/titlebg_A.png\")","backgroundSize":"100% 100%"}
-CSS_2_0 : Partial<VCSSStyleDeclaration>  = {"y":"8px","x":"22px","width":"36px","height":"36px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/pip_agi.png\")","backgroundSize":"100% 100%"}
+CSS_2_0 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"22px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/icon_prop_0.png\")","backgroundSize":"100% 100%"}
 CSS_2_1 : Partial<VCSSStyleDeclaration>  = {"y":"9px","x":"63px","width":"153px","height":"34px","fontWeight":"bold","fontSize":"25","color":"#ffffff"}
 CSS_1_1 : Partial<VCSSStyleDeclaration>  = {"y":"35px","x":"0px","width":"50px","height":"55px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/rarity/rare_A.png\")","backgroundSize":"100% 100%"}
 CSS_1_2 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"50px","width":"200px","height":"41px"}

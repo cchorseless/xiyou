@@ -79,6 +79,14 @@ export class PlayerDataComponent extends ET.Component {
                 break;
         }
     }
+
+    changePopulation(count: number) {
+        if (this.population + count > this.populationRoof) {
+            return;
+        }
+        this.population += count;
+    }
+
     addMoneyRoundStart(gold: number, wood: number) {
         this.changeItem(GameEnum.Item.EItemIndex.Gold, gold);
         this.changeItem(GameEnum.Item.EItemIndex.Wood, wood);
@@ -145,7 +153,14 @@ export class PlayerDataComponent extends ET.Component {
             this.updateNetTable();
         });
     }
-
+    /**
+     * 获取空闲人口数量
+     * @param playerID
+     * @returns
+     */
+    getFreePopulation() {
+        return this.populationRoof - this.population;
+    }
     applyPopuLevelUp(addlevel: number) {
         this.popuLevel += addlevel;
         let popu = KVHelper.KvServerConfig.population_config[this.popuLevel + ""].PopulationRoof;

@@ -1,50 +1,45 @@
+import { GameFunc } from "../../../GameFunc";
 import { EntityHelper } from "../../../helper/EntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
+import { ResHelper } from "../../../helper/ResHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
 /**塔防组件 */
 @registerET()
 export class BuildingComponent extends ET.Component {
+    public readonly IsSerializeEntity: boolean = true;
     public vLocation: Vector;
     public fAngle: number;
     public iLevel: number;
-    public iXP: number;
     public iAbilityPoints: number;
     public iQualificationLevel: number;
     public iBaseGoldCost: number;
     private iGoldCost: number;
     /**累计造成伤害 */
     public fDamage: number;
-    public hBlocker: CBaseEntity;
-    public iIndex: number;
     /**星级 */
-    public iStar: number;
-
+    @serializeETProps()
+    public iStar: number = 1;
+    @serializeETProps()
+    public PrimaryAttribute: number = 1;
     onAwake(vLocation: Vector, fAngle: number) {
-        let domain = this.GetDomain<BaseNpc_Plus>();
         this.vLocation = vLocation;
         this.fAngle = fAngle;
         this.iStar = 1;
-        this.updateNetTable();
+        this.PrimaryAttribute = GameFunc.AsAttribute(this.Domain.ETRoot.As<BuildingEntityRoot>().Config().AttributePrimary);
     }
 
     updateNetTable() {
-        let domain = this.GetDomain<BaseNpc_Plus>();
-        NetTablesHelper.SetData<IBuildingInfo>(NetTablesHelper.ENetTables.building, "" + domain.GetEntityIndex(), {
-            configid: domain.ETRoot.As<BuildingEntityRoot>().ConfigID,
-            iStar: this.iStar,
-            entityid: domain.GetEntityIndex() as number,
-            showhealthbar: 1,
-        });
+        NetTablesHelper.SetETEntity(this, false, this.Domain.ETRoot.As<BuildingEntityRoot>().Playerid);
     }
 
-    onDestroy(): void {
-        let domain = this.GetDomain<BaseNpc_Plus>();
-        NetTablesHelper.SetData<IEntityInfo>(NetTablesHelper.ENetTables.building, "" + domain.GetEntityIndex(), null);
+    public Dispose(): void {
+        NetTablesHelper.DelETEntity(this, this.Domain.ETRoot.As<BuildingEntityRoot>().Playerid);
+        super.Dispose();
     }
 
     GetAbilityPoints() {
@@ -64,5 +59,16 @@ export class BuildingComponent extends ET.Component {
      * 升星
      * @param n
      */
-    AddStar(n: number) {}
+    AddStar(n: number) {
+        this.iStar += n;
+        let domain = this.GetDomain<BaseNpc_Plus>();
+        let resinfo: ResHelper.IParticleInfo = {
+            resPath: "particles/prime/hero_spawn_hero_level.vpcf",
+            iAttachment: ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,
+            owner: domain,
+        };
+        let iParticleID = ResHelper.CreateParticle(resinfo);
+        ParticleManager.SetParticleControl(iParticleID, 0, domain.GetCursorPosition());
+        ParticleManager.ReleaseParticleIndex(iParticleID);
+    }
 }

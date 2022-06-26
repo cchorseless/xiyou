@@ -1,38 +1,74 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
+import { KV_DATA } from "../../config/KvAllInterface";
+import { BuildingEntityRoot } from "../../game/components/Building/BuildingEntityRoot";
+import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { CSSHelper } from "../../helper/CSSHelper";
+import { EventHelper } from "../../helper/EventHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
+import { TimerHelper } from "../../helper/TimerHelper";
 import { EntityHpBarItem } from "../Common/EntityHpBarItem";
 import { EntityHpMpBarItem } from "../Common/EntityHpMpBarItem";
 import { BuildingTopBarItem_UI } from "./BuildingTopBarItem_UI";
 export class BuildingTopBarItem extends BuildingTopBarItem_UI {
+    entityid: EntityIndex;
     onStartUI() {
-        let entityid = this.props.entityid as EntityIndex;
-        let ismy = Entities.IsControllableByPlayer(entityid, Game.GetLocalPlayerInfo().player_id);
+        this.entityid = this.props.entityid as EntityIndex;
+        let building = PlayerScene.PlayerEntityRootComp.getNetTableETEntity<BuildingEntityRoot>(this.entityid + "");
+        let ismy = Entities.IsControllableByPlayer(this.entityid, Game.GetLocalPlayerInfo().player_id);
         if (ismy) {
             this.addNodeChildAt(this.NODENAME.panel_hpbar, EntityHpMpBarItem, {
-                entityid: entityid,
+                entityid: this.entityid,
             });
         } else {
             this.addNodeChildAt(this.NODENAME.panel_hpbar, EntityHpBarItem, {
-                entityid: entityid,
+                entityid: this.entityid,
             });
+        }
+        let rare = building!.Config().Rarity.toUpperCase();
+        CSSHelper.setBgImageUrl(this.img_nameng, `common/rarity/titlebg_${rare}.png`);
+        CSSHelper.setBgImageUrl(this.img_rare, `common/rarity/rare_${rare}.png`);
+        CSSHelper.setLocalText(this.lbl_name, building!.ConfigID);
+        this.renderUI();
+        EventHelper.AddClientEvent(
+            building!.BuildingComp!.updateEventName,
+            FuncHelper.Handler.create(this, () => {
+                this.renderUI();
+            })
+        );
+        this.__root__.current!.visible = false;
+        TimerHelper.AddFrameTimer(
+            10,
+            FuncHelper.Handler.create(this, () => {
+                this.__root__.current!.visible = true;
+            })
+        );
+    }
+
+    renderUI() {
+        let building = PlayerScene.PlayerEntityRootComp.getNetTableETEntity<BuildingEntityRoot>(this.entityid + "");
+        if (building) {
+            for (let i = 1; i < 6; i++) {
+                (this as any)["img_star" + i].current!.visible = building.BuildingComp!.iStar >= i;
+            }
+            CSSHelper.setBgImageUrl(this.img_prop, `common/icon_prop_${building.BuildingComp!.PrimaryAttribute}.png`);
         }
     }
 
-    onRefreshUI(p: IBuildingInfo, scale: number) {
-        let entityid = p.entityid as EntityIndex;
-        if (!this.HasOverhead(entityid)) {
+    onRefreshUI(p: { entityid: number }, scale: number) {
+        this.entityid = p.entityid as EntityIndex;
+        if (!this.HasOverhead(this.entityid)) {
             this.close(false);
         } else {
-            let vOrigin = Entities.GetAbsOrigin(entityid);
+            let vOrigin = Entities.GetAbsOrigin(this.entityid);
             let fScreenX = Game.WorldToScreenX(vOrigin[0], vOrigin[1], vOrigin[2]);
             let fScreenY = Game.WorldToScreenY(vOrigin[0], vOrigin[1], vOrigin[2]);
             if (fScreenX < 0 || fScreenX > Game.GetScreenWidth() || fScreenY < 0 || fScreenY > Game.GetScreenHeight()) {
                 this.close(false);
             } else {
                 this.__root__.current!.style.preTransformScale2d = "" + scale;
-                let fOffset = Entities.GetHealthBarOffset(entityid);
+                let fOffset = Entities.GetHealthBarOffset(this.entityid);
                 fOffset = fOffset == -1 ? 275 : fOffset;
                 fOffset = fOffset + scale * 80 - 75;
                 let fX = Game.WorldToScreenX(vOrigin[0], vOrigin[1], vOrigin[2] + fOffset);
@@ -48,7 +84,6 @@ export class BuildingTopBarItem extends BuildingTopBarItem_UI {
 
     HasOverhead(iEntIndex: EntityIndex): boolean {
         return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex);
-        // return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex) && !Entities.NoHealthBar(iEntIndex);
     }
     HasHpUI(iEntIndex: EntityIndex): boolean {
         return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex) && !Entities.NoHealthBar(iEntIndex);

@@ -1,18 +1,19 @@
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ET } from "../../../libs/Entity";
 import { TCharacter } from "../../service/account/TCharacter";
+import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
 import { ChessControlComponent } from "../ChessControlComponent";
 import { DrawComponent } from "../DrawComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerComponent } from "./PlayerComponent";
 import { PlayerDataComponent } from "./PlayerDataComponent";
+import { PlayerEntityRootComponent } from "./PlayerEntityRootComponent";
 
 export class PlayerScene {
     /**组件 */
     static get Scene() {
         return ET.SceneRoot.GetInstance();
     }
-
     static get DrawComp() {
         return this.Scene.GetComponentByName<typeof DrawComponent>("DrawComponent")!;
     }
@@ -23,9 +24,9 @@ export class PlayerScene {
     static get PlayerDataComp() {
         return this.Scene.GetComponentByName<typeof PlayerDataComponent>("PlayerDataComponent")!;
     }
-    // static get PlayerETEntityComp() {
-    //     return this.Scene.GetComponentByName<typeof PlayerETEntityComponent>("PlayerETEntityComponent")!;
-    // }
+    static get PlayerEntityRootComp() {
+        return this.Scene.GetComponentByName<typeof PlayerEntityRootComponent>("PlayerEntityRootComponent")!;
+    }
     
     static get ChessControlComp() {
         return this.Scene.GetComponentByName<typeof ChessControlComponent>("ChessControlComponent")!;
@@ -41,9 +42,9 @@ export class PlayerScene {
 
     static Init() {
         // this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof DrawComponent>("DrawComponent"));
-        this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerComponent>("PlayerComponent"));
         this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
-        // this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerETEntityComponent>("PlayerETEntityComponent"));
+        this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerEntityRootComponent>("PlayerEntityRootComponent"));
+        this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerComponent>("PlayerComponent"));
         // 添加移动组件
         //  PlayerScene.Scene.AddComponent(ControlComponent);
         //  PlayerScene.Scene.AddComponent(CameraComponent);

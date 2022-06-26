@@ -1,4 +1,5 @@
 import { LogHelper } from "../../../helper/LogHelper";
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
@@ -19,15 +20,20 @@ export class EnemyUnitEntityRoot extends PlayerCreateUnitEntityRoot {
         (this as any).ConfigID = confid;
         (this as any).RoundID = roundid;
         (this as any).OnlyKey = onlyKey;
+        (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
     }
 
 
+
+    updateNetTable() {
+        NetTablesHelper.SetETEntity(this, false, this.Playerid);
+    }
     GetRound<T extends ERound>(): T {
         return this.GetPlayer().RoundManagerComp().RoundInfo[this.RoundID] as T;
     }
 
     GetRoundBasicUnitConfig() {
-        if (this.OnlyKey != null ) {
+        if (this.OnlyKey != null) {
             return this.GetRound<ERoundBoard>().config.unitinfo[this.OnlyKey];
         }
     }
@@ -51,5 +57,4 @@ export class EnemyUnitEntityRoot extends PlayerCreateUnitEntityRoot {
     RoundEnemyComp() {
         return this.GetComponentByName<RoundEnemyComponent>("RoundEnemyComponent");
     }
- 
 }

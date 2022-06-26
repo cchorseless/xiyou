@@ -15,6 +15,13 @@ export module KVHelper {
     export const KvServerConfig: Readonly<KvServerInterface> = {} as Readonly<KvServerInterface>;
     /**客戶端KV配置 */
     export const KvClientConfig: Readonly<KvClientInterface> = {} as Readonly<KvClientInterface>;
+    export function KvConfig() {
+        if (IsServer()) {
+            return KvServerConfig;
+        } else {
+            return KvClientConfig;
+        }
+    }
 
     export function initKVFile() {
         // 服务器
@@ -111,7 +118,6 @@ export module KVHelper {
         }
         return GameFunc.ArrayFunc.RandomArrayByWeight(r_arr, weight_arr)[0];
     }
-
 
     export function RandomPoolConfig(str: string): string {
         let _config = KvServerConfig.pool_config[str as "1001"];

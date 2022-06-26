@@ -3,6 +3,7 @@ import { EntityHelper } from "../../../helper/EntityHelper";
 import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
+import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
@@ -19,27 +20,10 @@ import { BuildingEntityRoot } from "./BuildingEntityRoot";
 /**塔防组件 */
 @registerET()
 export class BuildingManagerComponent extends ET.Component {
-    /**当前人口数量 */
-    curPopulation: number = 0;
-    /**当前人口上限 */
-    curPopulationRoof: number = 0;
-    /**人口等级 */
-    population_level: number = 0;
     /**是否建造过一个建筑 */
     bHasBuild: boolean = false;
-
     tGlobalBuffs: BuildingConfig.IBuffInfo[] = [];
-
     onAwake() {}
-
-    /**
-     * 获取空闲人口数量
-     * @param playerID
-     * @returns
-     */
-    public getFreePopulation() {
-        return this.curPopulationRoof - this.curPopulation;
-    }
 
     /**
      * 放置建築
@@ -55,36 +39,44 @@ export class BuildingManagerComponent extends ET.Component {
         // 相同的塔
         let bHasCount = this.getBuildingCount(towerID);
         if (bHasCount >= BuildingConfig.MAX_SAME_TOWER) {
-            EventHelper.ErrorMessage(GameEnum.Event.ErrorCode.dota_hud_error_has_same_tower, playerID);
+            EventHelper.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_has_same_tower, playerID);
             return;
         }
         //  人口判断
-        // let iPopulationAdd = BuildingSystem.GetBuildingPopulation(towerID);
-        // let freePopulation = this.getFreePopulation();
-        // if (iPopulationAdd > freePopulation) {
-        //     EventHelper.ErrorMessage(GameEnum.Event.ErrorCode.dota_hud_error_population_limit)
-        //     return false
-        // }
+        let iPopulationAdd = GameRules.Addon.ETRoot.BuildingSystem().GetBuildingPopulation(towerID);
+        let PlayerDataComp = domain.ETRoot.AsPlayer().PlayerDataComp();
+        let freePopulation = PlayerDataComp.getFreePopulation();
+        if (iPopulationAdd > freePopulation) {
+            EventHelper.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_population_limit);
+            return;
+        }
         let building = EntityHelper.CreateEntityByName(towerID, location, domain.GetTeamNumber(), false, domain, domain) as BaseNpc_Plus;
         if (!building) {
             return;
         }
+        ResHelper.CreateParticle(
+            new ResHelper.ParticleInfo()
+                .set_resPath("particles/econ/items/antimage/antimage_ti7/antimage_blink_start_ti7_ribbon_bright.vpcf")
+                .set_owner(building)
+                .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
+                .set_validtime(5)
+        );
         BuildingEntityRoot.Active(building);
         building.SetTeam(DOTATeam_t.DOTA_TEAM_GOODGUYS);
-        building.ETRoot.As<BuildingEntityRoot>().SetConfigId(playerID, towerID);
-        domain.ETRoot.AddDomainChild(building.ETRoot);
-        building.ETRoot.AddComponent(BuildingComponent, location, angle);
-        building.ETRoot.AddComponent(CombinationComponent);
-        building.ETRoot.AddComponent(ChessComponent);
-        building.ETRoot.AddComponent(RoundBuildingComponent);
-        // domain.ETRoot.GetComponent(CombinationManagerComponent).add(domain.ETRoot);
+        let buildingroot = building.ETRoot.As<BuildingEntityRoot>();
+        buildingroot.SetConfigId(playerID, towerID);
+        domain.ETRoot.AddDomainChild(buildingroot);
+        buildingroot.AddComponent(BuildingComponent, location, angle);
+        buildingroot.AddComponent(CombinationComponent);
+        buildingroot.AddComponent(ChessComponent);
+        buildingroot.AddComponent(RoundBuildingComponent);
+        buildingroot.updateNetTable();
         /**互相绑定 */
         building.SetControllableByPlayer(playerID, true);
         building.addSpawnedHandler(
             ET.Handler.create(this, () => {
                 modifier_no_health_bar.applyOnly(building, building);
                 // modifier_building.apply(this.createUnit, domain)
-                // modifier_test.apply(this.createUnit, domain)
             })
         );
         // 全场buff
@@ -95,9 +87,11 @@ export class BuildingManagerComponent extends ET.Component {
         //     }
         // }
         // 改变人口
-        // this.curPopulation += iPopulationAdd;
+        if (buildingroot.ChessComp().isInBattle()) {
+            PlayerDataComp.changePopulation(iPopulationAdd);
+            PlayerDataComp.updateNetTable();
+        }
         this.bHasBuild = true;
-        // FireLeftPopulationChanged(playerID, this.GetMaxPopulation(playerID) - this.tPlayerBuildings[playerID].population)
         return building;
     }
 
@@ -116,6 +110,13 @@ export class BuildingManagerComponent extends ET.Component {
         let building = target.BuildingComp();
         if (building == null) {
             return;
+        }
+        let PlayerDataComp = domain.ETRoot.AsPlayer().PlayerDataComp();
+        let iPopulationAdd = GameRules.Addon.ETRoot.BuildingSystem().GetBuildingPopulation(target.ConfigID);
+        // 改变人口
+        if (target.ChessComp().isInBattle()) {
+            PlayerDataComp.changePopulation(-iPopulationAdd);
+            PlayerDataComp.updateNetTable();
         }
         let iGoldCost = building.GetGoldCost();
         let iGoldReturn = math.floor(iGoldCost * fGoldReturn);

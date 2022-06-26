@@ -366,6 +366,7 @@ export module GameEnum {
         /**同步et 实体 */
         push_sync_et_entity = "push_sync_et_entity",
         push_update_nettable_etentity = 'push_update_nettable_etentity',
+        push_del_nettable_etentity = "push_del_nettable_etentity",
         push_update_nettable_partprop_etentity='push_update_nettable_partprop_etentity',
         /**推送错误信息 */
         push_error_message = "push_error_message",

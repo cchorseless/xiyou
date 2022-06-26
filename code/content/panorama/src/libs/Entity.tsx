@@ -13,7 +13,7 @@ export module ET {
         _t: string;
         _id: string;
         Children?: IEntityJson[];
-        C?: IEntityJson[];
+        C?: { [K: string]: IEntityJson };
         [K: string]: any;
     }
     interface IEntityProperty {
@@ -137,7 +137,8 @@ export module ET {
                     let keys = Object.keys(this.Components);
                     for (let k of keys) {
                         let isdrop = true;
-                        for (let _child of json.C) {
+                        for (let compname in json.C) {
+                            let _child = json.C[compname];
                             if (k == _child._t) {
                                 this.Components[k].updateFromJson(_child);
                                 isdrop = false;
@@ -149,7 +150,8 @@ export module ET {
                         }
                     }
                 }
-                for (let info of json.C) {
+                for (let k in json.C) {
+                    let info = json.C[k];
                     if (this.Components == null || this.Components[info._t] == null) {
                         let entity = Entity.FromJson(info);
                         if (this.IsRegister) {

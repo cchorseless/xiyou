@@ -63,6 +63,29 @@ export module NetTablesHelper {
             });
         }
     }
+    export function DelETEntity(obj: ET.Entity, ...playerID: Array<PlayerID>) {
+        if (!IsServer()) {
+            return;
+        }
+        if (obj == null || obj.IsDisposed()) {
+            return;
+        }
+        if (!NetTablesHelper.GetData(ENetTables.etentity, obj.InstanceId)) {
+            return;
+        }
+        NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, null);
+        let event: JS_TO_LUA_DATA = {};
+        event.state = true;
+        event.data = obj.InstanceId;
+        // 全部玩家
+        if (playerID == null || playerID.length == 0) {
+            EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_del_nettable_etentity, event);
+        } else {
+            playerID.forEach((_id) => {
+                EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_del_nettable_etentity, event, _id as PlayerID);
+            });
+        }
+    }
 
     export enum ENetTables {
         common = "common",

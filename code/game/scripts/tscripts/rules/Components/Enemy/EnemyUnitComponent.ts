@@ -19,6 +19,7 @@ import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
 @registerET()
 export class EnemyUnitComponent extends ET.Component {
     config: building_unit_enemy.OBJ_2_1;
+    readonly IsSerializeEntity: boolean = true;
 
     onAwake(): void {
         let domain = this.GetDomain<BaseNpc_Plus>();
@@ -37,22 +38,16 @@ export class EnemyUnitComponent extends ET.Component {
     }
 
     OnSpawnAnimalFinish() {
-        this.updateNetTable();
+        this.Domain.ETRoot.As<EnemyUnitEntityRoot>().updateNetTable();
     }
 
     updateNetTable() {
-        let domain = this.GetDomain<BaseNpc_Plus>();
-        NetTablesHelper.SetData<IEntityInfo>(NetTablesHelper.ENetTables.enemy, "" + domain.GetEntityIndex(), {
-            configid: domain.ETRoot.As<EnemyUnitEntityRoot>().ConfigID,
-            entityid: domain.GetEntityIndex() as number,
-            showhealthbar: 1,
-        });
+        NetTablesHelper.SetETEntity(this, false, this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Playerid);
     }
 
-    onDestroy(): void {
-        let domain = this.GetDomain<BaseNpc_Plus>();
-        NetTablesHelper.SetData<IEntityInfo>(NetTablesHelper.ENetTables.enemy, "" + domain.GetEntityIndex(), null);
-        LogHelper.print("EnemyUnitComponent remove NetTables");
+    public Dispose(): void {
+        NetTablesHelper.DelETEntity(this, this.GetPlayerId());
+        super.Dispose();
     }
 
     GetPlayerId() {

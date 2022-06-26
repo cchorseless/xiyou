@@ -194,6 +194,8 @@ export module ET {
         public readonly Children: { [uuid: string]: Entity };
         public readonly Components: { [name: string]: Component };
         public readonly SerializeETProps: string[];
+        public readonly IsSerializeEntity: boolean = false;
+
         /**初始化 */
         onAwake?(...args: any[]): void;
         /**重载组件 */
@@ -241,13 +243,17 @@ export module ET {
                 if (this.Children != null) {
                     obj.Children = {} as any;
                     for (let k in this.Children) {
-                        obj.Children[k] = this.Children[k].toJsonObject();
+                        if (this.Children[k].IsSerializeEntity) {
+                            obj.Children[k] = this.Children[k].toJsonObject();
+                        }
                     }
                 }
                 if (this.Components != null) {
                     obj.C = {};
                     for (let k in this.Components) {
-                        obj.C[k] = this.Components[k].toJsonObject();
+                        if (this.Components[k].IsSerializeEntity) {
+                            obj.C[k] = this.Components[k].toJsonObject();
+                        }
                     }
                 }
             }

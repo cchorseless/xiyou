@@ -14,18 +14,6 @@ export class PlayerComponent extends ET.Component {
     onAwake() {
         this.addEvent();
     }
-    allEntity: { [entityindex: string]: ET.Entity } = {};
-    addNetTableETEntity(entity: PlayerConfig.I.INetTableETEntity) {
-        this.allEntity["" + entity.EntityId] = entity as any;
-    }
-
-    getNetTableETEntity<T extends ET.Entity>(entityindex: string) {
-        let entity = this.allEntity[entityindex];
-        if (entity && !entity.IsDisposed()) {
-            return entity as T;
-        }
-        delete this.allEntity[entityindex];
-    }
 
     playerId: PlayerID;
     NoticeServerReady() {
@@ -71,6 +59,10 @@ export class PlayerComponent extends ET.Component {
             } else {
                 ET.EntityEventSystem.GetEntity(instanceid)?.Dispose();
             }
+        });
+        NetHelper.ListenOnLua(GameEnum.CustomProtocol.push_del_nettable_etentity, (event) => {
+            let instanceid = event.data;
+            ET.EntityEventSystem.GetEntity(instanceid)?.Dispose();
         });
         NetHelper.ListenOnLua(GameEnum.CustomProtocol.push_update_nettable_partprop_etentity, (event) => {
             let instanceid = event.data.instanceId;
