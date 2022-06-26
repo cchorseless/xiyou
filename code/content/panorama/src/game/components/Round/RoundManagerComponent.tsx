@@ -15,6 +15,7 @@ export class RoundManagerComponent extends ET.Component {
         this.startListen();
     }
     startListen() {
+        
     }
 
     addRound(r: ERound) {

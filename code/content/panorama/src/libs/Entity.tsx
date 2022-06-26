@@ -164,6 +164,7 @@ export module ET {
             TimerHelper.AddFrameTimer(
                 1,
                 FuncHelper.Handler.create(this, () => {
+                    EventHelper.FireClientEvent(this.GetType(), null, this);
                     EventHelper.FireClientEvent(this.updateEventName, null, this);
                 })
             );

@@ -2,6 +2,7 @@ import { Assert_Color } from "../../../assert/Assert_Color";
 import { Assert_MsgEffect } from "../../../assert/Assert_MsgEffect";
 import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
+import { GameEnum } from "../../../GameEnum";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
@@ -30,12 +31,13 @@ export class ERoundBoard extends ERound {
         this.bRunning = true;
         this.roundState = RoundConfig.ERoundBoardState.start;
         this.roundStartTime = TimerHelper.now();
+        let playerroot = this.Domain.ETRoot.AsPlayer();
+        playerroot.PlayerDataComp().addMoneyRoundStart(tonumber(this.config.roundprize_gold), tonumber(this.config.roundprize_wood));
         let allenemy = this.config.unitinfo;
         for (let unit_index in allenemy) {
             this.CreateBasicEnemy(unit_index, Assert_SpawnEffect.Effect.Spawn_fall);
         }
-        this.Domain.ETRoot.AsPlayer()
-            .BuildingManager()
+        playerroot.BuildingManager()
             .getAllBuilding()
             .forEach((b) => {
                 b.RoundBuildingComp().OnBoardRound_Start();
@@ -54,7 +56,7 @@ export class ERoundBoard extends ERound {
     ProjectileInfo: IProjectileEffectInfo = Assert_ProjectileEffect.p000;
     OnBattle() {
         this.roundState = RoundConfig.ERoundBoardState.battle;
-        NetTablesHelper.SetETEntity(this,false, this.Domain.ETRoot.AsPlayer().Playerid);
+        NetTablesHelper.SetETEntity(this, false, this.Domain.ETRoot.AsPlayer().Playerid);
         this.Domain.ETRoot.AsPlayer()
             .EnemyManagerComp()
             .getAllEnemy()
@@ -92,7 +94,7 @@ export class ERoundBoard extends ERound {
             return;
         }
         this.roundState = RoundConfig.ERoundBoardState.prize;
-        NetTablesHelper.SetETEntity(this,false, this.Domain.ETRoot.AsPlayer().Playerid);
+        NetTablesHelper.SetETEntity(this, false, this.Domain.ETRoot.AsPlayer().Playerid);
         let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllEnemy();
         let isWin = aliveEnemy.length == 0;
         if (!isWin) {
@@ -137,13 +139,13 @@ export class ERoundBoard extends ERound {
             return;
         }
         this.roundState = RoundConfig.ERoundBoardState.waiting_next;
-        NetTablesHelper.SetETEntity(this,false, this.Domain.ETRoot.AsPlayer().Playerid);
+        NetTablesHelper.SetETEntity(this, false, this.Domain.ETRoot.AsPlayer().Playerid);
         this.Domain.ETRoot.AsPlayer()
-        .BuildingManager()
-        .getAllBuilding()
-        .forEach((b) => {
-            b.RoundBuildingComp().OnBoardRound_WaitingEnd();
-        });
+            .BuildingManager()
+            .getAllBuilding()
+            .forEach((b) => {
+                b.RoundBuildingComp().OnBoardRound_WaitingEnd();
+            });
         GameRules.Addon.ETRoot.RoundSystem().endBoardRound();
     }
 
@@ -154,7 +156,6 @@ export class ERoundBoard extends ERound {
     IsWaitingEnd() {
         return this.roundState == RoundConfig.ERoundBoardState.waiting_next;
     }
-
 
     ApplyDamageHero(damage: number) {
         if (damage > 0) {
@@ -194,7 +195,4 @@ export class ERoundBoard extends ERound {
             enemyManager.addEnemy(enemyName, this.configID, unit_index, pos, spawnEffect);
         }
     }
-
-
-   
 }

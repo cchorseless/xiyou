@@ -2,10 +2,13 @@
 import React, { createRef, useState } from "react";
 import { AbilityEntityRoot } from "../../game/components/Ability/AbilityEntityRoot";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { CSSHelper } from "../../helper/CSSHelper";
 import { EventHelper } from "../../helper/EventHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
+import { PathHelper } from "../../helper/PathHelper";
+import { GameEnum } from "../../libs/GameEnum";
 import { ChallengeIconItem_UI } from "./ChallengeIconItem_UI";
 export class ChallengeIconItem extends ChallengeIconItem_UI {
     // 初始化数据
@@ -44,6 +47,7 @@ export class ChallengeIconItem extends ChallengeIconItem_UI {
         this.lbl_lv.current!.text = "Lv." + Abilities.GetLevel(this.abilityindex);
         if (entity) {
             this.lbl_cost.current!.text = entity.costCount + "";
+            CSSHelper.setBgImageUrl(this.img_cost, PathHelper.getMoneyIcon(entity.costType ));
         }
         this.updateSelf();
     }

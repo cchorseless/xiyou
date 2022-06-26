@@ -2,6 +2,7 @@ import React from "react";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
+import { TipsHelper } from "../../../helper/TipsHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { GameEnum } from "../../../libs/GameEnum";
 import { MainPanel } from "../../../view/MainPanel/MainPanel";
@@ -81,6 +82,12 @@ export class PlayerComponent extends ET.Component {
                     json[k] = data[k];
                 }
                 ET.EntityEventSystem.GetEntity(instanceid)?.updateFromJson(json);
+            }
+        });
+        /**监听错误信息 */
+        NetHelper.ListenOnLua(GameEnum.CustomProtocol.push_error_message, (event) => {
+            if (event.data != null) {
+                TipsHelper.showErrorMessage(event.data);
             }
         });
     }

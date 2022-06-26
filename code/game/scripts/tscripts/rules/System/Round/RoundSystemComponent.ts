@@ -20,9 +20,12 @@ export class RoundSystemComponent extends ET.Component {
     }
     public addEvent() {
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityHurtEvent, this.OnEntityHurtEvent);
-        EventHelper.addServerEvent(this, GameEnum.Event.CustomServer.onserver_allplayer_loginfinish, () => {
-            this.runBoardRound(RoundState.GetFirstBoardRoundid());
-        });
+       
+    }
+
+    OnAllPlayerClientLoginFinish() {
+        this.runBoardRound(RoundState.GetFirstBoardRoundid());
+        
     }
 
     private OnEntityHurtEvent(events: EntityHurtEvent) {

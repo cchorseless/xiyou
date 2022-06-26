@@ -51,7 +51,6 @@ export class courier_base extends BaseNpc_Hero_Plus {
     ActiveHiddenAbility(ability: CDOTABaseAbility) {
         ability.SetActivated(true);
         ability.SetLevel(1);
-        // ability.SetHidden(true);
     }
 
     onSpawned() {

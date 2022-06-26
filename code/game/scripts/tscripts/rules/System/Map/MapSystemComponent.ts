@@ -14,10 +14,10 @@ export class MapSystemComponent extends ET.Component {
         this.addEvent();
     }
 
-    public addEvent() {
-        EventHelper.addServerEvent(this, GameEnum.Event.CustomServer.onserver_allplayer_loginfinish, () => {
-            this.CreateAllMapUnit();
-        });
+    public addEvent() {}
+
+    public OnAllPlayerClientLoginFinish() {
+        this.CreateAllMapUnit();
     }
 
     public CreateAllMapUnit() {

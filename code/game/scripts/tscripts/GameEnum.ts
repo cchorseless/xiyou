@@ -1,9 +1,5 @@
 export module GameEnum {
-
-
     export namespace Property {
-
-
         export enum PrimaryAttribute {
             DOTA_ATTRIBUTE_AGILITY,
             DOTA_ATTRIBUTE_STRENGTH,
@@ -87,7 +83,7 @@ export module GameEnum {
              * Method Name: `GetModifierMoveSpeedBonus_Percentage_Unique`
              */
             MOVESPEED_BONUS_PERCENTAGE_UNIQUE = modifierfunction.MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE_UNIQUE,
-           
+
             /**
              * Method Name: `GetModifierMoveSpeedBonus_Special_Boots`
              */
@@ -920,9 +916,7 @@ export module GameEnum {
             /**todo */
             TARGET_CRITICALSTRIKE,
             //#endregion
-
         }
-
 
         /**
          * 属性枚举函数
@@ -1720,7 +1714,6 @@ export module GameEnum {
              * Method Name: `GetModifierAttackSpeedPercentage`
              */
             ATTACKSPEED_PERCENTAGE = "GetModifierAttackSpeedPercentage",
-
         }
 
         /**保留的属性计算，自定义属性计算事件 */
@@ -1777,37 +1770,36 @@ export module GameEnum {
             GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE,
             GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE,
         ];
-
     }
 
     export namespace Unit {
         /**单位类型 */
         export enum UnitClass {
             /**饰品 */
-            dota_item_wearable = 'dota_item_wearable',
+            dota_item_wearable = "dota_item_wearable",
             /**道具 */
-            item_lua = 'item_lua',
+            item_lua = "item_lua",
             /**技能 */
-            ability_lua = 'ability_lua',
+            ability_lua = "ability_lua",
             /**生物 */
-            npc_dota_creature = 'npc_dota_creature',
+            npc_dota_creature = "npc_dota_creature",
             /**防御塔 */
-            npc_dota_tower = 'npc_dota_tower',
+            npc_dota_tower = "npc_dota_tower",
             /**出生点 */
-            info_player_start_goodguys = 'info_player_start_goodguys',
+            info_player_start_goodguys = "info_player_start_goodguys",
         }
 
         export enum UnitLabels {
             /**NPC */
-            npc = 'npc',
+            npc = "npc",
             /**采集物 */
-            collect = 'collect',
+            collect = "collect",
             /**怪物 */
-            monster = 'monster',
+            monster = "monster",
             /**红方传送点 */
-            redtp = 'redtp',
+            redtp = "redtp",
             /**红方传送点 */
-            bluetp = 'bluetp',
+            bluetp = "bluetp",
         }
         /**单位名称 */
         export enum UnitNames {
@@ -1937,17 +1929,17 @@ export module GameEnum {
             //#endregion
             //#region 自定义
             /**全局计时器 */
-            info_target = 'info_target',
+            info_target = "info_target",
             /**添加了BUFF的空实体 */
-            npc_dota_thinker = 'npc_dota_thinker',
-            npc_dota_companion = 'npc_dota_companion',
+            npc_dota_thinker = "npc_dota_thinker",
+            npc_dota_companion = "npc_dota_companion",
             /**传送点 */
-            unit_red_tp = 'unit_red_tp',
-            unit_blue_tp = 'unit_blue_tp',
+            unit_red_tp = "unit_red_tp",
+            unit_blue_tp = "unit_blue_tp",
             /**泉水 */
-            dota_fountain = 'dota_fountain',
-            npc_dota_nemestice_tower_dire = 'npc_dota_nemestice_tower_dire',
-            npc_dota_nemestice_tower_radiant = 'npc_dota_nemestice_tower_radiant'
+            dota_fountain = "dota_fountain",
+            npc_dota_nemestice_tower_dire = "npc_dota_nemestice_tower_dire",
+            npc_dota_nemestice_tower_radiant = "npc_dota_nemestice_tower_radiant",
         }
     }
 
@@ -2418,118 +2410,111 @@ export module GameEnum {
              */
             ChatMembersChangedEvent = "chat_members_changed",
             DotaTeamKillCreditEvent = "dota_team_kill_credit",
-
         }
 
         /**自定义服务器事件 */
         export enum CustomServer {
             /**所有玩家登陆完成 */
-            onserver_allplayer_loginfinish = 'onserver_allplayer_loginfinish',
+            onserver_allplayer_loginfinish = "onserver_allplayer_loginfinish",
             /**服务器完成任务 */
-            onserver_finish_task = 'onserver_finish_task',
+            onserver_finish_task = "onserver_finish_task",
             /**请求产生协作任务 */
-            onserver_create_team_task = 'onserver_create_team_task',
+            onserver_create_team_task = "onserver_create_team_task",
             /**服务器更新对局任务进度 */
-            onserver_update_game_task_jindu = 'onserver_update_game_task_jindu',
+            onserver_update_game_task_jindu = "onserver_update_game_task_jindu",
         }
         /**JS 请求 LUA 的协议 */
         export enum CustomProtocol {
             /**同步et 实体 */
-            push_sync_et_entity = 'push_sync_et_entity',
-            push_update_nettable_etentity = 'push_update_nettable_etentity',
-            push_update_nettable_partprop_etentity = 'push_update_nettable_partprop_etentity',
+            push_sync_et_entity = "push_sync_et_entity",
+            push_update_nettable_etentity = "push_update_nettable_etentity",
+            push_update_nettable_partprop_etentity = "push_update_nettable_partprop_etentity",
 
             /**推送错误信息 */
-            push_error_message = 'push_error_message',
-            push_update_minimap = 'push_update_minimap',
-            push_update_minimap_nodraw = 'push_update_minimap_nodraw',
-            req_DebugGameOver = 'req_DebugGameOver',
-            req_DebugReload = 'req_DebugReload',
+            push_error_message = "push_error_message",
+            push_update_minimap = "push_update_minimap",
+            push_update_minimap_nodraw = "push_update_minimap_nodraw",
+            req_DebugGameOver = "req_DebugGameOver",
+            req_DebugReload = "req_DebugReload",
             req_DebugRestart = "req_DebugRestart",
             req_DebugClearAll = "req_DebugClearAll",
             req_LoginGame = "req_LoginGame",
-            req_KEY_DOWN = 'req_KEY_DOWN',
-            req_KEY_UP = 'req_KEY_UP',
+            req_KEY_DOWN = "req_KEY_DOWN",
+            req_KEY_UP = "req_KEY_UP",
             /**道具位置改变 */
-            req_ITEM_SLOT_CHANGE = 'req_ITEM_SLOT_CHANGE',
+            req_ITEM_SLOT_CHANGE = "req_ITEM_SLOT_CHANGE",
             /**摄像机环绕 */
-            req_Camera_Yaw_Change = 'req_Camera_Yaw_Change',
-            req_Mouse_Event = 'req_Mouse_Event',
-            req_Mouse_Position = 'req_Mouse_Position',
-            req_Update_Setting = 'req_Update_Setting',
+            req_Camera_Yaw_Change = "req_Camera_Yaw_Change",
+            req_Mouse_Event = "req_Mouse_Event",
+            req_Mouse_Position = "req_Mouse_Position",
+            req_Update_Setting = "req_Update_Setting",
             /**添加机器人 */
-            req_addBot = 'req_addBot',
+            req_addBot = "req_addBot",
             /**获取自己身份信息 */
-            req_get_self_shen_fen_info = 'req_get_self_shen_fen_info',
+            req_get_self_shen_fen_info = "req_get_self_shen_fen_info",
             /**获取所有知道的身份信息 */
-            req_get_know_other_shen_fen_info = 'req_get_know_other_shen_fen_info',
+            req_get_know_other_shen_fen_info = "req_get_know_other_shen_fen_info",
             /**获取当前断线重连数据 */
-            req_get_current_reconnect_data = 'req_get_current_reconnect_data',
+            req_get_current_reconnect_data = "req_get_current_reconnect_data",
             /**获取回合信息 */
-            req_get_current_round_info = 'req_get_current_round_info',
+            req_get_current_round_info = "req_get_current_round_info",
             /**创建队伍 */
-            req_send_to_make_team = 'req_send_to_make_team',
-            req_send_to_make_team_finish = 'req_send_to_make_team_finish',
+            req_send_to_make_team = "req_send_to_make_team",
+            req_send_to_make_team_finish = "req_send_to_make_team_finish",
             /**提交发言顺序 */
-            req_send_to_sure_chat_turn = 'req_send_to_sure_chat_turn',
+            req_send_to_sure_chat_turn = "req_send_to_sure_chat_turn",
             /**结束本轮发言 */
-            req_end_current_player_chat = 'req_end_current_player_chat',
+            req_end_current_player_chat = "req_end_current_player_chat",
             /**投票組隊意见 */
-            req_send_to_make_team_idea = 'req_send_to_make_team_idea',
+            req_send_to_make_team_idea = "req_send_to_make_team_idea",
             /**投票組隊结果 */
-            req_send_to_make_team_idea_result = 'req_send_to_make_team_idea_result',
+            req_send_to_make_team_idea_result = "req_send_to_make_team_idea_result",
             /**投票任务意见 */
-            req_send_to_finish_task_idea = 'req_send_to_finish_task_idea',
+            req_send_to_finish_task_idea = "req_send_to_finish_task_idea",
             /**投票任务结果 */
-            req_send_to_finish_task_idea_result = 'req_send_to_finish_task_idea_result',
+            req_send_to_finish_task_idea_result = "req_send_to_finish_task_idea_result",
             /**投票任务结果 */
-            req_send_to_sync_task_record = 'req_send_to_sync_task_record',
+            req_send_to_sync_task_record = "req_send_to_sync_task_record",
             /**刺杀界面 */
-            req_send_to_goto_ci_sha = 'req_send_to_goto_ci_sha',
+            req_send_to_goto_ci_sha = "req_send_to_goto_ci_sha",
             /**游戏结果 */
-            req_send_to_game_result = 'req_send_to_game_result',
+            req_send_to_game_result = "req_send_to_game_result",
             //#region 任务系统
             /**请求所有任务 */
-            req_self_all_task = 'req_self_all_task',
+            req_self_all_task = "req_self_all_task",
 
             /**接到任务 */
-            req_new_task = 'req_new_task',
+            req_new_task = "req_new_task",
             /**更新单个任务进度 */
-            req_update_one_task = 'req_update_one_task',
+            req_update_one_task = "req_update_one_task",
             /**客户端请求完成任务 */
-            req_finish_task_from_client = 'req_finish_task_from_client',
+            req_finish_task_from_client = "req_finish_task_from_client",
             /**请求任务奖励 */
-            req_task_prize = 'req_task_prize',
+            req_task_prize = "req_task_prize",
             /**采集物采集 */
-            req_collect_entity = 'req_collect_entity',
+            req_collect_entity = "req_collect_entity",
             //#endregion
-
         }
         /**错误信息 */
         export enum ErrorCode {
             /**相同塔限制 */
-            dota_hud_error_has_same_tower = 'dota_hud_error_has_same_tower',
+            dota_hud_error_has_same_tower = "dota_hud_error_has_same_tower",
             /**人口限制 */
-            dota_hud_error_population_limit = 'dota_hud_error_population_limit',
+            dota_hud_error_population_limit = "dota_hud_error_population_limit",
 
-            dota_hud_error_only_hero_can_use = 'dota_hud_error_only_hero_can_use',
-            dota_hud_error_cant_build_at_location = 'dota_hud_error_cant_build_at_location',
+            dota_hud_error_only_hero_can_use = "dota_hud_error_only_hero_can_use",
+            dota_hud_error_cant_build_at_location = "dota_hud_error_cant_build_at_location",
         }
-
     }
 
     /**玩家行为 */
     export namespace Debugger {
-
         export enum globalData {
-            DOTA_GAMERULES_STATE_INIT = 'DOTA_GAMERULES_STATE_INIT',
-            DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD = 'DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD',
-            DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP = 'DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP',
+            DOTA_GAMERULES_STATE_INIT = "DOTA_GAMERULES_STATE_INIT",
+            DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD = "DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD",
+            DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP = "DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP",
         }
-        export enum updateData {
-
-        }
-
+        export enum updateData {}
     }
 
     export namespace Dota2 {
@@ -2657,8 +2642,7 @@ export module GameEnum {
             snapfire = "npc_dota_hero_snapfire",
             hoodwink = "npc_dota_hero_hoodwink",
             dawnbreaker = "npc_dota_hero_dawnbreaker",
-
-        };
+        }
         /**英雄ID */
         export enum enum_HeroID {
             antimage = 1,
@@ -2783,23 +2767,29 @@ export module GameEnum {
             snapfire = 128,
             hoodwink = 123,
             dawnbreaker = 135,
-
-        };
+        }
         /**dota 自带buff */
         export enum modifierName {
             /**无敌BUFF */
-            modifier_invulnerable = 'modifier_invulnerable',
+            modifier_invulnerable = "modifier_invulnerable",
             /**泉水回血 */
-            modifier_fountain_aura = 'modifier_fountain_aura',
+            modifier_fountain_aura = "modifier_fountain_aura",
             /**泉水真实视野 */
-            modifier_fountain_truesight_aura = 'modifier_fountain_truesight_aura',
+            modifier_fountain_truesight_aura = "modifier_fountain_truesight_aura",
             /**泉水被动 */
-            modifier_fountain_passive = 'modifier_fountain_passive',
+            modifier_fountain_passive = "modifier_fountain_passive",
             /**塔真实视野 */
-            modifier_tower_truesight_aura = 'modifier_tower_truesight_aura',
+            modifier_tower_truesight_aura = "modifier_tower_truesight_aura",
             /**塔增加护甲BUFF */
-            modifier_tower_aura = 'modifier_tower_aura',
+            modifier_tower_aura = "modifier_tower_aura",
         }
-
+    }
+    /**道具 */
+    export namespace Item {
+        export enum EItemIndex {
+            Gold = 1,
+            Wood = 2,
+            Food=3,
+        }
     }
 }

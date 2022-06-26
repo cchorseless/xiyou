@@ -2,8 +2,10 @@
 import React, { createRef, useState } from "react";
 import { KV_DATA } from "../../config/KvAllInterface";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
 import { RoundConfig } from "../../game/system/Round/RoundConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { EventHelper } from "../../helper/EventHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
@@ -22,27 +24,48 @@ export class TopBarPanel extends TopBarPanel_UI {
     }
     onStartUI() {
         this.onRefreshUI();
+        EventHelper.AddClientEvent(
+            PlayerScene.PlayerDataComp.updateEventName,
+            FuncHelper.Handler.create(this, () => {
+                this.setdifficulty();
+                this.setPopulation();
+                this.setGold();
+                this.setFood();
+                this.setWood();
+                this.updateSelf();
+            })
+        );
+        EventHelper.AddClientEvent(
+            ERoundBoard.name,
+            FuncHelper.Handler.create(this, (entity: ERoundBoard) => {
+                if (entity.isCurrentRound()) {
+                    this.setroundlabel();
+                    this.setroundState();
+                    this.setstartTime();
+                    this.updateSelf();
+                }
+            })
+        );
     }
-    onRefreshUI(p?: { configID: string }) {
-        this.setroundlabel();
-        this.setroundState();
+    onRefreshUI() {
         this.setdifficulty();
-        this.setstartTime();
         this.setPopulation();
         this.setGold();
         this.setFood();
         this.setWood();
+        this.setroundlabel();
+        this.setroundState();
+        this.setstartTime();
+        this.updateSelf();
     }
 
     setroundlabel() {
         this.lbl_round.current!.text = PlayerScene.RoundManagerComp.getCurrentBoardRound().config.round_show;
-        this.updateSelf();
     }
 
     setdifficulty() {
         CSSHelper.setLocalText(this.lbl_roundDes, KV_DATA.lang_config.lang_config.turn.Des);
         this.lbl_roundDes.current!.text += `[${PlayerScene.PlayerDataComp.difficulty}]`;
-        this.updateSelf();
     }
     timerid: any;
     setstartTime() {
@@ -66,20 +89,16 @@ export class TopBarPanel extends TopBarPanel_UI {
 
     setPopulation() {
         this.lbl_population.current!.text = `${PlayerScene.PlayerDataComp.population}/${PlayerScene.PlayerDataComp.populationRoof}`;
-        this.updateSelf();
     }
 
     setGold() {
-        this.lbl_gold.current!.text = "" + PlayerScene.PlayerDataComp.gold;
-        this.updateSelf();
+        this.lbl_gold.current!.text = `${PlayerScene.PlayerDataComp.gold}(+${PlayerScene.PlayerDataComp.perIntervalGold})`;
     }
     setFood() {
-        this.lbl_food.current!.text = "" + PlayerScene.PlayerDataComp.food;
-        this.updateSelf();
+        this.lbl_food.current!.text = `${PlayerScene.PlayerDataComp.food}(+${PlayerScene.PlayerDataComp.perIntervalWood})`;
     }
     setWood() {
-        this.lbl_wood.current!.text = "" + PlayerScene.PlayerDataComp.wood;
-        this.updateSelf();
+        this.lbl_wood.current!.text = `${PlayerScene.PlayerDataComp.wood}(+${PlayerScene.PlayerDataComp.perIntervalWood})`;
     }
 
     lefttimeTask: TimerHelper.TimerTask | null;

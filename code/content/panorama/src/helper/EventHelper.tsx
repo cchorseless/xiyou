@@ -22,17 +22,7 @@ export module EventHelper {
             // 通知服务器
             NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_SLOT_CHANGE, e);
         });
-        /**监听错误信息 */
-        NetHelper.ListenOnLua(
-            GameEnum.CustomProtocol.push_error_message,
-            (event) => {
-                if (event.data != null) {
-                    switch (event.data) {
-                    }
-                }
-            },
-            EventHelper
-        );
+       
     }
 
     const AllEventInfo: { [eventName: string]: [{ isonce: boolean; handler: FuncHelper.Handler }] } = {};

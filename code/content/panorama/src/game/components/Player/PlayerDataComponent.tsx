@@ -7,54 +7,22 @@ export class PlayerDataComponent extends ET.Component {
     onSerializeToEntity() {
         PlayerScene.Scene.AddOneComponent(this);
     }
-    private _populationRoof: number = 0;
-    private _population: number = 0;
-    private _gold: number = 0;
-    private _food: number = 0;
-    private _wood: number = 0;
+    startTime: string;
+    difficulty: string;
+    popuLevel: number = 0;
+    popuLevelUpCostGold: number = 0;
+    popuLevelUpCostWood: number = 0;
+    techLevel: number = 0;
+    techLevelUpCostGold: number = 0;
+    popuLevelMax: number = 10;
+    techLevelMax: number = 10;
+    perIntervalGold: number = 0;
+    perIntervalWood: number = 0;
 
-    private _difficulty: string;
-    get difficulty() {
-        return this._difficulty;
-    }
-    set difficulty(v: string) {
-        this._difficulty = v;
-        TopBarPanel.GetInstance()?.setdifficulty();
-    }
-    
-    get populationRoof() {
-        return this._populationRoof;
-    }
-    set populationRoof(v: number) {
-        this._populationRoof = v;
-        TopBarPanel.GetInstance()?.setPopulation();
-    }
-    get population() {
-        return this._population;
-    }
-    set population(v: number) {
-        this._population = v;
-        TopBarPanel.GetInstance()?.setPopulation();
-    }
-    get gold() {
-        return this._gold;
-    }
-    set gold(v: number) {
-        this._gold = v;
-        TopBarPanel.GetInstance()?.setGold();
-    }
-    get food() {
-        return this._food;
-    }
-    set food(v: number) {
-        this._food = v;
-        TopBarPanel.GetInstance()?.setFood();
-    }
-    get wood() {
-        return this._wood;
-    }
-    set wood(v: number) {
-        this._wood = v;
-        TopBarPanel.GetInstance()?.setWood();
-    }
+    public populationRoof: number = 0;
+    public population: number = 0;
+    public gold: number = 0;
+    public food: number = 0;
+    public wood: number = 0;
+  
 }

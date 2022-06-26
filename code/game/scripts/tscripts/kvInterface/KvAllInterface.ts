@@ -1,6 +1,9 @@
 // generate with PIPIXIA's kv generator 
 import { pool_config } from "./kvConfig/pool_config" 
 import { pool_group_config } from "./kvConfig/pool_group_config" 
+import { prop_config } from "./kvConfig/prop_config" 
+import { population_config } from "./kvConfig/population_config" 
+import { tech_config } from "./kvConfig/tech_config" 
 import { lang_config } from "./kvConfig/lang_config" 
 import { building_combination } from "./building/building_combination" 
 import { building_item_card } from "./building/building_item_card" 
@@ -16,6 +19,9 @@ import { building_ability_tower } from "./building/building_ability_tower"
 export interface KvAllInterface  {
 "pool_config": pool_config.OBJ_1_1,
 "pool_group_config": pool_group_config.OBJ_1_1,
+"prop_config": prop_config.OBJ_1_1,
+"population_config": population_config.OBJ_1_1,
+"tech_config": tech_config.OBJ_1_1,
 "lang_config": lang_config.OBJ_1_1,
 "building_combination": building_combination.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
@@ -32,6 +38,9 @@ export interface KvAllInterface  {
 export const KvAllPath = {
 "pool_config": "scripts/npc/kvConfig/pool_config.kv",
 "pool_group_config": "scripts/npc/kvConfig/pool_group_config.kv",
+"prop_config": "scripts/npc/kvConfig/prop_config.kv",
+"population_config": "scripts/npc/kvConfig/population_config.kv",
+"tech_config": "scripts/npc/kvConfig/tech_config.kv",
 "lang_config": "scripts/npc/kvConfig/lang_config.kv",
 "building_combination": "scripts/npc/building/building_combination.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
@@ -48,6 +57,9 @@ export const KvAllPath = {
 export interface KvServerInterface   {
 "pool_config": pool_config.OBJ_1_1,
 "pool_group_config": pool_group_config.OBJ_1_1,
+"prop_config": prop_config.OBJ_1_1,
+"population_config": population_config.OBJ_1_1,
+"tech_config": tech_config.OBJ_1_1,
 "lang_config": lang_config.OBJ_1_1,
 "building_combination": building_combination.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
@@ -64,6 +76,9 @@ export interface KvServerInterface   {
 export const KvServer = {
 "pool_config": "scripts/npc/kvConfig/pool_config.kv",
 "pool_group_config": "scripts/npc/kvConfig/pool_group_config.kv",
+"prop_config": "scripts/npc/kvConfig/prop_config.kv",
+"population_config": "scripts/npc/kvConfig/population_config.kv",
+"tech_config": "scripts/npc/kvConfig/tech_config.kv",
 "lang_config": "scripts/npc/kvConfig/lang_config.kv",
 "building_combination": "scripts/npc/building/building_combination.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
@@ -80,6 +95,9 @@ export const KvServer = {
 export interface KvClientInterface   {
 "pool_config": pool_config.OBJ_1_1,
 "pool_group_config": pool_group_config.OBJ_1_1,
+"prop_config": prop_config.OBJ_1_1,
+"population_config": population_config.OBJ_1_1,
+"tech_config": tech_config.OBJ_1_1,
 "lang_config": lang_config.OBJ_1_1,
 "building_combination": building_combination.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
@@ -96,6 +114,9 @@ export interface KvClientInterface   {
 export const KvClient = {
 "pool_config": "scripts/npc/kvConfig/pool_config.kv",
 "pool_group_config": "scripts/npc/kvConfig/pool_group_config.kv",
+"prop_config": "scripts/npc/kvConfig/prop_config.kv",
+"population_config": "scripts/npc/kvConfig/population_config.kv",
+"tech_config": "scripts/npc/kvConfig/tech_config.kv",
 "lang_config": "scripts/npc/kvConfig/lang_config.kv",
 "building_combination": "scripts/npc/building/building_combination.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",

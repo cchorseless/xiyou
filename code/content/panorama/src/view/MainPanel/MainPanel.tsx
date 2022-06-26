@@ -40,6 +40,11 @@ export class MainPanel extends MainPanel_UI {
     }
 
     onRefreshUI() {
+        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, TopBarPanel, { 
+            
+         });
+
+
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, ChallengeShopItem, {
             uiScale: "70% 70% 100%",
             marginRight: "0px",

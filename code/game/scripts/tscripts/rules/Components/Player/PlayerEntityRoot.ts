@@ -1,4 +1,5 @@
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { TCharacter } from "../../../service/account/TCharacter";
 import { ET } from "../../Entity/Entity";
@@ -29,7 +30,7 @@ export class PlayerEntityRoot extends ET.EntityRoot {
     public OnLoginFinish(): void {
         this.IsLogin = true;
         this.TCharacter()?.SyncClient();
-
+        this.PlayerDataComp().updateNetTable();
     }
     PlayerComp() {
         return this.GetComponentByName<PlayerComponent>("PlayerComponent");

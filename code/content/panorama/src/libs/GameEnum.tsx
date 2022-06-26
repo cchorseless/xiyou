@@ -574,4 +574,11 @@ export module GameEnum {
             npc_dota_thinker = "npc_dota_thinker",
         }
     }
+     /**道具 */
+     export namespace Item {
+        export enum EItemIndex {
+            Gold = 1,
+            Wood = 2,
+        }
+    }
 }

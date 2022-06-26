@@ -400,7 +400,7 @@ const all_kv_to_ts = async (singleFile = null) => {
     KvAllInterface_s += KvAllInterface_s_1 + "}\n";
     KvAllInterface_s += `export const KV_DATA  = {
         ${KvAllDATA}
-    } as Readonly<KvAllInterface>; `;
+    } as any as Readonly<KvAllInterface>; `;
     if (!fs.existsSync(KvAllInterface_UI)) fs.mkdirSync(KvAllInterface_UI);
     fs.writeFileSync(KvAllInterface_UI, Top_Str + KvAllInterface_s);
     console.log("Parse kv->UIInterface finish,", " success: ", successCount, " fail: ", errorCount);

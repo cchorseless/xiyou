@@ -13,24 +13,29 @@ export class courier_challenge_equip extends BaseAbility_Plus {
     Init() {
         if (IsServer()) {
             AbilityEntityRoot.Active(this);
-            this.updateNetTable();
         }
     }
     CastFilterResult(): UnitFilterResult {
         let caster = this.GetCasterPlus();
         if (IsServer()) {
-            let round = caster.ETRoot.AsPlayer().RoundManagerComp().getCurrentBoardRound();
+            let playerroot = caster.ETRoot.AsPlayer();
+            let round = playerroot.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
-                return UnitFilterResult.UF_SUCCESS;
+                if (playerroot.PlayerDataComp().isEnoughItem(this.costType, this.costCount)) {
+                    return UnitFilterResult.UF_SUCCESS;
+                } else {
+                    this.errorStr = "cost not enough";
+                    return UnitFilterResult.UF_FAIL_CUSTOM;
+                }
             } else {
-                this.errorStr = "not in battle";
+                this.errorStr = "not in battle stage";
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
         }
         return UnitFilterResult.UF_SUCCESS;
     }
     @serializeDomainProps()
-    costType: number = 2;
+    costType: number = GameEnum.Item.EItemIndex.Wood;
     @serializeDomainProps()
     costCount: number = 0;
     updateNetTable() {
@@ -47,6 +52,8 @@ export class courier_challenge_equip extends BaseAbility_Plus {
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
                     challengeround.OnStart();
+                    root.PlayerDataComp().changeItem(this.costType, -this.costCount);
+                    root.PlayerDataComp().updateNetTable();
                     let level = this.GetLevel();
                     if (level < this.GetMaxLevel()) {
                         this.SetLevel(level + 1);
@@ -58,6 +65,10 @@ export class courier_challenge_equip extends BaseAbility_Plus {
     }
     ProcsMagicStick() {
         return false;
+    }
+    public OnUpgrade(): void {
+        super.OnUpgrade();
+        this.updateNetTable();
     }
 
 }

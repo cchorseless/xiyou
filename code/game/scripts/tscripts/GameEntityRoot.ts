@@ -66,4 +66,10 @@ export class GameEntityRoot extends ET.EntityRoot {
     EnemySystem() {
         return this.GetComponentByName<EnemySystemComponent>("EnemySystemComponent");
     }
+
+    OnAllPlayerClientLoginFinish() {
+        this.MapSystem().OnAllPlayerClientLoginFinish();
+        this.RoundSystem().OnAllPlayerClientLoginFinish();
+        this.DrawSystem().OnAllPlayerClientLoginFinish();
+    }
 }

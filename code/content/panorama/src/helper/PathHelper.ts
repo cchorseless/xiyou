@@ -1,3 +1,5 @@
+import { GameEnum } from "../libs/GameEnum";
+
 export module PathHelper {
     export function getRaretyIndex(str: string) {
         switch (str.toUpperCase()) {
@@ -7,8 +9,18 @@ export module PathHelper {
                 return 4;
             case "SSR":
                 return 5;
-           default:
+            default:
                 return 1;
+        }
+    }
+    export function getMoneyIcon(str: number) {
+        switch (str) {
+            case GameEnum.Item.EItemIndex.Gold:
+                return `common/money.png`;
+            case GameEnum.Item.EItemIndex.Wood:
+                return `common/wood_png.png`;
+            default:
+                return "";
         }
     }
 }

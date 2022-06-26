@@ -43,9 +43,6 @@ export class PlayerSystemComponent extends ET.Component {
             return;
         }
         let playerroot = this.GetPlayer(playerid);
-        TimerHelper.addTimer(1, () => {
-            playerroot.DrawComp().DrawStartCard();
-        });
         playerroot.OnLoginFinish();
         for (let player of this.GetAllPlayer()) {
             if (!player.IsLogin) {
@@ -53,15 +50,7 @@ export class PlayerSystemComponent extends ET.Component {
             }
         }
         this.IsAllLogin = true;
-        this.OnAllPlayerClientLogin();
-    }
-
-    private OnAllPlayerClientLogin() {
-        let allPlayer = this.GetAllPlayer();
-        allPlayer.forEach((player) => {
-            NetTablesHelper.SetETEntity(player.PlayerDataComp(), false, player.Playerid);
-        });
-        EventHelper.fireServerEvent(GameEnum.Event.CustomServer.onserver_allplayer_loginfinish);
+        GameRules.Addon.ETRoot.OnAllPlayerClientLoginFinish();
     }
 
     public IsValidPlayer(playerid: PlayerID | number | string): boolean {

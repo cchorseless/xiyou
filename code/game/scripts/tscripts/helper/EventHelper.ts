@@ -297,7 +297,7 @@ export module EventHelper {
      * @param sound
      * @param playerID
      */
-    export function ErrorMessage(errorcode: GameEnum.Event.ErrorCode, ...playerID: Array<PlayerID>) {
+    export function ErrorMessage(errorcode: string, ...playerID: Array<PlayerID>) {
         if (!IsServer()) {
             return;
         }

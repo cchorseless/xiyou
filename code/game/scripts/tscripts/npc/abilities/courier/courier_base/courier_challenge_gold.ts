@@ -4,6 +4,7 @@ import { EntityHelper } from "../../../../helper/EntityHelper";
 import { KVHelper } from "../../../../helper/KVHelper";
 import { LogHelper } from "../../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../../helper/NetTablesHelper";
+import { TimerHelper } from "../../../../helper/TimerHelper";
 import { AbilityEntityRoot } from "../../../../rules/Components/Ability/AbilityEntityRoot";
 import { serializeDomainProps } from "../../../../rules/Entity/Entity";
 import { DifficultyState } from "../../../../rules/System/Difficulty/DifficultyState";
@@ -17,12 +18,11 @@ export class courier_challenge_gold extends BaseAbility_Plus {
     Init() {
         if (IsServer()) {
             AbilityEntityRoot.Active(this);
-            this.updateNetTable();
         }
     }
 
     @serializeDomainProps()
-    costType: number = 1;
+    costType: number = GameEnum.Item.EItemIndex.Gold;
     @serializeDomainProps()
     costCount: number = 0;
     updateNetTable() {
@@ -33,9 +33,15 @@ export class courier_challenge_gold extends BaseAbility_Plus {
     CastFilterResult(): UnitFilterResult {
         let caster = this.GetCasterPlus();
         if (IsServer()) {
-            let round = caster.ETRoot.AsPlayer().RoundManagerComp().getCurrentBoardRound();
+            let playerroot = caster.ETRoot.AsPlayer();
+            let round = playerroot.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
-                return UnitFilterResult.UF_SUCCESS;
+                if (playerroot.PlayerDataComp().isEnoughItem(this.costType, this.costCount)) {
+                    return UnitFilterResult.UF_SUCCESS;
+                } else {
+                    this.errorStr = "cost not enough";
+                    return UnitFilterResult.UF_FAIL_CUSTOM;
+                }
             } else {
                 this.errorStr = "not in battle stage";
                 return UnitFilterResult.UF_FAIL_CUSTOM;
@@ -54,6 +60,8 @@ export class courier_challenge_gold extends BaseAbility_Plus {
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
                     challengeround.OnStart();
+                    root.PlayerDataComp().changeItem(this.costType, -this.costCount);
+                    root.PlayerDataComp().updateNetTable();
                     let level = this.GetLevel();
                     if (level < this.GetMaxLevel()) {
                         this.SetLevel(level + 1);
@@ -65,5 +73,9 @@ export class courier_challenge_gold extends BaseAbility_Plus {
     }
     ProcsMagicStick() {
         return false;
+    }
+    public OnUpgrade(): void {
+        super.OnUpgrade();
+        this.updateNetTable();
     }
 }

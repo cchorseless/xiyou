@@ -5,4 +5,9 @@ export module PlayerConfig {
             EntityId: EntityIndex;
         }
     }
+
+    export enum EProtocol {
+        reqApplyPopuLevelUp = "reqApplyPopuLevelUp",
+        reqApplyTechLevelUp = "reqApplyTechLevelUp",
+    }
 }
