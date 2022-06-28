@@ -41,8 +41,8 @@ CSS_2_2 : Partial<VCSSStyleDeclaration>  = {"y":"117px","x":"0px","uiScaleY":"35
 CSS_2_3 : Partial<VCSSStyleDeclaration>  = {"y":"122px","x":"228px","width":"47px","height":"44px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/card/likes.png\")","backgroundSize":"100% 100%"}
 CSS_2_4 : Partial<VCSSStyleDeclaration>  = {"y":"121px","x":"277px","width":"47px","height":"44px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/card/share.png\")","backgroundSize":"100% 100%"}
 CSS_2_5 : Partial<VCSSStyleDeclaration>  = {"y":"10px","x":"34px"}
-CSS_2_6 : Partial<VCSSStyleDeclaration>  = {"y":"164px","x":"146px","width":"48px","height":"48px","backgroundImage":"url(\"file://{images}/common/money.png\")"}
-CSS_2_7 : Partial<VCSSStyleDeclaration>  = {"y":"162px","x":"7px","width":"48px","height":"48px","backgroundImage":"url(\"file://{images}/common/population_png.png\")"}
+CSS_2_6 : Partial<VCSSStyleDeclaration>  = {"y":"164px","x":"146px","width":"48px","height":"48px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/money.png\")","backgroundSize":"100% 100%"}
+CSS_2_7 : Partial<VCSSStyleDeclaration>  = {"y":"167px","x":"7px","width":"48px","height":"36px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/population_png.png\")","backgroundSize":"100% 100%"}
 CSS_2_8 : Partial<VCSSStyleDeclaration>  = {"y":"165px","x":"61px","width":"61px","height":"42px","fontWeight":"bold","fontSize":"35","color":"#ffffff"}
 CSS_2_9 : Partial<VCSSStyleDeclaration>  = {"y":"167px","x":"203px","height":"42px","fontWeight":"bold","fontSize":"35","color":"#ffffff"}
 

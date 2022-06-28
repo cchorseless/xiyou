@@ -2,7 +2,7 @@
     "x":0,
     "type":"dota2Panel",
     "selectedBox":7,
-    "selecteID":2,
+    "selecteID":4,
     "props":{"width":230,"sceneColor":"#000000","height":40},
     "nodeParent":-1,
     "label":"dota2Panel",
@@ -67,7 +67,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":0,"width":38,"ref":"this.img_rarety","height":43,"bg-repeat":"space","bg-image":"common/rarity/R.png"},
+                    "props":{"y":0,"width":38,"ref":"this.img_rarety","height":43,"bg-repeat":"no-repeat","bg-image":"common/rarity/R.png"},
                     "nodeParent":7,
                     "label":"dota2Image",
                     "isDirectory":false,
@@ -76,7 +76,8 @@
                     "compId":4,
                     "child":[
                         ]
-                }]
+                }],
+            "$HIDDEN":false
         }],
     "animations":[
         {

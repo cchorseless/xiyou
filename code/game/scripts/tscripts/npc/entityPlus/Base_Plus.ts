@@ -11,7 +11,7 @@ import { ET } from "../../rules/Entity/Entity";
 import { PrecacheHelper } from "../../helper/PrecacheHelper";
 
 export interface BaseAbility extends CDOTA_Ability_Lua {}
-export class BaseAbility implements ET.IEntityRoot{
+export class BaseAbility implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
     /**查找技能 */
     static findIn<T extends typeof BaseAbility>(this: T, target: CDOTA_BaseNPC) {
@@ -20,7 +20,7 @@ export class BaseAbility implements ET.IEntityRoot{
 }
 
 export interface BaseItem extends CDOTA_Item_Lua {}
-export class BaseItem implements ET.IEntityRoot{
+export class BaseItem implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
 }
 
@@ -493,8 +493,7 @@ export class BaseModifier {
     }
 }
 
-export interface BaseNpc extends CDOTA_BaseNPC {
-}
+export interface BaseNpc extends CDOTA_BaseNPC {}
 export class BaseNpc implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
     /**对应dota内的名字 */
@@ -563,7 +562,7 @@ export class BaseNpc implements ET.IEntityRoot {
      * 是否是真实单位
      */
     IsRealUnit?() {
-        return !(this.IsIllusion() || this.IsClone() || this.IsTempestDouble());
+        return !(this.IsIllusion() || this.IsSummoned());
     }
     /**
      * 安全销毁实体

@@ -29,7 +29,7 @@ CSS_1_0 : Partial<VCSSStyleDeclaration>  = {"y":"3px","x":"40px","width":"160px"
 CSS_1_1 : Partial<VCSSStyleDeclaration>  = {}
 CSS_2_0 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"1px","width":"40px","height":"40px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/card/card_icon/abyssal_underlord.png\")","backgroundSize":"100% 100%"}
 CSS_2_1 : Partial<VCSSStyleDeclaration>  = {"y":"5px","x":"42px","height":"30px","fontWeight":"bold","fontSize":"30","color":"#ffffff"}
-CSS_2_2 : Partial<VCSSStyleDeclaration>  = {"y":"0px","width":"38px","height":"43px","backgroundRepeat":"space","backgroundImage":"url(\"file://{images}/common/rarity/R.png\")"}
+CSS_2_2 : Partial<VCSSStyleDeclaration>  = {"y":"0px","width":"38px","height":"43px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/common/rarity/R.png\")","backgroundSize":"100% 100%"}
 
 __root___isValid:boolean = true;
 __root___attrs:PanelAttributes={};

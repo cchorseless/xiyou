@@ -62,13 +62,14 @@ export class BuildingComponent extends ET.Component {
     AddStar(n: number) {
         this.iStar += n;
         let domain = this.GetDomain<BaseNpc_Plus>();
-        let resinfo: ResHelper.IParticleInfo = {
-            resPath: "particles/prime/hero_spawn_hero_level.vpcf",
-            iAttachment: ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,
-            owner: domain,
-        };
-        let iParticleID = ResHelper.CreateParticle(resinfo);
-        ParticleManager.SetParticleControl(iParticleID, 0, domain.GetCursorPosition());
-        ParticleManager.ReleaseParticleIndex(iParticleID);
+        // "particles/generic_hero_status/hero_levelup.vpcf"
+        // "particles/units/heroes/hero_oracle/oracle_false_promise_cast_enemy.vpcf"
+        let iParticleID = ResHelper.CreateParticle(
+            new ResHelper.ParticleInfo().
+                set_resPath("particles/generic_hero_status/hero_levelup.vpcf")
+                .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW).set_owner(domain).set_validtime(3)
+        );
+        EmitSoundOn("lvl_up", domain);
+        this.updateNetTable();
     }
 }
