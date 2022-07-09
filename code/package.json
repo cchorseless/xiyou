@@ -30,6 +30,7 @@
         "dota2MainPath": "D:/Program Files (x86)/Steam/steamapps/common/dota 2 beta"
     },
     "scripts": {
+        "httpserver": "node scripts/httpserver.js",
         "postinstall": "node scripts/install.js",
         "mapBuild": "node scripts/mapBuild.js --m bigmap01",
         "launch": "node scripts/launch.js --m bigmap01",

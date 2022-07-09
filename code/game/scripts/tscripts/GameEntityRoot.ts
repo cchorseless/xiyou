@@ -13,6 +13,7 @@ import { EnemySystemComponent } from "./rules/System/Enemy/EnemySystemComponent"
 import { MapSystemComponent } from "./rules/System/Map/MapSystemComponent";
 import { PlayerSystemComponent } from "./rules/System/Player/PlayerSystemComponent";
 import { RoundSystemComponent } from "./rules/System/Round/RoundSystemComponent";
+import { WearableSystemComponent } from "./rules/System/Wearable/WearableSystemComponent";
 
 /**
  * 避免循环加载导入模块，尽量避免用.文件路径更改需要批量替换
@@ -39,6 +40,7 @@ export class GameEntityRoot extends ET.EntityRoot {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemySystemComponent>("EnemySystemComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingSystemComponent>("BuildingSystemComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationSystemComponent>("CombinationSystemComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof WearableSystemComponent>("WearableSystemComponent"));
     }
     PlayerSystem() {
         return this.GetComponentByName<PlayerSystemComponent>("PlayerSystemComponent");
@@ -66,6 +68,11 @@ export class GameEntityRoot extends ET.EntityRoot {
     EnemySystem() {
         return this.GetComponentByName<EnemySystemComponent>("EnemySystemComponent");
     }
+
+    WearableSystem() {
+        return this.GetComponentByName<WearableSystemComponent>("WearableSystemComponent");
+    }
+    
 
     OnAllPlayerClientLoginFinish() {
         this.MapSystem().OnAllPlayerClientLoginFinish();

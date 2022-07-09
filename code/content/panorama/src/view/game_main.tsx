@@ -12,7 +12,7 @@ import { BasePureComponent } from "../libs/BasePureComponent";
 import { GameEnum } from "../libs/GameEnum";
 import { Minimap_plus } from "./alldota2/minimap_plus/Minimap_plus";
 import { EntityOverHeadPanel } from "./Common/EntityOverHeadPanel";
-import { HeroDebugItem } from "./HeroPanel/HeroDebugItem";
+import { HeroDebugItem } from "./Hero/HeroDebugItem";
 import { MainPanel } from "./MainPanel/MainPanel";
 
 export class RootPanel extends BasePureComponent {

@@ -14,6 +14,7 @@ import { BuildingState } from "../../System/Building/BuildingState";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { RoundBuildingComponent } from "../Round/RoundBuildingComponent";
+import { WearableComponent } from "../Wearable/WearableComponent";
 import { BuildingComponent } from "./BuildingComponent";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
 
@@ -67,6 +68,9 @@ export class BuildingManagerComponent extends ET.Component {
         buildingroot.SetConfigId(playerID, towerID);
         domain.ETRoot.AddDomainChild(buildingroot);
         buildingroot.AddComponent(BuildingComponent, location, angle);
+        if (buildingroot.GetDotaHeroName()) {
+            buildingroot.AddComponent(WearableComponent, buildingroot.GetDotaHeroName());
+        }
         buildingroot.AddComponent(CombinationComponent);
         buildingroot.AddComponent(ChessComponent);
         buildingroot.AddComponent(RoundBuildingComponent);

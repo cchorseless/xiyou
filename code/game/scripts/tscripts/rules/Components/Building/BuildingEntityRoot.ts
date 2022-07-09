@@ -19,6 +19,10 @@ export class BuildingEntityRoot extends PlayerCreateUnitEntityRoot {
         return KVHelper.KvConfig().building_unit_tower["" + this.ConfigID];
     }
 
+    GetDotaHeroName() {
+        return this.Config().DotaHeroName
+    }
+
     updateNetTable() {
         NetTablesHelper.SetETEntity(this, false, this.Playerid);
     }

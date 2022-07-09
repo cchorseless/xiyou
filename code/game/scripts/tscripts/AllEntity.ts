@@ -32,6 +32,8 @@ import { TCharacter } from "./service/account/TCharacter";
 import { BagComponent } from "./service/bag/BagComponent";
 import { TItem } from "./service/bag/TItem";
 import { SeedRandomComponent } from "./service/account/SeedRandomComponent";
+import { WearableComponent } from "./rules/Components/Wearable/WearableComponent";
+import { WearableSystemComponent } from "./rules/System/Wearable/WearableSystemComponent";
 
 
 MapSystemComponent;
@@ -66,6 +68,8 @@ EnemyKillPrizeComponent;
 EnemyMoveComponent;
 EnemyPropsComponent;
 
+WearableComponent;
+WearableSystemComponent;
 
 // service -----------
 CharacterDataComponent;

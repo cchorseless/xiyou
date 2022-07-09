@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"dota2Panel",
-    "selectedBox":27,
-    "selecteID":26,
+    "selectedBox":1,
+    "selecteID":4,
     "props":{"width":510,"sceneColor":"#000000","height":300},
     "nodeParent":-1,
     "label":"dota2Panel",
@@ -28,7 +28,7 @@
         {
             "x":15,
             "type":"dota2Button",
-            "props":{"y":200,"x":4,"width":180,"ref":"this.btn_poplvup","onmouseactivate":"this.onbtnpop_click","height":100,"bg-repeat":"no-repeat","bg-image":"common/btn_purple.png"},
+            "props":{"y":200,"x":4,"width":180,"ref":"this.btn_poplvup","onmouseactivate":"this.onbtnpop_click","height":100,"bg-repeat":"no-repeat","bg-image":"common/btn_lvuppopu.png"},
             "nodeParent":1,
             "label":"dota2Button",
             "isOpen":false,
@@ -139,7 +139,7 @@
         {
             "x":15,
             "type":"dota2Button",
-            "props":{"y":200,"x":185,"width":180,"ref":"this.btn_teclvup","onmouseactivate":"this.onbtntec_click","height":100,"bg-repeat":"no-repeat","bg-image":"common/btn_green.png"},
+            "props":{"y":200,"x":185,"width":180,"ref":"this.btn_teclvup","onmouseactivate":"this.onbtntec_click","height":100,"bg-repeat":"no-repeat","bg-image":"common/btn_lvuptec.png"},
             "nodeParent":1,
             "label":"dota2Button",
             "isOpen":false,
@@ -225,7 +225,7 @@
         {
             "x":15,
             "type":"dota2Button",
-            "props":{"y":199,"x":365,"width":140,"ref":"this.btn_shop","onmouseactivate":"this.onbtnshop_click","height":100,"bg-repeat":"no-repeat","bg-image":"common/btn_gold.png"},
+            "props":{"y":199,"x":365,"width":140,"ref":"this.btn_shop","onmouseactivate":"this.onbtnshop_click","height":100,"bg-repeat":"no-repeat","bg-image":"common/btn_shop.png"},
             "nodeParent":1,
             "label":"dota2Button",
             "isOpen":false,

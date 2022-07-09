@@ -77,6 +77,7 @@ export interface OBJ_1_1 {
 [k:string] : OBJ_2_1 }
 export interface OBJ_2_1 {
 "CardName" :string ,
+"DotaHeroName" :string ,
 "HeroId" :string ,
 "vscripts" :string ,
 "Rarity" :string ,

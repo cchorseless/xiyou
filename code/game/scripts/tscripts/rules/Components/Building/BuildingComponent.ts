@@ -4,6 +4,8 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
+import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
@@ -31,6 +33,13 @@ export class BuildingComponent extends ET.Component {
         this.fAngle = fAngle;
         this.iStar = 1;
         this.PrimaryAttribute = GameFunc.AsAttribute(this.Domain.ETRoot.As<BuildingEntityRoot>().Config().AttributePrimary);
+        TimerHelper.addTimer(
+            2,
+            () => {
+                this.ChangeFashionEquip(1);
+            },
+            this
+        );
     }
 
     updateNetTable() {
@@ -55,6 +64,15 @@ export class BuildingComponent extends ET.Component {
         return this.iStar < BuildingConfig.MAX_STAR;
     }
 
+    ChangeFashionEquip(n: number) {
+       
+        // if (wearables.length >= 1) {
+        //     print("MODEL REMOVED, RESPAWNING HERO");
+        //     //  hero.SetRespawnPosition(hero.GetOrigin())
+        //     hero.RespawnHero(false, false, false);
+        // }
+    }
+
     /**
      * 升星
      * @param n
@@ -65,9 +83,11 @@ export class BuildingComponent extends ET.Component {
         // "particles/generic_hero_status/hero_levelup.vpcf"
         // "particles/units/heroes/hero_oracle/oracle_false_promise_cast_enemy.vpcf"
         let iParticleID = ResHelper.CreateParticle(
-            new ResHelper.ParticleInfo().
-                set_resPath("particles/generic_hero_status/hero_levelup.vpcf")
-                .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW).set_owner(domain).set_validtime(3)
+            new ResHelper.ParticleInfo()
+                .set_resPath("particles/generic_hero_status/hero_levelup.vpcf")
+                .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
+                .set_owner(domain)
+                .set_validtime(3)
         );
         EmitSoundOn("lvl_up", domain);
         this.updateNetTable();

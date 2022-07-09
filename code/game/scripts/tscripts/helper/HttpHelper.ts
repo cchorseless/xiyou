@@ -50,7 +50,7 @@ export module HttpHelper {
         if (address == null || address.length == 0) {
             return;
         }
-        LogHelper.print("http post=>", sAction, address, hParams);
+        // LogHelper.print("http post=>", sAction, address, hParams);
         let handle = CreateHTTPRequestScriptVM("POST", address + sAction);
         handle.SetHTTPRequestHeaderValue("Content-Type", "application/json;charset=uft-8");
         handle.SetHTTPRequestHeaderValue("Authorization", token);

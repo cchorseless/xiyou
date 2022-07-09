@@ -67,7 +67,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":0,"width":38,"ref":"this.img_rarety","height":43,"bg-repeat":"no-repeat","bg-image":"common/rarity/R.png"},
+                    "props":{"y":0,"width":38,"ref":"this.img_rarety","height":43,"bg-repeat":"no-repeat","bg-image":"common/rarity/rare_C.png"},
                     "nodeParent":7,
                     "label":"dota2Image",
                     "isDirectory":false,
