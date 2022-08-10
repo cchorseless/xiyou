@@ -10,6 +10,36 @@ export class ability1_alchemist_acid_spray extends BaseAbility_Plus {
     /**对应dota内的名字 */
     __IN_DOTA_NAME__ = "alchemist_acid_spray";
     /**对应dota内的数据 */
-    __IN_DOTA_DATA__: typeof Data_alchemist_acid_spray = Data_alchemist_acid_spray ;
+    __IN_DOTA_DATA__: typeof Data_alchemist_acid_spray = Data_alchemist_acid_spray;
+    
+
+    GetAbilityTextureName() {
+        return ResHelper.GetAbilityTextureReplacement(super.GetAbilityTextureName(this), this.GetCasterPlus())
+    }
+     GetCastRange(vLocation:Vector, hTarget:BaseNpc_Plus) {
+        return this.GetSpecialValueFor("radius")
+    }
+     OnToggle() {
+        let hCaster = this.GetCasterPlus()
+        if ( this.GetToggleState() ) {
+            //  hCaster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_1)
+            let iParticleID = ParticleManager.CreateParticle("particles/units/heroes/hero_alchemist/alchemist_acid_spray_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, hCaster)
+            //  ParticleManager.SetParticleControlEnt(iParticleID, 0, hCaster, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_attack3", hCaster.GetAbsOrigin(), false)
+            ParticleManager.SetParticleControl(iParticleID, 0, hCaster.GetAttachmentOrigin(hCaster.ScriptLookupAttachment("attach_attack3")))
+            ParticleManager.SetParticleControl(iParticleID, 1, hCaster.GetAbsOrigin())
+            ParticleManager.SetParticleControl(iParticleID, 2, Vector(255, 255, 255))
+            ParticleManager.ReleaseParticleIndex(iParticleID)
+    
+            hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Alchemist.AcidSpray", hCaster))
+    
+            hCaster.AddNewModifier(hCaster, this, "modifier_alchemist_1", null)
+        } else {
+            hCaster.StopSound(ResHelper.GetSoundReplacement("Hero_Alchemist.AcidSpray", hCaster))
+            hCaster.RemoveModifierByName("modifier_alchemist_1")
+        }
+    }
+     ProcsMagicStick() {
+        return false
+    }
 }
     
