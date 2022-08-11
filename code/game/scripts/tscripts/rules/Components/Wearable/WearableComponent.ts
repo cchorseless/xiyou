@@ -36,22 +36,22 @@ export class WearableComponent extends ET.Component {
                 }
             }
         }
-        TimerHelper.addTimer(5, () => {
-            this.Wear(21182);
-            // this.Wear(4336);
-            // this.Wear(4337);
-            // this.Wear(4338);
-        let domain = this.GetDomain<BaseNpc_Plus>();
-        domain.NotifyWearablesOfModelChange(true)
-        }, this)
-        TimerHelper.addTimer(10, () => {
-            this.SwitchPersona(true);
-            // this.Wear(4336);
-            // this.Wear(4337);
-            // this.Wear(4338);
-        let domain = this.GetDomain<BaseNpc_Plus>();
-        domain.NotifyWearablesOfModelChange(true)
-        },this)
+        // TimerHelper.addTimer(5, () => {
+        //     this.Wear(21182);
+        //     // this.Wear(4336);
+        //     // this.Wear(4337);
+        //     // this.Wear(4338);
+        // let domain = this.GetDomain<BaseNpc_Plus>();
+        // domain.NotifyWearablesOfModelChange(true)
+        // }, this)
+        // TimerHelper.addTimer(10, () => {
+        //     this.SwitchPersona(true);
+        //     // this.Wear(4336);
+        //     // this.Wear(4337);
+        //     // this.Wear(4338);
+        // let domain = this.GetDomain<BaseNpc_Plus>();
+        // domain.NotifyWearablesOfModelChange(true)
+        // },this)
     }
 
     FindModelEntity(modelName: string) {

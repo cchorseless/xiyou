@@ -46,7 +46,7 @@ export class ERoundBoard extends ERound {
             TimerHelper.addTimer(
                 Number(this.config.round_readytime),
                 () => {
-                    this.OnBattle();
+                    // this.OnBattle();
                 },
                 this
             );

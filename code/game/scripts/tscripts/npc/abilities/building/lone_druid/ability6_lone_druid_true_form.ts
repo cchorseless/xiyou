@@ -250,18 +250,18 @@ export class modifier_lone_druid_6_form extends BaseModifier_Plus {
         this.shard_interval = this.GetSpecialValueFor("shard_interval")
         if (IsServer()) {
             hParent.SetAttackCapability(DOTAUnitAttackCapability_t.DOTA_UNIT_CAP_MELEE_ATTACK)
-            if (!hParent.HasAbility("lone_druid_bear_entangle_custom")) {
-                let hEntangle = hParent.AddAbility("lone_druid_bear_entangle_custom")
-                if (hParent.GetStar() != hEntangle.GetLevel()) {
-                    hEntangle.SetLevel(hParent.GetStar())
-                }
-            }
-            if (!hParent.HasAbility("lone_druid_bear_demolish_custom")) {
-                let hDemolish = hParent.AddAbility("lone_druid_bear_demolish_custom")
-                if (hParent.GetStar() != hDemolish.GetLevel()) {
-                    hDemolish.SetLevel(hParent.GetStar())
-                }
-            }
+            // if (!hParent.HasAbility("lone_druid_bear_entangle_custom")) {
+            //     let hEntangle = hParent.AddAbility("lone_druid_bear_entangle_custom")
+            //     if (hParent.GetStar() != hEntangle.GetLevel()) {
+            //         hEntangle.SetLevel(hParent.GetStar())
+            //     }
+            // }
+            // if (!hParent.HasAbility("lone_druid_bear_demolish_custom")) {
+            //     let hDemolish = hParent.AddAbility("lone_druid_bear_demolish_custom")
+            //     if (hParent.GetStar() != hDemolish.GetLevel()) {
+            //         hDemolish.SetLevel(hParent.GetStar())
+            //     }
+            // }
         }
     }
 

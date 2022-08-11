@@ -304,30 +304,30 @@ export class modifier_ember_spirit_6 extends BaseModifier_Plus {
             this.Destroy()
             return
         }
-        if (hCaster.GetBuilding != null) {
-            let hbuilding = hCaster.GetBuilding()
-            let ability = params.ability as BaseAbility_Plus
-            if (params.unit != null && params.unit == hCaster && hCaster.GetUnitLabel() != "builder") {
-                if (params.ability == null || params.ability == hAbility || params.ability.IsItem() || !params.ability.ProcsMagicStick() || !params.unit.IsAlive()) {
-                    return
-                }
-                if (params.ability.GetAbilityName() == "ember_spirit_1" && hbuilding.GetStar() >= 2) {
-                    if (hAbility.Ability1) {
-                        hAbility.Ability1(ability, this.GetParentPlus())
-                    }
-                }
-                if (params.ability.GetAbilityName() == "ember_spirit_2" && hbuilding.GetStar() >= 3) {
-                    if (hAbility.Ability2) {
-                        hAbility.Ability2(ability, this.GetParentPlus())
-                    }
-                }
-                if (params.ability.GetAbilityName() == "ember_spirit_6" && hbuilding.GetStar() >= 4) {
-                    if (hAbility.Ability3) {
-                        hAbility.Ability3(ability, this.GetParentPlus())
-                    }
-                }
-            }
-        }
+        // if (hCaster.GetBuilding != null) {
+        //     let hbuilding = hCaster.GetBuilding()
+        //     let ability = params.ability as BaseAbility_Plus
+        //     if (params.unit != null && params.unit == hCaster && hCaster.GetUnitLabel() != "builder") {
+        //         if (params.ability == null || params.ability == hAbility || params.ability.IsItem() || !params.ability.ProcsMagicStick() || !params.unit.IsAlive()) {
+        //             return
+        //         }
+        //         if (params.ability.GetAbilityName() == "ember_spirit_1" && hbuilding.GetStar() >= 2) {
+        //             if (hAbility.Ability1) {
+        //                 hAbility.Ability1(ability, this.GetParentPlus())
+        //             }
+        //         }
+        //         if (params.ability.GetAbilityName() == "ember_spirit_2" && hbuilding.GetStar() >= 3) {
+        //             if (hAbility.Ability2) {
+        //                 hAbility.Ability2(ability, this.GetParentPlus())
+        //             }
+        //         }
+        //         if (params.ability.GetAbilityName() == "ember_spirit_6" && hbuilding.GetStar() >= 4) {
+        //             if (hAbility.Ability3) {
+        //                 hAbility.Ability3(ability, this.GetParentPlus())
+        //             }
+        //         }
+        //     }
+        // }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
     On_Attack(params: ModifierAttackEvent) {
@@ -457,12 +457,12 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
         if (IsServer()) {
             let bStar_5 = false
             // 客户端没有GetBuilding
-            if (hCaster.GetBuilding != null) {
-                let hbuilding = hCaster.GetBuilding()
-                if (hbuilding != null && hbuilding.GetStar() >= 5) {
-                    bStar_5 = true
-                }
-            }
+            // if (hCaster.GetBuilding != null) {
+            //     let hbuilding = hCaster.GetBuilding()
+            //     if (hbuilding != null && hbuilding.GetStar() >= 5) {
+            //         bStar_5 = true
+            //     }
+            // }
             this.duration = (hCaster.HasTalent("special_bonus_unique_ember_spirit_custom_8") && bStar_5) && hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_8") + this.GetSpecialValueFor("duration") || this.GetSpecialValueFor("duration")
             this.armor_reduction = (hCaster.HasTalent("special_bonus_unique_ember_spirit_custom") && bStar_5) && hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom") || 0
             this.SetStackCount(this.armor_reduction)
@@ -495,12 +495,12 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
         this.tick_interval = this.GetSpecialValueFor("tick_interval")
         if (IsServer()) {
             let bStar_5 = false
-            if (hCaster.GetBuilding != null) {
-                let hbuilding = hCaster.GetBuilding()
-                if (hbuilding != null && hbuilding.GetStar() >= 5) {
-                    bStar_5 = true
-                }
-            }
+            // if (hCaster.GetBuilding != null) {
+            //     let hbuilding = hCaster.GetBuilding()
+            //     if (hbuilding != null && hbuilding.GetStar() >= 5) {
+            //         bStar_5 = true
+            //     }
+            // }
             this.duration = (hCaster.HasTalent("special_bonus_unique_ember_spirit_custom_8") && bStar_5) && hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_8") + this.GetSpecialValueFor("duration") || this.GetSpecialValueFor("duration")
             this.armor_reduction = (hCaster.HasTalent("special_bonus_unique_ember_spirit_custom") && bStar_5) && hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom") || 0
             this.SetStackCount(this.armor_reduction)
@@ -590,12 +590,12 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
             return
         }
         this.bStar_5 = false
-        if (hCaster.GetBuilding != null) {
-            let hbuilding = hCaster.GetBuilding()
-            if (hbuilding != null && hbuilding.GetStar() >= 5) {
-                this.bStar_5 = true
-            }
-        }
+        // if (hCaster.GetBuilding != null) {
+        //     let hbuilding = hCaster.GetBuilding()
+        //     if (hbuilding != null && hbuilding.GetStar() >= 5) {
+        //         this.bStar_5 = true
+        //     }
+        // }
         let extra_bonus_damage = (hCaster.HasTalent("special_bonus_unique_ember_spirit_custom_3") && this.bStar_5) && hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_3") || 0
         this.radius = this.GetSpecialValueFor("radius")
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage") + extra_bonus_damage
@@ -644,12 +644,12 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
             return
         }
         this.bStar_5 = false
-        if (hCaster.GetBuilding != null) {
-            let hbuilding = hCaster.GetBuilding()
-            if (hbuilding != null && hbuilding.GetStar() >= 5) {
-                this.bStar_5 = true
-            }
-        }
+        // if (hCaster.GetBuilding != null) {
+        //     let hbuilding = hCaster.GetBuilding()
+        //     if (hbuilding != null && hbuilding.GetStar() >= 5) {
+        //         this.bStar_5 = true
+        //     }
+        // }
         if (IsServer()) {
             let extra_bonus_damage = (hCaster.HasTalent("special_bonus_unique_ember_spirit_custom_3") && this.bStar_5) && hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_3") || 0
             this.ability_4 = EntIndexToHScript(params.ability_4_entindex) as BaseAbility_Plus
@@ -817,12 +817,12 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
             return
         }
         this.bStar_5 = false
-        if (hCaster.GetBuilding != null) {
-            let hbuilding = hCaster.GetBuilding()
-            if (hbuilding != null && hbuilding.GetStar() >= 5) {
-                this.bStar_5 = true
-            }
-        }
+        // if (hCaster.GetBuilding != null) {
+        //     let hbuilding = hCaster.GetBuilding()
+        //     if (hbuilding != null && hbuilding.GetStar() >= 5) {
+        //         this.bStar_5 = true
+        //     }
+        // }
         this.radius = this.GetSpecialValueFor("radius")
         this.is_aura = (hCaster.HasTalent("special_bonus_unique_ember_spirit_custom_4") && this.bStar_5)
         this.aura_radius = this.is_aura && this.radius || 0
@@ -867,12 +867,12 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
             return
         }
         this.bStar_5 = false
-        if (hCaster.GetBuilding != null) {
-            let hbuilding = hCaster.GetBuilding()
-            if (hbuilding != null && hbuilding.GetStar() >= 5) {
-                this.bStar_5 = true
-            }
-        }
+        // if (hCaster.GetBuilding != null) {
+        //     let hbuilding = hCaster.GetBuilding()
+        //     if (hbuilding != null && hbuilding.GetStar() >= 5) {
+        //         this.bStar_5 = true
+        //     }
+        // }
         this.radius = this.GetSpecialValueFor("radius")
         this.is_aura = (hCaster.HasTalent("special_bonus_unique_ember_spirit_custom_4") && this.bStar_5)
         this.aura_radius = this.is_aura && this.radius || 0
@@ -970,12 +970,12 @@ export class modifier_ember_spirit_6_friend_ember_spirit_4 extends BaseModifier_
                 return
             }
             this.bStar_5 = false
-            if (hCaster.GetBuilding != null) {
-                let hbuilding = hCaster.GetBuilding()
-                if (hbuilding != null && hbuilding.GetStar() >= 5) {
-                    this.bStar_5 = true
-                }
-            }
+            // if (hCaster.GetBuilding != null) {
+            //     let hbuilding = hCaster.GetBuilding()
+            //     if (hbuilding != null && hbuilding.GetStar() >= 5) {
+            //         this.bStar_5 = true
+            //     }
+            // }
             let extra_bonus_attack_damage_per_agi = (hCaster.HasTalent("special_bonus_unique_ember_spirit_custom_2") && this.bStar_5) && hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_2") || 0
             this.bonus_attack_damage_per_agi = this.GetSpecialValueFor("bonus_attack_damage_per_agi") + extra_bonus_attack_damage_per_agi
             let attribute_percent = this.GetSpecialValueFor("attribute_percent")

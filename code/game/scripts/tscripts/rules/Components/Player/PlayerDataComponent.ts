@@ -12,7 +12,7 @@ export class PlayerDataComponent extends ET.Component {
     @serializeETProps()
     startTime: string;
     @serializeETProps()
-    populationRoof: number = 0;
+    populationRoof: number = 100;
     @serializeETProps()
     population: number = 0;
     @serializeETProps()
