@@ -31,7 +31,7 @@ import { CharacterDataComponent } from "./service/account/CharacterDataComponent
 import { TCharacter } from "./service/account/TCharacter";
 import { BagComponent } from "./service/bag/BagComponent";
 import { TItem } from "./service/bag/TItem";
-import { SeedRandomComponent } from "./service/account/SeedRandomComponent";
+import { SeedRandomComponent } from "./service/common/SeedRandomComponent";
 import { WearableComponent } from "./rules/Components/Wearable/WearableComponent";
 import { WearableSystemComponent } from "./rules/System/Wearable/WearableSystemComponent";
 

@@ -1,5 +1,5 @@
 import { ET, registerET } from "../../rules/Entity/Entity";
-import { TCharacter } from "./TCharacter";
+import { TCharacter } from "../account/TCharacter";
 
 @registerET()
 export class SeedRandomComponent extends ET.Component {

@@ -1,0 +1,14 @@
+import Dictionary from "../../helper/DataContainerHelper";
+import { ET, registerET } from "../../rules/Entity/Entity";
+import { TCharacter } from "../account/TCharacter";
+
+@registerET()
+export class CharacterMailComponent extends ET.Component {
+    public MaxSize: number;
+    public LastMailId: string;
+    public Mails: string[];
+
+    public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
+    onSerializeToEntity() {
+    }
+}

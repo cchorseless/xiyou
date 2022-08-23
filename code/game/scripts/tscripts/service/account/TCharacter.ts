@@ -3,7 +3,7 @@ import { TimerHelper } from "../../helper/TimerHelper";
 import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
 import { BagComponent } from "../bag/BagComponent";
 import { CharacterDataComponent } from "./CharacterDataComponent";
-import { SeedRandomComponent } from "./SeedRandomComponent";
+import { SeedRandomComponent } from "../common/SeedRandomComponent";
 
 @registerET()
 export class TCharacter extends ET.Component {
@@ -11,6 +11,12 @@ export class TCharacter extends ET.Component {
     PlayerId: string;
     @serializeETProps()
     Name: string;
+    CreateTime: string;
+    LastLoginTime: string;
+    IsFirstLoginToday: boolean;
+    IsFirstLoginWeek: boolean;
+    IsFirstLoginSeason: boolean;
+
 
     onSerializeToEntity() {
         let PlayerSystem = GameRules.Addon.ETRoot.PlayerSystem();

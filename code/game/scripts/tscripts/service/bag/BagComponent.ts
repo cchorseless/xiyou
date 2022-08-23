@@ -12,4 +12,7 @@ export class BagComponent extends ET.Component {
     }
     @serializeETProps()
     public Items: string[];
+    public MaxSize: number;
+    public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
+
 }
