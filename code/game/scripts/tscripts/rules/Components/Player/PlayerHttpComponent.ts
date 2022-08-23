@@ -40,12 +40,12 @@ export class PlayerHttpComponent extends ET.Component {
         } else {
             password = md5.sumhexa(cbmsg.Key + GameSetting.ServerKey()) + accountid;
         }
-        let cbmsg1: GameProtocol.R2C_Login = await this.PostAsync(GameProtocol.Config.LoginRealm, { Account: steamid, Password: password }, loginUrl);
+        let cbmsg1: GameProtocol.R2C_Login = await this.PostAsync(GameProtocol.Config.LoginRealm, { Account: steamid, Password: password, ServerId: 1 }, loginUrl);
         if (cbmsg1.Error == 0) {
             let _adress = cbmsg1.Address.split(":");
             this.Address = "http://" + _adress[0];
             this.Port = _adress[1];
-            let cbmsg2: GameProtocol.H2C_CommonResponse = await this.PostAsync(GameProtocol.Config.LoginGate, { UserId: cbmsg1.UserId, Key: cbmsg1.Key });
+            let cbmsg2: GameProtocol.H2C_CommonResponse = await this.PostAsync(GameProtocol.Config.LoginGate, { UserId: cbmsg1.UserId, Key: cbmsg1.Key, ServerId: 1 });
             if (cbmsg2.Error == 0) {
                 this.TOKEN = "Bearer " + cbmsg2.Message;
                 // this.StartLoopPing();
@@ -86,5 +86,5 @@ export class PlayerHttpComponent extends ET.Component {
         }
     }
 
-    public onAwake() {}
+    public onAwake() { }
 }
