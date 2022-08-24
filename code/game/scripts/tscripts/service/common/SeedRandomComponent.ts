@@ -7,9 +7,9 @@ export class SeedRandomComponent extends ET.Component {
     Seed: number;
     SeedCount: number;
     onSerializeToEntity() {
-        let character = ET.EntityEventSystem.GetEntity(this.Id + TCharacter.name) as TCharacter;
+        let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter") as TCharacter;
         if (character && character.SeedRandomComp() == null) {
-            // character.AddOneComponent(this);
+            character.AddOneComponent(this);
         }
     }
 }

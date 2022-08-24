@@ -5,7 +5,7 @@ import { TCharacter } from "../account/TCharacter";
 @registerET()
 export class BagComponent extends ET.Component {
     onSerializeToEntity() {
-        let character = ET.EntityEventSystem.GetEntity(this.Id + TCharacter.name);
+        let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
         if (character) {
             character.AddOneComponent(this);
         }

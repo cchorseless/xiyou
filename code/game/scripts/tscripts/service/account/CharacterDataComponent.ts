@@ -9,7 +9,7 @@ export class CharacterDataComponent extends ET.Component {
     @serializeETProps()
     StarStone: number;
     onSerializeToEntity() {
-        let character = ET.EntityEventSystem.GetEntity(this.Id + TCharacter.name);
+        let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
         if (character) {
             character.AddOneComponent(this);
         }

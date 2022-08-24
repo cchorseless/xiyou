@@ -48,13 +48,21 @@ export class PlayerHttpComponent extends ET.Component {
             let cbmsg2: GameProtocol.H2C_CommonResponse = await this.PostAsync(GameProtocol.Config.LoginGate, { UserId: cbmsg1.UserId, Key: cbmsg1.Key, ServerId: 1 });
             if (cbmsg2.Error == 0) {
                 this.TOKEN = "Bearer " + cbmsg2.Message;
-                // this.StartLoopPing();
                 return;
             }
         }
         LogHelper.error(`Login error => steamid:${steamid}  playerid:${playerid}`);
     }
 
+    public async GetServerZoneInfo() {
+        if (this.IsDisposed()) {
+            return;
+        }
+        let cbmsg1: GameProtocol.H2C_CommonResponse = await this.GetAsync(GameProtocol.Config.GetServerZoneInfo);
+        if (cbmsg1.Error == 0) {
+            return;
+        }
+    }
 
     public Ping() {
         if (this.IsDisposed()) {

@@ -2,6 +2,7 @@ import Dictionary from "../../helper/DataContainerHelper";
 import { ET, registerET } from "../../rules/Entity/Entity";
 import { TCharacter } from "../account/TCharacter";
 import { TServerZone } from "../serverzone/TServerZone";
+import { TSeasonRankData } from "./TSeasonRankData";
 
 @registerET()
 export class ServerZoneRankComponent extends ET.Component {
@@ -20,7 +21,7 @@ export class ServerZoneRankComponent extends ET.Component {
         }
     }
     public get ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
-    public get CurSeasonRank(): TSeasonRankData {
+    public get CurSeasonRank() {
         if (this.SeasonRankData.containsKey(this.SeasonConfigId)) {
             return this.GetChild<TSeasonRankData>(this.SeasonRankData.get(this.SeasonConfigId));
         }
@@ -29,5 +30,9 @@ export class ServerZoneRankComponent extends ET.Component {
 
 
     onSerializeToEntity() {
+        let serverzone = ET.EntityEventSystem.GetEntity(this.Id + "TServerZone");
+        if (serverzone) {
+            serverzone.AddOneComponent(this);
+        }
     }
 }

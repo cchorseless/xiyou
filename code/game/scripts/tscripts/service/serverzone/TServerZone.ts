@@ -7,12 +7,14 @@ import { ServerZoneShopComponent } from "../shop/ServerZoneShopComponent";
 
 
 @registerET()
-export class TServerZone extends ET.Entity {
+export class TServerZone extends ET.Component {
     public ServerName: string;
     public ZoneID: number;
     public ServerID: number;
     public CreateTime: string;
-
+    onSerializeToEntity() {
+        GameRules.Addon.ETRoot.AddOneComponent(this);
+    }
     public get SeasonComp() { return this.GetComponentByName<ServerZoneSeasonComponent>("ServerZoneSeasonComponent"); }
     public get ShopComp() { return this.GetComponentByName<ServerZoneShopComponent>("ServerZoneShopComponent"); }
     public get ActivityComp() { return this.GetComponentByName<ServerZoneActivityComponent>("ServerZoneActivityComponent"); }

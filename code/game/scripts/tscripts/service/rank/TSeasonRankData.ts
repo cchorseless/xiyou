@@ -2,7 +2,7 @@ import Dictionary from "../../helper/DataContainerHelper";
 import { ET, registerET } from "../../rules/Entity/Entity";
 
 @registerET()
-export class TRankCommon extends ET.Entity {
+export class TSeasonRankData extends ET.Entity {
     public SeasonConfigId: number;
     private _Ranks: Dictionary<string, string> = new Dictionary<
         string,

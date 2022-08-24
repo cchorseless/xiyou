@@ -19,9 +19,9 @@ export class CharacterAchievementComponent extends ET.Component {
     }
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {
-        let character = ET.EntityEventSystem.GetEntity(this.Id + TCharacter.name) as TCharacter;
-        if (character && character.SeedRandomComp() == null) {
-            // character.AddOneComponent(this);
+        let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
+        if (character) {
+            character.AddOneComponent(this);
         }
     }
 }

@@ -19,5 +19,9 @@ export class ServerZoneBuffComponent extends ET.Component {
     }
     public get ServerZone() { return this.GetParent<TServerZone>(); }
     onSerializeToEntity() {
+        let serverzone = ET.EntityEventSystem.GetEntity(this.Id + "TServerZone");
+        if (serverzone) {
+            serverzone.AddOneComponent(this);
+        }
     }
 }
