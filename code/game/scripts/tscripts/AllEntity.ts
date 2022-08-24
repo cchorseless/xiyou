@@ -27,92 +27,49 @@ import { RoundManagerComponent } from "./rules/Components/Round/RoundManagerComp
 import { PlayerDataComponent } from "./rules/Components/Player/PlayerDataComponent";
 import { RoundBuildingComponent } from "./rules/Components/Round/RoundBuildingComponent";
 import { RoundPrizeUnitKillPrizeComponent } from "./rules/Components/Round/RoundPrizeUnitKillPrizeComponent";
-import { CharacterDataComponent } from "./service/account/CharacterDataComponent";
-import { TCharacter } from "./service/account/TCharacter";
-import { BagComponent } from "./service/bag/BagComponent";
-import { TItem } from "./service/bag/TItem";
-import { SeedRandomComponent } from "./service/common/SeedRandomComponent";
 import { WearableComponent } from "./rules/Components/Wearable/WearableComponent";
 import { WearableSystemComponent } from "./rules/System/Wearable/WearableSystemComponent";
-import { CharacterInGameDataComponent } from "./service/account/CharacterInGameDataComponent";
-import { CharacterSteamComponent } from "./service/account/CharacterSteamComponent";
-import { CharacterSteamDigestItem } from "./service/account/CharacterSteamDigestItem";
-import { CharacterAchievementComponent } from "./service/achievement/CharacterAchievementComponent";
-import { TCharacterAchievementItem } from "./service/achievement/TCharacterAchievementItem";
-import { CharacterActivityComponent } from "./service/activity/CharacterActivityComponent";
-import { ServerZoneActivityComponent } from "./service/activity/ServerZoneActivityComponent";
-import { TActivity } from "./service/activity/TActivity";
-import { TActivityBattlePass } from "./service/activity/TActivityBattlePass";
-import { TActivityBattlePassData } from "./service/activity/TActivityBattlePassData";
-import { TActivityDailyOnlinePrize } from "./service/activity/TActivityDailyOnlinePrize";
-import { TActivityDailyOnlinePrizeData } from "./service/activity/TActivityDailyOnlinePrizeData";
-import { TActivityData } from "./service/activity/TActivityData";
-import { TActivityGiftCommond } from "./service/activity/TActivityGiftCommond";
+import { ServiceEntity } from "./service/ServiceEntity";
 
+[
+    MapSystemComponent,
+    RoundSystemComponent,
+    PlayerSystemComponent,
+    EnemySystemComponent,
+    CombinationSystemComponent,
+    ChessControlSystemComponent,
+    BuildingSystemComponent,
+    DrawSystemComponent,
 
-MapSystemComponent;
-RoundSystemComponent;
-PlayerSystemComponent;
-EnemySystemComponent;
-CombinationSystemComponent;
-ChessControlSystemComponent;
-BuildingSystemComponent;
-DrawSystemComponent;
+    PlayerComponent,
+    PlayerDataComponent,
+    PlayerHttpComponent,
+    DrawComponent,
+    RoundManagerComponent,
+    RoundEnemyComponent,
+    RoundBuildingComponent,
+    RoundPrizeUnitKillPrizeComponent,
+    CombinationManagerComponent,
+    BuildingManagerComponent,
+    ChessControlComponent,
+    EnemyManagerComponent,
 
-PlayerComponent;
-PlayerDataComponent;
-PlayerHttpComponent;
-DrawComponent;
-RoundManagerComponent;
-RoundEnemyComponent;
-RoundBuildingComponent;
-RoundPrizeUnitKillPrizeComponent;
-CombinationManagerComponent;
-BuildingManagerComponent;
-ChessControlComponent;
-EnemyManagerComponent;
+    BuildingComponent,
+    BuildingPropsComponent,
+    CombinationComponent,
+    ChessComponent,
 
-BuildingComponent;
-BuildingPropsComponent;
-CombinationComponent;
-ChessComponent;
+    EnemyUnitComponent,
+    EnemyKillPrizeComponent,
+    EnemyMoveComponent,
+    EnemyPropsComponent,
 
-EnemyUnitComponent;
-EnemyKillPrizeComponent;
-EnemyMoveComponent;
-EnemyPropsComponent;
-
-WearableComponent;
-WearableSystemComponent;
-
-// service -----------
-CharacterDataComponent;
-CharacterInGameDataComponent;
-CharacterSteamComponent;
-CharacterSteamDigestItem;
-TCharacter;
-
-CharacterAchievementComponent;
-TCharacterAchievementItem;
-
-CharacterActivityComponent;
-ServerZoneActivityComponent;
-TActivity;
-TActivityBattlePass;
-TActivityBattlePassData;
-TActivityDailyOnlinePrize;
-TActivityDailyOnlinePrizeData;
-TActivityData;
-TActivityGiftCommond;
-
-
-
-SeedRandomComponent;
-BagComponent;
-TItem;
-
+    WearableComponent,
+    WearableSystemComponent,
+];
 export class AllEntity {
     static init() {
+        ServiceEntity.init();
         LogHelper.print("register all entity");
     }
 }

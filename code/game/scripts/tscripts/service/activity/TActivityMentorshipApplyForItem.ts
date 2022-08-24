@@ -2,7 +2,7 @@ import { ET, registerET } from "../../rules/Entity/Entity";
 import { TActivityMemberShipData } from "./TActivityMemberShipData";
 
 @registerET()
-export class TActivityMentorshipPrizeItem extends ET.Entity {
+export class TActivityMentorshipApplyForItem extends ET.Entity {
     public ConfigId: number;
     public Progress: number;
     public IsAchieve: boolean;
