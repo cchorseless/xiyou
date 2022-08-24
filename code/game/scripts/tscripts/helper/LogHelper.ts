@@ -100,7 +100,7 @@ export class LogHelper {
         else if (IsClient()) {
             where_str = '<IsClient>'
         }
-        let r2 = ["[" + r_s + where_str + "] WARN:"];
+        let r2 = ["[" + r_s + where_str + "] ERROR:"];
         let r3 = r2.concat(args);
         print(...r3);
     }

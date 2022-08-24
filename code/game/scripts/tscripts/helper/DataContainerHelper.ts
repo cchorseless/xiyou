@@ -15,7 +15,7 @@ export class List<T> extends Array<T> {
     }
 
     remove(value: T): void {
-        var index: number = this.indexOf(value);
+        let index: number = this.indexOf(value);
         this.removeAt(index);
     }
 
@@ -37,8 +37,8 @@ export class List<T> extends Array<T> {
 
     foreach(callback: Function): void {
         this._breaking = false;
-        var sum = this.length;
-        for (var i = 0; i < sum; i++) {
+        let sum = this.length;
+        for (let i = 0; i < sum; i++) {
             if (this._breaking) {
                 break;
             }
@@ -52,7 +52,7 @@ export class List<T> extends Array<T> {
     }
 
     toArray(): T[] {
-        var array: T[] = [];
+        let array: T[] = [];
         this.forEach(element => {
             array.push(element);
         });
@@ -90,7 +90,7 @@ export default class Dictionary<K, V> extends Object {
     }
 
     public remove(key: K): void {
-        var index = this._keys.indexOf(key, 0);
+        let index = this._keys.indexOf(key, 0);
         if (index !== -1) {
             this._keys.splice(index, 1);
             this._values.splice(index, 1);
@@ -141,8 +141,8 @@ export default class Dictionary<K, V> extends Object {
 
     public forEach(callback: (k: K, v: V) => void): void {
         this._breaking = false;
-        var sum = this._keys.length;
-        for (var i = 0; i < sum; i++) {
+        let sum = this._keys.length;
+        for (let i = 0; i < sum; i++) {
             if (this._breaking) {
                 break;
             }
@@ -156,7 +156,7 @@ export default class Dictionary<K, V> extends Object {
     }
 
     public toObject(): Object {
-        var obj: any = {};
+        let obj: any = {};
         this.forEach((k, v) => {
             obj[k] = v;
         });

@@ -1,4 +1,5 @@
 import { ET, registerET } from "../../rules/Entity/Entity";
+import { CharacterBuffComponent } from "../buff/CharacterBuffComponent";
 
 @registerET()
 export class THeroUnit extends ET.Entity {

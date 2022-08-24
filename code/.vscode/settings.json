@@ -1,11 +1,2 @@
 {
-    "files.exclude": {
-        "**/**.gameevents": true,
-        "**/**.json": true,
-        "**/**.txt": true,
-        "**/content": true,
-        "**/excels": true,
-        "**/game/scripts/npc": true,
-        "**/localization": true
-    }
 }

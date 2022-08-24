@@ -34,6 +34,20 @@ import { TItem } from "./service/bag/TItem";
 import { SeedRandomComponent } from "./service/common/SeedRandomComponent";
 import { WearableComponent } from "./rules/Components/Wearable/WearableComponent";
 import { WearableSystemComponent } from "./rules/System/Wearable/WearableSystemComponent";
+import { CharacterInGameDataComponent } from "./service/account/CharacterInGameDataComponent";
+import { CharacterSteamComponent } from "./service/account/CharacterSteamComponent";
+import { CharacterSteamDigestItem } from "./service/account/CharacterSteamDigestItem";
+import { CharacterAchievementComponent } from "./service/achievement/CharacterAchievementComponent";
+import { TCharacterAchievementItem } from "./service/achievement/TCharacterAchievementItem";
+import { CharacterActivityComponent } from "./service/activity/CharacterActivityComponent";
+import { ServerZoneActivityComponent } from "./service/activity/ServerZoneActivityComponent";
+import { TActivity } from "./service/activity/TActivity";
+import { TActivityBattlePass } from "./service/activity/TActivityBattlePass";
+import { TActivityBattlePassData } from "./service/activity/TActivityBattlePassData";
+import { TActivityDailyOnlinePrize } from "./service/activity/TActivityDailyOnlinePrize";
+import { TActivityDailyOnlinePrizeData } from "./service/activity/TActivityDailyOnlinePrizeData";
+import { TActivityData } from "./service/activity/TActivityData";
+import { TActivityGiftCommond } from "./service/activity/TActivityGiftCommond";
 
 
 MapSystemComponent;
@@ -73,8 +87,27 @@ WearableSystemComponent;
 
 // service -----------
 CharacterDataComponent;
-SeedRandomComponent;
+CharacterInGameDataComponent;
+CharacterSteamComponent;
+CharacterSteamDigestItem;
 TCharacter;
+
+CharacterAchievementComponent;
+TCharacterAchievementItem;
+
+CharacterActivityComponent;
+ServerZoneActivityComponent;
+TActivity;
+TActivityBattlePass;
+TActivityBattlePassData;
+TActivityDailyOnlinePrize;
+TActivityDailyOnlinePrizeData;
+TActivityData;
+TActivityGiftCommond;
+
+
+
+SeedRandomComponent;
 BagComponent;
 TItem;
 
