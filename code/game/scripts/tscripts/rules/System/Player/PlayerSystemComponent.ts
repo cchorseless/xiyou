@@ -25,7 +25,7 @@ export class PlayerSystemComponent extends ET.Component {
             switch (nNewState) {
                 // -- 游戏初始化
                 case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
-                    this.CreateAllPlayer();
+                    this.CreateAndLoginAllPlayer();
                     break;
             }
         });
@@ -65,7 +65,7 @@ export class PlayerSystemComponent extends ET.Component {
         return Object.values(this.AllPlayer);
     }
 
-    public CreateAllPlayer() {
+    public CreateAndLoginAllPlayer() {
         let allPlayer = this.GetAllPlayerid();
         allPlayer.forEach(async (playerid) => {
             let playerRoot = new PlayerEntityRoot();
