@@ -20,12 +20,12 @@ export class PlayerSystemComponent extends ET.Component {
     }
 
     private addEvent() {
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, (e) => {
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, async (e) => {
             const nNewState = GameRules.State_Get();
             switch (nNewState) {
                 // -- 游戏初始化
                 case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
-                    this.CreateAndLoginAllPlayer();
+                    await this.CreateAllPlayer();
                     break;
             }
         });
@@ -65,16 +65,17 @@ export class PlayerSystemComponent extends ET.Component {
         return Object.values(this.AllPlayer);
     }
 
-    public CreateAndLoginAllPlayer() {
+    public async CreateAllPlayer() {
         let allPlayer = this.GetAllPlayerid();
-        allPlayer.forEach(async (playerid) => {
+        for (let playerid of allPlayer) {
             let playerRoot = new PlayerEntityRoot();
             (playerRoot as any).Playerid = playerid;
             this.AllPlayer[playerid + ""] = playerRoot;
             let playerhttp = playerRoot.AddPreAwakeComponent(PrecacheHelper.GetRegClass<typeof PlayerHttpComponent>("PlayerHttpComponent"));
             LogHelper.print(playerRoot.PreAwakeArgs == null, playerRoot.Id);
             await playerhttp.PlayerLogin(playerid);
-        });
+        }
+
     }
 
     /**

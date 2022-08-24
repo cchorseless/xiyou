@@ -14,6 +14,7 @@ import { MapSystemComponent } from "./rules/System/Map/MapSystemComponent";
 import { PlayerSystemComponent } from "./rules/System/Player/PlayerSystemComponent";
 import { RoundSystemComponent } from "./rules/System/Round/RoundSystemComponent";
 import { WearableSystemComponent } from "./rules/System/Wearable/WearableSystemComponent";
+import { TServerZone } from "./service/serverzone/TServerZone";
 
 /**
  * 避免循环加载导入模块，尽量避免用.文件路径更改需要批量替换
@@ -42,6 +43,10 @@ export class GameEntityRoot extends ET.EntityRoot {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationSystemComponent>("CombinationSystemComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof WearableSystemComponent>("WearableSystemComponent"));
     }
+    TServerZone() {
+        return this.GetComponentByName<TServerZone>("TServerZone");
+    }
+
     PlayerSystem() {
         return this.GetComponentByName<PlayerSystemComponent>("PlayerSystemComponent");
     }
@@ -72,7 +77,8 @@ export class GameEntityRoot extends ET.EntityRoot {
     WearableSystem() {
         return this.GetComponentByName<WearableSystemComponent>("WearableSystemComponent");
     }
-    
+
+
 
     OnAllPlayerClientLoginFinish() {
         this.MapSystem().OnAllPlayerClientLoginFinish();
