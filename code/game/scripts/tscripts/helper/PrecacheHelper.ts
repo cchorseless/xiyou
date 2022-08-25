@@ -43,7 +43,6 @@ export class PrecacheHelper {
         }
         return r as T;
     }
-
     public static init(context: CScriptPrecacheContext) {
         // 初始化KV文件
         PrecacheHelper.initKVFile();
@@ -55,6 +54,8 @@ export class PrecacheHelper {
         PrecacheHelper.precachAllItems();
         // 加载单位
         PrecacheHelper.precachAllUnits();
+        // 加载Kv
+        PrecacheHelper.precachResByKV(context);
     }
 
     /**
@@ -130,14 +131,19 @@ export class PrecacheHelper {
      * 处理KV实体的资源加载
      * @param entityKeyValues
      */
-    public static precachResByKV(entityKeyValues: CScriptKeyValues, context: CScriptPrecacheContext ) {
-        // 加载粒子
-        for (let k in PrecacheHelper.KVfile_Key) {
-            let v = (PrecacheHelper.KVfile_Key as any)[k];
-            let res_particle = entityKeyValues.GetValue(k);
-            if (res_particle && typeof res_particle == "string") {
-                PrecacheHelper.precachRes(v, res_particle, context);
+    public static precachResByKV(context: CScriptPrecacheContext) {
+        [KVHelper.KvServerConfig.building_unit_tower, KVHelper.KvServerConfig.building_unit_enemy].forEach((v: any) => {
+            for (let unitName in v) {
+                let entityKeyValues = v[unitName];
+                // 加载粒子
+                for (let k in PrecacheHelper.KVfile_Key) {
+                    let v = (PrecacheHelper.KVfile_Key as any)[k];
+                    let resUrl = entityKeyValues[k];
+                    if (resUrl && typeof resUrl == "string") {
+                        PrecacheHelper.precachRes(v, resUrl, context);
+                    }
+                }
             }
-        }
+        });
     }
 }
