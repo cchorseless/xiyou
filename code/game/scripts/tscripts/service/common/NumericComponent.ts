@@ -17,6 +17,20 @@ export class NumericComponent extends ET.Component {
         }
     }
 
+    public GetAsInt(numericType: number) {
+        let v = this.NumericDic.get(numericType);
+        if (v != null) {
+            return parseInt(v);
+        }
+        return 0
+    }
+    public GetAsFloat(numericType: number) {
+        let v = this.NumericDic.get(numericType);
+        if (v != null) {
+            return parseFloat(v);
+        }
+        return 0.0
+    }
     onSerializeToEntity() {
     }
 }

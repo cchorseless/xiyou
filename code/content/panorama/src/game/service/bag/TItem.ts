@@ -1,4 +1,5 @@
 import { ET, registerET } from "../../../libs/Entity";
+import { BagComponent } from "./BagComponent";
 
 @registerET()
 export class TItem extends ET.Entity {
@@ -14,4 +15,8 @@ export class TItem extends ET.Entity {
     /// 是否锁定
     /// </summary>
     public IsLock: boolean;
+    public IsValid: boolean;
+
+    public get BagComp(): BagComponent { return this.GetParent<BagComponent>(); }
+
 }

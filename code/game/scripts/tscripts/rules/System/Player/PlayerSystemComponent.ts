@@ -1,7 +1,6 @@
 import { GameEnum } from "../../../GameEnum";
 import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";

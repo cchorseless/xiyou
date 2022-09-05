@@ -15,28 +15,28 @@ export class PlayerScene {
         return ET.SceneRoot.GetInstance();
     }
     static get DrawComp() {
-        return this.Scene.GetComponentByName<typeof DrawComponent>("DrawComponent")!;
+        return this.Scene.GetComponentByName<DrawComponent>("DrawComponent")!;
     }
 
     static get PlayerComp() {
-        return this.Scene.GetComponentByName<typeof PlayerHeroComponent>("PlayerHeroComponent")!;
+        return this.Scene.GetComponentByName<PlayerHeroComponent>("PlayerHeroComponent")!;
     }
     static get PlayerDataComp() {
-        return this.Scene.GetComponentByName<typeof PlayerDataComponent>("PlayerDataComponent")!;
+        return this.Scene.GetComponentByName<PlayerDataComponent>("PlayerDataComponent")!;
     }
     static get PlayerEntityRootComp() {
-        return this.Scene.GetComponentByName<typeof PlayerEntityRootComponent>("PlayerEntityRootComponent")!;
+        return this.Scene.GetComponentByName<PlayerEntityRootComponent>("PlayerEntityRootComponent")!;
     }
 
     static get ChessControlComp() {
-        return this.Scene.GetComponentByName<typeof ChessControlComponent>("ChessControlComponent")!;
+        return this.Scene.GetComponentByName<ChessControlComponent>("ChessControlComponent")!;
     }
 
     static get RoundManagerComp() {
-        return this.Scene.GetComponentByName<typeof RoundManagerComponent>("RoundManagerComponent")!;
+        return this.Scene.GetComponentByName<RoundManagerComponent>("RoundManagerComponent")!;
     }
     static get TCharacter() {
-        return this.Scene.GetComponentByName<typeof TCharacter>("TCharacter")!;
+        return this.Scene.GetComponentByName<TCharacter>("TCharacter")!;
     }
 
 

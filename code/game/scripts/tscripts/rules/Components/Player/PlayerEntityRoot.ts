@@ -62,7 +62,6 @@ export class PlayerEntityRoot extends ET.EntityRoot {
         }
     }
 
-
     PlayerDataComp() {
         return this.GetComponentByName<PlayerDataComponent>("PlayerDataComponent");
     }

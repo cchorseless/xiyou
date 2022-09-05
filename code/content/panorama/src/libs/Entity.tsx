@@ -455,11 +455,11 @@ export module ET {
             }
             return this.Components[type.name] as InstanceType<K>;
         }
-        public GetComponentByName<K extends typeof Component>(str: string) {
+        public GetComponentByName<K extends Component>(str: string) {
             if (this.Components == null) {
                 return null;
             }
-            return this.Components[str] as InstanceType<K>;
+            return this.Components[str] as K;
         }
         public static Create<K extends typeof Entity>(type: K) {
             let component = new type();

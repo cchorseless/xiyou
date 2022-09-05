@@ -16,6 +16,6 @@ export class EnemyUnitEntityRoot extends ET.Entity implements PlayerConfig.I.INe
         PlayerScene.PlayerEntityRootComp.removeEnemy(this);
     }
     get EnemyUnitComp() {
-        return this.GetComponentByName<typeof EnemyUnitComponent>("EnemyUnitComponent");
+        return this.GetComponentByName<EnemyUnitComponent>("EnemyUnitComponent");
     }
 }

@@ -21,6 +21,6 @@ export class BuildingEntityRoot extends ET.Entity implements PlayerConfig.I.INet
         PlayerScene.PlayerEntityRootComp.removeBuilding(this);
     }
     get BuildingComp() {
-        return this.GetComponentByName<typeof BuildingComponent>("BuildingComponent");
+        return this.GetComponentByName<BuildingComponent>("BuildingComponent");
     }
 }
