@@ -1,12 +1,12 @@
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { PlayerConfig } from "../../System/Player/PlayerConfig";
 import { PlayerDataComponent } from "./PlayerDataComponent";
+import { PlayerScene } from "./PlayerScene";
 
 /**玩家组件 */
 @registerET()
-export class PlayerComponent extends ET.Component {
+export class PlayerHeroComponent extends ET.Component {
     /**出生点 */
     firstSpawnPoint: Vector;
     /**玩家物品信息 */
@@ -14,11 +14,11 @@ export class PlayerComponent extends ET.Component {
     readonly playerColor: Vector;
 
     onAwake() {
-        let domain = this.GetDomain<BaseNpc_Hero_Plus>();
+        let domain = this.GetDomain<PlayerScene>();
+        let hero = domain.ETRoot.Hero;
         (this as any).playerColor = PlayerConfig.playerColor[domain.ETRoot.AsPlayer().Playerid];
-        this.firstSpawnPoint = domain.GetAbsOrigin();
-        domain.ETRoot.AddComponent(PlayerDataComponent);
-        modifier_wait_portal.applyOnly(domain, domain);
+        this.firstSpawnPoint = hero.GetAbsOrigin();
+        modifier_wait_portal.applyOnly(hero, hero);
     }
 
     /**
@@ -56,7 +56,7 @@ export class PlayerComponent extends ET.Component {
      * @returns
      */
     GetItemCount(itemname: string): number {
-        let hero = this.GetDomain<BaseNpc_Hero_Plus>();
+        let hero = this.GetDomain<PlayerScene>().ETRoot.Hero;
         let r = 0;
         for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM; i++) {
             let item = hero.GetItemInSlot(i);

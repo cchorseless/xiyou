@@ -1,5 +1,4 @@
 import { KVHelper } from "../../../helper/KVHelper";
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ECombination } from "./ECombination";

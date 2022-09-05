@@ -1,6 +1,5 @@
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, serializeETProps } from "../../Entity/Entity";
 
@@ -32,8 +31,8 @@ export class PlayerCreateUnitEntityRoot extends ET.EntityRoot {
     }
 
     public GetDistance2Player() {
-        let playerorgin = this.GetPlayer().GetDomain<BaseNpc_Hero_Plus>().GetAbsOrigin();
-        let selfv = this.GetDomain<BaseNpc_Hero_Plus>().GetAbsOrigin();
+        let playerorgin = this.GetPlayer().Hero.GetAbsOrigin();
+        let selfv = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
         return ((playerorgin - selfv) as Vector).Length2D();
     }
 }

@@ -13,6 +13,10 @@ export class CharacterMailComponent extends ET.Component {
         let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
         if (character) {
             character.AddOneComponent(this);
+            this.onReload();
         }
+    }
+    onReload() {
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this);
     }
 }

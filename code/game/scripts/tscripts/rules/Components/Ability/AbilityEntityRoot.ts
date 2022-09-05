@@ -6,7 +6,7 @@ export class AbilityEntityRoot extends ET.EntityRoot {
     @serializeETProps()
     readonly EntityId: EntityIndex;
 
-    OnActive() {
+    onAwake() {
         let domain = this.GetDomain<BaseAbility_Plus>();
         (this as any).EntityId = domain.GetEntityIndex();
     }

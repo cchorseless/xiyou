@@ -18,6 +18,7 @@ import { CharacterAchievementComponent } from "../achievement/CharacterAchieveme
 
 @registerET()
 export class TCharacter extends ET.Component {
+    // 玩家服务器playerId,并非游戏内
     @serializeETProps()
     PlayerId: string;
     @serializeETProps()
@@ -35,29 +36,15 @@ export class TCharacter extends ET.Component {
         for (let playerid of allplayerid) {
             if (this.Name == PlayerSystem.GetSteamID(playerid)) {
                 PlayerSystem.GetPlayer(playerid).AddOneComponent(this);
-                this.SyncClient();
+                this.onReload();
                 return;
             }
         }
     }
-
-    SyncClient() {
-        let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
-        let PlayerSystem = GameRules.Addon.ETRoot.PlayerSystem();
-        if (!PlayerSystem.GetPlayer(playerid).IsLogin) {
-            return;
-        }
-        TimerHelper.addTimer(
-            0.1,
-            () => {
-                NetTablesHelper.SetETEntity(this, true, playerid);
-                NetTablesHelper.SetETEntity(this.BagComp(), false, playerid);
-                NetTablesHelper.SetETEntity(this.DataComp(), false, playerid);
-                // NetTablesHelper.SetETEntity(this.SeedRandomComp(), false, playerid);
-            },
-            this
-        );
+    onReload(): void {
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this, true)
     }
+
     SeedRandomComp() {
         return this.GetComponentByName<SeedRandomComponent>("SeedRandomComponent");
     }

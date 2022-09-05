@@ -9,8 +9,6 @@ import { registerUnit } from "../entityPlus/Base_Plus";
 import { MiniMapHelper } from "../../helper/MiniMapHelper";
 import { ET } from "../../rules/Entity/Entity";
 import { ControlComponent } from "../../rules/Components/Control/ControlComponent";
-import { PlayerComponent } from "../../rules/Components/Player/PlayerComponent";
-import { EnemyManagerComponent } from "../../rules/Components/Enemy/EnemyManagerComponent";
 import { RoundManagerComponent } from "../../rules/Components/Round/RoundManagerComponent";
 import { CombinationManagerComponent } from "../../rules/Components/Combination/CombinationManagerComponent";
 import { PlayerState } from "../../rules/System/Player/PlayerState";
@@ -61,7 +59,7 @@ export class courier_base extends BaseNpc_Hero_Plus {
         if (!this.IsValidHero()) {
             return;
         }
-        GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.GetPlayerID()).Active(this);
+        GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.GetPlayerID()).BindHero(this);
         // 延遲1帧
         TimerHelper.addFrameTimer(1, () => {
             let playerid = this.GetPlayerID();
@@ -81,6 +79,6 @@ export class courier_base extends BaseNpc_Hero_Plus {
     }
 
     IsValidHero() {
-        return GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.GetPlayerID()).Domain == null;
+        return GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.GetPlayerID()).Hero == null;
     }
 }

@@ -50,8 +50,8 @@ export class PlayerDataComponent extends ET.Component {
         this.applyPopuLevelUp(0);
         this.applyTechLevelUp(0);
         this.perIntervalGold += 5;
-
         this.addMoneyPerInterval();
+        this.updateNetTable();
     }
 
     isEnoughItem(type: number, count: number) {
@@ -94,7 +94,7 @@ export class PlayerDataComponent extends ET.Component {
     }
 
     updateNetTable() {
-        NetTablesHelper.SetETEntity(this, false, this.Domain.ETRoot.AsPlayer().Playerid);
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this);
     }
 
     timePerInterval: string;

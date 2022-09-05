@@ -1,5 +1,4 @@
 import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/modifier_jiaoxie_wudi";
 import { ET, registerET } from "../../Entity/Entity";
@@ -44,7 +43,7 @@ export class RoundEnemyComponent extends ET.Component {
 
     playDamageHeroAni(ProjectileInfo: IProjectileEffectInfo = null) {
         let domain = this.GetDomain<BaseNpc_Plus>();
-        let hero = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Playerid).GetDomain<BaseNpc_Hero_Plus>();
+        let hero = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Playerid).Hero;
         ProjectileInfo = ProjectileInfo || Assert_ProjectileEffect.p000;
         ProjectileManager.CreateTrackingProjectile({
             Target: hero,

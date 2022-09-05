@@ -12,7 +12,6 @@ export class TCharacter extends ET.Component {
 
     onSerializeToEntity() {
         PlayerScene.Scene.AddOneComponent(this);
-        LogHelper.print(1111)
     }
     get BagComp() {
         return this.GetComponentByName<typeof BagComponent>("BagComponent");

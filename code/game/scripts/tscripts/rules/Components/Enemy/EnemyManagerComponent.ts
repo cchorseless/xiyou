@@ -2,7 +2,6 @@ import { ISpawnEffectInfo, SpawnEffectModifier } from "../../../assert/Assert_Sp
 import { EntityHelper } from "../../../helper/EntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_spawn_breaksoil } from "../../../npc/modifier/spawn/modifier_spawn_breaksoil";
 import { modifier_spawn_fall } from "../../../npc/modifier/spawn/modifier_spawn_fall";
@@ -22,8 +21,6 @@ export class EnemyManagerComponent extends ET.Component {
     iMaxEnemyBonusEach: number = 0;
 
     onAwake(...args: any[]): void {
-        let domain = this.GetDomain<BaseNpc_Hero_Plus>();
-        (this as any).PlayerID = domain.GetPlayerID();
         this.iMaxEnemyBonus = tonumber(KVHelper.KvServerConfig.building_config.MAX_ENERMY_EACH_PLAYER.configValue);
     }
     GetEnemySpawnPos() {
@@ -82,13 +79,13 @@ export class EnemyManagerComponent extends ET.Component {
                                 return;
                         }
                     }
-                }; 
+                };
                 enemy.ETRoot.As<EnemyUnitEntityRoot>().EnemyUnitComp().OnSpawnAnimalFinish();
             })
         );
         return enemy;
     }
-    killAllEnemy() {}
+    killAllEnemy() { }
 
     killEnemy(etroot: EnemyUnitEntityRoot) {
         this.tPlayerKills += 1;

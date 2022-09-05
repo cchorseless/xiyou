@@ -14,8 +14,8 @@ export class RoundPrizeUnitEntityRoot extends ET.EntityRoot {
         super.Dispose();
         npc.SafeDestroy();
     }
-    
-    public OnActive(): void {
+
+    public onAwake(): void {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundPrizeUnitKillPrizeComponent>("RoundPrizeUnitKillPrizeComponent"));
     }
 

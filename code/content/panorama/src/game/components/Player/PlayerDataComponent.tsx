@@ -19,10 +19,10 @@ export class PlayerDataComponent extends ET.Component {
     perIntervalGold: number = 0;
     perIntervalWood: number = 0;
 
-    public populationRoof: number = 0;
-    public population: number = 0;
-    public gold: number = 0;
-    public food: number = 0;
-    public wood: number = 0;
-  
+    populationRoof: number = 0;
+    population: number = 0;
+    gold: number = 0;
+    food: number = 0;
+    wood: number = 0;
+
 }

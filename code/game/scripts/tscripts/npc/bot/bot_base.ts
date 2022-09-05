@@ -4,7 +4,7 @@ import { PrecacheHelper } from "../../helper/PrecacheHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { AvalonBotComponent } from "../../rules/Components/Awalon/AvalonBotComponent";
 import { AvalonComponent } from "../../rules/Components/Awalon/AvalonComponent";
-import { PlayerComponent } from "../../rules/Components/Player/PlayerComponent";
+import { PlayerHeroComponent } from "../../rules/Components/Player/PlayerHeroComponent";
 import { ET } from "../../rules/Entity/Entity";
 import { PlayerState } from "../../rules/System/Player/PlayerState";
 import { BaseNpc_Hero_Plus } from "../entityPlus/BaseNpc_Hero_Plus";
@@ -29,12 +29,7 @@ export class bot_base extends BaseNpc_Hero_Plus {
 
         TimerHelper.addFrameTimer(1, () => {
             if (GameRules.State_Get() > DOTA_GameState.DOTA_GAMERULES_STATE_STRATEGY_TIME) {
-                GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.GetPlayerID()).Active(this);
-                this.ETRoot.AddComponent(AvalonComponent);
-                this.ETRoot.AddComponent(PlayerComponent);
-                this.ETRoot.AddComponent(AvalonBotComponent);
-                modifier_task.apply(this, this);
-                modifier_test.apply(this, this);
+                GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.GetPlayerID()).BindHero(this);
             } else {
                 return 5;
             }

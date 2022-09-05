@@ -3,7 +3,6 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { building_round_board } from "../../../kvInterface/building/building_round_board";
 import { building_round_board_challenge } from "../../../kvInterface/building/building_round_board_challenge";
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { DifficultyState } from "../../System/Difficulty/DifficultyState";
 import { RoundState } from "../../System/Round/RoundState";

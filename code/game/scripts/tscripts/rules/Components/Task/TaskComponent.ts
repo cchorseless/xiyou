@@ -1,7 +1,7 @@
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { ET } from "../../Entity/Entity";
 import { TaskConfig } from "../../System/Task/TaskConfig";
 import { TaskSystem } from "../../System/Task/TaskSystem";
+import { PlayerScene } from "../Player/PlayerScene";
 
 export class TaskComponent extends ET.Component {
 
@@ -13,15 +13,12 @@ export class TaskComponent extends ET.Component {
     readonly PlayerID: number;
 
     onAwake() {
-        let domain = this.GetDomain<BaseNpc_Hero_Plus>();
-        (this as any).PlayerID = domain.GetPlayerID();
-        TaskSystem.RegComponent(this);
     }
     /**
    * 检查是否是任务目标
    * @param unitname
    */
-    CheckIsTaskUnit( unitname: string) {
+    CheckIsTaskUnit(unitname: string) {
         let alltaskInfo = this.allTaskInfo;
         let r = [];
         if (alltaskInfo != null) {
@@ -43,7 +40,7 @@ export class TaskComponent extends ET.Component {
      * @param unitname
      * @returns
      */
-    CheckIsTaskUnitWith( unitname: string) {
+    CheckIsTaskUnitWith(unitname: string) {
         let alltaskInfo = this.allTaskInfo;
         let r = [];
         if (alltaskInfo != null) {

@@ -5,7 +5,6 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
@@ -65,7 +64,7 @@ export class BuildingComponent extends ET.Component {
     }
 
     ChangeFashionEquip(n: number) {
-       
+
         // if (wearables.length >= 1) {
         //     print("MODEL REMOVED, RESPAWNING HERO");
         //     //  hero.SetRespawnPosition(hero.GetOrigin())

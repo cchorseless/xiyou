@@ -9,28 +9,28 @@ export const registerET = () => (entity: typeof ET.Entity) => {
 };
 export const serializeETProps =
     (params: string = null) =>
-    (target: ET.Entity, attr: string) => {
-        // 处理属性
-        if (target.SerializeETProps == null) {
-            (target as any).SerializeETProps = [];
-        }
-        if (params != null) {
-            attr = params;
-        }
-        target.SerializeETProps.push(attr);
-    };
+        (target: ET.Entity, attr: string) => {
+            // 处理属性
+            if (target.SerializeETProps == null) {
+                (target as any).SerializeETProps = [];
+            }
+            if (params != null) {
+                attr = params;
+            }
+            target.SerializeETProps.push(attr);
+        };
 export const serializeDomainProps =
     (params: string = null) =>
-    (target: ET.IEntityRoot, attr: string) => {
-        // 处理属性
-        if (target.SerializeDomainProps == null) {
-            target.SerializeDomainProps = [];
-        }
-        if (params != null) {
-            attr = params;
-        }
-        target.SerializeDomainProps.push(attr);
-    };
+        (target: ET.IEntityRoot, attr: string) => {
+            // 处理属性
+            if (target.SerializeDomainProps == null) {
+                target.SerializeDomainProps = [];
+            }
+            if (params != null) {
+                attr = params;
+            }
+            target.SerializeDomainProps.push(attr);
+        };
 
 export module ET {
     export interface IEntityJson {
@@ -259,7 +259,6 @@ export module ET {
             }
             return obj;
         }
-
         public updateFromJson(json: IETEntityJson) {
             let ignoreKey = ["_t", "_id", "Children", "C"];
             for (let k in json) {
@@ -330,6 +329,9 @@ export module ET {
             let entity = EntityEventSystem.GetEntity(json._id + json._t);
             if (entity != null) {
                 entity.updateFromJson(json);
+                if (entity.onReload) {
+                    entity.onReload();
+                }
                 return entity;
             }
             let type: typeof Entity = PrecacheHelper.GetRegClass(json._t);
@@ -704,7 +706,7 @@ export module ET {
         static Active<T extends typeof EntityRoot>(this: T, etroot: IEntityRoot) {
             if (etroot.ETRoot == null) {
                 etroot.ETRoot = new this(etroot);
-                etroot.ETRoot.OnActive();
+                etroot.ETRoot.onAwake();
             }
         }
 
@@ -720,7 +722,7 @@ export module ET {
             return this as any as PlayerEntityRoot;
         }
 
-        public OnActive() {}
+        public onAwake() { }
         public Active(etroot: IEntityRoot) {
             if (this.Domain != null) {
                 return;
@@ -737,7 +739,7 @@ export module ET {
                     }
                 }
                 (this.PreAwakeArgs as any) = null;
-                this.OnActive();
+                this.onAwake();
             } else {
                 LogHelper.error("cant active");
             }

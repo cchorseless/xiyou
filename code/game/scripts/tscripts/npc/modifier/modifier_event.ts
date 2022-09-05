@@ -145,9 +145,9 @@ export class modifier_event extends BaseModifier_Plus {
                     }
                 }
                 // 检查位置是否改变
-                let changeData = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(playerid).PlayerComp().CheckItemSlotChange(r);
+                let changeData = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(playerid).PlayerHeroComp().CheckItemSlotChange(r);
                 // 同步位置数据
-                GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(playerid).PlayerComp().itemSlotData = r;
+                GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(playerid).PlayerHeroComp().itemSlotData = r;
                 if (changeData) {
                     let _event: EventData = {};
                     (_event as EventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;

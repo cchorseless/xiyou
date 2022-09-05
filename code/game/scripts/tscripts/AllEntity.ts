@@ -20,7 +20,6 @@ import { EnemyManagerComponent } from "./rules/Components/Enemy/EnemyManagerComp
 import { EnemyMoveComponent } from "./rules/Components/Enemy/EnemyMoveComponent";
 import { EnemyPropsComponent } from "./rules/Components/Enemy/EnemyPropsComponent";
 import { EnemyUnitComponent } from "./rules/Components/Enemy/EnemyUnitComponent";
-import { PlayerComponent } from "./rules/Components/Player/PlayerComponent";
 import { PlayerHttpComponent } from "./rules/Components/Player/PlayerHttpComponent";
 import { RoundEnemyComponent } from "./rules/Components/Round/RoundEnemyComponent";
 import { RoundManagerComponent } from "./rules/Components/Round/RoundManagerComponent";
@@ -30,6 +29,7 @@ import { RoundPrizeUnitKillPrizeComponent } from "./rules/Components/Round/Round
 import { WearableComponent } from "./rules/Components/Wearable/WearableComponent";
 import { WearableSystemComponent } from "./rules/System/Wearable/WearableSystemComponent";
 import { ServiceEntity } from "./service/ServiceEntity";
+import { PlayerHeroComponent } from "./rules/Components/Player/PlayerHeroComponent";
 
 [
     MapSystemComponent,
@@ -41,7 +41,7 @@ import { ServiceEntity } from "./service/ServiceEntity";
     BuildingSystemComponent,
     DrawSystemComponent,
 
-    PlayerComponent,
+    PlayerHeroComponent,
     PlayerDataComponent,
     PlayerHttpComponent,
     DrawComponent,

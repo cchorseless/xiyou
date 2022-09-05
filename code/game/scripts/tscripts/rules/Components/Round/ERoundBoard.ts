@@ -9,11 +9,11 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { building_round_board } from "../../../kvInterface/building/building_round_board";
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { serializeETProps } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { RoundConfig } from "../../System/Round/RoundConfig";
+import { PlayerScene } from "../Player/PlayerScene";
 import { ERound } from "./ERound";
 
 export class ERoundBoard extends ERound {
@@ -159,9 +159,9 @@ export class ERoundBoard extends ERound {
 
     ApplyDamageHero(damage: number) {
         if (damage > 0) {
-            let domain = this.GetDomain<BaseNpc_Hero_Plus>();
-            Assert_MsgEffect.CreateNumberEffect(domain, damage, 2, Assert_MsgEffect.EMsgEffect.MSG_MISS, Assert_Color.red);
-            EmitSoundOn(this.ProjectileInfo.sound, domain);
+            let hero = this.GetDomain<PlayerScene>().ETRoot.Hero;
+            Assert_MsgEffect.CreateNumberEffect(hero, damage, 2, Assert_MsgEffect.EMsgEffect.MSG_MISS, Assert_Color.red);
+            EmitSoundOn(this.ProjectileInfo.sound, hero);
             let enemyM = this.Domain.ETRoot.AsPlayer().EnemyManagerComp();
             enemyM.getAllEnemy().forEach((e) => {
                 enemyM.missEnemy(e);

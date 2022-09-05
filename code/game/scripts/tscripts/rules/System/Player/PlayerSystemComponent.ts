@@ -7,6 +7,7 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { PlayerEntityRoot } from "../../Components/Player/PlayerEntityRoot";
 import { PlayerHttpComponent } from "../../Components/Player/PlayerHttpComponent";
+import { PlayerScene } from "../../Components/Player/PlayerScene";
 import { ET, registerET } from "../../Entity/Entity";
 import { PlayerState } from "./PlayerState";
 
@@ -68,12 +69,12 @@ export class PlayerSystemComponent extends ET.Component {
     public async CreateAllPlayer() {
         let allPlayer = this.GetAllPlayerid();
         for (let playerid of allPlayer) {
-            let playerRoot = new PlayerEntityRoot();
+            let playerScene = new PlayerScene();
+            PlayerEntityRoot.Active(playerScene);
+            let playerRoot = playerScene.ETRoot;
             (playerRoot as any).Playerid = playerid;
             this.AllPlayer[playerid + ""] = playerRoot;
-            let playerhttp = playerRoot.AddPreAwakeComponent(PrecacheHelper.GetRegClass<typeof PlayerHttpComponent>("PlayerHttpComponent"));
-            LogHelper.print(playerRoot.PreAwakeArgs == null, playerRoot.Id);
-            await playerhttp.PlayerLogin(playerid);
+            await playerRoot.PlayerHttpComp().PlayerLogin(playerid);
         }
 
     }

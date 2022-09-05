@@ -7,7 +7,7 @@ import { ChessControlComponent } from "./components/ChessControlComponent";
 import { DrawComponent } from "./components/DrawComponent";
 import { EnemyUnitComponent } from "./components/Enemy/EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./components/Enemy/EnemyUnitEntityRoot";
-import { PlayerComponent } from "./components/Player/PlayerComponent";
+import { PlayerHeroComponent } from "./components/Player/PlayerHeroComponent";
 import { PlayerDataComponent } from "./components/Player/PlayerDataComponent";
 import { PlayerEntityRootComponent } from "./components/Player/PlayerEntityRootComponent";
 import { ERoundBoard } from "./components/Round/ERoundBoard";
@@ -28,7 +28,7 @@ EnemyUnitComponent;
 
 ChessControlComponent;
 DrawComponent;
-PlayerComponent;
+PlayerHeroComponent;
 PlayerDataComponent;
 PlayerEntityRootComponent;
 RoundManagerComponent;

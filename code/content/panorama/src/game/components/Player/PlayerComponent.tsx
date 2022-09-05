@@ -10,7 +10,7 @@ import { PlayerConfig } from "../../system/Player/PlayerConfig";
 
 /**玩家 */
 @registerET()
-export class PlayerComponent extends ET.Component {
+export class PlayerHeroComponent extends ET.Component {
     onAwake() {
         this.addEvent();
     }

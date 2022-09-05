@@ -4,17 +4,17 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { DrawConfig } from "../../System/Draw/DrawConfig";
 import { PlayerEntityRoot } from "../Player/PlayerEntityRoot";
+import { PlayerScene } from "../Player/PlayerScene";
 
 @registerET()
 export class DrawComponent extends ET.Component {
     @serializeETProps()
     tLastCards: string[];
 
-    onAwake(...args: any[]): void {}
+    onAwake(...args: any[]): void { }
 
     //  开局抽卡
     DrawStartCard() {
@@ -89,7 +89,7 @@ export class DrawComponent extends ET.Component {
         }
         let cardItemName = KVHelper.KvServerConfig.building_unit_tower[unitName].CardName;
         // let hItem = BaseItem_Plus.CreateOneToUnit(this.GetDomain<BaseNpc_Hero_Plus>(), cardItemName);
-        let hItem = this.GetDomain<BaseNpc_Hero_Plus>().AddItemByName(cardItemName);
+        let hItem = this.GetDomain<PlayerScene>().ETRoot.Hero.AddItemByName(cardItemName);
         // hItem.OnSpellStart()
         if (GameFunc.IsValid(hItem) && b2Public) {
             // Items.TryMoveEmptyPublic(iPlayerID, hHero, hItem);

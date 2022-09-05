@@ -2,7 +2,6 @@ import { GameSetting } from "../../../GameSetting";
 import { HttpHelper } from "../../../helper/HttpHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { GameProtocol } from "../../../service/GameProtocol";
 import { ET, registerET } from "../../Entity/Entity";
 import { PlayerState } from "../../System/Player/PlayerState";
@@ -48,6 +47,7 @@ export class PlayerHttpComponent extends ET.Component {
             let cbmsg2: GameProtocol.H2C_CommonResponse = await this.PostAsync(GameProtocol.Config.LoginGate, { UserId: cbmsg1.UserId, Key: cbmsg1.Key, ServerId: 1 });
             if (cbmsg2.Error == 0) {
                 this.TOKEN = "Bearer " + cbmsg2.Message;
+                this.Ping();
                 return;
             }
         }

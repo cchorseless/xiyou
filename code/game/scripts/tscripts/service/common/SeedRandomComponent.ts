@@ -8,4 +8,7 @@ export class SeedRandomComponent extends ET.Component {
     SeedCount: number;
     onSerializeToEntity() {
     }
+    onReload() {
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this);
+    }
 }

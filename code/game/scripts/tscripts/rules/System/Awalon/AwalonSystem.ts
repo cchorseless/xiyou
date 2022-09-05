@@ -8,7 +8,7 @@ import { modifier_tp } from "../../../npc/modifier/modifier_tp";
 import { AwalonEventHandler } from "./AwalonEventHandler";
 import { AwalonConfig } from "./AwalonConfig";
 import { AwalonState } from "./AwalonState";
-import { PlayerComponent } from "../../Components/Player/PlayerComponent";
+import { PlayerHeroComponent } from "../../Components/Player/PlayerHeroComponent";
 
 export class AwalonSystem {
 
@@ -116,7 +116,7 @@ export class AwalonSystem {
         for (let playerid in allPlayerinfo) {
             let _playerid = tonumber(playerid) as PlayerID;
             let hero = GameRules.Addon.ETRoot.PlayerSystem().GetHero(_playerid)
-            let firstSpawnPoint = hero.ETRoot.GetComponent(PlayerComponent).firstSpawnPoint;
+            let firstSpawnPoint = hero.ETRoot.GetComponent(PlayerHeroComponent).firstSpawnPoint;
             let istp = GameFunc.VectorFunctions.IsValidDiatance(hero.GetAbsOrigin(), firstSpawnPoint)
             if (!istp) {
                 modifier_tp.TeleportToPoint(hero, null, firstSpawnPoint)

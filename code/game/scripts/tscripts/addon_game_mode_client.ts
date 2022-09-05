@@ -5,7 +5,6 @@ import { EventHelper } from "./helper/EventHelper";
 import { KVHelper } from "./helper/KVHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { SingletonClass } from "./helper/SingletonHelper";
-import { BaseNpc_Hero_Plus } from "./npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
 import { AllEntity } from "./AllEntity";
 

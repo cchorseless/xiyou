@@ -5,7 +5,6 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health_bar";
 import { ET, registerET } from "../../Entity/Entity";
@@ -24,7 +23,7 @@ export class BuildingManagerComponent extends ET.Component {
     /**是否建造过一个建筑 */
     bHasBuild: boolean = false;
     tGlobalBuffs: BuildingConfig.IBuffInfo[] = [];
-    onAwake() {}
+    onAwake() { }
 
     /**
      * 放置建築

@@ -1,9 +1,9 @@
 import { GameSetting } from "../../../GameSetting";
-import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
+import { PlayerScene } from "../Player/PlayerScene";
 
 @registerET()
 export class ChessControlComponent extends ET.Component {
@@ -29,7 +29,7 @@ export class ChessControlComponent extends ET.Component {
             r = [false, "same vector"];
         }
         if (!r[0]) {
-            EmitSoundOn("General.CastFail_NoMana", this.GetDomain<BaseNpc_Hero_Plus>());
+            EmitSoundOn("General.CastFail_NoMana", this.GetDomain<PlayerScene>().ETRoot.Hero);
             return r;
         }
         let targetPos = ChessControlSystem.GetBoardGirdCenterVector3(boardVec);
