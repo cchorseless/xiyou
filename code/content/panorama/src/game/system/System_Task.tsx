@@ -36,7 +36,7 @@ export module System_Task {
                 selectUnit()
             });
             /**任务完成 */
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_finish_task_from_client, (event) => {
+            NetHelper.ListenOnLua( System_Task,GameEnum.CustomProtocol.req_finish_task_from_client, (event) => {
                 if (event.state && event.data && event.data.taskid) {
                     // 删除任务
                     // let tasktype = KV_DATA.task_config.taskdata![event.data.taskid as '1001']?.Tasktype
@@ -47,18 +47,17 @@ export module System_Task {
                     MainPanel.GetInstance()?.showFinishTaskDialog(event.data.taskid);
                 }
 
-            }, System_Task)
+            })
             /**更新单个任务进度 */
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_update_one_task, (event) => {
+            NetHelper.ListenOnLua(System_Task,GameEnum.CustomProtocol.req_update_one_task, (event) => {
                 if (event.state && event.data) {
                     Sys_state.TaskJinDu = Sys_state.TaskJinDu || {};
                     Sys_state.TaskJinDu = Object.assign(Sys_state.TaskJinDu, event.data);
                     TaskInfoDialog.GetInstance()?.updateUI()
                 }
-
-            }, System_Task)
+            })
             /**新任务 */
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_new_task, (event) => {
+            NetHelper.ListenOnLua(System_Task,GameEnum.CustomProtocol.req_new_task, (event) => {
                 if (event.state && event.data) {
                     for (let taskid in event.data) {
                         let taskinfo: task_config.OBJ_2_1 = event.data[taskid];
@@ -69,7 +68,7 @@ export module System_Task {
                     }
                     TaskInfoDialog.GetInstance()?.updateUI()
                 }
-            }, System_Task)
+            })
         }
 
         function selectUnit() {

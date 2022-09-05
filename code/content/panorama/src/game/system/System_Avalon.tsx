@@ -224,7 +224,7 @@ export module System_Avalon {
             if (hasStart) { return };
             hasStart = true;
             // 监听服务器数据推送
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_get_current_round_info, (event) => {
+            NetHelper.ListenOnLua(System_Avalon,GameEnum.CustomProtocol.req_get_current_round_info, (event) => {
                 if (event.state && event.data) {
                     // 新任务回合
                     if (Sys_state._currentRoundInfo) {
@@ -241,18 +241,18 @@ export module System_Avalon {
                     TopBarPanel.GetInstance()?.updateUI()
                     // 刷新主界面
                 }
-            }, System_Avalon);
+            });
             // 监听服务器推送创建队伍
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_send_to_make_team_finish, (event) => {
+            NetHelper.ListenOnLua(System_Avalon,GameEnum.CustomProtocol.req_send_to_make_team_finish, (event) => {
                 if (event.state) {
                     Sys_state._currentTeamInfo = event.data;
                 }
                 else {
                     TipsHelper.showTips('创建队伍失败',RootPanel.instance);
                 }
-            }, System_Avalon);
+            });
             // 监听服务器推送发言顺序
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_send_to_sure_chat_turn, (event) => {
+            NetHelper.ListenOnLua( System_Avalon,GameEnum.CustomProtocol.req_send_to_sure_chat_turn, (event) => {
                 if (event.state) {
                     Sys_state._currentChatTurn = event.data;
                     // MainPanel.GetInstance()?.updateRoundUI();
@@ -260,9 +260,9 @@ export module System_Avalon {
                 else {
                     TipsHelper.showTips('发言顺序设置失败',RootPanel.instance);
                 }
-            }, System_Avalon);
+            });
             // 监听服务器更改发言顺序
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_end_current_player_chat, (event) => {
+            NetHelper.ListenOnLua( System_Avalon,GameEnum.CustomProtocol.req_end_current_player_chat, (event) => {
                 if (event.state) {
                     Sys_state._currentChatTurn = event.data;
                     // 刷新主界面
@@ -272,9 +272,9 @@ export module System_Avalon {
                 else {
                     TipsHelper.showTips('发言顺序设置失败',RootPanel.instance);
                 }
-            }, System_Avalon);
+            });
             // 监听服务器组队投票意见
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_send_to_make_team_idea, (event) => {
+            NetHelper.ListenOnLua(System_Avalon,GameEnum.CustomProtocol.req_send_to_make_team_idea, (event) => {
                 if (event.state) {
                     Sys_state._currentTeamIdea = event.data;
                     // TeamAgreeGoForTaskDialog.GetInstance()?.updateAgreeInfo();
@@ -282,16 +282,16 @@ export module System_Avalon {
                 else {
                     TipsHelper.showTips('本轮已投票',RootPanel.instance);
                 }
-            }, System_Avalon);
+            });
             // 监听组队 投票结果
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_send_to_make_team_idea_result, (event) => {
+            NetHelper.ListenOnLua(System_Avalon,GameEnum.CustomProtocol.req_send_to_make_team_idea_result, (event) => {
                 if (event.state && event.data) {
                     let data: { success: boolean, agreeCount: number, disagreeCount: number } = event.data;
                     // MainPanel.GetInstance()?.showTeamResult(data);
                 }
-            }, System_Avalon);
+            });
             // 监听服务器推送任务记录
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_send_to_sync_task_record, (event) => {
+            NetHelper.ListenOnLua(System_Avalon,GameEnum.CustomProtocol.req_send_to_sync_task_record, (event) => {
                 if (event.state && event.data) {
                     Sys_state._allTaskRecord = event.data;
                     // 刷新顶部条
@@ -300,9 +300,9 @@ export module System_Avalon {
                 else {
                     TipsHelper.showTips('发言顺序设置失败',RootPanel.instance);
                 }
-            }, System_Avalon);
+            });
             // 监听服务器任务投票意见
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_send_to_finish_task_idea, (event) => {
+            NetHelper.ListenOnLua(System_Avalon,GameEnum.CustomProtocol.req_send_to_finish_task_idea, (event) => {
                 LogHelper.print(event.data, event.state)
                 if (event.state && event.data) {
                     Sys_state._currentTaskIdea = Sys_state._currentTaskIdea || {};
@@ -312,9 +312,9 @@ export module System_Avalon {
                 else {
                     TipsHelper.showTips('本轮已投票',RootPanel.instance);
                 }
-            }, System_Avalon);
+            });
             // 监听服务器任务投票结果
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_send_to_finish_task_idea_result, (event) => {
+            NetHelper.ListenOnLua(System_Avalon,GameEnum.CustomProtocol.req_send_to_finish_task_idea_result, (event) => {
                 if (event.state && event.data) {
                     Sys_state._currentTaskIdea = Sys_state._currentTaskIdea || {};
                     Sys_state._currentTaskIdea.success = event.data.success;
@@ -325,9 +325,9 @@ export module System_Avalon {
                 else {
                     TipsHelper.showTips('本轮已投票',RootPanel.instance);
                 }
-            }, System_Avalon);
+            });
             // 游戏结果
-            NetHelper.ListenOnLua(GameEnum.CustomProtocol.req_send_to_game_result, (event) => {
+            NetHelper.ListenOnLua(System_Avalon,GameEnum.CustomProtocol.req_send_to_game_result, (event) => {
                 if (event.state && event.data) {
                     Sys_state._otherRoleInfo.CampInfo = event.data.campInfo;
                     Sys_state._otherRoleInfo.RoleType = event.data.roleInfo;
@@ -336,7 +336,7 @@ export module System_Avalon {
                 }
                 else {
                 }
-            }, System_Avalon);
+            });
         }
     }
     export namespace Sys_config {

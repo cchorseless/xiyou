@@ -2,7 +2,9 @@ import { GameEnum } from "../libs/GameEnum";
 import { LogHelper } from "./LogHelper";
 
 export module NetHelper {
-    const allListenEventInfo = {};
+    export interface INetListener {
+        ListenEventInfo: { [key: string]: GameEventListenerID[] };
+    }
 
     /**请求LUA服务器数据 */
     export function SendToLua(protocol: string, data: any = null, cb: (event: JS_TO_LUA_DATA) => void | null = null as any, context: any = null) {
@@ -43,7 +45,7 @@ export module NetHelper {
      * @param context
      * @param isOnce 是否只监听一次
      */
-    export function ListenOnLua(protocol: string, cb: (event: JS_TO_LUA_DATA) => void, context: any = null, isOnce: boolean = false) {
+    export function ListenOnLua(context: any, protocol: string, cb: (event: JS_TO_LUA_DATA) => void, isOnce: boolean = false) {
         if (cb != null) {
             if (!isOnce) {
                 GameEvents.Subscribe(protocol, (event) => {
@@ -59,12 +61,12 @@ export module NetHelper {
             }
         }
     }
+    export function OffAllListenOnLua(context: any) {}
 
-    export function OffListenOnLua() {}
+    export function OffListenOnLua(context: any, protocol: string) {}
 
     export function GetTableValue(tableName: ENetTables, key: string) {
         return CustomNetTables.GetTableValue(tableName as never, key) as any;
-
     }
     export function GetOneTable(tableName: ENetTables) {
         return CustomNetTables.GetAllTableValues(tableName as never) as { key: string; value: any }[];
@@ -75,6 +77,6 @@ export module NetHelper {
         common = "common",
         etentity = "etentity",
         enemy = "enemy",
-        test="test",
+        test = "test",
     }
 }

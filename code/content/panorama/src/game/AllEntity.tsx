@@ -14,7 +14,6 @@ import { ERoundBoard } from "./components/Round/ERoundBoard";
 import { RoundManagerComponent } from "./components/Round/RoundManagerComponent";
 import { ServiceEntity } from "./service/ServiceEntity";
 
-
 AbilityEntityRoot;
 BuildingEntityRoot;
 BuildingComponent;
@@ -32,8 +31,13 @@ RoundManagerComponent;
 ERoundBoard;
 
 export class AllEntity {
+    static IsInit: boolean = false;
     static Init() {
+        if (AllEntity.IsInit) {
+            return;
+        }
         ServiceEntity.init();
         LogHelper.print("register all entity");
+        AllEntity.IsInit = true;
     }
 }

@@ -1,6 +1,8 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
 import { render } from "react-panorama-eom";
+import { AllEntity } from "../../../game/AllEntity";
+import { PlayerScene } from "../../../game/components/Player/PlayerScene";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { LogHelper } from "../../../helper/LogHelper";
@@ -18,17 +20,23 @@ export class Loading extends Loading_UI {
         Game.SetAutoLaunchEnabled(false);
     }
 }
-
 const eventid = GameEvents.Subscribe(GameEnum.GameEvent.game_rules_state_change, async (e: any) => {
+    if (!$.GetContextPanel().layoutfile.includes("custom_loading_screen")) {
+        GameEvents.Unsubscribe(eventid);
+        return;
+    }
     let state = Game.GetState();
     LogHelper.print("current state :", state);
+    LogHelper.print("panel file :", $.GetContextPanel().layoutfile);
     switch (state) {
         // 创建
         case DOTA_GameState.DOTA_GAMERULES_STATE_INIT:
+            AllEntity.Init();
             render(<Loading />, $.GetContextPanel());
             break;
         // 队伍选择界面
         case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
+            PlayerScene.LoginServer();
             while (Loading.GetInstance() == null) {
                 await TimerHelper.DelayTime(0.1, true);
             }
@@ -44,12 +52,11 @@ const eventid = GameEvents.Subscribe(GameEnum.GameEvent.game_rules_state_change,
             // });
             // this.updateSelf()
             break;
-
         // 销毁
         case DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME:
             Loading.GetInstance()!.close(true);
-            render(<></>, $.GetContextPanel());
             GameEvents.Unsubscribe(eventid);
+            render(<></>, $.GetContextPanel());
             break;
     }
 });

@@ -29,6 +29,7 @@ export class Minimap_plus extends Minimap_plus_UI {
     allheroicon: { [playerid: string]: Minimap_iconitem } = {};
     addEvent() {
         NetHelper.ListenOnLua(
+            this,
             GameEnum.CustomProtocol.push_update_minimap,
             (e) => {
                 if (e.state && e.data) {
@@ -48,10 +49,10 @@ export class Minimap_plus extends Minimap_plus_UI {
                     }
                     this.updateSelf();
                 }
-            },
-            this
+            }
         );
         NetHelper.ListenOnLua(
+            this,
             GameEnum.CustomProtocol.push_update_minimap_nodraw,
             (e) => {
                 LogHelper.print(e, "push_update_minimap_nodraw");
@@ -62,8 +63,7 @@ export class Minimap_plus extends Minimap_plus_UI {
                         }
                     }
                 }
-            },
-            this
+            }
         );
     }
     updateIcon(playerid: PlayerID, m: Minimap_iconitem) {

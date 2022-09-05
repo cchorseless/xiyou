@@ -30,7 +30,6 @@ export class MainPanel extends MainPanel_UI {
         this.panel_alldialog.current!.hittest = false;
     }
     onStartUI() {
-        PlayerScene.Init();
         TimerHelper.AddTimer(
             1,
             FuncHelper.Handler.create(this, () => {

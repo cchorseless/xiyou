@@ -1,6 +1,7 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
 import { render } from "react-panorama-eom";
+import { PlayerScene } from "../../../game/components/Player/PlayerScene";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { LogHelper } from "../../../helper/LogHelper";
@@ -54,14 +55,14 @@ export class Team_select extends Team_select_UI {
 
     addEvent = () => {
         NetHelper.ListenOnLua(
+            this,
             GameEnum.CustomProtocol.req_addBot,
             (e) => {
                 if (e.state) {
                     this.updatePlayerInfo();
                     this.isAdding = false;
                 }
-            },
-            this
+            }
         );
     };
 

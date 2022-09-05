@@ -10,7 +10,7 @@ export class PrecacheHelper {
     public static RegClass(cls: any[]) {
         for (let c of cls) {
             PrecacheHelper.allClassType[c.name] = c;
-            LogHelper.print("RegClass:", c.name);
+            // LogHelper.print("RegClass:", c.name);
         }
     }
     public static GetRegClass<T>(className: string) {

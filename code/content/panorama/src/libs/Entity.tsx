@@ -12,7 +12,7 @@ export module ET {
     interface IEntityJson {
         _t: string;
         _id: string;
-        Children?: IEntityJson[];
+        Children?: { [K: string]: IEntityJson };
         C?: { [K: string]: IEntityJson };
         [K: string]: any;
     }
@@ -104,23 +104,24 @@ export module ET {
                 }
             }
             if (json.Children) {
+                let _childs = Object.values(json.Children);
                 if (this.Children != null) {
                     let keys = Object.keys(this.Children);
                     for (let k of keys) {
                         let isdrop = true;
-                        for (let _child of json.Children) {
+                        for (let _child of _childs) {
                             if (k == _child._id) {
-                                this.GetChild(k)!.updateFromJson(_child);
+                                this.GetChild(k)?.updateFromJson(_child);
                                 isdrop = false;
                                 break;
                             }
                         }
                         if (isdrop) {
-                            this.Children[k].RemoveSelf();
+                            this.Children[k]?.RemoveSelf();
                         }
                     }
                 }
-                for (let info of json.Children) {
+                for (let info of _childs) {
                     if (this.GetChild(info._id) == null) {
                         let entity = Entity.FromJson(info);
                         if (this.IsRegister) {
@@ -140,13 +141,13 @@ export module ET {
                         for (let compname in json.C) {
                             let _child = json.C[compname];
                             if (k == _child._t) {
-                                this.Components[k].updateFromJson(_child);
+                                this.Components[k]?.updateFromJson(_child);
                                 isdrop = false;
                                 break;
                             }
                         }
                         if (isdrop) {
-                            this.Components[k].RemoveSelf();
+                            this.Components[k]?.RemoveSelf();
                         }
                     }
                 }

@@ -27,14 +27,14 @@ export class DrawComponent extends ET.Component {
     startListen() {
         // 监听服务器数据推送
         NetHelper.ListenOnLua(
+            this,
             DrawConfig.EProtocol.DrawCardResult,
             (event: CLIENT_DATA<ArrayLikeObject<string>>) => {
                 if (event.state) {
                     let card = Array<string>().concat(this.tLastCards);
                     MainPanel.GetInstance()!.addOnlyDialog(DrawCardPanel, { cards: card });
                 }
-            },
-            this
+            }
         );
     }
 
