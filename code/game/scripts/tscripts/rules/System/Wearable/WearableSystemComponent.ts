@@ -225,8 +225,7 @@ export class WearableSystemComponent extends ET.Component {
         }
     }
 
-
-    GetItemDefByModelName(model:string) {
+    GetItemDefByModelName(model: string) {
         return this.AllitemsModelMap[model];
     }
 }

@@ -31,7 +31,7 @@ export class ServerZoneSeasonComponent extends ET.Component {
 
     onSerializeToEntity() {
         let serverzone = ET.EntityEventSystem.GetEntity(this.Id + "TServerZone");
-        if (serverzone) {
+        if (serverzone!= null) {
             serverzone.AddOneComponent(this);
         }
     }

@@ -17,9 +17,9 @@
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "preserveSymlinks": true,
+        "strict": true,
         "strictNullChecks": false,
         "strictPropertyInitialization": false,
-        "strict": true
     },
     "include": [
         "../../shared",
@@ -32,6 +32,7 @@
         "tscripts/npc/abilities/dota",
         "tscripts/npc/items/dota",
         "tscripts/npc/units/dota",
+        "tscripts/zlib",
     ],
     "tstl": {
         "luaTarget": "JIT",

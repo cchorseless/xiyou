@@ -27,7 +27,7 @@ export class GameEvent extends SingletonClass {
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned);
         // EventHelper.addGameEvent(GameEnum.Event.GameEvent.ServerSpawnEvent, this.onServerSpawnEvent, this);
         // EventHelper.addGameEvent(GameEnum.Event.GameEvent.DotaOnHeroFinishSpawnEvent, this.onHeroFinishSpawn, this);
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, this.OnGameRulesStateChange);
+        // EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, this.OnGameRulesStateChange);
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityKilledEvent, this.OnEntityKilled);
         // EventHelper.addGameEvent(GameEnum.Event.GameEvent.DotaPlayerUsedAbilityEvent, this.OnAbilityUsed, this);
         // EventHelper.addGameEvent(EventInfo.ServerSpawnEvent, this.onServerSpawnEvent, this);

@@ -21,7 +21,7 @@ export class CharacterActivityComponent extends ET.Component {
     public Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {
         let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
-        if (character) {
+        if (character!= null) {
             character.AddOneComponent(this);
             this.onReload();
         }

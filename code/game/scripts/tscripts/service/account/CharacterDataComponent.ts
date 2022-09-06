@@ -39,7 +39,7 @@ export class EMoneyType {
 export class CharacterDataComponent extends ET.Component {
     onSerializeToEntity() {
         let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
-        if (character) {
+        if (character!= null) {
             character.AddOneComponent(this);
             this.onReload();
         }

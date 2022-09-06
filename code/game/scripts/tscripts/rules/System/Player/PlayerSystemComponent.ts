@@ -20,16 +20,6 @@ export class PlayerSystemComponent extends ET.Component {
     }
 
     private addEvent() {
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, async (e) => {
-            const nNewState = GameRules.State_Get();
-            switch (nNewState) {
-                // -- 游戏初始化
-                case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
-                    await this.CreateAllPlayer();
-                    break;
-            }
-        });
-
         /**客户端登陆 */
         EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_LoginGame, (event: JS_TO_LUA_DATA) => {
             event.state = true;
@@ -50,8 +40,13 @@ export class PlayerSystemComponent extends ET.Component {
             }
         }
         this.IsAllLogin = true;
-        GameRules.Addon.ETRoot.OnAllPlayerClientLoginFinish();
+        this.OnAllPlayerClientLoginFinish();
     }
+
+    private  OnAllPlayerClientLoginFinish() {
+        GameRules.Addon.ETRoot.MapSystem().OnAllPlayerClientLoginFinish();
+    }
+
 
     public IsValidPlayer(playerid: PlayerID | number | string): boolean {
         return this.AllPlayer[playerid + ""] != null;
@@ -75,7 +70,6 @@ export class PlayerSystemComponent extends ET.Component {
             this.AllPlayer[playerid + ""] = playerRoot;
             await playerRoot.PlayerHttpComp().PlayerLogin(playerid);
         }
-
     }
 
     /**

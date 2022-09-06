@@ -20,7 +20,7 @@ export class CharacterBuffComponent extends ET.Component {
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {
         let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
-        if (character) {
+        if (character!= null) {
             character.AddOneComponent(this);
             this.onReload();
         }

@@ -6,10 +6,7 @@ import { TCharacter } from "../account/TCharacter";
 export class CharacterTitleComponent extends ET.Component {
     public DressTitleConfigId: number;
 
-    private _Titles: Dictionary<number, string> = new Dictionary<
-        number,
-        string
-    >();
+    private _Titles: Dictionary<number, string> = new Dictionary<number, string>();
     public get Titles() {
         return this._Titles;
     }
@@ -20,10 +17,12 @@ export class CharacterTitleComponent extends ET.Component {
         }
     }
 
-    public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
+    public get Character(): TCharacter {
+        return this.GetParent<TCharacter>();
+    }
     onSerializeToEntity() {
         let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
-        if (character) {
+        if (character != null) {
             character.AddOneComponent(this);
             this.onReload();
         }

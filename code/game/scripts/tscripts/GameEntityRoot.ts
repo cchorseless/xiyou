@@ -3,6 +3,8 @@
  * 弃用，采用缓存类的形式
  */
 
+import { GameEnum } from "./GameEnum";
+import { EventHelper } from "./helper/EventHelper";
 import { PrecacheHelper } from "./helper/PrecacheHelper";
 import { ET } from "./rules/Entity/Entity";
 import { BuildingSystemComponent } from "./rules/System/Building/BuildingSystemComponent";
@@ -42,6 +44,7 @@ export class GameEntityRoot extends ET.EntityRoot {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingSystemComponent>("BuildingSystemComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationSystemComponent>("CombinationSystemComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof WearableSystemComponent>("WearableSystemComponent"));
+        this.addEvent();
     }
     TServerZone() {
         return this.GetComponentByName<TServerZone>("TServerZone");
@@ -78,10 +81,22 @@ export class GameEntityRoot extends ET.EntityRoot {
         return this.GetComponentByName<WearableSystemComponent>("WearableSystemComponent");
     }
 
+    private addEvent() {
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, async (e) => {
+            const nNewState = GameRules.State_Get();
+            switch (nNewState) {
+                // -- 游戏初始化
+                case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
+                    await this.PlayerSystem().CreateAllPlayer();
+                    break;
+                case DOTA_GameState.DOTA_GAMERULES_STATE_GAME_IN_PROGRESS:
+                    this.StartGame();
+                    break;
+            }
+        });
+    }
 
-
-    OnAllPlayerClientLoginFinish() {
-        this.MapSystem().OnAllPlayerClientLoginFinish();
+    private StartGame() {
         this.RoundSystem().OnAllPlayerClientLoginFinish();
         this.DrawSystem().OnAllPlayerClientLoginFinish();
     }
