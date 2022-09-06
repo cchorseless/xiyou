@@ -5,6 +5,8 @@ import { TActivity } from "./TActivity";
 
 @registerET()
 export class TActivityInvestMetaStone extends TActivity {
+
+
     private _Items: Dictionary<number, ValueTupleStruct<number, number>> = new Dictionary<
         number,
         ValueTupleStruct<number, number>

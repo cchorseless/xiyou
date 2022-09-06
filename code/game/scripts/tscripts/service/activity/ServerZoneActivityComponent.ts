@@ -1,11 +1,11 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
 import { TCharacter } from "../account/TCharacter";
 import { TServerZone } from "../serverzone/TServerZone";
 
 @registerET()
 export class ServerZoneActivityComponent extends ET.Component {
-
+    @serializeETProps()
     private _Activity: Dictionary<number, string> = new Dictionary<
         number,
         string
@@ -19,7 +19,7 @@ export class ServerZoneActivityComponent extends ET.Component {
             this._Activity.add(_d[0], _d[1]);
         }
     }
-    public get ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
+    public ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
 
 
     onSerializeToEntity() {

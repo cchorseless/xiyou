@@ -1,8 +1,11 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
 
 @registerET()
 export class NumericComponent extends ET.Component {
+    public readonly IsSerializeEntity: boolean = true;
+
+    @serializeETProps()
     private _NumericDic: Dictionary<number, string> = new Dictionary<
         number,
         string

@@ -57,6 +57,6 @@ export class CharacterDataComponent extends ET.Component {
         return this.GetComponentByName<CharacterInGameDataComponent>("CharacterInGameDataComponent");
     }
 
-    public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
+    public Character(): TCharacter { return this.GetParent<TCharacter>(); }
 
 }

@@ -3,6 +3,8 @@ import { HeroTalentComponent } from "./HeroTalentComponent";
 
 @registerET()
 export class THeroTalentItem extends ET.Entity {
+    public readonly IsSerializeEntity: boolean = true;
+
     public ConfigId: number;
     public CostTalentPoint: number;
     public TalentBuff: number[];

@@ -9,6 +9,8 @@ export enum EMailState {
 
 @registerET()
 export class TMail extends ET.Entity {
+    public readonly IsSerializeEntity: boolean = true;
+
     public Title: number;
     public Content: number;
     public State: number[];

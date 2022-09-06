@@ -1,10 +1,11 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
 import { CharacterActivityComponent } from "./CharacterActivityComponent";
 import { TActivityData } from "./TActivityData";
 
 @registerET()
 export class TActivityGiftCommondData extends TActivityData {
+    @serializeETProps()
     private _GiftCommonds: Dictionary<number, string> = new Dictionary<
         number,
         string
@@ -19,6 +20,6 @@ export class TActivityGiftCommondData extends TActivityData {
         }
     }
 
-    public get ActivityComp() { return this.GetParent<CharacterActivityComponent>(); }
+    public ActivityComp() { return this.GetParent<CharacterActivityComponent>(); }
 
 }

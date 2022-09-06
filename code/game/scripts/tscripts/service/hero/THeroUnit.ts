@@ -3,6 +3,8 @@ import { CharacterBuffComponent } from "../buff/CharacterBuffComponent";
 
 @registerET()
 export class THeroUnit extends ET.Entity {
+    public readonly IsSerializeEntity: boolean = true;
+
     public ConfigId: number;
 
     public Level: number;

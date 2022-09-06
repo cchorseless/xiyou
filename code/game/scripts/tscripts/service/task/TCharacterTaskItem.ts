@@ -3,6 +3,8 @@ import { CharacterTaskComponent } from "./CharacterTaskComponent";
 
 @registerET()
 export class TCharacterTaskItem extends ET.Entity {
+    public readonly IsSerializeEntity: boolean = true;
+
     public ConfigId: number;
     public Progress: number;
     public IsAchieve: boolean;

@@ -3,6 +3,7 @@ import { ET, registerET } from "../../rules/Entity/Entity";
 import { THeroUnit } from "../hero/THeroUnit";
 @registerET()
 export class HeroTalentComponent extends ET.Component {
+    public readonly IsSerializeEntity: boolean = true;
 
     TalentPoint: number;
     TotalTalentPoint: number;

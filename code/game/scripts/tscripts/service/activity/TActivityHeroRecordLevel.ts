@@ -1,10 +1,11 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
 import { ValueTupleStruct } from "../common/ValueTupleStruct";
 import { TActivity } from "./TActivity";
 
 @registerET()
 export class TActivityHeroRecordLevel extends TActivity {
+    @serializeETProps()
     private _Items: Dictionary<number, ValueTupleStruct<number, number>> = new Dictionary<
         number,
         ValueTupleStruct<number, number>

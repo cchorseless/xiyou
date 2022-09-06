@@ -3,6 +3,7 @@ import { ET, registerET } from "../../rules/Entity/Entity";
 
 @registerET()
 export class TShopUnit extends ET.Entity {
+    public readonly IsSerializeEntity: boolean = true;
     public ConfigId: number;
     public IsValid: boolean;
     private _ShopSellItem: Dictionary<number, string> = new Dictionary<

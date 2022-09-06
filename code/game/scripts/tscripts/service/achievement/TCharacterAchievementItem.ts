@@ -5,10 +5,12 @@ import { CharacterAchievementComponent } from "./CharacterAchievementComponent";
 
 @registerET()
 export class TCharacterAchievementItem extends ET.Entity {
+    public readonly IsSerializeEntity: boolean = true;
+
     public ConfigId: number;
     public IsAchieve: boolean;
     public IsPrizeGet: boolean;
-    public get AchievementComp(): CharacterAchievementComponent { return this.GetParent<CharacterAchievementComponent>(); }
+    public AchievementComp(): CharacterAchievementComponent { return this.GetParent<CharacterAchievementComponent>(); }
     onSerializeToEntity() {
 
     }

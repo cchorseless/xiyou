@@ -9,6 +9,6 @@ export class TActivityBattlePassData extends TActivityData {
     public ItemGetRecord: number[];
     public VipItemGetRecord: number[];
 
-    public get CharacterActivity() { return this.GetParent<CharacterActivityComponent>(); }
+    public CharacterActivity() { return this.GetParent<CharacterActivityComponent>(); }
 
 }

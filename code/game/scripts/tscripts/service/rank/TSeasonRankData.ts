@@ -3,6 +3,8 @@ import { ET, registerET } from "../../rules/Entity/Entity";
 
 @registerET()
 export class TSeasonRankData extends ET.Entity {
+    public readonly IsSerializeEntity: boolean = true;
+
     public SeasonConfigId: number;
     private _Ranks: Dictionary<string, string> = new Dictionary<
         string,

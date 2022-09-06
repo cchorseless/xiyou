@@ -1,10 +1,11 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
 import { CharacterActivityComponent } from "./CharacterActivityComponent";
 import { TActivityData } from "./TActivityData";
 
 @registerET()
 export class TActivityInvestMetaStoneData extends TActivityData {
+    @serializeETProps()
     private _ItemState: Dictionary<number, number> = new Dictionary<
         number,
         number

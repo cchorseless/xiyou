@@ -3,6 +3,8 @@ import { BagComponent } from "./BagComponent";
 
 @registerET()
 export class TItem extends ET.Entity {
+    public readonly IsSerializeEntity: boolean = true;
+
     public ConfigId: number;
 
     public CreateTime: string;
