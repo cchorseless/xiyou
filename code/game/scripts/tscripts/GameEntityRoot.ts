@@ -97,7 +97,6 @@ export class GameEntityRoot extends ET.EntityRoot {
                 // -- 游戏初始化
                 case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
                     // GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP, GetSystemTimeMS() / 1000);
-                    // GameDebugger.GetInstance().debugger_OnPlayerDisconnect();
                     await this.PlayerSystem().StartGame();
                     break;
                 // 	-- 选择英雄,可以获取玩家数量

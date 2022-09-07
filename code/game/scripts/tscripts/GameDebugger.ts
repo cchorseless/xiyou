@@ -147,33 +147,12 @@ export class GameDebugger extends SingletonClass {
         );
     }
 
-    /**
-     * 監聽玩家斷綫自動失敗
-     * @param inter
-     */
-    public debugger_OnPlayerDisconnect(inter: number = 5) {
-        TimerHelper.addTimer(
-            inter,
-            () => {
-                GameRules.Addon.ETRoot.PlayerSystem()
-                    .GetAllPlayeridByTeam()
-                    .forEach((iPlayerID) => {
-                        if (PlayerResource.GetConnectionState(iPlayerID) == DOTAConnectionState_t.DOTA_CONNECTION_STATE_ABANDONED) {
-                            this.MakePlayerLose(iPlayerID);
-                        }
-                    });
-                return inter;
-            },
-            this,
-            false
-        );
-    }
+
 
     public addDebugEvent() {
         //#region  游戏内事件
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.PlayerChatEvent, this.OnPlayerChat);
         //#endregion
-
         //#region  自定义事件
         // 游戏结束
         EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_DebugGameOver, this.onDebugGameOver);
@@ -186,25 +165,6 @@ export class GameDebugger extends SingletonClass {
         EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_addBot, this.onreq_addBot);
 
         //#endregion
-    }
-    /**Debugger數據 */
-    public debugger_Data: debuggerData;
-    /**
-     * 添加Debugger數據
-     * @param k
-     * @param v
-     */
-    static addDebuggerData(k: string, v: any) {
-        let data = GameDebugger.GetInstance().debugger_Data;
-        data = data || {};
-        data.globalData = data.globalData || {};
-        data.updateData = data.updateData || {};
-        if (k in GameEnum.Debugger.globalData) {
-            data.globalData[k] = v;
-        }
-        if (k in GameEnum.Debugger.updateData) {
-            data.updateData[k] = v;
-        }
     }
 
     /**聊天添加GM指令 */
@@ -246,7 +206,7 @@ export class GameDebugger extends SingletonClass {
     }
     //#region  自定义事件
     /**游戏结束 */
-    onDebugGameOver(event: JS_TO_LUA_DATA) {}
+    onDebugGameOver(event: JS_TO_LUA_DATA) { }
     /**reload */
     onDebugReload(event: JS_TO_LUA_DATA) {
         SendToConsole("clearall");
@@ -272,40 +232,6 @@ export class GameDebugger extends SingletonClass {
         }
     }
     //#endregion
-    //#region 功能性接口
 
-    /**
-     * 讓玩家失敗
-     * @param iPlayerID
-     */
-    MakePlayerLose(iPlayerID: PlayerID) {
-        let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
-        if (hHero && hHero.IsAlive()) {
-            // -- 数据存储
-            // this.UpdatePlayerEndData(hHero)
-            if (IsInToolsMode()) {
-                hHero.ForceKill(false);
-            }
-            let allLose = true;
-            GameRules.Addon.ETRoot.PlayerSystem()
-                .GetAllPlayeridByTeam()
-                .forEach((playerId) => {
-                    let _hHero = PlayerResource.GetSelectedHeroEntity(playerId);
-                    if (_hHero && _hHero.IsAlive()) {
-                        allLose = false;
-                    }
-                });
-            if (allLose && !IsInToolsMode()) {
-                GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
-            }
-        }
-    }
-    //#endregion
 }
-/**debug 數據 */
-interface debuggerData {
-    /**游戲全局數據 */
-    globalData?: any;
-    /**游戲實時更新數據 */
-    updateData?: any;
-}
+

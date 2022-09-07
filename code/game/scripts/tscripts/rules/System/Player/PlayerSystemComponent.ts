@@ -26,6 +26,8 @@ export class PlayerSystemComponent extends ET.Component {
             event.state = true;
             this.OnLoginPlayer(event.PlayerID);
         });
+
+
     }
 
     public readonly IsAllLogin: boolean = false;
@@ -56,6 +58,57 @@ export class PlayerSystemComponent extends ET.Component {
         this._WaitSyncEntity.length = 0;
         GameRules.Addon.ETRoot.MapSystem().OnAllPlayerClientLoginFinish();
     }
+
+    /**
+       * 監聽玩家斷綫自動失敗
+       * @param inter
+       */
+    public ListenPlayerDisconnect(inter: number = 5) {
+        TimerHelper.addTimer(
+            inter,
+            () => {
+                this.GetAllPlayerid()
+                    .forEach(async (iPlayerID) => {
+                        if (PlayerResource.GetConnectionState(iPlayerID) == DOTAConnectionState_t.DOTA_CONNECTION_STATE_ABANDONED) {
+                            await this.OnPlayerLeaveGame(iPlayerID);
+                        }
+                    });
+                return inter;
+            },
+            this,
+            false
+        );
+    }
+
+    /**
+    * 讓玩家失敗
+    * @param iPlayerID
+    */
+    async OnPlayerLeaveGame(iPlayerID: PlayerID) {
+        let player = this.GetPlayer(iPlayerID);
+        player.IsLeaveGame = true;
+        await player.PlayerHttpComp().PlayerLoginOut();
+        let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
+        if (hHero && hHero.IsAlive()) {
+            // -- 数据存储
+            // this.UpdatePlayerEndData(hHero)
+            if (IsInToolsMode()) {
+                hHero.ForceKill(false);
+            }
+            let allLose = true;
+            this.GetAllPlayerid()
+                .forEach((playerId) => {
+                    let _hHero = PlayerResource.GetSelectedHeroEntity(playerId);
+                    if (_hHero && _hHero.IsAlive()) {
+                        allLose = false;
+                    }
+                });
+            if (allLose && !IsInToolsMode()) {
+                GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
+            }
+        }
+    }
+
 
     private _WaitSyncEntity: { obj: ET.Entity, ignoreChild: boolean }[] = [];
     public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
@@ -99,6 +152,7 @@ export class PlayerSystemComponent extends ET.Component {
         }
         let playerRoot = Object.values(this.AllPlayer)[0];
         await playerRoot.PlayerHttpComp().CreateGameRecord(allServerPlayerId);
+        this.ListenPlayerDisconnect();
     }
 
     /**

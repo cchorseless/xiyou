@@ -2491,18 +2491,11 @@ export module GameEnum {
             req_collect_entity = "req_collect_entity",
             //#endregion
         }
-       
+
     }
 
     /**玩家行为 */
-    export namespace Debugger {
-        export enum globalData {
-            DOTA_GAMERULES_STATE_INIT = "DOTA_GAMERULES_STATE_INIT",
-            DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD = "DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD",
-            DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP = "DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP",
-        }
-        export enum updateData {}
-    }
+
 
     export namespace Dota2 {
         /**英雄名称 */
@@ -2776,7 +2769,7 @@ export module GameEnum {
         export enum EItemIndex {
             Gold = 1,
             Wood = 2,
-            Food=3,
+            Food = 3,
         }
     }
 }

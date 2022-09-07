@@ -56,6 +56,20 @@ export class PlayerHttpComponent extends ET.Component {
         LogHelper.error(`Login error => steamid:${steamid}  playerid:${playerid}`);
     }
 
+    public async PlayerLoginOut() {
+        if (this.IsDisposed()) {
+            return;
+        }
+        let cbmsg1: GameProtocol.H2C_CommonResponse = await this.GetAsync(
+            GameProtocol.Config.LoginOut);
+        if (cbmsg1.Error == 0) {
+            let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
+            LogHelper.print(`PlayerLoginOut => ${playerid}-----------------------`);
+            return;
+        }
+        LogHelper.error(`PlayerLoginOut error -----------------------`);
+    }
+
     public async CreateGameRecord(serverplayerIds: string[]) {
         if (this.IsDisposed()) {
             return;
