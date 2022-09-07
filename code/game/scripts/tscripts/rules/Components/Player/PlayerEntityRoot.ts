@@ -18,7 +18,8 @@ import { PlayerScene } from "./PlayerScene";
 export class PlayerEntityRoot extends ET.EntityRoot {
     readonly Playerid: PlayerID;
     readonly Hero?: BaseNpc_Hero_Plus;
-    IsLogin: boolean;
+    public IsLogin: boolean;
+    public IsLeaveGame: boolean = false;
 
     public onAwake(): void {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerHttpComponent>("PlayerHttpComponent"));
@@ -44,12 +45,13 @@ export class PlayerEntityRoot extends ET.EntityRoot {
             if (entity == null) {
                 break;
             }
-            NetTablesHelper.SetETEntity(entity.obj, entity.ignoreChild, this.Playerid);
+            this.SyncClientEntity(entity.obj, entity.ignoreChild);
         }
         this._WaitSyncEntity.length = 0;
     }
     private _WaitSyncEntity: { obj: ET.Entity, ignoreChild: boolean }[] = [];
     public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
+        if (this.IsLeaveGame) { return }
         if (this.IsLogin) {
             NetTablesHelper.SetETEntity(obj, ignoreChild, this.Playerid);
         }

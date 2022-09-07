@@ -12,6 +12,7 @@ export class ServerZoneGameRecordComponent extends ET.Component {
     }
 
     public ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
+
     onSerializeToEntity() {
         let serverzone = ET.EntityEventSystem.GetEntity(this.Id + "TServerZone");
         if (serverzone != null) {
@@ -19,6 +20,7 @@ export class ServerZoneGameRecordComponent extends ET.Component {
             this.onReload();
         }
     }
+
     onReload() {
         GameRules.Addon.ETRoot.PlayerSystem().SyncClientEntity(this, true);
     }
