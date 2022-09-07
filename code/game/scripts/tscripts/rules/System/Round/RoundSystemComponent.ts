@@ -20,12 +20,12 @@ export class RoundSystemComponent extends ET.Component {
     }
     public addEvent() {
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityHurtEvent, this.OnEntityHurtEvent);
-       
+
     }
 
-    OnAllPlayerClientLoginFinish() {
+    StartGame() {
         this.runBoardRound(RoundState.GetFirstBoardRoundid());
-        
+
     }
 
     private OnEntityHurtEvent(events: EntityHurtEvent) {

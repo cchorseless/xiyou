@@ -13,6 +13,7 @@ export class PlayerHttpComponent extends ET.Component {
     public TOKEN: string = "";
     public Address = "";
     public Port = "";
+    public ServerPlayerID = "";
 
     public getAdressPort() {
         return this.Address + ":" + this.Port;
@@ -44,6 +45,7 @@ export class PlayerHttpComponent extends ET.Component {
             let _adress = cbmsg1.Address.split(":");
             this.Address = "http://" + _adress[0];
             this.Port = _adress[1];
+            this.ServerPlayerID = cbmsg1.UserId;
             let cbmsg2: GameProtocol.H2C_CommonResponse = await this.PostAsync(GameProtocol.Config.LoginGate, { UserId: cbmsg1.UserId, Key: cbmsg1.Key, ServerId: 1 });
             if (cbmsg2.Error == 0) {
                 this.TOKEN = "Bearer " + cbmsg2.Message;
@@ -54,14 +56,16 @@ export class PlayerHttpComponent extends ET.Component {
         LogHelper.error(`Login error => steamid:${steamid}  playerid:${playerid}`);
     }
 
-    public async GetServerZoneInfo() {
+    public async CreateGameRecord(serverplayerIds: string[]) {
         if (this.IsDisposed()) {
             return;
         }
-        let cbmsg1: GameProtocol.H2C_CommonResponse = await this.GetAsync(GameProtocol.Config.GetServerZoneInfo);
+        let cbmsg1: GameProtocol.H2C_CommonResponse = await this.PostAsync(
+            GameProtocol.Config.CreateGameRecord, { Players: serverplayerIds });
         if (cbmsg1.Error == 0) {
             return;
         }
+        LogHelper.error(`CreateGameRecord error -----------------------`);
     }
 
     public Ping() {

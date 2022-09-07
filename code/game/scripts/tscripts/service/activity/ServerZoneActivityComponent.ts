@@ -26,6 +26,10 @@ export class ServerZoneActivityComponent extends ET.Component {
         let serverzone = ET.EntityEventSystem.GetEntity(this.Id + "TServerZone");
         if (serverzone) {
             serverzone.AddOneComponent(this);
+            this.onReload();
         }
+    }
+    onReload() {
+        GameRules.Addon.ETRoot.PlayerSystem().SyncClientEntity(this, true);
     }
 }

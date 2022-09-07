@@ -19,7 +19,7 @@ export class DrawSystemComponent extends ET.Component {
         });
     }
 
-    public OnAllPlayerClientLoginFinish() {
+    public StartGame() {
         TimerHelper.addTimer(1, () => {
             GameRules.Addon.ETRoot.PlayerSystem()
                 .GetAllPlayer()

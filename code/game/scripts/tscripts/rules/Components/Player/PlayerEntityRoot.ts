@@ -35,6 +35,8 @@ export class PlayerEntityRoot extends ET.EntityRoot {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingManagerComponent>("BuildingManagerComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
     }
+
+
     public OnLoginFinish(): void {
         this.IsLogin = true;
         while (this._WaitSyncEntity.length > 0) {
@@ -42,7 +44,7 @@ export class PlayerEntityRoot extends ET.EntityRoot {
             if (entity == null) {
                 break;
             }
-            NetTablesHelper.SetETEntity(entity.obj, entity.ignoreChild);
+            NetTablesHelper.SetETEntity(entity.obj, entity.ignoreChild, this.Playerid);
         }
         this._WaitSyncEntity.length = 0;
     }

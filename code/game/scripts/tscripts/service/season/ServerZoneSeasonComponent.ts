@@ -20,8 +20,8 @@ export class ServerZoneSeasonComponent extends ET.Component {
             this._Seasons.add(_d[0], _d[1]);
         }
     }
-    public get ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
-    public get CurSeason(): TServerZoneSeason {
+    public ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
+    public CurSeason(): TServerZoneSeason {
         if (this.Seasons.containsKey(this.CurSeasonConfigId)) {
             return this.GetChild<TServerZoneSeason>(this.Seasons.get(this.CurSeasonConfigId));
         }
@@ -31,8 +31,12 @@ export class ServerZoneSeasonComponent extends ET.Component {
 
     onSerializeToEntity() {
         let serverzone = ET.EntityEventSystem.GetEntity(this.Id + "TServerZone");
-        if (serverzone!= null) {
+        if (serverzone != null) {
             serverzone.AddOneComponent(this);
+            this.onReload();
         }
+    }
+    onReload() {
+        GameRules.Addon.ETRoot.PlayerSystem().SyncClientEntity(this, true);
     }
 }

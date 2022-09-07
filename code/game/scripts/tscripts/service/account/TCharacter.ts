@@ -15,6 +15,7 @@ import { CharacterRechargeComponent } from "../recharge/CharacterRechargeCompone
 import { CharacterBuffComponent } from "../buff/CharacterBuffComponent";
 import { CharacterTitleComponent } from "../title/CharacterTitleComponent";
 import { CharacterAchievementComponent } from "../achievement/CharacterAchievementComponent";
+import { CharacterGameRecordComponent } from "../gamerecord/CharacterGameRecordComponent";
 
 @registerET()
 export class TCharacter extends ET.Component {
@@ -86,5 +87,8 @@ export class TCharacter extends ET.Component {
     }
     AchievementComp() {
         return this.GetComponentByName<CharacterAchievementComponent>("CharacterAchievementComponent");
+    }
+    GameRecordComp() {
+        return this.GetComponentByName<CharacterGameRecordComponent>("CharacterGameRecordComponent");
     }
 }

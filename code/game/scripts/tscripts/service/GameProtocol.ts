@@ -3,7 +3,7 @@ export module GameProtocol {
         static readonly AccountLoginKey = "/AccountLoginKey";
         static readonly LoginRealm = "/LoginRealm";
         static readonly LoginGate = "/LoginGate";
-        static readonly GetServerZoneInfo = "/GetServerZoneInfo";
+        static readonly CreateGameRecord = "/CreateGameRecord";
         static readonly RefreshToken = "/RefreshToken";
         static readonly Ping = "/Ping";
         static readonly LoginOut = "/LoginOut";

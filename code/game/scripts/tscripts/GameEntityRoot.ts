@@ -5,6 +5,8 @@
 
 import { GameEnum } from "./GameEnum";
 import { EventHelper } from "./helper/EventHelper";
+import { LogHelper } from "./helper/LogHelper";
+import { NetTablesHelper } from "./helper/NetTablesHelper";
 import { PrecacheHelper } from "./helper/PrecacheHelper";
 import { ET } from "./rules/Entity/Entity";
 import { BuildingSystemComponent } from "./rules/System/Building/BuildingSystemComponent";
@@ -84,20 +86,47 @@ export class GameEntityRoot extends ET.EntityRoot {
     private addEvent() {
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, async (e) => {
             const nNewState = GameRules.State_Get();
+            LogHelper.print("OnGameRulesStateChange", nNewState);
             switch (nNewState) {
+                case DOTA_GameState.DOTA_GAMERULES_STATE_INIT:
+                    // GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_INIT, GetSystemTimeMS() / 1000);
+                    break;
+                case DOTA_GameState.DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD:
+                    // GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD, GetSystemTimeMS() / 1000);
+                    break;
                 // -- 游戏初始化
                 case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
-                    await this.PlayerSystem().CreateAllPlayer();
+                    // GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP, GetSystemTimeMS() / 1000);
+                    // GameDebugger.GetInstance().debugger_OnPlayerDisconnect();
+                    await this.PlayerSystem().StartGame();
                     break;
+                // 	-- 选择英雄,可以获取玩家数量
+                case DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION:
+                    break;
+                // 	-- 策略时间 创建初始英雄，调用初始英雄脚本
+                case DOTA_GameState.DOTA_GAMERULES_STATE_STRATEGY_TIME:
+                    break;
+                // 	队伍阵容调整阶段
+                case DOTA_GameState.DOTA_GAMERULES_STATE_TEAM_SHOWCASE:
+                    break;
+                // 	地图加载阶段
+                case DOTA_GameState.DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD:
+                    break;
+                // 	-- 准备阶段(进游戏，刷怪前)
+                case DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME:
+                    break;
+                // -- 游戏准备开始
                 case DOTA_GameState.DOTA_GAMERULES_STATE_GAME_IN_PROGRESS:
                     this.StartGame();
+                    break;
+                //  --游戏正式开始
+                case DOTA_GameState.DOTA_GAMERULES_STATE_POST_GAME:
                     break;
             }
         });
     }
-
     private StartGame() {
-        this.RoundSystem().OnAllPlayerClientLoginFinish();
-        this.DrawSystem().OnAllPlayerClientLoginFinish();
+        this.RoundSystem().StartGame();
+        this.DrawSystem().StartGame();
     }
 }

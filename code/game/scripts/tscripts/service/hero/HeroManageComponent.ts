@@ -18,7 +18,7 @@ export class HeroManageComponent extends ET.Component {
     }
 
     HeroBanDesign: string[];
-    public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
+    public Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {
         let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
         if (character) {

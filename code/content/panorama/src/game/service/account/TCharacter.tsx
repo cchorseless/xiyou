@@ -7,6 +7,7 @@ import { BagComponent } from "../bag/BagComponent";
 import { CharacterBuffComponent } from "../buff/CharacterBuffComponent";
 import { SeedRandomComponent } from "../common/SeedRandomComponent";
 import { CharacterDrawTreasureComponent } from "../draw/CharacterDrawTreasureComponent";
+import { CharacterGameRecordComponent } from "../gamerecord/CharacterGameRecordComponent";
 import { HeroManageComponent } from "../hero/HeroManageComponent";
 import { CharacterMailComponent } from "../mail/CharacterMailComponent";
 import { CharacterRechargeComponent } from "../recharge/CharacterRechargeComponent";
@@ -20,11 +21,9 @@ import { CharacterSteamComponent } from "./CharacterSteamComponent";
 export class TCharacter extends ET.Component {
     PlayerId: string;
     Name: string;
-
     onSerializeToEntity() {
         PlayerScene.Scene.AddOneComponent(this);
     }
-
     get SeedRandomComp() {
         return this.GetComponentByName<SeedRandomComponent>("SeedRandomComponent");
     }
@@ -66,5 +65,8 @@ export class TCharacter extends ET.Component {
     }
     get AchievementComp() {
         return this.GetComponentByName<CharacterAchievementComponent>("CharacterAchievementComponent");
+    }
+    get GameRecordComp() {
+        return this.GetComponentByName<CharacterGameRecordComponent>("CharacterGameRecordComponent");
     }
 }

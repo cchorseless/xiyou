@@ -11,6 +11,7 @@ import { PlayerEntityRootComponent } from "./PlayerEntityRootComponent";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { GameEnum } from "../../../libs/GameEnum";
+import { TServerZone } from "../../service/serverzone/TServerZone";
 
 export class PlayerScene {
     /**组件 */
@@ -40,6 +41,10 @@ export class PlayerScene {
     static get TCharacter() {
         return this.Scene.GetComponentByName<TCharacter>("TCharacter")!;
     }
+    static get TServerZone() {
+        return this.Scene.GetComponentByName<TServerZone>("TServerZone")!;
+    }
+
 
     static LoginServer() {
         LogHelper.print("---------------LoginServer---------------");

@@ -19,13 +19,17 @@ export class ServerZoneShopComponent extends ET.Component {
             this._ShopUnit.add(_d[0], _d[1]);
         }
     }
-    public get ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
+    public ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
 
 
     onSerializeToEntity() {
         let serverzone = ET.EntityEventSystem.GetEntity(this.Id + "TServerZone");
         if (serverzone) {
             serverzone.AddOneComponent(this);
+            this.onReload();
         }
+    }
+    onReload() {
+        GameRules.Addon.ETRoot.PlayerSystem().SyncClientEntity(this, true);
     }
 }

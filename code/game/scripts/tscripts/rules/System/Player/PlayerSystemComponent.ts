@@ -1,6 +1,7 @@
 import { GameEnum } from "../../../GameEnum";
 import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
@@ -27,7 +28,7 @@ export class PlayerSystemComponent extends ET.Component {
         });
     }
 
-    private IsAllLogin: boolean = false;
+    public readonly IsAllLogin: boolean = false;
     private OnLoginPlayer(playerid: PlayerID) {
         if (this.IsAllLogin) {
             return;
@@ -39,14 +40,38 @@ export class PlayerSystemComponent extends ET.Component {
                 return;
             }
         }
-        this.IsAllLogin = true;
         this.OnAllPlayerClientLoginFinish();
     }
 
-    private  OnAllPlayerClientLoginFinish() {
+
+    public OnAllPlayerClientLoginFinish() {
+        (this as any).IsAllLogin = true;
+        while (this._WaitSyncEntity.length > 0) {
+            let entity = this._WaitSyncEntity.shift();
+            if (entity == null) {
+                break;
+            }
+            NetTablesHelper.SetETEntity(entity.obj, entity.ignoreChild);
+        }
+        this._WaitSyncEntity.length = 0;
         GameRules.Addon.ETRoot.MapSystem().OnAllPlayerClientLoginFinish();
     }
 
+    private _WaitSyncEntity: { obj: ET.Entity, ignoreChild: boolean }[] = [];
+    public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
+        if (this.IsAllLogin) {
+            NetTablesHelper.SetETEntity(obj, ignoreChild);
+        }
+        else {
+            for (let i = 0, len = this._WaitSyncEntity.length; i < len; i++) {
+                if (this._WaitSyncEntity[i].obj === obj) {
+                    this._WaitSyncEntity[i].ignoreChild = ignoreChild;
+                    return;
+                }
+            }
+            this._WaitSyncEntity.push({ obj: obj, ignoreChild: ignoreChild });
+        }
+    }
 
     public IsValidPlayer(playerid: PlayerID | number | string): boolean {
         return this.AllPlayer[playerid + ""] != null;
@@ -60,8 +85,9 @@ export class PlayerSystemComponent extends ET.Component {
         return Object.values(this.AllPlayer);
     }
 
-    public async CreateAllPlayer() {
+    public async StartGame() {
         let allPlayer = this.GetAllPlayerid();
+        let allServerPlayerId: string[] = [];
         for (let playerid of allPlayer) {
             let playerScene = new PlayerScene();
             PlayerEntityRoot.Active(playerScene);
@@ -69,7 +95,10 @@ export class PlayerSystemComponent extends ET.Component {
             (playerRoot as any).Playerid = playerid;
             this.AllPlayer[playerid + ""] = playerRoot;
             await playerRoot.PlayerHttpComp().PlayerLogin(playerid);
+            allServerPlayerId.push(playerRoot.PlayerHttpComp().ServerPlayerID)
         }
+        let playerRoot = Object.values(this.AllPlayer)[0];
+        await playerRoot.PlayerHttpComp().CreateGameRecord(allServerPlayerId);
     }
 
     /**
