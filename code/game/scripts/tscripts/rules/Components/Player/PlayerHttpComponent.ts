@@ -14,6 +14,7 @@ export class PlayerHttpComponent extends ET.Component {
     public Address = "";
     public Port = "";
     public ServerPlayerID = "";
+    public readonly IsOnline: boolean = false;
 
     public getAdressPort() {
         return this.Address + ":" + this.Port;
@@ -49,6 +50,7 @@ export class PlayerHttpComponent extends ET.Component {
             let cbmsg2: GameProtocol.H2C_CommonResponse = await this.PostAsync(GameProtocol.Config.LoginGate, { UserId: cbmsg1.UserId, Key: cbmsg1.Key, ServerId: 1 });
             if (cbmsg2.Error == 0) {
                 this.TOKEN = "Bearer " + cbmsg2.Message;
+                (this as any).IsOnline = true;
                 this.Ping();
                 return;
             }
@@ -57,7 +59,7 @@ export class PlayerHttpComponent extends ET.Component {
     }
 
     public async PlayerLoginOut() {
-        if (this.IsDisposed()) {
+        if (this.IsDisposed() || !this.IsOnline) {
             return;
         }
         let cbmsg1: GameProtocol.H2C_CommonResponse = await this.GetAsync(
@@ -70,8 +72,24 @@ export class PlayerHttpComponent extends ET.Component {
         LogHelper.error(`PlayerLoginOut error -----------------------`);
     }
 
+    public async UploadGameRecord(key: string[], v: string[]) {
+        if (this.IsDisposed() || !this.IsOnline) {
+            return;
+        }
+        let cbmsg1: GameProtocol.H2C_CommonResponse = await this.PostAsync(
+            GameProtocol.Config.UploadGameRecord, { Keys: key, Values: v });
+        if (cbmsg1.Error == 0) {
+            let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
+            LogHelper.print(`UploadGameRecord => ${playerid}-----------------------`);
+            return;
+        }
+        LogHelper.error(`UploadGameRecord error -----------------------`);
+    }
+
+
+
     public async CreateGameRecord(serverplayerIds: string[]) {
-        if (this.IsDisposed()) {
+        if (this.IsDisposed() || !this.IsOnline) {
             return;
         }
         let cbmsg1: GameProtocol.H2C_CommonResponse = await this.PostAsync(
@@ -104,6 +122,10 @@ export class PlayerHttpComponent extends ET.Component {
                             }
                         }
                         this.Ping();
+                    }
+                    else {
+                        (this as any).IsOnline = false;
+                        LogHelper.error("ping error-------------------");
                     }
                 },
                 this.getAdressPort(),

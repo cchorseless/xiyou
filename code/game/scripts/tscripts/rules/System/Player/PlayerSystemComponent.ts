@@ -59,6 +59,23 @@ export class PlayerSystemComponent extends ET.Component {
         GameRules.Addon.ETRoot.MapSystem().OnAllPlayerClientLoginFinish();
     }
 
+    private _WaitUploadGameRecord: { k: string, v: string }[] = [];
+    public UploadGameRecord(key: string, v: string | number) {
+        this._WaitUploadGameRecord.push({ k: key, v: v + "" });
+        let player = this.GetOneOnlinePlayer();
+        if (player) {
+            let keys: string[] = [];
+            let values: string[] = [];
+            for (let info of this._WaitUploadGameRecord) {
+                keys.push(info.k);
+                values.push(info.v);
+            }
+            this._WaitUploadGameRecord = [];
+            player.PlayerHttpComp().UploadGameRecord(keys, values);
+        }
+    }
+
+
     /**
        * 監聽玩家斷綫自動失敗
        * @param inter
@@ -129,6 +146,16 @@ export class PlayerSystemComponent extends ET.Component {
     public IsValidPlayer(playerid: PlayerID | number | string): boolean {
         return this.AllPlayer[playerid + ""] != null;
     }
+    public GetOneOnlinePlayer(): PlayerEntityRoot {
+        let allPlayer = this.GetAllPlayer();
+        for (let player of allPlayer) {
+            if (player.PlayerHttpComp().IsOnline) {
+                return player;
+            }
+        }
+        return null;
+    }
+
 
     public GetPlayer(playerid: PlayerID | number | string): PlayerEntityRoot {
         return this.AllPlayer[playerid + ""];
@@ -150,7 +177,7 @@ export class PlayerSystemComponent extends ET.Component {
             await playerRoot.PlayerHttpComp().PlayerLogin(playerid);
             allServerPlayerId.push(playerRoot.PlayerHttpComp().ServerPlayerID)
         }
-        let playerRoot = Object.values(this.AllPlayer)[0];
+        let playerRoot = this.GetOneOnlinePlayer();;
         await playerRoot.PlayerHttpComp().CreateGameRecord(allServerPlayerId);
         this.ListenPlayerDisconnect();
     }

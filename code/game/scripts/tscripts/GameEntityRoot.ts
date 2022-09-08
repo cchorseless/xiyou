@@ -89,14 +89,14 @@ export class GameEntityRoot extends ET.EntityRoot {
             LogHelper.print("OnGameRulesStateChange", nNewState);
             switch (nNewState) {
                 case DOTA_GameState.DOTA_GAMERULES_STATE_INIT:
-                    // GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_INIT, GetSystemTimeMS() / 1000);
+                    this.PlayerSystem().UploadGameRecord(GameEnum.EGameRecordKey.GameTime.GAMERULES_STATE_INIT, GetSystemTimeMS() / 1000);
                     break;
                 case DOTA_GameState.DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD:
-                    // GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD, GetSystemTimeMS() / 1000);
+                    this.PlayerSystem().UploadGameRecord(GameEnum.EGameRecordKey.GameTime.GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD, GetSystemTimeMS() / 1000);
                     break;
                 // -- 游戏初始化
                 case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
-                    // GameDebugger.addDebuggerData(GameEnum.Debugger.globalData.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP, GetSystemTimeMS() / 1000);
+                    this.PlayerSystem().UploadGameRecord(GameEnum.EGameRecordKey.GameTime.GAMERULES_STATE_CUSTOM_GAME_SETUP, GetSystemTimeMS() / 1000);
                     await this.PlayerSystem().StartGame();
                     break;
                 // 	-- 选择英雄,可以获取玩家数量
@@ -128,4 +128,7 @@ export class GameEntityRoot extends ET.EntityRoot {
         this.RoundSystem().StartGame();
         this.DrawSystem().StartGame();
     }
+
+
+
 }

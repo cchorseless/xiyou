@@ -4,6 +4,7 @@ export module GameProtocol {
         static readonly LoginRealm = "/LoginRealm";
         static readonly LoginGate = "/LoginGate";
         static readonly CreateGameRecord = "/CreateGameRecord";
+        static readonly UploadGameRecord = "/UploadGameRecord";
         static readonly RefreshToken = "/RefreshToken";
         static readonly Ping = "/Ping";
         static readonly LoginOut = "/LoginOut";

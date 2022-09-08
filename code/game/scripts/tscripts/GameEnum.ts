@@ -1767,6 +1767,23 @@ export module GameEnum {
         ];
     }
 
+    export namespace EGameRecordKey {
+        export class GameTime {
+            public static readonly GAMERULES_STATE_INIT = "GAMERULES_STATE_INIT";
+            public static readonly GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD = "GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD";
+            public static readonly GAMERULES_STATE_CUSTOM_GAME_SETUP = "GAMERULES_STATE_CUSTOM_GAME_SETUP";
+            public static readonly GAMERULES_STATE_HERO_SELECTION = "GAMERULES_STATE_HERO_SELECTION";
+            public static readonly GAMERULES_STATE_STRATEGY_TIME = "GAMERULES_STATE_STRATEGY_TIME";
+            public static readonly GAMERULES_STATE_TEAM_SHOWCASE = "GAMERULES_STATE_TEAM_SHOWCASE";
+            public static readonly GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD = "GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD";
+            public static readonly GAMERULES_STATE_PRE_GAME = "GAMERULES_STATE_PRE_GAME";
+            public static readonly GAMERULES_STATE_SCENARIO_SETUP = "GAMERULES_STATE_SCENARIO_SETUP";
+            public static readonly GAMERULES_STATE_GAME_IN_PROGRESS = "GAMERULES_STATE_GAME_IN_PROGRESS";
+            public static readonly GAMERULES_STATE_POST_GAME = "GAMERULES_STATE_POST_GAME";
+            public static readonly GAMERULES_STATE_DISCONNECT = "GAMERULES_STATE_DISCONNECT";
+        }
+    }
+
     export namespace Unit {
         /**单位类型 */
         export enum UnitClass {
