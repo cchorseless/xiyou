@@ -51,6 +51,7 @@ export class PlayerHttpComponent extends ET.Component {
             if (cbmsg2.Error == 0) {
                 this.TOKEN = "Bearer " + cbmsg2.Message;
                 (this as any).IsOnline = true;
+                LogHelper.print(`Login success => steamid:${steamid}  playerid:${playerid}`);
                 this.Ping();
                 return;
             }
@@ -62,8 +63,7 @@ export class PlayerHttpComponent extends ET.Component {
         if (this.IsDisposed() || !this.IsOnline) {
             return;
         }
-        let cbmsg1: GameProtocol.H2C_CommonResponse = await this.GetAsync(
-            GameProtocol.Config.LoginOut);
+        let cbmsg1: GameProtocol.H2C_CommonResponse = await this.GetAsync(GameProtocol.Config.LoginOut);
         if (cbmsg1.Error == 0) {
             let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
             LogHelper.print(`PlayerLoginOut => ${playerid}-----------------------`);
@@ -76,8 +76,7 @@ export class PlayerHttpComponent extends ET.Component {
         if (this.IsDisposed() || !this.IsOnline) {
             return;
         }
-        let cbmsg1: GameProtocol.H2C_CommonResponse = await this.PostAsync(
-            GameProtocol.Config.UploadGameRecord, { Keys: key, Values: v });
+        let cbmsg1: GameProtocol.H2C_CommonResponse = await this.PostAsync(GameProtocol.Config.UploadGameRecord, { Keys: key, Values: v });
         if (cbmsg1.Error == 0) {
             let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
             LogHelper.print(`UploadGameRecord => ${playerid}-----------------------`);
@@ -86,14 +85,11 @@ export class PlayerHttpComponent extends ET.Component {
         LogHelper.error(`UploadGameRecord error -----------------------`);
     }
 
-
-
     public async CreateGameRecord(serverplayerIds: string[]) {
         if (this.IsDisposed() || !this.IsOnline) {
             return;
         }
-        let cbmsg1: GameProtocol.H2C_CommonResponse = await this.PostAsync(
-            GameProtocol.Config.CreateGameRecord, { Players: serverplayerIds });
+        let cbmsg1: GameProtocol.H2C_CommonResponse = await this.PostAsync(GameProtocol.Config.CreateGameRecord, { Players: serverplayerIds });
         if (cbmsg1.Error == 0) {
             return;
         }
@@ -122,8 +118,7 @@ export class PlayerHttpComponent extends ET.Component {
                             }
                         }
                         this.Ping();
-                    }
-                    else {
+                    } else {
                         (this as any).IsOnline = false;
                         LogHelper.error("ping error-------------------");
                     }
@@ -134,5 +129,5 @@ export class PlayerHttpComponent extends ET.Component {
         }
     }
 
-    public onAwake() { }
+    public onAwake() {}
 }

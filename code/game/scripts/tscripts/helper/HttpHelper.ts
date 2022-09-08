@@ -80,7 +80,7 @@ export module HttpHelper {
                     LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
                     resolve(json.decode(response.Body)[0]);
                 } else {
-                    LogHelper.error("http cb=>", sAction, response.StatusCode);
+                    LogHelper.error("http cb=>", sAction, response.StatusCode,'-----------');
                     reject(response.Body);
                 }
             });

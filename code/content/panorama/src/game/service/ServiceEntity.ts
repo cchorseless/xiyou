@@ -48,6 +48,9 @@ import { CharacterDrawTreasureComponent } from "./draw/CharacterDrawTreasureComp
 import { HeroEquipComponent } from "./equip/HeroEquipComponent";
 import { TEquipItem } from "./equip/TEquipItem";
 import { TEquipItemProp } from "./equip/TEquipItemProp";
+import { CharacterGameRecordComponent } from "./gamerecord/CharacterGameRecordComponent";
+import { ServerZoneGameRecordComponent } from "./gamerecord/ServerZoneGameRecordComponent";
+import { TGameRecordItem } from "./gamerecord/TGameRecordItem";
 import { HeroManageComponent } from "./hero/HeroManageComponent";
 import { HeroTalentComponent } from "./hero/HeroTalentComponent";
 import { THeroBanDesign } from "./hero/THeroBanDesign";
@@ -136,6 +139,10 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     HeroEquipComponent,
     TEquipItem,
     TEquipItemProp,
+
+    CharacterGameRecordComponent,
+    ServerZoneGameRecordComponent,
+    TGameRecordItem,
 
     HeroManageComponent,
     HeroTalentComponent,
