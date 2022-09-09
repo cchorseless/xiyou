@@ -15,6 +15,7 @@ export class PlayerHttpComponent extends ET.Component {
     public Port = "";
     public ServerPlayerID = "";
     public readonly IsOnline: boolean = false;
+    public static readonly GateId: number = 0;
 
     public getAdressPort() {
         return this.Address + ":" + this.Port;
@@ -41,8 +42,9 @@ export class PlayerHttpComponent extends ET.Component {
         } else {
             password = md5.sumhexa(cbmsg.Key + GameSetting.ServerKey()) + accountid;
         }
-        let cbmsg1: GameProtocol.R2C_Login = await this.PostAsync(GameProtocol.Config.LoginRealm, { Account: steamid, Password: password, ServerId: 1 }, loginUrl);
+        let cbmsg1: GameProtocol.R2C_Login = await this.PostAsync(GameProtocol.Config.LoginRealm, { Account: steamid, Password: password, ServerId: 1, GateId: PlayerHttpComponent.GateId }, loginUrl);
         if (cbmsg1.Error == 0) {
+            (PlayerHttpComponent.GateId as any) = cbmsg1.GateId;
             let _adress = cbmsg1.Address.split(":");
             this.Address = "http://" + _adress[0];
             this.Port = _adress[1];
@@ -129,5 +131,5 @@ export class PlayerHttpComponent extends ET.Component {
         }
     }
 
-    public onAwake() {}
+    public onAwake() { }
 }
