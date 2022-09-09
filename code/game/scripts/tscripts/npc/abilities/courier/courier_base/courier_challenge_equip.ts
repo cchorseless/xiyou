@@ -7,14 +7,11 @@ import { serializeDomainProps } from "../../../../rules/Entity/Entity";
 import { DifficultyState } from "../../../../rules/System/Difficulty/DifficultyState";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
+import { ActiveRootAbility } from "../../ActiveRootAbility";
 
 @registerAbility()
-export class courier_challenge_equip extends BaseAbility_Plus {
-    Init() {
-        if (IsServer()) {
-            AbilityEntityRoot.Active(this);
-        }
-    }
+export class courier_challenge_equip extends ActiveRootAbility {
+
     CastFilterResult(): UnitFilterResult {
         let caster = this.GetCasterPlus();
         if (IsServer()) {

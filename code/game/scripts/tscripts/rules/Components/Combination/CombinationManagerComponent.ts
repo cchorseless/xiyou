@@ -1,18 +1,19 @@
 import { KVHelper } from "../../../helper/KVHelper";
 import { ET, registerET } from "../../Entity/Entity";
+import { AbilityEntityRoot } from "../Ability/AbilityEntityRoot";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ECombination } from "./ECombination";
 
 @registerET()
 export class CombinationManagerComponent extends ET.Component {
     onAwake(): void {
-        let config = KVHelper.KvServerConfig.building_combination;
+        let config = KVHelper.KvServerConfig.building_combination_ability;
         for (let key in config) {
             let info = config[key];
-            let combina = this.allCombination[info.relation];
+            let combina = this.allCombination[info.relationid];
             if (combina == null) {
                 combina = this.AddChild(ECombination);
-                this.allCombination[info.relation] = combina;
+                this.allCombination[info.relationid] = combina;
             }
             combina.addConfig(info);
         }
@@ -21,7 +22,7 @@ export class CombinationManagerComponent extends ET.Component {
     private allCombination: { [k: string]: ECombination } = {};
     private entityArr: string[] = [];
 
-    public add(entity: BuildingEntityRoot) {
+    public add(entity: AbilityEntityRoot) {
         let comb = entity.CombinationComp();
         if (comb == null) {
             return;

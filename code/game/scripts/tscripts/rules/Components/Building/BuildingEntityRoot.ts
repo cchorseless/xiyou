@@ -2,6 +2,7 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
+import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
@@ -33,7 +34,9 @@ export class BuildingEntityRoot extends PlayerCreateUnitEntityRoot {
     BuildingPropComp() {
         return this.GetComponentByName<BuildingPropsComponent>("BuildingPropsComponent");
     }
-
+    AbilityManagerComp() {
+        return this.GetComponentByName<AbilityManagerComponent>("AbilityManagerComponent");
+    }
     CombinationComp() {
         return this.GetComponentByName<CombinationComponent>("CombinationComponent");
     }

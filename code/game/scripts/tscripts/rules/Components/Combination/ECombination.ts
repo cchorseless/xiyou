@@ -1,15 +1,15 @@
-import { building_combination } from "../../../kvInterface/building/building_combination";
+import { building_combination_ability } from "../../../kvInterface/building/building_combination_ability";
 import { ET } from "../../Entity/Entity";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 
 export class ECombination extends ET.Entity {
 
-    private config: { [k: string]: building_combination.OBJ_2_1 } = {};
+    private config: { [k: string]: building_combination_ability.OBJ_2_1 } = {};
     private activeNeedCount: number;
     private combination: { [k: string]: number } = {};
     private entityArr: string[] = [];
-    
-    addConfig(c: building_combination.OBJ_2_1) {
+
+    addConfig(c: building_combination_ability.OBJ_2_1) {
         this.config[c.index] = c;
         this.activeNeedCount = tonumber(c.count);
     }
@@ -19,22 +19,25 @@ export class ECombination extends ET.Entity {
             if (this.config[k].heroid == "" + c) {
                 return true
             }
+            if (this.config[k].Abilityid == "" + c) {
+                return true
+            }
         }
         return false
     }
 
     isActive() {
-        return Object.keys(this.config).length <= this.activeNeedCount;
+        return Object.keys(this.combination).length >= this.activeNeedCount;
     }
 
     addCombination(entity: BuildingEntityRoot) {
         let comp = entity.CombinationComp();
         if (comp == null) { return };
-        if (this.entityArr.indexOf(entity.Id) == -1) {
-            this.entityArr.push(entity.Id);
-        };
         let c = entity.ConfigID;
         if (this.isInCombination(c)) {
+            if (this.entityArr.indexOf(entity.Id) == -1) {
+                this.entityArr.push(entity.Id);
+            };
             this.combination[c] = this.combination[c] || 0;
             this.combination[c] += 1;
             if (this.isActive()) {

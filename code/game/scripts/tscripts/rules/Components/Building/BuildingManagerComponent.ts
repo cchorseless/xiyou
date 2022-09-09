@@ -10,6 +10,7 @@ import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health
 import { ET, registerET } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { BuildingState } from "../../System/Building/BuildingState";
+import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { RoundBuildingComponent } from "../Round/RoundBuildingComponent";
@@ -70,7 +71,7 @@ export class BuildingManagerComponent extends ET.Component {
         if (buildingroot.GetDotaHeroName()) {
             buildingroot.AddComponent(WearableComponent, buildingroot.GetDotaHeroName());
         }
-        buildingroot.AddComponent(CombinationComponent);
+        buildingroot.AddComponent(AbilityManagerComponent);
         buildingroot.AddComponent(ChessComponent);
         buildingroot.AddComponent(RoundBuildingComponent);
         buildingroot.updateNetTable();

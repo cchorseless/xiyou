@@ -6,6 +6,7 @@ import { population_config } from "./kvConfig/population_config"
 import { tech_config } from "./kvConfig/tech_config" 
 import { lang_config } from "./kvConfig/lang_config" 
 import { building_combination } from "./building/building_combination" 
+import { building_combination_ability } from "./building/building_combination_ability" 
 import { building_item_card } from "./building/building_item_card" 
 import { building_round } from "./building/building_round" 
 import { building_round_board } from "./building/building_round_board" 
@@ -24,6 +25,7 @@ export interface KvAllInterface  {
 "tech_config": tech_config.OBJ_1_1,
 "lang_config": lang_config.OBJ_1_1,
 "building_combination": building_combination.OBJ_1_1,
+"building_combination_ability": building_combination_ability.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
 "building_round": building_round.OBJ_1_1,
 "building_round_board": building_round_board.OBJ_1_1,
@@ -43,6 +45,7 @@ export const KvAllPath = {
 "tech_config": "scripts/npc/kvConfig/tech_config.kv",
 "lang_config": "scripts/npc/kvConfig/lang_config.kv",
 "building_combination": "scripts/npc/building/building_combination.kv",
+"building_combination_ability": "scripts/npc/building/building_combination_ability.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
 "building_round": "scripts/npc/building/building_round.kv",
 "building_round_board": "scripts/npc/building/building_round_board.kv",
@@ -62,6 +65,7 @@ export interface KvServerInterface   {
 "tech_config": tech_config.OBJ_1_1,
 "lang_config": lang_config.OBJ_1_1,
 "building_combination": building_combination.OBJ_1_1,
+"building_combination_ability": building_combination_ability.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
 "building_round": building_round.OBJ_1_1,
 "building_round_board": building_round_board.OBJ_1_1,
@@ -81,6 +85,7 @@ export const KvServer = {
 "tech_config": "scripts/npc/kvConfig/tech_config.kv",
 "lang_config": "scripts/npc/kvConfig/lang_config.kv",
 "building_combination": "scripts/npc/building/building_combination.kv",
+"building_combination_ability": "scripts/npc/building/building_combination_ability.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
 "building_round": "scripts/npc/building/building_round.kv",
 "building_round_board": "scripts/npc/building/building_round_board.kv",
@@ -100,6 +105,7 @@ export interface KvClientInterface   {
 "tech_config": tech_config.OBJ_1_1,
 "lang_config": lang_config.OBJ_1_1,
 "building_combination": building_combination.OBJ_1_1,
+"building_combination_ability": building_combination_ability.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
 "building_round": building_round.OBJ_1_1,
 "building_round_board": building_round_board.OBJ_1_1,
@@ -119,6 +125,7 @@ export const KvClient = {
 "tech_config": "scripts/npc/kvConfig/tech_config.kv",
 "lang_config": "scripts/npc/kvConfig/lang_config.kv",
 "building_combination": "scripts/npc/building/building_combination.kv",
+"building_combination_ability": "scripts/npc/building/building_combination_ability.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
 "building_round": "scripts/npc/building/building_round.kv",
 "building_round_board": "scripts/npc/building/building_round_board.kv",

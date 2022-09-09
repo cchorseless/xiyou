@@ -30,6 +30,7 @@ import { WearableComponent } from "./rules/Components/Wearable/WearableComponent
 import { WearableSystemComponent } from "./rules/System/Wearable/WearableSystemComponent";
 import { ServiceEntity } from "./service/ServiceEntity";
 import { PlayerHeroComponent } from "./rules/Components/Player/PlayerHeroComponent";
+import { AbilityManagerComponent } from "./rules/Components/Ability/AbilityManagerComponent";
 
 [
     MapSystemComponent,
@@ -41,6 +42,7 @@ import { PlayerHeroComponent } from "./rules/Components/Player/PlayerHeroCompone
     BuildingSystemComponent,
     DrawSystemComponent,
 
+    AbilityManagerComponent,
     PlayerHeroComponent,
     PlayerDataComponent,
     PlayerHttpComponent,

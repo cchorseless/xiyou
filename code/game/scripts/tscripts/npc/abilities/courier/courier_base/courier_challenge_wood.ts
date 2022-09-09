@@ -10,15 +10,12 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility } from "../../../entityPlus/Base_Plus";
 import { modifier_task } from "../../../modifier/modifier_task";
+import { ActiveRootAbility } from "../../ActiveRootAbility";
 
 /**删除 */
 @registerAbility()
-export class courier_challenge_wood extends BaseAbility_Plus {
-    Init() {
-        if (IsServer()) {
-            AbilityEntityRoot.Active(this);
-        }
-    }
+export class courier_challenge_wood extends ActiveRootAbility {
+
     CastFilterResult(): UnitFilterResult {
         let caster = this.GetCasterPlus();
         if (IsServer()) {
