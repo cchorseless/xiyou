@@ -36,6 +36,7 @@ export class PlayerHeroComponent extends ET.Component {
         });
         NetHelper.ListenOnLua(this,GameEnum.CustomProtocol.push_update_nettable_etentity, (event) => {
             let instanceid = event.data;
+            LogHelper.print(instanceid);
             let data = NetHelper.GetTableValue(NetHelper.ENetTables.etentity, instanceid);
             try {
                 if (data) {

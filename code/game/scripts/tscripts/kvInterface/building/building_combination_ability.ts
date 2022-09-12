@@ -14,6 +14,7 @@ export interface OBJ_2_1 {
 "relationid" :string ,
 "index" :string ,
 "active_count" :string ,
+"heroid" :string ,
 "Abilityid" :string ,
 [k:string] : string }
 }

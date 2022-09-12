@@ -7,12 +7,13 @@ import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifie
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { ActiveRootAbility } from "../../ActiveRootAbility";
 import { modifier_ursa_6_buff } from "./ability6_ursa_enrage";
 /** dota原技能数据 */
 export const Data_ursa_fury_swipes = { "ID": "5359", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE", "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "bonus_reset_time": "8 12 16 20", "LinkedSpecialBonus": "special_bonus_unique_ursa_4" }, "02": { "var_type": "FIELD_FLOAT", "bonus_reset_time_roshan": "10" }, "03": { "var_type": "FIELD_INTEGER", "damage_per_stack": "9 18 27 36", "LinkedSpecialBonus": "special_bonus_unique_ursa" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };
 
 @registerAbility()
-export class ability3_ursa_fury_swipes extends BaseAbility_Plus {
+export class ability3_ursa_fury_swipes extends ActiveRootAbility {
     /**对应dota内的名字 */
     __IN_DOTA_NAME__ = "ursa_fury_swipes";
     /**对应dota内的数据 */

@@ -8,12 +8,13 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
+import { ActiveRootAbility } from "../../ActiveRootAbility";
 
 /** dota原技能数据 */
 export const Data_ursa_enrage = { "ID": "5360", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "FightRecapLevel": "1", "AbilitySound": "Hero_Ursa.Enrage", "HasScepterUpgrade": "1", "AbilityCastAnimation": "ACT_DOTA_OVERRIDE_ABILITY_4", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastRange": "0", "AbilityCooldown": "70 50 30", "AbilityManaCost": "0 0 0", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "damage_reduction": "80" }, "02": { "var_type": "FIELD_INTEGER", "status_resistance": "50", "LinkedSpecialBonus": "special_bonus_unique_ursa_8" }, "03": { "var_type": "FIELD_FLOAT", "duration": "4 4.5 5", "LinkedSpecialBonus": "special_bonus_unique_ursa_3" }, "04": { "var_type": "FIELD_FLOAT", "cooldown_scepter": "30 24 18", "RequiresScepter": "1" } } };
 
 @registerAbility()
-export class ability6_ursa_enrage extends BaseAbility_Plus {
+export class ability6_ursa_enrage extends ActiveRootAbility {
     /**对应dota内的名字 */
     __IN_DOTA_NAME__ = "ursa_enrage";
     /**对应dota内的数据 */

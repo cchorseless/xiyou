@@ -24,7 +24,7 @@ export class BuildingManagerComponent extends ET.Component {
     /**是否建造过一个建筑 */
     bHasBuild: boolean = false;
     tGlobalBuffs: BuildingConfig.IBuffInfo[] = [];
-    onAwake() { }
+    onAwake() {}
 
     /**
      * 放置建築
@@ -62,19 +62,10 @@ export class BuildingManagerComponent extends ET.Component {
                 .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
                 .set_validtime(5)
         );
-        BuildingEntityRoot.Active(building);
         building.SetTeam(DOTATeam_t.DOTA_TEAM_GOODGUYS);
+        BuildingEntityRoot.Active(building, playerID, towerID, location, angle);
         let buildingroot = building.ETRoot.As<BuildingEntityRoot>();
-        buildingroot.SetConfigId(playerID, towerID);
         domain.ETRoot.AddDomainChild(buildingroot);
-        buildingroot.AddComponent(BuildingComponent, location, angle);
-        if (buildingroot.GetDotaHeroName()) {
-            buildingroot.AddComponent(WearableComponent, buildingroot.GetDotaHeroName());
-        }
-        buildingroot.AddComponent(AbilityManagerComponent);
-        buildingroot.AddComponent(ChessComponent);
-        buildingroot.AddComponent(RoundBuildingComponent);
-        buildingroot.updateNetTable();
         /**互相绑定 */
         building.SetControllableByPlayer(playerID, true);
         building.addSpawnedHandler(

@@ -641,6 +641,7 @@ export interface OBJ_2_1 {
 "AbilityType" :string ,
 "HasScepterUpgrade" :string ,
 "AbilityCastGestureSlot" :string ,
+"CombinationCondition" :string ,
 "MaxLevel" :string ,
 "AbilityDuration" :string ,
 "AbilityDamage" :string ,

@@ -9,28 +9,28 @@ export const registerET = () => (entity: typeof ET.Entity) => {
 };
 export const serializeETProps =
     (params: string = null) =>
-        (target: ET.Entity, attr: string) => {
-            // 处理属性
-            if (target.SerializeETProps == null) {
-                (target as any).SerializeETProps = [];
-            }
-            if (params != null) {
-                attr = params;
-            }
-            target.SerializeETProps.push(attr);
-        };
+    (target: ET.Entity, attr: string) => {
+        // 处理属性
+        if (target.SerializeETProps == null) {
+            (target as any).SerializeETProps = [];
+        }
+        if (params != null) {
+            attr = params;
+        }
+        target.SerializeETProps.push(attr);
+    };
 export const serializeDomainProps =
     (params: string = null) =>
-        (target: ET.IEntityRoot, attr: string) => {
-            // 处理属性
-            if (target.SerializeDomainProps == null) {
-                target.SerializeDomainProps = [];
-            }
-            if (params != null) {
-                attr = params;
-            }
-            target.SerializeDomainProps.push(attr);
-        };
+    (target: ET.IEntityRoot, attr: string) => {
+        // 处理属性
+        if (target.SerializeDomainProps == null) {
+            target.SerializeDomainProps = [];
+        }
+        if (params != null) {
+            attr = params;
+        }
+        target.SerializeDomainProps.push(attr);
+    };
 
 export module ET {
     export interface IEntityJson {
@@ -703,10 +703,10 @@ export module ET {
             }
         }
 
-        static Active<T extends typeof EntityRoot>(this: T, etroot: IEntityRoot) {
+        static Active<T extends typeof EntityRoot>(this: T, etroot: IEntityRoot, ...args: any[]) {
             if (etroot.ETRoot == null) {
                 etroot.ETRoot = new this(etroot);
-                etroot.ETRoot.onAwake();
+                etroot.ETRoot.onAwake(...args);
             }
         }
 
@@ -722,7 +722,7 @@ export module ET {
             return this as any as PlayerEntityRoot;
         }
 
-        public onAwake() { }
+        public onAwake(...args: any[]) {}
         public Active(etroot: IEntityRoot) {
             if (this.Domain != null) {
                 return;
@@ -773,8 +773,8 @@ export module ET {
             return component;
         }
 
-        public GetDomainChild(id: string) {
-            return this.DomainChildren[id];
+        public GetDomainChild<T extends EntityRoot>(id: string) {
+            return this.DomainChildren[id] as T;
         }
         public GetDomainChilds<K extends typeof EntityRoot>(type: K): InstanceType<K>[] {
             let r: InstanceType<K>[] = [];
@@ -804,28 +804,37 @@ export module ET {
 
         public AddDomainChild(_entityRoot: EntityRoot) {
             if (_entityRoot.DomainParent != null) {
-                throw new Error("setDomainParent error");
+                _entityRoot.DomainParent.removeDomainChildren(this);
             }
             _entityRoot.setDomainParent(this);
         }
+        public RemoveDomainChild(_entityRoot: EntityRoot) {
+            if (_entityRoot.DomainParent != this) {
+                return;
+            }
+            _entityRoot.DomainParent.removeDomainChildren(this);
+        }
+
+
         private setDomainParent(_domainParent: EntityRoot) {
             if (this.DomainParent != null) {
                 throw new Error("setDomainParent error");
             }
             (this as any).DomainParent = _domainParent;
-            this.DomainParent.addDomainChildrens(this);
+            this.DomainParent.addDomainChildren(this);
         }
-        private addDomainChildrens(child: EntityRoot) {
+        private addDomainChildren(child: EntityRoot) {
             if (this.DomainChildren == null) {
                 (this as any).DomainChildren = {};
             }
             this.DomainChildren[child.Id] = child;
         }
-        private removeDomainChildrens(child: EntityRoot) {
+        private removeDomainChildren(child: EntityRoot) {
             if (this.DomainChildren == null) {
                 return;
             }
             delete this.DomainChildren[child.Id];
+            (child as any).DomainParent = null;
             if (Object.keys(this.DomainChildren).length == 0) {
                 (this as any).DomainChildren = null;
             }
@@ -833,7 +842,7 @@ export module ET {
         public Dispose(): void {
             super.Dispose();
             if (this.DomainParent != null && !this.DomainParent.IsDisposed()) {
-                this.DomainParent.removeDomainChildrens(this);
+                this.DomainParent.removeDomainChildren(this);
                 (this as any).DomainParent = null;
             }
         }

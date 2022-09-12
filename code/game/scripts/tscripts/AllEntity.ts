@@ -31,6 +31,9 @@ import { WearableSystemComponent } from "./rules/System/Wearable/WearableSystemC
 import { ServiceEntity } from "./service/ServiceEntity";
 import { PlayerHeroComponent } from "./rules/Components/Player/PlayerHeroComponent";
 import { AbilityManagerComponent } from "./rules/Components/Ability/AbilityManagerComponent";
+import { ItemManagerComponent } from "./rules/Components/Item/ItemManagerComponent";
+import { ECombination } from "./rules/Components/Combination/ECombination";
+import { ECombinationLabelItem } from "./rules/Components/Combination/ECombinationLabelItem";
 
 [
     MapSystemComponent,
@@ -43,6 +46,7 @@ import { AbilityManagerComponent } from "./rules/Components/Ability/AbilityManag
     DrawSystemComponent,
 
     AbilityManagerComponent,
+    ItemManagerComponent,
     PlayerHeroComponent,
     PlayerDataComponent,
     PlayerHttpComponent,
@@ -52,13 +56,15 @@ import { AbilityManagerComponent } from "./rules/Components/Ability/AbilityManag
     RoundBuildingComponent,
     RoundPrizeUnitKillPrizeComponent,
     CombinationManagerComponent,
+    CombinationComponent,
+    ECombination,
+    ECombinationLabelItem,
     BuildingManagerComponent,
     ChessControlComponent,
     EnemyManagerComponent,
 
     BuildingComponent,
     BuildingPropsComponent,
-    CombinationComponent,
     ChessComponent,
 
     EnemyUnitComponent,

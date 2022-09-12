@@ -1,13 +1,13 @@
 import { building_combination_ability } from "../../../kvInterface/building/building_combination_ability";
-import { ET } from "../../Entity/Entity";
+import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { ET, registerET } from "../../Entity/Entity";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
-
+import { ECombinationLabelItem } from "./ECombinationLabelItem";
+@registerET()
 export class ECombination extends ET.Entity {
-
     private config: { [k: string]: building_combination_ability.OBJ_2_1 } = {};
     private activeNeedCount: number;
-    private combination: { [k: string]: number } = {};
-    private entityArr: string[] = [];
+    private combination: { [k: string]: ECombinationLabelItem[] } = {};
 
     addConfig(c: building_combination_ability.OBJ_2_1) {
         this.config[c.index] = c;
@@ -16,56 +16,66 @@ export class ECombination extends ET.Entity {
 
     isInCombination(c: number | string) {
         for (let k in this.config) {
-            if (this.config[k].heroid == "" + c) {
-                return true
-            }
+            // if (this.config[k].heroid == "" + c) {
+            //     return true
+            // }
             if (this.config[k].Abilityid == "" + c) {
-                return true
+                return true;
             }
         }
-        return false
+        return false;
     }
 
     isActive() {
-        return Object.keys(this.combination).length >= this.activeNeedCount;
-    }
-
-    addCombination(entity: BuildingEntityRoot) {
-        let comp = entity.CombinationComp();
-        if (comp == null) { return };
-        let c = entity.ConfigID;
-        if (this.isInCombination(c)) {
-            if (this.entityArr.indexOf(entity.Id) == -1) {
-                this.entityArr.push(entity.Id);
-            };
-            this.combination[c] = this.combination[c] || 0;
-            this.combination[c] += 1;
-            if (this.isActive()) {
-                for (let key of this.entityArr) {
-                    let eni = ET.EntityEventSystem.GetEntity(key);
-                    if (eni != null) {
-                    }
+        let buildingconfigid: string[] = [];
+        for (let k in this.combination) { 
+            let c = this.combination[k];
+            c.forEach(entity => {
+                let building = entity.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>();
+                if (!buildingconfigid.includes(building.ConfigID)) {
+                    buildingconfigid.push(building.ConfigID);
                 }
+            })
+        }
+        return buildingconfigid.length >= this.activeNeedCount;
+    }
+
+    addCombination(entity: ECombinationLabelItem) {
+        let c = entity.SourceEntityConfigId;
+        if (this.isInCombination(c)) {
+            this.combination[c] = this.combination[c] || [];
+            if (!this.combination[c].includes(entity)) {
+                this.combination[c].push(entity);
+            }
+            if (this.isActive()) {
+                // for (let key of this.entityArr) {
+                //     let eni = ET.EntityEventSystem.GetEntity(key);
+                //     if (eni != null) {
+                //     }
+                // }
             }
         }
     }
 
-    removeCombination(entity: BuildingEntityRoot) {
-        let comp = entity.CombinationComp();
-        if (comp == null) { return };
-        let index = this.entityArr.indexOf(entity.Id);
-        if (index > -1) {
-            this.entityArr.splice(index, 1);
+    removeCombination(entity: ECombinationLabelItem) {
+        let c = entity.SourceEntityConfigId;
+        if (this.combination[c] && this.combination[c].includes(entity)) {
+            let index = this.combination[c].indexOf(entity);
+            this.combination[c].splice(index, 1);
         }
-        let c = entity.ConfigID;
-        if (this.isInCombination(c)) {
-            this.combination[c] && (this.combination[c] -= 1);
-            if (this.combination[c] == 0) {
-                delete this.combination[c];
-            }
+        if (this.combination[c].length == 0) {
+            delete this.combination[c];
+        }
+        if (!this.isActive()) {
+            // for (let key of this.entityArr) {
+            //     let eni = ET.EntityEventSystem.GetEntity(key);
+            //     if (eni != null) {
+            //     }
+            // }
         }
     }
+
+
     public onDestroy(): void {
-        this.entityArr = null;
     }
 }

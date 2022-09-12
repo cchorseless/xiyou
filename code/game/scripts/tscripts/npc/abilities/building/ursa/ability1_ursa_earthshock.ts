@@ -9,6 +9,7 @@ import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
 import { modifier_particle } from "../../../modifier/modifier_particle";
+import { ActiveRootAbility } from "../../ActiveRootAbility";
 import { modifier_ursa_6_buff } from "./ability6_ursa_enrage";
 
 /** dota原技能数据 */
@@ -38,7 +39,7 @@ export const Data_ursa_earthshock = {
 };
 
 @registerAbility()
-export class ability1_ursa_earthshock extends BaseAbility_Plus {
+export class ability1_ursa_earthshock extends ActiveRootAbility {
     /**对应dota内的名字 */
     __IN_DOTA_NAME__ = "ursa_earthshock";
     /**对应dota内的数据 */
