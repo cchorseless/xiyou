@@ -7,6 +7,7 @@ import { PlayerScene } from "../Player/PlayerScene";
 
 @registerET()
 export class ChessControlComponent extends ET.Component {
+
     public moveChess(target: BuildingEntityRoot, v: Vector): [boolean, string] {
         let r: [boolean, string] = [true, ""];
         if (!this.Domain.ETRoot.AsPlayer().CheckIsAlive()) {

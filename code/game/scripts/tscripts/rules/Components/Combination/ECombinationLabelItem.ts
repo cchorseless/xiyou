@@ -47,7 +47,6 @@ export class ECombinationLabelItem extends ET.Entity {
     onDestroy(): void {
         let building = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>();
         building.GetPlayer().CombinationManager().removeCombination(this);
-
     }
 
 }

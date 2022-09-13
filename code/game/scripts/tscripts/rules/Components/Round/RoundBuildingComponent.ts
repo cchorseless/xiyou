@@ -1,4 +1,6 @@
+import { GameEnum } from "../../../GameEnum";
 import { GameFunc } from "../../../GameFunc";
+import { EventHelper } from "../../../helper/EventHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { building_auto_findtreasure } from "../../../npc/abilities/common/building_auto_findtreasure";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
@@ -13,10 +15,12 @@ import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
 import { KVConfigComponment } from "../KVConfig/KVConfigComponment";
 import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
+import { ERoundBoard } from "./ERoundBoard";
 /**回合控制 */
 @registerET()
 export class RoundBuildingComponent extends ET.Component {
     onAwake(...args: any[]): void {
+        this.addEvent();
         let domain = this.GetDomain<BaseNpc_Plus>();
         let currentround = domain.ETRoot.As<PlayerCreateUnitEntityRoot>().GetPlayer().RoundManagerComp().getCurrentBoardRound();
         switch (currentround.roundState) {
@@ -24,6 +28,11 @@ export class RoundBuildingComponent extends ET.Component {
                 this.OnBoardRound_Start();
                 break;
         }
+    }
+
+    addEvent() {
+        let building = this.Domain.ETRoot.As<BuildingEntityRoot>();
+
     }
     OnBoardRound_Start() {
         let domain = this.GetDomain<BaseNpc_Plus>();

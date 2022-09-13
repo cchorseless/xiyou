@@ -6,6 +6,7 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { DifficultyState } from "../../System/Difficulty/DifficultyState";
 import { PlayerConfig } from "../../System/Player/PlayerConfig";
+import { ERoundBoard } from "../Round/ERoundBoard";
 
 @registerET()
 export class PlayerDataComponent extends ET.Component {
@@ -117,6 +118,14 @@ export class PlayerDataComponent extends ET.Component {
     }
 
     addEvent() {
+        let playerroot = this.Domain.ETRoot.AsPlayer();
+        EventHelper.addServerEvent(this, GameEnum.Event.CustomServer.onserver_roundboard_onstart,
+            playerroot.Playerid,
+            (round: ERoundBoard) => {
+                if (round.IsBelongPlayer(this.Domain.ETRoot.AsPlayer().Playerid)) {
+                    this.addMoneyRoundStart(tonumber(round.config.roundprize_gold), tonumber(round.config.roundprize_wood));
+                }
+            });
         EventHelper.addProtocolEvent(this, PlayerConfig.EProtocol.reqApplyPopuLevelUp, (e) => {
             e.state = true;
             let playerid = this.Domain.ETRoot.AsPlayer().Playerid;

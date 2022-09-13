@@ -23,7 +23,7 @@ export const globalData = globalThis as typeof globalThis & {
     /**所有的JS协议事件 */
     allCustomProtocolEvent: { [k: string]: Array<{ context: any, cb: (event: JS_TO_LUA_DATA) => void }> };
     /**所有服务器自定义事件 */
-    allCustomServerEvent: { [k: string]: Array<{ context: any, cb: (event: LUA_TO_LUA_DATA) => void }> };
+    allCustomServerEvent: { [k: string]: Array<{ playerid: PlayerID, context: any, cb: (event: LUA_TO_LUA_DATA) => void }> };
     /**所有的buff实例 */
     allModifiersIntance: { [modifiername: string]: { [UUID: string]: InstanceType<typeof BaseModifier> } };
     /**全部注册的BUFF事件信息 */

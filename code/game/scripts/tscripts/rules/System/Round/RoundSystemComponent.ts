@@ -23,7 +23,7 @@ export class RoundSystemComponent extends ET.Component {
 
     }
 
-    StartGame() {
+    public StartGame() {
         this.runBoardRound(RoundState.GetFirstBoardRoundid());
 
     }

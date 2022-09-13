@@ -350,16 +350,15 @@ export module EventHelper {
      * @param context
      * @returns
      */
-    export function addServerEvent(context: any, eventName: GameEnum.Event.CustomServer, func: (event: LUA_TO_LUA_DATA) => void) {
+    export function addServerEvent(context: any, eventName: GameEnum.Event.CustomServer, playerid: PlayerID | null, func: (event: any) => void) {
         if (!IsServer()) {
             return;
         }
-
         if (eventName == null) {
             return;
         }
         globalData.allCustomServerEvent[eventName] = globalData.allCustomServerEvent[eventName] || [];
-        table.insert(globalData.allCustomServerEvent[eventName], { context: context, cb: func });
+        table.insert(globalData.allCustomServerEvent[eventName], { playerid: playerid, context: context, cb: func });
     }
     /**
      * 移除协议事件监听
@@ -368,7 +367,7 @@ export module EventHelper {
      * @param context
      * @returns
      */
-    export function removeServerEvent(context: any, eventName: GameEnum.Event.CustomServer, func: (event: LUA_TO_LUA_DATA) => void) {
+    export function removeServerEvent(context: any, eventName: GameEnum.Event.CustomServer, playerid: PlayerID | null, func: (event: LUA_TO_LUA_DATA) => void) {
         if (!IsServer()) {
             return;
         }
@@ -380,7 +379,7 @@ export module EventHelper {
             let len = globalData.allCustomServerEvent[eventName].length;
             for (let i = len - 1; i >= 0; i--) {
                 let cbinfo = globalData.allCustomServerEvent[eventName][i];
-                if (cbinfo.cb == func) {
+                if (cbinfo.cb == func && playerid == cbinfo.playerid) {
                     globalData.allCustomServerEvent[eventName].splice(i, 1);
                 }
             }
@@ -392,7 +391,7 @@ export module EventHelper {
      * @param eventName
      * @param eventData
      */
-    export function fireServerEvent(eventName: GameEnum.Event.CustomServer, eventData: LUA_TO_LUA_DATA = null) {
+    export function fireServerEvent(eventName: GameEnum.Event.CustomServer, playerid: PlayerID | null = null, eventData: any = null) {
         if (!IsServer()) {
             return;
         }
@@ -406,6 +405,9 @@ export module EventHelper {
         let allCB = globalData.allCustomServerEvent[eventName];
         if (allCB && allCB.length > 0) {
             allCB.forEach((cbinfo) => {
+                if (playerid != cbinfo.playerid) {
+                    return
+                }
                 let [status, nextCall] = xpcall(
                     cbinfo.cb,
                     (msg) => {

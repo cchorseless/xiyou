@@ -390,14 +390,14 @@ export class AwalonState {
         }
         // 同步对局任务数据
         EventHelper.fireServerEvent(GameEnum.Event.CustomServer.onserver_update_game_task_jindu,
-            {
-                data: {
-                    success: success,
-                    fail: fail,
-                    successPlayer: successPlayer,
-                    failPlayer: failPlayer
-                },
-            })
+            null, {
+            data: {
+                success: success,
+                fail: fail,
+                successPlayer: successPlayer,
+                failPlayer: failPlayer
+            },
+        })
 
         // 胜利，进入暗杀
         if (success == AwalonConfig.MaxTaskFinishTime) {
@@ -495,7 +495,7 @@ export class AwalonState {
                 break
         }
         if (r) {
-            let r_arr:any[] = [];
+            let r_arr: any[] = [];
             for (let k of r) {
                 // let info = KVHelper.KvServerConfig.npc_position_config[k as '1001']
                 // r_arr.push(Vector(

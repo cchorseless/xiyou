@@ -19,7 +19,7 @@ export module BuildingConfig {
     /**建筑物格子 */
     export const BUILDING_UNIT = 64;
     /**相同的塔最多造数量 */
-    export const MAX_SAME_TOWER = 1;
+    export const MAX_SAME_TOWER = 999;
     /**最大人口等级 */
     export const POPULATION_BASEMAXLEVEL = 6;
     /**最大人口数量 */
@@ -28,8 +28,8 @@ export module BuildingConfig {
     export const MAX_STAR = 5;
 
 
-      /**错误信息 */
-      export enum ErrorCode {
+    /**错误信息 */
+    export enum ErrorCode {
         /**相同塔限制 */
         dota_hud_error_has_same_tower = "dota_hud_error_has_same_tower",
         /**人口限制 */

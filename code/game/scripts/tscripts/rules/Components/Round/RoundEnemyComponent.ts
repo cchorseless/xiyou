@@ -40,7 +40,9 @@ export class RoundEnemyComponent extends ET.Component {
         modifier_jiaoxie_wudi.applyOnly(domain, domain);
         this.playDamageHeroAni(ProjectileInfo);
     }
+    OnBoardRound_WaitingEnd() {
 
+    }
     playDamageHeroAni(ProjectileInfo: IProjectileEffectInfo = null) {
         let domain = this.GetDomain<BaseNpc_Plus>();
         let hero = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Playerid).Hero;

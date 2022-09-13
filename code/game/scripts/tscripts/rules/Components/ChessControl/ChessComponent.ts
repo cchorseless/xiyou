@@ -16,6 +16,7 @@ export class ChessComponent extends ET.Component {
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.SetForwardVector(Vector(0, 1, 0));
         // this.updateForward();
+
     }
     updateBoardPos() {
         let location = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
@@ -84,6 +85,7 @@ export class ChessComponent extends ET.Component {
                 return;
             }
         }
+
     }
 
     FindClosePosToEnemy(enemy: PlayerCreateUnitEntityRoot): Vector {

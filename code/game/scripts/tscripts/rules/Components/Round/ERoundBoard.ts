@@ -32,16 +32,8 @@ export class ERoundBoard extends ERound {
         this.roundState = RoundConfig.ERoundBoardState.start;
         this.roundStartTime = TimerHelper.now();
         let playerroot = this.Domain.ETRoot.AsPlayer();
-        playerroot.PlayerDataComp().addMoneyRoundStart(tonumber(this.config.roundprize_gold), tonumber(this.config.roundprize_wood));
-        let allenemy = this.config.unitinfo;
-        for (let unit_index in allenemy) {
-            this.CreateBasicEnemy(unit_index, Assert_SpawnEffect.Effect.Spawn_fall);
-        }
-        playerroot.BuildingManager()
-            .getAllBuilding()
-            .forEach((b) => {
-                b.RoundBuildingComp().OnBoardRound_Start();
-            });
+        NetTablesHelper.SetETEntity(this, false, playerroot.Playerid);
+        EventHelper.fireServerEvent(GameEnum.Event.CustomServer.onserver_roundboard_onstart, playerroot.Playerid, this);
         if (this.config.round_readytime != null) {
             TimerHelper.addTimer(
                 Number(this.config.round_readytime),
@@ -53,23 +45,11 @@ export class ERoundBoard extends ERound {
         }
     }
 
-    ProjectileInfo: IProjectileEffectInfo = Assert_ProjectileEffect.p000;
     OnBattle() {
-        this.roundState = RoundConfig.ERoundBoardState.battle;
-        NetTablesHelper.SetETEntity(this, false, this.Domain.ETRoot.AsPlayer().Playerid);
-        this.Domain.ETRoot.AsPlayer()
-            .EnemyManagerComp()
-            .getAllEnemy()
-            .forEach((b) => {
-                b.RoundEnemyComp().OnBoardRound_Battle();
-            });
-        this.Domain.ETRoot.AsPlayer()
-            .BuildingManager()
-            .getAllBuilding()
-            .forEach((b) => {
-                b.RoundBuildingComp().OnBoardRound_Battle();
-            });
         let player = this.Domain.ETRoot.AsPlayer();
+        this.roundState = RoundConfig.ERoundBoardState.battle;
+        NetTablesHelper.SetETEntity(this, false, player.Playerid);
+        EventHelper.fireServerEvent(GameEnum.Event.CustomServer.onserver_roundboard_onbattle, player.Playerid, this);
         let buildingCount = player.BuildingManager().getAllBattleBuilding().length;
         let enemyCount = player.EnemyManagerComp().getAllEnemy().length;
         let delaytime = Number(this.config.round_time);
@@ -94,32 +74,11 @@ export class ERoundBoard extends ERound {
             return;
         }
         this.roundState = RoundConfig.ERoundBoardState.prize;
-        NetTablesHelper.SetETEntity(this, false, this.Domain.ETRoot.AsPlayer().Playerid);
+        let playerroot = this.Domain.ETRoot.AsPlayer();
+        NetTablesHelper.SetETEntity(this, false, playerroot.Playerid);
         let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllEnemy();
         let isWin = aliveEnemy.length == 0;
-        if (!isWin) {
-            let damage = 0;
-            let delay_time = 0.5;
-            aliveEnemy.forEach((b) => {
-                b.RoundEnemyComp().OnBoardRound_Prize(this.ProjectileInfo);
-                damage += Number(b.GetRoundBasicUnitConfig().failure_count || "0");
-                delay_time = math.min(delay_time, b.GetDistance2Player() / 1000);
-            });
-            TimerHelper.addTimer(
-                delay_time,
-                () => {
-                    this.ApplyDamageHero(damage);
-                },
-                this,
-                true
-            );
-        }
-        this.Domain.ETRoot.AsPlayer()
-            .BuildingManager()
-            .getAllBuilding()
-            .forEach((b) => {
-                b.RoundBuildingComp().OnBoardRound_Prize(isWin);
-            });
+        EventHelper.fireServerEvent(GameEnum.Event.CustomServer.onserver_roundboard_onprize, playerroot.Playerid, isWin);
         this.waitingEndTimer = TimerHelper.addTimer(
             20,
             () => {
@@ -139,13 +98,9 @@ export class ERoundBoard extends ERound {
             return;
         }
         this.roundState = RoundConfig.ERoundBoardState.waiting_next;
-        NetTablesHelper.SetETEntity(this, false, this.Domain.ETRoot.AsPlayer().Playerid);
-        this.Domain.ETRoot.AsPlayer()
-            .BuildingManager()
-            .getAllBuilding()
-            .forEach((b) => {
-                b.RoundBuildingComp().OnBoardRound_WaitingEnd();
-            });
+        let playerroot = this.Domain.ETRoot.AsPlayer();
+        NetTablesHelper.SetETEntity(this, false, playerroot.Playerid);
+        EventHelper.fireServerEvent(GameEnum.Event.CustomServer.onserver_roundboard_onwaitingend, playerroot.Playerid, this);
         GameRules.Addon.ETRoot.RoundSystem().endBoardRound();
     }
 
@@ -157,42 +112,9 @@ export class ERoundBoard extends ERound {
         return this.roundState == RoundConfig.ERoundBoardState.waiting_next;
     }
 
-    ApplyDamageHero(damage: number) {
-        if (damage > 0) {
-            let hero = this.GetDomain<PlayerScene>().ETRoot.Hero;
-            Assert_MsgEffect.CreateNumberEffect(hero, damage, 2, Assert_MsgEffect.EMsgEffect.MSG_MISS, Assert_Color.red);
-            EmitSoundOn(this.ProjectileInfo.sound, hero);
-            let enemyM = this.Domain.ETRoot.AsPlayer().EnemyManagerComp();
-            enemyM.getAllEnemy().forEach((e) => {
-                enemyM.missEnemy(e);
-            });
-        }
+    IsBelongPlayer(playerid: PlayerID) {
+        return (this.Domain.ETRoot.AsPlayer().Playerid == playerid)
     }
 
-    CreateBasicEnemy(unit_index: string, spawnEffect: ISpawnEffectInfo = null) {
-        let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
-        let allenemy = this.config.unitinfo;
-        let _boardVec = new ChessControlConfig.ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
-        let pos = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardGirdVector3(_boardVec);
-        let angle = Vector(Number(allenemy[unit_index].angles_x), Number(allenemy[unit_index].angles_y), Number(allenemy[unit_index].angles_z));
-        let enemyName = allenemy[unit_index].unit;
-        let delay = 0;
-        if (spawnEffect != null && spawnEffect.tp_effect != null) {
-            delay = RandomFloat(0.1, 2.1);
-            Assert_SpawnEffect.ShowTPEffectAtPosition(pos, spawnEffect.tp_effect, delay);
-        }
-        let domain = this.GetDomain<BaseNpc_Plus>();
-        let enemyManager = domain.ETRoot.AsPlayer().EnemyManagerComp();
-        if (delay > 0) {
-            TimerHelper.addTimer(
-                delay,
-                () => {
-                    enemyManager.addEnemy(enemyName, this.configID, unit_index, pos, spawnEffect);
-                },
-                this
-            );
-        } else {
-            enemyManager.addEnemy(enemyName, this.configID, unit_index, pos, spawnEffect);
-        }
-    }
+
 }
