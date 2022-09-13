@@ -68,8 +68,9 @@ export class ability1_ursa_earthshock extends ActiveRootAbility {
         return this.GetSpecialValueFor("shock_radius");
     }
     GetIntrinsicModifierName() {
-        return "modifier_ursa_1";
+        return modifier_ursa_1.name;
     }
+
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 // Modifiers

@@ -14,7 +14,9 @@ export interface OBJ_2_1 {
 "relationid" :string ,
 "index" :string ,
 "active_count" :string ,
+"acitve_common_effect" :string ,
 "heroid" :string ,
 "Abilityid" :string ,
+"acitve_special_effect" :string ,
 [k:string] : string }
 }
