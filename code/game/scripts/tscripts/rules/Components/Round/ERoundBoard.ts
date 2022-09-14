@@ -1,12 +1,6 @@
-import { Assert_Color } from "../../../assert/Assert_Color";
-import { Assert_MsgEffect } from "../../../assert/Assert_MsgEffect";
-import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
-import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
-import { GameEnum } from "../../../GameEnum";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { building_round_board } from "../../../kvInterface/building/building_round_board";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
@@ -32,13 +26,13 @@ export class ERoundBoard extends ERound {
         this.roundState = RoundConfig.ERoundBoardState.start;
         this.roundStartTime = TimerHelper.now();
         let playerroot = this.Domain.ETRoot.AsPlayer();
-        NetTablesHelper.SetETEntity(this, false, playerroot.Playerid);
+        playerroot.SyncClientEntity(this, false);
         EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onstart, playerroot.Playerid, this);
         if (this.config.round_readytime != null) {
             TimerHelper.addTimer(
                 Number(this.config.round_readytime),
                 () => {
-                    // this.OnBattle();
+                    this.OnBattle();
                 },
                 this
             );
@@ -48,7 +42,7 @@ export class ERoundBoard extends ERound {
     OnBattle() {
         let player = this.Domain.ETRoot.AsPlayer();
         this.roundState = RoundConfig.ERoundBoardState.battle;
-        NetTablesHelper.SetETEntity(this, false, player.Playerid);
+        player.SyncClientEntity(this, false);
         EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onbattle, player.Playerid, this);
         let buildingCount = player.BuildingManager().getAllBattleBuilding().length;
         let enemyCount = player.EnemyManagerComp().getAllEnemy().length;
@@ -75,7 +69,7 @@ export class ERoundBoard extends ERound {
         }
         this.roundState = RoundConfig.ERoundBoardState.prize;
         let playerroot = this.Domain.ETRoot.AsPlayer();
-        NetTablesHelper.SetETEntity(this, false, playerroot.Playerid);
+        playerroot.SyncClientEntity(this, false);
         let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllEnemy();
         let isWin = aliveEnemy.length == 0;
         EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onprize, playerroot.Playerid, isWin);
@@ -99,7 +93,7 @@ export class ERoundBoard extends ERound {
         }
         this.roundState = RoundConfig.ERoundBoardState.waiting_next;
         let playerroot = this.Domain.ETRoot.AsPlayer();
-        NetTablesHelper.SetETEntity(this, false, playerroot.Playerid);
+        playerroot.SyncClientEntity(this, false);
         EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onwaitingend, playerroot.Playerid, this);
         GameRules.Addon.ETRoot.RoundSystem().endBoardRound();
     }

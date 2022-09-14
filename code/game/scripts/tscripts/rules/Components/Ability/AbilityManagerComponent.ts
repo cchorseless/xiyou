@@ -14,7 +14,7 @@ export class AbilityManagerComponent extends ET.Component {
         let len = npc.GetAbilityCount();
         for (let i = 0; i < len; i++) {
             let ability = npc.GetAbilityByIndex(i) as BaseAbility_Plus;
-            if (ability.ETRoot) {
+            if (ability && ability.ETRoot) {
                 ability.UpgradeAbility(true)
                 ability.SetActivated(true);
                 ability.SetLevel(1);

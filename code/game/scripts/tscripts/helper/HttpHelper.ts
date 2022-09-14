@@ -5,13 +5,13 @@ export module HttpHelper {
         if (address == null || address.length == 0) {
             return;
         }
-        LogHelper.print("http get=>", sAction, address);
+        // LogHelper.print("http get=>", sAction, address);
         let handle = CreateHTTPRequestScriptVM("GET", address + sAction);
         handle.SetHTTPRequestHeaderValue("Content-Type", "application/json;charset=uft-8");
         handle.SetHTTPRequestHeaderValue("Authorization", token);
         handle.SetHTTPRequestAbsoluteTimeoutMS(fTimeout * 1000);
         handle.Send((response) => {
-            LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
+            // LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
             if (hFunc) {
                 hFunc(response.StatusCode, response.Body, response);
             }
@@ -21,7 +21,7 @@ export module HttpHelper {
         if (address == null || address.length == 0) {
             return;
         }
-        LogHelper.print("http get=>", sAction, address);
+        // LogHelper.print("http get=>", sAction, address);
         return new Promise<any>((resolve, reject) => {
             let handle = CreateHTTPRequestScriptVM("GET", address + sAction);
             handle.SetHTTPRequestHeaderValue("Content-Type", "application/json;charset=uft-8");
@@ -29,7 +29,7 @@ export module HttpHelper {
             handle.SetHTTPRequestAbsoluteTimeoutMS(fTimeout * 1000);
             handle.Send((response) => {
                 if (response.StatusCode == 200) {
-                    LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
+                    // LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
                     resolve(json.decode(response.Body)[0]);
                 } else {
                     LogHelper.error("http cb=>", sAction, response.StatusCode);
@@ -58,7 +58,7 @@ export module HttpHelper {
         handle.SetHTTPRequestAbsoluteTimeoutMS(fTimeout * 1000);
         handle.Send((response) => {
             if (hFunc) {
-                LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
+                // LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
                 hFunc(response.StatusCode, response.Body, response);
             }
         });
@@ -68,7 +68,7 @@ export module HttpHelper {
         if (address == null || address.length == 0) {
             return;
         }
-        LogHelper.print("http post=>", sAction, address, hParams);
+        // LogHelper.print("http post=>", sAction, address, hParams);
         return new Promise<any>((resolve, reject) => {
             let handle = CreateHTTPRequestScriptVM("POST", address + sAction);
             handle.SetHTTPRequestHeaderValue("Content-Type", "application/json;charset=uft-8");
@@ -77,7 +77,7 @@ export module HttpHelper {
             handle.SetHTTPRequestAbsoluteTimeoutMS(fTimeout * 1000);
             handle.Send((response) => {
                 if (response.StatusCode == 200) {
-                    LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
+                    // LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
                     resolve(json.decode(response.Body)[0]);
                 } else {
                     LogHelper.error("http cb=>", sAction, response.StatusCode,'-----------');

@@ -38,7 +38,7 @@ export class DrawComponent extends ET.Component {
         );
     }
 
-    async SelectCard(index: number, sTowerName: string, b2Public: boolean = false) {
+    async SelectCard(index: number, sTowerName: string, b2Public: number = 0) {
         let cbmsg = await NetHelper.SendToLuaAsync<DrawConfig.I.ICardSelected>(DrawConfig.EProtocol.CardSelected, {
             index: index,
             itemName: sTowerName,

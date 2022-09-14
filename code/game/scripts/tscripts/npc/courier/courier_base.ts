@@ -75,7 +75,7 @@ export class courier_base extends BaseNpc_Hero_Plus {
     }
 
     Activate() {
-        LogHelper.print("courier_base");
+        LogHelper.print("courier_base :=>", this.GetPlayerID());
     }
 
     IsValidHero() {

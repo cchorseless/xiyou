@@ -12,9 +12,11 @@ import { PlayerScene } from "../Player/PlayerScene";
 @registerET()
 export class DrawComponent extends ET.Component {
     @serializeETProps()
-    tLastCards: string[];
+    tLastCards: string[] = [];
 
-    onAwake(...args: any[]): void { }
+    onAwake(...args: any[]): void {
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this);
+    }
 
     //  开局抽卡
     DrawStartCard() {
@@ -79,7 +81,7 @@ export class DrawComponent extends ET.Component {
         EventHelper.fireProtocolEventToPlayer(DrawConfig.EProtocol.DrawCardResult, null, playerid);
     }
 
-    OnSelectCard2(index: number, unitName: string, b2Public: boolean = false): [boolean, string] {
+    OnSelectCard(index: number, unitName: string, b2Public: number = 0): [boolean, string] {
         let player = this.GetDomain<PlayerScene>().ETRoot;
         if (!player.CheckIsAlive()) {
             return [false, "hero is death"];
@@ -87,7 +89,7 @@ export class DrawComponent extends ET.Component {
         if (this.tLastCards[index] !== unitName) {
             return [false, "index error"];
         }
-        if (b2Public) {
+        if (b2Public != 0) {
             let publicbag = GameRules.Addon.ETRoot.PublicBagSystem();
             if (publicbag.IsEmpty()) {
                 let itemroot = publicbag.createBuildingItem(unitName);
@@ -108,12 +110,12 @@ export class DrawComponent extends ET.Component {
                 return [false, "buy fail"];
             }
         }
-        let playerid = player.Playerid;
-        NetTablesHelper.SetETEntity(this, false, playerid);
+        this.tLastCards[index] = null;
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this);
         return [true, ""];
     }
     //  选卡
-    OnSelectCard(index: number, unitName: string, b2Public: boolean = false): [boolean, string] {
+    OnSelectCard2(index: number, unitName: string, b2Public: boolean = false): [boolean, string] {
         if (!this.Domain.ETRoot.AsPlayer().CheckIsAlive()) {
             return [false, "hero is death"];
         }

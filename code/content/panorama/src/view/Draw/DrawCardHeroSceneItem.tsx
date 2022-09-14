@@ -70,7 +70,7 @@ export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI {
         let data = this.props as IProps;
         let r = await PlayerScene.DrawComp.SelectCard(data.index, data.itemname);
         if (r) {
-            PrecacheHelper.GetRegClass<typeof DrawCardPanel>("DrawCardPanel").GetInstance()!.close();
+            // PrecacheHelper.GetRegClass<typeof DrawCardPanel>("DrawCardPanel").GetInstance()!.close();
         }
     }
 }

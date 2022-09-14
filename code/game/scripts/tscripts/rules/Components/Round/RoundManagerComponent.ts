@@ -46,10 +46,8 @@ export class RoundManagerComponent extends ET.Component {
             this.RoundInfo[roundid] = this.AddChild(ERoundBoard, roundid);
         }
         this.curRoundBoard = roundid as string;
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this, true);
         (this.RoundInfo[roundid] as ERoundBoard).OnStart();
-        let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
-        NetTablesHelper.SetETEntity(this, true, playerid);
-        NetTablesHelper.SetETEntity(this.RoundInfo[roundid], false, playerid);
     }
     public getCurrentBoardRound() {
         return this.RoundInfo[this.curRoundBoard] as ERoundBoard;

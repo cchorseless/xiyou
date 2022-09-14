@@ -16,7 +16,7 @@ export class MapSystemComponent extends ET.Component {
 
     public addEvent() {}
 
-    public OnAllPlayerClientLoginFinish() {
+    public StartGame() {
         this.CreateAllMapUnit();
     }
 

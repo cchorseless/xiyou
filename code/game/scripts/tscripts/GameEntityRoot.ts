@@ -120,22 +120,24 @@ export class GameEntityRoot extends ET.EntityRoot {
                     break;
                 // 	-- 准备阶段(进游戏，刷怪前)
                 case DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME:
+                    this.MapSystem().StartGame();
                     break;
                 // -- 游戏准备开始
                 case DOTA_GameState.DOTA_GAMERULES_STATE_GAME_IN_PROGRESS:
-                    this.StartGame();
                     break;
                 //  --游戏正式开始
                 case DOTA_GameState.DOTA_GAMERULES_STATE_POST_GAME:
                     break;
             }
         });
-    }
-    private StartGame() {
-        this.RoundSystem().StartGame();
-        this.DrawSystem().StartGame();
+
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaOnHeroFinishSpawnEvent, this.onHeroFinishSpawn);
     }
 
-
-
+    private onHeroFinishSpawn(e: DotaOnHeroFinishSpawnEvent) {
+        if (this.PlayerSystem().IsAllBindHeroFinish()) {
+            this.RoundSystem().StartGame();
+            this.DrawSystem().StartGame();
+        }
+    }
 }

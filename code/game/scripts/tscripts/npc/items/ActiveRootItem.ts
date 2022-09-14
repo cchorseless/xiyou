@@ -1,14 +1,11 @@
-import { AbilityEntityRoot } from "../../rules/Components/Ability/AbilityEntityRoot";
-import { CombinationConfig } from "../../rules/System/Combination/CombinationConfig";
+import { ItemEntityRoot } from "../../rules/Components/Item/ItemEntityRoot";
 import { BaseItem_Plus } from "../entityPlus/BaseItem_Plus";
 
-export class ActiveRootItem extends BaseItem_Plus implements CombinationConfig.I.ICombinationHandler {
+export class ActiveRootItem extends BaseItem_Plus  {
     constructor() {
         super();
         if (IsServer()) {
-            AbilityEntityRoot.Active(this);
+            ItemEntityRoot.Active(this);
         }
     }
-    OnApplyCombinationEffect(str: string): void { }
-    OnCancelCombinationEffect(str: string): void { }
 }

@@ -11,6 +11,7 @@ export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
         (this as any).Playerid = ability.GetOwnerPlus().GetPlayerOwnerID();
         (this as any).ConfigID = ability.GetAbilityName();
         (this as any).EntityId = ability.GetEntityIndex();
+        LogHelper.print("AbilityEntityRoot",this.ConfigID)
     }
 
     config() {

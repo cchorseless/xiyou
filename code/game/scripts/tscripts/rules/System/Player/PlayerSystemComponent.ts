@@ -56,7 +56,6 @@ export class PlayerSystemComponent extends ET.Component {
             NetTablesHelper.SetETEntity(entity.obj, entity.ignoreChild);
         }
         this._WaitSyncEntity.length = 0;
-        GameRules.Addon.ETRoot.MapSystem().OnAllPlayerClientLoginFinish();
     }
 
     private _WaitUploadGameRecord: { k: string, v: string }[] = [];
@@ -142,6 +141,15 @@ export class PlayerSystemComponent extends ET.Component {
             this._WaitSyncEntity.push({ obj: obj, ignoreChild: ignoreChild });
         }
     }
+    public IsAllBindHeroFinish(): boolean {
+        for (let k in this.AllPlayer) {
+            if (this.AllPlayer[k].Hero == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public IsValidPlayer(playerid: PlayerID | number | string): boolean {
         return this.AllPlayer[playerid + ""] != null;

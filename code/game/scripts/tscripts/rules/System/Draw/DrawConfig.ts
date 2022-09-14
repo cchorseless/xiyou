@@ -21,7 +21,7 @@ export module DrawConfig {
         export interface ICardSelected {
             index: number;
             itemName: string;
-            b2Public: boolean;
+            b2Public: number;
         }
     }
 }

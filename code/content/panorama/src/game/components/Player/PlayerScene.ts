@@ -51,30 +51,11 @@ export class PlayerScene {
         NetHelper.SendToLua(GameEnum.CustomProtocol.req_LoginGame, null, (e) => {
             LogHelper.print(e);
         });
-        // let playerInfo = Game.GetLocalPlayerInfo();
-        // if (playerInfo == null || playerInfo.player_selected_hero_entity_index <= 0) {
-        //     /**玩家英雄创建绑定 */
-        //     // let eventid2 = GameEvents.Subscribe(GameEnum.GameEvent.dota_player_update_assigned_hero, (event: DotaPlayerUpdateAssignedHeroEvent) => {
-        //     //     let playerInfo = Game.GetLocalPlayerInfo();
-        //     //     if (playerInfo) {
-        //     //         if (playerInfo.player_id == event.playerid) {
-        //     //             this.playerId = playerInfo.player_id;
-        //     //             // NetHelper.SendToLua(GameEnum.CustomProtocol.req_LoginGame, null, (e) => {
-        //     //             //     LogHelper.print(e);
-        //     //             // });
-        //     //             GameEvents.Unsubscribe(eventid2);
-        //     //         }
-        //     //     }
-        //     // });
-        // } else {
-        //     // this.LoadNetTableData();
-        // }
     }
 
     static Init() {
         this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerEntityRootComponent>("PlayerEntityRootComponent"));
         this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerHeroComponent>("PlayerHeroComponent"));
-        this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof DrawComponent>("DrawComponent"));
         this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
         // 添加移动组件
         //  PlayerScene.Scene.AddComponent(ControlComponent);

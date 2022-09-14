@@ -13,7 +13,7 @@ export class ItemManagerComponent extends ET.Component {
         let len = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9;
         for (let i = 0; i <= len; i++) {
             let ability = npc.GetItemInSlot(i) as BaseItem_Plus;
-            if (ability.ETRoot) {
+            if (ability && ability.ETRoot) {
                 this.addItemRoot(ability.ETRoot as ItemEntityRoot);
             }
         }

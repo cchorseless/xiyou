@@ -1,3 +1,4 @@
+import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
@@ -28,6 +29,7 @@ export class PlayerEntityRoot extends ET.EntityRoot {
     }
 
     public BindHero(hero: BaseNpc_Hero_Plus): void {
+        LogHelper.print("BindHero :=>", this.Playerid);
         (this as any).Hero = hero;
         this.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerHeroComponent>("PlayerHeroComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundManagerComponent>("RoundManagerComponent"));
@@ -97,6 +99,6 @@ export class PlayerEntityRoot extends ET.EntityRoot {
         return this.GetComponentByName<TCharacter>("TCharacter");
     }
     CheckIsAlive() {
-        return this.GetDomain<BaseNpc_Hero_Plus>().IsAlive();
+        return this.Hero.IsAlive();
     }
 }
