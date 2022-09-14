@@ -16,6 +16,7 @@ import { DrawSystemComponent } from "./rules/System/Draw/DrawSystemComponent";
 import { EnemySystemComponent } from "./rules/System/Enemy/EnemySystemComponent";
 import { MapSystemComponent } from "./rules/System/Map/MapSystemComponent";
 import { PlayerSystemComponent } from "./rules/System/Player/PlayerSystemComponent";
+import { PublicBagSystemComponent } from "./rules/System/Public/PublicBagSystemComponent";
 import { RoundSystemComponent } from "./rules/System/Round/RoundSystemComponent";
 import { WearableSystemComponent } from "./rules/System/Wearable/WearableSystemComponent";
 import { TServerZone } from "./service/serverzone/TServerZone";
@@ -46,6 +47,7 @@ export class GameEntityRoot extends ET.EntityRoot {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingSystemComponent>("BuildingSystemComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationSystemComponent>("CombinationSystemComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof WearableSystemComponent>("WearableSystemComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof PublicBagSystemComponent>("PublicBagSystemComponent"));
         this.addEvent();
     }
     TServerZone() {
@@ -82,6 +84,11 @@ export class GameEntityRoot extends ET.EntityRoot {
     WearableSystem() {
         return this.GetComponentByName<WearableSystemComponent>("WearableSystemComponent");
     }
+
+    PublicBagSystem() {
+        return this.GetComponentByName<PublicBagSystemComponent>("PublicBagSystemComponent");
+    }
+
 
     private addEvent() {
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, async (e) => {

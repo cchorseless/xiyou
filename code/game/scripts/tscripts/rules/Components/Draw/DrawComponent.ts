@@ -79,24 +79,41 @@ export class DrawComponent extends ET.Component {
         EventHelper.fireProtocolEventToPlayer(DrawConfig.EProtocol.DrawCardResult, null, playerid);
     }
 
-    OnSelectCard2(index: number, unitName: string, b2Public: boolean = false, isfree: boolean = false): [boolean, string] {
-        if (!this.Domain.ETRoot.AsPlayer().CheckIsAlive()) {
+    OnSelectCard2(index: number, unitName: string, b2Public: boolean = false): [boolean, string] {
+        let player = this.GetDomain<PlayerScene>().ETRoot;
+        if (!player.CheckIsAlive()) {
             return [false, "hero is death"];
         }
         if (this.tLastCards[index] !== unitName) {
             return [false, "index error"];
         }
-        let cardItemName = KVHelper.KvServerConfig.building_unit_tower[unitName].CardName;
-        let hItem = this.GetDomain<PlayerScene>().ETRoot.Hero.AddItemByName(cardItemName);
-        // hItem.OnSpellStart()
-        if (GameFunc.IsValid(hItem) && b2Public) {
-            // Items.TryMoveEmptyPublic(iPlayerID, hHero, hItem);
-            this.tLastCards = [];
+        if (b2Public) {
+            let publicbag = GameRules.Addon.ETRoot.PublicBagSystem();
+            if (publicbag.IsEmpty()) {
+                let itemroot = publicbag.createBuildingItem(unitName);
+                if (itemroot == null) {
+                    return [false, "itemcreate fail"];
+                }
+                else {
+                    // todo 通知
+                }
+            }
+            else {
+                return [false, "PublicBag is full"];
+            }
         }
-        return [false, "index error"];
+        else {
+            let building = player.BuildingManager().addBuilding(unitName);
+            if (building == null) {
+                return [false, "buy fail"];
+            }
+        }
+        let playerid = player.Playerid;
+        NetTablesHelper.SetETEntity(this, false, playerid);
+        return [true, ""];
     }
     //  选卡
-    OnSelectCard(index: number, unitName: string, b2Public: boolean = false, isfree: boolean = false): [boolean, string] {
+    OnSelectCard(index: number, unitName: string, b2Public: boolean = false): [boolean, string] {
         if (!this.Domain.ETRoot.AsPlayer().CheckIsAlive()) {
             return [false, "hero is death"];
         }

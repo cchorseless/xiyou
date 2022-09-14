@@ -101,22 +101,6 @@ export class ChessControlSystemComponent extends ET.Component {
         this.BoardStandbyMinVector3[playerid + ""] = Vector(spawn.x - min_x, spawn.y - min_y, 128);
         return this.BoardStandbyMinVector3[playerid + ""];
     }
-    public GetBoardGirdVector3(v: ChessControlConfig.ChessVector) {
-        let playerid = v.playerid as PlayerID;
-        let minv: Vector;
-        let x: number;
-        let y: number;
-        if (v.y < 1 && v.y >= 0) {
-            minv = this.GetBoardStandbyMinVector3(playerid);
-            x = minv.x + ChessControlConfig.Gird_Width * (v.x + 0.5);
-            y = minv.y + ChessControlConfig.Gird_Height * (v.y + 0.5);
-        } else {
-            minv = this.GetBoard8x10MinVector3(playerid);
-            x = minv.x + ChessControlConfig.Gird_Width * (v.x + 0.5);
-            y = minv.y + ChessControlConfig.Gird_Height * (v.y - 1 + 0.5);
-        }
-        return Vector(x, y, 128);
-    }
 
     public GetBoardEmptyGirdRandomAround(v: ChessControlConfig.ChessVector) {
         let distance = 1;

@@ -27,6 +27,8 @@ export module BuildingConfig {
     /**最高星级 */
     export const MAX_STAR = 5;
 
+    export const MODEL_SCALE = [1, 1.5, 1.5, 1.5, 1.5, 1.5];
+
 
     /**错误信息 */
     export enum ErrorCode {

@@ -3,6 +3,8 @@ import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ET, registerET } from "../../Entity/Entity";
+import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
+import { RoundConfig } from "../../System/Round/RoundConfig";
 import { AbilityEntityRoot } from "../Ability/AbilityEntityRoot";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
@@ -29,7 +31,7 @@ export class CombinationManagerComponent extends ET.Component {
 
     private addEvent() {
         let player = this.Domain.ETRoot.AsPlayer();
-        EventHelper.addServerEvent(this, GameEnum.Event.CustomServer.onserver_roundboard_onbattle,
+        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onbattle,
             player.Playerid,
             (round: ERoundBoard) => {
                 for (let info in this.allCombination) {
@@ -40,12 +42,20 @@ export class CombinationManagerComponent extends ET.Component {
                         }
                     }
                 }
-
+            });
+        EventHelper.addServerEvent(this, ChessControlConfig.Event.ChessControl_JoinBattle,
+            player.Playerid,
+            (building: BuildingEntityRoot) => {
+                this.addBuilding(building);
+            });
+        EventHelper.addServerEvent(this, ChessControlConfig.Event.ChessControl_LeaveBattle,
+            player.Playerid,
+            (building: BuildingEntityRoot) => {
+                this.removeBuilding(building);
             });
     }
 
     private allCombination: { [k: string]: { [k: string]: ECombination } } = {};
-
     public addBuilding(entity: BuildingEntityRoot) {
         let comb = entity.CombinationComp();
         if (comb == null) {

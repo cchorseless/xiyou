@@ -12,7 +12,6 @@ import { AwalonState } from "../../System/Awalon/AwalonState";
 
 
 
-/**阿瓦隆组件 */
 export class AvalonComponent extends ET.Component {
     roleConfig: AwalonConfig.Avalon_RoleConfig;
     onAwake() {
@@ -32,15 +31,15 @@ export class AvalonComponent extends ET.Component {
         EventHelper.addGameEvent(
             this,
             GameEnum.Event.GameEvent.game_rules_state_change, () => {
-            const nNewState = GameRules.State_Get();
-            switch (nNewState) {
-                // 设置玩家阵营
-                // -- 游戏开始 --创建自己的英雄
-                case DOTA_GameState.DOTA_GAMERULES_STATE_GAME_IN_PROGRESS:
-                    this.setTeamnumber()
-                    break
-            }
-        });
+                const nNewState = GameRules.State_Get();
+                switch (nNewState) {
+                    // 设置玩家阵营
+                    // -- 游戏开始 --创建自己的英雄
+                    case DOTA_GameState.DOTA_GAMERULES_STATE_GAME_IN_PROGRESS:
+                        this.setTeamnumber()
+                        break
+                }
+            });
 
     }
 

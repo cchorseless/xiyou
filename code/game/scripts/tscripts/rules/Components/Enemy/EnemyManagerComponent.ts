@@ -15,6 +15,7 @@ import { modifier_spawn_torrent } from "../../../npc/modifier/spawn/modifier_spa
 import { ET, registerET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { EnemyState } from "../../System/Enemy/EnemyState";
+import { RoundConfig } from "../../System/Round/RoundConfig";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
@@ -39,7 +40,7 @@ export class EnemyManagerComponent extends ET.Component {
     }
     addEvent() {
         let player = this.Domain.ETRoot.AsPlayer();
-        EventHelper.addServerEvent(this, GameEnum.Event.CustomServer.onserver_roundboard_onstart,
+        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onstart,
             player.Playerid,
             (round: ERoundBoard) => {
                 let allenemy = round.config.unitinfo;
@@ -51,7 +52,7 @@ export class EnemyManagerComponent extends ET.Component {
                 //         b.RoundEnemyComp().OnBoardRound_Start();
                 //     });
             });
-        EventHelper.addServerEvent(this, GameEnum.Event.CustomServer.onserver_roundboard_onbattle,
+        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onbattle,
             player.Playerid,
             (round: ERoundBoard) => {
                 this.getAllEnemy()
@@ -59,7 +60,7 @@ export class EnemyManagerComponent extends ET.Component {
                         b.RoundEnemyComp().OnBoardRound_Battle();
                     });
             });
-        EventHelper.addServerEvent(this, GameEnum.Event.CustomServer.onserver_roundboard_onprize,
+        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onprize,
             player.Playerid,
             (iswin: boolean) => {
                 if (!iswin) {
@@ -81,7 +82,7 @@ export class EnemyManagerComponent extends ET.Component {
                     );
                 }
             });
-        EventHelper.addServerEvent(this, GameEnum.Event.CustomServer.onserver_roundboard_onwaitingend,
+        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onwaitingend,
             player.Playerid,
             (round: ERoundBoard) => {
                 this.getAllEnemy()
@@ -112,7 +113,7 @@ export class EnemyManagerComponent extends ET.Component {
         let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
         let allenemy = round.config.unitinfo;
         let _boardVec = new ChessControlConfig.ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
-        let pos = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardGirdVector3(_boardVec);
+        let pos = _boardVec.getVector3();
         let angle = Vector(Number(allenemy[unit_index].angles_x), Number(allenemy[unit_index].angles_y), Number(allenemy[unit_index].angles_z));
         let enemyName = allenemy[unit_index].unit;
         let delay = 0;

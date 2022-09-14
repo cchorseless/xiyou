@@ -40,7 +40,7 @@ export class BuildingEntityRoot extends PlayerCreateUnitEntityRoot {
 
 
     updateNetTable() {
-        NetTablesHelper.SetETEntity(this, false, this.Playerid);
+        this.GetPlayer().SyncClientEntity(this);
     }
 
     BuildingComp() {

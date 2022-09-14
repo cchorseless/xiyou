@@ -1,7 +1,4 @@
 import { GameFunc } from "../../../GameFunc";
-import { EntityHelper } from "../../../helper/EntityHelper";
-import { KVHelper } from "../../../helper/KVHelper";
-import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
@@ -35,17 +32,19 @@ export class BuildingComponent extends ET.Component {
         TimerHelper.addTimer(
             2,
             () => {
-                this.ChangeFashionEquip(1);
+                // this.ChangeFashionEquip(1);
             },
             this
         );
     }
 
     updateNetTable() {
-        NetTablesHelper.SetETEntity(this, false, this.Domain.ETRoot.As<BuildingEntityRoot>().Playerid);
+        this.Domain.ETRoot.As<BuildingEntityRoot>().GetPlayer().SyncClientEntity(this);
     }
 
-    public Dispose(): void {
+
+
+    Dispose(): void {
         NetTablesHelper.DelETEntity(this, this.Domain.ETRoot.As<BuildingEntityRoot>().Playerid);
         super.Dispose();
     }
@@ -64,7 +63,6 @@ export class BuildingComponent extends ET.Component {
     }
 
     ChangeFashionEquip(n: number) {
-
         // if (wearables.length >= 1) {
         //     print("MODEL REMOVED, RESPAWNING HERO");
         //     //  hero.SetRespawnPosition(hero.GetOrigin())
@@ -72,6 +70,10 @@ export class BuildingComponent extends ET.Component {
         // }
     }
 
+    public GetPopulation(): number {
+        let towerID = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>().ConfigID;
+        return GameRules.Addon.ETRoot.BuildingSystem().GetBuildingPopulation(towerID);
+    }
     /**
      * 升星
      * @param n
@@ -79,6 +81,7 @@ export class BuildingComponent extends ET.Component {
     AddStar(n: number) {
         this.iStar += n;
         let domain = this.GetDomain<BaseNpc_Plus>();
+        let building = domain.ETRoot.As<BuildingEntityRoot>();
         // "particles/generic_hero_status/hero_levelup.vpcf"
         // "particles/units/heroes/hero_oracle/oracle_false_promise_cast_enemy.vpcf"
         let iParticleID = ResHelper.CreateParticle(
@@ -89,6 +92,11 @@ export class BuildingComponent extends ET.Component {
                 .set_validtime(3)
         );
         EmitSoundOn("lvl_up", domain);
+        // 变大
+        domain.SetModelScale(domain.GetModelScale() * BuildingConfig.MODEL_SCALE[this.iStar - 1]);
+        // 技能升级
+        building.AbilityManagerComp().levelUpAllAbility();
+        // 通知跑马灯
         this.updateNetTable();
     }
 }

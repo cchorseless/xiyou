@@ -33,7 +33,7 @@ export class ERoundBoard extends ERound {
         this.roundStartTime = TimerHelper.now();
         let playerroot = this.Domain.ETRoot.AsPlayer();
         NetTablesHelper.SetETEntity(this, false, playerroot.Playerid);
-        EventHelper.fireServerEvent(GameEnum.Event.CustomServer.onserver_roundboard_onstart, playerroot.Playerid, this);
+        EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onstart, playerroot.Playerid, this);
         if (this.config.round_readytime != null) {
             TimerHelper.addTimer(
                 Number(this.config.round_readytime),
@@ -49,7 +49,7 @@ export class ERoundBoard extends ERound {
         let player = this.Domain.ETRoot.AsPlayer();
         this.roundState = RoundConfig.ERoundBoardState.battle;
         NetTablesHelper.SetETEntity(this, false, player.Playerid);
-        EventHelper.fireServerEvent(GameEnum.Event.CustomServer.onserver_roundboard_onbattle, player.Playerid, this);
+        EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onbattle, player.Playerid, this);
         let buildingCount = player.BuildingManager().getAllBattleBuilding().length;
         let enemyCount = player.EnemyManagerComp().getAllEnemy().length;
         let delaytime = Number(this.config.round_time);
@@ -78,7 +78,7 @@ export class ERoundBoard extends ERound {
         NetTablesHelper.SetETEntity(this, false, playerroot.Playerid);
         let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllEnemy();
         let isWin = aliveEnemy.length == 0;
-        EventHelper.fireServerEvent(GameEnum.Event.CustomServer.onserver_roundboard_onprize, playerroot.Playerid, isWin);
+        EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onprize, playerroot.Playerid, isWin);
         this.waitingEndTimer = TimerHelper.addTimer(
             20,
             () => {
@@ -100,7 +100,7 @@ export class ERoundBoard extends ERound {
         this.roundState = RoundConfig.ERoundBoardState.waiting_next;
         let playerroot = this.Domain.ETRoot.AsPlayer();
         NetTablesHelper.SetETEntity(this, false, playerroot.Playerid);
-        EventHelper.fireServerEvent(GameEnum.Event.CustomServer.onserver_roundboard_onwaitingend, playerroot.Playerid, this);
+        EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onwaitingend, playerroot.Playerid, this);
         GameRules.Addon.ETRoot.RoundSystem().endBoardRound();
     }
 

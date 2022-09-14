@@ -28,9 +28,31 @@ export module ChessControlConfig {
             return this.playerid - v.playerid < 0.1 && this.playerid - v.playerid > -0.1;
         }
         distance(v: ChessControlConfig.ChessVector) {
-            return (this.x - v.x)*(this.x - v.x) + (this.y - v.y)*(this.y - v.y);
-       }
+            return (this.x - v.x) * (this.x - v.x) + (this.y - v.y) * (this.y - v.y);
+        }
+        getVector3() {
+            let playerid = this.playerid as PlayerID;
+            let minv: Vector;
+            let x: number;
+            let y: number;
+            if (this.y < 1 && this.y >= 0) {
+                minv = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardStandbyMinVector3(playerid);
+                x = minv.x + ChessControlConfig.Gird_Width * (this.x + 0.5);
+                y = minv.y + ChessControlConfig.Gird_Height * (this.y + 0.5);
+            } else {
+                minv = GameRules.Addon.ETRoot.ChessControlSystem().GetBoard8x10MinVector3(playerid);
+                x = minv.x + ChessControlConfig.Gird_Width * (this.x + 0.5);
+                y = minv.y + ChessControlConfig.Gird_Height * (this.y - 1 + 0.5);
+            }
+            return Vector(x, y, 128);
+        }
     }
+
+    export enum Event {
+        ChessControl_JoinBattle = "ChessControl_JoinBattle",
+        ChessControl_LeaveBattle = "ChessControl_LeaveBattle",
+    }
+
 
     export enum EProtocol {
         pick_chess_position = "pick_chess_position",

@@ -350,7 +350,7 @@ export module EventHelper {
      * @param context
      * @returns
      */
-    export function addServerEvent(context: any, eventName: GameEnum.Event.CustomServer, playerid: PlayerID | null, func: (event: any) => void) {
+    export function addServerEvent(context: any, eventName: string, playerid: PlayerID | null, func: (event: any) => void) {
         if (!IsServer()) {
             return;
         }
@@ -367,7 +367,7 @@ export module EventHelper {
      * @param context
      * @returns
      */
-    export function removeServerEvent(context: any, eventName: GameEnum.Event.CustomServer, playerid: PlayerID | null, func: (event: LUA_TO_LUA_DATA) => void) {
+    export function removeServerEvent(context: any, eventName: string, playerid: PlayerID | null, func: (event: LUA_TO_LUA_DATA) => void) {
         if (!IsServer()) {
             return;
         }
@@ -391,7 +391,7 @@ export module EventHelper {
      * @param eventName
      * @param eventData
      */
-    export function fireServerEvent(eventName: GameEnum.Event.CustomServer, playerid: PlayerID | null = null, eventData: any = null) {
+    export function fireServerEvent(eventName: string, playerid: PlayerID | null = null, eventData: any = null) {
         if (!IsServer()) {
             return;
         }

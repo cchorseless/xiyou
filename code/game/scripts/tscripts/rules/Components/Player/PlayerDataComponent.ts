@@ -4,8 +4,11 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
+import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { DifficultyState } from "../../System/Difficulty/DifficultyState";
 import { PlayerConfig } from "../../System/Player/PlayerConfig";
+import { RoundConfig } from "../../System/Round/RoundConfig";
+import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 
 @registerET()
@@ -82,9 +85,6 @@ export class PlayerDataComponent extends ET.Component {
     }
 
     changePopulation(count: number) {
-        if (this.population + count > this.populationRoof) {
-            return;
-        }
         this.population += count;
     }
 
@@ -119,13 +119,27 @@ export class PlayerDataComponent extends ET.Component {
 
     addEvent() {
         let playerroot = this.Domain.ETRoot.AsPlayer();
-        EventHelper.addServerEvent(this, GameEnum.Event.CustomServer.onserver_roundboard_onstart,
+        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onstart,
             playerroot.Playerid,
             (round: ERoundBoard) => {
                 if (round.IsBelongPlayer(this.Domain.ETRoot.AsPlayer().Playerid)) {
                     this.addMoneyRoundStart(tonumber(round.config.roundprize_gold), tonumber(round.config.roundprize_wood));
                 }
             });
+        EventHelper.addServerEvent(this, ChessControlConfig.Event.ChessControl_JoinBattle,
+            playerroot.Playerid,
+            (building: BuildingEntityRoot) => {
+                let popu = building.BuildingComp().GetPopulation();
+                this.changePopulation(popu);
+            });
+        EventHelper.addServerEvent(this, ChessControlConfig.Event.ChessControl_LeaveBattle,
+            playerroot.Playerid,
+            (building: BuildingEntityRoot) => {
+                let popu = building.BuildingComp().GetPopulation();
+                this.changePopulation(-popu);
+            });
+
+
         EventHelper.addProtocolEvent(this, PlayerConfig.EProtocol.reqApplyPopuLevelUp, (e) => {
             e.state = true;
             let playerid = this.Domain.ETRoot.AsPlayer().Playerid;

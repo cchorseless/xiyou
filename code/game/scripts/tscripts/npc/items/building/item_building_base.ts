@@ -7,12 +7,12 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BuildingComponent } from "../../../rules/Components/Building/BuildingComponent";
 import { BuildingConfig } from "../../../rules/System/Building/BuildingConfig";
 import { ChessControlConfig } from "../../../rules/System/ChessControl/ChessControlConfig";
-import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility } from "../../entityPlus/Base_Plus";
+import { ActiveRootItem } from "../ActiveRootItem";
 
 /**建筑物道具基类 */
-export class item_building_base extends BaseItem_Plus {
+export class item_building_base extends ActiveRootItem {
     GetCreateUnitName() {
         let itemname = this.GetAbilityName();
         let info = KVHelper.KvConfig().building_item_card[itemname];
@@ -70,7 +70,7 @@ export class item_building_base extends BaseItem_Plus {
         if (IsServer()) {
             let sTowerName = this.GetCreateUnitName();
             let BuildingManager = this.GetOwnerPlus().ETRoot.AsPlayer().BuildingManager();
-            let count = BuildingManager.getBuildingCount(sTowerName);
+            let count = BuildingManager.getBuilding(sTowerName).length;
             if (count >= 1) {
                 return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET;
             }

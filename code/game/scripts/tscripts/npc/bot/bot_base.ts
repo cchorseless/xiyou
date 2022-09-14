@@ -2,8 +2,6 @@ import { GameDebugger } from "../../GameDebugger";
 import { LogHelper } from "../../helper/LogHelper";
 import { PrecacheHelper } from "../../helper/PrecacheHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
-import { AvalonBotComponent } from "../../rules/Components/Awalon/AvalonBotComponent";
-import { AvalonComponent } from "../../rules/Components/Awalon/AvalonComponent";
 import { PlayerHeroComponent } from "../../rules/Components/Player/PlayerHeroComponent";
 import { ET } from "../../rules/Entity/Entity";
 import { PlayerState } from "../../rules/System/Player/PlayerState";

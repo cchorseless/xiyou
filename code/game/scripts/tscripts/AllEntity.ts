@@ -34,6 +34,7 @@ import { AbilityManagerComponent } from "./rules/Components/Ability/AbilityManag
 import { ItemManagerComponent } from "./rules/Components/Item/ItemManagerComponent";
 import { ECombination } from "./rules/Components/Combination/ECombination";
 import { ECombinationLabelItem } from "./rules/Components/Combination/ECombinationLabelItem";
+import { PublicBagSystemComponent } from "./rules/System/Public/PublicBagSystemComponent";
 
 [
     MapSystemComponent,
@@ -44,6 +45,7 @@ import { ECombinationLabelItem } from "./rules/Components/Combination/ECombinati
     ChessControlSystemComponent,
     BuildingSystemComponent,
     DrawSystemComponent,
+    PublicBagSystemComponent,
 
     AbilityManagerComponent,
     ItemManagerComponent,

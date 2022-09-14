@@ -9,28 +9,28 @@ export const registerET = () => (entity: typeof ET.Entity) => {
 };
 export const serializeETProps =
     (params: string = null) =>
-    (target: ET.Entity, attr: string) => {
-        // 处理属性
-        if (target.SerializeETProps == null) {
-            (target as any).SerializeETProps = [];
-        }
-        if (params != null) {
-            attr = params;
-        }
-        target.SerializeETProps.push(attr);
-    };
+        (target: ET.Entity, attr: string) => {
+            // 处理属性
+            if (target.SerializeETProps == null) {
+                (target as any).SerializeETProps = [];
+            }
+            if (params != null) {
+                attr = params;
+            }
+            target.SerializeETProps.push(attr);
+        };
 export const serializeDomainProps =
     (params: string = null) =>
-    (target: ET.IEntityRoot, attr: string) => {
-        // 处理属性
-        if (target.SerializeDomainProps == null) {
-            target.SerializeDomainProps = [];
-        }
-        if (params != null) {
-            attr = params;
-        }
-        target.SerializeDomainProps.push(attr);
-    };
+        (target: ET.IEntityRoot, attr: string) => {
+            // 处理属性
+            if (target.SerializeDomainProps == null) {
+                target.SerializeDomainProps = [];
+            }
+            if (params != null) {
+                attr = params;
+            }
+            target.SerializeDomainProps.push(attr);
+        };
 
 export module ET {
     export interface IEntityJson {
@@ -722,7 +722,7 @@ export module ET {
             return this as any as PlayerEntityRoot;
         }
 
-        public onAwake(...args: any[]) {}
+        public onAwake(...args: any[]) { }
         public Active(etroot: IEntityRoot) {
             if (this.Domain != null) {
                 return;
@@ -840,6 +840,12 @@ export module ET {
             }
         }
         public Dispose(): void {
+            if (this.DomainChildren != null) {
+                for (let key in this.DomainChildren) {
+                    this.DomainChildren[key].Dispose();
+                }
+                (this as any).DomainChildren = null;
+            }
             super.Dispose();
             if (this.DomainParent != null && !this.DomainParent.IsDisposed()) {
                 this.DomainParent.removeDomainChildren(this);

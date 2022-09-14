@@ -45,6 +45,16 @@ export class ChessControlComponent extends ET.Component {
         return [true, ""];
     }
 
-
+    public findEmptyStandbyChessVector() {
+        let playerid = this.GetDomain<PlayerScene>().ETRoot.Playerid;
+        let chessVector = new ChessControlConfig.ChessVector(0, 0, playerid);
+        for (let i = 0; i < ChessControlConfig.Gird_Max_X; i++) {
+            chessVector.x = i;
+            if (GameRules.Addon.ETRoot.ChessControlSystem().IsBoardEmptyGird(chessVector)) {
+                return chessVector;
+            }
+        }
+        return null;
+    }
 
 }

@@ -1,10 +1,12 @@
 import { GameFunc } from "../../../GameFunc";
+import { EventHelper } from "../../../helper/EventHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_jump } from "../../../npc/modifier/modifier_jump";
 import { modifier_run } from "../../../npc/modifier/modifier_run";
 import { ET, registerET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
+import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
 
 @registerET()
@@ -16,7 +18,6 @@ export class ChessComponent extends ET.Component {
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.SetForwardVector(Vector(0, 1, 0));
         // this.updateForward();
-
     }
     updateBoardPos() {
         let location = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
@@ -28,6 +29,11 @@ export class ChessComponent extends ET.Component {
         domain.SetForwardVector(((position - domain.GetAbsOrigin()) as Vector).Normalized());
         domain.MoveToPosition(position);
     }
+    isBuilding() {
+        let domain = this.GetDomain<BaseNpc_Plus>();
+        return domain.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot");
+    }
+
     isInBattle() {
         return this.ChessVector.y >= 1;
     }
@@ -44,7 +50,7 @@ export class ChessComponent extends ET.Component {
 
     blink_start_p: Vector;
     is_moving: boolean;
-    public blinkChessX(v: Vector, isjump: boolean = true) {
+    blinkChessX(v: Vector, isjump: boolean = true) {
         if (this.is_moving) {
             return;
         }
@@ -54,8 +60,10 @@ export class ChessComponent extends ET.Component {
         domain.SetForwardVector(((v - domain.GetAbsOrigin()) as Vector).Normalized());
         domain.MoveToPosition(v);
         this.RemoveMovingModifier();
+        this.blink_start_p = domain.GetAbsOrigin();
         let chessPos = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardLocalVector2(v);
         GameRules.Addon.ETRoot.ChessControlSystem().RegistBlinkTargetGird(chessPos, true);
+        this.OnblinkChessStart(chessPos);
         if (isjump) {
             modifier_jump.applyOnly(domain, domain, null, {
                 vx: v.x,
@@ -67,7 +75,22 @@ export class ChessComponent extends ET.Component {
                 vy: v.y,
             });
         }
-        this.blink_start_p = domain.GetAbsOrigin();
+    }
+    OnblinkChessStart(to: ChessControlConfig.ChessVector) {
+        if (!this.isBuilding()) { return }
+        let building = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>()
+        if (this.isInBattle()) {
+            if (to.y == 0) {
+                EventHelper.fireServerEvent(ChessControlConfig.Event.ChessControl_LeaveBattle,
+                    building.Playerid, building)
+            }
+        }
+        else {
+            if (to.y > 0) {
+                EventHelper.fireServerEvent(ChessControlConfig.Event.ChessControl_JoinBattle,
+                    building.Playerid, building)
+            }
+        }
     }
     OnblinkChessFinish() {
         let sys = GameRules.Addon.ETRoot.ChessControlSystem();
@@ -137,6 +160,7 @@ export class ChessComponent extends ET.Component {
             return false;
         }
     }
+
 
     RemoveMovingModifier() {
         let domain = this.GetDomain<BaseNpc_Plus>();

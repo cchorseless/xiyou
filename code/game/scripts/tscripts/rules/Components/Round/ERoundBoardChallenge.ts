@@ -33,7 +33,7 @@ export class ERoundBoardChallenge extends ERound {
         let allenemy = this.config.unitinfo;
         let _boardVec = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardEmptyGirdRandom(playerid, true, true);
         // let _boardVec = new ChessControlConfig.ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
-        let pos = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardGirdVector3(_boardVec);
+        let pos = _boardVec.getVector3();
         let angle = Vector(Number(allenemy[unit_index].angles_x), Number(allenemy[unit_index].angles_y), Number(allenemy[unit_index].angles_z));
         let enemyName = allenemy[unit_index].unit;
         let delay = 0;

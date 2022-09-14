@@ -22,4 +22,10 @@ export module RoundConfig {
         end,
 
     }
+    export enum Event {
+        roundboard_onstart = "roundboard_onstart",
+        roundboard_onbattle = "roundboard_onbattle",
+        roundboard_onprize = "roundboard_onprize",
+        roundboard_onwaitingend = "roundboard_onwaitingend",
+    }
 }

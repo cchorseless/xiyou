@@ -2434,11 +2434,6 @@ export module GameEnum {
             onserver_create_team_task = "onserver_create_team_task",
             /**服务器更新对局任务进度 */
             onserver_update_game_task_jindu = "onserver_update_game_task_jindu",
-            onserver_roundboard_onstart = "onserver_roundboard_onstart",
-            onserver_roundboard_onbattle = "onserver_roundboard_onbattle",
-            onserver_roundboard_onprize = "onserver_roundboard_onprize",
-            onserver_roundboard_onwaitingend = "onserver_roundboard_onwaitingend",
-
         }
         /**JS 请求 LUA 的协议 */
         export enum CustomProtocol {
