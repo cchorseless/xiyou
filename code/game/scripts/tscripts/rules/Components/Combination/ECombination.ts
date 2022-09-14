@@ -1,3 +1,4 @@
+import { KVHelper } from "../../../helper/KVHelper";
 import { building_combination_ability } from "../../../kvInterface/building/building_combination_ability";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
@@ -111,17 +112,29 @@ export class ECombination extends ET.Entity {
     }
 
     ApplyEffect() {
-        for (let k in this.combination) {
-            let c = this.combination[k];
-            c.forEach(entity => {
-                let source = entity.getSourceEntity();
-                if (source) {
-                    let domain = (source.Domain as CombinationConfig.I.ICombinationHandler);
-                    if (domain.OnApplyCombinationEffect) {
-                        domain.OnApplyCombinationEffect(this.combinationId)
+        let config = KVHelper.KvServerConfig.building_combination_ability[this.combinationId];
+        if (config) {
+            let combuff = config.acitve_common_effect;
+            let spebuff = config.acitve_special_effect;
+            if (combuff && combuff.length > 0) {
+                let combuffconfig = KVHelper.KvServerConfig.effect_config[combuff];
+                if (combuffconfig) {
+                    switch (combuffconfig.target) {
+                        case CombinationConfig.EEffectTargetType.hero:
+                            break;
+                        case CombinationConfig.EEffectTargetType.team:
+                            break;
+                        case CombinationConfig.EEffectTargetType.enemy:
+                            break;
                     }
                 }
-            })
+            }
+            if (spebuff && spebuff.length > 0) {
+                let spebuffconfig = KVHelper.KvServerConfig.effect_config[spebuff];
+                if (spebuffconfig) {
+
+                }
+            }
         }
     }
 

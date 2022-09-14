@@ -17,6 +17,5 @@ export interface OBJ_2_1 {
 "acitve_common_effect" :string ,
 "heroid" :string ,
 "Abilityid" :string ,
-"acitve_special_effect" :string ,
 [k:string] : string }
 }
