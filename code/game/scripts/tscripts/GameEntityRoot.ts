@@ -183,13 +183,13 @@ export class GameEntityRoot extends ET.EntityRoot {
         }
         if (hUnit.ETRoot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
             let enemyUnit = hUnit.ETRoot.As<EnemyUnitEntityRoot>();
-            enemyUnit.GetPlayer().EnemyManagerComp().killEnemy(enemyUnit);
+            enemyUnit.onKilled(events);
         } else if (hUnit.ETRoot.AsValid<RoundPrizeUnitEntityRoot>("RoundPrizeUnitEntityRoot")) {
-            let enemyUnit = hUnit.ETRoot.As<RoundPrizeUnitEntityRoot>();
-            enemyUnit.KillPrizeComp()?.OnKillByEntity(events.entindex_attacker);
+            let roundprize = hUnit.ETRoot.As<RoundPrizeUnitEntityRoot>();
+            roundprize.onKilled(events);
         } else if (hUnit.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
             let buildunit = hUnit.ETRoot.As<BuildingEntityRoot>();
-            // buildunit.KillPrizeComp()?.OnKillByEntity(events.entindex_attacker);
+            buildunit.onKilled(events);
         }
     }
     public onJS_TO_LUA_EVENT(entindex: EntityIndex, event: JS_TO_LUA_DATA) {

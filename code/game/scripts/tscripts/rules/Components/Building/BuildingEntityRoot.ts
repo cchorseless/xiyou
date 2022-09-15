@@ -45,6 +45,11 @@ export class BuildingEntityRoot extends PlayerCreateUnitEntityRoot {
         }
     }
 
+    onKilled(events: EntityKilledEvent): void {
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
+    }
+
     Config() {
         return KVHelper.KvConfig().building_unit_tower["" + this.ConfigID];
     }
@@ -52,8 +57,6 @@ export class BuildingEntityRoot extends PlayerCreateUnitEntityRoot {
     GetDotaHeroName() {
         return this.Config().DotaHeroName;
     }
-
-
 
     updateNetTable() {
         this.GetPlayer().SyncClientEntity(this);

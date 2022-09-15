@@ -1,3 +1,4 @@
+import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
@@ -51,6 +52,13 @@ export class EnemyUnitEntityRoot extends PlayerCreateUnitEntityRoot {
         }
     }
 
+    onKilled(events: EntityKilledEvent): void {
+        this.GetPlayer().EnemyManagerComp().killEnemy(this);
+    }
+
+    config() {
+        return KVHelper.KvServerConfig.building_unit_enemy[this.ConfigID];
+    }
 
     GetRound<T extends ERound>(): T {
         return this.GetPlayer().RoundManagerComp().RoundInfo[this.RoundID] as T;

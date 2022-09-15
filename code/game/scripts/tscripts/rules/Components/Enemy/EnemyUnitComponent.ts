@@ -18,13 +18,10 @@ import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
 
 @registerET()
 export class EnemyUnitComponent extends ET.Component {
-    config: building_unit_enemy.OBJ_2_1;
     readonly IsSerializeEntity: boolean = true;
 
     onAwake(): void {
         let domain = this.GetDomain<BaseNpc_Plus>();
-        let configid = domain.ETRoot.As<EnemyUnitEntityRoot>().ConfigID;
-        this.config = KVHelper.KvServerConfig.building_unit_enemy[configid];
         domain.SetForwardVector(Vector(0, -1, 0));
         domain.addSpawnedHandler(
             ET.Handler.create(this, () => {
@@ -38,7 +35,7 @@ export class EnemyUnitComponent extends ET.Component {
     }
 
     EnemyUnitType() {
-        return this.config.UnitLabel;
+        return this.Domain.ETRoot.As<EnemyUnitEntityRoot>().config().UnitLabel;
     }
 
     IsWave() {

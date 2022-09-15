@@ -20,6 +20,9 @@ export class RoundPrizeUnitEntityRoot extends ET.EntityRoot {
         (this as any).OnlyKey = onlyKey;
         this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundPrizeUnitKillPrizeComponent>("RoundPrizeUnitKillPrizeComponent"));
     }
+    onKilled(events: EntityKilledEvent): void {
+        this.KillPrizeComp()?.OnKillByEntity(events.entindex_attacker);
+    }
 
     KillPrizeComp() {
         return this.GetComponentByName<RoundPrizeUnitKillPrizeComponent>("RoundPrizeUnitKillPrizeComponent");
