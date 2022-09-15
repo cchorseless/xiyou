@@ -31,17 +31,15 @@ export class CombinationManagerComponent extends ET.Component {
 
     private addEvent() {
         let player = this.Domain.ETRoot.AsPlayer();
+        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onstart,
+            player.Playerid,
+            (round: ERoundBoard) => {
+                this.activeECombination(false)
+            });
         EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onbattle,
             player.Playerid,
             (round: ERoundBoard) => {
-                for (let info in this.allCombination) {
-                    let combinas = Object.values(this.allCombination[info])
-                    for (let comb of combinas) {
-                        if (comb.isActive) {
-                            comb.ApplyEffect();
-                        }
-                    }
-                }
+                this.activeECombination(true)
             });
         EventHelper.addServerEvent(this, ChessControlConfig.Event.ChessControl_JoinBattle,
             player.Playerid,
@@ -54,6 +52,18 @@ export class CombinationManagerComponent extends ET.Component {
                 this.removeBuilding(building);
             });
     }
+
+    activeECombination(isActive: boolean) {
+        for (let info in this.allCombination) {
+            let combinas = Object.values(this.allCombination[info])
+            for (let comb of combinas) {
+                if (comb.isActive) {
+                    comb.ApplyBuffEffect(isActive);
+                }
+            }
+        }
+    }
+
 
     private allCombination: { [k: string]: { [k: string]: ECombination } } = {};
     public addBuilding(entity: BuildingEntityRoot) {

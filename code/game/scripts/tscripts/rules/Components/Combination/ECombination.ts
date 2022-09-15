@@ -1,9 +1,12 @@
 import { KVHelper } from "../../../helper/KVHelper";
+import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { building_combination_ability } from "../../../kvInterface/building/building_combination_ability";
+import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { CombinationConfig } from "../../System/Combination/CombinationConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
+import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
 
@@ -81,12 +84,6 @@ export class ECombination extends ET.Entity {
             this.checkActive();
             if (this.isActive) {
                 // this.ApplyEffect();
-                // let buildings = this.getAllBuilding();
-                // for (let key of this.entityArr) {
-                //     let eni = ET.EntityEventSystem.GetEntity(key);
-                //     if (eni != null) {
-                //     }
-                // }
             }
         }
     }
@@ -103,55 +100,64 @@ export class ECombination extends ET.Entity {
         this.checkActive();
         if (!this.isActive) {
             // this.CancelEffect();
-            // for (let key of this.entityArr) {
-            //     let eni = ET.EntityEventSystem.GetEntity(key);
-            //     if (eni != null) {
-            //     }
-            // }
         }
     }
 
-    ApplyEffect() {
+    ApplyBuffEffect(isActive: boolean = false) {
         let config = KVHelper.KvServerConfig.building_combination_ability[this.combinationId];
         if (config) {
             let combuff = config.acitve_common_effect;
             let spebuff = config.acitve_special_effect;
+            let bufflist: string[] = [];
             if (combuff && combuff.length > 0) {
-                let combuffconfig = KVHelper.KvServerConfig.effect_config[combuff];
-                if (combuffconfig) {
-                    switch (combuffconfig.target) {
-                        case CombinationConfig.EEffectTargetType.hero:
-                            break;
-                        case CombinationConfig.EEffectTargetType.team:
-                            break;
-                        case CombinationConfig.EEffectTargetType.enemy:
-                            break;
-                    }
-                }
+                combuff.split("|").forEach(buff => {
+                    buff && bufflist.push(buff);
+                })
             }
             if (spebuff && spebuff.length > 0) {
-                let spebuffconfig = KVHelper.KvServerConfig.effect_config[spebuff];
-                if (spebuffconfig) {
-
-                }
+                spebuff.split("|").forEach(buff => {
+                    buff && bufflist.push(buff);
+                })
             }
-        }
-    }
-
-    CancelEffect() {
-        for (let k in this.combination) {
-            let c = this.combination[k];
-            c.forEach(entity => {
-                let source = entity.getSourceEntity();
-                if (source) {
-                    let domain = (source.Domain as CombinationConfig.I.ICombinationHandler);
-                    if (domain.OnCancelCombinationEffect) {
-                        domain.OnCancelCombinationEffect(this.combinationId)
+            for (let buff of bufflist) {
+                if (buff && buff.length > 0) {
+                    let buffconfig = KVHelper.KvServerConfig.effect_config[buff];
+                    let type = PrecacheHelper.GetRegClass<typeof BaseModifier_Plus>(buff)
+                    if (buffconfig && type) {
+                        let buildings: PlayerCreateUnitEntityRoot[];
+                        switch (buffconfig.target) {
+                            case CombinationConfig.EEffectTargetType.hero:
+                                buildings = this.getAllBuilding();
+                                break;
+                            case CombinationConfig.EEffectTargetType.team:
+                                buildings = this.Domain.ETRoot.AsPlayer().BuildingManager().getAllBattleBuilding()
+                                break;
+                            case CombinationConfig.EEffectTargetType.enemy:
+                                buildings = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllEnemy()
+                                break;
+                        };
+                        if (buildings) {
+                            if (isActive) {
+                                buildings.forEach(build => {
+                                    let entity = build.GetDomain<BaseNpc_Plus>();
+                                    type.applyOnly(entity, entity)
+                                })
+                            }
+                            else {
+                                buildings.forEach(build => {
+                                    let entity = build.GetDomain<BaseNpc_Plus>();
+                                    type.remove(entity)
+                                })
+                            }
+                        }
                     }
                 }
-            })
+            }
+
         }
     }
+
+
 
     public onDestroy(): void {
     }

@@ -106,7 +106,7 @@ export class EnemyManagerComponent extends ET.Component {
     }
 
     public getAllEnemy() {
-        return this.GetDomain<BaseNpc_Plus>().ETRoot.GetDomainChilds(EnemyUnitEntityRoot);
+        return this.GetDomain<PlayerScene>().ETRoot.GetDomainChilds(EnemyUnitEntityRoot);
     }
 
     CreateRoundBasicEnemy(round: ERoundBoard, unit_index: string, spawnEffect: ISpawnEffectInfo = null) {

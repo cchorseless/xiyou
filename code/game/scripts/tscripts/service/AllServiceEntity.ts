@@ -133,17 +133,17 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     SeedRandomComponent,
     NumericComponent,
     GhostEntityComponent,
-    
+
     CharacterDrawTreasureComponent,
 
     HeroEquipComponent,
     TEquipItem,
     TEquipItemProp,
-    
+
     CharacterGameRecordComponent,
     ServerZoneGameRecordComponent,
     TGameRecordItem,
-    
+
     HeroManageComponent,
     HeroTalentComponent,
     THeroBanDesign,
@@ -181,6 +181,6 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     CharacterTitleComponent,
     CharacterTitleItem,
 ];
-export class ServiceEntity {
-    static init() {}
+export class AllServiceEntity {
+    static init() { }
 }
