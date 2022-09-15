@@ -61,13 +61,11 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
-            if (this.GetParentPlus().ETRoot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
-                let EnemyUnit = this.GetParentPlus().ETRoot.As<EnemyUnitEntityRoot>().EnemyUnitComp();
-                if (EnemyUnit != null ) {
-                    EnemyUnit.OnSpawnAnimalFinish();
-                }
+            let enemyroot = this.GetParentPlus().ETRoot;
+            if (enemyroot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
+                enemyroot.As<EnemyUnitEntityRoot>().OnSpawnAnimalFinish();
             }
-           
+
         }
     }
 

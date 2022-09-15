@@ -149,9 +149,7 @@ export class EnemyManagerComponent extends ET.Component {
         let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
         let enemy = EntityHelper.CreateEntityByName(enemyName, pos, DOTATeam_t.DOTA_TEAM_BADGUYS) as BaseNpc_Plus;
         enemy.SetNeverMoveToClearSpace(false);
-        EnemyUnitEntityRoot.Active(enemy);
-        enemy.ETRoot.As<EnemyUnitEntityRoot>().SetConfigId(playerid, enemyName, roundid, onlykey);
-        enemy.ETRoot.AddComponent(EnemyUnitComponent);
+        EnemyUnitEntityRoot.Active(enemy, playerid, enemyName, roundid, onlykey);
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.ETRoot.AddDomainChild(enemy.ETRoot);
         this.tAllEnemy.push(enemy.ETRoot.Id);
@@ -184,7 +182,7 @@ export class EnemyManagerComponent extends ET.Component {
                         }
                     }
                 };
-                enemy.ETRoot.As<EnemyUnitEntityRoot>().EnemyUnitComp().OnSpawnAnimalFinish();
+                enemy.ETRoot.As<EnemyUnitEntityRoot>().OnSpawnAnimalFinish();
             })
         );
         return enemy;

@@ -1,8 +1,14 @@
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
+import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, serializeETProps } from "../../Entity/Entity";
 
+export enum PlayerCreateUnitType {
+    BaseNpc = "BaseNpc",
+    BaseItem = "BaseItem",
+    BaseAbility = "BaseAbility",
+}
 export class PlayerCreateUnitEntityRoot extends ET.EntityRoot {
     @serializeETProps()
     readonly Playerid: PlayerID;
@@ -15,19 +21,8 @@ export class PlayerCreateUnitEntityRoot extends ET.EntityRoot {
     }
     public Dispose(): void {
         if (this.IsDisposed()) { return };
-        let npc = this.GetDomain<BaseNpc_Plus>();
         NetTablesHelper.DelETEntity(this, this.Playerid);
         super.Dispose();
-        if (npc && !npc.__safedestroyed__) {
-            npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
-            TimerHelper.addTimer(
-                3,
-                () => {
-                    npc.SafeDestroy();
-                },
-                this
-            );
-        }
     }
 
     public GetDistance2Player() {

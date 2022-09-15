@@ -9,20 +9,16 @@ export class RoundPrizeUnitEntityRoot extends ET.EntityRoot {
     readonly OnlyKey: string;
     readonly ConfigID: string;
 
-    public Dispose(): void {
+    public onDestroy(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
-        super.Dispose();
         npc.SafeDestroy();
     }
 
-    public onAwake(): void {
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundPrizeUnitKillPrizeComponent>("RoundPrizeUnitKillPrizeComponent"));
-    }
-
-    SetConfigId(confid: string, roundid: string, onlyKey: string = null) {
+    onAwake(confid: string, roundid: string, onlyKey: string = null) {
         (this as any).ConfigID = confid;
         (this as any).RoundID = roundid;
         (this as any).OnlyKey = onlyKey;
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundPrizeUnitKillPrizeComponent>("RoundPrizeUnitKillPrizeComponent"));
     }
 
     KillPrizeComp() {

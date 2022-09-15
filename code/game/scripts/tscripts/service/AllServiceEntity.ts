@@ -1,3 +1,4 @@
+import { LogHelper } from "../helper/LogHelper";
 import { CharacterDataComponent } from "./account/CharacterDataComponent";
 import { CharacterInGameDataComponent } from "./account/CharacterInGameDataComponent";
 import { CharacterSteamComponent } from "./account/CharacterSteamComponent";
@@ -182,5 +183,7 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     CharacterTitleItem,
 ];
 export class AllServiceEntity {
-    static init() { }
+    static init() {
+        LogHelper.print("register AllServiceEntity");
+    }
 }

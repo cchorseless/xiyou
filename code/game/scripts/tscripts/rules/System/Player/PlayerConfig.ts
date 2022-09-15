@@ -12,6 +12,8 @@ export module PlayerConfig {
         Vector(255, 0, 255),
     ];
 
+
+
     export enum EProtocol {
         reqApplyPopuLevelUp = "reqApplyPopuLevelUp",
         reqApplyTechLevelUp = "reqApplyTechLevelUp",

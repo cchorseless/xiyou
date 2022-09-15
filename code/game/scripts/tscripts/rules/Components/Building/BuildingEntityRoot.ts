@@ -1,13 +1,14 @@
 import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
 import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { ItemManagerComponent } from "../Item/ItemManagerComponent";
-import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
+import { PlayerCreateUnitEntityRoot, PlayerCreateUnitType } from "../Player/PlayerCreateUnitEntityRoot";
 import { RoundBuildingComponent } from "../Round/RoundBuildingComponent";
 import { WearableComponent } from "../Wearable/WearableComponent";
 import { BuildingComponent } from "./BuildingComponent";
@@ -29,6 +30,21 @@ export class BuildingEntityRoot extends PlayerCreateUnitEntityRoot {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundBuildingComponent>("RoundBuildingComponent"));
         this.updateNetTable();
     }
+
+    onDestroy(): void {
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        if (npc && !npc.__safedestroyed__) {
+            npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
+            TimerHelper.addTimer(
+                3,
+                () => {
+                    npc.SafeDestroy();
+                },
+                this
+            );
+        }
+    }
+
     Config() {
         return KVHelper.KvConfig().building_unit_tower["" + this.ConfigID];
     }

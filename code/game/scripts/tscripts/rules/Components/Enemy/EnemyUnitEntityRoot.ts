@@ -1,8 +1,10 @@
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
+import { PrecacheHelper } from "../../../helper/PrecacheHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ChessComponent } from "../ChessControl/ChessComponent";
-import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
+import { PlayerCreateUnitEntityRoot, PlayerCreateUnitType } from "../Player/PlayerCreateUnitEntityRoot";
 import { ERound } from "../Round/ERound";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { RoundEnemyComponent } from "../Round/RoundEnemyComponent";
@@ -15,19 +17,41 @@ export class EnemyUnitEntityRoot extends PlayerCreateUnitEntityRoot {
     readonly RoundID: string;
     readonly OnlyKey: string;
 
-    SetConfigId(playerid: PlayerID, confid: string, roundid: string, onlyKey: string = null) {
+    onAwake(playerid: PlayerID, confid: string, roundid: string, onlyKey: string = null) {
         (this as any).Playerid = playerid;
         (this as any).ConfigID = confid;
         (this as any).RoundID = roundid;
         (this as any).OnlyKey = onlyKey;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyUnitComponent>("EnemyUnitComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyKillPrizeComponent>("EnemyKillPrizeComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyPropsComponent>("EnemyPropsComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessComponent>("ChessComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundEnemyComponent>("RoundEnemyComponent"));
+    }
+
+    onDestroy(): void {
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        if (npc && !npc.__safedestroyed__) {
+            npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
+            TimerHelper.addTimer(
+                3,
+                () => {
+                    npc.SafeDestroy();
+                },
+                this
+            );
+        }
+    }
+
+    OnSpawnAnimalFinish() {
+        let player = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.Playerid);
+        if (player) {
+            player.SyncClientEntity(this.EnemyUnitComp());
+        }
     }
 
 
-
-    updateNetTable() {
-        NetTablesHelper.SetETEntity(this, false, this.Playerid);
-    }
     GetRound<T extends ERound>(): T {
         return this.GetPlayer().RoundManagerComp().RoundInfo[this.RoundID] as T;
     }

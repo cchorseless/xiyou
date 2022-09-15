@@ -25,29 +25,12 @@ export class EnemyUnitComponent extends ET.Component {
         let domain = this.GetDomain<BaseNpc_Plus>();
         let configid = domain.ETRoot.As<EnemyUnitEntityRoot>().ConfigID;
         this.config = KVHelper.KvServerConfig.building_unit_enemy[configid];
-        domain.ETRoot.AddComponent(EnemyKillPrizeComponent);
-        domain.ETRoot.AddComponent(EnemyPropsComponent);
-        domain.ETRoot.AddComponent(ChessComponent);
-        domain.ETRoot.AddComponent(RoundEnemyComponent);
         domain.SetForwardVector(Vector(0, -1, 0));
         domain.addSpawnedHandler(
             ET.Handler.create(this, () => {
                 modifier_no_health_bar.applyOnly(domain, domain);
             })
         );
-    }
-
-    OnSpawnAnimalFinish() {
-        this.Domain.ETRoot.As<EnemyUnitEntityRoot>().updateNetTable();
-    }
-
-    updateNetTable() {
-        NetTablesHelper.SetETEntity(this, false, this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Playerid);
-    }
-
-    public Dispose(): void {
-        NetTablesHelper.DelETEntity(this, this.GetPlayerId());
-        super.Dispose();
     }
 
     GetPlayerId() {

@@ -7,8 +7,6 @@ import { EnemyState } from "./EnemyState";
 
 @registerET()
 export class EnemySystemComponent extends ET.Component {
-    /**是否工作 */
-    public IsWorking: boolean = true;
     /**初始化 */
     public onAwake() {
         EnemyState.init();

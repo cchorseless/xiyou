@@ -1,7 +1,6 @@
 import { LogHelper } from "./helper/LogHelper";
 import { PrecacheHelper } from "./helper/PrecacheHelper";
 import { GameSetting } from "./GameSetting";
-import { GameEvent } from "./GameEvent";
 import { GameDebugger } from "./GameDebugger";
 import { modifier_event } from "./npc/modifier/modifier_event";
 import { KVHelper } from "./helper/KVHelper";
@@ -40,8 +39,6 @@ export class GameMode implements ET.IEntityRoot {
         GameSetting.init();
         // 初始化debugger
         GameDebugger.GetInstance().init();
-        // 添加監聽事件
-        GameEvent.GetInstance().init();
         // 启动模块
         this.ETRoot.init();
         // 初始化全局对象
