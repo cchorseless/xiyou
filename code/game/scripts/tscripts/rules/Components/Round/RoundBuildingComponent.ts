@@ -116,7 +116,7 @@ export class RoundBuildingComponent extends ET.Component {
         }
         if (!GameFunc.IsValid(new_target)) {
             let current_target = u.GetAttackTarget() as BaseNpc_Plus;
-            let all_unit = building.GetPlayer().EnemyManagerComp().getAllEnemy();
+            let all_unit = building.GetPlayer().EnemyManagerComp().getAllAliveEnemy();
             // 优先1：嘲讽
             let _taunt = modifier_taunt.findIn(u);
             if (_taunt && GameFunc.IsValid(_taunt.TauntUnit)) {

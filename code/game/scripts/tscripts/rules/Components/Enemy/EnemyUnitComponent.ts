@@ -35,7 +35,7 @@ export class EnemyUnitComponent extends ET.Component {
     }
 
     EnemyUnitType() {
-        return this.Domain.ETRoot.As<EnemyUnitEntityRoot>().config().UnitLabel;
+        return this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Config().UnitLabel;
     }
 
     IsWave() {

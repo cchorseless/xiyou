@@ -6,7 +6,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { CombinationConfig } from "../../System/Combination/CombinationConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
-import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
+import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
 
@@ -87,7 +87,10 @@ export class ECombination extends ET.Entity {
             }
         }
     }
-
+    removeAllCombination() {
+        this.combination = {};
+        this.checkActive();
+    }
     removeCombination(entity: ECombinationLabelItem) {
         let c = entity.SourceEntityConfigId;
         if (this.combination[c] && this.combination[c].includes(entity)) {
@@ -124,7 +127,7 @@ export class ECombination extends ET.Entity {
                     let buffconfig = KVHelper.KvServerConfig.effect_config[buff];
                     let type = PrecacheHelper.GetRegClass<typeof BaseModifier_Plus>(buff)
                     if (buffconfig && type) {
-                        let buildings: PlayerCreateUnitEntityRoot[];
+                        let buildings: PlayerCreateBattleUnitEntityRoot[];
                         switch (buffconfig.target) {
                             case CombinationConfig.EEffectTargetType.hero:
                                 buildings = this.getAllBuilding();
@@ -133,7 +136,7 @@ export class ECombination extends ET.Entity {
                                 buildings = this.Domain.ETRoot.AsPlayer().BuildingManager().getAllBattleBuilding()
                                 break;
                             case CombinationConfig.EEffectTargetType.enemy:
-                                buildings = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllEnemy()
+                                buildings = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllAliveEnemy()
                                 break;
                         };
                         if (buildings) {

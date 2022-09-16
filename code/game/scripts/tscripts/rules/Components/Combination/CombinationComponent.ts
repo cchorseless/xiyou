@@ -2,7 +2,6 @@ import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { AbilityEntityRoot } from "../Ability/AbilityEntityRoot";
-import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ItemEntityRoot } from "../Item/ItemEntityRoot";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
@@ -10,7 +9,6 @@ import { ECombinationLabelItem } from "./ECombinationLabelItem";
 export class CombinationComponent extends ET.Component {
     onAwake(): void {
         let domain = this.GetDomain<BaseNpc_Plus>();
-        let building = domain.ETRoot.As<BuildingEntityRoot>();
     }
 
     AbilityCombination: string[] = [];

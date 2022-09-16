@@ -1,3 +1,4 @@
+import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
@@ -45,14 +46,22 @@ export class ERoundBoard extends ERound {
         player.SyncClientEntity(this, false);
         EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onbattle, player.Playerid, this);
         let buildingCount = player.BuildingManager().getAllBattleBuilding().length;
-        let enemyCount = player.EnemyManagerComp().getAllEnemy().length;
+        let enemyCount = player.EnemyManagerComp().getAllAliveEnemy().length;
         let delaytime = Number(this.config.round_time);
         if (buildingCount == 0 || enemyCount == 0) {
             delaytime = 1;
         }
         this.prizeTimer = TimerHelper.addTimer(
-            delaytime,
+            1,
             () => {
+                delaytime--;
+                let buildingCount = player.BuildingManager().getAllBattleBuilding().length;
+                let enemyCount = player.EnemyManagerComp().getAllAliveEnemy().length;
+                if (delaytime > 0) {
+                    if (buildingCount > 0 && enemyCount > 0) {
+                        return 1;
+                    }
+                }
                 this.OnPrize();
             },
             this
@@ -70,7 +79,7 @@ export class ERoundBoard extends ERound {
         this.roundState = RoundConfig.ERoundBoardState.prize;
         let playerroot = this.Domain.ETRoot.AsPlayer();
         playerroot.SyncClientEntity(this, false);
-        let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllEnemy();
+        let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllAliveEnemy();
         let isWin = aliveEnemy.length == 0;
         EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onprize, playerroot.Playerid, isWin);
         this.waitingEndTimer = TimerHelper.addTimer(
@@ -109,6 +118,35 @@ export class ERoundBoard extends ERound {
     IsBelongPlayer(playerid: PlayerID) {
         return (this.Domain.ETRoot.AsPlayer().Playerid == playerid)
     }
-
-
+    CreateAllRoundBasicEnemy(SpawnEffect: ISpawnEffectInfo) {
+        let allenemy = this.config.unitinfo;
+        for (let unit_index in allenemy) {
+            this.CreateRoundBasicEnemy(unit_index, SpawnEffect);
+        }
+    }
+    CreateRoundBasicEnemy(unit_index: string, spawnEffect: ISpawnEffectInfo = null) {
+        let player = this.Domain.ETRoot.AsPlayer();
+        let playerid = player.Playerid;
+        let allenemy = this.config.unitinfo;
+        let _boardVec = new ChessControlConfig.ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
+        let pos = _boardVec.getVector3();
+        let angle = Vector(Number(allenemy[unit_index].angles_x), Number(allenemy[unit_index].angles_y), Number(allenemy[unit_index].angles_z));
+        let enemyName = allenemy[unit_index].unit;
+        let delay = 0;
+        if (spawnEffect != null && spawnEffect.tp_effect != null) {
+            delay = RandomFloat(0.1, 2.1);
+            Assert_SpawnEffect.ShowTPEffectAtPosition(pos, spawnEffect.tp_effect, delay);
+        }
+        if (delay > 0) {
+            TimerHelper.addTimer(
+                delay,
+                () => {
+                    player.EnemyManagerComp().addEnemy(enemyName, this.configID, unit_index, pos, spawnEffect);
+                },
+                this
+            );
+        } else {
+            player.EnemyManagerComp().addEnemy(enemyName, this.configID, unit_index, pos, spawnEffect);
+        }
+    }
 }

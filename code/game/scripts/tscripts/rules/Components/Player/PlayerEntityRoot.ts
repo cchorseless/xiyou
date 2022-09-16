@@ -10,6 +10,8 @@ import { ChessControlComponent } from "../ChessControl/ChessControlComponent";
 import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";
 import { DrawComponent } from "../Draw/DrawComponent";
 import { EnemyManagerComponent } from "../Enemy/EnemyManagerComponent";
+import { FakerHeroComponent } from "../FakerHero/FakerHeroComponent";
+import { FHeroCombinationManagerComponent } from "../FakerHero/FHeroCombinationManagerComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerDataComponent } from "./PlayerDataComponent";
 import { PlayerHeroComponent } from "./PlayerHeroComponent";
@@ -37,6 +39,7 @@ export class PlayerEntityRoot extends ET.EntityRoot {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyManagerComponent>("EnemyManagerComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingManagerComponent>("BuildingManagerComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof FakerHeroComponent>("FakerHeroComponent"));
     }
 
 
@@ -95,6 +98,10 @@ export class PlayerEntityRoot extends ET.EntityRoot {
     EnemyManagerComp() {
         return this.GetComponentByName<EnemyManagerComponent>("EnemyManagerComponent");
     }
+    FakerHeroComp() {
+        return this.GetComponentByName<FakerHeroComponent>("FakerHeroComponent");
+    }
+
     TCharacter() {
         return this.GetComponentByName<TCharacter>("TCharacter");
     }

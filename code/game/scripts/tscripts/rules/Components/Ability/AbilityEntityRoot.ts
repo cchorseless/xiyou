@@ -21,6 +21,4 @@ export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
     config() {
         return KVHelper.KvConfig().building_ability_tower["" + this.ConfigID];
     }
-
-    readonly SyncDomainProps: string[] = [];
 }

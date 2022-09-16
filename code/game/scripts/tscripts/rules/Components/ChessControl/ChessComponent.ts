@@ -7,12 +7,12 @@ import { modifier_run } from "../../../npc/modifier/modifier_run";
 import { ET, registerET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
-import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
+import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 
 @registerET()
 export class ChessComponent extends ET.Component {
     public ChessVector: ChessControlConfig.ChessVector;
-
+    readonly isAlive: boolean = true;
     onAwake(): void {
         this.updateBoardPos();
         let domain = this.GetDomain<BaseNpc_Plus>();
@@ -29,9 +29,12 @@ export class ChessComponent extends ET.Component {
         domain.SetForwardVector(((position - domain.GetAbsOrigin()) as Vector).Normalized());
         domain.MoveToPosition(position);
     }
-    isBuilding() {
-        let domain = this.GetDomain<BaseNpc_Plus>();
-        return domain.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot");
+    changeAliveState(state: boolean) {
+        (this as any).isAlive = state;
+    }
+
+    isInBattleAlive() {
+        return this.ChessVector.y >= 1 && this.isAlive;
     }
 
     isInBattle() {
@@ -40,7 +43,7 @@ export class ChessComponent extends ET.Component {
 
     isInBoard() {
         let location = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
-        let playerid = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateUnitEntityRoot>().Playerid;
+        let playerid = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>().Playerid;
         return GameRules.Addon.ETRoot.ChessControlSystem().IsInBoard(playerid, location);
     }
     isInBaseRoom() {
@@ -77,8 +80,9 @@ export class ChessComponent extends ET.Component {
         }
     }
     OnblinkChessStart(to: ChessControlConfig.ChessVector) {
-        if (!this.isBuilding()) { return }
-        let building = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>()
+        let etroot = this.GetDomain<BaseNpc_Plus>().ETRoot;
+        if (!etroot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) { return }
+        let building = etroot.As<BuildingEntityRoot>()
         if (this.isInBattle()) {
             if (to.y == 0) {
                 EventHelper.fireServerEvent(ChessControlConfig.Event.ChessControl_LeaveBattle,
@@ -111,7 +115,7 @@ export class ChessComponent extends ET.Component {
 
     }
 
-    FindClosePosToEnemy(enemy: PlayerCreateUnitEntityRoot): Vector {
+    FindClosePosToEnemy(enemy: PlayerCreateBattleUnitEntityRoot): Vector {
         let targetUnit = enemy.GetDomain<BaseNpc_Plus>();
         if (!targetUnit) {
             return;
@@ -134,7 +138,7 @@ export class ChessComponent extends ET.Component {
         }
     }
 
-    IsCanAttackTarget(target: PlayerCreateUnitEntityRoot, x?: number, y?: number) {
+    IsCanAttackTarget(target: PlayerCreateBattleUnitEntityRoot, x?: number, y?: number) {
         if (target == null) {
             return false;
         }

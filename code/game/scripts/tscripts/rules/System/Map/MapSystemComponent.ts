@@ -14,7 +14,12 @@ export class MapSystemComponent extends ET.Component {
         this.addEvent();
     }
 
-    public addEvent() {}
+    public addEvent() { }
+
+    public getFakerHeroSpawnPoint(player: PlayerID) {
+        return MapState.FakerHeroSpawnPoint[player];
+    }
+
 
     public StartGame() {
         this.CreateAllMapUnit();

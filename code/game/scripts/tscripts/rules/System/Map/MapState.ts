@@ -10,6 +10,7 @@ export class MapState {
     static readonly BaseRoomMaxPoint: Vector;
 
     static readonly BaseVForwardPoint: Vector[] = [Vector(0, 1, 0), Vector(1, 1, 0), Vector(-1, 1, 0), Vector(1, 0, 0), Vector(-1, 0, 0)];
+    static readonly FakerHeroSpawnPoint: Vector[] = [];
 
     static init() {
         // 传送门
@@ -31,11 +32,16 @@ export class MapState {
         this.BaseBaoXiangPoint.push(Entities.FindByName(null, "base_baoxiang03").GetAbsOrigin());
         this.BaseBaoXiangPoint.push(Entities.FindByName(null, "base_baoxiang04").GetAbsOrigin());
 
+        // 敵方出生點
+        this.PlayerTpDoorPoint.forEach(s => {
+            this.FakerHeroSpawnPoint.push(Vector(s.x + 500, s.y, s.z - 200))
+        });
         (this as any).BaseBaoXiangBossPoint = Entities.FindByName(null, "base_baoxiang_boss").GetAbsOrigin();
         let door1 = this.BaseTpDoorPoint[1];
         (this as any).BaseRoomMinPoint = Vector(door1.x - 400, door1.y - 300, door1.z);
         let door4 = this.BaseTpDoorPoint[4];
         (this as any).BaseRoomMaxPoint = Vector(door4.x + 400, door4.y * 2, door4.z);
+
         this.InitPrizeUnitRefreshZone();
     }
 

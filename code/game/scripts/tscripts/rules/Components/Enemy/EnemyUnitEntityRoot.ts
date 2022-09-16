@@ -4,17 +4,22 @@ import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
 import { ChessComponent } from "../ChessControl/ChessComponent";
+import { CombinationComponent } from "../Combination/CombinationComponent";
+import { ItemManagerComponent } from "../Item/ItemManagerComponent";
+import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { PlayerCreateUnitEntityRoot, PlayerCreateUnitType } from "../Player/PlayerCreateUnitEntityRoot";
 import { ERound } from "../Round/ERound";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { RoundEnemyComponent } from "../Round/RoundEnemyComponent";
+import { WearableComponent } from "../Wearable/WearableComponent";
 import { EnemyKillPrizeComponent } from "./EnemyKillPrizeComponent";
 import { EnemyMoveComponent } from "./EnemyMoveComponent";
 import { EnemyPropsComponent } from "./EnemyPropsComponent";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
 
-export class EnemyUnitEntityRoot extends PlayerCreateUnitEntityRoot {
+export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     readonly RoundID: string;
     readonly OnlyKey: string;
 
@@ -24,10 +29,10 @@ export class EnemyUnitEntityRoot extends PlayerCreateUnitEntityRoot {
         (this as any).RoundID = roundid;
         (this as any).OnlyKey = onlyKey;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
+        this.addBattleComp();
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyUnitComponent>("EnemyUnitComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyKillPrizeComponent>("EnemyKillPrizeComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyPropsComponent>("EnemyPropsComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessComponent>("ChessComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundEnemyComponent>("RoundEnemyComponent"));
     }
 
@@ -56,10 +61,12 @@ export class EnemyUnitEntityRoot extends PlayerCreateUnitEntityRoot {
         this.GetPlayer().EnemyManagerComp().killEnemy(this);
     }
 
-    config() {
+    Config() {
         return KVHelper.KvServerConfig.building_unit_enemy[this.ConfigID];
     }
-
+    GetDotaHeroName() {
+        return this.Config().DotaHeroName as string;
+    }
     GetRound<T extends ERound>(): T {
         return this.GetPlayer().RoundManagerComp().RoundInfo[this.RoundID] as T;
     }
@@ -69,11 +76,9 @@ export class EnemyUnitEntityRoot extends PlayerCreateUnitEntityRoot {
             return this.GetRound<ERoundBoard>().config.unitinfo[this.OnlyKey];
         }
     }
-
     EnemyUnitComp() {
         return this.GetComponentByName<EnemyUnitComponent>("EnemyUnitComponent");
     }
-
     EnemyKillPrize() {
         return this.GetComponentByName<EnemyKillPrizeComponent>("EnemyKillPrizeComponent");
     }
@@ -82,9 +87,6 @@ export class EnemyUnitEntityRoot extends PlayerCreateUnitEntityRoot {
     }
     EnemyPropsComp() {
         return this.GetComponentByName<EnemyPropsComponent>("EnemyPropsComponent");
-    }
-    ChessComp() {
-        return this.GetComponentByName<ChessComponent>("ChessComponent");
     }
     RoundEnemyComp() {
         return this.GetComponentByName<RoundEnemyComponent>("RoundEnemyComponent");

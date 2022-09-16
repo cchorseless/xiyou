@@ -1,8 +1,7 @@
 import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
-import { BuildingConfig } from "../../System/Building/BuildingConfig";
-import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
+import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { AbilityEntityRoot } from "./AbilityEntityRoot";
 
 @registerET()
@@ -25,36 +24,36 @@ export class AbilityManagerComponent extends ET.Component {
 
 
     getAbilityRoot(childid: string) {
-        let building = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>();
-        return building.GetDomainChild<AbilityEntityRoot>(childid);
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        return battleunit.GetDomainChild<AbilityEntityRoot>(childid);
     }
 
     addAbilityRoot(root: AbilityEntityRoot) {
-        let building = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>();
-        building.AddDomainChild(root);
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        battleunit.AddDomainChild(root);
         this.allAbilityRoot.push(root.Id);
-        if (building.CombinationComp()) {
-            building.CombinationComp().addAbilityRoot(root);
+        if (battleunit.CombinationComp()) {
+            battleunit.CombinationComp().addAbilityRoot(root);
         }
     }
 
     removeAbilityRoot(root: AbilityEntityRoot) {
-        let building = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>();
-        if (root.DomainParent != building) {
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        if (root.DomainParent != battleunit) {
             return;
         }
-        building.RemoveDomainChild(root);
+        battleunit.RemoveDomainChild(root);
         let index = this.allAbilityRoot.indexOf(root.Id);
         this.allAbilityRoot.splice(index, 1);
-        if (building.CombinationComp()) {
-            building.CombinationComp().removeAbilityRoot(root);
+        if (battleunit.CombinationComp()) {
+            battleunit.CombinationComp().removeAbilityRoot(root);
         }
     }
 
     levelUpAllAbility() {
-        let building = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
         this.allAbilityRoot.forEach(str => {
-            let ability = building.GetDomainChild<AbilityEntityRoot>(str);
+            let ability = battleunit.GetDomainChild<AbilityEntityRoot>(str);
             ability.GetDomain<BaseAbility_Plus>().UpgradeAbility(true);
         })
     }

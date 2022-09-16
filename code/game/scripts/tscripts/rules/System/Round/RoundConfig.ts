@@ -27,5 +27,7 @@ export module RoundConfig {
         roundboard_onbattle = "roundboard_onbattle",
         roundboard_onprize = "roundboard_onprize",
         roundboard_onwaitingend = "roundboard_onwaitingend",
+        roundboard_challenge_onstart = "roundboard_challenge_onstart",
+
     }
 }

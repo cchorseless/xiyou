@@ -39,102 +39,49 @@ export class EnemyManagerComponent extends ET.Component {
         return EnemyState.SpawnEnemyPoint[playerid];
     }
     addEvent() {
-        let player = this.Domain.ETRoot.AsPlayer();
-        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onstart,
-            player.Playerid,
-            (round: ERoundBoard) => {
-                let allenemy = round.config.unitinfo;
-                for (let unit_index in allenemy) {
-                    this.CreateRoundBasicEnemy(round, unit_index, this.SpawnEffect);
-                }
-                // this.getAllEnemy()
-                //     .forEach((b) => {
-                //         b.RoundEnemyComp().OnBoardRound_Start();
-                //     });
-            });
-        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onbattle,
-            player.Playerid,
-            (round: ERoundBoard) => {
-                this.getAllEnemy()
-                    .forEach((b) => {
-                        b.RoundEnemyComp().OnBoardRound_Battle();
-                    });
-            });
-        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onprize,
-            player.Playerid,
-            (iswin: boolean) => {
-                if (!iswin) {
-                    let damage = 0;
-                    let delay_time = 0.5;
-                    let aliveEnemy = this.getAllEnemy()
-                    aliveEnemy.forEach((b) => {
-                        b.RoundEnemyComp().OnBoardRound_Prize(this.ProjectileInfo);
-                        damage += Number(b.GetRoundBasicUnitConfig().failure_count || "0");
-                        delay_time = math.min(delay_time, b.GetDistance2Player() / 1000);
-                    });
-                    TimerHelper.addTimer(
-                        delay_time,
-                        () => {
-                            this.ApplyDamageHero(damage);
-                        },
-                        this,
-                        true
-                    );
-                }
-            });
-        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onwaitingend,
-            player.Playerid,
-            (round: ERoundBoard) => {
-                this.getAllEnemy()
-                    .forEach((b) => {
-                        b.RoundEnemyComp().OnBoardRound_WaitingEnd();
-                    });
-            });
+
     }
-    SpawnEffect: ISpawnEffectInfo = Assert_SpawnEffect.Effect.Spawn_fall;
-    ProjectileInfo: IProjectileEffectInfo = Assert_ProjectileEffect.p000;
-    ApplyDamageHero(damage: number) {
+    ApplyDamageHero(damage: number, projectileInfo: IProjectileEffectInfo) {
         if (damage > 0) {
             let hero = this.GetDomain<PlayerScene>().ETRoot.Hero;
             Assert_MsgEffect.CreateNumberEffect(hero, damage, 2, Assert_MsgEffect.EMsgEffect.MSG_MISS, Assert_Color.red);
-            EmitSoundOn(this.ProjectileInfo.sound, hero);
-            let enemyM = this.Domain.ETRoot.AsPlayer().EnemyManagerComp();
-            enemyM.getAllEnemy().forEach((e) => {
-                enemyM.missEnemy(e);
-            });
+            EmitSoundOn(projectileInfo.sound, hero);
         }
     }
 
-    public getAllEnemy() {
-        return this.GetDomain<PlayerScene>().ETRoot.GetDomainChilds(EnemyUnitEntityRoot);
+    getAllEnemy() {
+        let player = this.Domain.ETRoot.AsPlayer();
+        let r: EnemyUnitEntityRoot[] = [];
+        this.tAllEnemy.forEach((entityid) => {
+            let entity = player.GetDomainChild<EnemyUnitEntityRoot>(entityid);
+            if (entity) {
+                r.push(entity);
+            }
+        })
+        return r;
     }
-
-    CreateRoundBasicEnemy(round: ERoundBoard, unit_index: string, spawnEffect: ISpawnEffectInfo = null) {
-        let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
-        let allenemy = round.config.unitinfo;
-        let _boardVec = new ChessControlConfig.ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
-        let pos = _boardVec.getVector3();
-        let angle = Vector(Number(allenemy[unit_index].angles_x), Number(allenemy[unit_index].angles_y), Number(allenemy[unit_index].angles_z));
-        let enemyName = allenemy[unit_index].unit;
-        let delay = 0;
-        if (spawnEffect != null && spawnEffect.tp_effect != null) {
-            delay = RandomFloat(0.1, 2.1);
-            Assert_SpawnEffect.ShowTPEffectAtPosition(pos, spawnEffect.tp_effect, delay);
-        }
-        if (delay > 0) {
-            TimerHelper.addTimer(
-                delay,
-                () => {
-                    this.addEnemy(enemyName, round.configID, unit_index, pos, spawnEffect);
-                },
-                this
-            );
-        } else {
-            this.addEnemy(enemyName, round.configID, unit_index, pos, spawnEffect);
-        }
+    getAllAliveEnemy() {
+        let player = this.Domain.ETRoot.AsPlayer();
+        let r: EnemyUnitEntityRoot[] = [];
+        this.tAllEnemy.forEach((entityid) => {
+            let entity = player.GetDomainChild<EnemyUnitEntityRoot>(entityid);
+            if (entity && entity.ChessComp().isAlive) {
+                r.push(entity);
+            }
+        })
+        return r;
     }
-
-
+    getAllDeathEnemy() {
+        let player = this.Domain.ETRoot.AsPlayer();
+        let r: EnemyUnitEntityRoot[] = [];
+        this.tAllEnemy.forEach((entityid) => {
+            let entity = player.GetDomainChild<EnemyUnitEntityRoot>(entityid);
+            if (entity && entity.ChessComp().isAlive == false) {
+                r.push(entity);
+            }
+        })
+        return r;
+    }
 
     addEnemy(enemyName: string, roundid: string, onlykey: string = null, pos: Vector = null, spawnEffect: ISpawnEffectInfo = null) {
         if (enemyName == "" || enemyName == null) {
@@ -150,7 +97,7 @@ export class EnemyManagerComponent extends ET.Component {
         let enemy = EntityHelper.CreateEntityByName(enemyName, pos, DOTATeam_t.DOTA_TEAM_BADGUYS) as BaseNpc_Plus;
         enemy.SetNeverMoveToClearSpace(false);
         EnemyUnitEntityRoot.Active(enemy, playerid, enemyName, roundid, onlykey);
-        let domain = this.GetDomain<BaseNpc_Plus>();
+        let domain = this.GetDomain<PlayerScene>();
         domain.ETRoot.AddDomainChild(enemy.ETRoot);
         this.tAllEnemy.push(enemy.ETRoot.Id);
         enemy.addSpawnedHandler(
@@ -187,24 +134,30 @@ export class EnemyManagerComponent extends ET.Component {
         );
         return enemy;
     }
-    killAllEnemy() { }
 
     killEnemy(etroot: EnemyUnitEntityRoot) {
-        this.tPlayerKills += 1;
-        this.removeEnemy(etroot);
-    }
-
-    missEnemy(etroot: EnemyUnitEntityRoot) {
-        this.tPlayerMissing += 1;
-        this.removeEnemy(etroot);
-    }
-
-    private removeEnemy(etroot: EnemyUnitEntityRoot) {
-        let index = this.tAllEnemy.indexOf(etroot.Id);
-        this.tAllEnemy.splice(index, 1);
-        etroot.Dispose();
-        if (this.tAllEnemy.length == 0) {
-            this.Domain.ETRoot.AsPlayer().RoundManagerComp().getCurrentBoardRound().OnPrize();
+        if (!this.tAllEnemy.includes(etroot.Id) || etroot.ChessComp().isAlive == false) {
+            LogHelper.error("killEnemy error")
+            return;
         }
+        this.tPlayerKills += 1;
+        etroot.ChessComp().changeAliveState(false);
+    }
+    removeAllEnemy() {
+        let player = this.Domain.ETRoot.AsPlayer();
+        this.tAllEnemy.forEach((entityid) => {
+            let entity = player.GetDomainChild<EnemyUnitEntityRoot>(entityid);
+            if (entity) {
+                entity.Dispose();
+            }
+        });
+        this.tAllEnemy = [];
+    }
+    removeEnemy(etroot: EnemyUnitEntityRoot) {
+        if (this.tAllEnemy.includes(etroot.Id)) {
+            let index = this.tAllEnemy.indexOf(etroot.Id);
+            this.tAllEnemy.splice(index, 1);
+        }
+        etroot.Dispose();
     }
 }

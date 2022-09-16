@@ -197,13 +197,15 @@ export class BuildingManagerComponent extends ET.Component {
     public getAllBuilding() {
         return this.GetDomain<BaseNpc_Plus>().ETRoot.GetDomainChilds(BuildingEntityRoot);
     }
+
     public getAllBattleBuilding() {
         return this.GetDomain<BaseNpc_Plus>()
             .ETRoot.GetDomainChilds(BuildingEntityRoot)
             .filter((b) => {
-                return b.ChessComp().isInBattle();
+                return b.ChessComp().isInBattleAlive();
             });
     }
+
 
     public getBuilding(towerID: string) {
         let domain = this.GetDomain<BaseNpc_Plus>();

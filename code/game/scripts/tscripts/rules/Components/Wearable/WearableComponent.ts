@@ -5,6 +5,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { WearableConfig } from "../../System/Wearable/WearableConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
+import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
 
 @registerET()
 export class WearableComponent extends ET.Component {
@@ -27,7 +28,17 @@ export class WearableComponent extends ET.Component {
     }
     onAwake(dotaHeroName: string): void {
         (this as any).sHeroName = dotaHeroName;
-        let wearConfig = this.Domain.ETRoot.As<BuildingEntityRoot>().Config().Creature?.AttachWearables;
+        if (dotaHeroName == null || dotaHeroName.length == 0) {
+            return
+        }
+        let wearConfig;
+        let etroot = this.Domain.ETRoot;
+        if (etroot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
+            wearConfig = etroot.As<BuildingEntityRoot>().Config().Creature?.AttachWearables;
+        }
+        else if (etroot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
+            wearConfig = etroot.As<EnemyUnitEntityRoot>().Config().Creature?.AttachWearables;
+        }
         if (wearConfig) {
             for (let k in wearConfig) {
                 let v = wearConfig[k];
