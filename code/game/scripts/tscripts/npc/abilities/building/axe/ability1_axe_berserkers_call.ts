@@ -9,13 +9,14 @@ import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifie
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_particle } from "../../../modifier/modifier_particle";
+import { ActiveRootAbility } from "../../ActiveRootAbility";
 import { ability3_axe_counter_helix } from "./ability3_axe_counter_helix";
 
 /** dota原技能数据 */
 export const Data_axe_berserkers_call = { "ID": "5007", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "FightRecapLevel": "1", "AbilitySound": "Hero_Axe.Berserkers_Call", "HasScepterUpgrade": "1", "AbilityCastPoint": "0.4", "AbilityCastAnimation": "ACT_DOTA_OVERRIDE_ABILITY_1", "AbilityCastGestureSlot": "DEFAULT", "AbilityCooldown": "16 14 12 10", "AbilityDamage": "0 0 0 0", "AbilityManaCost": "80 90 100 110", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "300", "LinkedSpecialBonus": "special_bonus_unique_axe_2" }, "02": { "var_type": "FIELD_INTEGER", "bonus_armor": "30" }, "03": { "var_type": "FIELD_FLOAT", "duration": "2.0 2.4 2.8 3.2" } } };
 
 @registerAbility()
-export class ability1_axe_berserkers_call extends BaseAbility_Plus {
+export class ability1_axe_berserkers_call extends ActiveRootAbility {
     /**对应dota内的名字 */
     __IN_DOTA_NAME__ = "axe_berserkers_call";
     /**对应dota内的数据 */

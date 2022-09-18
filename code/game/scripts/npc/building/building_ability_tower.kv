@@ -126,7 +126,6 @@
 	"ability6_abaddon_borrowed_time" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/abaddon/ability6_abaddon_borrowed_time"
-		"CombinationLabel" "warframe"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
 		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
 		"HasShardUpgrade" "0"
@@ -245,7 +244,6 @@
 	"ability2_abyssal_underlord_pit_of_malice" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/abyssal_underlord/ability2_abyssal_underlord_pit_of_malice"
-		"CombinationCondition" "10004"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
@@ -1280,6 +1278,7 @@
 	"ability1_axe_berserkers_call" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/axe/ability1_axe_berserkers_call"
+		"CombinationLabel" "phyarm_up"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT"
 		"AbilityDamage" "0 0 0 0"
 		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_YES"
@@ -9683,6 +9682,7 @@
 	"ability1_juggernaut_blade_fury" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/juggernaut/ability1_juggernaut_blade_fury"
+		"CombinationLabel" "phyarm_up"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
 		"HasShardUpgrade" "1"
@@ -10266,6 +10266,7 @@
 	"ability1_kunkka_torrent" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/kunkka/ability1_kunkka_torrent"
+		"CombinationLabel" "phyarm_up"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
 		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
@@ -12575,9 +12576,108 @@
 		}
 
 	}
+	"ability1_marci_grapple" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/dota/dota_hero_marci/ability1_marci_grapple"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
+		"FightRecapLevel" "1"
+		"AbilitySound" "Hero_Marci.Grapple.Cast"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_5"
+		"AbilityCastPoint" "0.2"
+		"AbilityCastRange" "175"
+		"AbilityCooldown" "16 14 12 10"
+		"AbilityManaCost" "90"
+
+	}
+	"ability2_marci_companion_run" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/dota/dota_hero_marci/ability2_marci_companion_run"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"HasShardUpgrade" "1"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES_STRONG"
+		"FightRecapLevel" "1"
+		"AbilitySound" "Hero_Marci.Rebound.Cast"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_2"
+		"AbilityCastPoint" "0.1"
+		"AbilityCastRange" "800"
+		"AbilityManaCost" "70 80 90 100"
+
+	}
+	"ability3_marci_guardian" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/dota/dota_hero_marci/ability3_marci_guardian"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO"
+		"SpellImmunityType" "SPELL_IMMUNITY_ALLIES_YES"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
+		"FightRecapLevel" "1"
+		"AbilitySound" "Hero_Marci.Guardian.Applied"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_3"
+		"AbilityCastGestureSlot" "DEFAULT"
+		"AbilityCastPoint" "0.0"
+		"AbilityCastRange" "700"
+		"AbilityCooldown" "36 28 20 12"
+		"AbilityManaCost" "45 40 35 30"
+		"AbilitySpecial" {
+			"01" {
+				"var_type" "FIELD_FLOAT"
+				"buff_duration" "7"
+
+			}
+			"02" {
+				"var_type" "FIELD_FLOAT"
+				"lifesteal_pct" "35 40 45 50"
+
+			}
+			"03" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_damage" "20 35 50 65"
+
+			}
+			"04" {
+				"var_type" "FIELD_INTEGER"
+				"bonus_attack_range" "0"
+
+			}
+			"05" {
+				"var_type" "FIELD_INTEGER"
+				"nearest_ally_search_range" "700"
+
+			}
+
+		}
+
+	}
+	"ability6_marci_unleash" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/dota/dota_hero_marci/ability6_marci_unleash"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
+		"FightRecapLevel" "2"
+		"AbilitySound" "Hero_Marci.Unleash.Cast"
+		"HasScepterUpgrade" "1"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastPoint" "0.2"
+		"AbilityCooldown" "100 80 60"
+		"AbilityManaCost" "100 125 150"
+
+	}
 	"ability1_mars_spear" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/mars/ability1_mars_spear"
+		"CombinationLabel" "phyarm_up"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_DIRECTIONAL"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -17062,6 +17162,88 @@
 		"AbilityCastPoint" "0.0 0.0 0.0 0.0"
 
 	}
+	"ability1_primal_beast_onslaught" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/dota/dota_hero_primal_beast/ability1_primal_beast_onslaught"
+		"CombinationLabel" "phyarm_up"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
+		"FightRecapLevel" "1"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_2"
+		"AbilityCastGestureSlot" "DEFAULT"
+		"AbilityCastPoint" "0.15"
+		"AbilityCooldown" "25 22 19 16"
+		"AbilityManaCost" "120"
+
+	}
+	"ability2_primal_beast_trample" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/dota/dota_hero_primal_beast/ability2_primal_beast_trample"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastGestureSlot" "ABSOLUTE"
+		"AbilityManaCost" "90 85 80 75"
+
+	}
+	"ability3_primal_beast_uproar" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/dota/dota_hero_primal_beast/ability3_primal_beast_uproar"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"SpellDispellableType" "SPELL_DISPELLABLE_NO"
+		"HasScepterUpgrade" "1"
+		"AbilityCooldown" "0"
+
+	}
+	"ability4_primal_beast_rock_throw" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/dota/dota_hero_primal_beast/ability4_primal_beast_rock_throw"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_HIDDEN  | DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES"
+		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_PHYSICAL"
+		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_NO"
+		"FightRecapLevel" "1"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_1"
+		"AbilityCastGestureSlot" "DEFAULT"
+		"AbilityCastPoint" "0.5"
+		"AbilityCastRange" "1800"
+		"AbilityCooldown" "25"
+		"AbilityManaCost" "85"
+
+	}
+	"ability5_primal_beast_onslaught_release" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/dota/dota_hero_primal_beast/ability5_primal_beast_onslaught_release"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE | DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_7"
+		"AbilityCastPoint" "0.0"
+		"AbilityCastRange" "999999"
+		"AbilityCooldown" "0.3"
+
+	}
+	"ability6_primal_beast_pulverize" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "npc/abilities/dota/dota_hero_primal_beast/ability6_primal_beast_pulverize"
+		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_CHANNELLED  | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityType" "DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_5"
+		"AbilityCastPoint" "0.25"
+		"AbilityCastRange" "200"
+		"AbilityCooldown" "32 28 24"
+		"AbilityManaCost" "100"
+
+	}
 	"ability1_puck_illusory_orb" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/puck/ability1_puck_illusory_orb"
@@ -17256,6 +17438,7 @@
 	"ability1_pudge_meat_hook" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/pudge/ability1_pudge_meat_hook"
+		"CombinationLabel" "phyarm_up"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
 		"SpellImmunityType" "SPELL_IMMUNITY_ENEMIES_YES"
@@ -19843,6 +20026,7 @@
 	"ability1_skeleton_king_hellfire_blast" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/skeleton_king/ability1_skeleton_king_hellfire_blast"
+		"CombinationLabel" "phyarm_up"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -20231,6 +20415,7 @@
 	"ability1_slardar_sprint" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/slardar/ability1_slardar_sprint"
+		"CombinationLabel" "phyarm_up"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL"
 		"SpellDispellableType" "SPELL_DISPELLABLE_YES"
 		"AbilitySound" "Hero_Slardar.Sprint"
@@ -21847,6 +22032,7 @@
 	"ability1_sven_storm_bolt" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/sven/ability1_sven_storm_bolt"
+		"CombinationLabel" "phyarm_up"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -23763,6 +23949,7 @@
 	"ability1_troll_warlord_berserkers_rage" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/troll_warlord/ability1_troll_warlord_berserkers_rage"
+		"CombinationLabel" "phyarm_up"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilitySound" "Hero_TrollWarlord.BerserkersRage.Toggle"
 		"AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_1"
@@ -24059,6 +24246,7 @@
 	"ability1_tusk_ice_shards" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/tusk/ability1_tusk_ice_shards"
+		"CombinationLabel" "phyarm_up"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -24592,6 +24780,7 @@
 	"ability1_ursa_earthshock" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/building/ursa/ability1_ursa_earthshock"
+		"CombinationLabel" "phyarm_up"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
 		"AbilityDamage" "75 125 175 225"
 		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"

@@ -476,11 +476,11 @@ function createSound() {
 
 (async () => {
     // var args = process.argv.splice(2);
-    readDATA();
-    createNpc()
+    // readDATA();
+    // createNpc()
 
 
-    // createAbility()
+    createAbility()
     // createItem()
     // createSound();
 })().catch((error) => {

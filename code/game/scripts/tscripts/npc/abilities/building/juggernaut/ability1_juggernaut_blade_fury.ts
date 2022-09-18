@@ -11,12 +11,13 @@ import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifie
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
+import { ActiveRootAbility } from "../../ActiveRootAbility";
 
 /** dota原技能数据 */
 export const Data_juggernaut_blade_fury = { "ID": "5028", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "FightRecapLevel": "1", "HasShardUpgrade": "1", "AbilityCastRange": "0", "AbilityCastPoint": "0 0 0 0", "AbilityCooldown": "42 34 26 18", "AbilityManaCost": "120 110 100 90", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "blade_fury_damage_tick": "0.2", "CalculateSpellDamageTooltip": "0" }, "02": { "var_type": "FIELD_INTEGER", "blade_fury_radius": "260" }, "03": { "var_type": "FIELD_INTEGER", "blade_fury_damage": "85 110 135 160", "LinkedSpecialBonus": "special_bonus_unique_juggernaut_3" }, "04": { "var_type": "FIELD_FLOAT", "duration": "5.0", "LinkedSpecialBonus": "special_bonus_unique_juggernaut" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
 
 @registerAbility()
-export class ability1_juggernaut_blade_fury extends BaseAbility_Plus {
+export class ability1_juggernaut_blade_fury extends ActiveRootAbility {
     /**对应dota内的名字 */
     __IN_DOTA_NAME__ = "juggernaut_blade_fury";
     /**对应dota内的数据 */

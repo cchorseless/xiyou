@@ -71,7 +71,6 @@ export class WearableSystemComponent extends ET.Component {
     }
     LoadItem() {
         let items_game: { [k: string]: any } = LoadKeyValues("scripts/items/items_game.txt");
-        LogHelper.print(Object.keys(items_game));
         let name2itemdef_Map: { [K: string]: number } = {};
         (this.Allitems as any) = items_game.items; //  所有饰品信息
         for (let itemDef in this.Allitems) {
