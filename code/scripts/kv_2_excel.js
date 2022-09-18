@@ -7,12 +7,12 @@ const xlsx = require("node-xlsx");
 const old_npc_path = "game/scripts/dota2_old_npc_heroes.txt";
 const old_ability_path = "game/scripts/dota2_old_npc_abilities.txt";
 const old_item_path = "game/scripts/dota2_old_npc_items.txt";
-const old_shipin_path = "game/scripts/dota2_old_npc_shipin.txt";
+const old_shipin_path = "game/scripts/dota2_shipin_all.txt";
 const old_sound_path = "game/scripts/custom_sounds.txt";
 
-const old_npc_out_path = "excels/units/dota_units.xlsx";
-const old_ability_out_path = "excels/abilities/dota_abilities.xlsx";
-const old_item_out_path = "excels/items/dota_items.xlsx";
+const old_npc_out_path = "excels/dota/dota_units.xlsx";
+const old_ability_out_path = "excels/dota/dota_abilities.xlsx";
+const old_item_out_path = "excels/dota/dota_items.xlsx";
 const old_sound_out_path = "excels/sounds/custom_sounds.xlsx";
 
 let shiPinData = null;
@@ -57,10 +57,12 @@ function readDATA() {
         }
     }
     // 饰品数据
-    let _shipinobj = JSON.parse(fs.readFileSync(old_shipin_path, "utf8"));
+
+    let _shipinobj = keyvalues.decode(fs.readFileSync(old_shipin_path, "utf8"));
     shiPinData = {};
-    for (let k in _shipinobj) {
-        let _shipininfo = _shipinobj[k];
+    let shipininfo= _shipinobj.items_game.items
+    for (let k in shipininfo) {
+        let _shipininfo = shipininfo[k];
         let used_by_heroes = _shipininfo.used_by_heroes;
         if (used_by_heroes == null) {
             continue;
@@ -474,11 +476,13 @@ function createSound() {
 
 (async () => {
     // var args = process.argv.splice(2);
-    // readDATA();
-    // createNpc()
+    readDATA();
+    createNpc()
+
+
     // createAbility()
     // createItem()
-    createSound();
+    // createSound();
 })().catch((error) => {
     console.error(error);
     process.exit(1);

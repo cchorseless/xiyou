@@ -23192,6 +23192,299 @@
 			}
 		}
 	}
+	// 玛西
+	"npc_dota_hero_marci"
+	{
+		"Model"				"models/heroes/marci/marci_base.vmdl"
+		"IdleExpression"	"scenes/marci/marci_exp_idle_01.vcd"
+		"SoundSet"			"Hero_Marci"
+		"PickSound"			"marci_pick"
+		"BanSound"			"marci_ban"
+		"Enabled"			"1"
+		"HeroUnlockOrder"	"0"
+		"Role"				"Support,Carry,Initiator,Disabler,Escape"
+		"Rolelevels"		"1,1,2,1,1"
+		"Complexity"		"2"
+		"Team"				"Good"
+		"HeroID"			"136"
+		"HeroOrderID"			"122"
+		"BotImplemented"		"0"
+		"ModelScale"			"1"
+		"VersusScale"			"1"
+		"LoadoutScale"			"0.8"
+		"SpectatorLoadoutScale" "1"
+		"HeroGlowColor"			"0 50 247"
+		"CMEnabled"				"1"
+		"workshop_guide_name"		"Marci"
+		"new_player_enable"			"1"
+		"LastHitChallengeRival"		"npc_dota_hero_mirana"
+		"HeroSelectSoundEffect"		"Hero_Marci.Pick"
+		"GibType"		"default"
+		"Ability1"		"marci_grapple"
+		"Ability2"		"marci_companion_run"
+		"Ability3"		"marci_guardian"
+		"Ability4"		"generic_hidden"
+		"Ability5"		"generic_hidden"
+		"Ability6"		"marci_unleash"
+		
+		"AbilityDraftAbilities"
+		{
+			"Ability1"		"marci_grapple"
+			"Ability2"		"marci_companion_run"
+			"Ability3"		"marci_guardian"
+			"Ability6"		"marci_unleash"
+		}	
+
+		"Ability10"		"special_bonus_unique_marci_lunge_range"
+		"Ability11"		"special_bonus_unique_marci_grapple_damage"
+		"Ability12"		"special_bonus_unique_marci_guardian_lifesteal"
+		"Ability13"		"special_bonus_unique_marci_lunge_cooldown"
+		"Ability14"		"special_bonus_unique_marci_grapple_stun_duration"
+		"Ability15"		"special_bonus_unique_marci_unleash_speed"
+		"Ability16"		"special_bonus_unique_marci_unleash_silence"
+		"Ability17"		"special_bonus_unique_marci_guardian_magic_immune"
+		"ArmorPhysical"				"0"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"33"
+		"AttackDamageMax"			"37"
+		"AttackRate"				"1.700000"
+		"AttackAnimationPoint"		"0.300000"
+		"AttackAcquisitionRange"	"600"
+		"AttackRange"				"150"
+		"ProjectileSpeed"			"0"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"23"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseIntelligence"	"19"
+		"AttributeIntelligenceGain"	"1.900000"
+		"AttributeBaseAgility"		"20"
+		"AttributeAgilityGain"		"2.40000"
+		"StatusManaRegen"			"0.0"
+		"MovementSpeed"			"315"
+		"MovementTurnRate"		"0.900000"
+		"animation_transitions"
+		{
+		//	"ACT_DOTA_RUN"
+		//	{
+		//		"regular"		"0.300000"
+		//	}
+			"ACT_DOTA_IDLE"
+			{
+				"regular"		"0.5000"
+				"unleash"		"0.3000"
+				"injured"		"0.2000"
+			}
+		}	
+		"AttackSpeedActivityModifiers"
+		{
+			"fast"		"180"
+			"faster"	"250"
+		}
+		"HealthBarOffset"		"200"
+		"BoundsHullName"		"DOTA_HULL_SIZE_HERO"
+		"ItemSlots"
+		{
+			"0"
+			{
+				"SlotIndex"		"0"
+				"SlotName"		"head"
+				"SlotText"		"#LoadoutSlot_Head"
+				"TextureWidth"		"256"
+				"TextureHeight"		"256"
+				"MaxPolygonsLOD0"		"2500"
+				"MaxPolygonsLOD1"		"1250"
+			}
+			"1"
+			{
+				"SlotIndex"		"1"
+				"SlotName"		"armor"
+				"SlotText"		"#LoadoutSlot_Armor"
+				"TextureWidth"		"512"
+				"TextureHeight"		"512"
+				"MaxPolygonsLOD0"		"4000"
+				"MaxPolygonsLOD1"		"2000"
+			}
+			"2"
+			{
+				"SlotIndex"		"2"
+				"SlotName"		"shoulder"
+				"SlotText"		"#LoadoutSlot_shoulder"
+				"TextureWidth"		"512"
+				"TextureHeight"		"512"
+				"MaxPolygonsLOD0"		"3000"
+				"MaxPolygonsLOD1"		"1500"
+			}
+			"3"
+			{
+				"SlotIndex"		"3"
+				"SlotName"		"back"
+				"SlotText"		"#LoadoutSlot_Back"
+				"TextureWidth"		"256"
+				"TextureHeight"		"256"
+				"MaxPolygonsLOD0"		"2500"
+				"MaxPolygonsLOD1"		"1250"
+			}
+			"4"
+			{
+				"SlotIndex"		"4"
+				"SlotName"		"taunt"
+				"SlotText"		"#LoadoutSlot_Taunt"
+			}
+		}
+		"particle_folder"		"particles/units/heroes/hero_marci"
+		"GameSoundsFile"		"soundevents/game_sounds_heroes/game_sounds_marci.vsndevts"
+		"VoiceFile"				"soundevents/voscripts/game_sounds_vo_marci.vsndevts"
+	}
+	// 兽
+	"npc_dota_hero_primal_beast"
+	{
+		"Model"					"models/heroes/primal_beast/primal_beast_base.vmdl"
+		"IdleExpression"		"scenes/primal_beast/primal_beast_exp_idle_01.vcd"
+		"RareIdleExpression" 		"scenes/primal_beast/primal_beast_exp_idle_02.vcd"
+		"SoundSet"				"Hero_PrimalBeast"
+		"Enabled"				"1"
+		"CMEnabled"				"1"
+		"HeroUnlockOrder"		"1"
+		"Role"			"Initiator,Durable,Disabler"
+		"Rolelevels"	"3,3,2"
+		"Complexity"			"1"
+		"Team"					"Bad"
+		"HeroID"				"137"
+		"ModelScale"			"0.900000"
+		"MaxModelScaleMultiplier"	"1.25"
+		"LoadoutScale"		"0.900000"
+		"SpectatorLoadoutScale" "0.7"
+		"HeroGlowColor"			"0 0 255"
+		"PickSound"				"0"
+		"BanSound"				"0"
+		"HeroSelectSoundEffect"	"Hero_PrimalBeast.Pick"
+		"workshop_guide_name"	"Primal Beast"
+		"new_player_enable"		"1"
+		"LastHitChallengeRival"	"npc_dota_hero_skeleton_king"		
+		"GibType"				"default"
+		"Ability1"				"primal_beast_onslaught"
+		"Ability2"				"primal_beast_trample"
+		"Ability3"				"primal_beast_uproar"
+		"Ability4"				"primal_beast_rock_throw"
+		"Ability5"				"primal_beast_onslaught_release"
+		"Ability6"				"primal_beast_pulverize"
+		"Ability10"				"special_bonus_unique_primal_beast_onslaught_damage"
+		"Ability11"				"special_bonus_unique_primal_beast_trample_magic_resist"
+		"Ability12"				"special_bonus_unique_primal_beast_trample_cooldown"
+		"Ability13"				"special_bonus_unique_primal_beast_roar_dispells"
+		"Ability14"				"special_bonus_unique_primal_beast_trample_attack_damage"
+		"Ability15"				"special_bonus_unique_primal_beast_uproar_armor"
+		"Ability16"				"special_bonus_unique_primal_beast_pulverize_pierces_magic_immunity"
+		"Ability17"				"special_bonus_unique_primal_beast_pulverize_duration"
+		"AbilityDraftAbilities"
+		{
+			"Ability1"		"primal_beast_onslaught"
+			"Ability2"		"primal_beast_trample"
+			"Ability3"		"primal_beast_uproar"
+			"Ability6"		"primal_beast_pulverize"
+		}		
+		"ArmorPhysical"				"2"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"36"
+		"AttackDamageMax"			"38"
+		"AttackRate"				"1.80000"
+		"AttackAnimationPoint"		"0.60"
+		"AttackAcquisitionRange"	"600"
+		"AttackRange"				"150"
+		"AttackSpeedActivityModifiers"
+		{
+			"fast"		"200"
+		}
+		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"26"
+		"AttributeStrengthGain"		"4.300000"
+		"AttributeBaseIntelligence"	"16"
+		"AttributeIntelligenceGain"	"1.400000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"1.000000"
+		"ShowcasePlayIdleExpression" "0"
+		"MovementSpeed"				"310"
+		"MovementTurnRate"			"0.600000"
+		"HasAggressiveStance"		"0"
+		"animation_transitions"
+		{
+			"ACT_DOTA_IDLE"
+			{
+		 		"regular"	"0.9"
+			}
+			"ACT_DOTA_RUN"
+			{
+				"regular"		"0.9"
+			}
+		}
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
+		"VoiceFile"					"soundevents/voscripts/game_sounds_vo_primal_beast.vsndevts"
+		"particle_folder"			"particles/units/heroes/hero_primal_beast"
+		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_primal_beast.vsndevts"
+		"RenderablePortrait"
+		{
+			"Particles"
+			{
+				"particles/units/heroes/hero_primal_beast/primal_beast_loadout.vpcf"
+				{
+					"0"
+					{
+						"type"		"follow_origin"
+						"location"	"attach_hitloc"
+					}
+				}
+			}
+		}
+		"ItemSlots"
+		{
+			"0"
+			{
+				"SlotIndex"		"0"
+				"SlotName"		"head"
+				"SlotText"		"#LoadoutSlot_Head"
+				"TextureWidth"		"256"
+				"TextureHeight"		"256"
+				"MaxPolygonsLOD0"		"2500"
+				"MaxPolygonsLOD1"		"1250"
+			}
+			"1"
+			{
+				"SlotIndex"		"1"
+				"SlotName"		"arms"
+				"SlotText"		"#LoadoutSlot_Arms"
+				"TextureWidth"		"512"
+				"TextureHeight"		"512"
+				"MaxPolygonsLOD0"		"3000"
+				"MaxPolygonsLOD1"		"1500"
+			}
+			"2"
+			{
+				"SlotIndex"		"2"
+				"SlotName"		"back"
+				"SlotText"		"#LoadoutSlot_Back"
+				"TextureWidth"		"512"
+				"TextureHeight"		"512"
+				"MaxPolygonsLOD0"		"4000"
+				"MaxPolygonsLOD1"		"2000"
+			}
+			"3"
+			{
+				"SlotIndex"		"3"
+				"SlotName"		"legs"
+				"SlotText"		"#LoadoutSlot_Legs"
+				"TextureWidth"		"256"
+				"TextureHeight"		"256"
+				"MaxPolygonsLOD0"		"2500"
+				"MaxPolygonsLOD1"		"1250"
+			}
+			"4"	
+			{
+				"SlotIndex"		"4"
+				"SlotName"		"taunt"
+				"SlotText"		"#LoadoutSlot_Taunt"
+			}
+		}
+	}
 
 }
 
