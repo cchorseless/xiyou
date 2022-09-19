@@ -1,7 +1,7 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { CombinationRightPanel_UI } from "./CombinationRightPanel_UI";
-export class CombinationRightPanel extends CombinationRightPanel_UI {
+import { CombinationBottomPanel_UI } from "./CombinationBottomPanel_UI";
+export class CombinationBottomPanel extends CombinationBottomPanel_UI {
 	// 初始化数据
 	componentDidMount() {
 		super.componentDidMount();

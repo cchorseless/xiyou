@@ -32,6 +32,7 @@ export class WearableComponent extends ET.Component {
         return wearSys.Allitems[sItemDef];
     }
     onAwake(dotaHeroName: string): void {
+        return
         (this as any).sHeroName = dotaHeroName;
         if (dotaHeroName == null || dotaHeroName.length == 0) {
             return
@@ -500,7 +501,7 @@ export class WearableComponent extends ET.Component {
             let type = PrecacheHelper.GetRegClass<typeof EWearableItem>("EWearableItem");
             wearitem = this.AddChild(type, sItemDef);
         }
-        wearitem.dressUp(sStyle)
+        // wearitem.dressUp(sStyle)
     }
     public FindWearItemByItemDef(sItemDef: string) {
         if (!sItemDef) {

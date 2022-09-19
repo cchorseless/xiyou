@@ -3,7 +3,7 @@ import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { building_combination_ability } from "../../../kvInterface/building/building_combination_ability";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { CombinationConfig } from "../../System/Combination/CombinationConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
@@ -12,10 +12,15 @@ import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
 @registerET()
 export class ECombination extends ET.Entity {
+    public readonly IsSerializeEntity: boolean = true;
     private config: { [k: string]: building_combination_ability.OBJ_2_1 } = {};
-    private activeNeedCount: number;
     private combination: { [k: string]: ECombinationLabelItem[] } = {};
+    @serializeETProps()
     public combinationId: string;
+    @serializeETProps()
+    public activeNeedCount: number;
+    @serializeETProps()
+    public uniqueConfigList: string[] = [];
 
     onAwake(CombinationId: string): void {
         this.combinationId = CombinationId;
@@ -23,7 +28,7 @@ export class ECombination extends ET.Entity {
 
     addConfig(c: building_combination_ability.OBJ_2_1) {
         this.config[c.index] = c;
-        this.activeNeedCount = tonumber(c.count);
+        this.activeNeedCount = tonumber(c.active_count);
     }
 
     isInCombination(c: number | string) {
@@ -47,17 +52,17 @@ export class ECombination extends ET.Entity {
     }
 
     getCurUniqueCount() {
-        let buildingconfigid: string[] = [];
+        this.uniqueConfigList = [];
         for (let k in this.combination) {
             let c = this.combination[k];
             c.forEach(entity => {
                 let building = entity.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>();
-                if (!buildingconfigid.includes(building.ConfigID)) {
-                    buildingconfigid.push(building.ConfigID);
+                if (!this.uniqueConfigList.includes(building.ConfigID)) {
+                    this.uniqueConfigList.push(building.ConfigID);
                 }
             })
         }
-        return buildingconfigid.length
+        return this.uniqueConfigList.length
     }
 
     getAllBuilding() {

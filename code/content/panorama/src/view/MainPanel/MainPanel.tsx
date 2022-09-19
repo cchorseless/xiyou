@@ -17,6 +17,7 @@ import { CustomPortrait } from "../alldota2/ui_element/CustomPortrait";
 import { CustomPortraitGroup } from "../alldota2/ui_element/CustomPortraitGroup";
 import { CustomStats } from "../alldota2/ui_element/CustomStats";
 import { ChallengeShopItem } from "../Challenge/ChallengeShopItem";
+import { CombinationBottomPanel } from "../Combination/CombinationBottomPanel";
 import { DacBoardPanelV0 } from "../Common/DacBoardPanelV0";
 import { DebugPanel } from "../debugPanel/DebugPanel";
 import { ShopTopRightPanel } from "../Shop/ShopTopRightPanel";
@@ -39,10 +40,13 @@ export class MainPanel extends MainPanel_UI {
     }
 
     onRefreshUI() {
-        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, TopBarPanel, { 
-            
-         });
-
+        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, TopBarPanel);
+        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, CombinationBottomPanel, {
+            horizontalAlign: "center",
+            verticalAlign: "bottom",
+            marginBottom: "200px",
+            backgroundColor: "#FFFFFFFF",
+        });
 
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, ChallengeShopItem, {
             uiScale: "70% 70% 100%",

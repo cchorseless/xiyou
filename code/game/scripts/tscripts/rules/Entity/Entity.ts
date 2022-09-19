@@ -36,6 +36,7 @@ export module ET {
     export interface IEntityJson {
         _t: string;
         _id: string;
+        _p_instanceid?: string;
         Children?: { [k: string]: IEntityJson };
         C?: { [k: string]: IEntityJson };
         [K: string]: any;

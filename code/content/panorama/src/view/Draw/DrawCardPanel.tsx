@@ -57,4 +57,19 @@ export class DrawCardPanel extends DrawCardPanel_UI {
             i++;
         }
     }
+
+    hideItemByIndex(index: number) {
+        let herosceneitems = this.GetNodeChild(this.NODENAME.box_model, DrawCardHeroSceneItem);
+        herosceneitems.forEach(item => {
+            if (item.props.index === index) {
+                item.close(false);
+            }
+        });
+        let CardBottomItems = this.GetNodeChild(this.NODENAME.box, DrawCardBottomItem);
+        CardBottomItems.forEach(item => {
+            if (item.props.index === index) {
+                item.close(false);
+            }
+        });
+    }
 }

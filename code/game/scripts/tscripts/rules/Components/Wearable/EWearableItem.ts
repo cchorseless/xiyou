@@ -1,3 +1,4 @@
+import { GameFunc } from "../../../GameFunc";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { WearableConfig } from "../../System/Wearable/WearableConfig";
@@ -195,14 +196,15 @@ export class EWearableItem extends ET.Entity {
             case "19023":
                 return "GameActivity_t.ACT_DOTA_IDLE";
         }
-        switch (this.sHeroName) {
+        let comp = this.GetParent<WearableComponent>();
+        switch (comp.sHeroName) {
             //  修复神灵投矛 其他动作还没支持
             case "npc_dota_hero_huskar":
             //  修复小鹿投矛 其他动作还没支持
             case "npc_dota_hero_enchantress":
-                if (this.GetSlotName(sItemDef) == "weapon") {
-                    return "GameActivity_t.ACT_DOTA_IDLE";
-                }
+                // if (this.GetSlotName(sItemDef) == "weapon") {
+                //     return "GameActivity_t.ACT_DOTA_IDLE";
+                // }
                 break;
         }
         return null;
@@ -260,16 +262,16 @@ export class EWearableItem extends ET.Entity {
             }
         }
         if (wearSys.PrismaticParticles[particle_name]) {
-            this.prismatic_particles = this.prismatic_particles || {};
-            if (this.prismatic_particles[particle_name]) {
-                this.prismatic_particles[particle_name].particle_index = p;
-            } else {
-                this.prismatic_particles[particle_name] = {
-                    particle_index: p,
-                    slot_name: sSlotName,
-                    style: sStyle,
-                };
-            }
+            // this.prismatic_particles = this.prismatic_particles || {};
+            // if (this.prismatic_particles[particle_name]) {
+            //     this.prismatic_particles[particle_name].particle_index = p;
+            // } else {
+            //     this.prismatic_particles[particle_name] = {
+            //         particle_index: p,
+            //         slot_name: sSlotName,
+            //         style: sStyle,
+            //     };
+            // }
             // if (this.prismatic && Wearable.CanPrismatic(particle_name, this.prismatic)) {
             //     let sHexColor = wearSys.Allprismatics[this.prismatic].hex_color;
             //     let vColor = HexColor2RGBVector(sHexColor);
@@ -299,226 +301,225 @@ export class EWearableItem extends ET.Entity {
     changeSkin() {
 
     }
-
-    dressUp(sStyle: string = "0") {
-        if (this.itemDef == null) { return }
-        let comp = this.GetParent<WearableComponent>();
-        let config = comp.GetWearConfig(this.itemDef);
-        let hUnit = this.GetDomain<BaseNpc_Plus>();
-        let slot = this.getSlot();
-        let nModelIndex = -1;
-        let sModel_player = config.model_player;
-        this.style = sStyle;
-        //  删除原饰品
-        comp.TakeOffSlot(slot);
-        //  生成饰品模型
-        if (sModel_player) {
-            let hModel = this.FindModelEntity(sModel_player);
-            if (hModel == null) {
-                let sPropClass = this.GetPropClass(this.itemDef);
-                let sDefaultAnim = this.SpecialFixAnim(this.itemDef);
-                let _proptable: any = {
-                    model: sModel_player,
-                };
-                if (sDefaultAnim) {
-                    _proptable["DefaultAnim"] = sDefaultAnim;
-                }
-                hModel = SpawnEntityFromTableSynchronous(sPropClass, _proptable) as CBaseModelEntity;
-                hModel.SetOwner(hUnit);
-                hModel.SetParent(hUnit, "");
-                hModel.FollowEntity(hUnit, true);
-                if (config.skin) {
-                    hModel.SetSkin(tonumber("" + config.skin));
-                }
-            }
-            this.model = hModel;
-        }
-        // 款式
-        if (config.styles) {
-            let styleinfo = json.decode(config.styles)[0];
-            //  不同款式设置模型皮肤
-            let style_table = styleinfo[sStyle];
-            if (style_table) {
-                if (style_table.model_player && style_table.model_player != sModel_player) {
-                    this.model.SetModel(style_table.model_player);
-                }
-                if (style_table.skin && this.model) {
-                    this.model.SetSkin(style_table.skin);
-                }
-                if (style_table.skin && !this.model) {
-                    //  召唤物款式， 目前仅发现德鲁伊熊灵
-                    // this.summon_skin = style_table.skin;
-                }
-            }
-        }
-        if (config.asset_modifier) {
-            let asset_modifiers: any[] = [];
-            config.asset_modifier.split("|").forEach(key => {
-                if (key) {
-                    asset_modifiers.push(json.decode(key)[0])
-                }
-            })
-            for (let am_table of asset_modifiers) {
-                if (am_table.type == "persona" && am_table.persona == 1) {
-                    // this.SwitchPersona(true);
-                    this.bPersona = true;
-                }
-            }
-            for (let am_table of asset_modifiers) {
-                if (am_table.type == "additional_wearable") {
-                    //  额外模型
-                    if (!this.additional_wearable) {
-                        this.additional_wearable = [];
-                    }
-                    let sModel = am_table.asset;
-                    let hModel = SpawnEntityFromTableSynchronous("prop_dynamic", { model: sModel }) as CBaseModelEntity;
-                    hModel.SetOwner(hUnit);
-                    hModel.SetParent(hUnit, "");
-                    hModel.FollowEntity(hUnit, true);
-                    this.additional_wearable.push(hModel);
-                } else if (am_table.type == "entity_model") {
-                    //  更换英雄模型
-                    if (comp.sHeroName == am_table.asset) {
-                        this.changeHeroModel(am_table.modifier)
-                    } else if (comp.sHeroName == "npc_dota_hero_tiny") {
-                        // let sModelIndex = string.sub(am_table.asset, -1, -1)
-                        // nModelIndex = tonumber(sModelIndex) + 1
-                        // hUnit["Model" + nModelIndex] = am_table.modifier
-                        // if ( nModelIndex == hUnit.nModelIndex ) {
-                        //     hUnit.SetOriginalModel(am_table.modifier)
-                        //     hUnit.SetModel(am_table.modifier)
-                        // }
-                    } else {
-                        // //  更换召唤物模型
-                        // this.summon_model = this.summon_model || {};
-                        // this.summon_model[am_table.asset] = am_table.modifier;
-                        // hWear.bChangeSummon = hWear.bChangeSummon || {};
-                        // hWear.bChangeSummon[am_table.asset] = true;
-                        // //  召唤物skin写在外面，目前发现骨法金棒子 剑圣金猫
-                        // let nSkin = asset_modifiers["skin"];
-                        // if (nSkin != null) {
-                        //     this.summon_skin = nSkin;
-                        // }
-                    }
-                } else if (am_table.type == "hero_model_change") {
-                    //  更换英雄变身模型
-                    //  print("hero_model_change", am_table.asset)
-                    if (!am_table.style || tostring(am_table.style) == sStyle) {
-                        // this.hero_model_change = am_table;
-                    }
-                } else if (am_table.type == "model") {
-                    //  更换其他饰品模型
-                    //  print("hero_model_change", am_table.asset)
-                    // if (!am_table.style || tostring(am_table.style) == sStyle) {
-                    //     hWear.model_modifiers = hWear.model_modifiers || [];
-                    //     hWear.model_modifiers.push(am_table);
-                    //     for (let hSubWear of Object.values(this.Slots)) {
-                    //         if (hSubWear != hWear && hSubWear.model && hSubWear.model.GetModelName() == am_table.asset) {
-                    //             hSubWear.model.SetModel(am_table.modifier);
-                    //         }
-                    //     }
-                    // }
-                }
-            }
-            //  一定要在更换模型后面，否则可能找不到attachment
-            for (let am_table of asset_modifiers) {
-                if (am_table.type == "particle_create") {
-                    //  周身特效
-                    if ((!am_table.style || tostring(am_table.style) == sStyle) && !am_table.spawn_in_loadout_only) {
-                        let particle_name = am_table.modifier;
-                        let bReplaced = false;
-                        if (!this.IsDisplayInLoadout(sSlotName)) {
-                            //  隐藏槽位查看特效是否已被替换
-                            for (let hSubWear of Object.values(this.Slots)) {
-                                if (hSubWear.replace_particle_names && hSubWear.replace_particle_names[particle_name]) {
-                                    bReplaced = true;
-                                    hWear.particles[particle_name] = null;
-                                    break;
-                                }
-                            }
-                        }
-                        if (!bReplaced) {
-                            this.AddParticle(hWear, particle_name, sSlotName, sStyle);
-                        }
-                    }
-                } else if (am_table.type == "particle") {
-                    //  替换其他饰品的周身特效
-                    if ((!am_table.style || tostring(am_table.style) == sStyle) && !am_table.spawn_in_loadout_only) {
-                        let default_particle_name = am_table.asset;
-                        let particle_name = am_table.modifier;
-                        for (let hSubWear of Object.values(this.Slots)) {
-                            for (let p_name in hSubWear.particles) {
-                                let sub_p = hSubWear.particles[p_name];
-                                if (default_particle_name == p_name) {
-                                    if (sub_p != null) {
-                                        ParticleManager.DestroyParticle(sub_p, true);
-                                        ParticleManager.ReleaseParticleIndex(sub_p);
-                                        hSubWear.particles[p_name] = null;
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                        let p = this.AddParticle(hWear, particle_name, sSlotName, sStyle);
-                        hWear.replace_particle_names = hWear.replace_particle_names || {};
-                        hWear.replace_particle_names[default_particle_name] = true;
-                        // if (this.sHeroName == "npc_dota_hero_tiny" && nModelIndex > 0) {
-                        // hUnit["Particles" + nModelIndex][particle_name] = {
-                        //     pid = p,
-                        //     hWearParticles = hWear["particles"],
-                        //     recreate =  () => {
-                        //         return Wearable.AddParticle(hUnit, hWear, particle_name, sSlotName, sStyle)
-                        //     }
-                        // }
-                        // }
-                    }
-                } else if (am_table.type == "particle_projectile") {
-                    //  更换攻击弹道特效
-                    if ((!am_table.style || tostring(am_table.style) == sStyle) && !am_table.spawn_in_loadout_only) {
-                        let default_projectile = am_table.asset;
-                        let new_projectile = am_table.modifier;
-                        if (hUnit.GetRangedProjectileName() == default_projectile) {
-                            hWear.default_projectile = default_projectile;
-                        } else {
-                            hWear.default_projectile = am_table.asset;
-                        }
-                        hUnit.SetRangedProjectileName(new_projectile);
-                        this.new_projectile = new_projectile;
-                    }
-                } else if (am_table.type == "model_skin") {
-                    //  模型皮肤
-                    //  print("model_skin", am_table.skin)
-                    if (!am_table.style || tostring(am_table.style) == sStyle) {
-                        hUnit.SetSkin(am_table.skin);
-                        hWear.bChangeSkin = true;
-                    }
-                } else if (am_table.type == "activity") {
-                    //  修改动作
-                    //  print("activity", am_table.modifier)
-                    if (!am_table.style || tostring(am_table.style) == sStyle) {
-                        // ActivityModifier.AddWearableActivity(hUnit, am_table.modifier, sItemDef);
-                        hWear.bActivity = true;
-                    }
-                } else if (am_table.type == "entity_scale") {
-                    //  修改模型大小
-                    //  print("activity", am_table.modifier)
-                    if ((!am_table.style || tostring(am_table.style) == sStyle) && !am_table.asset) {
-                        hUnit.SetModelScale(am_table.scale_size);
-                        hWear.bChangeScale = true;
-                    }
-                }
-            }
-        }
-        this.SpecialFixParticles(sItemDef, hWear, sSlotName, sStyle);
-        // this.RefreshSpecial(hUnit)
-        if (nModelIndex > 0) {
-            // Wearable.SwitchTinyParticles(hUnit)
-        }
-        // if ( DefaultPrismatic && DefaultPrismatic[sItemDef] && !hUnit.prismatic ) {
-        //     let sPrismaticName = DefaultPrismatic[sItemDef]
-        //     Wearable.SwitchPrismatic(hUnit, sPrismaticName)
-        // }
-    }
+    // dressUp(sStyle: string = "0") {
+    //     if (this.itemDef == null) { return }
+    //     let comp = this.GetParent<WearableComponent>();
+    //     let config = comp.GetWearConfig(this.itemDef);
+    //     let hUnit = this.GetDomain<BaseNpc_Plus>();
+    //     let slot = this.getSlot();
+    //     let nModelIndex = -1;
+    //     let sModel_player = config.model_player;
+    //     this.style = sStyle;
+    //     //  删除原饰品
+    //     comp.TakeOffSlot(slot);
+    //     //  生成饰品模型
+    //     if (sModel_player) {
+    //         let hModel = this.FindModelEntity(sModel_player);
+    //         if (hModel == null) {
+    //             let sPropClass = this.GetPropClass(this.itemDef);
+    //             let sDefaultAnim = this.SpecialFixAnim(this.itemDef);
+    //             let _proptable: any = {
+    //                 model: sModel_player,
+    //             };
+    //             if (sDefaultAnim) {
+    //                 _proptable["DefaultAnim"] = sDefaultAnim;
+    //             }
+    //             hModel = SpawnEntityFromTableSynchronous(sPropClass, _proptable) as CBaseModelEntity;
+    //             hModel.SetOwner(hUnit);
+    //             hModel.SetParent(hUnit, "");
+    //             hModel.FollowEntity(hUnit, true);
+    //             if (config.skin) {
+    //                 hModel.SetSkin(tonumber("" + config.skin));
+    //             }
+    //         }
+    //         this.model = hModel;
+    //     }
+    //     // 款式
+    //     if (config.styles) {
+    //         let styleinfo = json.decode(config.styles)[0];
+    //         //  不同款式设置模型皮肤
+    //         let style_table = styleinfo[sStyle];
+    //         if (style_table) {
+    //             if (style_table.model_player && style_table.model_player != sModel_player) {
+    //                 this.model.SetModel(style_table.model_player);
+    //             }
+    //             if (style_table.skin && this.model) {
+    //                 this.model.SetSkin(style_table.skin);
+    //             }
+    //             if (style_table.skin && !this.model) {
+    //                 //  召唤物款式， 目前仅发现德鲁伊熊灵
+    //                 // this.summon_skin = style_table.skin;
+    //             }
+    //         }
+    //     }
+    //     if (config.asset_modifier) {
+    //         let asset_modifiers: any[] = [];
+    //         config.asset_modifier.split("|").forEach(key => {
+    //             if (key) {
+    //                 asset_modifiers.push(json.decode(key)[0])
+    //             }
+    //         })
+    //         for (let am_table of asset_modifiers) {
+    //             if (am_table.type == "persona" && am_table.persona == 1) {
+    //                 // this.SwitchPersona(true);
+    //                 this.bPersona = true;
+    //             }
+    //         }
+    //         for (let am_table of asset_modifiers) {
+    //             if (am_table.type == "additional_wearable") {
+    //                 //  额外模型
+    //                 if (!this.additional_wearable) {
+    //                     this.additional_wearable = [];
+    //                 }
+    //                 let sModel = am_table.asset;
+    //                 let hModel = SpawnEntityFromTableSynchronous("prop_dynamic", { model: sModel }) as CBaseModelEntity;
+    //                 hModel.SetOwner(hUnit);
+    //                 hModel.SetParent(hUnit, "");
+    //                 hModel.FollowEntity(hUnit, true);
+    //                 this.additional_wearable.push(hModel);
+    //             } else if (am_table.type == "entity_model") {
+    //                 //  更换英雄模型
+    //                 if (comp.sHeroName == am_table.asset) {
+    //                     this.changeHeroModel(am_table.modifier)
+    //                 } else if (comp.sHeroName == "npc_dota_hero_tiny") {
+    //                     // let sModelIndex = string.sub(am_table.asset, -1, -1)
+    //                     // nModelIndex = tonumber(sModelIndex) + 1
+    //                     // hUnit["Model" + nModelIndex] = am_table.modifier
+    //                     // if ( nModelIndex == hUnit.nModelIndex ) {
+    //                     //     hUnit.SetOriginalModel(am_table.modifier)
+    //                     //     hUnit.SetModel(am_table.modifier)
+    //                     // }
+    //                 } else {
+    //                     // //  更换召唤物模型
+    //                     // this.summon_model = this.summon_model || {};
+    //                     // this.summon_model[am_table.asset] = am_table.modifier;
+    //                     // hWear.bChangeSummon = hWear.bChangeSummon || {};
+    //                     // hWear.bChangeSummon[am_table.asset] = true;
+    //                     // //  召唤物skin写在外面，目前发现骨法金棒子 剑圣金猫
+    //                     // let nSkin = asset_modifiers["skin"];
+    //                     // if (nSkin != null) {
+    //                     //     this.summon_skin = nSkin;
+    //                     // }
+    //                 }
+    //             } else if (am_table.type == "hero_model_change") {
+    //                 //  更换英雄变身模型
+    //                 //  print("hero_model_change", am_table.asset)
+    //                 if (!am_table.style || tostring(am_table.style) == sStyle) {
+    //                     // this.hero_model_change = am_table;
+    //                 }
+    //             } else if (am_table.type == "model") {
+    //                 //  更换其他饰品模型
+    //                 //  print("hero_model_change", am_table.asset)
+    //                 // if (!am_table.style || tostring(am_table.style) == sStyle) {
+    //                 //     hWear.model_modifiers = hWear.model_modifiers || [];
+    //                 //     hWear.model_modifiers.push(am_table);
+    //                 //     for (let hSubWear of Object.values(this.Slots)) {
+    //                 //         if (hSubWear != hWear && hSubWear.model && hSubWear.model.GetModelName() == am_table.asset) {
+    //                 //             hSubWear.model.SetModel(am_table.modifier);
+    //                 //         }
+    //                 //     }
+    //                 // }
+    //             }
+    //         }
+    //         //  一定要在更换模型后面，否则可能找不到attachment
+    //         for (let am_table of asset_modifiers) {
+    //             if (am_table.type == "particle_create") {
+    //                 //  周身特效
+    //                 if ((!am_table.style || tostring(am_table.style) == sStyle) && !am_table.spawn_in_loadout_only) {
+    //                     let particle_name = am_table.modifier;
+    //                     let bReplaced = false;
+    //                     // if (!this.IsDisplayInLoadout(sSlotName)) {
+    //                     //     //  隐藏槽位查看特效是否已被替换
+    //                     //     for (let hSubWear of Object.values(this.Slots)) {
+    //                     //         if (hSubWear.replace_particle_names && hSubWear.replace_particle_names[particle_name]) {
+    //                     //             bReplaced = true;
+    //                     //             hWear.particles[particle_name] = null;
+    //                     //             break;
+    //                     //         }
+    //                     //     }
+    //                     // }
+    //                     // if (!bReplaced) {
+    //                     //     this.AddParticle(hWear, particle_name, sSlotName, sStyle);
+    //                     // }
+    //                 }
+    //             } else if (am_table.type == "particle") {
+    //                 //  替换其他饰品的周身特效
+    //                 if ((!am_table.style || tostring(am_table.style) == sStyle) && !am_table.spawn_in_loadout_only) {
+    //                     let default_particle_name = am_table.asset;
+    //                     let particle_name = am_table.modifier;
+    //                     for (let hSubWear of Object.values(this.Slots)) {
+    //                         for (let p_name in hSubWear.particles) {
+    //                             let sub_p = hSubWear.particles[p_name];
+    //                             if (default_particle_name == p_name) {
+    //                                 if (sub_p != null) {
+    //                                     ParticleManager.DestroyParticle(sub_p, true);
+    //                                     ParticleManager.ReleaseParticleIndex(sub_p);
+    //                                     hSubWear.particles[p_name] = null;
+    //                                 }
+    //                                 break;
+    //                             }
+    //                         }
+    //                     }
+    //                     let p = this.AddParticle(hWear, particle_name, sSlotName, sStyle);
+    //                     hWear.replace_particle_names = hWear.replace_particle_names || {};
+    //                     hWear.replace_particle_names[default_particle_name] = true;
+    //                     // if (this.sHeroName == "npc_dota_hero_tiny" && nModelIndex > 0) {
+    //                     // hUnit["Particles" + nModelIndex][particle_name] = {
+    //                     //     pid = p,
+    //                     //     hWearParticles = hWear["particles"],
+    //                     //     recreate =  () => {
+    //                     //         return Wearable.AddParticle(hUnit, hWear, particle_name, sSlotName, sStyle)
+    //                     //     }
+    //                     // }
+    //                     // }
+    //                 }
+    //             } else if (am_table.type == "particle_projectile") {
+    //                 //  更换攻击弹道特效
+    //                 if ((!am_table.style || tostring(am_table.style) == sStyle) && !am_table.spawn_in_loadout_only) {
+    //                     let default_projectile = am_table.asset;
+    //                     let new_projectile = am_table.modifier;
+    //                     if (hUnit.GetRangedProjectileName() == default_projectile) {
+    //                         hWear.default_projectile = default_projectile;
+    //                     } else {
+    //                         hWear.default_projectile = am_table.asset;
+    //                     }
+    //                     hUnit.SetRangedProjectileName(new_projectile);
+    //                     this.new_projectile = new_projectile;
+    //                 }
+    //             } else if (am_table.type == "model_skin") {
+    //                 //  模型皮肤
+    //                 //  print("model_skin", am_table.skin)
+    //                 if (!am_table.style || tostring(am_table.style) == sStyle) {
+    //                     hUnit.SetSkin(am_table.skin);
+    //                     hWear.bChangeSkin = true;
+    //                 }
+    //             } else if (am_table.type == "activity") {
+    //                 //  修改动作
+    //                 //  print("activity", am_table.modifier)
+    //                 if (!am_table.style || tostring(am_table.style) == sStyle) {
+    //                     // ActivityModifier.AddWearableActivity(hUnit, am_table.modifier, sItemDef);
+    //                     hWear.bActivity = true;
+    //                 }
+    //             } else if (am_table.type == "entity_scale") {
+    //                 //  修改模型大小
+    //                 //  print("activity", am_table.modifier)
+    //                 if ((!am_table.style || tostring(am_table.style) == sStyle) && !am_table.asset) {
+    //                     hUnit.SetModelScale(am_table.scale_size);
+    //                     hWear.bChangeScale = true;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     this.SpecialFixParticles(sItemDef, hWear, sSlotName, sStyle);
+    //     // this.RefreshSpecial(hUnit)
+    //     if (nModelIndex > 0) {
+    //         // Wearable.SwitchTinyParticles(hUnit)
+    //     }
+    //     // if ( DefaultPrismatic && DefaultPrismatic[sItemDef] && !hUnit.prismatic ) {
+    //     //     let sPrismaticName = DefaultPrismatic[sItemDef]
+    //     //     Wearable.SwitchPrismatic(hUnit, sPrismaticName)
+    //     // }
+    // }
     takeOff() {
 
     }

@@ -50,7 +50,11 @@ export module NetTablesHelper {
         if (obj == null || obj.IsDisposed()) {
             return;
         }
-        NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, obj.toJsonObject(ignoreChild));
+        let jsonobj = obj.toJsonObject(ignoreChild);
+        if (obj.Parent && obj.Parent.InstanceId) {
+            jsonobj._p_instanceid = obj.Parent.InstanceId;
+        }
+        NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, jsonobj);
         let event: JS_TO_LUA_DATA = {};
         event.state = true;
         event.data = obj.InstanceId;

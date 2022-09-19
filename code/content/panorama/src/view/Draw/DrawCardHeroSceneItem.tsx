@@ -35,7 +35,7 @@ export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI {
         };
     }
 
-   
+
     onRefreshUI(k: IProps) {
         // if (!k.itemname) {
         //     return;
@@ -66,11 +66,11 @@ export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI {
         if (!this.props.itemname) {
             return;
         }
-        this.playPickSound();
         let data = this.props as IProps;
         let r = await PlayerScene.DrawComp.SelectCard(data.index, data.itemname);
         if (r) {
-            // PrecacheHelper.GetRegClass<typeof DrawCardPanel>("DrawCardPanel").GetInstance()!.close();
+            this.playPickSound();
+            PrecacheHelper.GetRegClass<typeof DrawCardPanel>("DrawCardPanel").GetInstance()!.hideItemByIndex(data.index);
         }
     }
 }

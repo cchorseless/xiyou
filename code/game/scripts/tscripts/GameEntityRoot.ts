@@ -47,6 +47,7 @@ import { TServerZone } from "./service/serverzone/TServerZone";
 
 export class GameEntityRoot extends ET.EntityRoot {
     init() {
+        this.addEvent();
         this.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerSystemComponent>("PlayerSystemComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof MapSystemComponent>("MapSystemComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof DrawSystemComponent>("DrawSystemComponent"));
@@ -57,7 +58,6 @@ export class GameEntityRoot extends ET.EntityRoot {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationSystemComponent>("CombinationSystemComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof WearableSystemComponent>("WearableSystemComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof PublicBagSystemComponent>("PublicBagSystemComponent"));
-        this.addEvent();
     }
     TServerZone() {
         return this.GetComponentByName<TServerZone>("TServerZone");
@@ -192,7 +192,7 @@ export class GameEntityRoot extends ET.EntityRoot {
             buildunit.onKilled(events);
         }
     }
-    public onJS_TO_LUA_EVENT(entindex: EntityIndex, event: JS_TO_LUA_DATA) {
+    private onJS_TO_LUA_EVENT(entindex: EntityIndex, event: JS_TO_LUA_DATA) {
         if (event.protocol == null) {
             return;
         }

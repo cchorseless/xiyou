@@ -250,7 +250,7 @@ export module EventHelper {
         Object.assign(_event, eventData);
         _event.protocol = eventName;
         _event.state = true;
-        LogHelper.print(eventName);
+        // LogHelper.print(eventName);
         CustomGameEventManager.Send_ServerToAllClients<JS_TO_LUA_DATA>(eventName, _event);
     }
     /**
@@ -267,7 +267,7 @@ export module EventHelper {
         Object.assign(_event, eventData);
         _event.protocol = eventName;
         _event.state = true;
-        LogHelper.print(eventName);
+        // LogHelper.print(eventName);
         CustomGameEventManager.Send_ServerToTeam<JS_TO_LUA_DATA>(team, eventName, _event);
     }
     /**
@@ -287,7 +287,7 @@ export module EventHelper {
         _event.protocol = eventName;
         _event.state = true;
         let player = PlayerResource.GetPlayer(playerid);
-        LogHelper.print(eventName);
+        // LogHelper.print(eventName);
         CustomGameEventManager.Send_ServerToPlayer<JS_TO_LUA_DATA>(player, eventName, _event);
     }
 

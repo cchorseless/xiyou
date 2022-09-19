@@ -12,6 +12,7 @@ export module ET {
     interface IEntityJson {
         _t: string;
         _id: string;
+        _p_instanceid?: string;
         Children?: { [K: string]: IEntityJson };
         C?: { [K: string]: IEntityJson };
         [K: string]: any;
