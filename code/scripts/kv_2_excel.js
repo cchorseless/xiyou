@@ -13,6 +13,7 @@ const old_sound_path = "game/scripts/custom_sounds.txt";
 const old_npc_out_path = "excels/dota/dota_units.xlsx";
 const old_ability_out_path = "excels/dota/dota_abilities.xlsx";
 const old_item_out_path = "excels/dota/dota_items.xlsx";
+const old_shipin_out_path = "excels/dota/dota_shipin.xlsx";
 const old_sound_out_path = "excels/sounds/custom_sounds.xlsx";
 
 let shiPinData = null;
@@ -60,7 +61,7 @@ function readDATA() {
 
     let _shipinobj = keyvalues.decode(fs.readFileSync(old_shipin_path, "utf8"));
     shiPinData = {};
-    let shipininfo= _shipinobj.items_game.items
+    let shipininfo = _shipinobj.items_game.items
     for (let k in shipininfo) {
         let _shipininfo = shipininfo[k];
         let used_by_heroes = _shipininfo.used_by_heroes;
@@ -446,25 +447,25 @@ function createSound() {
                             newRow[index] = ab_info;
                         }
                         break;
-                    // default:
-                    //     let index2 = keyrow.indexOf(ability_k);
-                    //     if (index2 > -1) {
-                    //         newRow[index2] = "" + ab_info;
-                    //     }
-                    //     break;
+                        // default:
+                        //     let index2 = keyrow.indexOf(ability_k);
+                        //     if (index2 > -1) {
+                        //         newRow[index2] = "" + ab_info;
+                        //     }
+                        //     break;
                 }
                 if (ability_k == "vsnd_files") {
-                        let index = keyrow.indexOf(ability_k);
-                        newRow[index] = "";
-                        let vsndinfo = ab_info.filter((ss) => {
-                            return ss != ",";
-                        });
-                        for (let index_kk of vsndinfo) {
-                            newRow[index] += index_kk;
-                            if (vsndinfo.indexOf(index_kk) != vsndinfo.length - 1) {
-                                newRow[index] += "\n";
-                            }
+                    let index = keyrow.indexOf(ability_k);
+                    newRow[index] = "";
+                    let vsndinfo = ab_info.filter((ss) => {
+                        return ss != ",";
+                    });
+                    for (let index_kk of vsndinfo) {
+                        newRow[index] += index_kk;
+                        if (vsndinfo.indexOf(index_kk) != vsndinfo.length - 1) {
+                            newRow[index] += "\n";
                         }
+                    }
                 }
             }
             rows.push(newRow);
@@ -474,13 +475,83 @@ function createSound() {
     fs.writeFileSync(old_sound_out_path, xlsx.build(sheets));
 }
 
+function createShiPin() {
+    let kv_s = fs.readFileSync(old_shipin_path, "utf8");
+    let obj = keyvalues.decode(kv_s);
+    let info = obj.items_game.items;
+    if (!fs.existsSync(old_shipin_out_path)) {
+        return;
+    }
+    let sheets = xlsx.parse(old_shipin_out_path);
+    if (sheets.length < 2) {
+        console.error("缺少参数表:", old_shipin_out_path);
+        return;
+    }
+    let sheet = sheets[0];
+    let rows = sheet.data;
+    let nrows = rows.length;
+    let keyrow = rows[1];
+    let sheet_param = sheets[1];
+    let rows_param = sheet_param.data;
+    //空两行
+    if (nrows > 2) {
+        rows.splice(2, nrows - 2)
+    }
+    let nameMap = {};
+    for (let k in info) {
+        let npcinfo = info[k];
+        if (npcinfo["name"] == null) {
+            continue;
+        }
+        nameMap[npcinfo["name"]] = k;
+    }
+    for (let k in info) {
+        let npcinfo = info[k];
+        if (npcinfo["used_by_heroes"] == null) {
+            continue;
+        }
+        let newRow = [k];
+        for (let npc_key in npcinfo) {
+            let value = npcinfo[npc_key];
+            let index = keyrow.indexOf(npc_key);
+            switch (npc_key) {
+                case "bundle":
+                    if (value != null && index > -1 && typeof value == "object") {
+                        let idlist = [];
+                        Object.keys(value).forEach(__key => {
+                            if (nameMap[__key]) {
+                                idlist.push(nameMap[__key]);
+                            }
+                        })
+                        newRow[index] = idlist.join("|");
+                    }
+                    break;
+                case "used_by_heroes":
+                    if (value != null && index > -1 && typeof value == "object") {
+                        newRow[index] = Object.keys(value).join("|");
+                    }
+                    break;
+                default:
+                    if (value != null && index > -1 && typeof value == "string") {
+                        newRow[index] = value;
+                    }
+                    break;
+            }
+        }
+        rows.push(newRow);
+        console.log(k);
+    }
+    fs.writeFileSync(old_shipin_out_path, xlsx.build(sheets));
+}
+
+
 (async () => {
     // var args = process.argv.splice(2);
     // readDATA();
     // createNpc()
 
 
-    createAbility()
+    createShiPin()
     // createItem()
     // createSound();
 })().catch((error) => {
