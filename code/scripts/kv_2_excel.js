@@ -591,7 +591,7 @@ function createShiPin() {
     // var args = process.argv.splice(2);
     // readDATA();
     // createNpc()
-    createShiPin()
+    // createShiPin()
     // createItem()
     // createSound();
 })().catch((error) => {

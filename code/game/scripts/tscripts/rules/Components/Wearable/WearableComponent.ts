@@ -1,16 +1,19 @@
 import { GameFunc } from "../../../GameFunc";
+import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { WearableConfig } from "../../System/Wearable/WearableConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
+import { EWearableItem } from "./EWearableItem";
 
 @registerET()
 export class WearableComponent extends ET.Component {
     readonly sHeroName: string;
-    replace_particles: { [k: string]: string } = {};
+    readonly replaceParticles: { [k: string]: string[] } = {};
     Slots: { [k: string]: WearableConfig.IUnitWearSlotInfo } = {};
     prismatic_particles: { [k: string]: any } = {};
     prismatic: string;
@@ -19,6 +22,7 @@ export class WearableComponent extends ET.Component {
     summon_model: { [k: string]: any } = {};
     new_projectile: string;
     old_model: string;
+
     GetHeroConfig() {
         let wearSys = GameRules.Addon.ETRoot.WearableSystem();
         return wearSys.Allheroes[this.sHeroName];
@@ -64,6 +68,22 @@ export class WearableComponent extends ET.Component {
         // let domain = this.GetDomain<BaseNpc_Plus>();
         // domain.NotifyWearablesOfModelChange(true)
         // },this)
+    }
+
+    AddRplaceParticles(oldP: string, newP: string) {
+        if (this.replaceParticles[oldP] == null) {
+            this.replaceParticles[oldP] = [];
+        }
+        this.replaceParticles[oldP].push(newP);
+    }
+    RemoveRplaceParticles(oldP: string, newP: string) {
+        if (this.replaceParticles[oldP] == null) {
+            return
+        }
+        let index = this.replaceParticles[oldP].indexOf(newP)
+        if (index > -1) {
+            this.replaceParticles[oldP].splice(index, 1)
+        }
     }
 
     FindModelEntity(modelName: string) {
@@ -149,7 +169,7 @@ export class WearableComponent extends ET.Component {
         return true;
     }
 
-    Wear(sItemDef: string | number, sStyle: string = null) {
+    Wear(sItemDef: string | number, sStyle: string = "0") {
         sItemDef = sItemDef + "";
         let wearSys = GameRules.Addon.ETRoot.WearableSystem();
         let hItem = wearSys.Allitems["" + sItemDef];
@@ -158,97 +178,15 @@ export class WearableComponent extends ET.Component {
             return;
         }
         if (hItem.prefab == WearableConfig.EWearableType.bundle) {
-            //  捆绑包
-            if (this.ShouldRespawnForItem(sItemDef)) {
-                this._WearRespawn(sItemDef);
-                return;
-            }
             for (let sSubItemDef of wearSys.Allbundles[sItemDef]) {
                 this.Wear(sSubItemDef);
             }
             return;
         }
-        if (!sStyle) {
-            sStyle = "0";
-        }
-        if (this.ShouldRespawnForItem(sItemDef)) {
-            this._WearRespawn(sItemDef, sSlotName, sStyle);
-        } else {
-            this._WearProp(sItemDef, sSlotName, sStyle);
-        }
-    }
-    //  判断换某个itemDef时是否需要重生，包括捆绑包
-    ShouldRespawnForItem(sItemDef: string | number) {
-        sItemDef = sItemDef + "";
-        if (Object.keys(this.Slots).length == 0) {
-            return false;
-        }
-        let bHasRespawnItem = false;
-        for (let _hWear of Object.values(this.Slots)) {
-            if (_hWear.bRespawnItem) {
-                bHasRespawnItem = true;
-                break;
-            }
-        }
-        let wearSys = GameRules.Addon.ETRoot.WearableSystem();
-        let hItem = wearSys.Allitems["" + sItemDef];
-        if (hItem.prefab == WearableConfig.EWearableType.bundle) {
-            if (wearSys.m_bRespawnWear) {
-                for (let sSubItemDef of wearSys.Allbundles[sItemDef]) {
-                    let sSubSlotName = this.GetSlotName(sSubItemDef);
-                    let hSubWearOld = this.Slots[sSubSlotName];
-                    if (hSubWearOld && hSubWearOld.bRespawnItem) {
-                        //  被替换的槽位中有重生饰品
-                        return true;
-                    } else if (wearSys.AllrespawnItems[sSubItemDef] == 1) {
-                        //  捆绑包中有重生饰品
-                        return true;
-                    }
-                }
-            } else {
-                if (bHasRespawnItem) {
-                    //  已关闭重生饰品模式，但原单位仍有重生饰品，需要重生一个默认单位
-                    return true;
-                }
-            }
-            return false;
-        }
-        let sSlotName = this.GetSlotName(sItemDef);
-        let hWearOld = this.Slots[sSlotName];
-        if (!wearSys.m_bRespawnWear && bHasRespawnItem) {
-            //  已关闭重生饰品模式，但原单位仍有重生饰品，需要重生一个默认单位
-            return true;
-        } else if (hWearOld && wearSys.m_bRespawnWear && hWearOld.bRespawnItem) {
-            //  被替换的槽位中有重生饰品，需要重生一个不包含该重生饰品的单位
-            return true;
-        } else if (wearSys.m_bRespawnWear) {
-            //  新饰品为重生饰品
-            return true;
-        } else {
-            return false;
-        }
+        this._WearProp(sItemDef, sSlotName, sStyle);
+
     }
 
-    //  判断换某套搭配时是否需要重生
-    ShouldRespawnForCombination(hCombination: { [k: string]: number }) {
-        for (let _hWear of Object.values(this.Slots)) {
-            if (_hWear.bRespawnItem) {
-                //  被替换的饰品中有重生饰品
-                return true;
-            }
-        }
-        let wearSys = GameRules.Addon.ETRoot.WearableSystem();
-        if (wearSys.m_bRespawnWear) {
-            for (let nSlotIndex = 0; nSlotIndex <= 10; nSlotIndex++) {
-                let nItemDef = hCombination["itemDef" + nSlotIndex];
-                if (wearSys.AllrespawnItems[tostring(nItemDef)] == 1) {
-                    //  搭配中有重生饰品
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
     GetPropClass(sItemDef: string) {
         if (sItemDef == "4810") {
             //  蝙蝠不良头巾需要物理
@@ -542,51 +480,43 @@ export class WearableComponent extends ET.Component {
     //         hTiny.SetModel(sModel)
     //         Wearable.SwitchTinyParticles(hTiny)
     //     }
-    GetRepawnUnitName(hNewWears: any) {
-        let sUnitName = this.GetDomain<BaseNpc_Plus>().GetUnitName();
-        let sUnitNameWithWear = sUnitName;
-        let wearSys = GameRules.Addon.ETRoot.WearableSystem();
-        for (let nSlotIndexNew = 0; nSlotIndexNew <= 10; nSlotIndexNew++) {
-            let sSlotNameNew = this.GetSlotNameBySlotIndex(nSlotIndexNew);
-            if (sSlotNameNew && hNewWears[sSlotNameNew] && this.IsDisplayInLoadout(sSlotNameNew)) {
-                let sItemDefNew = hNewWears[sSlotNameNew].sItemDef;
-                let sStyleNew = hNewWears[sSlotNameNew].sStyle;
-                if (wearSys.AllrespawnItems[sItemDefNew] == 1) {
-                    sUnitNameWithWear = sUnitNameWithWear + "__" + nSlotIndexNew + "_" + sItemDefNew;
+
+    SlotWears: { [slot: string]: string[] } = {}
+
+
+    GetWearConfig(sItemDef: string) {
+        return KVHelper.KvServerConfig.shipin_config[sItemDef];
+    }
+    public WearOneItem(sItemDef: string, sStyle: string = "0") {
+        if (!sItemDef) {
+            return;
+        }
+        let config = this.GetWearConfig(sItemDef);
+        if (!config) {
+            return;
+        }
+        let wearitem = this.FindWearItemByItemDef(sItemDef);
+        if (wearitem == null) {
+            let type = PrecacheHelper.GetRegClass<typeof EWearableItem>("EWearableItem");
+            wearitem = this.AddChild(type, sItemDef);
+        }
+        wearitem.dressUp(sStyle)
+    }
+    public FindWearItemByItemDef(sItemDef: string) {
+        if (!sItemDef) {
+            return;
+        }
+        for (let k in this.SlotWears) {
+            let keys = this.SlotWears[k];
+            for (let entityid of keys) {
+                let entity = this.GetChild<EWearableItem>(entityid);
+                if (entity && entity.itemDef == sItemDef) {
+                    return entity
                 }
             }
         }
-        return sUnitNameWithWear;
     }
 
-    //  通过重生带饰品的新单位来换装单件itemDef
-    private _WearRespawn(sItemDef: string, sSlotName: string = null, sStyle: string = null) {
-        this._WearProp(sItemDef, sSlotName, sStyle);
-
-        // let hNewWears = {}
-        // let hItem = this.GetItemConfig(sItemDef )
-        // for (let hWearOrigin of Object.values( hUnitOrigin.Slots)) {
-        //     hNewWears[sSlotNameOrigin] = {
-        //         sItemDef = hWearOrigin["itemDef"],
-        //         sStyle = "0"
-        //     }
-        // }
-        // if ( hItem.prefab == "bundle" ) {
-        //     for _, sSubItemDef in pairs(Wearable.bundles[sItemDef]) do
-        //         let sSubSlotName = Wearable.GetSlotName(sSubItemDef)
-        //         hNewWears[sSubSlotName] = {
-        //             sItemDef = sSubItemDef,
-        //             sStyle = "0"
-        //         }
-        //     }
-        // } else {
-        //     hNewWears[sSlotName] = {
-        //         sItemDef = sItemDef,
-        //         sStyle = "0"
-        //     }
-        // }
-        // this._WearItemsRespawn(hUnitOrigin, hNewWears)
-    }
 
     //  通过生成prop_dynamic来换装
     private _WearProp(sItemDef: string, sSlotName: string, sStyle: string = null) {

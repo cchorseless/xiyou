@@ -1,4 +1,5 @@
 // generate with PIPIXIA's kv generator 
+import { shipin_config } from "./kvConfig/shipin_config" 
 import { pool_config } from "./kvConfig/pool_config" 
 import { pool_group_config } from "./kvConfig/pool_group_config" 
 import { prop_config } from "./kvConfig/prop_config" 
@@ -19,6 +20,7 @@ import { building_config } from "./building/building_config"
 import { building_unit_summoned } from "./building/building_unit_summoned" 
 import { building_ability_tower } from "./building/building_ability_tower" 
 export interface KvAllInterface  {
+"shipin_config": shipin_config.OBJ_1_1,
 "pool_config": pool_config.OBJ_1_1,
 "pool_group_config": pool_group_config.OBJ_1_1,
 "prop_config": prop_config.OBJ_1_1,
@@ -40,6 +42,7 @@ export interface KvAllInterface  {
 "building_ability_tower": building_ability_tower.OBJ_1_1,
 }
 export const KvAllPath = {
+"shipin_config": "scripts/npc/kvConfig/shipin_config.kv",
 "pool_config": "scripts/npc/kvConfig/pool_config.kv",
 "pool_group_config": "scripts/npc/kvConfig/pool_group_config.kv",
 "prop_config": "scripts/npc/kvConfig/prop_config.kv",
@@ -61,6 +64,7 @@ export const KvAllPath = {
 "building_ability_tower": "scripts/npc/building/building_ability_tower.kv",
 }
 export interface KvServerInterface   {
+"shipin_config": shipin_config.OBJ_1_1,
 "pool_config": pool_config.OBJ_1_1,
 "pool_group_config": pool_group_config.OBJ_1_1,
 "prop_config": prop_config.OBJ_1_1,
@@ -82,6 +86,7 @@ export interface KvServerInterface   {
 "building_ability_tower": building_ability_tower.OBJ_1_1,
 }
 export const KvServer = {
+"shipin_config": "scripts/npc/kvConfig/shipin_config.kv",
 "pool_config": "scripts/npc/kvConfig/pool_config.kv",
 "pool_group_config": "scripts/npc/kvConfig/pool_group_config.kv",
 "prop_config": "scripts/npc/kvConfig/prop_config.kv",
@@ -103,6 +108,7 @@ export const KvServer = {
 "building_ability_tower": "scripts/npc/building/building_ability_tower.kv",
 }
 export interface KvClientInterface   {
+"shipin_config": shipin_config.OBJ_1_1,
 "pool_config": pool_config.OBJ_1_1,
 "pool_group_config": pool_group_config.OBJ_1_1,
 "prop_config": prop_config.OBJ_1_1,
@@ -124,6 +130,7 @@ export interface KvClientInterface   {
 "building_ability_tower": building_ability_tower.OBJ_1_1,
 }
 export const KvClient = {
+"shipin_config": "scripts/npc/kvConfig/shipin_config.kv",
 "pool_config": "scripts/npc/kvConfig/pool_config.kv",
 "pool_group_config": "scripts/npc/kvConfig/pool_group_config.kv",
 "prop_config": "scripts/npc/kvConfig/prop_config.kv",
