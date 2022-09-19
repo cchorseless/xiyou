@@ -479,6 +479,14 @@ function createShiPin() {
     let kv_s = fs.readFileSync(old_shipin_path, "utf8");
     let obj = keyvalues.decode(kv_s);
     let info = obj.items_game.items;
+    let _controlPoints = obj.items_game.attribute_controlled_attached_particles;
+    let new_controlPoints = {};
+    for (let k in _controlPoints) {
+        let _controlPointsInfo = _controlPoints[k];
+        if (_controlPointsInfo.system) {
+            new_controlPoints[_controlPointsInfo.system] = _controlPointsInfo;
+        }
+    }
     if (!fs.existsSync(old_shipin_out_path)) {
         return;
     }
@@ -531,6 +539,40 @@ function createShiPin() {
                         newRow[index] = Object.keys(value).join("|");
                     }
                     break;
+                case "visuals":
+                    if (value != null && typeof value == "object") {
+                        for (let modefi_k in value) {
+                            let modefi_v = value[modefi_k];
+                            if (modefi_k == "skin") {
+                                newRow[keyrow.indexOf("skin")] = modefi_v;
+                            } else if (modefi_k == "skip_model_combine") {
+                                newRow[keyrow.indexOf("skip_model_combine")] = modefi_v;
+                            } else if (modefi_k == ("styles")) {
+                                newRow[keyrow.indexOf("styles")] = JSON.stringify(modefi_v);
+                            } else if (modefi_k.includes("asset_modifier")) {
+                                let index_asset_modifier = keyrow.indexOf("asset_modifier")
+                                newRow[index_asset_modifier] = newRow[index_asset_modifier] || "";
+                                if (newRow[index_asset_modifier].length > 0) {
+                                    newRow[index_asset_modifier] += "|";
+                                }
+                                newRow[index_asset_modifier] += JSON.stringify(modefi_v);
+                                // 控制点
+                                if (modefi_v.type == "particle_create" && modefi_v.modifier) {
+                                    let control_point_info = new_controlPoints[modefi_v.modifier]
+                                    if (control_point_info) {
+                                        let index_control_point = keyrow.indexOf("control_point")
+                                        newRow[index_control_point] = newRow[index_control_point] || "";
+                                        if (newRow[index_control_point].length > 0) {
+                                            newRow[index_control_point] += "|";
+                                        }
+                                        newRow[index_control_point] += JSON.stringify(control_point_info);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                    break;
                 default:
                     if (value != null && index > -1 && typeof value == "string") {
                         newRow[index] = value;
@@ -549,8 +591,6 @@ function createShiPin() {
     // var args = process.argv.splice(2);
     // readDATA();
     // createNpc()
-
-
     createShiPin()
     // createItem()
     // createSound();

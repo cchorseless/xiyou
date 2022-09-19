@@ -18,26 +18,15 @@ export class WearableSystemComponent extends ET.Component {
     readonly DefaultPrismatic: { [k: string]: any } = {};
     readonly EtherealParticles: { [k: string]: any } = {};
     readonly EtherealParticle2Names: { [k: string]: any } = {};
-    readonly AllrespawnItems: { [k: string]: number };
+    readonly AllrespawnItems: { [k: string]: number } = {};
     readonly Allasset_modifiers: { [k: string]: number };
     readonly AllcontrolPoints: { [k: string]: any };
     // 重生饰品模式
     readonly m_bRespawnWear: boolean = true;
 
     public onAwake() {
-        (this as any).AllrespawnItems = LoadKeyValues("scripts/items/respawn_items.txt") || {};
-        (this as any).AllcontrolPoints = LoadKeyValues("scripts/items/control_points.txt") || {};
         this.LoadHero();
         this.LoadItem();
-        // TimerHelper.addTimer(5, () => {
-        //     HttpHelper.PostRequest("dota_respawnItems", this.AllrespawnItems, null, "http://127.0.0.1:3000/", "");
-        // });
-        // TimerHelper.addTimer(8, () => {
-        //     HttpHelper.PostRequest("dota_assetModifier", this.AllassetModifier, null, "http://127.0.0.1:3000/", "");
-        // });
-        // TimerHelper.addTimer(10, () => {
-        //     HttpHelper.PostRequest("dota_controlPoints", this.AllcontrolPoints, null, "http://127.0.0.1:3000/", "");
-        // });
     }
 
     LoadHero() {
@@ -71,6 +60,15 @@ export class WearableSystemComponent extends ET.Component {
     }
     LoadItem() {
         let items_game: { [k: string]: any } = LoadKeyValues("scripts/items/items_game.txt");
+        let _controlPoints = items_game.attribute_controlled_attached_particles;
+        let _new_controlPoints = {} as any;
+        for (let k in _controlPoints) {
+            let _controlPointsInfo = _controlPoints[k] as any;
+            if (_controlPointsInfo.system) {
+                _new_controlPoints[_controlPointsInfo.system] = _controlPointsInfo;
+            }
+        }
+        (this.AllcontrolPoints as any) = _new_controlPoints;
         let name2itemdef_Map: { [K: string]: number } = {};
         (this.Allitems as any) = items_game.items; //  所有饰品信息
         for (let itemDef in this.Allitems) {

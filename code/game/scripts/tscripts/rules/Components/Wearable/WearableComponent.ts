@@ -10,6 +10,7 @@ import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
 @registerET()
 export class WearableComponent extends ET.Component {
     readonly sHeroName: string;
+    replace_particles: { [k: string]: string } = {};
     Slots: { [k: string]: WearableConfig.IUnitWearSlotInfo } = {};
     prismatic_particles: { [k: string]: any } = {};
     prismatic: string;
@@ -220,7 +221,7 @@ export class WearableComponent extends ET.Component {
         } else if (hWearOld && wearSys.m_bRespawnWear && hWearOld.bRespawnItem) {
             //  被替换的槽位中有重生饰品，需要重生一个不包含该重生饰品的单位
             return true;
-        } else if (wearSys.m_bRespawnWear && wearSys.AllrespawnItems[sItemDef] == 1) {
+        } else if (wearSys.m_bRespawnWear) {
             //  新饰品为重生饰品
             return true;
         } else {
@@ -670,7 +671,8 @@ export class WearableComponent extends ET.Component {
                             this.summon_skin = style_table.skin;
                         }
                     }
-                } else if (am_table.type == "additional_wearable") {
+                }
+                else if (am_table.type == "additional_wearable") {
                     //  print("additional_wearable", am_table.asset)
                     //  额外模型
                     if (!hWear.additional_wearable) {
@@ -757,7 +759,7 @@ export class WearableComponent extends ET.Component {
                             this.AddParticle(hWear, particle_name, sSlotName, sStyle);
                         }
                     }
-                } else if (am_table.type == "particle_replace") {
+                } else if (am_table.type == "particle") {
                     //  替换其他饰品的周身特效
                     if ((!am_table.style || tostring(am_table.style) == sStyle) && !am_table.spawn_in_loadout_only) {
                         let default_particle_name = am_table.asset;
@@ -828,7 +830,6 @@ export class WearableComponent extends ET.Component {
         this.Slots[sSlotName] = hWear;
         this.SpecialFixParticles(sItemDef, hWear, sSlotName, sStyle);
         // this.RefreshSpecial(hUnit)
-
         if (nModelIndex > 0) {
             // Wearable.SwitchTinyParticles(hUnit)
         }
