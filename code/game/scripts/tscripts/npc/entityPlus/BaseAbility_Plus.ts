@@ -106,14 +106,13 @@ export class BaseAbility_Plus extends BaseAbility {
 
     /**技能ICON */
     public GetAbilityTextureName(): string {
-        // 默认使用dota默认技能ICON
-        if (this.__IN_DOTA_NAME__) { return this.__IN_DOTA_NAME__ };
-        let iconpath = ResHelper.GetAbilityTextureReplacement('', this.GetCaster())
-        if (!iconpath || iconpath == '') {
-            iconpath = super.GetAbilityTextureName()
+        let iconpath = super.GetAbilityTextureName();
+        if (iconpath == null || iconpath == '') {
+            iconpath = this.__IN_DOTA_NAME__ || "";
         }
-        return iconpath;
+        return ResHelper.GetAbilityTextureReplacement(iconpath, this.GetCaster())
     }
+
     /**默认值 */
     public __DefaultSpecialValue__: { [k: string]: number | number[] };
     /**

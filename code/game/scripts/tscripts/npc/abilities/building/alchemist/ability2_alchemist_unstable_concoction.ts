@@ -40,9 +40,7 @@ export class ability2_alchemist_unstable_concoction extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_alchemist_unstable_concoction = Data_alchemist_unstable_concoction;
 
-    GetAbilityTextureName() {
-        return ResHelper.GetAbilityTextureReplacement(super.GetAbilityTextureName(), this.GetCasterPlus());
-    }
+
     GetCastRange(vLocation: Vector, hTarget: BaseNpc_Plus) {
         return this.GetSpecialValueFor("radius");
     }
@@ -152,7 +150,7 @@ export class modifier_alchemist_2 extends BaseModifier_Plus {
         if (GameFunc.IsValid(hAttacker) && hAttacker.GetTeamNumber() != hKilled.GetTeamNumber()) {
             let hSource = hAttacker.GetSource();
             if (hSource == hParent || (this.death_radius > 0 && CalcDistanceBetweenEntityOBB(hKilled, hParent) <= this.death_radius)) {
-                hParent.AddNewModifier(hParent, hAbility, "modifier_alchemist_2_buff", { duration : this.duration });
+                hParent.AddNewModifier(hParent, hAbility, "modifier_alchemist_2_buff", { duration: this.duration });
             }
         }
     }

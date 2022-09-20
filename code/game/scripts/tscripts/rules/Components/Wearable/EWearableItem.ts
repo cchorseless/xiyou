@@ -10,8 +10,10 @@ export class EWearableItem extends ET.Entity {
     readonly isDressUp: boolean = false;
     readonly itemDef: string;
     readonly replaceParticles: { [k: string]: string } = {};
+    readonly replaceSounds: { [k: string]: string } = {};
+    readonly replaceAbilityIcon: { [k: string]: string } = {};
     readonly createParticles: { [k: string]: ParticleID } = {};
-    // 未改变，召唤物或者英雄变身
+    // 未改变模型，召唤物或者英雄变身
     readonly replaceModel: { [k: string]: string } = {};
     // 已经改变
     readonly alreadyReplaceModel: { [k: string]: string } = {};
@@ -480,14 +482,16 @@ export class EWearableItem extends ET.Entity {
                             this.replaceModel[am_table.asset] = am_table.modifier;
                         }
                     }
-                } else if (am_table.type == "hero_model_change") {
+                }
+                else if (am_table.type == "hero_model_change") {
                     //  更换英雄变身模型
                     if (!am_table.style || tostring(am_table.style) == sStyle) {
                         if (am_table.asset && am_table.modifier) {
                             this.replaceModel[am_table.asset] = am_table.modifier;
                         }
                     }
-                } else if (am_table.type == "model") {
+                }
+                else if (am_table.type == "model") {
                     //  更换其他饰品模型
                     if (!am_table.style || tostring(am_table.style) == sStyle) {
                         let entity = comp.FindWearItemByModel(am_table.asset);
@@ -527,6 +531,22 @@ export class EWearableItem extends ET.Entity {
                         // ActivityModifier.AddWearableActivity(hUnit, am_table.modifier, sItemDef);
                     }
                 }
+                else if (am_table.type == "sound") {
+                    //  修改音效
+                    let old_sound = am_table.asset;
+                    let new_sound = am_table.modifier;
+                    if (old_sound && new_sound) {
+                        this.replaceSounds[old_sound] = new_sound;
+                    }
+                }
+                else if (am_table.type == "ability_icon") {
+                    //  修改音效
+                    let old_ = am_table.asset;
+                    let new_ = am_table.modifier;
+                    if (old_ && new_) {
+                        this.replaceAbilityIcon[old_] = new_;
+                    }
+                }
             }
         }
         // this.RefreshSpecial(hUnit)
@@ -556,6 +576,8 @@ export class EWearableItem extends ET.Entity {
         (this.alreadyReplaceModel as any) = {};
         (this.createParticles as any) = {};
         (this.replaceParticles as any) = {};
+        (this.replaceSounds as any) = {};
+        (this.replaceAbilityIcon as any) = {};
         (this.replaceModel as any) = {};
         if (this.additional_wearable) {
             for (let prop of this.additional_wearable) {

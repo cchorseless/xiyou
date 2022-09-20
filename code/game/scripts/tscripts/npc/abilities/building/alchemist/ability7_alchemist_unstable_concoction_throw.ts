@@ -37,9 +37,7 @@ export class ability7_alchemist_unstable_concoction_throw extends BaseAbility_Pl
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_alchemist_unstable_concoction_throw = Data_alchemist_unstable_concoction_throw;
 
-    GetAbilityTextureName() {
-        return ResHelper.GetAbilityTextureReplacement(super.GetAbilityTextureName(), this.GetCasterPlus());
-    }
+
     CastFilterResultTarget(hTarget: BaseNpc_Plus) {
         let hCaster = this.GetCasterPlus();
         let iPlayerID = hCaster.GetPlayerOwnerID();

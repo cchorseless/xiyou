@@ -42,9 +42,7 @@ export class ability6_alchemist_chemical_rage extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_alchemist_chemical_rage = Data_alchemist_chemical_rage;
 
-    GetAbilityTextureName() {
-        return ResHelper.GetAbilityTextureReplacement(super.GetAbilityTextureName(), this.GetCasterPlus());
-    }
+
     OnSpellStart() {
         let hCaster = this.GetCasterPlus();
         let duration = this.GetSpecialValueFor("duration");

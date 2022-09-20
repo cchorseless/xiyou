@@ -76,7 +76,7 @@ export class WearableComponent extends ET.Component {
             }
         }
     }
-    //  是否子槽位
+    //  是否子槽位 todo
     IsPersona(sSlotName: string) {
         return string.sub(sSlotName, -10) == "_persona_1";
     }
@@ -129,6 +129,19 @@ export class WearableComponent extends ET.Component {
                 return entity;
             }
         }
+    }
+    public GetAllDressWearItem() {
+        let r: EWearableItem[] = [];
+        for (let sSlotName in this.SlotWears) {
+            let entityids = this.SlotWears[sSlotName];
+            for (let entityid of entityids) {
+                let entity = this.GetChild<EWearableItem>(entityid);
+                if (entity.isDressUp) {
+                    r.push(entity);
+                }
+            }
+        }
+        return r;
     }
     private WearOneItem(sItemDef: string, sStyle: string = "0") {
         if (!sItemDef) {
@@ -202,4 +215,40 @@ export class WearableComponent extends ET.Component {
         }
     }
 
+    public GetAbilityTextureReplacement(str: string) {
+        let all = this.GetAllDressWearItem();
+        for (let entity of all) {
+            if (entity.replaceAbilityIcon[str]) {
+                return entity.replaceAbilityIcon[str];
+            }
+        }
+        return str;
+    }
+    public GetSoundReplacement(str: string) {
+        let all = this.GetAllDressWearItem();
+        for (let entity of all) {
+            if (entity.replaceSounds[str]) {
+                return entity.replaceSounds[str];
+            }
+        }
+        return str;
+    }
+    public GetModelReplacement(str: string) {
+        let all = this.GetAllDressWearItem();
+        for (let entity of all) {
+            if (entity.replaceModel[str]) {
+                return entity.replaceModel[str];
+            }
+        }
+        return str;
+    }
+    public GetParticleReplacement(str: string) {
+        let all = this.GetAllDressWearItem();
+        for (let entity of all) {
+            if (entity.replaceParticles[str]) {
+                return entity.replaceParticles[str];
+            }
+        }
+        return str;
+    }
 }

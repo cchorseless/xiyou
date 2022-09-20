@@ -1,31 +1,50 @@
 import { BaseNpc_Plus } from "../npc/entityPlus/BaseNpc_Plus";
+import { WearableComponent } from "../rules/Components/Wearable/WearableComponent";
 import { LogHelper } from "./LogHelper";
 import { TimerHelper } from "./TimerHelper";
 
 export module ResHelper {
-    export function GetAbilityTextureReplacement(res: string, npc: BaseNpc_Plus = null): string {
-        if (res && res.length > 0) {
-            return res;
+    export function GetAbilityTextureReplacement(res: string, npc: BaseNpc_Plus): string {
+        if (npc && npc.ETRoot) {
+            let wearComp = npc.ETRoot.GetComponentByName<WearableComponent>("WearableComponent");
+            if (wearComp) {
+                return wearComp.GetAbilityTextureReplacement(res)
+            }
         }
+        return res;
     }
 
-    export function GetSoundReplacement(res: string, npc: BaseNpc_Plus = null): string {
-        if (res && res.length > 0) {
-            return res;
+    export function GetSoundReplacement(res: string, npc: BaseNpc_Plus): string {
+        if (npc && npc.ETRoot) {
+            let wearComp = npc.ETRoot.GetComponentByName<WearableComponent>("WearableComponent");
+            if (wearComp) {
+                return wearComp.GetSoundReplacement(res)
+            }
         }
+        return res;
     }
 
-    export function GetModelReplacement(res: string, npc: BaseNpc_Plus = null): string {
-        if (res && res.length > 0) {
-            return res;
+    export function GetModelReplacement(res: string, npc: BaseNpc_Plus): string {
+        if (npc && npc.ETRoot) {
+            let wearComp = npc.ETRoot.GetComponentByName<WearableComponent>("WearableComponent");
+            if (wearComp) {
+                return wearComp.GetModelReplacement(res)
+            }
         }
+        return res;
     }
 
-    export function GetParticleReplacement(res: string, npc: BaseNpc_Plus = null): string {
-        if (res && res.length > 0) {
-            return res;
+    export function GetParticleReplacement(res: string, npc: BaseNpc_Plus): string {
+        if (npc && npc.ETRoot) {
+            let wearComp = npc.ETRoot.GetComponentByName<WearableComponent>("WearableComponent");
+            if (wearComp) {
+                return wearComp.GetParticleReplacement(res)
+            }
         }
+        return res;
     }
+
+
 
     export enum PARTICLE_DETAIL_LEVEL {
         PARTICLE_DETAIL_LEVEL_NONE,

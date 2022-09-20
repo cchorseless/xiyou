@@ -34,9 +34,6 @@ export class ability1_alchemist_acid_spray extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_alchemist_acid_spray = Data_alchemist_acid_spray;
 
-    GetAbilityTextureName() {
-        return ResHelper.GetAbilityTextureReplacement(super.GetAbilityTextureName(), this.GetCasterPlus());
-    }
     GetCastRange(vLocation: Vector, hTarget: BaseNpc_Plus) {
         return this.GetSpecialValueFor("radius");
     }

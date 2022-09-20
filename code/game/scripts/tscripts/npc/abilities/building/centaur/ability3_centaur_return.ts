@@ -40,7 +40,7 @@ export class ability3_centaur_return extends BaseAbility_Plus {
         let duration = this.GetSpecialValueFor("damage_gain_duration")
         let hModifier = modifier_centaur_3.findIn(hCaster)
         if (GameFunc.IsValid(hModifier)) {
-            hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Centaur.Retaliate.Cast"))
+            hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Centaur.Retaliate.Cast", hCaster))
             modifier_centaur_3_buff.apply(hCaster, hCaster, this, { duration: duration, modifier_count: hModifier.GetStackCount() })
             hModifier.SetStackCount(0)
         }
