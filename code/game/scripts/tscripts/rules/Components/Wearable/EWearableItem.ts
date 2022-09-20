@@ -25,6 +25,7 @@ export class EWearableItem extends ET.Entity {
     bActivity?: boolean;
     model?: CBaseModelEntity;
     additional_wearable?: CBaseModelEntity[];
+    addBuff?: CDOTA_Buff[];
     onAwake(itemDef: string) {
         (this.itemDef as any) = itemDef;
     }
@@ -546,6 +547,14 @@ export class EWearableItem extends ET.Entity {
                     if (old_ && new_) {
                         this.replaceAbilityIcon[old_] = new_;
                     }
+                } else if (am_table.type == "buff_modifier") {
+                    //  添加BUFF
+                    let new_ = am_table.modifier;
+                    if (new_) {
+                        let buff = hUnit.AddNewModifier(hUnit, null, new_, {});
+                        this.addBuff = this.addBuff || [];
+                        this.addBuff.push(buff);
+                    }
                 }
             }
         }
@@ -612,6 +621,9 @@ export class EWearableItem extends ET.Entity {
             this.bPersona = false;
             // SlotInfo.bPersona = null; //  防止stack overflow
         }
-
+        if (this.addBuff) {
+            this.addBuff.forEach(buff => { buff.Destroy() });
+            this.addBuff = null;
+        }
     }
 }
