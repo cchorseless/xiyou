@@ -22,6 +22,7 @@ export module ET {
     interface IEntityProperty {
         InstanceId: string;
         Id: string;
+        P_InstanceId?: string;
         NetTableName?: string;
         IsRegister: boolean;
         Parent: Entity | null;
@@ -81,6 +82,7 @@ export module ET {
         public readonly InstanceId: string;
         public readonly Id: string;
         public readonly NetTableName: string;
+        public readonly P_InstanceId: string;
         public readonly IsRegister: boolean = false;
         public readonly IsComponent: boolean = false;
         public readonly Parent: Entity;
@@ -210,6 +212,7 @@ export module ET {
                 entity = Entity.Create(type);
                 (entity as IEntityProperty).Id = json._id;
                 (entity as IEntityProperty).NetTableName = json._nettable;
+                (entity as IEntityProperty).P_InstanceId = json._p_instanceid;
                 entity.setDomain(SceneRoot.GetInstance());
             }
             entity.updateFromJson(json);

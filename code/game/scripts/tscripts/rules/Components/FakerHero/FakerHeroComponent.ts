@@ -24,7 +24,7 @@ export class FakerHeroComponent extends ET.Component {
             let player = this.Domain.ETRoot.AsPlayer();
             let spawn = GameRules.Addon.ETRoot.MapSystem().getFakerHeroSpawnPoint(player.Playerid);
             (this as any).FakerHero = unit_base_baoxiang.CreateOne(spawn, DOTATeam_t.DOTA_TEAM_BADGUYS, true);
-            FakerHeroEntityRoot.Active(this.FakerHero);
+            FakerHeroEntityRoot.Active(this.FakerHero, player.Playerid, "unit_base_baoxiang");
         }
     }
 

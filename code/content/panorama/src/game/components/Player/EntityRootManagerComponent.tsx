@@ -5,6 +5,7 @@ import { PlayerConfig } from "../../system/Player/PlayerConfig";
 import { AbilityEntityRoot } from "../Ability/AbilityEntityRoot";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
+import { FakerHeroEntityRoot } from "../FakerHero/FakerHeroEntityRoot";
 import { PlayerEntityRoot } from "./PlayerEntityRoot";
 import { PlayerScene } from "./PlayerScene";
 
@@ -14,6 +15,7 @@ export class EntityRootManagerComponent extends ET.Component {
     readonly AllBuilding: { [entityid: string]: string } = {};
     readonly AllEnemy: { [entityid: string]: string } = {};
     readonly AllAbility: { [playerid: string]: string } = {};
+    readonly AllFakerHero: { [playerid: string]: string } = {};
 
     onAwake() {
         let maxPlayers = Players.GetMaxPlayers();
@@ -38,6 +40,19 @@ export class EntityRootManagerComponent extends ET.Component {
         this.AllPlayers[playerid] = player.Id;
     }
 
+    getFakerHero(entityIndex: number | string) {
+        let entityid = this.AllFakerHero[entityIndex + ""];
+        if (entityid) {
+            return this.GetChild<FakerHeroEntityRoot>(entityid);
+        }
+    }
+
+    addFakerHero(b: FakerHeroEntityRoot) {
+        this.AllFakerHero[b.EntityId + ""] = b.Id;
+        this.AddOneChild(b);
+    }
+
+
     addAbility(b: AbilityEntityRoot) {
         this.AllAbility[b.EntityId + ""] = b.Id;
         this.AddOneChild(b);
@@ -46,8 +61,8 @@ export class EntityRootManagerComponent extends ET.Component {
         delete this.AllAbility[b.EntityId];
         b.Dispose();
     }
-    getAbility(entity: number | string) {
-        let entityid = this.AllAbility[entity + ""];
+    getAbility(entityIndex: number | string) {
+        let entityid = this.AllAbility[entityIndex + ""];
         if (entityid) {
             return this.GetChild<AbilityEntityRoot>(entityid);
         }
@@ -61,8 +76,8 @@ export class EntityRootManagerComponent extends ET.Component {
         delete this.AllBuilding[b.EntityId];
         b.Dispose();
     }
-    getBuilding(entity: number | string) {
-        let entityid = this.AllBuilding[entity + ""];
+    getBuilding(entityIndex: number | string) {
+        let entityid = this.AllBuilding[entityIndex + ""];
         if (entityid) {
             return this.GetChild<BuildingEntityRoot>(entityid);
         }
@@ -77,8 +92,8 @@ export class EntityRootManagerComponent extends ET.Component {
         delete this.AllEnemy[b.EntityId];
         b.Dispose();
     }
-    getEnemy(entity: number | string) {
-        let entityid = this.AllEnemy[entity + ""];
+    getEnemy(entityIndex: number | string) {
+        let entityid = this.AllEnemy[entityIndex + ""];
         if (entityid) {
             return this.GetChild<EnemyUnitEntityRoot>(entityid);
         }

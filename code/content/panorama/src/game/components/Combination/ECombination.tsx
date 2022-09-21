@@ -3,11 +3,10 @@ import { PlayerScene } from "../Player/PlayerScene";
 
 
 @registerET()
-export class CombinationManagerComponent extends ET.Component {
+export class ECombination extends ET.Entity {
     onSerializeToEntity(): void {
         if (this.IsFromLocalNetTable()) {
-            PlayerScene.Local.AddOneComponent(this);
+            PlayerScene.Local.CombinationManager.AddOneChild(this);
         }
     }
-
 }

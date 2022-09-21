@@ -1,13 +1,10 @@
 import { ET, registerET } from "../../../libs/Entity";
-import { PlayerConfig } from "../../system/Player/PlayerConfig";
+import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
 
 @registerET()
-export class EnemyUnitEntityRoot extends ET.Entity implements PlayerConfig.I.INetTableETEntity {
-    EntityId: EntityIndex;
-    Playerid: PlayerID;
-    ConfigID: string;
+export class EnemyUnitEntityRoot extends PlayerCreateUnitEntityRoot {
 
     onSerializeToEntity() {
         PlayerScene.EntityRootManage.addEnemy(this);

@@ -13,8 +13,10 @@ import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
 @registerET()
 export class CombinationManagerComponent extends ET.Component {
+    public readonly IsSerializeEntity: boolean = true;
     onAwake(): void {
         this.addEvent();
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this, true);
         let config = KVHelper.KvServerConfig.building_combination_ability;
         let type = PrecacheHelper.GetRegClass<typeof ECombination>("ECombination");
         for (let key in config) {

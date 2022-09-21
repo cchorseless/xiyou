@@ -5,19 +5,21 @@ import { ET, registerET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { RoundConfig } from "../../System/Round/RoundConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
-import { ECombination } from "../Combination/ECombination";
 import { ECombinationLabelItem } from "../Combination/ECombinationLabelItem";
 import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { FakerHeroEntityRoot } from "./FakerHeroEntityRoot";
+import { FHeroCombination } from "./FHeroCombination";
 
 
 @registerET()
 export class FHeroCombinationManagerComponent extends ET.Component {
+    public readonly IsSerializeEntity: boolean = true;
+
     onAwake(): void {
         this.addEvent();
         let config = KVHelper.KvServerConfig.building_combination_ability;
-        let type = PrecacheHelper.GetRegClass<typeof ECombination>("ECombination");
+        let type = PrecacheHelper.GetRegClass<typeof FHeroCombination>("FHeroCombination");
         for (let key in config) {
             let info = config[key];
             this.allCombination[info.relation] = this.allCombination[info.relation] || {};
@@ -49,7 +51,7 @@ export class FHeroCombinationManagerComponent extends ET.Component {
     }
 
 
-    private allCombination: { [k: string]: { [k: string]: ECombination } } = {};
+    private allCombination: { [k: string]: { [k: string]: FHeroCombination } } = {};
     public addEnemyUnit(entity: EnemyUnitEntityRoot) {
         let comb = entity.CombinationComp();
         if (comb == null) {

@@ -5,6 +5,10 @@ import { ET, serializeETProps } from "../../Entity/Entity";
 import { PlayerCreateUnitEntityRoot, PlayerCreateUnitType } from "../Player/PlayerCreateUnitEntityRoot";
 
 export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
+    public readonly IsSerializeEntity: boolean = true;
+
+    Sync
+
     onAwake() {
         let ability = this.GetDomain<BaseAbility_Plus>();
         (this as any).Playerid = ability.GetOwnerPlus().GetPlayerOwnerID();

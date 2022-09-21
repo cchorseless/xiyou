@@ -16,6 +16,7 @@ import { EnemyMoveComponent } from "./Components/Enemy/EnemyMoveComponent";
 import { EnemyPropsComponent } from "./Components/Enemy/EnemyPropsComponent";
 import { EnemyUnitComponent } from "./Components/Enemy/EnemyUnitComponent";
 import { FakerHeroComponent } from "./Components/FakerHero/FakerHeroComponent";
+import { FHeroCombination } from "./Components/FakerHero/FHeroCombination";
 import { FHeroCombinationManagerComponent } from "./Components/FakerHero/FHeroCombinationManagerComponent";
 import { ItemManagerComponent } from "./Components/Item/ItemManagerComponent";
 import { PlayerDataComponent } from "./Components/Player/PlayerDataComponent";
@@ -68,6 +69,7 @@ import { WearableSystemComponent } from "./System/Wearable/WearableSystemCompone
     ChessControlComponent,
     EnemyManagerComponent,
     FakerHeroComponent,
+    FHeroCombination,
     FHeroCombinationManagerComponent,
 
     BuildingComponent,

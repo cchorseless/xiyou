@@ -3,6 +3,7 @@ import { ET, registerET } from "../../../libs/Entity";
 import { TCharacter } from "../../service/account/TCharacter";
 import { PlayerConfig } from "../../system/Player/PlayerConfig";
 import { ChessControlComponent } from "../ChessControlComponent";
+import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";
 import { DrawComponent } from "../DrawComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerDataComponent } from "./PlayerDataComponent";
@@ -39,6 +40,9 @@ export class PlayerEntityRoot extends ET.Entity {
 
     get ChessControlComp() {
         return this.GetComponentByName<ChessControlComponent>("ChessControlComponent")!;
+    }
+    get CombinationManager() {
+        return this.GetComponentByName<CombinationManagerComponent>("CombinationManagerComponent")!;
     }
 
     get RoundManagerComp() {

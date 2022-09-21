@@ -14,15 +14,26 @@ import { ERoundBoard } from "./components/Round/ERoundBoard";
 import { RoundManagerComponent } from "./components/Round/RoundManagerComponent";
 import { ServiceEntity } from "./service/ServiceEntity";
 import { PlayerEntityRoot } from "./components/Player/PlayerEntityRoot";
+import { CombinationManagerComponent } from "./components/Combination/CombinationManagerComponent";
+import { ECombination } from "./components/Combination/ECombination";
+import { FakerHeroEntityRoot } from "./components/FakerHero/FakerHeroEntityRoot";
+import { FHeroCombination } from "./components/FakerHero/FHeroCombination";
+import { FHeroCombinationManagerComponent } from "./components/FakerHero/FHeroCombinationManagerComponent";
 
 AbilityEntityRoot;
 BuildingEntityRoot;
 BuildingComponent;
 BuildingManagerComponent;
 
+CombinationManagerComponent;
+ECombination;
+
 EnemyUnitEntityRoot;
 EnemyUnitComponent;
 
+FakerHeroEntityRoot;
+FHeroCombinationManagerComponent;
+FHeroCombination;
 
 ChessControlComponent;
 DrawComponent;
