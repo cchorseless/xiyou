@@ -30,7 +30,7 @@ export module KVHelper {
             if (Object.keys(KvServer).length == 0) {
                 return;
             }
-            for (k as any in KvServer) {
+            for (k in KvServer) {
                 (KvServerConfig as any)[k] = LoadKeyValues(KvServer[k]);
                 LogHelper.print("Server LoadKeyValues Finish:", k);
             }

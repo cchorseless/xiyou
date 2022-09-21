@@ -461,7 +461,7 @@ function single_excel_to_kv(file) {
     let out_dir = outpath.substr(0, parent_i);
     if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir);
     let r_s = "// generate with PIPIXIA's kv generator \n\n" + parse_paramSheetBaseData(sheet_param);
-    r_s += keyvalues.encode(result);
+    r_s += keyvalues.encode(result).replace(/\\\"/g, "'");
     fs.writeFileSync(outpath, r_s);
     console.log('success xlsx->kv', outpath);
     createLanguageTXT(file, rows)

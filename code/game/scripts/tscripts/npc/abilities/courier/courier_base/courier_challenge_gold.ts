@@ -3,7 +3,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { EntityHelper } from "../../../../helper/EntityHelper";
 import { KVHelper } from "../../../../helper/KVHelper";
 import { LogHelper } from "../../../../helper/LogHelper";
-import { NetTablesHelper } from "../../../../helper/NetTablesHelper";
 import { TimerHelper } from "../../../../helper/TimerHelper";
 import { AbilityEntityRoot } from "../../../../rules/Components/Ability/AbilityEntityRoot";
 import { serializeDomainProps } from "../../../../rules/Entity/Entity";
@@ -24,7 +23,7 @@ export class courier_challenge_gold extends ActiveRootAbility {
     costCount: number = 0;
     updateNetTable() {
         this.costCount = this.GetLevel() * 100;
-        NetTablesHelper.SetETEntity(this.ETRoot, true, this.GetOwnerPlus().GetPlayerOwnerID());
+        this.ETRoot.SyncClientEntity(this.ETRoot, true);
     }
 
     CastFilterResult(): UnitFilterResult {

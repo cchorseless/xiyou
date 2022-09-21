@@ -73,6 +73,7 @@ export module NetHelper {
         }
         return obj;
     }
+    
     export function GetOneTable(tableName: ENetTables) {
         return CustomNetTables.GetAllTableValues(tableName as never) as { key: string; value: any }[];
     }

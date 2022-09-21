@@ -26,6 +26,7 @@ import { RoundBuildingComponent } from "./Components/Round/RoundBuildingComponen
 import { RoundEnemyComponent } from "./Components/Round/RoundEnemyComponent";
 import { RoundManagerComponent } from "./Components/Round/RoundManagerComponent";
 import { RoundPrizeUnitKillPrizeComponent } from "./Components/Round/RoundPrizeUnitKillPrizeComponent";
+import { EWearableItem } from "./Components/Wearable/EWearableItem";
 import { WearableComponent } from "./Components/Wearable/WearableComponent";
 import { BuildingSystemComponent } from "./System/Building/BuildingSystemComponent";
 import { ChessControlSystemComponent } from "./System/ChessControl/ChessControlSystemComponent";
@@ -68,6 +69,7 @@ import { WearableSystemComponent } from "./System/Wearable/WearableSystemCompone
     BuildingManagerComponent,
     ChessControlComponent,
     EnemyManagerComponent,
+    
     FakerHeroComponent,
     FHeroCombination,
     FHeroCombinationManagerComponent,
@@ -81,6 +83,7 @@ import { WearableSystemComponent } from "./System/Wearable/WearableSystemCompone
     EnemyMoveComponent,
     EnemyPropsComponent,
 
+    EWearableItem,
     WearableComponent,
     WearableSystemComponent,
 ];

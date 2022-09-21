@@ -19,6 +19,12 @@ export class PlayerCreateUnitEntityRoot extends ET.EntityRoot {
     public GetPlayer() {
         return GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.Playerid);
     }
+    public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
+        this.GetPlayer().SyncClientEntity(obj, ignoreChild);
+    }
+    public DelClientEntity(obj: ET.Entity): void {
+        NetTablesHelper.DelETEntity(obj, this.Playerid);
+    }
     public Dispose(): void {
         if (this.IsDisposed()) { return };
         NetTablesHelper.DelETEntity(this, this.Playerid);

@@ -77,7 +77,7 @@ export class DrawComponent extends ET.Component {
         }
         this.tLastCards = [].concat(r_arr);
         let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
-        NetTablesHelper.SetETEntity(this, false, playerid);
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this);
         EventHelper.fireProtocolEventToPlayer(DrawConfig.EProtocol.DrawCardResult, null, playerid);
     }
 
@@ -163,8 +163,7 @@ export class DrawComponent extends ET.Component {
         //     this.tLastCards[iPlayerID] = {};
         //     this.UpdateNetTables();
         // }
-        let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
-        NetTablesHelper.SetETEntity(this, false, playerid);
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this);
         return [true, ""];
     }
     // 开局选卡

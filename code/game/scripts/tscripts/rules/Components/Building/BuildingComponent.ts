@@ -1,5 +1,4 @@
 import { GameFunc } from "../../../GameFunc";
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
@@ -38,14 +37,9 @@ export class BuildingComponent extends ET.Component {
         );
     }
 
-    updateNetTable() {
-        this.Domain.ETRoot.As<BuildingEntityRoot>().GetPlayer().SyncClientEntity(this);
-    }
-
-
 
     Dispose(): void {
-        NetTablesHelper.DelETEntity(this, this.Domain.ETRoot.As<BuildingEntityRoot>().Playerid);
+        this.Domain.ETRoot.As<BuildingEntityRoot>().DelClientEntity(this);
         super.Dispose();
     }
 
@@ -97,6 +91,6 @@ export class BuildingComponent extends ET.Component {
         // 技能升级
         building.AbilityManagerComp().levelUpAllAbility();
         // 通知跑马灯
-        this.updateNetTable();
+        this.Domain.ETRoot.As<BuildingEntityRoot>().SyncClientEntity(this);
     }
 }

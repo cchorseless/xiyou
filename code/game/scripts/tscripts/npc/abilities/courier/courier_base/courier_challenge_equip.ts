@@ -1,7 +1,6 @@
 
 import { GameEnum } from "../../../../GameEnum";
 import { LogHelper } from "../../../../helper/LogHelper";
-import { NetTablesHelper } from "../../../../helper/NetTablesHelper";
 import { AbilityEntityRoot } from "../../../../rules/Components/Ability/AbilityEntityRoot";
 import { serializeDomainProps } from "../../../../rules/Entity/Entity";
 import { DifficultyState } from "../../../../rules/System/Difficulty/DifficultyState";
@@ -37,7 +36,7 @@ export class courier_challenge_equip extends ActiveRootAbility {
     costCount: number = 0;
     updateNetTable() {
         this.costCount = this.GetLevel() * 50;
-        NetTablesHelper.SetETEntity(this.ETRoot, true, this.GetOwnerPlus().GetPlayerOwnerID());
+        this.ETRoot.SyncClientEntity(this.ETRoot, true);
     }
     OnSpellStart() {
         let caster = this.GetCasterPlus();

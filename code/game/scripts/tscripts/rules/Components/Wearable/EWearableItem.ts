@@ -1,4 +1,5 @@
 import { GameFunc } from "../../../GameFunc";
+import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { WearableConfig } from "../../System/Wearable/WearableConfig";
@@ -406,7 +407,9 @@ export class EWearableItem extends ET.Entity {
             }
             this.model = hModel;
         }
-        this.model.RemoveEffects(EntityEffects.EF_NODRAW);
+        if (this.model) {
+            this.model.RemoveEffects(EntityEffects.EF_NODRAW);
+        }
         // 款式
         if (config.styles) {
             let styleinfo = json.decode(config.styles)[0];

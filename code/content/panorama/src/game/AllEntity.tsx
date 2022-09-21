@@ -4,7 +4,7 @@ import { BuildingComponent } from "./components/Building/BuildingComponent";
 import { BuildingEntityRoot } from "./components/Building/BuildingEntityRoot";
 import { BuildingManagerComponent } from "./components/Building/BuildingManagerComponent";
 import { ChessControlComponent } from "./components/ChessControlComponent";
-import { DrawComponent } from "./components/DrawComponent";
+import { DrawComponent } from "./components/Draw/DrawComponent";
 import { EnemyUnitComponent } from "./components/Enemy/EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./components/Enemy/EnemyUnitEntityRoot";
 import { PlayerHeroComponent } from "./components/Player/PlayerHeroComponent";

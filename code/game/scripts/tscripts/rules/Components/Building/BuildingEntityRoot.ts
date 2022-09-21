@@ -3,14 +3,8 @@ import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET } from "../../Entity/Entity";
-import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
-import { ChessComponent } from "../ChessControl/ChessComponent";
-import { CombinationComponent } from "../Combination/CombinationComponent";
-import { ItemManagerComponent } from "../Item/ItemManagerComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { RoundBuildingComponent } from "../Round/RoundBuildingComponent";
-import { WearableComponent } from "../Wearable/WearableComponent";
 import { BuildingComponent } from "./BuildingComponent";
 import { BuildingPropsComponent } from "./BuildingPropsComponent";
 
@@ -22,7 +16,7 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         this.addBattleComp();
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingComponent>("BuildingComponent"), location, angle);
         this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundBuildingComponent>("RoundBuildingComponent"));
-        this.updateNetTable();
+        this.SyncClientEntity(this);
     }
 
     onDestroy(): void {
@@ -50,10 +44,6 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
 
     GetDotaHeroName() {
         return this.Config().DotaHeroName;
-    }
-
-    updateNetTable() {
-        this.GetPlayer().SyncClientEntity(this);
     }
 
     BuildingComp() {

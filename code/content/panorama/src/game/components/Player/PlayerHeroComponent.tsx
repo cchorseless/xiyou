@@ -17,23 +17,26 @@ export class PlayerHeroComponent extends ET.Component {
     }
 
     LoadNetTableData() {
-        let nettable = NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer());
-        let data_player = NetHelper.GetOneTable(nettable);
-        let data_common = NetHelper.GetOneTable(NetHelper.ENetTables.etentity);
-        let loadNetData = [data_player, data_common];
-        for (let data of loadNetData) {
-            if (data) {
-                for (let info of data) {
-                    try {
-                        ET.Entity.FromJson(info.value);
-                    }
-                    catch (error) {
-                        $.Msg(info)
-                    }
+        try {
+            let nettable = NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer());
+            let data_player = NetHelper.GetOneTable(nettable);
+            for (let info of data_player) {
+                if (info.value) {
+                    info.value._nettable = nettable;
+                    ET.Entity.FromJson(info.value);
+                }
+            }
+            let data_common = NetHelper.GetOneTable(NetHelper.ENetTables.etentity);
+            for (let info of data_common) {
+                if (info.value) {
+                    info.value._nettable = NetHelper.ENetTables.etentity;
+                    ET.Entity.FromJson(info.value);
                 }
             }
         }
-
+        catch (e) {
+            LogHelper.error(e);
+        }
     }
 
     addEvent() {
@@ -44,6 +47,7 @@ export class PlayerHeroComponent extends ET.Component {
             let instanceid = event.data.instanceId;
             let nettable = event.data.nettable;
             let data = NetHelper.GetTableValue(nettable, instanceid);
+            LogHelper.print(nettable, instanceid);
             try {
                 if (data) {
                     ET.Entity.FromJson(data);

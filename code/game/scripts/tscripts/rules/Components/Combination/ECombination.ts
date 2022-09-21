@@ -1,5 +1,4 @@
 import { KVHelper } from "../../../helper/KVHelper";
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { building_combination_ability } from "../../../kvInterface/building/building_combination_ability";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
@@ -50,7 +49,7 @@ export class ECombination extends ET.Entity {
         let curCount = this.getCurUniqueCount();
         // todo 特殊需要处理
         (this as any).isActive = curCount >= this.activeNeedCount;
-        NetTablesHelper.SetETEntity(this, false, this.Domain.ETRoot.AsPlayer().Playerid);
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this);
     }
 
 

@@ -1,19 +1,19 @@
-import { FuncHelper } from "../../helper/FuncHelper";
-import { LogHelper } from "../../helper/LogHelper";
-import { NetHelper } from "../../helper/NetHelper";
-import { TimerHelper } from "../../helper/TimerHelper";
-import { TipsHelper } from "../../helper/TipsHelper";
-import { ET, registerET } from "../../libs/Entity";
-import { DrawCardPanel } from "../../view/Draw/DrawCardPanel";
-import { MainPanel } from "../../view/MainPanel/MainPanel";
-import { DrawConfig } from "../system/Draw/DrawConfig";
-import { PlayerScene } from "./Player/PlayerScene";
+import { FuncHelper } from "../../../helper/FuncHelper";
+import { LogHelper } from "../../../helper/LogHelper";
+import { NetHelper } from "../../../helper/NetHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
+import { TipsHelper } from "../../../helper/TipsHelper";
+import { ET, registerET } from "../../../libs/Entity";
+import { DrawCardPanel } from "../../../view/Draw/DrawCardPanel";
+import { MainPanel } from "../../../view/MainPanel/MainPanel";
+import { DrawConfig } from "../../system/Draw/DrawConfig";
+import { PlayerScene } from "../Player/PlayerScene";
 
 /**抽卡 */
 @registerET()
 export class DrawComponent extends ET.Component {
     onSerializeToEntity() {
-        if (this.IsFromLocalNetTable()) {
+        if (PlayerScene.Local && this.IsFromLocalNetTable()) {
             PlayerScene.Local.AddOneComponent(this);
             this.startListen();
         }

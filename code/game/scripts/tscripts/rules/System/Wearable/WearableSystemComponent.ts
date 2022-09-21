@@ -20,7 +20,7 @@ export class WearableSystemComponent extends ET.Component {
 
     public onAwake() {
         this.LoadHero();
-        // this.LoadItem();
+        this.LoadItem();
     }
 
     LoadHero() {

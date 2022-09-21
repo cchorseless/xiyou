@@ -4,7 +4,7 @@ import { TCharacter } from "../../service/account/TCharacter";
 import { PlayerConfig } from "../../system/Player/PlayerConfig";
 import { ChessControlComponent } from "../ChessControlComponent";
 import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";
-import { DrawComponent } from "../DrawComponent";
+import { DrawComponent } from "../Draw/DrawComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerDataComponent } from "./PlayerDataComponent";
 import { PlayerHeroComponent } from "./PlayerHeroComponent";
@@ -17,6 +17,7 @@ export class PlayerEntityRoot extends ET.Entity {
     onAwake(playerid: PlayerID): void {
         (this.Playerid as any) = playerid;
         if (this.IsLocalPlayer) {
+            (PlayerScene.Local as any) = this;
             this.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerHeroComponent>("PlayerHeroComponent"));
             this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
             // 添加移动组件

@@ -1,3 +1,4 @@
+import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { TopBarPanel } from "../../../view/TopBarPanel/TopBarPanel";
@@ -6,7 +7,7 @@ import { PlayerScene } from "./PlayerScene";
 @registerET()
 export class PlayerDataComponent extends ET.Component {
     onSerializeToEntity() {
-        if (this.IsFromLocalNetTable()) {
+        if (PlayerScene.Local && this.IsFromLocalNetTable()) {
             PlayerScene.Local.AddOneComponent(this);
         }
     }

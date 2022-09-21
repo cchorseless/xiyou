@@ -115,7 +115,7 @@ export module ET {
 
 
         public updateFromJson(json: IEntityJson) {
-            let ignoreKey = ["_t", "_id", "Children", "C"];
+            let ignoreKey = ["_t", "_id", "Children", "C", "_p_instanceid", "_nettable"];
             for (let k in json) {
                 if (ignoreKey.indexOf(k) == -1) {
                     (this as any)[k] = json[k];
@@ -135,7 +135,7 @@ export module ET {
                             }
                         }
                         if (isdrop) {
-                            this.Children[k]?.RemoveSelf();
+                            // this.Children[k]?.RemoveSelf();
                         }
                     }
                 }
@@ -169,7 +169,7 @@ export module ET {
                             }
                         }
                         if (isdrop) {
-                            this.Components[k]?.RemoveSelf();
+                            // this.Components[k]?.RemoveSelf();
                         }
                     }
                 }
