@@ -24,7 +24,7 @@ export class ChallengeIconItem extends ChallengeIconItem_UI {
         }
         let castentity = Game.GetLocalPlayerInfo().player_selected_hero_entity_index;
         this.abilityindex = Entities.GetAbilityByName(castentity, abilityname);
-        let entity = PlayerScene.PlayerEntityRootComp.getNetTableETEntity<AbilityEntityRoot>("" + this.abilityindex);
+        let entity = PlayerScene.EntityRootManage.getAbility("" + this.abilityindex);
         if (entity) {
             EventHelper.AddClientEvent(
                 entity.updateEventName,
@@ -47,7 +47,7 @@ export class ChallengeIconItem extends ChallengeIconItem_UI {
         this.lbl_lv.current!.text = "Lv." + Abilities.GetLevel(this.abilityindex);
         if (entity) {
             this.lbl_cost.current!.text = entity.costCount + "";
-            CSSHelper.setBgImageUrl(this.img_cost, PathHelper.getMoneyIcon(entity.costType ));
+            CSSHelper.setBgImageUrl(this.img_cost, PathHelper.getMoneyIcon(entity.costType));
         }
         this.updateSelf();
     }

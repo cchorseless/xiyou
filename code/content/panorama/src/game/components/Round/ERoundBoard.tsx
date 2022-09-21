@@ -18,12 +18,12 @@ export class ERoundBoard extends ERound {
 
     onSerializeToEntity() {
         this.config = KV_DATA.building_round_board.building_round_board["" + this.configID];
-        PlayerScene.RoundManagerComp.addRound(this);
+        PlayerScene.Local.RoundManagerComp.addRound(this);
     }
 
     isCurrentRound() {
-        if (PlayerScene.RoundManagerComp && PlayerScene.RoundManagerComp.curRoundBoard && PlayerScene.RoundManagerComp.getCurrentBoardRound()) {
-            return this.configID == PlayerScene.RoundManagerComp.curRoundBoard;
+        if (PlayerScene.Local.RoundManagerComp && PlayerScene.Local.RoundManagerComp.curRoundBoard && PlayerScene.Local.RoundManagerComp.getCurrentBoardRound()) {
+            return this.configID == PlayerScene.Local.RoundManagerComp.curRoundBoard;
         }
         return false;
     }

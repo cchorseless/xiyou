@@ -25,7 +25,7 @@ export class TopBarPanel extends TopBarPanel_UI {
     onStartUI() {
         this.onRefreshUI();
         EventHelper.AddClientEvent(
-            PlayerScene.PlayerDataComp.updateEventName,
+            PlayerScene.Local.PlayerDataComp.updateEventName,
             FuncHelper.Handler.create(this, () => {
                 this.setdifficulty();
                 this.setPopulation();
@@ -60,12 +60,12 @@ export class TopBarPanel extends TopBarPanel_UI {
     }
 
     setroundlabel() {
-        this.lbl_round.current!.text = PlayerScene.RoundManagerComp.getCurrentBoardRound().config.round_show;
+        this.lbl_round.current!.text = PlayerScene.Local.RoundManagerComp.getCurrentBoardRound().config.round_show;
     }
 
     setdifficulty() {
         CSSHelper.setLocalText(this.lbl_roundDes, KV_DATA.lang_config.lang_config.turn.Des);
-        this.lbl_roundDes.current!.text += `[${PlayerScene.PlayerDataComp.difficulty}]`;
+        this.lbl_roundDes.current!.text += `[${PlayerScene.Local.PlayerDataComp.difficulty}]`;
     }
     timerid: any;
     setstartTime() {
@@ -88,22 +88,22 @@ export class TopBarPanel extends TopBarPanel_UI {
     }
 
     setPopulation() {
-        this.lbl_population.current!.text = `${PlayerScene.PlayerDataComp.population}/${PlayerScene.PlayerDataComp.populationRoof}`;
+        this.lbl_population.current!.text = `${PlayerScene.Local.PlayerDataComp.population}/${PlayerScene.Local.PlayerDataComp.populationRoof}`;
     }
 
     setGold() {
-        this.lbl_gold.current!.text = `${PlayerScene.PlayerDataComp.gold}(+${PlayerScene.PlayerDataComp.perIntervalGold})`;
+        this.lbl_gold.current!.text = `${PlayerScene.Local.PlayerDataComp.gold}(+${PlayerScene.Local.PlayerDataComp.perIntervalGold})`;
     }
     setFood() {
-        this.lbl_food.current!.text = `${PlayerScene.PlayerDataComp.food}(+${PlayerScene.PlayerDataComp.perIntervalWood})`;
+        this.lbl_food.current!.text = `${PlayerScene.Local.PlayerDataComp.food}(+${PlayerScene.Local.PlayerDataComp.perIntervalWood})`;
     }
     setWood() {
-        this.lbl_wood.current!.text = `${PlayerScene.PlayerDataComp.wood}(+${PlayerScene.PlayerDataComp.perIntervalWood})`;
+        this.lbl_wood.current!.text = `${PlayerScene.Local.PlayerDataComp.wood}(+${PlayerScene.Local.PlayerDataComp.perIntervalWood})`;
     }
 
     lefttimeTask: TimerHelper.TimerTask | null;
     setroundState() {
-        let currentround = PlayerScene.RoundManagerComp.getCurrentBoardRound();
+        let currentround = PlayerScene.Local.RoundManagerComp.getCurrentBoardRound();
         this.lbl_roundstagedes.current!.text = "" + currentround.getCurStateDes();
         if (currentround.roundStartTime != null) {
             if (this.lefttimeTask != null) {

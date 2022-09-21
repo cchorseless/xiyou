@@ -67,7 +67,7 @@ export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI {
             return;
         }
         let data = this.props as IProps;
-        let r = await PlayerScene.DrawComp.SelectCard(data.index, data.itemname);
+        let r = await PlayerScene.Local.DrawComp.SelectCard(data.index, data.itemname);
         if (r) {
             this.playPickSound();
             PrecacheHelper.GetRegClass<typeof DrawCardPanel>("DrawCardPanel").GetInstance()!.hideItemByIndex(data.index);

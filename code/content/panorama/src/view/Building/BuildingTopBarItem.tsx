@@ -15,7 +15,7 @@ export class BuildingTopBarItem extends BuildingTopBarItem_UI {
     entityid: EntityIndex;
     onStartUI() {
         this.entityid = this.props.entityid as EntityIndex;
-        let building = PlayerScene.PlayerEntityRootComp.getNetTableETEntity<BuildingEntityRoot>(this.entityid + "");
+        let building = PlayerScene.EntityRootManage.getBuilding(this.entityid);
         let ismy = Entities.IsControllableByPlayer(this.entityid, Game.GetLocalPlayerInfo().player_id);
         if (ismy) {
             this.addNodeChildAt(this.NODENAME.panel_hpbar, EntityHpMpBarItem, {
@@ -47,7 +47,7 @@ export class BuildingTopBarItem extends BuildingTopBarItem_UI {
     }
 
     renderUI() {
-        let building = PlayerScene.PlayerEntityRootComp.getNetTableETEntity<BuildingEntityRoot>(this.entityid + "");
+        let building = PlayerScene.EntityRootManage.getBuilding(this.entityid);
         if (building) {
             for (let i = 1; i < 6; i++) {
                 (this as any)["img_star" + i].current!.visible = building.BuildingComp!.iStar >= i;

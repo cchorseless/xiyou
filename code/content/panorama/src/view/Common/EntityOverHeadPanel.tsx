@@ -42,15 +42,12 @@ export class EntityOverHeadPanel extends EntityOverHeadPanel_UI {
     private allOverHeadUI: { [k: string]: ReactElement } = {};
     updateEnemy() {
         // 所有的怪物
-        let PlayerETEntityComp = PlayerScene.PlayerEntityRootComp;
-        if (PlayerETEntityComp == null) {
-            return;
-        }
+        let EntityRootManage = PlayerScene.EntityRootManage;
         let scale = 800 / GameUI.GetCameraPosition()[2];
-        for (let entityid in PlayerETEntityComp.AllEnemy) {
-            if (PlayerETEntityComp.AllEnemy[entityid]) {
+        for (let entityid in EntityRootManage.AllEnemy) {
+            if (EntityRootManage.AllEnemy[entityid]) {
                 if (this.allOverHeadUI[entityid] == null) {
-                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, EnemyTopBarItem, { "entityid":  Number(entityid) })!;
+                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, EnemyTopBarItem, { "entityid": Number(entityid) })!;
                 } else {
                     this.getPureCompByNode<EnemyTopBarItem>(this.allOverHeadUI[entityid] as any)?.onRefreshUI({ "entityid": Number(entityid) }, scale);
                 }
@@ -59,15 +56,12 @@ export class EntityOverHeadPanel extends EntityOverHeadPanel_UI {
     }
 
     updateBuilding() {
-        let PlayerETEntityComp = PlayerScene.PlayerEntityRootComp;
-        if (PlayerETEntityComp == null) {
-            return;
-        }
+        let EntityRootManage = PlayerScene.EntityRootManage;
         let scale = 800 / GameUI.GetCameraPosition()[2];
-        for (let entityid in PlayerETEntityComp.AllBuilding) {
-            if (PlayerETEntityComp.AllBuilding[entityid]) {
+        for (let entityid in EntityRootManage.AllBuilding) {
+            if (EntityRootManage.AllBuilding[entityid]) {
                 if (this.allOverHeadUI[entityid] == null) {
-                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, BuildingTopBarItem, { "entityid":  Number(entityid) })!;
+                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, BuildingTopBarItem, { "entityid": Number(entityid) })!;
                 } else {
                     this.getPureCompByNode<BuildingTopBarItem>(this.allOverHeadUI[entityid] as any)?.onRefreshUI({ "entityid": Number(entityid) }, scale);
                 }

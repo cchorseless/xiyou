@@ -9,10 +9,11 @@ import { EnemyUnitComponent } from "./components/Enemy/EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./components/Enemy/EnemyUnitEntityRoot";
 import { PlayerHeroComponent } from "./components/Player/PlayerHeroComponent";
 import { PlayerDataComponent } from "./components/Player/PlayerDataComponent";
-import { PlayerEntityRootComponent } from "./components/Player/PlayerEntityRootComponent";
+import { EntityRootManagerComponent } from "./components/Player/EntityRootManagerComponent";
 import { ERoundBoard } from "./components/Round/ERoundBoard";
 import { RoundManagerComponent } from "./components/Round/RoundManagerComponent";
 import { ServiceEntity } from "./service/ServiceEntity";
+import { PlayerEntityRoot } from "./components/Player/PlayerEntityRoot";
 
 AbilityEntityRoot;
 BuildingEntityRoot;
@@ -22,11 +23,13 @@ BuildingManagerComponent;
 EnemyUnitEntityRoot;
 EnemyUnitComponent;
 
+
 ChessControlComponent;
 DrawComponent;
 PlayerHeroComponent;
 PlayerDataComponent;
-PlayerEntityRootComponent;
+PlayerEntityRoot;
+EntityRootManagerComponent;
 RoundManagerComponent;
 ERoundBoard;
 

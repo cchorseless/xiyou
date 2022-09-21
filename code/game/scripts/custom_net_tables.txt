@@ -4,12 +4,12 @@
     custom_net_tables =
     [
 		"common",// 大杂烩，待整理
-		"building",// 
         "etentity",
-        "enemy",
-        "hero_list",
-        "game_timer",
-        // 阿瓦隆
-        "System_Avalon_Sys_state",
+        "etentity0",
+        "etentity1",
+        "etentity2",
+        "etentity3",
+        "etentity4",
+        "etentity5",
     ]
 }

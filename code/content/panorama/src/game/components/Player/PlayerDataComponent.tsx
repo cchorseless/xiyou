@@ -1,3 +1,4 @@
+import { NetHelper } from "../../../helper/NetHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { TopBarPanel } from "../../../view/TopBarPanel/TopBarPanel";
 import { PlayerScene } from "./PlayerScene";
@@ -5,7 +6,9 @@ import { PlayerScene } from "./PlayerScene";
 @registerET()
 export class PlayerDataComponent extends ET.Component {
     onSerializeToEntity() {
-        PlayerScene.Scene.AddOneComponent(this);
+        if (this.IsFromLocalNetTable()) {
+            PlayerScene.Local.AddOneComponent(this);
+        }
     }
     startTime: string;
     difficulty: string;

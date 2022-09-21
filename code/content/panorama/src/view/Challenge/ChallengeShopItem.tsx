@@ -94,14 +94,14 @@ export class ChallengeShopItem extends ChallengeShopItem_UI {
     onStartUI() {
         this.onRefreshUI();
         EventHelper.AddClientEvent(
-            PlayerScene.PlayerDataComp.updateEventName,
+            PlayerScene.Local.PlayerDataComp.updateEventName,
             FuncHelper.Handler.create(this, () => {
                 this.onRefreshUI();
             })
         );
     }
     onRefreshUI() {
-        let playerdata = PlayerScene.PlayerDataComp;
+        let playerdata = PlayerScene.Local.PlayerDataComp;
         this.lbl_lvpopdes.current!.text = `Lv:${playerdata.popuLevel}/${playerdata.popuLevelMax}`;
         this.lbl_teclvdes.current!.text = `Lv:${playerdata.techLevel}/${playerdata.techLevelMax}`;
         CSSHelper.setBgImageUrl(this.img_popneed0, PathHelper.getMoneyIcon(GameEnum.Item.EItemIndex.Gold));
@@ -112,7 +112,7 @@ export class ChallengeShopItem extends ChallengeShopItem_UI {
     }
 
     onbtnpop_click = () => {
-        let playerdata = PlayerScene.PlayerDataComp;
+        let playerdata = PlayerScene.Local.PlayerDataComp;
         if (playerdata.popuLevel >= playerdata.popuLevelMax) {
             TipsHelper.showErrorMessage("max level");
             return;
@@ -127,8 +127,8 @@ export class ChallengeShopItem extends ChallengeShopItem_UI {
         }
         NetHelper.SendToLua(PlayerConfig.EProtocol.reqApplyPopuLevelUp);
     };
-    onbtntec_click = () => { 
-        let playerdata = PlayerScene.PlayerDataComp;
+    onbtntec_click = () => {
+        let playerdata = PlayerScene.Local.PlayerDataComp;
         if (playerdata.techLevel >= playerdata.techLevelMax) {
             TipsHelper.showErrorMessage("max level");
             return;
@@ -137,7 +137,7 @@ export class ChallengeShopItem extends ChallengeShopItem_UI {
             TipsHelper.showErrorMessage("gold is not enough");
             return;
         }
-       
+
         NetHelper.SendToLua(PlayerConfig.EProtocol.reqApplyTechLevelUp);
     };
 

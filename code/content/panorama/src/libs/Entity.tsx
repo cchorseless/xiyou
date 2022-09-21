@@ -1,6 +1,7 @@
 import { EventHelper } from "../helper/EventHelper";
 import { FuncHelper } from "../helper/FuncHelper";
 import { LogHelper } from "../helper/LogHelper";
+import { NetHelper } from "../helper/NetHelper";
 import { PrecacheHelper } from "../helper/PrecacheHelper";
 import { TimerHelper } from "../helper/TimerHelper";
 
@@ -13,6 +14,7 @@ export module ET {
         _t: string;
         _id: string;
         _p_instanceid?: string;
+        _nettable?: string;
         Children?: { [K: string]: IEntityJson };
         C?: { [K: string]: IEntityJson };
         [K: string]: any;
@@ -20,6 +22,7 @@ export module ET {
     interface IEntityProperty {
         InstanceId: string;
         Id: string;
+        NetTableName?: string;
         IsRegister: boolean;
         Parent: Entity | null;
         Domain: IEntityRoot | null;
@@ -77,6 +80,7 @@ export module ET {
     export class Entity extends Object implements IEntityFunc {
         public readonly InstanceId: string;
         public readonly Id: string;
+        public readonly NetTableName: string;
         public readonly IsRegister: boolean = false;
         public readonly IsComponent: boolean = false;
         public readonly Parent: Entity;
@@ -96,6 +100,17 @@ export module ET {
         onUpdate?(): void;
         onRemove?(): void;
         onDestroy?(): void;
+
+        IsFromLocalNetTable() {
+            if (this.NetTableName == NetHelper.GetETEntityNetTableName()) {
+                return true;
+            }
+            if (this.NetTableName == NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer())) {
+                return true;
+            }
+            return false;
+        }
+
 
         public updateFromJson(json: IEntityJson) {
             let ignoreKey = ["_t", "_id", "Children", "C"];
@@ -127,9 +142,13 @@ export module ET {
                         let entity = Entity.FromJson(info);
                         if (this.IsRegister) {
                             this.AddOneChild(entity);
-                        } else {
+                        }
+                        else {
                             (entity as IEntityProperty).Parent = this;
                             this.AddToChildren(entity);
+                        }
+                        if (this.NetTableName) {
+                            (entity.NetTableName as any) = this.NetTableName;
                         }
                     }
                 }
@@ -162,6 +181,9 @@ export module ET {
                             (entity as IEntityProperty).Parent = this;
                             this.AddToComponents(entity);
                         }
+                        if (this.NetTableName) {
+                            (entity.NetTableName as any) = this.NetTableName;
+                        }
                     }
                 }
             }
@@ -187,6 +209,7 @@ export module ET {
             if (entity == null) {
                 entity = Entity.Create(type);
                 (entity as IEntityProperty).Id = json._id;
+                (entity as IEntityProperty).NetTableName = json._nettable;
                 entity.setDomain(SceneRoot.GetInstance());
             }
             entity.updateFromJson(json);

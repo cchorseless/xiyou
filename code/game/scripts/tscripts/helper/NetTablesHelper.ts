@@ -1,6 +1,7 @@
 import { GameEnum } from "../GameEnum";
 import { ET } from "../rules/Entity/Entity";
 import { EventHelper } from "./EventHelper";
+import { LogHelper } from "./LogHelper";
 
 export module NetTablesHelper {
     /**
@@ -30,15 +31,19 @@ export module NetTablesHelper {
         for (let k in new_data) {
             data[k] = new_data[k];
         }
-        NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, data);
         let event: JS_TO_LUA_DATA = {};
         event.state = true;
-        event.data = { instanceId: obj.InstanceId, props: props };
+        event.data = { instanceId: obj.InstanceId, props: props, nettable: "" };
         // 全部玩家
         if (playerID == null || playerID.length == 0) {
+            NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, data);
+            event.data.nettable = ENetTables.etentity;
             EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_update_nettable_partprop_etentity, event);
         } else {
             playerID.forEach((_id) => {
+                let nettable = GetETEntityNetTableName(_id);
+                NetTablesHelper.SetData(nettable, obj.InstanceId, data);
+                event.data.nettable = nettable;
                 EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_update_nettable_partprop_etentity, event, _id as PlayerID);
             });
         }
@@ -54,15 +59,19 @@ export module NetTablesHelper {
         if (obj.Parent && obj.Parent.InstanceId) {
             jsonobj._p_instanceid = obj.Parent.InstanceId;
         }
-        NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, jsonobj);
         let event: JS_TO_LUA_DATA = {};
         event.state = true;
-        event.data = obj.InstanceId;
+        event.data = { instanceId: obj.InstanceId, nettable: "" };
         // 全部玩家
         if (playerID == null || playerID.length == 0) {
+            event.data.nettable = ENetTables.etentity;
+            NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, jsonobj);
             EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_update_nettable_etentity, event);
         } else {
             playerID.forEach((_id) => {
+                let nettable = GetETEntityNetTableName(_id);
+                event.data.nettable = nettable;
+                NetTablesHelper.SetData(nettable, obj.InstanceId, jsonobj);
                 EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_update_nettable_etentity, event, _id as PlayerID);
             });
         }
@@ -77,24 +86,48 @@ export module NetTablesHelper {
         if (!NetTablesHelper.GetData(ENetTables.etentity, obj.InstanceId)) {
             return;
         }
-        NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, null);
         let event: JS_TO_LUA_DATA = {};
         event.state = true;
-        event.data = obj.InstanceId;
+        event.data = { instanceId: obj.InstanceId, nettable: "" };;
         // 全部玩家
         if (playerID == null || playerID.length == 0) {
+            NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, null);
+            event.data.nettable = ENetTables.etentity;
             EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_del_nettable_etentity, event);
         } else {
             playerID.forEach((_id) => {
+                let nettable = GetETEntityNetTableName(_id);
+                NetTablesHelper.SetData(nettable, obj.InstanceId, null);
+                event.data.nettable = nettable;
                 EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_del_nettable_etentity, event, _id as PlayerID);
             });
         }
     }
 
+    export function GetETEntityNetTableName(playerid: PlayerID = null): ENetTables {
+        if (playerid == null) {
+            return ENetTables.etentity;
+        }
+        switch (playerid) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                return ENetTables.etentity + playerid as any;
+        }
+        LogHelper.error("miss playerId =>", playerid);
+    }
+
     export enum ENetTables {
         common = "common",
-        building = "building",
-        enemy = "enemy",
         etentity = "etentity",
+        etentity0 = "etentity0",
+        etentity1 = "etentity1",
+        etentity2 = "etentity2",
+        etentity3 = "etentity3",
+        etentity4 = "etentity4",
+        etentity5 = "etentity5",
     }
 }

@@ -1,3 +1,4 @@
+import { ET } from "../libs/Entity";
 import { GameEnum } from "../libs/GameEnum";
 import { LogHelper } from "./LogHelper";
 
@@ -61,22 +62,45 @@ export module NetHelper {
             }
         }
     }
-    export function OffAllListenOnLua(context: any) {}
+    export function OffAllListenOnLua(context: any) { }
 
-    export function OffListenOnLua(context: any, protocol: string) {}
+    export function OffListenOnLua(context: any, protocol: string) { }
 
     export function GetTableValue(tableName: ENetTables, key: string) {
-        return CustomNetTables.GetTableValue(tableName as never, key) as any;
+        let obj = CustomNetTables.GetTableValue(tableName as never, key) as any;
+        if (obj) {
+            obj._nettable = tableName;
+        }
+        return obj;
     }
     export function GetOneTable(tableName: ENetTables) {
         return CustomNetTables.GetAllTableValues(tableName as never) as { key: string; value: any }[];
     }
+    export function GetETEntityNetTableName(playerid: PlayerID | null = null) {
+        if (playerid == null) {
+            return ENetTables.etentity;
+        }
+        switch (playerid) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                return ENetTables.etentity + playerid as any;
+        }
+        LogHelper.error("miss playerId =>", playerid);
+    }
+
 
     export enum ENetTables {
-        building = "building",
         common = "common",
         etentity = "etentity",
-        enemy = "enemy",
-        test = "test",
+        etentity0 = "etentity0",
+        etentity1 = "etentity1",
+        etentity2 = "etentity2",
+        etentity3 = "etentity3",
+        etentity4 = "etentity4",
+        etentity5 = "etentity5",
     }
 }

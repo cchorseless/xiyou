@@ -21,8 +21,8 @@ export class ShopPanel extends ShopPanel_UI {
     }
 
     public onRefreshUI(): void {
-        this.lbl_metastone.current!.text = "" + PlayerScene.TCharacter.DataComp!.NumericComp!.GetAsInt(EMoneyType.MetaStone);
-        this.lbl_starstone.current!.text = "" + PlayerScene.TCharacter.DataComp!.NumericComp!.GetAsInt(EMoneyType.StarStone);
+        this.lbl_metastone.current!.text = "" + PlayerScene.Local.TCharacter.DataComp!.NumericComp!.GetAsInt(EMoneyType.MetaStone);
+        this.lbl_starstone.current!.text = "" + PlayerScene.Local.TCharacter.DataComp!.NumericComp!.GetAsInt(EMoneyType.StarStone);
         this.updateSelf()
     }
 }

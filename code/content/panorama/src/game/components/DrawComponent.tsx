@@ -13,8 +13,10 @@ import { PlayerScene } from "./Player/PlayerScene";
 @registerET()
 export class DrawComponent extends ET.Component {
     onSerializeToEntity() {
-        PlayerScene.Scene.AddOneComponent(this);
-        this.startListen();
+        if (this.IsFromLocalNetTable()) {
+            PlayerScene.Local.AddOneComponent(this);
+            this.startListen();
+        }
     }
     private _tLastCards: string[];
     get tLastCards() {

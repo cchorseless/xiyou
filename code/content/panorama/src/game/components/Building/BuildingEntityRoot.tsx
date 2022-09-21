@@ -15,10 +15,10 @@ export class BuildingEntityRoot extends ET.Entity implements PlayerConfig.I.INet
     }
 
     onSerializeToEntity() {
-        PlayerScene.PlayerEntityRootComp.addBuilding(this);
+        PlayerScene.EntityRootManage.addBuilding(this);
     }
     onDestroy() {
-        PlayerScene.PlayerEntityRootComp.removeBuilding(this);
+        PlayerScene.EntityRootManage.removeBuilding(this);
     }
     get BuildingComp() {
         return this.GetComponentByName<BuildingComponent>("BuildingComponent");

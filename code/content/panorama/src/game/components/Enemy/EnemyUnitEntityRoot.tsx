@@ -10,10 +10,10 @@ export class EnemyUnitEntityRoot extends ET.Entity implements PlayerConfig.I.INe
     ConfigID: string;
 
     onSerializeToEntity() {
-        PlayerScene.PlayerEntityRootComp.addEnemy(this);
+        PlayerScene.EntityRootManage.addEnemy(this);
     }
     onDestroy() {
-        PlayerScene.PlayerEntityRootComp.removeEnemy(this);
+        PlayerScene.EntityRootManage.removeEnemy(this);
     }
     get EnemyUnitComp() {
         return this.GetComponentByName<EnemyUnitComponent>("EnemyUnitComponent");

@@ -17,27 +17,33 @@ export class PlayerHeroComponent extends ET.Component {
     }
 
     LoadNetTableData() {
-        let data = NetHelper.GetOneTable(NetHelper.ENetTables.etentity);
-        if (data) {
-            for (let info of data) {
-                try { 
-                    ET.Entity.FromJson(info.value);
-                }
-                catch (error) { 
-                    $.Msg(info)
+        let nettable = NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer());
+        let data_player = NetHelper.GetOneTable(nettable);
+        let data_common = NetHelper.GetOneTable(NetHelper.ENetTables.etentity);
+        let loadNetData = [data_player, data_common];
+        for (let data of loadNetData) {
+            if (data) {
+                for (let info of data) {
+                    try {
+                        ET.Entity.FromJson(info.value);
+                    }
+                    catch (error) {
+                        $.Msg(info)
+                    }
                 }
             }
         }
+
     }
 
     addEvent() {
-        NetHelper.ListenOnLua(this,GameEnum.CustomProtocol.push_sync_et_entity, (event) => {
+        NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_sync_et_entity, (event) => {
             ET.Entity.FromJson(event.data);
         });
-        NetHelper.ListenOnLua(this,GameEnum.CustomProtocol.push_update_nettable_etentity, (event) => {
-            let instanceid = event.data;
-            LogHelper.print(instanceid);
-            let data = NetHelper.GetTableValue(NetHelper.ENetTables.etentity, instanceid);
+        NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_update_nettable_etentity, (event) => {
+            let instanceid = event.data.instanceId;
+            let nettable = event.data.nettable;
+            let data = NetHelper.GetTableValue(nettable, instanceid);
             try {
                 if (data) {
                     ET.Entity.FromJson(data);
@@ -48,14 +54,15 @@ export class PlayerHeroComponent extends ET.Component {
                 LogHelper.error("" + e);
             }
         });
-        NetHelper.ListenOnLua(this,GameEnum.CustomProtocol.push_del_nettable_etentity, (event) => {
-            let instanceid = event.data;
+        NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_del_nettable_etentity, (event) => {
+            let instanceid = event.data.instanceId;
             ET.EntityEventSystem.GetEntity(instanceid)?.Dispose();
         });
-        NetHelper.ListenOnLua(this,GameEnum.CustomProtocol.push_update_nettable_partprop_etentity, (event) => {
+        NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_update_nettable_partprop_etentity, (event) => {
             let instanceid = event.data.instanceId;
+            let nettable = event.data.nettable;
             let props = event.data.props;
-            let data = NetHelper.GetTableValue(NetHelper.ENetTables.etentity, instanceid);
+            let data = NetHelper.GetTableValue(nettable, instanceid);
             if (data) {
                 let json = {} as any;
                 for (let k of props) {
@@ -65,7 +72,7 @@ export class PlayerHeroComponent extends ET.Component {
             }
         });
         /**监听错误信息 */
-        NetHelper.ListenOnLua(this,GameEnum.CustomProtocol.push_error_message, (event) => {
+        NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_error_message, (event) => {
             if (event.data != null) {
                 TipsHelper.showErrorMessage(event.data);
             }
