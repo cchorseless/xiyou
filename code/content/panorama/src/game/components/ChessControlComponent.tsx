@@ -5,8 +5,10 @@ import { TimerHelper } from "../../helper/TimerHelper";
 import { ET, registerET } from "../../libs/Entity";
 import { GameEnum } from "../../libs/GameEnum";
 import { CardSamllIconItem } from "../../view/Card/CardSamllIconItem";
+import { CombinationBottomPanel } from "../../view/Combination/CombinationBottomPanel";
 import { MainPanel } from "../../view/MainPanel/MainPanel";
 import { ChessControlConfig } from "../system/ChessControl/ChessControlConfig";
+import { PlayerScene } from "./Player/PlayerScene";
 @registerET()
 export class ChessControlComponent extends ET.Component {
     onAwake() {
@@ -79,10 +81,14 @@ export class ChessControlComponent extends ET.Component {
 
     async OnPlayerQueryUnit(keys: any) {
         // if (keys.splitscreenplayer == Game.GetLocalPlayerID()) {
+        let localPlayer = Players.GetLocalPlayer();
         let portrait_unit = Players.GetLocalPlayerPortraitUnit();
-        if (portrait_unit == Players.GetPlayerHeroEntityIndex(Game.GetLocalPlayerID())) {
+        let EntityRootManage = PlayerScene.EntityRootManage;
+        // 选中自己信使
+        if (portrait_unit == Players.GetPlayerHeroEntityIndex(localPlayer)) {
             await this.OnShowCursorHeroIcon(false);
-            // 选中自己信使
+            // 显示羁绊
+            CombinationBottomPanel.GetInstance()!.showCombination(localPlayer);
             // if (FindDotaHudElement("emotion_button")) {
             //     FindDotaHudElement("emotion_button").visible = true;
             // }
@@ -96,36 +102,49 @@ export class ChessControlComponent extends ET.Component {
             //     FindDotaHudElement("HealthProgress_Left").style["background-color"] =
             //         "gradient( linear, 0.0% 0.0%, 100.0% 0.0%, color-stop( 0.0, #79F27988 ), color-stop( 0.850, #79F279DD ), color-stop( 1.0, #79F279FF ) )";
             // }
-        } else {
-            // 选中的不是自己信使
-            // if (FindDotaHudElement("HealthProgress_Left")) {
-            //     // 生命条颜色变绿
-            //     FindDotaHudElement("HealthProgress_Left").style["background-color"] =
-            //         "gradient( linear, 0.0% 0.0%, 100.0% 0.0%, color-stop( 0.0, #2DA02788 ), color-stop( 0.850, #2DA027DD ), color-stop( 1.0, #2DA027FF ) )";
-            // }
+            return
+        }
+        // 选中的不是自己信使
+        // if (FindDotaHudElement("HealthProgress_Left")) {
+        //     // 生命条颜色变绿
+        //     FindDotaHudElement("HealthProgress_Left").style["background-color"] =
+        //         "gradient( linear, 0.0% 0.0%, 100.0% 0.0%, color-stop( 0.0, #2DA02788 ), color-stop( 0.850, #2DA027DD ), color-stop( 1.0, #2DA027FF ) )";
+        // }
 
-            // if (FindDotaHudElement("emotion_button")) {
-            //     FindDotaHudElement("emotion_button").visible = false;
-            // }
-            if (Entities.GetTeamNumber(portrait_unit) == Players.GetTeam(Players.GetLocalPlayer())) {
-                // 选中友方棋子
+        // if (FindDotaHudElement("emotion_button")) {
+        //     FindDotaHudElement("emotion_button").visible = false;
+        // }
+        if (Entities.GetTeamNumber(portrait_unit) == Players.GetTeam(localPlayer)) {
+            let building = EntityRootManage.getBuilding(portrait_unit)
+            // 选中友方棋子
+            if (building && building.Playerid == localPlayer) {
                 this.PORTRAIT_UNIT = portrait_unit;
                 await this.OnShowCursorHeroIcon(true);
-            } else {
-                // // 选中敌人
-                await this.OnShowCursorHeroIcon(false);
-                // if (Entities.IsHero(portrait_unit)) {
-                //     // 是信使，展示它的信使名字
-                //     UpdatePortraitCourierName(portrait_unit);
-                //     ShowDrodoCourierBuffContainer(Entities.GetTeamNumber(portrait_unit));
-                // } else {
-                //     HideDrodoCourierBuffContainer();
-                //     if (Entities.GetUnitName(portrait_unit) == "egg") {
-                //         UpdatePortraitEggName(portrait_unit);
-                //     }
-                // }
+                return
+            }
+            // 选中友方其他玩家信使
+            if (Entities.IsHero(portrait_unit)) {
+                let allplayer = EntityRootManage.getAllPlayer();
+                for (let player of allplayer) {
+                    if (portrait_unit == Players.GetPlayerHeroEntityIndex(player.Playerid)) {
+                        CombinationBottomPanel.GetInstance()!.showCombination(player.Playerid);
+                        return
+                    }
+                }
+            }
+
+        }
+        else {
+            // 选中敌人
+            let allfakerhero = EntityRootManage.getAllFakerHero();
+            for (let fakerhero of allfakerhero) {
+                if (portrait_unit == fakerhero.EntityId) {
+                    CombinationBottomPanel.GetInstance()!.showCombination(fakerhero.Playerid, false);
+                    return
+                }
             }
         }
+        await this.OnShowCursorHeroIcon(false);
     }
 
     UpdateHeroIcon() {

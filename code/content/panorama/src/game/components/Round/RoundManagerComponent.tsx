@@ -8,7 +8,7 @@ import { ERoundBoard } from "./ERoundBoard";
 export class RoundManagerComponent extends ET.Component {
     readonly RoundInfo: { [k: string]: ERound } = {};
     onSerializeToEntity() {
-        if (this.IsFromLocalNetTable()) {
+        if (NetHelper.IsFromLocalNetTable(this)) {
             PlayerScene.Local.AddOneComponent(this);
         }
     }

@@ -1,4 +1,5 @@
 import { LogHelper } from "../../../helper/LogHelper";
+import { NetHelper } from "../../../helper/NetHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { PlayerScene } from "../../components/Player/PlayerScene";
 import { CharacterAchievementComponent } from "../achievement/CharacterAchievementComponent";
@@ -22,7 +23,7 @@ export class TCharacter extends ET.Component {
     PlayerId: string;
     Name: string;
     onSerializeToEntity() {
-        if (this.IsFromLocalNetTable()) {
+        if (NetHelper.IsFromLocalNetTable(this)) {
             PlayerScene.Local.AddOneComponent(this);
         }
     }

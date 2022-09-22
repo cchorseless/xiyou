@@ -13,7 +13,7 @@ import { PlayerScene } from "../Player/PlayerScene";
 @registerET()
 export class DrawComponent extends ET.Component {
     onSerializeToEntity() {
-        if (PlayerScene.Local && this.IsFromLocalNetTable()) {
+        if (PlayerScene.Local && NetHelper.IsFromLocalNetTable(this)) {
             PlayerScene.Local.AddOneComponent(this);
             this.startListen();
         }

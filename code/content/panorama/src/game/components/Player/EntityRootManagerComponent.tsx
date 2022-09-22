@@ -26,6 +26,16 @@ export class EntityRootManagerComponent extends ET.Component {
             }
         }
     }
+    getAllPlayer() {
+        let players: PlayerEntityRoot[] = [];
+        for (let k in this.AllPlayers) {
+            let player = this.getPlayer(Number(k) as PlayerID);
+            if (player) {
+                players.push(player);
+            }
+        }
+        return players;
+    }
 
     getPlayer(playerid: PlayerID) {
         let entityid = this.AllPlayers[playerid];
@@ -40,15 +50,28 @@ export class EntityRootManagerComponent extends ET.Component {
         this.AllPlayers[playerid] = player.Id;
     }
 
-    getFakerHero(entityIndex: number | string) {
-        let entityid = this.AllFakerHero[entityIndex + ""];
+    getAllFakerHero() {
+        let fakerheros: FakerHeroEntityRoot[] = [];
+        for (let k in this.AllFakerHero) {
+            let fakerhero = this.getFakerHero(Number(k) as PlayerID);
+            if (fakerhero) {
+                fakerheros.push(fakerhero);
+            }
+        }
+        return fakerheros;
+    }
+    getFakerHero(playerid: PlayerID) {
+        let entityid = this.AllFakerHero[playerid + ""];
         if (entityid) {
             return this.GetChild<FakerHeroEntityRoot>(entityid);
+        }
+        else {
+
         }
     }
 
     addFakerHero(b: FakerHeroEntityRoot) {
-        this.AllFakerHero[b.EntityId + ""] = b.Id;
+        this.AllFakerHero[b.Playerid + ""] = b.Id;
         this.AddOneChild(b);
     }
 

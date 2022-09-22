@@ -7,7 +7,7 @@ import { PlayerScene } from "./PlayerScene";
 @registerET()
 export class PlayerDataComponent extends ET.Component {
     onSerializeToEntity() {
-        if (PlayerScene.Local && this.IsFromLocalNetTable()) {
+        if (PlayerScene.Local && NetHelper.IsFromLocalNetTable(this)) {
             PlayerScene.Local.AddOneComponent(this);
         }
     }

@@ -28,6 +28,7 @@ export class PlayerScene {
         return this.Scene.GetComponentByName<TServerZone>("TServerZone")!;
     }
 
+
     static LoginServer() {
         LogHelper.print("---------------LoginServer---------------");
         NetHelper.SendToLua(GameEnum.CustomProtocol.req_LoginGame, null, (e) => {

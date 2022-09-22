@@ -6,4 +6,6 @@ export class FHeroCombination extends ECombination {
     onSerializeToEntity(): void {
 
     }
+
+
 }

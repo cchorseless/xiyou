@@ -30,10 +30,10 @@ export class FHeroCombinationManagerComponent extends ET.Component {
             }
             combina.addConfig(info);
         }
+        this.Domain.ETRoot.As<FakerHeroEntityRoot>().SyncClientEntity(this);
     }
 
     private addEvent() {
-        let player = this.Domain.ETRoot.As<FakerHeroEntityRoot>();
     }
 
     activeECombination(isActive: boolean) {

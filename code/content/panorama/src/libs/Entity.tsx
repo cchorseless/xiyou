@@ -1,7 +1,6 @@
 import { EventHelper } from "../helper/EventHelper";
 import { FuncHelper } from "../helper/FuncHelper";
 import { LogHelper } from "../helper/LogHelper";
-import { NetHelper } from "../helper/NetHelper";
 import { PrecacheHelper } from "../helper/PrecacheHelper";
 import { TimerHelper } from "../helper/TimerHelper";
 
@@ -102,17 +101,6 @@ export module ET {
         onUpdate?(): void;
         onRemove?(): void;
         onDestroy?(): void;
-
-        IsFromLocalNetTable() {
-            if (this.NetTableName == NetHelper.GetETEntityNetTableName()) {
-                return true;
-            }
-            if (this.NetTableName == NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer())) {
-                return true;
-            }
-            return false;
-        }
-
 
         public updateFromJson(json: IEntityJson) {
             let ignoreKey = ["_t", "_id", "Children", "C", "_p_instanceid", "_nettable"];

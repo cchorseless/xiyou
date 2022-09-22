@@ -21,7 +21,7 @@ interface NodeData extends Partial<VCSSStyleDeclaration> {
     [k: string]: any;
 }
 
-interface ReactElement extends React.CElement<NodeData, BasePureComponent> {}
+interface ReactElement extends React.CElement<NodeData, BasePureComponent> { }
 
 interface ReactElementNodeInfo {
     Node: ReactElement;
@@ -138,8 +138,9 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     /**创建前，指定属性，添加事件 */
     // public onAwake(props: NodeData) {}
     /**渲染后一帧执行 */
-    public onStartUI() {}
-    public onRefreshUI(data?: NodeData, ...args: any[]) {}
+    public onStartUI() { }
+    public onRefreshUI(data?: NodeData, ...args: any[]) { }
+    public onDestroy() { }
 
     /**
      * 向_childs中添加子节点
@@ -299,6 +300,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
      * @param time 时间
      */
     public destroy() {
+        this.onDestroy();
         if (this.__root__ && this.__root__.current) {
             // 优先从父节点删除
             let parent = this.__root__.current.GetParent();

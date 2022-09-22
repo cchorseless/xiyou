@@ -1,3 +1,4 @@
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
@@ -11,8 +12,7 @@ export class FakerHeroEntityRoot extends PlayerCreateUnitEntityRoot {
         (this as any).Playerid = playerid;
         (this as any).ConfigID = conf;
         (this as any).EntityId = npc.GetEntityIndex();
-        // this.Domain.ETRoot.AsPlayer().SyncClientEntity(this, true, this.Playerid);
-
+        this.SyncClientEntity(this, true);
         this.AddComponent(PrecacheHelper.GetRegClass<typeof FHeroCombinationManagerComponent>("FHeroCombinationManagerComponent"));
     }
 

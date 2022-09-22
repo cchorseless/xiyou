@@ -22,25 +22,7 @@ export class WearableComponent extends ET.Component {
 
     onAwake(dotaHeroName: string): void {
         (this as any).sHeroName = dotaHeroName;
-        if (dotaHeroName == null || dotaHeroName.length == 0) {
-            return
-        }
-        let wearConfig;
-        let etroot = this.Domain.ETRoot;
-        if (etroot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
-            wearConfig = etroot.As<BuildingEntityRoot>().Config().Creature?.AttachWearables;
-        }
-        else if (etroot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
-            wearConfig = etroot.As<EnemyUnitEntityRoot>().Config().Creature?.AttachWearables;
-        }
-        if (wearConfig) {
-            for (let k in wearConfig) {
-                let v = wearConfig[k];
-                if (v.ItemDef) {
-                    this.Wear(v.ItemDef);
-                }
-            }
-        }
+        this.WearDefaults();
         // TimerHelper.addTimer(5, () => {
         //     this.Wear(21182);
         //     // this.Wear(4336);
@@ -59,19 +41,23 @@ export class WearableComponent extends ET.Component {
         // },this)
     }
 
-    WearDefaults(bPersona: boolean) {
-        let hHeroInfo = this.GetHeroConfig();
-        if (hHeroInfo && hHeroInfo.Slots) {
-            for (let sSlotName in hHeroInfo.Slots) {
-                let hSlot = hHeroInfo.Slots[sSlotName];
-                let _p = false;
-                if (bPersona) {
-                    _p = this.IsPersona(sSlotName);
-                } else {
-                    _p = !this.IsPersona(sSlotName);
-                }
-                if (hSlot && hSlot.DefaultItem && _p) {
-                    this.Wear(hSlot.DefaultItem);
+    WearDefaults() {
+        if (this.sHeroName == null || this.sHeroName.length == 0) {
+            return
+        }
+        let wearConfig;
+        let etroot = this.Domain.ETRoot;
+        if (etroot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
+            wearConfig = etroot.As<BuildingEntityRoot>().Config().Creature?.AttachWearables;
+        }
+        else if (etroot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
+            wearConfig = etroot.As<EnemyUnitEntityRoot>().Config().Creature?.AttachWearables;
+        }
+        if (wearConfig) {
+            for (let k in wearConfig) {
+                let v = wearConfig[k];
+                if (v.ItemDef) {
+                    this.Wear(v.ItemDef);
                 }
             }
         }

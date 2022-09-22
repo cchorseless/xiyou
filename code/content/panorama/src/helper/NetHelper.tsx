@@ -73,10 +73,21 @@ export module NetHelper {
         }
         return obj;
     }
-    
+
     export function GetOneTable(tableName: ENetTables) {
         return CustomNetTables.GetAllTableValues(tableName as never) as { key: string; value: any }[];
     }
+
+    export function IsFromLocalNetTable(entity: ET.Entity) {
+        if (entity.NetTableName == GetETEntityNetTableName()) {
+            return true;
+        }
+        if (entity.NetTableName == GetETEntityNetTableName(Players.GetLocalPlayer())) {
+            return true;
+        }
+        return false;
+    }
+
     export function GetETEntityNetTableName(playerid: PlayerID | null = null) {
         if (playerid == null) {
             return ENetTables.etentity;
@@ -93,6 +104,23 @@ export module NetHelper {
         LogHelper.error("miss playerId =>", playerid);
     }
 
+    export function GetPlayerIdByNetTableName(nettablename: string): PlayerID {
+        if (nettablename == null) {
+            return -1;
+        }
+        switch (nettablename) {
+            case ENetTables.etentity:
+                return Players.GetLocalPlayer();
+            case ENetTables.etentity0:
+            case ENetTables.etentity1:
+            case ENetTables.etentity2:
+            case ENetTables.etentity3:
+            case ENetTables.etentity4:
+            case ENetTables.etentity5:
+                return Number(nettablename.replace(ENetTables.etentity, "")) as PlayerID;
+        }
+        return -1;
+    }
 
     export enum ENetTables {
         common = "common",
