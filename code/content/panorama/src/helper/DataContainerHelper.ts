@@ -2,11 +2,16 @@
  * 高仿C#Dictionary
  * 效率稍差
  */
-export default class Dictionary<K, V>  {
+export default class Dictionary<K, V> extends Object {
 
     _keys: K[] = [];
     _values: V[] = [];
 
+    public copy(obj: Dictionary<K, V>) {
+        if (this == obj || obj == null) return;
+        this._keys = [].concat(obj._keys as any);
+        this._values = [].concat(obj._values as any);
+    }
     public add(key: K, value: V): void {
         if (this.containsKey(key)) {
             this._values[this._keys.indexOf(key)] = value;
@@ -62,8 +67,8 @@ export default class Dictionary<K, V>  {
     }
 
     public clear(): void {
-        this._keys.splice(0);
-        this._values.splice(0);
+        this._keys = []
+        this._values = []
     }
 
     public forEach(callback: (k: K, v: V) => void): void {

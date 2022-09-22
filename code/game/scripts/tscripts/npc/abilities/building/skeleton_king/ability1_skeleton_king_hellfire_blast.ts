@@ -4,6 +4,7 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
+import { PrecacheHelper } from "../../../../helper/PrecacheHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -58,7 +59,7 @@ export class ability1_skeleton_king_hellfire_blast extends ActiveRootAbility {
     }
     UseEnergy(iCount: number) {
         let hCaster = this.GetCasterPlus()
-        let hModifier = modifier_skeleton_king_3.findIn(hCaster) as BaseModifier_Plus;
+        let hModifier = hCaster.findBuff<modifier_skeleton_king_3>("modifier_skeleton_king_3");
         if (GameFunc.IsValid(hModifier) && hModifier.GetStackCount() >= iCount) {
             hModifier.SetStackCount(hModifier.GetStackCount() - iCount)
             return 1
@@ -70,7 +71,8 @@ export class ability1_skeleton_king_hellfire_blast extends ActiveRootAbility {
         modifier_skeleton_king_1_particle_warmup.remove(hCaster);
         let energy = this.GetSpecialValueFor("energy")
         this.HellFireBlast(this.UseEnergy(energy))
-        let hAbility = ability2_skeleton_king_vampiric_aura.findIn(hCaster) as ability2_skeleton_king_vampiric_aura;
+        let _type = PrecacheHelper.GetRegClass<typeof ability2_skeleton_king_vampiric_aura>("ability2_skeleton_king_vampiric_aura");
+        let hAbility = _type.findIn(hCaster);
         for (let hUnit of (hAbility.tSkeletons)) {
             if (GameFunc.IsValid(hUnit) && hUnit.GetStackCount("modifier_skeleton_king_2_summon", hCaster) == 3) {
                 this.HellFireBlast(0, hUnit)
@@ -141,7 +143,7 @@ export class ability1_skeleton_king_hellfire_blast extends ActiveRootAbility {
 
         if (caster.HasShard()) {
             let shard_point = this.GetSpecialValueFor("shard_point")
-            let hModifier = modifier_skeleton_king_3.findIn(caster) as BaseModifier_Plus;
+            let hModifier =caster.findBuff<modifier_skeleton_king_3>("modifier_skeleton_king_3");
             if (GameFunc.IsValid(hModifier)) {
                 hModifier.changeStackCount(shard_point)
             }
@@ -308,7 +310,8 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
                 return this.ignore_armor
             } else {
                 //  小骷髅无视护甲
-                let hSummonBuff = modifier_skeleton_king_2_summon.findIn(params.attacker)
+                let _type = PrecacheHelper.GetRegClass<typeof modifier_skeleton_king_2_summon>("modifier_skeleton_king_2_summon");
+                let hSummonBuff = _type.findIn(params.attacker)
                 if (GameFunc.IsValid(hSummonBuff) && hSummonBuff.GetCasterPlus() == this.GetCasterPlus()) {
                     return this.ignore_armor
                 }
@@ -318,8 +321,9 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_START)
     On_AttackStart(params: ModifierAttackEvent) {
         let hCaster = this.GetCasterPlus()
-        let sTalentName = "special_bonus_unique_skeleton_king_custom_1"
-        if (params.target == this.GetParentPlus() && (params.attacker == this.GetCasterPlus() || modifier_skeleton_king_2_summon.exist(params.attacker))) {
+        let sTalentName = "special_bonus_unique_skeleton_king_custom_1";
+        let _type = PrecacheHelper.GetRegClass<typeof modifier_skeleton_king_2_summon>("modifier_skeleton_king_2_summon");
+        if (params.target == this.GetParentPlus() && (params.attacker == this.GetCasterPlus() || _type.exist(params.attacker))) {
             if (this.bUseEnergy) {
                 modifier_skeleton_king_1_cannot_miss.apply(params.attacker, params.attacker, this.GetAbilityPlus(), null)
             }

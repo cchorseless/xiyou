@@ -52,6 +52,7 @@ export class CombinationBottomPanel extends CombinationBottomPanel_UI {
 		for (let ui of allui) {
 			ui.close(true)
 		}
+		this.updateSelf();
 	}
 
 
