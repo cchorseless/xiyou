@@ -78,6 +78,25 @@ export module FuncHelper {
         });
         return uuid;
     }
+    export function TryTransArrayLikeObject(a: any) {
+        if (typeof a === "object") {
+            let keys = Object.keys(a).sort();
+            let canTran: any = [];
+            for (let i = 0, len = keys.length; i < len; i++) {
+                if ((i + 1) + "" === keys[i]) {
+                    canTran.push(a[keys[i]]);
+                }
+                else {
+                    canTran = null;
+                    break;
+                }
+            }
+            if (canTran != null) {
+                return canTran;
+            }
+        }
+        return a;
+    }
 
     export function toArray<T>(a: ArrayLikeObject<T>) {
         let r: T[] = [];

@@ -16,6 +16,8 @@ export class ECombination extends ET.Entity {
     private config: { [k: string]: building_combination_ability.OBJ_2_1 } = {};
     private combination: { [k: string]: ECombinationLabelItem[] } = {};
     @serializeETProps()
+    public combinationName: string;
+    @serializeETProps()
     public combinationId: string;
     @serializeETProps()
     public activeNeedCount: number;
@@ -29,6 +31,7 @@ export class ECombination extends ET.Entity {
     addConfig(c: building_combination_ability.OBJ_2_1) {
         this.config[c.index] = c;
         this.activeNeedCount = tonumber(c.active_count);
+        this.combinationId = c.relation;
     }
 
     isInCombination(c: number | string) {

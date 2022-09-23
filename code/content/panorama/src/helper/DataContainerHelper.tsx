@@ -1,3 +1,5 @@
+import { FuncHelper } from "./FuncHelper";
+
 /**
  * 高仿C#Dictionary
  * 效率稍差
@@ -9,8 +11,8 @@ export default class Dictionary<K, V> extends Object {
 
     public copy(obj: Dictionary<K, V>) {
         if (this == obj || obj == null) return;
-        this._keys = [].concat(obj._keys as any);
-        this._values = [].concat(obj._values as any);
+        this._keys = [].concat(FuncHelper.TryTransArrayLikeObject(obj._keys) as any);
+        this._values = [].concat(FuncHelper.TryTransArrayLikeObject(obj._values) as any);
     }
 
     public copyData(ks: K[], vs: V[]) {

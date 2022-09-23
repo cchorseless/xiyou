@@ -1,5 +1,6 @@
 import { NetHelper } from "../../../helper/NetHelper";
 import { registerET, ET } from "../../../libs/Entity";
+import { CombinationBottomPanel } from "../../../view/Combination/CombinationBottomPanel";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ECombination } from "./ECombination";
 
@@ -12,17 +13,20 @@ export class CombinationManagerComponent extends ET.Component {
     }
 
     allCombination: string[] = [];
-    addCombination(_comb: ECombination) {
+    async addOneCombination(_comb: ECombination) {
         this.AddOneChild(_comb);
-        this.allCombination.push(_comb.Id)
+        this.allCombination.push(_comb.Id);
+        let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
+        await CombinationBottomPanel.GetInstance()!.addOneCombination(playerid, _comb);
     }
 
     getAllCombination() {
-        let r: ECombination[] = [];
+        let r: { [k: string]: ECombination[] } = {};
         this.allCombination.forEach(entityid => {
             let entity = this.GetChild<ECombination>(entityid);
             if (entity && entity.uniqueConfigList.length > 0) {
-                r.push(entity)
+                r[entity.combinationName] = r[entity.combinationName] || {};
+                r[entity.combinationName].push(entity);
             }
         })
         return r;

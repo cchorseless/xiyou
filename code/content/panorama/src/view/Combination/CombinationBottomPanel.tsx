@@ -18,8 +18,12 @@ export class CombinationBottomPanel extends CombinationBottomPanel_UI {
 	public onStartUI(): void {
 		this.showCombination(Players.GetLocalPlayer());
 	}
+	playerId: PlayerID;
+	isFaker: boolean;
 	public showCombination(playerId: PlayerID, isFaker: boolean = false): void {
-		let combinations: ECombination[] = [];
+		this.playerId = playerId;
+		this.isFaker = isFaker;
+		let combinations: { [k: string]: ECombination[] } = {}
 		if (isFaker) {
 			combinations = PlayerScene.EntityRootManage.getFakerHero(playerId)!.FHeroCombinationManager.getAllCombination();
 		}
@@ -28,26 +32,38 @@ export class CombinationBottomPanel extends CombinationBottomPanel_UI {
 		}
 		let allui = this.GetNodeChild(this.NODENAME.__root__, CombinationSingleBottomItem);
 		for (let i = 0, len = allui.length; i < len; i++) {
-			let entity = allui[i].bindCombEntity;
-			if (entity) {
-				let index = combinations.indexOf(entity);
-				if (index > -1) {
+			let combinationName = allui[i].combinationName;
+			if (combinationName && combinations[combinationName]) {
+				combinations[combinationName].forEach(entity => {
 					allui[i].BindCombEntity(entity);
-					allui.splice(i, 1);
-					combinations.splice(index, 1);
-					i--;
-					len--;
-				}
+				});
+				allui.splice(i, 1);
+				delete combinations[combinationName];
+				i--;
+				len--;
 			}
 		}
-		for (let comb of combinations) {
-			let ui = allui.pop();
-			if (ui) {
-				ui.BindCombEntity(comb);
+		for (let key in combinations) {
+			let combs = combinations[key];
+			if (combs && combs.length > 0) {
+				let ui = allui.pop();
+				if (ui) {
+					ui.UnBindAllCombEntity();
+					combs.forEach(entity => {
+						ui!.BindCombEntity(entity);
+					});
+				}
+				else {
+					let InstanceIdList: string[] = [];
+					combs.forEach(entity => {
+						InstanceIdList.push(entity.InstanceId)
+					})
+					this.addNodeChildAt(this.NODENAME.__root__, CombinationSingleBottomItem, {
+						InstanceIdList: InstanceIdList
+					});
+				}
 			}
-			else {
-				this.addNodeChildAt(this.NODENAME.__root__, CombinationSingleBottomItem, { CombEntityInstanceId: comb.InstanceId });
-			}
+
 		}
 		for (let ui of allui) {
 			ui.close(true)
@@ -55,6 +71,18 @@ export class CombinationBottomPanel extends CombinationBottomPanel_UI {
 		this.updateSelf();
 	}
 
-
+	public async addOneCombination(playerId: PlayerID, _comb: ECombination) {
+		if (this.playerId != playerId || this.isFaker != _comb.isFakerCombination()) { return }
+		let allui = this.GetNodeChild(this.NODENAME.__root__, CombinationSingleBottomItem);
+		for (let i = 0, len = allui.length; i < len; i++) {
+			if (allui[i].combinationName == _comb.combinationName) {
+				allui[i].BindCombEntity(_comb);
+				return;
+			}
+		}
+		await this.addNodeChildAsyncAt(this.NODENAME.__root__, CombinationSingleBottomItem, {
+			InstanceIdList: [_comb.InstanceId]
+		});
+	}
 
 }

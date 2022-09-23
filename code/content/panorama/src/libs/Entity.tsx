@@ -106,7 +106,7 @@ export module ET {
             let ignoreKey = ["_t", "_id", "Children", "C", "_p_instanceid", "_nettable"];
             for (let k in json) {
                 if (ignoreKey.indexOf(k) == -1) {
-                    (this as any)[k] = json[k];
+                    (this as any)[k] = FuncHelper.TryTransArrayLikeObject(json[k]);
                 }
             }
             if (json.Children) {

@@ -18,13 +18,7 @@ export class DrawComponent extends ET.Component {
             this.startListen();
         }
     }
-    private _tLastCards: string[];
-    get tLastCards() {
-        return this._tLastCards;
-    }
-    set tLastCards(v: string[]) {
-        this._tLastCards = FuncHelper.toArray(v as any);
-    }
+    tLastCards: string[];
 
     startListen() {
         // 监听服务器数据推送
