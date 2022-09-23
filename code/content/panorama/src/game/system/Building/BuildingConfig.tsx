@@ -1,14 +1,8 @@
-import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
 
 export module BuildingConfig {
 
     export namespace I {
-        /**玩家建造数据 */
-        export interface IBuffInfo {
-            hAbility: BaseAbility_Plus;
-            sBuffName: string;
-            tParams: ModifierTable,
-        }
+
         /**玩家建造数据 */
         export interface IBuildingDamageInfo {
             phyD: number;

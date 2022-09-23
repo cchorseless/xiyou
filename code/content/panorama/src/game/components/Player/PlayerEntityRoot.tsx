@@ -2,6 +2,7 @@ import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { TCharacter } from "../../service/account/TCharacter";
 import { PlayerConfig } from "../../system/Player/PlayerConfig";
+import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
 import { ChessControlComponent } from "../ChessControlComponent";
 import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";
 import { DrawComponent } from "../Draw/DrawComponent";
@@ -45,7 +46,9 @@ export class PlayerEntityRoot extends ET.Entity {
     get CombinationManager() {
         return this.GetComponentByName<CombinationManagerComponent>("CombinationManagerComponent")!;
     }
-
+    get BuildingManager() {
+        return this.GetComponentByName<BuildingManagerComponent>("BuildingManagerComponent")!;
+    }
     get RoundManagerComp() {
         return this.GetComponentByName<RoundManagerComponent>("RoundManagerComponent")!;
     }

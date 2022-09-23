@@ -7,7 +7,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health_bar";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { BuildingState } from "../../System/Building/BuildingState";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
@@ -25,9 +25,14 @@ import { BuildingEntityRoot } from "./BuildingEntityRoot";
 /**塔防组件 */
 @registerET()
 export class BuildingManagerComponent extends ET.Component {
+    public IsSerializeEntity: boolean = true;
+
+    @serializeETProps()
+    buildingDamageInfo: { [k: string]: BuildingConfig.I.IBuildingDamageInfo } = {};
 
     onAwake() {
         this.addEvent();
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this, true);
     }
 
     /**
@@ -194,6 +199,7 @@ export class BuildingManagerComponent extends ET.Component {
             });
 
     }
+
     public getAllBuilding() {
         return this.GetDomain<BaseNpc_Plus>().ETRoot.GetDomainChilds(BuildingEntityRoot);
     }
@@ -205,7 +211,6 @@ export class BuildingManagerComponent extends ET.Component {
                 return b.ChessComp().isInBattleAlive();
             });
     }
-
 
     public getBuilding(towerID: string) {
         let domain = this.GetDomain<BaseNpc_Plus>();

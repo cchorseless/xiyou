@@ -104,6 +104,7 @@ export class GameEntityRoot extends ET.EntityRoot {
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaOnHeroFinishSpawnEvent, this.onHeroFinishSpawn);
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned);
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityKilledEvent, this.OnEntityKilled);
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityHurtEvent, this.OnEntityHurt);
         /**JS 请求LUA 事件 */
         EventHelper.addCustomEvent(this, "JS_TO_LUA_EVENT", this.onJS_TO_LUA_EVENT);
 
@@ -191,6 +192,10 @@ export class GameEntityRoot extends ET.EntityRoot {
             let buildunit = hUnit.ETRoot.As<BuildingEntityRoot>();
             buildunit.onKilled(events);
         }
+    }
+
+    private OnEntityHurt(events: EntityHurtEvent) {
+
     }
     private onJS_TO_LUA_EVENT(entindex: EntityIndex, event: JS_TO_LUA_DATA) {
         if (event.protocol == null) {
