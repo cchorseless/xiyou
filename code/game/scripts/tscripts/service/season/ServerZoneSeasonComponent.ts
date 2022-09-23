@@ -15,10 +15,7 @@ export class ServerZoneSeasonComponent extends ET.Component {
         return this._Seasons;
     }
     public set Seasons(data: Dictionary<number, string>) {
-        this._Seasons.clear();
-        for (let _d of data as any) {
-            this._Seasons.add(_d[0], _d[1]);
-        }
+        this._Seasons.copyData((data as any)[0], (data as any)[1]);
     }
     public ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
     public CurSeason(): TServerZoneSeason {

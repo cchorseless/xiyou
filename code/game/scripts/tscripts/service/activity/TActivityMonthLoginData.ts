@@ -13,10 +13,8 @@ export class TActivityMonthLoginData extends TActivityData {
         return this._ItemState;
     }
     public set ItemState(data: Dictionary<number, number>) {
-        this._ItemState.clear();
-        for (let _d of data as any) {
-            this._ItemState.add(_d[0], _d[1]);
-        }
+        this._ItemState.copyData((data as any)[0], (data as any)[1]);
+
     }
 
     private _TotalLoginItemState: Dictionary<number, number> = new Dictionary<
@@ -27,9 +25,7 @@ export class TActivityMonthLoginData extends TActivityData {
         return this._TotalLoginItemState;
     }
     public set TotalLoginItemState(data: Dictionary<number, number>) {
-        this._TotalLoginItemState.clear();
-        for (let _d of data as any) {
-            this._TotalLoginItemState.add(_d[0], _d[1]);
-        }
+        this._TotalLoginItemState.copyData((data as any)[0], (data as any)[1]);
+
     }
 }

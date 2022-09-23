@@ -17,10 +17,8 @@ export class HeroTalentComponent extends ET.Component {
         return this._Talents;
     }
     public set Talents(data: Dictionary<number, string>) {
-        this._Talents.clear();
-        for (let _d of data as any) {
-            this._Talents.add(_d[0], _d[1]);
-        }
+        this._Talents.copyData((data as any)[0], (data as any)[1]);
+
     }
 
     private _TalentLearn: Dictionary<number, number[]> = new Dictionary<
@@ -31,10 +29,8 @@ export class HeroTalentComponent extends ET.Component {
         return this._TalentLearn;
     }
     public set TalentLearn(data: Dictionary<number, number[]>) {
-        this._TalentLearn.clear();
-        for (let _d of data as any) {
-            this._TalentLearn.add(_d[0], _d[1]);
-        }
+        this._TalentLearn.copyData((data as any)[0], (data as any)[1]);
+
     }
 
 

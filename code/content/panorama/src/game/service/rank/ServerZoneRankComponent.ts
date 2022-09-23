@@ -7,18 +7,13 @@ import { TSeasonRankData } from "./TSeasonRankData";
 @registerET()
 export class ServerZoneRankComponent extends ET.Component {
     public SeasonConfigId: number;
-    private _SeasonRankData: Dictionary<number, string> = new Dictionary<
+    public SeasonRankData: Dictionary<number, string> = new Dictionary<
         number,
         string
     >();
-    public get SeasonRankData() {
-        return this._SeasonRankData;
-    }
-    public set SeasonRankData(data: Dictionary<number, string>) {
-        this._SeasonRankData.clear();
-        for (let _d of data as any) {
-            this._SeasonRankData.add(_d[0], _d[1]);
-        }
+
+    public set _SeasonRankData(data: Dictionary<number, string>) {
+        this.SeasonRankData.copy(data);
     }
     public get ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
     public get CurSeasonRank() {

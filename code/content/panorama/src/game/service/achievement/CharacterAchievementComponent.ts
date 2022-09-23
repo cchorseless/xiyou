@@ -4,18 +4,12 @@ import { TCharacter } from "../account/TCharacter";
 
 @registerET()
 export class CharacterAchievementComponent extends ET.Component {
-    private _Achievements: Dictionary<number, string> = new Dictionary<
+    public Achievements: Dictionary<number, string> = new Dictionary<
         number,
         string
     >();
-    public get Achievements() {
-        return this._Achievements;
-    }
-    public set Achievements(data: Dictionary<number, string>) {
-        this._Achievements.clear();
-        for (let _d of data as any) {
-            this._Achievements.add(_d[0], _d[1]);
-        }
+    public set _Achievements(data: Dictionary<number, string>) {
+        this.Achievements.copy(data);
     }
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {

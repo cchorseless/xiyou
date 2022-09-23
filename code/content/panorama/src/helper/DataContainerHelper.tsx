@@ -12,6 +12,13 @@ export default class Dictionary<K, V> extends Object {
         this._keys = [].concat(obj._keys as any);
         this._values = [].concat(obj._values as any);
     }
+
+    public copyData(ks: K[], vs: V[]) {
+        if (ks == null || vs == null) return;
+        this._keys = [].concat(ks as any);
+        this._values = [].concat(vs as any);
+    }
+
     public add(key: K, value: V): void {
         if (this.containsKey(key)) {
             this._values[this._keys.indexOf(key)] = value;
@@ -72,20 +79,13 @@ export default class Dictionary<K, V> extends Object {
     }
 
     public forEach(callback: (k: K, v: V) => void): void {
-        this._breaking = false;
         let sum = this._keys.length;
         for (let i = 0; i < sum; i++) {
-            if (this._breaking) {
-                break;
-            }
             callback(this._keys[i], this._values[i]);
         }
     }
 
-    _breaking: boolean = false;
-    public break(): void {
-        this._breaking = true;
-    }
+
 
     public toObject(): Object {
         let obj: any = {};

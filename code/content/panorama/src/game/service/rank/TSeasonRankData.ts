@@ -4,17 +4,12 @@ import { ET, registerET } from "../../../libs/Entity";
 @registerET()
 export class TSeasonRankData extends ET.Entity {
     public SeasonConfigId: number;
-    private _Ranks: Dictionary<string, string> = new Dictionary<
+    public Ranks: Dictionary<string, string> = new Dictionary<
         string,
         string
     >();
-    public get Ranks() {
-        return this._Ranks;
-    }
-    public set Ranks(data: Dictionary<string, string>) {
-        this._Ranks.clear();
-        for (let _d of data as any) {
-            this._Ranks.add(_d[0], _d[1]);
-        }
+
+    public set _Ranks(data: Dictionary<string, string>) {
+        this.Ranks.copy(data);
     }
 }

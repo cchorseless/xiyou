@@ -13,15 +13,12 @@ export class CharacterActivityComponent extends ET.Component {
         return this._ActivityData;
     }
     public set ActivityData(data: Dictionary<number, string>) {
-        this._ActivityData.clear();
-        for (let _d of data as any) {
-            this._ActivityData.add(_d[0], _d[1]);
-        }
+        this._ActivityData.copyData((data as any)[0], (data as any)[1]);
     }
     public Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {
         let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
-        if (character!= null) {
+        if (character != null) {
             character.AddOneComponent(this);
             this.onReload();
         }

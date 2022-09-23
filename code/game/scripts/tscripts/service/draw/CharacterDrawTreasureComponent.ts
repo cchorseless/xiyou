@@ -13,10 +13,8 @@ export class CharacterDrawTreasureComponent extends ET.Component {
         return this._TreasureTimes;
     }
     public set TreasureTimes(data: Dictionary<number, number>) {
-        this._TreasureTimes.clear();
-        for (let _d of data as any) {
-            this.TreasureTimes.add(_d[0], _d[1]);
-        }
+        this._TreasureTimes.copyData((data as any)[0], (data as any)[1]);
+
     }
 
 
@@ -29,15 +27,13 @@ export class CharacterDrawTreasureComponent extends ET.Component {
         return this._FreeTimeStamp;
     }
     public set FreeTimeStamp(data: Dictionary<number, string>) {
-        this._FreeTimeStamp.clear();
-        for (let _d of data as any) {
-            this._FreeTimeStamp.add(_d[0], _d[1]);
-        }
+        this._FreeTimeStamp.copyData((data as any)[0], (data as any)[1]);
+
     }
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {
         let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
-        if (character!= null) {
+        if (character != null) {
             character.AddOneComponent(this);
             this.onReload();
         }

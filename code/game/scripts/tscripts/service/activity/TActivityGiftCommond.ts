@@ -14,10 +14,8 @@ export class TActivityGiftCommond extends TActivity {
         return this._Gifts;
     }
     public set Gifts(data: Dictionary<number, number>) {
-        this._Gifts.clear();
-        for (let _d of data as any) {
-            this._Gifts.add(_d[0], _d[1]);
-        }
+        this._Gifts.copyData((data as any)[0], (data as any)[1]);
+
     }
 
     public ActivityComp() { return this.GetParent<CharacterActivityComponent>(); }

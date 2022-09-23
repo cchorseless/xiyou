@@ -12,10 +12,8 @@ export class ServerZoneBuffComponent extends ET.Component {
         return this._GlobalBuffs;
     }
     public set GlobalBuffs(data: Dictionary<number, string>) {
-        this._GlobalBuffs.clear();
-        for (let _d of data as any) {
-            this._GlobalBuffs.add(_d[0], _d[1]);
-        }
+        this._GlobalBuffs.copyData((data as any)[0], (data as any)[1]);
+
     }
     public get ServerZone() { return this.GetParent<TServerZone>(); }
     onSerializeToEntity() {

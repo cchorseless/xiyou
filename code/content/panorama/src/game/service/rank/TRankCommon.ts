@@ -7,17 +7,12 @@ export class TRankCommon extends ET.Entity {
     public SeasonConfigId: number;
     public Name: string;
     public RankData: string[];
-    private _CharacterRankData: Dictionary<string, string> = new Dictionary<
+    public CharacterRankData: Dictionary<string, string> = new Dictionary<
         string,
         string
     >();
-    public get CharacterRankData() {
-        return this._CharacterRankData;
-    }
-    public set CharacterRankData(data: Dictionary<string, string>) {
-        this._CharacterRankData.clear();
-        for (let _d of data as any) {
-            this._CharacterRankData.add(_d[0], _d[1]);
-        }
+
+    public set _CharacterRankData(data: Dictionary<string, string>) {
+        this.CharacterRankData.copy(data);
     }
 }

@@ -16,9 +16,7 @@ export class TActivityMentorshipTreeData extends TActivityData {
         return this._MentorshipPrize;
     }
     public set MentorshipPrize(data: Dictionary<number, string>) {
-        this._MentorshipPrize.clear();
-        for (let _d of data as any) {
-            this._MentorshipPrize.add(_d[0], _d[1]);
-        }
+        this._MentorshipPrize.copyData((data as any)[0], (data as any)[1]);
+
     }
 }

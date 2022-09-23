@@ -14,10 +14,8 @@ export class TActivityBattlePass extends TActivity {
         return this._Items;
     }
     public set Items(data: Dictionary<number, ValueTupleStruct<number, number>>) {
-        this._Items.clear();
-        for (let _d of data as any) {
-            this._Items.add(_d[0], _d[1]);
-        }
+        this._Items.copyData((data as any)[0], (data as any)[1]);
+
     }
 
 
@@ -30,9 +28,7 @@ export class TActivityBattlePass extends TActivity {
         return this._VipItems;
     }
     public set VipItems(data: Dictionary<number, ValueTupleStruct<number, number>>) {
-        this._VipItems.clear();
-        for (let _d of data as any) {
-            this._VipItems.add(_d[0], _d[1]);
-        }
+        this._VipItems.copyData((data as any)[0], (data as any)[1]);
+
     }
 }

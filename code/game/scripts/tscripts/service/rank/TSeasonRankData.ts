@@ -14,9 +14,7 @@ export class TSeasonRankData extends ET.Entity {
         return this._Ranks;
     }
     public set Ranks(data: Dictionary<string, string>) {
-        this._Ranks.clear();
-        for (let _d of data as any) {
-            this._Ranks.add(_d[0], _d[1]);
-        }
+        this._Ranks.copyData((data as any)[0], (data as any)[1]);
+
     }
 }

@@ -14,10 +14,8 @@ export class ServerZoneActivityComponent extends ET.Component {
         return this._Activity;
     }
     public set Activity(data: Dictionary<number, string>) {
-        this._Activity.clear();
-        for (let _d of data as any) {
-            this._Activity.add(_d[0], _d[1]);
-        }
+        this._Activity.copyData((data as any)[0], (data as any)[1]);
+
     }
     public ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
 

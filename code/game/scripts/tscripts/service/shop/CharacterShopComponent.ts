@@ -12,10 +12,8 @@ export class CharacterShopComponent extends ET.Component {
         return this._ShopUnit;
     }
     public set ShopUnit(data: Dictionary<number, string>) {
-        this._ShopUnit.clear();
-        for (let _d of data as any) {
-            this._ShopUnit.add(_d[0], _d[1]);
-        }
+        this._ShopUnit.copyData((data as any)[0], (data as any)[1]);
+
     }
 
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }

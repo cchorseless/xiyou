@@ -13,10 +13,7 @@ export class CharacterAchievementComponent extends ET.Component {
         return this._Achievements;
     }
     public set Achievements(data: Dictionary<number, string>) {
-        this._Achievements.clear();
-        for (let _d of data as any) {
-            this._Achievements.add(_d[0], _d[1]);
-        }
+        this._Achievements.copyData((data as any)[0], (data as any)[1]);
     }
     public Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {

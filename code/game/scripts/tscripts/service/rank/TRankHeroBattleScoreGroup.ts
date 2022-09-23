@@ -16,9 +16,7 @@ export class TRankHeroBattleScoreGroup extends ET.Entity {
         return this._HeroBattllelScoreRank;
     }
     public set HeroBattllelScoreRank(data: Dictionary<number, string>) {
-        this._HeroBattllelScoreRank.clear();
-        for (let _d of data as any) {
-            this._HeroBattllelScoreRank.add(_d[0], _d[1]);
-        }
+        this._HeroBattllelScoreRank.copyData((data as any)[0], (data as any)[1]);
+
     }
 }

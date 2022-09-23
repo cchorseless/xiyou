@@ -11,10 +11,8 @@ export class HeroManageComponent extends ET.Component {
         return this._HeroUnits;
     }
     public set HeroUnits(data: Dictionary<number, string>) {
-        this._HeroUnits.clear();
-        for (let _d of data as any) {
-            this._HeroUnits.add(_d[0], _d[1]);
-        }
+        this._HeroUnits.copyData((data as any)[0], (data as any)[1]);
+
     }
 
     HeroBanDesign: string[];

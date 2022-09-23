@@ -12,15 +12,13 @@ export class CharacterBuffComponent extends ET.Component {
         return this._Buffs;
     }
     public set Buffs(data: Dictionary<number, string>) {
-        this._Buffs.clear();
-        for (let _d of data as any) {
-            this._Buffs.add(_d[0], _d[1]);
-        }
+        this._Buffs.copyData((data as any)[0], (data as any)[1]);
+
     }
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {
         let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
-        if (character!= null) {
+        if (character != null) {
             character.AddOneComponent(this);
             this.onReload();
         }

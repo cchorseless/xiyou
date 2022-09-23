@@ -11,10 +11,7 @@ export class CharacterTitleComponent extends ET.Component {
         return this._Titles;
     }
     public set Titles(data: Dictionary<number, string>) {
-        this._Titles.clear();
-        for (let _d of data as any) {
-            this._Titles.add(_d[0], _d[1]);
-        }
+        this._Titles.copyData((data as any)[0], (data as any)[1]);
     }
 
     public get Character(): TCharacter {

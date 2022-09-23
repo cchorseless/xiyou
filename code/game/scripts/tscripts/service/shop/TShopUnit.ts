@@ -14,9 +14,7 @@ export class TShopUnit extends ET.Entity {
         return this._ShopSellItem;
     }
     public set ShopSellItem(data: Dictionary<number, string>) {
-        this._ShopSellItem.clear();
-        for (let _d of data as any) {
-            this._ShopSellItem.add(_d[0], _d[1]);
-        }
+        this._ShopSellItem.copyData((data as any)[0], (data as any)[1]);
+
     }
 }

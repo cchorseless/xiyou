@@ -7,18 +7,13 @@ import { TServerZoneSeason } from "./TServerZoneSeason";
 @registerET()
 export class ServerZoneSeasonComponent extends ET.Component {
     public CurSeasonConfigId: number;
-    private _Seasons: Dictionary<number, string> = new Dictionary<
+    public Seasons: Dictionary<number, string> = new Dictionary<
         number,
         string
     >();
-    public get Seasons() {
-        return this._Seasons;
-    }
-    public set Seasons(data: Dictionary<number, string>) {
-        this._Seasons.clear();
-        for (let _d of data as any) {
-            this._Seasons.add(_d[0], _d[1]);
-        }
+
+    public set _Seasons(data: Dictionary<number, string>) {
+        this.Seasons.copy(data);
     }
     public get ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
     public get CurSeason(): TServerZoneSeason {

@@ -13,10 +13,8 @@ export class TActivityMonthLogin extends TActivity {
         return this._Items;
     }
     public set Items(data: Dictionary<number, ValueTupleStruct<number, number>>) {
-        this._Items.clear();
-        for (let _d of data as any) {
-            this._Items.add(_d[0], _d[1]);
-        }
+        this._Items.copyData((data as any)[0], (data as any)[1]);
+
     }
 
 
@@ -28,9 +26,7 @@ export class TActivityMonthLogin extends TActivity {
         return this._TotalLoginItems;
     }
     public set TotalLoginItems(data: Dictionary<number, ValueTupleStruct<number, number>>) {
-        this._TotalLoginItems.clear();
-        for (let _d of data as any) {
-            this._TotalLoginItems.add(_d[0], _d[1]);
-        }
+        this._TotalLoginItems.copyData((data as any)[0], (data as any)[1]);
+
     }
 }

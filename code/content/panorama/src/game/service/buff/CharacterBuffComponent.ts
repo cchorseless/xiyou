@@ -4,18 +4,13 @@ import { TCharacter } from "../account/TCharacter";
 
 @registerET()
 export class CharacterBuffComponent extends ET.Component {
-    private _Buffs: Dictionary<number, string> = new Dictionary<
+    public Buffs: Dictionary<number, string> = new Dictionary<
         number,
         string
     >();
-    public get Buffs() {
-        return this._Buffs;
-    }
-    public set Buffs(data: Dictionary<number, string>) {
-        this._Buffs.clear();
-        for (let _d of data as any) {
-            this._Buffs.add(_d[0], _d[1]);
-        }
+
+    public set _Buffs(data: Dictionary<number, string>) {
+        this.Buffs.copy(data);
     }
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {

@@ -5,32 +5,22 @@ import { TActivity } from "./TActivity";
 
 @registerET()
 export class TActivityMonthLogin extends TActivity {
-    private _Items: Dictionary<number, ValueTupleStruct<number, number>> = new Dictionary<
+    public Items: Dictionary<number, ValueTupleStruct<number, number>> = new Dictionary<
         number,
         ValueTupleStruct<number, number>
     >();
-    public get Items() {
-        return this._Items;
-    }
-    public set Items(data: Dictionary<number, ValueTupleStruct<number, number>>) {
-        this._Items.clear();
-        for (let _d of data as any) {
-            this._Items.add(_d[0], _d[1]);
-        }
+
+    public set _Items(data: Dictionary<number, ValueTupleStruct<number, number>>) {
+        this.Items.copy(data);
     }
 
 
-    private _TotalLoginItems: Dictionary<number, ValueTupleStruct<number, number>> = new Dictionary<
+    public TotalLoginItems: Dictionary<number, ValueTupleStruct<number, number>> = new Dictionary<
         number,
         ValueTupleStruct<number, number>
     >();
-    public get TotalLoginItems() {
-        return this._TotalLoginItems;
-    }
-    public set TotalLoginItems(data: Dictionary<number, ValueTupleStruct<number, number>>) {
-        this._TotalLoginItems.clear();
-        for (let _d of data as any) {
-            this._TotalLoginItems.add(_d[0], _d[1]);
-        }
+
+    public set _TotalLoginItems(data: Dictionary<number, ValueTupleStruct<number, number>>) {
+        this.TotalLoginItems.copy(data);
     }
 }

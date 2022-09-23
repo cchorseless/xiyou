@@ -5,18 +5,13 @@ import { TActivity } from "./TActivity";
 
 @registerET()
 export class TActivityMentorshipTree extends TActivity {
-    private _MentorshipTree: Dictionary<string, string> = new Dictionary<
+    public MentorshipTree: Dictionary<string, string> = new Dictionary<
         string,
         string
     >();
-    public get MentorshipTree() {
-        return this._MentorshipTree;
-    }
-    public set MentorshipTree(data: Dictionary<string, string>) {
-        this._MentorshipTree.clear();
-        for (let _d of data as any) {
-            this._MentorshipTree.add(_d[0], _d[1]);
-        }
+
+    public set _MentorshipTree(data: Dictionary<string, string>) {
+        this.MentorshipTree.copy(data);
     }
 
 }

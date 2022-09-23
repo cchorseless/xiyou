@@ -15,10 +15,8 @@ export class ServerZoneRankComponent extends ET.Component {
         return this._SeasonRankData;
     }
     public set SeasonRankData(data: Dictionary<number, string>) {
-        this._SeasonRankData.clear();
-        for (let _d of data as any) {
-            this._SeasonRankData.add(_d[0], _d[1]);
-        }
+        this._SeasonRankData.copyData((data as any)[0], (data as any)[1]);
+
     }
     public get ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
     public get CurSeasonRank() {

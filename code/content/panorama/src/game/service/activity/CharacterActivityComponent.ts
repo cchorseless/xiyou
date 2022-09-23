@@ -4,18 +4,12 @@ import { TCharacter } from "../account/TCharacter";
 
 @registerET()
 export class CharacterActivityComponent extends ET.Component {
-    private _ActivityData: Dictionary<number, string> = new Dictionary<
+    public ActivityData: Dictionary<number, string> = new Dictionary<
         number,
         string
     >();
-    public get ActivityData() {
-        return this._ActivityData;
-    }
-    public set ActivityData(data: Dictionary<number, string>) {
-        this._ActivityData.clear();
-        for (let _d of data as any) {
-            this._ActivityData.add(_d[0], _d[1]);
-        }
+    public set _ActivityData(data: Dictionary<number, string>) {
+        this.ActivityData.copy(data);
     }
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {

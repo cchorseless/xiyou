@@ -6,8 +6,6 @@ import { ET, registerET } from "../../../libs/Entity";
 export class NumericComponent extends ET.Component {
     public NumericDic: Dictionary<number, string> = new Dictionary<number, string>();
     public set _NumericDic(data: Dictionary<number, string>) {
-        LogHelper.print(1111, data)
-        this.NumericDic.clear();
         this.NumericDic.copy(data);
     }
 

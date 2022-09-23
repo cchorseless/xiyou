@@ -60,6 +60,7 @@ export class EntityRootManagerComponent extends ET.Component {
         }
         return fakerheros;
     }
+
     getFakerHero(playerid: PlayerID) {
         let entityid = this.AllFakerHero[playerid + ""];
         if (entityid) {
@@ -75,21 +76,23 @@ export class EntityRootManagerComponent extends ET.Component {
         this.AddOneChild(b);
     }
 
-
     addAbility(b: AbilityEntityRoot) {
         this.AllAbility[b.EntityId + ""] = b.Id;
         this.AddOneChild(b);
     }
+
     removeAbility(b: AbilityEntityRoot) {
         delete this.AllAbility[b.EntityId];
         b.Dispose();
     }
+
     getAbility(entityIndex: number | string) {
         let entityid = this.AllAbility[entityIndex + ""];
         if (entityid) {
             return this.GetChild<AbilityEntityRoot>(entityid);
         }
     }
+
     addBuilding(b: BuildingEntityRoot) {
         this.AllBuilding[b.EntityId + ""] = b.Id;
         this.AddOneChild(b);
@@ -99,6 +102,7 @@ export class EntityRootManagerComponent extends ET.Component {
         delete this.AllBuilding[b.EntityId];
         b.Dispose();
     }
+
     getBuilding(entityIndex: number | string) {
         let entityid = this.AllBuilding[entityIndex + ""];
         if (entityid) {
@@ -115,6 +119,7 @@ export class EntityRootManagerComponent extends ET.Component {
         delete this.AllEnemy[b.EntityId];
         b.Dispose();
     }
+
     getEnemy(entityIndex: number | string) {
         let entityid = this.AllEnemy[entityIndex + ""];
         if (entityid) {

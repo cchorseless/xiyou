@@ -8,32 +8,23 @@ export class HeroTalentComponent extends ET.Component {
     TotalTalentPoint: number;
 
 
-    private _Talents: Dictionary<number, string> = new Dictionary<
+    public Talents: Dictionary<number, string> = new Dictionary<
         number,
         string
     >();
-    public get Talents() {
-        return this._Talents;
-    }
-    public set Talents(data: Dictionary<number, string>) {
-        this._Talents.clear();
-        for (let _d of data as any) {
-            this._Talents.add(_d[0], _d[1]);
-        }
+
+    public set _Talents(data: Dictionary<number, string>) {
+        this.Talents.copy(data);
+
     }
 
-    private _TalentLearn: Dictionary<number, number[]> = new Dictionary<
+    public TalentLearn: Dictionary<number, number[]> = new Dictionary<
         number,
         number[]
     >();
-    public get TalentLearn() {
-        return this._TalentLearn;
-    }
-    public set TalentLearn(data: Dictionary<number, number[]>) {
-        this._TalentLearn.clear();
-        for (let _d of data as any) {
-            this._TalentLearn.add(_d[0], _d[1]);
-        }
+
+    public set _TalentLearn(data: Dictionary<number, number[]>) {
+        this.TalentLearn.copy(data);
     }
 
 
