@@ -39,6 +39,7 @@ export class ChessControlComponent extends ET.Component {
 
     OnMouseCallback() {
         GameUI.SetMouseCallback((eventName, mouseButton) => {
+            if (Game.IsGamePaused()) { return true; }
             const CONSUME_EVENT = true;
             const CONTINUE_EVENT = false;
             const LEFT_BUTTON = 0;
@@ -222,8 +223,7 @@ export class ChessControlComponent extends ET.Component {
         let par = Particles.CreateParticle("particles/ui_mouseactions/clicked_basemove.vpcf", 0, 0 as any);
         Particles.SetParticleControl(par, 0, position);
         Particles.SetParticleControl(par, 1, [0, 255, 0]);
-        // GameUI.SelectUnit(Players.GetPlayerHeroEntityIndex(Players.GetLocalPlayer()), false);
-        // GameUI.SelectUnit( -1, false );
+        GameUI.SelectUnit(Players.GetPlayerHeroEntityIndex(Players.GetLocalPlayer()), false);
         this.OnShowCursorHeroIcon(false);
     }
 }

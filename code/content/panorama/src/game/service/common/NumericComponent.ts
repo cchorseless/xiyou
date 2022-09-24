@@ -12,7 +12,6 @@ export class NumericComponent extends ET.Component {
     onSerializeToEntity() {
     }
     public GetAsInt(numericType: number) {
-        LogHelper.print(this.NumericDic)
         let v = this.NumericDic.get(numericType);
         if (v != null) {
             return parseInt(v);

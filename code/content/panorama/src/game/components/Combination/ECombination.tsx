@@ -13,6 +13,10 @@ export class ECombination extends ET.Entity {
     public uniqueConfigList: string[] = [];
 
     onSerializeToEntity(): void {
+        this.onReload();
+    }
+    onReload(): void {
+        if (this.IsEmpty()) { return; }
         let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
         PlayerScene.EntityRootManage.getPlayer(playerid)?.CombinationManager.addOneCombination(this);
     }
@@ -21,4 +25,7 @@ export class ECombination extends ET.Entity {
         return false;
     }
 
+    IsEmpty() {
+        return this.uniqueConfigList.length == 0;
+    }
 }

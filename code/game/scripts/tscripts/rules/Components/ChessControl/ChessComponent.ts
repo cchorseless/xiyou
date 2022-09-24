@@ -1,5 +1,6 @@
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
+import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_jump } from "../../../npc/modifier/modifier_jump";
@@ -14,10 +15,9 @@ export class ChessComponent extends ET.Component {
     public ChessVector: ChessControlConfig.ChessVector;
     readonly isAlive: boolean = true;
     onAwake(): void {
-        this.updateBoardPos();
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.SetForwardVector(Vector(0, 1, 0));
-        // this.updateForward();
+        this.updateBoardPos();
     }
     updateBoardPos() {
         let location = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
@@ -34,11 +34,11 @@ export class ChessComponent extends ET.Component {
     }
 
     isInBattleAlive() {
-        return this.ChessVector.y >= 1 && this.isAlive;
+        return this.isInBattle() && this.isAlive;
     }
 
     isInBattle() {
-        return this.ChessVector.y >= 1;
+        return !this.ChessVector.isY(0);
     }
 
     isInBoard() {
@@ -83,14 +83,15 @@ export class ChessComponent extends ET.Component {
         let etroot = this.GetDomain<BaseNpc_Plus>().ETRoot;
         if (!etroot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) { return }
         let building = etroot.As<BuildingEntityRoot>()
+        LogHelper.print(to);
         if (this.isInBattle()) {
-            if (to.y == 0) {
+            if (to.isY(0)) {
                 EventHelper.fireServerEvent(ChessControlConfig.Event.ChessControl_LeaveBattle,
                     building.Playerid, building)
             }
         }
         else {
-            if (to.y > 0) {
+            if (!to.isY(0)) {
                 EventHelper.fireServerEvent(ChessControlConfig.Event.ChessControl_JoinBattle,
                     building.Playerid, building)
             }
@@ -112,7 +113,7 @@ export class ChessComponent extends ET.Component {
                 return;
             }
         }
-
+        this.updateBoardPos();
     }
 
     FindClosePosToEnemy(enemy: PlayerCreateBattleUnitEntityRoot): Vector {

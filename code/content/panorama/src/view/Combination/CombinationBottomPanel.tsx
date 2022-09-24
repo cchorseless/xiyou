@@ -3,6 +3,7 @@ import React, { createRef, useState } from "react";
 import { ECombination } from "../../game/components/Combination/ECombination";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { EventHelper } from "../../helper/EventHelper";
+import { LogHelper } from "../../helper/LogHelper";
 import { GameEnum } from "../../libs/GameEnum";
 import { CombinationBottomPanel_UI } from "./CombinationBottomPanel_UI";
 import { CombinationSingleBottomItem } from "./CombinationSingleBottomItem";

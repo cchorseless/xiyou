@@ -18,9 +18,9 @@ this.img_icon = createRef<ImagePanel>();
 this.panel_box = createRef<Panel>();
 
     };
-CSS_0_0 : Partial<VCSSStyleDeclaration>  = {"width":"50px","height":"90px"}
+CSS_0_0 : Partial<VCSSStyleDeclaration>  = {"width":"50px","height":"110px"}
 CSS_1_0 : Partial<VCSSStyleDeclaration>  = {"width":"50px","marginRight":"0px","height":"50px","marginBottom":"0px","backgroundRepeat":"no-repeat","backgroundImage":"url(\"file://{images}/combination/icon/animal.png\")","backgroundSize":"100% 100%","horizontalAlign":"right","verticalAlign":"bottom"}
-CSS_1_1 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"0px","width":"50px","height":"40px"}
+CSS_1_1 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"0px","width":"50px","height":"60px"}
 
 __root___isValid:boolean = true;
 __root___attrs:PanelAttributes={};

@@ -14,18 +14,23 @@ export class CombinationManagerComponent extends ET.Component {
 
     allCombination: string[] = [];
     async addOneCombination(_comb: ECombination) {
-        this.AddOneChild(_comb);
-        this.allCombination.push(_comb.Id);
-        let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
-        await CombinationBottomPanel.GetInstance()!.addOneCombination(playerid, _comb);
+        if (!this.allCombination.includes(_comb.Id)) {
+            this.AddOneChild(_comb);
+            this.allCombination.push(_comb.Id);
+        }
+        if (!_comb.IsEmpty()) {
+            let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
+            await CombinationBottomPanel.GetInstance()!.addOneCombination(playerid, _comb);
+        }
+
     }
 
     getAllCombination() {
         let r: { [k: string]: ECombination[] } = {};
         this.allCombination.forEach(entityid => {
             let entity = this.GetChild<ECombination>(entityid);
-            if (entity && entity.uniqueConfigList.length > 0) {
-                r[entity.combinationName] = r[entity.combinationName] || {};
+            if (entity && !entity.IsEmpty()) {
+                r[entity.combinationName] = r[entity.combinationName] || [];
                 r[entity.combinationName].push(entity);
             }
         })

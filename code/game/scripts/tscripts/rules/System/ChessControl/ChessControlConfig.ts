@@ -15,14 +15,24 @@ export module ChessControlConfig {
             this.y = y;
             this.playerid = playerid;
         }
+
+        isX(x: number) {
+            return this.x - x < 0.1 && this.x - x > -0.1;
+        }
+
+        isY(y: number) {
+            return this.y - y < 0.1 && this.y - y > -0.1;
+        }
+
+      
         isSame(v: ChessControlConfig.ChessVector) {
             return this.isSameX(v) && this.isSameY(v) && this.isSamePlayer(v);
         }
         isSameX(v: ChessControlConfig.ChessVector) {
-            return this.x - v.x < 0.1 && this.x - v.x > -0.1;
+            return this.isX(v.x);
         }
         isSameY(v: ChessControlConfig.ChessVector) {
-            return this.y - v.y < 0.1 && this.y - v.y > -0.1;
+            return this.isY(v.y);
         }
         isSamePlayer(v: ChessControlConfig.ChessVector) {
             return this.playerid - v.playerid < 0.1 && this.playerid - v.playerid > -0.1;
