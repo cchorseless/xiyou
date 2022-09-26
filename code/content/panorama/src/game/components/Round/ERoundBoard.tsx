@@ -19,6 +19,12 @@ export class ERoundBoard extends ERound {
     onSerializeToEntity() {
         this.config = KV_DATA.building_round_board.building_round_board["" + this.configID];
         PlayerScene.Local.RoundManagerComp.addRound(this);
+        this.onReload();
+    }
+    onReload(): void {
+        if (this.isCurrentRound()) {
+            TopBarPanel.GetInstance()!.updateRound();
+        }
     }
 
     isCurrentRound() {

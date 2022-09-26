@@ -87,7 +87,6 @@ export class ChessComponent extends ET.Component {
         let etroot = this.GetDomain<BaseNpc_Plus>().ETRoot;
         if (!etroot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) { return }
         let building = etroot.As<BuildingEntityRoot>()
-        LogHelper.print(to);
         if (this.isInBattle()) {
             if (to.isY(0)) {
                 EventHelper.fireServerEvent(ChessControlConfig.Event.ChessControl_LeaveBattle,

@@ -4,7 +4,8 @@ import { KV_DATA } from "../../config/KvAllInterface";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { CombinationInfoDialog_UI } from "./CombinationInfoDialog_UI";
-import { CombinationItem } from "./CombinationItem";
+import { CombinationDesItem } from "./CombinationDesItem";
+import { CombinationCardIconItem } from "./CombinationCardIconItem";
 
 interface IProps {
     itemname: string;
@@ -28,17 +29,40 @@ export class CombinationInfoDialog extends CombinationInfoDialog_UI {
         if (!p.itemname) {
             return;
         }
-        this.clearNode(this.NODENAME.box);
+        this.clearNode(this.NODENAME.panel_des);
+        this.clearNode(this.NODENAME.panel_heroicon);
+        let config = KV_DATA.building_combination_ability.building_combination_ability;
+        let heronamemap: { [key: string]: string } = {};
+        let common_effectmap: { [key: string]: string } = {};
+        let relationicon = null;
+        for (let k in config) {
+            let info = config[k];
+            if (info.relation == p.itemname) {
+                if (info.index && info.heroid) {
+                    heronamemap[info.index] = info.heroid;
+                }
+                if (info.active_count && info.acitve_common_effect) {
+                    common_effectmap[info.active_count] = info.acitve_common_effect;
+                }
+                relationicon = relationicon || info.relationicon;
+            }
+        }
+        CSSHelper.setBgImageUrl(this.title_img_icon, `combination/icon/${relationicon}.png`);
         CSSHelper.setLocalText(this.lbl_des, p.itemname);
-        let config = KV_DATA.building_combination.building_combination[p.itemname];
-        CSSHelper.setBgImageUrl(this.title_img_icon, `combination/icon/${config.relationicon}.png`);
-        for (let i = 1; i <= Number(config.count); i++) {
-            this.addNodeChildAsyncAt(this.NODENAME.box, CombinationItem, {
-                itemname: `${config.relation}_${i}`,
-                marginLeft: "5px",
-                marginTop: "10px",
+        CSSHelper.setLocalText(this.lbl_0, p.itemname + "_Des");
+        CSSHelper.setLocalText(this.lbl_1, KV_DATA.lang_config.lang_config.combination_rule.Des);
+        let active_count = Object.keys(common_effectmap).sort();
+        for (let k of active_count) {
+            this.addNodeChildAsyncAt(this.NODENAME.panel_des, CombinationDesItem, {
+                activecount: Number(k),
+                effect: common_effectmap[k],
             });
         }
-        this.__root__.current!.style.height = 130 + 90 * Number(config.count) + "px";
+        for (let key in heronamemap) {
+            this.addNodeChildAsyncAt(this.NODENAME.panel_heroicon, CombinationCardIconItem, {
+                heroid: heronamemap[key],
+            });
+        }
+        // this.__root__.current!.style.height = 130 + 90 * Number(config.count) + "px";
     }
 }

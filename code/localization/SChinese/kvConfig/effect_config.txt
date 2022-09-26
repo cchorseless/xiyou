@@ -1,3 +1,3 @@
-"modifier_phy_arm_base_3"       "undefined"
-"modifier_phy_arm_base_6"       "undefined"
-"modifier_phy_arm_base_9"       "undefined"
+"modifier_phy_arm_base_3"       "全队增加3点护甲"
+"modifier_phy_arm_base_6"       "全队增加6点护甲"
+"modifier_phy_arm_base_9"       "全队增加9点护甲"

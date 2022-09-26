@@ -192,7 +192,6 @@ export module ET {
                 if (entity.onReload) {
                     entity.onReload();
                 }
-                EventHelper.FireClientEvent(entity.GetType(), null, this);
                 EventHelper.FireClientEvent(entity.updateEventName, null, this);
                 return entity;
             }

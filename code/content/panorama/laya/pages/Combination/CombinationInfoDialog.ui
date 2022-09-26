@@ -1,8 +1,8 @@
 {
     "x":0,
     "type":"dota2Panel",
-    "selectedBox":1,
-    "selecteID":2,
+    "selectedBox":8,
+    "selecteID":18,
     "props":{"width":400,"sceneColor":"#000000","height":400},
     "nodeParent":-1,
     "label":"dota2Panel",
@@ -29,16 +29,17 @@
         {
             "x":15,
             "type":"dota2Panel",
-            "props":{"y":0,"x":105,"width":315,"scaleY":0.6,"scaleX":0.6,"height":129},
+            "props":{"y":4,"x":11,"width":315,"scaleY":0.6,"scaleX":0.6,"height":129},
             "nodeParent":1,
             "label":"dota2Panel",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":12,
             "child":[
                 {
+                    "x":30,
                     "type":"dota2Image",
                     "props":{"y":18,"x":95,"width":200,"ref":"this.title_img_bg","height":93,"bg-repeat":"no-repeat","bg-image":"combination/combination_bg.png"},
                     "nodeParent":12,
@@ -63,6 +64,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"dota2Image",
                     "props":{"y":12,"x":10,"width":104,"ref":"this.title_img_icon","height":106,"bg-repeat":"no-repeat","bg-image":"combination/icon/animal.png"},
                     "nodeParent":12,
@@ -82,12 +84,63 @@
             "nodeParent":1,
             "label":"dota2Panel",
             "isOpen":true,
-            "isDirectory":false,
+            "isDirectory":true,
             "isAniNode":true,
-            "hasChild":false,
+            "hasChild":true,
             "compId":8,
             "child":[
-                ]
+                {
+                    "x":30,
+                    "type":"dota2Label",
+                    "props":{"y":0,"x":0,"ref":"this.lbl_0"},
+                    "nodeParent":8,
+                    "label":"dota2Label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":13,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"dota2Label",
+                    "props":{"y":48,"x":0,"ref":"this.lbl_1"},
+                    "nodeParent":8,
+                    "label":"dota2Label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":14,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"dota2Panel",
+                    "props":{"y":100,"x":0,"width":400,"ref":"this.panel_des","height":154},
+                    "nodeParent":8,
+                    "label":"dota2Panel",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":18,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"dota2Panel",
+                    "props":{"y":262,"x":0,"width":400,"ref":"this.panel_heroicon","height":50},
+                    "nodeParent":8,
+                    "label":"dota2Panel",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":17,
+                    "child":[
+                        ]
+                }]
         }],
     "animations":[
         {

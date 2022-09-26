@@ -199,6 +199,7 @@ export interface OBJ_2_1 {
 "Creature" :OBJ_3_1 ,
 "CardName" :string ,
 "DotaHeroName" :string ,
+"SmallIconRes" :string ,
 "Rarity" :string ,
 "Population" :string ,
 "StatusEnergy" :string ,

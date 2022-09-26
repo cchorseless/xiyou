@@ -14,6 +14,5 @@ export interface OBJ_2_1 {
 [k:string] : string | OBJ_3_1 }
 export interface OBJ_3_1 {
 "PHYSICAL_ARMOR_BASE" :string ,
-"PHYSICAL_ARMOR_BASE2" :string ,
 [k:string] : string }
 }

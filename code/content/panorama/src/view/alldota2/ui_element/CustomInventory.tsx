@@ -88,6 +88,9 @@ export class CustomInventory extends CustomInventory_UI {
     onRefreshUI() {
         let entitys = Players.GetSelectedEntities(Game.GetLocalPlayerID());
         this.selectedEntityid = entitys[entitys.length - 1];
+        if (this.selectedEntityid == null) {
+            return
+        }
         for (let i = 0; i < 9; i++) {
             let img = this.__root__.current!.FindChildTraverse("customitem_rare_" + i) as ImagePanel;
             if (img) {
@@ -109,7 +112,7 @@ export class CustomInventory extends CustomInventory_UI {
                 return;
             }
             if (Abilities.IsItem(overrideentityindex)) {
-                var iAbilityIndex = Abilities.GetLocalPlayerActiveAbility();
+                let iAbilityIndex = Abilities.GetLocalPlayerActiveAbility();
                 if (iAbilityIndex != -1) {
                     let iAbilityBehavior = Abilities.GetBehavior(iAbilityIndex);
                     if (iAbilityBehavior & DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_RUNE_TARGET) {
@@ -125,8 +128,8 @@ export class CustomInventory extends CustomInventory_UI {
             Abilities.ExecuteAbility(overrideentityindex, iCasterIndex, false);
         }
     };
-    onBtn_rightClick = (item_slot: number) => {};
-    onBtn_mouseover = (item_slot: number) => {};
-    onBtn_mouseout = (item_slot: number) => {};
-    onBtn_dragend = (item_slot: number) => {};
+    onBtn_rightClick = (item_slot: number) => { };
+    onBtn_mouseover = (item_slot: number) => { };
+    onBtn_mouseout = (item_slot: number) => { };
+    onBtn_dragend = (item_slot: number) => { };
 }

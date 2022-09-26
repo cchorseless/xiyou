@@ -23,4 +23,8 @@ export module PathHelper {
                 return "";
         }
     }
+
+    export function getRaretyFrameUrl(str: string) {
+        return `common/rarity/frame_${str.toUpperCase()}.png`
+    }
 }

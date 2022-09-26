@@ -14,6 +14,7 @@ export interface OBJ_1_1 {
 "round_prize" :OBJ_2_1 ,
 "round_waiting_next" :OBJ_2_1 ,
 "round_end" :OBJ_2_1 ,
+"combination_rule" :OBJ_2_1 ,
 [k:string] : OBJ_2_1 }
 export interface OBJ_2_1 {
 "Des" :string ,

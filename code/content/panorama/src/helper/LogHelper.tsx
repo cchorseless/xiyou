@@ -1,5 +1,6 @@
 export module LogHelper {
     export let IsDebug = true;
+    export const OffSetLine = -9;
 
     /**
      * 打印对象
@@ -22,7 +23,7 @@ export module LogHelper {
             let b = a[5].split(".");
             let c = a[6].split("/");
             let file = c[c.length - 1].split(":");
-            let file_str = `${file[0]}:${parseInt(file[1]) + 10}|`;
+            let file_str = `${file[0]}:${parseInt(file[1]) + OffSetLine}|`;
             let len = b.length;
             let cls = b[len - 2];
             let fun = b[len - 1];
@@ -54,7 +55,7 @@ export module LogHelper {
             let b = a[5].split(".");
             let c = a[6].split("/");
             let file = c[c.length - 1].split(":");
-            let file_str = `${file[0]}:${parseInt(file[1]) + 10}|`;
+            let file_str = `${file[0]}:${parseInt(file[1]) + OffSetLine}|`;
             let len = b.length;
             let cls = b[len - 2];
             let fun = b[len - 1];
@@ -81,7 +82,7 @@ export module LogHelper {
         //     let b = a[5].split('.');
         //     let c = a[6].split('/');
         //     let file = c[c.length - 1].split(':');
-        //     let file_str = `${file[0]}:${parseInt(file[1]) + 10}|`;
+        //     let file_str = `${file[0]}:${parseInt(file[1]) + OffSetLine}|`;
         //     let len = b.length;
         //     let cls = b[len - 2];
         //     let fun = b[len - 1];

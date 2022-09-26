@@ -8,3 +8,4 @@
 "lang_round_prize"       "奖励阶段"
 "lang_round_waiting_next"       "等待阶段"
 "lang_round_end"       "回合结束"
+"lang_combination_rule"       "需要己方场上有此流派技能N个不同的棋子触发，效果叠加。"

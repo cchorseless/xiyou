@@ -35,17 +35,6 @@ export class TopBarPanel extends TopBarPanel_UI {
                 this.updateSelf();
             })
         );
-        EventHelper.AddClientEvent(
-            ERoundBoard.name,
-            FuncHelper.Handler.create(this, (entity: ERoundBoard) => {
-                if (entity.isCurrentRound()) {
-                    this.setroundlabel();
-                    this.setroundState();
-                    this.setstartTime();
-                    this.updateSelf();
-                }
-            })
-        );
     }
     onRefreshUI() {
         this.setdifficulty();
@@ -53,6 +42,13 @@ export class TopBarPanel extends TopBarPanel_UI {
         this.setGold();
         this.setFood();
         this.setWood();
+        this.setroundlabel();
+        this.setroundState();
+        this.setstartTime();
+        this.updateSelf();
+    }
+
+    updateRound() {
         this.setroundlabel();
         this.setroundState();
         this.setstartTime();
