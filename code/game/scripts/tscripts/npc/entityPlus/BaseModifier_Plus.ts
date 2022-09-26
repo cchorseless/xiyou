@@ -51,7 +51,7 @@ export function registerProp(params: GameEnum.Property.Enum_MODIFIER_PROPERTY) {
                 target.__AllRegisterProperty[params] = new Set();
             }
             target.__AllRegisterProperty[params].add(attr);
-            LogHelper.print(target.constructor.name, params, attr, target.__AllRegisterProperty[params].size)
+            // LogHelper.print(target.constructor.name, params, attr, target.__AllRegisterProperty[params].size)
         }
         // 处理函数
         else {
@@ -62,7 +62,7 @@ export function registerProp(params: GameEnum.Property.Enum_MODIFIER_PROPERTY) {
                 target.__AllRegisterFunction[params] = new Set();
             }
             target.__AllRegisterFunction[params].add(desc.value);
-            LogHelper.print(target.constructor.name, params, target.__AllRegisterFunction[params].size)
+            // LogHelper.print(target.constructor.name, params, target.__AllRegisterFunction[params].size)
         }
     }
 }

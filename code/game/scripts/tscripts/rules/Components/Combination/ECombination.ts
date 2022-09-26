@@ -1,4 +1,5 @@
 import { KVHelper } from "../../../helper/KVHelper";
+import { LogHelper } from "../../../helper/LogHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { building_combination_ability } from "../../../kvInterface/building/building_combination_ability";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
@@ -31,7 +32,7 @@ export class ECombination extends ET.Entity {
     addConfig(c: building_combination_ability.OBJ_2_1) {
         this.config[c.index] = c;
         this.activeNeedCount = tonumber(c.active_count);
-        this.combinationId = c.relation;
+        this.combinationName = c.relation;
     }
 
     isInCombination(c: number | string) {
@@ -112,6 +113,7 @@ export class ECombination extends ET.Entity {
             delete this.combination[c];
         }
         this.checkActive();
+        LogHelper.print("removeCombination-------")
         if (!this.isActive) {
             // this.CancelEffect();
         }

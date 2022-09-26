@@ -11,7 +11,7 @@ export module NetHelper {
     export function SendToLua(protocol: string, data: any = null, cb: (event: JS_TO_LUA_DATA) => void | null = null as any, context: any = null) {
         if (cb != null) {
             let eventID = GameEvents.Subscribe(protocol, (event: JS_TO_LUA_DATA) => {
-                LogHelper.print(event.protocol);
+                // LogHelper.print(event.protocol);
                 cb.call(context, event);
                 GameEvents.Unsubscribe(eventID);
             });
@@ -26,11 +26,11 @@ export module NetHelper {
     export async function SendToLuaAsync<T>(protocol: string, data: T) {
         return new Promise<JS_TO_LUA_DATA>((resolve, reject) => {
             let eventID = GameEvents.Subscribe(protocol, (event: JS_TO_LUA_DATA) => {
-                LogHelper.print(event.protocol);
+                // LogHelper.print(event.protocol);
                 GameEvents.Unsubscribe(eventID);
                 resolve(event);
             });
-            LogHelper.print(protocol, data);
+            // LogHelper.print(protocol, data);
             GameEvents.SendCustomGameEventToServer("JS_TO_LUA_EVENT", {
                 protocol: protocol,
                 data: data,

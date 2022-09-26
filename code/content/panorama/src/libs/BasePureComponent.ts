@@ -101,7 +101,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     constructor(props: NodeData) {
         super(props);
         this.__root__ = null as any;
-        LogHelper.print("add BasePureComponent :", this.constructor.name);
+        // LogHelper.print("add BasePureComponent :", this.constructor.name);
     }
 
     private setRegister(value: boolean) {

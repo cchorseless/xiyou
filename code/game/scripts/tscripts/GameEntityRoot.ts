@@ -210,7 +210,7 @@ export class GameEntityRoot extends ET.EntityRoot {
 
     }
     private onJS_TO_LUA_EVENT(entindex: EntityIndex, event: JS_TO_LUA_DATA) {
-        if (event.protocol == null) {
+        if (event.protocol == null ) {
             return;
         }
         let allCB = globalData.allCustomProtocolEvent[event.protocol];

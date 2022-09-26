@@ -1,0 +1,43 @@
+
+import React, { createRef, PureComponent } from "react";
+import { BasePureComponent } from "../../libs/BasePureComponent";
+import { PanelAttributes,LabelAttributes } from "react-panorama-eom";
+
+
+export class CombinationBottomCountGroup_UI extends BasePureComponent {
+__root__: React.RefObject<Panel>;
+lbl: React.RefObject<LabelPanel>;
+NODENAME = {  __root__: '__root__',  lbl: 'lbl',  };
+FUNCNAME = {  };
+
+    constructor(props: any) {
+		super(props);
+this.__root__ = createRef<Panel>();
+this.lbl = createRef<LabelPanel>();
+
+    };
+CSS_0_0 : Partial<VCSSStyleDeclaration>  = {"width":"50px","height":"20px"}
+CSS_1_0 : Partial<VCSSStyleDeclaration>  = {}
+
+__root___isValid:boolean = true;
+__root___attrs:PanelAttributes={};
+__root___childs: Array<JSX.Element> = [];
+lbl_isValid:boolean = true;
+lbl_attrs:LabelAttributes={};
+lbl_childs: Array<JSX.Element> = [];
+
+render() {
+    return(
+        this.__root___isValid && 
+<Panel key="compId_1" ref={this.__root__} style={this.CSS_0_0}  {...this.props}   {...this.__root___attrs}>
+    {this.lbl_isValid && 
+<Label ref={this.lbl} key="compId_2" style={this.CSS_1_0}  {...this.lbl_attrs} >
+{this.lbl_childs}
+</Label>
+}
+
+{this.props.children}
+{this.__root___childs}
+ </Panel>
+    )};
+}

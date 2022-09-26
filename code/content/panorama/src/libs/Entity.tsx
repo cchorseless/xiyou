@@ -177,18 +177,23 @@ export module ET {
                     }
                 }
             }
-            TimerHelper.AddFrameTimer(
-                1,
-                FuncHelper.Handler.create(this, () => {
-                    EventHelper.FireClientEvent(this.GetType(), null, this);
-                    EventHelper.FireClientEvent(this.updateEventName, null, this);
-                })
-            );
+            // TimerHelper.AddFrameTimer(
+            //     1,
+            //     FuncHelper.Handler.create(this, () => {
+            //         EventHelper.FireClientEvent(this.GetType(), null, this);
+            //         EventHelper.FireClientEvent(this.updateEventName, null, this);
+            //     })
+            // );
         }
         static FromJson(json: IEntityJson) {
             let entity = EntityEventSystem.GetEntity(json._id + json._t);
             if (entity != null) {
                 entity.updateFromJson(json);
+                if (entity.onReload) {
+                    entity.onReload();
+                }
+                EventHelper.FireClientEvent(entity.GetType(), null, this);
+                EventHelper.FireClientEvent(entity.updateEventName, null, this);
                 return entity;
             }
             let type: typeof Entity = PrecacheHelper.GetRegClass(json._t);
