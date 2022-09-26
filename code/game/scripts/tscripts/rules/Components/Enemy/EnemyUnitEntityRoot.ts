@@ -5,6 +5,7 @@ import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
+import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { ItemManagerComponent } from "../Item/ItemManagerComponent";
@@ -29,6 +30,7 @@ export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         (this as any).RoundID = roundid;
         (this as any).OnlyKey = onlyKey;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
         this.addBattleComp();
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyUnitComponent>("EnemyUnitComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyKillPrizeComponent>("EnemyKillPrizeComponent"));
@@ -90,5 +92,8 @@ export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     }
     RoundEnemyComp() {
         return this.GetComponentByName<RoundEnemyComponent>("RoundEnemyComponent");
+    }
+    BattleUnitManager() {
+        return this.GetComponentByName<BattleUnitManagerComponent>("BattleUnitManagerComponent");
     }
 }

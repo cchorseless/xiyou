@@ -192,6 +192,18 @@ export class GameEntityRoot extends ET.EntityRoot {
             let buildunit = hUnit.ETRoot.As<BuildingEntityRoot>();
             buildunit.onKilled(events);
         }
+        else if (hUnit.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
+            let buildunit = hUnit.ETRoot.As<BuildingEntityRoot>();
+            buildunit.onKilled(events);
+        }
+        else if (hUnit.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
+            let buildunit = hUnit.ETRoot.As<BuildingEntityRoot>();
+            buildunit.onKilled(events);
+        }
+        else if (hUnit.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
+            let buildunit = hUnit.ETRoot.As<BuildingEntityRoot>();
+            buildunit.onKilled(events);
+        }
     }
 
     private OnEntityHurt(events: EntityHurtEvent) {

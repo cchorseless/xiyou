@@ -33,6 +33,10 @@ export class ChessComponent extends ET.Component {
         (this as any).isAlive = state;
     }
 
+    isInBoardAndBattle() {
+        return this.ChessVector.y >= 1 && this.isInBoard();
+    }
+
     isInBattleAlive() {
         return this.ChessVector.y >= 1 && this.isAlive;
     }

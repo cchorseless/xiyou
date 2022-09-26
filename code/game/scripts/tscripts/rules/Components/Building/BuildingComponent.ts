@@ -1,16 +1,18 @@
+import { GameEnum } from "../../../GameEnum";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { modifier_property } from "../../../npc/modifier/modifier_property";
+import { modifier_summon } from "../../../npc/modifier/modifier_summon";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
+import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
 /**塔防组件 */
 @registerET()
 export class BuildingComponent extends ET.Component {
     public readonly IsSerializeEntity: boolean = true;
-    public vLocation: Vector;
-    public fAngle: number;
     public iLevel: number;
     public iAbilityPoints: number;
     public iQualificationLevel: number;
@@ -23,9 +25,12 @@ export class BuildingComponent extends ET.Component {
     public iStar: number = 1;
     @serializeETProps()
     public PrimaryAttribute: number = 1;
-    onAwake(vLocation: Vector, fAngle: number) {
-        this.vLocation = vLocation;
-        this.fAngle = fAngle;
+
+    allSummon: string[] = [];
+    allIllusion: string[] = [];
+    allBuildingClone: string[] = [];
+
+    onAwake() {
         this.iStar = 1;
         this.PrimaryAttribute = GameFunc.AsAttribute(this.Domain.ETRoot.As<BuildingEntityRoot>().Config().AttributePrimary);
         TimerHelper.addTimer(
@@ -93,4 +98,7 @@ export class BuildingComponent extends ET.Component {
         // 通知跑马灯
         this.Domain.ETRoot.As<BuildingEntityRoot>().SyncClientEntity(this);
     }
+
+
+
 }

@@ -175,6 +175,7 @@ export interface OBJ_2_1 {
 "Ability3" :string ,
 "Ability6" :string ,
 "MovementSpeed" :string ,
+"MovementCapabilities" :string ,
 "MovementTurnRate" :string ,
 "HasAggressiveStance" :string ,
 "ArmorPhysical" :string ,
@@ -193,6 +194,7 @@ export interface OBJ_2_1 {
 "AttributeAgilityGain" :string ,
 "AttributeBaseIntelligence" :string ,
 "AttributeIntelligenceGain" :string ,
+"ConsideredHero" :string ,
 "MovementSpeedActivityModifiers" :OBJ_3_1 ,
 "Creature" :OBJ_3_1 ,
 "CardName" :string ,
@@ -231,12 +233,10 @@ export interface OBJ_2_1 {
 "AbilityLayout" :string ,
 "StatusManaRegen" :string ,
 "AttackRangeActivityModifiers" :OBJ_3_1 ,
-"MovementCapabilities" :string ,
 "StatusHealth" :string ,
 "StatusMana" :string ,
 "CombatClassAttack" :string ,
 "CombatClassDefend" :string ,
-"ConsideredHero" :string ,
 [k:string] : string | OBJ_3_1 }
 export interface OBJ_3_1 {
 "walk" :string ,

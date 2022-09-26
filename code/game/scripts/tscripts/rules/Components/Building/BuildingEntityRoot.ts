@@ -3,18 +3,20 @@ import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { RoundBuildingComponent } from "../Round/RoundBuildingComponent";
 import { BuildingComponent } from "./BuildingComponent";
 import { BuildingPropsComponent } from "./BuildingPropsComponent";
 
 export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
-    public onAwake(playerid: PlayerID, conf: string, location: Vector, angle: number) {
+    public onAwake(playerid: PlayerID, conf: string) {
         (this as any).Playerid = playerid;
         (this as any).ConfigID = conf;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
         this.addBattleComp();
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingComponent>("BuildingComponent"), location, angle);
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingComponent>("BuildingComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundBuildingComponent>("RoundBuildingComponent"));
         this.SyncClientEntity(this);
     }
@@ -54,5 +56,9 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     }
     RoundBuildingComp() {
         return this.GetComponentByName<RoundBuildingComponent>("RoundBuildingComponent");
+    }
+
+    BattleUnitManager() {
+        return this.GetComponentByName<BattleUnitManagerComponent>("BattleUnitManagerComponent");
     }
 }

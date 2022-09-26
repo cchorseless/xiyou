@@ -26,11 +26,7 @@ export class ability1_axe_berserkers_call extends ActiveRootAbility {
         this.SetDefaultSpecialValue("root_duration", [1.5, 1.8, 2.1, 2.4, 2.7, 3.0]);
         this.SetDefaultSpecialValue("attack_damage_pct", [80, 85, 90, 95, 100, 110]);
         this.SetDefaultSpecialValue("attack_interval", 0.5);
-
     }
-
-
-
 
     GetCastRange(vLocation: Vector, hTarget: BaseNpc_Plus) {
         return this.GetSpecialValueFor("radius")

@@ -1,5 +1,6 @@
 import { LogHelper } from "../helper/LogHelper";
 import { AbilityManagerComponent } from "./Components/Ability/AbilityManagerComponent";
+import { BattleUnitManagerComponent } from "./Components/BattleUnit/BattleUnitManagerComponent";
 import { BuildingComponent } from "./Components/Building/BuildingComponent";
 import { BuildingManagerComponent } from "./Components/Building/BuildingManagerComponent";
 import { BuildingPropsComponent } from "./Components/Building/BuildingPropsComponent";
@@ -51,7 +52,7 @@ import { WearableSystemComponent } from "./System/Wearable/WearableSystemCompone
     BuildingSystemComponent,
     DrawSystemComponent,
     PublicBagSystemComponent,
-
+    BattleUnitManagerComponent,
     AbilityManagerComponent,
     ItemManagerComponent,
     PlayerHeroComponent,
@@ -69,7 +70,7 @@ import { WearableSystemComponent } from "./System/Wearable/WearableSystemCompone
     BuildingManagerComponent,
     ChessControlComponent,
     EnemyManagerComponent,
-    
+
     FakerHeroComponent,
     FHeroCombination,
     FHeroCombinationManagerComponent,

@@ -22,6 +22,10 @@ export class AbilityManagerComponent extends ET.Component {
         }
     }
 
+    learnAbility(ability: string) {
+
+        return true
+    }
 
     getAbilityRoot(childid: string) {
         let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();

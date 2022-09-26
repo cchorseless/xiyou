@@ -15,6 +15,7 @@ import { RoundConfig } from "../../System/Round/RoundConfig";
 import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
+import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { RoundBuildingComponent } from "../Round/RoundBuildingComponent";
@@ -29,6 +30,9 @@ export class BuildingManagerComponent extends ET.Component {
 
     @serializeETProps()
     buildingDamageInfo: { [k: string]: BuildingConfig.I.IBuildingDamageInfo } = {};
+
+    allBuilding: string[] = [];
+    allBuildingHelper: BuildingEntityRoot[] = [];
 
     onAwake() {
         this.addEvent();
@@ -100,14 +104,15 @@ export class BuildingManagerComponent extends ET.Component {
      * @returns
      */
     public sellBuilding(target: BuildingEntityRoot, fGoldReturn = 0.5) {
-        let domain = this.GetDomain<PlayerScene>();
-        if (target.DomainParent && target.DomainParent != domain.ETRoot) {
+        if (!this.allBuilding.includes(target.Id)) {
             return;
         }
         let building = target.BuildingComp();
         if (building == null) {
             return;
         }
+        let index = this.allBuilding.indexOf(target.Id);
+        this.allBuilding.splice(index, 1);
         EventHelper.fireServerEvent(ChessControlConfig.Event.ChessControl_LeaveBattle,
             target.Playerid, building);
         let iGoldCost = building.GetGoldCost();
@@ -157,9 +162,10 @@ export class BuildingManagerComponent extends ET.Component {
                 // modifier_building.apply(this.createUnit, domain)
             })
         );
-        BuildingEntityRoot.Active(building, playerID, towerID, location, angle);
+        BuildingEntityRoot.Active(building, playerID, towerID);
         let buildingroot = building.ETRoot.As<BuildingEntityRoot>();
         playerroot.AddDomainChild(buildingroot);
+        this.allBuilding.push(buildingroot.Id)
         return building;
     }
 
@@ -186,7 +192,10 @@ export class BuildingManagerComponent extends ET.Component {
             (iswin: boolean) => {
                 this.getAllBattleBuilding()
                     .forEach((b) => {
-                        b.RoundBuildingComp().OnBoardRound_Prize(iswin);
+                        b.BattleUnitManager().ClearRuntimeBattleUnit();
+                        if (b.ChessComp().isInBattleAlive()) {
+                            b.RoundBuildingComp().OnBoardRound_Prize(iswin);
+                        }
                     });
             });
         EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onwaitingend,
@@ -201,20 +210,54 @@ export class BuildingManagerComponent extends ET.Component {
     }
 
     public getAllBuilding() {
-        return this.GetDomain<BaseNpc_Plus>().ETRoot.GetDomainChilds(BuildingEntityRoot);
+        let r: BuildingEntityRoot[] = [];
+        let player = this.GetDomain<PlayerScene>().ETRoot;
+        this.allBuilding.forEach((b) => {
+            let entity = player.GetDomainChild<BuildingEntityRoot>(b);
+            if (entity) {
+                r.push(entity);
+            }
+        })
+        return r;
+    }
+    /**
+     *
+     * @param includeSelfHelper 包括自己外派的
+     * @param includeOtherHelper 包括他人外派的
+     * @returns
+     */
+    public getAllBattleBuilding(includeSelfHelper: boolean = false, includeOtherHelper: boolean = true) {
+        let r: BuildingEntityRoot[] = [];
+        if (includeSelfHelper) {
+            r = this.getAllBuilding().filter((b) => {
+                return b.ChessComp().isInBattle();
+            });
+        }
+        else {
+            r = this.getAllBuilding().filter((b) => {
+                return b.ChessComp().isInBoardAndBattle();
+            });
+        }
+        if (includeOtherHelper) {
+            r = r.concat(this.allBuildingHelper.filter((b) => {
+                return b.ChessComp().isInBattle();
+            }));
+        }
+        return r;
     }
 
-    public getAllBattleBuilding() {
-        return this.GetDomain<BaseNpc_Plus>()
-            .ETRoot.GetDomainChilds(BuildingEntityRoot)
-            .filter((b) => {
-                return b.ChessComp().isInBattleAlive();
-            });
+    public getAllBattleUnitAlive() {
+        let allbuilding = this.getAllBattleBuilding();
+        let r: PlayerCreateBattleUnitEntityRoot[] = [];
+        allbuilding.forEach(b => {
+            r = r.concat(b.BattleUnitManager().GetAllBattleUnitAlive())
+        })
+        return r
     }
+
 
     public getBuilding(towerID: string) {
-        let domain = this.GetDomain<BaseNpc_Plus>();
-        let buildings = domain.ETRoot.GetDomainChilds(BuildingEntityRoot);
+        let buildings = this.getAllBuilding();
         let r: BuildingEntityRoot[] = [];
         buildings.forEach((c) => {
             if (c.ConfigID === towerID) {
@@ -223,5 +266,6 @@ export class BuildingManagerComponent extends ET.Component {
         });
         return r;
     }
+
 
 }

@@ -50,7 +50,7 @@ export class FakerHeroComponent extends ET.Component {
             player.Playerid,
             (round: ERoundBoard) => {
                 this.FakerHero.ETRoot.As<FakerHeroEntityRoot>().FHeroCombinationManager().activeECombination(true);
-                player.EnemyManagerComp().getAllAliveEnemy()
+                player.EnemyManagerComp().getAllEnemy()
                     .forEach((b) => {
                         b.RoundEnemyComp().OnBoardRound_Battle();
                     });

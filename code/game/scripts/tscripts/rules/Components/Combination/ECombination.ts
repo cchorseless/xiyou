@@ -144,7 +144,7 @@ export class ECombination extends ET.Entity {
                                 buildings = this.getAllBuilding();
                                 break;
                             case CombinationConfig.EEffectTargetType.team:
-                                buildings = this.Domain.ETRoot.AsPlayer().BuildingManager().getAllBattleBuilding()
+                                buildings = this.Domain.ETRoot.AsPlayer().BuildingManager().getAllBattleBuilding(true, false)
                                 break;
                             case CombinationConfig.EEffectTargetType.enemy:
                                 buildings = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllAliveEnemy()

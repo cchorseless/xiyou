@@ -23,4 +23,20 @@ export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
     config() {
         return KVHelper.KvConfig().building_ability_tower["" + this.ConfigID];
     }
+
+    isManaEnoughForActive() {
+        let needmana = this.config().AbilityActiveMana;
+        if (needmana) {
+            let ability = this.GetDomain<BaseAbility_Plus>();
+            if (needmana.includes("|")) {
+                let _mana = needmana.split("|");
+                needmana = _mana[math.max(ability.GetLevel(), _mana.length) - 1]
+            }
+            if (needmana) {
+                let caster = ability.GetCasterPlus();
+                return tonumber("" + needmana) <= caster.GetMana();
+            }
+        }
+        return true;
+    }
 }

@@ -45,8 +45,8 @@ export class ERoundBoard extends ERound {
         this.roundState = RoundConfig.ERoundBoardState.battle;
         player.SyncClientEntity(this, false);
         EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onbattle, player.Playerid, this);
-        let buildingCount = player.BuildingManager().getAllBattleBuilding().length;
-        let enemyCount = player.EnemyManagerComp().getAllAliveEnemy().length;
+        let buildingCount = player.BuildingManager().getAllBattleUnitAlive().length;
+        let enemyCount = player.EnemyManagerComp().getAllBattleUnitAlive().length;
         let delaytime = Number(this.config.round_time);
         if (buildingCount == 0 || enemyCount == 0) {
             delaytime = 1;
@@ -55,8 +55,8 @@ export class ERoundBoard extends ERound {
             1,
             () => {
                 delaytime--;
-                let buildingCount = player.BuildingManager().getAllBattleBuilding().length;
-                let enemyCount = player.EnemyManagerComp().getAllAliveEnemy().length;
+                let buildingCount = player.BuildingManager().getAllBattleUnitAlive().length;
+                let enemyCount = player.EnemyManagerComp().getAllBattleUnitAlive().length;
                 if (delaytime > 0) {
                     if (buildingCount > 0 && enemyCount > 0) {
                         return 1;
@@ -79,7 +79,7 @@ export class ERoundBoard extends ERound {
         this.roundState = RoundConfig.ERoundBoardState.prize;
         let playerroot = this.Domain.ETRoot.AsPlayer();
         playerroot.SyncClientEntity(this, false);
-        let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllAliveEnemy();
+        let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllBattleUnitAlive();
         let isWin = aliveEnemy.length == 0;
         EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onprize, playerroot.Playerid, isWin);
         this.waitingEndTimer = TimerHelper.addTimer(

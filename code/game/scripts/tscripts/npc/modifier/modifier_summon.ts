@@ -14,8 +14,6 @@ export class modifier_summon extends BaseModifier_Plus {
     IsStunDebuff() { return true }
     AllowIllusionDuplicate() { return false }
 
-
-
     /**
      * 创建召唤物
      * @param sUnitName
@@ -38,11 +36,15 @@ export class modifier_summon extends BaseModifier_Plus {
             summon: hSummon,
             eventType: EventDataType.attackerIsSelf + EventDataType.OtherCanBeAnyOne,
         }, Enum_MODIFIER_EVENT.ON_SPAWN_SUMMONNED)
-        return hSummon
+        return hSummon as BaseNpc_Plus;
     }
 
     static GetSummonCount(hCaster: BaseNpc_Plus) {
         return
+    }
+
+    public OnDestroy(): void {
+        super.OnDestroy();
     }
 }
 

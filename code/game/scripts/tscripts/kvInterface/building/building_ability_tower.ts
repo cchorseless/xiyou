@@ -654,6 +654,7 @@ export interface OBJ_2_1 {
 "AbilityDuration" :string ,
 "AbilityDamage" :string ,
 "CombinationLabel" :string ,
+"AbilityActiveMana" :string ,
 "RequiredLevel" :string ,
 "LevelsBetweenUpgrades" :string ,
 "AbilityTextureName" :string ,

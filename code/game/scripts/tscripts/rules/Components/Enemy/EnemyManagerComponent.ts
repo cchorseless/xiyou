@@ -16,6 +16,7 @@ import { ET, registerET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { EnemyState } from "../../System/Enemy/EnemyState";
 import { RoundConfig } from "../../System/Round/RoundConfig";
+import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
@@ -60,6 +61,15 @@ export class EnemyManagerComponent extends ET.Component {
         })
         return r;
     }
+    public getAllBattleUnitAlive() {
+        let allenemy = this.getAllEnemy();
+        let r: PlayerCreateBattleUnitEntityRoot[] = [];
+        allenemy.forEach(b => {
+            r = r.concat(b.BattleUnitManager().GetAllBattleUnitAlive())
+        })
+        return r
+    }
+
     getAllAliveEnemy() {
         let player = this.Domain.ETRoot.AsPlayer();
         let r: EnemyUnitEntityRoot[] = [];
