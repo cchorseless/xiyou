@@ -10,6 +10,7 @@ import { BuildingComponent } from "./BuildingComponent";
 import { BuildingPropsComponent } from "./BuildingPropsComponent";
 
 export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
+
     public onAwake(playerid: PlayerID, conf: string) {
         (this as any).Playerid = playerid;
         (this as any).ConfigID = conf;

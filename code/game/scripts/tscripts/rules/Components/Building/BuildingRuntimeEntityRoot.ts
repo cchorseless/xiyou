@@ -1,0 +1,4 @@
+import { BuildingEntityRoot } from "./BuildingEntityRoot";
+
+export class BuildingRuntimeEntityRoot extends BuildingEntityRoot {
+}

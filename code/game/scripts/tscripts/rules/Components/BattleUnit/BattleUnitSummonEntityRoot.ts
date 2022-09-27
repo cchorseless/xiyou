@@ -8,6 +8,7 @@ import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUn
 import { RoundBuildingComponent } from "../Round/RoundBuildingComponent";
 import { BuildingComponent } from "../Building/BuildingComponent";
 import { BuildingPropsComponent } from "../Building/BuildingPropsComponent";
+import { WearableComponent } from "../Wearable/WearableComponent";
 
 export class BattleUnitSummonEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     public onAwake(playerid: PlayerID, conf: string) {
@@ -15,8 +16,7 @@ export class BattleUnitSummonEntityRoot extends PlayerCreateBattleUnitEntityRoot
         (this as any).ConfigID = conf;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
         this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessComponent>("ChessComponent"));
-        this.addBattleComp();
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingComponent>("BuildingComponent"));
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof WearableComponent>("WearableComponent"), this.GetDotaHeroName());
         this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundBuildingComponent>("RoundBuildingComponent"));
         this.SyncClientEntity(this);
     }
