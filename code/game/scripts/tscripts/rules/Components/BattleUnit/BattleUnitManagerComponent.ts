@@ -57,8 +57,6 @@ export class BattleUnitManagerComponent extends ET.Component {
         }
     }
 
-
-
     public GetAllBattleUnitAlive() {
         let hCaster = this.GetDomain<BaseNpc_Plus>();
         let battleUnit = hCaster.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
