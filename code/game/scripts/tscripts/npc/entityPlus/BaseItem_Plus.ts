@@ -42,6 +42,66 @@ export class BaseItem_Plus extends BaseItem {
     }
 
     /**
+       * 技能施法可以释放
+       * @returns
+       */
+    public IsItemReady(): boolean {
+        let hCaster = this.GetCaster()
+        let iBehavior = this.GetBehaviorInt()
+        if (this.IsHidden()) {
+            return false
+        }
+        if (!hCaster) {
+            return false
+        }
+        if (!(this.IsFullyCastable() && this.IsActivated() && this.IsCooldownReady() && this.GetLevel() > 0 && this.IsOwnersManaEnough())) {
+            return false
+        }
+        if (hCaster.IsHexed() || hCaster.IsCommandRestricted()) {
+            return false
+        }
+        // 被控是否可以施法
+        if (hCaster.IsStunned() && !GameFunc.IncludeArgs(iBehavior, DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE)[0]) {
+            return false
+        }
+        if (hCaster.IsChanneling() && !GameFunc.IncludeArgs(iBehavior, DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL)[0]) {
+            return false
+        }
+        if (IsServer()) {
+            if (this.IsItem()) {
+                if (hCaster.IsMuted()) {
+                    return false
+                }
+            }
+            else {
+                if (hCaster.IsSilenced()) {
+                    return false
+                }
+            }
+        }
+        else {
+            if (this.IsItem()) {
+                if (this.CanBeUsedOutOfInventory()) {
+                    return false
+                }
+                if (!this.IsPassive() && hCaster.IsMuted()) {
+                    return false
+                }
+            }
+            else {
+                if (!this.IsPassive() && hCaster.IsSilenced()) {
+                    return false
+                }
+                if (this.IsPassive() && hCaster.PassivesDisabled()) {
+                    return false
+                }
+            }
+        }
+        return true
+
+    }
+
+    /**
      * 创建一个物品给单位，如果单位身上没地方放了，就扔在他附近随机位置
      * @param this
      * @param hUnit

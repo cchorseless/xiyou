@@ -23,7 +23,6 @@ export class AbilityManagerComponent extends ET.Component {
     }
 
     learnAbility(ability: string) {
-
         return true
     }
 
@@ -60,5 +59,24 @@ export class AbilityManagerComponent extends ET.Component {
             let ability = battleunit.GetDomainChild<AbilityEntityRoot>(str);
             ability.GetDomain<BaseAbility_Plus>().UpgradeAbility(true);
         })
+    }
+
+    getAllCanCastAbility() {
+        let r: BaseAbility_Plus[] = [];
+        let caster = this.GetDomain<BaseNpc_Plus>();
+        if (caster.IsTempestDouble() || caster.IsIllusion()) {
+            return r;
+        }
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        this.allAbilityRoot.forEach(str => {
+            let abilityroot = battleunit.GetDomainChild<AbilityEntityRoot>(str);
+            if (abilityroot) {
+                let ability = abilityroot.GetDomain<BaseAbility_Plus>()
+                if (ability.IsAbilityReady()) {
+                    r.push(ability)
+                }
+            }
+        });
+        return r;
     }
 }

@@ -20,7 +20,7 @@ export class BaseAbility_Plus extends BaseAbility {
     }
     public OnUpgrade() {
         if (this.GetLevel() == 1 && this.IsAutoCast) {
-            this.ToggleAutoCast()
+            // this.ToggleAutoCast()
         }
     }
     public IsHiddenWhenStolen() {
@@ -253,7 +253,7 @@ export class BaseAbility_Plus extends BaseAbility {
 
 
     /**尝试智能施法,AI会调用 */
-    public AutoSpellSelf() { };
+    public AutoSpellSelf(): boolean { return true };
 
     /**
      * 释放技能

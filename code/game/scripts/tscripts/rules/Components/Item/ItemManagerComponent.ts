@@ -47,4 +47,23 @@ export class ItemManagerComponent extends ET.Component {
             battleunit.CombinationComp().removeItemRoot(root);
         }
     }
+
+    getAllCanCastItem() {
+        let r: BaseItem_Plus[] = [];
+        let caster = this.GetDomain<BaseNpc_Plus>();
+        if (caster.IsTempestDouble() || caster.IsIllusion()) {
+            return r;
+        }
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        this.allItemRoot.forEach(str => {
+            let itemroot = battleunit.GetDomainChild<ItemEntityRoot>(str);
+            if (itemroot) {
+                let item = itemroot.GetDomain<BaseItem_Plus>()
+                if (item.IsItemReady()) {
+                    r.push(item)
+                }
+            }
+        });
+        return r;
+    }
 }

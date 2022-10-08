@@ -49,6 +49,17 @@ export class AiAttackComponent extends ET.Component {
         }
     }
 
+    castAbility() {
+        let u = this.GetDomain<BaseNpc_Plus>();
+        let battleUnit = u.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let abilityM = battleUnit.AbilityManagerComp();
+        if (abilityM) {
+
+        }
+
+
+    }
+
     findAroundEnemyToAttack(): BaseNpc_Plus {
         let u = this.GetDomain<BaseNpc_Plus>();
         let building = u.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();

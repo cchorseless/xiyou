@@ -64,6 +64,7 @@ export class ability1_axe_berserkers_call extends ActiveRootAbility {
                 OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET,
                 AbilityIndex: this.entindex(),
             })
+            return true;
         }
     }
 
