@@ -57,15 +57,13 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
     OnDestroy() {
         super.OnDestroy();
         if (IsServer()) {
-            this.GetParentPlus().RemoveHorizontalMotionController(this);
-            this.GetParentPlus().RemoveVerticalMotionController(this);
-            let etroot = this.GetParentPlus().ETRoot;
-            if (etroot != null) {
-                if (etroot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
-                    this.GetParentPlus().SetForwardVector(Vector(0, 1, 0));
-                } else if (etroot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
-                    this.GetParentPlus().SetForwardVector(Vector(0, -1, 0));
-                }
+            let npc = this.GetParentPlus();
+            npc.RemoveHorizontalMotionController(this);
+            npc.RemoveVerticalMotionController(this);
+            if (npc.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_GOODGUYS) {
+                npc.SetForwardVector(Vector(0, 1, 0));
+            } else if (npc.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_BADGUYS) {
+                npc.SetForwardVector(Vector(0, -1, 0));
             }
         }
     }

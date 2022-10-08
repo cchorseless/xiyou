@@ -1,4 +1,5 @@
 import { GameFunc } from "../../../GameFunc";
+import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_taunt } from "../../../npc/modifier/effect/modifier_taunt";
@@ -25,6 +26,9 @@ export class AiAttackComponent extends ET.Component {
                 if (chessComp.is_moving) {
                     return 0.1;
                 }
+                if (this.castAbilityAndItem()) {
+                    return 0.1;
+                }
                 let enemy = this.findAroundEnemyToAttack();
                 if (enemy) {
                     let enemyRoot = enemy.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
@@ -49,16 +53,33 @@ export class AiAttackComponent extends ET.Component {
         }
     }
 
-    castAbility() {
+    castAbilityAndItem() {
         let u = this.GetDomain<BaseNpc_Plus>();
         let battleUnit = u.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
         let abilityM = battleUnit.AbilityManagerComp();
         if (abilityM) {
-
+            let abilitys = abilityM.getAllCanCastAbility();
+            while (abilitys.length > 0) {
+                let ability = abilitys.shift();
+                if (ability && ability.AutoSpellSelf()) {
+                    return true;
+                }
+            }
         }
-
-
+        let itemM = battleUnit.ItemManagerComp();
+        if (itemM) {
+            let items = itemM.getAllCanCastItem();
+            while (items.length > 0) {
+                let item = items.shift();
+                if (item && item.AutoSpellSelf()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
+
+
 
     findAroundEnemyToAttack(): BaseNpc_Plus {
         let u = this.GetDomain<BaseNpc_Plus>();

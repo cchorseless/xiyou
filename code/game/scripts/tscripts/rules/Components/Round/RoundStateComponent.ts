@@ -44,8 +44,11 @@ export class RoundStateComponent extends ET.Component {
 
     OnBoardRound_Battle() {
         let domain = this.GetDomain<BaseNpc_Plus>();
-        modifier_jiaoxie_wudi.remove(domain);
         let battleunit = this.BattleUnit();
+        if (!battleunit.ChessComp().isInBattle()) {
+            return;
+        }
+        modifier_jiaoxie_wudi.remove(domain);
         battleunit.AiAttackComp().startFindEnemyAttack();
         if (battleunit.IsFriendly()) {
             modifier_remnant.applyOnly(domain, domain);
@@ -81,7 +84,7 @@ export class RoundStateComponent extends ET.Component {
         if (battleunit.IsFriendly()) {
             let domain = this.GetDomain<BaseNpc_Plus>();
             let ability = building_auto_findtreasure.findIn(domain);
-            if (ability.IsFinding()) {
+            if (ability && ability.IsFinding()) {
                 ability.GoBackBoard();
             }
         }

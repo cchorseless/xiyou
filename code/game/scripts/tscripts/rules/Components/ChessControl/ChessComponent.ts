@@ -77,10 +77,12 @@ export class ChessComponent extends ET.Component {
                 vy: v.y,
             });
         } else {
-            modifier_run.applyOnly(domain, domain, null, {
-                vx: v.x,
-                vy: v.y,
-            });
+            domain.MoveToPositionAggressive(v)
+            // modifier_run.applyOnly(domain, domain, null, {
+            //     vx: v.x,
+            //     vy: v.y,
+            // });
+
         }
     }
     OnblinkChessStart(to: ChessControlConfig.ChessVector) {

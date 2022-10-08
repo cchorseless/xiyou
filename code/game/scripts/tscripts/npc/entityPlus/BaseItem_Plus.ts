@@ -40,7 +40,8 @@ export class BaseItem_Plus extends BaseItem {
     IsCastBySelf() {
         return this.GetCasterPlus().GetEntityIndex() == this.GetOwnerPlus().GetEntityIndex();
     }
-
+    /**尝试智能施法,AI会调用 */
+    public AutoSpellSelf(): boolean { return true };
     /**
        * 技能施法可以释放
        * @returns

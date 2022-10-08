@@ -64,7 +64,7 @@ export class AbilityManagerComponent extends ET.Component {
     getAllCanCastAbility() {
         let r: BaseAbility_Plus[] = [];
         let caster = this.GetDomain<BaseNpc_Plus>();
-        if (caster.IsTempestDouble() || caster.IsIllusion()) {
+        if (caster.IsIllusion()) {
             return r;
         }
         let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();

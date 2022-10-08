@@ -144,6 +144,7 @@ export class ChessControlSystemComponent extends ET.Component {
         let centerY = math.floor(v.y);
         let playerid = v.playerid;
         let circle = math.floor(distance / ChessControlConfig.Gird_Width);
+        if (circle < 1) { circle = 1 }
         while (circle > 0) {
             if (centerX - circle > 0) {
                 if (centerY - circle >= 1) {
