@@ -11,7 +11,7 @@ import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-import { modifier_remnant } from "../../modifier/modifier_remnant";
+import { modifier_remnant } from "../../modifier/battle/modifier_remnant";
 import { modifier_tp } from "../../modifier/modifier_tp";
 
 // 自动寻宝
@@ -47,7 +47,7 @@ export class building_auto_findtreasure extends BaseAbility_Plus {
         TimerHelper.addTimer(
             1.1,
             () => {
-                building.RoundBuildingComp().OnBackBoardFromBaseRoom();
+                building.RoundStateComp().OnBackBoardFromBaseRoom();
             },
             building
         );

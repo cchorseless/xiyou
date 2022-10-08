@@ -1,0 +1,59 @@
+"DOTAAbilities"
+{
+	//=================================================================================================================
+	// minister: power_word_shield
+	//=================================================================================================================
+	"power_word_shield"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"	                    "ability_lua"
+		"AbilityTextureName"	        "power_word_shield"
+		"AbilityType"				    "DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_unit"
+        "SpellImmunityType"				"SPELL_IMMUNITY_ALLIES_YES"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+
+		"ScriptFile"	                "hg/minister/power_word_shield.lua"
+		"AbilitySound"				    "Hero_Oracle.FalsePromise.Cast"
+
+
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.1"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityCastGestureSlot"		"DEFAULT"
+		"AbilityCastRange"			    "1500"
+        "HasScepterUpgrade"			    "1"
+
+		// Time
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"1"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+        "precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_oracle.vsndevts"
+			"particle"	"particles/units/heroes/hero_oracle/oracle_false_promise_cast.vpcf"
+			"particle"	"particles/units/heroes/hero_oracle/oracle_false_promise.vpcf"
+		}
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityValues"
+		{
+            "shield"                    "200 400 600 800"
+            "mana_cost"                 "10"
+            "mana_res"                  "2.5"
+            "duration"                  "15"
+            "weak_duration"             "7.5"
+            "health_regen"              "20 40 60 80"
+		}
+	}
+
+
+}	

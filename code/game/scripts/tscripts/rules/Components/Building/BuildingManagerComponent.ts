@@ -9,18 +9,11 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health_bar";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
-import { BuildingState } from "../../System/Building/BuildingState";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { RoundConfig } from "../../System/Round/RoundConfig";
-import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
-import { ChessComponent } from "../ChessControl/ChessComponent";
-import { CombinationComponent } from "../Combination/CombinationComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERoundBoard } from "../Round/ERoundBoard";
-import { RoundBuildingComponent } from "../Round/RoundBuildingComponent";
-import { WearableComponent } from "../Wearable/WearableComponent";
-import { BuildingComponent } from "./BuildingComponent";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
 
 /**塔防组件 */
@@ -176,7 +169,7 @@ export class BuildingManagerComponent extends ET.Component {
             (round: ERoundBoard) => {
                 this.getAllBattleBuilding()
                     .forEach((b) => {
-                        b.RoundBuildingComp().OnBoardRound_Start();
+                        b.RoundStateComp().OnBoardRound_Start();
                     });
             });
         EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onbattle,
@@ -184,7 +177,7 @@ export class BuildingManagerComponent extends ET.Component {
             (round: ERoundBoard) => {
                 this.getAllBattleBuilding()
                     .forEach((b) => {
-                        b.RoundBuildingComp().OnBoardRound_Battle();
+                        b.RoundStateComp().OnBoardRound_Battle();
                     });
             });
         EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onprize,
@@ -194,7 +187,7 @@ export class BuildingManagerComponent extends ET.Component {
                     .forEach((b) => {
                         b.BattleUnitManager().ClearRuntimeBattleUnit();
                         if (b.ChessComp().isInBattleAlive()) {
-                            b.RoundBuildingComp().OnBoardRound_Prize(iswin);
+                            b.RoundStateComp().OnBoardRound_Prize_Building(iswin);
                         }
                     });
             });
@@ -203,7 +196,7 @@ export class BuildingManagerComponent extends ET.Component {
             (round: ERoundBoard) => {
                 this.getAllBattleBuilding()
                     .forEach((b) => {
-                        b.RoundBuildingComp().OnBoardRound_WaitingEnd();
+                        b.RoundStateComp().OnBoardRound_WaitingEnd();
                     });
             });
 

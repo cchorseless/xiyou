@@ -10,7 +10,6 @@ import { ET, registerET } from "../../Entity/Entity";
 import { EnemyConfig } from "../../System/Enemy/EnemyConfig";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { ERound } from "../Round/ERound";
-import { RoundEnemyComponent } from "../Round/RoundEnemyComponent";
 import { EnemyKillPrizeComponent } from "./EnemyKillPrizeComponent";
 import { EnemyMoveComponent } from "./EnemyMoveComponent";
 import { EnemyPropsComponent } from "./EnemyPropsComponent";

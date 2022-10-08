@@ -5,7 +5,7 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
-import { RoundBuildingComponent } from "../Round/RoundBuildingComponent";
+import { RoundStateComponent } from "../Round/RoundStateComponent";
 import { BuildingComponent } from "./BuildingComponent";
 import { BuildingPropsComponent } from "./BuildingPropsComponent";
 
@@ -18,7 +18,6 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
         this.addBattleComp();
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingComponent>("BuildingComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundBuildingComponent>("RoundBuildingComponent"));
         this.SyncClientEntity(this);
     }
 
@@ -55,10 +54,6 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     BuildingPropComp() {
         return this.GetComponentByName<BuildingPropsComponent>("BuildingPropsComponent");
     }
-    RoundBuildingComp() {
-        return this.GetComponentByName<RoundBuildingComponent>("RoundBuildingComponent");
-    }
-
     BattleUnitManager() {
         return this.GetComponentByName<BattleUnitManagerComponent>("BattleUnitManagerComponent");
     }

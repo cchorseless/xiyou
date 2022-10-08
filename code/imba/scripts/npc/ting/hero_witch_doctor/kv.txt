@@ -1,0 +1,602 @@
+"DOTAAbilities"
+{
+	/////////////////////////////////////////
+	//witch_doctor
+	////////////////////////////////////////
+	//=================================================================================================================
+	// Witch Doctor: Paralyzing Cask  麻痹药剂
+	//=================================================================================================================
+	"imba_witch_doctor_paralyzing_cask"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"ting/hero_witch_doctor.lua"
+		"AbilityTextureName"			"witch_doctor_paralyzing_cask"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES_STRONG"
+		"FightRecapLevel"				"1"
+		"AbilitySound"					"Hero_WitchDoctor.Paralyzing_Cask_Cast"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1500"
+		"AbilityCastPoint"				"0.1"
+
+		// Time
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"11"
+
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"75 100 125 150"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"80 100 120 140"
+
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.5"	// Can have multiple bounces
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_witchdoctor/witchdoctor_cask.vpcf"
+			"soundfile"	"sounds/weapons/hero/witch_doctor/cask_cast.vsnd"
+			"soundfile"	"sounds/weapons/hero/witch_doctor/cask_bounce01.vsnd"
+			"soundfile"	"sounds/weapons/hero/witch_doctor/cask_bounce02.vsnd"
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"1.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"paralyzed_duration"		"1.5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"50 100 150 200"
+				"LinkedSpecialBonus"	"special_bonus_imba_witch_doctor_1"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dis"			"300"	//弹跳距离
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bounces"				"5 5 6 10"	//弹跳次数
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"1000"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stun_radius"					"300"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal_radius"					"400"
+				"LinkedSpecialBonus"	"special_bonus_imba_witch_doctor_3"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"heal_duration"					"5.0"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bounces_enemy"					"5 5 5 5"
+			}
+
+
+
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
+	}
+
+	//=================================================================================================================
+	// Witch Doctor: Voodoo Restoration 巫毒恢复术
+	//=================================================================================================================
+	"imba_witch_doctor_voodoo_restoration"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"ting/hero_witch_doctor.lua"
+		"AbilityTextureName"			"witch_doctor_voodoo_restoration"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET "
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilitySound"					"Hero_WitchDoctor.Voodoo_Restoration"
+
+		// Time
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"10"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"10"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_witchdoctor/witchdoctor_voodoo_restoration.vpcf"
+			"particle"	"particles/units/heroes/hero_witchdoctor/witchdoctor_voodoo_restoration_flame.vpcf"
+			"particle"	"particles/units/heroes/hero_witchdoctor/witchdoctor_ward_attack_explosion.vpcf"
+			"soundfile"	"sounds/weapons/hero/witch_doctor/voodoo_restoration.vsnd"
+			"soundfile"	"sounds/weapons/hero/witch_doctor/voodoo_restoration_loop.vsnd"
+			"soundfile"	"sounds/weapons/hero/witch_doctor/voodoo_restoration_off.vsnd"
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"mana_per_second"			"5 10 20 40"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"600"
+				"LinkedSpecialBonus"	"special_bonus_imba_witch_doctor_3"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"heal"						"15 30 45 60"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"heal_interval"				"0.5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal_debuff"					"50"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"					"6.0"
+			}
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+	}
+
+	//=================================================================================================================
+	// Witch Doctor: Maledict
+	//=================================================================================================================
+	"imba_witch_doctor_maledict"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"ting/hero_witch_doctor.lua"
+		"AbilityTextureName"			"witch_doctor_voodoo_switcheroo"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT |DOTA_ABILITY_BEHAVIOR_SHOW_IN_GUIDES "
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"MaxLevel"						"1"
+		"FightRecapLevel"				"1"
+		"AbilitySound"					"Hero_WitchDoctor.Maledict_Cast"
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"800"
+		"AbilityCastPoint"				"0.35 0.35 0.35 0.35"
+
+		// Time
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"30"
+
+		// Damage.
+		//-------------------------------------------------------------------------------------------------------------
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"105 110 115 120"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_witchdoctor/witchdoctor_maledict.vpcf"
+			"particle"	"particles/units/heroes/hero_witchdoctor/witchdoctor_maledict_aoe.vpcf"
+			"soundfile"	"sounds/weapons/hero/witch_doctor/maledict_cast.vsnd"
+			"soundfile"	"sounds/weapons/hero/witch_doctor/maledict_fail.vsnd"
+			"soundfile"	"sounds/weapons/hero/witch_doctor/maledict_loop.vsnd"
+			"soundfile"	"sounds/weapons/hero/witch_doctor/maledict_tick.vsnd"
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"500"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"inv"						"2"	//诅咒间隔
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"slow"						"60"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"60"	//伤害
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"6.0"
+			}
+		}
+		"HasScepterUpgrade"			"1"
+		//"IsGrantedByScepter"		"1"
+	}
+
+	//=================================================================================================================
+	// Witch Doctor: Death Ward
+	//=================================================================================================================
+	"imba_witch_doctor_death_ward"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"ting/hero_witch_doctor.lua"
+		"AbilityTextureName"			"wuyi"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NO_INVIS | DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE | DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"FightRecapLevel"				"2"
+		"AbilitySound"					"Hero_WitchDoctor.Death_WardBuild"
+
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.35 0.35 0.35"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityChannelAnimation"		"ACT_DOTA_CHANNEL_ABILITY_4"
+
+		// Time
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"60 50 40"
+		"AbilityChannelTime"			"8.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"200 200 200"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_witchdoctor/witchdoctor_ward_attack.vpcf"
+			"particle"	"particles/units/heroes/hero_witchdoctor/witchdoctor_deathward_glow_c.vpcf"
+			"particle"	"particles/units/heroes/hero_witchdoctor/witchdoctor_ward_skull.vpcf"
+			"particle"	"particles/units/heroes/hero_witchdoctor/witchdoctor_ward_cast_staff_fire.vpcf"
+			"soundfile"	"sounds/weapons/hero/witch_doctor/deathward_build.vsnd"
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"700 800 900"
+				"CalculateSpellDamageTooltip"	"0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"channel"					"8"	//持续施法时间
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hp"						"8"	//被击次数
+				"LinkedSpecialBonus"	"special_bonus_imba_witch_doctor_6"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"inv"						"0.3" //攻击间隔
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"stun"						"0.1" //晕
+			}
+			"06"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"per"						"2"	//巫毒疗法倍数
+			}
+			"07"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"heal_radius"				"600"	//巫毒疗法范围
+				"LinkedSpecialBonus"	"special_bonus_imba_witch_doctor_3"
+			}
+
+		}
+	}
+
+	//=================================================================================================================
+	// Witch Doctor: Voodoo Switcheroo
+	//=================================================================================================================
+	"imba_witch_doctor_voodoo_switcheroo"
+	{
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"ting/hero_witch_doctor.lua"
+		"AbilityTextureName"			"witch_doctor_death_ward"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"MaxLevel"						"4"
+		//"IsGrantedByShard"				"1"
+		//"HasShardUpgrade"				"1"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.35 0.35 0.35"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+		"AbilityChannelAnimation"		"ACT_DOTA_CHANNEL_ABILITY_4"
+
+		// Time
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"28.0 26.0 24.0 22.0"
+		"AbilityChannelTime"			"5.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"250"
+
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"		"5.00"	//持续时间   需要再代码里改
+				"LinkedSpecialBonus"	"special_bonus_imba_witch_doctor_5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"num"			"1"	//数量
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"num_shard"		"2"	//魔晶+1
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage"		"40 60 80 100"	//守卫攻击
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"intv"			"0.9 0.7 0.5 0.3"	//守卫间隔
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bo"				"3"	//弹射次数
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"kno"					"50"	//击退距离
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow"					"15 20 25 30"	//减速
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"					"600"	//减速
+			}
+
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_4"
+		"HasShardUpgrade"				"1"
+	}
+
+			//麻痹药剂伤害
+	"special_bonus_imba_witch_doctor_1"
+	{
+		// General
+		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"special_bonus_undefined"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"	"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		// Special
+		// -------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"value"	 "100"
+			}
+		}
+		"LinkedAbility"
+		{
+			"01"	"imba_witch_doctor_paralyzing_cask"
+		}
+	}
+			//麻痹药剂冷却
+		"special_bonus_imba_witch_doctor_2"
+	{
+		// General
+		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"special_bonus_undefined"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"	"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		// Special
+		// -------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"value"	 "2"
+			}
+		}
+		"LinkedAbility"
+		{
+			"01"	"imba_witch_doctor_paralyzing_cask"
+		}
+	}
+			//回血范围增加
+		"special_bonus_imba_witch_doctor_3"
+	{
+		// General
+		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"special_bonus_undefined"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"	"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		// Special
+		// -------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"value"	 "100"
+			}
+		}
+		"LinkedAbility"
+		{
+			"01"	"imba_witch_doctor_voodoo_restoration"
+			"02"	"imba_witch_doctor_paralyzing_cask"
+			"03"	"imba_witch_doctor_death_ward"
+		}
+	}
+			//回血变开关
+		"special_bonus_imba_witch_doctor_4"
+	{
+		// General
+		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"special_bonus_undefined"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"	"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		// Special
+		// -------------------------------------------------------------------------------------------------------------
+		"LinkedAbility"
+		{
+			"01"	"imba_witch_doctor_voodoo_restoration"
+		}
+	}
+			//法老守卫持续时间
+		"special_bonus_imba_witch_doctor_5"
+	{
+		// General
+		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"special_bonus_undefined"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"	"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		// Special
+		// -------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"value"	 "2"
+			}
+		}
+		"LinkedAbility"
+		{
+			"01"	"imba_witch_doctor_voodoo_switcheroo"
+		}
+	}
+			//巫蛊之物血量增加
+		"special_bonus_imba_witch_doctor_6"
+	{
+		// General
+		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"special_bonus_undefined"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"	"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		// Special
+		// -------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"value"	 "6"
+			}
+		}
+		"LinkedAbility"
+		{
+			"01"	"imba_witch_doctor_death_ward"
+		}
+	}
+			//巫蛊之舞时获得技能免疫
+		"special_bonus_imba_witch_doctor_7"
+	{
+		// General
+		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"special_bonus_undefined"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"	"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		// Special
+		// -------------------------------------------------------------------------------------------------------------
+
+		"LinkedAbility"
+		{
+			"01"	"imba_witch_doctor_death_ward"
+		}
+	}
+			//死亡咒术不可驱散
+		"special_bonus_imba_witch_doctor_8"
+	{
+		// General
+		// -------------------------------------------------------------------------------------------------------------
+		"BaseClass"	"special_bonus_undefined"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityType"	"DOTA_ABILITY_TYPE_ATTRIBUTES"
+		// Special
+		// -------------------------------------------------------------------------------------------------------------
+
+		"LinkedAbility"
+		{
+			"01"	"imba_witch_doctor_maledict"
+		}
+	}
+}

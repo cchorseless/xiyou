@@ -3,24 +3,21 @@ import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ChessComponent } from "../ChessControl/ChessComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
-import { RoundBuildingComponent } from "../Round/RoundBuildingComponent";
 import { BuildingComponent } from "../Building/BuildingComponent";
 import { BuildingPropsComponent } from "../Building/BuildingPropsComponent";
-import { WearableComponent } from "../Wearable/WearableComponent";
 
 export class BattleUnitSummonEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     public onAwake(playerid: PlayerID, conf: string) {
         (this as any).Playerid = playerid;
         (this as any).ConfigID = conf;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessComponent>("ChessComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof WearableComponent>("WearableComponent"), this.GetDotaHeroName());
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundBuildingComponent>("RoundBuildingComponent"));
+        this.addBattleComp();
         this.SyncClientEntity(this);
     }
-
+    IsSummon() {
+        return true;
+    }
     onDestroy(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
         if (npc && !npc.__safedestroyed__) {
@@ -48,13 +45,4 @@ export class BattleUnitSummonEntityRoot extends PlayerCreateBattleUnitEntityRoot
         return this.Config().DotaHeroName;
     }
 
-    BuildingComp() {
-        return this.GetComponentByName<BuildingComponent>("BuildingComponent");
-    }
-    BuildingPropComp() {
-        return this.GetComponentByName<BuildingPropsComponent>("BuildingPropsComponent");
-    }
-    RoundBuildingComp() {
-        return this.GetComponentByName<RoundBuildingComponent>("RoundBuildingComponent");
-    }
 }

@@ -1,0 +1,33 @@
+"DOTAHeroes"
+{
+	//=================================================================================================================
+	// HERO: Primal Beast
+	//=================================================================================================================
+	"npc_dota_hero_primal_beast"
+	{
+		"Ability1"				"imba_onslaught"
+		"Ability2"				"imba_trample"
+		"Ability3"				"imba_uproar"
+		"Ability6"		        "imba_pulverize"
+		"Ability4"				"primal_beast_rock_throw"
+		"Ability5"		        "generic_hidden"
+		"Ability8"		        "imba_onslaught_again"
+		"Ability10"				"special_bonus_custom_value_msp30"
+		"Ability11"				"special_bonus_unique_primal_beast_onslaught_charges"
+		"Ability12"				"special_bonus_unique_imba_primal_beast_3"
+		"Ability13"				"special_bonus_unique_primal_beast_onslaught_damage"
+		"Ability14"				"special_bonus_unique_primal_beast_trample_attack_damage"
+		"Ability15"				"special_bonus_imba_primal_beast_7"
+		//"Ability15"			"special_bonus_unique_primal_beast_roar_dispells"
+		"Ability16"				"special_bonus_imba_primal_beast_6"
+		"Ability17"				"special_bonus_spell_lifesteal_50"
+		"AbilityDraftAbilities"
+		{
+			"Ability1"		"imba_onslaught"
+			"Ability2"		"imba_trample"
+			"Ability3"		"imba_uproar"
+			"Ability4"		"primal_beast_pulverize"
+		}
+
+	}
+}

@@ -9,8 +9,9 @@ import { BaseNpc_Plus } from "./BaseNpc_Plus";
 import { GameRequest } from "../../service/GameRequest";
 import { ET } from "../../rules/Entity/Entity";
 import { PrecacheHelper } from "../../helper/PrecacheHelper";
+import { BaseModifier_Plus } from "./BaseModifier_Plus";
 
-export interface BaseAbility extends CDOTA_Ability_Lua {}
+export interface BaseAbility extends CDOTA_Ability_Lua { }
 export class BaseAbility implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
     /**查找技能 */
@@ -19,12 +20,12 @@ export class BaseAbility implements ET.IEntityRoot {
     }
 }
 
-export interface BaseItem extends CDOTA_Item_Lua {}
+export interface BaseItem extends CDOTA_Item_Lua { }
 export class BaseItem implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
 }
 
-export interface BaseModifier extends CDOTA_Modifier_Lua {}
+export interface BaseModifier extends CDOTA_Modifier_Lua { }
 export class BaseModifier {
     /**本地特效时间 */
     public static LOCAL_PARTICLE_MODIFIER_DURATION = 3 / 30;
@@ -233,7 +234,7 @@ export class BaseModifier {
         return false;
     }
     /**初始化自己，OnCreated和OnRefresh都会调用 */
-    public Init(params?: object) {}
+    public Init(params?: object) { }
     /**  计时器 */
     public addTimer(n: number, cb: (this: any) => void | number) {
         let s = TimerHelper.addTimer(n, cb, this);
@@ -493,7 +494,7 @@ export class BaseModifier {
     }
 }
 
-export interface BaseNpc extends CDOTA_BaseNPC {}
+export interface BaseNpc extends CDOTA_BaseNPC { }
 export class BaseNpc implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
     /**对应dota内的名字 */
@@ -509,20 +510,20 @@ export class BaseNpc implements ET.IEntityRoot {
     /**是否已经被安全销毁 */
     __safedestroyed__?: boolean = false;
     /**缓存 */
-    Precache?(context: CScriptPrecacheContext) {}
+    Precache?(context: CScriptPrecacheContext) { }
     /**出生 */
-    Spawn?(entityKeyValues: CScriptKeyValues) {}
+    Spawn?(entityKeyValues: CScriptKeyValues) { }
     /**Spawn事件后执行
      * @both
      */
-    onSpawned?(event: NpcSpawnedEvent) {}
+    onSpawned?(event: NpcSpawnedEvent) { }
     /**onSpawned之后执行，激活 */
-    Activate?() {}
+    Activate?() { }
     /**
      * @override
      * 删除
      * */
-    UpdateOnRemove?() {}
+    UpdateOnRemove?() { }
     addSpawnedHandler?(handler: ET.Handler) {
         if (this.__bIsFirstSpawn == true) {
             handler.run();
@@ -620,6 +621,17 @@ export class BaseNpc implements ET.IEntityRoot {
         return default_V;
     }
     //#endregion
+    //#region 羁绊
+    HasCombination?(sCombination: string): BaseModifier_Plus {
+        if (this == null) return;
+        let Combination = this.FindModifierByName(sCombination);
+        if (Combination == null) return;
+        if (Combination.GetStackCount() == 0) return;
+        return Combination as BaseModifier_Plus;
+    }
+    //#endregion
+
+
 
     /**
      * 是否拥有魔晶
@@ -655,17 +667,17 @@ export class BaseNpc implements ET.IEntityRoot {
     }
 }
 
-export interface BaseNpc_Hero extends CDOTA_BaseNPC_Hero {}
-export class BaseNpc_Hero extends BaseNpc {}
+export interface BaseNpc_Hero extends CDOTA_BaseNPC_Hero { }
+export class BaseNpc_Hero extends BaseNpc { }
 
-export interface BaseModifierMotionHorizontal extends CDOTA_Modifier_Lua_Horizontal_Motion {}
-export class BaseModifierMotionHorizontal extends BaseModifier {}
+export interface BaseModifierMotionHorizontal extends CDOTA_Modifier_Lua_Horizontal_Motion { }
+export class BaseModifierMotionHorizontal extends BaseModifier { }
 
-export interface BaseModifierMotionVertical extends CDOTA_Modifier_Lua_Vertical_Motion {}
-export class BaseModifierMotionVertical extends BaseModifier {}
+export interface BaseModifierMotionVertical extends CDOTA_Modifier_Lua_Vertical_Motion { }
+export class BaseModifierMotionVertical extends BaseModifier { }
 
-export interface BaseModifierMotionBoth extends CDOTA_Modifier_Lua_Motion_Both {}
-export class BaseModifierMotionBoth extends BaseModifier {}
+export interface BaseModifierMotionBoth extends CDOTA_Modifier_Lua_Motion_Both { }
+export class BaseModifierMotionBoth extends BaseModifier { }
 
 LogHelper.print("------------------------", "setmetatable", "------------------------------");
 // Add standard base classes to prototype chain to make `super.*` work as `self.BaseClass.*`

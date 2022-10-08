@@ -1,127 +1,163 @@
-LinkLuaModifier("modifier_alchemist_4_buff_target", "abilities/tower/alchemist/alchemist_4.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_alchemist_4_buff_caster", "abilities/tower/alchemist/alchemist_4.lua", LUA_MODIFIER_MOTION_NONE)
+CreateTalents("npc_dota_hero_axe", "heros/hero_axe/berserkers_call.lua")
+berserkers_call = class({})
+LinkLuaModifier("modifier_berserkers_call_axe_buff", "heros/hero_axe/berserkers_call.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_berserkers_call_axe_debuff", "heros/hero_axe/berserkers_call.lua", LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_berserkers_call_axe_buff3", "heros/hero_axe/berserkers_call.lua", LUA_MODIFIER_MOTION_NONE)
 
-// - @class alchemist_4.EOM_AbilityBaseClass
-alchemist_4 = EOM_Ability({})
- GetAbilityTextureName() {
-	return ResHelper.GetAbilityTextureReplacement(super.GetAbilityTextureName(this), this.GetCasterPlus())
+ IsHiddenWhenStolen() {return false
 }
- CastFilterResultTarget(hTarget) {
-	let hCaster = this.GetCasterPlus()
-	let iPlayerID = hCaster.GetPlayerOwnerID()
-	let gold_cost = this.GetSpecialValueFor("gold_cost")
-	let iPlayerGold = 0
-	if ( IsServer() ) {
-		if ( !hTarget.IsBuilding() ) {
-			this.error = "dota_hud_error_only_can_cast_on_building"
-			return UF_FAIL_CUSTOM
-		}
-		iPlayerGold = PlayerData.GetGold(iPlayerID)
-	} else {
-		iPlayerGold = PlayerDataClient.GetGold(iPlayerID)
-	}
-	if ( iPlayerGold < gold_cost ) {
-		this.error = "DOTA_Hud_NeedMoreGold"
-		return UF_FAIL_CUSTOM
-	}
-	return super.CastFilterResultTarget(this, hTarget)
+ IsStealable() {return true
+}
+ IsRefreshable() {return true
+}
+ GetManaCost(iLevel:number) {
+    if ( this.GetCasterPlus().TG_HasTalent("special_bonus_axe_2") ) {
+        return 0
+    } else {
+        return super.GetManaCost(this,iLevel)
+    }
+}
+ GetCooldown(iLevel:number) {
+    if ( this.GetCasterPlus().HasScepter() ) {
+        return super.GetCooldown(this,iLevel)-3
+    } else {
+        return super.GetCooldown(this,iLevel)
+    }
 }
  OnSpellStart() {
-	let hCaster = this.GetCasterPlus()
-	let hTarget = this.GetCursorTarget()
-	let iPlayerID = hCaster.GetPlayerOwnerID()
-	let gold_cost = this.GetSpecialValueFor("gold_cost")
-	let cd = this.GetSpecialValueFor("cd")
+    this.caster=this.caster || this.GetCasterPlus()
+    let num=this.GetSpecialValueFor("num")
+    EmitSoundOn("Hero_Axe.Berserkers_Call",  this.caster)
+    this.caster.AddNewModifier( this.caster, this, "modifier_berserkers_call_axe_buff", {duration = this.GetSpecialValueFor("buff_defense_time")})
+    this.radius=this.GetSpecialValueFor("radius")+this.caster.GetPhysicalArmorValue(false)
+    let units=FindUnitsInRadius(this.caster.GetTeamNumber(),this.caster.GetAbsOrigin(),null,this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false)
+     if ( units.length>0 ) {
+            let stun_time=this.GetSpecialValueFor("stun_time")
+            let ab=this.caster.FindAbilityByName("battle_hunger")
+            for (let target of ( units )) {
 
-	if ( PlayerData.GetGold(iPlayerID) >= gold_cost ) {
-		hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Alchemist.UnstableConcoction.Throw", hCaster))
+                target.AddNewModifier_RS(this.caster, this, "modifier_axe_berserkers_call", {duration = stun_time})
+                    if ( units.length>num || this.caster.TG_HasTalent("special_bonus_axe_1")  ) {
+                        target.AddNewModifier_RS(this.caster, this, "modifier_berserkers_call_axe_debuff", {duration = stun_time})
+                    }
+                    if ( ab && this.caster.HasScepter() ) {
+                        ab.OnSpellStart(target)
+                    }
+            }
+    }
+        let mod=this.caster.FindModifierByName("modifier_counter_helix_ch")
+        if ( mod ) {
+                mod.TurnAround(this.caster)
+        }
+        // if ( units.length>num || this.caster.TG_HasTalent("special_bonus_axe_1")  ) {
+        //     let particle = ParticleManager.CreateParticle( "particles/heros/axe/axe_bc_m.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster)
+        //     ParticleManager.SetParticleControl(fx, 1, Vector(this.radius,this.radius,this.radius))
+        //     ParticleManager.ReleaseParticleIndex(particle)
+        // } else {
+        //     let particle = ParticleManager.CreateParticle( "particles/econ/items/axe/axe_ti9_immortal/axe_ti9_call.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster)
+        //     ParticleManager.SetParticleControl(fx, 2, Vector(this.radiusd,this.radius,this.radius))
+        //     ParticleManager.ReleaseParticleIndex(particle)
+        // }
+    let particle = ParticleManager.CreateParticle( "particles/econ/items/axe/axe_ti9_immortal/axe_ti9_call.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster)
+    ParticleManager.SetParticleControl(particle, 2, Vector(this.radius,this.radius,this.radius))
+    ParticleManager.ReleaseParticleIndex(particle)
+}
 
-		ProjectileManager.CreateTrackingProjectile({
-			Ability : this,
-			vSourceLoc : hCaster.GetAttachmentOrigin(hCaster.ScriptLookupAttachment("attach_attack3")),
-			iMoveSpeed : 900,
-			EffectName : "particles/units/heroes/hero_alchemist/alchemist_berserk_potion_projectile.vpcf",
-			Target : hTarget,
-		})
-		PlayerData.ModifyGold(iPlayerID, -gold_cost)
-		this.StartCooldown(cd)
-	}
-}
- OnProjectileHit(hTarget:BaseNpc_Plus, vLocation:Vector) {
-	let hCaster = this.GetCasterPlus()
+  // 防御buff
+    modifier_berserkers_call_axe_buff =  class({})
+     IsHidden() {return false
+    }
+     IsPurgable() {return false
+    }
+     DeclareFunctions() {
+        return
+        {
+            @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
+            @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_RESISTANCE_BONUS,
+        }
+    }
+     OnCreated() {
+		if ( this.GetAbilityPlus() == null ) { return }
+        this.armor=this.GetAbilityPlus().GetSpecialValueFor( "armor")
+        this.magica=this.GetAbilityPlus().GetSpecialValueFor( "magica")
+    }
+     OnRefresh() {
+        this.OnCreated()
+    }
+     GetPhysicalArmorBonus(  ) {return this.armor
+    }
+     GetMagicalResistanceBonus(  ) {return this.magica
+    }
 
-	EmitSoundOn(ResHelper.GetSoundReplacement("Hero_Alchemist.UnstableConcoction.Stun", hCaster), hTarget)
-	hTarget.AddNewModifier(hCaster, this, "modifier_alchemist_4_buff_target", null)
-	hCaster.AddNewModifier(hCaster, this, "modifier_alchemist_4_buff_caster", null)
-}
-// =======================================modifier_alchemist_4_buff_target=======================================
-// - @class modifier_alchemist_4_buff_target.eom_modifier
-modifier_alchemist_4_buff_target = eom_modifier({
-	GetTexture : "modifier_bonus_health",
-	IsHidden : false,
-	IsPurgable : false,
-	IsPurgeException : false,
-})
- OnCreated(params: ModifierTable) {
-	this.bonus_all = this.GetSpecialValueFor("bonus_all")
-	if ( IsServer() ) {
-		this.ModifyStackCount(this.bonus_all)
-	}
-}
- OnRefresh(params: ModifierTable) {
-	this.bonus_all = this.GetSpecialValueFor("bonus_all")
-	if ( IsServer() ) {
-		this.ModifyStackCount(this.bonus_all)
-	}
-}
- EDeclareFunctions() {
-	return {
-		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_ALL_BONUS,
-	}
-}
- EOM_GetModifierBonusStats_All() {
-	return this.GetStackCount()
-}
- DeclareFunctions() {
-	return {
-		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP,
-	}
-}
- OnTooltip() {
-	return this.GetStackCount()
-}
-// =======================================modifier_alchemist_4_buff_caster=======================================
-// - @class modifier_alchemist_4_buff_caster.eom_modifier
-modifier_alchemist_4_buff_caster = eom_modifier({
-	IsHidden : false,
-	IsPurgable : false,
-	IsPurgeException : false,
-})
- OnCreated(params: ModifierTable) {
-	this.spell_amp_stack = this.GetSpecialValueFor("spell_amp_stack")
-	if ( IsServer() ) {
-		this.ModifyStackCount(this.spell_amp_stack)
-	}
-}
- OnRefresh(params: ModifierTable) {
-	this.spell_amp_stack = this.GetSpecialValueFor("spell_amp_stack")
-	if ( IsServer() ) {
-		this.ModifyStackCount(this.spell_amp_stack)
-	}
-}
- EDeclareFunctions() {
-	return {
-		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS,
-	}
-}
- EOM_GetModifierSpellAmplifyBonus() {
-	return this.GetStackCount()
-}
- DeclareFunctions() {
-	return {
-		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP,
-	}
-}
- OnTooltip() {
-	return this.GetStackCount()
-}
+
+    // 敌人debuff
+    modifier_berserkers_call_axe_debuff= class({})
+
+     IsHidden() {return true
+    }
+     IsDebuff() {return true
+    }
+     IsPurgable() {return false
+    }
+     OnDeath(tg) {
+        if ( IsServer() ) {
+            if ( tg.unit == this.GetCasterPlus() ) {
+                this.Destroy()
+            }
+        }
+    }
+     OnCreated() {
+		if ( this.GetAbilityPlus() == null ) { return }
+        this.attsp=this.GetAbilityPlus().GetSpecialValueFor( "attsp")
+    }
+     OnRefresh() {
+        this.OnCreated()
+    }
+     CheckState() {
+        return
+        {
+            [modifierstate.MODIFIER_STATE_COMMAND_RESTRICTED] : true,
+            [modifierstate.MODIFIER_STATE_SILENCED]=true,
+            [modifierstate.MODIFIER_STATE_CANNOT_MISS]=true,
+            [modifierstate.MODIFIER_STATE_MUTED]=true,
+        }
+    }
+     DeclareFunctions() {
+        return
+        {
+            @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
+            @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH,
+        }
+    }
+
+     GetAttackSpeedBonus_Constant() {
+        return this.attsp
+    }
+
+
+    // A帐效果
+    modifier_berserkers_call_axe_buff3= class({})
+
+     IsHidden() {
+        return true
+    }
+     IsPurgable() {
+        return false
+    }
+
+     DeclareFunctions() {
+        return
+         {
+            @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACKED,
+        }
+    }
+
+     OnAttacked(tg) {
+        if ( !IsServer() ) {
+            return
+        }
+        if ( !tg.attacker.HasModifier("modifier_berserkers_call_axe_debuff") && tg.attacker.IsRealHero() && tg.attacker!=this.GetParentPlus() && tg.target==this.GetParentPlus()   ) {
+            tg.attacker.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_axe_berserkers_call", {duration = this.GetAbilityPlus().GetSpecialValueFor("stun_time")})
+            tg.attacker.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_berserkers_call_axe_debuff", {duration = this.GetAbilityPlus().GetSpecialValueFor("stun_time")})
+        }
+     }

@@ -52,7 +52,7 @@ export class FakerHeroComponent extends ET.Component {
                 this.FakerHero.ETRoot.As<FakerHeroEntityRoot>().FHeroCombinationManager().activeECombination(true);
                 player.EnemyManagerComp().getAllEnemy()
                     .forEach((b) => {
-                        b.RoundEnemyComp().OnBoardRound_Battle();
+                        b.RoundStateComp().OnBoardRound_Battle();
                     });
             });
         EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onprize,
@@ -63,7 +63,7 @@ export class FakerHeroComponent extends ET.Component {
                     let delay_time = 0.5;
                     let aliveEnemy = player.EnemyManagerComp().getAllAliveEnemy();
                     aliveEnemy.forEach((b) => {
-                        b.RoundEnemyComp().OnBoardRound_Prize(this.ProjectileInfo);
+                        b.RoundStateComp().OnBoardRound_Prize_Enemy(this.ProjectileInfo);
                         damage += Number(b.GetRoundBasicUnitConfig().failure_count || "0");
                         delay_time = math.min(delay_time, b.GetDistance2Player() / 1000);
                     });
@@ -82,7 +82,7 @@ export class FakerHeroComponent extends ET.Component {
             (round: ERoundBoard) => {
                 player.EnemyManagerComp().getAllAliveEnemy()
                     .forEach((b) => {
-                        b.RoundEnemyComp().OnBoardRound_WaitingEnd();
+                        b.RoundStateComp().OnBoardRound_WaitingEnd();
                     });
             });
     }

@@ -1,0 +1,22 @@
+"DOTAHeroes"
+{
+	"npc_dota_hero_treant"
+	{
+		"AttackRate"	"1.7"
+		"Ability1"		"imba_treant_natures_grasp"
+		"Ability2"		"imba_treant_leech_seed"
+		"Ability3"		"imba_treant_living_armor"
+		"Ability4"		"imba_treant_eyes_in_the_forest"
+		"Ability5"		"imba_treant_natures_guise"
+		"Ability6"		"imba_treant_overgrowth"
+		"Ability7"		"treant_eyes_in_the_forest"
+		"Ability10"		"special_bonus_imba_treant_1"
+		"Ability11"		"special_bonus_imba_treant_2"
+		"Ability12"		"special_bonus_imba_treant_3"
+		"Ability13"		"special_bonus_imba_treant_4"
+		"Ability14"		"special_bonus_imba_treant_5"
+		"Ability15"		"special_bonus_imba_treant_6"
+		"Ability16"		"special_bonus_imba_treant_7"
+		"Ability17"		"special_bonus_imba_treant_8"
+	}
+}			

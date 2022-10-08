@@ -12,22 +12,16 @@ import { modifier_particle } from "../../../modifier/modifier_particle";
 import { ActiveRootAbility } from "../../ActiveRootAbility";
 import { ability3_axe_counter_helix } from "./ability3_axe_counter_helix";
 
-/** dota原技能数据 */
-export const Data_axe_berserkers_call = { "ID": "5007", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "FightRecapLevel": "1", "AbilitySound": "Hero_Axe.Berserkers_Call", "HasScepterUpgrade": "1", "AbilityCastPoint": "0.4", "AbilityCastAnimation": "ACT_DOTA_OVERRIDE_ABILITY_1", "AbilityCastGestureSlot": "DEFAULT", "AbilityCooldown": "16 14 12 10", "AbilityDamage": "0 0 0 0", "AbilityManaCost": "80 90 100 110", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "300", "LinkedSpecialBonus": "special_bonus_unique_axe_2" }, "02": { "var_type": "FIELD_INTEGER", "bonus_armor": "30" }, "03": { "var_type": "FIELD_FLOAT", "duration": "2.0 2.4 2.8 3.2" } } };
-
 @registerAbility()
 export class ability1_axe_berserkers_call extends ActiveRootAbility {
     /**对应dota内的名字 */
     __IN_DOTA_NAME__ = "axe_berserkers_call";
-    /**对应dota内的数据 */
-    __IN_DOTA_DATA__: typeof Data_axe_berserkers_call = Data_axe_berserkers_call;
     Init() {
         this.SetDefaultSpecialValue("radius", 800);
         this.SetDefaultSpecialValue("root_duration", [1.5, 1.8, 2.1, 2.4, 2.7, 3.0]);
         this.SetDefaultSpecialValue("attack_damage_pct", [80, 85, 90, 95, 100, 110]);
         this.SetDefaultSpecialValue("attack_interval", 0.5);
     }
-
     GetCastRange(vLocation: Vector, hTarget: BaseNpc_Plus) {
         return this.GetSpecialValueFor("radius")
     }
@@ -35,6 +29,7 @@ export class ability1_axe_berserkers_call extends ActiveRootAbility {
         this.GetCasterPlus().EmitSound(ResHelper.GetSoundReplacement("Hero_Axe.BerserkersCall.Start", this.GetCasterPlus()))
         return true
     }
+    public IsAutoCast: boolean = true;
     OnSpellStart() {
         let caster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_axe_custom_6"
@@ -214,7 +209,6 @@ export class modifier_axe_1_particle_start extends modifier_particle {
                 iAttachment: ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,
                 owner: caster
             });
-
             ParticleManager.SetParticleControlEnt(particleID, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_mouth", caster.GetAbsOrigin(), true)
             ParticleManager.SetParticleControl(particleID, 2, Vector(radius, radius, radius))
             ParticleManager.ReleaseParticleIndex(particleID)

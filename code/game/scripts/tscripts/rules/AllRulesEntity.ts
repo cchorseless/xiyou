@@ -1,5 +1,6 @@
 import { LogHelper } from "../helper/LogHelper";
 import { AbilityManagerComponent } from "./Components/Ability/AbilityManagerComponent";
+import { AiAttackComponent } from "./Components/AI/AiAttackComponent";
 import { BattleUnitManagerComponent } from "./Components/BattleUnit/BattleUnitManagerComponent";
 import { BuildingComponent } from "./Components/Building/BuildingComponent";
 import { BuildingManagerComponent } from "./Components/Building/BuildingManagerComponent";
@@ -23,8 +24,7 @@ import { ItemManagerComponent } from "./Components/Item/ItemManagerComponent";
 import { PlayerDataComponent } from "./Components/Player/PlayerDataComponent";
 import { PlayerHeroComponent } from "./Components/Player/PlayerHeroComponent";
 import { PlayerHttpComponent } from "./Components/Player/PlayerHttpComponent";
-import { RoundBuildingComponent } from "./Components/Round/RoundBuildingComponent";
-import { RoundEnemyComponent } from "./Components/Round/RoundEnemyComponent";
+import { RoundStateComponent } from "./Components/Round/RoundStateComponent";
 import { RoundManagerComponent } from "./Components/Round/RoundManagerComponent";
 import { RoundPrizeUnitKillPrizeComponent } from "./Components/Round/RoundPrizeUnitKillPrizeComponent";
 import { EWearableItem } from "./Components/Wearable/EWearableItem";
@@ -60,8 +60,7 @@ import { WearableSystemComponent } from "./System/Wearable/WearableSystemCompone
     PlayerHttpComponent,
     DrawComponent,
     RoundManagerComponent,
-    RoundEnemyComponent,
-    RoundBuildingComponent,
+    RoundStateComponent,
     RoundPrizeUnitKillPrizeComponent,
     CombinationManagerComponent,
     CombinationComponent,
@@ -70,6 +69,8 @@ import { WearableSystemComponent } from "./System/Wearable/WearableSystemCompone
     BuildingManagerComponent,
     ChessControlComponent,
     EnemyManagerComponent,
+
+    AiAttackComponent,
 
     FakerHeroComponent,
     FHeroCombination,

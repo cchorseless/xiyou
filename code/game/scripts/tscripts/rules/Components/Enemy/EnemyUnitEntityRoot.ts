@@ -13,7 +13,7 @@ import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUn
 import { PlayerCreateUnitEntityRoot, PlayerCreateUnitType } from "../Player/PlayerCreateUnitEntityRoot";
 import { ERound } from "../Round/ERound";
 import { ERoundBoard } from "../Round/ERoundBoard";
-import { RoundEnemyComponent } from "../Round/RoundEnemyComponent";
+import { RoundStateComponent } from "../Round/RoundStateComponent";
 import { WearableComponent } from "../Wearable/WearableComponent";
 import { EnemyKillPrizeComponent } from "./EnemyKillPrizeComponent";
 import { EnemyMoveComponent } from "./EnemyMoveComponent";
@@ -35,7 +35,6 @@ export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyUnitComponent>("EnemyUnitComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyKillPrizeComponent>("EnemyKillPrizeComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyPropsComponent>("EnemyPropsComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundEnemyComponent>("RoundEnemyComponent"));
     }
 
     onDestroy(): void {
@@ -90,9 +89,7 @@ export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     EnemyPropsComp() {
         return this.GetComponentByName<EnemyPropsComponent>("EnemyPropsComponent");
     }
-    RoundEnemyComp() {
-        return this.GetComponentByName<RoundEnemyComponent>("RoundEnemyComponent");
-    }
+
     BattleUnitManager() {
         return this.GetComponentByName<BattleUnitManagerComponent>("BattleUnitManagerComponent");
     }
