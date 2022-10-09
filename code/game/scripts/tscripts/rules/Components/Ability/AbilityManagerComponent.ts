@@ -26,6 +26,30 @@ export class AbilityManagerComponent extends ET.Component {
         return true
     }
 
+    clearAllAbility() {
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        this.allAbilityRoot.forEach(str => {
+            let ability = battleunit.GetDomainChild<AbilityEntityRoot>(str);
+            if (ability) {
+                ability.Dispose()
+            }
+        });
+        this.allAbilityRoot = [];
+    }
+
+    getAllBaseAbility() {
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        let r: BaseAbility_Plus[] = [];
+        let len = npc.GetAbilityCount();
+        for (let i = 0; i < len; i++) {
+            let ability = npc.GetAbilityByIndex(i) as BaseAbility_Plus;
+            if (ability) {
+                r.push(ability);
+            }
+        }
+        return r;
+    }
+
     getAbilityRoot(childid: string) {
         let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
         return battleunit.GetDomainChild<AbilityEntityRoot>(childid);
@@ -35,7 +59,7 @@ export class AbilityManagerComponent extends ET.Component {
         let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
         battleunit.AddDomainChild(root);
         this.allAbilityRoot.push(root.Id);
-        if (battleunit.CombinationComp()) {
+        if (battleunit.IsBuilding() && battleunit.CombinationComp()) {
             battleunit.CombinationComp().addAbilityRoot(root);
         }
     }
@@ -60,6 +84,16 @@ export class AbilityManagerComponent extends ET.Component {
             ability.GetDomain<BaseAbility_Plus>().UpgradeAbility(true);
         })
     }
+
+
+    setAllAbilityLevel(level: number) {
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        this.allAbilityRoot.forEach(str => {
+            let ability = battleunit.GetDomainChild<AbilityEntityRoot>(str);
+            ability.GetDomain<BaseAbility_Plus>().SetLevel(level);
+        })
+    }
+
 
     getAllCanCastAbility() {
         let r: BaseAbility_Plus[] = [];

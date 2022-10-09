@@ -185,9 +185,10 @@ export class BuildingManagerComponent extends ET.Component {
             (iswin: boolean) => {
                 this.getAllBattleBuilding()
                     .forEach((b) => {
-                        b.BattleUnitManager().ClearRuntimeBattleUnit();
-                        if (b.ChessComp().isInBattleAlive()) {
-                            b.RoundStateComp().OnBoardRound_Prize_Building(iswin);
+                        let runtimebuilding = b.RuntimeBuilding;
+                        runtimebuilding.BattleUnitManager().ClearRuntimeBattleUnit();
+                        if (runtimebuilding.ChessComp().isInBattleAlive()) {
+                            runtimebuilding.RoundStateComp().OnBoardRound_Prize_RuntimeBuilding(iswin);
                         }
                     });
             });
@@ -201,7 +202,16 @@ export class BuildingManagerComponent extends ET.Component {
             });
 
     }
-
+    public getBuilding(towerID: string) {
+        let buildings = this.getAllBuilding();
+        let r: BuildingEntityRoot[] = [];
+        buildings.forEach((c) => {
+            if (c.ConfigID === towerID) {
+                r.push(c)
+            }
+        });
+        return r;
+    }
     public getAllBuilding() {
         let r: BuildingEntityRoot[] = [];
         let player = this.GetDomain<PlayerScene>().ETRoot;
@@ -243,22 +253,13 @@ export class BuildingManagerComponent extends ET.Component {
         let allbuilding = this.getAllBattleBuilding();
         let r: PlayerCreateBattleUnitEntityRoot[] = [];
         allbuilding.forEach(b => {
-            r = r.concat(b.BattleUnitManager().GetAllBattleUnitAlive())
+            r = r.concat(b.RuntimeBuilding.BattleUnitManager().GetAllBattleUnitAlive())
         })
         return r
     }
 
 
-    public getBuilding(towerID: string) {
-        let buildings = this.getAllBuilding();
-        let r: BuildingEntityRoot[] = [];
-        buildings.forEach((c) => {
-            if (c.ConfigID === towerID) {
-                r.push(c)
-            }
-        });
-        return r;
-    }
+
 
 
 }

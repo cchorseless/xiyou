@@ -39,6 +39,7 @@ import { PlayerSystemComponent } from "./System/Player/PlayerSystemComponent";
 import { PublicBagSystemComponent } from "./System/Public/PublicBagSystemComponent";
 import { RoundSystemComponent } from "./System/Round/RoundSystemComponent";
 import { WearableSystemComponent } from "./System/Wearable/WearableSystemComponent";
+import { BattleUnitComponent } from "./Components/BattleUnit/BattleUnitComponent";
 
 
 
@@ -69,7 +70,7 @@ import { WearableSystemComponent } from "./System/Wearable/WearableSystemCompone
     BuildingManagerComponent,
     ChessControlComponent,
     EnemyManagerComponent,
-
+    BattleUnitComponent,
     AiAttackComponent,
 
     FakerHeroComponent,

@@ -38,7 +38,7 @@ export module BuildingConfig {
     /**最高星级 */
     export const MAX_STAR = 5;
 
-    export const MODEL_SCALE = [1, 1.5, 1.5, 1.5, 1.5, 1.5];
+    export const MODEL_SCALE = [1, 1.2, 1.4, 1.6, 1.8, 2];
 
 
     /**错误信息 */

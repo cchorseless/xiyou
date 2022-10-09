@@ -15,7 +15,6 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
         let domain = this.GetDomain<BaseNpc_Plus>();
         return domain.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_GOODGUYS;
     }
-
     IsSummon() {
         return false;
     }
@@ -25,7 +24,9 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
     IsRuntimeBuilding() {
         return false;
     }
-
+    IsBuilding() {
+        return false;
+    }
     addBattleComp() {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessComponent>("ChessComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundStateComponent>("RoundStateComponent"));

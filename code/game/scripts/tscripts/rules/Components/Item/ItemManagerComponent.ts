@@ -12,15 +12,28 @@ export class ItemManagerComponent extends ET.Component {
         let npc = this.GetDomain<BaseNpc_Plus>();
         let len = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9;
         for (let i = 0; i <= len; i++) {
-            let ability = npc.GetItemInSlot(i) as BaseItem_Plus;
-            if (ability && ability.ETRoot) {
-                this.addItemRoot(ability.ETRoot as ItemEntityRoot);
+            let item = npc.GetItemInSlot(i) as BaseItem_Plus;
+            if (item && item.ETRoot) {
+                this.addItemRoot(item.ETRoot as ItemEntityRoot);
             }
         }
     }
     getItemRoot(childid: string) {
         let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
         return battleunit.GetDomainChild<ItemEntityRoot>(childid);
+    }
+
+    getAllBaseItem() {
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        let len = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9;
+        let r: BaseItem_Plus[] = []
+        for (let i = 0; i <= len; i++) {
+            let item = npc.GetItemInSlot(i) as BaseItem_Plus;
+            if (item) {
+                r.push(item)
+            }
+        }
+        return r;
     }
 
     addItemRoot(root: ItemEntityRoot) {
@@ -30,7 +43,7 @@ export class ItemManagerComponent extends ET.Component {
         }
         battleunit.AddDomainChild(root);
         this.allItemRoot.push(root.Id);
-        if (battleunit.CombinationComp()) {
+        if (battleunit.IsBuilding() && battleunit.CombinationComp()) {
             battleunit.CombinationComp().addItemRoot(root);
         }
     }

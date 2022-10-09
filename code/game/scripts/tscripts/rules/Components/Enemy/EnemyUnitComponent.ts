@@ -1,25 +1,16 @@
-import { EntityHelper } from "../../../helper/EntityHelper";
-import { KVHelper } from "../../../helper/KVHelper";
-import { LogHelper } from "../../../helper/LogHelper";
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
-import { PrecacheHelper } from "../../../helper/PrecacheHelper";
-import { building_unit_enemy } from "../../../kvInterface/building/building_unit_enemy";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health_bar";
 import { ET, registerET } from "../../Entity/Entity";
 import { EnemyConfig } from "../../System/Enemy/EnemyConfig";
-import { ChessComponent } from "../ChessControl/ChessComponent";
-import { ERound } from "../Round/ERound";
-import { EnemyKillPrizeComponent } from "./EnemyKillPrizeComponent";
-import { EnemyMoveComponent } from "./EnemyMoveComponent";
-import { EnemyPropsComponent } from "./EnemyPropsComponent";
+import { BattleUnitComponent } from "../BattleUnit/BattleUnitComponent";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
 
 @registerET()
-export class EnemyUnitComponent extends ET.Component {
+export class EnemyUnitComponent extends BattleUnitComponent {
     readonly IsSerializeEntity: boolean = true;
 
     onAwake(): void {
+        super.onAwake();
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.SetForwardVector(Vector(0, -1, 0));
         domain.addSpawnedHandler(

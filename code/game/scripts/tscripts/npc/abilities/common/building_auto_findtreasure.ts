@@ -4,7 +4,7 @@ import { AoiHelper } from "../../../helper/AoiHelper";
 import { EntityHelper } from "../../../helper/EntityHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { BuildingEntityRoot } from "../../../rules/Components/Building/BuildingEntityRoot";
+import { BuildingRuntimeEntityRoot } from "../../../rules/Components/Building/BuildingRuntimeEntityRoot";
 import { RoundPrizeUnitEntityRoot } from "../../../rules/Components/Round/RoundPrizeUnitEntityRoot";
 import { MapState } from "../../../rules/System/Map/MapState";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -38,7 +38,7 @@ export class building_auto_findtreasure extends BaseAbility_Plus {
         let hParent = this.GetOwnerPlus();
         let modifier = modifier_auto_findtreasure.findIn(hParent);
         modifier.StopFindTreasure();
-        let building = hParent.ETRoot.As<BuildingEntityRoot>();
+        let building = hParent.ETRoot.As<BuildingRuntimeEntityRoot>();
         let boardV = building.ChessComp().ChessVector;
         let t_p = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardGirdCenterVector3(boardV);
         modifier_tp.TeleportToPoint(hParent, null, GetGroundPosition(t_p, hParent));
@@ -47,7 +47,7 @@ export class building_auto_findtreasure extends BaseAbility_Plus {
         TimerHelper.addTimer(
             1.1,
             () => {
-                building.RoundStateComp().OnBackBoardFromBaseRoom();
+                building.OnBackBoardFromBaseRoom();
             },
             building
         );
@@ -117,7 +117,7 @@ export class modifier_auto_findtreasure extends BaseModifier_Plus {
         }
         let hParent = this.GetParentPlus();
         let ability = this.GetAbilityPlus() as building_auto_findtreasure;
-        let building = hParent.ETRoot.As<BuildingEntityRoot>();
+        let building = hParent.ETRoot.As<BuildingRuntimeEntityRoot>();
         let playerid = building.Playerid;
         let moveto = MapState.PlayerTpDoorPoint[playerid];
         this.findTimer = TimerHelper.addTimer(

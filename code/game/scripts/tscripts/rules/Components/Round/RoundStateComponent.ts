@@ -8,6 +8,8 @@ import { RoundConfig } from "../../System/Round/RoundConfig";
 import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
+import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
+import { BuildingRuntimeEntityRoot } from "../Building/BuildingRuntimeEntityRoot";
 /**回合控制 */
 @registerET()
 export class RoundStateComponent extends ET.Component {
@@ -46,20 +48,23 @@ export class RoundStateComponent extends ET.Component {
         let domain = this.GetDomain<BaseNpc_Plus>();
         modifier_jiaoxie_wudi.remove(domain);
         let battleunit = this.BattleUnit();
-        battleunit.AiAttackComp().startFindEnemyAttack();
-        if (battleunit.IsFriendly()) {
-            modifier_remnant.applyOnly(domain, domain);
+        if (battleunit.IsBuilding()) {
+            let building = battleunit as BuildingEntityRoot;
+            building.CreateCloneRuntimeBuilding();
+        }
+        else {
+            battleunit.AiAttackComp().startFindEnemyAttack();
         }
     }
 
-    OnBoardRound_Prize_Building(isWin: boolean) {
+    OnBoardRound_Prize_RuntimeBuilding(isWin: boolean) {
+        let battleunit = this.BattleUnit() as BuildingRuntimeEntityRoot;
         let domain = this.GetDomain<BaseNpc_Plus>();
-        this.BattleUnit().AiAttackComp().endFindToAttack();
+        battleunit.AiAttackComp().endFindToAttack();
         if (isWin) {
-            building_auto_findtreasure.findIn(domain).StartFindTreasure();
-            modifier_wait_portal.applyOnly(domain, domain, null, { duration: 60 });
+            battleunit.StartFindTreasure();
         } else {
-            modifier_remnant.remove(domain);
+            // modifier_remnant.remove(domain);
         }
     }
 
@@ -70,22 +75,13 @@ export class RoundStateComponent extends ET.Component {
         this.playDamageHeroAni(ProjectileInfo);
     }
 
-
-    OnBackBoardFromBaseRoom() {
-        let domain = this.GetDomain<BaseNpc_Plus>();
-        domain.SetIdleAcquire(true);
-        // domain.StartGesture(GameActivity_t.ACT_DOTA_IDLE);
-    }
     OnBoardRound_WaitingEnd() {
-        let battleunit = this.BattleUnit();
-        if (battleunit.IsFriendly()) {
-            let domain = this.GetDomain<BaseNpc_Plus>();
-            let ability = building_auto_findtreasure.findIn(domain);
-            if (ability.IsFinding()) {
-                ability.GoBackBoard();
-            }
+        let battleunit = this.BattleUnit() as BuildingRuntimeEntityRoot;
+        if (battleunit.IsRuntimeBuilding()) {
+            battleunit.StopFindTreasure();
         }
     }
+
     playDamageHeroAni(ProjectileInfo: IProjectileEffectInfo = null) {
         let domain = this.GetDomain<BaseNpc_Plus>();
         let hero = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Playerid).Hero;

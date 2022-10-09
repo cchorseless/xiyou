@@ -2,6 +2,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_illusion } from "../../../npc/modifier/modifier_illusion";
 import { modifier_summon } from "../../../npc/modifier/modifier_summon";
 import { registerET, ET } from "../../Entity/Entity";
+import { BuildingRuntimeEntityRoot } from "../Building/BuildingRuntimeEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { BattleUnitSummonEntityRoot } from "./BattleUnitSummonEntityRoot";
 
@@ -56,6 +57,23 @@ export class BattleUnitManagerComponent extends ET.Component {
             this.allIllusion.push(illusionroot.Id);
         }
     }
+
+    public AddRuntimeBuilding(sUnitName: string, vLocation: Vector, fDuration: number, bFindClearSpace: boolean = true, iTeamNumber: DOTATeam_t = null) {
+        if (!IsServer()) { return };
+        let hCaster = this.GetDomain<BaseNpc_Plus>();
+        let battleUnit = hCaster.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        if (!battleUnit) return;
+        let summon = modifier_summon.CreateSummon(sUnitName, hCaster, vLocation, fDuration, bFindClearSpace, iTeamNumber)
+        if (summon) {
+            let playerid = battleUnit.Playerid;
+            BattleUnitSummonEntityRoot.Active(summon, playerid, sUnitName);
+            let summonroot = summon.ETRoot.As<BattleUnitSummonEntityRoot>();
+            battleUnit.GetPlayer().AddDomainChild(summonroot);
+            this.allSummon.push(summonroot.Id);
+        }
+    }
+
+
 
     public GetAllBattleUnitAlive() {
         let hCaster = this.GetDomain<BaseNpc_Plus>();

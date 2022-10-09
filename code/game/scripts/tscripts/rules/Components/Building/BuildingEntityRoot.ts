@@ -2,23 +2,76 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
+import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
+import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
-import { RoundStateComponent } from "../Round/RoundStateComponent";
 import { BuildingComponent } from "./BuildingComponent";
 import { BuildingPropsComponent } from "./BuildingPropsComponent";
+import { BuildingRuntimeEntityRoot } from "./BuildingRuntimeEntityRoot";
 
 export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
-
     public onAwake(playerid: PlayerID, conf: string) {
         (this as any).Playerid = playerid;
         (this as any).ConfigID = conf;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
         this.addBattleComp();
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingComponent>("BuildingComponent"));
         this.SyncClientEntity(this);
+    }
+    IsBuilding() { return true }
+    public RuntimeBuilding: BuildingRuntimeEntityRoot;
+    public CreateCloneRuntimeBuilding() {
+        if (!IsServer()) { return };
+        this.RemoveCloneRuntimeBuilding();
+        let hCaster = this.GetDomain<BaseNpc_Plus>();
+        let vLocation = hCaster.GetAbsOrigin();
+        let iTeamNumber = hCaster.GetTeamNumber()
+        hCaster.AddNoDraw();
+        let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
+        let cloneRuntime = CreateUnitByName(this.ConfigID, vLocation, true, hHero, hHero, iTeamNumber) as BaseNpc_Plus;
+        if (cloneRuntime) {
+            BuildingRuntimeEntityRoot.Active(cloneRuntime, this.Playerid, this.ConfigID);
+            let runtimeroot = cloneRuntime.ETRoot.As<BuildingRuntimeEntityRoot>();
+            this.AddDomainChild(runtimeroot);
+            this.RuntimeBuilding = runtimeroot;
+            runtimeroot.BuildingComp().SetStar(this.BuildingComp().iStar);
+            // wearable
+            runtimeroot.WearableComp().WearCopy(this.WearableComp());
+            // equip
+            let allItem = this.ItemManagerComp().getAllBaseItem();
+            allItem.forEach(item => {
+                // cloneRuntime.AddItem(item);
+                let hItem = BaseItem_Plus.CreateOneToUnit(cloneRuntime, item.GetAbilityName());
+                if (item.RequiresCharges()) {
+                    hItem.SetCurrentCharges(item.GetCurrentCharges())
+                }
+            });
+            // ability
+            let allability = this.AbilityManagerComp().getAllBaseAbility();
+            allability.forEach(ability => {
+                let abilityname = ability.GetAbilityName();
+                if (cloneRuntime.FindAbilityByName(abilityname) == null) {
+                    runtimeroot.AbilityManagerComp().learnAbility(abilityname);
+                }
+            })
+            // buff
+            let modifiers = hCaster.FindAllModifiers() as BaseModifier_Plus[];
+            for (let modifier of (modifiers)) {
+                let buff = cloneRuntime.addBuff(modifier.GetName(), modifier.GetCasterPlus(), modifier.GetAbilityPlus())
+                buff.SetStackCount(modifier.GetStackCount())
+            }
+        }
+    }
+
+    public RemoveCloneRuntimeBuilding() {
+        if (this.RuntimeBuilding) {
+            this.RuntimeBuilding.Dispose();
+        }
+        this.RuntimeBuilding = null;
+        let hCaster = this.GetDomain<BaseNpc_Plus>();
+        hCaster.RemoveNoDraw();
     }
 
     onDestroy(): void {
@@ -51,10 +104,5 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     BuildingComp() {
         return this.GetComponentByName<BuildingComponent>("BuildingComponent");
     }
-    BuildingPropComp() {
-        return this.GetComponentByName<BuildingPropsComponent>("BuildingPropsComponent");
-    }
-    BattleUnitManager() {
-        return this.GetComponentByName<BattleUnitManagerComponent>("BattleUnitManagerComponent");
-    }
+
 }

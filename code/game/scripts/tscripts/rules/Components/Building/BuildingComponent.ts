@@ -7,50 +7,24 @@ import { modifier_property } from "../../../npc/modifier/modifier_property";
 import { modifier_summon } from "../../../npc/modifier/modifier_summon";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
+import { BattleUnitComponent } from "../BattleUnit/BattleUnitComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
 /**塔防组件 */
 @registerET()
-export class BuildingComponent extends ET.Component {
+export class BuildingComponent extends BattleUnitComponent {
     public readonly IsSerializeEntity: boolean = true;
-    public iLevel: number;
-    public iAbilityPoints: number;
-    public iQualificationLevel: number;
-    public iBaseGoldCost: number;
     private iGoldCost: number;
     /**累计造成伤害 */
     public fDamage: number;
-    /**星级 */
-    @serializeETProps()
-    public iStar: number = 1;
     @serializeETProps()
     public PrimaryAttribute: number = 1;
-
-    allSummon: string[] = [];
-    allIllusion: string[] = [];
-    allBuildingClone: string[] = [];
-
     onAwake() {
+        super.onAwake();
         this.iStar = 1;
         this.PrimaryAttribute = GameFunc.AsAttribute(this.Domain.ETRoot.As<BuildingEntityRoot>().Config().AttributePrimary);
-        TimerHelper.addTimer(
-            2,
-            () => {
-                // this.ChangeFashionEquip(1);
-            },
-            this
-        );
     }
 
-
-    Dispose(): void {
-        this.Domain.ETRoot.As<BuildingEntityRoot>().DelClientEntity(this);
-        super.Dispose();
-    }
-
-    GetAbilityPoints() {
-        return this.iAbilityPoints;
-    }
     /**金币价格 */
     GetGoldCost() {
         return this.iGoldCost || 0;
@@ -61,15 +35,7 @@ export class BuildingComponent extends ET.Component {
         return this.iStar < BuildingConfig.MAX_STAR;
     }
 
-    ChangeFashionEquip(n: number) {
-        // if (wearables.length >= 1) {
-        //     print("MODEL REMOVED, RESPAWNING HERO");
-        //     //  hero.SetRespawnPosition(hero.GetOrigin())
-        //     hero.RespawnHero(false, false, false);
-        // }
-    }
-
-    public GetPopulation(): number {
+    GetPopulation(): number {
         let towerID = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>().ConfigID;
         return GameRules.Addon.ETRoot.BuildingSystem().GetBuildingPopulation(towerID);
     }
@@ -92,13 +58,11 @@ export class BuildingComponent extends ET.Component {
         );
         EmitSoundOn("lvl_up", domain);
         // 变大
-        domain.SetModelScale(domain.GetModelScale() * BuildingConfig.MODEL_SCALE[this.iStar - 1]);
+        domain.SetModelScale(this.iScale * BuildingConfig.MODEL_SCALE[this.iStar - 1]);
         // 技能升级
         building.AbilityManagerComp().levelUpAllAbility();
         // 通知跑马灯
         this.Domain.ETRoot.As<BuildingEntityRoot>().SyncClientEntity(this);
     }
-
-
 
 }
