@@ -9,7 +9,7 @@ export class ItemEntityRoot extends PlayerCreateUnitEntityRoot {
 
     onAwake() {
         let item = this.GetDomain<BaseItem_Plus>();
-        (this as any).Playerid = item.GetOwnerPlus().GetPlayerOwnerID();
+        // (this as any).Playerid = item.GetOwnerPlus().GetPlayerOwnerID();
         (this as any).ConfigID = item.GetAbilityName();
         (this as any).EntityId = item.GetEntityIndex();
     }

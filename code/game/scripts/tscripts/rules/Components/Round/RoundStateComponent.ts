@@ -10,6 +10,7 @@ import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUn
 import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { BuildingRuntimeEntityRoot } from "../Building/BuildingRuntimeEntityRoot";
+import { LogHelper } from "../../../helper/LogHelper";
 /**回合控制 */
 @registerET()
 export class RoundStateComponent extends ET.Component {
@@ -36,23 +37,31 @@ export class RoundStateComponent extends ET.Component {
     }
 
     OnBoardRound_Start() {
+        let battleunit = this.BattleUnit();
+        if (battleunit.IsRuntimeBuilding()) {
+            return
+        }
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.addSpawnedHandler(
             ET.Handler.create(this, () => {
                 modifier_jiaoxie_wudi.applyOnly(domain, domain);
             })
         );
+        if (battleunit.IsBuilding()) {
+            let building = battleunit as BuildingEntityRoot;
+            building.RemoveCloneRuntimeBuilding();
+        }
     }
 
     OnBoardRound_Battle() {
-        let domain = this.GetDomain<BaseNpc_Plus>();
-        modifier_jiaoxie_wudi.remove(domain);
         let battleunit = this.BattleUnit();
         if (battleunit.IsBuilding()) {
             let building = battleunit as BuildingEntityRoot;
             building.CreateCloneRuntimeBuilding();
         }
         else {
+            let domain = this.GetDomain<BaseNpc_Plus>();
+            modifier_jiaoxie_wudi.remove(domain);
             battleunit.AiAttackComp().startFindEnemyAttack();
         }
     }

@@ -2,6 +2,7 @@
 import React, { createRef, useState } from "react";
 import { DotaUIHelper } from "../../helper/DotaUIHelper";
 import { CustomAbilityList } from "../alldota2/ui_element/CustomAbilityList";
+import { CustomBuffList } from "../alldota2/ui_element/CustomBuffList";
 import { CustomHealthMana } from "../alldota2/ui_element/CustomHealthMana";
 import { CustomInventory } from "../alldota2/ui_element/CustomInventory";
 import { CustomPortraitGroup } from "../alldota2/ui_element/CustomPortraitGroup";
@@ -32,6 +33,10 @@ export class DacBoardPanelV0 extends DacBoardPanelV0_UI {
             verticalAlign: "bottom",
         })
         this.addNodeChildAt(this.NODENAME.panel_PortraitGroup, CustomStats, {
+            horizontalAlign: "left",
+            verticalAlign: "bottom",
+        })
+        this.addNodeChildAt(this.NODENAME.panel_bufflist, CustomBuffList, {
             horizontalAlign: "left",
             verticalAlign: "bottom",
         })

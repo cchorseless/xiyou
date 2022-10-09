@@ -542,7 +542,6 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnRespawn(event: ModifierUnitEvent): void {
-        LogHelper.print(event, 111111);
         (event as EventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_RESPAWN);
     }

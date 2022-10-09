@@ -31,7 +31,6 @@ export class EntityOverHeadPanel extends EntityOverHeadPanel_UI {
             let entityid = Number(k) as EntityIndex;
             if (this.allOverHeadUI[k])
                 if (!Entities.IsValidEntity(entityid) || !Entities.IsAlive(entityid)) {
-                    // !NetHelper.GetTableValue(NetHelper.ENetTables.enemy, k) ||
                     this.getPureCompByNode<BuildingTopBarItem>(this.allOverHeadUI[k] as any)?.close();
                     delete this.allOverHeadUI[k];
                 }
@@ -45,11 +44,18 @@ export class EntityOverHeadPanel extends EntityOverHeadPanel_UI {
         let EntityRootManage = PlayerScene.EntityRootManage;
         let scale = 800 / GameUI.GetCameraPosition()[2];
         for (let entityid in EntityRootManage.AllEnemy) {
-            if (EntityRootManage.AllEnemy[entityid]) {
+            let entityroot = EntityRootManage.getEnemy(entityid);
+            if (entityroot && entityroot.IsShowOverhead) {
                 if (this.allOverHeadUI[entityid] == null) {
                     this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, EnemyTopBarItem, { "entityid": Number(entityid) })!;
                 } else {
                     this.getPureCompByNode<EnemyTopBarItem>(this.allOverHeadUI[entityid] as any)?.onRefreshUI({ "entityid": Number(entityid) }, scale);
+                }
+            }
+            else {
+                if (this.allOverHeadUI[entityid]) {
+                    this.getPureCompByNode<EnemyTopBarItem>(this.allOverHeadUI[entityid] as any)?.close();
+                    delete this.allOverHeadUI[entityid];
                 }
             }
         }
@@ -59,11 +65,18 @@ export class EntityOverHeadPanel extends EntityOverHeadPanel_UI {
         let EntityRootManage = PlayerScene.EntityRootManage;
         let scale = 800 / GameUI.GetCameraPosition()[2];
         for (let entityid in EntityRootManage.AllBuilding) {
-            if (EntityRootManage.AllBuilding[entityid]) {
+            let entityroot = EntityRootManage.getBuilding(entityid);
+            if (entityroot && entityroot.IsShowOverhead) {
                 if (this.allOverHeadUI[entityid] == null) {
                     this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, BuildingTopBarItem, { "entityid": Number(entityid) })!;
                 } else {
                     this.getPureCompByNode<BuildingTopBarItem>(this.allOverHeadUI[entityid] as any)?.onRefreshUI({ "entityid": Number(entityid) }, scale);
+                }
+            }
+            else {
+                if (this.allOverHeadUI[entityid]) {
+                    this.getPureCompByNode<BuildingTopBarItem>(this.allOverHeadUI[entityid] as any)?.close();
+                    delete this.allOverHeadUI[entityid];
                 }
             }
         }

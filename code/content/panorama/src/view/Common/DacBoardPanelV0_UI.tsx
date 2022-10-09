@@ -10,7 +10,8 @@ panel_PortraitGroup: React.RefObject<Panel>;
 panel_AbilityList: React.RefObject<Panel>;
 panel_HealthMana: React.RefObject<Panel>;
 panel_Inventory: React.RefObject<Panel>;
-NODENAME = {  __root__: '__root__',  panel_PortraitGroup: 'panel_PortraitGroup',  panel_AbilityList: 'panel_AbilityList',  panel_HealthMana: 'panel_HealthMana',  panel_Inventory: 'panel_Inventory',  };
+panel_bufflist: React.RefObject<Panel>;
+NODENAME = {  __root__: '__root__',  panel_PortraitGroup: 'panel_PortraitGroup',  panel_AbilityList: 'panel_AbilityList',  panel_HealthMana: 'panel_HealthMana',  panel_Inventory: 'panel_Inventory',  panel_bufflist: 'panel_bufflist',  };
 FUNCNAME = {  };
 
     constructor(props: any) {
@@ -20,13 +21,15 @@ this.panel_PortraitGroup = createRef<Panel>();
 this.panel_AbilityList = createRef<Panel>();
 this.panel_HealthMana = createRef<Panel>();
 this.panel_Inventory = createRef<Panel>();
+this.panel_bufflist = createRef<Panel>();
 
     };
 CSS_0_0 : Partial<VCSSStyleDeclaration>  = {"width":"1000px","height":"250px"}
 CSS_1_0 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"0px","width":"250px","height":"250px"}
-CSS_1_1 : Partial<VCSSStyleDeclaration>  = {"y":"3px","x":"254px","width":"487px","height":"150px"}
-CSS_1_2 : Partial<VCSSStyleDeclaration>  = {"y":"159px","x":"252px","width":"487px","height":"80px"}
+CSS_1_1 : Partial<VCSSStyleDeclaration>  = {"y":"80px","x":"252px","width":"487px","height":"104px"}
+CSS_1_2 : Partial<VCSSStyleDeclaration>  = {"y":"189px","x":"252px","width":"487px","height":"50px"}
 CSS_1_3 : Partial<VCSSStyleDeclaration>  = {"y":"0px","x":"745px","width":"250px","height":"250px"}
+CSS_1_4 : Partial<VCSSStyleDeclaration>  = {"y":"23px","x":"254px","width":"487px","height":"52px"}
 
 __root___isValid:boolean = true;
 __root___attrs:PanelAttributes={};
@@ -43,6 +46,9 @@ panel_HealthMana_childs: Array<JSX.Element> = [];
 panel_Inventory_isValid:boolean = true;
 panel_Inventory_attrs:PanelAttributes={};
 panel_Inventory_childs: Array<JSX.Element> = [];
+panel_bufflist_isValid:boolean = true;
+panel_bufflist_attrs:PanelAttributes={};
+panel_bufflist_childs: Array<JSX.Element> = [];
 
 render() {
     return(
@@ -66,6 +72,11 @@ render() {
     {this.panel_Inventory_isValid && 
 <Panel ref={this.panel_Inventory} key="compId_6" style={this.CSS_1_3}  {...this.panel_Inventory_attrs} >
 {this.panel_Inventory_childs}
+</Panel>
+}
+    {this.panel_bufflist_isValid && 
+<Panel ref={this.panel_bufflist} key="compId_7" style={this.CSS_1_4}  {...this.panel_bufflist_attrs} >
+{this.panel_bufflist_childs}
 </Panel>
 }
 

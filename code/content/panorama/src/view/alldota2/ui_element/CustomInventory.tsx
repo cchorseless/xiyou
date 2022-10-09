@@ -128,8 +128,18 @@ export class CustomInventory extends CustomInventory_UI {
             Abilities.ExecuteAbility(overrideentityindex, iCasterIndex, false);
         }
     };
-    onBtn_rightClick = (item_slot: number) => { };
+    onBtn_rightClick = (item_slot: number) => {
+        LogHelper.print(111111, " ---", item_slot);
+    };
     onBtn_mouseover = (item_slot: number) => { };
     onBtn_mouseout = (item_slot: number) => { };
-    onBtn_dragend = (item_slot: number) => { };
+    onBtn_dragend = (item_slot: number) => {
+        let pos = GameUI.GetCursorPosition();
+        let entitys = GameUI.FindScreenEntities(pos);
+        if (entitys.length > 0) { }
+        else {
+            let worldpos = GameUI.GetScreenWorldPosition(pos);
+        }
+        LogHelper.print(22222, " ---", item_slot, entitys);
+    };
 }

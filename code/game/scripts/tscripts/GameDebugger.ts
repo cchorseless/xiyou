@@ -7,6 +7,7 @@ import { TimerHelper } from "./helper/TimerHelper";
 import { globalData, reloadable } from "./GameCache";
 import { GameRequest } from "./service/GameRequest";
 import { BotHelper } from "./helper/BotHelper";
+import { BaseItem_Plus } from "./npc/entityPlus/BaseItem_Plus";
 
 @reloadable
 export class GameDebugger extends SingletonClass {
@@ -200,7 +201,7 @@ export class GameDebugger extends SingletonClass {
                 hero.AddItemByName(tokens[1]);
                 break;
             case "-b":
-                hero.AddItemByName("item_building_hero_" + tokens[1]);
+                BaseItem_Plus.CreateOneToUnit(hero,"item_building_hero_" + tokens[1])
                 break;
         }
     }

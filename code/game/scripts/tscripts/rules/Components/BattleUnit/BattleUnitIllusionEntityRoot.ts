@@ -13,7 +13,7 @@ export class BattleUnitIllusionEntityRoot extends PlayerCreateBattleUnitEntityRo
         (this as any).ConfigID = conf;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
         this.addBattleComp();
-        this.SyncClientEntity(this);
+        // this.SyncClientEntity(this);
     }
     IsIllusion(): boolean {
         return true;

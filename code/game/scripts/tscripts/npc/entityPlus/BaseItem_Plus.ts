@@ -34,7 +34,7 @@ export class BaseItem_Plus extends BaseItem {
         return this.GetParent() as BaseNpc_Plus;
     }
     GetOwnerPlus() {
-        return this.GetOwner() as BaseNpc_Plus;
+        return this.GetOwnerEntity() as BaseNpc_Plus;
     }
     /**自己给自己施法的 */
     IsCastBySelf() {
