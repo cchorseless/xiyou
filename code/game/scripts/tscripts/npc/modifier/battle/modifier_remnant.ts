@@ -51,19 +51,20 @@ export class modifier_remnant_thinker extends BaseModifier_Plus {
         return false;
     }
     iParticleSize: number = 1000;
+    // todo
     Init(params: ModifierTable) {
-        let hParent = this.GetParentPlus();
-        let iParticleID = ResHelper.CreateParticle(
-            //  "particles/units/towers/stormspirit/status_fx_remnant.vpcf"
-            new ResHelper.ParticleInfo()
-                .set_resPath("particles/units/heroes/hero_stormspirit/stormspirit_static_remnant.vpcf")
-                .set_owner(hParent)
-                .set_iAttachment(ParticleAttachment_t.PATTACH_INVALID)
-        );
-        let pos = hParent.GetAbsOrigin();
-        ParticleManager.SetParticleControlEnt(iParticleID, 1, hParent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", pos, true);
-        ParticleManager.SetParticleControl(iParticleID, 2, Vector(RandomInt(37, 52), 1, 100));
-        ParticleManager.SetParticleControl(iParticleID, 11, pos);
+        // let hParent = this.GetParentPlus();
+        // let iParticleID = ResHelper.CreateParticle(
+        //     //  "particles/units/towers/stormspirit/status_fx_remnant.vpcf"
+        //     new ResHelper.ParticleInfo()
+        //         .set_resPath("particles/units/heroes/hero_stormspirit/stormspirit_static_remnant.vpcf")
+        //         .set_owner(hParent)
+        //         .set_iAttachment(ParticleAttachment_t.PATTACH_INVALID)
+        // );
+        // let pos = hParent.GetAbsOrigin();
+        // ParticleManager.SetParticleControlEnt(iParticleID, 1, hParent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", pos, true);
+        // ParticleManager.SetParticleControl(iParticleID, 2, Vector(RandomInt(37, 52), 1, 100));
+        // ParticleManager.SetParticleControl(iParticleID, 11, pos);
     }
 
     OnDestroy() {

@@ -107,8 +107,8 @@ export class BaseAbility_Plus extends BaseAbility {
     /**技能ICON */
     public GetAbilityTextureName(): string {
         let iconpath = super.GetAbilityTextureName();
-        if (iconpath == null || iconpath == '') {
-            iconpath = this.__IN_DOTA_NAME__ || "";
+        if (iconpath == null || iconpath == this.constructor.name) {
+            iconpath = this.__IN_DOTA_NAME__;
         }
         return ResHelper.GetAbilityTextureReplacement(iconpath, this.GetCaster())
     }

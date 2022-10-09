@@ -3,12 +3,12 @@ import { GameEnum } from "../../GameEnum";
 import { GameFunc } from "../../GameFunc";
 import { LogHelper } from "../../helper/LogHelper";
 import { BuildingEntityRoot } from "../../rules/Components/Building/BuildingEntityRoot";
-import { BaseModifierMotionBoth_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
+import { BaseModifierMotionHorizontal_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../entityPlus/BaseNpc_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
 
 @registerModifier()
-export class modifier_run extends BaseModifierMotionBoth_Plus {
+export class modifier_run extends BaseModifierMotionHorizontal_Plus {
     IsStunDebuff() {
         return false;
     }
@@ -48,40 +48,34 @@ export class modifier_run extends BaseModifierMotionBoth_Plus {
             if (speed < 100) {
                 speed = 100;
             }
-
             if (kv.speed != null) {
                 speed = kv.speed;
             }
             this.vStartPosition = GetGroundPosition(this.GetParentPlus().GetOrigin(), this.GetParentPlus());
-            this.vTargetPosition = Vector(kv.vx, kv.vy, 128);
+            this.vTargetPosition = Vector(tonumber(kv.vx), tonumber(kv.vy), 128);
             this.vDirection = GameFunc.AsVector(this.vTargetPosition - this.vStartPosition).Normalized();
             this.flHorizontalSpeed = speed / 30;
             this.flDistance = GameFunc.AsVector(this.vTargetPosition - this.vStartPosition).Length2D() + this.flHorizontalSpeed;
             this.leap_traveled = 0;
-            //  this.GetParentPlus().SetForwardVector(this.vDirection)
+            this.GetParentPlus().SetForwardVector(this.vDirection)
             this.sound = "Courier.Footsteps";
             //  创建开始的特效和音效
             EmitSoundOn(this.sound, this.GetParentPlus());
             this.animation = GameActivity_t.ACT_DOTA_RUN;
-            // this.GetParentPlus().AddActivityModifier("run");
+            this.GetParentPlus().AddActivityModifier("run");
             this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_RUN);
         }
     }
 
     OnDestroy() {
+        super.OnDestroy()
         if (IsServer()) {
             this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_IDLE);
             this.GetParentPlus().RemoveHorizontalMotionController(this);
-            this.GetParentPlus().RemoveVerticalMotionController(this);
+            // this.GetParentPlus().RemoveVerticalMotionController(this);
         }
     }
 
-    //  DeclareFunctions() {
-    //     let funcs = {
-    //         @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DISABLE_AUTOATTACK,
-    //     }
-    //     return funcs
-    // }
 
     CheckState() {
         let state = {
@@ -104,6 +98,11 @@ export class modifier_run extends BaseModifierMotionBoth_Plus {
         }
     }
 
+    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DISABLE_AUTOATTACK)
+    g_DISABLE_AUTOATTACK() {
+        return 0
+    }
+
     UpdateHorizontalMotion(me: BaseNpc_Plus, dt: number) {
         if (IsServer()) {
             //  判断是否到达了终点
@@ -111,8 +110,9 @@ export class modifier_run extends BaseModifierMotionBoth_Plus {
             if (GameFunc.AsVector(me.GetAbsOrigin() - this.vTargetPosition).Length2D() > this.flHorizontalSpeed) {
                 // 没到终点
                 if (me.IsStunned() != true && me.IsFrozen() != true) {
-                    me.SetAbsOrigin(GetGroundPosition(GameFunc.AsVector(me.GetAbsOrigin() + this.vDirection * this.flHorizontalSpeed), me));
-                    this.leap_traveled = this.leap_traveled + this.flHorizontalSpeed;
+                    me.MoveToPositionAggressive(this.vTargetPosition)
+                    // me.SetAbsOrigin(GetGroundPosition(GameFunc.AsVector(me.GetAbsOrigin() + this.vDirection * this.flHorizontalSpeed), me));
+                    this.leap_traveled += this.flHorizontalSpeed;
                 } else {
                     // 眩晕或冰冻，不位移
                 }
@@ -129,14 +129,14 @@ export class modifier_run extends BaseModifierMotionBoth_Plus {
         }
     }
 
-    UpdateVerticalMotion(me: BaseNpc_Plus, dt: number) {
-        //  if ( IsServer() ) {
-        //      if ( this.flDistance > 300 ) {
-        //          let z = math.sin(this.leap_traveled/this.flDistance*3.1415926)*2*this.flDistance/3.1415926
-        //          me.SetAbsOrigin(GetGroundPosition(me.GetAbsOrigin(), me) + Vector(0,0,z/2))
-        //      //  } else {
-        //      //      this.animation = GameActivity_t.ACT_DOTA_RUN
-        //      }
-        //  }
-    }
+    // UpdateVerticalMotion(me: BaseNpc_Plus, dt: number) {
+    //  if ( IsServer() ) {
+    //      if ( this.flDistance > 300 ) {
+    //          let z = math.sin(this.leap_traveled/this.flDistance*3.1415926)*2*this.flDistance/3.1415926
+    //          me.SetAbsOrigin(GetGroundPosition(me.GetAbsOrigin(), me) + Vector(0,0,z/2))
+    //      //  } else {
+    //      //      this.animation = GameActivity_t.ACT_DOTA_RUN
+    //      }
+    //  }
+    // }
 }
