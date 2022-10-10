@@ -28,7 +28,7 @@ export enum EventDataType {
     OtherCanBeAnyOne = 4,
 }
 
-interface EventData {
+export interface IBuffEventData {
     /**主动 */
     attacker?: BaseNpc_Plus;
     unit?: BaseNpc_Plus;
@@ -47,7 +47,7 @@ export class modifier_event extends BaseModifier_Plus {
      * @param k
      * @returns
      */
-    static FireEvent(event: EventData, ...k: Array<Enum_MODIFIER_EVENT>) {
+    static FireEvent(event: IBuffEventData, ...k: Array<Enum_MODIFIER_EVENT>) {
         if (!IsServer()) {
             return;
         }
@@ -98,67 +98,7 @@ export class modifier_event extends BaseModifier_Plus {
         // this.addGameEvent();
     }
 
-    /**监听游戏事件 */
-    addGameEvent() {
-        // 道具获取事件
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaInventoryItemAddedEvent, (event) => {
-            // 17 表示 无效
-            if (event.item_slot < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM) {
-                (event as EventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
-                (event as EventData).unit = EntIndexToHScript(event.inventory_parent_entindex) as BaseNpc_Plus;
-                // 设置道具第一个拥有者
-                let item = EntIndexToHScript(event.item_entindex) as BaseItem_Plus;
-                if (item.GetPurchaser() == null) {
-                    item.SetPurchaser((event as EventData).unit);
-                }
-                modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_GET);
-            }
-        });
-        // 道具缺失事件
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaHeroInventoryItemChangeEvent, (event: DotaHeroInventoryItemChangeEvent) => {
-            let item = EntIndexToHScript(event.item_entindex) as BaseItem_Plus;
-            let state = item.GetItemState();
-            let slot = item.GetItemSlot();
-            (event as EventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
-            (event as EventData).unit = EntIndexToHScript(event.hero_entindex) as BaseNpc_Plus;
-            // 道具不在身上
-            if (state == 0 && slot == -1) {
-                modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_LOSE);
-            }
-            // 道具销毁|出售
-            else if (state == 1 && slot == DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1) {
-                modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_DESTROY);
-            }
-        });
-        // 道具位置改变
-        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_ITEM_SLOT_CHANGE, (event: JS_TO_LUA_DATA) => {
-            let playerid = event.PlayerID;
-            let hero = PlayerResource.GetPlayer(playerid).GetAssignedHero();
-            if (hero != null) {
-                let r: EntityIndex[] = [];
-                for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM; i++) {
-                    let itemEnity = hero.GetItemInSlot(i);
-                    if (itemEnity != null) {
-                        r.push(itemEnity.entindex());
-                    } else {
-                        r.push(-1 as EntityIndex);
-                    }
-                }
-                // 检查位置是否改变
-                let changeData = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(playerid).PlayerHeroComp().CheckItemSlotChange(r);
-                // 同步位置数据
-                GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(playerid).PlayerHeroComp().itemSlotData = r;
-                if (changeData) {
-                    let _event: EventData = {};
-                    (_event as EventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
-                    (_event as EventData).unit = hero as BaseNpc_Plus;
-                    (_event as EventData).changeSlot = changeData[0];
-                    (_event as EventData).state = changeData[1];
-                    modifier_event.FireEvent(_event, Enum_MODIFIER_EVENT.ON_ITEM_SLOT_CHANGE);
-                }
-            }
-        });
-    }
+
 
     DeclareFunctions() {
         // LogHelper.print('DeclareFunctions', modifier_event.DeclareEvent.length);
@@ -321,7 +261,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnAbilityEndChannel(event: ModifierAbilityEvent): void {
-        (event as EventData).eventType = EventDataType.unitIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ABILITY_END_CHANNEL);
     }
     /**
@@ -329,7 +269,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnAbilityExecuted(event: ModifierAbilityEvent): void {
-        (event as EventData).eventType = EventDataType.unitIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED);
     }
     /**
@@ -337,7 +277,7 @@ export class modifier_event extends BaseModifier_Plus {
      * start=>Executed=>FullyCas
      */
     OnAbilityFullyCast(event: ModifierAbilityEvent): void {
-        (event as EventData).eventType = EventDataType.unitIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ABILITY_FULLY_CAST);
         if (event.ability.IsItem()) {
             modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_USE_FINISH);
@@ -348,7 +288,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnAbilityStart(event: ModifierAbilityEvent): void {
-        (event as EventData).eventType = EventDataType.unitIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ABILITY_START);
     }
     /**
@@ -356,7 +296,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnAttack(event: ModifierAttackEvent): void {
-        (event as EventData).eventType = EventDataType.attackerIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.attackerIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ATTACK);
     }
     /**
@@ -457,7 +397,7 @@ export class modifier_event extends BaseModifier_Plus {
      * 怪物死亡
      */
     OnDeath(event: ModifierInstanceEvent): void {
-        (event as EventData).eventType = EventDataType.unitIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_DEATH);
     }
     /**
@@ -542,7 +482,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnRespawn(event: ModifierUnitEvent): void {
-        (event as EventData).eventType = EventDataType.unitIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_RESPAWN);
     }
     /**
@@ -550,7 +490,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnSetLocation(event: ModifierUnitEvent): void {
-        (event as EventData).eventType = EventDataType.unitIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_SET_LOCATION);
     }
     /**
@@ -565,7 +505,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnSpentMana(event: ModifierAbilityEvent): void {
-        (event as EventData).eventType = EventDataType.unitIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
 
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_SPENT_MANA);
     }
@@ -574,7 +514,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnStateChanged(event: ModifierUnitEvent): void {
-        (event as EventData).eventType = EventDataType.unitIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_STATE_CHANGED);
     }
     /**
@@ -582,7 +522,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnTakeDamage(event: ModifierInstanceEvent): void {
-        (event as EventData).eventType = EventDataType.attackerIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.attackerIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TAKEDAMAGE);
     }
     /**
@@ -597,7 +537,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnTeleported(event: ModifierUnitEvent): void {
-        (event as EventData).eventType = EventDataType.unitIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
 
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TELEPORTED);
     }
@@ -606,7 +546,7 @@ export class modifier_event extends BaseModifier_Plus {
      *
      */
     OnTeleporting(event: ModifierUnitEvent): void {
-        (event as EventData).eventType = EventDataType.unitIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_TELEPORTING);
     }
 
@@ -614,7 +554,7 @@ export class modifier_event extends BaseModifier_Plus {
      * 单位移动
      */
     OnUnitMoved(event: ModifierUnitEvent): void {
-        (event as EventData).eventType = EventDataType.unitIsSelf;
+        (event as IBuffEventData).eventType = EventDataType.unitIsSelf;
         modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_UNIT_MOVED);
     }
 }

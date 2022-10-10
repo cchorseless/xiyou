@@ -36,6 +36,7 @@ export class GameSetting {
     public static init() {
         GameSetting.gameRulesInit();
         GameSetting.gameModeInit();
+        // GameSetting.gameFilterInit();
         // DEBUG
         if (IsInToolsMode()) {
             GameRules.SetCustomGameSetupAutoLaunchDelay(30);
@@ -111,9 +112,28 @@ export class GameSetting {
         GameRules.Addon.Instance.SetPauseEnabled(true);
         GameRules.Addon.Instance.SetDaynightCycleDisabled(false);
         GameRules.Addon.Instance.SetSelectionGoldPenaltyEnabled(false);
-        // 指令过滤器
-        // GameRules.Addon.Instance.SetExecuteOrderFilter((event: ExecuteOrderFilterEvent) => {
-        //     return true
-        // }, GameSetting)
+
+    }
+
+    // 指令过滤器
+    public static gameFilterInit() {
+        let GameMode = GameRules.Addon.Instance;
+        GameMode.SetExecuteOrderFilter((event: ExecuteOrderFilterEvent) => {
+            return true
+        }, this);
+        GameMode.SetDamageFilter((event: DamageFilterEvent) => {
+            return true
+        }, this)
+        GameMode.SetItemAddedToInventoryFilter((event: ItemAddedToInventoryFilterEvent) => {
+            return true
+        }, this)
+        // GameMode:SetBountyRunePickupFilter(Dynamic_Wrap(public, "BountyRunePickupFilter"), public)
+        // GameMode:SetAbilityTuningValueFilter(Dynamic_Wrap(public, "AbilityTuningValueFilter"), public)
+        // GameMode:SetHealingFilter(Dynamic_Wrap(public, "HealingFilter"), public)
+        // GameMode:SetModifierGainedFilter(Dynamic_Wrap(public, "ModifierGainedFilter"), public)
+        // GameMode:SetModifyExperienceFilter(Dynamic_Wrap(public, "ModifyExperienceFilter"), public)
+        // GameMode:SetModifyGoldFilter(Dynamic_Wrap(public, "ModifyGoldFilter"), public)
+        // GameMode:SetRuneSpawnFilter(Dynamic_Wrap(public, "RuneSpawnFilter"), public)
+        // GameMode:SetTrackingProjectileFilter(Dynamic_Wrap(public, "TrackingProjectileFilter"), public)
     }
 }

@@ -40,6 +40,21 @@ export class BaseItem_Plus extends BaseItem {
     IsCastBySelf() {
         return this.GetCasterPlus().GetEntityIndex() == this.GetOwnerPlus().GetEntityIndex();
     }
+
+    CanGiveToNpc(npc: BaseNpc_Plus) {
+        if (GameFunc.IsValid(this) &&
+            GameFunc.IsValid(npc) &&
+            this.IsDroppable() &&
+            this.CanUnitPickUp(npc) &&
+            npc.IsAlive() &&
+            npc.IsRealUnit() &&
+            npc.HasInventory() 
+            ) {
+            return true;
+        }
+        return false;
+    }
+
     /**尝试智能施法,AI会调用 */
     public AutoSpellSelf(): boolean { return true };
     /**

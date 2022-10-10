@@ -367,7 +367,7 @@ export module GameEnum {
         push_sync_et_entity = "push_sync_et_entity",
         push_update_nettable_etentity = 'push_update_nettable_etentity',
         push_del_nettable_etentity = "push_del_nettable_etentity",
-        push_update_nettable_partprop_etentity='push_update_nettable_partprop_etentity',
+        push_update_nettable_partprop_etentity = 'push_update_nettable_partprop_etentity',
         /**推送错误信息 */
         push_error_message = "push_error_message",
         push_update_minimap = "push_update_minimap",
@@ -381,6 +381,10 @@ export module GameEnum {
         req_LoginGame = "req_LoginGame",
         /**道具位置改变 */
         req_ITEM_SLOT_CHANGE = "req_ITEM_SLOT_CHANGE",
+        /**道具给他人 */
+        req_ITEM_GIVE_NPC = "req_ITEM_GIVE_NPC",
+        /**道具仍在地上 */
+        req_ITEM_DROP_POSITION = "req_ITEM_DROP_POSITION",
         /**摄像机环绕 */
         req_Camera_Yaw_Change = "req_Camera_Yaw_Change",
         req_Mouse_Event = "req_Mouse_Event",
@@ -575,8 +579,8 @@ export module GameEnum {
             npc_dota_thinker = "npc_dota_thinker",
         }
     }
-     /**道具 */
-     export namespace Item {
+    /**道具 */
+    export namespace Item {
         export enum EItemIndex {
             Gold = 1,
             Wood = 2,

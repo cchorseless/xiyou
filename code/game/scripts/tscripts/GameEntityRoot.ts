@@ -11,7 +11,9 @@ import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { NetTablesHelper } from "./helper/NetTablesHelper";
 import { PrecacheHelper } from "./helper/PrecacheHelper";
+import { BaseItem_Plus } from "./npc/entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
+import { Enum_MODIFIER_EVENT, EventDataType, IBuffEventData, modifier_event } from "./npc/modifier/modifier_event";
 import { modifier_property } from "./npc/modifier/modifier_property";
 import { BuildingEntityRoot } from "./rules/Components/Building/BuildingEntityRoot";
 import { EnemyUnitEntityRoot } from "./rules/Components/Enemy/EnemyUnitEntityRoot";
@@ -107,6 +109,96 @@ export class GameEntityRoot extends ET.EntityRoot {
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityHurtEvent, this.OnEntityHurt);
         /**JS 请求LUA 事件 */
         EventHelper.addCustomEvent(this, "JS_TO_LUA_EVENT", this.onJS_TO_LUA_EVENT);
+        this.addItemEvent();
+    }
+
+    /**监听游戏item事件 */
+    private addItemEvent() {
+        // 道具获取事件
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaInventoryItemAddedEvent, (event) => {
+            // 17 表示 无效
+            if (event.item_slot < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM) {
+                (event as IBuffEventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
+                (event as IBuffEventData).unit = EntIndexToHScript(event.inventory_parent_entindex) as BaseNpc_Plus;
+                // 设置道具第一个拥有者
+                let item = EntIndexToHScript(event.item_entindex) as BaseItem_Plus;
+                if (item.GetPurchaser() == null) {
+                    item.SetPurchaser((event as IBuffEventData).unit);
+                }
+                modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_GET);
+            }
+        });
+        // 道具缺失事件
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaHeroInventoryItemChangeEvent, (event: DotaHeroInventoryItemChangeEvent) => {
+            let item = EntIndexToHScript(event.item_entindex) as BaseItem_Plus;
+            let state = item.GetItemState();
+            let slot = item.GetItemSlot();
+            (event as IBuffEventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
+            (event as IBuffEventData).unit = EntIndexToHScript(event.hero_entindex) as BaseNpc_Plus;
+            // 道具不在身上
+            if (state == 0 && slot == -1) {
+                modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_LOSE);
+            }
+            // 道具销毁|出售
+            else if (state == 1 && slot == DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1) {
+                modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_DESTROY);
+            }
+        });
+        // 道具位置改变
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_ITEM_SLOT_CHANGE, (event: JS_TO_LUA_DATA) => {
+            let playerid = event.PlayerID;
+            let hero = PlayerResource.GetPlayer(playerid).GetAssignedHero();
+            if (hero != null) {
+                let r: EntityIndex[] = [];
+                for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM; i++) {
+                    let itemEnity = hero.GetItemInSlot(i);
+                    if (itemEnity != null) {
+                        r.push(itemEnity.entindex());
+                    } else {
+                        r.push(-1 as EntityIndex);
+                    }
+                }
+                // 检查位置是否改变
+                let changeData = this.PlayerSystem().GetPlayer(playerid).PlayerHeroComp().CheckItemSlotChange(r);
+                // 同步位置数据
+                this.PlayerSystem().GetPlayer(playerid).PlayerHeroComp().itemSlotData = r;
+                if (changeData) {
+                    let _event: IBuffEventData = {};
+                    (_event as IBuffEventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
+                    (_event as IBuffEventData).unit = hero as BaseNpc_Plus;
+                    (_event as IBuffEventData).changeSlot = changeData[0];
+                    (_event as IBuffEventData).state = changeData[1];
+                    modifier_event.FireEvent(_event, Enum_MODIFIER_EVENT.ON_ITEM_SLOT_CHANGE);
+                }
+            }
+        });
+        // 道具给人
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_ITEM_GIVE_NPC, (event: JS_TO_LUA_DATA) => {
+            let playerid = event.PlayerID;
+            let itemslot = event.data.slot;
+            let npcentindex = event.data.npc;
+            let hero = PlayerResource.GetPlayer(playerid).GetAssignedHero();
+            if (hero == null || itemslot == null || npcentindex == null) {
+                event.state = false;
+                EventHelper.ErrorMessage("fail item", playerid);
+                return;
+            }
+            let itemEnity = hero.GetItemInSlot(itemslot) as BaseItem_Plus;
+            let npc = EntIndexToHScript(npcentindex) as BaseNpc_Plus;
+            if (!GameFunc.IsValid(itemEnity) || !GameFunc.IsValid(npc)) {
+                event.state = false;
+                EventHelper.ErrorMessage("fail item", playerid);
+                return;
+            }
+            // if (!itemEnity.CanGiveToNpc(npc)) {
+            //     event.state = false;
+            //     EventHelper.ErrorMessage("fail item", playerid);
+            //     return;
+            // }
+            npc.AddItem(itemEnity);
+            event.state = true;
+        });
+        // 道具仍在地上
 
     }
     private async onGameRulesStateChange(e: any) {
@@ -210,7 +302,7 @@ export class GameEntityRoot extends ET.EntityRoot {
 
     }
     private onJS_TO_LUA_EVENT(entindex: EntityIndex, event: JS_TO_LUA_DATA) {
-        if (event.protocol == null ) {
+        if (event.protocol == null) {
             return;
         }
         let allCB = globalData.allCustomProtocolEvent[event.protocol];

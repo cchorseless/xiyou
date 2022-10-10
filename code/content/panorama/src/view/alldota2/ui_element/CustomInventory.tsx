@@ -2,6 +2,7 @@ import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { NetHelper } from "../../../helper/NetHelper";
 import { GameEnum } from "../../../libs/GameEnum";
 import { CustomInventory_UI } from "./CustomInventory_UI";
 
@@ -136,10 +137,23 @@ export class CustomInventory extends CustomInventory_UI {
     onBtn_dragend = (item_slot: number) => {
         let pos = GameUI.GetCursorPosition();
         let entitys = GameUI.FindScreenEntities(pos);
-        if (entitys.length > 0) { }
+        if (entitys.length > 0) {
+            for (let info of entitys) {
+                if (info.accurateCollision) {
+                    NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_GIVE_NPC, {
+                        npc: info.entityIndex,
+                        slot: item_slot
+                    })
+                    break;
+                }
+            }
+        }
         else {
             let worldpos = GameUI.GetScreenWorldPosition(pos);
+            NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_DROP_POSITION, {
+                pos: worldpos,
+                slot: item_slot
+            })
         }
-        LogHelper.print(22222, " ---", item_slot, entitys);
     };
 }
