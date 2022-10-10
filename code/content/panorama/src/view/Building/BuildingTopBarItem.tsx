@@ -83,9 +83,14 @@ export class BuildingTopBarItem extends BuildingTopBarItem_UI {
     }
 
     HasOverhead(iEntIndex: EntityIndex): boolean {
-        return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex);
+        let EntityRootManage = PlayerScene.EntityRootManage;
+        let entityroot = EntityRootManage.getBuilding(iEntIndex);
+        if (entityroot && entityroot.IsShowOverhead) {
+            return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex) && !Entities.IsInvisible(iEntIndex);
+        }
+        return false;
     }
     HasHpUI(iEntIndex: EntityIndex): boolean {
-        return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex) && !Entities.NoHealthBar(iEntIndex);
+        return this.HasOverhead(iEntIndex) && !Entities.NoHealthBar(iEntIndex);
     }
 }

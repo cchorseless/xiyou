@@ -19,7 +19,7 @@ export class BuildingRuntimeEntityRoot extends PlayerCreateBattleUnitEntityRoot 
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
         this.addBattleComp();
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingComponent>("BuildingComponent"));
-        this.SyncClientEntity(this);
+        // this.SyncClientEntity(this);
     }
     onDestroy(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();

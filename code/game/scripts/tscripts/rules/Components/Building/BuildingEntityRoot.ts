@@ -29,6 +29,7 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         let vLocation = hCaster.GetAbsOrigin();
         let iTeamNumber = hCaster.GetTeamNumber()
         hCaster.AddNoDraw();
+        this.SetUIOverHead(false)
         let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
         let cloneRuntime = CreateUnitByName(this.ConfigID, vLocation, true, hHero, hHero, iTeamNumber) as BaseNpc_Plus;
         if (cloneRuntime) {
@@ -59,6 +60,9 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
             // buff
             let modifiers = hCaster.FindAllModifiers() as BaseModifier_Plus[];
             for (let modifier of (modifiers)) {
+                if (modifier.GetName() == "modifier_jiaoxie_wudi") {
+                    continue;
+                }
                 let buff = cloneRuntime.addBuff(modifier.GetName(), modifier.GetCasterPlus(), modifier.GetAbilityPlus())
                 buff.SetStackCount(modifier.GetStackCount())
             }
@@ -67,11 +71,13 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
 
     public RemoveCloneRuntimeBuilding() {
         if (this.RuntimeBuilding) {
+            this.RuntimeBuilding.GetDomain<BaseNpc_Plus>().AddNoDraw();
             this.RuntimeBuilding.Dispose();
         }
         this.RuntimeBuilding = null;
         let hCaster = this.GetDomain<BaseNpc_Plus>();
         hCaster.RemoveNoDraw();
+        this.SetUIOverHead(true)
     }
 
     onDestroy(): void {

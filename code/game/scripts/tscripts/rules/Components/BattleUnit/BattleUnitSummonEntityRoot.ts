@@ -13,7 +13,7 @@ export class BattleUnitSummonEntityRoot extends PlayerCreateBattleUnitEntityRoot
         (this as any).ConfigID = conf;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
         this.addBattleComp();
-        this.SyncClientEntity(this);
+        // this.SyncClientEntity(this);
     }
     IsSummon() {
         return true;

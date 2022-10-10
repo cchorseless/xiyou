@@ -1,7 +1,6 @@
 import { KVHelper } from "../../../helper/KVHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_wave } from "../../../npc/modifier/building/modifier_wave";
-import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { ET, registerET } from "../../Entity/Entity";
 import { DifficultyConfig } from "../../System/Difficulty/DifficultyConfig";
 import { DifficultyState } from "../../System/Difficulty/DifficultyState";

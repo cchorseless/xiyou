@@ -1,5 +1,6 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
+import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { EntityHpBarItem } from "../Common/EntityHpBarItem";
 import { EnemyTopBarItem_UI } from "./EnemyTopBarItem_UI";
 export class EnemyTopBarItem extends EnemyTopBarItem_UI {
@@ -37,7 +38,12 @@ export class EnemyTopBarItem extends EnemyTopBarItem_UI {
     }
 
     HasOverhead(iEntIndex: EntityIndex): boolean {
-        return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex);
+        let EntityRootManage = PlayerScene.EntityRootManage;
+        let entityroot = EntityRootManage.getEnemy(iEntIndex);
+        if (entityroot && entityroot.IsShowOverhead) {
+            return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex) && !Entities.IsInvisible(iEntIndex);
+        }
+        return false;
         // return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex) && !Entities.NoHealthBar(iEntIndex);
     }
     HasHpUI(iEntIndex: EntityIndex): boolean {

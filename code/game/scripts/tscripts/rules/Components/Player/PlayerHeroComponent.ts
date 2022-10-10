@@ -1,3 +1,4 @@
+import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { PlayerConfig } from "../../System/Player/PlayerConfig";
@@ -19,6 +20,7 @@ export class PlayerHeroComponent extends ET.Component {
         (this as any).playerColor = PlayerConfig.playerColor[domain.ETRoot.AsPlayer().Playerid];
         this.firstSpawnPoint = hero.GetAbsOrigin();
         modifier_wait_portal.applyOnly(hero, hero);
+        modifier_jiaoxie_wudi.applyOnly(hero, hero);
     }
 
     /**

@@ -19,12 +19,13 @@ export class ChessControlSystemComponent extends ET.Component {
     private addEvent() {
         /**移动棋子 */
         EventHelper.addProtocolEvent(this, ChessControlConfig.EProtocol.pick_chess_position, (event: CLIENT_DATA<ChessControlConfig.I.pick_chess_position>) => {
+            let playersys = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(event.PlayerID);
             let v = Vector(event.data.x, event.data.y, event.data.z);
             let entity = EntIndexToHScript(event.data.entityid as EntityIndex) as BaseNpc_Plus;
             if (!GameFunc.IsValid(entity) || entity.ETRoot == null || !entity.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
                 [event.state, event.message] = [false, "cant find entity"];
             } else {
-                [event.state, event.message] = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(event.PlayerID).ChessControlComp().moveChess(entity.ETRoot.As<BuildingEntityRoot>(), v);
+                [event.state, event.message] = playersys.ChessControlComp().moveChess(entity.ETRoot.As<BuildingEntityRoot>(), v);
             }
         });
     }
