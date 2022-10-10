@@ -26,6 +26,11 @@ export class PlayerEntityRoot extends ET.Entity {
             //  PlayerScene.Scene.AddComponent(CameraComponent);
         }
     }
+
+
+    Init() {
+        this.PlayerHeroComp.LoadNetTableData();
+    }
     get IsLocalPlayer() {
         return Players.GetLocalPlayer() == this.Playerid
     }

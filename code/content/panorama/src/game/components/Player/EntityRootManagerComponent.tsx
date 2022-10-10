@@ -17,7 +17,7 @@ export class EntityRootManagerComponent extends ET.Component {
     readonly AllAbility: { [playerid: string]: string } = {};
     readonly AllFakerHero: { [playerid: string]: string } = {};
 
-    onAwake() {
+    loadAllPlayers() { 
         let maxPlayers = Players.GetMaxPlayers();
         for (let i = 0; i < maxPlayers; i++) {
             let playerid = i as PlayerID;
@@ -38,7 +38,7 @@ export class EntityRootManagerComponent extends ET.Component {
     }
 
     getPlayer(playerid: PlayerID) {
-        let entityid = this.AllPlayers[playerid];
+        let entityid = this.AllPlayers[playerid + ""];
         if (entityid) {
             return this.GetChild<PlayerEntityRoot>(entityid);
         }

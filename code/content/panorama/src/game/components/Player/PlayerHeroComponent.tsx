@@ -13,11 +13,10 @@ import { PlayerConfig } from "../../system/Player/PlayerConfig";
 export class PlayerHeroComponent extends ET.Component {
     onAwake() {
         this.addEvent();
-        this.LoadNetTableData();
     }
 
     LoadNetTableData() {
-        try {
+        // try {
             let nettable = NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer());
             let data_player = NetHelper.GetOneTable(nettable);
             for (let info of data_player) {
@@ -25,7 +24,7 @@ export class PlayerHeroComponent extends ET.Component {
                     info.value._nettable = nettable;
                     ET.Entity.FromJson(info.value);
                 }
-            }
+        }
             let data_common = NetHelper.GetOneTable(NetHelper.ENetTables.etentity);
             for (let info of data_common) {
                 if (info.value) {
@@ -33,10 +32,10 @@ export class PlayerHeroComponent extends ET.Component {
                     ET.Entity.FromJson(info.value);
                 }
             }
-        }
-        catch (e) {
-            LogHelper.error(e);
-        }
+        // }
+        // catch (e) {
+        //     LogHelper.error(e);
+        // }
     }
 
     addEvent() {

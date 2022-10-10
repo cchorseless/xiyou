@@ -51,7 +51,7 @@ export class AllEntity {
             return;
         }
         ServiceEntity.init();
-        LogHelper.print("register all entity 999999");
+        LogHelper.print("register all entity 111111");
         AllEntity.IsInit = true;
     }
 }

@@ -1,3 +1,4 @@
+import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { registerET, ET } from "../../../libs/Entity";
 import { CombinationBottomPanel } from "../../../view/Combination/CombinationBottomPanel";
@@ -9,7 +10,8 @@ import { ECombination } from "./ECombination";
 export class CombinationManagerComponent extends ET.Component {
     onSerializeToEntity(): void {
         let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
-        PlayerScene.EntityRootManage.getPlayer(playerid)?.AddOneComponent(this);
+        let player = PlayerScene.EntityRootManage.getPlayer(playerid)!;
+        player.AddOneComponent(this);
     }
 
     allCombination: string[] = [];

@@ -32,5 +32,6 @@ export class PlayerScene {
 
     static Init() {
         this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof EntityRootManagerComponent>("EntityRootManagerComponent"));
+        this.EntityRootManage.loadAllPlayers();
     }
 }
