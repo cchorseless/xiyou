@@ -1,4 +1,4 @@
-import { KV_DATA } from "../config/KvAllInterface";
+
 import { FuncHelper } from "./FuncHelper";
 
 export module KVHelper {

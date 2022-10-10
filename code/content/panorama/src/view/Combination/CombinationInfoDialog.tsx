@@ -1,11 +1,12 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { KV_DATA } from "../../config/KvAllInterface";
+
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { CombinationInfoDialog_UI } from "./CombinationInfoDialog_UI";
 import { CombinationDesItem } from "./CombinationDesItem";
 import { CombinationCardIconItem } from "./CombinationCardIconItem";
+import { KvAllInterface } from "../../config/KvAllInterface";
 
 interface IProps {
     itemname: string;
@@ -31,6 +32,7 @@ export class CombinationInfoDialog extends CombinationInfoDialog_UI {
         }
         this.clearNode(this.NODENAME.panel_des);
         this.clearNode(this.NODENAME.panel_heroicon);
+        let KV_DATA = (GameUI.CustomUIConfig() as KvAllInterface)
         let config = KV_DATA.building_combination_ability.building_combination_ability;
         let heronamemap: { [key: string]: string } = {};
         let common_effectmap: { [key: string]: string } = {};

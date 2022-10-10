@@ -1,6 +1,6 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { KV_DATA } from "../../config/KvAllInterface";
+
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { CombinationDesItem_UI } from "./CombinationDesItem_UI";
@@ -13,9 +13,9 @@ export class CombinationDesItem extends CombinationDesItem_UI {
     onStartUI() {
         this.onRefreshUI(this.props as IProps);
     }
-   
+
     onRefreshUI(p: IProps) {
-        if (!p.activecount|| !p.effect) {
+        if (!p.activecount || !p.effect) {
             return;
         }
         this.lbl_des0.current!.text = `(${p.activecount})`;

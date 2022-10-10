@@ -1,6 +1,6 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { KV_DATA } from "../../config/KvAllInterface";
+
 import { BuildingEntityRoot } from "../../game/components/Building/BuildingEntityRoot";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { CSSHelper } from "../../helper/CSSHelper";

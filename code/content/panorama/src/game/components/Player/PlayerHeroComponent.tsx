@@ -47,7 +47,6 @@ export class PlayerHeroComponent extends ET.Component {
             let instanceid = event.data.instanceId;
             let nettable = event.data.nettable;
             let data = NetHelper.GetTableValue(nettable, instanceid);
-            LogHelper.print(nettable, instanceid);
             try {
                 if (data) {
                     ET.Entity.FromJson(data);

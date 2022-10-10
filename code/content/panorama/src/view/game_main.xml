@@ -16,7 +16,6 @@
     <scripts>
         <!-- <include src="s2r://panorama/scripts/util.vjs_c" /> -->
         <include src="s2r://panorama/scripts/sequence_actions.vjs_c" />
-        <!-- <include src="s2r://panorama/scripts/dota_sequence_actions.vjs_c" /> -->
         <include src="./game_main.tsx" />
     </scripts>
 

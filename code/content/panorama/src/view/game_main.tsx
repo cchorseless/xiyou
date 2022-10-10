@@ -1,6 +1,6 @@
 import React, { createRef } from "react";
 import { PanelAttributes, render } from "react-panorama-eom";
-import { AllEntity } from "../game/AllEntity";
+import { AllEntity } from "../game/Index";
 import { PlayerScene } from "../game/components/Player/PlayerScene";
 import { DebugHelper } from "../helper/DebugHelper";
 import { DotaUIHelper } from "../helper/DotaUIHelper";

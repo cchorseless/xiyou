@@ -1,4 +1,4 @@
-// generate with PIPIXIA's kv generator 
+
 export namespace pool_group_config { 
 export interface OBJ_0_1 {
 "poolgroupdata" :OBJ_1_1 ,

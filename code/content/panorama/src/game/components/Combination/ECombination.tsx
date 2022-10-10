@@ -1,6 +1,6 @@
-import { KV_DATA } from "../../../config/KvAllInterface";
 import { KVHelper } from "../../../helper/KVHelper";
 import { NetHelper } from "../../../helper/NetHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { registerET, ET } from "../../../libs/Entity";
 import { PlayerScene } from "../Player/PlayerScene";
 
@@ -15,10 +15,14 @@ export class ECombination extends ET.Entity {
     onSerializeToEntity(): void {
         this.onReload();
     }
-    onReload(): void {
+    async onReload() {
         if (this.IsEmpty()) { return; }
         let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
-        PlayerScene.EntityRootManage.getPlayer(playerid)?.CombinationManager.addOneCombination(this);
+        let player = PlayerScene.EntityRootManage.getPlayer(playerid)
+        if (player?.CombinationManager == null) {
+            await TimerHelper.DelayTime(0.1);
+        }
+        await player?.CombinationManager.addOneCombination(this);
     }
 
     isFakerCombination() {

@@ -235,4 +235,18 @@ export module TimerHelper {
             );
         });
     }
+
+    export async function MakeSure(obj: any) {
+        return new Promise<boolean>((resolve, reject) => {
+            let task = TimerHelper.AddIntervalFrameTimer(
+                1, 1,
+                FuncHelper.Handler.create(null, () => {
+                    if (obj)
+                        resolve(true);
+                }),
+                10
+            );
+
+        });
+    }
 }

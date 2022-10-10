@@ -1,4 +1,4 @@
-// generate with PIPIXIA's kv generator 
+
 export namespace building_unit_summoned { 
 export interface OBJ_0_1 {
 "building_unit_summoned" :OBJ_1_1 ,

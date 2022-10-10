@@ -1,17 +1,32 @@
 const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require('@aabao/webpack-panorama');
+const {
+    PanoramaManifestPlugin,
+    PanoramaTargetPlugin
+} = require('@aabao/webpack-panorama');
 
 /** @type {import('webpack').Configuration} */
 const isProduction = false;
+const fileList = () => {
+    let viewdir = [
+        "config"
+    ];
+    let r = [];
+    viewdir.forEach(file => {
+        r.push({
+            import: `./${file}`,
+            filename: `${file}.js`
+        })
+    })
+    return r
+};
 module.exports = {
-    optimization: {    // 1. 这个配置必须
+    optimization: { // 1. 这个配置必须
         minimize: false
     },
-    devtool: "eval-cheap-source-map", // 2. 这个配置必须
+    devtool: isProduction ? false : 'eval-source-map',
     mode: isProduction ? 'production' : 'development',
     context: path.resolve(__dirname, 'src'),
-    // devtool: isProduction ? false : 'eval-inline-source-map',
     output: {
         path: path.resolve(__dirname, 'layout/custom_game'),
         publicPath: 'file://{resources}/layout/custom_game/',
@@ -20,10 +35,15 @@ module.exports = {
         extensions: ['.ts', '.tsx', '...'],
         symlinks: false,
     },
-
+    // entry: () => {
+    //     let list = [{
+    //         import: "./game",
+    //         filename: "./game/game.js"
+    //     }, ];
+    //     return list;
+    // },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.xml$/,
                 loader: '@aabao/webpack-panorama/lib/layout-loader',
             },
@@ -35,19 +55,26 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
-                options: { transpileOnly: true },
+                options: {
+                    transpileOnly: true
+                },
             },
             {
                 test: /\.js?$|\.jsx?$/,
                 loader: 'babel-loader',
-                options: { presets: ['@babel/preset-react', '@babel/preset-env'] },
+                options: {
+                    presets: ['@babel/preset-react', '@babel/preset-env']
+                },
             },
             {
                 test: /\.css$/,
                 test: /\.(css|less)$/,
                 issuer: /\.xml$/,
                 loader: 'file-loader',
-                options: { name: '[path][name].css', esModule: false },
+                options: {
+                    name: '[path][name].css',
+                    esModule: false
+                },
             },
             {
                 test: /\.less$/,
@@ -89,7 +116,7 @@ module.exports = {
                     import: './view/game_main.xml',
                     type: 'Hud'
                 },
-            ],
+            ].concat(fileList()),
         }),
         new ForkTsCheckerWebpackPlugin({
             typescript: {

@@ -1,4 +1,4 @@
-// generate with PIPIXIA's kv generator 
+
 export namespace building_unit_tower { 
 export interface OBJ_0_1 {
 "building_unit_tower" :OBJ_1_1 ,
@@ -179,7 +179,9 @@ export interface OBJ_2_1 {
 "MovementTurnRate" :string ,
 "HasAggressiveStance" :string ,
 "ArmorPhysical" :string ,
+"StatusHealth" :string ,
 "StatusHealthRegen" :string ,
+"StatusMana" :string ,
 "AttackCapabilities" :string ,
 "AttackDamageMin" :string ,
 "AttackDamageMax" :string ,
@@ -234,19 +236,16 @@ export interface OBJ_2_1 {
 "AbilityLayout" :string ,
 "StatusManaRegen" :string ,
 "AttackRangeActivityModifiers" :OBJ_3_1 ,
-"StatusHealth" :string ,
-"StatusMana" :string ,
 "CombatClassAttack" :string ,
 "CombatClassDefend" :string ,
 [k:string] : string | OBJ_3_1 }
 export interface OBJ_3_1 {
 "walk" :string ,
-"<none>" :string ,
+"run" :string ,
 "AttachWearables" :OBJ_4_1 ,
 "fast" :string ,
 "faster" :string ,
 "fastest" :string ,
-"run" :string ,
 "jog" :string ,
 "run_fast" :string ,
 "attack_short_range" :string ,

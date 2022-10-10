@@ -1,11 +1,5 @@
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ET } from "../../../libs/Entity";
-import { TCharacter } from "../../service/account/TCharacter";
-import { ChessControlComponent } from "../ChessControlComponent";
-import { DrawComponent } from "../Draw/DrawComponent";
-import { RoundManagerComponent } from "../Round/RoundManagerComponent";
-import { PlayerHeroComponent } from "./PlayerHeroComponent";
-import { PlayerDataComponent } from "./PlayerDataComponent";
 import { EntityRootManagerComponent } from "./EntityRootManagerComponent";
 import { NetHelper } from "../../../helper/NetHelper";
 import { GameEnum } from "../../../libs/GameEnum";

@@ -1,4 +1,4 @@
-// generate with PIPIXIA's kv generator 
+
 export namespace prop_config { 
 export interface OBJ_0_1 {
 "prop_config" :OBJ_1_1 ,

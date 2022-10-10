@@ -1,4 +1,4 @@
-// generate with PIPIXIA's kv generator 
+
 export namespace building_round_board_challenge { 
 export interface OBJ_0_1 {
 "building_round_board_challenge" :OBJ_1_1 ,

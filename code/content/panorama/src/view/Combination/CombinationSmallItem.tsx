@@ -1,6 +1,6 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { KV_DATA } from "../../config/KvAllInterface";
+import { KvAllInterface } from "../../config/KvAllInterface";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { DotaUIHelper } from "../../helper/DotaUIHelper";
 import { LogHelper } from "../../helper/LogHelper";
@@ -47,13 +47,14 @@ export class CombinationSmallItem extends CombinationSmallItem_UI {
     onStartUI() {
         this.onRefreshUI(this.props as IProps);
     }
-  
+
 
     onRefreshUI(k: IProps) {
         if (!k.itemname) {
             return;
         }
         CSSHelper.setLocalText(this.lbl_des, k.itemname);
+        let KV_DATA = (GameUI.CustomUIConfig() as KvAllInterface)
         let config = KV_DATA.building_combination.building_combination[k.itemname];
         CSSHelper.setBgImageUrl(this.img_icon, `combination/icon/${config.relationicon}.png`);
     }

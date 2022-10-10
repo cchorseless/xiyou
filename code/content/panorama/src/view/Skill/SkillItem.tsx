@@ -1,7 +1,6 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
 import { DOTAAbilityImageAttributes } from "react-panorama-eom";
-import { KV_DATA } from "../../config/KvAllInterface";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
@@ -11,7 +10,7 @@ interface IProps {
     itemname: string;
 }
 export class SkillItem extends SkillItem_UI {
-	
+
     constructor(props: any) {
         super(props)
         this.img_skillicon_attrs.showtooltip = true;
@@ -21,7 +20,7 @@ export class SkillItem extends SkillItem_UI {
         this.img_skillicon.current!.style.borderRadius = "15px";
         this.onRefreshUI(this.props as IProps);
     }
-   
+
     onRefreshUI(p: IProps) {
         this.__root__.current!.hittest = true;
         this.img_skillicon.current!.hittest = true;

@@ -1,4 +1,4 @@
-// generate with PIPIXIA's kv generator 
+
 export namespace building_combination_ability { 
 export interface OBJ_0_1 {
 "building_combination_ability" :OBJ_1_1 ,

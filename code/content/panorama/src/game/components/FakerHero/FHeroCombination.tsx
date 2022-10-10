@@ -1,4 +1,5 @@
 import { NetHelper } from "../../../helper/NetHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { registerET } from "../../../libs/Entity";
 import { ECombination } from "../Combination/ECombination";
 import { PlayerScene } from "../Player/PlayerScene";
@@ -9,10 +10,14 @@ export class FHeroCombination extends ECombination {
         this.onReload();
     }
 
-    onReload(): void {
+    async onReload() {
         if (this.IsEmpty()) { return; }
         let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
-        PlayerScene.EntityRootManage.getFakerHero(playerid)!.FHeroCombinationManager.addOneCombination(this);
+        let player = PlayerScene.EntityRootManage.getFakerHero(playerid)
+        if (player?.FHeroCombinationManager == null) {
+            await TimerHelper.DelayTime(0.1);
+        }
+        await player!.FHeroCombinationManager.addOneCombination(this);
     }
     isFakerCombination() {
         return true;

@@ -1,4 +1,4 @@
-// generate with PIPIXIA's kv generator 
+
 import { shipin_config } from "./kvConfig/shipin_config" 
 import { pool_config } from "./kvConfig/pool_config" 
 import { pool_group_config } from "./kvConfig/pool_group_config" 

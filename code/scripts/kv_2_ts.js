@@ -10,7 +10,10 @@ const keyvalues = require("keyvalues-node");
 const program = require("commander");
 const chokidar = require("chokidar");
 const path = require("path");
-const { read_all_files, read_sub_directories } = require("./utils");
+const {
+    read_all_files,
+    read_sub_directories
+} = require("./utils");
 
 // 需要读取的excel路径
 const npc_path = "game/scripts/";
@@ -19,8 +22,9 @@ const interface_path = "game/scripts/tscripts/kvInterface";
 const uiInterface_path = "content/panorama/src/config";
 const kvjsconfig = "game/scripts/npc/kv_config.kv";
 const KvAllInterface_UI = uiInterface_path + "/KvAllInterface.ts";
+const KvAllInterface_UI_Data = uiInterface_path + "/KVData.ts";
 const KvAllInterface_Game = interface_path + "/KvAllInterface.ts";
-const Top_Str = "// generate with PIPIXIA's kv generator \n";
+const Top_Str = "\n";
 
 String.format = function () {
     var param = [];
@@ -82,7 +86,12 @@ function parseTreeObj(obj) {
             }
         } else {
             t_s = "OBJ_1_1";
-            needkeys.push({ deep: 1, parent: obj, key: _key, parentindex: "OBJ_1_1" });
+            needkeys.push({
+                deep: 1,
+                parent: obj,
+                key: _key,
+                parentindex: "OBJ_1_1"
+            });
         }
         // 考虑K相同值不同的情况
         let countDeep = Object.keys(typeObj["0"]).length || 1;
@@ -166,7 +175,12 @@ function parseTreeObj(obj) {
             }
             // 有新的下一列需要添加
             else {
-                needkeys.push({ deep: deep + 1, parent: obj, key: _key, parentindex: countindex });
+                needkeys.push({
+                    deep: deep + 1,
+                    parent: obj,
+                    key: _key,
+                    parentindex: countindex
+                });
                 // 需要挑选 下一深度的类型
                 cur_type = "OBJ_?";
             }
@@ -246,7 +260,7 @@ function buildTsStr(obj) {
             r += '"' + k + '" :' + inobj[k] + " ,\n";
         }
         if (temp == "") {
-            temp="any"
+            temp = "any"
         }
         if (_k !== "OBJ_0_1") {
             r += `[k:string] : ${temp} `;
@@ -398,11 +412,13 @@ const all_kv_to_ts = async (singleFile = null) => {
         KvAllInterface_s_1 = "{";
     }
     KvAllInterface_s += KvAllInterface_s_1 + "}\n";
-    KvAllInterface_s += `export const KV_DATA  = {
+    let kvconfigDATA = `export const KV_DATA  = {
         ${KvAllDATA}
-    } as any as Readonly<KvAllInterface>; `;
-    if (!fs.existsSync(KvAllInterface_UI)) fs.mkdirSync(KvAllInterface_UI);
+    } as any  `;
+    // if (!fs.existsSync(KvAllInterface_UI)) fs.mkdirSync(KvAllInterface_UI,);
     fs.writeFileSync(KvAllInterface_UI, Top_Str + KvAllInterface_s);
+    // if (!fs.existsSync(KvAllInterface_UI_Data)) fs.mkdirSync(KvAllInterface_UI_Data);
+    fs.writeFileSync(KvAllInterface_UI_Data, Top_Str + kvconfigDATA);
     console.log("Parse kv->UIInterface finish,", " success: ", successCount, " fail: ", errorCount);
     //#endregion
     //#region 转 game接口文件

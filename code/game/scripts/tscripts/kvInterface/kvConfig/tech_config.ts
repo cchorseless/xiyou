@@ -1,4 +1,4 @@
-// generate with PIPIXIA's kv generator 
+
 export namespace tech_config { 
 export interface OBJ_0_1 {
 "tech_config" :OBJ_1_1 ,

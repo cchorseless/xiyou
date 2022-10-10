@@ -1,7 +1,7 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
 import { render } from "react-panorama-eom";
-import { AllEntity } from "../../../game/AllEntity";
+import { AllEntity } from "../../../game/Index";
 import { PlayerScene } from "../../../game/components/Player/PlayerScene";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";

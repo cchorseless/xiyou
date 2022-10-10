@@ -1,4 +1,4 @@
-// generate with PIPIXIA's kv generator 
+
 export namespace lang_config { 
 export interface OBJ_0_1 {
 "lang_config" :OBJ_1_1 ,

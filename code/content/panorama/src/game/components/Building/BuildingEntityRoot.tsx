@@ -1,4 +1,4 @@
-import { KV_DATA } from "../../../config/KvAllInterface";
+import { KvAllInterface } from "../../../config/KvAllInterface";
 import { ET, registerET } from "../../../libs/Entity";
 import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
@@ -8,7 +8,7 @@ import { BuildingComponent } from "./BuildingComponent";
 export class BuildingEntityRoot extends PlayerCreateUnitEntityRoot {
 
     Config() {
-        return KV_DATA.building_unit_tower.building_unit_tower[this.ConfigID];
+        return (GameUI.CustomUIConfig() as KvAllInterface).building_unit_tower.building_unit_tower[this.ConfigID];
     }
 
     onSerializeToEntity() {

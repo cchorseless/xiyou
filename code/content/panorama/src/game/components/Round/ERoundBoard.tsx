@@ -1,6 +1,7 @@
 import { building_round_board } from "../../../config/building/building_round_board";
-import { KV_DATA } from "../../../config/KvAllInterface";
+import { KvAllInterface } from "../../../config/KvAllInterface";
 import { LogHelper } from "../../../helper/LogHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { TopBarPanel } from "../../../view/TopBarPanel/TopBarPanel";
 import { RoundConfig } from "../../system/Round/RoundConfig";
@@ -16,8 +17,12 @@ export class ERoundBoard extends ERound {
     tTowerDamage: { [entityIndex: string]: number } = {}; // 回合伤害
     config: building_round_board.OBJ_2_1;
 
-    onSerializeToEntity() {
+    async onSerializeToEntity() {
+        let KV_DATA = (GameUI.CustomUIConfig() as KvAllInterface)
         this.config = KV_DATA.building_round_board.building_round_board["" + this.configID];
+        if (PlayerScene.Local.RoundManagerComp == null) {
+            await TimerHelper.DelayTime(0.1);
+        }
         PlayerScene.Local.RoundManagerComp.addRound(this);
         this.onReload();
     }
@@ -37,6 +42,7 @@ export class ERoundBoard extends ERound {
     getCurStateDes() {
         LogHelper.print(this.roundState);
         let str = "";
+        let KV_DATA = (GameUI.CustomUIConfig() as KvAllInterface)
         switch (this.roundState) {
             case RoundConfig.ERoundBoardState.start:
                 str = $.Localize("#" + KV_DATA.lang_config.lang_config.round_start.Des);
