@@ -17,6 +17,8 @@ import { Enum_MODIFIER_EVENT, EventDataType, IBuffEventData, modifier_event } fr
 import { modifier_property } from "./npc/modifier/modifier_property";
 import { BuildingEntityRoot } from "./rules/Components/Building/BuildingEntityRoot";
 import { EnemyUnitEntityRoot } from "./rules/Components/Enemy/EnemyUnitEntityRoot";
+import { ItemEntityRoot } from "./rules/Components/Item/ItemEntityRoot";
+import { PlayerCreateBattleUnitEntityRoot } from "./rules/Components/Player/PlayerCreateBattleUnitEntityRoot";
 import { RoundPrizeUnitEntityRoot } from "./rules/Components/Round/RoundPrizeUnitEntityRoot";
 import { ET } from "./rules/Entity/Entity";
 import { BuildingSystemComponent } from "./rules/System/Building/BuildingSystemComponent";
@@ -185,21 +187,48 @@ export class GameEntityRoot extends ET.EntityRoot {
             }
             let itemEnity = hero.GetItemInSlot(itemslot) as BaseItem_Plus;
             let npc = EntIndexToHScript(npcentindex) as BaseNpc_Plus;
-            if (!GameFunc.IsValid(itemEnity) || !GameFunc.IsValid(npc)) {
+            if (!GameFunc.IsValid(itemEnity) || !GameFunc.IsValid(npc) || itemEnity.ETRoot == null || npc.ETRoot == null) {
                 event.state = false;
                 EventHelper.ErrorMessage("fail item", playerid);
                 return;
             }
-            // if (!itemEnity.CanGiveToNpc(npc)) {
-            //     event.state = false;
-            //     EventHelper.ErrorMessage("fail item", playerid);
-            //     return;
-            // }
-            npc.AddItem(itemEnity);
+            let itemroot = itemEnity.ETRoot.As<ItemEntityRoot>();
+            let npcroot = npc.ETRoot.As<PlayerCreateBattleUnitEntityRoot>()
+            if (!itemroot.canGiveToNpc(npcroot)) {
+                event.state = false;
+                EventHelper.ErrorMessage("fail item", playerid);
+                return;
+            }
+            npcroot.ItemManagerComp().addItemRoot(itemroot);
             event.state = true;
         });
         // 道具仍在地上
-
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_ITEM_DROP_POSITION, (event: JS_TO_LUA_DATA) => {
+            let playerid = event.PlayerID;
+            let itemslot = event.data.slot;
+            let pos = event.data.pos;
+            let hero = PlayerResource.GetPlayer(playerid).GetAssignedHero();
+            if (hero == null || itemslot == null || pos == null) {
+                event.state = false;
+                EventHelper.ErrorMessage("fail item", playerid);
+                return;
+            }
+            let itemEnity = hero.GetItemInSlot(itemslot) as BaseItem_Plus;
+            if (!GameFunc.IsValid(itemEnity) || itemEnity.ETRoot == null) {
+                event.state = false;
+                EventHelper.ErrorMessage("fail item", playerid);
+                return;
+            }
+            let itemroot = itemEnity.ETRoot.As<ItemEntityRoot>();
+            if (itemroot.DomainParent == null) {
+                event.state = false;
+                EventHelper.ErrorMessage("fail item", playerid);
+                return;
+            }
+            let posV = Vector(pos.x, pos.y, pos.z);
+            itemroot.DomainParent.As<PlayerCreateBattleUnitEntityRoot>().ItemManagerComp().dropItemRoot(itemroot, posV);
+            event.state = true;
+        });
     }
     private async onGameRulesStateChange(e: any) {
         const nNewState = GameRules.State_Get();

@@ -6,6 +6,7 @@ import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
+import { CombinationComponent } from "../Combination/CombinationComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { BuildingComponent } from "./BuildingComponent";
 import { BuildingPropsComponent } from "./BuildingPropsComponent";
@@ -16,8 +17,9 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         (this as any).Playerid = playerid;
         (this as any).ConfigID = conf;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
-        this.addBattleComp();
+        this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationComponent>("CombinationComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingComponent>("BuildingComponent"));
+        this.addBattleComp();
         this.SyncClientEntity(this);
     }
     IsBuilding() { return true }
@@ -45,7 +47,7 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
             allItem.forEach(item => {
                 // cloneRuntime.AddItem(item);
                 let hItem = BaseItem_Plus.CreateOneToUnit(cloneRuntime, item.GetAbilityName());
-                if (item.RequiresCharges()) {
+                if (item.IsStackable()) {
                     hItem.SetCurrentCharges(item.GetCurrentCharges())
                 }
             });

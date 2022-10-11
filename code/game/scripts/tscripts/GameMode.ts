@@ -70,8 +70,8 @@ export class GameMode implements ET.IEntityRoot {
         LogHelper.print("Script reloaded start!");
         // Do some stuff here
         /**更新KV */
-        GameRules.Playtesting_UpdateAddOnKeyValues();
         KVHelper.initKVFile();
+        GameRules.Playtesting_UpdateAddOnKeyValues();
         // let units = Entities.FindAllByClassname("npc_dota_creature") as BaseNpc_Plus[]
         // LogHelper.print(modifier_test.GetAllInstance(), 111)
         // let s = []

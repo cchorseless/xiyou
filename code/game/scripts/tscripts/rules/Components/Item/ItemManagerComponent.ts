@@ -18,10 +18,29 @@ export class ItemManagerComponent extends ET.Component {
             }
         }
     }
+
     getItemRoot(childid: string) {
         let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
         return battleunit.GetDomainChild<ItemEntityRoot>(childid);
     }
+
+
+    getItemRootBySlot(slot: number) {
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        let item = npc.GetItemInSlot(slot) as BaseItem_Plus;
+        if (item && item.ETRoot) {
+            return item.ETRoot as ItemEntityRoot
+        }
+    }
+
+    getItemRootByName(itemname: string) {
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        let item = npc.FindItemInInventory(itemname) as BaseItem_Plus;
+        if (item && item.ETRoot) {
+            return item.ETRoot as ItemEntityRoot
+        }
+    }
+
 
     getAllBaseItem() {
         let npc = this.GetDomain<BaseNpc_Plus>();
@@ -41,14 +60,31 @@ export class ItemManagerComponent extends ET.Component {
         if (root.DomainParent == battleunit) {
             return;
         }
+        if (root.DomainParent) {
+            root.DomainParent.As<PlayerCreateBattleUnitEntityRoot>().ItemManagerComp().removeItemRoot(root, false);
+        }
+        let item = root.GetDomain<BaseItem_Plus>();
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        if (item.IsStackable()) {
+            let olditem = npc.FindItemInInventory(item.GetAbilityName()) as BaseItem_Plus;
+            if (olditem) {
+                olditem.SetCurrentCharges(item.GetCurrentCharges() + olditem.GetCurrentCharges());
+                root.Dispose();
+                return;
+            }
+        }
         battleunit.AddDomainChild(root);
         this.allItemRoot.push(root.Id);
-        if (battleunit.IsBuilding() && battleunit.CombinationComp()) {
+        if (battleunit.CombinationComp()) {
             battleunit.CombinationComp().addItemRoot(root);
+        }
+        if (!root.isPickUped() || item.GetOwnerPlus() == null || item.GetOwnerPlus().entindex() != npc.entindex()) {
+            npc.AddItem(item);
+            root.clearSceneContainer();
         }
     }
 
-    removeItemRoot(root: ItemEntityRoot) {
+    removeItemRoot(root: ItemEntityRoot, bDeleteEntity: boolean = true) {
         let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
         if (root.DomainParent != battleunit) {
             return;
@@ -59,7 +95,25 @@ export class ItemManagerComponent extends ET.Component {
         if (battleunit.CombinationComp()) {
             battleunit.CombinationComp().removeItemRoot(root);
         }
+        let item = root.GetDomain<BaseItem_Plus>();
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        npc.TakeItem(item);
+        if (bDeleteEntity) {
+            root.Dispose();
+            return;
+        }
     }
+
+    dropItemRoot(root: ItemEntityRoot, vector: Vector) {
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        if (root.DomainParent != battleunit) {
+            return;
+        }
+        let item = root.GetDomain<BaseItem_Plus>();
+        this.removeItemRoot(root, false);
+        CreateItemOnPositionForLaunch(vector, item);
+    }
+
 
     getAllCanCastItem() {
         let r: BaseItem_Plus[] = [];
@@ -79,4 +133,16 @@ export class ItemManagerComponent extends ET.Component {
         });
         return r;
     }
+
+    //  从背包移出物品
+    removeItemRootBySlot(iSlot: number, bDeleteEntity: boolean = true) {
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        let item = npc.GetItemInSlot(iSlot) as BaseItem_Plus;
+        if (item && item.ETRoot) {
+            this.removeItemRoot(item.ETRoot as ItemEntityRoot, bDeleteEntity)
+        }
+    }
+
+
+
 }

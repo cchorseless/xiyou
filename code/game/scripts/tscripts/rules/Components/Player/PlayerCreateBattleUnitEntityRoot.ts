@@ -41,7 +41,7 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
     addBattleComp() {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessComponent>("ChessComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof AiAttackComponent>("AiAttackComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationComponent>("CombinationComponent"));
+        // this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationComponent>("CombinationComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof WearableComponent>("WearableComponent"), this.GetDotaHeroName());
         this.AddComponent(PrecacheHelper.GetRegClass<typeof AbilityManagerComponent>("AbilityManagerComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof ItemManagerComponent>("ItemManagerComponent"));

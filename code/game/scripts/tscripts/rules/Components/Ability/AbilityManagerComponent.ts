@@ -59,7 +59,7 @@ export class AbilityManagerComponent extends ET.Component {
         let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
         battleunit.AddDomainChild(root);
         this.allAbilityRoot.push(root.Id);
-        if (battleunit.IsBuilding() && battleunit.CombinationComp()) {
+        if (battleunit.CombinationComp()) {
             battleunit.CombinationComp().addAbilityRoot(root);
         }
     }

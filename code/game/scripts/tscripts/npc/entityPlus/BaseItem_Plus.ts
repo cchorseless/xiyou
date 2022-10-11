@@ -42,18 +42,32 @@ export class BaseItem_Plus extends BaseItem {
     }
 
     CanGiveToNpc(npc: BaseNpc_Plus) {
+        // let hPurchaser = this.GetPurchaser();
+        // if (GameFunc.IsValid(hPurchaser)) {
+        //     if( )
+        // }
+        // let iPurchaserID = IsValid(hPurchaser) and hPurchaser: GetPlayerOwnerID() or - 1
+        // let bSamePlayer = iPurchaserID == -1 or (PlayerResource: IsValidPlayerID(iPlayerID) and iPlayerID == iPurchaserID)
+
+        // if (not bSamePlayer) and(not hItem: IsCustomShareable()) then
+        // ErrorMessage(iPlayerID, "dota_hud_error_not_shareable")
+        // return false
+        // end
         if (GameFunc.IsValid(this) &&
             GameFunc.IsValid(npc) &&
             this.IsDroppable() &&
             this.CanUnitPickUp(npc) &&
             npc.IsAlive() &&
             npc.IsRealUnit() &&
-            npc.HasInventory() 
-            ) {
+            npc.HasInventory()
+        ) {
             return true;
         }
         return false;
     }
+
+
+
 
     /**尝试智能施法,AI会调用 */
     public AutoSpellSelf(): boolean { return true };

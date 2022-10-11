@@ -1,162 +1,1114 @@
-CreateTalents("npc_dota_hero_axe", "heros/hero_axe/berserkers_call.lua")
-berserkers_call = class({})
-LinkLuaModifier("modifier_berserkers_call_axe_buff", "heros/hero_axe/berserkers_call.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_berserkers_call_axe_debuff", "heros/hero_axe/berserkers_call.lua", LUA_MODIFIER_MOTION_NONE)
-LinkLuaModifier("modifier_berserkers_call_axe_buff3", "heros/hero_axe/berserkers_call.lua", LUA_MODIFIER_MOTION_NONE)
-
-function berserkers_call:IsHiddenWhenStolen()return false
-end
-function berserkers_call:IsStealable()return true
-end
-function berserkers_call:IsRefreshable()return true
-end
-function berserkers_call:GetManaCost(iLevel)
-    if self:GetCaster():TG_HasTalent("special_bonus_axe_2") then
-        return 0
-    else
-        return self.BaseClass.GetManaCost(self,iLevel)
-    end
-end
-function berserkers_call:GetCooldown(iLevel)
-    if self:GetCaster():HasScepter() then
-        return self.BaseClass.GetCooldown(self,iLevel)-3
-    else
-        return self.BaseClass.GetCooldown(self,iLevel)
-    end
-end
-function berserkers_call:OnSpellStart()
-    self.caster=self.caster or self:GetCaster()
-    local num=self:GetSpecialValueFor("num")
-    EmitSoundOn("Hero_Axe.Berserkers_Call",  self.caster)
-    self.caster:AddNewModifier( self.caster, self, "modifier_berserkers_call_axe_buff", {duration = self:GetSpecialValueFor("buff_defense_time")})
-    self.radius=self:GetSpecialValueFor("radius")+self.caster:GetPhysicalArmorValue(false)
-    local units=FindUnitsInRadius(self.caster:GetTeamNumber(),self.caster:GetAbsOrigin(),nil,self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
-     if #units>0 then
-            local stun_time=self:GetSpecialValueFor("stun_time")
-            local ab=self.caster:FindAbilityByName("battle_hunger")
-            for _,target in pairs(units) do
-                target:AddNewModifier_RS(self.caster, self, "modifier_axe_berserkers_call", {duration = stun_time})
-                    if #units>num or self.caster:TG_HasTalent("special_bonus_axe_1")  then
-                        target:AddNewModifier_RS(self.caster, self, "modifier_berserkers_call_axe_debuff", {duration = stun_time})
-                    end
-                    if ab and self.caster:HasScepter() then
-                        ab:OnSpellStart(target)
-                    end
-            end
-    end
-        local mod=self.caster:FindModifierByName("modifier_counter_helix_ch")
-        if mod then
-                mod:TurnAround(self.caster)
-        end
-        --if #units>num or self.caster:TG_HasTalent("special_bonus_axe_1")  then
-        --    local particle = ParticleManager:CreateParticle( "particles/heros/axe/axe_bc_m.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.caster)
-        --    ParticleManager:SetParticleControl(fx, 1, Vector(self.radius,self.radius,self.radius))
-        --    ParticleManager:ReleaseParticleIndex(particle)
-        --else
-        --    local particle = ParticleManager:CreateParticle( "particles/econ/items/axe/axe_ti9_immortal/axe_ti9_call.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.caster)
-        --    ParticleManager:SetParticleControl(fx, 2, Vector(self.radiusd,self.radius,self.radius))
-        --    ParticleManager:ReleaseParticleIndex(particle)
-        --end
-    local particle = ParticleManager:CreateParticle( "particles/econ/items/axe/axe_ti9_immortal/axe_ti9_call.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.caster)
-    ParticleManager:SetParticleControl(particle, 2, Vector(self.radius,self.radius,self.radius))
-    ParticleManager:ReleaseParticleIndex(particle)
+if Items == nil then
+	Items = class({})
 end
 
-  --防御buff
-    modifier_berserkers_call_axe_buff =  class({})
-    function modifier_berserkers_call_axe_buff:IsHidden()return false
-    end
-    function modifier_berserkers_call_axe_buff:IsPurgable()return false
-    end
-    function modifier_berserkers_call_axe_buff:DeclareFunctions()
-        return
-        {
-            MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
-            MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS,
-        }
-    end
-    function modifier_berserkers_call_axe_buff:OnCreated()
-		if self:GetAbility() == nil then return end
-        self.armor=self:GetAbility():GetSpecialValueFor( "armor")
-        self.magica=self:GetAbility():GetSpecialValueFor( "magica")
-    end
-    function modifier_berserkers_call_axe_buff:OnRefresh()
-        self:OnCreated()
-    end
-    function modifier_berserkers_call_axe_buff:GetModifierPhysicalArmorBonus(  )return self.armor
-    end
-    function modifier_berserkers_call_axe_buff:GetModifierMagicalResistanceBonus(  )return self.magica
-    end
+-- 检测物品
+CHECK_ITEM_RESULT_SUCCESS = 0 -- 成功
+CHECK_ITEM_RESULT_FAIL_FALSE_OWNER = 1 -- 失败，其他玩家的物品
+CHECK_ITEM_RESULT_FAIL_EXCLUSIVE = 2 -- 失败，不是你的专属
 
+-- TODO:成员函数区分客户端服务端
+function Items:init(bReload)
+	self:InitKV()
+	if IsServer() then
+		if not bReload then
+			self:InitPublicArea()
+			self.tCustomBackPack = {} -- 背包
+			self.tPublicBackPack = {} -- 公共背包
+			self.tItemProperties = {} -- 六星装备对应的额外属性
+		end
 
-    --敌人debuff
-    modifier_berserkers_call_axe_debuff= class({})
+		CustomUIEvent("QuickuseConsumable", Dynamic_Wrap(Items, "OnQuickuseConsumable"), Items)
+		CustomUIEvent("CustomRemakeItem", Dynamic_Wrap(Items, "OnCustomRemakeItem"), Items)
+		Request:Event("CombineItem", Dynamic_Wrap(Items, "OnCombineItem"), Items)
+		CustomUIEvent("CombineItem_lv6", Dynamic_Wrap(Items, "OnCombineItem_lv6"), Items)
 
-    function modifier_berserkers_call_axe_debuff:IsHidden()return true
-    end
-    function modifier_berserkers_call_axe_debuff:IsDebuff()return true
-    end
-    function modifier_berserkers_call_axe_debuff:IsPurgable()return false
-    end
-    function modifier_berserkers_call_axe_debuff:OnDeath(tg)
-        if IsServer() then
-            if tg.unit == self:GetCaster() then
-                self:Destroy()
-            end
-        end
-    end
-    function modifier_berserkers_call_axe_debuff:OnCreated()
-		if self:GetAbility() == nil then return end
-        self.attsp=self:GetAbility():GetSpecialValueFor( "attsp")
-    end
-    function modifier_berserkers_call_axe_debuff:OnRefresh()
-        self:OnCreated()
-    end
-    function modifier_berserkers_call_axe_debuff:CheckState()
-        return
-        {
-            [MODIFIER_STATE_COMMAND_RESTRICTED] = true,
-            [MODIFIER_STATE_SILENCED]=true,
-            [MODIFIER_STATE_CANNOT_MISS]=true,
-            [MODIFIER_STATE_MUTED]=true,
-        }
-    end
-    function modifier_berserkers_call_axe_debuff:DeclareFunctions()
-        return
-        {
-            MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
-            MODIFIER_EVENT_ON_DEATH,
-        }
-    end
+		GameEvent("custom_npc_first_spawned", Dynamic_Wrap(Items, "OnNPCFirstSpawned"), Items)
+		GameEvent("custom_entity_removed", Dynamic_Wrap(Items, "OnEntityRemoved"), Items)
+	end
 
-    function modifier_berserkers_call_axe_debuff:GetModifierAttackSpeedBonus_Constant()
-        return self.attsp
-    end
+	GameEvent("custom_inventory_contents_changed", Dynamic_Wrap(Items, "OnInventoryContentsChanged"), Items)
+end
+-- 重铸相关的信息
+function Items:InitKV()
+	self.tRemakeGroups = {} -- { [sGroup] : { [sItemName]: 1 } }
+	self.tRemakeItem2Group = {} -- { [sItemName] : sGroup }
+	-- 不可同时装备同组装备
+	self.tItem2EquipGroup = {} -- { [sItemName] : sGroup }
+	self.tEquipGroups = {}
+	for sItemName, v in pairs(KeyValues.ItemsKv) do
+		if sItemName ~= "Version" then
+			if v.RemakeGroup then
+				local sGroup = v.RemakeGroup
+				if sGroup == "upgradable_items" then
+					for i = (v.ItemBaseLevel or 1), (v.MaxUpgradeLevel or 1) do
+						local sGroupLevel = sGroup .. i
+						local sItemLevel = sItemName .. "," .. i
+						if self.tRemakeGroups[sGroupLevel] == nil then
+							self.tRemakeGroups[sGroupLevel] = {}
+						end
+						self.tRemakeGroups[sGroupLevel][sItemLevel] = 1
+						-- self.tRemakeItem2Group[sItemLevel] = sGroupLevel
+					end
+				else
+					if self.tRemakeGroups[sGroup] == nil then
+						self.tRemakeGroups[sGroup] = {}
+					end
+					self.tRemakeGroups[sGroup][sItemName] = 1
+					self.tRemakeItem2Group[sItemName] = sGroup
+				end
+			end
+			if v.EquipGroup then
+				local sGroup = v.EquipGroup
+				if self.tEquipGroups[sGroup] == nil then
+					self.tEquipGroups[sGroup] = {}
+				end
+				self.tEquipGroups[sGroup][sItemName] = 1
+				self.tItem2EquipGroup[sItemName] = sGroup
+			end
+		end
+	end
+	if IsServer() then
+		-- DeepPrintTable(self.tRemakeGroups)
+		-- DeepPrintTable(self.tRemakeItem2Group)
+	end
+end
+function Items:InitPublicArea()
+	self.tPublicArea = {}
+	local public_warehouses = Entities:FindAllByName("public_warehouse")
+	for k, public_warehouse in pairs(public_warehouses) do
+		local origin = public_warehouse:GetAbsOrigin()
+		local angles = public_warehouse:GetAngles()
+		local bounds = public_warehouse:GetBounds()
+		local vMin = RotatePosition(Vector(0, 0, 0), angles, bounds.Mins) + origin
+		local vMax = RotatePosition(Vector(0, 0, 0), angles, bounds.Maxs) + origin
 
+		table.insert(self.tPublicArea, {
+			Vector(vMin.x, vMin.y, vMax.z),
+			Vector(vMax.x, vMin.y, vMax.z),
+			Vector(vMax.x, vMax.y, vMax.z),
+			Vector(vMin.x, vMax.y, vMax.z)
+		})
 
-    --A帐效果
-    modifier_berserkers_call_axe_buff3= class({})
+		CustomNetTables:SetTableValue("common", "sharing_area", self.tPublicArea)
+	end
+end
+---------------------------------------nettable---------------------------------------
+if IsServer() then
+	function Items:UpdateBackPackNettable(iPlayerID, islot)
+		CustomNetTables:SetTableValue("common", "back_pack", self.tCustomBackPack)
+		CustomNetTables:SetTableValue("common", "public_back_pack", self.tPublicBackPack)
+		-- DeepPrintTable(self.tCustomBackPack[0])
+	end
+end
+---------------------------------------背包---------------------------------------
+if IsServer() then
+	--- 尝试将一个物品放到空的自定义背包格
+	function Items:TryMoveEmptyBackPack(iPlayerID, hUnit, hItem)
+		if type(self.tCustomBackPack[iPlayerID]) == "table" then
+			for iSlot = CUSTOM_ITEM_SLOT_MIN, CUSTOM_COMBINE_SLOT_MIN - 1 do
+				if self.tCustomBackPack[iPlayerID][iSlot] == nil then
+					self:TryMoveBackPack(iPlayerID, hUnit, hItem, iSlot)
+					return true
+				end
+			end
+		end
+		return false
+	end
+	--- 尝试将一个物品放到空的合成格
+	function Items:TryMoveCombine(iPlayerID, hUnit, hItem)
+		if type(self.tCustomBackPack[iPlayerID]) == "table" then
+			for iSlot = CUSTOM_COMBINE_SLOT_MIN, CUSTOM_ITEM_SLOT_MAX do
+				if self.tCustomBackPack[iPlayerID][iSlot] == nil then
+					return self:TryMoveBackPack(iPlayerID, hUnit, hItem, iSlot)
+				end
+			end
+		end
+		return false
+	end
+	--- @param hUnit CDOTA_BaseNPC 目标单位
+	function Items:TryMoveInventory(hUnit, hItem)
+		for i = DOTA_ITEM_SLOT_1, DOTA_ITEM_SLOT_9 do
+			local hSlotItem = hUnit:GetItemInSlot(i)
+			if not IsValid(hSlotItem) then
+				local result = Items:Inventory2BackPack(hUnit, i, hItem:GetItemSlot_Plus(), false)
+				self:UpdateBackPackNettable()
+				return result
+			end
+		end
+	end
+	--- 尝试将一个物品放到空的公共背包格
+	function Items:TryMoveEmptyPublic(iPlayerID, hUnit, hItem)
+		if type(self.tPublicBackPack) == "table" then
+			for iSlot = PUBLIC_ITEM_SLOT_MIN, PUBLIC_ITEM_SLOT_MAX do
+				if self.tPublicBackPack[iSlot] == nil then
+					return self:TryMoveBackPack(iPlayerID, hUnit, hItem, iSlot)
+				end
+			end
+		end
+		return false
+	end
+	--- 自定义背包的移动物品操作，不会处理移动双方都在dota2原生物品栏的情况（直接return nil）
+	--- @param iPlayerID number 发出操作的玩家
+	--- @param hUnit CDOTA_BaseNPC 物品在谁身上
+	--- @param hItem CDOTA_Item 物品
+	--- @return boolean true 表示成功处理
+	function Items:TryMoveBackPack(iPlayerID, hUnit, hItem, iTargetSLot)
+		if iTargetSLot > PUBLIC_ITEM_SLOT_MAX then
+			return
+		end
 
-    function modifier_berserkers_call_axe_buff3:IsHidden()
-        return true
-    end
-    function modifier_berserkers_call_axe_buff3:IsPurgable()
-        return false
-    end
+		if not (IsValid(hUnit) and IsValid(hItem) and type(hItem.GetItemSlot_Plus) == "function") then
+			return
+		end
 
-    function modifier_berserkers_call_axe_buff3:DeclareFunctions()
-        return
-         {
-            MODIFIER_EVENT_ON_ATTACKED,
-        }
-    end
+		if type(self.tCustomBackPack[iPlayerID]) ~= "table" then
+			self.tCustomBackPack[iPlayerID] = {}
+		end
 
-    function modifier_berserkers_call_axe_buff3:OnAttacked(tg)
-        if not IsServer() then
-            return
-        end
-        if not tg.attacker:HasModifier("modifier_berserkers_call_axe_debuff") and tg.attacker:IsRealHero() and tg.attacker~=self:GetParent() and tg.target==self:GetParent()   then
-            tg.attacker:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_axe_berserkers_call", {duration = self:GetAbility():GetSpecialValueFor("stun_time")})
-            tg.attacker:AddNewModifier(self:GetParent(), self:GetAbility(), "modifier_berserkers_call_axe_debuff", {duration = self:GetAbility():GetSpecialValueFor("stun_time")})
-        end
-     end
+		-- 判断物品是在物品栏还是背包
+		local iFromSlot = hItem:GetItemSlot_Plus()
+		if iFromSlot == -1 then
+			return
+		end
+		-- 不处理移动双方都在dota2原生物品栏的情况
+		if iFromSlot < CUSTOM_ITEM_SLOT_MIN and iTargetSLot < CUSTOM_ITEM_SLOT_MIN then
+			return
+		end
+
+		if not IsInToolsMode() and iFromSlot < PUBLIC_ITEM_SLOT_MIN then
+			local hItemOwner = hItem:GetPurchaser()
+			local iItemOwnerPlayerID = (IsValid(hItemOwner) and hItemOwner:IsAlive()) and hItemOwner:GetPlayerOwnerID() or -1
+			if iItemOwnerPlayerID ~= -1 and iPlayerID ~= iItemOwnerPlayerID then -- 物品不属于这个玩家
+				return
+			end
+		end
+
+		local result
+		-- 移动双方都在自定义背包
+		if iFromSlot >= CUSTOM_ITEM_SLOT_MIN and iTargetSLot >= CUSTOM_ITEM_SLOT_MIN then
+			result = self:SwapBackPack(iPlayerID, iFromSlot, iTargetSLot)
+		else
+			-- 移动双方各占一方
+			local iSlotInv = iFromSlot < CUSTOM_ITEM_SLOT_MIN and iFromSlot or iTargetSLot
+			local iSlotBP = iFromSlot < CUSTOM_ITEM_SLOT_MIN and iTargetSLot or iFromSlot
+			result = self:Inventory2BackPack(hUnit, iSlotInv, iSlotBP, iFromSlot < CUSTOM_ITEM_SLOT_MIN)
+			self:tryStackItem(iPlayerID, iSlotBP)
+		end
+
+		self:UpdateBackPackNettable()
+		return result
+	end
+	-- 两个都在backpack的物品交换位置
+	function Items:SwapBackPack(iPlayerID, iFromSlot, iTargetSlot)
+		if type(self.tCustomBackPack[iPlayerID]) ~= "table" then
+			self.tCustomBackPack[iPlayerID] = {}
+		end
+
+		-- 两者都在个人背包
+		if iFromSlot < PUBLIC_ITEM_SLOT_MIN and iTargetSlot < PUBLIC_ITEM_SLOT_MIN then
+			local temp = self.tCustomBackPack[iPlayerID][iFromSlot]
+			self.tCustomBackPack[iPlayerID][iFromSlot] = self.tCustomBackPack[iPlayerID][iTargetSlot]
+			self.tCustomBackPack[iPlayerID][iTargetSlot] = temp
+			return true
+			-- 两者都在公共背包
+		elseif iFromSlot >= PUBLIC_ITEM_SLOT_MIN and iTargetSlot >= PUBLIC_ITEM_SLOT_MIN then
+			local temp = self.tPublicBackPack[iFromSlot]
+			self.tPublicBackPack[iFromSlot] = self.tPublicBackPack[iTargetSlot]
+			self.tPublicBackPack[iTargetSlot] = temp
+			return true
+		else
+			-- 两边都有同名的可叠加物品的情况处理
+			local iSlotPersonal = iFromSlot < PUBLIC_ITEM_SLOT_MIN and iFromSlot or iTargetSlot
+			local iSlotPublic = iFromSlot < PUBLIC_ITEM_SLOT_MIN and iTargetSlot or iFromSlot
+			local hItemPersonal = EntIndexToHScript(self.tCustomBackPack[iPlayerID][iSlotPersonal] or -1)
+			local hItemPublic = EntIndexToHScript(self.tPublicBackPack[iSlotPublic] or -1)
+			if IsValid(hItemPersonal) and not hItemPersonal:IsCustomShareable() then
+				ErrorMessage(iPlayerID, "dota_hud_error_not_shareable")
+				return false
+			end
+			if IsValid(hItemPersonal) and IsValid(hItemPublic) then
+				local sItemPersonal = hItemPersonal:GetName()
+				local sItemPublic = hItemPublic:GetName()
+				if sItemPersonal == sItemPublic and hItemPersonal:IsStackable() then
+					local iChargeTotal = hItemPersonal:GetCurrentCharges() + hItemPublic:GetCurrentCharges()
+					if iFromSlot < PUBLIC_ITEM_SLOT_MIN then
+						hItemPublic:SetCurrentCharges(iChargeTotal)
+						hItemPersonal:Remove()
+						self.tCustomBackPack[iPlayerID][iSlotPersonal] = nil
+						return true
+					else
+						hItemPersonal:SetCurrentCharges(iChargeTotal)
+						hItemPublic:Remove()
+						self.tPublicBackPack[iSlotPublic] = nil
+						return true
+					end
+				end
+			end
+
+			local tempPublic = self.tPublicBackPack[iSlotPublic]
+			self.tPublicBackPack[iSlotPublic] = self.tCustomBackPack[iPlayerID][iSlotPersonal]
+			self.tCustomBackPack[iPlayerID][iSlotPersonal] = tempPublic
+
+			local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
+			local hItemOldPublic = EntIndexToHScript(tempPublic or -1)
+			local hItemOldPersonal = EntIndexToHScript(self.tPublicBackPack[iSlotPublic] or -1) -- 原本在个人背包，现在在公共背包的物品
+			-- 从公共背包拿到身上的东西要有所属者
+			if IsValid(hItemOldPublic) then
+				hItemOldPublic:SetPurchaser(hHero)
+				hItemOldPublic:SetOwner(hHero)
+				self:tryStackItem(iPlayerID, iSlotPersonal)
+			end
+			if IsValid(hItemOldPersonal) then
+				hItemOldPersonal:SetPurchaser(nil)
+				hItemOldPersonal:SetOwner(nil)
+				FireGameEvent("custom_item_to_public_backpack", { item = hItemOldPersonal:entindex(), player = iPlayerID })
+				self:tryStackItem(iPlayerID, iSlotPublic)
+			end
+			return true
+		end
+	end
+	--- @param bInv2BP boolean true:从物品栏的物品往背包拖动，反之反向
+	function Items:Inventory2BackPack(hUnit, iSlotInv, iSlotBP, bInv2BP)
+		local iPlayerID = hUnit:GetPlayerOwnerID()
+		if type(self.tCustomBackPack[iPlayerID]) ~= "table" then
+			self.tCustomBackPack[iPlayerID] = {}
+		end
+
+		local hInvItem = hUnit:GetItemInSlot(iSlotInv)
+		local hBackPackItem = EntIndexToHScript((iSlotBP < PUBLIC_ITEM_SLOT_MIN and self.tCustomBackPack[iPlayerID][iSlotBP] or self.tPublicBackPack[iSlotBP]) or -1)
+		if IsValid(hInvItem) or IsValid(hBackPackItem) then
+			if IsValid(hBackPackItem) then
+				if IsValid(hInvItem) and hBackPackItem:GetName() == hInvItem:GetName() then
+					if (type(hBackPackItem.CanUnitPickUpIgnoreDuplicate) == "function" and not hBackPackItem:CanUnitPickUpIgnoreDuplicate(hUnit)) then
+						return false
+					end
+				else
+					if (type(hBackPackItem.CanUnitPickUpIgnoreEmpty) == "function" and not hBackPackItem:CanUnitPickUpIgnoreEmpty(hUnit)) then
+						return false
+					end
+				end
+			end
+
+			-- 两边都有同名的可叠加物品的情况处理
+			if IsValid(hInvItem) and IsValid(hBackPackItem) then
+				local sItemInv = hInvItem:GetName()
+				local sItemBP = hBackPackItem:GetName()
+				if sItemInv == sItemBP and hBackPackItem:IsStackable() then
+					local iChargeTotal = hBackPackItem:GetCurrentCharges() + hInvItem:GetCurrentCharges()
+					if bInv2BP then
+						hBackPackItem:SetCurrentCharges(iChargeTotal)
+						hInvItem:Remove()
+						return true
+					else
+						hInvItem:SetCurrentCharges(iChargeTotal)
+						if iSlotBP < PUBLIC_ITEM_SLOT_MIN then
+							self.tCustomBackPack[iPlayerID][iSlotBP] = nil
+						else
+							self.tPublicBackPack[iSlotBP] = nil
+						end
+						hBackPackItem:Remove()
+						return true
+					end
+				end
+			end
+
+			if IsValid(hInvItem) then -- 物品栏到背包
+				if not hInvItem:IsCustomShareable() then
+					ErrorMessage(iPlayerID, "dota_hud_error_not_shareable")
+					return false
+				end
+				if not hInvItem:AllowedInBackpack() then
+					return false
+				end
+				hUnit:TakeItem(hInvItem)
+				if iSlotBP < PUBLIC_ITEM_SLOT_MIN then
+					self.tCustomBackPack[iPlayerID][iSlotBP] = hInvItem:entindex()
+				else
+					self.tPublicBackPack[iSlotBP] = hInvItem:entindex()
+					hInvItem:SetPurchaser(nil)
+					hInvItem:SetOwner(nil)
+					FireGameEvent("custom_item_to_public_backpack", { item = hInvItem:entindex(), player = iPlayerID })
+				end
+			else
+				if iSlotBP < PUBLIC_ITEM_SLOT_MIN then
+					self.tCustomBackPack[iPlayerID][iSlotBP] = nil
+				else
+					self.tPublicBackPack[iSlotBP] = nil
+				end
+			end
+			-- 背包物品到物品栏
+			if IsValid(hBackPackItem) then
+				-- 这个物品从公共背包来，重新设置所属者
+				if iSlotBP >= PUBLIC_ITEM_SLOT_MIN then
+					local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
+					hBackPackItem:SetPurchaser(hHero)
+					hBackPackItem:SetOwner(hHero)
+				end
+
+				local hResultItem = hUnit:AddItem(hBackPackItem)
+				if IsValid(hResultItem) then
+					local errorSlot = hResultItem:GetItemSlot()
+					hUnit:SwapItems(iSlotInv, errorSlot)
+				else -- 这一步不应该出现，保险
+					CreateItemOnPositionRandom(hUnit:GetAbsOrigin(), hBackPackItem)
+				end
+			end
+			return true
+		end
+
+		return false
+	end
+	function Items:GetItemIndexBackPack(iBackpackIndex, iPlayerID)
+		if iPlayerID ~= nil and iBackpackIndex <= CUSTOM_ITEM_SLOT_MAX then
+			if type(self.tCustomBackPack[iPlayerID]) ~= "table" then
+				return nil
+			end
+
+			return self.tCustomBackPack[iPlayerID][iBackpackIndex]
+		elseif iBackpackIndex <= PUBLIC_ITEM_SLOT_MAX then
+			return self.tPublicBackPack[iBackpackIndex]
+		end
+	end
+	--- 从背包移出物品
+	--- @param bDeleteEntity boolean 在移出背包的时候同时删除物品
+	function Items:RemoveItemInBackPack(iPlayerID, iSlot, bDeleteEntity)
+		if iSlot <= CUSTOM_ITEM_SLOT_MAX then
+			if type(self.tCustomBackPack[iPlayerID]) == "table" then
+				if bDeleteEntity then
+					local hItem = EntIndexToHScript(self.tCustomBackPack[iPlayerID][iSlot] or -1)
+					if IsValid(hItem) then
+						hItem:Remove()
+					end
+				end
+				self.tCustomBackPack[iPlayerID][iSlot] = nil
+				self:UpdateBackPackNettable()
+			end
+		elseif iSlot <= PUBLIC_ITEM_SLOT_MAX then
+			if bDeleteEntity then
+				local hItem = EntIndexToHScript(self.tPublicBackPack[iSlot] or -1)
+				if IsValid(hItem) then
+					hItem:Remove()
+				end
+			end
+			self.tPublicBackPack[iSlot] = nil
+			self:UpdateBackPackNettable()
+		end
+	end
+	function Items:SellItemInBackPack(iPlayerID, iSlot, hItem)
+		if not (type(iSlot) == "number" and iSlot >= CUSTOM_ITEM_SLOT_MIN and iSlot <= CUSTOM_ITEM_SLOT_MAX) then
+			return
+		end
+		if type(self.tCustomBackPack[iPlayerID]) == "table" then
+			if hItem == nil then
+				hItem = EntIndexToHScript(self.tCustomBackPack[iPlayerID][iSlot] or -1)
+			end
+
+			if not IsValid(hItem) then
+				return
+			end
+
+			if hItem._bIsRemaking then
+				return
+			end
+
+			local result = self:SellItem(iPlayerID, hItem)
+			if result == true then
+				Items:RemoveItemInBackPack(iPlayerID, iSlot, true)
+			end
+			return result
+		end
+	end
+	function Items:SellAllInBackPack(iPlayerID)
+		if type(self.tCustomBackPack[iPlayerID]) == "table" then
+			for iSlot = CUSTOM_ITEM_SLOT_MIN, CUSTOM_COMBINE_SLOT_MIN - 1 do
+				self:SellItemInBackPack(iPlayerID, iSlot)
+			end
+		end
+	end
+	-- 是否有空的背包 不包括合成格子
+	function Items:HasEmptyBackPack(iPlayerID)
+		if type(self.tCustomBackPack[iPlayerID]) ~= "table" then
+			self.tCustomBackPack[iPlayerID] = {}
+			return true
+		end
+		for iSlot = CUSTOM_ITEM_SLOT_MIN, CUSTOM_COMBINE_SLOT_MIN - 1 do
+			local itemIndex = self.tCustomBackPack[iPlayerID][iSlot]
+			if not (type(itemIndex) == "number" and IsValid(EntIndexToHScript(itemIndex))) then
+				return true
+			end
+		end
+		return false
+	end
+	--- 当背包新增物品时，若可堆叠，将其堆叠到可堆叠的位置
+	--- @param iPlayerID number
+	--- @param iSlot number 新增物品的位置
+	function Items:tryStackItem(iPlayerID, iSlot)
+		local hItem = EntIndexToHScript(self.tCustomBackPack[iPlayerID][iSlot] or -1)
+		if iSlot >= PUBLIC_ITEM_SLOT_MIN then
+			hItem = EntIndexToHScript(self.tPublicBackPack[iSlot] or -1)
+		end
+		if IsValid(hItem) and hItem:IsStackable() then
+			local sItem = hItem:GetName()
+			if iSlot < PUBLIC_ITEM_SLOT_MIN then
+				for i = CUSTOM_ITEM_SLOT_MIN, CUSTOM_COMBINE_SLOT_MIN - 1 do
+					if i ~= iSlot then
+						local hItem2 = EntIndexToHScript(self.tCustomBackPack[iPlayerID][i] or -1)
+						if IsValid(hItem2) and sItem == hItem2:GetName() then
+							hItem2:SetCurrentCharges(hItem:GetCurrentCharges() + hItem2:GetCurrentCharges())
+							hItem:Remove()
+							self.tCustomBackPack[iPlayerID][iSlot] = nil
+							return
+						end
+					end
+				end
+			else
+				for i = PUBLIC_ITEM_SLOT_MIN, PUBLIC_ITEM_SLOT_MAX do
+					if i ~= iSlot then
+						local hItem2 = EntIndexToHScript(self.tPublicBackPack[i] or -1)
+						if IsValid(hItem2) and sItem == hItem2:GetName() then
+							hItem2:SetCurrentCharges(hItem:GetCurrentCharges() + hItem2:GetCurrentCharges())
+							hItem:Remove()
+							self.tPublicBackPack[iSlot] = nil
+							return
+						end
+					end
+				end
+			end
+
+		end
+	end
+end
+---------------------------------------UI事件---------------------------------------
+if IsServer() then
+	function Items:OnQuickuseConsumable(iEventSourceIndex, tEvents)
+		local hCaster = EntIndexToHScript(tEvents.caster)
+		local hTarget = EntIndexToHScript(tEvents.target)
+		local hItem = EntIndexToHScript(tEvents.item)
+		local iPlayerID = hCaster:GetPlayerOwnerID()
+		if tEvents.count < 0 then
+			Service:LogPlayerCheat(iPlayerID, { where = "Quickuse", count = tEvents.count })
+		end
+		local iCount = math.max(0, tEvents.count)
+		if IsValid(hCaster) and IsValid(hTarget) and IsValid(hItem) and hItem:GetCaster() == hCaster then
+			local iGold = PlayerData:GetGold(iPlayerID)
+			local iGoldCost = hItem:GetCost()
+			local iCharges = hItem:GetCurrentCharges()
+			iCount = math.min(iCount, math.floor(iGold / iGoldCost) + iCharges)
+
+			if hItem.OnUse ~= nil and hItem:OnUse(hTarget, iCount) then
+				if iCount >= iCharges then
+					hItem:SetCurrentCharges(1)
+					hItem:SpendCharge()
+				else
+					hItem:SetCurrentCharges(iCharges - iCount)
+				end
+
+				PlayerData:ModifyGold(iPlayerID, -iGoldCost * math.max(iCount - iCharges, 0))
+			end
+		end
+	end
+	function Items:OnCustomRemakeItem(index, tData)
+		local iPlayerID = tData.PlayerID
+		local hItem = EntIndexToHScript(tData.iItemIndex)
+		if IsValid(hItem) and hItem.GetParent and hItem.GetPurchaser then
+			local hUnit = hItem:GetParent()
+			if not IsValid(hUnit) then
+				hUnit = hItem:GetPurchaser()
+			end
+			if not IsValid(hUnit) then
+				return
+			end
+			if hUnit:GetPlayerOwnerID() ~= iPlayerID then
+				return
+			end
+			if IsValid(hItem) then
+				hItem._bIsRemaking = true
+				hItem:Timer(1, function()
+					self:RemakeItem(hItem, hUnit, iPlayerID)
+					if IsValid(hItem) then
+						hItem._bIsRemaking = false
+					end
+				end)
+			end
+		end
+	end
+	-- 合成物品 TODO:各种错误返回不同的status
+	local invalid_return = { status = -1 }
+	function Items:OnCombineItem(tEvents)
+		local iPlayerID = tEvents.PlayerID
+		if type(self.tCustomBackPack[iPlayerID]) ~= "table" then
+			return invalid_return
+		end
+		local tItems = {}
+		local iSameLevel = -1
+		-- 神器消耗矿金处理
+		local iWoodCost = GetAbilityNameLevelSpecialValueFor("item_artifact_demagicking_maul", "wood_cost", 0)
+		local bCostWood = false
+		-- 判断是否能合成
+		for i = CUSTOM_COMBINE_SLOT_MIN, CUSTOM_ITEM_SLOT_MAX do
+			if self.tCustomBackPack[iPlayerID][i] == nil or self.tCustomBackPack[iPlayerID][i] == nil then
+				return invalid_return
+			end
+			local hItem = EntIndexToHScript(self.tCustomBackPack[iPlayerID][i])
+			if not IsValid(hItem) then
+				return invalid_return
+			end
+			if not hItem:IsCustomCombinable() then
+				return invalid_return
+			end
+			if hItem:GetLevel() >= hItem:GetMaxUpgradeLevel() then
+				return invalid_return
+			end
+
+			local iLevel = hItem:GetLevel()
+
+			if iSameLevel == -1 then
+				iSameLevel = iLevel
+			elseif iSameLevel ~= iLevel then
+				return invalid_return
+			end
+			-- 第四级物品无法合成，除非拥有神器且有足够木材
+			if iSameLevel >= 4 then
+				if Artifact:PlayerHasArtifact(iPlayerID, "item_artifact_demagicking_maul") then
+					if PlayerData:GetWood(iPlayerID) > iWoodCost then
+						bCostWood = true
+					else
+						ErrorMessage(iPlayerID, "dota_hud_error_wood_not_enough")
+						return invalid_return
+					end
+				else
+					return invalid_return
+				end
+			end
+
+			table.insert(tItems, hItem)
+		end
+		if #tItems ~= 3 then
+			return invalid_return
+		end
+		local rndtest = RandomFloat(0, 100)
+
+		if tEvents.random then
+			local newLevel = iSameLevel + 1
+			if newLevel > ITEM_MAX_LEVEL then
+				return invalid_return
+			end
+			local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
+			if PRD(hHero, PlayerProperty:GetProperty(iPlayerID, PLAYER_PROPERTY_ITEM_COMBINE_EXLEVEL_CHANCE), 'golden_stone') then
+				-- if RollPercentage(PlayerProperty:GetProperty(iPlayerID, PLAYER_PROPERTY_ITEM_COMBINE_EXLEVEL_CHANCE)) then
+				newLevel = math.min(newLevel + 1, ITEM_MAX_LEVEL)
+			end
+			local result = Draw:Draw(self.tRemakeGroups["upgradable_items" .. newLevel])
+			if result == nil or result == "" then
+				return
+			end
+
+			local hNewItem = self:CreateItemWithLevel(hHero, result)
+			if not IsValid(hNewItem) then
+				return
+			end
+
+			for i = CUSTOM_COMBINE_SLOT_MIN, CUSTOM_ITEM_SLOT_MAX do
+				self:RemoveItemInBackPack(iPlayerID, i, true)
+			end
+
+			self.tCustomBackPack[iPlayerID][CUSTOM_COMBINE_SLOT_MIN] = hNewItem:entindex()
+			self:UpdateBackPackNettable()
+			BpTask:UpdataTask(iPlayerID, "item_upgrade", 1)
+			if bCostWood then
+				PlayerData:ModifyWood(iPlayerID, -iWoodCost)
+			end
+			return { status = 0, combine_result = { 0 } }
+		else
+			if rndtest <= ChanceCombine33 then
+				for i = 1, 3 do
+					self:UpgradeItem(tItems[i])
+				end
+				BpTask:UpdataTask(iPlayerID, "item_upgrade", 1)
+				if bCostWood then
+					PlayerData:ModifyWood(iPlayerID, -iWoodCost)
+				end
+				return { status = 0, combine_result = { 0, 1, 2 } }
+			else
+				local rnd = RandomInt(1, 3)
+				for i = 1, 3 do
+					if i == rnd then
+						self:UpgradeItem(tItems[i])
+					else
+						self:RemoveItemInBackPack(iPlayerID, i - 1 + CUSTOM_COMBINE_SLOT_MIN, true)
+					end
+				end
+				BpTask:UpdataTask(iPlayerID, "item_upgrade", 1)
+				if bCostWood then
+					PlayerData:ModifyWood(iPlayerID, -iWoodCost)
+				end
+				return { status = 0, combine_result = { rnd - 1 } }
+			end
+		end
+
+		return invalid_return
+	end
+	function Items:OnCombineItem_lv6(index, tEvents)
+		local iPlayerID = tEvents.PlayerID
+		local sItem = tEvents.recipe_item
+		local bIncludingDrops = tEvents.including_drops
+		local bIncludingUnSelect = tEvents.including_unselect
+		local hLocalEntity = EntIndexToHScript(tEvents.local_entity)
+		local tComponents = {}
+		local CombineListKv = KeyValues.CombineListKv
+		local CombineResult = true
+
+		function FindItemForCombine(sItemName, iItemLevel)
+			--在选中单位身上找
+			if IsValid(hLocalEntity) then
+				for index = DOTA_ITEM_SLOT_1, DOTA_ITEM_SLOT_9, 1 do
+					local hItem = hLocalEntity:GetItemInSlot(index)
+					if IsValid(hItem) then
+						if hItem:GetLevel() == iItemLevel and hItem:GetAbilityName() == sItemName then
+							return hItem
+						end
+					end
+				end
+			end
+			for index = CUSTOM_ITEM_SLOT_MIN, CUSTOM_ITEM_SLOT_MAX, 1 do
+				local iItem = self:GetItemIndexBackPack(index, iPlayerID) or -1
+				local hItem = EntIndexToHScript(iItem)
+				if IsValid(hItem) then
+					if hItem:GetLevel() == iItemLevel and hItem:GetAbilityName() == sItemName then
+						return hItem
+					end
+				end
+			end
+			-- --在地上找
+			-- if not bHasItem and bIncludingDrops then
+			-- 	local array = FindAllByName(sItemName)
+			-- 	if array:GetOwner():GetPlayerOwnerID() == iPlayerID then
+			-- 		bHasItem = true
+			-- 		return bHasItem
+			-- 	end
+			-- end
+			--在其他单位身上找
+			-- if not bHasItem and bIncludingDrops then
+			-- 	local array = FindUnitsInRadius(PlayerResource:GetTeam(iPlayerID), Vector(0, 0, 0), nil, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+			-- 	for _, unit in pairs(array) do
+			-- 		if unit ~= nil and unit:IsAlive() and unit ~= hLocalEntity then
+			-- 			if unit:GetPlayerOwnerID() == iPlayerID then
+			-- 				if hLocalEntity:HasItemInInventory(sItemName) then
+			-- 					bHasItem = true
+			-- 					return bHasItem
+			-- 				end
+			-- 			end
+			-- 		end
+			-- 	end
+			-- end
+			return nil
+		end
+
+		--TODO遍历配方，如果每样物品都找到，就成功合成
+		for recipe_id, recipe in pairs(CombineListKv) do
+			if recipe.combine_item == sItem then
+				for i = 1, 6, 1 do
+					if recipe["item" .. i] ~= nil and recipe["item_star" .. i] ~= nil then
+						-- print(recipe["item"..i], recipe["item_star"..i])
+						local component = FindItemForCombine(recipe["item" .. i], recipe["item_star" .. i])
+						-- print("count", recipe["item"..i], component:GetAbilityName())
+						if component == nil then
+							CombineResult = false
+							break
+						else
+							table.insert(tComponents, component)
+						end
+					end
+				end
+			end
+		end
+
+		if CombineResult then
+			--合成成功
+			for _, hItem in pairs(tComponents) do
+				if IsValid(hItem) then
+					local iSlot = hItem:GetItemSlot_Plus()
+					if iSlot < CUSTOM_ITEM_SLOT_MIN then
+						hLocalEntity:RemoveItem(hItem)
+					else
+						self:RemoveItemInBackPack(iPlayerID, iSlot, true)
+					end
+				end
+			end
+			self:GiveItem2Unit(hLocalEntity, sItem)
+		end
+	end
+end
+---------------------------------------监听---------------------------------------
+function Items:OnInventoryContentsChanged(events)
+	local hUnit = EntIndexToHScript(events.owner_index)
+	if IsValid(hUnit) then
+		if IsClient() then
+			local tClientItems = {}
+			for i = DOTA_ITEM_SLOT_1, DOTA_ITEM_SLOT_9 do
+				tClientItems[i] = events["slot_" .. i]
+			end
+			hUnit.__tClientItems = tClientItems
+		end
+
+		FireInventoryContentsChanged(hUnit)
+	end
+end
+if IsServer() then
+	function Items:OnNPCFirstSpawned(events)
+		local spawnedUnit = EntIndexToHScript(events.entindex)
+		if not IsValid(spawnedUnit) then
+			return
+		end
+
+		if spawnedUnit:IsRealHero() and spawnedUnit:GetUnitLabel() == "builder" then
+			local iPlayerID = spawnedUnit:GetPlayerOwnerID()
+			self.tCustomBackPack[iPlayerID] = {}
+		end
+	end
+	function Items:OnEntityRemoved(tEvents)
+		local entindex = tEvents.entindex
+		local hEntity = EntIndexToHScript(entindex or -1)
+		if IsValid(hEntity) and hEntity.IsItem and hEntity:IsItem() then
+			self.tItemProperties[entindex] = nil
+			CustomNetTables:SetTableValue("item_extra_property", tostring(entindex), nil)
+		end
+	end
+else
+end
+---------------------------------------工具---------------------------------------
+if IsServer() then
+	-- 出售物品
+	function Items:SellItem(iPlayerID, hItem)
+		if not hItem:IsSellable() then
+			return false
+		end
+		local iItemCost = hItem:GetCost()
+		local iWoodCost = hItem:GetWoodCost()
+		local iPointCost = GetItemPointCost(hItem:GetName())
+		if GameRules:GetGameTime() - hItem:GetPurchaseTime() > ShopOriginalPriceTime then
+			iItemCost = iItemCost / 2
+			iWoodCost = iWoodCost * SELL_WOOD_REBACK
+			iPointCost = iPointCost * SELL_POINT_REBACK
+		end
+		if hItem:IsStackable() then
+			local coef = hItem:GetCurrentCharges() / hItem:GetInitialCharges()
+			iItemCost = iItemCost * coef
+			iWoodCost = iWoodCost * coef
+			iPointCost = iPointCost * coef
+		end
+		PlayerData:ModifyGold(iPlayerID, math.floor(iItemCost), false)
+		PlayerData:ModifyWood(iPlayerID, math.floor(iWoodCost), false)
+		Challenge:ModifyPoint(iPlayerID, math.floor(iPointCost))
+		Recycle:AddItem(iPlayerID, hItem:GetName(), hItem:GetLevel())
+		return true
+	end
+	-- 升级物品
+	function Items:UpgradeItem(hItem)
+		if IsValid(hItem) and hItem:GetLevel() < hItem:GetMaxUpgradeLevel() then
+			-- hItem:UpgradeAbility(true) -- 这种会导致闪退
+			hItem:SetLevel(hItem:GetLevel() + 1)
+		end
+	end
+	--- 重铸物品
+	--- @param hItem CDOTA_Item
+	function Items:RemakeItem(hItem, hUnit, iPlayerID)
+		local hAbilityCost
+		local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
+		if IsValid(hHero) then
+			for i = 1, 3 do
+				local hAbility = hHero:FindAbilityByName("courier_tower_unique_" .. i)
+				if IsValid(hAbility) and hAbility:IsCooldownReady() then
+					hAbilityCost = hAbility
+					break
+				end
+			end
+		end
+		if not IsValid(hAbilityCost) then
+			local iPointCost
+			local RemakeEquipCost = GetKV({}, "ConfigsKV", "RemakeEquipCost")
+			if hItem:IsHeroUniqueItem() then
+				iPointCost = RemakeEquipCost["Unique"]
+			else
+				local iLevel = Clamp(hItem:GetLevel(), 1, ITEM_MAX_LEVEL)
+				iPointCost = RemakeEquipCost[tostring(iLevel)]
+			end
+
+			if type(iPointCost) == "number" and Challenge:GetPoint(iPlayerID) >= iPointCost then
+				Challenge:ModifyPoint(iPlayerID, -iPointCost)
+			else
+				ErrorMessage(iPlayerID, "dota_hud_error_no_remake_stone")
+				return
+			end
+		end
+		-- 从同组的物品随机一个新的
+		local sItem = hItem:GetName()
+		local sGroup = self.tRemakeItem2Group[sItem]
+
+		if hItem:IsUpgradableItem() then -- 有等级的物品名特殊处理
+			sGroup = 'upgradable_items' .. hItem:GetLevel()
+			sItem = sItem .. "," .. hItem:GetLevel()
+		end
+
+		-- 神器效果重铸有概率升高稀有度
+		if PRD(hHero, PlayerProperty:GetProperty(iPlayerID, PLAYER_PROPERTY_ITEM_REMAKE_EXLEVEL_CHANCE), 'Remake_master') then
+			if hItem:IsUpgradableItem() then
+				sGroup = 'upgradable_items' .. math.min(hItem:GetLevel() + 1, ITEM_MAX_LEVEL)
+				sItem = sItem .. "," .. math.min(hItem:GetLevel() + 1, ITEM_MAX_LEVEL)
+			elseif string.find(sGroup, 'tower_items') then -- 专属处理
+				local tTable = {
+					tower_items_SSR = 'tower_items_SSR',
+					tower_items_SR = 'tower_items_SSR',
+					tower_items_R = 'tower_items_SR',
+				}
+				sGroup = tTable[sGroup] or sGroup
+			end
+		end
+
+		if sGroup == nil then
+			return
+		end
+
+		local tPool = deepcopy(self.tRemakeGroups[sGroup])
+		tPool[sItem] = nil -- 不能随机到自己
+		local result = Draw:Draw(tPool)
+		if result == nil or result == "" then
+			return
+		end
+		-- 处理当hUnit为空的情况
+		local iSlot = hItem:GetItemSlot_Plus()
+		if iSlot < CUSTOM_ITEM_SLOT_MIN then
+			-- 处理没空格的时候重铸出来的物品不掉在地上
+			if not IsValid(hUnit) then
+				hUnit = hItem:GetParent()
+			else
+				hUnit:TakeItem(hItem)
+			end
+		else
+			if not IsValid(hUnit) then
+				hUnit = hItem:GetPurchaser()
+			end
+			if not IsValid(hUnit) and PlayerResource:IsValidPlayerID(iPlayerID) then
+				hUnit = PlayerResource:GetSelectedHeroEntity(iPlayerID)
+			end
+		end
+		if not IsValid(hUnit) then
+			return
+		end
+		-- 创建新物品
+		local hNewItem = self:CreateItemWithLevel(hUnit, result)
+		if not IsValid(hNewItem) then
+			return
+		end
+
+		if iSlot < CUSTOM_ITEM_SLOT_MIN then
+			local hTargetItem = hUnit:AddItem(hNewItem)
+			if IsValid(hTargetItem) then
+				hUnit:SwapItems(iSlot, hNewItem:GetItemSlot())
+			else -- 应该不会出现，保险
+				CreateItemOnPositionRandom(hUnit:GetAbsOrigin(), hNewItem)
+			end
+		else
+			if type(self.tCustomBackPack[iPlayerID]) ~= "table" then
+				self.tCustomBackPack[iPlayerID] = {}
+			end
+			self.tCustomBackPack[iPlayerID][iSlot] = hNewItem:entindex()
+			self:UpdateBackPackNettable()
+		end
+		local hContainer = hItem:GetContainer()
+		hItem:Remove()
+		if IsValid(hContainer) then
+			hContainer:Remove()
+		end
+
+		if IsValid(hAbilityCost) then
+			hAbilityCost:UseResources(true, true, true)
+		end
+
+		BpTask:UpdataTask(iPlayerID, "item_reforge", 1)
+		return true
+	end
+	--- 坐标是否在共享区域
+	function Items:IsPositionInPublicArea(vPosition)
+		for k, polygon in pairs(self.tPublicArea) do
+			if IsPointInPolygon(vPosition, polygon) then
+				local tPlayerID = {}
+				for k, v in pairs(Spawner.Spawner) do
+					table.insert(tPlayerID, k)
+				end
+				table.sort(tPlayerID, function(a, b)
+					return (Spawner.Spawner[a]:GetAbsOrigin() - vPosition):Length2D() < (Spawner.Spawner[b]:GetAbsOrigin() - vPosition):Length2D()
+				end)
+				return true, tPlayerID[1]
+			end
+		end
+		return false
+	end
+	--- 创建一个物品，不会直接放入背包，如果物品名是xxx，1则创建1级的物品
+	--- @return CDOTA_Item 成功创建的物品或者nil
+	function Items:CreateItemWithLevel(hUnit, sItemName, bPurchaseTime)
+		if not IsValid(hUnit) then
+			return
+		end
+		local iLevel = 1
+		if string.find(sItemName, ",") then
+			local tInfo = string.split(sItemName, ",")
+			sItemName = tInfo[1]
+			iLevel = tonumber(tInfo[2])
+		end
+		local hItem = CreateItem(sItemName, hUnit, hUnit)
+		if IsValid(hItem) then
+			hItem:SetPurchaser(hUnit)
+			if bPurchaseTime then
+				hItem:SetPurchaseTime(GameRules:GetGameTime())
+			else
+				hItem:SetPurchaseTime(0)
+			end
+			-- 设置物品等级
+			if type(hItem.GetItemBaseLevel) == "function" and type(hItem.GetMaxUpgradeLevel) == "function" then
+				local iBaseLevel = hItem:GetItemBaseLevel()
+				local iMaxLevel = hItem:GetMaxUpgradeLevel()
+				iLevel = Clamp(iLevel, iBaseLevel, iMaxLevel)
+			end
+			if type(iLevel) == "number" then
+				hItem:SetLevel(iLevel)
+			end
+
+			if hItem:GetParent() == hUnit then
+				hUnit:TakeItem(hItem)
+			end
+			return hItem
+		end
+	end
+	--- 创建物品给一个单位
+	--- @return CDOTA_Item
+	function Items:GiveItem2Unit(hUnit, sItemName, bPurchaseTime)
+		if not IsValid(hUnit) then
+			return
+		end
+		local hItem = self:CreateItemWithLevel(hUnit, sItemName, bPurchaseTime)
+		if IsValid(hItem) then
+			local hTargetItem = hUnit:AddItem(hItem)
+			if IsValid(hTargetItem) then
+				hItem = hTargetItem
+			else
+				CreateItemOnPositionRandom(hUnit:GetAbsOrigin(), hItem)
+			end
+			return hItem
+		end
+	end
+	--- 创建物品到玩家背包
+	--- @param iPlayerID number
+	--- @param item string | CDOTA_Item
+	--- @param bPurchaseTime boolean
+	function Items:GiveItem2PlayerBackPack(iPlayerID, item, bPurchaseTime)
+		if not PlayerResource:IsValidPlayerID(iPlayerID) then
+			return
+		end
+
+		if type(self.tCustomBackPack[iPlayerID]) ~= "table" then
+			self.tCustomBackPack[iPlayerID] = {}
+		end
+
+		local sItem = item
+		local hItem = item
+		if type(sItem) == "string" then
+			local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
+			if not IsValid(hHero) then
+				return
+			end
+			hItem = self:CreateItemWithLevel(hHero, sItem, bPurchaseTime)
+		else
+			sItem = hItem:GetName()
+		end
+
+		if IsValid(hItem) then
+			for iSlot = CUSTOM_ITEM_SLOT_MIN, CUSTOM_COMBINE_SLOT_MIN - 1 do
+				if self.tCustomBackPack[iPlayerID][iSlot] == nil then
+					if hItem:IsCastOnPickup() then
+						hItem:OnSpellStart()
+					else
+						self.tCustomBackPack[iPlayerID][iSlot] = hItem:entindex()
+						self:tryStackItem(iPlayerID, iSlot)
+						self:UpdateBackPackNettable()
+					end
+					return hItem
+				end
+			end
+			-- 没有空位，放到购买者身上或者地上
+			local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
+			if not IsValid(hHero) then
+				return
+			end
+			local hTargetItem = hHero:AddItem(hItem)
+			if not IsValid(hTargetItem) then
+				CreateItemOnPositionRandom(hHero:GetAbsOrigin(), hItem)
+				ErrorMessage(iPlayerID, "dota_hud_error_item_to_hero_around")
+			else
+				ErrorMessage(iPlayerID, "dota_hud_error_item_to_hero_slot")
+			end
+			return hItem
+		end
+	end
+	--- 将单位身上的物品替换成另一个
+	--- @param hUnit CDOTA_BaseNPC
+	--- @param hOldItem CDOTA_Item
+	--- @param sNewItem string
+	function Items:ReplaceItem(hUnit, hOldItem, sNewItem)
+		local iSlot = hOldItem:GetItemSlot()
+		local hNewItem = self:CreateItemWithLevel(hUnit, sNewItem)
+		if IsValid(hNewItem) then
+			hUnit:RemoveItem(hOldItem)
+			local hResultItem = hUnit:AddItem(hNewItem)
+			if IsValid(hResultItem) then
+				if hNewItem:GetItemSlot() ~= iSlot then
+					hUnit:SwapItems(hNewItem:GetItemSlot(), iSlot)
+				end
+			else
+				CreateItemOnPositionRandom(hUnit:GetAbsOrigin(), hNewItem)
+			end
+		end
+	end
+end
+--=======================================物品额外随机属性=======================================
+if IsServer() then
+	--- 给物品随机额外属性
+	--- @param hItem CDOTA_Item
+	function Items:RandomItemExtraProperties(hItem, iNum)
+		if iNum == nil then
+			iNum = 8
+		end
+
+		local iIndex = hItem:entindex()
+		self.tItemProperties[iIndex] = {}
+
+		local tPool = WeightPool(deepcopy(KeyValues.tItemPropertyWeight))
+		local tSum = {}
+		for i = 1, iNum do
+			local sProperty = tPool:Random()
+			local config = KeyValues.ItemExtraProperty[sProperty]
+			if config == nil then
+				return false
+			end
+
+			local fValue = math.boxMullerRandom(config.min, config.max)
+			table.insert(self.tItemProperties[iIndex], { sProperty = sProperty, fValue = fValue })
+
+			-- 不超过最高数量
+			tSum[sProperty] = (tSum[sProperty] or 0) + 1
+			if tSum[sProperty] >= config.max_count then
+				tPool:Remove(sProperty)
+			end
+		end
+		CustomNetTables:SetTableValue("item_extra_property", tostring(iIndex), self.tItemProperties[iIndex])
+		hItem:GameTimer(0.2, function()
+			local hParent = hItem:GetParent()
+			if IsValid(hParent) then
+				hParent:FireOnInventoryContentsChanged()
+			end
+		end)
+		return true
+	end
+end
+return Items

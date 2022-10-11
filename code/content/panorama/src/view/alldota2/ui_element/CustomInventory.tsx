@@ -149,9 +149,9 @@ export class CustomInventory extends CustomInventory_UI {
             }
         }
         else {
-            let worldpos = GameUI.GetScreenWorldPosition(pos);
+            let worldpos = GameUI.GetScreenWorldPosition(pos)!;
             NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_DROP_POSITION, {
-                pos: worldpos,
+                pos: { x: worldpos[0], y: worldpos[1], z: worldpos[2] },
                 slot: item_slot
             })
         }
