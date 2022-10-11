@@ -31,7 +31,7 @@ export class modifier_building extends BaseModifier_Plus {
     Init(params: ModifierTable) {
         if (IsServer()) {
             let hParent = this.GetParentPlus();
-            let vColor = hParent.ETRoot.As<BuildingEntityRoot>().GetPlayer().PlayerHeroComp().playerColor;
+            let vColor = hParent.ETRoot.As<BuildingEntityRoot>().GetPlayer().GetColor();
             let info: ResHelper.IParticleInfo = {
                 resPath: "particles/player_color.vpcf",
                 iAttachment: ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,

@@ -16,6 +16,7 @@ import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
 import { Enum_MODIFIER_EVENT, EventDataType, IBuffEventData, modifier_event } from "./npc/modifier/modifier_event";
 import { modifier_property } from "./npc/modifier/modifier_property";
 import { BuildingEntityRoot } from "./rules/Components/Building/BuildingEntityRoot";
+import { CourierEntityRoot } from "./rules/Components/Courier/CourierEntityRoot";
 import { EnemyUnitEntityRoot } from "./rules/Components/Enemy/EnemyUnitEntityRoot";
 import { ItemEntityRoot } from "./rules/Components/Item/ItemEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "./rules/Components/Player/PlayerCreateBattleUnitEntityRoot";
@@ -149,21 +150,10 @@ export class GameEntityRoot extends ET.EntityRoot {
         // 道具位置改变
         EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_ITEM_SLOT_CHANGE, (event: JS_TO_LUA_DATA) => {
             let playerid = event.PlayerID;
-            let hero = PlayerResource.GetPlayer(playerid).GetAssignedHero();
+            let hero = this.PlayerSystem().GetPlayer(playerid).Hero!;
             if (hero != null) {
-                let r: EntityIndex[] = [];
-                for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM; i++) {
-                    let itemEnity = hero.GetItemInSlot(i);
-                    if (itemEnity != null) {
-                        r.push(itemEnity.entindex());
-                    } else {
-                        r.push(-1 as EntityIndex);
-                    }
-                }
                 // 检查位置是否改变
-                let changeData = this.PlayerSystem().GetPlayer(playerid).PlayerHeroComp().CheckItemSlotChange(r);
-                // 同步位置数据
-                this.PlayerSystem().GetPlayer(playerid).PlayerHeroComp().itemSlotData = r;
+                let changeData = hero.ETRoot.As<CourierEntityRoot>().CourierDataComp().CheckItemSlotChange();
                 if (changeData) {
                     let _event: IBuffEventData = {};
                     (_event as IBuffEventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
@@ -179,24 +169,24 @@ export class GameEntityRoot extends ET.EntityRoot {
             let playerid = event.PlayerID;
             let itemslot = event.data.slot;
             let npcentindex = event.data.npc;
-            let hero = PlayerResource.GetPlayer(playerid).GetAssignedHero();
+            let hero = this.PlayerSystem().GetPlayer(playerid).Hero!;
             if (hero == null || itemslot == null || npcentindex == null) {
                 event.state = false;
-                EventHelper.ErrorMessage("fail item", playerid);
+                EventHelper.ErrorMessage("not valid args", playerid);
                 return;
             }
             let itemEnity = hero.GetItemInSlot(itemslot) as BaseItem_Plus;
             let npc = EntIndexToHScript(npcentindex) as BaseNpc_Plus;
             if (!GameFunc.IsValid(itemEnity) || !GameFunc.IsValid(npc) || itemEnity.ETRoot == null || npc.ETRoot == null) {
                 event.state = false;
-                EventHelper.ErrorMessage("fail item", playerid);
+                EventHelper.ErrorMessage("not valid item or npc", playerid);
                 return;
             }
             let itemroot = itemEnity.ETRoot.As<ItemEntityRoot>();
             let npcroot = npc.ETRoot.As<PlayerCreateBattleUnitEntityRoot>()
             if (!itemroot.canGiveToNpc(npcroot)) {
                 event.state = false;
-                EventHelper.ErrorMessage("fail item", playerid);
+                EventHelper.ErrorMessage("cant give to npc", playerid);
                 return;
             }
             npcroot.ItemManagerComp().addItemRoot(itemroot);
@@ -207,22 +197,22 @@ export class GameEntityRoot extends ET.EntityRoot {
             let playerid = event.PlayerID;
             let itemslot = event.data.slot;
             let pos = event.data.pos;
-            let hero = PlayerResource.GetPlayer(playerid).GetAssignedHero();
+            let hero = this.PlayerSystem().GetPlayer(playerid).Hero!;
             if (hero == null || itemslot == null || pos == null) {
                 event.state = false;
-                EventHelper.ErrorMessage("fail item", playerid);
+                EventHelper.ErrorMessage("not valid args", playerid);
                 return;
             }
             let itemEnity = hero.GetItemInSlot(itemslot) as BaseItem_Plus;
             if (!GameFunc.IsValid(itemEnity) || itemEnity.ETRoot == null) {
                 event.state = false;
-                EventHelper.ErrorMessage("fail item", playerid);
+                EventHelper.ErrorMessage("not valid item ", playerid);
                 return;
             }
             let itemroot = itemEnity.ETRoot.As<ItemEntityRoot>();
             if (itemroot.DomainParent == null) {
                 event.state = false;
-                EventHelper.ErrorMessage("fail item", playerid);
+                EventHelper.ErrorMessage("not valid item ", playerid);
                 return;
             }
             let posV = Vector(pos.x, pos.y, pos.z);

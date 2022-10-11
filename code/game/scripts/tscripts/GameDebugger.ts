@@ -7,7 +7,8 @@ import { TimerHelper } from "./helper/TimerHelper";
 import { globalData, reloadable } from "./GameCache";
 import { GameRequest } from "./service/GameRequest";
 import { BotHelper } from "./helper/BotHelper";
-import { BaseItem_Plus } from "./npc/entityPlus/BaseItem_Plus";
+import { CourierEntityRoot } from "./rules/Components/Courier/CourierEntityRoot";
+import { ActiveRootItem } from "./npc/items/ActiveRootItem";
 
 @reloadable
 export class GameDebugger extends SingletonClass {
@@ -171,8 +172,9 @@ export class GameDebugger extends SingletonClass {
     /**聊天添加GM指令 */
     OnPlayerChat(events: PlayerChatEvent) {
         let iPlayerID = events.playerid;
-        let player = PlayerResource.GetPlayer(iPlayerID);
-        let hero = player.GetAssignedHero();
+        let player = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(iPlayerID);
+        let hero = player.Hero!;
+        let heroroot=hero.ETRoot.As<CourierEntityRoot>()
         let sText = events.text.toLowerCase();
         let bTeamOnly = events.teamonly == 1;
         let tokens = sText.split(" ");
@@ -201,7 +203,7 @@ export class GameDebugger extends SingletonClass {
                 hero.AddItemByName(tokens[1]);
                 break;
             case "-b":
-                BaseItem_Plus.CreateOneToUnit(hero,"item_building_hero_" + tokens[1])
+                ActiveRootItem.CreateOneToUnit(hero, "item_building_hero_" + tokens[1]);
                 break;
         }
     }

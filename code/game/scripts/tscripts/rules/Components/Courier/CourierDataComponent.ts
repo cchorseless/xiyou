@@ -1,23 +1,18 @@
+import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { ET, registerET, serializeETProps } from "../../Entity/Entity";
-import { PlayerConfig } from "../../System/Player/PlayerConfig";
-import { PlayerDataComponent } from "./PlayerDataComponent";
-import { PlayerScene } from "./PlayerScene";
 
 /**玩家组件 */
 @registerET()
-export class PlayerHeroComponent extends ET.Component {
+export class CourierDataComponent extends ET.Component {
     /**出生点 */
     firstSpawnPoint: Vector;
     /**玩家物品信息 */
     itemSlotData: EntityIndex[] = [];
-    readonly playerColor: Vector;
 
     onAwake() {
-        let domain = this.GetDomain<PlayerScene>();
-        let hero = domain.ETRoot.Hero;
-        (this as any).playerColor = PlayerConfig.playerColor[domain.ETRoot.AsPlayer().Playerid];
+        let hero = this.GetDomain<BaseNpc_Hero_Plus>();
         this.firstSpawnPoint = hero.GetAbsOrigin();
         modifier_wait_portal.applyOnly(hero, hero);
         modifier_jiaoxie_wudi.applyOnly(hero, hero);
@@ -25,17 +20,26 @@ export class PlayerHeroComponent extends ET.Component {
 
     /**
      * 检查位置是否变动
-     * @param playerid
-     * @param data
      * @returns 改变的slot [number[],0 | 1 | 2]
      */
-    CheckItemSlotChange(data: EntityIndex[]) {
+    CheckItemSlotChange() {
+        let hero = this.GetDomain<BaseNpc_Hero_Plus>();
+        let data: EntityIndex[] = [];
+        for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM; i++) {
+            let itemEnity = hero.GetItemInSlot(i);
+            if (itemEnity != null) {
+                data.push(itemEnity.entindex());
+            } else {
+                data.push(-1 as EntityIndex);
+            }
+        }
         let r = [];
         for (let i = 0; i < data.length; i++) {
             if (data[i] != this.itemSlotData[i]) {
                 r.push(i);
             }
         }
+        this.itemSlotData = data;
         if (r.length > 0) {
             /**获取|丢失|位置更换 */
             let state: 0 | 1 | 2 = 0;
@@ -58,7 +62,7 @@ export class PlayerHeroComponent extends ET.Component {
      * @returns
      */
     GetItemCount(itemname: string): number {
-        let hero = this.GetDomain<PlayerScene>().ETRoot.Hero;
+        let hero = this.GetDomain<BaseNpc_Hero_Plus>();
         let r = 0;
         for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM; i++) {
             let item = hero.GetItemInSlot(i);

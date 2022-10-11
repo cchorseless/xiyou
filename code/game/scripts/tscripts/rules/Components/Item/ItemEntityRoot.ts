@@ -1,13 +1,14 @@
+import { reloadable } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, serializeETProps } from "../../Entity/Entity";
-import { CombinationComponent } from "../Combination/CombinationComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { PlayerCreateUnitEntityRoot, PlayerCreateUnitType } from "../Player/PlayerCreateUnitEntityRoot";
 
+@reloadable
 export class ItemEntityRoot extends PlayerCreateUnitEntityRoot {
 
     onAwake() {
@@ -21,7 +22,19 @@ export class ItemEntityRoot extends PlayerCreateUnitEntityRoot {
         else {
             (this as any).Playerid = -1;
         }
+        this.regSelfToM();
     }
+
+    private regSelfToM() {
+        let item = this.GetDomain<BaseItem_Plus>();
+        let owner = item.GetOwnerPlus();
+        if (this.isPickUped() && owner != null && owner.ETRoot &&
+            owner.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().ItemManagerComp()
+        ) {
+            owner.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().ItemManagerComp().addItemRoot(this)
+        }
+    }
+
 
     isPickUped() {
         let item = this.GetDomain<BaseItem_Plus>();

@@ -1,3 +1,4 @@
+import { LogHelper } from "../../../helper/LogHelper";
 import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
@@ -10,6 +11,7 @@ export class ItemManagerComponent extends ET.Component {
     public allItemRoot: string[] = [];
     onAwake(...args: any[]): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
+        npc.SetHasInventory(true);
         let len = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9;
         for (let i = 0; i <= len; i++) {
             let item = npc.GetItemInSlot(i) as BaseItem_Plus;
@@ -54,6 +56,9 @@ export class ItemManagerComponent extends ET.Component {
         }
         return r;
     }
+
+
+
 
     addItemRoot(root: ItemEntityRoot) {
         let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();

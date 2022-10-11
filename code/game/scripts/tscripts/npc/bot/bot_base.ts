@@ -2,7 +2,6 @@ import { GameDebugger } from "../../GameDebugger";
 import { LogHelper } from "../../helper/LogHelper";
 import { PrecacheHelper } from "../../helper/PrecacheHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
-import { PlayerHeroComponent } from "../../rules/Components/Player/PlayerHeroComponent";
 import { ET } from "../../rules/Entity/Entity";
 import { PlayerState } from "../../rules/System/Player/PlayerState";
 import { BaseNpc_Hero_Plus } from "../entityPlus/BaseNpc_Hero_Plus";

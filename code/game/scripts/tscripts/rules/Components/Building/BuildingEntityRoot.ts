@@ -2,9 +2,9 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { ActiveRootItem } from "../../../npc/items/ActiveRootItem";
 import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
@@ -46,7 +46,7 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
             let allItem = this.ItemManagerComp().getAllBaseItem();
             allItem.forEach(item => {
                 // cloneRuntime.AddItem(item);
-                let hItem = BaseItem_Plus.CreateOneToUnit(cloneRuntime, item.GetAbilityName());
+                let hItem = ActiveRootItem.CreateOneToUnit(cloneRuntime, item.GetAbilityName());
                 if (item.IsStackable()) {
                     hItem.SetCurrentCharges(item.GetCurrentCharges())
                 }

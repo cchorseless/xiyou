@@ -22,7 +22,6 @@ import { FHeroCombination } from "./Components/FakerHero/FHeroCombination";
 import { FHeroCombinationManagerComponent } from "./Components/FakerHero/FHeroCombinationManagerComponent";
 import { ItemManagerComponent } from "./Components/Item/ItemManagerComponent";
 import { PlayerDataComponent } from "./Components/Player/PlayerDataComponent";
-import { PlayerHeroComponent } from "./Components/Player/PlayerHeroComponent";
 import { PlayerHttpComponent } from "./Components/Player/PlayerHttpComponent";
 import { RoundStateComponent } from "./Components/Round/RoundStateComponent";
 import { RoundManagerComponent } from "./Components/Round/RoundManagerComponent";
@@ -40,6 +39,7 @@ import { PublicBagSystemComponent } from "./System/Public/PublicBagSystemCompone
 import { RoundSystemComponent } from "./System/Round/RoundSystemComponent";
 import { WearableSystemComponent } from "./System/Wearable/WearableSystemComponent";
 import { BattleUnitComponent } from "./Components/BattleUnit/BattleUnitComponent";
+import { CourierDataComponent } from "./Components/Courier/CourierDataComponent";
 
 
 
@@ -48,6 +48,7 @@ import { BattleUnitComponent } from "./Components/BattleUnit/BattleUnitComponent
     RoundSystemComponent,
     PlayerSystemComponent,
     EnemySystemComponent,
+    CourierDataComponent,
     CombinationSystemComponent,
     ChessControlSystemComponent,
     BuildingSystemComponent,
@@ -56,7 +57,6 @@ import { BattleUnitComponent } from "./Components/BattleUnit/BattleUnitComponent
     BattleUnitManagerComponent,
     AbilityManagerComponent,
     ItemManagerComponent,
-    PlayerHeroComponent,
     PlayerDataComponent,
     PlayerHttpComponent,
     DrawComponent,

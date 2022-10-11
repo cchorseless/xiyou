@@ -5,16 +5,17 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { TCharacter } from "../../../service/account/TCharacter";
 import { ET } from "../../Entity/Entity";
+import { PlayerConfig } from "../../System/Player/PlayerConfig";
 import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
 import { ChessControlComponent } from "../ChessControl/ChessControlComponent";
 import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";
+import { CourierEntityRoot } from "../Courier/CourierEntityRoot";
 import { DrawComponent } from "../Draw/DrawComponent";
 import { EnemyManagerComponent } from "../Enemy/EnemyManagerComponent";
 import { FakerHeroComponent } from "../FakerHero/FakerHeroComponent";
 import { FHeroCombinationManagerComponent } from "../FakerHero/FHeroCombinationManagerComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerDataComponent } from "./PlayerDataComponent";
-import { PlayerHeroComponent } from "./PlayerHeroComponent";
 import { PlayerHttpComponent } from "./PlayerHttpComponent";
 import { PlayerScene } from "./PlayerScene";
 
@@ -33,7 +34,7 @@ export class PlayerEntityRoot extends ET.EntityRoot {
     public BindHero(hero: BaseNpc_Hero_Plus): void {
         LogHelper.print("BindHero :=>", this.Playerid);
         (this as any).Hero = hero;
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerHeroComponent>("PlayerHeroComponent"));
+        CourierEntityRoot.Active(hero);
         this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundManagerComponent>("RoundManagerComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationManagerComponent>("CombinationManagerComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyManagerComponent>("EnemyManagerComponent"));
@@ -80,9 +81,7 @@ export class PlayerEntityRoot extends ET.EntityRoot {
     DrawComp() {
         return this.GetComponentByName<DrawComponent>("DrawComponent");
     }
-    PlayerHeroComp() {
-        return this.GetComponentByName<PlayerHeroComponent>("PlayerHeroComponent");
-    }
+
     RoundManagerComp() {
         return this.GetComponentByName<RoundManagerComponent>("RoundManagerComponent");
     }
@@ -107,5 +106,9 @@ export class PlayerEntityRoot extends ET.EntityRoot {
     }
     CheckIsAlive() {
         return this.Hero.IsAlive();
+    }
+
+    GetColor() {
+        return PlayerConfig.playerColor[this.Playerid];
     }
 }

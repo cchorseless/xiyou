@@ -87,15 +87,15 @@ export class CustomInventory extends CustomInventory_UI {
 
     selectedEntityid: EntityIndex;
     onRefreshUI() {
-        let entitys = Players.GetSelectedEntities(Game.GetLocalPlayerID());
-        this.selectedEntityid = entitys[entitys.length - 1];
+        this.selectedEntityid = Players.GetLocalPlayerPortraitUnit();;
         if (this.selectedEntityid == null) {
             return
         }
         for (let i = 0; i < 9; i++) {
             let img = this.__root__.current!.FindChildTraverse("customitem_rare_" + i) as ImagePanel;
             if (img) {
-                img.visible = Entities.GetItemInSlot(this.selectedEntityid, i) > -1;
+                let slot = Entities.GetItemInSlot(this.selectedEntityid, i);
+                img.visible = slot > -1;
                 CSSHelper.setImagePanelUrl(img, `common/rarity/CardRarity_SR.png`);
             }
         }
@@ -135,6 +135,7 @@ export class CustomInventory extends CustomInventory_UI {
     onBtn_mouseover = (item_slot: number) => { };
     onBtn_mouseout = (item_slot: number) => { };
     onBtn_dragend = (item_slot: number) => {
+        // todo
         let pos = GameUI.GetCursorPosition();
         let entitys = GameUI.FindScreenEntities(pos);
         if (entitys.length > 0) {

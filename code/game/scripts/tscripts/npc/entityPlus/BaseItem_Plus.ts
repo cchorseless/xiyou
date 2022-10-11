@@ -145,7 +145,7 @@ export class BaseItem_Plus extends BaseItem {
         let hItem = CreateItem(itemname, player, player) as BaseItem_Plus;
         hItem.SetPurchaseTime(0);
         hUnit.AddItem(hItem);
-        if (GameFunc.IsValid(hItem) && hItem.GetParent() != hUnit && hItem.GetContainer() == null) {
+        if (GameFunc.IsValid(hItem) && hItem.GetOwnerPlus() != hUnit && hItem.GetContainer() == null) {
             hItem.SetParent(hUnit, "");
             hItem.CreateItemOnPositionRandom(hUnit.GetAbsOrigin());
         }
