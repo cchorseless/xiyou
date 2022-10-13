@@ -1,3 +1,4 @@
+import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
@@ -45,7 +46,6 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
             // equip
             let allItem = this.ItemManagerComp().getAllBaseItem();
             allItem.forEach(item => {
-                // cloneRuntime.AddItem(item);
                 let hItem = ActiveRootItem.CreateOneToUnit(cloneRuntime, item.GetAbilityName());
                 if (item.IsStackable()) {
                     hItem.SetCurrentCharges(item.GetCurrentCharges())
@@ -73,7 +73,11 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
 
     public RemoveCloneRuntimeBuilding() {
         if (this.RuntimeBuilding) {
-            this.RuntimeBuilding.GetDomain<BaseNpc_Plus>().AddNoDraw();
+            // this.RuntimeBuilding.BattleUnitManager().ClearRuntimeBattleUnit();
+            let npc = this.RuntimeBuilding.GetDomain<BaseNpc_Plus>();
+            if (GameFunc.IsValid(npc)) {
+                npc.AddNoDraw();
+            }
             this.RuntimeBuilding.Dispose();
         }
         this.RuntimeBuilding = null;
@@ -84,7 +88,7 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
 
     onDestroy(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
-        if (npc && !npc.__safedestroyed__) {
+        if (GameFunc.IsValid(npc) && !npc.__safedestroyed__) {
             npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
             TimerHelper.addTimer(
                 3,

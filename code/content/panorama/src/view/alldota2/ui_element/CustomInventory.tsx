@@ -54,13 +54,15 @@ export class CustomInventory extends CustomInventory_UI {
                     });
                     // b 拖动的panel
                     $.RegisterEventHandler("DragEnter", item_rare!, (panelID: string, dragged: Panel) => {
-
+                        LogHelper.print("DragEnter",panelID,dragged)
                         // this.onBtn_dragend(i);
                     });
                     $.RegisterEventHandler("DragLeave", item_rare!, (panelID: string, dragged: Panel) => {
                         // this.onBtn_dragend(i);
+                        LogHelper.print("DragLeave",panelID,dragged)
                     });
                     $.RegisterEventHandler("DragEnd", item_rare!, (panelID: string, dragged: Panel) => {
+                        LogHelper.print("DragEnd",panelID,dragged)
                         this.onBtn_dragend(i);
                     });
                 }
@@ -169,14 +171,16 @@ export class CustomInventory extends CustomInventory_UI {
         }
         else {
             let worldpos = GameUI.GetScreenWorldPosition(pos)!;
-            let itemindex = Entities.GetItemInSlot(this.selectedEntityid, item_slot);
-            if (itemindex > -1) {
-                Game.DropItemAtCursor(this.selectedEntityid, itemindex)
-            }
-            // NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_DROP_POSITION, {
-            //     pos: { x: worldpos[0], y: worldpos[1], z: worldpos[2] },
-            //     slot: item_slot
-            // })
+            // 走过去扔
+            // let itemindex = Entities.GetItemInSlot(this.selectedEntityid, item_slot);
+            // if (itemindex > -1) {
+            //     Game.DropItemAtCursor(this.selectedEntityid, itemindex)
+            // }
+            // 直接扔
+            NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_DROP_POSITION, {
+                pos: { x: worldpos[0], y: worldpos[1], z: worldpos[2] },
+                slot: item_slot
+            })
         }
     };
 }

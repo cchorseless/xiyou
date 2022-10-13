@@ -18,7 +18,13 @@ export class ChessComponent extends ET.Component {
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.SetForwardVector(Vector(0, 1, 0));
         this.updateBoardPos();
+        let etroot = domain.ETRoot.As<PlayerCreateBattleUnitEntityRoot>()
+        if (etroot.IsBuilding()) {
+            this.setMoving(false);
+        }
     }
+
+
     updateBoardPos() {
         let location = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
         this.ChessVector = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardLocalVector2(location);
@@ -55,13 +61,25 @@ export class ChessComponent extends ET.Component {
         return GameRules.Addon.ETRoot.ChessControlSystem().IsInBaseRoom(location);
     }
 
+    setMoving(ismoving: boolean) {
+        (this.isMoving as any) = ismoving;
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        if (ismoving) {
+            npc.SetMoveCapability(DOTAUnitMoveCapability_t.DOTA_UNIT_CAP_MOVE_GROUND);
+        }
+        else {
+            npc.SetMoveCapability(DOTAUnitMoveCapability_t.DOTA_UNIT_CAP_MOVE_NONE);
+        }
+    }
+
+
     blink_start_p: Vector;
-    is_moving: boolean;
+    readonly isMoving: boolean = false;
     blinkChessX(v: Vector, isjump: boolean = true) {
-        if (this.is_moving) {
+        if (this.isMoving) {
             return;
         }
-        this.is_moving = true;
+        this.setMoving(true);
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.Stop();
         domain.SetForwardVector(((v - domain.GetAbsOrigin()) as Vector).Normalized());
@@ -86,9 +104,10 @@ export class ChessComponent extends ET.Component {
         }
     }
     OnblinkChessStart(to: ChessControlConfig.ChessVector) {
-        let etroot = this.GetDomain<BaseNpc_Plus>().ETRoot;
-        if (!etroot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) { return }
-        let building = etroot.As<BuildingEntityRoot>()
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        let etroot = npc.ETRoot.As<PlayerCreateBattleUnitEntityRoot>()
+        if (!etroot.IsBuilding()) { return }
+        let building = etroot.As<BuildingEntityRoot>();
         if (this.isInBattle()) {
             if (to.isY(0)) {
                 EventHelper.fireServerEvent(ChessControlConfig.Event.ChessControl_LeaveBattle,
@@ -109,7 +128,6 @@ export class ChessComponent extends ET.Component {
         let chessPos = sys.GetBoardLocalVector2(v);
         sys.RegistBlinkTargetGird(chessPos, false);
         this.blink_start_p = null;
-        this.is_moving = false;
         let chess = sys.FindBoardInGirdChess(chessPos);
         if (chess.length > 1) {
             let pos = sys.GetBoardEmptyGirdRandomAround(chessPos);
@@ -118,6 +136,7 @@ export class ChessComponent extends ET.Component {
                 return;
             }
         }
+        this.setMoving(false);
         this.updateBoardPos();
     }
 

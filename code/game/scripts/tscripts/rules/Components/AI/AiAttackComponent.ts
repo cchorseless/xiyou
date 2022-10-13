@@ -23,9 +23,11 @@ export class AiAttackComponent extends ET.Component {
         this.timerBattle = TimerHelper.addTimer(
             0.1,
             () => {
-                if (chessComp.is_moving) {
+                if (this.IsDisposed()) { return }
+                if (chessComp.isMoving) {
                     return 0.1;
                 }
+                // todo
                 if (this.castAbilityAndItem()) {
                     return 0.1;
                 }
@@ -46,6 +48,7 @@ export class AiAttackComponent extends ET.Component {
             this
         );
     }
+
     endFindToAttack() {
         if (this.timerBattle) {
             TimerHelper.removeTimer(this.timerBattle);
@@ -53,6 +56,9 @@ export class AiAttackComponent extends ET.Component {
         }
     }
 
+    onDestroy(): void {
+        this.endFindToAttack();
+    }
     castAbilityAndItem() {
         let u = this.GetDomain<BaseNpc_Plus>();
         let battleUnit = u.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();

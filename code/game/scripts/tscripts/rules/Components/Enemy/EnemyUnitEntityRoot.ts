@@ -1,3 +1,4 @@
+import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
@@ -34,7 +35,7 @@ export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
 
     onDestroy(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
-        if (npc && !npc.__safedestroyed__) {
+        if (GameFunc.IsValid(npc) && !npc.__safedestroyed__) {
             npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
             TimerHelper.addTimer(
                 3,

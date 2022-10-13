@@ -253,7 +253,9 @@ export class BuildingManagerComponent extends ET.Component {
         let allbuilding = this.getAllBattleBuilding();
         let r: PlayerCreateBattleUnitEntityRoot[] = [];
         allbuilding.forEach(b => {
-            r = r.concat(b.RuntimeBuilding.BattleUnitManager().GetAllBattleUnitAlive())
+            if (b.RuntimeBuilding) {
+                r = r.concat(b.RuntimeBuilding.BattleUnitManager().GetAllBattleUnitAlive())
+            }
         })
         return r
     }

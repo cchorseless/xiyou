@@ -293,27 +293,9 @@ export class GameEntityRoot extends ET.EntityRoot {
         if (!hUnit.ETRoot) {
             return;
         }
-        if (hUnit.ETRoot.AsValid<EnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
-            let enemyUnit = hUnit.ETRoot.As<EnemyUnitEntityRoot>();
-            enemyUnit.onKilled(events);
-        } else if (hUnit.ETRoot.AsValid<RoundPrizeUnitEntityRoot>("RoundPrizeUnitEntityRoot")) {
-            let roundprize = hUnit.ETRoot.As<RoundPrizeUnitEntityRoot>();
-            roundprize.onKilled(events);
-        } else if (hUnit.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
-            let buildunit = hUnit.ETRoot.As<BuildingEntityRoot>();
-            buildunit.onKilled(events);
-        }
-        else if (hUnit.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
-            let buildunit = hUnit.ETRoot.As<BuildingEntityRoot>();
-            buildunit.onKilled(events);
-        }
-        else if (hUnit.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
-            let buildunit = hUnit.ETRoot.As<BuildingEntityRoot>();
-            buildunit.onKilled(events);
-        }
-        else if (hUnit.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
-            let buildunit = hUnit.ETRoot.As<BuildingEntityRoot>();
-            buildunit.onKilled(events);
+        let root =hUnit.ETRoot as PlayerCreateBattleUnitEntityRoot;
+        if (root.onKilled) {
+            root.onKilled(events);
         }
     }
 

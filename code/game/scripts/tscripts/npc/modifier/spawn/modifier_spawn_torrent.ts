@@ -35,15 +35,12 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
                 this.Destroy();
                 return;
             }
-
             this.vStartPosition = GetGroundPosition(this.GetParentPlus().GetOrigin(), this.GetParentPlus());
             this.vTargetPosition = Vector(kv.vx, kv.vy, 128);
             this.vDirection = GameFunc.AsVector(this.vTargetPosition - this.vStartPosition).Normalized();
             this.fDistance = GameFunc.AsVector(this.vTargetPosition - this.vStartPosition).Length2D();
             this.step = 0; // 0~30
-
             this.height = RandomInt(200, 600);
-
             //  创建开始的特效和音效
             EmitSoundOn("animation.torrent", this.GetParentPlus());
             let ppp = ResHelper.CreateParticle(
@@ -93,9 +90,6 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
             } else {
                 // 到终点了
                 me.SetAbsOrigin(this.vTargetPosition);
-                let chessComp = me.ETRoot.As<EnemyUnitEntityRoot>().ChessComp();
-                chessComp.is_moving = false;
-                chessComp.blink_start_p = null;
                 me.InterruptMotionControllers(true);
                 this.Destroy();
             }

@@ -523,7 +523,7 @@ export class BaseNpc implements ET.IEntityRoot {
      * @override
      * 删除
      * */
-    UpdateOnRemove?() { }
+    UpdateOnRemove?() {}
     addSpawnedHandler?(handler: ET.Handler) {
         if (this.__bIsFirstSpawn == true) {
             handler.run();

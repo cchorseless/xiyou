@@ -168,6 +168,7 @@ export class BaseNpc_Plus extends BaseNpc {
         return this
     }
 
+
     /**
       * 创建幻象
       * @param vLocation

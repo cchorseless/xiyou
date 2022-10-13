@@ -19,19 +19,20 @@ export class FakerHeroDataComponent extends ET.Component {
     ProjectileInfo: IProjectileEffectInfo = Assert_ProjectileEffect.p000;
     SpawnEffect: ISpawnEffectInfo = Assert_SpawnEffect.Effect.Spawn_fall;
     public addEvent() {
-        let player = this.Domain.ETRoot.AsPlayer();
+        let fakerhero=this.Domain.ETRoot.As<FakerHeroEntityRoot>()
+        let player = fakerhero.GetPlayer();
         EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onstart,
             player.Playerid,
             (round: ERoundBoard) => {
                 player.EnemyManagerComp().removeAllEnemy();
-                this.Domain.ETRoot.As<FakerHeroEntityRoot>().FHeroCombinationManager().activeECombination(false);
+                fakerhero.FHeroCombinationManager().activeECombination(false);
                 this.RefreshFakerHero(round);
                 round.CreateAllRoundBasicEnemy(this.SpawnEffect);
             });
         EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onbattle,
             player.Playerid,
             (round: ERoundBoard) => {
-                this.Domain.ETRoot.As<FakerHeroEntityRoot>().FHeroCombinationManager().activeECombination(true);
+                fakerhero.FHeroCombinationManager().activeECombination(true);
                 player.EnemyManagerComp().getAllEnemy()
                     .forEach((b) => {
                         b.RoundStateComp().OnBoardRound_Battle();

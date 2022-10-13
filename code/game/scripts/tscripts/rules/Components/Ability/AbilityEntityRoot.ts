@@ -1,3 +1,4 @@
+import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
@@ -31,8 +32,9 @@ export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
 
     onDestroy(): void {
         let ability = this.GetDomain<BaseAbility_Plus>();
+        if (!GameFunc.IsValid(ability)) { return }
         let owner = ability.GetOwnerPlus();
-        if (owner) {
+        if (GameFunc.IsValid(owner)) {
             owner.RemoveAbilityByHandle(ability);
         }
         ability.Destroy();

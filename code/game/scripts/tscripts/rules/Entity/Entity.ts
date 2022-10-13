@@ -806,7 +806,7 @@ export module ET {
 
         public AddDomainChild(_entityRoot: EntityRoot) {
             if (_entityRoot.DomainParent != null) {
-                _entityRoot.DomainParent.removeDomainChildren(this);
+                _entityRoot.DomainParent.removeDomainChildren(_entityRoot);
             }
             _entityRoot.setDomainParent(this);
         }
@@ -814,7 +814,7 @@ export module ET {
             if (_entityRoot.DomainParent != this) {
                 return;
             }
-            _entityRoot.DomainParent.removeDomainChildren(this);
+           this.removeDomainChildren(_entityRoot);
         }
 
 

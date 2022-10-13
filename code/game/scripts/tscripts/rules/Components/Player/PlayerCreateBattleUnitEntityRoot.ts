@@ -21,7 +21,8 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
         this.SyncClientEntity(this, true);
     }
 
-
+    onKilled(events: EntityKilledEvent): void { }
+    
     IsFriendly() {
         let domain = this.GetDomain<BaseNpc_Plus>();
         return domain.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_GOODGUYS;
