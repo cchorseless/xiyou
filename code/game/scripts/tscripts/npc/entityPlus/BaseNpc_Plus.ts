@@ -98,6 +98,9 @@ export class BaseNpc_Plus extends BaseNpc {
         return 0;
     }
 
+
+
+
     /**
     *
     * @param entityKeyValues
@@ -212,7 +215,7 @@ export class BaseNpc_Plus extends BaseNpc {
             if (ability != null) {
                 let illusion_ability = illusion.FindAbilityByName(ability.GetAbilityName())
                 if (illusion_ability == null) {
-                    illusion_ability = illusion.AddAbility(ability.GetAbilityName())
+                    illusion_ability = illusion.addAbilityPlus(ability.GetAbilityName())
                 }
                 if (illusion_ability != null) {
                     if (illusion_ability.GetLevel() < ability.GetLevel()) {

@@ -2,6 +2,7 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
 import { ET, serializeETProps } from "../../Entity/Entity";
+import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { PlayerCreateUnitEntityRoot, PlayerCreateUnitType } from "../Player/PlayerCreateUnitEntityRoot";
 
 export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
@@ -12,10 +13,29 @@ export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
         (this as any).Playerid = ability.GetOwnerPlus().GetPlayerOwnerID();
         (this as any).ConfigID = ability.GetAbilityName();
         (this as any).EntityId = ability.GetEntityIndex();
-        LogHelper.print("AbilityEntityRoot", this.ConfigID)
+        ability.UpgradeAbility(true)
+        ability.SetActivated(true);
+        this.regSelfToM()
     }
+
+    private regSelfToM() {
+        let item = this.GetDomain<BaseAbility_Plus>();
+        let owner = item.GetOwnerPlus();
+        if (owner != null && owner.ETRoot &&
+            owner.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().AbilityManagerComp()
+        ) {
+            owner.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().AbilityManagerComp().addAbilityRoot(this)
+        }
+    }
+
+
+
     onDestroy(): void {
         let ability = this.GetDomain<BaseAbility_Plus>();
+        let owner = ability.GetOwnerPlus();
+        if (owner) {
+            owner.RemoveAbilityByHandle(ability);
+        }
         ability.Destroy();
         UTIL_Remove(ability);
     }

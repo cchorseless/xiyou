@@ -6,6 +6,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BuildingComponent } from "../../../rules/Components/Building/BuildingComponent";
 import { BuildingEntityRoot } from "../../../rules/Components/Building/BuildingEntityRoot";
+import { PlayerCreateBattleUnitEntityRoot } from "../../../rules/Components/Player/PlayerCreateBattleUnitEntityRoot";
 import { BuildingConfig } from "../../../rules/System/Building/BuildingConfig";
 import { ChessControlConfig } from "../../../rules/System/ChessControl/ChessControlConfig";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
@@ -52,13 +53,13 @@ export class item_abilitybook_base extends ActiveRootItem {
 
     OnSpellStart() {
         let hCaster = this.GetCasterPlus();
-        let building = hCaster.ETRoot.As<BuildingEntityRoot>();
+        let building = hCaster.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
         let abilityM = building.AbilityManagerComp();
         if (abilityM == null) {
             return;
         }
         let sTowerName = this.GetCreateUnitName();
-        let result = abilityM.learnAbility(sTowerName);
+        let result = abilityM.tryLearnExtraAbility(sTowerName);
         if (result) {
             this.SpendCharge();
         }

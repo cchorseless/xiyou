@@ -56,7 +56,7 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
             allability.forEach(ability => {
                 let abilityname = ability.GetAbilityName();
                 if (cloneRuntime.FindAbilityByName(abilityname) == null) {
-                    runtimeroot.AbilityManagerComp().learnAbility(abilityname);
+                    cloneRuntime.addAbilityPlus(abilityname)
                 }
             })
             // buff

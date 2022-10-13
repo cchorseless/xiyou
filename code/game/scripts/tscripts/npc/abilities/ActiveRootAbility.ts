@@ -9,6 +9,7 @@ export class ActiveRootAbility extends BaseAbility_Plus {
             AbilityEntityRoot.Active(this);
         }
     }
+
     IsOwnersManaEnough() {
         return super.IsOwnersManaEnough() && this.ETRoot.isManaEnoughForActive();
     }

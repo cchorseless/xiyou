@@ -3,6 +3,8 @@ import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
+import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { unit_base_baoxiang } from "../../../npc/units/common/unit_base_baoxiang";
 import { TCharacter } from "../../../service/account/TCharacter";
 import { ET } from "../../Entity/Entity";
 import { PlayerConfig } from "../../System/Player/PlayerConfig";
@@ -12,16 +14,17 @@ import { CombinationManagerComponent } from "../Combination/CombinationManagerCo
 import { CourierEntityRoot } from "../Courier/CourierEntityRoot";
 import { DrawComponent } from "../Draw/DrawComponent";
 import { EnemyManagerComponent } from "../Enemy/EnemyManagerComponent";
-import { FakerHeroComponent } from "../FakerHero/FakerHeroComponent";
+import { FakerHeroEntityRoot } from "../FakerHero/FakerHeroEntityRoot";
 import { FHeroCombinationManagerComponent } from "../FakerHero/FHeroCombinationManagerComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerDataComponent } from "./PlayerDataComponent";
 import { PlayerHttpComponent } from "./PlayerHttpComponent";
-import { PlayerScene } from "./PlayerScene";
 
 export class PlayerEntityRoot extends ET.EntityRoot {
     readonly Playerid: PlayerID;
     readonly Hero?: BaseNpc_Hero_Plus;
+    readonly FakerHero?: BaseNpc_Plus;
+
     public IsLogin: boolean;
     public IsLeaveGame: boolean = false;
 
@@ -40,7 +43,17 @@ export class PlayerEntityRoot extends ET.EntityRoot {
         this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyManagerComponent>("EnemyManagerComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingManagerComponent>("BuildingManagerComponent"));
         this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof FakerHeroComponent>("FakerHeroComponent"));
+        this.CreateFakerHero();
+    }
+
+    public CreateFakerHero() {
+        if (this.FakerHero == null) {
+            let player = this.Domain.ETRoot.AsPlayer();
+            let spawn = GameRules.Addon.ETRoot.MapSystem().getFakerHeroSpawnPoint(player.Playerid);
+            // todo
+            (this as any).FakerHero = unit_base_baoxiang.CreateOne(spawn, DOTATeam_t.DOTA_TEAM_BADGUYS, true);
+            FakerHeroEntityRoot.Active(this.FakerHero, player.Playerid, "unit_base_baoxiang");
+        }
     }
 
 
@@ -97,9 +110,7 @@ export class PlayerEntityRoot extends ET.EntityRoot {
     EnemyManagerComp() {
         return this.GetComponentByName<EnemyManagerComponent>("EnemyManagerComponent");
     }
-    FakerHeroComp() {
-        return this.GetComponentByName<FakerHeroComponent>("FakerHeroComponent");
-    }
+
 
     TCharacter() {
         return this.GetComponentByName<TCharacter>("TCharacter");

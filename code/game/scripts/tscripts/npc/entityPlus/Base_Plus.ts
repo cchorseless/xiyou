@@ -665,6 +665,12 @@ export class BaseNpc implements ET.IEntityRoot {
         // this.SetMaxHealth(fCorrectHealth)
         // this.ModifyHealth(fHealthPercent * fCorrectHealth, null, false, 0)
     }
+    addAbilityPlus?(abilityname: string, level: number = 1) {
+        let ability = this.AddAbility(abilityname);
+        ability.SetActivated(true);
+        ability.SetLevel(level);
+        return ability as BaseAbility_Plus;
+    }
 }
 
 export interface BaseNpc_Hero extends CDOTA_BaseNPC_Hero { }

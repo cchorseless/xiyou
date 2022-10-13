@@ -1,4 +1,6 @@
+import { LogHelper } from "../../../helper/LogHelper";
 import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
+import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, registerET } from "../../Entity/Entity";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
@@ -14,16 +16,30 @@ export class AbilityManagerComponent extends ET.Component {
         for (let i = 0; i < len; i++) {
             let ability = npc.GetAbilityByIndex(i) as BaseAbility_Plus;
             if (ability && ability.ETRoot) {
-                ability.UpgradeAbility(true)
-                ability.SetActivated(true);
-                ability.SetLevel(1);
                 this.addAbilityRoot(ability.ETRoot as AbilityEntityRoot);
             }
         }
     }
 
-    learnAbility(ability: string) {
-        return true
+    extraAbility: AbilityEntityRoot;
+    tryLearnExtraAbility(abilityname: string) {
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        if (this.extraAbility) {
+            if (this.extraAbility.ConfigID == abilityname) {
+                return false;
+            }
+            this.removeAbilityRoot(this.extraAbility);
+            this.extraAbility = null;
+        }
+        let ability = npc.addAbilityPlus(abilityname);
+        if (ability.ETRoot) {
+            this.extraAbility = ability.ETRoot as AbilityEntityRoot;
+            return true
+        }
+        else {
+            LogHelper.error("ability has no etroot")
+            return false
+        }
     }
 
     clearAllAbility() {
@@ -57,6 +73,9 @@ export class AbilityManagerComponent extends ET.Component {
 
     addAbilityRoot(root: AbilityEntityRoot) {
         let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        if (root.DomainParent || root.DomainParent == battleunit) {
+            return;
+        }
         battleunit.AddDomainChild(root);
         this.allAbilityRoot.push(root.Id);
         if (battleunit.CombinationComp()) {
@@ -75,6 +94,7 @@ export class AbilityManagerComponent extends ET.Component {
         if (battleunit.CombinationComp()) {
             battleunit.CombinationComp().removeAbilityRoot(root);
         }
+        root.Dispose();
     }
 
     levelUpAllAbility() {

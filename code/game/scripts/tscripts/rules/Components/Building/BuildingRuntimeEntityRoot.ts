@@ -50,7 +50,7 @@ export class BuildingRuntimeEntityRoot extends PlayerCreateBattleUnitEntityRoot 
     StartFindTreasure() {
         let domain = this.GetDomain<BaseNpc_Plus>();
         this.AbilityManagerComp().clearAllAbility();
-        this.AbilityManagerComp().learnAbility("building_auto_findtreasure");
+        domain.addAbilityPlus("building_auto_findtreasure")
         building_auto_findtreasure.findIn(domain).StartFindTreasure();
         modifier_wait_portal.applyOnly(domain, domain, null, { duration: 60 });
     }

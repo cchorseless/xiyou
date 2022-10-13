@@ -17,7 +17,7 @@ import { EnemyManagerComponent } from "./Components/Enemy/EnemyManagerComponent"
 import { EnemyMoveComponent } from "./Components/Enemy/EnemyMoveComponent";
 import { EnemyPropsComponent } from "./Components/Enemy/EnemyPropsComponent";
 import { EnemyUnitComponent } from "./Components/Enemy/EnemyUnitComponent";
-import { FakerHeroComponent } from "./Components/FakerHero/FakerHeroComponent";
+import { FakerHeroDataComponent } from "./Components/FakerHero/FakerHeroDataComponent";
 import { FHeroCombination } from "./Components/FakerHero/FHeroCombination";
 import { FHeroCombinationManagerComponent } from "./Components/FakerHero/FHeroCombinationManagerComponent";
 import { ItemManagerComponent } from "./Components/Item/ItemManagerComponent";
@@ -73,7 +73,7 @@ import { CourierDataComponent } from "./Components/Courier/CourierDataComponent"
     BattleUnitComponent,
     AiAttackComponent,
 
-    FakerHeroComponent,
+    FakerHeroDataComponent,
     FHeroCombination,
     FHeroCombinationManagerComponent,
 

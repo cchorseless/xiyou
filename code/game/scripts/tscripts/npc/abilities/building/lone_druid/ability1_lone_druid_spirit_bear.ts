@@ -28,14 +28,14 @@ export class ability1_lone_druid_spirit_bear extends BaseAbility_Plus {
 
     CastFilterResultLocation(vLocation: Vector) {
         // if (modifier_building.exist(this.GetCasterPlus())) {
-            if (IsServer()) {
-                // SnapToGrid(BUILDING_SIZE, vLocation)
-                // if (!BuildSystem.ValidPosition(BUILDING_SIZE, vLocation, null)) {
-                //     this.errorStr = "dota_hud_error_cant_build_at_location"
-                //     returnUnitFilterResult.UF_FAIL_CUSTOM
-                // }
-            }
-            return UnitFilterResult.UF_SUCCESS
+        if (IsServer()) {
+            // SnapToGrid(BUILDING_SIZE, vLocation)
+            // if (!BuildSystem.ValidPosition(BUILDING_SIZE, vLocation, null)) {
+            //     this.errorStr = "dota_hud_error_cant_build_at_location"
+            //     returnUnitFilterResult.UF_FAIL_CUSTOM
+            // }
+        }
+        return UnitFilterResult.UF_SUCCESS
         // }
         this.errorStr = "dota_hud_error_only_building_can_use"
         return UnitFilterResult.UF_FAIL_CUSTOM
@@ -110,56 +110,55 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            let hParent = this.GetParentPlus()
-            let hAbility = this.GetAbilityPlus()
+            let hParent = this.GetParentPlus();
+            let hAbility = this.GetAbilityPlus();
             if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
                 // BuildSystem.RemoveBuilding(hParent)
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
             }
-            if (hParent.IsBuilding()) {
-                // let hReturn = lone_druid_bear_return_custom.findIn(hParent)
-                // if (GameFunc.IsValid(hReturn) && hReturn.GetLevel() != hAbility.GetLevel()) {
-                //     hReturn.SetLevel(hAbility.GetLevel())
-                // }
-                // let hEntangle = lone_druid_bear_entangle_custom.findIn(hParent)
-                // if (GameFunc.IsValid(hEntangle) && hEntangle.GetLevel() != hAbility.GetLevel()) {
-                //     hEntangle.SetLevel(hAbility.GetLevel())
-                // }
-                // let hDemolish = lone_druid_bear_demolish_custom.findIn(hParent)
-                // if (GameFunc.IsValid(hDemolish) && hDemolish.GetLevel() != hAbility.GetLevel()) {
-                //     hDemolish.SetLevel(hAbility.GetLevel())
-                // }
-                //  攻击力
-                //  let bear_base_damage = this.GetSpecialValueFor("bear_base_damage")
-                //  if ( bear_base_damage != this.bear_base_damage ) {
-                //  	hParent.SetBaseDamageMin(hParent.GetBaseDamageMin() - this.bear_base_damage + bear_base_damage)
-                //  	hParent.SetBaseDamageMax(hParent.GetBaseDamageMax() - this.bear_base_damage + bear_base_damage)
-                //  	this.bear_base_damage = bear_base_damage
-                //  }
-                //  a帐继承天赋技能
-                if (hCaster.HasScepter()) {
-                    if (this.sQulificationAbility != null && !hParent.HasAbility(this.sQulificationAbility)) {
-                        if (this.tInvalidQulificationAbility.indexOf(this.sQulificationAbility) > -1) {
-                            let hAbility = hParent.AddAbility(this.sQulificationAbility)
-                            if (GameFunc.IsValid(hAbility)) {
-                                hParent.SwapAbilities("hidden_qualification", this.sQulificationAbility, false, true)
-                            } else {
-                                //  TODO:这意味着可能技能名错了，是否有必要设置为空呢？
-                                this.sQulificationAbility = null
-                            }
+            // let hReturn = lone_druid_bear_return_custom.findIn(hParent)
+            // if (GameFunc.IsValid(hReturn) && hReturn.GetLevel() != hAbility.GetLevel()) {
+            //     hReturn.SetLevel(hAbility.GetLevel())
+            // }
+            // let hEntangle = lone_druid_bear_entangle_custom.findIn(hParent)
+            // if (GameFunc.IsValid(hEntangle) && hEntangle.GetLevel() != hAbility.GetLevel()) {
+            //     hEntangle.SetLevel(hAbility.GetLevel())
+            // }
+            // let hDemolish = lone_druid_bear_demolish_custom.findIn(hParent)
+            // if (GameFunc.IsValid(hDemolish) && hDemolish.GetLevel() != hAbility.GetLevel()) {
+            //     hDemolish.SetLevel(hAbility.GetLevel())
+            // }
+            //  攻击力
+            //  let bear_base_damage = this.GetSpecialValueFor("bear_base_damage")
+            //  if ( bear_base_damage != this.bear_base_damage ) {
+            //  	hParent.SetBaseDamageMin(hParent.GetBaseDamageMin() - this.bear_base_damage + bear_base_damage)
+            //  	hParent.SetBaseDamageMax(hParent.GetBaseDamageMax() - this.bear_base_damage + bear_base_damage)
+            //  	this.bear_base_damage = bear_base_damage
+            //  }
+            //  a帐继承天赋技能
+            if (hCaster.HasScepter()) {
+                if (this.sQulificationAbility != null && !hParent.HasAbility(this.sQulificationAbility)) {
+                    if (this.tInvalidQulificationAbility.indexOf(this.sQulificationAbility) > -1) {
+                        let hAbility = hParent.addAbilityPlus(this.sQulificationAbility)
+                        if (GameFunc.IsValid(hAbility)) {
+                            hParent.SwapAbilities("hidden_qualification", this.sQulificationAbility, false, true)
+                        } else {
+                            //  TODO:这意味着可能技能名错了，是否有必要设置为空呢？
+                            this.sQulificationAbility = null
                         }
                     }
-                } else {
-                    if (this.sQulificationAbility != null && hParent.HasAbility(this.sQulificationAbility)) {
-                        hParent.SwapAbilities("hidden_qualification", this.sQulificationAbility, false, true)
-                        hParent.RemoveAbility(this.sQulificationAbility)
-                    }
                 }
-                // 升星
-                // hParent.GetBuilding().SetQualificationLevel(hCaster.GetStar() + 2)
             }
+            else {
+                if (this.sQulificationAbility != null && hParent.HasAbility(this.sQulificationAbility)) {
+                    hParent.SwapAbilities("hidden_qualification", this.sQulificationAbility, false, true)
+                    hParent.RemoveAbility(this.sQulificationAbility)
+                }
+            }
+            // 升星
+            // hParent.GetBuilding().SetQualificationLevel(hCaster.GetStar() + 2)
             // hParent.FireSummonned(hCaster, true)
         }
     }
@@ -214,7 +213,7 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
                 this.sQulificationAbility = params.ability_name
                 if (hCaster.HasScepter()) {
                     if (this.tInvalidQulificationAbility.indexOf(this.sQulificationAbility) > -1) {
-                        let hAbility = hParent.AddAbility(this.sQulificationAbility)
+                        let hAbility = hParent.addAbilityPlus(this.sQulificationAbility)
                         if (GameFunc.IsValid(hAbility)) {
                             hParent.SwapAbilities("hidden_qualification", this.sQulificationAbility, false, true)
                         } else {
