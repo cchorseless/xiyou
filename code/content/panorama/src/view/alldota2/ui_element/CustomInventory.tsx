@@ -53,7 +53,14 @@ export class CustomInventory extends CustomInventory_UI {
                         this.onBtn_mouseout(i);
                     });
                     // b 拖动的panel
-                    $.RegisterEventHandler("DragEnd", item_rare!, (a, b) => {
+                    $.RegisterEventHandler("DragEnter", item_rare!, (panelID: string, dragged: Panel) => {
+
+                        // this.onBtn_dragend(i);
+                    });
+                    $.RegisterEventHandler("DragLeave", item_rare!, (panelID: string, dragged: Panel) => {
+                        // this.onBtn_dragend(i);
+                    });
+                    $.RegisterEventHandler("DragEnd", item_rare!, (panelID: string, dragged: Panel) => {
                         this.onBtn_dragend(i);
                     });
                 }
@@ -94,11 +101,21 @@ export class CustomInventory extends CustomInventory_UI {
         for (let i = 0; i < 9; i++) {
             let img = this.__root__.current!.FindChildTraverse("customitem_rare_" + i) as ImagePanel;
             if (img) {
-                let slot = Entities.GetItemInSlot(this.selectedEntityid, i);
-                img.visible = slot > -1;
-                CSSHelper.setImagePanelUrl(img, `common/rarity/CardRarity_SR.png`);
+                let itemindex = Entities.GetItemInSlot(this.selectedEntityid, i);
+                if (itemindex && itemindex > -1) {
+                    img.visible = true;
+                    CSSHelper.setImagePanelUrl(img, `common/rarity/CardRarity_SR.png`);
+                }
+                else {
+                    img.visible = false;
+                }
             }
         }
+    }
+    IsInThisRangle(x: number, y: number) {
+        let panel = $.CreatePanelWithProperties("DOTAInventory", this.__root__.current!, "inventory", {});
+
+        return false;
     }
 
     onBtn_leftClick = (item_slot: number) => {
@@ -137,6 +154,7 @@ export class CustomInventory extends CustomInventory_UI {
     onBtn_dragend = (item_slot: number) => {
         // todo
         let pos = GameUI.GetCursorPosition();
+        if (this.IsInThisRangle(pos[0], pos[1])) { return; }
         let entitys = GameUI.FindScreenEntities(pos);
         if (entitys.length > 0) {
             for (let info of entitys) {
@@ -151,10 +169,14 @@ export class CustomInventory extends CustomInventory_UI {
         }
         else {
             let worldpos = GameUI.GetScreenWorldPosition(pos)!;
-            NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_DROP_POSITION, {
-                pos: { x: worldpos[0], y: worldpos[1], z: worldpos[2] },
-                slot: item_slot
-            })
+            let itemindex = Entities.GetItemInSlot(this.selectedEntityid, item_slot);
+            if (itemindex > -1) {
+                Game.DropItemAtCursor(this.selectedEntityid, itemindex)
+            }
+            // NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_DROP_POSITION, {
+            //     pos: { x: worldpos[0], y: worldpos[1], z: worldpos[2] },
+            //     slot: item_slot
+            // })
         }
     };
 }

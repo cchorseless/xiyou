@@ -111,10 +111,10 @@ export class PlayerEntityRoot extends ET.EntityRoot {
         return this.GetComponentByName<EnemyManagerComponent>("EnemyManagerComponent");
     }
 
-
     TCharacter() {
         return this.GetComponentByName<TCharacter>("TCharacter");
     }
+
     CheckIsAlive() {
         return this.Hero.IsAlive();
     }

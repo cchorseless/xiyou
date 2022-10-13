@@ -13,7 +13,6 @@ export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
         (this as any).Playerid = ability.GetOwnerPlus().GetPlayerOwnerID();
         (this as any).ConfigID = ability.GetAbilityName();
         (this as any).EntityId = ability.GetEntityIndex();
-        ability.UpgradeAbility(true)
         ability.SetActivated(true);
         this.regSelfToM()
     }
