@@ -53,16 +53,16 @@ export class CustomInventory extends CustomInventory_UI {
                         this.onBtn_mouseout(i);
                     });
                     // b 拖动的panel
-                    $.RegisterEventHandler("DragEnter", item_rare!, (panelID: string, dragged: Panel) => {
-                        LogHelper.print("DragEnter",panelID,dragged)
+                    $.RegisterEventHandler("DragEnter", item_rare!, (panelID: Panel, dragged: Panel) => {
+                        LogHelper.print("DragEnter", panelID, dragged)
                         // this.onBtn_dragend(i);
                     });
-                    $.RegisterEventHandler("DragLeave", item_rare!, (panelID: string, dragged: Panel) => {
+                    $.RegisterEventHandler("DragLeave", item_rare!, (panelID: Panel, dragged: Panel) => {
                         // this.onBtn_dragend(i);
-                        LogHelper.print("DragLeave",panelID,dragged)
+                        LogHelper.print("DragLeave", panelID, dragged)
                     });
-                    $.RegisterEventHandler("DragEnd", item_rare!, (panelID: string, dragged: Panel) => {
-                        LogHelper.print("DragEnd",panelID,dragged)
+                    $.RegisterEventHandler("DragEnd", item_rare!, (panelID: Panel, dragged: Panel) => {
+                        LogHelper.print("DragEnd", panelID, dragged)
                         this.onBtn_dragend(i);
                     });
                 }
