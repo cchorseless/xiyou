@@ -25,14 +25,7 @@ export class BuildingRuntimeEntityRoot extends PlayerCreateBattleUnitEntityRoot 
     onDestroy(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
         if (GameFunc.IsValid(npc) && !npc.__safedestroyed__) {
-            npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
-            TimerHelper.addTimer(
-                3,
-                () => {
-                    npc.SafeDestroy();
-                },
-                this
-            );
+            npc.SafeDestroy();
         }
     }
     onKilled(events: EntityKilledEvent): void {

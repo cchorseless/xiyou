@@ -1,3 +1,5 @@
+import { PureComponent } from "react";
+
 export module ToolTipHelper {
 
 

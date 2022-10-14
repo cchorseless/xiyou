@@ -16,42 +16,49 @@ import { CombinationBottomPanel } from "./CombinationBottomPanel";
 import { CombinationInfoDialog } from "./CombinationInfoDialog";
 import { CombinationSingleBottomItem_UI } from "./CombinationSingleBottomItem_UI";
 export class CombinationSingleBottomItem extends CombinationSingleBottomItem_UI {
-	public infodialog: CombinationInfoDialog | null;
-	public isInRangle: boolean = true;
-	constructor(prop: any) {
-		super(prop);
-		this.img_icon_attrs.onmouseover = async (e) => {
-			if (this.infodialog) {
-				this.infodialog.close();
-				this.infodialog = null;
-			}
-			if (!this.combinationName) {
-				return
-			}
-			let pos = MainPanel.GetInstance()!.stagePos(this.__root__.current!);
-			this.isInRangle = true;
-			let islongover = await DotaUIHelper.isLongTimeMouseOver();
-			if (!this.isInRangle || !islongover) {
-				return;
-			}
-			this.infodialog = await MainPanel.GetInstance()!.addOnlyDialog(CombinationInfoDialog, {
-				itemname: this.combinationName,
-				x: pos.x + "px",
-				y: pos.y - 500 + "px",
-			});
-		};
-		this.img_icon_attrs.onmouseout = (e) => {
-			this.isInRangle = false;
-			if (this.infodialog) {
-				this.infodialog.close();
-				this.infodialog = null;
-			}
-		};
-	}
+	// public infodialog: CombinationInfoDialog | null;
+	// public isInRangle: boolean = true;
+	// constructor(prop: any) {
+	// 	super(prop);
+	// 	this.img_icon_attrs.onmouseover = async (e) => {
+	// 		if (this.infodialog) {
+	// 			this.infodialog.close();
+	// 			this.infodialog = null;
+	// 		}
+	// 		if (!this.combinationName) {
+	// 			return
+	// 		}
+	// 		let pos = MainPanel.GetInstance()!.stagePos(this.__root__.current!);
+	// 		this.isInRangle = true;
+	// 		let islongover = await DotaUIHelper.isLongTimeMouseOver();
+	// 		if (!this.isInRangle || !islongover) {
+	// 			return;
+	// 		}
+	// 		this.infodialog = await MainPanel.GetInstance()!.addOnlyDialog(CombinationInfoDialog, {
+	// 			itemname: this.combinationName,
+	// 			x: pos.x + "px",
+	// 			y: pos.y - 500 + "px",
+	// 		});
+	// 	};
+	// 	this.img_icon_attrs.onmouseout = (e) => {
+	// 		this.isInRangle = false;
+	// 		if (this.infodialog) {
+	// 			this.infodialog.close();
+	// 			this.infodialog = null;
+	// 		}
+	// 	};
+	// }
 
 	// 初始化数据
 	componentDidMount() {
 		super.componentDidMount();
+		MainPanel.GetInstance()!.AddCustomToolTip(this.img_icon.current!, CombinationInfoDialog, () => {
+			if (this.combinationName) {
+				return {
+					itemname: this.combinationName
+				}
+			}
+		});
 		CSSHelper.setFlowChildren(this.panel_box, "down");
 		let InstanceIdList: string[] = this.props.InstanceIdList;
 		InstanceIdList.forEach(entityid => {

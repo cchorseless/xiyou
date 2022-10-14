@@ -6,6 +6,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { BuildingComponent } from "../Building/BuildingComponent";
 import { BuildingPropsComponent } from "../Building/BuildingPropsComponent";
+import { GameFunc } from "../../../GameFunc";
 
 export class BattleUnitSummonEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     public onAwake(playerid: PlayerID, conf: string) {
@@ -15,20 +16,15 @@ export class BattleUnitSummonEntityRoot extends PlayerCreateBattleUnitEntityRoot
         this.addBattleComp();
         // this.SyncClientEntity(this);
     }
+
     IsSummon() {
         return true;
     }
+
     onDestroy(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
-        if (npc && !npc.__safedestroyed__) {
-            npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
-            TimerHelper.addTimer(
-                3,
-                () => {
-                    npc.SafeDestroy();
-                },
-                this
-            );
+        if (GameFunc.IsValid(npc) && !npc.__safedestroyed__) {
+            npc.SafeDestroy();
         }
     }
 

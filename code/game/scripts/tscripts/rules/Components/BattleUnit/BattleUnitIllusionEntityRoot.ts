@@ -1,3 +1,4 @@
+import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
@@ -15,21 +16,15 @@ export class BattleUnitIllusionEntityRoot extends PlayerCreateBattleUnitEntityRo
         this.addBattleComp();
         // this.SyncClientEntity(this);
     }
+
     IsIllusion(): boolean {
         return true;
     }
 
     onDestroy(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
-        if (npc && !npc.__safedestroyed__) {
-            npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
-            TimerHelper.addTimer(
-                3,
-                () => {
-                    npc.SafeDestroy();
-                },
-                this
-            );
+        if (GameFunc.IsValid(npc) && !npc.__safedestroyed__) {
+            npc.SafeDestroy();
         }
     }
 

@@ -73,11 +73,6 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
 
     public RemoveCloneRuntimeBuilding() {
         if (this.RuntimeBuilding) {
-            // this.RuntimeBuilding.BattleUnitManager().ClearRuntimeBattleUnit();
-            let npc = this.RuntimeBuilding.GetDomain<BaseNpc_Plus>();
-            if (GameFunc.IsValid(npc)) {
-                npc.AddNoDraw();
-            }
             this.RuntimeBuilding.Dispose();
         }
         this.RuntimeBuilding = null;

@@ -12,16 +12,18 @@ export class CustomBuffList extends CustomBuffList_UI {
         super.componentDidMount();
         let panelbuff = $.CreatePanel("DOTABuffList", this.__root__.current!, "buffs");
         if (panelbuff) {
-            // panelbuff.style.width = "100%";
+            panelbuff.style.flowChildren = "right-wrap";
+            panelbuff.style.width = "50%";
             // panelbuff.FindChildTraverse("HealthManaContainer")!.style.marginLeft = "0px";
             // panelbuff.FindChildTraverse("HealthManaContainer")!.style.marginRight = "0px";
         }
         let paneldebuff = $.CreatePanel("DOTABuffList", this.__root__.current!, "debuffs");
         if (paneldebuff) {
-            // paneldebuff.style.width = "100%";
+            paneldebuff.style.flowChildren = "right-wrap";
+            paneldebuff.style.width = "50%";
             // panelbuff.FindChildTraverse("HealthManaContainer")!.style.marginLeft = "0px";
             // panelbuff.FindChildTraverse("HealthManaContainer")!.style.marginRight = "0px";
         }
     }
-    onStartUI() {}
+    onStartUI() { }
 }
