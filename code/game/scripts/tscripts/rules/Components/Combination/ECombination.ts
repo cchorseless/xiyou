@@ -95,7 +95,7 @@ export class ECombination extends ET.Entity {
             }
             this.checkActive();
             if (this.isActive) {
-                // this.ApplyEffect();
+                // this.ApplyBuffEffect(true);
             }
         }
     }
@@ -155,14 +155,36 @@ export class ECombination extends ET.Entity {
                         if (buildings) {
                             if (isActive) {
                                 buildings.forEach(build => {
-                                    let entity = build.GetDomain<BaseNpc_Plus>();
-                                    type.applyOnly(entity, entity)
+                                    let entity: BaseNpc_Plus;
+                                    if (build.IsBuilding()) {
+                                        let RuntimeBuilding = build.As<BuildingEntityRoot>().RuntimeBuilding;
+                                        if (RuntimeBuilding) {
+                                            entity = RuntimeBuilding.GetDomain<BaseNpc_Plus>();
+                                        }
+                                    }
+                                    else {
+                                        entity = build.GetDomain<BaseNpc_Plus>();
+                                    }
+                                    if (entity) {
+                                        type.applyOnly(entity, entity)
+                                    }
                                 })
                             }
                             else {
                                 buildings.forEach(build => {
-                                    let entity = build.GetDomain<BaseNpc_Plus>();
-                                    type.remove(entity)
+                                    let entity: BaseNpc_Plus;
+                                    if (build.IsBuilding()) {
+                                        let RuntimeBuilding = build.As<BuildingEntityRoot>().RuntimeBuilding;
+                                        if (RuntimeBuilding) {
+                                            entity = RuntimeBuilding.GetDomain<BaseNpc_Plus>();
+                                        }
+                                    }
+                                    else {
+                                        entity = build.GetDomain<BaseNpc_Plus>();
+                                    }
+                                    if (entity) {
+                                        type.remove(entity)
+                                    }
                                 })
                             }
                         }
@@ -172,8 +194,4 @@ export class ECombination extends ET.Entity {
         }
     }
 
-
-
-    public onDestroy(): void {
-    }
 }

@@ -29,7 +29,7 @@ export class AiAttackComponent extends ET.Component {
                 }
                 // todo
                 if (this.castAbilityAndItem()) {
-                    return 0.1;
+                    return 1;
                 }
                 let enemy = this.findAroundEnemyToAttack();
                 if (enemy) {
@@ -84,9 +84,6 @@ export class AiAttackComponent extends ET.Component {
         }
         return false;
     }
-
-
-
     findAroundEnemyToAttack(): BaseNpc_Plus {
         let u = this.GetDomain<BaseNpc_Plus>();
         let building = u.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();

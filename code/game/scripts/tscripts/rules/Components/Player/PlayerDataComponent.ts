@@ -119,13 +119,7 @@ export class PlayerDataComponent extends ET.Component {
 
     addEvent() {
         let playerroot = this.Domain.ETRoot.AsPlayer();
-        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onstart,
-            playerroot.Playerid,
-            (round: ERoundBoard) => {
-                if (round.IsBelongPlayer(this.Domain.ETRoot.AsPlayer().Playerid)) {
-                    this.addMoneyRoundStart(tonumber(round.config.roundprize_gold), tonumber(round.config.roundprize_wood));
-                }
-            });
+
         EventHelper.addServerEvent(this, ChessControlConfig.Event.ChessControl_JoinBattle,
             playerroot.Playerid,
             (building: BuildingEntityRoot) => {
@@ -199,5 +193,12 @@ export class PlayerDataComponent extends ET.Component {
         this.perIntervalWood += tonumber(extraWood);
         let techLevelUpCostGold = KVHelper.KvServerConfig.tech_config[this.techLevel + ""].goldcost;
         this.techLevelUpCostGold += tonumber(techLevelUpCostGold);
+    }
+
+    OnRoundStartBegin(round: ERoundBoard) {
+        let playerroot = this.Domain.ETRoot.AsPlayer();
+        if (round.IsBelongPlayer(playerroot.Playerid)) {
+            this.addMoneyRoundStart(tonumber(round.config.roundprize_gold), tonumber(round.config.roundprize_wood));
+        }
     }
 }

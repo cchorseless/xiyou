@@ -34,16 +34,6 @@ export class CombinationManagerComponent extends ET.Component {
 
     private addEvent() {
         let player = this.Domain.ETRoot.AsPlayer();
-        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onstart,
-            player.Playerid,
-            (round: ERoundBoard) => {
-                this.activeECombination(false)
-            });
-        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onbattle,
-            player.Playerid,
-            (round: ERoundBoard) => {
-                this.activeECombination(true)
-            });
         EventHelper.addServerEvent(this, ChessControlConfig.Event.ChessControl_JoinBattle,
             player.Playerid,
             (building: BuildingEntityRoot) => {
@@ -67,7 +57,10 @@ export class CombinationManagerComponent extends ET.Component {
         }
     }
 
+    OnRoundStartBattle() {
+        this.activeECombination(true);
 
+    }
     private allCombination: { [k: string]: { [k: string]: ECombination } } = {};
     public addBuilding(entity: BuildingEntityRoot) {
         let comb = entity.CombinationComp();

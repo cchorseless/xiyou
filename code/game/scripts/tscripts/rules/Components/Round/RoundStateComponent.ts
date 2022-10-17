@@ -55,12 +55,11 @@ export class RoundStateComponent extends ET.Component {
 
     OnBoardRound_Battle() {
         let battleunit = this.BattleUnit();
+        let domain = this.GetDomain<BaseNpc_Plus>();
         if (battleunit.IsBuilding()) {
-            let building = battleunit as BuildingEntityRoot;
-            building.CreateCloneRuntimeBuilding();
+            modifier_jiaoxie_wudi.applyOnly(domain, domain);
         }
         else {
-            let domain = this.GetDomain<BaseNpc_Plus>();
             modifier_jiaoxie_wudi.remove(domain);
             battleunit.AiAttackComp().startFindEnemyAttack();
         }

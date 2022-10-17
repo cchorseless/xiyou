@@ -11,6 +11,7 @@ import { ET, registerET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { RoundConfig } from "../../System/Round/RoundConfig";
+import { FakerHeroEntityRoot } from "../FakerHero/FakerHeroEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERoundBoard } from "../Round/ERoundBoard";
@@ -164,34 +165,8 @@ export class BuildingManagerComponent extends ET.Component {
 
     public addEvent() {
         let player = this.Domain.ETRoot.AsPlayer();
-        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onstart,
-            player.Playerid,
-            (round: ERoundBoard) => {
-                this.getAllBattleBuilding()
-                    .forEach((b) => {
-                        b.RoundStateComp().OnBoardRound_Start();
-                    });
-            });
-        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onbattle,
-            player.Playerid,
-            (round: ERoundBoard) => {
-                this.getAllBattleBuilding()
-                    .forEach((b) => {
-                        b.RoundStateComp().OnBoardRound_Battle();
-                    });
-            });
-        EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onprize,
-            player.Playerid,
-            (iswin: boolean) => {
-                this.getAllBattleBuilding()
-                    .forEach((b) => {
-                        let runtimebuilding = b.RuntimeBuilding;
-                        runtimebuilding.BattleUnitManager().ClearRuntimeBattleUnit();
-                        if (runtimebuilding.ChessComp().isInBattleAlive()) {
-                            runtimebuilding.RoundStateComp().OnBoardRound_Prize_RuntimeBuilding(iswin);
-                        }
-                    });
-            });
+
+
         EventHelper.addServerEvent(this, RoundConfig.Event.roundboard_onwaitingend,
             player.Playerid,
             (round: ERoundBoard) => {
@@ -259,9 +234,29 @@ export class BuildingManagerComponent extends ET.Component {
         })
         return r
     }
+    OnRoundStartBegin(round: ERoundBoard) {
+        this.getAllBattleBuilding()
+            .forEach((b) => {
+                b.RoundStateComp().OnBoardRound_Start();
+            });
+    }
 
+    OnRoundStartBattle() {
+        this.getAllBattleBuilding()
+            .forEach((b) => {
+                b.CreateCloneRuntimeBuilding();
+            });
 
+    }
 
-
-
+    OnRoundStartPrize(round: ERoundBoard, iswin: boolean) {
+        this.getAllBattleBuilding()
+            .forEach((b) => {
+                let runtimebuilding = b.RuntimeBuilding;
+                runtimebuilding.BattleUnitManager().ClearRuntimeBattleUnit();
+                if (runtimebuilding.ChessComp().isInBattleAlive()) {
+                    runtimebuilding.RoundStateComp().OnBoardRound_Prize_RuntimeBuilding(iswin);
+                }
+            });
+    }
 }

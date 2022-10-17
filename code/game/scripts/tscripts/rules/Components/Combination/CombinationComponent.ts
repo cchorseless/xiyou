@@ -86,6 +86,9 @@ export class CombinationComponent extends ET.Component {
             }
         }
     }
+    // 战吼
+    OnRoundStartBattle() {
 
+    }
 
 }

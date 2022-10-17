@@ -6,11 +6,9 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ActiveRootItem } from "../../../npc/items/ActiveRootItem";
-import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { BuildingComponent } from "./BuildingComponent";
-import { BuildingPropsComponent } from "./BuildingPropsComponent";
 import { BuildingRuntimeEntityRoot } from "./BuildingRuntimeEntityRoot";
 
 export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
@@ -27,7 +25,6 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     public RuntimeBuilding: BuildingRuntimeEntityRoot;
     public CreateCloneRuntimeBuilding() {
         if (!IsServer()) { return };
-        this.RemoveCloneRuntimeBuilding();
         let hCaster = this.GetDomain<BaseNpc_Plus>();
         let vLocation = hCaster.GetAbsOrigin();
         let iTeamNumber = hCaster.GetTeamNumber()
@@ -36,6 +33,7 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
         let cloneRuntime = CreateUnitByName(this.ConfigID, vLocation, true, hHero, hHero, iTeamNumber) as BaseNpc_Plus;
         if (cloneRuntime) {
+            cloneRuntime.RemoveGesture(GameActivity_t.ACT_DOTA_SPAWN);
             BuildingRuntimeEntityRoot.Active(cloneRuntime, this.Playerid, this.ConfigID);
             let runtimeroot = cloneRuntime.ETRoot.As<BuildingRuntimeEntityRoot>();
             this.AddDomainChild(runtimeroot);
