@@ -1,7 +1,7 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { KvAllInterface } from "../../config/KvAllInterface";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { KVHelper } from "../../helper/KVHelper";
 import { PathHelper } from "../../helper/PathHelper";
 import { CombinationCardIconItem_UI } from "./CombinationCardIconItem_UI";
 
@@ -29,7 +29,7 @@ export class CombinationCardIconItem extends CombinationCardIconItem_UI {
 		if (!p.heroid) {
 			return;
 		}
-		let KV_DATA = (GameUI.CustomUIConfig() as KvAllInterface)
+		let KV_DATA = KVHelper.KVData();
 		let config = KV_DATA.building_unit_tower.building_unit_tower[p.heroid];
 		if (!config) { return }
 		CSSHelper.setBgImageUrl(this.img_icon, `card/card_icon/${config.SmallIconRes}.png`);

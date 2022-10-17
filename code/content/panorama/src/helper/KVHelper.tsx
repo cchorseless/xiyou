@@ -1,4 +1,5 @@
 
+import { KvAllInterface } from "../config/KvAllInterface";
 import { FuncHelper } from "./FuncHelper";
 
 export module KVHelper {
@@ -69,4 +70,7 @@ export module KVHelper {
         return r_positionid
     }
 
+    export function KVData() {
+        return (GameUI.CustomUIConfig() as any)["KVDATA"] as KvAllInterface
+    }
 }

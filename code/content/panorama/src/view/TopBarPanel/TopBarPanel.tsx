@@ -1,12 +1,12 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { KvAllInterface } from "../../config/KvAllInterface";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
 import { RoundConfig } from "../../game/system/Round/RoundConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { EventHelper } from "../../helper/EventHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
+import { KVHelper } from "../../helper/KVHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { TopBarPanel_UI } from "./TopBarPanel_UI";
@@ -18,7 +18,7 @@ export class TopBarPanel extends TopBarPanel_UI {
         // for (let i = 0; i < 5; i++) {
         // 	this.addNodeChildAt(this.NODENAME.panel_0, TeamNeedInfoItem, { marginLeft: '20px', uiScale: '40%', index: i })
         // }
-        let KV_DATA = (GameUI.CustomUIConfig() as KvAllInterface)
+        let KV_DATA = KVHelper.KVData();
         CSSHelper.setLocalText(this.lbl_foodDes, KV_DATA.lang_config.lang_config.food.Des);
         CSSHelper.setLocalText(this.lbl_goldDes, KV_DATA.lang_config.lang_config.gold.Des);
         CSSHelper.setLocalText(this.lbl_populationDes, KV_DATA.lang_config.lang_config.population.Des);
@@ -61,7 +61,7 @@ export class TopBarPanel extends TopBarPanel_UI {
     }
 
     setdifficulty() {
-        let KV_DATA = (GameUI.CustomUIConfig() as KvAllInterface)
+        let KV_DATA = KVHelper.KVData();
         CSSHelper.setLocalText(this.lbl_roundDes, KV_DATA.lang_config.lang_config.turn.Des);
         this.lbl_roundDes.current!.text += `[${PlayerScene.Local.PlayerDataComp.difficulty}]`;
     }

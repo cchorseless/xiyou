@@ -1,5 +1,5 @@
 import { building_round_board } from "../../../config/building/building_round_board";
-import { KvAllInterface } from "../../../config/KvAllInterface";
+import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET, registerET } from "../../../libs/Entity";
@@ -18,7 +18,7 @@ export class ERoundBoard extends ERound {
     config: building_round_board.OBJ_2_1;
 
     async onSerializeToEntity() {
-        let KV_DATA = (GameUI.CustomUIConfig() as KvAllInterface)
+        let KV_DATA = KVHelper.KVData();
         this.config = KV_DATA.building_round_board.building_round_board["" + this.configID];
         if (PlayerScene.Local.RoundManagerComp == null) {
             await TimerHelper.DelayTime(0.1);
@@ -42,7 +42,7 @@ export class ERoundBoard extends ERound {
     getCurStateDes() {
         LogHelper.print(this.roundState);
         let str = "";
-        let KV_DATA = (GameUI.CustomUIConfig() as KvAllInterface)
+        let KV_DATA = KVHelper.KVData();
         switch (this.roundState) {
             case RoundConfig.ERoundBoardState.start:
                 str = $.Localize("#" + KV_DATA.lang_config.lang_config.round_start.Des);

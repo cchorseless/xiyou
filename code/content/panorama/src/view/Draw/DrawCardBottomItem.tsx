@@ -1,7 +1,7 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { KvAllInterface } from "../../config/KvAllInterface";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { KVHelper } from "../../helper/KVHelper";
 import { PathHelper } from "../../helper/PathHelper";
 import { CombinationSmallItem } from "../Combination/CombinationSmallItem";
 import { SkillItem } from "../Skill/SkillItem";
@@ -25,7 +25,7 @@ export class DrawCardBottomItem extends DrawCardBottomItem_UI {
         this.onRefreshUI(this.props as IProps);
     }
     onRefreshUI(k: IProps) {
-        let KV_DATA = (GameUI.CustomUIConfig() as KvAllInterface)
+        let KV_DATA = KVHelper.KVData();
         let cardinfo = KV_DATA.building_unit_tower.building_unit_tower[k.itemname];
         let iteminfo = KV_DATA.building_item_card.building_item_card[cardinfo!.CardName];
         this.lbl_gold.current!.text = "X" + iteminfo?.ItemCost;

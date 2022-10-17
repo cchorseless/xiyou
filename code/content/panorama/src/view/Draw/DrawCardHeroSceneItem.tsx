@@ -1,7 +1,7 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { KvAllInterface } from "../../config/KvAllInterface";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { KVHelper } from "../../helper/KVHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { PrecacheHelper } from "../../helper/PrecacheHelper";
 import { GameEnum } from "../../libs/GameEnum";
@@ -57,7 +57,7 @@ export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI {
         if (!this.props.itemname) {
             return;
         }
-        let KV_DATA = (GameUI.CustomUIConfig() as KvAllInterface)
+        let KV_DATA = KVHelper.KVData();
         let config = KV_DATA.building_unit_tower.building_unit_tower[this.props.itemname];
         if (config.HeroSelectSoundEffect) {
             Game.EmitSound(config.HeroSelectSoundEffect);

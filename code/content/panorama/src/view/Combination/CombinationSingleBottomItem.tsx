@@ -1,11 +1,11 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { KvAllInterface } from "../../config/KvAllInterface";
 import { ECombination } from "../../game/components/Combination/ECombination";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { DotaUIHelper } from "../../helper/DotaUIHelper";
 import { EventHelper } from "../../helper/EventHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
+import { KVHelper } from "../../helper/KVHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { ET } from "../../libs/Entity";
@@ -104,7 +104,7 @@ export class CombinationSingleBottomItem extends CombinationSingleBottomItem_UI 
 
 	refreshIcon() {
 		if (this.combinationName == null) { return; };
-		let KV_DATA = (GameUI.CustomUIConfig() as KvAllInterface)
+		let KV_DATA = KVHelper.KVData();
 		let data = KV_DATA.building_combination_ability.building_combination_ability
 		for (let k in data) {
 			if (data[k].relation == this.combinationName) {
