@@ -1,6 +1,6 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { DOTAAbilityImageAttributes } from "react-panorama-eom";
+import { DOTAAbilityImageAttributes } from "@demon673/react-panorama";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";

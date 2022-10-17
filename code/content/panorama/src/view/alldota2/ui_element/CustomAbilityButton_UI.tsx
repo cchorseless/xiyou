@@ -1,6 +1,6 @@
 import React, { createRef, PureComponent } from "react";
 import { BasePureComponent } from "../../../libs/BasePureComponent";
-import { PanelAttributes } from "react-panorama-eom";
+import { PanelAttributes } from "@demon673/react-panorama";
 
 export class CustomAbilityButton_UI extends BasePureComponent {
     __root__: React.RefObject<Panel>;
@@ -18,8 +18,8 @@ export class CustomAbilityButton_UI extends BasePureComponent {
     __root___isValid: boolean = true;
     __root___attrs: PanelAttributes = {};
     __root___childs: Array<JSX.Element> = [];
-    onbtn_mouseover = () => {};
-    onbtn_mouseout = () => {};
+    onbtn_mouseover = () => { };
+    onbtn_mouseout = () => { };
     render() {
         return (
             this.__root___isValid && (
@@ -34,7 +34,7 @@ export class CustomAbilityButton_UI extends BasePureComponent {
                     {...this.props}
                     {...this.__root___attrs}
                 >
-                    <DOTAAbilityImage id="AbilityImage" ref={this.AbilityImage}  />
+                    <DOTAAbilityImage id="AbilityImage" ref={this.AbilityImage} />
                     <DOTAItemImage id="ItemImage" scaling="stretch-to-fit-x-preserve-aspect" />
                     <Panel hittest={false} id="AbilityBevel" />
                     <Panel hittest={false} id="ShineContainer">

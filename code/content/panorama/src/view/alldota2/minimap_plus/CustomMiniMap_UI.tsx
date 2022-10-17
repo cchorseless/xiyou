@@ -1,6 +1,6 @@
 import React, { createRef, PureComponent } from "react";
 import { BasePureComponent } from "../../../libs/BasePureComponent";
-import { PanelAttributes } from "react-panorama-eom";
+import { PanelAttributes } from "@demon673/react-panorama";
 
 export class CustomMiniMap_UI extends BasePureComponent {
     __root__: React.RefObject<Panel>;

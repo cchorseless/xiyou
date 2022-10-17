@@ -1,5 +1,5 @@
 import React, { createRef } from "react";
-import { PanelAttributes, render } from "react-panorama-eom";
+import { PanelAttributes, render } from "@demon673/react-panorama";
 import { AllEntity } from "../game/Index";
 import { PlayerScene } from "../game/components/Player/PlayerScene";
 import { DebugHelper } from "../helper/DebugHelper";

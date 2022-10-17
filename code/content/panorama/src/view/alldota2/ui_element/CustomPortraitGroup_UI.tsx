@@ -1,6 +1,6 @@
 import React, { createRef, PureComponent } from "react";
 import { BasePureComponent } from "../../../libs/BasePureComponent";
-import { DOTAParticleScenePanelAttributes, PanelAttributes } from "react-panorama-eom";
+import { DOTAParticleScenePanelAttributes, PanelAttributes } from "@demon673/react-panorama";
 import { CustomPortrait } from "./CustomPortrait";
 
 export class CustomPortraitGroup_UI extends BasePureComponent {
@@ -28,7 +28,7 @@ export class CustomPortraitGroup_UI extends BasePureComponent {
                     <Panel id="PortraitBackerColor" hittest={false} />
                     <Panel id="PortraitContainer" hittest={false}>
                         <CustomPortrait key="compId_2" hudType={"portraitHUD"} />
-                        <CustomPortrait key="compId_3"  hudType={"portraitHUDOverlay"} />
+                        <CustomPortrait key="compId_3" hudType={"portraitHUDOverlay"} />
                         <Image id="RightSideHeroBlur" src="panel://portraitHUD" hittest={false} />
                         <Panel id="SilenceIcon" hittest={false} always-cache-composition-layer={true} />
                         <Panel id="MutedIcon" hittest={false} always-cache-composition-layer={true} />

@@ -1,6 +1,6 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
-import { render } from "react-panorama-eom";
+import { render } from "@demon673/react-panorama";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { GameEnum } from "../../../libs/GameEnum";

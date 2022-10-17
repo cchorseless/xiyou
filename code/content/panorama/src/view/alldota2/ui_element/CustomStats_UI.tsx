@@ -1,6 +1,6 @@
 import React, { createRef, PureComponent } from "react";
 import { BasePureComponent } from "../../../libs/BasePureComponent";
-import { DOTAParticleScenePanelAttributes, PanelAttributes } from "react-panorama-eom";
+import { DOTAParticleScenePanelAttributes, PanelAttributes } from "@demon673/react-panorama";
 
 export class CustomStats_UI extends BasePureComponent {
     __root__: React.RefObject<Panel>;
@@ -13,7 +13,7 @@ export class CustomStats_UI extends BasePureComponent {
         this.__root__ = createRef<Panel>();
         this.stats_container = createRef<Panel>();
     }
-    CSS_0_0: Partial<VCSSStyleDeclaration> = {  };
+    CSS_0_0: Partial<VCSSStyleDeclaration> = {};
 
     __root___isValid: boolean = true;
     __root___attrs: PanelAttributes = {};

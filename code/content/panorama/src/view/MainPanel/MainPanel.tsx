@@ -105,7 +105,7 @@ export class MainPanel extends MainPanel_UI {
     }
 
     private CustomToolTip: BasePureComponent | null;
-    AddCustomToolTip<T extends typeof BasePureComponent>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = true) {
+    public AddCustomToolTip<T extends typeof BasePureComponent>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = true) {
         if (bindpanel == null || !bindpanel.IsValid()) { return };
         let isinrange = false;
         let brightness = Number(bindpanel.style.brightness);
@@ -176,7 +176,7 @@ export class MainPanel extends MainPanel_UI {
             }
         })
     }
-    AddTextToolTip(bindpanel: Panel, attrFunc: (() => string | void)) {
+    public AddTextToolTip(bindpanel: Panel, attrFunc: (() => string | void)) {
         if (!bindpanel) { return };
         let tipType = ToolTipHelper.ToolTipType.DOTAShowTextTooltip;
         let brightness = Number(bindpanel.style.brightness);
@@ -192,7 +192,7 @@ export class MainPanel extends MainPanel_UI {
             $.DispatchEvent(tipType.replace('Show', 'Hide'), bindpanel)
         })
     }
-    AddTitleTextToolTip(bindpanel: Panel, attrFunc: (() => { title: string, tip: string } | void)) {
+    public AddTitleTextToolTip(bindpanel: Panel, attrFunc: (() => { title: string, tip: string } | void)) {
         if (!bindpanel) { return };
         let tipType = ToolTipHelper.ToolTipType.DOTAShowTitleTextTooltip;
         let brightness = Number(bindpanel.style.brightness);
