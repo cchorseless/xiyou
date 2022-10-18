@@ -1,7 +1,8 @@
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { HeroTalentComponent } from "./HeroTalentComponent";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class THeroTalentItem extends ET.Entity {
     public readonly IsSerializeEntity: boolean = true;
 

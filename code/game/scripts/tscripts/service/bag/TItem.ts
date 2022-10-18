@@ -1,7 +1,8 @@
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { BagComponent } from "./BagComponent";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class TItem extends ET.Entity {
     public readonly IsSerializeEntity: boolean = true;
 

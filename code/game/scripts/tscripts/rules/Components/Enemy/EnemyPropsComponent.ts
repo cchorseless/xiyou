@@ -1,11 +1,12 @@
+import { reloadable } from "../../../GameCache";
 import { KVHelper } from "../../../helper/KVHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_wave } from "../../../npc/modifier/building/modifier_wave";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { DifficultyConfig } from "../../System/Difficulty/DifficultyConfig";
 import { DifficultyState } from "../../System/Difficulty/DifficultyState";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
-@registerET()
+@reloadable
 export class EnemyPropsComponent extends ET.Component {
 
     // fHPMult: number = 0;

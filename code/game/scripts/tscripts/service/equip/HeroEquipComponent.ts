@@ -1,5 +1,6 @@
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { THeroUnit } from "../hero/THeroUnit";
+import { reloadable } from "../../GameCache";
 
 export enum EEquipSolt {
 
@@ -30,7 +31,7 @@ export enum EEquipSolt {
     SlotMax = 12
 }
 
-@registerET()
+@reloadable
 export class HeroEquipComponent extends ET.Component {
     public readonly IsSerializeEntity: boolean = true;
 

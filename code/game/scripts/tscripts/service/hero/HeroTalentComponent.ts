@@ -1,7 +1,9 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { THeroUnit } from "../hero/THeroUnit";
-@registerET()
+import { reloadable } from "../../GameCache";
+
+@reloadable
 export class HeroTalentComponent extends ET.Component {
     public readonly IsSerializeEntity: boolean = true;
 

@@ -1,6 +1,7 @@
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { reloadable } from "../../GameCache";
+import { ET } from "../../rules/Entity/Entity";
 
-@registerET()
+@reloadable
 export class CharacterInGameDataComponent extends ET.Component {
     NumericType: number;
     NumericValue: number;

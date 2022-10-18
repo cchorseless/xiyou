@@ -1,9 +1,10 @@
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { GameEnum } from "../../../GameEnum";
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc } from "../../../npc/entityPlus/Base_Plus";
+import { reloadable } from "../../../GameCache";
 
 
 // ---方向
@@ -94,7 +95,7 @@ interface KeyboardData {
     }
 }
 /**移动控制组件 */
-@registerET()
+@reloadable
 export class ControlComponent extends ET.Component {
     /**玩家按键信息 */
     tKeyboardData: KeyboardData = {};
@@ -151,11 +152,11 @@ export class ControlComponent extends ET.Component {
         // 摄像机跟随
         PlayerResource.SetCameraTarget(domain.GetPlayerOwnerID(), domain);
         // 键盘输入
-        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_KEY_DOWN, this.onKey_Down, );
-        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_KEY_UP, this.onKey_Up, );
-        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_Camera_Yaw_Change, this.onCamera_Yaw_Change, );
-        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_Mouse_Event, this.onMouse_Event, );
-        EventHelper.addProtocolEvent(this,GameEnum.Event.CustomProtocol.req_Mouse_Position, this.onMouse_Position, );
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_KEY_DOWN, this.onKey_Down,);
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_KEY_UP, this.onKey_Up,);
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_Camera_Yaw_Change, this.onCamera_Yaw_Change,);
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_Mouse_Event, this.onMouse_Event,);
+        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_Mouse_Position, this.onMouse_Position,);
         this.startServerUpdate();
     }
 

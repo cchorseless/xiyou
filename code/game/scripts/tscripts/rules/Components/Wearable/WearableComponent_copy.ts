@@ -4,13 +4,13 @@
 // import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 // import { TimerHelper } from "../../../helper/TimerHelper";
 // import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-// import { ET, registerET } from "../../Entity/Entity";
+// import { ET } from "../../Entity/Entity";
 // import { WearableConfig } from "../../System/Wearable/WearableConfig";
 // import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 // import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
 // import { EWearableItem } from "./EWearableItem";
 
-// @registerET()
+// @reloadable
 // export class WearableComponent extends ET.Component {
 //     readonly sHeroName: string;
 //     readonly replaceParticles: { [k: string]: string[] } = {};

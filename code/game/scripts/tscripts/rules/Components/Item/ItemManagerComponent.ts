@@ -1,12 +1,13 @@
+import { reloadable } from "../../../GameCache";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { ItemEntityRoot } from "./ItemEntityRoot";
 
-@registerET()
+@reloadable
 export class ItemManagerComponent extends ET.Component {
     public allItemRoot: string[] = [];
     onAwake(...args: any[]): void {

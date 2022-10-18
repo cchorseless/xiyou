@@ -1,13 +1,14 @@
+import { reloadable } from "../../../GameCache";
 import { GameEnum } from "../../../GameEnum";
 import { GameSetting } from "../../../GameSetting";
 import { EventHelper } from "../../../helper/EventHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { unit_base_baoxiang } from "../../../npc/units/common/unit_base_baoxiang";
 import { unit_portal } from "../../../npc/units/common/unit_portal";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { MapState } from "./MapState";
 
-@registerET()
+@reloadable
 export class MapSystemComponent extends ET.Component {
     public onAwake(...args: any[]): void {
         MapState.init();

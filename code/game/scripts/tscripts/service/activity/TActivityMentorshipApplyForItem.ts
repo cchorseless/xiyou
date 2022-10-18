@@ -1,7 +1,8 @@
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { TActivityMemberShipData } from "./TActivityMemberShipData";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class TActivityMentorshipApplyForItem extends ET.Entity {
     public readonly IsSerializeEntity: boolean = true;
 

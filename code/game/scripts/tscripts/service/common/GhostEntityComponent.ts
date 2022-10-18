@@ -1,7 +1,8 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class GhostEntityComponent extends ET.Component {
     public ServerId: number;
 

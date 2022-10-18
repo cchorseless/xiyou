@@ -1,11 +1,12 @@
+import { GetRegClass, reloadable } from "../../../GameCache";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { AbilityEntityRoot } from "../Ability/AbilityEntityRoot";
 import { ItemEntityRoot } from "../Item/ItemEntityRoot";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
-@registerET()
+@reloadable
 export class CombinationComponent extends ET.Component {
     onAwake(): void {
         let domain = this.GetDomain<BaseNpc_Plus>();
@@ -19,7 +20,7 @@ export class CombinationComponent extends ET.Component {
             return;
         }
         if (config.CombinationLabel && config.CombinationLabel.length > 0) {
-            let type = PrecacheHelper.GetRegClass<typeof ECombinationLabelItem>("ECombinationLabelItem");
+            let type = GetRegClass<typeof ECombinationLabelItem>("ECombinationLabelItem");
             config.CombinationLabel.split("|").forEach((item) => {
                 if (item && item.length > 0) {
                     let entity = this.AddChild(type, "Ability", abilityroot.Id, item);
@@ -61,7 +62,7 @@ export class CombinationComponent extends ET.Component {
             return;
         }
         if (config.CombinationLabel && config.CombinationLabel.length > 0) {
-            let type = PrecacheHelper.GetRegClass<typeof ECombinationLabelItem>("ECombinationLabelItem");
+            let type = GetRegClass<typeof ECombinationLabelItem>("ECombinationLabelItem");
             config.CombinationLabel.split("|").forEach((item) => {
                 if (item && item.length > 0) {
                     let entity = this.AddChild(type, "Item", itemroot.Id, item);

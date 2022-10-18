@@ -1,12 +1,13 @@
+import { reloadable } from "../../../GameCache";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_illusion } from "../../../npc/modifier/modifier_illusion";
 import { modifier_summon } from "../../../npc/modifier/modifier_summon";
-import { registerET, ET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { BuildingRuntimeEntityRoot } from "../Building/BuildingRuntimeEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { BattleUnitSummonEntityRoot } from "./BattleUnitSummonEntityRoot";
 
-@registerET()
+@reloadable
 export class BattleUnitManagerComponent extends ET.Component {
     allSummon: string[] = [];
     allIllusion: string[] = [];

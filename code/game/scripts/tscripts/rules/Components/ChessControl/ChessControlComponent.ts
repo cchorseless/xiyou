@@ -1,12 +1,13 @@
+import { reloadable } from "../../../GameCache";
 import { GameSetting } from "../../../GameSetting";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { RoundConfig } from "../../System/Round/RoundConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 
-@registerET()
+@reloadable
 export class ChessControlComponent extends ET.Component {
 
     public moveChess(target: BuildingEntityRoot, v: Vector): [boolean, string] {

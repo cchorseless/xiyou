@@ -1,13 +1,14 @@
+import { reloadable } from "../../../GameCache";
 import { GameEnum } from "../../../GameEnum";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, registerET, serializeETProps } from "../../Entity/Entity";
+import { ET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 /**战斗单位组件 */
-@registerET()
+@reloadable
 export class BattleUnitComponent extends ET.Component {
     public iScale: number = 1;
     @serializeETProps()

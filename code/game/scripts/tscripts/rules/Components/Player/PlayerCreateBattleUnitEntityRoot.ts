@@ -1,3 +1,4 @@
+import { GetRegClass } from "../../../GameCache";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { registerProp } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
@@ -22,7 +23,7 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
     }
 
     onKilled(events: EntityKilledEvent): void { }
-    
+
     IsFriendly() {
         let domain = this.GetDomain<BaseNpc_Plus>();
         return domain.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_GOODGUYS;
@@ -40,13 +41,13 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
         return false;
     }
     addBattleComp() {
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessComponent>("ChessComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof AiAttackComponent>("AiAttackComponent"));
-        // this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationComponent>("CombinationComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof WearableComponent>("WearableComponent"), this.GetDotaHeroName());
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof AbilityManagerComponent>("AbilityManagerComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof ItemManagerComponent>("ItemManagerComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundStateComponent>("RoundStateComponent"));
+        this.AddComponent(GetRegClass<typeof ChessComponent>("ChessComponent"));
+        this.AddComponent(GetRegClass<typeof AiAttackComponent>("AiAttackComponent"));
+        // this.AddComponent(GetRegClass<typeof CombinationComponent>("CombinationComponent"));
+        this.AddComponent(GetRegClass<typeof WearableComponent>("WearableComponent"), this.GetDotaHeroName());
+        this.AddComponent(GetRegClass<typeof AbilityManagerComponent>("AbilityManagerComponent"));
+        this.AddComponent(GetRegClass<typeof ItemManagerComponent>("ItemManagerComponent"));
+        this.AddComponent(GetRegClass<typeof RoundStateComponent>("RoundStateComponent"));
 
     }
 

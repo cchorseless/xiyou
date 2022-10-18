@@ -1,5 +1,6 @@
-import { registerET } from "../../rules/Entity/Entity";
+
 import { TItem } from "../bag/TItem";
+import { reloadable } from "../../GameCache";
 
 export enum EEquipPropSlot {
     MinSlot = 0,
@@ -7,7 +8,7 @@ export enum EEquipPropSlot {
     MaxSlot = 5,
 }
 
-@registerET()
+@reloadable
 export class TEquipItem extends TItem {
     public Props: string[];
 }

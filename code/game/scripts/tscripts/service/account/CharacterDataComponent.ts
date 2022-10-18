@@ -1,4 +1,5 @@
-import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
+import { reloadable } from "../../GameCache";
+import { ET, serializeETProps } from "../../rules/Entity/Entity";
 import { NumericComponent } from "../common/NumericComponent";
 import { CharacterInGameDataComponent } from "./CharacterInGameDataComponent";
 import { TCharacter } from "./TCharacter";
@@ -35,11 +36,11 @@ export class EMoneyType {
     public static MoneyMax = 1000;
 
 }
-@registerET()
+@reloadable
 export class CharacterDataComponent extends ET.Component {
     onSerializeToEntity() {
         let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
-        if (character!= null) {
+        if (character != null) {
             character.AddOneComponent(this);
             this.onReload();
         }

@@ -1,11 +1,12 @@
+import { reloadable } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { modifier_auto_findtreasure } from "../../../npc/abilities/common/building_auto_findtreasure";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health_bar";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 
-@registerET()
+@reloadable
 export class RoundPrizeUnitKillPrizeComponent extends ET.Component {
     onAwake(...args: any[]): void {
         let domain = this.GetDomain<BaseNpc_Plus>();

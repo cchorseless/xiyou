@@ -1,5 +1,6 @@
-import { registerET } from "../../rules/Entity/Entity";
-import { TActivity } from "./TActivity";
 
-@registerET()
+import { TActivity } from "./TActivity";
+import { reloadable } from "../../GameCache";
+
+@reloadable
 export class TActivityMemberShip extends TActivity { }

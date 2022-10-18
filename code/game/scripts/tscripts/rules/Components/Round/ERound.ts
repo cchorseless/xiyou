@@ -1,3 +1,4 @@
+import { reloadable } from "../../../GameCache";
 import { EntityHelper } from "../../../helper/EntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
@@ -49,7 +50,7 @@ export class ERound extends ET.Entity {
     OnEnd() {
         this.bRunning = false;
     }
-    private onEntitySpawn(enemy: BaseNpc_Plus) {}
+    private onEntitySpawn(enemy: BaseNpc_Plus) { }
     onEntityHurt(entindex: EntityIndex, damage: number) {
         this.tTowerDamage[entindex] = this.tTowerDamage[entindex] || 0;
         this.tTowerDamage[entindex] += damage;

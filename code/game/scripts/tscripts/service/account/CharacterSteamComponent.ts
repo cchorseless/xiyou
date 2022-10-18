@@ -1,7 +1,8 @@
+import { reloadable } from "../../GameCache";
 import { NetTablesHelper } from "../../helper/NetTablesHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 
-@registerET()
+@reloadable
 export class CharacterSteamComponent extends ET.Component {
     onSerializeToEntity() {
         let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");

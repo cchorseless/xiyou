@@ -1,11 +1,12 @@
+import { reloadable } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { WearableConfig } from "../../System/Wearable/WearableConfig";
 import { WearableComponent } from "./WearableComponent";
 
-@registerET()
+@reloadable
 export class EWearableItem extends ET.Entity {
     bundleId: string;
     readonly isDressUp: boolean = false;

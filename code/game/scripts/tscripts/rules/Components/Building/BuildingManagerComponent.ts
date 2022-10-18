@@ -1,3 +1,4 @@
+import { reloadable } from "../../../GameCache";
 import { GameEnum } from "../../../GameEnum";
 import { EntityHelper } from "../../../helper/EntityHelper";
 import { EventHelper } from "../../../helper/EventHelper";
@@ -7,7 +8,7 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health_bar";
-import { ET, registerET, serializeETProps } from "../../Entity/Entity";
+import { ET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { RoundConfig } from "../../System/Round/RoundConfig";
@@ -18,7 +19,7 @@ import { ERoundBoard } from "../Round/ERoundBoard";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
 
 /**塔防组件 */
-@registerET()
+@reloadable
 export class BuildingManagerComponent extends ET.Component {
     public IsSerializeEntity: boolean = true;
 

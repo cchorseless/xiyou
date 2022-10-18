@@ -1,8 +1,9 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { TCharacter } from "../account/TCharacter";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class CharacterShopComponent extends ET.Component {
     private _ShopUnit: Dictionary<number, string> = new Dictionary<
         number,

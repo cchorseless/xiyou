@@ -1,7 +1,8 @@
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { TCharacter } from "../account/TCharacter";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class SeedRandomComponent extends ET.Component {
     public readonly IsSerializeEntity: boolean = true;
 

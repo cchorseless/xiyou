@@ -1,10 +1,11 @@
+import { reloadable } from "../../../GameCache";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
-import { ET, registerET, serializeETProps } from "../../Entity/Entity";
+import { ET, serializeETProps } from "../../Entity/Entity";
 
 /**玩家组件 */
-@registerET()
+@reloadable
 export class CourierDataComponent extends ET.Component {
     /**出生点 */
     firstSpawnPoint: Vector;

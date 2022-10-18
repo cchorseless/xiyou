@@ -1,13 +1,14 @@
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { ServerZoneActivityComponent } from "../activity/ServerZoneActivityComponent";
 import { ServerZoneBuffComponent } from "../buff/ServerZoneBuffComponent";
 import { ServerZoneGameRecordComponent } from "../gamerecord/ServerZoneGameRecordComponent";
 import { ServerZoneRankComponent } from "../rank/ServerZoneRankComponent";
 import { ServerZoneSeasonComponent } from "../season/ServerZoneSeasonComponent";
 import { ServerZoneShopComponent } from "../shop/ServerZoneShopComponent";
+import { reloadable } from "../../GameCache";
 
 
-@registerET()
+@reloadable
 export class TServerZone extends ET.Component {
     public ServerName: string;
     public ZoneID: number;

@@ -1,8 +1,9 @@
+import { reloadable } from "../../../GameCache";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 
-@registerET()
+@reloadable
 export class ECombinationLabelItem extends ET.Entity {
     public IsActive: boolean = true;
     public CombinationName: string = "";

@@ -1,14 +1,15 @@
+import { reloadable } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_taunt } from "../../../npc/modifier/effect/modifier_taunt";
 import { IBuilding_BaseNpc } from "../../../npc/units/building/Building_BaseNpc";
-import { registerET, ET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 
-@registerET()
+@reloadable
 export class AiAttackComponent extends ET.Component {
 
     timerBattle: string;

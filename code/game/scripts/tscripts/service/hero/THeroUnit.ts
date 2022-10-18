@@ -1,7 +1,9 @@
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { CharacterBuffComponent } from "../buff/CharacterBuffComponent";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+
+@reloadable
 export class THeroUnit extends ET.Entity {
     public readonly IsSerializeEntity: boolean = true;
 

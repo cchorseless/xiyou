@@ -1,3 +1,4 @@
+import { reloadable } from "../../../GameCache";
 import { GameEnum } from "../../../GameEnum";
 import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
@@ -8,10 +9,10 @@ import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { PlayerEntityRoot } from "../../Components/Player/PlayerEntityRoot";
 import { PlayerHttpComponent } from "../../Components/Player/PlayerHttpComponent";
 import { PlayerScene } from "../../Components/Player/PlayerScene";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { PlayerState } from "./PlayerState";
 
-@registerET()
+@reloadable
 export class PlayerSystemComponent extends ET.Component {
     public readonly AllPlayer: { [k: string]: PlayerEntityRoot } = {};
 

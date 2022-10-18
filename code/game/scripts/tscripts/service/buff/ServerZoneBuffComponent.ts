@@ -1,8 +1,9 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { TServerZone } from "../serverzone/TServerZone";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class ServerZoneBuffComponent extends ET.Component {
     private _GlobalBuffs: Dictionary<number, string> = new Dictionary<
         number,

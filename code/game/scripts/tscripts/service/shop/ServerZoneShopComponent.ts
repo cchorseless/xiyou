@@ -1,9 +1,10 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { TCharacter } from "../account/TCharacter";
 import { TServerZone } from "../serverzone/TServerZone";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class ServerZoneShopComponent extends ET.Component {
 
     private _ShopUnit: Dictionary<number, string> = new Dictionary<

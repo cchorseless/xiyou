@@ -1,6 +1,6 @@
 import Dictionary from "../../../helper/DataContainerHelper";
 import { ET, registerET } from "../../../libs/Entity";
-import { THeroUnit } from "../hero/THeroUnit";
+import { THeroUnit } from "./THeroUnit";
 @registerET()
 export class HeroTalentComponent extends ET.Component {
 

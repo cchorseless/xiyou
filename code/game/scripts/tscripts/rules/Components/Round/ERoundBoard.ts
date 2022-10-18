@@ -1,4 +1,5 @@
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
+import { reloadable } from "../../../GameCache";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
@@ -10,7 +11,7 @@ import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig
 import { RoundConfig } from "../../System/Round/RoundConfig";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERound } from "./ERound";
-
+@reloadable
 export class ERoundBoard extends ERound {
     @serializeETProps()
     roundState: RoundConfig.ERoundBoardState = null;

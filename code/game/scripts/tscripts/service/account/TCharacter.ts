@@ -1,6 +1,6 @@
 import { NetTablesHelper } from "../../helper/NetTablesHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
-import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
+import { ET, serializeETProps } from "../../rules/Entity/Entity";
 import { BagComponent } from "../bag/BagComponent";
 import { CharacterDataComponent } from "./CharacterDataComponent";
 import { SeedRandomComponent } from "../common/SeedRandomComponent";
@@ -16,8 +16,9 @@ import { CharacterBuffComponent } from "../buff/CharacterBuffComponent";
 import { CharacterTitleComponent } from "../title/CharacterTitleComponent";
 import { CharacterAchievementComponent } from "../achievement/CharacterAchievementComponent";
 import { CharacterGameRecordComponent } from "../gamerecord/CharacterGameRecordComponent";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class TCharacter extends ET.Component {
     // 玩家服务器playerId,并非游戏内
     @serializeETProps()

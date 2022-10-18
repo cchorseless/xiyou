@@ -3,7 +3,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { modifier_remnant } from "../../../npc/modifier/battle/modifier_remnant";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { RoundConfig } from "../../System/Round/RoundConfig";
 import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
@@ -11,8 +11,9 @@ import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { BuildingRuntimeEntityRoot } from "../Building/BuildingRuntimeEntityRoot";
 import { LogHelper } from "../../../helper/LogHelper";
+import { reloadable } from "../../../GameCache";
 /**回合控制 */
-@registerET()
+@reloadable
 export class RoundStateComponent extends ET.Component {
     onAwake(...args: any[]): void {
         this.addEvent();

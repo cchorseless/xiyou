@@ -1,9 +1,10 @@
+import { reloadable } from "../../../GameCache";
 import { EventHelper } from "../../../helper/EventHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { DrawConfig } from "./DrawConfig";
 
-@registerET()
+@reloadable
 export class DrawSystemComponent extends ET.Component {
     public onAwake() {
         this.addEvent();

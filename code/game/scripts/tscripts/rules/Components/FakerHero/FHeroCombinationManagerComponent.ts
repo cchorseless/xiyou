@@ -1,7 +1,8 @@
+import { GetRegClass, reloadable } from "../../../GameCache";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { RoundConfig } from "../../System/Round/RoundConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
@@ -12,14 +13,14 @@ import { FakerHeroEntityRoot } from "./FakerHeroEntityRoot";
 import { FHeroCombination } from "./FHeroCombination";
 
 
-@registerET()
+@reloadable
 export class FHeroCombinationManagerComponent extends ET.Component {
     public readonly IsSerializeEntity: boolean = true;
 
     onAwake(): void {
         this.addEvent();
         let config = KVHelper.KvServerConfig.building_combination_ability;
-        let type = PrecacheHelper.GetRegClass<typeof FHeroCombination>("FHeroCombination");
+        let type = GetRegClass<typeof FHeroCombination>("FHeroCombination");
         for (let key in config) {
             let info = config[key];
             this.allCombination[info.relation] = this.allCombination[info.relation] || {};

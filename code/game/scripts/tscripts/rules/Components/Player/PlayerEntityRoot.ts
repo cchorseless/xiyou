@@ -1,3 +1,4 @@
+import { GetRegClass } from "../../../GameCache";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
@@ -29,20 +30,20 @@ export class PlayerEntityRoot extends ET.EntityRoot {
     public IsLeaveGame: boolean = false;
 
     public onAwake(): void {
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerHttpComponent>("PlayerHttpComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerDataComponent>("PlayerDataComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof DrawComponent>("DrawComponent"));
+        this.AddComponent(GetRegClass<typeof PlayerHttpComponent>("PlayerHttpComponent"));
+        this.AddComponent(GetRegClass<typeof PlayerDataComponent>("PlayerDataComponent"));
+        this.AddComponent(GetRegClass<typeof DrawComponent>("DrawComponent"));
     }
 
     public BindHero(hero: BaseNpc_Hero_Plus): void {
         LogHelper.print("BindHero :=>", this.Playerid);
         (this as any).Hero = hero;
         CourierEntityRoot.Active(hero);
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundManagerComponent>("RoundManagerComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationManagerComponent>("CombinationManagerComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyManagerComponent>("EnemyManagerComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingManagerComponent>("BuildingManagerComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
+        this.AddComponent(GetRegClass<typeof RoundManagerComponent>("RoundManagerComponent"));
+        this.AddComponent(GetRegClass<typeof CombinationManagerComponent>("CombinationManagerComponent"));
+        this.AddComponent(GetRegClass<typeof EnemyManagerComponent>("EnemyManagerComponent"));
+        this.AddComponent(GetRegClass<typeof BuildingManagerComponent>("BuildingManagerComponent"));
+        this.AddComponent(GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
         this.CreateFakerHero();
     }
 

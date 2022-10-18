@@ -8,7 +8,6 @@ import { globalData, reloadable } from "../../GameCache";
 import { BaseNpc_Plus } from "./BaseNpc_Plus";
 import { GameRequest } from "../../service/GameRequest";
 import { ET } from "../../rules/Entity/Entity";
-import { PrecacheHelper } from "../../helper/PrecacheHelper";
 import { BaseModifier_Plus } from "./BaseModifier_Plus";
 
 export interface BaseAbility extends CDOTA_Ability_Lua { }
@@ -523,7 +522,7 @@ export class BaseNpc implements ET.IEntityRoot {
      * @override
      * 删除
      * */
-    UpdateOnRemove?() {}
+    UpdateOnRemove?() { }
     addSpawnedHandler?(handler: ET.Handler) {
         if (this.__bIsFirstSpawn == true) {
             handler.run();
@@ -714,7 +713,7 @@ export const registerAbility = (name?: string) => (ability: new () => CDOTA_Abil
             pcall(originalSpawn, this);
         }
     };
-    PrecacheHelper.RegClass([ability]);
+    reloadable(ability);
 };
 
 export const registerModifier = (modifierName?: string, modifierDescription?: string, name?: string) => (modifier: new () => CDOTA_Modifier_Lua) => {
@@ -755,7 +754,7 @@ export const registerModifier = (modifierName?: string, modifierDescription?: st
         base = base.____super;
     }
     LinkLuaModifier(name, fileName, type);
-    PrecacheHelper.RegClass([modifier]);
+    reloadable(modifier);
 };
 
 /**注册单位 */
@@ -777,7 +776,7 @@ export const registerUnit = (unitName?: string, localizationTokens?: { [x: strin
     env.UpdateOnRemove = function (this: void) {
         env[name].UpdateOnRemove && env[name].UpdateOnRemove();
     };
-    PrecacheHelper.RegClass([unit]);
+    reloadable(unit);
 };
 
 function clearTable(table: any) {

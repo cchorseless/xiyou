@@ -1,4 +1,5 @@
 
+import { GetRegClass } from "../../../../GameCache";
 import { GameEnum } from "../../../../GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
@@ -71,7 +72,7 @@ export class ability1_skeleton_king_hellfire_blast extends ActiveRootAbility {
         modifier_skeleton_king_1_particle_warmup.remove(hCaster);
         let energy = this.GetSpecialValueFor("energy")
         this.HellFireBlast(this.UseEnergy(energy))
-        let _type = PrecacheHelper.GetRegClass<typeof ability2_skeleton_king_vampiric_aura>("ability2_skeleton_king_vampiric_aura");
+        let _type = GetRegClass<typeof ability2_skeleton_king_vampiric_aura>("ability2_skeleton_king_vampiric_aura");
         let hAbility = _type.findIn(hCaster);
         for (let hUnit of (hAbility.tSkeletons)) {
             if (GameFunc.IsValid(hUnit) && hUnit.GetStackCount("modifier_skeleton_king_2_summon", hCaster) == 3) {
@@ -143,7 +144,7 @@ export class ability1_skeleton_king_hellfire_blast extends ActiveRootAbility {
 
         if (caster.HasShard()) {
             let shard_point = this.GetSpecialValueFor("shard_point")
-            let hModifier =caster.findBuff<modifier_skeleton_king_3>("modifier_skeleton_king_3");
+            let hModifier = caster.findBuff<modifier_skeleton_king_3>("modifier_skeleton_king_3");
             if (GameFunc.IsValid(hModifier)) {
                 hModifier.changeStackCount(shard_point)
             }
@@ -310,7 +311,7 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
                 return this.ignore_armor
             } else {
                 //  小骷髅无视护甲
-                let _type = PrecacheHelper.GetRegClass<typeof modifier_skeleton_king_2_summon>("modifier_skeleton_king_2_summon");
+                let _type = GetRegClass<typeof modifier_skeleton_king_2_summon>("modifier_skeleton_king_2_summon");
                 let hSummonBuff = _type.findIn(params.attacker)
                 if (GameFunc.IsValid(hSummonBuff) && hSummonBuff.GetCasterPlus() == this.GetCasterPlus()) {
                     return this.ignore_armor
@@ -322,7 +323,7 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
     On_AttackStart(params: ModifierAttackEvent) {
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_skeleton_king_custom_1";
-        let _type = PrecacheHelper.GetRegClass<typeof modifier_skeleton_king_2_summon>("modifier_skeleton_king_2_summon");
+        let _type = GetRegClass<typeof modifier_skeleton_king_2_summon>("modifier_skeleton_king_2_summon");
         if (params.target == this.GetParentPlus() && (params.attacker == this.GetCasterPlus() || _type.exist(params.attacker))) {
             if (this.bUseEnergy) {
                 modifier_skeleton_king_1_cannot_miss.apply(params.attacker, params.attacker, this.GetAbilityPlus(), null)

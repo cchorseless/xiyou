@@ -1,11 +1,12 @@
+import { reloadable } from "../../../GameCache";
 import { HttpHelper } from "../../../helper/HttpHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { WearableConfig } from "./WearableConfig";
 
-@registerET()
+@reloadable
 export class WearableSystemComponent extends ET.Component {
     readonly Allheroes: { [k: string]: WearableConfig.IHeroInfo } = {};
     readonly Allitems: { [k: string]: WearableConfig.IOneItemInfo } = {}; //  所有饰品信息

@@ -1,4 +1,5 @@
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
+import { reloadable } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
@@ -8,6 +9,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { ERound } from "./ERound";
 
+@reloadable
 export class ERoundBoardChallenge extends ERound {
     config: building_round_board_challenge.OBJ_2_1 = null;
     onAwake(configid: string): void {

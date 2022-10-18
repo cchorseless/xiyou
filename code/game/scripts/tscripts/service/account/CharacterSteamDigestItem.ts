@@ -1,6 +1,7 @@
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { reloadable } from "../../GameCache";
+import { ET } from "../../rules/Entity/Entity";
 
-@registerET()
+@reloadable
 export class CharacterSteamDigestItem extends ET.Entity {
     public readonly IsSerializeEntity: boolean = true;
 

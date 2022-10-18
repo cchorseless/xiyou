@@ -51,7 +51,7 @@ export class GameService extends SingletonClass {
     public GetPlayerServerData() {
         GameRules.Addon.ETRoot.PlayerSystem()
             .GetAllPlayerid()
-            .forEach((playerid) => {});
+            .forEach((playerid) => { });
     }
 
     public Sleep(fTime: number) {

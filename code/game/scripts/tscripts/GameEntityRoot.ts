@@ -3,14 +3,13 @@
  * 弃用，采用缓存类的形式
  */
 
-import { globalData } from "./GameCache";
+import { GetRegClass, globalData } from "./GameCache";
 import { GameEnum } from "./GameEnum";
 import { GameFunc } from "./GameFunc";
 import { EntityHelper } from "./helper/EntityHelper";
 import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { NetTablesHelper } from "./helper/NetTablesHelper";
-import { PrecacheHelper } from "./helper/PrecacheHelper";
 import { BaseItem_Plus } from "./npc/entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
 import { Enum_MODIFIER_EVENT, EventDataType, IBuffEventData, modifier_event } from "./npc/modifier/modifier_event";
@@ -53,16 +52,16 @@ import { TServerZone } from "./service/serverzone/TServerZone";
 export class GameEntityRoot extends ET.EntityRoot {
     init() {
         this.addEvent();
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerSystemComponent>("PlayerSystemComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof MapSystemComponent>("MapSystemComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof DrawSystemComponent>("DrawSystemComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlSystemComponent>("ChessControlSystemComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundSystemComponent>("RoundSystemComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemySystemComponent>("EnemySystemComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingSystemComponent>("BuildingSystemComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationSystemComponent>("CombinationSystemComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof WearableSystemComponent>("WearableSystemComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof PublicBagSystemComponent>("PublicBagSystemComponent"));
+        this.AddComponent(GetRegClass<typeof PlayerSystemComponent>("PlayerSystemComponent"));
+        this.AddComponent(GetRegClass<typeof MapSystemComponent>("MapSystemComponent"));
+        this.AddComponent(GetRegClass<typeof DrawSystemComponent>("DrawSystemComponent"));
+        this.AddComponent(GetRegClass<typeof ChessControlSystemComponent>("ChessControlSystemComponent"));
+        this.AddComponent(GetRegClass<typeof RoundSystemComponent>("RoundSystemComponent"));
+        this.AddComponent(GetRegClass<typeof EnemySystemComponent>("EnemySystemComponent"));
+        this.AddComponent(GetRegClass<typeof BuildingSystemComponent>("BuildingSystemComponent"));
+        this.AddComponent(GetRegClass<typeof CombinationSystemComponent>("CombinationSystemComponent"));
+        this.AddComponent(GetRegClass<typeof WearableSystemComponent>("WearableSystemComponent"));
+        this.AddComponent(GetRegClass<typeof PublicBagSystemComponent>("PublicBagSystemComponent"));
     }
     TServerZone() {
         return this.GetComponentByName<TServerZone>("TServerZone");
@@ -293,7 +292,7 @@ export class GameEntityRoot extends ET.EntityRoot {
         if (!hUnit.ETRoot) {
             return;
         }
-        let root =hUnit.ETRoot as PlayerCreateBattleUnitEntityRoot;
+        let root = hUnit.ETRoot as PlayerCreateBattleUnitEntityRoot;
         if (root.onKilled) {
             root.onKilled(events);
         }

@@ -1,17 +1,18 @@
+import { GetRegClass, reloadable } from "../../../GameCache";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { building_combination_ability } from "../../../kvInterface/building/building_combination_ability";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, registerET, serializeETProps } from "../../Entity/Entity";
+import { ET, serializeETProps } from "../../Entity/Entity";
 import { CombinationConfig } from "../../System/Combination/CombinationConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
 
-@registerET()
+@reloadable
 export class ECombination extends ET.Entity {
     public readonly IsSerializeEntity: boolean = true;
     private config: { [k: string]: building_combination_ability.OBJ_2_1 } = {};
@@ -138,7 +139,7 @@ export class ECombination extends ET.Entity {
             for (let buff of bufflist) {
                 if (buff && buff.length > 0) {
                     let buffconfig = KVHelper.KvServerConfig.effect_config[buff];
-                    let type = PrecacheHelper.GetRegClass<typeof BaseModifier_Plus>(buff)
+                    let type = GetRegClass<typeof BaseModifier_Plus>(buff)
                     if (buffconfig && type) {
                         let buildings: PlayerCreateBattleUnitEntityRoot[];
                         switch (buffconfig.target) {

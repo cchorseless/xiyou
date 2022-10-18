@@ -1,12 +1,13 @@
+import { reloadable } from "../../../GameCache";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
 
-@registerET()
+@reloadable
 export class EnemyKillPrizeComponent extends ET.Component {
     onAwake(...args: any[]): void {
         let domainroot = this.Domain.ETRoot.As<EnemyUnitEntityRoot>();

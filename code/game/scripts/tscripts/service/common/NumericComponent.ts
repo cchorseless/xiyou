@@ -1,7 +1,8 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
+import { ET, serializeETProps } from "../../rules/Entity/Entity";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class NumericComponent extends ET.Component {
     public readonly IsSerializeEntity: boolean = true;
     @serializeETProps()

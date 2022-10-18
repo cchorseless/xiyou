@@ -1,3 +1,4 @@
+import { GetRegClass } from "../../../GameCache";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
@@ -16,8 +17,8 @@ export class FakerHeroEntityRoot extends PlayerCreateUnitEntityRoot {
         (this as any).ConfigID = conf;
         (this as any).EntityId = npc.GetEntityIndex();
         this.SyncClientEntity(this, true);
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof FakerHeroDataComponent>("FakerHeroDataComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof FHeroCombinationManagerComponent>("FHeroCombinationManagerComponent"));
+        this.AddComponent(GetRegClass<typeof FakerHeroDataComponent>("FakerHeroDataComponent"));
+        this.AddComponent(GetRegClass<typeof FHeroCombinationManagerComponent>("FHeroCombinationManagerComponent"));
     }
     OnRoundStartBegin(round: ERoundBoard) {
         let player = this.GetPlayer();
@@ -25,7 +26,6 @@ export class FakerHeroEntityRoot extends PlayerCreateUnitEntityRoot {
         this.FHeroCombinationManager().activeECombination(false);
         this.FakerHeroDataComp().RefreshFakerHero();
         round.CreateAllRoundBasicEnemy(this.FakerHeroDataComp().SpawnEffect);
-
     }
     OnRoundStartBattle() {
         this.FHeroCombinationManager().activeECombination(true);

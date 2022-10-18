@@ -1,10 +1,11 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { TCharacter } from "../account/TCharacter";
 import { TServerZone } from "../serverzone/TServerZone";
 import { TServerZoneSeason } from "./TServerZoneSeason";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class ServerZoneSeasonComponent extends ET.Component {
     public CurSeasonConfigId: number;
     private _Seasons: Dictionary<number, string> = new Dictionary<

@@ -1,6 +1,7 @@
-import { ET, registerET } from "../../Entity/Entity";
+import { reloadable } from "../../../GameCache";
+import { ET } from "../../Entity/Entity";
 
-@registerET()
+@reloadable
 export class BuffManagerComponent extends ET.Component {
 
 

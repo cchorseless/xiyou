@@ -2,6 +2,7 @@ import { Assert_Color } from "../../../assert/Assert_Color";
 import { Assert_MsgEffect } from "../../../assert/Assert_MsgEffect";
 import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
 import { Assert_SpawnEffect, ISpawnEffectInfo, SpawnEffectModifier } from "../../../assert/Assert_SpawnEffect";
+import { reloadable } from "../../../GameCache";
 import { GameEnum } from "../../../GameEnum";
 import { EntityHelper } from "../../../helper/EntityHelper";
 import { EventHelper } from "../../../helper/EventHelper";
@@ -12,7 +13,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_spawn_breaksoil } from "../../../npc/modifier/spawn/modifier_spawn_breaksoil";
 import { modifier_spawn_fall } from "../../../npc/modifier/spawn/modifier_spawn_fall";
 import { modifier_spawn_torrent } from "../../../npc/modifier/spawn/modifier_spawn_torrent";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { EnemyState } from "../../System/Enemy/EnemyState";
 import { RoundConfig } from "../../System/Round/RoundConfig";
@@ -22,7 +23,7 @@ import { ERoundBoard } from "../Round/ERoundBoard";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
 
-@registerET()
+@reloadable
 export class EnemyManagerComponent extends ET.Component {
     tPlayerKills: number = 0;
     tPlayerMissing: number = 0;

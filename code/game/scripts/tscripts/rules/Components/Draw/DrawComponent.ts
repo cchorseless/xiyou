@@ -1,15 +1,16 @@
+import { reloadable } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
-import { ET, registerET, serializeETProps } from "../../Entity/Entity";
+import { ET, serializeETProps } from "../../Entity/Entity";
 import { DrawConfig } from "../../System/Draw/DrawConfig";
 import { PlayerEntityRoot } from "../Player/PlayerEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 
-@registerET()
+@reloadable
 export class DrawComponent extends ET.Component {
     @serializeETProps()
     tLastCards: string[] = [];

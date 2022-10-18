@@ -1,8 +1,9 @@
+import { reloadable } from "../../GameCache";
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
+import { ET, serializeETProps } from "../../rules/Entity/Entity";
 import { TCharacter } from "../account/TCharacter";
 
-@registerET()
+@reloadable
 export class CharacterActivityComponent extends ET.Component {
     @serializeETProps()
     private _ActivityData: Dictionary<number, string> = new Dictionary<

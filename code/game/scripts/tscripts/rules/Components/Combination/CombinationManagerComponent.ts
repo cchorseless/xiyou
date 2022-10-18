@@ -1,9 +1,10 @@
+import { GetRegClass, reloadable } from "../../../GameCache";
 import { GameEnum } from "../../../GameEnum";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { RoundConfig } from "../../System/Round/RoundConfig";
 import { AbilityEntityRoot } from "../Ability/AbilityEntityRoot";
@@ -12,14 +13,14 @@ import { ERoundBoard } from "../Round/ERoundBoard";
 import { ECombination } from "./ECombination";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
-@registerET()
+@reloadable
 export class CombinationManagerComponent extends ET.Component {
     public readonly IsSerializeEntity: boolean = true;
     onAwake(): void {
         this.addEvent();
         this.Domain.ETRoot.AsPlayer().SyncClientEntity(this, true);
         let config = KVHelper.KvServerConfig.building_combination_ability;
-        let type = PrecacheHelper.GetRegClass<typeof ECombination>("ECombination");
+        let type = GetRegClass<typeof ECombination>("ECombination");
         for (let key in config) {
             let info = config[key];
             this.allCombination[info.relation] = this.allCombination[info.relation] || {};

@@ -1,8 +1,9 @@
-import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
+import { ET, serializeETProps } from "../../rules/Entity/Entity";
 import { TCharacter } from "../account/TCharacter";
 import { TGameRecordItem } from "./TGameRecordItem";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class CharacterGameRecordComponent extends ET.Component {
     public Records: string[];
     public CurRecordID: string;

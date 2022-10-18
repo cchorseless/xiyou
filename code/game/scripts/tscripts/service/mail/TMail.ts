@@ -1,4 +1,5 @@
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
+import { reloadable } from "../../GameCache";
 
 export enum EMailState {
     Read = 1,
@@ -7,7 +8,7 @@ export enum EMailState {
     UnItemGet = 8,
 }
 
-@registerET()
+@reloadable
 export class TMail extends ET.Entity {
     public readonly IsSerializeEntity: boolean = true;
 

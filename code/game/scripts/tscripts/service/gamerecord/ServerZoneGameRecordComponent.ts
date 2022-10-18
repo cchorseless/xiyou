@@ -1,8 +1,9 @@
-import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
+import { ET, serializeETProps } from "../../rules/Entity/Entity";
 import { TServerZone } from "../serverzone/TServerZone";
 import { TGameRecordItem } from "./TGameRecordItem";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class ServerZoneGameRecordComponent extends ET.Component {
     public Records: string[] = [];
 

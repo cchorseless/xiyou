@@ -1,3 +1,4 @@
+import { reloadable } from "../../../GameCache";
 import { GameEnum } from "../../../GameEnum";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -5,13 +6,13 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_property } from "../../../npc/modifier/modifier_property";
 import { modifier_summon } from "../../../npc/modifier/modifier_summon";
-import { ET, registerET, serializeETProps } from "../../Entity/Entity";
+import { ET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { BattleUnitComponent } from "../BattleUnit/BattleUnitComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
 /**塔防组件 */
-@registerET()
+@reloadable
 export class BuildingComponent extends BattleUnitComponent {
     public readonly IsSerializeEntity: boolean = true;
     private iGoldCost: number;

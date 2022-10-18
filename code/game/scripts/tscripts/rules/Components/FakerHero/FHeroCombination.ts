@@ -1,6 +1,6 @@
-import { registerET } from "../../Entity/Entity";
+import { reloadable } from "../../../GameCache";
 import { ECombination } from "../Combination/ECombination";
 
-@registerET()
+@reloadable
 export class FHeroCombination extends ECombination {
 }

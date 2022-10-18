@@ -1,7 +1,8 @@
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { TServerZone } from "../serverzone/TServerZone";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class TGameRecordItem extends ET.Entity {
     public readonly IsSerializeEntity: boolean = true;
     public Players: string[];

@@ -1,8 +1,9 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { registerET } from "../../rules/Entity/Entity";
-import { TActivityData } from "./TActivityData";
 
-@registerET()
+import { TActivityData } from "./TActivityData";
+import { reloadable } from "../../GameCache";
+
+@reloadable
 export class TActivitySevenDayLoginData extends TActivityData {
 
     private _ItemState: Dictionary<number, number> = new Dictionary<

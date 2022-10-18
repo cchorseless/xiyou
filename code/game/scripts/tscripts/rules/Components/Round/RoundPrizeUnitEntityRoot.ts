@@ -1,3 +1,4 @@
+import { GetRegClass } from "../../../GameCache";
 import { LogHelper } from "../../../helper/LogHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
@@ -18,7 +19,7 @@ export class RoundPrizeUnitEntityRoot extends ET.EntityRoot {
         (this as any).ConfigID = confid;
         (this as any).RoundID = roundid;
         (this as any).OnlyKey = onlyKey;
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof RoundPrizeUnitKillPrizeComponent>("RoundPrizeUnitKillPrizeComponent"));
+        this.AddComponent(GetRegClass<typeof RoundPrizeUnitKillPrizeComponent>("RoundPrizeUnitKillPrizeComponent"));
     }
     onKilled(events: EntityKilledEvent): void {
         this.KillPrizeComp()?.OnKillByEntity(events.entindex_attacker);

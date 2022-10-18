@@ -1,12 +1,10 @@
+import { GetRegClass, reloadable } from "../../GameCache";
 import { GameFunc } from "../../GameFunc";
 import { LogHelper } from "../../helper/LogHelper";
-import { PrecacheHelper } from "../../helper/PrecacheHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { PlayerEntityRoot } from "../Components/Player/PlayerEntityRoot";
 
-export const registerET = () => (entity: typeof ET.Entity) => {
-    PrecacheHelper.RegClass([entity as any]);
-};
+
 export const serializeETProps =
     (params: string = null) =>
         (target: ET.Entity, attr: string) => {
@@ -336,7 +334,7 @@ export module ET {
                 }
                 return entity;
             }
-            let type: typeof Entity = PrecacheHelper.GetRegClass(json._t);
+            let type: typeof Entity = GetRegClass(json._t);
             if (type == null) {
                 LogHelper.error("cant find class" + json._t);
                 return;
@@ -814,7 +812,7 @@ export module ET {
             if (_entityRoot.DomainParent != this) {
                 return;
             }
-           this.removeDomainChildren(_entityRoot);
+            this.removeDomainChildren(_entityRoot);
         }
 
 

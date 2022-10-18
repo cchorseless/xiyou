@@ -1,8 +1,10 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { TCharacter } from "../account/TCharacter";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+
+@reloadable
 export class CharacterMailComponent extends ET.Component {
     public MaxSize: number;
     public LastMailId: string;
@@ -11,7 +13,7 @@ export class CharacterMailComponent extends ET.Component {
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {
         let character = ET.EntityEventSystem.GetEntity(this.Id + "TCharacter");
-        if (character!= null) {
+        if (character != null) {
             character.AddOneComponent(this);
             this.onReload();
         }

@@ -1,9 +1,10 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
+import { ET, serializeETProps } from "../../rules/Entity/Entity";
 import { ValueTupleStruct } from "../common/ValueTupleStruct";
 import { TActivity } from "./TActivity";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class TActivityMentorshipTree extends TActivity {
     @serializeETProps()
     private _MentorshipTree: Dictionary<string, string> = new Dictionary<

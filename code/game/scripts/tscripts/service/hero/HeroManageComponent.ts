@@ -1,7 +1,9 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { TCharacter } from "../account/TCharacter";
-@registerET()
+import { reloadable } from "../../GameCache";
+
+@reloadable
 export class HeroManageComponent extends ET.Component {
     private _HeroUnits: Dictionary<number, string> = new Dictionary<
         number,

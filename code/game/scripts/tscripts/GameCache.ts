@@ -51,7 +51,7 @@ globalData.allRegisterEvent = globalData.allRegisterEvent || {};
 globalData.allTimers = globalData.allTimers || {};
 globalData.allFrameTimers = globalData.allFrameTimers || {};
 globalData.allErrorInfo = globalData.allErrorInfo || {};
-if (!IsInToolsMode) {
+if (!IsInToolsMode()) {
     (debug.traceback as any) = function (this: void, ...args: any[]) {
         let trace;
         if (args.length == 0) {
@@ -94,4 +94,12 @@ export function reloadable<T extends { new(...args: any[]): {}; }>(constructor: 
         Object.assign(globalData.reloadCache[className].prototype, constructor.prototype);
     }
     return globalData.reloadCache[className];
+}
+
+export function GetRegClass<T>(className: string) {
+    let r = globalData.reloadCache[className];
+    if (r == null) {
+        LogHelper.error("NOT Reg reload Class " + className);
+    }
+    return r as T;
 }

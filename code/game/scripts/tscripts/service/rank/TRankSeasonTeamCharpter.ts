@@ -1,6 +1,7 @@
-import { ET, registerET } from "../../rules/Entity/Entity";
+import { ET } from "../../rules/Entity/Entity";
 import { TRankCommon } from "./TRankCommon";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class TRankSeasonTeamCharpter extends TRankCommon {
 }

@@ -1,9 +1,10 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
+import { ET, serializeETProps } from "../../rules/Entity/Entity";
 import { CharacterActivityComponent } from "./CharacterActivityComponent";
 import { TActivityData } from "./TActivityData";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class TActivityGiftCommondData extends TActivityData {
     @serializeETProps()
     private _GiftCommonds: Dictionary<number, string> = new Dictionary<

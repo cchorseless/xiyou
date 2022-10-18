@@ -1,11 +1,12 @@
+import { reloadable } from "../../../GameCache";
 import { KVHelper } from "../../../helper/KVHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { EnemyManagerComponent } from "../../Components/Enemy/EnemyManagerComponent";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { RoundState } from "../Round/RoundState";
 import { EnemyState } from "./EnemyState";
 
-@registerET()
+@reloadable
 export class EnemySystemComponent extends ET.Component {
     /**初始化 */
     public onAwake() {

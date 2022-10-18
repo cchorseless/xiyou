@@ -1,3 +1,4 @@
+import { reloadable } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
@@ -5,12 +6,12 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_jump } from "../../../npc/modifier/modifier_jump";
 import { modifier_run } from "../../../npc/modifier/modifier_run";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 
-@registerET()
+@reloadable
 export class ChessComponent extends ET.Component {
     public ChessVector: ChessControlConfig.ChessVector;
     readonly isAlive: boolean = true;

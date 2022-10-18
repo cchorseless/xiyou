@@ -1,3 +1,4 @@
+import { GetRegClass } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
@@ -17,9 +18,9 @@ export class BuildingRuntimeEntityRoot extends PlayerCreateBattleUnitEntityRoot 
         (this as any).Playerid = playerid;
         (this as any).ConfigID = conf;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
+        this.AddComponent(GetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
         this.addBattleComp();
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingComponent>("BuildingComponent"));
+        this.AddComponent(GetRegClass<typeof BuildingComponent>("BuildingComponent"));
         // this.SyncClientEntity(this);
     }
     onDestroy(): void {

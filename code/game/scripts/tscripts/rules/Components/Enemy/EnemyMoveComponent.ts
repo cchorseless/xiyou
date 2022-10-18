@@ -1,13 +1,14 @@
+import { reloadable } from "../../../GameCache";
 import { EntityHelper } from "../../../helper/EntityHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { EnemyConfig } from "../../System/Enemy/EnemyConfig";
 import { EnemyState } from "../../System/Enemy/EnemyState";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
-@registerET()
+@reloadable
 export class EnemyMoveComponent extends ET.Component {
     public lastCornerName: string;
     public targetCornerName: string;

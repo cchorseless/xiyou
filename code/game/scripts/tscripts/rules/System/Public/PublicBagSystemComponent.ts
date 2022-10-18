@@ -1,12 +1,13 @@
+import { reloadable } from "../../../GameCache";
 import { KVHelper } from "../../../helper/KVHelper";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { ItemEntityRoot } from "../../Components/Item/ItemEntityRoot";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { PublicBagConfig } from "./PublicBagConfig";
 
 
 
-@registerET()
+@reloadable
 export class PublicBagSystemComponent extends ET.Component {
     public onAwake() {
         this.addEvent();

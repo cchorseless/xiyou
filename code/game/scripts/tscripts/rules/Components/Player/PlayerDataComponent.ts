@@ -1,9 +1,10 @@
+import { reloadable } from "../../../GameCache";
 import { GameEnum } from "../../../GameEnum";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { ET, registerET, serializeETProps } from "../../Entity/Entity";
+import { ET, serializeETProps } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { DifficultyState } from "../../System/Difficulty/DifficultyState";
 import { PlayerConfig } from "../../System/Player/PlayerConfig";
@@ -11,7 +12,7 @@ import { RoundConfig } from "../../System/Round/RoundConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 
-@registerET()
+@reloadable
 export class PlayerDataComponent extends ET.Component {
     @serializeETProps()
     startTime: string;

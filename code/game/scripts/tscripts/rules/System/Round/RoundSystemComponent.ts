@@ -1,3 +1,4 @@
+import { reloadable } from "../../../GameCache";
 import { GameEnum } from "../../../GameEnum";
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
@@ -9,11 +10,11 @@ import { unit_base_gold_bag } from "../../../npc/units/common/unit_base_gold_bag
 import { EnemyUnitEntityRoot } from "../../Components/Enemy/EnemyUnitEntityRoot";
 import { RoundManagerComponent } from "../../Components/Round/RoundManagerComponent";
 import { RoundPrizeUnitEntityRoot } from "../../Components/Round/RoundPrizeUnitEntityRoot";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { MapState } from "../Map/MapState";
 import { RoundState } from "./RoundState";
 
-@registerET()
+@reloadable
 export class RoundSystemComponent extends ET.Component {
     public onAwake() {
         this.addEvent();

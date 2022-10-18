@@ -1,3 +1,4 @@
+import { GetRegClass } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
@@ -16,8 +17,8 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         (this as any).Playerid = playerid;
         (this as any).ConfigID = conf;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationComponent>("CombinationComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof BuildingComponent>("BuildingComponent"));
+        this.AddComponent(GetRegClass<typeof CombinationComponent>("CombinationComponent"));
+        this.AddComponent(GetRegClass<typeof BuildingComponent>("BuildingComponent"));
         this.addBattleComp();
         this.SyncClientEntity(this);
     }

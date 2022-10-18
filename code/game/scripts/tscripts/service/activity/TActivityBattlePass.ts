@@ -1,9 +1,10 @@
 import Dictionary from "../../helper/DataContainerHelper";
-import { ET, registerET, serializeETProps } from "../../rules/Entity/Entity";
+import { ET, serializeETProps } from "../../rules/Entity/Entity";
 import { ValueTupleStruct } from "../common/ValueTupleStruct";
 import { TActivity } from "./TActivity";
+import { reloadable } from "../../GameCache";
 
-@registerET()
+@reloadable
 export class TActivityBattlePass extends TActivity {
     @serializeETProps()
     private _Items: Dictionary<number, ValueTupleStruct<number, number>> = new Dictionary<

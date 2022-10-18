@@ -1,11 +1,12 @@
+import { reloadable } from "../../../GameCache";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health_bar";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { EnemyConfig } from "../../System/Enemy/EnemyConfig";
 import { BattleUnitComponent } from "../BattleUnit/BattleUnitComponent";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
 
-@registerET()
+@reloadable
 export class EnemyUnitComponent extends BattleUnitComponent {
     readonly IsSerializeEntity: boolean = true;
 

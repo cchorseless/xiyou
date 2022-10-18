@@ -1,3 +1,4 @@
+import { GetRegClass } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
@@ -25,12 +26,12 @@ export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         (this as any).RoundID = roundid;
         (this as any).OnlyKey = onlyKey;
         (this as any).EntityId = this.GetDomain<BaseNpc_Plus>().GetEntityIndex();
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof CombinationComponent>("CombinationComponent"));
+        this.AddComponent(GetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
+        this.AddComponent(GetRegClass<typeof CombinationComponent>("CombinationComponent"));
         this.addBattleComp();
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyUnitComponent>("EnemyUnitComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyKillPrizeComponent>("EnemyKillPrizeComponent"));
-        this.AddComponent(PrecacheHelper.GetRegClass<typeof EnemyPropsComponent>("EnemyPropsComponent"));
+        this.AddComponent(GetRegClass<typeof EnemyUnitComponent>("EnemyUnitComponent"));
+        this.AddComponent(GetRegClass<typeof EnemyKillPrizeComponent>("EnemyKillPrizeComponent"));
+        this.AddComponent(GetRegClass<typeof EnemyPropsComponent>("EnemyPropsComponent"));
     }
 
     onDestroy(): void {

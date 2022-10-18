@@ -1,3 +1,4 @@
+import { reloadable } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { GameSetting } from "../../../GameSetting";
 import { AoiHelper } from "../../../helper/AoiHelper";
@@ -5,12 +6,12 @@ import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { BuildingEntityRoot } from "../../Components/Building/BuildingEntityRoot";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { MapState } from "../Map/MapState";
 import { PlayerState } from "../Player/PlayerState";
 import { ChessControlConfig } from "./ChessControlConfig";
 
-@registerET()
+@reloadable
 export class ChessControlSystemComponent extends ET.Component {
     public onAwake(...args: any[]): void {
         this.addEvent();

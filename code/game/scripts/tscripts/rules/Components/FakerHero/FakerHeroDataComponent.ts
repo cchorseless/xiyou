@@ -1,13 +1,14 @@
 import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
+import { reloadable } from "../../../GameCache";
 import { EventHelper } from "../../../helper/EventHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { RoundConfig } from "../../System/Round/RoundConfig";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { FakerHeroEntityRoot } from "./FakerHeroEntityRoot";
 
-@registerET()
+@reloadable
 export class FakerHeroDataComponent extends ET.Component {
     onAwake(...args: any[]): void {
         this.addEvent();

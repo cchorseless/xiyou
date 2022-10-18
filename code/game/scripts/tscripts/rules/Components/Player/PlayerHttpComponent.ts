@@ -3,12 +3,13 @@ import { HttpHelper } from "../../../helper/HttpHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { GameProtocol } from "../../../service/GameProtocol";
-import { ET, registerET } from "../../Entity/Entity";
+import { ET } from "../../Entity/Entity";
 import { PlayerState } from "../../System/Player/PlayerState";
 import { md5 } from "../../../lib/md5";
+import { reloadable } from "../../../GameCache";
 
 /**玩家数据组件 */
-@registerET()
+@reloadable
 export class PlayerHttpComponent extends ET.Component {
     public TOKEN: string = "";
     public Address = "";

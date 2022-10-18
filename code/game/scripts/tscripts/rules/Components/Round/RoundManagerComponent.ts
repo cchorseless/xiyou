@@ -1,16 +1,17 @@
+import { reloadable } from "../../../GameCache";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { building_round_board } from "../../../kvInterface/building/building_round_board";
 import { building_round_board_challenge } from "../../../kvInterface/building/building_round_board_challenge";
-import { ET, registerET, serializeETProps } from "../../Entity/Entity";
+import { ET, serializeETProps } from "../../Entity/Entity";
 import { DifficultyState } from "../../System/Difficulty/DifficultyState";
 import { RoundState } from "../../System/Round/RoundState";
 import { ERound } from "./ERound";
 import { ERoundBoard } from "./ERoundBoard";
 import { ERoundBoardChallenge } from "./ERoundBoardChallenge";
 
-@registerET()
+@reloadable
 export class RoundManagerComponent extends ET.Component {
     readonly RoundInfo: { [k: string]: ERound } = {};
     onAwake() {
