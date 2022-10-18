@@ -19,13 +19,30 @@ import { ECombination } from "./components/Combination/ECombination";
 import { FakerHeroEntityRoot } from "./components/FakerHero/FakerHeroEntityRoot";
 import { FHeroCombination } from "./components/FakerHero/FHeroCombination";
 import { FHeroCombinationManagerComponent } from "./components/FakerHero/FHeroCombinationManagerComponent";
+import { BattleUnitComponent } from "./components/BattleUnit/BattleUnitComponent";
+import { BattleUnitIllusionEntityRoot } from "./components/BattleUnit/BattleUnitIllusionEntityRoot";
+import { BattleUnitSummonEntityRoot } from "./components/BattleUnit/BattleUnitSummonEntityRoot";
+import { BuildingRuntimeEntityRoot } from "./components/Building/BuildingRuntimeEntityRoot";
+import { CourierDataComponent } from "./components/Courier/CourierDataComponent";
+import { CourierEntityRoot } from "./components/Courier/CourierEntityRoot";
 
 AbilityEntityRoot;
+
+BattleUnitComponent;
+BattleUnitIllusionEntityRoot;
+BattleUnitSummonEntityRoot;
+
 BuildingEntityRoot;
 BuildingComponent;
 BuildingManagerComponent;
+BuildingRuntimeEntityRoot;
+
 
 CombinationManagerComponent;
+
+CourierDataComponent;
+CourierEntityRoot;
+
 ECombination;
 
 EnemyUnitEntityRoot;

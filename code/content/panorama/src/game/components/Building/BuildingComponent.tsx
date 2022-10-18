@@ -1,10 +1,10 @@
 import { ET, registerET } from "../../../libs/Entity";
+import { BattleUnitComponent } from "../BattleUnit/BattleUnitComponent";
 
 
 /**塔防组件 */
 @registerET()
-export class BuildingComponent extends ET.Component {
-    public iStar: number = 1;
+export class BuildingComponent extends BattleUnitComponent {
     public PrimaryAttribute: number = 1;
-    
- }
+
+}

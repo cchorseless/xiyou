@@ -108,7 +108,7 @@ export class MainPanel extends MainPanel_UI {
     public AddCustomToolTip<T extends typeof BasePureComponent>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = true) {
         if (bindpanel == null || !bindpanel.IsValid()) { return };
         let isinrange = false;
-        let brightness = Number(bindpanel.style.brightness)|| 1;
+        let brightness = Number(bindpanel.style.brightness) || 1;
         bindpanel.SetPanelEvent('onmouseover', async () => {
             let obj: any = {};
             if (attrFunc) {
@@ -137,11 +137,15 @@ export class MainPanel extends MainPanel_UI {
             let windowheight = this.__root__.current!.contentheight;
             let isleft = pos.x <= windowwidth / 2;
             let istop = pos.y <= windowheight / 2;
-            let posdialog = { x: 0, y: 0 };
             let dialogpanel = this.CustomToolTip.__root__.current!;
+            dialogpanel.visible = false;
+            await TimerHelper.DelayTime(0.05);
+            if (this.CustomToolTip == null || this.CustomToolTip.__root__.current !== dialogpanel) {
+                return;
+            }
+            let posdialog = { x: 0, y: 0 };
             let dialogwidth = dialogpanel.contentwidth;
             let dialogheight = dialogpanel.contentheight;
-            dialogpanel.visible = false;
             if (layoutleftRight) {
                 if (isleft) {
                     posdialog.x = pos.x + panelwidth + 20;
@@ -166,12 +170,10 @@ export class MainPanel extends MainPanel_UI {
                     posdialog.x = 0;
                 }
             }
-            LogHelper.print(windowwidth, windowheight,"window");
-            LogHelper.print(isleft, istop,"window");
-            LogHelper.print(dialogwidth, dialogheight,"dialog");
+            LogHelper.print(windowwidth, windowheight, "window");
+            LogHelper.print(isleft, istop, "window");
+            LogHelper.print(dialogwidth, dialogheight, "dialog");
             LogHelper.print(pos.x, pos.y, "ssss");
-            let data = bindpanel.GetPositionWithinWindow();
-            LogHelper.print(data.x, data.y,"ssss");
             dialogpanel.SetPositionInPixels(posdialog.x, posdialog.y, 0);
             dialogpanel.visible = true;
         });

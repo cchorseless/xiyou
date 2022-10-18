@@ -23,11 +23,9 @@ export class EnemyUnitComponent extends BattleUnitComponent {
     GetPlayerId() {
         return this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Playerid;
     }
-
     EnemyUnitType() {
         return this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Config().UnitLabel;
     }
-
     IsWave() {
         return this.EnemyUnitType() == EnemyConfig.EEnemyUnitType.wave;
     }
