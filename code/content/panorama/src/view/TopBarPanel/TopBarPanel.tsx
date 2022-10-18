@@ -9,6 +9,8 @@ import { FuncHelper } from "../../helper/FuncHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
+import { CombinationInfoDialog } from "../Combination/CombinationInfoDialog";
+import { MainPanel } from "../MainPanel/MainPanel";
 import { TopBarPanel_UI } from "./TopBarPanel_UI";
 export class TopBarPanel extends TopBarPanel_UI {
     // 初始化数据
@@ -18,6 +20,9 @@ export class TopBarPanel extends TopBarPanel_UI {
         // for (let i = 0; i < 5; i++) {
         // 	this.addNodeChildAt(this.NODENAME.panel_0, TeamNeedInfoItem, { marginLeft: '20px', uiScale: '40%', index: i })
         // }
+        MainPanel.GetInstance()!.AddCustomToolTip(this.btn_drawcard.current!, CombinationInfoDialog, () => { return { title: "1111", tip: "2222" } })
+        MainPanel.GetInstance()!.AddCustomToolTip(this.lbl_food.current!, CombinationInfoDialog, () => { return { title: "1111", tip: "2222" } })
+
         let KV_DATA = KVHelper.KVData();
         CSSHelper.setLocalText(this.lbl_foodDes, KV_DATA.lang_config.lang_config.food.Des);
         CSSHelper.setLocalText(this.lbl_goldDes, KV_DATA.lang_config.lang_config.gold.Des);

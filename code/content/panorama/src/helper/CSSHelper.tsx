@@ -889,7 +889,22 @@ export module CSSHelper {
         Purple = "purple",
         Yellow = "yellow",
     }
+    export function getPanelSize(panel: Panel) {
+        if (panel == null || !panel.IsValid()) {
+            return [0, 0];
+        }
+        let scalex = panel.actualuiscale_x || 1;
+        let scaley = panel.actualuiscale_y || 1;
+        if (panel.IsSizeValid()) {
+            return [panel.actuallayoutwidth, panel.actuallayoutheight];
+        }
+        let width = panel.style.width, height = panel.style.height;
+        if (width == null || height == null) {
+            LogHelper.error("Panel size parameter error")
+        }
 
+        return [Number(width?.replace("px", "")) , Number(height?.replace("px", "")) ];
+    }
     export function setLocalText(node: React.RefObject<LabelPanel>, str: string) {
         if (node.current == null) {
             return;
@@ -966,22 +981,22 @@ export module CSSHelper {
      * @param color
      * @returns
      */
-    export function addBorderStyle(node: React.RefObject<any>, color: enumColor = enumColor.White) {
-        if (node == null) {
+    export function addBorderStyle(panel: Panel, color: enumColor = enumColor.White) {
+        if (panel == null|| !panel.IsValid()) {
             return;
         }
-        node.current!.style.border = `2px solid ${color}`;
+        panel.style.border = `2px solid ${color}`;
     }
     /**
      *取消边框
      * @param node
      * @returns
      */
-    export function removeBorderStyle(node: React.RefObject<any>) {
-        if (node == null) {
+    export function removeBorderStyle(panel: Panel) {
+        if (panel == null|| !panel.IsValid()) {
             return;
         }
-        node.current!.style.border = null;
+        panel.style.border = null;
     }
 
     export namespace HtmlTxt {

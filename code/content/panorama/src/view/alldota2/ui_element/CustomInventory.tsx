@@ -1,8 +1,10 @@
 import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
+import { FuncHelper } from "../../../helper/FuncHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { GameEnum } from "../../../libs/GameEnum";
 import { CombinationInfoDialog } from "../../Combination/CombinationInfoDialog";
 import { MainPanel } from "../../MainPanel/MainPanel";
@@ -29,6 +31,7 @@ export class CustomInventory extends CustomInventory_UI {
                     // 背包道具背景图
                     let buttonSize = _slot.FindChildTraverse("ButtonSize");
                     let abilityButton = _slot.FindChildTraverse("AbilityButton");
+                    let itemImage = abilityButton!.FindChildTraverse("ItemImage");
                     // buttonSize!.style.backgroundImage = "none";
                     // buttonSize!.style.backgroundColor = "none";
                     this.buttonSizePanel.push(buttonSize!);
@@ -49,26 +52,25 @@ export class CustomInventory extends CustomInventory_UI {
                     item_rare.SetPanelEvent("oncontextmenu", () => {
                         this.onBtn_rightClick(i);
                     });
-                    MainPanel.GetInstance()!.AddCustomToolTip(abilityButton!, CombinationInfoDialog, () => { return { title: "1111", tip: "2222" } })
+                    MainPanel.GetInstance()!.AddCustomToolTip(item_rare!, CombinationInfoDialog, () => { return { title: "1111", tip: "2222" } })
                     // b 拖动的panel
-                    $.RegisterEventHandler("DragStart", abilityButton!, (panelID: Panel, dragged: Panel) => {
-                        MainPanel.GetInstance()!.HideToolTip(abilityButton!);
-                    });
-                    $.RegisterEventHandler("DragEnter", abilityButton!, (panelID: Panel, dragged: Panel) => {
-                        LogHelper.print("DragEnter", panelID, dragged)
+                    $.RegisterEventHandler("DragEnter", itemImage!, (panelID: Panel, dragged: Panel) => {
+                        LogHelper.print("DragEnter", panelID.id);
+                        CSSHelper.addBorderStyle(panelID);
+                        // MainPanel.GetInstance()!.HideToolTip(item_rare!);
                         // this.onBtn_dragend(i);
                     });
-                    $.RegisterEventHandler("DragLeave", abilityButton!, (panelID: Panel, dragged: Panel) => {
+                    $.RegisterEventHandler("DragLeave", itemImage!, (panelID: Panel, dragged: Panel) => {
                         // this.onBtn_dragend(i);
-                        LogHelper.print("DragLeave", panelID, dragged)
+                        CSSHelper.removeBorderStyle(panelID);
+                        LogHelper.print("DragLeave", panelID.id)
                     });
-                    $.RegisterEventHandler("DragDrop", abilityButton!, (panelID: Panel, dragged: Panel) => {
+                    $.RegisterEventHandler("DragDrop", itemImage!, (panelID: Panel, dragged: Panel) => {
                         // this.onBtn_dragend(i);
-                        LogHelper.print("DragDrop", panelID, dragged)
+                        LogHelper.print("DragDrop", panelID.id)
                     });
-                    $.RegisterEventHandler("DragEnd", abilityButton!, (panelID: Panel, dragged: Panel) => {
-                        LogHelper.print("DragEnd", panelID, dragged)
-                        // this.onBtn_dragend(i);
+                    $.RegisterEventHandler("DragEnd", itemImage!, (panelID: Panel, dragged: Panel) => {
+                        LogHelper.print("DragEnd", panelID.id)
                     });
                 }
             }

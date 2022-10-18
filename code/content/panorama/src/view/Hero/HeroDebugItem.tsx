@@ -8,7 +8,7 @@ export class HeroDebugItem extends HeroDebugItem_UI {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();
-        CSSHelper.addBorderStyle(this.__root__);
+        CSSHelper.addBorderStyle(this.__root__.current!);
         TimerHelper.AddIntervalFrameTimer(
             10,
             10,

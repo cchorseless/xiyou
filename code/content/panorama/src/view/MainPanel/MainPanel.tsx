@@ -2,6 +2,7 @@
 import React, { createRef, useState } from "react";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { System_Avalon } from "../../game/system/System_Avalon";
+import { CSSHelper } from "../../helper/CSSHelper";
 import { DotaUIHelper } from "../../helper/DotaUIHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
@@ -53,6 +54,7 @@ export class MainPanel extends MainPanel_UI {
             verticalAlign: "top",
             marginTop: "100px",
             marginLeft: "10px",
+            // className: "InventoryItem"
         });
         // 小地图
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, CustomMiniMap, {
@@ -82,6 +84,8 @@ export class MainPanel extends MainPanel_UI {
             position.y += panel.actualyoffset;
             panel = panel.GetParent()!;
         }
+        position.x = position.x / (this.__root__.current!.actualuiscale_x || 1);
+        position.y = position.y / (this.__root__.current!.actualuiscale_y || 1);
         return position;
     }
     public allPanelInMain: { [k: string]: BasePureComponent } = {};
@@ -105,9 +109,10 @@ export class MainPanel extends MainPanel_UI {
     }
 
     private CustomToolTip: BasePureComponent | null;
-    public AddCustomToolTip<T extends typeof BasePureComponent>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = true) {
+    public AddCustomToolTip<T extends typeof BasePureComponent>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = false) {
         if (bindpanel == null || !bindpanel.IsValid()) { return };
         let isinrange = false;
+        const offset = 20;
         let brightness = Number(bindpanel.style.brightness) || 1;
         bindpanel.SetPanelEvent('onmouseover', async () => {
             let obj: any = {};
@@ -131,49 +136,47 @@ export class MainPanel extends MainPanel_UI {
             }
             this.CustomToolTip = newtip;
             let pos = this.stagePos(bindpanel);
-            let panelwidth = bindpanel.contentwidth;
-            let panelheight = bindpanel.contentheight;
-            let windowwidth = this.__root__.current!.contentwidth;
-            let windowheight = this.__root__.current!.contentheight;
+            let panelsize = CSSHelper.getPanelSize(bindpanel);
+            let panelwidth = panelsize[0];
+            let panelheight = panelsize[1];
+            let windowsize = CSSHelper.getPanelSize(this.__root__.current!);
+            let windowwidth = windowsize[0];
+            let windowheight = windowsize[1];
             let isleft = pos.x <= windowwidth / 2;
             let istop = pos.y <= windowheight / 2;
             let dialogpanel = this.CustomToolTip.__root__.current!;
             dialogpanel.visible = false;
-            await TimerHelper.DelayTime(0.05);
-            if (this.CustomToolTip == null || this.CustomToolTip.__root__.current !== dialogpanel) {
-                return;
-            }
             let posdialog = { x: 0, y: 0 };
-            let dialogwidth = dialogpanel.contentwidth;
-            let dialogheight = dialogpanel.contentheight;
+            let size = CSSHelper.getPanelSize(dialogpanel)
+            let dialogwidth = size[0];
+            let dialogheight = size[1];
             if (layoutleftRight) {
                 if (isleft) {
-                    posdialog.x = pos.x + panelwidth + 20;
+                    posdialog.x = pos.x + panelwidth + offset;
                 }
                 else {
-                    posdialog.x = pos.x - dialogwidth - 20;
+                    posdialog.x = pos.x - dialogwidth - offset;
                 }
                 posdialog.y = pos.y + panelheight / 2 - dialogheight / 2;
                 if (posdialog.y < 0) {
                     posdialog.y = 0;
                 }
+                else if (posdialog.y + dialogheight > windowheight) {
+                    posdialog.y = windowheight - dialogheight;
+                }
             }
             else {
                 if (istop) {
-                    posdialog.y = pos.y + panelheight + 20;
+                    posdialog.y = pos.y + panelheight + offset;
                 }
                 else {
-                    posdialog.y = pos.y - dialogheight - 20;
+                    posdialog.y = pos.y - dialogheight - offset;
                 }
                 posdialog.x = pos.x + panelwidth / 2 - dialogwidth / 2;
                 if (posdialog.x < 0) {
                     posdialog.x = 0;
                 }
             }
-            LogHelper.print(windowwidth, windowheight, "window");
-            LogHelper.print(isleft, istop, "window");
-            LogHelper.print(dialogwidth, dialogheight, "dialog");
-            LogHelper.print(pos.x, pos.y, "ssss");
             dialogpanel.SetPositionInPixels(posdialog.x, posdialog.y, 0);
             dialogpanel.visible = true;
         });
@@ -183,9 +186,10 @@ export class MainPanel extends MainPanel_UI {
             if (this.CustomToolTip) {
                 this.CustomToolTip.close();
                 this.CustomToolTip = null;
+                this.updateSelf();
             }
         };
-        (bindpanel as any)["HideToolTipFunc"] = hideFunc;
+        (bindpanel as any).HideToolTipFunc = hideFunc;
         bindpanel.SetPanelEvent('onmouseout', hideFunc)
     }
     public AddTextToolTip(bindpanel: Panel, attrFunc: (() => string | void)) {
@@ -203,7 +207,7 @@ export class MainPanel extends MainPanel_UI {
             bindpanel.style.brightness = brightness + "";
             $.DispatchEvent(tipType.replace('Show', 'Hide'), bindpanel)
         }
-        (bindpanel as any)["HideToolTipFunc"] = hideFunc;
+        (bindpanel as any).HideToolTipFunc = hideFunc;
         bindpanel.SetPanelEvent('onmouseout', hideFunc)
     }
     public AddTitleTextToolTip(bindpanel: Panel, attrFunc: (() => { title: string, tip: string } | void)) {
@@ -221,12 +225,12 @@ export class MainPanel extends MainPanel_UI {
             bindpanel.style.brightness = brightness + "";
             $.DispatchEvent(tipType.replace('Show', 'Hide'), bindpanel)
         };
-        (bindpanel as any)["HideToolTipFunc"] = hideFunc;
+        (bindpanel as any).HideToolTipFunc = hideFunc;
         bindpanel.SetPanelEvent('onmouseout', hideFunc)
     }
 
     public HideToolTip(bindpanel: Panel) {
-        let hideFunc = (bindpanel as any)["HideToolTipFunc"];
+        let hideFunc = (bindpanel as any).HideToolTipFunc;
         if (hideFunc) {
             hideFunc();
         }

@@ -32,9 +32,9 @@ btn_shop_childs: Array<JSX.Element> = [];
 render() {
     return(
         this.__root___isValid && 
-<Panel key="compId_1" ref={this.__root__} style={this.CSS_0_0}  {...this.props}   {...this.__root___attrs}>
+<Panel  key="compId_1" ref={this.__root__} style={this.CSS_0_0}  {...this.props}   {...this.__root___attrs}>
     {this.btn_shop_isValid && 
-<Image ref={this.btn_shop} onmouseactivate={this.onbtn_shop} key="compId_2" style={this.CSS_1_0}  {...this.btn_shop_attrs}>
+<Image id="ItemImage" ref={this.btn_shop} onmouseactivate={this.onbtn_shop} key="compId_2" style={this.CSS_1_0}  {...this.btn_shop_attrs}>
         <Image key="compId_3" style={this.CSS_2_0} >
 </Image>
         <Label key="compId_4" style={this.CSS_2_1} >
