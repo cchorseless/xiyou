@@ -31,12 +31,12 @@ export class BuildingTopBarItem extends BuildingTopBarItem_UI {
         CSSHelper.setBgImageUrl(this.img_rare, `common/rarity/rare_${rare}.png`);
         CSSHelper.setLocalText(this.lbl_name, building!.ConfigID);
         this.renderUI();
-        EventHelper.AddClientEvent(
-            building!.BuildingComp!.updateEventName,
-            FuncHelper.Handler.create(this, () => {
-                this.renderUI();
-            })
-        );
+        // EventHelper.AddClientEvent(
+        //     building!.BuildingComp!.updateEventName,
+        //     FuncHelper.Handler.create(this, () => {
+        //         this.renderUI();
+        //     })
+        // );
         this.__root__.current!.visible = false;
         TimerHelper.AddFrameTimer(
             10,
@@ -50,9 +50,9 @@ export class BuildingTopBarItem extends BuildingTopBarItem_UI {
         let building = PlayerScene.EntityRootManage.getBuilding(this.entityid);
         if (building) {
             for (let i = 1; i < 6; i++) {
-                (this as any)["img_star" + i].current!.visible = building.BuildingComp!.iStar >= i;
+                // (this as any)["img_star" + i].current!.visible = building.BuildingComp!.iStar >= i;
             }
-            CSSHelper.setBgImageUrl(this.img_prop, `common/icon_prop_${building.BuildingComp!.PrimaryAttribute}.png`);
+            // CSSHelper.setBgImageUrl(this.img_prop, `common/icon_prop_${building.BuildingComp!.PrimaryAttribute}.png`);
         }
     }
 

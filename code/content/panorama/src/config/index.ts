@@ -1,3 +1,5 @@
 import { KV_DATA } from "./KVData"
 
-(GameUI.CustomUIConfig() as any)["KVDATA"] = KV_DATA;
+const config = {KVDATA:KV_DATA};
+GameUI.CustomUIConfig = () => {
+    return config }; 

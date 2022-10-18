@@ -71,6 +71,6 @@ export module KVHelper {
     }
 
     export function KVData() {
-        return (GameUI.CustomUIConfig() as any)["KVDATA"] as KvAllInterface
+        return (GameUI.CustomUIConfig() as any).KVDATA as KvAllInterface
     }
 }

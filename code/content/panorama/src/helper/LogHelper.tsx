@@ -31,7 +31,12 @@ export module LogHelper {
                 cls = "?";
             }
             let r = `[${file_str}${cls}:${fun}]:`;
-            $.Msg(r, ...args);
+            let msg: any[] = [];
+            args.forEach(ss => {
+                msg.push(ss);
+                msg.push(" ");
+            })
+            $.Msg(r, ...msg);
         }
     }
     /**

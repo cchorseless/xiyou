@@ -38,7 +38,7 @@ export class MainPanel extends MainPanel_UI {
             horizontalAlign: "center",
             verticalAlign: "bottom",
             marginBottom: "200px",
-            backgroundColor: "#FFFFFFFF",
+            // backgroundColor: "#FFFFFFFF",
         });
 
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, ChallengeShopItem, {
@@ -108,7 +108,7 @@ export class MainPanel extends MainPanel_UI {
     public AddCustomToolTip<T extends typeof BasePureComponent>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = true) {
         if (bindpanel == null || !bindpanel.IsValid()) { return };
         let isinrange = false;
-        let brightness = Number(bindpanel.style.brightness);
+        let brightness = Number(bindpanel.style.brightness)|| 1;
         bindpanel.SetPanelEvent('onmouseover', async () => {
             let obj: any = {};
             if (attrFunc) {
@@ -139,15 +139,17 @@ export class MainPanel extends MainPanel_UI {
             let istop = pos.y <= windowheight / 2;
             let posdialog = { x: 0, y: 0 };
             let dialogpanel = this.CustomToolTip.__root__.current!;
+            let dialogwidth = dialogpanel.contentwidth;
+            let dialogheight = dialogpanel.contentheight;
             dialogpanel.visible = false;
             if (layoutleftRight) {
                 if (isleft) {
                     posdialog.x = pos.x + panelwidth + 20;
                 }
                 else {
-                    posdialog.x = pos.x - dialogpanel.contentwidth - 20;
+                    posdialog.x = pos.x - dialogwidth - 20;
                 }
-                posdialog.y = pos.y + panelheight / 2 - dialogpanel.contentheight / 2;
+                posdialog.y = pos.y + panelheight / 2 - dialogheight / 2;
                 if (posdialog.y < 0) {
                     posdialog.y = 0;
                 }
@@ -157,13 +159,19 @@ export class MainPanel extends MainPanel_UI {
                     posdialog.y = pos.y + panelheight + 20;
                 }
                 else {
-                    posdialog.y = pos.y - dialogpanel.contentheight - 20;
+                    posdialog.y = pos.y - dialogheight - 20;
                 }
-                posdialog.x = pos.x + panelwidth / 2 - dialogpanel.contentwidth / 2;
+                posdialog.x = pos.x + panelwidth / 2 - dialogwidth / 2;
                 if (posdialog.x < 0) {
                     posdialog.x = 0;
                 }
             }
+            LogHelper.print(windowwidth, windowheight,"window");
+            LogHelper.print(isleft, istop,"window");
+            LogHelper.print(dialogwidth, dialogheight,"dialog");
+            LogHelper.print(pos.x, pos.y, "ssss");
+            let data = bindpanel.GetPositionWithinWindow();
+            LogHelper.print(data.x, data.y,"ssss");
             dialogpanel.SetPositionInPixels(posdialog.x, posdialog.y, 0);
             dialogpanel.visible = true;
         });
@@ -179,7 +187,7 @@ export class MainPanel extends MainPanel_UI {
     public AddTextToolTip(bindpanel: Panel, attrFunc: (() => string | void)) {
         if (!bindpanel) { return };
         let tipType = ToolTipHelper.ToolTipType.DOTAShowTextTooltip;
-        let brightness = Number(bindpanel.style.brightness);
+        let brightness = Number(bindpanel.style.brightness) || 1;
         bindpanel.SetPanelEvent('onmouseover', () => {
             let tips = attrFunc();
             if (tips) {
@@ -195,7 +203,7 @@ export class MainPanel extends MainPanel_UI {
     public AddTitleTextToolTip(bindpanel: Panel, attrFunc: (() => { title: string, tip: string } | void)) {
         if (!bindpanel) { return };
         let tipType = ToolTipHelper.ToolTipType.DOTAShowTitleTextTooltip;
-        let brightness = Number(bindpanel.style.brightness);
+        let brightness = Number(bindpanel.style.brightness) || 1;
         bindpanel.SetPanelEvent('onmouseover', () => {
             let data = attrFunc();
             if (data) {

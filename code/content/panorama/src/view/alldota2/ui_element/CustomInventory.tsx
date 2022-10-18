@@ -4,6 +4,8 @@ import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { GameEnum } from "../../../libs/GameEnum";
+import { CombinationInfoDialog } from "../../Combination/CombinationInfoDialog";
+import { MainPanel } from "../../MainPanel/MainPanel";
 import { CustomInventory_UI } from "./CustomInventory_UI";
 
 export class CustomInventory extends CustomInventory_UI {
@@ -26,6 +28,7 @@ export class CustomInventory extends CustomInventory_UI {
                 if (_slot) {
                     // 背包道具背景图
                     let buttonSize = _slot.FindChildTraverse("ButtonSize");
+                    let abilityButton = _slot.FindChildTraverse("AbilityButton");
                     // buttonSize!.style.backgroundImage = "none";
                     // buttonSize!.style.backgroundColor = "none";
                     this.buttonSizePanel.push(buttonSize!);
@@ -46,24 +49,23 @@ export class CustomInventory extends CustomInventory_UI {
                     item_rare.SetPanelEvent("oncontextmenu", () => {
                         this.onBtn_rightClick(i);
                     });
-                    item_rare.SetPanelEvent("onmouseover", () => {
-                        this.onBtn_mouseover(i);
-                    });
-                    item_rare.SetPanelEvent("onmouseout", () => {
-                        this.onBtn_mouseout(i);
-                    });
+                    MainPanel.GetInstance()!.AddCustomToolTip(item_rare!, CombinationInfoDialog,  () => { return { title: "1111", tip: "2222" } })
                     // b 拖动的panel
-                    $.RegisterEventHandler("DragEnter", item_rare!, (panelID: Panel, dragged: Panel) => {
+                    $.RegisterEventHandler("DragEnter", abilityButton!, (panelID: Panel, dragged: Panel) => {
                         LogHelper.print("DragEnter", panelID, dragged)
                         // this.onBtn_dragend(i);
                     });
-                    $.RegisterEventHandler("DragLeave", item_rare!, (panelID: Panel, dragged: Panel) => {
+                    $.RegisterEventHandler("DragLeave", abilityButton!, (panelID: Panel, dragged: Panel) => {
                         // this.onBtn_dragend(i);
                         LogHelper.print("DragLeave", panelID, dragged)
                     });
-                    $.RegisterEventHandler("DragEnd", item_rare!, (panelID: Panel, dragged: Panel) => {
+                    $.RegisterEventHandler("DragDrop", abilityButton!, (panelID: Panel, dragged: Panel) => {
+                        // this.onBtn_dragend(i);
+                        LogHelper.print("DragDrop", panelID, dragged)
+                    });
+                    $.RegisterEventHandler("DragEnd", abilityButton!, (panelID: Panel, dragged: Panel) => {
                         LogHelper.print("DragEnd", panelID, dragged)
-                        this.onBtn_dragend(i);
+                        // this.onBtn_dragend(i);
                     });
                 }
             }
@@ -151,8 +153,12 @@ export class CustomInventory extends CustomInventory_UI {
     onBtn_rightClick = (item_slot: number) => {
         LogHelper.print(111111, " ---", item_slot);
     };
-    onBtn_mouseover = (item_slot: number) => { };
-    onBtn_mouseout = (item_slot: number) => { };
+    onBtn_mouseover = (panel: Panel, item_slot: number) => {
+    };
+    onBtn_mouseout = (panel: Panel, item_slot: number) => {
+
+
+    };
     onBtn_dragend = (item_slot: number) => {
         // todo
         let pos = GameUI.GetCursorPosition();

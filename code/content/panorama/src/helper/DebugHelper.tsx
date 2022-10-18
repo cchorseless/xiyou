@@ -36,9 +36,9 @@ export module DebugHelper {
             let eventName = (GameEnum.GameEvent as any)[k]
             if (eventName) {
                 GameEvents.Subscribe(eventName, (e) => {
-                    LogHelper.print(eventName,e);
+                    // LogHelper.print(eventName,e);
                     if (k == GameEnum.GameEvent.dota_player_update_query_unit) {
-                        LogHelper.print(Players.GetLocalPlayerPortraitUnit());
+                        // LogHelper.print(Players.GetLocalPlayerPortraitUnit());
                     }
                 })
             }
