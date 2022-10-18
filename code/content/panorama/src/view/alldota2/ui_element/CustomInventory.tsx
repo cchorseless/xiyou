@@ -49,8 +49,11 @@ export class CustomInventory extends CustomInventory_UI {
                     item_rare.SetPanelEvent("oncontextmenu", () => {
                         this.onBtn_rightClick(i);
                     });
-                    MainPanel.GetInstance()!.AddCustomToolTip(item_rare!, CombinationInfoDialog,  () => { return { title: "1111", tip: "2222" } })
+                    MainPanel.GetInstance()!.AddCustomToolTip(abilityButton!, CombinationInfoDialog, () => { return { title: "1111", tip: "2222" } })
                     // b 拖动的panel
+                    $.RegisterEventHandler("DragStart", abilityButton!, (panelID: Panel, dragged: Panel) => {
+                        MainPanel.GetInstance()!.HideToolTip(abilityButton!);
+                    });
                     $.RegisterEventHandler("DragEnter", abilityButton!, (panelID: Panel, dragged: Panel) => {
                         LogHelper.print("DragEnter", panelID, dragged)
                         // this.onBtn_dragend(i);

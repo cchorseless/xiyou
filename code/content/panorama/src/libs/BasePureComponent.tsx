@@ -443,19 +443,4 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
             BasePureComponentSystem.RegisterReactElement(nodeinfo.Node, false);
         }
     }
-    getOverflow = () => {
-        switch (this.props.scroll) {
-            case "x":
-                return "scroll squish";
-            case "y":
-                return "squish scroll";
-            case "both":
-                return "scroll scroll";
-            case "none" || ["none", "none"]:
-                return "squish squish";
-            default:
-                break;
-        }
-
-    };
 }
