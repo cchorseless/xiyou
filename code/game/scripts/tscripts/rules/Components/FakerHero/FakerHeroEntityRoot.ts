@@ -1,6 +1,4 @@
 import { GetRegClass } from "../../../GameCache";
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
-import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
