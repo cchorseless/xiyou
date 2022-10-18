@@ -896,11 +896,50 @@ export module CSSHelper {
         }
         node.current.text = $.Localize("#" + str);
     }
-    export function setFlowChildren(node: React.RefObject<Panel>, str: "right-wrap" | "right" | "down" = "right-wrap") {
+    export function setFlowChildren(node: React.RefObject<Panel>, str: "right" | "right-wrap" | "down" | "down-wrap" | "left" | "left-wrap" | "up" | "up-wrap" | "none" = "right-wrap") {
         if (node.current == null) {
             return;
         }
         node.current.style.flowChildren = str;
+    }
+    export function setVerticalAlign(node: React.RefObject<Panel>, str: "top" | "bottom" | "middle" | "center" = "top") {
+        if (node.current == null) {
+            return;
+        }
+        node.current.style.verticalAlign = str;
+    }
+    export function setHorizontalAlign(node: React.RefObject<Panel>, str: "left" | "right" | "middle" | "center" = "left") {
+        if (node.current == null) {
+            return;
+        }
+        node.current.style.horizontalAlign = str;
+    }
+    export function setAlign(node: React.RefObject<Panel>, str: "left top" | "left center" | "left bottom" | "center top" | "center center" | "center bottom" | "right top" | "right center" | "right bottom") {
+        if (node.current == null) {
+            return;
+        }
+        node.current.style.align = str;
+    }
+    export function setScroll(node: React.RefObject<Panel>, str: "x" | "y" | "both" | "default") {
+        if (node.current == null) {
+            return;
+        }
+        let style = ""
+        switch (str) {
+            case "x":
+                style = "scroll squish";
+                break;
+            case "y":
+                style = "squish scroll";
+                break;
+            case "both":
+                style = "scroll scroll";
+                break;
+            default:
+                style = "squish squish";
+                break;
+        }
+        (node.current.style.overflow as any) = style;
     }
     export function setBgImageUrl(node: React.RefObject<Panel>, str: string) {
         if (node.current == null) {

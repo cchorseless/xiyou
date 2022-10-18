@@ -177,14 +177,16 @@ export class MainPanel extends MainPanel_UI {
             dialogpanel.SetPositionInPixels(posdialog.x, posdialog.y, 0);
             dialogpanel.visible = true;
         });
-        bindpanel.SetPanelEvent('onmouseout', () => {
+        let hideFunc = () => {
             isinrange = false;
             bindpanel.style.brightness = brightness + "";
             if (this.CustomToolTip) {
                 this.CustomToolTip.close();
                 this.CustomToolTip = null;
             }
-        })
+        };
+        (bindpanel as any)["HideToolTipFunc"] = hideFunc;
+        bindpanel.SetPanelEvent('onmouseout', hideFunc)
     }
     public AddTextToolTip(bindpanel: Panel, attrFunc: (() => string | void)) {
         if (!bindpanel) { return };
@@ -197,10 +199,12 @@ export class MainPanel extends MainPanel_UI {
                 $.DispatchEvent(tipType, bindpanel, tips);
             }
         });
-        bindpanel.SetPanelEvent('onmouseout', () => {
+        let hideFunc = () => {
             bindpanel.style.brightness = brightness + "";
             $.DispatchEvent(tipType.replace('Show', 'Hide'), bindpanel)
-        })
+        }
+        (bindpanel as any)["HideToolTipFunc"] = hideFunc;
+        bindpanel.SetPanelEvent('onmouseout', hideFunc)
     }
     public AddTitleTextToolTip(bindpanel: Panel, attrFunc: (() => { title: string, tip: string } | void)) {
         if (!bindpanel) { return };
@@ -213,10 +217,18 @@ export class MainPanel extends MainPanel_UI {
                 $.DispatchEvent(tipType, bindpanel, data.title, data.tip);
             }
         });
-        bindpanel.SetPanelEvent('onmouseout', () => {
+        let hideFunc = () => {
             bindpanel.style.brightness = brightness + "";
             $.DispatchEvent(tipType.replace('Show', 'Hide'), bindpanel)
-        })
+        };
+        (bindpanel as any)["HideToolTipFunc"] = hideFunc;
+        bindpanel.SetPanelEvent('onmouseout', hideFunc)
     }
 
+    public HideToolTip(bindpanel: Panel) {
+        let hideFunc = (bindpanel as any)["HideToolTipFunc"];
+        if (hideFunc) {
+            hideFunc();
+        }
+    }
 }
