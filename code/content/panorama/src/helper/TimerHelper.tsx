@@ -4,13 +4,18 @@ import { SingletonClass } from "./SingletonHelper";
 
 export module TimerHelper {
     export const Offtime = new Date().getTimezoneOffset() * 60 * 1000;
-    export const UpdateInterval = 0.02;
+    export const UpdateInterval = () => {
+        return Game.GetGameFrameTime() || 0.02;
+    }
 
     export function Init() {
-        $.Schedule(UpdateInterval, Update);
+        let interval = UpdateInterval();
+        $.Schedule(interval, () => {
+            Update(interval);
+        });
     }
-    function Update() {
-        TimeHelper.GetInstance().Update();
+    function Update(interval: number): void {
+        TimeHelper.GetInstance().Update(interval);
         Init();
     }
 
@@ -48,7 +53,7 @@ export module TimerHelper {
         }
 
         //更新
-        public Update(): boolean {
+        public Update(interval: number): boolean {
             if (!this.isIgnorePauseTime && Game.IsGamePaused()) {
                 return true;
             }
@@ -57,7 +62,7 @@ export module TimerHelper {
                 deltaTime = 1000;
             } else {
                 // UpdateInterval * 1000
-                deltaTime = 20;
+                deltaTime = interval * 1000;
             }
             this.mRunTime += deltaTime;
             let isFinish = this.mRunTime >= this.mDelay;
@@ -201,9 +206,9 @@ export module TimerHelper {
                 }
             }
         }
-        public Update() {
+        public Update(interval: number) {
             for (let i = 0; i < this.mUseTimerTasks.length; ++i) {
-                if (!this.mUseTimerTasks[i].Update()) {
+                if (!this.mUseTimerTasks[i].Update(interval)) {
                     //没更新成功，mUseTimerTasks长度减1，所以需要--i
                     --i;
                 }

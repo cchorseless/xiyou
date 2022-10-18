@@ -99,7 +99,7 @@ export function reloadable<T extends { new(...args: any[]): {}; }>(constructor: 
 export function GetRegClass<T>(className: string) {
     let r = globalData.reloadCache[className];
     if (r == null) {
-        LogHelper.error("NOT Reg reload Class " + className);
+        LogHelper.error("NOT Reg Reload Class " + className);
     }
     return r as T;
 }
