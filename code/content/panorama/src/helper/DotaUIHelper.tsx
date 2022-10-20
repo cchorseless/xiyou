@@ -228,26 +228,26 @@ export module DotaUIHelper {
         });
         $.RegisterForUnhandledEvent("DragEnter", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
             MainPanel.GetInstance()!.HideToolTip();
-            if (pPanel.BHasClass && pPanel.BHasClass(IsDragTargetPanel)) {
+            if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 let brightness = pPanel.style.brightness || 1;
                 pPanel.style.brightness = Number(brightness) + 0.5 + "";
                 runDragHandler(pDraggedPanel, "DragEnter", pPanel);
             }
         });
         $.RegisterForUnhandledEvent("DragLeave", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
-            if (pPanel.BHasClass && pPanel.BHasClass(IsDragTargetPanel)) {
+            if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 let brightness = pPanel.style.brightness || 1.5;
                 pPanel.style.brightness = Number(brightness) - 0.5 + "";
                 runDragHandler(pDraggedPanel, "DragLeave", pPanel);
             }
         });
         $.RegisterForUnhandledEvent("DragDrop", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
-            if (pPanel.BHasClass && pPanel.BHasClass(IsDragTargetPanel)) {
+            if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 runDragHandler(pDraggedPanel, "DragDrop", pPanel);
             }
         });
         $.RegisterForUnhandledEvent("DragEnd", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
-            if (pPanel.BHasClass && pPanel.BHasClass(IsDragTargetPanel)) {
+            if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 runDragHandler(pDraggedPanel, "DragEnd", pPanel);
             }
         });

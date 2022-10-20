@@ -121,13 +121,18 @@ export class GameEntityRoot extends ET.EntityRoot {
             // 17 表示 无效
             if (event.item_slot < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM) {
                 (event as IBuffEventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
-                (event as IBuffEventData).unit = EntIndexToHScript(event.inventory_parent_entindex) as BaseNpc_Plus;
+                let unit = EntIndexToHScript(event.inventory_parent_entindex) as BaseNpc_Plus;
+                (event as IBuffEventData).unit = unit;
                 // 设置道具第一个拥有者
                 let item = EntIndexToHScript(event.item_entindex) as BaseItem_Plus;
-                if (item.GetPurchaser() == null) {
-                    item.SetPurchaser((event as IBuffEventData).unit);
-                }
                 modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_GET);
+                if (item.ETRoot && unit.ETRoot) {
+                    let itemroot = item.ETRoot.As<ItemEntityRoot>();
+                    let npcroot = unit.ETRoot.As<PlayerCreateBattleUnitEntityRoot>()
+                    if (npcroot.ItemManagerComp()) {
+                        npcroot.ItemManagerComp().addItemRoot(itemroot);
+                    }
+                }
             }
         });
         // 道具缺失事件
@@ -136,7 +141,8 @@ export class GameEntityRoot extends ET.EntityRoot {
             let state = item.GetItemState();
             let slot = item.GetItemSlot();
             (event as IBuffEventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
-            (event as IBuffEventData).unit = EntIndexToHScript(event.hero_entindex) as BaseNpc_Plus;
+            let unit = EntIndexToHScript(event.hero_entindex) as BaseNpc_Plus;
+            (event as IBuffEventData).unit = unit;
             // 道具不在身上
             if (state == 0 && slot == -1) {
                 modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_LOSE);
@@ -144,6 +150,10 @@ export class GameEntityRoot extends ET.EntityRoot {
             // 道具销毁|出售
             else if (state == 1 && slot == DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1) {
                 modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_DESTROY);
+                if (item.ETRoot) {
+                    let itemroot = item.ETRoot.As<ItemEntityRoot>();
+                    itemroot.Dispose();
+                }
             }
         });
         // 道具位置改变
@@ -168,13 +178,14 @@ export class GameEntityRoot extends ET.EntityRoot {
             let playerid = event.PlayerID;
             let itemslot = event.data.slot;
             let npcentindex = event.data.npc;
+            let itementityid = event.data.itementityid;
             let hero = this.PlayerSystem().GetPlayer(playerid).Hero!;
             if (hero == null || itemslot == null || npcentindex == null) {
                 event.state = false;
                 EventHelper.ErrorMessage("not valid args", playerid);
                 return;
             }
-            let itemEnity = hero.GetItemInSlot(itemslot) as BaseItem_Plus;
+            let itemEnity = EntIndexToHScript(itementityid)  as BaseItem_Plus;
             let npc = EntIndexToHScript(npcentindex) as BaseNpc_Plus;
             if (!GameFunc.IsValid(itemEnity) || !GameFunc.IsValid(npc) || itemEnity.ETRoot == null || npc.ETRoot == null) {
                 event.state = false;
@@ -195,6 +206,7 @@ export class GameEntityRoot extends ET.EntityRoot {
         EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_ITEM_DROP_POSITION, (event: JS_TO_LUA_DATA) => {
             let playerid = event.PlayerID;
             let itemslot = event.data.slot;
+            let itementityid = event.data.itementityid;
             let pos = event.data.pos;
             let hero = this.PlayerSystem().GetPlayer(playerid).Hero!;
             if (hero == null || itemslot == null || pos == null) {
@@ -202,7 +214,7 @@ export class GameEntityRoot extends ET.EntityRoot {
                 EventHelper.ErrorMessage("not valid args", playerid);
                 return;
             }
-            let itemEnity = hero.GetItemInSlot(itemslot) as BaseItem_Plus;
+            let itemEnity = EntIndexToHScript(itementityid)  as BaseItem_Plus;
             if (!GameFunc.IsValid(itemEnity) || itemEnity.ETRoot == null) {
                 event.state = false;
                 EventHelper.ErrorMessage("not valid item ", playerid);
@@ -211,7 +223,7 @@ export class GameEntityRoot extends ET.EntityRoot {
             let itemroot = itemEnity.ETRoot.As<ItemEntityRoot>();
             if (itemroot.DomainParent == null) {
                 event.state = false;
-                EventHelper.ErrorMessage("not valid item ", playerid);
+                EventHelper.ErrorMessage(" item DomainParent is null", playerid);
                 return;
             }
             let posV = Vector(pos.x, pos.y, pos.z);

@@ -114,6 +114,7 @@ export class CustomInventory extends CustomInventory_UI {
     }
 
     onBtn_leftClick = (item_slot: number) => {
+        this.selectedEntityid = Players.GetLocalPlayerPortraitUnit();;
         let overrideentityindex = Entities.GetItemInSlot(this.selectedEntityid, item_slot);
         if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
             if (GameUI.IsAltDown()) {
@@ -153,12 +154,15 @@ export class CustomInventory extends CustomInventory_UI {
         let pos = GameUI.GetCursorPosition();
         if (!panel.BHasClass("panel_base")) { return; }
         let entitys = GameUI.FindScreenEntities(pos);
+        this.selectedEntityid = Players.GetLocalPlayerPortraitUnit();
+        let itementityid = Entities.GetItemInSlot(this.selectedEntityid, item_slot);
         if (entitys.length > 0) {
             for (let info of entitys) {
                 if (info.accurateCollision) {
                     NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_GIVE_NPC, {
                         npc: info.entityIndex,
-                        slot: item_slot
+                        slot: item_slot,
+                        itementityid: itementityid
                     })
                     break;
                 }
@@ -174,7 +178,8 @@ export class CustomInventory extends CustomInventory_UI {
             // 直接扔
             NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_DROP_POSITION, {
                 pos: { x: worldpos[0], y: worldpos[1], z: worldpos[2] },
-                slot: item_slot
+                slot: item_slot,
+                itementityid: itementityid
             })
         }
     };
