@@ -240,7 +240,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         let _childsName = this.getNode_childs_Name(nodeName);
         let parentNode: Array<JSX.Element> = (this as any)[_childsName];
         if (parentNode == null) {
-            throw Error(this.constructor.name + " dont have node : " + nodeName);
+            throw new Error(this.constructor.name + " dont have node : " + nodeName);
         }
         let len = parentNode.length;
         for (let i = 0; i < len; i++) {
