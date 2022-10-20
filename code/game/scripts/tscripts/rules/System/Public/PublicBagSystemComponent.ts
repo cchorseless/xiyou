@@ -1,6 +1,7 @@
 import { reloadable } from "../../../GameCache";
 import { KVHelper } from "../../../helper/KVHelper";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
+import { ActiveRootItem } from "../../../npc/items/ActiveRootItem";
 import { ItemEntityRoot } from "../../Components/Item/ItemEntityRoot";
 import { ET } from "../../Entity/Entity";
 import { PublicBagConfig } from "./PublicBagConfig";
@@ -13,7 +14,6 @@ export class PublicBagSystemComponent extends ET.Component {
         this.addEvent();
     }
     public addEvent() {
-
     }
     AllItem: { [key: string]: string } = {};
     getItemByIndex(key: string) {
@@ -25,14 +25,15 @@ export class PublicBagSystemComponent extends ET.Component {
         return Object.values(this.AllItem).length < PublicBagConfig.MAX_ITEM_COUNT;
     }
 
-    createBuildingItem(towername: string) {
+    addBuildingItem(towername: string) {
         if (!this.IsEmpty()) { return; }
         let cardItemName = KVHelper.KvServerConfig.building_unit_tower[towername].CardName;
-        let item = CreateItem(cardItemName, null, null) as BaseItem_Plus;
-        if (item && item.ETRoot) {
-            return item.ETRoot as ItemEntityRoot;
+        let item = ActiveRootItem.CreateItem(cardItemName);
+        if (item) {
+            return item.ETRoot;
         }
     }
+
     putInItem(item: ItemEntityRoot) {
         if (!this.IsEmpty()) { return; }
         if (Object.values(this.AllItem).includes(item.Id)) { return; }

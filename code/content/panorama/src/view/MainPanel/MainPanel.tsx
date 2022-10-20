@@ -1,7 +1,6 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
-import { System_Avalon } from "../../game/system/System_Avalon";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { DotaUIHelper } from "../../helper/DotaUIHelper";
 import { FuncHelper } from "../../helper/FuncHelper";

@@ -25,6 +25,7 @@ import { BattleUnitSummonEntityRoot } from "./components/BattleUnit/BattleUnitSu
 import { BuildingRuntimeEntityRoot } from "./components/Building/BuildingRuntimeEntityRoot";
 import { CourierDataComponent } from "./components/Courier/CourierDataComponent";
 import { CourierEntityRoot } from "./components/Courier/CourierEntityRoot";
+import { PublicBagSystemComponent } from "./system/Public/PublicBagSystemComponent";
 
 AbilityEntityRoot;
 
@@ -60,6 +61,10 @@ PlayerEntityRoot;
 EntityRootManagerComponent;
 RoundManagerComponent;
 ERoundBoard;
+
+
+PublicBagSystemComponent;
+
 
 export class AllEntity {
     static IsInit: boolean = false;

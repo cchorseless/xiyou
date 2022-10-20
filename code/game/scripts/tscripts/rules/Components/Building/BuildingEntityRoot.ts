@@ -65,14 +65,8 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
 
     onDestroy(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
-        if (GameFunc.IsValid(npc) && !npc.__safedestroyed__) {
-            TimerHelper.addTimer(
-                3,
-                () => {
-                    npc.SafeDestroy();
-                },
-                this
-            );
+        if (GameFunc.IsValid(npc)) {
+            npc.SafeDestroy();
         }
     }
 

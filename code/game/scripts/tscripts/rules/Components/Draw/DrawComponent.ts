@@ -93,7 +93,7 @@ export class DrawComponent extends ET.Component {
         if (b2Public != 0) {
             let publicbag = GameRules.Addon.ETRoot.PublicBagSystem();
             if (publicbag.IsEmpty()) {
-                let itemroot = publicbag.createBuildingItem(unitName);
+                let itemroot = publicbag.addBuildingItem(unitName);
                 if (itemroot == null) {
                     return [false, "itemcreate fail"];
                 }

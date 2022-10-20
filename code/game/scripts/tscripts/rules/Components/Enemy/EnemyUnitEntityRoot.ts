@@ -37,13 +37,7 @@ export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     onDestroy(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
         if (GameFunc.IsValid(npc)) {
-            TimerHelper.addTimer(
-                3,
-                () => {
-                    npc.SafeDestroy();
-                },
-                this
-            );
+            npc.SafeDestroy();
         }
     }
 

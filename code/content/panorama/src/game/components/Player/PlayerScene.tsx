@@ -6,6 +6,7 @@ import { GameEnum } from "../../../libs/GameEnum";
 import { TServerZone } from "../../service/serverzone/TServerZone";
 import { PlayerEntityRoot } from "./PlayerEntityRoot";
 import { LogHelper } from "../../../helper/LogHelper";
+import { PublicBagSystemComponent } from "../../system/Public/PublicBagSystemComponent";
 
 export class PlayerScene {
     /**组件 */
@@ -16,6 +17,10 @@ export class PlayerScene {
 
     static get EntityRootManage() {
         return this.Scene.GetComponentByName<EntityRootManagerComponent>("EntityRootManagerComponent")!;
+    }
+
+    static get PublicBagSystemComp() {
+        return this.Scene.GetComponentByName<PublicBagSystemComponent>("PublicBagSystemComponent")!;
     }
 
     static get TServerZone() {
