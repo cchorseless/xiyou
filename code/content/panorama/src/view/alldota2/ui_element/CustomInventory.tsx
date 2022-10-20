@@ -50,6 +50,7 @@ export class CustomInventory extends CustomInventory_UI {
                         this.onBtn_leftClick(i);
                     });
                     item_rare.SetPanelEvent("oncontextmenu", () => {
+                        MainPanel.GetInstance()!.HideToolTip(item_rare!);
                         this.onBtn_rightClick(i);
                     });
                     MainPanel.GetInstance()!.AddCustomToolTip(item_rare!, CombinationInfoDialog, () => { return { title: "1111", tip: "2222" } })

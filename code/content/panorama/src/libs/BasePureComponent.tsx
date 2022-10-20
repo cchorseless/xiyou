@@ -372,7 +372,12 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
             this.destroy();
         }
     }
-
+    public hide() {
+        if (this.__root__ && this.__root__.current) {
+            this.__root__.current.style.opacity = 0+"";
+            this.updateSelf();
+        }  
+    }
     private allGameEventID: GameEventListenerID[] = [];
     /**添加游戏事件 */
     public addGameEvent(eventName: GameEnum.GameEvent, handler: (e?: any) => void) {

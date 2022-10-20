@@ -33,7 +33,7 @@ declare let OnStartTouch: any;
 
 
 /**创建modeifier数据结构 */
-interface ModifierTable {
+interface ModifierTable  {
     /**时间 */
     duration?: number;
     /**hash id */

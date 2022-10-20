@@ -16,9 +16,9 @@ import { PlayerCreateUnitEntityRoot } from "./PlayerCreateUnitEntityRoot";
 export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot {
 
     @serializeETProps()
-    IsShowOverhead: boolean = true;
+    IsShowOverhead: boolean = false;
     SetUIOverHead(isshow: boolean) {
-        this.IsShowOverhead = isshow;
+        this.IsShowOverhead = false;
         this.SyncClientEntity(this, true);
     }
 

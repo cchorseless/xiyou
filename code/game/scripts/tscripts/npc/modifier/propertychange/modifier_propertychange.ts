@@ -3,6 +3,9 @@ import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_P
 
 export class modifier_propertychange extends BaseModifier_Plus {
 
+    public IsHidden(): boolean {
+        return false;
+    }
     config() {
         return KVHelper.KvServerConfig.effect_config[this.constructor.name];
     }

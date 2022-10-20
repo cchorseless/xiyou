@@ -1,12 +1,14 @@
 import { GetRegClass } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
+import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ActiveRootItem } from "../../../npc/items/ActiveRootItem";
+import { modifier_out_of_game } from "../../../npc/modifier/battle/modifier_out_of_game";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { BuildingComponent } from "./BuildingComponent";
@@ -29,7 +31,9 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         let hCaster = this.GetDomain<BaseNpc_Plus>();
         let vLocation = hCaster.GetAbsOrigin();
         let iTeamNumber = hCaster.GetTeamNumber()
-        hCaster.AddNoDraw();
+        // hCaster.AddNoDraw();
+        let buff = modifier_out_of_game.applyOnly(hCaster,hCaster);
+        LogHelper.print(buff==null)
         this.SetUIOverHead(false)
         let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
         let cloneRuntime = CreateUnitByName(this.ConfigID, vLocation, true, hHero, hHero, iTeamNumber) as BaseNpc_Plus;
@@ -61,7 +65,11 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
             // buff
             let modifiers = hCaster.FindAllModifiers() as BaseModifier_Plus[];
             for (let modifier of (modifiers)) {
+
                 if (modifier.GetName() == "modifier_jiaoxie_wudi") {
+                    continue;
+                }
+                if (modifier.GetName() == "modifier_out_of_game") {
                     continue;
                 }
                 let buff = cloneRuntime.addBuff(modifier.GetName(), modifier.GetCasterPlus(), modifier.GetAbilityPlus())
@@ -76,7 +84,8 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         }
         this.RuntimeBuilding = null;
         let hCaster = this.GetDomain<BaseNpc_Plus>();
-        hCaster.RemoveNoDraw();
+        // hCaster.RemoveNoDraw();
+        hCaster.removeBuff<modifier_out_of_game>("modifier_out_of_game");
         this.SetUIOverHead(true)
     }
 
