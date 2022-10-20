@@ -254,12 +254,13 @@ export module DotaUIHelper {
     }
     const AllEventInfo: { [eventName: string]: [{ pDraggedPanel: ItemImage | AbilityImage, isonce: boolean; handler: FuncHelper.Handler }] } = {};
     function runDragHandler(pDraggedPanel: ItemImage | AbilityImage, eventName: string, ...args: any[]) {
+        if (pDraggedPanel == null || !pDraggedPanel.IsValid()) { return }
         let eventinfo = AllEventInfo[eventName];
         if (eventinfo) {
             for (let i = 0, len = eventinfo.length; i < len; i++) {
                 let info = eventinfo[i];
                 if (info && info.handler && info.handler._id > 0) {
-                    if (info.pDraggedPanel.contextEntityIndex == pDraggedPanel.contextEntityIndex) {
+                    if (info.pDraggedPanel.contextEntityIndex && info.pDraggedPanel.contextEntityIndex == pDraggedPanel.contextEntityIndex) {
                         if (args.length > 0) {
                             info.handler.runWith(args);
                         } else {
