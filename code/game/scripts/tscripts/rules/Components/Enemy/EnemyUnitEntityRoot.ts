@@ -36,8 +36,7 @@ export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
 
     onDestroy(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
-        if (GameFunc.IsValid(npc) && !npc.__safedestroyed__) {
-            npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
+        if (GameFunc.IsValid(npc)) {
             TimerHelper.addTimer(
                 3,
                 () => {
@@ -56,6 +55,7 @@ export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     }
 
     onKilled(events: EntityKilledEvent): void {
+        super.onKilled(events);
         this.GetPlayer().EnemyManagerComp().killEnemy(this);
     }
 

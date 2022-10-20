@@ -54,25 +54,10 @@ export class CustomInventory extends CustomInventory_UI {
                         this.onBtn_rightClick(i);
                     });
                     MainPanel.GetInstance()!.AddCustomToolTip(item_rare!, CombinationInfoDialog, () => { return { title: "1111", tip: "2222" } })
-                    // b 拖动的panel
-                    $.RegisterEventHandler("DragEnter", itemImage!, (panelID: Panel, dragged: Panel) => {
-                        LogHelper.print("DragEnter", panelID.id);
-                        CSSHelper.addBorderStyle(panelID);
-                        // MainPanel.GetInstance()!.HideToolTip(item_rare!);
-                        // this.onBtn_dragend(i);
-                    });
-                    $.RegisterEventHandler("DragLeave", itemImage!, (panelID: Panel, dragged: Panel) => {
-                        // this.onBtn_dragend(i);
-                        CSSHelper.removeBorderStyle(panelID);
-                        LogHelper.print("DragLeave", panelID.id)
-                    });
-                    $.RegisterEventHandler("DragDrop", itemImage!, (panelID: Panel, dragged: Panel) => {
-                        // this.onBtn_dragend(i);
-                        LogHelper.print("DragDrop", panelID.id)
-                    });
-                    $.RegisterEventHandler("DragEnd", itemImage!, (panelID: Panel, dragged: Panel) => {
-                        LogHelper.print("DragEnd", panelID.id)
-                    });
+                    DotaUIHelper.addDragEvent(itemImage!, "DragDrop", FuncHelper.Handler.create(this, (panel: Panel) => {
+                        this.onBtn_dragdrop(i, panel);
+                    }))
+
                 }
             }
             this.onRefreshUI();
@@ -165,7 +150,7 @@ export class CustomInventory extends CustomInventory_UI {
 
 
     };
-    onBtn_dragend = (item_slot: number) => {
+    onBtn_dragdrop = (item_slot: number, panel: Panel) => {
         // todo
         let pos = GameUI.GetCursorPosition();
         if (this.IsInThisRangle(pos[0], pos[1])) { return; }

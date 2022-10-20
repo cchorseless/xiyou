@@ -21,6 +21,17 @@ export class AbilityManagerComponent extends ET.Component {
         }
     }
 
+    cloneAbility(source: AbilityManagerComponent) {
+        let allability = source.getAllBaseAbility();
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        allability.forEach(ability => {
+            let abilityname = ability.GetAbilityName();
+            if (npc.FindAbilityByName(abilityname) == null) {
+                npc.addAbilityPlus(abilityname)
+            }
+        })
+    }
+
     extraAbility: AbilityEntityRoot;
     tryLearnExtraAbility(abilityname: string) {
         let npc = this.GetDomain<BaseNpc_Plus>();

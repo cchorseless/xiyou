@@ -1,3 +1,4 @@
+import { FuncHelper } from "./FuncHelper";
 import { LogHelper } from "./LogHelper";
 import { TimerHelper } from "./TimerHelper";
 
@@ -218,12 +219,95 @@ export module DotaUIHelper {
         lower_hud = "lower_hud",
     }
 
+    function RegDragEvent() {
+        $.RegisterForUnhandledEvent("DragStart", (pPanel: Panel, pDraggedPanel: Panel) => {
+            runDragHandler(pDraggedPanel, "DragStart", pPanel)
+        });
+        $.RegisterForUnhandledEvent("DragEnter", (pPanel: Panel, pDraggedPanel: Panel) => {
+            if (pPanel.BHasClass && pPanel.BHasClass(IsDragTargetPanel)) {
+                let brightness = pPanel.style.brightness || 1;
+                pPanel.style.brightness = Number(brightness) + 0.5 + "";
+                runDragHandler(pDraggedPanel, "DragEnter", pPanel);
+            }
+        });
+        $.RegisterForUnhandledEvent("DragLeave", (pPanel: Panel, pDraggedPanel: Panel) => {
+            if (pPanel.BHasClass && pPanel.BHasClass(IsDragTargetPanel)) {
+                let brightness = pPanel.style.brightness || 1.5;
+                pPanel.style.brightness = Number(brightness) - 0.5 + "";
+                runDragHandler(pDraggedPanel, "DragLeave", pPanel);
+            }
+        });
+        $.RegisterForUnhandledEvent("DragDrop", (pPanel: Panel, pDraggedPanel: Panel) => {
+            if (pPanel.BHasClass && pPanel.BHasClass(IsDragTargetPanel)) {
+                runDragHandler(pDraggedPanel, "DragDrop", pPanel);
+            }
+        });
+        $.RegisterForUnhandledEvent("DragEnd", (pPanel: Panel, pDraggedPanel: Panel) => {
+            if (pPanel.BHasClass && pPanel.BHasClass(IsDragTargetPanel)) {
+                runDragHandler(pDraggedPanel, "DragEnd", pPanel);
+            }
+        });
+    }
+    const AllEventInfo: { [eventName: string]: [{ pDraggedPanel: Panel, isonce: boolean; handler: FuncHelper.Handler }] } = {};
+    function runDragHandler(pDraggedPanel: Panel, eventName: string, ...args: any[]) {
+        let eventinfo = AllEventInfo[eventName];
+        if (eventinfo) {
+            for (let i = 0, len = eventinfo.length; i < len; i++) {
+                let info = eventinfo[i];
+                if (info && info.handler && info.handler._id > 0) {
+                    if (info.pDraggedPanel === pDraggedPanel) {
+                        if (args.length > 0) {
+                            info.handler.runWith(args);
+                        } else {
+                            info.handler.run();
+                        }
+                        if (info.isonce) {
+                            AllEventInfo[eventName].splice(i, 1);
+                            i--;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    export function addDragEvent(pDraggedPanel: Panel, eventName: "DragEnter" | "DragLeave" | "DragDrop" | "DragEnd", handler: FuncHelper.Handler, isOnce = false) {
+        if (AllEventInfo[eventName] == null) {
+            AllEventInfo[eventName] = [] as any;
+        }
+        if (!isOnce) {
+            handler.once = false;
+        }
+        AllEventInfo[eventName].push({ pDraggedPanel: pDraggedPanel, isonce: isOnce, handler: handler });
+    }
+
+    export function removeDragEvent(pDraggedPanel: Panel) {
+        for (let eventName in AllEventInfo) {
+            for (let i = 0, len = AllEventInfo[eventName].length; i < len; i++) {
+                let info = AllEventInfo[eventName][i];
+                if (info && info.handler && info.handler._id > 0) {
+                    if (info.pDraggedPanel === pDraggedPanel) {
+                        AllEventInfo[eventName].splice(i, 1);
+                        info.handler.recover();
+                        i--;
+                    }
+                }
+            }
+        }
+    }
+
+    export function addDragTargetClass(targetPanel: Panel, className: string) {
+        targetPanel.AddClass(IsDragTargetPanel);
+        targetPanel.AddClass(className);
+    }
+    /**标记可拖拽目标 */
+    const IsDragTargetPanel = "IsDragTargetPanel";
 
     export function Init() {
-
         //小地图
         FindDotaHudElement("GlyphScanContainer")!.style.opacity = "0";
         FindDotaHudElement("RoshanTimerContainer")!.style.opacity = "0";
         FindDotaHudElement("HUDSkinMinimap")!.style.opacity = "0";
+        RegDragEvent();
     }
 }

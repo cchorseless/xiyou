@@ -3,6 +3,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { ActiveRootItem } from "../../../npc/items/ActiveRootItem";
 import { ET } from "../../Entity/Entity";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { ItemEntityRoot } from "./ItemEntityRoot";
@@ -20,6 +21,17 @@ export class ItemManagerComponent extends ET.Component {
                 this.addItemRoot(item.ETRoot as ItemEntityRoot);
             }
         }
+    }
+
+    cloneItem(source: ItemManagerComponent) {
+        let allItem = source.getAllBaseItem();
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        allItem.forEach(item => {
+            let hItem = ActiveRootItem.CreateOneToUnit(npc, item.GetAbilityName());
+            if (item.IsStackable()) {
+                hItem.SetCurrentCharges(item.GetCurrentCharges())
+            }
+        });
     }
 
     getItemRoot(childid: string) {

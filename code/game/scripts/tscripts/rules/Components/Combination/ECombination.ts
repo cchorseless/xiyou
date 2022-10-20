@@ -139,32 +139,32 @@ export class ECombination extends ET.Entity {
             for (let buff of bufflist) {
                 if (buff && buff.length > 0) {
                     let buffconfig = KVHelper.KvServerConfig.effect_config[buff];
-                    let type = GetRegClass<typeof BaseModifier_Plus>(buff)
+                    let type = GetRegClass<typeof BaseModifier_Plus>(buff);
                     if (buffconfig && type) {
-                        let buildings: PlayerCreateBattleUnitEntityRoot[];
+                        let battleunits: PlayerCreateBattleUnitEntityRoot[];
                         switch (buffconfig.target) {
                             case CombinationConfig.EEffectTargetType.hero:
-                                buildings = this.getAllBuilding();
+                                battleunits = this.getAllBuilding();
                                 break;
                             case CombinationConfig.EEffectTargetType.team:
-                                buildings = this.Domain.ETRoot.AsPlayer().BuildingManager().getAllBattleBuilding(true, false)
+                                battleunits = this.Domain.ETRoot.AsPlayer().BuildingManager().getAllBattleBuilding(true, false)
                                 break;
                             case CombinationConfig.EEffectTargetType.enemy:
-                                buildings = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllAliveEnemy()
+                                battleunits = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllAliveEnemy()
                                 break;
                         };
-                        if (buildings) {
+                        if (battleunits) {
                             if (isActive) {
-                                buildings.forEach(build => {
+                                battleunits.forEach(unit => {
                                     let entity: BaseNpc_Plus;
-                                    if (build.IsBuilding()) {
-                                        let RuntimeBuilding = build.As<BuildingEntityRoot>().RuntimeBuilding;
+                                    if (unit.IsBuilding()) {
+                                        let RuntimeBuilding = unit.As<BuildingEntityRoot>().RuntimeBuilding;
                                         if (RuntimeBuilding) {
                                             entity = RuntimeBuilding.GetDomain<BaseNpc_Plus>();
                                         }
                                     }
                                     else {
-                                        entity = build.GetDomain<BaseNpc_Plus>();
+                                        entity = unit.GetDomain<BaseNpc_Plus>();
                                     }
                                     if (entity) {
                                         type.applyOnly(entity, entity)
@@ -172,16 +172,16 @@ export class ECombination extends ET.Entity {
                                 })
                             }
                             else {
-                                buildings.forEach(build => {
+                                battleunits.forEach(unit => {
                                     let entity: BaseNpc_Plus;
-                                    if (build.IsBuilding()) {
-                                        let RuntimeBuilding = build.As<BuildingEntityRoot>().RuntimeBuilding;
+                                    if (unit.IsBuilding()) {
+                                        let RuntimeBuilding = unit.As<BuildingEntityRoot>().RuntimeBuilding;
                                         if (RuntimeBuilding) {
                                             entity = RuntimeBuilding.GetDomain<BaseNpc_Plus>();
                                         }
                                     }
                                     else {
-                                        entity = build.GetDomain<BaseNpc_Plus>();
+                                        entity = unit.GetDomain<BaseNpc_Plus>();
                                     }
                                     if (entity) {
                                         type.remove(entity)

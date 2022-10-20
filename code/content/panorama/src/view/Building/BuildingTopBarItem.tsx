@@ -85,7 +85,7 @@ export class BuildingTopBarItem extends BuildingTopBarItem_UI {
     HasOverhead(iEntIndex: EntityIndex): boolean {
         let EntityRootManage = PlayerScene.EntityRootManage;
         let entityroot = EntityRootManage.getBuilding(iEntIndex);
-        if (entityroot && entityroot.IsShowOverhead) {
+        if (entityroot && entityroot.BuildingComp!.IsShowOverhead) {
             return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex) && !Entities.IsInvisible(iEntIndex);
         }
         return false;

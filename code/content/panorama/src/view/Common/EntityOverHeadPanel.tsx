@@ -45,7 +45,7 @@ export class EntityOverHeadPanel extends EntityOverHeadPanel_UI {
         let scale = 800 / GameUI.GetCameraPosition()[2];
         for (let entityid in EntityRootManage.AllEnemy) {
             let entityroot = EntityRootManage.getEnemy(entityid);
-            if (entityroot && entityroot.IsShowOverhead) {
+            if (entityroot && entityroot.EnemyUnitComp!.IsShowOverhead) {
                 if (this.allOverHeadUI[entityid] == null) {
                     this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, EnemyTopBarItem, { "entityid": Number(entityid) })!;
                 } else {
@@ -66,7 +66,7 @@ export class EntityOverHeadPanel extends EntityOverHeadPanel_UI {
         let scale = 800 / GameUI.GetCameraPosition()[2];
         for (let entityid in EntityRootManage.AllBuilding) {
             let entityroot = EntityRootManage.getBuilding(entityid);
-            if (entityroot && entityroot.IsShowOverhead) {
+            if (entityroot && entityroot.BuildingComp!.IsShowOverhead) {
                 if (this.allOverHeadUI[entityid] == null) {
                     this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, BuildingTopBarItem, { "entityid": Number(entityid) })!;
                 } else {

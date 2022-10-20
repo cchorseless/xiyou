@@ -33,12 +33,7 @@ export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
     onDestroy(): void {
         let ability = this.GetDomain<BaseAbility_Plus>();
         if (!GameFunc.IsValid(ability)) { return }
-        let owner = ability.GetOwnerPlus();
-        if (GameFunc.IsValid(owner)) {
-            owner.RemoveAbilityByHandle(ability);
-        }
-        ability.Destroy();
-        UTIL_Remove(ability);
+        ability.SafeDestroy();
     }
 
     config() {

@@ -13,15 +13,45 @@ import { BaseModifier_Plus } from "./BaseModifier_Plus";
 export interface BaseAbility extends CDOTA_Ability_Lua { }
 export class BaseAbility implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
+    __safedestroyed__?: boolean = false;
     /**查找技能 */
     static findIn<T extends typeof BaseAbility>(this: T, target: CDOTA_BaseNPC) {
         return target.FindAbilityByName(this.name) as InstanceType<T>;
+    }
+    SafeDestroy?() {
+        if (!IsServer()) {
+            return;
+        }
+        if (GameFunc.IsValid(this)) {
+            if (this.__safedestroyed__) {
+                return;
+            }
+            this.__safedestroyed__ = true;
+            TimerHelper.removeAllTimer(this);
+            this.Destroy();
+            UTIL_Remove(this);
+        }
     }
 }
 
 export interface BaseItem extends CDOTA_Item_Lua { }
 export class BaseItem implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
+    __safedestroyed__?: boolean = false;
+    SafeDestroy?() {
+        if (!IsServer()) {
+            return;
+        }
+        if (GameFunc.IsValid(this)) {
+            if (this.__safedestroyed__) {
+                return;
+            }
+            this.__safedestroyed__ = true;
+            TimerHelper.removeAllTimer(this);
+            this.Destroy();
+            UTIL_Remove(this);
+        }
+    }
 }
 
 export interface BaseModifier extends CDOTA_Modifier_Lua { }
@@ -576,7 +606,6 @@ export class BaseNpc implements ET.IEntityRoot {
                 return;
             }
             this.__safedestroyed__ = true;
-            LogHelper.print(this.GetUnitName(), "SafeDestroy");
             let allm = this.FindAllModifiers();
             for (let m of allm) {
                 m.Destroy();

@@ -40,7 +40,7 @@ import { RoundSystemComponent } from "./System/Round/RoundSystemComponent";
 import { WearableSystemComponent } from "./System/Wearable/WearableSystemComponent";
 import { BattleUnitComponent } from "./Components/BattleUnit/BattleUnitComponent";
 import { CourierDataComponent } from "./Components/Courier/CourierDataComponent";
-
+import { BuffManagerComponent } from "./Components/Buff/BuffManagerComponent";
 
 
 [
@@ -77,6 +77,7 @@ import { CourierDataComponent } from "./Components/Courier/CourierDataComponent"
     FHeroCombination,
     FHeroCombinationManagerComponent,
 
+    BuffManagerComponent,
     BuildingComponent,
     BuildingPropsComponent,
     ChessComponent,

@@ -147,12 +147,11 @@ export class EnemyManagerComponent extends ET.Component {
     }
 
     killEnemy(etroot: EnemyUnitEntityRoot) {
-        if (!this.tAllEnemy.includes(etroot.Id) || etroot.ChessComp().isAlive == false) {
+        if (!this.tAllEnemy.includes(etroot.Id)) {
             LogHelper.error("killEnemy error")
             return;
         }
         this.tPlayerKills += 1;
-        etroot.ChessComp().changeAliveState(false);
     }
     removeAllEnemy() {
         let player = this.Domain.ETRoot.AsPlayer();

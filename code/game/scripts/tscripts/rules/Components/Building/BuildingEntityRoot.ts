@@ -2,8 +2,6 @@ import { GetRegClass } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
-import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
@@ -32,9 +30,8 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         let vLocation = hCaster.GetAbsOrigin();
         let iTeamNumber = hCaster.GetTeamNumber()
         // hCaster.AddNoDraw();
-        let buff = modifier_out_of_game.applyOnly(hCaster,hCaster);
-        LogHelper.print(buff==null)
-        this.SetUIOverHead(false)
+        modifier_out_of_game.applyOnly(hCaster, hCaster);
+        this.BuildingComp().SetUIOverHead(false)
         let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
         let cloneRuntime = CreateUnitByName(this.ConfigID, vLocation, true, hHero, hHero, iTeamNumber) as BaseNpc_Plus;
         if (cloneRuntime) {
@@ -47,34 +44,11 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
             // wearable
             runtimeroot.WearableComp().WearCopy(this.WearableComp());
             // equip
-            let allItem = this.ItemManagerComp().getAllBaseItem();
-            allItem.forEach(item => {
-                let hItem = ActiveRootItem.CreateOneToUnit(cloneRuntime, item.GetAbilityName());
-                if (item.IsStackable()) {
-                    hItem.SetCurrentCharges(item.GetCurrentCharges())
-                }
-            });
+            runtimeroot.ItemManagerComp().cloneItem(this.ItemManagerComp());
             // ability
-            let allability = this.AbilityManagerComp().getAllBaseAbility();
-            allability.forEach(ability => {
-                let abilityname = ability.GetAbilityName();
-                if (cloneRuntime.FindAbilityByName(abilityname) == null) {
-                    cloneRuntime.addAbilityPlus(abilityname)
-                }
-            })
+            runtimeroot.AbilityManagerComp().cloneAbility(this.AbilityManagerComp());
             // buff
-            let modifiers = hCaster.FindAllModifiers() as BaseModifier_Plus[];
-            for (let modifier of (modifiers)) {
-
-                if (modifier.GetName() == "modifier_jiaoxie_wudi") {
-                    continue;
-                }
-                if (modifier.GetName() == "modifier_out_of_game") {
-                    continue;
-                }
-                let buff = cloneRuntime.addBuff(modifier.GetName(), modifier.GetCasterPlus(), modifier.GetAbilityPlus())
-                buff.SetStackCount(modifier.GetStackCount())
-            }
+            runtimeroot.BuffManagerComp().cloneRuntimeBuff(this.BuffManagerComp())
         }
     }
 
@@ -85,14 +59,13 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         this.RuntimeBuilding = null;
         let hCaster = this.GetDomain<BaseNpc_Plus>();
         // hCaster.RemoveNoDraw();
+        this.BuildingComp().SetUIOverHead(true)
         hCaster.removeBuff<modifier_out_of_game>("modifier_out_of_game");
-        this.SetUIOverHead(true)
     }
 
     onDestroy(): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
         if (GameFunc.IsValid(npc) && !npc.__safedestroyed__) {
-            npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
             TimerHelper.addTimer(
                 3,
                 () => {
@@ -104,8 +77,7 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     }
 
     onKilled(events: EntityKilledEvent): void {
-        let npc = this.GetDomain<BaseNpc_Plus>();
-        npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
+        super.onKilled(events);
     }
 
     Config() {

@@ -40,7 +40,7 @@ export class EnemyTopBarItem extends EnemyTopBarItem_UI {
     HasOverhead(iEntIndex: EntityIndex): boolean {
         let EntityRootManage = PlayerScene.EntityRootManage;
         let entityroot = EntityRootManage.getEnemy(iEntIndex);
-        if (entityroot && entityroot.IsShowOverhead) {
+        if (entityroot && entityroot.EnemyUnitComp!.IsShowOverhead) {
             return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex) && !Entities.IsInvisible(iEntIndex);
         }
         return false;

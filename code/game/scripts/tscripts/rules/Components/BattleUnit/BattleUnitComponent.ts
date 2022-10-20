@@ -15,6 +15,13 @@ export class BattleUnitComponent extends ET.Component {
     public iLevel: number = 1;
     @serializeETProps()
     public iStar: number = 1;
+    @serializeETProps()
+    IsShowOverhead: boolean = false;
+    SetUIOverHead(isshow: boolean) {
+        this.IsShowOverhead = false;
+        this.Domain.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().SyncClientEntity(this, true);
+
+    }
     onAwake() {
         this.iScale = this.GetDomain<BaseNpc_Plus>().GetAbsScale();
     }

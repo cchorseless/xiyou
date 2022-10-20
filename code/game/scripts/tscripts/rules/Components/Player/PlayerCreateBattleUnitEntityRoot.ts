@@ -5,6 +5,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { serializeETProps } from "../../Entity/Entity";
 import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
 import { AiAttackComponent } from "../AI/AiAttackComponent";
+import { BuffManagerComponent } from "../Buff/BuffManagerComponent";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
@@ -15,14 +16,12 @@ import { PlayerCreateUnitEntityRoot } from "./PlayerCreateUnitEntityRoot";
 
 export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot {
 
-    @serializeETProps()
-    IsShowOverhead: boolean = false;
-    SetUIOverHead(isshow: boolean) {
-        this.IsShowOverhead = false;
-        this.SyncClientEntity(this, true);
+    onKilled(events: EntityKilledEvent): void {
+        this.ChessComp()?.changeAliveState(false);
+        this.AiAttackComp()?.endFindToAttack();
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
     }
-
-    onKilled(events: EntityKilledEvent): void { }
 
     IsFriendly() {
         let domain = this.GetDomain<BaseNpc_Plus>();
@@ -47,6 +46,7 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
         this.AddComponent(GetRegClass<typeof WearableComponent>("WearableComponent"), this.GetDotaHeroName());
         this.AddComponent(GetRegClass<typeof AbilityManagerComponent>("AbilityManagerComponent"));
         this.AddComponent(GetRegClass<typeof ItemManagerComponent>("ItemManagerComponent"));
+        this.AddComponent(GetRegClass<typeof BuffManagerComponent>("BuffManagerComponent"));
         this.AddComponent(GetRegClass<typeof RoundStateComponent>("RoundStateComponent"));
 
     }
@@ -68,6 +68,9 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
     }
     ItemManagerComp() {
         return this.GetComponentByName<ItemManagerComponent>("ItemManagerComponent");
+    }
+    BuffManagerComp() {
+        return this.GetComponentByName<BuffManagerComponent>("BuffManagerComponent");
     }
     CombinationComp() {
         return this.GetComponentByName<CombinationComponent>("CombinationComponent");

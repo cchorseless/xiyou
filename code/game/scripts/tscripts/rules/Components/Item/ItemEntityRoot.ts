@@ -64,9 +64,11 @@ export class ItemEntityRoot extends PlayerCreateUnitEntityRoot {
 
     onDestroy(): void {
         let item = this.GetDomain<BaseItem_Plus>();
-        item.GetContainer()?.Destroy();
-        this.clearSceneContainer();
-        UTIL_Remove(item);
+        if (GameFunc.IsValid(item)) {
+            item.GetContainer()?.Destroy();
+            this.clearSceneContainer();
+            item.SafeDestroy();
+        }
     }
     config() {
         return KVHelper.KvConfig().building_ability_tower["" + this.ConfigID];
