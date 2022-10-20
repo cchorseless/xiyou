@@ -20,6 +20,8 @@ export class Loading extends Loading_UI {
         Game.SetAutoLaunchEnabled(false);
     }
 }
+
+
 const eventid = GameEvents.Subscribe(GameEnum.GameEvent.game_rules_state_change, async (e: any) => {
     if (!$.GetContextPanel().layoutfile.includes("custom_loading_screen")) {
         GameEvents.Unsubscribe(eventid);

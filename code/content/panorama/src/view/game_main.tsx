@@ -82,3 +82,4 @@ function StartRenderGameUI() {
 LogHelper.print("StartRenderGameUI started=>", $.GetContextPanel().layoutfile);
 StartRenderGameUI();
 // $.Msg(DOTAHUDHeroViewClicked==null)
+

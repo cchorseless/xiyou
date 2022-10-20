@@ -20,6 +20,7 @@ export class MainPanel extends MainPanel_UI {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();
+        DotaUIHelper.addDragTargetClass(this.panel_base.current!, "panel_base");
         this.panel_allpanel.current!.hittest = false;
         this.panel_alldialog.current!.hittest = false;
     }
@@ -108,6 +109,7 @@ export class MainPanel extends MainPanel_UI {
     }
 
     private CustomToolTip: BasePureComponent | null;
+    private HideToolTipFunc: (() => void) | null;
     public AddCustomToolTip<T extends typeof BasePureComponent>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = false) {
         if (bindpanel == null || !bindpanel.IsValid()) { return };
         let isinrange = false;
@@ -178,6 +180,7 @@ export class MainPanel extends MainPanel_UI {
             }
             dialogpanel.SetPositionInPixels(posdialog.x, posdialog.y, 0);
             dialogpanel.visible = true;
+            this.HideToolTipFunc = hideFunc;
         });
         let hideFunc = () => {
             isinrange = false;
@@ -188,7 +191,6 @@ export class MainPanel extends MainPanel_UI {
                 this.updateSelf();
             }
         };
-        (bindpanel as any).HideToolTipFunc = hideFunc;
         bindpanel.SetPanelEvent('onmouseout', hideFunc)
     }
     public AddTextToolTip(bindpanel: Panel, attrFunc: (() => string | void)) {
@@ -200,13 +202,13 @@ export class MainPanel extends MainPanel_UI {
             if (tips) {
                 bindpanel.style.brightness = brightness + 0.5 + "";
                 $.DispatchEvent(tipType, bindpanel, tips);
+                this.HideToolTipFunc = hideFunc;
             }
         });
         let hideFunc = () => {
             bindpanel.style.brightness = brightness + "";
             $.DispatchEvent(tipType.replace('Show', 'Hide'), bindpanel)
         }
-        (bindpanel as any).HideToolTipFunc = hideFunc;
         bindpanel.SetPanelEvent('onmouseout', hideFunc)
     }
     public AddTitleTextToolTip(bindpanel: Panel, attrFunc: (() => { title: string, tip: string } | void)) {
@@ -218,20 +220,20 @@ export class MainPanel extends MainPanel_UI {
             if (data) {
                 bindpanel.style.brightness = brightness + 0.5 + "";
                 $.DispatchEvent(tipType, bindpanel, data.title, data.tip);
+                this.HideToolTipFunc = hideFunc;
             }
         });
         let hideFunc = () => {
             bindpanel.style.brightness = brightness + "";
             $.DispatchEvent(tipType.replace('Show', 'Hide'), bindpanel)
         };
-        (bindpanel as any).HideToolTipFunc = hideFunc;
         bindpanel.SetPanelEvent('onmouseout', hideFunc)
     }
 
-    public HideToolTip(bindpanel: Panel) {
-        let hideFunc = (bindpanel as any).HideToolTipFunc;
-        if (hideFunc) {
-            hideFunc();
+    public HideToolTip() {
+        if (this.HideToolTipFunc) {
+            this.HideToolTipFunc();
+            this.HideToolTipFunc = null;
         }
     }
 }

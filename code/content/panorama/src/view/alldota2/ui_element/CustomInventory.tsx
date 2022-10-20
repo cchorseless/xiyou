@@ -31,7 +31,7 @@ export class CustomInventory extends CustomInventory_UI {
                     // 背包道具背景图
                     let buttonSize = _slot.FindChildTraverse("ButtonSize");
                     let abilityButton = _slot.FindChildTraverse("AbilityButton");
-                    let itemImage = abilityButton!.FindChildTraverse("ItemImage");
+                    let itemImage = abilityButton!.FindChildTraverse("ItemImage") as ItemImage;
                     // buttonSize!.style.backgroundImage = "none";
                     // buttonSize!.style.backgroundColor = "none";
                     this.buttonSizePanel.push(buttonSize!);
@@ -50,7 +50,7 @@ export class CustomInventory extends CustomInventory_UI {
                         this.onBtn_leftClick(i);
                     });
                     item_rare.SetPanelEvent("oncontextmenu", () => {
-                        MainPanel.GetInstance()!.HideToolTip(item_rare!);
+                        MainPanel.GetInstance()!.HideToolTip();
                         this.onBtn_rightClick(i);
                     });
                     MainPanel.GetInstance()!.AddCustomToolTip(item_rare!, CombinationInfoDialog, () => { return { title: "1111", tip: "2222" } })
@@ -148,12 +148,10 @@ export class CustomInventory extends CustomInventory_UI {
     };
     onBtn_mouseout = (panel: Panel, item_slot: number) => {
 
-
     };
     onBtn_dragdrop = (item_slot: number, panel: Panel) => {
-        // todo
         let pos = GameUI.GetCursorPosition();
-        if (this.IsInThisRangle(pos[0], pos[1])) { return; }
+        if (!panel.BHasClass("panel_base")) { return; }
         let entitys = GameUI.FindScreenEntities(pos);
         if (entitys.length > 0) {
             for (let info of entitys) {

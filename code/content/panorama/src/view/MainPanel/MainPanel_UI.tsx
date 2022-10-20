@@ -55,17 +55,17 @@ render() {
 </Button>
 }
     {this.panel_base_isValid && 
-<Panel ref={this.panel_base} className="root" key="compId_16" style={this.CSS_1_1}  {...this.panel_base_attrs} >
+<Panel ref={this.panel_base} id="panel_base" className="root" key="compId_16" style={this.CSS_1_1}  {...this.panel_base_attrs} >
 {this.panel_base_childs}
 </Panel>
 }
     {this.panel_allpanel_isValid && 
-<Panel ref={this.panel_allpanel} className="root" key="compId_13" style={this.CSS_1_2}  {...this.panel_allpanel_attrs} >
+<Panel ref={this.panel_allpanel} id="panel_allpanel" className="root" key="compId_13" style={this.CSS_1_2}  {...this.panel_allpanel_attrs} >
 {this.panel_allpanel_childs}
 </Panel>
 }
     {this.panel_alldialog_isValid && 
-<Panel ref={this.panel_alldialog} className="root" key="compId_17" style={this.CSS_1_3}  {...this.panel_alldialog_attrs} >
+<Panel ref={this.panel_alldialog} id="panel_alldialog" className="root" key="compId_17" style={this.CSS_1_3}  {...this.panel_alldialog_attrs} >
 {this.panel_alldialog_childs}
 </Panel>
 }
