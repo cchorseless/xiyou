@@ -16,7 +16,7 @@ export class EnemyUnitComponent extends BattleUnitComponent {
         domain.SetForwardVector(Vector(0, -1, 0));
         domain.addSpawnedHandler(
             ET.Handler.create(this, () => {
-                modifier_no_health_bar.applyOnly(domain, domain);
+                // modifier_no_health_bar.applyOnly(domain, domain);
             })
         );
     }

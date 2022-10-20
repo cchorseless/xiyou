@@ -62,13 +62,13 @@ export class DrawCardPanel extends DrawCardPanel_UI {
         let herosceneitems = this.GetNodeChild(this.NODENAME.box_model, DrawCardHeroSceneItem);
         herosceneitems.forEach(item => {
             if (item.props.index === index) {
-                item.close(false);
+                item.hide();
             }
         });
         let CardBottomItems = this.GetNodeChild(this.NODENAME.box, DrawCardBottomItem);
         CardBottomItems.forEach(item => {
             if (item.props.index === index) {
-                item.close(false);
+                item.hide();
             }
         });
     }

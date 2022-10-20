@@ -12,7 +12,7 @@ export class RoundPrizeUnitKillPrizeComponent extends ET.Component {
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.addSpawnedHandler(
             ET.Handler.create(this, () => {
-                modifier_no_health_bar.applyOnly(domain, domain);
+                // modifier_no_health_bar.applyOnly(domain, domain);
             })
         );
     }

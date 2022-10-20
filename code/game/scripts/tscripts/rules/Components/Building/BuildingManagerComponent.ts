@@ -79,7 +79,7 @@ export class BuildingManagerComponent extends ET.Component {
         building.SetControllableByPlayer(playerID, true);
         building.addSpawnedHandler(
             ET.Handler.create(this, () => {
-                modifier_no_health_bar.applyOnly(building, building);
+                // modifier_no_health_bar.applyOnly(building, building);
                 // modifier_building.apply(this.createUnit, domain)
             })
         );
@@ -153,7 +153,7 @@ export class BuildingManagerComponent extends ET.Component {
         building.SetControllableByPlayer(playerID, true);
         building.addSpawnedHandler(
             ET.Handler.create(this, () => {
-                modifier_no_health_bar.applyOnly(building, building);
+                // modifier_no_health_bar.applyOnly(building, building);
                 // modifier_building.apply(this.createUnit, domain)
             })
         );
