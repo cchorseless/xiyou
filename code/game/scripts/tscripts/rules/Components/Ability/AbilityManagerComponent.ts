@@ -21,6 +21,10 @@ export class AbilityManagerComponent extends ET.Component {
         }
     }
 
+    OnBoardRound_Battle() {
+
+    }
+
     cloneAbility(source: AbilityManagerComponent) {
         let allability = source.getAllBaseAbility();
         let npc = this.GetDomain<BaseNpc_Plus>();

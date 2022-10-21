@@ -1,4 +1,5 @@
 import { GetRegClass } from "../../../GameCache";
+import { GameFunc } from "../../../GameFunc";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { registerProp } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
@@ -15,6 +16,14 @@ import { WearableComponent } from "../Wearable/WearableComponent";
 import { PlayerCreateUnitEntityRoot } from "./PlayerCreateUnitEntityRoot";
 
 export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot {
+
+    onVictory() {
+        let npc = this.GetDomain<BaseNpc_Plus>();
+        if (GameFunc.IsValid(npc)) {
+            npc.StartGesture(GameActivity_t.ACT_DOTA_VICTORY);
+        }
+    }
+
 
     onKilled(events: EntityKilledEvent): void {
         this.ChessComp()?.changeAliveState(false);

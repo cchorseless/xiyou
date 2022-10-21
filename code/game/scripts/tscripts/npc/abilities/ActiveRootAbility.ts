@@ -1,4 +1,5 @@
 import { AbilityEntityRoot } from "../../rules/Components/Ability/AbilityEntityRoot";
+import { ERoundBoard } from "../../rules/Components/Round/ERoundBoard";
 import { BaseAbility_Plus } from "../entityPlus/BaseAbility_Plus";
 
 export class ActiveRootAbility extends BaseAbility_Plus {
@@ -13,4 +14,6 @@ export class ActiveRootAbility extends BaseAbility_Plus {
     IsOwnersManaEnough() {
         return super.IsOwnersManaEnough() && this.ETRoot.isManaEnoughForActive();
     }
+
+    OnRoundStartPrize?(round: ERoundBoard, iswin: boolean): void;
 }

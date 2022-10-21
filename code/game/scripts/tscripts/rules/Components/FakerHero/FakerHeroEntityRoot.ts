@@ -21,15 +21,24 @@ export class FakerHeroEntityRoot extends PlayerCreateUnitEntityRoot {
     OnRoundStartBegin(round: ERoundBoard) {
         let player = this.GetPlayer();
         player.EnemyManagerComp().removeAllEnemy();
-        this.FHeroCombinationManager().activeECombination(false);
+        this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
+            comb.removeAllCombination();
+        })
         this.FakerHeroDataComp().RefreshFakerHero();
         round.CreateAllRoundBasicEnemy(this.FakerHeroDataComp().SpawnEffect);
     }
-    OnRoundStartBattle() {
-        this.FHeroCombinationManager().activeECombination(true);
 
+    OnRoundStartBattle() {
+        this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
+            comb.CombEffectComp().OnRoundStartBattle();
+        })
     }
     OnRoundStartPrize(round: ERoundBoard, iswin: boolean) {
+        this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
+            if (comb.CombEffectComp().OnRoundStartPrize) {
+                comb.CombEffectComp().OnRoundStartPrize(round, iswin);
+            }
+        })
         let player = this.GetPlayer();
         if (!iswin) {
             let damage = 0;

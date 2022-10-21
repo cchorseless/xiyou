@@ -259,5 +259,6 @@ export class BuildingManagerComponent extends ET.Component {
                     runtimebuilding.RoundStateComp().OnBoardRound_Prize_RuntimeBuilding(iswin);
                 }
             });
+
     }
 }

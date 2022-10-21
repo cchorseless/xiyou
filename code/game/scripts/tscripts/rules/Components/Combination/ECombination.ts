@@ -8,6 +8,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, serializeETProps } from "../../Entity/Entity";
 import { CombinationConfig } from "../../System/Combination/CombinationConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
+import { CombEffectComponent } from "../CombinationEffect/CombEffectComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
@@ -28,6 +29,18 @@ export class ECombination extends ET.Entity {
 
     onAwake(CombinationId: string): void {
         this.combinationId = CombinationId;
+        let type = this.getEffectClass();
+        this._combEffectComp = this.AddComponent(type, this.combinationId);
+    }
+    private _combEffectComp: CombEffectComponent;
+    private getEffectClass(): typeof CombEffectComponent {
+        switch (this.combinationId) {
+            default:
+                return GetRegClass<typeof CombEffectComponent>("CombEffectComponent");
+        }
+    }
+    CombEffectComp() {
+        return this._combEffectComp;
     }
 
     addConfig(c: building_combination_ability.OBJ_2_1) {
@@ -56,7 +69,6 @@ export class ECombination extends ET.Entity {
         (this as any).isActive = curCount >= this.activeNeedCount;
         this.Domain.ETRoot.AsPlayer().SyncClientEntity(this);
     }
-
 
 
     getCurUniqueCount() {
@@ -117,81 +129,6 @@ export class ECombination extends ET.Entity {
         LogHelper.print("removeCombination-------")
         if (!this.isActive) {
             // this.CancelEffect();
-        }
-    }
-
-    ApplyBuffEffect(isActive: boolean = false) {
-        let config = KVHelper.KvServerConfig.building_combination_ability[this.combinationId];
-        if (config) {
-            let combuff = config.acitve_common_effect;
-            let spebuff = config.acitve_special_effect;
-            let bufflist: string[] = [];
-            if (combuff && combuff.length > 0) {
-                combuff.split("|").forEach(buff => {
-                    buff && bufflist.push(buff);
-                })
-            }
-            if (spebuff && spebuff.length > 0) {
-                spebuff.split("|").forEach(buff => {
-                    buff && bufflist.push(buff);
-                })
-            }
-            for (let buff of bufflist) {
-                if (buff && buff.length > 0) {
-                    let buffconfig = KVHelper.KvServerConfig.effect_config[buff];
-                    let type = GetRegClass<typeof BaseModifier_Plus>(buff);
-                    if (buffconfig && type) {
-                        let battleunits: PlayerCreateBattleUnitEntityRoot[];
-                        switch (buffconfig.target) {
-                            case CombinationConfig.EEffectTargetType.hero:
-                                battleunits = this.getAllBuilding();
-                                break;
-                            case CombinationConfig.EEffectTargetType.team:
-                                battleunits = this.Domain.ETRoot.AsPlayer().BuildingManager().getAllBattleBuilding(true, false)
-                                break;
-                            case CombinationConfig.EEffectTargetType.enemy:
-                                battleunits = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllAliveEnemy()
-                                break;
-                        };
-                        if (battleunits) {
-                            if (isActive) {
-                                battleunits.forEach(unit => {
-                                    let entity: BaseNpc_Plus;
-                                    if (unit.IsBuilding()) {
-                                        let RuntimeBuilding = unit.As<BuildingEntityRoot>().RuntimeBuilding;
-                                        if (RuntimeBuilding) {
-                                            entity = RuntimeBuilding.GetDomain<BaseNpc_Plus>();
-                                        }
-                                    }
-                                    else {
-                                        entity = unit.GetDomain<BaseNpc_Plus>();
-                                    }
-                                    if (entity) {
-                                        type.applyOnly(entity, entity)
-                                    }
-                                })
-                            }
-                            else {
-                                battleunits.forEach(unit => {
-                                    let entity: BaseNpc_Plus;
-                                    if (unit.IsBuilding()) {
-                                        let RuntimeBuilding = unit.As<BuildingEntityRoot>().RuntimeBuilding;
-                                        if (RuntimeBuilding) {
-                                            entity = RuntimeBuilding.GetDomain<BaseNpc_Plus>();
-                                        }
-                                    }
-                                    else {
-                                        entity = unit.GetDomain<BaseNpc_Plus>();
-                                    }
-                                    if (entity) {
-                                        type.remove(entity)
-                                    }
-                                })
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 

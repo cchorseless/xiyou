@@ -91,9 +91,11 @@ export class ERoundBoard extends ERound {
         }
         this.roundState = RoundConfig.ERoundBoardState.prize;
         let playerroot = this.Domain.ETRoot.AsPlayer();
-        playerroot.SyncClientEntity(this, false);
+        playerroot.SyncClientEntity(this);
         let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllBattleUnitAlive();
         let isWin = aliveEnemy.length == 0;
+        playerroot.CourierRoot().OnRoundStartPrize(this, isWin);
+        playerroot.CombinationManager().OnRoundStartPrize(this, isWin);
         playerroot.BuildingManager().OnRoundStartPrize(this, isWin);
         playerroot.FakerHeroRoot().OnRoundStartPrize(this, isWin);
         this.waitingEndTimer = TimerHelper.addTimer(

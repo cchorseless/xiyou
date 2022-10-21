@@ -16,7 +16,7 @@ export class BattleUnitComponent extends ET.Component {
     @serializeETProps()
     public iStar: number = 1;
     @serializeETProps()
-    IsShowOverhead: boolean = false;
+    public IsShowOverhead: boolean = false;
     SetUIOverHead(isshow: boolean) {
         this.IsShowOverhead = false;
         this.Domain.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().SyncClientEntity(this, true);

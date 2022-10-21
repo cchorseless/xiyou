@@ -111,6 +111,9 @@ export class PlayerEntityRoot extends ET.EntityRoot {
     EnemyManagerComp() {
         return this.GetComponentByName<EnemyManagerComponent>("EnemyManagerComponent");
     }
+    CourierRoot() {
+        return this.Hero!.ETRoot.As<CourierEntityRoot>()
+    }
 
     FakerHeroRoot() {
         return this.FakerHero!.ETRoot.As<FakerHeroEntityRoot>()

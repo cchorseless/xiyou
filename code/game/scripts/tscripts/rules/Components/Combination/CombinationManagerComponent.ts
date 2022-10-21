@@ -47,21 +47,21 @@ export class CombinationManagerComponent extends ET.Component {
             });
     }
 
-    activeECombination(isActive: boolean) {
-        for (let info in this.allCombination) {
-            let combinas = Object.values(this.allCombination[info])
-            for (let comb of combinas) {
-                if (comb.isActive) {
-                    comb.ApplyBuffEffect(isActive);
-                }
+    public OnRoundStartBattle() {
+        this.getAllActiveCombination().forEach(comb => {
+            comb.CombEffectComp().OnRoundStartBattle();
+        })
+    }
+
+    public OnRoundStartPrize(round: ERoundBoard, iswin: boolean) {
+        this.getAllActiveCombination().forEach(comb => {
+            if (comb.CombEffectComp().OnRoundStartPrize) {
+                comb.CombEffectComp().OnRoundStartPrize(round, iswin);
             }
-        }
+        })
     }
 
-    OnRoundStartBattle() {
-        this.activeECombination(true);
 
-    }
     private allCombination: { [k: string]: { [k: string]: ECombination } } = {};
     public addBuilding(entity: BuildingEntityRoot) {
         let comb = entity.CombinationComp();
@@ -72,6 +72,19 @@ export class CombinationManagerComponent extends ET.Component {
         for (let info of allCombination) {
             this.addCombination(info);
         }
+    }
+
+    public getAllActiveCombination() {
+        let r: ECombination[] = [];
+        for (let info in this.allCombination) {
+            let combinas = Object.values(this.allCombination[info])
+            for (let comb of combinas) {
+                if (comb.isActive) {
+                    r.push(comb);
+                }
+            }
+        }
+        return r;
     }
 
     public addCombination(info: ECombinationLabelItem) {

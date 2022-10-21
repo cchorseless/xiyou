@@ -1,4 +1,5 @@
 import { ItemEntityRoot } from "../../rules/Components/Item/ItemEntityRoot";
+import { ERoundBoard } from "../../rules/Components/Round/ERoundBoard";
 import { BaseItem_Plus } from "../entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../entityPlus/BaseNpc_Plus";
 
@@ -14,4 +15,5 @@ export class ActiveRootItem extends BaseItem_Plus {
         ItemEntityRoot.Active(item);
         return item as InstanceType<T>;
     }
+    OnRoundStartPrize?(round: ERoundBoard, iswin: boolean): void;
 }

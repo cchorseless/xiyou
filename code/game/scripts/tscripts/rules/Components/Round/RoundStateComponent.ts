@@ -54,6 +54,7 @@ export class RoundStateComponent extends ET.Component {
         }
     }
 
+
     OnBoardRound_Battle() {
         let battleunit = this.BattleUnit();
         let domain = this.GetDomain<BaseNpc_Plus>();

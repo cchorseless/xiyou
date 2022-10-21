@@ -42,7 +42,7 @@ export class FHeroCombinationManagerComponent extends ET.Component {
             let combinas = Object.values(this.allCombination[info])
             for (let comb of combinas) {
                 if (comb.isActive) {
-                    comb.ApplyBuffEffect(isActive);
+                    comb.CombEffectComp().ApplyBuffEffect(isActive);
                 }
                 if (!isActive) {
                     comb.removeAllCombination();
@@ -51,6 +51,18 @@ export class FHeroCombinationManagerComponent extends ET.Component {
         }
     }
 
+    public getAllActiveCombination() {
+        let r: FHeroCombination[] = [];
+        for (let info in this.allCombination) {
+            let combinas = Object.values(this.allCombination[info])
+            for (let comb of combinas) {
+                if (comb.isActive) {
+                    r.push(comb);
+                }
+            }
+        }
+        return r;
+    }
 
     private allCombination: { [k: string]: { [k: string]: FHeroCombination } } = {};
     public addEnemyUnit(entity: EnemyUnitEntityRoot) {
