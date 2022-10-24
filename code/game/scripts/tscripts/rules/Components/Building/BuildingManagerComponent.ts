@@ -257,11 +257,13 @@ export class BuildingManagerComponent extends ET.Component {
     OnRoundStartPrize(round: ERoundBoard) {
         this.getAllBattleBuilding()
             .forEach((b) => {
-                let runtimebuilding = b.RuntimeBuilding;
-                runtimebuilding.BattleUnitManager().ClearRuntimeBattleUnit();
-                if (runtimebuilding.ChessComp().isInBattleAlive()) {
-                    runtimebuilding.RoundStateComp().OnBoardRound_Prize_RuntimeBuilding(round);
+                if (b.RuntimeBuilding) {
+                    b.RuntimeBuilding.BattleUnitManager().ClearRuntimeBattleUnit();
+                    if (b.RuntimeBuilding.ChessComp().isInBattleAlive()) {
+                        b.RuntimeBuilding.RoundStateComp().OnBoardRound_Prize_RuntimeBuilding(round);
+                    }
                 }
+
             });
         let player = this.GetDomain<PlayerScene>().ETRoot;
         player.CombinationManager().OnRoundStartPrize(round);

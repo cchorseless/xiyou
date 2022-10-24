@@ -30,8 +30,8 @@ export class CardTitleItem extends CardTitleItem_UI {
 
     onRefreshUI(k: IProps) {
         let KV_DATA = KVHelper.KVData();
-        let cardinfo = KV_DATA.building_unit_tower.building_unit_tower![k.itemname as "building_hero_lina"];
-        let iteminfo = KV_DATA.building_item_card.building_item_card![cardinfo!.CardName as "item_building_hero_lina"];
+        let cardinfo = KV_DATA.building_unit_tower![k.itemname as "building_hero_lina"];
+        let iteminfo = KV_DATA.building_item_card![cardinfo!.CardName as "item_building_hero_lina"];
         CSSHelper.setLocalText(this.lbl_name, k.itemname);
         CSSHelper.setBgImageUrl(this.img_rarety, `common/rarity/${cardinfo?.Rarity?.toUpperCase()}.png`);
         switch (cardinfo?.Rarity?.toUpperCase()) {

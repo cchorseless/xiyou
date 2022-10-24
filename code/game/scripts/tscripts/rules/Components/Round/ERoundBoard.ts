@@ -1,5 +1,6 @@
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
 import { reloadable } from "../../../GameCache";
+import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
@@ -49,7 +50,6 @@ export class ERoundBoard extends ERound {
         let player = this.Domain.ETRoot.AsPlayer();
         this.roundState = RoundConfig.ERoundBoardState.battle;
         player.SyncClientEntity(this, false);
-        PlayerResource.SetOverrideSelectionEntity(player.Playerid, player.Hero);
         player.BuildingManager().OnRoundStartBattle();
         player.FakerHeroRoot().OnRoundStartBattle();
         let buildingCount = player.BuildingManager().getAllBattleUnitAlive().length;
@@ -65,7 +65,6 @@ export class ERoundBoard extends ERound {
                 let buildingCount = player.BuildingManager().getAllBattleUnitAlive().length;
                 let enemyCount = player.EnemyManagerComp().getAllBattleUnitAlive().length;
                 if (delaytime > 0) {
-                    LogHelper.print("OnBattle", buildingCount, enemyCount);
                     if (buildingCount > 0 && enemyCount > 0) {
                         return 1;
                     }

@@ -62,7 +62,7 @@ export class CombinationSmallItem extends CombinationSmallItem_UI {
         }
         CSSHelper.setLocalText(this.lbl_des, k.itemname);
         let KV_DATA = KVHelper.KVData();
-        let config = KV_DATA.building_combination.building_combination[k.itemname];
+        let config = KV_DATA.building_combination[k.itemname];
         CSSHelper.setBgImageUrl(this.img_icon, `combination/icon/${config.relationicon}.png`);
     }
 }

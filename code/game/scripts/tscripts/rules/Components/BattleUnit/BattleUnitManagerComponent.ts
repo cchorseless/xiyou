@@ -79,7 +79,10 @@ export class BattleUnitManagerComponent extends ET.Component {
     public GetAllBattleUnitAlive() {
         let hCaster = this.GetDomain<BaseNpc_Plus>();
         let battleUnit = hCaster.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
-        let r: PlayerCreateBattleUnitEntityRoot[] = [battleUnit];
+        let r: PlayerCreateBattleUnitEntityRoot[] = [];
+        if (battleUnit && battleUnit.ChessComp().isInBattleAlive()) {
+            r.push(battleUnit);
+        }
         let allunit = [].concat(this.allSummon, this.allIllusion, this.allBuildingRuntime);
         if (allunit.length > 0) {
             let player = battleUnit.GetPlayer();

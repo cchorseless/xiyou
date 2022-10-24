@@ -105,7 +105,7 @@ export class CombinationSingleBottomItem extends CombinationSingleBottomItem_UI 
 	refreshIcon() {
 		if (this.combinationName == null) { return; };
 		let KV_DATA = KVHelper.KVData();
-		let data = KV_DATA.building_combination_ability.building_combination_ability
+		let data = KV_DATA.building_combination_ability
 		for (let k in data) {
 			if (data[k].relation == this.combinationName) {
 				CSSHelper.setBgImageUrl(this.img_icon, `combination/icon/${data[k].relationicon}.png`);

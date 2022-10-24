@@ -30,7 +30,7 @@ export class CombinationCardIconItem extends CombinationCardIconItem_UI {
 			return;
 		}
 		let KV_DATA = KVHelper.KVData();
-		let config = KV_DATA.building_unit_tower.building_unit_tower[p.heroid];
+		let config = KV_DATA.building_unit_tower[p.heroid];
 		if (!config) { return }
 		CSSHelper.setBgImageUrl(this.img_icon, `card/card_icon/${config.SmallIconRes}.png`);
 		CSSHelper.setBgImageUrl(this.img_iconbg, PathHelper.getRaretyFrameUrl(config.Rarity));

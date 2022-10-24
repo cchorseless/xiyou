@@ -91,6 +91,7 @@ export class RoundStateComponent extends ET.Component {
         let battleunit = this.BattleUnit() as EnemyUnitEntityRoot;
         let domain = this.GetDomain<BaseNpc_Plus>();
         battleunit.AiAttackComp().endFindToAttack();
+        battleunit.onVictory();
         battleunit.AbilityManagerComp().OnBoardRound_Prize(round);
         battleunit.ItemManagerComp().OnBoardRound_Prize(round);
         modifier_jiaoxie_wudi.applyOnly(domain, domain);

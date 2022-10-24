@@ -8,7 +8,7 @@ import { BuildingComponent } from "./BuildingComponent";
 export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
 
     Config() {
-        return (KVHelper.KVData()).building_unit_tower.building_unit_tower[this.ConfigID];
+        return (KVHelper.KVData()).building_unit_tower[this.ConfigID];
     }
 
     onSerializeToEntity() {

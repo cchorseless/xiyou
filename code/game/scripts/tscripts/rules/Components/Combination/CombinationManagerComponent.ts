@@ -62,7 +62,7 @@ export class CombinationManagerComponent extends ET.Component {
     }
 
 
-    private allCombination: { [k: string]: { [k: string]: ECombination } } = {};
+    private allCombination: { [relation: string]: { [relationid: string]: ECombination } } = {};
     public addBuilding(entity: BuildingEntityRoot) {
         let comb = entity.CombinationComp();
         if (comb == null) {

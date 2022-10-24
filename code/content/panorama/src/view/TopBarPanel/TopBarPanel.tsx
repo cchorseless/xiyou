@@ -24,9 +24,9 @@ export class TopBarPanel extends TopBarPanel_UI {
         MainPanel.GetInstance()!.AddCustomToolTip(this.lbl_food.current!, CombinationInfoDialog, () => { return { title: "1111", tip: "2222" } })
 
         let KV_DATA = KVHelper.KVData();
-        CSSHelper.setLocalText(this.lbl_foodDes, KV_DATA.lang_config.lang_config.food.Des);
-        CSSHelper.setLocalText(this.lbl_goldDes, KV_DATA.lang_config.lang_config.gold.Des);
-        CSSHelper.setLocalText(this.lbl_populationDes, KV_DATA.lang_config.lang_config.population.Des);
+        CSSHelper.setLocalText(this.lbl_foodDes, KV_DATA.lang_config.food.Des);
+        CSSHelper.setLocalText(this.lbl_goldDes, KV_DATA.lang_config.gold.Des);
+        CSSHelper.setLocalText(this.lbl_populationDes, KV_DATA.lang_config.population.Des);
     }
     onStartUI() {
         this.onRefreshUI();
@@ -67,7 +67,7 @@ export class TopBarPanel extends TopBarPanel_UI {
 
     setdifficulty() {
         let KV_DATA = KVHelper.KVData();
-        CSSHelper.setLocalText(this.lbl_roundDes, KV_DATA.lang_config.lang_config.turn.Des);
+        CSSHelper.setLocalText(this.lbl_roundDes, KV_DATA.lang_config.turn.Des);
         this.lbl_roundDes.current!.text += `[${PlayerScene.Local.PlayerDataComp.difficulty}]`;
     }
     timerid: any;

@@ -33,7 +33,7 @@ export class CombinationInfoDialog extends CombinationInfoDialog_UI {
         this.clearNode(this.NODENAME.panel_des);
         this.clearNode(this.NODENAME.panel_heroicon);
         let KV_DATA = KVHelper.KVData();
-        let config = KV_DATA.building_combination_ability.building_combination_ability;
+        let config = KV_DATA.building_combination_ability;
         let heronamemap: { [key: string]: string } = {};
         let common_effectmap: { [key: string]: string } = {};
         let relationicon = null;
@@ -52,7 +52,7 @@ export class CombinationInfoDialog extends CombinationInfoDialog_UI {
         CSSHelper.setBgImageUrl(this.title_img_icon, `combination/icon/${relationicon}.png`);
         CSSHelper.setLocalText(this.lbl_des, p.itemname);
         CSSHelper.setLocalText(this.lbl_0, p.itemname + "_Des");
-        CSSHelper.setLocalText(this.lbl_1, KV_DATA.lang_config.lang_config.combination_rule.Des);
+        CSSHelper.setLocalText(this.lbl_1, KV_DATA.lang_config.combination_rule.Des);
         let active_count = Object.keys(common_effectmap).sort();
         for (let k of active_count) {
             this.addNodeChildAsyncAt(this.NODENAME.panel_des, CombinationDesItem, {

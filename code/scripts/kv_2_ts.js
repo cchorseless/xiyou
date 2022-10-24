@@ -379,7 +379,7 @@ const all_kv_to_ts = async (singleFile = null) => {
     //#region  转 uiinterface
     let KvAllInterface_s = "";
     let KvAllInterface_s_1 = "";
-    let KvAllDATA = "";
+    let KvAllDATA = {};
     for (let k in kvfiles) {
         let file = npc_path + kvfiles[k].FilePath;
         let ext = path.extname(file);
@@ -397,12 +397,15 @@ const all_kv_to_ts = async (singleFile = null) => {
             KvAllInterface_s += "import { " + __ss + " } from ";
             KvAllInterface_s += file.replace(kv_path, '".').replace(ext, '" \n');
             if (KvAllInterface_s_1.length == 0) {
-                KvAllInterface_s_1 += "export interface KvAllInterface extends CustomUIConfig {\n";
+                KvAllInterface_s_1 += "export interface KvAllInterface extends ";
+            KvAllInterface_s_1 +=  '\n' + __ss + ".OBJ_0_1";
             }
-            KvAllInterface_s_1 += '"' + k + '": ' + __ss + ".OBJ_0_1,\n";
-
+            else {
+            KvAllInterface_s_1 +=  ',\n' + __ss + ".OBJ_0_1";
+            }
             let kv = keyvalues.decode(fs.readFileSync(file, "utf-8"));
-            KvAllDATA += k + " : " + JSON.stringify(kv) + ",\n";
+            Object.assign(KvAllDATA, kv);
+            // KvAllDATA    += k + " : " + JSON.stringify(kv) + ",\n";
         } else {
             errorCount += 1;
         }
@@ -411,10 +414,8 @@ const all_kv_to_ts = async (singleFile = null) => {
     if (KvAllInterface_s_1 == "") {
         KvAllInterface_s_1 = "{";
     }
-    KvAllInterface_s += KvAllInterface_s_1 + "}\n";
-    let kvconfigDATA = `export const KV_DATA  = {
-        ${KvAllDATA}
-    } as any  `;
+    KvAllInterface_s += KvAllInterface_s_1 + "{ }\n";
+    let kvconfigDATA = `export const KV_DATA  =  ${JSON.stringify(KvAllDATA)} as any ; `;
     // if (!fs.existsSync(KvAllInterface_UI)) fs.mkdirSync(KvAllInterface_UI,);
     fs.writeFileSync(KvAllInterface_UI, Top_Str + KvAllInterface_s);
     // if (!fs.existsSync(KvAllInterface_UI_Data)) fs.mkdirSync(KvAllInterface_UI_Data);

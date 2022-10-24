@@ -19,7 +19,7 @@ export class ERoundBoard extends ERound {
 
     async onSerializeToEntity() {
         let KV_DATA = KVHelper.KVData();
-        this.config = KV_DATA.building_round_board.building_round_board["" + this.configID];
+        this.config = KV_DATA.building_round_board["" + this.configID];
         if (PlayerScene.Local.RoundManagerComp == null) {
             await TimerHelper.DelayTime(0.1);
         }
@@ -45,19 +45,19 @@ export class ERoundBoard extends ERound {
         let KV_DATA = KVHelper.KVData();
         switch (this.roundState) {
             case RoundConfig.ERoundBoardState.start:
-                str = $.Localize("#" + KV_DATA.lang_config.lang_config.round_start.Des);
+                str = $.Localize("#" + KV_DATA.lang_config.round_start.Des);
                 break;
             case RoundConfig.ERoundBoardState.battle:
-                str = $.Localize("#" + KV_DATA.lang_config.lang_config.round_battle.Des);
+                str = $.Localize("#" + KV_DATA.lang_config.round_battle.Des);
                 break;
             case RoundConfig.ERoundBoardState.prize:
-                str = $.Localize("#" + KV_DATA.lang_config.lang_config.round_prize.Des);
+                str = $.Localize("#" + KV_DATA.lang_config.round_prize.Des);
                 break;
             case RoundConfig.ERoundBoardState.waiting_next:
-                str = $.Localize("#" + KV_DATA.lang_config.lang_config.round_waiting_next.Des);
+                str = $.Localize("#" + KV_DATA.lang_config.round_waiting_next.Des);
                 break;
             case RoundConfig.ERoundBoardState.end:
-                str = $.Localize("#" + KV_DATA.lang_config.lang_config.round_end.Des);
+                str = $.Localize("#" + KV_DATA.lang_config.round_end.Des);
                 break;
         }
         return str;

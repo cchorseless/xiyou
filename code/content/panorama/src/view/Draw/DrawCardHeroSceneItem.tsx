@@ -58,7 +58,7 @@ export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI {
             return;
         }
         let KV_DATA = KVHelper.KVData();
-        let config = KV_DATA.building_unit_tower.building_unit_tower[this.props.itemname];
+        let config = KV_DATA.building_unit_tower[this.props.itemname];
         if (config.HeroSelectSoundEffect) {
             Game.EmitSound(config.HeroSelectSoundEffect);
         }

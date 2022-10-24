@@ -26,8 +26,8 @@ export class DrawCardBottomItem extends DrawCardBottomItem_UI {
     }
     onRefreshUI(k: IProps) {
         let KV_DATA = KVHelper.KVData();
-        let cardinfo = KV_DATA.building_unit_tower.building_unit_tower[k.itemname];
-        let iteminfo = KV_DATA.building_item_card.building_item_card[cardinfo!.CardName];
+        let cardinfo = KV_DATA.building_unit_tower[k.itemname];
+        let iteminfo = KV_DATA.building_item_card[cardinfo!.CardName];
         this.lbl_gold.current!.text = "X" + iteminfo?.ItemCost;
         this.lbl_population.current!.text = "X" + cardinfo?.Population;
         CSSHelper.setBgImageUrl(this.frameBg, `common/rarity/item_rarity_border_${PathHelper.getRaretyIndex(cardinfo?.Rarity!)}.png`);

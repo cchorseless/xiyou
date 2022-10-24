@@ -33,7 +33,7 @@ export class CombEffectComponent extends ET.Component {
                     })
                 }
             }
-            for (let buff of bufflist) {
+            bufflist.forEach(buff => {
                 if (buff && buff.length > 0) {
                     let buffconfig = KVHelper.KvServerConfig.effect_config[buff];
                     let type = GetRegClass<typeof BaseModifier_Plus>(buff);
@@ -88,11 +88,13 @@ export class CombEffectComponent extends ET.Component {
                         }
                     }
                 }
-            }
+            })
         }
     }
 
     OnRoundStartBattle() {
+        let ecomb = this.GetParent<ECombination>();
+        LogHelper.print("OnRoundStartBattle", ecomb.combinationId);
         this.ApplyBuffEffect(true);
     }
 

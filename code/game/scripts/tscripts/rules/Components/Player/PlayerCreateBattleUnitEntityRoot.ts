@@ -20,6 +20,7 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
     onVictory() {
         let npc = this.GetDomain<BaseNpc_Plus>();
         if (GameFunc.IsValid(npc)) {
+            npc.Stop();
             npc.StartGesture(GameActivity_t.ACT_DOTA_VICTORY);
         }
     }
