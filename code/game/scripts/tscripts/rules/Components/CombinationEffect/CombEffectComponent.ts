@@ -1,5 +1,6 @@
 import { GetRegClass, reloadable } from "../../../GameCache";
 import { KVHelper } from "../../../helper/KVHelper";
+import { LogHelper } from "../../../helper/LogHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
@@ -19,20 +20,24 @@ export class CombEffectComponent extends ET.Component {
     }
 
     ApplyBuffEffect(isActive: boolean = false) {
-        let config = KVHelper.KvServerConfig.building_combination_ability[this.combinationId];
-        if (config) {
-            let combuff = config.acitve_common_effect;
-            let spebuff = config.acitve_special_effect;
-            let bufflist: string[] = [];
-            if (combuff && combuff.length > 0) {
-                combuff.split("|").forEach(buff => {
-                    buff && bufflist.push(buff);
-                })
-            }
-            if (spebuff && spebuff.length > 0) {
-                spebuff.split("|").forEach(buff => {
-                    buff && bufflist.push(buff);
-                })
+        let ecomb = this.GetParent<ECombination>();
+        let configMap = ecomb.config;
+        if (configMap) {
+            let bufflist: Set<string> = new Set<string>();
+            for (let key in configMap) {
+                let config = configMap[key];
+                let combuff = config.acitve_common_effect;
+                let spebuff = config.acitve_special_effect;
+                if (combuff && combuff.length > 0) {
+                    combuff.split("|").forEach(buff => {
+                        buff && bufflist.add(buff);
+                    })
+                }
+                if (spebuff && spebuff.length > 0) {
+                    spebuff.split("|").forEach(buff => {
+                        buff && bufflist.add(buff);
+                    })
+                }
             }
             for (let buff of bufflist) {
                 if (buff && buff.length > 0) {
@@ -42,7 +47,7 @@ export class CombEffectComponent extends ET.Component {
                         let battleunits: PlayerCreateBattleUnitEntityRoot[];
                         switch (buffconfig.target) {
                             case CombinationConfig.EEffectTargetType.hero:
-                                battleunits = this.GetParent<ECombination>().getAllBuilding();
+                                battleunits = ecomb.getAllBuilding();
                                 break;
                             case CombinationConfig.EEffectTargetType.team:
                                 battleunits = this.Domain.ETRoot.AsPlayer().BuildingManager().getAllBattleBuilding(true, false)
@@ -90,6 +95,7 @@ export class CombEffectComponent extends ET.Component {
                     }
                 }
             }
+
         }
     }
 

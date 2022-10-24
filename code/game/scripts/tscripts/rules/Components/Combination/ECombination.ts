@@ -16,7 +16,7 @@ import { ECombinationLabelItem } from "./ECombinationLabelItem";
 @reloadable
 export class ECombination extends ET.Entity {
     public readonly IsSerializeEntity: boolean = true;
-    private config: { [k: string]: building_combination_ability.OBJ_2_1 } = {};
+    public config: { [k: string]: building_combination_ability.OBJ_2_1 } = {};
     private combination: { [k: string]: ECombinationLabelItem[] } = {};
     @serializeETProps()
     public combinationName: string;

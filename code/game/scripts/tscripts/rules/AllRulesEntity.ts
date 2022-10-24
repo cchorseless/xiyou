@@ -41,6 +41,7 @@ import { WearableSystemComponent } from "./System/Wearable/WearableSystemCompone
 import { BattleUnitComponent } from "./Components/BattleUnit/BattleUnitComponent";
 import { CourierDataComponent } from "./Components/Courier/CourierDataComponent";
 import { BuffManagerComponent } from "./Components/Buff/BuffManagerComponent";
+import { CombEffectComponent } from "./Components/CombinationEffect/CombEffectComponent";
 
 
 [
@@ -67,6 +68,8 @@ import { BuffManagerComponent } from "./Components/Buff/BuffManagerComponent";
     CombinationComponent,
     ECombination,
     ECombinationLabelItem,
+    CombEffectComponent,
+    
     BuildingManagerComponent,
     ChessControlComponent,
     EnemyManagerComponent,

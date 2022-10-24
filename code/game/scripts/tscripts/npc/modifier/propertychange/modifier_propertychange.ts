@@ -7,7 +7,7 @@ export class modifier_propertychange extends BaseModifier_Plus {
         return false;
     }
     config() {
-        return KVHelper.KvServerConfig.effect_config[this.constructor.name];
+        return KVHelper.KvConfig().effect_config[this.constructor.name];
     }
 
     getData(prop: string) {

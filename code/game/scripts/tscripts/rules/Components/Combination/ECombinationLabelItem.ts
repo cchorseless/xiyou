@@ -2,6 +2,7 @@ import { reloadable } from "../../../GameCache";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
+import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 
 @reloadable
 export class ECombinationLabelItem extends ET.Entity {
@@ -36,18 +37,20 @@ export class ECombinationLabelItem extends ET.Entity {
     }
 
     public getSourceEntity() {
-        let building = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>();
+        let unitroot = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
         switch (this.SourceType) {
             case "Item":
-                return building.ItemManagerComp().getItemRoot(this.SourceEntityId);
+                return unitroot.ItemManagerComp().getItemRoot(this.SourceEntityId);
             case "Ability":
-                return building.AbilityManagerComp().getAbilityRoot(this.SourceEntityId);
+                return unitroot.AbilityManagerComp().getAbilityRoot(this.SourceEntityId);
         }
     }
 
     onDestroy(): void {
-        let building = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>();
-        building.GetPlayer().CombinationManager().removeCombination(this);
+        let unitroot = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        if (unitroot.IsBuilding()) {
+            unitroot.GetPlayer().CombinationManager().removeCombination(this);
+        }
     }
 
 }

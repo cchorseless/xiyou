@@ -71,6 +71,7 @@ export class ERoundBoard extends ERound {
                 let buildingCount = player.BuildingManager().getAllBattleUnitAlive().length;
                 let enemyCount = player.EnemyManagerComp().getAllBattleUnitAlive().length;
                 if (delaytime > 0) {
+                    LogHelper.print("OnBattle", buildingCount, enemyCount);
                     if (buildingCount > 0 && enemyCount > 0) {
                         return 1;
                     }
