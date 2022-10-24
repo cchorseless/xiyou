@@ -17,6 +17,8 @@ export class ERoundBoard extends ERound {
     roundState: RoundConfig.ERoundBoardState = null;
     @serializeETProps()
     roundStartTime: string;
+    @serializeETProps()
+    isWin: boolean = false;
     config: building_round_board.OBJ_2_1 = null;
     onAwake(configid: string): void {
         this.configID = configid;
@@ -47,17 +49,9 @@ export class ERoundBoard extends ERound {
         let player = this.Domain.ETRoot.AsPlayer();
         this.roundState = RoundConfig.ERoundBoardState.battle;
         player.SyncClientEntity(this, false);
+        PlayerResource.SetOverrideSelectionEntity(player.Playerid, player.Hero);
         player.BuildingManager().OnRoundStartBattle();
-        player.CombinationManager().OnRoundStartBattle();
         player.FakerHeroRoot().OnRoundStartBattle();
-        player.BuildingManager().getAllBattleBuilding().forEach(b => {
-            if (b && b.RuntimeBuilding) {
-                b.RuntimeBuilding.RoundStateComp().OnBoardRound_Battle();
-            }
-        })
-        player.EnemyManagerComp().getAllBattleUnitAlive().forEach(b => {
-            b.RoundStateComp().OnBoardRound_Battle();
-        })
         let buildingCount = player.BuildingManager().getAllBattleUnitAlive().length;
         let enemyCount = player.EnemyManagerComp().getAllBattleUnitAlive().length;
         let delaytime = Number(this.config.round_time);
@@ -94,11 +88,10 @@ export class ERoundBoard extends ERound {
         let playerroot = this.Domain.ETRoot.AsPlayer();
         playerroot.SyncClientEntity(this);
         let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllBattleUnitAlive();
-        let isWin = aliveEnemy.length == 0;
-        playerroot.CourierRoot().OnRoundStartPrize(this, isWin);
-        playerroot.CombinationManager().OnRoundStartPrize(this, isWin);
-        playerroot.BuildingManager().OnRoundStartPrize(this, isWin);
-        playerroot.FakerHeroRoot().OnRoundStartPrize(this, isWin);
+        this.isWin = aliveEnemy.length == 0;
+        playerroot.CourierRoot().OnRoundStartPrize(this);
+        playerroot.BuildingManager().OnRoundStartPrize(this);
+        playerroot.FakerHeroRoot().OnRoundStartPrize(this);
         this.waitingEndTimer = TimerHelper.addTimer(
             20,
             () => {

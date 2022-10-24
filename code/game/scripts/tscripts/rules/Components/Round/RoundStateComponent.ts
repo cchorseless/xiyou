@@ -12,6 +12,8 @@ import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { BuildingRuntimeEntityRoot } from "../Building/BuildingRuntimeEntityRoot";
 import { LogHelper } from "../../../helper/LogHelper";
 import { reloadable } from "../../../GameCache";
+import { ERoundBoard } from "./ERoundBoard";
+import { TimerHelper } from "../../../helper/TimerHelper";
 /**回合控制 */
 @reloadable
 export class RoundStateComponent extends ET.Component {
@@ -28,6 +30,8 @@ export class RoundStateComponent extends ET.Component {
                 break;
         }
     }
+
+
 
     BattleUnit() {
         let domain = this.GetDomain<BaseNpc_Plus>();
@@ -63,25 +67,34 @@ export class RoundStateComponent extends ET.Component {
         }
         else {
             modifier_jiaoxie_wudi.remove(domain);
-            battleunit.AiAttackComp().startFindEnemyAttack();
+            battleunit.AbilityManagerComp().OnBoardRound_Battle();
+            battleunit.ItemManagerComp().OnBoardRound_Battle();
+            TimerHelper.addTimer(1, () => {
+                battleunit.AiAttackComp().startFindEnemyAttack();
+            })
         }
     }
 
-    OnBoardRound_Prize_RuntimeBuilding(isWin: boolean) {
+    OnBoardRound_Prize_RuntimeBuilding(round: ERoundBoard) {
         let battleunit = this.BattleUnit() as BuildingRuntimeEntityRoot;
-        let domain = this.GetDomain<BaseNpc_Plus>();
         battleunit.AiAttackComp().endFindToAttack();
-        if (isWin) {
+        battleunit.AbilityManagerComp().OnBoardRound_Prize(round);
+        battleunit.ItemManagerComp().OnBoardRound_Prize(round);
+        battleunit.AiAttackComp().startFindEnemyAttack();
+        if (round.isWin) {
             battleunit.StartFindTreasure();
         } else {
-            // modifier_remnant.remove(domain);
         }
     }
 
-    OnBoardRound_Prize_Enemy(ProjectileInfo: IProjectileEffectInfo = null) {
+    OnBoardRound_Prize_Enemy(round: ERoundBoard) {
+        let battleunit = this.BattleUnit() as EnemyUnitEntityRoot;
         let domain = this.GetDomain<BaseNpc_Plus>();
-        this.BattleUnit().AiAttackComp().endFindToAttack();
+        battleunit.AiAttackComp().endFindToAttack();
+        battleunit.AbilityManagerComp().OnBoardRound_Prize(round);
+        battleunit.ItemManagerComp().OnBoardRound_Prize(round);
         modifier_jiaoxie_wudi.applyOnly(domain, domain);
+        let ProjectileInfo = battleunit.GetPlayer().FakerHeroRoot().FakerHeroDataComp().ProjectileInfo;
         this.playDamageHeroAni(ProjectileInfo);
     }
 

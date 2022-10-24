@@ -29,24 +29,28 @@ export class FakerHeroEntityRoot extends PlayerCreateUnitEntityRoot {
     }
 
     OnRoundStartBattle() {
+        let player = this.GetPlayer();
+        player.EnemyManagerComp().getAllBattleUnitAlive().forEach(b => {
+            b.RoundStateComp().OnBoardRound_Battle();
+        })
         this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
             comb.CombEffectComp().OnRoundStartBattle();
         })
     }
-    OnRoundStartPrize(round: ERoundBoard, iswin: boolean) {
+    OnRoundStartPrize(round: ERoundBoard) {
         this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
-            if (comb.CombEffectComp().OnRoundStartPrize) {
-                comb.CombEffectComp().OnRoundStartPrize(round, iswin);
+            if (comb.CombEffectComp()) {
+                comb.CombEffectComp().OnRoundStartPrize(round);
             }
         })
         let player = this.GetPlayer();
-        if (!iswin) {
+        if (!round.isWin) {
             let damage = 0;
             let delay_time = 0.5;
             let aliveEnemy = player.EnemyManagerComp().getAllAliveEnemy();
             let ProjectileInfo = this.FakerHeroDataComp().ProjectileInfo;
             aliveEnemy.forEach((b) => {
-                b.RoundStateComp().OnBoardRound_Prize_Enemy(ProjectileInfo);
+                b.RoundStateComp().OnBoardRound_Prize_Enemy(round);
                 damage += Number(b.GetRoundBasicUnitConfig().failure_count || "0");
                 delay_time = math.min(delay_time, b.GetDistance2Player() / 1000);
             });

@@ -6,6 +6,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ActiveRootItem } from "../../../npc/items/ActiveRootItem";
 import { ET } from "../../Entity/Entity";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { ERoundBoard } from "../Round/ERoundBoard";
 import { ItemEntityRoot } from "./ItemEntityRoot";
 
 @reloadable
@@ -21,6 +22,24 @@ export class ItemManagerComponent extends ET.Component {
                 this.addItemRoot(item.ETRoot as ItemEntityRoot);
             }
         }
+    }
+    // 战吼
+    OnBoardRound_Battle() {
+        let allItem = this.getAllBaseItem();
+        allItem.forEach(item => {
+            if (item.OnRoundStartBattle) {
+                item.OnRoundStartBattle()
+            }
+        })
+    }
+
+    OnBoardRound_Prize(round: ERoundBoard) {
+        let allItem = this.getAllBaseItem();
+        allItem.forEach(item => {
+            if (item.OnRoundStartPrize) {
+                item.OnRoundStartPrize(round)
+            }
+        })
     }
 
     cloneItem(source: ItemManagerComponent) {
@@ -60,9 +79,9 @@ export class ItemManagerComponent extends ET.Component {
     getAllBaseItem() {
         let npc = this.GetDomain<BaseNpc_Plus>();
         let len = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9;
-        let r: BaseItem_Plus[] = []
+        let r: ActiveRootItem[] = []
         for (let i = 0; i <= len; i++) {
-            let item = npc.GetItemInSlot(i) as BaseItem_Plus;
+            let item = npc.GetItemInSlot(i) as ActiveRootItem;
             if (item) {
                 r.push(item)
             }

@@ -11,6 +11,8 @@ import { PlayerCreateUnitEntityRoot, PlayerCreateUnitType } from "../Player/Play
 @reloadable
 export class ItemEntityRoot extends PlayerCreateUnitEntityRoot {
 
+    public readonly CombinationLabels: string[] = [];
+
     onAwake() {
         let item = this.GetDomain<BaseItem_Plus>();
         (this as any).ConfigID = item.GetAbilityName();
@@ -26,6 +28,14 @@ export class ItemEntityRoot extends PlayerCreateUnitEntityRoot {
     }
 
     private regSelfToM() {
+        let config = this.config();
+        if (config && config.CombinationLabel && config.CombinationLabel.length > 0) {
+            config.CombinationLabel.split("|").forEach((labels) => {
+                if (labels && labels.length > 0 && !this.CombinationLabels.includes(labels)) {
+                    this.CombinationLabels.push(labels);
+                }
+            });
+        }
         let item = this.GetDomain<BaseItem_Plus>();
         let owner = item.GetOwnerPlus();
         if (this.isPickUped() && owner != null && owner.ETRoot &&

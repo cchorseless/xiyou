@@ -1,4 +1,4 @@
-import { modifier_phy_arm_base_3 } from "./propertychange/modifier_phy_arm_base";
+import { modifier_phy_arm_base_3 } from "./combinationeffect/modifier_phy_arm_base";
 
 
 [

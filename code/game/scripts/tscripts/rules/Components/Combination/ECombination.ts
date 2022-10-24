@@ -8,7 +8,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, serializeETProps } from "../../Entity/Entity";
 import { CombinationConfig } from "../../System/Combination/CombinationConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
-import { CombEffectComponent } from "../CombinationEffect/CombEffectComponent";
+import { CombEffectComponent } from "./CombEffectComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
@@ -29,18 +29,11 @@ export class ECombination extends ET.Entity {
 
     onAwake(CombinationId: string): void {
         this.combinationId = CombinationId;
-        let type = this.getEffectClass();
-        this._combEffectComp = this.AddComponent(type, this.combinationId);
+        this.AddComponent(GetRegClass<typeof CombEffectComponent>("CombEffectComponent"));
     }
-    private _combEffectComp: CombEffectComponent;
-    private getEffectClass(): typeof CombEffectComponent {
-        switch (this.combinationId) {
-            default:
-                return GetRegClass<typeof CombEffectComponent>("CombEffectComponent");
-        }
-    }
+
     CombEffectComp() {
-        return this._combEffectComp;
+        return this.GetComponent(GetRegClass<typeof CombEffectComponent>("CombEffectComponent"));
     }
 
     addConfig(c: building_combination_ability.OBJ_2_1) {

@@ -1,11 +1,12 @@
 import { KVHelper } from "../../../helper/KVHelper";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 
-export class modifier_propertychange extends BaseModifier_Plus {
+export class modifier_combination_effect extends BaseModifier_Plus {
 
     public IsHidden(): boolean {
         return false;
     }
+
     config() {
         return KVHelper.KvConfig().effect_config[this.constructor.name];
     }

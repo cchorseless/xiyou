@@ -245,20 +245,26 @@ export class BuildingManagerComponent extends ET.Component {
     OnRoundStartBattle() {
         this.getAllBattleBuilding()
             .forEach((b) => {
+                //创建会逐个调用roundstate组件onawake
                 b.CreateCloneRuntimeBuilding();
             });
+        // 先战吼技能再激活羁绊
+        let player = this.GetDomain<PlayerScene>().ETRoot;
+        player.CombinationManager().OnRoundStartBattle();
 
     }
 
-    OnRoundStartPrize(round: ERoundBoard, iswin: boolean) {
+    OnRoundStartPrize(round: ERoundBoard) {
         this.getAllBattleBuilding()
             .forEach((b) => {
                 let runtimebuilding = b.RuntimeBuilding;
                 runtimebuilding.BattleUnitManager().ClearRuntimeBattleUnit();
                 if (runtimebuilding.ChessComp().isInBattleAlive()) {
-                    runtimebuilding.RoundStateComp().OnBoardRound_Prize_RuntimeBuilding(iswin);
+                    runtimebuilding.RoundStateComp().OnBoardRound_Prize_RuntimeBuilding(round);
                 }
             });
+        let player = this.GetDomain<PlayerScene>().ETRoot;
+        player.CombinationManager().OnRoundStartPrize(round);
 
     }
 }

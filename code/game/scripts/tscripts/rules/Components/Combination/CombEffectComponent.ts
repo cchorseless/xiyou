@@ -6,18 +6,12 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
 import { CombinationConfig } from "../../System/Combination/CombinationConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
-import { ECombination } from "../Combination/ECombination";
+import { ECombination } from "./ECombination";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 
 @reloadable
 export class CombEffectComponent extends ET.Component {
-
-    public combinationId: string;
-
-    onAwake(CombinationId: string): void {
-        this.combinationId = CombinationId;
-    }
 
     ApplyBuffEffect(isActive: boolean = false) {
         let ecomb = this.GetParent<ECombination>();
@@ -95,7 +89,6 @@ export class CombEffectComponent extends ET.Component {
                     }
                 }
             }
-
         }
     }
 
@@ -103,5 +96,15 @@ export class CombEffectComponent extends ET.Component {
         this.ApplyBuffEffect(true);
     }
 
-    OnRoundStartPrize?(round: ERoundBoard, iswin: boolean): void;
+    OnRoundStartPrize(round: ERoundBoard) {
+        let ecomb = this.GetParent<ECombination>();
+        let combinationName = ecomb.combinationName;
+        let combinationId = ecomb.combinationId;
+        if (combinationName === CombinationConfig.ECombinationLabel.suck_blood) {
+
+        }
+        else if (combinationName === CombinationConfig.ECombinationLabel.suck_blood) {
+
+        }
+    }
 }

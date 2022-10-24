@@ -1,10 +1,12 @@
 import { reloadable } from "../../../GameCache";
 import { LogHelper } from "../../../helper/LogHelper";
+import { ActiveRootAbility } from "../../../npc/abilities/ActiveRootAbility";
 import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { ERoundBoard } from "../Round/ERoundBoard";
 import { AbilityEntityRoot } from "./AbilityEntityRoot";
 
 @reloadable
@@ -20,10 +22,25 @@ export class AbilityManagerComponent extends ET.Component {
             }
         }
     }
-
+    // 战吼
     OnBoardRound_Battle() {
-
+        let allability = this.getAllBaseAbility();
+        allability.forEach(ability => {
+            if (ability.OnRoundStartBattle) {
+                ability.OnRoundStartBattle()
+            }
+        })
     }
+
+    OnBoardRound_Prize(round: ERoundBoard) {
+        let allability = this.getAllBaseAbility();
+        allability.forEach(ability => {
+            if (ability.OnRoundStartPrize) {
+                ability.OnRoundStartPrize(round)
+            }
+        })
+    }
+
 
     cloneAbility(source: AbilityManagerComponent) {
         let allability = source.getAllBaseAbility();
@@ -70,10 +87,10 @@ export class AbilityManagerComponent extends ET.Component {
 
     getAllBaseAbility() {
         let npc = this.GetDomain<BaseNpc_Plus>();
-        let r: BaseAbility_Plus[] = [];
+        let r: ActiveRootAbility[] = [];
         let len = npc.GetAbilityCount();
         for (let i = 0; i < len; i++) {
-            let ability = npc.GetAbilityByIndex(i) as BaseAbility_Plus;
+            let ability = npc.GetAbilityByIndex(i) as ActiveRootAbility;
             if (ability) {
                 r.push(ability);
             }

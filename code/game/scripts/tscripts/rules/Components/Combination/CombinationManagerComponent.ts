@@ -53,10 +53,10 @@ export class CombinationManagerComponent extends ET.Component {
         })
     }
 
-    public OnRoundStartPrize(round: ERoundBoard, iswin: boolean) {
+    public OnRoundStartPrize(round: ERoundBoard) {
         this.getAllActiveCombination().forEach(comb => {
-            if (comb.CombEffectComp().OnRoundStartPrize) {
-                comb.CombEffectComp().OnRoundStartPrize(round, iswin);
+            if (comb.CombEffectComp()) {
+                comb.CombEffectComp().OnRoundStartPrize(round);
             }
         })
     }

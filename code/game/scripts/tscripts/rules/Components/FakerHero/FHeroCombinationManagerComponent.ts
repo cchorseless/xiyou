@@ -37,19 +37,6 @@ export class FHeroCombinationManagerComponent extends ET.Component {
     private addEvent() {
     }
 
-    activeECombination(isActive: boolean) {
-        for (let info in this.allCombination) {
-            let combinas = Object.values(this.allCombination[info])
-            for (let comb of combinas) {
-                if (comb.isActive) {
-                    comb.CombEffectComp().ApplyBuffEffect(isActive);
-                }
-                if (!isActive) {
-                    comb.removeAllCombination();
-                }
-            }
-        }
-    }
 
     public getAllActiveCombination() {
         let r: FHeroCombination[] = [];

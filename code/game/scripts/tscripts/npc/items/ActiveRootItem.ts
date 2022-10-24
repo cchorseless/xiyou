@@ -15,5 +15,6 @@ export class ActiveRootItem extends BaseItem_Plus {
         ItemEntityRoot.Active(item);
         return item as InstanceType<T>;
     }
-    OnRoundStartPrize?(round: ERoundBoard, iswin: boolean): void;
+    OnRoundStartBattle?(): void;
+    OnRoundStartPrize?(round: ERoundBoard): void;
 }

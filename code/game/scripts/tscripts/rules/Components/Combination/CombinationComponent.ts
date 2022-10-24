@@ -15,19 +15,13 @@ export class CombinationComponent extends ET.Component {
     AbilityCombination: string[] = [];
     ItemCombination: string[] = [];
     addAbilityRoot(abilityroot: AbilityEntityRoot) {
-        let config = abilityroot.config();
-        if (config == null) {
-            return;
-        }
-        if (config.CombinationLabel && config.CombinationLabel.length > 0) {
-            let type = GetRegClass<typeof ECombinationLabelItem>("ECombinationLabelItem");
-            config.CombinationLabel.split("|").forEach((item) => {
-                if (item && item.length > 0) {
-                    let entity = this.AddChild(type, "Ability", abilityroot.Id, item);
-                    this.AbilityCombination.push(entity.Id);
-                }
-            });
-        }
+        let type = GetRegClass<typeof ECombinationLabelItem>("ECombinationLabelItem");
+        abilityroot.CombinationLabels.forEach((item) => {
+            if (item && item.length > 0) {
+                let entity = this.AddChild(type, "Ability", abilityroot.Id, item);
+                this.AbilityCombination.push(entity.Id);
+            }
+        });
     }
     removeAbilityRoot(abilityroot: AbilityEntityRoot) {
         for (let i = 0, len = this.AbilityCombination.length; i < len; i++) {
@@ -57,19 +51,13 @@ export class CombinationComponent extends ET.Component {
     }
 
     addItemRoot(itemroot: ItemEntityRoot) {
-        let config = itemroot.config();
-        if (config == null) {
-            return;
-        }
-        if (config.CombinationLabel && config.CombinationLabel.length > 0) {
-            let type = GetRegClass<typeof ECombinationLabelItem>("ECombinationLabelItem");
-            config.CombinationLabel.split("|").forEach((item) => {
-                if (item && item.length > 0) {
-                    let entity = this.AddChild(type, "Item", itemroot.Id, item);
-                    this.ItemCombination.push(entity.Id);
-                }
-            });
-        }
+        let type = GetRegClass<typeof ECombinationLabelItem>("ECombinationLabelItem");
+        itemroot.CombinationLabels.forEach((item) => {
+            if (item && item.length > 0) {
+                let entity = this.AddChild(type, "Item", itemroot.Id, item);
+                this.ItemCombination.push(entity.Id);
+            }
+        });
     }
 
     removeItemRoot(itemroot: ItemEntityRoot) {

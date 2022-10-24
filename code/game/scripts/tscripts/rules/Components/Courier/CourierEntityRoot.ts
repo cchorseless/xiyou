@@ -31,9 +31,9 @@ export class CourierEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         return this.GetComponentByName<ItemManagerComponent>("ItemManagerComponent");
     }
 
-    OnRoundStartPrize(round: ERoundBoard, iswin: boolean) {
+    OnRoundStartPrize(round: ERoundBoard) {
         let hero = this.GetDomain<BaseNpc_Hero_Plus>();
-        if (iswin) {
+        if (round.isWin) {
             this.onVictory();
             // 音效
             ResHelper.CreateParticle(new ResHelper.ParticleInfo()
