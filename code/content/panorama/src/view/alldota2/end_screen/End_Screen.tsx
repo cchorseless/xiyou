@@ -4,7 +4,8 @@ import { render } from "@demon673/react-panorama";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { End_Screen_UI } from "./End_Screen_UI";
-export class End_Screen extends End_Screen_UI {
+import { NodePropsData } from "../../../libs/BasePureComponent";
+export class End_Screen extends End_Screen_UI<NodePropsData> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount()

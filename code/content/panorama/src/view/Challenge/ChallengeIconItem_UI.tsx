@@ -1,11 +1,11 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,LabelAttributes,ImageAttributes } from "@demon673/react-panorama";
 import {SkillCastItem} from '../Skill/SkillCastItem' ;
 
 
-export class ChallengeIconItem_UI extends BasePureComponent {
+export class ChallengeIconItem_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 skillitem: React.RefObject<SkillCastItem>;
 lbl_lv: React.RefObject<LabelPanel>;
@@ -15,7 +15,7 @@ lbl_cost: React.RefObject<LabelPanel>;
 NODENAME = {  __root__: '__root__',  skillitem: 'skillitem',  lbl_lv: 'lbl_lv',  img_costbg: 'img_costbg',  img_cost: 'img_cost',  lbl_cost: 'lbl_cost',  };
 FUNCNAME = {  };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.skillitem = createRef<SkillCastItem>();

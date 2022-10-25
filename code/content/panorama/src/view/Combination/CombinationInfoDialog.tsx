@@ -7,11 +7,12 @@ import { CombinationInfoDialog_UI } from "./CombinationInfoDialog_UI";
 import { CombinationDesItem } from "./CombinationDesItem";
 import { CombinationCardIconItem } from "./CombinationCardIconItem";
 import { KVHelper } from "../../helper/KVHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 
-interface IProps {
+interface IProps extends NodePropsData {
     itemname: string;
 }
-export class CombinationInfoDialog extends CombinationInfoDialog_UI {
+export class CombinationInfoDialog extends CombinationInfoDialog_UI<IProps> {
 
     // 初始化数据
     componentDidMount() {

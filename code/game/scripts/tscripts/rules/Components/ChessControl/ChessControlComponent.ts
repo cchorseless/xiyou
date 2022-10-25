@@ -10,6 +10,11 @@ import { PlayerScene } from "../Player/PlayerScene";
 @reloadable
 export class ChessControlComponent extends ET.Component {
 
+    OnRoundStartBattle() {
+
+    }
+
+
     public moveChess(target: BuildingEntityRoot, v: Vector): [boolean, string] {
         let r: [boolean, string] = [true, ""];
         let playerRoot = this.Domain.ETRoot.AsPlayer();

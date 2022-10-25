@@ -2,8 +2,9 @@
 import React, { createRef, useState } from "react";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { EMoneyType } from "../../game/service/account/CharacterDataComponent";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { ShopPanel_UI } from "./ShopPanel_UI";
-export class ShopPanel extends ShopPanel_UI {
+export class ShopPanel extends ShopPanel_UI<NodePropsData> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();

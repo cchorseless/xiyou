@@ -3,16 +3,17 @@ import React, { createRef, useState } from "react";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
+import { NodePropsData } from "../../../libs/BasePureComponent";
 import { GameEnum } from "../../../libs/GameEnum";
 import { Minimap_iconitem } from "./Minimap_iconitem";
 import { Minimap_plus_UI } from "./Minimap_plus_UI";
-export class Minimap_plus extends Minimap_plus_UI {
+export class Minimap_plus extends Minimap_plus_UI<NodePropsData> {
     minimap_width: number = 0;
     minimap_height: number = 0;
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();
-       
+
         // this.addEvent()
     }
 

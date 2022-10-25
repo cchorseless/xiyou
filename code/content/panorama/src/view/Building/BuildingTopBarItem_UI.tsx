@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,ImageAttributes,LabelAttributes } from "@demon673/react-panorama";
 
 
-export class BuildingTopBarItem_UI extends BasePureComponent {
+export class BuildingTopBarItem_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 img_nameng: React.RefObject<ImagePanel>;
 img_prop: React.RefObject<ImagePanel>;
@@ -19,7 +19,7 @@ panel_hpbar: React.RefObject<Panel>;
 NODENAME = {  __root__: '__root__',  img_nameng: 'img_nameng',  img_prop: 'img_prop',  lbl_name: 'lbl_name',  img_rare: 'img_rare',  img_star4: 'img_star4',  img_star2: 'img_star2',  img_star1: 'img_star1',  img_star3: 'img_star3',  img_star5: 'img_star5',  panel_hpbar: 'panel_hpbar',  };
 FUNCNAME = {  };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.img_nameng = createRef<ImagePanel>();

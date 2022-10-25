@@ -3,8 +3,9 @@ import React, { createRef, useState } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { HeroDebugItem_UI } from "./HeroDebugItem_UI";
-export class HeroDebugItem extends HeroDebugItem_UI {
+export class HeroDebugItem extends HeroDebugItem_UI<NodePropsData> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();
@@ -12,9 +13,9 @@ export class HeroDebugItem extends HeroDebugItem_UI {
         TimerHelper.AddIntervalFrameTimer(
             10,
             10,
-			FuncHelper.Handler.create(this, () => {
-				this.onUpdate()
-			}),
+            FuncHelper.Handler.create(this, () => {
+                this.onUpdate()
+            }),
             -1
         );
     }

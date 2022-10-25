@@ -8,9 +8,10 @@ import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { PathHelper } from "../../helper/PathHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { GameEnum } from "../../libs/GameEnum";
 import { ChallengeIconItem_UI } from "./ChallengeIconItem_UI";
-export class ChallengeIconItem extends ChallengeIconItem_UI {
+export class ChallengeIconItem extends ChallengeIconItem_UI<NodePropsData> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();

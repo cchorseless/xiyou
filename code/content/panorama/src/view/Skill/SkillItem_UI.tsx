@@ -1,17 +1,17 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,ImageAttributes,DOTAAbilityImageAttributes } from "@demon673/react-panorama";
 
 
-export class SkillItem_UI extends BasePureComponent {
+export class SkillItem_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 img_bg: React.RefObject<ImagePanel>;
 img_skillicon: React.RefObject<AbilityImage>;
 NODENAME = {  __root__: '__root__',  img_bg: 'img_bg',  img_skillicon: 'img_skillicon',  };
 FUNCNAME = {  };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.img_bg = createRef<ImagePanel>();

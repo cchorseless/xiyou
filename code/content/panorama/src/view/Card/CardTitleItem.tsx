@@ -3,12 +3,13 @@ import React, { createRef, useState } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { LogHelper } from "../../helper/LogHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { CardTitleItem_UI } from "./CardTitleItem_UI";
-interface IProps {
+interface IProps extends NodePropsData {
     itemname: string;
 }
 
-export class CardTitleItem extends CardTitleItem_UI {
+export class CardTitleItem extends CardTitleItem_UI<IProps> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();

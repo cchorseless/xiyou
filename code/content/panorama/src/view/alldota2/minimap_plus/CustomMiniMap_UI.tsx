@@ -1,8 +1,8 @@
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../../libs/BasePureComponent";
+import { BaseEasyPureComponent } from "../../../libs/BasePureComponent";
 import { PanelAttributes } from "@demon673/react-panorama";
 
-export class CustomMiniMap_UI extends BasePureComponent {
+export class CustomMiniMap_UI extends BaseEasyPureComponent {
     __root__: React.RefObject<Panel>;
     NODENAME = { __root__: "__root__" };
     FUNCNAME = {};

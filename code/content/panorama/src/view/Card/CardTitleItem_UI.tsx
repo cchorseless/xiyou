@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,ImageAttributes,LabelAttributes } from "@demon673/react-panorama";
 
 
-export class CardTitleItem_UI extends BasePureComponent {
+export class CardTitleItem_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 nameBg: React.RefObject<ImagePanel>;
 box: React.RefObject<Panel>;
@@ -14,7 +14,7 @@ img_rarety: React.RefObject<ImagePanel>;
 NODENAME = {  __root__: '__root__',  nameBg: 'nameBg',  box: 'box',  img_icon: 'img_icon',  lbl_name: 'lbl_name',  img_rarety: 'img_rarety',  };
 FUNCNAME = {  };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.nameBg = createRef<ImagePanel>();

@@ -1,17 +1,17 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,LabelAttributes } from "@demon673/react-panorama";
 import {HeroTalentIconItem_UI} from './HeroTalentIconItem_UI' ;
 
 
-export class HeroSingleTalentItem_UI extends BasePureComponent {
+export class HeroSingleTalentItem_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 lbl_name: React.RefObject<LabelPanel>;
 NODENAME = {  __root__: '__root__',  lbl_name: 'lbl_name',  };
 FUNCNAME = {  };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.lbl_name = createRef<LabelPanel>();

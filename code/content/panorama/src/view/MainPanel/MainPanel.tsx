@@ -7,7 +7,7 @@ import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { ToolTipHelper } from "../../helper/ToolTipHelper";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { CustomMiniMap } from "../alldota2/minimap_plus/CustomMiniMap";
 import { ChallengeShopItem } from "../Challenge/ChallengeShopItem";
 import { CombinationBottomPanel } from "../Combination/CombinationBottomPanel";
@@ -16,7 +16,7 @@ import { DebugPanel } from "../debugPanel/DebugPanel";
 import { ShopTopRightPanel } from "../Shop/ShopTopRightPanel";
 import { TopBarPanel } from "../TopBarPanel/TopBarPanel";
 import { MainPanel_UI } from "./MainPanel_UI";
-export class MainPanel extends MainPanel_UI {
+export class MainPanel extends MainPanel_UI<NodePropsData> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();
@@ -88,10 +88,10 @@ export class MainPanel extends MainPanel_UI {
         position.y = position.y / (this.__root__.current!.actualuiscale_y || 1);
         return position;
     }
-    public allPanelInMain: { [k: string]: BasePureComponent } = {};
-    public allDialogInMain: { [k: string]: BasePureComponent } = {};
+    public allPanelInMain: { [k: string]: BaseEasyPureComponent } = {};
+    public allDialogInMain: { [k: string]: BaseEasyPureComponent } = {};
 
-    async addOnlyPanel<T extends typeof BasePureComponent>(nodeType: T, zorder: number, nodeData: { [k: string]: any } = {}) {
+    async addOnlyPanel<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeType: T, zorder: number, nodeData: M | any = {}) {
         for (let k of Object.keys(this.allDialogInMain)) {
             let _zorder = parseInt(k);
             if (_zorder >= zorder) {
@@ -103,14 +103,14 @@ export class MainPanel extends MainPanel_UI {
         this.allDialogInMain[zorder] = panel;
         return panel;
     }
-    async addOnlyDialog<T extends typeof BasePureComponent>(nodeType: T, nodeData: { [k: string]: any } = {}) {
+    async addOnlyDialog<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeType: T, nodeData: M | any = {}) {
         let panel = await this.addOrShowOnlyNodeChild(this.NODENAME.panel_alldialog, nodeType, nodeData);
         return panel;
     }
 
-    private CustomToolTip: BasePureComponent | null;
+    private CustomToolTip: BaseEasyPureComponent | null;
     private HideToolTipFunc: (() => void) | null;
-    public AddCustomToolTip<T extends typeof BasePureComponent>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = false) {
+    public AddCustomToolTip<M extends NodePropsData, T extends typeof BasePureComponent<M>>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = false) {
         if (bindpanel == null || !bindpanel.IsValid()) { return };
         let isinrange = false;
         const offset = 20;

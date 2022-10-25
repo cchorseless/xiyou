@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,ImageAttributes,LabelAttributes } from "@demon673/react-panorama";
 
 
-export class CombinationInfoDialog_UI extends BasePureComponent {
+export class CombinationInfoDialog_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 img_bg: React.RefObject<ImagePanel>;
 onbtn_click = (...args: any[]) => { };
@@ -19,7 +19,7 @@ panel_heroicon: React.RefObject<Panel>;
 NODENAME = {  __root__: '__root__',  img_bg: 'img_bg',  title_img_bg: 'title_img_bg',  lbl_des: 'lbl_des',  title_img_icon: 'title_img_icon',  box: 'box',  lbl_0: 'lbl_0',  lbl_1: 'lbl_1',  panel_des: 'panel_des',  panel_heroicon: 'panel_heroicon',  };
 FUNCNAME = {  onbtn_click: {nodeName:"img_bg",type:"onactivate"}, };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.img_bg = createRef<ImagePanel>();

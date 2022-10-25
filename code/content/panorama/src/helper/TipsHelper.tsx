@@ -1,4 +1,4 @@
-import { BasePureComponent } from "../libs/BasePureComponent";
+import { BaseEasyPureComponent } from "../libs/BasePureComponent";
 import { TipsPanel } from "../view/TipsPanel/TipsPanel";
 
 export module TipsHelper {
@@ -6,7 +6,7 @@ export module TipsHelper {
      * 显示tips
      * @returns
      */
-    export function showTips(s: string, root: BasePureComponent) {
+    export function showTips(s: string, root: BaseEasyPureComponent) {
         if (!root) {
             return;
         }
@@ -16,7 +16,7 @@ export module TipsHelper {
         root.updateSelf();
     }
 
-    export function showMessage(s: string, root: BasePureComponent) {
+    export function showMessage(s: string, root: BaseEasyPureComponent) {
         if (!root) {
             return;
         }

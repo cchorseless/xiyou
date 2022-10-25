@@ -12,7 +12,8 @@ import { GameEnum } from "../../../libs/GameEnum";
 import { Loading } from "../loading/loading";
 import { PlayerInTeamItem } from "./PlayerInTeamItem";
 import { Team_select_UI } from "./Team_select_UI";
-export class Team_select extends Team_select_UI {
+import { NodePropsData } from "../../../libs/BasePureComponent";
+export class Team_select extends Team_select_UI<NodePropsData> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();

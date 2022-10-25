@@ -5,11 +5,12 @@ import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { SkillItem_UI } from "./SkillItem_UI";
+import { NodePropsData } from "../../libs/BasePureComponent";
 
-interface IProps {
+interface IProps extends NodePropsData {
     itemname: string;
 }
-export class SkillItem extends SkillItem_UI {
+export class SkillItem extends SkillItem_UI<IProps> {
 
     constructor(props: any) {
         super(props)

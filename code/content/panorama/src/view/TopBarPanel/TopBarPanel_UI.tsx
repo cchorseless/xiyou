@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,LabelAttributes,ImageAttributes } from "@demon673/react-panorama";
 
 
-export class TopBarPanel_UI extends BasePureComponent {
+export class TopBarPanel_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 lbl_roundstagedes: React.RefObject<LabelPanel>;
 lbl_population: React.RefObject<LabelPanel>;
@@ -24,7 +24,7 @@ onbtn_click = (...args: any[]) => { };
 NODENAME = {  __root__: '__root__',  lbl_roundstagedes: 'lbl_roundstagedes',  lbl_population: 'lbl_population',  lbl_gold: 'lbl_gold',  lbl_round: 'lbl_round',  lbl_food: 'lbl_food',  lbl_wood: 'lbl_wood',  lbl_roundDes: 'lbl_roundDes',  lbl_populationDes: 'lbl_populationDes',  lbl_goldDes: 'lbl_goldDes',  lbl_foodDes: 'lbl_foodDes',  lbl_woodDes: 'lbl_woodDes',  lbl_lefttime: 'lbl_lefttime',  lbl_gametime: 'lbl_gametime',  btn_drawcard: 'btn_drawcard',  };
 FUNCNAME = {  onbtn_click: {nodeName:"btn_drawcard",type:"onmouseactivate"}, };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.lbl_roundstagedes = createRef<LabelPanel>();

@@ -8,10 +8,11 @@ import { EventHelper } from "../../helper/EventHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { EntityHpBarItem } from "../Common/EntityHpBarItem";
 import { EntityHpMpBarItem } from "../Common/EntityHpMpBarItem";
 import { BuildingTopBarItem_UI } from "./BuildingTopBarItem_UI";
-export class BuildingTopBarItem extends BuildingTopBarItem_UI {
+export class BuildingTopBarItem extends BuildingTopBarItem_UI<NodePropsData> {
     entityid: EntityIndex;
     onStartUI() {
         this.entityid = this.props.entityid as EntityIndex;

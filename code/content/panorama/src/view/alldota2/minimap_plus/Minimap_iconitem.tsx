@@ -2,9 +2,10 @@
 import React, { createRef, useState } from "react";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { NodePropsData } from "../../../libs/BasePureComponent";
 import { Minimap_iconitem_UI } from "./Minimap_iconitem_UI";
 import { Minimap_plus } from "./Minimap_plus";
-export class Minimap_iconitem extends Minimap_iconitem_UI {
+export class Minimap_iconitem extends Minimap_iconitem_UI<NodePropsData> {
 
 
 	playerid: PlayerID = -1;

@@ -12,7 +12,9 @@ import { TimerHelper } from "../../helper/TimerHelper";
 import { CombinationInfoDialog } from "../Combination/CombinationInfoDialog";
 import { MainPanel } from "../MainPanel/MainPanel";
 import { TopBarPanel_UI } from "./TopBarPanel_UI";
-export class TopBarPanel extends TopBarPanel_UI {
+import { NodePropsData } from "../../libs/BasePureComponent";
+
+export class TopBarPanel extends TopBarPanel_UI<NodePropsData> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();

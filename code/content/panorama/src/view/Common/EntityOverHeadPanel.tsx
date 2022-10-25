@@ -5,10 +5,11 @@ import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { BuildingTopBarItem } from "../Building/BuildingTopBarItem";
 import { EnemyTopBarItem } from "../Enemy/EnemyTopBarItem";
 import { EntityOverHeadPanel_UI } from "./EntityOverHeadPanel_UI";
-export class EntityOverHeadPanel extends EntityOverHeadPanel_UI {
+export class EntityOverHeadPanel extends EntityOverHeadPanel_UI<NodePropsData> {
     onStartUI() {
         TimerHelper.AddIntervalFrameTimer(
             1,

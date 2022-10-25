@@ -1,7 +1,8 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
+import { NodePropsData } from "../../../libs/BasePureComponent";
 import { PlayerInTeamItem_UI } from "./PlayerInTeamItem_UI";
-export class PlayerInTeamItem extends PlayerInTeamItem_UI {
+export class PlayerInTeamItem extends PlayerInTeamItem_UI<NodePropsData> {
 	// 初始化数据
 	componentDidMount() {
 		super.componentDidMount();

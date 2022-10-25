@@ -1,17 +1,17 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,LabelAttributes,DOTAHeroImageAttributes } from "@demon673/react-panorama";
 
 
-export class NpcTalkDialog_UI extends BasePureComponent {
+export class NpcTalkDialog_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 lbl_tips: React.RefObject<LabelPanel>;
 heroimaage: React.RefObject<HeroImage>;
 NODENAME = {  __root__: '__root__',  lbl_tips: 'lbl_tips',  heroimaage: 'heroimaage',  };
 FUNCNAME = {  };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.lbl_tips = createRef<LabelPanel>();

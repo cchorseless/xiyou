@@ -3,15 +3,16 @@ import React, { createRef, useState } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { PathHelper } from "../../helper/PathHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { CombinationSmallItem } from "../Combination/CombinationSmallItem";
 import { SkillItem } from "../Skill/SkillItem";
 import { DrawCardBottomItem_UI } from "./DrawCardBottomItem_UI";
 
-interface IProps {
+interface IProps extends NodePropsData {
     itemname: string;
     index: number;
 }
-export class DrawCardBottomItem extends DrawCardBottomItem_UI {
+export class DrawCardBottomItem extends DrawCardBottomItem_UI<IProps> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();

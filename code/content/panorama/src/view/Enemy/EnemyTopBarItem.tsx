@@ -1,9 +1,10 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { EntityHpBarItem } from "../Common/EntityHpBarItem";
 import { EnemyTopBarItem_UI } from "./EnemyTopBarItem_UI";
-export class EnemyTopBarItem extends EnemyTopBarItem_UI {
+export class EnemyTopBarItem extends EnemyTopBarItem_UI<NodePropsData> {
     onStartUI() {
         let entityid = this.props.entityid as EntityIndex;
         this.addNodeChildAt(this.NODENAME.panel_hpbar, EntityHpBarItem, {

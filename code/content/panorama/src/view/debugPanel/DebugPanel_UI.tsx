@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes } from "@demon673/react-panorama";
 
 
-export class DebugPanel_UI extends BasePureComponent {
+export class DebugPanel_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 panel_0: React.RefObject<Panel>;
 btn_close: React.RefObject<Button>;
@@ -22,7 +22,7 @@ onClick_finishTask = (...args: any[]) => { };
 NODENAME = {  __root__: '__root__',  panel_0: 'panel_0',  btn_close: 'btn_close',  btn_restartGame: 'btn_restartGame',  btn_clearall: 'btn_clearall',  btn_reload: 'btn_reload',  btn_createUnit: 'btn_createUnit',  btn_finishTask: 'btn_finishTask',  };
 FUNCNAME = {  onbtn_close: {nodeName:"btn_close",type:"onactivate"}, onClick_restartGame: {nodeName:"btn_restartGame",type:"ondblclick"}, onClick_btn_clearall: {nodeName:"btn_clearall",type:"onactivate"}, onClick_reload: {nodeName:"btn_reload",type:"ondblclick"}, onClick_createUnit: {nodeName:"btn_createUnit",type:"ondblclick"}, onClick_finishTask: {nodeName:"btn_finishTask",type:"ondblclick"}, };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.panel_0 = createRef<Panel>();

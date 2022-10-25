@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,LabelAttributes } from "@demon673/react-panorama";
 
 
-export class HeroFashionItem_UI extends BasePureComponent {
+export class HeroFashionItem_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 lbl_starstone: React.RefObject<LabelPanel>;
 lbl_dresschange: React.RefObject<LabelPanel>;
@@ -12,7 +12,7 @@ lbl_dressonekey: React.RefObject<LabelPanel>;
 NODENAME = {  __root__: '__root__',  lbl_starstone: 'lbl_starstone',  lbl_dresschange: 'lbl_dresschange',  lbl_dressonekey: 'lbl_dressonekey',  };
 FUNCNAME = {  };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.lbl_starstone = createRef<LabelPanel>();

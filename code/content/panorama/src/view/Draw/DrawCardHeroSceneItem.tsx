@@ -4,17 +4,19 @@ import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { KVHelper } from "../../helper/KVHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { PrecacheHelper } from "../../helper/PrecacheHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { GameEnum } from "../../libs/GameEnum";
 import { DrawCardBottomItem } from "./DrawCardBottomItem";
 import { DrawCardHeroSceneItem_UI } from "./DrawCardHeroSceneItem_UI";
 import { DrawCardPanel } from "./DrawCardPanel";
 
-interface IProps {
+interface IProps extends NodePropsData {
     itemname: string;
     index: number;
+    marginLeft?: string
 }
 
-export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI {
+export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI<IProps> {
     constructor(prop: IProps) {
         super(prop);
         this.heroscene_attrs.className = "hero_draw_card_box";

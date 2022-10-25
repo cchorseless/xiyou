@@ -1,17 +1,17 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,ImageAttributes } from "@demon673/react-panorama";
 
 
-export class CombinationSingleBottomItem_UI extends BasePureComponent {
+export class CombinationSingleBottomItem_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 img_icon: React.RefObject<ImagePanel>;
 panel_box: React.RefObject<Panel>;
 NODENAME = {  __root__: '__root__',  img_icon: 'img_icon',  panel_box: 'panel_box',  };
 FUNCNAME = {  };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.img_icon = createRef<ImagePanel>();

@@ -1,8 +1,8 @@
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../../libs/BasePureComponent";
+import { BaseEasyPureComponent } from "../../../libs/BasePureComponent";
 import { DOTAParticleScenePanelAttributes, PanelAttributes } from "@demon673/react-panorama";
 
-export class CustomStats_UI extends BasePureComponent {
+export class CustomStats_UI extends BaseEasyPureComponent {
     __root__: React.RefObject<Panel>;
     stats_container: React.RefObject<Panel>;
     NODENAME = { __root__: "__root__", stats_container: "stats_container" };

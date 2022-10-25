@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,ImageAttributes,LabelAttributes } from "@demon673/react-panorama";
 
 
-export class ShopPanel_UI extends BasePureComponent {
+export class ShopPanel_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 btn_gohome: React.RefObject<ImagePanel>;
 onbtn_gohome = (...args: any[]) => { };
@@ -15,7 +15,7 @@ lbl_metastone: React.RefObject<LabelPanel>;
 NODENAME = {  __root__: '__root__',  btn_gohome: 'btn_gohome',  btn_goback: 'btn_goback',  lbl_starstone: 'lbl_starstone',  lbl_metastone: 'lbl_metastone',  };
 FUNCNAME = {  onbtn_gohome: {nodeName:"btn_gohome",type:"onmouseactivate"}, onbtn_goback: {nodeName:"btn_goback",type:"onmouseactivate"}, };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.btn_gohome = createRef<ImagePanel>();

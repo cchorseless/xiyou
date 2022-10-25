@@ -8,14 +8,14 @@ import { EventHelper } from "../helper/EventHelper";
 import { LogHelper } from "../helper/LogHelper";
 import { PrecacheHelper } from "../helper/PrecacheHelper";
 import { TimerHelper } from "../helper/TimerHelper";
-import { BasePureComponent } from "../libs/BasePureComponent";
+import { BaseEasyPureComponent } from "../libs/BasePureComponent";
 import { GameEnum } from "../libs/GameEnum";
 import { Minimap_plus } from "./alldota2/minimap_plus/Minimap_plus";
 import { EntityOverHeadPanel } from "./Common/EntityOverHeadPanel";
 import { HeroDebugItem } from "./Hero/HeroDebugItem";
 import { MainPanel } from "./MainPanel/MainPanel";
 
-export class RootPanel extends BasePureComponent {
+export class RootPanel extends BaseEasyPureComponent {
     __root__: React.RefObject<Panel>;
     /**全局根节点实例 */
     static instance: RootPanel;

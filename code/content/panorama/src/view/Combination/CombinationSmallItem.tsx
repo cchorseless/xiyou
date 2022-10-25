@@ -5,14 +5,15 @@ import { DotaUIHelper } from "../../helper/DotaUIHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { MainPanel } from "../MainPanel/MainPanel";
 import { CombinationInfoDialog } from "./CombinationInfoDialog";
 import { CombinationSmallItem_UI } from "./CombinationSmallItem_UI";
 
-interface IProps {
+interface IProps extends NodePropsData {
     itemname: string;
 }
-export class CombinationSmallItem extends CombinationSmallItem_UI {
+export class CombinationSmallItem extends CombinationSmallItem_UI<IProps> {
     // public infodialog: CombinationInfoDialog | null;
     // public isInRangle: boolean = true;
     // constructor(prop: any) {

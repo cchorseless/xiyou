@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../../libs/BasePureComponent";
 import { PanelAttributes } from "@demon673/react-panorama";
 
 
-export class Team_select_UI extends BasePureComponent {
+export class Team_select_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 btn_startgame: React.RefObject<Button>;
 onbtn_startgame = (...args: any[]) => { };
@@ -14,7 +14,7 @@ allplayer: React.RefObject<Button>;
 NODENAME = {  __root__: '__root__',  btn_startgame: 'btn_startgame',  btn_addbot: 'btn_addbot',  allplayer: 'allplayer',  };
 FUNCNAME = {  onbtn_startgame: {nodeName:"btn_startgame",type:"onactivate"}, onbtn_addbot: {nodeName:"btn_addbot",type:"onactivate"}, };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.btn_startgame = createRef<Button>();

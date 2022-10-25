@@ -1,16 +1,16 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,DOTAScenePanelAttributes } from "@demon673/react-panorama";
 
 
-export class DrawCardHeroSceneItem_UI extends BasePureComponent {
+export class DrawCardHeroSceneItem_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 heroscene: React.RefObject<ScenePanel>;
 NODENAME = {  __root__: '__root__',  heroscene: 'heroscene',  };
 FUNCNAME = {  };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.heroscene = createRef<ScenePanel>();

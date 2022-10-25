@@ -1,7 +1,8 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { HeroPropInfoItem_UI } from "./HeroPropInfoItem_UI";
-export class HeroPropInfoItem extends HeroPropInfoItem_UI {
+export class HeroPropInfoItem extends HeroPropInfoItem_UI<NodePropsData> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();

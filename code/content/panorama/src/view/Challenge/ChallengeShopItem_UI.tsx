@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,LabelAttributes,ImageAttributes } from "@demon673/react-panorama";
 
 
-export class ChallengeShopItem_UI extends BasePureComponent {
+export class ChallengeShopItem_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 btn_poplvup: React.RefObject<Button>;
 onbtnpop_click = (...args: any[]) => { };
@@ -32,7 +32,7 @@ lbl_tiaozhanDes: React.RefObject<LabelPanel>;
 NODENAME = {  __root__: '__root__',  btn_poplvup: 'btn_poplvup',  panel_lvpop0: 'panel_lvpop0',  lbl_lvpopdes: 'lbl_lvpopdes',  lbl_lvpopulationdes: 'lbl_lvpopulationdes',  panel_lvpop1: 'panel_lvpop1',  img_popneed0: 'img_popneed0',  lbl_popneedcount0: 'lbl_popneedcount0',  img_popneed1: 'img_popneed1',  lbl_popneedcount1: 'lbl_popneedcount1',  btn_teclvup: 'btn_teclvup',  panel_lvtec0: 'panel_lvtec0',  lbl_teclvdes: 'lbl_teclvdes',  lbl_lvupdes: 'lbl_lvupdes',  panel_lvtec1: 'panel_lvtec1',  img_tecneed: 'img_tecneed',  lbl_tecneedcount: 'lbl_tecneedcount',  btn_shop: 'btn_shop',  lbl_shopdes: 'lbl_shopdes',  panel_bossall: 'panel_bossall',  lbl_tiaozhanDes: 'lbl_tiaozhanDes',  };
 FUNCNAME = {  onbtnpop_click: {nodeName:"btn_poplvup",type:"onmouseactivate"}, onbtntec_click: {nodeName:"btn_teclvup",type:"onmouseactivate"}, onbtnshop_click: {nodeName:"btn_shop",type:"onmouseactivate"}, };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.btn_poplvup = createRef<Button>();

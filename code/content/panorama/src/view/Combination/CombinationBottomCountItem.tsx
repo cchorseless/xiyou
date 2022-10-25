@@ -1,16 +1,17 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { CombinationBottomCountItem_UI } from "./CombinationBottomCountItem_UI";
 
-interface nodedata {
+interface IProps extends NodePropsData {
 	x: string;
 	y: string;
 	width: string;
 	height: string;
 	isactive: boolean;
 }
-export class CombinationBottomCountItem extends CombinationBottomCountItem_UI {
+export class CombinationBottomCountItem extends CombinationBottomCountItem_UI<IProps> {
 	// 初始化数据
 	componentDidMount() {
 		super.componentDidMount();
@@ -19,7 +20,7 @@ export class CombinationBottomCountItem extends CombinationBottomCountItem_UI {
 	public onStartUI(): void {
 		this.onRefreshUI(this.props as any);
 	}
-	onRefreshUI(data: nodedata) {
+	onRefreshUI(data: IProps) {
 		this.__root__.current!.style.width = data.width;
 		this.__root__.current!.style.height = data.height;
 		this.__root__.current!.style.x = data.x;

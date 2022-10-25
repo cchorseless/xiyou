@@ -3,12 +3,13 @@ import React, { createRef, useState } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { PathHelper } from "../../helper/PathHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { CombinationCardIconItem_UI } from "./CombinationCardIconItem_UI";
 
-interface IProps {
+interface IProps extends NodePropsData {
 	heroid: string;
 }
-export class CombinationCardIconItem extends CombinationCardIconItem_UI {
+export class CombinationCardIconItem extends CombinationCardIconItem_UI<IProps> {
 	// 初始化数据
 	componentDidMount() {
 		super.componentDidMount();
@@ -16,7 +17,7 @@ export class CombinationCardIconItem extends CombinationCardIconItem_UI {
 	};
 
 	onStartUI() {
-		this.onRefreshUI(this.props as IProps);
+		this.onRefreshUI(this.props);
 	}
 
 	activeSelect(isselect: boolean = false) {

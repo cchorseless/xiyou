@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes } from "@demon673/react-panorama";
 
 
-export class MainPanel_UI extends BasePureComponent {
+export class MainPanel_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 btn_debug: React.RefObject<Button>;
 onbtn_click = (...args: any[]) => { };
@@ -14,7 +14,7 @@ panel_alldialog: React.RefObject<Panel>;
 NODENAME = {  __root__: '__root__',  btn_debug: 'btn_debug',  panel_base: 'panel_base',  panel_allpanel: 'panel_allpanel',  panel_alldialog: 'panel_alldialog',  };
 FUNCNAME = {  onbtn_click: {nodeName:"btn_debug",type:"onactivate"}, };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.btn_debug = createRef<Button>();
@@ -55,17 +55,17 @@ render() {
 </Button>
 }
     {this.panel_base_isValid && 
-<Panel ref={this.panel_base} id="panel_base" className="root" key="compId_16" style={this.CSS_1_1}  {...this.panel_base_attrs} >
+<Panel ref={this.panel_base} className="root" key="compId_16" style={this.CSS_1_1}  {...this.panel_base_attrs} >
 {this.panel_base_childs}
 </Panel>
 }
     {this.panel_allpanel_isValid && 
-<Panel ref={this.panel_allpanel} id="panel_allpanel" className="root" key="compId_13" style={this.CSS_1_2}  {...this.panel_allpanel_attrs} >
+<Panel ref={this.panel_allpanel} className="root" key="compId_13" style={this.CSS_1_2}  {...this.panel_allpanel_attrs} >
 {this.panel_allpanel_childs}
 </Panel>
 }
     {this.panel_alldialog_isValid && 
-<Panel ref={this.panel_alldialog} id="panel_alldialog" className="root" key="compId_17" style={this.CSS_1_3}  {...this.panel_alldialog_attrs} >
+<Panel ref={this.panel_alldialog} className="root" key="compId_17" style={this.CSS_1_3}  {...this.panel_alldialog_attrs} >
 {this.panel_alldialog_childs}
 </Panel>
 }

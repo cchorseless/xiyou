@@ -1,17 +1,17 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,ImageAttributes } from "@demon673/react-panorama";
 
 
-export class ShopTopRightPanel_UI extends BasePureComponent {
+export class ShopTopRightPanel_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 btn_shop: React.RefObject<ImagePanel>;
 onbtn_shop = (...args: any[]) => { };
 NODENAME = {  __root__: '__root__',  btn_shop: 'btn_shop',  };
 FUNCNAME = {  onbtn_shop: {nodeName:"btn_shop",type:"onmouseactivate"}, };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.btn_shop = createRef<ImagePanel>();
@@ -32,9 +32,9 @@ btn_shop_childs: Array<JSX.Element> = [];
 render() {
     return(
         this.__root___isValid && 
-<Panel  key="compId_1" ref={this.__root__} style={this.CSS_0_0}  {...this.props}   {...this.__root___attrs}>
+<Panel key="compId_1" ref={this.__root__} style={this.CSS_0_0}  {...this.props}   {...this.__root___attrs}>
     {this.btn_shop_isValid && 
-<Image id="ItemImage" ref={this.btn_shop} onmouseactivate={this.onbtn_shop} key="compId_2" style={this.CSS_1_0}  {...this.btn_shop_attrs}>
+<Image ref={this.btn_shop} onmouseactivate={this.onbtn_shop} key="compId_2" style={this.CSS_1_0}  {...this.btn_shop_attrs}>
         <Image key="compId_3" style={this.CSS_2_0} >
 </Image>
         <Label key="compId_4" style={this.CSS_2_1} >

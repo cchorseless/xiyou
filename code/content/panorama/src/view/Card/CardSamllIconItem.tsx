@@ -2,11 +2,12 @@
 import React, { createRef, useState } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { CardSamllIconItem_UI } from "./CardSamllIconItem_UI";
-interface IProps {
+interface IProps extends NodePropsData {
     itemname: string;
 }
-export class CardSamllIconItem extends CardSamllIconItem_UI {
+export class CardSamllIconItem extends CardSamllIconItem_UI<IProps> {
     // 初始化数据
     onStartUI() {
         this.onRefreshUI(this.props as IProps);

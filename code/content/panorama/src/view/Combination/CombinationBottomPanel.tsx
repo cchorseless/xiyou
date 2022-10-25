@@ -4,10 +4,13 @@ import { ECombination } from "../../game/components/Combination/ECombination";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { EventHelper } from "../../helper/EventHelper";
 import { LogHelper } from "../../helper/LogHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { GameEnum } from "../../libs/GameEnum";
 import { CombinationBottomPanel_UI } from "./CombinationBottomPanel_UI";
 import { CombinationSingleBottomItem } from "./CombinationSingleBottomItem";
-export class CombinationBottomPanel extends CombinationBottomPanel_UI {
+
+
+export class CombinationBottomPanel extends CombinationBottomPanel_UI<NodePropsData> {
 	// 初始化数据
 	componentDidMount() {
 		super.componentDidMount();

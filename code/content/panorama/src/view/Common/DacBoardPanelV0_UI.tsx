@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes } from "@demon673/react-panorama";
 
 
-export class DacBoardPanelV0_UI extends BasePureComponent {
+export class DacBoardPanelV0_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 panel_PortraitGroup: React.RefObject<Panel>;
 panel_AbilityList: React.RefObject<Panel>;
@@ -14,7 +14,7 @@ panel_bufflist: React.RefObject<Panel>;
 NODENAME = {  __root__: '__root__',  panel_PortraitGroup: 'panel_PortraitGroup',  panel_AbilityList: 'panel_AbilityList',  panel_HealthMana: 'panel_HealthMana',  panel_Inventory: 'panel_Inventory',  panel_bufflist: 'panel_bufflist',  };
 FUNCNAME = {  };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.panel_PortraitGroup = createRef<Panel>();

@@ -1,16 +1,16 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../../libs/BasePureComponent";
 import { PanelAttributes } from "@demon673/react-panorama";
 
 
-export class Minimap_iconitem_UI extends BasePureComponent {
+export class Minimap_iconitem_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 img_0: React.RefObject<Panel>;
 NODENAME = {  __root__: '__root__',  img_0: 'img_0',  };
 FUNCNAME = {  };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.img_0 = createRef<Panel>();

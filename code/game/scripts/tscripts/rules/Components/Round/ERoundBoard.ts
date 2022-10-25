@@ -50,6 +50,7 @@ export class ERoundBoard extends ERound {
         let player = this.Domain.ETRoot.AsPlayer();
         this.roundState = RoundConfig.ERoundBoardState.battle;
         player.SyncClientEntity(this, false);
+        player.ChessControlComp().OnRoundStartBattle();
         player.BuildingManager().OnRoundStartBattle();
         player.FakerHeroRoot().OnRoundStartBattle();
         let buildingCount = player.BuildingManager().getAllBattleUnitAlive().length;

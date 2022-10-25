@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,ImageAttributes,DOTAAbilityImageAttributes,LabelAttributes } from "@demon673/react-panorama";
 
 
-export class SkillCastItem_UI extends BasePureComponent {
+export class SkillCastItem_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 img_bg: React.RefObject<ImagePanel>;
 img_skillicon: React.RefObject<AbilityImage>;
@@ -14,7 +14,7 @@ lbl_lefttime: React.RefObject<LabelPanel>;
 NODENAME = {  __root__: '__root__',  img_bg: 'img_bg',  img_skillicon: 'img_skillicon',  panel_cd: 'panel_cd',  lbl_lefttime: 'lbl_lefttime',  };
 FUNCNAME = {  onbtn_castability: {nodeName:"img_skillicon",type:"onmouseactivate"}, };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.img_bg = createRef<ImagePanel>();

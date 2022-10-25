@@ -8,6 +8,7 @@ import { FuncHelper } from "../../helper/FuncHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { ET } from "../../libs/Entity";
 import { MainPanel } from "../MainPanel/MainPanel";
 import { CombinationBottomCountGroup } from "./CombinationBottomCountGroup";
@@ -15,7 +16,7 @@ import { CombinationBottomCountItem } from "./CombinationBottomCountItem";
 import { CombinationBottomPanel } from "./CombinationBottomPanel";
 import { CombinationInfoDialog } from "./CombinationInfoDialog";
 import { CombinationSingleBottomItem_UI } from "./CombinationSingleBottomItem_UI";
-export class CombinationSingleBottomItem extends CombinationSingleBottomItem_UI {
+export class CombinationSingleBottomItem extends CombinationSingleBottomItem_UI<NodePropsData> {
 	// public infodialog: CombinationInfoDialog | null;
 	// public isInRangle: boolean = true;
 	// constructor(prop: any) {

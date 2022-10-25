@@ -3,13 +3,14 @@ import React, { createRef, useState } from "react";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { Effect_ShineItem } from "../Effect/Effect_ShineItem";
 import { SkillCastItem_UI } from "./SkillCastItem_UI";
-interface IProps {
+interface IProps extends NodePropsData {
     abilityname: string;
     castEntityIndex: EntityIndex;
 }
-export class SkillCastItem extends SkillCastItem_UI {
+export class SkillCastItem extends SkillCastItem_UI<IProps> {
     constructor(props: any) {
         super(props);
         this.img_skillicon_attrs.showtooltip = true;

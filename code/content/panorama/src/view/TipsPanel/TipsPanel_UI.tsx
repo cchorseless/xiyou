@@ -1,16 +1,16 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,LabelAttributes } from "@demon673/react-panorama";
 
 
-export class TipsPanel_UI extends BasePureComponent {
+export class TipsPanel_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 lbl: React.RefObject<LabelPanel>;
 NODENAME = {  __root__: '__root__',  lbl: 'lbl',  };
 FUNCNAME = {  };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.lbl = createRef<LabelPanel>();

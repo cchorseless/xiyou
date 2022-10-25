@@ -2,22 +2,19 @@
 import React, { createRef, useState } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
-import { registerUI } from "../../libs/BasePureComponent";
+import { NodePropsData, registerUI } from "../../libs/BasePureComponent";
 import { DrawCardBottomItem } from "./DrawCardBottomItem";
 import { DrawCardHeroSceneItem } from "./DrawCardHeroSceneItem";
 import { DrawCardPanel_UI } from "./DrawCardPanel_UI";
 
-interface IProps {
+interface IProps extends NodePropsData {
     cards: string[];
 }
 @registerUI()
-export class DrawCardPanel extends DrawCardPanel_UI {
+export class DrawCardPanel extends DrawCardPanel_UI<IProps> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();
-        // this.__root___childs.push(
-        // 	<DOTAScenePanel id="dfdsdfs" className="SceneLoaded" unit={"'npc_dota_hero_lina'"} light="global_light" antialias={true} renderdeferred={false} particleonly={false}></DOTAScenePanel>
-        // );
         CSSHelper.setFlowChildren(this.box);
         CSSHelper.setFlowChildren(this.box_model);
         this.img_bg.current!.style.opacity = "0.8";
@@ -28,10 +25,11 @@ export class DrawCardPanel extends DrawCardPanel_UI {
     onbtn_close_click = () => {
         this.close(true);
     };
+
     async onRefreshUI(props: IProps) {
         this.clearNode(this.NODENAME.box);
         this.clearNode(this.NODENAME.box_model);
-        let spaceX = "";
+        let spaceX: string = "";
         if (props.cards.length == 3) {
             this.box_model.current!.style.x = "150px";
             this.box.current!.style.x = "150px";

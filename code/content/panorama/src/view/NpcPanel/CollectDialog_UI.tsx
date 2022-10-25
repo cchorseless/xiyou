@@ -1,17 +1,17 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes } from "@demon673/react-panorama";
 
 
-export class CollectDialog_UI extends BasePureComponent {
+export class CollectDialog_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 btn_end: React.RefObject<Button>;
 onbtn_makeTeam = (...args: any[]) => { };
 NODENAME = {  __root__: '__root__',  btn_end: 'btn_end',  };
 FUNCNAME = {  onbtn_makeTeam: {nodeName:"btn_end",type:"onactivate"}, };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.btn_end = createRef<Button>();

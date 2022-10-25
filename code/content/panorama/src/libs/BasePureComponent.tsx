@@ -15,31 +15,33 @@ interface IBasePureCompProperty {
 /**
  * 节点数据
  */
-interface NodeData extends Partial<VCSSStyleDeclaration> {
+export interface NodePropsData extends Partial<VCSSStyleDeclaration> {
     /**组件唯一key */
     __onlykey__?: string;
+    key?: string;
     [k: string]: any;
 }
 
-interface ReactElement extends React.CElement<NodeData, BasePureComponent> { }
+
+interface ReactElement extends React.CElement<NodePropsData, BasePureComponent<NodePropsData>> { }
 
 interface ReactElementNodeInfo {
     Node: ReactElement;
-    Domain: BasePureComponent;
+    Domain: BasePureComponent<NodePropsData>;
     NodeParentName: string;
 }
 
-export const registerUI = () => (entity: typeof BasePureComponent) => {
+export const registerUI = () => (entity: typeof BasePureComponent<NodePropsData>) => {
     PrecacheHelper.RegClass([entity as any]);
 };
 
 export class BasePureComponentSystem {
-    public static AllBasePureComp: { [instanceId: string]: BasePureComponent } = {};
+    public static AllBasePureComp: { [instanceId: string]: BasePureComponent<NodePropsData> } = {};
     public static AllReactElement: { [instanceId: string]: ReactElementNodeInfo } = {};
     // 异步函数
     public static AllAsyacResolve: { [instanceId: string]: Function } = {};
 
-    static RegisterBasePureComp(entity: BasePureComponent, b: boolean) {
+    static RegisterBasePureComp(entity: BasePureComponent<NodePropsData>, b: boolean) {
         if (b) {
             if (entity.InstanceId == null || BasePureComponentSystem.AllBasePureComp[entity.InstanceId] != null) {
                 throw new Error("RegisterSystem error");
@@ -57,7 +59,7 @@ export class BasePureComponentSystem {
             delete BasePureComponentSystem.AllBasePureComp[entity.InstanceId];
         }
     }
-    static RegisterReactElement(entity: ReactElement, b: boolean, Domain: BasePureComponent | null = null, NodeParentName: string | null = null) {
+    static RegisterReactElement(entity: ReactElement, b: boolean, Domain: BasePureComponent<NodePropsData> | null = null, NodeParentName: string | null = null) {
         if (b) {
             if (entity.key == null || BasePureComponentSystem.AllReactElement[entity.key] != null || Domain == null || NodeParentName == null) {
                 LogHelper.error("RegisterReactElement error");
@@ -83,7 +85,7 @@ export class BasePureComponentSystem {
     }
 }
 
-export class BasePureComponent extends PureComponent<NodeData> implements ET.IEntityRoot {
+export class BasePureComponent<P extends NodePropsData> extends PureComponent<P> implements ET.IEntityRoot {
     static PanelZorder = 1;
     ETRoot?: ET.EntityRoot;
     /**根节点 */
@@ -98,7 +100,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     /**根节点样式 */
     CSS_0_0: Partial<VCSSStyleDeclaration> = {};
     /**类注册计数 */
-    constructor(props: NodeData) {
+    constructor(props: P) {
         super(props);
         this.__root__ = null as any;
         // LogHelper.print("add BasePureComponent :", this.constructor.name);
@@ -139,7 +141,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     // public onAwake(props: NodeData) {}
     /**渲染后一帧执行 */
     public onStartUI() { }
-    public onRefreshUI(data?: NodeData, ...args: any[]) { }
+    public onRefreshUI(data: any, ...args: any[]) { }
     public onDestroy() { }
 
     /**
@@ -150,7 +152,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
      * @param index 添加的索引，默认在父节点最后添加
      * @returns
      */
-    public addNodeChildAt<T extends typeof BasePureComponent>(nodeName: string, nodeType: T, nodeData: NodeData = {}, index: number = -1): ReactElement | void {
+    public addNodeChildAt<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M | any = {} as any, index: number = -1): ReactElement | void {
         let instanceId = FuncHelper.generateUUID();
         // 添加唯一Key
         nodeData.key = instanceId;
@@ -161,7 +163,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         if (parentNode == null) {
             throw Error(this.constructor.name + " dont have node : " + nodeName);
         }
-        let node = createElement(nodeType, nodeData) as ReactElement;
+        let node = createElement(nodeType, nodeData) as any as ReactElement;
         BasePureComponentSystem.RegisterReactElement(node, true, this, _childsName);
         if (index == -1) {
             parentNode = parentNode.concat([node]);
@@ -197,17 +199,17 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         (this as any)[_childsName] = parentNode;
     }
 
-    public getPureCompByNode<T extends BasePureComponent>(node: ReactElement): T | null {
+    public getPureCompByNode<T extends BasePureComponent<NodePropsData>>(node: ReactElement): T | null {
         if (node.key) {
             return BasePureComponentSystem.GetBasePureComp(node.key as string) as T;
         }
         return null;
     }
 
-    public async addOrShowOnlyNodeChild<T extends typeof BasePureComponent>(nodeName: string, nodeType: T, nodeData: NodeData = {}) {
-        let comp = this.GetOneNodeChild(nodeName, nodeType);
+    public async addOrShowOnlyNodeChild<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M | any = {} as any) {
+        let comp = this.GetOneNodeChild<M, T>(nodeName, nodeType);
         if (comp == null) {
-            comp = await this.addNodeChildAsyncAt(nodeName, nodeType, nodeData);
+            comp = await this.addNodeChildAsyncAt<M, T>(nodeName, nodeType, nodeData);
         } else {
             comp.__root__.current!.visible = true;
             if (Object.keys(nodeData).length > 0) {
@@ -218,7 +220,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         return comp as InstanceType<T>;
     }
 
-    public GetNodeChild<T extends typeof BasePureComponent>(nodeName: string, nodeType: T): InstanceType<T>[] {
+    public GetNodeChild<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T): InstanceType<T>[] {
         let _childsName = this.getNode_childs_Name(nodeName);
         let parentNode: Array<JSX.Element> = (this as any)[_childsName];
         if (parentNode == null) {
@@ -236,7 +238,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         return r;
     }
 
-    public GetOneNodeChild<T extends typeof BasePureComponent>(nodeName: string, nodeType: T): InstanceType<T> | null {
+    public GetOneNodeChild<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T): InstanceType<T> | null {
         let _childsName = this.getNode_childs_Name(nodeName);
         let parentNode: Array<JSX.Element> = (this as any)[_childsName];
         if (parentNode == null) {
@@ -258,7 +260,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     /**
      * 获取全部组件
      */
-    public static GetAllNode<T extends typeof BasePureComponent>(this: T): InstanceType<T>[] | void {
+    public static GetAllNode<M extends NodePropsData, T extends typeof BasePureComponent<M>>(this: T): InstanceType<T>[] | void {
         let r: InstanceType<T>[] = [];
         for (let k in BasePureComponentSystem.AllBasePureComp) {
             if (BasePureComponentSystem.AllBasePureComp[k].constructor.name == this.name) {
@@ -272,7 +274,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
      * @param this
      * @returns
      */
-    public static GetInstance<T extends typeof BasePureComponent>(this: T): InstanceType<T> | void {
+    public static GetInstance<M extends NodePropsData, T extends typeof BasePureComponent<M>>(this: T): InstanceType<T> | void {
         let r = this.GetAllNode();
         if (r && r.length == 1) {
             return r[0] as InstanceType<T>;
@@ -282,9 +284,9 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
         return null as any;
     }
 
-    public async addNodeChildAsyncAt<T extends typeof BasePureComponent>(nodeName: string, nodeType: T, nodeData: NodeData = {}, index: number = -1) {
+    public async addNodeChildAsyncAt<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M | any = {} as any, index: number = -1) {
         return new Promise<InstanceType<T>>((resolve, reject) => {
-            let node = this.addNodeChildAt(nodeName, nodeType, nodeData, index);
+            let node = this.addNodeChildAt<M, T>(nodeName, nodeType, nodeData, index);
             if (node) {
                 BasePureComponentSystem.AllAsyacResolve[(node as ReactElement).key as string] = resolve;
                 this.updateSelf();
@@ -374,9 +376,9 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
     }
     public hide() {
         if (this.__root__ && this.__root__.current) {
-            this.__root__.current.style.opacity = 0+"";
+            this.__root__.current.style.opacity = 0 + "";
             this.updateSelf();
-        }  
+        }
     }
     private allGameEventID: GameEventListenerID[] = [];
     /**添加游戏事件 */
@@ -448,4 +450,7 @@ export class BasePureComponent extends PureComponent<NodeData> implements ET.IEn
             BasePureComponentSystem.RegisterReactElement(nodeinfo.Node, false);
         }
     }
+}
+
+export class BaseEasyPureComponent extends BasePureComponent<NodePropsData>  {
 }

@@ -9,10 +9,11 @@ import { FuncHelper } from "../../helper/FuncHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { PathHelper } from "../../helper/PathHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { GameEnum } from "../../libs/GameEnum";
 import { ChallengeIconItem } from "./ChallengeIconItem";
 import { ChallengeShopItem_UI } from "./ChallengeShopItem_UI";
-export class ChallengeShopItem extends ChallengeShopItem_UI {
+export class ChallengeShopItem extends ChallengeShopItem_UI<NodePropsData> {
     // public infodialog: CombinationInfoDialog | null;
     public isInRangle: boolean = true;
     constructor(prop: any) {

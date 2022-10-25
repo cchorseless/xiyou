@@ -3,3 +3,4 @@ declare interface PlayerCustomNetTableDeclarations {
         hero_selections: string[];
     };
 }
+

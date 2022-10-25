@@ -1,10 +1,10 @@
 
 import React, { createRef, PureComponent } from "react";
-import { BasePureComponent } from "../../libs/BasePureComponent";
+import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes,ImageAttributes } from "@demon673/react-panorama";
 
 
-export class DrawCardPanel_UI extends BasePureComponent {
+export class DrawCardPanel_UI<T extends NodePropsData> extends BasePureComponent<T> {
 __root__: React.RefObject<Panel>;
 box_model: React.RefObject<Panel>;
 img_bg: React.RefObject<ImagePanel>;
@@ -14,7 +14,7 @@ box: React.RefObject<Panel>;
 NODENAME = {  __root__: '__root__',  box_model: 'box_model',  img_bg: 'img_bg',  btn_close: 'btn_close',  box: 'box',  };
 FUNCNAME = {  onbtn_close_click: {nodeName:"btn_close",type:"onactivate"}, };
 
-    constructor(props: any) {
+    constructor(props: T) {
 		super(props);
 this.__root__ = createRef<Panel>();
 this.box_model = createRef<Panel>();

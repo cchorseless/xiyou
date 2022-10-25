@@ -1,6 +1,7 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
 import { DotaUIHelper } from "../../helper/DotaUIHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
 import { CustomAbilityList } from "../alldota2/ui_element/CustomAbilityList";
 import { CustomBuffList } from "../alldota2/ui_element/CustomBuffList";
 import { CustomHealthMana } from "../alldota2/ui_element/CustomHealthMana";
@@ -8,7 +9,7 @@ import { CustomInventory } from "../alldota2/ui_element/CustomInventory";
 import { CustomPortraitGroup } from "../alldota2/ui_element/CustomPortraitGroup";
 import { CustomStats } from "../alldota2/ui_element/CustomStats";
 import { DacBoardPanelV0_UI } from "./DacBoardPanelV0_UI";
-export class DacBoardPanelV0 extends DacBoardPanelV0_UI {
+export class DacBoardPanelV0 extends DacBoardPanelV0_UI<NodePropsData> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();
