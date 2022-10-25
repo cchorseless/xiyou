@@ -38,7 +38,8 @@ export class AiAttackComponent extends ET.Component {
                     if (!chessComp.IsCanAttackTarget(enemyRoot)) {
                         let pos = chessComp.FindClosePosToEnemy(enemyRoot);
                         if (pos) {
-                            chessComp.blinkChessX(pos, false);
+                            domain.MoveToTargetToAttack(enemy)
+                            // chessComp.blinkChessX(pos, false);
                         }
                     } else {
                         GameFunc.ExecuteOrder(domain, dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_TARGET, enemy, null);

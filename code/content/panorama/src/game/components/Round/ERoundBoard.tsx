@@ -9,13 +9,25 @@ import { PlayerScene } from "../Player/PlayerScene";
 import { ERound } from "./ERound";
 @registerET()
 export class ERoundBoard extends ERound {
-    roundState: RoundConfig.ERoundBoardState;
     roundStartTime: string;
     configID: string;
     unitSpawned: number = 0;
     tTotalDamage: number = 0; // 回合总伤害
     tTowerDamage: { [entityIndex: string]: number } = {}; // 回合伤害
     config: building_round_board.OBJ_2_1;
+
+    private _roundState: RoundConfig.ERoundBoardState;
+    set roundState(v: RoundConfig.ERoundBoardState) {
+        if (this._roundState === RoundConfig.ERoundBoardState.start
+            && v === RoundConfig.ERoundBoardState.battle) {
+            PlayerScene.Local.SelectHero();
+        }
+        this._roundState = v;
+    }
+    get roundState() {
+        return this._roundState;
+    }
+
 
     async onSerializeToEntity() {
         let KV_DATA = KVHelper.KVData();

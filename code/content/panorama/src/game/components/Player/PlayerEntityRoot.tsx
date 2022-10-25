@@ -27,6 +27,28 @@ export class PlayerEntityRoot extends ET.Entity {
         }
     }
 
+    IsEntitySelected(iEntIndex: EntityIndex) {
+        let aSelectedEntities = Players.GetSelectedEntities(this.Playerid);
+        for (let index = aSelectedEntities.length - 1; index >= 0; index--) {
+            let _iEntIndex = aSelectedEntities[index];
+            if (iEntIndex == _iEntIndex) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+
+    SelectHero(isCameraCenter: boolean = false) {
+        let iEntIndex = Players.GetPlayerHeroEntityIndex(this.Playerid);
+        if (Entities.IsValidEntity(iEntIndex) && Entities.GetPlayerOwnerID(iEntIndex) == Players.GetLocalPlayer()) {
+            if (this.IsEntitySelected(iEntIndex)) {
+                if (isCameraCenter) GameUI.MoveCameraToEntity(iEntIndex);
+            } else {
+                GameUI.SelectUnit(iEntIndex, false);
+            }
+        }
+    }
 
     Init() {
         this.PlayerHeroComp.LoadNetTableData();

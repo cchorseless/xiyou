@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../../ai/AI_ability";
 import { GameEnum } from "../../../../GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
@@ -27,7 +28,7 @@ export class ability1_slardar_sprint extends ActiveRootAbility {
         this.SetDefaultSpecialValue("puddle_stun_increase", 50);
         this.SetDefaultSpecialValue("puddle_crit_damage_increase", 100);
         this.SetDefaultSpecialValue("shard_amplify_attack_damage_pct", 100);
-        this.SetDefaultSpecialValue("crush_radius", 800);
+        this.SetDefaultSpecialValue("crush_radius", 400);
         this.SetDefaultSpecialValue("crush_extra_slow", [-15, -20, -25, -30, -35, -40]);
         this.SetDefaultSpecialValue("crush_extra_slow_duration", [3, 3.6, 4.2, 4.8, 5.4, 6]);
         this.SetDefaultSpecialValue("crush_stun_duration", [1.3, 1.5, 1.7, 1.9, 2.1, 2.3]);
@@ -38,23 +39,7 @@ export class ability1_slardar_sprint extends ActiveRootAbility {
 
     }
 
-    Init_old() {
-        this.SetDefaultSpecialValue("puddle_attack_bonus", 200);
-        this.SetDefaultSpecialValue("puddle_attack_speed_bonus", 180);
-        this.SetDefaultSpecialValue("puddle_max_attack_speed_bonus", 180);
-        this.SetDefaultSpecialValue("puddle_stun_increase", 50);
-        this.SetDefaultSpecialValue("puddle_crit_damage_increase", 50);
-        this.SetDefaultSpecialValue("crush_radius", 600);
-        this.SetDefaultSpecialValue("crush_extra_slow", -165);
-        this.SetDefaultSpecialValue("crush_extra_slow_duration", [3, 3.6, 4.2, 4.8, 5.4, 6]);
-        this.SetDefaultSpecialValue("crush_stun_duration", [1.3, 1.5, 1.7, 1.9, 2.1, 2.3]);
-        this.SetDefaultSpecialValue("crush_damage", [130, 260, 520, 1040, 2080, 4160]);
-        this.SetDefaultSpecialValue("puddle_radius", 600);
-
-    }
-
     hBuffPtcl: modifier_slardar_1_particle_pre;
-
     GetCastRange(vLocation: Vector, hTarget: BaseNpc_Plus) {
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_slardar_custom_4"
@@ -107,9 +92,13 @@ export class ability1_slardar_sprint extends ActiveRootAbility {
     }
 
     GetIntrinsicModifierName() {
-        return "modifier_slardar_1"
+        return modifier_slardar_1.name;
     }
 
+    AutoSpellSelf(): boolean {
+        let radius = this.GetSpecialValueFor("crush_radius")
+        return AI_ability.NO_TARGET_if_enemy(this, radius)
+    }
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 // Modifiers

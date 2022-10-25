@@ -889,6 +889,34 @@ export module CSSHelper {
         Purple = "purple",
         Yellow = "yellow",
     }
+
+    export function ClassMaker(...args: (string | number | any | { [k: string]: boolean })[]): string {
+        let classes: string[] = [];
+        for (let i = 0; i < args.length; i++) {
+            let arg = args[i];
+            if (!arg) continue;
+            let argType = typeof arg;
+            if (argType === 'string' || argType === 'number') {
+                classes.push(arg as string);
+            }
+            else if (Array.isArray(arg)) {
+                if (arg.length) {
+                    let inner = ClassMaker(...arg);
+                    if (inner) {
+                        classes.push(inner);
+                    }
+                }
+            } else if (argType === 'object') {
+                let objargs = arg as { [k: string]: boolean }
+                for (let key in objargs) {
+                    if (objargs[key]) {
+                        classes.push(key);
+                    }
+                }
+            }
+        }
+        return classes.join(" ");
+    };
     export function getPanelSize(panel: Panel) {
         if (panel == null || !panel.IsValid()) {
             return [0, 0];
@@ -903,7 +931,7 @@ export module CSSHelper {
             LogHelper.error("Panel size parameter error")
         }
 
-        return [Number(width?.replace("px", "")) , Number(height?.replace("px", "")) ];
+        return [Number(width?.replace("px", "")), Number(height?.replace("px", ""))];
     }
     export function setLocalText(node: React.RefObject<LabelPanel>, str: string) {
         if (node.current == null) {
@@ -982,7 +1010,7 @@ export module CSSHelper {
      * @returns
      */
     export function addBorderStyle(panel: Panel, color: enumColor = enumColor.White) {
-        if (panel == null|| !panel.IsValid()) {
+        if (panel == null || !panel.IsValid()) {
             return;
         }
         panel.style.border = `2px solid ${color}`;
@@ -993,7 +1021,7 @@ export module CSSHelper {
      * @returns
      */
     export function removeBorderStyle(panel: Panel) {
-        if (panel == null|| !panel.IsValid()) {
+        if (panel == null || !panel.IsValid()) {
             return;
         }
         panel.style.border = null;

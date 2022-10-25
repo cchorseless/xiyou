@@ -1,4 +1,4 @@
-// generate with PIPIXIA's kv generator 
+// generate with  kv generator 
 
 #base  "abilities/courier_abilities.kv"
 #base  "abilities/common_abilities.kv"

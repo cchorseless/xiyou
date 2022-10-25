@@ -21,7 +21,9 @@ export module AI_ability {
                 OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET,
                 AbilityIndex: ability.entindex(),
             })
+            return true;
         }
+        return false;
     }
 
     export function POSITION_if_enemy(ability: BaseAbility_Plus, range: number) {

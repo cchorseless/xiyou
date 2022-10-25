@@ -98,33 +98,16 @@ export class BaseItem_Plus extends BaseItem {
             return false
         }
         if (IsServer()) {
-            if (this.IsItem()) {
-                if (hCaster.IsMuted()) {
-                    return false
-                }
-            }
-            else {
-                if (hCaster.IsSilenced()) {
-                    return false
-                }
+            if (hCaster.IsMuted()) {
+                return false
             }
         }
         else {
-            if (this.IsItem()) {
-                if (this.CanBeUsedOutOfInventory()) {
-                    return false
-                }
-                if (!this.IsPassive() && hCaster.IsMuted()) {
-                    return false
-                }
+            if (this.CanBeUsedOutOfInventory()) {
+                return false
             }
-            else {
-                if (!this.IsPassive() && hCaster.IsSilenced()) {
-                    return false
-                }
-                if (this.IsPassive() && hCaster.PassivesDisabled()) {
-                    return false
-                }
+            if (!this.IsPassive() && hCaster.IsMuted()) {
+                return false
             }
         }
         return true

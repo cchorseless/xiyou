@@ -148,7 +148,7 @@ export class AbilityManagerComponent extends ET.Component {
 
 
     getAllCanCastAbility() {
-        let r: BaseAbility_Plus[] = [];
+        let r: ActiveRootAbility[] = [];
         let caster = this.GetDomain<BaseNpc_Plus>();
         if (caster.IsIllusion()) {
             return r;
@@ -157,7 +157,7 @@ export class AbilityManagerComponent extends ET.Component {
         this.allAbilityRoot.forEach(str => {
             let abilityroot = battleunit.GetDomainChild<AbilityEntityRoot>(str);
             if (abilityroot) {
-                let ability = abilityroot.GetDomain<BaseAbility_Plus>()
+                let ability = abilityroot.GetDomain<ActiveRootAbility>()
                 if (ability.IsAbilityReady()) {
                     r.push(ability)
                 }

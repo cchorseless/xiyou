@@ -80,7 +80,6 @@ export class RoundStateComponent extends ET.Component {
         battleunit.AiAttackComp().endFindToAttack();
         battleunit.AbilityManagerComp().OnBoardRound_Prize(round);
         battleunit.ItemManagerComp().OnBoardRound_Prize(round);
-        battleunit.AiAttackComp().startFindEnemyAttack();
         if (round.isWin) {
             battleunit.StartFindTreasure();
         } else {

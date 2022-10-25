@@ -460,12 +460,34 @@ function single_excel_to_kv(file) {
     let parent_i = outpath.lastIndexOf('/');
     let out_dir = outpath.substr(0, parent_i);
     if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir);
-    let r_s = "// generate with PIPIXIA's kv generator \n\n" + parse_paramSheetBaseData(sheet_param);
+    let r_s = "// generate with  kv generator \n\n" + parse_paramSheetBaseData(sheet_param);
     r_s += keyvalues.encode(result).replace(/\\\"/g, "'");
     fs.writeFileSync(outpath, r_s);
     console.log('success xlsx->kv', outpath);
     createLanguageTXT(file, rows)
 }
+
+
+function single_excel_to_locatlization(file) {
+    if ((path.extname(file) != '.xlsx' && path.extname(file) != '.xls') || file.indexOf('~$') >= 0) {
+        console.log('excel 2 kv compiler ingore non-excel file=>', file);
+        return;
+    }
+    let sheets = xlsx.parse(file);
+    if (sheets.length < 2) {
+        console.error("缺少参数表:", file)
+        return;
+    }
+    let sheet = sheets[0];
+    let sheet_param = sheets[1];
+    if (sheet_param.name != "param") {
+        console.error("第二张表格须命名为 param ，以供辨识:", file);
+        return;
+    }
+    let rows = sheet.data;
+    createLanguageTXT(file, rows)
+}
+
 
 const select_excel_to_kv = async (fileNames) => {
     const files = read_all_files(excel_path);
@@ -484,6 +506,16 @@ const all_excel_to_kv = async (path) => {
         single_excel_to_kv(file);
     });
 };
+
+const all_excel_to_locatlization = async (path) => {
+    const files = read_all_files(excel_path);
+    files.forEach((file) => {
+        single_excel_to_locatlization(file);
+    });
+};
+
+module.exports.all_excel_to_locatlization = all_excel_to_locatlization;
+
 
 (async () => {
     var args = process.argv.splice(2)

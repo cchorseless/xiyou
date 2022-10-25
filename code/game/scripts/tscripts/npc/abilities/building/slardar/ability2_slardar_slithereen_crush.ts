@@ -27,16 +27,6 @@ export class ability2_slardar_slithereen_crush extends BaseAbility_Plus {
 
     }
 
-    Init_old() {
-        this.SetDefaultSpecialValue("chance", [10, 14, 18, 22, 30, 38]);
-        this.SetDefaultSpecialValue("bonus_damage", [220, 260, 300, 340, 400, 500]);
-        this.SetDefaultSpecialValue("armor_reduction_pct", 25);
-        this.SetDefaultSpecialValue("duration", 1);
-
-    }
-
-
-
     GetCooldown(iLevel: number) {
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_slardar_custom_5"

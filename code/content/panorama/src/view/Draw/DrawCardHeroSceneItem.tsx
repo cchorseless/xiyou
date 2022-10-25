@@ -13,7 +13,6 @@ import { DrawCardPanel } from "./DrawCardPanel";
 interface IProps extends NodePropsData {
     itemname: string;
     index: number;
-    marginLeft?: string
 }
 
 export class DrawCardHeroSceneItem extends DrawCardHeroSceneItem_UI<IProps> {
