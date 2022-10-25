@@ -4,7 +4,11 @@ import { FuncHelper } from "../../helper/FuncHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { TipsPanel_UI } from "./TipsPanel_UI";
-export class TipsPanel extends TipsPanel_UI<NodePropsData> {
+interface IProps extends NodePropsData {
+	str: string
+}
+
+export class TipsPanel extends TipsPanel_UI<IProps> {
 	// 初始化数据
 	componentDidMount() {
 		super.componentDidMount()

@@ -45,13 +45,13 @@ export class DrawCardPanel extends DrawCardPanel_UI<IProps> {
                 itemname: k,
                 index: i,
                 marginLeft: spaceX,
-            });
+            } as any);
             await this.addNodeChildAsyncAt(this.NODENAME.box, DrawCardBottomItem, {
                 itemname: k,
                 index: i,
                 marginLeft: spaceX,
                 marginTop: "20px",
-            });
+            } as any);
             i++;
         }
     }

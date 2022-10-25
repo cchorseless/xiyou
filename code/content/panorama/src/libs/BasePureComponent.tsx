@@ -15,13 +15,14 @@ interface IBasePureCompProperty {
 /**
  * 节点数据
  */
-export interface NodePropsData extends Partial<VCSSStyleDeclaration> {
+interface _NodePropsData {
     /**组件唯一key */
     __onlykey__?: string;
     key?: string;
     [k: string]: any;
-}
-
+};
+// export type NodePropsData = _NodePropsData;
+export type NodePropsData = _NodePropsData & Partial<VCSSStyleDeclaration>;
 
 interface ReactElement extends React.CElement<NodePropsData, BasePureComponent<NodePropsData>> { }
 
@@ -152,7 +153,7 @@ export class BasePureComponent<P extends NodePropsData> extends PureComponent<P>
      * @param index 添加的索引，默认在父节点最后添加
      * @returns
      */
-    public addNodeChildAt<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M | any = {} as any, index: number = -1): ReactElement | void {
+    public addNodeChildAt<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M = {} as any, index: number = -1): ReactElement | void {
         let instanceId = FuncHelper.generateUUID();
         // 添加唯一Key
         nodeData.key = instanceId;
@@ -206,7 +207,7 @@ export class BasePureComponent<P extends NodePropsData> extends PureComponent<P>
         return null;
     }
 
-    public async addOrShowOnlyNodeChild<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M | any = {} as any) {
+    public async addOrShowOnlyNodeChild<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M = {} as any) {
         let comp = this.GetOneNodeChild<M, T>(nodeName, nodeType);
         if (comp == null) {
             comp = await this.addNodeChildAsyncAt<M, T>(nodeName, nodeType, nodeData);
@@ -284,7 +285,8 @@ export class BasePureComponent<P extends NodePropsData> extends PureComponent<P>
         return null as any;
     }
 
-    public async addNodeChildAsyncAt<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M | any = {} as any, index: number = -1) {
+    public async addNodeChildAsyncAt<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T,
+        nodeData: M = {} as any, index: number = -1) {
         return new Promise<InstanceType<T>>((resolve, reject) => {
             let node = this.addNodeChildAt<M, T>(nodeName, nodeType, nodeData, index);
             if (node) {

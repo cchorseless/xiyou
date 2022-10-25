@@ -20,27 +20,27 @@ export class DacBoardPanelV0 extends DacBoardPanelV0_UI<NodePropsData> {
         this.addNodeChildAt(this.NODENAME.panel_PortraitGroup, CustomPortraitGroup, {
             horizontalAlign: "left",
             verticalAlign: "bottom",
-        })
+        } as any)
         this.addNodeChildAt(this.NODENAME.panel_AbilityList, CustomAbilityList, {
             horizontalAlign: "left",
             verticalAlign: "bottom",
-        })
+        } as any)
         this.addNodeChildAt(this.NODENAME.panel_HealthMana, CustomHealthMana, {
             horizontalAlign: "left",
             verticalAlign: "bottom",
-        })
+        } as any)
         this.addNodeChildAt(this.NODENAME.panel_Inventory, CustomInventory, {
             horizontalAlign: "left",
             verticalAlign: "bottom",
-        })
+        } as any)
         this.addNodeChildAt(this.NODENAME.panel_PortraitGroup, CustomStats, {
             horizontalAlign: "left",
             verticalAlign: "bottom",
-        })
+        } as any)
         this.addNodeChildAt(this.NODENAME.panel_bufflist, CustomBuffList, {
             horizontalAlign: "left",
             verticalAlign: "bottom",
-        })
+        } as any)
         this.updateSelf()
         // let lower_hud = DotaUIHelper.FindDotaHudElement(DotaUIHelper.EDotaUIId.lower_hud);
         // if (lower_hud) {

@@ -8,6 +8,7 @@ import { SkillItem_UI } from "./SkillItem_UI";
 import { NodePropsData } from "../../libs/BasePureComponent";
 
 interface IProps extends NodePropsData {
+    /**道具名称 */
     itemname: string;
 }
 export class SkillItem extends SkillItem_UI<IProps> {
@@ -19,7 +20,7 @@ export class SkillItem extends SkillItem_UI<IProps> {
     // 初始化数据
     onStartUI() {
         this.img_skillicon.current!.style.borderRadius = "15px";
-        this.onRefreshUI(this.props as IProps);
+        this.onRefreshUI(this.props);
     }
 
     onRefreshUI(p: IProps) {

@@ -11,7 +11,12 @@ import { PathHelper } from "../../helper/PathHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { GameEnum } from "../../libs/GameEnum";
 import { ChallengeIconItem_UI } from "./ChallengeIconItem_UI";
-export class ChallengeIconItem extends ChallengeIconItem_UI<NodePropsData> {
+
+interface IProps extends NodePropsData {
+    abilityname: string
+};
+
+export class ChallengeIconItem extends ChallengeIconItem_UI<IProps> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();

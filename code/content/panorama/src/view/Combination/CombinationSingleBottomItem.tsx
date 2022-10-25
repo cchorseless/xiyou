@@ -16,7 +16,12 @@ import { CombinationBottomCountItem } from "./CombinationBottomCountItem";
 import { CombinationBottomPanel } from "./CombinationBottomPanel";
 import { CombinationInfoDialog } from "./CombinationInfoDialog";
 import { CombinationSingleBottomItem_UI } from "./CombinationSingleBottomItem_UI";
-export class CombinationSingleBottomItem extends CombinationSingleBottomItem_UI<NodePropsData> {
+
+interface IProps extends NodePropsData {
+	InstanceIdList: string[]
+}
+
+export class CombinationSingleBottomItem extends CombinationSingleBottomItem_UI<IProps> {
 	// public infodialog: CombinationInfoDialog | null;
 	// public isInRangle: boolean = true;
 	// constructor(prop: any) {

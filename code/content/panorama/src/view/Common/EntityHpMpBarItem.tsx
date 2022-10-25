@@ -3,7 +3,10 @@ import React, { createRef, useState } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { EntityHpMpBarItem_UI } from "./EntityHpMpBarItem_UI";
-export class EntityHpMpBarItem extends EntityHpMpBarItem_UI<NodePropsData> {
+interface IProps extends NodePropsData {
+    entityid: EntityIndex
+}
+export class EntityHpMpBarItem extends EntityHpMpBarItem_UI<IProps> {
     // 初始化数据
     componentDidMount() {
         super.componentDidMount();

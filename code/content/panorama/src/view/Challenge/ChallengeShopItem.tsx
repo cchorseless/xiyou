@@ -76,19 +76,19 @@ export class ChallengeShopItem extends ChallengeShopItem_UI<NodePropsData> {
         this.addNodeChildAt(this.NODENAME.panel_bossall, ChallengeIconItem, {
             marginLeft: "5px",
             abilityname: "courier_challenge_gold",
-        });
+        } as any);
         this.addNodeChildAt(this.NODENAME.panel_bossall, ChallengeIconItem, {
             marginLeft: "5px",
             abilityname: "courier_challenge_wood",
-        });
+        } as any);
         this.addNodeChildAt(this.NODENAME.panel_bossall, ChallengeIconItem, {
             marginLeft: "5px",
             abilityname: "courier_challenge_equip",
-        });
+        } as any);
         this.addNodeChildAt(this.NODENAME.panel_bossall, ChallengeIconItem, {
             marginLeft: "5px",
             abilityname: "courier_challenge_artifact",
-        });
+        } as any);
         this.delayUpdateSelf();
     }
 

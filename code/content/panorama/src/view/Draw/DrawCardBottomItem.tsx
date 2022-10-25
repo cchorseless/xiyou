@@ -41,7 +41,7 @@ export class DrawCardBottomItem extends DrawCardBottomItem_UI<IProps> {
                 itemname: abilityname,
                 marginLeft: "5px",
                 marginTop: "10px",
-            });
+            } as any);
 
             let relationname = cardinfo["Relation_" + i] as string;
             if (!relationname) {
@@ -51,7 +51,7 @@ export class DrawCardBottomItem extends DrawCardBottomItem_UI<IProps> {
                 itemname: relationname,
                 marginLeft: "10px",
                 marginTop: "30px",
-            });
+            } as any);
         }
         this.titleitem.current!.onRefreshUI(k);
     }

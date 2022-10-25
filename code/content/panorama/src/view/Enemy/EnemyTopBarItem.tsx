@@ -4,9 +4,13 @@ import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { EntityHpBarItem } from "../Common/EntityHpBarItem";
 import { EnemyTopBarItem_UI } from "./EnemyTopBarItem_UI";
-export class EnemyTopBarItem extends EnemyTopBarItem_UI<NodePropsData> {
+interface IProps extends NodePropsData {
+    entityid: EntityIndex
+}
+
+export class EnemyTopBarItem extends EnemyTopBarItem_UI<IProps> {
     onStartUI() {
-        let entityid = this.props.entityid as EntityIndex;
+        let entityid = this.props.entityid;
         this.addNodeChildAt(this.NODENAME.panel_hpbar, EntityHpBarItem, {
             entityid: entityid,
         });

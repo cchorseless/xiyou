@@ -40,7 +40,7 @@ export class MainPanel extends MainPanel_UI<NodePropsData> {
             verticalAlign: "bottom",
             marginBottom: "200px",
             // backgroundColor: "#FFFFFFFF",
-        });
+        } as any);
 
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, ChallengeShopItem, {
             uiScale: "70% 70% 100%",
@@ -48,27 +48,27 @@ export class MainPanel extends MainPanel_UI<NodePropsData> {
             marginBottom: "0px",
             horizontalAlign: "right",
             verticalAlign: "bottom",
-        });
+        } as any);
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, ShopTopRightPanel, {
             horizontalAlign: "left",
             verticalAlign: "top",
             marginTop: "100px",
             marginLeft: "10px",
             // className: "InventoryItem"
-        });
+        } as any);
         // 小地图
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, CustomMiniMap, {
             horizontalAlign: "left",
             verticalAlign: "bottom",
             // marginBottom: "10px",
             // marginLeft: "10px",
-        });
+        } as any);
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, DacBoardPanelV0, {
             horizontalAlign: "center",
             verticalAlign: "bottom",
             // marginBottom: "10px",
             // marginLeft: "10px",
-        });
+        } as any);
         this.updateSelf();
     }
     /**debug */

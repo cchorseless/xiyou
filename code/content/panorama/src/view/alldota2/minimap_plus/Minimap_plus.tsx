@@ -44,7 +44,7 @@ export class Minimap_plus extends Minimap_plus_UI<NodePropsData> {
                                 isSelf: playerid == "" + Players.GetLocalPlayer(),
                                 v: v,
                                 q: q,
-                                playerid: Number(playerid),
+                                playerid: Number(playerid) as PlayerID,
                             });
                         }
                     }

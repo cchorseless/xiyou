@@ -12,7 +12,12 @@ import { NodePropsData } from "../../libs/BasePureComponent";
 import { EntityHpBarItem } from "../Common/EntityHpBarItem";
 import { EntityHpMpBarItem } from "../Common/EntityHpMpBarItem";
 import { BuildingTopBarItem_UI } from "./BuildingTopBarItem_UI";
-export class BuildingTopBarItem extends BuildingTopBarItem_UI<NodePropsData> {
+
+interface IProps extends NodePropsData {
+    entityid: EntityIndex
+}
+
+export class BuildingTopBarItem extends BuildingTopBarItem_UI<IProps> {
     entityid: EntityIndex;
     onStartUI() {
         this.entityid = this.props.entityid as EntityIndex;
