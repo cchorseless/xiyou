@@ -28,7 +28,7 @@ export class RootPanel extends BaseEasyPureComponent {
         super.componentDidMount();
         RootPanel.instance = this;
         // 摄像机高度
-        GameUI.SetCameraDistance(1500);
+        GameUI.SetCameraDistance(1200);
         // GameUI.SetCameraPitchMax(55);
         this.updateSelf();
     }

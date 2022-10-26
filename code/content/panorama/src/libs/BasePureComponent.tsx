@@ -86,11 +86,11 @@ export class BasePureComponentSystem {
     }
 }
 
-export class BasePureComponent<P extends NodePropsData> extends PureComponent<P> implements ET.IEntityRoot {
+export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel> extends PureComponent<P> implements ET.IEntityRoot {
     static PanelZorder = 1;
     ETRoot?: ET.EntityRoot;
     /**根节点 */
-    __root__: React.RefObject<Panel>;
+    __root__: React.RefObject<B>;
     /**全局唯一UUID，用于标识 */
     readonly InstanceId: string;
     readonly IsRegister: boolean = false;
@@ -104,6 +104,11 @@ export class BasePureComponent<P extends NodePropsData> extends PureComponent<P>
     constructor(props: P) {
         super(props);
         this.__root__ = null as any;
+        for (let k in props) {
+            if ((CSSHelper.VCSSStyle as any)[k]) {
+                (this.CSS_0_0 as any)[k] = this.props[k];
+            }
+        }
         // LogHelper.print("add BasePureComponent :", this.constructor.name);
     }
 
@@ -410,12 +415,12 @@ export class BasePureComponent<P extends NodePropsData> extends PureComponent<P>
     public componentDidMount() {
         // this.syncRootDataByProps();
         // 同步样式
-        for (let k in this.props) {
-            if ((CSSHelper.VCSSStyle as any)[k]) {
-                (this.CSS_0_0 as any)[k] = this.props[k];
-                this.__root__.current!.style[k as keyof VCSSStyleDeclaration] = this.props[k];
-            }
-        }
+        // for (let k in this.props) {
+        //     if ((CSSHelper.VCSSStyle as any)[k]) {
+        //         (this.CSS_0_0 as any)[k] = this.props[k];
+        //         this.__root__.current!.style[k as keyof VCSSStyleDeclaration] = this.props[k];
+        //     }
+        // }
         // 不遮挡tooltip
         this.__root__.current!.hittest = false;
         if (this.props.__onlykey__) {
