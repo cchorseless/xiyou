@@ -10,3 +10,4 @@
 	}
 	"saveDirectory"	""
 }
+      /*  "@aabao/webpack-panorama": "^0.2.1", */

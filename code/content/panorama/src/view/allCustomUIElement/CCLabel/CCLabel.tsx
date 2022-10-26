@@ -3,7 +3,6 @@ import { PanelAttributes, ImageAttributes, DOTAAbilityImageAttributes, LabelAttr
 import { BasePureComponent, NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import "./CCLabel.less";
 
 
 interface ICCLabelProps extends NodePropsData {

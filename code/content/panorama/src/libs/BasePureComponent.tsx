@@ -415,12 +415,12 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     public componentDidMount() {
         // this.syncRootDataByProps();
         // 同步样式
-        // for (let k in this.props) {
-        //     if ((CSSHelper.VCSSStyle as any)[k]) {
-        //         (this.CSS_0_0 as any)[k] = this.props[k];
-        //         this.__root__.current!.style[k as keyof VCSSStyleDeclaration] = this.props[k];
-        //     }
-        // }
+        for (let k in this.props) {
+            if ((CSSHelper.VCSSStyle as any)[k]) {
+                (this.CSS_0_0 as any)[k] = this.props[k];
+                this.__root__.current!.style[k as keyof VCSSStyleDeclaration] = this.props[k];
+            }
+        }
         // 不遮挡tooltip
         this.__root__.current!.hittest = false;
         if (this.props.__onlykey__) {

@@ -25,10 +25,10 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
     __root___attrs: PanelAttributes = {};
     __root___childs: Array<JSX.Element> = [];
     render() {
-        this.__root___isValid &&
-            <Panel ref={this.__root__}  {...this.props} style={this.CSS_0_0}    {...this.__root___attrs}>
-                {this.props.children}
+        return (this.__root___isValid &&
+            <Panel ref={this.__root__} style={this.CSS_0_0} {...this.props}     {...this.__root___attrs}>
                 {this.__root___childs}
-            </Panel>
+                {this.props.children}
+            </Panel>)
     }
 }

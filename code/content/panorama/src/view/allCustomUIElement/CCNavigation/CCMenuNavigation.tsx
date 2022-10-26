@@ -4,22 +4,21 @@ import { PathHelper } from "../../../helper/PathHelper";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCImage } from "../CCImage/CCImage";
 import { CCPanel } from "../CCPanel/CCPanel";
-import "./CCMenuNavigation.less";
 
 interface IMenuNavigationProps extends NodePropsData {
 	/** 菜单列表 */
 	list: string[];
 	/** 操作回调 */
-	onToggle: (menuName: string, state: boolean) => void;
+	onToggle?: (menuName: string, state: boolean) => void;
 }
 
 export class CCMenuNavigation extends CCPanel<IMenuNavigationProps> {
 	state = { select_name: "", subscribeEnable: true };
-	defaultProps = {
-		onToggle: (menuName: string, state: boolean) => {
-			// GameEvents.SendEventClientSide("custom_ui_toggle_windows", { window_name: "MenuButton_" + menuName, state: state ? 1 : 0 });
-		}
-	};
+	// defaultProps = {
+	// 	onToggle: (menuName: string, state: boolean) => {
+	// 		// GameEvents.SendEventClientSide("custom_ui_toggle_windows", { window_name: "MenuButton_" + menuName, state: state ? 1 : 0 });
+	// 	}
+	// };
 	id: GameEventListenerID | undefined;
 	componentDidMount() {
 		// super.componentDidMount();
@@ -39,31 +38,36 @@ export class CCMenuNavigation extends CCPanel<IMenuNavigationProps> {
 	// 		GameEvents.Unsubscribe(this.id);
 	// 	}
 	// }
+
+
 	render() {
-		return (
-			<Panel id="LeftTopMain" className="InitHide InitAnimation" hittest={false}>
-				<Panel id="DotaButtonsBG" hittest={false} />
-				<Panel id="LeftTopBG" hittest={false} />
-				<Panel id="LeftTopGameLogo" hittest={false} />
-				<Panel id="CC_MenuButtons">
-					{this.props.list.map((sName, sLoc) => {
-						return (
-							<Button id={sName} key={sName} className={CSSHelper.ClassMaker("CC_MenuButton", { IsActive: this.state.select_name == sName })} onactivate={self => {
-								if (this.props.onToggle) {
-									this.setState({ subscribeEnable: false });
-									this.props.onToggle(sName, this.state.select_name == sName ? false : true);
-									this.setState({ subscribeEnable: true });
-								}
-								this.setState({ select_name: this.state.select_name == sName ? "" : sName });
-							}} >
-								<CCImage id={`${sName}Icon`} className="LeftTopButtonIcon" backgroundImage={PathHelper.getImageUrl("icon/" + sName + ".png")} />
-								<Label localizedText={"#MenuButton_" + sName} />
-							</Button>
-						);
-					})}
-				</Panel>
-			</Panel>
-		);
+		this.__root___attrs.id = "LeftTopMain";
+		this.__root___attrs.hittest = false;
+		this.__root___childs = [
+			// <>
+			// 	<Panel id="DotaButtonsBG" hittest={false} />
+			// 	<Panel id="LeftTopBG" hittest={false} />
+			// 	<Panel id="LeftTopGameLogo" hittest={false} />
+			// 	<Panel id="CC_MenuButtons">
+			// 		{this.props.list.map((sName, sLoc) => {
+			// 			return (
+			// 				<Button id={sName} key={sName} className={CSSHelper.ClassMaker("CC_MenuButton", { IsActive: this.state.select_name == sName })} onactivate={self => {
+			// 					if (this.props.onToggle) {
+			// 						this.setState({ subscribeEnable: false });
+			// 						this.props.onToggle(sName, this.state.select_name == sName ? false : true);
+			// 						this.setState({ subscribeEnable: true });
+			// 					}
+			// 					this.setState({ select_name: this.state.select_name == sName ? "" : sName });
+			// 				}} >
+			// 					<CCImage id={`${sName}Icon`} className="LeftTopButtonIcon" backgroundImage={PathHelper.getImageUrl("icon/" + sName + ".png")} />
+			// 					<Label localizedText={"#MenuButton_" + sName} />
+			// 				</Button>
+			// 			);
+			// 		})}
+			// 	</Panel>
+			// </>
+		]
+		return super.render();
 	}
 }
 

@@ -308,11 +308,42 @@ export module DotaUIHelper {
     /**标记可拖拽目标 */
     const IsDragTargetPanel = "IsDragTargetPanel";
 
+
+    function RegAbilityItemToolTipEvent() {
+
+        let WindowRoot = GetWindowRoot()!;
+        let tooltips=WindowRoot.FindChildTraverse("Tooltips")!;
+        let AbilityDetail = tooltips.FindChildTraverse("AbilityDetails")!;
+        let AbilityCoreDetails = AbilityDetail.FindChildTraverse("AbilityCoreDetails")!;
+        let AbilityDescriptionContainer = AbilityCoreDetails.FindChildTraverse("AbilityDescriptionContainer")!;
+        let AbilityLore = AbilityCoreDetails.FindChildTraverse("AbilityLore")!;
+
+        $.RegisterForUnhandledEvent("DOTAShowAbilityTooltip", (ability, ability_name, c, d) => {
+            LogHelper.print("1", ability, ability_name);
+        });
+        $.RegisterForUnhandledEvent("DOTAShowAbilityTooltipForEntityIndex", (ability, ability_name, iEntityIndex, d) => {
+            // LogHelper.print("2",ability, ability_name);
+            LogHelper.print("2", d);
+        });
+        $.RegisterForUnhandledEvent("DOTAShowAbilityInventoryItemTooltip", (pPanel, iEntityIndex, iInventorySlot, d) => {
+            LogHelper.print("3", pPanel, iEntityIndex, iInventorySlot);
+        });
+        $.RegisterForUnhandledEvent("DOTAShowAbilityShopItemTooltip", (pPanel, iEntityIndex, iInventorySlot, d) => {
+            LogHelper.print("4", pPanel, iEntityIndex, iInventorySlot);
+        });
+
+    }
+
+    function OnShowAbilityTooltip(ability_name: string) {
+
+    }
+
     export function Init() {
         //小地图
         FindDotaHudElement("GlyphScanContainer")!.style.opacity = "0";
         FindDotaHudElement("RoshanTimerContainer")!.style.opacity = "0";
         FindDotaHudElement("HUDSkinMinimap")!.style.opacity = "0";
         RegDragEvent();
+
     }
 }

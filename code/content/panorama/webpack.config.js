@@ -54,10 +54,10 @@ module.exports = {
             },
             {
                 test: /\.tsx?$/,
-                loader: 'ts-loader',
-                options: {
-                    transpileOnly: true
-                },
+                use: [
+					{ loader: 'ts-loader', options: { transpileOnly: true } },
+					{ loader: path.resolve(__dirname,"./webpackloader/tscssloader.js") },
+				]
             },
             {
                 test: /\.js?$|\.jsx?$/,
@@ -78,12 +78,17 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                loader: 'less-loader',
-                options: {
-                    lessOptions: {
-                        relativeUrls: false,
-                    }
-                }
+                use: [
+					{ loader: path.resolve(__dirname,"./webpackloader/dota2keyframesloader.js") },
+					{
+						loader: 'less-loader',
+						options: {
+							lessOptions: {
+								relativeUrls: false,
+							}
+						}
+					},
+				]
             },
         ],
     },
