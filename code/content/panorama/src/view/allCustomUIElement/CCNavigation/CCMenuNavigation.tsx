@@ -15,31 +15,6 @@ interface IMenuNavigationProps extends NodePropsData {
 
 export class CCMenuNavigation extends CCPanel<IMenuNavigationProps> {
 	state = { select_name: "", subscribeEnable: true };
-	// defaultProps = {
-	// 	onToggle: (menuName: string, state: boolean) => {
-	// 		// GameEvents.SendEventClientSide("custom_ui_toggle_windows", { window_name: "MenuButton_" + menuName, state: state ? 1 : 0 });
-	// 	}
-	// };
-	id: GameEventListenerID | undefined;
-	componentDidMount() {
-		// super.componentDidMount();
-		// if (this.id == undefined) {
-		// 	this.id = GameEvents.Subscribe("custom_ui_toggle_windows", (event) => {
-		// 		if (this.state.subscribeEnable) {
-		// 			if (event.window_name.replace("MenuButton_", "") == this.state.select_name) {
-		// 				this.setState({ select_name: "" });
-		// 			};
-		// 		}
-		// 	});
-		// }
-	}
-	// componentWillUnmount() {
-	// 	super.componentWillUnmount();
-	// 	if (this.id) {
-	// 		GameEvents.Unsubscribe(this.id);
-	// 	}
-	// }
-
 	defaultStyle = () => {
 		return {
 			id: "LeftTopMain",
@@ -63,8 +38,8 @@ export class CCMenuNavigation extends CCPanel<IMenuNavigationProps> {
 								}
 								this.setState({ select_name: this.state.select_name == sName ? "" : sName });
 							}} >
-							<CCImage id={`${sName}Icon`} className="LeftTopButtonIcon" backgroundImage={CSSHelper.getImageUrl("icon/" + sName + ".png")} />
-							<Label localizedText={"#MenuButton_" + sName} />
+							<CCImage id={`${sName}Icon`} className="LeftTopButtonIcon" backgroundImage={CSSHelper.getCustomImageUrl("icon/" + sName + ".png")} />
+							<Label localizedText={"#lang_MenuButton_" + sName} />
 						</Button>
 					);
 				})}

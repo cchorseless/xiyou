@@ -25,12 +25,7 @@ export class MainPanel extends MainPanel_UI<NodePropsData> {
         this.panel_alldialog.current!.hittest = false;
     }
     onStartUI() {
-        TimerHelper.AddTimer(
-            1,
-            FuncHelper.Handler.create(this, () => {
-                this.onRefreshUI();
-            })
-        );
+        this.onRefreshUI();
     }
 
     onRefreshUI() {

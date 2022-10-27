@@ -923,7 +923,7 @@ export module CSSHelper {
     };
 
 
-    export function getImageUrl(str: string) {
+    export function getCustomImageUrl(str: string) {
         return `url("file://{images}/custom_game/${str}")`;
     }
 

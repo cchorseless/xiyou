@@ -17,6 +17,7 @@ import { MainPanel } from "./MainPanel/MainPanel";
 import { CCMenuNavigation } from "./allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCLabel } from "./allCustomUIElement/CCLabel/CCLabel";
 import { CCAvatar } from "./allCustomUIElement/CCAvatar/CCAvatar";
+import { CCMainPanel } from "./MainPanel/CCMainPanel";
 
 export class RootPanel extends BaseEasyPureComponent {
     __root__: React.RefObject<Panel>;
@@ -49,7 +50,7 @@ export class RootPanel extends BaseEasyPureComponent {
                 <Panel ref={this.__root__} key="compId_1" className="root" {...this.__root___attrs}>
                     <EntityOverHeadPanel />
                     <MainPanel />
-                    <CCMenuNavigation list={["setting", "mail", "store", "battlepass", "draw", "handbook"]} />
+                    <CCMainPanel />
                     <CCLabel  />
                     <CCAvatar  />
                     {this.props.children}
