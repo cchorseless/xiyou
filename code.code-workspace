@@ -3,5 +3,8 @@
 		{
 			"path": "code"
 		}
-	]
+	],
+	"settings": {
+		"javascript.format.enable": false
+	}
 }

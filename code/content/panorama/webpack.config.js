@@ -45,7 +45,13 @@ module.exports = {
     module: {
         rules: [{
                 test: /\.xml$/,
-                loader: '@aabao/webpack-panorama/lib/layout-loader',
+                use: [{
+                        loader: '@aabao/webpack-panorama/lib/layout-loader',
+                    },
+                    {
+                        loader: path.resolve(__dirname, "./webpackloader/importless.js")
+                    }
+                ]
             },
             {
                 test: /\.[jt]sx$/,
@@ -54,10 +60,16 @@ module.exports = {
             },
             {
                 test: /\.tsx?$/,
-                use: [
-					{ loader: 'ts-loader', options: { transpileOnly: true } },
-					{ loader: path.resolve(__dirname,"./webpackloader/tscssloader.js") },
-				]
+                use: [{
+                        loader: 'ts-loader',
+                        options: {
+                            transpileOnly: true
+                        }
+                    },
+                    {
+                        loader: path.resolve(__dirname, "./webpackloader/tscssloader.js")
+                    },
+                ]
             },
             {
                 test: /\.js?$|\.jsx?$/,
@@ -78,17 +90,18 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                use: [
-					{ loader: path.resolve(__dirname,"./webpackloader/dota2keyframesloader.js") },
-					{
-						loader: 'less-loader',
-						options: {
-							lessOptions: {
-								relativeUrls: false,
-							}
-						}
-					},
-				]
+                use: [{
+                        loader: path.resolve(__dirname, "./webpackloader/dota2keyframesloader.js")
+                    },
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            lessOptions: {
+                                relativeUrls: false,
+                            }
+                        }
+                    },
+                ]
             },
         ],
     },

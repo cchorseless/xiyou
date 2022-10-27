@@ -4,6 +4,7 @@ import { PathHelper } from "../../../helper/PathHelper";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCImage } from "../CCImage/CCImage";
 import { CCPanel } from "../CCPanel/CCPanel";
+import "./CCMenuNavigation.less";
 
 interface IMenuNavigationProps extends NodePropsData {
 	/** 菜单列表 */

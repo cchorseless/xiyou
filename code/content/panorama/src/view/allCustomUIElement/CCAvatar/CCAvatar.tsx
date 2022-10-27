@@ -3,6 +3,7 @@ import { PanelAttributes, ImageAttributes, DOTAAbilityImageAttributes, LabelAttr
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { CSSHelper } from "../../../helper/CSSHelper";
+import "./CCAvatar.less";
 
 interface ICCAvatarProps extends NodePropsData {
     /** 长id */

@@ -18,11 +18,5 @@
         <include src="s2r://panorama/scripts/sequence_actions.vjs_c" />
         <include src="./game_main.tsx" />
     </scripts>
-
-
-    <Panel id="custom_ui_group" class="root" hittest="false">
-        <Panel id="custom_event_group" hittest="true">
-            <Panel id="Event_DOTAHUDHeroViewClicked" hittest="true" onfocus="DOTAHUDHeroViewClicked();"/>
-        </Panel>
-    </Panel>
+    <Panel  class="root" hittest="false"> </Panel>
 </root>
