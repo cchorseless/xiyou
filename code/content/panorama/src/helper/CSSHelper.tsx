@@ -890,6 +890,10 @@ export module CSSHelper {
         Yellow = "yellow",
     }
 
+    export function IsCssStyle(kk: string) {
+        return (VCSSStyle as any)[kk] != null;
+    }
+
     export function ClassMaker(...args: (string | number | any | { [k: string]: boolean })[]): string {
         let classes: string[] = [];
         for (let i = 0; i < args.length; i++) {

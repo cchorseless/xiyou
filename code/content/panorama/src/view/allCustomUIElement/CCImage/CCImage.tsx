@@ -11,7 +11,7 @@ interface ICCImageProps extends NodePropsData {
     rotate?: number;
 }
 export class CCImage extends CCPanel<ICCImageProps, ImagePanel>{
-    defaultClass = () => { return CSSHelper.ClassMaker("CC_Image"); };
+    defaultClass = () => { return "CC_Image"; };
     defaultStyle = () => {
         return {
             preTransformRotate2d: (this.props.rotate != undefined) ? this.props.rotate + "deg" : undefined,
@@ -21,7 +21,7 @@ export class CCImage extends CCPanel<ICCImageProps, ImagePanel>{
     render() {
         return (
             this.__root___isValid &&
-            <Image ref={this.__root__ as any} style={this.CSS_0_0}  {...this.props}   {...this.__root___attrs}>
+            <Image ref={this.__root__ as any}    {...this.initRootAttrs()}>
                 {this.props.children}
                 {this.__root___childs}
             </Image>

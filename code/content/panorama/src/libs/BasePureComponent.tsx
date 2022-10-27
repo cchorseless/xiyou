@@ -104,11 +104,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     constructor(props: P) {
         super(props);
         this.__root__ = null as any;
-        for (let k in props) {
-            if ((CSSHelper.VCSSStyle as any)[k]) {
-                (this.CSS_0_0 as any)[k] = this.props[k];
-            }
-        }
+
         // LogHelper.print("add BasePureComponent :", this.constructor.name);
     }
 
@@ -416,8 +412,8 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         // this.syncRootDataByProps();
         // 同步样式
         for (let k in this.props) {
-            if ((CSSHelper.VCSSStyle as any)[k]) {
-                (this.CSS_0_0 as any)[k] = this.props[k];
+            if (CSSHelper.IsCssStyle(k)) {
+                // (this.CSS_0_0 as any)[k] = this.props[k];
                 this.__root__.current!.style[k as keyof VCSSStyleDeclaration] = this.props[k];
             }
         }
