@@ -20,36 +20,25 @@ import { ShopTopRightPanel } from "../Shop/ShopTopRightPanel";
 import { TopBarPanel } from "../TopBarPanel/TopBarPanel";
 import { CCMainPanel_UI } from "./CCMainPanel_UI";
 export class CCMainPanel extends CCMainPanel_UI<NodePropsData> {
-
-    defaultStyle = () => {
-        return {
-
-        }
-    }
-
-    constructor(props: any) {
-        super(props);
-        this.initUI()
-    }
-
-    initUI() {
+    InitUI() {
         this.addNodeChildAt(this.NODENAME.panel_base, CCMenuNavigation, {
             list: ["setting", "mail", "store", "battlepass", "draw", "handbook"],
             onToggle: (menuName: string, state: boolean) => {
-                LogHelper.print(menuName, state);
                 if (menuName == "store") {
                     if (state) {
-                        this.addNodeChildAt(this.NODENAME.panel_base, ShopPanel, {
+                        this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, ShopPanel, {
                             marginTop: "100px",
-
                         } as any)
                         this.updateSelf();
                     }
                     else {
-                        ShopPanel.GetInstance()!.close()
+                        ShopPanel.GetInstance()?.close()
                     }
                 }
             }
-        } as any)
+        } as any);
+
+
+        
     }
 }

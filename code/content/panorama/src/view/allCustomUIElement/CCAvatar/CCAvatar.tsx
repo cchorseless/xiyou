@@ -12,18 +12,20 @@ interface ICCAvatarProps extends NodePropsData {
     accountid?: string;
 }
 
-export  class CCAvatar extends CCPanel<ICCAvatarProps> {
+export class CCAvatar extends CCPanel<ICCAvatarProps> {
 
-    defaultClass = () => { return CSSHelper.ClassMaker("CC_Avatar"); };
+    defaultClass = () => { return "CC_Avatar"; };
     render() {
-        this.__root___childs = [
-            <DOTAAvatarImage key={this.props.steamid ?? "" + this.props.accountid ?? ""} steamid={this.props.steamid} style={{ width: "100%", height: "100%" }} hittest={false}
-                onload={self => {
-                    if (this.props.accountid) {
-                        self.accountid = this.props.accountid.toString();
-                    }
-                }} />
-        ]
-        return super.render();
+        return (this.__root___isValid &&
+            <Panel ref={this.__root__}      {...this.initRootAttrs()}>
+                <DOTAAvatarImage key={this.props.steamid ?? "" + this.props.accountid ?? ""} steamid={this.props.steamid} style={{ width: "100%", height: "100%" }} hittest={false}
+                    onload={self => {
+                        if (this.props.accountid) {
+                            self.accountid = this.props.accountid.toString();
+                        }
+                    }} />
+                {this.__root___childs}
+                {this.props.children}
+            </Panel>)
     }
 }

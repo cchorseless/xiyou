@@ -208,6 +208,21 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         return null;
     }
 
+    public addOnlyOneNodeChild<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M = {} as any) {
+        let comp = this.GetOneNodeChild<M, T>(nodeName, nodeType);
+        if (comp) {
+            comp.__root__.current!.visible = true;
+            if (Object.keys(nodeData).length > 0) {
+                comp.onRefreshUI(nodeData);
+            }
+            comp.updateSelf();
+        } else {
+            this.addNodeChildAt<M, T>(nodeName, nodeType, nodeData);
+        }
+    }
+
+
+
     public async addOrShowOnlyNodeChild<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M = {} as any) {
         let comp = this.GetOneNodeChild<M, T>(nodeName, nodeType);
         if (comp == null) {
