@@ -40,35 +40,36 @@ export class CCMenuNavigation extends CCPanel<IMenuNavigationProps> {
 	// 	}
 	// }
 
-
-	render() {
-		this.__root___attrs.id = "LeftTopMain";
-		this.__root___attrs.hittest = false;
-		this.__root___childs = [
-			// <>
-			// 	<Panel id="DotaButtonsBG" hittest={false} />
-			// 	<Panel id="LeftTopBG" hittest={false} />
-			// 	<Panel id="LeftTopGameLogo" hittest={false} />
-			// 	<Panel id="CC_MenuButtons">
-			// 		{this.props.list.map((sName, sLoc) => {
-			// 			return (
-			// 				<Button id={sName} key={sName} className={CSSHelper.ClassMaker("CC_MenuButton", { IsActive: this.state.select_name == sName })} onactivate={self => {
-			// 					if (this.props.onToggle) {
-			// 						this.setState({ subscribeEnable: false });
-			// 						this.props.onToggle(sName, this.state.select_name == sName ? false : true);
-			// 						this.setState({ subscribeEnable: true });
-			// 					}
-			// 					this.setState({ select_name: this.state.select_name == sName ? "" : sName });
-			// 				}} >
-			// 					<CCImage id={`${sName}Icon`} className="LeftTopButtonIcon" backgroundImage={PathHelper.getImageUrl("icon/" + sName + ".png")} />
-			// 					<Label localizedText={"#MenuButton_" + sName} />
-			// 				</Button>
-			// 			);
-			// 		})}
-			// 	</Panel>
-			// </>
-		]
-		return super.render();
+	defaultStyle = () => {
+		return {
+			id: "LeftTopMain",
+			hittest: false
+		}
+	}
+	defaultChild = () => {
+		return <>
+			<Panel id="DotaButtonsBG" hittest={false} />
+			<Panel id="LeftTopBG" hittest={false} />
+			<Panel id="LeftTopGameLogo" hittest={false} />
+			<Panel id="CC_MenuButtons" >
+				{this.props.list.map((sName, sLoc) => {
+					return (
+						<Button id={sName} key={sName} className={CSSHelper.ClassMaker("CC_MenuButton", { IsActive: this.state.select_name == sName })}
+							onactivate={self => {
+								if (this.props.onToggle) {
+									this.setState({ subscribeEnable: false });
+									this.props.onToggle(sName, this.state.select_name == sName ? false : true);
+									this.setState({ subscribeEnable: true });
+								}
+								this.setState({ select_name: this.state.select_name == sName ? "" : sName });
+							}} >
+							<CCImage id={`${sName}Icon`} className="LeftTopButtonIcon" backgroundImage={CSSHelper.getImageUrl("icon/" + sName + ".png")} />
+							<Label localizedText={"#MenuButton_" + sName} />
+						</Button>
+					);
+				})}
+			</Panel>
+		</>
 	}
 }
 

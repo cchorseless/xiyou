@@ -28,9 +28,4 @@ export module PathHelper {
         return `common/rarity/frame_${str.toUpperCase()}.png`
     }
 
-    export function getImageUrl(str: string) {
-        return (`file://{images}/${str}`);
-    }
-
-
 }

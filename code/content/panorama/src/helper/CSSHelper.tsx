@@ -921,6 +921,12 @@ export module CSSHelper {
         }
         return classes.join(" ");
     };
+
+
+    export function getImageUrl(str: string) {
+        return `url("file://{images}/custom_game/${str}")`;
+    }
+
     export function getPanelSize(panel: Panel) {
         if (panel == null || !panel.IsValid()) {
             return [0, 0];

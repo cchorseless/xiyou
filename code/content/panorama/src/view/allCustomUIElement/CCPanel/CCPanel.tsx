@@ -14,6 +14,7 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
     defaultStyle = (): Partial<ICCPanelProps & T & Omit<PanelAttributes, "ref">> => { return {}; };
     __root___isValid: boolean = true;
     __root___childs: Array<JSX.Element> = [];
+    defaultChild = (): JSX.Element => { return <></> };
 
     initRootAttrs() {
         let r: any = { style: {} };
@@ -46,6 +47,7 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
     render() {
         return (this.__root___isValid &&
             <Panel ref={this.__root__}      {...this.initRootAttrs()}>
+                {this.defaultChild()}
                 {this.__root___childs}
                 {this.props.children}
             </Panel>)

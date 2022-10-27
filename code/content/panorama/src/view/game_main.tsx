@@ -49,7 +49,7 @@ export class RootPanel extends BaseEasyPureComponent {
                 <Panel ref={this.__root__} key="compId_1" className="root" {...this.__root___attrs}>
                     <EntityOverHeadPanel />
                     <MainPanel />
-                    <CCMenuNavigation list={["aa","bb"] } />
+                    <CCMenuNavigation list={["setting", "mail", "store", "battlepass", "draw", "handbook"]} />
                     <CCLabel  />
                     <CCAvatar  />
                     {this.props.children}
