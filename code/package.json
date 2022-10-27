@@ -66,7 +66,6 @@
         "@moddota/panorama-types": "^1.21.0",
         "@demon673/react-panorama": "^0.2.2",
         "@aabao/webpack-panorama": "^0.2.1",
-        "dependency-tree": "8.1.2",
         "@types/react": "^17.0.21",
         "aes-js": "^3.1.2",
         "anymatch": "^3.1.2",
