@@ -29,22 +29,22 @@ export class MainPanel extends MainPanel_UI<NodePropsData> {
     }
 
     onRefreshUI() {
-        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, TopBarPanel);
-        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, CombinationBottomPanel, {
+        this.addOnlyOneNodeChild(this.NODENAME.panel_base, TopBarPanel);
+        this.addOnlyOneNodeChild(this.NODENAME.panel_base, CombinationBottomPanel, {
             horizontalAlign: "center",
             verticalAlign: "bottom",
             marginBottom: "200px",
             // backgroundColor: "#FFFFFFFF",
         } as any);
 
-        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, ChallengeShopItem, {
+        this.addOnlyOneNodeChild(this.NODENAME.panel_base, ChallengeShopItem, {
             uiScale: "70% 70% 100%",
             marginRight: "0px",
             marginBottom: "0px",
             horizontalAlign: "right",
             verticalAlign: "bottom",
         } as any);
-        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, ShopTopRightPanel, {
+        this.addOnlyOneNodeChild(this.NODENAME.panel_base, ShopTopRightPanel, {
             horizontalAlign: "left",
             verticalAlign: "top",
             marginTop: "100px",

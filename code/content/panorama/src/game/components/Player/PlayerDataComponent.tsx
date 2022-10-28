@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { ET, registerET } from "../../../libs/Entity";
@@ -10,6 +11,9 @@ export class PlayerDataComponent extends ET.Component {
         if (PlayerScene.Local && NetHelper.IsFromLocalNetTable(this)) {
             PlayerScene.Local.AddOneComponent(this);
         }
+    }
+    onReload(): void {
+
     }
     startTime: string;
     difficulty: string;
@@ -28,5 +32,6 @@ export class PlayerDataComponent extends ET.Component {
     gold: number = 0;
     food: number = 0;
     wood: number = 0;
+
 
 }

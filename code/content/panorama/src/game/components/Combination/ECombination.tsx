@@ -19,9 +19,6 @@ export class ECombination extends ET.Entity {
         if (this.IsEmpty()) { return; }
         let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
         let player = PlayerScene.EntityRootManage.getPlayer(playerid)
-        if (player?.CombinationManager == null) {
-            await TimerHelper.DelayTime(0.1);
-        }
         await player?.CombinationManager.addOneCombination(this);
     }
 

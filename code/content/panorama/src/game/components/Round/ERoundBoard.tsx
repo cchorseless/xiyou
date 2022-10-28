@@ -3,7 +3,7 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET, registerET } from "../../../libs/Entity";
-import { TopBarPanel } from "../../../view/TopBarPanel/TopBarPanel";
+import { CCTopBarPanel } from "../../../view/TopBarPanel/CCTopBarPanel";
 import { RoundConfig } from "../../system/Round/RoundConfig";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERound } from "./ERound";
@@ -28,19 +28,15 @@ export class ERoundBoard extends ERound {
         return this._roundState;
     }
 
-
-    async onSerializeToEntity() {
+    onSerializeToEntity() {
         let KV_DATA = KVHelper.KVData();
         this.config = KV_DATA.building_round_board["" + this.configID];
-        if (PlayerScene.Local.RoundManagerComp == null) {
-            await TimerHelper.DelayTime(0.1);
-        }
         PlayerScene.Local.RoundManagerComp.addRound(this);
         this.onReload();
     }
     onReload(): void {
         if (this.isCurrentRound()) {
-            TopBarPanel.GetInstance()!.updateRound();
+            CCTopBarPanel.GetInstance()!.setState({ round: this.Ref() });
         }
     }
 
@@ -52,7 +48,6 @@ export class ERoundBoard extends ERound {
     }
 
     getCurStateDes() {
-        LogHelper.print(this.roundState);
         let str = "";
         let KV_DATA = KVHelper.KVData();
         switch (this.roundState) {

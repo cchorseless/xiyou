@@ -17,25 +17,38 @@ export class PlayerHeroComponent extends ET.Component {
 
     LoadNetTableData() {
         // try {
-            let nettable = NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer());
-            let data_player = NetHelper.GetOneTable(nettable);
-            for (let info of data_player) {
-                if (info.value) {
-                    info.value._nettable = nettable;
-                    ET.Entity.FromJson(info.value);
-                }
+        let nettable = NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer());
+        let data_player = NetHelper.GetOneTable(nettable) as { key: string, value: ET.IEntityJson }[];
+        let allLoadData: { [key: string]: ET.IEntityJson } = {}
+        for (let info of data_player) {
+            if (info.value) {
+                info.value._nettable = nettable;
+                allLoadData[info.key] = info.value;
+            }
         }
-            let data_common = NetHelper.GetOneTable(NetHelper.ENetTables.etentity);
-            for (let info of data_common) {
-                if (info.value) {
-                    info.value._nettable = NetHelper.ENetTables.etentity;
-                    ET.Entity.FromJson(info.value);
+        let data_common = NetHelper.GetOneTable(NetHelper.ENetTables.etentity);
+        for (let info of data_common) {
+            if (info.value) {
+                info.value._nettable = NetHelper.ENetTables.etentity;
+                allLoadData[info.key] = info.value;
+            }
+        }
+        for (let key in allLoadData) {
+            let json = allLoadData[key];
+            if (json) {
+                let loadList = [key];
+                let _p_instanceid = json._p_instanceid;
+                while (_p_instanceid && allLoadData[_p_instanceid]) {
+                    loadList.push(_p_instanceid);
+                    _p_instanceid = allLoadData[_p_instanceid]._p_instanceid;
+                }
+                while (loadList.length > 0) {
+                    let loadkey = loadList.pop()!
+                    ET.Entity.FromJson(allLoadData[loadkey]);
+                    (allLoadData[loadkey] as any) = null;
                 }
             }
-        // }
-        // catch (e) {
-        //     LogHelper.error(e);
-        // }
+        }
     }
 
     addEvent() {
@@ -81,7 +94,7 @@ export class PlayerHeroComponent extends ET.Component {
         });
     }
 
-  
 
-    
+
+
 }

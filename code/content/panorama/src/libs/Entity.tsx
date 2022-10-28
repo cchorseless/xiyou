@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { EventHelper } from "../helper/EventHelper";
 import { FuncHelper } from "../helper/FuncHelper";
 import { LogHelper } from "../helper/LogHelper";
@@ -9,7 +10,7 @@ export const registerET = () => (entity: typeof ET.Entity) => {
 };
 
 export module ET {
-    interface IEntityJson {
+    export interface IEntityJson {
         _t: string;
         _id: string;
         _p_instanceid?: string;
@@ -102,6 +103,16 @@ export module ET {
         onRemove?(): void;
         onDestroy?(): void;
 
+        protected _ref: this | null;
+        protected _refSetFunc: any;
+        Ref() {
+            if (this._ref == null) {
+                [this._ref, this._refSetFunc] = useState(this);
+            }
+            return this._ref
+        }
+
+
         public updateFromJson(json: IEntityJson) {
             let ignoreKey = ["_t", "_id", "Children", "C", "_p_instanceid", "_nettable"];
             for (let k in json) {
@@ -191,6 +202,9 @@ export module ET {
                 entity.updateFromJson(json);
                 if (entity.onReload) {
                     entity.onReload();
+                }
+                if (entity._ref && entity._refSetFunc) {
+                    entity._refSetFunc(entity);
                 }
                 EventHelper.FireClientEvent(entity.updateEventName, null, this);
                 return entity;
@@ -360,6 +374,8 @@ export module ET {
             }
             this.setRegister(false);
             (this as IEntityProperty).InstanceId = "0";
+            this._ref = null;
+            this._refSetFunc = null;
             // 清理Component
             if (this.Components != null) {
                 for (let kv in this.Components) {
