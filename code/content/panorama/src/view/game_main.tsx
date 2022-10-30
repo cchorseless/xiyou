@@ -48,11 +48,9 @@ export class RootPanel extends BaseEasyPureComponent {
         return (
             this.__root___isValid && (
                 <Panel ref={this.__root__} key="compId_1" className="root" {...this.__root___attrs}>
-                    <EntityOverHeadPanel />
-                    <MainPanel />
+                    {/* <EntityOverHeadPanel /> */}
+                    {/* <MainPanel /> */}
                     <CCMainPanel />
-                    <CCLabel  />
-                    <CCAvatar  />
                     {this.props.children}
                     {this.__root___childs}
                 </Panel>
@@ -86,7 +84,7 @@ function StartRenderGameUI() {
     PlayerScene.Local.Init();
     render(<RootPanel />, $.GetContextPanel());
 }
-LogHelper.print("StartRenderGameUI started=>", $.GetContextPanel().layoutfile);
+LogHelper.print("StartRenderGameUI started");
 StartRenderGameUI();
 // $.Msg(DOTAHUDHeroViewClicked==null)
 

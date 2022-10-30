@@ -5,7 +5,22 @@ import { SingletonClass } from "./SingletonHelper";
 export module TimerHelper {
     export const Offtime = new Date().getTimezoneOffset() * 60 * 1000;
     export const UpdateInterval = () => {
-        return Game.GetGameFrameTime() || 0.02;
+        let inter = Game.GetGameFrameTime();
+        if (inter < 0.02) {
+            inter = 0.02
+        }
+        return inter;
+    }
+
+    export const GetTimeDes = (t: number) => {
+        t = Math.floor(t);
+        let ss = parseInt(t % 60 + "") + "";
+        let mm = parseInt(t / 60 % 60 + "") + "";
+        let hh = parseInt(t / 60 / 60 + "") + "";
+        ss = (ss.length == 2) ? ss : "0" + ss;
+        mm = (mm.length == 2) ? mm : "0" + mm;
+        hh = (hh.length == 2) ? hh : "0" + hh;
+        return `${hh}:${mm}:${ss}`;
     }
 
     export function Init() {
@@ -15,7 +30,7 @@ export module TimerHelper {
         });
     }
     function Update(interval: number): void {
-        TimeHelper.GetInstance().Update(interval);
+        TimerManage.GetInstance().Update(interval);
         Init();
     }
 
@@ -99,11 +114,11 @@ export module TimerHelper {
             this.mEndCallBack!.recover();
             this.mEndCallBack = null;
             this.mRunTime = 0;
-            TimeHelper.GetInstance().Clear(this);
+            TimerManage.GetInstance().Clear(this);
         }
     }
 
-    class TimeHelper extends SingletonClass {
+    class TimerManage extends SingletonClass {
         //正在使用的TimerTask
         mUseTimerTasks = new Array<TimerTask>();
         //空闲的TimerTask
@@ -217,16 +232,16 @@ export module TimerHelper {
     }
 
     export function AddTimer(delay: number, handler: FuncHelper.Handler, isIgnorePauseTime = true) {
-        return TimeHelper.GetInstance().AddTimer(delay, handler, isIgnorePauseTime);
+        return TimerManage.GetInstance().AddTimer(delay, handler, isIgnorePauseTime);
     }
     export function AddIntervalTimer(delay: number, _interval: number, handler: FuncHelper.Handler, looptime: number, _isIgnorePauseTime = true) {
-        return TimeHelper.GetInstance().AddIntervalTimer(delay, _interval, handler, looptime, _isIgnorePauseTime);
+        return TimerManage.GetInstance().AddIntervalTimer(delay, _interval, handler, looptime, _isIgnorePauseTime);
     }
     export function AddFrameTimer(delay: number, handler: FuncHelper.Handler, isIgnorePauseTime = true) {
-        return TimeHelper.GetInstance().AddFrameTimer(delay, handler, isIgnorePauseTime);
+        return TimerManage.GetInstance().AddFrameTimer(delay, handler, isIgnorePauseTime);
     }
     export function AddIntervalFrameTimer(delay: number, _interval: number, handler: FuncHelper.Handler, looptime: number, isIgnorePauseTime = true) {
-        return TimeHelper.GetInstance().AddIntervalFrameTimer(delay, _interval, handler, looptime, isIgnorePauseTime);
+        return TimerManage.GetInstance().AddIntervalFrameTimer(delay, _interval, handler, looptime, isIgnorePauseTime);
     }
 
     export async function DelayTime(delay: number, useGameTime = true) {
@@ -240,7 +255,9 @@ export module TimerHelper {
             );
         });
     }
-
+    export function ClearAll(obj: any) {
+        TimerManage.GetInstance().ClearAll(obj);
+    }
     export async function MakeSure(obj: any) {
         return new Promise<boolean>((resolve, reject) => {
             let task = TimerHelper.AddIntervalFrameTimer(

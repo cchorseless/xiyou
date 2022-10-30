@@ -108,49 +108,49 @@ export class TopBarPanel extends TopBarPanel_UI<NodePropsData> {
 
     lefttimeTask: TimerHelper.TimerTask | null;
     setroundState() {
-        let currentround = PlayerScene.Local.RoundManagerComp.getCurrentBoardRound();
-        this.lbl_roundstagedes.current!.text = "" + currentround.getCurStateDes();
-        if (currentround.roundStartTime != null) {
-            if (this.lefttimeTask != null) {
-                this.lefttimeTask.Clear();
-                this.lefttimeTask = null;
-            }
-            let lefttime = 0;
-            switch (currentround.roundState) {
-                case RoundConfig.ERoundBoardState.start:
-                    lefttime = Number(currentround.config.round_readytime);
-                    break;
-                case RoundConfig.ERoundBoardState.battle:
-                    lefttime = Number(currentround.config.round_time);
-                    break;
-                case RoundConfig.ERoundBoardState.prize:
-                case RoundConfig.ERoundBoardState.waiting_next:
-                case RoundConfig.ERoundBoardState.end:
-                    break;
-            }
-            if (lefttime == 0) {
-                this.lbl_lefttime.current!.text = "";
-            } else {
-                this.lbl_lefttime.current!.text = "" + lefttime;
-                this.lefttimeTask = TimerHelper.AddIntervalTimer(
-                    1,
-                    1,
-                    FuncHelper.Handler.create(this, () => {
-                        lefttime -= 1;
-                        if (lefttime <= 0) {
-                            this.lbl_lefttime.current!.text = "";
-                            this.lefttimeTask?.Clear();
-                            this.lefttimeTask = null;
-                        } else {
-                            this.lbl_lefttime.current!.text = "" + lefttime;
-                        }
-                        this.updateSelf();
-                    }),
-                    -1,
-                    true
-                );
-            }
-        }
-        this.updateSelf();
+        // let currentround = PlayerScene.Local.RoundManagerComp.getCurrentBoardRound();
+        // this.lbl_roundstagedes.current!.text = "" + currentround.getCurStateDes();
+        // if (currentround.roundStartTime != null) {
+        //     if (this.lefttimeTask != null) {
+        //         this.lefttimeTask.Clear();
+        //         this.lefttimeTask = null;
+        //     }
+        //     let lefttime = 0;
+        //     switch (currentround.roundState) {
+        //         case RoundConfig.ERoundBoardState.start:
+        //             lefttime = Number(currentround.config.round_readytime);
+        //             break;
+        //         case RoundConfig.ERoundBoardState.battle:
+        //             lefttime = Number(currentround.config.round_time);
+        //             break;
+        //         case RoundConfig.ERoundBoardState.prize:
+        //         case RoundConfig.ERoundBoardState.waiting_next:
+        //         case RoundConfig.ERoundBoardState.end:
+        //             break;
+        //     }
+        //     if (lefttime == 0) {
+        //         this.lbl_lefttime.current!.text = "";
+        //     } else {
+        //         this.lbl_lefttime.current!.text = "" + lefttime;
+        //         this.lefttimeTask = TimerHelper.AddIntervalTimer(
+        //             1,
+        //             1,
+        //             FuncHelper.Handler.create(this, () => {
+        //                 lefttime -= 1;
+        //                 if (lefttime <= 0) {
+        //                     this.lbl_lefttime.current!.text = "";
+        //                     this.lefttimeTask?.Clear();
+        //                     this.lefttimeTask = null;
+        //                 } else {
+        //                     this.lbl_lefttime.current!.text = "" + lefttime;
+        //                 }
+        //                 this.updateSelf();
+        //             }),
+        //             -1,
+        //             true
+        //         );
+        //     }
+        // }
+        // this.updateSelf();
     }
 }

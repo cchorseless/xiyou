@@ -6,9 +6,10 @@ import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../l
 import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { ShopPanel } from "../Shop/ShopPanel";
+import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
 
 
-export class CCMainPanel<T extends NodePropsData> extends CCPanel<T> {
+export class CCMainPanel extends CCPanel<NodePropsData> {
     __root__: React.RefObject<Panel>;
     btn_debug: React.RefObject<Button>;
     panel_base: React.RefObject<Panel>;
@@ -16,14 +17,13 @@ export class CCMainPanel<T extends NodePropsData> extends CCPanel<T> {
     panel_alldialog: React.RefObject<Panel>;
     NODENAME = { __root__: '__root__', btn_debug: 'btn_debug', panel_base: 'panel_base', panel_allpanel: 'panel_allpanel', panel_alldialog: 'panel_alldialog', };
 
-    constructor(props: T) {
+    constructor(props: NodePropsData) {
         super(props);
         this.__root__ = createRef<Panel>();
         this.btn_debug = createRef<Button>();
         this.panel_base = createRef<Panel>();
         this.panel_allpanel = createRef<Panel>();
         this.panel_alldialog = createRef<Panel>();
-        this.InitUI();
 
     };
     __root___isValid: boolean = true;
@@ -37,10 +37,12 @@ export class CCMainPanel<T extends NodePropsData> extends CCPanel<T> {
     panel_alldialog_isValid: boolean = true;
     panel_alldialog_childs: Array<JSX.Element> = [];
 
+    defaultClass = () => { return "CC_root" }
+
     render() {
         return (
             this.__root___isValid &&
-            <Panel ref={this.__root__} className="CC_root" hittest={false} {...this.initRootAttrs()}>
+            <Panel ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 {this.btn_debug_isValid &&
                     <Button ref={this.btn_debug} onactivate={this.onbtn_click} className="CommonButton"  >
                         {this.btn_debug_childs}
@@ -50,8 +52,9 @@ export class CCMainPanel<T extends NodePropsData> extends CCPanel<T> {
                     <Panel ref={this.panel_base} className="CC_root" hittest={false}>
                         <CCMenuNavigation
                             list={["setting", "mail", "store", "battlepass", "draw", "handbook"]}
-                            onToggle={this.onMenuNavigationToggle}
-                        />
+                            onToggle={this.onMenuNavigationToggle} />
+                        <CCTopBarCenter />
+                        <CCTopBarGameCoin />
                         {this.panel_base_childs}
                     </Panel>
                 }

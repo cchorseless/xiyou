@@ -15,3 +15,5 @@
 "lang_MenuButton_battlepass"       "战令"
 "lang_MenuButton_draw"       "抽奖"
 "lang_MenuButton_handbook"       "图鉴"
+"lang_TopBarRound"       "第{s:round}回合"
+"lang_TopBarDifficulty"       "游戏难度:{s:difficulty}"

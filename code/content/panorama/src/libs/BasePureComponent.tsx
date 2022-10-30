@@ -140,11 +140,34 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         return nodeName + "_isValid";
     }
     /**创建前，指定属性，添加事件 */
-    // public onAwake(props: NodeData) {}
+    public onInitUI() { }
     /**渲染后一帧执行 */
     public onStartUI() { }
     public onRefreshUI(data: any, ...args: any[]) { }
     public onDestroy() { }
+
+    /**
+     * 获取state 数据
+     * @param key 
+     * @param isWithRef 
+     * @returns 
+     */
+    public GetState<T>(key: string, isWithRef = false) {
+        let obj = (this.state as any)[key];
+        if (obj && isWithRef) {
+            return obj.Ref as T
+        }
+        return obj as T;
+    }
+    public UpdateState(obj: { [k: string]: any }) {
+        if (!obj) { return; }
+        if (this.IsRegister) {
+            this.setState(obj);
+        }
+        else {
+            this.state = Object.assign(this.state || {}, obj)
+        }
+    }
 
     /**
      * 向_childs中添加子节点
@@ -300,6 +323,22 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         }
         return null as any;
     }
+
+    public static GetInstanceByName<T>(name: string): T {
+        let r: T[] = [];
+        for (let k in BasePureComponentSystem.AllBasePureComp) {
+            if (BasePureComponentSystem.AllBasePureComp[k].constructor.name == name) {
+                r.push(BasePureComponentSystem.AllBasePureComp[k] as T);
+            }
+        }
+        if (r && r.length == 1) {
+            return r[0] as T;
+        } else if (r && r.length > 1) {
+            throw new Error("NodeComponent is not only");
+        }
+        return null as any;
+    }
+
 
     public async addNodeChildAsyncAt<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T,
         nodeData: M = {} as any, index: number = -1) {
@@ -463,6 +502,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         });
         this.allGameEventID = [];
         EventHelper.RemoveCaller(this);
+        TimerHelper.ClearAll(this);
         let nodeinfo = BasePureComponentSystem.GetReactElement(this.InstanceId);
         if (nodeinfo) {
             BasePureComponentSystem.RegisterReactElement(nodeinfo.Node, false);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { PureComponent, useEffect, useState } from "react";
 import { EventHelper } from "../helper/EventHelper";
 import { FuncHelper } from "../helper/FuncHelper";
 import { LogHelper } from "../helper/LogHelper";
@@ -78,6 +78,15 @@ export module ET {
         }
     }
 
+    export class EntityRef<T>{
+        get Ref(): T {
+            return this._Ref;
+        }
+        private _Ref: T
+        constructor(ref: T) {
+            this._Ref = ref;
+        }
+    }
     export class Entity extends Object implements IEntityFunc {
         public readonly InstanceId: string;
         public readonly Id: string;
@@ -103,14 +112,36 @@ export module ET {
         onRemove?(): void;
         onDestroy?(): void;
 
-        protected _ref: this | null;
-        protected _refSetFunc: any;
-        Ref() {
-            if (this._ref == null) {
-                [this._ref, this._refSetFunc] = useState(this);
-            }
-            return this._ref
+        /** 函数组件使用 */
+        public HookRef() {
+            const [v, setValue] = useState({ Ref: this });
+            const hander = FuncHelper.Handler.create(this, () => {
+                setValue({ Ref: this });
+            });
+            useEffect(() => {
+                EventHelper.AddClientEvent(this.updateEventName, hander, true);
+                return () => { hander._id > 0 && EventHelper.RemoveCaller(this, hander) };
+            }, [v])
+            return v.Ref;
         }
+        private _Ref: EntityRef<this>;
+        public Ref(v: boolean = false) {
+            if (!this._Ref || v) {
+                this._Ref = new EntityRef(this);
+            }
+            return { [this.GetType()]: this._Ref };
+        }
+
+        public RegRef(content: PureComponent & { UpdateState: (o: any) => void }) {
+            const entity = this;
+            content.UpdateState(entity.Ref());
+            EventHelper.AddClientEvent(this.updateEventName,
+                FuncHelper.Handler.create(content, () => {
+                    content && content.setState(entity.Ref(true));
+                })
+            )
+        }
+
 
 
         public updateFromJson(json: IEntityJson) {
@@ -188,13 +219,6 @@ export module ET {
                     }
                 }
             }
-            // TimerHelper.AddFrameTimer(
-            //     1,
-            //     FuncHelper.Handler.create(this, () => {
-            //         EventHelper.FireClientEvent(this.GetType(), null, this);
-            //         EventHelper.FireClientEvent(this.updateEventName, null, this);
-            //     })
-            // );
         }
         static FromJson(json: IEntityJson) {
             let entity = EntityEventSystem.GetEntity(json._id + json._t);
@@ -202,9 +226,6 @@ export module ET {
                 entity.updateFromJson(json);
                 if (entity.onReload) {
                     entity.onReload();
-                }
-                if (entity._ref && entity._refSetFunc) {
-                    entity._refSetFunc(entity);
                 }
                 EventHelper.FireClientEvent(entity.updateEventName, null, this);
                 return entity;
@@ -374,8 +395,6 @@ export module ET {
             }
             this.setRegister(false);
             (this as IEntityProperty).InstanceId = "0";
-            this._ref = null;
-            this._refSetFunc = null;
             // 清理Component
             if (this.Components != null) {
                 for (let kv in this.Components) {

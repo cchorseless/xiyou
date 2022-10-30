@@ -28,7 +28,7 @@ export class DrawComponent extends ET.Component {
             (event: CLIENT_DATA<ArrayLikeObject<string>>) => {
                 if (event.state) {
                     let card = Array<string>().concat(this.tLastCards);
-                    MainPanel.GetInstance()!.addOnlyDialog(DrawCardPanel, { cards: card });
+                    // MainPanel.GetInstance()!.addOnlyDialog(DrawCardPanel, { cards: card });
                 }
             }
         );

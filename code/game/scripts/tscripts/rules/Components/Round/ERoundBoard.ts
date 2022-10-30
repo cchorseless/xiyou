@@ -17,7 +17,7 @@ export class ERoundBoard extends ERound {
     @serializeETProps()
     roundState: RoundConfig.ERoundBoardState = null;
     @serializeETProps()
-    roundStartTime: string;
+    roundLeftTime: number = 0;
     @serializeETProps()
     isWin: boolean = false;
     config: building_round_board.OBJ_2_1 = null;
@@ -26,36 +26,36 @@ export class ERoundBoard extends ERound {
         this.config = KVHelper.KvServerConfig.building_round_board["" + configid];
     }
     OnStart() {
+        let delaytime = Number(this.config.round_readytime || 10);
         this.unitSpawned = 0;
         this.bRunning = true;
         this.roundState = RoundConfig.ERoundBoardState.start;
-        this.roundStartTime = TimerHelper.now();
+        this.roundLeftTime = GameRules.GetGameTime() + delaytime;
         let playerroot = this.Domain.ETRoot.AsPlayer();
         playerroot.SyncClientEntity(this, false);
         playerroot.PlayerDataComp().OnRoundStartBegin(this);
         playerroot.BuildingManager().OnRoundStartBegin(this);
         playerroot.FakerHeroRoot().OnRoundStartBegin(this);
-        if (this.config.round_readytime != null) {
-            TimerHelper.addTimer(
-                Number(this.config.round_readytime),
-                () => {
-                    this.OnBattle();
-                },
-                this
-            );
-        }
+        TimerHelper.addTimer(
+            delaytime,
+            () => {
+                this.OnBattle();
+            },
+            this
+        );
     }
 
     OnBattle() {
+        let delaytime = Number(this.config.round_time || 30);
         let player = this.Domain.ETRoot.AsPlayer();
         this.roundState = RoundConfig.ERoundBoardState.battle;
+        this.roundLeftTime = GameRules.GetGameTime() + delaytime;
         player.SyncClientEntity(this, false);
         player.ChessControlComp().OnRoundStartBattle();
         player.BuildingManager().OnRoundStartBattle();
         player.FakerHeroRoot().OnRoundStartBattle();
         let buildingCount = player.BuildingManager().getAllBattleUnitAlive().length;
         let enemyCount = player.EnemyManagerComp().getAllBattleUnitAlive().length;
-        let delaytime = Number(this.config.round_time);
         if (buildingCount == 0 || enemyCount == 0) {
             delaytime = 1;
         }
@@ -84,7 +84,9 @@ export class ERoundBoard extends ERound {
         if (this.roundState == RoundConfig.ERoundBoardState.prize) {
             return;
         }
+        let delaytime = Number(20 || 20);
         this.roundState = RoundConfig.ERoundBoardState.prize;
+        this.roundLeftTime = GameRules.GetGameTime() + delaytime;
         let playerroot = this.Domain.ETRoot.AsPlayer();
         playerroot.SyncClientEntity(this);
         let aliveEnemy = this.Domain.ETRoot.AsPlayer().EnemyManagerComp().getAllBattleUnitAlive();
@@ -93,7 +95,7 @@ export class ERoundBoard extends ERound {
         playerroot.BuildingManager().OnRoundStartPrize(this);
         playerroot.FakerHeroRoot().OnRoundStartPrize(this);
         this.waitingEndTimer = TimerHelper.addTimer(
-            20,
+            delaytime,
             () => {
                 this.OnWaitingEnd();
             },
@@ -111,6 +113,7 @@ export class ERoundBoard extends ERound {
             return;
         }
         this.roundState = RoundConfig.ERoundBoardState.waiting_next;
+        this.roundLeftTime = -1;
         let playerroot = this.Domain.ETRoot.AsPlayer();
         playerroot.SyncClientEntity(this, false);
         EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onwaitingend, playerroot.Playerid, this);

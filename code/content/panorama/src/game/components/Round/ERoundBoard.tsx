@@ -3,13 +3,13 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET, registerET } from "../../../libs/Entity";
-import { CCTopBarPanel } from "../../../view/TopBarPanel/CCTopBarPanel";
+import { CCTopBarCenter } from "../../../view/TopBarPanel/CCTopBarPanel";
 import { RoundConfig } from "../../system/Round/RoundConfig";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERound } from "./ERound";
 @registerET()
 export class ERoundBoard extends ERound {
-    roundStartTime: string;
+    roundLeftTime: number = -1;
     configID: string;
     unitSpawned: number = 0;
     tTotalDamage: number = 0; // 回合总伤害
@@ -36,7 +36,7 @@ export class ERoundBoard extends ERound {
     }
     onReload(): void {
         if (this.isCurrentRound()) {
-            CCTopBarPanel.GetInstance()!.setState({ round: this.Ref() });
+            CCTopBarCenter.GetInstance()?.UpdateState(this.Ref());
         }
     }
 

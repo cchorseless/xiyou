@@ -13,7 +13,6 @@ export class PlayerDataComponent extends ET.Component {
         }
     }
     onReload(): void {
-
     }
     startTime: string;
     difficulty: string;

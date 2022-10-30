@@ -1,45 +1,111 @@
-#CC_TopBarPanel {
-    width: 1400px;
-    height: 140px;
+#CC_TopBarCenter {
+    #RoundBG {
+        width: 369px;
+        height: 70px;
+        background-image: url("file://{images}/custom_game/hud/bg_round.png");
+        background-size: 100%;
+        horizontal-align: center;
+        flow-children: down;
+
+        #RoundDifficulty {
+            font-size: 18px;
+            margin-top: 5px;
+            color: gradient(linear, 0% 100%, 0% 0%, from(#F7F381), to(#FFFBC9));
+            text-align: right;
+            padding-right: 8px;
+            horizontal-align: center;
+        }
+
+        #RoundLabel {
+            width: 50%;
+            margin-top: 5px;
+            font-size: 18px;
+            color: gradient(linear, 0% 100%, 0% 0%, from(#F7F381), to(#FFFBC9));
+            text-align: right;
+            padding-right: 8px;
+        }
+
+        #RoundState {
+            width: 50%;
+            margin-top: 5px;
+            font-size: 18px;
+            color: gradient(linear, 0% 100%, 0% 0%, from(#F7F381), to(#FFFBC9));
+            text-align: left;
+            padding-left: 8px;
+        }
+    }
+
+    #RoundTime {
+        horizontal-align: center;
+        margin-top: 66px;
+    }
+}
+
+#CC_TopBarGameCoin {
     margin-top: 0px;
+    width: 600px;
+    height: 70px;
+    horizontal-align: right;
+    margin-right: 100px;
 
-    #TopBarBg {
-        width: 1400px;
-        height: 50px;
-        background-color: #000000;
-        margin-top: 35px;
+    #TopBarGameCoinBg {
+        transform: rotateY(180deg);
         background-repeat: no-repeat;
+        background-image: url("file://{images}/custom_game/hud/left_top_buttons_Bg.png");
+        width: 100%;
+        height: 100%;
     }
 
-    #ImageMoney {
-        width: 48px;
-        height: 48px;
-        background-repeat: no-repeat;
-        background-image: url("file://{images}/common/money.png");
-        background-size: 100% 100%;
-    }
+    #TopBarGameCoinGroup {
+        margin-left: 100px;
 
-    #ImagePolulation {
-        width: 48px;
-        height: 48px;
-        background-repeat: no-repeat;
-        background-image: url("file://{images}/common/population_png.png");
-        background-size: 100% 100%;
-    }
+        .CoinGroup {
+            margin-top: 10px;
+        }
 
-    #ImageFood {
-        width: 48px;
-        height: 48px;
-        background-repeat: no-repeat;
-        background-image: url("file://{images}/common/food_png.png");
-        background-size: 100% 100%;
-    }
+        .Icon_gold {
+            width: 48px;
+            height: 48px;
+            background-repeat: no-repeat;
+            background-image: url("file://{images}/common/money.png");
+            background-size: 100% 100%;
+        }
 
-    #ImageWood {
-        width: 48px;
-        height: 48px;
-        background-repeat: no-repeat;
-        background-image: url("file://{images}/common/wood_png.png");
-        background-size: 100% 100%;
+        .Icon_population {
+            width: 48px;
+            height: 40px;
+            background-repeat: no-repeat;
+            background-image: url("file://{images}/common/population_png.png");
+            background-size: 100% 100%;
+        }
+
+        .Icon_food {
+            width: 48px;
+            height: 48px;
+            background-repeat: no-repeat;
+            background-image: url("file://{images}/common/food_png.png");
+            background-size: 100% 100%;
+        }
+
+        .Icon_wood {
+            width: 48px;
+            height: 48px;
+            background-repeat: no-repeat;
+            background-image: url("file://{images}/common/wood_png.png");
+            background-size: 100% 100%;
+        }
+
+        .CoinName {
+            font-size: 20px;
+            color: gradient(linear, 0% 100%, 0% 0%, from(#F7F381), to(#FFFBC9));
+            text-align: left;
+            padding-left: 8px;
+        }
+
+        .CoinCount {
+            font-size: 18px;
+            color: gradient(linear, 0% 100%, 0% 0%, from(#F7F381), to(#FFFBC9));
+            text-align: right;
+        }
     }
 }

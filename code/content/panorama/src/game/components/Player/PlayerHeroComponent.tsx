@@ -16,7 +16,6 @@ export class PlayerHeroComponent extends ET.Component {
     }
 
     LoadNetTableData() {
-        // try {
         let nettable = NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer());
         let data_player = NetHelper.GetOneTable(nettable) as { key: string, value: ET.IEntityJson }[];
         let allLoadData: { [key: string]: ET.IEntityJson } = {}
@@ -39,11 +38,16 @@ export class PlayerHeroComponent extends ET.Component {
                 let loadList = [key];
                 let _p_instanceid = json._p_instanceid;
                 while (_p_instanceid && allLoadData[_p_instanceid]) {
-                    loadList.push(_p_instanceid);
-                    _p_instanceid = allLoadData[_p_instanceid]._p_instanceid;
+                    if (loadList.includes(_p_instanceid)) {
+                        break;
+                    }
+                    else {
+                        loadList.push(_p_instanceid);
+                        _p_instanceid = allLoadData[_p_instanceid]._p_instanceid;
+                    }
                 }
                 while (loadList.length > 0) {
-                    let loadkey = loadList.pop()!
+                    let loadkey = loadList.pop()!;
                     ET.Entity.FromJson(allLoadData[loadkey]);
                     (allLoadData[loadkey] as any) = null;
                 }

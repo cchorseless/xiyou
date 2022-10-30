@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NetHelper } from "../../../helper/NetHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { PlayerScene } from "../Player/PlayerScene";
@@ -28,4 +29,6 @@ export class RoundManagerComponent extends ET.Component {
     public getCurrentBoardRound() {
         return this.RoundInfo[this.curRoundBoard] as ERoundBoard;
     }
+
+
 }

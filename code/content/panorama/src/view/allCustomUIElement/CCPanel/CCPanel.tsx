@@ -2,15 +2,20 @@ import React, { createRef, PureComponent } from "react";
 import { PanelAttributes, ImageAttributes, DOTAAbilityImageAttributes, LabelAttributes } from "@demon673/react-panorama";
 import { BasePureComponent, NodePropsData } from "../../../libs/BasePureComponent";
 import { CSSHelper } from "../../../helper/CSSHelper";
+import { LogHelper } from "../../../helper/LogHelper";
+import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 
 interface ICCPanelProps extends NodePropsData {
+    tooltip?: string;
+    titleTooltip?: { title: string; tip: string }
+    titleDialog?: JSX.Element;
 }
 export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<ICCPanelProps & T & Omit<PanelAttributes, "ref">, P>{
     constructor(props: any) {
         super(props);
         this.__root__ = createRef<P>();
+        this.onInitUI()
     }
-    InitUI() { }
     defaultClass = () => { return ""; };
     defaultStyle = (): Partial<ICCPanelProps & T & Omit<PanelAttributes, "ref">> => { return {}; };
     __root___isValid: boolean = true;
@@ -18,7 +23,7 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
 
     initRootAttrs() {
         let r: any = { style: {} };
-        let ignoreKey = ["style", "children"];
+        let ignoreKey = ["style", "children", "tooltip", "titleTooltip", "titleDialog"];
         let _defaultstyle = this.defaultStyle();
         if (_defaultstyle) {
             for (let k in _defaultstyle) {
@@ -40,7 +45,21 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
                 r[k] = this.props[k];
             }
         }
-        r.className = CSSHelper.ClassMaker(this.defaultClass(), this.props.className)
+        let clsname = CSSHelper.ClassMaker(this.defaultClass(), this.props.className);
+        if (clsname != "") {
+            r.className = clsname;
+        }
+        if (r.tooltip || r.titleTooltip) {
+            r.onmouseover = (self: P) => {
+                if (this.props.onmouseover != undefined) {
+                    this.props.onmouseover(self);
+                }
+                if (r.tooltip) {
+
+                }
+                // CCPanel.GetInstanceByName<CCMainPanel>("CCMainPanel")?.AddTextToolTip(self, () => r.tooltip)
+            }
+        }
         return r;
     }
 

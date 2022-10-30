@@ -22,7 +22,7 @@ export module EventHelper {
             // 通知服务器
             NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_SLOT_CHANGE, e);
         });
-       
+
     }
 
     const AllEventInfo: { [eventName: string]: [{ isonce: boolean; handler: FuncHelper.Handler }] } = {};
@@ -63,18 +63,32 @@ export module EventHelper {
             }
         }
     }
-    export function RemoveCaller(context: any) {
+    export function RemoveCaller(context: any, handler: FuncHelper.Handler | null = null) {
         if (context == null) {
             return;
         }
-        for (let eventName in AllEventInfo) {
-            for (let i = 0, len = AllEventInfo[eventName].length; i < len; i++) {
-                let info = AllEventInfo[eventName][i];
-                if (info && info.handler && info.handler._id > 0) {
-                    if (context == info.handler.caller) {
+        if (handler) {
+            for (let eventName in AllEventInfo) {
+                for (let i = 0, len = AllEventInfo[eventName].length; i < len; i++) {
+                    let info = AllEventInfo[eventName][i];
+                    if (info.handler === handler) {
                         AllEventInfo[eventName].splice(i, 1);
                         info.handler.recover();
-                        i--;
+                        return;
+                    }
+                }
+            }
+        }
+        else {
+            for (let eventName in AllEventInfo) {
+                for (let i = 0, len = AllEventInfo[eventName].length; i < len; i++) {
+                    let info = AllEventInfo[eventName][i];
+                    if (info && info.handler && info.handler._id > 0) {
+                        if (context == info.handler.caller) {
+                            AllEventInfo[eventName].splice(i, 1);
+                            info.handler.recover();
+                            i--;
+                        }
                     }
                 }
             }

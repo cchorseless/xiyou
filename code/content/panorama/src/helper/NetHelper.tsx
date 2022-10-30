@@ -50,12 +50,12 @@ export module NetHelper {
         if (cb != null) {
             if (!isOnce) {
                 GameEvents.Subscribe(protocol, (event) => {
-                    LogHelper.print(protocol);
+                    // LogHelper.print(protocol);
                     cb.call(context, event);
                 });
             } else {
                 let eventID = GameEvents.Subscribe(protocol, (event: JS_TO_LUA_DATA) => {
-                    LogHelper.print(protocol);
+                    // LogHelper.print(protocol);
                     cb.call(context, event);
                     GameEvents.Unsubscribe(eventID);
                 });
