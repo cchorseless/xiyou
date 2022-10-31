@@ -6,8 +6,8 @@ export module TimerHelper {
     export const Offtime = new Date().getTimezoneOffset() * 60 * 1000;
     export const UpdateInterval = () => {
         let inter = Game.GetGameFrameTime();
-        if (inter < 0.02) {
-            inter = 0.02
+        if (inter < 0.04) {
+            inter = 0.04
         }
         return inter;
     }

@@ -5,7 +5,7 @@ import { PanelAttributes, ImageAttributes, LabelAttributes } from "@demon673/rea
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 
 
-export class ShopPanel_UI<T extends NodePropsData> extends CCPanel<T> {
+export class CCShopPanel<T extends NodePropsData> extends CCPanel<T> {
     __root__: React.RefObject<Panel>;
     btn_gohome: React.RefObject<ImagePanel>;
     onbtn_gohome = (...args: any[]) => { };
@@ -22,7 +22,7 @@ export class ShopPanel_UI<T extends NodePropsData> extends CCPanel<T> {
         this.btn_goback = createRef<ImagePanel>();
         this.lbl_starstone = createRef<LabelPanel>();
         this.lbl_metastone = createRef<LabelPanel>();
-        this.InitUI()
+        this.onInitUI()
     };
 
     __root___isValid: boolean = true;

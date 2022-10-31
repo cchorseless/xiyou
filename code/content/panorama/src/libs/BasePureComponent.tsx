@@ -143,14 +143,14 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     public onInitUI() { }
     /**渲染后一帧执行 */
     public onStartUI() { }
-    public onRefreshUI(data: any, ...args: any[]) { }
+    public onRefreshUI(...args: any[]) { }
     public onDestroy() { }
 
     /**
      * 获取state 数据
-     * @param key 
-     * @param isWithRef 
-     * @returns 
+     * @param key
+     * @param isWithRef
+     * @returns
      */
     public GetState<T>(key: string, isWithRef = false) {
         let obj = (this.state as any)[key];
@@ -463,25 +463,18 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     };
     // 初始化数据
     public componentDidMount() {
-        // this.syncRootDataByProps();
         // 同步样式
         for (let k in this.props) {
             if (CSSHelper.IsCssStyle(k)) {
-                // (this.CSS_0_0 as any)[k] = this.props[k];
                 this.__root__.current!.style[k as keyof VCSSStyleDeclaration] = this.props[k];
             }
         }
         // 不遮挡tooltip
         this.__root__.current!.hittest = false;
-        if (this.props.__onlykey__) {
-            (this as any).InstanceId = this.props.__onlykey__;
-        } else {
-            (this as any).InstanceId = FuncHelper.generateUUID();
-        }
+        (this as any).InstanceId = this.props.__onlykey__ || FuncHelper.generateUUID();
         this.setRegister(true);
         // 下一帧开始刷新
-        TimerHelper.AddFrameTimer(
-            1,
+        TimerHelper.AddFrameTimer(1,
             FuncHelper.Handler.create(this, () => {
                 if (this.IsRegister) {
                     this.onStartUI();
@@ -490,10 +483,6 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         );
     }
 
-    public componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
-        // LogHelper.warn(this.constructor.name)
-        // this.syncRootDataByProps()
-    }
     public componentWillUnmount() {
         this.setRegister(false);
         // 移除所有监听事件

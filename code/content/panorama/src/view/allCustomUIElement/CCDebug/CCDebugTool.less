@@ -1,0 +1,825 @@
+@ControlPanelWidth: 320px;
+@ControlPanelHeight: 240px;
+@ButtonHeight: 26px;
+@ExpendButtonWidth: 40px;
+@ExpendButtonHeight: 80px;
+
+/** sadasdasd */
+.EOM_DebugTool {
+
+	width: 100%;
+	height: 100%;
+}
+
+// 主面板
+.ControlPanel {
+
+	// transform: translateX(0%);
+	// vertical-align: top;
+	// horizontal-align: left;
+	flow-children: right;
+
+	// padding-top: 150px;
+	// padding-bottom: 10px;
+
+	transition-property: background-color, transform, position;
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in-out;
+
+	&.DirectionLeft {
+		transform: translateX(0%);
+		padding-top: 150px;
+		padding-bottom: 10px;
+	}
+
+	&.Minimized.DirectionLeft {
+		transform: translateX(-@ControlPanelWidth);
+	}
+
+	/** 右边排版*/
+	&.DirectionRight {
+		horizontal-align: right;
+		transform: translateX(0%);
+		padding-top: 150px;
+		padding-bottom: 10px;
+
+		.ControlPanelContainer {
+			transform: translateX(@ExpendButtonWidth);
+		}
+
+		#ExpandButtonContainer {
+			transform: translateX(@ControlPanelWidth) rotateZ(180deg);
+
+			#ExpandButton {
+				background-color: gradient(linear, 0% 0%, 70% 0%, from(#111111), to(#3b3b3b));
+				border-top-right-radius: 12px;
+				border-bottom-right-radius: 12px;
+
+				&:hover {
+					background-color: gradient(linear, 0% 0%, 70% 0%, from(#181818), to(#474747));
+				}
+			}
+		}
+	}
+
+	&.Minimized.DirectionRight {
+		transform: translateX(@ControlPanelWidth);
+	}
+
+	/** 上面排版*/
+	&.DirectionTop {
+		align: center top;
+		transform: translateY(0%);
+		flow-children: down;
+
+		.ControlPanelContainer {
+			min-height: @ControlPanelHeight;
+			width: fit-children;
+			flow-children: right;
+			padding-bottom: 0px;
+
+			background-color: gradient(linear, 0% 0%, 0% 70%, from(#111111), to(#222222));
+			box-shadow: #000000AA 2px 2px 8px;
+
+			.ControlPanelTitle {
+				width: 20px;
+				height: 100%;
+				flow-children: down;
+				// background-color: #2d2f31;
+				box-shadow: fill #00000011 1px 1px 8px 1px;
+				margin: 12px 0px 12px 12px;
+				// padding: 4px;
+
+				.CategoryHeader {
+					// width: 100%;
+					margin: 6px 0px;
+					align: center center;
+
+					// padding: 6px 6px 0px 6px;
+					.CategoryHeaderLabel {
+						font-size: 16px;
+						color: #fff;
+						text-transform: uppercase;
+						letter-spacing: 1px;
+					}
+				}
+
+
+				.CategoryHeaderFilledFront {
+					width: fit-children;
+					height: fill-parent-flow(1);
+				}
+
+				.CategoryHeaderFilledNext {
+					width: fit-children;
+					height: fill-parent-flow(1);
+				}
+
+				.CategoryHeaderIcon {
+					vertical-align: bottom;
+					margin: 2px 0px;
+				}
+			}
+		}
+
+		#ExpandButtonContainer {
+			width: @ExpendButtonHeight;
+			height: @ExpendButtonWidth;
+			horizontal-align: middle;
+
+			#ExpandButton {
+				width: @ExpendButtonHeight;
+				height: 25px;
+				align: center top;
+				transform: translateX(0px);
+
+				background-color: gradient(linear, 0% 0%, 0% 70%, from(#111111), to(#3b3b3b));
+				border-top-right-radius: 0px;
+				border-bottom-right-radius: 0px;
+				border-bottom-left-radius: 12px;
+				border-bottom-right-radius: 12px;
+
+
+				box-shadow: #000000AA 1px 1px 6px;
+
+				&:hover {
+
+					background-color: gradient(linear, 0% 0%, 0% 70%, from(#181818), to(#474747));
+				}
+			}
+		}
+
+		.Category {
+			width: @ControlPanelWidth;
+			height: 100%;
+			flow-children: down;
+			background-color: gradient(linear, 0% 0%, 0% 100%, from(#2d2f31), to(hsv-transform(#2d2f31, 0.0, 1.0, 0.4)));
+			box-shadow: fill #00000011 1px 1px 8px 1px;
+			margin: 12px 6px 12px 6px;
+			transition-property: width;
+			transition-duration: 0.15s;
+
+			&.SingleCol {
+				width: 140px;
+			}
+
+			.CategoryHeader {
+				width: 100%;
+				padding: 6px 6px 0px 6px;
+
+				.CategoryHeaderLabel {
+					font-size: 15px;
+					color: #fff;
+					text-transform: uppercase;
+					letter-spacing: 1px;
+				}
+			}
+
+			.CategoryButtonContainer {
+				flow-children: down;
+				width: 100%;
+				padding: 3px 6px 3px 6px;
+			}
+		}
+	}
+
+	&.Minimized.DirectionTop {
+		transform: translateY(-@ControlPanelHeight);
+	}
+}
+
+.Minimized {
+	#ExpandButton {
+		opacity: 0.2;
+	}
+
+	#ExpandButton:hover {
+		opacity: 1;
+	}
+}
+
+.Row {
+	flow-children: right;
+	width: 100%;
+	margin: 0px 0px;
+}
+
+// 主功能区
+.ControlPanelContainer {
+	// min-height: 600px;
+	width: @ControlPanelWidth;
+	// max-height: 785px;
+	flow-children: down;
+
+	background-color: gradient(linear, 0% 0%, 70% 0%, from(#111111), to(#222222));
+	box-shadow: #000000AA 2px 2px 8px;
+	padding-bottom: 12px;
+}
+
+// 展开按钮
+#ExpandButtonContainer {
+	width: @ExpendButtonWidth;
+	height: @ExpendButtonHeight;
+	vertical-align: middle;
+
+	#ExpandButton {
+		width: 25px;
+		height: @ExpendButtonHeight;
+		vertical-align: middle;
+		transform: translateX(0px);
+
+		background-color: gradient(linear, 0% 0%, 70% 0%, from(#111111), to(#3b3b3b));
+		border-top-right-radius: 12px;
+		border-bottom-right-radius: 12px;
+
+		box-shadow: #000000AA 1px 1px 6px;
+
+		transition-property: background-color, opacity;
+		transition-delay: 0.0s;
+		transition-duration: 0.2s;
+		transition-timing-function: ease-in-out;
+
+		&:hover {
+
+			background-color: gradient(linear, 0% 0%, 70% 0%, from(#181818), to(#474747));
+		}
+	}
+}
+
+/** 工具标题 */
+.ControlPanelTitle {
+	width: 100%;
+	flow-children: right;
+	// background-color: #2d2f31;
+	box-shadow: fill #00000011 1px 1px 8px 1px;
+	margin: 12px 12px 0px 12px;
+	// padding: 4px;
+
+	.CategoryHeader {
+		// width: 100%;
+		margin: 0px 6px;
+		vertical-align: center;
+
+		// padding: 6px 6px 0px 6px;
+		.CategoryHeaderLabel {
+			font-size: 16px;
+			color: #fff;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+	}
+
+	.CategoryHeaderFilledFront {
+		width: fit-children;
+	}
+
+	.CategoryHeaderFilledNext {
+		width: fill-parent-flow(1);
+	}
+
+	.CategoryHeaderIcon {
+		vertical-align: bottom;
+		margin: 0px 2px;
+	}
+}
+
+// 分类容器
+.Category {
+	width: 100%;
+	flow-children: down;
+	background-color: gradient(linear, 0% 0%, 0% 100%, from(#2d2f31), to(hsv-transform(#2d2f31, 0.0, 1.0, 0.4)));
+	box-shadow: fill #00000011 1px 1px 8px 1px;
+	margin: 12px 12px 0px 12px;
+
+	.CategoryHeader {
+		width: 100%;
+		padding: 6px 6px 0px 6px;
+
+		.CategoryHeaderLabel {
+			font-size: 15px;
+			color: #fff;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+	}
+
+	.CategoryButtonContainer {
+		flow-children: down;
+		width: 100%;
+		padding: 3px 6px 3px 6px;
+	}
+}
+
+// 切换按钮
+ToggleButton {
+	width: fill-parent-flow(1.0);
+	margin: 2px 2px;
+	height: @ButtonHeight;
+}
+
+ToggleButton Label {
+	letter-spacing: 1px;
+	color: #D8DADE;
+	vertical-align: center;
+}
+
+// 下拉按钮
+.EOM_DropDown {
+	min-height: @ButtonHeight;
+	padding: 0px 10px;
+	margin: 2px 2px;
+	background-color: #3e4144;
+	border: 1px solid #4e5155;
+	border-radius: 0px;
+	width: fill-parent-flow(1.0);
+
+	&:hover {
+		background-color: gradient(linear, 0% 0%, 70% 0%, from(#676b70), to(#3e4144));
+		border: 1px solid #686b70;
+	}
+
+	&:hover Label {
+		color: #FFF;
+	}
+}
+
+.EOM_DropDownMenuItem {
+	min-height: @ButtonHeight;
+	min-height: @ButtonHeight;
+	padding: 0px 4px;
+	// padding-left: 10px;
+}
+
+// 文本输入按钮
+.DemoTextEntry {
+	.DemoButton();
+
+	&>Label {
+		margin-left: 8px;
+		margin-right: 4px;
+	}
+
+	TextEntry {
+		width: fill-parent-flow(1.0);
+		font-size: 16px;
+		padding: 0px 4px 0px 4px;
+		line-height: 22px;
+		border-width: 0px;
+
+	}
+}
+
+// 滑动条
+.DemoSlider {
+	margin: 2px 2px;
+	flow-children: down;
+
+	.Title {
+		width: fill-parent-flow(1.0);
+		font-size: 18px;
+		color: #7d8688;
+
+	}
+
+	.Value {
+		font-size: 18px;
+		color: #7d8688;
+	}
+}
+
+.EOM_SwitchContainer {
+	margin: 2px 2px;
+	width: fill-parent-flow(1.0);
+	height: @ButtonHeight;
+	padding: 1px 2px;
+
+	.EOM_Switch {
+		vertical-align: center;
+	}
+}
+
+// 普通按钮
+.DemoButton {
+	margin: 2px 2px;
+
+	background-color: #3e4144;
+	border: 1px solid #4e5155;
+
+	height: @ButtonHeight;
+	width: fill-parent-flow(1.0);
+
+	transition-property: background-color, border, color;
+	transition-duration: 0.15s;
+	transition-timing-function: linear;
+
+	&:disabled {
+		opacity: 0.25;
+	}
+
+	&>Label {
+		horizontal-align: center;
+		vertical-align: middle;
+		padding: 0px 4px;
+
+		color: #D8DADE;
+		font-size: 16px;
+		text-transform: uppercase;
+		font-family: defaultFont;
+		font-weight: normal;
+		text-overflow: shrink;
+		letter-spacing: 1px;
+	}
+
+	&:hover {
+		background-color: gradient(linear, 0% 0%, 70% 0%, from(#676b70), to(#3e4144));
+		border: 1px solid #686b70;
+
+		Label {
+
+			color: #FFF;
+		}
+	}
+
+	&:active {
+		background-color: #7E94B1;
+		pre-transform-scale2d: 1.02;
+	}
+
+	&.QuitButton {
+		background-color: #9E393C;
+		border: 1px solid #b64548;
+		box-shadow: 0px 0px 8px #6e070a00;
+
+		&:hover {
+			background-color: #da5458;
+			background-color: gradient(linear, 0% 0%, 70% 0%, from(#da5458), to(#9E393C));
+			border: 1px solid #da5458;
+			box-shadow: 0px 0px 8px #94080d3f;
+		}
+
+		&:active {}
+
+		background-color: gradient(linear, 0% 0%, 0% 100%, from(#aa8888), to(#ffaaaa));
+		pre-transform-scale2d: 1.02;
+	}
+
+	&.GreenButton {
+		background-color: #42705B;
+		border: 1px solid #4e9e7a;
+
+		transition-property: background-color, border;
+		transition-duration: 0.15s;
+		transition-timing-function: ease-in-out;
+
+		&:hover {
+			background-color: gradient(linear, 0% 0%, 70% 0%, from(#3cc486), to(#259c67));
+			border: 1px solid #3feb9d;
+		}
+	}
+
+
+	&.RedButton {
+		background-color: #6D4A4E;
+		border: 1px solid #9b6369;
+
+		transition-property: background-color, border;
+		transition-duration: 0.15s;
+		transition-timing-function: ease-in-out;
+
+		&:hover {
+			background-color: gradient(linear, 0% 0%, 70% 0%, from(#be4f5c), to(#913943));
+			border: 1px solid #eb5f70;
+		}
+	}
+}
+
+
+.EOM_IconButton {
+	wash-color: #9aa5a8;
+
+	&:hover {
+		wash-color: none;
+	}
+}
+
+.SelectionContainer {
+	align: center top;
+	margin-top: 200px;
+	background-color: gradient(linear, 0% 0%, 0% 25%, from(#23232666), to(#1c1d2066));
+	box-shadow: #00000099 0px 0px 8px 0px;
+	border: 2px solid #32383677;
+	opacity: 0.0;
+	transform: translateY(-60px);
+
+	transition-property: opacity, transform, width, height;
+	transition-duration: 0.2s;
+	// sound: "ui_settings_out_multi";
+}
+
+.SelectionContainer.Show {
+	opacity: 1.0;
+	transform: translateY(0px);
+	sound: "ui_rollover_micro";
+}
+
+#SelectionPicker {
+	flow-children: down;
+	width: 100%;
+	height: 100%;
+	transition-property: width, height;
+	transition-duration: 0.2s;
+
+	&.ThinSize {
+		width: 635px;
+		height: 360px;
+	}
+
+	&.UnitStat {
+		width: 400px;
+		height: 500px;
+	}
+
+	&.WidthSize {
+		width: 1700px;
+		height: 320px;
+	}
+
+	&.SettingSize {
+		width: 635px;
+		height: 700px;
+	}
+}
+
+#SelectionPickerHeader {
+	flow-children: right;
+	width: 100%;
+	// background-color: #232326;
+	background-color: gradient(linear, 0% 0%, 70% 0%, from(#111111), to(#222222));
+	padding: 8px 12px 8px 12px;
+
+	.FilterContainer {
+		vertical-align: center;
+
+		Label {
+			font-size: 18px;
+			padding-left: 12px;
+			vertical-align: center;
+			color: white;
+			background-color: #181818dd;
+			border: 2px solid #222222;
+			box-shadow: #000000aa 0px 0px 8px 0px;
+		}
+	}
+
+	#SelectionTitle {
+		text-align: left;
+		text-overflow: shrink;
+		font-size: 22px;
+		color: #bfd2ee;
+		vertical-align: middle;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+	}
+
+	DropDown {
+		width: 140px;
+		vertical-align: center;
+
+		ToggleButton {
+			vertical-align: center;
+			padding: 0px;
+
+			Label {
+				margin-left: 4px;
+			}
+		}
+	}
+
+	.EOM_IconButton {
+		vertical-align: center;
+		margin: 0px 4px;
+	}
+
+	.SearchBox {
+		flow-children: right;
+		// background-color: black;
+		vertical-align: center;
+		margin-right: 12px;
+
+		#SelectionSearchTextEntry {
+			width: 160px;
+			font-size: 16px;
+			// padding: 0px 4px 0px 4px;
+			// line-height: 22px;
+			// border-width: 0px;
+			height: 32px;
+			border-left-width: 0px;
+			padding-top: 7px;
+
+			Label {
+				margin-top: 0px;
+				font-size: 16px;
+			}
+		}
+
+		.EOM_DropDown {
+			min-height: 32px;
+			padding: 0px 10px;
+			margin: 0px;
+			background-color: #3e4144;
+			border: 1px solid #4e5155;
+			border-radius: 0px;
+			width: fit-children;
+			// width: fill-parent-flow(1.0);
+
+			&:hover {
+				background-color: gradient(linear, 0% 0%, 70% 0%, from(#676b70), to(#3e4144));
+				border: 1px solid #686b70;
+			}
+
+			&:hover Label {
+				color: #FFF;
+			}
+		}
+	}
+}
+
+#SelectionList {
+	// width: 100%;
+	// overflow: squish scroll;
+	// padding: 16px 12px 0px 12px;
+
+	// flow-children: right-wrap;
+	width: 100%;
+	height: 100%;
+	// overflow: squish scroll;
+	padding: 6px;
+}
+
+#CustomSelectionList {
+	width: 100%;
+	height: 100%;
+	// overflow: squish scroll;
+	padding: 6px;
+
+	// flow-children: right-wrap;
+}
+
+.CodeModeLabel {
+	wash-color: #9aa5a8;
+
+	&:hover {
+		wash-color: white;
+	}
+
+	&>TextButton {
+		align: center center;
+
+		Label {
+			font-size: 21px;
+			font-weight: bold;
+			color: white;
+		}
+
+		&:not(:disabled):active {
+			brightness: 0.5;
+			sound: "ui_generic_button_click";
+		}
+	}
+}
+
+.LockIconButton {
+
+	&.Unlock {
+		clip: radial(50% 48%, 90deg, 310deg);
+	}
+}
+
+#ToggleSize {
+	background-color: none;
+	border-width: 0px;
+
+	#EOM_DropDown_arrow {
+		opacity: 0;
+	}
+}
+
+.EOM_DebugTool_AbilityPicker {
+	.EOM_DebugTool_AbilityPickerItem {
+		margin: 6px;
+		transition-property: brightness, saturation, opacity;
+		transition-duration: 0.1s;
+		// border-radius: 4px;
+
+
+		&:enabled:hover {
+			brightness: 2;
+			// background-color: #00000066;
+		}
+
+		&:enabled:active {
+			brightness: 0.5;
+			sound: "ui_generic_button_click";
+		}
+
+		&:disabled {
+			saturation: 0.0;
+			opacity: 0.2;
+		}
+
+		.DOTAAbilityImage,
+		DOTAAbilityImage {
+			width: 64px;
+			height: width-percentage(100%);
+			margin-bottom: 8px;
+			border: 1px solid black;
+		}
+
+		DOTAItemImage {
+			width: 60px;
+			height: width-percentage(75%);
+			margin-bottom: 8px;
+			border: 1px solid black;
+		}
+
+		DOTAHeroImage {
+			width: 58px;
+			height: 76px;
+			margin-bottom: 8px;
+			border: 1px solid black;
+		}
+
+		.EOM_DebugTool_AbilityPickerItemName {
+			width: 100%;
+			height: 20px;
+			color: #ffffff;
+			text-align: center;
+			text-overflow: shrink;
+			text-shadow: 0px 1px 2px 3 #00000066;
+		}
+	}
+}
+
+.EOM_DebugTool_TextPicker {
+	.EOM_DebugTool_TextPickerItem {
+		.DemoButton();
+		width: 160px;
+	}
+}
+
+#EOM_DebugTool_Setting {
+	background-color: gradient(linear, 0% 0%, 0% 25%, from(#232326), to(#1c1d20));
+
+	#SelectionPickerHeader {
+		background-color: #111111;
+
+	}
+
+	.SettingsSection {
+		flow-children: down;
+		width: 100%;
+		margin-top: 12px;
+	}
+
+	.SectionHeaderAlignRight {
+		width: 100%;
+	}
+
+	.SectionHeader {
+		font-size: 24px;
+		font-weight: thin;
+		color: #939da0;
+		text-transform: uppercase;
+	}
+
+	.SectionHeaderLine {
+		height: 2px;
+		width: 100%;
+		margin: 2px;
+		background-color: #3b3f40;
+		margin-bottom: 12px;
+	}
+
+	.AddNewKeyBind {
+		Label {
+			font-size: 18px;
+		}
+	}
+}
+
+.CanRemoveKeyBind {
+	.EOM_Image {
+		width: 0px;
+		height: 28px;
+		opacity: 0;
+		transition-property: opacity, width;
+		transition-duration: 0.15s;
+	}
+
+	&.deleteMode {
+		.EOM_Image {
+			width: 28px;
+			opacity: 1;
+		}
+	}
+}

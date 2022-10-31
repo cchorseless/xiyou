@@ -5,10 +5,25 @@ import { CSSHelper } from "../../../helper/CSSHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 
+type CC_PanelScroll = "clip" | "noclip" | "none" | "squish" | "scroll";
+
 interface ICCPanelProps extends NodePropsData {
+    /** 宽 */
+    width?: "fit-children" | `fill-parent-flow(${number})` | `height-percentage(${number}%)` | `${number}px` | `${number}%` | string;
+    /** 高 */
+    height?: "fit-children" | `fill-parent-flow(${number})` | `width-percentage(${number}%)` | `${number}px` | `${number}%` | string;
+    /** 子元素排列方式 */
+    flowChildren?: "right" | "right-wrap" | "down" | "down-wrap" | "left" | "left-wrap" | "up" | "up-wrap" | "none" | undefined,
+    /** 对齐方式 */
+    verticalAlign?: "top" | "bottom" | "middle" | "center",
+    horizontalAlign?: "left" | "right" | "middle" | "center",
+    align?: "left top" | "left center" | "left bottom" | "center top" | "center center" | "center bottom" | "right top" | "right center" | "right bottom",
+    /**文本tooltip */
     tooltip?: string;
-    titleTooltip?: { title: string; tip: string }
-    titleDialog?: JSX.Element;
+    titleTooltip?: { title: string; tip: string };
+    dialogTooltip?: { tipTypeClass: typeof CCPanel, props?: NodePropsData | any, layoutleftRight?: boolean };
+    /** 滚动方向 */
+    scroll?: "x" | "y" | "both" | CC_PanelScroll | [CC_PanelScroll, CC_PanelScroll] | undefined,
 }
 export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<ICCPanelProps & T & Omit<PanelAttributes, "ref">, P>{
     constructor(props: any) {
@@ -23,7 +38,7 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
 
     initRootAttrs() {
         let r: any = { style: {} };
-        let ignoreKey = ["style", "children", "tooltip", "titleTooltip", "titleDialog"];
+        let ignoreKey = ["style", "children"];
         let _defaultstyle = this.defaultStyle();
         if (_defaultstyle) {
             for (let k in _defaultstyle) {
@@ -49,16 +64,59 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
         if (clsname != "") {
             r.className = clsname;
         }
-        if (r.tooltip || r.titleTooltip) {
+        if (r.scroll) {
+            switch (r.scroll) {
+                case "x":
+                    r.style.overflow = "scroll squish";
+                    break;
+                case "y":
+                    r.style.overflow = "squish scroll";
+                    break;
+                case "both":
+                    r.style.overflow = "scroll scroll";
+                    break;
+                case "none" || ["none", "none"]:
+                    r.style.overflow = "squish squish";
+                    break;
+                default:
+                    break;
+            }
+            delete r.scroll;
+        }
+        if (r.tooltip || r.titleTooltip || r.dialogTooltip) {
             r.onmouseover = (self: P) => {
                 if (this.props.onmouseover != undefined) {
                     this.props.onmouseover(self);
                 }
                 if (r.tooltip) {
-
+                    $.DispatchEvent("DOTAShowTextTooltip", self, r.tooltip);
                 }
-                // CCPanel.GetInstanceByName<CCMainPanel>("CCMainPanel")?.AddTextToolTip(self, () => r.tooltip)
+                else if (r.titleTooltip) {
+                    $.DispatchEvent("DOTAShowTitleTextTooltip", self, r.titleTooltip.title, r.titleTooltip.tip);
+                }
+                else if (r.dialogTooltip) {
+                    let ccMainPanel = CCPanel.GetInstanceByName<CCMainPanel>("CCMainPanel");
+                    ccMainPanel.ShowCustomToolTip(self, r.dialogTooltip);
+                }
+            };
+            r.onmouseout = (self: Panel) => {
+                if (this.props.onmouseout != undefined) {
+                    this.props.onmouseout(self);
+                }
+                if (r.tooltip) {
+                    $.DispatchEvent("DOTAHideTextTooltip", self, r.tooltip);
+                }
+                else if (r.titleTooltip) {
+                    $.DispatchEvent("DOTAHideTitleTextTooltip", self, r.titleTooltip.title, r.titleTooltip.tip);
+                }
+                else if (r.dialogTooltip) {
+                    let ccMainPanel = CCPanel.GetInstanceByName<CCMainPanel>("CCMainPanel");
+                    ccMainPanel.HideToolTip();
+                }
             }
+        }
+        if (Object.keys(r.style).length == 0) {
+            delete r.style;
         }
         return r;
     }

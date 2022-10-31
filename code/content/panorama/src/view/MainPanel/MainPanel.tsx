@@ -13,8 +13,6 @@ import { ChallengeShopItem } from "../Challenge/ChallengeShopItem";
 import { CombinationBottomPanel } from "../Combination/CombinationBottomPanel";
 import { DacBoardPanelV0 } from "../Common/DacBoardPanelV0";
 import { DebugPanel } from "../debugPanel/DebugPanel";
-import { ShopTopRightPanel } from "../Shop/ShopTopRightPanel";
-import { TopBarPanel } from "../TopBarPanel/TopBarPanel";
 import { MainPanel_UI } from "./MainPanel_UI";
 export class MainPanel extends MainPanel_UI<NodePropsData> {
     // 初始化数据
@@ -29,7 +27,6 @@ export class MainPanel extends MainPanel_UI<NodePropsData> {
     }
 
     onRefreshUI() {
-        this.addOnlyOneNodeChild(this.NODENAME.panel_base, TopBarPanel);
         this.addOnlyOneNodeChild(this.NODENAME.panel_base, CombinationBottomPanel, {
             horizontalAlign: "center",
             verticalAlign: "bottom",
@@ -44,13 +41,7 @@ export class MainPanel extends MainPanel_UI<NodePropsData> {
             horizontalAlign: "right",
             verticalAlign: "bottom",
         } as any);
-        this.addOnlyOneNodeChild(this.NODENAME.panel_base, ShopTopRightPanel, {
-            horizontalAlign: "left",
-            verticalAlign: "top",
-            marginTop: "100px",
-            marginLeft: "10px",
-            // className: "InventoryItem"
-        } as any);
+
         // 小地图
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, CustomMiniMap, {
             horizontalAlign: "left",

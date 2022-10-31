@@ -3,6 +3,7 @@ import React, { createRef, PureComponent } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { ToolTipHelper } from "../../helper/ToolTipHelper";
 import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
+import { CCMiniMap } from "../allCustomUIElement/CCMiniMap/CCMiniMap";
 import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { ShopPanel } from "../Shop/ShopPanel";
@@ -11,25 +12,20 @@ import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
 
 export class CCMainPanel extends CCPanel<NodePropsData> {
     __root__: React.RefObject<Panel>;
-    btn_debug: React.RefObject<Button>;
     panel_base: React.RefObject<Panel>;
     panel_allpanel: React.RefObject<Panel>;
     panel_alldialog: React.RefObject<Panel>;
-    NODENAME = { __root__: '__root__', btn_debug: 'btn_debug', panel_base: 'panel_base', panel_allpanel: 'panel_allpanel', panel_alldialog: 'panel_alldialog', };
+    NODENAME = { __root__: '__root__', panel_base: 'panel_base', panel_allpanel: 'panel_allpanel', panel_alldialog: 'panel_alldialog', };
 
     constructor(props: NodePropsData) {
         super(props);
         this.__root__ = createRef<Panel>();
-        this.btn_debug = createRef<Button>();
         this.panel_base = createRef<Panel>();
         this.panel_allpanel = createRef<Panel>();
         this.panel_alldialog = createRef<Panel>();
 
     };
-    __root___isValid: boolean = true;
-    __root___childs: Array<JSX.Element> = [];
-    btn_debug_isValid: boolean = true;
-    btn_debug_childs: Array<JSX.Element> = [];
+
     panel_base_isValid: boolean = true;
     panel_base_childs: Array<JSX.Element> = [];
     panel_allpanel_isValid: boolean = true;
@@ -37,17 +33,10 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     panel_alldialog_isValid: boolean = true;
     panel_alldialog_childs: Array<JSX.Element> = [];
 
-    defaultClass = () => { return "CC_root" }
-
     render() {
         return (
             this.__root___isValid &&
-            <Panel ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
-                {this.btn_debug_isValid &&
-                    <Button ref={this.btn_debug} onactivate={this.onbtn_click} className="CommonButton"  >
-                        {this.btn_debug_childs}
-                    </Button>
-                }
+            <Panel ref={this.__root__} className="CC_root" hittest={false} {...this.initRootAttrs()}>
                 {this.panel_base_isValid &&
                     <Panel ref={this.panel_base} className="CC_root" hittest={false}>
                         <CCMenuNavigation
@@ -55,6 +44,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                             onToggle={this.onMenuNavigationToggle} />
                         <CCTopBarCenter />
                         <CCTopBarGameCoin />
+                        <CCMiniMap />
                         {this.panel_base_childs}
                     </Panel>
                 }
@@ -68,7 +58,6 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         {this.panel_alldialog_childs}
                     </Panel>
                 }
-
                 {this.props.children}
                 {this.__root___childs}
             </Panel>
@@ -89,10 +78,6 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         }
     }
 
-    onbtn_click = () => {
-        // this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, DebugPanel);
-        // this.updateSelf();
-    };
 
     public stagePos(panel: Panel) {
         let position = { x: 0, y: 0 };
@@ -105,10 +90,86 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         position.y = position.y / (this.__root__.current!.actualuiscale_y || 1);
         return position;
     }
-
+    //#region tooltips
     private CustomToolTip: BaseEasyPureComponent | null;
     private HideToolTipFunc: (() => void) | null;
-    public AddCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = false) {
+    /**显示tooltip弹窗 */
+    public async ShowCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, dialoginfo: { tipTypeClass: T, props: M | any, layoutleftRight: boolean }) {
+        if (bindpanel == null || !bindpanel.IsValid()) { return };
+        if (dialoginfo.tipTypeClass == null) { return };
+        let tipTypeClass = dialoginfo.tipTypeClass;
+        let obj = dialoginfo.props || {};
+        let layoutleftRight = dialoginfo.layoutleftRight || false;
+        let isinrange = false;
+        const offset = 20;
+        let brightness = Number(bindpanel.style.brightness) || 1;
+        bindpanel.style.brightness = brightness + 0.5 + "";
+        let newtip = await this.addNodeChildAsyncAt<M, T>(this.NODENAME.panel_alldialog, tipTypeClass, obj);
+        if (!isinrange) {
+            newtip.close();
+            return;
+        }
+        if (this.CustomToolTip) {
+            this.CustomToolTip.close();
+            this.CustomToolTip = null;
+        }
+        this.CustomToolTip = newtip;
+        let pos = this.stagePos(bindpanel);
+        let panelsize = CSSHelper.getPanelSize(bindpanel);
+        let panelwidth = panelsize[0];
+        let panelheight = panelsize[1];
+        let windowsize = CSSHelper.getPanelSize(this.__root__.current!);
+        let windowwidth = windowsize[0];
+        let windowheight = windowsize[1];
+        let isleft = pos.x <= windowwidth / 2;
+        let istop = pos.y <= windowheight / 2;
+        let dialogpanel = this.CustomToolTip!.__root__.current!;
+        dialogpanel.visible = false;
+        let posdialog = { x: 0, y: 0 };
+        let size = CSSHelper.getPanelSize(dialogpanel)
+        let dialogwidth = size[0];
+        let dialogheight = size[1];
+        if (layoutleftRight) {
+            if (isleft) {
+                posdialog.x = pos.x + panelwidth + offset;
+            }
+            else {
+                posdialog.x = pos.x - dialogwidth - offset;
+            }
+            posdialog.y = pos.y + panelheight / 2 - dialogheight / 2;
+            if (posdialog.y < 0) {
+                posdialog.y = 0;
+            }
+            else if (posdialog.y + dialogheight > windowheight) {
+                posdialog.y = windowheight - dialogheight;
+            }
+        }
+        else {
+            if (istop) {
+                posdialog.y = pos.y + panelheight + offset;
+            }
+            else {
+                posdialog.y = pos.y - dialogheight - offset;
+            }
+            posdialog.x = pos.x + panelwidth / 2 - dialogwidth / 2;
+            if (posdialog.x < 0) {
+                posdialog.x = 0;
+            }
+        }
+        dialogpanel.SetPositionInPixels(posdialog.x, posdialog.y, 0);
+        dialogpanel.visible = true;
+        this.HideToolTipFunc = () => {
+            isinrange = false;
+            bindpanel.style.brightness = brightness + "";
+            if (this.CustomToolTip) {
+                this.CustomToolTip.close();
+                this.CustomToolTip = null;
+                this.updateSelf();
+            }
+        };
+    }
+    /**注册tooltip弹窗事件 */
+    public RegCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = false) {
         if (bindpanel == null || !bindpanel.IsValid()) { return };
         let isinrange = false;
         const offset = 20;
@@ -191,7 +252,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         };
         bindpanel.SetPanelEvent('onmouseout', hideFunc)
     }
-    public AddTextToolTip(bindpanel: Panel, attrFunc: (() => string | void)) {
+    public RegTextToolTip(bindpanel: Panel, attrFunc: (() => string | void)) {
         if (!bindpanel) { return };
         let tipType = ToolTipHelper.ToolTipType.DOTAShowTextTooltip;
         let brightness = Number(bindpanel.style.brightness) || 1;
@@ -209,7 +270,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         }
         bindpanel.SetPanelEvent('onmouseout', hideFunc)
     }
-    public AddTitleTextToolTip(bindpanel: Panel, attrFunc: (() => { title: string, tip: string } | void)) {
+    public RegTitleTextToolTip(bindpanel: Panel, attrFunc: (() => { title: string, tip: string } | void)) {
         if (!bindpanel) { return };
         let tipType = ToolTipHelper.ToolTipType.DOTAShowTitleTextTooltip;
         let brightness = Number(bindpanel.style.brightness) || 1;
@@ -227,12 +288,16 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         };
         bindpanel.SetPanelEvent('onmouseout', hideFunc)
     }
+    /**隐藏tooltip弹窗事件 */
     public HideToolTip() {
         if (this.HideToolTipFunc) {
             this.HideToolTipFunc();
             this.HideToolTipFunc = null;
         }
     }
+    //#endregion
+
+
     private allPanelInMain: { [k: string]: BaseEasyPureComponent } = {};
     async addOnlyPanel<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeType: T, zorder: number, nodeData: M | any = {}) {
         for (let k of Object.keys(this.allPanelInMain)) {
