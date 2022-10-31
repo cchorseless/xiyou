@@ -8,7 +8,6 @@ import { EventHelper } from "../helper/EventHelper";
 import { LogHelper } from "../helper/LogHelper";
 import { PrecacheHelper } from "../helper/PrecacheHelper";
 import { TimerHelper } from "../helper/TimerHelper";
-import { BaseEasyPureComponent } from "../libs/BasePureComponent";
 import { GameEnum } from "../libs/GameEnum";
 import { Minimap_plus } from "./alldota2/minimap_plus/Minimap_plus";
 import { EntityOverHeadPanel } from "./Common/EntityOverHeadPanel";
@@ -18,38 +17,28 @@ import { CCMenuNavigation } from "./allCustomUIElement/CCNavigation/CCMenuNaviga
 import { CCLabel } from "./allCustomUIElement/CCLabel/CCLabel";
 import { CCAvatar } from "./allCustomUIElement/CCAvatar/CCAvatar";
 import { CCMainPanel } from "./MainPanel/CCMainPanel";
+import { CCPanel } from "./allCustomUIElement/CCPanel/CCPanel";
 
-export class RootPanel extends BaseEasyPureComponent {
-    __root__: React.RefObject<Panel>;
+export class RootPanel extends CCPanel {
     /**全局根节点实例 */
     static instance: RootPanel;
-    constructor(props: any) {
-        super(props);
-        this.__root__ = createRef<Panel>();
-    }
+
     // 初始化数据
-    componentDidMount() {
-        super.componentDidMount();
+    onStartUI() {
         RootPanel.instance = this;
         // 摄像机高度
         GameUI.SetCameraDistance(1200);
         // GameUI.SetCameraPitchMax(55);
-        this.updateSelf();
     }
-    componentWillUnmount() {
-        super.componentWillUnmount();
+    onDestroy() {
         (RootPanel.instance as any) = null;
     }
 
-    __root___isValid: boolean = true;
-    __root___attrs: PanelAttributes = {};
-    __root___childs: Array<JSX.Element> = [];
     render() {
         return (
             this.__root___isValid && (
-                <Panel ref={this.__root__} key="compId_1" className="root" {...this.__root___attrs}>
+                <Panel ref={this.__root__} className="CC_root" {...this.initRootAttrs()}>
                     {/* <EntityOverHeadPanel /> */}
-                    {/* <MainPanel /> */}
                     <CCMainPanel />
                     {this.props.children}
                     {this.__root___childs}

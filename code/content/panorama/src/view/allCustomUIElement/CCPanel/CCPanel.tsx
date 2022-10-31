@@ -7,6 +7,13 @@ import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 
 type CC_PanelScroll = "clip" | "noclip" | "none" | "squish" | "scroll";
 
+
+interface dialogTooltipInfo<M extends NodePropsData, T extends typeof CCPanel<M>> {
+    tipTypeClass: T,
+    props?: M | any,
+    layoutleftRight?: boolean
+}
+
 interface ICCPanelProps extends NodePropsData {
     /** 宽 */
     width?: "fit-children" | `fill-parent-flow(${number})` | `height-percentage(${number}%)` | `${number}px` | `${number}%` | string;
@@ -21,7 +28,7 @@ interface ICCPanelProps extends NodePropsData {
     /**文本tooltip */
     tooltip?: string;
     titleTooltip?: { title: string; tip: string };
-    dialogTooltip?: { tipTypeClass: typeof CCPanel, props?: NodePropsData | any, layoutleftRight?: boolean };
+    dialogTooltip?: dialogTooltipInfo<any, any>;
     /** 滚动方向 */
     scroll?: "x" | "y" | "both" | CC_PanelScroll | [CC_PanelScroll, CC_PanelScroll] | undefined,
 }
@@ -85,9 +92,6 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
         }
         if (r.tooltip || r.titleTooltip || r.dialogTooltip) {
             r.onmouseover = (self: P) => {
-                if (this.props.onmouseover != undefined) {
-                    this.props.onmouseover(self);
-                }
                 if (r.tooltip) {
                     $.DispatchEvent("DOTAShowTextTooltip", self, r.tooltip);
                 }
@@ -96,22 +100,19 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
                 }
                 else if (r.dialogTooltip) {
                     let ccMainPanel = CCPanel.GetInstanceByName<CCMainPanel>("CCMainPanel");
-                    ccMainPanel.ShowCustomToolTip(self, r.dialogTooltip);
+                    ccMainPanel?.ShowCustomToolTip(self, r.dialogTooltip);
                 }
             };
             r.onmouseout = (self: Panel) => {
-                if (this.props.onmouseout != undefined) {
-                    this.props.onmouseout(self);
-                }
                 if (r.tooltip) {
-                    $.DispatchEvent("DOTAHideTextTooltip", self, r.tooltip);
+                    $.DispatchEvent("DOTAHideTextTooltip", self);
                 }
                 else if (r.titleTooltip) {
-                    $.DispatchEvent("DOTAHideTitleTextTooltip", self, r.titleTooltip.title, r.titleTooltip.tip);
+                    $.DispatchEvent("DOTAHideTitleTextTooltip", self);
                 }
                 else if (r.dialogTooltip) {
                     let ccMainPanel = CCPanel.GetInstanceByName<CCMainPanel>("CCMainPanel");
-                    ccMainPanel.HideToolTip();
+                    ccMainPanel?.HideToolTip();
                 }
             }
         }

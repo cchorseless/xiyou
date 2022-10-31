@@ -18,17 +18,6 @@ export class PlayerInTeamItem extends PlayerInTeamItem_UI<IProps> {
 		// 玩家名字
 		this.lbl_playerName.current!.text = Players.GetPlayerName(playerID);
 	};
-	/**
-	 *更新渲染
-	 * @param prevProps 上一个状态的 props
-	 * @param prevState
-	 * @param snapshot
-	 */
-	componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
-		super.componentDidUpdate(prevProps, prevState, snapshot);
-	};
-	// 销毁
-	componentWillUnmount() {
-		super.componentWillUnmount();
-	};
+
+
 }

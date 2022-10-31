@@ -13,7 +13,7 @@ export class CCHealthMana extends CCPanel<IHealthMana> {
             this.__root___isValid && (
                 <Panel
                     id="BuffContainer"
-                    key="compId_1" className="root" ref={this.__root__}  {...this.initRootAttrs()}>
+                    className="root" ref={this.__root__}  {...this.initRootAttrs()}>
                     <GenericPanel type="DOTAHealthMana" id="health_mana" style={{ flowChildren: "right-wrap", width: "100%" }} />
                     {this.props.children}
                     {this.__root___childs}

@@ -15,16 +15,13 @@ export class CCShopPanel<T extends NodePropsData> extends CCPanel<T> {
     lbl_metastone: React.RefObject<LabelPanel>;
     NODENAME = { __root__: '__root__', };
 
-    constructor(props: T) {
-        super(props);
-        this.__root__ = createRef<Panel>();
+
+    onInitUI() {
         this.btn_gohome = createRef<ImagePanel>();
         this.btn_goback = createRef<ImagePanel>();
         this.lbl_starstone = createRef<LabelPanel>();
         this.lbl_metastone = createRef<LabelPanel>();
-        this.onInitUI()
-    };
-
+    }
     __root___isValid: boolean = true;
     __root___childs: Array<JSX.Element> = [];
     btn_gohome_isValid: boolean = true;

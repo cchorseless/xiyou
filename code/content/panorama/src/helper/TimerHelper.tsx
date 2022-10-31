@@ -215,11 +215,11 @@ export module TimerHelper {
             if (bindObj == null) {
                 return;
             }
-            for (let i = this.mNotUseTimerTasks.length - 1; i > -1; i--) {
-                if (this.mNotUseTimerTasks[i].IsBind(bindObj)) {
-                    this.mNotUseTimerTasks[i].Clear();
+            ([] as TimerTask[]).concat(this.mUseTimerTasks).forEach(task => {
+                if (task.IsBind(bindObj)) {
+                    task.Clear();
                 }
-            }
+            });
         }
         public Update(interval: number) {
             for (let i = 0; i < this.mUseTimerTasks.length; ++i) {

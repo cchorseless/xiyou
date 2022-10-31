@@ -1,29 +1,35 @@
 
 import React, { createRef, PureComponent } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { LogHelper } from "../../helper/LogHelper";
 import { ToolTipHelper } from "../../helper/ToolTipHelper";
 import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
-import { CCMiniMap } from "../allCustomUIElement/CCMiniMap/CCMiniMap";
+import { CCAbilityList } from "../allCustomUIElement/CCAbility/CCAbilityList";
+import { CCBuffList } from "../allCustomUIElement/CCBuffList/CCBuffList";
+import { CCHealthMana } from "../allCustomUIElement/CCHealthMana/CCHealthMana";
+import { CCInventory } from "../allCustomUIElement/CCInventory/CCInventory";
 import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPortraitGroup } from "../allCustomUIElement/CCPortrait/CCPortrait";
+import { CCUnitStats } from "../allCustomUIElement/CCUnitStats/CCUnitStats";
+import { CustomPortraitGroup } from "../alldota2/ui_element/CustomPortraitGroup";
+import { CombinationIconItem } from "../Combination/CombinationIconItem";
+import { CombinationInfoDialog } from "../Combination/CombinationInfoDialog";
+import { CCDacBoardPanel } from "../DacBoard/CCDacBoardPanel";
 import { ShopPanel } from "../Shop/ShopPanel";
 import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
 
 
 export class CCMainPanel extends CCPanel<NodePropsData> {
-    __root__: React.RefObject<Panel>;
     panel_base: React.RefObject<Panel>;
     panel_allpanel: React.RefObject<Panel>;
     panel_alldialog: React.RefObject<Panel>;
     NODENAME = { __root__: '__root__', panel_base: 'panel_base', panel_allpanel: 'panel_allpanel', panel_alldialog: 'panel_alldialog', };
 
-    constructor(props: NodePropsData) {
-        super(props);
-        this.__root__ = createRef<Panel>();
+    onInitUI() {
         this.panel_base = createRef<Panel>();
         this.panel_allpanel = createRef<Panel>();
         this.panel_alldialog = createRef<Panel>();
-
     };
 
     panel_base_isValid: boolean = true;
@@ -44,7 +50,13 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                             onToggle={this.onMenuNavigationToggle} />
                         <CCTopBarCenter />
                         <CCTopBarGameCoin />
-                        <CCMiniMap />
+                        {/* <CCDacBoardPanel /> */}
+                        <CustomPortraitGroup particleAttrs={{}} />
+                        {/* <CCAbilityList /> */}
+                        {/* <CCHealthMana />
+                        <CCInventory />
+                        <CCUnitStats />
+                        <CCBuffList /> */}
                         {this.panel_base_childs}
                     </Panel>
                 }
@@ -100,19 +112,16 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         let tipTypeClass = dialoginfo.tipTypeClass;
         let obj = dialoginfo.props || {};
         let layoutleftRight = dialoginfo.layoutleftRight || false;
-        let isinrange = false;
+        let isinrange = true;
         const offset = 20;
         let brightness = Number(bindpanel.style.brightness) || 1;
         bindpanel.style.brightness = brightness + 0.5 + "";
         let newtip = await this.addNodeChildAsyncAt<M, T>(this.NODENAME.panel_alldialog, tipTypeClass, obj);
         if (!isinrange) {
-            newtip.close();
+            newtip?.close();
             return;
         }
-        if (this.CustomToolTip) {
-            this.CustomToolTip.close();
-            this.CustomToolTip = null;
-        }
+        this.HideToolTip();
         this.CustomToolTip = newtip;
         let pos = this.stagePos(bindpanel);
         let panelsize = CSSHelper.getPanelSize(bindpanel);

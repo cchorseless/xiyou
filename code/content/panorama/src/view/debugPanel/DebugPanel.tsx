@@ -11,16 +11,7 @@ export class DebugPanel extends DebugPanel_UI<NodePropsData> {
 	componentDidMount() {
 		super.componentDidMount()
 	};
-	// 更新渲染
-	/**
-	 *
-	 * @param prevProps 上一个状态的 props
-	 * @param prevState
-	 * @param snapshot
-	 */
-	componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
-		super.componentDidUpdate(prevProps, prevState, snapshot)
-	};
+
 	onClick_tips = () => {
 		TipsHelper.showTips('双击有效', this)
 	}

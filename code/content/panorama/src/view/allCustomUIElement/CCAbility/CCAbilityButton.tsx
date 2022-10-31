@@ -11,8 +11,7 @@ interface ICCAbilityButton {
 export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
     AbilityImage: React.RefObject<AbilityImage>;
 
-    constructor(props: any) {
-        super(props);
+    onInitUI() {
         this.AbilityImage = createRef<AbilityImage>();
     }
 

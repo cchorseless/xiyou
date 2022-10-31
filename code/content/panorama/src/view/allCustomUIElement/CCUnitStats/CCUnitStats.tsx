@@ -10,21 +10,15 @@ export class CCUnitStats extends CCPanel<ICCUnitStats>  {
     stats_container: React.RefObject<Panel>;
     NODENAME = { __root__: "__root__", stats_container: "stats_container" };
 
-    constructor(props: any) {
-        super(props);
+    onInitUI() {
         this.__root__ = createRef<Panel>();
         this.stats_container = createRef<Panel>();
     }
-    CSS_0_0: Partial<VCSSStyleDeclaration> = {};
-
-    __root___isValid: boolean = true;
-    __root___attrs: PanelAttributes = {};
-    __root___childs: Array<JSX.Element> = [];
 
     render() {
         return (
             this.__root___isValid && (
-                <Panel key="compId_1" className="root" ref={this.__root__} style={this.CSS_0_0} {...this.props} {...this.__root___attrs}>
+                <Panel className="CC_root" ref={this.__root__}  {...this.initRootAttrs()}>
                     <Panel id="stats_container" ref={this.stats_container} hittest={false}>
                         <Panel id="stats_container_bg" hittest={false} />
                         <Panel id="HUDSkinStatBranchBG" className="hud_skinnable" hittest={false} />

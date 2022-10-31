@@ -7,7 +7,6 @@ interface ICCMiniMap extends NodePropsData {
 }
 
 export class CCMiniMap extends CCPanel<ICCMiniMap> {
-    NODENAME = { __root__: "__root__" };
 
     defaultStyle = () => {
         return {
@@ -15,7 +14,7 @@ export class CCMiniMap extends CCPanel<ICCMiniMap> {
             borderRadius: "5px",
             horizontalAlign: "left",
             verticalAlign: "bottom",
-        }
+        } as any;
     }
 
     render() {

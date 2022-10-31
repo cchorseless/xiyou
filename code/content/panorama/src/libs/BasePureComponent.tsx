@@ -186,7 +186,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         let _childsName = this.getNode_childs_Name(nodeName);
         let parentNode: Array<JSX.Element> = (this as any)[_childsName];
         if (parentNode == null) {
-            throw Error(this.constructor.name + " dont have node : " + nodeName);
+            throw new Error(this.constructor.name + " dont have node : " + nodeName);
         }
         let node = createElement(nodeType, nodeData) as any as ReactElement;
         BasePureComponentSystem.RegisterReactElement(node, true, this, _childsName);
@@ -204,7 +204,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     public removeNodeChild(_childsName: string, node: ReactElement) {
         let parentNode: Array<JSX.Element> = (this as any)[_childsName];
         if (parentNode == null) {
-            throw Error(this.constructor.name + " dont have node : " + _childsName);
+            throw new Error(this.constructor.name + " dont have node : " + _childsName);
         }
         let index = 0;
         for (let i = 0; i < parentNode.length; i++) {
@@ -214,7 +214,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             }
         }
         if (index == -1) {
-            throw Error(_childsName + " dont have this node");
+            throw new Error(_childsName + " dont have this node");
         } else {
             parentNode.splice(index, 1);
             parentNode = parentNode.concat([]);
@@ -264,7 +264,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         let _childsName = this.getNode_childs_Name(nodeName);
         let parentNode: Array<JSX.Element> = (this as any)[_childsName];
         if (parentNode == null) {
-            throw Error(this.constructor.name + " dont have node : " + nodeName);
+            throw new Error(this.constructor.name + " dont have node : " + nodeName);
         }
         let len = parentNode.length;
         let r: InstanceType<T>[] = [];
@@ -328,7 +328,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         let r: T[] = [];
         for (let k in BasePureComponentSystem.AllBasePureComp) {
             if (BasePureComponentSystem.AllBasePureComp[k].constructor.name == name) {
-                r.push(BasePureComponentSystem.AllBasePureComp[k] as T);
+                r.push(BasePureComponentSystem.AllBasePureComp[k] as any);
             }
         }
         if (r && r.length == 1) {
@@ -361,15 +361,11 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     public destroy() {
         this.onDestroy();
         if (this.__root__ && this.__root__.current) {
-            // 优先从父节点删除
-            let parent = this.__root__.current.GetParent();
-            if (parent) {
-                let nodeinfo = BasePureComponentSystem.GetReactElement(this.InstanceId);
-                if (nodeinfo) {
-                    nodeinfo.Domain.removeNodeChild(nodeinfo.NodeParentName, nodeinfo.Node);
-                    nodeinfo.Domain.updateSelf();
-                    return;
-                }
+            let nodeinfo = BasePureComponentSystem.GetReactElement(this.InstanceId);
+            if (nodeinfo) {
+                nodeinfo.Domain.removeNodeChild(nodeinfo.NodeParentName, nodeinfo.Node);
+                nodeinfo.Domain.updateSelf();
+                return;
             }
             // 无法从父节点删除，就直接删除自己
             // 警告：并没有销毁组件实例，可能有内存泄漏
@@ -403,7 +399,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             let _childsName = this.getNode_childs_Name(nodeName);
             let parentNode: Array<JSX.Element> = (this as any)[_childsName];
             if (parentNode == null) {
-                throw Error(this.constructor.name + " dont have node : " + nodeName);
+                throw new Error(this.constructor.name + " dont have node : " + nodeName);
             }
             (this as any)[_childsName] = [];
         }
@@ -411,7 +407,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         let _isValidName = this.getNode_isValid_Name(nodeName);
         let nodeisValid: Array<JSX.Element> = (this as any)[_isValidName];
         if (nodeisValid == null) {
-            throw Error(this.constructor.name + " dont have node : " + nodeName);
+            throw new Error(this.constructor.name + " dont have node : " + nodeName);
         }
         // 清除节点显示逻辑
         (this as any)[_isValidName] = false;

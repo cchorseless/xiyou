@@ -8,10 +8,12 @@ import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCPortraitGroup } from "../allCustomUIElement/CCPortrait/CCPortrait";
 import { CCUnitStats } from "../allCustomUIElement/CCUnitStats/CCUnitStats";
 
-export class DacBoardPanel<T extends NodePropsData> extends CCPanel<T> {
 
+interface ICCDacBoardPanel {
+
+}
+export class CCDacBoardPanel extends CCPanel<ICCDacBoardPanel> {
     onInitUI() {
-
     }
     render() {
         return (

@@ -13,7 +13,7 @@ export class CCBuffList extends CCPanel<IBuffList> {
             this.__root___isValid && (
                 <Panel
                     id="BuffContainer"
-                    key="compId_1" className="root" ref={this.__root__}  {...this.initRootAttrs()}>
+                    className="CC_root" ref={this.__root__}  {...this.initRootAttrs()}>
                     <CCPanel flowChildren="right" width="100%">
                         <GenericPanel type="DOTABuffList" id="buffs" showdebuffs="false" style={{ flowChildren: "right-wrap", width: "50%" }} />
                         <GenericPanel type="DOTABuffList" id="debuffs" showbuffs="false" style={{ flowChildren: "right-wrap", width: "50%" }} />
