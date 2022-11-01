@@ -7,7 +7,7 @@ import { CCInventory } from "../allCustomUIElement/CCInventory/CCInventory";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCPortraitGroup } from "../allCustomUIElement/CCPortrait/CCPortrait";
 import { CCUnitStats } from "../allCustomUIElement/CCUnitStats/CCUnitStats";
-
+import "./CCDacBoardPanel.less";
 
 interface ICCDacBoardPanel {
 
@@ -15,16 +15,22 @@ interface ICCDacBoardPanel {
 export class CCDacBoardPanel extends CCPanel<ICCDacBoardPanel> {
     onInitUI() {
     }
+
+
     render() {
         return (
             this.__root___isValid &&
-            <CCPanel ref={this.__root__} id="CC_DacBoardPanel"    {...this.initRootAttrs()} hittest={false}>
-                <CCPortraitGroup particleAttrs={{}} />
-                <CCAbilityList />
-                <CCHealthMana />
+            <CCPanel ref={this.__root__} id="CC_DacBoardPanel" horizontalAlign="center"  {...this.initRootAttrs()} hittest={false}>
+                <CCPanel id="DacBoardLeft">
+                    <CCPortraitGroup particleAttrs={{}} />
+                    <CCUnitStats />
+                </CCPanel>
+                <CCPanel id="DacBoardCenter">
+                    <CCBuffList />
+                    <CCAbilityList />
+                    <CCHealthMana />
+                </CCPanel>
                 <CCInventory />
-                <CCUnitStats />
-                <CCBuffList />
                 {this.props.children}
                 {this.__root___childs}
             </CCPanel >

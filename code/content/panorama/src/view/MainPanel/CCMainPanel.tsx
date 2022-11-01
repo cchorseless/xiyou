@@ -50,10 +50,11 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                             onToggle={this.onMenuNavigationToggle} />
                         <CCTopBarCenter />
                         <CCTopBarGameCoin />
-                        {/* <CCDacBoardPanel /> */}
-                        <CustomPortraitGroup particleAttrs={{}} />
-                        {/* <CCAbilityList /> */}
-                        {/* <CCHealthMana />
+                        <CCDacBoardPanel />
+                        {/* <CCPortraitGroup particleAttrs={{}} /> */}
+                        {/* <CCUnitStats /> */}
+                        {/* <CCInventory /> */}
+                        {/* 
                         <CCInventory />
                         <CCUnitStats />
                         <CCBuffList /> */}

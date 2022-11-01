@@ -8,16 +8,17 @@ interface IHealthMana extends NodePropsData {
 
 export class CCHealthMana extends CCPanel<IHealthMana> {
 
+    defaultStyle = () => {
+        return { flowChildren: "right-wrap", width: "100%" } as any
+    }
+
     render() {
         return (
             this.__root___isValid && (
-                <Panel
-                    id="BuffContainer"
-                    className="root" ref={this.__root__}  {...this.initRootAttrs()}>
-                    <GenericPanel type="DOTAHealthMana" id="health_mana" style={{ flowChildren: "right-wrap", width: "100%" }} />
+                <GenericPanel ref={this.__root__} type="DOTAHealthMana" id="health_mana"  {...this.initRootAttrs()}>
                     {this.props.children}
                     {this.__root___childs}
-                </Panel>
+                </GenericPanel>
             )
         );
     }

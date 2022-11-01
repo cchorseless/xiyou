@@ -35,11 +35,8 @@ export class CCInventory extends CCPanel<ICCInventory> {
     onStartUI() {
         this.addEvent();
         let panel = this.__root__.current!
-        panel.SetParent(this.__root__.current!);
         // this.inventoryitems = panel.FindChildTraverse("inventory_items");
         // this.InventoryBG = panel.FindChildTraverse("InventoryBG");
-        panel.style.width = "100%";
-        panel.style.height = "100%";
         let mainpanel = CCPanel.GetInstanceByName<MainPanel>("MainPanel");
         for (let i = 0; i < 9; i++) {
             let _slot = panel.FindChildTraverse("inventory_slot_" + i);
