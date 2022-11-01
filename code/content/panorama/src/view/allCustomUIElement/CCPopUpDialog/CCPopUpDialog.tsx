@@ -75,6 +75,8 @@ export class CCPopupBG extends CCPanel<ICCPopupBG> {
                 <Panel className="CC_LeftBottomBG" />
                 <Panel className="CC_CenterBottomBG" />
                 <Panel className="CC_RightBottomBG" />
+                {this.__root___childs}
+                {this.props.children}
             </Panel>
         );
     }

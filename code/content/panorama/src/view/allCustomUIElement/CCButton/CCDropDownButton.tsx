@@ -4,16 +4,6 @@ import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCDropDownButton.less";
 
-let pHudRoot = $.GetContextPanel();
-while (pHudRoot.GetParent() != undefined) {
-    pHudRoot = pHudRoot.GetParent() as Panel;
-}
-
-pHudRoot.FindChildrenWithClassTraverse("CC_DropDownMenu").forEach((child) => {
-    child.DeleteAsync(-1);
-});
-
-
 interface ICCDropDownButton {
     /** 没有初始选择时显示的文字 */
     placeholder?: string;
@@ -25,25 +15,22 @@ interface ICCDropDownButton {
     onClear?: () => void;
 };
 
-export class CCDropDownButton extends CCPanel<ICCDropDownButton> {
+export class CCDropDownButton extends CCPanel<ICCDropDownButton, TextButton> {
     private myMenu?: Panel;
-    private selfRef = createRef<TextButton>();
     defaultClass = () => { return ("CC_DropDown"); };
     onStartUI() {
         const { children, id } = this.props;
+        let pBtn = this.__root__.current!;
         if (this.myMenu == undefined) {
-            this.myMenu = $.CreatePanel("Panel", $.GetContextPanel(), `${id}_DropDownMenu`);
-            this.myMenu.SetParent(pHudRoot);
+            this.myMenu = $.CreatePanel("Panel", pBtn, `${id}_DropDownMenu`);
+            this.myMenu.SetParent(pBtn);
             this.myMenu.visible = false;
             this.myMenu.AddClass("CC_DropDownMenu");
         }
-        let pBtn = this.selfRef.current;
-        if (pBtn) {
-            for (let index = 0; index < pBtn.GetChildCount(); index++) {
-                const c = pBtn.GetChild(index);
-                if (c && c.id != "CC_DropDown_placeholder" && c.id != "CC_DropDown_arrow") {
-                    c.visible = (index + 1 == this.props.index);
-                }
+        for (let index = 0; index < pBtn.GetChildCount(); index++) {
+            const c = pBtn.GetChild(index);
+            if (c && c.id != "CC_DropDown_placeholder" && c.id != "CC_DropDown_arrow") {
+                c.visible = (index + 1 == this.props.index);
             }
         }
         render(
@@ -52,7 +39,7 @@ export class CCDropDownButton extends CCPanel<ICCDropDownButton> {
                     return (
                         // 包一层
                         <RadioButton group="CC_DropDownMenuItem" selected={childIndex + 1 == this.props.index} className={CSSHelper.ClassMaker("CC_DropDownMenuItem")} onactivate={self => {
-                            let pBtn = this.selfRef.current;
+                            let pBtn = this.__root__.current;
                             let bClear = false;
                             if (pBtn) {
                                 for (let index = 0; index < pBtn.GetChildCount(); index++) {
@@ -95,7 +82,7 @@ export class CCDropDownButton extends CCPanel<ICCDropDownButton> {
     }
 
     toggleMenu(state?: boolean) {
-        let pBtn = this.selfRef.current;
+        let pBtn = this.__root__.current;
         if (pBtn && this.myMenu) {
             let vPos = pBtn.GetPositionWithinWindow();
             this.myMenu.SetPositionInPixels(
@@ -125,14 +112,14 @@ export class CCDropDownButton extends CCPanel<ICCDropDownButton> {
 
     render() {
         const { children, className, ...others } = this.props;
-        return (
-            <Button ref={this.selfRef} {...others} {...this.initRootAttrs()}
+        return (this.__root___isValid &&
+            <TextButton ref={this.__root__} {...others} {...this.initRootAttrs()}
                 onactivate={() => { this.toggleMenu(); }}
             >
                 {children}
                 <Label id="CC_DropDown_placeholder" localizedText={(this.props.index == undefined && this.props.placeholder) ? this.props.placeholder : ""} />
                 <Image id="CC_DropDown_arrow" />
-            </Button>
+            </TextButton>
         );
     }
 }

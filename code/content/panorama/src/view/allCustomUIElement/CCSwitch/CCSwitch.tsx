@@ -1,10 +1,11 @@
 import { PanelAttributes } from "@demon673/react-panorama";
 import React, { createRef, ReactNode } from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
+import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCSwitch.less";
 
-interface ICCSwitch {
+interface ICCSwitch extends NodePropsData {
 	/** 当前是否选中 */
 	checked?: boolean,
 	/** 选中时的内容 */
@@ -17,10 +18,9 @@ interface ICCSwitch {
 	onChange?: (checked: boolean) => void,
 }
 
-export class CCSwitch extends CCPanel<PanelAttributes & ICCSwitch> {
+export class CCSwitch extends CCPanel<ICCSwitch, Button> {
 	defaultClass = () => { return CSSHelper.ClassMaker("CC_Switch", { Checked: this.state.checked }); };
 	state = { checked: this.props.checked ?? this.props.defaultChecked };
-	ref = createRef<Panel>();
 	static defaultProps = {
 		/** 初始是否选中 */
 		defaultChecked: true,
@@ -46,15 +46,15 @@ export class CCSwitch extends CCPanel<PanelAttributes & ICCSwitch> {
 			}
 		}
 	};
-	componentDidUpdate() {
-		if (this.props.checked != undefined && this.ref.current && this.props.checked != this.state.checked) {
+	componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
+		if (this.props.checked != undefined && this.__root__.current && this.props.checked != this.state.checked) {
 			this.setState({ checked: this.props.checked });
-			this.updateCheck(this.ref.current, this.props.checked);
+			this.updateCheck(this.__root__.current, this.props.checked);
 		}
 	}
 	render() {
-		return (
-			<Button  {...this.initRootAttrs()} ref={this.ref} onload={self => this.updateCheck(self, Boolean(this.state.checked))} onactivate={self => {
+		return (this.__root___isValid &&
+			<Button  {...this.initRootAttrs()} ref={this.__root__} onload={self => this.updateCheck(self, Boolean(this.state.checked))} onactivate={self => {
 				this.updateCheck(self, !this.state.checked);
 				if (this.props.onChange) {
 					this.props.onChange(!this.state.checked);
@@ -77,6 +77,8 @@ export class CCSwitch extends CCPanel<PanelAttributes & ICCSwitch> {
 						{this.props.unCheckedChildren}
 					</Panel>
 				}
+				{this.__root___childs}
+				{this.props.children}
 			</Button>
 		);
 	}

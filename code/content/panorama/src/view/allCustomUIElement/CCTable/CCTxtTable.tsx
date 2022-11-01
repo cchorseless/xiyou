@@ -30,8 +30,8 @@ export class CCTxtTable extends CCPanel<ICCTxtTable> {
 		}
 	};
 	render() {
-		return (
-			<CCPanel  {...this.initRootAttrs()}>
+		return (this.__root___isValid &&
+			<CCPanel ref={this.__root__} {...this.initRootAttrs()}>
 				{this.props.list.map((name, index) => {
 					if (index > 0) {
 						return (
@@ -44,6 +44,8 @@ export class CCTxtTable extends CCPanel<ICCTxtTable> {
 						return <TabButton key={index} selected={this.props.selected != undefined ? this.props.selected - 1 == index : this.state.selectedIndex == index} group={this.props.group} onactivate={() => this.onSelect(index)} localizedText={name} />;
 					}
 				})}
+				{this.__root___childs}
+				{this.props.children}
 			</CCPanel>
 		);
 	}

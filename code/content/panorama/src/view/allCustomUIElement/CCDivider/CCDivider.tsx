@@ -12,9 +12,11 @@ export class CCDivider extends CCPanel<ICCDivider> {
     defaultClass = () => { return CSSHelper.ClassMaker("EOM_Divider", this.props.defaultClass); };
     render() {
         return (
-            <Panel  {...this.initRootAttrs()}>
+            this.__root___isValid &&
+            <CCPanel ref={this.__root__}      {...this.initRootAttrs()}>
+                {this.__root___childs}
                 {this.props.children}
-            </Panel>
+            </CCPanel>
         );
     }
 }

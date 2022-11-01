@@ -135,7 +135,8 @@ export class CCDebugTool_Category extends CCPanel<IDebugTool_Category> {
 		const { title, layout, children } = this.props;
 		const { col } = this.state;
 		return (
-			<Panel  {...this.initRootAttrs()}>
+			this.__root___isValid &&
+			<CCPanel ref={this.__root__}      {...this.initRootAttrs()}>
 				<Panel className="CategoryHeader">
 					<Label className="CategoryHeaderLabel" localizedText={title} />
 					<Panel style={{ width: "fill-parent-flow(1)" }} />

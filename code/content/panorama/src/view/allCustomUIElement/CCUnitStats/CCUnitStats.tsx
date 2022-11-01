@@ -17,8 +17,8 @@ export class CCUnitStats extends CCPanel<ICCUnitStats>  {
                     <GenericPanel type="DOTAStatsRegion" id="stats" className="ShowSplitLabels" hittest={false} />
                     <GenericPanel type="DOTAHUDStrAgiInt" id="stragiint" always-cache-composition-layer="true" require-composition-layer="true" hittest={false} />
                     <Panel id="HUDSkinPreCenterParticlesLeft" className="hud_skinnable" hittest={false} />
-                    {this.props.children}
                     {this.__root___childs}
+                    {this.props.children}
                 </CCPanel>
             )
         );

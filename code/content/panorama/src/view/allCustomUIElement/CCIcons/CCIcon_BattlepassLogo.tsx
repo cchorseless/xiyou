@@ -5,7 +5,7 @@ interface IIcon_BattlepassLogoType {
 	type?: "Flat" | "GrayScale" | "GrayScaleSmall" | "Small";
 }
 export class CCIcon_BattlepassLogo extends CCIcon<IIcon_BattlepassLogoType> {
-	defaultStyle = (() => {
+	defaultStyle = () => {
 		switch (this.props.type) {
 			case "Flat":
 				return {
@@ -35,5 +35,5 @@ export class CCIcon_BattlepassLogo extends CCIcon<IIcon_BattlepassLogoType> {
 					height: "width-percentage(113%)",
 				};
 		}
-	})();
+	}
 }
