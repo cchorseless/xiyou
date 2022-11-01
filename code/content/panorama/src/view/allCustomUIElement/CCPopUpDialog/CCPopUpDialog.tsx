@@ -50,7 +50,7 @@ export class CCPopupBG extends CCPanel<ICCPopupBG> {
     static defaultProps = {
         /** 是否有标题 */
         hasTitle: true,
-        // type: DEFAULT_ADDON_TYPE,
+        type: CSSHelper.DEFAULT_ADDON_TYPE,
     };
 
     defaultClass = () => {

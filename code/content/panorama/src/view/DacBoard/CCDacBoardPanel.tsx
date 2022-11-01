@@ -15,26 +15,30 @@ interface ICCDacBoardPanel {
 export class CCDacBoardPanel extends CCPanel<ICCDacBoardPanel> {
     onInitUI() {
     }
-
+    defaultStyle = () => {
+        return {
+            horizontalAlign: "center"
+        };
+    }
     render() {
         return (
             this.__root___isValid &&
-            <CCPanel ref={this.__root__} id="CC_DacBoardPanel" horizontalAlign="center"  {...this.initRootAttrs()} hittest={false}>
-                <CCPanel id="DacBoardLeft">
+            <Panel ref={this.__root__} id="CC_DacBoardPanel"  {...this.initRootAttrs()} hittest={false}>
+                <Panel id="DacBoardLeft">
                     <CCPortraitGroup particleAttrs={{}} />
                     <CCUnitStats />
-                </CCPanel>
-                <CCPanel id="DacBoardCenter">
-                    <CCBuffList />
-                    <CCAbilityList />
+                </Panel>
+                <Panel id="DacBoardCenter">
+                    <CCBuffList className="CCBuffList" />
+                    <CCAbilityList className="CCAbilityList" />
                     <CCHealthMana />
-                </CCPanel>
-                <CCPanel id="DacBoardRight">
+                </Panel>
+                <Panel id="DacBoardRight">
                     <CCInventory />
-                </CCPanel>
+                </Panel>
                 {this.props.children}
                 {this.__root___childs}
-            </CCPanel >
+            </Panel >
         )
     }
 }

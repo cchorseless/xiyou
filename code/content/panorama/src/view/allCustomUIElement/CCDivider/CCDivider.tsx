@@ -13,10 +13,10 @@ export class CCDivider extends CCPanel<ICCDivider> {
     render() {
         return (
             this.__root___isValid &&
-            <CCPanel ref={this.__root__}      {...this.initRootAttrs()}>
+            <Panel ref={this.__root__}      {...this.initRootAttrs()}>
                 {this.__root___childs}
                 {this.props.children}
-            </CCPanel>
+            </Panel>
         );
     }
 }

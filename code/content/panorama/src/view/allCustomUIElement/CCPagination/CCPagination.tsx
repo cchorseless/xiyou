@@ -36,7 +36,7 @@ export class CCPagination extends CCPanel<ICCPagination> {
 		const { page, group } = this.state;
 		return (
 			this.__root___isValid &&
-			<CCPanel ref={this.__root__}      {...this.initRootAttrs()}>
+			<Panel ref={this.__root__}      {...this.initRootAttrs()}>
 				<Button className="CC_Pagination_Button CC_Pagination_LeftArrow" enabled={page > 1} onactivate={() => this.changePage(Math.max(1, page - 1))} />
 				{(() => {
 					let res: JSX.Element[] = [];
@@ -100,7 +100,7 @@ export class CCPagination extends CCPanel<ICCPagination> {
 				}
 				{this.__root___childs}
 				{this.props.children}
-			</CCPanel>
+			</Panel>
 		);
 	}
 }

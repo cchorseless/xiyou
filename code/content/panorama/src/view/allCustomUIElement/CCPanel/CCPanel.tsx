@@ -39,13 +39,13 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
         this.onInitUI()
     }
     defaultClass = () => { return ""; };
-    defaultStyle = (): Partial<ICCPanelProps & T & Omit<PanelAttributes, "ref">> => { return {}; };
+    defaultStyle = (): Partial<ICCPanelProps & VCSSStyleDeclaration & T & Omit<PanelAttributes, "ref">> | any => { return {}; };
     __root___isValid: boolean = true;
     __root___childs: Array<JSX.Element> = [];
 
     initRootAttrs() {
         let r: any = { style: {} };
-        let ignoreKey = ["style", "children"];
+        let ignoreKey = ["style", "children", "ref"];
         let _defaultstyle = this.defaultStyle();
         if (_defaultstyle) {
             for (let k in _defaultstyle) {

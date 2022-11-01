@@ -14,6 +14,11 @@ import "./CCTopBarPanel.less";
 
 export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
 
+    defaultStyle = () => {
+        return {
+            horizontalAlign: "center"
+        }
+    }
     onInitUI() {
         PlayerScene.Local.PlayerDataComp.RegRef(this);
         this.UpdateState(PlayerScene.Local.RoundManagerComp?.getCurrentBoardRound());
@@ -34,7 +39,7 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
         const gametime = this.GetState<number>("gametime");
         return (
             this.__root___isValid &&
-            <CCPanel ref={this.__root__} id="CC_TopBarCenter" horizontalAlign="center"   {...this.initRootAttrs()} hittest={false}>
+            <Panel id="CC_TopBarCenter" ref={this.__root__}    {...this.initRootAttrs()} hittest={false}>
                 <Image id="RoundBG" >
                     <CCPanel width="100%" flowChildren="right">
                         <Label id="RoundLabel" localizedText="#lang_TopBarRound" dialogVariables={{ round: round?.config.round_show }} />
@@ -45,7 +50,7 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
                 <CCImageNumber id="RoundTime" type="4" value={gametime} />
                 {this.props.children}
                 {this.__root___childs}
-            </CCPanel >
+            </Panel >
         )
     }
 }
@@ -68,7 +73,7 @@ export class CCTopBarGameCoin<T extends NodePropsData> extends CCPanel<T> {
 
         return (
             this.__root___isValid &&
-            <CCPanel ref={this.__root__} id="CC_TopBarGameCoin"    {...this.initRootAttrs()} hittest={false}>
+            <Panel ref={this.__root__} id="CC_TopBarGameCoin"    {...this.initRootAttrs()} hittest={false}>
                 <CCPanel id="TopBarGameCoinBg" flowChildren="right" />
                 <CCPanel id="TopBarGameCoinGroup" flowChildren="right">
                     {
@@ -85,7 +90,7 @@ export class CCTopBarGameCoin<T extends NodePropsData> extends CCPanel<T> {
                 </CCPanel>
                 {this.props.children}
                 {this.__root___childs}
-            </CCPanel >
+            </Panel >
         )
     }
 }

@@ -7,7 +7,8 @@ import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../l
 import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCDacBoardPanel } from "../DacBoard/CCDacBoardPanel";
-import { ShopPanel } from "../Shop/ShopPanel";
+import { CCDacBoardPanelV1 } from "../DacBoard/CCDacBoardPanelV1";
+import { CCShopPanel } from "../Shop/CCShopPanel";
 import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
 
 
@@ -64,13 +65,14 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     private onMenuNavigationToggle = (menuName: string, state: boolean) => {
         if (menuName == "store") {
             if (state) {
-                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, ShopPanel, {
-                    marginTop: "100px",
+                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCShopPanel, {
+                    type: "Tui3"
+                    // marginTop: "100px",
                 } as any)
                 this.updateSelf();
             }
             else {
-                ShopPanel.GetInstance()?.close()
+                CCShopPanel.GetInstance()?.close()
             }
         }
     }

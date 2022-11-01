@@ -12,7 +12,7 @@ export class CCAbilityList extends CCPanel<ICCAbilityList> {
     render() {
         return (
             this.__root___isValid && (
-                <GenericPanel type="DOTAAbilityList" id={"abilities"} ref={this.__root__}  {...this.initRootAttrs()}>
+                <GenericPanel type="DOTAAbilityList" id="abilities" ref={this.__root__}  {...this.initRootAttrs()}>
                     {this.props.children}
                     {this.__root___childs}
                 </GenericPanel>

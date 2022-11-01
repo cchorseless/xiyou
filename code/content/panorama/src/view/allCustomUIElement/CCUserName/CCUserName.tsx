@@ -17,7 +17,7 @@ export class CCUserName extends CCPanel<ICCUserName> {
     };
     render() {
         return (this.__root___isValid &&
-            <CCPanel ref={this.__root__}      {...this.initRootAttrs()}>
+            <Panel ref={this.__root__}      {...this.initRootAttrs()}>
                 <DOTAUserName key={this.props.steamid ?? "" + this.props.accountid ?? ""} steamid={this.props.steamid} style={{ width: "100%", height: "100%" }} hittest={false} onload={self => {
                     if (this.props.accountid) {
                         self.accountid = this.props.accountid.toString();
@@ -34,7 +34,7 @@ export class CCUserName extends CCPanel<ICCUserName> {
                 }} />
                 {this.__root___childs}
                 {this.props.children}
-            </CCPanel>
+            </Panel>
         );
     }
 }

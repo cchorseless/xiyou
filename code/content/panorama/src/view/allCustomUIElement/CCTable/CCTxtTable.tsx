@@ -31,7 +31,7 @@ export class CCTxtTable extends CCPanel<ICCTxtTable> {
 	};
 	render() {
 		return (this.__root___isValid &&
-			<CCPanel ref={this.__root__} {...this.initRootAttrs()}>
+			<Panel ref={this.__root__} {...this.initRootAttrs()}>
 				{this.props.list.map((name, index) => {
 					if (index > 0) {
 						return (
@@ -46,7 +46,7 @@ export class CCTxtTable extends CCPanel<ICCTxtTable> {
 				})}
 				{this.__root___childs}
 				{this.props.children}
-			</CCPanel>
+			</Panel>
 		);
 	}
 }

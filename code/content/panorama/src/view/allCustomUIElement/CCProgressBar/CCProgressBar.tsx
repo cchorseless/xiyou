@@ -24,12 +24,12 @@ export class CCProgressBar extends CCPanel<ICCProgressBar> {
 		const { value, min, max } = this.props;
 		const width = (value - min) / (max - min) * 100;
 		return (this.__root___isValid &&
-			<CCPanel ref={this.__root__}   {...this.initRootAttrs()}>
+			<Panel ref={this.__root__}   {...this.initRootAttrs()}>
 				<CCPanel className="CC_ProgressBar_Left" width={width + "%"} />
 				<CCPanel className="CC_ProgressBar_Right" width={(100 - width) + "%"} />
 				{this.__root___childs}
 				{this.props.children}
-			</CCPanel>
+			</Panel>
 		);
 	}
 }

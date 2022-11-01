@@ -63,6 +63,10 @@ export class BasePureComponentSystem {
     static RegisterReactElement(entity: ReactElement, b: boolean, Domain: BasePureComponent<NodePropsData> | null = null, NodeParentName: string | null = null) {
         if (b) {
             if (entity.key == null || BasePureComponentSystem.AllReactElement[entity.key] != null || Domain == null || NodeParentName == null) {
+                LogHelper.print(entity.key == null)
+                LogHelper.print(BasePureComponentSystem.AllReactElement[entity.key!] != null)
+                LogHelper.print(Domain == null)
+                LogHelper.print(NodeParentName == null)
                 LogHelper.error("RegisterReactElement error");
                 return;
             }
