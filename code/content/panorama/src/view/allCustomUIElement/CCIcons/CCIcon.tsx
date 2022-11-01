@@ -23,9 +23,8 @@ export interface ICCIcon {
 	height?: string;
 }
 
-const DEFAULT_ICON_SIZE = "32px";
 
-export default class CCIcon<T = {}> extends CCPanel<ImageAttributes & ICCIcon & T> {
+export class CCIcon<T = {}> extends CCPanel<ImageAttributes & ICCIcon & T> {
 	// static defaultProps = {
 	// 	src: "s2r://panorama/images/control_icons/dota_logo_white_png.vtex",
 	// };
@@ -36,8 +35,8 @@ export default class CCIcon<T = {}> extends CCPanel<ImageAttributes & ICCIcon & 
 			washColor: this.props.color,
 			animationDuration: (this.props.spinDuration != undefined) ? this.props.spinDuration + "s" : undefined,
 			opacity: (this.props.opacity != undefined) ? String(this.props.opacity) : undefined,
-			width: DEFAULT_ICON_SIZE,
-			height: DEFAULT_ICON_SIZE,
+			width: CSSHelper.DEFAULT_ICON_SIZE,
+			height: CSSHelper.DEFAULT_ICON_SIZE,
 		} as any;
 	};
 	render() {

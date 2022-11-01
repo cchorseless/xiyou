@@ -16,7 +16,6 @@ export class CCDacBoardPanel extends CCPanel<ICCDacBoardPanel> {
     onInitUI() {
     }
 
-
     render() {
         return (
             this.__root___isValid &&
@@ -30,7 +29,9 @@ export class CCDacBoardPanel extends CCPanel<ICCDacBoardPanel> {
                     <CCAbilityList />
                     <CCHealthMana />
                 </CCPanel>
-                <CCInventory />
+                <CCPanel id="DacBoardRight">
+                    <CCInventory />
+                </CCPanel>
                 {this.props.children}
                 {this.__root___childs}
             </CCPanel >

@@ -1,0 +1,61 @@
+.CC_Switch {
+    min-width: 44px;
+    height: 22px;
+    border-radius: 11px;
+    background-color: #2f323f;
+    box-shadow: fill #00000044 0px 0px 12px 0px;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    wash-color: #3366aa55;
+    saturation: 0.5;
+
+    &.Checked {
+        wash-color: none;
+    }
+
+    #CC_SwitchHandle {
+        border-radius: 50%;
+        height: 100%;
+        width: height-percentage(100%);
+        background-color: white;
+        box-shadow: #00230b33 0 2px 4px 0;
+        vertical-align: center;
+        margin: 2px;
+        transition-property: position, width;
+        transition-duration: 0.2s;
+    }
+
+    .CC_SwitchLabelCheck {
+        font-size: 14px;
+        align: left center;
+        margin-right: 22px;
+        margin-left: 6px;
+        color: white;
+        opacity: 1;
+        transition-property: opacity, position;
+        transition-duration: 0.2s;
+
+        &.Checked {
+            opacity: 0;
+            // x: 20px;
+        }
+    }
+
+    .CC_SwitchLabelUncheck {
+        font-size: 14px;
+        align: right center;
+        // text-align: right;
+        margin-left: 22px;
+        margin-right: 4px;
+        color: white;
+        opacity: 1;
+        transition-property: opacity, position;
+        transition-duration: 0.2s;
+        // x: -20px;
+
+        &.Checked {
+            opacity: 0;
+            // x: -20px;
+        }
+    }
+}

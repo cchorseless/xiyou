@@ -4,17 +4,8 @@ import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { ToolTipHelper } from "../../helper/ToolTipHelper";
 import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
-import { CCAbilityList } from "../allCustomUIElement/CCAbility/CCAbilityList";
-import { CCBuffList } from "../allCustomUIElement/CCBuffList/CCBuffList";
-import { CCHealthMana } from "../allCustomUIElement/CCHealthMana/CCHealthMana";
-import { CCInventory } from "../allCustomUIElement/CCInventory/CCInventory";
 import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
-import { CCPortraitGroup } from "../allCustomUIElement/CCPortrait/CCPortrait";
-import { CCUnitStats } from "../allCustomUIElement/CCUnitStats/CCUnitStats";
-import { CustomPortraitGroup } from "../alldota2/ui_element/CustomPortraitGroup";
-import { CombinationIconItem } from "../Combination/CombinationIconItem";
-import { CombinationInfoDialog } from "../Combination/CombinationInfoDialog";
 import { CCDacBoardPanel } from "../DacBoard/CCDacBoardPanel";
 import { ShopPanel } from "../Shop/ShopPanel";
 import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
@@ -51,13 +42,6 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCTopBarCenter />
                         <CCTopBarGameCoin />
                         <CCDacBoardPanel />
-                        {/* <CCPortraitGroup particleAttrs={{}} /> */}
-                        {/* <CCUnitStats /> */}
-                        {/* <CCInventory /> */}
-                        {/* 
-                        <CCInventory />
-                        <CCUnitStats />
-                        <CCBuffList /> */}
                         {this.panel_base_childs}
                     </Panel>
                 }

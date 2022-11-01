@@ -1,6 +1,11 @@
 import { LogHelper } from "./LogHelper";
 
 export module CSSHelper {
+
+    export const DEFAULT_ADDON_TYPE = "Tui3";
+    export const DEFAULT_ICON_SIZE = "32px";
+
+
     export enum VCSSStyle {
         /**
          * Controls blending mode for the panel. See CSS mix-blend-mode docs on web, except normal for us is with alpha blending.

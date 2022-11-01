@@ -2,8 +2,8 @@ import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { PathHelper } from "../../../helper/PathHelper";
 import { NodePropsData } from "../../../libs/BasePureComponent";
-import { CCIconButton } from "../CCIconButton/CCIconButton";
-import CCIcon_XClose from "../CCIcons/CCIcon_XClose";
+import { CCIconButton } from "../CCButton/CCIconButton";
+import { CCIcon_XClose } from "../CCIcons/CCIcon_XClose";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCPopUpDialog.less";
 
@@ -13,22 +13,26 @@ interface ICCPopUpDialog extends NodePropsData {
     onClose: () => void;
 }
 
-export class CCPopUpDialog extends CCPanel<ICCPopUpDialog> {
+export class CCPopUpDialog<T = {}> extends CCPanel<ICCPopUpDialog & T> {
     defaultClass = () => { return "CC_PopupMain"; };
+    static defaultProps = {
+        type: CSSHelper.DEFAULT_ADDON_TYPE,
+        onClose: () => { }
+    };
     render() {
         const { title } = this.props;
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__}      {...this.initRootAttrs()}
-            // onload={(self) => { self.AddClass("EOM_PopupMainShow"); }}
+            // onload={(self) => { self.AddClass("CC_PopupMainShow"); }}
             >
                 <CCPopupBG type={this.props.type} hasTitle={(title != undefined && title != "")} />
-                {(title != undefined && title != "") &&
-                    <Label className="EOM_PopupTitle" text={$.Localize(title)} />
+                {(title != null && title != "") &&
+                    <Label className="CC_PopupTitle" text={$.Localize(title)} />
                 }
-                {/* <EOM_CloseButton style={{ horizontalAlign: "right", marginTop: "16px", marginRight: "3px" }} onactivate={() => LoadData($.GetContextPanel(), "ClosePopup")()} /> */}
                 <CCIconButton className={this.props.type} icon={<CCIcon_XClose type={this.props.type} />} onactivate={() => this.props.onClose()} />
-                <Panel className="EOM_PopupContent">
+                <Panel className="CC_PopupContent">
+                    {this.__root___childs}
                     {this.props.children}
                 </Panel>
             </Panel>
@@ -50,27 +54,27 @@ export class CCPopupBG extends CCPanel<ICCPopupBG> {
     };
 
     defaultClass = () => {
-        return "EOM_PopupBG"
+        return "CC_PopupBG"
     }
 
     render() {
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__}      {...this.initRootAttrs()} hittest={false} hittestchildren={false} >
-                <Panel className="EOM_Texture" />
+                <Panel className="CC_Texture" />
                 {this.props.hasTitle &&
-                    <Panel className="EOM_TitleBG" />
+                    <Panel className="CC_TitleBG" />
                 }
-                <Panel className="EOM_HeaderBG" />
-                <Panel className="EOM_LeftTopBG" />
-                <Panel className="EOM_CenterTopBG" />
-                <Panel className="EOM_RightTopBG" />
-                <Panel className="EOM_LeftCenterBG" />
-                <Panel className="EOM_CenterCenterBG" />
-                <Panel className="EOM_RightCenterBG" />
-                <Panel className="EOM_LeftBottomBG" />
-                <Panel className="EOM_CenterBottomBG" />
-                <Panel className="EOM_RightBottomBG" />
+                <Panel className="CC_HeaderBG" />
+                <Panel className="CC_LeftTopBG" />
+                <Panel className="CC_CenterTopBG" />
+                <Panel className="CC_RightTopBG" />
+                <Panel className="CC_LeftCenterBG" />
+                <Panel className="CC_CenterCenterBG" />
+                <Panel className="CC_RightCenterBG" />
+                <Panel className="CC_LeftBottomBG" />
+                <Panel className="CC_CenterBottomBG" />
+                <Panel className="CC_RightBottomBG" />
             </Panel>
         );
     }

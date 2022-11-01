@@ -141,7 +141,10 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     }
     /**创建前，指定属性，添加事件 */
     public onInitUI() { }
-    /**渲染后一帧执行 */
+    /**
+     * 渲染后一帧执行
+     * @override
+     */
     public onStartUI() { }
     public onRefreshUI(...args: any[]) { }
     public onDestroy() { }

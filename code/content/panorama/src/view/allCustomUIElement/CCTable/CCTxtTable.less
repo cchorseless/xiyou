@@ -1,0 +1,41 @@
+.CC_TxtTable {
+    flow-children: right;
+
+    .CC_TxtTableSeparator {
+        font-size: 20px;
+        color: #939da022;
+        vertical-align: center;
+        margin: 0px 12px;
+    }
+
+    &>TabButton {
+        vertical-align: center;
+
+        Label {
+            color: #939da044;
+            transition-property: color;
+            transition-duration: 0.2s;
+        }
+
+        &:selected {
+            Label {
+                color: white;
+                sound: "ui_rollover_micro";
+            }
+        }
+
+        &:hover {
+            Label {
+                color: #CCCCCC;
+            }
+        }
+
+        &:active {
+            transform: translateY(2px);
+        }
+
+        &:active:selected {
+            transform: translateY(0px);
+        }
+    }
+}

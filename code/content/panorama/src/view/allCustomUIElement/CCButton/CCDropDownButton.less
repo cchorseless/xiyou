@@ -1,0 +1,124 @@
+.CC_DropDown {
+    min-width: 100px;
+    min-height: 32px;
+    background-color: #363942;
+    // box-shadow: #00000055 0px 0px 0px 0px;
+    // box-shadow: 0px 0px 12px 0px #000000AA;
+    // background-image: url("s2r://panorama/images/control_icons/arrow_dropdown_png.vtex");
+    // background-position: right 20px 35%;
+    // background-size: 16px 16px;
+    // background-repeat: no-repeat;
+    border: 0px solid #5e686966;
+    border-radius: 3px;
+    font-size: 20px;
+    transition-property: background-color, border, color;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    padding: 4px 10px;
+
+    &:hover {
+        background-color: #3e4047;
+
+        // brightness: 1.5;
+        &>Label {
+            color: white;
+        }
+
+        &>#CC_DropDown_arrow {
+            wash-color: white;
+        }
+    }
+
+    &>Label {
+        width: 100%;
+        margin: 0px 24px 0px 2px;
+        font-size: 16px;
+        transition-property: color;
+        transition-duration: 0.15s;
+        transition-timing-function: linear;
+        color: #aeaeaf;
+        vertical-align: center;
+        // font-style: italic;
+        font-weight: bold;
+    }
+}
+
+/** 箭头图标*/
+#CC_DropDown_arrow {
+    align: right center;
+    background-image: url("s2r://panorama/images/control_icons/arrow_dropdown_png.vtex");
+    background-size: 100%;
+    width: 18px;
+    height: 18px;
+    wash-color: #aeaeaf;
+}
+
+/** 下拉容器 */
+.CC_DropDownMenu {
+    // min-width: 100px;
+    // width: fit-children;
+    max-height: 0px;
+    padding: 4px 0px;
+    border-radius: 4px;
+    flow-children: down;
+    background-color: #262626;
+    // border: 1px solid #3D3D3D;
+    // box-shadow: #000000AA 0px 0px 12px 0px;
+    box-shadow: fill #00000044 0px 0px 12px 0px;
+    transition-property: background-color, max-height;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+
+    &.CC_DropDownMenuShow {
+        max-height: 1000px;
+    }
+}
+
+/** 下拉物品包一层 */
+.CC_DropDownMenuItem {
+    min-height: 30px;
+    // width: 100%;
+    // width: fit-children;
+    margin: 2px 4px;
+    border-radius: 4px;
+    padding: 8px 4px;
+    // padding-left: 8px;
+    background-color: #262626;
+    transition-property: background-color;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+    // flow-children: right;
+
+    &>Label {
+        font-size: 16px;
+        vertical-align: center;
+        // color: #EEEEEE;
+        color: #aeaeaf;
+    }
+
+    &:hover {
+        background-color: #32364733;
+
+        &>Label {
+            color: white;
+        }
+    }
+
+    &:selected {
+        background-color: #373f5566;
+
+        &>Label {
+            color: white;
+        }
+    }
+
+}
+
+RadioButton {
+    .RadioBox {
+        width: 2px;
+        color: blue;
+        height: 70%;
+        vertical-align: center;
+    }
+}

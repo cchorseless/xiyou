@@ -1,19 +1,19 @@
 
 import React, { createRef, PureComponent } from "react";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { PanelAttributes, ImageAttributes, LabelAttributes } from "@demon673/react-panorama";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPopUpDialog } from "../allCustomUIElement/CCPopUpDialog/CCPopUpDialog";
 
+interface ICCShopPanel extends NodePropsData {
 
-export class CCShopPanel<T extends NodePropsData> extends CCPanel<T> {
-    __root__: React.RefObject<Panel>;
+}
+
+export class CCShopPanel extends CCPopUpDialog<ICCShopPanel> {
     btn_gohome: React.RefObject<ImagePanel>;
     onbtn_gohome = (...args: any[]) => { };
     btn_goback: React.RefObject<ImagePanel>;
     onbtn_goback = (...args: any[]) => { };
     lbl_starstone: React.RefObject<LabelPanel>;
     lbl_metastone: React.RefObject<LabelPanel>;
-    NODENAME = { __root__: '__root__', };
 
 
     onInitUI() {
