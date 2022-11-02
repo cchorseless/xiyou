@@ -18,7 +18,6 @@ export class CourierEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         this.AddComponent(GetRegClass<typeof CourierDataComponent>("CourierDataComponent"));
         this.AddComponent(GetRegClass<typeof AbilityManagerComponent>("AbilityManagerComponent"));
         this.AddComponent(GetRegClass<typeof ItemManagerComponent>("ItemManagerComponent"));
-        this.GetPlayer().SyncClientEntity(this.CourierDataComp(), true, true)
     }
 
     CourierDataComp() {

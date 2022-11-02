@@ -43,20 +43,8 @@ export class PlayerSystemComponent extends ET.Component {
                 return;
             }
         }
-        this.OnAllPlayerClientLoginFinish();
-    }
-
-
-    public OnAllPlayerClientLoginFinish() {
         (this as any).IsAllLogin = true;
-        while (this._WaitSyncEntity.length > 0) {
-            let entity = this._WaitSyncEntity.shift();
-            if (entity == null) {
-                break;
-            }
-            NetTablesHelper.SetShareETEntity(entity.obj, entity.ignoreChild);
-        }
-        this._WaitSyncEntity.length = 0;
+        GameRules.Addon.ETRoot.OnAllPlayerClientLoginFinish();
     }
 
     private _WaitUploadGameRecord: { k: string, v: string }[] = [];
@@ -126,22 +114,6 @@ export class PlayerSystemComponent extends ET.Component {
         }
     }
 
-
-    private _WaitSyncEntity: { obj: ET.Entity, ignoreChild: boolean }[] = [];
-    public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
-        if (this.IsAllLogin) {
-            NetTablesHelper.SetShareETEntity(obj, ignoreChild);
-        }
-        else {
-            for (let i = 0, len = this._WaitSyncEntity.length; i < len; i++) {
-                if (this._WaitSyncEntity[i].obj === obj) {
-                    this._WaitSyncEntity[i].ignoreChild = ignoreChild;
-                    return;
-                }
-            }
-            this._WaitSyncEntity.push({ obj: obj, ignoreChild: ignoreChild });
-        }
-    }
     public IsAllBindHeroFinish(): boolean {
         for (let k in this.AllPlayer) {
             if (this.AllPlayer[k].Hero == null) {

@@ -34,15 +34,15 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
             }), -1, false)
     }
     render() {
-        const playerdata = this.GetState<PlayerDataComponent>(PlayerScene.Local.PlayerDataComp.InstanceId, true);
-        const round = this.GetState<ERoundBoard>("ERoundBoard", true);
+        const playerdata = this.GetStateEntity(PlayerScene.Local.PlayerDataComp)!;
+        const round = this.GetStateEntity(PlayerScene.Local.RoundManagerComp?.getCurrentBoardRound());
         const gametime = this.GetState<number>("gametime");
         return (
             this.__root___isValid &&
             <Panel id="CC_TopBarCenter" ref={this.__root__}    {...this.initRootAttrs()} hittest={false}>
                 <Image id="RoundBG" >
                     <CCPanel width="100%" flowChildren="right">
-                        <Label id="RoundLabel" localizedText="#lang_TopBarRound" dialogVariables={{ round: round?.config.round_show }} />
+                        <Label id="RoundLabel" localizedText="#lang_TopBarRound" dialogVariables={{ round: round?.config.round_show || "1" }} />
                         <Label id="RoundState" text={round?.getCurStateDes()} />
                     </CCPanel>
                     <Label id="RoundDifficulty" localizedText="#lang_TopBarDifficulty" dialogVariables={{ difficulty: playerdata.difficulty }} />
@@ -63,7 +63,7 @@ export class CCTopBarGameCoin<T extends NodePropsData> extends CCPanel<T> {
 
     }
     render() {
-        const playerdata = this.GetState<PlayerDataComponent>("PlayerDataComponent", true);
+        const playerdata = this.GetStateEntity<PlayerDataComponent>(PlayerScene.Local.PlayerDataComp)!;
         const coindes = [
             `${playerdata.population}/${playerdata.populationRoof}`,
             `${playerdata.gold}(+${playerdata.perIntervalGold})`,

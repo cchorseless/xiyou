@@ -3,15 +3,19 @@ import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { ET, serializeETProps } from "../../Entity/Entity";
+import { CourierEntityRoot } from "./CourierEntityRoot";
 
 /**玩家组件 */
 @reloadable
 export class CourierDataComponent extends ET.Component {
     @serializeETProps()
     health: number = 100;
-
-
-
+    @serializeETProps()
+    maxHealth: number = 100;
+    @serializeETProps()
+    steamID: string;
+    @serializeETProps()
+    damage: number = 0;
     /**出生点 */
     firstSpawnPoint: Vector;
     /**玩家物品信息 */
@@ -19,9 +23,12 @@ export class CourierDataComponent extends ET.Component {
 
     onAwake() {
         let hero = this.GetDomain<BaseNpc_Hero_Plus>();
+        let courierRoot = hero.ETRoot.As<CourierEntityRoot>();
         this.firstSpawnPoint = hero.GetAbsOrigin();
+        this.steamID = PlayerResource.GetSteamAccountID(courierRoot.Playerid).toString();
         modifier_wait_portal.applyOnly(hero, hero);
         modifier_jiaoxie_wudi.applyOnly(hero, hero);
+        this.updateNetTable();
     }
 
     /**
@@ -77,5 +84,15 @@ export class CourierDataComponent extends ET.Component {
             }
         }
         return r;
+    }
+
+    updateNetTable() {
+        let hero = this.GetDomain<BaseNpc_Hero_Plus>();
+        let courierRoot = hero.ETRoot.As<CourierEntityRoot>();
+        courierRoot.GetPlayer().SyncClientEntity(this, true, true)
+    }
+    ApplyDamage(damage: number) {
+        this.health -= damage;
+        this.updateNetTable();
     }
 }

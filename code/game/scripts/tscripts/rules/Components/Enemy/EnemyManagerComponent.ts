@@ -17,6 +17,7 @@ import { ET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { EnemyState } from "../../System/Enemy/EnemyState";
 import { RoundConfig } from "../../System/Round/RoundConfig";
+import { CourierEntityRoot } from "../Courier/CourierEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERoundBoard } from "../Round/ERoundBoard";
@@ -46,8 +47,10 @@ export class EnemyManagerComponent extends ET.Component {
     ApplyDamageHero(damage: number, projectileInfo: IProjectileEffectInfo) {
         if (damage > 0) {
             let hero = this.GetDomain<PlayerScene>().ETRoot.Hero;
+            let heroroot = hero.ETRoot.As<CourierEntityRoot>();
             Assert_MsgEffect.CreateNumberEffect(hero, damage, 2, Assert_MsgEffect.EMsgEffect.MSG_MISS, Assert_Color.red);
             EmitSoundOn(projectileInfo.sound, hero);
+            heroroot.CourierDataComp().ApplyDamage(damage);
         }
     }
 

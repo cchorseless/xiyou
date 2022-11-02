@@ -1,6 +1,6 @@
 import React from 'react';
 import { CCPanel } from '../CCPanel/CCPanel';
-
+import "./CCUserName.less";
 interface ICCUserName {
     /** 长id */
     steamid?: string;
@@ -11,7 +11,7 @@ interface ICCUserName {
 }
 
 export class CCUserName extends CCPanel<ICCUserName> {
-    defaultClass = () => { return ("EOM_UserName"); };
+    defaultClass = () => { return ("CC_UserName"); };
     static defaultProps = {
         showgGild: false
     };

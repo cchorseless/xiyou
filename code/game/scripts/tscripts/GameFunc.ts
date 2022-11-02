@@ -72,11 +72,10 @@ export module GameFunc {
         };
         return S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4();
     }
-    const uuidSeed = "GenerateUUID";
     let uuidCount: number = 0;
     export function GenerateUUID() {
         uuidCount++;
-        return DoUniqueString(uuidSeed) + "_" + uuidCount;
+        return DoUniqueString("" + RandomInt(1, 10000)) + uuidCount + "@";
     }
     /**
      * 获取服务器serverKey

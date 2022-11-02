@@ -42,9 +42,11 @@ import { BattleUnitComponent } from "./Components/BattleUnit/BattleUnitComponent
 import { CourierDataComponent } from "./Components/Courier/CourierDataComponent";
 import { BuffManagerComponent } from "./Components/Buff/BuffManagerComponent";
 import { CombEffectComponent } from "./Components/Combination/CombEffectComponent";
+import { GameStateSystemComponent } from "./System/GameState/GameStateSystemComponent";
 
 
 [
+    GameStateSystemComponent,
     MapSystemComponent,
     RoundSystemComponent,
     PlayerSystemComponent,

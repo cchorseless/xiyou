@@ -25,6 +25,6 @@ export class ServerZoneBuffComponent extends ET.Component {
         }
     }
     onReload() {
-        GameRules.Addon.ETRoot.PlayerSystem().SyncClientEntity(this, true);
+        GameRules.Addon.ETRoot.SyncClientEntity(this, true);
     }
 }

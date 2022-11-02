@@ -9,7 +9,7 @@ export interface ICCDivider {
 
 /** 分割线 */
 export class CCDivider extends CCPanel<ICCDivider> {
-    defaultClass = () => { return CSSHelper.ClassMaker("EOM_Divider", this.props.defaultClass); };
+    defaultClass = () => { return CSSHelper.ClassMaker("CC_Divider", this.props.defaultClass); };
     render() {
         return (
             this.__root___isValid &&

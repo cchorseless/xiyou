@@ -7,6 +7,7 @@ import { TServerZone } from "../../service/serverzone/TServerZone";
 import { PlayerEntityRoot } from "./PlayerEntityRoot";
 import { LogHelper } from "../../../helper/LogHelper";
 import { PublicBagSystemComponent } from "../../system/Public/PublicBagSystemComponent";
+import { GameStateSystemComponent } from "../GameState/GameStateSystemComponent";
 
 export class PlayerScene {
     /**组件 */
@@ -27,6 +28,9 @@ export class PlayerScene {
         return this.Scene.GetComponentByName<PublicBagSystemComponent>("PublicBagSystemComponent")!;
     }
 
+    static get GameStateSystem() {
+        return this.Scene.GetComponentByName<GameStateSystemComponent>("GameStateSystemComponent")!;
+    }
     static get TServerZone() {
         return this.Scene.GetComponentByName<TServerZone>("TServerZone")!;
     }

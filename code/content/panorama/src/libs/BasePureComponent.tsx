@@ -155,13 +155,19 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
      * @param isWithRef
      * @returns
      */
-    public GetState<T>(key: string, isWithRef = false) {
+    public GetState<T>(key: string) {
         let obj = (this.state as any)[key];
-        if (obj && isWithRef) {
-            return obj.Ref as T
-        }
         return obj as T;
     }
+
+    public GetStateEntity<T extends { InstanceId: string }>(entity: T) {
+        if (entity == null) { return null }
+        let obj = (this.state as any)[entity.InstanceId];
+        if (obj) {
+            return obj.Ref as T
+        }
+    }
+
     public UpdateState(obj: { [k: string]: any }) {
         if (!obj) { return; }
         if (this.IsRegister) {

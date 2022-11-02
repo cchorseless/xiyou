@@ -1,13 +1,17 @@
 
 import React, { createRef, PureComponent } from "react";
+import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
+import { TimerHelper } from "../../helper/TimerHelper";
 import { ToolTipHelper } from "../../helper/ToolTipHelper";
 import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCDacBoardPanel } from "../DacBoard/CCDacBoardPanel";
 import { CCDacBoardPanelV1 } from "../DacBoard/CCDacBoardPanelV1";
+import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
 import { CCShopPanel } from "../Shop/CCShopPanel";
 import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
 
@@ -22,7 +26,13 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         this.panel_base = createRef<Panel>();
         this.panel_allpanel = createRef<Panel>();
         this.panel_alldialog = createRef<Panel>();
+        let IsDataReady = PlayerScene.GameStateSystem && PlayerScene.GameStateSystem.IsAllPlayerBindHero;
+        this.UpdateState({ IsDataReady: IsDataReady })
     };
+
+    StartRenderUI() {
+        this.UpdateState({ IsDataReady: true })
+    }
 
     panel_base_isValid: boolean = true;
     panel_base_childs: Array<JSX.Element> = [];
@@ -32,17 +42,19 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     panel_alldialog_childs: Array<JSX.Element> = [];
 
     render() {
+        const IsDataReady = this.GetState<Boolean>("IsDataReady");
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} className="CC_root" hittest={false} {...this.initRootAttrs()}>
                 {this.panel_base_isValid &&
+                    IsDataReady &&
                     <Panel ref={this.panel_base} className="CC_root" hittest={false}>
                         <CCMenuNavigation
                             list={["setting", "mail", "store", "battlepass", "draw", "handbook"]}
                             onToggle={this.onMenuNavigationToggle} />
                         <CCTopBarCenter />
                         <CCTopBarGameCoin />
-                        {/* <CCDacBoardPanel /> */}
+                        <CCPlayerListPanel />
                         {this.panel_base_childs}
                     </Panel>
                 }

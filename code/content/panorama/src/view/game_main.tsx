@@ -73,7 +73,6 @@ function StartRenderGameUI() {
     PlayerScene.Local.Init();
     render(<RootPanel />, $.GetContextPanel());
 }
-LogHelper.print("StartRenderGameUI started");
+LogHelper.print("StartRenderGameUI started -----------------------------------");
 StartRenderGameUI();
-// $.Msg(DOTAHUDHeroViewClicked==null)
 

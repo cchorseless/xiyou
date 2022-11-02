@@ -26,7 +26,7 @@ export class CCPopUpDialog<T = {}> extends CCPanel<ICCPopUpDialog & T> {
         const { title } = this.props;
         return (
             this.__root___isValid &&
-            <Panel ref={this.__root__} hittest={true}    {...this.initRootAttrs()}
+            <Panel ref={this.__root__}   {...this.initRootAttrs()}
                 onload={(self) => { self.AddClass("CC_PopupMainShow"); }}
             >
                 <CCPopupBG type={this.props.type} hasTitle={(title != undefined && title != "")} />

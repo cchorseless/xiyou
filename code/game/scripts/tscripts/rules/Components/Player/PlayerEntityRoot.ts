@@ -45,6 +45,7 @@ export class PlayerEntityRoot extends ET.EntityRoot {
         this.AddComponent(GetRegClass<typeof BuildingManagerComponent>("BuildingManagerComponent"));
         this.AddComponent(GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
         this.CreateFakerHero();
+        GameRules.Addon.ETRoot.GameStateSystem().OnBindHeroFinish(this.Playerid);
     }
 
     public CreateFakerHero() {
@@ -84,6 +85,7 @@ export class PlayerEntityRoot extends ET.EntityRoot {
             for (let i = 0, len = this._WaitSyncEntity.length; i < len; i++) {
                 if (this._WaitSyncEntity[i].obj === obj) {
                     this._WaitSyncEntity[i].ignoreChild = ignoreChild;
+                    this._WaitSyncEntity[i].isShare = isShare;
                     return;
                 }
             }

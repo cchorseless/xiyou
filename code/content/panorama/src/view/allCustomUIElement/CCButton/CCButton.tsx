@@ -33,7 +33,7 @@ export class CCButton extends CCPanel<TextButtonAttributes & ICCButton, TextButt
 		/** 设置按钮类型 */
 		type: "Tui3",
 		/** 设置按钮颜色 */
-		color: "",
+		color: "Green",
 	};
 	render() {
 		return (this.__root___isValid &&
@@ -53,7 +53,7 @@ export class CCBaseButton extends CCPanel<TextButtonAttributes & ICCButton, Text
 		/** 设置按钮载入状态 */
 		loading: false,
 		/** 设置按钮颜色 */
-		color: "",
+		color: "Green",
 	};
 	render() {
 		return (this.__root___isValid &&

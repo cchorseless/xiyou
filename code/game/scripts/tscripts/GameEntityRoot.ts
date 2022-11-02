@@ -26,6 +26,7 @@ import { ChessControlSystemComponent } from "./rules/System/ChessControl/ChessCo
 import { CombinationSystemComponent } from "./rules/System/Combination/CombinationSystem";
 import { DrawSystemComponent } from "./rules/System/Draw/DrawSystemComponent";
 import { EnemySystemComponent } from "./rules/System/Enemy/EnemySystemComponent";
+import { GameStateSystemComponent } from "./rules/System/GameState/GameStateSystemComponent";
 import { MapSystemComponent } from "./rules/System/Map/MapSystemComponent";
 import { PlayerSystemComponent } from "./rules/System/Player/PlayerSystemComponent";
 import { PublicBagSystemComponent } from "./rules/System/Public/PublicBagSystemComponent";
@@ -50,8 +51,26 @@ import { TServerZone } from "./service/serverzone/TServerZone";
 // };
 
 export class GameEntityRoot extends ET.EntityRoot {
+
+    private _WaitSyncEntity: { obj: ET.Entity, ignoreChild: boolean }[] = [];
+    public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
+        if (this.PlayerSystem().IsAllLogin) {
+            NetTablesHelper.SetShareETEntity(obj, ignoreChild);
+        }
+        else {
+            for (let i = 0, len = this._WaitSyncEntity.length; i < len; i++) {
+                if (this._WaitSyncEntity[i].obj === obj) {
+                    this._WaitSyncEntity[i].ignoreChild = ignoreChild;
+                    return;
+                }
+            }
+            this._WaitSyncEntity.push({ obj: obj, ignoreChild: ignoreChild });
+        }
+    }
+
     init() {
         this.addEvent();
+        this.AddComponent(GetRegClass<typeof GameStateSystemComponent>("GameStateSystemComponent"));
         this.AddComponent(GetRegClass<typeof PlayerSystemComponent>("PlayerSystemComponent"));
         this.AddComponent(GetRegClass<typeof MapSystemComponent>("MapSystemComponent"));
         this.AddComponent(GetRegClass<typeof DrawSystemComponent>("DrawSystemComponent"));
@@ -63,10 +82,18 @@ export class GameEntityRoot extends ET.EntityRoot {
         this.AddComponent(GetRegClass<typeof WearableSystemComponent>("WearableSystemComponent"));
         this.AddComponent(GetRegClass<typeof PublicBagSystemComponent>("PublicBagSystemComponent"));
     }
+
+    public StartGame() {
+        this.RoundSystem().StartGame();
+        this.DrawSystem().StartGame();
+    }
+
     TServerZone() {
         return this.GetComponentByName<TServerZone>("TServerZone");
     }
-
+    GameStateSystem() {
+        return this.GetComponentByName<GameStateSystemComponent>("GameStateSystemComponent");
+    }
     PlayerSystem() {
         return this.GetComponentByName<PlayerSystemComponent>("PlayerSystemComponent");
     }
@@ -105,7 +132,7 @@ export class GameEntityRoot extends ET.EntityRoot {
 
     private addEvent() {
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, this.onGameRulesStateChange);
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaOnHeroFinishSpawnEvent, this.onHeroFinishSpawn);
+        // EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaOnHeroFinishSpawnEvent, this.onHeroFinishSpawn);
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned);
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityKilledEvent, this.OnEntityKilled);
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityHurtEvent, this.OnEntityHurt);
@@ -185,7 +212,7 @@ export class GameEntityRoot extends ET.EntityRoot {
                 EventHelper.ErrorMessage("not valid args", playerid);
                 return;
             }
-            let itemEnity = EntIndexToHScript(itementityid)  as BaseItem_Plus;
+            let itemEnity = EntIndexToHScript(itementityid) as BaseItem_Plus;
             let npc = EntIndexToHScript(npcentindex) as BaseNpc_Plus;
             if (!GameFunc.IsValid(itemEnity) || !GameFunc.IsValid(npc) || itemEnity.ETRoot == null || npc.ETRoot == null) {
                 event.state = false;
@@ -214,7 +241,7 @@ export class GameEntityRoot extends ET.EntityRoot {
                 EventHelper.ErrorMessage("not valid args", playerid);
                 return;
             }
-            let itemEnity = EntIndexToHScript(itementityid)  as BaseItem_Plus;
+            let itemEnity = EntIndexToHScript(itementityid) as BaseItem_Plus;
             if (!GameFunc.IsValid(itemEnity) || itemEnity.ETRoot == null) {
                 event.state = false;
                 EventHelper.ErrorMessage("not valid item ", playerid);
@@ -270,12 +297,23 @@ export class GameEntityRoot extends ET.EntityRoot {
                 break;
         }
     }
-    private onHeroFinishSpawn(e: DotaOnHeroFinishSpawnEvent) {
-        if (this.PlayerSystem().IsAllBindHeroFinish()) {
-            this.RoundSystem().StartGame();
-            this.DrawSystem().StartGame();
+
+
+
+
+    public OnAllPlayerClientLoginFinish() {
+        while (this._WaitSyncEntity.length > 0) {
+            let entity = this._WaitSyncEntity.shift();
+            if (entity == null) {
+                break;
+            }
+            NetTablesHelper.SetShareETEntity(entity.obj, entity.ignoreChild);
         }
+        this._WaitSyncEntity.length = 0;
     }
+
+
+
     private OnNPCSpawned(event: NpcSpawnedEvent) {
         let spawnedUnit = EntIndexToHScript(event.entindex) as BaseNpc_Plus;
         if (spawnedUnit == null) return;

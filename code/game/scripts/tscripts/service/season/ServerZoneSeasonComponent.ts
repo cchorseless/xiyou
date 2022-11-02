@@ -35,6 +35,6 @@ export class ServerZoneSeasonComponent extends ET.Component {
         }
     }
     onReload() {
-        GameRules.Addon.ETRoot.PlayerSystem().SyncClientEntity(this, true);
+        GameRules.Addon.ETRoot.SyncClientEntity(this, true);
     }
 }
