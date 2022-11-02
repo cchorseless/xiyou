@@ -14,7 +14,7 @@ export module ET {
         _t: string;
         _id: string;
         _p_instanceid?: string;
-        _nettable?: string;
+        _playerid?: number;
         Children?: { [K: string]: IEntityJson };
         C?: { [K: string]: IEntityJson };
         [K: string]: any;
@@ -23,7 +23,7 @@ export module ET {
         InstanceId: string;
         Id: string;
         P_InstanceId?: string;
-        NetTableName?: string;
+        BelongPlayerid?: number;
         IsRegister: boolean;
         Parent: Entity | null;
         Domain: IEntityRoot | null;
@@ -90,8 +90,8 @@ export module ET {
     export class Entity extends Object implements IEntityFunc {
         public readonly InstanceId: string;
         public readonly Id: string;
-        public readonly NetTableName: string;
         public readonly P_InstanceId: string;
+        public readonly BelongPlayerid: number;
         public readonly IsRegister: boolean = false;
         public readonly IsComponent: boolean = false;
         public readonly Parent: Entity;
@@ -142,14 +142,35 @@ export module ET {
             )
         }
 
+        public IsBelongLocalPlayer() {
+            if (this.BelongPlayerid != null) {
+                return this.BelongPlayerid < 0 || this.BelongPlayerid == Players.GetLocalPlayer();
+            }
+            throw new Error(this.GetType() + " cant find BelongPlayerid")
+        }
 
+        public get FixBelongPlayerid() {
+            if (this.BelongPlayerid == null) {
+                throw new Error(this.GetType() + " cant find BelongPlayerid")
+            }
+            if (this.BelongPlayerid < 0) {
+                return Players.GetLocalPlayer();
+            }
+            return this.BelongPlayerid;
+        }
 
         public updateFromJson(json: IEntityJson) {
-            let ignoreKey = ["_t", "_id", "Children", "C", "_p_instanceid", "_nettable"];
+            let ignoreKey = ["_t", "_id", "Children", "C", "_p_instanceid", "_playerid"];
             for (let k in json) {
                 if (ignoreKey.indexOf(k) == -1) {
                     (this as any)[k] = FuncHelper.TryTransArrayLikeObject(json[k]);
                 }
+            }
+            if (json._p_instanceid != null) {
+                (this.P_InstanceId as any) = json._p_instanceid;
+            }
+            if (json._playerid != null) {
+                (this.BelongPlayerid as any) = json._playerid;
             }
             if (json.Children) {
                 let _childs = Object.values(json.Children);
@@ -179,8 +200,8 @@ export module ET {
                             (entity as IEntityProperty).Parent = this;
                             this.AddToChildren(entity);
                         }
-                        if (this.NetTableName) {
-                            (entity.NetTableName as any) = this.NetTableName;
+                        if (this.BelongPlayerid != null) {
+                            (entity.BelongPlayerid as any) = this.BelongPlayerid;
                         }
                     }
                 }
@@ -213,8 +234,8 @@ export module ET {
                             (entity as IEntityProperty).Parent = this;
                             this.AddToComponents(entity);
                         }
-                        if (this.NetTableName) {
-                            (entity.NetTableName as any) = this.NetTableName;
+                        if (this.BelongPlayerid != null) {
+                            (entity.BelongPlayerid as any) = this.BelongPlayerid;
                         }
                     }
                 }
@@ -238,8 +259,6 @@ export module ET {
             if (entity == null) {
                 entity = Entity.Create(type);
                 (entity as IEntityProperty).Id = json._id;
-                (entity as IEntityProperty).NetTableName = json._nettable;
-                (entity as IEntityProperty).P_InstanceId = json._p_instanceid;
                 entity.setDomain(SceneRoot.GetInstance());
             }
             entity.updateFromJson(json);

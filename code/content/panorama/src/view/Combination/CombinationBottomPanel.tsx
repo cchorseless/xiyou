@@ -32,7 +32,7 @@ export class CombinationBottomPanel extends CombinationBottomPanel_UI<NodePropsD
 			combinations = PlayerScene.EntityRootManage.getFakerHero(playerId)!.FHeroCombinationManager.getAllCombination();
 		}
 		else {
-			combinations = PlayerScene.EntityRootManage.getPlayer(playerId)!.CombinationManager.getAllCombination();
+			combinations = PlayerScene.GetPlayer(playerId)!.CombinationManager.getAllCombination();
 		}
 		let allui = this.GetNodeChild(this.NODENAME.__root__, CombinationSingleBottomItem);
 		for (let i = 0, len = allui.length; i < len; i++) {

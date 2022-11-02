@@ -12,8 +12,7 @@ export class FHeroCombination extends ECombination {
 
     async onReload() {
         if (this.IsEmpty()) { return; }
-        let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
-        let player = PlayerScene.EntityRootManage.getFakerHero(playerid)
+        let player = PlayerScene.EntityRootManage.getFakerHero(this.BelongPlayerid)
         await player!.FHeroCombinationManager.addOneCombination(this);
     }
     isFakerCombination() {

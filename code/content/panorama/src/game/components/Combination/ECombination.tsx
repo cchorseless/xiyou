@@ -17,9 +17,7 @@ export class ECombination extends ET.Entity {
     }
     async onReload() {
         if (this.IsEmpty()) { return; }
-        let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
-        let player = PlayerScene.EntityRootManage.getPlayer(playerid)
-        await player?.CombinationManager.addOneCombination(this);
+        await PlayerScene.GetPlayer(this.BelongPlayerid)?.CombinationManager.addOneCombination(this);
     }
 
     isFakerCombination() {

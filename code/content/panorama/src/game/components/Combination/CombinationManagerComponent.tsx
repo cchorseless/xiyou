@@ -9,9 +9,7 @@ import { ECombination } from "./ECombination";
 @registerET()
 export class CombinationManagerComponent extends ET.Component {
     onSerializeToEntity(): void {
-        let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
-        let player = PlayerScene.EntityRootManage.getPlayer(playerid)!;
-        player.AddOneComponent(this);
+        PlayerScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
     }
 
     allCombination: string[] = [];
@@ -21,8 +19,7 @@ export class CombinationManagerComponent extends ET.Component {
             this.allCombination.push(_comb.Id);
         }
         if (!_comb.IsEmpty()) {
-            let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
-            await CombinationBottomPanel.GetInstance()!.addOneCombination(playerid, _comb);
+            await CombinationBottomPanel.GetInstance()!.addOneCombination(_comb.FixBelongPlayerid as PlayerID, _comb);
         }
 
     }

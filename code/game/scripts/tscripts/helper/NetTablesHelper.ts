@@ -19,7 +19,7 @@ export module NetTablesHelper {
         CustomNetTables.SetTableValue(_tablename, key, data as never);
     }
 
-    export function SetETEntityPart(obj: ET.Entity, props: string[], ...playerID: Array<PlayerID>) {
+    export function SetETEntityPart(belongPlayerId: PlayerID, obj: ET.Entity, props: string[], ...playerID: Array<PlayerID>) {
         if (!IsServer()) {
             return;
         }
@@ -31,24 +31,29 @@ export module NetTablesHelper {
         for (let k in new_data) {
             data[k] = new_data[k];
         }
-        let event: JS_TO_LUA_DATA = {};
-        event.state = true;
-        event.data = { instanceId: obj.InstanceId, props: props, nettable: "" };
+        data._playerid = belongPlayerId;
+        // let event: JS_TO_LUA_DATA = {};
+        // event.state = true;
+        // event.data = { instanceId: obj.InstanceId, props: props, nettable: "" };
         // 全部玩家
         if (playerID == null || playerID.length == 0) {
             NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, data);
-            event.data.nettable = ENetTables.etentity;
-            EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_update_nettable_partprop_etentity, event);
+            // event.data.nettable = ENetTables.etentity;
+            // EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_update_nettable_partprop_etentity, event);
         } else {
             playerID.forEach((_id) => {
                 let nettable = GetETEntityNetTableName(_id);
                 NetTablesHelper.SetData(nettable, obj.InstanceId, data);
-                event.data.nettable = nettable;
-                EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_update_nettable_partprop_etentity, event, _id as PlayerID);
+                // event.data.nettable = nettable;
+                // EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_update_nettable_partprop_etentity, event, _id as PlayerID);
             });
         }
     }
-    export function SetETEntity(obj: ET.Entity, ignoreChild: boolean = false, ...playerID: Array<PlayerID>) {
+    export function SetShareETEntity(obj: ET.Entity, ignoreChild: boolean = false) {
+        SetETEntity(-1, obj, ignoreChild);
+    }
+
+    export function SetETEntity(belongPlayerId: PlayerID, obj: ET.Entity, ignoreChild: boolean = false, ...playerID: Array<PlayerID>) {
         if (!IsServer()) {
             return;
         }
@@ -56,23 +61,24 @@ export module NetTablesHelper {
             return;
         }
         let jsonobj = obj.toJsonObject(ignoreChild);
+        jsonobj._playerid = belongPlayerId;
         if (obj.Parent && obj.Parent.InstanceId) {
             jsonobj._p_instanceid = obj.Parent.InstanceId;
         }
-        let event: JS_TO_LUA_DATA = {};
-        event.state = true;
-        event.data = { instanceId: obj.InstanceId, nettable: "" };
+        // let event: JS_TO_LUA_DATA = {};
+        // event.state = true;
+        // event.data = { instanceId: obj.InstanceId, nettable: "" };
         // 全部玩家
         if (playerID == null || playerID.length == 0) {
-            event.data.nettable = ENetTables.etentity;
+            // event.data.nettable = ENetTables.etentity;
             NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, jsonobj);
-            EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_update_nettable_etentity, event);
+            // EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_update_nettable_etentity, event);
         } else {
             playerID.forEach((_id) => {
                 let nettable = GetETEntityNetTableName(_id);
-                event.data.nettable = nettable;
+                // event.data.nettable = nettable;
                 NetTablesHelper.SetData(nettable, obj.InstanceId, jsonobj);
-                EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_update_nettable_etentity, event, _id as PlayerID);
+                // EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_update_nettable_etentity, event, _id as PlayerID);
             });
         }
     }
@@ -86,20 +92,20 @@ export module NetTablesHelper {
         if (!NetTablesHelper.GetData(ENetTables.etentity, obj.InstanceId)) {
             return;
         }
-        let event: JS_TO_LUA_DATA = {};
-        event.state = true;
-        event.data = { instanceId: obj.InstanceId, nettable: "" };;
+        // let event: JS_TO_LUA_DATA = {};
+        // event.state = true;
+        // event.data = { instanceId: obj.InstanceId, nettable: "" };;
         // 全部玩家
         if (playerID == null || playerID.length == 0) {
             NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, null);
-            event.data.nettable = ENetTables.etentity;
-            EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_del_nettable_etentity, event);
+            // event.data.nettable = ENetTables.etentity;
+            // EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_del_nettable_etentity, event);
         } else {
             playerID.forEach((_id) => {
                 let nettable = GetETEntityNetTableName(_id);
                 NetTablesHelper.SetData(nettable, obj.InstanceId, null);
-                event.data.nettable = nettable;
-                EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_del_nettable_etentity, event, _id as PlayerID);
+                // event.data.nettable = nettable;
+                // EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_del_nettable_etentity, event, _id as PlayerID);
             });
         }
     }

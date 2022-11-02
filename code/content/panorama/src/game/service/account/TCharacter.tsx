@@ -23,9 +23,7 @@ export class TCharacter extends ET.Component {
     PlayerId: string;
     Name: string;
     onSerializeToEntity() {
-        if (NetHelper.IsFromLocalNetTable(this)) {
-            PlayerScene.Local.AddOneComponent(this);
-        }
+        PlayerScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
     }
     get SeedRandomComp() {
         return this.GetComponentByName<SeedRandomComponent>("SeedRandomComponent");

@@ -15,6 +15,10 @@ export class PlayerScene {
     }
     static readonly Local: PlayerEntityRoot;
 
+    static GetPlayer(playerid: PlayerID | number) {
+        if (playerid < 0) { playerid = Players.GetLocalPlayer() }
+        return this.EntityRootManage?.getPlayer(playerid as PlayerID);
+    }
     static get EntityRootManage() {
         return this.Scene.GetComponentByName<EntityRootManagerComponent>("EntityRootManagerComponent")!;
     }

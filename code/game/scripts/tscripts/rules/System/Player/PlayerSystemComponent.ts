@@ -54,7 +54,7 @@ export class PlayerSystemComponent extends ET.Component {
             if (entity == null) {
                 break;
             }
-            NetTablesHelper.SetETEntity(entity.obj, entity.ignoreChild);
+            NetTablesHelper.SetShareETEntity(entity.obj, entity.ignoreChild);
         }
         this._WaitSyncEntity.length = 0;
     }
@@ -130,7 +130,7 @@ export class PlayerSystemComponent extends ET.Component {
     private _WaitSyncEntity: { obj: ET.Entity, ignoreChild: boolean }[] = [];
     public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
         if (this.IsAllLogin) {
-            NetTablesHelper.SetETEntity(obj, ignoreChild);
+            NetTablesHelper.SetShareETEntity(obj, ignoreChild);
         }
         else {
             for (let i = 0, len = this._WaitSyncEntity.length; i < len; i++) {

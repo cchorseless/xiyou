@@ -35,7 +35,7 @@ export module ET {
         _t: string;
         _id: string;
         _p_instanceid?: string;
-        _nettable?: string;
+        _playerid?: number;
         Children?: { [k: string]: IEntityJson };
         C?: { [k: string]: IEntityJson };
         [K: string]: any;

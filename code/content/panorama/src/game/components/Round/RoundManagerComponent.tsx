@@ -9,9 +9,7 @@ import { ERoundBoard } from "./ERoundBoard";
 export class RoundManagerComponent extends ET.Component {
     readonly RoundInfo: { [k: string]: ERound } = {};
     onSerializeToEntity() {
-        if (NetHelper.IsFromLocalNetTable(this)) {
-            PlayerScene.Local.AddOneComponent(this);
-        }
+        PlayerScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
     }
     curRoundBoard: string;
     onAwake() {

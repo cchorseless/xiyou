@@ -7,7 +7,6 @@ import { PlayerScene } from "../Player/PlayerScene";
 @registerET()
 export class FHeroCombinationManagerComponent extends CombinationManagerComponent {
     onSerializeToEntity(): void {
-        let playerid = NetHelper.GetPlayerIdByNetTableName(this.NetTableName);
-        PlayerScene.EntityRootManage.getFakerHero(playerid)!.AddOneComponent(this);
+        PlayerScene.EntityRootManage.getFakerHero(this.BelongPlayerid)?.AddOneComponent(this);
     }
 }

@@ -21,14 +21,12 @@ export class PlayerHeroComponent extends ET.Component {
         let allLoadData: { [key: string]: ET.IEntityJson } = {}
         for (let info of data_player) {
             if (info.value) {
-                info.value._nettable = nettable;
                 allLoadData[info.key] = info.value;
             }
         }
         let data_common = NetHelper.GetOneTable(NetHelper.ENetTables.etentity);
         for (let info of data_common) {
             if (info.value) {
-                info.value._nettable = NetHelper.ENetTables.etentity;
                 allLoadData[info.key] = info.value;
             }
         }
@@ -55,41 +53,62 @@ export class PlayerHeroComponent extends ET.Component {
         }
     }
 
-    addEvent() {
-        NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_sync_et_entity, (event) => {
-            ET.Entity.FromJson(event.data);
-        });
-        NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_update_nettable_etentity, (event) => {
-            let instanceid = event.data.instanceId;
-            let nettable = event.data.nettable;
-            let data = NetHelper.GetTableValue(nettable, instanceid);
+    private UpdateSyncEntity(tableName: string, key: string, value: any) {
+        if (value != null && value._t && value._id) {
             try {
-                if (data) {
-                    ET.Entity.FromJson(data);
-                } else {
-                    ET.EntityEventSystem.GetEntity(instanceid)?.Dispose();
-                }
+                ET.Entity.FromJson(value);
             } catch (e) {
                 LogHelper.error("" + e);
             }
+        }
+        else {
+            ET.EntityEventSystem.GetEntity(key)?.Dispose();
+        }
+    }
+
+    addEvent() {
+        let nettable = NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer())! as never;
+        CustomNetTables.SubscribeNetTableListener(nettable, (tableName, key, value) => {
+            this.UpdateSyncEntity(tableName, key as string, value)
         });
-        NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_del_nettable_etentity, (event) => {
-            let instanceid = event.data.instanceId;
-            ET.EntityEventSystem.GetEntity(instanceid)?.Dispose();
+        let netcommon = NetHelper.ENetTables.etentity as never;
+        CustomNetTables.SubscribeNetTableListener(netcommon, (tableName, key, value) => {
+            this.UpdateSyncEntity(tableName, key as string, value)
         });
-        NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_update_nettable_partprop_etentity, (event) => {
-            let instanceid = event.data.instanceId;
-            let nettable = event.data.nettable;
-            let props = event.data.props;
-            let data = NetHelper.GetTableValue(nettable, instanceid);
-            if (data) {
-                let json = {} as any;
-                for (let k of props) {
-                    json[k] = data[k];
-                }
-                ET.EntityEventSystem.GetEntity(instanceid)?.updateFromJson(json);
-            }
-        });
+        // NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_sync_et_entity, (event) => {
+        //     ET.Entity.FromJson(event.data);
+        // });
+        // NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_update_nettable_etentity, (event) => {
+        //     let instanceid = event.data.instanceId;
+        //     let nettable = event.data.nettable;
+        //     let data = NetHelper.GetTableValue(nettable, instanceid);
+        //     try {
+        //         if (data) {
+        //             ET.Entity.FromJson(data);
+        //         } else {
+        //             ET.EntityEventSystem.GetEntity(instanceid)?.Dispose();
+        //         }
+        //     } catch (e) {
+        //         LogHelper.error("" + e);
+        //     }
+        // });
+        // NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_del_nettable_etentity, (event) => {
+        //     let instanceid = event.data.instanceId;
+        //     ET.EntityEventSystem.GetEntity(instanceid)?.Dispose();
+        // });
+        // NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_update_nettable_partprop_etentity, (event) => {
+        //     let instanceid = event.data.instanceId;
+        //     let nettable = event.data.nettable;
+        //     let props = event.data.props;
+        //     let data = NetHelper.GetTableValue(nettable, instanceid);
+        //     if (data) {
+        //         let json = {} as any;
+        //         for (let k of props) {
+        //             json[k] = data[k];
+        //         }
+        //         ET.EntityEventSystem.GetEntity(instanceid)?.updateFromJson(json);
+        //     }
+        // });
         /**监听错误信息 */
         NetHelper.ListenOnLua(this, GameEnum.CustomProtocol.push_error_message, (event) => {
             if (event.data != null) {

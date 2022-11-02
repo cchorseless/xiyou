@@ -7,7 +7,7 @@ interface ICCUserName {
     /** 短id */
     accountid?: string;
     /** 是否显示工会 */
-    showgGild: boolean;
+    showgGild?: boolean;
 }
 
 export class CCUserName extends CCPanel<ICCUserName> {

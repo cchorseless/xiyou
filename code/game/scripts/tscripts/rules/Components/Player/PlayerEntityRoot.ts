@@ -73,7 +73,7 @@ export class PlayerEntityRoot extends ET.EntityRoot {
     public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
         if (this.IsLeaveGame) { return }
         if (this.IsLogin) {
-            NetTablesHelper.SetETEntity(obj, ignoreChild, this.Playerid);
+            NetTablesHelper.SetETEntity(this.Playerid, obj, ignoreChild, this.Playerid);
         }
         else {
             for (let i = 0, len = this._WaitSyncEntity.length; i < len; i++) {

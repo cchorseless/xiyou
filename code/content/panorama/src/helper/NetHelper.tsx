@@ -1,5 +1,3 @@
-import { ET } from "../libs/Entity";
-import { GameEnum } from "../libs/GameEnum";
 import { LogHelper } from "./LogHelper";
 
 export module NetHelper {
@@ -68,9 +66,6 @@ export module NetHelper {
 
     export function GetTableValue(tableName: ENetTables, key: string) {
         let obj = CustomNetTables.GetTableValue(tableName as never, key) as any;
-        if (obj) {
-            obj._nettable = tableName;
-        }
         return obj;
     }
 
@@ -78,15 +73,6 @@ export module NetHelper {
         return CustomNetTables.GetAllTableValues(tableName as never) as { key: string; value: any }[];
     }
 
-    export function IsFromLocalNetTable(entity: ET.Entity) {
-        if (entity.NetTableName == GetETEntityNetTableName()) {
-            return true;
-        }
-        if (entity.NetTableName == GetETEntityNetTableName(Players.GetLocalPlayer())) {
-            return true;
-        }
-        return false;
-    }
 
     export function GetETEntityNetTableName(playerid: PlayerID | null = null) {
         if (playerid == null) {
