@@ -45,7 +45,7 @@ export class BasePureComponentSystem {
     static RegisterBasePureComp(entity: BasePureComponent<NodePropsData>, b: boolean) {
         if (b) {
             if (entity.InstanceId == null || BasePureComponentSystem.AllBasePureComp[entity.InstanceId] != null) {
-                throw new Error("RegisterSystem error");
+                throw new Error("RegisterBasePureComp error");
             }
             BasePureComponentSystem.AllBasePureComp[entity.InstanceId] = entity;
             let resolve = BasePureComponentSystem.AllAsyacResolve[entity.InstanceId];
@@ -55,7 +55,7 @@ export class BasePureComponentSystem {
             }
         } else {
             if (entity.InstanceId == null || BasePureComponentSystem.AllBasePureComp[entity.InstanceId] == null) {
-                throw new Error("UnRegisterSystem error");
+                throw new Error("RegisterBasePureComp error");
             }
             delete BasePureComponentSystem.AllBasePureComp[entity.InstanceId];
         }
@@ -63,10 +63,6 @@ export class BasePureComponentSystem {
     static RegisterReactElement(entity: ReactElement, b: boolean, Domain: BasePureComponent<NodePropsData> | null = null, NodeParentName: string | null = null) {
         if (b) {
             if (entity.key == null || BasePureComponentSystem.AllReactElement[entity.key] != null || Domain == null || NodeParentName == null) {
-                LogHelper.print(entity.key == null)
-                LogHelper.print(BasePureComponentSystem.AllReactElement[entity.key!] != null)
-                LogHelper.print(Domain == null)
-                LogHelper.print(NodeParentName == null)
                 LogHelper.error("RegisterReactElement error");
                 return;
             }

@@ -1,5 +1,6 @@
 import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
+import { LogHelper } from "../../../helper/LogHelper";
 import { PathHelper } from "../../../helper/PathHelper";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCIconButton } from "../CCButton/CCIconButton";
@@ -14,23 +15,29 @@ interface ICCPopUpDialog extends NodePropsData {
 }
 
 export class CCPopUpDialog<T = {}> extends CCPanel<ICCPopUpDialog & T> {
-    defaultClass = () => { return "CC_PopupMain"; };
     static defaultProps = {
         type: CSSHelper.DEFAULT_ADDON_TYPE,
-        onClose: () => { }
+        onClose: () => {
+            LogHelper.print(333333333);
+        }
     };
+    defaultClass = () => { return "CC_PopupMain"; };
     render() {
         const { title } = this.props;
         return (
             this.__root___isValid &&
-            <Panel ref={this.__root__}      {...this.initRootAttrs()}
-            // onload={(self) => { self.AddClass("CC_PopupMainShow"); }}
+            <Panel ref={this.__root__} hittest={true}    {...this.initRootAttrs()}
+                onload={(self) => { self.AddClass("CC_PopupMainShow"); }}
             >
                 <CCPopupBG type={this.props.type} hasTitle={(title != undefined && title != "")} />
                 {(title != null && title != "") &&
                     <Label className="CC_PopupTitle" text={$.Localize(title)} />
                 }
-                <CCIconButton className={this.props.type} icon={<CCIcon_XClose type={this.props.type} />} onactivate={() => this.props.onClose()} />
+                <CCIconButton className={this.props.type} icon={<CCIcon_XClose type={this.props.type} />}
+                    onactivate={() => {
+                        LogHelper.print(222222);
+                        this.props.onClose()
+                    }} />
                 <Panel className="CC_PopupContent">
                     {this.__root___childs}
                     {this.props.children}
@@ -54,7 +61,7 @@ export class CCPopupBG extends CCPanel<ICCPopupBG> {
     };
 
     defaultClass = () => {
-        return "CC_PopupBG"
+        return CSSHelper.ClassMaker("CC_PopupBG", this.props.type)
     }
 
     render() {

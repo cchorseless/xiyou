@@ -10,11 +10,15 @@ export class CCDacBoardPanelV1 extends CCPanel<ICCDacBoardPanel> {
     onStartUI() {
         this.__root__.current!.style.height = "500px"
     }
+
+    defaultStyle = () => {
+        return { disallowedstyleflags: "hover,descendantfocus" }
+    }
+
     render() {
         return (
             this.__root___isValid &&
-            // <Panel ref={this.__root__} id="CCDacBoardPanelV1"  {...this.initRootAttrs()} hittest={false}>
-            <CCPanel id="lower_hud" ref={this.__root__} hittest={false} disallowedstyleflags="hover,descendantfocus" {...this.initRootAttrs()}>
+            <Panel id="lower_hud" ref={this.__root__} hittest={false}  {...this.initRootAttrs()}>
                 <Panel id="StatBranchDrawer" hittest={false}>
                     <GenericPanel type="DOTAStatBranch" id="statbranchdialog" hittest={false} />
                 </Panel>
@@ -74,7 +78,7 @@ export class CCDacBoardPanelV1 extends CCPanel<ICCDacBoardPanel> {
                 </CCPanel>
                 {this.props.children}
                 {this.__root___childs}
-            </CCPanel>
+            </Panel>
 
             // </Panel >
         )

@@ -42,7 +42,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                             onToggle={this.onMenuNavigationToggle} />
                         <CCTopBarCenter />
                         <CCTopBarGameCoin />
-                        <CCDacBoardPanel />
+                        {/* <CCDacBoardPanel /> */}
                         {this.panel_base_childs}
                     </Panel>
                 }

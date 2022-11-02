@@ -22,7 +22,7 @@ export interface ICCIconButton {
     /** ICON */
     icon?: React.ReactNode;
 }
-export class CCIconButton extends CCPanel<ICCIconButton> {
+export class CCIconButton extends CCPanel<ICCIconButton, Button> {
     defaultClass = () => { return ("CC_IconButton"); };
     render() {
         return (

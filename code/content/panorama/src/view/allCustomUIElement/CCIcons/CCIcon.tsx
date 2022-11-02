@@ -24,7 +24,7 @@ export interface ICCIcon {
 }
 
 
-export class CCIcon<T = {}> extends CCPanel<ImageAttributes & ICCIcon & T> {
+export class CCIcon<T = {}> extends CCPanel<ImageAttributes & ICCIcon & T, ImagePanel> {
 	// static defaultProps = {
 	// 	src: "s2r://panorama/images/control_icons/dota_logo_white_png.vtex",
 	// };
@@ -42,7 +42,7 @@ export class CCIcon<T = {}> extends CCPanel<ImageAttributes & ICCIcon & T> {
 	render() {
 		return (
 			this.__root___isValid &&
-			<Image ref={this.__root__ as any}    {...this.initRootAttrs()}>
+			<Image ref={this.__root__}    {...this.initRootAttrs()}>
 				{this.props.children}
 				{this.__root___childs}
 			</Image>
