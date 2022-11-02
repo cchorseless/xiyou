@@ -129,7 +129,7 @@ export module ET {
             if (!this._Ref || v) {
                 this._Ref = new EntityRef(this);
             }
-            return { [this.GetType()]: this._Ref };
+            return { [this.InstanceId]: this._Ref };
         }
 
         public RegRef(content: PureComponent & { UpdateState: (o: any) => void }) {

@@ -21,7 +21,7 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
     }
     onInitUI() {
         PlayerScene.Local.PlayerDataComp.RegRef(this);
-        this.UpdateState(PlayerScene.Local.RoundManagerComp?.getCurrentBoardRound());
+        this.UpdateState(PlayerScene.Local.RoundManagerComp?.getCurrentBoardRound().Ref());
         this.UpdateState({ gametime: -1 });
         TimerHelper.AddIntervalTimer(1, 1,
             FuncHelper.Handler.create(this, () => {
@@ -34,7 +34,7 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
             }), -1, false)
     }
     render() {
-        const playerdata = this.GetState<PlayerDataComponent>("PlayerDataComponent", true);
+        const playerdata = this.GetState<PlayerDataComponent>(PlayerScene.Local.PlayerDataComp.InstanceId, true);
         const round = this.GetState<ERoundBoard>("ERoundBoard", true);
         const gametime = this.GetState<number>("gametime");
         return (

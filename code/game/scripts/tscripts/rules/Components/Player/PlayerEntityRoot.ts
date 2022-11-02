@@ -65,15 +65,20 @@ export class PlayerEntityRoot extends ET.EntityRoot {
             if (entity == null) {
                 break;
             }
-            this.SyncClientEntity(entity.obj, entity.ignoreChild);
+            this.SyncClientEntity(entity.obj, entity.ignoreChild, entity.isShare);
         }
         this._WaitSyncEntity.length = 0;
     }
-    private _WaitSyncEntity: { obj: ET.Entity, ignoreChild: boolean }[] = [];
-    public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
+    private _WaitSyncEntity: { obj: ET.Entity, ignoreChild: boolean, isShare: boolean }[] = [];
+    public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false, isShare: boolean = false): void {
         if (this.IsLeaveGame) { return }
         if (this.IsLogin) {
-            NetTablesHelper.SetETEntity(this.Playerid, obj, ignoreChild, this.Playerid);
+            if (isShare) {
+                NetTablesHelper.SetETEntity(this.Playerid, obj, ignoreChild);
+            }
+            else {
+                NetTablesHelper.SetETEntity(this.Playerid, obj, ignoreChild, this.Playerid);
+            }
         }
         else {
             for (let i = 0, len = this._WaitSyncEntity.length; i < len; i++) {
@@ -82,7 +87,7 @@ export class PlayerEntityRoot extends ET.EntityRoot {
                     return;
                 }
             }
-            this._WaitSyncEntity.push({ obj: obj, ignoreChild: ignoreChild });
+            this._WaitSyncEntity.push({ obj: obj, ignoreChild: ignoreChild, isShare: isShare });
         }
     }
 

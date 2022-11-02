@@ -1,4 +1,5 @@
 import React from "react";
+import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCAvatar } from "../allCustomUIElement/CCAvatar/CCAvatar";
 import { CCBaseButton } from "../allCustomUIElement/CCButton/CCButton";
@@ -14,6 +15,9 @@ interface ICCPlayerListPanel extends NodePropsData {
 
 export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
     onInitUI() {
+        PlayerScene.EntityRootManage.getAllPlayer().forEach(player => {
+            player.CourierDataComp.RegRef(this);
+        })
     }
 
     render() {
@@ -23,7 +27,7 @@ export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
                 {[0, 1, 2, 3, 4].map((playerID) => {
                     const playerInfo = playerData[playerID];
                     return (
-                        <CCBaseButton key={playerID + ""} enabled={playerInfo.health > 0} className="PlayerInfo" onactivate={self => { }} customTooltip={{ name: "player_info", playerID: playerID }}>
+                        <CCBaseButton key={playerID + ""} enabled={playerInfo.health > 0} className="PlayerInfo" onactivate={self => { }} >
                             <CCAvatar id="playerAvatar" width="48px" height="48px" accountid={playerInfo.steamID.toString()} />
                             {playerInfo.steamID == "0" &&
                                 <Image id="playerAvatar" style={{ width: "48px", height: "48px" }} src="s2r://panorama/images/bot_icon_unfair_png.vtex" />

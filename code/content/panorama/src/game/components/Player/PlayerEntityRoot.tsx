@@ -5,6 +5,7 @@ import { PlayerConfig } from "../../system/Player/PlayerConfig";
 import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
 import { ChessControlComponent } from "../ChessControlComponent";
 import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";
+import { CourierDataComponent } from "../Courier/CourierDataComponent";
 import { DrawComponent } from "../Draw/DrawComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerDataComponent } from "./PlayerDataComponent";
@@ -79,6 +80,10 @@ export class PlayerEntityRoot extends ET.Entity {
     get RoundManagerComp() {
         return this.GetComponentByName<RoundManagerComponent>("RoundManagerComponent")!;
     }
+    get CourierDataComp() {
+        return this.GetComponentByName<CourierDataComponent>("CourierDataComponent")!;
+    }
+
     get TCharacter() {
         return this.GetComponentByName<TCharacter>("TCharacter")!;
     }

@@ -7,6 +7,11 @@ import { ET, serializeETProps } from "../../Entity/Entity";
 /**玩家组件 */
 @reloadable
 export class CourierDataComponent extends ET.Component {
+    @serializeETProps()
+    health: number = 100;
+
+
+
     /**出生点 */
     firstSpawnPoint: Vector;
     /**玩家物品信息 */

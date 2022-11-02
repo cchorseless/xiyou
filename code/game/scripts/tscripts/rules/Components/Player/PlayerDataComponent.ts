@@ -134,7 +134,6 @@ export class PlayerDataComponent extends ET.Component {
                 this.changePopulation(-popu);
             });
 
-
         EventHelper.addProtocolEvent(this, PlayerConfig.EProtocol.reqApplyPopuLevelUp, (e) => {
             e.state = true;
             let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
