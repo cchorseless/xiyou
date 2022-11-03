@@ -2,63 +2,63 @@
     margin-top: 80px;
     margin-left: 32px;
     flow-children: down;
-}
 
-#playerAvatar {
-    z-index: 1;
-    border-radius: 4px;
-}
-
-.PlayerInfo {
-    margin-bottom: 10px;
-    transition-property: position, saturation, brightness;
-    transition-duration: 0.2s;
-}
-
-#PlayerInfoRight {
-    width: 210px;
-    height: 48px;
-    background-image: url("file://{images}/custom_game/hud/player_info_vibg.png");
-    background-size: 100%;
-    padding-left: 40px;
-    padding-top: 4px;
-    margin-left: 14px;
-
-    #PlayerDamage {
-        color: white;
-        text-shadow: 0px 0px 1px 2 #000000;
-        font-size: 14px;
-        height: 16px;
+    #playerAvatar {
+        z-index: 1;
+        border-radius: 4px;
     }
 
-    #PlayerName {
-        margin-left: 30px;
-        width: 150px;
-        height: 16px;
+    .PlayerInfo {
+        margin-bottom: 10px;
+        transition-property: position, saturation, brightness;
+        transition-duration: 0.2s;
+    }
 
-        font-size: 14px;
-        color: #A1CBDC;
-        text-shadow: 0px 0px 1px 2 #000000;
-        text-overflow: shrink;
+    #PlayerInfoRight {
+        width: 210px;
+        height: 48px;
+        background-image: url("file://{images}/custom_game/hud/player_info_vibg.png");
+        background-size: 100%;
+        padding-left: 40px;
+        padding-top: 4px;
+        margin-left: 14px;
 
-        Label {
+        #PlayerDamage {
+            color: white;
+            text-shadow: 0px 0px 1px 2 #000000;
+            font-size: 14px;
+            height: 16px;
+        }
+
+        #PlayerName {
+            margin-left: 30px;
+            width: 150px;
+            height: 16px;
+
             font-size: 14px;
             color: #A1CBDC;
             text-shadow: 0px 0px 1px 2 #000000;
             text-overflow: shrink;
+
+            Label {
+                font-size: 14px;
+                color: #A1CBDC;
+                text-shadow: 0px 0px 1px 2 #000000;
+                text-overflow: shrink;
+            }
         }
-    }
 
-    .CC_ProgressBar {
-        height: 20px;
-        vertical-align: bottom;
-        margin-bottom: 4px;
-    }
+        .CC_ProgressBar {
+            height: 20px;
+            vertical-align: bottom;
+            margin-bottom: 4px;
+        }
 
-    #PlayerHealthLabel {
-        align: center center;
-        font-size: 16px;
-        text-shadow: 0px 0px 1px 2 #000000;
-        color: white;
+        #PlayerHealthLabel {
+            align: center center;
+            font-size: 16px;
+            text-shadow: 0px 0px 1px 2 #000000;
+            color: white;
+        }
     }
 }

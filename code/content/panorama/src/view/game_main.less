@@ -61,18 +61,7 @@
     }
 }
 
-.hero_draw_card_box {
-    // width: 300px;
-    // height: 300px;
-    transition-property: transform;
-    transition-duration: 0.2s;
-    z-index: 500;
-    // margin-top: -45px;
-}
 
-.hero_draw_card_box:hover {
-    transform: scale3d(1.2, 1.2, 1.2);
-}
 
 .CommonButton {
     &:hover {
@@ -117,4 +106,105 @@
         text-transform: none;
         text-align: center;
     }
+}
+
+@define NeutralTier1: #BEBEBE;
+@define NeutralTier2: #92E47E;
+@define NeutralTier3: #7F93FC;
+@define NeutralTier4: #D57BFF;
+@define NeutralTier5: #FFE195;
+@define NeutralTier6: #FF9595;
+@define NeutralTier7: gradient(linear, 0% 0%, 0% 100%, from(#c300ff), to(#ffcc00));
+
+.HotkeyContainer {
+    width: 100%;
+    height: 100%;
+    margin-left: 1px;
+    z-index: 5;
+
+    #Hotkey {
+        margin-left: -4px;
+        z-index: 16;
+        border-radius: 20%;
+        vertical-align: top;
+        horizontal-align: left;
+        min-width: 14px;
+        min-height: 14px;
+        max-width: 70px;
+        max-height: 15px;
+        white-space: nowrap;
+        background-color: gradient(linear, 0% 0%, 0% 100%, from(#393939), to(#414849));
+        border: 1px solid #ffffff05;
+        box-shadow: fill black 2px 1px 1px 2px;
+    }
+
+    #HotkeyText {
+        color: #bba995;
+        text-shadow: 1px 1px 0px 2 #000000;
+        font-size: 12px;
+        font-weight: normal;
+        text-align: center;
+        horizontal-align: center;
+        margin: 0px 0px -2px 0px;
+    }
+
+    #HotkeyModifier {
+        margin-left: -4px;
+        margin-top: 20px;
+        z-index: 16;
+        vertical-align: top;
+        horizontal-align: left;
+        min-width: 18px;
+        flow-children: down;
+        background-color: gradient(linear, 0% 0%, 0% 100%, from(#393939), to(#414849));
+        border: 1px solid #ffffff05;
+        box-shadow: fill black 2px 1px 1px 2px;
+        visibility: collapse;
+    }
+
+    &.hotkey_alt #HotkeyModifier {
+        visibility: visible;
+    }
+
+    #AltText {
+        color: #bba995;
+        text-shadow: 1px 1px 2px 2 #000000;
+        font-size: 8px;
+        font-weight: normal;
+        text-align: center;
+        width: 100%;
+        margin: 0px -2px -2px -1px;
+        visibility: visible;
+    }
+
+    #HotkeyCtrlModifier {
+        margin-left: 0px;
+        margin-top: 0px;
+        z-index: 15;
+        vertical-align: top;
+        horizontal-align: left;
+        min-width: 31px;
+        background-color: #212726;
+        border-radius: 4px;
+        border: 1px solid black;
+        box-shadow: fill #000000dd 1px 0px 2px 2px;
+        visibility: collapse;
+    }
+
+    &.hotkey_ctrl #HotkeyCtrlModifier {
+        visibility: visible;
+    }
+}
+
+.GameplayVariable {
+    font-weight: semibold;
+    color: #e1e1e1;
+}
+
+Label .GameplayValues {
+    color: #4d5560;
+}
+
+Label .GameplayValues.GameplayVariable {
+    color: #e1e1e1;
 }

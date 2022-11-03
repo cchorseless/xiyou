@@ -1,6 +1,5 @@
 import React, { createRef, PureComponent } from "react";
-import { PanelAttributes, ImageAttributes, DOTAAbilityImageAttributes, LabelAttributes } from "@demon673/react-panorama";
-import { BasePureComponent, NodePropsData } from "../../../libs/BasePureComponent";
+import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCPanel } from "../CCPanel/CCPanel";
 

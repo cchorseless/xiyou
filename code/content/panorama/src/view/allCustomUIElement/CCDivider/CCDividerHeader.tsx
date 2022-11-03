@@ -1,15 +1,13 @@
 import React, { } from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCPanel } from "../CCPanel/CCPanel";
-import "./CCDivider.less";
-export interface ICCDivider {
-    /** 默认样式 */
-    defaultClass?: "Default";
+import "./CCDividerHeader.less";
+export interface ICCDividerHeader {
 }
 
 /** 分割线 */
-export class CCDivider extends CCPanel<ICCDivider> {
-    defaultClass = () => { return CSSHelper.ClassMaker("CC_Divider", this.props.defaultClass); };
+export class CCDividerHeader extends CCPanel<ICCDividerHeader> {
+    defaultClass = () => { return CSSHelper.ClassMaker("CC_DividerHeader"); };
     render() {
         return (
             this.__root___isValid &&

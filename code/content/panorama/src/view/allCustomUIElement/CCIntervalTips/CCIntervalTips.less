@@ -1,0 +1,65 @@
+.CC_IntervalTips {
+    width: 484px;
+    height: 84px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid #9B9B9B;
+    border-radius: 8px;
+    flow-children: none;
+
+    #TipLabel {
+        width: 400px;
+        align: center center;
+        font-size: 18px;
+        color: #FFF;
+        text-align: center;
+    }
+
+    #PrevTip {
+        width: 24px;
+        height: 24px;
+        vertical-align: center;
+        margin-left: 12px;
+        background-image: url("s2r://panorama/images/control_icons/arrow_solid_right_png.vtex");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        pre-transform-rotate2d: 180deg;
+
+        transition-property: brightness, pre-transform-scale2d;
+        transition-duration: 0.1s;
+        transition-timing-function: ease-in-out;
+
+        &:hover {
+            brightness: 1.5;
+            pre-transform-scale2d: 1.05;
+        }
+
+        &:active {
+            brightness: 0.95;
+            pre-transform-scale2d: 0.95;
+        }
+    }
+
+    #NextTip {
+        width: 24px;
+        height: 24px;
+        align: right center;
+        margin-right: 12px;
+        background-image: url("s2r://panorama/images/control_icons/arrow_solid_right_png.vtex");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        transition-property: brightness, pre-transform-scale2d;
+        transition-duration: 0.1s;
+        transition-timing-function: ease-in-out;
+
+        &:hover {
+            brightness: 1.5;
+            pre-transform-scale2d: 1.05;
+        }
+
+        &:active {
+            brightness: 0.95;
+            pre-transform-scale2d: 0.95;
+        }
+    }
+}

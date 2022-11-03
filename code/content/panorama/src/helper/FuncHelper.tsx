@@ -161,7 +161,9 @@ export module FuncHelper {
             return [this.x, this.y, this.z] as [number, number, number];
         }
     }
-
+    export function ToFloat(v: number | string) {
+        return Math.round(Number(v) * 10000) / 10000;
+    }
     export function Clamp(num: number, min: number, max: number) {
         return num <= min ? min : num >= max ? max : num;
     }
@@ -169,7 +171,10 @@ export module FuncHelper {
     export function Lerp(percent: number, a: number, b: number) {
         return a + percent * (b - a);
     }
-
+    export function Round(fNumber: number, prec = 0) {
+        let i = Math.pow(10, prec);
+        return Math.round(fNumber * i) / i;
+    }
     export function RemapValClamped(num: number, a: number, b: number, c: number, d: number) {
         if (a == b) return c;
         let percent = (num - a) / (b - a);
@@ -223,4 +228,68 @@ export module FuncHelper {
             return Math.round(Math.random() * (max - min) + min);
         }
     }
+
+    export namespace BigNumber {
+        export enum Digit {
+            K = 1,
+            M = 2,
+            G = 3,
+            T = 4,
+            P = 5,
+            E = 6,
+            Z = 7,
+            Y = 8,
+            B = 9,
+        }
+        export enum DigitSchinese {
+            "万" = 1,
+            "亿" = 2,
+            "万亿" = 3,
+            "兆" = 4,
+            "万兆" = 5,
+            "京" = 6,
+            "万京" = 7,
+            "垓" = 8,
+            "万垓" = 9,
+        }
+
+        export function FormatNumber(fNumber: number, prec: number = 2) {
+            fNumber = ToFloat(fNumber);
+            let [a, b] = FormatNumberBase(fNumber, prec);
+            if (b) {
+                return a + b;
+            }
+            return a;
+        }
+
+        export function FormatNumberBase(fNumber: number, prec = 2) {
+            let sSign = fNumber < 0 ? "-" : "";
+            fNumber = Math.abs(fNumber);
+            let sNumber = String(Math.abs(fNumber));
+            let a = sNumber.split(".");
+            let sInteger = a[0];
+            let sLanguage = $.Language().toLowerCase();
+            if (sLanguage == "schinese") {
+                let n = Math.floor((sInteger.length - 1) / 4);
+                if (n == 0) {
+                    return [sSign + String(Round(fNumber, prec))];
+                }
+                sNumber = String(Round(fNumber / Math.pow(10000, n), prec));
+                let sDigit = DigitSchinese[n];
+                return [sSign + sNumber, sDigit];
+            } else {
+                let n = Math.floor((sInteger.length - 1) / 3);
+                if (n == 0) {
+                    return [sSign + String(Round(fNumber, prec))];
+                }
+                sNumber = String(Round(fNumber / Math.pow(1000, n), prec));
+                let sDigit = Digit[n];
+                return [sSign + sNumber, sDigit];
+            }
+        }
+    }
+
+
+
+
 }

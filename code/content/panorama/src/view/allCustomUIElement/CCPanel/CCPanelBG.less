@@ -1,0 +1,32 @@
+.CC_PanelBG {
+    opacity-mask-scroll-up: url("file://{images}/masks/vertical_scroll_mask_up.png");
+    opacity-mask-scroll-down: url("file://{images}/masks/vertical_scroll_mask_down.png");
+    opacity-mask-scroll-up-down: url("file://{images}/masks/vertical_scroll_mask.png");
+
+    &>VerticalScrollBar {
+        margin-right: 0px;
+        width: 6px;
+        // opacity: 0;
+        // background-size: 24px 29px, 24px 29px, 24px 100%;
+        // background-position: center top, center bottom, center top;
+        // background-repeat: no-repeat;
+        height: 95%;
+        vertical-align: center;
+        // overflow: noclip;
+
+        .ScrollThumb {
+            // background-size: 4px 80%, 8px 5%, 8px 5%;
+            // background-position: center center, center 5%, center 95%;
+            // background-repeat: no-repeat;
+            background-color: #999a9c;
+            border-width: 0px;
+            border-radius: 6px;
+        }
+    }
+
+    &.Default {
+        background-color: gradient(linear, 0% 0%, 0% 25%, from(#232326), to(#1c1d20));
+        box-shadow: #00000099 0px 0px 8px 0px;
+        border: 2px solid #32383677;
+    }
+}

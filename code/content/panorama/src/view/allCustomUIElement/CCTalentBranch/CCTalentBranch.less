@@ -1,0 +1,112 @@
+@keyframes LevelUpPulse {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+#CCTalentBranch {
+    #TalentBranchTitle {
+        horizontal-align: center;
+        font-size: 20px;
+        color: white;
+        text-shadow: 0px 0px 3px 3.0 #000000;
+        margin: 2px 0px;
+    }
+
+    .TalentLeft {
+        vertical-align: center;
+        background-color: gradient(linear, 70% 0%, 100% 0%, from(#10233a), to(#10233a00));
+
+        &.Selected {
+            .TalentDescription {
+                saturation: 1;
+                brightness: 1;
+                color: #CF9417;
+            }
+
+            // background-color: gradient(linear, 70% 0%, 100% 0%, from(#3a2610), to(#10233a00));
+        }
+
+        &.active {
+            .TalentDescription {
+                saturation: 1;
+                brightness: 1;
+                color: white;
+            }
+
+            animation-name: LevelUpPulse;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            background-image: url("file://{images}/custom_game/hud/statbranch_select_bg_left.png");
+            background-size: 100%;
+        }
+    }
+
+    .TalentRight {
+        vertical-align: center;
+        background-color: gradient(linear, 0% 0%, 30% 0%, from(#10233a00), to(#10233a));
+
+        &.Selected {
+            .TalentDescription {
+                saturation: 1;
+                brightness: 1;
+                color: #CF9417;
+            }
+
+            // background-color: gradient(linear, 70% 0%, 100% 0%, from(#3a2610), to(#10233a00));
+        }
+
+
+        &.active {
+            .TalentDescription {
+                saturation: 1;
+                brightness: 1;
+                color: white;
+            }
+
+            animation-name: LevelUpPulse;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            background-image: url("file://{images}/custom_game/hud/statbranch_select_bg_right.png");
+            background-size: 100%;
+        }
+    }
+
+    .TalentDescription {
+        font-size: 14px;
+        text-align: center;
+        align: center center;
+        color: #9bb1cd;
+        saturation: 0;
+        brightness: 0.5;
+
+        &.GameplayVariable {
+            font-weight: semibold;
+            color: #e1e1e1;
+        }
+
+        .GameplayValues {
+            color: #4d5560;
+        }
+
+        .UltimateValues {
+            color: #45DD3B;
+        }
+
+        .UltimateValues.GameplayVariable {
+            color: #45DD3B;
+        }
+
+        .GameplayValues.GameplayVariable {
+            color: #e1e1e1;
+        }
+    }
+}

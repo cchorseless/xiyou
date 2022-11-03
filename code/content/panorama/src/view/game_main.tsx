@@ -11,13 +11,13 @@ import { TimerHelper } from "../helper/TimerHelper";
 import { GameEnum } from "../libs/GameEnum";
 import { Minimap_plus } from "./alldota2/minimap_plus/Minimap_plus";
 import { EntityOverHeadPanel } from "./Common/EntityOverHeadPanel";
-import { HeroDebugItem } from "./Hero/HeroDebugItem";
 import { MainPanel } from "./MainPanel/MainPanel";
 import { CCMenuNavigation } from "./allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCLabel } from "./allCustomUIElement/CCLabel/CCLabel";
 import { CCAvatar } from "./allCustomUIElement/CCAvatar/CCAvatar";
 import { CCMainPanel } from "./MainPanel/CCMainPanel";
 import { CCPanel } from "./allCustomUIElement/CCPanel/CCPanel";
+import { CCPausePanel } from "./allCustomUIElement/CCPause/CCPausePanel";
 
 export class RootPanel extends CCPanel {
     /**全局根节点实例 */
@@ -40,6 +40,7 @@ export class RootPanel extends CCPanel {
                 <Panel ref={this.__root__} className="CC_root" {...this.initRootAttrs()}>
                     {/* <EntityOverHeadPanel /> */}
                     <CCMainPanel />
+                    <CCPausePanel tipQueue={["1", "2", "3"]} />
                     {this.props.children}
                     {this.__root___childs}
                 </Panel>
