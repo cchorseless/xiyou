@@ -156,7 +156,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
      * @returns
      */
     public GetState<T>(key: string) {
-        let obj = (this.state as any)[key];
+        let obj = ((this.state || {}) as any)[key];
         return obj as T;
     }
 

@@ -1,5 +1,3 @@
-import { LogHelper } from "./LogHelper";
-
 export module CSSHelper {
 
     export const DEFAULT_ADDON_TYPE = "Tui3";
@@ -936,16 +934,15 @@ export module CSSHelper {
         if (panel == null || !panel.IsValid()) {
             return [0, 0];
         }
-        let scalex = panel.actualuiscale_x || 1;
-        let scaley = panel.actualuiscale_y || 1;
+        // let scalex = panel.actualuiscale_x || 1;
+        // let scaley = panel.actualuiscale_y || 1;
         if (panel.IsSizeValid()) {
             return [panel.actuallayoutwidth, panel.actuallayoutheight];
         }
         let width = panel.style.width, height = panel.style.height;
         if (width == null || height == null) {
-            LogHelper.error("Panel size parameter error")
+            return [500, 200];
         }
-
         return [Number(width?.replace("px", "")), Number(height?.replace("px", ""))];
     }
     export function setLocalText(node: React.RefObject<LabelPanel>, str: string) {

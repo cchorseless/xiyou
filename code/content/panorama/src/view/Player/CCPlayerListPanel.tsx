@@ -8,6 +8,7 @@ import { CCIcon } from "../allCustomUIElement/CCIcons/CCIcon";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCProgressBar } from "../allCustomUIElement/CCProgressBar/CCProgressBar";
 import { CCUserName } from "../allCustomUIElement/CCUserName/CCUserName";
+import { CCPlayerInfoDialog } from "./CCPlayerInfoDialog";
 import "./CCPlayerListPanel.less";
 
 interface ICCPlayerListPanel extends NodePropsData {
@@ -32,7 +33,11 @@ export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
                     if (!CourierData) { return }
                     const playerID = CourierData.BelongPlayerid;
                     return (
-                        <CCBaseButton key={playerID + ""} enabled={CourierData.health > 0} className="PlayerInfo" onactivate={self => { }} >
+                        <CCBaseButton key={playerID + ""}
+                            enabled={CourierData.health > 0}
+                            className="PlayerInfo"
+                            onactivate={self => { }}
+                            dialogTooltip={{ tipTypeClass: CCPlayerInfoDialog, props: { Playerid: playerID }, layoutleftRight: true }}>
                             <CCAvatar id="playerAvatar" width="48px" height="48px" accountid={CourierData.steamID} />
                             {!CourierData.IsValidSteamID() &&
                                 <Image id="playerAvatar" style={{ width: "48px", height: "48px" }} src="s2r://panorama/images/bot_icon_unfair_png.vtex" />

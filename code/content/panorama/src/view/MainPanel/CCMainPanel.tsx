@@ -104,24 +104,8 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     //#region tooltips
     private CustomToolTip: BaseEasyPureComponent | null;
     private HideToolTipFunc: (() => void) | null;
-    /**显示tooltip弹窗 */
-    public async ShowCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, dialoginfo: { tipTypeClass: T, props: M | any, layoutleftRight: boolean }) {
-        if (bindpanel == null || !bindpanel.IsValid()) { return };
-        if (dialoginfo.tipTypeClass == null) { return };
-        let tipTypeClass = dialoginfo.tipTypeClass;
-        let obj = dialoginfo.props || {};
-        let layoutleftRight = dialoginfo.layoutleftRight || false;
-        let isinrange = true;
+    private UpdateToolTipPos(bindpanel: Panel, layoutleftRight: boolean) {
         const offset = 20;
-        let brightness = Number(bindpanel.style.brightness) || 1;
-        bindpanel.style.brightness = brightness + 0.5 + "";
-        let newtip = await this.addNodeChildAsyncAt<M, T>(this.NODENAME.panel_alldialog, tipTypeClass, obj);
-        if (!isinrange) {
-            newtip?.close();
-            return;
-        }
-        this.HideToolTip();
-        this.CustomToolTip = newtip;
         let pos = this.stagePos(bindpanel);
         let panelsize = CSSHelper.getPanelSize(bindpanel);
         let panelwidth = panelsize[0];
@@ -131,91 +115,10 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         let windowheight = windowsize[1];
         let isleft = pos.x <= windowwidth / 2;
         let istop = pos.y <= windowheight / 2;
-        let dialogpanel = this.CustomToolTip!.__root__.current!;
-        dialogpanel.visible = false;
-        let posdialog = { x: 0, y: 0 };
-        let size = CSSHelper.getPanelSize(dialogpanel)
-        let dialogwidth = size[0];
-        let dialogheight = size[1];
-        if (layoutleftRight) {
-            if (isleft) {
-                posdialog.x = pos.x + panelwidth + offset;
-            }
-            else {
-                posdialog.x = pos.x - dialogwidth - offset;
-            }
-            posdialog.y = pos.y + panelheight / 2 - dialogheight / 2;
-            if (posdialog.y < 0) {
-                posdialog.y = 0;
-            }
-            else if (posdialog.y + dialogheight > windowheight) {
-                posdialog.y = windowheight - dialogheight;
-            }
-        }
-        else {
-            if (istop) {
-                posdialog.y = pos.y + panelheight + offset;
-            }
-            else {
-                posdialog.y = pos.y - dialogheight - offset;
-            }
-            posdialog.x = pos.x + panelwidth / 2 - dialogwidth / 2;
-            if (posdialog.x < 0) {
-                posdialog.x = 0;
-            }
-        }
-        dialogpanel.SetPositionInPixels(posdialog.x, posdialog.y, 0);
-        dialogpanel.visible = true;
-        this.HideToolTipFunc = () => {
-            isinrange = false;
-            bindpanel.style.brightness = brightness + "";
-            if (this.CustomToolTip) {
-                this.CustomToolTip.close();
-                this.CustomToolTip = null;
-                this.updateSelf();
-            }
-        };
-    }
-    /**注册tooltip弹窗事件 */
-    public RegCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = false) {
-        if (bindpanel == null || !bindpanel.IsValid()) { return };
-        let isinrange = false;
-        const offset = 20;
-        let brightness = Number(bindpanel.style.brightness) || 1;
-        bindpanel.SetPanelEvent('onmouseover', async () => {
-            let obj: any = {};
-            if (attrFunc) {
-                obj = attrFunc();
-                // 有函数且返回null,不显示
-                if (obj == null) {
-                    return
-                }
-            }
-            bindpanel.style.brightness = brightness + 0.5 + "";
-            isinrange = true;
-            let newtip = await this.addNodeChildAsyncAt<M, T>(this.NODENAME.panel_alldialog, tipTypeClass, obj);
-            if (!isinrange) {
-                newtip.close();
-                return;
-            }
-            if (this.CustomToolTip) {
-                this.CustomToolTip.close();
-                this.CustomToolTip = null;
-            }
-            this.CustomToolTip = newtip;
-            let pos = this.stagePos(bindpanel);
-            let panelsize = CSSHelper.getPanelSize(bindpanel);
-            let panelwidth = panelsize[0];
-            let panelheight = panelsize[1];
-            let windowsize = CSSHelper.getPanelSize(this.__root__.current!);
-            let windowwidth = windowsize[0];
-            let windowheight = windowsize[1];
-            let isleft = pos.x <= windowwidth / 2;
-            let istop = pos.y <= windowheight / 2;
+        let setPosFunc = () => {
             let dialogpanel = this.CustomToolTip!.__root__.current!;
-            dialogpanel.visible = false;
             let posdialog = { x: 0, y: 0 };
-            let size = CSSHelper.getPanelSize(dialogpanel)
+            let size = CSSHelper.getPanelSize(dialogpanel);
             let dialogwidth = size[0];
             let dialogheight = size[1];
             if (layoutleftRight) {
@@ -246,7 +149,75 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                 }
             }
             dialogpanel.SetPositionInPixels(posdialog.x, posdialog.y, 0);
-            dialogpanel.visible = true;
+        }
+        setPosFunc();
+        let tasktimer = TimerHelper.AddIntervalTimer(0.1, 0.1, FuncHelper.Handler.create(this, () => {
+            let issizevalid = this.CustomToolTip?.__root__.current?.IsSizeValid();
+            if (issizevalid) {
+                tasktimer.Clear();
+                setPosFunc();
+            }
+            else if (issizevalid == null) {
+                tasktimer.Clear();
+            }
+
+        }), 10);
+    }
+    /**显示tooltip弹窗 */
+    public async ShowCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, dialoginfo: { tipTypeClass: T, props: M | any, layoutleftRight: boolean }) {
+        if (bindpanel == null || !bindpanel.IsValid()) { return };
+        if (dialoginfo.tipTypeClass == null) { return };
+        let tipTypeClass = dialoginfo.tipTypeClass;
+        let obj = dialoginfo.props || {};
+        let layoutleftRight = dialoginfo.layoutleftRight || false;
+        let isinrange = true;
+        let brightness = Number(bindpanel.style.brightness) || 1;
+        bindpanel.style.brightness = brightness + 0.5 + "";
+        let newtip = await this.addNodeChildAsyncAt<M, T>(this.NODENAME.panel_alldialog, tipTypeClass, obj);
+        if (!isinrange) {
+            newtip?.close();
+            return;
+        }
+        this.HideToolTip();
+        this.CustomToolTip = newtip;
+        this.UpdateToolTipPos(bindpanel, layoutleftRight);
+        this.HideToolTipFunc = () => {
+            isinrange = false;
+            bindpanel.style.brightness = brightness + "";
+            if (this.CustomToolTip) {
+                this.CustomToolTip.close();
+                this.CustomToolTip = null;
+                this.updateSelf();
+            }
+        };
+    }
+    /**注册tooltip弹窗事件 */
+    public RegCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = false) {
+        if (bindpanel == null || !bindpanel.IsValid()) { return };
+        let isinrange = false;
+        let brightness = Number(bindpanel.style.brightness) || 1;
+        bindpanel.SetPanelEvent('onmouseover', async () => {
+            let obj: any = {};
+            if (attrFunc) {
+                obj = attrFunc();
+                // 有函数且返回null,不显示
+                if (obj == null) {
+                    return
+                }
+            }
+            bindpanel.style.brightness = brightness + 0.5 + "";
+            isinrange = true;
+            let newtip = await this.addNodeChildAsyncAt<M, T>(this.NODENAME.panel_alldialog, tipTypeClass, obj);
+            if (!isinrange) {
+                newtip.close();
+                return;
+            }
+            if (this.CustomToolTip) {
+                this.CustomToolTip.close();
+                this.CustomToolTip = null;
+            }
+            this.CustomToolTip = newtip;
+            this.UpdateToolTipPos(bindpanel, layoutleftRight)
             this.HideToolTipFunc = hideFunc;
         });
         let hideFunc = () => {

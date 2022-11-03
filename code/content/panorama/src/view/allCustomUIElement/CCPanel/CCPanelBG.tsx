@@ -4,14 +4,17 @@ import { CCPanel } from "./CCPanel";
 import "./CCPanelBG.less";
 
 interface ICCPanelBG {
-    defaultClass?: "Default";
+    type?: "Default" | "Tui3";
 }
 
 export class CCPanelBG extends CCPanel<ICCPanelBG> {
     defaultClass = () => {
-        return CSSHelper.ClassMaker("CC_PanelBG", this.props.defaultClass);;
+        return CSSHelper.ClassMaker("CC_PanelBG", this.props.type);;
     };
 
+    static defaultProps = {
+        type: "Tui3"
+    }
     render() {
         return (this.__root___isValid &&
             <Panel ref={this.__root__}      {...this.initRootAttrs()}>

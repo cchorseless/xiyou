@@ -1,0 +1,72 @@
+#CC_PlayerInfoDialog {
+
+    .AbilityRow {
+        margin: 3px 0px;
+
+        DOTAAbilityImage {
+            // border: 1px solid white;
+            margin-left: 4px;
+            border-radius: 2px;
+            // border-brush: gradient(linear, 0% 0%, 0% 100%, from(#a09a72), to(#755417));
+            box-shadow: 0px 0px 6px 0px #000000;
+            width: 36px;
+            height: 36px;
+        }
+
+        DOTAItemImage {
+            margin-left: 4px;
+            border-radius: 2px;
+            box-shadow: 0px 0px 6px 0px #000000;
+            width: 52px;
+            height: 40px;
+        }
+
+        .AttributeName,
+        .AbilityName {
+            // font-family: titleFont;
+            color: white;
+            font-size: 16px;
+            text-shadow: 0px 0px 3px 2.0 #000000;
+        }
+
+        .AttributeName {
+            margin-top: 10px;
+        }
+
+        .AbilityType {
+            padding: 2px 6px;
+            color: white;
+            background-color: #10233a;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        .AttributeDescription,
+        .AbilityDescription {
+            margin-top: 4px;
+            font-size: 14px;
+            color: #9bb1cd;
+
+            &.GameplayVariable {
+                font-weight: semibold;
+                color: #e1e1e1;
+            }
+
+            .GameplayValues {
+                color: #4d5560;
+            }
+
+            .UltimateValues {
+                color: #45DD3B;
+            }
+
+            .UltimateValues.GameplayVariable {
+                color: #45DD3B;
+            }
+
+            .GameplayValues.GameplayVariable {
+                color: #e1e1e1;
+            }
+        }
+    }
+}
