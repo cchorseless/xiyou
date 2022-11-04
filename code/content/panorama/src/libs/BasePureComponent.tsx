@@ -475,7 +475,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             }
         }
         // 不遮挡tooltip
-        this.__root__.current!.hittest = false;
+        // this.__root__.current!.hittest = false;
         (this as any).InstanceId = this.props.__onlykey__ || FuncHelper.generateUUID();
         this.setRegister(true);
         // 下一帧开始刷新

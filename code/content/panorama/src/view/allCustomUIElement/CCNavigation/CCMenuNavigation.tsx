@@ -16,6 +16,10 @@ interface IMenuNavigationProps extends NodePropsData {
 export class CCMenuNavigation extends CCPanel<IMenuNavigationProps> {
 	state = { select_name: "", subscribeEnable: true };
 
+	NoSelectAny() {
+		this.UpdateState({ select_name: "", subscribeEnable: true })
+	}
+
 	render() {
 		return this.__root___isValid &&
 			<Panel ref={this.__root__} id="LeftTopMain" hittest={false} {...this.initRootAttrs()}>

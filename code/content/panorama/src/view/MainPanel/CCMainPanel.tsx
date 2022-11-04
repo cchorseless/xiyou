@@ -7,6 +7,7 @@ import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { ToolTipHelper } from "../../helper/ToolTipHelper";
 import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
+import { CCMiniMap } from "../allCustomUIElement/CCMiniMap/CCMiniMap";
 import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCDacBoardPanel } from "../DacBoard/CCDacBoardPanel";
@@ -55,6 +56,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCTopBarCenter />
                         <CCTopBarGameCoin />
                         <CCPlayerListPanel />
+                        <CCMiniMap />
                         {this.panel_base_childs}
                     </Panel>
                 }
@@ -75,18 +77,16 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     };
 
     private onMenuNavigationToggle = (menuName: string, state: boolean) => {
-        if (menuName == "store") {
-            if (state) {
+        CCShopPanel.GetInstance()?.close();
+        if (state) {
+            if (menuName == "store") {
                 this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCShopPanel, {
                     type: "Tui3"
                     // marginTop: "100px",
                 } as any)
-                this.updateSelf();
-            }
-            else {
-                CCShopPanel.GetInstance()?.close()
             }
         }
+        this.updateSelf();
     }
 
 

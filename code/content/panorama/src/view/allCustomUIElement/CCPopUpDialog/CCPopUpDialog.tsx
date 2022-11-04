@@ -17,9 +17,7 @@ interface ICCPopUpDialog extends NodePropsData {
 export class CCPopUpDialog<T = {}> extends CCPanel<ICCPopUpDialog & T> {
     static defaultProps = {
         type: CSSHelper.DEFAULT_ADDON_TYPE,
-        onClose: () => {
-            LogHelper.print(333333333);
-        }
+        onClose: () => { }
     };
     defaultClass = () => { return "CC_PopupMain"; };
     render() {
@@ -35,7 +33,6 @@ export class CCPopUpDialog<T = {}> extends CCPanel<ICCPopUpDialog & T> {
                 }
                 <CCIconButton className={this.props.type} icon={<CCIcon_XClose type={this.props.type} />}
                     onactivate={() => {
-                        LogHelper.print(222222);
                         this.props.onClose()
                     }} />
                 <Panel className="CC_PopupContent">

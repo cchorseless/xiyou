@@ -1,27 +1,19 @@
 import React, { createRef, PureComponent } from "react";
 import { NodePropsData } from "../../../libs/BasePureComponent";
-import { PanelAttributes } from "@demon673/react-panorama";
 import { CCPanel } from "../CCPanel/CCPanel";
+import "./CCMiniMap.less";
 
 interface ICCMiniMap extends NodePropsData {
 }
 
 export class CCMiniMap extends CCPanel<ICCMiniMap> {
 
-    defaultStyle = () => {
-        return {
-            width: "250px",
-            borderRadius: "5px",
-            horizontalAlign: "left",
-            verticalAlign: "bottom",
-        } as any;
-    }
 
     render() {
         return (
             this.__root___isValid && (
                 <Panel
-                    id="minimap_container"
+                    id="CC_MiniMap"
                     hittest={false}
                     disallowedstyleflags="hover,descendantfocus"
                     ref={this.__root__}

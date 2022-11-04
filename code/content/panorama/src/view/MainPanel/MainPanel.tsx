@@ -8,7 +8,6 @@ import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { ToolTipHelper } from "../../helper/ToolTipHelper";
 import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
-import { CustomMiniMap } from "../alldota2/minimap_plus/CustomMiniMap";
 import { ChallengeShopItem } from "../Challenge/ChallengeShopItem";
 import { CombinationBottomPanel } from "../Combination/CombinationBottomPanel";
 import { DacBoardPanelV0 } from "../Common/DacBoardPanelV0";
@@ -42,13 +41,7 @@ export class MainPanel extends MainPanel_UI<NodePropsData> {
             verticalAlign: "bottom",
         } as any);
 
-        // 小地图
-        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, CustomMiniMap, {
-            horizontalAlign: "left",
-            verticalAlign: "bottom",
-            // marginBottom: "10px",
-            // marginLeft: "10px",
-        } as any);
+
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, DacBoardPanelV0, {
             horizontalAlign: "center",
             verticalAlign: "bottom",
