@@ -26,6 +26,17 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
         return CSSHelper.ClassMaker("AbilityDetails", this.toggleClass)
     }
 
+    getConfigData(key: string) {
+        const sheetConfig = this.props.sheetConfig;
+        const abilityname = this.props.abilityname;
+        const tData = sheetConfig[abilityname] || {};
+        return tData[key]
+    }
+
+    getConfigDataAsInt(key: string) {
+        return Number(this.getConfigData(key)) || 0
+    }
+
     static defaultProps = {
         entityindex: -1,
         inventoryslot: -1,
@@ -50,11 +61,9 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
         const bIsItem = this.props.isItem;
         const toggleClass = this.toggleClass;
         const dialogVariables: { [x: string]: any; } = {};
-
         toggleClass['DescriptionOnly'] = mode == "description_only";
         toggleClass['ShowScepterOnly'] = mode == "show_scepter_only";
         toggleClass['NoAbilityData'] = abilityname == "" || tData == undefined || tData == null;
-
         // 铸造相关
         // let castingInfo = CustomNetTables.GetTableValue("common", "casting_info") || {};
         // let castingName = "";
@@ -82,7 +91,7 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
             iMaxLevel = iAbilityIndex == -1 ? tData.MaxUpgradeLevel || 0 : iMaxLevel;
             let bIsConsumable = tData.ItemQuality == "consumable";
             toggleClass['Consumable'] = bIsConsumable;
-            let iItemCost = iAbilityIndex != -1 ? Items.GetCost(iAbilityIndex) : GetItemCost(abilityname);
+            let iItemCost = iAbilityIndex != -1 ? Items.GetCost(iAbilityIndex) : this.getConfigDataAsInt("ItemCost");
             let bIsSellable = iAbilityIndex != -1 ? Items.IsSellable(iAbilityIndex) : false;
             toggleClass['ShowItemCost'] = iAbilityIndex == -1 && iItemCost != 0;
             toggleClass['ShowSellPrice'] = iAbilityIndex != -1 && iItemCost != 0 && bIsSellable;
@@ -254,21 +263,21 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
         sExtraAttributes = replaceValues({ sStr: sExtraAttributes, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: bIsItem ? iLevel : (iLevel != -1 ? iLevel : 0), iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
         dialogVariables['extra_attributes'] = sExtraAttributes;
         let fCurrentCooldown = iAbilityIndex != -1 && (!bIsEnemy || bIsItem) ? Abilities.GetLevelCooldown(iAbilityIndex) : 0;
-        fCurrentCooldown = CalcSpecialValueUpgrade(entityindex, abilityname, "cooldown", fCurrentCooldown);
+        fCurrentCooldown = AbilityHelper.CalcSpecialValueUpgrade(entityindex, abilityname, "cooldown", fCurrentCooldown);
         let fCurrentManaCost = iAbilityIndex != -1 && (!bIsEnemy || bIsItem) ? Abilities.GetLevelManaCost(iAbilityIndex) : 0;
-        fCurrentManaCost = CalcSpecialValueUpgrade(entityindex, abilityname, "mana_cost", fCurrentManaCost);
-        let aCooldowns = StringToValues(tData.AbilityCooldown || "");
+        fCurrentManaCost = AbilityHelper.CalcSpecialValueUpgrade(entityindex, abilityname, "mana_cost", fCurrentManaCost);
+        let aCooldowns = AbilityHelper.StringToValues(tData.AbilityCooldown || "");
         for (let i = 0; i < Math.max(aCooldowns.length, iMaxLevel); i++) {
             let v = iAbilityIndex != -1 ? Abilities.GetLevelCooldown(iAbilityIndex, i) : (aCooldowns[i] || 0);
-            aCooldowns[i] = CalcSpecialValueUpgrade(entityindex, abilityname, "cooldown", v);
+            aCooldowns[i] = AbilityHelper.CalcSpecialValueUpgrade(entityindex, abilityname, "cooldown", v);
         }
-        aCooldowns = SimplifyValuesArray(aCooldowns);
-        let aManaCosts = StringToValues(tData.AbilityManaCost || "");
+        aCooldowns = AbilityHelper.SimplifyValuesArray(aCooldowns);
+        let aManaCosts = AbilityHelper.StringToValues(tData.AbilityManaCost || "");
         for (let i = 0; i < Math.max(aManaCosts.length, iMaxLevel); i++) {
             let v = iAbilityIndex != -1 ? Abilities.GetLevelManaCost(iAbilityIndex, i) : (aManaCosts[i] || 0);
-            aManaCosts[i] = CalcSpecialValueUpgrade(entityindex, abilityname, "mana_cost", v);
+            aManaCosts[i] = AbilityHelper.CalcSpecialValueUpgrade(entityindex, abilityname, "mana_cost", v);
         }
-        aManaCosts = SimplifyValuesArray(aManaCosts);
+        aManaCosts = AbilityHelper.SimplifyValuesArray(aManaCosts);
 
         if (iAbilityIndex == -1 && bIsItem) {
             fCurrentCooldown = aCooldowns[iLevel - 1] || 0;

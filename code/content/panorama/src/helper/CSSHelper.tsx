@@ -925,7 +925,12 @@ export module CSSHelper {
         return classes.join(" ");
     };
 
-
+    export function SavePanelData(panel: Panel, key: string, v: string | number): void {
+        (panel.Data() as any)[key] = v;
+    }
+    export function GetPanelData<T>(panel: Panel, key: string): T {
+        return (panel.Data() as any)[key] as T;
+    }
     export function getCustomImageUrl(str: string) {
         return `url("file://{images}/custom_game/${str}")`;
     }

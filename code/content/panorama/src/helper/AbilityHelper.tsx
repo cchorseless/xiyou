@@ -2,6 +2,22 @@ import { FuncHelper } from "./FuncHelper";
 
 export module AbilityHelper {
 
+    export enum AbilityUpgradeOperator {
+        ABILITY_UPGRADES_OP_ADD = 0,
+        ABILITY_UPGRADES_OP_MUL = 1
+    }
+
+    export enum AbilityUpgradeType {
+        ABILITY_UPGRADES_TYPE_SPECIAL_VALUE = 0,
+        ABILITY_UPGRADES_TYPE_SPECIAL_VALUE_PROPERTY = 1,
+        ABILITY_UPGRADES_TYPE_STATS,
+        ABILITY_UPGRADES_TYPE_ABILITY_MECHANICS,
+        ABILITY_UPGRADES_TYPE_ADD_ABILITY
+    }
+    export enum AbilityUpgradeKeyType {
+        UPGRADES_KEY_DATA = 0,
+        UPGRADES_KEY_CACHED_RESULT = 1
+    }
     export function isActive(iBehavior: DOTA_ABILITY_BEHAVIOR) {
         if ((iBehavior & DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_TOGGLE) == DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_TOGGLE) {
             return true;
@@ -235,6 +251,24 @@ export module AbilityHelper {
         return "";
     }
 
+    export function GetSpecialValueUpgrade(iEntityIndex: EntityIndex | any, sAbilityName: string, sSpecialValueName: string, iOperator: AbilityUpgradeOperator) {
+        if (!Entities.IsValidEntity(iEntityIndex)) return 0;
+
+        let t = CustomNetTables.GetTableValue("ability_upgrades_result", iEntityIndex.toString());
+        if (!t || typeof (t.json) != "string") return 0;
+
+        let tCachedResult = JSON.parse(t.json);
+        if (!tCachedResult) return 0;
+
+        let tAllSpecialValueCachedResult = tCachedResult[AbilityUpgradeType.ABILITY_UPGRADES_TYPE_SPECIAL_VALUE];
+        if (typeof (tAllSpecialValueCachedResult) != "object" || typeof (tAllSpecialValueCachedResult[sAbilityName]) != "object" || typeof (tAllSpecialValueCachedResult[sAbilityName][sSpecialValueName]) != "object") return 0;
+
+        return tAllSpecialValueCachedResult[sAbilityName][sSpecialValueName][iOperator] || 0;
+    }
+
+    export function CalcSpecialValueUpgrade(iEntityIndex: number, sAbilityName: string, sSpecialValueName: string, fValue: number) {
+        return FuncHelper.ToFloat((fValue + GetSpecialValueUpgrade(iEntityIndex, sAbilityName, sSpecialValueName, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_ADD)) * (1 + GetSpecialValueUpgrade(iEntityIndex, sAbilityName, sSpecialValueName, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_MUL) * 0.01));
+    }
     export function AbilityDescriptionCompose(aValues: number[], iLevel: number = -1, bOnlyNowLevelValue: boolean = false) {
         let sTemp = "";
         let sTempPS = "";
@@ -270,7 +304,19 @@ export module AbilityHelper {
         }
         return [sTemp, sTempPS];
     }
-
+    export function SimplifyValuesArray(aValues: number[]) {
+        if (aValues && aValues.length > 1) {
+            let a = aValues[0];
+            for (let i = 1; i < aValues.length; i++) {
+                const value = aValues[i];
+                if (a != value) {
+                    return aValues;
+                }
+            }
+            return [a];
+        }
+        return aValues;
+    }
     export function GetAbilityDescription({ sStr, sheetConfig, abilityName, iLevel, bOnlyNowLevelValue = false }: { sStr: string, sheetConfig: any, abilityName: string, iLevel: number, bOnlyNowLevelValue?: boolean }) {
         let tData = sheetConfig[abilityName];
         if (!tData) { return sStr; }
@@ -490,8 +536,8 @@ export module AbilityHelper {
         Object.keys(tAddedValues).forEach(key => {
             let aNewValues = JSON.parse(JSON.stringify(aValues));
             for (let i = 0; i < iMaxLevel; i++) {
-                let value = aValues[Clamp(i, 0, aValues.length - 1)] || 0;
-                value = value + tAddedValues[key][Clamp(i, 0, tAddedValues[key].length - 1)];
+                let value = aValues[FuncHelper.Clamp(i, 0, aValues.length - 1)] || 0;
+                value = value + tAddedValues[key][FuncHelper.Clamp(i, 0, tAddedValues[key].length - 1)];
                 aNewValues[i] = value;
             }
             aValues = aNewValues;
@@ -499,13 +545,13 @@ export module AbilityHelper {
 
         if (aMinValues) {
             for (let i = 0; i < aValues.length; i++) {
-                aValues[i] = Math.max(aValues[i], aMinValues[Clamp(i, 0, aMinValues.length - 1)]);
+                aValues[i] = Math.max(aValues[i], aMinValues[FuncHelper.Clamp(i, 0, aMinValues.length - 1)]);
             }
         }
 
         if (aMaxValues) {
             for (let i = 0; i < aValues.length; i++) {
-                aValues[i] = Math.min(aValues[i], aMaxValues[Clamp(i, 0, aMaxValues.length - 1)]);
+                aValues[i] = Math.min(aValues[i], aMaxValues[FuncHelper.Clamp(i, 0, aMaxValues.length - 1)]);
             }
         }
 
@@ -557,7 +603,7 @@ export module AbilityHelper {
                     break;
             }
             if (!bIsDescription) {
-                let CalculateSpellDamageTooltip = GetSpecialValueProperty(sAbilityName, sValueName, "CalculateSpellDamageTooltip", iEntityIndex);
+                let CalculateSpellDamageTooltip = GetSpecialValueProperty(sheetConfig, sAbilityName, sValueName, "CalculateSpellDamageTooltip", iEntityIndex);
                 let bCalculateSpellDamage = CalculateSpellDamageTooltip != undefined ? Number(CalculateSpellDamageTooltip) == 1 : sValueName.indexOf("damage") != -1;
                 bCalculateSpellDamage = bCalculateSpellDamage && iEntityIndex && Entities.IsValidEntity(iEntityIndex);
                 let fSpellAmplify = Entities.GetSpellAmplify(iEntityIndex) * 0.01;
