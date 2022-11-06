@@ -11,7 +11,6 @@ import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../l
 import { ChallengeShopItem } from "../Challenge/ChallengeShopItem";
 import { CombinationBottomPanel } from "../Combination/CombinationBottomPanel";
 import { DacBoardPanelV0 } from "../Common/DacBoardPanelV0";
-import { DebugPanel } from "../debugPanel/DebugPanel";
 import { MainPanel_UI } from "./MainPanel_UI";
 export class MainPanel extends MainPanel_UI<NodePropsData> {
     // 初始化数据
@@ -50,11 +49,6 @@ export class MainPanel extends MainPanel_UI<NodePropsData> {
         } as any);
         this.updateSelf();
     }
-    /**debug */
-    onbtn_click = () => {
-        this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, DebugPanel);
-        this.updateSelf();
-    };
 
     public stagePos(panel: Panel) {
         let position = { x: 0, y: 0 };

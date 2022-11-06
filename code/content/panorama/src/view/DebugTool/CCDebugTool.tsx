@@ -9,23 +9,17 @@ import { CCIcon_Gear } from "../allCustomUIElement/CCIcons/CCIcon_Gear";
 import { CCSwitch } from "../allCustomUIElement/CCSwitch/CCSwitch";
 import { CCIcon_XClose } from "../allCustomUIElement/CCIcons/CCIcon_XClose";
 import { CCIcon_Lock } from "../allCustomUIElement/CCIcons/CCIcon_Lock";
-import { CCBaseButton, CCButton } from "../allCustomUIElement/CCButton/CCButton";
-import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
-import { GameEnum } from "../../libs/GameEnum";
-import { CCKeyBinder, KeyCode } from "../allCustomUIElement/CCKeyBinder/CCKeyBinder";
+import { NetHelper } from "../../helper/NetHelper";
 
 import "./CCDebugTool.less";
-import { NetHelper } from "../../helper/NetHelper";
 
 interface ICCDebugTool {
 	/** 面板的方向 */
 	direction: "top" | "right" | "left";
-	/** 展开按钮的位置 */
-	expandButtonAlign?: "top" | "bottom" | "left" | "right";
-	/** 子元素 */
-	containerElement?: ReactNode;
+	onSetting?: (p: Panel) => void;
+	onRefresh?: (p: Panel) => void;
 }
 
 export class CCDebugTool extends CCPanel<ICCDebugTool> {
@@ -36,14 +30,9 @@ export class CCDebugTool extends CCPanel<ICCDebugTool> {
 		config: {}
 	};
 	defaultClass = () => { return "CC_DebugTool"; };
-	expandButtonStyle = () => {
-		return {
-			verticalAlign: (this.props.expandButtonAlign == "top" || this.props.expandButtonAlign == "bottom") ? this.props.expandButtonAlign : undefined,
-			horizontalAlign: (this.props.expandButtonAlign == "left" || this.props.expandButtonAlign == "right") ? this.props.expandButtonAlign : undefined,
-		}
-	};
+
 	static defaultProps = {
-		direction: "left"
+		direction: "top",
 	};
 	onInitUI() {
 		TimerHelper.AddIntervalFrameTimer(5, 5, FuncHelper.Handler.create(this, () => {
@@ -64,9 +53,8 @@ export class CCDebugTool extends CCPanel<ICCDebugTool> {
 		return (
 			this.__root___isValid &&
 			<Panel ref={this.__root__} id="CC_DebugTool"  {...this.initRootAttrs()} hittest={false}>
-				{this.props.containerElement}
-				<CCDebugTool_Setting />
-				<Panel id="CC_DebugToolControlPanel" className={CSSHelper.ClassMaker("ControlPanel", { Minimized: this.state.Minimized, DirectionLeft: this.state.direction == "left", DirectionRight: this.state.direction == "right", DirectionTop: this.state.direction == "top", })}>
+				<Panel id="CC_DebugToolControlPanel"
+					className={CSSHelper.ClassMaker("ControlPanel", { Minimized: this.state.Minimized, DirectionLeft: this.state.direction == "left", DirectionRight: this.state.direction == "right", DirectionTop: this.state.direction == "top", })}>
 					<Panel className="ControlPanelContainer">
 						<Panel className="ControlPanelTitle">
 							<Panel className="CategoryHeaderFilledFront" />
@@ -79,12 +67,12 @@ export class CCDebugTool extends CCPanel<ICCDebugTool> {
 									<Label text={"右侧"} id="right" />
 								</CCDropDownButton>
 							</CCIconButton>
-							<CCIconButton className="CategoryHeaderIcon" tooltip={"重载数据"} verticalAlign="center" width="20px" icon={<CCIcon_Refresh />} onactivate={self => { }} />
-							<CCIconButton className="CategoryHeaderIcon" tooltip={"设置"} verticalAlign="center" width="20px" icon={<CCIcon_Gear />} onactivate={self => ToggleSelection("CC_DebugTool_Setting")} />
+							<CCIconButton className="CategoryHeaderIcon" tooltip={"重载数据"} verticalAlign="center" width="20px" icon={<CCIcon_Refresh />} onactivate={self => { this.props.onRefresh && this.props.onRefresh(self) }} />
+							<CCIconButton className="CategoryHeaderIcon" tooltip={"设置"} verticalAlign="center" width="20px" icon={<CCIcon_Gear />} onactivate={self => { this.props.onSetting && this.props.onSetting(self) }} />
 						</Panel>
 						{this.props.children}
 					</Panel>
-					<CCPanel id="ExpandButtonContainer" {...this.expandButtonStyle()} >
+					<CCPanel id="ExpandButtonContainer" horizontalAlign="left" verticalAlign="center" >
 						<Button id="ExpandButton" onactivate={self => {
 							this.UpdateState({ bManualShowPanel: this.state.Minimized, Minimized: !this.state.Minimized });
 						}} >
@@ -148,7 +136,9 @@ export class CCDebugTool_Category extends CCPanel<IDebugTool_Category> {
 
 /** 切换面板 */
 function ToggleSelection(sPickerName: string) {
-	let aPickerList = $.GetContextPanel().FindChildrenWithClassTraverse("SelectionContainer");
+	let rootpanel = CCDebugTool.GetInstance()?.__root__.current;
+	if (!rootpanel) { return }
+	let aPickerList = rootpanel.FindChildrenWithClassTraverse("SelectionContainer");
 	if (aPickerList !== null) {
 		for (const iterator of aPickerList) {
 			if (iterator.id == sPickerName) {
@@ -160,21 +150,22 @@ function ToggleSelection(sPickerName: string) {
 		}
 	}
 }
+
 // 普通按钮
 interface ICCDebugTool_DemoButton {
-	eventName: string; str?: string; text: string; onactivate?: () => void; color?: "RedButton" | "GreenButton" | "QuitButton";
+	eventName: string; str?: string; localtext: string; btncolor?: "RedButton" | "GreenButton" | "QuitButton";
 }
 export class CCDebugTool_DemoButton extends CCPanel<ICCDebugTool_DemoButton, TextButton>{
 	static defaultProps = {
 		str: "",
 	};
 	defaultClass = () => {
-		return CSSHelper.ClassMaker("DemoButton", "HotKeyValid", "FireEvent", this.props.color)
+		return CSSHelper.ClassMaker("DemoButton", "HotKeyValid", "FireEvent", this.props.btncolor)
 	}
 	defaultStyle = () => {
 		return {
 			id: this.props.eventName,
-			localizedText: this.props.text,
+			localizedText: this.props.localtext,
 			onactivate: (self: Panel) => {
 				if (this.props.eventName && this.props.eventName.length > 0) {
 					NetHelper.SendToLua(this.props.eventName)
@@ -191,7 +182,7 @@ export class CCDebugTool_DemoButton extends CCPanel<ICCDebugTool_DemoButton, Tex
 }
 // 切换按钮
 interface ICCDebugTool_DemoToggle {
-	eventName: string, str?: string, selected?: boolean, text: string;
+	eventName: string, str?: string, selected?: boolean, localtext: string;
 }
 export class CCDebugTool_DemoToggle extends CCPanel<ICCDebugTool_DemoToggle, ToggleButton>{
 	static defaultProps = {
@@ -202,7 +193,7 @@ export class CCDebugTool_DemoToggle extends CCPanel<ICCDebugTool_DemoToggle, Tog
 		return "HotKeyValid FireEvent"
 	}
 	defaultStyle = () => {
-		return { id: this.props.eventName, localizedText: this.props.text, selected: this.props.selected, }
+		return { id: this.props.eventName, localizedText: this.props.localtext, selected: this.props.selected, }
 	}
 	render() {
 		return (
@@ -228,7 +219,7 @@ export class CCDebugTool_DemoSwitch extends CCPanel<ICCDebugTool_DemoSwitch>{
 		onChange: (b: boolean) => { }
 	};
 	defaultClass = () => {
-		return "CC_SwitchContainer"
+		return "CC_DebugTool_DemoSwitch"
 	}
 	defaultStyle = () => {
 		return { id: this.props.eventName, selected: this.props.selected, onChange: this.props.onChange }
@@ -271,7 +262,7 @@ export class CCDebugTool_DemoDropDown extends CCPanel<ICCDebugTool_DemoDropDown>
 interface ICCDebugTool_DemoTextEntry {
 	onBtnClick?: (item: Panel) => void,
 	onTxtInput?: (item: Panel) => void,
-	eventName: string, text: string, defaultValue?: string;
+	eventName: string, localtext: string, defaultValue?: string;
 }
 export class CCDebugTool_DemoTextEntry extends CCPanel<ICCDebugTool_DemoTextEntry, TextButton> {
 	static defaultProps = {
@@ -283,7 +274,7 @@ export class CCDebugTool_DemoTextEntry extends CCPanel<ICCDebugTool_DemoTextEntr
 		return (
 			this.__root___isValid &&
 			<Panel ref={this.__root__}  {...this.initRootAttrs()} >
-				<TextButton className="DemoTextEntry" style={{ flowChildren: "right" }} onactivate={this.props.onBtnClick} localizedText={this.props.text}>
+				<TextButton className="DemoTextEntry" style={{ flowChildren: "right" }} onactivate={this.props.onBtnClick} localizedText={this.props.localtext}>
 					<TextEntry id="DemoTextEntry" text={this.props.defaultValue} oninputsubmit={this.props.onTxtInput}>
 					</TextEntry>
 				</TextButton>
@@ -293,7 +284,7 @@ export class CCDebugTool_DemoTextEntry extends CCPanel<ICCDebugTool_DemoTextEntr
 }
 
 interface ICCDebugTool_DemoSlider {
-	eventName: string, text: string, min: number, max: number, defaultValue: number, onChange: (value: number) => void;
+	eventName: string, titletext: string, min: number, max: number, defaultValue: number, onChange: (value: number) => void;
 }
 export class CCDebugTool_DemoSlider extends CCPanel<ICCDebugTool_DemoSlider> {
 	static defaultProps = {
@@ -310,7 +301,7 @@ export class CCDebugTool_DemoSlider extends CCPanel<ICCDebugTool_DemoSlider> {
 			this.__root___isValid &&
 			<Panel ref={this.__root__} className="DemoSlider" {...this.initRootAttrs()} >
 				<CCPanel flowChildren="right">
-					<Label className="Title" text={this.props.text} />
+					<Label className="Title" text={this.props.titletext} />
 					<Label className="Value" text={"" + value} />
 				</CCPanel>
 				<Slider className="HorizontalSlider" value={(this.props.defaultValue - min) / (max - min)} direction="horizontal"
@@ -330,7 +321,7 @@ export class CCDebugTool_DemoSlider extends CCPanel<ICCDebugTool_DemoSlider> {
 
 /** 打开一个面板 */
 interface ICCDebugTool_DemoSelectionButton {
-	eventName: string, text: string;
+	eventName: string, localtext: string;
 }
 export class CCDebugTool_DemoSelectionButton extends CCPanel<ICCDebugTool_DemoSelectionButton, TextButton> {
 	defaultClass = () => {
@@ -339,8 +330,8 @@ export class CCDebugTool_DemoSelectionButton extends CCPanel<ICCDebugTool_DemoSe
 	render() {
 		return (
 			this.__root___isValid &&
-			<TextButton ref={this.__root__} id={this.props.eventName} localizedText={this.props.text}   {...this.initRootAttrs()} >
-				<CCIcon_Arrow type="SolidRight" width="10px" align="right center" style={{ marginRight: "4px" }} />
+			<TextButton ref={this.__root__} id={this.props.eventName} localizedText={this.props.localtext}   {...this.initRootAttrs()} >
+				<CCIcon_Arrow type="SolidRight" width="10px" align="right center" marginRight="4px" />
 			</TextButton>
 		);
 	}
@@ -348,8 +339,9 @@ export class CCDebugTool_DemoSelectionButton extends CCPanel<ICCDebugTool_DemoSe
 
 /** 选择容器 */
 interface ICCDebugTool_SelectContainer {
+	DomainPanel?: CCPanel;
 	/** 事件名 */
-	eventName: string,
+	eventName?: string,
 	/** 标题 */
 	title: string,
 	/** 子元素 */
@@ -420,9 +412,10 @@ export class CCDebugTool_SelectContainer extends CCPanel<ICCDebugTool_SelectCont
 	dragable = false;
 	dragPanel: Panel & { offsetX?: number, offsetY?: number; } | undefined = undefined;
 	dragStart = (panel: Panel & { dragable?: boolean; }) => {
-		if (this.props.hasDragable != false) {
+		if (this.props.hasDragable != false && this.props.DomainPanel != null) {
 			this.dragable = true;
-			let parent = panel.FindAncestor(this.props.eventName);
+			this.GetNodeChild
+			let parent = this.props.DomainPanel.__root__.current;
 			if (parent) {
 				this.dragPanel = parent;
 				this.dragTimer();
@@ -456,12 +449,12 @@ export class CCDebugTool_SelectContainer extends CCPanel<ICCDebugTool_SelectCont
 
 
 	render() {
-		const { eventName, title: text, toggleList } = this.props;
+		const { title: text, toggleList } = this.props;
 		const { lock, size } = this.state;
 		return (
 			this.__root___isValid &&
 			<Panel ref={this.__root__}  {...this.initRootAttrs()} >
-				<CCPanel id={eventName} className={CSSHelper.ClassMaker("SelectionContainer", { LockWindow: lock })} hittest={true} width={size.width} height={size.height}>
+				<CCPanel className={CSSHelper.ClassMaker("SelectionContainer show", { LockWindow: lock })} hittest={true} width={size.width} height={size.height}>
 					<Panel id="SelectionPicker" >
 						<Panel id="SelectionPickerHeader" onactivate={() => { }} onmouseover={self => this.dragStart(self)} onmouseout={self => this.dragable = false}>
 							<Label id="SelectionTitle" localizedText={text} />
@@ -516,7 +509,7 @@ export class CCDebugTool_SelectContainer extends CCPanel<ICCDebugTool_SelectCont
 							{this.props.hasLock != false &&
 								<CCIconButton width="26px" tooltip={"锁定窗口"} tooltipPosition="top" className={CSSHelper.ClassMaker("LockIconButton", { Unlock: !this.state.lock })} icon={<CCIcon_Lock type="Small" />} onactivate={() => this.toggleLock()} />
 							}
-							<CCIconButton width="28px" tooltip={"关闭窗口"} tooltipPosition="top" icon={<CCIcon_XClose type="Default" />} onactivate={() => ToggleSelection(eventName)} />
+							<CCIconButton width="28px" tooltip={"关闭窗口"} tooltipPosition="top" icon={<CCIcon_XClose type="Default" />} onactivate={() => { this.props.DomainPanel && this.props.DomainPanel.close() }} />
 						</Panel>
 						{/* 物品列表 */}
 						<Panel id="SelectionList" >
@@ -528,524 +521,13 @@ export class CCDebugTool_SelectContainer extends CCPanel<ICCDebugTool_SelectCont
 		);
 	}
 }
-/** 设置界面 */
-interface ICCDebugTool_Setting {
-
-}
-export class CCDebugTool_Setting extends CCPanel<ICCDebugTool_Setting> {
-
-	state = {
-		tSettings: {},
-		deleteMode: false,
-		customKeyBindCount: 0,
-		eventNameList: [] as string[],
-		buttonTextList: [] as string[],
-		buttonTypeList: [] as string[],
-	}
-	private addKeyBind(self: Panel) {
-		let customKeyBindCount = this.GetState<number>("customKeyBindCount");
-		this.UpdateState({ customKeyBindCount: customKeyBindCount + 1 });
-		this.findHotKeyValidButton(self);
-	};
-	private findHotKeyValidButton(self: Panel) {
-		const root = CCDebugTool.GetInstance()!.__root__.current!;
-		let eventList: string[] = [];
-		let textList: string[] = [];
-		let typeList: string[] = [];
-		if (root) {
-			const demoButtonList = root.FindChildrenWithClassTraverse("HotKeyValid") as TextButton[];
-			demoButtonList.map((element) => {
-				eventList.push(element.id);
-				textList.push(element.text);
-				typeList.push((() => {
-					let result = "";
-					if (element.BHasClass("FireEvent")) {
-						result = "FireEvent";
-					} else if (element.BHasClass("ToggleSelection")) {
-						result = "ToggleSelection";
-					}
-					return result;
-				})());
-			});
-			this.UpdateState({ eventNameList: eventList });
-			this.UpdateState({ buttonTextList: textList });
-			this.UpdateState({ buttonTypeList: typeList });
-		}
-	};
-
-	private RegisterDemoButton(key: string, eventName: string, bInit: boolean) {
-		if (key && key != undefined) {
-			this.RegisterKeyBind(key, () => {
-				const CC_DebugTool = $.GetContextPanel().FindChildTraverse("CC_DebugTool");
-				if (CC_DebugTool) {
-					const demoButtonList = CC_DebugTool.FindChildrenWithClassTraverse("HotKeyValid") as TextButton[];
-					demoButtonList.map((element) => {
-						if (element.id == eventName.replace("hotkey_", "")) {
-							const index = this.state.eventNameList.indexOf(eventName.replace("hotkey_", ""));
-							if (index > -1) {
-								const buttonType = this.state.buttonTypeList[index];
-								if (buttonType == "FireEvent") {
-									// FireEvent(eventName.replace("hotkey_", ""));
-									$.DispatchEvent("Activated", element, "mouse");
-								} else if (buttonType == "ToggleSelection") {
-									// ToggleSelection(eventName.replace("hotkey_", ""));
-									$.DispatchEvent("Activated", element, "mouse");
-								}
-							}
-						}
-					});
-				}
-			});
-			if (!bInit) {
-				// FireEvent("ChangeToolSettingKeyBind", eventName + "," + key);
-			}
-			this.UpdateState({ customKeyBindCount: 0 });
-		}
-	};
-	private RegisterKeyBind(key: string, onkeydown?: () => void, onkeyup?: () => void) {
-		if (key && key != "") {
-			const sCommand = key + (Date.now() / 1000);
-			Game.CreateCustomKeyBind(KeyCode[key], "+" + sCommand);
-			Game.AddCommand("+" + sCommand, () => {
-				if (onkeydown) {
-					onkeydown();
-				}
-			}, "", 67108864);
-			Game.AddCommand("-" + sCommand, () => {
-				if (onkeyup) {
-					onkeyup();
-				}
-			}, "", 67108864);
-		}
-	}
-	private OnLoad(self: Panel) {
-		this.findHotKeyValidButton(self);
-	};
-	render() {
-		const customKeyBindCount = this.GetState<number>("customKeyBindCount");
-		const defaultSettingList = ["ReloadScriptButtonPressed"];
-		const eventNameList = this.GetState<string[]>("eventNameList");
-		const buttonTextList = this.GetState<string[]>("buttonTextList");
-		const buttonTypeList = this.GetState<string[]>("buttonTypeList");
-		const deleteMode = this.GetState<boolean>("deleteMode");
-		const tSettings = this.GetState<{ [k: string]: string }>("tSettings");
-		return (
-			this.__root___isValid &&
-			<Panel ref={this.__root__}  {...this.initRootAttrs()} hittest={false}>
-				<CCDebugTool_SelectContainer
-					eventName={"CC_DebugTool_Setting"}
-					title={"调试工具设置"}
-					width="500px"
-					height="700px"
-					hasRawMode={false}
-					hasToggleSize={false}
-					hasFilter={false}
-				>
-					<CCPanel id="CC_DebugTool_Setting" className="CC_DebugTool_Setting" flowChildren="down" width="100%" height="100%">
-						{/* 面板热键 */}
-						<CCPanel flowChildren="down" width="100%" marginTop="12px" onload={self => this.OnLoad(self)}>
-							<Label text="面板热键" className="SectionHeader" />
-							<Panel className="SectionHeaderLine" />
-							{/* 默认设置 */}
-							{eventNameList.length > 0 && defaultSettingList.map((eventName, index) => {
-								return <CCKeyBinder key={"defaultSettingList" + eventName + index} text={buttonTextList[eventNameList.indexOf(eventName)]} initKey={tSettings["hotkey_" + eventName]} callback={(key) => this.RegisterDemoButton(key, "hotkey_" + eventName, false)} />;
-							})}
-							{/* 已保存的自定义热键设置 */}
-							{buttonTextList.length > 0 && Object.keys(tSettings).map((eventName, index) => {
-								if (eventName.indexOf("hotkey_") != -1 && defaultSettingList.indexOf(eventName.replace("hotkey_", "")) == -1) {
-									return (
-										<CCPanel width="100%" height="36px" key={"saved" + eventName + index} flowChildren="right" className={CSSHelper.ClassMaker("CanRemoveKeyBind", { deleteMode: deleteMode })}>
-											<CCIconButton verticalAlign="center" icon={<CCImage src="s2r://panorama/images/control_icons/x_close_png.vtex" />} onactivate={self => { }} />
-											<CCKeyBinder text={buttonTextList} initDropIndex={eventNameList.indexOf(eventName.replace("hotkey_", "")) + 1} initKey={tSettings[eventName]} callback={(key, bInit, dropIndex) => {
-												if (eventNameList[dropIndex]) {
-													this.RegisterDemoButton(key, "hotkey_" + eventNameList[dropIndex], bInit);
-												}
-											}} />
-										</CCPanel>
-									);
-								}
-							})}
-							{/* 添加热键 */}
-							{[...Array(customKeyBindCount)].map((_, index) => {
-								if (buttonTextList.length > 0) {
-									return (
-										<CCPanel width="100%" height="36px" key={index + ""} flowChildren="right" className={CSSHelper.ClassMaker("CanRemoveKeyBind", { deleteMode: deleteMode })}>
-											<CCIconButton verticalAlign="center" icon={<CCImage src="s2r://panorama/images/control_icons/x_close_png.vtex" />} onactivate={self => this.UpdateState({ customKeyBindCount: customKeyBindCount - 1 })} />
-											<CCKeyBinder text={buttonTextList} callback={(key, bInit, dropIndex) => {
-												if (eventNameList[dropIndex]) {
-													if (key && key != "") {
-														this.RegisterDemoButton(key, "hotkey_" + eventNameList[dropIndex], bInit);
-													}
-												}
-											}} />
-										</CCPanel>
-									);
-								}
-							})}
-							<CCPanel width="100%">
-								<CCButton margin="4px 8px" className="AddNewKeyBind" type="Text" text="+ 按键绑定" onactivate={self => this.addKeyBind(self)} />
-								{!deleteMode &&
-									<CCButton margin="4px 8px" className="AddNewKeyBind" horizontalAlign="right" type="Text" text="- 删除绑定" onactivate={self => this.UpdateState({ deleteMode: true })} />
-								}
-								{deleteMode &&
-									<CCButton margin="4px 8px" className="AddNewKeyBind" horizontalAlign="right" type="Text" text="取消" onactivate={self => this.UpdateState({ deleteMode: false })} />
-								}
-							</CCPanel>
-						</CCPanel>
-						<CCButton verticalAlign="bottom" type="Outline" color="Blue" text="清空设置" onactivate={self => { this.UpdateState({ customKeyBindCount: 0 }); }} />
-					</CCPanel>
-				</CCDebugTool_SelectContainer>
-			</Panel>
-		)
-	}
-}
-
-/** 封装好的图标选择 */
-interface ICCDebugTool_IconPicker {
-
-}
-export class CCDebugTool_IconPicker extends CCPanel<ICCDebugTool_IconPicker> {
-	state = {
-		type: "",
-		filterWord: "",
-	};
-	render() {
-		const type = this.GetState<string>("type");
-		const filterWord = this.GetState<string>("filterWord");
-		return (
-			this.__root___isValid &&
-			<Panel ref={this.__root__} id="CC_DebugTool_TextPicker"  {...this.initRootAttrs()} hittest={false}>
-				<CCDebugTool_SelectContainer eventName="CC_DebugTool_IconPicker" title="图标选择" hasRawMode={false} toggleList={{
-					All: "全部",
-					Eom: "EOM",
-					Tui7: "Tui7",
-					Tui3: "Tui3",
-					NoType: "无类型",
-				}} onSearch={text => this.UpdateState({ filterWord: text })} onToggleType={text => this.UpdateState({ type: text })}>
-					{/* <CC_IconPicker type={type == "" ? undefined : type} filterWord={filterWord} /> */}
-				</CCDebugTool_SelectContainer>
-			</Panel>
-		)
-	}
-}
-
-/** 技能选择 */
-interface ICCDebugTool_AbilityPicker {
-	/** 事件名 */
-	eventName: string;
-	/** 技能名列表 */
-	abilityNames?: string[];
-	/** 窗口标题 */
-	title: string;
-	/** 分类 */
-	toggleList?: {
-		/** type是分类，后面实际显示的描述 */
-		[toggleType: string]: string;
-	};
-	/** 过滤器 */
-	filterFunc?: (toggleType: string, itemName: string) => boolean;
-}
-export class CCDebugTool_AbilityPicker extends CCPanel<ICCDebugTool_AbilityPicker> {
-	state = {
-		filterWord: "",
-		toggleType: "",
-		rawMode: false,
-	};
-	render() {
-		return (
-			this.__root___isValid &&
-			<Panel ref={this.__root__} id="CC_DebugTool_TextPicker"  {...this.initRootAttrs()} hittest={false}>
-				<CCDebugTool_SelectContainer
-					eventName={this.props.eventName}
-					title={this.props.title}
-					toggleList={this.props.toggleList}
-					onSearch={text => this.setState({ filterWord: text })}
-					onToggleType={text => this.setState({ toggleType: text })}
-					onChangeRawMode={rawMode => this.setState({ rawMode: rawMode })}
-				>
-					<CCPanel className="CC_DebugTool_AbilityPicker" flowChildren="right-wrap" width="100%" scroll="y" >
-						{this.props.abilityNames?.map((abilityname, index) => {
-							if (this.props.filterFunc) {
-								if (!this.props.filterFunc(this.state.toggleType, abilityname)) {
-									return;
-								}
-							}
-							if (this.state.filterWord != "") {
-								if (abilityname.search(new RegExp(this.state.filterWord, "gim")) == -1 && $.Localize("#DOTA_Tooltip_ability_" + abilityname).search(new RegExp(this.state.filterWord, "gim")) == -1) {
-									return;
-								}
-							}
-							return (
-								<CCBaseButton className="CC_DebugTool_AbilityPickerItem" key={index + ""} width="64px" flowChildren="down" onactivate={self => { }}>
-									<DOTAAbilityImage abilityname={abilityname} showtooltip />
-									<Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? abilityname : $.Localize("#DOTA_Tooltip_ability_" + abilityname)} />
-								</CCBaseButton>
-							);
-						})}
-					</CCPanel>
-				</CCDebugTool_SelectContainer>
-			</Panel>
-		);
-	}
-}
-/** 选择物品 */
-interface ICCDebugTool_ItemPicker {
-	/** 事件名 */
-	eventName: string;
-	/** 技能名列表 */
-	itemNames?: string[];
-	/** 窗口标题 */
-	title: string;
-	/** 分类 */
-	toggleList?: {
-		/** type是分类，后面实际显示的描述 */
-		[toggleType: string]: string;
-	};
-	/** 过滤器 */
-	filterFunc?: (toggleType: string, itemName: string) => boolean;
-}
-export class CCDebugTool_ItemPicker extends CCPanel<ICCDebugTool_ItemPicker> {
-	state = {
-		filterWord: "",
-		toggleType: "",
-		rawMode: false,
-	};
-	render() {
-		return (
-			this.__root___isValid &&
-			<Panel ref={this.__root__} id="CC_DebugTool_TextPicker"  {...this.initRootAttrs()} hittest={false}>
-				<CCDebugTool_SelectContainer
-					eventName={this.props.eventName}
-					title={this.props.title}
-					toggleList={this.props.toggleList}
-					onSearch={text => this.setState({ filterWord: text })}
-					onToggleType={text => this.setState({ toggleType: text })}
-					onChangeRawMode={rawMode => this.setState({ rawMode: rawMode })}
-				>
-					<CCPanel className="CC_DebugTool_AbilityPicker" flowChildren="right-wrap" width="100%" scroll="y" >
-						{this.props.itemNames?.map((abilityname, index) => {
-							if (this.props.filterFunc) {
-								if (!this.props.filterFunc(this.state.toggleType, abilityname)) {
-									return;
-								}
-							}
-							if (this.state.filterWord != "") {
-								if (abilityname.search(new RegExp(this.state.filterWord, "gim")) == -1 && $.Localize("#DOTA_Tooltip_ability_" + abilityname).search(new RegExp(this.state.filterWord, "gim")) == -1) {
-									return;
-								}
-							}
-							return (
-								<CCBaseButton className="CC_DebugTool_AbilityPickerItem" key={index + ""} flowChildren="down" onactivate={self => {
-
-								}}>
-									<DOTAItemImage itemname={abilityname} showtooltip />
-									<Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? abilityname : $.Localize("#DOTA_Tooltip_ability_" + abilityname)} />
-								</CCBaseButton>
-							);
-						})}
-					</CCPanel>
-				</CCDebugTool_SelectContainer>
-			</Panel>
-		);
-	}
-}
-/** 英雄选择 */
-interface ICCDebugTool_HeroPicker {
-	/** 事件名 */
-	eventName: string;
-	/** 单位名列表 */
-	unitNames?: string[];
-	/** 窗口标题 */
-	title: string;
-}
-export class CCDebugTool_HeroPicker extends CCPanel<ICCDebugTool_HeroPicker> {
-	state = {
-		rawMode: false,
-	};
-	render() {
-		return (
-			this.__root___isValid &&
-			<Panel ref={this.__root__} id="CC_DebugTool_TextPicker"  {...this.initRootAttrs()} hittest={false}>
-				<CCDebugTool_SelectContainer
-					eventName={this.props.eventName}
-					title={this.props.title}
-					hasFilter={false}
-					onChangeRawMode={rawMode => this.setState({ rawMode: rawMode })}
-				// width="620px"
-				// height="360px"
-				>
-					<CCPanel className="CC_DebugTool_AbilityPicker" flowChildren="right-wrap" width="100%" scroll="y" >
-						{this.props.unitNames?.map((unitName, index) => {
-							return (
-								<CCBaseButton className="CC_DebugTool_AbilityPickerItem" key={index + ""} flowChildren="down" onactivate={self => { }}>
-									<DOTAHeroImage heroimagestyle={"portrait"} heroname={unitName} id="HeroPickerCardImage" scaling="stretch-to-fit-x-preserve-aspect" />
-									<Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? unitName : $.Localize("#" + unitName)} />
-								</CCBaseButton>
-							);
-						})}
-					</CCPanel>
-				</CCDebugTool_SelectContainer>
-			</Panel>
-		);
-	}
-}
-
-/** 普通选择 */
-interface ICCDebugTool_TextPicker {
-	/** 事件名 */
-	eventName: string;
-	/** 列表 */
-	itemNames?: string[];
-	/** 窗口标题 */
-	title: string;
-}
-export class CCDebugTool_TextPicker extends CCPanel<ICCDebugTool_TextPicker> {
-	state = {
-		rawMode: false,
-	};
-	render() {
-		return (
-			this.__root___isValid &&
-			<Panel ref={this.__root__} id="CC_DebugTool_TextPicker"  {...this.initRootAttrs()} hittest={false}>
-				<CCDebugTool_SelectContainer
-					eventName={this.props.eventName}
-					title={this.props.title}
-					hasFilter={false}
-					onChangeRawMode={rawMode => this.UpdateState({ rawMode: rawMode })}
-				// width="620px"
-				// height="360px"
-				>
-					<CCPanel className="CC_DebugTool_TextPicker" flowChildren="right-wrap" width="100%" scroll="y" >
-						{this.props.itemNames?.map((itemName, index) => {
-							return (
-								<TextButton key={index} className="CC_DebugTool_TextPickerItem" localizedText={"#" + itemName} onactivate={self => { }} />
-							);
-						})}
-					</CCPanel>
-				</CCDebugTool_SelectContainer>
-			</Panel>
-		);
-	}
-}
-
-interface IDebugTool_SectPicker {
-	/** 事件名 */
-	eventName: string;
-	sheetConfig: any;
-	/** 技能名列表 */
-	abilityNames?: string[];
-	/** 窗口标题 */
-	title: string;
-	/** 分类 */
-	toggleList?: {
-		/** type是分类，后面实际显示的描述 */
-		[toggleType: string]: string;
-	};
-	/** 过滤器 */
-	filterFunc?: (toggleType: string, itemName: string) => boolean;
-}
 
 
-export class CCDebugTool_SectPicker extends CCPanel<IDebugTool_SectPicker> {
-	state = {
-		filterWord: "",
-		toggleType: "",
-		rawMode: false,
-	};
-	render() {
-		return (
-			this.__root___isValid &&
-			<Panel ref={this.__root__} id="CC_DebugTool_SectPicker"  {...this.initRootAttrs()} hittest={false}>
-				<CCDebugTool_SelectContainer
-					eventName={this.props.eventName}
-					title={this.props.title}
-					toggleList={this.props.toggleList}
-					onSearch={text => this.UpdateState({ filterWord: text })}
-					onToggleType={text => this.UpdateState({ toggleType: text })}
-					onChangeRawMode={rawMode => this.UpdateState({ rawMode: rawMode })}
-				>
-					<CCPanel className="CC_DebugTool_AbilityPicker" flowChildren="right-wrap" width="100%" scroll="y" >
-						{this.props.abilityNames?.map((abilityUpgradeID, index) => {
-							if (this.props.filterFunc) {
-								if (!this.props.filterFunc(this.state.toggleType, abilityUpgradeID)) {
-									return;
-								}
-							}
-							if (this.state.filterWord != "") {
-								if (abilityUpgradeID.search(new RegExp(this.state.filterWord, "gim")) == -1 && $.Localize("#DOTA_Tooltip_ability_mechanics_" + abilityUpgradeID).search(new RegExp(this.state.filterWord, "gim")) == -1) {
-									return;
-								}
-							}
-							const abilityUpgradeInfo = this.props.sheetConfig[abilityUpgradeID];
-							return (
-								<CCBaseButton className="CC_DebugTool_AbilityPickerItem" key={index + ""} width="64px" flowChildren="down"
-									onactivate={self => { }}
-									customTooltip={{ name: "sect_ability", abilityUpgradeID: abilityUpgradeID }}>
-									<Image className="DOTAAbilityImage" src={`file://{images}/spellicons/${abilityUpgradeInfo.Texture}.png`} />
-									<Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? abilityUpgradeID : $.Localize("#DOTA_Tooltip_ability_mechanics_" + abilityUpgradeID)} />
-								</CCBaseButton>
-							);
-						})}
-					</CCPanel>
-				</CCDebugTool_SelectContainer>
-			</Panel>
-		);
-	}
-}
 
-/** 单位信息面板 */
-export class CCDebugTool_UnitInfo extends CCPanel {
-	state = { unitIndex: -1 as EntityIndex };
-	onInitUI() {
-		this.UpdateState({ unitIndex: Players.GetLocalPlayerPortraitUnit() });
-		this.addGameEvent(GameEnum.GameEvent.dota_player_update_selected_unit, (e) => {
-			this.UpdateState({ unitIndex: Players.GetLocalPlayerPortraitUnit() });
-		})
-	}
 
-	getPosition = () => {
-		let result = "";
-		const position = Entities.GetAbsOrigin(this.state.unitIndex);
-		if (position) {
-			result = `${Number(position[0])}, ${Number(position[1])}, ${Number(position[2])}`;
-		}
-		return result;
-	};
-	getForward = () => {
-		let result = "";
-		const position = Entities.GetForward(this.state.unitIndex);
-		if (position) {
-			result = `${Number(position[0])}, ${Number(position[1])}, ${Number(position[2])}`;
-		}
-		return result;
-	};
-	render() {
-		const unitIndex = this.GetState<EntityIndex>("unitIndex");
-		return (
-			this.__root___isValid &&
-			<Panel ref={this.__root__} id="CC_DebugTool_UnitInfo"  {...this.initRootAttrs()} hittest={false}>
-				<CCDebugTool_SelectContainer
-					eventName={"CC_UnitInfo"}
-					title={"单位信息面板"}
-					width="480px"
-					height="620px"
-					hasRawMode={false}
-					hasToggleSize={false}
-					hasFilter={false}
-				>
-					<CCPanel flowChildren="down">
-						<Label text={"单位名：" + `(${unitIndex})` + Entities.GetUnitName(unitIndex)} />
-						<Label text={"位置：" + this.getPosition()} />
-						<Label text={"朝向：" + this.getForward()} />
-						<Label text={"生命：" + Entities.GetHealth(unitIndex) + "/" + Entities.GetMaxHealth(unitIndex)} />
-						<Label text={"魔法：" + Entities.GetMana(unitIndex) + "/" + Entities.GetMaxMana(unitIndex)} />
-						<Label text={"Modifier："} />
-						{[...Array(Entities.GetNumBuffs(unitIndex))].map((_, index) => {
-							return <Label key={index} text={"		" + Buffs.GetName(unitIndex, Entities.GetBuff(unitIndex, index))} />;
-						})}
-					</CCPanel>
-				</CCDebugTool_SelectContainer>
-			</Panel>
-		);
-	}
-}
+
+
+
+
+
+

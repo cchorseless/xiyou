@@ -2,8 +2,7 @@ import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCDropDownButton } from "../CCButton/CCDropDownButton";
 import { CCPanel } from "../CCPanel/CCPanel";
-
-import "./EOM_KeyBinder.less";
+import "./CCKeyBinder.less";
 
 /** 面板上的按键绑定 */
 export const Key2Command: { [key: string]: string; } = {

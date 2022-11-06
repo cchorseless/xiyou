@@ -18,6 +18,7 @@ import { CCAvatar } from "./allCustomUIElement/CCAvatar/CCAvatar";
 import { CCMainPanel } from "./MainPanel/CCMainPanel";
 import { CCPanel } from "./allCustomUIElement/CCPanel/CCPanel";
 import { CCPausePanel } from "./allCustomUIElement/CCPause/CCPausePanel";
+import { CCDebugPanel } from "./DebugTool/CCDebugPanel";
 
 export class RootPanel extends CCPanel {
     /**全局根节点实例 */
@@ -40,6 +41,7 @@ export class RootPanel extends CCPanel {
                 <Panel ref={this.__root__} className="CC_root" {...this.initRootAttrs()}>
                     {/* <EntityOverHeadPanel /> */}
                     <CCMainPanel />
+                    <CCDebugPanel direction="left" />
                     <CCPausePanel tipQueue={["1", "2", "3"]} />
                     {this.props.children}
                     {this.__root___childs}

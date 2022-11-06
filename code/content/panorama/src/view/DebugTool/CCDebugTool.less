@@ -360,7 +360,7 @@ ToggleButton Label {
     }
 }
 
-.CC_SwitchContainer {
+.CC_DebugTool_DemoSwitch {
     margin: 2px 2px;
     width: fill-parent-flow(1.0);
     height: @ButtonHeight;
@@ -467,26 +467,18 @@ ToggleButton Label {
 }
 
 
-.CC_IconButton {
-    wash-color: #9aa5a8;
-
-    &:hover {
-        wash-color: none;
-    }
-}
-
 .SelectionContainer {
     align: center top;
     margin-top: 200px;
     background-color: gradient(linear, 0% 0%, 0% 25%, from(#23232666), to(#1c1d2066));
     box-shadow: #00000099 0px 0px 8px 0px;
     border: 2px solid #32383677;
-    opacity: 0.0;
+    // opacity: 0.0;
     transform: translateY(-60px);
 
     transition-property: opacity, transform, width, height;
     transition-duration: 0.2s;
-    // sound: "ui_settings_out_multi";
+    sound: "ui_settings_out_multi";
 }
 
 .SelectionContainer.Show {
@@ -677,108 +669,7 @@ ToggleButton Label {
     }
 }
 
-.CC_DebugTool_AbilityPicker {
-    .CC_DebugTool_AbilityPickerItem {
-        margin: 6px;
-        transition-property: brightness, saturation, opacity;
-        transition-duration: 0.1s;
-        // border-radius: 4px;
 
-
-        &:enabled:hover {
-            brightness: 2;
-            // background-color: #00000066;
-        }
-
-        &:enabled:active {
-            brightness: 0.5;
-            sound: "ui_generic_button_click";
-        }
-
-        &:disabled {
-            saturation: 0.0;
-            opacity: 0.2;
-        }
-
-        .DOTAAbilityImage,
-        DOTAAbilityImage {
-            width: 64px;
-            height: width-percentage(100%);
-            margin-bottom: 8px;
-            border: 1px solid black;
-        }
-
-        DOTAItemImage {
-            width: 60px;
-            height: width-percentage(75%);
-            margin-bottom: 8px;
-            border: 1px solid black;
-        }
-
-        DOTAHeroImage {
-            width: 58px;
-            height: 76px;
-            margin-bottom: 8px;
-            border: 1px solid black;
-        }
-
-        .CC_DebugTool_AbilityPickerItemName {
-            width: 100%;
-            height: 20px;
-            color: #ffffff;
-            text-align: center;
-            text-overflow: shrink;
-            text-shadow: 0px 1px 2px 3 #00000066;
-        }
-    }
-}
-
-.CC_DebugTool_TextPicker {
-    .CC_DebugTool_TextPickerItem {
-        .DemoButton();
-        width: 160px;
-    }
-}
-
-#CC_DebugTool_Setting {
-    background-color: gradient(linear, 0% 0%, 0% 25%, from(#232326), to(#1c1d20));
-
-    #SelectionPickerHeader {
-        background-color: #111111;
-
-    }
-
-    .SettingsSection {
-        flow-children: down;
-        width: 100%;
-        margin-top: 12px;
-    }
-
-    .SectionHeaderAlignRight {
-        width: 100%;
-    }
-
-    .SectionHeader {
-        font-size: 24px;
-        font-weight: thin;
-        color: #939da0;
-        text-transform: uppercase;
-    }
-
-    .SectionHeaderLine {
-        height: 2px;
-        width: 100%;
-        margin: 2px;
-        background-color: #3b3f40;
-        margin-bottom: 12px;
-    }
-
-    .AddNewKeyBind {
-        Label {
-            font-size: 18px;
-        }
-    }
-}
 
 .CanRemoveKeyBind {
     .CC_Image {
