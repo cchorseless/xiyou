@@ -1,12 +1,36 @@
-.hero_draw_card_box {
-    // width: 300px;
-    // height: 300px;
-    transition-property: transform;
-    transition-duration: 0.2s;
-    z-index: 500;
-    // margin-top: -45px;
-}
+#CC_DrawCardPanel {
+    horizontal-align: center;
+    margin-top: 200px;
 
-.hero_draw_card_box:hover {
-    transform: scale3d(1.2, 1.2, 1.2);
+    #DrawBgImg {
+        height: 200px;
+        margin-bottom: 0px;
+        horizontal-align: center;
+        background-color: gradient(linear, 0% 0%, 0% 25%, from(#232326), to(#1c1d20));
+        box-shadow: #00000099 0px 0px 8px 0px;
+        border: 2px solid #32383677;
+    }
+
+
+    #DrawCardGroup {
+        width: 200px;
+        height: 400px;
+        flow-children: down;
+
+        .DrawCardSceneBox {
+            width: 200px;
+            height: 200px;
+            transition-property: transform;
+            transition-duration: 0.2s;
+            z-index: 500;
+            margin-top: 0px;
+            horizontal-align: center;
+
+            &:hover {
+                transform: scale3d(1.2, 1.2, 1.2);
+            }
+        }
+
+
+    }
 }

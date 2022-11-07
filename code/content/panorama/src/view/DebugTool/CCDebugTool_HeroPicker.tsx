@@ -5,8 +5,7 @@ import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
 /** 英雄选择 */
 interface ICCDebugTool_HeroPicker {
-    /** 事件名 */
-    eventName: string;
+
     /** 单位名列表 */
     unitNames?: string[];
     /** 窗口标题 */
@@ -21,7 +20,6 @@ export class CCDebugTool_HeroPicker extends CCPanel<ICCDebugTool_HeroPicker> {
             this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_DebugTool_TextPicker"  {...this.initRootAttrs()} hittest={false}>
                 <CCDebugTool_SelectContainer
-                    eventName={this.props.eventName}
                     title={this.props.title}
                     hasFilter={false}
                     onChangeRawMode={rawMode => this.setState({ rawMode: rawMode })}

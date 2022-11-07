@@ -4,8 +4,6 @@ import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 import "./CCDebugTool_TextPicker.less";
 /** 普通选择 */
 interface ICCDebugTool_TextPicker {
-    /** 事件名 */
-    eventName?: string;
     /** 列表 */
     itemNames?: string[];
     /** 窗口标题 */

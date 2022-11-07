@@ -1,6 +1,5 @@
-import React, { createRef, PureComponent } from "react";
-import { PanelAttributes, ImageAttributes, DOTAAbilityImageAttributes, LabelAttributes } from "@demon673/react-panorama";
-import { BasePureComponent, NodePropsData } from "../../../libs/BasePureComponent";
+import React from "react";
+import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import "./CCLabel.less";
@@ -14,18 +13,13 @@ interface ICCLabelProps extends NodePropsData {
     /** 字体颜色 */
     color?: string,
     /** 预设样式 */
-    type?: "Title" | "Normal" | "Money" | "Tip";
+    type?: "UnitName" | "Gold" | "Menu" | "Title" | "Normal" | "Money" | "Tip";
 }
 
 
 export class CCLabel extends CCPanel<ICCLabelProps, LabelPanel>{
     defaultClass = () => {
-        return CSSHelper.ClassMaker("CC_Label", {
-            CC_LabelTitle: this.props.type == "Title",
-            CC_LabelNormal: this.props.type == "Normal",
-            CC_LabelMoney: this.props.type == "Money",
-            CC_LabelTip: this.props.type == "Tip",
-        });
+        return CSSHelper.ClassMaker("CC_Label", this.props.type);
     };
     defaultStyle = () => {
         return {
@@ -34,6 +28,10 @@ export class CCLabel extends CCPanel<ICCLabelProps, LabelPanel>{
             color: this.props.color,
         };
     };
+
+    static defaultProps = {
+        type: "Normal"
+    }
 
     render() {
         return (

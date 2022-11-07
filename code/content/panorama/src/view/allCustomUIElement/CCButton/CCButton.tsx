@@ -7,7 +7,7 @@ import "./CCButton.less";
 
 export interface ICCButton {
 	/** 图标 */
-	icon?: JSX.Element;
+	icon?: React.ReactNode;
 	/** 设置按钮载入状态 */
 	loading?: boolean;
 	/**

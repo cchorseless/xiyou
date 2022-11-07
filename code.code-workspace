@@ -6,6 +6,9 @@
 	],
 	"settings": {
 		"javascript.format.enable": false,
-		"editor.formatOnSave": true
+		"editor.formatOnSave": true,
+		"css.customData": [
+			"${rootPath}/content/panorama/cssCustomData.json"
+		]
 	}
 }

@@ -4,8 +4,6 @@ import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
 interface IDebugTool_SectPicker {
-    /** 事件名 */
-    eventName: string;
     sheetConfig: any;
     /** 技能名列表 */
     abilityNames?: string[];
@@ -33,7 +31,6 @@ export class CCDebugTool_SectPicker extends CCPanel<IDebugTool_SectPicker> {
             this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_DebugTool_SectPicker"  {...this.initRootAttrs()} hittest={false}>
                 <CCDebugTool_SelectContainer
-                    eventName={this.props.eventName}
                     title={this.props.title}
                     toggleList={this.props.toggleList}
                     onSearch={text => this.UpdateState({ filterWord: text })}

@@ -4,7 +4,9 @@ import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
 import { ET, registerET } from "../../../libs/Entity";
+import { CCDrawCardPanel } from "../../../view/Draw/CCDrawCardPanel";
 import { DrawCardPanel } from "../../../view/Draw/DrawCardPanel";
+import { CCMainPanel } from "../../../view/MainPanel/CCMainPanel";
 import { MainPanel } from "../../../view/MainPanel/MainPanel";
 import { DrawConfig } from "../../system/Draw/DrawConfig";
 import { PlayerScene } from "../Player/PlayerScene";
@@ -28,7 +30,7 @@ export class DrawComponent extends ET.Component {
             (event: CLIENT_DATA<ArrayLikeObject<string>>) => {
                 if (event.state) {
                     let card = Array<string>().concat(this.tLastCards);
-                    // MainPanel.GetInstance()!.addOnlyDialog(DrawCardPanel, { cards: card });
+                    CCMainPanel.GetInstance()!.addOnlyPanel(CCDrawCardPanel, 1, { cards: card })
                 }
             }
         );

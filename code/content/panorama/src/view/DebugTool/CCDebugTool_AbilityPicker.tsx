@@ -7,8 +7,6 @@ import "./CCDebugTool_AbilityPicker.less";
 
 /** 技能选择 */
 interface ICCDebugTool_AbilityPicker {
-    /** 事件名 */
-    eventName: string;
     /** 技能名列表 */
     abilityNames?: string[];
     /** 窗口标题 */
@@ -32,7 +30,6 @@ export class CCDebugTool_AbilityPicker extends CCPanel<ICCDebugTool_AbilityPicke
             this.__root___isValid &&
             <Panel ref={this.__root__}   {...this.initRootAttrs()} hittest={false}>
                 <CCDebugTool_SelectContainer
-                    eventName={this.props.eventName}
                     title={this.props.title}
                     toggleList={this.props.toggleList}
                     onSearch={text => this.setState({ filterWord: text })}

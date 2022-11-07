@@ -5,8 +5,6 @@ import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
 /** 选择物品 */
 interface ICCDebugTool_ItemPicker {
-    /** 事件名 */
-    eventName: string;
     /** 技能名列表 */
     itemNames?: string[];
     /** 窗口标题 */
@@ -31,7 +29,6 @@ export class CCDebugTool_ItemPicker extends CCPanel<ICCDebugTool_ItemPicker> {
             this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_DebugTool_TextPicker"  {...this.initRootAttrs()} hittest={false}>
                 <CCDebugTool_SelectContainer
-                    eventName={this.props.eventName}
                     title={this.props.title}
                     toggleList={this.props.toggleList}
                     onSearch={text => this.setState({ filterWord: text })}

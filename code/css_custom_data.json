@@ -1,0 +1,48 @@
+{
+    "version": 1.1,
+    "properties": [{
+            "name": "horizontal-align",
+            "description": "水平布局： left | right | middle | center"
+        },
+        {
+            "name": "flow-children",
+            "description": "right | right-wrap | down | down-wrap | left | left-wrap | up | up-wrap"
+        },
+        {
+            "name": "wash-color",
+            "description": "color like"
+        },
+        {
+            "name": "opacity-brush",
+            "description": "color like"
+        },
+        {
+            "name": "border-brush",
+            "description": "color like"
+        },
+        {
+            "name": "brightness",
+            "description": "number like"
+        },
+        {
+            "name": "tooltip-position",
+            "description": "left | right | top | bottom "
+        },
+        {
+            "name": "sound",
+            "description": "string like"
+        },
+        {
+            "name": "saturation",
+            "description": "number like"
+        },
+        {
+            "name": "align",
+            "description": "center center"
+        }
+    ],
+    "pseudoClasses": [{
+        "name": ":my-link",
+        "description": ":any-link pseudo class. See details at https://preset-env.cssdb.org/features#any-link-pseudo-class"
+    }]
+}
