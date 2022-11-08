@@ -1,0 +1,1 @@
+declare type Rarity = "A" | "B" | "C" | "D" | "R" | "S" | "SS";

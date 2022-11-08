@@ -1,5 +1,6 @@
 import React from "react";
 import { KVHelper } from "../../helper/KVHelper";
+import { CCAbilityIcon } from "../allCustomUIElement/CCAbility/CCAbilityIcon";
 import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 
@@ -10,14 +11,12 @@ interface ICCDrawCardBottomItem {
 }
 export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
 
-
-
     render() {
         const unitname = this.props.unitname;
         let KV_DATA = KVHelper.KVData();
         let cardinfo = KV_DATA.building_unit_tower[unitname];
         let iteminfo = KV_DATA.building_item_card[cardinfo!.CardName];
-        const Rarity = cardinfo?.Rarity || "R";
+        const Rarity = cardinfo?.Rarity || "A";
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_DrawCardBottomItem" className={Rarity} hittest={false} {...this.initRootAttrs()}>
@@ -27,10 +26,12 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
                         [1, 2, 3, 4].map((a, i) => {
                             let abilityname = cardinfo["Ability" + i] as string;
                             if (abilityname != "ability_empty") {
-
+                                return <CCAbilityIcon abilityname={abilityname} />
                             }
                         })
                     }
+
+
                 </CCPanel>
             </Panel>
         )
