@@ -23,7 +23,7 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
     }
 
     async SelectCard(itemname: string, index: number, b2Public: number = 0) {
-        let r = await PlayerScene.Local.DrawComp.SelectCard(index, itemname);
+        let r = await PlayerScene.Local.DrawComp.SelectCard(index, itemname, b2Public);
         if (r) {
             let KV_DATA = KVHelper.KVData();
             let config = KV_DATA.building_unit_tower[itemname];
@@ -50,7 +50,11 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
                                     () => {
                                         this.SelectCard(card, index);
                                     }} />
-                                <CCDrawCardBottomItem unitname={card} />
+                                <CCDrawCardBottomItem unitname={card} onShare={() => {
+                                    this.SelectCard(card, index, 1);
+                                }} onWanted={() => {
+
+                                }} />
                             </CCPanel>
                         )
                     })

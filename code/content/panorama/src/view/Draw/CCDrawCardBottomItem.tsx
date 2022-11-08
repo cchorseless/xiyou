@@ -1,6 +1,11 @@
 import React from "react";
 import { KVHelper } from "../../helper/KVHelper";
 import { CCAbilityIcon } from "../allCustomUIElement/CCAbility/CCAbilityIcon";
+import { CCIconButton } from "../allCustomUIElement/CCButton/CCIconButton";
+import { CCIcon_Gold } from "../allCustomUIElement/CCIcons/CCIcon_Gold";
+import { CCIcon_Population } from "../allCustomUIElement/CCIcons/CCIcon_Population";
+import { CCIcon_Share } from "../allCustomUIElement/CCIcons/CCIcon_Share";
+import { CCIcon_Wanted } from "../allCustomUIElement/CCIcons/CCIcon_Wanted";
 import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 
@@ -8,8 +13,11 @@ import "./CCDrawCardBottomItem.less";
 
 interface ICCDrawCardBottomItem {
     unitname: string;
+    onShare: () => void;
+    onWanted: () => void;
 }
 export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
+
 
     render() {
         const unitname = this.props.unitname;
@@ -30,8 +38,18 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
                             }
                         })
                     }
-
-
+                </CCPanel>
+                <CCPanel horizontalAlign="center" flowChildren="right">
+                    <CCIconButton icon={<CCIcon_Share />} onactivate={() => { this.props.onShare() }} tooltip={"#todo"} />
+                    <CCPanel flowChildren="right">
+                        <CCIcon_Gold />
+                        <CCLabel type="Gold" text={"x" + iteminfo?.ItemCost} />
+                    </CCPanel>
+                    <CCPanel flowChildren="right">
+                        <CCIcon_Population />
+                        <CCLabel type="Gold" text={"x" + cardinfo?.Population} />
+                    </CCPanel>
+                    <CCIconButton icon={<CCIcon_Wanted />} onactivate={() => { this.props.onWanted() }} tooltip={"#todo"} />
                 </CCPanel>
             </Panel>
         )

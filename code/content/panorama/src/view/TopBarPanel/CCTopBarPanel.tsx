@@ -10,6 +10,7 @@ import { TimerHelper } from "../../helper/TimerHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { CCImageNumber } from "../allCustomUIElement/CCImageNumber/CCImageNumber";
 import "./CCTopBarPanel.less";
+import { CSSHelper } from "../../helper/CSSHelper";
 
 
 export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
@@ -79,7 +80,7 @@ export class CCTopBarGameCoin<T extends NodePropsData> extends CCPanel<T> {
                     {
                         ["population", "gold", "wood", "food"].map((nodename, index) => {
                             return (<CCPanel key={nodename} className="CoinGroup" flowChildren="right"  >
-                                <Image className={"Icon_" + nodename} />
+                                <Image className={CSSHelper.ClassMaker("img_Icon", nodename)} />
                                 <CCPanel flowChildren="down">
                                     <Label className="CoinName" localizedText={"#lang_" + nodename} />
                                     <Label className="CoinCount" text={coindes[index]} />
