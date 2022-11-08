@@ -26,7 +26,7 @@ export class CCPausePanel extends CCPanel<ICCPausePanel> {
     render() {
         const tips = this.props.tipQueue;
         return (this.__root___isValid &&
-            <Panel id="CC_PausePanel" ref={this.__root__}      {...this.initRootAttrs()}>
+            <Panel id="CC_PausePanel" ref={this.__root__} hittest={false}   {...this.initRootAttrs()}>
                 <Label id="CC_PausePausing" localizedText="#CustomPausing" hittest={false} />
                 {
                     tips && tips.length > 0 && <CCIntervalTips id="CC_PauseIntervalTip" tick={5} tipQueue={tips} />

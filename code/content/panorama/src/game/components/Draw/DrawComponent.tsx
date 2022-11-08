@@ -5,7 +5,6 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { CCDrawCardPanel } from "../../../view/Draw/CCDrawCardPanel";
-import { DrawCardPanel } from "../../../view/Draw/DrawCardPanel";
 import { CCMainPanel } from "../../../view/MainPanel/CCMainPanel";
 import { MainPanel } from "../../../view/MainPanel/MainPanel";
 import { DrawConfig } from "../../system/Draw/DrawConfig";

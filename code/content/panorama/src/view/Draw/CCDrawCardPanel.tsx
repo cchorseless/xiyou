@@ -9,6 +9,7 @@ import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCDrawCardBottomItem } from "./CCDrawCardBottomItem";
 
+import "./CCDrawCardPanel.less";
 interface ICCDrawCardPanel {
     cards: string[];
 }
@@ -39,26 +40,28 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_DrawCardPanel" hittest={false} {...this.initRootAttrs()}>
-                <CCPanel id="DrawBgImg" >
-                    <CCIconButton horizontalAlign="right" verticalAlign="top" type={this.props.type} icon={<CCIcon_XClose type={this.props.type} />} onactivate={() => { this.close() }} />
-                </CCPanel>
-                {
-                    this.props.cards.map((card, index) => {
-                        return (
-                            <CCPanel id="DrawCardGroup" key={index + ""} opacity={this.GetState<string>("CardGroup" + index)} >
-                                <CCDOTAScenePanel className="DrawCardSceneBox" unit={card} allowrotation={false} rotateonmousemove={false} onactivate={
-                                    () => {
-                                        this.SelectCard(card, index);
-                                    }} />
-                                <CCDrawCardBottomItem unitname={card} onShare={() => {
-                                    this.SelectCard(card, index, 1);
-                                }} onWanted={() => {
+                <CCPanel id="DrawBgImg" hittest={false} />
+                <CCIconButton marginRight="0px" icon={<CCIcon_XClose />} onactivate={() => { this.close() }} />
+                <CCPanel id="DrawBgBox" hittest={false}>
+                    {
+                        this.props.cards.map((card, index) => {
+                            return (
+                                <CCPanel id="DrawCardGroup" key={index + ""} opacity={this.GetState<string>("CardGroup" + index)} >
+                                    <CCDOTAScenePanel className="DrawCardSceneBox" unit={card.replace("building", "npc_dota")} allowrotation={false} rotateonmousemove={false} onactivate={
+                                        () => {
+                                            this.SelectCard(card, index);
+                                        }} />
+                                    <CCDrawCardBottomItem unitname={card} onShare={() => {
+                                        this.SelectCard(card, index, 1);
+                                    }} onWanted={() => {
 
-                                }} />
-                            </CCPanel>
-                        )
-                    })
-                }
+                                    }} />
+                                </CCPanel>
+                            )
+                        })
+                    }
+                </CCPanel>
+
             </Panel>
         )
     }

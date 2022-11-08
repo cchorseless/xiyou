@@ -1,17 +1,18 @@
 import React, { createRef, PureComponent } from "react";
-import { PanelAttributes } from "@demon673/react-panorama";
+import { DOTAAbilityImageAttributes, PanelAttributes } from "@demon673/react-panorama";
 import { CCPanel } from "../CCPanel/CCPanel";
 
 import "./CCAbilityIcon.less";
+import { LogHelper } from "../../../helper/LogHelper";
 
-interface ICCAbilityIcon {
+interface ICCAbilityIcon extends DOTAAbilityImageAttributes {
     abilityname: string;
     rarity?: Rarity
 }
 
 
 export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
-    defaultProps = {
+    static defaultProps = {
         rarity: "A"
     }
     render() {
@@ -19,7 +20,8 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_AbilityIcon" {...this.initRootAttrs()}  >
-                <DOTAAbilityImage abilityname={abilityname} />
+                {/* todo  */}
+                <DOTAAbilityImage abilityname={abilityname} showtooltip={true} />
                 <Image id="img_AbilityIcon" className={this.props.rarity} />
                 {this.props.children}
                 {this.__root___childs}

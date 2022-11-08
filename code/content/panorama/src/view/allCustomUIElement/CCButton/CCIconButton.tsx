@@ -24,6 +24,10 @@ export interface ICCIconButton extends ICCButton {
 }
 export class CCIconButton extends CCPanel<ICCIconButton, Button> {
     defaultClass = () => { return CSSHelper.ClassMaker(this.props.className, "CC_IconButton", this.props.type, this.props.color) };
+    static defaultProps = {
+        type: "Tui3"
+    }
+
     render() {
         return (
             this.__root___isValid &&

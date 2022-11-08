@@ -80,7 +80,7 @@ export class CCTopBarGameCoin<T extends NodePropsData> extends CCPanel<T> {
                     {
                         ["population", "gold", "wood", "food"].map((nodename, index) => {
                             return (<CCPanel key={nodename} className="CoinGroup" flowChildren="right"  >
-                                <Image className={CSSHelper.ClassMaker("img_Icon", nodename)} />
+                                <Image className={CSSHelper.ClassMaker("imgIcon", nodename)} />
                                 <CCPanel flowChildren="down">
                                     <Label className="CoinName" localizedText={"#lang_" + nodename} />
                                     <Label className="CoinCount" text={coindes[index]} />

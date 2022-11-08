@@ -41,8 +41,8 @@ export class RootPanel extends CCPanel {
                 <Panel ref={this.__root__} className="CC_root" {...this.initRootAttrs()}>
                     {/* <EntityOverHeadPanel /> */}
                     <CCMainPanel />
-                    <CCDebugPanel direction="left" />
-                    <CCPausePanel tipQueue={["1", "2", "3"]} />
+                    <CCDebugPanel direction="left" hittest={false} />
+                    <CCPausePanel tipQueue={["1", "2", "3"]} hittest={false} />
                     {this.props.children}
                     {this.__root___childs}
                 </Panel>

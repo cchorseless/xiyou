@@ -19,60 +19,60 @@ export class CCDropDownButton extends CCPanel<ICCDropDownButton, TextButton> {
     private myMenu?: Panel;
     defaultClass = () => { return ("CC_DropDown"); };
     onStartUI() {
-        const { children, id } = this.props;
-        let pBtn = this.__root__.current!;
-        if (this.myMenu == undefined) {
-            this.myMenu = $.CreatePanel("Panel", pBtn, `${id}_DropDownMenu`);
-            this.myMenu.SetParent(pBtn);
-            this.myMenu.visible = false;
-            this.myMenu.AddClass("CC_DropDownMenu");
-        }
-        for (let index = 0; index < pBtn.GetChildCount(); index++) {
-            const c = pBtn.GetChild(index);
-            if (c && c.id != "CC_DropDown_placeholder" && c.id != "CC_DropDown_arrow") {
-                c.visible = (index + 1 == this.props.index);
-            }
-        }
-        render(
-            <>
-                {Children.map(children, (p, childIndex) => {
-                    return (
-                        // 包一层
-                        <RadioButton group="CC_DropDownMenuItem" selected={childIndex + 1 == this.props.index} className={CSSHelper.ClassMaker("CC_DropDownMenuItem")} onactivate={self => {
-                            let pBtn = this.__root__.current;
-                            let bClear = false;
-                            if (pBtn) {
-                                for (let index = 0; index < pBtn.GetChildCount(); index++) {
-                                    const c = pBtn.GetChild(index) as LabelPanel;
-                                    if (c && c.id != "CC_DropDown_arrow" && c.id != "CC_DropDown_Clear") {
-                                        c.visible = index == childIndex;
-                                        if (c.visible) {
-                                            if (this.props.onChange) {
-                                                this.props.onChange(childIndex, c);
-                                            }
-                                        }
-                                    }
-                                    if (c && c.id == "CC_DropDown_Clear" && index == childIndex) {
-                                        bClear = true;
-                                        c.visible == false;
+        // const { children, id } = this.props;
+        // let pBtn = this.__root__.current!;
+        // if (this.myMenu == undefined) {
+        //     this.myMenu = $.CreatePanel("Panel", pBtn, `${id}_DropDownMenu`);
+        //     this.myMenu.SetParent(pBtn);
+        //     this.myMenu.visible = false;
+        //     this.myMenu.AddClass("CC_DropDownMenu");
+        // }
+        // for (let index = 0; index < pBtn.GetChildCount(); index++) {
+        //     const c = pBtn.GetChild(index);
+        //     if (c && c.id != "CC_DropDown_placeholder" && c.id != "CC_DropDown_arrow") {
+        //         c.visible = (index + 1 == this.props.index);
+        //     }
+        // }
+        // render(
+        //     <>
+        //         {Children.map(children, (p, childIndex) => {
+        //             return (
+        //                 // 包一层
+        //                 <RadioButton group="CC_DropDownMenuItem" selected={childIndex + 1 == this.props.index} className={"CC_DropDownMenuItem"} onactivate={self => {
+        //                     let pBtn = this.__root__.current;
+        //                     let bClear = false;
+        //                     if (pBtn) {
+        //                         for (let index = 0; index < pBtn.GetChildCount(); index++) {
+        //                             const c = pBtn.GetChild(index) as LabelPanel;
+        //                             if (c && c.id != "CC_DropDown_arrow" && c.id != "CC_DropDown_Clear") {
+        //                                 c.visible = index == childIndex;
+        //                                 if (c.visible) {
+        //                                     if (this.props.onChange) {
+        //                                         this.props.onChange(childIndex, c);
+        //                                     }
+        //                                 }
+        //                             }
+        //                             if (c && c.id == "CC_DropDown_Clear" && index == childIndex) {
+        //                                 bClear = true;
+        //                                 c.visible == false;
 
-                                        if (this.props.onClear) {
-                                            this.props.onClear();
-                                        }
-                                    }
-                                }
-                                if (bClear) {
-                                    (pBtn.FindChildTraverse("CC_DropDown_placeholder") as Panel).visible = true;
-                                }
-                            }
-                            this.toggleMenu(false);
-                        }} onblur={self => { this.toggleMenu(false); }}>
-                            {p}
-                        </RadioButton>
-                    );
-                })}
-            </>,
-            this.myMenu as Panel);
+        //                                 if (this.props.onClear) {
+        //                                     this.props.onClear();
+        //                                 }
+        //                             }
+        //                         }
+        //                         if (bClear) {
+        //                             (pBtn.FindChildTraverse("CC_DropDown_placeholder") as Panel).visible = true;
+        //                         }
+        //                     }
+        //                     this.toggleMenu(false);
+        //                 }} onblur={self => { this.toggleMenu(false); }}>
+        //                     {p}
+        //                 </RadioButton>
+        //             );
+        //         })}
+        //     </>,
+        //     this.myMenu as Panel);
     }
 
     componentWillUnmount() {

@@ -1,36 +1,67 @@
 #CC_DrawCardPanel {
     horizontal-align: center;
-    margin-top: 200px;
+    // width: 1000px;
+    // height: 600px;
+    margin-top: 100px;
+
+    .CC_IconButton {
+        horizontal-align: right;
+        wash-color: none;
+
+        &:hover {
+            wash-color: none;
+        }
+
+        &.Tui7 {
+            margin-top: 16px;
+            margin-right: 3px;
+        }
+
+        // &.Tui3 {}
+    }
+
 
     #DrawBgImg {
+        width: 100%;
         height: 200px;
-        margin-bottom: 0px;
+        margin-top: 200px;
         horizontal-align: center;
         background-color: gradient(linear, 0% 0%, 0% 25%, from(#232326), to(#1c1d20));
         box-shadow: #00000099 0px 0px 8px 0px;
         border: 2px solid #32383677;
+
+
     }
 
+    #DrawBgBox {
+        // width: 100%;
+        height: 100%;
+        margin-top: 0px;
+        margin-right: 0px;
+        flow-children: right;
 
-    #DrawCardGroup {
-        width: 200px;
-        height: 400px;
-        flow-children: down;
+        #DrawCardGroup {
+            height: 400px;
+            margin-left: 10px;
+            flow-children: down;
 
-        .DrawCardSceneBox {
-            width: 200px;
-            height: 200px;
-            transition-property: transform;
-            transition-duration: 0.2s;
-            z-index: 500;
-            margin-top: 0px;
-            horizontal-align: center;
+            .DrawCardSceneBox {
+                width: 200px;
+                height: 200px;
+                transition-property: transform;
+                transition-duration: 0.2s;
+                z-index: 500;
+                margin-top: 0px;
+                horizontal-align: center;
 
-            &:hover {
-                transform: scale3d(1.2, 1.2, 1.2);
+                &:hover {
+                    transform: scale3d(1.2, 1.2, 1.2);
+                }
             }
+
+
         }
-
-
     }
+
+
 }

@@ -3,9 +3,10 @@ import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import "./CCLabel.less";
+import { LabelAttributes } from "@demon673/react-panorama";
 
 
-interface ICCLabelProps extends NodePropsData {
+interface ICCLabelProps extends LabelAttributes {
     /** 字体大小 */
     fontSize?: `${number}px`;
     /** 字体样式 */

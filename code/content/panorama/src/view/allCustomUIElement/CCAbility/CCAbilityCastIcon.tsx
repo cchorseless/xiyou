@@ -1,11 +1,11 @@
 import React, { createRef, PureComponent } from "react";
 import { PanelAttributes } from "@demon673/react-panorama";
 import { CCPanel } from "../CCPanel/CCPanel";
-
-import "./CCAbilityCastIcon.less";
 import { CCLabel } from "../CCLabel/CCLabel";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
+
+import "./CCAbilityCastIcon.less";
 
 interface ICCAbilityCastIcon {
     abilityname: string;
@@ -15,7 +15,7 @@ interface ICCAbilityCastIcon {
 
 
 export class CCAbilityCastIcon extends CCPanel<ICCAbilityCastIcon> {
-    defaultProps = {
+    static defaultProps = {
         rarity: "A"
     }
     abilityindex: AbilityEntityIndex;

@@ -15,6 +15,14 @@ export interface OBJ_1_1 {
 "round_waiting_next" :OBJ_2_1 ,
 "round_end" :OBJ_2_1 ,
 "combination_rule" :OBJ_2_1 ,
+"MenuButton_setting" :OBJ_2_1 ,
+"MenuButton_mail" :OBJ_2_1 ,
+"MenuButton_store" :OBJ_2_1 ,
+"MenuButton_battlepass" :OBJ_2_1 ,
+"MenuButton_draw" :OBJ_2_1 ,
+"MenuButton_handbook" :OBJ_2_1 ,
+"TopBarRound" :OBJ_2_1 ,
+"TopBarDifficulty" :OBJ_2_1 ,
 [k:string] : OBJ_2_1 }
 export interface OBJ_2_1 {
 "Des" :string ,

@@ -3,6 +3,11 @@ import { CCIcon } from "./CCIcon";
 
 
 export class CCIcon_XClose extends CCIcon<{ type?: "Default" | "Gradient" | "Quit" | "Tui7" | "Tui3"; }> {
+
+	static defaultProps = {
+		type: "Tui3"
+	}
+
 	defaultStyle = () => {
 		switch (this.props.type) {
 			case "Default":

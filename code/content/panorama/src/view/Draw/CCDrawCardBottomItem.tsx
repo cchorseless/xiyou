@@ -28,28 +28,31 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_DrawCardBottomItem" className={Rarity} hittest={false} {...this.initRootAttrs()}>
-                <CCLabel type="UnitName" horizontalAlign="center" />
-                <CCPanel horizontalAlign="center" flowChildren="right" >
+                <CCPanel horizontalAlign="center" flowChildren="right">
+                    <CCLabel textAlign={"center"} type="UnitName" localizedText={"#" + unitname} verticalAlign="center" height="20px" />
+                    <CCIconButton marginLeft={"10px"} icon={<CCIcon_Share />} onactivate={() => { this.props.onShare() }} tooltip={"#todo"} />
+                    <CCIconButton icon={<CCIcon_Wanted />} onactivate={() => { this.props.onWanted() }} tooltip={"#todo"} />
+                </CCPanel>
+
+                <CCPanel horizontalAlign="center" flowChildren="right" marginTop={"10px"}>
                     {
-                        [1, 2, 3, 4].map((a, i) => {
-                            let abilityname = cardinfo["Ability" + i] as string;
-                            if (abilityname != "ability_empty") {
-                                return <CCAbilityIcon abilityname={abilityname} />
+                        [1, 2, 3, 6].map((a, i) => {
+                            let abilityname = cardinfo["Ability" + a] as string;
+                            if (abilityname && abilityname != "ability_empty") {
+                                return <CCAbilityIcon key={"" + i} abilityname={abilityname} />
                             }
                         })
                     }
                 </CCPanel>
                 <CCPanel horizontalAlign="center" flowChildren="right">
-                    <CCIconButton icon={<CCIcon_Share />} onactivate={() => { this.props.onShare() }} tooltip={"#todo"} />
                     <CCPanel flowChildren="right">
                         <CCIcon_Gold />
                         <CCLabel type="Gold" text={"x" + iteminfo?.ItemCost} />
                     </CCPanel>
-                    <CCPanel flowChildren="right">
+                    <CCPanel flowChildren="right" marginLeft={"10px"}>
                         <CCIcon_Population />
                         <CCLabel type="Gold" text={"x" + cardinfo?.Population} />
                     </CCPanel>
-                    <CCIconButton icon={<CCIcon_Wanted />} onactivate={() => { this.props.onWanted() }} tooltip={"#todo"} />
                 </CCPanel>
             </Panel>
         )
