@@ -8,7 +8,6 @@ import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { ToolTipHelper } from "../../helper/ToolTipHelper";
 import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
-import { ChallengeShopItem } from "../Challenge/ChallengeShopItem";
 import { CombinationBottomPanel } from "../Combination/CombinationBottomPanel";
 import { DacBoardPanelV0 } from "../Common/DacBoardPanelV0";
 import { MainPanel_UI } from "./MainPanel_UI";
@@ -31,14 +30,6 @@ export class MainPanel extends MainPanel_UI<NodePropsData> {
             marginBottom: "200px",
             // backgroundColor: "#FFFFFFFF",
         } as any);
-
-        // this.addOnlyOneNodeChild(this.NODENAME.panel_base, ChallengeShopItem, {
-        //     uiScale: "70% 70% 100%",
-        //     marginRight: "0px",
-        //     marginBottom: "0px",
-        //     horizontalAlign: "right",
-        //     verticalAlign: "bottom",
-        // } as any);
 
 
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, DacBoardPanelV0, {

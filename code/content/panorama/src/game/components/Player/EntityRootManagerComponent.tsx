@@ -61,6 +61,24 @@ export class EntityRootManagerComponent extends ET.Component {
         return fakerheros;
     }
 
+    isHero(entityid: EntityIndex) {
+        let allplayer = this.getAllPlayer();
+        for (let v of allplayer) {
+            if (v.GetHeroEntityIndex() === entityid) {
+                return v
+            }
+        }
+    }
+
+    isFakerHero(entityid: EntityIndex) {
+        let allfakers = this.getAllFakerHero();
+        for (let v of allfakers) {
+            if (v.EntityId === entityid) {
+                return v
+            }
+        }
+    }
+
     getFakerHero(playerid: PlayerID | number) {
         let entityid = this.AllFakerHero[playerid + ""];
         if (entityid) {

@@ -29,7 +29,7 @@ export class DrawComponent extends ET.Component {
             (event: CLIENT_DATA<ArrayLikeObject<string>>) => {
                 if (event.state) {
                     let card = Array<string>().concat(this.tLastCards);
-                    CCMainPanel.GetInstance()!.addOnlyPanel(CCDrawCardPanel, 1, { cards: card })
+                    CCMainPanel.GetInstance()?.addOnlyPanel(CCDrawCardPanel, { cards: card })
                 }
             }
         );

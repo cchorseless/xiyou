@@ -4,9 +4,8 @@ import { NetHelper } from "../../helper/NetHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { ET, registerET } from "../../libs/Entity";
 import { GameEnum } from "../../libs/GameEnum";
-import { CardSamllIconItem } from "../../view/Card/CardSamllIconItem";
-import { CombinationBottomPanel } from "../../view/Combination/CombinationBottomPanel";
-import { MainPanel } from "../../view/MainPanel/MainPanel";
+import { CCMainPanel } from "../../view/MainPanel/CCMainPanel";
+import { CCUnitChessMoveIcon } from "../../view/Unit/CCUnitChessMoveIcon";
 import { ChessControlConfig } from "../system/ChessControl/ChessControlConfig";
 import { PlayerScene } from "./Player/PlayerScene";
 @registerET()
@@ -88,8 +87,6 @@ export class ChessControlComponent extends ET.Component {
         // 选中自己信使
         if (portrait_unit == Players.GetPlayerHeroEntityIndex(localPlayer)) {
             await this.OnShowCursorHeroIcon(false);
-            // 显示羁绊
-            CombinationBottomPanel.GetInstance()!.showCombination(localPlayer);
             // if (FindDotaHudElement("emotion_button")) {
             //     FindDotaHudElement("emotion_button").visible = true;
             // }
@@ -128,7 +125,6 @@ export class ChessControlComponent extends ET.Component {
                 let allplayer = EntityRootManage.getAllPlayer();
                 for (let player of allplayer) {
                     if (portrait_unit == Players.GetPlayerHeroEntityIndex(player.Playerid)) {
-                        CombinationBottomPanel.GetInstance()!.showCombination(player.Playerid);
                         return
                     }
                 }
@@ -140,7 +136,6 @@ export class ChessControlComponent extends ET.Component {
             let allfakerhero = EntityRootManage.getAllFakerHero();
             for (let fakerhero of allfakerhero) {
                 if (portrait_unit == fakerhero.EntityId) {
-                    CombinationBottomPanel.GetInstance()!.showCombination(fakerhero.Playerid, false);
                     return
                 }
             }
@@ -157,14 +152,14 @@ export class ChessControlComponent extends ET.Component {
         if (this.IS_CURSOR_HERO_ICON_SHOWING) {
             // 显示英雄小图标
             const cursorPosition = GameUI.GetCursorPosition();
-            var w = Game.GetScreenWidth();
-            var h = Game.GetScreenHeight();
-            var maxwidth = (w / h) * 1080;
-            var midwidth = maxwidth / 2;
-            var maxheight = 1080; //1920 * h / w;
-            var midheight = maxheight / 2;
-            var newX = (cursorPosition[0] / w) * maxwidth;
-            var newY = (cursorPosition[1] / h) * maxheight;
+            let w = Game.GetScreenWidth();
+            let h = Game.GetScreenHeight();
+            let maxwidth = (w / h) * 1080;
+            let midwidth = maxwidth / 2;
+            let maxheight = 1080; //1920 * h / w;
+            let midheight = maxheight / 2;
+            let newX = (cursorPosition[0] / w) * maxwidth;
+            let newY = (cursorPosition[1] / h) * maxheight;
             // if (newX > midwidth) {
             //     newX += ((newX - midwidth) / midwidth) * 125;
             // }
@@ -173,7 +168,7 @@ export class ChessControlComponent extends ET.Component {
             // }
             newX -= 30;
             newY -= 30;
-            CardSamllIconItem.GetInstance()!.changePos(newX, newY);
+            CCUnitChessMoveIcon.GetInstance()!.changePos(newX, newY);
             const gamePosition = Game.ScreenXYToWorld(cursorPosition[0], cursorPosition[1]);
             const origin = Entities.GetAbsOrigin(this.PORTRAIT_UNIT);
             Particles.SetParticleControl(this.MOVING_PCF, 5, [gamePosition[0], gamePosition[1], gamePosition[2]]);
@@ -204,11 +199,11 @@ export class ChessControlComponent extends ET.Component {
     }
     async show_cursor_hero(unit_name: string) {
         unit_name = unit_name.replace("building_hero_", "");
-        await MainPanel.GetInstance()!.addOnlyDialog(CardSamllIconItem, { itemname: unit_name });
+        await CCMainPanel.GetInstance()!.addOnlyPanel(CCUnitChessMoveIcon, { itemname: unit_name });
         this.IS_CURSOR_HERO_ICON_SHOWING = true;
     }
     hide_cursor_hero() {
-        CardSamllIconItem.GetInstance()?.close(false);
+        CCUnitChessMoveIcon.GetInstance()?.close(false);
         this.IS_CURSOR_HERO_ICON_SHOWING = false;
         Particles.DestroyParticleEffect(this.MOVING_PCF, true);
         Particles.ReleaseParticleIndex(this.MOVING_PCF);

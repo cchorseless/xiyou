@@ -60,7 +60,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
         return (
             this.__root___isValid &&
             <Panel id="CC_ChallengeShopPanel" ref={this.__root__}      {...this.initRootAttrs()}>
-                <CCPanel id="challenge_imgBg" className="Show" flowChildren="down" >
+                <CCPanel id="challenge_imgBg" flowChildren="down" >
                     <CCLabel type="Title" horizontalAlign="center" text={$.Localize("#lang_LevelChallenge")} />
                     <CCDividerLine />
                     <CCPanel flowChildren="right" horizontalAlign="center" marginTop={"10px"}>

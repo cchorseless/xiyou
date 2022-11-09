@@ -52,11 +52,13 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
                                         lastCount = entityList[index + 1]!.activeNeedCount;
                                     }
                                     const divCount = entity.activeNeedCount - lastCount;
-                                    const onCount = entity.uniqueConfigList.length - lastCount;
+                                    const activeCount = entity.uniqueConfigList.length - lastCount;
                                     return (
-                                        <CCPanel flowChildren="right">
+                                        <CCPanel flowChildren="right" width="60px">
                                             {[...Array(divCount)].map((a, b) => {
-                                                <CCPanel width={100 / divCount + "%"} />
+                                                <CCPanel width={100 / divCount + "%"} className={CSSHelper.ClassMaker("ImgTag", {
+                                                    IsActive: b + 1 <= activeCount
+                                                })} />
                                             })}
                                         </CCPanel>
                                     )

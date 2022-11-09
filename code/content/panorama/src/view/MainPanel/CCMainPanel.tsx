@@ -11,6 +11,7 @@ import { CCMiniMap } from "../allCustomUIElement/CCMiniMap/CCMiniMap";
 import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCChallengeShopPanel } from "../Challenge/CCChallengeShopPanel";
+import { CCCombinationBottomPanel } from "../Combination/CCCombinationBottomPanel";
 import { CCDacBoardPanel } from "../DacBoard/CCDacBoardPanel";
 import { CCDacBoardPanelV1 } from "../DacBoard/CCDacBoardPanelV1";
 import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
@@ -58,6 +59,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCTopBarGameCoin />
                         <CCPlayerListPanel />
                         <CCMiniMap />
+                        <CCCombinationBottomPanel />
                         <CCChallengeShopPanel />
                         {this.panel_base_childs}
                     </Panel>
@@ -279,19 +281,23 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     //#endregion
 
 
-    private allPanelInMain: { [k: string]: BaseEasyPureComponent } = {};
-    async addOnlyPanel<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeType: T, zorder: number, nodeData: M | any = {}) {
-        for (let k of Object.keys(this.allPanelInMain)) {
-            let _zorder = parseInt(k);
-            if (_zorder >= zorder) {
-                this.allPanelInMain[k].close(true);
-                delete this.allPanelInMain[k];
+    private allPanelInMain: { [k: string]: BaseEasyPureComponent[] } = {};
+    async addOnlyPanel<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeType: T, nodeData: M | any = {}, zorder: number = -1) {
+        if (zorder > -1) {
+            for (let k of Object.keys(this.allPanelInMain)) {
+                let _zorder = parseInt(k);
+                if (_zorder > zorder) {
+                    this.allPanelInMain[k].forEach(c => c.close(true));
+                    delete this.allPanelInMain[k];
+                }
             }
         }
         let panel = await this.addOrShowOnlyNodeChild(this.NODENAME.panel_allpanel, nodeType, nodeData);
-        this.allPanelInMain[zorder] = panel;
+        this.allPanelInMain[zorder] = this.allPanelInMain[zorder] || [];
+        this.allPanelInMain[zorder].push(panel);
         return panel;
     }
+
 
 
 }
