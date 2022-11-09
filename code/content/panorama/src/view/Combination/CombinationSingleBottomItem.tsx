@@ -22,39 +22,6 @@ interface IProps extends NodePropsData {
 }
 
 export class CombinationSingleBottomItem extends CombinationSingleBottomItem_UI<IProps> {
-	// public infodialog: CombinationInfoDialog | null;
-	// public isInRangle: boolean = true;
-	// constructor(prop: any) {
-	// 	super(prop);
-	// 	this.img_icon_attrs.onmouseover = async (e) => {
-	// 		if (this.infodialog) {
-	// 			this.infodialog.close();
-	// 			this.infodialog = null;
-	// 		}
-	// 		if (!this.combinationName) {
-	// 			return
-	// 		}
-	// 		let pos = MainPanel.GetInstance()!.stagePos(this.__root__.current!);
-	// 		this.isInRangle = true;
-	// 		let islongover = await DotaUIHelper.isLongTimeMouseOver();
-	// 		if (!this.isInRangle || !islongover) {
-	// 			return;
-	// 		}
-	// 		this.infodialog = await MainPanel.GetInstance()!.addOnlyDialog(CombinationInfoDialog, {
-	// 			itemname: this.combinationName,
-	// 			x: pos.x + "px",
-	// 			y: pos.y - 500 + "px",
-	// 		});
-	// 	};
-	// 	this.img_icon_attrs.onmouseout = (e) => {
-	// 		this.isInRangle = false;
-	// 		if (this.infodialog) {
-	// 			this.infodialog.close();
-	// 			this.infodialog = null;
-	// 		}
-	// 	};
-	// }
-
 	// 初始化数据
 	componentDidMount() {
 		super.componentDidMount();

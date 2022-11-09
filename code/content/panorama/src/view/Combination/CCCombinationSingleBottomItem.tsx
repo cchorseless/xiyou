@@ -1,0 +1,54 @@
+import React, { } from "react";
+import { ECombination } from "../../game/components/Combination/ECombination";
+import { CSSHelper } from "../../helper/CSSHelper";
+import { KVHelper } from "../../helper/KVHelper";
+import { ET } from "../../libs/Entity";
+import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import "./CCCombinationSingleBottomItem.less";
+export interface ICCCombinationSingleBottomItem {
+    combinationName: string;
+    InstanceIdList: string[];
+
+}
+
+/** 分割线 */
+export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleBottomItem> {
+
+    onInitUI() {
+        let InstanceIdList: string[] = this.props.InstanceIdList;
+        InstanceIdList.forEach(entityid => {
+            let entity = ET.EntityEventSystem.GetEntity(entityid) as ECombination;
+            entity?.RegRef(this);
+        })
+    }
+
+    getIcon() {
+        const combinationName = this.props.combinationName;
+        if (combinationName == null) { return; };
+        let KV_DATA = KVHelper.KVData();
+        let data = KV_DATA.building_combination_ability
+        for (let k in data) {
+            if (data[k].relation == combinationName) {
+                return data[k].relationicon;
+            }
+        }
+        return ""
+    }
+
+    render() {
+
+        return (
+            this.__root___isValid &&
+            <Panel ref={this.__root__} id="CC_CombinationSingleBottomItem"    {...this.initRootAttrs()}>
+                <CCPanel flowChildren="right">
+                    <CCPanel id="CombinationIcon" backgroundImage={`url('file://{images}/combination/icon/${this.getIcon()}.png')`} />
+                    <CCPanel >
+
+                    </CCPanel>
+                </CCPanel>
+                {this.__root___childs}
+                {this.props.children}
+            </Panel>
+        );
+    }
+}

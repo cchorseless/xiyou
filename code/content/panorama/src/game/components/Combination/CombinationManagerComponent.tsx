@@ -33,6 +33,9 @@ export class CombinationManagerComponent extends ET.Component {
                 r[entity.combinationName].push(entity);
             }
         })
+        for (let k in r) {
+            r[k].sort((a, b) => { return a.activeNeedCount - b.activeNeedCount })
+        }
         return r;
     }
 

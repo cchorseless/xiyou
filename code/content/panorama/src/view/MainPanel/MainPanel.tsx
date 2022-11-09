@@ -32,13 +32,13 @@ export class MainPanel extends MainPanel_UI<NodePropsData> {
             // backgroundColor: "#FFFFFFFF",
         } as any);
 
-        this.addOnlyOneNodeChild(this.NODENAME.panel_base, ChallengeShopItem, {
-            uiScale: "70% 70% 100%",
-            marginRight: "0px",
-            marginBottom: "0px",
-            horizontalAlign: "right",
-            verticalAlign: "bottom",
-        } as any);
+        // this.addOnlyOneNodeChild(this.NODENAME.panel_base, ChallengeShopItem, {
+        //     uiScale: "70% 70% 100%",
+        //     marginRight: "0px",
+        //     marginBottom: "0px",
+        //     horizontalAlign: "right",
+        //     verticalAlign: "bottom",
+        // } as any);
 
 
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, DacBoardPanelV0, {
