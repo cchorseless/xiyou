@@ -21,8 +21,6 @@ export interface ICCButton {
 	/** 设置按钮颜色 */
 	// color?: "Green" | "Blue" | "Red" | "Purple" | "Gold" | "DarkGreen" | "Bronze" | "Plus" | string;
 	color?: "Green" | "Blue" | "Red" | "Purple" | "Gold" | "Gray";
-	/** 点击按钮时的回调 */
-	onClick?: (event: string) => void;
 }
 
 export class CCButton extends CCPanel<TextButtonAttributes & ICCButton, TextButton> {

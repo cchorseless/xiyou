@@ -2,8 +2,7 @@ import React from "react";
 import { KVHelper } from "../../helper/KVHelper";
 import { CCAbilityIcon } from "../allCustomUIElement/CCAbility/CCAbilityIcon";
 import { CCIconButton } from "../allCustomUIElement/CCButton/CCIconButton";
-import { CCIcon_Gold } from "../allCustomUIElement/CCIcons/CCIcon_Gold";
-import { CCIcon_Population } from "../allCustomUIElement/CCIcons/CCIcon_Population";
+import { CCIcon_CoinType } from "../allCustomUIElement/CCIcons/CCIcon_CoinType";
 import { CCIcon_Share } from "../allCustomUIElement/CCIcons/CCIcon_Share";
 import { CCIcon_Wanted } from "../allCustomUIElement/CCIcons/CCIcon_Wanted";
 import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
@@ -46,11 +45,11 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
                 </CCPanel>
                 <CCPanel horizontalAlign="center" flowChildren="right">
                     <CCPanel flowChildren="right">
-                        <CCIcon_Gold />
+                        <CCIcon_CoinType cointype="Gold" />
                         <CCLabel type="Gold" text={"x" + iteminfo?.ItemCost} />
                     </CCPanel>
                     <CCPanel flowChildren="right" marginLeft={"10px"}>
-                        <CCIcon_Population />
+                        <CCIcon_CoinType cointype="Population" />
                         <CCLabel type="Gold" text={"x" + cardinfo?.Population} />
                     </CCPanel>
                 </CCPanel>

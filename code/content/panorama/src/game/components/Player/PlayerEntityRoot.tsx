@@ -39,6 +39,9 @@ export class PlayerEntityRoot extends ET.Entity {
         return false;
     };
 
+    GetHeroEntityIndex() {
+        return Players.GetPlayerHeroEntityIndex(this.Playerid);
+    }
 
     SelectHero(isCameraCenter: boolean = false) {
         let iEntIndex = Players.GetPlayerHeroEntityIndex(this.Playerid);

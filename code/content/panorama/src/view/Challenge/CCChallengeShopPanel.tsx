@@ -1,0 +1,103 @@
+import React, { } from "react";
+import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { PlayerConfig } from "../../game/system/Player/PlayerConfig";
+import { NetHelper } from "../../helper/NetHelper";
+import { TipsHelper } from "../../helper/TipsHelper";
+import { GameEnum } from "../../libs/GameEnum";
+import { CCButton } from "../allCustomUIElement/CCButton/CCButton";
+import { CCIcon_CoinType } from "../allCustomUIElement/CCIcons/CCIcon_CoinType";
+import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
+import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCChallengeAbilityIcon } from "./CCChallengeAbilityIcon";
+
+import "./CCChallengeShopPanel.less";
+
+export interface ICCChallengeShopPanel {
+
+}
+
+export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
+
+    onInitUI() {
+        PlayerScene.Local.PlayerDataComp.RegRef(this);
+    }
+    onbtnpop_click = () => {
+        let playerdata = PlayerScene.Local.PlayerDataComp;
+        if (playerdata.popuLevel >= playerdata.popuLevelMax) {
+            TipsHelper.showErrorMessage("max level");
+            return;
+        }
+        if (playerdata.gold < playerdata.popuLevelUpCostGold) {
+            TipsHelper.showErrorMessage("gold is not enough");
+            return;
+        }
+        if (playerdata.wood < playerdata.popuLevelUpCostWood) {
+            TipsHelper.showErrorMessage("wood is not enough");
+            return;
+        }
+        NetHelper.SendToLua(PlayerConfig.EProtocol.reqApplyPopuLevelUp);
+    };
+    onbtntec_click = () => {
+        let playerdata = PlayerScene.Local.PlayerDataComp;
+        if (playerdata.techLevel >= playerdata.techLevelMax) {
+            TipsHelper.showErrorMessage("max level");
+            return;
+        }
+        if (playerdata.gold < playerdata.techLevelUpCostGold) {
+            TipsHelper.showErrorMessage("gold is not enough");
+            return;
+        }
+
+        NetHelper.SendToLua(PlayerConfig.EProtocol.reqApplyTechLevelUp);
+    };
+
+
+    onbtnshop_click = () => { }
+
+    render() {
+        const playerdata = this.GetStateEntity(PlayerScene.Local.PlayerDataComp)
+        return (
+            this.__root___isValid &&
+            <Panel id="CC_ChallengeShopPanel" ref={this.__root__}      {...this.initRootAttrs()}>
+                <CCPanel id="challenge_imgBg" flowChildren="down" >
+                    <CCLabel type="Title" horizontalAlign="center" text={$.Localize("#lang_challenge")} />
+                    <CCPanel flowChildren="right" horizontalAlign="center">
+                        {["gold", "wood", "equip", "artifact"].map((ability, index) => {
+                            let abilityname = "courier_challenge_" + ability;
+                            return <CCChallengeAbilityIcon abilityname={abilityname} />;
+                        })}
+                    </CCPanel>
+                    <CCPanel flowChildren="right" horizontalAlign="center">
+                        <CCPanel id="challenge_popuUp" flowChildren="down">
+                            <CCButton color="Green" type="Tui3" tooltip={"#todo"} onactivated={() => { this.onbtnpop_click() }}>
+                                <CCLabel type="UnitName" align="center center" text={$.Localize("#lang_population") + ' Lv.' + `${playerdata?.popuLevel}/${playerdata?.popuLevelMax}`} />
+                            </CCButton>
+                            <CCPanel flowChildren="right" horizontalAlign="center">
+                                <CCIcon_CoinType cointype={"Gold"} />
+                                <CCLabel type="Gold" text={playerdata?.popuLevelUpCostGold} />
+                            </CCPanel>
+                            <CCPanel flowChildren="right" horizontalAlign="center">
+                                <CCIcon_CoinType cointype={"Wood"} />
+                                <CCLabel type="Gold" text={playerdata?.popuLevelUpCostWood} />
+                            </CCPanel>
+                        </CCPanel>
+                        <CCPanel id="challenge_tectUp" flowChildren="down">
+                            <CCButton color="Green" type="Tui3" tooltip={"#todo"} onactivated={() => { this.onbtntec_click() }}>
+                                <CCLabel type="UnitName" align="center center" text={$.Localize("#lang_tech") + ' Lv.' + `${playerdata?.techLevel}/${playerdata?.techLevelMax}`} />
+                            </CCButton>
+                            <CCPanel flowChildren="right" horizontalAlign="center">
+                                <CCIcon_CoinType cointype={"Gold"} />
+                                <CCLabel type="Gold" text={playerdata?.techLevelUpCostGold} />
+                            </CCPanel>
+                        </CCPanel>
+                        <CCButton id="challenge_shop" color="Green" type="Tui3" tooltip={"#todo"} onactivated={() => { this.onbtnshop_click() }}>
+                            <CCLabel type="UnitName" align="center center" text={$.Localize("#lang_shop")} />
+                        </CCButton>
+                    </CCPanel>
+                </CCPanel>
+                {this.__root___childs}
+                {this.props.children}
+            </Panel>
+        );
+    }
+}
