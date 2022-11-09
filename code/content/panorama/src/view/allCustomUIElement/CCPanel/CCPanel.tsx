@@ -38,8 +38,8 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
         this.__root__ = createRef<P>();
         this.onInitUI()
     }
-    defaultClass = () => { return ""; };
-    defaultStyle = (): Partial<ICCPanelProps & VCSSStyleDeclaration & T & Omit<PanelAttributes, "ref">> | any => { return {}; };
+    defaultClass() { return ""; };
+    defaultStyle(): Partial<ICCPanelProps & VCSSStyleDeclaration & T & Omit<PanelAttributes, "ref">> | any { return {}; };
     __root___isValid: boolean = true;
     __root___childs: Array<JSX.Element> = [];
 

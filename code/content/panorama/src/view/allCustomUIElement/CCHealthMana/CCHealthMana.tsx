@@ -8,7 +8,7 @@ interface IHealthMana extends NodePropsData {
 
 export class CCHealthMana extends CCPanel<IHealthMana> {
 
-    defaultStyle = () => {
+    defaultStyle() {
         return { flowChildren: "right-wrap", width: "100%" } as any
     }
 

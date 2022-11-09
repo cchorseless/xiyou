@@ -10,6 +10,7 @@ import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../l
 import { CCMiniMap } from "../allCustomUIElement/CCMiniMap/CCMiniMap";
 import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCChallengeShopPanel } from "../Challenge/CCChallengeShopPanel";
 import { CCDacBoardPanel } from "../DacBoard/CCDacBoardPanel";
 import { CCDacBoardPanelV1 } from "../DacBoard/CCDacBoardPanelV1";
 import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
@@ -57,6 +58,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCTopBarGameCoin />
                         <CCPlayerListPanel />
                         <CCMiniMap />
+                        <CCChallengeShopPanel />
                         {this.panel_base_childs}
                     </Panel>
                 }

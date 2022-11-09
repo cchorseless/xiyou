@@ -8,7 +8,7 @@ interface ICCPanelBG {
 }
 
 export class CCPanelBG extends CCPanel<ICCPanelBG> {
-    defaultClass = () => {
+    defaultClass() {
         return CSSHelper.ClassMaker("CC_PanelBG", this.props.type);;
     };
 

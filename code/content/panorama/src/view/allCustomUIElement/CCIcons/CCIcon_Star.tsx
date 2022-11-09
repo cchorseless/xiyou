@@ -1,36 +1,31 @@
 import { CCIcon } from "./CCIcon";
 
 export class CCIcon_Star extends CCIcon<{ type?: "Favorite" | "Selected" | "Lock" | "Filled" | "Eom" | "Tui7Task"; }> {
-	defaultStyle = () => {
+	defaultStyle() {
+		let styles = super.defaultStyle();
 		switch (this.props.type) {
 			case "Favorite":
-				return {
-					src: "s2r://panorama/images/control_icons/star_favorite_psd.vtex"
-				};
+				styles.src = "s2r://panorama/images/control_icons/star_favorite_psd.vtex"
+				break;
 			case "Selected":
-				return {
-					src: "s2r://panorama/images/control_icons/star_favorite_selected_psd.vtex"
-				};
+				styles.src = "s2r://panorama/images/control_icons/star_favorite_selected_psd.vtex"
+				break;
 			case "Lock":
-				return {
-					src: "s2r://panorama/images/control_icons/star_locked_png.vtex"
-				};
+				styles.src = "s2r://panorama/images/control_icons/star_locked_png.vtex"
+				break;
 			case "Filled":
-				return {
-					src: "s2r://panorama/images/control_icons/starfilled_psd.vtex"
-				};
+				styles.src = "s2r://panorama/images/control_icons/starfilled_psd.vtex"
+				break;
 			case "Eom":
-				return {
-					src: "s2r://panorama/images/eom_design/icon/eom/star_png.vtex",
-				};
+				styles.src = "s2r://panorama/images/eom_design/icon/eom/star_png.vtex";
+				break;
 			case "Tui7Task":
-				return {
-					src: "s2r://panorama/images/eom_design/icon/Tui7/task_point_png.vtex",
-				};
+				styles.src = "s2r://panorama/images/eom_design/icon/Tui7/task_point_png.vtex";
+				break;
 			default:
-				return {
-					src: "s2r://panorama/images/eom_design/icon/eom/star_png.vtex",
-				};
+				styles.src = "s2r://panorama/images/eom_design/icon/eom/star_png.vtex";
+				break;
 		}
+		return styles;
 	}
 }

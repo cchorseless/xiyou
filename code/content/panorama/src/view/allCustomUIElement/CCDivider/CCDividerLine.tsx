@@ -15,7 +15,7 @@ export class CCDividerLine extends CCPanel<IDividerLine> {
         type: "Default",
         isHorizontal: true,
     }
-    defaultClass = () => {
+    defaultClass() {
         return CSSHelper.ClassMaker("CC_DividerLine", this.props.type, {
             Horizontal: this.props.isHorizontal,
             Vertical: !this.props.isHorizontal

@@ -240,7 +240,7 @@ interface ICCKeyBinder {
 }
 export class CCKeyBinder extends CCPanel<ICCKeyBinder>{
     static defaultProps = { type: KeyBinderType.Normal, text: "", initKey: "" }
-    defaultClass = () => {
+    defaultClass() {
         return CSSHelper.ClassMaker("SettingsKeyBinder", "BindingRow", {
             HeroAbilityBindAbilityButton: this.props.type == KeyBinderType.Ability,
             ItemBindButton: this.props.type == KeyBinderType.Item,
@@ -307,7 +307,7 @@ export class CCKeyBinder extends CCPanel<ICCKeyBinder>{
         }
     }
 
-    defaultStyle = () => {
+    defaultStyle() {
         return {
             onactivate: (self: Panel) => this.OnActivate(self),
             onfocus: (self: Panel) => this.OnFocus(self),

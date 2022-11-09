@@ -11,7 +11,7 @@ export interface ICCPortraitV1 {
 }
 
 export default class CCPortraitV1 extends CCPanel<ICCPortraitV1> {
-    defaultClass = () => { return CSSHelper.ClassMaker("CC_PortraitV1"); };
+    defaultClass() { return CSSHelper.ClassMaker("CC_PortraitV1"); };
     onInitUI() {
         this.customHeroPortrait = createRef<ScenePanel>();
     }

@@ -26,7 +26,7 @@ interface ICCPortraitGroup {
 
 export class CCPortraitGroup extends CCPanel<ICCPortraitGroup> {
 
-    defaultStyle = () => {
+    defaultStyle() {
         return {
         }
     }

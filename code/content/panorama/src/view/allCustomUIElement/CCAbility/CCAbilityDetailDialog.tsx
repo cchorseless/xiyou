@@ -19,10 +19,10 @@ interface ICCAbilityDetailDialog extends NodePropsData {
 }
 
 export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
-    defaultStyle = () => {
+    defaultStyle() {
         return { width: "600px", height: "400px" }
     }
-    defaultClass = () => {
+    defaultClass() {
         return CSSHelper.ClassMaker("AbilityDetails", this.toggleClass)
     }
 

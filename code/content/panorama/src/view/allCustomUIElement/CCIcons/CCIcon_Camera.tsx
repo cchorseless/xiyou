@@ -1,16 +1,17 @@
 import { CCIcon } from "./CCIcon";
 
 export class CCIcon_Camera extends CCIcon<{ type?: "hollow"; }> {
-	defaultStyle = () => {
+	defaultStyle() {
+		let styles = super.defaultStyle();
 		switch (this.props.type) {
 			case "hollow":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/camera_hollow_png.vtex",
-				};
+				});
 			default:
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/camera_png.vtex",
-				};
+				});
 		}
 	}
 }

@@ -8,7 +8,7 @@ interface IBuffList extends NodePropsData {
 
 export class CCBuffList extends CCPanel<IBuffList> {
 
-    defaultStyle = () => {
+    defaultStyle() {
         return {
             width: "100%",
             height: "50px",

@@ -5,7 +5,7 @@ interface ICCIcon_CoinType {
 }
 
 export class CCIcon_CoinType extends CCIcon<ICCIcon_CoinType> {
-    defaultStyle = () => {
+    defaultStyle() {
         let superStyle = super.defaultStyle();
         let src = "";
         switch (this.props.cointype) {

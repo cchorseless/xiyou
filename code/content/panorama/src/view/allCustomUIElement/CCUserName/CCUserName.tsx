@@ -11,7 +11,7 @@ interface ICCUserName {
 }
 
 export class CCUserName extends CCPanel<ICCUserName> {
-    defaultClass = () => { return ("CC_UserName"); };
+    defaultClass() { return ("CC_UserName"); };
     static defaultProps = {
         showgGild: false
     };

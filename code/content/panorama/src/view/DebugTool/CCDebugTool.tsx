@@ -29,7 +29,7 @@ export class CCDebugTool extends CCPanel<ICCDebugTool> {
 		direction: this.props.direction,
 		config: {}
 	};
-	defaultClass = () => { return "CC_DebugTool"; };
+	defaultClass() { return "CC_DebugTool"; };
 
 	static defaultProps = {
 		direction: "top",
@@ -95,7 +95,7 @@ interface IDebugTool_Category {
 }
 // 分类
 export class CCDebugTool_Category extends CCPanel<IDebugTool_Category> {
-	defaultClass = () => { return CSSHelper.ClassMaker("Category", { SingleCol: this.props.col! <= 1 }); };
+	defaultClass() { return CSSHelper.ClassMaker("Category", { SingleCol: this.props.col! <= 1 }); };
 	state = { col: this.props.col };
 	static defaultProps = {
 		col: 2,
@@ -159,10 +159,10 @@ export class CCDebugTool_DemoButton extends CCPanel<ICCDebugTool_DemoButton, Tex
 	static defaultProps = {
 		str: "",
 	};
-	defaultClass = () => {
+	defaultClass() {
 		return CSSHelper.ClassMaker("DemoButton", "HotKeyValid", "FireEvent", this.props.btncolor)
 	}
-	defaultStyle = () => {
+	defaultStyle() {
 		return {
 			id: this.props.eventName,
 			localizedText: this.props.localtext,
@@ -189,10 +189,10 @@ export class CCDebugTool_DemoToggle extends CCPanel<ICCDebugTool_DemoToggle, Tog
 		str: "",
 		selected: false,
 	};
-	defaultClass = () => {
+	defaultClass() {
 		return "HotKeyValid FireEvent"
 	}
-	defaultStyle = () => {
+	defaultStyle() {
 		return { id: this.props.eventName, localizedText: this.props.localtext, selected: this.props.selected, }
 	}
 	render() {
@@ -218,10 +218,10 @@ export class CCDebugTool_DemoSwitch extends CCPanel<ICCDebugTool_DemoSwitch>{
 		selected: false,
 		onChange: (b: boolean) => { }
 	};
-	defaultClass = () => {
+	defaultClass() {
 		return "CC_DebugTool_DemoSwitch"
 	}
-	defaultStyle = () => {
+	defaultStyle() {
 		return { id: this.props.eventName, selected: this.props.selected, onChange: this.props.onChange }
 	}
 	render() {
@@ -324,7 +324,7 @@ interface ICCDebugTool_DemoSelectionButton {
 	eventName: string, localtext: string;
 }
 export class CCDebugTool_DemoSelectionButton extends CCPanel<ICCDebugTool_DemoSelectionButton, TextButton> {
-	defaultClass = () => {
+	defaultClass() {
 		return "DemoButton HotKeyValid ToggleSelection"
 	}
 	render() {

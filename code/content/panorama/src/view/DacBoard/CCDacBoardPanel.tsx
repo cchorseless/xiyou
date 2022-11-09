@@ -15,7 +15,7 @@ interface ICCDacBoardPanel {
 export class CCDacBoardPanel extends CCPanel<ICCDacBoardPanel> {
     onInitUI() {
     }
-    defaultStyle = () => {
+    defaultStyle() {
         return {
             horizontalAlign: "center"
         };

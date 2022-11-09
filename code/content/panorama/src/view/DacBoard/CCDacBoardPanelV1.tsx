@@ -11,7 +11,7 @@ export class CCDacBoardPanelV1 extends CCPanel<ICCDacBoardPanel> {
         this.__root__.current!.style.height = "500px"
     }
 
-    defaultStyle = () => {
+    defaultStyle() {
         return { disallowedstyleflags: "hover,descendantfocus" }
     }
 

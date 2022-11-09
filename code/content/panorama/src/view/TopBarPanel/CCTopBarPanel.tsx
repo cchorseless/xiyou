@@ -15,7 +15,7 @@ import { CSSHelper } from "../../helper/CSSHelper";
 
 export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
 
-    defaultStyle = () => {
+    defaultStyle() {
         return {
             horizontalAlign: "center"
         }

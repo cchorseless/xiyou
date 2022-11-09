@@ -17,3 +17,6 @@
 "lang_MenuButton_handbook"       "图鉴"
 "lang_TopBarRound"       "第{s:round}回合"
 "lang_TopBarDifficulty"       "游戏难度:{s:difficulty}"
+"lang_LevelChallenge"       "关卡挑战"
+"lang_tech"       "科技"
+"lang_bagshop"       "背包商店"

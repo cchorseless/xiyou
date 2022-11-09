@@ -15,7 +15,7 @@ interface ICCDOTAScenePanel extends NodePropsData {
     light?: "global_light" | string,
 }
 export class CCDOTAScenePanel extends CCPanel<ICCDOTAScenePanel, ScenePanel>{
-    defaultClass = () => { return "CC_DOTAScenePanel"; };
+    defaultClass() { return "CC_DOTAScenePanel"; };
     static defaultProps = {
         camera: "default_camera",
         drawbackground: false,

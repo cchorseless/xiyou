@@ -14,7 +14,7 @@ interface ICCProgressBar {
 }
 
 export class CCProgressBar extends CCPanel<ICCProgressBar> {
-	defaultClass = () => { return "CC_ProgressBar"; };
+	defaultClass() { return "CC_ProgressBar"; };
 	static defaultProps = {
 		value: 0,
 		min: 0,

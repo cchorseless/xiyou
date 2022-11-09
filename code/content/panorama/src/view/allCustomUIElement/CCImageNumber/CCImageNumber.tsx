@@ -4,7 +4,7 @@ import { CCPanel } from '../CCPanel/CCPanel';
 import "./CCImageNumber.less";
 
 export class CCImageNumber extends CCPanel<{ value: number, type: "1" | "2" | "3" | "4" | "5"; }> {
-    defaultClass = () => { return "CC_ImageNumber" + this.props.type; };
+    defaultClass() { return "CC_ImageNumber" + this.props.type; };
     render() {
         let numberArr = String(this.props.value).replace("-", "").split("");
         return (this.__root___isValid &&

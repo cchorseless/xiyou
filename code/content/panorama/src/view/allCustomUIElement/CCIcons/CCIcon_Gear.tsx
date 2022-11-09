@@ -2,32 +2,33 @@ import React from "react";
 import { CCIcon } from "./CCIcon";
 
 export class CCIcon_Gear extends CCIcon<{ type?: "Return" | "Shadow" | "Small" | "Setting" | "Tui7"; }> {
-	defaultStyle = () => {
+	defaultStyle() {
+		let styles = super.defaultStyle();
 		switch (this.props.type) {
 			case "Return":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/gear_return_png.vtex"
-				};
+				});
 			case "Small":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/gear_small_png.vtex"
-				};
+				});
 			case "Shadow":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/gear_shadow_png.vtex"
-				};
+				});
 			case "Setting":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/settings_png.vtex"
-				};
+				});
 			case "Tui7":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/eom_design/icon/Tui7/setting_png.vtex",
-				};
+				});
 			default:
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/gear_png.vtex",
-				};
+				});
 		}
 	}
 }

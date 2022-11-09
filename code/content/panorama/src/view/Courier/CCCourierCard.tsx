@@ -29,7 +29,7 @@ export class CCCourierCard extends CCPanel<ICCCourierCard> {
         allowrotation: true,
     }
 
-    defaultClass = () => {
+    defaultClass() {
         const tCourierData = this.props.tCourierData;
         const sRarity = tCourierData.Rarity || "R";
         return CSSHelper.ClassMaker("CourierCard", sRarity)

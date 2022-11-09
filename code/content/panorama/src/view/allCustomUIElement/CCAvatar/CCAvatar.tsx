@@ -14,7 +14,7 @@ interface ICCAvatarProps extends NodePropsData {
 
 export class CCAvatar extends CCPanel<ICCAvatarProps> {
 
-    defaultClass = () => { return "CC_Avatar"; };
+    defaultClass() { return "CC_Avatar"; };
     render() {
         return (this.__root___isValid &&
             <Panel ref={this.__root__}      {...this.initRootAttrs()}>

@@ -88,15 +88,16 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_AbilityIcon" {...this.initRootAttrs()}  >
-                <DOTAAbilityImage ref={this.abilityImage} abilityname={abilityname} onmouseactivate={this.onbtn_castability}>
-                    {lefttime >= 0 && <CCPanel backgroundColor="#000000DD" clip={"radial(50.0% 50.0%, 0.0deg, " + -(lefttime / remainingtime) * 360 + "deg)"} />}
-                    {lefttime >= 0 && <CCLabel text={"" + (lefttime / 10).toFixed(1)} />}
-                    {this.abilityImage_childs}
-                </DOTAAbilityImage>
-                <Image id="img_AbilityIcon" className={this.props.rarity} />
+                <Image id="img_AbilityIcon" className={this.props.rarity} >
+                    <DOTAAbilityImage ref={this.abilityImage} abilityname={abilityname} onmouseactivate={this.onbtn_castability}>
+                        {lefttime >= 0 && <CCPanel backgroundColor="#000000DD" clip={"radial(50.0% 50.0%, 0.0deg, " + -(lefttime / remainingtime) * 360 + "deg)"} />}
+                        {lefttime >= 0 && <CCLabel text={"" + (lefttime / 10).toFixed(1)} />}
+                        {this.abilityImage_childs}
+                    </DOTAAbilityImage>
+                </Image>
                 {this.props.children}
                 {this.__root___childs}
-            </Panel>
+            </Panel >
         )
     }
 }

@@ -8,32 +8,28 @@ export class CCIcon_XClose extends CCIcon<{ type?: "Default" | "Gradient" | "Qui
 		type: "Tui3"
 	}
 
-	defaultStyle = () => {
+	defaultStyle() {
+		let styles = super.defaultStyle();
 		switch (this.props.type) {
 			case "Default":
-				return {
-					src: "s2r://panorama/images/control_icons/x_close_png.vtex"
-				};
+				styles.src = "s2r://panorama/images/control_icons/x_close_png.vtex"
+				break;
 			case "Gradient":
-				return {
-					src: "s2r://panorama/images/control_icons/x_close_gradient_png.vtex"
-				};
+				styles.src = "s2r://panorama/images/control_icons/x_close_gradient_png.vtex"
+				break;
 			case "Quit":
-				return {
-					src: "s2r://panorama/images/control_icons/quit_png.vtex"
-				};
+				styles.src = "s2r://panorama/images/control_icons/quit_png.vtex"
+				break;
 			case "Tui7":
-				return {
-					src: "file://{images}/custom_game/eom_design/icon/Tui7/btn_close.png"
-				};
+				styles.src = "file://{images}/custom_game/eom_design/icon/Tui7/btn_close.png"
+				break;
 			case "Tui3":
-				return {
-					src: "file://{images}/custom_game/eom_design/icon/Tui3/btn_close.png"
-				};
+				styles.src = "file://{images}/custom_game/eom_design/icon/Tui3/btn_close.png"
+				break;
 			default:
-				return {
-					src: "s2r://panorama/images/control_icons/x_close_png.vtex",
-				};
+				styles.src = "s2r://panorama/images/control_icons/x_close_png.vtex"
+				break;
 		}
+		return styles;
 	};
 }

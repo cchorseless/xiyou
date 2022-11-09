@@ -24,7 +24,7 @@ export interface ICCButton {
 }
 
 export class CCButton extends CCPanel<TextButtonAttributes & ICCButton, TextButton> {
-	defaultClass = () => { return CSSHelper.ClassMaker(this.props.className, "CC_Button", this.props.type, this.props.color, { Loading: this.props.loading }); };
+	defaultClass() { return CSSHelper.ClassMaker(this.props.className, "CC_Button", this.props.type, this.props.color, { Loading: this.props.loading }); };
 	static defaultProps = {
 		/** 设置按钮载入状态 */
 		loading: false,
@@ -46,7 +46,7 @@ export class CCButton extends CCPanel<TextButtonAttributes & ICCButton, TextButt
 	}
 }
 export class CCBaseButton extends CCPanel<TextButtonAttributes & ICCButton, TextButton> {
-	defaultClass = () => { return CSSHelper.ClassMaker(this.props.className, "CC_Button", this.props.type, this.props.color, { Loading: this.props.loading }); };
+	defaultClass() { return CSSHelper.ClassMaker(this.props.className, "CC_Button", this.props.type, this.props.color, { Loading: this.props.loading }); };
 	static defaultProps = {
 		/** 设置按钮载入状态 */
 		loading: false,

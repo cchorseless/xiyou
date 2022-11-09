@@ -14,15 +14,15 @@ interface ICCLabelProps extends LabelAttributes {
     /** 字体颜色 */
     color?: string,
     /** 预设样式 */
-    type?: "UnitName" | "Gold" | "Menu" | "Title" | "Normal" | "Money" | "Tip";
+    type?: "UnitName" | "Level" | "AbilityName" | "ItemName" | "Gold" | "Menu" | "Title" | "Normal" | "Money" | "Tip";
 }
 
 
 export class CCLabel extends CCPanel<ICCLabelProps, LabelPanel>{
-    defaultClass = () => {
+    defaultClass() {
         return CSSHelper.ClassMaker("CC_Label", this.props.type);
     };
-    defaultStyle = () => {
+    defaultStyle() {
         return {
             fontSize: this.props.fontSize,
             fontFamily: this.props.fontFamily,

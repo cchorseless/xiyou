@@ -10,8 +10,8 @@ interface ICCImageProps extends NodePropsData {
     rotate?: number;
 }
 export class CCImage extends CCPanel<ICCImageProps, ImagePanel>{
-    defaultClass = () => { return "CC_Image"; };
-    defaultStyle = () => {
+    defaultClass() { return "CC_Image"; };
+    defaultStyle() {
         return {
             preTransformRotate2d: (this.props.rotate != undefined) ? this.props.rotate + "deg" : undefined,
         };

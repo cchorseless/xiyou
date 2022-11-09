@@ -23,7 +23,7 @@ export interface ICCIconButton extends ICCButton {
     icon?: React.ReactNode;
 }
 export class CCIconButton extends CCPanel<ICCIconButton, Button> {
-    defaultClass = () => { return CSSHelper.ClassMaker(this.props.className, "CC_IconButton", this.props.type, this.props.color) };
+    defaultClass() { return CSSHelper.ClassMaker(this.props.className, "CC_IconButton", this.props.type, this.props.color) };
     static defaultProps = {
         type: "Tui3"
     }

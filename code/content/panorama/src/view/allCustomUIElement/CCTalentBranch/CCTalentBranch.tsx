@@ -11,7 +11,7 @@ interface ICCTalentBranch {
 
 
 export class CCTalentBranch extends CCPanel<ICCTalentBranch> {
-    defaultStyle = () => {
+    defaultStyle() {
         return {
             width: "400px",
             flowChildren: "down"
@@ -51,10 +51,10 @@ interface ICCTalentRow {
 }
 
 export class CCTalentRow extends CCPanel<ICCTalentRow> {
-    defaultClass = () => {
+    defaultClass() {
         return CSSHelper.ClassMaker(this.props.direction, { Selected: this.props.Selected, active: this.props.active });
     }
-    defaultStyle = () => {
+    defaultStyle() {
         return {
             width: "fill-parent-flow(1)",
             height: "40px"

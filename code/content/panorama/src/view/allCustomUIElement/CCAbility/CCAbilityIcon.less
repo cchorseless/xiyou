@@ -1,16 +1,21 @@
 #CC_AbilityIcon {
 
-    .DOTAAbilityImage,
-    DOTAAbilityImage {
-        width: 64px;
-        height: 64px;
-    }
+
 
     #img_AbilityIcon {
         width: 64px;
-        height: width-percentage(100%);
+        height: 64px;
+        padding: 5px;
         background-repeat: no-repeat;
         background-size: 100%;
+
+        .DOTAAbilityImage,
+        DOTAAbilityImage {
+            border-radius: 5px;
+            width: 100%;
+            height: 100%;
+        }
+
 
         &.A {
             background-image: url("file://{images}/common/rarity/frame_A.png");

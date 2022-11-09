@@ -19,7 +19,7 @@ export class CCPopUpDialog<T = {}> extends CCPanel<ICCPopUpDialog & T> {
         type: CSSHelper.DEFAULT_ADDON_TYPE,
         onClose: () => { }
     };
-    defaultClass = () => { return "CC_PopupMain"; };
+    defaultClass() { return "CC_PopupMain"; };
     render() {
         const { title } = this.props;
         return (
@@ -57,7 +57,7 @@ export class CCPopupBG extends CCPanel<ICCPopupBG> {
         type: CSSHelper.DEFAULT_ADDON_TYPE,
     };
 
-    defaultClass = () => {
+    defaultClass() {
         return CSSHelper.ClassMaker("CC_PopupBG", this.props.type)
     }
 

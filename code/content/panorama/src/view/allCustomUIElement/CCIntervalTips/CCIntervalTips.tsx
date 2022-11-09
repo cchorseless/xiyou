@@ -10,7 +10,7 @@ interface ICCIntervalTips {
 }
 
 export class CCIntervalTips extends CCPanel<ICCIntervalTips> {
-    defaultClass = () => { return ("CC_IntervalTips"); };
+    defaultClass() { return ("CC_IntervalTips"); };
     static defaultProps = { tick: 5 };
     onInitUI(isnext = true) {
         if (this.timeTaskWork) {

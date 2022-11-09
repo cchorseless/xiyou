@@ -8,7 +8,7 @@ import { BuildingTopBarItem } from "../Building/BuildingTopBarItem";
 import { EnemyTopBarItem } from "../Enemy/EnemyTopBarItem";
 
 export class CCOverHeadPanel extends CCPanel<NodePropsData> {
-    defaultClass = () => {
+    defaultClass() {
         return "CC_root";
     }
     onStartUI() {

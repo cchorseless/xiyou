@@ -15,7 +15,7 @@ interface ICCTxtTable {
 
 /** 面包屑组件，不同于前端在dota2中大部分是Tab切换页签的作用 */
 export class CCTxtTable extends CCPanel<ICCTxtTable> {
-	defaultClass = () => {
+	defaultClass() {
 		return "CC_TxtTable";
 	};
 	static defaultProps = {

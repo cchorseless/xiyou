@@ -17,7 +17,7 @@ interface ICCPagination {
 
 /** 分页组件 */
 export class CCPagination extends CCPanel<ICCPagination> {
-	defaultClass = () => { return "CC_Pagination"; };
+	defaultClass() { return "CC_Pagination"; };
 	static defaultProps = {
 		defaultPage: 1,
 		boundaryCount: 1,

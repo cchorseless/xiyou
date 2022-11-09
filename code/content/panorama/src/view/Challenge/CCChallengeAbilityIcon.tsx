@@ -34,13 +34,16 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
         return (
             this.__root___isValid &&
             <Panel id="CC_ChallengeAbilityIcon" ref={this.__root__}      {...this.initRootAttrs()}>
-                <CCAbilityIcon abilityname={abilityname} castEntityIndex={castentity} >
-                    <CCLabel type="Gold" text={`lv.${Abilities.GetLevel(abilityindex)}`} align={"left bottom"} />
+                <CCAbilityIcon abilityname={abilityname} castEntityIndex={castentity} horizontalAlign={"center"}>
+                    <CCLabel type="Level" text={`Lv.${Abilities.GetLevel(abilityindex)}`} align={"left bottom"} />
                 </CCAbilityIcon>
-                <CCPanel flowChildren="right" horizontalAlign="center">
-                    <CCIcon_CoinType cointype={GameEnum.Item.EItemIndex[ability?.costType as any] as any} />
-                    <CCLabel type="Gold" text={`${ability?.costCount}`} />
-                </CCPanel>
+                <CCLabel type="AbilityName" text={$.Localize("#DOTA_Tooltip_ability_" + abilityname)} horizontalAlign={"center"} />
+                {
+                    ability && <CCPanel flowChildren="right" horizontalAlign="center">
+                        <CCIcon_CoinType width="20px" height="20px" cointype={GameEnum.Item.EItemIndex[ability?.costType as any] as any} />
+                        <CCLabel type="Gold" text={`${ability?.costCount}`} fontSize={'18px'} />
+                    </CCPanel>
+                }
                 {this.__root___childs}
                 {this.props.children}
             </Panel>

@@ -17,7 +17,7 @@ interface ICCDropDownButton {
 
 export class CCDropDownButton extends CCPanel<ICCDropDownButton, TextButton> {
     private myMenu?: Panel;
-    defaultClass = () => { return ("CC_DropDown"); };
+    defaultClass() { return ("CC_DropDown"); };
     onStartUI() {
         // const { children, id } = this.props;
         // let pBtn = this.__root__.current!;

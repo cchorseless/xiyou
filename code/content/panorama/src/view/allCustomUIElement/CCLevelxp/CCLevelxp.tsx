@@ -7,7 +7,7 @@ interface ICCLevelxp {
 }
 
 export class CCLevelxp extends CCPanel<ICCLevelxp> {
-    defaultClass = () => { return ("CC_Levelxp"); };
+    defaultClass() { return ("CC_Levelxp"); };
     render() {
         return (
             this.__root___isValid &&

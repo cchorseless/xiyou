@@ -6,129 +6,130 @@ interface IIcon_ArrowType {
 }
 
 export class CCIcon_Arrow extends CCIcon<IIcon_ArrowType> {
-	defaultClass = () => { return CSSHelper.ClassMaker(this.props.className, "CC_Icon", { CC_IconSpin: this.props.spin || this.props.spinDuration, CC_IconShadow: this.props.shadow, Mirror: this.props.type == "DoubleLeft" }); };
-	defaultStyle = () => {
+	defaultClass() { return CSSHelper.ClassMaker(this.props.className, "CC_Icon", { CC_IconSpin: this.props.spin || this.props.spinDuration, CC_IconShadow: this.props.shadow, Mirror: this.props.type == "DoubleLeft" }); };
+	defaultStyle() {
+		let styles = super.defaultStyle();
 		switch (this.props.type) {
 			case "DoubleLeft":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_double_psd.vtex",
-				};
+				});
 			case "DoubleRight":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_double_psd.vtex",
-				};
+				});
 			case "DoubleLeftThin":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/double_arrow_left_png.vtex",
-				};
+				});
 			case "DoubleRightThin":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/double_arrow_right_png.vtex",
-				};
+				});
 			case "DropdownUp":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_dropdown_up_png.vtex",
-				};
+				});
 			case "Dropdown":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_dropdown_png.vtex",
-				};
+				});
 			case "Left":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_min_left_psd.vtex",
 					width: "18px",
 					height: "width-percentage(175%)",
-				};
+				});
 			case "Right":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_min_right_psd.vtex",
 					width: "18px",
 					height: "width-percentage(175%)",
-				};
+				});
 			case "ArrowLeft":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_left_png.vtex",
-				};
+				});
 			case "ArrowRight":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_right_png.vtex",
-				};
+				});
 			case "SolidUp":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_solid_up_png.vtex",
 					height: "width-percentage(60%)",
-				};
+				});
 			case "SolidDown":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_solid_down_png.vtex",
 					height: "width-percentage(60%)",
-				};
+				});
 			case "SolidLeft":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_solid_left_png.vtex",
 					width: "19px",
 					height: "width-percentage(167%)",
-				};
+				});
 			case "SolidRight":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_solid_right_png.vtex",
 					width: "19px",
 					height: "width-percentage(167%)",
-				};
+				});
 			case "TopRight":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_top_right_psd.vtex",
-				};
+				});
 			case "UpDown":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_up_down_psd.vtex",
-				};
+				});
 			case "Popout":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_popout_png.vtex",
-				};
+				});
 			case "RightUp":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_right_up_psd.vtex",
-				};
+				});
 			case "Download":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/download_png.vtex",
-				};
+				});
 			case "ReturnToGame":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/return_to_game_png.vtex",
-				};
+				});
 			case "Shuffle":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/shuffle_psd.vtex",
 					height: "width-percentage(87.5%)",
-				};
+				});
 			case "Swap":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/swap_psd.vtex",
 					height: "width-percentage(84%)",
-				};
+				});
 			case "Expand":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/expand_png.vtex",
-				};
+				});
 			case "Minimize":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/restore_icon_psd.vtex",
-				};
+				});
 			case "Maximize":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/maximize_icon_psd.vtex",
-				};
+				});
 			case "Move":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/move_png.vtex",
-				};
+				});
 			default:
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/arrow_right_up_psd.vtex",
-				};
+				});
 		}
 	}
 }

@@ -28,8 +28,8 @@ export class CCIcon<T = {}> extends CCPanel<ImageAttributes & ICCIcon & T, Image
 	// static defaultProps = {
 	// 	src: "s2r://panorama/images/control_icons/dota_logo_white_png.vtex",
 	// };
-	defaultClass = () => { return CSSHelper.ClassMaker("CC_Icon", this.props.className, { CC_IconSpin: this.props.spin || this.props.spinDuration, CC_IconShadow: this.props.shadow }); };
-	defaultStyle = () => {
+	defaultClass() { return CSSHelper.ClassMaker("CC_Icon", this.props.className, { CC_IconSpin: this.props.spin || this.props.spinDuration, CC_IconShadow: this.props.shadow }); };
+	defaultStyle() {
 		return {
 			preTransformRotate2d: (this.props.rotate != undefined) ? this.props.rotate + "deg" : undefined,
 			washColor: this.props.color,

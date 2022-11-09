@@ -6,41 +6,42 @@ export class CCIcon_Check extends CCIcon<{ type?: "Default" | "64" | "BoxCheck" 
 	static defaultProps = {
 		type: CSSHelper.DEFAULT_ADDON_TYPE,
 	};
-	defaultStyle = () => {
+	defaultStyle() {
+		let styles = super.defaultStyle();
 		switch (this.props.type) {
 			case "Default":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/check_png.vtex"
-				};
+				});
 			case "64":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/check_64_png.vtex"
-				};
+				});
 			case "BoxCheck":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/checkbox_check_psd.vtex"
-				};
+				});
 			case "Gradient":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/check_gradient_png.vtex"
-				};
+				});
 			case "Shadow":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/check_shadow_png.vtex"
-				};
+				});
 			case "Thin":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/check_thin_psd.vtex"
-				};
+				});
 			case "Tui7":
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/eom_design/icon/Tui7/confirm_png.vtex",
 					height: "width-percentage(72.7%)"
-				};
+				});
 			default:
-				return {
+				return Object.assign(styles, {
 					src: "s2r://panorama/images/control_icons/check_png.vtex",
-				};
+				});
 		}
 	}
 }

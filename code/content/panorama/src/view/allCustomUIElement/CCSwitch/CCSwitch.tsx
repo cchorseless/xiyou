@@ -19,7 +19,7 @@ interface ICCSwitch extends NodePropsData {
 }
 
 export class CCSwitch extends CCPanel<ICCSwitch, Button> {
-	defaultClass = () => { return CSSHelper.ClassMaker("CC_Switch", { Checked: this.state.checked }); };
+	defaultClass() { return CSSHelper.ClassMaker("CC_Switch", { Checked: this.state.checked }); };
 	state = { checked: this.props.checked ?? this.props.defaultChecked };
 	static defaultProps = {
 		/** 初始是否选中 */
