@@ -3,6 +3,7 @@ import { ECombination } from "../../game/components/Combination/ECombination";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { ET } from "../../libs/Entity";
+import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import "./CCCombinationSingleBottomItem.less";
 export interface ICCCombinationSingleBottomItem {
@@ -36,13 +37,32 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
     }
 
     render() {
-
+        const entityList = this.props.InstanceIdList.map((entityId, index) => { return this.GetStateEntity(ET.EntityEventSystem.GetEntity(entityId) as ECombination) })
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_CombinationSingleBottomItem"    {...this.initRootAttrs()}>
                 <CCPanel flowChildren="right">
                     <CCPanel id="CombinationIcon" backgroundImage={`url('file://{images}/combination/icon/${this.getIcon()}.png')`} />
                     <CCPanel >
+                        {
+                            entityList.map((entity, index) => {
+                                if (entity) {
+                                    let lastCount = 0
+                                    if (index < entityList.length - 1) {
+                                        lastCount = entityList[index + 1]!.activeNeedCount;
+                                    }
+                                    const divCount = entity.activeNeedCount - lastCount;
+                                    const onCount = entity.uniqueConfigList.length - lastCount;
+                                    return (
+                                        <CCPanel flowChildren="right">
+                                            {[...Array(divCount)].map((a, b) => {
+                                                <CCPanel width={100 / divCount + "%"} />
+                                            })}
+                                        </CCPanel>
+                                    )
+                                }
+                            })
+                        }
 
                     </CCPanel>
                 </CCPanel>

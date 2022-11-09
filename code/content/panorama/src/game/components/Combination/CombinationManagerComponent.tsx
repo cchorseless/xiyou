@@ -34,7 +34,7 @@ export class CombinationManagerComponent extends ET.Component {
             }
         })
         for (let k in r) {
-            r[k].sort((a, b) => { return a.activeNeedCount - b.activeNeedCount })
+            r[k].sort((a, b) => { return b.activeNeedCount - a.activeNeedCount })
         }
         return r;
     }
