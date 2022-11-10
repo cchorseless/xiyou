@@ -2,6 +2,7 @@ import React, { } from "react";
 import { ECombination } from "../../game/components/Combination/ECombination";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
+import { LogHelper } from "../../helper/LogHelper";
 import { ET } from "../../libs/Entity";
 import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
@@ -13,6 +14,18 @@ export interface ICCCombinationSingleBottomItem {
 }
 
 export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleBottomItem> {
+
+    onReady() {
+        const InstanceIdList: string[] = this.props.InstanceIdList;
+        let r = true;
+        InstanceIdList.forEach(entityid => {
+            let entity = ET.EntityEventSystem.GetEntity(entityid) as ECombination;
+            if (entity == null) {
+                r = false;
+            }
+        })
+        return r;
+    }
 
     onInitUI() {
         let InstanceIdList: string[] = this.props.InstanceIdList;
@@ -36,13 +49,14 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
     }
 
     render() {
+        if (!this.__root___isValid) { return <></> }
         const entityList = this.props.InstanceIdList.map((entityId, index) => { return this.GetStateEntity(ET.EntityEventSystem.GetEntity(entityId) as ECombination) })
+        const lastentity = entityList[entityList.length - 1]!
+        if (lastentity.IsEmpty()) { return <></> }
         return (
-            this.__root___isValid &&
-            <Panel ref={this.__root__} id="CC_CombinationSingleBottomItem"    {...this.initRootAttrs()}>
-                <CCPanel flowChildren="right">
-                    <CCPanel id="CombinationIcon" backgroundImage={`url('file://{images}/combination/icon/${this.getIcon()}.png')`} />
-                    <CCPanel >
+            <Panel ref={this.__root__} id="CC_CombinationSingleBottomItem"  {...this.initRootAttrs()}>
+                <CCPanel flowChildren="down" brightness={lastentity.IsActive() ? "1" : "0.1"} >
+                    <CCPanel id="CombinationTagBox" flowChildren="down">
                         {
                             entityList.map((entity, index) => {
                                 if (entity) {
@@ -53,9 +67,9 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
                                     const divCount = entity.activeNeedCount - lastCount;
                                     const activeCount = entity.uniqueConfigList.length - lastCount;
                                     return (
-                                        <CCPanel flowChildren="right" width="60px">
+                                        <CCPanel id="CombinationTag" key={"" + index} >
                                             {[...Array(divCount)].map((a, b) => {
-                                                <CCPanel width={100 / divCount + "%"} className={CSSHelper.ClassMaker("ImgTag", {
+                                                return <CCPanel key={"" + b} height="6px" width={Math.floor(42 / divCount) + "px"} className={CSSHelper.ClassMaker("ImgTag", {
                                                     IsActive: b + 1 <= activeCount
                                                 })} />
                                             })}
@@ -66,6 +80,7 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
                         }
 
                     </CCPanel>
+                    <CCPanel id="CombinationIcon" backgroundImage={`url('file://{images}/combination/icon/${this.getIcon()}.png')`} />
                 </CCPanel>
                 {this.__root___childs}
                 {this.props.children}

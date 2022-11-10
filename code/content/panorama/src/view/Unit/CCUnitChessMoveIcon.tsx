@@ -3,7 +3,6 @@ import React, { createRef, useState } from "react";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCUnitSmallIcon } from "../allCustomUIElement/CCUnit/CCUnitSmallIcon";
-import "./CCUnitSmallIcon.less";
 
 interface ICCUnitChessMoveIcon extends NodePropsData {
     itemname: string;

@@ -1,7 +1,9 @@
+import { EventHelper } from "../../../helper/EventHelper";
+import { FuncHelper } from "../../../helper/FuncHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { registerET, ET } from "../../../libs/Entity";
-import { CombinationBottomPanel } from "../../../view/Combination/CombinationBottomPanel";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ECombination } from "./ECombination";
 
@@ -13,13 +15,15 @@ export class CombinationManagerComponent extends ET.Component {
     }
 
     allCombination: string[] = [];
-    async addOneCombination(_comb: ECombination) {
+    addOneCombination(_comb: ECombination) {
         if (!this.allCombination.includes(_comb.Id)) {
             this.AddOneChild(_comb);
             this.allCombination.push(_comb.Id);
         }
         if (!_comb.IsEmpty()) {
-            await CombinationBottomPanel.GetInstance()!.addOneCombination(_comb.FixBelongPlayerid as PlayerID, _comb);
+            TimerHelper.AddTimer(0.1, FuncHelper.Handler.create(this, () => {
+                EventHelper.FireClientEvent(this.updateEventName, null, this)
+            }))
         }
 
     }

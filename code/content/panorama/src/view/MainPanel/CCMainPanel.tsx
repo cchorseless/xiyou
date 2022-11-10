@@ -29,13 +29,8 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         this.panel_base = createRef<Panel>();
         this.panel_allpanel = createRef<Panel>();
         this.panel_alldialog = createRef<Panel>();
-        let IsDataReady = PlayerScene.GameStateSystem && PlayerScene.GameStateSystem.IsAllPlayerBindHero;
-        this.UpdateState({ IsDataReady: IsDataReady })
     };
 
-    StartRenderUI() {
-        this.UpdateState({ IsDataReady: true })
-    }
 
     panel_base_isValid: boolean = true;
     panel_base_childs: Array<JSX.Element> = [];
@@ -45,12 +40,10 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     panel_alldialog_childs: Array<JSX.Element> = [];
 
     render() {
-        const IsDataReady = this.GetState<Boolean>("IsDataReady");
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} className="CC_root" hittest={false} {...this.initRootAttrs()}>
                 {this.panel_base_isValid &&
-                    IsDataReady &&
                     <Panel ref={this.panel_base} className="CC_root" hittest={false}>
                         <CCMenuNavigation
                             list={["setting", "mail", "store", "battlepass", "draw", "handbook"]}
@@ -294,6 +287,14 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         }
         let panel = await this.addOrShowOnlyNodeChild(this.NODENAME.panel_allpanel, nodeType, nodeData);
         this.allPanelInMain[zorder] = this.allPanelInMain[zorder] || [];
+        for (let i = 0, len = this.allPanelInMain[zorder].length; i < len; i++) {
+            let comp = this.allPanelInMain[zorder][i];
+            if (comp && comp.IsRegister == false) {
+                this.allPanelInMain[zorder].splice(i, 1);
+                i--;
+                len--;
+            }
+        }
         this.allPanelInMain[zorder].push(panel);
         return panel;
     }

@@ -3,6 +3,9 @@ export module CSSHelper {
     export const DEFAULT_ADDON_TYPE = "Tui3";
     export const DEFAULT_ICON_SIZE = "32px";
 
+    export function IsReadyUI() {
+        return Game.GetState() === 9;
+    }
 
     export enum VCSSStyle {
         /**

@@ -32,6 +32,12 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
                 Game.EmitSound(config.HeroSelectSoundEffect);
             }
             this.UpdateState({ ["CardGroup" + index]: "0" });
+            for (let i = 0, len = this.props.cards.length; i < len; i++) {
+                if (i != index && this.GetState<string>("CardGroup" + i) == "1") {
+                    return;
+                }
+            }
+            this.hide();
         }
     }
 
@@ -41,7 +47,7 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
             this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_DrawCardPanel" hittest={false} {...this.initRootAttrs()}>
                 <CCPanel id="DrawBgImg" hittest={false} />
-                <CCIconButton marginRight="0px" icon={<CCIcon_XClose />} onactivate={() => { this.close() }} />
+                <CCIconButton marginRight="0px" icon={<CCIcon_XClose />} onactivate={() => { this.hide() }} />
                 <CCPanel id="DrawBgBox" hittest={false}>
                     {
                         this.props.cards.map((card, index) => {

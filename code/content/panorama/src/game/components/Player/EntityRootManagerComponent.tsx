@@ -62,6 +62,7 @@ export class EntityRootManagerComponent extends ET.Component {
     }
 
     isHero(entityid: EntityIndex) {
+        if (!Entities.IsValidEntity(entityid)) { return }
         let allplayer = this.getAllPlayer();
         for (let v of allplayer) {
             if (v.GetHeroEntityIndex() === entityid) {
@@ -71,6 +72,7 @@ export class EntityRootManagerComponent extends ET.Component {
     }
 
     isFakerHero(entityid: EntityIndex) {
+        if (!Entities.IsValidEntity(entityid)) { return }
         let allfakers = this.getAllFakerHero();
         for (let v of allfakers) {
             if (v.EntityId === entityid) {

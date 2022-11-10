@@ -4,6 +4,8 @@ import { BasePureComponent, NodePropsData } from "../../../libs/BasePureComponen
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
+import { TimerHelper } from "../../../helper/TimerHelper";
+import { FuncHelper } from "../../../helper/FuncHelper";
 
 type CC_PanelScroll = "clip" | "noclip" | "none" | "squish" | "scroll";
 
@@ -36,11 +38,22 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
     constructor(props: any) {
         super(props);
         this.__root__ = createRef<P>();
-        this.onInitUI()
+        this.checkDataReady()
     }
+    private checkDataReady() {
+        this.__root___isValid = this.onReady();
+        if (this.__root___isValid) {
+            this.onInitUI();
+            this.updateSelf();
+        }
+        else {
+            TimerHelper.AddFrameTimer(5, FuncHelper.Handler.create(this, () => { this.checkDataReady() }))
+        }
+    }
+
     defaultClass() { return ""; };
     defaultStyle(): Partial<ICCPanelProps & VCSSStyleDeclaration & T & Omit<PanelAttributes, "ref">> | any { return {}; };
-    __root___isValid: boolean = true;
+    __root___isValid: boolean;
     __root___childs: Array<JSX.Element> = [];
 
     initRootAttrs() {
@@ -121,6 +134,7 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
         }
         return r;
     }
+
 
     render() {
         return (this.__root___isValid &&

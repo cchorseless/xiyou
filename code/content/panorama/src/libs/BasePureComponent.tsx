@@ -139,8 +139,12 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     private getNode_isValid_Name(nodeName: string): string {
         return nodeName + "_isValid";
     }
+    /**数据准备检查 */
+    public onReady(): boolean { return true; }
+
     /**创建前，指定属性，添加事件 */
     public onInitUI() { }
+
     /**
      * 渲染后一帧执行
      * @override
@@ -436,6 +440,12 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             this.destroy();
         }
     }
+    public show() {
+        if (this.__root__ && this.__root__.current) {
+            this.__root__.current.style.opacity = 1 + "";
+            this.updateSelf();
+        }
+    }
     public hide() {
         if (this.__root__ && this.__root__.current) {
             this.__root__.current.style.opacity = 0 + "";
@@ -453,7 +463,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     /**刷新自己 */
     public updateSelf = () => {
         this._updateSelf += 1;
-        this.setState({ _updateSelf: this._updateSelf });
+        this.UpdateState({ _updateSelf: this._updateSelf });
     };
 
     public delayUpdateSelf = () => {

@@ -7,14 +7,20 @@ import { ET } from "../../libs/Entity";
 import { GameEnum } from "../../libs/GameEnum";
 import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
-import "./CCCombinationBottomPanel.less";
 import { CCCombinationSingleBottomItem } from "./CCCombinationSingleBottomItem";
+
+import "./CCCombinationBottomPanel.less";
+import { LogHelper } from "../../helper/LogHelper";
+
 export interface ICCCombinationBottomPanel {
 
 }
 
 export class CCCombinationBottomPanel extends CCPanel<ICCCombinationBottomPanel> {
 
+    onReady() {
+        return Boolean(PlayerScene.Local.CombinationManager)
+    }
 
     onInitUI() {
         this.UpdateState({ curunit: Players.GetLocalPlayerPortraitUnit() || -1 });
@@ -25,6 +31,7 @@ export class CCCombinationBottomPanel extends CCPanel<ICCCombinationBottomPanel>
 
 
     render() {
+        if (!this.__root___isValid) { return <></> }
         const curunit = this.GetState<EntityIndex>("curunit");
         const player = PlayerScene.EntityRootManage.isHero(curunit);
         const fakerhero = PlayerScene.EntityRootManage.isFakerHero(curunit);
@@ -35,8 +42,7 @@ export class CCCombinationBottomPanel extends CCPanel<ICCCombinationBottomPanel>
         else if (player) {
             combinations = player.CombinationManager.getAllCombination();
         }
-
-        return (this.__root___isValid &&
+        return (
             <Panel ref={this.__root__} id="CC_CombinationBottomPanel"    {...this.initRootAttrs()}>
                 {
                     Object.keys(combinations).map((v, index) => {

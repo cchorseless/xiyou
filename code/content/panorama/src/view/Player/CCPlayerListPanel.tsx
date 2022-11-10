@@ -16,6 +16,16 @@ interface ICCPlayerListPanel extends NodePropsData {
 }
 
 export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
+
+    onReady() {
+        let r = true;
+        PlayerScene.EntityRootManage.getAllPlayer().forEach(player => {
+            if (player.CourierDataComp == null) { r = false }
+        })
+        return r;
+    }
+
+
     onInitUI() {
         PlayerScene.EntityRootManage.getAllPlayer().forEach(player => {
             player.CourierDataComp?.RegRef(this);
@@ -23,11 +33,11 @@ export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
     }
 
     render() {
+        if (!this.__root___isValid) { return <></> }
         const CourierDataComps = PlayerScene.EntityRootManage.getAllPlayer().map((player) => {
             return this.GetStateEntity(player.CourierDataComp);
         })
         return (
-            this.__root___isValid &&
             <Panel ref={this.__root__} id="PlayerInfoContainer" hittest={false} {...this.initRootAttrs()}>
                 {CourierDataComps.map((CourierData) => {
                     if (!CourierData) { return }

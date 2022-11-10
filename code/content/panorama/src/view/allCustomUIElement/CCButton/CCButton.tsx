@@ -35,7 +35,7 @@ export class CCButton extends CCPanel<TextButtonAttributes & ICCButton, TextButt
 	};
 	render() {
 		return (this.__root___isValid &&
-			<TextButton ref={this.__root__}  {...this.initRootAttrs()} enabled={this.props.enabled == undefined ? !this.props.loading : this.props.enabled}>
+			<TextButton ref={this.__root__}   {...this.initRootAttrs()} enabled={this.props.enabled == undefined ? !this.props.loading : this.props.enabled}>
 				{this.props.loading &&
 					<CCIcon_Spinner spin width="24px" align="center center" />
 				}

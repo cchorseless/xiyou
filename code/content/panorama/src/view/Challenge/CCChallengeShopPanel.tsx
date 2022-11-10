@@ -1,6 +1,8 @@
 import React, { } from "react";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { PlayerConfig } from "../../game/system/Player/PlayerConfig";
+import { CSSHelper } from "../../helper/CSSHelper";
+import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
 import { GameEnum } from "../../libs/GameEnum";
@@ -19,10 +21,14 @@ export interface ICCChallengeShopPanel {
 
 export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
 
+    onReady() {
+        return Boolean(PlayerScene.Local.PlayerDataComp) && CSSHelper.IsReadyUI();
+    }
+
     onInitUI() {
         PlayerScene.Local.PlayerDataComp.RegRef(this);
     }
-    onbtnpop_click = () => {
+    onbtnpop_click() {
         let playerdata = PlayerScene.Local.PlayerDataComp;
         if (playerdata.popuLevel >= playerdata.popuLevelMax) {
             TipsHelper.showErrorMessage("max level");
@@ -36,9 +42,10 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
             TipsHelper.showErrorMessage("wood is not enough");
             return;
         }
+        LogHelper.print("onbtnpop_click")
         NetHelper.SendToLua(PlayerConfig.EProtocol.reqApplyPopuLevelUp);
     };
-    onbtntec_click = () => {
+    onbtntec_click() {
         let playerdata = PlayerScene.Local.PlayerDataComp;
         if (playerdata.techLevel >= playerdata.techLevelMax) {
             TipsHelper.showErrorMessage("max level");
@@ -48,17 +55,16 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
             TipsHelper.showErrorMessage("gold is not enough");
             return;
         }
-
         NetHelper.SendToLua(PlayerConfig.EProtocol.reqApplyTechLevelUp);
     };
 
 
-    onbtnshop_click = () => { }
+    onbtnshop_click() { }
 
     render() {
+        if (!this.__root___isValid) { return <></> }
         const playerdata = this.GetStateEntity(PlayerScene.Local.PlayerDataComp)
         return (
-            this.__root___isValid &&
             <Panel id="CC_ChallengeShopPanel" ref={this.__root__}      {...this.initRootAttrs()}>
                 <CCPanel id="challenge_imgBg" flowChildren="down" >
                     <CCLabel type="Title" horizontalAlign="center" text={$.Localize("#lang_LevelChallenge")} />
@@ -72,7 +78,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
                     <CCDividerLine />
                     <CCPanel flowChildren="right" horizontalAlign="center">
                         <CCPanel id="challenge_popuUp" flowChildren="down">
-                            <CCButton color="Green" type="Tui3" tooltip={"#todo"} onactivated={() => { this.onbtnpop_click() }}>
+                            <CCButton color="Green" type="Tui3" tooltip={"#todo"} onactivate={() => { this.onbtnpop_click() }}>
                                 <CCLabel type="UnitName" align="center center" text={$.Localize("#lang_population") + ' Lv.' + `${playerdata?.popuLevel}/${playerdata?.popuLevelMax}`} />
                             </CCButton>
                             <CCPanel flowChildren="right" horizontalAlign="center">
@@ -84,7 +90,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
 
                         </CCPanel>
                         <CCPanel id="challenge_tectUp" flowChildren="down">
-                            <CCButton color="Green" type="Tui3" tooltip={"#todo"} onactivated={() => { this.onbtntec_click() }}>
+                            <CCButton color="Green" type="Tui3" tooltip={"#todo"} onactivate={() => { this.onbtntec_click() }}>
                                 <CCLabel type="UnitName" align="center center" text={$.Localize("#lang_tech") + ' Lv.' + `${playerdata?.techLevel}/${playerdata?.techLevelMax}`} />
                             </CCButton>
                             <CCPanel flowChildren="right" horizontalAlign="center">
@@ -92,7 +98,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
                                 <CCLabel type="Gold" text={playerdata?.techLevelUpCostGold} />
                             </CCPanel>
                         </CCPanel>
-                        {/* <CCButton id="challenge_shop" color="Green" type="Tui3" tooltip={"#todo"} onactivated={() => { this.onbtnshop_click() }}>
+                        {/* <CCButton id="challenge_shop" color="Green" type="Tui3" tooltip={"#todo"} onactivate={() => { this.onbtnshop_click() }}>
                             <CCLabel type="UnitName" align="center center" text={$.Localize("#lang_bagshop")} />
                         </CCButton> */}
                     </CCPanel>

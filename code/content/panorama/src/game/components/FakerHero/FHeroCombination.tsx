@@ -10,10 +10,10 @@ export class FHeroCombination extends ECombination {
         this.onReload();
     }
 
-    async onReload() {
+    onReload() {
         if (this.IsEmpty()) { return; }
         let player = PlayerScene.EntityRootManage.getFakerHero(this.BelongPlayerid)
-        await player!.FHeroCombinationManager.addOneCombination(this);
+        player!.FHeroCombinationManager.addOneCombination(this);
     }
     isFakerCombination() {
         return true;

@@ -168,7 +168,7 @@ export class ChessControlComponent extends ET.Component {
             // }
             newX -= 30;
             newY -= 30;
-            CCUnitChessMoveIcon.GetInstance()!.changePos(newX, newY);
+            CCUnitChessMoveIcon.GetInstance()?.changePos(newX, newY);
             const gamePosition = Game.ScreenXYToWorld(cursorPosition[0], cursorPosition[1]);
             const origin = Entities.GetAbsOrigin(this.PORTRAIT_UNIT);
             Particles.SetParticleControl(this.MOVING_PCF, 5, [gamePosition[0], gamePosition[1], gamePosition[2]]);
@@ -203,7 +203,7 @@ export class ChessControlComponent extends ET.Component {
         this.IS_CURSOR_HERO_ICON_SHOWING = true;
     }
     hide_cursor_hero() {
-        CCUnitChessMoveIcon.GetInstance()?.close(false);
+        CCUnitChessMoveIcon.GetInstance()?.close();
         this.IS_CURSOR_HERO_ICON_SHOWING = false;
         Particles.DestroyParticleEffect(this.MOVING_PCF, true);
         Particles.ReleaseParticleIndex(this.MOVING_PCF);

@@ -2,6 +2,7 @@ import { GetRegClass, reloadable } from "../../GameCache";
 import { GameFunc } from "../../GameFunc";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
+import { CourierEntityRoot } from "../Components/Courier/CourierEntityRoot";
 import { PlayerEntityRoot } from "../Components/Player/PlayerEntityRoot";
 
 
@@ -720,6 +721,10 @@ export module ET {
 
         public AsPlayer() {
             return this as any as PlayerEntityRoot;
+        }
+
+        public AsHero() {
+            return this as any as CourierEntityRoot;;
         }
 
         public onAwake(...args: any[]) { }

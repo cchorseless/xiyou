@@ -15,7 +15,7 @@ export class courier_challenge_artifact extends ActiveRootAbility {
     CastFilterResult(): UnitFilterResult {
         let caster = this.GetCasterPlus();
         if (IsServer()) {
-            let playerroot = caster.ETRoot.AsPlayer();
+            let playerroot = caster.ETRoot.AsHero().GetPlayer();
             let round = playerroot.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
                 if (playerroot.PlayerDataComp().isEnoughItem(this.costType, this.costCount)) {
@@ -42,7 +42,7 @@ export class courier_challenge_artifact extends ActiveRootAbility {
     OnSpellStart() {
         let caster = this.GetCasterPlus();
         if (IsServer()) {
-            let root = caster.ETRoot.AsPlayer();
+            let root = caster.ETRoot.AsHero().GetPlayer();
             let round = root.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
                 let configid = DifficultyState.DifficultyChapter + "_artifact";

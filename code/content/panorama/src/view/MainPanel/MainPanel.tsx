@@ -8,7 +8,6 @@ import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { ToolTipHelper } from "../../helper/ToolTipHelper";
 import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
-import { CombinationBottomPanel } from "../Combination/CombinationBottomPanel";
 import { DacBoardPanelV0 } from "../Common/DacBoardPanelV0";
 import { MainPanel_UI } from "./MainPanel_UI";
 export class MainPanel extends MainPanel_UI<NodePropsData> {
@@ -24,12 +23,7 @@ export class MainPanel extends MainPanel_UI<NodePropsData> {
     }
 
     onRefreshUI() {
-        this.addOnlyOneNodeChild(this.NODENAME.panel_base, CombinationBottomPanel, {
-            horizontalAlign: "center",
-            verticalAlign: "bottom",
-            marginBottom: "200px",
-            // backgroundColor: "#FFFFFFFF",
-        } as any);
+
 
 
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, DacBoardPanelV0, {

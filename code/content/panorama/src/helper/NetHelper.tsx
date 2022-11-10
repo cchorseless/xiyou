@@ -19,6 +19,7 @@ export module NetHelper {
             data: data,
             hasCB: Boolean(cb),
         });
+        // LogHelper.print("SendToLua:", protocol);
     }
 
     export async function SendToLuaAsync<T>(protocol: string, data: T) {

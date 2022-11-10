@@ -5,7 +5,6 @@ import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { CombinationInfoDialog_UI } from "./CombinationInfoDialog_UI";
 import { CombinationDesItem } from "./CombinationDesItem";
-import { CombinationCardIconItem } from "./CombinationCardIconItem";
 import { KVHelper } from "../../helper/KVHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 
@@ -62,9 +61,7 @@ export class CombinationInfoDialog extends CombinationInfoDialog_UI<IProps> {
             });
         }
         for (let key in heronamemap) {
-            this.addNodeChildAsyncAt(this.NODENAME.panel_heroicon, CombinationCardIconItem, {
-                heroid: heronamemap[key],
-            });
+
         }
         // this.__root__.current!.style.height = 130 + 90 * Number(config.count) + "px";
     }

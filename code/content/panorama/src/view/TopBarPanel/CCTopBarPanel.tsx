@@ -20,13 +20,18 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
             horizontalAlign: "center"
         }
     }
+
+    onReady() {
+        return Boolean(PlayerScene.Local.PlayerDataComp && PlayerScene.Local.RoundManagerComp?.getCurrentBoardRound());
+    }
+
     onInitUI() {
         PlayerScene.Local.PlayerDataComp.RegRef(this);
         this.UpdateState(PlayerScene.Local.RoundManagerComp?.getCurrentBoardRound().Ref());
         this.UpdateState({ gametime: -1 });
         TimerHelper.AddIntervalTimer(1, 1,
             FuncHelper.Handler.create(this, () => {
-                let round = PlayerScene.Local.RoundManagerComp?.getCurrentBoardRound();
+                let round = PlayerScene.Local.RoundManagerComp!.getCurrentBoardRound();
                 let lefttime = -1;
                 if (round) {
                     lefttime = Math.floor(round.roundLeftTime - Game.GetGameTime());
@@ -35,11 +40,11 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
             }), -1, false)
     }
     render() {
+        if (!this.__root___isValid) { return <></> }
         const playerdata = this.GetStateEntity(PlayerScene.Local.PlayerDataComp)!;
         const round = this.GetStateEntity(PlayerScene.Local.RoundManagerComp?.getCurrentBoardRound());
         const gametime = this.GetState<number>("gametime");
         return (
-            this.__root___isValid &&
             <Panel id="CC_TopBarCenter" ref={this.__root__}    {...this.initRootAttrs()} hittest={false}>
                 <Image id="RoundBG" >
                     <CCPanel width="100%" flowChildren="right">
@@ -59,21 +64,24 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
 
 export class CCTopBarGameCoin<T extends NodePropsData> extends CCPanel<T> {
 
+    onReady() {
+        return Boolean(PlayerScene.Local.PlayerDataComp);
+    }
+
     onInitUI() {
         PlayerScene.Local.PlayerDataComp.RegRef(this);
 
     }
     render() {
+        if (!this.__root___isValid) { return <></> }
         const playerdata = this.GetStateEntity<PlayerDataComponent>(PlayerScene.Local.PlayerDataComp)!;
         const coindes = [
             `${playerdata.population}/${playerdata.populationRoof}`,
             `${playerdata.gold}(+${playerdata.perIntervalGold})`,
             `${playerdata.food}(+${playerdata.perIntervalWood})`,
             `${playerdata.wood}(+${playerdata.perIntervalWood})`
-        ]
-
+        ];
         return (
-            this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_TopBarGameCoin"    {...this.initRootAttrs()} hittest={false}>
                 <CCPanel id="TopBarGameCoinBg" flowChildren="right" />
                 <CCPanel id="TopBarGameCoinGroup" flowChildren="right">

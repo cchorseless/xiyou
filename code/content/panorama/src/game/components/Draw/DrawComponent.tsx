@@ -28,6 +28,7 @@ export class DrawComponent extends ET.Component {
             DrawConfig.EProtocol.DrawCardResult,
             (event: CLIENT_DATA<ArrayLikeObject<string>>) => {
                 if (event.state) {
+                    CCDrawCardPanel.GetInstance()?.close();
                     let card = Array<string>().concat(this.tLastCards);
                     CCMainPanel.GetInstance()?.addOnlyPanel(CCDrawCardPanel, { cards: card })
                 }

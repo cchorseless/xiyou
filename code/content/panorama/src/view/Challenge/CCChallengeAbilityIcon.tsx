@@ -15,18 +15,22 @@ export interface ICCChallengeAbilityIcon {
 
 export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
 
-    onInitUI() {
+    onReady() {
         const abilityname = this.props.abilityname;
         const castentity = PlayerScene.Local.GetHeroEntityIndex();
         const abilityindex = Entities.GetAbilityByName(castentity, abilityname);
         let entity = PlayerScene.EntityRootManage.getAbility("" + abilityindex);
         if (entity) {
             this.abilityEntity = entity;
-            entity.RegRef(this);
         }
+        return Boolean(entity);
     }
     abilityEntity: AbilityEntityRoot;
+    onInitUI() {
+        this.abilityEntity.RegRef(this);
+    }
     render() {
+        if (!this.__root___isValid) { return <></> }
         const abilityname = this.props.abilityname;
         const castentity = PlayerScene.Local.GetHeroEntityIndex();
         const abilityindex = Entities.GetAbilityByName(castentity, abilityname);

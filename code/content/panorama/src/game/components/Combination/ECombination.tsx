@@ -15,15 +15,17 @@ export class ECombination extends ET.Entity {
     onSerializeToEntity(): void {
         this.onReload();
     }
-    async onReload() {
+    onReload() {
         if (this.IsEmpty()) { return; }
-        await PlayerScene.GetPlayer(this.BelongPlayerid)?.CombinationManager.addOneCombination(this);
+        PlayerScene.GetPlayer(this.BelongPlayerid)?.CombinationManager.addOneCombination(this);
     }
 
     isFakerCombination() {
         return false;
     }
-
+    IsActive() {
+        return this.uniqueConfigList.length >= this.activeNeedCount;
+    }
     IsEmpty() {
         return this.uniqueConfigList.length == 0;
     }
