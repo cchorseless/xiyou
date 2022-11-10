@@ -12,7 +12,6 @@ export interface ICCCombinationSingleBottomItem {
 
 }
 
-/** 分割线 */
 export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleBottomItem> {
 
     onInitUI() {
