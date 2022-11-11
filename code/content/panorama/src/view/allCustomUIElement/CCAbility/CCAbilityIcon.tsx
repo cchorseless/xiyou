@@ -1,13 +1,12 @@
 import React, { createRef, PureComponent } from "react";
 import { DOTAAbilityImageAttributes, PanelAttributes } from "@demon673/react-panorama";
 import { CCPanel } from "../CCPanel/CCPanel";
-import { LogHelper } from "../../../helper/LogHelper";
-
-import "./CCAbilityIcon.less";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { CCLabel } from "../CCLabel/CCLabel";
 import { CCEffectShine } from "../CCEffect/CCEffectShine";
+
+import "./CCAbilityIcon.less";
 
 interface ICCAbilityIcon extends DOTAAbilityImageAttributes {
     abilityname: string;
@@ -59,24 +58,24 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
         }
         let remainingtime = Math.floor(Abilities.GetCooldownTimeRemaining(this.abilityindex) * 10) - 10;
         if (remainingtime <= 0 || Abilities.IsCooldownReady(this.abilityindex)) {
-            this.UpdateState({ leftime: -1 });
+            this.UpdateState({ lefttime: -1 });
             return;
         }
-        let leftime = remainingtime;
-        this.UpdateState({ leftime: remainingtime, remainingtime: remainingtime });
+        let lefttime = remainingtime;
+        this.UpdateState({ lefttime: remainingtime, remainingtime: remainingtime });
         this.lefttimewprk = TimerHelper.AddIntervalTimer(
             0,
             0.1,
             FuncHelper.Handler.create(this, () => {
-                if (leftime <= 0) {
+                if (lefttime <= 0) {
                     this.lefttimewprk!.Clear();
                     this.lefttimewprk = null;
                     this.addOnlyOneNodeChild(this.NODENAME.abilityImage, CCEffectShine);
                 }
                 else {
-                    leftime--;
+                    lefttime--;
                 }
-                this.UpdateState({ leftime: leftime });
+                this.UpdateState({ lefttime: lefttime });
             }),
             -1
         );

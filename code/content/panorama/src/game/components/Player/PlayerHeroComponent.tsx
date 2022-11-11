@@ -5,7 +5,6 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { GameEnum } from "../../../libs/GameEnum";
-import { MainPanel } from "../../../view/MainPanel/MainPanel";
 import { PlayerConfig } from "../../system/Player/PlayerConfig";
 
 /**玩家 */

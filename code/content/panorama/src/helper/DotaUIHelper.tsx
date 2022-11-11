@@ -1,5 +1,5 @@
 import { useRegisterForUnhandledEvent } from "@demon673/react-panorama";
-import { MainPanel } from "../view/MainPanel/MainPanel";
+import { CCMainPanel } from "../view/MainPanel/CCMainPanel";
 import { FuncHelper } from "./FuncHelper";
 import { LogHelper } from "./LogHelper";
 import { TimerHelper } from "./TimerHelper";
@@ -227,7 +227,7 @@ export module DotaUIHelper {
             // runDragHandler(pDraggedPanel, "DragStart", pPanel)
         });
         $.RegisterForUnhandledEvent("DragEnter", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
-            MainPanel.GetInstance()!.HideToolTip();
+            CCMainPanel.GetInstance()!.HideToolTip();
             if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 let brightness = pPanel.style.brightness || 1;
                 pPanel.style.brightness = Number(brightness) + 0.5 + "";
@@ -312,7 +312,7 @@ export module DotaUIHelper {
     function RegAbilityItemToolTipEvent() {
 
         let WindowRoot = GetWindowRoot()!;
-        let tooltips=WindowRoot.FindChildTraverse("Tooltips")!;
+        let tooltips = WindowRoot.FindChildTraverse("Tooltips")!;
         let AbilityDetail = tooltips.FindChildTraverse("AbilityDetails")!;
         let AbilityCoreDetails = AbilityDetail.FindChildTraverse("AbilityCoreDetails")!;
         let AbilityDescriptionContainer = AbilityCoreDetails.FindChildTraverse("AbilityDescriptionContainer")!;

@@ -715,4 +715,58 @@ export module AbilityHelper {
         }
         return sStr;
     }
+    export function GetLevelCooldown(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
+        GameEvents.SendEventClientSide("custom_get_ability_cooldown", {
+            ability_ent_index: iEntityIndex,
+            level: iLevel,
+        });
+        let iCasterIndex = Abilities.GetCaster(iEntityIndex);
+        let iAbilityEntIndex = Entities.GetAbilityByName(iCasterIndex, "unit_state");
+        if (iAbilityEntIndex != -1) {
+            let sCooldown = Abilities.GetAbilityTextureName(iAbilityEntIndex);
+            if (sCooldown == "") {
+                let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
+                let tAbility = CustomUIConfig.AbilitiesKv[sAbilityName];
+                let tItem = CustomUIConfig.ItemsKv[sAbilityName];
+                let tData = tAbility || tItem;
+                if (tData) {
+                    if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
+                    let aCooldowns = StringToValues(tData.AbilityCooldown || "");
+                    if (iLevel >= 0 && aCooldowns.length > 0) {
+                        return aCooldowns[Math.min(iLevel, aCooldowns.length - 1)];
+                    }
+                }
+                return 0;
+            }
+            return Number(sCooldown);
+        }
+        return 0;
+    };
+    export function GetLevelManaCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
+        GameEvents.SendEventClientSide("custom_get_ability_mana_cost", {
+            ability_ent_index: iEntityIndex,
+            level: iLevel,
+        });
+        let iCasterIndex = Abilities.GetCaster(iEntityIndex);
+        let iAbilityEntIndex = Entities.GetAbilityByName(iCasterIndex, "unit_state");
+        if (iAbilityEntIndex != -1) {
+            let sManaCost = Abilities.GetAbilityTextureName(iAbilityEntIndex);
+            if (sManaCost == "") {
+                let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
+                let tAbility = CustomUIConfig.AbilitiesKv[sAbilityName];
+                let tItem = CustomUIConfig.ItemsKv[sAbilityName];
+                let tData = tAbility || tItem;
+                if (tData) {
+                    if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
+                    let aManaCosts = StringToValues(tData.AbilityManaCost || "");
+                    if (iLevel >= 0 && aManaCosts.length > 0) {
+                        return aManaCosts[Math.min(iLevel, aManaCosts.length - 1)];
+                    }
+                }
+                return 0;
+            }
+            return Number(sManaCost);
+        }
+        return 0;
+    };
 }

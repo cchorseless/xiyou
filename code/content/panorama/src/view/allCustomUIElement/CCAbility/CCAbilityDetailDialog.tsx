@@ -1,10 +1,10 @@
 
 import React, { useState } from "react";
 import { NodePropsData } from "../../../libs/BasePureComponent";
-import { PanelAttributes } from "@demon673/react-panorama";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { AbilityHelper } from "../../../helper/AbilityHelper";
+import { FuncHelper } from "../../../helper/FuncHelper";
 
 interface ICCAbilityDetailDialog extends NodePropsData {
     abilityname: string,
@@ -49,6 +49,8 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
     toggleClass: { [k: string]: boolean } = {}
 
     render() {
+        Entities.GetAbilityByName
+        Abilities.GetAbilityTextureName
         const abilityname = this.props.abilityname;
         const sheetConfig = this.props.sheetConfig;
         const entityindex = this.props.entityindex || -1 as EntityIndex;
@@ -258,23 +260,23 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                 }
             }
         }
-        sAttributes = replaceValues({ sStr: sAttributes, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: bIsItem ? iLevel : (iLevel != -1 ? iLevel : 0), iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+        sAttributes = AbilityHelper.ReplaceAbilityValues({ sStr: sAttributes, sheetConfig: sheetConfig, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: bIsItem ? iLevel : (iLevel != -1 ? iLevel : 0), iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
         dialogVariables['attributes'] = sAttributes;
-        sExtraAttributes = replaceValues({ sStr: sExtraAttributes, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: bIsItem ? iLevel : (iLevel != -1 ? iLevel : 0), iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+        sExtraAttributes = AbilityHelper.ReplaceAbilityValues({ sStr: sExtraAttributes, sheetConfig: sheetConfig, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: bIsItem ? iLevel : (iLevel != -1 ? iLevel : 0), iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
         dialogVariables['extra_attributes'] = sExtraAttributes;
-        let fCurrentCooldown = iAbilityIndex != -1 && (!bIsEnemy || bIsItem) ? Abilities.GetLevelCooldown(iAbilityIndex) : 0;
+        let fCurrentCooldown = iAbilityIndex != -1 && (!bIsEnemy || bIsItem) ? AbilityHelper.GetLevelCooldown(iAbilityIndex) : 0;
         fCurrentCooldown = AbilityHelper.CalcSpecialValueUpgrade(entityindex, abilityname, "cooldown", fCurrentCooldown);
-        let fCurrentManaCost = iAbilityIndex != -1 && (!bIsEnemy || bIsItem) ? Abilities.GetLevelManaCost(iAbilityIndex) : 0;
+        let fCurrentManaCost = iAbilityIndex != -1 && (!bIsEnemy || bIsItem) ? AbilityHelper.GetLevelManaCost(iAbilityIndex) : 0;
         fCurrentManaCost = AbilityHelper.CalcSpecialValueUpgrade(entityindex, abilityname, "mana_cost", fCurrentManaCost);
         let aCooldowns = AbilityHelper.StringToValues(tData.AbilityCooldown || "");
         for (let i = 0; i < Math.max(aCooldowns.length, iMaxLevel); i++) {
-            let v = iAbilityIndex != -1 ? Abilities.GetLevelCooldown(iAbilityIndex, i) : (aCooldowns[i] || 0);
+            let v = iAbilityIndex != -1 ? AbilityHelper.GetLevelCooldown(iAbilityIndex, i) : (aCooldowns[i] || 0);
             aCooldowns[i] = AbilityHelper.CalcSpecialValueUpgrade(entityindex, abilityname, "cooldown", v);
         }
         aCooldowns = AbilityHelper.SimplifyValuesArray(aCooldowns);
         let aManaCosts = AbilityHelper.StringToValues(tData.AbilityManaCost || "");
         for (let i = 0; i < Math.max(aManaCosts.length, iMaxLevel); i++) {
-            let v = iAbilityIndex != -1 ? Abilities.GetLevelManaCost(iAbilityIndex, i) : (aManaCosts[i] || 0);
+            let v = iAbilityIndex != -1 ? AbilityHelper.GetLevelManaCost(iAbilityIndex, i) : (aManaCosts[i] || 0);
             aManaCosts[i] = AbilityHelper.CalcSpecialValueUpgrade(entityindex, abilityname, "mana_cost", v);
         }
         aManaCosts = AbilityHelper.SimplifyValuesArray(aManaCosts);
@@ -285,17 +287,17 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
         }
 
         let fCooldownReduction = entityindex != -1 ? Entities.GetCooldownReduction(entityindex) : 0;
-        fCurrentCooldown = Float(fCurrentCooldown * (1 - fCooldownReduction * 0.01));
+        fCurrentCooldown = FuncHelper.ToFloat(fCurrentCooldown * (1 - fCooldownReduction * 0.01));
 
         // 冷却时间
         let sCooldownDescription = "";
         if (!(aCooldowns.length == 0 || (aCooldowns.length == 1 && aCooldowns[0] == 0))) {
             for (let level = 0; level < aCooldowns.length; level++) {
-                const value = Float(aCooldowns[level] * (1 - fCooldownReduction * 0.01));
+                const value = FuncHelper.ToFloat(aCooldowns[level] * (1 - fCooldownReduction * 0.01));
                 if (sCooldownDescription != "") {
                     sCooldownDescription = sCooldownDescription + " / ";
                 }
-                let sValue = Round(Math.abs(value), 2) + "";
+                let sValue = FuncHelper.Round(Math.abs(value), 2) + "";
                 if (iLevel != -1 && (level + 1 == Math.min(iLevel, aCooldowns.length))) {
                     sValue = "<span class='GameplayVariable'>" + sValue + "</span>";
                 }
@@ -315,7 +317,7 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                 if (sManaCostDescription != "") {
                     sManaCostDescription = sManaCostDescription + " / ";
                 }
-                let sValue = Round(Math.abs(value)) + "";
+                let sValue = FuncHelper.Round(Math.abs(value)) + "";
                 if (iLevel != -1 && (level + 1 == Math.min(iLevel, aManaCosts.length))) {
                     sValue = "<span class='GameplayVariable'>" + sValue + "</span>";
                     fCurrentManaCost = value;
@@ -472,7 +474,7 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                                 </Panel>
                             </Panel>
                         </Panel>
-                        {/* <Panel id="AbilityCastingHeader" className={classNames({ 'Hidden': castingName == "" })}>
+                        {/* <Panel id="AbilityCastingHeader" className={CSSHelper.ClassMaker({ 'Hidden': castingName == "" })}>
 						<Label id="AbilityCasting" localizedText="DOTA_AbilityTooltip_Casting" dialogVariables={{ itemname: $.Localize("#DOTA_Tooltip_ability_" + castingName) }} html={true} />
 					</Panel> */}
                         <Label id="CostToComplete" localizedText="#DOTA_HUD_Shop_Item_Complete" />
@@ -536,7 +538,7 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                                         }
                                     }
 
-                                    refSelf.current?.RemoveClass("DevouredFirstLine");
+                                    this.__root__.current?.RemoveClass("DevouredFirstLine");
                                     let iLine = 0;
                                     for (let i = 0; i < aDescriptions.length; i++) {
                                         const sUnprocessedDescription = aDescriptions[i];
@@ -551,27 +553,27 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                                                 ++iLine;
                                                 if (sHeader == "<h1>$devoured</h1>") {
                                                     if (iLine == 1) {
-                                                        refSelf.current?.AddClass("DevouredFirstLine");
+                                                        this.__root__.current?.AddClass("DevouredFirstLine");
                                                     }
                                                     sHeader = sHeader.replace("\$devoured", $.Localize("#dota_ability_devoured_title"));
                                                 } else if (sHeader == "<h1>$devoured_2</h1>") {
                                                     if (iLine == 1) {
-                                                        refSelf.current?.AddClass("DevouredFirstLine");
+                                                        this.__root__.current?.AddClass("DevouredFirstLine");
                                                     }
                                                     sHeader = sHeader.replace("\$devoured_2", $.Localize("#dota_ability_devoured_2_title"));
                                                 }
                                                 list.push(
-                                                    <Label key={list.length} className={classNames('Header', { 'Active': bIsActive && iLine == iActiveDescriptionLine })} text={sHeader} html={true} />
+                                                    <Label key={list.length} className={CSSHelper.ClassMaker('Header', { 'Active': bIsActive && iLine == iActiveDescriptionLine })} text={sHeader} html={true} />
                                                 );
                                             }
                                         }
                                         sDescription = sDescription.replace(regexp, "");
                                         sDescription = sDescription.replace(/%%/g, "%");
 
-                                        sDescription = replaceValues({ sStr: sDescription, bShowExtra: showextradescription, sAbilityName: sAbilityName, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+                                        sDescription = AbilityHelper.ReplaceAbilityValues({ sStr: sDescription, sheetConfig: sheetConfig, bShowExtra: showextradescription, sAbilityName: sAbilityName, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
 
                                         list.push(
-                                            <Label key={list.length} className={classNames({ 'Active': bIsActive && iLine == iActiveDescriptionLine, 'AbilityMechanics': i >= iOriginalDescriptions })} text={sDescription} html={true} />
+                                            <Label key={list.length} className={CSSHelper.ClassMaker({ 'Active': bIsActive && iLine == iActiveDescriptionLine, 'AbilityMechanics': i >= iOriginalDescriptions })} text={sDescription} html={true} />
                                         );
                                     }
 
@@ -590,17 +592,17 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                                                 }
 
                                                 list.push(
-                                                    <Label key={list.length} className={classNames('Header')} text={_sCondition} html={true} />
+                                                    <Label key={list.length} className={CSSHelper.ClassMaker('Header')} text={_sCondition} html={true} />
                                                 );
                                             }
                                         }
                                         sExtraEffect = sExtraEffect.replace(regexp, "");
                                         sExtraEffect = sExtraEffect.replace(/%%/g, "%");
 
-                                        sExtraEffect = replaceValues({ sStr: sExtraEffect, bShowExtra: showextradescription, sAbilityName: sAbilityName, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+                                        sExtraEffect = AbilityHelper.ReplaceAbilityValues({ sStr: sExtraEffect, sheetConfig: sheetConfig, bShowExtra: showextradescription, sAbilityName: sAbilityName, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
 
                                         list.push(
-                                            <Label key={list.length} className={classNames({ 'ExtraEffect': true })} text={sExtraEffect} html={true} />
+                                            <Label key={list.length} className={CSSHelper.ClassMaker({ 'ExtraEffect': true })} text={sExtraEffect} html={true} />
                                         );
                                     }
                                 }

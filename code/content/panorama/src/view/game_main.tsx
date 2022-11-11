@@ -11,7 +11,6 @@ import { TimerHelper } from "../helper/TimerHelper";
 import { GameEnum } from "../libs/GameEnum";
 import { Minimap_plus } from "./alldota2/minimap_plus/Minimap_plus";
 import { EntityOverHeadPanel } from "./Common/EntityOverHeadPanel";
-import { MainPanel } from "./MainPanel/MainPanel";
 import { CCMenuNavigation } from "./allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCLabel } from "./allCustomUIElement/CCLabel/CCLabel";
 import { CCAvatar } from "./allCustomUIElement/CCAvatar/CCAvatar";

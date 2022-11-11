@@ -6,7 +6,6 @@ import { TipsHelper } from "../../../helper/TipsHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { CCDrawCardPanel } from "../../../view/Draw/CCDrawCardPanel";
 import { CCMainPanel } from "../../../view/MainPanel/CCMainPanel";
-import { MainPanel } from "../../../view/MainPanel/MainPanel";
 import { DrawConfig } from "../../system/Draw/DrawConfig";
 import { PlayerScene } from "../Player/PlayerScene";
 
@@ -42,8 +41,8 @@ export class DrawComponent extends ET.Component {
             itemName: sTowerName,
             b2Public: b2Public,
         });
-        if (!cbmsg.state) {
-            TipsHelper.showTips(cbmsg.message!, MainPanel.GetInstance()!);
+        if (!cbmsg.state && cbmsg.message) {
+            TipsHelper.showErrorMessage(cbmsg.message);
         }
         return cbmsg.state!;
     }
