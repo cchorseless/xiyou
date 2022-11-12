@@ -7,13 +7,12 @@ import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { ToolTipHelper } from "../../helper/ToolTipHelper";
 import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
+import { CCDacBoard } from "../allCustomUIElement/CCDacBoard/CCDacBoard";
 import { CCMiniMap } from "../allCustomUIElement/CCMiniMap/CCMiniMap";
 import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCChallengeShopPanel } from "../Challenge/CCChallengeShopPanel";
 import { CCCombinationBottomPanel } from "../Combination/CCCombinationBottomPanel";
-import { CCDacBoardPanel } from "../DacBoard/CCDacBoardPanel";
-import { CCDacBoardPanelV1 } from "../DacBoard/CCDacBoardPanelV1";
 import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
 import { CCShopPanel } from "../Shop/CCShopPanel";
 import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
@@ -54,6 +53,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCMiniMap />
                         <CCCombinationBottomPanel />
                         <CCChallengeShopPanel />
+                        <CCDacBoard />
                         {this.panel_base_childs}
                     </Panel>
                 }

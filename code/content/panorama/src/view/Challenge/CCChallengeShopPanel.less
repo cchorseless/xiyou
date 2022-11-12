@@ -1,20 +1,20 @@
 #CC_ChallengeShopPanel {
     align: right bottom;
+    opacity: 1;
+    transform: translateY(100px);
+    transition-property: opacity, transform;
+    transition-duration: 0.15s;
+
+    // &.Show {
+    //     opacity: 1;
+    //     transform: translateY(0px);
+    // }
 
     #challenge_imgBg {
         padding: 10px;
         height: 350px;
         background-image: url("file://{images}/custom_game/hud/bg_list_window.png");
         background-size: 100%;
-        opacity: 1;
-
-        transform: translateY(100px);
-        transition-property: opacity, transform;
-        transition-duration: 0.15s;
-
-        &.Show {
-            // opacity: 1;
-            // transform: translateY(0px);
-        }
+        background-size: 100%;
     }
 }

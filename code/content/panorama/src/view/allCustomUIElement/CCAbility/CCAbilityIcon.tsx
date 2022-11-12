@@ -71,6 +71,7 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
                     this.lefttimewprk!.Clear();
                     this.lefttimewprk = null;
                     this.addOnlyOneNodeChild(this.NODENAME.abilityImage, CCEffectShine);
+                    this.updateSelf()
                 }
                 else {
                     lefttime--;
@@ -89,8 +90,8 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
             <Panel ref={this.__root__} id="CC_AbilityIcon" {...this.initRootAttrs()}  >
                 <Image id="img_AbilityIcon" className={this.props.rarity} >
                     <DOTAAbilityImage ref={this.abilityImage} abilityname={abilityname} onmouseactivate={this.onbtn_castability}>
-                        {lefttime >= 0 && <CCPanel backgroundColor="#000000DD" clip={"radial(50.0% 50.0%, 0.0deg, " + -(lefttime / remainingtime) * 360 + "deg)"} />}
-                        {lefttime >= 0 && <CCLabel text={"" + (lefttime / 10).toFixed(1)} />}
+                        {lefttime >= 0 && <CCPanel width="100%" height="100%" backgroundColor="#000000DD" clip={"radial(50.0% 50.0%, 0.0deg, " + -(lefttime / remainingtime) * 360 + "deg)"} />}
+                        {lefttime >= 0 && <CCLabel type="UnitName" align="center center" text={"" + (lefttime / 10).toFixed(1)} />}
                         {this.abilityImage_childs}
                     </DOTAAbilityImage>
                 </Image>

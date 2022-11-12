@@ -18,7 +18,9 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
     onReady() {
         const abilityname = this.props.abilityname;
         const castentity = PlayerScene.Local.GetHeroEntityIndex();
+        if (!Entities.IsValidEntity(castentity)) { return false; }
         const abilityindex = Entities.GetAbilityByName(castentity, abilityname);
+        if (!Entities.IsValidEntity(abilityindex)) { return false; }
         let entity = PlayerScene.EntityRootManage.getAbility("" + abilityindex);
         if (entity) {
             this.abilityEntity = entity;
@@ -30,13 +32,12 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
         this.abilityEntity.RegRef(this);
     }
     render() {
-        if (!this.__root___isValid) { return <></> }
+        if (!this.__root___isValid) { return <Panel /> }
         const abilityname = this.props.abilityname;
         const castentity = PlayerScene.Local.GetHeroEntityIndex();
         const abilityindex = Entities.GetAbilityByName(castentity, abilityname);
         const ability = this.GetStateEntity(this.abilityEntity);
         return (
-            this.__root___isValid &&
             <Panel id="CC_ChallengeAbilityIcon" ref={this.__root__}      {...this.initRootAttrs()}>
                 <CCAbilityIcon abilityname={abilityname} castEntityIndex={castentity} horizontalAlign={"center"}>
                     <CCLabel type="Level" text={`Lv.${Abilities.GetLevel(abilityindex)}`} align={"left bottom"} />

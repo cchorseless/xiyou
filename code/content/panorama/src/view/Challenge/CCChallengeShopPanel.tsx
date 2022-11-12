@@ -2,8 +2,10 @@ import React, { } from "react";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { PlayerConfig } from "../../game/system/Player/PlayerConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
+import { TimerHelper } from "../../helper/TimerHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
 import { GameEnum } from "../../libs/GameEnum";
 import { CCButton } from "../allCustomUIElement/CCButton/CCButton";
@@ -27,6 +29,10 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
 
     onInitUI() {
         PlayerScene.Local.PlayerDataComp.RegRef(this);
+        // TimerHelper.AddTimer(1, FuncHelper.Handler.create(this, () => {
+        //     this.__root__.current!.AddClass("Show")
+        // }))
+
     }
     onbtnpop_click() {
         let playerdata = PlayerScene.Local.PlayerDataComp;
@@ -42,7 +48,6 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
             TipsHelper.showErrorMessage("wood is not enough");
             return;
         }
-        LogHelper.print("onbtnpop_click")
         NetHelper.SendToLua(PlayerConfig.EProtocol.reqApplyPopuLevelUp);
     };
     onbtntec_click() {
@@ -63,7 +68,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
 
     render() {
         if (!this.__root___isValid) { return <></> }
-        const playerdata = this.GetStateEntity(PlayerScene.Local.PlayerDataComp)
+        const playerdata = this.GetStateEntity(PlayerScene.Local.PlayerDataComp);
         return (
             <Panel id="CC_ChallengeShopPanel" ref={this.__root__}      {...this.initRootAttrs()}>
                 <CCPanel id="challenge_imgBg" flowChildren="down" >
@@ -72,7 +77,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
                     <CCPanel flowChildren="right" horizontalAlign="center" marginTop={"10px"}>
                         {["gold", "wood", "equip", "artifact"].map((ability, index) => {
                             let abilityname = "courier_challenge_" + ability;
-                            return <CCChallengeAbilityIcon key={ability} abilityname={abilityname} marginLeft="10px" />;
+                            return <CCChallengeAbilityIcon key={ability} abilityname={abilityname} />;
                         })}
                     </CCPanel>
                     <CCDividerLine />

@@ -15,7 +15,11 @@ export class CCHealthMana extends CCPanel<IHealthMana> {
     render() {
         return (
             this.__root___isValid && (
-                <GenericPanel ref={this.__root__} type="DOTAHealthMana" id="health_mana"  {...this.initRootAttrs()}>
+                <GenericPanel type="DOTAHealthMana" id="health_mana" ref={this.__root__}  {...this.initRootAttrs()} onload={(panel) => {
+                    const HealthManaContainer = panel.FindChildTraverse("HealthManaContainer");
+                    HealthManaContainer!.style.marginLeft = "0px";
+                    HealthManaContainer!.style.marginRight = "0px";
+                }} >
                     {this.props.children}
                     {this.__root___childs}
                 </GenericPanel>

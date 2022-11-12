@@ -4,6 +4,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { registerET, ET } from "../../../libs/Entity";
+import { CCCombinationBottomPanel } from "../../../view/Combination/CCCombinationBottomPanel";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ECombination } from "./ECombination";
 
@@ -22,7 +23,7 @@ export class CombinationManagerComponent extends ET.Component {
         }
         if (!_comb.IsEmpty()) {
             TimerHelper.AddTimer(0.1, FuncHelper.Handler.create(this, () => {
-                EventHelper.FireClientEvent(this.updateEventName, null, this)
+                CCCombinationBottomPanel.GetInstance()?.updateSelf()
             }))
         }
 

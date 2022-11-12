@@ -37,15 +37,17 @@ export class CCUnitStats extends CCPanel<ICCUnitStats>  {
     render() {
         return (
             this.__root___isValid && (
-                <Panel id="stats_container" ref={this.__root__} hittest={false}{...this.initRootAttrs()}>
-                    <Panel id="stats_container_bg" hittest={false} />
-                    <Panel id="HUDSkinStatBranchBG" className="hud_skinnable" hittest={false} />
-                    <Panel id="HUDSkinStatBranchGlow" className="hud_skinnable" hittest={false} />
-                    <GenericPanel type="DOTAStatsRegion" id="stats" ref={this.stats} className="ShowSplitLabels statsDiv" hittest={false} />
-                    <GenericPanel type="DOTAHUDStrAgiInt" id="stragiint" ref={this.stragiint} className="stragiintDiv" always-cache-composition-layer="true" require-composition-layer="true" hittest={false} />
-                    <Panel id="HUDSkinPreCenterParticlesLeft" className="hud_skinnable" hittest={false} />
-                    {this.__root___childs}
-                    {this.props.children}
+                <Panel id="CC_UnitStats" ref={this.__root__} hittest={false}{...this.initRootAttrs()}>
+                    <CCPanel id="stats_container" hittest={false} marginLeft="0px">
+                        <Panel id="stats_container_bg" hittest={false} />
+                        <Panel id="HUDSkinStatBranchBG" className="hud_skinnable" hittest={false} />
+                        <Panel id="HUDSkinStatBranchGlow" className="hud_skinnable" hittest={false} />
+                        <GenericPanel type="DOTAStatsRegion" id="stats" ref={this.stats} className="ShowSplitLabels statsDiv" hittest={false} />
+                        <GenericPanel type="DOTAHUDStrAgiInt" id="stragiint" ref={this.stragiint} className="stragiintDiv" always-cache-composition-layer="true" require-composition-layer="true" hittest={false} />
+                        <Panel id="HUDSkinPreCenterParticlesLeft" className="hud_skinnable" hittest={false} />
+                        {this.__root___childs}
+                        {this.props.children}
+                    </CCPanel>
                 </Panel>
             )
         );

@@ -1,5 +1,5 @@
 import React from "react";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../CCPanel/CCPanel";
 
 
 interface ICCDacBoardPanel {
@@ -66,7 +66,7 @@ export class CCDacBoardPanelV1 extends CCPanel<ICCDacBoardPanel> {
                         <Panel className="AbilityInsetShadowLeft" />
                         <GenericPanel type="DOTAHotkey" id="StatBranchHotkey" keybind="LearnStats" hittest={false} />
                         <Panel id="AbilitiesAndStatBranch" hittest={false}>
-                            <GenericPanel type="DOTATalentDisplay" id="StatBranch" />
+                            {/* <GenericPanel type="DOTAHudTalentDisplay" id="StatBranch" /> */}
                             <GenericPanel type="DOTAAbilityList" id="abilities" hittest={false} />
                         </Panel>
                         <Panel className="AbilityInsetShadowRight" require-composition-layer="true" always-cache-composition-layer="true" />

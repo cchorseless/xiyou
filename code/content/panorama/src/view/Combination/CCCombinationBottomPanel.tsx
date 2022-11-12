@@ -27,6 +27,9 @@ export class CCCombinationBottomPanel extends CCPanel<ICCCombinationBottomPanel>
         this.addGameEvent(GameEnum.GameEvent.dota_player_update_selected_unit, (e) => {
             this.UpdateState({ curunit: Players.GetLocalPlayerPortraitUnit() });
         });
+        this.addGameEvent(GameEnum.GameEvent.dota_player_update_query_unit, (e) => {
+            this.UpdateState({ curunit: Players.GetLocalPlayerPortraitUnit() });
+        });
     }
 
 
