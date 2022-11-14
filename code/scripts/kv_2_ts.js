@@ -451,6 +451,7 @@ const all_kv_to_ts = async (singleFile = null) => {
         kvconfigDATA += ");\n"
         KvAllInterface_s += ";\n"
     }
+    KvAllInterface_s=KvAllInterface_s.replace(/{}\|/g, '');
     // if (!fs.existsSync(KvAllInterface_UI)) fs.mkdirSync(KvAllInterface_UI,);
     fs.writeFileSync(KvAllInterface_UI, Top_Str + KvAllInterface_s);
     // if (!fs.existsSync(KvAllInterface_UI_Data)) fs.mkdirSync(KvAllInterface_UI_Data);
@@ -553,7 +554,6 @@ const client_kv_bundle = () => {
             }
         }
     })
-    console.log(clientkvbundle);
 }
 
 

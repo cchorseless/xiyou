@@ -1,6 +1,6 @@
 // generate with  kv generator 
 
-#base  "building\building_item_card.kv"
+#base  "building/building_item_card.kv"
 "DOTAAbilities" {
 
 }

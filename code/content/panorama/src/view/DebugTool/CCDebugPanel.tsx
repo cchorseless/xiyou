@@ -47,15 +47,6 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                     direction={this.props.direction || "top"}
                     onSetting={() => { this.addOnlyDebugDialog(CCDebugTool_Setting) }}
                     onRefresh={() => { }}
-                // containerElement={
-                //     <>
-                //         <CCDebugTool_SectPicker title="添加流派" eventName="AddSectButtonPressed" sheetConfig={{}} abilityNames={sectList} toggleList={sectToggleList} filterFunc={sectFilterFunc} />
-                //         <CCDebugTool_UnitInfo />
-                //         <CCDebugTool_TextPicker title="更换英雄" eventName="ChangeHeroButtonPressed" itemNames={commonHeroList} />
-                //         <CCDebugTool_TextPicker title="选择阶段" eventName="SelectStateButtonPressed" itemNames={stateList} />
-                //         <CCDebugTool_TextPicker title="跳转到特定区域" eventName="TeleportButtonPressed" itemNames={positionList} />
-                //     </>
-                // }
                 >
                     <CCDebugTool_Category title="游戏" >
                         <CCDebugTool_DemoTextEntry eventName="ChangeHostTimescale" localtext="主机速度" />

@@ -65,7 +65,6 @@ export class CCTalentRow extends CCPanel<ICCTalentRow> {
             <Panel id="CC_TalentRow" hittest={true} onactivate={self => { }}>
                 <Label className="TalentDescription" html={true} text={AbilityHelper.GetAbilityDescription({
                     sStr: $.Localize("#DOTA_Tooltip_ability_" + this.props.abilityName),
-                    sheetConfig: KVHelper.KVData().building_ability_tower,
                     abilityName: this.props.abilityName,
                     iLevel: 1,
                 })} />

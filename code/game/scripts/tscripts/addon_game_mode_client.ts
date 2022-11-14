@@ -20,7 +20,7 @@ export class GameMode_Client extends SingletonClass {
 
     public addEvent() {
         EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned);
-        EventHelper.addGameEvent(this, "call_get_ability_special_value", this.OnCall_get_ability_special_value);
+        EventHelper.addGameEvent(this, "call_get_ability_data", this.OnCall_get_ability_data);
         EventHelper.addGameEvent(this, "call_get_unit_data", this.OnCall_get_unit_data);
         EventHelper.addGameEvent(this, "call_get_player_data", this.OnCall_get_player_data);
 
@@ -46,7 +46,7 @@ export class GameMode_Client extends SingletonClass {
         }
     }
 
-    private OnCall_get_ability_special_value(e: IGet_ability_special_value) {
+    private OnCall_get_ability_data(e: IGet_ability_data) {
         ability_propertytool.call_level = e.level;
         ability_propertytool.call_key = e.key_name;
         ability_propertytool.call_ability = e.ability_entindex;

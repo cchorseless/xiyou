@@ -40,6 +40,6 @@ building_unit_enemy.OBJ_0_1,
 building_config.OBJ_0_1,
 building_unit_summoned.OBJ_0_1,
 building_ability_tower.OBJ_0_1{ }
-export type KV_AllAbilitys = {}| building_ability_tower.OBJ_1_1 ;
-export type KV_AllItems  = {}|building_item_card.OBJ_1_1 ;
-export type KV_AllUnits  = {}|building_unit_enemy.OBJ_1_1 |building_unit_tower.OBJ_1_1 |building_unit_summoned.OBJ_1_1 ;
+export type KV_AllAbilitys =  building_ability_tower.OBJ_1_1 ;
+export type KV_AllItems  = building_item_card.OBJ_1_1 ;
+export type KV_AllUnits  = building_unit_enemy.OBJ_1_1 |building_unit_tower.OBJ_1_1 |building_unit_summoned.OBJ_1_1 ;

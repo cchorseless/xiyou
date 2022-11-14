@@ -5,6 +5,7 @@ import { KVHelper } from "./KVHelper";
 export module AbilityHelper {
 
     export const AbilityPropertyTool = "ability_propertytool";
+    export const Call_AbilityFunc = "call_get_ability_data";
 
     export enum AbilityUpgradeOperator {
         ABILITY_UPGRADES_OP_ADD = 0,
@@ -256,22 +257,23 @@ export module AbilityHelper {
     }
 
     export function GetSpecialValueUpgrade(iEntityIndex: EntityIndex | any, sAbilityName: string, sSpecialValueName: string, iOperator: AbilityUpgradeOperator) {
-        if (!Entities.IsValidEntity(iEntityIndex)) return 0;
+        // if (!Entities.IsValidEntity(iEntityIndex)) return 0;
 
-        let t = CustomNetTables.GetTableValue("ability_upgrades_result", iEntityIndex.toString());
-        if (!t || typeof (t.json) != "string") return 0;
+        // let t = CustomNetTables.GetTableValue("ability_upgrades_result", iEntityIndex.toString());
+        // if (!t || typeof (t.json) != "string") return 0;
 
-        let tCachedResult = JSON.parse(t.json);
-        if (!tCachedResult) return 0;
+        // let tCachedResult = JSON.parse(t.json);
+        // if (!tCachedResult) return 0;
 
-        let tAllSpecialValueCachedResult = tCachedResult[AbilityUpgradeType.ABILITY_UPGRADES_TYPE_SPECIAL_VALUE];
-        if (typeof (tAllSpecialValueCachedResult) != "object" || typeof (tAllSpecialValueCachedResult[sAbilityName]) != "object" || typeof (tAllSpecialValueCachedResult[sAbilityName][sSpecialValueName]) != "object") return 0;
+        // let tAllSpecialValueCachedResult = tCachedResult[AbilityUpgradeType.ABILITY_UPGRADES_TYPE_SPECIAL_VALUE];
+        // if (typeof (tAllSpecialValueCachedResult) != "object" || typeof (tAllSpecialValueCachedResult[sAbilityName]) != "object" || typeof (tAllSpecialValueCachedResult[sAbilityName][sSpecialValueName]) != "object") return 0;
 
-        return tAllSpecialValueCachedResult[sAbilityName][sSpecialValueName][iOperator] || 0;
+        // return tAllSpecialValueCachedResult[sAbilityName][sSpecialValueName][iOperator] || 0;
     }
 
     export function CalcSpecialValueUpgrade(iEntityIndex: number, sAbilityName: string, sSpecialValueName: string, fValue: number) {
-        return FuncHelper.ToFloat((fValue + GetSpecialValueUpgrade(iEntityIndex, sAbilityName, sSpecialValueName, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_ADD)) * (1 + GetSpecialValueUpgrade(iEntityIndex, sAbilityName, sSpecialValueName, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_MUL) * 0.01));
+        return fValue;
+        // return FuncHelper.ToFloat((fValue + GetSpecialValueUpgrade(iEntityIndex, sAbilityName, sSpecialValueName, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_ADD)) * (1 + GetSpecialValueUpgrade(iEntityIndex, sAbilityName, sSpecialValueName, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_MUL) * 0.01));
     }
     export function AbilityDescriptionCompose(aValues: number[], iLevel: number = -1, bOnlyNowLevelValue: boolean = false) {
         let sTemp = "";
@@ -322,7 +324,7 @@ export module AbilityHelper {
         return aValues;
     }
     export function GetAbilityDescription({ sStr, abilityName, iLevel, bOnlyNowLevelValue = false }: { sStr: string, abilityName: string, iLevel: number, bOnlyNowLevelValue?: boolean }) {
-        let tData = KVHelper.KVAbilitys[abilityName];
+        let [isitem, tData] = KVHelper.GetAbilityOrItemData(abilityName);
         if (!tData) { return sStr; }
         let aValueNames = Object.keys(tData?.AbilityValues ?? {});
         for (let index = 0; index < aValueNames.length; index++) {
@@ -351,42 +353,54 @@ export module AbilityHelper {
         return SimplifyValuesArray(aValues);
     }
     export function GetSpecialValues(sAbilityName: string, sName: string, iEntityIndex = -1) {
-        let tAbilityKeyValues = CustomUIConfig.AbilitiesKv[sAbilityName];
-        let tItemKeyValues = CustomUIConfig.ItemsKv[sAbilityName];
-        let tKeyValues = tAbilityKeyValues || tItemKeyValues;
+        // let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
+        // if (iEntityIndex != -1) {
+        //     let aValues = GetAbilityMechanicsUpgradeSpecialValues(iEntityIndex, sAbilityName, sName);
+        //     if (aValues != undefined) {
+        //         return aValues;
+        //     }
+        // }
 
-        if (iEntityIndex != -1) {
-            let aValues = GetAbilityMechanicsUpgradeSpecialValues(iEntityIndex, sAbilityName, sName);
-            if (aValues != undefined) {
-                return aValues;
-            }
-        }
-
-        if (tKeyValues) {
-            let tSpecials = tKeyValues.AbilitySpecial;
-            if (tSpecials) {
-                for (let sIndex in tSpecials) {
-                    let tData = tSpecials[sIndex];
-                    if (tData[sName] != undefined && tData[sName] != null) {
-                        let sType = tData.var_type;
-                        let sValues = tData[sName].toString();
-                        let aValues = sValues.split(" ");
-                        for (let i = 0; i < aValues.length; i++) {
-                            let value = Number(aValues[i]);
-                            if (sType == "FIELD_INTEGER") {
-                                aValues[i] = parseInt(value);
-                            } else if (sType == "FIELD_FLOAT") {
-                                aValues[i] = parseFloat(value.toFixed(6));
-                            }
-                        }
-                        return SimplifyValuesArray(aValues);
-                    }
-                }
-            }
-        }
+        // if (tKeyValues) {
+        //     let tSpecials = tKeyValues.AbilitySpecial;
+        //     if (tSpecials) {
+        //         for (let sIndex in tSpecials) {
+        //             let tData = tSpecials[sIndex];
+        //             if (tData[sName] != undefined && tData[sName] != null) {
+        //                 let sType = tData.var_type;
+        //                 let sValues = tData[sName].toString();
+        //                 let aValues = sValues.split(" ");
+        //                 for (let i = 0; i < aValues.length; i++) {
+        //                     let value = Number(aValues[i]);
+        //                     if (sType == "FIELD_INTEGER") {
+        //                         aValues[i] = parseInt(value + "");
+        //                     } else if (sType == "FIELD_FLOAT") {
+        //                         aValues[i] = parseFloat(value.toFixed(6));
+        //                     }
+        //                 }
+        //                 return SimplifyValuesArray(aValues);
+        //             }
+        //         }
+        //     }
+        // }
 
         return [];
     }
+    const tAddedProperties = {
+        _str: "GetStrength",
+        _agi: "GetAgility",
+        _int: "GetIntellect",
+        _all: "GetAllStats",
+        _attack_damage: "GetAttackDamage",
+        _attack_speed: "GetAttackSpeedPercent",
+        _health: "GetCustomMaxHealth",
+        _mana: "GetMaxMana",
+        _armor: "GetArmor",
+        _magical_armor: "GetMagicalArmor",
+        _move_speed: "GetMoveSpeed",
+        _ulti: "GetUltiPower",
+    };
+
     const aPropertyNames = [
         "var_type",
         "abilitycastrange",
@@ -415,7 +429,7 @@ export module AbilityHelper {
     ];
     export function GetSpecialNames(sAbilityName: string, iEntityIndex = -1) {
         let aSpecials: string[] = [];
-        let tKeyValues = sheetConfig[sAbilityName];
+        let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
         if (tKeyValues) {
             let tSpecials = tKeyValues.AbilitySpecial;
             if (tSpecials) {
@@ -434,9 +448,8 @@ export module AbilityHelper {
             }
             aSpecials = aSpecials.concat("abilitycastrange", "abilitycastpoint", "abilityduration", "abilitychanneltime", "abilitydamage");
         }
-        // todo
         if (iEntityIndex != -1) {
-            // let a = GetAbilityMechanicsUpgradeSpecialNames(iEntityIndex:EntityIndex, sAbilityName);
+            // let a = GetAbilityMechanicsUpgradeSpecialNames(iEntityIndex, sAbilityName);
             // for (let index = 0; index < a.length; index++) {
             //     const v = a[index];
             //     if (!FindKey(aSpecials, v)) {
@@ -446,8 +459,26 @@ export module AbilityHelper {
         }
         return aSpecials;
     }
-    export function GetSpecialValueProperty(sName: string, sPropertyName: string, iEntityIndex = -1): string {
-        let tKeyValues = sheetConfig[sAbilityName];
+
+    export function GetSpecialVarType(sAbilityName: string, sName: string,) {
+        let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
+        if (tKeyValues) {
+            var tSpecials = tKeyValues.AbilitySpecial;
+            if (tSpecials) {
+                for (var sIndex in tSpecials) {
+                    var tData = tSpecials[sIndex];
+                    if (tData[sName] != undefined && tData[sName] != null) {
+                        return tData.var_type;
+                    }
+                }
+            }
+        }
+
+        return [];
+    }
+
+    export function GetSpecialValueProperty(sAbilityName: string, sName: string, sPropertyName: string, iEntityIndex = -1): string {
+        let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
         if (iEntityIndex != -1) {
             // let sPropertyValue = GetAbilityMechanicsUpgradeLevelSpecialValueProperty(iEntityIndex:EntityIndex, sAbilityName, sName, sPropertyName);
             // if (sPropertyValue != undefined) {
@@ -459,8 +490,8 @@ export module AbilityHelper {
             if (tSpecials) {
                 for (let sIndex in tSpecials) {
                     let tData = tSpecials[sIndex];
-                    if (tData[sName] != undefined && tData[sName] != null) {
-                        if (tData[sPropertyName] != undefined && tData[sPropertyName] != null) {
+                    if (tData[sName] != null) {
+                        if (tData[sPropertyName] != null) {
                             return tData[sPropertyName].toString();
                         }
                     }
@@ -470,269 +501,268 @@ export module AbilityHelper {
         return "";
     }
     export function GetSpecialValuesWithCalculated(sAbilityName: string, sName: string, iEntityIndex = -1) {
-        let aOriginalValues = GetSpecialValues(sAbilityName, sName, iEntityIndex);
-        for (let i = 0; i < aOriginalValues.length; i++) {
-            let v = aOriginalValues[i];
-            aOriginalValues[i] = CalcSpecialValueUpgrade(iEntityIndex, sAbilityName, sName, v);
-        }
-        let aValues = JSON.parse(JSON.stringify(aOriginalValues));
-        let tAddedValues = {};
-        let tAddedFactors = {};
-        let aMinValues = GetSpecialValueProperty(sAbilityName, sName, "_min", iEntityIndex);
-        if (aMinValues) {
-            aMinValues = StringToValues(aMinValues);
-            for (let i = 0; i < aMinValues.length; i++) {
-                let v = aMinValues[i];
-                aMinValues[i] = CalcSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, "_min", v);
-            }
-        }
-        let aMaxValues = GetSpecialValueProperty(sAbilityName, sName, "_max", iEntityIndex);
-        if (aMaxValues) {
-            aMaxValues = StringToValues(aMaxValues);
-            for (let i = 0; i < aMaxValues.length; i++) {
-                let v = aMaxValues[i];
-                aMaxValues[i] = CalcSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, "_max", v);
-            }
-        }
-        let sType = GetSpecialVarType(sAbilityName, sName);
-        let iMaxLevel = aValues.length;
-        for (const key in tAddedProperties) {
-            const sFuncName = tAddedProperties[key];
-            let func = Entities[sFuncName];
-            if (typeof (func) != "function") continue;
-            let sFactors = GetSpecialValueProperty(sAbilityName, sName, key, iEntityIndex);
-            if (sFactors) {
-                tAddedValues[key] = [];
-                tAddedFactors[key] = [];
-                let aFactors = StringToValues(sFactors);
-                iMaxLevel = Math.max(aFactors.length, iMaxLevel);
-                for (let i = 0; i < Math.max(aFactors.length, aValues.length); i++) {
-                    let factor = aFactors[Clamp(i, 0, aFactors.length - 1)];
-                    factor = CalcSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, key, factor);
-                    tAddedFactors[key][i] = factor;
-                    let addedValue = factor * Entities[sFuncName](iEntityIndex);
-                    if (sType == "FIELD_INTEGER") {
-                        addedValue = parseInt(addedValue);
-                    } else if (sType == "FIELD_FLOAT") {
-                        addedValue = Float(addedValue);
-                    }
-                    tAddedValues[key][i] = addedValue;
-                }
-            } else {
-                let extra_factor = GetSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, key, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_ADD);
-                if (extra_factor != 0) {
-                    tAddedValues[key] = [];
-                    tAddedFactors[key] = [];
-                    for (let i = 0; i < aValues.length; i++) {
-                        let factor = extra_factor;
-                        tAddedFactors[key][i] = factor;
-                        let addedValue = factor * Entities[sFuncName](iEntityIndex);
-                        if (sType == "FIELD_INTEGER") {
-                            addedValue = parseInt(addedValue);
-                        } else if (sType == "FIELD_FLOAT") {
-                            addedValue = Float(addedValue);
-                        }
-                        tAddedValues[key][i] = addedValue;
-                    }
-                }
-            }
-        }
-        Object.keys(tAddedValues).forEach(key => {
-            let aNewValues = JSON.parse(JSON.stringify(aValues));
-            for (let i = 0; i < iMaxLevel; i++) {
-                let value = aValues[FuncHelper.Clamp(i, 0, aValues.length - 1)] || 0;
-                value = value + tAddedValues[key][FuncHelper.Clamp(i, 0, tAddedValues[key].length - 1)];
-                aNewValues[i] = value;
-            }
-            aValues = aNewValues;
-        });
+        // let aOriginalValues = GetSpecialValues(sAbilityName, sName, iEntityIndex);
+        // for (let i = 0; i < aOriginalValues.length; i++) {
+        //     let v = aOriginalValues[i];
+        //     aOriginalValues[i] = CalcSpecialValueUpgrade(iEntityIndex, sAbilityName, sName, v);
+        // }
+        // let aValues = JSON.parse(JSON.stringify(aOriginalValues));
+        // let tAddedValues = {};
+        // let tAddedFactors = {};
+        // let aMinValues = GetSpecialValueProperty(sAbilityName, sName, "_min", iEntityIndex);
+        // // if (aMinValues) {
+        // //     aMinValues = StringToValues(aMinValues);
+        // //     for (let i = 0; i < aMinValues.length; i++) {
+        // //         let v = aMinValues[i];
+        // //         aMinValues[i] = CalcSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, "_min", v);
+        // //     }
+        // // }
+        // let aMaxValues = GetSpecialValueProperty(sAbilityName, sName, "_max", iEntityIndex);
+        // // if (aMaxValues) {
+        // //     aMaxValues = StringToValues(aMaxValues);
+        // //     for (let i = 0; i < aMaxValues.length; i++) {
+        // //         let v = aMaxValues[i];
+        // //         aMaxValues[i] = CalcSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, "_max", v);
+        // //     }
+        // // }
+        // let sType = GetSpecialVarType(sAbilityName, sName);
+        // let iMaxLevel = aValues.length;
+        // for (const key in tAddedProperties) {
+        //     const sFuncName = (tAddedProperties as any)[key] as string;
+        //     let func = UnitHelper[sFuncName];
+        //     if (typeof (func) != "function") continue;
+        //     let sFactors = GetSpecialValueProperty(sAbilityName, sName, key, iEntityIndex);
+        //     if (sFactors) {
+        //         tAddedValues[key] = [];
+        //         tAddedFactors[key] = [];
+        //         let aFactors = StringToValues(sFactors);
+        //         iMaxLevel = Math.max(aFactors.length, iMaxLevel);
+        //         for (let i = 0; i < Math.max(aFactors.length, aValues.length); i++) {
+        //             let factor = aFactors[Clamp(i, 0, aFactors.length - 1)];
+        //             factor = CalcSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, key, factor);
+        //             tAddedFactors[key][i] = factor;
+        //             let addedValue = factor * Entities[sFuncName](iEntityIndex);
+        //             if (sType == "FIELD_INTEGER") {
+        //                 addedValue = parseInt(addedValue);
+        //             } else if (sType == "FIELD_FLOAT") {
+        //                 addedValue = Float(addedValue);
+        //             }
+        //             tAddedValues[key][i] = addedValue;
+        //         }
+        //     } else {
+        //         let extra_factor = GetSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, key, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_ADD);
+        //         if (extra_factor != 0) {
+        //             tAddedValues[key] = [];
+        //             tAddedFactors[key] = [];
+        //             for (let i = 0; i < aValues.length; i++) {
+        //                 let factor = extra_factor;
+        //                 tAddedFactors[key][i] = factor;
+        //                 let addedValue = factor * Entities[sFuncName](iEntityIndex);
+        //                 if (sType == "FIELD_INTEGER") {
+        //                     addedValue = parseInt(addedValue);
+        //                 } else if (sType == "FIELD_FLOAT") {
+        //                     addedValue = Float(addedValue);
+        //                 }
+        //                 tAddedValues[key][i] = addedValue;
+        //             }
+        //         }
+        //     }
+        // }
+        // Object.keys(tAddedValues).forEach(key => {
+        //     let aNewValues = JSON.parse(JSON.stringify(aValues));
+        //     for (let i = 0; i < iMaxLevel; i++) {
+        //         let value = aValues[FuncHelper.Clamp(i, 0, aValues.length - 1)] || 0;
+        //         value = value + tAddedValues[key][FuncHelper.Clamp(i, 0, tAddedValues[key].length - 1)];
+        //         aNewValues[i] = value;
+        //     }
+        //     aValues = aNewValues;
+        // });
 
-        if (aMinValues) {
-            for (let i = 0; i < aValues.length; i++) {
-                aValues[i] = Math.max(aValues[i], aMinValues[FuncHelper.Clamp(i, 0, aMinValues.length - 1)]);
-            }
-        }
+        // if (aMinValues) {
+        //     for (let i = 0; i < aValues.length; i++) {
+        //         aValues[i] = Math.max(aValues[i], aMinValues[FuncHelper.Clamp(i, 0, aMinValues.length - 1)]);
+        //     }
+        // }
 
-        if (aMaxValues) {
-            for (let i = 0; i < aValues.length; i++) {
-                aValues[i] = Math.min(aValues[i], aMaxValues[FuncHelper.Clamp(i, 0, aMaxValues.length - 1)]);
-            }
-        }
+        // if (aMaxValues) {
+        //     for (let i = 0; i < aValues.length; i++) {
+        //         aValues[i] = Math.min(aValues[i], aMaxValues[FuncHelper.Clamp(i, 0, aMaxValues.length - 1)]);
+        //     }
+        // }
 
-        return {
-            aValues: aValues,
-            aOriginalValues: aOriginalValues,
-            aMinValues: aMinValues,
-            aMaxValues: aMaxValues,
-            tAddedFactors: tAddedFactors,
-            tAddedValues: tAddedValues,
-        };
+        // return {
+        //     aValues: aValues,
+        //     aOriginalValues: aOriginalValues,
+        //     aMinValues: aMinValues,
+        //     aMaxValues: aMaxValues,
+        //     tAddedFactors: tAddedFactors,
+        //     tAddedValues: tAddedValues,
+        // };
     }
     export function ReplaceAbilityValues({ sStr, bShowExtra, sAbilityName, iLevel, iEntityIndex = -1 as EntityIndex, bIsDescription = false, bOnlyNowLevelValue = false }: { sStr: string, bShowExtra: boolean, sAbilityName: string, iLevel: number, iEntityIndex?: EntityIndex, bIsDescription?: boolean, bOnlyNowLevelValue?: boolean; }) {
-        let tData = sheetConfig[sAbilityName];
-        if (!tData) { return sStr }
-        let aValueNames = GetSpecialNames(sheetConfig, sAbilityName, iEntityIndex);
-        for (let index = 0; index < aValueNames.length; index++) {
-            const sValueName = aValueNames[index];
-            let block = new RegExp("%" + sValueName + "%", "g");
-            let blockPS = new RegExp("%" + sValueName + "%%", "g");
-            let iResult = sStr.search(block);
-            let iResultPS = sStr.search(blockPS);
-            if (iResult == -1 && iResultPS == -1) continue;
+        // let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
+        // if (!tData) { return sStr }
+        // let aValueNames = GetSpecialNames(sAbilityName, iEntityIndex);
+        // for (let index = 0; index < aValueNames.length; index++) {
+        //     const sValueName = aValueNames[index];
+        //     let block = new RegExp("%" + sValueName + "%", "g");
+        //     let blockPS = new RegExp("%" + sValueName + "%%", "g");
+        //     let iResult = sStr.search(block);
+        //     let iResultPS = sStr.search(blockPS);
+        //     if (iResult == -1 && iResultPS == -1) continue;
 
-            let tResult = GetSpecialValuesWithCalculated(sAbilityName, sValueName, iEntityIndex);
-            let aValues: number[];
-            switch (sValueName) {
-                case "abilitycastrange":
-                    aValues = StringToValues(tData.AbilityCastRange || "");
-                    break;
-                case "abilitycastpoint":
-                    aValues = StringToValues(tData.AbilityCastPoint || "");
-                    break;
-                case "abilityduration":
-                    aValues = StringToValues(tData.AbilityDuration || "");
-                    break;
-                case "abilitychanneltime":
-                    aValues = StringToValues(tData.AbilityChannelTime || "");
-                    break;
-                case "abilitydamage":
-                    aValues = StringToValues(tData.AbilityDamage || "");
-                    break;
-                default:
-                    if (bIsDescription) {
-                        aValues = tResult.aValues;
-                    } else {
-                        aValues = tResult.aOriginalValues;
-                    }
-                    break;
-            }
-            if (!bIsDescription) {
-                let CalculateSpellDamageTooltip = GetSpecialValueProperty(sAbilityName, sValueName, "CalculateSpellDamageTooltip", iEntityIndex);
-                let bCalculateSpellDamage = CalculateSpellDamageTooltip != undefined ? Number(CalculateSpellDamageTooltip) == 1 : sValueName.indexOf("damage") != -1;
-                bCalculateSpellDamage = bCalculateSpellDamage && iEntityIndex && Entities.IsValidEntity(iEntityIndex);
-                let fSpellAmplify = Entities.GetSpellAmplify(iEntityIndex) * 0.01;
-                if (bShowExtra && bCalculateSpellDamage) {
-                    for (let j = 0; j < aValues.length; j++) {
-                        const value = aValues[j];
-                        aValues[j] = Math.round(value * (1 + fSpellAmplify) * 100) / 100;
-                    }
-                    for (let j = 0; j < tResult.aValues.length; j++) {
-                        const value = tResult.aValues[j];
-                        tResult.aValues[j] = Math.round(value * (1 + fSpellAmplify) * 100) / 100;
-                    }
-                    if (tResult.aMinValues) {
-                        for (let j = 0; j < tResult.aMinValues.length; j++) {
-                            const value = tResult.aMinValues[j];
-                            tResult.aMinValues[j] = Math.round(value * (1 + fSpellAmplify) * 100) / 100;
-                        }
-                    }
-                    if (tResult.aMaxValues) {
-                        for (let j = 0; j < tResult.aMaxValues.length; j++) {
-                            const value = tResult.aMaxValues[j];
-                            tResult.aMaxValues[j] = Math.round(value * (1 + fSpellAmplify) * 100) / 100;
-                        }
-                    }
-                    for (const key in tResult.tAddedValues) {
-                        const aAddedValues = tResult.tAddedValues[key];
-                        if (aAddedValues) {
-                            for (let j = 0; j < aAddedValues.length; j++) {
-                                const value = aAddedValues[j];
-                                aAddedValues[j] = Math.round(value * (1 + fSpellAmplify) * 100) / 100;
-                            }
-                        }
-                    }
-                }
-            }
-            let [sValues, sValuesPS] = AbilityDescriptionCompose(aValues, iLevel, bOnlyNowLevelValue);
-            if (!bIsDescription) {
-                if (!bShowExtra || !(iEntityIndex && Entities.IsValidEntity(iEntityIndex))) {
-                    let tAddedFactors = tResult.tAddedFactors;
-                    Object.keys(tAddedFactors).forEach((key, n) => {
-                        const aAddedFactors = tAddedFactors[key];
-                        if (aAddedFactors) {
-                            if (key == "_ulti") {
-                                sValues = sValues.replace("GameplayValues", "UltimateValues");
-                            } else {
-                                let [sTemp, sTempPS] = AbilityDescriptionCompose(aAddedFactors, iLevel, bOnlyNowLevelValue);
-                                if (aValues.length == 1 && aValues[0] == 0) {
-                                    if (n == 0) {
-                                        sValues = $.Localize("#dota_ability_variable" + key) + "×" + sTemp;
-                                        sValuesPS = $.Localize("#dota_ability_variable" + key) + "×" + sTempPS;
-                                    } else {
-                                        sValues = sValues + " + " + $.Localize("#dota_ability_variable" + key) + "×" + sTemp;
-                                        sValuesPS = sValuesPS + " + " + $.Localize("#dota_ability_variable" + key) + "×" + sTempPS;
-                                    }
-                                } else {
-                                    sValues = sValues + "[+" + $.Localize("#dota_ability_variable" + key) + "×" + sTemp + "]";
-                                    sValuesPS = sValuesPS + "[+" + $.Localize("#dota_ability_variable" + key) + "×" + sTempPS + "]";
-                                }
-                            }
-                        }
-                    });
-                } else {
-                    let tAddedValues = tResult.tAddedValues;
-                    let bHasOperation = false;
-                    Object.keys(tAddedValues).forEach((key, n) => {
-                        const aAddedValues = tAddedValues[key];
-                        if (aAddedValues) {
-                            let [sTemp, sTempPS] = AbilityDescriptionCompose(aAddedValues, iLevel, bOnlyNowLevelValue);
-                            if (aValues.length == 1 && aValues[0] == 0) {
-                                if (n == 0) {
-                                    sValues = sTemp;
-                                    sValuesPS = sTempPS;
-                                } else {
-                                    bHasOperation = true;
-                                    sValues = sValues + " + " + sTemp;
-                                    sValuesPS = sValuesPS + " + " + sTempPS;
-                                }
-                            } else {
-                                bHasOperation = true;
-                                sValues = sValues + "[+" + sTemp + "]";
-                                sValuesPS = sValuesPS + "[+" + sTempPS + "]";
-                            }
-                        }
-                    });
-                    let [sTemp, sTempPS] = AbilityDescriptionCompose(tResult.aValues, iLevel, bOnlyNowLevelValue);
-                    if (bHasOperation) {
-                        sValues = sValues + " = " + sTemp;
-                        sValuesPS = sValuesPS + " = " + sTempPS;
-                    } else {
-                        sValues = sTemp;
-                        sValuesPS = sTempPS;
-                    }
-                }
-                if (bShowExtra && (tResult.aMinValues || tResult.aMaxValues)) {
-                    if (tResult.aMinValues) {
-                        let [sTemp, sTempPS] = AbilityDescriptionCompose(tResult.aMinValues, iLevel, bOnlyNowLevelValue);
-                        sValues = sValues + "[" + $.Localize("#dota_ability_variable_min") + sTemp + "]";
-                        sValuesPS = sValuesPS + "[" + $.Localize("#dota_ability_variable_min") + sTempPS + "]";
-                    }
-                    if (tResult.aMaxValues) {
-                        let [sTemp, sTempPS] = AbilityDescriptionCompose(tResult.aMaxValues, iLevel, bOnlyNowLevelValue);
-                        sValues = sValues + "[" + $.Localize("#dota_ability_variable_max") + sTemp + "]";
-                        sValuesPS = sValuesPS + "[" + $.Localize("#dota_ability_variable_max") + sTempPS + "]";
-                    }
-                }
-            }
-            sStr = sStr.replace(blockPS, sValuesPS);
-            sStr = sStr.replace(block, sValues);
-        }
+        //     let tResult = GetSpecialValuesWithCalculated(sAbilityName, sValueName, iEntityIndex);
+        //     let aValues: number[];
+        //     switch (sValueName) {
+        //         case "abilitycastrange":
+        //             aValues = StringToValues(tData.AbilityCastRange || "");
+        //             break;
+        //         case "abilitycastpoint":
+        //             aValues = StringToValues(tData.AbilityCastPoint || "");
+        //             break;
+        //         case "abilityduration":
+        //             aValues = StringToValues(tData.AbilityDuration || "");
+        //             break;
+        //         case "abilitychanneltime":
+        //             aValues = StringToValues(tData.AbilityChannelTime || "");
+        //             break;
+        //         case "abilitydamage":
+        //             aValues = StringToValues(tData.AbilityDamage || "");
+        //             break;
+        //         default:
+        //             if (bIsDescription) {
+        //                 aValues = tResult.aValues;
+        //             } else {
+        //                 aValues = tResult.aOriginalValues;
+        //             }
+        //             break;
+        //     }
+        //     if (!bIsDescription) {
+        //         let CalculateSpellDamageTooltip = GetSpecialValueProperty(sAbilityName, sValueName, "CalculateSpellDamageTooltip", iEntityIndex);
+        //         let bCalculateSpellDamage = CalculateSpellDamageTooltip != undefined ? Number(CalculateSpellDamageTooltip) == 1 : sValueName.indexOf("damage") != -1;
+        //         bCalculateSpellDamage = bCalculateSpellDamage && iEntityIndex && Entities.IsValidEntity(iEntityIndex);
+        //         let fSpellAmplify = UnitHelper.GetSpellAmplify(iEntityIndex) * 0.01;
+        //         if (bShowExtra && bCalculateSpellDamage) {
+        //             for (let j = 0; j < aValues.length; j++) {
+        //                 const value = aValues[j];
+        //                 aValues[j] = Math.round(value * (1 + fSpellAmplify) * 100) / 100;
+        //             }
+        //             for (let j = 0; j < tResult.aValues.length; j++) {
+        //                 const value = tResult.aValues[j];
+        //                 tResult.aValues[j] = Math.round(value * (1 + fSpellAmplify) * 100) / 100;
+        //             }
+        //             if (tResult.aMinValues) {
+        //                 for (let j = 0; j < tResult.aMinValues.length; j++) {
+        //                     const value = tResult.aMinValues[j];
+        //                     tResult.aMinValues[j] = Math.round(value * (1 + fSpellAmplify) * 100) / 100;
+        //                 }
+        //             }
+        //             if (tResult.aMaxValues) {
+        //                 for (let j = 0; j < tResult.aMaxValues.length; j++) {
+        //                     const value = tResult.aMaxValues[j];
+        //                     tResult.aMaxValues[j] = Math.round(value * (1 + fSpellAmplify) * 100) / 100;
+        //                 }
+        //             }
+        //             for (const key in tResult.tAddedValues) {
+        //                 const aAddedValues = tResult.tAddedValues[key];
+        //                 if (aAddedValues) {
+        //                     for (let j = 0; j < aAddedValues.length; j++) {
+        //                         const value = aAddedValues[j];
+        //                         aAddedValues[j] = Math.round(value * (1 + fSpellAmplify) * 100) / 100;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     let [sValues, sValuesPS] = AbilityDescriptionCompose(aValues, iLevel, bOnlyNowLevelValue);
+        //     if (!bIsDescription) {
+        //         if (!bShowExtra || !(iEntityIndex && Entities.IsValidEntity(iEntityIndex))) {
+        //             let tAddedFactors = tResult.tAddedFactors;
+        //             Object.keys(tAddedFactors).forEach((key, n) => {
+        //                 const aAddedFactors = tAddedFactors[key];
+        //                 if (aAddedFactors) {
+        //                     if (key == "_ulti") {
+        //                         sValues = sValues.replace("GameplayValues", "UltimateValues");
+        //                     } else {
+        //                         let [sTemp, sTempPS] = AbilityDescriptionCompose(aAddedFactors, iLevel, bOnlyNowLevelValue);
+        //                         if (aValues.length == 1 && aValues[0] == 0) {
+        //                             if (n == 0) {
+        //                                 sValues = $.Localize("#dota_ability_variable" + key) + "×" + sTemp;
+        //                                 sValuesPS = $.Localize("#dota_ability_variable" + key) + "×" + sTempPS;
+        //                             } else {
+        //                                 sValues = sValues + " + " + $.Localize("#dota_ability_variable" + key) + "×" + sTemp;
+        //                                 sValuesPS = sValuesPS + " + " + $.Localize("#dota_ability_variable" + key) + "×" + sTempPS;
+        //                             }
+        //                         } else {
+        //                             sValues = sValues + "[+" + $.Localize("#dota_ability_variable" + key) + "×" + sTemp + "]";
+        //                             sValuesPS = sValuesPS + "[+" + $.Localize("#dota_ability_variable" + key) + "×" + sTempPS + "]";
+        //                         }
+        //                     }
+        //                 }
+        //             });
+        //         } else {
+        //             let tAddedValues = tResult.tAddedValues;
+        //             let bHasOperation = false;
+        //             Object.keys(tAddedValues).forEach((key, n) => {
+        //                 const aAddedValues = tAddedValues[key];
+        //                 if (aAddedValues) {
+        //                     let [sTemp, sTempPS] = AbilityDescriptionCompose(aAddedValues, iLevel, bOnlyNowLevelValue);
+        //                     if (aValues.length == 1 && aValues[0] == 0) {
+        //                         if (n == 0) {
+        //                             sValues = sTemp;
+        //                             sValuesPS = sTempPS;
+        //                         } else {
+        //                             bHasOperation = true;
+        //                             sValues = sValues + " + " + sTemp;
+        //                             sValuesPS = sValuesPS + " + " + sTempPS;
+        //                         }
+        //                     } else {
+        //                         bHasOperation = true;
+        //                         sValues = sValues + "[+" + sTemp + "]";
+        //                         sValuesPS = sValuesPS + "[+" + sTempPS + "]";
+        //                     }
+        //                 }
+        //             });
+        //             let [sTemp, sTempPS] = AbilityDescriptionCompose(tResult.aValues, iLevel, bOnlyNowLevelValue);
+        //             if (bHasOperation) {
+        //                 sValues = sValues + " = " + sTemp;
+        //                 sValuesPS = sValuesPS + " = " + sTempPS;
+        //             } else {
+        //                 sValues = sTemp;
+        //                 sValuesPS = sTempPS;
+        //             }
+        //         }
+        //         if (bShowExtra && (tResult.aMinValues || tResult.aMaxValues)) {
+        //             if (tResult.aMinValues) {
+        //                 let [sTemp, sTempPS] = AbilityDescriptionCompose(tResult.aMinValues, iLevel, bOnlyNowLevelValue);
+        //                 sValues = sValues + "[" + $.Localize("#dota_ability_variable_min") + sTemp + "]";
+        //                 sValuesPS = sValuesPS + "[" + $.Localize("#dota_ability_variable_min") + sTempPS + "]";
+        //             }
+        //             if (tResult.aMaxValues) {
+        //                 let [sTemp, sTempPS] = AbilityDescriptionCompose(tResult.aMaxValues, iLevel, bOnlyNowLevelValue);
+        //                 sValues = sValues + "[" + $.Localize("#dota_ability_variable_max") + sTemp + "]";
+        //                 sValuesPS = sValuesPS + "[" + $.Localize("#dota_ability_variable_max") + sTempPS + "]";
+        //             }
+        //         }
+        //     }
+        //     sStr = sStr.replace(blockPS, sValuesPS);
+        //     sStr = sStr.replace(block, sValues);
+        // }
         return sStr;
     }
     export function GetLevelCooldown(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        GameEvents.SendEventClientSide("custom_get_ability_cooldown", {
-            ability_ent_index: iEntityIndex,
+        GameEvents.SendEventClientSide(Call_AbilityFunc, {
+            ability_entindex: iEntityIndex,
             level: iLevel,
+            key_name: "cool_down"
         });
         let iCasterIndex = Abilities.GetCaster(iEntityIndex);
-        let iAbilityEntIndex = Entities.GetAbilityByName(iCasterIndex, "unit_state");
+        let iAbilityEntIndex = Entities.GetAbilityByName(iCasterIndex, AbilityPropertyTool);
         if (iAbilityEntIndex != -1) {
             let sCooldown = Abilities.GetAbilityTextureName(iAbilityEntIndex);
             if (sCooldown == "") {
                 let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
-                let tAbility = CustomUIConfig.AbilitiesKv[sAbilityName];
-                let tItem = CustomUIConfig.ItemsKv[sAbilityName];
-                let tData = tAbility || tItem;
+                let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
                 if (tData) {
                     if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
                     let aCooldowns = StringToValues(tData.AbilityCooldown || "");
@@ -747,9 +777,10 @@ export module AbilityHelper {
         return 0;
     };
     export function GetLevelManaCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        GameEvents.SendEventClientSide("custom_get_ability_mana_cost", {
-            ability_ent_index: iEntityIndex,
+        GameEvents.SendEventClientSide(Call_AbilityFunc, {
+            ability_entindex: iEntityIndex,
             level: iLevel,
+            key_name: "mana_cost",
         });
         let iCasterIndex = Abilities.GetCaster(iEntityIndex);
         let iAbilityEntIndex = Entities.GetAbilityByName(iCasterIndex, AbilityPropertyTool);
@@ -757,9 +788,7 @@ export module AbilityHelper {
             let sManaCost = Abilities.GetAbilityTextureName(iAbilityEntIndex);
             if (sManaCost == "") {
                 let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
-                let tAbility = CustomUIConfig.AbilitiesKv[sAbilityName];
-                let tItem = CustomUIConfig.ItemsKv[sAbilityName];
-                let tData = tAbility || tItem;
+                let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
                 if (tData) {
                     if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
                     let aManaCosts = StringToValues(tData.AbilityManaCost || "");
@@ -773,8 +802,58 @@ export module AbilityHelper {
         }
         return 0;
     };
-
-
+    export function GetLevelGoldCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
+        GameEvents.SendEventClientSide(Call_AbilityFunc, {
+            ability_entindex: iEntityIndex,
+            level: iLevel,
+            key_name: "gold_cost",
+        });
+        let iCasterIndex = Abilities.GetCaster(iEntityIndex);
+        let iAbilityEntIndex = Entities.GetAbilityByName(iCasterIndex, AbilityPropertyTool);
+        if (iAbilityEntIndex != -1) {
+            let sGoldCost = Abilities.GetAbilityTextureName(iAbilityEntIndex);
+            if (sGoldCost == "") {
+                let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
+                let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
+                if (tData) {
+                    if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
+                    let aGoldCosts = StringToValues(tData.AbilityGoldCost || "");
+                    if (iLevel >= 0 && aGoldCosts.length > 0) {
+                        return aGoldCosts[Math.min(iLevel, aGoldCosts.length - 1)];
+                    }
+                }
+                return 0;
+            }
+            return Number(sGoldCost);
+        }
+        return 0;
+    };
+    export function GetLevelEnergyCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
+        GameEvents.SendEventClientSide(Call_AbilityFunc, {
+            ability_entindex: iEntityIndex,
+            level: iLevel,
+            key_name: "energy_cost",
+        });
+        let iCasterIndex = Abilities.GetCaster(iEntityIndex);
+        let iAbilityEntIndex = Entities.GetAbilityByName(iCasterIndex, AbilityPropertyTool);
+        if (iAbilityEntIndex != -1) {
+            let sEnergyCost = Abilities.GetAbilityTextureName(iAbilityEntIndex);
+            if (sEnergyCost == "") {
+                let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
+                let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
+                if (tData) {
+                    if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
+                    let aEnergyCosts = StringToValues(tData.AbilityEnergyCost || "");
+                    if (iLevel >= 0 && aEnergyCosts.length > 0) {
+                        return aEnergyCosts[Math.min(iLevel, aEnergyCosts.length - 1)];
+                    }
+                }
+                return 0;
+            }
+            return Number(sEnergyCost);
+        }
+        return 0;
+    };
 
 
 
@@ -935,4 +1014,82 @@ export module UnitHelper {
     export function GetHealthBarHeight(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetHealthBarHeight")), -1);
     };
+}
+
+
+
+export module ItemHelper {
+    export function GetItemValue(sItemName: string, sKeyName: string) {
+        let tItemKeyValues = KVHelper.KVItems()[sItemName];
+        if (tItemKeyValues) {
+            return tItemKeyValues[sKeyName];
+        }
+        return;
+    }
+
+    export function GetItemCost(sItemName: string) {
+        return Number(GetItemValue(sItemName, "ItemCost")) || 0;
+    }
+
+    export function GetItemRarity(sItemName: string) {
+        let iRarity = GetItemValue(sItemName, "Rarity");
+        if (iRarity == undefined || iRarity == null) {
+            return -1;
+        }
+        return iRarity;
+    }
+
+    export function GetItemRecipes(sItemName: string) {
+        let aList = [];
+        let sItemRecipe = GetItemValue(sItemName, "ItemRecipe");
+        if (typeof sItemRecipe == "string") {
+            sItemRecipe = sItemRecipe.replace(/\s/g, "");
+            let a = sItemRecipe.split(/\|/g);
+            for (let i = 0; i < a.length; i++) {
+                let _a = a[i].split(/\+/g);
+                let l = [];
+                for (let j = 0; j < _a.length; j++) {
+                    l.push(_a[j]);
+                }
+                aList.push(l);
+            }
+        }
+        return aList;
+    }
+
+    export function GetItemRelatedRecipes(sItemName: string) {
+        let aList = [];
+        let ItemsKv = KVHelper.KVItems()
+        for (const _sItemName in ItemsKv) {
+            let aRecipes = GetItemRecipes(_sItemName);
+            if (aRecipes.length > 0) {
+                for (let i = 0; i < aRecipes.length; i++) {
+                    const aRecipe = aRecipes[i];
+                    if (aRecipe.indexOf(sItemName) != -1) {
+                        aList.push(aRecipe);
+                    }
+                }
+            }
+        }
+        return aList;
+    }
+
+    export function GetItemRelatedRecipesWithResults(sItemName: string) {
+        let aList = [];
+        let aResults = [];
+        let ItemsKv = KVHelper.KVItems()
+        for (const _sItemName in ItemsKv) {
+            let aRecipes = GetItemRecipes(_sItemName);
+            if (aRecipes.length > 0) {
+                for (let i = 0; i < aRecipes.length; i++) {
+                    const aRecipe = aRecipes[i];
+                    if (aRecipe.indexOf(sItemName) != -1) {
+                        aList.push(aRecipe);
+                        aResults.push(_sItemName);
+                    }
+                }
+            }
+        }
+        return [aList, aResults];
+    }
 }

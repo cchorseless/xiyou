@@ -87,7 +87,9 @@ export module KVHelper {
     }
 
     export function GetAbilityOrItemData(abilityitemname: string) {
-        return (GameUI.CustomUIConfig() as any).KV_Abilitys as KV_AllAbilitys
+        let dataability = KVAbilitys()[abilityitemname as keyof KV_AllAbilitys];
+        let dataitem = KVItems()[abilityitemname as keyof KV_AllItems];
+        return [Boolean(dataitem), dataability || dataitem] as [boolean, any];
     }
 
 

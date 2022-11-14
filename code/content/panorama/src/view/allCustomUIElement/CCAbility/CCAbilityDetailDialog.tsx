@@ -3,13 +3,12 @@ import React, { useState } from "react";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCPanel } from "../CCPanel/CCPanel";
-import { AbilityHelper } from "../../../helper/DotaEntityHelper";
+import { AbilityHelper, ItemHelper, UnitHelper } from "../../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
-
+import { KVHelper } from "../../../helper/KVHelper";
+import "./CCAbilityDetailDialog.less";
 interface ICCAbilityDetailDialog extends NodePropsData {
     abilityname: string,
-    sheetConfig: any,
-    isItem: boolean,
     entityindex?: EntityIndex,
     inventoryslot?: number,
     level?: number,
@@ -27,9 +26,8 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
     }
 
     getConfigData(key: string) {
-        const sheetConfig = this.props.sheetConfig;
         const abilityname = this.props.abilityname;
-        const tData = sheetConfig[abilityname] || {};
+        const [isitem, tData] = KVHelper.GetAbilityOrItemData(abilityname) || {};
         return tData[key]
     }
 
@@ -49,18 +47,14 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
     toggleClass: { [k: string]: boolean } = {}
 
     render() {
-        Entities.GetAbilityByName
-        Abilities.GetAbilityTextureName
         const abilityname = this.props.abilityname;
-        const sheetConfig = this.props.sheetConfig;
+        const [bIsItem, tData] = KVHelper.GetAbilityOrItemData(abilityname) || {};
         const entityindex = this.props.entityindex || -1 as EntityIndex;
         const inventoryslot = this.props.inventoryslot || -1;
         const level = this.props.level || -1;
         const mode = this.props.mode;
         const showextradescription = this.props.showextradescription!;
         const onlynowlevelvalue = this.props.onlynowlevelvalue!;
-        const tData = sheetConfig[abilityname] || {};
-        const bIsItem = this.props.isItem;
         const toggleClass = this.toggleClass;
         const dialogVariables: { [x: string]: any; } = {};
         toggleClass['DescriptionOnly'] = mode == "description_only";
@@ -156,7 +150,7 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
             let sScepterUpgradeDescription = $.Localize("#DOTA_Tooltip_ability_" + abilityname + "_aghanim_description");
             if (sScepterUpgradeDescription != "#DOTA_Tooltip_ability_" + abilityname + "_aghanim_description") {
                 sScepterUpgradeDescription = sScepterUpgradeDescription.replace(/%%/g, "%");
-                sScepterUpgradeDescription = AbilityHelper.ReplaceAbilityValues({ sStr: sScepterUpgradeDescription, sheetConfig: sheetConfig, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+                sScepterUpgradeDescription = AbilityHelper.ReplaceAbilityValues({ sStr: sScepterUpgradeDescription, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
                 dialogVariables['scepter_upgrade_description'] = sScepterUpgradeDescription;
             } else {
                 toggleClass['ScepterUpgradable'] = false;
@@ -179,16 +173,16 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                 sExtraDescription = sExtraDescription + $.Localize("#" + sItemDispelType);
             }
         }
-        sExtraDescription = AbilityHelper.ReplaceAbilityValues({ sStr: sExtraDescription, sheetConfig: sheetConfig, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+        sExtraDescription = AbilityHelper.ReplaceAbilityValues({ sStr: sExtraDescription, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
         dialogVariables['extradescription'] = sExtraDescription;
 
         // 属性
-        let aValueNames = AbilityHelper.GetSpecialNames(sheetConfig, abilityname, entityindex);
+        let aValueNames = AbilityHelper.GetSpecialNames(abilityname, entityindex);
         let sAttributes = "";
         let sExtraAttributes = "";
         for (let i = 0; i < aValueNames.length; i++) {
             const sValueName = aValueNames[i];
-            let bRequiresScepter = (Number(AbilityHelper.GetSpecialValueProperty(sheetConfig, abilityname, sValueName, "RequiresScepter", entityindex)) || 0) == 1;
+            let bRequiresScepter = (Number(AbilityHelper.GetSpecialValueProperty(abilityname, sValueName, "RequiresScepter", entityindex)) || 0) == 1;
             if (bRequiresScepter && entityindex != -1 && !Entities.HasScepter(entityindex)) {
                 continue;
             }
@@ -260,12 +254,12 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                 }
             }
         }
-        sAttributes = AbilityHelper.ReplaceAbilityValues({ sStr: sAttributes, sheetConfig: sheetConfig, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: bIsItem ? iLevel : (iLevel != -1 ? iLevel : 0), iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+        sAttributes = AbilityHelper.ReplaceAbilityValues({ sStr: sAttributes, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: bIsItem ? iLevel : (iLevel != -1 ? iLevel : 0), iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
         dialogVariables['attributes'] = sAttributes;
-        sExtraAttributes = AbilityHelper.ReplaceAbilityValues({ sStr: sExtraAttributes, sheetConfig: sheetConfig, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: bIsItem ? iLevel : (iLevel != -1 ? iLevel : 0), iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+        sExtraAttributes = AbilityHelper.ReplaceAbilityValues({ sStr: sExtraAttributes, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: bIsItem ? iLevel : (iLevel != -1 ? iLevel : 0), iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
         dialogVariables['extra_attributes'] = sExtraAttributes;
         let fCurrentCooldown = iAbilityIndex != -1 && (!bIsEnemy || bIsItem) ? AbilityHelper.GetLevelCooldown(iAbilityIndex) : 0;
-        fCurrentCooldown = AbilityHelper.CalcSpecialValueUpgrade(entityindex, abilityname, "cooldown", fCurrentCooldown);
+        fCurrentCooldown = AbilityHelper.CalcSpecialValueUpgrade(entityindex, abilityname, "cool_down", fCurrentCooldown);
         let fCurrentManaCost = iAbilityIndex != -1 && (!bIsEnemy || bIsItem) ? AbilityHelper.GetLevelManaCost(iAbilityIndex) : 0;
         fCurrentManaCost = AbilityHelper.CalcSpecialValueUpgrade(entityindex, abilityname, "mana_cost", fCurrentManaCost);
         let aCooldowns = AbilityHelper.StringToValues(tData.AbilityCooldown || "");
@@ -286,7 +280,7 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
             fCurrentManaCost = aManaCosts[iLevel - 1] || 0;
         }
 
-        let fCooldownReduction = entityindex != -1 ? Entities.GetCooldownReduction(entityindex) : 0;
+        let fCooldownReduction = entityindex != -1 ? UnitHelper.GetCooldownReduction(entityindex) : 0;
         fCurrentCooldown = FuncHelper.ToFloat(fCurrentCooldown * (1 - fCooldownReduction * 0.01));
 
         // 冷却时间
@@ -333,11 +327,11 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
         toggleClass['UsesAbilityCharges'] = false;
 
         // 物品等级，用中立物品的样式来显示
-        let iNeutralTier = GetItemRarity(abilityname);
+        let iNeutralTier = ItemHelper.GetItemRarity(abilityname);
         if (bIsItem && iNeutralTier != -1) {
-            toggleClass['IsNeutralItem'] = iNeutralTier >= 0;
-            toggleClass['NeutralTier' + (iNeutralTier + 1)] = true;
-            dialogVariables['neutral_item_tier_number'] = iNeutralTier + 1;
+            // toggleClass['IsNeutralItem'] = iNeutralTier >= 0;
+            // toggleClass['NeutralTier' + (iNeutralTier + 1)] = true;
+            // dialogVariables['neutral_item_tier_number'] = iNeutralTier + 1;
         }
 
         if (bIsItem && iAbilityIndex != -1) {
@@ -506,18 +500,16 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                             {(() => {
                                 let sAbilityName = abilityname;
                                 let bIsBook = false;
-
                                 if (bIsItem) {
-                                    let sType = GetCustomItemType(abilityname);
-                                    if (sType == "CUSTOM_ITEM_TYPE_ABILITY_BOOK") {
-                                        let sLinkAbility = GetItemValue<string>(abilityname, "LinkAbility");
-                                        if (typeof sLinkAbility == "string") {
-                                            sAbilityName = sLinkAbility;
-                                            bIsBook = true;
-                                        }
-                                    }
+                                    // let sType = ItemHelper.GetCustomItemType(abilityname);
+                                    // if (sType == "CUSTOM_ITEM_TYPE_ABILITY_BOOK") {
+                                    //     let sLinkAbility = ItemHelper.GetItemValue(abilityname, "LinkAbility");
+                                    //     if (typeof sLinkAbility == "string") {
+                                    //         sAbilityName = sLinkAbility;
+                                    //         bIsBook = true;
+                                    //     }
+                                    // }
                                 }
-
                                 let sAllDescription = "#DOTA_Tooltip_ability_" + sAbilityName + "_Description";
                                 let list: JSX.Element[] = [];
                                 let sAllDescriptionLocalize = $.Localize(sAllDescription);
@@ -529,13 +521,13 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                                     let iOriginalDescriptions = aDescriptions.length;
 
                                     if (entityindex != -1) {
-                                        let aAbilityUpgradesList = GetAbilityUpgradesList(entityindex);
-                                        for (let index = 0; index < aAbilityUpgradesList.length; index++) {
-                                            let tData = aAbilityUpgradesList[index];
-                                            if (tData.type == AbilityUpgradeType.ABILITY_UPGRADES_TYPE_ABILITY_MECHANICS && tData.ability_name == sAbilityName) {
-                                                aDescriptions.push($.Localize("#dota_tooltip_ability_mechanics_" + tData.ability_name + "_" + tData.description));
-                                            }
-                                        }
+                                        // let aAbilityUpgradesList = GetAbilityUpgradesList(entityindex);
+                                        // for (let index = 0; index < aAbilityUpgradesList.length; index++) {
+                                        //     let tData = aAbilityUpgradesList[index];
+                                        //     if (tData.type == AbilityHelper.AbilityUpgradeType.ABILITY_UPGRADES_TYPE_ABILITY_MECHANICS && tData.ability_name == sAbilityName) {
+                                        //         aDescriptions.push($.Localize("#dota_tooltip_ability_mechanics_" + tData.ability_name + "_" + tData.description));
+                                        //     }
+                                        // }
                                     }
 
                                     this.__root__.current?.RemoveClass("DevouredFirstLine");
@@ -570,7 +562,7 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                                         sDescription = sDescription.replace(regexp, "");
                                         sDescription = sDescription.replace(/%%/g, "%");
 
-                                        sDescription = AbilityHelper.ReplaceAbilityValues({ sStr: sDescription, sheetConfig: sheetConfig, bShowExtra: showextradescription, sAbilityName: sAbilityName, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+                                        sDescription = AbilityHelper.ReplaceAbilityValues({ sStr: sDescription, bShowExtra: showextradescription, sAbilityName: sAbilityName, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
 
                                         list.push(
                                             <Label key={list.length} className={CSSHelper.ClassMaker({ 'Active': bIsActive && iLine == iActiveDescriptionLine, 'AbilityMechanics': i >= iOriginalDescriptions })} text={sDescription} html={true} />
@@ -599,7 +591,7 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                                         sExtraEffect = sExtraEffect.replace(regexp, "");
                                         sExtraEffect = sExtraEffect.replace(/%%/g, "%");
 
-                                        sExtraEffect = AbilityHelper.ReplaceAbilityValues({ sStr: sExtraEffect, sheetConfig: sheetConfig, bShowExtra: showextradescription, sAbilityName: sAbilityName, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+                                        sExtraEffect = AbilityHelper.ReplaceAbilityValues({ sStr: sExtraEffect, bShowExtra: showextradescription, sAbilityName: sAbilityName, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
 
                                         list.push(
                                             <Label key={list.length} className={CSSHelper.ClassMaker({ 'ExtraEffect': true })} text={sExtraEffect} html={true} />

@@ -38,7 +38,7 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
                         [1, 2, 3, 6].map((a, i) => {
                             let abilityname = cardinfo["Ability" + a] as string;
                             if (abilityname && abilityname != "ability_empty") {
-                                return <CCAbilityIcon key={"" + i} abilityname={abilityname} />
+                                return <CCAbilityIcon key={"" + i} abilityname={abilityname} tipsInfo={{ level: 1 }} />
                             }
                         })
                     }

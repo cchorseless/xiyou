@@ -1,10 +1,10 @@
 import React from "react";
+import { KVHelper } from "../../helper/KVHelper";
 import { CCBaseButton } from "../allCustomUIElement/CCButton/CCButton";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
 interface IDebugTool_SectPicker {
-    sheetConfig: any;
     /** 技能名列表 */
     abilityNames?: string[];
     /** 窗口标题 */
@@ -51,7 +51,7 @@ export class CCDebugTool_SectPicker extends CCPanel<IDebugTool_SectPicker> {
                                     return;
                                 }
                             }
-                            const abilityUpgradeInfo = this.props.sheetConfig[abilityUpgradeID];
+                            const abilityUpgradeInfo = KVHelper.KVAbilitys()[abilityUpgradeID];
                             return (
                                 <CCBaseButton className="CC_DebugTool_AbilityPickerItem" key={index + ""} width="64px" flowChildren="down"
                                     onactivate={self => { }}

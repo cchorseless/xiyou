@@ -5,13 +5,24 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { CCLabel } from "../CCLabel/CCLabel";
 import { CCEffectShine } from "../CCEffect/CCEffectShine";
+import { CCAbilityDetailDialog } from "./CCAbilityDetailDialog";
+import { CCAbilityInfoDialog } from "./CCAbilityInfoDialog";
+
+
 
 import "./CCAbilityIcon.less";
 
 interface ICCAbilityIcon extends DOTAAbilityImageAttributes {
     abilityname: string;
     castEntityIndex?: EntityIndex;
-    rarity?: Rarity
+    rarity?: Rarity;
+    tipsInfo?: {
+        level?: number,
+        mode?: "description_only" | "show_scepter_only" | "normal",
+        showextradescription?: boolean,
+        onlynowlevelvalue?: boolean
+    };
+
 }
 
 
@@ -21,7 +32,25 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
     abilityImage: React.RefObject<AbilityImage>;
     static defaultProps = {
         rarity: "A",
-        castEntityIndex: -1
+        castEntityIndex: -1,
+        showTips: true,
+    }
+
+    defaultStyle() {
+        if (this.props.tipsInfo) {
+            let obj = Object.assign({
+                abilityname: this.props.abilityname,
+                entityindex: this.props.castEntityIndex,
+            }, this.props.tipsInfo)
+            return {
+                dialogTooltip: {
+                    tipTypeClass: CCAbilityInfoDialog,
+                    props: obj,
+                    layoutleftRight: true
+                }
+            }
+        }
+        return {}
     }
     abilityindex: AbilityEntityIndex;
     onInitUI() {
