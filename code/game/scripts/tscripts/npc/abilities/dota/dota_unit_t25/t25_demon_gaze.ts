@@ -15,7 +15,7 @@ import { LogHelper } from "../../../../helper/LogHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { GameSetting } from "../../../../GameSetting";
 import { GameEnum } from "../../../../GameEnum";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 
 @registerAbility()

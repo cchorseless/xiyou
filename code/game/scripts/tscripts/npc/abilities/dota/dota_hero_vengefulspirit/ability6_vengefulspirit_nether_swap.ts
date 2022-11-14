@@ -8,7 +8,7 @@ import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifie
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_building } from "../../../modifier/modifier_building";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { ability1_vengefulspirit_magic_missile } from "./ability1_vengefulspirit_magic_missile";
 import { ability2_vengefulspirit_wave_of_terror } from "./ability2_vengefulspirit_wave_of_terror";
 
@@ -22,24 +22,24 @@ export class ability6_vengefulspirit_nether_swap extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_vengefulspirit_nether_swap = Data_vengefulspirit_nether_swap;
     Init() {
-                this.SetDefaultSpecialValue("duration", 7);
+        this.SetDefaultSpecialValue("duration", 7);
         this.SetDefaultSpecialValue("damage_factor", 100);
-        this.SetDefaultSpecialValue("bonus_damage_percent", [6,7,8,9,10,11]);
+        this.SetDefaultSpecialValue("bonus_damage_percent", [6, 7, 8, 9, 10, 11]);
         this.SetDefaultSpecialValue("max_bonus_damage_percent", 60);
         this.SetDefaultSpecialValue("radius", 600);
         this.SetDefaultSpecialValue("double_damage", 2);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("duration", 7);
+        this.SetDefaultSpecialValue("duration", 7);
         this.SetDefaultSpecialValue("damage_factor", 100);
-        this.SetDefaultSpecialValue("bonus_damage_percent", [1,2,3,4,5,6]);
+        this.SetDefaultSpecialValue("bonus_damage_percent", [1, 2, 3, 4, 5, 6]);
         this.SetDefaultSpecialValue("max_bonus_damage_percent", 60);
         this.SetDefaultSpecialValue("radius", 600);
         this.SetDefaultSpecialValue("double_damage", 2);
 
-        }
+    }
 
 
 

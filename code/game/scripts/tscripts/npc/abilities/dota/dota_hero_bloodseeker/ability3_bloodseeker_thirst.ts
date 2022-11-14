@@ -7,7 +7,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 /** dota原技能数据 */
 export const Data_bloodseeker_thirst = { "ID": "5017", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "min_bonus_pct": "75" }, "02": { "var_type": "FIELD_INTEGER", "bonus_movement_speed": "14 24 34 44", "LinkedSpecialBonus": "special_bonus_unique_bloodseeker_4" }, "03": { "var_type": "FIELD_INTEGER", "hero_kill_heal": "10 15 20 25" }, "04": { "var_type": "FIELD_INTEGER", "creep_kill_heal": "11 14 17 20" }, "05": { "var_type": "FIELD_INTEGER", "half_bonus_aoe": "300" }, "06": { "var_type": "FIELD_INTEGER", "max_bonus_pct": "25" }, "07": { "var_type": "FIELD_INTEGER", "visibility_threshold_pct": "25" }, "08": { "var_type": "FIELD_INTEGER", "invis_threshold_pct": "25" }, "09": { "var_type": "FIELD_FLOAT", "linger_duration": "4.0" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };
 

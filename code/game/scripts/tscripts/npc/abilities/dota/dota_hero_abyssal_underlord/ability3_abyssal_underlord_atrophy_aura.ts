@@ -5,7 +5,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_abyssal_underlord_atrophy_aura = { "ID": "5615", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "AbilityCastRange": "900", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "900" }, "02": { "var_type": "FIELD_INTEGER", "damage_reduction_pct": "5 15 25 35" }, "03": { "var_type": "FIELD_INTEGER", "bonus_damage_from_creep": "2 4 6 8" }, "04": { "var_type": "FIELD_INTEGER", "bonus_damage_from_hero": "30 35 40 45" }, "05": { "var_type": "FIELD_FLOAT", "bonus_damage_duration": "30 45 60 75" }, "06": { "var_type": "FIELD_FLOAT", "bonus_damage_duration_scepter": "70 80 90 100", "RequiresScepter": "1" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };

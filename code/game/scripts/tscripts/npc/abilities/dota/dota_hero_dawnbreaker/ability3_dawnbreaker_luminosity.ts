@@ -9,7 +9,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { EntityHelper } from "../../../../helper/EntityHelper";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_dawnbreaker_luminosity = { "ID": "7918", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_FRIENDLY", "SpellImmunityType": "SPELL_IMMUNITY_ALLIES_YES", "AbilityCastAnimation": "ACT_DOTA_OVERRIDE_ABILITY_3", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastPoint": "0.0 0.0 0.0 0.0", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "heal_radius": "650" }, "02": { "var_type": "FIELD_INTEGER", "heal_pct": "30 40 50 60" }, "03": { "var_type": "FIELD_INTEGER", "bonus_damage": "120 140 160 180" }, "04": { "var_type": "FIELD_INTEGER", "attack_count": "3" }, "05": { "var_type": "FIELD_FLOAT", "proc_cooldown": "0.00" }, "06": { "var_type": "FIELD_INTEGER", "heal_from_creeps": "50" }, "07": { "var_type": "FIELD_INTEGER", "allied_healing_pct": "35" } } };

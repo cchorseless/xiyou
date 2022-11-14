@@ -10,7 +10,7 @@ import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_poison } from "../../../modifier/effect/modifier_poison";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 import { ability1_venomancer_venomous_gale } from "./ability1_venomancer_venomous_gale";
 
@@ -24,29 +24,29 @@ export class ability6_venomancer_poison_nova extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_venomancer_poison_nova = Data_venomancer_poison_nova;
     Init() {
-                this.SetDefaultSpecialValue("radius", 830);
+        this.SetDefaultSpecialValue("radius", 830);
         this.SetDefaultSpecialValue("duration", 5);
-        this.SetDefaultSpecialValue("poison_count_per_sec_agi", [3,3.5,4,4.5,5,6]);
+        this.SetDefaultSpecialValue("poison_count_per_sec_agi", [3, 3.5, 4, 4.5, 5, 6]);
         this.SetDefaultSpecialValue("count_multiple_scepter", 2);
         this.SetDefaultSpecialValue("extend_duration", 3);
         this.SetDefaultSpecialValue("extend_radius", 325);
-        this.SetDefaultSpecialValue("start_radius", [255,255,255]);
+        this.SetDefaultSpecialValue("start_radius", [255, 255, 255]);
         this.SetDefaultSpecialValue("speed", 500);
         this.SetDefaultSpecialValue("poison_ticktime_pct", -30);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("radius", 830);
+        this.SetDefaultSpecialValue("radius", 830);
         this.SetDefaultSpecialValue("duration", 5);
-        this.SetDefaultSpecialValue("poison_count_per_sec_agi", [0.3,0.6,0.9,1.2,1.5,2.0]);
+        this.SetDefaultSpecialValue("poison_count_per_sec_agi", [0.3, 0.6, 0.9, 1.2, 1.5, 2.0]);
         this.SetDefaultSpecialValue("count_multiple_scepter", 2);
         this.SetDefaultSpecialValue("extend_duration", 3);
         this.SetDefaultSpecialValue("extend_radius", 325);
-        this.SetDefaultSpecialValue("start_radius", [255,255,255]);
+        this.SetDefaultSpecialValue("start_radius", [255, 255, 255]);
         this.SetDefaultSpecialValue("speed", 500);
 
-        }
+    }
 
 
     radius: number;
@@ -85,7 +85,7 @@ export class ability6_venomancer_poison_nova extends BaseAbility_Plus {
             }
         )
         EmitSoundOnLocationWithCaster(this.vCastPos, ResHelper.GetSoundReplacement("Hero_Venomancer.PoisonNova", hCaster), hCaster)
-         modifier_venomancer_6_particle_venomancer_poison_nova_cast.apply( hCaster , hCaster, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION }) 
+        modifier_venomancer_6_particle_venomancer_poison_nova_cast.apply(hCaster, hCaster, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
     }
     damageTargets() {
         let hCaster = this.GetCasterPlus()
@@ -97,7 +97,7 @@ export class ability6_venomancer_poison_nova extends BaseAbility_Plus {
                     table.insert(this.tTargetsRecord, hTarget)
                     modifier_poison.Poison(hTarget, hCaster, this, modifier_poison.GetPoisonStackCount(hTarget) * hCaster.GetTalentValue("special_bonus_unique_venomancer_custom_7") * 0.01)
                     EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Venomancer.PoisonNovaImpact", hCaster), hCaster)
-                     modifier_venomancer_6_debuff.apply( hTarget , hCaster, this, { duration: duration }) 
+                    modifier_venomancer_6_debuff.apply(hTarget, hCaster, this, { duration: duration })
                 }
             }
         }
@@ -240,10 +240,10 @@ export class modifier_venomancer_6_debuff extends BaseModifier_Plus {
             let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), null, this.extend_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false)
             for (let hTarget of (tTarget)) {
                 if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
-                    let hModifier  = modifier_venomancer_6_debuff.findIn(  hTarget ) as BaseModifier_Plus;
+                    let hModifier = modifier_venomancer_6_debuff.findIn(hTarget) as BaseModifier_Plus;
                     if (GameFunc.IsValid(hModifier)) {
                         hModifier.SetDuration(hModifier.GetRemainingTime() + this.extend_duration, true)
-                         modifier_venomancer_6_particle_venomancer_3_infect.apply( hTarget , hParent, this.GetAbilityPlus(), { duration: modifier_venomancer_6_debuff.LOCAL_PARTICLE_MODIFIER_DURATION }) 
+                        modifier_venomancer_6_particle_venomancer_3_infect.apply(hTarget, hParent, this.GetAbilityPlus(), { duration: modifier_venomancer_6_debuff.LOCAL_PARTICLE_MODIFIER_DURATION })
                     }
                 }
             }

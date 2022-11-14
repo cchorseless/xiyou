@@ -398,10 +398,9 @@ const all_kv_to_ts = async (singleFile = null) => {
             KvAllInterface_s += file.replace(kv_path, '".').replace(ext, '" \n');
             if (KvAllInterface_s_1.length == 0) {
                 KvAllInterface_s_1 += "export interface KvAllInterface extends ";
-            KvAllInterface_s_1 +=  '\n' + __ss + ".OBJ_0_1";
-            }
-            else {
-            KvAllInterface_s_1 +=  ',\n' + __ss + ".OBJ_0_1";
+                KvAllInterface_s_1 += '\n' + __ss + ".OBJ_0_1";
+            } else {
+                KvAllInterface_s_1 += ',\n' + __ss + ".OBJ_0_1";
             }
             let kv = keyvalues.decode(fs.readFileSync(file, "utf-8"));
             Object.assign(KvAllDATA, kv);
@@ -415,7 +414,43 @@ const all_kv_to_ts = async (singleFile = null) => {
         KvAllInterface_s_1 = "{";
     }
     KvAllInterface_s += KvAllInterface_s_1 + "{ }\n";
-    let kvconfigDATA = `export const KV_DATA  =  ${JSON.stringify(KvAllDATA)} as any ; `;
+    let kvconfigDATA = `export const KV_DATA  =  ${JSON.stringify(KvAllDATA)} as any ; \n`;
+    if (clientkvbundle[0]) {
+        kvconfigDATA += "export const KV_Abilitys  = Object.assign({} ";
+        KvAllInterface_s += "export type KV_AllAbilitys = {}";
+        clientkvbundle[0].forEach(s => {
+            if (KvAllInterface_s.includes(s)) {
+                kvconfigDATA += `,KV_DATA.${s}`;
+                KvAllInterface_s += `| ${s}.OBJ_1_1 `;
+            }
+        })
+        kvconfigDATA += ");\n"
+        KvAllInterface_s += ";\n"
+    }
+    if (clientkvbundle[1]) {
+        kvconfigDATA += "export const KV_Items  = Object.assign({} ";
+        KvAllInterface_s += "export type KV_AllItems  = {}";
+        clientkvbundle[1].forEach(s => {
+            if (KvAllInterface_s.includes(s)) {
+                kvconfigDATA += `,KV_DATA.${s}`;
+                KvAllInterface_s += `|${s}.OBJ_1_1 `;
+            }
+        })
+        kvconfigDATA += ");\n"
+        KvAllInterface_s += ";\n"
+    }
+    if (clientkvbundle[2]) {
+        kvconfigDATA += "export const KV_Units  = Object.assign({} ";
+        KvAllInterface_s += "export type KV_AllUnits  = {}";
+        clientkvbundle[2].forEach(s => {
+            if (KvAllInterface_s.includes(s)) {
+                kvconfigDATA += `,KV_DATA.${s}`;
+                KvAllInterface_s += `|${s}.OBJ_1_1 `;
+            }
+        })
+        kvconfigDATA += ");\n"
+        KvAllInterface_s += ";\n"
+    }
     // if (!fs.existsSync(KvAllInterface_UI)) fs.mkdirSync(KvAllInterface_UI,);
     fs.writeFileSync(KvAllInterface_UI, Top_Str + KvAllInterface_s);
     // if (!fs.existsSync(KvAllInterface_UI_Data)) fs.mkdirSync(KvAllInterface_UI_Data);
@@ -494,13 +529,43 @@ const all_kv_to_ts = async (singleFile = null) => {
 };
 module.exports.all_kv_to_ts = all_kv_to_ts;
 
+const clientkvbundle = [];
+const client_kv_bundle = () => {
+    const abilityskv = "game/scripts/npc/npc_abilities_custom.txt";
+    const itemskv = "game/scripts/npc/npc_items_custom.txt";
+    const unitskv = "game/scripts/npc/npc_units_custom.txt";
+    clientkvbundle.length = 0;
+    [abilityskv, itemskv, unitskv].forEach(file => {
+        let kv_s = fs.readFileSync(file, "utf8");
+        let kvnamelist = [];
+        clientkvbundle.push(kvnamelist);
+        // 处理#base
+        let repObj = kv_s.match(/#base(.+)([\r\n|\n])/gi);
+        if (repObj) {
+            for (let reps of repObj) {
+                if (reps) {
+                    kvnamelist.push(path.basename(reps).replace(path.extname(reps), ""))
+                }
+            }
+        } else {
+            if (kv_s.indexOf("#base") >= 0) {
+                throw Error("#base 没有匹配到");
+            }
+        }
+    })
+    console.log(clientkvbundle);
+}
+
+
 (async () => {
     var args = process.argv.splice(2);
+    client_kv_bundle();
     await all_kv_to_ts();
     program.option("-w, --watch", "Watch Mode").parse(process.argv);
     if (args.indexOf("--watch") > -1) {
         console.log("start with watch mode");
         chokidar.watch(kv_path).on("change", (file) => {
+            client_kv_bundle();
             all_kv_to_ts();
         });
     }

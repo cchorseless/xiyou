@@ -8,7 +8,7 @@
 import { LogHelper } from "../../helper/LogHelper";
 import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "./modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../propertystat/modifier_event";
 @registerModifier()
 export class modifier_activity extends BaseModifier_Plus {
     params: ModifierTable;

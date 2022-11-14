@@ -13,7 +13,7 @@ import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
 import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 import { LogHelper } from "../../../../helper/LogHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { GameEnum } from "../../../../GameEnum";
 
 
@@ -90,7 +90,7 @@ export class modifier_t4_frost extends BaseModifier_Plus {
             return
         }
         if (params.attacker == this.GetParentPlus()) {
-             modifier_t4_frost_projectile.remove( params.attacker );
+            modifier_t4_frost_projectile.remove(params.attacker);
 
             if (!BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
                 table.insert(this.records, params.record)

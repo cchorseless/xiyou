@@ -1,5 +1,5 @@
 import React from "react";
-import { AbilityHelper } from "../../../helper/AbilityHelper";
+import { AbilityHelper } from "../../../helper/DotaEntityHelper";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { CCLevelxp } from "../CCLevelxp/CCLevelxp";

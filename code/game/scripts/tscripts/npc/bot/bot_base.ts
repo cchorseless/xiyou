@@ -6,7 +6,6 @@ import { ET } from "../../rules/Entity/Entity";
 import { PlayerState } from "../../rules/System/Player/PlayerState";
 import { BaseNpc_Hero_Plus } from "../entityPlus/BaseNpc_Hero_Plus";
 import { registerUnit } from "../entityPlus/Base_Plus";
-import { modifier_property } from "../modifier/modifier_property";
 import { modifier_task } from "../modifier/modifier_task";
 import { modifier_test } from "../modifier/modifier_test";
 @registerUnit()

@@ -9,7 +9,7 @@ import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifie
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_arc_warden_flux = { "ID": "5677", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "FightRecapLevel": "1", "AbilitySound": "Hero_ArcWarden.Flux.Target", "AbilityCastRange": "500 600 700 800", "AbilityCastPoint": "0.3 0.3 0.3 0.3", "AbilityCooldown": "16.0", "AbilityManaCost": "75", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "6.0", "LinkedSpecialBonus": "special_bonus_unique_arc_warden_2" }, "02": { "var_type": "FIELD_INTEGER", "damage_per_second": "15 30 45 60" }, "03": { "var_type": "FIELD_INTEGER", "search_radius": "225" }, "04": { "var_type": "FIELD_FLOAT", "think_interval": "0.5" }, "05": { "var_type": "FIELD_INTEGER", "move_speed_slow_pct": "20 30 40 50" }, "06": { "var_type": "FIELD_INTEGER", "abilitycastrange": "", "LinkedSpecialBonus": "special_bonus_unique_arc_warden_5" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };

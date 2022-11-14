@@ -9,7 +9,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { ability3_earthshaker_aftershock } from "./ability3_earthshaker_aftershock";
 /** dota原技能数据 */
 export const Data_earthshaker_fissure = { "ID": "5023", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES_STRONG", "FightRecapLevel": "1", "AbilitySound": "Hero_EarthShaker.Fissure", "HasShardUpgrade": "1", "AbilityCastRange": "1400", "AbilityCastPoint": "0.69 0.69 0.69 0.69", "AbilityCooldown": "21 19 17 15", "AbilityDamage": "110 160 210 260", "AbilityManaCost": "110 130 150 170", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "fissure_range": "1400", "LinkedSpecialBonus": "special_bonus_unique_earthshaker_3" }, "02": { "var_type": "FIELD_FLOAT", "fissure_duration": "6.5 7 7.5 8.0" }, "03": { "var_type": "FIELD_INTEGER", "fissure_radius": "225" }, "04": { "var_type": "FIELD_FLOAT", "stun_duration": "1.0 1.25 1.5 1.75" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };

@@ -14,7 +14,7 @@ import { modifier_particle, modifier_particle_thinker } from "../../../modifier/
 import { LogHelper } from "../../../../helper/LogHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { modifier_bleeding } from "../../../modifier/effect/modifier_bleeding";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { GameEnum } from "../../../../GameEnum";
 
 

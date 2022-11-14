@@ -8,7 +8,7 @@ import { BaseModifier_Plus, registerProp } from "../entityPlus/BaseModifier_Plus
 import { BaseNpc_Hero_Plus } from "../entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../entityPlus/BaseNpc_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "./modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../propertystat/modifier_event";
 
 @registerModifier()
 export class modifier_task extends BaseModifier_Plus {

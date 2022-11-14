@@ -7,7 +7,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_templar_assassin_refraction = { "ID": "5194", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE", "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "AbilitySound": "Hero_TemplarAssassin.Refraction", "AbilityCastPoint": "0.0 0.0 0.0 0.0", "AbilityCooldown": "17.0 17.0 17.0 17.0", "AbilityManaCost": "100", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "instances": "3 4 5 6", "LinkedSpecialBonus": "special_bonus_unique_templar_assassin" }, "02": { "var_type": "FIELD_INTEGER", "bonus_damage": "25 50 75 100" }, "03": { "var_type": "FIELD_INTEGER", "damage_threshold": "5 5 5 5" }, "04": { "var_type": "FIELD_FLOAT", "duration": "17.0 17.0 17.0 17.0" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };

@@ -7,7 +7,7 @@ import { ResHelper } from "../../helper/ResHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { BaseModifier_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "./modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../propertystat/modifier_event";
 
 @registerModifier()
 export class modifier_portal extends BaseModifier_Plus {

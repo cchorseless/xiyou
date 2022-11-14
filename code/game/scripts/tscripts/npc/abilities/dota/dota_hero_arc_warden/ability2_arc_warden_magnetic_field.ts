@@ -8,7 +8,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_arc_warden_magnetic_field = { "ID": "5678", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING", "SpellImmunityType": "SPELL_IMMUNITY_ALLIES_YES", "FightRecapLevel": "1", "AbilitySound": "Hero_ArcWarden.MagneticField.Cast", "HasShardUpgrade": "1", "AbilityCastAnimation": "ACT_DOTA_AW_MAGNETIC_FIELD", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastPoint": "0.3", "AbilityCooldown": "20", "AbilityManaCost": "50 70 90 110", "AbilityCastRange": "900", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "300" }, "02": { "var_type": "FIELD_FLOAT", "duration": "3.5 4.5 5.5 6.5" }, "03": { "var_type": "FIELD_INTEGER", "attack_speed_bonus": "50 60 70 80" }, "04": { "var_type": "FIELD_INTEGER", "evasion_chance": "100" } } };

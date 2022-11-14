@@ -2424,17 +2424,6 @@ export module GameEnum {
             DotaTeamKillCreditEvent = "dota_team_kill_credit",
         }
 
-        /**自定义服务器事件 */
-        export enum CustomServer {
-            /**所有玩家登陆完成 */
-            onserver_allplayer_loginfinish = "onserver_allplayer_loginfinish",
-            /**服务器完成任务 */
-            onserver_finish_task = "onserver_finish_task",
-            /**请求产生协作任务 */
-            onserver_create_team_task = "onserver_create_team_task",
-            /**服务器更新对局任务进度 */
-            onserver_update_game_task_jindu = "onserver_update_game_task_jindu",
-        }
         /**JS 请求 LUA 的协议 */
         export enum CustomProtocol {
             /**同步et 实体 */

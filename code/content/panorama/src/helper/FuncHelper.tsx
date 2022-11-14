@@ -3,6 +3,9 @@ import { LogHelper } from "./LogHelper";
 export module FuncHelper {
 
 
+    export function ToFiniteNumber(i: number, defaultVar = 0) {
+        return isFinite(i) ? i : defaultVar;
+    }
 
 
     export class Handler {

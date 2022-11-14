@@ -10,7 +10,7 @@ import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifie
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 import { ability6_keeper_of_the_light_spirit_form } from "./ability6_keeper_of_the_light_spirit_form";
 

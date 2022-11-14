@@ -4,7 +4,7 @@ import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, modifier_event, registerEvent } from "./modifier_event";
+import { Enum_MODIFIER_EVENT, modifier_event, registerEvent } from "../propertystat/modifier_event";
 
 @registerModifier()
 export class modifier_respawn extends BaseModifier_Plus {

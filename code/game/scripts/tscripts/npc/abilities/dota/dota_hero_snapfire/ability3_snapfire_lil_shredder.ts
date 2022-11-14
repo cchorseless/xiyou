@@ -9,7 +9,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_snapfire_lil_shredder = { "ID": "6488", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING", "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL", "FightRecapLevel": "1", "AbilitySound": "Hero_Snapfire.ExplosiveShells.Cast", "AbilityCastPoint": "0.0", "AbilityCastRange": "800", "AbilityCastAnimation": "ACT_DOTA_OVERRIDE_ABILITY_3", "AbilityCooldown": "24 20 16 12", "AbilityDuration": "6", "AbilityManaCost": "50 65 80 95", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "damage": "20 45 70 95" }, "02": { "var_type": "FIELD_INTEGER", "buffed_attacks": "6" }, "03": { "var_type": "FIELD_INTEGER", "attack_speed_bonus": "300" }, "04": { "var_type": "FIELD_INTEGER", "attack_range_bonus": "75 150 225 300" }, "05": { "var_type": "FIELD_INTEGER", "buff_duration_tooltip": "6" }, "06": { "var_type": "FIELD_FLOAT", "base_attack_time": "1.0" }, "07": { "var_type": "FIELD_INTEGER", "armor_reduction_per_attack": "1" }, "08": { "var_type": "FIELD_FLOAT", "armor_duration": "5.0" } } };

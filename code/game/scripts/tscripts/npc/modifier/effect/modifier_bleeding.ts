@@ -7,7 +7,7 @@ import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
-import { modifier_property } from "../modifier_property";
+import { modifier_property } from "../../propertystat/modifier_property";
 /**流血BUFF */
 @registerModifier()
 export class modifier_bleeding extends BaseModifier_Plus {

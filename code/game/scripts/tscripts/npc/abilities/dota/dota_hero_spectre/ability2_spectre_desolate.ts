@@ -8,7 +8,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_spectre_desolate = { "ID": "5335", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE", "AbilityUnitDamageType": "DAMAGE_TYPE_PURE", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "AbilitySound": "Hero_Spectre.Desolate", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "bonus_damage": "18 32 46 60", "LinkedSpecialBonus": "special_bonus_unique_spectre_2" }, "02": { "var_type": "FIELD_INTEGER", "radius": "425" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_2" };

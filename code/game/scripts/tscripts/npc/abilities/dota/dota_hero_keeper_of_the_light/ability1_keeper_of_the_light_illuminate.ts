@@ -9,7 +9,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 import { modifier_night_stalker_6_night } from "../dota_hero_night_stalker/ability6_night_stalker_darkness";
 import { ability6_keeper_of_the_light_spirit_form } from "./ability6_keeper_of_the_light_spirit_form";

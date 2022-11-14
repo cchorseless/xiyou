@@ -8,7 +8,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 import { modifier_ursa_6_buff } from "./ability6_ursa_enrage";
 
@@ -22,26 +22,26 @@ export class ability1_ursa_earthshock extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_ursa_earthshock = Data_ursa_earthshock;
     Init() {
-                this.SetDefaultSpecialValue("shock_chance", 17);
+        this.SetDefaultSpecialValue("shock_chance", 17);
         this.SetDefaultSpecialValue("shock_chance_per_stack", 0.5);
         this.SetDefaultSpecialValue("shock_radius", 800);
-        this.SetDefaultSpecialValue("shock_damage", [200,400,600,800,1000,1200]);
-        this.SetDefaultSpecialValue("shock_attack_percent", [50,90,140,200,270,350]);
+        this.SetDefaultSpecialValue("shock_damage", [200, 400, 600, 800, 1000, 1200]);
+        this.SetDefaultSpecialValue("shock_attack_percent", [50, 90, 140, 200, 270, 350]);
         this.SetDefaultSpecialValue("shock_movement_slow", -30);
         this.SetDefaultSpecialValue("shock_duration", 2);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("shock_chance", 17);
+        this.SetDefaultSpecialValue("shock_chance", 17);
         this.SetDefaultSpecialValue("shock_chance_per_stack", 0.5);
         this.SetDefaultSpecialValue("shock_radius", 600);
-        this.SetDefaultSpecialValue("shock_damage", [200,400,600,800,1000,1200]);
-        this.SetDefaultSpecialValue("shock_attack_percent", [50,90,140,200,270,350]);
+        this.SetDefaultSpecialValue("shock_damage", [200, 400, 600, 800, 1000, 1200]);
+        this.SetDefaultSpecialValue("shock_attack_percent", [50, 90, 140, 200, 270, 350]);
         this.SetDefaultSpecialValue("shock_movement_slow", -30);
         this.SetDefaultSpecialValue("shock_duration", 2);
 
-        }
+    }
 
 
     GetCastRange(vLocation: Vector, hTarget: BaseNpc_Plus) {
@@ -103,11 +103,11 @@ export class modifier_ursa_1 extends BaseModifier_Plus {
                 if (GameFunc.mathUtil.PRD(chance, params.attacker, "ursa_1_earthshock")) {
                     hAbility.UseResources(true, true, true)
                     let fDamage = this.shock_damage + (this.shock_attack_percent + this.GetParentPlus().GetTalentValue("special_bonus_unique_ursa_custom_8")) * 0.01 * params.attacker.GetAverageTrueAttackDamage(params.target)
-                     modifier_ursa_1_particle_ursa_earthshock.apply( params.attacker , params.attacker, hAbility, { duration: modifier_ursa_1.LOCAL_PARTICLE_MODIFIER_DURATION }) 
+                    modifier_ursa_1_particle_ursa_earthshock.apply(params.attacker, params.attacker, hAbility, { duration: modifier_ursa_1.LOCAL_PARTICLE_MODIFIER_DURATION })
                     //  EmitSoundOnLocationWithCaster(params.attacker.GetAbsOrigin(), "Hero_Ursa.Earthshock", params.attacker)
                     let tTargets = AoiHelper.FindEntityInRadius(params.attacker.GetTeamNumber(), params.attacker.GetAbsOrigin(), this.shock_radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST)
                     for (let hTarget of (tTargets)) {
-                         modifier_ursa_1_debuff.apply( hTarget , params.attacker, hAbility, { duration: this.shock_duration * hTarget.GetStatusResistanceFactor(params.attacker) }) 
+                        modifier_ursa_1_debuff.apply(hTarget, params.attacker, hAbility, { duration: this.shock_duration * hTarget.GetStatusResistanceFactor(params.attacker) })
                         let tDamageTable = {
                             ability: hAbility,
                             attacker: params.attacker,

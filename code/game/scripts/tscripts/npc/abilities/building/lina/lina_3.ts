@@ -7,7 +7,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 /** dota原技能数据 */
 export const Data_lina_fiery_soul = { "ID": "5042", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "fiery_soul_attack_speed_bonus": "40 60 80 100", "LinkedSpecialBonus": "special_bonus_unique_lina_2" }, "02": { "var_type": "FIELD_FLOAT", "fiery_soul_move_speed_bonus": "5 6 7 8", "LinkedSpecialBonus": "special_bonus_unique_lina_2", "LinkedSpecialBonusField": "value2" }, "03": { "var_type": "FIELD_INTEGER", "fiery_soul_max_stacks": "3" }, "04": { "var_type": "FIELD_INTEGER", "fiery_soul_stack_duration": "12" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };
 

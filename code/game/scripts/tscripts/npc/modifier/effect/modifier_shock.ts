@@ -8,8 +8,8 @@ import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../modifier_event";
-import { modifier_property } from "../modifier_property";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+import { modifier_property } from "../../propertystat/modifier_property";
 
 /**触电 */
 @registerModifier()

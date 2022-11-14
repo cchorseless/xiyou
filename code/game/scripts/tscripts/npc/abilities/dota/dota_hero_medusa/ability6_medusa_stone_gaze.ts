@@ -9,7 +9,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -72,7 +72,7 @@ export class modifier_medusa_3 extends BaseModifier_Plus {
                 if (GameFunc.mathUtil.PRD(chance, params.attacker, "medusa_4")) {
                     modifier_medusa_3_debuff.apply(params.target, params.attacker, this.GetAbilityPlus(), { duration: duration * params.target.GetStatusResistanceFactor(params.attacker) })
                     // if (!Spawner.IsEndless()) {
-                    //      modifier_medusa_3_stack.apply( params.attacker , params.attacker, this.GetAbilityPlus(), null) 
+                    //      modifier_medusa_3_stack.apply( params.attacker , params.attacker, this.GetAbilityPlus(), null)
                     // }
                     //  EmitSoundOnLocationWithCaster(params.target.GetAbsOrigin(), "Hero_Medusa.StoneGaze.Stun", params.attacker)
                 }

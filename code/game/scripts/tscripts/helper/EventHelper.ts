@@ -15,36 +15,6 @@ import { LogHelper } from "./LogHelper";
 
 export module EventHelper {
     /**
-     * 添加客户端lua监听事件
-     * @param eventName
-     * @param func
-     * @param context
-     * @param isOnce
-     */
-    export function addClientGameEvent<TName extends keyof GameEventDeclarations>(context: any, eventName: TName, func: (event: GameEventDeclarations[TName]) => void, isOnce: boolean = false) {
-        if (!IsClient()) {
-            return;
-        }
-        // let _eventName = eventName as any;
-        let _eventid;
-        //#region 支持监听一次  TODO
-        // if (isOnce) {
-        //     let funcOnce = (event: any) => {
-
-        //     }
-        //     _eventid = ListenToGameEvent(_eventName, func, context);
-        // }
-        //#endregion
-        _eventid = ListenToGameEvent(eventName, func, context);
-        if (_eventid) {
-            if (globalData.allGameEvent[eventName] == null) {
-                globalData.allGameEvent[eventName] = [];
-            }
-            globalData.allGameEvent[eventName].push(_eventid);
-        }
-    }
-
-    /**
      * 添加监听事件
      * @param eventName
      * @param func
@@ -314,22 +284,6 @@ export module EventHelper {
         }
     }
 
-    export function SyncETEntity(obj: ET.IEntityJson, ...playerID: Array<PlayerID>) {
-        if (!IsServer()) {
-            return;
-        }
-        let event: JS_TO_LUA_DATA = {};
-        event.state = true;
-        event.data = obj;
-        // 全部玩家
-        if (playerID == null || playerID.length == 0) {
-            EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_sync_et_entity, event);
-        } else {
-            playerID.forEach((_id) => {
-                EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_sync_et_entity, event, _id as PlayerID);
-            });
-        }
-    }
 
     /**
      * 删除所有协议事件监听

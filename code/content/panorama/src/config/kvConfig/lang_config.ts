@@ -23,6 +23,9 @@ export interface OBJ_1_1 {
 "MenuButton_handbook" :OBJ_2_1 ,
 "TopBarRound" :OBJ_2_1 ,
 "TopBarDifficulty" :OBJ_2_1 ,
+"LevelChallenge" :OBJ_2_1 ,
+"tech" :OBJ_2_1 ,
+"bagshop" :OBJ_2_1 ,
 [k:string] : OBJ_2_1 }
 export interface OBJ_2_1 {
 "Des" :string ,

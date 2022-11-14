@@ -9,7 +9,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -22,18 +22,18 @@ export class ability3_ogre_magi_bloodlust extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_ogre_magi_bloodlust = Data_ogre_magi_bloodlust;
     Init() {
-                this.SetDefaultSpecialValue("multicast_2_times", [40,45,50,55,60]);
-        this.SetDefaultSpecialValue("multicast_3_times", [15,20,25,30,35]);
-        this.SetDefaultSpecialValue("multicast_4_times", [0,5,10,15,20]);
+        this.SetDefaultSpecialValue("multicast_2_times", [40, 45, 50, 55, 60]);
+        this.SetDefaultSpecialValue("multicast_3_times", [15, 20, 25, 30, 35]);
+        this.SetDefaultSpecialValue("multicast_4_times", [0, 5, 10, 15, 20]);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("multicast_2_times", [40,45,50,55,60]);
-        this.SetDefaultSpecialValue("multicast_3_times", [15,20,25,30,35]);
-        this.SetDefaultSpecialValue("multicast_4_times", [0,5,10,15,20]);
+        this.SetDefaultSpecialValue("multicast_2_times", [40, 45, 50, 55, 60]);
+        this.SetDefaultSpecialValue("multicast_3_times", [15, 20, 25, 30, 35]);
+        this.SetDefaultSpecialValue("multicast_4_times", [0, 5, 10, 15, 20]);
 
-        }
+    }
 
 
 
@@ -82,21 +82,21 @@ export class modifier_ogre_magi_3 extends BaseModifier_Plus {
         super.OnCreated(params);
         if (IsServer()) {
             let hParent = this.GetParentPlus()
-             modifier_ogre_magi_3_buff.apply( hParent , hParent, this.GetAbilityPlus(), {}) 
+            modifier_ogre_magi_3_buff.apply(hParent, hParent, this.GetAbilityPlus(), {})
         }
     }
     OnRefresh(params: ModifierTable) {
         super.OnRefresh(params);
         if (IsServer()) {
             let hParent = this.GetParentPlus()
-             modifier_ogre_magi_3_buff.apply( hParent , hParent, this.GetAbilityPlus(), {}) 
+            modifier_ogre_magi_3_buff.apply(hParent, hParent, this.GetAbilityPlus(), {})
         }
     }
     OnDestroy() {
         super.OnDestroy();
         if (IsServer()) {
             let hParent = this.GetParentPlus()
-             modifier_ogre_magi_3_buff.remove( hParent );
+            modifier_ogre_magi_3_buff.remove(hParent);
         }
     }
 }

@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_sven_6_buff } from "./ability6_sven_gods_strength";
 
 /** dota原技能数据 */
@@ -18,20 +18,20 @@ export class ability2_sven_great_cleave extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_sven_great_cleave = Data_sven_great_cleave;
     Init() {
-                this.SetDefaultSpecialValue("cleave_starting_width", 250);
+        this.SetDefaultSpecialValue("cleave_starting_width", 250);
         this.SetDefaultSpecialValue("cleave_ending_width", 500);
         this.SetDefaultSpecialValue("cleave_distance", 1000);
-        this.SetDefaultSpecialValue("great_cleave_damage", [55,70,85,100,115,130]);
+        this.SetDefaultSpecialValue("great_cleave_damage", [55, 70, 85, 100, 115, 130]);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("cleave_starting_width", 250);
+        this.SetDefaultSpecialValue("cleave_starting_width", 250);
         this.SetDefaultSpecialValue("cleave_ending_width", 500);
         this.SetDefaultSpecialValue("cleave_distance", 1000);
-        this.SetDefaultSpecialValue("great_cleave_damage", [55,70,85,100,115,130]);
+        this.SetDefaultSpecialValue("great_cleave_damage", [55, 70, 85, 100, 115, 130]);
 
-        }
+    }
 
 
     GetIntrinsicModifierName() {

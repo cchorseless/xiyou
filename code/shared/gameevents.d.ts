@@ -37,3 +37,26 @@ declare interface CustomGameEventDeclarations {
     /**JS 请求 LUA data */
     JS_TO_LUA_EVENT: JS_TO_LUA_DATA;
 }
+
+
+
+declare interface IGet_ability_special_value {
+    ability_entindex: EntityIndex, level: number, key_name: string | "cooldown" | "mana_cost" | "gold_cost";
+}
+
+declare interface IGet_unit_data {
+    unit_entindex: EntityIndex, func_name: string;
+}
+
+declare interface IGet_player_data {
+    PlayerID: PlayerID, func_name: string;
+}
+
+/**
+ * 客户端JS调用客户端lua
+ */
+declare interface GameEventDeclarations {
+    call_get_ability_special_value: IGet_ability_special_value;
+    call_get_unit_data: IGet_unit_data;
+    call_get_player_data: IGet_player_data;
+}

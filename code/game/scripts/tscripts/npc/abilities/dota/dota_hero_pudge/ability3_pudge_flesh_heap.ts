@@ -8,7 +8,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_pudge_flesh_heap = { "ID": "5074", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "magic_resistance": "12 14 16 18" }, "02": { "var_type": "FIELD_FLOAT", "flesh_heap_strength_buff_amount": "1.5 2 2.5 3.0", "LinkedSpecialBonus": "special_bonus_unique_pudge_1" }, "03": { "var_type": "FIELD_INTEGER", "flesh_heap_range": "450" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };
@@ -20,11 +20,11 @@ export class ability3_pudge_flesh_heap extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_pudge_flesh_heap = Data_pudge_flesh_heap;
     Init() {
-                this.SetDefaultSpecialValue("radius", 900);
-        this.SetDefaultSpecialValue("bonus_health", [10,20,30,40,50]);
-        this.SetDefaultSpecialValue("bonus_str", [0.2,0.5,0.8,1.1,1.5]);
+        this.SetDefaultSpecialValue("radius", 900);
+        this.SetDefaultSpecialValue("bonus_health", [10, 20, 30, 40, 50]);
+        this.SetDefaultSpecialValue("bonus_str", [0.2, 0.5, 0.8, 1.1, 1.5]);
 
-        }
+    }
 
 
     GetAOERadius() {
@@ -80,7 +80,7 @@ export class modifier_pudge_3 extends BaseModifier_Plus {
                 this.SetStackCount(this.GetStackCount() + factor)
                 if (hAttacker == hParent) {
                     // 击杀
-                     modifier_pudge_3_bonus_str.apply( hParent , hParent, hAbility, { factor: factor }) 
+                    modifier_pudge_3_bonus_str.apply(hParent, hParent, hAbility, { factor: factor })
                 }
             }
         }

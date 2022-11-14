@@ -8,7 +8,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_clinkz_1_buff } from "./ability1_clinkz_strafe";
 import { modifier_clinkz_2_bonus_attackspeed } from "./ability2_clinkz_searing_arrows";
 import { modifier_clinkz_6_summon } from "./ability6_clinkz_death_pact";

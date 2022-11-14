@@ -9,7 +9,7 @@ import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_poison } from "../../../modifier/effect/modifier_poison";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_viper_poison_attack = { "ID": "5218", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "AbilitySound": "hero_viper.poisonAttack.Cast", "HasShardUpgrade": "1", "AbilityCastRange": "600 640 680 720", "AbilityCastPoint": "0", "AbilityCooldown": "0.0", "AbilityDamage": "0 0 0 0", "AbilityManaCost": "20 22 24 26", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "4" }, "02": { "var_type": "FIELD_FLOAT", "damage": "4 8 12 16" }, "03": { "var_type": "FIELD_INTEGER", "movement_speed": "6 8 10 12" }, "04": { "var_type": "FIELD_INTEGER", "magic_resistance": "3 5 7 9" }, "05": { "var_type": "FIELD_INTEGER", "max_stacks": "5" }, "06": { "var_type": "FIELD_INTEGER", "bonus_range": "25 65 105 145" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
@@ -21,24 +21,24 @@ export class ability1_viper_poison_attack extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_viper_poison_attack = Data_viper_poison_attack;
     Init() {
-                this.SetDefaultSpecialValue("poison_count", [50,100,150,200,250,300]);
+        this.SetDefaultSpecialValue("poison_count", [50, 100, 150, 200, 250, 300]);
         this.SetDefaultSpecialValue("poison_count_agility", 2);
-        this.SetDefaultSpecialValue("movespeed_reduce", [6,8,10,12,14,16]);
-        this.SetDefaultSpecialValue("magical_armor_reduce", [-3,-5,-7,-9,-11,-13]);
+        this.SetDefaultSpecialValue("movespeed_reduce", [6, 8, 10, 12, 14, 16]);
+        this.SetDefaultSpecialValue("magical_armor_reduce", [-3, -5, -7, -9, -11, -13]);
         this.SetDefaultSpecialValue("max_debuff_count", 3);
         this.SetDefaultSpecialValue("duration", 4);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("poison_count", [50,100,150,200,250,300]);
+        this.SetDefaultSpecialValue("poison_count", [50, 100, 150, 200, 250, 300]);
         this.SetDefaultSpecialValue("poison_count_agility", 2);
-        this.SetDefaultSpecialValue("movespeed_reduce", [6,8,10,12,14,16]);
-        this.SetDefaultSpecialValue("magical_armor_reduce", [3,5,7,9,11,13]);
+        this.SetDefaultSpecialValue("movespeed_reduce", [6, 8, 10, 12, 14, 16]);
+        this.SetDefaultSpecialValue("magical_armor_reduce", [3, 5, 7, 9, 11, 13]);
         this.SetDefaultSpecialValue("max_debuff_count", 3);
         this.SetDefaultSpecialValue("duration", 4);
 
-        }
+    }
 
     GetCastRange(vLocation: Vector, hTarget: BaseNpc_Plus) {
         return math.max(this.GetCasterPlus().Script_GetAttackRange(), super.GetCastRange(vLocation, hTarget))
@@ -99,7 +99,7 @@ export class modifier_viper_1 extends BaseModifier_Plus {
             return
         }
 
-         modifier_viper_1_projectile.apply( hParent , hParent, hAbility, null) 
+        modifier_viper_1_projectile.apply(hParent, hParent, hAbility, null)
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_RECORD)
     AttackRecord(params: ModifierAttackEvent) {
@@ -109,7 +109,7 @@ export class modifier_viper_1 extends BaseModifier_Plus {
         if (!GameFunc.IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop" || hParent != this.GetParentPlus() || hParent.IsIllusion()) {
             return
         }
-         modifier_viper_1_projectile.remove( hParent );
+        modifier_viper_1_projectile.remove(hParent);
         if (BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USECASTATTACKORB, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) ||
             hAbility.CastFilterResult() != UnitFilterResult.UF_SUCCESS ||
             hParent.IsSilenced() ||
@@ -148,7 +148,7 @@ export class modifier_viper_1 extends BaseModifier_Plus {
             iCount = iCount + hParent.GetAgility() * n
         }
         modifier_poison.Poison(hTarget, hParent, hAbility, iCount)
-         modifier_viper_1_debuff.apply( hTarget , hParent, hAbility, { duration: this.duration * hTarget.GetStatusResistanceFactor(hParent) }) 
+        modifier_viper_1_debuff.apply(hTarget, hParent, hAbility, { duration: this.duration * hTarget.GetStatusResistanceFactor(hParent) })
     }
     AttackRecordDestroy(params: ModifierAttackEvent) {
         let hTarget = params.target

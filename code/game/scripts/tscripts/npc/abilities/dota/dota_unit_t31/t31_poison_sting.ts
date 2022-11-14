@@ -13,7 +13,7 @@ import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
 import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 import { LogHelper } from "../../../../helper/LogHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_poison } from "../../../modifier/effect/modifier_poison";
 
 

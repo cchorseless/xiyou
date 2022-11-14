@@ -13,7 +13,7 @@ import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
 import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 import { LogHelper } from "../../../../helper/LogHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { GameEnum } from "../../../../GameEnum";
 import { modifier_dummy } from "../../../modifier/modifier_dummy";
 import { unit_dummy } from "../../../units/common/unit_dummy";
@@ -79,7 +79,7 @@ export class t28_toss_stone extends BaseAbility_Plus {
 
         let speed = this.GetSpecialValueFor("speed")
 
-        let hThinker = unit_dummy.CreateOne(vPosition, hCaster.GetTeamNumber(), false,  hCaster, hCaster)
+        let hThinker = unit_dummy.CreateOne(vPosition, hCaster.GetTeamNumber(), false, hCaster, hCaster)
         modifier_dummy.apply(hThinker, hCaster, this, { duration: 10 })
 
         let info: CreateTrackingProjectileOptions = {

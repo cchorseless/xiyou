@@ -9,7 +9,7 @@ import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } fr
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_no_health_bar } from "../../../modifier/modifier_no_health_bar";
 import { ability1_storm_spirit_static_remnant } from "./ability1_storm_spirit_static_remnant";
 import { ability3_storm_spirit_overload } from "./ability3_storm_spirit_overload";

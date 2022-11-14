@@ -7,7 +7,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 /** dota原技能数据 */
 export const Data_jakiro_liquid_fire = { "ID": "5299", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING", "AbilityUnitTargetFlags": "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_DEAD", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "AbilitySound": "Hero_Jakiro.LiquidFire", "AbilityCooldown": "20 15 10 4", "AbilityDuration": "5.0", "AbilityCastRange": "600", "AbilityCastPoint": "0.0 0.0 0.0 0.0", "AbilityModifierSupportBonus": "35", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "slow_attack_speed_pct": "-30 -40 -50 -60", "LinkedSpecialBonus": "special_bonus_unique_jakiro_4" }, "02": { "var_type": "FIELD_INTEGER", "radius": "300" }, "03": { "var_type": "FIELD_INTEGER", "damage": "12 16 20 24", "LinkedSpecialBonus": "special_bonus_unique_jakiro_8" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };
 

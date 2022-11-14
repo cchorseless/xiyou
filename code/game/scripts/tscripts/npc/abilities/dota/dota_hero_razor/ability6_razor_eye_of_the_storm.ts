@@ -7,7 +7,7 @@ import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_razor_eye_of_the_storm = { "ID": "5085", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "FightRecapLevel": "1", "HasScepterUpgrade": "1", "AbilitySound": "Hero_Razor.Storm.Cast", "AbilityCastAnimation": "ACT_DOTA_OVERRIDE_ABILITY_4", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastPoint": "0", "AbilityCooldown": "80 70 60", "AbilityManaCost": "100 150 200", "AbilityModifierSupportValue": "0.1", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "500" }, "02": { "var_type": "FIELD_FLOAT", "duration": "30.0" }, "03": { "var_type": "FIELD_FLOAT", "strike_interval": "0.7 0.6 0.5", "LinkedSpecialBonus": "special_bonus_unique_razor_2" }, "04": { "var_type": "FIELD_INTEGER", "armor_reduction": "1 1 1" }, "05": { "var_type": "FIELD_INTEGER", "damage": "60 75 90" } } };
@@ -19,16 +19,16 @@ export class ability6_razor_eye_of_the_storm extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_razor_eye_of_the_storm = Data_razor_eye_of_the_storm;
     Init() {
-                this.SetDefaultSpecialValue("radius", 750);
+        this.SetDefaultSpecialValue("radius", 750);
         this.SetDefaultSpecialValue("attack_targets", 1);
         this.SetDefaultSpecialValue("scepter_targets_bonus", 2);
         this.SetDefaultSpecialValue("damage_tick", 0.75);
-        this.SetDefaultSpecialValue("damage", [200,300,450,650,900,1300]);
-        this.SetDefaultSpecialValue("damage_bonus_agi", [2.5,3,3.5,4,4.5,5]);
+        this.SetDefaultSpecialValue("damage", [200, 300, 450, 650, 900, 1300]);
+        this.SetDefaultSpecialValue("damage_bonus_agi", [2.5, 3, 3.5, 4, 4.5, 5]);
         this.SetDefaultSpecialValue("duration", 8);
         this.SetDefaultSpecialValue("shock_pct", 65);
 
-        }
+    }
 
 
 
@@ -47,7 +47,7 @@ export class ability6_razor_eye_of_the_storm extends BaseAbility_Plus {
         let iHitCount = this.GetSpecialValueFor("attack_targets") + (hCaster.HasScepter() && this.GetSpecialValueFor("scepter_targets_bonus") || 0)
         let iRadius = this.GetSpecialValueFor("radius")
         let duration = this.GetSpecialValueFor("duration")
-         modifier_razor_6_buff.apply( hCaster , hCaster, this, { 
+        modifier_razor_6_buff.apply(hCaster, hCaster, this, {
             iRadius: iRadius,
             fDamageTick: fDamageTick,
             iHitCount: iHitCount,

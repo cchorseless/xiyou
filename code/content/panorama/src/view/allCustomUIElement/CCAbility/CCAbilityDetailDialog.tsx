@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCPanel } from "../CCPanel/CCPanel";
-import { AbilityHelper } from "../../../helper/AbilityHelper";
+import { AbilityHelper } from "../../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 
 interface ICCAbilityDetailDialog extends NodePropsData {

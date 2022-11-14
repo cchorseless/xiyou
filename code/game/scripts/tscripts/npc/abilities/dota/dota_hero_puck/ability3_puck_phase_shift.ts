@@ -8,7 +8,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_puck_phase_shift = { "ID": "5072", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK", "AbilitySound": "Hero_Puck.Phase_Shift", "AbilityCastPoint": "0 0 0 0", "AbilityChannelTime": "0.75 1.50 2.25 3.25", "AbilityCooldown": "7.5 7 6.5 6", "AbilityManaCost": "0 0 0 0", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "0.75 1.50 2.25 3.25" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };

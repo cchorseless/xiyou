@@ -9,7 +9,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 /** dota原技能数据 */
 export const Data_necrolyte_sadist = { "ID": "5160", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "AbilitySound": "Hero_Necrolyte.SpiritForm.Cast", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "HasScepterUpgrade": "1", "AbilityCastPoint": "0", "AbilityCooldown": "28 24 20 16", "AbilityManaCost": "50", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "3 3.5 4 4.5" }, "02": { "var_type": "FIELD_INTEGER", "heal_bonus": "75" }, "03": { "var_type": "FIELD_INTEGER", "movement_speed": "12 16 20 24", "LinkedSpecialBonus": "special_bonus_unique_necrophos_3" }, "04": { "var_type": "FIELD_INTEGER", "slow_aoe": "750" }, "05": { "var_type": "FIELD_INTEGER", "bonus_damage": "-40" }, "06": { "var_type": "FIELD_INTEGER", "cooldown_scepter": "10", "RequiresScepter": "1" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_2" };

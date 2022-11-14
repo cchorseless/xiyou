@@ -11,7 +11,7 @@ import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_poison } from "../../../modifier/effect/modifier_poison";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_viper_corrosive_skin = { "ID": "5220", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "AbilitySound": "hero_viper.CorrosiveSkin", "AbilityModifierSupportBonus": "10", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "4.0" }, "02": { "var_type": "FIELD_INTEGER", "bonus_attack_speed": "8 16 24 32", "LinkedSpecialBonus": "special_bonus_unique_viper_6", "LinkedSpecialBonusOperation": "SPECIAL_BONUS_MULTIPLY" }, "03": { "var_type": "FIELD_INTEGER", "bonus_magic_resistance": "10 15 20 25", "LinkedSpecialBonus": "special_bonus_unique_viper_6", "LinkedSpecialBonusOperation": "SPECIAL_BONUS_MULTIPLY" }, "04": { "var_type": "FIELD_INTEGER", "damage": "8 16 24 32", "LinkedSpecialBonus": "special_bonus_unique_viper_1" }, "05": { "var_type": "FIELD_INTEGER", "max_range_tooltip": "1400" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };
@@ -23,25 +23,25 @@ export class ability3_viper_corrosive_skin extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_viper_corrosive_skin = Data_viper_corrosive_skin;
     Init() {
-                this.SetDefaultSpecialValue("poison_count", [25,50,75,100,125]);
+        this.SetDefaultSpecialValue("poison_count", [25, 50, 75, 100, 125]);
         this.SetDefaultSpecialValue("poison_count_agility", 0.2);
         this.SetDefaultSpecialValue("aura_radius", 225);
         this.SetDefaultSpecialValue("duration", 4);
-        this.SetDefaultSpecialValue("movespeed_reduce", [6,8,10,12,14]);
+        this.SetDefaultSpecialValue("movespeed_reduce", [6, 8, 10, 12, 14]);
         this.SetDefaultSpecialValue("max_debuff_count", 3);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("poison_count", [25,50,75,100,125]);
+        this.SetDefaultSpecialValue("poison_count", [25, 50, 75, 100, 125]);
         this.SetDefaultSpecialValue("poison_count_agility", 0.2);
         this.SetDefaultSpecialValue("aura_radius", 225);
         this.SetDefaultSpecialValue("duration", 4);
-        this.SetDefaultSpecialValue("movespeed_reduce", [6,8,10,12,14]);
-        this.SetDefaultSpecialValue("magical_armor_reduce", [3,5,7,9,11]);
+        this.SetDefaultSpecialValue("movespeed_reduce", [6, 8, 10, 12, 14]);
+        this.SetDefaultSpecialValue("magical_armor_reduce", [3, 5, 7, 9, 11]);
         this.SetDefaultSpecialValue("max_debuff_count", 3);
 
-        }
+    }
 
     GetCastRange(vLocation: Vector, hTarget: BaseNpc_Plus) {
         return this.GetSpecialValueFor("aura_radius")

@@ -7,30 +7,26 @@ import { LogHelper } from "./helper/LogHelper";
 import { SingletonClass } from "./helper/SingletonHelper";
 import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
 import { AllEntity } from "./AllEntity";
+import { ability_propertytool } from "./npc/propertystat/ability_propertytool";
 
-class GameMode_Client extends SingletonClass {
+export class GameMode_Client extends SingletonClass {
+
+
+
     public Init() {
         this.addEvent();
         KVHelper.initKVFile();
     }
 
     public addEvent() {
-        // for (let k in GameEnum.Event.GameEvent) {
-        //     let eventName = (GameEnum.Event.GameEvent as any)[k];
-        //     if (eventName) {
-        //         ListenToGameEvent(
-        //             eventName,
-        //             (e) => {
-        //                 LogHelper.print(k, "|", eventName);
-        //             },
-        //             null
-        //         );
-        //     }
-        // }
-        EventHelper.addClientGameEvent(this, GameEnum.Event.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned);
+        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned);
+        EventHelper.addGameEvent(this, "call_get_ability_special_value", this.OnCall_get_ability_special_value);
+        EventHelper.addGameEvent(this, "call_get_unit_data", this.OnCall_get_unit_data);
+        EventHelper.addGameEvent(this, "call_get_player_data", this.OnCall_get_player_data);
+
     }
 
-    public OnNPCSpawned(e: NpcSpawnedEvent) {
+    private OnNPCSpawned(e: NpcSpawnedEvent) {
         let spawnedUnit = EntIndexToHScript(e.entindex) as BaseNpc_Plus;
         if (spawnedUnit == null) return;
         let sUnitName = spawnedUnit.GetUnitName();
@@ -49,25 +45,23 @@ class GameMode_Client extends SingletonClass {
             }
         }
     }
+
+    private OnCall_get_ability_special_value(e: IGet_ability_special_value) {
+        ability_propertytool.call_level = e.level;
+        ability_propertytool.call_key = e.key_name;
+        ability_propertytool.call_ability = e.ability_entindex;
+    }
+    private OnCall_get_unit_data(e: IGet_unit_data) {
+        ability_propertytool.call_unit = e.unit_entindex;
+        ability_propertytool.call_func = e.func_name;
+    }
+
+    private OnCall_get_player_data(e: IGet_player_data) {
+
+    }
+
 }
 
 LogHelper.print("IsClient start ----------------------");
 AllEntity.init();
 GameMode_Client.GetInstance().Init();
-// (_G as any).EntityFramework.CreateCppClassProxy('dota_hero_zuus');
-
-// EntityMixins = {}
-// EntityClasses = {}
-// EntityLinkClasses = {}
-// EntityClassNameOverrides = {}
-// EntityDesignerNameToClassname = {}
-// EntityFramework = {}
-// EntityUtils = {}
-// LogHelper.print('EntityMixins:', (_G as any).EntityMixins)
-// LogHelper.print('EntityClasses:', (_G as any).EntityClasses)
-// LogHelper.print('EntityLinkClasses:', (_G as any).EntityLinkClasses)
-// LogHelper.print('EntityDesignerNameToClassname:', (_G as any).EntityDesignerNameToClassname)
-// LogHelper.print('EntityClassNameOverrides:', (_G as any).EntityClassNameOverrides)
-// LogHelper.print('EntityFramework:', (_G as any).EntityFramework)
-// LogHelper.print('GameDataObj:', (_G as any).GameDataObj)
-// LogHelper.print('EntityUtils:', (_G as any).dota_hero_zuus, 11);

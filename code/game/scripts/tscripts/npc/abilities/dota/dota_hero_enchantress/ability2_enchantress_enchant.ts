@@ -9,7 +9,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_enchantress_enchant = { "ID": "5268", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "AbilitySound": "Hero_Enchantress.EnchantCreep", "AbilityCastRange": "700", "AbilityCastPoint": "0.3 0.3 0.3 0.3", "AbilityCooldown": "28 24 20 16", "AbilityDuration": "3.75 4.5 5.25 6", "AbilityManaCost": "40 50 60 70", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "dominate_duration": "30 60 90 120" }, "02": { "var_type": "FIELD_INTEGER", "enchant_health": "200 300 400 500" }, "03": { "var_type": "FIELD_INTEGER", "enchant_armor": "2 4 6 8" }, "04": { "var_type": "FIELD_INTEGER", "enchant_damage": "10 30 50 70" }, "05": { "var_type": "FIELD_INTEGER", "slow_movement_speed": "-55" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_2" };

@@ -9,7 +9,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 /** dota原技能数据 */
 export const Data_obsidian_destroyer_equilibrium = { "ID": "5684", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "HasShardUpgrade": "1", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_5", "AbilityCastPoint": "0.75", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "proc_chance": "30" }, "02": { "var_type": "FIELD_INTEGER", "mana_restore": "20 30 40 50" }, "03": { "var_type": "FIELD_FLOAT", "mana_capacity_steal": "5" }, "04": { "var_type": "FIELD_FLOAT", "mana_capacity_duration": "30 40 50 60" } } };

@@ -8,7 +8,7 @@ import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_razor_unstable_current = { "ID": "5084", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE", "HasShardUpgrade": "1", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "self_movement_speed_pct": "12 16 20 24", "LinkedSpecialBonus": "special_bonus_unique_razor_5" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };
@@ -20,11 +20,11 @@ export class ability3_razor_unstable_current extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_razor_unstable_current = Data_razor_unstable_current;
     Init() {
-                this.SetDefaultSpecialValue("attack_damage_shock_pct", 8);
-        this.SetDefaultSpecialValue("attack_shock_damage_pct", [130,170,220,280,350]);
+        this.SetDefaultSpecialValue("attack_damage_shock_pct", 8);
+        this.SetDefaultSpecialValue("attack_shock_damage_pct", [130, 170, 220, 280, 350]);
         this.SetDefaultSpecialValue("count", 1);
 
-        }
+    }
 
 
     GetIntrinsicModifierName() {

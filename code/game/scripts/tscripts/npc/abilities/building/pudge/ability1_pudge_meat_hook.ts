@@ -11,7 +11,6 @@ import { BattleHelper } from "../../../../helper/BattleHelper";
 import { EntityHelper } from "../../../../helper/EntityHelper";
 import { modifier_bleeding } from "../../../modifier/effect/modifier_bleeding";
 import { LogHelper } from "../../../../helper/LogHelper";
-import { modifier_property } from "../../../modifier/modifier_property";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { item_towerchange_custom } from "../../../items/avalon/item_towerchange_custom";
 import { ActiveRootAbility } from "../../ActiveRootAbility";

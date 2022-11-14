@@ -8,7 +8,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_building } from "../../../modifier/modifier_building";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 /** dota原技能数据 */
 export const Data_lone_druid_spirit_bear = { "ID": "5412", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET", "DisplayAdditionalHeroes": "1", "AbilitySound": "Hero_LoneDruid.SpiritBear.Cast", "HasScepterUpgrade": "1", "AbilityCastPoint": "0.5 0.5 0.5 0.5", "AbilityCooldown": "120.0", "AbilityManaCost": "75 75 75 75", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "bear_hp": "1100 1400 1700 2000" }, "02": { "var_type": "FIELD_INTEGER", "bear_regen_tooltip": "5 6 7 8" }, "03": { "var_type": "FIELD_FLOAT", "bear_bat": "1.75 1.65 1.55 1.45", "LinkedSpecialBonus": "special_bonus_unique_lone_druid_10" }, "04": { "var_type": "FIELD_INTEGER", "bear_armor": "3 4 5 6", "LinkedSpecialBonus": "special_bonus_unique_lone_druid_2" }, "05": { "var_type": "FIELD_FLOAT", "backlash_damage": "20.0" }, "06": { "var_type": "FIELD_FLOAT", "cooldown_scepter": "120.0", "RequiresScepter": "1" }, "07": { "var_type": "FIELD_INTEGER", "movespeed_tooltip": "340 360 380 400" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
 

@@ -2,7 +2,7 @@ import { LogHelper } from "./helper/LogHelper";
 import { PrecacheHelper } from "./helper/PrecacheHelper";
 import { GameSetting } from "./GameSetting";
 import { GameDebugger } from "./GameDebugger";
-import { modifier_event } from "./npc/modifier/modifier_event";
+import { modifier_event } from "./npc/propertystat/modifier_event";
 import { KVHelper } from "./helper/KVHelper";
 import { globalData, reloadable } from "./GameCache";
 import { GameEnum } from "./GameEnum";

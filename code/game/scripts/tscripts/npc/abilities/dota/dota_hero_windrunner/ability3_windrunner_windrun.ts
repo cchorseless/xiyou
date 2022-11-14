@@ -10,7 +10,7 @@ import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifie
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_windrunner_windrun = { "ID": "5132", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "AbilitySound": "Ability.Windrun", "HasScepterUpgrade": "1", "AbilityCastPoint": "0.3 0.3 0.3 0.3", "AbilityCooldown": "15 14 13 12", "AbilityDuration": "3 4 5 6", "AbilityManaCost": "50", "AbilityModifierSupportValue": "0.1", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "movespeed_bonus_pct": "60" }, "02": { "var_type": "FIELD_INTEGER", "evasion_pct_tooltip": "100" }, "03": { "var_type": "FIELD_INTEGER", "enemy_movespeed_bonus_pct": "-15 -20 -25 -30", "LinkedSpecialBonus": "special_bonus_unique_windranger_2" }, "04": { "var_type": "FIELD_INTEGER", "radius": "325" }, "05": { "var_type": "FIELD_FLOAT", "duration": "3 4 5 6" }, "06": { "var_type": "FIELD_INTEGER", "max_charges": "2", "RequiresScepter": "1" }, "07": { "var_type": "FIELD_INTEGER", "charge_restore_time": "15 14 13 12", "RequiresScepter": "1" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };

@@ -8,7 +8,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_riki_blink_strike = { "ID": "5143", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_CUSTOM", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_CUSTOM", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "AbilitySound": "Hero_Riki.Blink_Strike", "AbilityCastRange": "600 700 800 900", "AbilityCastPoint": "0.3", "AbilityCooldown": "0.1", "AbilityCharges": "2", "AbilityChargeRestoreTime": "25 20 15 10", "AbilityManaCost": "50", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "abilitycastrange": "", "LinkedSpecialBonus": "special_bonus_unique_riki_3" }, "02": { "var_type": "FIELD_INTEGER", "bonus_damage": "25 50 75 100" }, "03": { "var_type": "FIELD_FLOAT", "AbilityChargeRestoreTime": "", "LinkedSpecialBonus": "special_bonus_unique_riki_9", "LinkedSpecialBonusOperation": "SPECIAL_BONUS_SUBTRACT" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_2" };

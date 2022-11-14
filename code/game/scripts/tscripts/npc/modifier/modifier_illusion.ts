@@ -2,8 +2,8 @@ import { GameEnum } from "../../GameEnum";
 import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../entityPlus/BaseNpc_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, EventDataType, modifier_event } from "./modifier_event";
-import { modifier_property } from "./modifier_property";
+import { Enum_MODIFIER_EVENT, EventDataType, modifier_event } from "../propertystat/modifier_event";
+import { modifier_property } from "../propertystat/modifier_property";
 
 @registerModifier()
 export class modifier_illusion extends BaseModifier_Plus {

@@ -9,7 +9,7 @@ import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifie
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_arc_warden_tempest_double = { "ID": "5683", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "FightRecapLevel": "2", "AbilitySound": "Hero_ArcWarden.TempestDouble", "HasScepterUpgrade": "1", "AbilityCastPoint": "0.15", "AbilityCastAnimation": "ACT_DOTA_OVERRIDE_ABILITY_4", "AbilityCastGestureSlot": "DEFAULT", "AbilityCooldown": "60 50 40", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "18 22 26", "LinkedSpecialBonus": "special_bonus_unique_arc_warden_6" }, "02": { "var_type": "FIELD_INTEGER", "bounty": "180 240 300" } } };
@@ -21,9 +21,9 @@ export class ability6_arc_warden_tempest_double extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_arc_warden_tempest_double = Data_arc_warden_tempest_double;
     Init() {
-                this.SetDefaultSpecialValue("duration", 12);
+        this.SetDefaultSpecialValue("duration", 12);
         this.SetDefaultSpecialValue("wraith_count", 1);
-        this.SetDefaultSpecialValue("base_damage", [400,700,1100,1800,2600,3500]);
+        this.SetDefaultSpecialValue("base_damage", [400, 700, 1100, 1800, 2600, 3500]);
         this.SetDefaultSpecialValue("spawn_interval", 0.3);
         this.SetDefaultSpecialValue("shock_bonus_all", 2.5);
         this.SetDefaultSpecialValue("damage_radius", 300);
@@ -31,7 +31,7 @@ export class ability6_arc_warden_tempest_double extends BaseAbility_Plus {
         this.SetDefaultSpecialValue("fire_count", 3);
         this.SetDefaultSpecialValue("shard_fire_count", 0);
 
-        }
+    }
 
 
 

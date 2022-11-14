@@ -8,7 +8,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_bloodseeker_bloodrage = { "ID": "5015", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_FRIENDLY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "FightRecapLevel": "1", "AbilitySound": "hero_bloodseeker.bloodRage", "HasShardUpgrade": "1", "AbilityCastPoint": "0.2", "AbilityManaCost": "25", "AbilityCooldown": "14 12 10 8", "AbilityCastRange": "800", "AbilityModifierSupportValue": "0.1", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "8" }, "02": { "var_type": "FIELD_INTEGER", "attack_speed": "60 90 120 150", "LinkedSpecialBonus": "special_bonus_unique_bloodseeker_5" }, "03": { "var_type": "FIELD_INTEGER", "spell_amp": "15 20 25 30" }, "04": { "var_type": "FIELD_FLOAT", "damage_pct": "2" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1", "AbilityCastGestureSlot": "DEFAULT" };

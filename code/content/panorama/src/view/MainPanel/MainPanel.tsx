@@ -22,7 +22,6 @@ export class MainPanel extends MainPanel_UI<NodePropsData> {
     onRefreshUI() {
 
 
-
         this.addOrShowOnlyNodeChild(this.NODENAME.panel_base, DacBoardPanelV0, {
             horizontalAlign: "center",
             verticalAlign: "bottom",

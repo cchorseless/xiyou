@@ -8,7 +8,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -21,38 +21,38 @@ export class ability1_nevermore_shadowraze1 extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_nevermore_shadowraze1 = Data_nevermore_shadowraze1;
     Init() {
-                this.SetDefaultSpecialValue("chance_scepter", 17);
+        this.SetDefaultSpecialValue("chance_scepter", 17);
         this.SetDefaultSpecialValue("shadowraze_range1_damage_factor", 2);
         this.SetDefaultSpecialValue("shadowraze_range2_damage_factor", 1);
         this.SetDefaultSpecialValue("shadowraze_range3_damage_factor", 0.5);
-        this.SetDefaultSpecialValue("shadowraze_damage", [200,400,600,800,1600,2400]);
+        this.SetDefaultSpecialValue("shadowraze_damage", [200, 400, 600, 800, 1600, 2400]);
         this.SetDefaultSpecialValue("shadowraze_radius", 250);
         this.SetDefaultSpecialValue("shadowraze_interval", 0.25);
         this.SetDefaultSpecialValue("shadowraze_range1", 200);
         this.SetDefaultSpecialValue("shadowraze_range2", 450);
         this.SetDefaultSpecialValue("shadowraze_range3", 700);
-        this.SetDefaultSpecialValue("stack_bonus_damage", [50,100,200,400,800,1600]);
-        this.SetDefaultSpecialValue("stack_bonus_damage_per_agi", [1.0,1.2,1.4,1.6,1.8,2.0]);
+        this.SetDefaultSpecialValue("stack_bonus_damage", [50, 100, 200, 400, 800, 1600]);
+        this.SetDefaultSpecialValue("stack_bonus_damage_per_agi", [1.0, 1.2, 1.4, 1.6, 1.8, 2.0]);
         this.SetDefaultSpecialValue("duration", 11);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("shadowraze_range3", 700);
-        this.SetDefaultSpecialValue("stack_bonus_damage", [50,100,200,400,800,1600]);
-        this.SetDefaultSpecialValue("stack_bonus_damage_per_agi", [1.0,1.2,1.4,1.6,1.8,2.0]);
+        this.SetDefaultSpecialValue("shadowraze_range3", 700);
+        this.SetDefaultSpecialValue("stack_bonus_damage", [50, 100, 200, 400, 800, 1600]);
+        this.SetDefaultSpecialValue("stack_bonus_damage_per_agi", [1.0, 1.2, 1.4, 1.6, 1.8, 2.0]);
         this.SetDefaultSpecialValue("duration", 11);
         this.SetDefaultSpecialValue("chance_scepter", 15);
         this.SetDefaultSpecialValue("shadowraze_range1_damage_factor", 2);
         this.SetDefaultSpecialValue("shadowraze_range2_damage_factor", 1);
         this.SetDefaultSpecialValue("shadowraze_range3_damage_factor", 0.5);
-        this.SetDefaultSpecialValue("shadowraze_damage", [200,400,600,800,1600,2400]);
+        this.SetDefaultSpecialValue("shadowraze_damage", [200, 400, 600, 800, 1600, 2400]);
         this.SetDefaultSpecialValue("shadowraze_radius", 250);
         this.SetDefaultSpecialValue("shadowraze_interval", 0.25);
         this.SetDefaultSpecialValue("shadowraze_range1", 200);
         this.SetDefaultSpecialValue("shadowraze_range2", 450);
 
-        }
+    }
 
 
 

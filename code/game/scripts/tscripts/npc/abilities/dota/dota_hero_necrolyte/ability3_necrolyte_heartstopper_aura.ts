@@ -9,7 +9,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -22,24 +22,24 @@ export class ability3_necrolyte_heartstopper_aura extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_necrolyte_heartstopper_aura = Data_necrolyte_heartstopper_aura;
     Init() {
-                this.SetDefaultSpecialValue("base_damage", [100,200,400,800,1600]);
-        this.SetDefaultSpecialValue("intellect_damage_factor", [1,1,2,3,4]);
-        this.SetDefaultSpecialValue("intellect_bonus_factor", [1,1,1,1,2]);
+        this.SetDefaultSpecialValue("base_damage", [100, 200, 400, 800, 1600]);
+        this.SetDefaultSpecialValue("intellect_damage_factor", [1, 1, 2, 3, 4]);
+        this.SetDefaultSpecialValue("intellect_bonus_factor", [1, 1, 1, 1, 2]);
         this.SetDefaultSpecialValue("scepter_intellect_bonus_factor", 1);
         this.SetDefaultSpecialValue("aura_radius", 1000);
         this.SetDefaultSpecialValue("damage_think_interval", 0.5);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("base_damage", [40,115,190,265,340]);
-        this.SetDefaultSpecialValue("intellect_damage_factor", [0.2,0.3,0.4,0.5,0.6]);
-        this.SetDefaultSpecialValue("intellect_bonus_factor", [0.2,0.25,0.3,0.35,0.4]);
+        this.SetDefaultSpecialValue("base_damage", [40, 115, 190, 265, 340]);
+        this.SetDefaultSpecialValue("intellect_damage_factor", [0.2, 0.3, 0.4, 0.5, 0.6]);
+        this.SetDefaultSpecialValue("intellect_bonus_factor", [0.2, 0.25, 0.3, 0.35, 0.4]);
         this.SetDefaultSpecialValue("scepter_intellect_bonus_factor", 0.2);
         this.SetDefaultSpecialValue("aura_radius", 1000);
         this.SetDefaultSpecialValue("damage_think_interval", 0.5);
 
-        }
+    }
 
 
     GetIntrinsicModifierName() {
@@ -128,7 +128,7 @@ export class modifier_necrolyte_3 extends BaseModifier_Plus {
             // if (GameFunc.IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled() && !Spawner.IsEndless()) {
             //     let factor = params.unit.IsConsideredHero() && 5 || 1
             //     let fInt = this.intellect_bonus_factor + (hAttacker.HasScepter() && this.scepter_intellect_bonus_factor || 0) + this.GetParentPlus().GetTalentValue("special_bonus_unique_necrolyte_custom_3")
-            //      modifier_necrolyte_3_buff.apply( hAttacker , hAttacker, this.GetAbilityPlus(), { int=fInt * factor }) 
+            //      modifier_necrolyte_3_buff.apply( hAttacker , hAttacker, this.GetAbilityPlus(), { int=fInt * factor })
             // }
         }
     }

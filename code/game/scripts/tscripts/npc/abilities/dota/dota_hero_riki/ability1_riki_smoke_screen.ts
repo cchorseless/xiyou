@@ -7,7 +7,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 /** dota原技能数据 */
 export const Data_riki_smoke_screen = { "ID": "5142", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "AbilitySound": "Hero_Riki.Smoke_Screen", "AbilityCastRange": "550", "AbilityCastPoint": "0.2", "AbilityCooldown": "20 17 14 11", "AbilityDuration": "6", "AbilityManaCost": "75", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "300 325 350 375", "LinkedSpecialBonus": "special_bonus_unique_riki_7" }, "02": { "var_type": "FIELD_INTEGER", "duration": "6" }, "03": { "var_type": "FIELD_INTEGER", "miss_rate": "20 35 50 65" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
 
@@ -18,15 +18,15 @@ export class ability1_riki_smoke_screen extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_riki_smoke_screen = Data_riki_smoke_screen;
     Init() {
-                this.SetDefaultSpecialValue("radius", [300,325,350,375,400,425]);
+        this.SetDefaultSpecialValue("radius", [300, 325, 350, 375, 400, 425]);
         this.SetDefaultSpecialValue("duration", 6);
-        this.SetDefaultSpecialValue("move_speed_pct", [15,25,35,45,55,65]);
+        this.SetDefaultSpecialValue("move_speed_pct", [15, 25, 35, 45, 55, 65]);
         this.SetDefaultSpecialValue("bonus_attack_count", 1);
         this.SetDefaultSpecialValue("shard_duration", 3);
         this.SetDefaultSpecialValue("shard_increase_physical_damage", 45);
         this.SetDefaultSpecialValue("shard_interval", 7);
 
-        }
+    }
 
 
     GetAOERadius() {
@@ -119,7 +119,7 @@ export class modifier_riki_1 extends BaseModifier_Plus {
             hAttacker = hAttacker.GetSource()
             if (GameFunc.IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled()) {
                 // && !Spawner.IsEndless()
-                if ( this.GetParentPlus().HasTalent("special_bonus_unique_riki_custom_2") && modifier_riki_1_debuff.exist(  params.unit )) {
+                if (this.GetParentPlus().HasTalent("special_bonus_unique_riki_custom_2") && modifier_riki_1_debuff.exist(params.unit)) {
                     modifier_riki_1_attack_damage.apply(params.attacker, params.attacker, this.GetAbilityPlus(), null)
                 }
             }
@@ -215,7 +215,7 @@ export class modifier_riki_1_thinker extends BaseModifier_Plus {
                 let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), null, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
                 for (let hTarget of (tTarget)) {
 
-                    if (! modifier_riki_1_shard_interval.exist( hTarget )) {
+                    if (!modifier_riki_1_shard_interval.exist(hTarget)) {
                         // 间隔
                         modifier_riki_1_shard_interval.apply(hTarget, hCaster, this.GetAbilityPlus(), { duration: this.shard_interval })
                         // 睡眠，物理伤害加深

@@ -5,7 +5,7 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_ursa_overpower = { "ID": "5358", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "AbilitySound": "Hero_Ursa.Overpower", "AbilityCastAnimation": "ACT_DOTA_OVERRIDE_ABILITY_3", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastRange": "0", "AbilityCastPoint": "0.3 0.3 0.3 0.3", "AbilityCooldown": "12 11 10 9", "AbilityDuration": "20", "AbilityManaCost": "30 40 50 60", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "max_attacks": "3 4 5 6", "LinkedSpecialBonus": "special_bonus_unique_ursa_7" }, "02": { "var_type": "FIELD_INTEGER", "attack_speed_bonus_pct": "400 400 400 400" } } };

@@ -8,7 +8,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 /** dota原技能数据 */
 export const Data_clinkz_strafe = { "ID": "5259", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "FightRecapLevel": "1", "AbilitySound": "Hero_Clinkz.Strafe", "AbilityCooldown": "34 30 26 22", "AbilityCastPoint": "0.0 0.0 0.0 0.0", "AbilityManaCost": "70", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "3 4 5 6", "LinkedSpecialBonus": "special_bonus_unique_clinkz_2" }, "02": { "var_type": "FIELD_INTEGER", "attack_speed_bonus_pct": "90 120 150 180", "LinkedSpecialBonus": "special_bonus_unique_clinkz_7" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };

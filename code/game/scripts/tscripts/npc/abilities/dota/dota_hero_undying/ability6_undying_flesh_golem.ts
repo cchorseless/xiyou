@@ -9,7 +9,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_undying_flesh_golem = { "ID": "5447", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "FightRecapLevel": "2", "AbilitySound": "Hero_Undying.FleshGolem", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_4", "AbilityCooldown": "125", "AbilityManaCost": "100 125 150", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "slow": "40 45 50" }, "02": { "var_type": "FIELD_INTEGER", "damage_amp": "25 30 35" }, "03": { "var_type": "FIELD_FLOAT", "slow_duration": "6" }, "04": { "var_type": "FIELD_INTEGER", "str_percentage": "40 50 60" }, "05": { "var_type": "FIELD_FLOAT", "duration": "40" }, "06": { "var_type": "FIELD_INTEGER", "movement_bonus": "30" } } };

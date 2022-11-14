@@ -8,7 +8,7 @@ import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 /** dota原技能数据 */
 export const Data_axe_battle_hunger = { "ID": "5008", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "FightRecapLevel": "1", "AbilitySound": "Hero_Axe.Battle_Hunger", "AbilityCastAnimation": "ACT_DOTA_OVERRIDE_ABILITY_2", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastPoint": "0.3 0.3 0.3 0.3", "AbilityCooldown": "20 15 10 5", "AbilityManaCost": "50 60 70 80", "AbilityCastRange": "700 775 850 925", "AbilityModifierSupportValue": "0.1", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "12.0" }, "02": { "var_type": "FIELD_INTEGER", "slow": "-12" }, "03": { "var_type": "FIELD_INTEGER", "speed_bonus": "12" }, "04": { "var_type": "FIELD_INTEGER", "damage_per_second": "16 24 32 40", "LinkedSpecialBonus": "special_bonus_unique_axe" }, "05": { "var_type": "FIELD_INTEGER", "damage_reduction_scepter": "30", "CalculateSpellDamageTooltip": "0", "RequiresScepter": "1" }, "06": { "var_type": "FIELD_INTEGER", "scepter_range": "400", "RequiresScepter": "1" } } };
 

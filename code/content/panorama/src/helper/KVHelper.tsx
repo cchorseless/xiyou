@@ -1,5 +1,5 @@
 
-import { KvAllInterface } from "../config/KvAllInterface";
+import { KvAllInterface, KV_AllAbilitys, KV_AllItems, KV_AllUnits } from "../config/KvAllInterface";
 import { FuncHelper } from "./FuncHelper";
 
 export module KVHelper {
@@ -73,4 +73,22 @@ export module KVHelper {
     export function KVData() {
         return (GameUI.CustomUIConfig() as any).KVDATA as KvAllInterface
     }
+
+    export function KVAbilitys() {
+        return (GameUI.CustomUIConfig() as any).KV_Abilitys as KV_AllAbilitys
+    }
+
+    export function KVItems() {
+        return (GameUI.CustomUIConfig() as any).KV_Items as KV_AllItems
+    }
+
+    export function KVUnits() {
+        return (GameUI.CustomUIConfig() as any).KV_Units as KV_AllUnits
+    }
+
+    export function GetAbilityOrItemData(abilityitemname: string) {
+        return (GameUI.CustomUIConfig() as any).KV_Abilitys as KV_AllAbilitys
+    }
+
+
 }

@@ -9,7 +9,7 @@ import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifie
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_feared } from "../../../modifier/effect/modifier_feared";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../modifier/modifier_event";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -22,18 +22,18 @@ export class ability2_queenofpain_blink extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_queenofpain_blink = Data_queenofpain_blink;
     Init() {
-                this.SetDefaultSpecialValue("area_of_effect", 900);
+        this.SetDefaultSpecialValue("area_of_effect", 900);
         this.SetDefaultSpecialValue("projectile_speed", 900);
-        this.SetDefaultSpecialValue("damage_per_int", [7,8,9,11,13,15]);
+        this.SetDefaultSpecialValue("damage_per_int", [7, 8, 9, 11, 13, 15]);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("area_of_effect", 900);
+        this.SetDefaultSpecialValue("area_of_effect", 900);
         this.SetDefaultSpecialValue("projectile_speed", 900);
-        this.SetDefaultSpecialValue("damage_per_int", [4.5,5,5.5,6,6.5,7]);
+        this.SetDefaultSpecialValue("damage_per_int", [4.5, 5, 5.5, 6, 6.5, 7]);
 
-        }
+    }
 
 
 
