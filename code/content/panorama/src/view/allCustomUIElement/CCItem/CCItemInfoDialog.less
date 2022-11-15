@@ -1,0 +1,434 @@
+@define NeutralTier1: #BEBEBE;
+@define NeutralTier2: #92E47E;
+@define NeutralTier3: #7F93FC;
+@define NeutralTier4: #D57BFF;
+@define NeutralTier5: #FFE195;
+@define NeutralTier6: #FF9595;
+@define NeutralTier7: gradient(linear, 0% 0%, 0% 100%, from(#c300ff), to(#ffcc00));
+
+#CC_ItemInfoDialog {
+    background-image: url("file://{images}/custom_game/hud/bg_list_window.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+
+    #Header {
+        flow-children: right;
+
+        #ItemImage {
+            width: 66px;
+            height: 48px;
+            margin-top: 4px;
+            margin-right: 8px;
+            margin-bottom: 6px;
+            margin-left: 4px;
+            box-shadow: 0px 0px 4px black;
+            visibility: collapse;
+        }
+
+
+        #HeaderLabels {
+            flow-children: down;
+
+            #AbilityHeader {
+                flow-children: right;
+
+                #AbilityName {
+                    font-size: 20px;
+                    color: #e1e1e1;
+                    width: fill-parent-flow(1.0);
+                    vertical-align: middle;
+                    padding-left: 4px;
+                    text-overflow: shrink;
+                    letter-spacing: 0.5px;
+                    text-shadow: 2px 2px 0px 1.0 #00000090;
+                    margin-top: 2px;
+                    text-transform: uppercase;
+                    font-weight: semi-bold;
+                    padding-left: 8px;
+                }
+
+                #AbilityLevel {
+                    horizontal-align: right;
+                    margin-left: 8px;
+                    /* margin-top: 6px; */
+                    vertical-align: middle;
+                    color: white;
+                    font-size: 15px;
+                }
+            }
+
+            #AbilitySubHeader {
+                width: 100%;
+                // margin-top: -4px;
+                flow-children: right;
+
+                #ItemSubtitle {
+                    visibility: collapse;
+
+                    &.ShowItemSubtitle {
+                        visibility: visible;
+                        vertical-align: center;
+                        padding-left: 4px;
+                    }
+
+                }
+
+                .ItemAvailabilityIcon {
+                    width: 30px;
+                    height: 30px;
+                    wash-color: #748090;
+                    margin-right: -2px;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center;
+
+                    &.MainShopIcon {
+                        background-image: url("s2r://panorama/images/control_icons/shop_icon_main_psd.vtex");
+                        width: 24px;
+                        height: 24px;
+                        //background-position: 50% 50%;
+                        background-repeat: no-repeat;
+                        background-size: 120%;
+                    }
+
+                    &.SecretShopIcon {
+                        background-image: url("s2r://panorama/images/control_icons/shop_icon_secret_psd.vtex");
+                        width: 24px;
+                        height: 24px;
+                        background-repeat: no-repeat;
+                        background-size: 120%;
+                    }
+
+                    &.SideShopIcon {
+                        background-image: url("s2r://panorama/images/control_icons/shop_icon_side_psd.vtex");
+                        width: 24px;
+                        height: 24px;
+                        background-repeat: no-repeat;
+                        background-size: 130%;
+                    }
+                }
+
+
+                #NeutralItemTier {
+                    color: #666;
+                    font-size: 16px;
+                    padding-left: 4px;
+                    margin-top: 2px;
+                    visibility: collapse;
+
+                    &.TierLabel {
+                        font-weight: semi-bold;
+
+                        &.NeutralTier1 {
+                            color: NeutralTier1;
+                        }
+
+                        &.NeutralTier2 {
+                            color: NeutralTier2;
+                        }
+
+                        &.NeutralTier3 {
+                            color: NeutralTier3;
+                        }
+
+                        &.NeutralTier4 {
+                            color: NeutralTier4;
+                        }
+
+                        &.NeutralTier5 {
+                            color: NeutralTier5;
+                        }
+
+                        &.NeutralTier6 {
+                            color: NeutralTier6;
+                        }
+
+                        &.NeutralTier7 {
+                            color: NeutralTier7;
+                        }
+                    }
+                }
+
+
+                #ItemCost {
+                    flow-children: right;
+                    visibility: collapse;
+
+                    #ItemCostIcon {
+                        width: 23px;
+                        height: 23px;
+                        background-image: url("s2r://panorama/images/hud/icon_gold_psd.vtex");
+                        background-size: 100%;
+                        margin-right: 5px;
+                        margin-left: 4px;
+                    }
+
+                    #BuyCostLabel {
+                        color: #FFCC33;
+                        font-size: 16px;
+                        font-weight: bold;
+                        margin-top: 3px;
+                        text-shadow: 2px 2px 0px 1.0 #00000088;
+                        font-family: monospaceNumbersFont;
+                    }
+
+                    #BuyCostDeficit {
+                        visibility: collapse;
+                        color: #e03e2e;
+                        font-size: 16px;
+                        font-weight: bold;
+                        margin-top: 3px;
+                        margin-left: 4px;
+                        text-shadow: 2px 2px 0px 1.0 #00000088;
+                        font-family: monospaceNumbersFont;
+                    }
+                }
+
+                #StockContainer {
+                    #RestockTime {
+                        font-size: 16px;
+                        color: #e03e2e;
+                        margin-top: 3px;
+                        margin-left: 6px;
+                        text-shadow: 2px 2px 0px 1.0 #00000090;
+                    }
+
+                    #StockAmount {
+                        font-size: 16px;
+                        color: #e1e1e1;
+                        horizontal-align: right;
+                        visibility: collapse;
+                        margin-top: 3px;
+                        margin-left: 6px;
+                        text-shadow: 2px 2px 0px 1.0 #00000090;
+                    }
+                }
+            }
+
+        }
+    }
+
+
+    #AbilityTarget {
+        border-top-color: #29353b;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-bottom-color: #29353b;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        width: 100%;
+        padding: 5px 0px 2px 8px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        flow-children: down;
+
+        Label {
+            color: #596e89;
+            font-size: 16px;
+        }
+
+
+        #AbilityTopRowContainer {
+            width: 100%;
+
+            #CurrentAbilityCosts {
+                flow-children: right;
+                horizontal-align: right;
+                vertical-align: center;
+
+                Label {
+                    color: #596e89;
+                    font-size: 16px;
+                    background-position: 0% 50%;
+                    background-repeat: no-repeat;
+                    padding-left: 25px;
+                    margin-left: 10px;
+                }
+
+                #CurrentAbilityCooldown {
+                    background-image: url("s2r://panorama/images/status_icons/ability_cooldown_icon_psd.vtex");
+                    text-overflow: shrink;
+                }
+
+                #CurrentAbilityManaCost {
+                    background-image: url("s2r://panorama/images/status_icons/ability_manacost_icon_psd.vtex");
+                }
+            }
+        }
+    }
+
+
+    #AbilityCoreDetails {
+        flow-children: down;
+
+        #AbilityAttributes {
+            margin-top: 0px;
+            margin-bottom: 10px;
+            margin-left: 4px;
+            font-size: 17px;
+            width: 400px;
+        }
+
+        #AbilityDescriptionContainer {
+            flow-children: down;
+            width: 330px;
+
+            Label {
+                color: #9ab0cd;
+                font-size: 16px;
+                width: 330px;
+                padding-left: 8px;
+                padding-right: 8px;
+                padding-top: 6px;
+                padding-bottom: 8px;
+                margin-bottom: 12px;
+
+                &.Header {
+                    margin-bottom: 0px;
+                    padding-top: 4px;
+                    height: 28px;
+                    background-repeat: no-repeat;
+                    background-position: top;
+                    background-image: url("s2r://panorama/images/hud/item_tooltip_passive_psd.vtex");
+
+                    &.Active {
+                        background-image: url("s2r://panorama/images/hud/item_tooltip_active_psd.vtex");
+                    }
+                }
+
+                &.AbilityMechanics {
+                    color: white;
+                    background-color: rgb(37, 56, 68);
+                    padding-left: 12px;
+                    padding-right: 12px;
+                    padding-top: 4px;
+                    padding-bottom: 8px;
+                    margin-bottom: 12px;
+                    margin-left: 2px;
+                    margin-right: 3px;
+                    font-size: 14px;
+                    width: 330px;
+                    font-weight: light;
+
+
+                    #AbilityCosts {
+                        flow-children: right-wrap;
+                        visibility: collapse;
+
+                        Label {
+                            color: #7D7D7D;
+                            font-size: 16px;
+                            background-position: 0% 50%;
+                            background-repeat: no-repeat;
+                            padding-left: 25px;
+                            margin-right: 10px;
+                        }
+
+                    }
+                }
+            }
+        }
+
+
+        #AbilityExtraDescription,
+        #AbilityScepterDescription,
+        #ItemScepterDescription,
+        #AbilityScepterDescriptionContainer {
+            font-size: 16px;
+            color: rgb(158, 182, 197);
+            background-color: rgb(37, 56, 68);
+            padding-left: 12px;
+            padding-right: 12px;
+            padding-top: 4px;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            margin-left: 2px;
+            margin-right: 3px;
+            width: 330px;
+        }
+
+
+        #AbilityScepterDescriptionContainer {
+            flow-children: down;
+            visibility: collapse;
+        }
+
+        #AbilityExtraDescription {
+            visibility: collapse;
+        }
+
+        #AbilityGameplayChanges {
+            background-color: #18212a;
+            margin-top: 6px;
+            margin-bottom: 6px;
+            width: 330px;
+            flow-children: down;
+            visibility: collapse;
+            margin-left: 1px;
+        }
+
+        #AbilityLore {
+            padding: 5px 10px 5px 10px;
+            font-size: 14px;
+            color: #3d4e5b;
+            font-style: italic;
+            background-color: #0b1215;
+            width: 330px;
+            margin-top: 12px;
+            margin-left: 1px;
+        }
+
+        #OwnedBy {
+            font-size: 15px;
+            font-weight: bold;
+            visibility: collapse;
+        }
+
+        #SellPriceLabel {
+            visibility: collapse;
+            color: #D58A17;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #SellPriceTimeLabel {
+            visibility: collapse;
+            color: #D58A17;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #DisassembleLabel {
+            visibility: collapse;
+            color: #D58A17;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #DisassembleTimeLabel {
+            visibility: collapse;
+            color: #D58A17;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        #NotEnoughGoldLabel {
+            font-size: 17px;
+            color: red;
+            visibility: collapse;
+        }
+
+    }
+
+    #ConsumableAbilityInfo {
+        margin-top: 4px;
+        width: 100%;
+        font-size: 16px;
+        background-color: #233154;
+        padding: 5px 10px 5px 10px;
+        color: #ccc;
+
+        visibility: collapse;
+    }
+}

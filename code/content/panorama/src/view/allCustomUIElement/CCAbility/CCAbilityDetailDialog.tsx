@@ -182,19 +182,18 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
         let sExtraAttributes = "";
         for (let i = 0; i < aValueNames.length; i++) {
             const sValueName = aValueNames[i];
-            let bRequiresScepter = (Number(AbilityHelper.GetSpecialValueProperty(abilityname, sValueName, "RequiresScepter", entityindex)) || 0) == 1;
+            let bRequiresScepter = (Number(AbilityHelper.GetSpecialValueWithTag(abilityname, sValueName, AbilityHelper.AbilitySpecialValueTag.RequiresScepter, entityindex)) || 0) == 1;
             if (bRequiresScepter && entityindex != -1 && !Entities.HasScepter(entityindex)) {
                 continue;
             }
             let sValueDescription = "#DOTA_Tooltip_ability_" + abilityname + "_" + sValueName;
             switch (sValueName) {
                 case "abilitydamage":
-                    var aValues = AbilityHelper.StringToValues(tData.AbilityDamage || "");
+                    let aValues = AbilityHelper.StringToValues(tData.AbilityDamage || "");
                     sValueDescription = "AbilityDamage";
                     if (aValues.length == 0 || (aValues.length == 1 && aValues[0] == 0)) sValueDescription = "";
                     break;
             }
-
             let sValueLocalize = $.Localize(sValueDescription);
             if (sValueLocalize == sValueDescription) {
                 let sVariableLocalize = $.Localize("#dota_tooltip_item_variable_" + sValueName);
@@ -207,15 +206,12 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                 if (bHasPercentSign) {
                     sValueLocalize = sValueLocalize.substring(1);
                 }
-
                 let bHasSign = sValueLocalize.search(/[\+\-]/g) == 0;
                 if (bHasSign) {
                     let sSign = sValueLocalize.substring(0, 1);
                     sValueLocalize = sValueLocalize.substring(1);
-
                     if (sAttributes != "") sAttributes = sAttributes + "<br>";
                     if (bRequiresScepter) sAttributes = sAttributes + "<span class='ScepterUpgrade'>";
-
                     sAttributes = sAttributes + sSign;
                     sAttributes = sAttributes + " %" + sValueName + "%";
                     if (bHasPercentSign) {
@@ -225,7 +221,7 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                     let aVariables = sValueLocalize.match(/\$(.+?)\b/g);
                     if (aVariables) {
                         for (const block of aVariables) {
-                            let sVariable = block.substr(1);
+                            let sVariable = block.substring(1);
                             let sVariableLocalize = $.Localize("#dota_ability_variable_" + sVariable);
                             if (sVariableLocalize != "#dota_ability_variable_" + sVariable) {
                                 let bHasPercentSign = sVariableLocalize.search(/%/g) == 0;
@@ -238,18 +234,15 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                     } else {
                         sAttributes = sAttributes + sValueLocalize;
                     }
-
                     if (bRequiresScepter) sAttributes = sAttributes + "</span>";
                 } else {
                     if (sExtraAttributes != "") sExtraAttributes = sExtraAttributes + "<br>";
                     if (bRequiresScepter) sExtraAttributes = sExtraAttributes + "<span class='ScepterUpgrade'>";
-
                     sExtraAttributes = sExtraAttributes + sValueLocalize;
                     sExtraAttributes = sExtraAttributes + " %" + sValueName + "%";
                     if (bHasPercentSign) {
                         sExtraAttributes = sExtraAttributes + "%";
                     }
-
                     if (bRequiresScepter) sExtraAttributes = sExtraAttributes + "</span>";
                 }
             }
@@ -500,16 +493,16 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                             {(() => {
                                 let sAbilityName = abilityname;
                                 let bIsBook = false;
-                                if (bIsItem) {
-                                    // let sType = ItemHelper.GetCustomItemType(abilityname);
-                                    // if (sType == "CUSTOM_ITEM_TYPE_ABILITY_BOOK") {
-                                    //     let sLinkAbility = ItemHelper.GetItemValue(abilityname, "LinkAbility");
-                                    //     if (typeof sLinkAbility == "string") {
-                                    //         sAbilityName = sLinkAbility;
-                                    //         bIsBook = true;
-                                    //     }
-                                    // }
-                                }
+                                // if (bIsItem) {
+                                // let sType = ItemHelper.GetCustomItemType(abilityname);
+                                // if (sType == "CUSTOM_ITEM_TYPE_ABILITY_BOOK") {
+                                //     let sLinkAbility = ItemHelper.GetItemValue(abilityname, "LinkAbility");
+                                //     if (typeof sLinkAbility == "string") {
+                                //         sAbilityName = sLinkAbility;
+                                //         bIsBook = true;
+                                //     }
+                                // }
+                                // }
                                 let sAllDescription = "#DOTA_Tooltip_ability_" + sAbilityName + "_Description";
                                 let list: JSX.Element[] = [];
                                 let sAllDescriptionLocalize = $.Localize(sAllDescription);
@@ -529,7 +522,6 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
                                         //     }
                                         // }
                                     }
-
                                     this.__root__.current?.RemoveClass("DevouredFirstLine");
                                     let iLine = 0;
                                     for (let i = 0; i < aDescriptions.length; i++) {
