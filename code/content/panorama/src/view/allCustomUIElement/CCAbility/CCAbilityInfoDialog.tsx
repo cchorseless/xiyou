@@ -107,6 +107,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         const showextradescription = this.props.showextradescription!;
         const onlynowlevelvalue = this.props.onlynowlevelvalue!;
 
+        dialogVariables['level'] = iLevel.toString();
         let iAbilityIndex = -1 as AbilityEntityIndex;
         if (castentityindex && castentityindex != -1) {
             iAbilityIndex = Entities.GetAbilityByName(castentityindex, abilityname)
@@ -318,7 +319,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                 </Panel>
                 <Panel id="AbilityTarget">
                     <Panel id="AbilityTopRowContainer">
-                        <Label id="AbilityCastType" className={CSSHelper.ClassMaker({ 'Hidden': sCastType == "" })} localizedText="#DOTA_AbilityTooltip_CastType" html={true} />
+                        <Label id="AbilityCastType" className={CSSHelper.ClassMaker({ 'Hidden': sCastType == "" })} localizedText="#DOTA_AbilityTooltip_CastType" html={true} dialogVariables={dialogVariables} />
                         <Panel id="CurrentAbilityCosts" className={CSSHelper.ClassMaker({ 'Hidden': (fCurrentCooldown == 0 && fCurrentManaCost == 0) })}>
                             <Label id="CurrentAbilityManaCost" className={CSSHelper.ClassMaker("ManaCost", { 'Hidden': fCurrentManaCost == 0 })} localizedText="{s:current_manacost}" html={true} dialogVariables={dialogVariables} />
                             <Label id="CurrentAbilityCooldown" className={CSSHelper.ClassMaker("Cooldown", { 'Hidden': fCurrentCooldown == 0 })} localizedText="{s:current_cooldown}" html={true} dialogVariables={dialogVariables} />
@@ -331,7 +332,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                 </Panel>
                 <Panel id="AbilityCoreDetails">
                     <Label id="AbilityAttributes" className={CSSHelper.ClassMaker({ 'Hidden': sAttributes == "" })} localizedText="#DOTA_AbilityTooltip_Attributes" html={true} dialogVariables={dialogVariables} />
-                    <Panel id="AbilityDescriptionContainer" >
+                    <Panel id="CCAbilityDescriptionContainer" >
                         {this.parseAbilityDescription()}
                     </Panel>
                     <Panel id="AbilityScepterDescriptionContainer">

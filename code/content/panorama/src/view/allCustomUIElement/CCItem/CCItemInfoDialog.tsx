@@ -438,7 +438,7 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                             <Label className="Cooldown" localizedText="{s:current_cooldown}" html={true} dialogVariables={dialogVariables} />
                             <Label className="ManaCost" localizedText="{s:current_manacost}" html={true} dialogVariables={dialogVariables} />
                         </Panel>
-                        <Panel id="AbilityDescriptionContainer" >
+                        <Panel id="CCAbilityDescriptionContainer" >
                             {this.parseAbilityDescription()}
                         </Panel>
                     </Panel>

@@ -10,7 +10,8 @@
     background-image: url("file://{images}/custom_game/hud/bg_list_window.png");
     background-size: 100%;
     background-repeat: no-repeat;
-
+    padding: 5px;
+    width: 350px;
 
     #Header {
         flow-children: right;
@@ -23,7 +24,7 @@
             margin-bottom: 6px;
             margin-left: 4px;
             box-shadow: 0px 0px 4px black;
-            visibility: collapse;
+
         }
 
 
@@ -64,7 +65,7 @@
                 flow-children: right;
 
                 #ItemSubtitle {
-                    visibility: collapse;
+
 
                     &.ShowItemSubtitle {
                         visibility: visible;
@@ -115,7 +116,6 @@
                     font-size: 16px;
                     padding-left: 4px;
                     margin-top: 2px;
-                    visibility: collapse;
 
                     &.TierLabel {
                         font-weight: semi-bold;
@@ -153,7 +153,6 @@
 
                 #ItemCost {
                     flow-children: right;
-                    visibility: collapse;
 
                     #ItemCostIcon {
                         width: 23px;
@@ -174,7 +173,6 @@
                     }
 
                     #BuyCostDeficit {
-                        visibility: collapse;
                         color: #e03e2e;
                         font-size: 16px;
                         font-weight: bold;
@@ -198,7 +196,6 @@
                         font-size: 16px;
                         color: #e1e1e1;
                         horizontal-align: right;
-                        visibility: collapse;
                         margin-top: 3px;
                         margin-left: 6px;
                         text-shadow: 2px 2px 0px 1.0 #00000090;
@@ -261,72 +258,56 @@
 
     #AbilityCoreDetails {
         flow-children: down;
+        width: 100%;
 
         #AbilityAttributes {
             margin-top: 0px;
             margin-bottom: 10px;
             margin-left: 4px;
             font-size: 17px;
-            width: 400px;
+            width: 100%;
         }
 
-        #AbilityDescriptionContainer {
+        #CCAbilityDescriptionContainer {
             flow-children: down;
-            width: 330px;
+            width: 100%;
 
             Label {
                 color: #9ab0cd;
                 font-size: 16px;
-                width: 330px;
+                width: 100%;
                 padding-left: 8px;
                 padding-right: 8px;
                 padding-top: 6px;
                 padding-bottom: 8px;
+            }
+
+            .Header {
+                margin-bottom: 0px;
+                padding-top: 4px;
+                height: 28px;
+                background-repeat: no-repeat;
+                background-position: top;
+                background-image: url("s2r://panorama/images/hud/item_tooltip_passive_psd.vtex");
+
+                &.Active {
+                    background-image: url("s2r://panorama/images/hud/item_tooltip_active_psd.vtex");
+                }
+            }
+
+            .AbilityMechanics {
+                color: white;
+                background-color: rgb(37, 56, 68);
+                padding-left: 12px;
+                padding-right: 12px;
+                padding-top: 4px;
+                padding-bottom: 8px;
                 margin-bottom: 12px;
-
-                &.Header {
-                    margin-bottom: 0px;
-                    padding-top: 4px;
-                    height: 28px;
-                    background-repeat: no-repeat;
-                    background-position: top;
-                    background-image: url("s2r://panorama/images/hud/item_tooltip_passive_psd.vtex");
-
-                    &.Active {
-                        background-image: url("s2r://panorama/images/hud/item_tooltip_active_psd.vtex");
-                    }
-                }
-
-                &.AbilityMechanics {
-                    color: white;
-                    background-color: rgb(37, 56, 68);
-                    padding-left: 12px;
-                    padding-right: 12px;
-                    padding-top: 4px;
-                    padding-bottom: 8px;
-                    margin-bottom: 12px;
-                    margin-left: 2px;
-                    margin-right: 3px;
-                    font-size: 14px;
-                    width: 330px;
-                    font-weight: light;
-
-
-                    #AbilityCosts {
-                        flow-children: right-wrap;
-                        visibility: collapse;
-
-                        Label {
-                            color: #7D7D7D;
-                            font-size: 16px;
-                            background-position: 0% 50%;
-                            background-repeat: no-repeat;
-                            padding-left: 25px;
-                            margin-right: 10px;
-                        }
-
-                    }
-                }
+                margin-left: 2px;
+                margin-right: 3px;
+                font-size: 14px;
+                width: 100%;
+                font-weight: light;
             }
         }
 
@@ -345,26 +326,36 @@
             margin-bottom: 12px;
             margin-left: 2px;
             margin-right: 3px;
-            width: 330px;
+            width: 100%;
         }
 
+        #AbilityCosts {
+            flow-children: right-wrap;
+
+
+            Label {
+                color: #7D7D7D;
+                font-size: 16px;
+                background-position: 0% 50%;
+                background-repeat: no-repeat;
+                padding-left: 25px;
+                margin-right: 10px;
+            }
+
+        }
 
         #AbilityScepterDescriptionContainer {
             flow-children: down;
-            visibility: collapse;
         }
 
-        #AbilityExtraDescription {
-            visibility: collapse;
-        }
+        #AbilityExtraDescription {}
 
         #AbilityGameplayChanges {
             background-color: #18212a;
             margin-top: 6px;
             margin-bottom: 6px;
-            width: 330px;
+            width: 100%;
             flow-children: down;
-            visibility: collapse;
             margin-left: 1px;
         }
 
@@ -374,7 +365,7 @@
             color: #3d4e5b;
             font-style: italic;
             background-color: #0b1215;
-            width: 330px;
+            width: 100%;
             margin-top: 12px;
             margin-left: 1px;
         }
@@ -382,32 +373,27 @@
         #OwnedBy {
             font-size: 15px;
             font-weight: bold;
-            visibility: collapse;
         }
 
         #SellPriceLabel {
-            visibility: collapse;
             color: #D58A17;
             font-size: 15px;
             font-weight: bold;
         }
 
         #SellPriceTimeLabel {
-            visibility: collapse;
             color: #D58A17;
             font-size: 15px;
             font-weight: bold;
         }
 
         #DisassembleLabel {
-            visibility: collapse;
             color: #D58A17;
             font-size: 15px;
             font-weight: bold;
         }
 
         #DisassembleTimeLabel {
-            visibility: collapse;
             color: #D58A17;
             font-size: 15px;
             font-weight: bold;
@@ -416,7 +402,6 @@
         #NotEnoughGoldLabel {
             font-size: 17px;
             color: red;
-            visibility: collapse;
         }
 
     }
@@ -428,7 +413,5 @@
         background-color: #233154;
         padding: 5px 10px 5px 10px;
         color: #ccc;
-
-        visibility: collapse;
     }
 }
