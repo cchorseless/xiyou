@@ -753,7 +753,8 @@ export module AbilityHelper {
         // }
         return sStr;
     }
-    export function GetLevelCooldown(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
+    export function
+        GetLevelCooldown(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
         GameEvents.SendEventClientSide(Call_AbilityFunc, {
             ability_entindex: iEntityIndex,
             level: iLevel,
