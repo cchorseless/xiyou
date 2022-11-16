@@ -13,13 +13,17 @@ interface ICCInventory extends NodePropsData {
 }
 
 export class CCInventory extends CCPanel<ICCInventory> {
+
+
     render() {
         return (
             this.__root___isValid && (
-                <GenericPanel type="DOTAInventory" className="PortraitLocation" id={"inventory"} ref={this.__root__}  {...this.initRootAttrs()}>
-                    {this.props.children}
-                    {this.__root___childs}
-                </GenericPanel>
+                <Panel id="CC_Inventory" ref={this.__root__} {...this.initRootAttrs()}>
+                    <GenericPanel type="DOTAInventory" className="PortraitLocation" id={"inventory"} ref={this.__root__}  {...this.initRootAttrs()}>
+                        {this.props.children}
+                        {this.__root___childs}
+                    </GenericPanel>
+                </Panel>
             )
         );
 
@@ -34,9 +38,14 @@ export class CCInventory extends CCPanel<ICCInventory> {
     }
     onStartUI() {
         this.addEvent();
-        let panel = this.__root__.current!
-        // this.inventoryitems = panel.FindChildTraverse("inventory_items");
-        // this.InventoryBG = panel.FindChildTraverse("InventoryBG");
+        let panel = this.__root__.current!;
+        panel.style.width = "100%";
+        panel.style.height = "100%";
+        let inventoryitems = panel.FindChildTraverse("inventory_items")!;
+        let InventoryBG = panel.FindChildTraverse("InventoryBG")!;
+        panel.style.uiScale = "100%";
+        inventoryitems.style.uiScale = "100%";
+        InventoryBG.style.uiScale = "100%";
         let mainpanel = CCPanel.GetInstanceByName<MainPanel>("MainPanel");
         for (let i = 0; i < 9; i++) {
             let _slot = panel.FindChildTraverse("inventory_slot_" + i);

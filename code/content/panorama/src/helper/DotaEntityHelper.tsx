@@ -1023,6 +1023,15 @@ export module UnitHelper {
 
 
 export module ItemHelper {
+    export function IsItemLocked(iItemEntIndex: ItemEntityIndex) {
+        // let tData = CustomNetTables.GetTableValue("items", iItemEntIndex.toString());
+
+        // if (tData && typeof (tData.bLocked) == "number") {
+        //     return tData.bLocked == 1;
+        // }
+
+        return false;
+    }
     export function GetItemValue(sItemName: string, sKeyName: string) {
         let tItemKeyValues = KVHelper.KVItems()[sItemName];
         if (tItemKeyValues) {
@@ -1036,7 +1045,7 @@ export module ItemHelper {
     }
 
     export function GetItemRarity(sItemName: string) {
-        let iRarity = GetItemValue(sItemName, "Rarity");
+        let iRarity = Number(GetItemValue(sItemName, "Rarity"));
         if (iRarity == undefined || iRarity == null) {
             return -1;
         }

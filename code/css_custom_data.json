@@ -39,7 +39,19 @@
         {
             "name": "align",
             "description": "center center"
+        },
+        {
+            "name": "tooltip-body-position",
+            "description": "number like 50% 50%"
+
         }
+        ,
+        {
+            "name": "pre-transform-scale2d",
+            "description": "number like 1.2"
+        }
+        
+
     ],
     "pseudoClasses": [{
         "name": ":my-link",

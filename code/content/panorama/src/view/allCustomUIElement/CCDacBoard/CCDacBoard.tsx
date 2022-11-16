@@ -9,6 +9,8 @@ import { CCPortraitGroup } from "./CCPortraitGroup";
 import "./CCDacBoard.less";
 import { CCDOTAHudTalentDisplay } from "./CCDOTAHudTalentDisplay";
 import { CCDOTAAghsStatusDisplay } from "./CCDOTAAghsStatusDisplay";
+import { CCInventorySlot } from "../CCInventory/CCInventorySlot";
+import { InventorySlot } from "../CCInventory/AbilityPanel";
 
 interface ICCDacBoard {
 
@@ -29,12 +31,12 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
                     <CCBuffList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"140px"} />
                     <CCPanel flowChildren="right">
                         <CCAbilityList noshowability={[7, 8, 9, 10, 11, 12, 13]} horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"50px"} />
-                        <CCDOTAAghsStatusDisplay />
+                        <CCDOTAAghsStatusDisplay marginTop={"60px"} />
                     </CCPanel>
                     <CCHealthMana verticalAlign="bottom" marginBottom={"0px"} />
                 </CCPanel>
                 <Panel id="DacBoardRight">
-                    <CCInventory />
+                    <InventorySlot id={"inventory_slot_" + 1} />
                 </Panel>
                 {this.props.children}
                 {this.__root___childs}

@@ -8,21 +8,30 @@ interface ICCAbilityList extends NodePropsData {
 }
 
 export class CCAbilityList extends CCPanel<ICCAbilityList> {
+
+    onStartUI() {
+        this.hideAbility()
+    }
+
+    private hideAbility() {
+        if (this.props.noshowability) {
+            this.props.noshowability.forEach((i) => {
+                let panel = this.__root__.current!.FindChild("Ability" + i);
+                if (panel) {
+                    panel.visible = false;
+                }
+            })
+        }
+    }
     render() {
         return (
             this.__root___isValid && (
-                <GenericPanel type="DOTAAbilityList" id="abilities" ref={this.__root__}  {...this.initRootAttrs()} onload={
-                    (rootpanel) => {
-                        if (this.props.noshowability) {
-                            this.props.noshowability.forEach((i) => {
-                                let panel = rootpanel.FindChild("Ability" + i);
-                                if (panel) {
-                                    panel.visible = false;
-                                }
-                            })
+                <GenericPanel type="DOTAAbilityList" id="abilities" ref={this.__root__}  {...this.initRootAttrs()}
+                    onload={
+                        (rootpanel) => {
+                            this.hideAbility()
                         }
-                    }
-                }>
+                    }>
                     {this.props.children}
                     {this.__root___childs}
                 </GenericPanel>
