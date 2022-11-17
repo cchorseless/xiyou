@@ -942,10 +942,10 @@ export module CSSHelper {
         if (panel == null || !panel.IsValid()) {
             return [0, 0];
         }
-        // let scalex = panel.actualuiscale_x || 1;
-        // let scaley = panel.actualuiscale_y || 1;
+        let scalex = panel.actualuiscale_x || 1;
+        let scaley = panel.actualuiscale_y || 1;
         if (panel.IsSizeValid()) {
-            return [panel.actuallayoutwidth, panel.actuallayoutheight];
+            return [panel.actuallayoutwidth / scalex, panel.actuallayoutheight / scaley];
         }
         let width = panel.style.width, height = panel.style.height;
         if (width == null || height == null) {

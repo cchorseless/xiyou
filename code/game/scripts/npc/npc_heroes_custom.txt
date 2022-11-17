@@ -8,6 +8,8 @@
 		"vscripts" "npc/courier/courier_base.lua"
 		"Model" "models/courier/donkey_ti7/donkey_ti7.vmdl"
 		"ModelScale" "1"
+		"BoundsHullName" "DOTA_HULL_SIZE_HERO"
+		"RingRadius" "70"
 		"VisionDaytimeRange" "2000"
 		"VisionNighttimeRange" "2000"
 		"Ability1" "courier_draw_card_v1"

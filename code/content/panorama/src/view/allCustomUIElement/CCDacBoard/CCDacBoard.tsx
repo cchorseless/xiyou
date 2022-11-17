@@ -5,38 +5,39 @@ import { CCPanel } from "../CCPanel/CCPanel";
 import { CCBuffList } from "./CCBuffList";
 import { CCHealthMana } from "./CCHealthMana";
 import { CCPortraitGroup } from "./CCPortraitGroup";
-
-import "./CCDacBoard.less";
 import { CCDOTAHudTalentDisplay } from "./CCDOTAHudTalentDisplay";
 import { CCDOTAAghsStatusDisplay } from "./CCDOTAAghsStatusDisplay";
-import { CCInventorySlot } from "../CCInventory/CCInventorySlot";
-import { InventorySlot } from "../CCInventory/AbilityPanel";
+import "./CCDacBoard.less";
+import { CSSHelper } from "../../../helper/CSSHelper";
 
 interface ICCDacBoard {
 
 }
 export class CCDacBoard extends CCPanel<ICCDacBoard> {
+    onReady() {
+        return CSSHelper.IsReadyUI()
+    }
     onInitUI() {
     }
 
     render() {
+        if (!this.__root___isValid) { return <Panel ref={this.__root__} id="CC_DacBoardPanel" /> }
         return (
-            this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_DacBoardPanel"  {...this.initRootAttrs()} hittest={false}>
-                <Panel id="DacBoardLeft" >
+                <Panel id="DacBoardLeft" hittest={false}>
                     <CCPortraitGroup particleAttrs={{}} align="right bottom" />
                 </Panel>
-                <CCPanel id="DacBoardCenter" minWidth={"300px"}>
+                <CCPanel id="DacBoardCenter" minWidth={"300px"} hittest={false}>
                     <CCPanel id="DacBoardCenterBG" />
-                    <CCBuffList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"140px"} />
-                    <CCPanel flowChildren="right">
+                    <CCPanel flowChildren="right" hittest={false}>
                         <CCAbilityList noshowability={[7, 8, 9, 10, 11, 12, 13]} horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"50px"} />
                         <CCDOTAAghsStatusDisplay marginTop={"60px"} />
                     </CCPanel>
                     <CCHealthMana verticalAlign="bottom" marginBottom={"0px"} />
+                    <CCBuffList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"140px"} />
                 </CCPanel>
-                <Panel id="DacBoardRight">
-                    <InventorySlot id={"inventory_slot_" + 1} />
+                <Panel id="DacBoardRight" hittest={false}>
+                    <CCInventory verticalAlign="bottom" marginBottom={"0px"} />
                 </Panel>
                 {this.props.children}
                 {this.__root___childs}

@@ -157,7 +157,6 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
             else if (issizevalid == null) {
                 tasktimer.Clear();
             }
-
         }), 10);
     }
     /**显示tooltip弹窗 */

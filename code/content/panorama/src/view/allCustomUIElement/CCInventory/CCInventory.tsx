@@ -2,32 +2,80 @@ import React, { createRef, PureComponent } from "react";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { GameEnum } from "../../../libs/GameEnum";
-import { MainPanel } from "../../MainPanel/MainPanel";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
+import { CCMainPanel } from "../../MainPanel/CCMainPanel";
+
+import "./CCInventory.less";
 
 interface ICCInventory extends NodePropsData {
 }
 
 export class CCInventory extends CCPanel<ICCInventory> {
-
-
     render() {
         return (
             this.__root___isValid && (
                 <Panel id="CC_Inventory" ref={this.__root__} {...this.initRootAttrs()}>
-                    <GenericPanel type="DOTAInventory" className="PortraitLocation" id={"inventory"} ref={this.__root__}  {...this.initRootAttrs()}>
-                        {this.props.children}
-                        {this.__root___childs}
-                    </GenericPanel>
+                    {this.props.children}
+                    {this.__root___childs}
                 </Panel>
             )
         );
-
     }
+    onInitUI() {
+        this.addEvent();
+    }
+    // 整体背景
+    inventoryitems: Panel | null;
+    // 背包背景
+    InventoryBG: Panel | null;
+    onStartUI() {
+        let panel = $.CreatePanelWithProperties("DOTAInventory", this.__root__.current!, "inventory", {});
+        if (panel) {
+            panel.SetParent(this.__root__.current!);
+            this.inventoryitems = panel.FindChildTraverse("inventory_items")!;
+            this.InventoryBG = panel.FindChildTraverse("InventoryBG")!;
+            this.InventoryBG.AddClass("CC_InventoryBg");
+            panel.style.width = "100%";
+            panel.style.height = "100%";
+            this.InventoryBG.ApplyStyles(true);
+            let mainpanel = CCPanel.GetInstanceByName<CCMainPanel>("CCMainPanel");
+            for (let i = 0; i < 9; i++) {
+                let _slot = panel.FindChildTraverse("inventory_slot_" + i);
+                if (_slot) {
+                    // 背包道具背景图
+                    let buttonSize = _slot.FindChildTraverse("ButtonSize")!;
+                    buttonSize.AddClass("CC_ButtonSizeBg");
+                    let abilityButton = _slot.FindChildTraverse("AbilityButton");
+                    let itemImage = abilityButton!.FindChildTraverse("ItemImage") as ItemImage;
+                    let item_rare = $.CreatePanelWithProperties("Image", buttonSize, "customitem_rare_" + i, {
+                    });
+                    item_rare.hittest = true;
+                    item_rare.SetDraggable(true);
+                    item_rare.style.zIndex = 100;
+                    item_rare.style.width = "100%";
+                    item_rare.style.height = "100%";
+                    item_rare.SetScaling("stretch-to-fit-preserve-aspect");
+                    item_rare.SetPanelEvent("onmouseactivate", () => {
+                        this.onBtn_leftClick(i);
+                    });
+                    item_rare.SetPanelEvent("oncontextmenu", () => {
+                        mainpanel.HideToolTip();
+                        this.onBtn_rightClick(i);
+                    });
+                    DotaUIHelper.addDragEvent(itemImage!, "DragDrop", FuncHelper.Handler.create(this, (panel: Panel) => {
+                        this.onBtn_dragdrop(i, panel);
+                    }))
+
+                }
+            }
+            this.onRefreshUI();
+        }
+    }
+
     addEvent() {
         this.addGameEvent(GameEnum.GameEvent.dota_inventory_changed, (e) => {
             this.onRefreshUI();
@@ -36,54 +84,7 @@ export class CCInventory extends CCPanel<ICCInventory> {
             this.onRefreshUI();
         });
     }
-    onStartUI() {
-        this.addEvent();
-        let panel = this.__root__.current!;
-        panel.style.width = "100%";
-        panel.style.height = "100%";
-        let inventoryitems = panel.FindChildTraverse("inventory_items")!;
-        let InventoryBG = panel.FindChildTraverse("InventoryBG")!;
-        panel.style.uiScale = "100%";
-        inventoryitems.style.uiScale = "100%";
-        InventoryBG.style.uiScale = "100%";
-        let mainpanel = CCPanel.GetInstanceByName<MainPanel>("MainPanel");
-        for (let i = 0; i < 9; i++) {
-            let _slot = panel.FindChildTraverse("inventory_slot_" + i);
-            if (_slot) {
-                // 背包道具背景图
-                let buttonSize = _slot.FindChildTraverse("ButtonSize");
-                let abilityButton = _slot.FindChildTraverse("AbilityButton");
-                let itemImage = abilityButton!.FindChildTraverse("ItemImage") as ItemImage;
-                // buttonSize!.style.backgroundImage = "none";
-                // buttonSize!.style.backgroundColor = "none";
-                // this.buttonSizePanel.push(buttonSize!);
-                // 备用背包背景图
-                let buttonWell = _slot.FindChildTraverse("ButtonWell");
-                // buttonWell!.style.boxShadow = "none";
-                // this.buttonSizeWell.push(buttonWell!);
-                let item_rare = $.CreatePanelWithProperties("Image", buttonSize!, "customitem_rare_" + i, {});
-                item_rare.hittest = true;
-                item_rare.SetDraggable(true);
-                item_rare.style.zIndex = 100;
-                item_rare.style.width = "100%";
-                item_rare.style.height = "100%";
-                item_rare.SetScaling("stretch-to-fit-preserve-aspect");
-                item_rare.SetPanelEvent("onmouseactivate", () => {
-                    this.onBtn_leftClick(i);
-                });
-                item_rare.SetPanelEvent("oncontextmenu", () => {
-                    mainpanel.HideToolTip();
-                    this.onBtn_rightClick(i);
-                });
-                // mainpanel.AddCustomToolTip(item_rare!, CombinationInfoDialog, () => { return { title: "1111", tip: "2222" } })
-                DotaUIHelper.addDragEvent(itemImage!, "DragDrop", FuncHelper.Handler.create(this, (panel: Panel) => {
-                    this.onBtn_dragdrop(i, panel);
-                }))
 
-            }
-        }
-        this.onRefreshUI();
-    }
     selectedEntityid: EntityIndex;
     onRefreshUI() {
         this.selectedEntityid = Players.GetLocalPlayerPortraitUnit();;

@@ -148,6 +148,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
 
         // 属性
         let aValueNames = AbilityHelper.GetSpecialNames(abilityname, castentityindex);
+        LogHelper.print(aValueNames);
         let sAttributes = "";
         let sExtraAttributes = "";
         for (let i = 0; i < aValueNames.length; i++) {
@@ -159,7 +160,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
             let sValueDescription = "#DOTA_Tooltip_ability_" + abilityname + "_" + sValueName;
             switch (sValueName) {
                 case "abilitydamage":
-                    var aValues = AbilityHelper.StringToValues(tData.AbilityDamage || "");
+                    let aValues = AbilityHelper.StringToValues(tData.AbilityDamage || "");
                     sValueDescription = "AbilityDamage";
                     if (aValues.length == 0 || (aValues.length == 1 && aValues[0] == 0)) sValueDescription = "";
                     break;
@@ -176,15 +177,12 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                 if (bHasPercentSign) {
                     sValueLocalize = sValueLocalize.substring(1);
                 }
-
                 let bHasSign = sValueLocalize.search(/[\+\-]/g) == 0;
                 if (bHasSign) {
                     let sSign = sValueLocalize.substring(0, 1);
                     sValueLocalize = sValueLocalize.substring(1);
-
                     if (sAttributes != "") sAttributes = sAttributes + "<br>";
                     if (bRequiresScepter) sAttributes = sAttributes + "<span class='ScepterUpgrade'>";
-
                     sAttributes = sAttributes + sSign;
                     sAttributes = sAttributes + " %" + sValueName + "%";
                     if (bHasPercentSign) {
@@ -207,18 +205,15 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                     } else {
                         sAttributes = sAttributes + sValueLocalize;
                     }
-
                     if (bRequiresScepter) sAttributes = sAttributes + "</span>";
                 } else {
                     if (sExtraAttributes != "") sExtraAttributes = sExtraAttributes + "<br>";
                     if (bRequiresScepter) sExtraAttributes = sExtraAttributes + "<span class='ScepterUpgrade'>";
-
                     sExtraAttributes = sExtraAttributes + sValueLocalize;
                     sExtraAttributes = sExtraAttributes + " %" + sValueName + "%";
                     if (bHasPercentSign) {
                         sExtraAttributes = sExtraAttributes + "%";
                     }
-
                     if (bRequiresScepter) sExtraAttributes = sExtraAttributes + "</span>";
                 }
             }
@@ -229,6 +224,8 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         // sExtraAttributes = AbilityHelper.ReplaceAbilityValues({ sStr: sExtraAttributes, bShowExtra: showextradescription, sAbilityName: abilityname, iLevel: bIsItem ? iLevel : (iLevel != -1 ? iLevel : 0), iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
         dialogVariables['extra_attributes'] = sExtraAttributes;
 
+        LogHelper.print(sAttributes)
+        LogHelper.print(sExtraAttributes)
 
         let bIsActive = AbilityHelper.isActive(iBehavior);
         let iActiveDescriptionLine = tData.ActiveDescriptionLine || 1;
@@ -362,7 +359,6 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                     <Label id="AbilityLore" className={CSSHelper.ClassMaker({ 'Hidden': $.Localize("#" + sLore) == "#" + sLore || $.Localize("#" + sLore) == "" })} localizedText="#DOTA_AbilityTooltip_Lore" html={true} dialogVariables={dialogVariables} />
                     {/* <Label id="AbilityUpgradeLevel" className={CSSHelper.ClassMaker({ 'Hidden': iAbilityLearnResult != AbilityLearnResult_t.ABILITY_CANNOT_BE_UPGRADED_REQUIRES_LEVEL })} localizedText="#DOTA_AbilityTooltip_UpgradeLevel" html={true} /> */}
                 </Panel>
-
             </Panel>)
     }
 }

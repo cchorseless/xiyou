@@ -37,7 +37,7 @@ export class RootPanel extends CCPanel {
     render() {
         return (
             this.__root___isValid && (
-                <Panel ref={this.__root__} className="CC_root" {...this.initRootAttrs()}>
+                <Panel ref={this.__root__} className="CC_root" hittest={false} {...this.initRootAttrs()}>
                     {/* <EntityOverHeadPanel /> */}
                     <CCMainPanel />
                     <CCDebugPanel direction="left" hittest={false} />
@@ -61,8 +61,8 @@ function StartRenderGameUI() {
     // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_GAME_NAME, false);
     // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_TEAMS, false);
     // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_CLOCK, false);
-    // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_QUICK_STATS, false);
-    // GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_ACTION_PANEL, false);
+    GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_QUICK_STATS, false);
+    GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_ACTION_PANEL, false);
     GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_ACTION_MINIMAP, false);
 
     /**初始化系统 */
