@@ -253,7 +253,6 @@ export class BuildingManagerComponent extends ET.Component {
         player.CombinationManager().OnRoundStartBattle();
 
     }
-
     OnRoundStartPrize(round: ERoundBoard) {
         this.getAllBattleBuilding()
             .forEach((b) => {

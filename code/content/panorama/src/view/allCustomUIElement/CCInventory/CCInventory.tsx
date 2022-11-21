@@ -8,6 +8,7 @@ import { CSSHelper } from "../../../helper/CSSHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
+import { CCItemInfoDialog } from "../CCItem/CCItemInfoDialog";
 
 import "./CCInventory.less";
 
@@ -49,10 +50,19 @@ export class CCInventory extends CCPanel<ICCInventory> {
                     // 背包道具背景图
                     let buttonSize = _slot.FindChildTraverse("ButtonSize")!;
                     buttonSize.AddClass("CC_ButtonSizeBg");
-                    let abilityButton = _slot.FindChildTraverse("AbilityButton");
+                    let abilityButton = _slot.FindChildTraverse("AbilityButton")!;
+                    mainpanel.RegCustomToolTip(abilityButton, CCItemInfoDialog, () => {
+                        let selectedEntityid = Players.GetLocalPlayerPortraitUnit();;
+                        let abilityindex = Entities.GetItemInSlot(selectedEntityid, i);
+                        return {
+                            abilityname: Abilities.GetAbilityName(abilityindex),
+                            inventoryslot: i,
+                            castentityindex: selectedEntityid,
+                            level: Abilities.GetLevel(abilityindex),
+                        }
+                    }, true);
                     let itemImage = abilityButton!.FindChildTraverse("ItemImage") as ItemImage;
-                    let item_rare = $.CreatePanelWithProperties("Image", buttonSize, "customitem_rare_" + i, {
-                    });
+                    let item_rare = $.CreatePanelWithProperties("Image", buttonSize, "customitem_rare_" + i, {});
                     item_rare.hittest = true;
                     item_rare.SetDraggable(true);
                     item_rare.style.zIndex = 100;
@@ -66,6 +76,7 @@ export class CCInventory extends CCPanel<ICCInventory> {
                         mainpanel.HideToolTip();
                         this.onBtn_rightClick(i);
                     });
+
                     DotaUIHelper.addDragEvent(itemImage!, "DragDrop", FuncHelper.Handler.create(this, (panel: Panel) => {
                         this.onBtn_dragdrop(i, panel);
                     }))

@@ -27,6 +27,11 @@ export module AbilityHelper {
     export enum AbilitySpecialValueTag {
         /**神杖升级 */
         RequiresScepter = "RequiresScepter",
+        /**最小值 */
+        _min = "_min",
+        _max = "_max",
+        /** */
+        CalculateSpellDamageTooltip = "CalculateSpellDamageTooltip",
     }
 
     export function isActive(iBehavior: DOTA_ABILITY_BEHAVIOR) {
@@ -359,36 +364,35 @@ export module AbilityHelper {
         return SimplifyValuesArray(aValues);
     }
     export function GetSpecialValues(sAbilityName: string, sName: string, iEntityIndex = -1) {
-        // let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
+        let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
         // if (iEntityIndex != -1) {
         //     let aValues = GetAbilityMechanicsUpgradeSpecialValues(iEntityIndex, sAbilityName, sName);
         //     if (aValues != undefined) {
         //         return aValues;
         //     }
         // }
-
-        // if (tKeyValues) {
-        //     let tSpecials = tKeyValues.AbilitySpecial;
-        //     if (tSpecials) {
-        //         for (let sIndex in tSpecials) {
-        //             let tData = tSpecials[sIndex];
-        //             if (tData[sName] != undefined && tData[sName] != null) {
-        //                 let sType = tData.var_type;
-        //                 let sValues = tData[sName].toString();
-        //                 let aValues = sValues.split(" ");
-        //                 for (let i = 0; i < aValues.length; i++) {
-        //                     let value = Number(aValues[i]);
-        //                     if (sType == "FIELD_INTEGER") {
-        //                         aValues[i] = parseInt(value + "");
-        //                     } else if (sType == "FIELD_FLOAT") {
-        //                         aValues[i] = parseFloat(value.toFixed(6));
-        //                     }
-        //                 }
-        //                 return SimplifyValuesArray(aValues);
-        //             }
-        //         }
-        //     }
-        // }
+        if (tKeyValues) {
+            let tSpecials = tKeyValues.AbilitySpecial;
+            if (tSpecials) {
+                for (let sIndex in tSpecials) {
+                    let tData = tSpecials[sIndex];
+                    if (tData[sName] != undefined && tData[sName] != null) {
+                        let sType = tData.var_type;
+                        let sValues = tData[sName].toString();
+                        let aValues = sValues.split(" ");
+                        for (let i = 0; i < aValues.length; i++) {
+                            let value = Number(aValues[i]);
+                            if (sType == "FIELD_INTEGER") {
+                                aValues[i] = parseInt(value + "");
+                            } else if (sType == "FIELD_FLOAT") {
+                                aValues[i] = parseFloat(value.toFixed(6));
+                            }
+                        }
+                        return SimplifyValuesArray(aValues);
+                    }
+                }
+            }
+        }
 
         return [];
     }
@@ -433,6 +437,9 @@ export module AbilityHelper {
         "_min",
         "_move_speed",
     ];
+
+
+
     export function GetSpecialNames(sAbilityName: string, iEntityIndex = -1) {
         let aSpecials: string[] = [];
         let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
@@ -469,21 +476,20 @@ export module AbilityHelper {
     export function GetSpecialVarType(sAbilityName: string, sName: string,) {
         let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
         if (tKeyValues) {
-            var tSpecials = tKeyValues.AbilitySpecial;
+            let tSpecials = tKeyValues.AbilitySpecial;
             if (tSpecials) {
-                for (var sIndex in tSpecials) {
-                    var tData = tSpecials[sIndex];
+                for (let sIndex in tSpecials) {
+                    let tData = tSpecials[sIndex];
                     if (tData[sName] != undefined && tData[sName] != null) {
                         return tData.var_type;
                     }
                 }
             }
         }
-
         return [];
     }
 
-    export function GetSpecialValueWithTag(sAbilityName: string, sName: string, tagname: AbilitySpecialValueTag, iEntityIndex = -1): string {
+    export function GetSpecialValueWithTag(sAbilityName: string, sName: string, tagname: AbilitySpecialValueTag | string, iEntityIndex = -1): string {
         let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
         if (iEntityIndex != -1) {
             // let sPropertyValue = GetAbilityMechanicsUpgradeLevelSpecialValueProperty(iEntityIndex:EntityIndex, sAbilityName, sName, sPropertyName);
@@ -504,104 +510,125 @@ export module AbilityHelper {
         }
         return "";
     }
-    export function GetSpecialValuesWithCalculated(sAbilityName: string, sName: string, iEntityIndex = -1) {
-        // let aOriginalValues = GetSpecialValues(sAbilityName, sName, iEntityIndex);
-        // for (let i = 0; i < aOriginalValues.length; i++) {
-        //     let v = aOriginalValues[i];
-        //     aOriginalValues[i] = CalcSpecialValueUpgrade(iEntityIndex, sAbilityName, sName, v);
-        // }
-        // let aValues = JSON.parse(JSON.stringify(aOriginalValues));
-        // let tAddedValues = {};
-        // let tAddedFactors = {};
-        // let aMinValues = GetSpecialValueProperty(sAbilityName, sName, "_min", iEntityIndex);
-        // // if (aMinValues) {
-        // //     aMinValues = StringToValues(aMinValues);
-        // //     for (let i = 0; i < aMinValues.length; i++) {
-        // //         let v = aMinValues[i];
-        // //         aMinValues[i] = CalcSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, "_min", v);
-        // //     }
-        // // }
-        // let aMaxValues = GetSpecialValueProperty(sAbilityName, sName, "_max", iEntityIndex);
-        // // if (aMaxValues) {
-        // //     aMaxValues = StringToValues(aMaxValues);
-        // //     for (let i = 0; i < aMaxValues.length; i++) {
-        // //         let v = aMaxValues[i];
-        // //         aMaxValues[i] = CalcSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, "_max", v);
-        // //     }
-        // // }
-        // let sType = GetSpecialVarType(sAbilityName, sName);
-        // let iMaxLevel = aValues.length;
-        // for (const key in tAddedProperties) {
-        //     const sFuncName = (tAddedProperties as any)[key] as string;
-        //     let func = UnitHelper[sFuncName];
-        //     if (typeof (func) != "function") continue;
-        //     let sFactors = GetSpecialValueProperty(sAbilityName, sName, key, iEntityIndex);
-        //     if (sFactors) {
-        //         tAddedValues[key] = [];
-        //         tAddedFactors[key] = [];
-        //         let aFactors = StringToValues(sFactors);
-        //         iMaxLevel = Math.max(aFactors.length, iMaxLevel);
-        //         for (let i = 0; i < Math.max(aFactors.length, aValues.length); i++) {
-        //             let factor = aFactors[Clamp(i, 0, aFactors.length - 1)];
-        //             factor = CalcSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, key, factor);
-        //             tAddedFactors[key][i] = factor;
-        //             let addedValue = factor * Entities[sFuncName](iEntityIndex);
-        //             if (sType == "FIELD_INTEGER") {
-        //                 addedValue = parseInt(addedValue);
-        //             } else if (sType == "FIELD_FLOAT") {
-        //                 addedValue = Float(addedValue);
-        //             }
-        //             tAddedValues[key][i] = addedValue;
-        //         }
-        //     } else {
-        //         let extra_factor = GetSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, key, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_ADD);
-        //         if (extra_factor != 0) {
-        //             tAddedValues[key] = [];
-        //             tAddedFactors[key] = [];
-        //             for (let i = 0; i < aValues.length; i++) {
-        //                 let factor = extra_factor;
-        //                 tAddedFactors[key][i] = factor;
-        //                 let addedValue = factor * Entities[sFuncName](iEntityIndex);
-        //                 if (sType == "FIELD_INTEGER") {
-        //                     addedValue = parseInt(addedValue);
-        //                 } else if (sType == "FIELD_FLOAT") {
-        //                     addedValue = Float(addedValue);
-        //                 }
-        //                 tAddedValues[key][i] = addedValue;
-        //             }
-        //         }
-        //     }
-        // }
-        // Object.keys(tAddedValues).forEach(key => {
-        //     let aNewValues = JSON.parse(JSON.stringify(aValues));
-        //     for (let i = 0; i < iMaxLevel; i++) {
-        //         let value = aValues[FuncHelper.Clamp(i, 0, aValues.length - 1)] || 0;
-        //         value = value + tAddedValues[key][FuncHelper.Clamp(i, 0, tAddedValues[key].length - 1)];
-        //         aNewValues[i] = value;
-        //     }
-        //     aValues = aNewValues;
-        // });
 
-        // if (aMinValues) {
-        //     for (let i = 0; i < aValues.length; i++) {
-        //         aValues[i] = Math.max(aValues[i], aMinValues[FuncHelper.Clamp(i, 0, aMinValues.length - 1)]);
-        //     }
-        // }
+    export function GetSpecialValuePropertyUpgrade(iEntityIndex: EntityIndex, sAbilityName: string, sSpecialValueName: string, sSpecialValueProperty: string, iOperator: AbilityUpgradeOperator) {
+        if (!Entities.IsValidEntity(iEntityIndex)) return 0;
 
-        // if (aMaxValues) {
-        //     for (let i = 0; i < aValues.length; i++) {
-        //         aValues[i] = Math.min(aValues[i], aMaxValues[FuncHelper.Clamp(i, 0, aMaxValues.length - 1)]);
-        //     }
-        // }
+        // let t = CustomNetTables.GetTableValue("ability_upgrades_result", iEntityIndex.toString());
+        // if (!t || typeof (t.json) != "string") return 0;
 
-        // return {
-        //     aValues: aValues,
-        //     aOriginalValues: aOriginalValues,
-        //     aMinValues: aMinValues,
-        //     aMaxValues: aMaxValues,
-        //     tAddedFactors: tAddedFactors,
-        //     tAddedValues: tAddedValues,
-        // };
+        // let tCachedResult = JSON.parse(t.json);
+        // if (!tCachedResult) return 0;
+
+        // let tAllSpecialValuePropertyCachedResult = tCachedResult[AbilityUpgradeType.ABILITY_UPGRADES_TYPE_SPECIAL_VALUE_PROPERTY];
+        // if (typeof (tAllSpecialValuePropertyCachedResult) != "object" || typeof (tAllSpecialValuePropertyCachedResult[sAbilityName]) != "object" || typeof (tAllSpecialValuePropertyCachedResult[sAbilityName][sSpecialValueName]) != "object" || typeof (tAllSpecialValuePropertyCachedResult[sAbilityName][sSpecialValueName][sSpecialValueProperty]) != "object") return 0;
+
+        // return tAllSpecialValuePropertyCachedResult[sAbilityName][sSpecialValueName][sSpecialValueProperty][iOperator] || 0;
+        return 0
+    }
+
+    export function CalcSpecialValuePropertyUpgrade(iEntityIndex: EntityIndex, sAbilityName: string, sSpecialValueName: string, sSpecialValueProperty: string, fValue: number) {
+        return FuncHelper.ToFloat((fValue + GetSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sSpecialValueName, sSpecialValueProperty, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_ADD)) * (1 + GetSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sSpecialValueName, sSpecialValueProperty, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_MUL) * 0.01));
+    }
+
+    export function GetSpecialValuesWithCalculated(sAbilityName: string, sName: string, iEntityIndex: EntityIndex = -1 as EntityIndex) {
+        let aOriginalValues = GetSpecialValues(sAbilityName, sName, iEntityIndex);
+        for (let i = 0; i < aOriginalValues.length; i++) {
+            let v = aOriginalValues[i];
+            aOriginalValues[i] = CalcSpecialValueUpgrade(iEntityIndex, sAbilityName, sName, v);
+        }
+        let aValues = JSON.parse(JSON.stringify(aOriginalValues));
+        let tAddedValues: { [k: string]: number[] } = {};
+        let tAddedFactors: { [k: string]: number[] } = {};
+        let aMinValues: number[] = [];
+        let aMaxValues: number[] = [];
+        let _aMinValues = GetSpecialValueWithTag(sAbilityName, sName, AbilitySpecialValueTag._min, iEntityIndex);
+        if (_aMinValues) {
+            aMinValues = StringToValues(_aMinValues);
+            for (let i = 0; i < aMinValues.length; i++) {
+                let v = aMinValues[i];
+                aMinValues[i] = CalcSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, "_min", v);
+            }
+        }
+        let _aMaxValues = GetSpecialValueWithTag(sAbilityName, sName, AbilitySpecialValueTag._max, iEntityIndex);
+        if (_aMaxValues) {
+            aMaxValues = StringToValues(_aMaxValues);
+            for (let i = 0; i < aMaxValues.length; i++) {
+                let v = aMaxValues[i];
+                aMaxValues[i] = CalcSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, "_max", v);
+            }
+        }
+        let sType = GetSpecialVarType(sAbilityName, sName);
+        let iMaxLevel = aValues.length;
+        for (const key in tAddedProperties) {
+            const sFuncName = (tAddedProperties as any)[key] as string;
+            let func = (UnitHelper as any)[sFuncName];
+            if (typeof (func) != "function") continue;
+            let sFactors = GetSpecialValueWithTag(sAbilityName, sName, key, iEntityIndex);
+            if (sFactors) {
+                tAddedValues[key] = [];
+                tAddedFactors[key] = [];
+                let aFactors = StringToValues(sFactors);
+                iMaxLevel = Math.max(aFactors.length, iMaxLevel);
+                for (let i = 0; i < Math.max(aFactors.length, aValues.length); i++) {
+                    let factor = aFactors[FuncHelper.Clamp(i, 0, aFactors.length - 1)];
+                    factor = CalcSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, key, factor);
+                    tAddedFactors[key][i] = factor;
+                    let addedValue = factor * func(iEntityIndex) as any;
+                    if (sType == "FIELD_INTEGER") {
+                        addedValue = parseInt(addedValue);
+                    } else if (sType == "FIELD_FLOAT") {
+                        addedValue = FuncHelper.ToFloat(addedValue);
+                    }
+                    tAddedValues[key][i] = addedValue;
+                }
+            }
+            else {
+                let extra_factor = GetSpecialValuePropertyUpgrade(iEntityIndex, sAbilityName, sName, key, AbilityUpgradeOperator.ABILITY_UPGRADES_OP_ADD);
+                if (extra_factor != 0) {
+                    tAddedValues[key] = [];
+                    tAddedFactors[key] = [];
+                    for (let i = 0; i < aValues.length; i++) {
+                        let factor = extra_factor;
+                        tAddedFactors[key][i] = factor;
+                        let addedValue = factor * (UnitHelper as any)[sFuncName](iEntityIndex);
+                        if (sType == "FIELD_INTEGER") {
+                            addedValue = parseInt(addedValue + "");
+                        } else if (sType == "FIELD_FLOAT") {
+                            addedValue = FuncHelper.ToFloat(addedValue);
+                        }
+                        tAddedValues[key][i] = addedValue;
+                    }
+                }
+            }
+        }
+        Object.keys(tAddedValues).forEach(key => {
+            let aNewValues = JSON.parse(JSON.stringify(aValues));
+            for (let i = 0; i < iMaxLevel; i++) {
+                let value = aValues[FuncHelper.Clamp(i, 0, aValues.length - 1)] || 0;
+                value = value + tAddedValues[key][FuncHelper.Clamp(i, 0, tAddedValues[key].length - 1)];
+                aNewValues[i] = value;
+            }
+            aValues = aNewValues;
+        });
+        if (aMinValues) {
+            for (let i = 0; i < aValues.length; i++) {
+                aValues[i] = Math.max(aValues[i], aMinValues[FuncHelper.Clamp(i, 0, aMinValues.length - 1)]);
+            }
+        }
+        if (aMaxValues) {
+            for (let i = 0; i < aValues.length; i++) {
+                aValues[i] = Math.min(aValues[i], aMaxValues[FuncHelper.Clamp(i, 0, aMaxValues.length - 1)]);
+            }
+        }
+        return {
+            aValues: aValues,
+            aOriginalValues: aOriginalValues,
+            aMinValues: aMinValues,
+            aMaxValues: aMaxValues,
+            tAddedFactors: tAddedFactors,
+            tAddedValues: tAddedValues,
+        };
     }
     export function ReplaceAbilityValues({ sStr, bShowExtra, sAbilityName, iLevel, iEntityIndex = -1 as EntityIndex, bIsDescription = false, bOnlyNowLevelValue = false }: { sStr: string, bShowExtra: boolean, sAbilityName: string, iLevel: number, iEntityIndex?: EntityIndex, bIsDescription?: boolean, bOnlyNowLevelValue?: boolean; }) {
         let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
@@ -641,7 +668,7 @@ export module AbilityHelper {
                     break;
             }
             if (!bIsDescription) {
-                let CalculateSpellDamageTooltip = GetSpecialValueProperty(sAbilityName, sValueName, "CalculateSpellDamageTooltip", iEntityIndex);
+                let CalculateSpellDamageTooltip = GetSpecialValueWithTag(sAbilityName, sValueName, AbilitySpecialValueTag.CalculateSpellDamageTooltip, iEntityIndex);
                 let bCalculateSpellDamage = CalculateSpellDamageTooltip != undefined ? Number(CalculateSpellDamageTooltip) == 1 : sValueName.indexOf("damage") != -1;
                 bCalculateSpellDamage = bCalculateSpellDamage && iEntityIndex && Entities.IsValidEntity(iEntityIndex);
                 let fSpellAmplify = UnitHelper.GetSpellAmplify(iEntityIndex) * 0.01;
@@ -753,8 +780,82 @@ export module AbilityHelper {
         }
         return sStr;
     }
-    export function
-        GetLevelCooldown(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
+
+
+    export function ReplaceAbilityValuesDes({ sStr, bShowExtra, sAbilityName, iLevel, iEntityIndex = -1 as EntityIndex, bIsDescription = false, bOnlyNowLevelValue = false }: { sStr: string, bShowExtra: boolean, sAbilityName: string, iLevel: number, iEntityIndex?: EntityIndex, bIsDescription?: boolean, bOnlyNowLevelValue?: boolean; }) {
+        let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
+        if (!tData) { return sStr }
+        let aValueNames = GetSpecialNames(sAbilityName, iEntityIndex);
+        for (let index = 0; index < aValueNames.length; index++) {
+            const sValueName = aValueNames[index];
+            let block = new RegExp("%" + sValueName + "%", "g");
+            let blockPS = new RegExp("%" + sValueName + "%%", "g");
+            let iResult = sStr.search(block);
+            let iResultPS = sStr.search(blockPS);
+            if (iResult == -1 && iResultPS == -1) continue;
+            // let tResult = GetSpecialValuesWithCalculated(sAbilityName, sValueName, iEntityIndex);
+            let aValues: number[] = GetSpecialValues(sAbilityName, sValueName, iEntityIndex);
+            switch (sValueName) {
+                case "abilitycastrange":
+                    aValues = StringToValues(tData.AbilityCastRange || "");
+                    break;
+                case "abilitycastpoint":
+                    aValues = StringToValues(tData.AbilityCastPoint || "");
+                    break;
+                case "abilityduration":
+                    aValues = StringToValues(tData.AbilityDuration || "");
+                    break;
+                case "abilitychanneltime":
+                    aValues = StringToValues(tData.AbilityChannelTime || "");
+                    break;
+                case "abilitydamage":
+                    aValues = StringToValues(tData.AbilityDamage || "");
+                    break;
+                default:
+                    break;
+            }
+            let [sValues, sValuesPS] = AbilityDescriptionCompose(aValues, iLevel, bOnlyNowLevelValue);
+            sStr = sStr.replace(blockPS, sValuesPS);
+            sStr = sStr.replace(block, sValues);
+        }
+        return sStr;
+    }
+
+    export function GetAbilitySpecialDes(sAbilityName: string, iLevel: number, iEntityIndex?: EntityIndex, bOnlyNowLevelValue: boolean = false) {
+        let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
+        let r: string[] = [];
+        if (!tData) { return r }
+        let aValueNames = GetSpecialNames(sAbilityName, iEntityIndex);
+        for (let index = 0; index < aValueNames.length; index++) {
+            const sValueName = aValueNames[index];
+            // let tResult = GetSpecialValuesWithCalculated(sAbilityName, sValueName, iEntityIndex);
+            let aValues: number[] = GetSpecialValues(sAbilityName, sValueName, iEntityIndex);
+            switch (sValueName) {
+                case "abilitycastrange":
+                    aValues = StringToValues(tData.AbilityCastRange || "");
+                    break;
+                case "abilitycastpoint":
+                    aValues = StringToValues(tData.AbilityCastPoint || "");
+                    break;
+                case "abilityduration":
+                    aValues = StringToValues(tData.AbilityDuration || "");
+                    break;
+                case "abilitychanneltime":
+                    aValues = StringToValues(tData.AbilityChannelTime || "");
+                    break;
+                case "abilitydamage":
+                    aValues = StringToValues(tData.AbilityDamage || "");
+                    break;
+                default:
+                    break;
+            }
+            let [sValues, sValuesPS] = AbilityDescriptionCompose(aValues, iLevel, bOnlyNowLevelValue);
+            r.push(`${$.Localize(sValueName)} : ${sValues}`)
+        }
+        return r;
+    }
+
+    export function GetLevelCooldown(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
         GameEvents.SendEventClientSide(Call_AbilityFunc, {
             ability_entindex: iEntityIndex,
             level: iLevel,

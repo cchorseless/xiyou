@@ -43,6 +43,8 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
 
     parseAbilityDescription() {
         const sAbilityName = this.props.abilityname;
+        const castentityindex = this.props.castentityindex;
+        const level = this.props.level!;
         let sAllDescription = "#DOTA_Tooltip_ability_" + sAbilityName + "_Description";
         let list: JSX.Element[] = [];
         let sAllDescriptionLocalize = $.Localize(sAllDescription);
@@ -65,7 +67,6 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                     <Label key={list.length} className={CSSHelper.ClassMaker('AbilityMechanics', { 'Active': true, })} text={sDescription} html={true} />
                 );
             }
-
             let sExtraEffect = $.Localize("#DOTA_Tooltip_ability_" + sAbilityName + "_extra_effect");
             if (sExtraEffect != "#DOTA_Tooltip_ability_" + sAbilityName + "_extra_effect") {
                 let regexp = new RegExp("<h1>.+?</h1>", "");
@@ -92,6 +93,12 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                 );
             }
         }
+        let speclabel: string[] = AbilityHelper.GetAbilitySpecialDes(sAbilityName, level, castentityindex);
+        speclabel.forEach(t => {
+            list.push(
+                <Label key={list.length} className={CSSHelper.ClassMaker('AbilityMechanics', { 'Active': true, })} text={t} html={true} />
+            );
+        })
         return list;
     }
 
