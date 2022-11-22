@@ -47,11 +47,10 @@ export class CCUnitDamageInfo extends CCPanel<ICCUnitDamageInfo> {
         })
         let fMaxDamage = 0;
         if (infos[0]) fMaxDamage = infos[0].fDamageTotal;
-
         return (
             <Panel id="CC_UnitDamageInfo" ref={this.__root__}    {...this.initRootAttrs()}>
                 {
-                    infos.map((info) => {
+                    fMaxDamage > 0 && infos.map((info) => {
                         return <CCUnitDamageProgressItem fMaxDamage={fMaxDamage}  {...info} />
                     })
                 }
