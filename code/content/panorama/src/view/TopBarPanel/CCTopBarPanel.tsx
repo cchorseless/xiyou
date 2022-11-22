@@ -40,7 +40,9 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
             }), -1, false)
     }
     render() {
-        if (!this.__root___isValid) { return <></> }
+        if (!this.__root___isValid) {
+            return this.defaultRender("CC_TopBarCenter");
+        }
         const playerdata = this.GetStateEntity(PlayerScene.Local.PlayerDataComp)!;
         const round = this.GetStateEntity(PlayerScene.Local.RoundManagerComp?.getCurrentBoardRound());
         const gametime = this.GetState<number>("gametime");
@@ -73,7 +75,9 @@ export class CCTopBarGameCoin<T extends NodePropsData> extends CCPanel<T> {
 
     }
     render() {
-        if (!this.__root___isValid) { return <></> }
+        if (!this.__root___isValid) {
+            return this.defaultRender("CC_TopBarGameCoin");
+        }
         const playerdata = this.GetStateEntity<PlayerDataComponent>(PlayerScene.Local.PlayerDataComp)!;
         const coindes = [
             `${playerdata.population}/${playerdata.populationRoof}`,

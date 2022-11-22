@@ -44,7 +44,7 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
         this.__root___isValid = this.onReady();
         if (this.__root___isValid) {
             this.onInitUI();
-            this.updateSelf();
+            this.delayUpdateSelf();
         }
         else {
             TimerHelper.AddFrameTimer(5, FuncHelper.Handler.create(this, () => { this.checkDataReady() }))
@@ -135,6 +135,9 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
         return r;
     }
 
+    defaultRender(id: string) {
+        return <Panel id={id} ref={this.__root__}      {...this.initRootAttrs()} />
+    }
 
     render() {
         return (this.__root___isValid &&

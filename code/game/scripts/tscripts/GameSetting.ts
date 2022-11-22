@@ -39,7 +39,7 @@ export class GameSetting {
     public static init() {
         GameSetting.gameRulesInit();
         GameSetting.gameModeInit();
-        // GameSetting.gameFilterInit();
+        GameSetting.gameFilterInit();
         // DEBUG
         if (IsInToolsMode()) {
             GameRules.SetCustomGameSetupAutoLaunchDelay(30);
@@ -125,30 +125,31 @@ export class GameSetting {
             return true
         }, this);
         GameMode.SetDamageFilter((event: DamageFilterEvent) => {
-            let hAbility = EntIndexToHScript(event.entindex_inflictor_const || -1 as any)
-            let hVictim = EntIndexToHScript(event.entindex_victim_const || -1 as any)
+            // let hAbility = EntIndexToHScript(event.entindex_inflictor_const || -1 as any)
+            let hVictim = EntIndexToHScript(event.entindex_victim_const || -1 as any) as BaseNpc_Plus;
             let hAttacker = EntIndexToHScript(event.entindex_attacker_const || -1 as any) as BaseNpc_Plus;
-            LogHelper.print(event)
             if (GameFunc.IsValid(hAttacker) && hAttacker != hVictim && event.damage > 0) {
-                let fDamage = event.damage
-                let iDamageType = event.damagetype_const
-                let iPlayerID = hAttacker.GetPlayerOwnerID()
-                if (PlayerResource.IsValidPlayerID(iPlayerID)) {
-                    let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
-                    if (hHero != hAttacker) {
-                        if (iDamageType == DAMAGE_TYPES.DAMAGE_TYPE_NONE) {
-                            iDamageType = DAMAGE_TYPES.DAMAGE_TYPE_PURE
-                        }
-                        let building = hAttacker.ETRoot as BuildingEntityRoot;
-                        if (building && building.IsBattleUnit()) {
-                            let round = building.GetPlayer().RoundManagerComp().getCurrentBoardRound();
-                            if (building.IsIllusion()) {
-
+                let fDamage = event.damage;
+                let iDamageType = event.damagetype_const;
+                [hAttacker, hVictim].forEach(unit => {
+                    let iPlayerID = unit.GetPlayerOwnerID();
+                    if (PlayerResource.IsValidPlayerID(iPlayerID)) {
+                        let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+                        if (hHero != unit) {
+                            if (iDamageType == DAMAGE_TYPES.DAMAGE_TYPE_NONE) {
+                                iDamageType = DAMAGE_TYPES.DAMAGE_TYPE_PURE
                             }
-                            round.AddRoundDamage(event.entindex_attacker_const + "", iDamageType, fDamage)
+                            let building = unit.ETRoot as BuildingEntityRoot;
+                            if (building && building.IsBattleUnit()) {
+                                let round = building.GetPlayer().RoundManagerComp().getCurrentBoardRound();
+                                if (building.IsIllusion()) {
+
+                                }
+                                round.AddRoundDamage(unit.GetEntityIndex() + "", unit == hAttacker, iDamageType, fDamage)
+                            }
                         }
                     }
-                }
+                })
             }
             return true
         }, this)

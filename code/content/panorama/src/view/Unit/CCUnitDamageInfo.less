@@ -1,10 +1,23 @@
 #CC_UnitDamageInfo {
     max-height: 280px;
-    vertical-align: bottom;
-    // margin: 0px 0px 0px 12px;
-    margin-bottom: 420px;
+    vertical-align: top;
+    horizontal-align: right;
+    margin-top: 50px;
     flow-children: down;
     padding-left: 12px;
+
+    #CC_tableBg {
+        horizontal-align: right;
+        margin-right: 0px;
+        background-image: url("file://{images}/custom_game/hud/button_item_operate.png");
+        background-size: 193px 29px;
+        width: 170px;
+        height: 29px;
+
+        .Sptxt {
+            margin: 0px 5px;
+        }
+    }
 
     VerticalScrollBar {
         horizontal-align: left;
@@ -15,12 +28,12 @@
 }
 
 #CC_UnitDamageProgressItem {
-    flow-children: left;
+    flow-children: right;
     margin-top: 8px;
     margin-left: 4px;
 
     .TowerDamageBar {
-        width: 250px;
+        width: 180px;
         vertical-align: center;
 
         border-radius: 0px;
@@ -31,7 +44,8 @@
 
         .TotalDamage {
             vertical-align: top;
-            // horizontal-align: right;
+            horizontal-align: right;
+            margin-right: 30px;
             margin-bottom: 2px;
             text-align: center;
             color: #ffffff;
@@ -41,23 +55,20 @@
         }
 
         .TowerDamageBar_Left {
-            height: 6px;
-            // border: 1px solid #000000;
+            border: 1px solid #000000;
             border-radius: 6px;
             vertical-align: bottom;
-            // horizontal-align: right;
+            horizontal-align: right;
+            margin-right: 0px;
             flow-children: right;
 
-            Label {
-                height: 8px;
+            .DamageLabel {
+                height: 10px;
                 vertical-align: center;
                 color: #FFFFFF;
                 text-shadow: 0px 0px 0px 2 black;
                 text-align: center;
                 text-overflow: shrink;
-            }
-
-            .DamageLabel {
                 border-radius: 2px;
             }
 
@@ -75,9 +86,5 @@
         }
     }
 
-    .TowerIcon {
-        width: 26px;
-        height: width-percentage(100%);
-        img-shadow: 0px 0px 2px 2 #000;
-    }
+
 }

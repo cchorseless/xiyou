@@ -198,7 +198,6 @@ export class ChessControlComponent extends ET.Component {
         // IS_CURSOR_HERO_ICON_SHOWING = true;
     }
     async show_cursor_hero(unit_name: string) {
-        unit_name = unit_name.replace("building_hero_", "");
         await CCMainPanel.GetInstance()!.addOnlyPanel(CCUnitChessMoveIcon, { itemname: unit_name });
         this.IS_CURSOR_HERO_ICON_SHOWING = true;
     }

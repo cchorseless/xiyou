@@ -13,6 +13,9 @@ import { BaseAbility_Plus } from "../entityPlus/BaseAbility_Plus";
 @registerUnit()
 export class courier_base extends BaseNpc_Hero_Plus {
     Spawn(entityKeyValues: CScriptKeyValues) {
+        if (!IsServer()) {
+            return;
+        }
         // 开局会创建多个英雄，系统一会删除掉
         if (!this.IsValidHero()) {
             return;

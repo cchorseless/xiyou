@@ -3,11 +3,14 @@ import React, { createRef, useState } from "react";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
 import { RoundConfig } from "../../game/system/Round/RoundConfig";
+import { UnitHelper } from "../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
+import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCTxtTable } from "../allCustomUIElement/CCTable/CCTxtTable";
 import { CCUnitSmallIcon } from "../allCustomUIElement/CCUnit/CCUnitSmallIcon";
 import "./CCUnitDamageInfo.less";
 
@@ -20,38 +23,47 @@ export class CCUnitDamageInfo extends CCPanel<ICCUnitDamageInfo> {
     }
     onInitUI() {
         TimerHelper.AddIntervalFrameTimer(1, 1, FuncHelper.Handler.create(this, () => {
-            let round = PlayerScene.Local.RoundManagerComp.getCurrentBoardRound();
-            if (round.roundState == RoundConfig.ERoundBoardState.battle) {
-                this.updateSelf();
-            }
+            this.updateSelf();
         }), -1, false);
     }
 
     render() {
-        let round = PlayerScene.Local.RoundManagerComp.getCurrentBoardRound();
-        if (!this.__root___isValid || round.roundState == RoundConfig.ERoundBoardState.start) {
-            return <Panel id="CC_UnitDamageInfo" ref={this.__root__}    {...this.initRootAttrs()} />
+        if (!this.__root___isValid) {
+            return this.defaultRender("CC_UnitDamageInfo");
         }
+        let round = PlayerScene.Local.RoundManagerComp.getCurrentBoardRound();
+        if (round.roundState == RoundConfig.ERoundBoardState.start) {
+            return this.defaultRender("CC_UnitDamageInfo");
+        }
+        const isdamage = this.GetState<Boolean>("isdamage");
         let infos = Object.keys(round.unitDamageInfo).map(key => {
             let _info = round.unitDamageInfo[key];
             return {
                 SUnitName: Entities.GetUnitName(Number(key) as EntityIndex),
-                fDamageTotal: _info.phyD + _info.magD + _info.pureD,
-                fDamagePhysic: _info.phyD,
-                fDamageMagic: _info.magD,
-                fDamagePure: _info.pureD,
+                fDamageTotal: isdamage ? (_info.phyD + _info.magD + _info.pureD) : (_info.byphyD + _info.bymagD + _info.bypureD),
+                fDamagePhysic: isdamage ? _info.phyD : _info.byphyD,
+                fDamageMagic: isdamage ? _info.magD : _info.bymagD,
+                fDamagePure: isdamage ? _info.pureD : _info.bypureD,
             }
         });
         infos.sort((a, b) => {
-            return (a.fDamageTotal) - (b.fDamageTotal);
+            return (b.fDamageTotal) - (a.fDamageTotal);
         })
         let fMaxDamage = 0;
         if (infos[0]) fMaxDamage = infos[0].fDamageTotal;
         return (
             <Panel id="CC_UnitDamageInfo" ref={this.__root__}    {...this.initRootAttrs()}>
+                <CCPanel id="CC_tableBg" >
+                    <CCTxtTable align="center center" list={["damage", "hurt"]}
+                        separatorclass="Sptxt"
+                        onChange={(index: number, text: string) => {
+                            this.UpdateState({ isdamage: index == 1 })
+                        }} />
+                </CCPanel>
                 {
-                    fMaxDamage > 0 && infos.map((info) => {
-                        return <CCUnitDamageProgressItem fMaxDamage={fMaxDamage}  {...info} />
+                    fMaxDamage > 0 && infos.map((info, index) => {
+                        if (info.fDamageTotal > 0)
+                            return <CCUnitDamageProgressItem key={index + ""} fMaxDamage={fMaxDamage}  {...info} />
                     })
                 }
                 {this.props.children}
@@ -72,8 +84,14 @@ interface ICCUnitDamageProgressItem {
     fDamageMagic: number,
 }
 export class CCUnitDamageProgressItem extends CCPanel<ICCUnitDamageProgressItem> {
+
+    SUnitName: string;
     render() {
-        const SUnitName = this.props.SUnitName;
+        // 防止单位死亡
+        if (!this.SUnitName) {
+            this.SUnitName = this.props.SUnitName;
+        }
+        const SUnitName = this.SUnitName;
         const fMaxDamage = this.props.fMaxDamage;
         const fDamageTotal = this.props.fDamageTotal;
         const fDamagePure = this.props.fDamagePure;
@@ -94,9 +112,9 @@ export class CCUnitDamageProgressItem extends CCPanel<ICCUnitDamageProgressItem>
                             tooltip={$.Localize("#Tooltip_Round_Damage_Pure")}
                         />
                     </CCPanel>
-                    <Label className="TotalDamage" localizedText="{s:total_damage}" hittest={false} />
+                    <Label className="TotalDamage" text={Math.floor(fDamageTotal) + ""} hittest={false} />
                 </Panel>
-                <CCUnitSmallIcon className="TowerIcon" itemname={SUnitName} />
+                <CCUnitSmallIcon itemname={SUnitName} rarity={UnitHelper.GetUnitRarety(SUnitName)} width="40px" height="40px" />
                 {this.props.children}
                 {this.__root___childs}
             </Panel>

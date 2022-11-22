@@ -34,7 +34,9 @@ export class CCCombinationBottomPanel extends CCPanel<ICCCombinationBottomPanel>
 
 
     render() {
-        if (!this.__root___isValid) { return <></> }
+        if (!this.__root___isValid) {
+            return this.defaultRender("CC_CombinationBottomPanel");
+        }
         const curunit = this.GetState<EntityIndex>("curunit");
         const player = PlayerScene.EntityRootManage.isHero(curunit);
         const fakerhero = PlayerScene.EntityRootManage.isFakerHero(curunit);

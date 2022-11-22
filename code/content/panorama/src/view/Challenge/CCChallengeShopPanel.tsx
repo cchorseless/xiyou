@@ -67,7 +67,9 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
     onbtnshop_click() { }
 
     render() {
-        if (!this.__root___isValid) { return <></> }
+        if (!this.__root___isValid) {
+            return this.defaultRender("CC_ChallengeShopPanel");
+        }
         const playerdata = this.GetStateEntity(PlayerScene.Local.PlayerDataComp);
         return (
             <Panel id="CC_ChallengeShopPanel" ref={this.__root__}      {...this.initRootAttrs()}>

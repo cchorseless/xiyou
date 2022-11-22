@@ -21,7 +21,9 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
     }
 
     render() {
-        if (!this.__root___isValid) { return <Panel ref={this.__root__} id="CC_DacBoardPanel" /> }
+        if (!this.__root___isValid) {
+            return this.defaultRender("CC_DacBoardPanel");
+        }
         return (
             <Panel ref={this.__root__} id="CC_DacBoardPanel"  {...this.initRootAttrs()} hittest={false}>
                 <Panel id="DacBoardLeft" hittest={false}>

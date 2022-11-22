@@ -49,7 +49,9 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
     }
 
     render() {
-        if (!this.__root___isValid) { return <></> }
+        if (!this.__root___isValid) {
+            return this.defaultRender("CC_CombinationSingleBottomItem");
+        }
         const entityList = this.props.InstanceIdList.map((entityId, index) => { return this.GetStateEntity(ET.EntityEventSystem.GetEntity(entityId) as ECombination) })
         const lastentity = entityList[entityList.length - 1]!
         if (lastentity.IsEmpty()) { return <></> }

@@ -23,10 +23,12 @@ export class CCUnitSmallIcon extends CCPanel<ICCUnitSmallIcon> {
         return "";
     }
     render() {
+        let unit_name = this.props.itemname;
+        unit_name = unit_name.replace("building_hero_", "");
         return (
             this.__root___isValid &&
             <Panel id="CC_UnitSmallIcon" ref={this.__root__}    {...this.initRootAttrs()}>
-                <CCPanel id="UnitIcon" backgroundImage={`url(\"file://{images}/card/card_icon/${this.props.itemname}.png\")`} />
+                <CCPanel id="UnitIcon" backgroundImage={`url(\"file://{images}/card/card_icon/${unit_name}.png\")`} />
                 {this.props.children}
                 {this.__root___childs}
             </Panel>

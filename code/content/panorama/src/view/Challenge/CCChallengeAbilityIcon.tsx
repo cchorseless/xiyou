@@ -32,7 +32,9 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
         this.abilityEntity.RegRef(this);
     }
     render() {
-        if (!this.__root___isValid) { return <Panel id="CC_ChallengeAbilityIcon" /> }
+        if (!this.__root___isValid) {
+            return this.defaultRender("CC_ChallengeAbilityIcon");
+        }
         const abilityname = this.props.abilityname;
         const castentity = PlayerScene.Local.GetHeroEntityIndex();
         const abilityindex = Entities.GetAbilityByName(castentity, abilityname);

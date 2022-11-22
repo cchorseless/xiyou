@@ -1,14 +1,20 @@
 {
-    "include": ["src",
-		"../declarations",
-        "../../shared"],
+    "include": [
+        "src",
+        "../declarations",
+        "../../shared"
+    ],
     "compilerOptions": {
         "target": "es2017",
-        "lib": ["es2017"],
-        "types": ["@moddota/panorama-types"],
+        "lib": [
+            "es2017"
+        ],
+        "types": [
+            "@moddota/panorama-types"
+        ],
         "moduleResolution": "node",
         "strict": true,
-        "strictPropertyInitialization":false,
+        "strictPropertyInitialization": false,
         "preserveSymlinks": true,
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,

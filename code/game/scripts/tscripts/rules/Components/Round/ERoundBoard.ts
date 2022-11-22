@@ -9,7 +9,6 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { building_round_board } from "../../../kvInterface/building/building_round_board";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { serializeETProps } from "../../Entity/Entity";
-import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { RoundConfig } from "../../System/Round/RoundConfig";
 import { PlayerScene } from "../Player/PlayerScene";
@@ -17,7 +16,7 @@ import { ERound } from "./ERound";
 @reloadable
 export class ERoundBoard extends ERound {
     @serializeETProps()
-    unitDamageInfo: { [k: string]: BuildingConfig.I.IBuildingDamageInfo } = {};
+    unitDamageInfo: { [k: string]: BuildingConfig.IBuildingDamageInfo } = {};
     @serializeETProps()
     roundState: RoundConfig.ERoundBoardState = null;
     @serializeETProps()
@@ -167,18 +166,34 @@ export class ERoundBoard extends ERound {
         }
     }
 
-    AddRoundDamage(attack: string, damagetype: DAMAGE_TYPES, damage: number) {
+    AddRoundDamage(attack: string, isattack: boolean, damagetype: DAMAGE_TYPES, damage: number) {
         if (this.unitDamageInfo[attack] == null) {
-            this.unitDamageInfo[attack] = { phyD: 0, magD: 0, pureD: 0 };
+            this.unitDamageInfo[attack] = { phyD: 0, magD: 0, pureD: 0, byphyD: 0, bymagD: 0, bypureD: 0 };
         }
+        damage = Math.floor(damage);
         if (damagetype == DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL) {
-            this.unitDamageInfo[attack].phyD += damage
+            if (isattack) {
+                this.unitDamageInfo[attack].phyD += damage
+            }
+            else {
+                this.unitDamageInfo[attack].byphyD += damage
+            }
         }
         else if (damagetype == DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL) {
-            this.unitDamageInfo[attack].magD += damage
+            if (isattack) {
+                this.unitDamageInfo[attack].magD += damage
+            }
+            else {
+                this.unitDamageInfo[attack].bymagD += damage
+            }
         }
         else if (damagetype == DAMAGE_TYPES.DAMAGE_TYPE_PURE) {
-            this.unitDamageInfo[attack].pureD += damage
+            if (isattack) {
+                this.unitDamageInfo[attack].pureD += damage
+            }
+            else {
+                this.unitDamageInfo[attack].bypureD += damage
+            }
         }
         let playerroot = this.Domain.ETRoot.AsPlayer();
         let playerid = playerroot.Playerid;

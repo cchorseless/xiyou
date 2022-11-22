@@ -33,12 +33,14 @@ export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
     }
 
     render() {
-        if (!this.__root___isValid) { return <></> }
+        if (!this.__root___isValid) {
+            return this.defaultRender("CC_PlayerInfoContainer");
+        }
         const CourierDataComps = PlayerScene.EntityRootManage.getAllPlayer().map((player) => {
             return this.GetStateEntity(player.CourierDataComp);
         })
         return (
-            <Panel ref={this.__root__} id="PlayerInfoContainer" hittest={false} {...this.initRootAttrs()}>
+            <Panel ref={this.__root__} id="CC_PlayerInfoContainer" hittest={false} {...this.initRootAttrs()}>
                 {CourierDataComps.map((CourierData) => {
                     if (!CourierData) { return }
                     const playerID = CourierData.BelongPlayerid;

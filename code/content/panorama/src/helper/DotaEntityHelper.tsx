@@ -994,7 +994,13 @@ export module UnitHelper {
         }
         return -1 as BuffID;
     };
-
+    export function GetUnitRarety(unitname: string): Rarity {
+        let unitobj = KVHelper.KVUnits()[unitname];
+        if (unitobj && unitobj.Rarity) {
+            return unitobj.Rarity as Rarity
+        }
+        return ("A") as Rarity;
+    };
 
     export function GetAttackSpeedPercent(iUnitEntIndex: EntityIndex) {
         return Entities.GetAttackSpeed(iUnitEntIndex) * 100;
