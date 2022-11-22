@@ -1,7 +1,10 @@
 import { GameEnum } from "./GameEnum";
+import { GameFunc } from "./GameFunc";
 import { LogHelper } from "./helper/LogHelper";
 import { SingletonClass } from "./helper/SingletonHelper";
 import { Modifier_Plus } from "./npc/entityPlus/BaseModifier_Plus";
+import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
+import { BuildingEntityRoot } from "./rules/Components/Building/BuildingEntityRoot";
 export class GameSetting {
     /**版本号 */
     public static readonly GAME_VERSION: string = "1.0.0";
@@ -122,6 +125,31 @@ export class GameSetting {
             return true
         }, this);
         GameMode.SetDamageFilter((event: DamageFilterEvent) => {
+            let hAbility = EntIndexToHScript(event.entindex_inflictor_const || -1 as any)
+            let hVictim = EntIndexToHScript(event.entindex_victim_const || -1 as any)
+            let hAttacker = EntIndexToHScript(event.entindex_attacker_const || -1 as any) as BaseNpc_Plus;
+            LogHelper.print(event)
+            if (GameFunc.IsValid(hAttacker) && hAttacker != hVictim && event.damage > 0) {
+                let fDamage = event.damage
+                let iDamageType = event.damagetype_const
+                let iPlayerID = hAttacker.GetPlayerOwnerID()
+                if (PlayerResource.IsValidPlayerID(iPlayerID)) {
+                    let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+                    if (hHero != hAttacker) {
+                        if (iDamageType == DAMAGE_TYPES.DAMAGE_TYPE_NONE) {
+                            iDamageType = DAMAGE_TYPES.DAMAGE_TYPE_PURE
+                        }
+                        let building = hAttacker.ETRoot as BuildingEntityRoot;
+                        if (building && building.IsBattleUnit()) {
+                            let round = building.GetPlayer().RoundManagerComp().getCurrentBoardRound();
+                            if (building.IsIllusion()) {
+
+                            }
+                            round.AddRoundDamage(event.entindex_attacker_const + "", iDamageType, fDamage)
+                        }
+                    }
+                }
+            }
             return true
         }, this)
         GameMode.SetItemAddedToInventoryFilter((event: ItemAddedToInventoryFilterEvent) => {

@@ -9,6 +9,5 @@ export class BuildingManagerComponent extends ET.Component {
     onSerializeToEntity(): void {
         PlayerScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
     }
-    buildingDamageInfo: { [k: string]: BuildingConfig.I.IBuildingDamageInfo } = {};
 
 }

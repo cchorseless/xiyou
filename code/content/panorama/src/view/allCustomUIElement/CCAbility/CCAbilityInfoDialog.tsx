@@ -96,7 +96,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         let speclabel: string[] = AbilityHelper.GetAbilitySpecialDes(sAbilityName, level, castentityindex);
         speclabel.forEach(t => {
             list.push(
-                <Label key={list.length} className={CSSHelper.ClassMaker('AbilityMechanics', { 'Active': true, })} text={t} html={true} />
+                <Label key={list.length} className={CSSHelper.ClassMaker('ExtraEffect', { 'Active': true, })} text={t} html={true} />
             );
         })
         return list;

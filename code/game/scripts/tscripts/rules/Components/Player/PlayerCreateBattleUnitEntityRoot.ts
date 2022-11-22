@@ -37,6 +37,9 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
         let domain = this.GetDomain<BaseNpc_Plus>();
         return domain.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_GOODGUYS;
     }
+    IsBattleUnit() {
+        return true;
+    }
     IsSummon() {
         return false;
     }

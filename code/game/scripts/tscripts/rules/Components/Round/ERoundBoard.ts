@@ -4,16 +4,20 @@ import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { building_round_board } from "../../../kvInterface/building/building_round_board";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { serializeETProps } from "../../Entity/Entity";
+import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
 import { RoundConfig } from "../../System/Round/RoundConfig";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERound } from "./ERound";
 @reloadable
 export class ERoundBoard extends ERound {
+    @serializeETProps()
+    unitDamageInfo: { [k: string]: BuildingConfig.I.IBuildingDamageInfo } = {};
     @serializeETProps()
     roundState: RoundConfig.ERoundBoardState = null;
     @serializeETProps()
@@ -161,5 +165,24 @@ export class ERoundBoard extends ERound {
         } else {
             player.EnemyManagerComp().addEnemy(enemyName, this.configID, unit_index, pos, spawnEffect);
         }
+    }
+
+    AddRoundDamage(attack: string, damagetype: DAMAGE_TYPES, damage: number) {
+        if (this.unitDamageInfo[attack] == null) {
+            this.unitDamageInfo[attack] = { phyD: 0, magD: 0, pureD: 0 };
+        }
+        if (damagetype == DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL) {
+            this.unitDamageInfo[attack].phyD += damage
+        }
+        else if (damagetype == DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL) {
+            this.unitDamageInfo[attack].magD += damage
+        }
+        else if (damagetype == DAMAGE_TYPES.DAMAGE_TYPE_PURE) {
+            this.unitDamageInfo[attack].pureD += damage
+        }
+        let playerroot = this.Domain.ETRoot.AsPlayer();
+        let playerid = playerroot.Playerid;
+        NetTablesHelper.SetETEntityPart(playerid, this, ["unitDamageInfo"], playerid)
+
     }
 }

@@ -156,7 +156,7 @@ export class BaseNpc_Plus extends BaseNpc {
     }
     GetSource?() {
         if (this.IsSummoned() || this.IsClone() || this.IsIllusion()) {
-            // return GameFunc.IsValid(this.GetSummoner()) && this.GetSummoner() || this
+            return GameFunc.IsValid(this.GetSummoner()) && this.GetSummoner() || this;
         }
         return this
     }

@@ -4,6 +4,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { CCTopBarCenter } from "../../../view/TopBarPanel/CCTopBarPanel";
+import { BuildingConfig } from "../../system/Building/BuildingConfig";
 import { RoundConfig } from "../../system/Round/RoundConfig";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERound } from "./ERound";
@@ -12,9 +13,8 @@ export class ERoundBoard extends ERound {
     roundLeftTime: number = -1;
     configID: string;
     unitSpawned: number = 0;
-    tTotalDamage: number = 0; // 回合总伤害
-    tTowerDamage: { [entityIndex: string]: number } = {}; // 回合伤害
     config: building_round_board.OBJ_2_1;
+    unitDamageInfo: { [k: string]: BuildingConfig.I.IBuildingDamageInfo } = {};
 
     private _roundState: RoundConfig.ERoundBoardState;
     set roundState(v: RoundConfig.ERoundBoardState) {

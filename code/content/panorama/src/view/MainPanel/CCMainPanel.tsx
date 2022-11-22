@@ -16,6 +16,7 @@ import { CCCombinationBottomPanel } from "../Combination/CCCombinationBottomPane
 import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
 import { CCShopPanel } from "../Shop/CCShopPanel";
 import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
+import { CCUnitDamageInfo } from "../Unit/CCUnitDamageInfo";
 
 
 export class CCMainPanel extends CCPanel<NodePropsData> {
@@ -54,6 +55,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCCombinationBottomPanel />
                         <CCChallengeShopPanel />
                         <CCDacBoard />
+                        <CCUnitDamageInfo />
                         {this.panel_base_childs}
                     </Panel>
                 }

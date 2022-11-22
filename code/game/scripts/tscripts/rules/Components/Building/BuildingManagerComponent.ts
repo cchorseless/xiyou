@@ -23,9 +23,6 @@ import { BuildingEntityRoot } from "./BuildingEntityRoot";
 export class BuildingManagerComponent extends ET.Component {
     public IsSerializeEntity: boolean = true;
 
-    @serializeETProps()
-    buildingDamageInfo: { [k: string]: BuildingConfig.I.IBuildingDamageInfo } = {};
-
     allBuilding: string[] = [];
     allBuildingHelper: BuildingEntityRoot[] = [];
 

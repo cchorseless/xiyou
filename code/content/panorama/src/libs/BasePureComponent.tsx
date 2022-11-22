@@ -463,6 +463,9 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     /**刷新自己 */
     public updateSelf = () => {
         this._updateSelf += 1;
+        if (this._updateSelf > 10000) {
+            this._updateSelf = 0;
+        }
         this.UpdateState({ _updateSelf: this._updateSelf });
     };
 

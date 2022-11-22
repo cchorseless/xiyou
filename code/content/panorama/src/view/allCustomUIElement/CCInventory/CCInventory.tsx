@@ -51,16 +51,6 @@ export class CCInventory extends CCPanel<ICCInventory> {
                     let buttonSize = _slot.FindChildTraverse("ButtonSize")!;
                     buttonSize.AddClass("CC_ButtonSizeBg");
                     let abilityButton = _slot.FindChildTraverse("AbilityButton")!;
-                    mainpanel.RegCustomToolTip(abilityButton, CCItemInfoDialog, () => {
-                        let selectedEntityid = Players.GetLocalPlayerPortraitUnit();;
-                        let abilityindex = Entities.GetItemInSlot(selectedEntityid, i);
-                        return {
-                            abilityname: Abilities.GetAbilityName(abilityindex),
-                            inventoryslot: i,
-                            castentityindex: selectedEntityid,
-                            level: Abilities.GetLevel(abilityindex),
-                        }
-                    }, true);
                     let itemImage = abilityButton!.FindChildTraverse("ItemImage") as ItemImage;
                     let item_rare = $.CreatePanelWithProperties("Image", buttonSize, "customitem_rare_" + i, {});
                     item_rare.hittest = true;
