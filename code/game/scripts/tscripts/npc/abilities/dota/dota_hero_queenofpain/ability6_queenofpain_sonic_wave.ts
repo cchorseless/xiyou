@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -21,32 +21,32 @@ export class ability6_queenofpain_sonic_wave extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_queenofpain_sonic_wave = Data_queenofpain_sonic_wave;
     Init() {
-                this.SetDefaultSpecialValue("knockback_distance_scepter", 250);
+        this.SetDefaultSpecialValue("knockback_distance_scepter", 250);
         this.SetDefaultSpecialValue("knockback_duration", 0.5);
         this.SetDefaultSpecialValue("delay", 0.452);
         this.SetDefaultSpecialValue("starting_aoe", 100);
         this.SetDefaultSpecialValue("distance", 900);
         this.SetDefaultSpecialValue("final_aoe", 450);
         this.SetDefaultSpecialValue("speed", 900);
-        this.SetDefaultSpecialValue("damage", [3400,4300,5200,6100,7000,8000]);
-        this.SetDefaultSpecialValue("damage_scepter", [13400,14300,15200,16100,17000,18000]);
-        this.SetDefaultSpecialValue("damage_per_int", [4.5,5,6,7.5,9,11]);
+        this.SetDefaultSpecialValue("damage", [3400, 4300, 5200, 6100, 7000, 8000]);
+        this.SetDefaultSpecialValue("damage_scepter", [13400, 14300, 15200, 16100, 17000, 18000]);
+        this.SetDefaultSpecialValue("damage_per_int", [4.5, 5, 6, 7.5, 9, 11]);
         this.SetDefaultSpecialValue("knockback_distance", 200);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("delay", 0.452);
+        this.SetDefaultSpecialValue("delay", 0.452);
         this.SetDefaultSpecialValue("starting_aoe", 100);
         this.SetDefaultSpecialValue("distance", 900);
         this.SetDefaultSpecialValue("final_aoe", 450);
         this.SetDefaultSpecialValue("speed", 900);
-        this.SetDefaultSpecialValue("damage", [3400,4300,5200,6100,7000,8000]);
-        this.SetDefaultSpecialValue("damage_scepter", [13400,14300,5200,16100,17000,18000]);
+        this.SetDefaultSpecialValue("damage", [3400, 4300, 5200, 6100, 7000, 8000]);
+        this.SetDefaultSpecialValue("damage_scepter", [13400, 14300, 5200, 16100, 17000, 18000]);
         this.SetDefaultSpecialValue("bleeding_duration", 5);
         this.SetDefaultSpecialValue("bleeding_damage_percent", 5);
 
-        }
+    }
 
 
 
@@ -157,7 +157,7 @@ export class ability6_queenofpain_sonic_wave extends BaseAbility_Plus {
 
                 let vCenter = hDummy.GetAbsOrigin()
 
-                 modifier_knockback.remove( hTarget );
+                modifier_knockback.remove(hTarget);
                 modifier_knockback.apply(hTarget, hCaster, this, {
                     center_x: vCenter.x,
                     center_y: vCenter.y,

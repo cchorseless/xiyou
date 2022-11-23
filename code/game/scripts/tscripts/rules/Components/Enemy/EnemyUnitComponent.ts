@@ -2,7 +2,7 @@ import { reloadable } from "../../../GameCache";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health_bar";
 import { ET } from "../../Entity/Entity";
-import { EnemyConfig } from "../../System/Enemy/EnemyConfig";
+import { EnemyConfig } from "../../../shared/EnemyConfig";
 import { BattleUnitComponent } from "../BattleUnit/BattleUnitComponent";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
 

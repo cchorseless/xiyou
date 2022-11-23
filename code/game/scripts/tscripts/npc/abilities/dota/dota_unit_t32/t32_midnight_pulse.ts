@@ -14,7 +14,7 @@ import { modifier_particle, modifier_particle_thinker } from "../../../modifier/
 import { LogHelper } from "../../../../helper/LogHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { GameSetting } from "../../../../GameSetting";
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 
 
 @registerAbility()
@@ -225,7 +225,7 @@ export class modifier_t32_midnight_pulse_thinker extends BaseModifier_Plus {
     OnDestroy() {
         super.OnDestroy();
         if (IsServer()) {
-             modifier_t32_midnight_pulse_bound.remove( this.GetParentPlus() );
+            modifier_t32_midnight_pulse_bound.remove(this.GetParentPlus());
             UTIL_Remove(this.GetParentPlus())
         }
     }

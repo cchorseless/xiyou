@@ -1,4 +1,4 @@
-import { GameEnum } from "../libs/GameEnum";
+import { GameEnum } from "../../../../game/scripts/tscripts/shared/GameEnum";
 import { DotaUIHelper } from "./DotaUIHelper";
 import { FuncHelper } from "./FuncHelper";
 import { LogHelper } from "./LogHelper";

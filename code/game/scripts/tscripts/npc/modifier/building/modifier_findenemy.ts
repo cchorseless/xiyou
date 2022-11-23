@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../GameEnum";
+import { GameEnum } from "../../../shared/GameEnum";
 import { GameFunc } from "../../../GameFunc";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
@@ -28,5 +28,5 @@ export class modifier_findenemy extends BaseModifier_Plus {
         }
     }
 
- 
+
 }

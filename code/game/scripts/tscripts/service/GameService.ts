@@ -6,7 +6,7 @@
  * @Description: file content
  */
 
-import { GameEnum } from "../GameEnum";
+import { GameEnum } from "../shared/GameEnum";
 import { EventHelper } from "../helper/EventHelper";
 import { LogHelper } from "../helper/LogHelper";
 import { SingletonClass } from "../helper/SingletonHelper";
@@ -18,7 +18,7 @@ export class GameService extends SingletonClass {
     }
 
     public addEvent() {
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, this.OnGameRulesStateChange);
+        EventHelper.addGameEvent(this, GameEnum.GameEvent.game_rules_state_change, this.OnGameRulesStateChange);
     }
 
     public OnGameRulesStateChange(e: any) {

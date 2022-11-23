@@ -1,8 +1,7 @@
 {
     "include": [
         "src",
-        "../declarations",
-        "../../shared"
+        "../../game/scripts/tscripts/shared"
     ],
     "compilerOptions": {
         "target": "es2017",

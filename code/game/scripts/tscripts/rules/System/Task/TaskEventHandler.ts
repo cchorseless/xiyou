@@ -1,4 +1,4 @@
-// import { GameEnum } from "../../../GameEnum";
+// import { GameEnum } from "../../../shared/GameEnum";
 // import { GameFunc } from "../../../GameFunc";
 // import { EventHelper } from "../../../helper/EventHelper";
 // import { LogHelper } from "../../../helper/LogHelper";
@@ -16,7 +16,7 @@
 //     public static startListen(sys: typeof TaskSystem) {
 //         this.System = sys;
 //         /**产生协作任务 */
-//         EventHelper.addServerEvent(GameEnum.Event.CustomServer.onserver_create_team_task, (event: LUA_TO_LUA_DATA) => {
+//         EventHelper.addServerEvent(GameEnum.CustomServer.onserver_create_team_task, (event: LUA_TO_LUA_DATA) => {
 //             let teaminfo = AwalonState.GetcurrentTeamInfo();
 //             for (let k in teaminfo) {
 //                 let playerid = teaminfo[k];
@@ -28,7 +28,7 @@
 //             }
 //         }, this);
 //         /**更新对局任务进度 */
-//         EventHelper.addServerEvent(GameEnum.Event.CustomServer.onserver_update_game_task_jindu, (event: LUA_TO_LUA_DATA) => {
+//         EventHelper.addServerEvent(GameEnum.CustomServer.onserver_update_game_task_jindu, (event: LUA_TO_LUA_DATA) => {
 //             let success = event.data.success;
 //             let fail = event.data.fail;
 //             let successPlayer = event.data.successPlayer as PlayerID[];
@@ -54,14 +54,14 @@
 //                         _event.state = this.finishTask(_event.PlayerID, _event.data.taskid, _count, true)
 //                         // 完成任务通知客户端
 //                         if (_event.state) {
-//                             EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.req_finish_task_from_client, _event, _event.PlayerID);
+//                             EventHelper.fireProtocolEventToPlayer(GameEnum.CustomProtocol.req_finish_task_from_client, _event, _event.PlayerID);
 //                         }
 //                     }
 //                 }
 //             )
 //         })
 //         /**服务器完成任务 */
-//         EventHelper.addServerEvent(GameEnum.Event.CustomServer.onserver_finish_task, (event: LUA_TO_LUA_DATA) => {
+//         EventHelper.addServerEvent(GameEnum.CustomServer.onserver_finish_task, (event: LUA_TO_LUA_DATA) => {
 //             let _event = event as JS_TO_LUA_DATA;
 //             _event.state = false;
 //             let _info = sys.GetPlayerTask(_event.PlayerID).allTaskInfo;
@@ -71,12 +71,12 @@
 //                 _event.state = this.finishTask(_event.PlayerID, _event.data.taskid, entityIndex, true)
 //                 // 完成任务通知客户端
 //                 if (_event.state) {
-//                     EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.req_finish_task_from_client, _event, _event.PlayerID);
+//                     EventHelper.fireProtocolEventToPlayer(GameEnum.CustomProtocol.req_finish_task_from_client, _event, _event.PlayerID);
 //                 }
 //             };
 //         }, this);
 //         /**请求任务信息 */
-//         EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_self_all_task, (event: JS_TO_LUA_DATA) => {
+//         EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_self_all_task, (event: JS_TO_LUA_DATA) => {
 //             event.state = false;
 //             if (Sys_state.allPlayerTask[event.PlayerID] == null) {
 //                 let role = AwalonState.GetRoleConfig(event.PlayerID).RoleType;
@@ -98,7 +98,7 @@
 
 //         }, this);
 //         /**客户端请求任务完成 */
-//         EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_finish_task_from_client, (event: JS_TO_LUA_DATA) => {
+//         EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_finish_task_from_client, (event: JS_TO_LUA_DATA) => {
 //             event.state = false;
 //             let _info = sys.GetPlayerTask(event.PlayerID).allTaskInfo
 //             if (_info && event.data && event.data.taskid) {
@@ -109,7 +109,7 @@
 //             }
 //         }, this);
 //         /**请求采集 */
-//         EventHelper.addProtocolEvent(GameEnum.Event.CustomProtocol.req_collect_entity, (event: JS_TO_LUA_DATA) => {
+//         EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_collect_entity, (event: JS_TO_LUA_DATA) => {
 //             let entityIndex: EntityIndex = event.data;
 //             event.state = false;
 //             if (entityIndex) {
@@ -246,7 +246,7 @@
 //         //     let event = {} as JS_TO_LUA_DATA;
 //         //     event.data = {};
 //         //     event.data[taskid] = info;
-//         //     EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.req_new_task, event, playerid);
+//         //     EventHelper.fireProtocolEventToPlayer(GameEnum.CustomProtocol.req_new_task, event, playerid);
 //         // }
 //     }
 //     /**
@@ -261,7 +261,7 @@
 //             let event = {} as JS_TO_LUA_DATA;
 //             event.data = {};
 //             event.data[taskid] = Sys_state.TaskJinDu[playerid][taskid];
-//             EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.req_update_one_task, event, playerid);
+//             EventHelper.fireProtocolEventToPlayer(GameEnum.CustomProtocol.req_update_one_task, event, playerid);
 //         }
 //     }
 //     /**

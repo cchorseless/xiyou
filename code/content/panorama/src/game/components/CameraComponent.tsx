@@ -1,8 +1,9 @@
+import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { ET, registerET } from "../../libs/Entity";
-import { GameEnum } from "../../libs/GameEnum";
+// import { GameEnum } from "../../libs/GameEnum";
 
 const MIN_CAMERA_DISTANCE = 1300;
 const MAX_CAMERA_DISTANCE = 3500;

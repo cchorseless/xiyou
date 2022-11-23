@@ -1,13 +1,12 @@
 import React, { } from "react";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
-import { PlayerConfig } from "../../game/system/Player/PlayerConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
-import { GameEnum } from "../../libs/GameEnum";
+import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
 import { CCButton } from "../allCustomUIElement/CCButton/CCButton";
 import { CCDividerLine } from "../allCustomUIElement/CCDivider/CCDividerLine";
 import { CCIcon_CoinType } from "../allCustomUIElement/CCIcons/CCIcon_CoinType";
@@ -16,6 +15,7 @@ import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCChallengeAbilityIcon } from "./CCChallengeAbilityIcon";
 
 import "./CCChallengeShopPanel.less";
+import { PlayerConfig } from "../../../../../game/scripts/tscripts/shared/PlayerConfig";
 
 export interface ICCChallengeShopPanel {
 

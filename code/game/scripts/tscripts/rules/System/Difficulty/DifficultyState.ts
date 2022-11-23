@@ -1,4 +1,4 @@
-import { DifficultyConfig } from "./DifficultyConfig";
+import { DifficultyConfig } from "../../../shared/DifficultyConfig";
 
 export class DifficultyState {
     /**章节难度*/

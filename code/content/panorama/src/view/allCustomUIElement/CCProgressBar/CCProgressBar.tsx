@@ -7,8 +7,8 @@ interface ICCProgressBar {
 	// checked?: boolean,
 	/** 值 */
 	value: number,
-	min: number,
-	max: number,
+	min?: number,
+	max?: number,
 	/** 变化时回调函数 */
 	onChange?: (checked: boolean) => void,
 }
@@ -22,7 +22,7 @@ export class CCProgressBar extends CCPanel<ICCProgressBar> {
 	};
 	render() {
 		const { value, min, max } = this.props;
-		const width = (value - min) / (max - min) * 100;
+		const width = (value - min!) / (max! - min!) * 100;
 		return (this.__root___isValid &&
 			<Panel ref={this.__root__}   {...this.initRootAttrs()}>
 				<CCPanel className="CC_ProgressBar_Left" width={width + "%"} />

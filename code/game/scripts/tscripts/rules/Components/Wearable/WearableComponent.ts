@@ -6,7 +6,7 @@ import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
-import { WearableConfig } from "../../System/Wearable/WearableConfig";
+import { WearableConfig } from "../../../shared/WearableConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
 import { EWearableItem } from "./EWearableItem";

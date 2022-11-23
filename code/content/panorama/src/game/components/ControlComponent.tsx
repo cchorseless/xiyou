@@ -1,7 +1,7 @@
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { ET, registerET } from "../../libs/Entity";
-import { GameEnum } from "../../libs/GameEnum";
+import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
 
 const KeyCode: { [key: string]: string; } = {
     // Q: "Q",

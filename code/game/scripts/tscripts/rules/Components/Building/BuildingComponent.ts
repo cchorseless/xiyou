@@ -1,12 +1,12 @@
 import { reloadable } from "../../../GameCache";
-import { GameEnum } from "../../../GameEnum";
+import { GameEnum } from "../../../shared/GameEnum";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_summon } from "../../../npc/modifier/modifier_summon";
 import { ET, serializeETProps } from "../../Entity/Entity";
-import { BuildingConfig } from "../../System/Building/BuildingConfig";
+import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { BattleUnitComponent } from "../BattleUnit/BattleUnitComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";

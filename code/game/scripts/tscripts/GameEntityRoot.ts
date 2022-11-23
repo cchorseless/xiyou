@@ -4,7 +4,7 @@
  */
 
 import { GetRegClass, globalData } from "./GameCache";
-import { GameEnum } from "./GameEnum";
+import { GameEnum } from "./shared/GameEnum";
 import { GameFunc } from "./GameFunc";
 import { EntityHelper } from "./helper/EntityHelper";
 import { EventHelper } from "./helper/EventHelper";
@@ -132,11 +132,11 @@ export class GameEntityRoot extends ET.EntityRoot {
 
 
     private addEvent() {
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.game_rules_state_change, this.onGameRulesStateChange);
-        // EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaOnHeroFinishSpawnEvent, this.onHeroFinishSpawn);
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned);
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityKilledEvent, this.OnEntityKilled);
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityHurtEvent, this.OnEntityHurt);
+        EventHelper.addGameEvent(this, GameEnum.GameEvent.game_rules_state_change, this.onGameRulesStateChange);
+        // EventHelper.addGameEvent(this, GameEnum.GameEvent.DotaOnHeroFinishSpawnEvent, this.onHeroFinishSpawn);
+        EventHelper.addGameEvent(this, GameEnum.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned);
+        EventHelper.addGameEvent(this, GameEnum.GameEvent.EntityKilledEvent, this.OnEntityKilled);
+        EventHelper.addGameEvent(this, GameEnum.GameEvent.EntityHurtEvent, this.OnEntityHurt);
         /**JS 请求LUA 事件 */
         EventHelper.addCustomEvent(this, "JS_TO_LUA_EVENT", this.onJS_TO_LUA_EVENT);
         this.addItemEvent();
@@ -145,7 +145,7 @@ export class GameEntityRoot extends ET.EntityRoot {
     /**监听游戏item事件 */
     private addItemEvent() {
         // 道具获取事件
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaInventoryItemAddedEvent, (event) => {
+        EventHelper.addGameEvent(this, GameEnum.GameEvent.DotaInventoryItemAddedEvent, (event) => {
             // 17 表示 无效
             if (event.item_slot < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM) {
                 (event as IBuffEventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;
@@ -164,7 +164,7 @@ export class GameEntityRoot extends ET.EntityRoot {
             }
         });
         // 道具缺失事件
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.DotaHeroInventoryItemChangeEvent, (event: DotaHeroInventoryItemChangeEvent) => {
+        EventHelper.addGameEvent(this, GameEnum.GameEvent.DotaHeroInventoryItemChangeEvent, (event: DotaHeroInventoryItemChangeEvent) => {
             let item = EntIndexToHScript(event.item_entindex) as BaseItem_Plus;
             let state = item.GetItemState();
             let slot = item.GetItemSlot();
@@ -185,7 +185,7 @@ export class GameEntityRoot extends ET.EntityRoot {
             }
         });
         // 道具位置改变
-        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_ITEM_SLOT_CHANGE, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(this, GameEnum.CustomProtocol.req_ITEM_SLOT_CHANGE, (event: JS_TO_LUA_DATA) => {
             let playerid = event.PlayerID;
             let hero = this.PlayerSystem().GetPlayer(playerid).Hero!;
             if (hero != null) {
@@ -202,7 +202,7 @@ export class GameEntityRoot extends ET.EntityRoot {
             }
         });
         // 道具给人
-        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_ITEM_GIVE_NPC, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(this, GameEnum.CustomProtocol.req_ITEM_GIVE_NPC, (event: JS_TO_LUA_DATA) => {
             let playerid = event.PlayerID;
             let itemslot = event.data.slot;
             let npcentindex = event.data.npc;
@@ -231,7 +231,7 @@ export class GameEntityRoot extends ET.EntityRoot {
             event.state = true;
         });
         // 道具仍在地上
-        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_ITEM_DROP_POSITION, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(this, GameEnum.CustomProtocol.req_ITEM_DROP_POSITION, (event: JS_TO_LUA_DATA) => {
             let playerid = event.PlayerID;
             let itemslot = event.data.slot;
             let itementityid = event.data.itementityid;

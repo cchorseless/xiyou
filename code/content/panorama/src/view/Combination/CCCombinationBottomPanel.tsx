@@ -4,7 +4,7 @@ import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { ET } from "../../libs/Entity";
-import { GameEnum } from "../../libs/GameEnum";
+import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
 import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCCombinationSingleBottomItem } from "./CCCombinationSingleBottomItem";

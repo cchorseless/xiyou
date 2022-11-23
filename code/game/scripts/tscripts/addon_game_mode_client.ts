@@ -1,4 +1,4 @@
-import { GameEnum } from "./GameEnum";
+import { GameEnum } from "./shared/GameEnum";
 import { GameFunc } from "./GameFunc";
 import { EntityHelper } from "./helper/EntityHelper";
 import { EventHelper } from "./helper/EventHelper";
@@ -19,7 +19,7 @@ export class GameMode_Client extends SingletonClass {
     }
 
     public addEvent() {
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned);
+        EventHelper.addGameEvent(this, GameEnum.GameEvent.NpcSpawnedEvent, this.OnNPCSpawned);
         EventHelper.addGameEvent(this, "call_get_ability_data", this.OnCall_get_ability_data);
         EventHelper.addGameEvent(this, "call_get_unit_data", this.OnCall_get_unit_data);
         EventHelper.addGameEvent(this, "call_get_player_data", this.OnCall_get_player_data);

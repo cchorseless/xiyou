@@ -1,4 +1,4 @@
-import { GameEnum } from "./GameEnum";
+import { GameEnum } from "./shared/GameEnum";
 import { GameSetting } from "./GameSetting";
 import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
@@ -38,8 +38,8 @@ export class GameDebugger extends SingletonClass {
 
     /**打印游戏时间顺序 */
     private printGameEvent() {
-        for (let k in GameEnum.Event.GameEvent) {
-            let eventName = (GameEnum.Event.GameEvent as any)[k];
+        for (let k in GameEnum.GameEvent) {
+            let eventName = (GameEnum.GameEvent as any)[k];
             if (eventName) {
                 EventHelper.addGameEvent(this, eventName, (e) => {
                     LogHelper.print(k, "|", eventName);
@@ -153,18 +153,18 @@ export class GameDebugger extends SingletonClass {
 
     public addDebugEvent() {
         //#region  游戏内事件
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.PlayerChatEvent, this.OnPlayerChat);
+        EventHelper.addGameEvent(this, GameEnum.GameEvent.PlayerChatEvent, this.OnPlayerChat);
         //#endregion
         //#region  自定义事件
         // 游戏结束
-        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_DebugGameOver, this.onDebugGameOver);
+        EventHelper.addProtocolEvent(this, GameEnum.CustomProtocol.req_DebugGameOver, this.onDebugGameOver);
         // 游戏重载
-        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_DebugReload, this.onDebugReload);
+        EventHelper.addProtocolEvent(this, GameEnum.CustomProtocol.req_DebugReload, this.onDebugReload);
         // 游戏重新开始
-        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_DebugRestart, this.onDebugRestart);
+        EventHelper.addProtocolEvent(this, GameEnum.CustomProtocol.req_DebugRestart, this.onDebugRestart);
         // 清除打印
-        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_DebugClearAll, this.onDebugClearAll);
-        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_addBot, this.onreq_addBot);
+        EventHelper.addProtocolEvent(this, GameEnum.CustomProtocol.req_DebugClearAll, this.onDebugClearAll);
+        EventHelper.addProtocolEvent(this, GameEnum.CustomProtocol.req_addBot, this.onreq_addBot);
 
         //#endregion
     }
@@ -174,7 +174,7 @@ export class GameDebugger extends SingletonClass {
         let iPlayerID = events.playerid;
         let player = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(iPlayerID);
         let hero = player.Hero!;
-        let heroroot=hero.ETRoot.As<CourierEntityRoot>()
+        let heroroot = hero.ETRoot.As<CourierEntityRoot>()
         let sText = events.text.toLowerCase();
         let bTeamOnly = events.teamonly == 1;
         let tokens = sText.split(" ");

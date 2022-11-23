@@ -4,7 +4,7 @@ import { reloadable } from "../../../GameCache";
 import { EventHelper } from "../../../helper/EventHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET } from "../../Entity/Entity";
-import { RoundConfig } from "../../System/Round/RoundConfig";
+import { RoundConfig } from "../../../shared/RoundConfig";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { FakerHeroEntityRoot } from "./FakerHeroEntityRoot";
 

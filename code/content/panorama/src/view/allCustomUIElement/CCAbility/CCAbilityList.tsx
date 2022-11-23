@@ -5,7 +5,6 @@ import { NodePropsData } from "../../../libs/BasePureComponent";
 import "./CCAbilityList.less";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { NetHelper } from "../../../helper/NetHelper";
-import { GameEnum } from "../../../libs/GameEnum";
 import { LogHelper } from "../../../helper/LogHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 import { CCAbilityInfoDialog } from "./CCAbilityInfoDialog";

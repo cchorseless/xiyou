@@ -2,10 +2,11 @@ import { reloadable } from "../../../GameCache";
 import { GameSetting } from "../../../GameSetting";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
-import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
-import { RoundConfig } from "../../System/Round/RoundConfig";
+import { ChessControlConfig } from "../../../shared/ChessControlConfig";
+import { RoundConfig } from "../../../shared/RoundConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
+import { ChessVector } from "../../System/ChessControl/ChessVector";
 
 @reloadable
 export class ChessControlComponent extends ET.Component {
@@ -61,7 +62,7 @@ export class ChessControlComponent extends ET.Component {
 
     public findEmptyStandbyChessVector() {
         let playerid = this.GetDomain<PlayerScene>().ETRoot.Playerid;
-        let chessVector = new ChessControlConfig.ChessVector(0, 0, playerid);
+        let chessVector = new ChessVector(0, 0, playerid);
         for (let i = 0; i < ChessControlConfig.Gird_Max_X; i++) {
             chessVector.x = i;
             if (GameRules.Addon.ETRoot.ChessControlSystem().IsBoardEmptyGird(chessVector)) {

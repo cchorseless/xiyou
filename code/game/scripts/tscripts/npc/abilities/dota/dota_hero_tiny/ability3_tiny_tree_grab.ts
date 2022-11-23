@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -13,14 +13,14 @@ export const Data_tiny_tree_grab = { "ID": "5108", "AbilityBehavior": "DOTA_ABIL
 
 @registerAbility()
 export class ability3_tiny_tree_grab extends BaseAbility_Plus {
-    /**对应dota内的名字 */
-    __IN_DOTA_NAME__ = "tiny_tree_grab";
-    /**对应dota内的数据 */
-    __IN_DOTA_DATA__: typeof Data_tiny_tree_grab = Data_tiny_tree_grab;
-    Init() {
-                this.SetDefaultSpecialValue("bonus_base_damage", [0.2,0.4,0.6,0.8,1.0]);
-        this.SetDefaultSpecialValue("attack_speed_reduction", [0,50,100,150,200]);
-        this.SetDefaultSpecialValue("cooldown_pct", 20);
+        /**对应dota内的名字 */
+        __IN_DOTA_NAME__ = "tiny_tree_grab";
+        /**对应dota内的数据 */
+        __IN_DOTA_DATA__: typeof Data_tiny_tree_grab = Data_tiny_tree_grab;
+        Init() {
+                this.SetDefaultSpecialValue("bonus_base_damage", [0.2, 0.4, 0.6, 0.8, 1.0]);
+                this.SetDefaultSpecialValue("attack_speed_reduction", [0, 50, 100, 150, 200]);
+                this.SetDefaultSpecialValue("cooldown_pct", 20);
 
         }
 

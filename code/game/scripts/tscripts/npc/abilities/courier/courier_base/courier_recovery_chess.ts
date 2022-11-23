@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { EntityHelper } from "../../../../helper/EntityHelper";
 import { LogHelper } from "../../../../helper/LogHelper";
 import { BuildingEntityRoot } from "../../../../rules/Components/Building/BuildingEntityRoot";

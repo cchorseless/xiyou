@@ -2,9 +2,9 @@ import { reloadable } from "../../../GameCache";
 import { KVHelper } from "../../../helper/KVHelper";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { ActiveRootItem } from "../../../npc/items/ActiveRootItem";
+import { PublicBagConfig } from "../../../shared/PublicBagConfig";
 import { ItemEntityRoot } from "../../Components/Item/ItemEntityRoot";
 import { ET } from "../../Entity/Entity";
-import { PublicBagConfig } from "./PublicBagConfig";
 
 
 

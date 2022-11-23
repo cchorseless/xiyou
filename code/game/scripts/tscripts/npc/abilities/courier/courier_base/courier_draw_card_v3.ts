@@ -1,8 +1,8 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { EntityHelper } from "../../../../helper/EntityHelper";
 import { LogHelper } from "../../../../helper/LogHelper";
-import { DrawConfig } from "../../../../rules/System/Draw/DrawConfig";
+import { DrawConfig } from "../../../../shared/DrawConfig";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";

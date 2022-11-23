@@ -7,13 +7,14 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_jump } from "../../../npc/modifier/modifier_jump";
 import { modifier_run } from "../../../npc/modifier/modifier_run";
 import { ET } from "../../Entity/Entity";
-import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
+import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { ChessVector } from "../../System/ChessControl/ChessVector";
 
 @reloadable
 export class ChessComponent extends ET.Component {
-    public ChessVector: ChessControlConfig.ChessVector;
+    public ChessVector: ChessVector;
     readonly isAlive: boolean = true;
     onAwake(): void {
         let domain = this.GetDomain<BaseNpc_Plus>();
@@ -104,7 +105,7 @@ export class ChessComponent extends ET.Component {
 
         }
     }
-    OnblinkChessStart(to: ChessControlConfig.ChessVector) {
+    OnblinkChessStart(to: ChessVector) {
         let npc = this.GetDomain<BaseNpc_Plus>();
         let etroot = npc.ETRoot.As<PlayerCreateBattleUnitEntityRoot>()
         if (!etroot.IsBuilding()) { return }

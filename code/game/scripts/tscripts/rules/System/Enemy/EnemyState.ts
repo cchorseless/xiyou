@@ -1,6 +1,3 @@
-import { EnemyManagerComponent } from "../../Components/Enemy/EnemyManagerComponent";
-import { EnemyConfig } from "./EnemyConfig";
-
 export class EnemyState {
 
     public static readonly SpawnEnemyPoint: Vector[] = [];
@@ -18,6 +15,6 @@ export class EnemyState {
             this.EnemyWayPoint[pointName] = Entities.FindByName(null, pointName).GetAbsOrigin()
         }
         return this.EnemyWayPoint[pointName];
-    } 
+    }
 
 }

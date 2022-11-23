@@ -1,5 +1,5 @@
 import { reloadable } from "../../GameCache";
-import { GameEnum } from "../../GameEnum";
+import { GameEnum } from "../../shared/GameEnum";
 import { GameFunc } from "../../GameFunc";
 import { AoiHelper } from "../../helper/AoiHelper";
 import { LogHelper } from "../../helper/LogHelper";

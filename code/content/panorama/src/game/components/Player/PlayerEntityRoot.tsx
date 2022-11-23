@@ -1,7 +1,6 @@
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { TCharacter } from "../../service/account/TCharacter";
-import { PlayerConfig } from "../../system/Player/PlayerConfig";
 import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
 import { ChessControlComponent } from "../ChessControlComponent";
 import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";

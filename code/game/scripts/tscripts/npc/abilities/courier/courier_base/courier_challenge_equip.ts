@@ -1,5 +1,5 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { LogHelper } from "../../../../helper/LogHelper";
 import { AbilityEntityRoot } from "../../../../rules/Components/Ability/AbilityEntityRoot";
 import { serializeDomainProps } from "../../../../rules/Entity/Entity";

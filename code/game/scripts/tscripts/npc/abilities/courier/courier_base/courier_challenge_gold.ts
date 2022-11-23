@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { EntityHelper } from "../../../../helper/EntityHelper";
 import { KVHelper } from "../../../../helper/KVHelper";

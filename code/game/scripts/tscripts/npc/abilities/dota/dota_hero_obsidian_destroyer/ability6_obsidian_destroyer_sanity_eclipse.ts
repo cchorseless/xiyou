@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -22,20 +22,20 @@ export class ability6_obsidian_destroyer_sanity_eclipse extends BaseAbility_Plus
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_obsidian_destroyer_sanity_eclipse = Data_obsidian_destroyer_sanity_eclipse;
     Init() {
-                this.SetDefaultSpecialValue("mana_damage_multiplier", [1,1.5,2,2.5,3,4]);
+        this.SetDefaultSpecialValue("mana_damage_multiplier", [1, 1.5, 2, 2.5, 3, 4]);
         this.SetDefaultSpecialValue("radius", 575);
         this.SetDefaultSpecialValue("cast_range", 800);
         this.SetDefaultSpecialValue("essence_energy", 4);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("mana_damage_multiplier", [1.0,1.2,1.4,1.6,1.8,2.0]);
+        this.SetDefaultSpecialValue("mana_damage_multiplier", [1.0, 1.2, 1.4, 1.6, 1.8, 2.0]);
         this.SetDefaultSpecialValue("radius", 575);
         this.SetDefaultSpecialValue("cast_range", 800);
         this.SetDefaultSpecialValue("essence_energy", 4);
 
-        }
+    }
 
 
     GetCooldown(iLevel: number) {
@@ -58,7 +58,7 @@ export class ability6_obsidian_destroyer_sanity_eclipse extends BaseAbility_Plus
 
         //  			 modifier_obsidian_destroyer_2_invulnerable.remove( hUnit );
         //  			this.HitTarget(hUnit)
-        //  			 modifier_obsidian_destroyer_2_invulnerable.apply( hUnit , caster, this, null) 
+        //  			 modifier_obsidian_destroyer_2_invulnerable.apply( hUnit , caster, this, null)
         //  		}
         //  	}
         //  }

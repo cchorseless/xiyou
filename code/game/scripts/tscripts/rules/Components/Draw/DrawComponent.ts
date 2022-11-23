@@ -6,7 +6,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { ET, serializeETProps } from "../../Entity/Entity";
-import { DrawConfig } from "../../System/Draw/DrawConfig";
+import { DrawConfig } from "../../../shared/DrawConfig";
 import { PlayerEntityRoot } from "../Player/PlayerEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 

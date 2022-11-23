@@ -1,5 +1,5 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -19,18 +19,18 @@ export class ability2_phantom_assassin_phantom_strike extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_phantom_assassin_phantom_strike = Data_phantom_assassin_phantom_strike;
     Init() {
-                this.SetDefaultSpecialValue("bonus_attack_speed", 230);
-        this.SetDefaultSpecialValue("duration", [2.0,2.5,3.0,3.5,4.0,4.5]);
-        this.SetDefaultSpecialValue("ignore_armor", [15,20,25,30,35,45]);
+        this.SetDefaultSpecialValue("bonus_attack_speed", 230);
+        this.SetDefaultSpecialValue("duration", [2.0, 2.5, 3.0, 3.5, 4.0, 4.5]);
+        this.SetDefaultSpecialValue("ignore_armor", [15, 20, 25, 30, 35, 45]);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("bonus_attack_speed", 230);
-        this.SetDefaultSpecialValue("duration", [2.0,2.5,3.0,3.5,4.0,4.5]);
-        this.SetDefaultSpecialValue("ignore_armor", [15,20,25,30,35,45]);
+        this.SetDefaultSpecialValue("bonus_attack_speed", 230);
+        this.SetDefaultSpecialValue("duration", [2.0, 2.5, 3.0, 3.5, 4.0, 4.5]);
+        this.SetDefaultSpecialValue("ignore_armor", [15, 20, 25, 30, 35, 45]);
 
-        }
+    }
 
 
     GetCooldown(iLevel: number) {

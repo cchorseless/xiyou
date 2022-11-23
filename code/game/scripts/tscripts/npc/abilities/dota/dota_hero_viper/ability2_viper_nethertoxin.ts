@@ -1,5 +1,5 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -21,22 +21,22 @@ export class ability2_viper_nethertoxin extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_viper_nethertoxin = Data_viper_nethertoxin;
     Init() {
-                this.SetDefaultSpecialValue("damage_sec", [200,400,600,800,1200,1600]);
+        this.SetDefaultSpecialValue("damage_sec", [200, 400, 600, 800, 1200, 1600]);
         this.SetDefaultSpecialValue("duration", 8);
-        this.SetDefaultSpecialValue("poison_percent", [40,60,80,100,120,140]);
+        this.SetDefaultSpecialValue("poison_percent", [40, 60, 80, 100, 120, 140]);
         this.SetDefaultSpecialValue("damage_radius", 400);
         this.SetDefaultSpecialValue("shard_incoming_poison_damage_pct", 150);
         this.SetDefaultSpecialValue("poison_stack_pct", 50);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("damage_sec", [200,400,600,800,1200,1600]);
+        this.SetDefaultSpecialValue("damage_sec", [200, 400, 600, 800, 1200, 1600]);
         this.SetDefaultSpecialValue("duration", 8);
-        this.SetDefaultSpecialValue("poison_percent", [40,60,80,100,120,140]);
+        this.SetDefaultSpecialValue("poison_percent", [40, 60, 80, 100, 120, 140]);
         this.SetDefaultSpecialValue("damage_radius", 400);
 
-        }
+    }
 
 
     GetAOERadius() {

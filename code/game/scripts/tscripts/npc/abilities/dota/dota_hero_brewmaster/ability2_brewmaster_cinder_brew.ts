@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -17,13 +17,13 @@ export class ability2_brewmaster_cinder_brew extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_brewmaster_cinder_brew = Data_brewmaster_cinder_brew;
     Init() {
-                this.SetDefaultSpecialValue("radius", 500);
-        this.SetDefaultSpecialValue("damage", [700,900,1100,1300,1500,1700]);
+        this.SetDefaultSpecialValue("radius", 500);
+        this.SetDefaultSpecialValue("damage", [700, 900, 1100, 1300, 1500, 1700]);
         this.SetDefaultSpecialValue("duration", 4);
-        this.SetDefaultSpecialValue("attack_bonus_damage", [2.0,2.5,3.0,3.5,4.0,5.0]);
+        this.SetDefaultSpecialValue("attack_bonus_damage", [2.0, 2.5, 3.0, 3.5, 4.0, 5.0]);
         this.SetDefaultSpecialValue("magic_armor", 18);
 
-        }
+    }
 
 
 

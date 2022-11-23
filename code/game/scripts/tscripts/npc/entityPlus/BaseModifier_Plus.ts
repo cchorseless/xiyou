@@ -5,7 +5,7 @@
  * @LastEditTime: 2021-06-15 19:08:54
  * @Description: file content
  */
-import { GameEnum } from "../../GameEnum";
+import { GameEnum } from "../../shared/GameEnum";
 import { GameFunc } from "../../GameFunc";
 import { AoiHelper } from "../../helper/AoiHelper";
 import { LogHelper } from "../../helper/LogHelper";

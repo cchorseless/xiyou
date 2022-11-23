@@ -1,5 +1,5 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { LogHelper } from "../../../../helper/LogHelper";
 import { MiniMapHelper } from "../../../../helper/MiniMapHelper";
 import { ResHelper } from "../../../../helper/ResHelper";

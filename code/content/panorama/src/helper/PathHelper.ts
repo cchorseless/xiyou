@@ -1,4 +1,5 @@
-import { GameEnum } from "../libs/GameEnum";
+import { GameEnum } from "../../../../game/scripts/tscripts/shared/GameEnum";
+
 
 export module PathHelper {
     export function getRaretyIndex(str: string) {

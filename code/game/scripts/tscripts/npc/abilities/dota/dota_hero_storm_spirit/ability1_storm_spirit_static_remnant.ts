@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -20,27 +20,27 @@ export class ability1_storm_spirit_static_remnant extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_storm_spirit_static_remnant = Data_storm_spirit_static_remnant;
     Init() {
-                this.SetDefaultSpecialValue("static_remnant_radius", 700);
+        this.SetDefaultSpecialValue("static_remnant_radius", 700);
         this.SetDefaultSpecialValue("static_remnant_damage_radius", 725);
         this.SetDefaultSpecialValue("static_remnant_duration", 6);
-        this.SetDefaultSpecialValue("static_remnant_damage", [200,400,800,1600,3200,6400]);
-        this.SetDefaultSpecialValue("intellect_factor", [5,6,7,8,9,10]);
+        this.SetDefaultSpecialValue("static_remnant_damage", [200, 400, 800, 1600, 3200, 6400]);
+        this.SetDefaultSpecialValue("intellect_factor", [5, 6, 7, 8, 9, 10]);
         this.SetDefaultSpecialValue("static_remnant_delay", 1);
         this.SetDefaultSpecialValue("shock_bonus_int", 3);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("static_remnant_radius", 235);
+        this.SetDefaultSpecialValue("static_remnant_radius", 235);
         this.SetDefaultSpecialValue("static_remnant_damage_radius", 260);
         this.SetDefaultSpecialValue("static_remnant_duration", 12);
-        this.SetDefaultSpecialValue("static_remnant_damage", [500,800,1500,2000,2500,3000]);
-        this.SetDefaultSpecialValue("intellect_factor", [1,2,3,4,5,6]);
+        this.SetDefaultSpecialValue("static_remnant_damage", [500, 800, 1500, 2000, 2500, 3000]);
+        this.SetDefaultSpecialValue("intellect_factor", [1, 2, 3, 4, 5, 6]);
         this.SetDefaultSpecialValue("static_remnant_delay", 1);
         this.SetDefaultSpecialValue("super_state_damage_factor", 2);
         this.SetDefaultSpecialValue("super_state_damage_radius", 100);
 
-        }
+    }
 
 
     GetCastRange(vLocation: Vector, hTarget: BaseNpc_Plus) {

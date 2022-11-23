@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -22,24 +22,24 @@ export class ability2_tinker_heat_seeking_missile extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_tinker_heat_seeking_missile = Data_tinker_heat_seeking_missile;
     Init() {
-                this.SetDefaultSpecialValue("cooldown_tooltip", [10,9,8,7,6,5]);
-        this.SetDefaultSpecialValue("damage", [500,800,1600,2400,3200,4000]);
+        this.SetDefaultSpecialValue("cooldown_tooltip", [10, 9, 8, 7, 6, 5]);
+        this.SetDefaultSpecialValue("damage", [500, 800, 1600, 2400, 3200, 4000]);
         this.SetDefaultSpecialValue("radius", 1500);
         this.SetDefaultSpecialValue("targets", 4);
         this.SetDefaultSpecialValue("speed", 700);
         this.SetDefaultSpecialValue("duration", 3);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("cooldown_tooltip", [10,9,8,7,6,5]);
-        this.SetDefaultSpecialValue("damage", [500,800,1600,2400,3200,4000]);
+        this.SetDefaultSpecialValue("cooldown_tooltip", [10, 9, 8, 7, 6, 5]);
+        this.SetDefaultSpecialValue("damage", [500, 800, 1600, 2400, 3200, 4000]);
         this.SetDefaultSpecialValue("radius", 1500);
         this.SetDefaultSpecialValue("targets", 4);
         this.SetDefaultSpecialValue("speed", 700);
         this.SetDefaultSpecialValue("targets_scepter", 8);
 
-        }
+    }
 
 
 

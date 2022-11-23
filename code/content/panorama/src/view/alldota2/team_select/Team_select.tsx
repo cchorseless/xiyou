@@ -8,7 +8,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
-import { GameEnum } from "../../../libs/GameEnum";
+import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
 import { Loading } from "../loading/loading";
 import { PlayerInTeamItem } from "./PlayerInTeamItem";
 import { Team_select_UI } from "./Team_select_UI";

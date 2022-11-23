@@ -1,4 +1,4 @@
-import { GameEnum } from "../GameEnum";
+import { GameEnum } from "../shared/GameEnum";
 import { EventHelper } from "./EventHelper";
 import { LogHelper } from "./LogHelper";
 import { TimerHelper } from "./TimerHelper";
@@ -23,7 +23,7 @@ export module MiniMapHelper {
         let offy = math.abs(v.y - 7680) / 7680 / 2;
         v.x = offx;
         v.y = offy
-        EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_update_minimap, {
+        EventHelper.fireProtocolEventToPlayer(GameEnum.CustomProtocol.push_update_minimap, {
             state: true,
             data: {
                 [showplayerid]: {
@@ -49,7 +49,7 @@ export module MiniMapHelper {
                 allTimerInfo.splice(i, 1);
             }
         }
-        EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_update_minimap_nodraw, {
+        EventHelper.fireProtocolEventToPlayer(GameEnum.CustomProtocol.push_update_minimap_nodraw, {
             state: true,
             data: { [showplayerid]: 1 }
         }, forplayerid)

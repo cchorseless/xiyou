@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -19,24 +19,24 @@ export class ability1_sniper_shrapnel extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_sniper_shrapnel = Data_sniper_shrapnel;
     Init() {
-                this.SetDefaultSpecialValue("slow_movement_speed", [-20,-26,-32,-38,-34,-40]);
+        this.SetDefaultSpecialValue("slow_movement_speed", [-20, -26, -32, -38, -34, -40]);
         this.SetDefaultSpecialValue("radius", 450);
-        this.SetDefaultSpecialValue("shrapnel_damage", [300,700,1200,1800,2400,3200]);
+        this.SetDefaultSpecialValue("shrapnel_damage", [300, 700, 1200, 1800, 2400, 3200]);
         this.SetDefaultSpecialValue("shrapnel_damage_per_agi", 3);
         this.SetDefaultSpecialValue("duration", 6);
         this.SetDefaultSpecialValue("damage_delay", 1.2);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("slow_movement_speed", -190);
+        this.SetDefaultSpecialValue("slow_movement_speed", -190);
         this.SetDefaultSpecialValue("radius", 450);
-        this.SetDefaultSpecialValue("shrapnel_damage", [300,700,1200,1800,2400,3200]);
+        this.SetDefaultSpecialValue("shrapnel_damage", [300, 700, 1200, 1800, 2400, 3200]);
         this.SetDefaultSpecialValue("shrapnel_damage_per_agi", 3);
         this.SetDefaultSpecialValue("duration", 6);
         this.SetDefaultSpecialValue("damage_delay", 1.2);
 
-        }
+    }
 
 
 

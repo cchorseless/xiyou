@@ -1,5 +1,3 @@
-import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-
 export class MapState {
     static readonly PlayerTpDoorPoint: Vector[] = [];
     static readonly BaseTpDoorPoint: Vector[] = [];

@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../GameEnum";
+import { GameEnum } from "../../../shared/GameEnum";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BuildingEntityRoot } from "../../../rules/Components/Building/BuildingEntityRoot";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";

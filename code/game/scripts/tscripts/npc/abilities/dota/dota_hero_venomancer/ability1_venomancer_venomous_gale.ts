@@ -1,5 +1,5 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -22,24 +22,24 @@ export class ability1_venomancer_venomous_gale extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_venomancer_venomous_gale = Data_venomancer_venomous_gale;
     Init() {
-                this.SetDefaultSpecialValue("base_damage", [400,600,1000,1400,2000,3000]);
+        this.SetDefaultSpecialValue("base_damage", [400, 600, 1000, 1400, 2000, 3000]);
         this.SetDefaultSpecialValue("movement_slow", -40);
         this.SetDefaultSpecialValue("duration", 7);
-        this.SetDefaultSpecialValue("poison_count", [200,300,500,700,1000,1500]);
+        this.SetDefaultSpecialValue("poison_count", [200, 300, 500, 700, 1000, 1500]);
         this.SetDefaultSpecialValue("radius", 125);
         this.SetDefaultSpecialValue("speed", 1200);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("base_damage", [400,600,800,1000,1200,1400]);
+        this.SetDefaultSpecialValue("base_damage", [400, 600, 800, 1000, 1200, 1400]);
         this.SetDefaultSpecialValue("movement_slow", -40);
         this.SetDefaultSpecialValue("duration", 7);
-        this.SetDefaultSpecialValue("poison_count", [200,300,400,500,600,700]);
+        this.SetDefaultSpecialValue("poison_count", [200, 300, 400, 500, 600, 700]);
         this.SetDefaultSpecialValue("radius", 125);
         this.SetDefaultSpecialValue("speed", 1200);
 
-        }
+    }
 
     GetCooldown(iLevel: number) {
         return super.GetCooldown(iLevel) - this.GetCasterPlus().GetTalentValue('special_bonus_unique_venomancer_custom_1')
@@ -98,7 +98,7 @@ export class ability1_venomancer_venomous_gale extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(vLocation, ResHelper.GetSoundReplacement("Hero_Venomancer.VenomousGaleImpact", hCaster), hCaster)
 
         modifier_poison.Poison(hTarget, hCaster, this, poison_count)
-         modifier_venomancer_1_projectile_debuff.apply( hTarget , hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) }) 
+        modifier_venomancer_1_projectile_debuff.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
     }
     GetIntrinsicModifierName() {
         return "modifier_venomancer_1"

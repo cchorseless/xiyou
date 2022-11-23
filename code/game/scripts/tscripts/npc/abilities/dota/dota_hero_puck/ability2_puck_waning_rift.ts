@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -20,12 +20,12 @@ export class ability2_puck_waning_rift extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_puck_waning_rift = Data_puck_waning_rift;
     Init() {
-                this.SetDefaultSpecialValue("radius", 900);
-        this.SetDefaultSpecialValue("silence_duration", [2,2,3,3,4,4]);
-        this.SetDefaultSpecialValue("damage", [400,700,1000,1500,2000,2700]);
-        this.SetDefaultSpecialValue("damage_int_factor", [6,7,7,8,9,11]);
+        this.SetDefaultSpecialValue("radius", 900);
+        this.SetDefaultSpecialValue("silence_duration", [2, 2, 3, 3, 4, 4]);
+        this.SetDefaultSpecialValue("damage", [400, 700, 1000, 1500, 2000, 2700]);
+        this.SetDefaultSpecialValue("damage_int_factor", [6, 7, 7, 8, 9, 11]);
 
-        }
+    }
 
 
 

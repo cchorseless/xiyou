@@ -5,11 +5,12 @@ import { AoiHelper } from "../../../helper/AoiHelper";
 import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { BuildingEntityRoot } from "../../Components/Building/BuildingEntityRoot";
 import { ET } from "../../Entity/Entity";
 import { MapState } from "../Map/MapState";
 import { PlayerState } from "../Player/PlayerState";
-import { ChessControlConfig } from "./ChessControlConfig";
+import { ChessVector } from "./ChessVector";
 
 @reloadable
 export class ChessControlSystemComponent extends ET.Component {
@@ -104,7 +105,7 @@ export class ChessControlSystemComponent extends ET.Component {
         return this.BoardStandbyMinVector3[playerid + ""];
     }
 
-    public GetBoardEmptyGirdRandomAround(v: ChessControlConfig.ChessVector) {
+    public GetBoardEmptyGirdRandomAround(v: ChessVector) {
         let distance = 1;
         while (distance <= 10) {
             let circle = this.GetBoardGirdAroundCircle(v, ChessControlConfig.Gird_Width * distance);
@@ -127,7 +128,7 @@ export class ChessControlSystemComponent extends ET.Component {
         }
         let x = RandomInt(0, ChessControlConfig.Gird_Max_X);
         let y = RandomInt(min_y, max_y);
-        let v = new ChessControlConfig.ChessVector(x, y, playerid);
+        let v = new ChessVector(x, y, playerid);
         let distance = 1;
         while (distance <= 10) {
             let circle = this.GetBoardGirdAroundCircle(v, ChessControlConfig.Gird_Width * distance);
@@ -140,8 +141,8 @@ export class ChessControlSystemComponent extends ET.Component {
         }
     }
 
-    public GetBoardGirdAroundCircle(v: ChessControlConfig.ChessVector, distance: number) {
-        let r: ChessControlConfig.ChessVector[] = [];
+    public GetBoardGirdAroundCircle(v: ChessVector, distance: number) {
+        let r: ChessVector[] = [];
         let centerX = math.floor(v.x);
         let centerY = math.floor(v.y);
         let playerid = v.playerid;
@@ -150,26 +151,26 @@ export class ChessControlSystemComponent extends ET.Component {
         while (circle > 0) {
             if (centerX - circle > 0) {
                 if (centerY - circle >= 1) {
-                    r.push(new ChessControlConfig.ChessVector(centerX - circle, centerY - circle, playerid));
+                    r.push(new ChessVector(centerX - circle, centerY - circle, playerid));
                 }
-                r.push(new ChessControlConfig.ChessVector(centerX - circle, centerY, playerid));
+                r.push(new ChessVector(centerX - circle, centerY, playerid));
                 if (centerY + circle < ChessControlConfig.Gird_Max_Y) {
-                    r.push(new ChessControlConfig.ChessVector(centerX - circle, centerY + circle, playerid));
+                    r.push(new ChessVector(centerX - circle, centerY + circle, playerid));
                 }
             }
             if (centerY - circle >= 1) {
-                r.push(new ChessControlConfig.ChessVector(centerX, centerY - circle, playerid));
+                r.push(new ChessVector(centerX, centerY - circle, playerid));
             }
             if (centerY + circle < ChessControlConfig.Gird_Max_Y) {
-                r.push(new ChessControlConfig.ChessVector(centerX, centerY + circle, playerid));
+                r.push(new ChessVector(centerX, centerY + circle, playerid));
             }
             if (centerX + circle < ChessControlConfig.Gird_Max_X) {
                 if (centerY - circle >= 1) {
-                    r.push(new ChessControlConfig.ChessVector(centerX + circle, centerY - circle, playerid));
+                    r.push(new ChessVector(centerX + circle, centerY - circle, playerid));
                 }
-                r.push(new ChessControlConfig.ChessVector(centerX + circle, centerY, playerid));
+                r.push(new ChessVector(centerX + circle, centerY, playerid));
                 if (centerY + circle < ChessControlConfig.Gird_Max_Y) {
-                    r.push(new ChessControlConfig.ChessVector(centerX + circle, centerY + circle, playerid));
+                    r.push(new ChessVector(centerX + circle, centerY + circle, playerid));
                 }
             }
             circle--;
@@ -177,7 +178,7 @@ export class ChessControlSystemComponent extends ET.Component {
         return r;
     }
     // x ,y playerid
-    public GetBoardGirdCenterVector3(v: ChessControlConfig.ChessVector) {
+    public GetBoardGirdCenterVector3(v: ChessVector) {
         let playerid = v.playerid as PlayerID;
         let minv: Vector;
         let x: number;
@@ -194,7 +195,7 @@ export class ChessControlSystemComponent extends ET.Component {
         return Vector(x, y, 128);
     }
 
-    public FindBoardInGirdChess(v: ChessControlConfig.ChessVector) {
+    public FindBoardInGirdChess(v: ChessVector) {
         let playerid = v.playerid as PlayerID;
         if (!GameRules.Addon.ETRoot.PlayerSystem().IsValidPlayer(playerid)) {
             return;
@@ -218,8 +219,8 @@ export class ChessControlSystemComponent extends ET.Component {
         return r;
     }
 
-    private BlinkTargetGird: ChessControlConfig.ChessVector[] = [];
-    public IsBlinkTargetGird(v: ChessControlConfig.ChessVector) {
+    private BlinkTargetGird: ChessVector[] = [];
+    public IsBlinkTargetGird(v: ChessVector) {
         for (let k of this.BlinkTargetGird) {
             if (k.isSame(v)) {
                 return true;
@@ -227,7 +228,7 @@ export class ChessControlSystemComponent extends ET.Component {
         }
         return false;
     }
-    public RegistBlinkTargetGird(v: ChessControlConfig.ChessVector, isadd: boolean) {
+    public RegistBlinkTargetGird(v: ChessVector, isadd: boolean) {
         if (isadd) {
             if (!this.IsBlinkTargetGird(v)) {
                 this.BlinkTargetGird.push(v);
@@ -242,7 +243,7 @@ export class ChessControlSystemComponent extends ET.Component {
         }
     }
 
-    public IsBoardEmptyGird(v: ChessControlConfig.ChessVector) {
+    public IsBoardEmptyGird(v: ChessVector) {
         return this.FindBoardInGirdChess(v).length === 0;
     }
     public IsInBaseRoom(v: Vector) {
@@ -293,9 +294,9 @@ export class ChessControlSystemComponent extends ET.Component {
                     x = math.floor((v.x - minv.x) / ChessControlConfig.Gird_Width);
                     y = 0;
                 }
-                return new ChessControlConfig.ChessVector(x, y, playerid);
+                return new ChessVector(x, y, playerid);
             }
         }
-        return new ChessControlConfig.ChessVector(x, y, playerid);
+        return new ChessVector(x, y, playerid);
     }
 }

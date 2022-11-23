@@ -1,5 +1,5 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -47,8 +47,8 @@ export class ability1_pudge_meat_hook extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_pudge_meat_hook = Data_pudge_meat_hook;
     Init() {
-                this.SetDefaultSpecialValue("bleed_damage", [1000,1500,2000,2500,3000,4000]);
-        this.SetDefaultSpecialValue("bleed_damage_str", [3,4,5,6,7,8]);
+        this.SetDefaultSpecialValue("bleed_damage", [1000, 1500, 2000, 2500, 3000, 4000]);
+        this.SetDefaultSpecialValue("bleed_damage_str", [3, 4, 5, 6, 7, 8]);
         this.SetDefaultSpecialValue("hook_speed", 1450);
         this.SetDefaultSpecialValue("hook_width", 200);
         this.SetDefaultSpecialValue("hook_distance", 1300);
@@ -57,7 +57,7 @@ export class ability1_pudge_meat_hook extends BaseAbility_Plus {
         this.SetDefaultSpecialValue("extra_count", 4);
         this.SetDefaultSpecialValue("extra_angle", 15);
 
-        }
+    }
 
     AutoSpellSelf() {
         if (IsServer()) {

@@ -3,11 +3,11 @@ import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { ET, registerET } from "../../libs/Entity";
-import { GameEnum } from "../../libs/GameEnum";
+import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
 import { CCMainPanel } from "../../view/MainPanel/CCMainPanel";
 import { CCUnitChessMoveIcon } from "../../view/Unit/CCUnitChessMoveIcon";
-import { ChessControlConfig } from "../system/ChessControl/ChessControlConfig";
 import { PlayerScene } from "./Player/PlayerScene";
+import { ChessControlConfig } from "../../../../../game/scripts/tscripts/shared/ChessControlConfig";
 @registerET()
 export class ChessControlComponent extends ET.Component {
     onAwake() {

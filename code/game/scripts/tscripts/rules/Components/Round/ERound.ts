@@ -6,7 +6,7 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { building_round } from "../../../kvInterface/building/building_round";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, serializeETProps } from "../../Entity/Entity";
-import { RoundConfig } from "../../System/Round/RoundConfig";
+import { RoundConfig } from "../../../shared/RoundConfig";
 
 export class ERound extends ET.Entity {
     @serializeETProps()

@@ -1,5 +1,5 @@
 import { reloadable } from "../../../GameCache";
-import { GameEnum } from "../../../GameEnum";
+import { GameEnum } from "../../../shared/GameEnum";
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
@@ -20,7 +20,7 @@ export class RoundSystemComponent extends ET.Component {
         this.addEvent();
     }
     public addEvent() {
-        EventHelper.addGameEvent(this, GameEnum.Event.GameEvent.EntityHurtEvent, this.OnEntityHurtEvent);
+        EventHelper.addGameEvent(this, GameEnum.GameEvent.EntityHurtEvent, this.OnEntityHurtEvent);
 
     }
 

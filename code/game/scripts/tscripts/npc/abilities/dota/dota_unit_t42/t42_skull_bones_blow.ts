@@ -14,7 +14,7 @@ import { modifier_particle, modifier_particle_thinker } from "../../../modifier/
 import { LogHelper } from "../../../../helper/LogHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { GameSetting } from "../../../../GameSetting";
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 
 
 @registerAbility()
@@ -37,7 +37,7 @@ export class t42_skull_bones_blow extends BaseAbility_Plus {
             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
         }
         BattleHelper.GoApplyDamage(tDamageTable)
-         modifier_skull_bones_blow_custom_debuff.apply( hTarget , hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) }) 
+        modifier_skull_bones_blow_custom_debuff.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
         AoiHelper.DoCleaveAction(hCaster, hTarget, cleave_starting_width, cleave_ending_width, cleave_distance, (hTarget) => {
             let tDamageTable = {
                 ability: this,
@@ -47,7 +47,7 @@ export class t42_skull_bones_blow extends BaseAbility_Plus {
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
             }
             BattleHelper.GoApplyDamage(tDamageTable)
-             modifier_skull_bones_blow_custom_debuff.apply( hTarget , hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) }) 
+            modifier_skull_bones_blow_custom_debuff.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
         })
     }
     OnUpgrade() {

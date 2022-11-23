@@ -1,5 +1,5 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { EntityHelper } from "../../../../helper/EntityHelper";
 import { LogHelper } from "../../../../helper/LogHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";

@@ -4,7 +4,7 @@ import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCDividerHeader } from '../allCustomUIElement/CCDivider/CCDividerHeader';
 import { CCDOTAScenePanel } from '../allCustomUIElement/CCDOTAScenePanel/CCDOTAScenePanel';
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
-import { CCPanelBG } from '../allCustomUIElement/CCPanel/CCPanelBG';
+import { CCPanelBG } from '../allCustomUIElement/CCPanel/CCPanelPart';
 import "./CCPlayerInfoDialog.less";
 
 interface ICCPlayerInfoDialog extends NodePropsData {

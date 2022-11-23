@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -20,29 +20,29 @@ export class ability6_tinker_rearm extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_tinker_rearm = Data_tinker_rearm;
     Init() {
-                this.SetDefaultSpecialValue("radius", 900);
+        this.SetDefaultSpecialValue("radius", 900);
         this.SetDefaultSpecialValue("collision_radius", 50);
         this.SetDefaultSpecialValue("splash_radius", 150);
         this.SetDefaultSpecialValue("duration", 6);
         this.SetDefaultSpecialValue("speed", 400);
         this.SetDefaultSpecialValue("machines_per_sec", 24);
         this.SetDefaultSpecialValue("distance", 1800);
-        this.SetDefaultSpecialValue("damage", [350,500,650,800,950,1100]);
+        this.SetDefaultSpecialValue("damage", [350, 500, 650, 800, 950, 1100]);
         this.SetDefaultSpecialValue("scepter_duration", 3);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("radius", 900);
+        this.SetDefaultSpecialValue("radius", 900);
         this.SetDefaultSpecialValue("collision_radius", 50);
         this.SetDefaultSpecialValue("splash_radius", 150);
         this.SetDefaultSpecialValue("duration", 6);
         this.SetDefaultSpecialValue("speed", 400);
         this.SetDefaultSpecialValue("machines_per_sec", 24);
         this.SetDefaultSpecialValue("distance", 1800);
-        this.SetDefaultSpecialValue("damage", [350,500,650,800,950,1100]);
+        this.SetDefaultSpecialValue("damage", [350, 500, 650, 800, 950, 1100]);
 
-        }
+    }
 
     vLastPosition: Vector;
 

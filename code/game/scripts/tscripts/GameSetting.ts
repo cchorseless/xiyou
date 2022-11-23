@@ -1,4 +1,4 @@
-import { GameEnum } from "./GameEnum";
+import { GameEnum } from "./shared/GameEnum";
 import { GameFunc } from "./GameFunc";
 import { LogHelper } from "./helper/LogHelper";
 import { SingletonClass } from "./helper/SingletonHelper";

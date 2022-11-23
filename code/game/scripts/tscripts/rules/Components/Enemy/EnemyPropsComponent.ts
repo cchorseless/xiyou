@@ -3,8 +3,6 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_wave } from "../../../npc/modifier/building/modifier_wave";
 import { ET } from "../../Entity/Entity";
-import { DifficultyConfig } from "../../System/Difficulty/DifficultyConfig";
-import { DifficultyState } from "../../System/Difficulty/DifficultyState";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
 @reloadable
 export class EnemyPropsComponent extends ET.Component {

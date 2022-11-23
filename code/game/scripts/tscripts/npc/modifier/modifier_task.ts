@@ -1,4 +1,4 @@
-import { GameEnum } from "../../GameEnum";
+import { GameEnum } from "../../shared/GameEnum";
 import { EventHelper } from "../../helper/EventHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { LogHelper } from "../../helper/LogHelper";
@@ -44,7 +44,7 @@ export class modifier_task extends BaseModifier_Plus {
                     // if (tonumber(info.TaskFinishType) == System_Task.Sys_config.TaskFinishType.Kill) {
                     //     this.addFrameTimer(1, () => {
                     //         EventHelper.fireServerEvent(
-                    //             GameEnum.Event.CustomServer.onserver_finish_task,
+                    //             GameEnum.CustomServer.onserver_finish_task,
                     //             {
                     //                 PlayerID: playerid,
                     //                 data: {
@@ -72,7 +72,7 @@ export class modifier_task extends BaseModifier_Plus {
                     // if (tonumber(info.TaskFinishType) == System_Task.Sys_config.TaskFinishType.Collect) {
                     //     this.addFrameTimer(1, () => {
                     //         EventHelper.fireServerEvent(
-                    //             GameEnum.Event.CustomServer.onserver_finish_task,
+                    //             GameEnum.CustomServer.onserver_finish_task,
                     //             {
                     //                 PlayerID: playerid,
                     //                 data: {
@@ -101,7 +101,7 @@ export class modifier_task extends BaseModifier_Plus {
                     // if (tonumber(info.TaskFinishType) == System_Task.Sys_config.TaskFinishType.HasItem) {
                     //     this.addFrameTimer(1, () => {
                     //         EventHelper.fireServerEvent(
-                    //             GameEnum.Event.CustomServer.onserver_finish_task,
+                    //             GameEnum.CustomServer.onserver_finish_task,
                     //             {
                     //                 PlayerID: playerid,
                     //                 data: {
@@ -130,7 +130,7 @@ export class modifier_task extends BaseModifier_Plus {
                     // if (tonumber(info.TaskFinishType) == System_Task.Sys_config.TaskFinishType.HasItem) {
                     //     this.addFrameTimer(1, () => {
                     //         EventHelper.fireServerEvent(
-                    //             GameEnum.Event.CustomServer.onserver_finish_task,
+                    //             GameEnum.CustomServer.onserver_finish_task,
                     //             {
                     //                 PlayerID: playerid,
                     //                 data: {
@@ -159,7 +159,7 @@ export class modifier_task extends BaseModifier_Plus {
                     // if (tonumber(info.TaskFinishType) == System_Task.Sys_config.TaskFinishType.UseItem) {
                     //     this.addFrameTimer(1, () => {
                     //         EventHelper.fireServerEvent(
-                    //             GameEnum.Event.CustomServer.onserver_finish_task,
+                    //             GameEnum.CustomServer.onserver_finish_task,
                     //             {
                     //                 PlayerID: playerid,
                     //                 data: {
@@ -203,7 +203,7 @@ export class modifier_task_npc extends BaseModifier_Plus {
                     // if (tonumber(info.TaskFinishType) == System_Task.Sys_config.TaskFinishType.GiveItem) {
                     //     this.addFrameTimer(1, () => {
                     //         EventHelper.fireServerEvent(
-                    //             GameEnum.Event.CustomServer.onserver_finish_task,
+                    //             GameEnum.CustomServer.onserver_finish_task,
                     //             {
                     //                 PlayerID: playerid,
                     //                 data: {

@@ -1,5 +1,5 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -20,23 +20,23 @@ export class ability2_slark_pounce extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_slark_pounce = Data_slark_pounce;
     Init() {
-                this.SetDefaultSpecialValue("radius", 700);
+        this.SetDefaultSpecialValue("radius", 700);
         this.SetDefaultSpecialValue("leash_count", 5);
-        this.SetDefaultSpecialValue("leash_duration", [2,3,4,5,6,7]);
+        this.SetDefaultSpecialValue("leash_duration", [2, 3, 4, 5, 6, 7]);
         this.SetDefaultSpecialValue("leash_radius", 700);
         this.SetDefaultSpecialValue("shard_amplify_damage_pct", 60);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("scepter_cd_reduce", 4);
-        this.SetDefaultSpecialValue("damage", [200,400,600,800,1000,1200]);
+        this.SetDefaultSpecialValue("scepter_cd_reduce", 4);
+        this.SetDefaultSpecialValue("damage", [200, 400, 600, 800, 1000, 1200]);
         this.SetDefaultSpecialValue("radius", 575);
         this.SetDefaultSpecialValue("leash_count", 5);
-        this.SetDefaultSpecialValue("leash_duration", [4,5,6,7,8,9]);
+        this.SetDefaultSpecialValue("leash_duration", [4, 5, 6, 7, 8, 9]);
         this.SetDefaultSpecialValue("leash_radius", 620);
 
-        }
+    }
 
 
     GetCastRange() {
@@ -149,7 +149,7 @@ export class modifier_slark_2 extends BaseModifier_Plus {
     }
     @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     EOM_GetModifierOutgoingDamagePercentage(params: ModifierAttackEvent) {
-        if ( GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && params != null && modifier_slark_2_leash.exist(  params.target )) {
+        if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && params != null && modifier_slark_2_leash.exist(params.target)) {
             return this.shard_amplify_damage_pct
         }
         return 0

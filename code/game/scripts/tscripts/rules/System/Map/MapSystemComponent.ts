@@ -1,5 +1,5 @@
 import { reloadable } from "../../../GameCache";
-import { GameEnum } from "../../../GameEnum";
+import { GameEnum } from "../../../shared/GameEnum";
 import { GameSetting } from "../../../GameSetting";
 import { EventHelper } from "../../../helper/EventHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";

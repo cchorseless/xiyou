@@ -1,5 +1,5 @@
+import { GameEnum } from "../../../../game/scripts/tscripts/shared/GameEnum";
 import { BasePureComponent, BasePureComponentSystem } from "../libs/BasePureComponent";
-import { GameEnum } from "../libs/GameEnum";
 import { FuncHelper } from "./FuncHelper";
 import { LogHelper } from "./LogHelper";
 import { TimerHelper } from "./TimerHelper";
@@ -51,7 +51,7 @@ export module DebugHelper {
             debug_LoggerComponentinfo();
             printGameEvent();
         }
-       
+
     }
 }
 

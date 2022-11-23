@@ -1,4 +1,4 @@
-import { GameEnum } from "../GameEnum";
+import { GameEnum } from "../shared/GameEnum";
 import { GameSetting } from "../GameSetting";
 
 export module BotHelper {

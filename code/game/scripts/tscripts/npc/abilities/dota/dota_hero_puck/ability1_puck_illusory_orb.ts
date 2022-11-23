@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -20,16 +20,16 @@ export class ability1_puck_illusory_orb extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_puck_illusory_orb = Data_puck_illusory_orb;
     Init() {
-                this.SetDefaultSpecialValue("orb_count", 5);
+        this.SetDefaultSpecialValue("orb_count", 5);
         this.SetDefaultSpecialValue("orbs_angle", 75);
         this.SetDefaultSpecialValue("radius", 225);
         this.SetDefaultSpecialValue("max_distance", 1300);
         this.SetDefaultSpecialValue("orb_speed", 650);
-        this.SetDefaultSpecialValue("damage", [600,1000,1500,2000,2700,3500]);
+        this.SetDefaultSpecialValue("damage", [600, 1000, 1500, 2000, 2700, 3500]);
         this.SetDefaultSpecialValue("stack_duration", 10);
         this.SetDefaultSpecialValue("damage_int_factor_per_stack", 2);
 
-        }
+    }
 
 
     GetCooldown(iLevel: number) {
@@ -127,7 +127,7 @@ export class ability1_puck_illusory_orb extends BaseAbility_Plus {
         let hDummy = EntIndexToHScript(ExtraData.dummy_entindex || -1) as BaseNpc_Plus
         if (GameFunc.IsValid(hDummy)) {
             hDummy.StopSound(ExtraData.sound_name)
-             modifier_dummy.remove( hDummy );
+            modifier_dummy.remove(hDummy);
         }
 
         return true

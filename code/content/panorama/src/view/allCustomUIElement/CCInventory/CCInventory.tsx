@@ -1,7 +1,7 @@
 import React, { createRef, PureComponent } from "react";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { NodePropsData } from "../../../libs/BasePureComponent";
-import { GameEnum } from "../../../libs/GameEnum";
+import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { CSSHelper } from "../../../helper/CSSHelper";

@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -22,20 +22,20 @@ export class ability1_necrolyte_death_pulse extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_necrolyte_death_pulse = Data_necrolyte_death_pulse;
     Init() {
-                this.SetDefaultSpecialValue("base_damage", [250,500,750,1000,1250,1500]);
-        this.SetDefaultSpecialValue("intellect_damage_factor", [2,2.5,3,3.5,4,5]);
+        this.SetDefaultSpecialValue("base_damage", [250, 500, 750, 1000, 1250, 1500]);
+        this.SetDefaultSpecialValue("intellect_damage_factor", [2, 2.5, 3, 3.5, 4, 5]);
         this.SetDefaultSpecialValue("aoe_radius", 800);
         this.SetDefaultSpecialValue("speed", 450);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("base_damage", [250,300,350,400,450,500]);
-        this.SetDefaultSpecialValue("intellect_damage_factor", [1.0,1.4,1.8,2.2,2.6,3.2]);
+        this.SetDefaultSpecialValue("base_damage", [250, 300, 350, 400, 450, 500]);
+        this.SetDefaultSpecialValue("intellect_damage_factor", [1.0, 1.4, 1.8, 2.2, 2.6, 3.2]);
         this.SetDefaultSpecialValue("aoe_radius", 800);
         this.SetDefaultSpecialValue("speed", 450);
 
-        }
+    }
 
 
 

@@ -1,6 +1,6 @@
 import { GameFunc } from "../../../GameFunc";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { BuildingConfig } from "./BuildingConfig";
+import { BuildingConfig } from "../../../shared/BuildingConfig";
 
 
 export class BuildingState {

@@ -2,7 +2,7 @@ import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ET } from "../../../libs/Entity";
 import { EntityRootManagerComponent } from "./EntityRootManagerComponent";
 import { NetHelper } from "../../../helper/NetHelper";
-import { GameEnum } from "../../../libs/GameEnum";
+import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
 import { TServerZone } from "../../service/serverzone/TServerZone";
 import { PlayerEntityRoot } from "./PlayerEntityRoot";
 import { LogHelper } from "../../../helper/LogHelper";

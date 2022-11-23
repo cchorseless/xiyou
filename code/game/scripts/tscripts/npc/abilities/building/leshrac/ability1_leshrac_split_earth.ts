@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -185,7 +185,7 @@ export class modifier_leshrac_1_thinker extends BaseModifier_Plus {
 
             if (hCaster.HasTalent("special_bonus_unique_leshrac_custom")) {
                 let duration = hCaster.GetTalentValue("special_bonus_unique_leshrac_custom")
-                let hThinker = unit_dummy.CreateOne(vPosition, hCaster.GetTeamNumber(),  false, hCaster, hCaster)
+                let hThinker = unit_dummy.CreateOne(vPosition, hCaster.GetTeamNumber(), false, hCaster, hCaster)
                 modifier_leshrac_1_field.apply(hThinker, hThinker, hAbility, { duration: duration })
             }
         } else {

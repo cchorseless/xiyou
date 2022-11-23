@@ -13,7 +13,7 @@ import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
 import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 import { LogHelper } from "../../../../helper/LogHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { modifier_t21_magical_link_buff } from "../dota_unit_t21/t21_magical_link";
 
 

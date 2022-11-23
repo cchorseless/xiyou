@@ -4,7 +4,7 @@ import { LogHelper } from "../../helper/LogHelper";
 import { BaseModifier, BaseNpc } from "./Base_Plus";
 import { GameFunc } from "../../GameFunc";
 import { BaseModifier_Plus } from "./BaseModifier_Plus";
-import { GameEnum } from "../../GameEnum";
+import { GameEnum } from "../../shared/GameEnum";
 import { modifier_activity } from "../modifier/modifier_activity";
 import { EntityHelper } from "../../helper/EntityHelper";
 import { BaseAbility_Plus } from "./BaseAbility_Plus";

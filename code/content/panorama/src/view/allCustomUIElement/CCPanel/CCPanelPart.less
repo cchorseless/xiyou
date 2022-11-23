@@ -1,0 +1,75 @@
+.CC_PanelBG {
+    opacity-mask-scroll-up: url("file://{images}/masks/vertical_scroll_mask_up.png");
+    opacity-mask-scroll-down: url("file://{images}/masks/vertical_scroll_mask_down.png");
+    opacity-mask-scroll-up-down: url("file://{images}/masks/vertical_scroll_mask.png");
+
+    padding: 20px;
+
+    &>VerticalScrollBar {
+        margin-right: 0px;
+        width: 6px;
+        // opacity: 0;
+        // background-size: 24px 29px, 24px 29px, 24px 100%;
+        // background-position: center top, center bottom, center top;
+        // background-repeat: no-repeat;
+        height: 95%;
+        vertical-align: center;
+        // overflow: noclip;
+
+        .ScrollThumb {
+            // background-size: 4px 80%, 8px 5%, 8px 5%;
+            // background-position: center center, center 5%, center 95%;
+            // background-repeat: no-repeat;
+            background-color: #999a9c;
+            border-width: 0px;
+            border-radius: 6px;
+        }
+    }
+
+    &.Default {
+        background-color: gradient(linear, 0% 0%, 0% 25%, from(#232326), to(#1c1d20));
+        box-shadow: #00000099 0px 0px 8px 0px;
+        border: 2px solid #32383677;
+        // wash-color: #12141a;
+    }
+
+    &.ToolTip {
+        // min-width: 380px;
+        // min-height: 300px;
+        border: 2px solid white;
+        border-radius: 2px;
+        // box-shadow: 0px 0px 10px black;
+        box-shadow: fill #1e1c24 0px 0px 6px 1px;
+        border-brush: gradient(linear, 0% 0%, 0% 100%, from(#a09a72), to(#755417));
+        background-color: gradient(linear, 0% 0%, 100% 100%, from(#29425d), to(#222e36));
+        padding: 4px;
+        margin: 6px;
+    }
+
+    &.Tui3 {
+        background-image: url("file://{images}/custom_game/tooltip/bg_tip.png");
+        background-size: 100%;
+    }
+}
+
+.CC_PanelHeader {
+    width: 100%;
+    background-image: url("file://{images}/custom_game/tooltip/bg_tip_title.png");
+    background-size: 100%;
+}
+
+.CC_PanelDivder {
+    background-size: 100%;
+
+    &.Horizontal {
+        background-image: url("file://{images}/custom_game/tooltip/divider_horizontal.png");
+        width: 100%;
+        height: 6px;
+    }
+
+    &.Vertical {
+        background-image: url("file://{images}/custom_game/tooltip/divider_vertical.png.png");
+        width: 6px;
+        height: 100%;
+    }
+}

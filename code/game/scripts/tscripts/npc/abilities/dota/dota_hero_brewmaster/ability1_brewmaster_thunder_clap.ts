@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -22,14 +22,14 @@ export class ability1_brewmaster_thunder_clap extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_brewmaster_thunder_clap = Data_brewmaster_thunder_clap;
     Init() {
-                this.SetDefaultSpecialValue("radius", 900);
-        this.SetDefaultSpecialValue("damage", [1000,2000,3000,4000,5000,6000]);
-        this.SetDefaultSpecialValue("movement_slow", [30,40,50,60,70,80]);
-        this.SetDefaultSpecialValue("duration", [1.1,1.4,1.7,2.0,2.3,2.6]);
-        this.SetDefaultSpecialValue("attack_bonus_damage", [1,2,3,4,5,6]);
+        this.SetDefaultSpecialValue("radius", 900);
+        this.SetDefaultSpecialValue("damage", [1000, 2000, 3000, 4000, 5000, 6000]);
+        this.SetDefaultSpecialValue("movement_slow", [30, 40, 50, 60, 70, 80]);
+        this.SetDefaultSpecialValue("duration", [1.1, 1.4, 1.7, 2.0, 2.3, 2.6]);
+        this.SetDefaultSpecialValue("attack_bonus_damage", [1, 2, 3, 4, 5, 6]);
         this.SetDefaultSpecialValue("damage_amplify_per", 100);
 
-        }
+    }
 
 
 

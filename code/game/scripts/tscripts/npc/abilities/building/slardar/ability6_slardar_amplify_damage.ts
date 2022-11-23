@@ -1,5 +1,5 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -17,16 +17,16 @@ export class ability6_slardar_amplify_damage extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_slardar_amplify_damage = Data_slardar_amplify_damage;
     Init() {
-                this.SetDefaultSpecialValue("radius", 900);
-        this.SetDefaultSpecialValue("armor_reduction", [-4,-8,-12,-16,-20,-25]);
+        this.SetDefaultSpecialValue("radius", 900);
+        this.SetDefaultSpecialValue("armor_reduction", [-4, -8, -12, -16, -20, -25]);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("radius", 900);
+        this.SetDefaultSpecialValue("radius", 900);
         this.SetDefaultSpecialValue("armor_reduction", -45);
 
-        }
+    }
 
 
 

@@ -1,12 +1,12 @@
 import { GetRegClass, reloadable } from "../../../GameCache";
-import { GameEnum } from "../../../GameEnum";
+import { GameEnum } from "../../../shared/GameEnum";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ET } from "../../Entity/Entity";
-import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
-import { RoundConfig } from "../../System/Round/RoundConfig";
+import { ChessControlConfig } from "../../../shared/ChessControlConfig";
+import { RoundConfig } from "../../../shared/RoundConfig";
 import { AbilityEntityRoot } from "../Ability/AbilityEntityRoot";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";

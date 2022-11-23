@@ -9,10 +9,11 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { building_round_board } from "../../../kvInterface/building/building_round_board";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { serializeETProps } from "../../Entity/Entity";
-import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
-import { RoundConfig } from "../../System/Round/RoundConfig";
+import { ChessControlConfig } from "../../../shared/ChessControlConfig";
+import { RoundConfig } from "../../../shared/RoundConfig";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERound } from "./ERound";
+import { ChessVector } from "../../System/ChessControl/ChessVector";
 @reloadable
 export class ERoundBoard extends ERound {
     @serializeETProps()
@@ -144,7 +145,7 @@ export class ERoundBoard extends ERound {
         let player = this.Domain.ETRoot.AsPlayer();
         let playerid = player.Playerid;
         let allenemy = this.config.unitinfo;
-        let _boardVec = new ChessControlConfig.ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
+        let _boardVec = new ChessVector(Number(allenemy[unit_index].position_x), Number(allenemy[unit_index].position_y), playerid);
         let pos = _boardVec.getVector3();
         let angle = Vector(Number(allenemy[unit_index].angles_x), Number(allenemy[unit_index].angles_y), Number(allenemy[unit_index].angles_z));
         let enemyName = allenemy[unit_index].unit;

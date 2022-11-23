@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -19,24 +19,24 @@ export class ability6_spectre_haunt extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_spectre_haunt = Data_spectre_haunt;
     Init() {
-                this.SetDefaultSpecialValue("illusion_count", [2,3,4,5,6,7]);
-        this.SetDefaultSpecialValue("illusion_damage_outgoing", [50,60,70,80,90,100]);
-        this.SetDefaultSpecialValue("illusion_health_percent", [50,60,70,80,90,100]);
+        this.SetDefaultSpecialValue("illusion_count", [2, 3, 4, 5, 6, 7]);
+        this.SetDefaultSpecialValue("illusion_damage_outgoing", [50, 60, 70, 80, 90, 100]);
+        this.SetDefaultSpecialValue("illusion_health_percent", [50, 60, 70, 80, 90, 100]);
         this.SetDefaultSpecialValue("duration", 7);
         this.SetDefaultSpecialValue("attack_range", 150);
         this.SetDefaultSpecialValue("movespeed", 800);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("illusion_count", [2,3,4,5,6,7]);
-        this.SetDefaultSpecialValue("illusion_damage_outgoing", [50,60,70,80,90,100]);
-        this.SetDefaultSpecialValue("illusion_health_percent", [50,60,70,80,90,100]);
+        this.SetDefaultSpecialValue("illusion_count", [2, 3, 4, 5, 6, 7]);
+        this.SetDefaultSpecialValue("illusion_damage_outgoing", [50, 60, 70, 80, 90, 100]);
+        this.SetDefaultSpecialValue("illusion_health_percent", [50, 60, 70, 80, 90, 100]);
         this.SetDefaultSpecialValue("duration", 7);
         this.SetDefaultSpecialValue("attack_range", 150);
         this.SetDefaultSpecialValue("movespeed", 800);
 
-        }
+    }
 
 
 

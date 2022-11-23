@@ -3,8 +3,8 @@ import { HttpHelper } from "../../../helper/HttpHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
+import { WearableConfig } from "../../../shared/WearableConfig";
 import { ET } from "../../Entity/Entity";
-import { WearableConfig } from "./WearableConfig";
 
 @reloadable
 export class WearableSystemComponent extends ET.Component {

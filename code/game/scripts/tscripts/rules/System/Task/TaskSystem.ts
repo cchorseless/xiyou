@@ -1,6 +1,4 @@
 import { TaskComponent } from "../../Components/Task/TaskComponent";
-import { TaskConfig } from "./TaskConfig";
-import { TaskState } from "./TaskState";
 
 export class TaskSystem {
     static Init() {

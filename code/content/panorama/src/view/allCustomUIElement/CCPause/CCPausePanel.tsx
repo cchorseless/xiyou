@@ -2,7 +2,7 @@ import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { LogHelper } from "../../../helper/LogHelper";
-import { GameEnum } from "../../../libs/GameEnum";
+import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
 import { CCIntervalTips } from "../CCIntervalTips/CCIntervalTips";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCPausePanel.less";
@@ -18,7 +18,7 @@ export class CCPausePanel extends CCPanel<ICCPausePanel> {
         if (oldpanel) {
             oldpanel!.style.opacity = "0";
         }
-        this.addGameEvent(GameEnum.GameEvent.dota_pause_event, (e: DotaPauseEventEvent) => {
+        this.addGameEvent(GameEnum.GameEvent.DotaPauseEventEvent, (e: DotaPauseEventEvent) => {
             this.__root__.current!.SetHasClass("Paused", e.message == 34);
         })
     }

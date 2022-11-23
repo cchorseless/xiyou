@@ -4,7 +4,6 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
-import { BuildingConfig } from "../../System/Building/BuildingConfig";
 import { KVConfigComponment } from "../KVConfig/KVConfigComponment";
 /**塔防组件 */
 @reloadable

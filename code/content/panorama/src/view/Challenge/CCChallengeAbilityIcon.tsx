@@ -1,7 +1,8 @@
 import React, { } from "react";
 import { AbilityEntityRoot } from "../../game/components/Ability/AbilityEntityRoot";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
-import { GameEnum } from "../../libs/GameEnum";
+import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
+
 import { CCAbilityIcon } from "../allCustomUIElement/CCAbility/CCAbilityIcon";
 import { CCIcon_CoinType } from "../allCustomUIElement/CCIcons/CCIcon_CoinType";
 import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";

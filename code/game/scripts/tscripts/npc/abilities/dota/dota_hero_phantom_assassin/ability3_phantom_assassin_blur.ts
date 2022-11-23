@@ -1,5 +1,5 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -17,18 +17,18 @@ export class ability3_phantom_assassin_blur extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_phantom_assassin_blur = Data_phantom_assassin_blur;
     Init() {
-                this.SetDefaultSpecialValue("blur_count", [15,20,25,30,40]);
+        this.SetDefaultSpecialValue("blur_count", [15, 20, 25, 30, 40]);
         this.SetDefaultSpecialValue("blur_duration", 10);
-        this.SetDefaultSpecialValue("cast_point_percent", [50,60,70,80,90]);
+        this.SetDefaultSpecialValue("cast_point_percent", [50, 60, 70, 80, 90]);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("blur_count", [15,20,25,30,40]);
+        this.SetDefaultSpecialValue("blur_count", [15, 20, 25, 30, 40]);
         this.SetDefaultSpecialValue("blur_duration", 10);
-        this.SetDefaultSpecialValue("cast_point_percent", [50,60,70,80,90]);
+        this.SetDefaultSpecialValue("cast_point_percent", [50, 60, 70, 80, 90]);
 
-        }
+    }
 
 
 
@@ -39,7 +39,7 @@ export class ability3_phantom_assassin_blur extends BaseAbility_Plus {
         if (hCaster.HasTalent("special_bonus_unique_phantom_assassin_custom_6")) {
             blur_count = blur_count + hCaster.GetTalentValue("special_bonus_unique_phantom_assassin_custom_6")
         }
-         modifier_phantom_assassin_3_blur_attack.apply( hCaster , hCaster, this, { duration: blur_duration, blur_count: blur_count }) 
+        modifier_phantom_assassin_3_blur_attack.apply(hCaster, hCaster, this, { duration: blur_duration, blur_count: blur_count })
     }
     GetIntrinsicModifierName() {
         return "modifier_phantom_assassin_3"

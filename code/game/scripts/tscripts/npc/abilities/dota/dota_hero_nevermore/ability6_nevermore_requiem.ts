@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -23,7 +23,7 @@ export class ability6_nevermore_requiem extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_nevermore_requiem = Data_nevermore_requiem;
     Init() {
-                this.SetDefaultSpecialValue("fear_duration", 1.5);
+        this.SetDefaultSpecialValue("fear_duration", 1.5);
         this.SetDefaultSpecialValue("shadowraze_stack_increase", 20);
         this.SetDefaultSpecialValue("cast_time_tooltip", 1.67);
         this.SetDefaultSpecialValue("soul_release", 25);
@@ -32,13 +32,13 @@ export class ability6_nevermore_requiem extends BaseAbility_Plus {
         this.SetDefaultSpecialValue("requiem_slow_duration", 5);
         this.SetDefaultSpecialValue("requiem_line_width_start", 125);
         this.SetDefaultSpecialValue("requiem_line_width_end", 425);
-        this.SetDefaultSpecialValue("requiem_line_speed", [700,700,700]);
+        this.SetDefaultSpecialValue("requiem_line_speed", [700, 700, 700]);
         this.SetDefaultSpecialValue("requiem_damage_pct_scepter", 40);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("requiem_line_speed", [700,700,700]);
+        this.SetDefaultSpecialValue("requiem_line_speed", [700, 700, 700]);
         this.SetDefaultSpecialValue("requiem_damage_pct_scepter", 40);
         this.SetDefaultSpecialValue("fear_duration", 1.5);
         this.SetDefaultSpecialValue("shadowraze_stack_increase", 10);
@@ -50,7 +50,7 @@ export class ability6_nevermore_requiem extends BaseAbility_Plus {
         this.SetDefaultSpecialValue("requiem_line_width_start", 125);
         this.SetDefaultSpecialValue("requiem_line_width_end", 425);
 
-        }
+    }
 
     ParticleModifier: BaseModifier_Plus;
     iPreParticleID: any;

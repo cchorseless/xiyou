@@ -6,7 +6,8 @@ import { LogHelper } from "../helper/LogHelper";
 import { PrecacheHelper } from "../helper/PrecacheHelper";
 import { TimerHelper } from "../helper/TimerHelper";
 import { ET } from "./Entity";
-import { GameEnum } from "./GameEnum";
+import { GameEnum } from "../../../../game/scripts/tscripts/shared/GameEnum";
+
 
 interface IBasePureCompProperty {
     InstanceId: string;

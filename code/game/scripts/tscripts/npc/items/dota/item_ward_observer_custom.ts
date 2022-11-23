@@ -3,7 +3,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { GameEnum } from "../../../GameEnum";
+import { GameEnum } from "../../../shared/GameEnum";
 import { unit_ward_observer } from "../../units/common/unit_ward_observer";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { HashTableHelper } from "../../../helper/HashTableHelper";
@@ -60,7 +60,7 @@ export class modifier_vision extends BaseModifier_Plus {
      * @param stack 层数来描述视野
      */
     static CreateVisionUnit(caster: BaseNpc_Plus, position: Vector, teamnumber: DOTATeam_t, duration: number = null, stack: number = 1) {
-        let unit = unit_ward_observer.CreateOne(position, teamnumber,  false, caster, caster);
+        let unit = unit_ward_observer.CreateOne(position, teamnumber, false, caster, caster);
         unit.AddNoDraw();
         modifier_vision.apply(unit, caster, null, {
             duration: duration,

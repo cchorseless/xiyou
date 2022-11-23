@@ -1,5 +1,5 @@
 import { ET } from "../../Entity/Entity";
-import { TaskConfig } from "../../System/Task/TaskConfig";
+import { TaskConfig } from "../../../shared/TaskConfig";
 import { TaskSystem } from "../../System/Task/TaskSystem";
 import { PlayerScene } from "../Player/PlayerScene";
 

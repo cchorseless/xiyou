@@ -1,4 +1,4 @@
-import { GameEnum } from "../GameEnum";
+import { GameEnum } from "../shared/GameEnum";
 import { ET } from "../rules/Entity/Entity";
 import { EventHelper } from "./EventHelper";
 import { LogHelper } from "./LogHelper";
@@ -39,13 +39,13 @@ export module NetTablesHelper {
         if (playerID == null || playerID.length == 0) {
             NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, data);
             // event.data.nettable = ENetTables.etentity;
-            // EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_update_nettable_partprop_etentity, event);
+            // EventHelper.fireProtocolEventToClient(GameEnum.CustomProtocol.push_update_nettable_partprop_etentity, event);
         } else {
             playerID.forEach((_id) => {
                 let nettable = GetETEntityNetTableName(_id);
                 NetTablesHelper.SetData(nettable, obj.InstanceId, data);
                 // event.data.nettable = nettable;
-                // EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_update_nettable_partprop_etentity, event, _id as PlayerID);
+                // EventHelper.fireProtocolEventToPlayer(GameEnum.CustomProtocol.push_update_nettable_partprop_etentity, event, _id as PlayerID);
             });
         }
     }
@@ -72,13 +72,13 @@ export module NetTablesHelper {
         if (playerID == null || playerID.length == 0) {
             // event.data.nettable = ENetTables.etentity;
             NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, jsonobj);
-            // EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_update_nettable_etentity, event);
+            // EventHelper.fireProtocolEventToClient(GameEnum.CustomProtocol.push_update_nettable_etentity, event);
         } else {
             playerID.forEach((_id) => {
                 let nettable = GetETEntityNetTableName(_id);
                 // event.data.nettable = nettable;
                 NetTablesHelper.SetData(nettable, obj.InstanceId, jsonobj);
-                // EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_update_nettable_etentity, event, _id as PlayerID);
+                // EventHelper.fireProtocolEventToPlayer(GameEnum.CustomProtocol.push_update_nettable_etentity, event, _id as PlayerID);
             });
         }
     }
@@ -99,13 +99,13 @@ export module NetTablesHelper {
         if (playerID == null || playerID.length == 0) {
             NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, null);
             // event.data.nettable = ENetTables.etentity;
-            // EventHelper.fireProtocolEventToClient(GameEnum.Event.CustomProtocol.push_del_nettable_etentity, event);
+            // EventHelper.fireProtocolEventToClient(GameEnum.CustomProtocol.push_del_nettable_etentity, event);
         } else {
             playerID.forEach((_id) => {
                 let nettable = GetETEntityNetTableName(_id);
                 NetTablesHelper.SetData(nettable, obj.InstanceId, null);
                 // event.data.nettable = nettable;
-                // EventHelper.fireProtocolEventToPlayer(GameEnum.Event.CustomProtocol.push_del_nettable_etentity, event, _id as PlayerID);
+                // EventHelper.fireProtocolEventToPlayer(GameEnum.CustomProtocol.push_del_nettable_etentity, event, _id as PlayerID);
             });
         }
     }

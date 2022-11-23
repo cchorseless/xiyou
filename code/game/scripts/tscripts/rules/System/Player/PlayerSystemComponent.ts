@@ -1,5 +1,5 @@
 import { reloadable } from "../../../GameCache";
-import { GameEnum } from "../../../GameEnum";
+import { GameEnum } from "../../../shared/GameEnum";
 import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
@@ -23,7 +23,7 @@ export class PlayerSystemComponent extends ET.Component {
 
     private addEvent() {
         /**客户端登陆 */
-        EventHelper.addProtocolEvent(this, GameEnum.Event.CustomProtocol.req_LoginGame, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(this, GameEnum.CustomProtocol.req_LoginGame, (event: JS_TO_LUA_DATA) => {
             event.state = true;
             this.OnLoginPlayer(event.PlayerID);
         });

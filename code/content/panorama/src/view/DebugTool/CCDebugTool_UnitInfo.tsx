@@ -1,7 +1,6 @@
 import React from "react";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
-import { GameEnum } from "../../libs/GameEnum";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 

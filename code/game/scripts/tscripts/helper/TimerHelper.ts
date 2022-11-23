@@ -1,5 +1,5 @@
 import { globalData } from "../GameCache";
-import { GameEnum } from "../GameEnum";
+import { GameEnum } from "../shared/GameEnum";
 import { GameRequest } from "../service/GameRequest";
 import { LogHelper } from "./LogHelper";
 
@@ -130,9 +130,9 @@ export module TimerHelper {
     }
 
     export function now() {
-        return  GetSystemDate() +" "+ GetSystemTime();
+        return GetSystemDate() + " " + GetSystemTime();
     }
-   
+
     export async function delayTimer(delay: number, useGameTime = true) {
         return new Promise((resolve, reject) => {
             addTimer(delay, () => {

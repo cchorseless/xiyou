@@ -1,3 +1,4 @@
+import { DrawConfig } from "../../../../../../game/scripts/tscripts/shared/DrawConfig";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
@@ -6,7 +7,6 @@ import { TipsHelper } from "../../../helper/TipsHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { CCDrawCardPanel } from "../../../view/Draw/CCDrawCardPanel";
 import { CCMainPanel } from "../../../view/MainPanel/CCMainPanel";
-import { DrawConfig } from "../../system/Draw/DrawConfig";
 import { PlayerScene } from "../Player/PlayerScene";
 
 /**抽卡 */

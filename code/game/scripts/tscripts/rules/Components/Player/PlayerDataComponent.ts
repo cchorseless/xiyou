@@ -1,14 +1,13 @@
 import { reloadable } from "../../../GameCache";
-import { GameEnum } from "../../../GameEnum";
+import { GameEnum } from "../../../shared/GameEnum";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET, serializeETProps } from "../../Entity/Entity";
-import { ChessControlConfig } from "../../System/ChessControl/ChessControlConfig";
+import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { DifficultyState } from "../../System/Difficulty/DifficultyState";
-import { PlayerConfig } from "../../System/Player/PlayerConfig";
-import { RoundConfig } from "../../System/Round/RoundConfig";
+import { PlayerConfig } from "../../../shared/PlayerConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 

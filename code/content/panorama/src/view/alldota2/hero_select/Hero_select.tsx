@@ -3,7 +3,6 @@ import React, { createRef, useState } from "react";
 import { render } from "@demon673/react-panorama";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { LogHelper } from "../../../helper/LogHelper";
-import { GameEnum } from "../../../libs/GameEnum";
 import { Hero_select_UI } from "./Hero_select_UI";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 export class Hero_select extends Hero_select_UI<NodePropsData> {

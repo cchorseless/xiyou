@@ -22,7 +22,6 @@
         "strictPropertyInitialization": false,
     },
     "include": [
-        "../../shared",
         "tscripts",
         "!tscripts/npc/abilities/dota",
         "!tscripts/npc/items/dota",

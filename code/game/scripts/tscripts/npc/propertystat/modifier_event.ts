@@ -6,7 +6,7 @@
  * @Description:统一事件监听
  */
 import { globalData } from "../../GameCache";
-import { GameEnum } from "../../GameEnum";
+import { GameEnum } from "../../shared/GameEnum";
 import { GameFunc } from "../../GameFunc";
 import { BattleHelper } from "../../helper/BattleHelper";
 import { EventHelper } from "../../helper/EventHelper";

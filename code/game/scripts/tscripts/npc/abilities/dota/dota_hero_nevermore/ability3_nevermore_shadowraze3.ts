@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -13,29 +13,29 @@ export const Data_nevermore_shadowraze3 = { "ID": "5061", "AbilityBehavior": "DO
 
 @registerAbility()
 export class ability3_nevermore_shadowraze3 extends BaseAbility_Plus {
-    /**对应dota内的名字 */
-    __IN_DOTA_NAME__ = "nevermore_shadowraze3";
-    /**对应dota内的数据 */
-    __IN_DOTA_DATA__: typeof Data_nevermore_shadowraze3 = Data_nevermore_shadowraze3;
-    Init() {
-                this.SetDefaultSpecialValue("presence_incoming_damage_ptg", [16,22,28,34,40]);
-        this.SetDefaultSpecialValue("presence_radius", 1100);
-        this.SetDefaultSpecialValue("fear_incoming_damage_ptg", [6,8,10,12,16]);
-        this.SetDefaultSpecialValue("max_damage_percent", 50);
-        this.SetDefaultSpecialValue("min_range", 200);
-        this.SetDefaultSpecialValue("range_decay_factor", 100);
-        this.SetDefaultSpecialValue("range_decay_damage", [7,6,5,4,3]);
+        /**对应dota内的名字 */
+        __IN_DOTA_NAME__ = "nevermore_shadowraze3";
+        /**对应dota内的数据 */
+        __IN_DOTA_DATA__: typeof Data_nevermore_shadowraze3 = Data_nevermore_shadowraze3;
+        Init() {
+                this.SetDefaultSpecialValue("presence_incoming_damage_ptg", [16, 22, 28, 34, 40]);
+                this.SetDefaultSpecialValue("presence_radius", 1100);
+                this.SetDefaultSpecialValue("fear_incoming_damage_ptg", [6, 8, 10, 12, 16]);
+                this.SetDefaultSpecialValue("max_damage_percent", 50);
+                this.SetDefaultSpecialValue("min_range", 200);
+                this.SetDefaultSpecialValue("range_decay_factor", 100);
+                this.SetDefaultSpecialValue("range_decay_damage", [7, 6, 5, 4, 3]);
 
         }
 
-    Init_old() {
-                this.SetDefaultSpecialValue("presence_incoming_damage_ptg", [10,16,22,28,34,40]);
-        this.SetDefaultSpecialValue("presence_radius", 1100);
-        this.SetDefaultSpecialValue("fear_incoming_damage_ptg", [4,6,8,10,12,16]);
-        this.SetDefaultSpecialValue("max_damage_percent", 50);
-        this.SetDefaultSpecialValue("min_range", 200);
-        this.SetDefaultSpecialValue("range_decay_factor", 100);
-        this.SetDefaultSpecialValue("range_decay_damage", [7,6,5,4,3]);
+        Init_old() {
+                this.SetDefaultSpecialValue("presence_incoming_damage_ptg", [10, 16, 22, 28, 34, 40]);
+                this.SetDefaultSpecialValue("presence_radius", 1100);
+                this.SetDefaultSpecialValue("fear_incoming_damage_ptg", [4, 6, 8, 10, 12, 16]);
+                this.SetDefaultSpecialValue("max_damage_percent", 50);
+                this.SetDefaultSpecialValue("min_range", 200);
+                this.SetDefaultSpecialValue("range_decay_factor", 100);
+                this.SetDefaultSpecialValue("range_decay_damage", [7, 6, 5, 4, 3]);
 
         }
 

@@ -1,5 +1,5 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -23,9 +23,9 @@ export class ability2_pangolier_shield_crash extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_pangolier_shield_crash = Data_pangolier_shield_crash;
     Init() {
-                this.SetDefaultSpecialValue("all_factor_damage", [2,3,4,5,6,7]);
-        this.SetDefaultSpecialValue("damage", [1000,2000,3000,4000,5000,6000]);
-        this.SetDefaultSpecialValue("unit_stacks", [100,300,500,700,900,1100]);
+        this.SetDefaultSpecialValue("all_factor_damage", [2, 3, 4, 5, 6, 7]);
+        this.SetDefaultSpecialValue("damage", [1000, 2000, 3000, 4000, 5000, 6000]);
+        this.SetDefaultSpecialValue("unit_stacks", [100, 300, 500, 700, 900, 1100]);
         this.SetDefaultSpecialValue("duration", 4);
         this.SetDefaultSpecialValue("radius", 1200);
         this.SetDefaultSpecialValue("jump_duration", 0.4);
@@ -33,11 +33,11 @@ export class ability2_pangolier_shield_crash extends BaseAbility_Plus {
         this.SetDefaultSpecialValue("scepter_attack_count", 2);
         this.SetDefaultSpecialValue("lucky_duration", 1);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("damage", [300,600,900,1200,1500,1800]);
-        this.SetDefaultSpecialValue("unit_stacks", [9,18,27,36,45,54]);
+        this.SetDefaultSpecialValue("damage", [300, 600, 900, 1200, 1500, 1800]);
+        this.SetDefaultSpecialValue("unit_stacks", [9, 18, 27, 36, 45, 54]);
         this.SetDefaultSpecialValue("duration", 4);
         this.SetDefaultSpecialValue("radius", 800);
         this.SetDefaultSpecialValue("jump_duration", 0.4);
@@ -45,7 +45,7 @@ export class ability2_pangolier_shield_crash extends BaseAbility_Plus {
         this.SetDefaultSpecialValue("scepter_attack_count", 2);
         this.SetDefaultSpecialValue("lucky_duration", 1);
 
-        }
+    }
 
     vCasterLoc: Vector;
 

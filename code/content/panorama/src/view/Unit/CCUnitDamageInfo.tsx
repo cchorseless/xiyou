@@ -1,8 +1,8 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
+import { RoundConfig } from "../../../../../game/scripts/tscripts/shared/RoundConfig";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
-import { RoundConfig } from "../../game/system/Round/RoundConfig";
 import { UnitHelper } from "../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";

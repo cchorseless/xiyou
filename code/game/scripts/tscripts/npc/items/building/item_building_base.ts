@@ -1,12 +1,10 @@
-import { GameEnum } from "../../../GameEnum";
+import { GameEnum } from "../../../shared/GameEnum";
 import { GameFunc } from "../../../GameFunc";
 import { EntityHelper } from "../../../helper/EntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BuildingComponent } from "../../../rules/Components/Building/BuildingComponent";
-import { BuildingConfig } from "../../../rules/System/Building/BuildingConfig";
-import { ChessControlConfig } from "../../../rules/System/ChessControl/ChessControlConfig";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility } from "../../entityPlus/Base_Plus";
 import { ActiveRootItem } from "../ActiveRootItem";

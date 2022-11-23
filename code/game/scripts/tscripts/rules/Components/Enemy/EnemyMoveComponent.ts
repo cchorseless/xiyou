@@ -4,7 +4,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
-import { EnemyConfig } from "../../System/Enemy/EnemyConfig";
+import { EnemyConfig } from "../../../shared/EnemyConfig";
 import { EnemyState } from "../../System/Enemy/EnemyState";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";

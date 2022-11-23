@@ -9,7 +9,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { GameEnum } from "../../../GameEnum";
+import { GameEnum } from "../../../shared/GameEnum";
 
 @registerAbility()
 export class item_poor_mans_shield_custom extends BaseItem_Plus {

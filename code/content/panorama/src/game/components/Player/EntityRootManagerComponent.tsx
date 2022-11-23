@@ -1,7 +1,6 @@
 import { NetHelper } from "../../../helper/NetHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ET, registerET } from "../../../libs/Entity";
-import { PlayerConfig } from "../../system/Player/PlayerConfig";
 import { AbilityEntityRoot } from "../Ability/AbilityEntityRoot";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";

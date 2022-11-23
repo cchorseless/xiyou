@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -23,22 +23,22 @@ export class ability1_ogre_magi_fireblast extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_ogre_magi_fireblast = Data_ogre_magi_fireblast;
     Init() {
-                this.SetDefaultSpecialValue("stun_duration", 1.5);
+        this.SetDefaultSpecialValue("stun_duration", 1.5);
         this.SetDefaultSpecialValue("multicast_delay", 0.6);
-        this.SetDefaultSpecialValue("fireblast_damage", [500,800,1100,1400,1700,2000]);
+        this.SetDefaultSpecialValue("fireblast_damage", [500, 800, 1100, 1400, 1700, 2000]);
         this.SetDefaultSpecialValue("fireblast_damage_per_str", 4);
         this.SetDefaultSpecialValue("fireblast_damage_per_int", 4);
 
-        }
+    }
 
     Init_old() {
-                this.SetDefaultSpecialValue("stun_duration", 1.5);
+        this.SetDefaultSpecialValue("stun_duration", 1.5);
         this.SetDefaultSpecialValue("multicast_delay", 0.6);
-        this.SetDefaultSpecialValue("fireblast_damage", [500,800,1100,1400,1700,2000]);
+        this.SetDefaultSpecialValue("fireblast_damage", [500, 800, 1100, 1400, 1700, 2000]);
         this.SetDefaultSpecialValue("fireblast_damage_per_str", 4);
         this.SetDefaultSpecialValue("fireblast_damage_per_int", 4);
 
-        }
+    }
 
 
 

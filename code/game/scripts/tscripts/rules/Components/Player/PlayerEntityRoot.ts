@@ -8,7 +8,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { unit_base_baoxiang } from "../../../npc/units/common/unit_base_baoxiang";
 import { TCharacter } from "../../../service/account/TCharacter";
 import { ET } from "../../Entity/Entity";
-import { PlayerConfig } from "../../System/Player/PlayerConfig";
+import { PlayerConfig } from "../../../shared/PlayerConfig";
 import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
 import { ChessControlComponent } from "../ChessControl/ChessControlComponent";
 import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";

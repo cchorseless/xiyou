@@ -3,7 +3,7 @@ import { GameFunc } from "../../../GameFunc";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
-import { WearableConfig } from "../../System/Wearable/WearableConfig";
+import { WearableConfig } from "../../../shared/WearableConfig";
 import { WearableComponent } from "./WearableComponent";
 
 @reloadable

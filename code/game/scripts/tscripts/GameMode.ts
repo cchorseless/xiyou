@@ -5,7 +5,7 @@ import { GameDebugger } from "./GameDebugger";
 import { modifier_event } from "./npc/propertystat/modifier_event";
 import { KVHelper } from "./helper/KVHelper";
 import { globalData, reloadable } from "./GameCache";
-import { GameEnum } from "./GameEnum";
+import { GameEnum } from "./shared/GameEnum";
 import { BaseModifier } from "./npc/entityPlus/Base_Plus";
 import { GameEntityRoot } from "./GameEntityRoot";
 import { Assert_Sounds } from "./assert/Assert_Sounds";

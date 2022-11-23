@@ -4,7 +4,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
-import { CombinationConfig } from "../../System/Combination/CombinationConfig";
+import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ECombination } from "./ECombination";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";

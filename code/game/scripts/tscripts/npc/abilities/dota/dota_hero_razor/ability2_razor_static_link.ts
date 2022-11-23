@@ -1,5 +1,5 @@
 
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -20,13 +20,13 @@ export class ability2_razor_static_link extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_razor_static_link = Data_razor_static_link;
     Init() {
-                this.SetDefaultSpecialValue("link_break_buffer", 400);
+        this.SetDefaultSpecialValue("link_break_buffer", 400);
         this.SetDefaultSpecialValue("damage_tick", 0.75);
-        this.SetDefaultSpecialValue("shock_damage_increase_pct", [20,23,26,29,32,35]);
+        this.SetDefaultSpecialValue("shock_damage_increase_pct", [20, 23, 26, 29, 32, 35]);
         this.SetDefaultSpecialValue("shard_aoe_radius", 300);
         this.SetDefaultSpecialValue("duration", 7);
 
-        }
+    }
 
 
     OnSpellStart() {
@@ -64,7 +64,7 @@ export class ability2_razor_static_link extends BaseAbility_Plus {
         let fDuration = this.GetSpecialValueFor("duration")
         let sTalentName = "special_bonus_unique_razor_custom_6"
         let fDamageTick = this.GetSpecialValueFor("damage_tick") - hCaster.GetTalentValue(sTalentName)
-         modifier_razor_2_link.apply( hTarget , hCaster, this, { 
+        modifier_razor_2_link.apply(hTarget, hCaster, this, {
             duration: fDuration,
             iMaxDistance: iMaxDistance,
             fDamageTick: fDamageTick
@@ -74,7 +74,7 @@ export class ability2_razor_static_link extends BaseAbility_Plus {
         let fDuration = this.GetSpecialValueFor("duration")
         let sTalentName = "special_bonus_unique_razor_custom_4"
         let iDamageIncrease = this.GetSpecialValueFor("shock_damage_increase_pct") + hCaster.GetTalentValue(sTalentName)
-         modifier_razor_2_debuff.apply( hTarget , hCaster, this, { 
+        modifier_razor_2_debuff.apply(hTarget, hCaster, this, {
             duration: fDuration,
             iDamageIncrease: iDamageIncrease
         })
@@ -178,11 +178,11 @@ export class modifier_razor_2_link extends BaseModifier_Plus {
             this.StartIntervalThink(fDamageTick)
         } else {
             let iParticleID = ResHelper.CreateParticle({
-                    resPath: "particles/units/heroes/hero_razor/razor_static_link.vpcf",
-                    resNpc:   this.GetCasterPlus(),
-                    iAttachment:   ParticleAttachment_t.PATTACH_POINT_FOLLOW,
-                    owner:  this.GetParentPlus()
-                });
+                resPath: "particles/units/heroes/hero_razor/razor_static_link.vpcf",
+                resNpc: this.GetCasterPlus(),
+                iAttachment: ParticleAttachment_t.PATTACH_POINT_FOLLOW,
+                owner: this.GetParentPlus()
+            });
 
             ParticleManager.SetParticleControlEnt(iParticleID, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_static", Vector(0, 0, 0), false)
             ParticleManager.SetParticleControlEnt(iParticleID, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", Vector(0, 0, 0), false)

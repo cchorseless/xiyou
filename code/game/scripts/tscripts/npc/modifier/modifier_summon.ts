@@ -1,4 +1,4 @@
-import { GameEnum } from "../../GameEnum";
+import { GameEnum } from "../../shared/GameEnum";
 import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../entityPlus/BaseNpc_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";

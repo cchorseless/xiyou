@@ -54,7 +54,9 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
         }
         const entityList = this.props.InstanceIdList.map((entityId, index) => { return this.GetStateEntity(ET.EntityEventSystem.GetEntity(entityId) as ECombination) })
         const lastentity = entityList[entityList.length - 1]!
-        if (lastentity.IsEmpty()) { return <></> }
+        if (lastentity.IsEmpty()) {
+            return this.defaultRender("CC_CombinationSingleBottomItem");
+        }
         return (
             <Panel ref={this.__root__} id="CC_CombinationSingleBottomItem"  {...this.initRootAttrs()}>
                 <CCPanel flowChildren="down" brightness={lastentity.IsActive() ? "1" : "0.1"} >

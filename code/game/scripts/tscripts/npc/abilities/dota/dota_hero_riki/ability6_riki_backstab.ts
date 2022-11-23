@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -19,15 +19,15 @@ export class ability6_riki_backstab extends BaseAbility_Plus {
     /**对应dota内的数据 */
     __IN_DOTA_DATA__: typeof Data_riki_backstab = Data_riki_backstab;
     Init() {
-                this.SetDefaultSpecialValue("radius", 450);
+        this.SetDefaultSpecialValue("radius", 450);
         this.SetDefaultSpecialValue("attack_count", 8);
-        this.SetDefaultSpecialValue("attack_damage_pct", [100,135,170,205,250,300]);
+        this.SetDefaultSpecialValue("attack_damage_pct", [100, 135, 170, 205, 250, 300]);
         this.SetDefaultSpecialValue("duration", 2);
         this.SetDefaultSpecialValue("scepter_attacks", 4);
         this.SetDefaultSpecialValue("attack_targets", 1);
         this.SetDefaultSpecialValue("scepter_duration", 1);
 
-        }
+    }
 
 
 
@@ -206,7 +206,7 @@ export class modifier_riki_6_thinker extends BaseModifier_Plus {
                 hCaster.SetAbsOrigin(vTarget)
                 modifier_riki_6_damage_pct.apply(hCaster, hCaster, this.GetAbilityPlus(), null)
                 BattleHelper.Attack(hCaster, hTarget, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_IGNOREINVIS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)
-                 modifier_riki_6_damage_pct.remove( hCaster );
+                modifier_riki_6_damage_pct.remove(hCaster);
                 hCaster.SetAbsOrigin(vPosition)
             }
             if (hCaster.HasScepter()) {
@@ -218,7 +218,7 @@ export class modifier_riki_6_thinker extends BaseModifier_Plus {
                         hCaster.SetAbsOrigin(vTarget)
                         modifier_riki_6_damage_pct.apply(hCaster, hCaster, this.GetAbilityPlus(), null)
                         BattleHelper.Attack(hCaster, hTarget, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_IGNOREINVIS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)
-                         modifier_riki_6_damage_pct.remove( hCaster );
+                        modifier_riki_6_damage_pct.remove(hCaster);
                         hCaster.SetAbsOrigin(vPosition)
                     }
                 }

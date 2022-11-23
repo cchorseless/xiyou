@@ -6,7 +6,7 @@ import { building_combination_ability } from "../../../kvInterface/building/buil
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, serializeETProps } from "../../Entity/Entity";
-import { CombinationConfig } from "../../System/Combination/CombinationConfig";
+import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { CombEffectComponent } from "./CombEffectComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";

@@ -4,7 +4,7 @@ import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jia
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { modifier_remnant } from "../../../npc/modifier/battle/modifier_remnant";
 import { ET } from "../../Entity/Entity";
-import { RoundConfig } from "../../System/Round/RoundConfig";
+import { RoundConfig } from "../../../shared/RoundConfig";
 import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";

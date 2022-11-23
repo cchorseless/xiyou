@@ -2,7 +2,7 @@ import { GameFunc } from "../../GameFunc";
 import { AoiHelper } from "../../helper/AoiHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
-import { GameEnum } from "../../GameEnum";
+import { GameEnum } from "../../shared/GameEnum";
 import { BaseAbility_Plus } from "./BaseAbility_Plus";
 import { globalData, reloadable } from "../../GameCache";
 import { BaseNpc_Plus } from "./BaseNpc_Plus";

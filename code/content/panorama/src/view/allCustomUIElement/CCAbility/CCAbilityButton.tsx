@@ -21,9 +21,12 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
         draggable: false,
     }
 
+    CastRangeParticleID: ParticleID;
     private onAbilityButtonclick_left() {
         const overrideentityindex = this.props.overrideentityindex!;
         if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
+            // m_bToggleState = Abilities.GetToggleState(overrideentityindex);
+            let iCasterIndex = Abilities.GetCaster(overrideentityindex);
             if (GameUI.IsAltDown()) {
                 Abilities.PingAbility(overrideentityindex);
                 return;
@@ -31,6 +34,17 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
             if (GameUI.IsControlDown()) {
                 Abilities.AttemptToUpgrade(overrideentityindex);
                 return;
+            }
+            // 施法范围
+            let fCastRange = Abilities.GetCastRange(overrideentityindex);
+            if (this.CastRangeParticleID) {
+                Particles.DestroyParticleEffect(this.CastRangeParticleID, false);
+                this.CastRangeParticleID = null as any;
+            }
+            if (fCastRange > 0) {
+                this.CastRangeParticleID = Particles.CreateParticle("particles/ui_mouseactions/range_display.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, -1 as EntityIndex);
+                Particles.SetParticleControlEnt(this.CastRangeParticleID, 0, iCasterIndex, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "", Entities.GetAbsOrigin(iCasterIndex), true);
+                Particles.SetParticleControl(this.CastRangeParticleID, 1, [fCastRange, 1, 1]);
             }
             if (Abilities.IsItem(overrideentityindex)) {
                 var iAbilityIndex = Abilities.GetLocalPlayerActiveAbility();
@@ -56,7 +70,6 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
                     }
                 }
             }
-            let iCasterIndex = Abilities.GetCaster(overrideentityindex);
             Abilities.ExecuteAbility(overrideentityindex, iCasterIndex, false);
         }
     }

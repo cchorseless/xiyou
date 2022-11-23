@@ -4,8 +4,7 @@ import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
 import { ET, registerET } from "../../../libs/Entity";
-import { GameEnum } from "../../../libs/GameEnum";
-import { PlayerConfig } from "../../system/Player/PlayerConfig";
+import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
 
 /**玩家 */
 @registerET()

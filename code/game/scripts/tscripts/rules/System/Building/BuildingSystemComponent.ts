@@ -2,7 +2,7 @@ import { reloadable } from "../../../GameCache";
 import { KVHelper } from "../../../helper/KVHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
-import { BuildingConfig } from "./BuildingConfig";
+import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { BuildingState } from "./BuildingState";
 
 @reloadable

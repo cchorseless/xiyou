@@ -14,7 +14,7 @@ import { modifier_particle, modifier_particle_thinker } from "../../../modifier/
 import { LogHelper } from "../../../../helper/LogHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { GameSetting } from "../../../../GameSetting";
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 

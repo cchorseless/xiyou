@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../GameEnum";
+import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { EntityHelper } from "../../../../helper/EntityHelper";
 import { LogHelper } from "../../../../helper/LogHelper";
@@ -20,7 +20,7 @@ export class courier_auto_gold extends BaseAbility_Plus {
         // }
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_HIDDEN;
     }
-   
+
     OnSpellStart() {
         let hCaster = this.GetCasterPlus();
         let basic_gold = this.GetSpecialValueFor("basic_gold");
