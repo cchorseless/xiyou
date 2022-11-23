@@ -6,6 +6,8 @@ import { LogHelper } from "../../helper/LogHelper";
 import { ET } from "../../libs/Entity";
 import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCCombinationIcon } from "./CCCombinationIcon";
+import { CCCombinationInfoDialog } from "./CCCombinationInfoDialog";
 import "./CCCombinationSingleBottomItem.less";
 export interface ICCCombinationSingleBottomItem {
     combinationName: string;
@@ -57,9 +59,17 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
         if (lastentity.IsEmpty()) {
             return this.defaultRender("CC_CombinationSingleBottomItem");
         }
+        const sectName = this.props.combinationName;
         return (
             <Panel ref={this.__root__} id="CC_CombinationSingleBottomItem"  {...this.initRootAttrs()}>
-                <CCPanel flowChildren="down" brightness={lastentity.IsActive() ? "1" : "0.1"} >
+                <CCPanel flowChildren="down" brightness={lastentity.IsActive() ? "1" : "0.1"} dialogTooltip={
+                    {
+                        cls: CCCombinationInfoDialog,
+                        props: {
+                            sectName: sectName
+                        }
+                    }
+                } >
                     <CCPanel id="CombinationTagBox" flowChildren="down">
                         {
                             entityList.map((entity, index) => {
@@ -84,7 +94,7 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
                         }
 
                     </CCPanel>
-                    <CCPanel id="CombinationIcon" backgroundImage={`url('file://{images}/combination/icon/${this.getIcon()}.png')`} />
+                    <CCCombinationIcon id="CombinationIcon" sectName={sectName} />
                 </CCPanel>
                 {this.__root___childs}
                 {this.props.children}

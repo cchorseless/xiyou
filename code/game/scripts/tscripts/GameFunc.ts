@@ -207,6 +207,10 @@ export module GameFunc {
             return s.x + " " + s.y + " " + s.z;
         }
 
+        export function ArrayToVector(s: [number, number, number]): Vector {
+            if (s == null) return;
+            return Vector(...s);
+        }
         /**
          * 字符串转Vector
          * @param s

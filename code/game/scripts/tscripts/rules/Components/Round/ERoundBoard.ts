@@ -167,10 +167,11 @@ export class ERoundBoard extends ERound {
         }
     }
 
-    AddRoundDamage(attack: string, isattack: boolean, damagetype: DAMAGE_TYPES, damage: number) {
+    AddRoundDamage(attack: string, name: string, isattack: boolean, damagetype: DAMAGE_TYPES, damage: number) {
         if (this.unitDamageInfo[attack] == null) {
-            this.unitDamageInfo[attack] = { phyD: 0, magD: 0, pureD: 0, byphyD: 0, bymagD: 0, bypureD: 0 };
+            this.unitDamageInfo[attack] = { name: name, phyD: 0, magD: 0, pureD: 0, byphyD: 0, bymagD: 0, bypureD: 0 };
         }
+
         damage = Math.floor(damage);
         if (damagetype == DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL) {
             if (isattack) {

@@ -5,8 +5,8 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { GameProtocol } from "../../../service/GameProtocol";
 import { ET } from "../../Entity/Entity";
 import { PlayerState } from "../../System/Player/PlayerState";
-import { md5 } from "../../../shared/lib/md5";
 import { reloadable } from "../../../GameCache";
+import { md5 } from "../../../lib/md5";
 
 /**玩家数据组件 */
 @reloadable

@@ -1,233 +1,236 @@
 #CC_AbilityInfoDialog {
-    width: 350px;
-    flow-children: down;
-    background-image: url("file://{images}/custom_game/hud/bg_dialog.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    padding: 10px 10px;
-
-    #HeaderLabels {
+    #PanelBg {
+        width: 350px;
         flow-children: down;
+        padding: 5px 5px;
 
-        #AbilityHeader {
-            flow-children: right;
-            background-repeat: no-repeat;
-            background-position: top;
-            background-size: 100%;
-            background-image: url("s2r://panorama/images/hud/item_tooltip_passive_psd.vtex");
-
-            #AbilityName {
-                font-size: 20px;
-                color: #e1e1e1;
-                width: fill-parent-flow(1.0);
-                vertical-align: middle;
-                padding-left: 4px;
-                text-overflow: shrink;
-                letter-spacing: 0.5px;
-                text-shadow: 2px 2px 0px 1.0 #00000090;
-                margin-top: 2px;
-                text-transform: uppercase;
-                font-weight: semi-bold;
-                padding-left: 8px;
-            }
-
-            #AbilityLevel {
-                horizontal-align: right;
-                margin-left: 8px;
-                /* margin-top: 6px; */
-                vertical-align: middle;
-                color: white;
-                font-size: 15px;
-            }
-        }
-
-    }
-
-    #AbilityTarget {
-        border-top-color: #29353b;
-        border-top-width: 1px;
-        border-top-style: solid;
-        border-bottom-color: #29353b;
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
-        width: 100%;
-        padding: 5px 0px 2px 8px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        flow-children: down;
-
-        Label {
-            color: #596e89;
-            font-size: 16px;
-        }
-
-
-        #AbilityTopRowContainer {
-            width: 100%;
-
-
-            #CurrentAbilityCosts {
-                flow-children: right;
-                horizontal-align: right;
-                vertical-align: center;
-
-                Label {
-                    color: #596e89;
-                    font-size: 16px;
-                    background-position: 0% 50%;
-                    background-repeat: no-repeat;
-                    padding-left: 25px;
-                    margin-left: 10px;
-                }
-
-                #CurrentAbilityCooldown {
-                    background-image: url("s2r://panorama/images/status_icons/ability_cooldown_icon_psd.vtex");
-                    text-overflow: shrink;
-                }
-
-                #CurrentAbilityManaCost {
-                    background-image: url("s2r://panorama/images/status_icons/ability_manacost_icon_psd.vtex");
-                }
-            }
-        }
-    }
-
-
-    #AbilityCoreDetails {
-        flow-children: down;
-        width: 100%;
-
-        #AbilityAttributes {
-            margin-top: 0px;
-            margin-bottom: 10px;
-            margin-left: 4px;
-            font-size: 17px;
-            width: 100%;
-        }
-
-        #CCAbilityDescriptionContainer {
+        #HeaderLabels {
             flow-children: down;
-            width: 100%;
 
-            Label {
-                color: #9ab0cd;
-                font-size: 16px;
-                width: 100%;
-                padding-left: 8px;
-                padding-right: 8px;
-                padding-top: 6px;
-                // padding-bottom: 8px;
-            }
-
-            .Header {
-                margin-bottom: 0px;
-                padding-top: 4px;
-                height: 28px;
-                width: 100%;
+            #AbilityHeader {
+                flow-children: right;
                 background-repeat: no-repeat;
                 background-position: top;
                 background-size: 100%;
                 background-image: url("s2r://panorama/images/hud/item_tooltip_passive_psd.vtex");
 
-                &.Active {
-                    background-image: url("s2r://panorama/images/hud/item_tooltip_active_psd.vtex");
+                #AbilityName {
+                    font-size: 20px;
+                    color: #e1e1e1;
+                    width: fill-parent-flow(1.0);
+                    vertical-align: middle;
+                    padding-left: 4px;
+                    text-overflow: shrink;
+                    letter-spacing: 0.5px;
+                    text-shadow: 2px 2px 0px 1.0 #00000090;
+                    margin-top: 2px;
+                    text-transform: uppercase;
+                    font-weight: semi-bold;
+                    padding-left: 8px;
+                }
+
+                #AbilityLevel {
+                    horizontal-align: right;
+                    margin-left: 8px;
+                    /* margin-top: 6px; */
+                    vertical-align: middle;
+                    color: white;
+                    font-size: 15px;
                 }
             }
 
-            .AbilityMechanics {
-                color: white;
+        }
+
+        #AbilityTarget {
+            border-top-color: #29353b;
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-bottom-color: #29353b;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            width: 100%;
+            padding: 5px 0px 2px 8px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            flow-children: down;
+
+            Label {
+                color: #596e89;
+                font-size: 16px;
+            }
+
+
+            #AbilityTopRowContainer {
+                width: 100%;
+
+
+                #CurrentAbilityCosts {
+                    flow-children: right;
+                    horizontal-align: right;
+                    vertical-align: center;
+
+                    Label {
+                        color: #596e89;
+                        font-size: 16px;
+                        background-position: 0% 50%;
+                        background-repeat: no-repeat;
+                        padding-left: 25px;
+                        margin-left: 10px;
+                    }
+
+                    #CurrentAbilityCooldown {
+                        background-image: url("s2r://panorama/images/status_icons/ability_cooldown_icon_psd.vtex");
+                        text-overflow: shrink;
+                    }
+
+                    #CurrentAbilityManaCost {
+                        background-image: url("s2r://panorama/images/status_icons/ability_manacost_icon_psd.vtex");
+                    }
+                }
+            }
+        }
+
+
+        #AbilityCoreDetails {
+            flow-children: down;
+            width: 100%;
+
+            #AbilityAttributes {
+                margin-top: 0px;
+                margin-bottom: 10px;
+                margin-left: 4px;
+                font-size: 17px;
+                width: 100%;
+            }
+
+            #CCAbilityDescriptionContainer {
+                flow-children: down;
+                width: 100%;
+
+                Label {
+                    color: #9ab0cd;
+                    font-size: 16px;
+                    width: 100%;
+                    padding-left: 8px;
+                    padding-right: 8px;
+                    padding-top: 6px;
+                    // padding-bottom: 8px;
+                }
+
+                .Header {
+                    margin-bottom: 0px;
+                    padding-top: 4px;
+                    height: 28px;
+                    width: 100%;
+                    background-repeat: no-repeat;
+                    background-position: top;
+                    background-size: 100%;
+                    background-image: url("s2r://panorama/images/hud/item_tooltip_passive_psd.vtex");
+
+                    &.Active {
+                        background-image: url("s2r://panorama/images/hud/item_tooltip_active_psd.vtex");
+                    }
+                }
+
+                .AbilityMechanics {
+                    color: white;
+                    background-color: rgb(37, 56, 68);
+                    background-size: 100%;
+                    padding-left: 12px;
+                    padding-right: 12px;
+                    padding-top: 4px;
+                    padding-bottom: 8px;
+                    // margin-bottom: 12px;
+                    margin-left: 2px;
+                    margin-right: 3px;
+                    font-size: 14px;
+                    width: 100%;
+                    font-weight: light;
+                }
+            }
+
+            #AbilityCosts {
+                // flow-children: right-wrap;
+                width: 100%;
+
+                Label {
+                    color: #7D7D7D;
+                    font-size: 16px;
+                    background-position: 0% 50%;
+                    background-repeat: no-repeat;
+                    padding-left: 25px;
+                    margin-right: 10px;
+                }
+
+                .Cooldown {
+                    background-image: url("s2r://panorama/images/status_icons/ability_cooldown_icon_psd.vtex");
+                    text-overflow: shrink;
+                    margin-left: 5px;
+                    margin-right: 2px;
+                }
+
+                .ManaCost {
+                    // margin-left: 5px;
+                    horizontal-align: right;
+                    margin-right: 2px;
+                    text-overflow: shrink;
+                    background-image: url("s2r://panorama/images/status_icons/ability_manacost_icon_psd.vtex");
+                }
+
+            }
+
+            #AbilityExtraDescription,
+            #AbilityScepterDescription,
+            #ItemScepterDescription,
+            #AbilityScepterDescriptionContainer {
+                font-size: 16px;
+                color: rgb(158, 182, 197);
                 background-color: rgb(37, 56, 68);
-                background-size: 100%;
                 padding-left: 12px;
                 padding-right: 12px;
                 padding-top: 4px;
                 padding-bottom: 8px;
-                // margin-bottom: 12px;
+                margin-bottom: 12px;
                 margin-left: 2px;
                 margin-right: 3px;
-                font-size: 14px;
                 width: 100%;
-                font-weight: light;
+            }
+
+
+            #AbilityScepterDescriptionContainer {
+                flow-children: down;
+                visibility: collapse;
+            }
+
+            #AbilityExtraDescription {
+                visibility: collapse;
+            }
+
+            #AbilityGameplayChanges {
+                background-color: #18212a;
+                margin-top: 6px;
+                margin-bottom: 6px;
+                width: 100%;
+                flow-children: down;
+                visibility: collapse;
+                margin-left: 1px;
+            }
+
+            #AbilityLore {
+                padding: 5px 10px 5px 10px;
+                font-size: 14px;
+                color: #3d4e5b;
+                font-style: italic;
+                background-color: #0b1215;
+                width: 100%;
+                margin-top: 12px;
+                margin-left: 1px;
             }
         }
 
-        #AbilityCosts {
-            // flow-children: right-wrap;
-            width: 100%;
-
-            Label {
-                color: #7D7D7D;
-                font-size: 16px;
-                background-position: 0% 50%;
-                background-repeat: no-repeat;
-                padding-left: 25px;
-                margin-right: 10px;
-            }
-
-            .Cooldown {
-                background-image: url("s2r://panorama/images/status_icons/ability_cooldown_icon_psd.vtex");
-                text-overflow: shrink;
-                margin-left: 5px;
-                margin-right: 2px;
-            }
-
-            .ManaCost {
-                // margin-left: 5px;
-                horizontal-align: right;
-                margin-right: 2px;
-                text-overflow: shrink;
-                background-image: url("s2r://panorama/images/status_icons/ability_manacost_icon_psd.vtex");
-            }
-
-        }
-
-        #AbilityExtraDescription,
-        #AbilityScepterDescription,
-        #ItemScepterDescription,
-        #AbilityScepterDescriptionContainer {
-            font-size: 16px;
-            color: rgb(158, 182, 197);
-            background-color: rgb(37, 56, 68);
-            padding-left: 12px;
-            padding-right: 12px;
-            padding-top: 4px;
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-            margin-left: 2px;
-            margin-right: 3px;
-            width: 100%;
-        }
-
-
-        #AbilityScepterDescriptionContainer {
-            flow-children: down;
-            visibility: collapse;
-        }
-
-        #AbilityExtraDescription {
-            visibility: collapse;
-        }
-
-        #AbilityGameplayChanges {
-            background-color: #18212a;
-            margin-top: 6px;
-            margin-bottom: 6px;
-            width: 100%;
-            flow-children: down;
-            visibility: collapse;
-            margin-left: 1px;
-        }
-
-        #AbilityLore {
-            padding: 5px 10px 5px 10px;
-            font-size: 14px;
-            color: #3d4e5b;
-            font-style: italic;
-            background-color: #0b1215;
-            width: 100%;
-            margin-top: 12px;
-            margin-left: 1px;
-        }
     }
+
+
+
 
 }

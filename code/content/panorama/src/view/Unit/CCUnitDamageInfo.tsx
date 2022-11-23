@@ -39,7 +39,7 @@ export class CCUnitDamageInfo extends CCPanel<ICCUnitDamageInfo> {
         let infos = Object.keys(round.unitDamageInfo).map(key => {
             let _info = round.unitDamageInfo[key];
             return {
-                SUnitName: Entities.GetUnitName(Number(key) as EntityIndex),
+                SUnitName: _info.name,
                 fDamageTotal: isdamage ? (_info.phyD + _info.magD + _info.pureD) : (_info.byphyD + _info.bymagD + _info.bypureD),
                 fDamagePhysic: isdamage ? _info.phyD : _info.byphyD,
                 fDamageMagic: isdamage ? _info.magD : _info.bymagD,
@@ -85,13 +85,8 @@ interface ICCUnitDamageProgressItem {
 }
 export class CCUnitDamageProgressItem extends CCPanel<ICCUnitDamageProgressItem> {
 
-    SUnitName: string;
     render() {
-        // 防止单位死亡
-        if (!this.SUnitName) {
-            this.SUnitName = this.props.SUnitName;
-        }
-        const SUnitName = this.SUnitName;
+        const SUnitName = this.props.SUnitName;
         const fMaxDamage = this.props.fMaxDamage;
         const fDamageTotal = this.props.fDamageTotal;
         const fDamagePure = this.props.fDamagePure;

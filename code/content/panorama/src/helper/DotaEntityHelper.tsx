@@ -1,5 +1,6 @@
 import { FuncHelper } from "./FuncHelper";
 import { KVHelper } from "./KVHelper";
+import { LogHelper } from "./LogHelper";
 
 
 export module AbilityHelper {
@@ -848,6 +849,9 @@ export module AbilityHelper {
                     break;
                 default:
                     break;
+            }
+            if (aValues.length == 1 && aValues[0] == 0) {
+                continue;
             }
             let [sValues, sValuesPS] = AbilityDescriptionCompose(aValues, iLevel, bOnlyNowLevelValue);
             r.push(`${$.Localize(sValueName)} : ${sValues}`)

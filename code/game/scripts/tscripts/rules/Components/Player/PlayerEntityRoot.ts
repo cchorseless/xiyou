@@ -20,6 +20,7 @@ import { FHeroCombinationManagerComponent } from "../FakerHero/FHeroCombinationM
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerDataComponent } from "./PlayerDataComponent";
 import { PlayerHttpComponent } from "./PlayerHttpComponent";
+import { GameFunc } from "../../../GameFunc";
 
 export class PlayerEntityRoot extends ET.EntityRoot {
     readonly Playerid: PlayerID;
@@ -135,6 +136,6 @@ export class PlayerEntityRoot extends ET.EntityRoot {
     }
 
     GetColor() {
-        return PlayerConfig.playerColor[this.Playerid];
+        return GameFunc.VectorFunctions.ArrayToVector(PlayerConfig.playerColor[this.Playerid]);
     }
 }

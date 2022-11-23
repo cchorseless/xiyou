@@ -13,7 +13,14 @@ export module CombinationConfig {
     export enum ECombinationLabel {
         phyarm_up = "phyarm_up",
         mgcarm_down = "mgcarm_down",
+        phycrit_up = "phycrit_up",
+        disarm = "disarm",
         suck_blood = "suck_blood",
+        shield = "shield",
+        invent = "invent",
+        tranform = "tranform",
+        seckill = "seckill",
+        betrayal = "betrayal",
     }
 
     // 1加甲流

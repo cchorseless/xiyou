@@ -1,6 +1,6 @@
 import React, { createRef, PureComponent } from "react";
 import { DOTAAbilityImageAttributes, PanelAttributes } from "@demon673/react-panorama";
-import { CCPanel } from "../CCPanel/CCPanel";
+import { CCPanel, dialogTooltipInfo } from "../CCPanel/CCPanel";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { CCLabel } from "../CCLabel/CCLabel";
@@ -44,10 +44,10 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
             }, this.props.tipsInfo)
             return {
                 dialogTooltip: {
-                    tipTypeClass: CCAbilityInfoDialog,
+                    cls: CCAbilityInfoDialog,
                     props: obj,
-                    layoutleftRight: true
-                }
+                    posRight: true
+                } as dialogTooltipInfo<CCAbilityInfoDialog, any>
             }
         }
         return {}

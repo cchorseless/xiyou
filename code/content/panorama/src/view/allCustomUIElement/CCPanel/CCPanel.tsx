@@ -10,10 +10,10 @@ import { FuncHelper } from "../../../helper/FuncHelper";
 type CC_PanelScroll = "clip" | "noclip" | "none" | "squish" | "scroll";
 
 
-interface dialogTooltipInfo<M extends NodePropsData, T extends typeof CCPanel<M>> {
-    tipTypeClass: T,
+export interface dialogTooltipInfo<M extends NodePropsData, T extends typeof CCPanel<M>> {
+    cls: T,
     props?: M | any,
-    layoutleftRight?: boolean
+    posRight?: boolean
 }
 
 interface ICCPanelProps extends NodePropsData {

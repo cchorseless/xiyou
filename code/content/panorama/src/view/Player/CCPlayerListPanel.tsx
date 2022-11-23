@@ -49,7 +49,7 @@ export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
                             enabled={CourierData.health > 0}
                             className="PlayerInfo"
                             onactivate={self => { }}
-                            dialogTooltip={{ tipTypeClass: CCPlayerInfoDialog, props: { Playerid: playerID }, layoutleftRight: true }}>
+                            dialogTooltip={{ cls: CCPlayerInfoDialog, props: { Playerid: playerID }, posRight: true }}>
                             <CCAvatar id="playerAvatar" width="48px" height="48px" accountid={CourierData.steamID} />
                             {!CourierData.IsValidSteamID() &&
                                 <Image id="playerAvatar" style={{ width: "48px", height: "48px" }} src="s2r://panorama/images/bot_icon_unfair_png.vtex" />

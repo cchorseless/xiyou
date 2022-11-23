@@ -145,7 +145,7 @@ export class GameSetting {
                                 if (building.IsIllusion()) {
 
                                 }
-                                round.AddRoundDamage(unit.GetEntityIndex() + "", unit == hAttacker, iDamageType, fDamage)
+                                round.AddRoundDamage(unit.GetEntityIndex() + "", unit.GetUnitName(), unit == hAttacker, iDamageType, fDamage)
                             }
                         }
                     }

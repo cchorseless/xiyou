@@ -10,7 +10,7 @@ import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../l
 import { CCDacBoard } from "../allCustomUIElement/CCDacBoard/CCDacBoard";
 import { CCMiniMap } from "../allCustomUIElement/CCMiniMap/CCMiniMap";
 import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel, dialogTooltipInfo } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCChallengeShopPanel } from "../Challenge/CCChallengeShopPanel";
 import { CCCombinationBottomPanel } from "../Combination/CCCombinationBottomPanel";
 import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
@@ -162,12 +162,12 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         }), 10);
     }
     /**显示tooltip弹窗 */
-    public async ShowCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, dialoginfo: { tipTypeClass: T, props: M | any, layoutleftRight: boolean }) {
+    public async ShowCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, dialoginfo: dialogTooltipInfo<T, any>) {
         if (bindpanel == null || !bindpanel.IsValid()) { return };
-        if (dialoginfo.tipTypeClass == null) { return };
-        let tipTypeClass = dialoginfo.tipTypeClass;
+        if (dialoginfo.cls == null) { return };
+        let tipTypeClass = dialoginfo.cls;
         let obj = dialoginfo.props || {};
-        let layoutleftRight = dialoginfo.layoutleftRight || false;
+        let layoutleftRight = dialoginfo.posRight || false;
         let isinrange = true;
         let brightness = Number(bindpanel.style.brightness) || 1;
         bindpanel.style.brightness = brightness + 0.5 + "";
@@ -190,7 +190,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         };
     }
     /**注册tooltip弹窗事件 */
-    public RegCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, tipTypeClass: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = false) {
+    public RegCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, cls: T, attrFunc: (() => { [k: string]: any } | void) | null = null, layoutleftRight: boolean = false) {
         if (bindpanel == null || !bindpanel.IsValid()) { return };
         let isinrange = false;
         let brightness = Number(bindpanel.style.brightness) || 1;
@@ -205,7 +205,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
             }
             bindpanel.style.brightness = brightness + 0.5 + "";
             isinrange = true;
-            let newtip = await this.addNodeChildAsyncAt<M, T>(this.NODENAME.panel_alldialog, tipTypeClass, obj);
+            let newtip = await this.addNodeChildAsyncAt<M, T>(this.NODENAME.panel_alldialog, cls, obj);
             if (!isinrange) {
                 newtip.close();
                 return;
