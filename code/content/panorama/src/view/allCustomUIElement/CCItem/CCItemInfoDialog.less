@@ -24,7 +24,6 @@
             margin-bottom: 6px;
             margin-left: 4px;
             box-shadow: 0px 0px 4px black;
-
         }
 
 
@@ -60,93 +59,94 @@
             }
 
             #AbilitySubHeader {
-                width: 100%;
+                // width: 100%;
                 // margin-top: -4px;
                 flow-children: right;
 
                 #ItemSubtitle {
-
-
-                    &.ShowItemSubtitle {
-                        visibility: visible;
-                        vertical-align: center;
-                        padding-left: 4px;
-                    }
-
+                    vertical-align: center;
+                    padding-left: 4px;
                 }
 
-                .ItemAvailabilityIcon {
-                    width: 30px;
-                    height: 30px;
-                    wash-color: #748090;
-                    margin-right: -2px;
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    background-position: center;
+                .ItemAvailabilityRow {
+                    flow-children: right;
 
-                    &.MainShopIcon {
-                        background-image: url("s2r://panorama/images/control_icons/shop_icon_main_psd.vtex");
-                        width: 24px;
-                        height: 24px;
-                        //background-position: 50% 50%;
-                        background-repeat: no-repeat;
-                        background-size: 120%;
+                    Label {
+                        vertical-align: middle;
+                        margin-top: 4px;
+                        color: #ccc;
+                        margin-left: 3px;
                     }
 
-                    &.SecretShopIcon {
-                        background-image: url("s2r://panorama/images/control_icons/shop_icon_secret_psd.vtex");
-                        width: 24px;
-                        height: 24px;
+                    .ItemAvailabilityIcon {
+                        width: 30px;
+                        height: 30px;
+                        wash-color: #748090;
+                        margin-right: -2px;
+                        background-size: contain;
                         background-repeat: no-repeat;
-                        background-size: 120%;
-                    }
+                        background-position: center;
 
-                    &.SideShopIcon {
-                        background-image: url("s2r://panorama/images/control_icons/shop_icon_side_psd.vtex");
-                        width: 24px;
-                        height: 24px;
-                        background-repeat: no-repeat;
-                        background-size: 130%;
+                        &.MainShopIcon {
+                            background-image: url("s2r://panorama/images/control_icons/shop_icon_main_psd.vtex");
+                            width: 24px;
+                            height: 24px;
+                            //background-position: 50% 50%;
+                            background-repeat: no-repeat;
+                            background-size: 120%;
+                        }
+
+                        &.SecretShopIcon {
+                            background-image: url("s2r://panorama/images/control_icons/shop_icon_secret_psd.vtex");
+                            width: 24px;
+                            height: 24px;
+                            background-repeat: no-repeat;
+                            background-size: 120%;
+                        }
+
+                        &.SideShopIcon {
+                            background-image: url("s2r://panorama/images/control_icons/shop_icon_side_psd.vtex");
+                            width: 24px;
+                            height: 24px;
+                            background-repeat: no-repeat;
+                            background-size: 130%;
+                        }
                     }
                 }
-
 
                 #NeutralItemTier {
                     color: #666;
                     font-size: 16px;
                     padding-left: 4px;
                     margin-top: 2px;
+                    font-weight: semi-bold;
 
-                    &.TierLabel {
-                        font-weight: semi-bold;
+                    &.NeutralTier1 {
+                        color: NeutralTier1;
+                    }
 
-                        &.NeutralTier1 {
-                            color: NeutralTier1;
-                        }
+                    &.NeutralTier2 {
+                        color: NeutralTier2;
+                    }
 
-                        &.NeutralTier2 {
-                            color: NeutralTier2;
-                        }
+                    &.NeutralTier3 {
+                        color: NeutralTier3;
+                    }
 
-                        &.NeutralTier3 {
-                            color: NeutralTier3;
-                        }
+                    &.NeutralTier4 {
+                        color: NeutralTier4;
+                    }
 
-                        &.NeutralTier4 {
-                            color: NeutralTier4;
-                        }
+                    &.NeutralTier5 {
+                        color: NeutralTier5;
+                    }
 
-                        &.NeutralTier5 {
-                            color: NeutralTier5;
-                        }
+                    &.NeutralTier6 {
+                        color: NeutralTier6;
+                    }
 
-                        &.NeutralTier6 {
-                            color: NeutralTier6;
-                        }
-
-                        &.NeutralTier7 {
-                            color: NeutralTier7;
-                        }
+                    &.NeutralTier7 {
+                        color: NeutralTier7;
                     }
                 }
 
@@ -203,6 +203,11 @@
                 }
             }
 
+            #CostToComplete {
+                color: #FFCC33;
+                font-size: 16px;
+                font-weight: bold;
+            }
         }
     }
 

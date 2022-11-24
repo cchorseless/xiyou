@@ -24,7 +24,7 @@ export class CCPlayerInfoDialog extends CCPanel<ICCPlayerInfoDialog> {
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} id="CC_PlayerInfoDialog" hittest={false} {...this.initRootAttrs()}>
-                <CCPanelBG width="600px" flowChildren="down">
+                <CCPanelBG width="600px" type="ToolTip" flowChildren="down">
                     <CCDividerHeader flowChildren="right">
                         <Label text="英雄信息" />
                     </CCDividerHeader>

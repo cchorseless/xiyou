@@ -6,18 +6,18 @@ import { CCPanel } from "../CCPanel/CCPanel";
 import { AbilityHelper, ItemHelper, UnitHelper } from "../../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { KVHelper } from "../../../helper/KVHelper";
+import { LogHelper } from "../../../helper/LogHelper";
 
 import "./CCItemInfoDialog.less";
-import { LogHelper } from "../../../helper/LogHelper";
 
 interface ICCItemInfoDialog extends NodePropsData {
     itemname: string,
     castentityindex?: EntityIndex,
     inventoryslot?: number,
     level?: number,
-    mode?: "description_only" | "show_scepter_only" | "normal",
-    showextradescription?: boolean,
-    onlynowlevelvalue?: boolean
+    // mode?: "description_only" | "show_scepter_only" | "normal",
+    // showextradescription?: boolean,
+    // onlynowlevelvalue?: boolean
 }
 
 export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
@@ -42,14 +42,16 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
         castentityindex: -1,
         inventoryslot: -1,
         level: -1,
-        mode: "normal",
-        showextradescription: false,
-        onlynowlevelvalue: false,
+        // mode: "normal",
+        // showextradescription: false,
+        // onlynowlevelvalue: false,
     }
 
 
     parseAbilityDescription() {
         const sAbilityName = this.props.itemname;
+        const castentityindex = this.props.castentityindex;
+        const level = this.props.level!;
         let sAllDescription = "#DOTA_Tooltip_ability_" + sAbilityName + "_Description";
         let list: JSX.Element[] = [];
         let sAllDescriptionLocalize = $.Localize(sAllDescription);
@@ -67,12 +69,11 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                 }
                 sDescription = sDescription.replace(regexp, "");
                 sDescription = sDescription.replace(/%%/g, "%");
-                // sDescription = AbilityHelper.ReplaceAbilityValues({ sStr: sDescription, bShowExtra: showextradescription, sAbilityName: sAbilityName, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+                sDescription = AbilityHelper.ReplaceAbilityValuesDes({ sStr: sDescription, sAbilityName: sAbilityName, iLevel: level, iEntityIndex: castentityindex });
                 list.push(
                     <Label key={list.length} className={CSSHelper.ClassMaker('AbilityMechanics', { 'Active': true, })} text={sDescription} html={true} />
                 );
             }
-
             let sExtraEffect = $.Localize("#DOTA_Tooltip_ability_" + sAbilityName + "_extra_effect");
             if (sExtraEffect != "#DOTA_Tooltip_ability_" + sAbilityName + "_extra_effect") {
                 let regexp = new RegExp("<h1>.+?</h1>", "");
@@ -93,15 +94,28 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                 }
                 sExtraEffect = sExtraEffect.replace(regexp, "");
                 sExtraEffect = sExtraEffect.replace(/%%/g, "%");
-                // sExtraEffect = AbilityHelper.ReplaceAbilityValues({ sStr: sExtraEffect, bShowExtra: showextradescription, sAbilityName: sAbilityName, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+                sExtraEffect = AbilityHelper.ReplaceAbilityValuesDes({ sStr: sExtraEffect, sAbilityName: sAbilityName, iLevel: level, iEntityIndex: castentityindex });
                 list.push(
-                    <Label key={list.length} className={CSSHelper.ClassMaker({ 'ExtraEffect': true })} text={sExtraEffect} html={true} />
+                    <Label key={list.length} className={CSSHelper.ClassMaker('ExtraEffect', { 'Active': true, })} text={sExtraEffect} html={true} />
                 );
             }
         }
         return list;
     }
 
+    parseAbilitySpecial() {
+        const sAbilityName = this.props.itemname;
+        const castentityindex = this.props.castentityindex;
+        const level = this.props.level!;
+        let list: JSX.Element[] = [];
+        let speclabel: string[] = AbilityHelper.GetAbilitySpecialDes(sAbilityName, level, castentityindex);
+        speclabel.forEach(t => {
+            list.push(
+                <Label key={list.length} className={CSSHelper.ClassMaker('AbilitySpecial', { 'Active': true, })} text={t} html={true} />
+            );
+        })
+        return list;
+    }
 
     render() {
         const dialogVariables: { [x: string]: any; } = {};
@@ -110,39 +124,39 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
         const castentityindex = this.props.castentityindex!;
         const tData = KVHelper.KVItems()[itemname] || {};
         const iLevel = this.props.level || -1;
-        const mode = this.props.mode;
         const inventoryslot = this.props.inventoryslot!;
-        const showextradescription = this.props.showextradescription!;
-        const onlynowlevelvalue = this.props.onlynowlevelvalue!;
+        // const mode = this.props.mode;
+        // const showextradescription = this.props.showextradescription!;
+        // const onlynowlevelvalue = this.props.onlynowlevelvalue!;
         let iItemIndex = -1 as ItemEntityIndex;
         if (castentityindex != -1 && inventoryslot != -1) {
             iItemIndex = Entities.GetItemInSlot(castentityindex, inventoryslot)
         }
-        // let iMaxLevel = iItemIndex != -1 ? ItemHelper.GetMaxLevel(iItemIndex) : -1;
-        // iLevel = iItemIndex == -1 ? Number(tData.ItemBaseLevel) || 1 : iLevel;
-        let iMaxLevel = iItemIndex == -1 ? tData.MaxUpgradeLevel || 0 : 1;
+        let iMaxLevel = iItemIndex == -1 ? Number(tData.MaxUpgradeLevel || 0) || 0 : 1;
         let bIsConsumable = tData.ItemQuality == "consumable";
-        toggleClass['Consumable'] = bIsConsumable;
         let iItemCost = iItemIndex != -1 ? Items.GetCost(iItemIndex) : ItemHelper.GetItemCost(itemname);
         let bIsSellable = iItemIndex != -1 ? Items.IsSellable(iItemIndex) : false;
 
-        toggleClass['ShowItemCost'] = iItemIndex == -1 && iItemCost != 0;
-        toggleClass['ShowSellPrice'] = iItemIndex != -1 && iItemCost != 0 && bIsSellable;
-        if (toggleClass['ShowItemCost']) {
+        let ShowItemCost = iItemIndex == -1 && iItemCost != 0;
+        let NotEnoughGold = false
+        if (ShowItemCost) {
             dialogVariables['buy_cost'] = iItemCost;
             let iGold = Players.GetGold(Players.GetLocalPlayer());
-            toggleClass['NotEnoughGold'] = castentityindex != -1 && iGold < iItemCost;
-            if (toggleClass['NotEnoughGold']) {
-                toggleClass['NotEnoughGold'] = iGold < iItemCost;
+            NotEnoughGold = castentityindex != -1 && iGold < iItemCost;
+            if (NotEnoughGold) {
+                NotEnoughGold = iGold < iItemCost;
                 dialogVariables['buy_cost_deficit'] = iItemCost - iGold;
             }
         }
-        if (toggleClass['ShowSellPrice']) {
+
+        let ShowSellPrice = iItemIndex != -1 && iItemCost != 0 && bIsSellable;
+        let ShowSellPriceTime = false
+        if (ShowSellPrice) {
             let fPurchaseTime = Items.GetPurchaseTime(iItemIndex);
             let bOriginalPrice = Game.GetGameTime() <= fPurchaseTime + 10;
             dialogVariables['sell_price'] = bOriginalPrice ? iItemCost : iItemCost / 2;
-            toggleClass['ShowSellPriceTime'] = bOriginalPrice;
-            toggleClass['ShowSellPrice'] = !bOriginalPrice;
+            ShowSellPriceTime = bOriginalPrice;
+            ShowSellPrice = !bOriginalPrice;
             let fTime = (Game.GetGameTime() - fPurchaseTime);
             let sStr = "";
             if (fTime <= 10) {
@@ -158,32 +172,28 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
         let iBehavior = iItemIndex != -1 ? Abilities.GetBehavior(iItemIndex) : AbilityHelper.SBehavior2IBehavior(tData.AbilityBehavior || "");
         let sCastType = AbilityHelper.getCastType(iBehavior);
         dialogVariables['casttype'] = $.Localize("#" + sCastType);
-
         let iTeam = iItemIndex != -1 ? Abilities.GetAbilityTargetTeam(iItemIndex) : AbilityHelper.STeam2ITeam(tData.AbilityUnitTargetTeam || "");
         let iType = iItemIndex != -1 ? Abilities.GetAbilityTargetType(iItemIndex) : AbilityHelper.SType2IType(tData.AbilityUnitTargetType || "");
         let sTargetType = AbilityHelper.getTargetType(iTeam, iType);
         dialogVariables['targettype'] = $.Localize("#" + sTargetType);
-
         let iDamageType = iItemIndex != -1 ? Abilities.GetAbilityDamageType(iItemIndex) : AbilityHelper.SDamageType2IDamageType(tData.AbilityUnitDamageType || "");
         let sDamageType = AbilityHelper.getDamageType(iDamageType);
         dialogVariables['damagetype'] = $.Localize("#" + sDamageType);
-
         let sSpellImmunity = AbilityHelper.getSpellImmunity(tData.SpellImmunityType || "");
         dialogVariables['spellimmunity'] = $.Localize("#" + sSpellImmunity);
-
         let sSpellDispellableType = tData.SpellDispellableType || "";
         let sDispelType = AbilityHelper.getDispelType(sSpellDispellableType);
         dialogVariables['dispeltype'] = $.Localize("#" + sDispelType);
 
-        toggleClass['ScepterUpgradable'] = (tData.HasScepterUpgrade ? tData.HasScepterUpgrade == "1" : false) && Entities.HasScepter(castentityindex);
-        if (toggleClass['ScepterUpgradable']) {
+        let ScepterUpgradable = (tData.HasScepterUpgrade ? tData.HasScepterUpgrade == "1" : false) && Entities.HasScepter(castentityindex);
+        if (ScepterUpgradable) {
             let sScepterUpgradeDescription = $.Localize("#DOTA_Tooltip_ability_" + itemname + "_aghanim_description");
             if (sScepterUpgradeDescription != "#DOTA_Tooltip_ability_" + itemname + "_aghanim_description") {
                 sScepterUpgradeDescription = sScepterUpgradeDescription.replace(/%%/g, "%");
                 // sScepterUpgradeDescription = AbilityHelper.ReplaceAbilityValues({ sStr: sScepterUpgradeDescription, bShowExtra: showextradescription, sAbilityName: itemname, iLevel: iLevel, iEntityIndex: castentityindex, bOnlyNowLevelValue: onlynowlevelvalue });
                 dialogVariables['scepter_upgrade_description'] = sScepterUpgradeDescription;
             } else {
-                toggleClass['ScepterUpgradable'] = false;
+                ScepterUpgradable = false;
             }
         }
 
@@ -264,10 +274,10 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                 }
             }
         }
-        // sAttributes = AbilityHelper.ReplaceAbilityValues({ sStr: sAttributes, bShowExtra: showextradescription, sAbilityName: itemname, iLevel: bIsItem ? iLevel : (iLevel != -1 ? iLevel : 0), iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+        sAttributes = AbilityHelper.ReplaceAbilityValuesDes({ sStr: sAttributes, sAbilityName: itemname, iLevel: iLevel, iEntityIndex: castentityindex });
         dialogVariables['attributes'] = sAttributes;
 
-        // sExtraAttributes = AbilityHelper.ReplaceAbilityValues({ sStr: sExtraAttributes, bShowExtra: showextradescription, sAbilityName: itemname, iLevel: bIsItem ? iLevel : (iLevel != -1 ? iLevel : 0), iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+        sExtraAttributes = AbilityHelper.ReplaceAbilityValuesDes({ sStr: sExtraAttributes, sAbilityName: itemname, iLevel: iLevel, iEntityIndex: castentityindex });
         dialogVariables['extra_attributes'] = sExtraAttributes;
 
 
@@ -285,15 +295,14 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                 sExtraDescription = sExtraDescription + $.Localize(sNote);
             }
         }
-        // sExtraDescription = AbilityHelper.ReplaceAbilityValues({ sStr: sExtraDescription, bShowExtra: showextradescription, sAbilityName: itemname, iLevel: iLevel, iEntityIndex: entityindex, bOnlyNowLevelValue: onlynowlevelvalue });
+        sExtraDescription = AbilityHelper.ReplaceAbilityValuesDes({ sStr: sExtraDescription, sAbilityName: itemname, iLevel: iLevel, iEntityIndex: castentityindex });
         dialogVariables['extradescription'] = sExtraDescription;
 
         // 冷却时间
         let aCooldowns = AbilityHelper.StringToValues(tData.AbilityCooldown || "");
-        // for (let i = 0; i < Math.max(aCooldowns.length, iMaxLevel); i++) {
-        //     let v = iItemIndex != -1 ? AbilityHelper.GetLevelCooldown(iItemIndex, i) : (aCooldowns[i] || 0);
-        //     aCooldowns[i] = AbilityHelper.CalcSpecialValueUpgrade(entityindex, itemname, "cooldown", v);
-        // }
+        for (let i = 0; i < Math.max(aCooldowns.length, iMaxLevel); i++) {
+            aCooldowns[i] = iItemIndex != -1 ? AbilityHelper.GetLevelCooldown(iItemIndex, i) : (aCooldowns[i] || 0);
+        }
         aCooldowns = AbilityHelper.SimplifyValuesArray(aCooldowns);
         let fCurrentCooldown = iItemIndex != -1 ? AbilityHelper.GetLevelCooldown(iItemIndex) : 0;
         let fCooldownReduction = castentityindex != -1 ? UnitHelper.GetCooldownReduction(castentityindex) : 0;
@@ -321,10 +330,9 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
         let fCurrentManaCost = iItemIndex != -1 ? AbilityHelper.GetLevelManaCost(iItemIndex) : 0;
         // fCurrentManaCost = AbilityHelper.CalcSpecialValueUpgrade(entityindex, itemname, "mana_cost", fCurrentManaCost);
         let aManaCosts = AbilityHelper.StringToValues(tData.AbilityManaCost || "");
-        // for (let i = 0; i < Math.max(aManaCosts.length, iMaxLevel); i++) {
-        //     let v = iItemIndex != -1 ? AbilityHelper.GetLevelManaCost(iItemIndex, i) : (aManaCosts[i] || 0);
-        //     aManaCosts[i] = AbilityHelper.CalcSpecialValueUpgrade(entityindex, itemname, "mana_cost", v);
-        // }
+        for (let i = 0; i < Math.max(aManaCosts.length, iMaxLevel); i++) {
+            aManaCosts[i] = iItemIndex != -1 ? AbilityHelper.GetLevelManaCost(iItemIndex, i) : (aManaCosts[i] || 0);
+        }
         aManaCosts = AbilityHelper.SimplifyValuesArray(aManaCosts);
         let sManaCostDescription = "";
         if (!(aManaCosts.length == 0 || (aManaCosts.length == 1 && aManaCosts[0] == 0))) {
@@ -351,14 +359,17 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
 
         // 物品等级，用中立物品的样式来显示
         let iNeutralTier = ItemHelper.GetItemRarity(itemname);
+        let IsNeutralItem = false;
+        let siNeutralTiercls = "";
         if (iNeutralTier != -1) {
-            // toggleClass['IsNeutralItem'] = iNeutralTier >= 0;
-            // toggleClass['NeutralTier' + (iNeutralTier + 1)] = true;
-            // dialogVariables['neutral_item_tier_number'] = iNeutralTier + 1;
+            IsNeutralItem = iNeutralTier >= 0;
+            siNeutralTiercls = 'NeutralTier' + (iNeutralTier + 1);
+            dialogVariables['neutral_item_tier_number'] = iNeutralTier + 1;
         }
+        let ShowItemSubtitle = false;
         if (iItemIndex != -1) {
             if (sCastType == "DOTA_ToolTip_Ability_Toggle") {
-                toggleClass['ShowItemSubtitle'] = true;
+                ShowItemSubtitle = true;
                 if (Abilities.GetToggleState(iItemIndex)) {
                     dialogVariables['item_subtitle'] = $.Localize("#DOTA_Aura_Inactive");
                 } else {
@@ -368,12 +379,12 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                 let iCurrentCharges = Items.GetCurrentCharges(iItemIndex);
                 if (Items.IsPermanent(iItemIndex)) {
                     if (Items.AlwaysDisplayCharges(iItemIndex)) {
-                        toggleClass['ShowItemSubtitle'] = true;
+                        ShowItemSubtitle = true;
                         dialogVariables['item_subtitle'] = ($.Localize("#DOTA_Charges")).replace(/%s1/g, String(iCurrentCharges));
                     }
                 } else if (iCurrentCharges > 0) {
                     if (!Items.ForceHideCharges(iItemIndex)) {
-                        toggleClass['ShowItemSubtitle'] = true;
+                        ShowItemSubtitle = true;
                         dialogVariables['item_subtitle'] = ($.Localize("#DOTA_StackCount")).replace(/%s1/g, String(iCurrentCharges));
                     }
                 }
@@ -390,7 +401,7 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                             <Label id="AbilityLevel" className={CSSHelper.ClassMaker({ 'Hidden': iMaxLevel <= 0 })} localizedText="#DOTA_AbilityTooltip_Level" html={true} dialogVariables={dialogVariables} />
                         </Panel>
                         <Panel id="AbilitySubHeader">
-                            <Label id="ItemSubtitle" localizedText="{s:item_subtitle}" dialogVariables={dialogVariables} />
+                            <Label id="ItemSubtitle" className={CSSHelper.ClassMaker({ 'Hidden': ShowItemSubtitle })} localizedText="{s:item_subtitle}" dialogVariables={dialogVariables} />
                             <Panel id="ItemAvailibilityMainShop" className="ItemAvailabilityRow">
                                 <Panel className="ItemAvailabilityIcon MainShopIcon" />
                             </Panel>
@@ -401,9 +412,9 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                                 <Panel className="ItemAvailabilityIcon SecretShopIcon" />
                             </Panel>
                             <Panel className="TopBottomFlow">
-                                <Label id="NeutralItemTier" html={true} localizedText="#DOTA_NeutralItemTier" />
+                                <Label id="NeutralItemTier" className={CSSHelper.ClassMaker(siNeutralTiercls, { 'Hidden': IsNeutralItem })} html={true} localizedText="#DOTA_NeutralItemTier" />
                                 <Panel className="LeftRightFlow">
-                                    <Panel id="ItemCost">
+                                    <Panel id="ItemCost" className={CSSHelper.ClassMaker({ 'Hidden': !ShowItemCost })} >
                                         <Panel id="ItemCostIcon" />
                                         <Label id="BuyCostLabel" localizedText="{d:r:buy_cost}" dialogVariables={dialogVariables} />
                                         <Label id="BuyCostDeficit" localizedText="(-{d:r:buy_cost_deficit})" dialogVariables={dialogVariables} />
@@ -418,6 +429,7 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                         <Label id="CostToComplete" localizedText="#DOTA_HUD_Shop_Item_Complete" />
                     </Panel>
                 </Panel>
+
                 <Panel id="AbilityTarget">
                     <Panel id="AbilityTopRowContainer">
                         <Label id="AbilityCastType" className={CSSHelper.ClassMaker({ 'Hidden': sCastType == "" })} localizedText="#DOTA_AbilityTooltip_CastType" html={true} />
@@ -469,11 +481,11 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
                     <Label id="AbilityLore" className={CSSHelper.ClassMaker({ 'Hidden': $.Localize("#" + sLore) == "#" + sLore || $.Localize("#" + sLore) == "" })} localizedText="#DOTA_AbilityTooltip_Lore" html={true} dialogVariables={dialogVariables} />
                     {/* <Label id="AbilityUpgradeLevel" className={CSSHelper.ClassMaker({ 'Hidden': iAbilityLearnResult != AbilityLearnResult_t.ABILITY_CANNOT_BE_UPGRADED_REQUIRES_LEVEL })} localizedText="#DOTA_AbilityTooltip_UpgradeLevel" html={true} /> */}
                     <Label id="OwnedBy" localizedText="#DOTA_HUD_Item_Owned_By" html={true} />
-                    <Label id="SellPriceLabel" localizedText="#DOTA_HUD_Item_Tooltip_Sell_Price" />
-                    <Label id="SellPriceTimeLabel" localizedText="#DOTA_HUD_Item_Tooltip_Sell_Price_Time" />
+                    <Label id="SellPriceLabel" localizedText="#DOTA_HUD_Item_Tooltip_Sell_Price" className={CSSHelper.ClassMaker({ 'Hidden': !ShowSellPrice })} />
+                    <Label id="SellPriceTimeLabel" localizedText="#DOTA_HUD_Item_Tooltip_Sell_Price_Time" className={CSSHelper.ClassMaker({ 'Hidden': !ShowSellPriceTime })} />
                     <Label id="DisassembleLabel" localizedText="#DOTA_HUD_Item_Tooltip_Disassemble" />
                     <Label id="DisassembleTimeLabel" localizedText="#DOTA_HUD_Item_Tooltip_Disassemble_Time" />
-                    <Label id="NotEnoughGoldLabel" localizedText="#DOTA_Shop_Item_Error_Cant_Afford" />
+                    <Label id="NotEnoughGoldLabel" localizedText="#DOTA_Shop_Item_Error_Cant_Afford" className={CSSHelper.ClassMaker({ 'Hidden': !NotEnoughGold })} />
                 </Panel>
                 <Label id="ConsumableAbilityInfo" localizedText="#DOTA_HUD_Item_Tooltip_Consumable_Info" />
             </Panel >)
