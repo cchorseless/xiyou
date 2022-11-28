@@ -41,16 +41,3 @@ export class CCPanelHeader extends CCPanel<ICCPanelHeader> {
     }
 }
 
-interface ICCPanelDivder {
-    type: "Horizontal" | "Vertical";
-}
-export class CCPanelDivder extends CCPanel<ICCPanelDivder> {
-    defaultClass = () => { return CSSHelper.ClassMaker("CC_PanelDivder", this.props.type); };
-    render() {
-        return (this.__root___isValid &&
-            <Panel ref={this.__root__}      {...this.initRootAttrs()}>
-                {this.__root___childs}
-                {this.props.children}
-            </Panel>)
-    }
-}

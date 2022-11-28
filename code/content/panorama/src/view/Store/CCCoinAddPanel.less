@@ -1,0 +1,44 @@
+@import "../game_main.less";
+
+.CC_CoinAddPanel {
+    vertical-align: center;
+
+    #iconimg {
+        width: 26px;
+        height: 26px;
+        vertical-align: center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+
+    #iconNumBg {
+        width: 138px;
+        height: 32px;
+        vertical-align: center;
+        x: 13px;
+
+        background-image: url("file://{images}/custom_game/store/currency_bg.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        z-index: -1;
+
+        Label {
+            x: 16px;
+            vertical-align: center;
+            font-size: 18px;
+            color: #BE9564;
+        }
+    }
+
+    #iconAddBtn {
+        width: 30px;
+        height: 30px;
+        x: 140px;
+        vertical-align: center;
+        background-image: url("file://{images}/custom_game/store/btn_add.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        .CommonButtonEffect();
+    }
+}

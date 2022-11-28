@@ -5,7 +5,7 @@ import "./CCDividerLine.less";
 
 export interface IDividerLine {
     /** 默认样式 */
-    type?: "Default";
+    type?: "Default" | "Tui3";
     isHorizontal?: boolean;
 }
 

@@ -1,205 +1,152 @@
-// .CC_MenuButton {
-// 	tooltip-position: bottom;
-// 	width: 46px;
-// 	height: 52px;
-// 	margin-top: 12px;
-// 	horizontal-align: center;
-// 	transition-property: brightness, pre-transform-scale2d;
-// 	transition-duration: 0.2s;
-// 	img-shadow: 0px 0px 3px 3 black;
-
-// 	&:hover {
-// 		brightness: 2.0;
-// 		// opacity: 1.0;
-// 		// wash-color: white;
-// 	}
-
-// 	&:active {
-// 		brightness: 0.5;
-// 		sound: "ui_generic_button_click";
-// 	}
-
-// 	.CC_MenuLabel {
-// 		font-size: 13px;
-// 		color: #FBD05B;
-// 		align: center bottom;
-// 		text-shadow: 0px 0px 2px 4 #000000;
-// 	}
-
-// 	.CC_MenuExclamationMark {
-// 		width: 14px;
-// 		height: 14px;
-// 		background-image: url("s2r://panorama/images/control_icons/bell_psd.vtex");
-// 		background-size: 100%;
-// 		img-shadow: 0px 0px 3px 3 black;
-// 		wash-color: red;
-// 		align: right top;
-// 		z-index: 1;
-// 		// margin-bottom: 6px;
-// 		// animation-name: MarkPulse;
-// 		// animation-duration: 2s;
-// 		// animation-delay: 0s;
-// 		// animation-timing-function: ease-in-out;
-// 		// animation-iteration-count: infinite;
-// 		// transform-origin: 0% 100%
-// 	}
-
-// 	.CC_Icon {
-// 		horizontal-align: center;
-// 	}
-// }
-
-
-
 @keyframes MarkPulse {
-	0% {
-		brightness: 1.5;
-		pre-transform-scale2d: 1.1;
-		transform: rotateZ(0deg);
-	}
+    0% {
+        brightness: 1.5;
+        pre-transform-scale2d: 1.1;
+        transform: rotateZ(0deg);
+    }
 
-	25% {
-		brightness: 0.5;
-		pre-transform-scale2d: 1.0;
-	}
+    25% {
+        brightness: 0.5;
+        pre-transform-scale2d: 1.0;
+    }
 
-	50% {
-		brightness: 1.5;
-		pre-transform-scale2d: 1.1;
-		transform: rotateZ(-10deg);
-	}
+    50% {
+        brightness: 1.5;
+        pre-transform-scale2d: 1.1;
+        transform: rotateZ(-10deg);
+    }
 
-	75% {
-		brightness: 0.5;
-		pre-transform-scale2d: 1.0;
-	}
+    75% {
+        brightness: 0.5;
+        pre-transform-scale2d: 1.0;
+    }
 
-	100% {
-		brightness: 1.5;
-		pre-transform-scale2d: 1.1;
-		transform: rotateZ(0deg);
-	}
+    100% {
+        brightness: 1.5;
+        pre-transform-scale2d: 1.1;
+        transform: rotateZ(0deg);
+    }
 }
 
 #CC_MenuButtons {
-	margin-left: 122px;
-	flow-children: right;
+    margin-left: 122px;
+    flow-children: right;
 }
 
 #LeftTopMain {
-	padding-left: 90px;
+    padding-left: 90px;
 
-	@keyframes InitMoveRight {
-		0% {
-			opacity: 0;
-			transform: translateX(-500px);
-		}
+    @keyframes InitMoveRight {
+        0% {
+            opacity: 0;
+            transform: translateX(-500px);
+        }
 
-		100% {
-			opacity: 1;
-			transform: translateY(0px);
-		}
-	}
+        100% {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+    }
 
-	&.InitAnimation {
-		animation-name: InitMoveRight;
-		animation-duration: 1.5s;
-	}
+    &.InitAnimation {
+        animation-name: InitMoveRight;
+        animation-duration: 1.5s;
+    }
 
-	#DotaButtonsBG {
-		width: 150px;
-		height: 47px;
-		margin-left: -90px;
-		background-color: #0000004d;
-	}
+    #DotaButtonsBG {
+        width: 150px;
+        height: 47px;
+        margin-left: -90px;
+        background-color: #0000004d;
+    }
 
-	#LeftTopBG {
-		width: 563px;
-		height: 55px;
-		background-image: url("file://{images}/custom_game/hud/left_top_buttons_Bg.png");
-		background-repeat: no-repeat;
-		background-size: 100% 100%;
-	}
+    #LeftTopBG {
+        width: 563px;
+        height: 55px;
+        background-image: url("file://{images}/custom_game/hud/left_top_buttons_Bg.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
 
-	#LeftTopGameLogo {
-		width: 108px;
-		height: 68px;
-		margin-left: 12px;
-		background-image: url("file://{images}/custom_game/hud/logo.png");
-		background-repeat: no-repeat;
-		background-size: 100% 100%;
-	}
+    #LeftTopGameLogo {
+        width: 108px;
+        height: 68px;
+        margin-left: 12px;
+        background-image: url("file://{images}/custom_game/hud/logo.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
 
-	#LeftTopButtons {
-		margin-left: 122px;
-		flow-children: right;
-	}
+    #LeftTopButtons {
+        margin-left: 122px;
+        flow-children: right;
+    }
 }
 
 .CC_MenuButton {
-	width: 43px;
-	height: 61px;
-	margin: 0px 4px;
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	transition-property: background-image;
-	transition-duration: 0.15s;
-	transition-timing-function: ease-in-out;
-	tooltip-position: bottom;
-	overflow: noclip;
+    width: 43px;
+    height: 61px;
+    margin: 0px 4px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    transition-property: background-image;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+    tooltip-position: bottom;
+    overflow: noclip;
 
-	.LeftTopButtonIcon {
-		width: 35px;
-		height: 35px;
-		horizontal-align: center;
-		y: 7px;
-		background-image: url("file://{images}/custom_game/icons/bp.png");
-		background-repeat: no-repeat;
-		background-size: 100% 100%;
-		background-repeat: no-repeat;
-		transition-property: width, height, position;
-		transition-duration: 0.15s;
-		transition-timing-function: ease-in-out;
-	}
+    .LeftTopButtonIcon {
+        width: 35px;
+        height: 35px;
+        horizontal-align: center;
+        y: 7px;
+        background-image: url("file://{images}/custom_game/icons/bp.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        transition-property: width, height, position;
+        transition-duration: 0.15s;
+        transition-timing-function: ease-in-out;
+    }
 
-	Label {
-		horizontal-align: center;
-		y: 38px;
-		font-size: 14px;
-		color: #C1A362;
-		text-shadow: 0px 0px 1px 2 #11141B;
-		transition-property: font-size, color, position;
-		transition-duration: 0.15s;
-		transition-timing-function: ease-in-out;
-	}
+    Label {
+        horizontal-align: center;
+        y: 38px;
+        font-size: 14px;
+        color: #C1A362;
+        text-shadow: 0px 0px 1px 2 #11141B;
+        transition-property: font-size, color, position;
+        transition-duration: 0.15s;
+        transition-timing-function: ease-in-out;
+    }
 
-	&:not(.IsActive):hover {
-		background-image: url("file://{images}/custom_game/hud/left_top_button_hover_bg.png");
+    &:not(.IsActive):hover {
+        background-image: url("file://{images}/custom_game/hud/left_top_button_hover_bg.png");
 
-		Label {
-			color: #FFF9B5;
-		}
-	}
+        Label {
+            color: #FFF9B5;
+        }
+    }
 
-	&:active {
-		sound: "ui_generic_button_click";
-	}
+    &:active {
+        sound: "ui_generic_button_click";
+    }
 
-	&.IsActive {
-		background-image: url("file://{images}/custom_game/hud/left_top_button_active_bg.png");
-		background-position: center top -6px;
-		background-size: 54px 72px;
+    &.IsActive {
+        background-image: url("file://{images}/custom_game/hud/left_top_button_active_bg.png");
+        background-position: center top -6px;
+        background-size: 54px 72px;
 
-		.LeftTopButtonIcon {
-			width: 45px;
-			height: 45px;
-			y: 2px;
-		}
+        .LeftTopButtonIcon {
+            width: 45px;
+            height: 45px;
+            y: 2px;
+        }
 
-		Label {
-			y: 44px;
-			font-size: 16px;
-			color: #FFF9B5;
-		}
-	}
+        Label {
+            y: 44px;
+            font-size: 16px;
+            color: #FFF9B5;
+        }
+    }
 }

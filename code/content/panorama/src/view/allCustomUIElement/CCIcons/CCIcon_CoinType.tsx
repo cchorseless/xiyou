@@ -1,7 +1,7 @@
 import { CCIcon } from "./CCIcon";
 
 interface ICCIcon_CoinType {
-    cointype: "Gold" | "Food" | "Wood" | "Population";
+    cointype: CoinType;
 }
 
 export class CCIcon_CoinType extends CCIcon<ICCIcon_CoinType> {
@@ -20,6 +20,12 @@ export class CCIcon_CoinType extends CCIcon<ICCIcon_CoinType> {
                 break;
             case "Population":
                 src = "s2r://panorama/images/custom_game/icon/population_png.vtex";
+                break;
+            case "MetaStone":
+                src = "s2r://panorama/images/custom_game/icon/metastone_png.vtex";
+                break;
+            case "StarStone":
+                src = "s2r://panorama/images/custom_game/icon/starstone_png.vtex";
                 break;
         }
         if (src.length > 0) {

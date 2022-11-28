@@ -19,8 +19,8 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
     render() {
         return (
             this.__root___isValid &&
-            <Panel ref={this.__root__} className="CC_root" hittest={false} {...this.initRootAttrs()}>
-                <CCPopUpDialog title="#sssss" verticalAlign="top" marginTop="120px" type="Tui3"
+            <Panel ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+                <CCPopUpDialog fullcontent={true} verticalAlign="top" marginTop="120px" type="Tui3"
                     onClose={
                         () => {
                             this.close();
