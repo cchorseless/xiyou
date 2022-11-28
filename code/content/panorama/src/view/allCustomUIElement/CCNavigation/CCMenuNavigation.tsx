@@ -9,6 +9,7 @@ import "./CCMenuNavigation.less";
 interface IMenuNavigationProps extends NodePropsData {
 	/** 菜单列表 */
 	list: string[];
+	showlogo?: boolean;
 	/** 操作回调 */
 	onToggle?: (menuName: string, state: boolean) => void;
 }
@@ -25,8 +26,8 @@ export class CCMenuNavigation extends CCPanel<IMenuNavigationProps> {
 			<Panel ref={this.__root__} id="LeftTopMain" hittest={false} {...this.initRootAttrs()}>
 				<Panel id="DotaButtonsBG" hittest={false} />
 				<Panel id="LeftTopBG" hittest={false} />
-				<Panel id="LeftTopGameLogo" hittest={false} />
-				<Panel id="CC_MenuButtons" >
+				<Panel id="LeftTopGameLogo" className={CSSHelper.ClassMaker({ Showlogo: Boolean(this.props.showlogo) })} hittest={false} />
+				<Panel id="CC_MenuButtons" className={CSSHelper.ClassMaker({ Showlogo: Boolean(this.props.showlogo) })} >
 					{this.props.list.map((sName, sLoc) => {
 						return (
 							<Button id={sName} key={sName} className={CSSHelper.ClassMaker("CC_MenuButton", { IsActive: this.state.select_name == sName })}

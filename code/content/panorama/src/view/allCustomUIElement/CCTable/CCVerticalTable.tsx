@@ -14,7 +14,6 @@ interface ICCVerticalTable {
     onChange?: (index: number, text: string) => void;
 }
 
-/** 面包屑组件，不同于前端在dota2中大部分是Tab切换页签的作用 */
 export class CCVerticalTable extends CCPanel<ICCVerticalTable> {
     static defaultProps = {
         list: [],
@@ -30,18 +29,17 @@ export class CCVerticalTable extends CCPanel<ICCVerticalTable> {
     };
     render() {
         return (this.__root___isValid &&
-            <Panel id="CC_VerticalTable" ref={this.__root__} always-cache-composition-layer={true} {...this.initRootAttrs()}>
+            <Panel className="CC_VerticalTable" ref={this.__root__}  {...this.initRootAttrs()}>
                 {this.props.list.map((sName, index) => {
                     return (
                         <TabButton onactivate={() => this.onSelect(index)}
                             selected={this.props.selected != undefined ? this.props.selected - 1 == index : this.state.selectedIndex == index} group={this.props.group}
-                            className={CSSHelper.ClassMaker("VerticalTab", sName)} key={index + ""}>
+                            className={CSSHelper.ClassMaker("VerticalTab")} key={sName}>
                             <Panel id="SelectBG" hittest={false} />
                             <Label localizedText={sName} hittest={false} />
                         </TabButton>
                     );
-                })
-                }
+                })}
                 {this.__root___childs}
                 {this.props.children}
             </Panel >

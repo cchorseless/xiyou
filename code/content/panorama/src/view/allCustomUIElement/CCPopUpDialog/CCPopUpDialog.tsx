@@ -34,7 +34,7 @@ export class CCPopUpDialog<T = {}> extends CCPanel<ICCPopUpDialog & T> {
                 {(title != null && title != "" && !this.props.fullcontent) &&
                     <Label className="CC_PopupTitle" text={$.Localize(title)} />
                 }
-                <CCIconButton type={this.props.type} icon={<CCIcon_XClose type={this.props.type} />}
+                <CCIconButton zIndex={2} type={this.props.type} icon={<CCIcon_XClose type={this.props.type} />}
                     onactivate={() => {
                         this.props.onClose()
                     }} />

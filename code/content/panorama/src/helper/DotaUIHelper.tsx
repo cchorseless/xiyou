@@ -343,6 +343,9 @@ export module DotaUIHelper {
         FindDotaHudElement("GlyphScanContainer")!.style.opacity = "0";
         FindDotaHudElement("RoshanTimerContainer")!.style.opacity = "0";
         FindDotaHudElement("HUDSkinMinimap")!.style.opacity = "0";
+        // 计分板按钮
+        FindDotaHudElement("ToggleScoreboardButton")!.style.opacity = "0";
+
         RegDragEvent();
 
     }

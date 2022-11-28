@@ -12,13 +12,13 @@ import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavig
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../allCustomUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../allCustomUIElement/CCTable/CCVerticalTable";
-import { CCCoinAddPanel } from "./CCCoinAddPanel";
-import "./CCStorePanel.less";
-interface ICCStorePanel extends NodePropsData {
+import { CCCoinAddPanel } from "../Store/CCCoinAddPanel";
+import "./CCMailPanel.less";
+interface ICCMailPanel extends NodePropsData {
 
 }
 
-export class CCStorePanel extends CCPanel<ICCStorePanel> {
+export class CCMailPanel extends CCPanel<ICCMailPanel> {
     onReady() {
         return Boolean(PlayerScene.Local.TCharacter && PlayerScene.Local.TCharacter.DataComp)
     }
@@ -38,15 +38,15 @@ export class CCStorePanel extends CCPanel<ICCStorePanel> {
 
     render() {
         if (!this.__root___isValid) {
-            return this.defaultRender("CC_StorePanel")
+            return this.defaultRender("CC_MailPanel")
         }
-        const sName = "store";
+        const sName = "mail";
         const DataComp = this.GetStateEntity(PlayerScene.Local.TCharacter.DataComp!)!;
         const MetaStone = DataComp.NumericComp!.GetAsInt(EMoneyType.MetaStone)
         const StarStone = DataComp.NumericComp!.GetAsInt(EMoneyType.StarStone)
         const selectindex = this.GetState<number>("selectindex") || 0;
         return (
-            <Panel id="CC_StorePanel" className="CC_root" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+            <Panel id="CC_MailPanel" className="CC_root" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPopUpDialog id="PanelBg" fullcontent={true} verticalAlign="top" marginTop="120px" onClose={() => this.closeThis()} >
                     <CCPanel id="PanelHeader" flowChildren="right">
                         <CCImage id="PanelIcon" backgroundImage={CSSHelper.getCustomImageUrl("icon/" + sName + ".png")} />
@@ -58,13 +58,12 @@ export class CCStorePanel extends CCPanel<ICCStorePanel> {
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">
                         <CCVerticalTable marginTop={"20px"} list={[
-                            "Home",
-                            "Props",
-                            "Chest",
-                            "Resource",
-                            "Star",]} onChange={(index: number, text: string) => {
-                                this.UpdateState({ selectindex: index })
-                            }} />
+                            "friend",
+                            "system",
+                            "digest",
+                        ]} onChange={(index: number, text: string) => {
+                            this.UpdateState({ selectindex: index })
+                        }} />
                         {
 
                         }

@@ -13,8 +13,10 @@ import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavig
 import { CCPanel, dialogTooltipInfo } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCChallengeShopPanel } from "../Challenge/CCChallengeShopPanel";
 import { CCCombinationBottomPanel } from "../Combination/CCCombinationBottomPanel";
+import { CCHandBookPanel } from "../HandBook/CCHandBookPanel";
+import { CCMailPanel } from "../Mail/CCMailPanel";
 import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
-import { CCShopPanel } from "../Shop/CCShopPanel";
+import { CCStorePanel } from "../Store/CCStorePanel";
 import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
 import { CCUnitDamageInfo } from "../Unit/CCUnitDamageInfo";
 
@@ -46,7 +48,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                 {this.panel_base_isValid &&
                     <Panel ref={this.panel_base} className="CC_root" hittest={false}>
                         <CCMenuNavigation
-                            list={["setting", "mail", "store", "battlepass", "draw", "handbook"]}
+                            list={["setting", "mail", "store", "battlepass", "draw", "handbook", "rank", "activity", "record", "bag"]}
                             onToggle={this.onMenuNavigationToggle} />
                         <CCTopBarCenter />
                         <CCTopBarGameCoin />
@@ -76,13 +78,18 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     };
 
     private onMenuNavigationToggle = (menuName: string, state: boolean) => {
-        CCShopPanel.GetInstance()?.close();
+        CCStorePanel.GetInstance()?.close();
+        CCMailPanel.GetInstance()?.close();
+        CCHandBookPanel.GetInstance()?.close();
         if (state) {
             if (menuName == "store") {
-                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCShopPanel, {
-                    type: "Tui3"
-                    // marginTop: "100px",
-                } as any)
+                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCStorePanel)
+            }
+            else if (menuName == "mail") {
+                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCMailPanel)
+            }
+            else if (menuName == "handbook") {
+                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCHandBookPanel)
             }
         }
         this.updateSelf();
