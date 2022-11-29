@@ -7,15 +7,21 @@ import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { ToolTipHelper } from "../../helper/ToolTipHelper";
 import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
+import { CCActivityPanel } from "../Activity/CCActivityPanel";
 import { CCDacBoard } from "../allCustomUIElement/CCDacBoard/CCDacBoard";
 import { CCMiniMap } from "../allCustomUIElement/CCMiniMap/CCMiniMap";
 import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel, dialogTooltipInfo } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCStoragePanel } from "../Storage/CCStoragePanel";
+import { CCBattlePassPanel } from "../BattlePass/CCBattlePassPanel";
 import { CCChallengeShopPanel } from "../Challenge/CCChallengeShopPanel";
 import { CCCombinationBottomPanel } from "../Combination/CCCombinationBottomPanel";
 import { CCHandBookPanel } from "../HandBook/CCHandBookPanel";
+import { CCLuckyDrawPanel } from "../LuckyDraw/CCLuckyDrawPanel";
 import { CCMailPanel } from "../Mail/CCMailPanel";
 import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
+import { CCRankPanel } from "../Rank/CCRankPanel";
+import { CCRecordPanel } from "../Record/CCRecordPanel";
 import { CCShopPanel } from "../Shop/CCShopPanel";
 import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
 import { CCUnitDamageInfo } from "../Unit/CCUnitDamageInfo";
@@ -48,7 +54,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                 {this.panel_base_isValid &&
                     <Panel ref={this.panel_base} className="CC_root" hittest={false}>
                         <CCMenuNavigation
-                            list={["setting", "mail", "store", "battlepass", "draw", "handbook", "rank", "activity", "record", "bag"]}
+                            list={["setting", "mail", "store", "battlepass", "draw", "handbook", "rank", "activity", "record", "storage"]}
                             onToggle={this.onMenuNavigationToggle} />
                         <CCTopBarCenter />
                         <CCTopBarGameCoin />
@@ -80,7 +86,13 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     private onMenuNavigationToggle = (menuName: string, state: boolean) => {
         CCShopPanel.GetInstance()?.close();
         CCMailPanel.GetInstance()?.close();
+        CCBattlePassPanel.GetInstance()?.close();
         CCHandBookPanel.GetInstance()?.close();
+        CCLuckyDrawPanel.GetInstance()?.close();
+        CCRankPanel.GetInstance()?.close();
+        CCActivityPanel.GetInstance()?.close();
+        CCRecordPanel.GetInstance()?.close();
+        CCStoragePanel.GetInstance()?.close();
         if (state) {
             if (menuName == "store") {
                 this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCShopPanel)
@@ -90,6 +102,24 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
             }
             else if (menuName == "handbook") {
                 this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCHandBookPanel)
+            }
+            else if (menuName == "battlepass") {
+                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCBattlePassPanel)
+            }
+            else if (menuName == "draw") {
+                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCLuckyDrawPanel)
+            }
+            else if (menuName == "rank") {
+                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCRankPanel)
+            }
+            else if (menuName == "activity") {
+                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCActivityPanel)
+            }
+            else if (menuName == "record") {
+                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCRecordPanel)
+            }
+            else if (menuName == "storage") {
+                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCStoragePanel)
             }
         }
         this.updateSelf();

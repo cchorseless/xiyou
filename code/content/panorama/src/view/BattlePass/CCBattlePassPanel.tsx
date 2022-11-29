@@ -12,20 +12,19 @@ import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavig
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../allCustomUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../allCustomUIElement/CCTable/CCVerticalTable";
-import { CCCoinAddPanel } from "./CCCoinAddPanel";
-import "./CCShopPanel.less";
-interface ICCShopPanel extends NodePropsData {
+import { CCCoinAddPanel } from "../Shop/CCCoinAddPanel";
+import "./CCBattlePassPanel.less";
+interface ICCBattlePassPanel extends NodePropsData {
 
 }
 
-export class CCShopPanel extends CCPanel<ICCShopPanel> {
+export class CCBattlePassPanel extends CCPanel<ICCBattlePassPanel> {
     onReady() {
         return Boolean(PlayerScene.Local.TCharacter && PlayerScene.Local.TCharacter.DataComp)
     }
 
     onInitUI() {
-        PlayerScene.Local.TCharacter.DataComp?.RegRef(this);
-        LogHelper.print(PlayerScene.Local.TCharacter.ShopComp?.ShopUnit)
+        PlayerScene.Local.TCharacter.DataComp?.RegRef(this)
     }
 
     closeThis() {
@@ -39,15 +38,15 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
 
     render() {
         if (!this.__root___isValid) {
-            return this.defaultRender("CC_ShopPanel")
+            return this.defaultRender("CC_BattlePassPanel")
         }
-        const sName = "store";
+        const sName = "battlepass";
         const DataComp = this.GetStateEntity(PlayerScene.Local.TCharacter.DataComp!)!;
         const MetaStone = DataComp.NumericComp!.GetAsInt(EMoneyType.MetaStone)
         const StarStone = DataComp.NumericComp!.GetAsInt(EMoneyType.StarStone)
         const selectindex = this.GetState<number>("selectindex") || 0;
         return (
-            <Panel id="CC_ShopPanel" className="CC_root" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+            <Panel id="CC_BattlePassPanel" className="CC_root" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPopUpDialog id="PanelBg" fullcontent={true} verticalAlign="top" marginTop="120px" onClose={() => this.closeThis()} >
                     <CCPanel id="PanelHeader" flowChildren="right">
                         <CCImage id="PanelIcon" backgroundImage={CSSHelper.getCustomImageUrl("icon/" + sName + ".png")} />
@@ -59,13 +58,12 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">
                         <CCVerticalTable marginTop={"20px"} list={[
-                            "Home",
-                            "Props",
-                            "Chest",
-                            "Resource",
-                            "Star",]} onChange={(index: number, text: string) => {
-                                this.UpdateState({ selectindex: index })
-                            }} />
+                            "prize",
+                            "task",
+                            "charge",
+                        ]} onChange={(index: number, text: string) => {
+                            this.UpdateState({ selectindex: index })
+                        }} />
                         {
 
                         }

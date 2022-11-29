@@ -13,9 +13,10 @@ import { CCIcon_CoinType } from "../allCustomUIElement/CCIcons/CCIcon_CoinType";
 import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCChallengeAbilityIcon } from "./CCChallengeAbilityIcon";
+import { PlayerConfig } from "../../../../../game/scripts/tscripts/shared/PlayerConfig";
+import { CCDrawCardPanel } from "../Draw/CCDrawCardPanel";
 
 import "./CCChallengeShopPanel.less";
-import { PlayerConfig } from "../../../../../game/scripts/tscripts/shared/PlayerConfig";
 
 export interface ICCChallengeShopPanel {
 
@@ -65,7 +66,18 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
 
 
     onbtnshop_click() { }
-
+    onbtndraw_click() {
+        let draw = CCDrawCardPanel.GetInstance();
+        if (draw != null) {
+            LogHelper.print(draw.IsHide())
+            if (draw.IsHide()) {
+                draw.show();
+            }
+            else {
+                draw.hide();
+            }
+        }
+    }
     render() {
         if (!this.__root___isValid) {
             return this.defaultRender("CC_ChallengeShopPanel");
@@ -75,7 +87,6 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
             <Panel id="CC_ChallengeShopPanel" ref={this.__root__}      {...this.initRootAttrs()}>
                 <CCPanel id="challenge_imgBg" flowChildren="down" >
                     <CCLabel type="Title" horizontalAlign="center" text={$.Localize("#lang_LevelChallenge")} />
-                    <CCDividerLine />
                     <CCPanel flowChildren="right" horizontalAlign="center" marginTop={"10px"}>
                         {["gold", "wood", "equip", "artifact"].map((ability, index) => {
                             let abilityname = "courier_challenge_" + ability;
@@ -105,9 +116,15 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
                                 <CCLabel type="Gold" text={playerdata?.techLevelUpCostGold} />
                             </CCPanel>
                         </CCPanel>
-                        {/* <CCButton id="challenge_shop" color="Green" type="Tui3" tooltip={"#todo"} onactivate={() => { this.onbtnshop_click() }}>
+                    </CCPanel>
+                    <CCDividerLine />
+                    <CCPanel flowChildren="right" horizontalAlign="center">
+                        <CCButton id="challenge_draw" color="Purple" type="Tui3" tooltip={"#todo"} onactivate={() => { this.onbtndraw_click() }}>
+                            <CCLabel type="UnitName" align="center center" text={$.Localize("#lang_draw")} />
+                        </CCButton>
+                        <CCButton id="challenge_shop" color="Gold" type="Tui3" tooltip={"#todo"} onactivate={() => { this.onbtnshop_click() }}>
                             <CCLabel type="UnitName" align="center center" text={$.Localize("#lang_bagshop")} />
-                        </CCButton> */}
+                        </CCButton>
                     </CCPanel>
                 </CCPanel>
                 {this.__root___childs}

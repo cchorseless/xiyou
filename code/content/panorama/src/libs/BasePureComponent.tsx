@@ -453,6 +453,12 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             this.updateSelf();
         }
     }
+    public IsHide() {
+        if (this.__root__ && this.__root__.current && this.__root__.current.style.opacity != null) {
+            return Number(this.__root__.current.style.opacity) == 0;
+        }
+        return false;
+    }
     private allGameEventID: GameEventListenerID[] = [];
     /**添加游戏事件 */
     public addGameEvent(eventName: GameEnum.GameEvent, handler: (e?: any) => void) {

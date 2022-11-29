@@ -18,7 +18,7 @@
 "lang_MenuButton_rank"       "排行榜"
 "lang_MenuButton_activity"       "活动"
 "lang_MenuButton_record"       "档案"
-"lang_MenuButton_bag"       "背包"
+"lang_MenuButton_storage"       "仓库"
 "lang_TopBarRound"       "第{s:round}回合"
 "lang_TopBarDifficulty"       "游戏难度:{s:difficulty}"
 "lang_LevelChallenge"       "关卡挑战"
