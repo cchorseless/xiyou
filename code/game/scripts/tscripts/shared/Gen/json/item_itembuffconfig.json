@@ -1,0 +1,137 @@
+[
+  {
+    "id": 10002,
+    "BuffName": "BUFF1",
+    "BuffValidTime": 1000,
+    "BuffTargetType": "AllPlayer",
+    "BuffTargetArgs": [],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 1,
+    "BuffGroupMember": [
+      10002,
+      10005
+    ]
+  },
+  {
+    "id": 10005,
+    "BuffName": "BUFF2",
+    "BuffValidTime": 2000,
+    "BuffTargetType": "AllHero",
+    "BuffTargetArgs": [],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 2,
+    "BuffGroupMember": []
+  },
+  {
+    "id": 10006,
+    "BuffName": "BUFF3",
+    "BuffValidTime": 0,
+    "BuffTargetType": "SingleHero",
+    "BuffTargetArgs": [
+      10002
+    ],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 0,
+    "BuffGroupMember": []
+  },
+  {
+    "id": 10007,
+    "BuffName": "BUFF4",
+    "BuffValidTime": 0,
+    "BuffTargetType": "",
+    "BuffTargetArgs": [],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 0,
+    "BuffGroupMember": []
+  },
+  {
+    "id": 10008,
+    "BuffName": "BUFF5",
+    "BuffValidTime": 0,
+    "BuffTargetType": "",
+    "BuffTargetArgs": [],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 0,
+    "BuffGroupMember": []
+  },
+  {
+    "id": 10009,
+    "BuffName": "BUFF6",
+    "BuffValidTime": 0,
+    "BuffTargetType": "",
+    "BuffTargetArgs": [],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 0,
+    "BuffGroupMember": []
+  },
+  {
+    "id": 10010,
+    "BuffName": "BUFF7",
+    "BuffValidTime": 0,
+    "BuffTargetType": "",
+    "BuffTargetArgs": [],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 0,
+    "BuffGroupMember": []
+  },
+  {
+    "id": 10011,
+    "BuffName": "BUFF8",
+    "BuffValidTime": 0,
+    "BuffTargetType": "",
+    "BuffTargetArgs": [],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 0,
+    "BuffGroupMember": []
+  },
+  {
+    "id": 10013,
+    "BuffName": "BUFF9",
+    "BuffValidTime": 0,
+    "BuffTargetType": "",
+    "BuffTargetArgs": [],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 0,
+    "BuffGroupMember": []
+  },
+  {
+    "id": 10014,
+    "BuffName": "BUFF10",
+    "BuffValidTime": 0,
+    "BuffTargetType": "",
+    "BuffTargetArgs": [],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 0,
+    "BuffGroupMember": []
+  },
+  {
+    "id": 10015,
+    "BuffName": "BUFF11",
+    "BuffValidTime": 0,
+    "BuffTargetType": "",
+    "BuffTargetArgs": [],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 0,
+    "BuffGroupMember": []
+  },
+  {
+    "id": 10016,
+    "BuffName": "BUFF12",
+    "BuffValidTime": 0,
+    "BuffTargetType": "",
+    "BuffTargetArgs": [],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 0,
+    "BuffGroupMember": []
+  },
+  {
+    "id": 10017,
+    "BuffName": "BUFF13",
+    "BuffValidTime": 0,
+    "BuffTargetType": "",
+    "BuffTargetArgs": [],
+    "BuffQuality": 0,
+    "BuffGroupPriority": 0,
+    "BuffGroupMember": []
+  }
+]

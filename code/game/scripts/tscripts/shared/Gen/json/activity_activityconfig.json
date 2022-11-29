@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "IsValid": 1,
+    "IsCyclicActivity": true,
+    "ActivityName": "",
+    "ActivityScript": ""
+  },
+  {
+    "id": 2,
+    "IsValid": 0,
+    "IsCyclicActivity": true,
+    "ActivityName": "",
+    "ActivityScript": ""
+  },
+  {
+    "id": 3,
+    "IsValid": 0,
+    "IsCyclicActivity": true,
+    "ActivityName": "",
+    "ActivityScript": ""
+  },
+  {
+    "id": 4,
+    "IsValid": 0,
+    "IsCyclicActivity": true,
+    "ActivityName": "",
+    "ActivityScript": ""
+  }
+]

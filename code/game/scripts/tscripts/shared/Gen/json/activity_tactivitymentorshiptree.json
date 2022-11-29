@@ -1,0 +1,216 @@
+[
+  {
+    "id": 1001,
+    "IsValid": 1,
+    "TreeLevel": 0,
+    "PrizeConditionType": "BuildRelation",
+    "PrizeCondition": 0,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10002,
+        "ItemCount": 1
+      }
+    ]
+  },
+  {
+    "id": 1002,
+    "IsValid": 1,
+    "TreeLevel": 1,
+    "PrizeConditionType": "BuildRelation",
+    "PrizeCondition": 0,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      }
+    ]
+  },
+  {
+    "id": 1003,
+    "IsValid": 1,
+    "TreeLevel": 2,
+    "PrizeConditionType": "BuildRelation",
+    "PrizeCondition": 0,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      }
+    ]
+  },
+  {
+    "id": 1004,
+    "IsValid": 1,
+    "TreeLevel": 3,
+    "PrizeConditionType": "Recharge",
+    "PrizeCondition": 0,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      }
+    ]
+  },
+  {
+    "id": 2001,
+    "IsValid": 1,
+    "TreeLevel": 1,
+    "PrizeConditionType": "Online",
+    "PrizeCondition": 30,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      }
+    ]
+  },
+  {
+    "id": 2002,
+    "IsValid": 1,
+    "TreeLevel": -1,
+    "PrizeConditionType": "",
+    "PrizeCondition": 30,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      }
+    ]
+  },
+  {
+    "id": 2003,
+    "IsValid": 1,
+    "TreeLevel": 1,
+    "PrizeConditionType": "",
+    "PrizeCondition": 648,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      }
+    ]
+  },
+  {
+    "id": 2004,
+    "IsValid": 1,
+    "TreeLevel": -1,
+    "PrizeConditionType": "",
+    "PrizeCondition": 648,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      }
+    ]
+  },
+  {
+    "id": 3001,
+    "IsValid": 1,
+    "TreeLevel": 1,
+    "PrizeConditionType": "",
+    "PrizeCondition": 1,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      }
+    ]
+  },
+  {
+    "id": 3002,
+    "IsValid": 1,
+    "TreeLevel": -1,
+    "PrizeConditionType": "",
+    "PrizeCondition": 1,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      }
+    ]
+  }
+]

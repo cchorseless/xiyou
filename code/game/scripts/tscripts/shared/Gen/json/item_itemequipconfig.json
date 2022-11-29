@@ -1,0 +1,135 @@
+[
+  {
+    "id": 10004,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 10005,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 10006,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 10007,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 10008,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [
+      5001001,
+      22
+    ],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 10009,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 10010,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 10011,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": [
+      {
+        "SuitCount": 2,
+        "SuitBuffs": [
+          10001
+        ]
+      },
+      {
+        "SuitCount": 3,
+        "SuitBuffs": [
+          1002
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10013,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 10014,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 10015,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 10016,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  },
+  {
+    "id": 10017,
+    "BindHeroId": 0,
+    "EquipSlot": 0,
+    "EquipRandomProp": [],
+    "SuitId": 0,
+    "SuitName": "",
+    "SuitInfo": []
+  }
+]

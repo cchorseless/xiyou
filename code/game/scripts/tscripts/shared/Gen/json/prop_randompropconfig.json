@@ -1,0 +1,87 @@
+[
+  {
+    "id": 10001,
+    "propPool": [
+      {
+        "Propid": 20010,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20011,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20012,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20013,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      }
+    ]
+  },
+  {
+    "id": 20002,
+    "propPool": [
+      {
+        "Propid": 20011,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20012,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20013,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      }
+    ]
+  },
+  {
+    "id": 20003,
+    "propPool": [
+      {
+        "Propid": 20011,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20012,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      },
+      {
+        "Propid": 20013,
+        "PropDes": "sss",
+        "PropWeight": 10,
+        "PropMax": 100,
+        "PropMin": 20
+      }
+    ]
+  }
+]

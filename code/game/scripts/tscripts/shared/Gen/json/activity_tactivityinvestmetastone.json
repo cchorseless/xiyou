@@ -1,0 +1,106 @@
+[
+  {
+    "id": 10001,
+    "ActivityStartTime": 1655913600,
+    "ActivityEndTime": 1656518400,
+    "InvestItemGroup": [
+      {
+        "Need": 100,
+        "GainMin": 10001,
+        "GainMax": 10002
+      },
+      {
+        "Need": 200,
+        "GainMin": 10002,
+        "GainMax": 10002
+      },
+      {
+        "Need": 300,
+        "GainMin": 10002,
+        "GainMax": 10001
+      },
+      {
+        "Need": 400,
+        "GainMin": 10001,
+        "GainMax": 10002
+      },
+      {
+        "Need": 500,
+        "GainMin": 10002,
+        "GainMax": 10001
+      },
+      {
+        "Need": 600,
+        "GainMin": 10001,
+        "GainMax": 10002
+      },
+      {
+        "Need": 700,
+        "GainMin": 10002,
+        "GainMax": 10001
+      },
+      {
+        "Need": 800,
+        "GainMin": 10001,
+        "GainMax": 10002
+      },
+      {
+        "Need": 900,
+        "GainMin": 10002,
+        "GainMax": 10001
+      },
+      {
+        "Need": 1000,
+        "GainMin": 10001,
+        "GainMax": 10002
+      },
+      {
+        "Need": 1100,
+        "GainMin": 10002,
+        "GainMax": 10001
+      },
+      {
+        "Need": 1200,
+        "GainMin": 10001,
+        "GainMax": 10002
+      },
+      {
+        "Need": 1300,
+        "GainMin": 10002,
+        "GainMax": 10001
+      },
+      {
+        "Need": 1400,
+        "GainMin": 10001,
+        "GainMax": 10001
+      }
+    ]
+  },
+  {
+    "id": 10002,
+    "ActivityStartTime": 1655913600,
+    "ActivityEndTime": 1656518400,
+    "InvestItemGroup": [
+      {
+        "Need": 1100,
+        "GainMin": 10001,
+        "GainMax": 10002
+      },
+      {
+        "Need": 1200,
+        "GainMin": 10002,
+        "GainMax": 10001
+      },
+      {
+        "Need": 1300,
+        "GainMin": 10001,
+        "GainMax": 10002
+      },
+      {
+        "Need": 1400,
+        "GainMin": 10002,
+        "GainMax": 10001
+      }
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "SeasonName": "第一赛季",
+    "SeasonStartTime": 1656604800,
+    "SeasonEndTime": 1661875200
+  },
+  {
+    "id": 2,
+    "SeasonName": "第一赛季",
+    "SeasonStartTime": 1661961600,
+    "SeasonEndTime": 1698681600
+  }
+]

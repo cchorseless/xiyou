@@ -1,0 +1,237 @@
+[
+  {
+    "id": 1,
+    "isVaild": 1,
+    "ItemName": "金币",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "",
+    "UseArgs": [],
+    "AwakeScript": []
+  },
+  {
+    "id": 2,
+    "isVaild": 1,
+    "ItemName": "木材",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "",
+    "UseArgs": [],
+    "AwakeScript": []
+  },
+  {
+    "id": 100,
+    "isVaild": 0,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "",
+    "UseArgs": [],
+    "AwakeScript": []
+  },
+  {
+    "id": 1000,
+    "isVaild": 0,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "",
+    "UseArgs": [],
+    "AwakeScript": []
+  },
+  {
+    "id": 10001,
+    "isVaild": 0,
+    "ItemName": "测试宝箱",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "GetPrize",
+    "UseArgs": [
+      5001001,
+      22
+    ],
+    "AwakeScript": []
+  },
+  {
+    "id": 10002,
+    "isVaild": 0,
+    "ItemName": "宝箱",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "GetPrize",
+    "UseArgs": [],
+    "AwakeScript": []
+  },
+  {
+    "id": 10003,
+    "isVaild": 0,
+    "ItemName": "宝箱",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "GetPrize",
+    "UseArgs": [],
+    "AwakeScript": []
+  },
+  {
+    "id": 10004,
+    "isVaild": 0,
+    "ItemName": "史莱姆装备1",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "DressUp",
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": "BindEquip",
+        "ScriptValue": []
+      }
+    ]
+  },
+  {
+    "id": 10005,
+    "isVaild": 0,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "",
+    "UseArgs": [],
+    "AwakeScript": []
+  },
+  {
+    "id": 10006,
+    "isVaild": 0,
+    "ItemName": "英雄经验",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "AllowMany",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "",
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": "AddHeroExp",
+        "ScriptValue": [
+          10001,
+          100
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10007,
+    "isVaild": 0,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "ForbidMany",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "",
+    "UseArgs": [],
+    "AwakeScript": []
+  },
+  {
+    "id": 10008,
+    "isVaild": 0,
+    "ItemName": "",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "NoSlot",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "",
+    "UseArgs": [],
+    "AwakeScript": []
+  },
+  {
+    "id": 10009,
+    "isVaild": 0,
+    "ItemName": "祝福1",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "AllowMany",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "AddBuff",
+    "UseArgs": [
+      10002
+    ],
+    "AwakeScript": []
+  },
+  {
+    "id": 10010,
+    "isVaild": 0,
+    "ItemName": "称号1",
+    "ItemIcon": "",
+    "ItemQuality": 0,
+    "ItemType": "",
+    "ItemDes": "",
+    "BagSlotType": "NoSlot",
+    "AutoUse": false,
+    "BatchUseable": false,
+    "UseScript": "",
+    "UseArgs": [],
+    "AwakeScript": [
+      {
+        "ScriptName": "AddTitle",
+        "ScriptValue": [
+          10001
+        ]
+      }
+    ]
+  }
+]

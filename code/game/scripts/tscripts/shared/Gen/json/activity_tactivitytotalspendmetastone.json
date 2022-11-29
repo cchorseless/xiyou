@@ -1,0 +1,133 @@
+[
+  {
+    "id": 10001,
+    "ActivityStartTime": 1655913600,
+    "ActivityEndTime": 1656518400,
+    "PrizeItemGroup": [
+      {
+        "Index": 1,
+        "ItemGroup": [
+          {
+            "ItemConfigId": 10001,
+            "ItemCount": 1
+          },
+          {
+            "ItemConfigId": 10002,
+            "ItemCount": 1
+          }
+        ]
+      },
+      {
+        "Index": 2,
+        "ItemGroup": [
+          {
+            "ItemConfigId": 10002,
+            "ItemCount": 1
+          },
+          {
+            "ItemConfigId": 10001,
+            "ItemCount": 1
+          }
+        ]
+      },
+      {
+        "Index": 3,
+        "ItemGroup": [
+          {
+            "ItemConfigId": 10002,
+            "ItemCount": 1
+          },
+          {
+            "ItemConfigId": 10001,
+            "ItemCount": 1
+          }
+        ]
+      },
+      {
+        "Index": 4,
+        "ItemGroup": [
+          {
+            "ItemConfigId": 10002,
+            "ItemCount": 1
+          },
+          {
+            "ItemConfigId": 10001,
+            "ItemCount": 1
+          }
+        ]
+      },
+      {
+        "Index": 5,
+        "ItemGroup": [
+          {
+            "ItemConfigId": 10002,
+            "ItemCount": 1
+          },
+          {
+            "ItemConfigId": 10001,
+            "ItemCount": 1
+          }
+        ]
+      },
+      {
+        "Index": 6,
+        "ItemGroup": [
+          {
+            "ItemConfigId": 10002,
+            "ItemCount": 1
+          },
+          {
+            "ItemConfigId": 10001,
+            "ItemCount": 1
+          }
+        ]
+      },
+      {
+        "Index": 7,
+        "ItemGroup": [
+          {
+            "ItemConfigId": 10002,
+            "ItemCount": 1
+          },
+          {
+            "ItemConfigId": 10001,
+            "ItemCount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10002,
+    "ActivityStartTime": 1655913600,
+    "ActivityEndTime": 1656518400,
+    "PrizeItemGroup": [
+      {
+        "Index": 1,
+        "ItemGroup": [
+          {
+            "ItemConfigId": 10001,
+            "ItemCount": 1
+          },
+          {
+            "ItemConfigId": 10002,
+            "ItemCount": 1
+          }
+        ]
+      },
+      {
+        "Index": 2,
+        "ItemGroup": [
+          {
+            "ItemConfigId": 10001,
+            "ItemCount": 1
+          },
+          {
+            "ItemConfigId": 10002,
+            "ItemCount": 1
+          }
+        ]
+      }
+    ]
+  }
+]

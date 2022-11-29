@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "CostType": 1,
+    "RealPrice": 100,
+    "FreeInterval": 0,
+    "SpePrizeTimes": 0,
+    "ComItemPoolGroup": 10001,
+    "SpeItemPoolGroup": 0
+  },
+  {
+    "id": 2,
+    "CostType": 1,
+    "RealPrice": 100,
+    "FreeInterval": 3200,
+    "SpePrizeTimes": 10,
+    "ComItemPoolGroup": 10001,
+    "SpeItemPoolGroup": 10001
+  },
+  {
+    "id": 3,
+    "CostType": 1,
+    "RealPrice": 100,
+    "FreeInterval": 0,
+    "SpePrizeTimes": 10,
+    "ComItemPoolGroup": 10001,
+    "SpeItemPoolGroup": 10001
+  },
+  {
+    "id": 4,
+    "CostType": 1,
+    "RealPrice": 100,
+    "FreeInterval": 0,
+    "SpePrizeTimes": 10,
+    "ComItemPoolGroup": 1002,
+    "SpeItemPoolGroup": 1002
+  }
+]

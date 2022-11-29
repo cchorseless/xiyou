@@ -1,0 +1,240 @@
+[
+  {
+    "id": 10001,
+    "IsRandomRepeat": 1,
+    "RandomCountInfo": [
+      {
+        "RandomCount": 100,
+        "RandomWeight": 2
+      },
+      {
+        "RandomCount": 200,
+        "RandomWeight": 3
+      }
+    ],
+    "ItemPoolGroup": [
+      {
+        "ItemPoolConfigId": 10001,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10002,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10003,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10004,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10005,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10006,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10007,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10008,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10009,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10010,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10011,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10012,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10013,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10014,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10015,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10016,
+        "ItemPoolWeight": 1
+      }
+    ]
+  },
+  {
+    "id": 10002,
+    "IsRandomRepeat": 0,
+    "RandomCountInfo": [],
+    "ItemPoolGroup": [
+      {
+        "ItemPoolConfigId": 10017,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10018,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10019,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10020,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10021,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10022,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10023,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10024,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10025,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10026,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10027,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10028,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10029,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10030,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10031,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10032,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10033,
+        "ItemPoolWeight": 1
+      }
+    ]
+  },
+  {
+    "id": 10003,
+    "IsRandomRepeat": 0,
+    "RandomCountInfo": [],
+    "ItemPoolGroup": [
+      {
+        "ItemPoolConfigId": 10034,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10035,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10036,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10037,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10038,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10039,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10040,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10041,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10042,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10043,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10044,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10045,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10046,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10047,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10048,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10049,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10050,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10051,
+        "ItemPoolWeight": 1
+      },
+      {
+        "ItemPoolConfigId": 10052,
+        "ItemPoolWeight": 1
+      }
+    ]
+  }
+]

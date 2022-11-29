@@ -1,0 +1,166 @@
+[
+  {
+    "id": 1,
+    "IsValid": 1,
+    "GiftCommond": "HappyNewYear",
+    "GiftCount": 100,
+    "ActivityStartTime": 1655913600,
+    "ActivityEndTime": 1656518400,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10002,
+        "ItemCount": 1
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "IsValid": 1,
+    "GiftCommond": "",
+    "GiftCount": 0,
+    "ActivityStartTime": 1655913600,
+    "ActivityEndTime": 1656518400,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "IsValid": 1,
+    "GiftCommond": "",
+    "GiftCount": 0,
+    "ActivityStartTime": 1655913600,
+    "ActivityEndTime": 1656518400,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      }
+    ]
+  },
+  {
+    "id": 270,
+    "IsValid": 1,
+    "GiftCommond": "",
+    "GiftCount": 0,
+    "ActivityStartTime": 1655913600,
+    "ActivityEndTime": 1656518400,
+    "ItemGroup": [
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      },
+      {
+        "ItemConfigId": 10001,
+        "ItemCount": 1
+      }
+    ]
+  }
+]
