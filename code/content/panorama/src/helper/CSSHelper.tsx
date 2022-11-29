@@ -900,6 +900,9 @@ export module CSSHelper {
         return (VCSSStyle as any)[kk] != null;
     }
 
+    export function IsChineseLanguage() {
+        return $.Language() == "schinese"
+    }
     export function ClassMaker(...args: (string | number | any | { [k: string]: boolean })[]): string {
         let classes: string[] = [];
         for (let i = 0; i < args.length; i++) {
@@ -936,6 +939,9 @@ export module CSSHelper {
     }
     export function getCustomImageUrl(str: string) {
         return `url("file://{images}/custom_game/${str}")`;
+    }
+    export function getItemImageUrl(str: string) {
+        return `url("file://{images}/items/${str}")`;
     }
 
     export function getPanelSize(panel: Panel) {

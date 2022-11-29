@@ -111,7 +111,7 @@ export class ItemConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Item.ItemConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Item.ItemConfigRecord
             _v = new Item.ItemConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -125,7 +125,7 @@ export class ItemConfig{
     get(key: number): Item.ItemConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -258,7 +258,7 @@ export class ItemEquipConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Item.ItemEquipConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Item.ItemEquipConfigRecord
             _v = new Item.ItemEquipConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -272,7 +272,7 @@ export class ItemEquipConfig{
     get(key: number): Item.ItemEquipConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -369,7 +369,7 @@ export class ItemBuffConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Item.ItemBuffConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Item.ItemBuffConfigRecord
             _v = new Item.ItemBuffConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -383,7 +383,7 @@ export class ItemBuffConfig{
     get(key: number): Item.ItemBuffConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -461,7 +461,7 @@ export class ItemPrizePoolConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Item.ItemPrizePoolConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Item.ItemPrizePoolConfigRecord
             _v = new Item.ItemPrizePoolConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -475,7 +475,7 @@ export class ItemPrizePoolConfig{
     get(key: number): Item.ItemPrizePoolConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -560,7 +560,7 @@ export class ItemPrizePoolGroupConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Item.ItemPrizePoolGroupConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Item.ItemPrizePoolGroupConfigRecord
             _v = new Item.ItemPrizePoolGroupConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -574,7 +574,7 @@ export class ItemPrizePoolGroupConfig{
     get(key: number): Item.ItemPrizePoolGroupConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -678,7 +678,7 @@ export class ShopConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Shop.ShopConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Shop.ShopConfigRecord
             _v = new Shop.ShopConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -692,7 +692,7 @@ export class ShopConfig{
     get(key: number): Shop.ShopConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -789,6 +789,10 @@ export class ShopSellItemBean {
         this.OriginPrice = _json_.OriginPrice
         if (_json_.RealPrice === undefined) { throw new Error() }
         this.RealPrice = _json_.RealPrice
+        if (_json_.OverSeaOriginPrice === undefined) { throw new Error() }
+        this.OverSeaOriginPrice = _json_.OverSeaOriginPrice
+        if (_json_.OverSeaRealPrice === undefined) { throw new Error() }
+        this.OverSeaRealPrice = _json_.OverSeaRealPrice
         if (_json_.Discount === undefined) { throw new Error() }
         this.Discount = _json_.Discount
         if (_json_.VipLimit === undefined) { throw new Error() }
@@ -842,6 +846,14 @@ export class ShopSellItemBean {
      */
     readonly RealPrice: number
     /**
+     * 海外初始价格
+     */
+    readonly OverSeaOriginPrice: number
+    /**
+     * 海外最终价格
+     */
+    readonly OverSeaRealPrice: number
+    /**
      * 折扣
      */
     readonly Discount: number
@@ -867,7 +879,7 @@ export class PropConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Prop.PropConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Prop.PropConfigRecord
             _v = new Prop.PropConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -881,7 +893,7 @@ export class PropConfig{
     get(key: number): Prop.PropConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -929,7 +941,7 @@ export class RandomPropConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Prop.RandomPropConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Prop.RandomPropConfigRecord
             _v = new Prop.RandomPropConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -943,7 +955,7 @@ export class RandomPropConfig{
     get(key: number): Prop.RandomPropConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1028,7 +1040,7 @@ export class ActivityConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Activity.ActivityConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Activity.ActivityConfigRecord
             _v = new Activity.ActivityConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -1042,7 +1054,7 @@ export class ActivityConfig{
     get(key: number): Activity.ActivityConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1102,7 +1114,7 @@ export class TActivityMonthLogin{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Activity.TActivityMonthLoginRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Activity.TActivityMonthLoginRecord
             _v = new Activity.TActivityMonthLoginRecord(_json2_)
             this._dataList.push(_v)
@@ -1116,7 +1128,7 @@ export class TActivityMonthLogin{
     get(key: number): Activity.TActivityMonthLoginRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1227,7 +1239,7 @@ export class TActivitySevenDayLogin{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Activity.TActivitySevenDayLoginRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Activity.TActivitySevenDayLoginRecord
             _v = new Activity.TActivitySevenDayLoginRecord(_json2_)
             this._dataList.push(_v)
@@ -1241,7 +1253,7 @@ export class TActivitySevenDayLogin{
     get(key: number): Activity.TActivitySevenDayLoginRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1293,7 +1305,7 @@ export class TActivityBattlePass{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Activity.TActivityBattlePassRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Activity.TActivityBattlePassRecord
             _v = new Activity.TActivityBattlePassRecord(_json2_)
             this._dataList.push(_v)
@@ -1307,7 +1319,7 @@ export class TActivityBattlePass{
     get(key: number): Activity.TActivityBattlePassRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1410,7 +1422,7 @@ export class TActivityHeroRecordLevel{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Activity.TActivityHeroRecordLevelRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Activity.TActivityHeroRecordLevelRecord
             _v = new Activity.TActivityHeroRecordLevelRecord(_json2_)
             this._dataList.push(_v)
@@ -1424,7 +1436,7 @@ export class TActivityHeroRecordLevel{
     get(key: number): Activity.TActivityHeroRecordLevelRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1464,7 +1476,7 @@ export class TActivityDailyOnlinePrize{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Activity.TActivityDailyOnlinePrizeRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Activity.TActivityDailyOnlinePrizeRecord
             _v = new Activity.TActivityDailyOnlinePrizeRecord(_json2_)
             this._dataList.push(_v)
@@ -1478,7 +1490,7 @@ export class TActivityDailyOnlinePrize{
     get(key: number): Activity.TActivityDailyOnlinePrizeRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1518,7 +1530,7 @@ export class TActivityInvestMetaStone{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Activity.TActivityInvestMetaStoneRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Activity.TActivityInvestMetaStoneRecord
             _v = new Activity.TActivityInvestMetaStoneRecord(_json2_)
             this._dataList.push(_v)
@@ -1532,7 +1544,7 @@ export class TActivityInvestMetaStone{
     get(key: number): Activity.TActivityInvestMetaStoneRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1617,7 +1629,7 @@ export class TActivityTotalGainMetaStone{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Activity.TActivityTotalGainMetaStoneRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Activity.TActivityTotalGainMetaStoneRecord
             _v = new Activity.TActivityTotalGainMetaStoneRecord(_json2_)
             this._dataList.push(_v)
@@ -1631,7 +1643,7 @@ export class TActivityTotalGainMetaStone{
     get(key: number): Activity.TActivityTotalGainMetaStoneRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1683,7 +1695,7 @@ export class TActivityTotalOnlineTime{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Activity.TActivityTotalOnlineTimeRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Activity.TActivityTotalOnlineTimeRecord
             _v = new Activity.TActivityTotalOnlineTimeRecord(_json2_)
             this._dataList.push(_v)
@@ -1697,7 +1709,7 @@ export class TActivityTotalOnlineTime{
     get(key: number): Activity.TActivityTotalOnlineTimeRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1749,7 +1761,7 @@ export class TActivityTotalSpendMetaStone{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Activity.TActivityTotalSpendMetaStoneRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Activity.TActivityTotalSpendMetaStoneRecord
             _v = new Activity.TActivityTotalSpendMetaStoneRecord(_json2_)
             this._dataList.push(_v)
@@ -1763,7 +1775,7 @@ export class TActivityTotalSpendMetaStone{
     get(key: number): Activity.TActivityTotalSpendMetaStoneRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1815,7 +1827,7 @@ export class TActivityGiftCommond{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Activity.TActivityGiftCommondRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Activity.TActivityGiftCommondRecord
             _v = new Activity.TActivityGiftCommondRecord(_json2_)
             this._dataList.push(_v)
@@ -1829,7 +1841,7 @@ export class TActivityGiftCommond{
     get(key: number): Activity.TActivityGiftCommondRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1899,7 +1911,7 @@ export class TActivityMentorshipTree{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Activity.TActivityMentorshipTreeRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Activity.TActivityMentorshipTreeRecord
             _v = new Activity.TActivityMentorshipTreeRecord(_json2_)
             this._dataList.push(_v)
@@ -1913,7 +1925,7 @@ export class TActivityMentorshipTree{
     get(key: number): Activity.TActivityMentorshipTreeRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -1977,7 +1989,7 @@ export class HeroLevelUpConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Hero.HeroLevelUpConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Hero.HeroLevelUpConfigRecord
             _v = new Hero.HeroLevelUpConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -1991,7 +2003,7 @@ export class HeroLevelUpConfig{
     get(key: number): Hero.HeroLevelUpConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -2033,7 +2045,7 @@ export class HeroConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Hero.HeroConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Hero.HeroConfigRecord
             _v = new Hero.HeroConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -2047,7 +2059,7 @@ export class HeroConfig{
     get(key: number): Hero.HeroConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -2126,7 +2138,7 @@ export class HeroTalentConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Hero.HeroTalentConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Hero.HeroTalentConfigRecord
             _v = new Hero.HeroTalentConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -2140,7 +2152,7 @@ export class HeroTalentConfig{
     get(key: number): Hero.HeroTalentConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -2194,7 +2206,7 @@ export class SeasonConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Season.SeasonConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Season.SeasonConfigRecord
             _v = new Season.SeasonConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -2208,7 +2220,7 @@ export class SeasonConfig{
     get(key: number): Season.SeasonConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -2262,7 +2274,7 @@ export class RankPrizeConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Rank.RankPrizeConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Rank.RankPrizeConfigRecord
             _v = new Rank.RankPrizeConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -2276,7 +2288,7 @@ export class RankPrizeConfig{
     get(key: number): Rank.RankPrizeConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -2320,7 +2332,7 @@ export class DrawTreasureConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Draw.DrawTreasureConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Draw.DrawTreasureConfigRecord
             _v = new Draw.DrawTreasureConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -2334,7 +2346,7 @@ export class DrawTreasureConfig{
     get(key: number): Draw.DrawTreasureConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -2406,7 +2418,7 @@ export class TaskConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Task.TaskConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Task.TaskConfigRecord
             _v = new Task.TaskConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -2420,7 +2432,7 @@ export class TaskConfig{
     get(key: number): Task.TaskConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -2515,7 +2527,7 @@ export class AchievementConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Achievement.AchievementConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Achievement.AchievementConfigRecord
             _v = new Achievement.AchievementConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -2529,7 +2541,7 @@ export class AchievementConfig{
     get(key: number): Achievement.AchievementConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }
@@ -2609,7 +2621,7 @@ export class TitleConfig{
     constructor(_json_: any) {
         this._dataMap = new Map<number, Title.TitleConfigRecord>()
         this._dataList = []
-        for(var _json2_ of _json_) {
+        for(let _json2_ of _json_) {
             let _v: Title.TitleConfigRecord
             _v = new Title.TitleConfigRecord(_json2_)
             this._dataList.push(_v)
@@ -2623,7 +2635,7 @@ export class TitleConfig{
     get(key: number): Title.TitleConfigRecord | undefined { return this._dataMap.get(key); }
 
     resolve(_tables: Map<string, any>) {
-        for(var v of this._dataList) {
+        for(let v of this._dataList) {
             v.resolve(_tables)
         }
     }

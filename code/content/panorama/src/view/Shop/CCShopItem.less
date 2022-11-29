@@ -1,0 +1,71 @@
+.CC_ShopItem {
+    width: 250px;
+    height: 300px;
+
+    background-image: url("file://{images}/custom_game/store/store_item_bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    overflow: noclip;
+
+    border: 2px solid #00000000;
+    border-radius: 4px;
+
+    transition-property: brightness, border;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+
+    &:hover {
+        brightness: 1.5;
+        border-color: #54EDFF;
+    }
+
+    #ShopItemName {
+        max-width: 180px;
+        max-height: 56px;
+        horizontal-align: center;
+        margin-top: 20px;
+        font-size: 20px;
+        text-align: center;
+        color: #C9A874;
+        text-shadow: 0px 0px 3px 2 #000000;
+        text-overflow: shrink;
+        z-index: 2;
+    }
+
+    #ShopItemImg {
+        width: 80%;
+        height: width-percentage(34000/250%);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        align: center center;
+    }
+
+
+
+    #ShopItemNumBG {
+        width: 96px;
+        height: 59px;
+        align: right bottom;
+        margin-bottom: 16px;
+        background-image: url("file://{images}/custom_game/store/item_num.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        #ShopItemNum {
+            align: center center;
+            font-size: 26px;
+            color: #D6A661;
+            text-shadow: 0px 0px 3px 2 #000000;
+            text-overflow: shrink;
+        }
+    }
+
+    &.UnAvailable {
+        saturation: .1;
+        brightness: .4;
+
+        &:hover {
+            brightness: .6;
+        }
+    }
+}

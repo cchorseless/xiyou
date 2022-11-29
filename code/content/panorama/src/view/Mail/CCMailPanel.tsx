@@ -12,7 +12,7 @@ import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavig
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../allCustomUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../allCustomUIElement/CCTable/CCVerticalTable";
-import { CCCoinAddPanel } from "../Store/CCCoinAddPanel";
+import { CCCoinAddPanel } from "../Shop/CCCoinAddPanel";
 import "./CCMailPanel.less";
 interface ICCMailPanel extends NodePropsData {
 

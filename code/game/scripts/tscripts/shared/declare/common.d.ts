@@ -1,6 +1,11 @@
 declare type Rarity = "A" | "B" | "C" | "D" | "R" | "S" | "SS";
 declare type CoinType = "Gold" | "Food" | "Wood" | "Population" | "MetaStone" | "StarStone";
 
+declare interface IItemInfo {
+    itemid: string | number,
+    count?: number;
+}
+
 declare interface IGoodsInfo {
     /**支付类型 */
     pay_type: "0" | "300001" | "300002",

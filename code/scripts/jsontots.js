@@ -7,8 +7,13 @@ const {
 
 const jsonpath = "game/scripts/tscripts/shared/Gen/json";
 const outtspath = "game/scripts/tscripts/shared/Gen/JsonConfig.ts";
+const typepath = "game/scripts/tscripts/shared/Gen/Types.ts";
 
 function jsontots() {
+    let typestr = fs.readFileSync(typepath, "utf-8");
+    typestr = typestr.replace(/for\(var /g, "for(let ")
+    fs.writeFileSync(typepath, typestr);
+
     let filestr = "";
     const files = read_all_files(jsonpath);
     files.forEach((file) => {
@@ -24,7 +29,8 @@ function jsontots() {
     };
     export const JSONConfig: Tables = new Tables(JsonDataLoader);
     `;
-    fs.writeFileSync(outtspath, filestr)
+    fs.writeFileSync(outtspath, filestr);
+
 }
 
 (async () => {

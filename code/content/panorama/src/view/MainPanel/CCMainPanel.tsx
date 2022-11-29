@@ -16,7 +16,7 @@ import { CCCombinationBottomPanel } from "../Combination/CCCombinationBottomPane
 import { CCHandBookPanel } from "../HandBook/CCHandBookPanel";
 import { CCMailPanel } from "../Mail/CCMailPanel";
 import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
-import { CCStorePanel } from "../Store/CCStorePanel";
+import { CCShopPanel } from "../Shop/CCShopPanel";
 import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
 import { CCUnitDamageInfo } from "../Unit/CCUnitDamageInfo";
 
@@ -78,12 +78,12 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     };
 
     private onMenuNavigationToggle = (menuName: string, state: boolean) => {
-        CCStorePanel.GetInstance()?.close();
+        CCShopPanel.GetInstance()?.close();
         CCMailPanel.GetInstance()?.close();
         CCHandBookPanel.GetInstance()?.close();
         if (state) {
             if (menuName == "store") {
-                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCStorePanel)
+                this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCShopPanel)
             }
             else if (menuName == "mail") {
                 this.addOnlyOneNodeChild(this.NODENAME.panel_allpanel, CCMailPanel)
