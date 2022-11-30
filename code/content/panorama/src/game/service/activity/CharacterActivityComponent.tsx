@@ -1,6 +1,9 @@
+import { EEnum } from "../../../../../../game/scripts/tscripts/shared/Gen/Types";
 import Dictionary from "../../../helper/DataContainerHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { TCharacter } from "../account/TCharacter";
+import { TActivityData } from "./TActivityData";
+import { TActivityMemberShipData } from "./TActivityMemberShipData";
 
 @registerET()
 export class CharacterActivityComponent extends ET.Component {
@@ -18,5 +21,16 @@ export class CharacterActivityComponent extends ET.Component {
             character.AddOneComponent(this);
         }
     }
+    public GetActivityData<T extends TActivityData>(activityconfigid: number) {
+        let activityid = this.ActivityData.get(activityconfigid)
+        if (activityid) {
+            return this.GetChild<T>(activityid);
+        }
+        return null;
+    }
 
+
+    public get MemberShip() {
+        return this.GetActivityData<TActivityMemberShipData>(EEnum.EActivityType.TActivityMemberShip)
+    }
 }

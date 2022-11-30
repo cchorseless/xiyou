@@ -29,6 +29,9 @@ export module TimerHelper {
             Update(interval);
         });
     }
+    export function Now() {
+        return new Date().getTime()
+    }
     function Update(interval: number): void {
         TimerManage.GetInstance().Update(interval);
         Init();

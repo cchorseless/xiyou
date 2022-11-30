@@ -1,7 +1,7 @@
 
 import React, { createRef, PureComponent } from "react";
+import { EEnum } from "../../../../../game/scripts/tscripts/shared/Gen/Types";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
-import { EMoneyType } from "../../game/service/account/CharacterDataComponent";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
@@ -42,8 +42,8 @@ export class CCRecordPanel extends CCPanel<ICCRecordPanel> {
         }
         const sName = "record";
         const DataComp = this.GetStateEntity(PlayerScene.Local.TCharacter.DataComp!)!;
-        const MetaStone = DataComp.NumericComp!.GetAsInt(EMoneyType.MetaStone)
-        const StarStone = DataComp.NumericComp!.GetAsInt(EMoneyType.StarStone)
+        const MetaStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.MetaStone)
+        const StarStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.StarStone)
         const selectindex = this.GetState<number>("selectindex") || 0;
         return (
             <Panel id="CC_RecordPanel" className="CC_root" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>

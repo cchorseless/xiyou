@@ -10,7 +10,7 @@ import { GameFunc } from "../GameFunc";
 import { HttpHelper } from "../helper/HttpHelper";
 import { LogHelper } from "../helper/LogHelper";
 import { SingletonClass } from "../helper/SingletonHelper";
-import { GameProtocol } from "./GameProtocol";
+import { GameProtocol } from "../shared/GameProtocol";
 
 export class GameRequest extends SingletonClass {
     public tEvents: { [v: string]: Array<{ callback: Function; context: Object }> } = {};
@@ -72,7 +72,7 @@ export class GameRequest extends SingletonClass {
             return;
         }
         await HttpHelper.PostRequestAsync(
-            GameProtocol.Config.SetServerKey,
+            GameProtocol.Protocol.SetServerKey,
             {
                 ServerKey: token,
                 Name: name,

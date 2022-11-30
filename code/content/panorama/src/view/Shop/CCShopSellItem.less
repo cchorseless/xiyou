@@ -1,0 +1,157 @@
+.CC_ShopSellItem {
+
+    .CCShopItem {
+        #SaleCountingDown {
+            width: 157px;
+            height: 19px;
+            background-repeat: no-repeat;
+            background-size: 92px 19px;
+            background-position: right center;
+            background-image: url("file://{images}/custom_game/store/tag_bg_red.png");
+
+            #Timer {
+                align: left bottom;
+                x: 4px;
+                font-size: 14px;
+                color: #FF8E61;
+                text-shadow: 0px 0px 3px 2 #000000;
+            }
+
+            #LimitedSaleTime {
+                align: right center;
+                margin-right: 10px;
+                font-size: 14px;
+                color: #FFFFFF;
+                text-shadow: 0px 0px 3px 2 #000000;
+            }
+        }
+
+        #SaleLimit {
+            margin-top: 187px;
+            width: 157px;
+            height: 19px;
+            background-image: url("file://{images}/custom_game/store/tag_bg_red.png");
+            background-repeat: no-repeat;
+            background-size: 92px 19px;
+            background-position: right center;
+            z-index: 2;
+
+            Label {
+                align: right center;
+                margin-right: 6px;
+                font-size: 14px;
+                color: #FFFFFF;
+                text-shadow: 0px 0px 3px 2 #000000;
+            }
+        }
+
+        #Discount {
+            width: 157px;
+            height: 19px;
+            margin-top: 168px;
+            background-image: url("file://{images}/custom_game/store/tag_bg_green.png");
+            background-repeat: no-repeat;
+            background-size: 92px 19px;
+            background-position: right center;
+            z-index: 2;
+
+            Label {
+                align: right center;
+                margin-right: 6px;
+                font-size: 16px;
+                color: #FFFFFF;
+                text-shadow: 0px 0px 3px 2 #000000;
+            }
+        }
+
+        #VipLimit {
+            width: 50px;
+            height: 50px;
+            background-image: url("file://{images}/custom_game/store/tag_bg_green.png");
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+
+    }
+
+    .ShopItemButton {
+        width: 156px;
+        height: 46px;
+        horizontal-align: center;
+        y: 216px;
+        background-image: url("file://{images}/custom_game/common/btn_gold.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        &:enabled {
+            .CommonButtonEffect();
+        }
+
+        &:disabled {
+            saturation: 0;
+            brightness: .4;
+        }
+
+        Label {
+            align: center center;
+            font-size: 16px;
+            color: #FFFFFF;
+            text-shadow: 0px 0px 1px 2 rgba(0, 0, 0, 0.6);
+        }
+
+        &.PriceNotEnought {
+            Label {
+                color: red;
+            }
+        }
+
+
+        &.RMBBtn {
+            background-image: url("file://{images}/custom_game/common/btn_purple.png");
+        }
+
+        &.FreeBtn {
+            background-image: url("file://{images}/custom_game/hud_shop/combine_btn.png");
+        }
+
+        &.MoonBtn {
+            #MoonWithNum {
+                align: center center;
+                flow-children: right;
+
+                Image {
+                    width: 21px;
+                    height: 21px;
+                    background-image: url("file://{images}/custom_game/icons/moon.png");
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                }
+
+                Label {
+                    margin-left: 6px;
+                }
+            }
+        }
+
+        &.StarBtn {
+            #StarWithNum {
+                align: center center;
+                flow-children: right;
+
+                Image {
+                    width: 21px;
+                    height: 21px;
+                    background-image: url("file://{images}/custom_game/icons/star.png");
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                }
+
+                Label {
+                    margin-left: 6px;
+                }
+            }
+        }
+    }
+
+
+}

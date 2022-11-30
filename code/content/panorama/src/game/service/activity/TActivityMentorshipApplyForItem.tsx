@@ -1,5 +1,5 @@
 import { ET, registerET } from "../../../libs/Entity";
-import { TActivityMemberShipData } from "./TActivityMemberShipData";
+import { TActivityMentorshipTreeData } from "./TActivityMentorshipTreeData";
 
 @registerET()
 export class TActivityMentorshipApplyForItem extends ET.Entity {
@@ -9,6 +9,6 @@ export class TActivityMentorshipApplyForItem extends ET.Entity {
     public IsPrizeGet: boolean;
     public PrizeGet: string[];
 
-    public get MemberShipData() { return this.GetParent<TActivityMemberShipData>(); }
+    public get MemberShipData() { return this.GetParent<TActivityMentorshipTreeData>(); }
 
 }

@@ -73,7 +73,7 @@ export class Vector4 {
 }
 
 
-export namespace test {
+export namespace EEnum {
 export enum ETestQuality {
     /**
      * 最高品质
@@ -94,13 +94,107 @@ export enum ETestQuality {
 }
 }
 
-export namespace test {
-export enum AccessFlag {
-    WRITE = 1,
-    READ = 2,
-    TRUNCATE = 4,
-    NEW = 8,
-    READ_WRITE = WRITE|READ,
+export namespace EEnum {
+export enum EMoneyType {
+    /**
+     * 空值
+     */
+    None = 0,
+    /**
+     * 金币
+     */
+    Gold = 1,
+    /**
+     * 木材
+     */
+    Wood = 2,
+    /**
+     * 原石
+     */
+    MetaStone = 101,
+    /**
+     * 星石
+     */
+    StarStone = 102,
+    /**
+     * 钱
+     */
+    Money = 103,
+    /**
+     * 通用英雄经验
+     */
+    ComHeroExp = 104,
+}
+}
+
+export namespace EEnum {
+export enum ESellRefreshType {
+    /**
+     * 每天
+     */
+    EveryDay = 0,
+    /**
+     * 每周
+     */
+    EveryWeek = 1,
+    /**
+     * 每月
+     */
+    EveryMonth = 2,
+    /**
+     * 每年
+     */
+    EveryYear = 3,
+    /**
+     * 每小时
+     */
+    EveryHour = 4,
+    /**
+     * 每赛季
+     */
+    EverySeason = 5,
+}
+}
+
+export namespace EEnum {
+export enum EActivityType {
+    /**
+     * 7日登录
+     */
+    TActivitySevenDayLogin = 1,
+    /**
+     * 每月登录
+     */
+    TActivityMonthLogin = 2,
+    /**
+     * 战令
+     */
+    TActivityBattlePass = 3,
+    /**
+     * 月卡
+     */
+    TActivityMemberShip = 4,
+    /**
+     * 英雄等级
+     */
+    TActivityHeroRecordLevel = 5,
+    /**
+     * 每日奖励
+     */
+    TActivityDailyOnlinePrize = 6,
+    /**
+     * 原石骰子
+     */
+    TActivityInvestMetaStone = 7,
+    TActivityTotalGainMetaStone = 8,
+    TActivityTotalOnlineTime = 9,
+    TActivityTotalSpendMetaStone = 10,
+    /**
+     * 兑换码
+     */
+    TActivityGiftCommond = 11,
+    TActivityMentorshipTree = 12,
+    ServerZoneActivityMax = 1000,
 }
 }
 
@@ -773,6 +867,8 @@ export class ShopSellItemBean {
         this.Selllabel = _json_.Selllabel
         if (_json_.SellCount === undefined) { throw new Error() }
         this.SellCount = _json_.SellCount
+        if (_json_.SellRefreshType === undefined) { throw new Error() }
+        this.SellRefreshType = _json_.SellRefreshType
         if (_json_.SellStartTime === undefined) { throw new Error() }
         this.SellStartTime = _json_.SellStartTime
         if (_json_.SellValidTime === undefined) { throw new Error() }
@@ -814,6 +910,10 @@ export class ShopSellItemBean {
      */
     readonly SellCount: number
     /**
+     * 商品刷新类型
+     */
+    readonly SellRefreshType: EEnum.ESellRefreshType
+    /**
      * 商品开启时间
      */
     readonly SellStartTime: number
@@ -836,7 +936,7 @@ export class ShopSellItemBean {
     /**
      * 货币类型
      */
-    readonly CostType: number
+    readonly CostType: EEnum.EMoneyType
     /**
      * 初始价格
      */

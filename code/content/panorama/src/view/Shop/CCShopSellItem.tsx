@@ -1,14 +1,9 @@
 
 import React, { createRef, PureComponent } from "react";
+import { EEnum } from "../../../../../game/scripts/tscripts/shared/Gen/Types";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
-import { EMoneyType } from "../../game/service/account/CharacterDataComponent";
 import { TShopSellItem } from "../../game/service/shop/TShopSellItem";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { LogHelper } from "../../helper/LogHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
-import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
-import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 import { CCShopItem } from "./CCShopItem";
 import "./CCShopSellItem.less";
@@ -23,10 +18,22 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
         this.props.entity && this.props.entity.RegRef(this);
     }
 
+    onBtnBuyClick() {
+        const sellitem = this.GetStateEntity(this.props.entity)!;
+        if (sellitem.SellConfig.VipLimit == 1) {
+            let MemberShip = PlayerScene.Local.TCharacter.ActivityComp?.MemberShip;
+            if (!MemberShip?.IsVip()) {
+                // TipsHelper.showErrorMessage()
+                return;
+            }
+        }
+
+    }
 
     render() {
         const sellitem = this.GetStateEntity(this.props.entity)!;
         const sellinfo = sellitem.SellConfig;
+        const end_time = sellinfo.SellStartTime + sellinfo.SellValidTime;
         // 按钮类型
         let price = sellinfo.RealPrice || 0;
         let iOriginPrice = sellinfo.OriginPrice || 0;
@@ -35,85 +42,65 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
             price = sellinfo.OverSeaRealPrice || 0;
             iOriginPrice = sellinfo.OverSeaOriginPrice || 0;
         }
-        let buttonType = 0;// 人民币
-        let buttonID = "RMBBtn";
-        let sClass = "";
+        let buttonID = "";
         if (price == 0) {
-            buttonType = 1;//免费
             buttonID = "FreeBtn";
         }
-        else if (pay_type == "300001") {
-            buttonType = 2;// 月石
+        else if (sellinfo.CostType == EEnum.EMoneyType.MetaStone) {
             buttonID = "MoonBtn";
-            // sClass = "";
-            // if (moonstone < price) {
-            // 	sClass = "PriceNotEnought";
-            // 	onactive = () => {
-            // 		Popups.Show("moonstone_not_enough", {});
-            // 	};
-            // }
-        } else if (pay_type == "300002") {
-            buttonType = 3;
+        }
+        else if (sellinfo.CostType == EEnum.EMoneyType.StarStone) {
             buttonID = "StarBtn";
-            // sClass = "";
-            // if (starlight < price) {
-            // 	sClass = "PriceNotEnought";
-            // 	onactive = () => { };//TODO:星辉不足
-            // }
+        }
+        else if (sellinfo.CostType == EEnum.EMoneyType.Money) {
+            buttonID = "RMBBtn";
         }
         // 限购
         let bEnable = true;
-        let iLimitType = Number(limit_type) || 0;
-        let iBoughtCount = Number(bought_count) || 0;
-        let iLimitCount = Number(limit_count) || 0;
-        if (iLimitType > 0) {
-            bEnable = iBoughtCount < iLimitCount;
+        let iLimitCount = sellinfo.SellCount;
+        if (iLimitCount > 0) {
+            bEnable = sellitem.BuyCount < iLimitCount;
         }
-        if (vip == "1") {
-            bEnable &&= plus;
-        } else if (vip == "2") {
-            bEnable &&= plus_p;
-        }
-
-        let discont = 100 - price / iOriginPrice * 100;
-
+        let discont = 100 - sellinfo.Discount;
         return (
-            <Panel id="CC_ShopGoodItem" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
-                {/* 限购倒计时 */}
-                {end_time && <Countdown id="SaleCountingDown" className="HeadTag" endTime={Number(end_time) || 0} hittest={false}>
-                    <Label id="Timer" localizedText="{t:d:t:countdown_time}" />
-                    <Label id="LimitedSaleTime" localizedText="#LimitedSaleTime" />
-                </Countdown>}
-                {/* 期间限购 */}
-                {iLimitType > 0 &&
-                    <Panel id="SaleLimit" hittest={false}>
-                        <Label key={limit_type} localizedText={`#Shop_Goods_limit_${limit_type}`} dialogVariables={{ current: Number(bought_count) || 0, total: Number(limit_count) || 0 }} />
-                    </Panel>}
-                {/* 折扣 */}
-                {discont > 0 && discont < 100 &&
-                    <Panel id="Discount" hittest={false}>
-                        <Label key={limit_type} localizedText="-{d:discont}%" dialogVariables={{ discont: Math.round(discont) }} />
-                    </Panel>
-                }
-                {/* 免费标签 */}
-                {buttonType == 1 && <Panel id="FreeTag" className="HeadTag" hittest={false} >
-                    <Label localizedText="#Free" />
-                </Panel>}
+            <Panel className="CC_ShopSellItem" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 {/* 商品图 */}
-                <CCShopItem itemid={sellinfo.ItemConfigId} count={sellinfo.ItemCount} />
+                <CCShopItem itemid={sellinfo.ItemConfigId} count={sellinfo.ItemCount} >
+                    {/* 限购倒计时 */}
+                    {end_time > 0 &&
+                        <Countdown id="SaleCountingDown" className="HeadTag" endTime={Number(end_time) || 0} hittest={false}>
+                            <Label id="Timer" localizedText="{t:d:t:countdown_time}" />
+                            <Label id="LimitedSaleTime" localizedText="#LimitedSaleTime" />
+                        </Countdown>}
+                    {/* 期间限购 */}
+                    {iLimitCount > 0 &&
+                        <Panel id="SaleLimit" hittest={false}>
+                            <Label key={iLimitCount} localizedText={`#Shop_Goods_limit_${sellinfo.SellRefreshType}`} dialogVariables={{ current: sellitem.BuyCount || 0, total: iLimitCount || 0 }} />
+                        </Panel>}
+                    {/* 折扣 */}
+                    {discont > 0 && discont < 100 &&
+                        <Panel id="Discount" hittest={false}>
+                            <Label localizedText="-{d:discont}%" dialogVariables={{ discont: Math.round(discont) }} />
+                        </Panel>
+                    }
+                    {
+                        sellinfo.VipLimit == 1 &&
+                        <Panel id="VipLimit" hittest={false} />
+                    }
+                </CCShopItem>
                 {/* 购买按钮 */}
-                <Button id={buttonID} className={"ShopItemButton " + sClass} onactivate={onactive} enabled={bEnable}>
+                <Button className={CSSHelper.ClassMaker("ShopItemButton ", buttonID)} onactivate={() => this.onBtnBuyClick()} enabled={bEnable}>
                     {/* RMB */}
-                    {buttonType == 0 && <Label localizedText="#Shop_Buy_With_Money" dialogVariables={{ price: String(price) }} />}
+                    {buttonID == "RMBBtn" && <Label localizedText="#Shop_Buy_With_Money" dialogVariables={{ price: String(price) }} />}
                     {/* Free */}
-                    {buttonType == 1 && <Label localizedText="#DialogBox_Rcv" />}
+                    {buttonID == "FreeBtn" && <Label localizedText="#DialogBox_Rcv" />}
                     {/* Moon */}
-                    {buttonType == 2 && <Panel id="MoonWithNum" hittest={false}>
+                    {buttonID == "MoonBtn" && <Panel id="MoonWithNum" hittest={false}>
                         <Image />
                         <Label text={price} />
                     </Panel>}
                     {/* Star */}
-                    {buttonType == 3 && <Panel id="StarWithNum" hittest={false}>
+                    {buttonID == "StarBtn" && <Panel id="StarWithNum" hittest={false}>
                         <Image />
                         <Label text={price} />
                     </Panel>}

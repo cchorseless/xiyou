@@ -5,7 +5,7 @@ import { ET, registerET } from "../../../libs/Entity";
 export class TShopSellItem extends ET.Entity {
     public ConfigId: number;
     public ShopId: number;
-    public LeftCount: number;
+    public BuyCount: number;
     public SellConfig: Shop.ShopSellItemBean;
 
 }
