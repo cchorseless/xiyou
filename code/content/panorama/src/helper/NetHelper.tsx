@@ -23,7 +23,22 @@ export module NetHelper {
             data: data,
             hasCB: Boolean(cb),
         });
-        // LogHelper.print("SendToLua:", protocol);
+    }
+    /**请求CSharp服务器数据 */
+    export function SendToCSharp(protocol: string, data: any = null, cb: (event: JS_TO_LUA_DATA) => void | null = null as any, context: any = null) {
+        if (cb != null) {
+            let eventID = GameEvents.Subscribe(protocol, (event: JS_TO_LUA_DATA) => {
+                // LogHelper.print(event.protocol);
+                cb.call(context, event);
+                GameEvents.Unsubscribe(eventID);
+            });
+        }
+        GameEvents.SendCustomGameEventToServer("JS_TO_LUA_EVENT", {
+            protocol: protocol,
+            data: data,
+            hasCB: Boolean(cb),
+            isawait: true,
+        });
     }
 
     export async function SendToLuaAsync<T>(protocol: string, data: T) {

@@ -365,6 +365,19 @@ export class GameEntityRoot extends ET.EntityRoot {
         if (event.protocol == null) {
             return;
         }
+        event.sendClientCB = () => {
+            if (event.hasCB) {
+                let player = PlayerResource.GetPlayer(event.PlayerID);
+                if (player) {
+                    delete event["hasCB"];
+                    delete event["PlayerID"];
+                    // 处理复杂数据类型，数据类型
+                    if (event.data != null) {
+                    }
+                    CustomGameEventManager.Send_ServerToPlayer<JS_TO_LUA_DATA>(player, event.protocol, event);
+                }
+            }
+        }
         let allCB = globalData.allCustomProtocolEvent[event.protocol];
         if (allCB && allCB.length > 0) {
             allCB.forEach((cbinfo) => {
@@ -382,18 +395,11 @@ export class GameEntityRoot extends ET.EntityRoot {
                     GameRequest.GetInstance().SendErrorLog(nextCall);
                     return;
                 }
-                if (event.hasCB) {
-                    let player = PlayerResource.GetPlayer(event.PlayerID);
-                    if (player) {
-                        delete event["hasCB"];
-                        delete event["PlayerID"];
-                        // 处理复杂数据类型，数据类型
-                        if (event.data != null) {
-                        }
-                        CustomGameEventManager.Send_ServerToPlayer<JS_TO_LUA_DATA>(player, event.protocol, event);
-                    }
+                if (!event.isawait && event.sendClientCB) {
+                    event.sendClientCB();
                 }
             });
         }
     }
+
 }

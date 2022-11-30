@@ -12,6 +12,10 @@ export module EventHelper {
     }
 
     function addEvent() {
+        GameEvents.Subscribe("custom_npc_first_spawned", (e) => {
+            LogHelper.print(111111);
+            LogHelper.print(e)
+        })
         GameEvents.Subscribe(GameEnum.GameEvent.game_rules_state_change, (e) => {
             $.Msg("Game Enter State", Game.GetState());
         });

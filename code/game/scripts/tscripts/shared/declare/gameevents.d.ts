@@ -17,9 +17,14 @@ declare interface JS_TO_LUA_DATA extends LUA_TO_LUA_DATA {
     message?: string;
     /**是否有回调 */
     hasCB?: boolean;
+    /**异步处理 */
+    isawait?: boolean;
+    /**通知客户端函数 */
+    sendClientCB?: () => void;
     /**服务器模拟自己触发的事件 */
     IsfromServer?: boolean;
 }
+
 
 declare interface CLIENT_DATA<T> extends JS_TO_LUA_DATA {
     data?: T;

@@ -37,6 +37,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         this.panel_base = createRef<Panel>();
         this.panel_allpanel = createRef<Panel>();
         this.panel_alldialog = createRef<Panel>();
+
     };
 
 

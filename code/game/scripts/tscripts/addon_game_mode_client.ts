@@ -23,7 +23,6 @@ export class GameMode_Client extends SingletonClass {
         EventHelper.addGameEvent(this, "call_get_ability_data", this.OnCall_get_ability_data);
         EventHelper.addGameEvent(this, "call_get_unit_data", this.OnCall_get_unit_data);
         EventHelper.addGameEvent(this, "call_get_player_data", this.OnCall_get_player_data);
-
     }
 
     private OnNPCSpawned(e: NpcSpawnedEvent) {
