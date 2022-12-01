@@ -10,6 +10,7 @@ import { DifficultyState } from "../../System/Difficulty/DifficultyState";
 import { PlayerConfig } from "../../../shared/PlayerConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
+import { EEnum } from "../../../shared/Gen/Types";
 
 @reloadable
 export class PlayerDataComponent extends ET.Component {
@@ -60,11 +61,11 @@ export class PlayerDataComponent extends ET.Component {
 
     isEnoughItem(type: number, count: number) {
         switch (type) {
-            case GameEnum.Item.EItemIndex.Gold:
+            case EEnum.EMoneyType.Gold:
                 return this.gold + count >= 0;
-            case GameEnum.Item.EItemIndex.Wood:
+            case EEnum.EMoneyType.Wood:
                 return this.wood + count >= 0;
-            case GameEnum.Item.EItemIndex.Food:
+            case EEnum.EMoneyType.Food:
                 return this.food + count >= 0;
         }
         return false;
@@ -72,13 +73,13 @@ export class PlayerDataComponent extends ET.Component {
 
     changeItem(type: number, count: number) {
         switch (type) {
-            case GameEnum.Item.EItemIndex.Gold:
+            case EEnum.EMoneyType.Gold:
                 this.gold += count;
                 break;
-            case GameEnum.Item.EItemIndex.Wood:
+            case EEnum.EMoneyType.Wood:
                 this.wood += count;
                 break;
-            case GameEnum.Item.EItemIndex.Food:
+            case EEnum.EMoneyType.Food:
                 this.food += count;
                 break;
         }
@@ -89,8 +90,8 @@ export class PlayerDataComponent extends ET.Component {
     }
 
     addMoneyRoundStart(gold: number, wood: number) {
-        this.changeItem(GameEnum.Item.EItemIndex.Gold, gold);
-        this.changeItem(GameEnum.Item.EItemIndex.Wood, wood);
+        this.changeItem(EEnum.EMoneyType.Gold, gold);
+        this.changeItem(EEnum.EMoneyType.Wood, wood);
         this.updateNetTable();
     }
 
@@ -107,8 +108,8 @@ export class PlayerDataComponent extends ET.Component {
         this.timePerInterval = TimerHelper.addTimer(
             15,
             () => {
-                this.changeItem(GameEnum.Item.EItemIndex.Gold, this.perIntervalGold);
-                this.changeItem(GameEnum.Item.EItemIndex.Wood, this.perIntervalWood);
+                this.changeItem(EEnum.EMoneyType.Gold, this.perIntervalGold);
+                this.changeItem(EEnum.EMoneyType.Wood, this.perIntervalWood);
                 this.updateNetTable();
                 return 15;
             },
@@ -148,8 +149,8 @@ export class PlayerDataComponent extends ET.Component {
                 EventHelper.ErrorMessage("wood not enough", playerid);
                 return;
             }
-            this.changeItem(GameEnum.Item.EItemIndex.Gold, -this.popuLevelUpCostGold);
-            this.changeItem(GameEnum.Item.EItemIndex.Wood, -this.popuLevelUpCostWood);
+            this.changeItem(EEnum.EMoneyType.Gold, -this.popuLevelUpCostGold);
+            this.changeItem(EEnum.EMoneyType.Wood, -this.popuLevelUpCostWood);
             this.applyPopuLevelUp(1);
             this.updateNetTable();
         });
@@ -164,7 +165,7 @@ export class PlayerDataComponent extends ET.Component {
                 EventHelper.ErrorMessage("gold not enough", playerid);
                 return;
             }
-            this.changeItem(GameEnum.Item.EItemIndex.Gold, -this.techLevelUpCostGold);
+            this.changeItem(EEnum.EMoneyType.Gold, -this.techLevelUpCostGold);
             this.applyTechLevelUp(1);
             this.updateNetTable();
         });

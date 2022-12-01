@@ -9,6 +9,7 @@ import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
 
 import "./CCChallengeAbilityIcon.less";
+import { EEnum } from "../../../../../game/scripts/tscripts/shared/Gen/Types";
 
 export interface ICCChallengeAbilityIcon {
     abilityname: string
@@ -48,7 +49,7 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
                 <CCLabel type="AbilityName" text={$.Localize("#DOTA_Tooltip_ability_" + abilityname)} horizontalAlign={"center"} />
                 {
                     ability && <CCPanel flowChildren="right" horizontalAlign="center">
-                        <CCIcon_CoinType width="20px" height="20px" cointype={GameEnum.Item.EItemIndex[ability?.costType as any] as any} />
+                        <CCIcon_CoinType width="20px" height="20px" cointype={EEnum.EMoneyType[ability?.costType as any] as any} />
                         <CCLabel type="Gold" text={`${ability?.costCount}`} fontSize={'18px'} />
                     </CCPanel>
                 }

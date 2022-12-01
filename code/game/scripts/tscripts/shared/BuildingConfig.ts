@@ -21,6 +21,14 @@ export module BuildingConfig {
 
     export const MODEL_SCALE = [1, 1.2, 1.4, 1.6, 1.8, 2];
 
+    export enum ERarity {
+        D = 1,
+        C = 2,
+        B = 3,
+        A = 4,
+        S = 10,
+        SS = 11,
+    }
 
     /**错误信息 */
     export enum ErrorCode {

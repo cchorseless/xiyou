@@ -1,4 +1,5 @@
 import { GameEnum } from "../../../../game/scripts/tscripts/shared/GameEnum";
+import { EEnum } from "../../../../game/scripts/tscripts/shared/Gen/Types";
 
 
 export module PathHelper {
@@ -16,9 +17,9 @@ export module PathHelper {
     }
     export function getMoneyIcon(str: number) {
         switch (str) {
-            case GameEnum.Item.EItemIndex.Gold:
+            case EEnum.EMoneyType.Gold:
                 return `common/money.png`;
-            case GameEnum.Item.EItemIndex.Wood:
+            case EEnum.EMoneyType.Wood:
                 return `common/wood_png.png`;
             default:
                 return "";

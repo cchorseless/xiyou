@@ -12,13 +12,14 @@ import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_test } from "../../../modifier/modifier_test";
 import { ActiveRootAbility } from "../../ActiveRootAbility";
+import { EEnum } from "../../../../shared/Gen/Types";
 
 @registerAbility()
 export class courier_challenge_gold extends ActiveRootAbility {
 
 
     @serializeDomainProps()
-    costType: number = GameEnum.Item.EItemIndex.Gold;
+    costType: number = EEnum.EMoneyType.Gold;
     @serializeDomainProps()
     costCount: number = 0;
     updateNetTable() {

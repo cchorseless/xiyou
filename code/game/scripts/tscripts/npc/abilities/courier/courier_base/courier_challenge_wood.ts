@@ -10,6 +10,7 @@ import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility } from "../../../entityPlus/Base_Plus";
 import { modifier_task } from "../../../modifier/modifier_task";
 import { ActiveRootAbility } from "../../ActiveRootAbility";
+import { EEnum } from "../../../../shared/Gen/Types";
 
 /**删除 */
 @registerAbility()
@@ -36,7 +37,7 @@ export class courier_challenge_wood extends ActiveRootAbility {
     }
 
     @serializeDomainProps()
-    costType: number = GameEnum.Item.EItemIndex.Gold;
+    costType: number = EEnum.EMoneyType.Gold;
     @serializeDomainProps()
     costCount: number = 0;
     updateNetTable() {

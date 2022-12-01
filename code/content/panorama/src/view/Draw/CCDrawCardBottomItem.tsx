@@ -32,7 +32,6 @@ export class CCDrawCardBottomItem extends CCPanel<ICCDrawCardBottomItem> {
                     <CCIconButton marginLeft={"10px"} icon={<CCIcon_Share />} onactivate={() => { this.props.onShare() }} tooltip={"#todo"} />
                     <CCIconButton icon={<CCIcon_Wanted />} onactivate={() => { this.props.onWanted() }} tooltip={"#todo"} />
                 </CCPanel>
-
                 <CCPanel horizontalAlign="center" flowChildren="right" marginTop={"10px"}>
                     {
                         [1, 2, 3, 6].map((a, i) => {

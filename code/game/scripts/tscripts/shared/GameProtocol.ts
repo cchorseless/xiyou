@@ -9,7 +9,6 @@ export module GameProtocol {
         static readonly Ping = "/Ping";
         static readonly LoginOut = "/LoginOut";
         static readonly SetServerKey = "/SetServerKey";
-
         static readonly Buy_ShopItem = "/Buy_ShopItem";
     }
 

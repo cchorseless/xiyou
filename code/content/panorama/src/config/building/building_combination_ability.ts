@@ -48,6 +48,7 @@ export interface OBJ_2_1 {
 "index" :string ,
 "active_count" :string ,
 "acitve_common_effect" :string ,
+"heroid" :string ,
 "Abilityid" :string ,
 [k:string] : string }
 }

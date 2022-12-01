@@ -2867,12 +2867,4 @@ export module GameEnum {
             modifier_tower_aura = "modifier_tower_aura",
         }
     }
-    /**道具 */
-    export namespace Item {
-        export enum EItemIndex {
-            Gold = 1,
-            Wood = 2,
-            Food = 3,
-        }
-    }
 }

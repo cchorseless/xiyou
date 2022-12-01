@@ -7,6 +7,7 @@ import { DifficultyState } from "../../../../rules/System/Difficulty/DifficultyS
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { ActiveRootAbility } from "../../ActiveRootAbility";
+import { EEnum } from "../../../../shared/Gen/Types";
 
 @registerAbility()
 export class courier_challenge_equip extends ActiveRootAbility {
@@ -31,7 +32,7 @@ export class courier_challenge_equip extends ActiveRootAbility {
         return UnitFilterResult.UF_SUCCESS;
     }
     @serializeDomainProps()
-    costType: number = GameEnum.Item.EItemIndex.Wood;
+    costType: number = EEnum.EMoneyType.Wood;
     @serializeDomainProps()
     costCount: number = 0;
     updateNetTable() {

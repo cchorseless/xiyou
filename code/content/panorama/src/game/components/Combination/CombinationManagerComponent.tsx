@@ -28,7 +28,15 @@ export class CombinationManagerComponent extends ET.Component {
         }
 
     }
-
+    getCombinationByCombinationName(_comb: string) {
+        if (_comb == null) return;
+        for (let entityid of this.allCombination) {
+            let entity = this.GetChild<ECombination>(entityid);
+            if (entity && entity.combinationName == _comb) {
+                return entity
+            }
+        }
+    }
     getAllCombination() {
         let r: { [k: string]: ECombination[] } = {};
         this.allCombination.forEach(entityid => {

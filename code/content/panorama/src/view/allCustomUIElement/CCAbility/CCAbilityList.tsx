@@ -1,13 +1,14 @@
 import React, { createRef, PureComponent } from "react";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { NodePropsData } from "../../../libs/BasePureComponent";
-
-import "./CCAbilityList.less";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 import { CCAbilityInfoDialog } from "./CCAbilityInfoDialog";
+import "./CCAbilityList.less";
+import { TimerHelper } from "../../../helper/TimerHelper";
+import { FuncHelper } from "../../../helper/FuncHelper";
 interface ICCAbilityList extends NodePropsData {
     noshowability?: number[];
 }
@@ -19,15 +20,16 @@ export class CCAbilityList extends CCPanel<ICCAbilityList> {
     }
     onStartUI() {
         this.hideAbility()
-
     }
+    dealList: number[] = [];
     private hideAbility() {
         let mainpanel = CCPanel.GetInstanceByName<CCMainPanel>("CCMainPanel");
         for (let i = 0; i < 15; i++) {
             let panel = this.abilityList.current!.FindChild("Ability" + i);
-            if (panel == null) {
-                break;
+            if (panel == null || this.dealList.includes(i)) {
+                continue;
             }
+            this.dealList.push(i)
             let abilityButton = panel.FindChildTraverse("AbilityButton")!;
             mainpanel.RegCustomToolTip(abilityButton, CCAbilityInfoDialog, () => {
                 let selectedEntityid = Players.GetLocalPlayerPortraitUnit();;
@@ -42,7 +44,19 @@ export class CCAbilityList extends CCPanel<ICCAbilityList> {
                 panel.visible = false;
             }
         }
-
+        if (this.props.noshowability) {
+            let isFinish = true;
+            this.props.noshowability.forEach(i => {
+                if (!this.dealList.includes(i)) {
+                    isFinish = false;
+                }
+            })
+            if (!isFinish) {
+                TimerHelper.AddTimer(0.1, FuncHelper.Handler.create(this, () => {
+                    this.hideAbility();
+                }))
+            }
+        }
     }
 
     render() {

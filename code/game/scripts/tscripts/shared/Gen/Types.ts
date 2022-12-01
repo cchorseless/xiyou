@@ -109,6 +109,14 @@ export enum EMoneyType {
      */
     Wood = 2,
     /**
+     * 食物
+     */
+    Food = 3,
+    /**
+     * 人口
+     */
+    Population = 4,
+    /**
      * 原石
      */
     MetaStone = 101,

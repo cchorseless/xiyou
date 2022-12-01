@@ -5580,7 +5580,7 @@
 "shop_shopconfig":[
   {
     "id": 10001,
-    "isVaild": 0,
+    "isVaild": 1,
     "ShopType": 0,
     "ShopName": "",
     "ShopRefreshType": 0,
@@ -5895,7 +5895,7 @@
   },
   {
     "id": 10002,
-    "isVaild": 0,
+    "isVaild": 1,
     "ShopType": 0,
     "ShopName": "",
     "ShopRefreshType": 0,
@@ -6229,7 +6229,7 @@
   },
   {
     "id": 10003,
-    "isVaild": 0,
+    "isVaild": 1,
     "ShopType": 0,
     "ShopName": "",
     "ShopRefreshType": 0,

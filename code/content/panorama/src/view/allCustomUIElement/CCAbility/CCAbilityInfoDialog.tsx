@@ -7,9 +7,11 @@ import { AbilityHelper, ItemHelper, UnitHelper } from "../../../helper/DotaEntit
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
-
-import "./CCAbilityInfoDialog.less";
 import { CCPanelBG } from "../CCPanel/CCPanelPart";
+import { PlayerScene } from "../../../game/components/Player/PlayerScene";
+import { CCUnitSmallIcon } from "../CCUnit/CCUnitSmallIcon";
+import "./CCAbilityInfoDialog.less";
+import { BuildingConfig } from "../../../../../../game/scripts/tscripts/shared/BuildingConfig";
 
 interface ICCAbilityInfoDialog extends NodePropsData {
     abilityname: string,
@@ -116,6 +118,20 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         const castentityindex = this.props.castentityindex!;
         const tData = KVHelper.KVAbilitys()[abilityname] || {};
         const iLevel = this.props.level || -1;
+        const combinationLabel = tData.CombinationLabel;
+        const entity = PlayerScene.Local.CombinationManager.getCombinationByCombinationName(combinationLabel)
+        const herolist: string[] = [];
+        for (let k in KVHelper.KVData().building_combination_ability) {
+            let data = KVHelper.KVData().building_combination_ability[k];
+            if (data.relation == combinationLabel && data.heroid && !herolist.includes(data.heroid)) {
+                herolist.push(data.heroid);
+            }
+        }
+        herolist.sort((a, b) => {
+            const r_a = BuildingConfig.ERarity[KVHelper.KVData().building_unit_tower[a].Rarity as any] as any;
+            const r_b = BuildingConfig.ERarity[KVHelper.KVData().building_unit_tower[b].Rarity as any] as any;
+            return r_a - r_b
+        });
         // const mode = this.props.mode;
         // const showextradescription = this.props.showextradescription!;
         // const onlynowlevelvalue = this.props.onlynowlevelvalue!;
@@ -128,7 +144,6 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         let iBehavior = iAbilityIndex != -1 ? Abilities.GetBehavior(iAbilityIndex) : AbilityHelper.SBehavior2IBehavior(tData.AbilityBehavior || "");
         let sCastType = AbilityHelper.getCastType(iBehavior);
         dialogVariables['casttype'] = $.Localize("#" + sCastType);
-
         let iTeam = iAbilityIndex != -1 ? Abilities.GetAbilityTargetTeam(iAbilityIndex) : AbilityHelper.STeam2ITeam(tData.AbilityUnitTargetTeam || "");
         let iType = iAbilityIndex != -1 ? Abilities.GetAbilityTargetType(iAbilityIndex) : AbilityHelper.SType2IType(tData.AbilityUnitTargetType || "");
         let sTargetType = AbilityHelper.getTargetType(iTeam, iType);
@@ -155,7 +170,6 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                 ScepterUpgradable = false;
             }
         }
-
         // 属性
         let aValueNames = AbilityHelper.GetSpecialNames(abilityname, castentityindex);
         let sAttributes = "";
@@ -238,7 +252,6 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         let iActiveDescriptionLine = tData.ActiveDescriptionLine || 1;
         let sLore = "#DOTA_Tooltip_ability_" + abilityname + "_Lore";
         dialogVariables['lore'] = $.Localize(sLore);
-
         let sExtraDescription = "";
         const iMaxNote = 13;
         for (let i = 0; i < iMaxNote; i++) {
@@ -277,7 +290,6 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
             sCooldownDescription = "<span class='GameplayValues'>" + sCooldownDescription + "</span>";
             dialogVariables['cooldown'] = sCooldownDescription;
         }
-
         // 魔法消耗
         let fCurrentManaCost = iAbilityIndex != -1 ? AbilityHelper.GetLevelManaCost(iAbilityIndex) : 0;
         let aManaCosts = AbilityHelper.StringToValues(tData.AbilityManaCost || "");
@@ -304,11 +316,8 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
             sManaCostDescription = "<span class='GameplayValues'>" + sManaCostDescription + "</span>";
             dialogVariables['manacost'] = sManaCostDescription;
         }
-
         dialogVariables['current_manacost'] = fCurrentManaCost.toFixed(0);
         dialogVariables['current_cooldown'] = Number(fCurrentCooldown.toFixed(2)).toString();
-
-
         return (this.__root___isValid &&
             <Panel id="CC_AbilityInfoDialog" ref={this.__root__}  {...this.initRootAttrs()}>
                 <CCPanelBG id="PanelBg" type="ToolTip">
@@ -364,6 +373,14 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                         <Label id="AbilityLore" className={CSSHelper.ClassMaker({ 'Hidden': $.Localize("#" + sLore) == "#" + sLore || $.Localize("#" + sLore) == "" })} localizedText="#DOTA_AbilityTooltip_Lore" html={true} dialogVariables={dialogVariables} />
                         {/* <Label id="AbilityUpgradeLevel" className={CSSHelper.ClassMaker({ 'Hidden': iAbilityLearnResult != AbilityLearnResult_t.ABILITY_CANNOT_BE_UPGRADED_REQUIRES_LEVEL })} localizedText="#DOTA_AbilityTooltip_UpgradeLevel" html={true} /> */}
                     </Panel>
+                    <CCPanel id="AbilityCombination" flowChildren="right-wrap">
+                        {herolist.length > 0 && entity && herolist.map(
+                            (name, index) => {
+                                return <CCUnitSmallIcon key={index + ""} itemname={name} Rarity={KVHelper.KVData().building_unit_tower[name].Rarity} brightness={entity.uniqueConfigList.includes(name) ? "1" : "0.1"} />
+                            })}
+                    </CCPanel>
+                    {this.props.children}
+                    {this.__root___childs}
                 </CCPanelBG>
             </Panel>)
     }

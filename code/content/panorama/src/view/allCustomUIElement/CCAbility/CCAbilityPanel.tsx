@@ -212,7 +212,6 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                                 }}
                             onmouseout={(self) => {
 
-
                             }} >
                             <Panel id="LevelUpButton">
                                 <Panel id="LevelUpIcon" />
