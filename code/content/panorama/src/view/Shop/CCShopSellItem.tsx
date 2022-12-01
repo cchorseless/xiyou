@@ -1,12 +1,16 @@
 
 import React, { createRef, PureComponent } from "react";
+import { GameProtocol } from "../../../../../game/scripts/tscripts/shared/GameProtocol";
 import { EEnum } from "../../../../../game/scripts/tscripts/shared/Gen/Types";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { TShopSellItem } from "../../game/service/shop/TShopSellItem";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCWaitProgressDialog } from "../Common/CCWaitProgressDialog";
+import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCShopItem } from "./CCShopItem";
+import { CCShopSellDetailDialog } from "./CCShopSellDetailDialog";
 import "./CCShopSellItem.less";
 
 interface ICCShopSellItem {
@@ -27,9 +31,8 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
                 // TipsHelper.showErrorMessage()
                 return;
             }
-            // NetHelper.SendToLua(this.props.entity
+            CCMainPanel.GetInstance()!.addOnlyPanel(CCShopSellDetailDialog, { entity: this.props.entity })
         }
-
     }
 
     render() {

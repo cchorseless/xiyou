@@ -1,0 +1,138 @@
+.CC_ShopSellDetailDialog {
+    #PopUpBg {
+        width: 800px;
+        height: 520px;
+        padding: 7px;
+
+        #ShopDetailDesc {
+            height: 290px;
+            width: 400px;
+            margin-left: 358px;
+            margin-top: 60px;
+            color: #FFF;
+            font-size: 20px;
+            overflow: squish scroll;
+        }
+
+        #NumberEntry {
+            align: center bottom;
+            // margin-right: 150px;
+            margin-bottom: 88px;
+            flow-children: right;
+
+            #NumberAdd,
+            #NumberReduce {
+                width: 43px;
+                height: 43px;
+                vertical-align: center;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+
+                &:enabled {
+                    .CommonButtonEffect();
+                }
+
+                &:disabled {
+                    saturation: 0;
+                    brightness: .4;
+                }
+            }
+
+            #NumberAdd {
+                background-image: url("file://{images}/custom_game/common/btn_add.png");
+            }
+
+            #NumberReduce {
+                background-image: url("file://{images}/custom_game/common/btn_reduce.png");
+            }
+
+            TextEntry {
+                width: 100px;
+                margin: 0px 8px;
+                vertical-align: center;
+            }
+        }
+
+        .BuyButton {
+            width: 180px;
+            height: 51px;
+            align: center bottom;
+            // margin-right: 160px;
+            margin-bottom: 24px;
+            flow-children: right;
+            background-image: url("file://{images}/custom_game/common/btn_gold.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+
+            &:enabled {
+                .CommonButtonEffect();
+            }
+
+            &:disabled {
+                saturation: 0;
+                brightness: .5;
+            }
+
+            Label {
+                align: center center;
+                font-size: 16px;
+                color: #FFFFFF;
+                text-shadow: 0px 0px 1px 2 rgba(0, 0, 0, 0.6);
+            }
+
+            &.RMBBtn {
+                background-image: url("file://{images}/custom_game/common/btn_purple.png");
+            }
+
+            &.FreeBtn {
+                background-image: url("file://{images}/custom_game/hud_shop/combine_btn.png");
+            }
+
+            &.MoonBtn {
+                background-image: url("file://{images}/custom_game/common/btn_gold.png");
+
+                &.PriceNotEnought {
+                    Label {
+                        color: red;
+                    }
+                }
+
+                #MoonWithNum {
+                    align: center center;
+                    flow-children: right;
+
+                    Image {
+                        width: 21px;
+                        height: 21px;
+                        background-image: url("file://{images}/custom_game/icons/moon.png");
+                        background-repeat: no-repeat;
+                        background-size: 100% 100%;
+                    }
+
+                    Label {
+                        margin-left: 6px;
+                    }
+                }
+            }
+
+            &.StarBtn {
+                #StarWithNum {
+                    align: center center;
+                    flow-children: right;
+
+                    Image {
+                        width: 21px;
+                        height: 21px;
+                        background-image: url("file://{images}/custom_game/icons/star.png");
+                        background-repeat: no-repeat;
+                        background-size: 100% 100%;
+                    }
+
+                    Label {
+                        margin-left: 6px;
+                    }
+                }
+            }
+        }
+    }
+}

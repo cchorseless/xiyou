@@ -51,6 +51,7 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
         }
     }
 
+
     defaultClass() { return ""; };
     defaultStyle(): Partial<ICCPanelProps & VCSSStyleDeclaration & T & Omit<PanelAttributes, "ref">> | any { return {}; };
     __root___isValid: boolean;

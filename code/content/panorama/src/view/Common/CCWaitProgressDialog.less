@@ -1,0 +1,41 @@
+.CC_WaitProgressDialog {
+    #PopUpBg {
+        width: 452px;
+        height: 288px;
+
+        .Pleasewait {
+            align: center center;
+            margin: 8px;
+            min-width: 200px;
+            min-height: 200px;
+            flow-children: down;
+
+            #waitMsg {
+                horizontal-align: center;
+                font-size: 18px;
+                color: #FFF;
+            }
+
+            #refresh {
+                width: 36px;
+                height: 36px;
+                align: center center;
+                background-image: url("file://{images}/control_icons/refresh.png");
+                background-size: 100%;
+                background-repeat: no-repeat;
+                animation-name: RequestAnimation;
+                animation-duration: 0.5s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                animation-direction: reverse;
+            }
+        }
+
+        #Msg {
+            align: center center;
+            margin: 16px;
+            font-size: 18px;
+            color: #FFF;
+        }
+    }
+}
