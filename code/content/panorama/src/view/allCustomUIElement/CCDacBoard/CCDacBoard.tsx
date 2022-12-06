@@ -1,6 +1,6 @@
 import React from "react";
 import { CCAbilityList } from "../CCAbility/CCAbilityList";
-import { CCInventory } from "../CCInventory/CCInventory";
+import { CCInventory } from "../CCInventory/CCInventory2";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { CCBuffList } from "./CCBuffList";
 import { CCHealthMana } from "./CCHealthMana";

@@ -46,12 +46,12 @@ export class CCSwitch extends CCPanel<ICCSwitch, Button> {
 			}
 		}
 	};
-	componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
-		if (this.props.checked != undefined && this.__root__.current && this.props.checked != this.state.checked) {
-			this.setState({ checked: this.props.checked });
-			this.updateCheck(this.__root__.current, this.props.checked);
-		}
-	}
+	// componentDidUpdate(prevProps: any, prevState: any, snapshot?: any) {
+	// 	if (this.props.checked != undefined && this.__root__.current && this.props.checked != this.state.checked) {
+	// 		this.setState({ checked: this.props.checked });
+	// 		this.updateCheck(this.__root__.current, this.props.checked);
+	// 	}
+	// }
 	render() {
 		return (this.__root___isValid &&
 			<Button  {...this.initRootAttrs()} ref={this.__root__} onload={self => this.updateCheck(self, Boolean(this.state.checked))} onactivate={self => {

@@ -1,4 +1,5 @@
 import { GameEnum } from "../../../../game/scripts/tscripts/shared/GameEnum";
+import { ShareConfig } from "../../../../game/scripts/tscripts/shared/ShareConfig";
 import { FuncHelper } from "./FuncHelper";
 import { KVHelper } from "./KVHelper";
 import { LogHelper } from "./LogHelper";
@@ -1190,11 +1191,7 @@ export module ItemHelper {
     }
 
     export function GetItemRarity(sItemName: string) {
-        let iRarity = Number(GetItemValue(sItemName, "Rarity"));
-        if (iRarity == undefined || iRarity == null) {
-            return -1;
-        }
-        return iRarity;
+        return ShareConfig.ToRarityNumber(GetItemValue(sItemName, "Rarity") as any);
     }
 
     export function GetItemRecipes(sItemName: string) {

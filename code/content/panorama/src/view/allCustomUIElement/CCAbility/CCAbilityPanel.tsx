@@ -472,7 +472,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         const dialogVariables = this.GetState("dialogVariables", {});
         return (
             this.__root___isValid &&
-            <Panel id="CC_AbilityPanel" ref={this.__root__} {...this.initRootAttrs()}>
+            <Panel ref={this.__root__} {...this.initRootAttrs()}>
                 <Panel id="ButtonAndLevel" require-composition-layer="true" always-cache-composition-layer="true" hittest={false}>
                     <Panel id="LevelUpBurstFXContainer" hittest={false}>
                         {!m_is_item &&
@@ -502,7 +502,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                             <Panel id="LearnModeButton" hittest={false} />
                         </Button>
                         <Panel id="LevelUpLight" hittest={false} />
-                        <Panel hittest={false} id="ButtonWell">
+                        <Panel hittest={false} id="ButtonWell" >
                             <Panel hittest={false} id="AutocastableBorder" />
                             <Panel id="AutoCastingContainer" hittest={false}>
                                 {/* {!m_is_item &&
@@ -566,9 +566,10 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                                         // GameUI.CustomUIConfig().HideAbilityTooltip(self);
                                     }} >
                                     <DOTAAbilityImage id="AbilityImage" showtooltip={false} hittest={false} ref={this.AbilityImage} />
-                                    <DOTAItemImage id="ItemImage" contextEntityIndex={overrideentityindex} scaling="stretch-to-fit-x-preserve-aspect" showtooltip={false} hittest={false} hittestchildren={false} />
+                                    {/* scaling="stretch-to-fit-x-preserve-aspect" */}
+                                    <DOTAItemImage id="ItemImage" contextEntityIndex={overrideentityindex} showtooltip={false} hittest={false} hittestchildren={false} />
                                     <Panel hittest={false} id="AbilityBevel" />
-                                    <Panel hittest={false} id="ShineContainer">
+                                    <Panel hittest={false} id="ShineContainer" >
                                         <Panel hittest={false} id="Shine" />
                                     </Panel>
                                     <Panel id="TopBarUltimateCooldown" hittest={false} />

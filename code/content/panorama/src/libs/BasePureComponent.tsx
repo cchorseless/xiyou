@@ -160,10 +160,10 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
      * @returns
      */
     public GetState<T>(key: string, defaultV: T = null as any) {
-        if (defaultV != null) {
-            this.UpdateState({ key: defaultV })
-        }
         let obj = ((this.state || {}) as any)[key];
+        if (obj == null && defaultV != null) {
+            obj = defaultV;
+        }
         return obj as T;
     }
 

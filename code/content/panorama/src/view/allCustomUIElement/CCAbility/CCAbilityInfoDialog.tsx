@@ -12,6 +12,7 @@ import { PlayerScene } from "../../../game/components/Player/PlayerScene";
 import { CCUnitSmallIcon } from "../CCUnit/CCUnitSmallIcon";
 import "./CCAbilityInfoDialog.less";
 import { BuildingConfig } from "../../../../../../game/scripts/tscripts/shared/BuildingConfig";
+import { ShareConfig } from "../../../../../../game/scripts/tscripts/shared/ShareConfig";
 
 interface ICCAbilityInfoDialog extends NodePropsData {
     abilityname: string,
@@ -129,8 +130,8 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
             }
         }
         herolist.sort((a, b) => {
-            const r_a = BuildingConfig.ERarity[KVHelper.KVData().building_unit_tower[a].Rarity as any] as any;
-            const r_b = BuildingConfig.ERarity[KVHelper.KVData().building_unit_tower[b].Rarity as any] as any;
+            const r_a = ShareConfig.ToRarityNumber(KVHelper.KVData().building_unit_tower[a].Rarity as any);
+            const r_b = ShareConfig.ToRarityNumber(KVHelper.KVData().building_unit_tower[b].Rarity as any);
             return r_a - r_b
         });
         // const mode = this.props.mode;

@@ -3,7 +3,7 @@ import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCAbilityPanel, ICCAbilityPanel } from "../CCAbility/CCAbilityPanel";
 import { CCPanel } from "../CCPanel/CCPanel";
-import "./CCInventorySlot.less";
+// import "./CCInventorySlot.less";
 interface ICCInventorySlot extends ICCAbilityPanel {
     isBackpack?: boolean,
 }
@@ -13,7 +13,7 @@ export class CCInventorySlot extends CCPanel<ICCInventorySlot> {
     static defaultProps = {
         overrideentityindex: -1,
         overridedisplaykeybind: DOTAKeybindCommand_t.DOTA_KEYBIND_NONE,
-        draggable: false,
+        draggable: true,
         dragtype: "InventorySlot",
         slot: -1,
         isBackpack: false,
@@ -30,8 +30,7 @@ export class CCInventorySlot extends CCPanel<ICCInventorySlot> {
             this.__root___isValid &&
             <Panel id="CC_InventorySlot" ref={this.__root__} {...this.initRootAttrs()}>
                 <CCAbilityPanel
-                    id="AbilityPanel"
-                    className={CSSHelper.ClassMaker("InventoryItem", { "BackpackSlot": isBackpack })}
+                    className={CSSHelper.ClassMaker("InventoryItem", "inventory", { "BackpackSlot": isBackpack })}
                     overrideentityindex={overrideentityindex}
                     overridedisplaykeybind={overridedisplaykeybind}
                     slot={slot}
