@@ -20,7 +20,7 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
             <Panel ref={this.__root__} id="CC_CombinationInfoDialog"  {...this.initRootAttrs()}>
                 <CCPanelBG width="380px" flowChildren="down" type="ToolTip">
                     <CCPanelHeader flowChildren="right">
-                        <CCCombinationIcon className="SectImage" sectName={sectName} />
+                        <CCCombinationIcon id="SectIcon" sectName={sectName} />
                         <CCPanel className="SectDes" flowChildren="down" marginLeft="8px" >
                             <Label id="SectNameHeader" html={true} text={$.Localize("#DOTA_Tooltip_ability_" + sectName)} />
                             {/* <Label id="SectNameDescription" html={true} text={replaceValues({

@@ -52,9 +52,9 @@ export class CCAbilityList extends CCPanel<ICCAbilityList> {
                 }
             })
             if (!isFinish) {
-                TimerHelper.AddTimer(0.1, FuncHelper.Handler.create(this, () => {
-                    this.hideAbility();
-                }))
+                // TimerHelper.AddTimer(0.1, FuncHelper.Handler.create(this, () => {
+                //     this.hideAbility();
+                // }))
             }
         }
     }

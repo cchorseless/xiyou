@@ -120,6 +120,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         const iLevel = this.props.level || -1;
         const combinationLabel = tData.CombinationLabel;
         const entity = PlayerScene.Local.CombinationManager.getCombinationByCombinationName(combinationLabel)
+        const uniqueConfigList = entity?.uniqueConfigList || [];
         const herolist: string[] = [];
         for (let k in KVHelper.KVData().building_combination_ability) {
             let data = KVHelper.KVData().building_combination_ability[k];
@@ -374,9 +375,9 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                         {/* <Label id="AbilityUpgradeLevel" className={CSSHelper.ClassMaker({ 'Hidden': iAbilityLearnResult != AbilityLearnResult_t.ABILITY_CANNOT_BE_UPGRADED_REQUIRES_LEVEL })} localizedText="#DOTA_AbilityTooltip_UpgradeLevel" html={true} /> */}
                     </Panel>
                     <CCPanel id="AbilityCombination" flowChildren="right-wrap">
-                        {herolist.length > 0 && entity && herolist.map(
+                        {herolist.length > 0 && herolist.map(
                             (name, index) => {
-                                return <CCUnitSmallIcon key={index + ""} itemname={name} Rarity={KVHelper.KVData().building_unit_tower[name].Rarity} brightness={entity.uniqueConfigList.includes(name) ? "1" : "0.1"} />
+                                return <CCUnitSmallIcon key={index + ""} width="35px" height="35px" itemname={name} rarity={KVHelper.KVData().building_unit_tower[name].Rarity as Rarity} brightness={uniqueConfigList.includes(name) ? "1" : "0.1"} />
                             })}
                     </CCPanel>
                     {this.props.children}
