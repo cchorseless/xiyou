@@ -157,10 +157,12 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     /**
      * 获取state 数据
      * @param key
-     * @param isWithRef
      * @returns
      */
-    public GetState<T>(key: string) {
+    public GetState<T>(key: string, defaultV: T = null as any) {
+        if (defaultV != null) {
+            this.UpdateState({ key: defaultV })
+        }
         let obj = ((this.state || {}) as any)[key];
         return obj as T;
     }
@@ -499,13 +501,18 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         (this as any).InstanceId = this.props.__onlykey__ || FuncHelper.generateUUID();
         this.setRegister(true);
         // 下一帧开始刷新
-        TimerHelper.AddFrameTimer(1,
-            FuncHelper.Handler.create(this, () => {
-                if (this.IsRegister) {
-                    this.onStartUI();
-                }
-            })
-        );
+        // TimerHelper.AddFrameTimer(1,
+        //     FuncHelper.Handler.create(this, () => {
+        //         if (this.IsRegister) {
+        //             this.onStartUI();
+        //         }
+        //     })
+        // );
+        this.onStartUI();
+
+    }
+    public componentDidUpdate() {
+
     }
 
     public componentWillUnmount() {

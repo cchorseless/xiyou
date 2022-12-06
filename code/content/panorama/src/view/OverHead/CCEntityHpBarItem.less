@@ -1,0 +1,85 @@
+.CC_EntityHpBarItem {
+    width: 100%;
+    height: 100%;
+    border-style: solid;
+    border-radius: 6px;
+    border: 1px solid #404040;
+    box-shadow: fill #000000 0px 0px 2px 0px;
+
+    @keyframes BigDamageShine {
+        0% {
+            brightness: 10;
+            background-color: gradient(linear, 0% 0%, 100% 0%, from(rgb(255, 186, 102)), to(rgb(227, 82, 82)));
+        }
+
+        33% {
+            brightness: 10;
+            background-color: gradient(linear, 0% 0%, 100% 0%, from(rgb(255, 186, 102)), to(rgb(227, 82, 82)));
+        }
+
+        99% {
+            brightness: 1;
+            background-color: gradient(linear, 0% 0%, 100% 0%, from(rgb(255, 186, 102)), to(rgb(227, 82, 82)));
+        }
+
+        100% {
+            brightness: 1;
+            background-color: rgb(251, 213, 75);
+        }
+    }
+
+
+    #HealthProgress_Left {
+        height: 100%;
+
+        background-color: gradient(linear, 0% 0%, 0% 100%, from(#5D2E25), color-stop(0.2, #c22d17FF), color-stop(.5, rgb(151, 36, 19)), to(#5D2C25));
+        background-color: #c22d17FF;
+    }
+
+    #HealthProgress_Loss {
+        height: 100%;
+
+        background-color: #e4bb86;
+        transition-property: width;
+        transition-duration: 0.3s;
+        transition-timing-function: ease;
+
+        animation-name: none;
+        animation-duration: 0.3s;
+        animation-timing-function: ease;
+
+        &.BigDamageShine {
+            animation-name: BigDamageShine;
+            animation-timing-function: cubic-bezier(1, 0, 1, 0);
+        }
+    }
+
+    #HealthLossLastContainer {
+        width: 100%;
+        height: 100%;
+
+        .HealthLossLast {
+            width: 100%;
+            height: 100%;
+            border-radius: 0px;
+            overflow: clip;
+            background-color: transparent;
+
+            .ProgressBarLeft {
+                border-radius: 0px;
+                border-right-style: solid;
+                border-right-width: 1px;
+                border-right-color: #6e2112;
+                background-color: #e99e8eDD;
+            }
+        }
+
+        .TransitionBar {
+            .ProgressBarLeft {
+                transition-property: width;
+                transition-duration: 0.2s;
+                transition-timing-function: ease;
+            }
+        }
+    }
+}

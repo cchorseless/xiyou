@@ -114,6 +114,8 @@ export class CCCombinationIcon extends CCPanel<ICCCombinationIcon> {
                 <CCImage className="SectIconBG" washColor={this.getColor()} backgroundImage={CSSHelper.getCustomImageUrl("synergyicons/synergy_backing_layers/leftcapsule" + this.getIndex() + "_psd.png")} />
                 <CCImage className="SectIconBGBottom" washColor={this.getColor()} backgroundImage={CSSHelper.getCustomImageUrl("synergyicons/synergy_backing_layers/leftcapsule_border_bottom_pop" + this.getIndex() + "_psd.png")} />
                 <CCImage className="SectImage" backgroundImage={CSSHelper.getCustomImageUrl("synergyicons/" + this.getSectImage() + ".png")} />
+                {this.__root___childs}
+                {this.props.children}
             </Panel>
         );
     }

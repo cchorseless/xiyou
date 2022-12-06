@@ -991,7 +991,15 @@ export module AbilityHelper {
     };
 
 
-
+    export function GetAbilityIndex(iEntityIndex: EntityIndex, iAbilityEntIndex: AbilityEntityIndex) {
+        for (let i = 0; i < Entities.GetAbilityCount(iEntityIndex); i++) {
+            const _iAbilityEntIndex = Entities.GetAbility(iEntityIndex, i);
+            if (_iAbilityEntIndex == iAbilityEntIndex) {
+                return i;
+            }
+        }
+        return -1;
+    };
 }
 
 
