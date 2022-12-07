@@ -9,7 +9,6 @@ import { LogHelper } from "../helper/LogHelper";
 import { PrecacheHelper } from "../helper/PrecacheHelper";
 import { TimerHelper } from "../helper/TimerHelper";
 import { Minimap_plus } from "./alldota2/minimap_plus/Minimap_plus";
-import { EntityOverHeadPanel } from "./Common/EntityOverHeadPanel";
 import { CCMenuNavigation } from "./allCustomUIElement/CCNavigation/CCMenuNavigation";
 import { CCLabel } from "./allCustomUIElement/CCLabel/CCLabel";
 import { CCAvatar } from "./allCustomUIElement/CCAvatar/CCAvatar";

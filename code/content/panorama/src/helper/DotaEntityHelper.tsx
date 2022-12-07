@@ -1004,6 +1004,7 @@ export module AbilityHelper {
 }
 
 
+
 export module UnitHelper {
 
     export function GetAbilityIndex(iEntityIndex: EntityIndex, iAbilityEntIndex: AbilityEntityIndex) {

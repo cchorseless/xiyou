@@ -1,27 +1,82 @@
-let hAbility = EntIndexToHScript(params.entindex_inflictor_const || -1)
-	// - @type CDOTA_BaseNPC
-	let hVictim = EntIndexToHScript(params.entindex_victim_const || -1)
-	let hAttacker = EntIndexToHScript(params.entindex_attacker_const || -1)
+// -@class modifier_gold_wave.eom_modifier
+@registerModifier()
+export class modifier_gold_wave extends BaseModifier_Plus {
 
-	if ( GameFunc.IsValid(hAttacker) && hAttacker != hVictim && params.damage > 0 ) {
-		let fDamage = params.damage
-		let iDamageType = params.damagetype_const
-		let iPlayerID = hAttacker.GetPlayerOwnerID()
+let public = modifier_gold_wave
 
-		if ( PlayerResource.IsValidPlayerID(iPlayerID) ) {
-			let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
-			hAttacker = hAttacker.GetSource()
-			if ( hHero != hAttacker ) {
-				if ( iDamageType == DAMAGE_TYPES.DAMAGE_TYPE_NONE ) {
-					iDamageType = DAMAGE_TYPES.DAMAGE_TYPE_PURE
-				}
-				if ( hAttacker.IsBuilding() && hAttacker.GetBuilding != null ) {
-					let hBuilding = hAttacker.GetBuilding()
-					let sTowerName = hBuilding.GetUnitEntityName()
-
-					hBuilding.ModifyTotalDamage(fDamage)
-
-					Rounds.AddRoundDamage(iPlayerID, hAttacker, sTowerName, iDamageType, fDamage)
-				}
-			}
+ IsHidden() {
+	return false
+}
+ IsDebuff() {
+	return false
+}
+ IsPurgable() {
+	return false
+}
+ IsPurgeException() {
+	return false
+}
+ AllowIllusionDuplicate() {
+	return false
+}
+ RemoveOnDeath() {
+	return false
+}
+ GetPriority() {
+	return MODIFIER_PRIORITY_SUPER_ULTRA
+}
+ GetTexture() {
+	return "alchemist_goblins_greed"
+}
+ GetStatusEffectName() {
+	return "particles/econ/items/effigies/status_fx_effigies/status_effect_effigy_gold.vpcf"
+}
+ StatusEffectPriority() {
+	return 99
+}
+ OnCreated(params: ModifierTable) {
+	let hParent = this.GetParentPlus()
+	this.moveSpeed = hParent.GetBaseMoveSpeed()
+	if ( IsServer() ) {
+		this.StartIntervalThink(this.GetDuration())
+	}
+}
+ OnIntervalThink() {
+	if ( IsServer() ) {
+		this.GetParentPlus().ForceKill(false)
+		this.StartIntervalThink(-1)
+		this.Destroy()
+	}
+}
+ CheckState() {
+	return {
+		//  [modifierstate.MODIFIER_STATE_NO_HEALTH_BAR] : true,
+		[modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION] : true,
+	}
+}
+ DeclareFunctions() {
+	return {
+		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MIN_HEALTH,
+		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_ABSOLUTE_MIN,
+	}
+}
+ GetMinHealth(params: ModifierTable) {
+	return 1
+}
+ GetMoveSpeed_AbsoluteMin(params: ModifierTable) {
+	return this.moveSpeed - 100
+}
+ EDeclareFunctions() {
+	return {
+		@registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE = {null, this.GetParentPlus() },
+	}
+}
+ OnTakeDamage(params: ModifierTable) {
+	if ( params.unit == this.GetParentPlus() ) {
+		let hParent = this.GetParentPlus()
+		if ( hParent.GetHealth() >= 1 && hParent.GetHealth() <= params.damage ) {
+			this.IncrementStackCount()
+			hParent.ModifyHealth(hParent.GetMaxHealth(), null, false, 0)
 		}
+	}
+}

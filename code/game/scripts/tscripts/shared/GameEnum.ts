@@ -2865,6 +2865,8 @@ export module GameEnum {
             modifier_tower_truesight_aura = "modifier_tower_truesight_aura",
             /**塔增加护甲BUFF */
             modifier_tower_aura = "modifier_tower_aura",
+            /**多血条BUFF */
+            modifier_many_hp_bar = "modifier_many_hp_bar",
         }
 
 

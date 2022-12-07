@@ -53,6 +53,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         const slot = this.props.slot!;
         const dragtype = this.props.dragtype!;
         if (draggable) {
+            // DotaUIHelper.addDragEvent()
             // 拖拽相关
             useRegisterForUnhandledEvent("DragStart", (pPanel: Panel, tDragCallbacks: DragSettings) => {
                 const pSelf = this.__root__.current;
@@ -165,6 +166,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             }, [overrideentityindex, overridedisplaykeybind, slot, dragtype]);
         }
     }
+
 
     onStartUI() {
         let pSelf = this.__root__.current;

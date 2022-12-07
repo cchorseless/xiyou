@@ -1,27 +1,81 @@
-local hAbility = EntIndexToHScript(params.entindex_inflictor_const or -1)
-	--- @type CDOTA_BaseNPC
-	local hVictim = EntIndexToHScript(params.entindex_victim_const or -1)
-	local hAttacker = EntIndexToHScript(params.entindex_attacker_const or -1)
+---@class modifier_gold_wave:eom_modifier
+modifier_gold_wave = eom_modifier({})
 
-	if IsValid(hAttacker) and hAttacker ~= hVictim and params.damage > 0 then
-		local fDamage = params.damage
-		local iDamageType = params.damagetype_const
-		local iPlayerID = hAttacker:GetPlayerOwnerID()
+local public = modifier_gold_wave
 
-		if PlayerResource:IsValidPlayerID(iPlayerID) then
-			local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
-			hAttacker = hAttacker:GetSource()
-			if hHero ~= hAttacker then
-				if iDamageType == DAMAGE_TYPE_NONE then
-					iDamageType = DAMAGE_TYPE_PURE
-				end
-				if hAttacker:IsBuilding() and hAttacker.GetBuilding ~= nil then
-					local hBuilding = hAttacker:GetBuilding()
-					local sTowerName = hBuilding:GetUnitEntityName()
-
-					hBuilding:ModifyTotalDamage(fDamage)
-
-					Rounds:AddRoundDamage(iPlayerID, hAttacker, sTowerName, iDamageType, fDamage)
-				end
-			end
+function public:IsHidden()
+	return false
+end
+function public:IsDebuff()
+	return false
+end
+function public:IsPurgable()
+	return false
+end
+function public:IsPurgeException()
+	return false
+end
+function public:AllowIllusionDuplicate()
+	return false
+end
+function public:RemoveOnDeath()
+	return false
+end
+function public:GetPriority()
+	return MODIFIER_PRIORITY_SUPER_ULTRA
+end
+function public:GetTexture()
+	return "alchemist_goblins_greed"
+end
+function public:GetStatusEffectName()
+	return "particles/econ/items/effigies/status_fx_effigies/status_effect_effigy_gold.vpcf"
+end
+function public:StatusEffectPriority()
+	return 99
+end
+function public:OnCreated(params)
+	local hParent = self:GetParent()
+	self.moveSpeed = hParent:GetBaseMoveSpeed()
+	if IsServer() then
+		self:StartIntervalThink(self:GetDuration())
+	end
+end
+function public:OnIntervalThink()
+	if IsServer() then
+		self:GetParent():ForceKill(false)
+		self:StartIntervalThink(-1)
+		self:Destroy()
+	end
+end
+function public:CheckState()
+	return {
+		-- [MODIFIER_STATE_NO_HEALTH_BAR] = true,
+		[MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+	}
+end
+function public:DeclareFunctions()
+	return {
+		MODIFIER_PROPERTY_MIN_HEALTH,
+		MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE_MIN,
+	}
+end
+function public:GetMinHealth(params)
+	return 1
+end
+function public:GetModifierMoveSpeed_AbsoluteMin(params)
+	return self.moveSpeed - 100
+end
+function public:EDeclareFunctions()
+	return {
+		MODIFIER_EVENT_ON_TAKEDAMAGE = {nil, self:GetParent() },
+	}
+end
+function public:OnTakeDamage(params)
+	if params.unit == self:GetParent() then
+		local hParent = self:GetParent()
+		if hParent:GetHealth() >= 1 and hParent:GetHealth() <= params.damage then
+			self:IncrementStackCount()
+			hParent:ModifyHealth(hParent:GetMaxHealth(), nil, false, 0)
 		end
+	end
+end
