@@ -1001,6 +1001,9 @@ export module AbilityHelper {
         }
         return -1;
     };
+
+
+
 }
 
 
@@ -1190,8 +1193,10 @@ export module ItemHelper {
     export function GetItemCost(sItemName: string) {
         return Number(GetItemValue(sItemName, "ItemCost")) || 0;
     }
-
     export function GetItemRarity(sItemName: string) {
+        return GetItemValue(sItemName, "Rarity") || "A";
+    }
+    export function GetItemRarityNumber(sItemName: string) {
         return ShareConfig.ToRarityNumber(GetItemValue(sItemName, "Rarity") as any);
     }
 

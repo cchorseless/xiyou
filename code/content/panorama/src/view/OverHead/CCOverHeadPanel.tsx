@@ -4,8 +4,8 @@ import { FuncHelper } from "../../helper/FuncHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
-import { BuildingTopBarItem } from "../Building/BuildingTopBarItem";
-import { EnemyTopBarItem } from "../Enemy/EnemyTopBarItem";
+import { CCBuildingTopBarItem } from "./CCBuildingTopBarItem";
+import { CCEnemyTopBarItem } from "./CCEnemyTopBarItem";
 
 export class CCOverHeadPanel extends CCPanel<NodePropsData> {
     defaultClass() {
@@ -33,7 +33,7 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
             let entityid = Number(k) as EntityIndex;
             if (this.allOverHeadUI[k])
                 if (!Entities.IsValidEntity(entityid) || !Entities.IsAlive(entityid)) {
-                    this.getPureCompByNode<BuildingTopBarItem>(this.allOverHeadUI[k] as any)?.close();
+                    this.getPureCompByNode<CCBuildingTopBarItem>(this.allOverHeadUI[k] as any)?.close();
                     delete this.allOverHeadUI[k];
                 }
         }
@@ -49,14 +49,14 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
             let entityroot = EntityRootManage.getEnemy(entityid);
             if (entityroot && entityroot.EnemyUnitComp!.IsShowOverhead) {
                 if (this.allOverHeadUI[entityid] == null) {
-                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, EnemyTopBarItem, { "entityid": Number(entityid) })!;
+                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, CCEnemyTopBarItem, { "entityid": Number(entityid) })!;
                 } else {
-                    this.getPureCompByNode<EnemyTopBarItem>(this.allOverHeadUI[entityid] as any)?.onRefreshUI({ "entityid": Number(entityid) }, scale);
+                    this.getPureCompByNode<CCEnemyTopBarItem>(this.allOverHeadUI[entityid] as any)?.updatePos(scale);
                 }
             }
             else {
                 if (this.allOverHeadUI[entityid]) {
-                    this.getPureCompByNode<EnemyTopBarItem>(this.allOverHeadUI[entityid] as any)?.close();
+                    this.getPureCompByNode<CCEnemyTopBarItem>(this.allOverHeadUI[entityid] as any)?.close();
                     delete this.allOverHeadUI[entityid];
                 }
             }
@@ -70,14 +70,14 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
             let entityroot = EntityRootManage.getBuilding(entityid);
             if (entityroot && entityroot.BuildingComp!.IsShowOverhead) {
                 if (this.allOverHeadUI[entityid] == null) {
-                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, BuildingTopBarItem, { "entityid": Number(entityid) })!;
+                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, CCBuildingTopBarItem, { "entityid": Number(entityid) })!;
                 } else {
-                    this.getPureCompByNode<BuildingTopBarItem>(this.allOverHeadUI[entityid] as any)?.onRefreshUI({ "entityid": Number(entityid) }, scale);
+                    this.getPureCompByNode<CCBuildingTopBarItem>(this.allOverHeadUI[entityid] as any)?.updatePos(scale);
                 }
             }
             else {
                 if (this.allOverHeadUI[entityid]) {
-                    this.getPureCompByNode<BuildingTopBarItem>(this.allOverHeadUI[entityid] as any)?.close();
+                    this.getPureCompByNode<CCBuildingTopBarItem>(this.allOverHeadUI[entityid] as any)?.close();
                     delete this.allOverHeadUI[entityid];
                 }
             }

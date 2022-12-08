@@ -358,7 +358,7 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
 
 
         // 物品等级，用中立物品的样式来显示
-        let iNeutralTier = ItemHelper.GetItemRarity(itemname);
+        let iNeutralTier = ItemHelper.GetItemRarityNumber(itemname);
         let IsNeutralItem = false;
         let siNeutralTiercls = "";
         if (iNeutralTier != -1) {

@@ -1,0 +1,172 @@
+.CC_ItemImage {
+    width: 88px;
+    height: 64px;
+
+    #DOTAItemImage {
+        width: 100%;
+        height: 100%;
+        background-size: 100% 100%;
+    }
+
+    #CardRarityOverlay {
+        width: 100%;
+        height: 100%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-image: none;
+
+        &.CardRarity_R {
+            background-image: url("file://{images}/custom_game/rarity/CardRarity_R.png");
+        }
+
+        &.CardRarity_SR {
+            background-image: url("file://{images}/custom_game/rarity/CardRarity_SR.png");
+        }
+
+        &.CardRarity_SSR {
+            background-image: url("file://{images}/custom_game/rarity/CardRarity_SSR.png");
+        }
+    }
+
+    #StarCardRarityOverlay {
+        width: 100%;
+        height: 100%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-image: none;
+
+        &.StarCardRarity_SR {
+            background-image: url("file://{images}/custom_game/rarity/item_unique_border.png");
+        }
+
+        &.StarCardRarity_SSR {
+            background-image: url("file://{images}/custom_game/rarity/item_unique_border.png");
+        }
+    }
+
+    #UniqueItemBorder {
+        width: 100%;
+        height: 100%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-image: url("file://{images}/custom_game/rarity/item_unique_border.png");
+
+        #UniqueItemTower {
+            width: 3000/88%;
+            height: width-percentage(100%);
+            align: right bottom;
+            img-shadow: -1px -1px 1px 3 #000;
+        }
+    }
+
+    #ItemRarityBorder {
+        width: 100%;
+        height: 100%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-image: url("file://{images}/custom_game/rarity/item_rarity_border_1.png");
+
+        &.RarityLevel1 {
+            background-image: url("file://{images}/custom_game/rarity/item_rarity_border_1.png");
+        }
+
+        &.RarityLevel2 {
+            background-image: url("file://{images}/custom_game/rarity/item_rarity_border_2.png");
+        }
+
+        &.RarityLevel3 {
+            background-image: url("file://{images}/custom_game/rarity/item_rarity_border_3.png");
+        }
+
+        &.RarityLevel4 {
+            background-image: url("file://{images}/custom_game/rarity/item_rarity_border_4.png");
+        }
+
+        &.RarityLevel5 {
+            background-image: url("file://{images}/custom_game/rarity/item_rarity_border_5.png");
+        }
+
+        &.RarityLevel6 {
+            background-image: url("file://{images}/custom_game/rarity/item_rarity_border_6.png");
+        }
+    }
+
+    #ItemLockStars {
+        align: center bottom;
+        margin-bottom: 4px;
+        flow-children: right;
+
+        .ItemLockStar {
+            width: 10px;
+            height: 10px;
+
+            background-image: url("file://{images}/control_icons/winner.png");
+            background-size: 100%;
+            background-repeat: no-repeat;
+            img-shadow: 0px 0px 2px 2 #000000;
+        }
+    }
+}
+
+@itemLevelColor: #FFFFFF, #00FF00, #00ffff, #ffa8ff, #fbca04;
+
+#ItemRarityStars {
+    height: 1400/64%;
+    align: left bottom;
+    flow-children: right;
+    margin-left: 2px;
+    margin-bottom: 2px;
+
+    .RarityLevel1 & {
+        wash-color: #FFFFFF;
+    }
+
+    .RarityLevel2 & {
+        wash-color: #00FF00;
+    }
+
+    .RarityLevel3 & {
+        wash-color: #00ffff;
+    }
+
+    .RarityLevel4 & {
+        wash-color: #ffa8ff;
+    }
+
+    .RarityLevel5 & {
+        wash-color: #fbca04;
+    }
+
+    .RarityLevel6 & {
+        height: 1800/64%;
+        wash-color: #fbca04;
+    }
+
+    .ItemStar {
+        width: height-percentage(100%);
+        height: 100%;
+
+        background-image: url("file://{images}/control_icons/winner.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+        img-shadow: 0px 0px 2px 2 #000000;
+    }
+
+    .ItemStar6 {
+        width: height-percentage(100%);
+        height: 100%;
+
+        background-image: url("file://{images}/control_icons/bp2019_mvp_icon.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+        img-shadow: 0px 0px 2px 2 #000000;
+    }
+}
+
+#UniqueItemTower {
+    visibility: collapse;
+
+    .AltPressed & {
+        visibility: visible;
+    }
+}

@@ -34,10 +34,11 @@ export class CCEntityHpMpBarItem extends CCPanel<ICCEntityHpMpBarItem> {
     mpLoss = createRef<Panel>();
     mpLeft = createRef<Panel>();
     render() {
-        const iUnitEntIndex = this.props.entityid;
+        const entityid = this.props.entityid as EntityIndex;
+        const isfriend = Entities.GetTeamNumber(entityid) == Game.GetLocalPlayerInfo().player_team_id;
         return (
             <Panel ref={this.__root__}  {...this.initRootAttrs()}>
-                <CCEntityHpBarItem entityid={iUnitEntIndex} />
+                <CCEntityHpBarItem entityid={entityid} />
                 <Panel className="CC_EntityHpBarItem">
                     <Panel id="ManaProgress_Loss" ref={this.mpLoss} />
                     <Panel id="ManaProgress_Left" ref={this.mpLeft} />

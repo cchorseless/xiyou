@@ -222,7 +222,7 @@ export module DotaUIHelper {
     }
 
     function RegDragEvent() {
-        $.RegisterForUnhandledEvent("DragStart", (...args) => {
+        $.RegisterForUnhandledEvent("DragStart", (pPanel: Panel, tDragCallbacks: DragSettings) => {
             LogHelper.print("DragStart", "111111")
             // runDragHandler(pDraggedPanel, "DragStart", pPanel)
         });

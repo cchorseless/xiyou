@@ -320,7 +320,7 @@ export class CCAbilityDetailDialog extends CCPanel<ICCAbilityDetailDialog> {
         toggleClass['UsesAbilityCharges'] = false;
 
         // 物品等级，用中立物品的样式来显示
-        let iNeutralTier = ItemHelper.GetItemRarity(abilityname);
+        let iNeutralTier = ItemHelper.GetItemRarityNumber(abilityname);
         if (bIsItem && iNeutralTier != -1) {
             // toggleClass['IsNeutralItem'] = iNeutralTier >= 0;
             // toggleClass['NeutralTier' + (iNeutralTier + 1)] = true;

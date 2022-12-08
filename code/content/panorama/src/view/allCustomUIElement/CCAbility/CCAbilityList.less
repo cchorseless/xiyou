@@ -1,13 +1,43 @@
 #CC_AbilityList {
+    width: 410px;
+    overflow: noclip;
+
     #abilities {
-        margin-top: -50px;
+        vertical-align: top;
+        max-width: 410px;
+        min-height: 80px;
+        margin-top: 8px;
+        vertical-align: top;
 
-        .NoShowAbility {
-            width: 0px;
-            opacity: 0;
-            visibility: collapse;
+        flow-children: right-wrap;
+
+        .AbilityPanel {
+            vertical-align: top;
+
+            #ButtonAndLevel {
+                height: fit-children;
+
+                #LevelUpBurstFXContainer {
+                    height: fit-children;
+                }
+
+                #ButtonWithLevelUpTab {
+                    height: fit-children;
+                    margin-bottom: 12px;
+
+                    #LevelUpLight {
+                        height: 0px;
+                    }
+
+                    #HotkeyContainer {
+                        margin-top: 0px;
+                    }
+                }
+
+                #AbilityLevelContainer {
+                    margin-bottom: 0px;
+                }
+            }
         }
-
-
     }
 }

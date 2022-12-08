@@ -5,20 +5,23 @@ import { FuncHelper } from "../../../helper/FuncHelper";
 
 
 interface ICCAbilityButton {
-    draggable?: boolean;
-    overrideentityindex?: ItemEntityIndex
+    overrideentityindex: AbilityEntityIndex,
+    m_level: number,
+    iUnlockStar?: number,
+    m_cooldown_percent: number;
+    dialogVariables: {
+        cooldown_timer: number;
+        item_charge_count: number;
+        item_alt_charge_count: number;
+    }
 }
 
 
 export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
-    AbilityImage: React.RefObject<AbilityImage>;
-    onInitUI() {
-        this.AbilityImage = createRef<AbilityImage>();
-    }
+    AbilityImage: React.RefObject<AbilityImage> = createRef<AbilityImage>();
 
     static defaultProps = {
         overrideentityindex: -1,
-        draggable: false,
     }
 
     CastRangeParticleID: ParticleID;
@@ -73,7 +76,6 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
             Abilities.ExecuteAbility(overrideentityindex, iCasterIndex, false);
         }
     }
-
     private onAbilityButtonclick_right() {
         const overrideentityindex = this.props.overrideentityindex!;
         const slot = this.props.slot!;
@@ -158,8 +160,6 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
         //     }
         // }
     }
-
-
     private onAbilityButtonMouseOver() {
         const overrideentityindex = this.props.overrideentityindex!;
         if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
@@ -181,55 +181,14 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
     }
     render() {
         const overrideentityindex = this.props.overrideentityindex!;
-        const bIsValid = overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex);
-        const dialogVariables: { [x: string]: any; } = {};
-        const bIsItem = Abilities.IsItem(overrideentityindex) && bIsValid;
-        const contextEntityIndex = (bIsItem ? -1 : overrideentityindex) as AbilityEntityIndex;
-        const iCasterIndex = Abilities.GetCaster(overrideentityindex);
-        const bCooldownReady = (!bIsValid || Entities.IsEnemy(iCasterIndex)) ? true : Abilities.IsCooldownReady(overrideentityindex);
-        let fCooldownLength = Abilities.GetCooldownLength(overrideentityindex);
-        let fChargesPercent = 1;
-        if (!bCooldownReady) {
-            let fCooldownTimeRemaining = Abilities.GetCooldownTimeRemaining(overrideentityindex);
-            let fPercent = (fCooldownTimeRemaining / fCooldownLength);
-            if (fCooldownLength == 0) fPercent = 1;
-            fChargesPercent = 1 - fPercent;
-            dialogVariables["cooldown_timer"] = Math.ceil(fCooldownTimeRemaining);
-        }
-        let show_item_charges = false;
-        let show_item_alt_charges = false;
-        let muted = false;
-        if (bIsItem) {
-            muted = Items.IsMuted(overrideentityindex);
-            let iChargeCount = 0;
-            let bHasCharges = false;
-            let iAltChargeCount = 0;
-            let bHasAltCharges = false;
-            if (Items.ShowSecondaryCharges(overrideentityindex)) {
-                bHasCharges = true;
-                bHasAltCharges = true;
-                if (Abilities.GetToggleState(overrideentityindex)) {
-                    iChargeCount = Items.GetCurrentCharges(overrideentityindex);
-                    iAltChargeCount = Items.GetSecondaryCharges(overrideentityindex);
-                }
-                else {
-                    iAltChargeCount = Items.GetCurrentCharges(overrideentityindex);
-                    iChargeCount = Items.GetSecondaryCharges(overrideentityindex);
-                }
-            }
-            else if (Items.ShouldDisplayCharges(overrideentityindex)) {
-                bHasCharges = true;
-                iChargeCount = Items.GetCurrentCharges(overrideentityindex);
-            }
-            show_item_charges = bHasCharges;
-            show_item_alt_charges = bHasAltCharges;
-            dialogVariables["item_charge_count"] = iChargeCount;
-            dialogVariables["item_alt_charge_count"] = iAltChargeCount;
-        }
+        const m_level = this.props.m_level!;
+        const m_cooldown_percent = this.props.m_cooldown_percent!;
+        const dialogVariables = this.props.dialogVariables!;
+
         return (
             this.__root___isValid && (
                 <Panel
-                    id="CC_AbilityButton"
+                    id="AbilityButton"
                     onactivate={(self) => { this.onAbilityButtonclick_left() }}
                     oncontextmenu={(self) => { this.onAbilityButtonclick_right(); }}
                     onmouseover={(self) => { this.onAbilityButtonMouseOver() }}
@@ -237,30 +196,23 @@ export class CCAbilityButton extends CCPanel<ICCAbilityButton> {
                     ref={this.__root__}
                     {...this.initRootAttrs()}
                 >
-                    <DOTAAbilityImage id="AbilityImage" showtooltip={false} hittest={false} contextEntityIndex={contextEntityIndex} />
-                    {bIsItem &&
-                        <DOTAItemImage id="ItemImage" contextEntityIndex={overrideentityindex} scaling="stretch-to-fit-x-preserve-aspect" showtooltip={false} hittest={false} hittestchildren={false} />
-                    }
+                    <DOTAAbilityImage id="AbilityImage" showtooltip={false} hittest={false} ref={this.AbilityImage} />
+                    {/* scaling="stretch-to-fit-x-preserve-aspect" */}
+                    <DOTAItemImage id="ItemImage" contextEntityIndex={overrideentityindex as any} showtooltip={false} hittest={false} hittestchildren={false} />
+                    {/* <CustomItemImage id="ItemImage" showtooltip={false} contextEntityIndex={overrideentityindex as ItemEntityIndex} iLevel={m_level} iUnlockStar={iUnlockStar} /> */}
                     <Panel hittest={false} id="AbilityBevel" />
-                    <Panel hittest={false} id="ShineContainer">
+                    <Panel hittest={false} id="ShineContainer" >
                         <Panel hittest={false} id="Shine" />
                     </Panel>
                     <Panel id="TopBarUltimateCooldown" hittest={false} />
-                    {!bCooldownReady &&
-                        <Panel id="Cooldown" hittest={false}>
-                            <Panel id="CooldownOverlay" hittest={false} style={{ clip: "radial(50.0% 50.0%, 0.0deg, " + -FuncHelper.ToFiniteNumber(fChargesPercent) * 360 + "deg)" }} />
-                            <Label id="CooldownTimer" className="MonoNumbersFont" localizedText="{d:cooldown_timer}" hittest={false} dialogVariables={dialogVariables} />
-                        </Panel>
-                    }
+                    <Panel id="Cooldown" hittest={false}>
+                        <Panel id="CooldownOverlay" hittest={false} style={{ clip: "radial(50.0% 50.0%, 0.0deg, " + - FuncHelper.ToFiniteNumber(m_cooldown_percent) * 360 + "deg)" }} />
+                        <Label id="CooldownTimer" className="MonoNumbersFont" localizedText="{d:cooldown_timer}" hittest={false} dialogVariables={dialogVariables} />
+                    </Panel>
                     <Panel id="ActiveAbility" hittest={false} />
                     <Panel id="InactiveOverlay" hittest={false} />
-                    {show_item_charges &&
-                        <Label id="ItemCharges" localizedText="{d:item_charge_count}" dialogVariables={dialogVariables} hittest={false} />
-                    }
-                    {show_item_alt_charges &&
-                        <Label id="ItemAltCharges" localizedText="{d:item_alt_charge_count}" dialogVariables={dialogVariables} hittest={false} />
-                    }
-                    {/* <Label id="ItemTimer" text="{s:item_timer}" dialogVariables={{ item_timer: this.props.item_timer }} hittest={false} /> */}
+                    <Label id="ItemCharges" localizedText="{d:item_charge_count}" hittest={false} dialogVariables={dialogVariables} />
+                    <Label id="ItemAltCharges" localizedText="{d:item_alt_charge_count}" hittest={false} dialogVariables={dialogVariables} />
                     {this.props.children}
                     {this.__root___childs}
                 </Panel>

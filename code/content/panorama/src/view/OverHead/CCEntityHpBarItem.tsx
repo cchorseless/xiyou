@@ -85,8 +85,10 @@ export class CCEntityHpBarItem extends CCPanel<ICCEntityHpBarItem> {
     hpManyContainer = createRef<Panel>();
 
     render() {
+        const entityid = this.props.entityid as EntityIndex;
+        const isfriend = Entities.GetTeamNumber(entityid) == Game.GetLocalPlayerInfo().player_team_id;
         return (<Panel className="CC_EntityHpBarItem" ref={this.__root__}  {...this.initRootAttrs()}>
-            <Panel id="HealthProgress_Loss" ref={this.hpLoss} />
+            <Panel id="HealthProgress_Loss" ref={this.hpLoss} className="isfriend" />
             <Panel id="HealthProgress_Left" ref={this.hpLeft} />
             {
                 this.manyBuffCount > 0 && <Panel id="HealthLossLastContainer" ref={this.hpManyContainer} hittest={false} />

@@ -7,6 +7,7 @@ import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 import { CCPanel } from "../CCPanel/CCPanel";
+import { CCAbilityButton } from "./CCAbilityButton";
 import "./CCAbilityPanel.less";
 
 export interface ICCAbilityPanel extends PanelAttributes {
@@ -43,7 +44,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
     private AbilityButton: React.RefObject<Panel> = createRef<Panel>();;
     private dragPanelInfo: IDragPanelInfo = {} as any;
 
-    onInitUI() {
+    addDragEvent() {
         const draggable = this.props.draggable!;
         const dragstartcallback = this.props.dragstartcallback!;
         const dragdropcallback = this.props.dragdropcallback!;
@@ -52,11 +53,10 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         const overridedisplaykeybind = this.props.overridedisplaykeybind!;
         const slot = this.props.slot!;
         const dragtype = this.props.dragtype!;
+        const pSelf = this.__root__.current!;
         if (draggable) {
-            // DotaUIHelper.addDragEvent()
             // 拖拽相关
-            useRegisterForUnhandledEvent("DragStart", (pPanel: Panel, tDragCallbacks: DragSettings) => {
-                const pSelf = this.__root__.current;
+            $.RegisterEventHandler("DragStart", pSelf, (pPanel: Panel, tDragCallbacks: DragSettings) => {
                 if (pSelf && pPanel == this.AbilityButton.current) {
                     if (!pSelf || pSelf.BHasClass("no_ability")) {
                         return true;
@@ -93,8 +93,9 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     }
                     return true;
                 }
-            }, [overrideentityindex, overridedisplaykeybind, slot, dragtype]);
-            useRegisterForUnhandledEvent("DragLeave", (pPanel: Panel, pDraggedPanel: Panel) => {
+                return true;
+            });
+            $.RegisterEventHandler("DragLeave", pSelf, (pPanel: Panel, pDraggedPanel: Panel) => {
                 if (this.dragPanelInfo.dragpanel == null) {
                     return false;
                 }
@@ -110,9 +111,8 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     return true;
                 }
                 return false;
-            }, [overrideentityindex, overridedisplaykeybind, slot, dragtype]);
-            useRegisterForUnhandledEvent("DragEnter", (pPanel: Panel, pDraggedPanel: Panel) => {
-                const pSelf = this.__root__.current;
+            });
+            $.RegisterEventHandler("DragEnter", pSelf, (pPanel: Panel, pDraggedPanel: Panel) => {
                 if (this.dragPanelInfo.dragpanel == null) {
                     return true;
                 }
@@ -127,9 +127,8 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     return true;
                 }
                 return false;
-            }, [overrideentityindex, overridedisplaykeybind, slot, dragtype]);
-            useRegisterForUnhandledEvent("DragDrop", (pPanel: Panel, pDraggedPanel: Panel) => {
-                const pSelf = this.__root__.current;
+            });
+            $.RegisterEventHandler("DragDrop", pSelf, (pPanel: Panel, pDraggedPanel: Panel) => {
                 if (this.dragPanelInfo.dragpanel == null) {
                     return true;
                 }
@@ -152,9 +151,8 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     this.dragPanelInfo.m_DragCompleted = true;
                 }
                 return false;
-            }, [overrideentityindex, overridedisplaykeybind, slot, dragtype]);
-            useRegisterForUnhandledEvent("DragEnd", (pPanel: Panel, pDraggedPanel: Panel) => {
-                const pSelf = this.__root__.current;
+            });
+            $.RegisterEventHandler("DragEnd", pSelf, (pPanel: Panel, pDraggedPanel: Panel) => {
                 if (pSelf && pPanel == this.AbilityButton.current) {
                     if (typeof dragendcallback == "function") {
                         dragendcallback(this.dragPanelInfo, overrideentityindex, overridedisplaykeybind, slot, dragtype);
@@ -163,14 +161,13 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     pSelf.RemoveClass("dragging_from");
                     this.dragPanelInfo = {} as any;
                 }
-            }, [overrideentityindex, overridedisplaykeybind, slot, dragtype]);
+            });
         }
     }
 
 
     onStartUI() {
-        let pSelf = this.__root__.current;
-        if (pSelf == null) return;
+        const pSelf = this.__root__.current!;
         const m_cooldown_ready = this.GetState<boolean>("m_cooldown_ready", false);
         const m_in_ability_phase = this.GetState("m_in_ability_phase", false);
         const m_cast_start_time = this.GetState("m_cast_start_time", -1);
@@ -263,7 +260,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         this.updateDialogVariables("gold_cost", iGoldCost);
 
         // 物品等级，用中立物品的样式来显示
-        let iNeutralTier = ItemHelper.GetItemRarity(Abilities.GetAbilityName(overrideentityindex));
+        let iNeutralTier = ItemHelper.GetItemRarityNumber(Abilities.GetAbilityName(overrideentityindex));
         pSelf.SetHasClass("is_neutral_item", bIsItem && iNeutralTier != -1);
         if (pSelf.BHasClass("is_neutral_item")) {
             pSelf.SwitchClass("NeutralTier", "NeutralTier" + (iNeutralTier + 1));
@@ -364,10 +361,9 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         }
         this.UpdateState({ "m_in_ability_phase": bInAbilityPhase })
         this.UpdateState({ "m_cooldown_ready": bCooldownReady })
+        this.addDragEvent();
 
     }
-
-
 
     private updateDialogVariables(k: string, v: any) {
         let dialogVariables = this.GetState("dialogVariables", {} as { [K: string]: any });
@@ -376,7 +372,45 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         this.UpdateState({ "dialogVariables": dialogVariables });
     }
 
-
+    private onbtn_leftclick() {
+        const overrideentityindex = this.props.overrideentityindex!;
+        if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
+            if (GameUI.IsAltDown()) {
+                Abilities.PingAbility(overrideentityindex);
+                return;
+            }
+            if (GameUI.IsControlDown()) {
+                Abilities.AttemptToUpgrade(overrideentityindex);
+                return;
+            }
+            if (Abilities.IsItem(overrideentityindex)) {
+                var iAbilityIndex = Abilities.GetLocalPlayerActiveAbility();
+                if (iAbilityIndex != -1) {
+                    let iAbilityBehavior = Abilities.GetBehavior(iAbilityIndex);
+                    if (iAbilityBehavior & DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_RUNE_TARGET) {
+                        let iClickbehaviors = GameUI.GetClickBehaviors();
+                        if (iClickbehaviors === CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_CAST) {
+                            Game.PrepareUnitOrders({
+                                AbilityIndex: iAbilityIndex,
+                                ShowEffects: false,
+                                OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION,
+                                Position: [overrideentityindex, 16300, 0],
+                            });
+                            // GameEvents.SendCustomGameEventToServer("ability_spell_item_target", {
+                            // 	ability_index: iAbilityIndex,
+                            // 	item_index: overrideentityindex,
+                            // });
+                            // GameEvents.SendEventClientSide("custom_get_active_ability", { entindex: -1 as AbilityEntityIndex });
+                            // Abilities.ExecuteAbility(iAbilityIndex, Abilities.GetCaster(iAbilityIndex), true);
+                        }
+                        return;
+                    }
+                }
+            }
+            let iCasterIndex = Abilities.GetCaster(overrideentityindex);
+            Abilities.ExecuteAbility(overrideentityindex, iCasterIndex, false);
+        }
+    }
     private onbtn_rightclick() {
         const overrideentityindex = this.props.overrideentityindex!;
         const draggable = this.props.draggable!;
@@ -462,7 +496,26 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             }
         }
     }
-
+    private onbtn_moveover() {
+        const overrideentityindex = this.props.overrideentityindex!;
+        // if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
+        //     if (Abilities.IsItem(overrideentityindex)) {
+        //         GameEvents.SendEventClientSide("custom_hover_item", {
+        //             item_entindex: overrideentityindex,
+        //         });
+        //     }
+        //     GameUI.CustomUIConfig().ShowAbilityTooltip(self, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), slot);
+        // }
+    }
+    private onbtn_moveout() {
+        const overrideentityindex = this.props.overrideentityindex!;
+        // if (Abilities.IsItem(overrideentityindex)) {
+        //     GameEvents.SendEventClientSide("custom_hover_item", {
+        //         item_entindex: -1 as ItemEntityIndex,
+        //     });
+        // }
+        // GameUI.CustomUIConfig().HideAbilityTooltip(self);
+    }
     render() {
         const m_is_item = this.GetState("m_is_item", false);
         const m_max_level = this.GetState("m_max_level", 0);
@@ -470,39 +523,14 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         const m_charges_percent = this.GetState("m_charges_percent", 1);
         const m_cooldown_percent = this.GetState("m_cooldown_percent", 1);
         const overrideentityindex = this.props.overrideentityindex!;
-        const draggable = this.props.draggable!;
         const dialogVariables = this.GetState("dialogVariables", {});
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} {...this.initRootAttrs()}>
                 <Panel id="ButtonAndLevel" require-composition-layer="true" always-cache-composition-layer="true" hittest={false}>
-                    <Panel id="LevelUpBurstFXContainer" hittest={false}>
-                        {!m_is_item &&
-                            <DOTAScenePanel id="LevelUpBurstFX" map="scenes/hud/levelupburst" renderdeferred={false} rendershadows={false} camera="camera_1" hittest={false} particleonly={true} />
-                        }
-                    </Panel>
+                    <CCLevelUpBurstFXContainer m_is_item={m_is_item} />
                     <Panel id="ButtonWithLevelUpTab" hittest={false}>
-                        <Button id="LevelUpTab" hittest={true}
-                            onactivate={() => {
-                                if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
-                                    Abilities.AttemptToUpgrade(overrideentityindex);
-                                }
-                            }} onmouseover={(self) => {
-                                if (this.AbilityButton.current) {
-                                    if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
-                                        // GameUI.CustomUIConfig().ShowAbilityTooltip(pAbilityButton, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), slot);
-                                    }
-                                }
-                            }} onmouseout={(self) => {
-                                if (this.AbilityButton.current) {
-                                    // GameUI.CustomUIConfig().HideAbilityTooltip(pAbilityButton);
-                                }
-                            }} >
-                            <Panel id="LevelUpButton">
-                                <Panel id="LevelUpIcon" />
-                            </Panel>
-                            <Panel id="LearnModeButton" hittest={false} />
-                        </Button>
+                        <CCLevelUpTab overrideentityindex={overrideentityindex} abilityButton={this.AbilityButton} />
                         <Panel id="LevelUpLight" hittest={false} />
                         <Panel hittest={false} id="ButtonWell" >
                             <Panel hittest={false} id="AutocastableBorder" />
@@ -512,61 +540,11 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                                 <DOTAScenePanel id="AutoCasting" map="scenes/hud/autocasting" renderdeferred={false} rendershadows={false} camera="camera_1" hittest={false} particleonly={true} />
                             </Panel>
                             <Panel id="ButtonSize">
-                                <Panel id="AbilityButton" ref={this.AbilityButton} draggable={draggable}
-                                    onactivate={(self) => {
-                                        if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
-                                            if (GameUI.IsAltDown()) {
-                                                Abilities.PingAbility(overrideentityindex);
-                                                return;
-                                            }
-                                            if (GameUI.IsControlDown()) {
-                                                Abilities.AttemptToUpgrade(overrideentityindex);
-                                                return;
-                                            }
-                                            if (Abilities.IsItem(overrideentityindex)) {
-                                                var iAbilityIndex = Abilities.GetLocalPlayerActiveAbility();
-                                                if (iAbilityIndex != -1) {
-                                                    let iAbilityBehavior = Abilities.GetBehavior(iAbilityIndex);
-                                                    if (iAbilityBehavior & DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_RUNE_TARGET) {
-                                                        let iClickbehaviors = GameUI.GetClickBehaviors();
-                                                        if (iClickbehaviors === CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_CAST) {
-                                                            Game.PrepareUnitOrders({
-                                                                AbilityIndex: iAbilityIndex,
-                                                                ShowEffects: false,
-                                                                OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION,
-                                                                Position: [overrideentityindex, 16300, 0],
-                                                            });
-                                                            // GameEvents.SendCustomGameEventToServer("ability_spell_item_target", {
-                                                            // 	ability_index: iAbilityIndex,
-                                                            // 	item_index: overrideentityindex,
-                                                            // });
-                                                            // GameEvents.SendEventClientSide("custom_get_active_ability", { entindex: -1 as AbilityEntityIndex });
-                                                            // Abilities.ExecuteAbility(iAbilityIndex, Abilities.GetCaster(iAbilityIndex), true);
-                                                        }
-                                                        return;
-                                                    }
-                                                }
-                                            }
-                                            let iCasterIndex = Abilities.GetCaster(overrideentityindex);
-                                            Abilities.ExecuteAbility(overrideentityindex, iCasterIndex, false);
-                                        }
-                                    }} oncontextmenu={(self) => this.onbtn_rightclick()} onmouseover={(self) => {
-                                        // if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
-                                        //     if (Abilities.IsItem(overrideentityindex)) {
-                                        //         GameEvents.SendEventClientSide("custom_hover_item", {
-                                        //             item_entindex: overrideentityindex,
-                                        //         });
-                                        //     }
-                                        //     GameUI.CustomUIConfig().ShowAbilityTooltip(self, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), slot);
-                                        // }
-                                    }} onmouseout={(self) => {
-                                        // if (Abilities.IsItem(overrideentityindex)) {
-                                        //     GameEvents.SendEventClientSide("custom_hover_item", {
-                                        //         item_entindex: -1 as ItemEntityIndex,
-                                        //     });
-                                        // }
-                                        // GameUI.CustomUIConfig().HideAbilityTooltip(self);
-                                    }} >
+                                <Panel id="AbilityButton" ref={this.AbilityButton}
+                                    onactivate={(self) => { this.onbtn_leftclick() }}
+                                    oncontextmenu={(self) => this.onbtn_rightclick()}
+                                    onmouseover={(self) => this.onbtn_moveover()}
+                                    onmouseout={(self) => this.onbtn_moveout()} >
                                     <DOTAAbilityImage id="AbilityImage" showtooltip={false} hittest={false} ref={this.AbilityImage} />
                                     {/* scaling="stretch-to-fit-x-preserve-aspect" */}
                                     <DOTAItemImage id="ItemImage" contextEntityIndex={overrideentityindex} showtooltip={false} hittest={false} hittestchildren={false} />
@@ -599,17 +577,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                                 <Panel hittest={false} id="DropTargetHighlight" />
                             </Panel>
                         </Panel>
-                        <Panel id="HotkeyContainer" hittest={false} hittestchildren={false}>
-                            <Panel id="Hotkey">
-                                <Label id="HotkeyText" localizedText="{s:hotkey}" dialogVariables={dialogVariables} />
-                            </Panel>
-                            <Panel id="HotkeyModifier">
-                                <Label id="AltText" localizedText="#DOTA_Keybind_ALT" dialogVariables={dialogVariables} />
-                            </Panel>
-                            <Panel id="HotkeyCtrlModifier">
-                                <Label id="CtrlText" localizedText="#DOTA_Keybind_CTRL" dialogVariables={dialogVariables} />
-                            </Panel>
-                        </Panel>
+                        <CCHotkeyContainer info={dialogVariables} />
                         <CircularProgressBar id="AbilityCharges" hittest={false} hittestchildren={false} value={m_charges_percent}>
                             <Label localizedText="{d:ability_charge_count}" dialogVariables={dialogVariables} />
                         </CircularProgressBar>
@@ -622,5 +590,72 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 </Panel>
             </Panel>
         )
+    }
+}
+
+
+class CCLevelUpBurstFXContainer extends CCPanel<{ m_is_item: boolean }> {
+    render() {
+        const m_is_item = this.props.m_is_item;
+        return (
+            <Panel id="LevelUpBurstFXContainer" hittest={false} ref={this.__root__} {...this.initRootAttrs()}>
+                {!m_is_item && <DOTAScenePanel id="LevelUpBurstFX" map="scenes/hud/levelupburst" renderdeferred={false} rendershadows={false} camera="camera_1" hittest={false} particleonly={true} />}
+            </Panel >
+        );
+    }
+
+}
+
+
+
+class CCLevelUpTab extends CCPanel<{ overrideentityindex: AbilityEntityIndex, abilityButton: React.RefObject<Panel> }, Button> {
+    render() {
+        const overrideentityindex = this.props.overrideentityindex;
+        const AbilityButton = this.props.abilityButton;
+        return (
+            <Button id="LevelUpTab" hittest={true} onactivate={
+                () => {
+                    if (Entities.IsValidEntity(overrideentityindex))
+                        Abilities.AttemptToUpgrade(overrideentityindex);
+                }}
+                onmouseover={(self) => {
+                    if (AbilityButton.current) {
+                        if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
+                            // GameUI.CustomUIConfig().ShowAbilityTooltip(pAbilityButton, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), slot);
+                        }
+                    }
+                }} onmouseout={(self) => {
+                    if (AbilityButton.current) {
+                        // GameUI.CustomUIConfig().HideAbilityTooltip(pAbilityButton);
+                    }
+                }}
+                ref={this.__root__} {...this.initRootAttrs()}>
+                <Panel id="LevelUpButton">
+                    <Panel id="LevelUpIcon" />
+                </Panel>
+                <Panel id="LearnModeButton" hittest={false} />
+            </Button>
+        );
+    }
+
+}
+
+
+class CCHotkeyContainer extends CCPanel<{ info: { [K: string]: string } }>{
+    render() {
+        const info = this.props.info;
+        return (
+            <Panel id="HotkeyContainer" hittest={false} hittestchildren={false} ref={this.__root__} {...this.initRootAttrs()}>
+                <Panel id="Hotkey">
+                    <Label id="HotkeyText" localizedText="{s:hotkey}" dialogVariables={info} />
+                </Panel>
+                <Panel id="HotkeyModifier">
+                    <Label id="AltText" localizedText="#DOTA_Keybind_ALT" dialogVariables={info} />
+                </Panel>
+                <Panel id="HotkeyCtrlModifier">
+                    <Label id="CtrlText" localizedText="#DOTA_Keybind_CTRL" dialogVariables={info} />
+                </Panel>
+            </Panel>
+        );
     }
 }
