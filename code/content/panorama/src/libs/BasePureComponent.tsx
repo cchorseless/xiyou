@@ -147,11 +147,11 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     public onInitUI() { }
 
     /**
-     * 渲染后一帧执行
+     * 渲染后执行
      * @override
      */
     public onStartUI() { }
-    public onRefreshUI(...args: any[]) { }
+    public onRefreshUI() { }
     public onDestroy() { }
 
     /**
@@ -251,9 +251,6 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         let comp = this.GetOneNodeChild<M, T>(nodeName, nodeType);
         if (comp) {
             comp.__root__.current!.visible = true;
-            if (Object.keys(nodeData).length > 0) {
-                comp.onRefreshUI(nodeData);
-            }
             comp.updateSelf();
         } else {
             this.addNodeChildAt<M, T>(nodeName, nodeType, nodeData);
@@ -268,9 +265,6 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             comp = await this.addNodeChildAsyncAt<M, T>(nodeName, nodeType, nodeData);
         } else {
             comp.__root__.current!.visible = true;
-            if (Object.keys(nodeData).length > 0) {
-                comp.onRefreshUI(nodeData);
-            }
             comp.updateSelf();
         }
         return comp as InstanceType<T>;
@@ -496,8 +490,6 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
                 this.__root__.current!.style[k as keyof VCSSStyleDeclaration] = this.props[k];
             }
         }
-        // 不遮挡tooltip
-        // this.__root__.current!.hittest = false;
         (this as any).InstanceId = this.props.__onlykey__ || FuncHelper.generateUUID();
         this.setRegister(true);
         // 下一帧开始刷新
@@ -509,12 +501,53 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         //     })
         // );
         this.onStartUI();
-
     }
-    public componentDidUpdate() {
-
+    private useEffectPropList: { func: () => void, prop: string[] }[];
+    public useEffectProps(func: () => void, ...prop: string[]) {
+        if (this.useEffectPropList == null) {
+            this.useEffectPropList = [];
+        }
+        this.useEffectPropList.push({ func: func, prop: prop });
     }
-
+    private useEffectStateList: { func: () => void, state: string[] }[];
+    public useEffectState(func: () => void, ...state: string[]) {
+        if (this.useEffectStateList == null) {
+            this.useEffectStateList = [];
+        }
+        this.useEffectStateList.push({ func: func, state: state });
+    }
+    public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>) {
+        if (this.useEffectPropList) {
+            for (let info of this.useEffectPropList) {
+                if (info.prop.length == 0) {
+                    info.func();
+                }
+                else {
+                    for (let k of info.prop) {
+                        if (this.props[k] != prevProps[k]) {
+                            info.func();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (this.useEffectStateList) {
+            for (let info of this.useEffectStateList) {
+                if (info.state.length == 0) {
+                    info.func();
+                }
+                else {
+                    for (let k of info.state) {
+                        if ((this.state as any)[k] != prevState[k]) {
+                            info.func();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
     public componentWillUnmount() {
         this.setRegister(false);
         // 移除所有监听事件

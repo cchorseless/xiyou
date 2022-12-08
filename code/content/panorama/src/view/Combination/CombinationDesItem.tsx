@@ -12,10 +12,11 @@ interface IProps extends NodePropsData {
 export class CombinationDesItem extends CombinationDesItem_UI<IProps> {
     // 初始化数据
     onStartUI() {
-        this.onRefreshUI(this.props);
+        this.onRefreshUI();
     }
 
-    onRefreshUI(p: IProps) {
+    onRefreshUI() {
+        const p = this.props;
         if (!p.activecount || !p.effect) {
             return;
         }

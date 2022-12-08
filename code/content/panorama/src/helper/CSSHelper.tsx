@@ -931,7 +931,7 @@ export module CSSHelper {
         return classes.join(" ");
     };
 
-    export function SavePanelData(panel: Panel, key: string, v: string | number): void {
+    export function SavePanelData(panel: Panel, key: string, v: string | number | any): void {
         (panel.Data() as any)[key] = v;
     }
     export function GetPanelData<T>(panel: Panel, key: string): T {

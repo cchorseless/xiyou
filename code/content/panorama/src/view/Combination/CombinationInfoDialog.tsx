@@ -20,13 +20,14 @@ export class CombinationInfoDialog extends CombinationInfoDialog_UI<IProps> {
     }
 
     onStartUI() {
-        this.onRefreshUI(this.props as IProps);
+        this.onRefreshUI();
     }
     onbtn_click = () => {
         this.close()
     }
 
-    onRefreshUI(p: IProps) {
+    onRefreshUI() {
+        const p = this.props;
         if (!p.itemname) {
             return;
         }
