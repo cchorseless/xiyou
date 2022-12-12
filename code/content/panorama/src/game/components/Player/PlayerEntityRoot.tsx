@@ -6,6 +6,7 @@ import { ChessControlComponent } from "../ChessControlComponent";
 import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";
 import { CourierDataComponent } from "../Courier/CourierDataComponent";
 import { DrawComponent } from "../Draw/DrawComponent";
+import { PublicShopComponent } from "../Public/PublicShopComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerDataComponent } from "./PlayerDataComponent";
 import { PlayerHeroComponent } from "./PlayerHeroComponent";
@@ -68,6 +69,9 @@ export class PlayerEntityRoot extends ET.Entity {
     }
     get PlayerDataComp() {
         return this.GetComponentByName<PlayerDataComponent>("PlayerDataComponent")!;
+    }
+    get PublicShopComp() {
+        return this.GetComponentByName<PublicShopComponent>("PublicShopComponent")!;
     }
 
     get ChessControlComp() {

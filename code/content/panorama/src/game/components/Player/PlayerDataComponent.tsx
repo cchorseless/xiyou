@@ -29,5 +29,4 @@ export class PlayerDataComponent extends ET.Component {
     food: number = 0;
     wood: number = 0;
 
-
 }

@@ -1,9 +1,8 @@
-import { PanelAttributes, useRegisterForUnhandledEvent } from "@demon673/react-panorama";
+import { PanelAttributes } from "@demon673/react-panorama";
 import React, { createRef } from "react";
 import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { AbilityHelper, ItemHelper, UnitHelper } from "../../../helper/DotaEntityHelper";
-import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
@@ -18,8 +17,8 @@ export interface ICCAbilityPanel extends PanelAttributes {
     slot?: number,
     dragtype?: string,
     dragstartcallback?: (tDragCallbacks: DragSettings, overrideentityindex: ItemEntityIndex, overridedisplaykeybind: DOTAKeybindCommand_t, slot: number, dragtype: string) => boolean;
-    dragdropcallback?: (pDraggedPanel: Panel, overrideentityindex: ItemEntityIndex, overridedisplaykeybind: DOTAKeybindCommand_t, slot: number, dragtype: string) => boolean;
-    dragendcallback?: (pDraggedPanel: Panel, overrideentityindex: ItemEntityIndex, overridedisplaykeybind: DOTAKeybindCommand_t, slot: number, dragtype: string) => void;
+    dragdropcallback?: (pDraggedPanel: IDragPanel, overrideentityindex: ItemEntityIndex, overridedisplaykeybind: DOTAKeybindCommand_t, slot: number, dragtype: string) => boolean;
+    dragendcallback?: (pDraggedPanel: IDragPanel, overrideentityindex: ItemEntityIndex, overridedisplaykeybind: DOTAKeybindCommand_t, slot: number, dragtype: string) => void;
 }
 
 
@@ -83,19 +82,19 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     let iAbilityIndex = overrideentityindex;
                     if (iAbilityIndex != -1) {
                         let sAbilityName = Abilities.GetAbilityName(iAbilityIndex);
-                        let pDisplayPanel: ItemImage | AbilityImage;
+                        let pDisplayPanel: IDragPanel;
                         if (Abilities.IsItem(iAbilityIndex)) {
                             pDisplayPanel = $.CreatePanel("DOTAItemImage", $.GetContextPanel(), "dragImage");
-                            pDisplayPanel.itemname = sAbilityName;
+                            (pDisplayPanel as ItemImage).itemname = sAbilityName;
                         } else {
                             pDisplayPanel = $.CreatePanel("DOTAAbilityImage", $.GetContextPanel(), "dragImage");
-                            pDisplayPanel.abilityname = sAbilityName;
+                            (pDisplayPanel as AbilityImage).abilityname = sAbilityName;
                         }
-                        CSSHelper.SavePanelData(pDisplayPanel, "overrideentityindex", iAbilityIndex);
-                        CSSHelper.SavePanelData(pDisplayPanel, "m_pPanel", pSelf);
-                        CSSHelper.SavePanelData(pDisplayPanel, "m_DragCompleted", false);
-                        CSSHelper.SavePanelData(pDisplayPanel, "m_DragType", dragtype);
-                        CSSHelper.SavePanelData(pDisplayPanel, "m_Slot", slot);
+                        pDisplayPanel.overrideentityindex = iAbilityIndex;
+                        pDisplayPanel.m_pPanel = pSelf;
+                        pDisplayPanel.m_DragCompleted = false;
+                        pDisplayPanel.m_DragType = dragtype;
+                        pDisplayPanel.m_Slot = slot;
                         pDisplayPanel.AddClass(dragtype);
                         tDragCallbacks.displayPanel = pDisplayPanel;
                         tDragCallbacks.offsetX = 0;
@@ -106,16 +105,16 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 }
                 return true;
             });
-            $.RegisterEventHandler("DragLeave", pSelf, (pPanel: Panel, pDraggedPanel: Panel) => {
+            $.RegisterEventHandler("DragLeave", pSelf, (pPanel: Panel, pDraggedPanel: IDragPanel) => {
                 const dragtype = this.props.dragtype!;
-                if (CSSHelper.GetPanelData(pDraggedPanel, "m_pPanel") == null) {
+                if (pDraggedPanel.m_pPanel == null) {
                     return false;
                 }
-                if (CSSHelper.GetPanelData(pDraggedPanel, "m_DragType") != dragtype) {
+                if (pDraggedPanel.m_DragType != dragtype) {
                     return false;
                 }
                 if (pSelf && pPanel == this.AbilityButton.current) {
-                    if (CSSHelper.GetPanelData(pDraggedPanel, "m_pPanel") == pSelf) {
+                    if (pDraggedPanel.m_pPanel == pSelf) {
                         return false;
                     }
 
@@ -125,17 +124,17 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 }
                 return false;
             });
-            $.RegisterEventHandler("DragEnter", pSelf, (pPanel: Panel, pDraggedPanel: Panel) => {
+            $.RegisterEventHandler("DragEnter", pSelf, (pPanel: Panel, pDraggedPanel: IDragPanel) => {
                 const dragtype = this.props.dragtype!;
 
-                if (CSSHelper.GetPanelData(pDraggedPanel, "m_pPanel") == null) {
+                if (pDraggedPanel.m_pPanel == null) {
                     return true;
                 }
-                if (CSSHelper.GetPanelData(pDraggedPanel, "m_DragType") != dragtype) {
+                if (pDraggedPanel.m_DragType != dragtype) {
                     return true;
                 }
                 if (pSelf && pPanel == this.AbilityButton.current) {
-                    if (CSSHelper.GetPanelData(pDraggedPanel, "m_pPanel") == pSelf) {
+                    if (pDraggedPanel.m_pPanel == pSelf) {
                         return true;
                     }
                     pSelf.AddClass("potential_drop_target");
@@ -143,43 +142,41 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 }
                 return false;
             });
-            $.RegisterEventHandler("DragDrop", pSelf, (pPanel: Panel, pDraggedPanel: Panel) => {
+            $.RegisterEventHandler("DragDrop", pSelf, (pPanel: Panel, pDraggedPanel: IDragPanel) => {
                 const dragdropcallback = this.props.dragdropcallback!;
                 const overrideentityindex = this.props.overrideentityindex!;
                 const dragtype = this.props.dragtype!;
                 const overridedisplaykeybind = this.props.overridedisplaykeybind!;
                 const slot = this.props.slot!;
-
-                if (CSSHelper.GetPanelData(pDraggedPanel, "m_pPanel") == null) {
+                if (pDraggedPanel.m_pPanel == null) {
                     return true;
                 }
-                if (CSSHelper.GetPanelData(pDraggedPanel, "m_DragType") != dragtype) {
+                if (pDraggedPanel.m_DragType != dragtype) {
                     return true;
                 }
                 if (pSelf && pPanel == this.AbilityButton.current) {
-                    if (CSSHelper.GetPanelData(pDraggedPanel, "m_pPanel") == pSelf) {
-                        CSSHelper.SavePanelData(pDraggedPanel, "m_DragCompleted", true);
+                    if (pDraggedPanel.m_pPanel == pSelf) {
+                        pDraggedPanel.m_DragCompleted = true;
                         return true;
                     }
                     if (typeof dragdropcallback == "function" && dragdropcallback(pDraggedPanel, overrideentityindex, overridedisplaykeybind, slot, dragtype)) {
-                        CSSHelper.SavePanelData(pDraggedPanel, "m_DragCompleted", true);
+                        pDraggedPanel.m_DragCompleted = true;
                     }
                     return true;
                 } else {
-                    if (CSSHelper.GetPanelData(pDraggedPanel, "m_pPanel") == null) {
+                    if (pDraggedPanel.m_pPanel == null) {
                         return true;
                     }
-                    CSSHelper.SavePanelData(pDraggedPanel, "m_DragCompleted", true);
+                    pDraggedPanel.m_DragCompleted = true;
                 }
                 return false;
             });
-            $.RegisterEventHandler("DragEnd", pSelf, (pPanel: Panel, pDraggedPanel: Panel) => {
+            $.RegisterEventHandler("DragEnd", pSelf, (pPanel: Panel, pDraggedPanel: IDragPanel) => {
                 const dragendcallback = this.props.dragendcallback!;
                 const overrideentityindex = this.props.overrideentityindex!;
                 const dragtype = this.props.dragtype!;
                 const overridedisplaykeybind = this.props.overridedisplaykeybind!;
                 const slot = this.props.slot!;
-
                 if (pSelf && pPanel == this.AbilityButton.current) {
                     if (typeof dragendcallback == "function") {
                         dragendcallback(pDraggedPanel, overrideentityindex, overridedisplaykeybind, slot, dragtype);

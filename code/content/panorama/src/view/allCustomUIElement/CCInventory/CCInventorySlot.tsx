@@ -71,8 +71,8 @@ export class CCInventorySlot extends CCPanel<ICCInventorySlot> {
                     draggable={draggable}
                     dragtype={dragtype}
                     dragdropcallback={(pDraggedPanel, overrideentityindex, overridedisplaykeybind, slot, dragtype) => {
-                        let iAbilityIndex = CSSHelper.GetPanelData(pDraggedPanel, "overrideentityindex") as any;
-                        let m_Slot = CSSHelper.GetPanelData(pDraggedPanel, "m_Slot") as any;
+                        let iAbilityIndex = pDraggedPanel.overrideentityindex!;
+                        let m_Slot = pDraggedPanel.m_Slot;
                         if (iAbilityIndex != -1 && m_Slot != -1) {
                             let iCasterIndex = Abilities.GetCaster(iAbilityIndex);
                             Game.PrepareUnitOrders({
@@ -87,9 +87,9 @@ export class CCInventorySlot extends CCPanel<ICCInventorySlot> {
                         return false;
                     }}
                     dragendcallback={(pDraggedPanel, overrideentityindex, overridedisplaykeybind, slot, dragtype) => {
-                        if (CSSHelper.GetPanelData(pDraggedPanel, "m_DragCompleted") == false) {
-                            let iAbilityIndex = CSSHelper.GetPanelData(pDraggedPanel, "overrideentityindex") as any;
-                            let m_Slot = CSSHelper.GetPanelData(pDraggedPanel, "m_Slot") as number;
+                        if (pDraggedPanel.m_DragCompleted == false) {
+                            let iAbilityIndex = pDraggedPanel.overrideentityindex;
+                            let m_Slot = pDraggedPanel.m_Slot!;
                             if (iAbilityIndex != -1 && m_Slot != -1) {
                                 this.onBtn_dragend(m_Slot)
                             }

@@ -1010,6 +1010,25 @@ export module AbilityHelper {
 
 export module UnitHelper {
 
+    export function GetCursorUnit(iTeam: number = -1) {
+        let vPosCursor = GameUI.GetCursorPosition();
+        let world_position = GameUI.GetScreenWorldPosition(vPosCursor);
+        if (world_position == null) {
+            return -1;
+        }
+        let targets = GameUI.FindScreenEntities(vPosCursor);
+        targets = targets.filter(e => e.accurateCollision);
+        if (iTeam != -1) {
+            targets.filter(e => Entities.GetTeamNumber(e.entityIndex) == iTeam);
+        }
+        targets = targets.filter(e => (!Entities.IsIllusion(e.entityIndex)) && (Entities.GetClassname(e.entityIndex) == "npc_dota_creature" || Entities.IsRealHero(e.entityIndex)) && Entities.IsInventoryEnabled(e.entityIndex));
+        if (targets.length == 0) {
+            return -1;
+        }
+        targets.sort((a, b) => Game.Length2D(Entities.GetAbsOrigin(a.entityIndex), world_position!) - Game.Length2D(Entities.GetAbsOrigin(b.entityIndex), world_position!));
+        return targets[0].entityIndex;
+    };
+
     export function GetAbilityIndex(iEntityIndex: EntityIndex, iAbilityEntIndex: AbilityEntityIndex) {
         for (let i = 0; i < Entities.GetAbilityCount(iEntityIndex); i++) {
             const _iAbilityEntIndex = Entities.GetAbility(iEntityIndex, i);
@@ -1252,5 +1271,121 @@ export module ItemHelper {
             }
         }
         return [aList, aResults];
+    }
+
+    export function GetItemName(item: string | ItemEntityIndex) {
+        let sItemName: string;
+        if (typeof (item) == "string") {
+            sItemName = item;
+        } else {
+            sItemName = Abilities.GetAbilityName(item);
+        }
+        return sItemName;
+    }
+    /**
+     * 获取物品木材价格
+     * @param item 物品名字或者index
+     * @returns 返回物品价格
+     */
+    export function GetItemWoodCost(item: string | ItemEntityIndex) {
+        let sItemName = GetItemName(item);
+        let total = Number(GetItemValue(sItemName, "WoodCost")) || 0;
+        if (typeof (item) != "string") {
+            if (Items.IsStackable(item)) {
+                total *= Items.GetCurrentCharges(item) / Items.GetInitialCharges(item);
+            }
+        }
+        return total;
+    }
+
+    /**
+     * 获取物品挑战点数价格
+     * @param item 物品名字或者index
+     * @returns 返回物品价格
+     */
+    export function GetItemPointCost(item: string | ItemEntityIndex) {
+        let sItemName = GetItemName(item);
+        let total = Number(GetItemValue(sItemName, "PointCost")) || 0;
+        if (typeof (item) != "string") {
+            if (Items.IsStackable(item)) {
+                total *= Items.GetCurrentCharges(item) / Items.GetInitialCharges(item);
+            }
+        }
+        return total;
+    }
+
+    /**
+     * 获取物品糖果价格
+     * @param item 物品名字或者index
+     * @returns 返回物品价格
+     */
+    export function GetItemFoodCost(item: string | ItemEntityIndex) {
+        let sItemName = GetItemName(item);
+        let total = Number(GetItemValue(sItemName, "FoodCost")) || 0;
+        if (typeof (item) != "string") {
+            if (Items.IsStackable(item)) {
+                total *= Items.GetCurrentCharges(item) / Items.GetInitialCharges(item);
+            }
+        }
+        return total;
+    }
+
+    /**
+     * 获取物品对应等级的价格
+     * @param sItemName 物品名字
+     * @param iLevel 物品等级
+     * @returns 返回物品价格
+     */
+    export function GetItemCostLV(sItemName: string, iLevel: number) {
+        if (iLevel >= 1 && iLevel <= 5) {
+            return Number(GetItemValue(sItemName, "ItemCost" + iLevel)) || GetItemCost(sItemName) || 0;
+        } else {
+            return GetItemCost(sItemName);
+        }
+    }
+    /**
+     * 物品是否可以合成
+     * @param iItemIndex 物品实体index
+     */
+    export function IsCombinable(iItemIndex: ItemEntityIndex) {
+        return false;
+        // const data = CustomNetTables.GetTableValue("common", "artifact");
+        // const tLocalArtifacts = (data && (data[Players.GetLocalPlayer()])) ?? {};
+        // const bCanCombine4Star = (() => {
+        //     for (let i = 0; i < CustomUIConfig.ConfigsKV.artifact.PLAYER_MAX_ARTIFACT_WITH_EXTRA; i++) {
+        //         let itemIndex: ItemEntityIndex | undefined = tLocalArtifacts[i + 1];
+        //         if (itemIndex != undefined && Abilities.GetAbilityName(itemIndex) == "item_artifact_demagicking_maul") {
+        //             return true;
+        //         }
+        //     }
+        // })();
+        // return IsUpgradable(iItemIndex)
+        //     && CustomUIConfig.ItemsKv[Abilities.GetAbilityName(iItemIndex)].Combinable == 1
+        //     && (bCanCombine4Star ? (Abilities.GetLevel(iItemIndex) < 5) : (Abilities.GetLevel(iItemIndex) < 4));
+    }
+
+    // let tRemakeGroups = {};
+    // let tRemakeItem2Group = {};
+    // for (let sItemName in CustomUIConfig.ItemsKv) {
+    //     let Info = CustomUIConfig.ItemsKv[sItemName];
+    //     if (Info.RemakeGroup) {
+    //         if (tRemakeGroups[Info.RemakeGroup] == undefined) {
+    //             tRemakeGroups[Info.RemakeGroup] = {};
+    //         }
+    //         tRemakeGroups[Info.RemakeGroup][sItemName] = 1;
+    //         tRemakeItem2Group[sItemName] = Info.RemakeGroup;
+    //     }
+    // }
+    // /**
+    //  * 物品是否可以重铸
+    //  * @param iItemIndex 物品实体index 物品名
+    //  */
+    // export function IsRemakable(item: string | ItemEntityIndex) {
+    //     let sItemName = GetItemName(item);
+    //     return Boolean(tRemakeItem2Group[sItemName]);
+    // }
+
+    export function IsHeroUniqueItem(iItemIndex: ItemEntityIndex) {
+        return GetItemValue(Abilities.GetAbilityName(iItemIndex), "hero") != undefined;
     }
 }
