@@ -1,0 +1,82 @@
+.CC_PublicBagSlotItem {
+    width: 55px;
+    height: width-percentage(6400/88%);
+    margin: 6px;
+
+    transition-property: border, brightness;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+
+    background-image: url("file://{images}/custom_game/inventory/item_bg.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    &.AnimationShine {
+        border: 2px solid #FFFFFF;
+        brightness: 2;
+        border-radius: 4px;
+    }
+
+    #BackPackSlotBorder {
+        width: 100%;
+        height: 100%;
+        background-image: url("file://{images}/custom_game/inventory/item_border.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+    .CustomItemImage {
+        width: 100%;
+        height: 100%;
+        // margin: 3px 3px;
+        // background-size: 100% 100%;
+        // border-radius: 2px;
+    }
+
+    #DropTargetHighlight {
+        width: 100%;
+        height: 100%;
+
+        background-color: gradient(radial, 50% -20%, 0% 0%, 80% 100%, from(#FFFFFF1E), to(#FFFFFF00));
+        opacity: 0;
+
+        transition-property: opacity;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-in-out;
+    }
+
+    #itemCharge {
+        align: right bottom;
+        margin-right: 3px;
+        margin-bottom: -3px;
+
+        visibility: collapse;
+
+        text-align: right;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        text-shadow: 0px 0px 3px 4 #000000;
+        font-family: RadianceM;
+    }
+
+    &.dragging_from {
+        saturation: 0.3;
+        wash-color: #666666;
+        contrast: 0.95;
+        brightness: 0.7;
+        pre-transform-scale2d: .95;
+    }
+
+    &.potential_drop_target {
+        #DropTargetHighlight {
+            opacity: 1;
+        }
+    }
+
+    &.has_charge {
+        #itemCharge {
+            visibility: visible;
+        }
+    }
+}

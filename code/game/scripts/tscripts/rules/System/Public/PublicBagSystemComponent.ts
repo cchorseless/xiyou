@@ -4,7 +4,7 @@ import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { ActiveRootItem } from "../../../npc/items/ActiveRootItem";
 import { PublicBagConfig } from "../../../shared/PublicBagConfig";
 import { ItemEntityRoot } from "../../Components/Item/ItemEntityRoot";
-import { ET } from "../../Entity/Entity";
+import { ET, serializeETProps } from "../../Entity/Entity";
 
 
 
@@ -15,6 +15,7 @@ export class PublicBagSystemComponent extends ET.Component {
     }
     public addEvent() {
     }
+    @serializeETProps()
     AllItem: { [key: string]: string } = {};
     getItemByIndex(key: string) {
         let entityid = this.AllItem[key];
@@ -22,7 +23,8 @@ export class PublicBagSystemComponent extends ET.Component {
         return GameRules.Addon.ETRoot.GetDomainChild<ItemEntityRoot>(entityid);
     }
     IsEmpty() {
-        return Object.values(this.AllItem).length < PublicBagConfig.MAX_ITEM_COUNT;
+        const count = PublicBagConfig.PUBLIC_ITEM_SLOT_MAX - PublicBagConfig.PUBLIC_ITEM_SLOT_MIN + 1
+        return Object.values(this.AllItem).length < count;
     }
 
     addBuildingItem(towername: string) {
@@ -37,10 +39,13 @@ export class PublicBagSystemComponent extends ET.Component {
     putInItem(item: ItemEntityRoot) {
         if (!this.IsEmpty()) { return; }
         if (Object.values(this.AllItem).includes(item.Id)) { return; }
-        for (let i = 0; i < PublicBagConfig.MAX_ITEM_COUNT; i++) {
-            if (this.AllItem[i] == null) {
-                this.AllItem[i] = item.Id;
+        for (let i = PublicBagConfig.PUBLIC_ITEM_SLOT_MIN; i < PublicBagConfig.PUBLIC_ITEM_SLOT_MAX + 1; i++) {
+            if (this.AllItem[i + ""] == null) {
+                this.AllItem[i + ""] = item.Id;
                 GameRules.Addon.ETRoot.AddDomainChild(item);
+                GameRules.Addon.ETRoot.SyncClientEntity(item);
+                GameRules.Addon.ETRoot.SyncClientEntity(this);
+                break;
             }
         }
     }

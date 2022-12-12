@@ -27,6 +27,7 @@ import { CourierDataComponent } from "./components/Courier/CourierDataComponent"
 import { CourierEntityRoot } from "./components/Courier/CourierEntityRoot";
 import { PublicBagSystemComponent } from "./system/Public/PublicBagSystemComponent";
 import { GameStateSystemComponent } from "./components/GameState/GameStateSystemComponent";
+import { PublicShopComponent } from "./components/Public/PublicShopComponent";
 
 
 GameStateSystemComponent;
@@ -66,7 +67,7 @@ EntityRootManagerComponent;
 RoundManagerComponent;
 ERoundBoard;
 
-
+PublicShopComponent;
 PublicBagSystemComponent;
 
 
