@@ -19,6 +19,7 @@ import { building_unit_enemy } from "./building/building_unit_enemy"
 import { building_config } from "./building/building_config" 
 import { building_unit_summoned } from "./building/building_unit_summoned" 
 import { building_ability_tower } from "./building/building_ability_tower" 
+import { courier_abilities } from "./abilities/courier_abilities" 
 export interface KvAllInterface  {
 "shipin_config": shipin_config.OBJ_1_1,
 "pool_config": pool_config.OBJ_1_1,
@@ -40,6 +41,7 @@ export interface KvAllInterface  {
 "building_config": building_config.OBJ_1_1,
 "building_unit_summoned": building_unit_summoned.OBJ_1_1,
 "building_ability_tower": building_ability_tower.OBJ_1_1,
+"courier_abilities": courier_abilities.OBJ_1_1,
 }
 export const KvAllPath = {
 "shipin_config": "scripts/npc/kvConfig/shipin_config.kv",
@@ -62,6 +64,7 @@ export const KvAllPath = {
 "building_config": "scripts/npc/building/building_config.kv",
 "building_unit_summoned": "scripts/npc/building/building_unit_summoned.kv",
 "building_ability_tower": "scripts/npc/building/building_ability_tower.kv",
+"courier_abilities": "scripts/npc/abilities/courier_abilities.kv",
 }
 export interface KvServerInterface   {
 "shipin_config": shipin_config.OBJ_1_1,
@@ -84,6 +87,7 @@ export interface KvServerInterface   {
 "building_config": building_config.OBJ_1_1,
 "building_unit_summoned": building_unit_summoned.OBJ_1_1,
 "building_ability_tower": building_ability_tower.OBJ_1_1,
+"courier_abilities": courier_abilities.OBJ_1_1,
 }
 export const KvServer = {
 "shipin_config": "scripts/npc/kvConfig/shipin_config.kv",
@@ -106,6 +110,7 @@ export const KvServer = {
 "building_config": "scripts/npc/building/building_config.kv",
 "building_unit_summoned": "scripts/npc/building/building_unit_summoned.kv",
 "building_ability_tower": "scripts/npc/building/building_ability_tower.kv",
+"courier_abilities": "scripts/npc/abilities/courier_abilities.kv",
 }
 export interface KvClientInterface   {
 "shipin_config": shipin_config.OBJ_1_1,
@@ -128,6 +133,7 @@ export interface KvClientInterface   {
 "building_config": building_config.OBJ_1_1,
 "building_unit_summoned": building_unit_summoned.OBJ_1_1,
 "building_ability_tower": building_ability_tower.OBJ_1_1,
+"courier_abilities": courier_abilities.OBJ_1_1,
 }
 export const KvClient = {
 "shipin_config": "scripts/npc/kvConfig/shipin_config.kv",
@@ -150,4 +156,5 @@ export const KvClient = {
 "building_config": "scripts/npc/building/building_config.kv",
 "building_unit_summoned": "scripts/npc/building/building_unit_summoned.kv",
 "building_ability_tower": "scripts/npc/building/building_ability_tower.kv",
+"courier_abilities": "scripts/npc/abilities/courier_abilities.kv",
 }

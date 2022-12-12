@@ -26,7 +26,6 @@ export class CCPopUpDialog<T = {}> extends CCPanel<ICCPopUpDialog & T> {
     render() {
         const { title } = this.props;
         return (
-            this.__root___isValid &&
             <Panel ref={this.__root__}   {...this.initRootAttrs()}
                 onload={(self) => { self.AddClass("CC_PopupMainShow"); }}
             >

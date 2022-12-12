@@ -19,6 +19,7 @@ import { building_unit_enemy } from "./building/building_unit_enemy"
 import { building_config } from "./building/building_config" 
 import { building_unit_summoned } from "./building/building_unit_summoned" 
 import { building_ability_tower } from "./building/building_ability_tower" 
+import { courier_abilities } from "./abilities/courier_abilities" 
 export interface KvAllInterface extends 
 shipin_config.OBJ_0_1,
 pool_config.OBJ_0_1,
@@ -39,7 +40,8 @@ building_unit_tower.OBJ_0_1,
 building_unit_enemy.OBJ_0_1,
 building_config.OBJ_0_1,
 building_unit_summoned.OBJ_0_1,
-building_ability_tower.OBJ_0_1{ }
-export type KV_AllAbilitys =  building_ability_tower.OBJ_1_1 ;
+building_ability_tower.OBJ_0_1,
+courier_abilities.OBJ_0_1{ }
+export type KV_AllAbilitys =  courier_abilities.OBJ_1_1 | building_ability_tower.OBJ_1_1 ;
 export type KV_AllItems  = building_item_card.OBJ_1_1 ;
 export type KV_AllUnits  = building_unit_enemy.OBJ_1_1 |building_unit_tower.OBJ_1_1 |building_unit_summoned.OBJ_1_1 ;

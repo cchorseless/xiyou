@@ -119,7 +119,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         const castentityindex = this.props.castentityindex!;
         const tData = KVHelper.KVAbilitys()[abilityname] || {};
         const iLevel = this.props.level || -1;
-        const combinationLabel = tData.CombinationLabel;
+        const combinationLabel = tData.CombinationLabel! as string;
         const entity = PlayerScene.Local.CombinationManager.getCombinationByCombinationName(combinationLabel)
         const uniqueConfigList = entity?.uniqueConfigList || [];
         const herolist: string[] = [];
@@ -151,14 +151,14 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         let sTargetType = AbilityHelper.getTargetType(iTeam, iType);
         dialogVariables['targettype'] = $.Localize("#" + sTargetType);
 
-        let iDamageType = iAbilityIndex != -1 ? Abilities.GetAbilityDamageType(iAbilityIndex) : AbilityHelper.SDamageType2IDamageType(tData.AbilityUnitDamageType || "");
+        let iDamageType = iAbilityIndex != -1 ? Abilities.GetAbilityDamageType(iAbilityIndex) : AbilityHelper.SDamageType2IDamageType(tData.AbilityUnitDamageType as string || "");
         let sDamageType = AbilityHelper.getDamageType(iDamageType);
         dialogVariables['damagetype'] = $.Localize("#" + sDamageType);
 
-        let sSpellImmunity = AbilityHelper.getSpellImmunity(tData.SpellImmunityType || "");
+        let sSpellImmunity = AbilityHelper.getSpellImmunity(tData.SpellImmunityType as string || "");
         dialogVariables['spellimmunity'] = $.Localize("#" + sSpellImmunity);
 
-        let sSpellDispellableType = tData.SpellDispellableType || "";
+        let sSpellDispellableType = tData.SpellDispellableType as string || "";
         let sDispelType = AbilityHelper.getDispelType(sSpellDispellableType);
         dialogVariables['dispeltype'] = $.Localize("#" + sDispelType);
         let ScepterUpgradable = (tData.HasScepterUpgrade ? tData.HasScepterUpgrade == "1" : false) && Entities.HasScepter(castentityindex);
@@ -185,7 +185,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
             let sValueDescription = "#DOTA_Tooltip_ability_" + abilityname + "_" + sValueName;
             switch (sValueName) {
                 case "abilitydamage":
-                    let aValues = AbilityHelper.StringToValues(tData.AbilityDamage || "");
+                    let aValues = AbilityHelper.StringToValues(tData.AbilityDamage as string || "");
                     sValueDescription = "AbilityDamage";
                     if (aValues.length == 0 || (aValues.length == 1 && aValues[0] == 0)) sValueDescription = "";
                     break;

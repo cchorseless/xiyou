@@ -107,6 +107,10 @@ export class CCAbilityList extends CCPanel<ICCAbilityList> {
             })
         })
     }
+    onInitUI() {
+        this.updateAbilityList()
+        this.addEvent()
+    }
 
     render() {
         const abilities = this.GetState<number[]>("abilities") || [];

@@ -31,9 +31,10 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
                 </Panel>
                 <CCPanel id="DacBoardCenter" minWidth={"300px"} hittest={false}>
                     <CCPanel id="DacBoardCenterBG" />
-                    <CCPanel flowChildren="right" hittest={false}>
-                        <CCAbilityList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"50px"} />
-                        <CCDOTAAghsStatusDisplay marginTop={"60px"} />
+                    <CCPanel flowChildren="right" hittest={false} verticalAlign="bottom" marginBottom={"60px"} >
+                        {/* <CCAbilityList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"50px"} /> */}
+                        <CCAbilityList horizontalAlign={"center"} verticalAlign="center" />
+                        <CCDOTAAghsStatusDisplay />
                     </CCPanel>
                     <CCHealthMana verticalAlign="bottom" marginBottom={"0px"} />
                     <CCBuffList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"140px"} />

@@ -6,9 +6,10 @@ import { AbilityHelper, ItemHelper, UnitHelper } from "../../../helper/DotaEntit
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 import { CCPanel } from "../CCPanel/CCPanel";
-import { CCAbilityButton } from "./CCAbilityButton";
+import { CCAbilityInfoDialog } from "./CCAbilityInfoDialog";
 import "./CCAbilityPanel.less";
 
 export interface ICCAbilityPanel extends PanelAttributes {
@@ -49,7 +50,6 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             m_in_ability_phase: false,
             m_charges_percent: 1,
             m_cooldown_percent: 1,
-            m_cast_start_time: -1,
             dialogVariables: {}
         });
         this.useEffectProps(() => {
@@ -58,22 +58,19 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
     }
     onStartUI() {
         this.onRefreshUI()
-
+        this.addDragEvent();
     }
     addDragEvent() {
         const draggable = this.props.draggable!;
-        const dragstartcallback = this.props.dragstartcallback!;
-        const dragdropcallback = this.props.dragdropcallback!;
-        const dragendcallback = this.props.dragendcallback!;
-        const overrideentityindex = this.props.overrideentityindex!;
-        const overridedisplaykeybind = this.props.overridedisplaykeybind!;
-        const slot = this.props.slot!;
-        const dragtype = this.props.dragtype!;
         const pSelf = this.__root__.current!;
         if (draggable) {
             // 拖拽相关
             $.RegisterEventHandler("DragStart", pSelf, (pPanel: Panel, tDragCallbacks: DragSettings) => {
-                LogHelper.print("DragStart", 11111)
+                const dragstartcallback = this.props.dragstartcallback!;
+                const overrideentityindex = this.props.overrideentityindex!;
+                const overridedisplaykeybind = this.props.overridedisplaykeybind!;
+                const dragtype = this.props.dragtype!;
+                const slot = this.props.slot!;
                 if (pSelf && pPanel == this.AbilityButton.current) {
                     if (!pSelf || pSelf.BHasClass("no_ability")) {
                         return true;
@@ -110,6 +107,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 return true;
             });
             $.RegisterEventHandler("DragLeave", pSelf, (pPanel: Panel, pDraggedPanel: Panel) => {
+                const dragtype = this.props.dragtype!;
                 if (CSSHelper.GetPanelData(pDraggedPanel, "m_pPanel") == null) {
                     return false;
                 }
@@ -128,6 +126,8 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 return false;
             });
             $.RegisterEventHandler("DragEnter", pSelf, (pPanel: Panel, pDraggedPanel: Panel) => {
+                const dragtype = this.props.dragtype!;
+
                 if (CSSHelper.GetPanelData(pDraggedPanel, "m_pPanel") == null) {
                     return true;
                 }
@@ -144,6 +144,12 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 return false;
             });
             $.RegisterEventHandler("DragDrop", pSelf, (pPanel: Panel, pDraggedPanel: Panel) => {
+                const dragdropcallback = this.props.dragdropcallback!;
+                const overrideentityindex = this.props.overrideentityindex!;
+                const dragtype = this.props.dragtype!;
+                const overridedisplaykeybind = this.props.overridedisplaykeybind!;
+                const slot = this.props.slot!;
+
                 if (CSSHelper.GetPanelData(pDraggedPanel, "m_pPanel") == null) {
                     return true;
                 }
@@ -168,6 +174,12 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                 return false;
             });
             $.RegisterEventHandler("DragEnd", pSelf, (pPanel: Panel, pDraggedPanel: Panel) => {
+                const dragendcallback = this.props.dragendcallback!;
+                const overrideentityindex = this.props.overrideentityindex!;
+                const dragtype = this.props.dragtype!;
+                const overridedisplaykeybind = this.props.overridedisplaykeybind!;
+                const slot = this.props.slot!;
+
                 if (pSelf && pPanel == this.AbilityButton.current) {
                     if (typeof dragendcallback == "function") {
                         dragendcallback(pDraggedPanel, overrideentityindex, overridedisplaykeybind, slot, dragtype);
@@ -178,13 +190,19 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             });
         }
     }
+    private fCastStartTime = -1;
+
+    intervalRefresh() {
+        // 延迟0.1，保证数据最新
+        TimerHelper.AddTimer(0.1, FuncHelper.Handler.create(this, () => {
+            this.onRefreshUI();
+        }), false);
+    }
 
     onRefreshUI() {
-        this.addDragEvent();
         const pSelf = this.__root__.current!;
         const m_cooldown_ready = this.GetState<boolean>("m_cooldown_ready", false);
         const m_in_ability_phase = this.GetState("m_in_ability_phase", false);
-        const m_cast_start_time = this.GetState("m_cast_start_time", -1);
         const overrideentityindex = this.props.overrideentityindex!;
         const slot = this.props.slot!;
         const overridedisplaykeybind = this.props.overridedisplaykeybind!;
@@ -315,23 +333,22 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             }
         }
 
-        let fCastStartTime = m_cast_start_time;
         if (bInAbilityPhase) {
-            if (fCastStartTime == undefined || fCastStartTime == -1) fCastStartTime = Game.GetGameTime() - Game.GetGameFrameTime();
-
-            let fCastTime = FuncHelper.Clamp(Game.GetGameTime() - fCastStartTime, 0, Abilities.GetCastPoint(overrideentityindex));
+            if (this.fCastStartTime == undefined || this.fCastStartTime == -1) this.fCastStartTime = Game.GetGameTime() - Game.GetGameFrameTime();
+            let fCastTime = FuncHelper.Clamp(Game.GetGameTime() - this.fCastStartTime, 0, Abilities.GetCastPoint(overrideentityindex));
             let fPercent = fCastTime / Abilities.GetCastPoint(overrideentityindex);
             this.UpdateState({ "m_cooldown_percent": fPercent })
         } else {
-            fCastStartTime = -1;
+            this.fCastStartTime = -1;
         }
-        this.UpdateState({ "m_cast_start_time": fCastStartTime })
         if (!bCooldownReady) {
             let fCooldownTimeRemaining = Abilities.GetCooldownTimeRemaining(overrideentityindex);
             let fPercent = (fCooldownTimeRemaining / fCooldownLength);
             if (fCooldownLength == 0) fPercent = 1;
-            this.UpdateState({ "m_cooldown_percent": fPercent })
-            this.updateDialogVariables("cooldown_timer", Math.ceil(fCooldownTimeRemaining));
+            this.UpdateState({ "m_cooldown_percent": fPercent });
+            this.UpdateState({ "cooldown_timer": fCooldownTimeRemaining });
+            // this.updateDialogVariables("cooldown_timer", Math.ceil(fCooldownTimeRemaining));
+            this.intervalRefresh();
         }
         let pShine = pSelf.FindChildTraverse("Shine");
         if (pShine) {
@@ -375,12 +392,13 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         }
         this.UpdateState({ "m_in_ability_phase": bInAbilityPhase })
         this.UpdateState({ "m_cooldown_ready": bCooldownReady })
+
     }
 
     private updateDialogVariables(k: string, v: any) {
         let dialogVariables = this.GetState("dialogVariables", {} as { [K: string]: any });
         dialogVariables[k] = v;
-        dialogVariables = { ...dialogVariables };
+        dialogVariables = Object.assign({}, dialogVariables);
         this.UpdateState({ "dialogVariables": dialogVariables });
     }
     private onbtn_leftclick() {
@@ -420,6 +438,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             }
             let iCasterIndex = Abilities.GetCaster(overrideentityindex);
             Abilities.ExecuteAbility(overrideentityindex, iCasterIndex, false);
+            this.intervalRefresh();
         }
     }
     private onbtn_rightclick() {
@@ -446,7 +465,6 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     let bMoveToStash = false;
                     let bDropFromStash = false;
                     let bMoveToTraining = true;
-
                     // 铸造相关
                     // let castingInfo = CustomNetTables.GetTableValue("common", "casting_info") || {};
                     // let castingName = "";
@@ -496,7 +514,6 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     //   this.updateDialogVariables("int_value", Number(GameUI.CustomUIConfig().ItemsKv[castingName].CastingCrystalCost || 0));
                     // }
                 }
-                return;
             }
             if (Abilities.IsAutocast(overrideentityindex)) {
                 Game.PrepareUnitOrders({
@@ -505,32 +522,48 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     UnitIndex: Abilities.GetCaster(overrideentityindex),
                 });
             }
+            // const pSelf = this.__root__.current!;
+            // pSelf.SetHasClass("auto_cast_enabled", !Abilities.GetAutoCastState(overrideentityindex));
+            this.intervalRefresh()
         }
     }
     private onbtn_moveover() {
         const overrideentityindex = this.props.overrideentityindex!;
-        // if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
-        //     if (Abilities.IsItem(overrideentityindex)) {
-        //         GameEvents.SendEventClientSide("custom_hover_item", {
-        //             item_entindex: overrideentityindex,
-        //         });
-        //     }
-        //     GameUI.CustomUIConfig().ShowAbilityTooltip(self, Abilities.GetAbilityName(overrideentityindex), Abilities.GetCaster(overrideentityindex), slot);
-        // }
+        if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
+            const ccMainPanel = CCMainPanel.GetInstance()!;
+            let dialoginfo = {} as any;
+            if (Abilities.IsItem(overrideentityindex)) {
+                dialoginfo = {
+                    cls: CCAbilityInfoDialog,
+                    props: {
+                        abilityname: Abilities.GetAbilityName(overrideentityindex),
+                        castentityindex: overrideentityindex,
+                        level: Abilities.GetLevel(overrideentityindex),
+                    }
+                };
+            }
+            else {
+                dialoginfo = {
+                    cls: CCAbilityInfoDialog,
+                    props: {
+                        abilityname: Abilities.GetAbilityName(overrideentityindex),
+                        castentityindex: overrideentityindex,
+                        level: Abilities.GetLevel(overrideentityindex),
+                    }
+                };
+            }
+            ccMainPanel.ShowCustomToolTip(this.AbilityButton.current!, dialoginfo);
+        }
     }
     private onbtn_moveout() {
-        const overrideentityindex = this.props.overrideentityindex!;
-        // if (Abilities.IsItem(overrideentityindex)) {
-        //     GameEvents.SendEventClientSide("custom_hover_item", {
-        //         item_entindex: -1 as ItemEntityIndex,
-        //     });
-        // }
-        // GameUI.CustomUIConfig().HideAbilityTooltip(self);
+        const ccMainPanel = CCMainPanel.GetInstance()!;
+        ccMainPanel.HideToolTip();
     }
     render() {
         const m_is_item = this.GetState("m_is_item", false);
         const m_max_level = this.GetState("m_max_level", 0);
         const m_level = this.GetState("m_level", 0);
+        const cooldown_timer = this.GetState("cooldown_timer", 0);
         const m_charges_percent = this.GetState("m_charges_percent", 1);
         const m_cooldown_percent = this.GetState("m_cooldown_percent", 1);
         const dialogVariables = this.GetState("dialogVariables", {});
@@ -567,7 +600,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                                     <Panel id="TopBarUltimateCooldown" hittest={false} />
                                     <Panel id="Cooldown" hittest={false}>
                                         <Panel id="CooldownOverlay" hittest={false} style={{ clip: "radial(50.0% 50.0%, 0.0deg, " + - FuncHelper.ToFiniteNumber(m_cooldown_percent) * 360 + "deg)" }} />
-                                        <Label id="CooldownTimer" className="MonoNumbersFont" localizedText="{d:cooldown_timer}" hittest={false} dialogVariables={dialogVariables} />
+                                        <Label id="CooldownTimer" className="MonoNumbersFont" text={Math.ceil(cooldown_timer) + ""} hittest={false} />
                                     </Panel>
                                     <Panel id="ActiveAbility" hittest={false} />
                                     <Panel id="InactiveOverlay" hittest={false} />
