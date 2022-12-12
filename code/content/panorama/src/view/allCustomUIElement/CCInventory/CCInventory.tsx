@@ -3,6 +3,7 @@ import { CCPanel } from "../CCPanel/CCPanel";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
 import { CCInventorySlot } from "./CCInventorySlot";
+import "./CCInventory.less";
 
 interface ICCInventory extends NodePropsData {
 }

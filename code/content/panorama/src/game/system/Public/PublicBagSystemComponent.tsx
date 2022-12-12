@@ -12,6 +12,6 @@ export class PublicBagSystemComponent extends ET.Component {
     getItemByIndex(key: string) {
         let entityid = this.AllItem[key];
         if (entityid == null) return;
-        return GameRules.Addon.ETRoot.GetDomainChild<ItemEntityRoot>(entityid);
+        // return GameRules.Addon.ETRoot.GetDomainChild<ItemEntityRoot>(entityid);
     }
 }

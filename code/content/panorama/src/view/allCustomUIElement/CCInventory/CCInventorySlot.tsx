@@ -6,7 +6,6 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { CCAbilityPanel, ICCAbilityPanel } from "../CCAbility/CCAbilityPanel";
 import { CCPanel } from "../CCPanel/CCPanel";
-// import "./CCInventorySlot.less";
 interface ICCInventorySlot extends ICCAbilityPanel {
     isBackpack?: boolean,
 }

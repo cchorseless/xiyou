@@ -189,7 +189,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
     }
     private fCastStartTime = -1;
 
-    intervalRefresh() {
+    private intervalRefresh() {
         // 延迟0.1，保证数据最新
         TimerHelper.AddTimer(0.1, FuncHelper.Handler.create(this, () => {
             this.onRefreshUI();
@@ -315,19 +315,20 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         let fCooldownLength = Abilities.GetCooldownLength(overrideentityindex);
         pSelf.RemoveClass("show_ability_charges");
         if (!Entities.IsEnemy(iCasterIndex)) {
-            for (let i = 0; i < Entities.GetNumBuffs(iCasterIndex); i++) {
-                let iModifier = Entities.GetBuff(iCasterIndex, i);
-                let sModifierName = Buffs.GetName(iCasterIndex, iModifier);
-                if (iModifier != -1 && Buffs.GetAbility(iCasterIndex, iModifier) == overrideentityindex && !Buffs.IsDebuff(iCasterIndex, iModifier)) {
-                    pSelf.AddClass("show_ability_charges");
-                    this.updateDialogVariables("ability_charge_count", Buffs.GetStackCount(iCasterIndex, iModifier));
-                    fCooldownLength = Buffs.GetDuration(iCasterIndex, iModifier) == -1 ? 0 : Buffs.GetDuration(iCasterIndex, iModifier);
-                    let fPercent = FuncHelper.Clamp(Buffs.GetRemainingTime(iCasterIndex, iModifier) / fCooldownLength, 0, 1);
-                    let fChargesPercent = 1 - fPercent;
-                    this.UpdateState({ "m_charges_percent": fChargesPercent })
-                    break;
-                }
-            }
+
+            // for (let i = 0; i < Entities.GetNumBuffs(iCasterIndex); i++) {
+            //     let iModifier = Entities.GetBuff(iCasterIndex, i);
+            //     let sModifierName = Buffs.GetName(iCasterIndex, iModifier);
+            //     if (iModifier != -1 && Buffs.GetAbility(iCasterIndex, iModifier) == overrideentityindex && !Buffs.IsDebuff(iCasterIndex, iModifier)) {
+            //         pSelf.AddClass("show_ability_charges");
+            //         this.updateDialogVariables("ability_charge_count", Buffs.GetStackCount(iCasterIndex, iModifier));
+            //         fCooldownLength = Buffs.GetDuration(iCasterIndex, iModifier) == -1 ? 0 : Buffs.GetDuration(iCasterIndex, iModifier);
+            //         let fPercent = FuncHelper.Clamp(Buffs.GetRemainingTime(iCasterIndex, iModifier) / fCooldownLength, 0, 1);
+            //         let fChargesPercent = 1 - fPercent;
+            //         this.UpdateState({ "m_charges_percent": fChargesPercent })
+            //         break;
+            //     }
+            // }
         }
 
         if (bInAbilityPhase) {
@@ -343,7 +344,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             let fPercent = (fCooldownTimeRemaining / fCooldownLength);
             if (fCooldownLength == 0) fPercent = 1;
             this.UpdateState({ "m_cooldown_percent": fPercent });
-            this.UpdateState({ "cooldown_timer": fCooldownTimeRemaining });
+            this.UpdateState({ "cooldown_timer": Math.ceil(fCooldownTimeRemaining) });
             // this.updateDialogVariables("cooldown_timer", Math.ceil(fCooldownTimeRemaining));
             this.intervalRefresh();
         }
@@ -536,7 +537,8 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                         abilityname: Abilities.GetAbilityName(overrideentityindex),
                         castentityindex: overrideentityindex,
                         level: Abilities.GetLevel(overrideentityindex),
-                    }
+                    },
+                    posRight: true,
                 };
             }
             else {
@@ -546,7 +548,8 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                         abilityname: Abilities.GetAbilityName(overrideentityindex),
                         castentityindex: overrideentityindex,
                         level: Abilities.GetLevel(overrideentityindex),
-                    }
+                    },
+                    posRight: true,
                 };
             }
             ccMainPanel.ShowCustomToolTip(this.AbilityButton.current!, dialoginfo);
@@ -563,7 +566,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         const cooldown_timer = this.GetState("cooldown_timer", 0);
         const m_charges_percent = this.GetState("m_charges_percent", 1);
         const m_cooldown_percent = this.GetState("m_cooldown_percent", 1);
-        const dialogVariables = this.GetState("dialogVariables", {});
+        const dialogVariables = this.GetState("dialogVariables", {}) as any;
         const overrideentityindex = this.props.overrideentityindex!;
         const draggable = this.props.draggable!;
         return (
@@ -581,7 +584,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
 							} */}
                                 <DOTAScenePanel id="AutoCasting" map="scenes/hud/autocasting" renderdeferred={false} rendershadows={false} camera="camera_1" hittest={false} particleonly={true} />
                             </Panel>
-                            <Panel id="ButtonSize">
+                            <Panel id="ButtonSize" >
                                 <Panel id="AbilityButton" draggable={draggable} ref={this.AbilityButton}
                                     onactivate={(self) => { this.onbtn_leftclick() }}
                                     oncontextmenu={(self) => this.onbtn_rightclick()}
@@ -601,16 +604,16 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                                     </Panel>
                                     <Panel id="ActiveAbility" hittest={false} />
                                     <Panel id="InactiveOverlay" hittest={false} />
-                                    <Label id="ItemCharges" localizedText="{d:item_charge_count}" hittest={false} dialogVariables={dialogVariables} />
-                                    <Label id="ItemAltCharges" localizedText="{d:item_alt_charge_count}" hittest={false} dialogVariables={dialogVariables} />
+                                    <Label id="ItemCharges" text={dialogVariables.item_charge_count} hittest={false} />
+                                    <Label id="ItemAltCharges" text={dialogVariables.item_alt_charge_count} hittest={false} />
                                 </Panel>
                                 <Panel hittest={false} id="ActiveAbilityBorder" />
                                 <Panel hittest={false} id="PassiveAbilityBorder" />
                                 <Panel hittest={false} id="AutocastableAbilityBorder" />
                                 <Panel hittest={false} id="GoldCostBG" />
-                                <Label hittest={false} id="GoldCost" localizedText="{d:gold_cost}" dialogVariables={dialogVariables} />
+                                <Label hittest={false} id="GoldCost" text={dialogVariables.gold_cost} />
                                 <Panel hittest={false} id="ManaCostBG" />
-                                <Label hittest={false} id="ManaCost" localizedText="{d:mana_cost}" dialogVariables={dialogVariables} />
+                                <Label hittest={false} id="ManaCost" text={dialogVariables.mana_cost} />
                                 {/* <Label hittest={false} id="NeutralItemTier" localizedText="{d:neutral_item_tier_number}" dialogVariables={dialogVariables} /> */}
                                 <Panel hittest={false} id="CombineLockedOverlay" />
                                 <Panel hittest={false} id="SilencedOverlay" />
@@ -621,7 +624,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                         </Panel>
                         <CCHotkeyContainer info={dialogVariables} />
                         <CircularProgressBar id="AbilityCharges" hittest={false} hittestchildren={false} value={m_charges_percent}>
-                            <Label localizedText="{d:ability_charge_count}" dialogVariables={dialogVariables} />
+                            <Label text={dialogVariables.ability_charge_count} />
                         </CircularProgressBar>
                     </Panel>
                     <Panel hittest={false} id="AbilityLevelContainer" >
