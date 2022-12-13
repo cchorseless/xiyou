@@ -39,11 +39,11 @@ export class ability1_kunkka_torrent extends ActiveRootAbility {
 
     GetCooldown(iLevel: number) {
         let hCaster = this.GetCasterPlus()
-        return super.GetCooldown(iLevel) - hCaster.GetTalentValue("special_bonus_unique_kunkka_custom_4")
+        return super.GetCooldown(iLevel)
     }
     GetAOERadius() {
         let hCaster = this.GetCasterPlus()
-        return this.GetSpecialValueFor("radius") + hCaster.GetTalentValue("special_bonus_unique_kunkka_custom")
+        return this.GetSpecialValueFor("radius")
     }
     OnAbilityPhaseInterrupted() {
         let caster = this.GetCasterPlus()

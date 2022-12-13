@@ -14,68 +14,6 @@ import { KVHelper } from "../../../helper/KVHelper";
 interface ICCAbilityList extends NodePropsData {
 }
 
-export class CCAbilityList2 extends CCPanel<ICCAbilityList> {
-    abilityList: React.RefObject<Panel>;
-    onInitUI() {
-        this.abilityList = createRef<Panel>();
-    }
-    onStartUI() {
-        this.hideAbility()
-    }
-    dealList: number[] = [];
-    private hideAbility() {
-        let mainpanel = CCPanel.GetInstanceByName<CCMainPanel>("CCMainPanel");
-        for (let i = 0; i < 15; i++) {
-            let panel = this.abilityList.current!.FindChild("Ability" + i);
-            if (panel == null || this.dealList.includes(i)) {
-                continue;
-            }
-            this.dealList.push(i)
-            let abilityButton = panel.FindChildTraverse("AbilityButton")!;
-            mainpanel.RegCustomToolTip(abilityButton, CCAbilityInfoDialog, () => {
-                let selectedEntityid = Players.GetLocalPlayerPortraitUnit();;
-                let abilityindex = Entities.GetAbility(selectedEntityid, i);
-                return {
-                    abilityname: Abilities.GetAbilityName(abilityindex),
-                    castentityindex: selectedEntityid,
-                    level: Abilities.GetLevel(abilityindex),
-                }
-            }, true)
-            if (this.props.noshowability && this.props.noshowability.includes(i)) {
-                panel.visible = false;
-            }
-        }
-        // if (this.props.noshowability) {
-        //     let isFinish = true;
-        //     this.props.noshowability.forEach(i => {
-        //         if (!this.dealList.includes(i)) {
-        //             isFinish = false;
-        //         }
-        //     })
-        //     if (!isFinish) {
-        //         // TimerHelper.AddTimer(0.1, FuncHelper.Handler.create(this, () => {
-        //         //     this.hideAbility();
-        //         // }))
-        //     }
-        // }
-    }
-
-    render() {
-        return (
-            this.__root___isValid && (
-                <Panel id="CC_AbilityList" ref={this.__root__}  {...this.initRootAttrs()}>
-                    <GenericPanel type="DOTAAbilityList" id="abilities" ref={this.abilityList}>
-                    </GenericPanel>
-                    {this.props.children}
-                    {this.__root___childs}
-                </Panel>
-            )
-        );
-    }
-
-}
-
-
 export class CCAbilityList extends CCPanel<ICCAbilityList> {
     abilityList: React.RefObject<Panel> = createRef<Panel>();
 

@@ -188,11 +188,17 @@ export class BaseAbility_Plus extends BaseAbility {
         return true
 
     }
-
+    /**
+     * @both
+     * @returns 
+     */
     public GetCasterPlus() {
         return this.GetCaster() as BaseNpc_Plus
     }
-
+    /**
+     * @server
+     * @returns 
+     */
     public GetOwnerPlus() {
         return this.GetOwner() as BaseNpc_Plus
     }

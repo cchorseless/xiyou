@@ -7,6 +7,7 @@ import { FuncHelper } from "../../../helper/FuncHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
+import { CCItemInfoDialog } from "../CCItem/CCItemInfoDialog";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { CCAbilityInfoDialog } from "./CCAbilityInfoDialog";
 import "./CCAbilityPanel.less";
@@ -58,6 +59,9 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
     onStartUI() {
         this.onRefreshUI()
         this.addDragEvent();
+        TimerHelper.AddIntervalTimer(0.1, 0.1, FuncHelper.Handler.create(this, () => {
+            this.onRefreshUI();
+        }), -1, false);
     }
     addDragEvent() {
         const draggable = this.props.draggable!;
@@ -191,9 +195,9 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
 
     private intervalRefresh() {
         // 延迟0.1，保证数据最新
-        TimerHelper.AddTimer(0.1, FuncHelper.Handler.create(this, () => {
-            this.onRefreshUI();
-        }), false);
+        // TimerHelper.AddTimer(0.1, FuncHelper.Handler.create(this, () => {
+        //     this.onRefreshUI();
+        // }), false);
     }
 
     onRefreshUI() {
@@ -345,7 +349,6 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
             this.UpdateState({ "m_cooldown_percent": fPercent });
             this.UpdateState({ "cooldown_timer": Math.ceil(fCooldownTimeRemaining) });
             // this.updateDialogVariables("cooldown_timer", Math.ceil(fCooldownTimeRemaining));
-            this.intervalRefresh();
         }
         let pShine = pSelf.FindChildTraverse("Shine");
         if (pShine) {
@@ -389,11 +392,16 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         }
         this.UpdateState({ "m_in_ability_phase": bInAbilityPhase })
         this.UpdateState({ "m_cooldown_ready": bCooldownReady })
+        if (!bCooldownReady || pSelf.BHasClass("is_active")) {
+            this.intervalRefresh();
+        }
 
     }
 
+
     private updateDialogVariables(k: string, v: any) {
         let dialogVariables = this.GetState("dialogVariables", {} as { [K: string]: any });
+        if (dialogVariables[k] == v) { return }
         dialogVariables[k] = v;
         dialogVariables = Object.assign({}, dialogVariables);
         this.UpdateState({ "dialogVariables": dialogVariables });
@@ -422,6 +430,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                                 OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION,
                                 Position: [overrideentityindex, 16300, 0],
                             });
+                            this.intervalRefresh();
                             // GameEvents.SendCustomGameEventToServer("ability_spell_item_target", {
                             // 	ability_index: iAbilityIndex,
                             // 	item_index: overrideentityindex,
@@ -526,16 +535,18 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
     }
     private onbtn_moveover() {
         const overrideentityindex = this.props.overrideentityindex!;
+        const slot = this.props.slot!;
         if (overrideentityindex != -1 && Entities.IsValidEntity(overrideentityindex)) {
             const ccMainPanel = CCMainPanel.GetInstance()!;
             let dialoginfo = {} as any;
             if (Abilities.IsItem(overrideentityindex)) {
                 dialoginfo = {
-                    cls: CCAbilityInfoDialog,
+                    cls: CCItemInfoDialog,
                     props: {
-                        abilityname: Abilities.GetAbilityName(overrideentityindex),
+                        itemname: Abilities.GetAbilityName(overrideentityindex),
                         castentityindex: overrideentityindex,
                         level: Abilities.GetLevel(overrideentityindex),
+                        inventoryslot: slot
                     },
                     posRight: true,
                 };

@@ -1,7 +1,4 @@
-import React, { } from "react";
-import { CSSHelper } from "../../../helper/CSSHelper";
-import { FuncHelper } from "../../../helper/FuncHelper";
-import { TimerHelper } from "../../../helper/TimerHelper";
+import React from "react";
 import { CCPanel } from "../CCPanel/CCPanel";
 
 export interface ICCDOTAAghsStatusDisplay {

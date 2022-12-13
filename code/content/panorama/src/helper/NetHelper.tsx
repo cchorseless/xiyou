@@ -4,10 +4,6 @@ export module NetHelper {
     export interface INetListener {
         ListenEventInfo: { [key: string]: GameEventListenerID[] };
     }
-    /**同步调用客户端lua函数 */
-    export function CallClientLuaFunc<TName extends keyof GameEventDeclarations>(protocol: TName, data: any = {}) {
-        GameEvents.SendEventClientSide(protocol, data);
-    }
 
     /**请求LUA服务器数据 */
     export function SendToLua(protocol: string, data: any = null, cb: (event: JS_TO_LUA_DATA) => void | null = null as any, context: any = null) {

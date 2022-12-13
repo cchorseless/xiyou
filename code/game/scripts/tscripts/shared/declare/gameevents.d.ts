@@ -54,7 +54,7 @@ declare interface IGet_unit_data {
 }
 
 declare interface IGet_player_data {
-    PlayerID: PlayerID, func_name: string;
+    playerid: PlayerID, func_name: string;
 }
 
 /**

@@ -39,8 +39,8 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         castentityindex: -1,
         level: -1,
         mode: "normal",
-        showextradescription: false,
-        onlynowlevelvalue: false,
+        // showextradescription: false,
+        // onlynowlevelvalue: false,
     }
 
     parseAbilityDescription() {

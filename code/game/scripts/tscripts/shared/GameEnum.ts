@@ -2605,6 +2605,11 @@ export module GameEnum {
         req_collect_entity = "req_collect_entity",
         //#endregion
     }
+    export enum CustomCallClientLua {
+        call_get_ability_data = "call_get_ability_data",
+        call_get_unit_data = "call_get_unit_data",
+        call_get_player_data = "call_get_player_data",
+    }
 
     /**玩家行为 */
     export namespace Dota2 {

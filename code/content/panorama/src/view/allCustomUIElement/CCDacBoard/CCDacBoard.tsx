@@ -26,22 +26,23 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
         }
         return (
             <Panel ref={this.__root__} id="CC_DacBoardPanel"  {...this.initRootAttrs()} hittest={false}>
-                <Panel id="DacBoardLeft" hittest={false}>
-                    <CCPortraitGroup particleAttrs={{}} align="right bottom" />
-                </Panel>
-                <CCPanel id="DacBoardCenter" minWidth={"300px"} hittest={false}>
-                    <CCPanel id="DacBoardCenterBG" />
-                    <CCPanel flowChildren="right" hittest={false} verticalAlign="bottom" marginBottom={"60px"} >
-                        {/* <CCAbilityList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"50px"} /> */}
-                        <CCAbilityList horizontalAlign={"center"} verticalAlign="center" />
-                        <CCDOTAAghsStatusDisplay />
+                <CCPanel id="DacBoardBG" />
+                <CCPanel id="DacBoardDiv">
+                    <Panel id="DacBoardLeft" hittest={false}>
+                        <CCPortraitGroup particleAttrs={{}} align="right bottom" />
+                    </Panel>
+                    <CCPanel id="DacBoardCenter" minWidth={"300px"} hittest={false}>
+                        <CCPanel flowChildren="right" hittest={false} verticalAlign="bottom" marginBottom={"60px"} >
+                            <CCAbilityList horizontalAlign={"center"} verticalAlign="center" />
+                            {/* <CCDOTAAghsStatusDisplay /> */}
+                        </CCPanel>
+                        <CCHealthMana verticalAlign="bottom" marginBottom={"0px"} />
+                        <CCBuffList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"140px"} />
                     </CCPanel>
-                    <CCHealthMana verticalAlign="bottom" marginBottom={"0px"} />
-                    <CCBuffList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"140px"} />
+                    <Panel id="DacBoardRight" hittest={false}>
+                        <CCInventory verticalAlign="bottom" marginBottom={"0px"} />
+                    </Panel>
                 </CCPanel>
-                <Panel id="DacBoardRight" hittest={false}>
-                    <CCInventory verticalAlign="bottom" marginBottom={"0px"} />
-                </Panel>
                 {this.props.children}
                 {this.__root___childs}
             </Panel >

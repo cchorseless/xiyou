@@ -8,7 +8,6 @@ import { LogHelper } from "./LogHelper";
 export module AbilityHelper {
 
     export const AbilityPropertyTool = "ability_propertytool";
-    export const Call_AbilityFunc = "call_get_ability_data";
 
     export enum AbilityUpgradeOperator {
         ABILITY_UPGRADES_OP_ADD = 0,
@@ -888,7 +887,7 @@ export module AbilityHelper {
     }
 
     export function GetLevelCooldown(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        GameEvents.SendEventClientSide(Call_AbilityFunc, {
+        GameEvents.SendEventClientSide(GameEnum.CustomCallClientLua.call_get_ability_data, {
             ability_entindex: iEntityIndex,
             level: iLevel,
             key_name: "cool_down"
@@ -914,7 +913,7 @@ export module AbilityHelper {
         return 0;
     };
     export function GetLevelManaCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        GameEvents.SendEventClientSide(Call_AbilityFunc, {
+        GameEvents.SendEventClientSide(GameEnum.CustomCallClientLua.call_get_ability_data, {
             ability_entindex: iEntityIndex,
             level: iLevel,
             key_name: "mana_cost",
@@ -940,7 +939,7 @@ export module AbilityHelper {
         return 0;
     };
     export function GetLevelGoldCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        GameEvents.SendEventClientSide(Call_AbilityFunc, {
+        GameEvents.SendEventClientSide(GameEnum.CustomCallClientLua.call_get_ability_data, {
             ability_entindex: iEntityIndex,
             level: iLevel,
             key_name: "gold_cost",
@@ -966,7 +965,7 @@ export module AbilityHelper {
         return 0;
     };
     export function GetLevelEnergyCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        GameEvents.SendEventClientSide(Call_AbilityFunc, {
+        GameEvents.SendEventClientSide(GameEnum.CustomCallClientLua.call_get_ability_data, {
             ability_entindex: iEntityIndex,
             level: iLevel,
             key_name: "energy_cost",
