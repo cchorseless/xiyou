@@ -1,0 +1,115 @@
+.CC_ArtifactListPanel {
+    width: 287px;
+    min-height: 115px;
+    align: right bottom;
+    margin-bottom: 254px;
+
+    #ToggleArtifact {
+        width: 22px;
+        height: 48px;
+        align: right center;
+        margin-bottom: 50px;
+
+        background-image: url("file://{images}/custom_game/hud_artifact/artifact_toggle.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        z-index: 1;
+
+        Image {
+            width: 12px;
+            height: 15px;
+            align: right center;
+            margin-top: 2px;
+            background-image: url("file://{images}/custom_game/common/toggle_arrow_left.png");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+
+            transition-property: transform, pre-transform-scale2d, brightness;
+            transition-duration: 0.35s;
+        }
+
+        &:hover {
+            brightness: 1.4;
+
+            Image {
+                brightness: 1.6;
+                pre-transform-scale2d: 1.05;
+            }
+        }
+
+        .ExpandArtifact & {
+            Image {
+                transform: rotateZ(180deg);
+            }
+        }
+    }
+
+    #ArtifactPanelAndTitle {
+        flow-children: down;
+        transform: translateX(300px);
+        opacity: 0;
+        transition-property: transform, opacity;
+        transition-duration: 0.5s;
+
+        .ExpandArtifact & {
+            transform: none;
+            opacity: 1;
+        }
+
+        #ArtifactTitle {
+            padding-left: 24px;
+            padding-top: 2px;
+            align: right top;
+            color: #DAB774;
+            text-shadow: 0px 0px 0px 2 black;
+            font-size: 16px;
+            background-color: gradient(linear, 100% 0%, 0% 0%, from(#000000), color-stop(0.8, #00000099), to(#00000000));
+        }
+
+        #ArtifactPanel {
+            margin-top: -4px;
+            background-image: url("file://{images}/custom_game/hud_artifact/artifact_bg.png");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+
+            #ArtifactList {
+                width: 287px;
+                min-height: 115px;
+                align: right bottom;
+                margin-right: 5px;
+
+                padding: 12px 12px;
+
+                flow-children: left-wrap;
+
+                .ArtifactBuffBG {
+                    width: 40px;
+                    height: 40px;
+                    margin: 3px 4px;
+                    background-image: url("file://{images}/custom_game/hud_artifact/buff_bg.png");
+                    background-size: 100% 100%;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    overflow: noclip;
+                    // tooltip-position: left;
+
+                    &.Lock {
+                        background-image:url("file://{images}/custom_game/common/lock.png"),
+                        url("file://{images}/custom_game/hud_artifact/buff_bg.png");
+                        background-size: 48*0.55px 53*0.55px, 100% 100%;
+                        background-position: left 8px center, center;
+                    }
+
+                    .ArtifactBuff {
+                        width: 36px;
+                        height: width-percentage(100%);
+                        border-radius: 50%;
+                        box-shadow: fill #00000099 0px 0px 4px 2px;
+                        align: center center;
+                    }
+                }
+            }
+        }
+    }
+
+}

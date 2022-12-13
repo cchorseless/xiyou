@@ -315,20 +315,19 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         let fCooldownLength = Abilities.GetCooldownLength(overrideentityindex);
         pSelf.RemoveClass("show_ability_charges");
         if (!Entities.IsEnemy(iCasterIndex)) {
-
-            // for (let i = 0; i < Entities.GetNumBuffs(iCasterIndex); i++) {
-            //     let iModifier = Entities.GetBuff(iCasterIndex, i);
-            //     let sModifierName = Buffs.GetName(iCasterIndex, iModifier);
-            //     if (iModifier != -1 && Buffs.GetAbility(iCasterIndex, iModifier) == overrideentityindex && !Buffs.IsDebuff(iCasterIndex, iModifier)) {
-            //         pSelf.AddClass("show_ability_charges");
-            //         this.updateDialogVariables("ability_charge_count", Buffs.GetStackCount(iCasterIndex, iModifier));
-            //         fCooldownLength = Buffs.GetDuration(iCasterIndex, iModifier) == -1 ? 0 : Buffs.GetDuration(iCasterIndex, iModifier);
-            //         let fPercent = FuncHelper.Clamp(Buffs.GetRemainingTime(iCasterIndex, iModifier) / fCooldownLength, 0, 1);
-            //         let fChargesPercent = 1 - fPercent;
-            //         this.UpdateState({ "m_charges_percent": fChargesPercent })
-            //         break;
-            //     }
-            // }
+            for (let i = 0; i < Entities.GetNumBuffs(iCasterIndex); i++) {
+                let iModifier = Entities.GetBuff(iCasterIndex, i);
+                let sModifierName = Buffs.GetName(iCasterIndex, iModifier);
+                if (iModifier != -1 && Buffs.GetAbility(iCasterIndex, iModifier) == overrideentityindex && (GameEnum.Ability.EAbilityChargeBuffName as any)[sModifierName] && !Buffs.IsDebuff(iCasterIndex, iModifier)) {
+                    pSelf.AddClass("show_ability_charges");
+                    this.updateDialogVariables("ability_charge_count", Buffs.GetStackCount(iCasterIndex, iModifier));
+                    fCooldownLength = Buffs.GetDuration(iCasterIndex, iModifier) == -1 ? 0 : Buffs.GetDuration(iCasterIndex, iModifier);
+                    let fPercent = FuncHelper.Clamp(Buffs.GetRemainingTime(iCasterIndex, iModifier) / fCooldownLength, 0, 1);
+                    let fChargesPercent = 1 - fPercent;
+                    this.UpdateState({ "m_charges_percent": fChargesPercent })
+                    break;
+                }
+            }
         }
 
         if (bInAbilityPhase) {
@@ -623,6 +622,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                             </Panel>
                         </Panel>
                         <CCHotkeyContainer info={dialogVariables} />
+                        {/* 技能充能层数 */}
                         <CircularProgressBar id="AbilityCharges" hittest={false} hittestchildren={false} value={m_charges_percent}>
                             <Label text={dialogVariables.ability_charge_count} />
                         </CircularProgressBar>

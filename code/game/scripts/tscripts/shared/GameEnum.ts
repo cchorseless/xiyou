@@ -2054,6 +2054,15 @@ export module GameEnum {
         }
     }
 
+    export namespace Ability {
+        /**技能积蓄点数BUFF名称 */
+        export enum EAbilityChargeBuffName {
+            modifier_charges = "modifier_charges"
+        }
+
+    }
+
+
     /**
      * 所有系统保留事件类型
      */
@@ -2598,8 +2607,6 @@ export module GameEnum {
     }
 
     /**玩家行为 */
-
-
     export namespace Dota2 {
         /**英雄名称 */
         export enum enum_HeroName {
@@ -2852,7 +2859,7 @@ export module GameEnum {
             dawnbreaker = 135,
         }
         /**dota 自带buff */
-        export enum modifierName {
+        export enum EReserveModifierName {
             /**无敌BUFF */
             modifier_invulnerable = "modifier_invulnerable",
             /**泉水回血 */
@@ -2879,4 +2886,6 @@ export module GameEnum {
             DOTA_ITEM_STASH_MAX = 14,
         }
     }
+
+
 }

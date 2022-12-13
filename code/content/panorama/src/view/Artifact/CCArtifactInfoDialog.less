@@ -1,0 +1,65 @@
+.CC_ArtifactInfoDialog {
+    width: 380PX;
+    flow-children: down;
+
+    .CC_PanelHeader {
+        padding: 10px;
+
+        .SectImage {
+            width: 66px;
+            height: 48px;
+            // margin: 10px 4px 10px 10px;
+            border: 1px solid white;
+            border-radius: 2px;
+            border-brush: gradient(linear, 0% 0%, 0% 100%, from(#a09a72), to(#755417));
+        }
+
+        #SectNameHeader {
+            font-size: 18px;
+            color: white;
+            text-shadow: 0px 0px 3px 3.0 #000000;
+            // font-family: titleFont;
+            // margin-top: ;
+            // vertical-align: center;
+            // margin-left: 10px;
+        }
+    }
+
+    .SectRow {
+        margin: 8px 5px 4px 5px;
+
+        #SectNameDescription {
+            font-size: 16px;
+            // color: white;
+            vertical-align: bottom;
+
+            &.GameplayVariable {
+                font-weight: semibold;
+                color: #e1e1e1;
+            }
+
+            .GameplayValues {
+                color: #4d5560;
+            }
+
+            .GameplayValues.GameplayVariable {
+                color: #e1e1e1;
+            }
+        }
+    }
+
+    #LoreContainer {
+        width: 100%;
+        vertical-align: bottom;
+        padding: 5px 10px 5px 10px;
+        background-color: #0c1316;
+        border-radius: 2px;
+        margin: 4px;
+
+        Label {
+            font-size: 14px;
+            color: #3d4e5b;
+            font-style: italic;
+        }
+    }
+}
