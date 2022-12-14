@@ -11,9 +11,14 @@ import "./CCDacBoard.less";
 import { CSSHelper } from "../../../helper/CSSHelper";
 
 interface ICCDacBoard {
-
+    type?: "Tui3" | "Style1";
 }
 export class CCDacBoard extends CCPanel<ICCDacBoard> {
+
+    static defaultProps = {
+        type: "Style1"
+    }
+
     onReady() {
         return CSSHelper.IsReadyUI()
     }
@@ -26,7 +31,7 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
         }
         return (
             <Panel ref={this.__root__} id="CC_DacBoardPanel"  {...this.initRootAttrs()} hittest={false}>
-                <CCPanel id="DacBoardBG" />
+                <CCPanel className={CSSHelper.ClassMaker("DacBoardBG", this.props.type)} />
                 <CCPanel id="DacBoardDiv">
                     <Panel id="DacBoardLeft" hittest={false}>
                         <CCPortraitGroup particleAttrs={{}} align="right bottom" />

@@ -17,7 +17,7 @@ export interface ICCButton {
 	 * - Bevel按钮支持"Green" | "DarkGreen" | "Bronze" | "Plus"颜色
 	 * - Store按钮支持"Direct" | "InBundle" | "InTreasure" | "AdditionalDropInTreasure" | "DotaPlus" | "Market" | "ShardsPurchase" | "Gift" | "Season_Winter2017" | "Season_International2016" | "Season_Fall2016" | "Season_International2017" | "Season_International2018" | "Season_International2019" | "Season_International2020" | "Season_Spring2021"
 	 * */
-	type?: "Default" | "Primary" | "Bevel" | "Store" | "Text" | "Outline" | "Tui6" | "Tui7" | "Tui3";
+	type?: "Default" | "Primary" | "Bevel" | "Store" | "Text" | "Outline" | "Tui6" | "Tui7" | "Tui3" | "Style1";
 	/** 设置按钮颜色 */
 	// color?: "Green" | "Blue" | "Red" | "Purple" | "Gold" | "DarkGreen" | "Bronze" | "Plus" | string;
 	color?: "Green" | "Blue" | "Red" | "Purple" | "Gold" | "Gray";
