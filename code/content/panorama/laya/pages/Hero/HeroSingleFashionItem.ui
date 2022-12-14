@@ -15,7 +15,7 @@
         {
             "x":15,
             "type":"dota2Image",
-            "props":{"width":100,"ref":"this.img_iconBg","height":100,"bg-repeat":"no-repeat","bg-image":"common/rarity/frame_A.png"},
+            "props":{"width":100,"ref":"this.img_iconBg","height":100,"bg-repeat":"no-repeat","bg-image":"rarity/frame_A.png"},
             "nodeParent":1,
             "label":"dota2Image",
             "isDirectory":false,
@@ -28,7 +28,7 @@
         {
             "x":15,
             "type":"dota2Image",
-            "props":{"y":0,"x":0,"width":100,"ref":"this.img_icon","height":100,"bg-repeat":"no-repeat","bg-image":"common/rarity/frame_A.png"},
+            "props":{"y":0,"x":0,"width":100,"ref":"this.img_icon","height":100,"bg-repeat":"no-repeat","bg-image":"rarity/frame_A.png"},
             "nodeParent":1,
             "label":"dota2Image",
             "isDirectory":false,

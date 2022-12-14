@@ -1,7 +1,7 @@
 import React from "react";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
 /** 单位信息面板 */

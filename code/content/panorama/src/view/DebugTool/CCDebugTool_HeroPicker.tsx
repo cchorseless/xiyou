@@ -1,6 +1,6 @@
 import React from "react";
-import { CCBaseButton } from "../allCustomUIElement/CCButton/CCButton";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCBaseButton } from "../AllUIElement/CCButton/CCButton";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
 /** 英雄选择 */

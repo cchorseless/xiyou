@@ -1,7 +1,7 @@
 import React from "react";
 import { KVHelper } from "../../helper/KVHelper";
-import { CCBaseButton } from "../allCustomUIElement/CCButton/CCButton";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCBaseButton } from "../AllUIElement/CCButton/CCButton";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
 interface IDebugTool_SectPicker {

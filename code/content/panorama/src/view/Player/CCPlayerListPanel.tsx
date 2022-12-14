@@ -2,12 +2,12 @@ import React from "react";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { LogHelper } from "../../helper/LogHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCAvatar } from "../allCustomUIElement/CCAvatar/CCAvatar";
-import { CCBaseButton } from "../allCustomUIElement/CCButton/CCButton";
-import { CCIcon } from "../allCustomUIElement/CCIcons/CCIcon";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
-import { CCProgressBar } from "../allCustomUIElement/CCProgressBar/CCProgressBar";
-import { CCUserName } from "../allCustomUIElement/CCUserName/CCUserName";
+import { CCAvatar } from "../AllUIElement/CCAvatar/CCAvatar";
+import { CCBaseButton } from "../AllUIElement/CCButton/CCButton";
+import { CCIcon } from "../AllUIElement/CCIcons/CCIcon";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCProgressBar } from "../AllUIElement/CCProgressBar/CCProgressBar";
+import { CCUserName } from "../AllUIElement/CCUserName/CCUserName";
 import { CCPlayerInfoDialog } from "./CCPlayerInfoDialog";
 import "./CCPlayerListPanel.less";
 

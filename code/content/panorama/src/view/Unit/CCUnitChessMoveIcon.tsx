@@ -1,8 +1,8 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
-import { CCUnitSmallIcon } from "../allCustomUIElement/CCUnit/CCUnitSmallIcon";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCUnitSmallIcon } from "../AllUIElement/CCUnit/CCUnitSmallIcon";
 
 interface ICCUnitChessMoveIcon extends NodePropsData {
     itemname: string;

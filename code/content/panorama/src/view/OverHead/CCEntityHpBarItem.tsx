@@ -3,7 +3,7 @@ import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { AbilityHelper, ItemHelper, UnitHelper } from "../../helper/DotaEntityHelper";
 
 import "./CCEntityHpBarItem.less";

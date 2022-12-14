@@ -2,8 +2,8 @@ import React from "react";
 import { CombinationConfig } from "../../../../../game/scripts/tscripts/shared/CombinationConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
-import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCImage } from "../AllUIElement/CCImage/CCImage";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
 import "./CCCombinationIcon.less";
 
@@ -110,10 +110,10 @@ export class CCCombinationIcon extends CCPanel<ICCCombinationIcon> {
     render() {
         return (
             <Panel ref={this.__root__}   {...this.initRootAttrs()}>
-                <CCImage className="SectIconBGBorder" backgroundImage={CSSHelper.getCustomImageUrl("synergyicons/synergy_backing_layers/leftcapsule_border" + this.getIndex() + "_psd.png")} />
-                <CCImage className="SectIconBG" washColor={this.getColor()} backgroundImage={CSSHelper.getCustomImageUrl("synergyicons/synergy_backing_layers/leftcapsule" + this.getIndex() + "_psd.png")} />
-                <CCImage className="SectIconBGBottom" washColor={this.getColor()} backgroundImage={CSSHelper.getCustomImageUrl("synergyicons/synergy_backing_layers/leftcapsule_border_bottom_pop" + this.getIndex() + "_psd.png")} />
-                <CCImage className="SectImage" backgroundImage={CSSHelper.getCustomImageUrl("synergyicons/" + this.getSectImage() + ".png")} />
+                <CCImage className="SectIconBGBorder" backgroundImage={CSSHelper.getCustomImageUrl("combination/icon/iconbg/leftcapsule_border" + this.getIndex() + "_psd.png")} />
+                <CCImage className="SectIconBG" washColor={this.getColor()} backgroundImage={CSSHelper.getCustomImageUrl("combination/icon/iconbg/leftcapsule" + this.getIndex() + "_psd.png")} />
+                <CCImage className="SectIconBGBottom" washColor={this.getColor()} backgroundImage={CSSHelper.getCustomImageUrl("combination/icon/iconbg/leftcapsule_border_bottom_pop" + this.getIndex() + "_psd.png")} />
+                <CCImage className="SectImage" backgroundImage={CSSHelper.getCustomImageUrl("combination/icon/" + this.getSectImage() + ".png")} />
                 {this.__root___childs}
                 {this.props.children}
             </Panel>

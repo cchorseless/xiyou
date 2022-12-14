@@ -5,8 +5,8 @@ import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { ET } from "../../libs/Entity";
 import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
-import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCImage } from "../AllUIElement/CCImage/CCImage";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCCombinationSingleBottomItem } from "./CCCombinationSingleBottomItem";
 
 import "./CCCombinationBottomPanel.less";

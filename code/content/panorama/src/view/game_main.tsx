@@ -8,13 +8,12 @@ import { EventHelper } from "../helper/EventHelper";
 import { LogHelper } from "../helper/LogHelper";
 import { PrecacheHelper } from "../helper/PrecacheHelper";
 import { TimerHelper } from "../helper/TimerHelper";
-import { Minimap_plus } from "./alldota2/minimap_plus/Minimap_plus";
-import { CCMenuNavigation } from "./allCustomUIElement/CCNavigation/CCMenuNavigation";
-import { CCLabel } from "./allCustomUIElement/CCLabel/CCLabel";
-import { CCAvatar } from "./allCustomUIElement/CCAvatar/CCAvatar";
+import { CCMenuNavigation } from "./AllUIElement/CCNavigation/CCMenuNavigation";
+import { CCLabel } from "./AllUIElement/CCLabel/CCLabel";
+import { CCAvatar } from "./AllUIElement/CCAvatar/CCAvatar";
 import { CCMainPanel } from "./MainPanel/CCMainPanel";
-import { CCPanel } from "./allCustomUIElement/CCPanel/CCPanel";
-import { CCPausePanel } from "./allCustomUIElement/CCPause/CCPausePanel";
+import { CCPanel } from "./AllUIElement/CCPanel/CCPanel";
+import { CCPausePanel } from "./AllUIElement/CCPause/CCPausePanel";
 import { CCDebugPanel } from "./DebugTool/CCDebugPanel";
 
 export class RootPanel extends CCPanel {

@@ -1,10 +1,10 @@
 import React, { } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
-import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
-import { CCPanelBG, CCPanelHeader } from "../allCustomUIElement/CCPanel/CCPanelPart";
-import { CCProgressBar } from "../allCustomUIElement/CCProgressBar/CCProgressBar";
+import { CCImage } from "../AllUIElement/CCImage/CCImage";
+import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCPanelBG, CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
+import { CCProgressBar } from "../AllUIElement/CCProgressBar/CCProgressBar";
 import { CCCombinationIcon } from "./CCCombinationIcon";
 
 import "./CCCombinationInfoDialog.less";

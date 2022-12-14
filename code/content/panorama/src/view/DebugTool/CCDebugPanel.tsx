@@ -2,7 +2,7 @@ import React from "react";
 import { LogHelper } from "../../helper/LogHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool, CCDebugTool_Category, CCDebugTool_DemoButton, CCDebugTool_DemoSelectionButton, CCDebugTool_DemoSlider, CCDebugTool_DemoTextEntry, CCDebugTool_DemoToggle } from "./CCDebugTool";
 import { CCDebugTool_AbilityPicker } from "./CCDebugTool_AbilityPicker";
 import { CCDebugTool_HeroPicker } from "./CCDebugTool_HeroPicker";

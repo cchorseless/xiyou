@@ -1,6 +1,6 @@
 import React from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
 interface CourierData {
     CourierId?: number,

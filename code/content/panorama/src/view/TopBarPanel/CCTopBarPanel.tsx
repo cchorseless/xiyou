@@ -1,14 +1,14 @@
 
 import React, { createRef } from "react";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
 import { PlayerDataComponent } from "../../game/components/Player/PlayerDataComponent";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
-import { CCImageNumber } from "../allCustomUIElement/CCImageNumber/CCImageNumber";
+import { CCImageNumber } from "../AllUIElement/CCImageNumber/CCImageNumber";
 import "./CCTopBarPanel.less";
 import { CSSHelper } from "../../helper/CSSHelper";
 

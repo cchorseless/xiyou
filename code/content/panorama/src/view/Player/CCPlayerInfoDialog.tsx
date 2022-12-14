@@ -1,10 +1,10 @@
 import React from 'react';
 import { PlayerScene } from '../../game/components/Player/PlayerScene';
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCDividerHeader } from '../allCustomUIElement/CCDivider/CCDividerHeader';
-import { CCDOTAScenePanel } from '../allCustomUIElement/CCDOTAScenePanel/CCDOTAScenePanel';
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
-import { CCPanelBG } from '../allCustomUIElement/CCPanel/CCPanelPart';
+import { CCDividerHeader } from '../AllUIElement/CCDivider/CCDividerHeader';
+import { CCDOTAScenePanel } from '../AllUIElement/CCDOTAScenePanel/CCDOTAScenePanel';
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCPanelBG } from '../AllUIElement/CCPanel/CCPanelPart';
 import "./CCPlayerInfoDialog.less";
 
 interface ICCPlayerInfoDialog extends NodePropsData {

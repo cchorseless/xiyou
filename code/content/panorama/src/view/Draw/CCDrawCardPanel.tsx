@@ -2,11 +2,11 @@ import React from "react";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { KVHelper } from "../../helper/KVHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCIconButton } from "../allCustomUIElement/CCButton/CCIconButton";
-import { CCDOTAScenePanel } from "../allCustomUIElement/CCDOTAScenePanel/CCDOTAScenePanel";
-import { CCIcon_XClose } from "../allCustomUIElement/CCIcons/CCIcon_XClose";
-import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCIconButton } from "../AllUIElement/CCButton/CCIconButton";
+import { CCDOTAScenePanel } from "../AllUIElement/CCDOTAScenePanel/CCDOTAScenePanel";
+import { CCIcon_XClose } from "../AllUIElement/CCIcons/CCIcon_XClose";
+import { CCImage } from "../AllUIElement/CCImage/CCImage";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDrawCardBottomItem } from "./CCDrawCardBottomItem";
 
 import "./CCDrawCardPanel.less";

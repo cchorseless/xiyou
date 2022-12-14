@@ -1,5 +1,5 @@
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
 interface ICCOverHeadBaseItem extends NodePropsData {
     entityid: EntityIndex

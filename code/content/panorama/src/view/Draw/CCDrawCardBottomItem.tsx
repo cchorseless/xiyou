@@ -1,12 +1,12 @@
 import React from "react";
 import { KVHelper } from "../../helper/KVHelper";
-import { CCAbilityIcon } from "../allCustomUIElement/CCAbility/CCAbilityIcon";
-import { CCIconButton } from "../allCustomUIElement/CCButton/CCIconButton";
-import { CCIcon_CoinType } from "../allCustomUIElement/CCIcons/CCIcon_CoinType";
-import { CCIcon_Share } from "../allCustomUIElement/CCIcons/CCIcon_Share";
-import { CCIcon_Wanted } from "../allCustomUIElement/CCIcons/CCIcon_Wanted";
-import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCAbilityIcon } from "../AllUIElement/CCAbility/CCAbilityIcon";
+import { CCIconButton } from "../AllUIElement/CCButton/CCIconButton";
+import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
+import { CCIcon_Share } from "../AllUIElement/CCIcons/CCIcon_Share";
+import { CCIcon_Wanted } from "../AllUIElement/CCIcons/CCIcon_Wanted";
+import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
 import "./CCDrawCardBottomItem.less";
 

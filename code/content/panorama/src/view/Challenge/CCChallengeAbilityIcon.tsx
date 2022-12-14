@@ -3,10 +3,10 @@ import { AbilityEntityRoot } from "../../game/components/Ability/AbilityEntityRo
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
 
-import { CCAbilityIcon } from "../allCustomUIElement/CCAbility/CCAbilityIcon";
-import { CCIcon_CoinType } from "../allCustomUIElement/CCIcons/CCIcon_CoinType";
-import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCAbilityIcon } from "../AllUIElement/CCAbility/CCAbilityIcon";
+import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
+import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
 import "./CCChallengeAbilityIcon.less";
 import { EEnum } from "../../../../../game/scripts/tscripts/shared/Gen/Types";

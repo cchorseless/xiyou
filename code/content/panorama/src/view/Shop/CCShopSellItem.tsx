@@ -6,7 +6,7 @@ import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { TShopSellItem } from "../../game/service/shop/TShopSellItem";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { NetHelper } from "../../helper/NetHelper";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCWaitProgressDialog } from "../Common/CCWaitProgressDialog";
 import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCShopItem } from "./CCShopItem";

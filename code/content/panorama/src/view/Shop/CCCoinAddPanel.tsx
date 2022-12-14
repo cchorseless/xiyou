@@ -2,11 +2,11 @@ import React, { createRef, PureComponent } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCIcon_CoinType } from "../allCustomUIElement/CCIcons/CCIcon_CoinType";
-import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
-import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
-import { CCMenuNavigation } from "../allCustomUIElement/CCNavigation/CCMenuNavigation";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
+import { CCImage } from "../AllUIElement/CCImage/CCImage";
+import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
+import { CCMenuNavigation } from "../AllUIElement/CCNavigation/CCMenuNavigation";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCCoinAddPanel.less";
 
 interface ICCCoinAddPanel extends NodePropsData {

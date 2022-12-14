@@ -1,5 +1,5 @@
 import React from "react";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 import "./CCDebugTool_TextPicker.less";
 /** 普通选择 */

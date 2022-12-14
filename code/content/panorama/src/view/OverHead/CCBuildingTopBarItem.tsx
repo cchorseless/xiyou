@@ -1,13 +1,13 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCEntityHpBarItem } from "./CCEntityHpBarItem";
 import { CCEntityHpMpBarItem } from "./CCEntityHpMpBarItem";
 import { CCOverHeadBaseItem } from "./CCOverHeadBaseItem";
 import "./CCBuildingTopBarItem.less";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { CCIcon_Star } from "../allCustomUIElement/CCIcons/CCIcon_Star";
+import { CCIcon_Star } from "../AllUIElement/CCIcons/CCIcon_Star";
 
 export class CCBuildingTopBarItem extends CCOverHeadBaseItem {
 
@@ -39,7 +39,7 @@ export class CCBuildingTopBarItem extends CCOverHeadBaseItem {
                     return <CCIcon_Star key={index + ""} type={BuildingComp.iStar > index ? "Filled" : "UnFilled"} />;
                 })}
             </CCPanel>
-            <CCPanel id="nameBg" flowChildren="right" backgroundImage={CSSHelper.getCustomImageUrl(`common/rarity/rare_${rare}.png`)}>
+            <CCPanel id="nameBg" flowChildren="right" backgroundImage={CSSHelper.getCustomImageUrl(`rarity/rare_${rare}.png`)}>
                 <CCPanel id="unitprop" backgroundImage={CSSHelper.getCustomImageUrl(`common/icon_prop_${BuildingComp.PrimaryAttribute}.png`)} />;
                 <Label id="unitname" localizedText={"#" + building!.ConfigID} />;
             </CCPanel>

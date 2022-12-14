@@ -2,7 +2,7 @@
 import React, { createRef, useState } from "react";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { EntityHpBarItem } from "../Common/EntityHpBarItem";
 import { CCEntityHpBarItem } from "./CCEntityHpBarItem";
 import { CCOverHeadBaseItem } from "./CCOverHeadBaseItem";

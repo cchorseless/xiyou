@@ -28,7 +28,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":0,"x":0,"width":330,"ref":"this.frameBg","height":220,"bg-repeat":"no-repeat","bg-image":"common/rarity/item_rarity_border_5.png"},
+                    "props":{"y":0,"x":0,"width":330,"ref":"this.frameBg","height":220,"bg-repeat":"no-repeat","bg-image":"rarity/item_rarity_border_5.png"},
                     "nodeParent":19,
                     "label":"dota2Image",
                     "isDirectory":false,

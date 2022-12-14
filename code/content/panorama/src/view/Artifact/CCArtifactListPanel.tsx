@@ -2,7 +2,7 @@ import React, { createRef, useState } from "react";
 import { ArtifactConfig } from "../../../../../game/scripts/tscripts/shared/ArtifactConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCArtifactListPanel.less";
 
 interface ICCArtifactListPanel extends NodePropsData {

@@ -2,7 +2,7 @@
 import React, { createRef, PureComponent } from "react";
 import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { PanelAttributes, ImageAttributes, LabelAttributes } from "@demon673/react-panorama";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
 
 export class CombinationInfoDialog_UI<T extends NodePropsData> extends CCPanel<T> {

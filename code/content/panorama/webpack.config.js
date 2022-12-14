@@ -112,21 +112,21 @@ module.exports = {
             entries: [
                 // 编译载入界面到custom_loading_screen
                 {
-                    import: './view/alldota2/loading/loading.xml',
+                    import: './view/AllSpeHud/loading/loading.xml',
                     filename: 'custom_loading_screen.xml',
                 },
-                {
-                    import: './view/alldota2/team_select/team_select.xml',
-                    filename: 'team_select.xml',
-                },
+                // {
+                //     import: './view/AllSpeHud/team_select/team_select.xml',
+                //     filename: 'team_select.xml',
+                // },
                 // 英雄选择
-                {
-                    import: './view/alldota2/hero_select/hero_select.xml',
-                    type: 'HeroSelection'
-                },
+                // {
+                //     import: './view/AllSpeHud/hero_select/hero_select.xml',
+                //     type: 'HeroSelection'
+                // },
                 // 结束界面
                 {
-                    import: './view/alldota2/end_screen/end_screen.xml',
+                    import: './view/AllSpeHud/end_screen/end_screen.xml',
                     type: 'EndScreen'
                 },
                 // 游戏界面

@@ -1,7 +1,7 @@
 import React, { createRef, useState } from "react";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
-import { CCCircleAbilityItem } from "../allCustomUIElement/CCAbility/CCCircleAbilityItem";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCCircleAbilityItem } from "../AllUIElement/CCAbility/CCCircleAbilityItem";
 // import "./CCCircleArtifactItem.less";
 
 interface ICCCircleArtifactItem extends NodePropsData {

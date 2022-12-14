@@ -1,10 +1,10 @@
 import React from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { CCButton } from "../allCustomUIElement/CCButton/CCButton";
-import { CCIconButton } from "../allCustomUIElement/CCButton/CCIconButton";
-import { CCImage } from "../allCustomUIElement/CCImage/CCImage";
-import { CCKeyBinder, KeyCode } from "../allCustomUIElement/CCKeyBinder/CCKeyBinder";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCButton } from "../AllUIElement/CCButton/CCButton";
+import { CCIconButton } from "../AllUIElement/CCButton/CCIconButton";
+import { CCImage } from "../AllUIElement/CCImage/CCImage";
+import { CCKeyBinder, KeyCode } from "../AllUIElement/CCKeyBinder/CCKeyBinder";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool, CCDebugTool_SelectContainer } from "./CCDebugTool";
 
 /** 设置界面 */

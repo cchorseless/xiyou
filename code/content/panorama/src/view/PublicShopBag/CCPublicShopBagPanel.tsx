@@ -4,7 +4,7 @@ import { PublicBagConfig } from "../../../../../game/scripts/tscripts/shared/Pub
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { LogHelper } from "../../helper/LogHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPublicBagSlotItem } from "./CCPublicBagSlotItem";
 import "./CCPublicShopBagPanel.less";
 interface ICCPublicShopBagPanel extends NodePropsData {

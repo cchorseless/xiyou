@@ -8,10 +8,10 @@ import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCLabel } from "../allCustomUIElement/CCLabel/CCLabel";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
-import { CCTxtTable } from "../allCustomUIElement/CCTable/CCTxtTable";
-import { CCUnitSmallIcon } from "../allCustomUIElement/CCUnit/CCUnitSmallIcon";
+import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCTxtTable } from "../AllUIElement/CCTable/CCTxtTable";
+import { CCUnitSmallIcon } from "../AllUIElement/CCUnit/CCUnitSmallIcon";
 import "./CCUnitDamageInfo.less";
 
 

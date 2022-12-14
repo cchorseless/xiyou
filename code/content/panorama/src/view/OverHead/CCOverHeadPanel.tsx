@@ -3,7 +3,7 @@ import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCBuildingTopBarItem } from "./CCBuildingTopBarItem";
 import { CCEnemyTopBarItem } from "./CCEnemyTopBarItem";
 

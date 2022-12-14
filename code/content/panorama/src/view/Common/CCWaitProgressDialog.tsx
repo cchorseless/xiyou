@@ -1,8 +1,8 @@
 
 import React, { createRef, PureComponent } from "react";
 import { NetHelper } from "../../helper/NetHelper";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
-import { CCPopUpDialog } from "../allCustomUIElement/CCPopUpDialog/CCPopUpDialog";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import "./CCWaitProgressDialog.less";
 

@@ -15,7 +15,7 @@
         {
             "x":15,
             "type":"dota2Image",
-            "props":{"y":3,"x":40,"width":160,"ref":"this.nameBg","height":32,"bg-image":"common/rarity/bg_R.png"},
+            "props":{"y":3,"x":40,"width":160,"ref":"this.nameBg","height":32,"bg-image":"rarity/bg_R.png"},
             "nodeParent":1,
             "label":"dota2Image",
             "isOpen":true,
@@ -67,7 +67,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":0,"width":38,"ref":"this.img_rarety","height":43,"bg-repeat":"no-repeat","bg-image":"common/rarity/rare_C.png"},
+                    "props":{"y":0,"width":38,"ref":"this.img_rarety","height":43,"bg-repeat":"no-repeat","bg-image":"rarity/rare_C.png"},
                     "nodeParent":7,
                     "label":"dota2Image",
                     "isDirectory":false,

@@ -7,8 +7,8 @@ import { ItemHelper } from "../../helper/DotaEntityHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCItemImage } from "../allCustomUIElement/CCItem/CCItemImage";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCItemImage } from "../AllUIElement/CCItem/CCItemImage";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCPublicShopItem.less";
 interface ICCPublicShopItem extends NodePropsData {
     iType: PublicBagConfig.EPublicShopType,

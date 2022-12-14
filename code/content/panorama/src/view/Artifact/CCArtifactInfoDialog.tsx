@@ -1,8 +1,8 @@
 import React, { createRef, useState } from "react";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { AbilityHelper, ItemHelper, UnitHelper } from "../../helper/DotaEntityHelper";
-import { CCPanelHeader } from "../allCustomUIElement/CCPanel/CCPanelPart";
+import { CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
 import "./CCArtifactInfoDialog.less";
 
 

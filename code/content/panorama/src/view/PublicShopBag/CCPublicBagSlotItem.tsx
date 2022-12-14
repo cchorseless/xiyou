@@ -6,8 +6,8 @@ import { ItemHelper, UnitHelper } from "../../helper/DotaEntityHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCItemImage } from "../allCustomUIElement/CCItem/CCItemImage";
-import { CCPanel } from "../allCustomUIElement/CCPanel/CCPanel";
+import { CCItemImage } from "../AllUIElement/CCItem/CCItemImage";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import "./CCPublicBagSlotItem.less";
 
