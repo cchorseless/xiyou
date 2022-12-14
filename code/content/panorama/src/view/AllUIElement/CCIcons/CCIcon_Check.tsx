@@ -35,7 +35,7 @@ export class CCIcon_Check extends CCIcon<{ type?: "Default" | "64" | "BoxCheck" 
 				});
 			case "Tui7":
 				return Object.assign(styles, {
-					src: "s2r://panorama/images/eom_design/icon/Tui7/confirm_png.vtex",
+					src: "s2r://panorama/images/eom_design/icon/tui7/confirm_png.vtex",
 					height: "width-percentage(72.7%)"
 				});
 			default:

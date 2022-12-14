@@ -10,15 +10,15 @@ export class CCIcon_Handbook extends CCIcon<{ type: "Tui3" | "Tui3Menu"; }> {
 		switch (this.props.type) {
 			case "Tui3Menu":
 				return Object.assign(styles, {
-					src: "s2r://panorama/images/eom_design/icon/Tui3/handbook_menu.vtex",
+					src: "s2r://panorama/images/eom_design/icon/tui3/handbook_menu.vtex",
 				});
 			case "Tui3":
 				return Object.assign(styles, {
-					src: "s2r://panorama/images/eom_design/icon/Tui3/handbook.vtex",
+					src: "s2r://panorama/images/eom_design/icon/tui3/handbook.vtex",
 				});
 			default:
 				return Object.assign(styles, {
-					src: "s2r://panorama/images/eom_design/icon/Tui3/handbook_menu.vtex",
+					src: "s2r://panorama/images/eom_design/icon/tui3/handbook_menu.vtex",
 				});
 		}
 	}

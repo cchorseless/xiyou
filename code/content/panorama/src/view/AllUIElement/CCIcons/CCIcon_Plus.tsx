@@ -22,11 +22,11 @@ export class CCIcon_Plus extends CCIcon<{ type?: "Default" | "Gradient" | "Thin"
 				});
 			case "Tui7":
 				return Object.assign(styles, {
-					src: "s2r://panorama/images/eom_design/icon/Tui7/btn_add.png"
+					src: "s2r://panorama/images/eom_design/icon/tui7/btn_add.png"
 				});
 			case "Tui7Plus":
 				return Object.assign(styles, {
-					src: "s2r://panorama/images/eom_design/icon/Tui7/btn_add_plus.png"
+					src: "s2r://panorama/images/eom_design/icon/tui7/btn_add_plus.png"
 				});
 			default:
 				return Object.assign(styles, {

@@ -14,11 +14,11 @@ export class CCIcon_Info extends CCIcon<{ type?: "Default" | "Tui6" | "Tui7"; }>
 				});
 			case "Tui6":
 				return Object.assign(styles, {
-					src: "s2r://panorama/images/eom_design/icon/Tui6/info_png.vtex",
+					src: "s2r://panorama/images/eom_design/icon/tui6/info_png.vtex",
 				});
 			case "Tui7":
 				return Object.assign(styles, {
-					src: "s2r://panorama/images/eom_design/icon/Tui7/mini_info_png.vtex",
+					src: "s2r://panorama/images/eom_design/icon/tui7/mini_info_png.vtex",
 				});
 			default:
 				return Object.assign(styles, {

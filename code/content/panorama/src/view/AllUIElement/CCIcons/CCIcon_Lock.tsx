@@ -30,7 +30,7 @@ export class CCIcon_Lock extends CCIcon<{ type?: "Small" | "Plus" | "Gold" | "Sh
 				});
 			case "Tui7":
 				return Object.assign(styles, {
-					src: "s2r://panorama/images/eom_design/icon/Tui7/lock_png.vtex",
+					src: "s2r://panorama/images/eom_design/icon/tui7/lock_png.vtex",
 				});
 			default:
 				return Object.assign(styles, {

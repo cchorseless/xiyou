@@ -21,10 +21,10 @@ export class CCIcon_XClose extends CCIcon<{ type?: "Default" | "Gradient" | "Qui
 				styles.src = "s2r://panorama/images/control_icons/quit_png.vtex"
 				break;
 			case "Tui7":
-				styles.src = "file://{images}/custom_game/eom_design/icon/Tui7/btn_close.png"
+				styles.src = "file://{images}/custom_game/eom_design/icon/tui7/btn_close.png"
 				break;
 			case "Tui3":
-				styles.src = "file://{images}/custom_game/eom_design/icon/Tui3/btn_close.png"
+				styles.src = "file://{images}/custom_game/eom_design/icon/tui3/btn_close.png"
 				break;
 			default:
 				styles.src = "s2r://panorama/images/control_icons/x_close_png.vtex"

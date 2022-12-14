@@ -10,7 +10,7 @@ export class CCIcon_History extends CCIcon<{ type?: "Tui7"; }> {
 		switch (this.props.type) {
 			case "Tui7":
 				return Object.assign(styles, {
-					src: "s2r://panorama/images/eom_design/icon/Tui7/history_png.vtex",
+					src: "s2r://panorama/images/eom_design/icon/tui7/history_png.vtex",
 				});
 			default:
 				return Object.assign(styles, {

@@ -23,7 +23,7 @@ export class CCIcon_Gear extends CCIcon<{ type?: "Return" | "Shadow" | "Small" |
 				});
 			case "Tui7":
 				return Object.assign(styles, {
-					src: "s2r://panorama/images/eom_design/icon/Tui7/setting_png.vtex",
+					src: "s2r://panorama/images/eom_design/icon/tui7/setting_png.vtex",
 				});
 			default:
 				return Object.assign(styles, {
