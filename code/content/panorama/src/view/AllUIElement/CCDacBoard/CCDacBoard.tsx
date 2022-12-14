@@ -7,8 +7,8 @@ import { CCHealthMana } from "./CCHealthMana";
 import { CCPortraitGroup } from "./CCPortraitGroup";
 import { CCDOTAHudTalentDisplay } from "./CCDOTAHudTalentDisplay";
 import { CCDOTAAghsStatusDisplay } from "./CCDOTAAghsStatusDisplay";
-import "./CCDacBoard.less";
 import { CSSHelper } from "../../../helper/CSSHelper";
+import "./CCDacBoard.less";
 
 interface ICCDacBoard {
     type?: "Tui3" | "Style1";
@@ -36,7 +36,7 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
                     <Panel id="DacBoardLeft" hittest={false}>
                         <CCPortraitGroup particleAttrs={{}} align="right bottom" />
                     </Panel>
-                    <CCPanel id="DacBoardCenter" minWidth={"300px"} hittest={false}>
+                    <CCPanel id="DacBoardCenter" hittest={false}>
                         <CCPanel flowChildren="right" hittest={false} verticalAlign="bottom" marginBottom={"60px"} >
                             <CCAbilityList horizontalAlign={"center"} verticalAlign="center" />
                             {/* <CCDOTAAghsStatusDisplay /> */}

@@ -39,7 +39,7 @@ export class CCBuildingTopBarItem extends CCOverHeadBaseItem {
                     return <CCIcon_Star key={index + ""} type={BuildingComp.iStar > index ? "Filled" : "UnFilled"} />;
                 })}
             </CCPanel>
-            <CCPanel id="nameBg" flowChildren="right" backgroundImage={CSSHelper.getCustomImageUrl(`rarity/rare_${rare}.png`)}>
+            <CCPanel id="nameBg" flowChildren="right" backgroundImage={CSSHelper.getCustomImageUrl(`rarity/rare_${rare.toLowerCase()}.png`)}>
                 <CCPanel id="unitprop" backgroundImage={CSSHelper.getCustomImageUrl(`common/icon_prop_${BuildingComp.PrimaryAttribute}.png`)} />;
                 <Label id="unitname" localizedText={"#" + building!.ConfigID} />;
             </CCPanel>

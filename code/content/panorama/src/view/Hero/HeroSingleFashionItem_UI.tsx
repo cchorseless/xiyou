@@ -21,8 +21,8 @@ export class HeroSingleFashionItem_UI<T extends NodePropsData> extends BasePureC
 
     };
     CSS_0_0: Partial<VCSSStyleDeclaration> = { "width": "100px", "height": "100px" }
-    CSS_1_0: Partial<VCSSStyleDeclaration> = { "width": "100px", "height": "100px", "backgroundRepeat": "no-repeat", "backgroundImage": "url(\"file://{images}/rarity/frame_A.png\")", "backgroundSize": "100% 100%" }
-    CSS_1_1: Partial<VCSSStyleDeclaration> = { "y": "0px", "x": "0px", "width": "100px", "height": "100px", "backgroundRepeat": "no-repeat", "backgroundImage": "url(\"file://{images}/rarity/frame_A.png\")", "backgroundSize": "100% 100%" }
+    CSS_1_0: Partial<VCSSStyleDeclaration> = { "width": "100px", "height": "100px", "backgroundRepeat": "no-repeat", "backgroundImage": "url(\"file://{images}/rarity/frame_a.png\")", "backgroundSize": "100% 100%" }
+    CSS_1_1: Partial<VCSSStyleDeclaration> = { "y": "0px", "x": "0px", "width": "100px", "height": "100px", "backgroundRepeat": "no-repeat", "backgroundImage": "url(\"file://{images}/rarity/frame_a.png\")", "backgroundSize": "100% 100%" }
     CSS_1_2: Partial<VCSSStyleDeclaration> = { "y": "50px", "x": "0px", "width": "50px", "height": "50px", "backgroundRepeat": "no-repeat", "backgroundImage": "url(\"file://{images}/card/card_icon/antimage.png\")", "backgroundSize": "100% 100%" }
 
     __root___isValid: boolean = true;

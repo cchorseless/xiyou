@@ -27,7 +27,7 @@ export module PathHelper {
     }
 
     export function getRaretyFrameUrl(str: string) {
-        return `rarity/frame_${str.toUpperCase()}.png`
+        return `rarity/frame_${str.toLowerCase()}.png`
     }
 
 }
