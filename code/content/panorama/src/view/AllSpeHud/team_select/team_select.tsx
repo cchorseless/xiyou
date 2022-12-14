@@ -9,29 +9,31 @@ import { PlayerInTeamItem } from "./PlayerInTeamItem";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import "./team_select.less";
+import { CCButton } from "../../AllUIElement/CCButton/CCButton";
 
 interface IProps extends NodePropsData {
 }
 
 export class CCTeam_select extends CCPanel<IProps> {
 
-    onInit() {
+    onInitUI() {
         Game.SetAutoLaunchEnabled(false);
+        Game.AutoAssignPlayersToTeams();
         this.addEvent();
         let playerID = Game.GetLocalPlayerID();
         let ishost = false;
         if (Players.IsValidPlayerID(playerID)) {
-            ishost = Game.GetPlayerInfo(playerID).player_has_host_privileges;
+            ishost = Boolean(Game.GetPlayerInfo(playerID).player_has_host_privileges);
         }
-        this.UpdateState({ isHost: ishost })
+        this.UpdateState({ isHost: Boolean(ishost) })
     }
 
 
-    onbtn_startgame = () => {
+    onbtn_startgame() {
         this.OnLockAndStartPressed();
     };
 
-    addEvent = () => {
+    addEvent() {
         NetHelper.ListenOnLua(
             this,
             GameEnum.CustomProtocol.req_addBot,
@@ -46,7 +48,7 @@ export class CCTeam_select extends CCPanel<IProps> {
     };
 
     isAdding = false;
-    onbtn_addbot = () => {
+    onbtn_addbot() {
         // let len = Game.GetAllPlayerIDs().length;
         // if (len >= 10) {
         //     TipsHelper.showTips('最多10人', this)
@@ -60,7 +62,7 @@ export class CCTeam_select extends CCPanel<IProps> {
         // NetHelper.SendToLua(GameEnum.CustomProtocol.req_addBot)
     };
 
-    OnLockAndStartPressed = () => {
+    OnLockAndStartPressed() {
         // Don't allow a forced start if there are unassigned players
         if (Game.GetUnassignedPlayerIDs().length > 0) {
             return;
@@ -105,12 +107,12 @@ export class CCTeam_select extends CCPanel<IProps> {
                     }
                 </CCPanel>
                 <CCPanel id="Actiondiv" flowChildren="right" visible={isHost}>
-                    <Button id="btn_addbot" onactivate={this.onbtn_addbot}  >
+                    <CCButton type="Style1" color="Blue" width="200px" height="60px" onactivate={() => this.onbtn_addbot()}  >
                         <Label className="btn_lbl" text="添加机器人" />
-                    </Button>
-                    <Button id="btn_startgame" onactivate={this.onbtn_startgame} >
+                    </CCButton>
+                    <CCButton type="Style1" color="Green" width="200px" height="60px" onactivate={() => this.onbtn_startgame()} >
                         <Label className="btn_lbl" text="开始游戏" />
-                    </Button>
+                    </CCButton>
                 </CCPanel>
                 {this.props.children}
                 {this.__root___childs}

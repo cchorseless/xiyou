@@ -1,5 +1,6 @@
 /** Create By Editor*/
 import React, { createRef, useState } from "react";
+import { CSSHelper } from "../../../helper/CSSHelper";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCUnitSmallIcon.less";
@@ -28,7 +29,7 @@ export class CCUnitSmallIcon extends CCPanel<ICCUnitSmallIcon> {
         return (
             this.__root___isValid &&
             <Panel id="CC_UnitSmallIcon" ref={this.__root__}    {...this.initRootAttrs()}>
-                <CCPanel id="UnitIcon" backgroundImage={`url(\"file://{images}/hero/hero_icon/${unit_name}.png\")`} />
+                <CCPanel id="UnitIcon" backgroundImage={CSSHelper.getCustomImageUrl(`custom_game/hero/hero_icon/${unit_name}.png`)} />
                 {this.props.children}
                 {this.__root___childs}
             </Panel>

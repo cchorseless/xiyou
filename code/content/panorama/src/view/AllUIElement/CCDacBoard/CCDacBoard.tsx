@@ -31,7 +31,7 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
         }
         return (
             <Panel ref={this.__root__} id="CC_DacBoardPanel"  {...this.initRootAttrs()} hittest={false}>
-                <CCPanel className={CSSHelper.ClassMaker("DacBoardBG", this.props.type)} />
+                <CCPanel id="DacBoardBG" className={CSSHelper.ClassMaker(this.props.type)} />
                 <CCPanel id="DacBoardDiv">
                     <Panel id="DacBoardLeft" hittest={false}>
                         <CCPortraitGroup particleAttrs={{}} align="right bottom" />

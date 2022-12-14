@@ -26,11 +26,11 @@ export class CCUnitStats extends CCPanel<ICCUnitStats>  {
         this.stragiint.current!.style.marginBottom = "0px";
         this.stragiint.current!.style.marginRight = "5px";
         let DamageIcon = this.stats.current!.FindChildTraverse("DamageIcon")!;
-        CSSHelper.setPanelBgImageUrl(DamageIcon, `common/icon_props_damage.png`);
+        CSSHelper.setPanelBgImageUrl(DamageIcon, `custom_game/eom_design/ccunitstats/icon_props_damage.png`);
         let armorIcon = this.stats.current!.FindChildTraverse("ArmorIcon")!;
-        CSSHelper.setPanelBgImageUrl(armorIcon, `common/icon_props_armor.png`);
+        CSSHelper.setPanelBgImageUrl(armorIcon, `custom_game/eom_design/ccunitstats/icon_props_armor.png`);
         let speedIcon = this.stats.current!.FindChildTraverse("MoveSpeedIcon")!;
-        CSSHelper.setPanelBgImageUrl(speedIcon, `common/icon_props_speed.png`);
+        CSSHelper.setPanelBgImageUrl(speedIcon, `custom_game/eom_design/ccunitstats/icon_props_speed.png`);
 
     }
 
