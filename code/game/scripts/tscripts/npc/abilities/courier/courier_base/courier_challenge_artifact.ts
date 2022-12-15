@@ -11,7 +11,7 @@ import { ActiveRootAbility } from "../../ActiveRootAbility";
 import { EEnum } from "../../../../shared/Gen/Types";
 
 @registerAbility()
-export class courier_challenge_artifact extends ActiveRootAbility {
+export class courier_challenge_artifact extends ActiveRootAbility implements IAbilityChallenge {
 
     CastFilterResult(): UnitFilterResult {
         let caster = this.GetCasterPlus();

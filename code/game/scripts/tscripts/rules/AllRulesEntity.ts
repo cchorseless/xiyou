@@ -20,7 +20,7 @@ import { EnemyUnitComponent } from "./Components/Enemy/EnemyUnitComponent";
 import { FakerHeroDataComponent } from "./Components/FakerHero/FakerHeroDataComponent";
 import { FHeroCombination } from "./Components/FakerHero/FHeroCombination";
 import { FHeroCombinationManagerComponent } from "./Components/FakerHero/FHeroCombinationManagerComponent";
-import { ItemManagerComponent } from "./Components/Item/ItemManagerComponent";
+import { InventoryComponent } from "./Components/Inventory/InventoryComponent";
 import { PlayerDataComponent } from "./Components/Player/PlayerDataComponent";
 import { PlayerHttpComponent } from "./Components/Player/PlayerHttpComponent";
 import { RoundStateComponent } from "./Components/Round/RoundStateComponent";
@@ -28,40 +28,24 @@ import { RoundManagerComponent } from "./Components/Round/RoundManagerComponent"
 import { RoundPrizeUnitKillPrizeComponent } from "./Components/Round/RoundPrizeUnitKillPrizeComponent";
 import { EWearableItem } from "./Components/Wearable/EWearableItem";
 import { WearableComponent } from "./Components/Wearable/WearableComponent";
-import { BuildingSystemComponent } from "./System/Building/BuildingSystemComponent";
-import { ChessControlSystemComponent } from "./System/ChessControl/ChessControlSystemComponent";
-import { CombinationSystemComponent } from "./System/Combination/CombinationSystem";
-import { DrawSystemComponent } from "./System/Draw/DrawSystemComponent";
-import { EnemySystemComponent } from "./System/Enemy/EnemySystemComponent";
-import { MapSystemComponent } from "./System/Map/MapSystemComponent";
-import { PlayerSystemComponent } from "./System/Player/PlayerSystemComponent";
-import { PublicBagSystemComponent } from "./System/Public/PublicBagSystemComponent";
-import { RoundSystemComponent } from "./System/Round/RoundSystemComponent";
+
 import { WearableSystemComponent } from "./System/Wearable/WearableSystemComponent";
 import { BattleUnitComponent } from "./Components/BattleUnit/BattleUnitComponent";
 import { CourierDataComponent } from "./Components/Courier/CourierDataComponent";
 import { BuffManagerComponent } from "./Components/Buff/BuffManagerComponent";
 import { CombEffectComponent } from "./Components/Combination/CombEffectComponent";
-import { GameStateSystemComponent } from "./System/GameState/GameStateSystemComponent";
+import { CourierBagComponent } from "./Components/Courier/CourierBagComponent";
+import { CourierShopComponent } from "./Components/Courier/CourierShopComponent";
+import { RulesEntityPart1 } from "./RulesEntityPart1";
 
 
 [
-    GameStateSystemComponent,
-    MapSystemComponent,
-    RoundSystemComponent,
-    PlayerSystemComponent,
-    EnemySystemComponent,
-    CourierDataComponent,
-    CombinationSystemComponent,
-    ChessControlSystemComponent,
-    BuildingSystemComponent,
-    DrawSystemComponent,
-    PublicBagSystemComponent,
     BattleUnitManagerComponent,
     AbilityManagerComponent,
-    ItemManagerComponent,
+    InventoryComponent,
     PlayerDataComponent,
     PlayerHttpComponent,
+
     DrawComponent,
     RoundManagerComponent,
     RoundStateComponent,
@@ -71,7 +55,9 @@ import { GameStateSystemComponent } from "./System/GameState/GameStateSystemComp
     ECombination,
     ECombinationLabelItem,
     CombEffectComponent,
-
+    CourierDataComponent,
+    CourierBagComponent,
+    CourierShopComponent,
     BuildingManagerComponent,
     ChessControlComponent,
     EnemyManagerComponent,
@@ -91,13 +77,13 @@ import { GameStateSystemComponent } from "./System/GameState/GameStateSystemComp
     EnemyKillPrizeComponent,
     EnemyMoveComponent,
     EnemyPropsComponent,
-
     EWearableItem,
     WearableComponent,
     WearableSystemComponent,
 ];
 export class AllRulesEntity {
     static init() {
+        RulesEntityPart1.init()
         LogHelper.print("register AllRulesEntity");
     }
 }

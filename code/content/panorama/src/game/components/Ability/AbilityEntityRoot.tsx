@@ -4,8 +4,6 @@ import { PlayerScene } from "../Player/PlayerScene";
 
 @registerET()
 export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
-    costType: number;
-    costCount: number;
 
     onSerializeToEntity() {
         PlayerScene.EntityRootManage.addAbility(this);

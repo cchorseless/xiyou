@@ -157,8 +157,8 @@ export class GameEntityRoot extends ET.EntityRoot {
                 if (item.ETRoot && unit.ETRoot) {
                     let itemroot = item.ETRoot.As<ItemEntityRoot>();
                     let npcroot = unit.ETRoot.As<PlayerCreateBattleUnitEntityRoot>()
-                    if (npcroot.ItemManagerComp()) {
-                        npcroot.ItemManagerComp().addItemRoot(itemroot);
+                    if (npcroot.InventoryComp()) {
+                        npcroot.InventoryComp().addItemRoot(itemroot);
                     }
                 }
             }
@@ -227,7 +227,7 @@ export class GameEntityRoot extends ET.EntityRoot {
                 EventHelper.ErrorMessage("cant give to npc", playerid);
                 return;
             }
-            npcroot.ItemManagerComp().addItemRoot(itemroot);
+            npcroot.InventoryComp().addItemRoot(itemroot);
             event.state = true;
         });
         // 道具仍在地上
@@ -255,7 +255,7 @@ export class GameEntityRoot extends ET.EntityRoot {
                 return;
             }
             let posV = Vector(pos.x, pos.y, pos.z);
-            itemroot.DomainParent.As<PlayerCreateBattleUnitEntityRoot>().ItemManagerComp().dropItemRoot(itemroot, posV);
+            itemroot.DomainParent.As<PlayerCreateBattleUnitEntityRoot>().InventoryComp().dropItemRoot(itemroot, posV);
             event.state = true;
         });
     }

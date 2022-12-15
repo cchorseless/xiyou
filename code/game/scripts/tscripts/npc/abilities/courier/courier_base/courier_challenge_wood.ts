@@ -14,7 +14,7 @@ import { EEnum } from "../../../../shared/Gen/Types";
 
 /**删除 */
 @registerAbility()
-export class courier_challenge_wood extends ActiveRootAbility {
+export class courier_challenge_wood extends ActiveRootAbility implements IAbilityChallenge {
 
     CastFilterResult(): UnitFilterResult {
         let caster = this.GetCasterPlus();

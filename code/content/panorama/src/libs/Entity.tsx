@@ -10,19 +10,11 @@ export const registerET = () => (entity: typeof ET.Entity) => {
 };
 
 export module ET {
-    export interface IEntityJson {
-        _t: string;
-        _id: string;
-        _p_instanceid?: string;
-        _playerid?: number;
-        Children?: { [K: string]: IEntityJson };
-        C?: { [K: string]: IEntityJson };
-        [K: string]: any;
-    }
     interface IEntityProperty {
         InstanceId: string;
         Id: string;
         P_InstanceId?: string;
+        D_Props?: { [key: string]: any };
         BelongPlayerid?: number;
         IsRegister: boolean;
         Parent: Entity | null;
@@ -91,6 +83,8 @@ export module ET {
         public readonly InstanceId: string;
         public readonly Id: string;
         public readonly P_InstanceId: string;
+        /**绑定实体同步的属性 */
+        public readonly D_Props: { [K: string]: any };
         public readonly BelongPlayerid: number;
         public readonly IsRegister: boolean = false;
         public readonly IsComponent: boolean = false;
@@ -160,7 +154,7 @@ export module ET {
         }
 
         public updateFromJson(json: IEntityJson) {
-            let ignoreKey = ["_t", "_id", "Children", "C", "_p_instanceid", "_playerid"];
+            let ignoreKey = ["_t", "_id", "Children", "C", "_p_instanceid", "_playerid", "_d_props"];
             for (let k in json) {
                 if (ignoreKey.indexOf(k) == -1) {
                     (this as any)[k] = FuncHelper.TryTransArrayLikeObject(json[k]);
@@ -171,6 +165,9 @@ export module ET {
             }
             if (json._playerid != null) {
                 (this.BelongPlayerid as any) = json._playerid;
+            }
+            if (json._d_props != null) {
+                (this.D_Props as any) = json._d_props;
             }
             if (json.Children) {
                 let _childs = Object.values(json.Children);
@@ -289,6 +286,10 @@ export module ET {
 
         public GetType() {
             return this.constructor.name;
+        }
+
+        public GetD_Props<P>() {
+            return (this.D_Props || {}) as P;
         }
         public IsDisposed() {
             return this.InstanceId == "0";

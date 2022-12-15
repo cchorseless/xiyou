@@ -44,7 +44,7 @@ export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
             // wearable
             runtimeroot.WearableComp().WearCopy(this.WearableComp());
             // equip
-            runtimeroot.ItemManagerComp().cloneItem(this.ItemManagerComp());
+            runtimeroot.InventoryComp().cloneItem(this.InventoryComp());
             // ability
             runtimeroot.AbilityManagerComp().cloneAbility(this.AbilityManagerComp());
             // buff

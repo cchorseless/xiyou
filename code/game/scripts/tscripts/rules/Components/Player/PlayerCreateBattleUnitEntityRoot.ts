@@ -10,7 +10,7 @@ import { BuffManagerComponent } from "../Buff/BuffManagerComponent";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ChessComponent } from "../ChessControl/ChessComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
-import { ItemManagerComponent } from "../Item/ItemManagerComponent";
+import { InventoryComponent } from "../Inventory/InventoryComponent";
 import { RoundStateComponent } from "../Round/RoundStateComponent";
 import { WearableComponent } from "../Wearable/WearableComponent";
 import { PlayerCreateUnitEntityRoot } from "./PlayerCreateUnitEntityRoot";
@@ -58,7 +58,7 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
         // this.AddComponent(GetRegClass<typeof CombinationComponent>("CombinationComponent"));
         this.AddComponent(GetRegClass<typeof WearableComponent>("WearableComponent"), this.GetDotaHeroName());
         this.AddComponent(GetRegClass<typeof AbilityManagerComponent>("AbilityManagerComponent"));
-        this.AddComponent(GetRegClass<typeof ItemManagerComponent>("ItemManagerComponent"));
+        this.AddComponent(GetRegClass<typeof InventoryComponent>("InventoryComponent"));
         this.AddComponent(GetRegClass<typeof BuffManagerComponent>("BuffManagerComponent"));
         this.AddComponent(GetRegClass<typeof RoundStateComponent>("RoundStateComponent"));
 
@@ -79,8 +79,8 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
     AbilityManagerComp() {
         return this.GetComponentByName<AbilityManagerComponent>("AbilityManagerComponent");
     }
-    ItemManagerComp() {
-        return this.GetComponentByName<ItemManagerComponent>("ItemManagerComponent");
+    InventoryComp() {
+        return this.GetComponentByName<InventoryComponent>("InventoryComponent");
     }
     BuffManagerComp() {
         return this.GetComponentByName<BuffManagerComponent>("BuffManagerComponent");

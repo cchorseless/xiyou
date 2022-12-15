@@ -74,7 +74,7 @@ export class AiAttackComponent extends ET.Component {
                 }
             }
         }
-        let itemM = battleUnit.ItemManagerComp();
+        let itemM = battleUnit.InventoryComp();
         if (itemM) {
             let items = itemM.getAllCanCastItem();
             while (items.length > 0) {

@@ -39,9 +39,9 @@ export class ItemEntityRoot extends PlayerCreateUnitEntityRoot {
         let item = this.GetDomain<BaseItem_Plus>();
         let owner = item.GetOwnerPlus();
         if (this.isPickUped() && owner != null && owner.ETRoot &&
-            owner.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().ItemManagerComp()
+            owner.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().InventoryComp()
         ) {
-            owner.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().ItemManagerComp().addItemRoot(this)
+            owner.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().InventoryComp().addItemRoot(this)
         }
     }
 
@@ -88,7 +88,7 @@ export class ItemEntityRoot extends PlayerCreateUnitEntityRoot {
         if (this.Playerid != -1 && this.Playerid != unitroot.Playerid) {
             return false;
         }
-        if (unitroot.ItemManagerComp() == null) {
+        if (unitroot.InventoryComp() == null) {
             return false;
         }
         let item = this.GetDomain<BaseItem_Plus>();

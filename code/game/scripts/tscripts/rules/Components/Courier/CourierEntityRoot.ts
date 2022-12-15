@@ -3,10 +3,12 @@ import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
-import { ItemManagerComponent } from "../Item/ItemManagerComponent";
+import { InventoryComponent } from "../Inventory/InventoryComponent";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
+import { CourierBagComponent } from "./CourierBagComponent";
 import { CourierDataComponent } from "./CourierDataComponent";
+import { CourierShopComponent } from "./CourierShopComponent";
 
 
 export class CourierEntityRoot extends PlayerCreateBattleUnitEntityRoot {
@@ -17,7 +19,9 @@ export class CourierEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         (this as any).EntityId = hero.GetEntityIndex();
         this.AddComponent(GetRegClass<typeof CourierDataComponent>("CourierDataComponent"));
         this.AddComponent(GetRegClass<typeof AbilityManagerComponent>("AbilityManagerComponent"));
-        this.AddComponent(GetRegClass<typeof ItemManagerComponent>("ItemManagerComponent"));
+        this.AddComponent(GetRegClass<typeof InventoryComponent>("InventoryComponent"));
+        this.AddComponent(GetRegClass<typeof CourierBagComponent>("CourierBagComponent"));
+        this.AddComponent(GetRegClass<typeof CourierShopComponent>("CourierShopComponent"));
     }
 
     CourierDataComp() {
@@ -27,10 +31,15 @@ export class CourierEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     AbilityManagerComp() {
         return this.GetComponentByName<AbilityManagerComponent>("AbilityManagerComponent");
     }
-    ItemManagerComp() {
-        return this.GetComponentByName<ItemManagerComponent>("ItemManagerComponent");
+    InventoryComp() {
+        return this.GetComponentByName<InventoryComponent>("InventoryComponent");
     }
-
+    CourierBagComp() {
+        return this.GetComponentByName<CourierBagComponent>("CourierBagComponent");
+    }
+    CourierShopComp() {
+        return this.GetComponentByName<CourierShopComponent>("CourierShopComponent");
+    }
     OnRoundStartPrize(round: ERoundBoard) {
         let hero = this.GetDomain<BaseNpc_Hero_Plus>();
         if (round.isWin) {

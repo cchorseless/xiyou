@@ -40,7 +40,7 @@ export class ECombinationLabelItem extends ET.Entity {
         let unitroot = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
         switch (this.SourceType) {
             case "Item":
-                return unitroot.ItemManagerComp().getItemRoot(this.SourceEntityId);
+                return unitroot.InventoryComp().getItemRoot(this.SourceEntityId);
             case "Ability":
                 return unitroot.AbilityManagerComp().getAbilityRoot(this.SourceEntityId);
         }

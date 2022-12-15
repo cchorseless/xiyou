@@ -15,7 +15,7 @@ import { ActiveRootAbility } from "../../ActiveRootAbility";
 import { EEnum } from "../../../../shared/Gen/Types";
 
 @registerAbility()
-export class courier_challenge_gold extends ActiveRootAbility {
+export class courier_challenge_gold extends ActiveRootAbility implements IAbilityChallenge {
 
 
     @serializeDomainProps()

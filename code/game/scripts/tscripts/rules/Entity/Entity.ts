@@ -32,15 +32,6 @@ export const serializeDomainProps =
         };
 
 export module ET {
-    export interface IEntityJson {
-        _t: string;
-        _id: string;
-        _p_instanceid?: string;
-        _playerid?: number;
-        Children?: { [k: string]: IEntityJson };
-        C?: { [k: string]: IEntityJson };
-        [K: string]: any;
-    }
     export interface IETEntityJson {
         _t: string;
         _id: string;
@@ -218,9 +209,10 @@ export module ET {
                 }
             }
             if (this.Domain.SerializeDomainProps != null) {
+                obj._d_props = {};
                 for (let k of this.Domain.SerializeDomainProps) {
                     if (props.includes(k)) {
-                        obj[k] = (this.Domain as any)[k];
+                        obj._d_props[k] = (this.Domain as any)[k];
                     }
                 }
             }
@@ -236,8 +228,9 @@ export module ET {
                 }
             }
             if (this.Domain.SerializeDomainProps != null) {
+                obj._d_props = {};
                 for (let k of this.Domain.SerializeDomainProps) {
-                    obj[k] = (this.Domain as any)[k];
+                    obj._d_props[k] = (this.Domain as any)[k];
                 }
             }
             if (!ignoreChild) {

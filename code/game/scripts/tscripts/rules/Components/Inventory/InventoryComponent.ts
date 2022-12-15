@@ -5,12 +5,12 @@ import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ActiveRootItem } from "../../../npc/items/ActiveRootItem";
 import { ET } from "../../Entity/Entity";
+import { ItemEntityRoot } from "../Item/ItemEntityRoot";
 import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
-import { ItemEntityRoot } from "./ItemEntityRoot";
 
 @reloadable
-export class ItemManagerComponent extends ET.Component {
+export class InventoryComponent extends ET.Component {
     public allItemRoot: string[] = [];
     onAwake(...args: any[]): void {
         let npc = this.GetDomain<BaseNpc_Plus>();
@@ -42,7 +42,7 @@ export class ItemManagerComponent extends ET.Component {
         })
     }
 
-    cloneItem(source: ItemManagerComponent) {
+    cloneItem(source: InventoryComponent) {
         let allItem = source.getAllBaseItem();
         let npc = this.GetDomain<BaseNpc_Plus>();
         allItem.forEach(item => {
@@ -98,7 +98,7 @@ export class ItemManagerComponent extends ET.Component {
             return;
         }
         if (root.DomainParent) {
-            root.DomainParent.As<PlayerCreateBattleUnitEntityRoot>().ItemManagerComp().removeItemRoot(root, false);
+            root.DomainParent.As<PlayerCreateBattleUnitEntityRoot>().InventoryComp().removeItemRoot(root, false);
         }
         let item = root.GetDomain<BaseItem_Plus>();
         let npc = this.GetDomain<BaseNpc_Plus>();

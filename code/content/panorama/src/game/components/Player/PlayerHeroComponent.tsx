@@ -15,8 +15,8 @@ export class PlayerHeroComponent extends ET.Component {
 
     LoadNetTableData() {
         let nettable = NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer());
-        let data_player = NetHelper.GetOneTable(nettable) as { key: string, value: ET.IEntityJson }[];
-        let allLoadData: { [key: string]: ET.IEntityJson } = {}
+        let data_player = NetHelper.GetOneTable(nettable) as { key: string, value: IEntityJson }[];
+        let allLoadData: { [key: string]: IEntityJson } = {}
         for (let info of data_player) {
             if (info.value) {
                 allLoadData[info.key] = info.value;

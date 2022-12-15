@@ -1,5 +1,5 @@
 import React, { createRef, useState } from "react";
-import { ArtifactConfig } from "../../../../../game/scripts/tscripts/shared/ArtifactConfig";
+import { PublicBagConfig } from "../../../../../game/scripts/tscripts/shared/PublicBagConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -14,9 +14,10 @@ export class CCArtifactListPanel extends CCPanel<ICCArtifactListPanel> {
     render() {
         return (
             <Panel className="CC_ArtifactListPanel" ref={this.__root__}  {...this.initRootAttrs()}>
-                <Button id="ToggleArtifact" onactivate={() => {
-                    this.__root__.current?.ToggleClass("ExpandArtifact");
-                }}>
+                <Button id="ToggleArtifact"
+                    onactivate={() => {
+                        this.__root__.current?.ToggleClass("ExpandArtifact");
+                    }}>
                     <Image id="ToggleImg" />
                 </Button>
                 <Panel id="ArtifactPanelAndTitle" hittest={false}>
@@ -24,7 +25,7 @@ export class CCArtifactListPanel extends CCPanel<ICCArtifactListPanel> {
                     <Panel id="ArtifactPanel" hittest={false}>
                         <Panel id="ArtifactList" hittest={false}>
                             {
-                                [...Array(ArtifactConfig.PLAYER_MAX_ARTIFACT_WITH_EXTRA)].map((item, index) => {
+                                [...Array(PublicBagConfig.PLAYER_MAX_ARTIFACT_WITH_EXTRA)].map((item, index) => {
                                     let itemIndex: ItemEntityIndex | undefined = tArtifacts[index + 1];
                                     let bLock = index >= iMaxArtifact;
                                     return (

@@ -49,8 +49,8 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
                 <CCLabel type="AbilityName" text={$.Localize("#DOTA_Tooltip_ability_" + abilityname)} horizontalAlign={"center"} />
                 {
                     ability && <CCPanel flowChildren="right" horizontalAlign="center">
-                        <CCIcon_CoinType width="20px" height="20px" cointype={EEnum.EMoneyType[ability?.costType as any] as any} />
-                        <CCLabel type="Gold" text={`${ability?.costCount}`} fontSize={'18px'} />
+                        <CCIcon_CoinType width="20px" height="20px" cointype={EEnum.EMoneyType[ability?.GetD_Props<IAbilityChallenge>().costType as any] as any} />
+                        <CCLabel type="Gold" text={`${ability?.GetD_Props<IAbilityChallenge>().costCount}`} fontSize={'18px'} />
                     </CCPanel>
                 }
                 {this.__root___childs}

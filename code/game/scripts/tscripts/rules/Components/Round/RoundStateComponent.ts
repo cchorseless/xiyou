@@ -68,7 +68,7 @@ export class RoundStateComponent extends ET.Component {
         else {
             modifier_jiaoxie_wudi.remove(domain);
             battleunit.AbilityManagerComp().OnBoardRound_Battle();
-            battleunit.ItemManagerComp().OnBoardRound_Battle();
+            battleunit.InventoryComp().OnBoardRound_Battle();
             TimerHelper.addTimer(1, () => {
                 battleunit.AiAttackComp().startFindEnemyAttack();
             })
@@ -79,7 +79,7 @@ export class RoundStateComponent extends ET.Component {
         let battleunit = this.BattleUnit() as BuildingRuntimeEntityRoot;
         battleunit.AiAttackComp().endFindToAttack();
         battleunit.AbilityManagerComp().OnBoardRound_Prize(round);
-        battleunit.ItemManagerComp().OnBoardRound_Prize(round);
+        battleunit.InventoryComp().OnBoardRound_Prize(round);
         if (round.isWin) {
             battleunit.StartFindTreasure();
         } else {
@@ -92,7 +92,7 @@ export class RoundStateComponent extends ET.Component {
         battleunit.AiAttackComp().endFindToAttack();
         battleunit.onVictory();
         battleunit.AbilityManagerComp().OnBoardRound_Prize(round);
-        battleunit.ItemManagerComp().OnBoardRound_Prize(round);
+        battleunit.InventoryComp().OnBoardRound_Prize(round);
         modifier_jiaoxie_wudi.applyOnly(domain, domain);
         let ProjectileInfo = battleunit.GetPlayer().FakerHeroRoot().FakerHeroDataComp().ProjectileInfo;
         this.playDamageHeroAni(ProjectileInfo);
