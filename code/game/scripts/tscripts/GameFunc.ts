@@ -94,6 +94,7 @@ export module GameFunc {
      * @param table 类
      */
     export function BindInstanceToCls(_instance: any, table: new () => any) {
+        if (_instance instanceof table) { return }
         let instance = GetmetatableIndex(_instance) as any;
         let { prototype } = table;
         while (prototype) {

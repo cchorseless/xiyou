@@ -50,7 +50,7 @@ export class ability6_pudge_dismember extends BaseAbility_Plus {
         if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
-        let hThinker = CreateUnitByName(hCaster.GetUnitName(), hCaster.GetAbsOrigin(), false, hCaster, hCaster, hCaster.GetTeamNumber())
+        let hThinker = BaseNpc_Plus.CreateUnitByName(hCaster.GetUnitName(), hCaster.GetAbsOrigin(), hCaster.GetTeamNumber(), false, hCaster, hCaster)
 
         for (let i = hThinker.GetAbilityCount() - 1; i >= 0; i++) {
             let hAbility = hThinker.GetAbilityByIndex(i)

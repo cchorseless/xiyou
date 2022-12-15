@@ -1,5 +1,4 @@
 import { ResHelper } from "../../helper/ResHelper";
-import { LogHelper } from "../../helper/LogHelper";
 import { BaseItem } from "./Base_Plus";
 import { BaseNpc_Plus } from "./BaseNpc_Plus";
 import { GameFunc } from "../../GameFunc";
@@ -114,6 +113,15 @@ export class BaseItem_Plus extends BaseItem {
 
     }
 
+    static CreateItem(
+        itemName: string,
+        owner: CDOTAPlayerController | undefined,
+        purchaser: CDOTAPlayerController | undefined,
+    ) {
+        let hItem = CreateItem(itemName, owner, purchaser) as BaseItem_Plus;
+        GameFunc.BindInstanceToCls(hItem, BaseItem_Plus);
+        return hItem
+    }
     /**
      * 创建一个物品给单位，如果单位身上没地方放了，就扔在他附近随机位置
      * @param this
@@ -125,7 +133,7 @@ export class BaseItem_Plus extends BaseItem {
         if (itemname == null) {
             itemname = this.name;
         }
-        let hItem = CreateItem(itemname, player, player) as BaseItem_Plus;
+        let hItem = BaseItem_Plus.CreateItem(itemname, player, player)
         hItem.SetPurchaseTime(0);
         hUnit.AddItem(hItem);
         if (GameFunc.IsValid(hItem) && hItem.GetOwnerPlus() != hUnit && hItem.GetContainer() == null) {

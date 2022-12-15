@@ -4,11 +4,10 @@ import { LogHelper } from "../../helper/LogHelper";
 import { BaseModifier, BaseNpc } from "./Base_Plus";
 import { GameFunc } from "../../GameFunc";
 import { BaseModifier_Plus } from "./BaseModifier_Plus";
-import { GameEnum } from "../../shared/GameEnum";
 import { modifier_activity } from "../modifier/modifier_activity";
-import { EntityHelper } from "../../helper/EntityHelper";
 import { BaseAbility_Plus } from "./BaseAbility_Plus";
 import { globalData } from "../../GameCache";
+import { BaseItem_Plus } from "./BaseItem_Plus";
 /**普通NPC单位基类 */
 export class BaseNpc_Plus extends BaseNpc {
 
@@ -30,7 +29,20 @@ export class BaseNpc_Plus extends BaseNpc {
         npcOwner: CBaseEntity | undefined = null,
         entityOwner: BaseNpc_Plus = null
     ): InstanceType<T> {
-        return EntityHelper.CreateEntityByName(this.name, v, team, findClearSpace, npcOwner, entityOwner) as InstanceType<T>;
+        return BaseNpc_Plus.CreateUnitByName(this.name, v, team, findClearSpace, npcOwner, entityOwner) as InstanceType<T>;
+    }
+
+    static CreateUnitByName(
+        unitname: string,
+        v: Vector,
+        team: DOTATeam_t,
+        findClearSpace: boolean = true,
+        npcOwner: CBaseEntity | undefined = null,
+        entityOwner: BaseNpc_Plus = null
+    ) {
+        let unit = CreateUnitByName(unitname, v, findClearSpace, npcOwner, entityOwner, team);
+        GameFunc.BindInstanceToCls(unit, BaseNpc_Plus);
+        return unit as BaseNpc_Plus;
     }
 
     public addBuff?<T extends BaseModifier>(buffname: string, caster?: BaseNpc_Plus, ability?: BaseAbility_Plus, modifierTable?: ModifierTable): T {
@@ -189,7 +201,7 @@ export class BaseNpc_Plus extends BaseNpc {
         fDuration: number,
         fOutgoingDamage: number,
         fIncomingDamage: number) {
-        let illusion = CreateUnitByName(this.GetUnitName(), vLocation, bFindClearSpace, hNPCOwner, hUnitOwner, iTeamNumber) as BaseNpc_Plus;
+        let illusion = BaseNpc_Plus.CreateUnitByName(this.GetUnitName(), vLocation, iTeamNumber, bFindClearSpace, hNPCOwner, hUnitOwner) as BaseNpc_Plus;
         illusion.MakeIllusion()
         illusion.SetForwardVector(this.GetForwardVector())
         if (hUnitOwner != null) {
@@ -248,7 +260,7 @@ export class BaseNpc_Plus extends BaseNpc {
         for (let i = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; i <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
             let item = this.GetItemInSlot(i)
             if (item != null) {
-                let illusion_item = CreateItem(item.GetName(), illusion as any, illusion as any)
+                let illusion_item = BaseItem_Plus.CreateItem(item.GetName(), illusion as any, illusion as any)
                 if (GameFunc.IsValid(illusion_item)) {
                     illusion_item.EndCooldown()
                     illusion_item.SetPurchaser(null)

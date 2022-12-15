@@ -200,7 +200,7 @@ export class GameDebugger extends SingletonClass {
             case "-test":
                 break;
             case "-additem":
-                hero.AddItemByName(tokens[1]);
+                ActiveRootItem.CreateOneToUnit(hero, tokens[1]);
                 break;
             case "-b":
                 ActiveRootItem.CreateOneToUnit(hero, "item_building_hero_" + tokens[1]);

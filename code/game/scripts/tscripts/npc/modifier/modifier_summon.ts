@@ -28,7 +28,7 @@ export class modifier_summon extends BaseModifier_Plus {
         if (!IsServer()) { return };
         let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
         iTeamNumber = iTeamNumber || hCaster.GetTeamNumber()
-        let hSummon = CreateUnitByName(sUnitName, vLocation, bFindClearSpace, hHero, hHero, iTeamNumber)
+        let hSummon = BaseNpc_Plus.CreateUnitByName(sUnitName, vLocation, iTeamNumber, bFindClearSpace, hHero, hHero)
         fDuration = fDuration + modifier_property.SumProps(hCaster, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.SUMMON_DURATION_BONUS);
         modifier_summon.apply(hSummon, hCaster, null, { duration: fDuration })
         modifier_event.FireEvent({

@@ -68,7 +68,7 @@ export class ability1_mars_spear extends ActiveRootAbility {
 
         let vStartPosition = (vPosition - vDirection * fOffsetDistance) as Vector
 
-        let hThinker = CreateUnitByName(hCaster.GetUnitName(), vStartPosition, false, hCaster, hCaster, hCaster.GetTeamNumber())
+        let hThinker = BaseNpc_Plus.CreateUnitByName(hCaster.GetUnitName(), vStartPosition, hCaster.GetTeamNumber(), false, hCaster, hCaster)
 
         for (let i = hThinker.GetAbilityCount() - 1; i >= 0; i--) {
             let ability = hThinker.GetAbilityByIndex(i)

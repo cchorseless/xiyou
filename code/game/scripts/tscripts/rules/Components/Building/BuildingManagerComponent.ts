@@ -57,7 +57,7 @@ export class BuildingManagerComponent extends ET.Component {
             EventHelper.ErrorMessage(BuildingConfig.ErrorCode.dota_hud_error_population_limit);
             return;
         }
-        let building = EntityHelper.CreateEntityByName(towerID, location, hero.GetTeamNumber(), false, hero, hero) as BaseNpc_Plus;
+        let building = BaseNpc_Plus.CreateUnitByName(towerID, location, hero.GetTeamNumber(), false, hero, hero) as BaseNpc_Plus;
         if (!building) {
             return;
         }
@@ -134,7 +134,7 @@ export class BuildingManagerComponent extends ET.Component {
         }
         let location = pos.getVector3();
         let angle: number = BuildingConfig.BUILDING_ANGLE;
-        let building = EntityHelper.CreateEntityByName(towerID, location, hero.GetTeamNumber(), false, hero, hero) as BaseNpc_Plus;
+        let building = BaseNpc_Plus.CreateUnitByName(towerID, location, hero.GetTeamNumber(), false, hero, hero) as BaseNpc_Plus;
         if (!building) {
             return;
         }

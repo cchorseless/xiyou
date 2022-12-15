@@ -567,7 +567,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
     }
     private onbtn_moveout() {
         const ccMainPanel = CCMainPanel.GetInstance()!;
-        ccMainPanel.HideToolTip();
+        // ccMainPanel.HideToolTip();
     }
     render() {
         const m_is_item = this.GetState("m_is_item", false);

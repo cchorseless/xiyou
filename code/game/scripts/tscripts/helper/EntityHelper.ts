@@ -18,30 +18,6 @@ export module EntityHelper {
         }
     };
 
-    /**
-     * 创建单位
-     * @param unitName
-     * @param location
-     * @param team
-     * @param creater 创建者
-     * @param findClearSpace
-     * @param npcOwner
-     * @param entityOwner
-     * @returns
-     */
-    export function CreateEntityByName(
-        unitName: string,
-        location: Vector,
-        team: DOTATeam_t,
-        findClearSpace: boolean = true,
-        npcOwner: CBaseEntity | undefined = null,
-        entityOwner: CBaseEntity | undefined = null,
-    ) {
-        return CreateUnitByName(unitName, location, findClearSpace, npcOwner, entityOwner, team) as BaseNpc_Plus;
-
-    }
-
-
 
     /**
      * 回复怒气

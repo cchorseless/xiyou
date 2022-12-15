@@ -18,7 +18,7 @@ export class modifier_remnant extends BaseModifier_Plus {
     ReleaseRemnant(vPosition: Vector = null) {
         let hCaster = this.GetParentPlus();
         vPosition = vPosition || hCaster.GetAbsOrigin();
-        let hThinker = CreateUnitByName(hCaster.GetUnitName(), vPosition, false, hCaster, hCaster, hCaster.GetTeamNumber());
+        let hThinker = BaseNpc_Plus.CreateUnitByName(hCaster.GetUnitName(), vPosition, hCaster.GetTeamNumber(), false, hCaster, hCaster);
         this.remnants.push(hThinker);
         hThinker.SetForwardVector(hCaster.GetForwardVector());
         hThinker.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_CAST_ABILITY_1, 1.5);

@@ -13,6 +13,7 @@ import { modifier_kill } from "../../../modifier/modifier_kill";
 import { ability1_skeleton_king_hellfire_blast } from "./ability1_skeleton_king_hellfire_blast";
 import { modifier_skeleton_king_3 } from "./ability3_skeleton_king_mortal_strike";
 import { ability6_skeleton_king_reincarnation, modifier_skeleton_king_6_damage } from "./ability6_skeleton_king_reincarnation";
+import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 
 /** dota原技能数据 */
 export const Data_skeleton_king_vampiric_aura = { "ID": "5087", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_FRIENDLY", "AbilityCastPoint": "0.1", "AbilityCooldown": "50", "AbilityManaCost": "65 70 75 80", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "vampiric_aura": "10 18 26 34", "LinkedSpecialBonus": "special_bonus_unique_wraith_king_2" }, "02": { "var_type": "FIELD_FLOAT", "skeleton_duration": "60" }, "03": { "var_type": "FIELD_INTEGER", "max_skeleton_charges": "2 4 6 8", "LinkedSpecialBonus": "special_bonus_unique_wraith_king_5" }, "04": { "var_type": "FIELD_FLOAT", "spawn_interval": "0.25" }, "05": { "var_type": "FIELD_FLOAT", "reincarnate_time": "3" }, "06": { "var_type": "FIELD_INTEGER", "gold_bounty": "5" }, "07": { "var_type": "FIELD_INTEGER", "xp_bounty": "5" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_2" };
@@ -96,7 +97,7 @@ export class ability2_skeleton_king_vampiric_aura extends BaseAbility_Plus {
         let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
         let location = hCaster.GetAbsOrigin()
         let summon_loc = location + GameFunc.VectorFunctions.Rotation2D(Vector(100, 0, 0), math.rad(360 / max_skeleton_charges * this.iIndex))
-        let hUnit = CreateUnitByName("npc_dota_wraith_king_skeleton_warrior_custom", summon_loc as Vector, false, hHero, hHero, hCaster.GetTeamNumber())
+        let hUnit = BaseNpc_Plus.CreateUnitByName("npc_dota_wraith_king_skeleton_warrior_custom", summon_loc as Vector, hCaster.GetTeamNumber(), false, hHero, hHero)
         hUnit.SetBaseDamageMin(skeleton_attack)
         hUnit.SetBaseDamageMax(skeleton_attack)
         hUnit.SetForwardVector(hCaster.GetForwardVector())

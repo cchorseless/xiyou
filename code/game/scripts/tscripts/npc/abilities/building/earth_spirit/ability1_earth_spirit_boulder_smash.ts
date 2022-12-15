@@ -127,7 +127,7 @@ export class ability1_earth_spirit_boulder_smash extends BaseAbility_Plus {
             // hTargetOrStone.bUsing = true //  正在使用，不能被其他技能使用
         } else if (iType == 1) {
             // 创建幻象
-            let hThinker = CreateUnitByName(hTargetOrStone.GetUnitName(), vStartPos, false, hCaster, hCaster, hCaster.GetTeamNumber())
+            let hThinker = BaseNpc_Plus.CreateUnitByName(hTargetOrStone.GetUnitName(), vStartPos, hCaster.GetTeamNumber(), false, hCaster, hCaster)
             let abilitycount = hThinker.GetAbilityCount()
             for (let i = abilitycount - 1; i >= 0; i--) {
                 let hAbility = hThinker.GetAbilityByIndex(i)

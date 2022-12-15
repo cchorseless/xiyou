@@ -42,7 +42,7 @@ export class ability2_juggernaut_healing_ward extends BaseAbility_Plus {
         if (GameFunc.IsValid(this.hHealingWard) && this.hHealingWard.IsAlive()) {
             this.hHealingWard.ForceKill(false)
         }
-        this.hHealingWard = CreateUnitByName("npc_dota_juggernaut_healing_ward", vPosition, false, hCaster, hCaster, hCaster.GetTeamNumber())
+        this.hHealingWard = BaseNpc_Plus.CreateUnitByName("npc_dota_juggernaut_healing_ward", vPosition, hCaster.GetTeamNumber(), false, hCaster, hCaster)
         modifier_juggernaut_2_aura.apply(this.hHealingWard, hCaster, this, { duration: duration })
         //  记录上一次释放的位置
         this.vLastPosition = vPosition

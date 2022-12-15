@@ -129,7 +129,7 @@ export class modifier_lycan_1 extends BaseModifier_Plus {
                     }
                 } else {
                     if (!GameFunc.IsValid(hWolf) || !hWolf.IsAlive()) {
-                        let hWolf = CreateUnitByName("npc_dota_lycan_wolf_custom", (hParent.GetAbsOrigin() + RandomVector(50)) as Vector, false, hHero, hHero, hParent.GetTeamNumber())
+                        let hWolf = BaseNpc_Plus.CreateUnitByName("npc_dota_lycan_wolf_custom", (hParent.GetAbsOrigin() + RandomVector(50)) as Vector, hParent.GetTeamNumber(), false, hHero, hHero)
                         hWolf.SetForwardVector(hParent.GetForwardVector())
                         modifier_lycan_1_particle_spawn.apply(hParent, hWolf, hAbility, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
                         this.tWolves[i] = hWolf

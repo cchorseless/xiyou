@@ -38,17 +38,17 @@ export class CourierBagComponent extends ET.Component {
     }
 
     putInItem(item: ItemEntityRoot) {
-        if (!this.IsEmpty()) { return; }
-        if (Object.values(this.AllItem).includes(item.Id)) { return; }
-        for (let i = PublicBagConfig.PUBLIC_ITEM_SLOT_MIN; i < PublicBagConfig.PUBLIC_ITEM_SLOT_MAX + 1; i++) {
-            if (this.AllItem[i + ""] == null) {
-                this.AllItem[i + ""] = item.Id;
-                GameRules.Addon.ETRoot.AddDomainChild(item);
-                GameRules.Addon.ETRoot.SyncClientEntity(item);
-                GameRules.Addon.ETRoot.SyncClientEntity(this);
-                break;
-            }
-        }
+        // if (!this.IsEmpty()) { return; }
+        // if (Object.values(this.AllItem).includes(item.Id)) { return; }
+        // for (let i = PublicBagConfig.PUBLIC_ITEM_SLOT_MIN; i < PublicBagConfig.PUBLIC_ITEM_SLOT_MAX + 1; i++) {
+        //     if (this.AllItem[i + ""] == null) {
+        //         this.AllItem[i + ""] = item.Id;
+        //         GameRules.Addon.ETRoot.AddDomainChild(item);
+        //         GameRules.Addon.ETRoot.SyncClientEntity(item);
+        //         GameRules.Addon.ETRoot.SyncClientEntity(this);
+        //         break;
+        //     }
+        // }
     }
 
     getOutItem(item: ItemEntityRoot) {

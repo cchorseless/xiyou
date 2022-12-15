@@ -108,7 +108,7 @@ export class EnemyManagerComponent extends ET.Component {
             throw new Error("cant find emeny spawn pos");
         }
         let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
-        let enemy = EntityHelper.CreateEntityByName(enemyName, pos, DOTATeam_t.DOTA_TEAM_BADGUYS) as BaseNpc_Plus;
+        let enemy = BaseNpc_Plus.CreateUnitByName(enemyName, pos, DOTATeam_t.DOTA_TEAM_BADGUYS);
         enemy.SetNeverMoveToClearSpace(false);
         EnemyUnitEntityRoot.Active(enemy, playerid, enemyName, roundid, onlykey);
         let domain = this.GetDomain<PlayerScene>();
