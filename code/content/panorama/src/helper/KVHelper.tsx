@@ -1,5 +1,4 @@
 
-import { KvAllInterface, KV_AllAbilitys, KV_AllItems, KV_AllUnits } from "../config/KvAllInterface";
 import { FuncHelper } from "./FuncHelper";
 
 export module KVHelper {

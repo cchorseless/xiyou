@@ -1,25 +1,4 @@
 
-import { shipin_config } from "./kvConfig/shipin_config" 
-import { pool_config } from "./kvConfig/pool_config" 
-import { pool_group_config } from "./kvConfig/pool_group_config" 
-import { prop_config } from "./kvConfig/prop_config" 
-import { effect_config } from "./kvConfig/effect_config" 
-import { population_config } from "./kvConfig/population_config" 
-import { tech_config } from "./kvConfig/tech_config" 
-import { lang_config } from "./kvConfig/lang_config" 
-import { building_combination } from "./building/building_combination" 
-import { building_combination_ability } from "./building/building_combination_ability" 
-import { building_item_card } from "./building/building_item_card" 
-import { building_round } from "./building/building_round" 
-import { building_round_board } from "./building/building_round_board" 
-import { building_round_challenge } from "./building/building_round_challenge" 
-import { building_round_board_challenge } from "./building/building_round_board_challenge" 
-import { building_unit_tower } from "./building/building_unit_tower" 
-import { building_unit_enemy } from "./building/building_unit_enemy" 
-import { building_config } from "./building/building_config" 
-import { building_unit_summoned } from "./building/building_unit_summoned" 
-import { building_ability_tower } from "./building/building_ability_tower" 
-import { courier_abilities } from "./abilities/courier_abilities" 
 export interface KvAllInterface  {
 "shipin_config": shipin_config.OBJ_1_1,
 "pool_config": pool_config.OBJ_1_1,
@@ -158,3 +137,9 @@ export const KvClient = {
 "building_ability_tower": "scripts/npc/building/building_ability_tower.kv",
 "courier_abilities": "scripts/npc/abilities/courier_abilities.kv",
 }
+export const allAbilitys = ["courier_abilities","building_ability_tower"];
+export type KV_Abilitys = courier_abilities.OBJ_1_1|building_ability_tower.OBJ_1_1;
+export const allItems = ["building_item_card"];
+export type KV_Items = building_item_card.OBJ_1_1;
+export const allUnits = ["building_unit_enemy","building_unit_tower","building_unit_summoned"];
+export type KV_Units = building_unit_enemy.OBJ_1_1|building_unit_tower.OBJ_1_1|building_unit_summoned.OBJ_1_1;

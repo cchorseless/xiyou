@@ -6,7 +6,6 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { building_round_board } from "../../../kvInterface/building/building_round_board";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { serializeETProps } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";

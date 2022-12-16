@@ -2,7 +2,6 @@ import { GetRegClass, reloadable } from "../../../GameCache";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
-import { building_combination_ability } from "../../../kvInterface/building/building_combination_ability";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, serializeETProps } from "../../Entity/Entity";

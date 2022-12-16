@@ -7,20 +7,29 @@
  */
 
 import { GameFunc } from "../GameFunc";
-import { KvClient, KvClientInterface, KvServer, KvServerInterface } from "../kvInterface/KvAllInterface";
+import { allAbilitys, allItems, allUnits, KvAllPath, KvClient, KvClientInterface, KvServer, KvServerInterface, KV_Abilitys, KV_Items, KV_Units } from "../kvInterface/KvAllInterface";
 import { LogHelper } from "./LogHelper";
+
 
 export module KVHelper {
     /**服務器KV配置 */
     export const KvServerConfig: Readonly<KvServerInterface> = {} as Readonly<KvServerInterface>;
     /**客戶端KV配置 */
     export const KvClientConfig: Readonly<KvClientInterface> = {} as Readonly<KvClientInterface>;
+    /**所有技能 */
+    export const KvAbilitys: Readonly<KV_Abilitys> = {} as Readonly<KV_Abilitys>;
+    /**所有道具 */
+    export const KvItems: Readonly<KV_Items> = {} as Readonly<KV_Items>;
+    /**所有单位 */
+    export const KvUnits: Readonly<KV_Units> = {} as Readonly<KV_Units>;
+
     export function KvConfig() {
         if (IsServer()) {
             return KvServerConfig;
         } else {
             return KvClientConfig;
         }
+
     }
 
     export function initKVFile() {
@@ -46,6 +55,16 @@ export module KVHelper {
                 LogHelper.print("Client LoadKeyValues Finish:", k);
             }
         }
+        // 合并
+        allAbilitys.forEach((file: any) => {
+            Object.assign(KvAbilitys, (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]))
+        });
+        allItems.forEach((file: any) => {
+            Object.assign(KvItems, (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]))
+        });
+        allUnits.forEach((file: any) => {
+            Object.assign(KvUnits, (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]))
+        });
     }
 
     /**

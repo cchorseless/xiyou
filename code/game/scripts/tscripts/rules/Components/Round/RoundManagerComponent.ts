@@ -2,8 +2,6 @@ import { reloadable } from "../../../GameCache";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
-import { building_round_board } from "../../../kvInterface/building/building_round_board";
-import { building_round_board_challenge } from "../../../kvInterface/building/building_round_board_challenge";
 import { ET, serializeETProps } from "../../Entity/Entity";
 import { DifficultyState } from "../../System/Difficulty/DifficultyState";
 import { RoundState } from "../../System/Round/RoundState";

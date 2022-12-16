@@ -21,7 +21,7 @@ const kv_path = "game/scripts/npc";
 const interface_path = "game/scripts/tscripts/kvInterface";
 const uiInterface_path = "content/panorama/src/config";
 const kvjsconfig = "game/scripts/npc/kv_config.kv";
-const KvAllInterface_UI = uiInterface_path + "/KvAllInterface.ts";
+const KvAllInterface_UI = uiInterface_path + "/KvAllInterface.d.ts";
 const KvAllInterface_UI_Data = uiInterface_path + "/KVData.ts";
 const KvAllInterface_Game = interface_path + "/KvAllInterface.ts";
 const Top_Str = "\n";
@@ -240,13 +240,13 @@ function buildTsStr(obj) {
         }
     }
     if (namespace) {
-        r += `export namespace ${namespace} { \n`;
+        r += `declare namespace ${namespace} { \n`;
     }
     for (let _k in outObj) {
         if (_k == "OBJ_1_1") {
-            r += "export interface " + _k + insterS + " {\n";
+            r += " interface " + _k + insterS + " {\n";
         } else {
-            r += "export interface " + _k + " {\n";
+            r += " interface " + _k + " {\n";
         }
         let inobj = outObj[_k];
         let temp = "";
@@ -327,8 +327,8 @@ function single_kv_to_ts(file, outFilePath = interface_path) {
     let outType = parseTreeObj(outObj);
     let outpath = file
         .replace(kv_path, outFilePath)
-        .replace(/\.(k|K)(v|V)$/, ".ts")
-        .replace(/\.(t|T)(x|X)(t|T)$/, ".ts");
+        .replace(/\.(k|K)(v|V)$/, ".d.ts")
+        .replace(/\.(t|T)(x|X)(t|T)$/, ".d.ts");
     let parent_i = outpath.lastIndexOf("/");
     let out_dir = outpath.substr(0, parent_i);
     if (!fs.existsSync(outFilePath)) fs.mkdirSync(outFilePath);
@@ -394,10 +394,10 @@ const all_kv_to_ts = async (singleFile = null) => {
         if (single_kv_to_ts(file, uiInterface_path)) {
             successCount += 1;
             let __ss = path.basename(file, ext);
-            KvAllInterface_s += "import { " + __ss + " } from ";
-            KvAllInterface_s += file.replace(kv_path, '".').replace(ext, '" \n');
+            // KvAllInterface_s += "import { " + __ss + " } from ";
+            // KvAllInterface_s += file.replace(kv_path, '".').replace(ext, '" \n');
             if (KvAllInterface_s_1.length == 0) {
-                KvAllInterface_s_1 += "export interface KvAllInterface extends ";
+                KvAllInterface_s_1 += "declare interface KvAllInterface extends ";
                 KvAllInterface_s_1 += '\n' + __ss + ".OBJ_0_1";
             } else {
                 KvAllInterface_s_1 += ',\n' + __ss + ".OBJ_0_1";
@@ -417,7 +417,7 @@ const all_kv_to_ts = async (singleFile = null) => {
     let kvconfigDATA = `export const KV_DATA  =  ${JSON.stringify(KvAllDATA)} as any ; \n`;
     if (clientkvbundle[0]) {
         kvconfigDATA += "export const KV_Abilitys  = Object.assign({} ";
-        KvAllInterface_s += "export type KV_AllAbilitys = {}";
+        KvAllInterface_s += "declare type KV_AllAbilitys = {}";
         clientkvbundle[0].forEach(s => {
             if (KvAllInterface_s.includes(s)) {
                 kvconfigDATA += `,KV_DATA.${s}`;
@@ -429,7 +429,7 @@ const all_kv_to_ts = async (singleFile = null) => {
     }
     if (clientkvbundle[1]) {
         kvconfigDATA += "export const KV_Items  = Object.assign({} ";
-        KvAllInterface_s += "export type KV_AllItems  = {}";
+        KvAllInterface_s += "declare type KV_AllItems  = {}";
         clientkvbundle[1].forEach(s => {
             if (KvAllInterface_s.includes(s)) {
                 kvconfigDATA += `,KV_DATA.${s}`;
@@ -441,7 +441,7 @@ const all_kv_to_ts = async (singleFile = null) => {
     }
     if (clientkvbundle[2]) {
         kvconfigDATA += "export const KV_Units  = Object.assign({} ";
-        KvAllInterface_s += "export type KV_AllUnits  = {}";
+        KvAllInterface_s += "declare type KV_AllUnits  = {}";
         clientkvbundle[2].forEach(s => {
             if (KvAllInterface_s.includes(s)) {
                 kvconfigDATA += `,KV_DATA.${s}`;
@@ -482,8 +482,8 @@ const all_kv_to_ts = async (singleFile = null) => {
         if (single_kv_to_ts(file, interface_path)) {
             successCount += 1;
             let __ss = path.basename(file, ext);
-            KvAllInterface_s += "import { " + __ss + " } from ";
-            KvAllInterface_s += file.replace(kv_path, '".').replace(ext, '" \n');
+            // KvAllInterface_s += "import { " + __ss + " } from ";
+            // KvAllInterface_s += file.replace(kv_path, '".').replace(ext, '" \n');
             if (KvAllInterface_s_1.length == 0) {
                 KvAllInterface_s_1 += "export interface KvAllInterface  {\n";
             }
@@ -522,8 +522,28 @@ const all_kv_to_ts = async (singleFile = null) => {
     KvAllInterface_s += KvAllInterface_s_1 + "}\n" + KvAllPath_s + "}\n";
     KvAllInterface_s += KvServer_Interf_s + "}\n" + KvServer_s + "}\n";
     KvAllInterface_s += KvClient_Interf_s + "}\n" + KvClient_s + "}\n";
+    // 合并
+    // 技能
+    let allAbilitys = (clientkvbundle[0] || []).filter((_i, index) => {
+        if (KvAllInterface_s.includes(_i)) return _i;
+    })
+    KvAllInterface_s += `export const allAbilitys = ${JSON.stringify(allAbilitys ) };\n`;
+    KvAllInterface_s += `export type KV_Abilitys = ${(allAbilitys).map((_i,index)=>{return _i+".OBJ_1_1"}).join("|") || "any" };\n`;
+    // 道具
+    let allItems = (clientkvbundle[1] || []).filter((_i, index) => {
+        if (KvAllInterface_s.includes(_i)) return _i;
+    })
+    KvAllInterface_s += `export const allItems = ${JSON.stringify(allItems) };\n`
+    KvAllInterface_s += `export type KV_Items = ${(allItems).map((_i,index)=>{return _i+".OBJ_1_1"}).join("|") || "any" };\n`;
+    // 单位
+    let allUnits = (clientkvbundle[2] || []).filter((_i, index) => {
+        if (KvAllInterface_s.includes(_i)) return _i;
+    })
+    KvAllInterface_s += `export const allUnits = ${JSON.stringify(allUnits) };\n`
+    KvAllInterface_s += `export type KV_Units = ${(allUnits).map((_i,index)=>{return _i+".OBJ_1_1"}).join("|") || "any" };\n`;
+
     // KvAllPath
-    if (!fs.existsSync(KvAllInterface_Game)) fs.mkdirSync(KvAllInterface_Game);
+    if (!fs.existsSync(interface_path)) fs.mkdirSync(interface_path);
     fs.writeFileSync(KvAllInterface_Game, Top_Str + KvAllInterface_s);
     console.log("Parse kv->Game Interface finish,", " success: ", successCount, " fail: ", errorCount);
     //#endregion

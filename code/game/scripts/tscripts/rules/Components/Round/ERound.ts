@@ -3,7 +3,6 @@ import { EntityHelper } from "../../../helper/EntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { building_round } from "../../../kvInterface/building/building_round";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, serializeETProps } from "../../Entity/Entity";
 import { RoundConfig } from "../../../shared/RoundConfig";

@@ -4,7 +4,6 @@ import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { building_round_board_challenge } from "../../../kvInterface/building/building_round_board_challenge";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { ERound } from "./ERound";

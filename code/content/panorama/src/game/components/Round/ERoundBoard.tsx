@@ -1,11 +1,9 @@
 import { RoundConfig } from "../../../../../../game/scripts/tscripts/shared/RoundConfig";
-import { building_round_board } from "../../../config/building/building_round_board";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { CCTopBarCenter } from "../../../view/TopBarPanel/CCTopBarPanel";
-// import { BuildingConfig } from "../../system/Building/BuildingConfig";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERound } from "./ERound";
 @registerET()
