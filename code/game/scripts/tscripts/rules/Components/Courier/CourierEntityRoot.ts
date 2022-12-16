@@ -4,14 +4,14 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
 import { InventoryComponent } from "../Inventory/InventoryComponent";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { CourierBagComponent } from "./CourierBagComponent";
 import { CourierDataComponent } from "./CourierDataComponent";
 import { CourierShopComponent } from "./CourierShopComponent";
 
 
-export class CourierEntityRoot extends PlayerCreateBattleUnitEntityRoot {
+export class CourierEntityRoot extends BattleUnitEntityRoot {
     onAwake() {
         let hero = this.GetDomain<BaseNpc_Hero_Plus>();
         (this as any).Playerid = hero.GetPlayerOwnerID();

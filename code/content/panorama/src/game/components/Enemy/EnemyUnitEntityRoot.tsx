@@ -1,11 +1,10 @@
 import { ET, registerET } from "../../../libs/Entity";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
-import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
 
 @registerET()
-export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
+export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
 
     onSerializeToEntity() {
         PlayerScene.EntityRootManage.addEnemy(this);

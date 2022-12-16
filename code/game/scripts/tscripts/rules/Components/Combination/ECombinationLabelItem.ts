@@ -2,7 +2,7 @@ import { reloadable } from "../../../GameCache";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 
 @reloadable
 export class ECombinationLabelItem extends ET.Entity {
@@ -37,7 +37,7 @@ export class ECombinationLabelItem extends ET.Entity {
     }
 
     public getSourceEntity() {
-        let unitroot = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let unitroot = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         switch (this.SourceType) {
             case "Item":
                 return unitroot.InventoryComp().getItemRoot(this.SourceEntityId);
@@ -47,7 +47,7 @@ export class ECombinationLabelItem extends ET.Entity {
     }
 
     onDestroy(): void {
-        let unitroot = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let unitroot = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         if (unitroot.IsBuilding()) {
             unitroot.GetPlayer().CombinationManager().removeCombination(this);
         }

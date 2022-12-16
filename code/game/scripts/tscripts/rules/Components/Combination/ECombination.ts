@@ -8,7 +8,7 @@ import { ET, serializeETProps } from "../../Entity/Entity";
 import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { CombEffectComponent } from "./CombEffectComponent";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
 

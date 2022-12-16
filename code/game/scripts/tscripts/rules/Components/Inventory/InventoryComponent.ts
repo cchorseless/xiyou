@@ -6,7 +6,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ActiveRootItem } from "../../../npc/items/ActiveRootItem";
 import { ET } from "../../Entity/Entity";
 import { ItemEntityRoot } from "../Item/ItemEntityRoot";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 
 @reloadable
@@ -54,7 +54,7 @@ export class InventoryComponent extends ET.Component {
     }
 
     getItemRoot(childid: string) {
-        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         return battleunit.GetDomainChild<ItemEntityRoot>(childid);
     }
 
@@ -93,12 +93,12 @@ export class InventoryComponent extends ET.Component {
 
 
     addItemRoot(root: ItemEntityRoot) {
-        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         if (root.DomainParent == battleunit) {
             return;
         }
         if (root.DomainParent) {
-            root.DomainParent.As<PlayerCreateBattleUnitEntityRoot>().InventoryComp().removeItemRoot(root, false);
+            root.DomainParent.As<BattleUnitEntityRoot>().InventoryComp().removeItemRoot(root, false);
         }
         let item = root.GetDomain<BaseItem_Plus>();
         let npc = this.GetDomain<BaseNpc_Plus>();
@@ -122,7 +122,7 @@ export class InventoryComponent extends ET.Component {
     }
 
     removeItemRoot(root: ItemEntityRoot, bDeleteEntity: boolean = true) {
-        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         if (root.DomainParent != battleunit) {
             return;
         }
@@ -142,7 +142,7 @@ export class InventoryComponent extends ET.Component {
     }
 
     dropItemRoot(root: ItemEntityRoot, vector: Vector) {
-        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         if (root.DomainParent != battleunit) {
             return;
         }
@@ -158,7 +158,7 @@ export class InventoryComponent extends ET.Component {
         if (caster.IsTempestDouble() || caster.IsIllusion()) {
             return r;
         }
-        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         this.allItemRoot.forEach(str => {
             let itemroot = battleunit.GetDomainChild<ItemEntityRoot>(str);
             if (itemroot) {

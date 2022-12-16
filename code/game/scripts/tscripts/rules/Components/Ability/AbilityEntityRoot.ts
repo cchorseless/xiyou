@@ -3,12 +3,11 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
-import { ET, serializeETProps } from "../../Entity/Entity";
 import { CombinationConfig } from "../../../shared/CombinationConfig";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
-import { PlayerCreateUnitEntityRoot, PlayerCreateUnitType } from "../Player/PlayerCreateUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
+import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 
-export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
+export class AbilityEntityRoot extends BaseEntityRoot {
     public readonly IsSerializeEntity: boolean = true;
     public readonly CombinationLabels: string[] = [];
 
@@ -25,17 +24,20 @@ export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
         let item = this.GetDomain<BaseAbility_Plus>();
         let owner = item.GetOwnerPlus();
         let config = this.config();
-        if (config && config.CombinationLabel && config.CombinationLabel.length > 0) {
-            config.CombinationLabel.split("|").forEach((labels) => {
-                if (labels && labels.length > 0 && !this.CombinationLabels.includes(labels)) {
-                    this.CombinationLabels.push(labels);
-                }
-            });
-        }
-        if (owner != null && owner.ETRoot &&
-            owner.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().AbilityManagerComp()
-        ) {
-            owner.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().AbilityManagerComp().addAbilityRoot(this)
+        if (config) {
+            let CombinationLabel = config.CombinationLabel as string;
+            if (CombinationLabel && CombinationLabel.length > 0) {
+                CombinationLabel.split("|").forEach((labels) => {
+                    if (labels && labels.length > 0 && !this.CombinationLabels.includes(labels)) {
+                        this.CombinationLabels.push(labels);
+                    }
+                });
+            }
+            if (owner != null && owner.ETRoot &&
+                owner.ETRoot.As<BattleUnitEntityRoot>().AbilityManagerComp()
+            ) {
+                owner.ETRoot.As<BattleUnitEntityRoot>().AbilityManagerComp().addAbilityRoot(this)
+            }
         }
     }
 
@@ -48,7 +50,7 @@ export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
     }
 
     config() {
-        return KVHelper.KvConfig().building_ability_tower["" + this.ConfigID];
+        return KVHelper.KvAbilitys["" + this.ConfigID];
     }
 
     isCombinationLabel(label: string): boolean {
@@ -56,7 +58,7 @@ export class AbilityEntityRoot extends PlayerCreateUnitEntityRoot {
     }
 
     isManaEnoughForActive() {
-        let needmana = this.config().AbilityActiveMana;
+        let needmana = this.config().AbilityActiveMana as string;
         if (needmana) {
             let ability = this.GetDomain<BaseAbility_Plus>();
             if (needmana.includes("|")) {

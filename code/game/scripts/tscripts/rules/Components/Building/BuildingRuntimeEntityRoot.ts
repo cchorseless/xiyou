@@ -7,10 +7,10 @@ import { building_auto_findtreasure } from "../../../npc/abilities/common/buildi
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { BuildingComponent } from "./BuildingComponent";
 
-export class BuildingRuntimeEntityRoot extends PlayerCreateBattleUnitEntityRoot {
+export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
     public IsRuntimeBuilding(): boolean {
         return true;
     }

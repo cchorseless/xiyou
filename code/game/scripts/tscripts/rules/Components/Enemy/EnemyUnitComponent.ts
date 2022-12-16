@@ -3,11 +3,11 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health_bar";
 import { ET } from "../../Entity/Entity";
 import { EnemyConfig } from "../../../shared/EnemyConfig";
-import { BattleUnitComponent } from "../BattleUnit/BattleUnitComponent";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
+import { ChessDataComponent } from "../ChessControl/ChessDataComponent";
 
 @reloadable
-export class EnemyUnitComponent extends BattleUnitComponent {
+export class EnemyUnitComponent extends ChessDataComponent {
     readonly IsSerializeEntity: boolean = true;
 
     onAwake(): void {

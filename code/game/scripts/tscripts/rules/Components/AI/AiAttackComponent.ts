@@ -7,7 +7,7 @@ import { modifier_taunt } from "../../../npc/modifier/effect/modifier_taunt";
 import { IBuilding_BaseNpc } from "../../../npc/units/building/Building_BaseNpc";
 import { ET } from "../../Entity/Entity";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 
 @reloadable
 export class AiAttackComponent extends ET.Component {
@@ -15,7 +15,7 @@ export class AiAttackComponent extends ET.Component {
     timerBattle: string;
     startFindEnemyAttack() {
         let domain = this.GetDomain<BaseNpc_Plus>();
-        let chessComp = domain.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().ChessComp();
+        let chessComp = domain.ETRoot.As<BattleUnitEntityRoot>().ChessComp();
         chessComp.updateBoardPos();
         if (this.timerBattle) {
             TimerHelper.removeTimer(this.timerBattle);
@@ -34,7 +34,7 @@ export class AiAttackComponent extends ET.Component {
                 }
                 let enemy = this.findAroundEnemyToAttack();
                 if (enemy) {
-                    let enemyRoot = enemy.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+                    let enemyRoot = enemy.ETRoot.As<BattleUnitEntityRoot>();
                     if (!chessComp.IsCanAttackTarget(enemyRoot)) {
                         let pos = chessComp.FindClosePosToEnemy(enemyRoot);
                         if (pos) {
@@ -63,7 +63,7 @@ export class AiAttackComponent extends ET.Component {
     }
     castAbilityAndItem() {
         let u = this.GetDomain<BaseNpc_Plus>();
-        let battleUnit = u.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleUnit = u.ETRoot.As<BattleUnitEntityRoot>();
         let abilityM = battleUnit.AbilityManagerComp();
         if (abilityM) {
             let abilitys = abilityM.getAllCanCastAbility();
@@ -88,7 +88,7 @@ export class AiAttackComponent extends ET.Component {
     }
     findAroundEnemyToAttack(): BaseNpc_Plus {
         let u = this.GetDomain<BaseNpc_Plus>();
-        let building = u.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let building = u.ETRoot.As<BattleUnitEntityRoot>();
         if (!GameFunc.IsValid(u)) {
             return;
         }
@@ -98,7 +98,7 @@ export class AiAttackComponent extends ET.Component {
         }
         if (!GameFunc.IsValid(new_target)) {
             let current_target = u.GetAttackTarget() as BaseNpc_Plus;
-            let all_unit: PlayerCreateBattleUnitEntityRoot[];
+            let all_unit: BattleUnitEntityRoot[];
             if (u.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_GOODGUYS) {
                 all_unit = building.GetPlayer().EnemyManagerComp().getAllBattleUnitAlive();
             }

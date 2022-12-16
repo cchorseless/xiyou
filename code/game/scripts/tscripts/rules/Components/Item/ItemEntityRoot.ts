@@ -5,14 +5,15 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
-import { PlayerCreateUnitEntityRoot, PlayerCreateUnitType } from "../Player/PlayerCreateUnitEntityRoot";
+import { PublicBagConfig } from "../../../shared/PublicBagConfig";
+import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 
 @reloadable
-export class ItemEntityRoot extends PlayerCreateUnitEntityRoot {
+export class ItemEntityRoot extends BaseEntityRoot {
 
     public readonly CombinationLabels: string[] = [];
-
+    public ItemType: number = PublicBagConfig.EBagItemType.COMMON;
     onAwake() {
         let item = this.GetDomain<BaseItem_Plus>();
         (this as any).ConfigID = item.GetAbilityName();
@@ -24,24 +25,27 @@ export class ItemEntityRoot extends PlayerCreateUnitEntityRoot {
         else {
             (this as any).Playerid = -1;
         }
-        this.regSelfToM();
+        this.regSelfToInventory();
     }
 
-    private regSelfToM() {
+    private regSelfToInventory() {
         let config = this.config();
-        if (config && config.CombinationLabel && config.CombinationLabel.length > 0) {
-            config.CombinationLabel.split("|").forEach((labels) => {
-                if (labels && labels.length > 0 && !this.CombinationLabels.includes(labels)) {
-                    this.CombinationLabels.push(labels);
-                }
-            });
-        }
-        let item = this.GetDomain<BaseItem_Plus>();
-        let owner = item.GetOwnerPlus();
-        if (this.isPickUped() && owner != null && owner.ETRoot &&
-            owner.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().InventoryComp()
-        ) {
-            owner.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().InventoryComp().addItemRoot(this)
+        if (config) {
+            let CombinationLabel = config.CombinationLabel as string;
+            if (CombinationLabel && CombinationLabel.length > 0) {
+                config.CombinationLabel.split("|").forEach((labels) => {
+                    if (labels && labels.length > 0 && !this.CombinationLabels.includes(labels)) {
+                        this.CombinationLabels.push(labels);
+                    }
+                });
+            }
+            let item = this.GetDomain<BaseItem_Plus>();
+            let owner = item.GetOwnerPlus();
+            if (this.isPickUped() && owner != null && owner.ETRoot &&
+                owner.ETRoot.As<BattleUnitEntityRoot>().InventoryComp()
+            ) {
+                owner.ETRoot.As<BattleUnitEntityRoot>().InventoryComp().addItemRoot(this)
+            }
         }
     }
 
@@ -59,7 +63,7 @@ export class ItemEntityRoot extends PlayerCreateUnitEntityRoot {
         }
     }
 
-    changeItemOwner(owner: PlayerCreateBattleUnitEntityRoot | null) {
+    changeItemOwner(owner: BattleUnitEntityRoot | null) {
         let item = this.GetDomain<BaseItem_Plus>();
         if (owner) {
             let npc = owner.GetDomain<BaseNpc_Plus>();
@@ -81,10 +85,10 @@ export class ItemEntityRoot extends PlayerCreateUnitEntityRoot {
         }
     }
     config() {
-        return KVHelper.KvConfig().building_ability_tower["" + this.ConfigID];
+        return KVHelper.KvItems["" + this.ConfigID];
     }
 
-    canGiveToNpc(unitroot: PlayerCreateBattleUnitEntityRoot) {
+    canGiveToNpc(unitroot: BattleUnitEntityRoot) {
         if (this.Playerid != -1 && this.Playerid != unitroot.Playerid) {
             return false;
         }

@@ -13,7 +13,7 @@ import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { RoundConfig } from "../../../shared/RoundConfig";
 import { FakerHeroEntityRoot } from "../FakerHero/FakerHeroEntityRoot";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
@@ -224,7 +224,7 @@ export class BuildingManagerComponent extends ET.Component {
 
     public getAllBattleUnitAlive() {
         let allbuilding = this.getAllBattleBuilding();
-        let r: PlayerCreateBattleUnitEntityRoot[] = [];
+        let r: BattleUnitEntityRoot[] = [];
         allbuilding.forEach(b => {
             if (b.RuntimeBuilding) {
                 r = r.concat(b.RuntimeBuilding.BattleUnitManager().GetAllBattleUnitAlive())

@@ -2,9 +2,11 @@ import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { TCharacter } from "../../service/account/TCharacter";
 import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
-import { ChessControlComponent } from "../ChessControlComponent";
+import { ChessControlComponent } from "../ChessControl/ChessControlComponent";
 import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";
+import { CourierBagComponent } from "../Courier/CourierBagComponent";
 import { CourierDataComponent } from "../Courier/CourierDataComponent";
+import { CourierShopComponent } from "../Courier/CourierShopComponent";
 import { DrawComponent } from "../Draw/DrawComponent";
 import { PublicShopComponent } from "../Public/PublicShopComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
@@ -73,7 +75,6 @@ export class PlayerEntityRoot extends ET.Entity {
     get PublicShopComp() {
         return this.GetComponentByName<PublicShopComponent>("PublicShopComponent")!;
     }
-
     get ChessControlComp() {
         return this.GetComponentByName<ChessControlComponent>("ChessControlComponent")!;
     }
@@ -89,7 +90,12 @@ export class PlayerEntityRoot extends ET.Entity {
     get CourierDataComp() {
         return this.GetComponentByName<CourierDataComponent>("CourierDataComponent")!;
     }
-
+    get CourierBagComp() {
+        return this.GetComponentByName<CourierBagComponent>("CourierBagComponent")!;
+    }
+    get CourierShopComp() {
+        return this.GetComponentByName<CourierShopComponent>("CourierShopComponent")!;
+    }
     get TCharacter() {
         return this.GetComponentByName<TCharacter>("TCharacter")!;
     }

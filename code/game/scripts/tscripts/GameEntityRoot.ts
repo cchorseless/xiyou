@@ -19,7 +19,7 @@ import { BuildingEntityRoot } from "./rules/Components/Building/BuildingEntityRo
 import { CourierEntityRoot } from "./rules/Components/Courier/CourierEntityRoot";
 import { EnemyUnitEntityRoot } from "./rules/Components/Enemy/EnemyUnitEntityRoot";
 import { ItemEntityRoot } from "./rules/Components/Item/ItemEntityRoot";
-import { PlayerCreateBattleUnitEntityRoot } from "./rules/Components/Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "./rules/Components/BattleUnit/BattleUnitEntityRoot";
 import { RoundPrizeUnitEntityRoot } from "./rules/Components/Round/RoundPrizeUnitEntityRoot";
 import { ET } from "./rules/Entity/Entity";
 import { BuildingSystemComponent } from "./rules/System/Building/BuildingSystemComponent";
@@ -156,7 +156,7 @@ export class GameEntityRoot extends ET.EntityRoot {
                 modifier_event.FireEvent(event, Enum_MODIFIER_EVENT.ON_ITEM_GET);
                 if (item.ETRoot && unit.ETRoot) {
                     let itemroot = item.ETRoot.As<ItemEntityRoot>();
-                    let npcroot = unit.ETRoot.As<PlayerCreateBattleUnitEntityRoot>()
+                    let npcroot = unit.ETRoot.As<BattleUnitEntityRoot>()
                     if (npcroot.InventoryComp()) {
                         npcroot.InventoryComp().addItemRoot(itemroot);
                     }
@@ -221,7 +221,7 @@ export class GameEntityRoot extends ET.EntityRoot {
                 return;
             }
             let itemroot = itemEnity.ETRoot.As<ItemEntityRoot>();
-            let npcroot = npc.ETRoot.As<PlayerCreateBattleUnitEntityRoot>()
+            let npcroot = npc.ETRoot.As<BattleUnitEntityRoot>()
             if (!itemroot.canGiveToNpc(npcroot)) {
                 event.state = false;
                 EventHelper.ErrorMessage("cant give to npc", playerid);
@@ -255,7 +255,7 @@ export class GameEntityRoot extends ET.EntityRoot {
                 return;
             }
             let posV = Vector(pos.x, pos.y, pos.z);
-            itemroot.DomainParent.As<PlayerCreateBattleUnitEntityRoot>().InventoryComp().dropItemRoot(itemroot, posV);
+            itemroot.DomainParent.As<BattleUnitEntityRoot>().InventoryComp().dropItemRoot(itemroot, posV);
             event.state = true;
         });
     }
@@ -352,7 +352,7 @@ export class GameEntityRoot extends ET.EntityRoot {
         if (!hUnit.ETRoot) {
             return;
         }
-        let root = hUnit.ETRoot as PlayerCreateBattleUnitEntityRoot;
+        let root = hUnit.ETRoot as BattleUnitEntityRoot;
         if (root.onKilled) {
             root.onKilled(events);
         }

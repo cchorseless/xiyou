@@ -3,19 +3,18 @@ import { GameFunc } from "../../../GameFunc";
 import { PrecacheHelper } from "../../../helper/PrecacheHelper";
 import { registerProp } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 import { serializeETProps } from "../../Entity/Entity";
 import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
 import { AiAttackComponent } from "../AI/AiAttackComponent";
 import { BuffManagerComponent } from "../Buff/BuffManagerComponent";
-import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
-import { ChessComponent } from "../ChessControl/ChessComponent";
+import { ChessMoveComponent } from "../ChessControl/ChessMoveComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { InventoryComponent } from "../Inventory/InventoryComponent";
 import { RoundStateComponent } from "../Round/RoundStateComponent";
 import { WearableComponent } from "../Wearable/WearableComponent";
-import { PlayerCreateUnitEntityRoot } from "./PlayerCreateUnitEntityRoot";
 
-export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot {
+export class BattleUnitEntityRoot extends BaseEntityRoot {
 
     onVictory() {
         let npc = this.GetDomain<BaseNpc_Plus>();
@@ -53,7 +52,7 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
         return false;
     }
     addBattleComp() {
-        this.AddComponent(GetRegClass<typeof ChessComponent>("ChessComponent"));
+        this.AddComponent(GetRegClass<typeof ChessMoveComponent>("ChessMoveComponent"));
         this.AddComponent(GetRegClass<typeof AiAttackComponent>("AiAttackComponent"));
         // this.AddComponent(GetRegClass<typeof CombinationComponent>("CombinationComponent"));
         this.AddComponent(GetRegClass<typeof WearableComponent>("WearableComponent"), this.GetDotaHeroName());
@@ -71,7 +70,7 @@ export class PlayerCreateBattleUnitEntityRoot extends PlayerCreateUnitEntityRoot
         return this.GetComponentByName<WearableComponent>("WearableComponent");
     }
     ChessComp() {
-        return this.GetComponentByName<ChessComponent>("ChessComponent");
+        return this.GetComponentByName<ChessMoveComponent>("ChessMoveComponent");
     }
     AiAttackComp() {
         return this.GetComponentByName<AiAttackComponent>("AiAttackComponent");

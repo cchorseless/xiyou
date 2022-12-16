@@ -8,11 +8,11 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ActiveRootItem } from "../../../npc/items/ActiveRootItem";
 import { modifier_out_of_game } from "../../../npc/modifier/battle/modifier_out_of_game";
 import { CombinationComponent } from "../Combination/CombinationComponent";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { BuildingComponent } from "./BuildingComponent";
 import { BuildingRuntimeEntityRoot } from "./BuildingRuntimeEntityRoot";
 
-export class BuildingEntityRoot extends PlayerCreateBattleUnitEntityRoot {
+export class BuildingEntityRoot extends BattleUnitEntityRoot {
     public onAwake(playerid: PlayerID, conf: string) {
         (this as any).Playerid = playerid;
         (this as any).ConfigID = conf;

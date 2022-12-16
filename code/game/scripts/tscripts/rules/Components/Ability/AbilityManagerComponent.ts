@@ -5,7 +5,7 @@ import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
 import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { AbilityEntityRoot } from "./AbilityEntityRoot";
 
@@ -75,7 +75,7 @@ export class AbilityManagerComponent extends ET.Component {
     }
 
     clearAllAbility() {
-        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         this.allAbilityRoot.forEach(str => {
             let ability = battleunit.GetDomainChild<AbilityEntityRoot>(str);
             if (ability) {
@@ -99,12 +99,12 @@ export class AbilityManagerComponent extends ET.Component {
     }
 
     getAbilityRoot(childid: string) {
-        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         return battleunit.GetDomainChild<AbilityEntityRoot>(childid);
     }
 
     addAbilityRoot(root: AbilityEntityRoot) {
-        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         if (root.DomainParent || root.DomainParent == battleunit) {
             return;
         }
@@ -116,7 +116,7 @@ export class AbilityManagerComponent extends ET.Component {
     }
 
     removeAbilityRoot(root: AbilityEntityRoot) {
-        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         if (root.DomainParent != battleunit) {
             return;
         }
@@ -130,7 +130,7 @@ export class AbilityManagerComponent extends ET.Component {
     }
 
     levelUpAllAbility() {
-        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         this.allAbilityRoot.forEach(str => {
             let ability = battleunit.GetDomainChild<AbilityEntityRoot>(str);
             ability.GetDomain<BaseAbility_Plus>().UpgradeAbility(true);
@@ -139,7 +139,7 @@ export class AbilityManagerComponent extends ET.Component {
 
 
     setAllAbilityLevel(level: number) {
-        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         this.allAbilityRoot.forEach(str => {
             let ability = battleunit.GetDomainChild<AbilityEntityRoot>(str);
             ability.GetDomain<BaseAbility_Plus>().SetLevel(level);
@@ -153,7 +153,7 @@ export class AbilityManagerComponent extends ET.Component {
         if (caster.IsIllusion()) {
             return r;
         }
-        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleunit = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>();
         this.allAbilityRoot.forEach(str => {
             let abilityroot = battleunit.GetDomainChild<AbilityEntityRoot>(str);
             if (abilityroot) {

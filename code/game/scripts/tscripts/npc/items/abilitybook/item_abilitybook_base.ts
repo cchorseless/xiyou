@@ -6,7 +6,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BuildingComponent } from "../../../rules/Components/Building/BuildingComponent";
 import { BuildingEntityRoot } from "../../../rules/Components/Building/BuildingEntityRoot";
-import { PlayerCreateBattleUnitEntityRoot } from "../../../rules/Components/Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../../../rules/Components/BattleUnit/BattleUnitEntityRoot";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility } from "../../entityPlus/Base_Plus";
@@ -52,7 +52,7 @@ export class item_abilitybook_base extends ActiveRootItem {
 
     OnSpellStart() {
         let hCaster = this.GetCasterPlus();
-        let building = hCaster.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let building = hCaster.ETRoot.As<BattleUnitEntityRoot>();
         let abilityM = building.AbilityManagerComp();
         if (abilityM == null) {
             return;

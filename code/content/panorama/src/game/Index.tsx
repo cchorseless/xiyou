@@ -3,7 +3,7 @@ import { AbilityEntityRoot } from "./components/Ability/AbilityEntityRoot";
 import { BuildingComponent } from "./components/Building/BuildingComponent";
 import { BuildingEntityRoot } from "./components/Building/BuildingEntityRoot";
 import { BuildingManagerComponent } from "./components/Building/BuildingManagerComponent";
-import { ChessControlComponent } from "./components/ChessControlComponent";
+import { ChessControlComponent } from "./components/ChessControl/ChessControlComponent";
 import { DrawComponent } from "./components/Draw/DrawComponent";
 import { EnemyUnitComponent } from "./components/Enemy/EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./components/Enemy/EnemyUnitEntityRoot";
@@ -19,7 +19,7 @@ import { ECombination } from "./components/Combination/ECombination";
 import { FakerHeroEntityRoot } from "./components/FakerHero/FakerHeroEntityRoot";
 import { FHeroCombination } from "./components/FakerHero/FHeroCombination";
 import { FHeroCombinationManagerComponent } from "./components/FakerHero/FHeroCombinationManagerComponent";
-import { BattleUnitComponent } from "./components/BattleUnit/BattleUnitComponent";
+import { ChessDataComponent } from "./components/ChessControl/ChessDataComponent";
 import { BattleUnitIllusionEntityRoot } from "./components/BattleUnit/BattleUnitIllusionEntityRoot";
 import { BattleUnitSummonEntityRoot } from "./components/BattleUnit/BattleUnitSummonEntityRoot";
 import { BuildingRuntimeEntityRoot } from "./components/Building/BuildingRuntimeEntityRoot";
@@ -28,13 +28,15 @@ import { CourierEntityRoot } from "./components/Courier/CourierEntityRoot";
 import { PublicBagSystemComponent } from "./system/Public/PublicBagSystemComponent";
 import { GameStateSystemComponent } from "./components/GameState/GameStateSystemComponent";
 import { PublicShopComponent } from "./components/Public/PublicShopComponent";
+import { CourierBagComponent } from "./components/Courier/CourierBagComponent";
+import { CourierShopComponent } from "./components/Courier/CourierShopComponent";
 
 
 GameStateSystemComponent;
 
 AbilityEntityRoot;
 
-BattleUnitComponent;
+ChessDataComponent;
 BattleUnitIllusionEntityRoot;
 BattleUnitSummonEntityRoot;
 
@@ -48,6 +50,8 @@ CombinationManagerComponent;
 
 CourierDataComponent;
 CourierEntityRoot;
+CourierBagComponent;
+CourierShopComponent;
 
 ECombination;
 

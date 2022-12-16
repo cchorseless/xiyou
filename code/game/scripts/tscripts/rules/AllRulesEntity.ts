@@ -5,7 +5,7 @@ import { BattleUnitManagerComponent } from "./Components/BattleUnit/BattleUnitMa
 import { BuildingComponent } from "./Components/Building/BuildingComponent";
 import { BuildingManagerComponent } from "./Components/Building/BuildingManagerComponent";
 import { BuildingPropsComponent } from "./Components/Building/BuildingPropsComponent";
-import { ChessComponent } from "./Components/ChessControl/ChessComponent";
+import { ChessMoveComponent } from "./Components/ChessControl/ChessMoveComponent";
 import { ChessControlComponent } from "./Components/ChessControl/ChessControlComponent";
 import { CombinationComponent } from "./Components/Combination/CombinationComponent";
 import { CombinationManagerComponent } from "./Components/Combination/CombinationManagerComponent";
@@ -15,7 +15,6 @@ import { DrawComponent } from "./Components/Draw/DrawComponent";
 import { EnemyKillPrizeComponent } from "./Components/Enemy/EnemyKillPrizeComponent";
 import { EnemyManagerComponent } from "./Components/Enemy/EnemyManagerComponent";
 import { EnemyMoveComponent } from "./Components/Enemy/EnemyMoveComponent";
-import { EnemyPropsComponent } from "./Components/Enemy/EnemyPropsComponent";
 import { EnemyUnitComponent } from "./Components/Enemy/EnemyUnitComponent";
 import { FakerHeroDataComponent } from "./Components/FakerHero/FakerHeroDataComponent";
 import { FHeroCombination } from "./Components/FakerHero/FHeroCombination";
@@ -30,13 +29,13 @@ import { EWearableItem } from "./Components/Wearable/EWearableItem";
 import { WearableComponent } from "./Components/Wearable/WearableComponent";
 
 import { WearableSystemComponent } from "./System/Wearable/WearableSystemComponent";
-import { BattleUnitComponent } from "./Components/BattleUnit/BattleUnitComponent";
 import { CourierDataComponent } from "./Components/Courier/CourierDataComponent";
 import { BuffManagerComponent } from "./Components/Buff/BuffManagerComponent";
 import { CombEffectComponent } from "./Components/Combination/CombEffectComponent";
 import { CourierBagComponent } from "./Components/Courier/CourierBagComponent";
 import { CourierShopComponent } from "./Components/Courier/CourierShopComponent";
 import { RulesEntityPart1 } from "./RulesEntityPart1";
+import { ChessDataComponent } from "./Components/ChessControl/ChessDataComponent";
 
 
 [
@@ -60,8 +59,8 @@ import { RulesEntityPart1 } from "./RulesEntityPart1";
     CourierShopComponent,
     BuildingManagerComponent,
     ChessControlComponent,
+    ChessDataComponent,
     EnemyManagerComponent,
-    BattleUnitComponent,
     AiAttackComponent,
 
     FakerHeroDataComponent,
@@ -71,12 +70,11 @@ import { RulesEntityPart1 } from "./RulesEntityPart1";
     BuffManagerComponent,
     BuildingComponent,
     BuildingPropsComponent,
-    ChessComponent,
+    ChessMoveComponent,
 
     EnemyUnitComponent,
     EnemyKillPrizeComponent,
     EnemyMoveComponent,
-    EnemyPropsComponent,
     EWearableItem,
     WearableComponent,
     WearableSystemComponent,

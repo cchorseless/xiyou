@@ -1,15 +1,11 @@
 import { reloadable } from "../../../GameCache";
-import { GameEnum } from "../../../shared/GameEnum";
-import { GameFunc } from "../../../GameFunc";
-import { ResHelper } from "../../../helper/ResHelper";
-import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
-/**战斗单位组件 */
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
+/**棋子数据组件 */
 @reloadable
-export class BattleUnitComponent extends ET.Component {
+export class ChessDataComponent extends ET.Component {
     public iScale: number = 1;
     @serializeETProps()
     public iLevel: number = 1;
@@ -19,14 +15,14 @@ export class BattleUnitComponent extends ET.Component {
     public IsShowOverhead: boolean = false;
     SetUIOverHead(isshow: boolean) {
         this.IsShowOverhead = false;
-        this.Domain.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().SyncClientEntity(this, true);
+        this.Domain.ETRoot.As<BattleUnitEntityRoot>().SyncClientEntity(this, true);
 
     }
     onAwake() {
         this.iScale = this.GetDomain<BaseNpc_Plus>().GetAbsScale();
     }
     onDestroy(): void {
-        this.Domain.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().DelClientEntity(this);
+        this.Domain.ETRoot.As<BattleUnitEntityRoot>().DelClientEntity(this);
     }
     /**是否可以升星 */
     checkCanStarUp() {
@@ -36,7 +32,7 @@ export class BattleUnitComponent extends ET.Component {
     SetStar(n: number) {
         this.iStar = n;
         let domain = this.GetDomain<BaseNpc_Plus>();
-        let building = domain.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let building = domain.ETRoot.As<BattleUnitEntityRoot>();
         // 变大
         domain.SetModelScale(this.iScale * BuildingConfig.MODEL_SCALE[this.iStar - 1]);
         // 技能升级

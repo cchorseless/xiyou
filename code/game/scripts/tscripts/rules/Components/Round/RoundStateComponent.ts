@@ -6,7 +6,7 @@ import { modifier_remnant } from "../../../npc/modifier/battle/modifier_remnant"
 import { ET } from "../../Entity/Entity";
 import { RoundConfig } from "../../../shared/RoundConfig";
 import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { BuildingRuntimeEntityRoot } from "../Building/BuildingRuntimeEntityRoot";
@@ -20,7 +20,7 @@ export class RoundStateComponent extends ET.Component {
     onAwake(...args: any[]): void {
         this.addEvent();
         let domain = this.GetDomain<BaseNpc_Plus>();
-        let currentround = domain.ETRoot.As<PlayerCreateBattleUnitEntityRoot>().GetPlayer().RoundManagerComp().getCurrentBoardRound();
+        let currentround = domain.ETRoot.As<BattleUnitEntityRoot>().GetPlayer().RoundManagerComp().getCurrentBoardRound();
         switch (currentround.roundState) {
             case RoundConfig.ERoundBoardState.start:
                 this.OnBoardRound_Start();
@@ -35,7 +35,7 @@ export class RoundStateComponent extends ET.Component {
 
     BattleUnit() {
         let domain = this.GetDomain<BaseNpc_Plus>();
-        return domain.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        return domain.ETRoot.As<BattleUnitEntityRoot>();
     }
 
     addEvent() {

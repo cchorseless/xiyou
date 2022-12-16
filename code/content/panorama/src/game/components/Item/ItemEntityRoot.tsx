@@ -3,7 +3,7 @@ import { ET, registerET } from "../../../libs/Entity";
 import { PlayerScene } from "../Player/PlayerScene";
 
 @registerET()
-export class AbilityEntityRoot extends BaseEntityRoot {
+export class ItemEntityRoot extends BaseEntityRoot {
 
     onSerializeToEntity() {
         PlayerScene.EntityRootManage.addAbility(this);

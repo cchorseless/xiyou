@@ -1,9 +1,9 @@
 import { ET, registerET } from "../../../libs/Entity";
-import { BattleUnitComponent } from "../BattleUnit/BattleUnitComponent";
+import { ChessDataComponent } from "../ChessControl/ChessDataComponent";
 import { PlayerScene } from "../Player/PlayerScene";
 
 /**塔防组件 */
 @registerET()
-export class EnemyUnitComponent extends BattleUnitComponent {
+export class EnemyUnitComponent extends ChessDataComponent {
 
 }

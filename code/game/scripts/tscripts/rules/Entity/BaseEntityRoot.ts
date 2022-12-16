@@ -1,15 +1,9 @@
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
-import { TimerHelper } from "../../../helper/TimerHelper";
-import { BaseAbility_Plus } from "../../../npc/entityPlus/BaseAbility_Plus";
-import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET, serializeETProps } from "../../Entity/Entity";
+import { NetTablesHelper } from "../../helper/NetTablesHelper";
+import { BaseNpc_Plus } from "../../npc/entityPlus/BaseNpc_Plus";
+import { ET, serializeETProps } from "./Entity";
 
-export enum PlayerCreateUnitType {
-    BaseNpc = "BaseNpc",
-    BaseItem = "BaseItem",
-    BaseAbility = "BaseAbility",
-}
-export class PlayerCreateUnitEntityRoot extends ET.EntityRoot {
+
+export class BaseEntityRoot extends ET.EntityRoot {
     @serializeETProps()
     readonly Playerid: PlayerID;
     @serializeETProps()
@@ -22,6 +16,7 @@ export class PlayerCreateUnitEntityRoot extends ET.EntityRoot {
     public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
         this.GetPlayer().SyncClientEntity(obj, ignoreChild);
     }
+
     public DelClientEntity(obj: ET.Entity): void {
         NetTablesHelper.DelETEntity(obj, this.Playerid);
     }

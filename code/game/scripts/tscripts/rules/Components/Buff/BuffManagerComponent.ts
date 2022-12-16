@@ -1,7 +1,7 @@
 import { reloadable } from "../../../GameCache";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 
 @reloadable
 export class BuffManagerComponent extends ET.Component {
@@ -9,7 +9,7 @@ export class BuffManagerComponent extends ET.Component {
     RuntimeCloneBuff: string[] = [];
     addRuntimeCloneBuff(buffName: string) {
         let domain = this.GetDomain<BaseNpc_Plus>();
-        let etroot = domain.ETRoot.As<PlayerCreateBattleUnitEntityRoot>()
+        let etroot = domain.ETRoot.As<BattleUnitEntityRoot>()
         if (etroot.IsBuilding()) {
             if (!this.RuntimeCloneBuff.includes(buffName)) {
                 this.RuntimeCloneBuff.push(buffName)

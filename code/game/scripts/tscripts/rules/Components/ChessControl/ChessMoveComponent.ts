@@ -9,18 +9,18 @@ import { modifier_run } from "../../../npc/modifier/modifier_run";
 import { ET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { ChessVector } from "../../System/ChessControl/ChessVector";
 
 @reloadable
-export class ChessComponent extends ET.Component {
+export class ChessMoveComponent extends ET.Component {
     public ChessVector: ChessVector;
     readonly isAlive: boolean = true;
     onAwake(): void {
         let domain = this.GetDomain<BaseNpc_Plus>();
         domain.SetForwardVector(Vector(0, 1, 0));
         this.updateBoardPos();
-        let etroot = domain.ETRoot.As<PlayerCreateBattleUnitEntityRoot>()
+        let etroot = domain.ETRoot.As<BattleUnitEntityRoot>()
         if (etroot.IsBuilding()) {
             this.setMoving(false);
         }
@@ -55,7 +55,7 @@ export class ChessComponent extends ET.Component {
 
     isInBoard() {
         let location = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
-        let playerid = this.GetDomain<BaseNpc_Plus>().ETRoot.As<PlayerCreateBattleUnitEntityRoot>().Playerid;
+        let playerid = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>().Playerid;
         return GameRules.Addon.ETRoot.ChessControlSystem().IsInBoard(playerid, location);
     }
     isInBaseRoom() {
@@ -107,7 +107,7 @@ export class ChessComponent extends ET.Component {
     }
     OnblinkChessStart(to: ChessVector) {
         let npc = this.GetDomain<BaseNpc_Plus>();
-        let etroot = npc.ETRoot.As<PlayerCreateBattleUnitEntityRoot>()
+        let etroot = npc.ETRoot.As<BattleUnitEntityRoot>()
         if (!etroot.IsBuilding()) { return }
         let building = etroot.As<BuildingEntityRoot>();
         if (this.isInBattle()) {
@@ -142,7 +142,7 @@ export class ChessComponent extends ET.Component {
         this.updateBoardPos();
     }
 
-    FindClosePosToEnemy(enemy: PlayerCreateBattleUnitEntityRoot): Vector {
+    FindClosePosToEnemy(enemy: BattleUnitEntityRoot): Vector {
         let targetUnit = enemy.GetDomain<BaseNpc_Plus>();
         if (!targetUnit) {
             return;
@@ -165,7 +165,7 @@ export class ChessComponent extends ET.Component {
         }
     }
 
-    IsCanAttackTarget(target: PlayerCreateBattleUnitEntityRoot, x?: number, y?: number) {
+    IsCanAttackTarget(target: BattleUnitEntityRoot, x?: number, y?: number) {
         if (target == null) {
             return false;
         }

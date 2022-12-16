@@ -4,7 +4,7 @@ import { modifier_illusion } from "../../../npc/modifier/modifier_illusion";
 import { modifier_summon } from "../../../npc/modifier/modifier_summon";
 import { ET } from "../../Entity/Entity";
 import { BuildingRuntimeEntityRoot } from "../Building/BuildingRuntimeEntityRoot";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { BattleUnitSummonEntityRoot } from "./BattleUnitSummonEntityRoot";
 
 @reloadable
@@ -16,7 +16,7 @@ export class BattleUnitManagerComponent extends ET.Component {
     public AddSummon(sUnitName: string, vLocation: Vector, fDuration: number, bFindClearSpace: boolean = true, iTeamNumber: DOTATeam_t = null) {
         if (!IsServer()) { return };
         let hCaster = this.GetDomain<BaseNpc_Plus>();
-        let battleUnit = hCaster.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleUnit = hCaster.ETRoot.As<BattleUnitEntityRoot>();
         if (!battleUnit) return;
         let summon = modifier_summon.CreateSummon(sUnitName, hCaster, vLocation, fDuration, bFindClearSpace, iTeamNumber)
         if (summon) {
@@ -32,7 +32,7 @@ export class BattleUnitManagerComponent extends ET.Component {
         let r: BattleUnitSummonEntityRoot[] = [];
         if (this.allSummon.length > 0) {
             let hCaster = this.GetDomain<BaseNpc_Plus>();
-            let battleUnit = hCaster.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+            let battleUnit = hCaster.ETRoot.As<BattleUnitEntityRoot>();
             let player = battleUnit.GetPlayer();
             this.allSummon.forEach((b) => {
                 let entity = player.GetDomainChild<BattleUnitSummonEntityRoot>(b);
@@ -47,7 +47,7 @@ export class BattleUnitManagerComponent extends ET.Component {
     public AddIllusion(sUnitName: string, vLocation: Vector, fDuration: number, bFindClearSpace: boolean = true, iTeamNumber: DOTATeam_t = null) {
         if (!IsServer()) { return };
         let hCaster = this.GetDomain<BaseNpc_Plus>();
-        let battleUnit = hCaster.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleUnit = hCaster.ETRoot.As<BattleUnitEntityRoot>();
         if (!battleUnit) return;
         let illusion = modifier_illusion.CreateIllusion(sUnitName, hCaster, vLocation, fDuration, bFindClearSpace, iTeamNumber)
         if (illusion) {
@@ -62,7 +62,7 @@ export class BattleUnitManagerComponent extends ET.Component {
     public AddRuntimeBuilding(sUnitName: string, vLocation: Vector, fDuration: number, bFindClearSpace: boolean = true, iTeamNumber: DOTATeam_t = null) {
         if (!IsServer()) { return };
         let hCaster = this.GetDomain<BaseNpc_Plus>();
-        let battleUnit = hCaster.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleUnit = hCaster.ETRoot.As<BattleUnitEntityRoot>();
         if (!battleUnit) return;
         let summon = modifier_summon.CreateSummon(sUnitName, hCaster, vLocation, fDuration, bFindClearSpace, iTeamNumber)
         if (summon) {
@@ -78,8 +78,8 @@ export class BattleUnitManagerComponent extends ET.Component {
 
     public GetAllBattleUnitAlive() {
         let hCaster = this.GetDomain<BaseNpc_Plus>();
-        let battleUnit = hCaster.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
-        let r: PlayerCreateBattleUnitEntityRoot[] = [];
+        let battleUnit = hCaster.ETRoot.As<BattleUnitEntityRoot>();
+        let r: BattleUnitEntityRoot[] = [];
         if (battleUnit && battleUnit.ChessComp().isInBattleAlive()) {
             r.push(battleUnit);
         }
@@ -87,7 +87,7 @@ export class BattleUnitManagerComponent extends ET.Component {
         if (allunit.length > 0) {
             let player = battleUnit.GetPlayer();
             allunit.forEach((b) => {
-                let entity = player.GetDomainChild<PlayerCreateBattleUnitEntityRoot>(b);
+                let entity = player.GetDomainChild<BattleUnitEntityRoot>(b);
                 if (entity && entity.ChessComp().isInBattleAlive()) {
                     r.push(entity);
                 }
@@ -98,12 +98,12 @@ export class BattleUnitManagerComponent extends ET.Component {
 
     public ClearRuntimeBattleUnit() {
         let hCaster = this.GetDomain<BaseNpc_Plus>();
-        let battleUnit = hCaster.ETRoot.As<PlayerCreateBattleUnitEntityRoot>();
+        let battleUnit = hCaster.ETRoot.As<BattleUnitEntityRoot>();
         let allunit = [].concat(this.allSummon, this.allIllusion, this.allBuildingRuntime);
         if (allunit.length > 0) {
             let player = battleUnit.GetPlayer();
             allunit.forEach((b) => {
-                let entity = player.GetDomainChild<PlayerCreateBattleUnitEntityRoot>(b);
+                let entity = player.GetDomainChild<BattleUnitEntityRoot>(b);
                 if (entity) {
                     entity.Dispose();
                 }

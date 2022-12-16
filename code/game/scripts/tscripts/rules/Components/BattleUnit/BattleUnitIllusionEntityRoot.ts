@@ -6,9 +6,9 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { BuildingComponent } from "../Building/BuildingComponent";
 import { BuildingPropsComponent } from "../Building/BuildingPropsComponent";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 
-export class BattleUnitIllusionEntityRoot extends PlayerCreateBattleUnitEntityRoot {
+export class BattleUnitIllusionEntityRoot extends BattleUnitEntityRoot {
     public onAwake(playerid: PlayerID, conf: string) {
         (this as any).Playerid = playerid;
         (this as any).ConfigID = conf;

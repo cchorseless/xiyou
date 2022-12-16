@@ -8,15 +8,14 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { ERound } from "../Round/ERound";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { EnemyKillPrizeComponent } from "./EnemyKillPrizeComponent";
 import { EnemyMoveComponent } from "./EnemyMoveComponent";
-import { EnemyPropsComponent } from "./EnemyPropsComponent";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
 
-export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
+export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
     readonly RoundID: string;
     readonly OnlyKey: string;
 
@@ -31,7 +30,6 @@ export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
         this.addBattleComp();
         this.AddComponent(GetRegClass<typeof EnemyUnitComponent>("EnemyUnitComponent"));
         this.AddComponent(GetRegClass<typeof EnemyKillPrizeComponent>("EnemyKillPrizeComponent"));
-        this.AddComponent(GetRegClass<typeof EnemyPropsComponent>("EnemyPropsComponent"));
     }
 
     onDestroy(): void {
@@ -77,9 +75,7 @@ export class EnemyUnitEntityRoot extends PlayerCreateBattleUnitEntityRoot {
     EnemyMoveComp() {
         return this.GetComponentByName<EnemyMoveComponent>("EnemyMoveComponent");
     }
-    EnemyPropsComp() {
-        return this.GetComponentByName<EnemyPropsComponent>("EnemyPropsComponent");
-    }
+
 
     BattleUnitManager() {
         return this.GetComponentByName<BattleUnitManagerComponent>("BattleUnitManagerComponent");

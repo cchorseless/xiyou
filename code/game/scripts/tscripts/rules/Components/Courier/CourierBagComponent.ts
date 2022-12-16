@@ -3,6 +3,7 @@ import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { PublicBagConfig } from "../../../shared/PublicBagConfig";
 import { ET, serializeETProps } from "../../Entity/Entity";
 import { ItemEntityRoot } from "../Item/ItemEntityRoot";
+import { CourierEntityRoot } from "./CourierEntityRoot";
 
 @reloadable
 export class CourierBagComponent extends ET.Component {
@@ -38,22 +39,38 @@ export class CourierBagComponent extends ET.Component {
     }
 
     putInItem(item: ItemEntityRoot) {
-        // if (!this.IsEmpty()) { return; }
-        // if (Object.values(this.AllItem).includes(item.Id)) { return; }
-        // for (let i = PublicBagConfig.PUBLIC_ITEM_SLOT_MIN; i < PublicBagConfig.PUBLIC_ITEM_SLOT_MAX + 1; i++) {
-        //     if (this.AllItem[i + ""] == null) {
-        //         this.AllItem[i + ""] = item.Id;
-        //         GameRules.Addon.ETRoot.AddDomainChild(item);
-        //         GameRules.Addon.ETRoot.SyncClientEntity(item);
-        //         GameRules.Addon.ETRoot.SyncClientEntity(this);
-        //         break;
-        //     }
-        // }
+        const itemtype = item.ItemType;
+        if (!this.IsItemEmpty(itemtype)) { return; }
+        this.AllItem[itemtype] = this.AllItem[itemtype] || {};
+        const items = this.AllItem[itemtype];
+        if (Object.values(items).includes(item.Id)) { return; }
+        let beginindex = 0;
+        let endindex = 0;
+        if (itemtype == PublicBagConfig.EBagItemType.COMMON) {
+            endindex = PublicBagConfig.DOTA_ITEM_BAG_MAX;
+            beginindex = PublicBagConfig.DOTA_ITEM_BAG_MIN;
+        }
+        else if (itemtype == PublicBagConfig.EBagItemType.ARTIFACT) {
+            endindex = PublicBagConfig.DOTA_ITEM_ARTIFACT_MAX;
+            beginindex = PublicBagConfig.DOTA_ITEM_ARTIFACT_MIN;
+        }
+        for (let i = beginindex; i < endindex + 1; i++) {
+            if (items[i + ""] == null) {
+                items[i + ""] = item.Id;
+                let root = this.GetDomain<BaseNpc_Hero_Plus>().ETRoot.As<CourierEntityRoot>();
+                root.AddDomainChild(item);
+                root.SyncClientEntity(item);
+                root.SyncClientEntity(this);
+                break;
+            }
+        }
     }
 
     getOutItem(item: ItemEntityRoot) {
 
     }
+
+
 
 
 

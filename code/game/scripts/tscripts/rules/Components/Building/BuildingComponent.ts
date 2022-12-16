@@ -7,12 +7,11 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_summon } from "../../../npc/modifier/modifier_summon";
 import { ET, serializeETProps } from "../../Entity/Entity";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
-import { BattleUnitComponent } from "../BattleUnit/BattleUnitComponent";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
+import { ChessDataComponent } from "../ChessControl/ChessDataComponent";
 /**塔防组件 */
 @reloadable
-export class BuildingComponent extends BattleUnitComponent {
+export class BuildingComponent extends ChessDataComponent {
     public readonly IsSerializeEntity: boolean = true;
     private iGoldCost: number;
     /**累计造成伤害 */

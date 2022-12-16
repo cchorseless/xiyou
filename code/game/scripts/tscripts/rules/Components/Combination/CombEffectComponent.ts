@@ -7,7 +7,7 @@ import { ET } from "../../Entity/Entity";
 import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ECombination } from "./ECombination";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 
 @reloadable
@@ -38,7 +38,7 @@ export class CombEffectComponent extends ET.Component {
                     let buffconfig = KVHelper.KvServerConfig.effect_config[buff];
                     let type = GetRegClass<typeof BaseModifier_Plus>(buff);
                     if (buffconfig && type) {
-                        let battleunits: PlayerCreateBattleUnitEntityRoot[];
+                        let battleunits: BattleUnitEntityRoot[];
                         switch (buffconfig.target) {
                             case CombinationConfig.EEffectTargetType.hero:
                                 battleunits = ecomb.getAllBuilding();

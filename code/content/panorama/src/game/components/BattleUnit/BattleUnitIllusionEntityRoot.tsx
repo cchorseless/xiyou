@@ -1,5 +1,5 @@
 import { registerET } from "../../../libs/Entity";
-import { PlayerCreateBattleUnitEntityRoot } from "../Player/PlayerCreateBattleUnitEntityRoot";
+import { BattleUnitEntityRoot } from "./BattleUnitEntityRoot";
 
 @registerET()
-export class BattleUnitIllusionEntityRoot extends PlayerCreateBattleUnitEntityRoot { }
+export class BattleUnitIllusionEntityRoot extends BattleUnitEntityRoot { }

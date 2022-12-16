@@ -1,12 +1,12 @@
 import { GetRegClass } from "../../../GameCache";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { PlayerCreateUnitEntityRoot } from "../Player/PlayerCreateUnitEntityRoot";
+import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { FakerHeroDataComponent } from "./FakerHeroDataComponent";
 import { FHeroCombinationManagerComponent } from "./FHeroCombinationManagerComponent";
 
-export class FakerHeroEntityRoot extends PlayerCreateUnitEntityRoot {
+export class FakerHeroEntityRoot extends BaseEntityRoot {
     public readonly IsSerializeEntity: boolean = true;
 
     onAwake(playerid: PlayerID, conf: string) {

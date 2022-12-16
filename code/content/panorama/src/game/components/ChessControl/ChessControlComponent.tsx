@@ -1,13 +1,13 @@
-import { FuncHelper } from "../../helper/FuncHelper";
-import { LogHelper } from "../../helper/LogHelper";
-import { NetHelper } from "../../helper/NetHelper";
-import { TimerHelper } from "../../helper/TimerHelper";
-import { ET, registerET } from "../../libs/Entity";
-import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
-import { CCMainPanel } from "../../view/MainPanel/CCMainPanel";
-import { CCUnitChessMoveIcon } from "../../view/Unit/CCUnitChessMoveIcon";
-import { PlayerScene } from "./Player/PlayerScene";
-import { ChessControlConfig } from "../../../../../game/scripts/tscripts/shared/ChessControlConfig";
+import { FuncHelper } from "../../../helper/FuncHelper";
+import { LogHelper } from "../../../helper/LogHelper";
+import { NetHelper } from "../../../helper/NetHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
+import { ET, registerET } from "../../../libs/Entity";
+import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
+import { CCMainPanel } from "../../../view/MainPanel/CCMainPanel";
+import { CCUnitChessMoveIcon } from "../../../view/Unit/CCUnitChessMoveIcon";
+import { PlayerScene } from "../Player/PlayerScene";
+import { ChessControlConfig } from "../../../../../../game/scripts/tscripts/shared/ChessControlConfig";
 @registerET()
 export class ChessControlComponent extends ET.Component {
     onAwake() {
