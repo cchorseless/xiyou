@@ -13,6 +13,14 @@ export class BaseEntityRoot extends ET.EntityRoot {
     public GetPlayer() {
         return GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.Playerid);
     }
+
+    static SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
+        let etroot = obj.GetDomain().ETRoot;
+        if (etroot) {
+            etroot.As<BaseEntityRoot>().SyncClientEntity(obj, ignoreChild);
+        }
+    }
+
     public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
         this.GetPlayer().SyncClientEntity(obj, ignoreChild);
     }

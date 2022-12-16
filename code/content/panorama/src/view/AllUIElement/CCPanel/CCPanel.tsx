@@ -38,7 +38,13 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
     constructor(props: any) {
         super(props);
         this.__root__ = createRef<P>();
-        this.checkDataReady()
+        this.__root___isValid = this.onReady();
+        if (this.__root___isValid) {
+            this.onInitUI();
+        }
+        else {
+            this.checkDataReady()
+        }
     }
     private checkDataReady() {
         this.__root___isValid = this.onReady();

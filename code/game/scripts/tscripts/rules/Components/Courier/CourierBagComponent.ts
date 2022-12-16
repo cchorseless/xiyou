@@ -10,12 +10,14 @@ export class CourierBagComponent extends ET.Component {
 
     public onAwake() {
         this.addEvent();
+        CourierEntityRoot.SyncClientEntity(this)
     }
     public addEvent() {
     }
     @serializeETProps()
     AllItem: { [itemtype: string]: { [slot: string]: string } } = {};
-
+    @serializeETProps()
+    iMaxArtifact: number = 6;
     getItemByIndex(slot: string, itemtype: number = PublicBagConfig.EBagItemType.COMMON) {
         const iteminfo = this.AllItem[itemtype + ""];
         if (iteminfo == null) return;

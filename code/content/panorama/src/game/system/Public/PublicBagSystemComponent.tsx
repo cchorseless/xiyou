@@ -1,17 +1,18 @@
 import { ET, registerET } from "../../../libs/Entity";
+import { ItemEntityRoot } from "../../components/Item/ItemEntityRoot";
 import { PlayerScene } from "../../components/Player/PlayerScene";
 
 @registerET()
 export class PublicBagSystemComponent extends ET.Component {
-    AllItem: { [key: string]: string } = {};
+    AllItem: { [slot: string]: string } = {};
     onSerializeToEntity(): void {
         PlayerScene.Scene.AddOneComponent(this);
     }
 
 
-    getItemByIndex(key: string) {
-        let entityid = this.AllItem[key];
+    getItemByIndex(slot: string) {
+        let entityid = this.AllItem[slot];
         if (entityid == null) return;
-        // return GameRules.Addon.ETRoot.GetDomainChild<ItemEntityRoot>(entityid);
+        return PlayerScene.EntityRootManage.GetChild<ItemEntityRoot>(entityid);
     }
 }

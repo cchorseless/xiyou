@@ -30,11 +30,13 @@ import { GameStateSystemComponent } from "./components/GameState/GameStateSystem
 import { PublicShopComponent } from "./components/Public/PublicShopComponent";
 import { CourierBagComponent } from "./components/Courier/CourierBagComponent";
 import { CourierShopComponent } from "./components/Courier/CourierShopComponent";
+import { ItemEntityRoot } from "./components/Item/ItemEntityRoot";
 
 
 GameStateSystemComponent;
 
 AbilityEntityRoot;
+ItemEntityRoot;
 
 ChessDataComponent;
 BattleUnitIllusionEntityRoot;

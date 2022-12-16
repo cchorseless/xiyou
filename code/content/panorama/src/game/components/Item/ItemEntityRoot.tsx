@@ -6,9 +6,9 @@ import { PlayerScene } from "../Player/PlayerScene";
 export class ItemEntityRoot extends BaseEntityRoot {
 
     onSerializeToEntity() {
-        PlayerScene.EntityRootManage.addAbility(this);
+        PlayerScene.EntityRootManage.addItem(this);
     }
     onDestroy() {
-        PlayerScene.EntityRootManage.removeAbility(this);
+        PlayerScene.EntityRootManage.removeItem(this);
     }
 }

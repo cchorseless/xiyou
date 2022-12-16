@@ -5,6 +5,7 @@ import { AbilityEntityRoot } from "../Ability/AbilityEntityRoot";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { EnemyUnitEntityRoot } from "../Enemy/EnemyUnitEntityRoot";
 import { FakerHeroEntityRoot } from "../FakerHero/FakerHeroEntityRoot";
+import { ItemEntityRoot } from "../Item/ItemEntityRoot";
 import { PlayerEntityRoot } from "./PlayerEntityRoot";
 import { PlayerScene } from "./PlayerScene";
 
@@ -13,8 +14,9 @@ export class EntityRootManagerComponent extends ET.Component {
     readonly AllPlayers: { [playerid: string]: string } = {};
     readonly AllBuilding: { [entityid: string]: string } = {};
     readonly AllEnemy: { [entityid: string]: string } = {};
-    readonly AllAbility: { [playerid: string]: string } = {};
     readonly AllFakerHero: { [playerid: string]: string } = {};
+    readonly AllAbility: { [playerid: string]: string } = {};
+    readonly AllItem: { [playerid: string]: string } = {};
 
     loadAllPlayers() {
         let maxPlayers = Players.GetMaxPlayers();
@@ -109,6 +111,23 @@ export class EntityRootManagerComponent extends ET.Component {
         let entityid = this.AllAbility[entityIndex + ""];
         if (entityid) {
             return this.GetChild<AbilityEntityRoot>(entityid);
+        }
+    }
+
+    addItem(b: ItemEntityRoot) {
+        this.AllItem[b.EntityId + ""] = b.Id;
+        this.AddOneChild(b);
+    }
+
+    removeItem(b: ItemEntityRoot) {
+        delete this.AllItem[b.EntityId];
+        b.Dispose();
+    }
+
+    getItem(entityIndex: number | string) {
+        let entityid = this.AllItem[entityIndex + ""];
+        if (entityid) {
+            return this.GetChild<ItemEntityRoot>(entityid);
         }
     }
 

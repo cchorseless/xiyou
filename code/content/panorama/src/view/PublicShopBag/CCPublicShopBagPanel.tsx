@@ -19,6 +19,9 @@ export class CCPublicShopBagPanel extends CCPanel<ICCPublicShopBagPanel> {
 
 export class CCPublicBag extends CCPanel<ICCPublicShopBagPanel> {
 
+    onReady() {
+        return Boolean(PlayerScene.PublicBagSystemComp)
+    }
 
     onInit() {
         PlayerScene.PublicBagSystemComp.RegRef(this)
@@ -27,29 +30,26 @@ export class CCPublicBag extends CCPanel<ICCPublicShopBagPanel> {
 
 
     render() {
-        const publicBag = this.GetStateEntity(PlayerScene.PublicBagSystemComp!)
-        const publicBag
+        if (!this.__root___isValid) { return this.defaultRender("CC_PublicBag") }
+        const publicBag = this.GetStateEntity(PlayerScene.PublicBagSystemComp)!;
+
         return (
-            this.__root___isValid &&
-            <Panel className="CC_PublicBag" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+            <Panel id="CC_PublicBag" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <Panel id="PublicBackPackTitle" className="CustomShopTitle" hittest={false}>
                     <Label localizedText="#CustomPublicBackPack" />
                 </Panel>
                 <Panel id="CustomPublicBackPack" hittest={false}>
-                    {(() => {
-                        let empty_index = 0;
-                        let res: JSX.Element[] = [];
-                        for (let i = PublicBagConfig.PUBLIC_ITEM_SLOT_MIN; i <= PublicBagConfig.PUBLIC_ITEM_SLOT_MAX; i++) {
-                            let itemindex = publicBackPackItems[i] ?? -1;
-                            if (itemindex != -1) {
-                                res.push(<CCPublicBagSlotItem key={itemindex} slot={i} itemIndex={itemindex} />);
-                            } else {
-                                // 这样写可以让空白的格子被复用
-                                res.push(<CCPublicBagSlotItem key={"empty_" + (empty_index++)} slot={i} itemIndex={itemindex} />);
+                    {
+                        [...Array(PublicBagConfig.PUBLIC_ITEM_SLOT_MAX - PublicBagConfig.PUBLIC_ITEM_SLOT_MIN + 1)].map((_, index) => {
+                            let itemindex = -1 as any;
+                            let slot = index + PublicBagConfig.PUBLIC_ITEM_SLOT_MIN;
+                            let entity = publicBag.getItemByIndex(slot + "");
+                            if (entity) {
+                                itemindex = entity.EntityId;
                             }
-                        }
-                        return res;
-                    })()}
+                            return <CCPublicBagSlotItem key={index + ""} slot={slot} itemIndex={itemindex} />
+                        })
+                    }
                 </Panel>
             </Panel>
         );
