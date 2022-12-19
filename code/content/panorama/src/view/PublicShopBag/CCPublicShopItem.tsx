@@ -10,13 +10,8 @@ import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCItemImage } from "../AllUIElement/CCItem/CCItemImage";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCPublicShopItem.less";
-interface ICCPublicShopItem extends NodePropsData {
+interface ICCPublicShopItem extends IPublicShopItem {
     iType: PublicBagConfig.EPublicShopType,
-    sItemName?: string,
-    iSlot: number,
-    iLevel: number,
-    iLeftCount?: number,
-    iLimit?: number,
 }
 
 export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
@@ -93,9 +88,7 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
         const iLeftCount = this.props.iLeftCount;
         const iLevel = this.props.iLevel;
         const iLimit = this.props.iLimit;
-
-        const tips = {
-        } as any
+        const tips = {} as any
         return (
             <Button ref={this.__root__}
                 oncontextmenu={() => this.OnClick_Buy()}

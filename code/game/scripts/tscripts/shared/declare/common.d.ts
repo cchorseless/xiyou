@@ -31,3 +31,11 @@ declare interface IGoodsInfo {
     img?: string, // 指定商品图
     orderby: string,
 }
+
+declare interface IPublicShopItem {
+    sItemName?: string,
+    iSlot: number,
+    iLevel: number,
+    iLeftCount?: number,
+    iLimit?: number,
+}

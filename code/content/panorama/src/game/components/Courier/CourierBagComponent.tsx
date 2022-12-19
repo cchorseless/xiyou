@@ -11,7 +11,25 @@ export class CourierBagComponent extends ET.Component {
         PlayerScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
     }
     AllItem: { [itemtype: string]: { [slot: string]: string } } = {};
+    /**最大神器数 */
     iMaxArtifact = 6;
+    /**购买道具到背包|信使 */
+    bBuyItem2Bag: boolean = false;
+
+
+    setBuyItem2Bag(b: boolean) {
+
+    }
+
+    sellAllItem() {
+
+    }
+
+
+    onEquipCombine() {
+
+    }
+
     getAllArtifact() {
         let items = this.AllItem[PublicBagConfig.EBagItemType.ARTIFACT] || {};
         let artifacts: ItemEntityRoot[] = [];
@@ -25,5 +43,15 @@ export class CourierBagComponent extends ET.Component {
         })
         return artifacts;
     }
+
+    getItemByIndex(slot: string, itemtype = PublicBagConfig.EBagItemType.COMMON) {
+        let items = this.AllItem[itemtype] || {};
+        let entityid = items[slot];
+        if (entityid == null) return;
+        return PlayerScene.EntityRootManage.GetChild<ItemEntityRoot>(entityid);
+    }
+
+
+
 
 }

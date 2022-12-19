@@ -1388,4 +1388,39 @@ export module ItemHelper {
     export function IsHeroUniqueItem(iItemIndex: ItemEntityIndex) {
         return GetItemValue(Abilities.GetAbilityName(iItemIndex), "hero") != undefined;
     }
+
+
+    /**
+     * 物品是否是多级物品
+     * @param item 物品名 | 实体index
+     */
+    export function IsMultiLevelItem(item: ItemEntityIndex | string) {
+        if (item == -1 || item == "") {
+            return false;
+        }
+        let sItemName = GetItemName(item);
+        let ItemsKv = KVHelper.KVItems()
+        let data = ItemsKv[sItemName];
+        if (data == null) {
+            return false;
+        }
+        return (typeof (data.ItemBaseLevel) == "number" && typeof (data.MaxUpgradeLevel) == "number");
+    }
+
+    /**
+     * 物品是否可以升级，必须是多级物品
+     * @param iItemIndex 物品实体index
+     */
+    export function IsUpgradable(iItemIndex: ItemEntityIndex) {
+        if (!IsMultiLevelItem(iItemIndex)) {
+            return false;
+        }
+        let ItemsKv = KVHelper.KVItems()
+        let data = ItemsKv[Abilities.GetAbilityName(iItemIndex)];
+        if (Abilities.GetLevel(iItemIndex) >= (Number(data.MaxUpgradeLevel) ?? 0)) {
+            return false;
+        }
+        return true;
+    }
+
 }

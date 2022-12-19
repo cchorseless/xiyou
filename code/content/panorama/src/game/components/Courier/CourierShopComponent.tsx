@@ -1,3 +1,4 @@
+import { PublicBagConfig } from "../../../../../../game/scripts/tscripts/shared/PublicBagConfig";
 import { LogHelper } from "../../../helper/LogHelper";
 import { registerET, ET } from "../../../libs/Entity";
 import { PlayerScene } from "../Player/PlayerScene";
@@ -8,6 +9,16 @@ export class CourierShopComponent extends ET.Component {
         PlayerScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
     }
 
-
+    AllSellItem: { [shoptype: string]: { [slot: string]: IPublicShopItem } } = {};
+    getSellItem(selltype: PublicBagConfig.EPublicShopType) {
+        let items = this.AllSellItem[selltype] || {};
+        let sellitems: IPublicShopItem[] = [];
+        let keys = Object.keys(items);
+        keys.sort((a, b) => { return Number(a) - Number(b) });
+        keys.forEach(slot => {
+            sellitems.push(items[slot]);
+        })
+        return sellitems;
+    }
 
 }
