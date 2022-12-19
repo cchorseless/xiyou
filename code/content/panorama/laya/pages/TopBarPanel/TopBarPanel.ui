@@ -53,7 +53,7 @@
                 {
                     "x":30,
                     "type":"dota2Image",
-                    "props":{"y":6,"x":1220,"width":48,"height":48,"bg-repeat":"no-repeat","bg-image":"common/food_png.png"},
+                    "props":{"y":6,"x":1220,"width":48,"height":48,"bg-repeat":"no-repeat","bg-image":"common/soulcrystal_png.png"},
                     "nodeParent":2,
                     "label":"dota2Image",
                     "isDirectory":false,
@@ -144,7 +144,7 @@
                 {
                     "x":30,
                     "type":"dota2Label",
-                    "props":{"y":9,"x":1270,"text":"10000","ref":"this.lbl_food","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
+                    "props":{"y":9,"x":1270,"text":"10000","ref":"this.lbl_soulcrystal","height":42,"font-weight":"bold","font-size":40,"color":"#ffffff"},
                     "nodeParent":2,
                     "label":"dota2Label",
                     "isDirectory":false,
@@ -210,7 +210,7 @@
         {
             "x":15,
             "type":"dota2Label",
-            "props":{"y":5,"x":1225,"text":"粮食","ref":"this.lbl_foodDes","height":42,"font-weight":"bold","font-size":25,"color":"#ffffff"},
+            "props":{"y":5,"x":1225,"text":"粮食","ref":"this.lbl_soulcrystalDes","height":42,"font-weight":"bold","font-size":25,"color":"#ffffff"},
             "nodeParent":1,
             "label":"dota2Label",
             "isDirectory":false,

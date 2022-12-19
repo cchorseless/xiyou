@@ -2,7 +2,7 @@
 "lang_gold"       "金币"
 "lang_wood"       "木材"
 "lang_turn"       "回合"
-"lang_food"       "食物"
+"lang_soulcrystal"       "魂晶"
 "lang_round_start"       "准备阶段"
 "lang_round_battle"       "战斗阶段"
 "lang_round_prize"       "奖励阶段"

@@ -30,13 +30,13 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
         const playdata = PlayerScene.Local.PlayerDataComp
         const iGoldCost = ItemHelper.GetItemCostLV(sItemName, iLevel) * iPercent;
         const iWoodCost = ItemHelper.GetItemWoodCost(sItemName) * iPercent;
-        const iFoodCost = ItemHelper.GetItemFoodCost(sItemName) * iPercent;
+        const iSoulCrystalCost = ItemHelper.GetItemSoulCrystalCost(sItemName) * iPercent;
         const bGoldEnough = playdata.gold >= iGoldCost;
         const bWoodEnough = playdata.wood >= iWoodCost;
-        const bFoodEnough = playdata.food >= iFoodCost;
+        const bSoulCrystalEnough = playdata.soulcrystal >= iSoulCrystalCost;
         return CSSHelper.ClassMaker("CC_PublicShopItem", {
             HasItem: Boolean(sItemName),
-            CantBuy: !(bGoldEnough && bWoodEnough && bFoodEnough && (iLeftCount == undefined || iLeftCount > 0)),
+            CantBuy: !(bGoldEnough && bWoodEnough && bSoulCrystalEnough && (iLeftCount == undefined || iLeftCount > 0)),
         })
     }
 
@@ -51,10 +51,10 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
         const playdata = PlayerScene.Local.PlayerDataComp
         const iGoldCost = ItemHelper.GetItemCostLV(sItemName, iLevel) * iPercent;
         const iWoodCost = ItemHelper.GetItemWoodCost(sItemName) * iPercent;
-        const iFoodCost = ItemHelper.GetItemFoodCost(sItemName) * iPercent;
+        const iSoulCrystalCost = ItemHelper.GetItemSoulCrystalCost(sItemName) * iPercent;
         const bGoldEnough = playdata.gold >= iGoldCost;
         const bWoodEnough = playdata.wood >= iWoodCost;
-        const bFoodEnough = playdata.food >= iFoodCost;
+        const bSoulCrystalEnough = playdata.soulcrystal >= iSoulCrystalCost;
         if (sItemName != "" && iSlot >= 0) {
             if (iLeftCount != undefined && iLeftCount <= 0) {
                 TipsHelper.showErrorMessage("dota_hud_error_buy_none_left_count");
@@ -62,7 +62,7 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
                 TipsHelper.showErrorMessage("DOTA_Hud_NeedMoreGold");
             } else if (!bWoodEnough) {
                 TipsHelper.showErrorMessage("dota_hud_error_wood_not_enough");
-            } else if (!bFoodEnough) {
+            } else if (!bSoulCrystalEnough) {
                 TipsHelper.showErrorMessage("dota_hud_error_candy_not_enough");
             } else {
                 Game.EmitSound("General.Buy");

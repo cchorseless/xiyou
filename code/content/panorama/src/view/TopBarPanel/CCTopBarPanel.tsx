@@ -82,7 +82,7 @@ export class CCTopBarGameCoin<T extends NodePropsData> extends CCPanel<T> {
         const coindes = [
             `${playerdata.population}/${playerdata.populationRoof}`,
             `${playerdata.gold}(+${playerdata.perIntervalGold})`,
-            `${playerdata.food}(+${playerdata.perIntervalWood})`,
+            `${playerdata.soulcrystal}(+${playerdata.perIntervalWood})`,
             `${playerdata.wood}(+${playerdata.perIntervalWood})`
         ];
         return (
@@ -90,7 +90,7 @@ export class CCTopBarGameCoin<T extends NodePropsData> extends CCPanel<T> {
                 <CCPanel id="TopBarGameCoinBg" flowChildren="right" />
                 <CCPanel id="TopBarGameCoinGroup" flowChildren="right">
                     {
-                        ["population", "gold", "wood", "food"].map((nodename, index) => {
+                        ["population", "gold", "wood", "soulcrystal"].map((nodename, index) => {
                             return (<CCPanel key={nodename} className="CoinGroup" flowChildren="right"  >
                                 <Image className={CSSHelper.ClassMaker("imgIcon", nodename)} />
                                 <CCPanel flowChildren="down">

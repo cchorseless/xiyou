@@ -18,10 +18,10 @@ export module PublicBagConfig {
 
 
     export enum EPublicShopType {
-        COMMON = 1,
-        POINT = 2,
-        RANDOM = 3,
-        CANDY = 4,
+        GoldShop = 1,
+        WoodShop = 2,
+        RandomShop = 3,
+        CandyShop = 4,
     }
 
 }

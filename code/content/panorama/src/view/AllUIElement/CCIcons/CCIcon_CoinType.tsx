@@ -1,6 +1,7 @@
 import { CCIcon } from "./CCIcon";
 
 interface ICCIcon_CoinType {
+
     cointype: CoinType;
 }
 
@@ -12,8 +13,8 @@ export class CCIcon_CoinType extends CCIcon<ICCIcon_CoinType> {
             case "Gold":
                 src = "s2r://panorama/images/custom_game/icon/gold_png.vtex";
                 break;
-            case "Food":
-                src = "s2r://panorama/images/custom_game/icon/food_png.vtex";
+            case "SoulCrystal":
+                src = "s2r://panorama/images/custom_game/icon/soulcrystal_png.vtex";
                 break;
             case "Wood":
                 src = "s2r://panorama/images/custom_game/icon/wood_png.vtex";

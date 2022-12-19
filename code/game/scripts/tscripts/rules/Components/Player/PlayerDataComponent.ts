@@ -23,7 +23,7 @@ export class PlayerDataComponent extends ET.Component {
     @serializeETProps()
     gold: number = 0;
     @serializeETProps()
-    food: number = 0;
+    soulcrystal: number = 0;
     @serializeETProps()
     wood: number = 0;
     @serializeETProps()
@@ -65,8 +65,8 @@ export class PlayerDataComponent extends ET.Component {
                 return this.gold + count >= 0;
             case EEnum.EMoneyType.Wood:
                 return this.wood + count >= 0;
-            case EEnum.EMoneyType.Food:
-                return this.food + count >= 0;
+            case EEnum.EMoneyType.SoulCrystal:
+                return this.soulcrystal + count >= 0;
         }
         return false;
     }
@@ -79,8 +79,8 @@ export class PlayerDataComponent extends ET.Component {
             case EEnum.EMoneyType.Wood:
                 this.wood += count;
                 break;
-            case EEnum.EMoneyType.Food:
-                this.food += count;
+            case EEnum.EMoneyType.SoulCrystal:
+                this.soulcrystal += count;
                 break;
         }
     }

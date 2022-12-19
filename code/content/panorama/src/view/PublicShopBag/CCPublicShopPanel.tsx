@@ -2,6 +2,7 @@
 import React, { createRef, PureComponent } from "react";
 import { PublicBagConfig } from "../../../../../game/scripts/tscripts/shared/PublicBagConfig";
 import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { KVHelper } from "../../helper/KVHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -21,24 +22,31 @@ export class CCPublicShopPanel extends CCPanel<ICCPublicShopPanel> {
 
 
 export class CCGoldShop extends CCPanel<{}> {
+    onReady() {
+        return Boolean(PlayerScene.Local.CourierShopComp)
+    }
+
+    onInit() {
+        PlayerScene.Local.CourierShopComp.RegRef(this)
+    }
+
 
     render() {
+        if (!this.__root___isValid) { return this.defaultRender("CC_GoldShop") }
+        const courierShop = this.GetStateEntity(PlayerScene.Local.CourierShopComp)!;
+        const GoldItems = courierShop.getSellItem(PublicBagConfig.EPublicShopType.GoldShop)
         return (
             <Panel id="CC_GoldShop" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPublicShopBagTitle title={$.Localize("#GoldShop")} />
                 <Panel id="CommonShopContainer">
-                    {Object.entries(CustomUIConfig.ShopKv.common).map(([index, { sItem, difficulty, limit }]) => {
-                        if (iDifficulty >= difficulty) {
-                            let iSlot = parseInt(index);
-                            let iLeft: number | undefined;
-                            if (limit != undefined) {
-                                let iBoughtCount = safeNumber(shop_buy_count.common?.[iSlot], 0);
-                                if (iBoughtCount) {
-                                    iLeft = limit - iBoughtCount;
-                                }
-                            }
-                            return (<CCPublicShopItem key={sItem} iSlot={iSlot} sItemName={sItem} iLeftCount={iLeft} iLimit={limit} iType={PublicBagConfig.EPublicShopType.COMMON} iLevel={1} />);
-                        }
+                    {GoldItems.map((iteminfo, index) => {
+                        let iSlot = iteminfo.iSlot;
+                        let iLeft: number | undefined;
+                        return (<CCPublicShopItem key={index + ""}
+                            iSlot={iSlot} sItemName={iteminfo.sItemName}
+                            iLeftCount={iLeft} iLimit={iteminfo.iLimit}
+                            iType={PublicBagConfig.EPublicShopType.GoldShop}
+                            iLevel={1} />);
                     })}
                 </Panel>
             </Panel>

@@ -1319,9 +1319,9 @@ export module ItemHelper {
      * @param item 物品名字或者index
      * @returns 返回物品价格
      */
-    export function GetItemFoodCost(item: string | ItemEntityIndex) {
+    export function GetItemSoulCrystalCost(item: string | ItemEntityIndex) {
         let sItemName = GetItemName(item);
-        let total = Number(GetItemValue(sItemName, "FoodCost")) || 0;
+        let total = Number(GetItemValue(sItemName, "SoulCrystalCost")) || 0;
         if (typeof (item) != "string") {
             if (Items.IsStackable(item)) {
                 total *= Items.GetCurrentCharges(item) / Items.GetInitialCharges(item);

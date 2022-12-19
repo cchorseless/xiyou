@@ -26,7 +26,7 @@ export class PlayerDataComponent extends ET.Component {
     populationRoof: number = 0;
     population: number = 0;
     gold: number = 0;
-    food: number = 0;
+    soulcrystal: number = 0;
     wood: number = 0;
 
 }

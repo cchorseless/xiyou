@@ -8,7 +8,7 @@ declare namespace lang_config {
 "gold" :OBJ_2_1 ,
 "wood" :OBJ_2_1 ,
 "turn" :OBJ_2_1 ,
-"food" :OBJ_2_1 ,
+"soulcrystal" :OBJ_2_1 ,
 "round_start" :OBJ_2_1 ,
 "round_battle" :OBJ_2_1 ,
 "round_prize" :OBJ_2_1 ,
