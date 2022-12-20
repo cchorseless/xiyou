@@ -76,3 +76,40 @@
         margin: 0px 21px;
     }
 }
+
+
+#CC_PublicShopBagPanel {
+    align: right bottom;
+    margin-bottom: 220px;
+    margin-right: 0px;
+    flow-children: left;
+
+    transform: translateX(724px);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out 0s, opacity 0.25s ease-in-out 0s;
+
+    .ShowShop & {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+
+    #ShopLeft {
+        width: 360px;
+        height: 712px;
+        flow-children: down;
+        overflow: squish scroll;
+    }
+
+    #ShopRight {
+        width: 298px;
+        height: 712px;
+        padding-top: 36px;
+
+        flow-children: down;
+
+        #ShopCloseBtn {
+            horizontal-align: right;
+            z-index: 1;
+        }
+    }
+}

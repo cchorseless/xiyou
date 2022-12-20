@@ -516,6 +516,10 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         }
         this.useEffectStateList.push({ func: func, state: state });
     }
+    public hasState(k: string) {
+        return (this.state as any)[k] != null;
+    }
+
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>) {
         if (this.useEffectPropList) {
             for (let info of this.useEffectPropList) {

@@ -22,7 +22,7 @@ export class CCUnitDamageInfo extends CCPanel<ICCUnitDamageInfo> {
         return Boolean(PlayerScene.Local.RoundManagerComp && PlayerScene.Local.RoundManagerComp.getCurrentBoardRound());
     }
     onInitUI() {
-        TimerHelper.AddIntervalFrameTimer(1, 1, FuncHelper.Handler.create(this, () => {
+        TimerHelper.AddIntervalTimer(0.1, 0.1, FuncHelper.Handler.create(this, () => {
             this.updateSelf();
         }), -1, false);
     }

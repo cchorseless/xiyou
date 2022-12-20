@@ -20,5 +20,10 @@ export class CourierShopComponent extends ET.Component {
         })
         return sellitems;
     }
+    /**随机商店解锁回合数 */
+    randomLockRound = 16;
 
+    refreshRandomShop() {
+
+    }
 }

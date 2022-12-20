@@ -8,15 +8,8 @@ import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCToggleButton } from "../AllUIElement/CCToggleButton/CCToggleButton";
 import { CCPublicBagSlotItem } from "./CCPublicBagSlotItem";
 import { CCPublicShopBagTitle } from "./CCPublicShopBagTitle";
-import "./CCPublicBagPanel.less";
-
-interface ICCPublicBagPanel extends NodePropsData {
-
-}
-
-export class CCPublicBagPanel extends CCPanel<ICCPublicBagPanel> {
-
-}
+import { CCPublicShopItem } from "./CCPublicShopItem";
+import "./CCPublicShopBagPanel.less";
 
 
 export class CCPublicBag extends CCPanel<{}> {
@@ -104,10 +97,8 @@ export class CCPersonBag extends CCPanel<{}> {
     }
 }
 
-interface ICCEquipCombine extends NodePropsData {
 
-}
-export class CCEquipCombine extends CCPanel<ICCEquipCombine> {
+export class CCEquipCombine extends CCPanel<{}> {
     onReady() {
         return Boolean(PlayerScene.Local.CourierBagComp)
     }
@@ -169,4 +160,151 @@ export class CCEquipCombine extends CCPanel<ICCEquipCombine> {
             </Panel>
         );
     }
+}
+
+
+export class CCGoldShop extends CCPanel<{}> {
+    onReady() {
+        return Boolean(PlayerScene.Local.CourierShopComp)
+    }
+
+    onInit() {
+        PlayerScene.Local.CourierShopComp.RegRef(this)
+    }
+
+
+    render() {
+        if (!this.__root___isValid) { return this.defaultRender("CC_GoldShop") }
+        const courierShop = this.GetStateEntity(PlayerScene.Local.CourierShopComp)!;
+        const GoldItems = courierShop.getSellItem(PublicBagConfig.EPublicShopType.GoldShop)
+        return (
+            <Panel id="CC_GoldShop" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+                <CCPublicShopBagTitle title={$.Localize("#GoldShop")} />
+                <Panel id="CommonShopContainer">
+                    {GoldItems.map((iteminfo, index) => {
+                        let iSlot = iteminfo.iSlot;
+                        let iLeft: number | undefined;
+                        return (<CCPublicShopItem key={index + ""}
+                            iSlot={iSlot} sItemName={iteminfo.sItemName}
+                            iLeftCount={iLeft} iLimit={iteminfo.iLimit}
+                            iType={PublicBagConfig.EPublicShopType.GoldShop}
+                            iLevel={1} />);
+                    })}
+                </Panel>
+            </Panel>
+        )
+    }
+}
+
+export class CCWoodShop extends CCPanel<{}> {
+    onReady() {
+        return Boolean(PlayerScene.Local.CourierShopComp)
+    }
+
+    onInit() {
+        PlayerScene.Local.CourierShopComp.RegRef(this)
+    }
+
+
+    render() {
+        if (!this.__root___isValid) { return this.defaultRender("CC_WoodShop") }
+        const courierShop = this.GetStateEntity(PlayerScene.Local.CourierShopComp)!;
+        const WoodItems = courierShop.getSellItem(PublicBagConfig.EPublicShopType.WoodShop)
+        return (
+            <Panel id="CC_WoodShop" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+                <CCPublicShopBagTitle title={$.Localize("#WoodShop")} />
+                <Panel id="CommonShopContainer">
+                    {WoodItems.map((iteminfo, index) => {
+                        let iSlot = iteminfo.iSlot;
+                        let iLeft: number | undefined;
+                        return (<CCPublicShopItem key={index + ""}
+                            iSlot={iSlot} sItemName={iteminfo.sItemName}
+                            iLeftCount={iLeft} iLimit={iteminfo.iLimit}
+                            iType={PublicBagConfig.EPublicShopType.WoodShop}
+                            iLevel={1} />);
+                    })}
+                </Panel>
+            </Panel>
+        )
+    }
+}
+
+
+export class CCRandomShop extends CCPanel<{}> {
+    onReady() {
+        return Boolean(PlayerScene.Local.CourierShopComp)
+    }
+
+    onInit() {
+        PlayerScene.Local.CourierShopComp.RegRef(this);
+        PlayerScene.Local.PlayerDataComp.RegRef(this);
+    }
+
+
+    render() {
+        if (!this.__root___isValid) { return this.defaultRender("CC_RandomShop") }
+        const courierShop = this.GetStateEntity(PlayerScene.Local.CourierShopComp)!;
+        const PlayerDataComp = this.GetStateEntity(PlayerScene.Local.PlayerDataComp)!;
+        const RandomItems = courierShop.getSellItem(PublicBagConfig.EPublicShopType.RandomShop);
+        const islock = courierShop.randomLockRound;
+
+        return (
+            <Panel id="CC_RandomShop" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+                <CCPublicShopBagTitle title={$.Localize("#WoodShop")} />
+                <Panel id="RandomShopContainer">
+                    <Panel id="RandomShopLock" >
+                        <Image />
+                        <Label localizedText={"#RandomShopUnlock"} dialogVariables={{ unlock_round: iUnlockShowRound }} />
+                    </Panel>
+                    <Panel id="RandomShopList" hittest={false}>
+                        {RandomItems.map((iteminfo, index) => {
+                            let iSlot = iteminfo.iSlot;
+                            let iLeft: number | undefined;
+                            return (<CCPublicShopItem key={index + ""}
+                                iSlot={iSlot} sItemName={iteminfo.sItemName}
+                                iLeftCount={iLeft} iLimit={iteminfo.iLimit}
+                                iType={PublicBagConfig.EPublicShopType.RandomShop}
+                                iLevel={1} />);
+                        })}
+                    </Panel>
+                </Panel>
+                <Label key="RandomShopTime" id="RandomShopTime" localizedText="#RandomShopTime" html={true} />
+                <CCButton id="RandomShopRefresh" type="Style1" enabled={PlayerDataComp.wood >= iRefreshCost} onactivate={() => courierShop.refreshRandomShop()} >
+                    <Label localizedText="#RandomShopRefresh" />
+                </CCButton>
+            </Panel>
+        )
+    }
+}
+
+
+interface ICCPublicBagPanel extends NodePropsData {
+
+}
+
+export class CCPublicShopBagPanel extends CCPanel<ICCPublicBagPanel> {
+
+    render() {
+        return (
+            <Panel id="CC_PublicShopBagPanel" ref={this.__root__} hittest={false} >
+                <Panel id="ShopLeft" className="CommonWindowBG" onactivate={() => { }}>
+                    <Button id="ShopCloseBtn" className="CommonCloseButton" onactivate={() => CustomUIConfig.HideHud("Shop")} />
+                    <DiscountContext.Provider value={iDiscount}>
+                        <GoldContext.Provider value={iGold}><WoodContext.Provider value={iWood}><PointContext.Provider value={iPoint}>
+                            <Shop />
+                            <RandomShop />
+                            {bShowCandyShop && <CandyShop />}
+                        </PointContext.Provider></WoodContext.Provider></GoldContext.Provider>
+                    </DiscountContext.Provider>
+                </Panel>
+                <Panel id="ShopRight" className="CommonWindowBG" onactivate={() => { }}>
+                    <CCPublicBag />
+                    <CCPersonBag />
+                    <CCEquipCombine />
+                </Panel>
+            </Panel >
+        )
+    }
+
+
 }

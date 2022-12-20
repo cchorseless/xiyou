@@ -3,7 +3,6 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET, registerET } from "../../../libs/Entity";
-import { CCTopBarCenter } from "../../../view/TopBarPanel/CCTopBarPanel";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERound } from "./ERound";
 @registerET()
@@ -33,9 +32,7 @@ export class ERoundBoard extends ERound {
         this.onReload();
     }
     onReload(): void {
-        if (this.isCurrentRound()) {
-            CCTopBarCenter.GetInstance()?.UpdateState(this.Ref());
-        }
+
     }
 
     isCurrentRound() {

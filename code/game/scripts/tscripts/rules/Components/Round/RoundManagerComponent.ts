@@ -15,6 +15,7 @@ export class RoundManagerComponent extends ET.Component {
     onAwake() {
         this.initBoardRound();
         this.initChallengeRound();
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this, true);
     }
     @serializeETProps()
     curRoundBoard: string;
@@ -45,9 +46,10 @@ export class RoundManagerComponent extends ET.Component {
             this.RoundInfo[roundid] = this.AddChild(ERoundBoard, roundid);
         }
         this.curRoundBoard = roundid as string;
-        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this, true);
         (this.RoundInfo[roundid] as ERoundBoard).OnStart();
+        this.Domain.ETRoot.AsPlayer().SyncClientEntity(this, true);
     }
+
     public getCurrentBoardRound() {
         return this.RoundInfo[this.curRoundBoard] as ERoundBoard;
     }
