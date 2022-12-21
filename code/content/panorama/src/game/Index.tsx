@@ -25,12 +25,12 @@ import { BattleUnitSummonEntityRoot } from "./components/BattleUnit/BattleUnitSu
 import { BuildingRuntimeEntityRoot } from "./components/Building/BuildingRuntimeEntityRoot";
 import { CourierDataComponent } from "./components/Courier/CourierDataComponent";
 import { CourierEntityRoot } from "./components/Courier/CourierEntityRoot";
-import { PublicBagSystemComponent } from "./system/Public/PublicBagSystemComponent";
-import { GameStateSystemComponent } from "./components/GameState/GameStateSystemComponent";
+import { PublicBagSystemComponent } from "./system/PublicBagSystemComponent";
 import { PublicShopComponent } from "./components/Public/PublicShopComponent";
 import { CourierBagComponent } from "./components/Courier/CourierBagComponent";
 import { CourierShopComponent } from "./components/Courier/CourierShopComponent";
 import { ItemEntityRoot } from "./components/Item/ItemEntityRoot";
+import { GameStateSystemComponent } from "./system/GameStateSystemComponent";
 
 
 GameStateSystemComponent;

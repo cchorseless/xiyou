@@ -6,8 +6,8 @@ import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnu
 import { TServerZone } from "../../service/serverzone/TServerZone";
 import { PlayerEntityRoot } from "./PlayerEntityRoot";
 import { LogHelper } from "../../../helper/LogHelper";
-import { PublicBagSystemComponent } from "../../system/Public/PublicBagSystemComponent";
-import { GameStateSystemComponent } from "../GameState/GameStateSystemComponent";
+import { PublicBagSystemComponent } from "../../system/PublicBagSystemComponent";
+import { GameStateSystemComponent } from "../../system/GameStateSystemComponent";
 
 export class PlayerScene {
     /**组件 */
@@ -39,12 +39,6 @@ export class PlayerScene {
     }
 
 
-    static LoginServer() {
-        LogHelper.print("---------------LoginServer---------------");
-        NetHelper.SendToLua(GameEnum.CustomProtocol.req_LoginGame, null, (e) => {
-            LogHelper.print(e);
-        });
-    }
 
     static Init() {
         this.Scene.AddComponent(PrecacheHelper.GetRegClass<typeof EntityRootManagerComponent>("EntityRootManagerComponent"));

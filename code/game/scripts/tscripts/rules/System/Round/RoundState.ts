@@ -1,7 +1,6 @@
 import { KVHelper } from "../../../helper/KVHelper";
 import { unit_base_equip_bag } from "../../../npc/units/common/unit_base_equip_bag";
 import { unit_base_gold_bag } from "../../../npc/units/common/unit_base_gold_bag";
-import { DifficultyState } from "../Difficulty/DifficultyState";
 import { MapState } from "../Map/MapState";
 
 export class RoundState {
@@ -16,7 +15,7 @@ export class RoundState {
     }
 
     static GetFirstBoardRoundid() {
-        return DifficultyState.DifficultyChapter + "_1";
+        return GameRules.Addon.ETRoot.GameStateSystem().DifficultyChapter + "_1";
     }
 
     static GetNextBoardRoundid() {

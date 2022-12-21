@@ -20,11 +20,12 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
         sItemName: "",
         iLeftCount: 0,
         iLimit: 0,
+        iLevel: -1,
     }
 
     defaultClass() {
         const sItemName = this.props.sItemName!;
-        const iLevel = this.props.iLevel;
+        const iLevel = this.props.iLevel!;
         const iLeftCount = this.props.iLeftCount;
         const iPercent = 1;
         const playdata = PlayerScene.Local.PlayerDataComp
@@ -45,7 +46,7 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
         const iSlot = this.props.iSlot;
         const iType = this.props.iType;
         const iLeftCount = this.props.iLeftCount;
-        const iLevel = this.props.iLevel;
+        const iLevel = this.props.iLevel!;
         const iDiscount = PlayerScene.Local.PublicShopComp.shopDiscount;
         const iPercent = 1 - iDiscount / 100;
         const playdata = PlayerScene.Local.PlayerDataComp

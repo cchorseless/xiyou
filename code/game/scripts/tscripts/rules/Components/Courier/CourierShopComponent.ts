@@ -10,7 +10,9 @@ export class CourierShopComponent extends ET.Component {
 
     @serializeETProps()
     AllSellItem: { [shoptype: string]: { [slot: string]: IPublicShopItem } } = {};
-
-
+    @serializeETProps()
+    randomLockRound = 16;
+    @serializeETProps()
+    refreshPrice = 20;
 
 }

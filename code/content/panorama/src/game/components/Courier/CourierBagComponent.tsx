@@ -15,7 +15,8 @@ export class CourierBagComponent extends ET.Component {
     iMaxArtifact = 6;
     /**购买道具到背包|信使 */
     bBuyItem2Bag: boolean = false;
-
+    /**神器选项列表 */
+    artifactSelection: string[] = []
 
     setBuyItem2Bag(b: boolean) {
 
@@ -27,6 +28,11 @@ export class CourierBagComponent extends ET.Component {
 
 
     onEquipCombine() {
+
+    }
+
+
+    selectArtifact(itemName?: string, refresh?: 0 | 1, random?: 0 | 1) {
 
     }
 

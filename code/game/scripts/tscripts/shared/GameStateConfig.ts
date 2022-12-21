@@ -1,5 +1,29 @@
-export module DifficultyConfig {
+export module GameStateConfig {
+    /**网表存数据是否是存字符串的形式 */
+    export const NetTableSaveDataAsSring = false;
+    /**lua服务器特殊处理一些数据类型 */
+    export function TryEncodeData(d: any) {
+        if (NetTableSaveDataAsSring) { return d }
+        if (typeof d == "boolean") {
+            if (d) {
+                return "true"
+            }
+            else {
+                return "false"
+            }
+        }
+        return d;
+    }
 
+    export function TryDecodeData(d: any) {
+        if (NetTableSaveDataAsSring) { return d }
+        if (d == "true") { return true }
+        if (d == "false") { return false }
+        return d;
+    }
+
+    /**无尽最大层数 */
+    export const iMaxEndless = 999;
     export enum EDifficultyChapter {
         n1 = "n1",
         n2 = "n2",
@@ -11,6 +35,7 @@ export module DifficultyConfig {
         n8 = "n8",
         n9 = "n9",
         n10 = "n10",
+        endless = "endless"
     }
 
     export const ENDLESS_ENEMEY_fHPMult = {
@@ -51,7 +76,7 @@ export module DifficultyConfig {
         "601": 0.15,
     }
 
-    export const ENDLESS_ENEMEY_fHPAdd= {
+    export const ENDLESS_ENEMEY_fHPAdd = {
         "1": 0.15,
         "10": 0.2,
         "21": 0.3,
@@ -63,7 +88,7 @@ export module DifficultyConfig {
         "501": 0.15,
         "601": 0.15,
     }
-    
+
     export const ENDLESS_ENEMEY_fArmorPhyAdd = {
         "1": 0.15,
         "10": 0.2,

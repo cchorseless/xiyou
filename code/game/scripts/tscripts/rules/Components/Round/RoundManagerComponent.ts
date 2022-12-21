@@ -3,7 +3,6 @@ import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ET, serializeETProps } from "../../Entity/Entity";
-import { DifficultyState } from "../../System/Difficulty/DifficultyState";
 import { RoundState } from "../../System/Round/RoundState";
 import { ERound } from "./ERound";
 import { ERoundBoard } from "./ERoundBoard";
@@ -22,7 +21,7 @@ export class RoundManagerComponent extends ET.Component {
 
     private initChallengeRound() {
         for (let k in KVHelper.KvServerConfig.building_round_board_challenge) {
-            if (KVHelper.KvServerConfig.building_round_board_challenge[k].round_label == DifficultyState.DifficultyChapter) {
+            if (KVHelper.KvServerConfig.building_round_board_challenge[k].round_label == GameRules.Addon.ETRoot.GameStateSystem().DifficultyChapter) {
                 this.RoundInfo[k] = this.AddChild(ERoundBoardChallenge, k);
             }
         }

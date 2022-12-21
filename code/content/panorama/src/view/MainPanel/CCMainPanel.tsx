@@ -26,6 +26,7 @@ import { CCShopPanel } from "../Shop/CCShopPanel";
 import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
 import { CCUnitDamageInfo } from "../Unit/CCUnitDamageInfo";
 import { CCArtifactListPanel } from "../Artifact/CCArtifactListPanel";
+import { CCPublicShopBagPanel } from "../PublicShopBag/CCPublicShopBagPanel";
 
 
 export class CCMainPanel extends CCPanel<NodePropsData> {
@@ -67,6 +68,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCDacBoard />
                         <CCUnitDamageInfo />
                         <CCArtifactListPanel />
+                        <CCPublicShopBagPanel />
                         {this.panel_base_childs}
                     </Panel>
                 }

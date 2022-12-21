@@ -1,5 +1,5 @@
 import React from "react";
-import { CCBaseButton } from "../AllUIElement/CCButton/CCButton";
+import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
@@ -50,12 +50,12 @@ export class CCDebugTool_ItemPicker extends CCPanel<ICCDebugTool_ItemPicker> {
                                 }
                             }
                             return (
-                                <CCBaseButton className="CC_DebugTool_AbilityPickerItem" key={index + ""} flowChildren="down" onactivate={self => {
+                                <CCButton type="Empty" className="CC_DebugTool_AbilityPickerItem" key={index + ""} flowChildren="down" onactivate={self => {
 
                                 }}>
                                     <DOTAItemImage itemname={abilityname} showtooltip />
                                     <Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? abilityname : $.Localize("#DOTA_Tooltip_ability_" + abilityname)} />
-                                </CCBaseButton>
+                                </CCButton>
                             );
                         })}
                     </CCPanel>

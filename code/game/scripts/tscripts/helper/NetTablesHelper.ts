@@ -2,6 +2,7 @@ import { GameEnum } from "../shared/GameEnum";
 import { ET } from "../rules/Entity/Entity";
 import { EventHelper } from "./EventHelper";
 import { LogHelper } from "./LogHelper";
+import { GameStateConfig } from "../shared/GameStateConfig";
 
 export module NetTablesHelper {
     /**
@@ -27,6 +28,10 @@ export module NetTablesHelper {
             return;
         }
         let data = NetTablesHelper.GetData(ENetTables.etentity, obj.InstanceId);
+        if (GameStateConfig.NetTableSaveDataAsSring) {
+            data = json.decode(data)[0];
+            if (!data) { return }
+        }
         let new_data = obj.toJsonPartObject(props);
         for (let k in new_data) {
             data[k] = new_data[k];
@@ -37,13 +42,13 @@ export module NetTablesHelper {
         // event.data = { instanceId: obj.InstanceId, props: props, nettable: "" };
         // 全部玩家
         if (playerID == null || playerID.length == 0) {
-            NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, data);
+            NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, GameStateConfig.NetTableSaveDataAsSring ? json.encode(data) : data);
             // event.data.nettable = ENetTables.etentity;
             // EventHelper.fireProtocolEventToClient(GameEnum.CustomProtocol.push_update_nettable_partprop_etentity, event);
         } else {
             playerID.forEach((_id) => {
                 let nettable = GetETEntityNetTableName(_id);
-                NetTablesHelper.SetData(nettable, obj.InstanceId, data);
+                NetTablesHelper.SetData(nettable, obj.InstanceId, GameStateConfig.NetTableSaveDataAsSring ? json.encode(data) : data);
                 // event.data.nettable = nettable;
                 // EventHelper.fireProtocolEventToPlayer(GameEnum.CustomProtocol.push_update_nettable_partprop_etentity, event, _id as PlayerID);
             });
@@ -71,13 +76,13 @@ export module NetTablesHelper {
         // 全部玩家
         if (playerID == null || playerID.length == 0) {
             // event.data.nettable = ENetTables.etentity;
-            NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, jsonobj);
+            NetTablesHelper.SetData(ENetTables.etentity, obj.InstanceId, GameStateConfig.NetTableSaveDataAsSring ? json.encode(jsonobj) : jsonobj);
             // EventHelper.fireProtocolEventToClient(GameEnum.CustomProtocol.push_update_nettable_etentity, event);
         } else {
             playerID.forEach((_id) => {
                 let nettable = GetETEntityNetTableName(_id);
                 // event.data.nettable = nettable;
-                NetTablesHelper.SetData(nettable, obj.InstanceId, jsonobj);
+                NetTablesHelper.SetData(nettable, obj.InstanceId, GameStateConfig.NetTableSaveDataAsSring ? json.encode(jsonobj) : jsonobj);
                 // EventHelper.fireProtocolEventToPlayer(GameEnum.CustomProtocol.push_update_nettable_etentity, event, _id as PlayerID);
             });
         }

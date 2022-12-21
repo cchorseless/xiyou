@@ -357,6 +357,15 @@ export module AbilityHelper {
         }
         return sStr;
     }
+    export function GetAbilityDescriptionByName(sAbilityName: string) {
+        const str = $.Localize("#DOTA_Tooltip_ability_" + sAbilityName + "_description");
+        return GetAbilityDescription({
+            sStr: str,
+            abilityName: sAbilityName,
+            iLevel: 1
+        })
+    }
+
     export function StringToValues(sValues: string) {
         let aStr = sValues.toString().split(" ");
         let aValues = [];

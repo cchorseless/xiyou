@@ -1,6 +1,6 @@
 import React from "react";
 import { KVHelper } from "../../helper/KVHelper";
-import { CCBaseButton } from "../AllUIElement/CCButton/CCButton";
+import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
@@ -53,12 +53,12 @@ export class CCDebugTool_SectPicker extends CCPanel<IDebugTool_SectPicker> {
                             }
                             const abilityUpgradeInfo = KVHelper.KVAbilitys()[abilityUpgradeID];
                             return (
-                                <CCBaseButton className="CC_DebugTool_AbilityPickerItem" key={index + ""} width="64px" flowChildren="down"
+                                <CCButton type="Empty" className="CC_DebugTool_AbilityPickerItem" key={index + ""} width="64px" flowChildren="down"
                                     onactivate={self => { }}
                                     customTooltip={{ name: "sect_ability", abilityUpgradeID: abilityUpgradeID }}>
                                     <Image className="DOTAAbilityImage" src={`file://{images}/spellicons/${abilityUpgradeInfo.Texture}.png`} />
                                     <Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? abilityUpgradeID : $.Localize("#DOTA_Tooltip_ability_mechanics_" + abilityUpgradeID)} />
-                                </CCBaseButton>
+                                </CCButton>
                             );
                         })}
                     </CCPanel>

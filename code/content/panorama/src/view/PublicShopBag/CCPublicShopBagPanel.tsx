@@ -9,7 +9,11 @@ import { CCToggleButton } from "../AllUIElement/CCToggleButton/CCToggleButton";
 import { CCPublicBagSlotItem } from "./CCPublicBagSlotItem";
 import { CCPublicShopBagTitle } from "./CCPublicShopBagTitle";
 import { CCPublicShopItem } from "./CCPublicShopItem";
+import { CCIcon_XClose } from "../AllUIElement/CCIcons/CCIcon_XClose";
+import { CCPanelBG } from "../AllUIElement/CCPanel/CCPanelPart";
 import "./CCPublicShopBagPanel.less";
+import { CCIcon_Lock } from "../AllUIElement/CCIcons/CCIcon_Lock";
+import { CSSHelper } from "../../helper/CSSHelper";
 
 
 export class CCPublicBag extends CCPanel<{}> {
@@ -76,7 +80,7 @@ export class CCPersonBag extends CCPanel<{}> {
                         })
                     }
                 </Panel>
-                <CCToggleButton id="ToggleBuy2Bag" selected={courierBag.bBuyItem2Bag} onactivate={p => courierBag.setBuyItem2Bag(!p.IsSelected())}>
+                <CCToggleButton id="ToggleBuy2Bag" selected={Boolean(courierBag.bBuyItem2Bag)} onactivate={p => courierBag.setBuyItem2Bag(!p.IsSelected())}>
                     <Label localizedText="#Buy2Bag" />
                 </CCToggleButton>
                 <CCButton type="Style1" color="Blue" width="200px" height="60px" horizontalAlign="center"
@@ -134,9 +138,9 @@ export class CCEquipCombine extends CCPanel<{}> {
                 <CCPublicShopBagTitle title={$.Localize("#lang_EquipCombine")} />
                 <Panel id="EquipCombineFrom" hittest={false}>
                     {
-                        [...Array(PublicBagConfig.PUBLIC_ITEM_SLOT_MAX - PublicBagConfig.PUBLIC_ITEM_SLOT_MIN + 1)].map((_, index) => {
+                        [...Array(PublicBagConfig.CUSTOM_COMBINE_SLOT_MAX - PublicBagConfig.CUSTOM_COMBINE_SLOT_MIN + 1)].map((_, index) => {
                             let itemindex = -1 as any;
-                            let slot = index + PublicBagConfig.PUBLIC_ITEM_SLOT_MIN;
+                            let slot = index + PublicBagConfig.CUSTOM_COMBINE_SLOT_MIN;
                             let entity = courierBag.getItemByIndex(slot + "");
                             if (entity) {
                                 itemindex = entity.EntityId;
@@ -180,7 +184,7 @@ export class CCGoldShop extends CCPanel<{}> {
         return (
             <Panel id="CC_GoldShop" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPublicShopBagTitle title={$.Localize("#GoldShop")} />
-                <Panel id="CommonShopContainer">
+                <Panel id="GoldShopContainer">
                     {GoldItems.map((iteminfo, index) => {
                         let iSlot = iteminfo.iSlot;
                         let iLeft: number | undefined;
@@ -213,7 +217,7 @@ export class CCWoodShop extends CCPanel<{}> {
         return (
             <Panel id="CC_WoodShop" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPublicShopBagTitle title={$.Localize("#WoodShop")} />
-                <Panel id="CommonShopContainer">
+                <Panel id="WoodShopContainer">
                     {WoodItems.map((iteminfo, index) => {
                         let iSlot = iteminfo.iSlot;
                         let iLeft: number | undefined;
@@ -238,6 +242,7 @@ export class CCRandomShop extends CCPanel<{}> {
     onInit() {
         PlayerScene.Local.CourierShopComp.RegRef(this);
         PlayerScene.Local.PlayerDataComp.RegRef(this);
+        PlayerScene.Local.RoundManagerComp.RegRef(this);
     }
 
 
@@ -245,16 +250,18 @@ export class CCRandomShop extends CCPanel<{}> {
         if (!this.__root___isValid) { return this.defaultRender("CC_RandomShop") }
         const courierShop = this.GetStateEntity(PlayerScene.Local.CourierShopComp)!;
         const PlayerDataComp = this.GetStateEntity(PlayerScene.Local.PlayerDataComp)!;
+        const RoundManagerComp = this.GetStateEntity(PlayerScene.Local.RoundManagerComp)!;
         const RandomItems = courierShop.getSellItem(PublicBagConfig.EPublicShopType.RandomShop);
-        const islock = courierShop.randomLockRound;
+        const currentround = Number(RoundManagerComp.getCurrentBoardRound()!.config.round_show)
+        const Unlock = courierShop.randomLockRound >= currentround;
 
         return (
             <Panel id="CC_RandomShop" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPublicShopBagTitle title={$.Localize("#WoodShop")} />
-                <Panel id="RandomShopContainer">
+                <CCPanel id="RandomShopContainer" className={CSSHelper.ClassMaker({ Unlock: Unlock })} >
                     <Panel id="RandomShopLock" >
-                        <Image />
-                        <Label localizedText={"#RandomShopUnlock"} dialogVariables={{ unlock_round: iUnlockShowRound }} />
+                        <CCIcon_Lock type="Tui7" horizontalAlign="center" />
+                        <Label localizedText={"#RandomShopUnlock"} dialogVariables={{ unlock_round: currentround }} />
                     </Panel>
                     <Panel id="RandomShopList" hittest={false}>
                         {RandomItems.map((iteminfo, index) => {
@@ -263,16 +270,20 @@ export class CCRandomShop extends CCPanel<{}> {
                             return (<CCPublicShopItem key={index + ""}
                                 iSlot={iSlot} sItemName={iteminfo.sItemName}
                                 iLeftCount={iLeft} iLimit={iteminfo.iLimit}
-                                iType={PublicBagConfig.EPublicShopType.RandomShop}
-                                iLevel={1} />);
+                                iType={PublicBagConfig.EPublicShopType.RandomShop} />);
                         })}
                     </Panel>
-                </Panel>
-                <Label key="RandomShopTime" id="RandomShopTime" localizedText="#RandomShopTime" html={true} />
-                <CCButton id="RandomShopRefresh" type="Style1" enabled={PlayerDataComp.wood >= iRefreshCost} onactivate={() => courierShop.refreshRandomShop()} >
-                    <Label localizedText="#RandomShopRefresh" />
-                </CCButton>
-            </Panel>
+                </CCPanel>
+                {
+                    Unlock &&
+                    <>
+                        <Label key="RandomShopTime" id="RandomShopTime" localizedText="#RandomShopTime" html={true} />
+                        <CCButton id="RandomShopRefresh" type="Style1" enabled={PlayerDataComp.wood >= courierShop.refreshPrice} onactivate={() => courierShop.refreshRandomShop()} >
+                            <Label localizedText="#RandomShopRefresh" />
+                        </CCButton>
+                    </>
+                }
+            </Panel >
         )
     }
 }
@@ -284,24 +295,28 @@ interface ICCPublicBagPanel extends NodePropsData {
 
 export class CCPublicShopBagPanel extends CCPanel<ICCPublicBagPanel> {
 
+
+    isShowSelf() {
+        return this.__root__.current!.BHasClass("ShowPublicShopBag")
+    }
+    showSelf(isshow: boolean) {
+        this.__root__.current!.SetHasClass("ShowPublicShopBag", isshow)
+    }
+
     render() {
         return (
             <Panel id="CC_PublicShopBagPanel" ref={this.__root__} hittest={false} >
-                <Panel id="ShopLeft" className="CommonWindowBG" onactivate={() => { }}>
-                    <Button id="ShopCloseBtn" className="CommonCloseButton" onactivate={() => CustomUIConfig.HideHud("Shop")} />
-                    <DiscountContext.Provider value={iDiscount}>
-                        <GoldContext.Provider value={iGold}><WoodContext.Provider value={iWood}><PointContext.Provider value={iPoint}>
-                            <Shop />
-                            <RandomShop />
-                            {bShowCandyShop && <CandyShop />}
-                        </PointContext.Provider></WoodContext.Provider></GoldContext.Provider>
-                    </DiscountContext.Provider>
-                </Panel>
-                <Panel id="ShopRight" className="CommonWindowBG" onactivate={() => { }}>
+                <CCIcon_XClose type="Tui7" align="right top" onactivate={() => this.showSelf(false)} />
+                <CCPanelBG id="ShopLeft" scroll="y">
+                    <CCGoldShop />
+                    <CCWoodShop />
+                    <CCRandomShop />
+                </CCPanelBG>
+                <CCPanelBG id="ShopRight"  >
                     <CCPublicBag />
                     <CCPersonBag />
                     <CCEquipCombine />
-                </Panel>
+                </CCPanelBG>
             </Panel >
         )
     }

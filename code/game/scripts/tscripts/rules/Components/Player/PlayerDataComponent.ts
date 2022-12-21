@@ -6,7 +6,6 @@ import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET, serializeETProps } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
-import { DifficultyState } from "../../System/Difficulty/DifficultyState";
 import { PlayerConfig } from "../../../shared/PlayerConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
@@ -51,7 +50,7 @@ export class PlayerDataComponent extends ET.Component {
     onAwake(...args: any[]): void {
         this.addEvent();
         this.startTime = TimerHelper.now();
-        this.difficulty = DifficultyState.getDifficultyDes();
+        this.difficulty = GameRules.Addon.ETRoot.GameStateSystem().getDifficultyDes();
         this.applyPopuLevelUp(0);
         this.applyTechLevelUp(0);
         this.perIntervalGold += 5;

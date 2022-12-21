@@ -32,7 +32,9 @@ export class ERoundBoard extends ERound {
         this.onReload();
     }
     onReload(): void {
+        if (this.isCurrentRound()) {
 
+        }
     }
 
     isCurrentRound() {

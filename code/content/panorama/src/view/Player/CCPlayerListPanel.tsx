@@ -3,7 +3,7 @@ import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { LogHelper } from "../../helper/LogHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCAvatar } from "../AllUIElement/CCAvatar/CCAvatar";
-import { CCBaseButton } from "../AllUIElement/CCButton/CCButton";
+import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCIcon } from "../AllUIElement/CCIcons/CCIcon";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCProgressBar } from "../AllUIElement/CCProgressBar/CCProgressBar";
@@ -45,7 +45,8 @@ export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
                     if (!CourierData) { return }
                     const playerID = CourierData.BelongPlayerid;
                     return (
-                        <CCBaseButton key={playerID + ""}
+                        <CCButton key={playerID + ""}
+                            type="Empty"
                             enabled={CourierData.health > 0}
                             className="PlayerInfo"
                             onactivate={self => { }}
@@ -69,7 +70,7 @@ export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
                                     <Label id="PlayerHealthLabel" text={CourierData.health + " / " + CourierData.maxHealth} />
                                 </CCProgressBar>
                             </CCPanel>
-                        </CCBaseButton>
+                        </CCButton>
                     );
                 })}
             </Panel>

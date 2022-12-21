@@ -5,6 +5,7 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { TipsHelper } from "../../../helper/TipsHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
+import { GameStateConfig } from "../../../../../../game/scripts/tscripts/shared/GameStateConfig";
 
 /**玩家 */
 @registerET()
@@ -19,13 +20,13 @@ export class PlayerHeroComponent extends ET.Component {
         let allLoadData: { [key: string]: IEntityJson } = {}
         for (let info of data_player) {
             if (info.value) {
-                allLoadData[info.key] = info.value;
+                allLoadData[info.key] = GameStateConfig.NetTableSaveDataAsSring ? JSON.parse(info.value as any) : info.value;
             }
         }
         let data_common = NetHelper.GetOneTable(NetHelper.ENetTables.etentity);
         for (let info of data_common) {
             if (info.value) {
-                allLoadData[info.key] = info.value;
+                allLoadData[info.key] = GameStateConfig.NetTableSaveDataAsSring ? JSON.parse(info.value as any) : info.value;
             }
         }
         for (let key in allLoadData) {
@@ -52,6 +53,7 @@ export class PlayerHeroComponent extends ET.Component {
     }
 
     private UpdateSyncEntity(tableName: string, key: string, value: any) {
+        value = GameStateConfig.NetTableSaveDataAsSring ? JSON.parse(value as any) : value;
         if (value != null && value._t && value._id) {
             try {
                 ET.Entity.FromJson(value);

@@ -1,5 +1,5 @@
 import React from "react";
-import { CCBaseButton } from "../AllUIElement/CCButton/CCButton";
+import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
@@ -31,10 +31,10 @@ export class CCDebugTool_HeroPicker extends CCPanel<ICCDebugTool_HeroPicker> {
                     <CCPanel className="CC_DebugTool_AbilityPicker" flowChildren="right-wrap" width="100%" scroll="y" >
                         {this.props.unitNames?.map((unitName, index) => {
                             return (
-                                <CCBaseButton className="CC_DebugTool_AbilityPickerItem" key={index + ""} flowChildren="down" onactivate={self => { }}>
+                                <CCButton type="Empty" className="CC_DebugTool_AbilityPickerItem" key={index + ""} flowChildren="down" onactivate={self => { }}>
                                     <DOTAHeroImage heroimagestyle={"portrait"} heroname={unitName} id="HeroPickerCardImage" scaling="stretch-to-fit-x-preserve-aspect" />
                                     <Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? unitName : $.Localize("#" + unitName)} />
-                                </CCBaseButton>
+                                </CCButton>
                             );
                         })}
                     </CCPanel>

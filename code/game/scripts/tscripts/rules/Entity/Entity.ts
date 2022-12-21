@@ -2,6 +2,7 @@ import { GetRegClass, reloadable } from "../../GameCache";
 import { GameFunc } from "../../GameFunc";
 import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
+import { GameStateConfig } from "../../shared/GameStateConfig";
 import { CourierEntityRoot } from "../Components/Courier/CourierEntityRoot";
 import { PlayerEntityRoot } from "../Components/Player/PlayerEntityRoot";
 
@@ -204,7 +205,7 @@ export module ET {
             if (this.SerializeETProps != null) {
                 for (let k of this.SerializeETProps) {
                     if (props.includes(k)) {
-                        obj[k] = (this as any)[k];
+                        obj[k] = GameStateConfig.TryEncodeData((this as any)[k]);
                     }
                 }
             }
@@ -212,7 +213,7 @@ export module ET {
                 obj._d_props = {};
                 for (let k of this.Domain.SerializeDomainProps) {
                     if (props.includes(k)) {
-                        obj._d_props[k] = (this.Domain as any)[k];
+                        obj._d_props[k] = GameStateConfig.TryEncodeData((this.Domain as any)[k]);
                     }
                 }
             }
@@ -224,13 +225,13 @@ export module ET {
             obj._id = this.Id;
             if (this.SerializeETProps != null) {
                 for (let k of this.SerializeETProps) {
-                    obj[k] = (this as any)[k];
+                    obj[k] = GameStateConfig.TryEncodeData((this as any)[k]);
                 }
             }
             if (this.Domain.SerializeDomainProps != null) {
                 obj._d_props = {};
                 for (let k of this.Domain.SerializeDomainProps) {
-                    obj._d_props[k] = (this.Domain as any)[k];
+                    obj._d_props[k] = GameStateConfig.TryEncodeData((this.Domain as any)[k]);
                 }
             }
             if (!ignoreChild) {

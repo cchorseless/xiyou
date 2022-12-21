@@ -22,7 +22,10 @@ export class CourierShopComponent extends ET.Component {
     }
     /**随机商店解锁回合数 */
     randomLockRound = 16;
-
+    /**随机商店刷新价格 */
+    refreshPrice = 20;
+    /**折扣 */
+    iDiscount = 100;
     refreshRandomShop() {
 
     }

@@ -1,6 +1,6 @@
-import { ET, registerET } from "../../../libs/Entity";
-import { ItemEntityRoot } from "../../components/Item/ItemEntityRoot";
-import { PlayerScene } from "../../components/Player/PlayerScene";
+import { ET, registerET } from "../../libs/Entity";
+import { ItemEntityRoot } from "../components/Item/ItemEntityRoot";
+import { PlayerScene } from "../components/Player/PlayerScene";
 
 @registerET()
 export class PublicBagSystemComponent extends ET.Component {

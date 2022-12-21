@@ -5,4 +5,6 @@ import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 export class CCHero_Select extends CCPanel<NodePropsData> {
 }
-render(<CCHero_Select />, $.GetContextPanel());
+
+render(<CCHero_Select />, $.GetContextPanel())
+

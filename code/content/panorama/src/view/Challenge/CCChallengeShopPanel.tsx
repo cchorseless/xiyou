@@ -17,6 +17,7 @@ import { PlayerConfig } from "../../../../../game/scripts/tscripts/shared/Player
 import { CCDrawCardPanel } from "../Draw/CCDrawCardPanel";
 
 import "./CCChallengeShopPanel.less";
+import { CCPublicShopBagPanel } from "../PublicShopBag/CCPublicShopBagPanel";
 
 export interface ICCChallengeShopPanel {
 
@@ -65,11 +66,15 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
     };
 
 
-    onbtnshop_click() { }
+    onbtnshop_click() {
+        let shopbag = CCPublicShopBagPanel.GetInstance();
+        if (shopbag != null) {
+            shopbag.showSelf(!shopbag.isShowSelf());
+        }
+    }
     onbtndraw_click() {
         let draw = CCDrawCardPanel.GetInstance();
         if (draw != null) {
-            LogHelper.print(draw.IsHide())
             if (draw.IsHide()) {
                 draw.show();
             }

@@ -3,7 +3,6 @@ import { GameEnum } from "../../../../shared/GameEnum";
 import { LogHelper } from "../../../../helper/LogHelper";
 import { AbilityEntityRoot } from "../../../../rules/Components/Ability/AbilityEntityRoot";
 import { serializeDomainProps } from "../../../../rules/Entity/Entity";
-import { DifficultyState } from "../../../../rules/System/Difficulty/DifficultyState";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { ActiveRootAbility } from "../../ActiveRootAbility";
@@ -45,7 +44,7 @@ export class courier_challenge_equip extends ActiveRootAbility implements IAbili
             let root = caster.ETRoot.AsHero().GetPlayer();
             let round = root.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
-                let configid = DifficultyState.DifficultyChapter + "_equip";
+                let configid = GameRules.Addon.ETRoot.GameStateSystem().DifficultyChapter + "_equip";
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
                     challengeround.OnStart();

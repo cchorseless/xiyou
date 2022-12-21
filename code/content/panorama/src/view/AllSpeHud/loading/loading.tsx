@@ -8,6 +8,7 @@ import { NodePropsData } from "../../../libs/BasePureComponent";
 import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import { CCHero_Select } from "../hero_select/hero_select";
+import { NetHelper } from "../../../helper/NetHelper";
 
 import "./loading.less";
 
@@ -35,22 +36,31 @@ export class CCLoading extends CCPanel<NodePropsData> {
                 return;
             }
             if (state == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP) {
-                PlayerScene.LoginServer();
+                this.LoginServer();
             }
             LogHelper.print("current state :", state);
             this.UpdateState({ gamestate: state })
         })
     }
 
+    LoginServer(cb = () => { }) {
+        LogHelper.print("---------------LoginServer---------------");
+        NetHelper.SendToLua(GameEnum.CustomProtocol.req_LoginGame, null, (e) => {
+            this.UpdateState({ login: e.state })
+        });
+    }
     render() {
-        const gamestate = this.GetState<number>("gamestate")
+        const gamestate = this.GetState<number>("gamestate");
+        const login = this.GetState<boolean>("login", false);
         return (
             <Panel className="CC_Loading" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPanel id="loadingBg" />
+                {/* 队伍选择界面 */}
                 {gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP &&
                     <CCTeam_select />
                 }
-                {gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION &&
+                {/* 英雄选择 */}
+                {login && gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION &&
                     <CCHero_Select />
                 }
                 {this.props.children}
@@ -61,41 +71,3 @@ export class CCLoading extends CCPanel<NodePropsData> {
 }
 AllEntity.Init();
 render(<CCLoading />, $.GetContextPanel());
-// const eventid = GameEvents.Subscribe(GameEnum.GameEvent.game_rules_state_change, async (e: any) => {
-//     if (!$.GetContextPanel().layoutfile.includes("custom_loading_screen")) {
-//         GameEvents.Unsubscribe(eventid);
-//         return;
-//     }
-//     let state = Game.GetState();
-//     LogHelper.print("current state :", state);
-//     LogHelper.print("panel file :", $.GetContextPanel().layoutfile);
-//     switch (state) {
-//         // 创建
-//         case DOTA_GameState.DOTA_GAMERULES_STATE_INIT:
-//             AllEntity.Init();
-//             render(<CCLoading />, $.GetContextPanel());
-//             break;
-//         // 队伍选择界面
-//         case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
-//             PlayerScene.LoginServer();
-//             while (CCLoading.GetInstance() == null) {
-//                 await TimerHelper.DelayTime(0.1, true);
-//             }
-//             let load = CCLoading.GetInstance()!;
-//             load.addNodeChildAsyncAt(load.NODENAME.__root__, CCTeam_select);
-//             break;
-//         /**英雄选择 */
-//         case DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION:
-//             // this.showOnlyNodeComponent(this.NODENAME.__root__, Hero_select, {
-//             //     isActive: true
-//             // });
-//             // this.updateSelf()
-//             break;
-//         // 销毁
-//         case DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME:
-//             CCLoading.GetInstance()!.close(true);
-//             GameEvents.Unsubscribe(eventid);
-//             render(<></>, $.GetContextPanel());
-//             break;
-//     }
-// });

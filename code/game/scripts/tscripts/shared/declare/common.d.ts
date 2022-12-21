@@ -35,7 +35,7 @@ declare interface IGoodsInfo {
 declare interface IPublicShopItem {
     sItemName?: string,
     iSlot: number,
-    iLevel: number,
+    iLevel?: number,
     iLeftCount?: number,
     iLimit?: number,
 }

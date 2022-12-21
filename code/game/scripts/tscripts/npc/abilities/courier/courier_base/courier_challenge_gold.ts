@@ -6,7 +6,6 @@ import { LogHelper } from "../../../../helper/LogHelper";
 import { TimerHelper } from "../../../../helper/TimerHelper";
 import { AbilityEntityRoot } from "../../../../rules/Components/Ability/AbilityEntityRoot";
 import { serializeDomainProps } from "../../../../rules/Entity/Entity";
-import { DifficultyState } from "../../../../rules/System/Difficulty/DifficultyState";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -53,7 +52,7 @@ export class courier_challenge_gold extends ActiveRootAbility implements IAbilit
             let root = caster.ETRoot.AsHero().GetPlayer();
             let round = root.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
-                let configid = DifficultyState.DifficultyChapter + "_gold";
+                let configid = GameRules.Addon.ETRoot.GameStateSystem().DifficultyChapter + "_gold";
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
                     challengeround.OnStart();

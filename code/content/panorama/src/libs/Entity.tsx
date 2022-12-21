@@ -1,4 +1,5 @@
 import { PureComponent, useEffect, useState } from "react";
+import { GameStateConfig } from "../../../../game/scripts/tscripts/shared/GameStateConfig";
 import { EventHelper } from "../helper/EventHelper";
 import { FuncHelper } from "../helper/FuncHelper";
 import { LogHelper } from "../helper/LogHelper";
@@ -153,11 +154,16 @@ export module ET {
             return this.BelongPlayerid;
         }
 
+        private TryTransData(d: any) {
+            d = GameStateConfig.TryDecodeData(d)
+            return FuncHelper.TryTransArrayLikeObject(d);
+        }
+
         public updateFromJson(json: IEntityJson) {
             let ignoreKey = ["_t", "_id", "Children", "C", "_p_instanceid", "_playerid", "_d_props"];
             for (let k in json) {
                 if (ignoreKey.indexOf(k) == -1) {
-                    (this as any)[k] = FuncHelper.TryTransArrayLikeObject(json[k]);
+                    (this as any)[k] = this.TryTransData(json[k]);
                 }
             }
             if (json._p_instanceid != null) {
