@@ -8,12 +8,10 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { BuildingEntityRoot } from "../../Components/Building/BuildingEntityRoot";
 import { ET } from "../../Entity/Entity";
-import { MapState } from "../Map/MapState";
-import { PlayerState } from "../Player/PlayerState";
 import { ChessVector } from "./ChessVector";
 
 @reloadable
-export class ChessControlSystemComponent extends ET.Component {
+export class ChessControlSystemComponent extends ET.SingletonComponent {
     public onAwake(...args: any[]): void {
         this.addEvent();
     }
@@ -21,7 +19,7 @@ export class ChessControlSystemComponent extends ET.Component {
     private addEvent() {
         /**移动棋子 */
         EventHelper.addProtocolEvent(this, ChessControlConfig.EProtocol.pick_chess_position, (event: CLIENT_DATA<ChessControlConfig.I.pick_chess_position>) => {
-            let playersys = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(event.PlayerID);
+            let playersys = GPlayerSystem.GetInstance().GetPlayer(event.PlayerID);
             let v = Vector(event.data.x, event.data.y, event.data.z);
             let entity = EntIndexToHScript(event.data.entityid as EntityIndex) as BaseNpc_Plus;
             if (!GameFunc.IsValid(entity) || entity.ETRoot == null || !entity.ETRoot.AsValid<BuildingEntityRoot>("BuildingEntityRoot")) {
@@ -40,7 +38,7 @@ export class ChessControlSystemComponent extends ET.Component {
     public BoardStandbyMinVector3: { [playerid: string]: Vector } = {};
 
     public GetPlayerfirstSpawnPoint(playerid: PlayerID) {
-        return PlayerState.HeroSpawnPoint[playerid];
+        return GPlayerSystem.GetInstance().HeroSpawnPoint[playerid];
     }
 
     public GetBoardMaxVector3(playerid: PlayerID) {
@@ -197,7 +195,7 @@ export class ChessControlSystemComponent extends ET.Component {
 
     public FindBoardInGirdChess(v: ChessVector) {
         let playerid = v.playerid as PlayerID;
-        if (!GameRules.Addon.ETRoot.PlayerSystem().IsValidPlayer(playerid)) {
+        if (!GPlayerSystem.GetInstance().IsValidPlayer(playerid)) {
             return;
         }
         let v3 = this.GetBoardGirdCenterVector3(v);
@@ -247,8 +245,8 @@ export class ChessControlSystemComponent extends ET.Component {
         return this.FindBoardInGirdChess(v).length === 0;
     }
     public IsInBaseRoom(v: Vector) {
-        let minv = MapState.BaseRoomMinPoint;
-        let maxv = MapState.BaseRoomMaxPoint;
+        let minv = GMapSystem.GetInstance().BaseRoomMinPoint;
+        let maxv = GMapSystem.GetInstance().BaseRoomMaxPoint;
         return v.x >= minv.x && v.x <= maxv.x && v.y >= minv.y && v.y <= maxv.y;
     }
 
@@ -273,7 +271,7 @@ export class ChessControlSystemComponent extends ET.Component {
     public GetBoardLocalVector2(v: Vector, IsValidPlayer: boolean = true) {
         let playerlist: PlayerID[] = [];
         if (IsValidPlayer) {
-            playerlist = GameRules.Addon.ETRoot.PlayerSystem().GetAllPlayerid();
+            playerlist = GPlayerSystem.GetInstance().GetAllPlayerid();
         } else {
             for (let i = 0; i < GameSetting.GAME_MAX_PLAYER; i++) {
                 playerlist.push(i as PlayerID);
@@ -299,4 +297,14 @@ export class ChessControlSystemComponent extends ET.Component {
         }
         return new ChessVector(x, y, playerid);
     }
+}
+
+declare global {
+    /**
+     * @ServerOnly
+     */
+    var GChessControlSystem: typeof ChessControlSystemComponent;
+}
+if (_G.GChessControlSystem == undefined) {
+    _G.GChessControlSystem = ChessControlSystemComponent;
 }

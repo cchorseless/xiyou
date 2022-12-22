@@ -36,6 +36,6 @@ export class ServerZoneRankComponent extends ET.Component {
         }
     }
     onReload() {
-        GameRules.Addon.ETRoot.SyncClientEntity(this, true);
+        GGameEntityRoot.GetInstance().SyncClientEntity(this, true);
     }
 }

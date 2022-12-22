@@ -1,7 +1,7 @@
 import { LogHelper } from "../helper/LogHelper";
 import { BuildingSystemComponent } from "./System/Building/BuildingSystemComponent";
 import { ChessControlSystemComponent } from "./System/ChessControl/ChessControlSystemComponent";
-import { CombinationSystemComponent } from "./System/Combination/CombinationSystem";
+import { CombinationSystemComponent } from "./System/Combination/CombinationSystemComponent";
 import { DrawSystemComponent } from "./System/Draw/DrawSystemComponent";
 import { EnemySystemComponent } from "./System/Enemy/EnemySystemComponent";
 import { GameStateSystemComponent } from "./System/GameState/GameStateSystemComponent";

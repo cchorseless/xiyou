@@ -4,7 +4,7 @@ import { GameStateConfig } from "../../../shared/GameStateConfig";
 import { ET, serializeETProps } from "../../Entity/Entity";
 
 @reloadable
-export class GameStateSystemComponent extends ET.Component {
+export class GameStateSystemComponent extends ET.SingletonComponent {
 
     @serializeETProps()
     IsAllPlayerBindHero: boolean = false;
@@ -64,12 +64,22 @@ export class GameStateSystemComponent extends ET.Component {
 
     OnBindHeroFinish(playerID: PlayerID) {
         this.BindHeroPlayer.push(playerID);
-        this.IsAllPlayerBindHero = GameRules.Addon.ETRoot.PlayerSystem().IsAllBindHeroFinish();
-        GameRules.Addon.ETRoot.SyncClientEntity(this);
+        this.IsAllPlayerBindHero = GPlayerSystem.GetInstance().IsAllBindHeroFinish();
+        GGameEntityRoot.GetInstance().SyncClientEntity(this);
         LogHelper.print("OnBindHeroFinish", this.IsAllPlayerBindHero)
         if (this.IsAllPlayerBindHero) {
-            GameRules.Addon.ETRoot.StartGame();
+            GGameEntityRoot.GetInstance().StartGame();
         }
     }
 
+}
+
+declare global {
+    /**
+     * @ServerOnly
+     */
+    var GGameStateSystem: typeof GameStateSystemComponent;
+}
+if (_G.GGameStateSystem == undefined) {
+    _G.GGameStateSystem = GameStateSystemComponent;
 }

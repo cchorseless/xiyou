@@ -3,11 +3,10 @@ import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { BaseNpc_Hero_Plus } from "../entityPlus/BaseNpc_Hero_Plus";
 import { registerUnit } from "../entityPlus/Base_Plus";
-import { PlayerState } from "../../rules/System/Player/PlayerState";
-import { courier_challenge_wood } from "../abilities/courier/courier_base/courier_challenge_wood";
-import { courier_challenge_gold } from "../abilities/courier/courier_base/courier_challenge_gold";
-import { courier_challenge_equip } from "../abilities/courier/courier_base/courier_challenge_equip";
-import { courier_challenge_artifact } from "../abilities/courier/courier_base/courier_challenge_artifact";
+import { courier_challenge_wood } from "../abilities/courier/courier_challenge_wood";
+import { courier_challenge_gold } from "../abilities/courier/courier_challenge_gold";
+import { courier_challenge_equip } from "../abilities/courier/courier_challenge_equip";
+import { courier_challenge_artifact } from "../abilities/courier/courier_challenge_artifact";
 
 @registerUnit()
 export class courier_base extends BaseNpc_Hero_Plus {
@@ -42,12 +41,12 @@ export class courier_base extends BaseNpc_Hero_Plus {
         if (!this.IsValidHero()) {
             return;
         }
-        GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.GetPlayerID()).BindHero(this);
+        GPlayerSystem.GetInstance().GetPlayer(this.GetPlayerID()).BindHero(this);
         // 延遲1帧
         TimerHelper.addFrameTimer(1, () => {
             let playerid = this.GetPlayerID();
             // 设置出生点
-            let startPoint = PlayerState.HeroSpawnPoint[playerid];
+            let startPoint = GPlayerSystem.GetInstance().HeroSpawnPoint[playerid];
             let a = GetGroundPosition(startPoint, this);
             this.SetAbsOrigin(a);
             CenterCameraOnUnit(playerid, this);
@@ -65,7 +64,7 @@ export class courier_base extends BaseNpc_Hero_Plus {
     }
 
     IsValidHero() {
-        return GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.GetPlayerID()).Hero == null;
+        return GPlayerSystem.GetInstance().GetPlayer(this.GetPlayerID()).Hero == null;
     }
 
 

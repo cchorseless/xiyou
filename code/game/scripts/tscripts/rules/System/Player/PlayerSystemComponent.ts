@@ -10,14 +10,23 @@ import { PlayerEntityRoot } from "../../Components/Player/PlayerEntityRoot";
 import { PlayerHttpComponent } from "../../Components/Player/PlayerHttpComponent";
 import { PlayerScene } from "../../Components/Player/PlayerScene";
 import { ET } from "../../Entity/Entity";
-import { PlayerState } from "./PlayerState";
 
 @reloadable
-export class PlayerSystemComponent extends ET.Component {
+export class PlayerSystemComponent extends ET.SingletonComponent {
     public readonly AllPlayer: { [k: string]: PlayerEntityRoot } = {};
+    readonly HeroSpawnPoint: Vector[] = [];
 
+
+    init() {
+        // 出生点
+        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint0").GetAbsOrigin());
+        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint1").GetAbsOrigin());
+        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint2").GetAbsOrigin());
+        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint3").GetAbsOrigin());
+        this.HeroSpawnPoint.push(Entities.FindByName(null, "player_startpoint4").GetAbsOrigin());
+    }
     public onAwake() {
-        PlayerState.init();
+        this.init();
         this.addEvent();
     }
 
@@ -44,7 +53,7 @@ export class PlayerSystemComponent extends ET.Component {
             }
         }
         (this as any).IsAllLogin = true;
-        GameRules.Addon.ETRoot.OnAllPlayerClientLoginFinish();
+        GGameEntityRoot.GetInstance().OnAllPlayerClientLoginFinish();
     }
 
     private _WaitUploadGameRecord: { k: string, v: string }[] = [];
@@ -234,4 +243,15 @@ export class PlayerSystemComponent extends ET.Component {
     public GetHero(playerid: PlayerID) {
         return PlayerResource.GetPlayer(playerid).GetAssignedHero() as BaseNpc_Hero_Plus;
     }
+}
+
+
+declare global {
+    /**
+     * @ServerOnly
+     */
+    var GPlayerSystem: typeof PlayerSystemComponent;
+}
+if (_G.GPlayerSystem == undefined) {
+    _G.GPlayerSystem = PlayerSystemComponent;
 }

@@ -9,7 +9,7 @@ import { ET, serializeETProps } from "../../Entity/Entity";
 
 
 @reloadable
-export class PublicBagSystemComponent extends ET.Component {
+export class PublicBagSystemComponent extends ET.SingletonComponent {
     public onAwake() {
         this.addEvent();
     }
@@ -20,7 +20,7 @@ export class PublicBagSystemComponent extends ET.Component {
     getItemByIndex(key: string) {
         let entityid = this.AllItem[key];
         if (entityid == null) return;
-        return GameRules.Addon.ETRoot.GetDomainChild<ItemEntityRoot>(entityid);
+        return GGameEntityRoot.GetInstance().GetDomainChild<ItemEntityRoot>(entityid);
     }
     IsEmpty() {
         const count = PublicBagConfig.PUBLIC_ITEM_SLOT_MAX - PublicBagConfig.PUBLIC_ITEM_SLOT_MIN + 1
@@ -42,9 +42,9 @@ export class PublicBagSystemComponent extends ET.Component {
         for (let i = PublicBagConfig.PUBLIC_ITEM_SLOT_MIN; i < PublicBagConfig.PUBLIC_ITEM_SLOT_MAX + 1; i++) {
             if (this.AllItem[i + ""] == null) {
                 this.AllItem[i + ""] = item.Id;
-                GameRules.Addon.ETRoot.AddDomainChild(item);
-                GameRules.Addon.ETRoot.SyncClientEntity(item);
-                GameRules.Addon.ETRoot.SyncClientEntity(this);
+                GGameEntityRoot.GetInstance().AddDomainChild(item);
+                GGameEntityRoot.GetInstance().SyncClientEntity(item);
+                GGameEntityRoot.GetInstance().SyncClientEntity(this);
                 break;
             }
         }
@@ -53,4 +53,14 @@ export class PublicBagSystemComponent extends ET.Component {
     getOutItem(item: ItemEntityRoot) {
 
     }
+}
+
+declare global {
+    /**
+     * @ServerOnly
+     */
+    var GPublicBagSystem: typeof PublicBagSystemComponent;
+}
+if (_G.GPublicBagSystem == undefined) {
+    _G.GPublicBagSystem = PublicBagSystemComponent;
 }

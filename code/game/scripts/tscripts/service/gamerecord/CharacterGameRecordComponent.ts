@@ -10,7 +10,7 @@ export class CharacterGameRecordComponent extends ET.Component {
 
     public GetCurGameRecord(): TGameRecordItem {
         if (this.CurRecordID != null) {
-            return GameRules.Addon.ETRoot.TServerZone().GameRecordComp().GetChild<TGameRecordItem>(this.CurRecordID);
+            return GTServerZone.GetInstance().GameRecordComp().GetChild<TGameRecordItem>(this.CurRecordID);
         }
         return null;
     }

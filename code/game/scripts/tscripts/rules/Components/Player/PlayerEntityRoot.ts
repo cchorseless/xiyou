@@ -46,13 +46,13 @@ export class PlayerEntityRoot extends ET.EntityRoot {
         this.AddComponent(GetRegClass<typeof BuildingManagerComponent>("BuildingManagerComponent"));
         this.AddComponent(GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
         this.CreateFakerHero();
-        GameRules.Addon.ETRoot.GameStateSystem().OnBindHeroFinish(this.Playerid);
+        GGameStateSystem.GetInstance().OnBindHeroFinish(this.Playerid);
     }
 
     public CreateFakerHero() {
         if (this.FakerHero == null) {
             let player = this.Domain.ETRoot.AsPlayer();
-            let spawn = GameRules.Addon.ETRoot.MapSystem().getFakerHeroSpawnPoint(player.Playerid);
+            let spawn = GMapSystem.GetInstance().getFakerHeroSpawnPoint(player.Playerid);
             // todo
             (this as any).FakerHero = unit_base_baoxiang.CreateOne(spawn, DOTATeam_t.DOTA_TEAM_BADGUYS, true);
             FakerHeroEntityRoot.Active(this.FakerHero, player.Playerid, "unit_base_baoxiang");

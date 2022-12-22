@@ -36,7 +36,7 @@ export class BuildingComponent extends ChessDataComponent {
 
     GetPopulation(): number {
         let towerID = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BuildingEntityRoot>().ConfigID;
-        return GameRules.Addon.ETRoot.BuildingSystem().GetBuildingPopulation(towerID);
+        return GBuildingSystem.GetInstance().GetBuildingPopulation(towerID);
     }
     /**
      * 升星

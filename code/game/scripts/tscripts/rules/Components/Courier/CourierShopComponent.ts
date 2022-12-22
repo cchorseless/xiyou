@@ -1,8 +1,9 @@
 import { reloadable } from "../../../GameCache";
-import { ET, serializeETProps } from "../../Entity/Entity";
+import { serializeETProps } from "../../Entity/Entity";
+import { OnCourierComponent } from "../../Entity/OnCourierComponent";
 
 @reloadable
-export class CourierShopComponent extends ET.Component {
+export class CourierShopComponent extends OnCourierComponent {
 
     onAwake(...args: any[]): void {
 

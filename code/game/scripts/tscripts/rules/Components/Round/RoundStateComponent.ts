@@ -107,7 +107,7 @@ export class RoundStateComponent extends ET.Component {
 
     playDamageHeroAni(ProjectileInfo: IProjectileEffectInfo = null) {
         let domain = this.GetDomain<BaseNpc_Plus>();
-        let hero = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Playerid).Hero;
+        let hero = GPlayerSystem.GetInstance().GetPlayer(this.Domain.ETRoot.As<EnemyUnitEntityRoot>().Playerid).Hero;
         ProjectileInfo = ProjectileInfo || Assert_ProjectileEffect.p000;
         ProjectileManager.CreateTrackingProjectile({
             Target: hero,

@@ -18,6 +18,7 @@ export class BaseAbility_Plus extends BaseAbility {
     public GetCustomCastError() {
         return this.errorStr
     }
+
     public OnUpgrade() {
         if (this.GetLevel() == 1 && this.IsAutoCast) {
             // this.ToggleAutoCast()

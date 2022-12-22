@@ -24,7 +24,7 @@ export class item_building_base extends ActiveRootItem {
     //             return UnitFilterResult.UF_FAIL_CUSTOM;
     //         }
     //         let hCaster = this.GetCasterPlus();
-    //         let boardPos = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardLocalVector2(vLocation, false);
+    //         let boardPos = GChessControlSystem.GetInstance().GetBoardLocalVector2(vLocation, false);
     //         if (boardPos.playerid != hCaster.ETRoot.AsPlayer().Playerid || boardPos.x < 0 || boardPos.y < 0 || boardPos.y > ChessControlConfig.ChessValid_Max_Y) {
     //             this.errorStr = BuildingConfig.ErrorCode.dota_hud_error_cant_build_at_location;
     //             return UnitFilterResult.UF_FAIL_CUSTOM;
@@ -104,11 +104,11 @@ export class item_building_base extends ActiveRootItem {
     //     if (!GameFunc.IsValid(hTarget)) {
     //         let sTowerName = this.GetCreateUnitName();
     //         let location = this.GetCursorPosition();
-    //         let boardPos = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardLocalVector2(location, false);
+    //         let boardPos = GChessControlSystem.GetInstance().GetBoardLocalVector2(location, false);
     //         if (boardPos.playerid != hCaster.ETRoot.AsPlayer().Playerid || boardPos.y > ChessControlConfig.ChessValid_Max_Y) {
     //             return;
     //         }
-    //         let trueLocal = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardGirdCenterVector3(boardPos);
+    //         let trueLocal = GChessControlSystem.GetInstance().GetBoardGirdCenterVector3(boardPos);
     //         let result = buildM.placeBuilding(sTowerName, trueLocal);
     //         if (result) {
     //             this.SpendCharge();

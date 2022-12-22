@@ -11,7 +11,7 @@ export class BaseEntityRoot extends ET.EntityRoot {
     @serializeETProps()
     readonly EntityId: EntityIndex;
     public GetPlayer() {
-        return GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.Playerid);
+        return GPlayerSystem.GetInstance().GetPlayer(this.Playerid);
     }
 
     static SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {

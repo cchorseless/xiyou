@@ -29,20 +29,22 @@ export class modifier_courier extends BaseModifier_Plus {
         return this.sCourierName
     }
     sCourierName: string;
-    sModelName: string;
+    model: string;
     fModelScale: number;
     iSkin: number;
+    ambientModifiers: string;
+    addAbilityName: string;
     OnCreated(params: ModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
-            let hParent = this.GetParentPlus()
-            let sCourierName = params.courier_name || "courier_1"
+            let sCourierName = params.courier_name
             this.sCourierName = sCourierName
-            this.sModelName = KVHelper.CourierUnits.GetCourierModel(sCourierName)
             this.fModelScale = KVHelper.CourierUnits.GetCourierModelScale(sCourierName)
+            this.model = KVHelper.CourierUnits.GetCourierModel(sCourierName)
             this.iSkin = KVHelper.CourierUnits.GetCourierSkin(sCourierName)
-            this.fVisualZDelta = KVHelper.CourierUnits.GetCourierVisualZDelta(sCourierName)
-            this.SetStackCount(this.fVisualZDelta)
+            this.ambientModifiers = KVHelper.CourierUnits.GetCourierAmbientEffect(sCourierName)
+            this.addAbilityName = KVHelper.CourierUnits.GetCourierAbility(sCourierName)
+            this.SetStackCount(KVHelper.CourierUnits.GetCourierVisualZDelta(sCourierName))
             this.StartIntervalThink(0)
         }
     }
@@ -50,32 +52,33 @@ export class modifier_courier extends BaseModifier_Plus {
         super.OnDestroy()
         if (IsServer()) {
             let hParent = this.GetParentPlus()
-            hParent.SetSkin(0)
+            hParent.SetSkin(0);
+            if (this.ambientModifiers && this.ambientModifiers.length > 0) {
+                hParent.removeBuff(this.ambientModifiers);
+            }
+            if (this.addAbilityName && this.addAbilityName.length > 0) {
+                hParent.removeAbilityPlus(this.addAbilityName)
+            }
+
         }
     }
     OnIntervalThink() {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
-
             hParent.SetSkin(this.iSkin)
-
+            if (this.ambientModifiers && this.ambientModifiers.length > 0) {
+                hParent.addBuff(this.ambientModifiers, hParent)
+            }
+            if (this.addAbilityName && this.addAbilityName.length > 0) {
+                hParent.addAbilityPlus(this.ambientModifiers)
+            }
             this.StartIntervalThink(-1)
         }
     }
-    //     DeclareFunctions() {
-    //         if (IsServer()) {
-    //             return {
-    // 			@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_SCALE,
-    // 			@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.VISUAL_Z_DELTA,
-    // 		}
-    //     }
-    // return {
-    // 		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.VISUAL_Z_DELTA,
-    // 	}
-    // }
+
     @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
     CC_GetModelChange(params: ModifierTable) {
-        return this.sModelName
+        return this.model;
     }
     @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_SCALE)
     CC_GetModelScale(params: ModifierTable) {

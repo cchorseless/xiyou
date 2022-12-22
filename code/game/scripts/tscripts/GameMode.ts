@@ -98,7 +98,7 @@ export class GameMode implements ET.IEntityRoot {
     public bGameEnd = false;
     public Victory() {
         if (this.bGameEnd == true) return;
-        this.ETRoot.PlayerSystem().GetAllPlayeridByTeam().forEach((iPlayerID) => {
+        GPlayerSystem.GetInstance().GetAllPlayeridByTeam().forEach((iPlayerID) => {
             let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
             if (_hHero && _hHero.IsAlive()) {
                 // this.UpdatePlayerEndData(hHero)
@@ -111,7 +111,7 @@ export class GameMode implements ET.IEntityRoot {
     }
     public Defeat() {
         if (this.bGameEnd == true) return;
-        this.ETRoot.PlayerSystem().GetAllPlayeridByTeam().forEach((iPlayerID) => {
+        GPlayerSystem.GetInstance().GetAllPlayeridByTeam().forEach((iPlayerID) => {
             let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
             if (_hHero && _hHero.IsAlive()) {
                 // this.UpdatePlayerEndData(hHero)

@@ -1,182 +1,57 @@
--- Link被动buff
-for sAbilityName, data in pairs(KeyValues.CourierAbilityKv) do
-	if type(data) == "table" and type(data.CourierPassvieModifier) == "string" and type(data.ScriptFile) == "string" then
-		LinkLuaModifier(data.CourierPassvieModifier, data.ScriptFile, LUA_MODIFIER_MOTION_NONE)
+LinkLuaModifier("modifier_courier_gold_sec_1", "abilities/builder/courier_gold_sec_1.lua", LUA_MODIFIER_MOTION_NONE)
+
+if courier_gold_sec_1 == nil then
+	courier_gold_sec_1 = class({})
+end
+function courier_gold_sec_1:OnUpgrade()
+	if self:GetLevel() > 0 then
+		local hCaster = self:GetCaster()
+		self:StartCooldown(self:GetSpecialValueFor("interval"))
+		hCaster:AddNewModifier(hCaster, self, "modifier_courier_gold_sec_1", nil)
 	end
 end
-
-if PlayerCourier == nil then
-	--- @class PlayerCourier
-	PlayerCourier = {}
+---------------------------------------modifier_courier_gold_sec_1---------------------------------------
+---@class modifier_courier_gold_sec_1:eom_modifier
+modifier_courier_gold_sec_1 = eom_modifier({})
+function modifier_courier_gold_sec_1:IsHidden()
+	return true
 end
-function PlayerCourier:init(bReload)
-	if not bReload then
-		self.tPlayerCouriers = {}
-	end
-
-	--- 信使技能->信使被动buff名
-	self.tCourierAbilityPassiveBuff = {}
-	for sAbilityName, data in pairs(KeyValues.CourierAbilityKv) do
-		if type(data) == "table" and type(data.CourierPassvieModifier) == "string" and type(data.ScriptFile) == "string" then
-			self.tCourierAbilityPassiveBuff[sAbilityName] = data.CourierPassvieModifier
-		end
-	end
-
-	GameEvent("custom_npc_first_spawned", Dynamic_Wrap(self, "OnNPCFirstSpawned"), self)
+function modifier_courier_gold_sec_1:IsPurgable()
+	return false
 end
-function PlayerCourier:OnNPCFirstSpawned(events)
-	local hSpawnedUnit = EntIndexToHScript(events.entindex)
-	if not IsValid(hSpawnedUnit) then
+function modifier_courier_gold_sec_1:IsPurgeException()
+	return false
+end
+function modifier_courier_gold_sec_1:OnCreated(params)
+	self.interval = self:GetAbilitySpecialValueFor("interval")
+	self.gold_sec_min = self:GetAbilitySpecialValueFor("gold_sec_min")
+	self.gold_sec_max = self:GetAbilitySpecialValueFor("gold_sec_max")
+	if IsServer() then
+		self:StartIntervalThink(self.interval)
+	end
+end
+function modifier_courier_gold_sec_1:OnRefresh(params)
+	self.interval = self:GetAbilitySpecialValueFor("interval")
+	self.gold_sec_min = self:GetAbilitySpecialValueFor("gold_sec_min")
+	self.gold_sec_max = self:GetAbilitySpecialValueFor("gold_sec_max")
+	if IsServer() then
+		self:StartIntervalThink(self.interval)
+	end
+end
+function modifier_courier_gold_sec_1:OnIntervalThink()
+	local hParent = self:GetParent()
+	local hAbility = self:GetAbility()
+	if not IsValid(hAbility) then
+		self:Destroy()
 		return
 	end
-	if hSpawnedUnit:GetUnitName() == "npc_dota_thinker" then
+	if Rounds:IsEndlessRound() then
+		self:StartIntervalThink(-1)
 		return
 	end
-
-	if hSpawnedUnit:IsRealHero() and hSpawnedUnit:GetUnitLabel() == "builder" then
-		local iPlayerID = hSpawnedUnit:GetPlayerOwnerID()
-		-- 技能等级设置
-		local sCourierInUse = self:GetPlayerCourierInUse(iPlayerID)
-		local sAbilityInUse = self:GetCourierAbility(sCourierInUse)
-		if sAbilityInUse then
-			local hAbilitySlot = hSpawnedUnit:FindAbilityByName("builder_slot_2")
-			if IsValid(hAbilitySlot) then
-				hSpawnedUnit:RemoveAbilityByHandle(hAbilitySlot)
-			end
-			hSpawnedUnit:AddAbility(sAbilityInUse):UpgradeAbility(true)
-		end
-
-		hSpawnedUnit:GameTimer(1, function()
-			self:RefreshCourier(iPlayerID)
-		end)
-	end
+	local iPlayerID = hParent:GetPlayerOwnerID()
+	local random = RandomInt(self.gold_sec_min, self.gold_sec_max)
+	PlayerData:ModifyGold(iPlayerID, random, true)
+	hAbility:StartCooldown(self.interval)
+	SendOverheadEventMessage(hParent:GetPlayerOwner(), OVERHEAD_ALERT_GOLD, hParent, random, nil)
 end
-function PlayerCourier:SetCouriers(iPlayerID, tCouriers)
-	self.tPlayerCouriers[iPlayerID] = deepcopy(tCouriers)
-end
-function PlayerCourier:RefreshCourier(iPlayerID, bRefreshPassive)
-	if bRefreshPassive == nil then
-		bRefreshPassive = true
-	end
-	local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
-	if not IsValid(hHero) or not hHero:IsAlive() then
-		return
-	end
-
-	local sCurrentCourierName = self:GetCourierName(iPlayerID)
-	local sCourierName = self:GetPlayerCourierInUse(iPlayerID)
-	local sCourierFxName = self:GetPlayerCourierFxInUse(iPlayerID)
-	local sCourierFxModifierName
-	local sAmbientFx = self:GetCourierAmbientEffect(sCourierName)
-	local sAmbientFxModifierName
-
-	for sFxName, tData in pairs(KeyValues.CourierFxKv) do
-		if type(tData) == "table" then
-			local sModifierName = tData.Modifier
-			if type(sModifierName) == "string" then
-				hHero:RemoveModifierByName(sModifierName)
-				if sFxName == sAmbientFx then
-					sAmbientFxModifierName = sModifierName
-				end
-				if sFxName == sCourierFxName then
-					sCourierFxModifierName = sModifierName
-				end
-			end
-		end
-	end
-
-	-- 信使被动效果
-	if bRefreshPassive and type(self.tPlayerCouriers[iPlayerID]) == "table" then
-		for k, sCourierID in pairs(self.tPlayerCouriers[iPlayerID]) do
-			local sCourier = self:GetCourierNameByID(sCourierID)
-			if sCourier then
-				local sAbility = self:GetCourierAbility(sCourier)
-				if sAbility then
-					local sBuff = self.tCourierAbilityPassiveBuff[sAbility]
-					if sBuff then
-						if sCourier == sCourierName then
-							hHero:RemoveModifierByName(sBuff)
-						else
-							-- 不上场才生效
-							hHero:RemoveModifierByName(sBuff)
-							hHero:AddNewModifier(hHero, nil, sBuff, nil)
-						end
-					end
-				end
-			end
-		end
-	end
-
-	hHero:RemoveModifierByName("modifier_courier")
-	hHero:AddNewModifier(hHero, nil, "modifier_courier", { courier_name = sCourierName })
-
-	if sAmbientFxModifierName then
-		hHero:GameTimer("AmbientFx", 0, function()
-			hHero:AddNewModifier(hHero, nil, sAmbientFxModifierName, nil)
-		end)
-	end
-
-	if sCourierFxModifierName then
-		hHero:GameTimer("Fx", 0, function()
-			hHero:AddNewModifier(hHero, nil, sCourierFxModifierName, nil)
-		end)
-	end
-end
---- 获取当前生效的信使
-function PlayerCourier:GetCourierName(iPlayerID)
-	local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
-	local hModifier = hHero:FindModifierByName("modifier_courier")
-	if IsValid(hModifier) and type(hModifier.GetCourierName) == "function" then
-		return hModifier:GetCourierName() or "courier_1"
-	end
-	return "courier_1"
-end
---- 获取现在服务器上存的数据玩家装备的线
-function PlayerCourier:GetPlayerCourierInUse(iPlayerID)
-	local sCourierNameInUse = "courier_1"
-	if type(Service) == "table" and type(Service.tNettableData) == "table" and type(Service.tNettableData.playerInUse) == "table" and type(Service.tNettableData.playerInUse[iPlayerID]) == "table" and Service.tNettableData.playerInUse[iPlayerID].courier ~= nil then
-		for sCourierName, tData in pairs(KeyValues.CourierKv) do
-			if type(tData) == "table" and tostring(tData.CourierId) == tostring(Service.tNettableData.playerInUse[iPlayerID].courier) then
-				sCourierNameInUse = sCourierName
-			end
-		end
-	end
-	return sCourierNameInUse
-end
---- 获取玩家正在使用的信使特效
-function PlayerCourier:GetPlayerCourierFxInUse(iPlayerID)
-	if type(Service) == "table" and type(Service.tNettableData) == "table" and type(Service.tNettableData.playerInUse) == "table" and type(Service.tNettableData.playerInUse[iPlayerID]) == "table" then
-		return Service.tNettableData.playerInUse[iPlayerID].courier_fx or ""
-	end
-	return ""
-end
---=======================================Utils=======================================
-function PlayerCourier:GetCourierNameByID(sId)
-	return KeyValues.CourierID2Name[tostring(sId)]
-end
-function PlayerCourier:GetCourierAbility(sCourierName)
-	if KeyValues.CourierKv[sCourierName] == nil then return end
-	return KeyValues.CourierKv[sCourierName].Ability1
-end
-function PlayerCourier:GetCourierModel(sCourierName)
-	if KeyValues.CourierKv[sCourierName] == nil then return "models/development/invisiblebox.vmdl" end
-	return KeyValues.CourierKv[sCourierName].Model or "models/development/invisiblebox.vmdl"
-end
-function PlayerCourier:GetCourierModelScale(sCourierName)
-	if KeyValues.CourierKv[sCourierName] == nil then return 1 end
-	return KeyValues.CourierKv[sCourierName].ModelScale or 1
-end
-function PlayerCourier:GetCourierSkin(sCourierName)
-	if KeyValues.CourierKv[sCourierName] == nil then return 0 end
-	return KeyValues.CourierKv[sCourierName].Skin or 0
-end
-function PlayerCourier:GetCourierVisualZDelta(sCourierName)
-	if KeyValues.CourierKv[sCourierName] == nil then return 0 end
-	return KeyValues.CourierKv[sCourierName].VisualZDelta or 0
-end
-function PlayerCourier:GetCourierAmbientEffect(sCourierName)
-	if KeyValues.CourierKv[sCourierName] == nil then return end
-	return KeyValues.CourierKv[sCourierName].AmbientEffect
-end
-
-return PlayerCourier

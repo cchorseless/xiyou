@@ -3,7 +3,7 @@
  * 弃用，采用缓存类的形式
  */
 
-import { GetRegClass, globalData } from "./GameCache";
+import { globalData } from "./GameCache";
 import { GameEnum } from "./shared/GameEnum";
 import { GameFunc } from "./GameFunc";
 import { EntityHelper } from "./helper/EntityHelper";
@@ -15,16 +15,13 @@ import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
 import { ability_propertytool } from "./npc/propertystat/ability_propertytool";
 import { Enum_MODIFIER_EVENT, EventDataType, IBuffEventData, modifier_event } from "./npc/propertystat/modifier_event";
 import { modifier_property } from "./npc/propertystat/modifier_property";
-import { BuildingEntityRoot } from "./rules/Components/Building/BuildingEntityRoot";
 import { CourierEntityRoot } from "./rules/Components/Courier/CourierEntityRoot";
-import { EnemyUnitEntityRoot } from "./rules/Components/Enemy/EnemyUnitEntityRoot";
 import { ItemEntityRoot } from "./rules/Components/Item/ItemEntityRoot";
 import { BattleUnitEntityRoot } from "./rules/Components/BattleUnit/BattleUnitEntityRoot";
-import { RoundPrizeUnitEntityRoot } from "./rules/Components/Round/RoundPrizeUnitEntityRoot";
 import { ET } from "./rules/Entity/Entity";
 import { BuildingSystemComponent } from "./rules/System/Building/BuildingSystemComponent";
 import { ChessControlSystemComponent } from "./rules/System/ChessControl/ChessControlSystemComponent";
-import { CombinationSystemComponent } from "./rules/System/Combination/CombinationSystem";
+import { CombinationSystemComponent } from "./rules/System/Combination/CombinationSystemComponent";
 import { DrawSystemComponent } from "./rules/System/Draw/DrawSystemComponent";
 import { EnemySystemComponent } from "./rules/System/Enemy/EnemySystemComponent";
 import { GameStateSystemComponent } from "./rules/System/GameState/GameStateSystemComponent";
@@ -34,7 +31,6 @@ import { PublicBagSystemComponent } from "./rules/System/Public/PublicBagSystemC
 import { RoundSystemComponent } from "./rules/System/Round/RoundSystemComponent";
 import { WearableSystemComponent } from "./rules/System/Wearable/WearableSystemComponent";
 import { GameRequest } from "./service/GameRequest";
-import { TServerZone } from "./service/serverzone/TServerZone";
 
 /**
  * 避免循环加载导入模块，尽量避免用.文件路径更改需要批量替换
@@ -53,9 +49,13 @@ import { TServerZone } from "./service/serverzone/TServerZone";
 
 export class GameEntityRoot extends ET.EntityRoot {
 
+    static GetInstance() {
+        return GameRules.Addon.ETRoot;
+    }
+
     private _WaitSyncEntity: { obj: ET.Entity, ignoreChild: boolean }[] = [];
     public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
-        if (this.PlayerSystem().IsAllLogin) {
+        if (GPlayerSystem.GetInstance().IsAllLogin) {
             NetTablesHelper.SetShareETEntity(obj, ignoreChild);
         }
         else {
@@ -71,64 +71,24 @@ export class GameEntityRoot extends ET.EntityRoot {
 
     init() {
         this.addEvent();
-        this.AddComponent(GetRegClass<typeof GameStateSystemComponent>("GameStateSystemComponent"));
-        this.AddComponent(GetRegClass<typeof PlayerSystemComponent>("PlayerSystemComponent"));
-        this.AddComponent(GetRegClass<typeof MapSystemComponent>("MapSystemComponent"));
-        this.AddComponent(GetRegClass<typeof DrawSystemComponent>("DrawSystemComponent"));
-        this.AddComponent(GetRegClass<typeof ChessControlSystemComponent>("ChessControlSystemComponent"));
-        this.AddComponent(GetRegClass<typeof RoundSystemComponent>("RoundSystemComponent"));
-        this.AddComponent(GetRegClass<typeof EnemySystemComponent>("EnemySystemComponent"));
-        this.AddComponent(GetRegClass<typeof BuildingSystemComponent>("BuildingSystemComponent"));
-        this.AddComponent(GetRegClass<typeof CombinationSystemComponent>("CombinationSystemComponent"));
-        this.AddComponent(GetRegClass<typeof WearableSystemComponent>("WearableSystemComponent"));
-        this.AddComponent(GetRegClass<typeof PublicBagSystemComponent>("PublicBagSystemComponent"));
+        this.AddComponent(GameStateSystemComponent);
+        this.AddComponent(PlayerSystemComponent);
+        this.AddComponent(MapSystemComponent);
+        this.AddComponent(DrawSystemComponent);
+        this.AddComponent(ChessControlSystemComponent);
+        this.AddComponent(RoundSystemComponent);
+        this.AddComponent(EnemySystemComponent);
+        this.AddComponent(BuildingSystemComponent);
+        this.AddComponent(CombinationSystemComponent);
+        this.AddComponent(WearableSystemComponent);
+        this.AddComponent(PublicBagSystemComponent);
     }
 
     public StartGame() {
-        this.RoundSystem().StartGame();
-        this.DrawSystem().StartGame();
+        GRoundSystem.GetInstance().StartGame();
+        GDrawSystem.GetInstance().StartGame();
     }
 
-    TServerZone() {
-        return this.GetComponentByName<TServerZone>("TServerZone");
-    }
-    GameStateSystem() {
-        return this.GetComponentByName<GameStateSystemComponent>("GameStateSystemComponent");
-    }
-    PlayerSystem() {
-        return this.GetComponentByName<PlayerSystemComponent>("PlayerSystemComponent");
-    }
-    MapSystem() {
-        return this.GetComponentByName<MapSystemComponent>("MapSystemComponent");
-    }
-    RoundSystem() {
-        return this.GetComponentByName<RoundSystemComponent>("RoundSystemComponent");
-    }
-
-    DrawSystem() {
-        return this.GetComponentByName<DrawSystemComponent>("DrawSystemComponent");
-    }
-
-    CombinationSystem() {
-        return this.GetComponentByName<CombinationSystemComponent>("CombinationSystemComponent");
-    }
-    BuildingSystem() {
-        return this.GetComponentByName<BuildingSystemComponent>("BuildingSystemComponent");
-    }
-    ChessControlSystem() {
-        return this.GetComponentByName<ChessControlSystemComponent>("ChessControlSystemComponent");
-    }
-    EnemySystem() {
-        return this.GetComponentByName<EnemySystemComponent>("EnemySystemComponent");
-    }
-
-    WearableSystem() {
-        return this.GetComponentByName<WearableSystemComponent>("WearableSystemComponent");
-    }
-
-    PublicBagSystem() {
-        return this.GetComponentByName<PublicBagSystemComponent>("PublicBagSystemComponent");
-    }
 
 
     private addEvent() {
@@ -187,7 +147,7 @@ export class GameEntityRoot extends ET.EntityRoot {
         // 道具位置改变
         EventHelper.addProtocolEvent(this, GameEnum.CustomProtocol.req_ITEM_SLOT_CHANGE, (event: JS_TO_LUA_DATA) => {
             let playerid = event.PlayerID;
-            let hero = this.PlayerSystem().GetPlayer(playerid).Hero!;
+            let hero = GPlayerSystem.GetInstance().GetPlayer(playerid).Hero!;
             if (hero != null) {
                 // 检查位置是否改变
                 let changeData = hero.ETRoot.As<CourierEntityRoot>().CourierDataComp().CheckItemSlotChange();
@@ -207,7 +167,7 @@ export class GameEntityRoot extends ET.EntityRoot {
             let itemslot = event.data.slot;
             let npcentindex = event.data.npc;
             let itementityid = event.data.itementityid;
-            let hero = this.PlayerSystem().GetPlayer(playerid).Hero!;
+            let hero = GPlayerSystem.GetInstance().GetPlayer(playerid).Hero!;
             if (hero == null || itemslot == null || npcentindex == null) {
                 event.state = false;
                 EventHelper.ErrorMessage("not valid args", playerid);
@@ -236,7 +196,7 @@ export class GameEntityRoot extends ET.EntityRoot {
             let itemslot = event.data.slot;
             let itementityid = event.data.itementityid;
             let pos = event.data.pos;
-            let hero = this.PlayerSystem().GetPlayer(playerid).Hero!;
+            let hero = GPlayerSystem.GetInstance().GetPlayer(playerid).Hero!;
             if (hero == null || itemslot == null || pos == null) {
                 event.state = false;
                 EventHelper.ErrorMessage("not valid args", playerid);
@@ -264,15 +224,15 @@ export class GameEntityRoot extends ET.EntityRoot {
         LogHelper.print("OnGameRulesStateChange", nNewState);
         switch (nNewState) {
             case DOTA_GameState.DOTA_GAMERULES_STATE_INIT:
-                this.PlayerSystem().UploadGameRecord(GameEnum.EGameRecordKey.GameTime.GAMERULES_STATE_INIT, GetSystemTimeMS() / 1000);
+                GPlayerSystem.GetInstance().UploadGameRecord(GameEnum.EGameRecordKey.GameTime.GAMERULES_STATE_INIT, GetSystemTimeMS() / 1000);
                 break;
             case DOTA_GameState.DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD:
-                this.PlayerSystem().UploadGameRecord(GameEnum.EGameRecordKey.GameTime.GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD, GetSystemTimeMS() / 1000);
+                GPlayerSystem.GetInstance().UploadGameRecord(GameEnum.EGameRecordKey.GameTime.GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD, GetSystemTimeMS() / 1000);
                 break;
             // -- 游戏初始化
             case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
-                this.PlayerSystem().UploadGameRecord(GameEnum.EGameRecordKey.GameTime.GAMERULES_STATE_CUSTOM_GAME_SETUP, GetSystemTimeMS() / 1000);
-                await this.PlayerSystem().StartGame();
+                GPlayerSystem.GetInstance().UploadGameRecord(GameEnum.EGameRecordKey.GameTime.GAMERULES_STATE_CUSTOM_GAME_SETUP, GetSystemTimeMS() / 1000);
+                await GPlayerSystem.GetInstance().StartGame();
                 break;
             // 	-- 选择英雄,可以获取玩家数量
             case DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION:
@@ -288,7 +248,7 @@ export class GameEntityRoot extends ET.EntityRoot {
                 break;
             // 	-- 准备阶段(进游戏，刷怪前)
             case DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME:
-                this.MapSystem().StartGame();
+                GMapSystem.GetInstance().StartGame();
                 break;
             // -- 游戏准备开始
             case DOTA_GameState.DOTA_GAMERULES_STATE_GAME_IN_PROGRESS:
@@ -402,4 +362,13 @@ export class GameEntityRoot extends ET.EntityRoot {
         }
     }
 
+}
+declare global {
+    /**
+     * @ServerOnly
+     */
+    var GGameEntityRoot: typeof GameEntityRoot;
+}
+if (_G.GGameEntityRoot == undefined) {
+    _G.GGameEntityRoot = GameEntityRoot;
 }

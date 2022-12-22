@@ -172,7 +172,7 @@ export class GameDebugger extends SingletonClass {
     /**聊天添加GM指令 */
     OnPlayerChat(events: PlayerChatEvent) {
         let iPlayerID = events.playerid;
-        let player = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(iPlayerID);
+        let player = GPlayerSystem.GetInstance().GetPlayer(iPlayerID);
         let hero = player.Hero!;
         let heroroot = hero.ETRoot.As<CourierEntityRoot>()
         let sText = events.text.toLowerCase();

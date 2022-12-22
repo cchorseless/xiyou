@@ -15,17 +15,16 @@ import { modifier_spawn_fall } from "../../../npc/modifier/spawn/modifier_spawn_
 import { modifier_spawn_torrent } from "../../../npc/modifier/spawn/modifier_spawn_torrent";
 import { ET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
-import { EnemyState } from "../../System/Enemy/EnemyState";
-import { RoundConfig } from "../../../shared/RoundConfig";
 import { CourierEntityRoot } from "../Courier/CourierEntityRoot";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
+import { OnPlayerComponent } from "../../Entity/OnPlayerComponent";
 
 @reloadable
-export class EnemyManagerComponent extends ET.Component {
+export class EnemyManagerComponent extends OnPlayerComponent {
     tPlayerKills: number = 0;
     tPlayerMissing: number = 0;
     tAllEnemy: string[] = [];
@@ -39,7 +38,7 @@ export class EnemyManagerComponent extends ET.Component {
     }
     GetEnemySpawnPos() {
         let playerid = this.Domain.ETRoot.AsPlayer().Playerid;
-        return EnemyState.SpawnEnemyPoint[playerid];
+        return GEnemySystem.GetInstance().SpawnEnemyPoint[playerid];
     }
     addEvent() {
 

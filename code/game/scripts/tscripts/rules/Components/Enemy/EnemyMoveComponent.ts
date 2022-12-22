@@ -5,7 +5,6 @@ import { TimerHelper } from "../../../helper/TimerHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { ET } from "../../Entity/Entity";
 import { EnemyConfig } from "../../../shared/EnemyConfig";
-import { EnemyState } from "../../System/Enemy/EnemyState";
 import { EnemyUnitComponent } from "./EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./EnemyUnitEntityRoot";
 @reloadable
@@ -70,7 +69,7 @@ export class EnemyMoveComponent extends ET.Component {
             return;
         }
         let hUnit = this.GetDomain<BaseNpc_Plus>();
-        let corner = EnemyState.getEnemyWayPos(this.targetCornerName);
+        let corner = GEnemySystem.GetInstance().getEnemyWayPos(this.targetCornerName);
         if (corner) {
             hUnit.MoveToPosition(corner);
             if (this.moveTimer != null) {

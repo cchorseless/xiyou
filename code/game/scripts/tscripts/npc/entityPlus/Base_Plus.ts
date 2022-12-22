@@ -699,6 +699,13 @@ export class BaseNpc implements ET.IEntityRoot {
         ability.SetLevel(level);
         return ability as BaseAbility_Plus;
     }
+
+    removeAbilityPlus?(abilityname: string) {
+        let ability = this.FindAbilityByName(abilityname) as BaseAbility_Plus;
+        ability.SafeDestroy();
+        this.RemoveAbility(abilityname);
+    }
+
 }
 
 export interface BaseNpc_Hero extends CDOTA_BaseNPC_Hero { }

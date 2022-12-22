@@ -2,15 +2,15 @@ import { reloadable } from "../../../GameCache";
 import { BaseNpc_Hero_Plus } from "../../../npc/entityPlus/BaseNpc_Hero_Plus";
 import { PublicBagConfig } from "../../../shared/PublicBagConfig";
 import { ET, serializeETProps } from "../../Entity/Entity";
+import { OnCourierComponent } from "../../Entity/OnCourierComponent";
 import { ItemEntityRoot } from "../Item/ItemEntityRoot";
-import { CourierEntityRoot } from "./CourierEntityRoot";
 
 @reloadable
-export class CourierBagComponent extends ET.Component {
+export class CourierBagComponent extends OnCourierComponent {
 
     public onAwake() {
         this.addEvent();
-        CourierEntityRoot.SyncClientEntity(this)
+        this.GetRoot().GetPlayer().SyncClientEntity(this)
     }
     public addEvent() {
     }
@@ -59,7 +59,7 @@ export class CourierBagComponent extends ET.Component {
         for (let i = beginindex; i < endindex + 1; i++) {
             if (items[i + ""] == null) {
                 items[i + ""] = item.Id;
-                let root = this.GetDomain<BaseNpc_Hero_Plus>().ETRoot.As<CourierEntityRoot>();
+                let root = this.GetRoot()
                 root.AddDomainChild(item);
                 root.SyncClientEntity(item);
                 root.SyncClientEntity(this);

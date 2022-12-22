@@ -33,7 +33,7 @@ export class TCharacter extends ET.Component {
 
 
     onSerializeToEntity() {
-        let PlayerSystem = GameRules.Addon.ETRoot.PlayerSystem();
+        let PlayerSystem = GPlayerSystem.GetInstance();
         let allplayerid = PlayerSystem.GetAllPlayerid();
         for (let playerid of allplayerid) {
             if (this.Name == PlayerSystem.GetSteamID(playerid)) {

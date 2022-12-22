@@ -17,7 +17,7 @@ export module MiniMapHelper {
      */
     export function showPlayerOnMiniForPlayer(showplayerid: PlayerID, forplayerid: PlayerID) {
         if (!IsServer()) { return }
-        let hero = GameRules.Addon.ETRoot.PlayerSystem().GetHero(showplayerid);
+        let hero = GPlayerSystem.GetInstance().GetHero(showplayerid);
         let v = hero.GetAbsOrigin();
         let offx = math.abs(v.x + 7680) / 7680 / 2;
         let offy = math.abs(v.y - 7680) / 7680 / 2;

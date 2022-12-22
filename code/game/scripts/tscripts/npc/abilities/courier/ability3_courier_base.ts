@@ -1,9 +1,9 @@
 
-import { LogHelper } from "../../../../helper/LogHelper";
-import { TimerHelper } from "../../../../helper/TimerHelper";
-import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
-import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_test } from "../../../modifier/modifier_test";
+import { LogHelper } from "../../../helper/LogHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
+import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
+import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+import { modifier_test } from "../../modifier/modifier_test";
 
 // 种树
 @registerAbility()

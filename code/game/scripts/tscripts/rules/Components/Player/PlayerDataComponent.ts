@@ -10,9 +10,10 @@ import { PlayerConfig } from "../../../shared/PlayerConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { EEnum } from "../../../shared/Gen/Types";
+import { OnPlayerComponent } from "../../Entity/OnPlayerComponent";
 
 @reloadable
-export class PlayerDataComponent extends ET.Component {
+export class PlayerDataComponent extends OnPlayerComponent {
     @serializeETProps()
     startTime: string;
     @serializeETProps()
@@ -198,3 +199,5 @@ export class PlayerDataComponent extends ET.Component {
         }
     }
 }
+
+

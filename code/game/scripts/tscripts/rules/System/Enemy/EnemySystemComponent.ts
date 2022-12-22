@@ -1,20 +1,34 @@
 import { reloadable } from "../../../GameCache";
 import { KVHelper } from "../../../helper/KVHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { EnemyManagerComponent } from "../../Components/Enemy/EnemyManagerComponent";
 import { ET } from "../../Entity/Entity";
-import { RoundState } from "../Round/RoundState";
-import { EnemyState } from "./EnemyState";
 
 @reloadable
-export class EnemySystemComponent extends ET.Component {
+export class EnemySystemComponent extends ET.SingletonComponent {
+
+    public readonly SpawnEnemyPoint: Vector[] = [];
+    private readonly EnemyWayPoint: { [k: string]: Vector } = {};
+
+    public init() {
+        // this.SpawnEnemyPoint.push(this.getEnemyWayPos("player_0_start"));
+        // this.SpawnEnemyPoint.push(this.getEnemyWayPos("player_1_start"));
+        // this.SpawnEnemyPoint.push(this.getEnemyWayPos("player_2_start"));
+        // this.SpawnEnemyPoint.push(this.getEnemyWayPos("player_3_start"));
+    }
+
+    public getEnemyWayPos(pointName: string) {
+        if (this.EnemyWayPoint[pointName] == null) {
+            this.EnemyWayPoint[pointName] = Entities.FindByName(null, pointName).GetAbsOrigin()
+        }
+        return this.EnemyWayPoint[pointName];
+    }
+
     /**初始化 */
     public onAwake() {
-        EnemyState.init();
     }
     public GetEnemyCounts() {
         let index = 0;
-        GameRules.Addon.ETRoot.PlayerSystem()
+        GPlayerSystem.GetInstance()
             .GetAllPlayer()
             .forEach((player) => {
                 index += player.EnemyManagerComp().tAllEnemy.length;
@@ -23,7 +37,7 @@ export class EnemySystemComponent extends ET.Component {
     }
     public GetMaxEnemy() {
         let index = 0;
-        let allplayer = GameRules.Addon.ETRoot.PlayerSystem().GetAllPlayer();
+        let allplayer = GPlayerSystem.GetInstance().GetAllPlayer();
         let playerCount = allplayer.length;
         allplayer.forEach((player) => {
             index += player.EnemyManagerComp().iMaxEnemyBonus + player.EnemyManagerComp().iMaxEnemyBonusEach * playerCount;
@@ -58,7 +72,7 @@ export class EnemySystemComponent extends ET.Component {
                     1,
                     () => {
                         if (GameRules.GetGameTime() > fWarningDefeatTime) {
-                            if (RoundState.IsEndlessRound()) {
+                            if (GRoundSystem.GetInstance().IsEndlessRound()) {
                                 GameRules.Addon.Victory();
                             } else {
                                 GameRules.Addon.Defeat();
@@ -77,4 +91,13 @@ export class EnemySystemComponent extends ET.Component {
             }
         }
     }
+}
+declare global {
+    /**
+     * @ServerOnly
+     */
+    var GEnemySystem: typeof EnemySystemComponent;
+}
+if (_G.GEnemySystem == undefined) {
+    _G.GEnemySystem = EnemySystemComponent;
 }

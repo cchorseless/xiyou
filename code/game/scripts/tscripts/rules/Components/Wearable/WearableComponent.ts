@@ -17,7 +17,7 @@ export class WearableComponent extends ET.Component {
     readonly replaceParticles: { [k: string]: string[] } = {};
 
     GetHeroConfig() {
-        let wearSys = GameRules.Addon.ETRoot.WearableSystem();
+        let wearSys = GWearableSystem.GetInstance();
         return wearSys.Allheroes[this.sHeroName];
     }
 

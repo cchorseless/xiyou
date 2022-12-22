@@ -29,7 +29,7 @@ export class ChessMoveComponent extends ET.Component {
 
     updateBoardPos() {
         let location = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
-        this.ChessVector = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardLocalVector2(location);
+        this.ChessVector = GChessControlSystem.GetInstance().GetBoardLocalVector2(location);
     }
 
     updateForward(position: Vector) {
@@ -56,11 +56,11 @@ export class ChessMoveComponent extends ET.Component {
     isInBoard() {
         let location = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
         let playerid = this.GetDomain<BaseNpc_Plus>().ETRoot.As<BattleUnitEntityRoot>().Playerid;
-        return GameRules.Addon.ETRoot.ChessControlSystem().IsInBoard(playerid, location);
+        return GChessControlSystem.GetInstance().IsInBoard(playerid, location);
     }
     isInBaseRoom() {
         let location = this.GetDomain<BaseNpc_Plus>().GetAbsOrigin();
-        return GameRules.Addon.ETRoot.ChessControlSystem().IsInBaseRoom(location);
+        return GChessControlSystem.GetInstance().IsInBaseRoom(location);
     }
 
     setMoving(ismoving: boolean) {
@@ -88,8 +88,8 @@ export class ChessMoveComponent extends ET.Component {
         domain.MoveToPosition(v);
         this.RemoveMovingModifier();
         this.blink_start_p = domain.GetAbsOrigin();
-        let chessPos = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardLocalVector2(v);
-        GameRules.Addon.ETRoot.ChessControlSystem().RegistBlinkTargetGird(chessPos, true);
+        let chessPos = GChessControlSystem.GetInstance().GetBoardLocalVector2(v);
+        GChessControlSystem.GetInstance().RegistBlinkTargetGird(chessPos, true);
         this.OnblinkChessStart(chessPos);
         if (isjump) {
             modifier_jump.applyOnly(domain, domain, null, {
@@ -124,7 +124,7 @@ export class ChessMoveComponent extends ET.Component {
         }
     }
     OnblinkChessFinish() {
-        let sys = GameRules.Addon.ETRoot.ChessControlSystem();
+        let sys = GChessControlSystem.GetInstance();
         let domain = this.GetDomain<BaseNpc_Plus>();
         let v = domain.GetAbsOrigin();
         let chessPos = sys.GetBoardLocalVector2(v);
@@ -148,7 +148,7 @@ export class ChessMoveComponent extends ET.Component {
             return;
         }
         let targetpos = targetUnit.GetAbsOrigin();
-        let sys = GameRules.Addon.ETRoot.ChessControlSystem();
+        let sys = GChessControlSystem.GetInstance();
         let enemyChessVector = sys.GetBoardLocalVector2(targetpos);
         let attacker = this.GetDomain<BaseNpc_Plus>();
         let location = attacker.GetAbsOrigin();

@@ -1,16 +1,11 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
-import { LogHelper } from "../../../../helper/LogHelper";
-import { AbilityEntityRoot } from "../../../../rules/Components/Ability/AbilityEntityRoot";
-import { serializeDomainProps } from "../../../../rules/Entity/Entity";
-import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
-import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { ActiveRootAbility } from "../../ActiveRootAbility";
-import { EEnum } from "../../../../shared/Gen/Types";
+import { serializeDomainProps } from "../../../rules/Entity/Entity";
+import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+import { ActiveRootAbility } from "../ActiveRootAbility";
+import { EEnum } from "../../../shared/Gen/Types";
 
 @registerAbility()
-export class courier_challenge_artifact extends ActiveRootAbility implements IAbilityChallenge {
+export class courier_challenge_equip extends ActiveRootAbility implements IAbilityChallenge {
 
     CastFilterResult(): UnitFilterResult {
         let caster = this.GetCasterPlus();
@@ -36,7 +31,7 @@ export class courier_challenge_artifact extends ActiveRootAbility implements IAb
     @serializeDomainProps()
     costCount: number = 0;
     updateNetTable() {
-        this.costCount = this.GetLevel() * 80;
+        this.costCount = this.GetLevel() * 50;
         this.ETRoot.SyncClientEntity(this.ETRoot, true);
     }
     OnSpellStart() {
@@ -45,7 +40,7 @@ export class courier_challenge_artifact extends ActiveRootAbility implements IAb
             let root = caster.ETRoot.AsHero().GetPlayer();
             let round = root.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
-                let configid = GameRules.Addon.ETRoot.GameStateSystem().getDifficultyChapterDes() + "_artifact";
+                let configid = GGameStateSystem.GetInstance().getDifficultyChapterDes() + "_equip";
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
                     challengeround.OnStart();
@@ -60,7 +55,6 @@ export class courier_challenge_artifact extends ActiveRootAbility implements IAb
             }
         }
     }
-
     ProcsMagicStick() {
         return false;
     }
@@ -68,6 +62,7 @@ export class courier_challenge_artifact extends ActiveRootAbility implements IAb
         super.OnUpgrade();
         this.updateNetTable();
     }
+
 }
 
 

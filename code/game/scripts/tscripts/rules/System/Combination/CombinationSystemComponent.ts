@@ -3,7 +3,7 @@ import { KVHelper } from "../../../helper/KVHelper";
 import { ET } from "../../Entity/Entity";
 
 @reloadable
-export class CombinationSystemComponent extends ET.Component {
+export class CombinationSystemComponent extends ET.SingletonComponent {
 
     /**是否工作 */
     public IsWorking: boolean = true;
@@ -21,4 +21,14 @@ export class CombinationSystemComponent extends ET.Component {
 
     }
 
+}
+
+declare global {
+    /**
+     * @ServerOnly
+     */
+    var GCombinationSystem: typeof CombinationSystemComponent;
+}
+if (_G.GCombinationSystem == undefined) {
+    _G.GCombinationSystem = CombinationSystemComponent;
 }

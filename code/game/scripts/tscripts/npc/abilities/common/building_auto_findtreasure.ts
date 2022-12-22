@@ -6,7 +6,6 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { BuildingRuntimeEntityRoot } from "../../../rules/Components/Building/BuildingRuntimeEntityRoot";
 import { RoundPrizeUnitEntityRoot } from "../../../rules/Components/Round/RoundPrizeUnitEntityRoot";
-import { MapState } from "../../../rules/System/Map/MapState";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
@@ -40,7 +39,7 @@ export class building_auto_findtreasure extends BaseAbility_Plus {
         modifier.StopFindTreasure();
         let building = hParent.ETRoot.As<BuildingRuntimeEntityRoot>();
         let boardV = building.ChessComp().ChessVector;
-        let t_p = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardGirdCenterVector3(boardV);
+        let t_p = GChessControlSystem.GetInstance().GetBoardGirdCenterVector3(boardV);
         modifier_tp.TeleportToPoint(hParent, null, GetGroundPosition(t_p, hParent));
         modifier_remnant.remove(hParent);
         modifier.Destroy();
@@ -119,7 +118,7 @@ export class modifier_auto_findtreasure extends BaseModifier_Plus {
         let ability = this.GetAbilityPlus() as building_auto_findtreasure;
         let building = hParent.ETRoot.As<BuildingRuntimeEntityRoot>();
         let playerid = building.Playerid;
-        let moveto = MapState.PlayerTpDoorPoint[playerid];
+        let moveto = GMapSystem.GetInstance().PlayerTpDoorPoint[playerid];
         this.findTimer = TimerHelper.addTimer(
             0.5,
             () => {
@@ -153,7 +152,7 @@ export class modifier_auto_findtreasure extends BaseModifier_Plus {
         });
         let targetnpc: RoundPrizeUnitEntityRoot = null;
         if (targets.length == 0) {
-            let prizeUnits = GameRules.Addon.ETRoot.RoundSystem().randomRoundPrizeUnit();
+            let prizeUnits = GRoundSystem.GetInstance().randomRoundPrizeUnit();
             if (prizeUnits.length == 0) {
                 return;
             } else {

@@ -40,7 +40,7 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
     }
 
     OnSpawnAnimalFinish() {
-        let player = GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.Playerid);
+        let player = GPlayerSystem.GetInstance().GetPlayer(this.Playerid);
         if (player) {
             player.SyncClientEntity(this.EnemyUnitComp());
         }

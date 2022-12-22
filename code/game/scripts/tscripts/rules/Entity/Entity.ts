@@ -182,6 +182,7 @@ export module ET {
         public readonly Id: string;
         public readonly IsRegister: boolean = false;
         public readonly IsComponent: boolean = false;
+        public readonly IsSingleton: boolean = false;
         public readonly Parent: Entity;
         public readonly Domain: IEntityRoot;
         public readonly Children: { [uuid: string]: Entity };
@@ -641,6 +642,10 @@ export module ET {
                 throw new Error("entity already has component: " + type);
             }
             component.setParent(this);
+            // 单例组件处理
+            if (component.IsSingleton) {
+                (type as any as typeof SingletonComponent)._instance_ = component;
+            }
             return component;
         }
 
@@ -656,6 +661,10 @@ export module ET {
             component.setParent(this);
             args = args || [];
             EntityEventSystem.Awake(component, ...args);
+            // 单例组件处理
+            if (component.IsSingleton) {
+                (type as any as typeof SingletonComponent)._instance_ = component;
+            }
             return component;
         }
 
@@ -685,6 +694,22 @@ export module ET {
         public readonly IsComponent: boolean = true;
     }
 
+    export class SingletonComponent extends Component {
+        public static _instance_: Component;
+        public readonly IsSingleton: boolean = true;
+
+        /**
+         * 获取一个单例
+         * @returns
+         */
+        public static GetInstance<T extends typeof SingletonComponent>(this: T): InstanceType<T> {
+            let Class: T = this;
+            if (!Class._instance_ || Class._instance_.IsDisposed()) {
+                LogHelper.error(this.constructor.name + " is not a SingletonComponent")
+            }
+            return Class._instance_ as InstanceType<T>;
+        }
+    }
     export class EntityRoot extends Entity {
         public readonly DomainParent: EntityRoot;
         public readonly DomainChildren: { [uuid: string]: EntityRoot };

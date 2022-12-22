@@ -11,11 +11,29 @@ import { EnemyUnitEntityRoot } from "../../Components/Enemy/EnemyUnitEntityRoot"
 import { RoundManagerComponent } from "../../Components/Round/RoundManagerComponent";
 import { RoundPrizeUnitEntityRoot } from "../../Components/Round/RoundPrizeUnitEntityRoot";
 import { ET } from "../../Entity/Entity";
-import { MapState } from "../Map/MapState";
-import { RoundState } from "./RoundState";
 
 @reloadable
-export class RoundSystemComponent extends ET.Component {
+export class RoundSystemComponent extends ET.SingletonComponent {
+
+    iRound: string;
+
+    GetCurrentRoundType() {
+        return KVHelper.KvServerConfig.building_round[this.iRound].round_type;
+    }
+    // - 判断是否是无尽
+    IsEndlessRound() {
+        return this.GetCurrentRoundType() == "endless";
+    }
+
+    GetFirstBoardRoundid() {
+        const difficultydes = GGameStateSystem.GetInstance().getDifficultyChapterDes()
+        return difficultydes + "_1";
+    }
+
+    GetNextBoardRoundid() {
+        return KVHelper.KvServerConfig.building_round_board[this.iRound].round_nextid;
+    }
+
     public onAwake() {
         this.addEvent();
     }
@@ -25,7 +43,7 @@ export class RoundSystemComponent extends ET.Component {
     }
 
     public StartGame() {
-        this.runBoardRound(RoundState.GetFirstBoardRoundid());
+        this.runBoardRound(this.GetFirstBoardRoundid());
 
     }
 
@@ -41,8 +59,8 @@ export class RoundSystemComponent extends ET.Component {
     }
 
     public runBoardRound(round: string) {
-        RoundState.iRound = round;
-        GameRules.Addon.ETRoot.PlayerSystem()
+        this.iRound = round;
+        GPlayerSystem.GetInstance()
             .GetAllPlayer()
             .forEach((player) => {
                 player.RoundManagerComp().runBoardRound(round);
@@ -52,7 +70,7 @@ export class RoundSystemComponent extends ET.Component {
 
     public endBoardRound() {
         let allWaiting = true;
-        GameRules.Addon.ETRoot.PlayerSystem()
+        GPlayerSystem.GetInstance()
             .GetAllPlayer()
             .forEach((player) => {
                 if (!player.RoundManagerComp().getCurrentBoardRound().IsWaitingEnd()) {
@@ -63,7 +81,7 @@ export class RoundSystemComponent extends ET.Component {
             TimerHelper.addTimer(
                 3,
                 () => {
-                    let nextid = RoundState.GetNextBoardRoundid();
+                    let nextid = this.GetNextBoardRoundid();
                     if (nextid != null) {
                         this.runBoardRound(nextid);
                     }
@@ -75,7 +93,7 @@ export class RoundSystemComponent extends ET.Component {
 
     private createRoundPrizeUnit(round: string) {
         this.clearRoundPrizeUnit();
-        let posinfo = MapState.BaseRoomPrizeUnitRefreshZone;
+        let posinfo = GMapSystem.GetInstance().BaseRoomPrizeUnitRefreshZone;
         let minx = posinfo[0];
         let miny = posinfo[1];
         let maxx = posinfo[2];
@@ -117,4 +135,13 @@ export class RoundSystemComponent extends ET.Component {
         //     true
         // );
     }
+}
+declare global {
+    /**
+     * @ServerOnly
+     */
+    var GRoundSystem: typeof RoundSystemComponent;
+}
+if (_G.GRoundSystem == undefined) {
+    _G.GRoundSystem = RoundSystemComponent;
 }

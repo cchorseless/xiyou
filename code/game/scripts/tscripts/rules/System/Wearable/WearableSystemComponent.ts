@@ -7,7 +7,7 @@ import { WearableConfig } from "../../../shared/WearableConfig";
 import { ET } from "../../Entity/Entity";
 
 @reloadable
-export class WearableSystemComponent extends ET.Component {
+export class WearableSystemComponent extends ET.SingletonComponent {
     readonly Allheroes: { [k: string]: WearableConfig.IHeroInfo } = {};
     readonly Allitems: { [k: string]: WearableConfig.IOneItemInfo } = {}; //  所有饰品信息
     readonly AllitemsModelMap: { [k: string]: number } = {}; //  所有饰品信息
@@ -366,4 +366,13 @@ export class WearableSystemComponent extends ET.Component {
     GetItemDefByModelName(model: string) {
         return this.AllitemsModelMap[model];
     }
+}
+declare global {
+    /**
+     * @ServerOnly
+     */
+    var GWearableSystem: typeof WearableSystemComponent;
+}
+if (_G.GWearableSystem == undefined) {
+    _G.GWearableSystem = WearableSystemComponent;
 }

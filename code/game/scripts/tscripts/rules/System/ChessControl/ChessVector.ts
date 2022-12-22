@@ -40,11 +40,11 @@ export class ChessVector {
         let x: number;
         let y: number;
         if (this.y < 1 && this.y >= 0) {
-            minv = GameRules.Addon.ETRoot.ChessControlSystem().GetBoardStandbyMinVector3(playerid);
+            minv = GChessControlSystem.GetInstance().GetBoardStandbyMinVector3(playerid);
             x = minv.x + ChessControlConfig.Gird_Width * (this.x + 0.5);
             y = minv.y + ChessControlConfig.Gird_Height * (this.y + 0.5);
         } else {
-            minv = GameRules.Addon.ETRoot.ChessControlSystem().GetBoard8x10MinVector3(playerid);
+            minv = GChessControlSystem.GetInstance().GetBoard8x10MinVector3(playerid);
             x = minv.x + ChessControlConfig.Gird_Width * (this.x + 0.5);
             y = minv.y + ChessControlConfig.Gird_Height * (this.y - 1 + 0.5);
         }

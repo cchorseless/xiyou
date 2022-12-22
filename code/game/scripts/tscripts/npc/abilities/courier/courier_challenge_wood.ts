@@ -1,15 +1,7 @@
-import { GameEnum } from "../../../../shared/GameEnum";
-import { GameFunc } from "../../../../GameFunc";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { LogHelper } from "../../../../helper/LogHelper";
-import { AbilityEntityRoot } from "../../../../rules/Components/Ability/AbilityEntityRoot";
-import { serializeDomainProps } from "../../../../rules/Entity/Entity";
-import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
-import { registerAbility } from "../../../entityPlus/Base_Plus";
-import { modifier_task } from "../../../modifier/modifier_task";
-import { ActiveRootAbility } from "../../ActiveRootAbility";
-import { EEnum } from "../../../../shared/Gen/Types";
+import { serializeDomainProps } from "../../../rules/Entity/Entity";
+import { registerAbility } from "../../entityPlus/Base_Plus";
+import { ActiveRootAbility } from "../ActiveRootAbility";
+import { EEnum } from "../../../shared/Gen/Types";
 
 /**删除 */
 @registerAbility()
@@ -49,7 +41,7 @@ export class courier_challenge_wood extends ActiveRootAbility implements IAbilit
             let root = caster.ETRoot.AsHero().GetPlayer();
             let round = root.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
-                let configid = GameRules.Addon.ETRoot.GameStateSystem().getDifficultyChapterDes() + "_wood";
+                let configid = GGameStateSystem.GetInstance().getDifficultyChapterDes() + "_wood";
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
                     challengeround.OnStart();

@@ -49,7 +49,7 @@ export class GameService extends SingletonClass {
     }
 
     public GetPlayerServerData() {
-        GameRules.Addon.ETRoot.PlayerSystem()
+        GPlayerSystem.GetInstance()
             .GetAllPlayerid()
             .forEach((playerid) => { });
     }

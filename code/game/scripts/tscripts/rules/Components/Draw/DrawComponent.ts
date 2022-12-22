@@ -2,16 +2,14 @@ import { reloadable } from "../../../GameCache";
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
-import { LogHelper } from "../../../helper/LogHelper";
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
-import { BaseItem_Plus } from "../../../npc/entityPlus/BaseItem_Plus";
 import { ET, serializeETProps } from "../../Entity/Entity";
 import { DrawConfig } from "../../../shared/DrawConfig";
 import { PlayerEntityRoot } from "../Player/PlayerEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
+import { OnPlayerComponent } from "../../Entity/OnPlayerComponent";
 
 @reloadable
-export class DrawComponent extends ET.Component {
+export class DrawComponent extends OnPlayerComponent {
     @serializeETProps()
     tLastCards: string[] = [];
 
@@ -91,7 +89,7 @@ export class DrawComponent extends ET.Component {
             return [false, "index error"];
         }
         if (b2Public != 0) {
-            let publicbag = GameRules.Addon.ETRoot.PublicBagSystem();
+            let publicbag = GPublicBagSystem.GetInstance();
             if (publicbag.IsEmpty()) {
                 let itemroot = publicbag.addBuildingItem(unitName);
                 if (itemroot == null) {

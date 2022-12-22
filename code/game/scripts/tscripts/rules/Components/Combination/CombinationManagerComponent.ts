@@ -12,9 +12,10 @@ import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { ECombination } from "./ECombination";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
+import { OnPlayerComponent } from "../../Entity/OnPlayerComponent";
 
 @reloadable
-export class CombinationManagerComponent extends ET.Component {
+export class CombinationManagerComponent extends OnPlayerComponent {
     public readonly IsSerializeEntity: boolean = true;
     onAwake(): void {
         this.addEvent();

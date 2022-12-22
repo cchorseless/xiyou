@@ -1,15 +1,13 @@
 import { reloadable } from "../../../GameCache";
-import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ET, serializeETProps } from "../../Entity/Entity";
-import { RoundState } from "../../System/Round/RoundState";
+import { OnPlayerComponent } from "../../Entity/OnPlayerComponent";
 import { ERound } from "./ERound";
 import { ERoundBoard } from "./ERoundBoard";
 import { ERoundBoardChallenge } from "./ERoundBoardChallenge";
 
 @reloadable
-export class RoundManagerComponent extends ET.Component {
+export class RoundManagerComponent extends OnPlayerComponent {
     readonly RoundInfo: { [k: string]: ERound } = {};
     onAwake() {
         this.initBoardRound();
@@ -21,7 +19,7 @@ export class RoundManagerComponent extends ET.Component {
 
     private initChallengeRound() {
         for (let k in KVHelper.KvServerConfig.building_round_board_challenge) {
-            if (KVHelper.KvServerConfig.building_round_board_challenge[k].round_label == GameRules.Addon.ETRoot.GameStateSystem().getDifficultyChapterDes()) {
+            if (KVHelper.KvServerConfig.building_round_board_challenge[k].round_label == GGameStateSystem.GetInstance().getDifficultyChapterDes()) {
                 this.RoundInfo[k] = this.AddChild(ERoundBoardChallenge, k);
             }
         }

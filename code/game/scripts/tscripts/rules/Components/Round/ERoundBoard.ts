@@ -120,7 +120,7 @@ export class ERoundBoard extends ERound {
         let playerroot = this.Domain.ETRoot.AsPlayer();
         playerroot.SyncClientEntity(this, false);
         EventHelper.fireServerEvent(RoundConfig.Event.roundboard_onwaitingend, playerroot.Playerid, this);
-        GameRules.Addon.ETRoot.RoundSystem().endBoardRound();
+        GRoundSystem.GetInstance().endBoardRound();
     }
 
     IsBattle() {

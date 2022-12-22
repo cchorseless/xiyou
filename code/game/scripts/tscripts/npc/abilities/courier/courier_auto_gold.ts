@@ -1,11 +1,11 @@
-import { GameEnum } from "../../../../shared/GameEnum";
-import { GameFunc } from "../../../../GameFunc";
-import { EntityHelper } from "../../../../helper/EntityHelper";
-import { LogHelper } from "../../../../helper/LogHelper";
-import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
-import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
-import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
+import { GameEnum } from "../../../shared/GameEnum";
+import { GameFunc } from "../../../GameFunc";
+import { EntityHelper } from "../../../helper/EntityHelper";
+import { LogHelper } from "../../../helper/LogHelper";
+import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
+import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
+import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
+import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 
 // 高级抽卡
 @registerAbility()

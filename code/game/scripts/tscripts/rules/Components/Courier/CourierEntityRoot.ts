@@ -25,13 +25,28 @@ export class CourierEntityRoot extends BattleUnitEntityRoot {
         this.AddComponent(GetRegClass<typeof InventoryComponent>("InventoryComponent"));
         this.AddComponent(GetRegClass<typeof CourierBagComponent>("CourierBagComponent"));
         this.AddComponent(GetRegClass<typeof CourierShopComponent>("CourierShopComponent"));
+        this.RefreshCourier()
 
+    }
+
+    RefreshCourier() {
+        let hHero = this.GetDomain<BaseNpc_Hero_Plus>();
+        if (!GameFunc.IsValid(hHero) || !hHero.IsAlive()) {
+            return
+        }
+        let sCurrentCourierName = this.GetCourierName()
+        let sCourierName = this.GetPlayerCourierInUse()
+        if (sCurrentCourierName == sCourierName && modifier_courier.findIn(hHero)) {
+            return
+        }
+        modifier_courier.remove(hHero);
+        modifier_courier.applyOnly(hHero, hHero, null, { courier_name: sCourierName });
     }
 
     // - 获取当前生效的信使
     GetCourierName() {
         let hero = this.GetDomain<BaseNpc_Hero_Plus>();
-        let hModifier = hero.FindModifierByName("modifier_courier") as modifier_courier;
+        let hModifier = modifier_courier.findIn(hero);
         if (GameFunc.IsValid(hModifier)) {
             return hModifier.GetCourierName() || GameStateConfig.DefaultCourier;
         }

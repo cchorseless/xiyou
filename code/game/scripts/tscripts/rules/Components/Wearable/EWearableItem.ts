@@ -278,7 +278,7 @@ export class EWearableItem extends ET.Entity {
     }
     AddParticle2(hWear: WearableConfig.IUnitWearSlotInfo, particle_name: string, sSlotName: string, sStyle: string = null) {
         let hUnit = this.GetDomain<BaseNpc_Plus>();
-        let wearSys = GameRules.Addon.ETRoot.WearableSystem();
+        let wearSys = GWearableSystem.GetInstance();
         let attach_type = ParticleAttachment_t.PATTACH_CUSTOMORIGIN;
         let attach_entity = hUnit as CBaseEntity;
         if (hWear && hWear.model) {

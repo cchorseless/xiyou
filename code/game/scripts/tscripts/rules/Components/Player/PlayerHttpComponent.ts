@@ -3,14 +3,14 @@ import { HttpHelper } from "../../../helper/HttpHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { ET } from "../../Entity/Entity";
-import { PlayerState } from "../../System/Player/PlayerState";
 import { reloadable } from "../../../GameCache";
 import { md5 } from "../../../lib/md5";
 import { GameProtocol } from "../../../shared/GameProtocol";
+import { OnPlayerComponent } from "../../Entity/OnPlayerComponent";
 
 /**玩家数据组件 */
 @reloadable
-export class PlayerHttpComponent extends ET.Component {
+export class PlayerHttpComponent extends OnPlayerComponent {
     public TOKEN: string = "";
     public Address = "";
     public Port = "";
@@ -32,7 +32,7 @@ export class PlayerHttpComponent extends ET.Component {
     }
 
     public async PlayerLogin(playerid: PlayerID) {
-        let PlayerSystem = GameRules.Addon.ETRoot.PlayerSystem();
+        let PlayerSystem = GPlayerSystem.GetInstance();
         let steamid = PlayerSystem.GetSteamID(playerid);
         let accountid = PlayerSystem.GetAccountID(playerid);
         let loginUrl = GameProtocol.LoginUrl();

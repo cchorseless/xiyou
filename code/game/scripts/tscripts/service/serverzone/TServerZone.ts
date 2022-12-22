@@ -9,18 +9,18 @@ import { reloadable } from "../../GameCache";
 
 
 @reloadable
-export class TServerZone extends ET.Component {
+export class TServerZone extends ET.SingletonComponent {
     public ServerName: string;
     public ZoneID: number;
     public ServerID: number;
     public CreateTime: string;
     onSerializeToEntity() {
-        GameRules.Addon.ETRoot.AddOneComponent(this);
+        GGameEntityRoot.GetInstance().AddOneComponent(this);
         this.onReload();
     }
 
     onReload() {
-        GameRules.Addon.ETRoot.SyncClientEntity(this, true);
+        GGameEntityRoot.GetInstance().SyncClientEntity(this, true);
     }
 
 
@@ -30,4 +30,14 @@ export class TServerZone extends ET.Component {
     public RankComp() { return this.GetComponentByName<ServerZoneRankComponent>("ServerZoneRankComponent"); }
     public BuffComp() { return this.GetComponentByName<ServerZoneBuffComponent>("ServerZoneBuffComponent"); }
     public GameRecordComp() { return this.GetComponentByName<ServerZoneGameRecordComponent>("ServerZoneGameRecordComponent"); }
+}
+
+declare global {
+    /**
+     * @ServerOnly
+     */
+    var GTServerZone: typeof TServerZone;
+}
+if (_G.GTServerZone == undefined) {
+    _G.GTServerZone = TServerZone;
 }

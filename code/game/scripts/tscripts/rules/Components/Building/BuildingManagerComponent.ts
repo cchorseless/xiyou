@@ -17,10 +17,11 @@ import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
+import { OnPlayerComponent } from "../../Entity/OnPlayerComponent";
 
 /**塔防组件 */
 @reloadable
-export class BuildingManagerComponent extends ET.Component {
+export class BuildingManagerComponent extends OnPlayerComponent {
     public IsSerializeEntity: boolean = true;
 
     allBuilding: string[] = [];
@@ -39,7 +40,7 @@ export class BuildingManagerComponent extends ET.Component {
      * @param angle
      */
     public placeBuilding(towerID: string, location: Vector, angle: number = BuildingConfig.BUILDING_ANGLE) {
-        let playerroot = this.GetDomain<PlayerScene>().ETRoot;
+        let playerroot = this.GetRoot()
         let hero = playerroot.Hero;
         let playerID = playerroot.Playerid;
         if (!hero.IsAlive()) return;
@@ -50,7 +51,7 @@ export class BuildingManagerComponent extends ET.Component {
             return;
         }
         //  人口判断
-        let iPopulationAdd = GameRules.Addon.ETRoot.BuildingSystem().GetBuildingPopulation(towerID);
+        let iPopulationAdd = GBuildingSystem.GetInstance().GetBuildingPopulation(towerID);
         let PlayerDataComp = playerroot.PlayerDataComp();
         let freePopulation = PlayerDataComp.getFreePopulation();
         if (iPopulationAdd > freePopulation) {

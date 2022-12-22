@@ -1,15 +1,14 @@
 import { reloadable } from "../../../GameCache";
-import { GameSetting } from "../../../GameSetting";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
-import { ET } from "../../Entity/Entity";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { RoundConfig } from "../../../shared/RoundConfig";
 import { BuildingEntityRoot } from "../Building/BuildingEntityRoot";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ChessVector } from "../../System/ChessControl/ChessVector";
+import { OnPlayerComponent } from "../../Entity/OnPlayerComponent";
 
 @reloadable
-export class ChessControlComponent extends ET.Component {
+export class ChessControlComponent extends OnPlayerComponent {
 
     OnRoundStartBattle() {
 
@@ -18,7 +17,7 @@ export class ChessControlComponent extends ET.Component {
 
     public moveChess(target: BuildingEntityRoot, v: Vector): [boolean, string] {
         let r: [boolean, string] = [true, ""];
-        let playerRoot = this.Domain.ETRoot.AsPlayer();
+        let playerRoot = this.GetRoot();
         if (!playerRoot.CheckIsAlive()) {
             r = [false, "hero is death"];
         }
@@ -28,7 +27,7 @@ export class ChessControlComponent extends ET.Component {
         if (playerRoot.GetDomainChild(target.Id) == null) {
             r = [false, "EntityRoot is not my"];
         }
-        let ChessControlSystem = GameRules.Addon.ETRoot.ChessControlSystem();
+        let ChessControlSystem = GChessControlSystem.GetInstance();
         let boardVec = ChessControlSystem.GetBoardLocalVector2(v);
         if (boardVec.playerid != playerRoot.Playerid ||
             boardVec.x < 0 || boardVec.y < 0 ||
@@ -65,7 +64,7 @@ export class ChessControlComponent extends ET.Component {
         let chessVector = new ChessVector(0, 0, playerid);
         for (let i = 0; i < ChessControlConfig.Gird_Max_X; i++) {
             chessVector.x = i;
-            if (GameRules.Addon.ETRoot.ChessControlSystem().IsBoardEmptyGird(chessVector)) {
+            if (GChessControlSystem.GetInstance().IsBoardEmptyGird(chessVector)) {
                 return chessVector;
             }
         }

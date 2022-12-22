@@ -24,11 +24,11 @@
 //     old_model: string;
 
 //     GetHeroConfig() {
-//         let wearSys = GameRules.Addon.ETRoot.WearableSystem();
+//         let wearSys = GWearableSystem.GetInstance();
 //         return wearSys.Allheroes[this.sHeroName];
 //     }
 //     GetItemConfig(sItemDef: string) {
-//         let wearSys = GameRules.Addon.ETRoot.WearableSystem();
+//         let wearSys = GWearableSystem.GetInstance();
 //         return wearSys.Allitems[sItemDef];
 //     }
 //     onAwake(dotaHeroName: string): void {
@@ -156,7 +156,7 @@
 
 //     Wear(sItemDef: string | number, sStyle: string = "0") {
 //         sItemDef = sItemDef + "";
-//         let wearSys = GameRules.Addon.ETRoot.WearableSystem();
+//         let wearSys = GWearableSystem.GetInstance();
 //         let hItem = wearSys.Allitems["" + sItemDef];
 //         let sSlotName = this.GetSlotName(sItemDef);
 //         if (this.bPersona && !this.IsPersona(sSlotName) && sSlotName != "persona_selector") {
@@ -334,7 +334,7 @@
 
 //     AddParticle(hWear: WearableConfig.IUnitWearSlotInfo, particle_name: string, sSlotName: string, sStyle: string = null) {
 //         let hUnit = this.GetDomain<BaseNpc_Plus>();
-//         let wearSys = GameRules.Addon.ETRoot.WearableSystem();
+//         let wearSys = GWearableSystem.GetInstance();
 //         let attach_type = ParticleAttachment_t.PATTACH_CUSTOMORIGIN;
 //         let attach_entity = hUnit as CBaseEntity;
 //         if (hWear && hWear.model) {
@@ -524,7 +524,7 @@
 //         if (!sStyle) {
 //             sStyle = "0";
 //         }
-//         let wearSys = GameRules.Addon.ETRoot.WearableSystem();
+//         let wearSys = GWearableSystem.GetInstance();
 //         let hItem = wearSys.Allitems[sItemDef];
 //         let hUnit = this.GetDomain<BaseNpc_Plus>();
 //         // if (this.sHeroName == "npc_dota_hero_tiny") {
