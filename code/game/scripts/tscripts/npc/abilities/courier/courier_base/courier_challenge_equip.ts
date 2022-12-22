@@ -44,7 +44,7 @@ export class courier_challenge_equip extends ActiveRootAbility implements IAbili
             let root = caster.ETRoot.AsHero().GetPlayer();
             let round = root.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
-                let configid = GameRules.Addon.ETRoot.GameStateSystem().DifficultyChapter + "_equip";
+                let configid = GameRules.Addon.ETRoot.GameStateSystem().getDifficultyChapterDes() + "_equip";
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
                     challengeround.OnStart();

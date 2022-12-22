@@ -152,4 +152,34 @@ export module KVHelper {
         }
         return GameFunc.ArrayFunc.RandomArrayByWeight(r_arr, weight_arr)[0];
     }
+
+
+    export namespace CourierUnits {
+
+        export function GetCourierAbility(sCourierName: string) {
+            if (KvConfig().courier_units[sCourierName] == null) { return }
+            return KvConfig().courier_units[sCourierName].Ability1
+        }
+        export function GetCourierModel(sCourierName: string) {
+            if (KvConfig().courier_units[sCourierName] == null) { return "models/development/invisiblebox.vmdl" }
+            return KvConfig().courier_units[sCourierName].Model || "models/development/invisiblebox.vmdl"
+        }
+        export function GetCourierModelScale(sCourierName: string) {
+            if (KvConfig().courier_units[sCourierName] == null) { return 1 }
+            return Number(KvConfig().courier_units[sCourierName].ModelScale) || 1
+        }
+        export function GetCourierSkin(sCourierName: string) {
+            if (KvConfig().courier_units[sCourierName] == null) { return 0 }
+            return Number(KvConfig().courier_units[sCourierName].Skin) || 0
+        }
+        export function GetCourierVisualZDelta(sCourierName: string) {
+            if (KvConfig().courier_units[sCourierName] == null) { return 0 }
+            return Number(KvConfig().courier_units[sCourierName].VisualZDelta) || 0
+        }
+        export function GetCourierAmbientEffect(sCourierName: string) {
+            if (KvConfig().courier_units[sCourierName] == null) { return }
+            return KvConfig().courier_units[sCourierName].AmbientModifiers
+        }
+
+    }
 }

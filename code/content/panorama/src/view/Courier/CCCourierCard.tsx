@@ -1,22 +1,10 @@
 import React from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { KVHelper } from "../../helper/KVHelper";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
-interface CourierData {
-    CourierId?: number,
-    Rarity?: string,
-    Modifier?: string,
-    Model?: string,
-    Skin?: number,
-    ItemDef?: number,
-    ItemStyle?: number,
-    ModelScale?: number,
-    AmbientEffect?: string,
-    Ability1?: string,
-    VisualZDelta?: number,
-}
+
 interface ICCCourierCard {
-    tCourierData: CourierData,
     sCourierName: string,
     allowrotation?: boolean;
     showmodel?: boolean;
@@ -35,8 +23,8 @@ export class CCCourierCard extends CCPanel<ICCCourierCard> {
         return CSSHelper.ClassMaker("CourierCard", sRarity)
     }
     render() {
-        const tCourierData = this.props.tCourierData;
         const sCourierName = this.props.sCourierName;
+        const tCourierData = KVHelper.KVData().CourierUnits[sCourierName];
         const showmodel = this.props.showmodel;
         const allowrotation = this.props.allowrotation;
         return (

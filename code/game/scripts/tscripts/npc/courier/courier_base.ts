@@ -3,13 +3,12 @@ import { LogHelper } from "../../helper/LogHelper";
 import { TimerHelper } from "../../helper/TimerHelper";
 import { BaseNpc_Hero_Plus } from "../entityPlus/BaseNpc_Hero_Plus";
 import { registerUnit } from "../entityPlus/Base_Plus";
-import { MiniMapHelper } from "../../helper/MiniMapHelper";
 import { PlayerState } from "../../rules/System/Player/PlayerState";
 import { courier_challenge_wood } from "../abilities/courier/courier_base/courier_challenge_wood";
 import { courier_challenge_gold } from "../abilities/courier/courier_base/courier_challenge_gold";
 import { courier_challenge_equip } from "../abilities/courier/courier_base/courier_challenge_equip";
 import { courier_challenge_artifact } from "../abilities/courier/courier_base/courier_challenge_artifact";
-import { BaseAbility_Plus } from "../entityPlus/BaseAbility_Plus";
+
 @registerUnit()
 export class courier_base extends BaseNpc_Hero_Plus {
     Spawn(entityKeyValues: CScriptKeyValues) {
@@ -68,4 +67,8 @@ export class courier_base extends BaseNpc_Hero_Plus {
     IsValidHero() {
         return GameRules.Addon.ETRoot.PlayerSystem().GetPlayer(this.GetPlayerID()).Hero == null;
     }
+
+
+
+
 }

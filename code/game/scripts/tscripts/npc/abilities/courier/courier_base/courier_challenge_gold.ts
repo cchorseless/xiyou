@@ -52,7 +52,7 @@ export class courier_challenge_gold extends ActiveRootAbility implements IAbilit
             let root = caster.ETRoot.AsHero().GetPlayer();
             let round = root.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
-                let configid = GameRules.Addon.ETRoot.GameStateSystem().DifficultyChapter + "_gold";
+                let configid = GameRules.Addon.ETRoot.GameStateSystem().getDifficultyChapterDes() + "_gold";
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
                     challengeround.OnStart();

@@ -1,3 +1,5 @@
+import { GameProtocol } from "../../../../../../game/scripts/tscripts/shared/GameProtocol";
+import Dictionary from "../../../helper/DataContainerHelper";
 import { ET, registerET } from "../../../libs/Entity";
 import { NumericComponent } from "../common/NumericComponent";
 import { CharacterInGameDataComponent } from "./CharacterInGameDataComponent";
@@ -11,6 +13,19 @@ export class CharacterDataComponent extends ET.Component {
             character.AddOneComponent(this);
         }
     }
+    public GameDataStrDic: Dictionary<string, string> = new Dictionary<
+        string,
+        string
+    >();
+    public set _GameDataStrDic(data: Dictionary<string, string>) {
+        this.GameDataStrDic.copy(data);
+    }
+
+    getGameDataStr(key: GameProtocol.EGameDataStrDicKey) {
+        return this.GameDataStrDic.get(key)
+    }
+
+
 
     get NumericComp() {
         return this.GetComponentByName<NumericComponent>("NumericComponent");

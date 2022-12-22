@@ -2,7 +2,10 @@ import React, { createRef, useState } from "react";
 import { GameStateConfig } from "../../../../../../game/scripts/tscripts/shared/GameStateConfig";
 import { PlayerScene } from "../../../game/components/Player/PlayerScene";
 import { CSSHelper } from "../../../helper/CSSHelper";
+import { FuncHelper } from "../../../helper/FuncHelper";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
+import "./CCGameDifficulty.less";
+
 
 interface ICCGameDifficulty {
     iDifficulty: number, max: number, selected: boolean, aPlayerIDs?: PlayerID[], forceEnable?: boolean
@@ -57,18 +60,11 @@ interface IEndlessDifficulty {
 }
 export class CCGameEndlessDifficulty extends CCPanel<IEndlessDifficulty, RadioButton> {
 
-    SelectDifficulty(difficulty: number) {
 
-    }
     refDecrease = createRef<Button>()
     refIncrease = createRef<Button>()
     refText = createRef<TextEntry>()
-    defaultClass() {
-        const iDifficulty = this.props.iDifficulty;
-        return CSSHelper.ClassMaker("CC_GameDifficulty", "Difficulty_" + iDifficulty)
-    }
-
-    iOldOffset: number;
+    iOldOffset: number | null;
     sLastText: string;
 
 
@@ -78,23 +74,20 @@ export class CCGameEndlessDifficulty extends CCPanel<IEndlessDifficulty, RadioBu
             if (pSelf.text != "") {
                 let sOld = pSelf.text;
                 if (isFinite(Number(sOld))) {
-                    iNumber = Clamp(Number(sOld), 1, iMaxEndless);
+                    iNumber = FuncHelper.Clamp(Number(sOld), 1, GameStateConfig.iMaxEndless);
                 } else {
                     iNumber = Number(this.sLastText == "" ? "1" : this.sLastText);
                 }
                 let sNew = String(iNumber);
-                GameEvents.SendCustomGameEventToServer("EndlessSetting", {
-                    value: Number(sNew),
-                    type: "endless"
-                });
+                PlayerScene.GameStateSystem.SelectDifficultyEndlessLevel(iNumber)
                 if (sOld != sNew) {
                     this.iOldOffset = pSelf.GetCursorOffset();
                     pSelf.text = sNew;
-                    pSelf.iOldOffset = undefined;
+                    this.iOldOffset = null;
                 }
             }
             else {
-                PlayerScene.GameStateSystem.SelectDifficultyLevel(iNumber)
+                PlayerScene.GameStateSystem.SelectDifficultyEndlessLevel(iNumber)
             }
             let pDecreaseButton = this.refDecrease.current;
             if (pDecreaseButton) {
@@ -114,15 +107,13 @@ export class CCGameEndlessDifficulty extends CCPanel<IEndlessDifficulty, RadioBu
         const selected = this.props.selected;
         const aPlayerIDs = this.props.aPlayerIDs || [];
         return (
-            <RadioButton id="OperatorEndless" group="DifficultySelected" enabled={enable} selected={selected}
+            <RadioButton id="CC_GameEndlessDifficulty" group="DifficultySelected" enabled={enable} selected={selected}
                 onactivate={p => {
-                    PlayerScene.GameStateSystem.SelectDifficultyLevel(iNumber)
-                    GameEvents.SendCustomGameEventToServer("EndlessSetting", {
-                        value: safeNumber(refText.current?.text, iMaxEndless),
-                        type: "endless",
-                    });
-
-                    GameEvents.SendCustomGameEventToServer("SelectDifficulty", { difficulty: 999 });
+                    let iNumber = Number(this.refText.current?.text) || 0;
+                    if (iNumber > GameStateConfig.iMaxEndless) {
+                        iNumber = GameStateConfig.iMaxEndless;
+                    }
+                    PlayerScene.GameStateSystem.SelectDifficultyEndlessLevel(iNumber)
                 }}
                 onmouseover={p => $.DispatchEvent("DOTAShowTextTooltip", p, $.Localize("#Difficult_" + 999 + "_Description"))}
                 onmouseout={p => $.DispatchEvent("DOTAHideTextTooltip", p)}

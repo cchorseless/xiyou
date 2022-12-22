@@ -17,14 +17,12 @@ export class GameStateSystemComponent extends ET.Component {
     /**难度关卡 */
     @serializeETProps()
     DifficultyLevel: number = 0;
+    /**难度选择结束时间 */
+    BeforeGameEndTime: number = 0;
 
-    getDifficultyDes() {
-        if (this.DifficultyLevel > 0) {
-            return this.DifficultyChapter + "[" + this.DifficultyLevel + "]";
-        }
-        return this.DifficultyChapter;
+    getDifficultyChapterDes() {
+        return GameStateConfig.EDifficultyChapter[this.DifficultyLevel] as string;
     }
-
 
 
     private getDifficultyConfig(arr: { [k: string]: number }) {

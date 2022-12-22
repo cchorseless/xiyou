@@ -49,7 +49,7 @@ export class courier_challenge_wood extends ActiveRootAbility implements IAbilit
             let root = caster.ETRoot.AsHero().GetPlayer();
             let round = root.RoundManagerComp().getCurrentBoardRound();
             if (round.IsBattle()) {
-                let configid = GameRules.Addon.ETRoot.GameStateSystem().DifficultyChapter + "_wood";
+                let configid = GameRules.Addon.ETRoot.GameStateSystem().getDifficultyChapterDes() + "_wood";
                 let challengeround = root.RoundManagerComp().getBoardChallengeRound(configid);
                 if (challengeround) {
                     challengeround.OnStart();

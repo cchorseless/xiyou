@@ -1,82 +1,190 @@
-// -@class modifier_gold_wave.eom_modifier
-@registerModifier()
-export class modifier_gold_wave extends BaseModifier_Plus {
+//  Link被动buff
+for (let data of ( KeyValues.CourierAbilityKv)) {
+	 
 
-let public = modifier_gold_wave
+	if ( type(data) == "table" && type(data.CourierPassvieModifier) == "string" && type(data.ScriptFile) == "string" ) {
+		LinkLuaModifier(data.CourierPassvieModifier, data.ScriptFile, LUA_MODIFIER_MOTION_NONE)
+	}
+}
 
- IsHidden() {
-	return false
+if ( PlayerCourier == null ) {
+	// - @class PlayerCourier
+	PlayerCourier = {}
 }
- IsDebuff() {
-	return false
-}
- IsPurgable() {
-	return false
-}
- IsPurgeException() {
-	return false
-}
- AllowIllusionDuplicate() {
-	return false
-}
- RemoveOnDeath() {
-	return false
-}
- GetPriority() {
-	return MODIFIER_PRIORITY_SUPER_ULTRA
-}
- GetTexture() {
-	return "alchemist_goblins_greed"
-}
- GetStatusEffectName() {
-	return "particles/econ/items/effigies/status_fx_effigies/status_effect_effigy_gold.vpcf"
-}
- StatusEffectPriority() {
-	return 99
-}
- OnCreated(params: ModifierTable) {
-	let hParent = this.GetParentPlus()
-	this.moveSpeed = hParent.GetBaseMoveSpeed()
-	if ( IsServer() ) {
-		this.StartIntervalThink(this.GetDuration())
+ init(bReload) {
+	if ( !bReload ) {
+		this.tPlayerCouriers = {}
 	}
-}
- OnIntervalThink() {
-	if ( IsServer() ) {
-		this.GetParentPlus().ForceKill(false)
-		this.StartIntervalThink(-1)
-		this.Destroy()
-	}
-}
- CheckState() {
-	return {
-		//  [modifierstate.MODIFIER_STATE_NO_HEALTH_BAR] : true,
-		[modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION] : true,
-	}
-}
- DeclareFunctions() {
-	return {
-		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MIN_HEALTH,
-		@registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_ABSOLUTE_MIN,
-	}
-}
- GetMinHealth(params: ModifierTable) {
-	return 1
-}
- GetMoveSpeed_AbsoluteMin(params: ModifierTable) {
-	return this.moveSpeed - 100
-}
- EDeclareFunctions() {
-	return {
-		@registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE = {null, this.GetParentPlus() },
-	}
-}
- OnTakeDamage(params: ModifierTable) {
-	if ( params.unit == this.GetParentPlus() ) {
-		let hParent = this.GetParentPlus()
-		if ( hParent.GetHealth() >= 1 && hParent.GetHealth() <= params.damage ) {
-			this.IncrementStackCount()
-			hParent.ModifyHealth(hParent.GetMaxHealth(), null, false, 0)
+
+	// - 信使技能->信使被动buff名
+	this.tCourierAbilityPassiveBuff = {}
+	for (let data of ( KeyValues.CourierAbilityKv)) {
+	 
+
+		if ( type(data) == "table" && type(data.CourierPassvieModifier) == "string" && type(data.ScriptFile) == "string" ) {
+			this.tCourierAbilityPassiveBuff[sAbilityName] = data.CourierPassvieModifier
 		}
 	}
+
+	GameEvent("custom_npc_first_spawned", Dynamic_Wrap(this, "OnNPCFirstSpawned"), this)
 }
+ OnNPCFirstSpawned(events) {
+	let hSpawnedUnit = EntIndexToHScript(events.entindex)
+	if ( !GameFunc.IsValid(hSpawnedUnit) ) {
+		return
+	}
+	if ( hSpawnedUnit.GetUnitName() == "npc_dota_thinker" ) {
+		return
+	}
+
+	if ( hSpawnedUnit.IsRealHero() && hSpawnedUnit.GetUnitLabel() == "builder" ) {
+		let iPlayerID = hSpawnedUnit.GetPlayerOwnerID()
+		//  技能等级设置
+		let sCourierInUse = this.GetPlayerCourierInUse(iPlayerID)
+		let sAbilityInUse = this.GetCourierAbility(sCourierInUse)
+		if ( sAbilityInUse ) {
+			let hAbilitySlot = hSpawnedUnit.FindAbilityByName("builder_slot_2")
+			if ( GameFunc.IsValid(hAbilitySlot) ) {
+				hSpawnedUnit.RemoveAbilityByHandle(hAbilitySlot)
+			}
+			hSpawnedUnit.AddAbility(sAbilityInUse).UpgradeAbility(true)
+		}
+
+		hSpawnedUnit.GameTimer(1,  () => {
+			this.RefreshCourier(iPlayerID)
+		})
+	}
+}
+ SetCouriers(iPlayerID, tCouriers) {
+	this.tPlayerCouriers[iPlayerID] = deepcopy(tCouriers)
+}
+ RefreshCourier(iPlayerID, bRefreshPassive) {
+	if ( bRefreshPassive == null ) {
+		bRefreshPassive = true
+	}
+	let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+	if ( !GameFunc.IsValid(hHero) || !hHero.IsAlive() ) {
+		return
+	}
+
+	let sCurrentCourierName = this.GetCourierName(iPlayerID)
+	let sCourierName = this.GetPlayerCourierInUse(iPlayerID)
+	let sCourierFxName = this.GetPlayerCourierFxInUse(iPlayerID)
+	let sCourierFxModifierName
+	let sAmbientFx = this.GetCourierAmbientEffect(sCourierName)
+	let sAmbientFxModifierName
+
+	for (let tData of ( KeyValues.CourierFxKv)) {
+	 
+
+		if ( type(tData) == "table" ) {
+			let sModifierName = tData.Modifier
+			if ( type(sModifierName) == "string" ) {
+				hHero.RemoveModifierByName(sModifierName)
+				if ( sFxName == sAmbientFx ) {
+					sAmbientFxModifierName = sModifierName
+				}
+				if ( sFxName == sCourierFxName ) {
+					sCourierFxModifierName = sModifierName
+				}
+			}
+		}
+	}
+
+	//  信使被动效果
+	if ( bRefreshPassive && type(this.tPlayerCouriers[iPlayerID]) == "table" ) {
+		for k, sCourierID in pairs(this.tPlayerCouriers[iPlayerID]) do
+			let sCourier = this.GetCourierNameByID(sCourierID)
+			if ( sCourier ) {
+				let sAbility = this.GetCourierAbility(sCourier)
+				if ( sAbility ) {
+					let sBuff = this.tCourierAbilityPassiveBuff[sAbility]
+					if ( sBuff ) {
+						if ( sCourier == sCourierName ) {
+							hHero.RemoveModifierByName(sBuff)
+						} else {
+							//  不上场才生效
+							hHero.RemoveModifierByName(sBuff)
+							hHero.AddNewModifier(hHero, null, sBuff, null)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	hHero.RemoveModifierByName("modifier_courier")
+	hHero.AddNewModifier(hHero, null, "modifier_courier", { courier_name = sCourierName })
+
+	if ( sAmbientFxModifierName ) {
+		hHero.GameTimer("AmbientFx", 0,  () => {
+			hHero.AddNewModifier(hHero, null, sAmbientFxModifierName, null)
+		})
+	}
+
+	if ( sCourierFxModifierName ) {
+		hHero.GameTimer("Fx", 0,  () => {
+			hHero.AddNewModifier(hHero, null, sCourierFxModifierName, null)
+		})
+	}
+}
+// - 获取当前生效的信使
+ GetCourierName(iPlayerID) {
+	let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+	let hModifier = hHero.FindModifierByName("modifier_courier")
+	if ( GameFunc.IsValid(hModifier) && type(hModifier.GetCourierName) == "function" ) {
+		return hModifier.GetCourierName() || "courier_1"
+	}
+	return "courier_1"
+}
+// - 获取现在服务器上存的数据玩家装备的线
+ GetPlayerCourierInUse(iPlayerID) {
+	let sCourierNameInUse = "courier_1"
+	if ( type(Service) == "table" && type(Service.tNettableData) == "table" && type(Service.tNettableData.playerInUse) == "table" && type(Service.tNettableData.playerInUse[iPlayerID]) == "table" && Service.tNettableData.playerInUse[iPlayerID].courier != null ) {
+		for (let tData of ( KeyValues.CourierKv)) {
+	 
+
+			if ( type(tData) == "table" && tostring(tData.CourierId) == tostring(Service.tNettableData.playerInUse[iPlayerID].courier) ) {
+				sCourierNameInUse = sCourierName
+			}
+		}
+	}
+	return sCourierNameInUse
+}
+// - 获取玩家正在使用的信使特效
+ GetPlayerCourierFxInUse(iPlayerID) {
+	if ( type(Service) == "table" && type(Service.tNettableData) == "table" && type(Service.tNettableData.playerInUse) == "table" && type(Service.tNettableData.playerInUse[iPlayerID]) == "table" ) {
+		return Service.tNettableData.playerInUse[iPlayerID].courier_fx || ""
+	}
+	return ""
+}
+// =======================================Utils=======================================
+ GetCourierNameByID(sId) {
+	return KeyValues.CourierID2Name[tostring(sId)]
+}
+ GetCourierAbility(sCourierName) {
+	if ( KeyValues.CourierKv[sCourierName] == null ) { return }
+	return KeyValues.CourierKv[sCourierName].Ability1
+}
+ GetCourierModel(sCourierName) {
+	if ( KeyValues.CourierKv[sCourierName] == null ) { return "models/development/invisiblebox.vmdl" }
+	return KeyValues.CourierKv[sCourierName].Model || "models/development/invisiblebox.vmdl"
+}
+ GetCourierModelScale(sCourierName) {
+	if ( KeyValues.CourierKv[sCourierName] == null ) { return 1 }
+	return KeyValues.CourierKv[sCourierName].ModelScale || 1
+}
+ GetCourierSkin(sCourierName) {
+	if ( KeyValues.CourierKv[sCourierName] == null ) { return 0 }
+	return KeyValues.CourierKv[sCourierName].Skin || 0
+}
+ GetCourierVisualZDelta(sCourierName) {
+	if ( KeyValues.CourierKv[sCourierName] == null ) { return 0 }
+	return KeyValues.CourierKv[sCourierName].VisualZDelta || 0
+}
+ GetCourierAmbientEffect(sCourierName) {
+	if ( KeyValues.CourierKv[sCourierName] == null ) { return }
+	return KeyValues.CourierKv[sCourierName].AmbientEffect
+}
+
+return PlayerCourier

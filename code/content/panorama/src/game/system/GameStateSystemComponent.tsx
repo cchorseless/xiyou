@@ -12,12 +12,22 @@ export class GameStateSystemComponent extends ET.Component {
     BindHeroPlayer: number[] = [];
     DifficultyChapter: GameStateConfig.EDifficultyChapter = GameStateConfig.EDifficultyChapter.n1;
     DifficultyLevel: number = 0;
+    BeforeGameEndTime: number = 0;
 
-    SelectDifficultyChapter(difficulty: number) {
+    getDifficultyChapterDes() {
+        return GameStateConfig.EDifficultyChapter[this.DifficultyLevel] as string;
+    }
+
+    SelectDifficultyChapter(difficulty: GameStateConfig.EDifficultyChapter) {
 
     }
 
-    SelectDifficultyLevel(difficulty: number) {
+    SelectDifficultyEndlessLevel(level: number) {
+
+    }
+
+
+    SelectCourier(name: string) {
 
     }
 }

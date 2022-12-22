@@ -36,7 +36,7 @@
         #DifficultyHover {
             width: 100%;
             height: 100%;
-            background-image: url("file://{images}/custom_game/before_game/hover.png");
+            background-image: url("file://{images}/custom_game/allspehud/before_game/hover.png");
             background-repeat: no-repeat;
             background-size: 85px 49px;
             background-position: center;
@@ -70,7 +70,7 @@
     #Lock {
         width: 32px;
         height: 32px;
-        background-image: url("file://{images}/custom_game/before_game/lock.png");
+        background-image: url("file://{images}/custom_game/allspehud/before_game/lock.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: 33px 37px;
@@ -102,6 +102,110 @@
 
         #Lock {
             visibility: visible;
+        }
+    }
+}
+
+#CC_GameEndlessDifficulty {
+    margin-top: 90px;
+    horizontal-align: right;
+    flow-children: right;
+
+    .RadioBox {
+        visibility: collapse;
+    }
+
+    .DifficultyPlayers {
+        flow-children: right;
+        vertical-align: center;
+        margin-right: 64px;
+    }
+
+    #Lock {
+        width: 32px;
+        height: 32px;
+        background-image: url("file://{images}/custom_game/allspehud/before_game/lock.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 33px 37px;
+        overflow: noclip;
+        visibility: collapse;
+    }
+
+    #endlessName {
+        vertical-align: top;
+        font-size: 20px;
+        color: #BB70DE;
+        text-shadow: 0px 0px 2px 3 #000000;
+        transition-property: color;
+        transition-duration: 0.2s;
+        transition-timing-function: ease-in-out;
+    }
+
+    &:selected {
+        #endlessName {
+            color: #eac5fa;
+            font-size: 24px;
+        }
+    }
+
+    #TextEntryAndButtons {
+        margin-left: 4px;
+        flow-children: down;
+
+        background-image: url("file://{images}/custom_game/allspehud/before_game/entry_bg.png");
+        background-position: left -10px top -6px, center;
+        background-repeat: no-repeat;
+        background-size: 54px 33px;
+        overflow: noclip;
+
+        #Buttons {
+            margin-top: 4px;
+            flow-children: right;
+        }
+    }
+
+    &:disabled {
+        #Lock {
+            visibility: visible;
+        }
+    }
+
+    #OperatorEndlessDecreaseButton,
+    #OperatorEndlessIncreaseButton {
+        vertical-align: center;
+        width: 20px;
+        height: 20px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+
+        &:enabled {
+            .CommonButtonEffect();
+        }
+    }
+
+    #OperatorEndlessDecreaseButton {
+        background-image: url("file://{images}/custom_game/allspehud/before_game/reduce.png");
+    }
+
+    #OperatorEndlessIncreaseButton {
+        background-image: url("file://{images}/custom_game/allspehud/before_game/add.png");
+    }
+
+    #OperatorEndlessTextEntry {
+        width: 54px;
+        height: 20px;
+        vertical-align: center;
+        padding: 0px;
+
+        background-color: transparent;
+        border-width: 0px;
+
+        Label {
+            horizontal-align: center;
+            font-size: 14px;
+            text-align: center;
+            text-overflow: shrink;
         }
     }
 }

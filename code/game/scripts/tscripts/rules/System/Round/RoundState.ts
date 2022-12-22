@@ -15,7 +15,8 @@ export class RoundState {
     }
 
     static GetFirstBoardRoundid() {
-        return GameRules.Addon.ETRoot.GameStateSystem().DifficultyChapter + "_1";
+        const difficultydes = GameRules.Addon.ETRoot.GameStateSystem().getDifficultyChapterDes()
+        return difficultydes + "_1";
     }
 
     static GetNextBoardRoundid() {

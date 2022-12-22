@@ -21,7 +21,7 @@ export class RoundManagerComponent extends ET.Component {
 
     private initChallengeRound() {
         for (let k in KVHelper.KvServerConfig.building_round_board_challenge) {
-            if (KVHelper.KvServerConfig.building_round_board_challenge[k].round_label == GameRules.Addon.ETRoot.GameStateSystem().DifficultyChapter) {
+            if (KVHelper.KvServerConfig.building_round_board_challenge[k].round_label == GameRules.Addon.ETRoot.GameStateSystem().getDifficultyChapterDes()) {
                 this.RoundInfo[k] = this.AddChild(ERoundBoardChallenge, k);
             }
         }

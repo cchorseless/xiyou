@@ -12,7 +12,6 @@ export class PlayerDataComponent extends ET.Component {
     onReload(): void {
     }
     startTime: string;
-    difficulty: string;
     popuLevel: number = 0;
     popuLevelUpCostGold: number = 0;
     popuLevelUpCostWood: number = 0;

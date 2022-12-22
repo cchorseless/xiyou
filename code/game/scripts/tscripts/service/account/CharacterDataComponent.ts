@@ -1,41 +1,12 @@
 import { reloadable } from "../../GameCache";
+import Dictionary from "../../helper/DataContainerHelper";
 import { ET, serializeETProps } from "../../rules/Entity/Entity";
+import { GameProtocol } from "../../shared/GameProtocol";
 import { NumericComponent } from "../common/NumericComponent";
 import { CharacterInGameDataComponent } from "./CharacterInGameDataComponent";
 import { TCharacter } from "./TCharacter";
 
-export class EMoneyType {
-    public static InGame_Gold = 1;
-    public static InGameMax = 100;
-    public static MetaStone = 101;
-    public static StarStone = 102;
-    public static ComHeroExp = 103;
 
-    public static FireEventMin = 500;
-
-    public static BattlePassExp = 501;
-
-    public static AchieveMentMin = 600;
-
-    public static KillEnemyCount = 601;
-
-    public static AchieveMentMax = 699;
-
-    public static DailyDataMin = 700;
-
-    public static DailyDataMax = 799;
-
-    public static WeekDataMin = 800;
-
-    public static WeekDataMax = 899;
-
-    public static SeasonDataMin = 900;
-
-    public static SeasonDataMax = 999;
-
-    public static MoneyMax = 1000;
-
-}
 @reloadable
 export class CharacterDataComponent extends ET.Component {
     onSerializeToEntity() {
@@ -48,6 +19,21 @@ export class CharacterDataComponent extends ET.Component {
 
     onReload(): void {
         this.Domain.ETRoot.AsPlayer().SyncClientEntity(this);
+    }
+    @serializeETProps()
+    private _GameDataStrDic: Dictionary<string, string> = new Dictionary<
+        string,
+        string
+    >();
+    public get GameDataStrDic() {
+        return this._GameDataStrDic;
+    }
+    public set GameDataStrDic(data: Dictionary<string, string>) {
+        this._GameDataStrDic.copyData((data as any)[0], (data as any)[1]);
+    }
+
+    getGameDataStr(key: GameProtocol.EGameDataStrDicKey) {
+        return this.GameDataStrDic.get(key)
     }
 
 

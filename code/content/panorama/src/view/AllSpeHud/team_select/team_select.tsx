@@ -99,6 +99,7 @@ export class CCTeam_select extends CCPanel<IProps> {
         const allPlayerList = Game.GetAllPlayerIDs();
         return (
             <Panel className="CC_Team_select" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+                <Label id="Logo" localizedText="#xiyou" />
                 <CCPanel id="PlayerList">
                     {
                         // allPlayerList.map((playerid, indeex) => {

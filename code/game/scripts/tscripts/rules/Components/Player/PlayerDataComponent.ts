@@ -25,8 +25,6 @@ export class PlayerDataComponent extends ET.Component {
     soulcrystal: number = 0;
     @serializeETProps()
     wood: number = 0;
-    @serializeETProps()
-    difficulty: string;
 
     @serializeETProps()
     popuLevel: number = 0;
@@ -50,7 +48,6 @@ export class PlayerDataComponent extends ET.Component {
     onAwake(...args: any[]): void {
         this.addEvent();
         this.startTime = TimerHelper.now();
-        this.difficulty = GameRules.Addon.ETRoot.GameStateSystem().getDifficultyDes();
         this.applyPopuLevelUp(0);
         this.applyTechLevelUp(0);
         this.perIntervalGold += 5;

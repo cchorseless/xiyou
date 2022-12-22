@@ -20,6 +20,10 @@ export module GameProtocol {
         // return "http://139.196.182.10:10002";
     }
 
-
+    /**服务器存的key */
+    export enum EGameDataStrDicKey {
+        sCourierIDInUse = "sCourierIDInUse",
+        sCourierIDInUseFx = "sCourierIDInUseFx"
+    }
 
 }

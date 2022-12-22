@@ -1,7 +1,7 @@
 export module GameStateConfig {
     /**网表存数据是否是存字符串的形式 */
     export const NetTableSaveDataAsSring = false;
-    /**lua服务器特殊处理一些数据类型 */
+    /**lua服务器特殊处理一些数据类型 todo 循环嵌套的结构没有处理*/
     export function TryEncodeData(d: any) {
         if (NetTableSaveDataAsSring) { return d }
         if (typeof d == "boolean") {
@@ -25,17 +25,17 @@ export module GameStateConfig {
     /**无尽最大层数 */
     export const iMaxEndless = 999;
     export enum EDifficultyChapter {
-        n1 = "n1",
-        n2 = "n2",
-        n3 = "n3",
-        n4 = "n4",
-        n5 = "n5",
-        n6 = "n6",
-        n7 = "n7",
-        n8 = "n8",
-        n9 = "n9",
-        n10 = "n10",
-        endless = "endless"
+        n1 = 1,
+        n2 = 2,
+        n3 = 3,
+        n4 = 4,
+        n5 = 5,
+        n6 = 6,
+        n7 = 7,
+        n8 = 8,
+        n9 = 9,
+        n10 = 10,
+        endless = 999
     }
 
     export const ENDLESS_ENEMEY_fHPMult = {
@@ -114,5 +114,9 @@ export module GameStateConfig {
         "501": 0.15,
         "601": 0.15,
     }
+
+    /**默认信使 */
+    export const DefaultCourier = "courier_1";
+
 
 }

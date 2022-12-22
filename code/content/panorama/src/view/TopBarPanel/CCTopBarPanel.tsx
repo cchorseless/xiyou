@@ -47,7 +47,13 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
             }), -1, false)
     }
 
-
+    getDifficultyDes() {
+        const difficultydes = PlayerScene.GameStateSystem.getDifficultyChapterDes();
+        if (PlayerScene.GameStateSystem.DifficultyLevel > 0) {
+            return difficultydes + "[" + PlayerScene.GameStateSystem.DifficultyLevel + "]";
+        }
+        return difficultydes;
+    }
 
     render() {
         if (!this.__root___isValid) {
@@ -63,7 +69,7 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
                         <Label id="RoundLabel" localizedText="#lang_TopBarRound" dialogVariables={{ round: round?.config.round_show || "1" }} />
                         <Label id="RoundState" text={round?.getCurStateDes()} />
                     </CCPanel>
-                    <Label id="RoundDifficulty" localizedText="#lang_TopBarDifficulty" dialogVariables={{ difficulty: playerdata.difficulty }} />
+                    <Label id="RoundDifficulty" localizedText="#lang_TopBarDifficulty" dialogVariables={{ difficulty: this.getDifficultyDes() }} />
                 </Image>
                 <CCImageNumber id="RoundTime" type="4" value={Math.floor(gametime)} />
                 {this.props.children}
