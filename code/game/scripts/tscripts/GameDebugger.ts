@@ -9,6 +9,7 @@ import { GameRequest } from "./service/GameRequest";
 import { BotHelper } from "./helper/BotHelper";
 import { CourierEntityRoot } from "./rules/Components/Courier/CourierEntityRoot";
 import { ActiveRootItem } from "./npc/items/ActiveRootItem";
+import { GameStateConfig } from "./shared/GameStateConfig";
 
 @reloadable
 export class GameDebugger extends SingletonClass {
@@ -181,7 +182,7 @@ export class GameDebugger extends SingletonClass {
         switch (tokens[0]) {
             case "-sendkey":
                 let serverkey = GetDedicatedServerKeyV2(tokens[1]);
-                GameRequest.GetInstance().SendServerKey(GameSetting.GAME_Name, tokens[1], serverkey);
+                GameRequest.GetInstance().SendServerKey(GameStateConfig.GAME_Name, tokens[1], serverkey);
                 break;
             case "-addbot":
                 let botCount = tonumber(tokens[1] || 1);

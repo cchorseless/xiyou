@@ -22,8 +22,14 @@ export module GameProtocol {
 
     /**服务器存的key */
     export enum EGameDataStrDicKey {
+        /**當前信使 */
         sCourierIDInUse = "sCourierIDInUse",
-        sCourierIDInUseFx = "sCourierIDInUseFx"
+        /**当前信使特效 */
+        sCourierIDInUseFx = "sCourierIDInUseFx",
+        /**通关的最大难度章节 */
+        iDifficultyMaxChapter = "iDifficultyMaxChapter",
+        /**通关的无尽最大难度层数 */
+        iDifficultyMaxLevel = "iDifficultyMaxLevel",
     }
 
 }

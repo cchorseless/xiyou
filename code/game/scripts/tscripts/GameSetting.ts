@@ -5,15 +5,12 @@ import { SingletonClass } from "./helper/SingletonHelper";
 import { Modifier_Plus } from "./npc/entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
 import { BuildingEntityRoot } from "./rules/Components/Building/BuildingEntityRoot";
+import { GameStateConfig } from "./shared/GameStateConfig";
 export class GameSetting {
     /**版本号 */
     public static readonly GAME_VERSION: string = "1.0.0";
 
-    public static readonly GAME_Name: string = "xiyou";
-
     public static readonly GAME_ISDEBUG: boolean = true;
-    /**最大玩家数量 */
-    public static readonly GAME_MAX_PLAYER: number = 5;
     /**每队最大玩家数量 */
     public static readonly TEAM_MAX_PLAYER: number = 1;
     /**开局金币数量 */
@@ -70,16 +67,16 @@ export class GameSetting {
         GameRules.SetHideKillMessageHeaders(true);
         GameRules.SetUseUniversalShopMode(true);
         GameRules.SetStartingGold(GameSetting.GAME_START_GOLD);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_GOODGUYS, GameSetting.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_BADGUYS, GameSetting.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_1, GameSetting.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_2, GameSetting.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_3, GameSetting.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_4, GameSetting.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_5, GameSetting.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_6, GameSetting.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_7, GameSetting.GAME_MAX_PLAYER);
-        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_8, GameSetting.GAME_MAX_PLAYER);
+        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_GOODGUYS, GameStateConfig.GAME_MAX_PLAYER);
+        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_BADGUYS, GameStateConfig.GAME_MAX_PLAYER);
+        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_1, GameStateConfig.GAME_MAX_PLAYER);
+        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_2, GameStateConfig.GAME_MAX_PLAYER);
+        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_3, GameStateConfig.GAME_MAX_PLAYER);
+        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_4, GameStateConfig.GAME_MAX_PLAYER);
+        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_5, GameStateConfig.GAME_MAX_PLAYER);
+        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_6, GameStateConfig.GAME_MAX_PLAYER);
+        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_7, GameStateConfig.GAME_MAX_PLAYER);
+        GameRules.SetCustomGameTeamMaxPlayers(DOTATeam_t.DOTA_TEAM_CUSTOM_8, GameStateConfig.GAME_MAX_PLAYER);
         GameRules.SetUseCustomHeroXPValues(true);
     }
 

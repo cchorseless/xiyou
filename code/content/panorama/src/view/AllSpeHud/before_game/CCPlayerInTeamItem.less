@@ -1,0 +1,197 @@
+.CCPlayerInTeamItem {
+    width: 367px;
+    height: 358px;
+    padding-top: 30px;
+    padding-right: 40px;
+
+    background-image: url("file://{images}/custom_game/before_game/player_bg.png");
+    background-repeat: no-repeat;
+    background-size: 327px 328px;
+    background-position: 0% 30px;
+
+    #PlayerTitleUse {
+        ui-scale: 70%;
+        horizontal-align: center;
+        margin-top: 45px;
+    }
+
+    #PlayerCourierRarity {
+        width: 100px;
+        height: 32px;
+        margin-top: -15px;
+        background-repeat: no-repeat;
+        background-position: 0% 0%;
+    }
+
+    #PlayerCourierName {
+        align: center top;
+        margin-top: 18px;
+        width: 143px;
+        height: 21px;
+
+        color: #ffffff;
+        font-size: 18px;
+        text-shadow: 0px 0px 3px 3 #000000;
+        text-overflow: shrink;
+        text-align: center;
+    }
+
+    #PlayerCourierScene {
+        width: 100%;
+        height: 100%;
+        margin-top: 50px;
+        margin-bottom: 100px;
+    }
+
+    #PlayerCourierAbility {
+        align: right bottom;
+        margin-right: 20px;
+        margin-bottom: 105px;
+        width: 52px;
+        height: width-percentage(100%);
+        padding: 3px;
+
+        transition-property: opacity;
+        transition-duration: 0.15s;
+        transition-timing-function: ease-in-out;
+
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    #PlayerDifficulty {
+        align: right top;
+        width: 47px;
+        height: 55px;
+        margin-top: -25px;
+
+        background-image: url("file://{images}/custom_game/before_game/difficulty_bg.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+
+        #PlayerDifficultyNum {
+            align: center center;
+            width: 40px;
+            height: 32px;
+            transform: rotateZ(-15deg);
+
+            background-repeat: no-repeat;
+        }
+
+        #PlayerDifficultyEndless {
+            align: center center;
+            font-size: 20px;
+            color: #eac5fa;
+            text-shadow: 0px 0px 2px 3 #000000;
+
+            transform: rotateZ(-15deg);
+        }
+    }
+
+    #PlayerState {
+        align: right top;
+        margin-top: 17px;
+        margin-right: -35px;
+
+        #PlayerReady {
+            width: 81px;
+            height: 73px;
+
+            background-image: url("file://{images}/custom_game/common/tick_big.png");
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+
+        #PlayerNotReady {
+            margin-top: 30px;
+            margin-right: 10px;
+
+            color: #ff4a4a;
+            font-size: 25px;
+            text-shadow: 0px 0px 1px 4 #000000;
+            text-align: center;
+        }
+    }
+
+    .loop(@index) when(@index >=0) {
+        .loop(@index - 1);
+
+        &.Difficulty@{index} {
+            #PlayerDifficulty #PlayerDifficultyNum {
+                background-image: url("file://{images}/custom_game/before_game/N@{index}_selected.png");
+            }
+        }
+    }
+
+    .loop(6);
+
+    &.Difficulty999 {
+        #PlayerDifficulty {
+            overflow: noclip;
+        }
+    }
+
+    &.CourierR {
+        #PlayerCourierRarity {
+            background-image: url("file://{images}/custom_game/rarity/R.png");
+        }
+
+        #PlayerCourierAbility {
+            background-image: url("file://{images}/custom_game/card/card_ability_border_R.jpg");
+        }
+    }
+
+    &.CourierSR {
+        #PlayerCourierRarity {
+            background-image: url("file://{images}/custom_game/rarity/SR.png");
+        }
+
+        #PlayerCourierAbility {
+            background-image: url("file://{images}/custom_game/card/card_ability_border_SR.jpg");
+        }
+    }
+
+    &.CourierSSR {
+        #PlayerCourierRarity {
+            background-image: url("file://{images}/custom_game/rarity/SSR.png");
+        }
+
+        #PlayerCourierAbility {
+            background-image: url("file://{images}/custom_game/card/card_ability_border_SSR.jpg");
+        }
+    }
+
+    #NewPlayerMain {
+        align: left bottom;
+        margin-bottom: 34px;
+        flow-children: down;
+
+        Label {
+            font-size: 14px;
+            color: #3EF3BC;
+        }
+
+        Image {
+            width: 53px;
+            height: 50px;
+            margin-top: 7px;
+            margin-left: 12px;
+            background-image: url("file://{images}/custom_game/before_game/new_player.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+    }
+
+    .PlayerCard {
+        align: center bottom;
+        margin-bottom: 16px;
+
+        #PlayerName {
+            width: 133px;
+            height: 100%;
+            margin-top: 18px;
+            margin-left: 72px;
+            // text-overflow: ellipsis;
+        }
+    }
+}

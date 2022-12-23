@@ -39,3 +39,18 @@ declare interface IPublicShopItem {
     iLeftCount?: number,
     iLimit?: number,
 }
+
+/**玩家选择进入游戏数据 */
+interface IPlayerGameSelection {
+    Difficulty: {
+        Chapter: number;
+        Level: number;
+        MaxChapter: number;
+        MaxLevel: number;
+    },
+    Courier: string;
+    Title: string;
+    EndlessRank: number;
+    IsReady: boolean;
+    bNewPlayer: boolean;
+}

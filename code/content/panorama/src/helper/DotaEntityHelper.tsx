@@ -1,5 +1,5 @@
 import { GameEnum } from "../../../../game/scripts/tscripts/shared/GameEnum";
-import { ShareConfig } from "../../../../game/scripts/tscripts/shared/ShareConfig";
+import { JsonConfigHelper } from "../../../../game/scripts/tscripts/shared/Gen/JsonConfigHelper";
 import { FuncHelper } from "./FuncHelper";
 import { KVHelper } from "./KVHelper";
 import { LogHelper } from "./LogHelper";
@@ -1225,7 +1225,7 @@ export module ItemHelper {
         return GetItemValue(sItemName, "Rarity") || "A";
     }
     export function GetItemRarityNumber(sItemName: string) {
-        return ShareConfig.ToRarityNumber(GetItemValue(sItemName, "Rarity") as any);
+        return JsonConfigHelper.ToRarityNumber(GetItemValue(sItemName, "Rarity") as any);
     }
 
     export function GetItemRecipes(sItemName: string) {

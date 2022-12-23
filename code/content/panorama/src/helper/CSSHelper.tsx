@@ -896,6 +896,14 @@ export module CSSHelper {
         Yellow = "yellow",
     }
 
+    export function GetPlayerColor(playerid: PlayerID) {
+        const color = Players.GetPlayerColor(playerid)
+        return "#" + ('00' + (color & 0xFF).toString(16)).substring(-2) +
+            ('00' + ((color >> 8) & 0xFF).toString(16)).substring(-2) +
+            ('00' + ((color >> 16) & 0xFF).toString(16)).substring(-2) +
+            ('00' + ((color >> 24) & 0xFF).toString(16)).substring(-2);
+    }
+
     export function IsCssStyle(kk: string) {
         return (VCSSStyle as any)[kk] != null;
     }

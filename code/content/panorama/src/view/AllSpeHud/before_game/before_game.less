@@ -1,0 +1,150 @@
+#CC_Before_Game {
+    width: 100%;
+    height: 100%;
+    background-image: url("file://{images}/custom_game/before_game/bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    #TimerTitle {
+        align: center top;
+        margin-top: 26px;
+        font-size: 16px;
+        color: #5AC5E4;
+        text-shadow: 0px 0px 3px 2 #000000;
+    }
+
+    #Timer {
+        align: center top;
+        margin-top: 57px;
+        flow-children: right;
+
+    }
+
+    #PlayerContainer {
+        width: 790px;
+        align: center top;
+        margin-left: 40px;
+        margin-top: 120px;
+        flow-children: right-wrap;
+
+        #Player_1,
+        #Player_3 {
+            margin-left: 50px;
+        }
+
+        #Player_2,
+        #Player_3 {
+            margin-top: 10px;
+        }
+    }
+
+    #PlayerCourier {
+        margin-left: 305px;
+        margin-top: 107px;
+        flow-children: down;
+
+        #PlayerCourierTitle {
+            margin-right: 10px;
+            horizontal-align: center;
+            color: #4e8994;
+            font-size: 16px;
+            text-shadow: 0px 0px 3px 3 #000000;
+        }
+
+        #PlayerCourierList {
+            width: 180px;
+            max-height: 700px;
+            margin-top: 20px;
+            padding-left: 10px;
+            flow-children: down;
+            // opacity-mask-scroll-up-down: url("file://{images}/custom_game/common/vertical_scroll_mask.png");
+            // opacity-mask-scroll-up: url("file://{images}/custom_game/common/vertical_scroll_mask_up.png");
+            // opacity-mask-scroll-down: url("file://{images}/custom_game/common/vertical_scroll_mask_down.png");
+        }
+
+        .PlayerCourierCard {
+            ui-scale: 60%;
+            margin-bottom: 18px;
+            transition-property: box-shadow;
+            transition-duration: 0.15s;
+            transition-timing-function: ease-in-out;
+
+            &.Selected {
+                box-shadow: 0px 0px 16px -8px #1cc9cf;
+
+                animation-name: Shine;
+                animation-delay: 0.15s;
+                animation-duration: 20s;
+                animation-iteration-count: infinite;
+                animation-timing-function: ease-in-out;
+            }
+
+            &:hover {
+                brightness: 2.0;
+            }
+
+            @keyframes Shine {
+                0% {
+                    box-shadow: 0px 0px 10px -5px #1cc9cf;
+                }
+
+                10% {
+                    box-shadow: 0px 0px 16px -8px #74e8ec;
+                }
+
+                20% {
+                    box-shadow: 0px 0px 12px -6px #1cc9cf;
+                }
+
+                30% {
+                    box-shadow: 0px 0px 14px -7px #74e8ec;
+                }
+
+                40% {
+                    box-shadow: 0px 0px 8px -4px #1cc9cf;
+                }
+
+                50% {
+                    box-shadow: 0px 0px 24px -12px #74e8ec;
+                }
+
+                60% {
+                    box-shadow: 0px 0px 18px -9px #1cc9cf;
+                }
+
+                70% {
+                    box-shadow: 0px 0px 20px -10px #74e8ec;
+                }
+
+                80% {
+                    box-shadow: 0px 0px 10px -5px #1cc9cf;
+                }
+
+                90% {
+                    box-shadow: 0px 0px 20px -10px #74e8ec;
+                }
+
+                100% {
+                    box-shadow: 0px 0px 10px -5px #1cc9cf;
+                }
+            }
+        }
+    }
+
+    #Difficulties {
+        align: right top;
+        margin-right: 224px;
+        margin-top: 100px;
+
+        flow-children: down;
+
+        #DifficultiesTitle {
+            align: right top;
+            margin-top: 8px;
+            margin-right: 60px;
+            font-size: 16px;
+            color: #4E8994;
+            text-shadow: 0px 0px 2px 2 #000;
+        }
+    }
+}

@@ -13,6 +13,7 @@ export class GameStateSystemComponent extends ET.Component {
     DifficultyChapter: GameStateConfig.EDifficultyChapter = GameStateConfig.EDifficultyChapter.n1;
     DifficultyLevel: number = 0;
     BeforeGameEndTime: number = 0;
+    tPlayerGameSelection: { [playerid: string]: IPlayerGameSelection } = {}
 
     getDifficultyChapterDes() {
         return GameStateConfig.EDifficultyChapter[this.DifficultyLevel] as string;
@@ -25,7 +26,6 @@ export class GameStateSystemComponent extends ET.Component {
     SelectDifficultyEndlessLevel(level: number) {
 
     }
-
 
     SelectCourier(name: string) {
 

@@ -1,4 +1,6 @@
 export module GameStateConfig {
+    export const GAME_Name = "xiyou";
+    export const GAME_MAX_PLAYER = 5;
     /**网表存数据是否是存字符串的形式 */
     export const NetTableSaveDataAsSring = false;
     /**lua服务器特殊处理一些数据类型 todo 循环嵌套的结构没有处理*/
@@ -22,8 +24,7 @@ export module GameStateConfig {
         return d;
     }
 
-    /**无尽最大层数 */
-    export const iMaxEndless = 999;
+
     export enum EDifficultyChapter {
         n1 = 1,
         n2 = 2,
@@ -35,9 +36,13 @@ export module GameStateConfig {
         n8 = 8,
         n9 = 9,
         n10 = 10,
+        /**无尽关卡 */
         endless = 999
     }
-
+    /**无尽最大层数 */
+    export const iMaxEndless = 999;
+    /**普通最大难度 */
+    export const DIFFICULTY_LAST = EDifficultyChapter.n6;
     export const ENDLESS_ENEMEY_fHPMult = {
         "1": 0.15,
         "10": 0.2,

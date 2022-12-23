@@ -8,16 +8,15 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 // 额外金币
 @registerAbility()
 export class courier_extra_gold_sec_1 extends BaseAbility_Plus {
-    OnUpgrade() {
-        if (this.GetLevel() > 0) {
-            let hCaster = this.GetCasterPlus()
-            this.StartCooldown(this.GetSpecialValueFor("interval"))
-            hCaster.AddNewModifier(hCaster, this, "modifier_courier_gold_sec_1", null)
-        }
+    // OnUpgrade() {
+    //     if (this.GetLevel() > 0) {
+    //         let hCaster = this.GetCasterPlus()
+    //         hCaster.AddNewModifier(hCaster, this, "modifier_courier_gold_sec_1", null)
+    //     }
+    // }
+    GetIntrinsicModifierName() {
+        return modifier_courier_gold_sec_1.name;
     }
-
-
-
 
 }
 
@@ -42,7 +41,8 @@ export class modifier_courier_gold_sec_1 extends BaseModifier_Plus {
         this.interval = this.GetSpecialValueFor("interval")
         this.gold_sec_min = this.GetSpecialValueFor("gold_sec_min")
         this.gold_sec_max = this.GetSpecialValueFor("gold_sec_max")
-        if (IsServer()) {
+        if (IsServer() && params.IsOnCreated) {
+            this.CC_IntervalThink();
             this.addTimer(this.interval, this.CC_IntervalThink)
         }
     }

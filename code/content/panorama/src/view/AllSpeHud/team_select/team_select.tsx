@@ -5,11 +5,10 @@ import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
 import { CCLoading } from "../loading/loading";
-import { PlayerInTeamItem } from "./PlayerInTeamItem";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
-import "./team_select.less";
 import { CCButton } from "../../AllUIElement/CCButton/CCButton";
+import "./team_select.less";
 
 interface IProps extends NodePropsData {
 }
