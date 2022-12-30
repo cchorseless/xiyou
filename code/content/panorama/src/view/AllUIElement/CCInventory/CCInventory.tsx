@@ -1,9 +1,9 @@
-import React, { createRef, PureComponent } from "react";
-import { CCPanel } from "../CCPanel/CCPanel";
-import { NodePropsData } from "../../../libs/BasePureComponent";
+import React from "react";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
-import { CCInventorySlot } from "./CCInventorySlot";
+import { NodePropsData } from "../../../libs/BasePureComponent";
+import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCInventory.less";
+import { CCInventorySlot } from "./CCInventorySlot";
 
 interface ICCInventory extends NodePropsData {
 }
@@ -59,7 +59,7 @@ export class CCInventory extends CCPanel<ICCInventory> {
         return (
             this.__root___isValid && (
                 <Panel id="InventoryRoot" ref={this.__root__} {...this.initRootAttrs()}>
-                    <Panel id="inventory_items" hittest={false} require-composition-layer="true" always-cache-composition-layer="true" >
+                    <Panel id="inventory_items" hittest={false} require-composition-layer={true} always-cache-composition-layer={true} >
                         <Panel id="InventoryContainer" hittest={true} draggable={true} >
                             <Panel id="inventory_list_container" hittest={false} >
                                 <Panel id="inventory_list" className="inventory_list" hittest={false}  >

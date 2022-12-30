@@ -16,6 +16,7 @@ export class PlayerEntityRoot extends ET.Entity {
 
     onAwake(playerid: PlayerID): void {
         (this.BelongPlayerid as any) = playerid;
+        GLogHelper.print("-----------", PlayerEntityRoot.GetOneInstance(this.BelongPlayerid) == null)
         if (this.IsLocalPlayer) {
             (GGameScene.Local as any) = this;
             this.AddComponent(GGetRegClass<typeof PlayerNetTableComponent>("PlayerNetTableComponent"));

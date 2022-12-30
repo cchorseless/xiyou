@@ -6,7 +6,7 @@ const {
 } = require('@aabao/webpack-panorama');
 
 /** @type {import('webpack').Configuration} */
-const isProduction = false;
+const isProduction = false;;
 const fileList = () => {
     let viewdir = [
         "config"
@@ -22,9 +22,9 @@ const fileList = () => {
 };
 module.exports = {
     optimization: { // 1. 这个配置必须
-        minimize: false
+        minimize: false,
     },
-    devtool: isProduction ? false : 'eval-source-map',
+    devtool: isProduction ? false : 'eval-cheap-module-source-map',
     mode: isProduction ? 'production' : 'development',
     context: path.resolve(__dirname, 'src'),
     output: {
@@ -46,7 +46,10 @@ module.exports = {
         rules: [{
                 test: /\.xml$/,
                 use: [{
-                        loader: '@aabao/webpack-panorama/lib/layout-loader',
+                    loader: '@aabao/webpack-panorama/lib/layout-loader',
+                    options: {
+                        cacheable: true,
+                    },
                     },
                     {
                         loader: path.resolve(__dirname, "./webpackloader/importless.js")
@@ -57,6 +60,9 @@ module.exports = {
                 test: /\.[jt]sx$/,
                 issuer: /\.xml$/,
                 loader: '@aabao/webpack-panorama/lib/entry-loader',
+                options: {
+                    cacheable: true,
+                },
             },
             {
                 test: /\.tsx?$/,
@@ -109,6 +115,10 @@ module.exports = {
     plugins: [
         new PanoramaTargetPlugin(),
         new PanoramaManifestPlugin({
+            minify: {
+				caseSensitive: true,
+				keepClosingSlash: true,
+			},
             entries: [
                 // 编译载入界面到custom_loading_screen
                 {

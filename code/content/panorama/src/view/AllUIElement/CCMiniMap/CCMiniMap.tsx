@@ -1,4 +1,4 @@
-import React, { createRef, PureComponent } from "react";
+import React from "react";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCMiniMap.less";
@@ -20,7 +20,7 @@ export class CCMiniMap extends CCPanel<ICCMiniMap> {
                     {...this.initRootAttrs()}
                 >
                     <Panel id="minimap_block" acceptsfocus={true}>
-                        <DOTAMinimap id="minimap" require-composition-layer="true" />
+                        <DOTAMinimap id="minimap" require-composition-layer={true} />
                     </Panel>
                     <Panel id="HUDSkinMinimap" hittest={false} />
                     {/* <Panel id="GlyphScanContainer" hittest="false">

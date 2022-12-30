@@ -581,7 +581,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} {...this.initRootAttrs()}>
-                <Panel id="ButtonAndLevel" require-composition-layer="true" always-cache-composition-layer="true" hittest={false}>
+                <Panel id="ButtonAndLevel" require-composition-layer={true} always-cache-composition-layer={true} hittest={false}>
                     <CCLevelUpBurstFXContainer m_is_item={m_is_item} />
                     <Panel id="ButtonWithLevelUpTab" hittest={false}>
                         <CCLevelUpTab overrideentityindex={overrideentityindex} abilityButton={this.AbilityButton} />

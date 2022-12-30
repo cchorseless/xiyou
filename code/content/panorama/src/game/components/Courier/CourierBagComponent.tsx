@@ -6,8 +6,9 @@ import { ItemEntityRoot } from "../Item/ItemEntityRoot";
 @GReloadable
 export class CourierBagComponent extends CourierBag {
     onSerializeToEntity() {
-        LogHelper.print("CourierBagComponent", this.BelongPlayerid);
-        GGameScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
+        LogHelper.print("CourierBagComponent", GGameScene.GetPlayer(this.BelongPlayerid) == null, GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid) == null, this.BelongPlayerid);
+
+        GGameScene.GetPlayer(this.BelongPlayerid).AddOneComponent(this);
     }
 
     setBuyItem2Bag(b: boolean) {

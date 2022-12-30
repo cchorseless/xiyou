@@ -10,7 +10,7 @@ import { AllServiceEntity } from "./service/AllServiceEntity";
 export class AllShared {
     static Init() {
         AllServiceEntity.init();
-        GLogHelper.print("register AllShared");
+        GLogHelper.print(`-------------------------------CODE ON LUA ${_CODE_IN_LUA_}---------------------------------`);
 
     }
 }

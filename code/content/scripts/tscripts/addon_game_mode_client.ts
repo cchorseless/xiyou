@@ -8,7 +8,6 @@ import { KVHelper } from "./helper/KVHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { BaseNpc_Plus } from "./npc/entityPlus/BaseNpc_Plus";
 import { ability_propertytool } from "./npc/propertystat/ability_propertytool";
-import { AllShared } from "./shared/AllShared";
 import { GameEnum } from "./shared/GameEnum";
 import { SingletonClass } from "./shared/lib/SingletonClass";
 
@@ -64,7 +63,6 @@ export class GameMode_Client extends SingletonClass {
 }
 
 LogHelper.print("IsClient start ----------------------");
-AllShared.Init();
 GameCache.Init();
 AllEntity.Init();
 GameMode_Client.GetInstance().Init();

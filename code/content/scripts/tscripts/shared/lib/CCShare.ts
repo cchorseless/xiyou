@@ -268,10 +268,11 @@ declare global {
     type IGDictionary<K, V> = CCShare.Dictionary<K, V>;
     var GDictionary: typeof CCShare.Dictionary;
 }
-if (!(Entities as any).First) {
+const _CODE_IN_JS_ = !((Entities as any).First);
+if (_CODE_IN_JS_) {
     (global as any)._G = global;
 }
-(_G._CODE_IN_LUA_ as any) = ((Entities as any).First !== null);
+(_G._CODE_IN_LUA_ as any) = !_CODE_IN_JS_;
 if (_G.GHandler == null) {
     _G.GHandler = CCShare.CCHandler;
     _G._GReloadClassTypeCache = {};
@@ -279,7 +280,7 @@ if (_G.GHandler == null) {
     _G.GGetRegClass = CCShare.GetRegClass;
     _G.GGenerateUUID = CCShare.GenerateUUID;
     _G.GDictionary = CCShare.Dictionary;
-    if (!_G._CODE_IN_LUA_) {
-        (_G as any).GameRules = Game;
+    if (_CODE_IN_JS_) {
+        (global as any).GameRules = Game;
     }
 }

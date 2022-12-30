@@ -13,7 +13,7 @@ export class CCDOTAXP extends CCPanel<ICCDOTAXP> {
         return (
             this.__root___isValid &&
             <Panel id="CC_DOTAXP" ref={this.__root__}      {...this.initRootAttrs()}>
-                <GenericPanel type="DOTAXP" id="xp" style={{ width: "45px" }} hittest={false} always-cache-composition-layer="true" require-composition-layer="true" />
+                <GenericPanel type="DOTAXP" id="xp" style={{ width: "45px" }} hittest={false} always-cache-composition-layer={true} require-composition-layer={true} />
                 {this.__root___childs}
                 {this.props.children}
             </Panel>

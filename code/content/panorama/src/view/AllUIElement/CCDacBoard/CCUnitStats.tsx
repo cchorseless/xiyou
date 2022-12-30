@@ -1,8 +1,6 @@
-import React, { createRef, PureComponent } from "react";
-import { DOTAParticleScenePanelAttributes, PanelAttributes } from "@demon673/react-panorama";
-import { CCPanel } from "../CCPanel/CCPanel";
+import React, { createRef } from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { LogHelper } from "../../../helper/LogHelper";
+import { CCPanel } from "../CCPanel/CCPanel";
 
 
 interface ICCUnitStats {
@@ -43,7 +41,7 @@ export class CCUnitStats extends CCPanel<ICCUnitStats>  {
                         <Panel id="HUDSkinStatBranchBG" className="hud_skinnable" hittest={false} />
                         <Panel id="HUDSkinStatBranchGlow" className="hud_skinnable" hittest={false} />
                         <GenericPanel type="DOTAStatsRegion" id="stats" ref={this.stats} className="ShowSplitLabels statsDiv" hittest={false} />
-                        <GenericPanel type="DOTAHUDStrAgiInt" id="stragiint" ref={this.stragiint} className="stragiintDiv" always-cache-composition-layer="true" require-composition-layer="true" hittest={false} />
+                        <GenericPanel type="DOTAHUDStrAgiInt" id="stragiint" ref={this.stragiint} className="stragiintDiv" always-cache-composition-layer={true} require-composition-layer={true} hittest={false} />
                         <Panel id="HUDSkinPreCenterParticlesLeft" className="hud_skinnable" hittest={false} />
                         {this.__root___childs}
                         {this.props.children}

@@ -13,7 +13,7 @@ export class ECombination extends ET.Entity {
     }
     onReload() {
         if (this.IsEmpty()) { return; }
-        GGameScene.GetPlayer(this.BelongPlayerid)?.CombinationManager.addOneCombination(this);
+        GGameScene.GetPlayer(this.BelongPlayerid).CombinationManager.addOneCombination(this);
     }
 
     isFakerCombination() {

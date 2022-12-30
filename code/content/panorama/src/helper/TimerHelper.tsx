@@ -1,4 +1,5 @@
 export module TimerHelper {
+    export let isWorking = false;
     export const Offtime = new Date().getTimezoneOffset() * 60 * 1000;
     export const GetTimeDes = (t: number) => {
         t = Math.floor(t);
@@ -10,8 +11,11 @@ export module TimerHelper {
         hh = (hh.length == 2) ? hh : "0" + hh;
         return `${hh}:${mm}:${ss}`;
     }
-
+    export function Stop() {
+        isWorking = false;
+    }
     export function Init() {
+        isWorking = true;
         let interval = GTimerHelper.GetUpdateInterval();
         $.Schedule(interval, () => {
             Update(interval);
@@ -22,6 +26,6 @@ export module TimerHelper {
     }
     function Update(interval: number): void {
         GTimerHelper.Update(interval);
-        Init();
+        isWorking && Init();
     }
 }

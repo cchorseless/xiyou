@@ -6,6 +6,7 @@ import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { AllEntity } from "../../../game/AllEntity";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import { CCHero_Select } from "../hero_select/hero_select";
@@ -21,6 +22,7 @@ export class CCLoading extends CCPanel<NodePropsData> {
         this.addEvent()
     }
     onDestroy() {
+        TimerHelper.Stop();
         LogHelper.print("----------------loading close----------------")
     }
 
@@ -69,6 +71,8 @@ export class CCLoading extends CCPanel<NodePropsData> {
         )
     }
 }
+LogHelper.print("------------CODE ON LUA :", _CODE_IN_LUA_);
 AllShared.Init();
 AllEntity.Init();
+TimerHelper.Init();
 render(<CCLoading />, $.GetContextPanel());
