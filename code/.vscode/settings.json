@@ -2,5 +2,8 @@
     "editor.formatOnSave": true,
     "css.customData": [
         "./css_custom_data.json"
-    ]
+    ],
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    }
 }

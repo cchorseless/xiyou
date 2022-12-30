@@ -1,6 +1,6 @@
 import { render } from "@demon673/react-panorama";
 import React, { createRef, PureComponent } from "react";
-import { PublicBagConfig } from "../../../../../game/scripts/tscripts/shared/PublicBagConfig";
+import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { ItemHelper, UnitHelper } from "../../helper/DotaEntityHelper";
 import { LogHelper } from "../../helper/LogHelper";

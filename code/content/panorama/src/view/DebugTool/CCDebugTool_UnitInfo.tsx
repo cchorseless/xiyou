@@ -1,6 +1,4 @@
 import React from "react";
-import { FuncHelper } from "../../helper/FuncHelper";
-import { TimerHelper } from "../../helper/TimerHelper";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
@@ -8,7 +6,7 @@ import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 export class CCDebugTool_UnitInfo extends CCPanel {
     state = { unitIndex: -1 as EntityIndex };
     onInitUI() {
-        TimerHelper.AddIntervalFrameTimer(5, 5, FuncHelper.Handler.create(this, () => {
+        GTimerHelper.AddFrameTimer(5, GHandler.create(this, () => {
             const unitIndex = Players.GetLocalPlayerPortraitUnit();
             this.UpdateState({ unitIndex: unitIndex });
             this.UpdateState({ position: this.getPosition() });
@@ -17,8 +15,8 @@ export class CCDebugTool_UnitInfo extends CCPanel {
             this.UpdateState({ hp: (Entities.GetHealth(unitIndex) + "/" + Entities.GetMaxHealth(unitIndex)) });
             this.UpdateState({ mp: (Entities.GetMana(unitIndex) + "/" + Entities.GetMaxMana(unitIndex)) });
             this.UpdateState({ buff: ([...Array(Entities.GetNumBuffs(unitIndex))]) });
-
-        }), -1)
+            return 5
+        }))
     }
 
 

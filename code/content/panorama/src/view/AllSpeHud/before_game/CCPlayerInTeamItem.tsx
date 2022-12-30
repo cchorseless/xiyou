@@ -1,6 +1,5 @@
 import React, { createRef, useState } from "react";
-import { GameStateConfig } from "../../../../../../game/scripts/tscripts/shared/GameStateConfig";
-import { PlayerScene } from "../../../game/components/Player/PlayerScene";
+import { GameServiceConfig } from "../../../../../scripts/tscripts/shared/GameServiceConfig";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
@@ -15,11 +14,11 @@ interface ICCPlayerInTeamItem {
 export class CCPlayerInTeamItem extends CCPanel<ICCPlayerInTeamItem> {
 
     onReady() {
-        return Boolean(PlayerScene.GameStateSystem)
+        return Boolean(GGameScene.GameServiceSystem)
     }
 
     onInitUI() {
-        PlayerScene.GameStateSystem.RegRef(this);
+        GGameScene.GameServiceSystem.RegRef(this);
     }
 
     defaultStyle() {
@@ -29,7 +28,7 @@ export class CCPlayerInTeamItem extends CCPanel<ICCPlayerInTeamItem> {
 
     render() {
         const iPlayerID = this.props.iPlayerID;
-        const GamseStateSys = this.GetStateEntity(PlayerScene.GameStateSystem)!;
+        const GamseStateSys = this.GetStateEntity(GGameScene.GameServiceSystem)!;
         const tPlayerGameSelection = GamseStateSys.tPlayerGameSelection!;
         const tGameSelection = tPlayerGameSelection[iPlayerID + ""];
         const sCourierName = tGameSelection.Courier;
@@ -51,7 +50,7 @@ export class CCPlayerInTeamItem extends CCPanel<ICCPlayerInTeamItem> {
                 </>}
                 <Panel id="PlayerDifficulty" hittest={false} >
                     {(() => {
-                        if (iDifficulty == GameStateConfig.EDifficultyChapter.endless) {
+                        if (iDifficulty == GameServiceConfig.EDifficultyChapter.endless) {
                             return <Label id="PlayerDifficultyEndless" localizedText="#Difficult_999" />;
                         }
                         return <Panel id="PlayerDifficultyNum" />;

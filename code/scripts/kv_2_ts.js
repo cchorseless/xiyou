@@ -18,7 +18,7 @@ const {
 // 需要读取的excel路径
 const npc_path = "game/scripts/";
 const kv_path = "game/scripts/npc";
-const interface_path = "game/scripts/tscripts/kvInterface";
+const interface_path = "content/scripts/tscripts/kvInterface";
 const uiInterface_path = "content/panorama/src/config";
 const kvjsconfig = "game/scripts/npc/kv_config.kv";
 const KvAllInterface_UI = uiInterface_path + "/KvAllInterface.d.ts";

@@ -1,18 +1,9 @@
-import { ET, registerET } from "../../libs/Entity";
-import { ItemEntityRoot } from "../components/Item/ItemEntityRoot";
-import { PlayerScene } from "../components/Player/PlayerScene";
+import { PublicBagSystem } from "../../../../scripts/tscripts/shared/rules/System/PublicBagSystem";
 
-@registerET()
-export class PublicBagSystemComponent extends ET.Component {
-    AllItem: { [slot: string]: string } = {};
+@GReloadable
+export class PublicBagSystemComponent extends PublicBagSystem {
     onSerializeToEntity(): void {
-        PlayerScene.Scene.AddOneComponent(this);
+        GGameScene.Scene.AddOneComponent(this);
     }
 
-
-    getItemByIndex(slot: string) {
-        let entityid = this.AllItem[slot];
-        if (entityid == null) return;
-        return PlayerScene.EntityRootManage.GetChild<ItemEntityRoot>(entityid);
-    }
 }

@@ -1,23 +1,18 @@
-import React, { } from "react";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import React from "react";
+import { PlayerConfig } from "../../../../scripts/tscripts/shared/PlayerConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { FuncHelper } from "../../helper/FuncHelper";
-import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
-import { TimerHelper } from "../../helper/TimerHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
-import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCDividerLine } from "../AllUIElement/CCDivider/CCDividerLine";
 import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
-import { CCChallengeAbilityIcon } from "./CCChallengeAbilityIcon";
-import { PlayerConfig } from "../../../../../game/scripts/tscripts/shared/PlayerConfig";
 import { CCDrawCardPanel } from "../Draw/CCDrawCardPanel";
+import { CCChallengeAbilityIcon } from "./CCChallengeAbilityIcon";
 
-import "./CCChallengeShopPanel.less";
 import { CCPublicShopBagPanel } from "../PublicShopBag/CCPublicShopBagPanel";
+import "./CCChallengeShopPanel.less";
 
 export interface ICCChallengeShopPanel {
 
@@ -26,18 +21,18 @@ export interface ICCChallengeShopPanel {
 export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
 
     onReady() {
-        return Boolean(PlayerScene.Local.PlayerDataComp) && CSSHelper.IsReadyUI();
+        return Boolean(GGameScene.Local.PlayerDataComp) && CSSHelper.IsReadyUI();
     }
 
     onInitUI() {
-        PlayerScene.Local.PlayerDataComp.RegRef(this);
-        // TimerHelper.AddTimer(1, FuncHelper.Handler.create(this, () => {
+        GGameScene.Local.PlayerDataComp.RegRef(this);
+        // GTimerHelper.AddTimer(1, GHandler.create(this, () => {
         //     this.__root__.current!.AddClass("Show")
         // }))
 
     }
     onbtnpop_click() {
-        let playerdata = PlayerScene.Local.PlayerDataComp;
+        let playerdata = GGameScene.Local.PlayerDataComp;
         if (playerdata.popuLevel >= playerdata.popuLevelMax) {
             TipsHelper.showErrorMessage("max level");
             return;
@@ -53,7 +48,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
         NetHelper.SendToLua(PlayerConfig.EProtocol.reqApplyPopuLevelUp);
     };
     onbtntec_click() {
-        let playerdata = PlayerScene.Local.PlayerDataComp;
+        let playerdata = GGameScene.Local.PlayerDataComp;
         if (playerdata.techLevel >= playerdata.techLevelMax) {
             TipsHelper.showErrorMessage("max level");
             return;
@@ -87,7 +82,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
         if (!this.__root___isValid) {
             return this.defaultRender("CC_ChallengeShopPanel");
         }
-        const playerdata = this.GetStateEntity(PlayerScene.Local.PlayerDataComp);
+        const playerdata = this.GetStateEntity(GGameScene.Local.PlayerDataComp);
         return (
             <Panel id="CC_ChallengeShopPanel" ref={this.__root__}      {...this.initRootAttrs()}>
                 <CCPanel id="challenge_imgBg" flowChildren="down" >

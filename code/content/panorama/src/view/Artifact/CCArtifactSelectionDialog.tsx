@@ -1,5 +1,4 @@
 import React, { createRef, useState } from "react";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { AbilityHelper } from "../../helper/DotaEntityHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
@@ -16,7 +15,7 @@ interface ICCArtifactSelectionDialog extends NodePropsData {
 export class CCArtifactSelectionDialog extends CCPanel<ICCArtifactSelectionDialog> {
 
     render() {
-        const courierbag = PlayerScene.Local.CourierBagComp!;
+        const courierbag = GGameScene.Local.CourierBagComp!;
         return (
             <Panel className={CSSHelper.ClassMaker("CC_ArtifactSelectionDialog")} ref={this.__root__}  {...this.initRootAttrs()}>
                 <CCPopupBG type="Tui3" />

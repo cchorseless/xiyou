@@ -1,7 +1,6 @@
 
 import React, { createRef, PureComponent } from "react";
-import { PublicBagConfig } from "../../../../../game/scripts/tscripts/shared/PublicBagConfig";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -19,17 +18,17 @@ import { CSSHelper } from "../../helper/CSSHelper";
 export class CCPublicBag extends CCPanel<{}> {
 
     onReady() {
-        return Boolean(PlayerScene.PublicBagSystemComp)
+        return Boolean(GGameScene.PublicBagSystemComp)
     }
 
     onInit() {
-        PlayerScene.PublicBagSystemComp.RegRef(this)
+        GGameScene.PublicBagSystemComp.RegRef(this)
     }
 
 
     render() {
         if (!this.__root___isValid) { return this.defaultRender("CC_PublicBag") }
-        const publicBag = this.GetStateEntity(PlayerScene.PublicBagSystemComp)!;
+        const publicBag = this.GetStateEntity(GGameScene.PublicBagSystemComp)!;
         return (
             <Panel id="CC_PublicBag" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPublicShopBagTitle title={$.Localize("#PublicBag")} />
@@ -53,17 +52,17 @@ export class CCPublicBag extends CCPanel<{}> {
 
 export class CCPersonBag extends CCPanel<{}> {
     onReady() {
-        return Boolean(PlayerScene.Local.CourierBagComp)
+        return Boolean(GGameScene.Local.CourierBagComp)
     }
 
     onInit() {
-        PlayerScene.Local.CourierBagComp.RegRef(this)
+        GGameScene.Local.CourierBagComp.RegRef(this)
     }
 
 
     render() {
         if (!this.__root___isValid) { return this.defaultRender("CC_PersonBag") }
-        const courierBag = this.GetStateEntity(PlayerScene.Local.CourierBagComp)!;
+        const courierBag = this.GetStateEntity(GGameScene.Local.CourierBagComp)!;
         return (
             <Panel id="CC_PersonBag" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPublicShopBagTitle title={$.Localize("#PublicBag")} />
@@ -104,15 +103,15 @@ export class CCPersonBag extends CCPanel<{}> {
 
 export class CCEquipCombine extends CCPanel<{}> {
     onReady() {
-        return Boolean(PlayerScene.Local.CourierBagComp)
+        return Boolean(GGameScene.Local.CourierBagComp)
     }
 
     onInit() {
-        PlayerScene.Local.CourierBagComp.RegRef(this)
+        GGameScene.Local.CourierBagComp.RegRef(this)
     }
 
     checkCanCombine() {
-        const courierBag = PlayerScene.Local.CourierBagComp!;
+        const courierBag = GGameScene.Local.CourierBagComp!;
         let iItemSameLevel = -1;
         for (let i = PublicBagConfig.CUSTOM_COMBINE_SLOT_MIN; i <= PublicBagConfig.PUBLIC_ITEM_SLOT_MAX; i++) {
             let entity = courierBag.getItemByIndex(i + "");
@@ -131,7 +130,7 @@ export class CCEquipCombine extends CCPanel<{}> {
 
     render() {
         if (!this.__root___isValid) { return this.defaultRender("CC_PersonBag") }
-        const courierBag = this.GetStateEntity(PlayerScene.Local.CourierBagComp)!;
+        const courierBag = this.GetStateEntity(GGameScene.Local.CourierBagComp)!;
         const bCanCombine = this.checkCanCombine()
         return (
             <Panel id="CC_EquipCombine" ref={this.__root__} hittest={false}>
@@ -169,17 +168,17 @@ export class CCEquipCombine extends CCPanel<{}> {
 
 export class CCGoldShop extends CCPanel<{}> {
     onReady() {
-        return Boolean(PlayerScene.Local.CourierShopComp)
+        return Boolean(GGameScene.Local.CourierShopComp)
     }
 
     onInit() {
-        PlayerScene.Local.CourierShopComp.RegRef(this)
+        GGameScene.Local.CourierShopComp.RegRef(this)
     }
 
 
     render() {
         if (!this.__root___isValid) { return this.defaultRender("CC_GoldShop") }
-        const courierShop = this.GetStateEntity(PlayerScene.Local.CourierShopComp)!;
+        const courierShop = this.GetStateEntity(GGameScene.Local.CourierShopComp)!;
         const GoldItems = courierShop.getSellItem(PublicBagConfig.EPublicShopType.GoldShop)
         return (
             <Panel id="CC_GoldShop" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
@@ -202,17 +201,17 @@ export class CCGoldShop extends CCPanel<{}> {
 
 export class CCWoodShop extends CCPanel<{}> {
     onReady() {
-        return Boolean(PlayerScene.Local.CourierShopComp)
+        return Boolean(GGameScene.Local.CourierShopComp)
     }
 
     onInit() {
-        PlayerScene.Local.CourierShopComp.RegRef(this)
+        GGameScene.Local.CourierShopComp.RegRef(this)
     }
 
 
     render() {
         if (!this.__root___isValid) { return this.defaultRender("CC_WoodShop") }
-        const courierShop = this.GetStateEntity(PlayerScene.Local.CourierShopComp)!;
+        const courierShop = this.GetStateEntity(GGameScene.Local.CourierShopComp)!;
         const WoodItems = courierShop.getSellItem(PublicBagConfig.EPublicShopType.WoodShop)
         return (
             <Panel id="CC_WoodShop" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
@@ -236,21 +235,21 @@ export class CCWoodShop extends CCPanel<{}> {
 
 export class CCRandomShop extends CCPanel<{}> {
     onReady() {
-        return Boolean(PlayerScene.Local.CourierShopComp)
+        return Boolean(GGameScene.Local.CourierShopComp)
     }
 
     onInit() {
-        PlayerScene.Local.CourierShopComp.RegRef(this);
-        PlayerScene.Local.PlayerDataComp.RegRef(this);
-        PlayerScene.Local.RoundManagerComp.RegRef(this);
+        GGameScene.Local.CourierShopComp.RegRef(this);
+        GGameScene.Local.PlayerDataComp.RegRef(this);
+        GGameScene.Local.RoundManagerComp.RegRef(this);
     }
 
 
     render() {
         if (!this.__root___isValid) { return this.defaultRender("CC_RandomShop") }
-        const courierShop = this.GetStateEntity(PlayerScene.Local.CourierShopComp)!;
-        const PlayerDataComp = this.GetStateEntity(PlayerScene.Local.PlayerDataComp)!;
-        const RoundManagerComp = this.GetStateEntity(PlayerScene.Local.RoundManagerComp)!;
+        const courierShop = this.GetStateEntity(GGameScene.Local.CourierShopComp)!;
+        const PlayerDataComp = this.GetStateEntity(GGameScene.Local.PlayerDataComp)!;
+        const RoundManagerComp = this.GetStateEntity(GGameScene.Local.RoundManagerComp)!;
         const RandomItems = courierShop.getSellItem(PublicBagConfig.EPublicShopType.RandomShop);
         const currentround = Number(RoundManagerComp.getCurrentBoardRound()!.config.round_show)
         const Unlock = courierShop.randomLockRound >= currentround;

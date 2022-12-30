@@ -1,8 +1,6 @@
 import React, { createRef, useState } from "react";
-import { PublicBagConfig } from "../../../../../game/scripts/tscripts/shared/PublicBagConfig";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { LogHelper } from "../../helper/LogHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCIcon_Lock } from "../AllUIElement/CCIcons/CCIcon_Lock";
 import { CCItemImage } from "../AllUIElement/CCItem/CCItemImage";
@@ -16,19 +14,19 @@ interface ICCArtifactListPanel extends NodePropsData {
 export class CCArtifactListPanel extends CCPanel<ICCArtifactListPanel> {
 
     onReady() {
-        return PlayerScene.Local.CourierBagComp != null
+        return GGameScene.Local.CourierBagComp != null
     }
     onInitUI() {
         // this.useEffectProps(() => {
         //     const playerid = this.props.playerid;
         //     PlayerScene.EntityRootManage.getPlayer(playerid)?.CourierBagComp?.RegRef(this);
         // }, "playerid");
-        PlayerScene.Local.CourierBagComp.RegRef(this);
+        GGameScene.Local.CourierBagComp.RegRef(this);
     }
 
     render() {
         if (!this.__root___isValid) { return this.defaultRender("CC_ArtifactListPanel") };
-        const CourierBag = this.GetStateEntity(PlayerScene.Local.CourierBagComp)!;
+        const CourierBag = this.GetStateEntity(GGameScene.Local.CourierBagComp)!;
         const tArtifacts = CourierBag?.getAllArtifact() || [];
         const len = tArtifacts.length;
         const ExpandArtifact = this.GetState<boolean>("ExpandArtifact", false);
@@ -38,6 +36,8 @@ export class CCArtifactListPanel extends CCPanel<ICCArtifactListPanel> {
                     className={CSSHelper.ClassMaker({ ExpandArtifact: ExpandArtifact })}
                     onactivate={
                         () => {
+                            // $.Msg(GLogHelper == null)
+                            GLogHelper.print(111111);
                             this.UpdateState({ ExpandArtifact: !ExpandArtifact })
                         }}>
                     <Image id="ToggleImg" />

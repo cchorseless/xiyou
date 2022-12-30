@@ -1,12 +1,10 @@
 import { NetHelper } from "../../../helper/NetHelper";
-import { ET, registerET } from "../../../libs/Entity";
-import { PlayerScene } from "../Player/PlayerScene";
-import { BuildingEntityRoot } from "./BuildingEntityRoot";
+import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 
-@registerET()
+@GReloadable
 export class BuildingManagerComponent extends ET.Component {
     onSerializeToEntity(): void {
-        PlayerScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
+        GGameScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
     }
 
 

@@ -1,9 +1,8 @@
 
 import React, { createRef, PureComponent } from "react";
-import { GameProtocol } from "../../../../../game/scripts/tscripts/shared/GameProtocol";
-import { JsonConfigHelper } from "../../../../../game/scripts/tscripts/shared/Gen/JsonConfigHelper";
-import { EEnum } from "../../../../../game/scripts/tscripts/shared/Gen/Types";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
+import { JsonConfigHelper } from "../../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
+import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { TShopSellItem } from "../../game/service/shop/TShopSellItem";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -21,7 +20,7 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
 
     onInitUI() {
         this.props.entity && this.props.entity.RegRef(this);
-        PlayerScene.Local.TCharacter.DataComp?.RegRef(this);
+        GGameScene.Local.TCharacter.DataComp?.RegRef(this);
         this.UpdateState({ iNum: 0 })
     }
 
@@ -30,7 +29,7 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
         const sellitem = this.GetStateEntity(this.props.entity)!;
         if (sellitem.SellConfig.VipLimit == 1) {
             this.close();
-            let MemberShip = PlayerScene.Local.TCharacter.ActivityComp?.MemberShip;
+            let MemberShip = GGameScene.Local.TCharacter.ActivityComp?.MemberShip;
             if (!MemberShip?.IsVip()) {
                 // TipsHelper.showErrorMessage()
                 return;
@@ -46,7 +45,7 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
         }
     }
     render() {
-        const DataComp = this.GetStateEntity(PlayerScene.Local.TCharacter.DataComp!)!;
+        const DataComp = this.GetStateEntity(GGameScene.Local.TCharacter.DataComp!)!;
         const MetaStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.MetaStone)
         const StarStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.StarStone)
         const sellitem = this.GetStateEntity(this.props.entity)!;

@@ -1,4 +1,3 @@
-import { LogHelper } from "./LogHelper";
 
 export module FuncHelper {
 
@@ -6,73 +5,11 @@ export module FuncHelper {
     export function ToFiniteNumber(i: number, defaultVar = 0) {
         return isFinite(i) ? i : defaultVar;
     }
-
-
-    export class Handler {
-        private static _pool: Handler[] = [];
-        private static _gid: number = 0;
-        public _id = Handler._gid++;
-        public caller: any;
-        public method: Function | null;
-        public args: any[];
-        public once: boolean;
-        constructor() {
-            this.once = false;
-            this._id = 0;
-            this.setTo(null, null, []);
-        }
-        setTo(caller: any, method: any, args: any[], once = false) {
-            this._id = Handler._gid++;
-            this.caller = caller;
-            this.method = method;
-            this.args = args;
-            this.once = once;
-            return this;
-        }
-        run() {
-            if (this.method == null) return null;
-            let id = this._id;
-            let nextCall = this.method.apply(this.caller);
-            this._id === id && this.once && this.recover();
-            return nextCall;
-        }
-        runWith(data: any[]) {
-            if (this.method == null) return null;
-            let id = this._id;
-            let arg: any[] = [];
-            if (this.args) {
-                arg = arg.concat(this.args);
-            }
-            if (data) {
-                arg = arg.concat(data);
-            }
-            let nextCall = this.method.apply(this.caller, arg);
-            this._id === id && this.once && this.recover();
-            return nextCall;
-        }
-        clear() {
-            this.caller = null;
-            this.method = null;
-            this.args = [];
-            return this;
-        }
-        recover() {
-            if (this._id > 0) {
-                this._id = 0;
-                Handler._pool.push(this.clear());
-            }
-        }
-        static create(caller: any, method: any, args: any[] = [], once = true) {
-            if (Handler._pool.length > 0) return (Handler._pool.pop() as Handler).setTo(caller, method, args, once);
-            return new Handler().setTo(caller, method, args, once);
-        }
-    }
-
     /**
      * 获取全局唯一UUID
      * @returns
      */
-    export function generateUUID() {
+    export function GenerateUUID() {
         let d = new Date().getTime();
         let uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
             let r = (d + Math.random() * 16) % 16 | 0;
@@ -80,25 +17,6 @@ export module FuncHelper {
             return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
         });
         return uuid;
-    }
-    export function TryTransArrayLikeObject(a: any) {
-        if (typeof a === "object") {
-            let keys = Object.keys(a).sort();
-            let canTran: any = [];
-            for (let i = 0, len = keys.length; i < len; i++) {
-                if ((i + 1) + "" === keys[i]) {
-                    canTran.push(a[keys[i]]);
-                }
-                else {
-                    canTran = null;
-                    break;
-                }
-            }
-            if (canTran != null) {
-                return canTran;
-            }
-        }
-        return a;
     }
 
     export function toArray<T>(a: ArrayLikeObject<T>) {
@@ -113,7 +31,7 @@ export module FuncHelper {
     /**
      * 获取本局玩家数量
      */
-    export function getPlayerCount() {
+    export function GetPlayerCount() {
         let playerCount = Players.GetMaxTeamPlayers();
         for (let i = 0; i < playerCount; i++) {
             if (!Players.IsValidPlayerID(i as PlayerID)) {

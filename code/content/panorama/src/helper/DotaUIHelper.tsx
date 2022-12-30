@@ -1,8 +1,5 @@
-import { useRegisterForUnhandledEvent } from "@demon673/react-panorama";
 import { CCMainPanel } from "../view/MainPanel/CCMainPanel";
-import { FuncHelper } from "./FuncHelper";
 import { LogHelper } from "./LogHelper";
-import { TimerHelper } from "./TimerHelper";
 
 export module DotaUIHelper {
     /**UI根节点 */
@@ -16,7 +13,7 @@ export module DotaUIHelper {
 
     export async function isLongTimeMouseOver() {
         let oldmouse = GameUI.GetCursorPosition();
-        await TimerHelper.DelayTime(0.3);
+        await GTimerHelper.DelayTime(0.3);
         let newmouse = GameUI.GetCursorPosition();
         let dis = (newmouse[0] - oldmouse[0]) * (newmouse[0] - oldmouse[0]) + (newmouse[1] - oldmouse[1]) * (newmouse[1] - oldmouse[1]);
         return dis <= 1000;
@@ -252,7 +249,7 @@ export module DotaUIHelper {
             }
         });
     }
-    const AllEventInfo: { [eventName: string]: [{ pDraggedPanel: ItemImage | AbilityImage, isonce: boolean; handler: FuncHelper.Handler }] } = {};
+    const AllEventInfo: { [eventName: string]: [{ pDraggedPanel: ItemImage | AbilityImage, isonce: boolean; handler: IGHandler }] } = {};
     function runDragHandler(pDraggedPanel: ItemImage | AbilityImage, eventName: string, ...args: any[]) {
         if (pDraggedPanel == null || !pDraggedPanel.IsValid()) { return }
         let eventinfo = AllEventInfo[eventName];
@@ -276,7 +273,7 @@ export module DotaUIHelper {
         }
     }
 
-    export function addDragEvent(pDraggedPanel: ItemImage | AbilityImage, eventName: "DragEnter" | "DragLeave" | "DragDrop" | "DragEnd", handler: FuncHelper.Handler, isOnce = false) {
+    export function addDragEvent(pDraggedPanel: ItemImage | AbilityImage, eventName: "DragEnter" | "DragLeave" | "DragDrop" | "DragEnd", handler: IGHandler, isOnce = false) {
         if (AllEventInfo[eventName] == null) {
             AllEventInfo[eventName] = [] as any;
         }

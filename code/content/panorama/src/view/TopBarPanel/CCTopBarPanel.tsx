@@ -1,16 +1,11 @@
 
-import React, { createRef } from "react";
-import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
-import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
+import React from "react";
 import { PlayerDataComponent } from "../../game/components/Player/PlayerDataComponent";
-import { LogHelper } from "../../helper/LogHelper";
-import { TimerHelper } from "../../helper/TimerHelper";
-import { FuncHelper } from "../../helper/FuncHelper";
-import { CCImageNumber } from "../AllUIElement/CCImageNumber/CCImageNumber";
-import "./CCTopBarPanel.less";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { NodePropsData } from "../../libs/BasePureComponent";
+import { CCImageNumber } from "../AllUIElement/CCImageNumber/CCImageNumber";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import "./CCTopBarPanel.less";
 
 
 export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
@@ -22,35 +17,35 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
     }
 
     onReady() {
-        return Boolean(PlayerScene.Local.PlayerDataComp && PlayerScene.Local.RoundManagerComp?.getCurrentBoardRound());
+        return Boolean(GGameScene.Local.PlayerDataComp && GGameScene.Local.RoundManagerComp?.getCurrentBoardRound());
     }
 
     onInitUI() {
-        PlayerScene.Local.PlayerDataComp.RegRef(this);
-        PlayerScene.Local.RoundManagerComp.RegRef(this);
-        PlayerScene.Local.RoundManagerComp!.getCurrentBoardRound().RegRef(this);
+        GGameScene.Local.PlayerDataComp.RegRef(this);
+        GGameScene.Local.RoundManagerComp.RegRef(this);
+        GGameScene.Local.RoundManagerComp!.getCurrentBoardRound().RegRef(this);
         this.useEffectState(() => {
-            let curround = PlayerScene.Local.RoundManagerComp!.getCurrentBoardRound();
+            let curround = GGameScene.Local.RoundManagerComp!.getCurrentBoardRound();
             if (!this.hasState(curround.InstanceId)) {
                 curround.RegRef(this);
             }
-        }, PlayerScene.Local.RoundManagerComp.InstanceId)
+        }, GGameScene.Local.RoundManagerComp.InstanceId)
         this.UpdateState({ gametime: -1 });
-        TimerHelper.AddIntervalTimer(1, 1,
-            FuncHelper.Handler.create(this, () => {
-                let round = PlayerScene.Local.RoundManagerComp!.getCurrentBoardRound();
-                let lefttime = -1;
-                if (round) {
-                    lefttime = round.roundLeftTime - Game.GetGameTime();
-                }
-                this.UpdateState({ gametime: lefttime });
-            }), -1, false)
+        GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+            let round = GGameScene.Local.RoundManagerComp!.getCurrentBoardRound();
+            let lefttime = -1;
+            if (round) {
+                lefttime = round.roundLeftTime - Game.GetGameTime();
+            }
+            this.UpdateState({ gametime: lefttime });
+            return 1
+        }))
     }
 
     getDifficultyDes() {
-        const difficultydes = PlayerScene.GameStateSystem.getDifficultyChapterDes();
-        if (PlayerScene.GameStateSystem.DifficultyLevel > 0) {
-            return difficultydes + "[" + PlayerScene.GameStateSystem.DifficultyLevel + "]";
+        const difficultydes = GGameScene.GameServiceSystem.getDifficultyChapterDes();
+        if (GGameScene.GameServiceSystem.DifficultyLevel > 0) {
+            return difficultydes + "[" + GGameScene.GameServiceSystem.DifficultyLevel + "]";
         }
         return difficultydes;
     }
@@ -59,8 +54,8 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
         if (!this.__root___isValid) {
             return this.defaultRender("CC_TopBarCenter");
         }
-        const playerdata = this.GetStateEntity(PlayerScene.Local.PlayerDataComp)!;
-        const round = this.GetStateEntity(PlayerScene.Local.RoundManagerComp.getCurrentBoardRound())!;
+        const playerdata = this.GetStateEntity(GGameScene.Local.PlayerDataComp)!;
+        const round = this.GetStateEntity(GGameScene.Local.RoundManagerComp.getCurrentBoardRound())!;
         const gametime = this.GetState<number>("gametime");
         return (
             <Panel id="CC_TopBarCenter" ref={this.__root__}    {...this.initRootAttrs()} hittest={false}>
@@ -83,18 +78,18 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
 export class CCTopBarGameCoin<T extends NodePropsData> extends CCPanel<T> {
 
     onReady() {
-        return Boolean(PlayerScene.Local.PlayerDataComp);
+        return Boolean(GGameScene.Local.PlayerDataComp);
     }
 
     onInitUI() {
-        PlayerScene.Local.PlayerDataComp.RegRef(this);
+        GGameScene.Local.PlayerDataComp.RegRef(this);
 
     }
     render() {
         if (!this.__root___isValid) {
             return this.defaultRender("CC_TopBarGameCoin");
         }
-        const playerdata = this.GetStateEntity<PlayerDataComponent>(PlayerScene.Local.PlayerDataComp)!;
+        const playerdata = this.GetStateEntity<PlayerDataComponent>(GGameScene.Local.PlayerDataComp)!;
         const coindes = [
             `${playerdata.population}/${playerdata.populationRoof}`,
             `${playerdata.gold}(+${playerdata.perIntervalGold})`,

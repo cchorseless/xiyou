@@ -1,7 +1,4 @@
 import { ReactElement } from "react";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
-import { FuncHelper } from "../../helper/FuncHelper";
-import { TimerHelper } from "../../helper/TimerHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCBuildingTopBarItem } from "./CCBuildingTopBarItem";
@@ -12,14 +9,10 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
         return "CC_root";
     }
     onStartUI() {
-        TimerHelper.AddIntervalFrameTimer(
-            1,
-            1,
-            FuncHelper.Handler.create(this, () => {
-                this.onUpdate();
-            }),
-            -1
-        );
+        GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+            this.onUpdate();
+            return 1
+        }));
     }
     onUpdate() {
         // let iCursorEntIndex = GameUI.CustomUIConfig().GetCursorEntity();
@@ -43,10 +36,10 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
     private allOverHeadUI: { [k: string]: ReactElement } = {};
     updateEnemy() {
         // 所有的怪物
-        let EntityRootManage = PlayerScene.EntityRootManage;
+        const allenemy = GEnemyUnitEntityRoot.GetAllInstance();
         let scale = 800 / GameUI.GetCameraPosition()[2];
-        for (let entityid in EntityRootManage.AllEnemy) {
-            let entityroot = EntityRootManage.getEnemy(entityid);
+        for (let entityroot of allenemy) {
+            const entityid = entityroot.EntityId;
             if (entityroot && entityroot.EnemyUnitComp!.IsShowOverhead) {
                 if (this.allOverHeadUI[entityid] == null) {
                     this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, CCEnemyTopBarItem, { "entityid": Number(entityid) })!;
@@ -64,10 +57,10 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
     }
 
     updateBuilding() {
-        let EntityRootManage = PlayerScene.EntityRootManage;
         let scale = 800 / GameUI.GetCameraPosition()[2];
-        for (let entityid in EntityRootManage.AllBuilding) {
-            let entityroot = EntityRootManage.getBuilding(entityid);
+        const allbuilding = GBuildingEntityRoot.GetAllInstance();
+        for (let entityroot of allbuilding) {
+            const entityid = entityroot.EntityId;
             if (entityroot && entityroot.BuildingComp!.IsShowOverhead) {
                 if (this.allOverHeadUI[entityid] == null) {
                     this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, CCBuildingTopBarItem, { "entityid": Number(entityid) })!;

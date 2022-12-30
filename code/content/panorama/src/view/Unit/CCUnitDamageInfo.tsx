@@ -1,14 +1,9 @@
 /** Create By Editor*/
-import React, { createRef, useState } from "react";
-import { RoundConfig } from "../../../../../game/scripts/tscripts/shared/RoundConfig";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
-import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
+import React from "react";
+import { RoundConfig } from "../../../../scripts/tscripts/shared/RoundConfig";
 import { UnitHelper } from "../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
-import { LogHelper } from "../../helper/LogHelper";
-import { TimerHelper } from "../../helper/TimerHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCTxtTable } from "../AllUIElement/CCTable/CCTxtTable";
 import { CCUnitSmallIcon } from "../AllUIElement/CCUnit/CCUnitSmallIcon";
@@ -19,19 +14,20 @@ interface ICCUnitDamageInfo extends NodePropsData {
 }
 export class CCUnitDamageInfo extends CCPanel<ICCUnitDamageInfo> {
     onReady() {
-        return Boolean(PlayerScene.Local.RoundManagerComp && PlayerScene.Local.RoundManagerComp.getCurrentBoardRound());
+        return Boolean(GGameScene.Local.RoundManagerComp && GGameScene.Local.RoundManagerComp.getCurrentBoardRound());
     }
     onInitUI() {
-        TimerHelper.AddIntervalTimer(0.1, 0.1, FuncHelper.Handler.create(this, () => {
+        GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
             this.updateSelf();
-        }), -1, false);
+            return 0.1
+        }));
     }
 
     render() {
         if (!this.__root___isValid) {
             return this.defaultRender("CC_UnitDamageInfo");
         }
-        let round = PlayerScene.Local.RoundManagerComp.getCurrentBoardRound();
+        let round = GGameScene.Local.RoundManagerComp.getCurrentBoardRound();
         if (round.roundState == RoundConfig.ERoundBoardState.start) {
             return this.defaultRender("CC_UnitDamageInfo");
         }

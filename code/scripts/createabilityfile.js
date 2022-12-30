@@ -5,11 +5,11 @@ const old_ability_path = "game/scripts/dota2_old_npc_abilities.txt";
 const old_item_path = "game/scripts/dota2_old_npc_items.txt";
 const building_item_path = "game/scripts/npc/building/building_item_card.kv";
 
-const ts_path = "game/scripts/tscripts/npc/abilities/dota/";
-const unit_path = "game/scripts/tscripts/npc/units/dota";
-const item_path = "game/scripts/tscripts/npc/items/dota";
-const building_item_ts_path = "game/scripts/tscripts/npc/items/building";
-const unit_item_path = "game/scripts/tscripts/npc/items/building";
+const ts_path = "content/scripts/tscripts/npc/abilities/dota/";
+const unit_path = "content/scripts/tscripts/npc/units/dota";
+const item_path = "content/scripts/tscripts/npc/items/dota";
+const building_item_ts_path = "content/scripts/tscripts/npc/items/building";
+const unit_item_path = "content/scripts/tscripts/npc/items/building";
 
 function main() {
     let kv_s = fs.readFileSync(old_npc_path, "utf8");
@@ -202,10 +202,10 @@ export class $1 extends item_building_base {
 
 function unitbuildingCreate(type) {
     let building_unit_path = "game/scripts/npc/building/building_unit_tower.kv";
-    let building_unit_ts_path = "game/scripts/tscripts/npc/units/building/tower";
+    let building_unit_ts_path = "content/scripts/tscripts/npc/units/building/tower";
     if (type == 1) {
         building_unit_path = "game/scripts/npc/building/building_unit_enemy.kv";
-        building_unit_ts_path = "game/scripts/tscripts/npc/units/building/enemy";
+        building_unit_ts_path = "content/scripts/tscripts/npc/units/building/enemy";
     }
 
     let kv_s = fs.readFileSync(building_unit_path, "utf8");

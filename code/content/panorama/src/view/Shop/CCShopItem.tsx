@@ -1,6 +1,6 @@
 
 import React, { createRef, PureComponent } from "react";
-import { JsonConfigHelper } from "../../../../../game/scripts/tscripts/shared/Gen/JsonConfigHelper";
+import { JsonConfigHelper } from "../../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";

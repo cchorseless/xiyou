@@ -1,8 +1,8 @@
-import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
+import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
-import { ET, registerET } from "../../libs/Entity";
+import { ET } from "../../../../scripts/tscripts/shared/lib/Entity";
 // import { GameEnum } from "../../libs/GameEnum";
 
 const MIN_CAMERA_DISTANCE = 1300;
@@ -23,7 +23,7 @@ const END_OFFSET_SCREEN = 1 / 3;
 
 /**摄像机控制组件 */
 
-@registerET()
+@GReloadable
 export class CameraComponent extends ET.Component {
 
     fCameraDistance: number = 1300;

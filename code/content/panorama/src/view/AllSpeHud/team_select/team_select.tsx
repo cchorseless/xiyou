@@ -1,13 +1,11 @@
 /** Create By Editor*/
-import React, { createRef, useState } from "react";
-import { FuncHelper } from "../../../helper/FuncHelper";
+import React from "react";
+import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { NetHelper } from "../../../helper/NetHelper";
-import { TimerHelper } from "../../../helper/TimerHelper";
-import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
-import { CCLoading } from "../loading/loading";
 import { NodePropsData } from "../../../libs/BasePureComponent";
-import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import { CCButton } from "../../AllUIElement/CCButton/CCButton";
+import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
+import { CCLoading } from "../loading/loading";
 import "./team_select.less";
 
 interface IProps extends NodePropsData {
@@ -34,16 +32,13 @@ export class CCTeam_select extends CCPanel<IProps> {
 
     addEvent() {
         NetHelper.ListenOnLua(
-            this,
-            GameEnum.CustomProtocol.req_addBot,
-            (e) => {
+            GameEnum.CustomProtocol.req_addBot, GHandler.create(this, (e) => {
                 if (e.state) {
                     Game.AutoAssignPlayersToTeams();
                     this.updateSelf();
                     this.isAdding = false;
                 }
-            }
-        );
+            }));
     };
 
     isAdding = false;
@@ -72,9 +67,9 @@ export class CCTeam_select extends CCPanel<IProps> {
         Game.SetAutoLaunchEnabled(false);
         // Set the remaining time before the game starts
         Game.SetRemainingSetupTime(0);
-        TimerHelper.AddTimer(
+        GTimerHelper.AddTimer(
             3,
-            FuncHelper.Handler.create(this, () => {
+            GHandler.create(this, () => {
                 let loading = CCLoading.GetInstance();
                 if (loading) {
                     loading!.destroy();

@@ -1,7 +1,7 @@
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
-import { ET, registerET } from "../../libs/Entity";
-import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
+import { ET } from "../../../../scripts/tscripts/shared/lib/Entity";
+import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
 
 const KeyCode: { [key: string]: string; } = {
     // Q: "Q",
@@ -110,7 +110,7 @@ const KeyCode: { [key: string]: string; } = {
 };
 
 /**角色控制组件 */
-@registerET()
+@GReloadable
 export class ControlComponent extends ET.Component {
     onAwake() {
         for (const key in KeyCode) {

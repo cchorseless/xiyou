@@ -1,9 +1,5 @@
 /** Create By Editor*/
-import React, { createRef, useState } from "react";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
-import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
-import { EntityHpBarItem } from "../Common/EntityHpBarItem";
+import React from "react";
 import { CCEntityHpBarItem } from "./CCEntityHpBarItem";
 import { CCOverHeadBaseItem } from "./CCOverHeadBaseItem";
 
@@ -11,8 +7,7 @@ import { CCOverHeadBaseItem } from "./CCOverHeadBaseItem";
 export class CCEnemyTopBarItem extends CCOverHeadBaseItem {
 
     HasOverhead(iEntIndex: EntityIndex): boolean {
-        let EntityRootManage = PlayerScene.EntityRootManage;
-        let entityroot = EntityRootManage.getEnemy(iEntIndex);
+        let entityroot = GEnemyUnitEntityRoot.GetEntity(iEntIndex);
         if (entityroot && entityroot.EnemyUnitComp!.IsShowOverhead) {
             return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex) && !Entities.IsInvisible(iEntIndex);
         }

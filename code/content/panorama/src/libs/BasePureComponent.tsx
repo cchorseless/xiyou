@@ -1,12 +1,9 @@
-import React, { createElement, createRef, PureComponent } from "react";
+import React, { createElement, PureComponent } from "react";
+import { GameEnum } from "../../../scripts/tscripts/shared/GameEnum";
+import { ET } from "../../../scripts/tscripts/shared/lib/Entity";
+import { GEventHelper } from "../../../scripts/tscripts/shared/lib/GEventHelper";
 import { CSSHelper } from "../helper/CSSHelper";
-import { EventHelper } from "../helper/EventHelper";
-import { FuncHelper } from "../helper/FuncHelper";
 import { LogHelper } from "../helper/LogHelper";
-import { PrecacheHelper } from "../helper/PrecacheHelper";
-import { TimerHelper } from "../helper/TimerHelper";
-import { ET } from "./Entity";
-import { GameEnum } from "../../../../game/scripts/tscripts/shared/GameEnum";
 
 
 interface IBasePureCompProperty {
@@ -34,7 +31,7 @@ interface ReactElementNodeInfo {
 }
 
 export const registerUI = () => (entity: typeof BasePureComponent<NodePropsData>) => {
-    PrecacheHelper.RegClass([entity as any]);
+    GReloadable(entity);
 };
 
 export class BasePureComponentSystem {
@@ -194,7 +191,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
      * @returns
      */
     public addNodeChildAt<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M = {} as any, index: number = -1): ReactElement | void {
-        let instanceId = FuncHelper.generateUUID();
+        let instanceId = GGenerateUUID();
         // 添加唯一Key
         nodeData.key = instanceId;
         // 复制一份存起来
@@ -473,9 +470,9 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     };
 
     public delayUpdateSelf = () => {
-        TimerHelper.AddFrameTimer(
+        GTimerHelper.AddFrameTimer(
             1,
-            FuncHelper.Handler.create(this, () => {
+            GHandler.create(this, () => {
                 if (this.IsRegister) {
                     this.updateSelf();
                 }
@@ -490,11 +487,11 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
                 this.__root__.current!.style[k as keyof VCSSStyleDeclaration] = this.props[k];
             }
         }
-        (this as any).InstanceId = this.props.__onlykey__ || FuncHelper.generateUUID();
+        (this as any).InstanceId = this.props.__onlykey__ || GGenerateUUID();
         this.setRegister(true);
         // 下一帧开始刷新
-        // TimerHelper.AddFrameTimer(1,
-        //     FuncHelper.Handler.create(this, () => {
+        // GTimerHelper.AddFrameTimer(1,
+        //     GHandler.create(this, () => {
         //         if (this.IsRegister) {
         //             this.onStartUI();
         //         }
@@ -559,8 +556,8 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             GameEvents.Unsubscribe(e);
         });
         this.allGameEventID = [];
-        EventHelper.RemoveCaller(this);
-        TimerHelper.ClearAll(this);
+        GEventHelper.RemoveCaller(this);
+        GTimerHelper.ClearAll(this);
         let nodeinfo = BasePureComponentSystem.GetReactElement(this.InstanceId);
         if (nodeinfo) {
             BasePureComponentSystem.RegisterReactElement(nodeinfo.Node, false);

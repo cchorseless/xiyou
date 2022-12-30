@@ -1,5 +1,4 @@
 import React from 'react';
-import { PlayerScene } from '../../game/components/Player/PlayerScene';
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCDividerHeader } from '../AllUIElement/CCDivider/CCDividerHeader';
 import { CCDOTAScenePanel } from '../AllUIElement/CCDOTAScenePanel/CCDOTAScenePanel';
@@ -13,12 +12,12 @@ interface ICCPlayerInfoDialog extends NodePropsData {
 
 export class CCPlayerInfoDialog extends CCPanel<ICCPlayerInfoDialog> {
     onInitUI() {
-        PlayerScene.GetPlayer(this.props.Playerid)?.CourierDataComp?.RegRef(this)
+        GGameScene.GetPlayer(this.props.Playerid)?.CourierDataComp?.RegRef(this)
     }
 
     render() {
         const heroData = this.GetState<any>("heroData");
-        // const CourierData = this.GetStateEntity(PlayerScene.GetPlayer(this.props.Playerid)?.CourierDataComp!);
+        // const CourierData = this.GetStateEntity(GGameScene.GetPlayer(this.props.Playerid)?.CourierDataComp!);
         let entityid = Players.GetPlayerHeroEntityIndex(this.props.Playerid as PlayerID)
         const playerData = { heroName: Entities.GetUnitName(entityid) }
         return (

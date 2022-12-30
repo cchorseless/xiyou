@@ -1,7 +1,7 @@
 import React, { createRef, PureComponent } from "react";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { NodePropsData } from "../../../libs/BasePureComponent";
-import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
+import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { CCInventorySlot } from "./CCInventorySlot";
 import "./CCInventory.less";
 

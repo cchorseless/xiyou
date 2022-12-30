@@ -1,14 +1,13 @@
 import { BaseEntityRoot } from "../../../libs/BaseEntityRoot";
-import { ET, registerET } from "../../../libs/Entity";
-import { PlayerScene } from "../Player/PlayerScene";
 
-@registerET()
+@GReloadable
 export class ItemEntityRoot extends BaseEntityRoot {
+}
+declare global {
+    type IItemEntityRoot = ItemEntityRoot;
+    var GItemEntityRoot: typeof ItemEntityRoot;
+}
 
-    onSerializeToEntity() {
-        PlayerScene.EntityRootManage.addItem(this);
-    }
-    onDestroy() {
-        PlayerScene.EntityRootManage.removeItem(this);
-    }
+if (_G.GItemEntityRoot == undefined) {
+    _G.GItemEntityRoot = ItemEntityRoot;
 }

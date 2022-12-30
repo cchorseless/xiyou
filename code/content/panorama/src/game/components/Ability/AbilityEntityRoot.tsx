@@ -1,14 +1,14 @@
 import { BaseEntityRoot } from "../../../libs/BaseEntityRoot";
-import { ET, registerET } from "../../../libs/Entity";
-import { PlayerScene } from "../Player/PlayerScene";
 
-@registerET()
+@GReloadable
 export class AbilityEntityRoot extends BaseEntityRoot {
 
-    onSerializeToEntity() {
-        PlayerScene.EntityRootManage.addAbility(this);
-    }
-    onDestroy() {
-        PlayerScene.EntityRootManage.removeAbility(this);
-    }
+}
+declare global {
+    type IAbilityEntityRoot = AbilityEntityRoot;
+    var GAbilityEntityRoot: typeof AbilityEntityRoot;
+}
+
+if (_G.GAbilityEntityRoot == undefined) {
+    _G.GAbilityEntityRoot = AbilityEntityRoot;
 }

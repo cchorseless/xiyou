@@ -1,7 +1,6 @@
 
 import React, { createRef, PureComponent } from "react";
-import { EEnum } from "../../../../../game/scripts/tscripts/shared/Gen/Types";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
@@ -20,12 +19,12 @@ interface ICCShopPanel extends NodePropsData {
 
 export class CCShopPanel extends CCPanel<ICCShopPanel> {
     onReady() {
-        return Boolean(PlayerScene.Local.TCharacter && PlayerScene.Local.TCharacter.DataComp)
+        return Boolean(GGameScene.Local.TCharacter && GGameScene.Local.TCharacter.DataComp)
     }
 
     onInitUI() {
-        PlayerScene.Local.TCharacter.DataComp?.RegRef(this);
-        LogHelper.print(PlayerScene.Local.TCharacter.ShopComp?.ShopUnit)
+        GGameScene.Local.TCharacter.DataComp?.RegRef(this);
+        LogHelper.print(GGameScene.Local.TCharacter.ShopComp?.ShopUnit)
     }
 
     closeThis() {
@@ -42,7 +41,7 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
             return this.defaultRender("CC_ShopPanel")
         }
         const sName = "store";
-        const DataComp = this.GetStateEntity(PlayerScene.Local.TCharacter.DataComp!)!;
+        const DataComp = this.GetStateEntity(GGameScene.Local.TCharacter.DataComp!)!;
         const MetaStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.MetaStone)
         const StarStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.StarStone)
         const selectindex = this.GetState<number>("selectindex") || 0;

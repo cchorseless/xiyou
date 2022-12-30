@@ -1,11 +1,8 @@
-import React, { createRef, PureComponent } from "react";
-import { DOTAAbilityImageAttributes, PanelAttributes } from "@demon673/react-panorama";
-import { CCPanel, dialogTooltipInfo } from "../CCPanel/CCPanel";
-import { TimerHelper } from "../../../helper/TimerHelper";
-import { FuncHelper } from "../../../helper/FuncHelper";
-import { CCLabel } from "../CCLabel/CCLabel";
+import { DOTAAbilityImageAttributes } from "@demon673/react-panorama";
+import React, { createRef } from "react";
 import { CCEffectShine } from "../CCEffect/CCEffectShine";
-import { CCAbilityDetailDialog } from "./CCAbilityDetailDialog";
+import { CCLabel } from "../CCLabel/CCLabel";
+import { CCPanel, dialogTooltipInfo } from "../CCPanel/CCPanel";
 import { CCAbilityInfoDialog } from "./CCAbilityInfoDialog";
 
 
@@ -67,16 +64,16 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
         }
         if (Abilities.CanBeExecuted(this.abilityindex)) {
             Abilities.ExecuteAbility(this.abilityindex, castEntityIndex, false);
-            TimerHelper.AddTimer(
+            GTimerHelper.AddTimer(
                 0.1,
-                FuncHelper.Handler.create(this, () => {
+                GHandler.create(this, () => {
                     this.showCdEffect();
                 })
             );
         }
     };
 
-    lefttimewprk: TimerHelper.TimerTask | null;
+    lefttimewprk: ITimerTask | null;
     showCdEffect() {
         if (this.abilityindex == null || this.abilityindex < 0) {
             return;
@@ -92,23 +89,19 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
         }
         let lefttime = remainingtime;
         this.UpdateState({ lefttime: remainingtime, remainingtime: remainingtime });
-        this.lefttimewprk = TimerHelper.AddIntervalTimer(
-            0,
-            0.1,
-            FuncHelper.Handler.create(this, () => {
-                if (lefttime <= 0) {
-                    this.lefttimewprk!.Clear();
-                    this.lefttimewprk = null;
-                    this.addOnlyOneNodeChild(this.NODENAME.abilityImage, CCEffectShine);
-                    this.updateSelf()
-                }
-                else {
-                    lefttime--;
-                }
-                this.UpdateState({ lefttime: lefttime });
-            }),
-            -1
-        );
+        this.lefttimewprk = GTimerHelper.AddTimer(0, GHandler.create(this, () => {
+            if (lefttime <= 0) {
+                this.addOnlyOneNodeChild(this.NODENAME.abilityImage, CCEffectShine);
+                this.updateSelf()
+                this.lefttimewprk = null;
+                return;
+            }
+            else {
+                lefttime--;
+            }
+            this.UpdateState({ lefttime: lefttime });
+            return 0.1
+        }));
     }
     render() {
         const abilityname = this.props.abilityname;

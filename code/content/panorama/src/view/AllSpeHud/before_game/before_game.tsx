@@ -1,58 +1,53 @@
 /** Create By Editor*/
-import React, { createRef, useState } from "react";
-import { render } from "@demon673/react-panorama";
+import React, { createRef } from "react";
+import { GameProtocol } from "../../../../../scripts/tscripts/shared/GameProtocol";
+import { GameServiceConfig } from "../../../../../scripts/tscripts/shared/GameServiceConfig";
+import { EEnum } from "../../../../../scripts/tscripts/shared/Gen/Types";
+import { CSSHelper } from "../../../helper/CSSHelper";
 import { NodePropsData } from "../../../libs/BasePureComponent";
-import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import { CCDOTAChat } from "../../AllUIElement/CCDOTAChat/CCDOTAChat";
 import { CCImageNumber } from "../../AllUIElement/CCImageNumber/CCImageNumber";
-import { TimerHelper } from "../../../helper/TimerHelper";
-import { PlayerScene } from "../../../game/components/Player/PlayerScene";
-import { FuncHelper } from "../../../helper/FuncHelper";
-import { CCGameDifficulty, CCGameEndlessDifficulty } from "./CCGameDifficulty";
+import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import { CCCourierCard } from "../../Courier/CCCourierCard";
-import { CSSHelper } from "../../../helper/CSSHelper";
-import { KVHelper } from "../../../helper/KVHelper";
-import { GameProtocol } from "../../../../../../game/scripts/tscripts/shared/GameProtocol";
 import "./before_game.less";
-import { EEnum } from "../../../../../../game/scripts/tscripts/shared/Gen/Types";
-import { GameStateConfig } from "../../../../../../game/scripts/tscripts/shared/GameStateConfig";
+import { CCGameDifficulty, CCGameEndlessDifficulty } from "./CCGameDifficulty";
 import { CCPlayerInTeamItem } from "./CCPlayerInTeamItem";
 export class CCBefore_Game extends CCPanel<NodePropsData> {
 
     TimerRef = createRef<Panel>();
 
     onReady() {
-        return Boolean(PlayerScene.Local.PlayerDataComp && PlayerScene.GameStateSystem)
+        return Boolean(GGameScene.Local.PlayerDataComp && GGameScene.GameServiceSystem)
     }
 
     onInitUI() {
-        PlayerScene.Local.PlayerDataComp.RegRef(this);
-        PlayerScene.GameStateSystem.RegRef(this);
+        GGameScene.Local.PlayerDataComp.RegRef(this);
+        GGameScene.GameServiceSystem.RegRef(this);
         this.UpdateState({ iTimeLeft: -1 });
-        TimerHelper.AddIntervalTimer(1, 1,
-            FuncHelper.Handler.create(this, () => {
-                let lefttime = PlayerScene.GameStateSystem.BeforeGameEndTime - Game.GetGameTime();;
-                this.UpdateState({ iTimeLeft: lefttime });
-            }), -1, false)
+        GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+            let lefttime = GGameScene.GameServiceSystem.BeforeGameEndTime - Game.GetGameTime();;
+            this.UpdateState({ iTimeLeft: lefttime });
+            return 1
+        }))
     }
 
 
     render() {
         if (!this.__root___isValid) { return this.defaultRender("CC_Before_Game") }
         const iTimeLeft = this.GetState<number>("iTimeLeft");
-        const DataComp = PlayerScene.Local.TCharacter.DataComp!;
-        const sCourierIDInUse = DataComp.getGameDataStr(GameProtocol.EGameDataStrDicKey.sCourierIDInUse) || GameStateConfig.DefaultCourier;
+        const DataComp = GGameScene.Local.TCharacter.DataComp!;
+        const sCourierIDInUse = DataComp.getGameDataStr(GameProtocol.EGameDataStrDicKey.sCourierIDInUse) || GameServiceConfig.DefaultCourier;
         const iDifficultyMaxChapter = DataComp.getGameDataStr(GameProtocol.EGameDataStrDicKey.iDifficultyMaxChapter) || "0";
         const iDifficultyMaxLevel = DataComp.getGameDataStr(GameProtocol.EGameDataStrDicKey.iDifficultyMaxLevel) || "0";
         const maxDiff = Number(iDifficultyMaxChapter);
         const layers = Number(iDifficultyMaxLevel);
-        const courierunlock = PlayerScene.Local.TCharacter.BagComp?.getItemByType(EEnum.EItemType.Courier);
+        const courierunlock = GGameScene.Local.TCharacter.BagComp?.getItemByType(EEnum.EItemType.Courier);
         const courierNames: Set<string> = new Set();
-        courierNames.add(GameStateConfig.DefaultCourier);
+        courierNames.add(GameServiceConfig.DefaultCourier);
         courierunlock?.forEach(item => {
             courierNames.add(item.Config?.ItemName || "")
         })
-        const GamseStateSys = this.GetStateEntity(PlayerScene.GameStateSystem)!;
+        const GamseStateSys = this.GetStateEntity(GGameScene.GameServiceSystem)!;
         const tPlayerGameSelection = GamseStateSys.tPlayerGameSelection;
         return (
             <Panel ref={this.__root__} id="CC_Before_Game" hittest={false} {...this.initRootAttrs()}>
@@ -74,7 +69,7 @@ export class CCBefore_Game extends CCPanel<NodePropsData> {
                                         className={CSSHelper.ClassMaker("PlayerCourierCard", { "Selected": sCourierIDInUse == sCourierName })}
                                         sCourierName={sCourierName}
                                         onactivate={p => {
-                                            PlayerScene.GameStateSystem.SelectCourier(sCourierName);
+                                            GGameScene.GameServiceSystem.SelectCourier(sCourierName);
                                             p.ScrollParentToMakePanelFit(3, false);
                                         }}
                                         onload={p => {
@@ -88,7 +83,7 @@ export class CCBefore_Game extends CCPanel<NodePropsData> {
                 </Panel>
                 <Panel id="PlayerContainer" hittest={false}>
                     {
-                        [...Array(GameStateConfig.GAME_MAX_PLAYER)].map(
+                        [...Array(GameServiceConfig.GAME_MAX_PLAYER)].map(
                             (_, index) => {
                                 let iPlayerID = index as PlayerID;
                                 if (Players.IsValidPlayerID(iPlayerID)) {
@@ -99,11 +94,11 @@ export class CCBefore_Game extends CCPanel<NodePropsData> {
                 </Panel>
                 <Panel id="Difficulties" hittest={false}>
                     <Label id="DifficultiesTitle" localizedText="#Select_Difficulties" />
-                    {[...Array(GameStateConfig.DIFFICULTY_LAST + 1)].map(
+                    {[...Array(GameServiceConfig.DIFFICULTY_LAST + 1)].map(
                         (_, index) => {
                             let charpter = index + 1;
-                            if (index == GameStateConfig.DIFFICULTY_LAST) {
-                                charpter = GameStateConfig.EDifficultyChapter.endless;
+                            if (index == GameServiceConfig.DIFFICULTY_LAST) {
+                                charpter = GameServiceConfig.EDifficultyChapter.endless;
                             }
                             let aPlayerIDs: PlayerID[] = [];
                             let selected = false;
@@ -117,8 +112,8 @@ export class CCBefore_Game extends CCPanel<NodePropsData> {
                                     }
                                 }
                             }
-                            if (charpter == GameStateConfig.EDifficultyChapter.endless) {
-                                return <CCGameEndlessDifficulty key={index + ""} selected={selected} enable={maxDiff >= GameStateConfig.DIFFICULTY_LAST} layers={layers} aPlayerIDs={aPlayerIDs} />;
+                            if (charpter == GameServiceConfig.EDifficultyChapter.endless) {
+                                return <CCGameEndlessDifficulty key={index + ""} selected={selected} enable={maxDiff >= GameServiceConfig.DIFFICULTY_LAST} layers={layers} aPlayerIDs={aPlayerIDs} />;
                             }
                             return <CCGameDifficulty key={index + ""} iDifficulty={charpter} selected={selected} max={maxDiff} aPlayerIDs={aPlayerIDs} />;
                         })}

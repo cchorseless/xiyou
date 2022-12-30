@@ -7,7 +7,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 import { CCAbilityInfoDialog } from "./CCAbilityInfoDialog";
 import { CCAbilityPanel } from "./CCAbilityPanel";
-import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
+import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { AbilityHelper } from "../../../helper/DotaEntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import "./CCAbilityList.less";

@@ -1,21 +1,22 @@
-import React, { createRef } from "react";
-import { PanelAttributes, render } from "@demon673/react-panorama";
-import { AllEntity } from "../game/Index";
-import { PlayerScene } from "../game/components/Player/PlayerScene";
+// LogHelper必须放第一行先导入
+import { render } from "@demon673/react-panorama";
+import React from "react";
+import { AllShared } from "../../../scripts/tscripts/shared/AllShared";
+import { AllEntity } from "../game/AllEntity";
+import { GameScene } from "../game/GameScene";
 import { DebugHelper } from "../helper/DebugHelper";
 import { DotaUIHelper } from "../helper/DotaUIHelper";
 import { EventHelper } from "../helper/EventHelper";
 import { LogHelper } from "../helper/LogHelper";
-import { PrecacheHelper } from "../helper/PrecacheHelper";
 import { TimerHelper } from "../helper/TimerHelper";
-import { CCMenuNavigation } from "./AllUIElement/CCNavigation/CCMenuNavigation";
-import { CCLabel } from "./AllUIElement/CCLabel/CCLabel";
-import { CCAvatar } from "./AllUIElement/CCAvatar/CCAvatar";
-import { CCMainPanel } from "./MainPanel/CCMainPanel";
 import { CCPanel } from "./AllUIElement/CCPanel/CCPanel";
 import { CCPausePanel } from "./AllUIElement/CCPause/CCPausePanel";
 import { CCDebugPanel } from "./DebugTool/CCDebugPanel";
+import { CCMainPanel } from "./MainPanel/CCMainPanel";
 
+declare global {
+    var _G: typeof globalThis;
+}
 export class RootPanel extends CCPanel {
     /**全局根节点实例 */
     static instance: RootPanel;
@@ -63,13 +64,14 @@ function StartRenderGameUI() {
     GameUI.SetDefaultUIEnabled(DotaDefaultUIElement_t.DOTA_DEFAULT_UI_ACTION_MINIMAP, false);
 
     /**初始化系统 */
+    AllShared.Init();
     AllEntity.Init();
     TimerHelper.Init();
     DebugHelper.Init();
     EventHelper.Init();
     DotaUIHelper.Init();
-    PlayerScene.Init();
-    PlayerScene.Local.Init();
+    GameScene.Init();
+    GameScene.Local.Init();
     render(<RootPanel />, $.GetContextPanel());
 }
 LogHelper.print("StartRenderGameUI started -----------------------------------");

@@ -1,11 +1,10 @@
-import { ET, registerET } from "../../../libs/Entity";
-import { PlayerScene } from "../../components/Player/PlayerScene";
+import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 
-@registerET()
+@GReloadable
 export class PublicShopComponent extends ET.Component {
     shopDiscount: number = 100;
 
     onSerializeToEntity(): void {
-        PlayerScene.Scene.AddOneComponent(this);
+        GGameScene.Scene.AddOneComponent(this);
     }
 }

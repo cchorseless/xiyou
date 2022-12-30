@@ -14,3 +14,7 @@ declare interface IDragItem extends IDragPanel {
     itemname?: string;
     tParticleIDs?: ParticleID[];
 }
+
+
+declare const PlayerResource: any;
+declare const GameRules: CScriptBindingPR_Game;

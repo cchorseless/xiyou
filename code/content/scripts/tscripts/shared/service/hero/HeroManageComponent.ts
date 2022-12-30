@@ -1,0 +1,32 @@
+
+import { ET } from "../../lib/Entity";
+import { TCharacter } from "../account/TCharacter";
+
+
+@GReloadable
+export class HeroManageComponent extends ET.Component {
+    private _HeroUnits = new GDictionary<
+        number,
+        string
+    >();
+    public get HeroUnits() {
+        return this._HeroUnits;
+    }
+    public set HeroUnits(data) {
+        this._HeroUnits.copy(data);
+
+    }
+
+    HeroBanDesign: string[];
+    public Character(): TCharacter { return this.GetParent<TCharacter>(); }
+    onSerializeToEntity() {
+        let character = ET.EntitySystem.GetEntity(this.Id + "TCharacter");
+        if (character) {
+            character.AddOneComponent(this);
+            this.onReload();
+        }
+    }
+    onReload() {
+        this.SyncClient();
+    }
+}

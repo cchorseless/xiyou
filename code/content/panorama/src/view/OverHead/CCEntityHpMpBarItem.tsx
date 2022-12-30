@@ -1,6 +1,4 @@
-import React, { createRef, useState } from "react";
-import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import React, { createRef } from "react";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";

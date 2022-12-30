@@ -8,9 +8,8 @@ import { FuncHelper } from "../../../helper/FuncHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { CCPanelBG } from "../CCPanel/CCPanelPart";
-import { PlayerScene } from "../../../game/components/Player/PlayerScene";
 import { CCUnitSmallIcon } from "../CCUnit/CCUnitSmallIcon";
-import { JsonConfigHelper } from "../../../../../../game/scripts/tscripts/shared/Gen/JsonConfigHelper";
+import { JsonConfigHelper } from "../../../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
 import "./CCAbilityInfoDialog.less";
 
 interface ICCAbilityInfoDialog extends NodePropsData {
@@ -119,7 +118,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         const tData = KVHelper.KVAbilitys()[abilityname] || {};
         const iLevel = this.props.level || -1;
         const combinationLabel = tData.CombinationLabel! as string;
-        const entity = PlayerScene.Local.CombinationManager.getCombinationByCombinationName(combinationLabel)
+        const entity = GGameScene.Local.CombinationManager.getCombinationByCombinationName(combinationLabel)
         const uniqueConfigList = entity?.uniqueConfigList || [];
         const herolist: string[] = [];
         for (let k in KVHelper.KVData().building_combination_ability) {

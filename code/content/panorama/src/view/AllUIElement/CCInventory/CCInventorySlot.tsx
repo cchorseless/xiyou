@@ -1,6 +1,6 @@
 import { PanelAttributes } from "@demon673/react-panorama";
 import React from "react";
-import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
+import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";

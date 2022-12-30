@@ -4,6 +4,7 @@
         <include src="../../game_main.less" />
     </styles>
     <scripts>
+
         <include src="file://{resources}/layout/custom_game/config.js" />
         <include src="./loading.tsx" />
     </scripts>

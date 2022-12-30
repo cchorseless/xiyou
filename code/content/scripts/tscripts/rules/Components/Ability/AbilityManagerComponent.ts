@@ -1,0 +1,163 @@
+
+import { LogHelper } from "../../../helper/LogHelper";
+import { ActiveRootAbility } from "../../../npc/abilities/ActiveRootAbility";
+import { ET } from "../../../shared/lib/Entity";
+import { ERoundBoard } from "../Round/ERoundBoard";
+
+@GReloadable
+export class AbilityManagerComponent extends ET.Component {
+    public allAbilityRoot: string[] = [];
+    onAwake(...args: any[]): void {
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        let len = npc.GetAbilityCount();
+        for (let i = 0; i < len; i++) {
+            let ability = npc.GetAbilityByIndex(i) as IBaseAbility_Plus;
+            if (ability && ability.ETRoot) {
+                this.addAbilityRoot(ability.ETRoot as IAbilityEntityRoot);
+            }
+        }
+    }
+    // 战吼
+    OnBoardRound_Battle() {
+        let allability = this.getAllBaseAbility();
+        allability.forEach(ability => {
+            if (ability.OnRoundStartBattle) {
+                ability.OnRoundStartBattle()
+            }
+        })
+    }
+
+    OnBoardRound_Prize(round: ERoundBoard) {
+        let allability = this.getAllBaseAbility();
+        allability.forEach(ability => {
+            if (ability.OnRoundStartPrize) {
+                ability.OnRoundStartPrize(round)
+            }
+        })
+    }
+
+
+    cloneAbility(source: AbilityManagerComponent) {
+        let allability = source.getAllBaseAbility();
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        allability.forEach(ability => {
+            let abilityname = ability.GetAbilityName();
+            if (npc.FindAbilityByName(abilityname) == null) {
+                npc.addAbilityPlus(abilityname)
+            }
+        })
+    }
+
+    extraAbility: IAbilityEntityRoot;
+    tryLearnExtraAbility(abilityname: string) {
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        if (this.extraAbility) {
+            if (this.extraAbility.ConfigID == abilityname) {
+                return false;
+            }
+            this.removeAbilityRoot(this.extraAbility);
+            this.extraAbility = null;
+        }
+        let ability = npc.addAbilityPlus(abilityname);
+        if (ability.ETRoot) {
+            this.extraAbility = ability.ETRoot as IAbilityEntityRoot;
+            return true
+        }
+        else {
+            LogHelper.error("ability has no etroot")
+            return false
+        }
+    }
+
+    clearAllAbility() {
+        let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
+        this.allAbilityRoot.forEach(str => {
+            let ability = battleunit.GetDomainChild<IAbilityEntityRoot>(str);
+            if (ability) {
+                ability.Dispose()
+            }
+        });
+        this.allAbilityRoot = [];
+    }
+
+    getAllBaseAbility() {
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        let r: ActiveRootAbility[] = [];
+        let len = npc.GetAbilityCount();
+        for (let i = 0; i < len; i++) {
+            let ability = npc.GetAbilityByIndex(i) as ActiveRootAbility;
+            if (ability) {
+                r.push(ability);
+            }
+        }
+        return r;
+    }
+
+    getAbilityRoot(childid: string) {
+        let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
+        return battleunit.GetDomainChild<IAbilityEntityRoot>(childid);
+    }
+
+    addAbilityRoot(root: IAbilityEntityRoot) {
+        let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
+        if (root.DomainParent || root.DomainParent == battleunit) {
+            return;
+        }
+        battleunit.AddDomainChild(root);
+        this.allAbilityRoot.push(root.Id);
+        if (battleunit.CombinationComp()) {
+            battleunit.CombinationComp().addAbilityRoot(root);
+        }
+    }
+
+    removeAbilityRoot(root: IAbilityEntityRoot) {
+        let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
+        if (root.DomainParent != battleunit) {
+            return;
+        }
+        battleunit.RemoveDomainChild(root);
+        let index = this.allAbilityRoot.indexOf(root.Id);
+        this.allAbilityRoot.splice(index, 1);
+        if (battleunit.CombinationComp()) {
+            battleunit.CombinationComp().removeAbilityRoot(root);
+        }
+        root.Dispose();
+    }
+
+    levelUpAllAbility() {
+        let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
+        this.allAbilityRoot.forEach(str => {
+            let ability = battleunit.GetDomainChild<IAbilityEntityRoot>(str);
+            ability.GetDomain<IBaseAbility_Plus>().UpgradeAbility(true);
+        })
+    }
+
+
+    setAllAbilityLevel(level: number) {
+        let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
+        this.allAbilityRoot.forEach(str => {
+            let ability = battleunit.GetDomainChild<IAbilityEntityRoot>(str);
+            ability.GetDomain<IBaseAbility_Plus>().SetLevel(level);
+        })
+    }
+
+
+    getAllCanCastAbility() {
+        let r: ActiveRootAbility[] = [];
+        let caster = this.GetDomain<IBaseNpc_Plus>();
+        if (caster.IsIllusion()) {
+            return r;
+        }
+        let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
+        this.allAbilityRoot.forEach(str => {
+            let abilityroot = battleunit.GetDomainChild<IAbilityEntityRoot>(str);
+            if (abilityroot) {
+                let ability = abilityroot.GetDomain<ActiveRootAbility>()
+                if (ability.IsAbilityReady()) {
+                    r.push(ability)
+                }
+            }
+        });
+        return r;
+    }
+}

@@ -9,7 +9,7 @@ const { read_all_files, read_sub_directories } = require("./utils");
 // 需要读取的excel路径
 const excel_path = "excels/sounds";
 const kv_path = "content/soundevents";
-const ts_path = "game/scripts/tscripts/assert/Assert_SoundEvent.ts";
+const ts_path = "content/scripts/tscripts/assert/Assert_SoundEvent.ts";
 
 function single_excel_to_kv(file) {
     if ((path.extname(file) != ".xlsx" && path.extname(file) != ".xls") || file.indexOf("~$") >= 0) {

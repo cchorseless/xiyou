@@ -1,18 +1,14 @@
 
-import React, { createRef, PureComponent } from "react";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import React, { createRef } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { FuncHelper } from "../../helper/FuncHelper";
-import { LogHelper } from "../../helper/LogHelper";
-import { TimerHelper } from "../../helper/TimerHelper";
-import { ToolTipHelper } from "../../helper/ToolTipHelper";
+import { TipsHelper } from "../../helper/TipsHelper";
 import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
 import { CCActivityPanel } from "../Activity/CCActivityPanel";
 import { CCDacBoard } from "../AllUIElement/CCDacBoard/CCDacBoard";
 import { CCMiniMap } from "../AllUIElement/CCMiniMap/CCMiniMap";
 import { CCMenuNavigation } from "../AllUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel, dialogTooltipInfo } from "../AllUIElement/CCPanel/CCPanel";
-import { CCStoragePanel } from "../Storage/CCStoragePanel";
+import { CCArtifactListPanel } from "../Artifact/CCArtifactListPanel";
 import { CCBattlePassPanel } from "../BattlePass/CCBattlePassPanel";
 import { CCChallengeShopPanel } from "../Challenge/CCChallengeShopPanel";
 import { CCCombinationBottomPanel } from "../Combination/CCCombinationBottomPanel";
@@ -23,10 +19,9 @@ import { CCPlayerListPanel } from "../Player/CCPlayerListPanel";
 import { CCRankPanel } from "../Rank/CCRankPanel";
 import { CCRecordPanel } from "../Record/CCRecordPanel";
 import { CCShopPanel } from "../Shop/CCShopPanel";
+import { CCStoragePanel } from "../Storage/CCStoragePanel";
 import { CCTopBarCenter, CCTopBarGameCoin } from "../TopBarPanel/CCTopBarPanel";
 import { CCUnitDamageInfo } from "../Unit/CCUnitDamageInfo";
-import { CCArtifactListPanel } from "../Artifact/CCArtifactListPanel";
-import { CCPublicShopBagPanel } from "../PublicShopBag/CCPublicShopBagPanel";
 
 
 export class CCMainPanel extends CCPanel<NodePropsData> {
@@ -68,7 +63,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCDacBoard />
                         <CCUnitDamageInfo />
                         <CCArtifactListPanel />
-                        <CCPublicShopBagPanel />
+                        {/* <CCPublicShopBagPanel /> */}
                         {this.panel_base_childs}
                     </Panel>
                 }
@@ -192,16 +187,19 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
             dialogpanel.SetPositionInPixels(posdialog.x, posdialog.y, 0);
         }
         setPosFunc();
-        let tasktimer = TimerHelper.AddIntervalTimer(0.1, 0.1, FuncHelper.Handler.create(this, () => {
+        let i = 0;
+        GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
+            i++;
             let issizevalid = this.CustomToolTip?.__root__.current?.IsSizeValid();
             if (issizevalid) {
-                tasktimer.Clear();
                 setPosFunc();
+                return
             }
-            else if (issizevalid == null) {
-                tasktimer.Clear();
+            else if (issizevalid == null || i >= 10) {
+                return
             }
-        }), 10);
+            return 0.1
+        }));
     }
     /**显示tooltip弹窗 */
     public async ShowCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, dialoginfo: dialogTooltipInfo<T, any>) {
@@ -273,7 +271,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     }
     public RegTextToolTip(bindpanel: Panel, attrFunc: (() => string | void)) {
         if (!bindpanel) { return };
-        let tipType = ToolTipHelper.ToolTipType.DOTAShowTextTooltip;
+        let tipType = TipsHelper.ToolTipType.DOTAShowTextTooltip;
         let brightness = Number(bindpanel.style.brightness) || 1;
         bindpanel.SetPanelEvent('onmouseover', () => {
             let tips = attrFunc();
@@ -291,7 +289,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     }
     public RegTitleTextToolTip(bindpanel: Panel, attrFunc: (() => { title: string, tip: string } | void)) {
         if (!bindpanel) { return };
-        let tipType = ToolTipHelper.ToolTipType.DOTAShowTitleTextTooltip;
+        let tipType = TipsHelper.ToolTipType.DOTAShowTitleTextTooltip;
         let brightness = Number(bindpanel.style.brightness) || 1;
         bindpanel.SetPanelEvent('onmouseover', () => {
             let data = attrFunc();

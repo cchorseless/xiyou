@@ -1,11 +1,9 @@
 import { PanelAttributes } from "@demon673/react-panorama";
 import React, { createRef } from "react";
-import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
+import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { AbilityHelper, ItemHelper, UnitHelper } from "../../../helper/DotaEntityHelper";
+import { AbilityHelper, ItemHelper } from "../../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
-import { LogHelper } from "../../../helper/LogHelper";
-import { TimerHelper } from "../../../helper/TimerHelper";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 import { CCItemInfoDialog } from "../CCItem/CCItemInfoDialog";
 import { CCPanel } from "../CCPanel/CCPanel";
@@ -59,9 +57,10 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
     onStartUI() {
         this.onRefreshUI()
         this.addDragEvent();
-        TimerHelper.AddIntervalTimer(0.1, 0.1, FuncHelper.Handler.create(this, () => {
+        GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
             this.onRefreshUI();
-        }), -1, false);
+            return 0.1
+        }));
     }
     addDragEvent() {
         const draggable = this.props.draggable!;
@@ -195,7 +194,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
 
     private intervalRefresh() {
         // 延迟0.1，保证数据最新
-        // TimerHelper.AddTimer(0.1, FuncHelper.Handler.create(this, () => {
+        // GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
         //     this.onRefreshUI();
         // }), false);
     }

@@ -1,7 +1,6 @@
 
 import React, { createRef, PureComponent } from "react";
-import { EEnum } from "../../../../../game/scripts/tscripts/shared/Gen/Types";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
@@ -20,11 +19,11 @@ interface ICCMailPanel extends NodePropsData {
 
 export class CCMailPanel extends CCPanel<ICCMailPanel> {
     onReady() {
-        return Boolean(PlayerScene.Local.TCharacter && PlayerScene.Local.TCharacter.DataComp)
+        return Boolean(GGameScene.Local.TCharacter && GGameScene.Local.TCharacter.DataComp)
     }
 
     onInitUI() {
-        PlayerScene.Local.TCharacter.DataComp?.RegRef(this)
+        GGameScene.Local.TCharacter.DataComp?.RegRef(this)
     }
 
     closeThis() {
@@ -41,7 +40,7 @@ export class CCMailPanel extends CCPanel<ICCMailPanel> {
             return this.defaultRender("CC_MailPanel")
         }
         const sName = "mail";
-        const DataComp = this.GetStateEntity(PlayerScene.Local.TCharacter.DataComp!)!;
+        const DataComp = this.GetStateEntity(GGameScene.Local.TCharacter.DataComp!)!;
         const MetaStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.MetaStone)
         const StarStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.StarStone)
         const selectindex = this.GetState<number>("selectindex") || 0;

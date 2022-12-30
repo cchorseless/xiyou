@@ -1,11 +1,7 @@
-import { RoundConfig } from "../../../../../../game/scripts/tscripts/shared/RoundConfig";
+import { RoundConfig } from "../../../../../scripts/tscripts/shared/RoundConfig";
 import { KVHelper } from "../../../helper/KVHelper";
-import { LogHelper } from "../../../helper/LogHelper";
-import { TimerHelper } from "../../../helper/TimerHelper";
-import { ET, registerET } from "../../../libs/Entity";
-import { PlayerScene } from "../Player/PlayerScene";
 import { ERound } from "./ERound";
-@registerET()
+@GReloadable
 export class ERoundBoard extends ERound {
     roundLeftTime: number = -1;
     configID: string;
@@ -17,7 +13,7 @@ export class ERoundBoard extends ERound {
     set roundState(v: RoundConfig.ERoundBoardState) {
         if (this._roundState === RoundConfig.ERoundBoardState.start
             && v === RoundConfig.ERoundBoardState.battle) {
-            PlayerScene.Local.SelectHero();
+            GGameScene.Local.SelectHero();
         }
         this._roundState = v;
     }
@@ -28,7 +24,7 @@ export class ERoundBoard extends ERound {
     onSerializeToEntity() {
         let KV_DATA = KVHelper.KVData();
         this.config = KV_DATA.building_round_board["" + this.configID];
-        PlayerScene.Local.RoundManagerComp.addRound(this);
+        GGameScene.Local.RoundManagerComp.addRound(this);
         this.onReload();
     }
     onReload(): void {
@@ -38,8 +34,8 @@ export class ERoundBoard extends ERound {
     }
 
     isCurrentRound() {
-        if (PlayerScene.Local.RoundManagerComp && PlayerScene.Local.RoundManagerComp.curRoundBoard && PlayerScene.Local.RoundManagerComp.getCurrentBoardRound()) {
-            return this.configID == PlayerScene.Local.RoundManagerComp.curRoundBoard;
+        if (GGameScene.Local.RoundManagerComp && GGameScene.Local.RoundManagerComp.curRoundBoard && GGameScene.Local.RoundManagerComp.getCurrentBoardRound()) {
+            return this.configID == GGameScene.Local.RoundManagerComp.curRoundBoard;
         }
         return false;
     }

@@ -1,5 +1,5 @@
 
-import React, { createRef, PureComponent } from "react";
+import React from "react";
 import { NetHelper } from "../../helper/NetHelper";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
@@ -23,9 +23,9 @@ export class CCWaitProgressDialog extends CCPanel<ICCWaitProgressDialog> {
 
     onInitUI() {
         if (this.props.protocol) {
-            NetHelper.SendToCSharp(this.props.protocol, this.props.data, (e) => {
+            NetHelper.SendToCSharp(this.props.protocol, this.props.data, GHandler.create(this, (e) => {
                 this.changeState(Boolean(e.state));
-            }, this)
+            }))
         }
     }
 

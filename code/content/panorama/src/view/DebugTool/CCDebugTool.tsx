@@ -1,17 +1,15 @@
-import React, { Children, ReactElement, ReactNode, useCallback, useState } from "react";
-import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import React, { Children, ReactNode } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { CCIconButton } from "../AllUIElement/CCButton/CCIconButton";
-import { CCDropDownButton } from "../AllUIElement/CCButton/CCDropDownButton";
-import { CCIcon_Arrow } from "../AllUIElement/CCIcons/CCIcon_Arrow";
-import { CCIcon_Refresh } from "../AllUIElement/CCIcons/CCIcon_Refresh";
-import { CCIcon_Gear } from "../AllUIElement/CCIcons/CCIcon_Gear";
-import { CCSwitch } from "../AllUIElement/CCSwitch/CCSwitch";
-import { CCIcon_XClose } from "../AllUIElement/CCIcons/CCIcon_XClose";
-import { CCIcon_Lock } from "../AllUIElement/CCIcons/CCIcon_Lock";
-import { TimerHelper } from "../../helper/TimerHelper";
-import { FuncHelper } from "../../helper/FuncHelper";
 import { NetHelper } from "../../helper/NetHelper";
+import { CCDropDownButton } from "../AllUIElement/CCButton/CCDropDownButton";
+import { CCIconButton } from "../AllUIElement/CCButton/CCIconButton";
+import { CCIcon_Arrow } from "../AllUIElement/CCIcons/CCIcon_Arrow";
+import { CCIcon_Gear } from "../AllUIElement/CCIcons/CCIcon_Gear";
+import { CCIcon_Lock } from "../AllUIElement/CCIcons/CCIcon_Lock";
+import { CCIcon_Refresh } from "../AllUIElement/CCIcons/CCIcon_Refresh";
+import { CCIcon_XClose } from "../AllUIElement/CCIcons/CCIcon_XClose";
+import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCSwitch } from "../AllUIElement/CCSwitch/CCSwitch";
 
 import "./CCDebugTool.less";
 
@@ -35,7 +33,7 @@ export class CCDebugTool extends CCPanel<ICCDebugTool> {
 		direction: "top",
 	};
 	onInitUI() {
-		TimerHelper.AddIntervalFrameTimer(5, 5, FuncHelper.Handler.create(this, () => {
+		GTimerHelper.AddFrameTimer(5, GHandler.create(this, () => {
 			if (!this.state.bManualShowPanel) {
 				if (this.state.Minimized == GameUI.IsAltDown()) {
 					this.UpdateState({ Minimized: !GameUI.IsAltDown() });
@@ -45,7 +43,8 @@ export class CCDebugTool extends CCPanel<ICCDebugTool> {
 					this.UpdateState({ bManualShowPanel: false });
 				}
 			}
-		}), -1);
+			return 5
+		}));
 	}
 
 

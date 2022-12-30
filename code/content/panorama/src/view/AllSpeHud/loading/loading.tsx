@@ -1,15 +1,15 @@
-import React from "react";
+// LogHelper必须放第一行先导入
 import { render } from "@demon673/react-panorama";
-import { AllEntity } from "../../../game/Index";
-import { PlayerScene } from "../../../game/components/Player/PlayerScene";
+import React from "react";
+import { AllShared } from "../../../../../scripts/tscripts/shared/AllShared";
+import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
+import { AllEntity } from "../../../game/AllEntity";
 import { LogHelper } from "../../../helper/LogHelper";
-import { CCTeam_select } from "../team_select/team_select";
+import { NetHelper } from "../../../helper/NetHelper";
 import { NodePropsData } from "../../../libs/BasePureComponent";
-import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import { CCHero_Select } from "../hero_select/hero_select";
-import { NetHelper } from "../../../helper/NetHelper";
-
+import { CCTeam_select } from "../team_select/team_select";
 import "./loading.less";
 
 /**只用loading一个节点作为开局界面，其他全部作为子节点添加。 */
@@ -45,9 +45,9 @@ export class CCLoading extends CCPanel<NodePropsData> {
 
     LoginServer(cb = () => { }) {
         LogHelper.print("---------------LoginServer---------------");
-        NetHelper.SendToLua(GameEnum.CustomProtocol.req_LoginGame, null, (e) => {
+        NetHelper.SendToLua(GameEnum.CustomProtocol.req_LoginGame, null, GHandler.create(this, (e) => {
             this.UpdateState({ login: e.state })
-        });
+        }));
     }
     render() {
         const gamestate = this.GetState<number>("gamestate");
@@ -69,5 +69,6 @@ export class CCLoading extends CCPanel<NodePropsData> {
         )
     }
 }
+AllShared.Init();
 AllEntity.Init();
 render(<CCLoading />, $.GetContextPanel());

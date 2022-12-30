@@ -1,7 +1,6 @@
 
 import React, { createRef, PureComponent } from "react";
-import { PublicBagConfig } from "../../../../../game/scripts/tscripts/shared/PublicBagConfig";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { ItemHelper } from "../../helper/DotaEntityHelper";
 import { LogHelper } from "../../helper/LogHelper";
@@ -28,7 +27,7 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
         const iLevel = this.props.iLevel!;
         const iLeftCount = this.props.iLeftCount;
         const iPercent = 1;
-        const playdata = PlayerScene.Local.PlayerDataComp
+        const playdata = GGameScene.Local.PlayerDataComp
         const iGoldCost = ItemHelper.GetItemCostLV(sItemName, iLevel) * iPercent;
         const iWoodCost = ItemHelper.GetItemWoodCost(sItemName) * iPercent;
         const iSoulCrystalCost = ItemHelper.GetItemSoulCrystalCost(sItemName) * iPercent;
@@ -47,9 +46,9 @@ export class CCPublicShopItem extends CCPanel<ICCPublicShopItem, Button> {
         const iType = this.props.iType;
         const iLeftCount = this.props.iLeftCount;
         const iLevel = this.props.iLevel!;
-        const iDiscount = PlayerScene.Local.PublicShopComp.shopDiscount;
+        const iDiscount = GGameScene.Local.PublicShopComp.shopDiscount;
         const iPercent = 1 - iDiscount / 100;
-        const playdata = PlayerScene.Local.PlayerDataComp
+        const playdata = GGameScene.Local.PlayerDataComp
         const iGoldCost = ItemHelper.GetItemCostLV(sItemName, iLevel) * iPercent;
         const iWoodCost = ItemHelper.GetItemWoodCost(sItemName) * iPercent;
         const iSoulCrystalCost = ItemHelper.GetItemSoulCrystalCost(sItemName) * iPercent;

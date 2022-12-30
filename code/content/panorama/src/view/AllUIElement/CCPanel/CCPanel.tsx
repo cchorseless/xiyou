@@ -1,11 +1,8 @@
-import React, { createRef, PureComponent } from "react";
-import { PanelAttributes, ImageAttributes, DOTAAbilityImageAttributes, LabelAttributes } from "@demon673/react-panorama";
-import { BasePureComponent, NodePropsData } from "../../../libs/BasePureComponent";
+import { PanelAttributes } from "@demon673/react-panorama";
+import React, { createRef } from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { LogHelper } from "../../../helper/LogHelper";
+import { BasePureComponent, NodePropsData } from "../../../libs/BasePureComponent";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
-import { TimerHelper } from "../../../helper/TimerHelper";
-import { FuncHelper } from "../../../helper/FuncHelper";
 
 type CC_PanelScroll = "clip" | "noclip" | "none" | "squish" | "scroll";
 
@@ -53,7 +50,7 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
             this.delayUpdateSelf();
         }
         else {
-            TimerHelper.AddFrameTimer(5, FuncHelper.Handler.create(this, () => { this.checkDataReady() }))
+            GTimerHelper.AddFrameTimer(5, GHandler.create(this, () => { this.checkDataReady() }))
         }
     }
 

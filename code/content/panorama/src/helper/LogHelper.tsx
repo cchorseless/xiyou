@@ -103,3 +103,12 @@ export module LogHelper {
         }
     }
 }
+declare global {
+    /**
+     * @JsOnly
+     */
+    var GLogHelper: typeof LogHelper;
+}
+if (global.GLogHelper == null) {
+    global.GLogHelper = LogHelper;
+}

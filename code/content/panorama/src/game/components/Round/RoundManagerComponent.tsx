@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { NetHelper } from "../../../helper/NetHelper";
-import { ET, registerET } from "../../../libs/Entity";
-import { PlayerScene } from "../Player/PlayerScene";
+import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { ERound } from "./ERound";
 import { ERoundBoard } from "./ERoundBoard";
 
-@registerET()
+@GReloadable
 export class RoundManagerComponent extends ET.Component {
     readonly RoundInfo: { [k: string]: ERound } = {};
     onSerializeToEntity() {
-        PlayerScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
+        GGameScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
     }
     curRoundBoard: string;
     onAwake() {

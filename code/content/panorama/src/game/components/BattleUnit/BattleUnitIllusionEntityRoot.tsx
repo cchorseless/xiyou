@@ -1,5 +1,5 @@
-import { registerET } from "../../../libs/Entity";
+
 import { BattleUnitEntityRoot } from "./BattleUnitEntityRoot";
 
-@registerET()
+@GReloadable
 export class BattleUnitIllusionEntityRoot extends BattleUnitEntityRoot { }

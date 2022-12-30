@@ -1,5 +1,5 @@
-import { GameEnum } from "../../../../game/scripts/tscripts/shared/GameEnum";
-import { JsonConfigHelper } from "../../../../game/scripts/tscripts/shared/Gen/JsonConfigHelper";
+import { GameEnum } from "../../../scripts/tscripts/shared/GameEnum";
+import { JsonConfigHelper } from "../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
 import { FuncHelper } from "./FuncHelper";
 import { KVHelper } from "./KVHelper";
 import { LogHelper } from "./LogHelper";

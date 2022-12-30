@@ -42,7 +42,7 @@
         "outputImage": "node scripts/output_image_less.js",
         "jsontots": "node scripts/jsontots.js",
         "prod:ui": "node --preserve-symlinks node_modules/webpack/bin/webpack.js --config content/panorama/webpack.config.js",
-        "prod:ts": "tstl --project game/scripts/tsconfig.json",
+        "prod:ts": "tstl --project content/scripts/tsconfig.json",
         "prod:kv": "node scripts/excel_2_kv.js",
         "prod:createability": "node scripts/createabilityfile.js",
         "prod:soundkv": "node scripts/soundexcel_2_kv.js",
@@ -54,7 +54,7 @@
         "predev": "node scripts/install.js",
         "dev": "run-p dev:*",
         "dev:ui": "node --preserve-symlinks node_modules/webpack/bin/webpack.js --config content/panorama/webpack.config.js --watch",
-        "dev:ts": "tstl --project game/scripts/tsconfig.json --watch",
+        "dev:ts": "tstl --project content/scripts/tsconfig.json --watch",
         "dev:kv": "node scripts/excel_2_kv.js --watch",
         "dev:kv2ts": "node scripts/kv_2_ts.js --watch",
         "dev:localization": "node scripts/localization.js --watch"

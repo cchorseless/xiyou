@@ -1,3 +1,4 @@
+import { GameServiceConfig } from "../../../scripts/tscripts/shared/GameServiceConfig";
 import { LogHelper } from "./LogHelper";
 
 export module NetHelper {
@@ -6,33 +7,33 @@ export module NetHelper {
     }
 
     /**请求LUA服务器数据 */
-    export function SendToLua(protocol: string, data: any = null, cb: (event: JS_TO_LUA_DATA) => void | null = null as any, context: any = null) {
-        if (cb != null) {
+    export function SendToLua(protocol: string, data: any = null, cbHander: IGHandler | null = null) {
+        if (cbHander != null) {
             let eventID = GameEvents.Subscribe(protocol, (event: JS_TO_LUA_DATA) => {
                 // LogHelper.print(event.protocol);
-                cb.call(context, event);
+                cbHander.runWith([event])
                 GameEvents.Unsubscribe(eventID);
             });
         }
         GameEvents.SendCustomGameEventToServer("JS_TO_LUA_EVENT", {
             protocol: protocol,
             data: data,
-            hasCB: Boolean(cb),
+            hasCB: Boolean(cbHander),
         });
     }
     /**请求CSharp服务器数据 */
-    export function SendToCSharp(protocol: string, data: any = null, cb: (event: JS_TO_LUA_DATA) => void | null = null as any, context: any = null) {
-        if (cb != null) {
+    export function SendToCSharp(protocol: string, data: any = null, cbHander: IGHandler | null = null) {
+        if (cbHander != null) {
             let eventID = GameEvents.Subscribe(protocol, (event: JS_TO_LUA_DATA) => {
                 // LogHelper.print(event.protocol);
-                cb.call(context, event);
+                cbHander.runWith([event])
                 GameEvents.Unsubscribe(eventID);
             });
         }
         GameEvents.SendCustomGameEventToServer("JS_TO_LUA_EVENT", {
             protocol: protocol,
             data: data,
-            hasCB: Boolean(cb),
+            hasCB: Boolean(cbHander),
             isawait: true,
         });
     }
@@ -60,39 +61,35 @@ export module NetHelper {
      * @param context
      * @param isOnce 是否只监听一次
      */
-    export function ListenOnLua(context: any, protocol: string, cb: (event: JS_TO_LUA_DATA) => void, isOnce: boolean = false) {
-        if (cb != null) {
-            if (!isOnce) {
-                GameEvents.Subscribe(protocol, (event) => {
-                    // LogHelper.print(protocol);
-                    cb.call(context, event);
-                });
-            } else {
-                let eventID = GameEvents.Subscribe(protocol, (event: JS_TO_LUA_DATA) => {
-                    // LogHelper.print(protocol);
-                    cb.call(context, event);
+    export function ListenOnLua(protocol: string, cbHander: IGHandler | null = null, isOnce: boolean = false) {
+        if (cbHander != null) {
+            cbHander.once = isOnce;
+            let eventID = GameEvents.Subscribe(protocol, (event) => {
+                // LogHelper.print(protocol);
+                cbHander.runWith([event]);
+                if (isOnce) {
                     GameEvents.Unsubscribe(eventID);
-                });
-            }
+                }
+            });
         }
     }
     export function OffAllListenOnLua(context: any) { }
 
     export function OffListenOnLua(context: any, protocol: string) { }
 
-    export function GetTableValue(tableName: ENetTables, key: string) {
+    export function GetTableValue(tableName: GameServiceConfig.ENetTables, key: string) {
         let obj = CustomNetTables.GetTableValue(tableName as never, key) as any;
         return obj;
     }
 
-    export function GetOneTable(tableName: ENetTables) {
+    export function GetOneTable(tableName: GameServiceConfig.ENetTables) {
         return CustomNetTables.GetAllTableValues(tableName as never) as { key: string; value: any }[];
     }
 
 
     export function GetETEntityNetTableName(playerid: PlayerID | null = null) {
         if (playerid == null) {
-            return ENetTables.etentity;
+            return GameServiceConfig.ENetTables.etentity;
         }
         switch (playerid) {
             case 0:
@@ -101,7 +98,7 @@ export module NetHelper {
             case 3:
             case 4:
             case 5:
-                return ENetTables.etentity + playerid as any;
+                return GameServiceConfig.ENetTables.etentity + playerid as any;
         }
         LogHelper.error("miss playerId =>", playerid);
     }
@@ -111,27 +108,16 @@ export module NetHelper {
             return -1;
         }
         switch (nettablename) {
-            case ENetTables.etentity:
+            case GameServiceConfig.ENetTables.etentity:
                 return Players.GetLocalPlayer();
-            case ENetTables.etentity0:
-            case ENetTables.etentity1:
-            case ENetTables.etentity2:
-            case ENetTables.etentity3:
-            case ENetTables.etentity4:
-            case ENetTables.etentity5:
-                return Number(nettablename.replace(ENetTables.etentity, "")) as PlayerID;
+            case GameServiceConfig.ENetTables.etentity0:
+            case GameServiceConfig.ENetTables.etentity1:
+            case GameServiceConfig.ENetTables.etentity2:
+            case GameServiceConfig.ENetTables.etentity3:
+            case GameServiceConfig.ENetTables.etentity4:
+            case GameServiceConfig.ENetTables.etentity5:
+                return Number(nettablename.replace(GameServiceConfig.ENetTables.etentity, "")) as PlayerID;
         }
         return -1;
-    }
-
-    export enum ENetTables {
-        common = "common",
-        etentity = "etentity",
-        etentity0 = "etentity0",
-        etentity1 = "etentity1",
-        etentity2 = "etentity2",
-        etentity3 = "etentity3",
-        etentity4 = "etentity4",
-        etentity5 = "etentity5",
     }
 }

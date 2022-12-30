@@ -1,6 +1,4 @@
 import React from "react";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
-import { LogHelper } from "../../helper/LogHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCAvatar } from "../AllUIElement/CCAvatar/CCAvatar";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
@@ -19,7 +17,7 @@ export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
 
     onReady() {
         let r = true;
-        PlayerScene.EntityRootManage.getAllPlayer().forEach(player => {
+        GPlayerEntityRoot.GetAllInstance().forEach(player => {
             if (player.CourierDataComp == null) { r = false }
         })
         return r;
@@ -27,7 +25,7 @@ export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
 
 
     onInitUI() {
-        PlayerScene.EntityRootManage.getAllPlayer().forEach(player => {
+        GPlayerEntityRoot.GetAllInstance().forEach(player => {
             player.CourierDataComp?.RegRef(this);
         })
     }
@@ -36,7 +34,7 @@ export class CCPlayerListPanel extends CCPanel<ICCPlayerListPanel> {
         if (!this.__root___isValid) {
             return this.defaultRender("CC_PlayerInfoContainer");
         }
-        const CourierDataComps = PlayerScene.EntityRootManage.getAllPlayer().map((player) => {
+        const CourierDataComps = GPlayerEntityRoot.GetAllInstance().map((player) => {
             return this.GetStateEntity(player.CourierDataComp);
         })
         return (

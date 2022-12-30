@@ -1,5 +1,5 @@
-import { GameEnum } from "../../../../game/scripts/tscripts/shared/GameEnum";
-import { EEnum } from "../../../../game/scripts/tscripts/shared/Gen/Types";
+import { GameEnum } from "../../../scripts/tscripts/shared/GameEnum";
+import { EEnum } from "../../../scripts/tscripts/shared/Gen/Types";
 
 
 export module PathHelper {

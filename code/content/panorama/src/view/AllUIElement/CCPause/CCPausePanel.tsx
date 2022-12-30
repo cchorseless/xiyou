@@ -2,7 +2,7 @@ import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { LogHelper } from "../../../helper/LogHelper";
-import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
+import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { CCIntervalTips } from "../CCIntervalTips/CCIntervalTips";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCPausePanel.less";

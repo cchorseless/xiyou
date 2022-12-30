@@ -1,5 +1,5 @@
 import React from "react";
-import { CombinationConfig } from "../../../../../game/scripts/tscripts/shared/CombinationConfig";
+import { CombinationConfig } from "../../../../scripts/tscripts/shared/CombinationConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { CCImage } from "../AllUIElement/CCImage/CCImage";

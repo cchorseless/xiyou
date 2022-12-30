@@ -1,10 +1,9 @@
 import React, { } from "react";
 import { ECombination } from "../../game/components/Combination/ECombination";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
-import { ET } from "../../libs/Entity";
-import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
+import { ET } from "../../../../scripts/tscripts/shared/lib/Entity";
+import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
 import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCCombinationSingleBottomItem } from "./CCCombinationSingleBottomItem";
@@ -19,7 +18,7 @@ export interface ICCCombinationBottomPanel {
 export class CCCombinationBottomPanel extends CCPanel<ICCCombinationBottomPanel> {
 
     onReady() {
-        return Boolean(PlayerScene.Local.CombinationManager)
+        return Boolean(GGameScene.Local.CombinationManager)
     }
 
     onInitUI() {
@@ -38,14 +37,14 @@ export class CCCombinationBottomPanel extends CCPanel<ICCCombinationBottomPanel>
             return this.defaultRender("CC_CombinationBottomPanel");
         }
         const curunit = this.GetState<EntityIndex>("curunit");
-        const player = PlayerScene.EntityRootManage.isHero(curunit);
-        const fakerhero = PlayerScene.EntityRootManage.isFakerHero(curunit);
+        const courier = GCourierEntityRoot.GetEntity(curunit);
+        const fakerhero = GFakerHeroEntityRoot.GetEntity(curunit);
         let combinations: { [k: string]: ECombination[] } = {};
         if (fakerhero) {
             combinations = fakerhero.FHeroCombinationManager.getAllCombination();
         }
-        else if (player) {
-            combinations = player.CombinationManager.getAllCombination();
+        else if (courier) {
+            combinations = courier.GetPlayer().CombinationManager.getAllCombination();
         }
         return (
             <Panel ref={this.__root__} id="CC_CombinationBottomPanel"    {...this.initRootAttrs()}>

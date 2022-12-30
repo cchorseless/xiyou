@@ -1,11 +1,7 @@
-import { KVHelper } from "../../../helper/KVHelper";
-import { NetHelper } from "../../../helper/NetHelper";
-import { TimerHelper } from "../../../helper/TimerHelper";
-import { registerET, ET } from "../../../libs/Entity";
-import { PlayerScene } from "../Player/PlayerScene";
+import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 
 
-@registerET()
+@GReloadable
 export class ECombination extends ET.Entity {
     public combinationName: string;
     public combinationId: string;
@@ -17,7 +13,7 @@ export class ECombination extends ET.Entity {
     }
     onReload() {
         if (this.IsEmpty()) { return; }
-        PlayerScene.GetPlayer(this.BelongPlayerid)?.CombinationManager.addOneCombination(this);
+        GGameScene.GetPlayer(this.BelongPlayerid)?.CombinationManager.addOneCombination(this);
     }
 
     isFakerCombination() {

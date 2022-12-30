@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+        "rootDir": "tscripts",
+        "outDir": "../../game/scripts/vscripts", //输出目录
+        "target": "esnext",
+        "lib": [
+            "esnext"
+        ],
+        "types": [
+            "@moddota/dota-lua-types",
+        ],
+        "plugins": [
+            {
+                "transform": "@moddota/dota-lua-types/transformer"
+            }
+        ],
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "preserveSymlinks": true,
+        "strict": true,
+        "strictNullChecks": false,
+        "strictPropertyInitialization": false,
+    },
+    "include": [
+        "tscripts",
+        "!tscripts/npc/abilities/dota",
+        "!tscripts/npc/items/dota",
+        "!tscripts/npc/units/dota",
+    ],
+    "exclude": [
+        "tscripts/npc/abilities/dota",
+        "tscripts/npc/items/dota",
+        "tscripts/npc/units/dota",
+        "tscripts/zlib",
+    ],
+    "tstl": {
+        "luaTarget": "JIT",
+        "sourceMapTraceback": true
+    }
+}

@@ -1,31 +1,10 @@
-import { useState } from "react";
-import { LogHelper } from "../../../helper/LogHelper";
-import { NetHelper } from "../../../helper/NetHelper";
-import { ET, registerET } from "../../../libs/Entity";
-import { PlayerScene } from "./PlayerScene";
+import { PlayerData } from "../../../../../scripts/tscripts/shared/rules/Player/PlayerData";
 
-@registerET()
-export class PlayerDataComponent extends ET.Component {
+@GReloadable
+export class PlayerDataComponent extends PlayerData {
     onSerializeToEntity() {
-        PlayerScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
+        GGameScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
     }
     onReload(): void {
     }
-    startTime: string;
-    popuLevel: number = 0;
-    popuLevelUpCostGold: number = 0;
-    popuLevelUpCostWood: number = 0;
-    techLevel: number = 0;
-    techLevelUpCostGold: number = 0;
-    popuLevelMax: number = 10;
-    techLevelMax: number = 10;
-    perIntervalGold: number = 0;
-    perIntervalWood: number = 0;
-
-    populationRoof: number = 0;
-    population: number = 0;
-    gold: number = 0;
-    soulcrystal: number = 0;
-    wood: number = 0;
-
 }

@@ -1,14 +1,11 @@
-import { FuncHelper } from "../../../helper/FuncHelper";
+import { ChessControlConfig } from "../../../../../scripts/tscripts/shared/ChessControlConfig";
+import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
+import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
-import { TimerHelper } from "../../../helper/TimerHelper";
-import { ET, registerET } from "../../../libs/Entity";
-import { GameEnum } from "../../../../../../game/scripts/tscripts/shared/GameEnum";
 import { CCMainPanel } from "../../../view/MainPanel/CCMainPanel";
 import { CCUnitChessMoveIcon } from "../../../view/Unit/CCUnitChessMoveIcon";
-import { PlayerScene } from "../Player/PlayerScene";
-import { ChessControlConfig } from "../../../../../../game/scripts/tscripts/shared/ChessControlConfig";
-@registerET()
+@GReloadable
 export class ChessControlComponent extends ET.Component {
     onAwake() {
         this.addEvent();
@@ -25,15 +22,10 @@ export class ChessControlComponent extends ET.Component {
         GameEvents.Subscribe(GameEnum.GameEvent.dota_player_update_selected_unit, async (e) => {
             await this.OnPlayerQueryUnit(e);
         });
-        TimerHelper.AddIntervalFrameTimer(
-            1,
-            1,
-            FuncHelper.Handler.create(this, () => {
-                this.UpdateHeroIcon();
-            }),
-            -1,
-            false
-        );
+        GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+            this.UpdateHeroIcon();
+            return 1
+        }));
     }
 
     OnMouseCallback() {
@@ -83,7 +75,6 @@ export class ChessControlComponent extends ET.Component {
         // if (keys.splitscreenplayer == Game.GetLocalPlayerID()) {
         let localPlayer = Players.GetLocalPlayer();
         let portrait_unit = Players.GetLocalPlayerPortraitUnit();
-        let EntityRootManage = PlayerScene.EntityRootManage;
         // 选中自己信使
         if (portrait_unit == Players.GetPlayerHeroEntityIndex(localPlayer)) {
             await this.OnShowCursorHeroIcon(false);
@@ -113,31 +104,25 @@ export class ChessControlComponent extends ET.Component {
         //     FindDotaHudElement("emotion_button").visible = false;
         // }
         if (Entities.GetTeamNumber(portrait_unit) == Players.GetTeam(localPlayer)) {
-            let building = EntityRootManage.getBuilding(portrait_unit)
+            let building = GBuildingEntityRoot.GetEntity(portrait_unit)
             // 选中友方棋子
-            if (building && building.Playerid == localPlayer) {
+            if (building && building.BelongPlayerid == localPlayer) {
                 this.PORTRAIT_UNIT = portrait_unit;
                 await this.OnShowCursorHeroIcon(true);
                 return
             }
             // 选中友方其他玩家信使
             if (Entities.IsHero(portrait_unit)) {
-                let allplayer = EntityRootManage.getAllPlayer();
-                for (let player of allplayer) {
-                    if (portrait_unit == Players.GetPlayerHeroEntityIndex(player.Playerid)) {
-                        return
-                    }
+                if (GCourierEntityRoot.GetEntity(portrait_unit)) {
+                    return
                 }
             }
 
         }
         else {
             // 选中敌人
-            let allfakerhero = EntityRootManage.getAllFakerHero();
-            for (let fakerhero of allfakerhero) {
-                if (portrait_unit == fakerhero.EntityId) {
-                    return
-                }
+            if (GFakerHeroEntityRoot.GetEntity(portrait_unit)) {
+                return
             }
         }
         await this.OnShowCursorHeroIcon(false);
@@ -211,9 +196,9 @@ export class ChessControlComponent extends ET.Component {
     Jump_cursor_hero() {
         // 当前显示英雄小图标
         let position = Game.ScreenXYToWorld(GameUI.GetCursorPosition()[0], GameUI.GetCursorPosition()[1]);
-        NetHelper.SendToLua(ChessControlConfig.EProtocol.pick_chess_position, { entityid: this.PORTRAIT_UNIT, x: position[0], y: position[1], z: position[2] }, (event) => {
+        NetHelper.SendToLua(ChessControlConfig.EProtocol.pick_chess_position, { entityid: this.PORTRAIT_UNIT, x: position[0], y: position[1], z: position[2] }, GHandler.create(this, (event) => {
             LogHelper.print(event);
-        });
+        }));
         let par = Particles.CreateParticle("particles/ui_mouseactions/clicked_basemove.vpcf", 0, 0 as any);
         Particles.SetParticleControl(par, 0, position);
         Particles.SetParticleControl(par, 1, [0, 255, 0]);

@@ -1,11 +1,8 @@
 
-import React, { createRef, PureComponent } from "react";
-import { EEnum } from "../../../../../game/scripts/tscripts/shared/Gen/Types";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import React from "react";
+import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { LogHelper } from "../../helper/LogHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
-import { CCDividerLine } from "../AllUIElement/CCDivider/CCDividerLine";
 import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCMenuNavigation } from "../AllUIElement/CCNavigation/CCMenuNavigation";
@@ -20,11 +17,11 @@ interface ICCStoragePanel extends NodePropsData {
 
 export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
     onReady() {
-        return Boolean(PlayerScene.Local.TCharacter && PlayerScene.Local.TCharacter.DataComp)
+        return Boolean(GGameScene.Local.TCharacter && GGameScene.Local.TCharacter.DataComp)
     }
 
     onInitUI() {
-        PlayerScene.Local.TCharacter.DataComp?.RegRef(this)
+        GGameScene.Local.TCharacter.DataComp?.RegRef(this)
     }
 
     closeThis() {
@@ -41,7 +38,7 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
             return this.defaultRender("CC_StoragePanel")
         }
         const sName = "storage";
-        const DataComp = this.GetStateEntity(PlayerScene.Local.TCharacter.DataComp!)!;
+        const DataComp = this.GetStateEntity(GGameScene.Local.TCharacter.DataComp!)!;
         const MetaStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.MetaStone)
         const StarStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.StarStone)
         const selectindex = this.GetState<number>("selectindex") || 0;

@@ -1,12 +1,10 @@
-import { PublicBagConfig } from "../../../../../../game/scripts/tscripts/shared/PublicBagConfig";
-import { LogHelper } from "../../../helper/LogHelper";
-import { registerET, ET } from "../../../libs/Entity";
-import { PlayerScene } from "../Player/PlayerScene";
+import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
+import { PublicBagConfig } from "../../../../../scripts/tscripts/shared/PublicBagConfig";
 
-@registerET()
+@GReloadable
 export class CourierShopComponent extends ET.Component {
     onSerializeToEntity() {
-        PlayerScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
+        GGameScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
     }
 
     AllSellItem: { [shoptype: string]: { [slot: string]: IPublicShopItem } } = {};

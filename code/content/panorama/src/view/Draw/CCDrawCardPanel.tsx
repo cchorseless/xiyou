@@ -1,5 +1,4 @@
 import React from "react";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
 import { KVHelper } from "../../helper/KVHelper";
 import { NodePropsData } from "../../libs/BasePureComponent";
 import { CCIconButton } from "../AllUIElement/CCButton/CCIconButton";
@@ -24,7 +23,7 @@ export class CCDrawCardPanel extends CCPanel<ICCDrawCardPanel> {
     }
 
     async SelectCard(itemname: string, index: number, b2Public: number = 0) {
-        let r = await PlayerScene.Local.DrawComp.SelectCard(index, itemname, b2Public);
+        let r = await GGameScene.Local.DrawComp.SelectCard(index, itemname, b2Public);
         if (r) {
             let KV_DATA = KVHelper.KVData();
             let config = KV_DATA.building_unit_tower[itemname];

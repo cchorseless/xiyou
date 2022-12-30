@@ -1,0 +1,10 @@
+[
+  {
+    "guild_open_level": 10,
+    "bag_init_capacity": 100,
+    "bag_max_capacity": 500,
+    "newbie_tasks": [
+      1000110002
+    ]
+  }
+]

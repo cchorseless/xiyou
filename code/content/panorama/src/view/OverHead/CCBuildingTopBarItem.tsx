@@ -1,19 +1,16 @@
-/** Create By Editor*/
-import React, { createRef, useState } from "react";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
+import React from "react";
+import { CSSHelper } from "../../helper/CSSHelper";
+import { CCIcon_Star } from "../AllUIElement/CCIcons/CCIcon_Star";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import "./CCBuildingTopBarItem.less";
 import { CCEntityHpBarItem } from "./CCEntityHpBarItem";
 import { CCEntityHpMpBarItem } from "./CCEntityHpMpBarItem";
 import { CCOverHeadBaseItem } from "./CCOverHeadBaseItem";
-import "./CCBuildingTopBarItem.less";
-import { CSSHelper } from "../../helper/CSSHelper";
-import { CCIcon_Star } from "../AllUIElement/CCIcons/CCIcon_Star";
 
 export class CCBuildingTopBarItem extends CCOverHeadBaseItem {
 
     HasOverhead(iEntIndex: EntityIndex): boolean {
-        let EntityRootManage = PlayerScene.EntityRootManage;
-        let entityroot = EntityRootManage.getBuilding(iEntIndex);
+        let entityroot = GBuildingEntityRoot.GetEntity(iEntIndex);
         if (entityroot && entityroot.BuildingComp!.IsShowOverhead) {
             return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex) && !Entities.IsInvisible(iEntIndex);
         }
@@ -22,13 +19,13 @@ export class CCBuildingTopBarItem extends CCOverHeadBaseItem {
 
     onInitUI() {
         const entityid = this.props.entityid as EntityIndex;
-        let building = PlayerScene.EntityRootManage.getBuilding(entityid);
+        let building = GBuildingEntityRoot.GetEntity(entityid);
         building?.BuildingComp?.RegRef(this);
     }
 
     render() {
         const entityid = this.props.entityid as EntityIndex;
-        const building = PlayerScene.EntityRootManage.getBuilding(entityid)!;
+        const building = GBuildingEntityRoot.GetEntity(entityid)!;
         const BuildingComp = this.GetStateEntity(building.BuildingComp!)!;
         let rare = building!.Config().Rarity.toUpperCase();
 

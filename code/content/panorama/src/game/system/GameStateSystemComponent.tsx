@@ -1,25 +1,13 @@
-import { GameStateConfig } from "../../../../../game/scripts/tscripts/shared/GameStateConfig";
-import { ET, registerET } from "../../libs/Entity";
-import { PlayerScene } from "../components/Player/PlayerScene";
+import { GameServiceConfig } from "../../../../scripts/tscripts/shared/GameServiceConfig";
+import { GameServiceSystem } from "../../../../scripts/tscripts/shared/rules/System/GameServiceSystem";
 
-@registerET()
-export class GameStateSystemComponent extends ET.Component {
+@GReloadable
+export class GameServiceSystemComponent extends GameServiceSystem {
     onSerializeToEntity(): void {
-        PlayerScene.Scene.AddOneComponent(this);
+        GGameScene.Scene.AddOneComponent(this);
     }
 
-    IsAllPlayerBindHero: boolean = false;
-    BindHeroPlayer: number[] = [];
-    DifficultyChapter: GameStateConfig.EDifficultyChapter = GameStateConfig.EDifficultyChapter.n1;
-    DifficultyLevel: number = 0;
-    BeforeGameEndTime: number = 0;
-    tPlayerGameSelection: { [playerid: string]: IPlayerGameSelection } = {}
-
-    getDifficultyChapterDes() {
-        return GameStateConfig.EDifficultyChapter[this.DifficultyLevel] as string;
-    }
-
-    SelectDifficultyChapter(difficulty: GameStateConfig.EDifficultyChapter) {
+    SelectDifficultyChapter(difficulty: GameServiceConfig.EDifficultyChapter) {
 
     }
 

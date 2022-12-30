@@ -1,6 +1,5 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { FuncHelper } from "../../../helper/FuncHelper";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCVerticalTable.less";
 
@@ -17,7 +16,7 @@ interface ICCVerticalTable {
 export class CCVerticalTable extends CCPanel<ICCVerticalTable> {
     static defaultProps = {
         list: [],
-        group: FuncHelper.generateUUID(),
+        group: GGenerateUUID(),
         defaultSelected: 0
     };
     state = { selectedIndex: (this.props.defaultSelected != undefined) ? Math.min(this.props.list.length - 1, Math.max(0, this.props.defaultSelected - 1)) : undefined };

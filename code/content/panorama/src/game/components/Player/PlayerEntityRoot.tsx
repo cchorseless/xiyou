@@ -1,6 +1,4 @@
-import { PrecacheHelper } from "../../../helper/PrecacheHelper";
-import { ET, registerET } from "../../../libs/Entity";
-import { TCharacter } from "../../service/account/TCharacter";
+import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
 import { ChessControlComponent } from "../ChessControl/ChessControlComponent";
 import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";
@@ -11,19 +9,17 @@ import { DrawComponent } from "../Draw/DrawComponent";
 import { PublicShopComponent } from "../Public/PublicShopComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerDataComponent } from "./PlayerDataComponent";
-import { PlayerHeroComponent } from "./PlayerHeroComponent";
-import { PlayerScene } from "./PlayerScene";
+import { PlayerNetTableComponent } from "./PlayerNetTableComponent";
 
-@registerET()
+@GReloadable
 export class PlayerEntityRoot extends ET.Entity {
-    readonly Playerid: PlayerID;
 
     onAwake(playerid: PlayerID): void {
-        (this.Playerid as any) = playerid;
+        (this.BelongPlayerid as any) = playerid;
         if (this.IsLocalPlayer) {
-            (PlayerScene.Local as any) = this;
-            this.AddComponent(PrecacheHelper.GetRegClass<typeof PlayerHeroComponent>("PlayerHeroComponent"));
-            this.AddComponent(PrecacheHelper.GetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
+            (GGameScene.Local as any) = this;
+            this.AddComponent(GGetRegClass<typeof PlayerNetTableComponent>("PlayerNetTableComponent"));
+            this.AddComponent(GGetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
             // 添加移动组件
             //  PlayerScene.Scene.AddComponent(ControlComponent);
             //  PlayerScene.Scene.AddComponent(CameraComponent);
@@ -31,7 +27,7 @@ export class PlayerEntityRoot extends ET.Entity {
     }
 
     IsEntitySelected(iEntIndex: EntityIndex) {
-        let aSelectedEntities = Players.GetSelectedEntities(this.Playerid);
+        let aSelectedEntities = Players.GetSelectedEntities(this.BelongPlayerid);
         for (let index = aSelectedEntities.length - 1; index >= 0; index--) {
             let _iEntIndex = aSelectedEntities[index];
             if (iEntIndex == _iEntIndex) {
@@ -42,11 +38,11 @@ export class PlayerEntityRoot extends ET.Entity {
     };
 
     GetHeroEntityIndex() {
-        return Players.GetPlayerHeroEntityIndex(this.Playerid);
+        return Players.GetPlayerHeroEntityIndex(this.BelongPlayerid);
     }
 
     SelectHero(isCameraCenter: boolean = false) {
-        let iEntIndex = Players.GetPlayerHeroEntityIndex(this.Playerid);
+        let iEntIndex = Players.GetPlayerHeroEntityIndex(this.BelongPlayerid);
         if (Entities.IsValidEntity(iEntIndex) && Entities.GetPlayerOwnerID(iEntIndex) == Players.GetLocalPlayer()) {
             if (this.IsEntitySelected(iEntIndex)) {
                 if (isCameraCenter) GameUI.MoveCameraToEntity(iEntIndex);
@@ -57,17 +53,18 @@ export class PlayerEntityRoot extends ET.Entity {
     }
 
     Init() {
-        this.PlayerHeroComp.LoadNetTableData();
+        this.PlayerNetTableComp.LoadNetTableData();
     }
+
     get IsLocalPlayer() {
-        return Players.GetLocalPlayer() == this.Playerid
+        return Players.GetLocalPlayer() == this.BelongPlayerid
     }
 
     get DrawComp() {
         return this.GetComponentByName<DrawComponent>("DrawComponent")!;
     }
-    get PlayerHeroComp() {
-        return this.GetComponentByName<PlayerHeroComponent>("PlayerHeroComponent")!;
+    get PlayerNetTableComp() {
+        return this.GetComponentByName<PlayerNetTableComponent>("PlayerNetTableComponent")!;
     }
     get PlayerDataComp() {
         return this.GetComponentByName<PlayerDataComponent>("PlayerDataComponent")!;
@@ -97,6 +94,14 @@ export class PlayerEntityRoot extends ET.Entity {
         return this.GetComponentByName<CourierShopComponent>("CourierShopComponent")!;
     }
     get TCharacter() {
-        return this.GetComponentByName<TCharacter>("TCharacter")!;
+        return this.GetComponentByName<ITCharacter>("TCharacter")!;
     }
+}
+
+declare global {
+    type IPlayerEntityRoot = PlayerEntityRoot;
+    var GPlayerEntityRoot: typeof PlayerEntityRoot;
+}
+if (_G.GPlayerEntityRoot == null) {
+    _G.GPlayerEntityRoot = PlayerEntityRoot;
 }

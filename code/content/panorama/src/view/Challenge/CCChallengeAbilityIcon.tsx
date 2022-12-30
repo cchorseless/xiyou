@@ -1,7 +1,6 @@
 import React, { } from "react";
 import { AbilityEntityRoot } from "../../game/components/Ability/AbilityEntityRoot";
-import { PlayerScene } from "../../game/components/Player/PlayerScene";
-import { GameEnum } from "../../../../../game/scripts/tscripts/shared/GameEnum";
+import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
 
 import { CCAbilityIcon } from "../AllUIElement/CCAbility/CCAbilityIcon";
 import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
@@ -9,7 +8,7 @@ import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
 import "./CCChallengeAbilityIcon.less";
-import { EEnum } from "../../../../../game/scripts/tscripts/shared/Gen/Types";
+import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 
 export interface ICCChallengeAbilityIcon {
     abilityname: string
@@ -19,11 +18,11 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
 
     onReady() {
         const abilityname = this.props.abilityname;
-        const castentity = PlayerScene.Local.GetHeroEntityIndex();
+        const castentity = GGameScene.Local.GetHeroEntityIndex();
         if (!Entities.IsValidEntity(castentity)) { return false; }
         const abilityindex = Entities.GetAbilityByName(castentity, abilityname);
         if (!Entities.IsValidEntity(abilityindex)) { return false; }
-        let entity = PlayerScene.EntityRootManage.getAbility("" + abilityindex);
+        let entity = GAbilityEntityRoot.GetEntity(abilityindex);
         if (entity) {
             this.abilityEntity = entity;
         }
@@ -38,7 +37,7 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
             return this.defaultRender("CC_ChallengeAbilityIcon");
         }
         const abilityname = this.props.abilityname;
-        const castentity = PlayerScene.Local.GetHeroEntityIndex();
+        const castentity = GGameScene.Local.GetHeroEntityIndex();
         const abilityindex = Entities.GetAbilityByName(castentity, abilityname);
         const ability = this.GetStateEntity(this.abilityEntity);
         return (

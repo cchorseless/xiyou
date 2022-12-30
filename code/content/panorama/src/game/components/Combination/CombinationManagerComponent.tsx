@@ -1,18 +1,12 @@
-import { EventHelper } from "../../../helper/EventHelper";
-import { FuncHelper } from "../../../helper/FuncHelper";
-import { LogHelper } from "../../../helper/LogHelper";
-import { NetHelper } from "../../../helper/NetHelper";
-import { TimerHelper } from "../../../helper/TimerHelper";
-import { registerET, ET } from "../../../libs/Entity";
+import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { CCCombinationBottomPanel } from "../../../view/Combination/CCCombinationBottomPanel";
-import { PlayerScene } from "../Player/PlayerScene";
 import { ECombination } from "./ECombination";
 
 
-@registerET()
+@GReloadable
 export class CombinationManagerComponent extends ET.Component {
     onSerializeToEntity(): void {
-        PlayerScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
+        GGameScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
     }
 
     allCombination: string[] = [];
@@ -22,7 +16,7 @@ export class CombinationManagerComponent extends ET.Component {
             this.allCombination.push(_comb.Id);
         }
         if (!_comb.IsEmpty()) {
-            TimerHelper.AddTimer(0.1, FuncHelper.Handler.create(this, () => {
+            GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
                 CCCombinationBottomPanel.GetInstance()?.updateSelf()
             }))
         }

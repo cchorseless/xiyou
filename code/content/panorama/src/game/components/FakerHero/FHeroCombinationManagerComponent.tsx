@@ -1,12 +1,11 @@
 import { NetHelper } from "../../../helper/NetHelper";
-import { ET, registerET } from "../../../libs/Entity";
+import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { CombinationManagerComponent } from "../Combination/CombinationManagerComponent";
-import { PlayerScene } from "../Player/PlayerScene";
 
 
-@registerET()
+@GReloadable
 export class FHeroCombinationManagerComponent extends CombinationManagerComponent {
     onSerializeToEntity(): void {
-        PlayerScene.EntityRootManage.getFakerHero(this.BelongPlayerid)?.AddOneComponent(this);
+        GFakerHeroEntityRoot.GetOneInstance(this.BelongPlayerid)?.AddOneComponent(this);
     }
 }

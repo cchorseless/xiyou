@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { FuncHelper } from "../../../helper/FuncHelper";
-import { TimerHelper } from "../../../helper/TimerHelper";
+import React from "react";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCIntervalTips.less";
 
@@ -32,11 +30,11 @@ export class CCIntervalTips extends CCPanel<ICCIntervalTips> {
         }
         this.UpdateState({ curIndex: curIndex });
         let tick = this.props.tick || 5;
-        this.timeTaskWork = TimerHelper.AddTimer(tick, FuncHelper.Handler.create(this, () => {
+        this.timeTaskWork = GTimerHelper.AddTimer(tick, GHandler.create(this, () => {
             this.onInitUI();
         }), true)
     }
-    timeTaskWork: TimerHelper.TimerTask | null;
+    timeTaskWork: ITimerTask | null;
     render() {
         const curIndex = this.GetState<number>("curIndex") || 0;
         return (

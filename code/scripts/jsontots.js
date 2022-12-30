@@ -5,9 +5,9 @@ const {
     read_sub_directories
 } = require('./utils');
 
-const jsonpath = "game/scripts/tscripts/shared/Gen/json";
-const outtspath = "game/scripts/tscripts/shared/Gen/JsonConfig.ts";
-const typepath = "game/scripts/tscripts/shared/Gen/Types.ts";
+const jsonpath = "content/scripts/tscripts/shared/Gen/json";
+const outtspath = "content/scripts/tscripts/shared/Gen/JsonConfig.ts";
+const typepath = "content/scripts/tscripts/shared/Gen/Types.ts";
 
 function jsontots() {
     let typestr = fs.readFileSync(typepath, "utf-8");

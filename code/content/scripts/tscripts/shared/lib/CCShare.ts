@@ -1,0 +1,285 @@
+export module CCShare {
+    export class CCHandler<R = any> {
+        private static _pool: CCHandler[] = [];
+        private static _gid: number = 0;
+        public _id = CCHandler._gid++;
+        public caller: any;
+        public method: ((...args: any[]) => R) | null;
+        public args: any[] | null;
+        public tmpArg: any;
+        public once: boolean;
+        constructor() {
+            this.once = false;
+            this._id = 0;
+            this.setTo(null, null, null);
+        }
+        setTo(caller: any, method: ((...args: any[]) => R) | null, args: any[] | null, once = true) {
+            this._id = CCHandler._gid++;
+            this.caller = caller;
+            this.method = method;
+            this.args = args;
+            this.once = once;
+            this.tmpArg = null;
+            return this;
+        }
+        run() {
+            if (this.method == null) return null;
+            let id = this._id;
+            let nextCall = this.method.apply(this.caller);
+            this._id === id && this.once && this.recover();
+            return nextCall;
+        }
+        runWith(data: any[]) {
+            if (this.method == null) return null;
+            let id = this._id;
+            let arg: any[] = [];
+            if (this.args) {
+                arg = arg.concat(this.args);
+            }
+            if (data) {
+                arg = arg.concat(data);
+            }
+            let nextCall = this.method.apply(this.caller, arg);
+            this._id === id && this.once && this.recover();
+            return nextCall;
+        }
+        // run() {
+        //     if (this.method == null) return null;
+        //     let id = this._id;
+        //     let [status, nextCall] = xpcall(
+        //         this.method,
+        //         (msg: any) => {
+        //             return "\n" + GLogHelper.traceFunc(msg) + "\n";
+        //         },
+        //         this.caller
+        //     );
+        //     if (!status) {
+        //         GLogHelper.error(nextCall);
+        //     }
+        //     this._id === id && this.once && this.recover();
+        //     return nextCall;
+        // }
+        // runWith(data: any[]) {
+        //     if (this.method == null) return null;
+        //     let id = this._id;
+        //     let arg: any[] = [];
+        //     if (this.args) {
+        //         arg = arg.concat(this.args);
+        //     }
+        //     if (data) {
+        //         arg = arg.concat(data);
+        //     }
+        //     let [status, nextCall] = xpcall(
+        //         this.method,
+        //         (msg: any) => {
+        //             return "\n" + GLogHelper.traceFunc(msg) + "\n";
+        //         },
+        //         this.caller,
+        //         ...arg
+        //     );
+        //     if (!status) {
+        //         GLogHelper.error(nextCall);
+        //     }
+        //     this._id === id && this.once && this.recover();
+        //     return nextCall;
+        // }
+        clear() {
+            this.caller = null;
+            this.method = null;
+            this.args = null;
+            this.tmpArg = null;
+            return this;
+        }
+        recover() {
+            if (this._id > 0) {
+                this._id = 0;
+                CCHandler._pool.push(this.clear());
+            }
+        }
+        static create<R = any>(caller: any, method: ((...args: any[]) => R) | null, args: any[] | null = null, once = true) {
+            if (CCHandler._pool.length > 0) return CCHandler._pool.pop()!.setTo(caller, method, args as any, once);
+            return new CCHandler().setTo(caller, method, args, once);
+        }
+    }
+    export function Reloadable<T extends { new(...args: any[]): {}; }>(constructor: T): T {
+        const className = constructor.name;
+        if (_G._GReloadClassTypeCache[className] == null) {
+            _G._GReloadClassTypeCache[className] = constructor;
+        }
+        else if (_CODE_IN_LUA_) {
+            Object.assign(_G._GReloadClassTypeCache[className].prototype, constructor.prototype);
+        }
+        return _G._GReloadClassTypeCache[className];
+    }
+
+    export function GetRegClass<T>(className: string, ignoreExt: boolean = false) {
+        let r;
+        if (ignoreExt) { r = _G._GReloadClassTypeCache[className]; }
+        else {
+            r = _G._GReloadClassTypeCache[className + "Ext"] || _G._GReloadClassTypeCache[className];
+        }
+        if (r == null) {
+            GLogHelper.error("NOT Reg Reload Class " + className);
+        }
+        return r as T;
+    }
+
+    let uuidCount: number = 0;
+    export function GenerateUUID() {
+        uuidCount++;
+        let a = Math.floor(Math.random() * 10000 + 1);
+        let b = Math.floor(Math.random() * 10000 + 1);
+        return `${a}_${b}_${uuidCount}@`;
+    }
+
+    export class Dictionary<K, V>  {
+
+        _keys: K[] = [];
+        _values: V[] = [];
+
+        public copy(obj: any) {
+            if (this == obj || obj == null) return;
+            if (obj[0] && obj[1]) {
+                this._keys = [].concat(obj[0]);
+                this._values = [].concat(obj[1]);
+            }
+            else if (obj._keys && obj._values) {
+                this._keys = [].concat(TryTransArrayLikeObject(obj._keys));
+                this._values = [].concat(TryTransArrayLikeObject(obj._values));
+            }
+        }
+
+        public copyData(ks: K[], vs: V[]) {
+            if (ks == null || vs == null) return;
+            this._keys = [].concat(ks as any);
+            this._values = [].concat(vs as any);
+        }
+
+        public add(key: K, value: V): void {
+            if (this.containsKey(key)) {
+                this._values[this._keys.indexOf(key)] = value;
+            } else {
+                this._keys.push(key);
+                this._values.push(value);
+            }
+        }
+
+        public remove(key: K): void {
+            let index = this._keys.indexOf(key, 0);
+            if (index !== -1) {
+                this._keys.splice(index, 1);
+                this._values.splice(index, 1);
+            }
+        }
+
+        public get(key: K): V {
+            if (this.containsKey(key)) {
+                return this._values[this._keys.indexOf(key)];
+            } else {
+                return null as any as V;
+            }
+        }
+
+        public set(key: K, value: V): void {
+            if (this.containsKey(key)) {
+                this._values[this._keys.indexOf(key)] = value;
+            } else {
+                this._keys.push(key);
+                this._values.push(value);
+            }
+        }
+
+        public keys(): K[] {
+            return this._keys.concat([]);
+        }
+
+        public values(): V[] {
+            return this._values.concat([]);
+        }
+
+        public containsKey(key: K): boolean {
+            return this._keys.indexOf(key) != -1;
+        }
+
+        public containsValue(value: V): boolean {
+            return this._values.indexOf(value) != -1;
+        }
+
+        public count(): number {
+            return this._keys.length;
+        }
+
+        public clear(): void {
+            this._keys = [];
+            this._values = [];
+        }
+
+        public forEach(callback: (k: K, v: V) => void): void {
+            let sum = this._keys.length;
+            for (let i = 0; i < sum; i++) {
+                callback(this._keys[i], this._values[i]);
+            }
+        }
+
+
+
+        public toObject(): Object {
+            let obj: any = {};
+            this.forEach((k, v) => {
+                obj[k] = v;
+            });
+            return obj;
+        }
+    }
+    export function TryTransArrayLikeObject(a: any) {
+        if (typeof a === "object") {
+            let keys = Object.keys(a).sort();
+            let canTran: any = [];
+            for (let i = 0, len = keys.length; i < len; i++) {
+                if ((i + 1) + "" === keys[i]) {
+                    canTran.push(a[keys[i] as any]);
+                }
+                else {
+                    canTran = null;
+                    break;
+                }
+            }
+            if (canTran != null) {
+                return canTran;
+            }
+        }
+        return a;
+    }
+
+
+
+}
+
+declare global {
+    var global: typeof globalThis;
+    /**代码是否在lua上 */
+    var _CODE_IN_LUA_: Readonly<boolean>;
+    var GHandler: typeof CCShare.CCHandler;
+    type IGHandler<R = any> = CCShare.CCHandler<R>;
+    var _GReloadClassTypeCache: Record<string, any>;
+    var GReloadable: typeof CCShare.Reloadable;
+    var GGetRegClass: typeof CCShare.GetRegClass;
+    var GGenerateUUID: typeof CCShare.GenerateUUID;
+    type IGDictionary<K, V> = CCShare.Dictionary<K, V>;
+    var GDictionary: typeof CCShare.Dictionary;
+}
+if (!(Entities as any).First) {
+    (global as any)._G = global;
+}
+(_G._CODE_IN_LUA_ as any) = ((Entities as any).First !== null);
+if (_G.GHandler == null) {
+    _G.GHandler = CCShare.CCHandler;
+    _G._GReloadClassTypeCache = {};
+    _G.GReloadable = CCShare.Reloadable;
+    _G.GGetRegClass = CCShare.GetRegClass;
+    _G.GGenerateUUID = CCShare.GenerateUUID;
+    _G.GDictionary = CCShare.Dictionary;
+    if (!_G._CODE_IN_LUA_) {
+        (_G as any).GameRules = Game;
+    }
+}

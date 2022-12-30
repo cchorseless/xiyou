@@ -1,9 +1,8 @@
-import { ET, registerET } from "../../../libs/Entity";
+import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { ChessDataComponent } from "../ChessControl/ChessDataComponent";
-import { PlayerScene } from "../Player/PlayerScene";
 
 /**塔防组件 */
-@registerET()
+@GReloadable
 export class EnemyUnitComponent extends ChessDataComponent {
 
 }
