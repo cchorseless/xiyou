@@ -120,14 +120,8 @@ export module ET {
         }
 
         public static GetAllInstances<T extends typeof Entity>(typename: string): InstanceType<T>[] {
-            const typeList = (EntitySystem.AllTypeEntity[typename] || {});
-            if (!typeList) {
-                throw new Error(typename + " is not a Muti instance");
-            }
-            let rlist = [] as InstanceType<T>[];
-            Object.values(typeList).forEach(v => {
-                rlist = rlist.concat(v as InstanceType<T>[])
-            })
+            const typeList = (EntitySystem.AllTypeEntity[typename] || []);
+            let rlist = [...typeList];
             return rlist as InstanceType<T>[];
         }
 

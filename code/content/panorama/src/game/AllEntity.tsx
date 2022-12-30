@@ -1,3 +1,4 @@
+import { AllServiceEntity } from "../../../scripts/tscripts/shared/service/AllServiceEntity";
 import { LogHelper } from "../helper/LogHelper";
 import { AbilityEntityRoot } from "./components/Ability/AbilityEntityRoot";
 import { BattleUnitIllusionEntityRoot } from "./components/BattleUnit/BattleUnitIllusionEntityRoot";
@@ -75,12 +76,8 @@ PublicBagSystemComponent;
 
 
 export class AllEntity {
-    static IsInit: boolean = false;
     static Init() {
-        if (AllEntity.IsInit) {
-            return;
-        }
+        AllServiceEntity.init()
         LogHelper.print("register all entity 111111");
-        AllEntity.IsInit = true;
     }
 }
