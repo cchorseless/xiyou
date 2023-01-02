@@ -1,15 +1,9 @@
 import { PublicBagConfig } from "../../../../../scripts/tscripts/shared/PublicBagConfig";
 import { CourierBag } from "../../../../../scripts/tscripts/shared/rules/Courier/CourierBag";
-import { LogHelper } from "../../../helper/LogHelper";
 import { ItemEntityRoot } from "../Item/ItemEntityRoot";
 
 @GReloadable
 export class CourierBagComponent extends CourierBag {
-    onSerializeToEntity() {
-        LogHelper.print("CourierBagComponent", GGameScene.GetPlayer(this.BelongPlayerid) == null, GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid) == null, this.BelongPlayerid);
-
-        GGameScene.GetPlayer(this.BelongPlayerid).AddOneComponent(this);
-    }
 
     setBuyItem2Bag(b: boolean) {
 

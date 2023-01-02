@@ -12,7 +12,6 @@ export class CombinationManagerComponent extends ET.Component {
     public readonly IsSerializeEntity: boolean = true;
     onAwake(): void {
         this.addEvent();
-        this.SyncClient(true);
         let config = KVHelper.KvServerConfig.building_combination_ability;
         let type = GGetRegClass<typeof ECombination>("ECombination");
         for (let key in config) {
@@ -25,6 +24,7 @@ export class CombinationManagerComponent extends ET.Component {
             }
             combina.addConfig(info);
         }
+        this.SyncClient(true);
     }
 
     private addEvent() {

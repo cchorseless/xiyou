@@ -2,7 +2,6 @@ import { GameProtocol } from "../../GameProtocol";
 import { ET, serializeETProps } from "../../lib/Entity";
 import { NumericComponent } from "../common/NumericComponent";
 import { CharacterInGameDataComponent } from "./CharacterInGameDataComponent";
-import { TCharacter } from "./TCharacter";
 
 
 @GReloadable
@@ -41,7 +40,5 @@ export class CharacterDataComponent extends ET.Component {
     get InGameDataComp() {
         return this.GetComponentByName<CharacterInGameDataComponent>("CharacterInGameDataComponent");
     }
-
-    get Character(): TCharacter { return this.GetParent<TCharacter>(); }
 
 }

@@ -1,4 +1,6 @@
-
+declare interface IEntityStringData {
+    _: string;
+}
 
 declare interface CustomNetTableInfo extends CustomNetTableDeclarations {
     common: {

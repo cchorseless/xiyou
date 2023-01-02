@@ -2,8 +2,6 @@ import { PublicBagSystem } from "../../../../scripts/tscripts/shared/rules/Syste
 
 @GReloadable
 export class PublicBagSystemComponent extends PublicBagSystem {
-    onSerializeToEntity(): void {
-        GGameScene.Scene.AddOneComponent(this);
-    }
+
 
 }

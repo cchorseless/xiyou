@@ -9,7 +9,6 @@ import { CCMainPanel } from "../../../view/MainPanel/CCMainPanel";
 @GReloadable
 export class DrawComponent extends ET.Component {
     onSerializeToEntity() {
-        GGameScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
         if (this.IsBelongLocalPlayer()) {
             this.startListen();
         }

@@ -16,7 +16,6 @@ export class PlayerEntityRoot extends ET.Entity {
 
     onAwake(playerid: PlayerID): void {
         (this.BelongPlayerid as any) = playerid;
-        GLogHelper.print("-----------", PlayerEntityRoot.GetOneInstance(this.BelongPlayerid) == null)
         if (this.IsLocalPlayer) {
             (GGameScene.Local as any) = this;
             this.AddComponent(GGetRegClass<typeof PlayerNetTableComponent>("PlayerNetTableComponent"));
@@ -62,37 +61,37 @@ export class PlayerEntityRoot extends ET.Entity {
     }
 
     get DrawComp() {
-        return this.GetComponentByName<DrawComponent>("DrawComponent")!;
+        return DrawComponent.GetOneInstance(this.BelongPlayerid);
     }
     get PlayerNetTableComp() {
         return this.GetComponentByName<PlayerNetTableComponent>("PlayerNetTableComponent")!;
     }
     get PlayerDataComp() {
-        return this.GetComponentByName<PlayerDataComponent>("PlayerDataComponent")!;
+        return PlayerDataComponent.GetOneInstance(this.BelongPlayerid);
     }
     get PublicShopComp() {
-        return this.GetComponentByName<PublicShopComponent>("PublicShopComponent")!;
+        return PublicShopComponent.GetOneInstance(this.BelongPlayerid);
     }
     get ChessControlComp() {
         return this.GetComponentByName<ChessControlComponent>("ChessControlComponent")!;
     }
     get CombinationManager() {
-        return this.GetComponentByName<CombinationManagerComponent>("CombinationManagerComponent")!;
+        return CombinationManagerComponent.GetOneInstance(this.BelongPlayerid);
     }
     get BuildingManager() {
-        return this.GetComponentByName<BuildingManagerComponent>("BuildingManagerComponent")!;
+        return BuildingManagerComponent.GetOneInstance(this.BelongPlayerid);
     }
     get RoundManagerComp() {
-        return this.GetComponentByName<RoundManagerComponent>("RoundManagerComponent")!;
+        return RoundManagerComponent.GetOneInstance(this.BelongPlayerid);
     }
     get CourierDataComp() {
-        return this.GetComponentByName<CourierDataComponent>("CourierDataComponent")!;
+        return CourierDataComponent.GetOneInstance(this.BelongPlayerid);
     }
     get CourierBagComp() {
-        return this.GetComponentByName<CourierBagComponent>("CourierBagComponent")!;
+        return CourierBagComponent.GetOneInstance(this.BelongPlayerid);
     }
     get CourierShopComp() {
-        return this.GetComponentByName<CourierShopComponent>("CourierShopComponent")!;
+        return CourierShopComponent.GetOneInstance(this.BelongPlayerid);
     }
     get TCharacter() {
         return this.GetComponentByName<ITCharacter>("TCharacter")!;

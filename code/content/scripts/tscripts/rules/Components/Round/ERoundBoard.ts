@@ -171,7 +171,7 @@ export class ERoundBoard extends ERound {
                 this.unitDamageInfo[attack].bypureD += damage
             }
         }
-        NetTablesHelper.SetETEntityPart(this.BelongPlayerid, this, ["unitDamageInfo"], this.BelongPlayerid)
+        NetTablesHelper.SetETEntityPart(this, ["unitDamageInfo"], this.BelongPlayerid)
 
     }
 }

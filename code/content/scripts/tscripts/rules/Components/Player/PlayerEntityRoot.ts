@@ -316,7 +316,6 @@ export class PlayerEntityRoot extends PlayerSystem {
     DrawComp() {
         return this.GetComponentByName<DrawComponent>("DrawComponent");
     }
-
     RoundManagerComp() {
         return this.GetComponentByName<RoundManagerComponent>("RoundManagerComponent");
     }

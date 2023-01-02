@@ -5,9 +5,6 @@ import { ECombination } from "./ECombination";
 
 @GReloadable
 export class CombinationManagerComponent extends ET.Component {
-    onSerializeToEntity(): void {
-        GGameScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
-    }
 
     allCombination: string[] = [];
     addOneCombination(_comb: ECombination) {

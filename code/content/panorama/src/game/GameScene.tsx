@@ -15,11 +15,11 @@ export class GameScene {
     }
 
     static get PublicBagSystemComp() {
-        return this.Scene.GetComponentByName<PublicBagSystemComponent>("PublicBagSystemComponent")!;
+        return PublicBagSystemComponent.GetInstance()!;
     }
 
     static get GameServiceSystem() {
-        return this.Scene.GetComponentByName<GameServiceSystemComponent>("GameServiceSystemComponent")!;
+        return GameServiceSystemComponent.GetInstance()!;
     }
     static get TServerZone() {
         return this.Scene.GetComponentByName<ITServerZone>("TServerZone")!;

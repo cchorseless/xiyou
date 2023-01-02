@@ -3,9 +3,6 @@ import { PublicBagConfig } from "../../../../../scripts/tscripts/shared/PublicBa
 
 @GReloadable
 export class CourierShopComponent extends ET.Component {
-    onSerializeToEntity() {
-        GGameScene.GetPlayer(this.BelongPlayerid)?.AddOneComponent(this);
-    }
 
     AllSellItem: { [shoptype: string]: { [slot: string]: IPublicShopItem } } = {};
     getSellItem(selltype: PublicBagConfig.EPublicShopType) {

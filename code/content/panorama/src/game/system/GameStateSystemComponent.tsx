@@ -3,9 +3,7 @@ import { GameServiceSystem } from "../../../../scripts/tscripts/shared/rules/Sys
 
 @GReloadable
 export class GameServiceSystemComponent extends GameServiceSystem {
-    onSerializeToEntity(): void {
-        GGameScene.Scene.AddOneComponent(this);
-    }
+
 
     SelectDifficultyChapter(difficulty: GameServiceConfig.EDifficultyChapter) {
 

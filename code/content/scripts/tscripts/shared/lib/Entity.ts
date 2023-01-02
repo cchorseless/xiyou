@@ -417,6 +417,7 @@ export module ET {
                 (entity.Id as any) = json._id;
                 entity.setDomain(GameSceneRoot.GetInstance());
             }
+            // 这里先创建注册然后SerializeToEntity，所以getinstance 比 getcomponent 更早拿到实体
             entity.updateFromJson(json);
             EntitySystem.SerializeToEntity(entity);
             return entity;

@@ -24,7 +24,7 @@ export class FHeroCombinationManagerComponent extends ET.Component {
             combina.addConfig(info);
         }
 
-        this.SyncClient();
+        this.SyncClient(true);
     }
 
     private addEvent() {

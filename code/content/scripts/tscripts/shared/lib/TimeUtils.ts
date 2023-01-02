@@ -130,7 +130,7 @@ export module TimeUtils {
          * 
          * @param delayframeCount 帧数
          * @param endCallBack 
-         * @param _isIgnorePauseTime true 忽视游戏暂停
+         * @param _isIgnorePauseTime true 忽视游戏暂停; default false
          * @returns 
          */
         public AddFrameTimer(delayframeCount: number, endCallBack: ITimerHander, _isIgnorePauseTime = false): TimerTask {

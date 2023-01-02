@@ -6,7 +6,7 @@ import { FHeroCombinationManagerComponent } from "./FHeroCombinationManagerCompo
 export class FakerHeroEntityRoot extends BaseEntityRoot {
 
     get FHeroCombinationManager() {
-        return this.GetComponentByName<FHeroCombinationManagerComponent>("FHeroCombinationManagerComponent")!;
+        return FHeroCombinationManagerComponent.GetOneInstance(this.BelongPlayerid);
     }
 }
 

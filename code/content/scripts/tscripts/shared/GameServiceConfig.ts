@@ -1,8 +1,10 @@
+import { CCShare } from "./lib/CCShare";
+
 export module GameServiceConfig {
     export const GAME_Name = "xiyou";
     export const GAME_MAX_PLAYER = 5;
     /**网表存数据是否是存字符串的形式 */
-    export const NetTableSaveDataAsSring = false;
+    export const NetTableSaveDataAsSring = true;
     /**lua服务器特殊处理一些数据类型 todo 循环嵌套的结构没有处理*/
     export function TryEncodeData(d: any) {
         if (NetTableSaveDataAsSring) { return d }
@@ -21,6 +23,9 @@ export module GameServiceConfig {
         if (NetTableSaveDataAsSring) { return d }
         if (d == "true") { return true }
         if (d == "false") { return false }
+        if (!_CODE_IN_LUA_) {
+            d = CCShare.TryTransArrayLikeObject(d);
+        }
         return d;
     }
 

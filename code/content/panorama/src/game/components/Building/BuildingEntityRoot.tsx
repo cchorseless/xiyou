@@ -1,5 +1,4 @@
 import { KVHelper } from "../../../helper/KVHelper";
-import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { BuildingComponent } from "./BuildingComponent";
 
@@ -10,7 +9,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         return (KVHelper.KVData()).building_unit_tower[this.ConfigID];
     }
     get BuildingComp() {
-        return this.GetComponentByName<BuildingComponent>("BuildingComponent");
+        return BuildingComponent.GetOneInstance(this.BelongPlayerid);
     }
 }
 declare global {

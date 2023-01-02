@@ -1,9 +1,7 @@
 import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
-import { FuncHelper } from "../../helper/FuncHelper";
-import { LogHelper } from "../../helper/LogHelper";
-import { NetHelper } from "../../helper/NetHelper";
 import { ET } from "../../../../scripts/tscripts/shared/lib/Entity";
-// import { GameEnum } from "../../libs/GameEnum";
+import { FuncHelper } from "../../helper/FuncHelper";
+import { NetHelper } from "../../helper/NetHelper";
 
 const MIN_CAMERA_DISTANCE = 1300;
 const MAX_CAMERA_DISTANCE = 3500;
@@ -69,7 +67,10 @@ export class CameraComponent extends ET.Component {
             }
             return r;
         });
-        this.startUpdate(1);
+        GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+            this.onUpdate();
+            return 1;
+        }))
     }
     /**开启摄像机环绕 */
     bLocksurroundCamrea: boolean = true;

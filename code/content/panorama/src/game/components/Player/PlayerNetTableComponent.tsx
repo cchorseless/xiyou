@@ -18,13 +18,13 @@ export class PlayerNetTableComponent extends ET.Component {
         let allLoadData: { [key: string]: IEntityJson } = {}
         for (let info of data_player) {
             if (info.value) {
-                allLoadData[info.key] = GameServiceConfig.NetTableSaveDataAsSring ? JSON.parse(info.value as any) : info.value;
+                allLoadData[info.key] = GameServiceConfig.NetTableSaveDataAsSring ? JSON.parse(info.value._ as any) : info.value;
             }
         }
         let data_common = NetHelper.GetOneTable(GameServiceConfig.ENetTables.etentity);
         for (let info of data_common) {
             if (info.value) {
-                allLoadData[info.key] = GameServiceConfig.NetTableSaveDataAsSring ? JSON.parse(info.value as any) : info.value;
+                allLoadData[info.key] = GameServiceConfig.NetTableSaveDataAsSring ? JSON.parse(info.value._ as any) : info.value;
             }
         }
         for (let key in allLoadData) {
@@ -51,7 +51,7 @@ export class PlayerNetTableComponent extends ET.Component {
     }
 
     private UpdateSyncEntity(tableName: string, key: string, value: any) {
-        value = GameServiceConfig.NetTableSaveDataAsSring ? JSON.parse(value as any) : value;
+        value = GameServiceConfig.NetTableSaveDataAsSring ? JSON.parse(value._ as any) : value;
         if (value != null && value._t && value._id) {
             try {
                 ET.Entity.FromJson(value);
