@@ -65,5 +65,7 @@ import { modifier_courier_fx_ambient_9 } from "./courier_ambient_effect/modifier
 ]
 
 export class AllModifierEntity {
-    static init() { }
+    static init() {
+        GLogHelper.print("register all AllModifierEntity");
+    }
 }

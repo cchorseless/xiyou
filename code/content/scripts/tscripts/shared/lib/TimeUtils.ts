@@ -93,7 +93,8 @@ export module TimeUtils {
             return inter;
         }
         Now(): number {
-            return new Date().getTime();
+            // return new Date().getTime();
+            return 1;
         }
 
         //尝试从空闲池中取一个TimerTask

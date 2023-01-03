@@ -1,5 +1,5 @@
 import { KVHelper } from "../../../helper/KVHelper";
-import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 
 export class modifier_combination_effect extends BaseModifier_Plus {
 

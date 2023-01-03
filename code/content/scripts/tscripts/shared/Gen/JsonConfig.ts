@@ -1,6 +1,6 @@
 
     import { Tables } from "./Types";
-    const JSONData : any = { "achievement_achievementconfig":[
+    const JSONData : {[k:string]:any[]} = { "achievement_achievementconfig":[
   {
     "id": 10001,
     "Index": 1,
@@ -6865,5 +6865,12 @@
     function JsonDataLoader(filename:string){
         return JSONData[filename];
     };
-    export const JSONConfig: Tables = new Tables(JsonDataLoader);
+    let tabledata: Tables;
+    try {
+      tabledata = new Tables(JsonDataLoader);
+    }
+    catch (error) {
+      GLogHelper.error(error)
+    }
+    export const JSONConfig: Tables = tabledata;
     

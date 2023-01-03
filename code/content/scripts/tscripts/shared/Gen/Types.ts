@@ -58,7 +58,7 @@ export class Vector4 {
         }
         return new Vector4(x, y, z, w)
     }
-    
+
     x: number
     y: number
     z: number
@@ -74,2900 +74,2900 @@ export class Vector4 {
 
 
 export namespace EEnum {
-export enum EMoneyType {
-    /**
-     * 空值
-     */
-    None = 0,
-    /**
-     * 金币
-     */
-    Gold = 1,
-    /**
-     * 木材
-     */
-    Wood = 2,
-    /**
-     * 魂晶
-     */
-    SoulCrystal = 3,
-    /**
-     * 人口
-     */
-    Population = 4,
-    /**
-     * 原石
-     */
-    MetaStone = 101,
-    /**
-     * 星石
-     */
-    StarStone = 102,
-    /**
-     * 钱
-     */
-    Money = 103,
-    /**
-     * 通用英雄经验
-     */
-    ComHeroExp = 104,
-}
+    export enum EMoneyType {
+        /**
+         * 空值
+         */
+        None = 0,
+        /**
+         * 金币
+         */
+        Gold = 1,
+        /**
+         * 木材
+         */
+        Wood = 2,
+        /**
+         * 魂晶
+         */
+        SoulCrystal = 3,
+        /**
+         * 人口
+         */
+        Population = 4,
+        /**
+         * 原石
+         */
+        MetaStone = 101,
+        /**
+         * 星石
+         */
+        StarStone = 102,
+        /**
+         * 钱
+         */
+        Money = 103,
+        /**
+         * 通用英雄经验
+         */
+        ComHeroExp = 104,
+    }
 }
 
 export namespace EEnum {
-export enum ESellRefreshType {
-    /**
-     * 每天
-     */
-    EveryDay = 0,
-    /**
-     * 每周
-     */
-    EveryWeek = 1,
-    /**
-     * 每月
-     */
-    EveryMonth = 2,
-    /**
-     * 每年
-     */
-    EveryYear = 3,
-    /**
-     * 每小时
-     */
-    EveryHour = 4,
-    /**
-     * 每赛季
-     */
-    EverySeason = 5,
-}
+    export enum ESellRefreshType {
+        /**
+         * 每天
+         */
+        EveryDay = 0,
+        /**
+         * 每周
+         */
+        EveryWeek = 1,
+        /**
+         * 每月
+         */
+        EveryMonth = 2,
+        /**
+         * 每年
+         */
+        EveryYear = 3,
+        /**
+         * 每小时
+         */
+        EveryHour = 4,
+        /**
+         * 每赛季
+         */
+        EverySeason = 5,
+    }
 }
 
 export namespace EEnum {
-export enum EActivityType {
-    /**
-     * 7日登录
-     */
-    TActivitySevenDayLogin = 1,
-    /**
-     * 每月登录
-     */
-    TActivityMonthLogin = 2,
-    /**
-     * 战令
-     */
-    TActivityBattlePass = 3,
-    /**
-     * 月卡
-     */
-    TActivityMemberShip = 4,
-    /**
-     * 英雄等级
-     */
-    TActivityHeroRecordLevel = 5,
-    /**
-     * 每日奖励
-     */
-    TActivityDailyOnlinePrize = 6,
-    /**
-     * 原石骰子
-     */
-    TActivityInvestMetaStone = 7,
-    TActivityTotalGainMetaStone = 8,
-    TActivityTotalOnlineTime = 9,
-    TActivityTotalSpendMetaStone = 10,
-    /**
-     * 兑换码
-     */
-    TActivityGiftCommond = 11,
-    TActivityMentorshipTree = 12,
-    ServerZoneActivityMax = 1000,
-}
+    export enum EActivityType {
+        /**
+         * 7日登录
+         */
+        TActivitySevenDayLogin = 1,
+        /**
+         * 每月登录
+         */
+        TActivityMonthLogin = 2,
+        /**
+         * 战令
+         */
+        TActivityBattlePass = 3,
+        /**
+         * 月卡
+         */
+        TActivityMemberShip = 4,
+        /**
+         * 英雄等级
+         */
+        TActivityHeroRecordLevel = 5,
+        /**
+         * 每日奖励
+         */
+        TActivityDailyOnlinePrize = 6,
+        /**
+         * 原石骰子
+         */
+        TActivityInvestMetaStone = 7,
+        TActivityTotalGainMetaStone = 8,
+        TActivityTotalOnlineTime = 9,
+        TActivityTotalSpendMetaStone = 10,
+        /**
+         * 兑换码
+         */
+        TActivityGiftCommond = 11,
+        TActivityMentorshipTree = 12,
+        ServerZoneActivityMax = 1000,
+    }
 }
 
 export namespace EEnum {
-export enum EItemType {
-    /**
-     * 空值
-     */
-    None = 0,
-    /**
-     * 装备
-     */
-    Equip = 1,
-    /**
-     * 信使
-     */
-    Courier = 2,
-    /**
-     * 祝福
-     */
-    Buff = 3,
-}
+    export enum EItemType {
+        /**
+         * 空值
+         */
+        None = 0,
+        /**
+         * 装备
+         */
+        Equip = 1,
+        /**
+         * 信使
+         */
+        Courier = 2,
+        /**
+         * 祝福
+         */
+        Buff = 3,
+    }
 }
 
 export namespace EEnum {
-export enum ERarity {
-    /**
-     * 空值
-     */
-    None = 0,
-    /**
-     * 稀有度D
-     */
-    D = 1,
-    /**
-     * 稀有度C
-     */
-    C = 2,
-    /**
-     * 稀有度B
-     */
-    B = 3,
-    /**
-     * 稀有度A
-     */
-    A = 4,
-    /**
-     * 稀有度R
-     */
-    R = 5,
-    /**
-     * 稀有度S
-     */
-    S = 10,
-    /**
-     * 稀有度SS
-     */
-    SS = 11,
-    /**
-     * 稀有度SSR
-     */
-    SSR = 12,
-}
+    export enum ERarity {
+        /**
+         * 空值
+         */
+        None = 0,
+        /**
+         * 稀有度D
+         */
+        D = 1,
+        /**
+         * 稀有度C
+         */
+        C = 2,
+        /**
+         * 稀有度B
+         */
+        B = 3,
+        /**
+         * 稀有度A
+         */
+        A = 4,
+        /**
+         * 稀有度R
+         */
+        R = 5,
+        /**
+         * 稀有度S
+         */
+        S = 10,
+        /**
+         * 稀有度SS
+         */
+        SS = 11,
+        /**
+         * 稀有度SSR
+         */
+        SSR = 12,
+    }
 }
 
 export namespace EEnum {
-export enum EBagSlotType {
-    /**
-     * 允许叠加
-     */
-    AllowMany = 0,
-    /**
-     * 禁止叠加
-     */
-    ForbidMany = 1,
-    /**
-     * 不占格子
-     */
-    NoSlot = 2,
-}
+    export enum EBagSlotType {
+        /**
+         * 允许叠加
+         */
+        AllowMany = 0,
+        /**
+         * 禁止叠加
+         */
+        ForbidMany = 1,
+        /**
+         * 不占格子
+         */
+        NoSlot = 2,
+    }
 }
 
 export namespace EEnum {
-export enum EItemUseScript {
-    /**
-     * 空值
-     */
-    None = 0,
-    /**
-     * 获取奖励
-     */
-    GetPrize = 1,
-    /**
-     * 穿戴
-     */
-    DressUp = 2,
-    /**
-     * 祝福Buff
-     */
-    AddBuff = 3,
-}
+    export enum EItemUseScript {
+        /**
+         * 空值
+         */
+        None = 0,
+        /**
+         * 获取奖励
+         */
+        GetPrize = 1,
+        /**
+         * 穿戴
+         */
+        DressUp = 2,
+        /**
+         * 祝福Buff
+         */
+        AddBuff = 3,
+    }
 }
 
 export namespace EEnum {
-export enum EItemAwakeScript {
-    /**
-     * 空值
-     */
-    None = 0,
-    /**
-     * 添加英雄经验
-     */
-    AddHeroExp = 1,
-    /**
-     * 添加称号
-     */
-    AddTitle = 2,
-    /**
-     * 穿戴装备
-     */
-    BindEquip = 3,
-}
+    export enum EItemAwakeScript {
+        /**
+         * 空值
+         */
+        None = 0,
+        /**
+         * 添加英雄经验
+         */
+        AddHeroExp = 1,
+        /**
+         * 添加称号
+         */
+        AddTitle = 2,
+        /**
+         * 穿戴装备
+         */
+        BindEquip = 3,
+    }
 }
 
 export namespace Item {
-export class ItemConfig{
-    private _dataMap: Map<number, Item.ItemConfigRecord>
-    private _dataList: Item.ItemConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Item.ItemConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Item.ItemConfigRecord
-            _v = new Item.ItemConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class ItemConfig {
+        private _dataMap: Map<number, Item.ItemConfigRecord>
+        private _dataList: Item.ItemConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Item.ItemConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Item.ItemConfigRecord
+                _v = new Item.ItemConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
-    }
 
-    getDataMap(): Map<number, Item.ItemConfigRecord> { return this._dataMap; }
-    getDataList(): Item.ItemConfigRecord[] { return this._dataList; }
+        getDataMap(): Map<number, Item.ItemConfigRecord> { return this._dataMap; }
+        getDataList(): Item.ItemConfigRecord[] { return this._dataList; }
 
-    get(key: number): Item.ItemConfigRecord | undefined { return this._dataMap.get(key); }
+        get(key: number): Item.ItemConfigRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
         }
-    }
 
-}
+    }
 }
 
 
 
 export namespace Item {
-export class ItemConfigRecord {
+    export class ItemConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.isVaild === undefined) { throw new Error() }
-        this.isVaild = _json_.isVaild
-        if (_json_.ItemName === undefined) { throw new Error() }
-        this.ItemName = _json_.ItemName
-        if (_json_.ItemIcon === undefined) { throw new Error() }
-        this.ItemIcon = _json_.ItemIcon
-        if (_json_.ItemQuality === undefined) { throw new Error() }
-        this.ItemQuality = _json_.ItemQuality
-        if (_json_.ItemType === undefined) { throw new Error() }
-        this.ItemType = _json_.ItemType
-        if (_json_.ItemDes === undefined) { throw new Error() }
-        this.ItemDes = _json_.ItemDes
-        if (_json_.BagSlotType === undefined) { throw new Error() }
-        this.BagSlotType = _json_.BagSlotType
-        if (_json_.AutoUse === undefined) { throw new Error() }
-        this.AutoUse = _json_.AutoUse
-        if (_json_.BatchUseable === undefined) { throw new Error() }
-        this.BatchUseable = _json_.BatchUseable
-        if (_json_.UseScript === undefined) { throw new Error() }
-        this.UseScript = _json_.UseScript
-        if (_json_.UseArgs === undefined) { throw new Error() }
-        this.UseArgs = _json_.UseArgs
-        if (_json_.AwakeScript === undefined) { throw new Error() }
-        { this.AwakeScript = []; for(let _ele of _json_.AwakeScript) { let _e : Item.ItemAwakeScriptBean; _e = new Item.ItemAwakeScriptBean(_ele); this.AwakeScript.push(_e);}}
-    }
-
-    /**
-     * 道具id
-     */
-    readonly id: number
-    /**
-     * 是否启用
-     */
-    readonly isVaild: number
-    /**
-     * 道具名称
-     */
-    readonly ItemName: string
-    /**
-     * 道具icon
-     */
-    readonly ItemIcon: string
-    /**
-     * 道具品质
-     */
-    readonly ItemQuality: EEnum.ERarity
-    /**
-     * 道具类型
-     */
-    readonly ItemType: EEnum.EItemType
-    /**
-     * 道具描述
-     */
-    readonly ItemDes: string
-    /**
-     * 背包占用格子类型
-     */
-    readonly BagSlotType: EEnum.EBagSlotType
-    /**
-     * 获得自动使用
-     */
-    readonly AutoUse: boolean
-    /**
-     * 批量使用
-     */
-    readonly BatchUseable: boolean
-    /**
-     * 使用脚本
-     */
-    readonly UseScript: EEnum.EItemUseScript
-    /**
-     * 使用参数
-     */
-    readonly UseArgs: number[]
-    readonly AwakeScript: Item.ItemAwakeScriptBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.AwakeScript) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-
-
-export namespace Item {
-export class ItemAwakeScriptBean {
-
-    constructor(_json_: any) {
-        if (_json_.ScriptName === undefined) { throw new Error() }
-        this.ScriptName = _json_.ScriptName
-        if (_json_.ScriptValue === undefined) { throw new Error() }
-        this.ScriptValue = _json_.ScriptValue
-    }
-
-    /**
-     * 道具脚本
-     */
-    readonly ScriptName: EEnum.EItemAwakeScript
-    /**
-     * 道具脚本参数
-     */
-    readonly ScriptValue: number[]
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Item {
-export class ItemEquipConfig{
-    private _dataMap: Map<number, Item.ItemEquipConfigRecord>
-    private _dataList: Item.ItemEquipConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Item.ItemEquipConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Item.ItemEquipConfigRecord
-            _v = new Item.ItemEquipConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.isVaild === undefined) { throw new Error() }
+            this.isVaild = _json_.isVaild
+            if (_json_.ItemName === undefined) { throw new Error() }
+            this.ItemName = _json_.ItemName
+            if (_json_.ItemIcon === undefined) { throw new Error() }
+            this.ItemIcon = _json_.ItemIcon
+            if (_json_.ItemQuality === undefined) { throw new Error() }
+            this.ItemQuality = _json_.ItemQuality
+            if (_json_.ItemType === undefined) { throw new Error() }
+            this.ItemType = _json_.ItemType
+            if (_json_.ItemDes === undefined) { throw new Error() }
+            this.ItemDes = _json_.ItemDes
+            if (_json_.BagSlotType === undefined) { throw new Error() }
+            this.BagSlotType = _json_.BagSlotType
+            if (_json_.AutoUse === undefined) { throw new Error() }
+            this.AutoUse = _json_.AutoUse
+            if (_json_.BatchUseable === undefined) { throw new Error() }
+            this.BatchUseable = _json_.BatchUseable
+            if (_json_.UseScript === undefined) { throw new Error() }
+            this.UseScript = _json_.UseScript
+            if (_json_.UseArgs === undefined) { throw new Error() }
+            this.UseArgs = _json_.UseArgs
+            if (_json_.AwakeScript === undefined) { throw new Error() }
+            { this.AwakeScript = []; for (let _ele of _json_.AwakeScript) { let _e: Item.ItemAwakeScriptBean; _e = new Item.ItemAwakeScriptBean(_ele); this.AwakeScript.push(_e); } }
         }
-    }
 
-    getDataMap(): Map<number, Item.ItemEquipConfigRecord> { return this._dataMap; }
-    getDataList(): Item.ItemEquipConfigRecord[] { return this._dataList; }
+        /**
+         * 道具id
+         */
+        readonly id: number
+        /**
+         * 是否启用
+         */
+        readonly isVaild: number
+        /**
+         * 道具名称
+         */
+        readonly ItemName: string
+        /**
+         * 道具icon
+         */
+        readonly ItemIcon: string
+        /**
+         * 道具品质
+         */
+        readonly ItemQuality: EEnum.ERarity
+        /**
+         * 道具类型
+         */
+        readonly ItemType: EEnum.EItemType
+        /**
+         * 道具描述
+         */
+        readonly ItemDes: string
+        /**
+         * 背包占用格子类型
+         */
+        readonly BagSlotType: EEnum.EBagSlotType
+        /**
+         * 获得自动使用
+         */
+        readonly AutoUse: boolean
+        /**
+         * 批量使用
+         */
+        readonly BatchUseable: boolean
+        /**
+         * 使用脚本
+         */
+        readonly UseScript: EEnum.EItemUseScript
+        /**
+         * 使用参数
+         */
+        readonly UseArgs: number[]
+        readonly AwakeScript: Item.ItemAwakeScriptBean[]
 
-    get(key: number): Item.ItemEquipConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.AwakeScript) { if (_e != null) { _e.resolve(_tables); } }
         }
     }
 
 }
-}
 
 
 
 export namespace Item {
-export class ItemEquipConfigRecord {
+    export class ItemAwakeScriptBean {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.BindHeroId === undefined) { throw new Error() }
-        this.BindHeroId = _json_.BindHeroId
-        if (_json_.EquipSlot === undefined) { throw new Error() }
-        this.EquipSlot = _json_.EquipSlot
-        if (_json_.EquipRandomProp === undefined) { throw new Error() }
-        this.EquipRandomProp = _json_.EquipRandomProp
-        if (_json_.SuitId === undefined) { throw new Error() }
-        this.SuitId = _json_.SuitId
-        if (_json_.SuitName === undefined) { throw new Error() }
-        this.SuitName = _json_.SuitName
-        if (_json_.SuitInfo === undefined) { throw new Error() }
-        { this.SuitInfo = []; for(let _ele of _json_.SuitInfo) { let _e : Item.ItemEquipSuitBean; _e = new Item.ItemEquipSuitBean(_ele); this.SuitInfo.push(_e);}}
-    }
-
-    /**
-     * 装备id
-     */
-    readonly id: number
-    /**
-     * 穿戴英雄
-     */
-    readonly BindHeroId: number
-    /**
-     * 穿戴部位
-     */
-    readonly EquipSlot: number
-    /**
-     * 装备随机属性
-     */
-    readonly EquipRandomProp: number[]
-    /**
-     * 套装Id
-     */
-    readonly SuitId: number
-    /**
-     * 套装名称
-     */
-    readonly SuitName: string
-    readonly SuitInfo: Item.ItemEquipSuitBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.SuitInfo) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-
-
-export namespace Item {
-export class ItemEquipSuitBean {
-
-    constructor(_json_: any) {
-        if (_json_.SuitCount === undefined) { throw new Error() }
-        this.SuitCount = _json_.SuitCount
-        if (_json_.SuitBuffs === undefined) { throw new Error() }
-        this.SuitBuffs = _json_.SuitBuffs
-    }
-
-    /**
-     * 套装数量
-     */
-    readonly SuitCount: number
-    /**
-     * 套装Buff效果
-     */
-    readonly SuitBuffs: number[]
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Item {
-export class ItemBuffConfig{
-    private _dataMap: Map<number, Item.ItemBuffConfigRecord>
-    private _dataList: Item.ItemBuffConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Item.ItemBuffConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Item.ItemBuffConfigRecord
-            _v = new Item.ItemBuffConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        constructor(_json_: any) {
+            if (_json_.ScriptName === undefined) { throw new Error() }
+            this.ScriptName = _json_.ScriptName
+            if (_json_.ScriptValue === undefined) { throw new Error() }
+            this.ScriptValue = _json_.ScriptValue
         }
-    }
 
-    getDataMap(): Map<number, Item.ItemBuffConfigRecord> { return this._dataMap; }
-    getDataList(): Item.ItemBuffConfigRecord[] { return this._dataList; }
+        /**
+         * 道具脚本
+         */
+        readonly ScriptName: EEnum.EItemAwakeScript
+        /**
+         * 道具脚本参数
+         */
+        readonly ScriptValue: number[]
 
-    get(key: number): Item.ItemBuffConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
         }
     }
 
 }
-}
-
-
 
 export namespace Item {
-export class ItemBuffConfigRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.BuffName === undefined) { throw new Error() }
-        this.BuffName = _json_.BuffName
-        if (_json_.BuffValidTime === undefined) { throw new Error() }
-        this.BuffValidTime = _json_.BuffValidTime
-        if (_json_.BuffTargetType === undefined) { throw new Error() }
-        this.BuffTargetType = _json_.BuffTargetType
-        if (_json_.BuffTargetArgs === undefined) { throw new Error() }
-        this.BuffTargetArgs = _json_.BuffTargetArgs
-        if (_json_.BuffQuality === undefined) { throw new Error() }
-        this.BuffQuality = _json_.BuffQuality
-        if (_json_.BuffGroupPriority === undefined) { throw new Error() }
-        this.BuffGroupPriority = _json_.BuffGroupPriority
-        if (_json_.BuffGroupMember === undefined) { throw new Error() }
-        this.BuffGroupMember = _json_.BuffGroupMember
-    }
-
-    /**
-     * Buffid
-     */
-    readonly id: number
-    /**
-     * Buff名称
-     */
-    readonly BuffName: string
-    /**
-     * buff有效时间(秒)
-     */
-    readonly BuffValidTime: number
-    /**
-     * 目标类型
-     */
-    readonly BuffTargetType: string
-    /**
-     * 目标类型参数
-     */
-    readonly BuffTargetArgs: number[]
-    /**
-     * Buff品质
-     */
-    readonly BuffQuality: number
-    /**
-     * Buff组内优先级
-     */
-    readonly BuffGroupPriority: number
-    /**
-     * 同组Buff成员
-     */
-    readonly BuffGroupMember: number[]
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Item {
-export class ItemPrizePoolConfig{
-    private _dataMap: Map<number, Item.ItemPrizePoolConfigRecord>
-    private _dataList: Item.ItemPrizePoolConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Item.ItemPrizePoolConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Item.ItemPrizePoolConfigRecord
-            _v = new Item.ItemPrizePoolConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class ItemEquipConfig {
+        private _dataMap: Map<number, Item.ItemEquipConfigRecord>
+        private _dataList: Item.ItemEquipConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Item.ItemEquipConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Item.ItemEquipConfigRecord
+                _v = new Item.ItemEquipConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
+
+        getDataMap(): Map<number, Item.ItemEquipConfigRecord> { return this._dataMap; }
+        getDataList(): Item.ItemEquipConfigRecord[] { return this._dataList; }
+
+        get(key: number): Item.ItemEquipConfigRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
     }
+}
 
-    getDataMap(): Map<number, Item.ItemPrizePoolConfigRecord> { return this._dataMap; }
-    getDataList(): Item.ItemPrizePoolConfigRecord[] { return this._dataList; }
 
-    get(key: number): Item.ItemPrizePoolConfigRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+export namespace Item {
+    export class ItemEquipConfigRecord {
+
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.BindHeroId === undefined) { throw new Error() }
+            this.BindHeroId = _json_.BindHeroId
+            if (_json_.EquipSlot === undefined) { throw new Error() }
+            this.EquipSlot = _json_.EquipSlot
+            if (_json_.EquipRandomProp === undefined) { throw new Error() }
+            this.EquipRandomProp = _json_.EquipRandomProp
+            if (_json_.SuitId === undefined) { throw new Error() }
+            this.SuitId = _json_.SuitId
+            if (_json_.SuitName === undefined) { throw new Error() }
+            this.SuitName = _json_.SuitName
+            if (_json_.SuitInfo === undefined) { throw new Error() }
+            { this.SuitInfo = []; for (let _ele of _json_.SuitInfo) { let _e: Item.ItemEquipSuitBean; _e = new Item.ItemEquipSuitBean(_ele); this.SuitInfo.push(_e); } }
+        }
+
+        /**
+         * 装备id
+         */
+        readonly id: number
+        /**
+         * 穿戴英雄
+         */
+        readonly BindHeroId: number
+        /**
+         * 穿戴部位
+         */
+        readonly EquipSlot: number
+        /**
+         * 装备随机属性
+         */
+        readonly EquipRandomProp: number[]
+        /**
+         * 套装Id
+         */
+        readonly SuitId: number
+        /**
+         * 套装名称
+         */
+        readonly SuitName: string
+        readonly SuitInfo: Item.ItemEquipSuitBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.SuitInfo) { if (_e != null) { _e.resolve(_tables); } }
         }
     }
 
 }
-}
 
 
 
 export namespace Item {
-export class ItemPrizePoolConfigRecord {
+    export class ItemEquipSuitBean {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.itempool === undefined) { throw new Error() }
-        { this.itempool = []; for(let _ele of _json_.itempool) { let _e : Item.ItemPrizePoolBean; _e = new Item.ItemPrizePoolBean(_ele); this.itempool.push(_e);}}
-    }
-
-    /**
-     * 池子id
-     */
-    readonly id: number
-    readonly itempool: Item.ItemPrizePoolBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.itempool) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-
-
-export namespace Item {
-export class ItemPrizePoolBean {
-
-    constructor(_json_: any) {
-        if (_json_.ItemConfigId === undefined) { throw new Error() }
-        this.ItemConfigId = _json_.ItemConfigId
-        if (_json_.ItemName === undefined) { throw new Error() }
-        this.ItemName = _json_.ItemName
-        if (_json_.ItemCount === undefined) { throw new Error() }
-        this.ItemCount = _json_.ItemCount
-        if (_json_.ItemWeight === undefined) { throw new Error() }
-        this.ItemWeight = _json_.ItemWeight
-        if (_json_.isVaild === undefined) { throw new Error() }
-        this.isVaild = _json_.isVaild
-    }
-
-    /**
-     * 道具索引
-     */
-    readonly ItemConfigId: number
-    /**
-     * 道具名称
-     */
-    readonly ItemName: string
-    /**
-     * 道具数量
-     */
-    readonly ItemCount: number
-    /**
-     * 道具权重
-     */
-    readonly ItemWeight: number
-    /**
-     * 是否启用
-     */
-    readonly isVaild: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Item {
-export class ItemPrizePoolGroupConfig{
-    private _dataMap: Map<number, Item.ItemPrizePoolGroupConfigRecord>
-    private _dataList: Item.ItemPrizePoolGroupConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Item.ItemPrizePoolGroupConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Item.ItemPrizePoolGroupConfigRecord
-            _v = new Item.ItemPrizePoolGroupConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        constructor(_json_: any) {
+            if (_json_.SuitCount === undefined) { throw new Error() }
+            this.SuitCount = _json_.SuitCount
+            if (_json_.SuitBuffs === undefined) { throw new Error() }
+            this.SuitBuffs = _json_.SuitBuffs
         }
-    }
 
-    getDataMap(): Map<number, Item.ItemPrizePoolGroupConfigRecord> { return this._dataMap; }
-    getDataList(): Item.ItemPrizePoolGroupConfigRecord[] { return this._dataList; }
+        /**
+         * 套装数量
+         */
+        readonly SuitCount: number
+        /**
+         * 套装Buff效果
+         */
+        readonly SuitBuffs: number[]
 
-    get(key: number): Item.ItemPrizePoolGroupConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
         }
     }
 
 }
+
+export namespace Item {
+    export class ItemBuffConfig {
+        private _dataMap: Map<number, Item.ItemBuffConfigRecord>
+        private _dataList: Item.ItemBuffConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Item.ItemBuffConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Item.ItemBuffConfigRecord
+                _v = new Item.ItemBuffConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Item.ItemBuffConfigRecord> { return this._dataMap; }
+        getDataList(): Item.ItemBuffConfigRecord[] { return this._dataList; }
+
+        get(key: number): Item.ItemBuffConfigRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
+    }
 }
 
 
 
 export namespace Item {
-export class ItemPrizePoolGroupConfigRecord {
+    export class ItemBuffConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.IsRandomRepeat === undefined) { throw new Error() }
-        this.IsRandomRepeat = _json_.IsRandomRepeat
-        if (_json_.RandomCountInfo === undefined) { throw new Error() }
-        { this.RandomCountInfo = []; for(let _ele of _json_.RandomCountInfo) { let _e : Item.ItemRandomCountBean; _e = new Item.ItemRandomCountBean(_ele); this.RandomCountInfo.push(_e);}}
-        if (_json_.ItemPoolGroup === undefined) { throw new Error() }
-        { this.ItemPoolGroup = []; for(let _ele of _json_.ItemPoolGroup) { let _e : Item.ItemPoolGroupBean; _e = new Item.ItemPoolGroupBean(_ele); this.ItemPoolGroup.push(_e);}}
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.BuffName === undefined) { throw new Error() }
+            this.BuffName = _json_.BuffName
+            if (_json_.BuffValidTime === undefined) { throw new Error() }
+            this.BuffValidTime = _json_.BuffValidTime
+            if (_json_.BuffTargetType === undefined) { throw new Error() }
+            this.BuffTargetType = _json_.BuffTargetType
+            if (_json_.BuffTargetArgs === undefined) { throw new Error() }
+            this.BuffTargetArgs = _json_.BuffTargetArgs
+            if (_json_.BuffQuality === undefined) { throw new Error() }
+            this.BuffQuality = _json_.BuffQuality
+            if (_json_.BuffGroupPriority === undefined) { throw new Error() }
+            this.BuffGroupPriority = _json_.BuffGroupPriority
+            if (_json_.BuffGroupMember === undefined) { throw new Error() }
+            this.BuffGroupMember = _json_.BuffGroupMember
+        }
+
+        /**
+         * Buffid
+         */
+        readonly id: number
+        /**
+         * Buff名称
+         */
+        readonly BuffName: string
+        /**
+         * buff有效时间(秒)
+         */
+        readonly BuffValidTime: number
+        /**
+         * 目标类型
+         */
+        readonly BuffTargetType: string
+        /**
+         * 目标类型参数
+         */
+        readonly BuffTargetArgs: number[]
+        /**
+         * Buff品质
+         */
+        readonly BuffQuality: number
+        /**
+         * Buff组内优先级
+         */
+        readonly BuffGroupPriority: number
+        /**
+         * 同组Buff成员
+         */
+        readonly BuffGroupMember: number[]
+
+        resolve(_tables: Map<string, any>) {
+        }
     }
 
-    /**
-     * 池子组id
-     */
-    readonly id: number
-    /**
-     * 随机奖励是否重复
-     */
-    readonly IsRandomRepeat: number
-    readonly RandomCountInfo: Item.ItemRandomCountBean[]
-    readonly ItemPoolGroup: Item.ItemPoolGroupBean[]
+}
 
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.RandomCountInfo) { if (_e != null ) {_e.resolve(_tables);} }
-        for(let _e of this.ItemPoolGroup) { if (_e != null ) {_e.resolve(_tables);} }
+export namespace Item {
+    export class ItemPrizePoolConfig {
+        private _dataMap: Map<number, Item.ItemPrizePoolConfigRecord>
+        private _dataList: Item.ItemPrizePoolConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Item.ItemPrizePoolConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Item.ItemPrizePoolConfigRecord
+                _v = new Item.ItemPrizePoolConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Item.ItemPrizePoolConfigRecord> { return this._dataMap; }
+        getDataList(): Item.ItemPrizePoolConfigRecord[] { return this._dataList; }
+
+        get(key: number): Item.ItemPrizePoolConfigRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
     }
 }
+
+
+
+export namespace Item {
+    export class ItemPrizePoolConfigRecord {
+
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.itempool === undefined) { throw new Error() }
+            { this.itempool = []; for (let _ele of _json_.itempool) { let _e: Item.ItemPrizePoolBean; _e = new Item.ItemPrizePoolBean(_ele); this.itempool.push(_e); } }
+        }
+
+        /**
+         * 池子id
+         */
+        readonly id: number
+        readonly itempool: Item.ItemPrizePoolBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.itempool) { if (_e != null) { _e.resolve(_tables); } }
+        }
+    }
 
 }
 
 
 
 export namespace Item {
-export class ItemRandomCountBean {
+    export class ItemPrizePoolBean {
 
-    constructor(_json_: any) {
-        if (_json_.RandomCount === undefined) { throw new Error() }
-        this.RandomCount = _json_.RandomCount
-        if (_json_.RandomWeight === undefined) { throw new Error() }
-        this.RandomWeight = _json_.RandomWeight
+        constructor(_json_: any) {
+            if (_json_.ItemConfigId === undefined) { throw new Error() }
+            this.ItemConfigId = _json_.ItemConfigId
+            if (_json_.ItemName === undefined) { throw new Error() }
+            this.ItemName = _json_.ItemName
+            if (_json_.ItemCount === undefined) { throw new Error() }
+            this.ItemCount = _json_.ItemCount
+            if (_json_.ItemWeight === undefined) { throw new Error() }
+            this.ItemWeight = _json_.ItemWeight
+            if (_json_.isVaild === undefined) { throw new Error() }
+            this.isVaild = _json_.isVaild
+        }
+
+        /**
+         * 道具索引
+         */
+        readonly ItemConfigId: number
+        /**
+         * 道具名称
+         */
+        readonly ItemName: string
+        /**
+         * 道具数量
+         */
+        readonly ItemCount: number
+        /**
+         * 道具权重
+         */
+        readonly ItemWeight: number
+        /**
+         * 是否启用
+         */
+        readonly isVaild: number
+
+        resolve(_tables: Map<string, any>) {
+        }
     }
 
-    /**
-     * 随机数量
-     */
-    readonly RandomCount: number
-    /**
-     * 随机权重
-     */
-    readonly RandomWeight: number
+}
 
-    resolve(_tables: Map<string, any>) {
+export namespace Item {
+    export class ItemPrizePoolGroupConfig {
+        private _dataMap: Map<number, Item.ItemPrizePoolGroupConfigRecord>
+        private _dataList: Item.ItemPrizePoolGroupConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Item.ItemPrizePoolGroupConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Item.ItemPrizePoolGroupConfigRecord
+                _v = new Item.ItemPrizePoolGroupConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Item.ItemPrizePoolGroupConfigRecord> { return this._dataMap; }
+        getDataList(): Item.ItemPrizePoolGroupConfigRecord[] { return this._dataList; }
+
+        get(key: number): Item.ItemPrizePoolGroupConfigRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
     }
 }
+
+
+
+export namespace Item {
+    export class ItemPrizePoolGroupConfigRecord {
+
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.IsRandomRepeat === undefined) { throw new Error() }
+            this.IsRandomRepeat = _json_.IsRandomRepeat
+            if (_json_.RandomCountInfo === undefined) { throw new Error() }
+            { this.RandomCountInfo = []; for (let _ele of _json_.RandomCountInfo) { let _e: Item.ItemRandomCountBean; _e = new Item.ItemRandomCountBean(_ele); this.RandomCountInfo.push(_e); } }
+            if (_json_.ItemPoolGroup === undefined) { throw new Error() }
+            { this.ItemPoolGroup = []; for (let _ele of _json_.ItemPoolGroup) { let _e: Item.ItemPoolGroupBean; _e = new Item.ItemPoolGroupBean(_ele); this.ItemPoolGroup.push(_e); } }
+        }
+
+        /**
+         * 池子组id
+         */
+        readonly id: number
+        /**
+         * 随机奖励是否重复
+         */
+        readonly IsRandomRepeat: number
+        readonly RandomCountInfo: Item.ItemRandomCountBean[]
+        readonly ItemPoolGroup: Item.ItemPoolGroupBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.RandomCountInfo) { if (_e != null) { _e.resolve(_tables); } }
+            for (let _e of this.ItemPoolGroup) { if (_e != null) { _e.resolve(_tables); } }
+        }
+    }
 
 }
 
 
 
 export namespace Item {
-export class ItemPoolGroupBean {
+    export class ItemRandomCountBean {
 
-    constructor(_json_: any) {
-        if (_json_.ItemPoolConfigId === undefined) { throw new Error() }
-        this.ItemPoolConfigId = _json_.ItemPoolConfigId
-        if (_json_.ItemPoolWeight === undefined) { throw new Error() }
-        this.ItemPoolWeight = _json_.ItemPoolWeight
+        constructor(_json_: any) {
+            if (_json_.RandomCount === undefined) { throw new Error() }
+            this.RandomCount = _json_.RandomCount
+            if (_json_.RandomWeight === undefined) { throw new Error() }
+            this.RandomWeight = _json_.RandomWeight
+        }
+
+        /**
+         * 随机数量
+         */
+        readonly RandomCount: number
+        /**
+         * 随机权重
+         */
+        readonly RandomWeight: number
+
+        resolve(_tables: Map<string, any>) {
+        }
     }
 
-    /**
-     * 池子索引
-     */
-    readonly ItemPoolConfigId: number
-    /**
-     * 池子权重
-     */
-    readonly ItemPoolWeight: number
-
-    resolve(_tables: Map<string, any>) {
-    }
 }
+
+
+
+export namespace Item {
+    export class ItemPoolGroupBean {
+
+        constructor(_json_: any) {
+            if (_json_.ItemPoolConfigId === undefined) { throw new Error() }
+            this.ItemPoolConfigId = _json_.ItemPoolConfigId
+            if (_json_.ItemPoolWeight === undefined) { throw new Error() }
+            this.ItemPoolWeight = _json_.ItemPoolWeight
+        }
+
+        /**
+         * 池子索引
+         */
+        readonly ItemPoolConfigId: number
+        /**
+         * 池子权重
+         */
+        readonly ItemPoolWeight: number
+
+        resolve(_tables: Map<string, any>) {
+        }
+    }
 
 }
 
 export namespace Shop {
-export class ShopConfig{
-    private _dataMap: Map<number, Shop.ShopConfigRecord>
-    private _dataList: Shop.ShopConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Shop.ShopConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Shop.ShopConfigRecord
-            _v = new Shop.ShopConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class ShopConfig {
+        private _dataMap: Map<number, Shop.ShopConfigRecord>
+        private _dataList: Shop.ShopConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Shop.ShopConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Shop.ShopConfigRecord
+                _v = new Shop.ShopConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
-    }
 
-    getDataMap(): Map<number, Shop.ShopConfigRecord> { return this._dataMap; }
-    getDataList(): Shop.ShopConfigRecord[] { return this._dataList; }
+        getDataMap(): Map<number, Shop.ShopConfigRecord> { return this._dataMap; }
+        getDataList(): Shop.ShopConfigRecord[] { return this._dataList; }
 
-    get(key: number): Shop.ShopConfigRecord | undefined { return this._dataMap.get(key); }
+        get(key: number): Shop.ShopConfigRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
         }
+
     }
-
-}
-}
-
-
-
-export namespace Shop {
-export class ShopConfigRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.isVaild === undefined) { throw new Error() }
-        this.isVaild = _json_.isVaild
-        if (_json_.ShopType === undefined) { throw new Error() }
-        this.ShopType = _json_.ShopType
-        if (_json_.ShopName === undefined) { throw new Error() }
-        this.ShopName = _json_.ShopName
-        if (_json_.ShopRefreshType === undefined) { throw new Error() }
-        this.ShopRefreshType = _json_.ShopRefreshType
-        if (_json_.ShopStartTime === undefined) { throw new Error() }
-        this.ShopStartTime = _json_.ShopStartTime
-        if (_json_.ShopValidTime === undefined) { throw new Error() }
-        this.ShopValidTime = _json_.ShopValidTime
-        if (_json_.sellinfo === undefined) { throw new Error() }
-        { this.sellinfo = []; for(let _ele of _json_.sellinfo) { let _e : Shop.ShopSellItemBean; _e = new Shop.ShopSellItemBean(_ele); this.sellinfo.push(_e);}}
-    }
-
-    /**
-     * 池子id
-     */
-    readonly id: number
-    /**
-     * 是否启用
-     */
-    readonly isVaild: number
-    /**
-     * 商店类型
-     */
-    readonly ShopType: number
-    /**
-     * 商店名称
-     */
-    readonly ShopName: string
-    /**
-     * 商店刷新类型
-     */
-    readonly ShopRefreshType: number
-    /**
-     * 商店开启时间
-     */
-    readonly ShopStartTime: number
-    /**
-     * 商店有效时间
-     */
-    readonly ShopValidTime: number
-    readonly sellinfo: Shop.ShopSellItemBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.sellinfo) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
 }
 
 
 
 export namespace Shop {
-export class ShopSellItemBean {
+    export class ShopConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.SellConfigid === undefined) { throw new Error() }
-        this.SellConfigid = _json_.SellConfigid
-        if (_json_.Selllabel === undefined) { throw new Error() }
-        this.Selllabel = _json_.Selllabel
-        if (_json_.SellCount === undefined) { throw new Error() }
-        this.SellCount = _json_.SellCount
-        if (_json_.SellRefreshType === undefined) { throw new Error() }
-        this.SellRefreshType = _json_.SellRefreshType
-        if (_json_.SellStartTime === undefined) { throw new Error() }
-        this.SellStartTime = _json_.SellStartTime
-        if (_json_.SellValidTime === undefined) { throw new Error() }
-        this.SellValidTime = _json_.SellValidTime
-        if (_json_.ItemConfigId === undefined) { throw new Error() }
-        this.ItemConfigId = _json_.ItemConfigId
-        if (_json_.ItemName === undefined) { throw new Error() }
-        this.ItemName = _json_.ItemName
-        if (_json_.ItemCount === undefined) { throw new Error() }
-        this.ItemCount = _json_.ItemCount
-        if (_json_.CostType === undefined) { throw new Error() }
-        this.CostType = _json_.CostType
-        if (_json_.OriginPrice === undefined) { throw new Error() }
-        this.OriginPrice = _json_.OriginPrice
-        if (_json_.RealPrice === undefined) { throw new Error() }
-        this.RealPrice = _json_.RealPrice
-        if (_json_.OverSeaOriginPrice === undefined) { throw new Error() }
-        this.OverSeaOriginPrice = _json_.OverSeaOriginPrice
-        if (_json_.OverSeaRealPrice === undefined) { throw new Error() }
-        this.OverSeaRealPrice = _json_.OverSeaRealPrice
-        if (_json_.Discount === undefined) { throw new Error() }
-        this.Discount = _json_.Discount
-        if (_json_.VipLimit === undefined) { throw new Error() }
-        this.VipLimit = _json_.VipLimit
-        if (_json_.isVaild === undefined) { throw new Error() }
-        this.isVaild = _json_.isVaild
-    }
-
-    /**
-     * 售卖索引
-     */
-    readonly SellConfigid: number
-    /**
-     * 售卖标签
-     */
-    readonly Selllabel: string
-    /**
-     * 售卖数量
-     */
-    readonly SellCount: number
-    /**
-     * 商品刷新类型
-     */
-    readonly SellRefreshType: EEnum.ESellRefreshType
-    /**
-     * 商品开启时间
-     */
-    readonly SellStartTime: number
-    /**
-     * 商品有效时间
-     */
-    readonly SellValidTime: number
-    /**
-     * 道具索引
-     */
-    readonly ItemConfigId: number
-    /**
-     * 道具名称
-     */
-    readonly ItemName: string
-    /**
-     * 道具数量
-     */
-    readonly ItemCount: number
-    /**
-     * 货币类型
-     */
-    readonly CostType: EEnum.EMoneyType
-    /**
-     * 初始价格
-     */
-    readonly OriginPrice: number
-    /**
-     * 最终价格
-     */
-    readonly RealPrice: number
-    /**
-     * 海外初始价格
-     */
-    readonly OverSeaOriginPrice: number
-    /**
-     * 海外最终价格
-     */
-    readonly OverSeaRealPrice: number
-    /**
-     * 折扣
-     */
-    readonly Discount: number
-    /**
-     * Vip限制
-     */
-    readonly VipLimit: number
-    /**
-     * 是否启用
-     */
-    readonly isVaild: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Prop {
-export class PropConfig{
-    private _dataMap: Map<number, Prop.PropConfigRecord>
-    private _dataList: Prop.PropConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Prop.PropConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Prop.PropConfigRecord
-            _v = new Prop.PropConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.isVaild === undefined) { throw new Error() }
+            this.isVaild = _json_.isVaild
+            if (_json_.ShopType === undefined) { throw new Error() }
+            this.ShopType = _json_.ShopType
+            if (_json_.ShopName === undefined) { throw new Error() }
+            this.ShopName = _json_.ShopName
+            if (_json_.ShopRefreshType === undefined) { throw new Error() }
+            this.ShopRefreshType = _json_.ShopRefreshType
+            if (_json_.ShopStartTime === undefined) { throw new Error() }
+            this.ShopStartTime = _json_.ShopStartTime
+            if (_json_.ShopValidTime === undefined) { throw new Error() }
+            this.ShopValidTime = _json_.ShopValidTime
+            if (_json_.sellinfo === undefined) { throw new Error() }
+            { this.sellinfo = []; for (let _ele of _json_.sellinfo) { let _e: Shop.ShopSellItemBean; _e = new Shop.ShopSellItemBean(_ele); this.sellinfo.push(_e); } }
         }
-    }
 
-    getDataMap(): Map<number, Prop.PropConfigRecord> { return this._dataMap; }
-    getDataList(): Prop.PropConfigRecord[] { return this._dataList; }
+        /**
+         * 池子id
+         */
+        readonly id: number
+        /**
+         * 是否启用
+         */
+        readonly isVaild: number
+        /**
+         * 商店类型
+         */
+        readonly ShopType: number
+        /**
+         * 商店名称
+         */
+        readonly ShopName: string
+        /**
+         * 商店刷新类型
+         */
+        readonly ShopRefreshType: number
+        /**
+         * 商店开启时间
+         */
+        readonly ShopStartTime: number
+        /**
+         * 商店有效时间
+         */
+        readonly ShopValidTime: number
+        readonly sellinfo: Shop.ShopSellItemBean[]
 
-    get(key: number): Prop.PropConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.sellinfo) { if (_e != null) { _e.resolve(_tables); } }
         }
     }
 
 }
-}
 
 
 
-export namespace Prop {
-export class PropConfigRecord {
+export namespace Shop {
+    export class ShopSellItemBean {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.PropName === undefined) { throw new Error() }
-        this.PropName = _json_.PropName
-        if (_json_.Des === undefined) { throw new Error() }
-        this.Des = _json_.Des
-    }
+        constructor(_json_: any) {
+            if (_json_.SellConfigid === undefined) { throw new Error() }
+            this.SellConfigid = _json_.SellConfigid
+            if (_json_.Selllabel === undefined) { throw new Error() }
+            this.Selllabel = _json_.Selllabel
+            if (_json_.SellCount === undefined) { throw new Error() }
+            this.SellCount = _json_.SellCount
+            if (_json_.SellRefreshType === undefined) { throw new Error() }
+            this.SellRefreshType = _json_.SellRefreshType
+            if (_json_.SellStartTime === undefined) { throw new Error() }
+            this.SellStartTime = _json_.SellStartTime
+            if (_json_.SellValidTime === undefined) { throw new Error() }
+            this.SellValidTime = _json_.SellValidTime
+            if (_json_.ItemConfigId === undefined) { throw new Error() }
+            this.ItemConfigId = _json_.ItemConfigId
+            if (_json_.ItemName === undefined) { throw new Error() }
+            this.ItemName = _json_.ItemName
+            if (_json_.ItemCount === undefined) { throw new Error() }
+            this.ItemCount = _json_.ItemCount
+            if (_json_.CostType === undefined) { throw new Error() }
+            this.CostType = _json_.CostType
+            if (_json_.OriginPrice === undefined) { throw new Error() }
+            this.OriginPrice = _json_.OriginPrice
+            if (_json_.RealPrice === undefined) { throw new Error() }
+            this.RealPrice = _json_.RealPrice
+            if (_json_.OverSeaOriginPrice === undefined) { throw new Error() }
+            this.OverSeaOriginPrice = _json_.OverSeaOriginPrice
+            if (_json_.OverSeaRealPrice === undefined) { throw new Error() }
+            this.OverSeaRealPrice = _json_.OverSeaRealPrice
+            if (_json_.Discount === undefined) { throw new Error() }
+            this.Discount = _json_.Discount
+            if (_json_.VipLimit === undefined) { throw new Error() }
+            this.VipLimit = _json_.VipLimit
+            if (_json_.isVaild === undefined) { throw new Error() }
+            this.isVaild = _json_.isVaild
+        }
 
-    /**
-     * 主键
-     */
-    readonly id: number
-    /**
-     * 属性名称
-     */
-    readonly PropName: string
-    /**
-     * 属性描述
-     */
-    readonly Des: string
+        /**
+         * 售卖索引
+         */
+        readonly SellConfigid: number
+        /**
+         * 售卖标签
+         */
+        readonly Selllabel: string
+        /**
+         * 售卖数量
+         */
+        readonly SellCount: number
+        /**
+         * 商品刷新类型
+         */
+        readonly SellRefreshType: EEnum.ESellRefreshType
+        /**
+         * 商品开启时间
+         */
+        readonly SellStartTime: number
+        /**
+         * 商品有效时间
+         */
+        readonly SellValidTime: number
+        /**
+         * 道具索引
+         */
+        readonly ItemConfigId: number
+        /**
+         * 道具名称
+         */
+        readonly ItemName: string
+        /**
+         * 道具数量
+         */
+        readonly ItemCount: number
+        /**
+         * 货币类型
+         */
+        readonly CostType: EEnum.EMoneyType
+        /**
+         * 初始价格
+         */
+        readonly OriginPrice: number
+        /**
+         * 最终价格
+         */
+        readonly RealPrice: number
+        /**
+         * 海外初始价格
+         */
+        readonly OverSeaOriginPrice: number
+        /**
+         * 海外最终价格
+         */
+        readonly OverSeaRealPrice: number
+        /**
+         * 折扣
+         */
+        readonly Discount: number
+        /**
+         * Vip限制
+         */
+        readonly VipLimit: number
+        /**
+         * 是否启用
+         */
+        readonly isVaild: number
 
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Prop {
-export class RandomPropConfig{
-    private _dataMap: Map<number, Prop.RandomPropConfigRecord>
-    private _dataList: Prop.RandomPropConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Prop.RandomPropConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Prop.RandomPropConfigRecord
-            _v = new Prop.RandomPropConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        resolve(_tables: Map<string, any>) {
         }
     }
 
-    getDataMap(): Map<number, Prop.RandomPropConfigRecord> { return this._dataMap; }
-    getDataList(): Prop.RandomPropConfigRecord[] { return this._dataList; }
+}
 
-    get(key: number): Prop.RandomPropConfigRecord | undefined { return this._dataMap.get(key); }
+export namespace Prop {
+    export class PropConfig {
+        private _dataMap: Map<number, Prop.PropConfigRecord>
+        private _dataList: Prop.PropConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Prop.PropConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Prop.PropConfigRecord
+                _v = new Prop.PropConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        getDataMap(): Map<number, Prop.PropConfigRecord> { return this._dataMap; }
+        getDataList(): Prop.PropConfigRecord[] { return this._dataList; }
+
+        get(key: number): Prop.PropConfigRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
+    }
+}
+
+
+
+export namespace Prop {
+    export class PropConfigRecord {
+
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.PropName === undefined) { throw new Error() }
+            this.PropName = _json_.PropName
+            if (_json_.Des === undefined) { throw new Error() }
+            this.Des = _json_.Des
+        }
+
+        /**
+         * 主键
+         */
+        readonly id: number
+        /**
+         * 属性名称
+         */
+        readonly PropName: string
+        /**
+         * 属性描述
+         */
+        readonly Des: string
+
+        resolve(_tables: Map<string, any>) {
         }
     }
 
 }
+
+export namespace Prop {
+    export class RandomPropConfig {
+        private _dataMap: Map<number, Prop.RandomPropConfigRecord>
+        private _dataList: Prop.RandomPropConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Prop.RandomPropConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Prop.RandomPropConfigRecord
+                _v = new Prop.RandomPropConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Prop.RandomPropConfigRecord> { return this._dataMap; }
+        getDataList(): Prop.RandomPropConfigRecord[] { return this._dataList; }
+
+        get(key: number): Prop.RandomPropConfigRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
+    }
 }
 
 
 
 export namespace Prop {
-export class RandomPropConfigRecord {
+    export class RandomPropConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.propPool === undefined) { throw new Error() }
-        { this.propPool = []; for(let _ele of _json_.propPool) { let _e : Prop.PropPoolBean; _e = new Prop.PropPoolBean(_ele); this.propPool.push(_e);}}
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.propPool === undefined) { throw new Error() }
+            { this.propPool = []; for (let _ele of _json_.propPool) { let _e: Prop.PropPoolBean; _e = new Prop.PropPoolBean(_ele); this.propPool.push(_e); } }
+        }
+
+        /**
+         * 随机属性id
+         */
+        readonly id: number
+        readonly propPool: Prop.PropPoolBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.propPool) { if (_e != null) { _e.resolve(_tables); } }
+        }
     }
-
-    /**
-     * 随机属性id
-     */
-    readonly id: number
-    readonly propPool: Prop.PropPoolBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.propPool) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
 
 }
 
 
 
 export namespace Prop {
-export class PropPoolBean {
+    export class PropPoolBean {
 
-    constructor(_json_: any) {
-        if (_json_.Propid === undefined) { throw new Error() }
-        this.Propid = _json_.Propid
-        if (_json_.PropDes === undefined) { throw new Error() }
-        this.PropDes = _json_.PropDes
-        if (_json_.PropWeight === undefined) { throw new Error() }
-        this.PropWeight = _json_.PropWeight
-        if (_json_.PropMax === undefined) { throw new Error() }
-        this.PropMax = _json_.PropMax
-        if (_json_.PropMin === undefined) { throw new Error() }
-        this.PropMin = _json_.PropMin
+        constructor(_json_: any) {
+            if (_json_.Propid === undefined) { throw new Error() }
+            this.Propid = _json_.Propid
+            if (_json_.PropDes === undefined) { throw new Error() }
+            this.PropDes = _json_.PropDes
+            if (_json_.PropWeight === undefined) { throw new Error() }
+            this.PropWeight = _json_.PropWeight
+            if (_json_.PropMax === undefined) { throw new Error() }
+            this.PropMax = _json_.PropMax
+            if (_json_.PropMin === undefined) { throw new Error() }
+            this.PropMin = _json_.PropMin
+        }
+
+        /**
+         * 属性id
+         */
+        readonly Propid: number
+        /**
+         * 属性描述
+         */
+        readonly PropDes: string
+        /**
+         * 属性权重
+         */
+        readonly PropWeight: number
+        /**
+         * 属性显示最大值
+         */
+        readonly PropMax: number
+        /**
+         * 属性显示最小值
+         */
+        readonly PropMin: number
+
+        resolve(_tables: Map<string, any>) {
+        }
     }
-
-    /**
-     * 属性id
-     */
-    readonly Propid: number
-    /**
-     * 属性描述
-     */
-    readonly PropDes: string
-    /**
-     * 属性权重
-     */
-    readonly PropWeight: number
-    /**
-     * 属性显示最大值
-     */
-    readonly PropMax: number
-    /**
-     * 属性显示最小值
-     */
-    readonly PropMin: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
 
 }
 
 export namespace Activity {
-export class ActivityConfig{
-    private _dataMap: Map<number, Activity.ActivityConfigRecord>
-    private _dataList: Activity.ActivityConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Activity.ActivityConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.ActivityConfigRecord
-            _v = new Activity.ActivityConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class ActivityConfig {
+        private _dataMap: Map<number, Activity.ActivityConfigRecord>
+        private _dataList: Activity.ActivityConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Activity.ActivityConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Activity.ActivityConfigRecord
+                _v = new Activity.ActivityConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
-    }
 
-    getDataMap(): Map<number, Activity.ActivityConfigRecord> { return this._dataMap; }
-    getDataList(): Activity.ActivityConfigRecord[] { return this._dataList; }
+        getDataMap(): Map<number, Activity.ActivityConfigRecord> { return this._dataMap; }
+        getDataList(): Activity.ActivityConfigRecord[] { return this._dataList; }
 
-    get(key: number): Activity.ActivityConfigRecord | undefined { return this._dataMap.get(key); }
+        get(key: number): Activity.ActivityConfigRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
         }
+
     }
-
-}
-}
-
-
-
-export namespace Activity {
-export class ActivityConfigRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.IsValid === undefined) { throw new Error() }
-        this.IsValid = _json_.IsValid
-        if (_json_.IsCyclicActivity === undefined) { throw new Error() }
-        this.IsCyclicActivity = _json_.IsCyclicActivity
-        if (_json_.ActivityName === undefined) { throw new Error() }
-        this.ActivityName = _json_.ActivityName
-        if (_json_.ActivityScript === undefined) { throw new Error() }
-        this.ActivityScript = _json_.ActivityScript
-    }
-
-    /**
-     * 活动id
-     */
-    readonly id: number
-    /**
-     * 是否启用
-     */
-    readonly IsValid: number
-    /**
-     * 循环活动
-     */
-    readonly IsCyclicActivity: boolean
-    /**
-     * 活动名称
-     */
-    readonly ActivityName: string
-    /**
-     * 活动脚本
-     */
-    readonly ActivityScript: string
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Activity {
-export class TActivityMonthLogin{
-    private _dataMap: Map<number, Activity.TActivityMonthLoginRecord>
-    private _dataList: Activity.TActivityMonthLoginRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Activity.TActivityMonthLoginRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivityMonthLoginRecord
-            _v = new Activity.TActivityMonthLoginRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
-        }
-    }
-
-    getDataMap(): Map<number, Activity.TActivityMonthLoginRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivityMonthLoginRecord[] { return this._dataList; }
-
-    get(key: number): Activity.TActivityMonthLoginRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
-        }
-    }
-
-}
 }
 
 
 
 export namespace Activity {
-export class TActivityMonthLoginRecord {
+    export class ActivityConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.ActivityStartTime === undefined) { throw new Error() }
-        this.ActivityStartTime = _json_.ActivityStartTime
-        if (_json_.ActivityEndTime === undefined) { throw new Error() }
-        this.ActivityEndTime = _json_.ActivityEndTime
-        if (_json_.LoginPrize === undefined) { throw new Error() }
-        { this.LoginPrize = []; for(let _ele of _json_.LoginPrize) { let _e : Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.LoginPrize.push(_e);}}
-        if (_json_.TotalLoginPrize === undefined) { throw new Error() }
-        { this.TotalLoginPrize = []; for(let _ele of _json_.TotalLoginPrize) { let _e : Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.TotalLoginPrize.push(_e);}}
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.IsValid === undefined) { throw new Error() }
+            this.IsValid = _json_.IsValid
+            if (_json_.IsCyclicActivity === undefined) { throw new Error() }
+            this.IsCyclicActivity = _json_.IsCyclicActivity
+            if (_json_.ActivityName === undefined) { throw new Error() }
+            this.ActivityName = _json_.ActivityName
+            if (_json_.ActivityScript === undefined) { throw new Error() }
+            this.ActivityScript = _json_.ActivityScript
+        }
+
+        /**
+         * 活动id
+         */
+        readonly id: number
+        /**
+         * 是否启用
+         */
+        readonly IsValid: number
+        /**
+         * 循环活动
+         */
+        readonly IsCyclicActivity: boolean
+        /**
+         * 活动名称
+         */
+        readonly ActivityName: string
+        /**
+         * 活动脚本
+         */
+        readonly ActivityScript: string
+
+        resolve(_tables: Map<string, any>) {
+        }
     }
 
-    /**
-     * 活动id
-     */
-    readonly id: number
-    /**
-     * 开启时间
-     */
-    readonly ActivityStartTime: number
-    /**
-     * 结束时间
-     */
-    readonly ActivityEndTime: number
-    readonly LoginPrize: Item.ItemGroupBean[]
-    readonly TotalLoginPrize: Item.ItemGroupBean[]
+}
 
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.LoginPrize) { if (_e != null ) {_e.resolve(_tables);} }
-        for(let _e of this.TotalLoginPrize) { if (_e != null ) {_e.resolve(_tables);} }
+export namespace Activity {
+    export class TActivityMonthLogin {
+        private _dataMap: Map<number, Activity.TActivityMonthLoginRecord>
+        private _dataList: Activity.TActivityMonthLoginRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Activity.TActivityMonthLoginRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Activity.TActivityMonthLoginRecord
+                _v = new Activity.TActivityMonthLoginRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Activity.TActivityMonthLoginRecord> { return this._dataMap; }
+        getDataList(): Activity.TActivityMonthLoginRecord[] { return this._dataList; }
+
+        get(key: number): Activity.TActivityMonthLoginRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
     }
 }
+
+
+
+export namespace Activity {
+    export class TActivityMonthLoginRecord {
+
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            this.ActivityStartTime = _json_.ActivityStartTime
+            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            this.ActivityEndTime = _json_.ActivityEndTime
+            if (_json_.LoginPrize === undefined) { throw new Error() }
+            { this.LoginPrize = []; for (let _ele of _json_.LoginPrize) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.LoginPrize.push(_e); } }
+            if (_json_.TotalLoginPrize === undefined) { throw new Error() }
+            { this.TotalLoginPrize = []; for (let _ele of _json_.TotalLoginPrize) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.TotalLoginPrize.push(_e); } }
+        }
+
+        /**
+         * 活动id
+         */
+        readonly id: number
+        /**
+         * 开启时间
+         */
+        readonly ActivityStartTime: number
+        /**
+         * 结束时间
+         */
+        readonly ActivityEndTime: number
+        readonly LoginPrize: Item.ItemGroupBean[]
+        readonly TotalLoginPrize: Item.ItemGroupBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.LoginPrize) { if (_e != null) { _e.resolve(_tables); } }
+            for (let _e of this.TotalLoginPrize) { if (_e != null) { _e.resolve(_tables); } }
+        }
+    }
 
 }
 
 
 
 export namespace Item {
-export class ItemGroupBean {
+    export class ItemGroupBean {
 
-    constructor(_json_: any) {
-        if (_json_.Index === undefined) { throw new Error() }
-        this.Index = _json_.Index
-        if (_json_.ItemGroup === undefined) { throw new Error() }
-        { this.ItemGroup = []; for(let _ele of _json_.ItemGroup) { let _e : Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e);}}
+        constructor(_json_: any) {
+            if (_json_.Index === undefined) { throw new Error() }
+            this.Index = _json_.Index
+            if (_json_.ItemGroup === undefined) { throw new Error() }
+            { this.ItemGroup = []; for (let _ele of _json_.ItemGroup) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e); } }
+        }
+
+        /**
+         * 道具组索引
+         */
+        readonly Index: number
+        /**
+         * 道具组
+         */
+        readonly ItemGroup: Item.ItemInfoBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.ItemGroup) { if (_e != null) { _e.resolve(_tables); } }
+        }
     }
-
-    /**
-     * 道具组索引
-     */
-    readonly Index: number
-    /**
-     * 道具组
-     */
-    readonly ItemGroup: Item.ItemInfoBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.ItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
 
 }
 
 
 
 export namespace Item {
-export class ItemInfoBean {
+    export class ItemInfoBean {
 
-    constructor(_json_: any) {
-        if (_json_.ItemConfigId === undefined) { throw new Error() }
-        this.ItemConfigId = _json_.ItemConfigId
-        if (_json_.ItemCount === undefined) { throw new Error() }
-        this.ItemCount = _json_.ItemCount
-    }
-
-    /**
-     * 道具索引
-     */
-    readonly ItemConfigId: number
-    /**
-     * 道具数量
-     */
-    readonly ItemCount: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Activity {
-export class TActivitySevenDayLogin{
-    private _dataMap: Map<number, Activity.TActivitySevenDayLoginRecord>
-    private _dataList: Activity.TActivitySevenDayLoginRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Activity.TActivitySevenDayLoginRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivitySevenDayLoginRecord
-            _v = new Activity.TActivitySevenDayLoginRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        constructor(_json_: any) {
+            if (_json_.ItemConfigId === undefined) { throw new Error() }
+            this.ItemConfigId = _json_.ItemConfigId
+            if (_json_.ItemCount === undefined) { throw new Error() }
+            this.ItemCount = _json_.ItemCount
         }
-    }
 
-    getDataMap(): Map<number, Activity.TActivitySevenDayLoginRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivitySevenDayLoginRecord[] { return this._dataList; }
+        /**
+         * 道具索引
+         */
+        readonly ItemConfigId: number
+        /**
+         * 道具数量
+         */
+        readonly ItemCount: number
 
-    get(key: number): Activity.TActivitySevenDayLoginRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
         }
     }
 
 }
-}
-
-
 
 export namespace Activity {
-export class TActivitySevenDayLoginRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.ActivityStartTime === undefined) { throw new Error() }
-        this.ActivityStartTime = _json_.ActivityStartTime
-        if (_json_.ActivityEndTime === undefined) { throw new Error() }
-        this.ActivityEndTime = _json_.ActivityEndTime
-        if (_json_.PrizeItemGroup === undefined) { throw new Error() }
-        { this.PrizeItemGroup = []; for(let _ele of _json_.PrizeItemGroup) { let _e : Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.PrizeItemGroup.push(_e);}}
-    }
-
-    /**
-     * 活动id
-     */
-    readonly id: number
-    /**
-     * 开启时间
-     */
-    readonly ActivityStartTime: number
-    /**
-     * 结束时间
-     */
-    readonly ActivityEndTime: number
-    readonly PrizeItemGroup: Item.ItemGroupBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.PrizeItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-export namespace Activity {
-export class TActivityBattlePass{
-    private _dataMap: Map<number, Activity.TActivityBattlePassRecord>
-    private _dataList: Activity.TActivityBattlePassRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Activity.TActivityBattlePassRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivityBattlePassRecord
-            _v = new Activity.TActivityBattlePassRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class TActivitySevenDayLogin {
+        private _dataMap: Map<number, Activity.TActivitySevenDayLoginRecord>
+        private _dataList: Activity.TActivitySevenDayLoginRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Activity.TActivitySevenDayLoginRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Activity.TActivitySevenDayLoginRecord
+                _v = new Activity.TActivitySevenDayLoginRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
-    }
 
-    getDataMap(): Map<number, Activity.TActivityBattlePassRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivityBattlePassRecord[] { return this._dataList; }
+        getDataMap(): Map<number, Activity.TActivitySevenDayLoginRecord> { return this._dataMap; }
+        getDataList(): Activity.TActivitySevenDayLoginRecord[] { return this._dataList; }
 
-    get(key: number): Activity.TActivityBattlePassRecord | undefined { return this._dataMap.get(key); }
+        get(key: number): Activity.TActivitySevenDayLoginRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
         }
-    }
 
-}
+    }
 }
 
 
 
 export namespace Activity {
-export class TActivityBattlePassRecord {
+    export class TActivitySevenDayLoginRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.ActivityStartTime === undefined) { throw new Error() }
-        this.ActivityStartTime = _json_.ActivityStartTime
-        if (_json_.ActivityEndTime === undefined) { throw new Error() }
-        this.ActivityEndTime = _json_.ActivityEndTime
-        if (_json_.ItemPrize === undefined) { throw new Error() }
-        { this.ItemPrize = []; for(let _ele of _json_.ItemPrize) { let _e : Activity.BattlePassBean; _e = new Activity.BattlePassBean(_ele); this.ItemPrize.push(_e);}}
-    }
-
-    /**
-     * 活动id
-     */
-    readonly id: number
-    /**
-     * 开启时间
-     */
-    readonly ActivityStartTime: number
-    /**
-     * 结束时间
-     */
-    readonly ActivityEndTime: number
-    readonly ItemPrize: Activity.BattlePassBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.ItemPrize) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-
-
-export namespace Activity {
-export class BattlePassBean {
-
-    constructor(_json_: any) {
-        if (_json_.Level === undefined) { throw new Error() }
-        this.Level = _json_.Level
-        if (_json_.Exp === undefined) { throw new Error() }
-        this.Exp = _json_.Exp
-        if (_json_.ItemConfigId === undefined) { throw new Error() }
-        this.ItemConfigId = _json_.ItemConfigId
-        if (_json_.ItemCount === undefined) { throw new Error() }
-        this.ItemCount = _json_.ItemCount
-        if (_json_.VIP_ItemConfigId === undefined) { throw new Error() }
-        this.VIPItemConfigId = _json_.VIP_ItemConfigId
-        if (_json_.VIP_ItemCount === undefined) { throw new Error() }
-        this.VIPItemCount = _json_.VIP_ItemCount
-    }
-
-    /**
-     * 等级
-     */
-    readonly Level: number
-    /**
-     * 升级经验
-     */
-    readonly Exp: number
-    /**
-     * 道具索引
-     */
-    readonly ItemConfigId: number
-    /**
-     * 道具数量
-     */
-    readonly ItemCount: number
-    /**
-     * vip道具索引
-     */
-    readonly VIPItemConfigId: number
-    /**
-     * vip道具数量
-     */
-    readonly VIPItemCount: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Activity {
-export class TActivityHeroRecordLevel{
-    private _dataMap: Map<number, Activity.TActivityHeroRecordLevelRecord>
-    private _dataList: Activity.TActivityHeroRecordLevelRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Activity.TActivityHeroRecordLevelRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivityHeroRecordLevelRecord
-            _v = new Activity.TActivityHeroRecordLevelRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            this.ActivityStartTime = _json_.ActivityStartTime
+            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            this.ActivityEndTime = _json_.ActivityEndTime
+            if (_json_.PrizeItemGroup === undefined) { throw new Error() }
+            { this.PrizeItemGroup = []; for (let _ele of _json_.PrizeItemGroup) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.PrizeItemGroup.push(_e); } }
         }
-    }
 
-    getDataMap(): Map<number, Activity.TActivityHeroRecordLevelRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivityHeroRecordLevelRecord[] { return this._dataList; }
+        /**
+         * 活动id
+         */
+        readonly id: number
+        /**
+         * 开启时间
+         */
+        readonly ActivityStartTime: number
+        /**
+         * 结束时间
+         */
+        readonly ActivityEndTime: number
+        readonly PrizeItemGroup: Item.ItemGroupBean[]
 
-    get(key: number): Activity.TActivityHeroRecordLevelRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.PrizeItemGroup) { if (_e != null) { _e.resolve(_tables); } }
         }
     }
 
 }
-}
-
-
 
 export namespace Activity {
-export class TActivityHeroRecordLevelRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.ItemGroup === undefined) { throw new Error() }
-        { this.ItemGroup = []; for(let _ele of _json_.ItemGroup) { let _e : Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e);}}
-    }
-
-    /**
-     * 等级
-     */
-    readonly id: number
-    readonly ItemGroup: Item.ItemInfoBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.ItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-export namespace Activity {
-export class TActivityDailyOnlinePrize{
-    private _dataMap: Map<number, Activity.TActivityDailyOnlinePrizeRecord>
-    private _dataList: Activity.TActivityDailyOnlinePrizeRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Activity.TActivityDailyOnlinePrizeRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivityDailyOnlinePrizeRecord
-            _v = new Activity.TActivityDailyOnlinePrizeRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class TActivityBattlePass {
+        private _dataMap: Map<number, Activity.TActivityBattlePassRecord>
+        private _dataList: Activity.TActivityBattlePassRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Activity.TActivityBattlePassRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Activity.TActivityBattlePassRecord
+                _v = new Activity.TActivityBattlePassRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
-    }
 
-    getDataMap(): Map<number, Activity.TActivityDailyOnlinePrizeRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivityDailyOnlinePrizeRecord[] { return this._dataList; }
+        getDataMap(): Map<number, Activity.TActivityBattlePassRecord> { return this._dataMap; }
+        getDataList(): Activity.TActivityBattlePassRecord[] { return this._dataList; }
 
-    get(key: number): Activity.TActivityDailyOnlinePrizeRecord | undefined { return this._dataMap.get(key); }
+        get(key: number): Activity.TActivityBattlePassRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
         }
-    }
 
-}
+    }
 }
 
 
 
 export namespace Activity {
-export class TActivityDailyOnlinePrizeRecord {
+    export class TActivityBattlePassRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.ItemGroup === undefined) { throw new Error() }
-        { this.ItemGroup = []; for(let _ele of _json_.ItemGroup) { let _e : Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e);}}
-    }
-
-    /**
-     * 在线时间秒
-     */
-    readonly id: number
-    readonly ItemGroup: Item.ItemInfoBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.ItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-export namespace Activity {
-export class TActivityInvestMetaStone{
-    private _dataMap: Map<number, Activity.TActivityInvestMetaStoneRecord>
-    private _dataList: Activity.TActivityInvestMetaStoneRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Activity.TActivityInvestMetaStoneRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivityInvestMetaStoneRecord
-            _v = new Activity.TActivityInvestMetaStoneRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            this.ActivityStartTime = _json_.ActivityStartTime
+            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            this.ActivityEndTime = _json_.ActivityEndTime
+            if (_json_.ItemPrize === undefined) { throw new Error() }
+            { this.ItemPrize = []; for (let _ele of _json_.ItemPrize) { let _e: Activity.BattlePassBean; _e = new Activity.BattlePassBean(_ele); this.ItemPrize.push(_e); } }
         }
-    }
 
-    getDataMap(): Map<number, Activity.TActivityInvestMetaStoneRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivityInvestMetaStoneRecord[] { return this._dataList; }
+        /**
+         * 活动id
+         */
+        readonly id: number
+        /**
+         * 开启时间
+         */
+        readonly ActivityStartTime: number
+        /**
+         * 结束时间
+         */
+        readonly ActivityEndTime: number
+        readonly ItemPrize: Activity.BattlePassBean[]
 
-    get(key: number): Activity.TActivityInvestMetaStoneRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.ItemPrize) { if (_e != null) { _e.resolve(_tables); } }
         }
     }
 
 }
-}
 
 
 
 export namespace Activity {
-export class TActivityInvestMetaStoneRecord {
+    export class BattlePassBean {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.ActivityStartTime === undefined) { throw new Error() }
-        this.ActivityStartTime = _json_.ActivityStartTime
-        if (_json_.ActivityEndTime === undefined) { throw new Error() }
-        this.ActivityEndTime = _json_.ActivityEndTime
-        if (_json_.InvestItemGroup === undefined) { throw new Error() }
-        { this.InvestItemGroup = []; for(let _ele of _json_.InvestItemGroup) { let _e : Activity.InvestMetaStoneBean; _e = new Activity.InvestMetaStoneBean(_ele); this.InvestItemGroup.push(_e);}}
-    }
-
-    /**
-     * 活动id
-     */
-    readonly id: number
-    /**
-     * 开启时间
-     */
-    readonly ActivityStartTime: number
-    /**
-     * 结束时间
-     */
-    readonly ActivityEndTime: number
-    readonly InvestItemGroup: Activity.InvestMetaStoneBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.InvestItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-
-
-export namespace Activity {
-export class InvestMetaStoneBean {
-
-    constructor(_json_: any) {
-        if (_json_.Need === undefined) { throw new Error() }
-        this.Need = _json_.Need
-        if (_json_.GainMin === undefined) { throw new Error() }
-        this.GainMin = _json_.GainMin
-        if (_json_.GainMax === undefined) { throw new Error() }
-        this.GainMax = _json_.GainMax
-    }
-
-    /**
-     * 需要数量
-     */
-    readonly Need: number
-    /**
-     * 获得最小数量
-     */
-    readonly GainMin: number
-    /**
-     * 获得最大数量
-     */
-    readonly GainMax: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Activity {
-export class TActivityTotalGainMetaStone{
-    private _dataMap: Map<number, Activity.TActivityTotalGainMetaStoneRecord>
-    private _dataList: Activity.TActivityTotalGainMetaStoneRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Activity.TActivityTotalGainMetaStoneRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivityTotalGainMetaStoneRecord
-            _v = new Activity.TActivityTotalGainMetaStoneRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        constructor(_json_: any) {
+            if (_json_.Level === undefined) { throw new Error() }
+            this.Level = _json_.Level
+            if (_json_.Exp === undefined) { throw new Error() }
+            this.Exp = _json_.Exp
+            if (_json_.ItemConfigId === undefined) { throw new Error() }
+            this.ItemConfigId = _json_.ItemConfigId
+            if (_json_.ItemCount === undefined) { throw new Error() }
+            this.ItemCount = _json_.ItemCount
+            if (_json_.VIP_ItemConfigId === undefined) { throw new Error() }
+            this.VIPItemConfigId = _json_.VIP_ItemConfigId
+            if (_json_.VIP_ItemCount === undefined) { throw new Error() }
+            this.VIPItemCount = _json_.VIP_ItemCount
         }
-    }
 
-    getDataMap(): Map<number, Activity.TActivityTotalGainMetaStoneRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivityTotalGainMetaStoneRecord[] { return this._dataList; }
+        /**
+         * 等级
+         */
+        readonly Level: number
+        /**
+         * 升级经验
+         */
+        readonly Exp: number
+        /**
+         * 道具索引
+         */
+        readonly ItemConfigId: number
+        /**
+         * 道具数量
+         */
+        readonly ItemCount: number
+        /**
+         * vip道具索引
+         */
+        readonly VIPItemConfigId: number
+        /**
+         * vip道具数量
+         */
+        readonly VIPItemCount: number
 
-    get(key: number): Activity.TActivityTotalGainMetaStoneRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
         }
     }
 
 }
-}
-
-
 
 export namespace Activity {
-export class TActivityTotalGainMetaStoneRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.ActivityStartTime === undefined) { throw new Error() }
-        this.ActivityStartTime = _json_.ActivityStartTime
-        if (_json_.ActivityEndTime === undefined) { throw new Error() }
-        this.ActivityEndTime = _json_.ActivityEndTime
-        if (_json_.PrizeItemGroup === undefined) { throw new Error() }
-        { this.PrizeItemGroup = []; for(let _ele of _json_.PrizeItemGroup) { let _e : Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.PrizeItemGroup.push(_e);}}
-    }
-
-    /**
-     * 活动id
-     */
-    readonly id: number
-    /**
-     * 开启时间
-     */
-    readonly ActivityStartTime: number
-    /**
-     * 结束时间
-     */
-    readonly ActivityEndTime: number
-    readonly PrizeItemGroup: Item.ItemGroupBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.PrizeItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-export namespace Activity {
-export class TActivityTotalOnlineTime{
-    private _dataMap: Map<number, Activity.TActivityTotalOnlineTimeRecord>
-    private _dataList: Activity.TActivityTotalOnlineTimeRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Activity.TActivityTotalOnlineTimeRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivityTotalOnlineTimeRecord
-            _v = new Activity.TActivityTotalOnlineTimeRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class TActivityHeroRecordLevel {
+        private _dataMap: Map<number, Activity.TActivityHeroRecordLevelRecord>
+        private _dataList: Activity.TActivityHeroRecordLevelRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Activity.TActivityHeroRecordLevelRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Activity.TActivityHeroRecordLevelRecord
+                _v = new Activity.TActivityHeroRecordLevelRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
+
+        getDataMap(): Map<number, Activity.TActivityHeroRecordLevelRecord> { return this._dataMap; }
+        getDataList(): Activity.TActivityHeroRecordLevelRecord[] { return this._dataList; }
+
+        get(key: number): Activity.TActivityHeroRecordLevelRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
     }
+}
 
-    getDataMap(): Map<number, Activity.TActivityTotalOnlineTimeRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivityTotalOnlineTimeRecord[] { return this._dataList; }
 
-    get(key: number): Activity.TActivityTotalOnlineTimeRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+export namespace Activity {
+    export class TActivityHeroRecordLevelRecord {
+
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.ItemGroup === undefined) { throw new Error() }
+            { this.ItemGroup = []; for (let _ele of _json_.ItemGroup) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e); } }
+        }
+
+        /**
+         * 等级
+         */
+        readonly id: number
+        readonly ItemGroup: Item.ItemInfoBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.ItemGroup) { if (_e != null) { _e.resolve(_tables); } }
         }
     }
 
 }
-}
-
-
 
 export namespace Activity {
-export class TActivityTotalOnlineTimeRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.ActivityStartTime === undefined) { throw new Error() }
-        this.ActivityStartTime = _json_.ActivityStartTime
-        if (_json_.ActivityEndTime === undefined) { throw new Error() }
-        this.ActivityEndTime = _json_.ActivityEndTime
-        if (_json_.PrizeItemGroup === undefined) { throw new Error() }
-        { this.PrizeItemGroup = []; for(let _ele of _json_.PrizeItemGroup) { let _e : Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.PrizeItemGroup.push(_e);}}
-    }
-
-    /**
-     * 活动id
-     */
-    readonly id: number
-    /**
-     * 开启时间
-     */
-    readonly ActivityStartTime: number
-    /**
-     * 结束时间
-     */
-    readonly ActivityEndTime: number
-    readonly PrizeItemGroup: Item.ItemGroupBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.PrizeItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-export namespace Activity {
-export class TActivityTotalSpendMetaStone{
-    private _dataMap: Map<number, Activity.TActivityTotalSpendMetaStoneRecord>
-    private _dataList: Activity.TActivityTotalSpendMetaStoneRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Activity.TActivityTotalSpendMetaStoneRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivityTotalSpendMetaStoneRecord
-            _v = new Activity.TActivityTotalSpendMetaStoneRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class TActivityDailyOnlinePrize {
+        private _dataMap: Map<number, Activity.TActivityDailyOnlinePrizeRecord>
+        private _dataList: Activity.TActivityDailyOnlinePrizeRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Activity.TActivityDailyOnlinePrizeRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Activity.TActivityDailyOnlinePrizeRecord
+                _v = new Activity.TActivityDailyOnlinePrizeRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
+
+        getDataMap(): Map<number, Activity.TActivityDailyOnlinePrizeRecord> { return this._dataMap; }
+        getDataList(): Activity.TActivityDailyOnlinePrizeRecord[] { return this._dataList; }
+
+        get(key: number): Activity.TActivityDailyOnlinePrizeRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
     }
+}
 
-    getDataMap(): Map<number, Activity.TActivityTotalSpendMetaStoneRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivityTotalSpendMetaStoneRecord[] { return this._dataList; }
 
-    get(key: number): Activity.TActivityTotalSpendMetaStoneRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+export namespace Activity {
+    export class TActivityDailyOnlinePrizeRecord {
+
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.ItemGroup === undefined) { throw new Error() }
+            { this.ItemGroup = []; for (let _ele of _json_.ItemGroup) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e); } }
+        }
+
+        /**
+         * 在线时间秒
+         */
+        readonly id: number
+        readonly ItemGroup: Item.ItemInfoBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.ItemGroup) { if (_e != null) { _e.resolve(_tables); } }
         }
     }
 
 }
-}
-
-
 
 export namespace Activity {
-export class TActivityTotalSpendMetaStoneRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.ActivityStartTime === undefined) { throw new Error() }
-        this.ActivityStartTime = _json_.ActivityStartTime
-        if (_json_.ActivityEndTime === undefined) { throw new Error() }
-        this.ActivityEndTime = _json_.ActivityEndTime
-        if (_json_.PrizeItemGroup === undefined) { throw new Error() }
-        { this.PrizeItemGroup = []; for(let _ele of _json_.PrizeItemGroup) { let _e : Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.PrizeItemGroup.push(_e);}}
-    }
-
-    /**
-     * 活动id
-     */
-    readonly id: number
-    /**
-     * 开启时间
-     */
-    readonly ActivityStartTime: number
-    /**
-     * 结束时间
-     */
-    readonly ActivityEndTime: number
-    readonly PrizeItemGroup: Item.ItemGroupBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.PrizeItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-export namespace Activity {
-export class TActivityGiftCommond{
-    private _dataMap: Map<number, Activity.TActivityGiftCommondRecord>
-    private _dataList: Activity.TActivityGiftCommondRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Activity.TActivityGiftCommondRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivityGiftCommondRecord
-            _v = new Activity.TActivityGiftCommondRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class TActivityInvestMetaStone {
+        private _dataMap: Map<number, Activity.TActivityInvestMetaStoneRecord>
+        private _dataList: Activity.TActivityInvestMetaStoneRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Activity.TActivityInvestMetaStoneRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Activity.TActivityInvestMetaStoneRecord
+                _v = new Activity.TActivityInvestMetaStoneRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
-    }
 
-    getDataMap(): Map<number, Activity.TActivityGiftCommondRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivityGiftCommondRecord[] { return this._dataList; }
+        getDataMap(): Map<number, Activity.TActivityInvestMetaStoneRecord> { return this._dataMap; }
+        getDataList(): Activity.TActivityInvestMetaStoneRecord[] { return this._dataList; }
 
-    get(key: number): Activity.TActivityGiftCommondRecord | undefined { return this._dataMap.get(key); }
+        get(key: number): Activity.TActivityInvestMetaStoneRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
         }
-    }
 
-}
+    }
 }
 
 
 
 export namespace Activity {
-export class TActivityGiftCommondRecord {
+    export class TActivityInvestMetaStoneRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.IsValid === undefined) { throw new Error() }
-        this.IsValid = _json_.IsValid
-        if (_json_.GiftCommond === undefined) { throw new Error() }
-        this.GiftCommond = _json_.GiftCommond
-        if (_json_.GiftCount === undefined) { throw new Error() }
-        this.GiftCount = _json_.GiftCount
-        if (_json_.ActivityStartTime === undefined) { throw new Error() }
-        this.ActivityStartTime = _json_.ActivityStartTime
-        if (_json_.ActivityEndTime === undefined) { throw new Error() }
-        this.ActivityEndTime = _json_.ActivityEndTime
-        if (_json_.ItemGroup === undefined) { throw new Error() }
-        { this.ItemGroup = []; for(let _ele of _json_.ItemGroup) { let _e : Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e);}}
-    }
-
-    /**
-     * 礼包Id
-     */
-    readonly id: number
-    /**
-     * 是否有效
-     */
-    readonly IsValid: number
-    /**
-     * 礼包口令
-     */
-    readonly GiftCommond: string
-    /**
-     * 礼包数量
-     */
-    readonly GiftCount: number
-    /**
-     * 开启时间
-     */
-    readonly ActivityStartTime: number
-    /**
-     * 结束时间
-     */
-    readonly ActivityEndTime: number
-    readonly ItemGroup: Item.ItemInfoBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.ItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-export namespace Activity {
-export class TActivityMentorshipTree{
-    private _dataMap: Map<number, Activity.TActivityMentorshipTreeRecord>
-    private _dataList: Activity.TActivityMentorshipTreeRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Activity.TActivityMentorshipTreeRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Activity.TActivityMentorshipTreeRecord
-            _v = new Activity.TActivityMentorshipTreeRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            this.ActivityStartTime = _json_.ActivityStartTime
+            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            this.ActivityEndTime = _json_.ActivityEndTime
+            if (_json_.InvestItemGroup === undefined) { throw new Error() }
+            { this.InvestItemGroup = []; for (let _ele of _json_.InvestItemGroup) { let _e: Activity.InvestMetaStoneBean; _e = new Activity.InvestMetaStoneBean(_ele); this.InvestItemGroup.push(_e); } }
         }
-    }
 
-    getDataMap(): Map<number, Activity.TActivityMentorshipTreeRecord> { return this._dataMap; }
-    getDataList(): Activity.TActivityMentorshipTreeRecord[] { return this._dataList; }
+        /**
+         * 活动id
+         */
+        readonly id: number
+        /**
+         * 开启时间
+         */
+        readonly ActivityStartTime: number
+        /**
+         * 结束时间
+         */
+        readonly ActivityEndTime: number
+        readonly InvestItemGroup: Activity.InvestMetaStoneBean[]
 
-    get(key: number): Activity.TActivityMentorshipTreeRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.InvestItemGroup) { if (_e != null) { _e.resolve(_tables); } }
         }
     }
 
 }
+
+
+
+export namespace Activity {
+    export class InvestMetaStoneBean {
+
+        constructor(_json_: any) {
+            if (_json_.Need === undefined) { throw new Error() }
+            this.Need = _json_.Need
+            if (_json_.GainMin === undefined) { throw new Error() }
+            this.GainMin = _json_.GainMin
+            if (_json_.GainMax === undefined) { throw new Error() }
+            this.GainMax = _json_.GainMax
+        }
+
+        /**
+         * 需要数量
+         */
+        readonly Need: number
+        /**
+         * 获得最小数量
+         */
+        readonly GainMin: number
+        /**
+         * 获得最大数量
+         */
+        readonly GainMax: number
+
+        resolve(_tables: Map<string, any>) {
+        }
+    }
+
+}
+
+export namespace Activity {
+    export class TActivityTotalGainMetaStone {
+        private _dataMap: Map<number, Activity.TActivityTotalGainMetaStoneRecord>
+        private _dataList: Activity.TActivityTotalGainMetaStoneRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Activity.TActivityTotalGainMetaStoneRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Activity.TActivityTotalGainMetaStoneRecord
+                _v = new Activity.TActivityTotalGainMetaStoneRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Activity.TActivityTotalGainMetaStoneRecord> { return this._dataMap; }
+        getDataList(): Activity.TActivityTotalGainMetaStoneRecord[] { return this._dataList; }
+
+        get(key: number): Activity.TActivityTotalGainMetaStoneRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
+    }
 }
 
 
 
 export namespace Activity {
-export class TActivityMentorshipTreeRecord {
+    export class TActivityTotalGainMetaStoneRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.IsValid === undefined) { throw new Error() }
-        this.IsValid = _json_.IsValid
-        if (_json_.TreeLevel === undefined) { throw new Error() }
-        this.TreeLevel = _json_.TreeLevel
-        if (_json_.PrizeConditionType === undefined) { throw new Error() }
-        this.PrizeConditionType = _json_.PrizeConditionType
-        if (_json_.PrizeCondition === undefined) { throw new Error() }
-        this.PrizeCondition = _json_.PrizeCondition
-        if (_json_.ItemGroup === undefined) { throw new Error() }
-        { this.ItemGroup = []; for(let _ele of _json_.ItemGroup) { let _e : Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e);}}
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            this.ActivityStartTime = _json_.ActivityStartTime
+            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            this.ActivityEndTime = _json_.ActivityEndTime
+            if (_json_.PrizeItemGroup === undefined) { throw new Error() }
+            { this.PrizeItemGroup = []; for (let _ele of _json_.PrizeItemGroup) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.PrizeItemGroup.push(_e); } }
+        }
+
+        /**
+         * 活动id
+         */
+        readonly id: number
+        /**
+         * 开启时间
+         */
+        readonly ActivityStartTime: number
+        /**
+         * 结束时间
+         */
+        readonly ActivityEndTime: number
+        readonly PrizeItemGroup: Item.ItemGroupBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.PrizeItemGroup) { if (_e != null) { _e.resolve(_tables); } }
+        }
     }
 
-    /**
-     * 奖励Id
-     */
-    readonly id: number
-    /**
-     * 是否有效
-     */
-    readonly IsValid: number
-    /**
-     * 树奖励层级
-     */
-    readonly TreeLevel: number
-    /**
-     * 奖励条件类型
-     */
-    readonly PrizeConditionType: string
-    /**
-     * 奖励条件
-     */
-    readonly PrizeCondition: number
-    readonly ItemGroup: Item.ItemInfoBean[]
+}
 
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.ItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
+export namespace Activity {
+    export class TActivityTotalOnlineTime {
+        private _dataMap: Map<number, Activity.TActivityTotalOnlineTimeRecord>
+        private _dataList: Activity.TActivityTotalOnlineTimeRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Activity.TActivityTotalOnlineTimeRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Activity.TActivityTotalOnlineTimeRecord
+                _v = new Activity.TActivityTotalOnlineTimeRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Activity.TActivityTotalOnlineTimeRecord> { return this._dataMap; }
+        getDataList(): Activity.TActivityTotalOnlineTimeRecord[] { return this._dataList; }
+
+        get(key: number): Activity.TActivityTotalOnlineTimeRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
     }
 }
+
+
+
+export namespace Activity {
+    export class TActivityTotalOnlineTimeRecord {
+
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            this.ActivityStartTime = _json_.ActivityStartTime
+            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            this.ActivityEndTime = _json_.ActivityEndTime
+            if (_json_.PrizeItemGroup === undefined) { throw new Error() }
+            { this.PrizeItemGroup = []; for (let _ele of _json_.PrizeItemGroup) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.PrizeItemGroup.push(_e); } }
+        }
+
+        /**
+         * 活动id
+         */
+        readonly id: number
+        /**
+         * 开启时间
+         */
+        readonly ActivityStartTime: number
+        /**
+         * 结束时间
+         */
+        readonly ActivityEndTime: number
+        readonly PrizeItemGroup: Item.ItemGroupBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.PrizeItemGroup) { if (_e != null) { _e.resolve(_tables); } }
+        }
+    }
+
+}
+
+export namespace Activity {
+    export class TActivityTotalSpendMetaStone {
+        private _dataMap: Map<number, Activity.TActivityTotalSpendMetaStoneRecord>
+        private _dataList: Activity.TActivityTotalSpendMetaStoneRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Activity.TActivityTotalSpendMetaStoneRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Activity.TActivityTotalSpendMetaStoneRecord
+                _v = new Activity.TActivityTotalSpendMetaStoneRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Activity.TActivityTotalSpendMetaStoneRecord> { return this._dataMap; }
+        getDataList(): Activity.TActivityTotalSpendMetaStoneRecord[] { return this._dataList; }
+
+        get(key: number): Activity.TActivityTotalSpendMetaStoneRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
+    }
+}
+
+
+
+export namespace Activity {
+    export class TActivityTotalSpendMetaStoneRecord {
+
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            this.ActivityStartTime = _json_.ActivityStartTime
+            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            this.ActivityEndTime = _json_.ActivityEndTime
+            if (_json_.PrizeItemGroup === undefined) { throw new Error() }
+            { this.PrizeItemGroup = []; for (let _ele of _json_.PrizeItemGroup) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.PrizeItemGroup.push(_e); } }
+        }
+
+        /**
+         * 活动id
+         */
+        readonly id: number
+        /**
+         * 开启时间
+         */
+        readonly ActivityStartTime: number
+        /**
+         * 结束时间
+         */
+        readonly ActivityEndTime: number
+        readonly PrizeItemGroup: Item.ItemGroupBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.PrizeItemGroup) { if (_e != null) { _e.resolve(_tables); } }
+        }
+    }
+
+}
+
+export namespace Activity {
+    export class TActivityGiftCommond {
+        private _dataMap: Map<number, Activity.TActivityGiftCommondRecord>
+        private _dataList: Activity.TActivityGiftCommondRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Activity.TActivityGiftCommondRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Activity.TActivityGiftCommondRecord
+                _v = new Activity.TActivityGiftCommondRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Activity.TActivityGiftCommondRecord> { return this._dataMap; }
+        getDataList(): Activity.TActivityGiftCommondRecord[] { return this._dataList; }
+
+        get(key: number): Activity.TActivityGiftCommondRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
+    }
+}
+
+
+
+export namespace Activity {
+    export class TActivityGiftCommondRecord {
+
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.IsValid === undefined) { throw new Error() }
+            this.IsValid = _json_.IsValid
+            if (_json_.GiftCommond === undefined) { throw new Error() }
+            this.GiftCommond = _json_.GiftCommond
+            if (_json_.GiftCount === undefined) { throw new Error() }
+            this.GiftCount = _json_.GiftCount
+            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            this.ActivityStartTime = _json_.ActivityStartTime
+            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            this.ActivityEndTime = _json_.ActivityEndTime
+            if (_json_.ItemGroup === undefined) { throw new Error() }
+            { this.ItemGroup = []; for (let _ele of _json_.ItemGroup) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e); } }
+        }
+
+        /**
+         * 礼包Id
+         */
+        readonly id: number
+        /**
+         * 是否有效
+         */
+        readonly IsValid: number
+        /**
+         * 礼包口令
+         */
+        readonly GiftCommond: string
+        /**
+         * 礼包数量
+         */
+        readonly GiftCount: number
+        /**
+         * 开启时间
+         */
+        readonly ActivityStartTime: number
+        /**
+         * 结束时间
+         */
+        readonly ActivityEndTime: number
+        readonly ItemGroup: Item.ItemInfoBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.ItemGroup) { if (_e != null) { _e.resolve(_tables); } }
+        }
+    }
+
+}
+
+export namespace Activity {
+    export class TActivityMentorshipTree {
+        private _dataMap: Map<number, Activity.TActivityMentorshipTreeRecord>
+        private _dataList: Activity.TActivityMentorshipTreeRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Activity.TActivityMentorshipTreeRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Activity.TActivityMentorshipTreeRecord
+                _v = new Activity.TActivityMentorshipTreeRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Activity.TActivityMentorshipTreeRecord> { return this._dataMap; }
+        getDataList(): Activity.TActivityMentorshipTreeRecord[] { return this._dataList; }
+
+        get(key: number): Activity.TActivityMentorshipTreeRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
+    }
+}
+
+
+
+export namespace Activity {
+    export class TActivityMentorshipTreeRecord {
+
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.IsValid === undefined) { throw new Error() }
+            this.IsValid = _json_.IsValid
+            if (_json_.TreeLevel === undefined) { throw new Error() }
+            this.TreeLevel = _json_.TreeLevel
+            if (_json_.PrizeConditionType === undefined) { throw new Error() }
+            this.PrizeConditionType = _json_.PrizeConditionType
+            if (_json_.PrizeCondition === undefined) { throw new Error() }
+            this.PrizeCondition = _json_.PrizeCondition
+            if (_json_.ItemGroup === undefined) { throw new Error() }
+            { this.ItemGroup = []; for (let _ele of _json_.ItemGroup) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e); } }
+        }
+
+        /**
+         * 奖励Id
+         */
+        readonly id: number
+        /**
+         * 是否有效
+         */
+        readonly IsValid: number
+        /**
+         * 树奖励层级
+         */
+        readonly TreeLevel: number
+        /**
+         * 奖励条件类型
+         */
+        readonly PrizeConditionType: string
+        /**
+         * 奖励条件
+         */
+        readonly PrizeCondition: number
+        readonly ItemGroup: Item.ItemInfoBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.ItemGroup) { if (_e != null) { _e.resolve(_tables); } }
+        }
+    }
 
 }
 
 export namespace Hero {
-export class HeroLevelUpConfig{
-    private _dataMap: Map<number, Hero.HeroLevelUpConfigRecord>
-    private _dataList: Hero.HeroLevelUpConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Hero.HeroLevelUpConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Hero.HeroLevelUpConfigRecord
-            _v = new Hero.HeroLevelUpConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class HeroLevelUpConfig {
+        private _dataMap: Map<number, Hero.HeroLevelUpConfigRecord>
+        private _dataList: Hero.HeroLevelUpConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Hero.HeroLevelUpConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Hero.HeroLevelUpConfigRecord
+                _v = new Hero.HeroLevelUpConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
-    }
 
-    getDataMap(): Map<number, Hero.HeroLevelUpConfigRecord> { return this._dataMap; }
-    getDataList(): Hero.HeroLevelUpConfigRecord[] { return this._dataList; }
+        getDataMap(): Map<number, Hero.HeroLevelUpConfigRecord> { return this._dataMap; }
+        getDataList(): Hero.HeroLevelUpConfigRecord[] { return this._dataList; }
 
-    get(key: number): Hero.HeroLevelUpConfigRecord | undefined { return this._dataMap.get(key); }
+        get(key: number): Hero.HeroLevelUpConfigRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
         }
+
     }
-
-}
-}
-
-
-
-export namespace Hero {
-export class HeroLevelUpConfigRecord {
-
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.Exp === undefined) { throw new Error() }
-        this.Exp = _json_.Exp
-    }
-
-    /**
-     * 等级
-     */
-    readonly id: number
-    /**
-     * 所需经验
-     */
-    readonly Exp: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Hero {
-export class HeroConfig{
-    private _dataMap: Map<number, Hero.HeroConfigRecord>
-    private _dataList: Hero.HeroConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Hero.HeroConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Hero.HeroConfigRecord
-            _v = new Hero.HeroConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
-        }
-    }
-
-    getDataMap(): Map<number, Hero.HeroConfigRecord> { return this._dataMap; }
-    getDataList(): Hero.HeroConfigRecord[] { return this._dataList; }
-
-    get(key: number): Hero.HeroConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
-        }
-    }
-
-}
 }
 
 
 
 export namespace Hero {
-export class HeroConfigRecord {
+    export class HeroLevelUpConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.IsValid === undefined) { throw new Error() }
-        this.IsValid = _json_.IsValid
-        if (_json_.HeroName === undefined) { throw new Error() }
-        this.HeroName = _json_.HeroName
-        if (_json_.TalentInfo === undefined) { throw new Error() }
-        { this.TalentInfo = []; for(let _ele of _json_.TalentInfo) { let _e : Hero.HeroTalentInfoBean; _e = new Hero.HeroTalentInfoBean(_ele); this.TalentInfo.push(_e);}}
-    }
-
-    /**
-     * 英雄Id
-     */
-    readonly id: number
-    /**
-     * 是否启用
-     */
-    readonly IsValid: number
-    /**
-     * 英雄名字
-     */
-    readonly HeroName: string
-    readonly TalentInfo: Hero.HeroTalentInfoBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.TalentInfo) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-
-
-export namespace Hero {
-export class HeroTalentInfoBean {
-
-    constructor(_json_: any) {
-        if (_json_.TalentLevel === undefined) { throw new Error() }
-        this.TalentLevel = _json_.TalentLevel
-        if (_json_.TalentGroup === undefined) { throw new Error() }
-        this.TalentGroup = _json_.TalentGroup
-    }
-
-    /**
-     * 天赋等级
-     */
-    readonly TalentLevel: number
-    /**
-     * 天赋组
-     */
-    readonly TalentGroup: number[]
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Hero {
-export class HeroTalentConfig{
-    private _dataMap: Map<number, Hero.HeroTalentConfigRecord>
-    private _dataList: Hero.HeroTalentConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Hero.HeroTalentConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Hero.HeroTalentConfigRecord
-            _v = new Hero.HeroTalentConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.Exp === undefined) { throw new Error() }
+            this.Exp = _json_.Exp
         }
-    }
 
-    getDataMap(): Map<number, Hero.HeroTalentConfigRecord> { return this._dataMap; }
-    getDataList(): Hero.HeroTalentConfigRecord[] { return this._dataList; }
+        /**
+         * 等级
+         */
+        readonly id: number
+        /**
+         * 所需经验
+         */
+        readonly Exp: number
 
-    get(key: number): Hero.HeroTalentConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
         }
     }
 
 }
+
+export namespace Hero {
+    export class HeroConfig {
+        private _dataMap: Map<number, Hero.HeroConfigRecord>
+        private _dataList: Hero.HeroConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Hero.HeroConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Hero.HeroConfigRecord
+                _v = new Hero.HeroConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Hero.HeroConfigRecord> { return this._dataMap; }
+        getDataList(): Hero.HeroConfigRecord[] { return this._dataList; }
+
+        get(key: number): Hero.HeroConfigRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
+    }
 }
 
 
 
 export namespace Hero {
-export class HeroTalentConfigRecord {
+    export class HeroConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.TalentName === undefined) { throw new Error() }
-        this.TalentName = _json_.TalentName
-        if (_json_.NeedTalentPoint === undefined) { throw new Error() }
-        this.NeedTalentPoint = _json_.NeedTalentPoint
-        if (_json_.TalentBuffs === undefined) { throw new Error() }
-        this.TalentBuffs = _json_.TalentBuffs
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.IsValid === undefined) { throw new Error() }
+            this.IsValid = _json_.IsValid
+            if (_json_.HeroName === undefined) { throw new Error() }
+            this.HeroName = _json_.HeroName
+            if (_json_.TalentInfo === undefined) { throw new Error() }
+            { this.TalentInfo = []; for (let _ele of _json_.TalentInfo) { let _e: Hero.HeroTalentInfoBean; _e = new Hero.HeroTalentInfoBean(_ele); this.TalentInfo.push(_e); } }
+        }
+
+        /**
+         * 英雄Id
+         */
+        readonly id: number
+        /**
+         * 是否启用
+         */
+        readonly IsValid: number
+        /**
+         * 英雄名字
+         */
+        readonly HeroName: string
+        readonly TalentInfo: Hero.HeroTalentInfoBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.TalentInfo) { if (_e != null) { _e.resolve(_tables); } }
+        }
     }
 
-    /**
-     * 天赋Id
-     */
-    readonly id: number
-    /**
-     * 天赋名称
-     */
-    readonly TalentName: string
-    /**
-     * 消耗天赋点
-     */
-    readonly NeedTalentPoint: number
-    /**
-     * 天赋Buff
-     */
-    readonly TalentBuffs: number[]
+}
 
-    resolve(_tables: Map<string, any>) {
+
+
+export namespace Hero {
+    export class HeroTalentInfoBean {
+
+        constructor(_json_: any) {
+            if (_json_.TalentLevel === undefined) { throw new Error() }
+            this.TalentLevel = _json_.TalentLevel
+            if (_json_.TalentGroup === undefined) { throw new Error() }
+            this.TalentGroup = _json_.TalentGroup
+        }
+
+        /**
+         * 天赋等级
+         */
+        readonly TalentLevel: number
+        /**
+         * 天赋组
+         */
+        readonly TalentGroup: number[]
+
+        resolve(_tables: Map<string, any>) {
+        }
+    }
+
+}
+
+export namespace Hero {
+    export class HeroTalentConfig {
+        private _dataMap: Map<number, Hero.HeroTalentConfigRecord>
+        private _dataList: Hero.HeroTalentConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Hero.HeroTalentConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Hero.HeroTalentConfigRecord
+                _v = new Hero.HeroTalentConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Hero.HeroTalentConfigRecord> { return this._dataMap; }
+        getDataList(): Hero.HeroTalentConfigRecord[] { return this._dataList; }
+
+        get(key: number): Hero.HeroTalentConfigRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
     }
 }
+
+
+
+export namespace Hero {
+    export class HeroTalentConfigRecord {
+
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.TalentName === undefined) { throw new Error() }
+            this.TalentName = _json_.TalentName
+            if (_json_.NeedTalentPoint === undefined) { throw new Error() }
+            this.NeedTalentPoint = _json_.NeedTalentPoint
+            if (_json_.TalentBuffs === undefined) { throw new Error() }
+            this.TalentBuffs = _json_.TalentBuffs
+        }
+
+        /**
+         * 天赋Id
+         */
+        readonly id: number
+        /**
+         * 天赋名称
+         */
+        readonly TalentName: string
+        /**
+         * 消耗天赋点
+         */
+        readonly NeedTalentPoint: number
+        /**
+         * 天赋Buff
+         */
+        readonly TalentBuffs: number[]
+
+        resolve(_tables: Map<string, any>) {
+        }
+    }
 
 }
 
 export namespace Season {
-export class SeasonConfig{
-    private _dataMap: Map<number, Season.SeasonConfigRecord>
-    private _dataList: Season.SeasonConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Season.SeasonConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Season.SeasonConfigRecord
-            _v = new Season.SeasonConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class SeasonConfig {
+        private _dataMap: Map<number, Season.SeasonConfigRecord>
+        private _dataList: Season.SeasonConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Season.SeasonConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Season.SeasonConfigRecord
+                _v = new Season.SeasonConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
-    }
 
-    getDataMap(): Map<number, Season.SeasonConfigRecord> { return this._dataMap; }
-    getDataList(): Season.SeasonConfigRecord[] { return this._dataList; }
+        getDataMap(): Map<number, Season.SeasonConfigRecord> { return this._dataMap; }
+        getDataList(): Season.SeasonConfigRecord[] { return this._dataList; }
 
-    get(key: number): Season.SeasonConfigRecord | undefined { return this._dataMap.get(key); }
+        get(key: number): Season.SeasonConfigRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
         }
-    }
 
-}
+    }
 }
 
 
 
 export namespace Season {
-export class SeasonConfigRecord {
+    export class SeasonConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.SeasonName === undefined) { throw new Error() }
-        this.SeasonName = _json_.SeasonName
-        if (_json_.SeasonStartTime === undefined) { throw new Error() }
-        this.SeasonStartTime = _json_.SeasonStartTime
-        if (_json_.SeasonEndTime === undefined) { throw new Error() }
-        this.SeasonEndTime = _json_.SeasonEndTime
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.SeasonName === undefined) { throw new Error() }
+            this.SeasonName = _json_.SeasonName
+            if (_json_.SeasonStartTime === undefined) { throw new Error() }
+            this.SeasonStartTime = _json_.SeasonStartTime
+            if (_json_.SeasonEndTime === undefined) { throw new Error() }
+            this.SeasonEndTime = _json_.SeasonEndTime
+        }
+
+        /**
+         * 赛季id
+         */
+        readonly id: number
+        /**
+         * 赛季名称
+         */
+        readonly SeasonName: string
+        /**
+         * 赛季开始时间
+         */
+        readonly SeasonStartTime: number
+        /**
+         * 赛季结束时间
+         */
+        readonly SeasonEndTime: number
+
+        resolve(_tables: Map<string, any>) {
+        }
     }
-
-    /**
-     * 赛季id
-     */
-    readonly id: number
-    /**
-     * 赛季名称
-     */
-    readonly SeasonName: string
-    /**
-     * 赛季开始时间
-     */
-    readonly SeasonStartTime: number
-    /**
-     * 赛季结束时间
-     */
-    readonly SeasonEndTime: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
 
 }
 
 export namespace Rank {
-export class RankPrizeConfig{
-    private _dataMap: Map<number, Rank.RankPrizeConfigRecord>
-    private _dataList: Rank.RankPrizeConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Rank.RankPrizeConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Rank.RankPrizeConfigRecord
-            _v = new Rank.RankPrizeConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class RankPrizeConfig {
+        private _dataMap: Map<number, Rank.RankPrizeConfigRecord>
+        private _dataList: Rank.RankPrizeConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Rank.RankPrizeConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Rank.RankPrizeConfigRecord
+                _v = new Rank.RankPrizeConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
-    }
 
-    getDataMap(): Map<number, Rank.RankPrizeConfigRecord> { return this._dataMap; }
-    getDataList(): Rank.RankPrizeConfigRecord[] { return this._dataList; }
+        getDataMap(): Map<number, Rank.RankPrizeConfigRecord> { return this._dataMap; }
+        getDataList(): Rank.RankPrizeConfigRecord[] { return this._dataList; }
 
-    get(key: number): Rank.RankPrizeConfigRecord | undefined { return this._dataMap.get(key); }
+        get(key: number): Rank.RankPrizeConfigRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
         }
-    }
 
-}
+    }
 }
 
 
 
 export namespace Rank {
-export class RankPrizeConfigRecord {
+    export class RankPrizeConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.SeasonPrizeItemGroup === undefined) { throw new Error() }
-        { this.SeasonPrizeItemGroup = []; for(let _ele of _json_.SeasonPrizeItemGroup) { let _e : Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.SeasonPrizeItemGroup.push(_e);}}
-        if (_json_.DailyPrizeItemGroup === undefined) { throw new Error() }
-        { this.DailyPrizeItemGroup = []; for(let _ele of _json_.DailyPrizeItemGroup) { let _e : Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.DailyPrizeItemGroup.push(_e);}}
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.SeasonPrizeItemGroup === undefined) { throw new Error() }
+            { this.SeasonPrizeItemGroup = []; for (let _ele of _json_.SeasonPrizeItemGroup) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.SeasonPrizeItemGroup.push(_e); } }
+            if (_json_.DailyPrizeItemGroup === undefined) { throw new Error() }
+            { this.DailyPrizeItemGroup = []; for (let _ele of _json_.DailyPrizeItemGroup) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.DailyPrizeItemGroup.push(_e); } }
+        }
+
+        /**
+         * 排行id
+         */
+        readonly id: number
+        readonly SeasonPrizeItemGroup: Item.ItemGroupBean[]
+        readonly DailyPrizeItemGroup: Item.ItemGroupBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.SeasonPrizeItemGroup) { if (_e != null) { _e.resolve(_tables); } }
+            for (let _e of this.DailyPrizeItemGroup) { if (_e != null) { _e.resolve(_tables); } }
+        }
     }
-
-    /**
-     * 排行id
-     */
-    readonly id: number
-    readonly SeasonPrizeItemGroup: Item.ItemGroupBean[]
-    readonly DailyPrizeItemGroup: Item.ItemGroupBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.SeasonPrizeItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-        for(let _e of this.DailyPrizeItemGroup) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
 
 }
 
 export namespace Draw {
-export class DrawTreasureConfig{
-    private _dataMap: Map<number, Draw.DrawTreasureConfigRecord>
-    private _dataList: Draw.DrawTreasureConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Draw.DrawTreasureConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Draw.DrawTreasureConfigRecord
-            _v = new Draw.DrawTreasureConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class DrawTreasureConfig {
+        private _dataMap: Map<number, Draw.DrawTreasureConfigRecord>
+        private _dataList: Draw.DrawTreasureConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Draw.DrawTreasureConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Draw.DrawTreasureConfigRecord
+                _v = new Draw.DrawTreasureConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
-    }
 
-    getDataMap(): Map<number, Draw.DrawTreasureConfigRecord> { return this._dataMap; }
-    getDataList(): Draw.DrawTreasureConfigRecord[] { return this._dataList; }
+        getDataMap(): Map<number, Draw.DrawTreasureConfigRecord> { return this._dataMap; }
+        getDataList(): Draw.DrawTreasureConfigRecord[] { return this._dataList; }
 
-    get(key: number): Draw.DrawTreasureConfigRecord | undefined { return this._dataMap.get(key); }
+        get(key: number): Draw.DrawTreasureConfigRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
         }
-    }
 
-}
+    }
 }
 
 
 
 export namespace Draw {
-export class DrawTreasureConfigRecord {
+    export class DrawTreasureConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.CostType === undefined) { throw new Error() }
-        this.CostType = _json_.CostType
-        if (_json_.RealPrice === undefined) { throw new Error() }
-        this.RealPrice = _json_.RealPrice
-        if (_json_.FreeInterval === undefined) { throw new Error() }
-        this.FreeInterval = _json_.FreeInterval
-        if (_json_.SpePrizeTimes === undefined) { throw new Error() }
-        this.SpePrizeTimes = _json_.SpePrizeTimes
-        if (_json_.ComItemPoolGroup === undefined) { throw new Error() }
-        this.ComItemPoolGroup = _json_.ComItemPoolGroup
-        if (_json_.SpeItemPoolGroup === undefined) { throw new Error() }
-        this.SpeItemPoolGroup = _json_.SpeItemPoolGroup
-    }
-
-    /**
-     * 宝箱id
-     */
-    readonly id: number
-    /**
-     * 货币类型
-     */
-    readonly CostType: number
-    /**
-     * 货币数量
-     */
-    readonly RealPrice: number
-    /**
-     * 免费时间间隔(s)
-     */
-    readonly FreeInterval: number
-    /**
-     * 干涉次数
-     */
-    readonly SpePrizeTimes: number
-    /**
-     * 普通奖池组
-     */
-    readonly ComItemPoolGroup: number
-    /**
-     * 特殊奖池组
-     */
-    readonly SpeItemPoolGroup: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
-
-}
-
-export namespace Task {
-export class TaskConfig{
-    private _dataMap: Map<number, Task.TaskConfigRecord>
-    private _dataList: Task.TaskConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Task.TaskConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Task.TaskConfigRecord
-            _v = new Task.TaskConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.CostType === undefined) { throw new Error() }
+            this.CostType = _json_.CostType
+            if (_json_.RealPrice === undefined) { throw new Error() }
+            this.RealPrice = _json_.RealPrice
+            if (_json_.FreeInterval === undefined) { throw new Error() }
+            this.FreeInterval = _json_.FreeInterval
+            if (_json_.SpePrizeTimes === undefined) { throw new Error() }
+            this.SpePrizeTimes = _json_.SpePrizeTimes
+            if (_json_.ComItemPoolGroup === undefined) { throw new Error() }
+            this.ComItemPoolGroup = _json_.ComItemPoolGroup
+            if (_json_.SpeItemPoolGroup === undefined) { throw new Error() }
+            this.SpeItemPoolGroup = _json_.SpeItemPoolGroup
         }
-    }
 
-    getDataMap(): Map<number, Task.TaskConfigRecord> { return this._dataMap; }
-    getDataList(): Task.TaskConfigRecord[] { return this._dataList; }
+        /**
+         * 宝箱id
+         */
+        readonly id: number
+        /**
+         * 货币类型
+         */
+        readonly CostType: number
+        /**
+         * 货币数量
+         */
+        readonly RealPrice: number
+        /**
+         * 免费时间间隔(s)
+         */
+        readonly FreeInterval: number
+        /**
+         * 干涉次数
+         */
+        readonly SpePrizeTimes: number
+        /**
+         * 普通奖池组
+         */
+        readonly ComItemPoolGroup: number
+        /**
+         * 特殊奖池组
+         */
+        readonly SpeItemPoolGroup: number
 
-    get(key: number): Task.TaskConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
         }
     }
 
 }
+
+export namespace Task {
+    export class TaskConfig {
+        private _dataMap: Map<number, Task.TaskConfigRecord>
+        private _dataList: Task.TaskConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Task.TaskConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Task.TaskConfigRecord
+                _v = new Task.TaskConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Task.TaskConfigRecord> { return this._dataMap; }
+        getDataList(): Task.TaskConfigRecord[] { return this._dataList; }
+
+        get(key: number): Task.TaskConfigRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
+    }
 }
 
 
 
 export namespace Task {
-export class TaskConfigRecord {
+    export class TaskConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.TaskName === undefined) { throw new Error() }
-        this.TaskName = _json_.TaskName
-        if (_json_.TaskDes === undefined) { throw new Error() }
-        this.TaskDes = _json_.TaskDes
-        if (_json_.TaskType === undefined) { throw new Error() }
-        this.TaskType = _json_.TaskType
-        if (_json_.TaskFinishType === undefined) { throw new Error() }
-        this.TaskFinishType = _json_.TaskFinishType
-        if (_json_.TaskFinishCondition === undefined) { throw new Error() }
-        { this.TaskFinishCondition = []; for(let _ele of _json_.TaskFinishCondition) { let _e : Task.TaskFinishConditionBean; _e = new Task.TaskFinishConditionBean(_ele); this.TaskFinishCondition.push(_e);}}
-        if (_json_.TaskPrize === undefined) { throw new Error() }
-        { this.TaskPrize = []; for(let _ele of _json_.TaskPrize) { let _e : Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.TaskPrize.push(_e);}}
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.TaskName === undefined) { throw new Error() }
+            this.TaskName = _json_.TaskName
+            if (_json_.TaskDes === undefined) { throw new Error() }
+            this.TaskDes = _json_.TaskDes
+            if (_json_.TaskType === undefined) { throw new Error() }
+            this.TaskType = _json_.TaskType
+            if (_json_.TaskFinishType === undefined) { throw new Error() }
+            this.TaskFinishType = _json_.TaskFinishType
+            if (_json_.TaskFinishCondition === undefined) { throw new Error() }
+            { this.TaskFinishCondition = []; for (let _ele of _json_.TaskFinishCondition) { let _e: Task.TaskFinishConditionBean; _e = new Task.TaskFinishConditionBean(_ele); this.TaskFinishCondition.push(_e); } }
+            if (_json_.TaskPrize === undefined) { throw new Error() }
+            { this.TaskPrize = []; for (let _ele of _json_.TaskPrize) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.TaskPrize.push(_e); } }
+        }
+
+        /**
+         * 任务id
+         */
+        readonly id: number
+        /**
+         * 任务名称
+         */
+        readonly TaskName: string
+        /**
+         * 任务描述
+         */
+        readonly TaskDes: string
+        /**
+         * 任务类型
+         */
+        readonly TaskType: string
+        /**
+         * 任务完成类型
+         */
+        readonly TaskFinishType: string
+        readonly TaskFinishCondition: Task.TaskFinishConditionBean[]
+        readonly TaskPrize: Item.ItemInfoBean[]
+
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.TaskFinishCondition) { if (_e != null) { _e.resolve(_tables); } }
+            for (let _e of this.TaskPrize) { if (_e != null) { _e.resolve(_tables); } }
+        }
     }
-
-    /**
-     * 任务id
-     */
-    readonly id: number
-    /**
-     * 任务名称
-     */
-    readonly TaskName: string
-    /**
-     * 任务描述
-     */
-    readonly TaskDes: string
-    /**
-     * 任务类型
-     */
-    readonly TaskType: string
-    /**
-     * 任务完成类型
-     */
-    readonly TaskFinishType: string
-    readonly TaskFinishCondition: Task.TaskFinishConditionBean[]
-    readonly TaskPrize: Item.ItemInfoBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.TaskFinishCondition) { if (_e != null ) {_e.resolve(_tables);} }
-        for(let _e of this.TaskPrize) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
 
 }
 
 
 
 export namespace Task {
-export class TaskFinishConditionBean {
+    export class TaskFinishConditionBean {
 
-    constructor(_json_: any) {
-        if (_json_.KeyString === undefined) { throw new Error() }
-        this.KeyString = _json_.KeyString
-        if (_json_.ValueInt === undefined) { throw new Error() }
-        this.ValueInt = _json_.ValueInt
+        constructor(_json_: any) {
+            if (_json_.KeyString === undefined) { throw new Error() }
+            this.KeyString = _json_.KeyString
+            if (_json_.ValueInt === undefined) { throw new Error() }
+            this.ValueInt = _json_.ValueInt
+        }
+
+        /**
+         * 条件Key
+         */
+        readonly KeyString: string
+        /**
+         * 条件Value
+         */
+        readonly ValueInt: number
+
+        resolve(_tables: Map<string, any>) {
+        }
     }
-
-    /**
-     * 条件Key
-     */
-    readonly KeyString: string
-    /**
-     * 条件Value
-     */
-    readonly ValueInt: number
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
 
 }
 
 export namespace Achievement {
-export class AchievementConfig{
-    private _dataMap: Map<number, Achievement.AchievementConfigRecord>
-    private _dataList: Achievement.AchievementConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Achievement.AchievementConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Achievement.AchievementConfigRecord
-            _v = new Achievement.AchievementConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+    export class AchievementConfig {
+        private _dataMap: Map<number, Achievement.AchievementConfigRecord>
+        private _dataList: Achievement.AchievementConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Achievement.AchievementConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Achievement.AchievementConfigRecord
+                _v = new Achievement.AchievementConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
         }
-    }
 
-    getDataMap(): Map<number, Achievement.AchievementConfigRecord> { return this._dataMap; }
-    getDataList(): Achievement.AchievementConfigRecord[] { return this._dataList; }
+        getDataMap(): Map<number, Achievement.AchievementConfigRecord> { return this._dataMap; }
+        getDataList(): Achievement.AchievementConfigRecord[] { return this._dataList; }
 
-    get(key: number): Achievement.AchievementConfigRecord | undefined { return this._dataMap.get(key); }
+        get(key: number): Achievement.AchievementConfigRecord | undefined { return this._dataMap.get(key); }
 
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
         }
-    }
 
-}
+    }
 }
 
 
 
 export namespace Achievement {
-export class AchievementConfigRecord {
+    export class AchievementConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.Index === undefined) { throw new Error() }
-        this.Index = _json_.Index
-        if (_json_.NextId === undefined) { throw new Error() }
-        this.NextId = _json_.NextId
-        if (_json_.AchievementName === undefined) { throw new Error() }
-        this.AchievementName = _json_.AchievementName
-        if (_json_.AchievementDes === undefined) { throw new Error() }
-        this.AchievementDes = _json_.AchievementDes
-        if (_json_.AchievementType === undefined) { throw new Error() }
-        this.AchievementType = _json_.AchievementType
-        if (_json_.AchievementFinishType === undefined) { throw new Error() }
-        this.AchievementFinishType = _json_.AchievementFinishType
-        if (_json_.AchieveFinishCondition === undefined) { throw new Error() }
-        { this.AchieveFinishCondition = []; for(let _ele of _json_.AchieveFinishCondition) { let _e : Task.TaskFinishConditionBean; _e = new Task.TaskFinishConditionBean(_ele); this.AchieveFinishCondition.push(_e);}}
-        if (_json_.AchievePrize === undefined) { throw new Error() }
-        { this.AchievePrize = []; for(let _ele of _json_.AchievePrize) { let _e : Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.AchievePrize.push(_e);}}
-    }
-
-    /**
-     * 成就id
-     */
-    readonly id: number
-    /**
-     * 组内索引
-     */
-    readonly Index: number
-    /**
-     * 组内下一个成就id
-     */
-    readonly NextId: number
-    /**
-     * 成就名称
-     */
-    readonly AchievementName: string
-    /**
-     * 成就描述
-     */
-    readonly AchievementDes: string
-    /**
-     * 成就类型
-     */
-    readonly AchievementType: string
-    /**
-     * 成就完成类型
-     */
-    readonly AchievementFinishType: string
-    readonly AchieveFinishCondition: Task.TaskFinishConditionBean[]
-    readonly AchievePrize: Item.ItemInfoBean[]
-
-    resolve(_tables: Map<string, any>) {
-        for(let _e of this.AchieveFinishCondition) { if (_e != null ) {_e.resolve(_tables);} }
-        for(let _e of this.AchievePrize) { if (_e != null ) {_e.resolve(_tables);} }
-    }
-}
-
-}
-
-export namespace Title {
-export class TitleConfig{
-    private _dataMap: Map<number, Title.TitleConfigRecord>
-    private _dataList: Title.TitleConfigRecord[]
-    constructor(_json_: any) {
-        this._dataMap = new Map<number, Title.TitleConfigRecord>()
-        this._dataList = []
-        for(let _json2_ of _json_) {
-            let _v: Title.TitleConfigRecord
-            _v = new Title.TitleConfigRecord(_json2_)
-            this._dataList.push(_v)
-            this._dataMap.set(_v.id, _v)
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.Index === undefined) { throw new Error() }
+            this.Index = _json_.Index
+            if (_json_.NextId === undefined) { throw new Error() }
+            this.NextId = _json_.NextId
+            if (_json_.AchievementName === undefined) { throw new Error() }
+            this.AchievementName = _json_.AchievementName
+            if (_json_.AchievementDes === undefined) { throw new Error() }
+            this.AchievementDes = _json_.AchievementDes
+            if (_json_.AchievementType === undefined) { throw new Error() }
+            this.AchievementType = _json_.AchievementType
+            if (_json_.AchievementFinishType === undefined) { throw new Error() }
+            this.AchievementFinishType = _json_.AchievementFinishType
+            if (_json_.AchieveFinishCondition === undefined) { throw new Error() }
+            { this.AchieveFinishCondition = []; for (let _ele of _json_.AchieveFinishCondition) { let _e: Task.TaskFinishConditionBean; _e = new Task.TaskFinishConditionBean(_ele); this.AchieveFinishCondition.push(_e); } }
+            if (_json_.AchievePrize === undefined) { throw new Error() }
+            { this.AchievePrize = []; for (let _ele of _json_.AchievePrize) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.AchievePrize.push(_e); } }
         }
-    }
 
-    getDataMap(): Map<number, Title.TitleConfigRecord> { return this._dataMap; }
-    getDataList(): Title.TitleConfigRecord[] { return this._dataList; }
+        /**
+         * 成就id
+         */
+        readonly id: number
+        /**
+         * 组内索引
+         */
+        readonly Index: number
+        /**
+         * 组内下一个成就id
+         */
+        readonly NextId: number
+        /**
+         * 成就名称
+         */
+        readonly AchievementName: string
+        /**
+         * 成就描述
+         */
+        readonly AchievementDes: string
+        /**
+         * 成就类型
+         */
+        readonly AchievementType: string
+        /**
+         * 成就完成类型
+         */
+        readonly AchievementFinishType: string
+        readonly AchieveFinishCondition: Task.TaskFinishConditionBean[]
+        readonly AchievePrize: Item.ItemInfoBean[]
 
-    get(key: number): Title.TitleConfigRecord | undefined { return this._dataMap.get(key); }
-
-    resolve(_tables: Map<string, any>) {
-        for(let v of this._dataList) {
-            v.resolve(_tables)
+        resolve(_tables: Map<string, any>) {
+            for (let _e of this.AchieveFinishCondition) { if (_e != null) { _e.resolve(_tables); } }
+            for (let _e of this.AchievePrize) { if (_e != null) { _e.resolve(_tables); } }
         }
     }
 
 }
+
+export namespace Title {
+    export class TitleConfig {
+        private _dataMap: Map<number, Title.TitleConfigRecord>
+        private _dataList: Title.TitleConfigRecord[]
+        constructor(_json_: any[]) {
+            this._dataMap = new Map<number, Title.TitleConfigRecord>()
+            this._dataList = []
+            for (let _json2_ of _json_) {
+                let _v: Title.TitleConfigRecord
+                _v = new Title.TitleConfigRecord(_json2_)
+                this._dataList.push(_v)
+                this._dataMap.set(_v.id, _v)
+            }
+        }
+
+        getDataMap(): Map<number, Title.TitleConfigRecord> { return this._dataMap; }
+        getDataList(): Title.TitleConfigRecord[] { return this._dataList; }
+
+        get(key: number): Title.TitleConfigRecord | undefined { return this._dataMap.get(key); }
+
+        resolve(_tables: Map<string, any>) {
+            for (let v of this._dataList) {
+                v.resolve(_tables)
+            }
+        }
+
+    }
 }
 
 
 
 export namespace Title {
-export class TitleConfigRecord {
+    export class TitleConfigRecord {
 
-    constructor(_json_: any) {
-        if (_json_.id === undefined) { throw new Error() }
-        this.id = _json_.id
-        if (_json_.TitleName === undefined) { throw new Error() }
-        this.TitleName = _json_.TitleName
-        if (_json_.TitleType === undefined) { throw new Error() }
-        this.TitleType = _json_.TitleType
-        if (_json_.TitleValidTime === undefined) { throw new Error() }
-        this.TitleValidTime = _json_.TitleValidTime
-        if (_json_.TitleBuffs === undefined) { throw new Error() }
-        this.TitleBuffs = _json_.TitleBuffs
+        constructor(_json_: any) {
+            if (_json_.id === undefined) { throw new Error() }
+            this.id = _json_.id
+            if (_json_.TitleName === undefined) { throw new Error() }
+            this.TitleName = _json_.TitleName
+            if (_json_.TitleType === undefined) { throw new Error() }
+            this.TitleType = _json_.TitleType
+            if (_json_.TitleValidTime === undefined) { throw new Error() }
+            this.TitleValidTime = _json_.TitleValidTime
+            if (_json_.TitleBuffs === undefined) { throw new Error() }
+            this.TitleBuffs = _json_.TitleBuffs
+        }
+
+        /**
+         * 称号Id
+         */
+        readonly id: number
+        /**
+         * 称号名称
+         */
+        readonly TitleName: string
+        /**
+         * 称号类型
+         */
+        readonly TitleType: number
+        /**
+         * 称号有效时间
+         */
+        readonly TitleValidTime: number
+        /**
+         * 称号Buff
+         */
+        readonly TitleBuffs: number[]
+
+        resolve(_tables: Map<string, any>) {
+        }
     }
-
-    /**
-     * 称号Id
-     */
-    readonly id: number
-    /**
-     * 称号名称
-     */
-    readonly TitleName: string
-    /**
-     * 称号类型
-     */
-    readonly TitleType: number
-    /**
-     * 称号有效时间
-     */
-    readonly TitleValidTime: number
-    /**
-     * 称号Buff
-     */
-    readonly TitleBuffs: number[]
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
 
 }
 
 export namespace Glob {
-export class GlobalSetting{
+    export class GlobalSetting {
 
-     private _data: Glob.GlobalSettingRecord
-    constructor(_json_: any) {
-        if (_json_.length != 1) throw new Error('table mode=one, but size != 1')
-        this._data = new Glob.GlobalSettingRecord(_json_[0])
+        private _data: Glob.GlobalSettingRecord
+        constructor(_json_: any[]) {
+            if (_json_.length != 1) throw new Error('table mode=one, but size != 1')
+            this._data = new Glob.GlobalSettingRecord(_json_[0])
+        }
+
+        getData(): Glob.GlobalSettingRecord { return this._data; }
+
+        /**
+         * desc1
+         */
+        get guildOpenLevel(): number { return this._data.guildOpenLevel; }
+        /**
+         * desc2
+         */
+        get bagInitCapacity(): number { return this._data.bagInitCapacity; }
+        /**
+         * desc3
+         */
+        get bagMaxCapacity(): number { return this._data.bagMaxCapacity; }
+        /**
+         * desc4
+         */
+        get newbieTasks(): number[] { return this._data.newbieTasks; }
+
+        resolve(_tables: Map<string, any>) {
+            this._data.resolve(_tables)
+        }
+
+
     }
-
-    getData(): Glob.GlobalSettingRecord { return this._data; }
-
-    /**
-     * desc1
-     */
-     get  guildOpenLevel(): number { return this._data.guildOpenLevel; }
-    /**
-     * desc2
-     */
-     get  bagInitCapacity(): number { return this._data.bagInitCapacity; }
-    /**
-     * desc3
-     */
-     get  bagMaxCapacity(): number { return this._data.bagMaxCapacity; }
-    /**
-     * desc4
-     */
-     get  newbieTasks(): number[] { return this._data.newbieTasks; }
-
-    resolve(_tables: Map<string, any>) {
-        this._data.resolve(_tables)
-    }
-
-    
-}
 }
 
 
 
 export namespace Glob {
-export class GlobalSettingRecord {
+    export class GlobalSettingRecord {
 
-    constructor(_json_: any) {
-        if (_json_.guild_open_level === undefined) { throw new Error() }
-        this.guildOpenLevel = _json_.guild_open_level
-        if (_json_.bag_init_capacity === undefined) { throw new Error() }
-        this.bagInitCapacity = _json_.bag_init_capacity
-        if (_json_.bag_max_capacity === undefined) { throw new Error() }
-        this.bagMaxCapacity = _json_.bag_max_capacity
-        if (_json_.newbie_tasks === undefined) { throw new Error() }
-        this.newbieTasks = _json_.newbie_tasks
+        constructor(_json_: any) {
+            if (_json_.guild_open_level === undefined) { throw new Error() }
+            this.guildOpenLevel = _json_.guild_open_level
+            if (_json_.bag_init_capacity === undefined) { throw new Error() }
+            this.bagInitCapacity = _json_.bag_init_capacity
+            if (_json_.bag_max_capacity === undefined) { throw new Error() }
+            this.bagMaxCapacity = _json_.bag_max_capacity
+            if (_json_.newbie_tasks === undefined) { throw new Error() }
+            this.newbieTasks = _json_.newbie_tasks
+        }
+
+        /**
+         * desc1
+         */
+        readonly guildOpenLevel: number
+        /**
+         * desc2
+         */
+        readonly bagInitCapacity: number
+        /**
+         * desc3
+         */
+        readonly bagMaxCapacity: number
+        /**
+         * desc4
+         */
+        readonly newbieTasks: number[]
+
+        resolve(_tables: Map<string, any>) {
+        }
     }
-
-    /**
-     * desc1
-     */
-    readonly guildOpenLevel: number
-    /**
-     * desc2
-     */
-    readonly bagInitCapacity: number
-    /**
-     * desc3
-     */
-    readonly bagMaxCapacity: number
-    /**
-     * desc4
-     */
-    readonly newbieTasks: number[]
-
-    resolve(_tables: Map<string, any>) {
-    }
-}
 
 }
 
@@ -2976,65 +2976,65 @@ type JsonLoader = (file: string) => any
 
 export class Tables {
     private _ItemConfig: Item.ItemConfig
-    get ItemConfig(): Item.ItemConfig  { return this._ItemConfig;}
+    get ItemConfig(): Item.ItemConfig { return this._ItemConfig; }
     private _ItemEquipConfig: Item.ItemEquipConfig
-    get ItemEquipConfig(): Item.ItemEquipConfig  { return this._ItemEquipConfig;}
+    get ItemEquipConfig(): Item.ItemEquipConfig { return this._ItemEquipConfig; }
     private _ItemBuffConfig: Item.ItemBuffConfig
-    get ItemBuffConfig(): Item.ItemBuffConfig  { return this._ItemBuffConfig;}
+    get ItemBuffConfig(): Item.ItemBuffConfig { return this._ItemBuffConfig; }
     private _ItemPrizePoolConfig: Item.ItemPrizePoolConfig
-    get ItemPrizePoolConfig(): Item.ItemPrizePoolConfig  { return this._ItemPrizePoolConfig;}
+    get ItemPrizePoolConfig(): Item.ItemPrizePoolConfig { return this._ItemPrizePoolConfig; }
     private _ItemPrizePoolGroupConfig: Item.ItemPrizePoolGroupConfig
-    get ItemPrizePoolGroupConfig(): Item.ItemPrizePoolGroupConfig  { return this._ItemPrizePoolGroupConfig;}
+    get ItemPrizePoolGroupConfig(): Item.ItemPrizePoolGroupConfig { return this._ItemPrizePoolGroupConfig; }
     private _ShopConfig: Shop.ShopConfig
-    get ShopConfig(): Shop.ShopConfig  { return this._ShopConfig;}
+    get ShopConfig(): Shop.ShopConfig { return this._ShopConfig; }
     private _PropConfig: Prop.PropConfig
-    get PropConfig(): Prop.PropConfig  { return this._PropConfig;}
+    get PropConfig(): Prop.PropConfig { return this._PropConfig; }
     private _RandomPropConfig: Prop.RandomPropConfig
-    get RandomPropConfig(): Prop.RandomPropConfig  { return this._RandomPropConfig;}
+    get RandomPropConfig(): Prop.RandomPropConfig { return this._RandomPropConfig; }
     private _ActivityConfig: Activity.ActivityConfig
-    get ActivityConfig(): Activity.ActivityConfig  { return this._ActivityConfig;}
+    get ActivityConfig(): Activity.ActivityConfig { return this._ActivityConfig; }
     private _TActivityMonthLogin: Activity.TActivityMonthLogin
-    get TActivityMonthLogin(): Activity.TActivityMonthLogin  { return this._TActivityMonthLogin;}
+    get TActivityMonthLogin(): Activity.TActivityMonthLogin { return this._TActivityMonthLogin; }
     private _TActivitySevenDayLogin: Activity.TActivitySevenDayLogin
-    get TActivitySevenDayLogin(): Activity.TActivitySevenDayLogin  { return this._TActivitySevenDayLogin;}
+    get TActivitySevenDayLogin(): Activity.TActivitySevenDayLogin { return this._TActivitySevenDayLogin; }
     private _TActivityBattlePass: Activity.TActivityBattlePass
-    get TActivityBattlePass(): Activity.TActivityBattlePass  { return this._TActivityBattlePass;}
+    get TActivityBattlePass(): Activity.TActivityBattlePass { return this._TActivityBattlePass; }
     private _TActivityHeroRecordLevel: Activity.TActivityHeroRecordLevel
-    get TActivityHeroRecordLevel(): Activity.TActivityHeroRecordLevel  { return this._TActivityHeroRecordLevel;}
+    get TActivityHeroRecordLevel(): Activity.TActivityHeroRecordLevel { return this._TActivityHeroRecordLevel; }
     private _TActivityDailyOnlinePrize: Activity.TActivityDailyOnlinePrize
-    get TActivityDailyOnlinePrize(): Activity.TActivityDailyOnlinePrize  { return this._TActivityDailyOnlinePrize;}
+    get TActivityDailyOnlinePrize(): Activity.TActivityDailyOnlinePrize { return this._TActivityDailyOnlinePrize; }
     private _TActivityInvestMetaStone: Activity.TActivityInvestMetaStone
-    get TActivityInvestMetaStone(): Activity.TActivityInvestMetaStone  { return this._TActivityInvestMetaStone;}
+    get TActivityInvestMetaStone(): Activity.TActivityInvestMetaStone { return this._TActivityInvestMetaStone; }
     private _TActivityTotalGainMetaStone: Activity.TActivityTotalGainMetaStone
-    get TActivityTotalGainMetaStone(): Activity.TActivityTotalGainMetaStone  { return this._TActivityTotalGainMetaStone;}
+    get TActivityTotalGainMetaStone(): Activity.TActivityTotalGainMetaStone { return this._TActivityTotalGainMetaStone; }
     private _TActivityTotalOnlineTime: Activity.TActivityTotalOnlineTime
-    get TActivityTotalOnlineTime(): Activity.TActivityTotalOnlineTime  { return this._TActivityTotalOnlineTime;}
+    get TActivityTotalOnlineTime(): Activity.TActivityTotalOnlineTime { return this._TActivityTotalOnlineTime; }
     private _TActivityTotalSpendMetaStone: Activity.TActivityTotalSpendMetaStone
-    get TActivityTotalSpendMetaStone(): Activity.TActivityTotalSpendMetaStone  { return this._TActivityTotalSpendMetaStone;}
+    get TActivityTotalSpendMetaStone(): Activity.TActivityTotalSpendMetaStone { return this._TActivityTotalSpendMetaStone; }
     private _TActivityGiftCommond: Activity.TActivityGiftCommond
-    get TActivityGiftCommond(): Activity.TActivityGiftCommond  { return this._TActivityGiftCommond;}
+    get TActivityGiftCommond(): Activity.TActivityGiftCommond { return this._TActivityGiftCommond; }
     private _TActivityMentorshipTree: Activity.TActivityMentorshipTree
-    get TActivityMentorshipTree(): Activity.TActivityMentorshipTree  { return this._TActivityMentorshipTree;}
+    get TActivityMentorshipTree(): Activity.TActivityMentorshipTree { return this._TActivityMentorshipTree; }
     private _HeroLevelUpConfig: Hero.HeroLevelUpConfig
-    get HeroLevelUpConfig(): Hero.HeroLevelUpConfig  { return this._HeroLevelUpConfig;}
+    get HeroLevelUpConfig(): Hero.HeroLevelUpConfig { return this._HeroLevelUpConfig; }
     private _HeroConfig: Hero.HeroConfig
-    get HeroConfig(): Hero.HeroConfig  { return this._HeroConfig;}
+    get HeroConfig(): Hero.HeroConfig { return this._HeroConfig; }
     private _HeroTalentConfig: Hero.HeroTalentConfig
-    get HeroTalentConfig(): Hero.HeroTalentConfig  { return this._HeroTalentConfig;}
+    get HeroTalentConfig(): Hero.HeroTalentConfig { return this._HeroTalentConfig; }
     private _SeasonConfig: Season.SeasonConfig
-    get SeasonConfig(): Season.SeasonConfig  { return this._SeasonConfig;}
+    get SeasonConfig(): Season.SeasonConfig { return this._SeasonConfig; }
     private _RankPrizeConfig: Rank.RankPrizeConfig
-    get RankPrizeConfig(): Rank.RankPrizeConfig  { return this._RankPrizeConfig;}
+    get RankPrizeConfig(): Rank.RankPrizeConfig { return this._RankPrizeConfig; }
     private _DrawTreasureConfig: Draw.DrawTreasureConfig
-    get DrawTreasureConfig(): Draw.DrawTreasureConfig  { return this._DrawTreasureConfig;}
+    get DrawTreasureConfig(): Draw.DrawTreasureConfig { return this._DrawTreasureConfig; }
     private _TaskConfig: Task.TaskConfig
-    get TaskConfig(): Task.TaskConfig  { return this._TaskConfig;}
+    get TaskConfig(): Task.TaskConfig { return this._TaskConfig; }
     private _AchievementConfig: Achievement.AchievementConfig
-    get AchievementConfig(): Achievement.AchievementConfig  { return this._AchievementConfig;}
+    get AchievementConfig(): Achievement.AchievementConfig { return this._AchievementConfig; }
     private _TitleConfig: Title.TitleConfig
-    get TitleConfig(): Title.TitleConfig  { return this._TitleConfig;}
+    get TitleConfig(): Title.TitleConfig { return this._TitleConfig; }
     private _GlobalSetting: Glob.GlobalSetting
-    get GlobalSetting(): Glob.GlobalSetting  { return this._GlobalSetting;}
+    get GlobalSetting(): Glob.GlobalSetting { return this._GlobalSetting; }
 
     constructor(loader: JsonLoader) {
         let tables = new Map<string, any>()

@@ -8,8 +8,8 @@ import { GameServiceSystem } from "../../shared/rules/System/GameServiceSystem";
 export class GameServiceSystemComponent extends GameServiceSystem {
 
     public onAwake(): void {
-        this.addEvent();
-        this.SyncClient()
+        // this.addEvent();
+        // this.SyncClient()
     }
 
     addEvent() {

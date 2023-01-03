@@ -12,7 +12,10 @@ const typepath = "content/scripts/tscripts/shared/Gen/Types.ts";
 function jsontots() {
     let typestr = fs.readFileSync(typepath, "utf-8");
     typestr = typestr.replace(/for\(var /g, "for(let ")
+    typestr = typestr.replace(/constructor\(_json_: any\) {\s+this._dataMap/g, "constructor(_json_: any[]) {\n this._dataMap ")
+    typestr = typestr.replace(/constructor\(_json_: any\) {\s+if \(_json_.length/g, "constructor(_json_: any[]) {\n if (_json_.length ")
     fs.writeFileSync(typepath, typestr);
+
 
     let filestr = "";
     const files = read_all_files(jsonpath);
@@ -23,11 +26,18 @@ function jsontots() {
     });
     filestr = `
     import { Tables } from "./Types";
-    const JSONData : any = { ${filestr} };
+    const JSONData : {[k:string]:any[]} = { ${filestr} };
     function JsonDataLoader(filename:string){
         return JSONData[filename];
     };
-    export const JSONConfig: Tables = new Tables(JsonDataLoader);
+    let tabledata: Tables;
+    try {
+      tabledata = new Tables(JsonDataLoader);
+    }
+    catch (error) {
+      GLogHelper.error(error)
+    }
+    export const JSONConfig: Tables = tabledata;
     `;
     fs.writeFileSync(outtspath, filestr);
 

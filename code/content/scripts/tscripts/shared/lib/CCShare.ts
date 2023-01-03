@@ -204,11 +204,21 @@ export module CCShare {
         public containsValue(value: V): boolean {
             return this._values.indexOf(value) != -1;
         }
-
-        public count(): number {
+        public get size(): number {
             return this._keys.length;
         }
-
+        public has(key: K): boolean {
+            return this._keys.indexOf(key) != -1;
+        }
+        public delete(key: K): boolean {
+            const index = this._keys.indexOf(key);
+            if (index != -1) {
+                this._keys.splice(index, 1);
+                this._values.splice(index, 1);
+                return true;
+            }
+            return false
+        }
         public clear(): void {
             this._keys = [];
             this._values = [];
@@ -282,5 +292,8 @@ if (_G.GHandler == null) {
     _G.GDictionary = CCShare.Dictionary;
     if (_CODE_IN_JS_) {
         (global as any).GameRules = Game;
+    }
+    else {
+        // (_G.Map as any) = CCShare.Dictionary;
     }
 }

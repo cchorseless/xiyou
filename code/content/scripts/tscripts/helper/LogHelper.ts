@@ -1,5 +1,5 @@
 export class LogHelper {
-    public static PRINT_MESSAGE_STACK = 'PRINT_MESSAGE_STACK'
+    public static _PRINT_MESSAGE_STACK_ = '_PRINT_MESSAGE_STACK_'
     public static IsDebug = true;
     /**原始的堆栈函数 */
     public static traceFunc = debug.traceback
@@ -35,7 +35,7 @@ export class LogHelper {
             args_ObjectIndex = args_ObjectIndex.map((s) => { return s - index - 1 })
         }
         if (args.length == 0) { return };
-        let message: string = LogHelper.PRINT_MESSAGE_STACK;
+        let message: string = LogHelper._PRINT_MESSAGE_STACK_;
         let stack = LogHelper.traceFunc(message, 2);
         stack = stack.replace(message, "").replace("stack traceback:", "")
         let s = stack.split('\n');
@@ -79,7 +79,7 @@ export class LogHelper {
             return;
         }
 
-        let message: string = LogHelper.PRINT_MESSAGE_STACK;
+        let message: string = LogHelper._PRINT_MESSAGE_STACK_;
         let stack = LogHelper.traceFunc(message, 3);
         stack = stack.replace(message, "").replace("stack traceback:", "")
         let s = stack.split('\n');
@@ -133,7 +133,7 @@ if (!IsInToolsMode()) {
         }
         /**LUA 的堆栈信息 */
         let luatrace = args[0];
-        if (luatrace != LogHelper.PRINT_MESSAGE_STACK) {
+        if (luatrace != LogHelper._PRINT_MESSAGE_STACK_) {
             if (type(luatrace) == 'string' && !GGameCache.allErrorInfo[luatrace]) {
                 let errmsg = '';
                 if (type(trace) == 'string') {
@@ -157,6 +157,12 @@ declare global {
      */
     var GLogHelper: typeof LogHelper;
 }
-if (_G.GLogHelper == undefined) {
+if (_G.GLogHelper == null) {
     _G.GLogHelper = LogHelper;
+    LogHelper.print("-------------------LogHelper Init----------------------------")
+    // const oldrequire = require;
+    // _G.require = (s: string) => {
+    //     LogHelper.print(s)
+    //     return oldrequire(s)
+    // }
 }

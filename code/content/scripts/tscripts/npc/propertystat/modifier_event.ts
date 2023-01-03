@@ -7,7 +7,6 @@
  */
 import { GameFunc } from "../../GameFunc";
 import { BattleHelper } from "../../helper/BattleHelper";
-import { LogHelper } from "../../helper/LogHelper";
 import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
 
@@ -586,7 +585,7 @@ export function registerEvent(params: Enum_MODIFIER_EVENT, onSelf = true, onOthe
             // 针对其他人的监听，其他人是施法者
             target.__AllRegisterEvent[params][1].add(desc.value);
         }
-        LogHelper.print(target.constructor.name, methodName);
+        // LogHelper.print(target.constructor.name, methodName);
     };
 }
 

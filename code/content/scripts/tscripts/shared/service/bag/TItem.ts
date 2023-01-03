@@ -22,6 +22,7 @@ export class TItem extends ET.Entity {
 
     public get Config() {
         return JSONConfig.ItemConfig.get(this.ConfigId)
+        // return {}
     }
 
 }

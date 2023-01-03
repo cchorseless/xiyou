@@ -71,7 +71,6 @@ export class CCLoading extends CCPanel<NodePropsData> {
         )
     }
 }
-LogHelper.print("------------CODE ON LUA :", _CODE_IN_LUA_);
 AllShared.Init();
 AllEntity.Init();
 TimerHelper.Init();

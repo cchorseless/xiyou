@@ -685,7 +685,7 @@ export class BaseModifierMotionVertical extends BaseModifier { }
 export interface BaseModifierMotionBoth extends CDOTA_Modifier_Lua_Motion_Both { }
 export class BaseModifierMotionBoth extends BaseModifier { }
 
-LogHelper.print("------------------------", "setmetatable", "------------------------------");
+LogHelper.print(`-------------------setmetatable IsServer: ${IsServer()}------------------------------`);
 // Add standard base classes to prototype chain to make `super.*` work as `self.BaseClass.*`
 setmetatable(BaseAbility.prototype, { __index: IsServer() ? CDOTA_Ability_Lua : C_DOTA_Ability_Lua });
 setmetatable(BaseItem.prototype, { __index: IsServer() ? CDOTA_Item_Lua : C_DOTA_Item_Lua });
