@@ -27,7 +27,7 @@ export module NetTablesHelper {
         }
         let jsonobj = NetTablesHelper.GetData(GameServiceConfig.ENetTables.etentity, obj.InstanceId);
         if (GameServiceConfig.NetTableSaveDataAsSring) {
-            jsonobj = json.decode(jsonobj)[0];
+            jsonobj = json.decode(jsonobj._)[0];
             if (!jsonobj) { return }
         }
         let new_data = obj.toJsonPartObject(props);
