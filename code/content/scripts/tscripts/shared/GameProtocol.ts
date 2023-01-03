@@ -10,6 +10,11 @@ export module GameProtocol {
         static readonly LoginOut = "/LoginOut";
         static readonly SetServerKey = "/SetServerKey";
         static readonly Buy_ShopItem = "/Buy_ShopItem";
+        // 开局
+        static readonly SelectDifficultyChapter = "/SelectDifficultyChapter";
+        static readonly SelectDifficultyEndlessLevel = "/SelectDifficultyEndlessLevel";
+        static readonly SelectCourier = "/SelectCourier";
+
     }
 
     // export const HTTP_URL = "http://139.196.182.10:8080";

@@ -92,6 +92,10 @@ export module TimeUtils {
             }
             return inter;
         }
+        Now(): number {
+            return new Date().getTime();
+        }
+
         //尝试从空闲池中取一个TimerTask
         GetTimerTask() {
             let data = null;
@@ -108,11 +112,11 @@ export module TimeUtils {
 
         //创建一个计时器
         /**
-         * 
+         *
          * @param _delay 秒
-         * @param endCallBack 
+         * @param endCallBack
          * @param _isIgnorePauseTime true 忽视游戏暂停
-         * @returns 
+         * @returns
          */
         public AddTimer(_delay: number, endCallBack: ITimerHander, _isIgnorePauseTime = false) {
             let data = this.GetTimerTask();
@@ -127,11 +131,11 @@ export module TimeUtils {
             task.Init(false, _delay, endCallBack, _isIgnorePauseTime);
         }
         /**
-         * 
+         *
          * @param delayframeCount 帧数
-         * @param endCallBack 
+         * @param endCallBack
          * @param _isIgnorePauseTime true 忽视游戏暂停; default false
-         * @returns 
+         * @returns
          */
         public AddFrameTimer(delayframeCount: number, endCallBack: ITimerHander, _isIgnorePauseTime = false): TimerTask {
             let data = this.GetTimerTask();

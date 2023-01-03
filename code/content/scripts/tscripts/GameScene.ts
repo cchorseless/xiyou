@@ -50,7 +50,7 @@ export class GameScene {
     private static _WaitSyncEntity: { obj: ET.Entity, ignoreChild: boolean }[] = [];
     public static SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
         if (GPlayerEntityRoot.IsAllLogin) {
-            NetTablesHelper.SetShareETEntity(obj, ignoreChild);
+            NetTablesHelper.SetETEntity(obj, ignoreChild);
         }
         else {
             for (let i = 0, len = this._WaitSyncEntity.length; i < len; i++) {
@@ -82,7 +82,6 @@ export class GameScene {
         GRoundSystem.GetInstance().StartGame();
         GDrawSystem.GetInstance().StartGame();
     }
-
 
 
     private static addEvent() {
@@ -262,7 +261,7 @@ export class GameScene {
             if (entity == null) {
                 break;
             }
-            NetTablesHelper.SetShareETEntity(entity.obj, entity.ignoreChild);
+            NetTablesHelper.SetETEntity(entity.obj, entity.ignoreChild);
         }
         this._WaitSyncEntity.length = 0;
     }

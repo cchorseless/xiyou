@@ -9,4 +9,8 @@ export class TShopSellItem extends ET.Entity {
     public ShopId: number;
     public BuyCount: number;
     public SellConfig: Shop.ShopSellItemBean;
+
+
+
+
 }

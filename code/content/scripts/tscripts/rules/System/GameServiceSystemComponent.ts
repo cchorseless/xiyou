@@ -1,3 +1,4 @@
+import { EventHelper } from "../../helper/EventHelper";
 import { HttpHelper } from "../../helper/HttpHelper";
 import { GameProtocol } from "../../shared/GameProtocol";
 import { GameServiceConfig } from "../../shared/GameServiceConfig";
@@ -5,6 +6,36 @@ import { GameServiceSystem } from "../../shared/rules/System/GameServiceSystem";
 
 @GReloadable
 export class GameServiceSystemComponent extends GameServiceSystem {
+
+    public onAwake(): void {
+        this.addEvent();
+        this.SyncClient()
+    }
+
+    addEvent() {
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.SelectDifficultyChapter, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+
+        }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.SelectDifficultyEndlessLevel, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+
+        }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.SelectCourier, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+
+        }));
+
+        const hander = GHandler.create(this, async (e: JS_TO_LUA_DATA) => {
+            const playeroot = GGameScene.GetPlayer(e.PlayerID);
+            if (playeroot) {
+                e.data = await playeroot.PlayerHttpComp().PostAsync(e.protocol, e.data);
+                if (e.isawait && e.sendClientCB) {
+                    e.sendClientCB()
+                }
+            }
+        });
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.Buy_ShopItem, hander);
+
+    }
+
     /**
      *
      * @param key

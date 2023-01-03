@@ -24,7 +24,8 @@ export module EventHelper {
         let _eventid = ListenToGameEvent(eventName, (e) => {
             hander.runWith([e]);
             if (hander.once) {
-                removeGameEvent(eventName, hander.caller)
+                removeGameEvent(eventName, hander.caller);
+                StopListeningToGameEvent(_eventid);
             }
         }, EventHelper);
         if (_eventid) {
@@ -76,7 +77,8 @@ export module EventHelper {
         let _eventid = CustomGameEventManager.RegisterListener(eventName, (userId: EntityIndex, event: any) => {
             hander.runWith([userId, event]);
             if (hander.once) {
-                removeCustomEvent(eventName, hander.caller)
+                removeCustomEvent(eventName, hander.caller);
+                CustomGameEventManager.UnregisterListener(_eventid);
             }
         });
         if (_eventid) {

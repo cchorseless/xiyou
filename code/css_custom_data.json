@@ -51,8 +51,16 @@
         },
         {
             "name": "blur",
-            "description": "毛玻璃效果 gaussian(1.0"
+            "description": "毛玻璃效果 gaussian(1.0)"
 
+        },
+        {
+            "name": "x",
+            "description": "30px"
+        },
+        {
+            "name": "y",
+            "description": "30px"
         }
 
     ],

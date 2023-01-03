@@ -1,12 +1,9 @@
 
-import React, { createRef, PureComponent } from "react";
-import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
+import React from "react";
 import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
-import { TShopSellItem } from "../../game/service/shop/TShopSellItem";
+import { TShopSellItem } from "../../../../scripts/tscripts/shared/service/shop/TShopSellItem";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { NetHelper } from "../../helper/NetHelper";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
-import { CCWaitProgressDialog } from "../Common/CCWaitProgressDialog";
 import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCShopItem } from "./CCShopItem";
 import { CCShopSellDetailDialog } from "./CCShopSellDetailDialog";
@@ -25,7 +22,7 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
     onBtnBuyClick() {
         const sellitem = this.GetStateEntity(this.props.entity)!;
         if (sellitem.SellConfig.VipLimit == 1) {
-            let MemberShip = GGameScene.Local.TCharacter.ActivityComp?.MemberShip;
+            let MemberShip = GTActivityMemberShipData.GetOneInstance(GGameScene.Local.BelongPlayerid);
             if (!MemberShip?.IsVip()) {
                 // TipsHelper.showErrorMessage()
                 return;

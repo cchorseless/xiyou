@@ -1,5 +1,5 @@
+import { JSONConfig } from "../../Gen/JsonConfig";
 import { ET } from "../../lib/Entity";
-import { BagComponent } from "./BagComponent";
 
 
 @GReloadable
@@ -20,6 +20,8 @@ export class TItem extends ET.Entity {
     public IsLock: boolean;
     public IsValid: boolean;
 
-    public get BagComp(): BagComponent { return this.GetParent<BagComponent>(); }
+    public get Config() {
+        return JSONConfig.ItemConfig.get(this.ConfigId)
+    }
 
 }

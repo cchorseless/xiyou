@@ -126,5 +126,5 @@ export class PlayerHttpComponent extends ET.Component {
         }
     }
 
-    public onAwake() { }
+
 }

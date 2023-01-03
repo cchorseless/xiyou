@@ -52,9 +52,7 @@ export module NetTablesHelper {
             });
         }
     }
-    export function SetShareETEntity(obj: ET.Entity, ignoreChild: boolean = false) {
-        SetETEntity(obj, ignoreChild);
-    }
+
 
     export function SetETEntity(obj: ET.Entity, ignoreChild: boolean = false, ...playerID: Array<PlayerID>) {
         if (!IsServer()) {
