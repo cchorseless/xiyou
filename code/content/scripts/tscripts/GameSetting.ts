@@ -78,7 +78,7 @@ export class GameSetting {
 
     public static gameModeInit() {
         if (GameRules.Addon.Instance == null) {
-            throw Error("GameRules.Addon.Instance == null");
+            GLogHelper.error("GameRules.Addon.Instance == null");
         }
         // 默认英雄,跳过英雄选择界面
         GameRules.Addon.Instance.SetCustomGameForceHero(GameSetting.DEFAULT_PICKED_HERO);

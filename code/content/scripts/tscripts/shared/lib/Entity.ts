@@ -57,7 +57,7 @@ export module ET {
             const typekey = entity.GetType();
             if (b) {
                 if (entity.InstanceId == null || EntitySystem.AllEntity[entity.InstanceId] != null) {
-                    throw new Error("RegisterSystem error");
+                    GLogHelper.error("RegisterSystem error");
                 }
                 EntitySystem.AllEntity[entity.InstanceId] = entity;
                 EntitySystem.AllTypeEntity[typekey] = EntitySystem.AllTypeEntity[typekey] || [];
@@ -70,7 +70,7 @@ export module ET {
                 }
             } else {
                 if (entity.InstanceId == null || EntitySystem.AllEntity[entity.InstanceId] == null) {
-                    throw new Error("UnRegisterSystem error");
+                    GLogHelper.error("UnRegisterSystem error");
                 }
                 delete EntitySystem.AllEntity[entity.InstanceId];
                 if (EntitySystem.AllTypeEntity[typekey]) {
@@ -114,7 +114,7 @@ export module ET {
         public static GetInstances<T extends typeof Entity>(typename: string, playerid: PlayerID): InstanceType<T>[] {
             const typeList = (EntitySystem.AllTypeEntity[typename] || []).filter(instance => { return instance.BelongPlayerid == playerid });;
             if (typeList.length == 0) {
-                throw new Error(typename + " is not a Muti instance");
+                GLogHelper.error(typename + " is not a Muti instance");
             }
             return typeList as InstanceType<T>[];
         }
@@ -208,13 +208,13 @@ export module ET {
             if (this.BelongPlayerid != null) {
                 return this.BelongPlayerid < 0 || this.BelongPlayerid == Players.GetLocalPlayer();
             }
-            throw new Error(this.GetType() + " cant find BelongPlayerid")
+            GLogHelper.error(this.GetType() + " cant find BelongPlayerid")
         }
 
         public get FixBelongPlayerid() {
             if (_CODE_IN_LUA_) { return 0 }
             if (this.BelongPlayerid == null) {
-                throw new Error(this.GetType() + " cant find BelongPlayerid")
+                GLogHelper.error(this.GetType() + " cant find BelongPlayerid")
             }
             if (this.BelongPlayerid < 0) {
                 return Players.GetLocalPlayer();
@@ -409,7 +409,7 @@ export module ET {
             }
             let type: typeof Entity = GGetRegClass(json._t);
             if (type == null) {
-                throw new Error("cant find class" + json._t);
+                GLogHelper.error("cant find class" + json._t);
             }
             entity = EntitySystem.GetEntity(json._id + json._t);
             if (entity == null) {
@@ -426,7 +426,7 @@ export module ET {
         static UpdateFromJson(json: IEntityJson) {
             let entity = EntitySystem.GetEntity(json._id + json._t);
             if (entity == null) {
-                throw new Error("cant find entity to update");
+                GLogHelper.error("cant find entity to update");
             }
             entity.updateFromJson(json);
             return entity;
@@ -454,16 +454,16 @@ export module ET {
 
         protected setParent(value: Entity) {
             if (value == null) {
-                throw new Error("cant set parent null:" + this.constructor.name);
+                GLogHelper.error("cant set parent null:" + this.constructor.name);
             }
 
             if (value == this) {
-                throw new Error("cant set parent self:" + this.constructor.name);
+                GLogHelper.error("cant set parent self:" + this.constructor.name);
             }
 
             // 严格限制parent必须要有domain,也就是说parent必须在数据树上面
             if (value.Domain == null) {
-                throw new Error("cant set parent because parent domain is null: {this.GetType().Name} {value.GetType().Name}");
+                GLogHelper.error("cant set parent because parent domain is null: {this.GetType().Name} {value.GetType().Name}");
             }
 
             if (this.Parent != null) {
@@ -500,7 +500,7 @@ export module ET {
 
         protected setDomain(value: IEntityRoot) {
             if (value == null) {
-                throw new Error("domain cant set null: {this.GetType().Name}");
+                GLogHelper.error("domain cant set null: {this.GetType().Name}");
             }
 
             if (this.Domain == value) {
@@ -703,7 +703,7 @@ export module ET {
         public AddOneComponent(component: Component) {
             let type = component.GetType();
             if (this.Components != null && this.Components[type] != null) {
-                throw new Error("entity already has component: {type.FullName}");
+                GLogHelper.error("entity already has component: {type.FullName}");
             }
             component.setParent(this);
             return component;
@@ -711,7 +711,7 @@ export module ET {
 
         public AddComponent<K extends typeof Component>(type: K, ...args: any[]) {
             if (this.Components != null && this.Components[type.name] != null) {
-                throw new Error("entity already has component: {type.FullName}");
+                GLogHelper.error("entity already has component: {type.FullName}");
             }
             let component = Entity.Create(type) as InstanceType<K>;
             (component.Id as any) = this.Id;
@@ -758,7 +758,7 @@ export module ET {
          */
         public static GetInstance<T extends typeof SingletonComponent>(this: T): InstanceType<T> {
             if (!this._instance_ || this._instance_.IsDisposed()) {
-                throw new Error(this.constructor.name + " is not a SingletonComponent");
+                GLogHelper.error(this.constructor.name + " is not a SingletonComponent");
             }
             return this._instance_ as InstanceType<T>;
         }
@@ -814,17 +814,17 @@ export module ET {
                 (this.PreAwakeArgs as any) = null;
                 this.onAwake();
             } else {
-                throw new Error("cant active");
+                GLogHelper.error("cant active");
             }
         }
 
         public AddPreAwakeComponent<K extends typeof Component>(type: K, ...args: any[]) {
             if (this.Components != null && this.Components[type.name] != null) {
-                throw new Error("entity already has component: {type.FullName}");
+                GLogHelper.error("entity already has component: {type.FullName}");
             }
             let component = Entity.Create(type) as InstanceType<K>;
             if (!component.IsComponent) {
-                throw new Error("is not component: " + type.name);
+                GLogHelper.error("is not component: " + type.name);
             }
             (component.Id as any) = this.Id;
             (component.Parent as any) = this;
@@ -891,7 +891,7 @@ export module ET {
 
         private setDomainParent(_domainParent: EntityRoot) {
             if (this.DomainParent != null) {
-                throw new Error("setDomainParent error");
+                GLogHelper.error("setDomainParent error");
             }
             (this.DomainParent as any) = _domainParent;
             (this.BelongPlayerid as any) = (this.DomainParent as any).BelongPlayerid;

@@ -326,7 +326,7 @@ export class ability1_pudge_meat_hook extends ActiveRootAbility {
             tHashtable.bChainAttached = true
             ParticleManager.SetParticleControlEnt(tHashtable.iParticleID, 0, tHashtable.hCaster, ParticleAttachment_t.PATTACH_CUSTOMORIGIN, null, tHashtable.vStartPosition + tHashtable.vHookOffset, true)
             ParticleManager.SetParticleControl(tHashtable.iParticleID, 0, tHashtable.vStartPosition + tHashtable.vHookOffset)
-            if (tHashtable.tVictim.length == 0) {
+            if ((tHashtable.tVictim as any[]).length == 0) {
                 ParticleManager.SetParticleControlEnt(tHashtable.iParticleID, 1, tHashtable.hCaster, ParticleAttachment_t.PATTACH_CUSTOMORIGIN, null, tHashtable.vStartPosition + tHashtable.vHookOffset, true)
                 if (tHashtable.bRetracting == true) {
                     ParticleManager.SetParticleControl(tHashtable.iParticleID, 1, tHashtable.vStartPosition + tHashtable.vHookOffset)

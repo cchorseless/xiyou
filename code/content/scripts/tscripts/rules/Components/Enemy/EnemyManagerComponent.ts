@@ -87,13 +87,13 @@ export class EnemyManagerComponent extends ET.Component {
 
     addEnemy(enemyName: string, roundid: string, onlykey: string = null, pos: Vector = null, spawnEffect: ISpawnEffectInfo = null) {
         if (enemyName == "" || enemyName == null) {
-            throw new Error("cant find emeny name");
+            GLogHelper.error("cant find emeny name");
         }
         if (pos == null) {
             pos = this.GetEnemySpawnPos();
         }
         if (pos == null) {
-            throw new Error("cant find emeny spawn pos");
+            GLogHelper.error("cant find emeny spawn pos");
         }
         let enemy = BaseNpc_Plus.CreateUnitByName(enemyName, pos, DOTATeam_t.DOTA_TEAM_BADGUYS);
         enemy.SetNeverMoveToClearSpace(false);

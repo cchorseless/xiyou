@@ -357,7 +357,7 @@ export module GameFunc {
                 r.push(arr[k - 1]);
             }
             if (r.length != index.length) {
-                throw new Error("RandomArray out of range");
+                GLogHelper.error("RandomArray out of range");
             }
             return r;
         }
@@ -378,7 +378,7 @@ export module GameFunc {
                 return _arr;
             }
             if (_arr.length < count) {
-                throw new Error("our of range");
+                GLogHelper.error("our of range");
             }
             let _count = count;
             let he = 0;
@@ -405,7 +405,7 @@ export module GameFunc {
                 _weight.splice(index, 1);
             }
             if (r.length != count) {
-                throw new Error("our of range");
+                GLogHelper.error("our of range");
             }
             return r;
         }
