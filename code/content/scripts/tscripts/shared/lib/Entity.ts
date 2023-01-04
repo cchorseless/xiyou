@@ -100,7 +100,7 @@ export module ET {
         * @returns
         */
         public static GetInstance<T extends typeof Entity>(typename: string, playerid: PlayerID): InstanceType<T> {
-            const typeList = (EntitySystem.AllTypeEntity[typename] || []).filter(instance => { return instance.BelongPlayerid == playerid });;
+            const typeList: Entity[] = (EntitySystem.AllTypeEntity[typename] || []).filter(instance => { return instance.BelongPlayerid == playerid });;
             if (typeList.length !== 1 || typeList[0].IsDisposed()) {
                 return null as InstanceType<T>;
             }
@@ -112,7 +112,7 @@ export module ET {
         * @returns
         */
         public static GetInstances<T extends typeof Entity>(typename: string, playerid: PlayerID): InstanceType<T>[] {
-            const typeList = (EntitySystem.AllTypeEntity[typename] || []).filter(instance => { return instance.BelongPlayerid == playerid });;
+            const typeList: Entity[] = (EntitySystem.AllTypeEntity[typename] || []).filter(instance => { return instance.BelongPlayerid == playerid });;
             if (typeList.length == 0) {
                 GLogHelper.error(typename + " is not a Muti instance");
             }
@@ -120,7 +120,7 @@ export module ET {
         }
 
         public static GetAllInstances<T extends typeof Entity>(typename: string): InstanceType<T>[] {
-            const typeList = (EntitySystem.AllTypeEntity[typename] || []);
+            const typeList: Entity[] = (EntitySystem.AllTypeEntity[typename] || []);
             let rlist = [...typeList];
             return rlist as InstanceType<T>[];
         }

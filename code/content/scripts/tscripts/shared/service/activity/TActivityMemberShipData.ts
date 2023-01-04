@@ -11,7 +11,7 @@ export class TActivityMemberShipData extends TActivityData {
     }
 
     onReload() {
-        this.SyncClient(false, true);
+        this.SyncClient(true, true);
     }
 
     IsVip() {

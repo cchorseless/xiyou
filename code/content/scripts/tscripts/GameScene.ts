@@ -319,6 +319,7 @@ export class GameScene {
             return;
         }
         event.sendClientCB = () => {
+            event.sendClientCB = null;
             if (event.hasCB) {
                 let player = PlayerResource.GetPlayer(event.PlayerID);
                 if (player) {

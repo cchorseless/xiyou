@@ -1,4 +1,5 @@
 import { GameProtocol } from "../../GameProtocol";
+import { GameServiceConfig } from "../../GameServiceConfig";
 import { ET, serializeETProps } from "../../lib/Entity";
 import { NumericComponent } from "../common/NumericComponent";
 import { CharacterInGameDataComponent } from "./CharacterInGameDataComponent";
@@ -15,7 +16,7 @@ export class CharacterDataComponent extends ET.Component {
     }
 
     onReload(): void {
-        this.SyncClient();
+        this.SyncClient(true, true);
     }
     private _GameDataStrDic = new GDictionary<
         string,
@@ -33,6 +34,16 @@ export class CharacterDataComponent extends ET.Component {
         return this.GameDataStrDic.get(key)
     }
 
+    // - 获取现在服务器上存的数据玩家装备的线
+    GetPlayerCourierInUse() {
+        return this.getGameDataStr(GameProtocol.EGameDataStrDicKey.sCourierIDInUse) || GameServiceConfig.DefaultCourier;
+    }
+
+    // - 获取玩家正在使用的信使特效
+    GetPlayerCourierFxInUse() {
+        return this.getGameDataStr(GameProtocol.EGameDataStrDicKey.sCourierIDInUseFx) || "";
+    }
+
 
     get NumericComp() {
         return this.GetComponentByName<NumericComponent>("NumericComponent");
@@ -41,4 +52,11 @@ export class CharacterDataComponent extends ET.Component {
         return this.GetComponentByName<CharacterInGameDataComponent>("CharacterInGameDataComponent");
     }
 
+}
+
+declare global {
+    var GCharacterDataComponent: typeof CharacterDataComponent;
+}
+if (_G.GCharacterDataComponent == null) {
+    _G.GCharacterDataComponent = CharacterDataComponent;
 }

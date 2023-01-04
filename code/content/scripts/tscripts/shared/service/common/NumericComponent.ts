@@ -5,12 +5,11 @@ import { ET, serializeETProps } from "../../lib/Entity";
 @GReloadable
 export class NumericComponent extends ET.Component {
     public readonly IsSerializeEntity: boolean = true;
-    @serializeETProps()
     private _NumericDic = new GDictionary<
         number,
         string
     >();
-
+    @serializeETProps()
     public get NumericDic() {
         return this._NumericDic;
     }

@@ -2,7 +2,6 @@
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { modifier_courier } from "../../../npc/courier/modifier_courier";
-import { GameProtocol } from "../../../shared/GameProtocol";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
@@ -33,7 +32,7 @@ export class CourierEntityRoot extends BattleUnitEntityRoot {
             return
         }
         let sCurrentCourierName = this.GetCourierName()
-        let sCourierName = this.GetPlayerCourierInUse()
+        let sCourierName = GCharacterDataComponent.GetOneInstance(this.BelongPlayerid).GetPlayerCourierInUse()
         if (sCurrentCourierName == sCourierName && modifier_courier.findIn(hHero)) {
             return
         }
@@ -51,15 +50,8 @@ export class CourierEntityRoot extends BattleUnitEntityRoot {
         return GameServiceConfig.DefaultCourier;
     }
 
-    // - 获取现在服务器上存的数据玩家装备的线
-    GetPlayerCourierInUse() {
-        return this.GetPlayer().TCharacter().DataComp.getGameDataStr(GameProtocol.EGameDataStrDicKey.sCourierIDInUse) || GameServiceConfig.DefaultCourier;
-    }
 
-    // - 获取玩家正在使用的信使特效
-    GetPlayerCourierFxInUse() {
-        return this.GetPlayer().TCharacter().DataComp.getGameDataStr(GameProtocol.EGameDataStrDicKey.sCourierIDInUseFx) || "";
-    }
+
 
     CourierDataComp() {
         return this.GetComponentByName<CourierDataComponent>("CourierDataComponent");
