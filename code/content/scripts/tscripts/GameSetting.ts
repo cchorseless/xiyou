@@ -47,13 +47,13 @@ export class GameSetting {
     }
 
     public static gameRulesInit() {
-        GameRules.SetHeroRespawnEnabled(true);
+        GameRules.SetHeroRespawnEnabled(false);
         GameRules.SetSameHeroSelectionEnabled(true);
         GameRules.SetHeroSelectionTime(99999);
         GameRules.SetHeroSelectPenaltyTime(0);
         GameRules.SetStrategyTime(0.5);
         GameRules.SetShowcaseTime(0);
-        GameRules.SetPreGameTime(0);
+        GameRules.SetPreGameTime(3);
         GameRules.SetPostGameTime(3000);
         GameRules.SetTreeRegrowTime(10);
         GameRules.SetGoldPerTick(0);
@@ -81,7 +81,7 @@ export class GameSetting {
             GLogHelper.error("GameRules.Addon.Instance == null");
         }
         // 默认英雄,跳过英雄选择界面
-        GameRules.Addon.Instance.SetCustomGameForceHero(GameSetting.DEFAULT_PICKED_HERO);
+        // GameRules.Addon.Instance.SetCustomGameForceHero(GameSetting.DEFAULT_PICKED_HERO);
         //#region  開啓后閃退
         // GameRules.Addon.Instance.SetUseCustomHeroLevels(true)
         //#endregion

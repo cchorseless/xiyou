@@ -1,4 +1,5 @@
 import { ET } from "../../../scripts/tscripts/shared/lib/Entity";
+import { GameEventSystemComponent } from "./system/GameEventSystemComponent";
 import { GameServiceSystemComponent } from "./system/GameStateSystemComponent";
 import { PublicBagSystemComponent } from "./system/PublicBagSystemComponent";
 
@@ -21,11 +22,17 @@ export class GameScene {
     static get GameServiceSystem() {
         return GameServiceSystemComponent.GetInstance()!;
     }
+
+    static get GameEventSystem() {
+        return GameEventSystemComponent.GetInstance()!;
+    }
+
     static get TServerZone() {
         return this.Scene.GetComponentByName<ITServerZone>("TServerZone")!;
     }
 
     static Init() {
+        this.Scene.AddComponent(GameEventSystemComponent);
         let maxPlayers = Players.GetMaxPlayers();
         for (let i = 0; i < maxPlayers; i++) {
             let playerid = i as PlayerID;
@@ -33,6 +40,7 @@ export class GameScene {
                 GameScene.Scene.AddChild(GPlayerEntityRoot, playerid)
             }
         }
+        // this.GameEventSystem.LoadNetTableData();
     }
 }
 declare global {

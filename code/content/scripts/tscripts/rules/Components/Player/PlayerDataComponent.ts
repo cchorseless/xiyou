@@ -1,7 +1,6 @@
 
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
-import { TimerHelper } from "../../../helper/TimerHelper";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { EEnum } from "../../../shared/Gen/Types";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
@@ -14,11 +13,9 @@ export class PlayerDataComponent extends PlayerData {
 
     onAwake(...args: any[]): void {
         this.addEvent();
-        this.startTime = TimerHelper.Now();
         this.applyPopuLevelUp(0);
         this.applyTechLevelUp(0);
         this.perIntervalGold += 5;
-        this.addMoneyPerInterval();
         this.SyncClient();
     }
 
@@ -33,6 +30,11 @@ export class PlayerDataComponent extends PlayerData {
         }
         return false;
     }
+
+    StartGame() {
+        this.addMoneyPerInterval();
+    }
+
 
     changeItem(type: number, count: number) {
         switch (type) {

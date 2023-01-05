@@ -2,7 +2,6 @@ import { GameEnum } from "../../../scripts/tscripts/shared/GameEnum";
 import { JsonConfigHelper } from "../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
 import { FuncHelper } from "./FuncHelper";
 import { KVHelper } from "./KVHelper";
-import { LogHelper } from "./LogHelper";
 
 
 export module AbilityHelper {
@@ -487,7 +486,7 @@ export module AbilityHelper {
         return aSpecials;
     }
 
-    export function GetSpecialVarType(sAbilityName: string, sName: string,) {
+    export function GetSpecialVarType(sAbilityName: string, sName: string) {
         let [isitem, tKeyValues] = KVHelper.GetAbilityOrItemData(sAbilityName);
         if (tKeyValues) {
             let tSpecials = tKeyValues.AbilitySpecial;

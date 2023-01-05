@@ -21,8 +21,7 @@ export class TItem extends ET.Entity {
     public IsValid: boolean;
 
     public get Config() {
-        return JSONConfig.ItemConfig.get(this.ConfigId)
-        // return {}
+        return JSONConfig.ItemConfig.get(this.ConfigId)!;
     }
 
 }

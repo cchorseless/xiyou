@@ -4,6 +4,7 @@ import React from "react";
 import { AllShared } from "../../../../../scripts/tscripts/shared/AllShared";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { AllEntity } from "../../../game/AllEntity";
+import { GameScene } from "../../../game/GameScene";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
@@ -17,7 +18,7 @@ export class CCLoading extends CCPanel<NodePropsData> {
     // 初始化数据
     onInitUI() {
         Game.SetAutoLaunchEnabled(false);
-        this.UpdateState({ gamestate: Game.GetState() })
+        this.onGameStateChange()
         this.addEvent()
     }
     onDestroy() {
@@ -27,27 +28,30 @@ export class CCLoading extends CCPanel<NodePropsData> {
 
     addEvent() {
         this.addGameEvent(GameEnum.GameEvent.game_rules_state_change, (e) => {
-            const state = Game.GetState();
-            if (!$.GetContextPanel().layoutfile.includes("custom_loading_screen")) {
-                this.close()
-                return;
-            }
-            if (state == DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME) {
-                this.close()
-                return;
-            }
-            if (state == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP) {
-                this.LoginServer();
-                Game.SetAutoLaunchEnabled(false);
-                Game.AutoAssignPlayersToTeams();
-            }
-
-            LogHelper.print("current state :", state);
-            this.UpdateState({ gamestate: state })
+            this.onGameStateChange()
         })
     }
 
-    LoginServer(cb = () => { }) {
+    onGameStateChange() {
+        const state = Game.GetState();
+        if (!$.GetContextPanel().layoutfile.includes("custom_loading_screen")) {
+            this.close()
+            return;
+        }
+        if (state == DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME) {
+            this.close()
+            return;
+        }
+        if (state == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP) {
+            this.LoginServer();
+            Game.SetAutoLaunchEnabled(false);
+            Game.AutoAssignPlayersToTeams();
+            Game.SetRemainingSetupTime(0);
+        }
+        LogHelper.print("current state :", state);
+        this.UpdateState({ gamestate: state })
+    }
+    LoginServer() {
         LogHelper.print("---------------LoginServer---------------");
         NetHelper.SendToLua(GameEnum.CustomProtocol.req_LoginGame, null, GHandler.create(this, (e) => {
             this.UpdateState({ login: e.state })
@@ -60,11 +64,11 @@ export class CCLoading extends CCPanel<NodePropsData> {
             <Panel className="CC_Loading" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPanel id="loadingBg" />
                 {/* 队伍选择界面 */}
-                {/* {gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP &&
-                    <CCTeam_select />
+                {/* {login && gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP &&
+                    <CCBefore_Game />
                 } */}
                 {/* 英雄选择 */}
-                {login && gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION &&
+                {gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION &&
                     <CCBefore_Game />
                 }
                 {this.props.children}
@@ -76,4 +80,5 @@ export class CCLoading extends CCPanel<NodePropsData> {
 AllShared.Init();
 AllEntity.Init();
 TimerHelper.Init();
+GameScene.Init()
 render(<CCLoading />, $.GetContextPanel());

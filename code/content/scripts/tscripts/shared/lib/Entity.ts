@@ -121,8 +121,9 @@ export module ET {
 
         public static GetAllInstances<T extends typeof Entity>(typename: string): InstanceType<T>[] {
             const typeList: Entity[] = (EntitySystem.AllTypeEntity[typename] || []);
-            let rlist = [...typeList];
-            return rlist as InstanceType<T>[];
+            let rlist: InstanceType<T>[] = [];
+            rlist = rlist.concat(typeList as any[]);
+            return rlist;
         }
 
         static Awake(entity: Entity, ...args: any[]) {
@@ -759,7 +760,7 @@ export module ET {
          */
         public static GetInstance<T extends typeof SingletonComponent>(this: T): InstanceType<T> {
             if (!this._instance_ || this._instance_.IsDisposed()) {
-                GLogHelper.error(this.constructor.name + " is not a SingletonComponent");
+                GLogHelper.warn(this.constructor.name + " is not a SingletonComponent");
             }
             return this._instance_ as InstanceType<T>;
         }

@@ -1,4 +1,3 @@
-import { AllServiceEntity } from "../../../scripts/tscripts/shared/service/AllServiceEntity";
 import { LogHelper } from "../helper/LogHelper";
 import { AbilityEntityRoot } from "./components/Ability/AbilityEntityRoot";
 import { BattleUnitIllusionEntityRoot } from "./components/BattleUnit/BattleUnitIllusionEntityRoot";
@@ -24,7 +23,6 @@ import { FHeroCombinationManagerComponent } from "./components/FakerHero/FHeroCo
 import { ItemEntityRoot } from "./components/Item/ItemEntityRoot";
 import { PlayerDataComponent } from "./components/Player/PlayerDataComponent";
 import { PlayerEntityRoot } from "./components/Player/PlayerEntityRoot";
-import { PlayerNetTableComponent } from "./components/Player/PlayerNetTableComponent";
 import { PublicShopComponent } from "./components/Public/PublicShopComponent";
 import { ERoundBoard } from "./components/Round/ERoundBoard";
 import { RoundManagerComponent } from "./components/Round/RoundManagerComponent";
@@ -65,7 +63,6 @@ FHeroCombination;
 
 ChessControlComponent;
 DrawComponent;
-PlayerNetTableComponent;
 PlayerDataComponent;
 PlayerEntityRoot;
 RoundManagerComponent;
@@ -77,7 +74,6 @@ PublicBagSystemComponent;
 
 export class AllEntity {
     static Init() {
-        AllServiceEntity.init()
         LogHelper.print("register all entity 111111");
     }
 }

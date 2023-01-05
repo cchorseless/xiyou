@@ -6,7 +6,6 @@ import { AllEntity } from "../game/AllEntity";
 import { GameScene } from "../game/GameScene";
 import { DebugHelper } from "../helper/DebugHelper";
 import { DotaUIHelper } from "../helper/DotaUIHelper";
-import { EventHelper } from "../helper/EventHelper";
 import { LogHelper } from "../helper/LogHelper";
 import { TimerHelper } from "../helper/TimerHelper";
 import { CCPanel } from "./AllUIElement/CCPanel/CCPanel";
@@ -67,10 +66,8 @@ function StartRenderGameUI() {
     AllEntity.Init();
     TimerHelper.Init();
     DebugHelper.Init();
-    EventHelper.Init();
     DotaUIHelper.Init();
     GameScene.Init();
-    GameScene.Local.Init();
     render(<RootPanel />, $.GetContextPanel());
 }
 LogHelper.print("StartRenderGameUI started -----------------------------------");

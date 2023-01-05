@@ -9,7 +9,6 @@ import { DrawComponent } from "../Draw/DrawComponent";
 import { PublicShopComponent } from "../Public/PublicShopComponent";
 import { RoundManagerComponent } from "../Round/RoundManagerComponent";
 import { PlayerDataComponent } from "./PlayerDataComponent";
-import { PlayerNetTableComponent } from "./PlayerNetTableComponent";
 
 @GReloadable
 export class PlayerEntityRoot extends ET.Entity {
@@ -18,7 +17,6 @@ export class PlayerEntityRoot extends ET.Entity {
         (this.BelongPlayerid as any) = playerid;
         if (this.IsLocalPlayer) {
             (GGameScene.Local as any) = this;
-            this.AddComponent(GGetRegClass<typeof PlayerNetTableComponent>("PlayerNetTableComponent"));
             this.AddComponent(GGetRegClass<typeof ChessControlComponent>("ChessControlComponent"));
             // 添加移动组件
             //  PlayerScene.Scene.AddComponent(ControlComponent);
@@ -52,9 +50,6 @@ export class PlayerEntityRoot extends ET.Entity {
         }
     }
 
-    Init() {
-        this.PlayerNetTableComp.LoadNetTableData();
-    }
 
     get IsLocalPlayer() {
         return Players.GetLocalPlayer() == this.BelongPlayerid
@@ -63,9 +58,7 @@ export class PlayerEntityRoot extends ET.Entity {
     get DrawComp() {
         return DrawComponent.GetOneInstance(this.BelongPlayerid);
     }
-    get PlayerNetTableComp() {
-        return this.GetComponentByName<PlayerNetTableComponent>("PlayerNetTableComponent")!;
-    }
+
     get PlayerDataComp() {
         return PlayerDataComponent.GetOneInstance(this.BelongPlayerid);
     }

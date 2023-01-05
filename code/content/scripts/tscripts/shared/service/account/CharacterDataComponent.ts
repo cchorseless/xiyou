@@ -34,7 +34,7 @@ export class CharacterDataComponent extends ET.Component {
     getGameRecord(key: GameProtocol.ECharacterGameRecordKey): string {
         return this.GameRecord.get(key)
     }
-    getGameRecordAsNumber(key: GameProtocol.ECharacterGameRecordKey): number {
+    getGameRecordAsNumber(key: GameProtocol.ECharacterGameRecordKey) {
         const value = this.GameRecord.get(key)
         if (value) {
             return Number(value)

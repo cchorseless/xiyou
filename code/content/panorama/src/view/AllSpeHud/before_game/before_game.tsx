@@ -11,12 +11,13 @@ import { CCLoading } from "../loading/loading";
 import "./before_game.less";
 import { CCGameDifficulty, CCGameEndlessDifficulty } from "./CCGameDifficulty";
 import { CCPlayerInTeamItem } from "./CCPlayerInTeamItem";
+
 export class CCBefore_Game extends CCPanel<NodePropsData> {
 
     TimerRef = createRef<Panel>();
 
     onReady() {
-        return Boolean(GGameScene.Local.PlayerDataComp && GGameScene.GameServiceSystem)
+        return Boolean(GGameScene.GameServiceSystem)
     }
 
     onInitUI() {
@@ -69,11 +70,12 @@ export class CCBefore_Game extends CCPanel<NodePropsData> {
         const iTimeLeft = this.GetState<number>("iTimeLeft");
         const GamseStateSys = this.GetStateEntity(GGameScene.GameServiceSystem)!;
         const tPlayerGameSelection = GamseStateSys.tPlayerGameSelection;
-        const localselect = GamseStateSys.getPlayerGameSelection(Players.GetLocalPlayer());
+        const localplayerid = Players.GetLocalPlayer()
+        const localselect = GamseStateSys.getPlayerGameSelection(localplayerid);
         const sCourierIDInUse = localselect.Courier;
         const maxDiff = localselect.Difficulty.MaxChapter
         const layers = localselect.Difficulty.MaxLevel
-        const courierNames = GGameScene.Local.TCharacter.BagComp!.getAllCourierNames();
+        const courierNames = GBagComponent.GetOneInstance(localplayerid).getAllCourierNames();
         return (
             <Panel ref={this.__root__} id="CC_Before_Game" hittest={false} {...this.initRootAttrs()}>
                 {/* <Button id="CustomDashBoardButton" onactivate={() => $.DispatchEvent("DOTAHUDShowDashboard")} /> */}
@@ -150,5 +152,4 @@ export class CCBefore_Game extends CCPanel<NodePropsData> {
         )
     }
 }
-
 

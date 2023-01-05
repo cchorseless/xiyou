@@ -6,7 +6,7 @@ const {
 } = require('@aabao/webpack-panorama');
 
 /** @type {import('webpack').Configuration} */
-const isProduction = false;;
+const isProduction = true;;
 const fileList = () => {
     let viewdir = [
         "config"
@@ -131,7 +131,7 @@ module.exports = {
                 // },
                 // 英雄选择
                 // {
-                //     import: './view/AllSpeHud/hero_select/hero_select.xml',
+                //     import: './view/AllSpeHud/before_game/before_game.xml',
                 //     type: 'HeroSelection'
                 // },
                 // 结束界面

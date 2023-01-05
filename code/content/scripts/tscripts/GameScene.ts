@@ -82,6 +82,7 @@ export class GameScene {
     static StartGame() {
         GRoundSystem.GetInstance().StartGame();
         GDrawSystem.GetInstance().StartGame();
+        GPlayerEntityRoot.StartGame();
     }
 
 
@@ -266,7 +267,7 @@ export class GameScene {
             // -- 游戏初始化
             case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
                 GPlayerEntityRoot.UploadGameRecord(GameEnum.EGameRecordKey.GameTime.GAMERULES_STATE_CUSTOM_GAME_SETUP, GetSystemTimeMS() / 1000);
-                await GPlayerEntityRoot.StartGame();
+                await GPlayerEntityRoot.LoginServer();
                 break;
             // 	-- 选择英雄,可以获取玩家数量
             case DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION:
@@ -297,6 +298,7 @@ export class GameScene {
 
 
     static OnAllPlayerClientLoginFinish() {
+        LogHelper.print("OnAllPlayerClientLoginFinish")
         while (this._WaitSyncEntity.length > 0) {
             let entity = this._WaitSyncEntity.shift();
             if (entity == null) {

@@ -36,14 +36,29 @@ export class PlayerSystem extends ET.EntityRoot {
         /**客户端登陆 */
         EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_LoginGame, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
             event.state = true;
-            this.OnLoginPlayer(event.PlayerID);
+            this.OnClientLoginPlayer(event.PlayerID);
         }));
 
-
     }
-
+    /**
+     * 登录服务器
+     */
+    static async LoginServer() {
+        let allPlayer = this.GetAllPlayerid();
+        let allServerPlayerId: string[] = [];
+        for (let playerid of allPlayer) {
+            let playerScene = new PlayerScene();
+            PlayerEntityRoot.Active(playerScene, playerid);
+            let playerRoot = playerScene.ETRoot;
+            await playerRoot.PlayerHttpComp().PlayerLogin(playerid);
+            allServerPlayerId.push(playerRoot.PlayerHttpComp().ServerPlayerID)
+        }
+        let playerRoot = this.GetOneOnlinePlayer();;
+        await playerRoot.PlayerHttpComp().CreateGameRecord(allServerPlayerId);
+        this.ListenPlayerDisconnect();
+    }
     static readonly IsAllLogin: boolean = false;
-    private static OnLoginPlayer(playerid: PlayerID) {
+    private static OnClientLoginPlayer(playerid: PlayerID) {
         if (this.IsAllLogin) {
             return;
         }
@@ -81,14 +96,15 @@ export class PlayerSystem extends ET.EntityRoot {
        * @param inter
        */
     public static ListenPlayerDisconnect(inter: number = 5) {
-        GTimerHelper.AddTimer(inter, GHandler.create(this, () => {
-            this.GetAllPlayerid().forEach(async (iPlayerID) => {
-                if (PlayerResource.GetConnectionState(iPlayerID) == DOTAConnectionState_t.DOTA_CONNECTION_STATE_ABANDONED) {
-                    await this.OnPlayerLeaveGame(iPlayerID);
-                }
-            });
-            return inter;
-        }), true);
+        GTimerHelper.AddTimer(inter,
+            GHandler.create(this, () => {
+                this.GetAllPlayerid().forEach(async (iPlayerID) => {
+                    if (PlayerResource.GetConnectionState(iPlayerID) == DOTAConnectionState_t.DOTA_CONNECTION_STATE_ABANDONED) {
+                        await this.OnPlayerLeaveGame(iPlayerID);
+                    }
+                });
+                return inter;
+            }), true);
     }
 
     /**
@@ -145,20 +161,14 @@ export class PlayerSystem extends ET.EntityRoot {
     }
 
 
-
-    static async StartGame() {
-        let allPlayer = this.GetAllPlayerid();
-        let allServerPlayerId: string[] = [];
-        for (let playerid of allPlayer) {
-            let playerScene = new PlayerScene();
-            PlayerEntityRoot.Active(playerScene, playerid);
-            let playerRoot = playerScene.ETRoot;
-            await playerRoot.PlayerHttpComp().PlayerLogin(playerid);
-            allServerPlayerId.push(playerRoot.PlayerHttpComp().ServerPlayerID)
+    /**
+     * 开始游戏
+     */
+    static StartGame() {
+        const allPlayer = PlayerEntityRoot.GetAllInstance()
+        for (let player of allPlayer) {
+            player.PlayerDataComp().StartGame();
         }
-        let playerRoot = this.GetOneOnlinePlayer();;
-        await playerRoot.PlayerHttpComp().CreateGameRecord(allServerPlayerId);
-        this.ListenPlayerDisconnect();
     }
 
     /**
