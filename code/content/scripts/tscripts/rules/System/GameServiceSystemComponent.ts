@@ -2,6 +2,7 @@ import { EventHelper } from "../../helper/EventHelper";
 import { HttpHelper } from "../../helper/HttpHelper";
 import { GameProtocol } from "../../shared/GameProtocol";
 import { GameServiceConfig } from "../../shared/GameServiceConfig";
+import { GEventHelper } from "../../shared/lib/GEventHelper";
 import { GameServiceSystem } from "../../shared/rules/System/GameServiceSystem";
 
 @GReloadable
@@ -13,16 +14,53 @@ export class GameServiceSystemComponent extends GameServiceSystem {
     }
 
     addEvent() {
+        GEventHelper.AddEvent(GCharacterDataComponent.name, GHandler.create(this, (e: ICharacterDataComponent) => {
+            const playerid = e.BelongPlayerid;
+            this.tPlayerGameSelection[playerid + ""] = this.tPlayerGameSelection[playerid + ""] || ({ Difficulty: {} } as any);
+            const data = this.tPlayerGameSelection[playerid + ""];
+            data.Difficulty.MaxChapter = e.getGameRecordAsNumber(GameProtocol.ECharacterGameRecordKey.iDifficultyMaxChapter) || GameServiceConfig.EDifficultyChapter.n1;
+            data.Difficulty.MaxLevel = e.getGameRecordAsNumber(GameProtocol.ECharacterGameRecordKey.iDifficultyMaxLevel) || 0;
+            data.Difficulty.Chapter = data.Difficulty.MaxLevel == GameServiceConfig.EDifficultyChapter.endless ? GameServiceConfig.EDifficultyChapter.endless : (data.Difficulty.MaxLevel + 1);
+            data.Difficulty.Level = data.Difficulty.MaxLevel;
+            data.Courier = e.getGameRecord(GameProtocol.ECharacterGameRecordKey.sCourierIDInUse) || GameServiceConfig.DefaultCourier;
+            this.SyncClient();
+        }))
         EventHelper.addProtocolEvent(GameProtocol.Protocol.SelectDifficultyChapter, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
-            const characterdata = GCharacterDataComponent.GetOneInstance(e.PlayerID);
-
-
+            const characterdata = this.tPlayerGameSelection[e.PlayerID + ""];
+            const charpter = e.data;
+            if (characterdata && characterdata.Difficulty.MaxChapter >= charpter) {
+                characterdata.Difficulty.Chapter = charpter;
+                e.state = true;
+                this.SyncClient();
+                return
+            }
+            e.state = false;
         }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.SelectDifficultyEndlessLevel, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
-
+            const characterdata = this.tPlayerGameSelection[e.PlayerID + ""];
+            const level = e.data;
+            if (characterdata && characterdata.Difficulty.MaxLevel >= level) {
+                characterdata.Difficulty.Level = level;
+                e.state = true;
+                this.SyncClient();
+                return
+            }
+            e.state = false;
         }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.SelectCourier, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
-
+            const bagcomp = GBagComponent.GetOneInstance(e.PlayerID);
+            const allcouriers = bagcomp.getAllCourierNames();
+            const characterdata = this.tPlayerGameSelection[e.PlayerID + ""];
+            const couriername = e.data;
+            if (characterdata && couriername && allcouriers.includes(couriername)) {
+                if (characterdata && characterdata.Courier !== couriername) {
+                    characterdata.Courier = couriername;
+                    e.state = true;
+                    this.SyncClient();
+                    return
+                }
+            }
+            e.state = false;
         }));
 
         const hander = GHandler.create(this, async (e: JS_TO_LUA_DATA) => {

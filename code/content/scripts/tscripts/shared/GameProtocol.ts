@@ -10,6 +10,7 @@ export module GameProtocol {
         static readonly LoginOut = "/LoginOut";
         static readonly SetServerKey = "/SetServerKey";
         static readonly Buy_ShopItem = "/Buy_ShopItem";
+        static readonly UploadCharacterGameRecord = "UploadCharacterGameRecord";
         // 开局
         static readonly SelectDifficultyChapter = "/SelectDifficultyChapter";
         static readonly SelectDifficultyEndlessLevel = "/SelectDifficultyEndlessLevel";
@@ -26,7 +27,7 @@ export module GameProtocol {
     }
 
     /**服务器存的key */
-    export enum EGameDataStrDicKey {
+    export enum ECharacterGameRecordKey {
         /**當前信使 */
         sCourierIDInUse = "sCourierIDInUse",
         /**当前信使特效 */

@@ -235,6 +235,7 @@ export module ET {
             //#endregion LUA
         }
 
+
         /**
          * 获取一个单例
          * @returns

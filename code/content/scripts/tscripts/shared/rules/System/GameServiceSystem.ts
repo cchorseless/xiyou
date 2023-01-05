@@ -8,7 +8,6 @@ export class GameServiceSystem extends ET.SingletonComponent {
     IsAllPlayerBindHero: boolean = false;
     @serializeETProps()
     BindHeroPlayer: number[] = [];
-
     /**章节难度*/
     @serializeETProps()
     DifficultyChapter: GameServiceConfig.EDifficultyChapter = GameServiceConfig.EDifficultyChapter.n1;
@@ -24,5 +23,9 @@ export class GameServiceSystem extends ET.SingletonComponent {
 
     getDifficultyChapterDes() {
         return GameServiceConfig.EDifficultyChapter[this.DifficultyLevel] as string;
+    }
+
+    getPlayerGameSelection(playerid: PlayerID) {
+        return this.tPlayerGameSelection[playerid + ""];
     }
 }

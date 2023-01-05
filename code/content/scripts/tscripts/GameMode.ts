@@ -1,4 +1,3 @@
-import { Assert_Sounds } from "./assert/Assert_Sounds";
 import { GameDebugger } from "./GameDebugger";
 import { GameScene } from "./GameScene";
 import { GameSetting } from "./GameSetting";
@@ -87,36 +86,5 @@ export class GameMode {
         // 更新全局NPC
         // this.InitGlobalBaseNPC();
         LogHelper.print("Script reloaded end!");
-    }
-    /**本局是否結束 */
-    public bGameEnd = false;
-    public Victory() {
-        if (this.bGameEnd == true) return;
-        GPlayerEntityRoot.GetAllPlayeridByTeam().forEach((iPlayerID) => {
-            let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
-            if (_hHero && _hHero.IsAlive()) {
-                // this.UpdatePlayerEndData(hHero)
-            }
-        });
-        this.bGameEnd = true;
-        EmitAnnouncerSound(Assert_Sounds.Announcer.end_02);
-        EmitGlobalSound(Assert_Sounds.Game.Victory);
-        GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_GOODGUYS);
-    }
-    public Defeat() {
-        if (this.bGameEnd == true) return;
-        GPlayerEntityRoot.GetAllPlayeridByTeam().forEach((iPlayerID) => {
-            let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
-            if (_hHero && _hHero.IsAlive()) {
-                // this.UpdatePlayerEndData(hHero)
-                if (!IsInToolsMode()) {
-                    _hHero.ForceKill(false);
-                }
-            }
-        });
-        this.bGameEnd = true;
-        EmitAnnouncerSound(Assert_Sounds.Announcer.end_08);
-        EmitGlobalSound(Assert_Sounds.Game.Defeat);
-        GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
     }
 }

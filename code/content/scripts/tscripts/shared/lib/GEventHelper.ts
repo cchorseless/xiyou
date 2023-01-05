@@ -6,9 +6,7 @@ export module GEventHelper {
         if (AllEventInfo[eventName] == null) {
             AllEventInfo[eventName] = [] as any;
         }
-        if (!isOnce) {
-            handler.once = false;
-        }
+        handler.once = false;
         AllEventInfo[eventName].push({ isonce: isOnce, playerid: playerid, handler: handler });
     }
 

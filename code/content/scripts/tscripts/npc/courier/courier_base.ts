@@ -24,10 +24,10 @@ export class courier_base extends BaseNpc_Hero_Plus {
             let ability = this.GetAbilityByIndex(i);
             if (ability) ability.UpgradeAbility(true);
         }
-        let ability1 = this.addAbilityPlus(courier_challenge_gold.name);
-        let ability2 = this.addAbilityPlus(courier_challenge_wood.name);
-        let ability3 = this.addAbilityPlus(courier_challenge_equip.name);
-        let ability4 = this.addAbilityPlus(courier_challenge_artifact.name);
+        this.addAbilityPlus(courier_challenge_gold.name);
+        this.addAbilityPlus(courier_challenge_wood.name);
+        this.addAbilityPlus(courier_challenge_equip.name);
+        this.addAbilityPlus(courier_challenge_artifact.name);
         this.SetIdleAcquire(false);
     }
 

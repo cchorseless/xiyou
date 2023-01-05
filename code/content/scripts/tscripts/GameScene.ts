@@ -3,6 +3,7 @@
  * 弃用，采用缓存类的形式
  */
 
+import { Assert_Sounds } from "./assert/Assert_Sounds";
 import { GameFunc } from "./GameFunc";
 import { EntityHelper } from "./helper/EntityHelper";
 import { EventHelper } from "./helper/EventHelper";
@@ -83,6 +84,46 @@ export class GameScene {
         GDrawSystem.GetInstance().StartGame();
     }
 
+
+    /**本局是否結束 */
+    static bGameEnd = false;
+    static bVictory = false
+
+    static Victory() {
+        if (this.bGameEnd == true) return;
+        GPlayerEntityRoot.GetAllPlayeridByTeam().forEach((iPlayerID) => {
+            let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
+            if (_hHero && _hHero.IsAlive()) {
+                // this.UpdatePlayerEndData(hHero)
+            }
+        });
+        this.bGameEnd = true;
+        this.bVictory = true;
+        EmitAnnouncerSound(Assert_Sounds.Announcer.end_02);
+        EmitGlobalSound(Assert_Sounds.Game.Victory);
+        GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_GOODGUYS);
+    }
+    static Defeat() {
+        if (this.bGameEnd == true) return;
+        GPlayerEntityRoot.GetAllPlayeridByTeam().forEach((iPlayerID) => {
+            let _hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID);
+            if (_hHero && _hHero.IsAlive()) {
+                // this.UpdatePlayerEndData(hHero)
+                if (!IsInToolsMode()) {
+                    _hHero.ForceKill(false);
+                }
+            }
+        });
+        this.bGameEnd = true;
+        this.bVictory = false;
+        EmitAnnouncerSound(Assert_Sounds.Announcer.end_08);
+        EmitGlobalSound(Assert_Sounds.Game.Defeat);
+        GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
+    }
+
+    private static OnGameEnd() {
+
+    }
 
     private static addEvent() {
         EventHelper.addGameEvent(GameEnum.GameEvent.game_rules_state_change, GHandler.create(this, this.onGameRulesStateChange));

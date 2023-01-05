@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react";
+import React from "react";
 import { GameServiceConfig } from "../../../../../scripts/tscripts/shared/GameServiceConfig";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { KVHelper } from "../../../helper/KVHelper";
@@ -57,15 +57,13 @@ export class CCPlayerInTeamItem extends CCPanel<ICCPlayerInTeamItem> {
                     })()}
                 </Panel>
                 <Panel id="PlayerState" >
-                    {(() => {
-                        if (tGameSelection.IsReady) {
-                            return <Panel id="PlayerReady" />;
-                        }
-                        return <Label id="PlayerNotReady" localizedText="#PlayerNotReady" />;
-                    })()}
+                    {
+                        tGameSelection.IsReady ?
+                            <Panel id="PlayerReady" /> : <Label id="PlayerNotReady" localizedText="#PlayerNotReady" />
+                    }
                 </Panel>
                 <CCPlayerCard iPlayerID={iPlayerID} />
-                <CCRankEmblem id="PlayerEndlessRankEmblem" rank={tGameSelection.EndlessRank} />
+                {tGameSelection.EndlessRank && <CCRankEmblem id="PlayerEndlessRankEmblem" rank={tGameSelection.EndlessRank} />}
                 {tGameSelection.bNewPlayer && <Panel id="NewPlayerMain">
                     <Label localizedText="#Help_new_player" />
                     <Image />

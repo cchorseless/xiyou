@@ -69,9 +69,9 @@ export class EnemySystemComponent extends ET.SingletonComponent {
                 this.warnTimer = GTimerHelper.AddTimer(1, GHandler.create(this, () => {
                     if (GameRules.GetGameTime() > fWarningDefeatTime) {
                         if (GRoundSystem.GetInstance().IsEndlessRound()) {
-                            GameRules.Addon.Victory();
+                            GGameScene.Victory();
                         } else {
-                            GameRules.Addon.Defeat();
+                            GGameScene.Defeat();
                         }
                         return;
                     }

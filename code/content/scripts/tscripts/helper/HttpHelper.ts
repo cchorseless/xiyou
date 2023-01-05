@@ -42,7 +42,7 @@ export module HttpHelper {
     export function PostRequest(
         sAction: string,
         hParams: { [v: string]: any },
-        hFunc: (StatusCode: number, Body: string, response: CScriptHTTPResponse) => void = null,
+        hFunc: (Body: any, response: CScriptHTTPResponse) => void = null,
         address: string,
         token: string,
         fTimeout: number = 30
@@ -57,9 +57,13 @@ export module HttpHelper {
         handle.SetHTTPRequestRawPostBody("application/json", json.encode(hParams));
         handle.SetHTTPRequestAbsoluteTimeoutMS(fTimeout * 1000);
         handle.Send((response) => {
-            if (hFunc) {
-                // LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
-                hFunc(response.StatusCode, response.Body, response);
+            if (response.StatusCode == 200) {
+                if (hFunc) {
+                    // LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
+                    hFunc(json.decode(response.Body)[0], response);
+                }
+            } else {
+                LogHelper.error("http cb=>", sAction, response.StatusCode, '-----------');
             }
         });
     }
@@ -80,7 +84,7 @@ export module HttpHelper {
                     // LogHelper.print("http cb=>", sAction, response.StatusCode, response.Body);
                     resolve(json.decode(response.Body)[0]);
                 } else {
-                    LogHelper.error("http cb=>", sAction, response.StatusCode,'-----------');
+                    LogHelper.error("http cb=>", sAction, response.StatusCode, '-----------');
                     reject(response.Body);
                 }
             });

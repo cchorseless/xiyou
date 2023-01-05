@@ -1,14 +1,13 @@
 /** Create By Editor*/
 import React, { createRef } from "react";
-import { GameProtocol } from "../../../../../scripts/tscripts/shared/GameProtocol";
 import { GameServiceConfig } from "../../../../../scripts/tscripts/shared/GameServiceConfig";
-import { EEnum } from "../../../../../scripts/tscripts/shared/Gen/Types";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCDOTAChat } from "../../AllUIElement/CCDOTAChat/CCDOTAChat";
 import { CCImageNumber } from "../../AllUIElement/CCImageNumber/CCImageNumber";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import { CCCourierCard } from "../../Courier/CCCourierCard";
+import { CCLoading } from "../loading/loading";
 import "./before_game.less";
 import { CCGameDifficulty, CCGameEndlessDifficulty } from "./CCGameDifficulty";
 import { CCPlayerInTeamItem } from "./CCPlayerInTeamItem";
@@ -21,7 +20,8 @@ export class CCBefore_Game extends CCPanel<NodePropsData> {
     }
 
     onInitUI() {
-        GGameScene.Local.PlayerDataComp.RegRef(this);
+        Game.SetAutoLaunchEnabled(false);
+        Game.AutoAssignPlayersToTeams();
         GGameScene.GameServiceSystem.RegRef(this);
         this.UpdateState({ iTimeLeft: -1 });
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {
@@ -32,23 +32,48 @@ export class CCBefore_Game extends CCPanel<NodePropsData> {
     }
 
 
+    OnLockAndStartPressed() {
+        // Don't allow a forced start if there are unassigned players
+        if (Game.GetUnassignedPlayerIDs().length > 0) {
+            return;
+        }
+        // Lock the team selection so that no more team changes can be made
+        Game.SetTeamSelectionLocked(true);
+        // Disable the auto start count down
+        Game.SetAutoLaunchEnabled(false);
+        // Set the remaining time before the game starts
+        Game.SetRemainingSetupTime(0);
+        GTimerHelper.AddTimer(
+            3,
+            GHandler.create(this, () => {
+                let loading = CCLoading.GetInstance();
+                if (loading) {
+                    loading!.destroy();
+                }
+            })
+        );
+    };
+
+    //--------------------------------------------------------------------------------------------------
+    // Handler for when the Cancel and Unlock button is pressed
+    //--------------------------------------------------------------------------------------------------
+    OnCancelAndUnlockPressed() {
+        // Unlock the team selection, allowing the players to change teams again
+        Game.SetTeamSelectionLocked(false);
+        // Stop the countdown timer
+        Game.SetRemainingSetupTime(-1);
+    }
+
     render() {
         if (!this.__root___isValid) { return this.defaultRender("CC_Before_Game") }
         const iTimeLeft = this.GetState<number>("iTimeLeft");
-        const DataComp = GGameScene.Local.TCharacter.DataComp!;
-        const sCourierIDInUse = DataComp.getGameDataStr(GameProtocol.EGameDataStrDicKey.sCourierIDInUse) || GameServiceConfig.DefaultCourier;
-        const iDifficultyMaxChapter = DataComp.getGameDataStr(GameProtocol.EGameDataStrDicKey.iDifficultyMaxChapter) || "0";
-        const iDifficultyMaxLevel = DataComp.getGameDataStr(GameProtocol.EGameDataStrDicKey.iDifficultyMaxLevel) || "0";
-        const maxDiff = Number(iDifficultyMaxChapter);
-        const layers = Number(iDifficultyMaxLevel);
-        const courierunlock = GGameScene.Local.TCharacter.BagComp?.getItemByType(EEnum.EItemType.Courier);
-        const courierNames: Set<string> = new Set();
-        courierNames.add(GameServiceConfig.DefaultCourier);
-        courierunlock?.forEach(item => {
-            courierNames.add(item.Config?.ItemName || "")
-        })
         const GamseStateSys = this.GetStateEntity(GGameScene.GameServiceSystem)!;
         const tPlayerGameSelection = GamseStateSys.tPlayerGameSelection;
+        const localselect = GamseStateSys.getPlayerGameSelection(Players.GetLocalPlayer());
+        const sCourierIDInUse = localselect.Courier;
+        const maxDiff = localselect.Difficulty.MaxChapter
+        const layers = localselect.Difficulty.MaxLevel
+        const courierNames = GGameScene.Local.TCharacter.BagComp!.getAllCourierNames();
         return (
             <Panel ref={this.__root__} id="CC_Before_Game" hittest={false} {...this.initRootAttrs()}>
                 {/* <Button id="CustomDashBoardButton" onactivate={() => $.DispatchEvent("DOTAHUDShowDashboard")} /> */}
@@ -63,7 +88,7 @@ export class CCBefore_Game extends CCPanel<NodePropsData> {
                     {/* 第一次点击列表，列表总是会自动回到最顶上，SetFocus可以解决，虽然我不知道为什么能解决 */}
                     <CCPanel id="PlayerCourierList" onload={p => p.SetFocus()} scroll="y" >
                         {
-                            Array.from(courierNames).map(([sCourierName, index]) => {
+                            courierNames.map(([sCourierName, index]) => {
                                 return (
                                     <CCCourierCard key={sCourierName}
                                         className={CSSHelper.ClassMaker("PlayerCourierCard", { "Selected": sCourierIDInUse == sCourierName })}

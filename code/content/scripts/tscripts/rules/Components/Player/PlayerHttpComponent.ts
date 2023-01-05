@@ -69,6 +69,19 @@ export class PlayerHttpComponent extends ET.Component {
         }
         LogHelper.error(`PlayerLoginOut error -----------------------`);
     }
+    public UploadCharacterGameRecord(key: string[], v: string[]) {
+        if (this.IsDisposed() || !this.IsOnline) {
+            return;
+        }
+        HttpHelper.PostRequest(GameProtocol.Protocol.UploadCharacterGameRecord, { Keys: key, Values: v }, (b, c) => {
+            let cbmsg1: H2C_CommonResponse = b;
+            if (cbmsg1.Error == 0) {
+                LogHelper.print(`UploadCharacterGameRecord => ${this.BelongPlayerid}-----------------------`);
+                return;
+            }
+            LogHelper.error(`UploadCharacterGameRecord error -----------------------`);
+        }, this.getAdressPort(), this.TOKEN);
+    }
 
     public async UploadGameRecord(key: string[], v: string[]) {
         if (this.IsDisposed() || !this.IsOnline) {

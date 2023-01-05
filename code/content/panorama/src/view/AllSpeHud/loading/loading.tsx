@@ -9,8 +9,7 @@ import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
-import { CCHero_Select } from "../hero_select/hero_select";
-import { CCTeam_select } from "../team_select/team_select";
+import { CCBefore_Game } from "../before_game/before_game";
 import "./loading.less";
 
 /**只用loading一个节点作为开局界面，其他全部作为子节点添加。 */
@@ -39,7 +38,10 @@ export class CCLoading extends CCPanel<NodePropsData> {
             }
             if (state == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP) {
                 this.LoginServer();
+                Game.SetAutoLaunchEnabled(false);
+                Game.AutoAssignPlayersToTeams();
             }
+
             LogHelper.print("current state :", state);
             this.UpdateState({ gamestate: state })
         })
@@ -58,12 +60,12 @@ export class CCLoading extends CCPanel<NodePropsData> {
             <Panel className="CC_Loading" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPanel id="loadingBg" />
                 {/* 队伍选择界面 */}
-                {gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP &&
+                {/* {gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP &&
                     <CCTeam_select />
-                }
+                } */}
                 {/* 英雄选择 */}
                 {login && gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION &&
-                    <CCHero_Select />
+                    <CCBefore_Game />
                 }
                 {this.props.children}
                 {this.__root___childs}

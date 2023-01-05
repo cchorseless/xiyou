@@ -22,7 +22,7 @@ export class CourierEntityRoot extends BattleUnitEntityRoot {
         this.AddComponent(GGetRegClass<typeof InventoryComponent>("InventoryComponent"));
         this.AddComponent(GGetRegClass<typeof CourierBagComponent>("CourierBagComponent"));
         this.AddComponent(GGetRegClass<typeof CourierShopComponent>("CourierShopComponent"));
-        // this.RefreshCourier()
+        this.RefreshCourier()
 
     }
 
@@ -32,7 +32,7 @@ export class CourierEntityRoot extends BattleUnitEntityRoot {
             return
         }
         let sCurrentCourierName = this.GetCourierName()
-        let sCourierName = GCharacterDataComponent.GetOneInstance(this.BelongPlayerid).GetPlayerCourierInUse()
+        let sCourierName = GGameServiceSystem.GetInstance().tPlayerGameSelection[this.BelongPlayerid + ""].Courier;
         if (sCurrentCourierName == sCourierName && modifier_courier.findIn(hHero)) {
             return
         }
@@ -49,8 +49,6 @@ export class CourierEntityRoot extends BattleUnitEntityRoot {
         }
         return GameServiceConfig.DefaultCourier;
     }
-
-
 
 
     CourierDataComp() {
