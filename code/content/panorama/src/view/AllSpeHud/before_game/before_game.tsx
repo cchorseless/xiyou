@@ -15,14 +15,11 @@ import { CCPlayerInTeamItem } from "./CCPlayerInTeamItem";
 export class CCBefore_Game extends CCPanel<NodePropsData> {
 
     TimerRef = createRef<Panel>();
-
     onReady() {
         return Boolean(GGameScene.GameServiceSystem)
     }
 
     onInitUI() {
-        Game.SetAutoLaunchEnabled(false);
-        Game.AutoAssignPlayersToTeams();
         GGameScene.GameServiceSystem.RegRef(this);
         this.UpdateState({ iTimeLeft: -1 });
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {

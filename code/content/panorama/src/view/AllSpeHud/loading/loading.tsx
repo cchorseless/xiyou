@@ -23,6 +23,7 @@ export class CCLoading extends CCPanel<NodePropsData> {
     }
     onDestroy() {
         TimerHelper.Stop();
+        GameScene.Scene.Dispose();
         LogHelper.print("----------------loading close----------------")
     }
 
@@ -44,9 +45,21 @@ export class CCLoading extends CCPanel<NodePropsData> {
         }
         if (state == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP) {
             this.LoginServer();
-            Game.SetAutoLaunchEnabled(false);
-            Game.AutoAssignPlayersToTeams();
-            Game.SetRemainingSetupTime(0);
+            let playerID = Game.GetLocalPlayerID();
+            let ishost = false;
+            if (Players.IsValidPlayerID(playerID)) {
+                ishost = Boolean(Game.GetPlayerInfo(playerID).player_has_host_privileges);
+            }
+            // 主机结束队伍选择阶段
+            if (ishost) {
+                Game.SetAutoLaunchEnabled(false);
+                Game.AutoAssignPlayersToTeams();
+                Game.SetRemainingSetupTime(0);
+            }
+        }
+        else if (state == DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION) {
+            TimerHelper.Init();
+            GameScene.Init();
         }
         LogHelper.print("current state :", state);
         this.UpdateState({ gamestate: state })
@@ -68,7 +81,7 @@ export class CCLoading extends CCPanel<NodePropsData> {
                     <CCBefore_Game />
                 } */}
                 {/* 英雄选择 */}
-                {gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION &&
+                {login && gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION &&
                     <CCBefore_Game />
                 }
                 {this.props.children}
@@ -79,6 +92,4 @@ export class CCLoading extends CCPanel<NodePropsData> {
 }
 AllShared.Init();
 AllEntity.Init();
-TimerHelper.Init();
-GameScene.Init()
 render(<CCLoading />, $.GetContextPanel());

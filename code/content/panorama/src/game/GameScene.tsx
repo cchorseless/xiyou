@@ -40,7 +40,7 @@ export class GameScene {
                 GameScene.Scene.AddChild(GPlayerEntityRoot, playerid)
             }
         }
-        // this.GameEventSystem.LoadNetTableData();
+        this.GameEventSystem.LoadNetTableData();
     }
 }
 declare global {

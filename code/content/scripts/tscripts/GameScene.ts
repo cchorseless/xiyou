@@ -268,6 +268,7 @@ export class GameScene {
             case DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP:
                 GPlayerEntityRoot.UploadGameRecord(GameEnum.EGameRecordKey.GameTime.GAMERULES_STATE_CUSTOM_GAME_SETUP, GetSystemTimeMS() / 1000);
                 await GPlayerEntityRoot.LoginServer();
+                // GameRules.SetCustomGameSetupRemainingTime(1)
                 break;
             // 	-- 选择英雄,可以获取玩家数量
             case DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION:
