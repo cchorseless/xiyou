@@ -272,6 +272,7 @@ export class GameScene {
                 break;
             // 	-- 选择英雄,可以获取玩家数量
             case DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION:
+                GGameServiceSystem.GetInstance().StartGameModeSelection()
                 break;
             // 	-- 策略时间 创建初始英雄，调用初始英雄脚本
             case DOTA_GameState.DOTA_GAMERULES_STATE_STRATEGY_TIME:

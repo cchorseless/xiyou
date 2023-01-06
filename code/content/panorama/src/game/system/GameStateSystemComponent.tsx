@@ -18,4 +18,9 @@ export class GameServiceSystemComponent extends GameServiceSystem {
     SelectCourier(name: string) {
         NetHelper.SendToLua(GameProtocol.Protocol.SelectCourier, name);
     }
+
+    SelectReady(isready: string) {
+        NetHelper.SendToLua(GameProtocol.Protocol.SelectReady, isready);
+    }
+
 }

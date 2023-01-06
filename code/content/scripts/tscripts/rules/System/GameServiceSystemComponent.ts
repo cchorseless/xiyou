@@ -7,17 +7,64 @@ import { GameServiceSystem } from "../../shared/rules/System/GameServiceSystem";
 
 @GReloadable
 export class GameServiceSystemComponent extends GameServiceSystem {
+    static SelectionTime = 30;
+    static SelectionReadyLockTime = 5;
 
     public onAwake(): void {
         this.addEvent();
+    }
+
+    StartGameModeSelection() {
+        this.BeforeGameEndTime = GameRules.GetGameTime() + GameServiceSystemComponent.SelectionTime;
+        const Allplayerids = GPlayerEntityRoot.GetAllPlayerid();
+        Allplayerids.forEach(playerid => {
+            this.initPlayerGameSelection(playerid);
+        })
+        GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
+            if (GameRules.GetGameTime() >= this.BeforeGameEndTime) {
+                this.FinishGameModeSelection()
+                return
+            }
+            return 0.1;
+        }));
+        this.SyncClient()
+    }
+
+    FinishGameModeSelection() {
+        this.BeforeGameEndTime = -1;
+        let iSelectedDifficulty = GameServiceConfig.EDifficultyChapter.endless;
+        const allPlayerroot = GPlayerEntityRoot.GetAllInstance();
+        allPlayerroot.forEach((playerroot) => {
+            const data = this.getPlayerGameSelection(playerroot.BelongPlayerid);
+            if (data) {
+                //  优先低难度
+                iSelectedDifficulty = math.min(iSelectedDifficulty, data.Difficulty.Chapter)
+            }
+            let player = PlayerResource.GetPlayer(playerroot.BelongPlayerid)
+            if (player != null) {
+                player.SetSelectedHero(GameServiceConfig.DEFAULT_PICKED_HERO)
+            }
+        })
+        this.DifficultyChapter = iSelectedDifficulty;
+        if (iSelectedDifficulty == GameServiceConfig.EDifficultyChapter.endless) {
+            //  多人无尽选择规则
+            let endlesslayer = 1
+            allPlayerroot.forEach((playerroot) => {
+                const data = this.getPlayerGameSelection(playerroot.BelongPlayerid);
+                if (data) {
+                    iSelectedDifficulty = math.min(endlesslayer, data.Difficulty.Level)
+                }
+            })
+            this.DifficultyChapter = endlesslayer;
+        }
         this.SyncClient()
     }
 
     addEvent() {
         GEventHelper.AddEvent(GCharacterDataComponent.name, GHandler.create(this, (e: ICharacterDataComponent) => {
             const playerid = e.BelongPlayerid;
-            this.tPlayerGameSelection[playerid + ""] = this.tPlayerGameSelection[playerid + ""] || ({ Difficulty: {} } as any);
-            const data = this.tPlayerGameSelection[playerid + ""];
+            this.initPlayerGameSelection(playerid);
+            const data = this.getPlayerGameSelection(playerid);
             data.Difficulty.MaxChapter = e.getGameRecordAsNumber(GameProtocol.ECharacterGameRecordKey.iDifficultyMaxChapter) || GameServiceConfig.EDifficultyChapter.n1;
             data.Difficulty.MaxLevel = e.getGameRecordAsNumber(GameProtocol.ECharacterGameRecordKey.iDifficultyMaxLevel) || 0;
             data.Difficulty.Chapter = data.Difficulty.MaxLevel == GameServiceConfig.EDifficultyChapter.endless ? GameServiceConfig.EDifficultyChapter.endless : (data.Difficulty.MaxLevel + 1);
@@ -47,6 +94,20 @@ export class GameServiceSystemComponent extends GameServiceSystem {
             }
             e.state = false;
         }));
+
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.SelectReady, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            const characterdata = this.tPlayerGameSelection[e.PlayerID + ""];
+            const isready = e.data;
+            if (characterdata && characterdata.IsReady != isready) {
+                characterdata.IsReady = isready;
+
+                e.state = true;
+                this.SyncClient();
+                return
+            }
+            e.state = false;
+        }));
+
         EventHelper.addProtocolEvent(GameProtocol.Protocol.SelectCourier, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             const bagcomp = GBagComponent.GetOneInstance(e.PlayerID);
             const allcouriers = bagcomp.getAllCourierNames();

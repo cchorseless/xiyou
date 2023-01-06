@@ -1,5 +1,4 @@
 import { GameFunc } from "./GameFunc";
-import { GameEnum } from "./shared/GameEnum";
 import { GameServiceConfig } from "./shared/GameServiceConfig";
 
 export class GameSetting {
@@ -15,8 +14,6 @@ export class GameSetting {
     public static readonly MINIMUM_ATTACK_SPEED: number = 20;
     /**最大攻击速度 */
     public static readonly MAXIMUM_ATTACK_SPEED: number = 500;
-    /**玩家初始英雄 */
-    public static readonly DEFAULT_PICKED_HERO: string = GameEnum.Dota2.enum_HeroName.phoenix;
     /**英雄AI时间间隔 */
     public static readonly AI_TIMER_TICK_TIME_HERO: number = 0.25;
     /**AI时间间隔 */

@@ -1,7 +1,6 @@
 import { GameServiceConfig } from "../../GameServiceConfig";
 import { ET, serializeETProps } from "../../lib/Entity";
 
-
 export class GameServiceSystem extends ET.SingletonComponent {
 
     @serializeETProps()
@@ -28,4 +27,21 @@ export class GameServiceSystem extends ET.SingletonComponent {
     getPlayerGameSelection(playerid: PlayerID) {
         return this.tPlayerGameSelection[playerid + ""];
     }
+
+    initPlayerGameSelection(playerid: PlayerID) {
+        this.tPlayerGameSelection[playerid + ""] = this.tPlayerGameSelection[playerid + ""] || {
+            Difficulty: {
+                Chapter: 1,
+                Level: 0,
+                MaxChapter: 1,
+                MaxLevel: 0
+            },
+            Courier: GameServiceConfig.DefaultCourier,
+            Title: "",
+            EndlessRank: 0,
+            IsReady: false,
+            bNewPlayer: false,
+        };
+    }
 }
+

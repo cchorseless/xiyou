@@ -30,38 +30,6 @@ export class CCBefore_Game extends CCPanel<NodePropsData> {
     }
 
 
-    OnLockAndStartPressed() {
-        // Don't allow a forced start if there are unassigned players
-        if (Game.GetUnassignedPlayerIDs().length > 0) {
-            return;
-        }
-        // Lock the team selection so that no more team changes can be made
-        Game.SetTeamSelectionLocked(true);
-        // Disable the auto start count down
-        Game.SetAutoLaunchEnabled(false);
-        // Set the remaining time before the game starts
-        Game.SetRemainingSetupTime(0);
-        GTimerHelper.AddTimer(
-            3,
-            GHandler.create(this, () => {
-                let loading = CCLoading.GetInstance();
-                if (loading) {
-                    loading!.destroy();
-                }
-            })
-        );
-    };
-
-    //--------------------------------------------------------------------------------------------------
-    // Handler for when the Cancel and Unlock button is pressed
-    //--------------------------------------------------------------------------------------------------
-    OnCancelAndUnlockPressed() {
-        // Unlock the team selection, allowing the players to change teams again
-        Game.SetTeamSelectionLocked(false);
-        // Stop the countdown timer
-        Game.SetRemainingSetupTime(-1);
-    }
-
     render() {
         if (!this.__root___isValid) { return this.defaultRender("CC_Before_Game") }
         const iTimeLeft = this.GetState<number>("iTimeLeft");

@@ -15,6 +15,7 @@ export module GameProtocol {
         static readonly SelectDifficultyChapter = "/SelectDifficultyChapter";
         static readonly SelectDifficultyEndlessLevel = "/SelectDifficultyEndlessLevel";
         static readonly SelectCourier = "/SelectCourier";
+        static readonly SelectReady = "/SelectReady";
 
     }
 

