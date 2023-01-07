@@ -4,9 +4,8 @@
         <include src="../../game_main.less" />
     </styles>
     <scripts>
-
         <include src="file://{resources}/layout/custom_game/config.js" />
-        <include src="./before_game.tsx" />
+        <include src="./hero_select.tsx" />
     </scripts>
-    <Panel hittest="false" />
+    <Panel class="root" hittest="false" />
 </root>

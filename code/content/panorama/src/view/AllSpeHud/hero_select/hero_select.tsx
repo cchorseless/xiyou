@@ -1,63 +1,93 @@
-/** Create By Editor*/
+import { render } from "@demon673/react-panorama";
 import React, { createRef } from "react";
+import { AllShared } from "../../../../../scripts/tscripts/shared/AllShared";
+import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { GameServiceConfig } from "../../../../../scripts/tscripts/shared/GameServiceConfig";
+import { AllEntity } from "../../../game/AllEntity";
+import { GameScene } from "../../../game/GameScene";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { NodePropsData } from "../../../libs/BasePureComponent";
+import { DotaUIHelper } from "../../../helper/DotaUIHelper";
+import { LogHelper } from "../../../helper/LogHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { CCDOTAChat } from "../../AllUIElement/CCDOTAChat/CCDOTAChat";
 import { CCImageNumber } from "../../AllUIElement/CCImageNumber/CCImageNumber";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import { CCCourierCard } from "../../Courier/CCCourierCard";
-import { CCLoading } from "../loading/loading";
-import "./before_game.less";
 import { CCGameDifficulty, CCGameEndlessDifficulty } from "./CCGameDifficulty";
 import { CCPlayerInTeamItem } from "./CCPlayerInTeamItem";
+import "./hero_select.less";
 
-export class CCBefore_Game extends CCPanel<NodePropsData> {
+export class CCHero_Select extends CCPanel<NodePropsData> {
 
     TimerRef = createRef<Panel>();
     onReady() {
-        return Boolean(GGameScene.GameServiceSystem)
+        const localplayerid = Players.GetLocalPlayer();
+        return Boolean(GGameScene.GameServiceSystem && GBagComponent.GetOneInstance(localplayerid))
     }
 
     onInitUI() {
+        const localplayerid = Players.GetLocalPlayer()
         GGameScene.GameServiceSystem.RegRef(this);
+        GBagComponent.GetOneInstance(localplayerid).RegRef(this);
         this.UpdateState({ iTimeLeft: -1 });
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {
             let lefttime = GGameScene.GameServiceSystem.BeforeGameEndTime - Game.GetGameTime();;
             this.UpdateState({ iTimeLeft: lefttime });
-            return 1
+            if (lefttime >= 0) {
+                return 1
+            }
         }))
+        this.addEvent();
+        this.onGameStateChange();
     }
 
+    onDestroy() {
+        this.__root___isValid = false;
+        TimerHelper.Stop();
+        GameScene.Scene.Dispose();
+        LogHelper.print("----------------CCHero_Select close----------------")
+    }
 
+    addEvent() {
+        this.addGameEvent(GameEnum.GameEvent.game_rules_state_change, (e) => {
+            this.onGameStateChange()
+        })
+    }
+
+    onGameStateChange() {
+        const state = Game.GetState();
+        if (state != DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION) {
+            this.close()
+        }
+    }
     render() {
-        if (!this.__root___isValid) { return this.defaultRender("CC_Before_Game") }
+        if (!this.__root___isValid) { return this.defaultRender("CC_Hero_Select") }
+        const localplayerid = Players.GetLocalPlayer()
         const iTimeLeft = this.GetState<number>("iTimeLeft");
         const GamseStateSys = this.GetStateEntity(GGameScene.GameServiceSystem)!;
+        const bagcomp = this.GetStateEntity(GBagComponent.GetOneInstance(localplayerid))!;
         const tPlayerGameSelection = GamseStateSys.tPlayerGameSelection;
-        const localplayerid = Players.GetLocalPlayer()
         const localselect = GamseStateSys.getPlayerGameSelection(localplayerid);
         const sCourierIDInUse = localselect.Courier;
         const maxDiff = localselect.Difficulty.MaxChapter
-        const layers = localselect.Difficulty.MaxLevel
-        const courierNames = GBagComponent.GetOneInstance(localplayerid).getAllCourierNames();
+        const layers = localselect.Difficulty.MaxLevel;
+        const courierNames = bagcomp.getAllCourierNames();
         return (
-            <Panel ref={this.__root__} id="CC_Before_Game" hittest={false} {...this.initRootAttrs()}>
+            <Panel ref={this.__root__} id="CC_Hero_Select" hittest={false} {...this.initRootAttrs()}>
                 {/* <Button id="CustomDashBoardButton" onactivate={() => $.DispatchEvent("DOTAHUDShowDashboard")} /> */}
                 {/* <Button id="CustomSettingButton" onactivate={() => $.DispatchEvent("DOTAShowSettingsPopup")} /> */}
                 <Label id="TimerTitle" localizedText="#TimerTitle" />
                 <Panel id="Timer" hittest={false} ref={this.TimerRef}>
                     <CCImageNumber id="RoundTime" type="4" value={Math.floor(iTimeLeft)} />
                 </Panel>
-                {/* 左边信使选择 */}
                 <Panel id="PlayerCourier" hittest={false} >
                     <Label id="PlayerCourierTitle" localizedText="#CourierSelectionTitle" />
                     {/* 第一次点击列表，列表总是会自动回到最顶上，SetFocus可以解决，虽然我不知道为什么能解决 */}
                     <CCPanel id="PlayerCourierList" onload={p => p.SetFocus()} scroll="y" >
                         {
-                            courierNames.map(([sCourierName, index]) => {
+                            courierNames.map((sCourierName, index) => {
                                 return (
-                                    <CCCourierCard key={sCourierName}
+                                    <CCCourierCard key={sCourierName + ""}
                                         className={CSSHelper.ClassMaker("PlayerCourierCard", { "Selected": sCourierIDInUse == sCourierName })}
                                         sCourierName={sCourierName}
                                         onactivate={p => {
@@ -73,20 +103,21 @@ export class CCBefore_Game extends CCPanel<NodePropsData> {
                             })}
                     </CCPanel>
                 </Panel>
+                {/* 左边信使选择 */}
                 <Panel id="PlayerContainer" hittest={false}>
-                    {
-                        [...Array(GameServiceConfig.GAME_MAX_PLAYER)].map(
-                            (_, index) => {
-                                let iPlayerID = index as PlayerID;
-                                if (Players.IsValidPlayerID(iPlayerID)) {
-                                    return <CCPlayerInTeamItem id={"Player_" + index} iPlayerID={iPlayerID} />
-                                }
-                            })
+                    {Array(GameServiceConfig.GAME_MAX_PLAYER).map(
+                        (_, index) => {
+                            let iPlayerID = index as PlayerID;
+                            if (Players.IsValidPlayerID(iPlayerID)) {
+                                return <CCPlayerInTeamItem key={index + ""} id={"Player_" + index} iPlayerID={iPlayerID} />
+                            }
+                            return null;
+                        })
                     }
                 </Panel>
                 <Panel id="Difficulties" hittest={false}>
                     <Label id="DifficultiesTitle" localizedText="#Select_Difficulties" />
-                    {[...Array(GameServiceConfig.DIFFICULTY_LAST + 1)].map(
+                    {Array(GameServiceConfig.DIFFICULTY_LAST + 1).map(
                         (_, index) => {
                             let charpter = index + 1;
                             if (index == GameServiceConfig.DIFFICULTY_LAST) {
@@ -118,3 +149,9 @@ export class CCBefore_Game extends CCPanel<NodePropsData> {
     }
 }
 
+AllShared.Init();
+AllEntity.Init();
+TimerHelper.Init();
+GameScene.Init();
+DotaUIHelper.Init();
+render(<CCHero_Select />, $.GetContextPanel());

@@ -1,12 +1,10 @@
 /** Create By Editor*/
-import React, { createRef, useState } from "react";
 
 import { CSSHelper } from "../../helper/CSSHelper";
-import { LogHelper } from "../../helper/LogHelper";
-import { CombinationInfoDialog_UI } from "./CombinationInfoDialog_UI";
-import { CombinationDesItem } from "./CombinationDesItem";
 import { KVHelper } from "../../helper/KVHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+import { CombinationDesItem } from "./CombinationDesItem";
+import { CombinationInfoDialog_UI } from "./CombinationInfoDialog_UI";
+
 
 interface IProps extends NodePropsData {
     itemname: string;

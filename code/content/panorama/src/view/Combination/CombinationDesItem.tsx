@@ -1,9 +1,7 @@
 /** Create By Editor*/
-import React, { createRef, useState } from "react";
 
 import { CSSHelper } from "../../helper/CSSHelper";
-import { LogHelper } from "../../helper/LogHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CombinationDesItem_UI } from "./CombinationDesItem_UI";
 interface IProps extends NodePropsData {
     activecount: number;

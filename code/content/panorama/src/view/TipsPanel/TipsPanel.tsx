@@ -1,5 +1,5 @@
 /** Create By Editor*/
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { TipsPanel_UI } from "./TipsPanel_UI";
 interface IProps extends NodePropsData {
 	str: string

@@ -1,7 +1,7 @@
-import React, { createRef, useState } from "react";
+import React from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { AbilityHelper } from "../../helper/DotaEntityHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";

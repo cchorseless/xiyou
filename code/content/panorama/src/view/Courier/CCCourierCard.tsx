@@ -18,7 +18,8 @@ export class CCCourierCard extends CCPanel<ICCCourierCard> {
     }
 
     defaultClass() {
-        const tCourierData = this.props.tCourierData;
+        const sCourierName = this.props.sCourierName;
+        const tCourierData = KVHelper.KVData().CourierUnits[sCourierName];
         const sRarity = tCourierData.Rarity || "R";
         return CSSHelper.ClassMaker("CourierCard", sRarity)
     }

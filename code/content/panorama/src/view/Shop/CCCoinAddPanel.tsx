@@ -1,11 +1,6 @@
-import React, { createRef, PureComponent } from "react";
-import { CSSHelper } from "../../helper/CSSHelper";
-import { LogHelper } from "../../helper/LogHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+import React from "react";
+
 import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
-import { CCImage } from "../AllUIElement/CCImage/CCImage";
-import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
-import { CCMenuNavigation } from "../AllUIElement/CCNavigation/CCMenuNavigation";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCCoinAddPanel.less";
 

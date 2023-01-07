@@ -3,8 +3,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 function tsCssLoader(source) {
-    if (source.search(/import.*.less.*;/) != -1) {
-        source = source.replace(/import.*.(less|sass|scss|css).*;/g, "");
+    const reg = /import(\s*)(\'|\").*\.(less|sass|scss|css)(\'|\")(\s*);/g;
+    if (source.search(reg) != -1) {
+        source = source.replace(reg, "");
     }
     let luastart = source.search(/#region LUA/);
     let luaend = source.search(/#endregion LUA/);

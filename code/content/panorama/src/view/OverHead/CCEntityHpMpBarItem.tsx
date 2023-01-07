@@ -1,6 +1,6 @@
 import React, { createRef } from "react";
 import { FuncHelper } from "../../helper/FuncHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCEntityHpBarItem } from "./CCEntityHpBarItem";
 

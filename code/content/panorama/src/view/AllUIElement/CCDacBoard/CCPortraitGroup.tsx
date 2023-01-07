@@ -1,5 +1,5 @@
 import React from "react";
-import { NodePropsData } from "../../../libs/BasePureComponent";
+
 import { CCPanel } from "../CCPanel/CCPanel";
 import { CCPortrait } from "../CCPortrait/CCPortrait";
 import { CCDOTAXP } from "./CCDOTAXP";

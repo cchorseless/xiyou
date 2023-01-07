@@ -19,8 +19,9 @@ interface _NodePropsData {
     key?: string;
     [k: string]: any;
 };
-// export type NodePropsData = _NodePropsData;
-export type NodePropsData = _NodePropsData & Partial<VCSSStyleDeclaration>;
+declare global {
+    type NodePropsData = _NodePropsData & Partial<VCSSStyleDeclaration>;
+}
 
 interface ReactElement extends React.CElement<NodePropsData, BasePureComponent<NodePropsData>> { }
 
@@ -169,6 +170,9 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         let obj = (this.state as any)[entity.InstanceId];
         if (obj) {
             return obj.Ref as T
+        }
+        else {
+            return entity as T;
         }
     }
 

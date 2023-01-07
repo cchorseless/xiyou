@@ -1,5 +1,5 @@
-import React, { createRef, PureComponent } from "react";
-import { NodePropsData } from "../../../libs/BasePureComponent";
+import React from "react";
+
 import { CCPanel } from "../CCPanel/CCPanel";
 
 interface ICCDOTAScenePanel extends NodePropsData {

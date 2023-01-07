@@ -1,11 +1,9 @@
 import { render } from "@demon673/react-panorama";
-import React, { createRef, PureComponent } from "react";
-import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
+import React from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { ItemHelper, UnitHelper } from "../../helper/DotaEntityHelper";
-import { LogHelper } from "../../helper/LogHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCItemImage } from "../AllUIElement/CCItem/CCItemImage";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCMainPanel } from "../MainPanel/CCMainPanel";

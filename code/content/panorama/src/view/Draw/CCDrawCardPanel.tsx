@@ -1,10 +1,9 @@
 import React from "react";
 import { KVHelper } from "../../helper/KVHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCIconButton } from "../AllUIElement/CCButton/CCIconButton";
 import { CCDOTAScenePanel } from "../AllUIElement/CCDOTAScenePanel/CCDOTAScenePanel";
 import { CCIcon_XClose } from "../AllUIElement/CCIcons/CCIcon_XClose";
-import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDrawCardBottomItem } from "./CCDrawCardBottomItem";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
-import { NodePropsData } from "../../../libs/BasePureComponent";
+
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCInventory.less";
 import { CCInventorySlot } from "./CCInventorySlot";

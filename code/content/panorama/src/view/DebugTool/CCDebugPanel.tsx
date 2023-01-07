@@ -1,6 +1,5 @@
 import React from "react";
-import { LogHelper } from "../../helper/LogHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool, CCDebugTool_Category, CCDebugTool_DemoButton, CCDebugTool_DemoSelectionButton, CCDebugTool_DemoSlider, CCDebugTool_DemoTextEntry, CCDebugTool_DemoToggle } from "./CCDebugTool";

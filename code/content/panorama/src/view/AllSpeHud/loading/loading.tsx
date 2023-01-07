@@ -1,16 +1,11 @@
-// LogHelper必须放第一行先导入
 import { render } from "@demon673/react-panorama";
 import React from "react";
 import { AllShared } from "../../../../../scripts/tscripts/shared/AllShared";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
-import { AllEntity } from "../../../game/AllEntity";
-import { GameScene } from "../../../game/GameScene";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
-import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
-import { CCBefore_Game } from "../before_game/before_game";
 import "./loading.less";
 
 /**只用loading一个节点作为开局界面，其他全部作为子节点添加。 */
@@ -23,7 +18,6 @@ export class CCLoading extends CCPanel<NodePropsData> {
     }
     onDestroy() {
         TimerHelper.Stop();
-        GameScene.Scene.Dispose();
         LogHelper.print("----------------loading close----------------")
     }
 
@@ -39,7 +33,7 @@ export class CCLoading extends CCPanel<NodePropsData> {
             this.close()
             return;
         }
-        if (state == DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME) {
+        if (state >= DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME) {
             this.close()
             return;
         }
@@ -57,11 +51,6 @@ export class CCLoading extends CCPanel<NodePropsData> {
                 Game.SetRemainingSetupTime(0);
             }
         }
-        else if (state == DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION) {
-            TimerHelper.Init();
-            GameScene.Init();
-        }
-        LogHelper.print("current state :", state);
         this.UpdateState({ gamestate: state })
     }
     LoginServer() {
@@ -80,10 +69,6 @@ export class CCLoading extends CCPanel<NodePropsData> {
                 {/* {login && gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP &&
                     <CCBefore_Game />
                 } */}
-                {/* 英雄选择 */}
-                {login && gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_HERO_SELECTION &&
-                    <CCBefore_Game />
-                }
                 {this.props.children}
                 {this.__root___childs}
             </Panel>
@@ -91,5 +76,5 @@ export class CCLoading extends CCPanel<NodePropsData> {
     }
 }
 AllShared.Init();
-AllEntity.Init();
+TimerHelper.Init();
 render(<CCLoading />, $.GetContextPanel());

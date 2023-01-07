@@ -1,6 +1,5 @@
-import React, { createRef, PureComponent } from "react";
-import { NodePropsData } from "../../../libs/BasePureComponent";
-import { CSSHelper } from "../../../helper/CSSHelper";
+import React from "react";
+
 import { CCPanel } from "../CCPanel/CCPanel";
 
 interface ICCImageProps extends NodePropsData {

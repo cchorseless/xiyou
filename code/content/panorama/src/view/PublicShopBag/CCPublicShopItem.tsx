@@ -1,11 +1,10 @@
 
-import React, { createRef, PureComponent } from "react";
+import React from "react";
 import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { ItemHelper } from "../../helper/DotaEntityHelper";
-import { LogHelper } from "../../helper/LogHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCItemImage } from "../AllUIElement/CCItem/CCItemImage";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCPublicShopItem.less";

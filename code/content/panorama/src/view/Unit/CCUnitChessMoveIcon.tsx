@@ -1,6 +1,6 @@
 /** Create By Editor*/
 import React from "react";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCUnitSmallIcon } from "../AllUIElement/CCUnit/CCUnitSmallIcon";
 

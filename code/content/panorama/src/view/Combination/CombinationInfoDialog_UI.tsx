@@ -1,7 +1,6 @@
 
-import React, { createRef, PureComponent } from "react";
-import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
-import { PanelAttributes, ImageAttributes, LabelAttributes } from "@demon673/react-panorama";
+import { ImageAttributes, LabelAttributes, PanelAttributes } from "@demon673/react-panorama";
+import React, { createRef } from "react";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
 

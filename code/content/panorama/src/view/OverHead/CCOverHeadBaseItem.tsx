@@ -1,4 +1,4 @@
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
 interface ICCOverHeadBaseItem extends NodePropsData {

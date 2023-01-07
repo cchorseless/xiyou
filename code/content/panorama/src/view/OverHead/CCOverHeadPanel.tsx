@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCBuildingTopBarItem } from "./CCBuildingTopBarItem";
 import { CCEnemyTopBarItem } from "./CCEnemyTopBarItem";

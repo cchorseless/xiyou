@@ -1,7 +1,7 @@
-import React, { createRef, useState } from "react";
+import React from "react";
 import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCIcon_Lock } from "../AllUIElement/CCIcons/CCIcon_Lock";
 import { CCItemImage } from "../AllUIElement/CCItem/CCItemImage";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";

@@ -1,18 +1,18 @@
 
-import React, { createRef, PureComponent } from "react";
+import React from "react";
 import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
+import { CSSHelper } from "../../helper/CSSHelper";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
+import { CCIcon_Lock } from "../AllUIElement/CCIcons/CCIcon_Lock";
+import { CCIcon_XClose } from "../AllUIElement/CCIcons/CCIcon_XClose";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCPanelBG } from "../AllUIElement/CCPanel/CCPanelPart";
 import { CCToggleButton } from "../AllUIElement/CCToggleButton/CCToggleButton";
 import { CCPublicBagSlotItem } from "./CCPublicBagSlotItem";
+import "./CCPublicShopBagPanel.less";
 import { CCPublicShopBagTitle } from "./CCPublicShopBagTitle";
 import { CCPublicShopItem } from "./CCPublicShopItem";
-import { CCIcon_XClose } from "../AllUIElement/CCIcons/CCIcon_XClose";
-import { CCPanelBG } from "../AllUIElement/CCPanel/CCPanelPart";
-import "./CCPublicShopBagPanel.less";
-import { CCIcon_Lock } from "../AllUIElement/CCIcons/CCIcon_Lock";
-import { CSSHelper } from "../../helper/CSSHelper";
 
 
 export class CCPublicBag extends CCPanel<{}> {

@@ -1,16 +1,10 @@
-import React, { createRef, PureComponent } from "react";
-import { CCPanel } from "../CCPanel/CCPanel";
-import { NodePropsData } from "../../../libs/BasePureComponent";
-import { CSSHelper } from "../../../helper/CSSHelper";
-import { NetHelper } from "../../../helper/NetHelper";
-import { LogHelper } from "../../../helper/LogHelper";
-import { CCMainPanel } from "../../MainPanel/CCMainPanel";
-import { CCAbilityInfoDialog } from "./CCAbilityInfoDialog";
-import { CCAbilityPanel } from "./CCAbilityPanel";
+import React, { createRef } from "react";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
-import { AbilityHelper } from "../../../helper/DotaEntityHelper";
+import { CSSHelper } from "../../../helper/CSSHelper";
 import { KVHelper } from "../../../helper/KVHelper";
+import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCAbilityList.less";
+import { CCAbilityPanel } from "./CCAbilityPanel";
 
 interface ICCAbilityList extends NodePropsData {
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { PathHelper } from "../../../helper/PathHelper";
-import { NodePropsData } from "../../../libs/BasePureComponent";
+
 import { CCImage } from "../CCImage/CCImage";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCMenuNavigation.less";

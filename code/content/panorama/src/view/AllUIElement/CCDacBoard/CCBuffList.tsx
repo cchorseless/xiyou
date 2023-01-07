@@ -1,6 +1,4 @@
-import React, { createRef, PureComponent } from "react";
-import { NodePropsData } from "../../../libs/BasePureComponent";
-import { PanelAttributes } from "@demon673/react-panorama";
+import React from "react";
 import { CCPanel } from "../CCPanel/CCPanel";
 
 interface IBuffList extends NodePropsData {

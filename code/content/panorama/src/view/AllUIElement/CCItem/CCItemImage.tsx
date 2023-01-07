@@ -1,12 +1,10 @@
 
-import React, { useState } from "react";
-import { NodePropsData } from "../../../libs/BasePureComponent";
+import React from "react";
+
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { CCPanel } from "../CCPanel/CCPanel";
-import { AbilityHelper, ItemHelper, UnitHelper } from "../../../helper/DotaEntityHelper";
-import { FuncHelper } from "../../../helper/FuncHelper";
+import { ItemHelper } from "../../../helper/DotaEntityHelper";
 import { KVHelper } from "../../../helper/KVHelper";
-import { LogHelper } from "../../../helper/LogHelper";
+import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCItemImage.less";
 
 interface ICCItemImage extends NodePropsData {

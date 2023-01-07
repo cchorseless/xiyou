@@ -1,5 +1,5 @@
 import React from "react";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCAvatar } from "../AllUIElement/CCAvatar/CCAvatar";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCIcon } from "../AllUIElement/CCIcons/CCIcon";

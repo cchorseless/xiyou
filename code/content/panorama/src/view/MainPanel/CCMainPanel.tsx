@@ -2,7 +2,7 @@
 import React, { createRef } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
-import { BaseEasyPureComponent, BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
+import { BaseEasyPureComponent, BasePureComponent } from "../../libs/BasePureComponent";
 import { CCActivityPanel } from "../Activity/CCActivityPanel";
 import { CCDacBoard } from "../AllUIElement/CCDacBoard/CCDacBoard";
 import { CCMiniMap } from "../AllUIElement/CCMiniMap/CCMiniMap";

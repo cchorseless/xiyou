@@ -1,7 +1,6 @@
-import React, { createRef, PureComponent } from "react";
-import { DOTAParticleScenePanelAttributes, PanelAttributes } from "@demon673/react-panorama";
+import React from "react";
 import { CCPanel } from "../CCPanel/CCPanel";
-import { NodePropsData } from "../../../libs/BasePureComponent";
+
 import "./CCPortrait.less";
 interface ICCPortrait extends NodePropsData {
     hudType: string

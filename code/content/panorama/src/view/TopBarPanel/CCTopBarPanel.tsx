@@ -2,7 +2,7 @@
 import React from "react";
 import { PlayerDataComponent } from "../../game/components/Player/PlayerDataComponent";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCImageNumber } from "../AllUIElement/CCImageNumber/CCImageNumber";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCTopBarPanel.less";

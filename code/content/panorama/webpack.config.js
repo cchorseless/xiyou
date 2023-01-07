@@ -130,10 +130,10 @@ module.exports = {
                 //     filename: 'team_select.xml',
                 // },
                 // 英雄选择
-                // {
-                //     import: './view/AllSpeHud/before_game/before_game.xml',
-                //     type: 'HeroSelection'
-                // },
+                {
+                    import: './view/AllSpeHud/hero_select/hero_select.xml',
+                    type: 'HeroSelection'
+                },
                 // 结束界面
                 {
                     import: './view/AllSpeHud/end_screen/end_screen.xml',

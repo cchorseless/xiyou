@@ -2,12 +2,10 @@
 import React from "react";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { NetHelper } from "../../../helper/NetHelper";
-import { NodePropsData } from "../../../libs/BasePureComponent";
 import { CCButton } from "../../AllUIElement/CCButton/CCButton";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import { CCLoading } from "../loading/loading";
 import "./team_select.less";
-
 interface IProps extends NodePropsData {
 }
 

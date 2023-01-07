@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react";
+import React, { createRef } from "react";
 import { GameServiceConfig } from "../../../../../scripts/tscripts/shared/GameServiceConfig";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
@@ -116,6 +116,7 @@ export class CCGameEndlessDifficulty extends CCPanel<IEndlessDifficulty, RadioBu
                 }}
                 onmouseover={p => $.DispatchEvent("DOTAShowTextTooltip", p, $.Localize("#Difficult_" + 999 + "_Description"))}
                 onmouseout={p => $.DispatchEvent("DOTAHideTextTooltip", p)}
+                ref={this.__root__}  {...this.initRootAttrs()}
             >
                 <Panel className="DifficultyPlayers" hittest={false}>
                     {aPlayerIDs.map(iPlayerID => {

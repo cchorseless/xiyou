@@ -1,8 +1,5 @@
-import React, { createRef, PureComponent } from "react";
-import { PanelAttributes, ImageAttributes, DOTAAbilityImageAttributes, LabelAttributes } from "@demon673/react-panorama";
-import { NodePropsData } from "../../../libs/BasePureComponent";
+import React from "react";
 import { CCPanel } from "../CCPanel/CCPanel";
-import { CSSHelper } from "../../../helper/CSSHelper";
 import "./CCAvatar.less";
 
 interface ICCAvatarProps extends NodePropsData {

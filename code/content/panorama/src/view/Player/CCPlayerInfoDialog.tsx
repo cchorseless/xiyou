@@ -1,5 +1,5 @@
 import React from 'react';
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCDividerHeader } from '../AllUIElement/CCDivider/CCDividerHeader';
 import { CCDOTAScenePanel } from '../AllUIElement/CCDOTAScenePanel/CCDOTAScenePanel';
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";

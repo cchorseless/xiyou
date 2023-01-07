@@ -1,7 +1,7 @@
 import { PanelAttributes } from "@demon673/react-panorama";
 import React, { createRef } from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { BasePureComponent, NodePropsData } from "../../../libs/BasePureComponent";
+import { BasePureComponent } from "../../../libs/BasePureComponent";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 
 type CC_PanelScroll = "clip" | "noclip" | "none" | "squish" | "scroll";
@@ -44,12 +44,15 @@ export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<
         }
     }
     private checkDataReady() {
-        this.__root___isValid = this.onReady();
-        if (this.__root___isValid) {
+        const isReady = this.onReady();
+        if (isReady) {
+            // 保证先initUI完成后，render才刷新。不会由于onInitUI 出发rerender
             this.onInitUI();
-            this.delayUpdateSelf();
+            this.__root___isValid = true
+            this.updateSelf();
         }
         else {
+            this.__root___isValid = false;
             GTimerHelper.AddFrameTimer(5, GHandler.create(this, () => { this.checkDataReady() }))
         }
     }

@@ -3,7 +3,7 @@ import React from "react";
 import { RoundConfig } from "../../../../scripts/tscripts/shared/RoundConfig";
 import { UnitHelper } from "../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCTxtTable } from "../AllUIElement/CCTable/CCTxtTable";
 import { CCUnitSmallIcon } from "../AllUIElement/CCUnit/CCUnitSmallIcon";

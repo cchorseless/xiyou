@@ -1,6 +1,6 @@
 import React from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCAvatar } from "../AllUIElement/CCAvatar/CCAvatar";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCPlayerCard.less";

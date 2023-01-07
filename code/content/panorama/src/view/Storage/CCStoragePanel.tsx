@@ -2,7 +2,7 @@
 import React from "react";
 import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCMenuNavigation } from "../AllUIElement/CCNavigation/CCMenuNavigation";

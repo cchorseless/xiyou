@@ -1,6 +1,5 @@
 /** Create By Editor*/
-import React, { createRef, useState } from "react";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { HeroTalentIconItem_UI } from "./HeroTalentIconItem_UI";
 export class HeroTalentIconItem extends HeroTalentIconItem_UI<NodePropsData> {
 	// 初始化数据

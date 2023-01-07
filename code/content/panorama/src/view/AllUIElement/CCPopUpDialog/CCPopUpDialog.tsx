@@ -1,8 +1,6 @@
 import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { LogHelper } from "../../../helper/LogHelper";
-import { PathHelper } from "../../../helper/PathHelper";
-import { NodePropsData } from "../../../libs/BasePureComponent";
+
 import { CCIconButton } from "../CCButton/CCIconButton";
 import { CCIcon_XClose } from "../CCIcons/CCIcon_XClose";
 import { CCPanel } from "../CCPanel/CCPanel";

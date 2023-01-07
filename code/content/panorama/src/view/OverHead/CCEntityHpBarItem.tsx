@@ -2,7 +2,7 @@ import React, { createRef } from "react";
 import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
 import { UnitHelper } from "../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
 import "./CCEntityHpBarItem.less";

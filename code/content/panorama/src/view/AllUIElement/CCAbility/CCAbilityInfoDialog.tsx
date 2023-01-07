@@ -1,15 +1,13 @@
 
-import React, { useState } from "react";
-import { NodePropsData } from "../../../libs/BasePureComponent";
+import React from "react";
+import { JsonConfigHelper } from "../../../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { CCPanel } from "../CCPanel/CCPanel";
-import { AbilityHelper, ItemHelper, UnitHelper } from "../../../helper/DotaEntityHelper";
+import { AbilityHelper, UnitHelper } from "../../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { KVHelper } from "../../../helper/KVHelper";
-import { LogHelper } from "../../../helper/LogHelper";
+import { CCPanel } from "../CCPanel/CCPanel";
 import { CCPanelBG } from "../CCPanel/CCPanelPart";
 import { CCUnitSmallIcon } from "../CCUnit/CCUnitSmallIcon";
-import { JsonConfigHelper } from "../../../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
 import "./CCAbilityInfoDialog.less";
 
 interface ICCAbilityInfoDialog extends NodePropsData {

@@ -1,7 +1,6 @@
-import { PanelAttributes } from "@demon673/react-panorama";
-import React, { createRef, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { NodePropsData } from "../../../libs/BasePureComponent";
+
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCSwitch.less";
 

@@ -336,13 +336,20 @@ export module DotaUIHelper {
     }
 
     export function Init() {
+        const PreGame = FindDotaHudElement("PreGame");
+        if (PreGame) {
+            PreGame.enabled = false;
+            PreGame.style.opacity = "0";
+        }
+        const stackable_side_panels = FindDotaHudElement("stackable_side_panels");
+        if (stackable_side_panels)
+            stackable_side_panels.style.visibility = "collapse";
         //小地图
         FindDotaHudElement("GlyphScanContainer")!.style.opacity = "0";
         FindDotaHudElement("RoshanTimerContainer")!.style.opacity = "0";
         FindDotaHudElement("HUDSkinMinimap")!.style.opacity = "0";
         // 计分板按钮
         FindDotaHudElement("ToggleScoreboardButton")!.style.opacity = "0";
-
         RegDragEvent();
 
     }

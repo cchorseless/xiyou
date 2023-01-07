@@ -1,7 +1,7 @@
 
-import React, { createRef, PureComponent } from "react";
-import { BasePureComponent, NodePropsData } from "../../libs/BasePureComponent";
-import { PanelAttributes, ImageAttributes } from "@demon673/react-panorama";
+import { ImageAttributes, PanelAttributes } from "@demon673/react-panorama";
+import React, { createRef } from "react";
+import { BasePureComponent } from "../../libs/BasePureComponent";
 
 
 export class HeroSingleFashionItem_UI<T extends NodePropsData> extends BasePureComponent<T> {

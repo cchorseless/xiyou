@@ -947,7 +947,7 @@ export module ET {
             return GameSceneRoot.Instance;
         }
         onDestroy(): void {
-            GameSceneRoot.Instance = null
+            (GameSceneRoot.Instance as any) = null
         }
     }
 }

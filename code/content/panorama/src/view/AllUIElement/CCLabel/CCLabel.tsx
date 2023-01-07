@@ -1,9 +1,9 @@
 import React from "react";
-import { NodePropsData } from "../../../libs/BasePureComponent";
-import { CCPanel } from "../CCPanel/CCPanel";
-import { CSSHelper } from "../../../helper/CSSHelper";
-import "./CCLabel.less";
+
 import { LabelAttributes } from "@demon673/react-panorama";
+import { CSSHelper } from "../../../helper/CSSHelper";
+import { CCPanel } from "../CCPanel/CCPanel";
+import "./CCLabel.less";
 
 
 interface ICCLabelProps extends LabelAttributes {

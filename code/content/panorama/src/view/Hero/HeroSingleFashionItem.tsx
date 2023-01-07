@@ -1,6 +1,5 @@
 /** Create By Editor*/
-import React, { createRef, useState } from "react";
-import { NodePropsData } from "../../libs/BasePureComponent";
+
 import { HeroSingleFashionItem_UI } from "./HeroSingleFashionItem_UI";
 export class HeroSingleFashionItem extends HeroSingleFashionItem_UI<NodePropsData> {
 	// 初始化数据
