@@ -48,6 +48,7 @@ export class GameScene {
     static GetPlayer(playerid: PlayerID | number) {
         return GPlayerEntityRoot.GetOneInstance(playerid as PlayerID)
     }
+
     private static _WaitSyncEntity: { obj: ET.Entity, ignoreChild: boolean }[] = [];
     public static SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void {
         if (GPlayerEntityRoot.IsAllLogin) {
@@ -363,6 +364,9 @@ export class GameScene {
         if (event.protocol == null) {
             return;
         }
+        let allCB = GGameCache.allCustomProtocolEvent[event.protocol] || [];
+        GLogHelper.DeepPrintTable(event);
+        GLogHelper.print("CBcount: " + allCB.length)
         event.sendClientCB = () => {
             event.sendClientCB = null;
             if (event.hasCB) {
@@ -377,7 +381,6 @@ export class GameScene {
                 }
             }
         }
-        let allCB = GGameCache.allCustomProtocolEvent[event.protocol] || [];
         for (let i = 0, len = allCB.length; i < len; i++) {
             let cbinfo = allCB[i];
             if (cbinfo == null) {

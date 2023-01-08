@@ -69,36 +69,15 @@ export class LogHelper {
     }
 
     public static warn(...args: any[]): void {
-        LogHelper.print("-----------warn---------------")
+        LogHelper.print("-------------------------------------warn-------------------------------------")
         LogHelper.print(...args);
-        LogHelper.print("-----------warn end---------------")
+        LogHelper.print("-------------------------------------warn end---------------------------------")
     }
 
     public static error(...args: any[]): void {
         if (!IsInToolsMode()) {
             return;
         }
-
-        let message: string = LogHelper._PRINT_MESSAGE_STACK_;
-        let stack = LogHelper.traceFunc(message, 3);
-        stack = stack.replace(message, "").replace("stack traceback:", "")
-        let s = stack.split('\n');
-        let s0 = s[3]
-        for (let _ss of s) {
-            if (_ss && _ss != '' && _ss.indexOf(LogHelper.name + '.ts') == -1) {
-                s0 = _ss;
-                break;
-            }
-        }
-        s0 = s0.replace(" ", "").replace("in function", "");
-        let s1 = s0.split("<")[0];
-        let s2 = s1.split('\\');
-        let r = [];
-        for (let i = 2; i < s2.length; i++) {
-            r.push(s2[i])
-        }
-        let r_s = r.join("\\")
-        r_s = string.gsub(r_s, ".*scripts[\\/]vscripts[\\/]", "")[0];
         let where_str = '<Is????>'
         if (IsServer()) {
             where_str = '<IsServer>'
@@ -106,11 +85,9 @@ export class LogHelper {
         else if (IsClient()) {
             where_str = '<IsClient>'
         }
-        let r2 = ["[" + r_s + where_str + "] ERROR:"];
+        let r2 = ["[" + where_str + "] ERROR:"];
         let r3 = r2.concat(args);
-        LogHelper.print("-----------error---------------")
-        print(...r3);
-        LogHelper.print("-----------error end---------------")
+        error(r3.join(" "), 2)
     }
 
     public static DeepPrintTable(table?: Object) {

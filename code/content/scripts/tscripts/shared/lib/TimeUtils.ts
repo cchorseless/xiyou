@@ -92,8 +92,11 @@ export module TimeUtils {
             }
             return inter;
         }
+        /**
+         * @override TimerHelper 覆盖掉
+         * @returns 
+         */
         Now(): number {
-            // return new Date().getTime();
             return 1;
         }
 

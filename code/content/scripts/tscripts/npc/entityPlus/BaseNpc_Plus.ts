@@ -1,8 +1,7 @@
 
 import { GameFunc } from "../../GameFunc";
-import { modifier_activity } from "../modifier/modifier_activity";
 import { BaseItem_Plus } from "./BaseItem_Plus";
-import { BaseModifier, BaseNpc } from "./Base_Plus";
+import { BaseNpc } from "./Base_Plus";
 /**普通NPC单位基类 */
 export class BaseNpc_Plus extends BaseNpc {
 
@@ -38,101 +37,6 @@ export class BaseNpc_Plus extends BaseNpc {
         let unit = CreateUnitByName(unitname, v, findClearSpace, npcOwner, entityOwner, team);
         GameFunc.BindInstanceToCls(unit, BaseNpc_Plus);
         return unit as IBaseNpc_Plus;
-    }
-
-    public addBuff?<T extends BaseModifier>(buffname: string, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: ModifierTable): T {
-        if (IsServer()) {
-            let m = this.AddNewModifier(caster, ability, buffname, modifierTable) as T;
-            if (m && m.UUID) {
-                GGameCache.allModifiersIntance[buffname] = GGameCache.allModifiersIntance[buffname] || {};
-                GGameCache.allModifiersIntance[buffname][m.UUID] = m;
-            }
-            return m;
-        }
-    }
-
-
-    public addOnlyBuff?<T extends BaseModifier>(buffname: string, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: ModifierTable): T {
-        if (IsServer()) {
-            if (this.existBuff(buffname)) {
-                return this.findBuff(buffname, caster);
-            } else {
-                return this.addBuff<T>(buffname, caster, ability, modifierTable);
-            }
-        }
-    }
-
-
-    public removeBuff?<T extends BaseModifier>(buffname: string, caster?: CDOTA_BaseNPC) {
-        if (IsServer()) {
-            if (caster) {
-                let modef = this.findBuff<T>(buffname, caster);
-                if (modef) {
-                    modef.Destroy();
-                }
-            } else {
-                let modef = this.findBuff<T>(buffname);
-                if (modef) {
-                    modef.Destroy();
-                }
-            }
-        }
-    }
-
-
-    public existBuff?<T extends BaseModifier>(buffname: string): boolean {
-        if (buffname) {
-            return this.HasModifier(buffname);
-        }
-        return false;
-    }
-
-    public findBuff?<T extends BaseModifier>(buffname: string, caster: CDOTA_BaseNPC = null): T {
-        if (buffname && this.existBuff(buffname)) {
-            if (caster) {
-                return this.FindModifierByNameAndCaster(buffname, caster) as T;
-            }
-            return this.FindModifierByName(buffname) as T;
-        }
-    }
-
-
-    public getBuffStack?<T extends BaseModifier>(buffname: string, caster: CDOTA_BaseNPC = null): number {
-        let m = this.findBuff<T>(buffname, caster);
-        if (m) {
-            return m.GetStackCount();
-        }
-        return 0;
-    }
-
-
-
-
-    /**
-    *
-    * @param entityKeyValues
-    */
-    InitActivityModifier?() {
-        if (this.__IN_DOTA_DATA__) {
-            let entityKeyValues = this.__IN_DOTA_DATA__;
-            let move = entityKeyValues.MovementSpeedActivityModifiers;
-            let attackspeed = entityKeyValues.AttackSpeedActivityModifiers;
-            let attackrange = entityKeyValues.AttackRangeActivityModifiers;
-            let obj = {};
-            if (move) {
-                obj = Object.assign(obj, move)
-            }
-            if (attackspeed) {
-                obj = Object.assign(obj, attackspeed)
-            }
-            if (attackrange) {
-                obj = Object.assign(obj, attackrange)
-            }
-            if (Object.keys(obj).length > 0) {
-                modifier_activity.apply(this, this, null, obj)
-            }
-        }
-
     }
 
     GetIntellect?() {

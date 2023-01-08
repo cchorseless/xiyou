@@ -6,21 +6,36 @@ import { NetHelper } from "../../helper/NetHelper";
 @GReloadable
 export class GameServiceSystemComponent extends GameServiceSystem {
 
+    get LocalPlayerGameSelection() {
+        return this.tPlayerGameSelection[Players.GetLocalPlayer()];
+    }
 
     SelectDifficultyChapter(difficulty: GameServiceConfig.EDifficultyChapter) {
+        if (this.LocalPlayerGameSelection.Difficulty.Chapter == difficulty) {
+            return
+        }
         NetHelper.SendToLua(GameProtocol.Protocol.SelectDifficultyChapter, difficulty);
     }
 
     SelectDifficultyEndlessLevel(level: number) {
+        if (this.LocalPlayerGameSelection.Difficulty.Level == level) {
+            return
+        }
         NetHelper.SendToLua(GameProtocol.Protocol.SelectDifficultyEndlessLevel, level);
     }
 
     SelectCourier(name: string) {
+        if (this.LocalPlayerGameSelection.Courier == name) {
+            return
+        }
         NetHelper.SendToLua(GameProtocol.Protocol.SelectCourier, name);
     }
 
-    SelectReady(isready: string) {
-        NetHelper.SendToLua(GameProtocol.Protocol.SelectReady, isready);
+    SelectReady() {
+        if (this.LocalPlayerGameSelection.IsReady) {
+            return
+        }
+        NetHelper.SendToLua(GameProtocol.Protocol.SelectReady, true);
     }
 
 }

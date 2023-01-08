@@ -70,7 +70,7 @@ export class modifier_courier extends BaseModifier_Plus {
                 hParent.addBuff(this.ambientModifiers, hParent)
             }
             if (this.addAbilityName && this.addAbilityName.length > 0) {
-                hParent.addAbilityPlus(this.ambientModifiers)
+                hParent.addAbilityPlus(this.addAbilityName)
             }
             this.StartIntervalThink(-1)
         }

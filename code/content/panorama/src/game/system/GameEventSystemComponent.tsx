@@ -25,8 +25,10 @@ export class GameEventSystemComponent extends ET.SingletonComponent {
         /**监听错误信息 */
         NetHelper.ListenOnLua(GameEnum.CustomProtocol.push_error_message,
             GHandler.create(this, (event) => {
+                GLogHelper.print(event);
                 if (event.data != null) {
                     TipsHelper.showErrorMessage(event.data);
+
                 }
             }));
         let nettable = NetHelper.GetETEntityNetTableName(Players.GetLocalPlayer())! as never;

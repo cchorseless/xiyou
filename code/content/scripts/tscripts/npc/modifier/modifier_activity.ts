@@ -5,7 +5,6 @@
  * @LastEditTime: 2021-05-19 14:36:43
  * @Description:出生自带BUFF标签
  */
-import { LogHelper } from "../../helper/LogHelper";
 import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../propertystat/modifier_event";
@@ -115,4 +114,11 @@ export const Activity_Flags = {
     attack_short_range: "attack_short_range",
     attack_long_range: "attack_long_range",
     no_hammer: "no_hammer",
+}
+
+declare global {
+    var Gmodifier_activity: typeof modifier_activity;
+}
+if (_G.Gmodifier_activity == null) {
+    _G.Gmodifier_activity = modifier_activity;
 }

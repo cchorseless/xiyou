@@ -26,7 +26,11 @@ import { modifier_courier_fx_ambient_6 } from "./courier_ambient_effect/modifier
 import { modifier_courier_fx_ambient_7 } from "./courier_ambient_effect/modifier_courier_fx_ambient_7";
 import { modifier_courier_fx_ambient_8 } from "./courier_ambient_effect/modifier_courier_fx_ambient_8";
 import { modifier_courier_fx_ambient_9 } from "./courier_ambient_effect/modifier_courier_fx_ambient_9";
+import { modifier_activity } from "./modifier_activity";
 
+[
+    modifier_activity,
+];
 
 [
     modifier_phy_arm_base_3,

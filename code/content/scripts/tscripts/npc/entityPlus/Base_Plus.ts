@@ -660,15 +660,117 @@ export class BaseNpc implements ET.IEntityRoot {
     }
     addAbilityPlus?(abilityname: string, level: number = 1) {
         let ability = this.AddAbility(abilityname);
-        ability.SetActivated(true);
-        ability.SetLevel(level);
+        if (ability) {
+            ability.SetActivated(true);
+            ability.SetLevel(level);
+        }
+        else {
+            GLogHelper.error("addAbilityPlus ERROR ", abilityname, level)
+        }
         return ability as IBaseAbility_Plus;
     }
 
     removeAbilityPlus?(abilityname: string) {
         let ability = this.FindAbilityByName(abilityname) as IBaseAbility_Plus;
-        ability.SafeDestroy();
-        this.RemoveAbility(abilityname);
+        if (ability) {
+            ability.SafeDestroy();
+            this.RemoveAbility(abilityname);
+        }
+        else {
+            GLogHelper.error("removeAbilityPlus ERROR ", abilityname)
+        }
+    }
+
+
+    public addBuff?<T extends BaseModifier>(buffname: string, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: ModifierTable): T {
+        if (IsServer()) {
+            let m = this.AddNewModifier(caster, ability, buffname, modifierTable) as T;
+            if (m && m.UUID) {
+                GGameCache.allModifiersIntance[buffname] = GGameCache.allModifiersIntance[buffname] || {};
+                GGameCache.allModifiersIntance[buffname][m.UUID] = m;
+            }
+            return m;
+        }
+    }
+
+
+    public addOnlyBuff?<T extends BaseModifier>(buffname: string, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: ModifierTable): T {
+        if (IsServer()) {
+            if (this.existBuff(buffname)) {
+                return this.findBuff(buffname, caster);
+            } else {
+                return this.addBuff<T>(buffname, caster, ability, modifierTable);
+            }
+        }
+    }
+
+
+    public removeBuff?<T extends BaseModifier>(buffname: string, caster?: CDOTA_BaseNPC) {
+        if (IsServer()) {
+            if (caster) {
+                let modef = this.findBuff<T>(buffname, caster);
+                if (modef) {
+                    modef.Destroy();
+                }
+            } else {
+                let modef = this.findBuff<T>(buffname);
+                if (modef) {
+                    modef.Destroy();
+                }
+            }
+        }
+    }
+
+
+    public existBuff?<T extends BaseModifier>(buffname: string): boolean {
+        if (buffname) {
+            return this.HasModifier(buffname);
+        }
+        return false;
+    }
+
+    public findBuff?<T extends BaseModifier>(buffname: string, caster: CDOTA_BaseNPC = null): T {
+        if (buffname && this.existBuff(buffname)) {
+            if (caster) {
+                return this.FindModifierByNameAndCaster(buffname, caster) as T;
+            }
+            return this.FindModifierByName(buffname) as T;
+        }
+    }
+
+
+    public getBuffStack?<T extends BaseModifier>(buffname: string, caster: CDOTA_BaseNPC = null): number {
+        let m = this.findBuff<T>(buffname, caster);
+        if (m) {
+            return m.GetStackCount();
+        }
+        return 0;
+    }
+    /**
+        *
+        * @param entityKeyValues
+        */
+    InitActivityModifier?() {
+        if (this.__IN_DOTA_DATA__) {
+            let entityKeyValues = this.__IN_DOTA_DATA__;
+            let move = entityKeyValues.MovementSpeedActivityModifiers;
+            let attackspeed = entityKeyValues.AttackSpeedActivityModifiers;
+            let attackrange = entityKeyValues.AttackRangeActivityModifiers;
+            let obj = {};
+            if (move) {
+                obj = Object.assign(obj, move)
+            }
+            if (attackspeed) {
+                obj = Object.assign(obj, attackspeed)
+            }
+            if (attackrange) {
+                obj = Object.assign(obj, attackrange)
+            }
+            if (Object.keys(obj).length > 0) {
+                Gmodifier_activity.apply(this, this, null, obj)
+            }
+        }
+
     }
 
 }

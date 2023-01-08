@@ -2,7 +2,7 @@ import React from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
-
+import "./CCCourierCard.less";
 
 interface ICCCourierCard {
     sCourierName: string,

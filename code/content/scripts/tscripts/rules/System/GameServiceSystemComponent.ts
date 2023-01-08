@@ -12,6 +12,12 @@ export class GameServiceSystemComponent extends GameServiceSystem {
 
     public onAwake(): void {
         this.addEvent();
+        GLogHelper.print("GetSystemTimeMS", GetSystemTimeMS())
+        GLogHelper.print("GetSystemDate", GetSystemDate(), GetSystemTime())
+        GLogHelper.print("Time", Time())
+        GLogHelper.print("Plat_FloatTime", Plat_FloatTime())
+        GLogHelper.print("LocalTime", LocalTime())
+
     }
 
     StartGameModeSelection() {
@@ -33,7 +39,7 @@ export class GameServiceSystemComponent extends GameServiceSystem {
     FinishGameModeSelection() {
         this.BeforeGameEndTime = -1;
         let iSelectedDifficulty = GameServiceConfig.EDifficultyChapter.endless;
-        const allPlayerroot = GPlayerEntityRoot.GetAllInstance();
+        const allPlayerroot = GPlayerEntityRoot.GetAllValidPlayer();
         allPlayerroot.forEach((playerroot) => {
             const data = this.getPlayerGameSelection(playerroot.BelongPlayerid);
             if (data) {
@@ -67,7 +73,7 @@ export class GameServiceSystemComponent extends GameServiceSystem {
             const data = this.getPlayerGameSelection(playerid);
             data.Difficulty.MaxChapter = e.getGameRecordAsNumber(GameProtocol.ECharacterGameRecordKey.iDifficultyMaxChapter) || GameServiceConfig.EDifficultyChapter.n1;
             data.Difficulty.MaxLevel = e.getGameRecordAsNumber(GameProtocol.ECharacterGameRecordKey.iDifficultyMaxLevel) || 0;
-            data.Difficulty.Chapter = data.Difficulty.MaxLevel == GameServiceConfig.EDifficultyChapter.endless ? GameServiceConfig.EDifficultyChapter.endless : (data.Difficulty.MaxLevel + 1);
+            data.Difficulty.Chapter = data.Difficulty.MaxChapter
             data.Difficulty.Level = data.Difficulty.MaxLevel;
             data.Courier = e.getGameRecord(GameProtocol.ECharacterGameRecordKey.sCourierIDInUse) || GameServiceConfig.DefaultCourier;
             this.SyncClient();
@@ -97,10 +103,17 @@ export class GameServiceSystemComponent extends GameServiceSystem {
 
         EventHelper.addProtocolEvent(GameProtocol.Protocol.SelectReady, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             const characterdata = this.tPlayerGameSelection[e.PlayerID + ""];
-            const isready = e.data;
-            if (characterdata && characterdata.IsReady != isready) {
-                characterdata.IsReady = isready;
-
+            if (characterdata && !characterdata.IsReady) {
+                characterdata.IsReady = true;
+                let allready = true;
+                GPlayerEntityRoot.GetAllValidPlayer().forEach(player => {
+                    if (!this.getPlayerGameSelection(player.BelongPlayerid).IsReady) {
+                        allready = false;
+                    }
+                });
+                if (allready) {
+                    this.BeforeGameEndTime = GameRules.GetGameTime() + GameServiceSystemComponent.SelectionReadyLockTime;
+                }
                 e.state = true;
                 this.SyncClient();
                 return
@@ -113,12 +126,17 @@ export class GameServiceSystemComponent extends GameServiceSystem {
             const allcouriers = bagcomp.getAllCourierNames();
             const characterdata = this.tPlayerGameSelection[e.PlayerID + ""];
             const couriername = e.data;
-            if (characterdata && couriername && allcouriers.includes(couriername)) {
-                if (characterdata && characterdata.Courier !== couriername) {
-                    characterdata.Courier = couriername;
-                    e.state = true;
-                    this.SyncClient();
-                    return
+            if (characterdata && couriername) {
+                if (allcouriers.includes(couriername)) {
+                    if (characterdata.Courier !== couriername) {
+                        characterdata.Courier = couriername;
+                        e.state = true;
+                        this.SyncClient();
+                        return
+                    }
+                }
+                else {
+                    EventHelper.ErrorMessage("unlock this courier", e.PlayerID);
                 }
             }
             e.state = false;

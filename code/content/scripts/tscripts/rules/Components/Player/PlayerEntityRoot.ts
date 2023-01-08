@@ -95,10 +95,11 @@ export class PlayerSystem extends ET.EntityRoot {
        * 監聽玩家斷綫自動失敗
        * @param inter
        */
-    public static ListenPlayerDisconnect(inter: number = 5) {
+    public static ListenPlayerDisconnect(inter: number = 1) {
         GTimerHelper.AddTimer(inter,
             GHandler.create(this, () => {
-                this.GetAllPlayerid().forEach(async (iPlayerID) => {
+                this.GetAllValidPlayer().forEach(async (playerroot) => {
+                    const iPlayerID = playerroot.BelongPlayerid;
                     if (PlayerResource.GetConnectionState(iPlayerID) == DOTAConnectionState_t.DOTA_CONNECTION_STATE_ABANDONED) {
                         await this.OnPlayerLeaveGame(iPlayerID);
                     }
@@ -119,9 +120,7 @@ export class PlayerSystem extends ET.EntityRoot {
         if (hHero && hHero.IsAlive()) {
             // -- 数据存储
             // this.UpdatePlayerEndData(hHero)
-            if (IsInToolsMode()) {
-                hHero.ForceKill(false);
-            }
+            hHero.ForceKill(false);
             let allLose = true;
             this.GetAllPlayerid()
                 .forEach((playerId) => {
@@ -130,7 +129,7 @@ export class PlayerSystem extends ET.EntityRoot {
                         allLose = false;
                     }
                 });
-            if (allLose && !IsInToolsMode()) {
+            if (allLose) {
                 GameRules.SetGameWinner(DOTATeam_t.DOTA_TEAM_BADGUYS);
             }
         }
@@ -160,6 +159,9 @@ export class PlayerSystem extends ET.EntityRoot {
         return null;
     }
 
+    public static GetAllValidPlayer(): IPlayerEntityRoot[] {
+        return PlayerEntityRoot.GetAllInstance().filter(player => { return !player.IsLeaveGame })
+    }
 
     /**
      * 开始游戏

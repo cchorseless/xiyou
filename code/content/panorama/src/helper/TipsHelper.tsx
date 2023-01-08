@@ -1,3 +1,4 @@
+import { CCTipsPanel } from "../view/AllUIElement/CCTips/CCTipsPanel";
 
 export module TipsHelper {
     export enum ToolTipType {
@@ -67,6 +68,11 @@ export module TipsHelper {
         })
     }
     export function showErrorMessage(msg: string, sound = "General.CastFail_Custom") {
-        GameUI.SendCustomHUDError(msg, sound);
+        if (Game.GetState() < DOTA_GameState.DOTA_GAMERULES_STATE_PRE_GAME) {
+            CCTipsPanel.ShowOne(msg, sound)
+        }
+        else {
+            GameUI.SendCustomHUDError(msg, sound);
+        }
     }
 }

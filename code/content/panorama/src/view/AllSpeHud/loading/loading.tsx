@@ -60,17 +60,14 @@ export class CCLoading extends CCPanel<NodePropsData> {
         }));
     }
     render() {
-        const gamestate = this.GetState<number>("gamestate");
         const login = this.GetState<boolean>("login", false);
         return (
-            <Panel className="CC_Loading" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
+            <Panel className="CC_Loading" ref={this.__root__} hittest={false} >
                 <CCPanel id="loadingBg" />
                 {/* 队伍选择界面 */}
                 {/* {login && gamestate == DOTA_GameState.DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP &&
                     <CCBefore_Game />
                 } */}
-                {this.props.children}
-                {this.__root___childs}
             </Panel>
         )
     }

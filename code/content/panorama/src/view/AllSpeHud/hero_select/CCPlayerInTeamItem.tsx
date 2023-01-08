@@ -21,54 +21,59 @@ export class CCPlayerInTeamItem extends CCPanel<ICCPlayerInTeamItem> {
         GGameScene.GameServiceSystem.RegRef(this);
     }
 
-    defaultStyle() {
-        const iPlayerID = this.props.iPlayerID;
-        return { borderColor: CSSHelper.GetPlayerColor(iPlayerID) }
-    }
+    // defaultStyle() {
+    //     const iPlayerID = this.props.iPlayerID;
+    //     return { borderColor: CSSHelper.GetPlayerColor(iPlayerID) }
+    // }
 
     render() {
         const iPlayerID = this.props.iPlayerID;
         const GamseStateSys = this.GetStateEntity(GGameScene.GameServiceSystem)!;
-        const tPlayerGameSelection = GamseStateSys.tPlayerGameSelection!;
-        const tGameSelection = tPlayerGameSelection[iPlayerID + ""];
+        const tGameSelection = GamseStateSys.getPlayerGameSelection(iPlayerID);
         const sCourierName = tGameSelection.Courier;
         const tCourierData = KVHelper.KVData().CourierUnits[sCourierName];
         const tPlayerTitle = tGameSelection.Title;
         const iDifficulty = tGameSelection.Difficulty.MaxChapter;
-
         return (
-            <Panel className={CSSHelper.ClassMaker("CCPlayerInTeamItem", `Difficulty${iDifficulty}`, `Courier${tCourierData?.Rarity ?? "R"}`)}
+            <Panel className={CSSHelper.ClassMaker("CCPlayerInTeamItem", `Difficulty${iDifficulty}`, `Courier${tCourierData.Rarity || "R"}`)}
                 ref={this.__root__} hittest={false} {...this.initRootAttrs()}  >
-                {tPlayerTitle != undefined && <CCOverheadTitle id="PlayerTitleUse" sCourierTitleID={tPlayerTitle} />}
+                {tPlayerTitle != null && tPlayerTitle.length > 0 && <CCOverheadTitle id="PlayerTitleUse" sCourierTitleID={tPlayerTitle} />}
                 {tCourierData && <>
                     <Panel id="PlayerCourierRarity" hittest={false} />
                     <Panel id="PlayerCourierScene" hittest={false} >
-                        <GenericPanel type="DOTAUIEconSetPreview" key={sCourierName} itemdef={tCourierData?.ItemDef ?? 0} itemstyle={tCourierData?.ItemStyle ?? 0} displaymode="loadout_small" drawbackground={true} antialias={true} allowrotation={true} />
+                        <GenericPanel type="DOTAUIEconSetPreview" key={sCourierName} itemdef={tCourierData?.ItemDef || 0} itemstyle={tCourierData?.ItemStyle || 0} displaymode="loadout_small" drawbackground={true} antialias={true} allowrotation={true} />
                     </Panel>
                     <Label id="PlayerCourierName" text={$.Localize("#" + sCourierName as string)} hittest={false} />
                     {tCourierData.Ability1 && <DOTAAbilityImage id="PlayerCourierAbility" abilityname={tCourierData.Ability1} showtooltip={true} />}
                 </>}
                 <Panel id="PlayerDifficulty" hittest={false} >
-                    {(() => {
-                        if (iDifficulty == GameServiceConfig.EDifficultyChapter.endless) {
-                            return <Label id="PlayerDifficultyEndless" localizedText="#Difficult_999" />;
-                        }
-                        return <Panel id="PlayerDifficultyNum" />;
-                    })()}
+                    {
+                        (iDifficulty == GameServiceConfig.EDifficultyChapter.endless) ?
+                            <Label id="PlayerDifficultyEndless" localizedText="#Difficult_999" /> :
+                            <Panel id="PlayerDifficultyNum" />
+                    }
                 </Panel>
                 <Panel id="PlayerState" >
                     {
                         tGameSelection.IsReady ?
-                            <Panel id="PlayerReady" /> : <Label id="PlayerNotReady" localizedText="#PlayerNotReady" />
+                            <Panel id="PlayerReady" /> :
+                            <Label id="PlayerNotReady" localizedText="#PlayerNotReady" />
                     }
                 </Panel>
                 <CCPlayerCard iPlayerID={iPlayerID} />
-                {tGameSelection.EndlessRank && <CCRankEmblem id="PlayerEndlessRankEmblem" rank={tGameSelection.EndlessRank} />}
-                {tGameSelection.bNewPlayer && <Panel id="NewPlayerMain">
-                    <Label localizedText="#Help_new_player" />
-                    <Image />
-                </Panel>}
+                <CCRankEmblem id="PlayerEndlessRankEmblem" rank={tGameSelection.EndlessRank} />
+                {tGameSelection.bNewPlayer &&
+                    <Panel id="NewPlayerMain">
+                        <Label id="NewPlayer_lbl" localizedText="#Help_new_player" />
+                        <Image id="NewPlayer_Img" />
+                    </Panel>}
             </Panel>
         );
     }
 }
+`
+
+
+
+
+`

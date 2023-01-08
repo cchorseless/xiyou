@@ -144,9 +144,7 @@ export class GameDebugger extends SingletonClass {
         let iPlayerID = events.playerid;
         let player = GPlayerEntityRoot.GetOneInstance(iPlayerID);
         let hero = player.Hero!;
-        let heroroot = hero.ETRoot.As<ICourierEntityRoot>()
         let sText = events.text.toLowerCase();
-        let bTeamOnly = events.teamonly == 1;
         let tokens = sText.split(" ");
         switch (tokens[0]) {
             case "-sendkey":

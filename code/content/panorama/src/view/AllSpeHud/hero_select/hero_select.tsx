@@ -9,8 +9,10 @@ import { CSSHelper } from "../../../helper/CSSHelper";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
+import { CCButton } from "../../AllUIElement/CCButton/CCButton";
 import { CCDOTAChat } from "../../AllUIElement/CCDOTAChat/CCDOTAChat";
 import { CCImageNumber } from "../../AllUIElement/CCImageNumber/CCImageNumber";
+import { CCMenuDashBoardBackAndSetting } from "../../AllUIElement/CCNavigation/CCMenuDashBoardBackAndSetting";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import { CCCourierCard } from "../../Courier/CCCourierCard";
 import { CCGameDifficulty, CCGameEndlessDifficulty } from "./CCGameDifficulty";
@@ -74,12 +76,12 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
         const courierNames = bagcomp.getAllCourierNames();
         return (
             <Panel ref={this.__root__} id="CC_Hero_Select" hittest={false} {...this.initRootAttrs()}>
-                {/* <Button id="CustomDashBoardButton" onactivate={() => $.DispatchEvent("DOTAHUDShowDashboard")} /> */}
-                {/* <Button id="CustomSettingButton" onactivate={() => $.DispatchEvent("DOTAShowSettingsPopup")} /> */}
+                <CCMenuDashBoardBackAndSetting />
                 <Label id="TimerTitle" localizedText="#TimerTitle" />
                 <Panel id="Timer" hittest={false} ref={this.TimerRef}>
                     <CCImageNumber id="RoundTime" type="4" value={Math.floor(iTimeLeft)} />
                 </Panel>
+                {/* 左边信使选择 */}
                 <Panel id="PlayerCourier" hittest={false} >
                     <Label id="PlayerCourierTitle" localizedText="#CourierSelectionTitle" />
                     {/* 第一次点击列表，列表总是会自动回到最顶上，SetFocus可以解决，虽然我不知道为什么能解决 */}
@@ -90,6 +92,7 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
                                     <CCCourierCard key={sCourierName + ""}
                                         className={CSSHelper.ClassMaker("PlayerCourierCard", { "Selected": sCourierIDInUse == sCourierName })}
                                         sCourierName={sCourierName}
+                                        allowrotation={false}
                                         onactivate={p => {
                                             GGameScene.GameServiceSystem.SelectCourier(sCourierName);
                                             p.ScrollParentToMakePanelFit(3, false);
@@ -103,21 +106,20 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
                             })}
                     </CCPanel>
                 </Panel>
-                {/* 左边信使选择 */}
                 <Panel id="PlayerContainer" hittest={false}>
-                    {Array(GameServiceConfig.GAME_MAX_PLAYER).map(
+                    <CCPlayerInTeamItem key={0 + ""} id={"Player_" + 0} iPlayerID={0} />
+                    {/* {[...Array(1)].map(
                         (_, index) => {
                             let iPlayerID = index as PlayerID;
                             if (Players.IsValidPlayerID(iPlayerID)) {
                                 return <CCPlayerInTeamItem key={index + ""} id={"Player_" + index} iPlayerID={iPlayerID} />
                             }
-                            return null;
                         })
-                    }
+                    } */}
                 </Panel>
                 <Panel id="Difficulties" hittest={false}>
                     <Label id="DifficultiesTitle" localizedText="#Select_Difficulties" />
-                    {Array(GameServiceConfig.DIFFICULTY_LAST + 1).map(
+                    {[...Array(GameServiceConfig.DIFFICULTY_LAST + 1)].map(
                         (_, index) => {
                             let charpter = index + 1;
                             if (index == GameServiceConfig.DIFFICULTY_LAST) {
@@ -136,19 +138,28 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
                                 }
                             }
                             if (charpter == GameServiceConfig.EDifficultyChapter.endless) {
-                                return <CCGameEndlessDifficulty key={index + ""} selected={selected} enable={maxDiff >= GameServiceConfig.DIFFICULTY_LAST} layers={layers} aPlayerIDs={aPlayerIDs} />;
+                                return <CCGameEndlessDifficulty key={index + ""} selected={selected} enable={maxDiff == GameServiceConfig.EDifficultyChapter.endless} layers={layers} aPlayerIDs={aPlayerIDs} />;
                             }
                             return <CCGameDifficulty key={index + ""} iDifficulty={charpter} selected={selected} max={maxDiff} aPlayerIDs={aPlayerIDs} />;
                         })}
                 </Panel>
+                {/* 准备 */}
+                <CCButton id="ReadyButton"
+                    type="Style1"
+                    enabled={!localselect.IsReady}
+                    color="Green"
+                    onactivate={() => {
+                        GamseStateSys.SelectReady();
+                    }} >
+                    <Label className="btn_lbl" localizedText="#lang_ready" />
+                </CCButton>
                 <Panel id="ChatContainer" hittest={false}>
-                    <CCDOTAChat id="Chat" className="PreGameChat" chatstyle="hudpregame" />
+                    <CCDOTAChat id="Chat" className="PreGameChat" />
                 </Panel>
             </Panel>
         )
     }
 }
-
 AllShared.Init();
 AllEntity.Init();
 TimerHelper.Init();

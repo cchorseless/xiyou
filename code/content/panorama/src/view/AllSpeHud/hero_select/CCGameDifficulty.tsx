@@ -2,6 +2,7 @@ import React, { createRef } from "react";
 import { GameServiceConfig } from "../../../../../scripts/tscripts/shared/GameServiceConfig";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
+import { CCButton } from "../../AllUIElement/CCButton/CCButton";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
 import "./CCGameDifficulty.less";
 
@@ -60,8 +61,6 @@ interface IEndlessDifficulty {
 export class CCGameEndlessDifficulty extends CCPanel<IEndlessDifficulty, RadioButton> {
 
 
-    refDecrease = createRef<Button>()
-    refIncrease = createRef<Button>()
     refText = createRef<TextEntry>()
     iOldOffset: number | null;
     sLastText: string;
@@ -88,25 +87,24 @@ export class CCGameEndlessDifficulty extends CCPanel<IEndlessDifficulty, RadioBu
             else {
                 GGameScene.GameServiceSystem.SelectDifficultyEndlessLevel(iNumber)
             }
-            let pDecreaseButton = this.refDecrease.current;
-            if (pDecreaseButton) {
-                pDecreaseButton.enabled = iNumber > 1;
-            }
-            let pIncreaseButton = this.refIncrease.current;
-            if (pIncreaseButton) {
-                pIncreaseButton.enabled = iNumber < GameServiceConfig.iMaxEndless;
-            }
+            this.UpdateState({ pDecreaseButton: (iNumber > 1) })
+            this.UpdateState({ pIncreaseButton: iNumber < GameServiceConfig.iMaxEndless })
         }
         this.sLastText = pSelf.text;
     }
 
     render() {
         const enable = this.props.enable;
+        const pDecreaseButton = this.GetState<boolean>("pDecreaseButton", enable);
+        const pIncreaseButton = this.GetState<boolean>("pIncreaseButton", enable);
         const layers = this.props.layers;
         const selected = this.props.selected;
         const aPlayerIDs = this.props.aPlayerIDs || [];
         return (
-            <RadioButton id="CC_GameEndlessDifficulty" group="DifficultySelected" enabled={enable} selected={selected}
+            <RadioButton id="CC_GameEndlessDifficulty"
+                group="DifficultySelected"
+                enabled={enable}
+                selected={selected}
                 onactivate={p => {
                     let iNumber = Number(this.refText.current?.text) || 0;
                     if (iNumber > GameServiceConfig.iMaxEndless) {
@@ -129,21 +127,23 @@ export class CCGameEndlessDifficulty extends CCPanel<IEndlessDifficulty, RadioBu
                 <Image id="Lock" />
                 <Label id="endlessName" localizedText="#Difficult_999" />
                 <Panel id="TextEntryAndButtons" hittest={false}>
-                    <TextEntry id="OperatorEndlessTextEntry" textmode="numeric" multiline={false} placeholder="1" ref={this.refText} text={String(GameServiceConfig.iMaxEndless)}
+                    <TextEntry id="OperatorEndlessTextEntry" enabled={enable} textmode="numeric" multiline={false} placeholder="1" ref={this.refText} text={layers + ""}
                         ontextentrychange={(pSelf) => { this.onTextChange(pSelf) }} />
                     <Panel id="Buttons" hittest={false}>
-                        <Button id="OperatorEndlessDecreaseButton" ref={this.refDecrease} enabled={enable} onactivate={() => {
-                            let p = this.refText.current;
-                            if (p) {
-                                p.text = String((Number(p.text) || 1) - 1);
-                            }
-                        }} />
-                        <Button id="OperatorEndlessIncreaseButton" ref={this.refIncrease} enabled={enable} onactivate={() => {
-                            let p = this.refText.current;
-                            if (p) {
-                                p.text = String((Number(p.text) || 1) + 1);
-                            }
-                        }} />
+                        <CCButton id="OperatorEndlessDecreaseButton" enabled={pDecreaseButton}
+                            onactivate={() => {
+                                let p = this.refText.current;
+                                if (p) {
+                                    p.text = String((Number(p.text) || 1) - 1);
+                                }
+                            }} />
+                        <CCButton id="OperatorEndlessIncreaseButton" enabled={pIncreaseButton}
+                            onactivate={() => {
+                                let p = this.refText.current;
+                                if (p) {
+                                    p.text = String((Number(p.text) || 1) + 1);
+                                }
+                            }} />
                     </Panel>
                 </Panel>
             </RadioButton>
