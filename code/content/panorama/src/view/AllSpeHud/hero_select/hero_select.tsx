@@ -107,15 +107,14 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
                     </CCPanel>
                 </Panel>
                 <Panel id="PlayerContainer" hittest={false}>
-                    <CCPlayerInTeamItem key={0 + ""} id={"Player_" + 0} iPlayerID={0} />
-                    {/* {[...Array(1)].map(
+                    {[...Array(GameServiceConfig.GAME_MAX_PLAYER)].map(
                         (_, index) => {
                             let iPlayerID = index as PlayerID;
                             if (Players.IsValidPlayerID(iPlayerID)) {
                                 return <CCPlayerInTeamItem key={index + ""} id={"Player_" + index} iPlayerID={iPlayerID} />
                             }
-                        })
-                    } */}
+                        }).filter(t => { return Boolean(t) })
+                    }
                 </Panel>
                 <Panel id="Difficulties" hittest={false}>
                     <Label id="DifficultiesTitle" localizedText="#Select_Difficulties" />
@@ -148,9 +147,7 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
                     type="Style1"
                     enabled={!localselect.IsReady}
                     color="Green"
-                    onactivate={() => {
-                        GamseStateSys.SelectReady();
-                    }} >
+                    onactivate={() => { GamseStateSys.SelectReady(); }} >
                     <Label className="btn_lbl" localizedText="#lang_ready" />
                 </CCButton>
                 <Panel id="ChatContainer" hittest={false}>

@@ -15,12 +15,12 @@ export class TActivityMemberShipData extends TActivityData {
     }
 
     IsVip() {
-        const now = GTimerHelper.Now();
+        const now = GTimerHelper.NowUnix();
         return Number(this.VipStartTime) <= now && Number(this.VipEndTime) >= now;
     }
 
     IsVipForever() {
-        const now = GTimerHelper.Now();
+        const now = GTimerHelper.NowUnix();
         return Number(this.VipStartTime) <= now && Number(this.VipEndTime) >= now;
     }
 }

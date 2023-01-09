@@ -1,6 +1,7 @@
 import { GameSetting } from "../../../GameSetting";
 import { HttpHelper } from "../../../helper/HttpHelper";
 import { LogHelper } from "../../../helper/LogHelper";
+import { TimerHelper } from "../../../helper/TimerHelper";
 import { md5 } from "../../../lib/md5";
 import { GameProtocol } from "../../../shared/GameProtocol";
 import { ET } from "../../../shared/lib/Entity";
@@ -126,6 +127,10 @@ export class PlayerHttpComponent extends ET.Component {
                                     LogHelper.error(e);
                                 }
                             }
+                        }
+                        // 计算服务器的时区
+                        if (msg.Time) {
+                            TimerHelper.UpdateTimeZoneOffSet(Number(msg.Time))
                         }
                         this.Ping();
                     } else {

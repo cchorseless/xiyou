@@ -15,14 +15,16 @@ export module TimerHelper {
         isWorking = false;
     }
     export function Init() {
+        //**覆盖 */
+        GTimerHelper.NowUnix = NowUnix;
         isWorking = true;
         let interval = GTimerHelper.GetUpdateInterval();
         $.Schedule(interval, () => {
             Update(interval);
         });
     }
-    export function Now() {
-        return new Date().getTime()
+    function NowUnix() {
+        return Date.now()
     }
     function Update(interval: number): void {
         GTimerHelper.Update(interval);

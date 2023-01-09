@@ -3,6 +3,8 @@ import { LogHelper } from "./LogHelper";
 
 export module TimerHelper {
     export function Init() {
+        // 函数覆盖掉
+        GTimerHelper.NowUnix = NowUnix;
         if (GGameCache.TimerEntity != null) {
             return;
         }
@@ -15,9 +17,44 @@ export module TimerHelper {
             return interval;
         }, interval)
     }
-    export function Now() {
-        return GetSystemDate() + " " + GetSystemTime();
+    /**时间戳 */
+    function NowUnix() {
+        const timeoffset = (TimeZoneOffSet || 0) * 3600 * 1000;
+        return GetLocalTime() - timeoffset;
     }
+
+    function GetLocalTime() {
+        // 北京时间--01/09/23
+        const date = GetSystemDate().split("/");
+        let year = Number(date[2]);
+        if (year < 2000) year += 2000;
+        const month = Number(date[0]);
+        const day = Number(date[1]);
+        // 北京时间--10:42:17
+        const time = GetSystemTime().split(":");;
+        const hour = Number(time[0]);
+        const minute = Number(time[1]);
+        const second = Number(time[2]);
+        return GTimerHelper.toUnixTime(year, month, day, hour, minute, second) * 1000;
+    }
+    let TimeZoneOffSet: number | null = null;
+    /**
+     * 更新一下时区，用于获取utc时间戳
+     * @param time
+     */
+    export function UpdateTimeZoneOffSet(time: number) {
+        if (TimeZoneOffSet != null) {
+            const offset = time - GetLocalTime();
+            TimeZoneOffSet = Math.floor(Math.abs(offset / 1000 / 3600));
+            if (offset < 0) {
+                TimeZoneOffSet = TimeZoneOffSet * -1;
+            }
+        }
+        GLogHelper.print(NowUnix(), "------NowUnix-----")
+        GLogHelper.print(time, "-----servertime------")
+        GLogHelper.print(NowUnix() - time, "-----offset------")
+    }
+
     // export class TimeWorker {
     //     /**固定时间间隔 */
     //     static TIMERS_THINK = 0.02;

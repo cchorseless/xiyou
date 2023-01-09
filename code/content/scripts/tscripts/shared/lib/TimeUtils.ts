@@ -94,11 +94,62 @@ export module TimeUtils {
         }
         /**
          * @override TimerHelper 覆盖掉
-         * @returns 
+         * @returns unix mills时间戳
          */
-        Now(): number {
+        NowUnix(): number {
             return 1;
         }
+
+        /**
+         * 判断年份是否为闰年
+         * @param iYear 年份
+         * @returns 是否是闰年
+         */
+        IsLeapYear(iYear: number) {
+            return (iYear % 4 == 0 && iYear % 100 != 0) || (iYear % 400 == 0);
+        }
+
+        /**
+         * 根据日期返回时间戳
+         * @param iYear 年
+         * @param iMonth 月
+         * @param iDay 日
+         * @param iHour 时
+         * @param iMin 分
+         * @param iSec 秒
+         * @returns 时间戳
+         */
+        toUnixTime(iYear: number = 0, iMonth: number = 0, iDay: number = 0, iHour: number = 0, iMin: number = 0, iSec: number = 0) {
+            let iTotalSec = iSec + iMin * 60 + iHour * 60 * 60 + (iDay - 1) * 86400;
+            // 此年经过的秒
+            let iTotalDay = 0;
+            let iTotalMonth = iMonth - 1;
+            for (let i = 0; i <= iTotalMonth; i++) {
+                if (i == 1 || i == 3 || i == 5 || i == 7 || i == 8 || i == 10 || i == 12) {
+                    iTotalDay = iTotalDay + 31;
+                } else if (i == 4 || i == 6 || i == 9 || i == 11) {
+                    iTotalDay = iTotalDay + 30;
+                } else {
+                    if (this.IsLeapYear(iYear)) {
+                        iTotalDay = iTotalDay + 29;
+                    } else {
+
+                        iTotalDay = iTotalDay + 28;
+                    }
+                }
+            }
+
+            for (let i = 1970; i <= iYear - 1; i++) {
+                if (this.IsLeapYear(i)) {
+                    iTotalDay = iTotalDay + 366;
+                } else {
+                    iTotalDay = iTotalDay + 365;
+                }
+            }
+            iTotalSec = iTotalSec + iTotalDay * 86400;
+            return iTotalSec;
+        }
+
 
         //尝试从空闲池中取一个TimerTask
         GetTimerTask() {

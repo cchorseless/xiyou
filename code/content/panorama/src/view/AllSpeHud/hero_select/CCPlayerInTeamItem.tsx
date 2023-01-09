@@ -1,5 +1,6 @@
 import React from "react";
 import { GameServiceConfig } from "../../../../../scripts/tscripts/shared/GameServiceConfig";
+import { PlayerConfig } from "../../../../../scripts/tscripts/shared/PlayerConfig";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { CCPanel } from "../../AllUIElement/CCPanel/CCPanel";
@@ -21,10 +22,10 @@ export class CCPlayerInTeamItem extends CCPanel<ICCPlayerInTeamItem> {
         GGameScene.GameServiceSystem.RegRef(this);
     }
 
-    // defaultStyle() {
-    //     const iPlayerID = this.props.iPlayerID;
-    //     return { borderColor: CSSHelper.GetPlayerColor(iPlayerID) }
-    // }
+    defaultStyle() {
+        const iPlayerID = this.props.iPlayerID;
+        return { borderColor: PlayerConfig.GetPlayerColor(iPlayerID) }
+    }
 
     render() {
         const iPlayerID = this.props.iPlayerID;

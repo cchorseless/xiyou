@@ -12,6 +12,19 @@ export module PlayerConfig {
         [255, 0, 255],
     ];
 
+    export function colorRGBtoHex(rgb: [number, number, number]) {
+        const r = rgb[0];
+        const g = rgb[1];
+        const b = rgb[2];
+        const hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        return hex;
+    }
+    /**
+     * 玩家颜色
+     */
+    export function GetPlayerColor(playerid: PlayerID) {
+        return colorRGBtoHex(playerColor[playerid])
+    }
 
 
     export enum EProtocol {
