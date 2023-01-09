@@ -61,7 +61,8 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
                             "Props",
                             "Chest",
                             "Resource",
-                            "Star",]} onChange={(index: number, text: string) => {
+                            "Star",]}
+                            onChange={(index: number, text: string) => {
                                 this.UpdateState({ selectindex: index })
                             }} />
                         {

@@ -1,0 +1,22 @@
+.CCLinkLabel {
+    background-size: 100%;
+    background-repeat: no-repeat;
+    transition-property: brightness;
+    transition-duration: 0.05s;
+
+
+
+    &:disabled {
+        saturation: 0.0;
+        brightness: 0.5;
+    }
+
+    &:not(:disabled):hover {
+        brightness: 2.0;
+    }
+
+    &:not(:disabled):active {
+        brightness: 0.5;
+        sound: "ui_generic_button_click";
+    }
+}

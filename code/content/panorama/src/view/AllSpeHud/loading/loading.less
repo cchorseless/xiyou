@@ -9,4 +9,93 @@
         background-repeat: no-repeat;
         background-size: 100% 100%;
     }
+
+    #Logo {
+        width: 1337/2px;
+        height: 596/2px;
+        align: center center;
+        background-image: url("file://{images}/custom_game/allspehud/loading/logo_english.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        .Language_tchinese &,
+        .Language_TCHINESE &,
+        .Language_Tchinese &,
+        .Language_schinese &,
+        .Language_SCHINESE &,
+        .Language_Schinese & {
+            background-image: url("file://{images}/custom_game/allspehud/loading/logo_chinese.png");
+        }
+    }
+
+    #EOM {
+        align: center bottom;
+        margin-bottom: 48px;
+        flow-children: right;
+
+        #EOM_Logo {
+            width: 64px;
+            height: 64px;
+            background-image: url("file://{images}/custom_game/eom_logo.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        Label {
+            vertical-align: center;
+            font-size: 20px;
+            color: #FFFFFF;
+        }
+    }
+
+    #LoadingCustomTip {
+        align: center bottom;
+        margin-bottom: 177px;
+    }
+
+    #BugEmail {
+        align: center bottom;
+        margin-bottom: 16px;
+        color: #FFFFFF;
+    }
+
+    #QQGroups {
+        margin-left: 108px;
+        margin-top: 128px;
+        flow-children: down;
+        visibility: collapse;
+
+        .Language_schinese &,
+        .Language_SCHINESE &,
+        .Language_Schinese & {
+            visibility: visible;
+        }
+    }
+
+    .QQGroup {
+        margin: 8px 0px;
+        color: #EEE;
+        text-decoration: underline;
+    }
+
+    #Discord {
+        margin-left: 108px;
+        margin-top: 76px;
+        flow-children: right;
+
+        Label {
+            vertical-align: center;
+            color: #EEE;
+            text-decoration: underline;
+        }
+
+        #DiscordImg {
+            width: 32px;
+            height: 32px;
+            margin-left: 4px;
+            background-image: url("file://{images}/custom_game/allspehud/loading/discord.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+    }
 }

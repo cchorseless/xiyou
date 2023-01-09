@@ -20,7 +20,7 @@ export class CCActivityPanel extends CCPanel<ICCActivityPanel> {
     }
 
     onInitUI() {
-        GGameScene.Local.TCharacter.DataComp?.RegRef(this)
+        GGameScene.Local.TCharacter.DataComp!.RegRef(this)
     }
 
     closeThis() {

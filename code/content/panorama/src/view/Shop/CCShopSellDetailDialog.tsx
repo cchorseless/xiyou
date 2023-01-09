@@ -5,6 +5,7 @@ import { JsonConfigHelper } from "../../../../scripts/tscripts/shared/Gen/JsonCo
 import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { TShopSellItem } from "../../../../scripts/tscripts/shared/service/shop/TShopSellItem";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { TipsHelper } from "../../helper/TipsHelper";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCWaitProgressDialog } from "../Common/CCWaitProgressDialog";
@@ -31,7 +32,7 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
             this.close();
             let MemberShip = GTActivityMemberShipData.GetOneInstance(GGameScene.Local.BelongPlayerid);
             if (!MemberShip.IsVip()) {
-                // TipsHelper.showErrorMessage()
+                TipsHelper.showErrorMessage("not vip")
                 return;
             }
             CCWaitProgressDialog.showProgressDialog({

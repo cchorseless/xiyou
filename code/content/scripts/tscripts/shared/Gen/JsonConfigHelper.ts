@@ -9,4 +9,6 @@ export module JsonConfigHelper {
     export function ToRarityNumber(rarity: EEnum.ERarity) {
         return Number(EEnum.ERarity[rarity]) || -1;
     }
+
+
 }

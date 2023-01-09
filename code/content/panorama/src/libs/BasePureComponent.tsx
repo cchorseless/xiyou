@@ -511,6 +511,11 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         this.useEffectPropList.push({ func: func, prop: prop });
     }
     private useEffectStateList: { func: () => void, state: string[] }[];
+    /**
+     *
+     * @param func
+     * @param state state中的key 对应的value 发生改变 会调用
+     */
     public useEffectState(func: () => void, ...state: string[]) {
         if (this.useEffectStateList == null) {
             this.useEffectStateList = [];

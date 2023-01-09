@@ -42,6 +42,7 @@ import { CharacterBuffComponent } from "./buff/CharacterBuffComponent";
 import { ServerZoneBuffComponent } from "./buff/ServerZoneBuffComponent";
 import { TBuffItem } from "./buff/TBuffItem";
 import { GhostEntityComponent } from "./common/GhostEntityComponent";
+import { LuBanConfigComponent } from "./common/LuBanConfigComponent";
 import { NumericComponent } from "./common/NumericComponent";
 import { SeedRandomComponent } from "./common/SeedRandomComponent";
 import { CharacterDrawTreasureComponent } from "./draw/CharacterDrawTreasureComponent";
@@ -133,6 +134,7 @@ import { CharacterTitleItem } from "./title/CharacterTitleItem";
     SeedRandomComponent,
     NumericComponent,
     GhostEntityComponent,
+    LuBanConfigComponent,
 
     CharacterDrawTreasureComponent,
 

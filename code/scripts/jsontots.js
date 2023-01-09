@@ -30,14 +30,21 @@ function jsontots() {
     function JsonDataLoader(filename:string){
         return JSONData[filename];
     };
-    let tabledata: Tables;
-    try {
-      tabledata = new Tables(JsonDataLoader);
-    }
-    catch (error) {
-      GLogHelper.error(error)
-    }
-    export const JSONConfig: Tables = tabledata;
+    export let JSONConfig: Readonly<Tables>;
+    export function RefreshConfig(data: { [k: string]: any }) {
+      for (let k in data) {
+        JSONData[k] = data[k];
+      }
+      let tabledata: Tables = null as any;
+      try {
+        tabledata = new Tables(JsonDataLoader);
+      }
+      catch (error) {
+        GLogHelper.error(error)
+      }
+      JSONConfig = tabledata
+    };
+    RefreshConfig({});
     `;
     fs.writeFileSync(outtspath, filestr);
 
