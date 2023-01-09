@@ -18,8 +18,10 @@ export class LuBanConfigComponent extends ET.Component {
             //#endregion LUA
         }
         else {
+            //#region JS
             const obj = JSON.parse(this.ClientSyncConfig);
             RefreshConfig(obj);
+            //#endregion JS
         }
         this.SyncClient()
     }
