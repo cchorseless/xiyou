@@ -11,18 +11,24 @@ export class LuBanConfigComponent extends ET.Component {
     }
 
     onReload() {
+        let obj: { [l: string]: string };
         if (_CODE_IN_LUA_) {
             //#region LUA
-            const obj = (_G as any).json.decode(this.ClientSyncConfig)[0]
-            RefreshConfig(obj);
+            obj = (_G as any).json.decode(this.ClientSyncConfig)[0];
+            for (let key in obj) {
+                obj[key] = (_G as any).json.decode(obj[key])[0];
+            }
             //#endregion LUA
         }
         else {
             //#region JS
-            const obj = JSON.parse(this.ClientSyncConfig);
-            RefreshConfig(obj);
+            obj = JSON.parse(this.ClientSyncConfig);
+            for (let key in obj) {
+                obj[key] = JSON.parse(obj[key])
+            }
             //#endregion JS
         }
+        RefreshConfig(obj);
         this.SyncClient()
     }
 }

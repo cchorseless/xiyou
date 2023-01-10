@@ -12,11 +12,6 @@ export class GameServiceSystemComponent extends GameServiceSystem {
 
     public onAwake(): void {
         this.addEvent();
-        GLogHelper.print("GetSystemTimeMS", GetSystemTimeMS())
-        GLogHelper.print("GetSystemDate", GetSystemDate(), GetSystemTime())
-        GLogHelper.print("Time", Time())
-        GLogHelper.print("Plat_FloatTime", Plat_FloatTime())
-        GLogHelper.print("LocalTime", LocalTime())
 
     }
 
