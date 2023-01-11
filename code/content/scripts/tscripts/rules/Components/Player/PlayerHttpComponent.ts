@@ -122,6 +122,7 @@ export class PlayerHttpComponent extends ET.Component {
                             let msgcb: any[] = json.decode(msg.Message)[0];
                             for (let entitystr of msgcb) {
                                 try {
+                                    // base64处理
                                     ET.Entity.FromJson(entitystr);
                                 } catch (e) {
                                     LogHelper.error(e);

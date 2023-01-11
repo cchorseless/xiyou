@@ -28,7 +28,6 @@ declare interface G2C_LoginGate {
     PlayerId: string;
 }
 
-
 declare interface G2C_Ping {
     RpcId: number;
     Error: number;

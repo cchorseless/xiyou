@@ -56,7 +56,9 @@ export class CCFriendMenu extends CCPanel<ICCFriendMenu> {
     render() {
         return (
             this.__root___isValid &&
-            <GenericPanel type="DOTAFriendMenu" id="FriendMenu" ref={this.__root__} {...this.initRootAttrs()} />
+            <GenericPanel type="DOTAFriendMenu" id="FriendMenu"
+                showLobbies={false} showBroadcastingParties={true} showBroadcastingPartiesAsRegularParties={true}
+                ref={this.__root__} {...this.initRootAttrs()} />
         );
     }
 }
