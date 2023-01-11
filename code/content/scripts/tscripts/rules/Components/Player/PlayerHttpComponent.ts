@@ -3,6 +3,7 @@ import { HttpHelper } from "../../../helper/HttpHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
 import { md5 } from "../../../lib/md5";
+import { DecompressZlib } from "../../../lib/zlib";
 import { GameProtocol } from "../../../shared/GameProtocol";
 import { ET } from "../../../shared/lib/Entity";
 
@@ -122,7 +123,7 @@ export class PlayerHttpComponent extends ET.Component {
                             let msgcb: any[] = json.decode(msg.Message)[0];
                             for (let entitystr of msgcb) {
                                 try {
-                                    // base64处理
+                                    entitystr = DecompressZlib(entitystr)
                                     ET.Entity.FromJson(entitystr);
                                 } catch (e) {
                                     LogHelper.error(e);
