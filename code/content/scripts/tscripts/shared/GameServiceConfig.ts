@@ -4,7 +4,14 @@ import { CCShare } from "./lib/CCShare";
 export module GameServiceConfig {
     export const GAME_Name = "xiyou";
     export const GAME_MAX_PLAYER = 5;
-
+    /**
+     * 数据同步客户端是否压缩
+     */
+    export const SyncClientCompress = true;
+    /**
+     * 数据同步客户端转成base64字符串
+     */
+    export const SyncClientToBase64 = true;
     /**玩家初始英雄 */
     export const DEFAULT_PICKED_HERO = GameEnum.Dota2.enum_HeroName.phoenix;
     /**网表存数据是否是存字符串的形式 */

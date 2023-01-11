@@ -2,9 +2,11 @@ import { GameSetting } from "../../../GameSetting";
 import { HttpHelper } from "../../../helper/HttpHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
+import { FromBase64 } from "../../../lib/Base64";
 import { md5 } from "../../../lib/md5";
 import { DecompressZlib } from "../../../lib/zlib";
 import { GameProtocol } from "../../../shared/GameProtocol";
+import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { ET } from "../../../shared/lib/Entity";
 
 /**玩家数据组件 */
@@ -123,7 +125,12 @@ export class PlayerHttpComponent extends ET.Component {
                             let msgcb: any[] = json.decode(msg.Message)[0];
                             for (let entitystr of msgcb) {
                                 try {
-                                    entitystr = DecompressZlib(entitystr)
+                                    if (GameServiceConfig.SyncClientToBase64) {
+                                        entitystr = FromBase64(entitystr)
+                                    }
+                                    if (GameServiceConfig.SyncClientCompress) {
+                                        entitystr = DecompressZlib(entitystr)
+                                    }
                                     ET.Entity.FromJson(entitystr);
                                 } catch (e) {
                                     LogHelper.error(e);
