@@ -261,8 +261,35 @@ export module CCShare {
         return a;
     }
 
+    export function FromJson(v: string) {
+        if (_CODE_IN_LUA_) {
+            //#region LUA
+            const r = (_G as any).json.decode(v) as [any, number];
+            if (r[0] == null) {
+                GLogHelper.error("From json fail", v)
+            }
+            return r[0];
+            //#endregion LUA
+        }
+        else {
+            //#region JS
+            return JSON.parse(v);
+            //#endregion JS
+        }
+    }
 
-
+    export function ToJson(v: any): string {
+        if (_CODE_IN_LUA_) {
+            //#region LUA
+            return (_G as any).json.encode(v);
+            //#endregion LUA
+        }
+        else {
+            //#region JS
+            return JSON.stringify(v);
+            //#endregion JS
+        }
+    }
 }
 
 declare global {
@@ -274,6 +301,8 @@ declare global {
     var _GReloadClassTypeCache: Record<string, any>;
     var GReloadable: typeof CCShare.Reloadable;
     var GGetRegClass: typeof CCShare.GetRegClass;
+    var GFromJson: typeof CCShare.FromJson;
+    var GToJson: typeof CCShare.ToJson;
     var GGenerateUUID: typeof CCShare.GenerateUUID;
     type IGDictionary<K, V> = CCShare.Dictionary<K, V>;
     var GDictionary: typeof CCShare.Dictionary;
@@ -288,6 +317,8 @@ if (_G.GHandler == null) {
     _G._GReloadClassTypeCache = {};
     _G.GReloadable = CCShare.Reloadable;
     _G.GGetRegClass = CCShare.GetRegClass;
+    _G.GFromJson = CCShare.FromJson;
+    _G.GToJson = CCShare.ToJson;
     _G.GGenerateUUID = CCShare.GenerateUUID;
     _G.GDictionary = CCShare.Dictionary;
     if (_CODE_IN_JS_) {

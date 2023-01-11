@@ -10,7 +10,7 @@ export enum EMailState {
 
 @GReloadable
 export class TMail extends ET.Entity {
-    public readonly IsSerializeEntity: boolean = true;
+
 
     public Title: number;
     public Content: number;

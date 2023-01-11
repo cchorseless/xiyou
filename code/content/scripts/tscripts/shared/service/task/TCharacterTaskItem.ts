@@ -4,7 +4,7 @@ import { CharacterTaskComponent } from "./CharacterTaskComponent";
 
 @GReloadable
 export class TCharacterTaskItem extends ET.Entity {
-    public readonly IsSerializeEntity: boolean = true;
+
 
     public ConfigId: number;
     public Progress: number;

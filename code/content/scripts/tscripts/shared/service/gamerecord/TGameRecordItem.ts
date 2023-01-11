@@ -4,7 +4,7 @@ import { TServerZone } from "../serverzone/TServerZone";
 
 @GReloadable
 export class TGameRecordItem extends ET.Entity {
-    public readonly IsSerializeEntity: boolean = true;
+
     public Players: string[];
 
     onSerializeToEntity() {

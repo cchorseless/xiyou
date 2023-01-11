@@ -14,7 +14,6 @@ import { BuildingEntityRoot } from "./BuildingEntityRoot";
 /**塔防组件 */
 @GReloadable
 export class BuildingManagerComponent extends ET.Component {
-    public IsSerializeEntity: boolean = true;
 
     allBuilding: string[] = [];
     allBuildingHelper: IBuildingEntityRoot[] = [];

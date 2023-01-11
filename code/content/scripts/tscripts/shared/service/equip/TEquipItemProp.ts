@@ -3,7 +3,7 @@ import { ET } from "../../lib/Entity";
 
 @GReloadable
 export class TEquipItemProp extends ET.Entity {
-    public readonly IsSerializeEntity: boolean = true;
+
 
     public PropQuality: number;
     public PropId: number;

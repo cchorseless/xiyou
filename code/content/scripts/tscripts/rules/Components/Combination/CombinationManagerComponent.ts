@@ -9,7 +9,7 @@ import { ECombinationLabelItem } from "./ECombinationLabelItem";
 
 @GReloadable
 export class CombinationManagerComponent extends ET.Component {
-    public readonly IsSerializeEntity: boolean = true;
+
     onAwake(): void {
         this.addEvent();
         let config = KVHelper.KvServerConfig.building_combination_ability;

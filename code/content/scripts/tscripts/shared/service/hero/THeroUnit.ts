@@ -5,7 +5,7 @@ import { CharacterBuffComponent } from "../buff/CharacterBuffComponent";
 
 @GReloadable
 export class THeroUnit extends ET.Entity {
-    public readonly IsSerializeEntity: boolean = true;
+
 
     public ConfigId: number;
 

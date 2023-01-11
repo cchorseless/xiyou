@@ -4,7 +4,7 @@ import { TActivityMemberShipData } from "./TActivityMemberShipData";
 
 @GReloadable
 export class TActivityMentorshipApplyForItem extends ET.Entity {
-    public readonly IsSerializeEntity: boolean = true;
+
 
     public ConfigId: number;
     public Progress: number;

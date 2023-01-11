@@ -1,10 +1,13 @@
 
+import { serializeETProps } from "../../lib/Entity";
 import { TActivityData } from "./TActivityData";
 
 
 @GReloadable
 export class TActivityMemberShipData extends TActivityData {
+    @serializeETProps()
     public VipStartTime: string;
+    @serializeETProps()
     public VipEndTime: string;
     onSerializeToEntity() {
         this.onReload()

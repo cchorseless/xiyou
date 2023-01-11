@@ -4,7 +4,7 @@ import { HeroTalentComponent } from "./HeroTalentComponent";
 
 @GReloadable
 export class THeroTalentItem extends ET.Entity {
-    public readonly IsSerializeEntity: boolean = true;
+
 
     public ConfigId: number;
     public CostTalentPoint: number;

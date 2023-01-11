@@ -48,7 +48,6 @@ export class CCFriendMenu extends CCPanel<ICCFriendMenu> {
                         }
                     }
                 }
-
             }
         }
     }

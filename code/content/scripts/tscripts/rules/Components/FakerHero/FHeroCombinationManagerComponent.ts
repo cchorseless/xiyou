@@ -7,7 +7,7 @@ import { FHeroCombination } from "./FHeroCombination";
 
 @GReloadable
 export class FHeroCombinationManagerComponent extends ET.Component {
-    public readonly IsSerializeEntity: boolean = true;
+
 
     onAwake(): void {
         this.addEvent();

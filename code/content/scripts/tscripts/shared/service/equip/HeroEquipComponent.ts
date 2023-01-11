@@ -33,7 +33,7 @@ export enum EEquipSolt {
 
 @GReloadable
 export class HeroEquipComponent extends ET.Component {
-    public readonly IsSerializeEntity: boolean = true;
+
 
     Equips: string[];
     public get HeroUnit(): THeroUnit { return this.GetParent<THeroUnit>(); }

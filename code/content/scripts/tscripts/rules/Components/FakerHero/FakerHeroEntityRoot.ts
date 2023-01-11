@@ -5,7 +5,7 @@ import { FakerHeroDataComponent } from "./FakerHeroDataComponent";
 import { FHeroCombinationManagerComponent } from "./FHeroCombinationManagerComponent";
 
 export class FakerHeroEntityRoot extends BaseEntityRoot {
-    public readonly IsSerializeEntity: boolean = true;
+
 
     onAwake(playerid: PlayerID, conf: string) {
         let npc = this.GetDomain<IBaseNpc_Plus>();

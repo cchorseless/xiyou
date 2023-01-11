@@ -1,12 +1,12 @@
 
 
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 import { CharacterAchievementComponent } from "./CharacterAchievementComponent";
 
 @GReloadable
 export class TCharacterAchievementItem extends ET.Entity {
-    public readonly IsSerializeEntity: boolean = true;
 
+    @serializeETProps()
     public ConfigId: number;
     public IsAchieve: boolean;
     public IsPrizeGet: boolean;

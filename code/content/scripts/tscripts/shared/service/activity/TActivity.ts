@@ -4,7 +4,7 @@ import { ServerZoneActivityComponent } from "./ServerZoneActivityComponent";
 
 @GReloadable
 export class TActivity extends ET.Entity {
-    public readonly IsSerializeEntity: boolean = true;
+
     public ActivityId: number;
     public ConfigId: number;
     public ValidState: boolean;

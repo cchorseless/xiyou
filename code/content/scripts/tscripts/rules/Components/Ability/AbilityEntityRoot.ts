@@ -5,7 +5,7 @@ import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 
 export class AbilityEntityRoot extends BaseEntityRoot {
-    public readonly IsSerializeEntity: boolean = true;
+
     public readonly CombinationLabels: string[] = [];
 
     onAwake() {

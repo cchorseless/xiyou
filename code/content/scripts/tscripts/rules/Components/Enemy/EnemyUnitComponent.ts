@@ -4,7 +4,6 @@ import { ChessDataComponent } from "../ChessControl/ChessDataComponent";
 
 @GReloadable
 export class EnemyUnitComponent extends ChessDataComponent {
-    readonly IsSerializeEntity: boolean = true;
 
     onAwake(): void {
         super.onAwake();

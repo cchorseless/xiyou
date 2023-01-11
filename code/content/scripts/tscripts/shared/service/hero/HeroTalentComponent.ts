@@ -5,7 +5,7 @@ import { THeroUnit } from "../hero/THeroUnit";
 
 @GReloadable
 export class HeroTalentComponent extends ET.Component {
-    public readonly IsSerializeEntity: boolean = true;
+
 
     TalentPoint: number;
     TotalTalentPoint: number;

@@ -161,7 +161,10 @@ export module ET {
         public readonly Children: { [uuid: string]: Entity };
         public readonly Components: { [name: string]: Component };
         public readonly SerializeETProps: string[];
-        public readonly IsSerializeEntity: boolean = false;
+        public get IsSerializeEntity() {
+            // 数据只绑定在EntityRoot上，其他组件不需要重复同步
+            return this.SerializeETProps != null || (this.Domain.SerializeDomainProps != null && (this.Domain.ETRoot as any) == this);
+        }
         public get updateEventName() {
             return "updateEntity_" + this.InstanceId;
         }
@@ -291,7 +294,8 @@ export module ET {
                     obj[k] = GameServiceConfig.TryEncodeData((this as any)[k]);
                 }
             }
-            if (this.Domain.SerializeDomainProps != null) {
+            // 数据只绑定在EntityRoot上，其他组件不需要重复同步
+            if (this.Domain.SerializeDomainProps != null && (this.Domain.ETRoot as any) == this) {
                 obj._d_props = {};
                 for (let k of this.Domain.SerializeDomainProps) {
                     obj._d_props[k] = GameServiceConfig.TryEncodeData((this.Domain as any)[k]);

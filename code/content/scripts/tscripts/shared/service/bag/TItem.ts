@@ -4,7 +4,7 @@ import { ET } from "../../lib/Entity";
 
 @GReloadable
 export class TItem extends ET.Entity {
-    public readonly IsSerializeEntity: boolean = true;
+
 
     public ConfigId: number;
 

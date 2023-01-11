@@ -4,7 +4,7 @@ import { ET } from "../../lib/Entity";
 
 @GReloadable
 export class TSeasonRankData extends ET.Entity {
-    public readonly IsSerializeEntity: boolean = true;
+
 
     public SeasonConfigId: number;
     private _Ranks: IGDictionary<string, string> = new GDictionary<

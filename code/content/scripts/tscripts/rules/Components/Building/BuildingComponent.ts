@@ -7,7 +7,7 @@ import { ChessDataComponent } from "../ChessControl/ChessDataComponent";
 /**塔防组件 */
 @GReloadable
 export class BuildingComponent extends ChessDataComponent {
-    public readonly IsSerializeEntity: boolean = true;
+
     private iGoldCost: number;
     /**累计造成伤害 */
     public fDamage: number;
