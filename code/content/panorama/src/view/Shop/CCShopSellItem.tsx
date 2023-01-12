@@ -48,7 +48,7 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
             buttonID = "FreeBtn";
         }
         else if (sellinfo.CostType == EEnum.EMoneyType.MetaStone) {
-            buttonID = "MoonBtn";
+            buttonID = "MetaBtn";
         }
         else if (sellinfo.CostType == EEnum.EMoneyType.StarStone) {
             buttonID = "StarBtn";
@@ -96,7 +96,7 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
                     {/* Free */}
                     {buttonID == "FreeBtn" && <Label localizedText="#DialogBox_Rcv" />}
                     {/* Moon */}
-                    {buttonID == "MoonBtn" && <Panel id="MoonWithNum" hittest={false}>
+                    {buttonID == "MetaBtn" && <Panel id="MetaWithNum" hittest={false}>
                         <Image />
                         <Label text={price} />
                     </Panel>}
