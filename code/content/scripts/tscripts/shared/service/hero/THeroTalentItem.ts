@@ -1,4 +1,4 @@
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 import { HeroTalentComponent } from "./HeroTalentComponent";
 
 
@@ -6,8 +6,11 @@ import { HeroTalentComponent } from "./HeroTalentComponent";
 export class THeroTalentItem extends ET.Entity {
 
 
+    @serializeETProps()
     public ConfigId: number;
+    @serializeETProps()
     public CostTalentPoint: number;
+    @serializeETProps()
     public TalentBuff: number[];
 
     public get HeroTalentComp(): HeroTalentComponent { return this.GetParent<HeroTalentComponent>(); }

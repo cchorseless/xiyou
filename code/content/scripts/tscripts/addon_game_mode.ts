@@ -16,4 +16,3 @@ Object.assign(getfenv(), {
 if (GameRules.Addon) {
     GameRules.Addon.Reload();
 }
-

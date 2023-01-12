@@ -92,7 +92,6 @@ export class GameEventSystemComponent extends ET.SingletonComponent {
     }
 
     UpdateSyncEntity(tableName: string, key: string, value: any) {
-        LogHelper.print(tableName, key);
         value = GameServiceConfig.NetTableSaveDataAsSring ? JSON.parse(value._ as any) : value;
         if (value != null && value._t && value._id) {
             try {

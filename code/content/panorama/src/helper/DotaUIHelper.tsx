@@ -218,12 +218,20 @@ export module DotaUIHelper {
         lower_hud = "lower_hud",
     }
 
+    const DragHander = {
+        DragStart: 0,
+        DragEnter: 0,
+        DragLeave: 0,
+        DragDrop: 0,
+        DragEnd: 0,
+    }
+
     function RegDragEvent() {
-        $.RegisterForUnhandledEvent("DragStart", (pPanel: Panel, tDragCallbacks: DragSettings) => {
+        DragHander.DragStart = $.RegisterForUnhandledEvent("DragStart", (pPanel: Panel, tDragCallbacks: DragSettings) => {
             LogHelper.print("DragStart", "111111")
             // runDragHandler(pDraggedPanel, "DragStart", pPanel)
         });
-        $.RegisterForUnhandledEvent("DragEnter", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
+        DragHander.DragEnter = $.RegisterForUnhandledEvent("DragEnter", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
             CCMainPanel.GetInstance()!.HideToolTip();
             if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 let brightness = pPanel.style.brightness || 1;
@@ -231,19 +239,19 @@ export module DotaUIHelper {
                 runDragHandler(pDraggedPanel, "DragEnter", pPanel);
             }
         });
-        $.RegisterForUnhandledEvent("DragLeave", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
+        DragHander.DragLeave = $.RegisterForUnhandledEvent("DragLeave", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
             if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 let brightness = pPanel.style.brightness || 1.5;
                 pPanel.style.brightness = Number(brightness) - 0.5 + "";
                 runDragHandler(pDraggedPanel, "DragLeave", pPanel);
             }
         });
-        $.RegisterForUnhandledEvent("DragDrop", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
+        DragHander.DragDrop = $.RegisterForUnhandledEvent("DragDrop", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
             if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 runDragHandler(pDraggedPanel, "DragDrop", pPanel);
             }
         });
-        $.RegisterForUnhandledEvent("DragEnd", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
+        DragHander.DragEnd = $.RegisterForUnhandledEvent("DragEnd", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
             if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 runDragHandler(pDraggedPanel, "DragEnd", pPanel);
             }
@@ -353,4 +361,13 @@ export module DotaUIHelper {
         RegDragEvent();
 
     }
+    export function Quit() {
+        for (let k in DragHander) {
+            const eventid = (DragHander as any)[k];
+            if (eventid != 0) {
+                $.UnregisterForUnhandledEvent(k, eventid)
+            }
+        }
+    }
+
 }

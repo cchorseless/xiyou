@@ -1,5 +1,6 @@
 
 
+import { serializeETProps } from "../../lib/Entity";
 import { TActivityData } from "./TActivityData";
 
 
@@ -10,6 +11,7 @@ export class TActivityTotalOnlineTimeData extends TActivityData {
         number,
         number
     >();
+    @serializeETProps()
     public get ItemState() {
         return this._ItemState;
     }
@@ -18,6 +20,7 @@ export class TActivityTotalOnlineTimeData extends TActivityData {
 
     }
 
+    @serializeETProps()
     public LastLoginTotalOnlineTime: number;
 
 }

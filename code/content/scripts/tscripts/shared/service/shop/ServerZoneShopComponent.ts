@@ -1,5 +1,5 @@
 
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 import { TCharacter } from "../account/TCharacter";
 import { TServerZone } from "../serverzone/TServerZone";
 
@@ -11,6 +11,7 @@ export class ServerZoneShopComponent extends ET.Component {
         number,
         string
     >();
+    @serializeETProps()
     public get ShopUnit() {
         return this._ShopUnit;
     }

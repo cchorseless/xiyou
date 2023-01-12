@@ -1,5 +1,5 @@
 import { RefreshConfig } from "../../Gen/JsonConfig";
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 
 
 @GReloadable
@@ -11,6 +11,7 @@ export class LuBanConfigComponent extends ET.Component {
         string,
         string
     >();
+    @serializeETProps()
     public get ClientSyncConfig() {
         return this._ClientSyncConfig;
     }

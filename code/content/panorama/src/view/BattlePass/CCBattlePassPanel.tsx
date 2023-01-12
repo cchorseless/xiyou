@@ -19,7 +19,6 @@ export class CCBattlePassPanel extends CCPanel<ICCBattlePassPanel> {
     onReady() {
         return Boolean(GGameScene.Local.TCharacter && GGameScene.Local.TCharacter.DataComp)
     }
-
     onInitUI() {
         GGameScene.Local.TCharacter.DataComp?.RegRef(this)
     }

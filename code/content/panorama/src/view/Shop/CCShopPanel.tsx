@@ -2,7 +2,6 @@
 import React from "react";
 import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { LogHelper } from "../../helper/LogHelper";
 
 import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
@@ -12,6 +11,7 @@ import { CCPopUpDialog } from "../AllUIElement/CCPopUpDialog/CCPopUpDialog";
 import { CCVerticalTable } from "../AllUIElement/CCTable/CCVerticalTable";
 import { CCCoinAddPanel } from "./CCCoinAddPanel";
 import "./CCShopPanel.less";
+import { CCShopSellItem } from "./CCShopSellItem";
 interface ICCShopPanel extends NodePropsData {
 
 }
@@ -23,7 +23,9 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
 
     onInitUI() {
         GGameScene.Local.TCharacter.DataComp?.RegRef(this);
-        LogHelper.print(GGameScene.Local.TCharacter.ShopComp?.ShopUnit)
+        GTShopUnit.GetGroupInstance(GGameScene.Local.BelongPlayerid).forEach(e => {
+            e.RegRef(this);
+        })
     }
 
     closeThis() {
@@ -44,6 +46,10 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
         const MetaStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.MetaStone)
         const StarStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.StarStone)
         const selectindex = this.GetState<number>("selectindex") || 0;
+        const shopunits = GTShopUnit.GetGroupInstance(GGameScene.Local.BelongPlayerid).map((e) => { return this.GetStateEntity(e)! })
+        shopunits.sort((a, b) => { return a.ConfigId - b.ConfigId })
+        const curshopunit = shopunits[selectindex];
+        const allsellitems = curshopunit.getAllSellItems();
         return (
             <Panel id="CC_ShopPanel" className="CC_root" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPopUpDialog id="PanelBg" fullcontent={true} verticalAlign="top" marginTop="120px" onClose={() => this.closeThis()} >
@@ -56,17 +62,16 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
                         </CCPanel>
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">
-                        <CCVerticalTable marginTop={"20px"} list={[
-                            "Home",
-                            "Props",
-                            "Chest",
-                            "Resource",
-                            "Star",]}
-                            onChange={(index: number, text: string) => {
-                                this.UpdateState({ selectindex: index })
-                            }} />
+                        <CCVerticalTable marginTop={"20px"} list={shopunits.map(e => { return e.Config!.ShopName })}
+                            onChange={(index: number, text: string) => { this.UpdateState({ selectindex: index }) }} />
                         {
-
+                            <CCPanel flowChildren="right-wrap">
+                                {
+                                    allsellitems.map((e, index) => {
+                                        return <CCShopSellItem key={index + ""} entity={e} />
+                                    })
+                                }
+                            </CCPanel>
                         }
                     </CCPanel>
                     {this.props.children}

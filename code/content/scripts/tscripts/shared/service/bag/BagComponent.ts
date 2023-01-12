@@ -20,6 +20,7 @@ export class BagComponent extends ET.Component {
 
     @serializeETProps()
     public Items: string[];
+    @serializeETProps()
     public MaxSize: number;
 
     getItemByType(itemtype: EEnum.EItemType) {

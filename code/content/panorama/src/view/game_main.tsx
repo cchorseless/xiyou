@@ -29,6 +29,9 @@ export class RootPanel extends CCPanel {
     }
     onDestroy() {
         (RootPanel.instance as any) = null;
+        TimerHelper.Stop();
+        DotaUIHelper.Quit();
+        GameScene.Scene.Dispose();
     }
 
     render() {

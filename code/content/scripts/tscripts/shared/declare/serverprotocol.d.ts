@@ -40,6 +40,7 @@ declare interface C2H_Buy_ShopItem // IRequest
 {
     ShopId: string;
     ItemId: string;
+    PriceType: number;
     ItemCount: number;
 }
 

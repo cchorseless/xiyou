@@ -1,5 +1,5 @@
 
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 import { TCharacter } from "../account/TCharacter";
 
 
@@ -9,6 +9,7 @@ export class HeroManageComponent extends ET.Component {
         number,
         string
     >();
+    @serializeETProps()
     public get HeroUnits() {
         return this._HeroUnits;
     }
@@ -17,6 +18,7 @@ export class HeroManageComponent extends ET.Component {
 
     }
 
+    @serializeETProps()
     HeroBanDesign: string[];
     public Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {
