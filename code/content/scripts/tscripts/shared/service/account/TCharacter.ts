@@ -21,6 +21,7 @@ export class TCharacter extends ET.Component {
     // 玩家服务器playerId,并非游戏内
     @serializeETProps()
     Int64PlayerId: string;
+    /**STEAM 短id */
     @serializeETProps()
     Name: string;
     CreateTime: string;
@@ -30,8 +31,10 @@ export class TCharacter extends ET.Component {
     IsFirstLoginSeason: boolean;
     onSerializeToEntity() {
         //#region LUA
+        GLogHelper.print(this.Name + ": ")
         for (let i = 0; i < GameServiceConfig.GAME_MAX_PLAYER; i++) {
-            let sPlayerSteamid = PlayerResource.GetSteamID(i as PlayerID).ToHexString();
+            let sPlayerSteamid = PlayerResource.GetSteamAccountID(i as PlayerID) + "";
+            GLogHelper.print(sPlayerSteamid + "----- ")
             if (sPlayerSteamid == this.Name) {
                 (this.BelongPlayerid as any) = i;
                 break;

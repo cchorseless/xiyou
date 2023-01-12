@@ -33,17 +33,16 @@ export class PlayerHttpComponent extends ET.Component {
     }
 
     public async PlayerLogin(playerid: PlayerID) {
-        let steamid = GPlayerEntityRoot.GetSteamID(playerid);
         let accountid = GPlayerEntityRoot.GetAccountID(playerid);
         let loginUrl = GameProtocol.LoginUrl();
-        let cbmsg: H2C_GetAccountLoginKey = await this.PostAsync(GameProtocol.Protocol.AccountLoginKey, { Account: steamid }, loginUrl);
+        let cbmsg: H2C_GetAccountLoginKey = await this.PostAsync(GameProtocol.Protocol.AccountLoginKey, { Account: accountid }, loginUrl);
         let password = "";
         if (cbmsg.Error == 0) {
             password = md5.sumhexa(cbmsg.Key + GameSetting.ServerKey() + accountid);
         } else {
             password = md5.sumhexa(cbmsg.Key + GameSetting.ServerKey()) + accountid;
         }
-        let cbmsg1: R2C_Login = await this.PostAsync(GameProtocol.Protocol.LoginRealm, { Account: steamid, Password: password, ServerId: 1, GateId: PlayerHttpComponent.GateId }, loginUrl);
+        let cbmsg1: R2C_Login = await this.PostAsync(GameProtocol.Protocol.LoginRealm, { Account: accountid, Password: password, ServerId: 1, GateId: PlayerHttpComponent.GateId }, loginUrl);
         if (cbmsg1.Error == 0) {
             (PlayerHttpComponent.GateId as any) = cbmsg1.GateId;
             let _adress = cbmsg1.Address.split(":");
@@ -54,12 +53,12 @@ export class PlayerHttpComponent extends ET.Component {
             if (cbmsg2.Error == 0) {
                 this.TOKEN = "Bearer " + cbmsg2.Message;
                 (this.IsOnline as any) = true;
-                LogHelper.print(`Login success => steamid:${steamid}  playerid:${playerid}`);
+                LogHelper.print(`Login success => steamid:${accountid}  playerid:${playerid}`);
                 this.Ping();
                 return;
             }
         }
-        LogHelper.error(`Login error => steamid:${steamid}  playerid:${playerid}`);
+        LogHelper.error(`Login error => steamid:${accountid}  playerid:${playerid}`);
     }
 
     public async PlayerLoginOut() {
@@ -130,6 +129,9 @@ export class PlayerHttpComponent extends ET.Component {
                                     }
                                     if (GameServiceConfig.SyncClientCompress) {
                                         entitystr = DecompressZlib(entitystr)
+                                    }
+                                    if (typeof entitystr === "string") {
+                                        entitystr = json.decode(entitystr)[0]
                                     }
                                     ET.Entity.FromJson(entitystr);
                                 } catch (e) {

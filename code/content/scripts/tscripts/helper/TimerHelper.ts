@@ -19,8 +19,7 @@ export module TimerHelper {
     }
     /**时间戳 */
     function NowUnix() {
-        const timeoffset = (TimeZoneOffSet || 0) * 3600 * 1000;
-        return GetLocalTime() - timeoffset;
+        return GetLocalTime() + TimestampOffSet;
     }
 
     function GetLocalTime() {
@@ -37,22 +36,13 @@ export module TimerHelper {
         const second = Number(time[2]);
         return GTimerHelper.toUnixTime(year, month, day, hour, minute, second) * 1000;
     }
-    let TimeZoneOffSet: number | null = null;
+    let TimestampOffSet: number = 0;
     /**
      * 更新一下时区，用于获取utc时间戳
      * @param time
      */
     export function UpdateTimeZoneOffSet(time: number) {
-        if (TimeZoneOffSet != null) {
-            const offset = time - GetLocalTime();
-            TimeZoneOffSet = Math.floor(Math.abs(offset / 1000 / 3600));
-            if (offset < 0) {
-                TimeZoneOffSet = TimeZoneOffSet * -1;
-            }
-        }
-        GLogHelper.print(NowUnix(), "------NowUnix-----")
-        GLogHelper.print(time, "-----servertime------")
-        GLogHelper.print(NowUnix() - time, "-----offset------")
+        TimestampOffSet = time - GetLocalTime();
     }
 
     // export class TimeWorker {

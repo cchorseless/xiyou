@@ -236,6 +236,7 @@ export module ET {
                 const playerroot = GGameScene.GetPlayer(this.BelongPlayerid) as any;
                 playerroot.SyncClientEntity(this, ignoreChild, isShare);
             }
+            GLogHelper.print(this.GetType(), this.BelongPlayerid);
             //#endregion LUA
         }
 
@@ -404,6 +405,9 @@ export module ET {
             }
         }
         static FromJson(json: IEntityJson) {
+            if (json._t == "CharacterActivityComponent") {
+                GLogHelper.print(json)
+            }
             let entity = EntitySystem.GetEntity(json._id + json._t);
             if (entity != null) {
                 entity.updateFromJson(json);
