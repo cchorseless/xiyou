@@ -1,11 +1,13 @@
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 import { TCharacter } from "../account/TCharacter";
 import { TGameRecordItem } from "./TGameRecordItem";
 
 
 @GReloadable
 export class CharacterGameRecordComponent extends ET.Component {
+    @serializeETProps()
     public Records: string[];
+    @serializeETProps()
     public CurRecordID: string;
 
     public GetCurGameRecord(): TGameRecordItem | null {

@@ -1,5 +1,5 @@
 
-import { ET } from "../../lib/Entity";
+import { serializeETProps } from "../../lib/Entity";
 import { ValueTupleStruct } from "../common/ValueTupleStruct";
 import { TActivity } from "./TActivity";
 
@@ -10,6 +10,7 @@ export class TActivitySevenDayLogin extends TActivity {
         number,
         ValueTupleStruct<number, number>
     >();
+    @serializeETProps()
     public get Items() {
         return this._Items;
     }

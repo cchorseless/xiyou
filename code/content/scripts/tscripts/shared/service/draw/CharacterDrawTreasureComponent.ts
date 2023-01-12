@@ -1,5 +1,5 @@
 
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 import { TCharacter } from "../account/TCharacter";
 
 
@@ -10,6 +10,7 @@ export class CharacterDrawTreasureComponent extends ET.Component {
         number,
         number
     >();
+    @serializeETProps()
     public get TreasureTimes() {
         return this._TreasureTimes;
     }
@@ -22,6 +23,7 @@ export class CharacterDrawTreasureComponent extends ET.Component {
         number,
         string
     >();
+    @serializeETProps()
     public get FreeTimeStamp() {
         return this._FreeTimeStamp;
     }

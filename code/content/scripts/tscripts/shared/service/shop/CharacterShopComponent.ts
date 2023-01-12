@@ -1,5 +1,5 @@
 
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 import { TCharacter } from "../account/TCharacter";
 
 
@@ -9,6 +9,7 @@ export class CharacterShopComponent extends ET.Component {
         number,
         string
     >();
+    @serializeETProps()
     public get ShopUnit() {
         return this._ShopUnit;
     }

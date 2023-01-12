@@ -1,16 +1,18 @@
 
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 import { TServerZone } from "../serverzone/TServerZone";
 import { TServerZoneSeason } from "./TServerZoneSeason";
 
 
 @GReloadable
 export class ServerZoneSeasonComponent extends ET.Component {
+    @serializeETProps()
     public CurSeasonConfigId: number;
     private _Seasons = new GDictionary<
         number,
         string
     >();
+    @serializeETProps()
     public get Seasons() {
         return this._Seasons;
     }

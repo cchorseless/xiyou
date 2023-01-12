@@ -1,4 +1,4 @@
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 import { THeroUnit } from "../hero/THeroUnit";
 
 
@@ -35,6 +35,7 @@ export enum EEquipSolt {
 export class HeroEquipComponent extends ET.Component {
 
 
+    @serializeETProps()
     Equips: string[];
     public get HeroUnit(): THeroUnit { return this.GetParent<THeroUnit>(); }
 

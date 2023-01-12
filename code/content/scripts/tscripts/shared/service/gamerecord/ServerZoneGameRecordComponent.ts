@@ -5,6 +5,7 @@ import { TGameRecordItem } from "./TGameRecordItem";
 
 @GReloadable
 export class ServerZoneGameRecordComponent extends ET.Component {
+    @serializeETProps()
     public Records: string[] = [];
 
     addRecord(record: TGameRecordItem) {

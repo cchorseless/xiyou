@@ -1,5 +1,5 @@
 
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 import { THeroUnit } from "../hero/THeroUnit";
 
 
@@ -7,7 +7,9 @@ import { THeroUnit } from "../hero/THeroUnit";
 export class HeroTalentComponent extends ET.Component {
 
 
+    @serializeETProps()
     TalentPoint: number;
+    @serializeETProps()
     TotalTalentPoint: number;
 
 
@@ -15,6 +17,7 @@ export class HeroTalentComponent extends ET.Component {
         number,
         string
     >();
+    @serializeETProps()
     public get Talents() {
         return this._Talents;
     }
@@ -27,6 +30,7 @@ export class HeroTalentComponent extends ET.Component {
         number,
         number[]
     >();
+    @serializeETProps()
     public get TalentLearn() {
         return this._TalentLearn;
     }

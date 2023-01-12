@@ -1,4 +1,4 @@
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 
 
 export enum EMailState {
@@ -12,15 +12,24 @@ export enum EMailState {
 export class TMail extends ET.Entity {
 
 
+    @serializeETProps()
     public Title: number;
+    @serializeETProps()
     public Content: number;
+    @serializeETProps()
     public State: number[];
+    @serializeETProps()
     public From: string;
+    @serializeETProps()
     public FromDes: string;
+    @serializeETProps()
     public To: string[];
+    @serializeETProps()
     public ToDes: string;
+    @serializeETProps()
     public Time: string;
+    @serializeETProps()
     public ValidTime: number;
-
+    @serializeETProps()
     public Items: { Item1: number, Item2: number }[];
 }

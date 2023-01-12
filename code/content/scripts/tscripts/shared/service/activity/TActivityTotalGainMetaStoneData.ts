@@ -1,5 +1,6 @@
 
 
+import { serializeETProps } from "../../lib/Entity";
 import { TActivityData } from "./TActivityData";
 
 
@@ -10,6 +11,7 @@ export class TActivityTotalGainMetaStoneData extends TActivityData {
         number,
         number
     >();
+    @serializeETProps()
     public get ItemState() {
         return this._ItemState;
     }

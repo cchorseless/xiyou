@@ -1,10 +1,11 @@
-import { ET } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 import { TServerZone } from "../serverzone/TServerZone";
 
 
 @GReloadable
 export class TGameRecordItem extends ET.Entity {
 
+    @serializeETProps()
     public Players: string[];
 
     onSerializeToEntity() {
