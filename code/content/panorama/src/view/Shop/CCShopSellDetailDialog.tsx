@@ -40,6 +40,7 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
                 data: {
                     ShopId: sellitem.ShopId + "",
                     ItemId: sellitem.SellConfig.ItemConfigId + "",
+                    PriceType: CSSHelper.IsChineseLanguage() ? 0 : 1,
                     ItemCount: iNum
                 } as C2H_Buy_ShopItem,
             })

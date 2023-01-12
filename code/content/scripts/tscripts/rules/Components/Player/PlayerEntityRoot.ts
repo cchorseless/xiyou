@@ -362,6 +362,7 @@ export class PlayerEntityRoot extends PlayerSystem {
     GetColor() {
         return GameFunc.VectorFunctions.ArrayToVector(PlayerConfig.playerColor[this.BelongPlayerid]);
     }
+
 }
 
 declare global {
