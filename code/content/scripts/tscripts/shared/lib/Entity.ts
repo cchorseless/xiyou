@@ -336,7 +336,8 @@ export module ET {
                 (this.D_Props as any) = json._d_props;
             }
             if (json.Children) {
-                let _childs = Object.values(json.Children);
+                // 服务器那边发过来的是数组
+                let _childs: IEntityJson[] = Object.values(json.Children);
                 if (this.Children != null) {
                     let keys = Object.keys(this.Children);
                     for (let k of keys) {
@@ -370,14 +371,15 @@ export module ET {
                 }
             }
             if (json.C) {
+                // 服务器那边发过来的是数组
+                let comps: IEntityJson[] = Object.values(json.C);
                 if (this.Components != null) {
                     let keys = Object.keys(this.Components);
                     for (let k of keys) {
                         let isdrop = true;
-                        for (let compname in json.C) {
-                            let _child = json.C[compname];
-                            if (k == _child._t) {
-                                this.Components[k]?.updateFromJson(_child);
+                        for (let _comp of comps) {
+                            if (k == _comp._t) {
+                                this.Components[k]?.updateFromJson(_comp);
                                 isdrop = false;
                                 break;
                             }
@@ -387,10 +389,9 @@ export module ET {
                         }
                     }
                 }
-                for (let k in json.C) {
-                    let info = json.C[k];
-                    if (this.Components == null || this.Components[info._t] == null) {
-                        let entity = Entity.FromJson(info);
+                for (let _comp of comps) {
+                    if (this.Components == null || this.Components[_comp._t] == null) {
+                        let entity = Entity.FromJson(_comp);
                         if (this.IsRegister) {
                             this.AddOneComponent(entity as any);
                         } else {
@@ -405,9 +406,6 @@ export module ET {
             }
         }
         static FromJson(json: IEntityJson) {
-            if (json._t == "CharacterActivityComponent") {
-                GLogHelper.print(json)
-            }
             let entity = EntitySystem.GetEntity(json._id + json._t);
             if (entity != null) {
                 entity.updateFromJson(json);

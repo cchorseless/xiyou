@@ -1,5 +1,4 @@
 import { JSONConfig } from "../../Gen/JsonConfig";
-import { Shop } from "../../Gen/Types";
 import { ET, serializeETProps } from "../../lib/Entity";
 
 
@@ -11,7 +10,7 @@ export class TShopSellItem extends ET.Entity {
     public ShopId: number;
     @serializeETProps()
     public BuyCount: number;
-    public get SellConfig(): Shop.ShopSellItemBean {
+    public get SellConfig() {
         const json = JSONConfig.ShopConfig.get(this.ShopId);
         if (json) {
             return json.sellinfo.find(info => info.SellConfigid == this.ConfigId)

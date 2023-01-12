@@ -24,7 +24,7 @@ module.exports = {
     optimization: { // 1. 这个配置必须
         minimize: false,
     },
-    devtool: isProduction ? false : 'eval-cheap-module-source-map',
+    devtool: isProduction ? false : 'eval',/**-cheap-module-source-map */
     mode: isProduction ? 'production' : 'development',
     context: path.resolve(__dirname, 'src'),
     output: {
@@ -79,10 +79,17 @@ module.exports = {
             },
             {
                 test: /\.js?$|\.jsx?$/,
-                loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-react', '@babel/preset-env']
-                },
+                use: [
+                    {
+                        loader: path.resolve(__dirname, "./webpackloader/jsloader.js")
+                    },
+                 {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-react', '@babel/preset-env']
+                    }, },
+                ],
+             
             },
             {
                 test: /\.css$/,

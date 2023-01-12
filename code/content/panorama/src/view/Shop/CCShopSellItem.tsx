@@ -21,7 +21,7 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
 
     onBtnBuyClick() {
         const sellitem = this.GetStateEntity(this.props.entity)!;
-        if (sellitem.SellConfig.VipLimit == 1) {
+        if (sellitem.SellConfig!.VipLimit == 1) {
             let MemberShip = GTActivityMemberShipData.GetOneInstance(GGameScene.Local.BelongPlayerid);
             if (!MemberShip?.IsVip()) {
                 // TipsHelper.showErrorMessage()
@@ -33,7 +33,7 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
 
     render() {
         const sellitem = this.GetStateEntity(this.props.entity)!;
-        const sellinfo = sellitem.SellConfig;
+        const sellinfo = sellitem.SellConfig!;
         const end_time = sellinfo.SellStartTime + sellinfo.SellValidTime;
         // 按钮类型
         let price = sellinfo.RealPrice || 0;

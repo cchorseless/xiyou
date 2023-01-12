@@ -4,7 +4,7 @@
         <!-- <include src="../../game_main.less" /> -->
     </styles>
     <scripts>
-        <include src="./team_select.tsx" />
+        <!-- <include src="./team_select.tsx" /> -->
     </scripts>
     <Panel hittest="false" />
 </root>

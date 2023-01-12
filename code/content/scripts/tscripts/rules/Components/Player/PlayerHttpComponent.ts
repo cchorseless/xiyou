@@ -135,8 +135,8 @@ export class PlayerHttpComponent extends ET.Component {
                                     }
                                     ET.Entity.FromJson(entitystr);
                                 } catch (e) {
-                                    LogHelper.error(e);
                                     LogHelper.print(entitystr);
+                                    LogHelper.error(e);
                                 }
                             }
                         }

@@ -9,11 +9,16 @@ export class TActivityMemberShipData extends TActivityData {
     public VipStartTime: string;
     @serializeETProps()
     public VipEndTime: string;
+
+
+
     onSerializeToEntity() {
         this.onReload()
     }
 
     onReload() {
+        GLogHelper.print(this.SerializeETProps);
+        GLogHelper.print(this.toJsonObject());
         this.SyncClient(true, true);
     }
 

@@ -28,7 +28,7 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
     onBtnBuyClick() {
         const iNum = this.GetState<number>("iNum");
         const sellitem = this.GetStateEntity(this.props.entity)!;
-        if (sellitem.SellConfig.VipLimit == 1) {
+        if (sellitem.SellConfig!.VipLimit == 1) {
             this.close();
             let MemberShip = GTActivityMemberShipData.GetOneInstance(GGameScene.Local.BelongPlayerid);
             if (!MemberShip.IsVip()) {
@@ -39,7 +39,7 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
                 protocol: GameProtocol.Protocol.Buy_ShopItem,
                 data: {
                     ShopId: sellitem.ShopId + "",
-                    ItemId: sellitem.SellConfig.ItemConfigId + "",
+                    ItemId: sellitem.SellConfig!.ItemConfigId + "",
                     PriceType: CSSHelper.IsChineseLanguage() ? 0 : 1,
                     ItemCount: iNum
                 } as C2H_Buy_ShopItem,
@@ -51,7 +51,7 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
         const MetaStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.MetaStone)
         const StarStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.StarStone)
         const sellitem = this.GetStateEntity(this.props.entity)!;
-        const sellinfo = sellitem.SellConfig;
+        const sellinfo = sellitem.SellConfig!;
         const itemid = sellinfo.ItemConfigId;
         const itemconfig = JsonConfigHelper.GetRecordItemConfig(itemid)
         const iNum = this.GetState<number>("iNum");
