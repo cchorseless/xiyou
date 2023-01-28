@@ -85,9 +85,9 @@ export class LogHelper {
         else if (IsClient()) {
             where_str = '<IsClient>'
         }
-        let r2 = ["[" + where_str + "] ERROR:"];
-        let r3 = r2.concat(args);
-        error(r3.join(" "), 2)
+        LogHelper.print("[" + where_str + "] ERROR:")
+        let r2 = args || [];
+        error(r2.join(" "), 2)
     }
 
     public static DeepPrintTable(table?: Object) {

@@ -96,7 +96,8 @@
         "luamin": "1.0.4",
         "walk": "^2.3.14",
         "webpack": "5.40.0",
-        "webpack-cli": "^4.7.2"
+        "webpack-cli": "^4.7.2",
+        "js-base64": "^3.7.4"
     },
     "prettier": {
         "printWidth": 200,

@@ -9,7 +9,7 @@ const {
 const isProduction = true;;
 const fileList = () => {
     let viewdir = [
-        "config"
+        "config","zlib"
     ];
     let r = [];
     viewdir.forEach(file => {

@@ -4,8 +4,8 @@ import { BattleUnitManagerComponent } from "./Components/BattleUnit/BattleUnitMa
 import { BuildingComponent } from "./Components/Building/BuildingComponent";
 import { BuildingManagerComponent } from "./Components/Building/BuildingManagerComponent";
 import { BuildingPropsComponent } from "./Components/Building/BuildingPropsComponent";
-import { ChessMoveComponent } from "./Components/ChessControl/ChessMoveComponent";
 import { ChessControlComponent } from "./Components/ChessControl/ChessControlComponent";
+import { ChessMoveComponent } from "./Components/ChessControl/ChessMoveComponent";
 import { CombinationComponent } from "./Components/Combination/CombinationComponent";
 import { CombinationManagerComponent } from "./Components/Combination/CombinationManagerComponent";
 import { ECombination } from "./Components/Combination/ECombination";
@@ -21,24 +21,26 @@ import { FHeroCombinationManagerComponent } from "./Components/FakerHero/FHeroCo
 import { InventoryComponent } from "./Components/Inventory/InventoryComponent";
 import { PlayerDataComponent } from "./Components/Player/PlayerDataComponent";
 import { PlayerHttpComponent } from "./Components/Player/PlayerHttpComponent";
-import { RoundStateComponent } from "./Components/Round/RoundStateComponent";
 import { RoundManagerComponent } from "./Components/Round/RoundManagerComponent";
 import { RoundPrizeUnitKillPrizeComponent } from "./Components/Round/RoundPrizeUnitKillPrizeComponent";
+import { RoundStateComponent } from "./Components/Round/RoundStateComponent";
 import { EWearableItem } from "./Components/Wearable/EWearableItem";
 import { WearableComponent } from "./Components/Wearable/WearableComponent";
 
-import { WearableSystemComponent } from "./System/WearableSystemComponent";
-import { CourierDataComponent } from "./Components/Courier/CourierDataComponent";
+import { LuBanConfigComponent } from "./ComponentExt/LuBanConfigComponent";
 import { BuffManagerComponent } from "./Components/Buff/BuffManagerComponent";
+import { ChessDataComponent } from "./Components/ChessControl/ChessDataComponent";
 import { CombEffectComponent } from "./Components/Combination/CombEffectComponent";
 import { CourierBagComponent } from "./Components/Courier/CourierBagComponent";
+import { CourierDataComponent } from "./Components/Courier/CourierDataComponent";
 import { CourierShopComponent } from "./Components/Courier/CourierShopComponent";
-import { RulesEntityPart1 } from "./RulesEntityPart1";
-import { ChessDataComponent } from "./Components/ChessControl/ChessDataComponent";
 import { PlayerEntityRoot } from "./Components/Player/PlayerEntityRoot";
+import { RulesEntityPart1 } from "./RulesEntityPart1";
+import { WearableSystemComponent } from "./System/WearableSystemComponent";
 
 
 [
+    LuBanConfigComponent,
     BattleUnitManagerComponent,
     AbilityManagerComponent,
     InventoryComponent,

@@ -12,7 +12,7 @@ export class Vector2 {
         let x = json.x
         let y = json.y
         if (x == null || y == null) {
-            throw new Error()
+            GLogHelper.error(1);
         }
         return new Vector2(x, y)
     }
@@ -31,7 +31,7 @@ export class Vector3 {
         let y = json.y
         let z = json.z
         if (x == null || y == null || z == null) {
-            throw new Error()
+            GLogHelper.error(1);
         }
         return new Vector3(x, y, z)
     }
@@ -54,7 +54,7 @@ export class Vector4 {
         let z = json.z
         let w = json.w
         if (x == null || y == null || z == null || w == null) {
-            throw new Error()
+            GLogHelper.error(1);
         }
         return new Vector4(x, y, z, w)
     }
@@ -306,6 +306,19 @@ export namespace EEnum {
     }
 }
 
+export namespace EEnum {
+    export enum EShopPriceType {
+        /**
+         * 国内价格
+         */
+        ChinaPrice = 0,
+        /**
+         * 海外价格
+         */
+        OverSeaPrice = 1,
+    }
+}
+
 export namespace Item {
     export class ItemConfig {
         private _dataMap: Map<number, Item.ItemConfigRecord>
@@ -341,31 +354,31 @@ export namespace Item {
     export class ItemConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.isVaild === undefined) { throw new Error() }
+            if (_json_.isVaild === undefined) { GLogHelper.error(1); }
             this.isVaild = _json_.isVaild
-            if (_json_.ItemName === undefined) { throw new Error() }
+            if (_json_.ItemName === undefined) { GLogHelper.error(1); }
             this.ItemName = _json_.ItemName
-            if (_json_.ItemIcon === undefined) { throw new Error() }
+            if (_json_.ItemIcon === undefined) { GLogHelper.error(1); }
             this.ItemIcon = _json_.ItemIcon
-            if (_json_.ItemQuality === undefined) { throw new Error() }
+            if (_json_.ItemQuality === undefined) { GLogHelper.error(1); }
             this.ItemQuality = _json_.ItemQuality
-            if (_json_.ItemType === undefined) { throw new Error() }
+            if (_json_.ItemType === undefined) { GLogHelper.error(1); }
             this.ItemType = _json_.ItemType
-            if (_json_.ItemDes === undefined) { throw new Error() }
+            if (_json_.ItemDes === undefined) { GLogHelper.error(1); }
             this.ItemDes = _json_.ItemDes
-            if (_json_.BagSlotType === undefined) { throw new Error() }
+            if (_json_.BagSlotType === undefined) { GLogHelper.error(1); }
             this.BagSlotType = _json_.BagSlotType
-            if (_json_.AutoUse === undefined) { throw new Error() }
+            if (_json_.AutoUse === undefined) { GLogHelper.error(1); }
             this.AutoUse = _json_.AutoUse
-            if (_json_.BatchUseable === undefined) { throw new Error() }
+            if (_json_.BatchUseable === undefined) { GLogHelper.error(1); }
             this.BatchUseable = _json_.BatchUseable
-            if (_json_.UseScript === undefined) { throw new Error() }
+            if (_json_.UseScript === undefined) { GLogHelper.error(1); }
             this.UseScript = _json_.UseScript
-            if (_json_.UseArgs === undefined) { throw new Error() }
+            if (_json_.UseArgs === undefined) { GLogHelper.error(1); }
             this.UseArgs = _json_.UseArgs
-            if (_json_.AwakeScript === undefined) { throw new Error() }
+            if (_json_.AwakeScript === undefined) { GLogHelper.error(1); }
             { this.AwakeScript = []; for (let _ele of _json_.AwakeScript) { let _e: Item.ItemAwakeScriptBean; _e = new Item.ItemAwakeScriptBean(_ele); this.AwakeScript.push(_e); } }
         }
 
@@ -432,9 +445,9 @@ export namespace Item {
     export class ItemAwakeScriptBean {
 
         constructor(_json_: any) {
-            if (_json_.ScriptName === undefined) { throw new Error() }
+            if (_json_.ScriptName === undefined) { GLogHelper.error(1); }
             this.ScriptName = _json_.ScriptName
-            if (_json_.ScriptValue === undefined) { throw new Error() }
+            if (_json_.ScriptValue === undefined) { GLogHelper.error(1); }
             this.ScriptValue = _json_.ScriptValue
         }
 
@@ -488,19 +501,19 @@ export namespace Item {
     export class ItemEquipConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.BindHeroId === undefined) { throw new Error() }
+            if (_json_.BindHeroId === undefined) { GLogHelper.error(1); }
             this.BindHeroId = _json_.BindHeroId
-            if (_json_.EquipSlot === undefined) { throw new Error() }
+            if (_json_.EquipSlot === undefined) { GLogHelper.error(1); }
             this.EquipSlot = _json_.EquipSlot
-            if (_json_.EquipRandomProp === undefined) { throw new Error() }
+            if (_json_.EquipRandomProp === undefined) { GLogHelper.error(1); }
             this.EquipRandomProp = _json_.EquipRandomProp
-            if (_json_.SuitId === undefined) { throw new Error() }
+            if (_json_.SuitId === undefined) { GLogHelper.error(1); }
             this.SuitId = _json_.SuitId
-            if (_json_.SuitName === undefined) { throw new Error() }
+            if (_json_.SuitName === undefined) { GLogHelper.error(1); }
             this.SuitName = _json_.SuitName
-            if (_json_.SuitInfo === undefined) { throw new Error() }
+            if (_json_.SuitInfo === undefined) { GLogHelper.error(1); }
             { this.SuitInfo = []; for (let _ele of _json_.SuitInfo) { let _e: Item.ItemEquipSuitBean; _e = new Item.ItemEquipSuitBean(_ele); this.SuitInfo.push(_e); } }
         }
 
@@ -543,9 +556,9 @@ export namespace Item {
     export class ItemEquipSuitBean {
 
         constructor(_json_: any) {
-            if (_json_.SuitCount === undefined) { throw new Error() }
+            if (_json_.SuitCount === undefined) { GLogHelper.error(1); }
             this.SuitCount = _json_.SuitCount
-            if (_json_.SuitBuffs === undefined) { throw new Error() }
+            if (_json_.SuitBuffs === undefined) { GLogHelper.error(1); }
             this.SuitBuffs = _json_.SuitBuffs
         }
 
@@ -599,21 +612,21 @@ export namespace Item {
     export class ItemBuffConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.BuffName === undefined) { throw new Error() }
+            if (_json_.BuffName === undefined) { GLogHelper.error(1); }
             this.BuffName = _json_.BuffName
-            if (_json_.BuffValidTime === undefined) { throw new Error() }
+            if (_json_.BuffValidTime === undefined) { GLogHelper.error(1); }
             this.BuffValidTime = _json_.BuffValidTime
-            if (_json_.BuffTargetType === undefined) { throw new Error() }
+            if (_json_.BuffTargetType === undefined) { GLogHelper.error(1); }
             this.BuffTargetType = _json_.BuffTargetType
-            if (_json_.BuffTargetArgs === undefined) { throw new Error() }
+            if (_json_.BuffTargetArgs === undefined) { GLogHelper.error(1); }
             this.BuffTargetArgs = _json_.BuffTargetArgs
-            if (_json_.BuffQuality === undefined) { throw new Error() }
+            if (_json_.BuffQuality === undefined) { GLogHelper.error(1); }
             this.BuffQuality = _json_.BuffQuality
-            if (_json_.BuffGroupPriority === undefined) { throw new Error() }
+            if (_json_.BuffGroupPriority === undefined) { GLogHelper.error(1); }
             this.BuffGroupPriority = _json_.BuffGroupPriority
-            if (_json_.BuffGroupMember === undefined) { throw new Error() }
+            if (_json_.BuffGroupMember === undefined) { GLogHelper.error(1); }
             this.BuffGroupMember = _json_.BuffGroupMember
         }
 
@@ -691,9 +704,9 @@ export namespace Item {
     export class ItemPrizePoolConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.itempool === undefined) { throw new Error() }
+            if (_json_.itempool === undefined) { GLogHelper.error(1); }
             { this.itempool = []; for (let _ele of _json_.itempool) { let _e: Item.ItemPrizePoolBean; _e = new Item.ItemPrizePoolBean(_ele); this.itempool.push(_e); } }
         }
 
@@ -716,15 +729,15 @@ export namespace Item {
     export class ItemPrizePoolBean {
 
         constructor(_json_: any) {
-            if (_json_.ItemConfigId === undefined) { throw new Error() }
+            if (_json_.ItemConfigId === undefined) { GLogHelper.error(1); }
             this.ItemConfigId = _json_.ItemConfigId
-            if (_json_.ItemName === undefined) { throw new Error() }
+            if (_json_.ItemName === undefined) { GLogHelper.error(1); }
             this.ItemName = _json_.ItemName
-            if (_json_.ItemCount === undefined) { throw new Error() }
+            if (_json_.ItemCount === undefined) { GLogHelper.error(1); }
             this.ItemCount = _json_.ItemCount
-            if (_json_.ItemWeight === undefined) { throw new Error() }
+            if (_json_.ItemWeight === undefined) { GLogHelper.error(1); }
             this.ItemWeight = _json_.ItemWeight
-            if (_json_.isVaild === undefined) { throw new Error() }
+            if (_json_.isVaild === undefined) { GLogHelper.error(1); }
             this.isVaild = _json_.isVaild
         }
 
@@ -790,13 +803,13 @@ export namespace Item {
     export class ItemPrizePoolGroupConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.IsRandomRepeat === undefined) { throw new Error() }
+            if (_json_.IsRandomRepeat === undefined) { GLogHelper.error(1); }
             this.IsRandomRepeat = _json_.IsRandomRepeat
-            if (_json_.RandomCountInfo === undefined) { throw new Error() }
+            if (_json_.RandomCountInfo === undefined) { GLogHelper.error(1); }
             { this.RandomCountInfo = []; for (let _ele of _json_.RandomCountInfo) { let _e: Item.ItemRandomCountBean; _e = new Item.ItemRandomCountBean(_ele); this.RandomCountInfo.push(_e); } }
-            if (_json_.ItemPoolGroup === undefined) { throw new Error() }
+            if (_json_.ItemPoolGroup === undefined) { GLogHelper.error(1); }
             { this.ItemPoolGroup = []; for (let _ele of _json_.ItemPoolGroup) { let _e: Item.ItemPoolGroupBean; _e = new Item.ItemPoolGroupBean(_ele); this.ItemPoolGroup.push(_e); } }
         }
 
@@ -825,9 +838,9 @@ export namespace Item {
     export class ItemRandomCountBean {
 
         constructor(_json_: any) {
-            if (_json_.RandomCount === undefined) { throw new Error() }
+            if (_json_.RandomCount === undefined) { GLogHelper.error(1); }
             this.RandomCount = _json_.RandomCount
-            if (_json_.RandomWeight === undefined) { throw new Error() }
+            if (_json_.RandomWeight === undefined) { GLogHelper.error(1); }
             this.RandomWeight = _json_.RandomWeight
         }
 
@@ -852,9 +865,9 @@ export namespace Item {
     export class ItemPoolGroupBean {
 
         constructor(_json_: any) {
-            if (_json_.ItemPoolConfigId === undefined) { throw new Error() }
+            if (_json_.ItemPoolConfigId === undefined) { GLogHelper.error(1); }
             this.ItemPoolConfigId = _json_.ItemPoolConfigId
-            if (_json_.ItemPoolWeight === undefined) { throw new Error() }
+            if (_json_.ItemPoolWeight === undefined) { GLogHelper.error(1); }
             this.ItemPoolWeight = _json_.ItemPoolWeight
         }
 
@@ -908,21 +921,24 @@ export namespace Shop {
     export class ShopConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) {
+                GLogHelper.print(_json_)
+                GLogHelper.error(1);
+            }
             this.id = _json_.id
-            if (_json_.isVaild === undefined) { throw new Error() }
+            if (_json_.isVaild === undefined) { GLogHelper.error(1); }
             this.isVaild = _json_.isVaild
-            if (_json_.ShopType === undefined) { throw new Error() }
+            if (_json_.ShopType === undefined) { GLogHelper.error(1); }
             this.ShopType = _json_.ShopType
-            if (_json_.ShopName === undefined) { throw new Error() }
+            if (_json_.ShopName === undefined) { GLogHelper.error(1); }
             this.ShopName = _json_.ShopName
-            if (_json_.ShopRefreshType === undefined) { throw new Error() }
+            if (_json_.ShopRefreshType === undefined) { GLogHelper.error(1); }
             this.ShopRefreshType = _json_.ShopRefreshType
-            if (_json_.ShopStartTime === undefined) { throw new Error() }
+            if (_json_.ShopStartTime === undefined) { GLogHelper.error(1); }
             this.ShopStartTime = _json_.ShopStartTime
-            if (_json_.ShopValidTime === undefined) { throw new Error() }
+            if (_json_.ShopValidTime === undefined) { GLogHelper.error(1); }
             this.ShopValidTime = _json_.ShopValidTime
-            if (_json_.sellinfo === undefined) { throw new Error() }
+            if (_json_.sellinfo === undefined) { GLogHelper.error(1); }
             { this.sellinfo = []; for (let _ele of _json_.sellinfo) { let _e: Shop.ShopSellItemBean; _e = new Shop.ShopSellItemBean(_ele); this.sellinfo.push(_e); } }
         }
 
@@ -969,39 +985,39 @@ export namespace Shop {
     export class ShopSellItemBean {
 
         constructor(_json_: any) {
-            if (_json_.SellConfigid === undefined) { throw new Error() }
+            if (_json_.SellConfigid === undefined) { GLogHelper.error(1); }
             this.SellConfigid = _json_.SellConfigid
-            if (_json_.Selllabel === undefined) { throw new Error() }
+            if (_json_.Selllabel === undefined) { GLogHelper.error(1); }
             this.Selllabel = _json_.Selllabel
-            if (_json_.SellCount === undefined) { throw new Error() }
+            if (_json_.SellCount === undefined) { GLogHelper.error(1); }
             this.SellCount = _json_.SellCount
-            if (_json_.SellRefreshType === undefined) { throw new Error() }
+            if (_json_.SellRefreshType === undefined) { GLogHelper.error(1); }
             this.SellRefreshType = _json_.SellRefreshType
-            if (_json_.SellStartTime === undefined) { throw new Error() }
+            if (_json_.SellStartTime === undefined) { GLogHelper.error(1); }
             this.SellStartTime = _json_.SellStartTime
-            if (_json_.SellValidTime === undefined) { throw new Error() }
+            if (_json_.SellValidTime === undefined) { GLogHelper.error(1); }
             this.SellValidTime = _json_.SellValidTime
-            if (_json_.ItemConfigId === undefined) { throw new Error() }
+            if (_json_.ItemConfigId === undefined) { GLogHelper.error(1); }
             this.ItemConfigId = _json_.ItemConfigId
-            if (_json_.ItemName === undefined) { throw new Error() }
+            if (_json_.ItemName === undefined) { GLogHelper.error(1); }
             this.ItemName = _json_.ItemName
-            if (_json_.ItemCount === undefined) { throw new Error() }
+            if (_json_.ItemCount === undefined) { GLogHelper.error(1); }
             this.ItemCount = _json_.ItemCount
-            if (_json_.CostType === undefined) { throw new Error() }
+            if (_json_.CostType === undefined) { GLogHelper.error(1); }
             this.CostType = _json_.CostType
-            if (_json_.OriginPrice === undefined) { throw new Error() }
+            if (_json_.OriginPrice === undefined) { GLogHelper.error(1); }
             this.OriginPrice = _json_.OriginPrice
-            if (_json_.RealPrice === undefined) { throw new Error() }
+            if (_json_.RealPrice === undefined) { GLogHelper.error(1); }
             this.RealPrice = _json_.RealPrice
-            if (_json_.OverSeaOriginPrice === undefined) { throw new Error() }
+            if (_json_.OverSeaOriginPrice === undefined) { GLogHelper.error(1); }
             this.OverSeaOriginPrice = _json_.OverSeaOriginPrice
-            if (_json_.OverSeaRealPrice === undefined) { throw new Error() }
+            if (_json_.OverSeaRealPrice === undefined) { GLogHelper.error(1); }
             this.OverSeaRealPrice = _json_.OverSeaRealPrice
-            if (_json_.Discount === undefined) { throw new Error() }
+            if (_json_.Discount === undefined) { GLogHelper.error(1); }
             this.Discount = _json_.Discount
-            if (_json_.VipLimit === undefined) { throw new Error() }
+            if (_json_.VipLimit === undefined) { GLogHelper.error(1); }
             this.VipLimit = _json_.VipLimit
-            if (_json_.isVaild === undefined) { throw new Error() }
+            if (_json_.isVaild === undefined) { GLogHelper.error(1); }
             this.isVaild = _json_.isVaild
         }
 
@@ -1115,11 +1131,11 @@ export namespace Prop {
     export class PropConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.PropName === undefined) { throw new Error() }
+            if (_json_.PropName === undefined) { GLogHelper.error(1); }
             this.PropName = _json_.PropName
-            if (_json_.Des === undefined) { throw new Error() }
+            if (_json_.Des === undefined) { GLogHelper.error(1); }
             this.Des = _json_.Des
         }
 
@@ -1177,9 +1193,9 @@ export namespace Prop {
     export class RandomPropConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.propPool === undefined) { throw new Error() }
+            if (_json_.propPool === undefined) { GLogHelper.error(1); }
             { this.propPool = []; for (let _ele of _json_.propPool) { let _e: Prop.PropPoolBean; _e = new Prop.PropPoolBean(_ele); this.propPool.push(_e); } }
         }
 
@@ -1202,15 +1218,15 @@ export namespace Prop {
     export class PropPoolBean {
 
         constructor(_json_: any) {
-            if (_json_.Propid === undefined) { throw new Error() }
+            if (_json_.Propid === undefined) { GLogHelper.error(1); }
             this.Propid = _json_.Propid
-            if (_json_.PropDes === undefined) { throw new Error() }
+            if (_json_.PropDes === undefined) { GLogHelper.error(1); }
             this.PropDes = _json_.PropDes
-            if (_json_.PropWeight === undefined) { throw new Error() }
+            if (_json_.PropWeight === undefined) { GLogHelper.error(1); }
             this.PropWeight = _json_.PropWeight
-            if (_json_.PropMax === undefined) { throw new Error() }
+            if (_json_.PropMax === undefined) { GLogHelper.error(1); }
             this.PropMax = _json_.PropMax
-            if (_json_.PropMin === undefined) { throw new Error() }
+            if (_json_.PropMin === undefined) { GLogHelper.error(1); }
             this.PropMin = _json_.PropMin
         }
 
@@ -1276,15 +1292,15 @@ export namespace Activity {
     export class ActivityConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.IsValid === undefined) { throw new Error() }
+            if (_json_.IsValid === undefined) { GLogHelper.error(1); }
             this.IsValid = _json_.IsValid
-            if (_json_.IsCyclicActivity === undefined) { throw new Error() }
+            if (_json_.IsCyclicActivity === undefined) { GLogHelper.error(1); }
             this.IsCyclicActivity = _json_.IsCyclicActivity
-            if (_json_.ActivityName === undefined) { throw new Error() }
+            if (_json_.ActivityName === undefined) { GLogHelper.error(1); }
             this.ActivityName = _json_.ActivityName
-            if (_json_.ActivityScript === undefined) { throw new Error() }
+            if (_json_.ActivityScript === undefined) { GLogHelper.error(1); }
             this.ActivityScript = _json_.ActivityScript
         }
 
@@ -1350,15 +1366,15 @@ export namespace Activity {
     export class TActivityMonthLoginRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            if (_json_.ActivityStartTime === undefined) { GLogHelper.error(1); }
             this.ActivityStartTime = _json_.ActivityStartTime
-            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            if (_json_.ActivityEndTime === undefined) { GLogHelper.error(1); }
             this.ActivityEndTime = _json_.ActivityEndTime
-            if (_json_.LoginPrize === undefined) { throw new Error() }
+            if (_json_.LoginPrize === undefined) { GLogHelper.error(1); }
             { this.LoginPrize = []; for (let _ele of _json_.LoginPrize) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.LoginPrize.push(_e); } }
-            if (_json_.TotalLoginPrize === undefined) { throw new Error() }
+            if (_json_.TotalLoginPrize === undefined) { GLogHelper.error(1); }
             { this.TotalLoginPrize = []; for (let _ele of _json_.TotalLoginPrize) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.TotalLoginPrize.push(_e); } }
         }
 
@@ -1391,9 +1407,9 @@ export namespace Item {
     export class ItemGroupBean {
 
         constructor(_json_: any) {
-            if (_json_.Index === undefined) { throw new Error() }
+            if (_json_.Index === undefined) { GLogHelper.error(1); }
             this.Index = _json_.Index
-            if (_json_.ItemGroup === undefined) { throw new Error() }
+            if (_json_.ItemGroup === undefined) { GLogHelper.error(1); }
             { this.ItemGroup = []; for (let _ele of _json_.ItemGroup) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e); } }
         }
 
@@ -1419,9 +1435,9 @@ export namespace Item {
     export class ItemInfoBean {
 
         constructor(_json_: any) {
-            if (_json_.ItemConfigId === undefined) { throw new Error() }
+            if (_json_.ItemConfigId === undefined) { GLogHelper.error(1); }
             this.ItemConfigId = _json_.ItemConfigId
-            if (_json_.ItemCount === undefined) { throw new Error() }
+            if (_json_.ItemCount === undefined) { GLogHelper.error(1); }
             this.ItemCount = _json_.ItemCount
         }
 
@@ -1475,13 +1491,13 @@ export namespace Activity {
     export class TActivitySevenDayLoginRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            if (_json_.ActivityStartTime === undefined) { GLogHelper.error(1); }
             this.ActivityStartTime = _json_.ActivityStartTime
-            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            if (_json_.ActivityEndTime === undefined) { GLogHelper.error(1); }
             this.ActivityEndTime = _json_.ActivityEndTime
-            if (_json_.PrizeItemGroup === undefined) { throw new Error() }
+            if (_json_.PrizeItemGroup === undefined) { GLogHelper.error(1); }
             { this.PrizeItemGroup = []; for (let _ele of _json_.PrizeItemGroup) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.PrizeItemGroup.push(_e); } }
         }
 
@@ -1541,13 +1557,13 @@ export namespace Activity {
     export class TActivityBattlePassRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            if (_json_.ActivityStartTime === undefined) { GLogHelper.error(1); }
             this.ActivityStartTime = _json_.ActivityStartTime
-            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            if (_json_.ActivityEndTime === undefined) { GLogHelper.error(1); }
             this.ActivityEndTime = _json_.ActivityEndTime
-            if (_json_.ItemPrize === undefined) { throw new Error() }
+            if (_json_.ItemPrize === undefined) { GLogHelper.error(1); }
             { this.ItemPrize = []; for (let _ele of _json_.ItemPrize) { let _e: Activity.BattlePassBean; _e = new Activity.BattlePassBean(_ele); this.ItemPrize.push(_e); } }
         }
 
@@ -1578,17 +1594,17 @@ export namespace Activity {
     export class BattlePassBean {
 
         constructor(_json_: any) {
-            if (_json_.Level === undefined) { throw new Error() }
+            if (_json_.Level === undefined) { GLogHelper.error(1); }
             this.Level = _json_.Level
-            if (_json_.Exp === undefined) { throw new Error() }
+            if (_json_.Exp === undefined) { GLogHelper.error(1); }
             this.Exp = _json_.Exp
-            if (_json_.ItemConfigId === undefined) { throw new Error() }
+            if (_json_.ItemConfigId === undefined) { GLogHelper.error(1); }
             this.ItemConfigId = _json_.ItemConfigId
-            if (_json_.ItemCount === undefined) { throw new Error() }
+            if (_json_.ItemCount === undefined) { GLogHelper.error(1); }
             this.ItemCount = _json_.ItemCount
-            if (_json_.VIP_ItemConfigId === undefined) { throw new Error() }
+            if (_json_.VIP_ItemConfigId === undefined) { GLogHelper.error(1); }
             this.VIPItemConfigId = _json_.VIP_ItemConfigId
-            if (_json_.VIP_ItemCount === undefined) { throw new Error() }
+            if (_json_.VIP_ItemCount === undefined) { GLogHelper.error(1); }
             this.VIPItemCount = _json_.VIP_ItemCount
         }
 
@@ -1658,9 +1674,9 @@ export namespace Activity {
     export class TActivityHeroRecordLevelRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.ItemGroup === undefined) { throw new Error() }
+            if (_json_.ItemGroup === undefined) { GLogHelper.error(1); }
             { this.ItemGroup = []; for (let _ele of _json_.ItemGroup) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e); } }
         }
 
@@ -1712,9 +1728,9 @@ export namespace Activity {
     export class TActivityDailyOnlinePrizeRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.ItemGroup === undefined) { throw new Error() }
+            if (_json_.ItemGroup === undefined) { GLogHelper.error(1); }
             { this.ItemGroup = []; for (let _ele of _json_.ItemGroup) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e); } }
         }
 
@@ -1766,13 +1782,13 @@ export namespace Activity {
     export class TActivityInvestMetaStoneRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            if (_json_.ActivityStartTime === undefined) { GLogHelper.error(1); }
             this.ActivityStartTime = _json_.ActivityStartTime
-            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            if (_json_.ActivityEndTime === undefined) { GLogHelper.error(1); }
             this.ActivityEndTime = _json_.ActivityEndTime
-            if (_json_.InvestItemGroup === undefined) { throw new Error() }
+            if (_json_.InvestItemGroup === undefined) { GLogHelper.error(1); }
             { this.InvestItemGroup = []; for (let _ele of _json_.InvestItemGroup) { let _e: Activity.InvestMetaStoneBean; _e = new Activity.InvestMetaStoneBean(_ele); this.InvestItemGroup.push(_e); } }
         }
 
@@ -1803,11 +1819,11 @@ export namespace Activity {
     export class InvestMetaStoneBean {
 
         constructor(_json_: any) {
-            if (_json_.Need === undefined) { throw new Error() }
+            if (_json_.Need === undefined) { GLogHelper.error(1); }
             this.Need = _json_.Need
-            if (_json_.GainMin === undefined) { throw new Error() }
+            if (_json_.GainMin === undefined) { GLogHelper.error(1); }
             this.GainMin = _json_.GainMin
-            if (_json_.GainMax === undefined) { throw new Error() }
+            if (_json_.GainMax === undefined) { GLogHelper.error(1); }
             this.GainMax = _json_.GainMax
         }
 
@@ -1865,13 +1881,13 @@ export namespace Activity {
     export class TActivityTotalGainMetaStoneRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            if (_json_.ActivityStartTime === undefined) { GLogHelper.error(1); }
             this.ActivityStartTime = _json_.ActivityStartTime
-            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            if (_json_.ActivityEndTime === undefined) { GLogHelper.error(1); }
             this.ActivityEndTime = _json_.ActivityEndTime
-            if (_json_.PrizeItemGroup === undefined) { throw new Error() }
+            if (_json_.PrizeItemGroup === undefined) { GLogHelper.error(1); }
             { this.PrizeItemGroup = []; for (let _ele of _json_.PrizeItemGroup) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.PrizeItemGroup.push(_e); } }
         }
 
@@ -1931,13 +1947,13 @@ export namespace Activity {
     export class TActivityTotalOnlineTimeRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            if (_json_.ActivityStartTime === undefined) { GLogHelper.error(1); }
             this.ActivityStartTime = _json_.ActivityStartTime
-            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            if (_json_.ActivityEndTime === undefined) { GLogHelper.error(1); }
             this.ActivityEndTime = _json_.ActivityEndTime
-            if (_json_.PrizeItemGroup === undefined) { throw new Error() }
+            if (_json_.PrizeItemGroup === undefined) { GLogHelper.error(1); }
             { this.PrizeItemGroup = []; for (let _ele of _json_.PrizeItemGroup) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.PrizeItemGroup.push(_e); } }
         }
 
@@ -1997,13 +2013,13 @@ export namespace Activity {
     export class TActivityTotalSpendMetaStoneRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            if (_json_.ActivityStartTime === undefined) { GLogHelper.error(1); }
             this.ActivityStartTime = _json_.ActivityStartTime
-            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            if (_json_.ActivityEndTime === undefined) { GLogHelper.error(1); }
             this.ActivityEndTime = _json_.ActivityEndTime
-            if (_json_.PrizeItemGroup === undefined) { throw new Error() }
+            if (_json_.PrizeItemGroup === undefined) { GLogHelper.error(1); }
             { this.PrizeItemGroup = []; for (let _ele of _json_.PrizeItemGroup) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.PrizeItemGroup.push(_e); } }
         }
 
@@ -2063,19 +2079,19 @@ export namespace Activity {
     export class TActivityGiftCommondRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.IsValid === undefined) { throw new Error() }
+            if (_json_.IsValid === undefined) { GLogHelper.error(1); }
             this.IsValid = _json_.IsValid
-            if (_json_.GiftCommond === undefined) { throw new Error() }
+            if (_json_.GiftCommond === undefined) { GLogHelper.error(1); }
             this.GiftCommond = _json_.GiftCommond
-            if (_json_.GiftCount === undefined) { throw new Error() }
+            if (_json_.GiftCount === undefined) { GLogHelper.error(1); }
             this.GiftCount = _json_.GiftCount
-            if (_json_.ActivityStartTime === undefined) { throw new Error() }
+            if (_json_.ActivityStartTime === undefined) { GLogHelper.error(1); }
             this.ActivityStartTime = _json_.ActivityStartTime
-            if (_json_.ActivityEndTime === undefined) { throw new Error() }
+            if (_json_.ActivityEndTime === undefined) { GLogHelper.error(1); }
             this.ActivityEndTime = _json_.ActivityEndTime
-            if (_json_.ItemGroup === undefined) { throw new Error() }
+            if (_json_.ItemGroup === undefined) { GLogHelper.error(1); }
             { this.ItemGroup = []; for (let _ele of _json_.ItemGroup) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e); } }
         }
 
@@ -2147,17 +2163,17 @@ export namespace Activity {
     export class TActivityMentorshipTreeRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.IsValid === undefined) { throw new Error() }
+            if (_json_.IsValid === undefined) { GLogHelper.error(1); }
             this.IsValid = _json_.IsValid
-            if (_json_.TreeLevel === undefined) { throw new Error() }
+            if (_json_.TreeLevel === undefined) { GLogHelper.error(1); }
             this.TreeLevel = _json_.TreeLevel
-            if (_json_.PrizeConditionType === undefined) { throw new Error() }
+            if (_json_.PrizeConditionType === undefined) { GLogHelper.error(1); }
             this.PrizeConditionType = _json_.PrizeConditionType
-            if (_json_.PrizeCondition === undefined) { throw new Error() }
+            if (_json_.PrizeCondition === undefined) { GLogHelper.error(1); }
             this.PrizeCondition = _json_.PrizeCondition
-            if (_json_.ItemGroup === undefined) { throw new Error() }
+            if (_json_.ItemGroup === undefined) { GLogHelper.error(1); }
             { this.ItemGroup = []; for (let _ele of _json_.ItemGroup) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.ItemGroup.push(_e); } }
         }
 
@@ -2225,9 +2241,9 @@ export namespace Hero {
     export class HeroLevelUpConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.Exp === undefined) { throw new Error() }
+            if (_json_.Exp === undefined) { GLogHelper.error(1); }
             this.Exp = _json_.Exp
         }
 
@@ -2281,13 +2297,13 @@ export namespace Hero {
     export class HeroConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.IsValid === undefined) { throw new Error() }
+            if (_json_.IsValid === undefined) { GLogHelper.error(1); }
             this.IsValid = _json_.IsValid
-            if (_json_.HeroName === undefined) { throw new Error() }
+            if (_json_.HeroName === undefined) { GLogHelper.error(1); }
             this.HeroName = _json_.HeroName
-            if (_json_.TalentInfo === undefined) { throw new Error() }
+            if (_json_.TalentInfo === undefined) { GLogHelper.error(1); }
             { this.TalentInfo = []; for (let _ele of _json_.TalentInfo) { let _e: Hero.HeroTalentInfoBean; _e = new Hero.HeroTalentInfoBean(_ele); this.TalentInfo.push(_e); } }
         }
 
@@ -2318,9 +2334,9 @@ export namespace Hero {
     export class HeroTalentInfoBean {
 
         constructor(_json_: any) {
-            if (_json_.TalentLevel === undefined) { throw new Error() }
+            if (_json_.TalentLevel === undefined) { GLogHelper.error(1); }
             this.TalentLevel = _json_.TalentLevel
-            if (_json_.TalentGroup === undefined) { throw new Error() }
+            if (_json_.TalentGroup === undefined) { GLogHelper.error(1); }
             this.TalentGroup = _json_.TalentGroup
         }
 
@@ -2374,13 +2390,13 @@ export namespace Hero {
     export class HeroTalentConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.TalentName === undefined) { throw new Error() }
+            if (_json_.TalentName === undefined) { GLogHelper.error(1); }
             this.TalentName = _json_.TalentName
-            if (_json_.NeedTalentPoint === undefined) { throw new Error() }
+            if (_json_.NeedTalentPoint === undefined) { GLogHelper.error(1); }
             this.NeedTalentPoint = _json_.NeedTalentPoint
-            if (_json_.TalentBuffs === undefined) { throw new Error() }
+            if (_json_.TalentBuffs === undefined) { GLogHelper.error(1); }
             this.TalentBuffs = _json_.TalentBuffs
         }
 
@@ -2442,13 +2458,13 @@ export namespace Season {
     export class SeasonConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.SeasonName === undefined) { throw new Error() }
+            if (_json_.SeasonName === undefined) { GLogHelper.error(1); }
             this.SeasonName = _json_.SeasonName
-            if (_json_.SeasonStartTime === undefined) { throw new Error() }
+            if (_json_.SeasonStartTime === undefined) { GLogHelper.error(1); }
             this.SeasonStartTime = _json_.SeasonStartTime
-            if (_json_.SeasonEndTime === undefined) { throw new Error() }
+            if (_json_.SeasonEndTime === undefined) { GLogHelper.error(1); }
             this.SeasonEndTime = _json_.SeasonEndTime
         }
 
@@ -2510,11 +2526,11 @@ export namespace Rank {
     export class RankPrizeConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.SeasonPrizeItemGroup === undefined) { throw new Error() }
+            if (_json_.SeasonPrizeItemGroup === undefined) { GLogHelper.error(1); }
             { this.SeasonPrizeItemGroup = []; for (let _ele of _json_.SeasonPrizeItemGroup) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.SeasonPrizeItemGroup.push(_e); } }
-            if (_json_.DailyPrizeItemGroup === undefined) { throw new Error() }
+            if (_json_.DailyPrizeItemGroup === undefined) { GLogHelper.error(1); }
             { this.DailyPrizeItemGroup = []; for (let _ele of _json_.DailyPrizeItemGroup) { let _e: Item.ItemGroupBean; _e = new Item.ItemGroupBean(_ele); this.DailyPrizeItemGroup.push(_e); } }
         }
 
@@ -2568,19 +2584,19 @@ export namespace Draw {
     export class DrawTreasureConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.CostType === undefined) { throw new Error() }
+            if (_json_.CostType === undefined) { GLogHelper.error(1); }
             this.CostType = _json_.CostType
-            if (_json_.RealPrice === undefined) { throw new Error() }
+            if (_json_.RealPrice === undefined) { GLogHelper.error(1); }
             this.RealPrice = _json_.RealPrice
-            if (_json_.FreeInterval === undefined) { throw new Error() }
+            if (_json_.FreeInterval === undefined) { GLogHelper.error(1); }
             this.FreeInterval = _json_.FreeInterval
-            if (_json_.SpePrizeTimes === undefined) { throw new Error() }
+            if (_json_.SpePrizeTimes === undefined) { GLogHelper.error(1); }
             this.SpePrizeTimes = _json_.SpePrizeTimes
-            if (_json_.ComItemPoolGroup === undefined) { throw new Error() }
+            if (_json_.ComItemPoolGroup === undefined) { GLogHelper.error(1); }
             this.ComItemPoolGroup = _json_.ComItemPoolGroup
-            if (_json_.SpeItemPoolGroup === undefined) { throw new Error() }
+            if (_json_.SpeItemPoolGroup === undefined) { GLogHelper.error(1); }
             this.SpeItemPoolGroup = _json_.SpeItemPoolGroup
         }
 
@@ -2654,19 +2670,19 @@ export namespace Task {
     export class TaskConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.TaskName === undefined) { throw new Error() }
+            if (_json_.TaskName === undefined) { GLogHelper.error(1); }
             this.TaskName = _json_.TaskName
-            if (_json_.TaskDes === undefined) { throw new Error() }
+            if (_json_.TaskDes === undefined) { GLogHelper.error(1); }
             this.TaskDes = _json_.TaskDes
-            if (_json_.TaskType === undefined) { throw new Error() }
+            if (_json_.TaskType === undefined) { GLogHelper.error(1); }
             this.TaskType = _json_.TaskType
-            if (_json_.TaskFinishType === undefined) { throw new Error() }
+            if (_json_.TaskFinishType === undefined) { GLogHelper.error(1); }
             this.TaskFinishType = _json_.TaskFinishType
-            if (_json_.TaskFinishCondition === undefined) { throw new Error() }
+            if (_json_.TaskFinishCondition === undefined) { GLogHelper.error(1); }
             { this.TaskFinishCondition = []; for (let _ele of _json_.TaskFinishCondition) { let _e: Task.TaskFinishConditionBean; _e = new Task.TaskFinishConditionBean(_ele); this.TaskFinishCondition.push(_e); } }
-            if (_json_.TaskPrize === undefined) { throw new Error() }
+            if (_json_.TaskPrize === undefined) { GLogHelper.error(1); }
             { this.TaskPrize = []; for (let _ele of _json_.TaskPrize) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.TaskPrize.push(_e); } }
         }
 
@@ -2707,9 +2723,9 @@ export namespace Task {
     export class TaskFinishConditionBean {
 
         constructor(_json_: any) {
-            if (_json_.KeyString === undefined) { throw new Error() }
+            if (_json_.KeyString === undefined) { GLogHelper.error(1); }
             this.KeyString = _json_.KeyString
-            if (_json_.ValueInt === undefined) { throw new Error() }
+            if (_json_.ValueInt === undefined) { GLogHelper.error(1); }
             this.ValueInt = _json_.ValueInt
         }
 
@@ -2763,23 +2779,23 @@ export namespace Achievement {
     export class AchievementConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.Index === undefined) { throw new Error() }
+            if (_json_.Index === undefined) { GLogHelper.error(1); }
             this.Index = _json_.Index
-            if (_json_.NextId === undefined) { throw new Error() }
+            if (_json_.NextId === undefined) { GLogHelper.error(1); }
             this.NextId = _json_.NextId
-            if (_json_.AchievementName === undefined) { throw new Error() }
+            if (_json_.AchievementName === undefined) { GLogHelper.error(1); }
             this.AchievementName = _json_.AchievementName
-            if (_json_.AchievementDes === undefined) { throw new Error() }
+            if (_json_.AchievementDes === undefined) { GLogHelper.error(1); }
             this.AchievementDes = _json_.AchievementDes
-            if (_json_.AchievementType === undefined) { throw new Error() }
+            if (_json_.AchievementType === undefined) { GLogHelper.error(1); }
             this.AchievementType = _json_.AchievementType
-            if (_json_.AchievementFinishType === undefined) { throw new Error() }
+            if (_json_.AchievementFinishType === undefined) { GLogHelper.error(1); }
             this.AchievementFinishType = _json_.AchievementFinishType
-            if (_json_.AchieveFinishCondition === undefined) { throw new Error() }
+            if (_json_.AchieveFinishCondition === undefined) { GLogHelper.error(1); }
             { this.AchieveFinishCondition = []; for (let _ele of _json_.AchieveFinishCondition) { let _e: Task.TaskFinishConditionBean; _e = new Task.TaskFinishConditionBean(_ele); this.AchieveFinishCondition.push(_e); } }
-            if (_json_.AchievePrize === undefined) { throw new Error() }
+            if (_json_.AchievePrize === undefined) { GLogHelper.error(1); }
             { this.AchievePrize = []; for (let _ele of _json_.AchievePrize) { let _e: Item.ItemInfoBean; _e = new Item.ItemInfoBean(_ele); this.AchievePrize.push(_e); } }
         }
 
@@ -2857,15 +2873,15 @@ export namespace Title {
     export class TitleConfigRecord {
 
         constructor(_json_: any) {
-            if (_json_.id === undefined) { throw new Error() }
+            if (_json_.id === undefined) { GLogHelper.error(1); }
             this.id = _json_.id
-            if (_json_.TitleName === undefined) { throw new Error() }
+            if (_json_.TitleName === undefined) { GLogHelper.error(1); }
             this.TitleName = _json_.TitleName
-            if (_json_.TitleType === undefined) { throw new Error() }
+            if (_json_.TitleType === undefined) { GLogHelper.error(1); }
             this.TitleType = _json_.TitleType
-            if (_json_.TitleValidTime === undefined) { throw new Error() }
+            if (_json_.TitleValidTime === undefined) { GLogHelper.error(1); }
             this.TitleValidTime = _json_.TitleValidTime
-            if (_json_.TitleBuffs === undefined) { throw new Error() }
+            if (_json_.TitleBuffs === undefined) { GLogHelper.error(1); }
             this.TitleBuffs = _json_.TitleBuffs
         }
 
@@ -2938,13 +2954,13 @@ export namespace Glob {
     export class GlobalSettingRecord {
 
         constructor(_json_: any) {
-            if (_json_.guild_open_level === undefined) { throw new Error() }
+            if (_json_.guild_open_level === undefined) { GLogHelper.error(1); }
             this.guildOpenLevel = _json_.guild_open_level
-            if (_json_.bag_init_capacity === undefined) { throw new Error() }
+            if (_json_.bag_init_capacity === undefined) { GLogHelper.error(1); }
             this.bagInitCapacity = _json_.bag_init_capacity
-            if (_json_.bag_max_capacity === undefined) { throw new Error() }
+            if (_json_.bag_max_capacity === undefined) { GLogHelper.error(1); }
             this.bagMaxCapacity = _json_.bag_max_capacity
-            if (_json_.newbie_tasks === undefined) { throw new Error() }
+            if (_json_.newbie_tasks === undefined) { GLogHelper.error(1); }
             this.newbieTasks = _json_.newbie_tasks
         }
 

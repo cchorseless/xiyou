@@ -12,6 +12,7 @@ const typepath = "content/scripts/tscripts/shared/Gen/Types.ts";
 function jsontots() {
     let typestr = fs.readFileSync(typepath, "utf-8");
     typestr = typestr.replace(/for\(var /g, "for(let ")
+    typestr = typestr.replace(/throw new Error\(\)/g, "GLogHelper.error(1);")
     typestr = typestr.replace(/constructor\(_json_: any\) {\s+this._dataMap/g, "constructor(_json_: any[]) {\n this._dataMap ")
     typestr = typestr.replace(/constructor\(_json_: any\) {\s+if \(_json_.length/g, "constructor(_json_: any[]) {\n if (_json_.length ")
     fs.writeFileSync(typepath, typestr);

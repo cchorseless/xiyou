@@ -8,7 +8,7 @@
     "AchievementName": "",
     "AchievementDes": "",
     "AchievementType": "",
-    "AchievementFinishType": "",
+    "AchievementFinishType": "112",
     "AchieveFinishCondition": [],
     "AchievePrize": []
   },
@@ -34,21 +34,21 @@
   },
   {
     "id": 2,
-    "IsValid": 0,
+    "IsValid": 1,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""
   },
   {
     "id": 3,
-    "IsValid": 0,
+    "IsValid": 1,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""
   },
   {
     "id": 4,
-    "IsValid": 0,
+    "IsValid": 1,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""
@@ -5592,7 +5592,7 @@
     "id": 10001,
     "isVaild": 1,
     "ShopType": 0,
-    "ShopName": "",
+    "ShopName": "Home",
     "ShopRefreshType": 0,
     "ShopStartTime": 0,
     "ShopValidTime": 0,
@@ -5907,7 +5907,7 @@
     "id": 10002,
     "isVaild": 1,
     "ShopType": 0,
-    "ShopName": "",
+    "ShopName": "Props",
     "ShopRefreshType": 0,
     "ShopStartTime": 0,
     "ShopValidTime": 0,
@@ -6241,7 +6241,7 @@
     "id": 10003,
     "isVaild": 1,
     "ShopType": 0,
-    "ShopName": "",
+    "ShopName": "Chest",
     "ShopRefreshType": 0,
     "ShopStartTime": 0,
     "ShopValidTime": 0,

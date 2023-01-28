@@ -6,7 +6,7 @@
     "AchievementName": "",
     "AchievementDes": "",
     "AchievementType": "",
-    "AchievementFinishType": "",
+    "AchievementFinishType": "112",
     "AchieveFinishCondition": [],
     "AchievePrize": []
   },

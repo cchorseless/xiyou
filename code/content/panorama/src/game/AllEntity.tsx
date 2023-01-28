@@ -1,4 +1,5 @@
 import { LogHelper } from "../helper/LogHelper";
+import { LuBanConfigComponent } from "./componentext/LuBanConfigComponent";
 import { AbilityEntityRoot } from "./components/Ability/AbilityEntityRoot";
 import { BattleUnitIllusionEntityRoot } from "./components/BattleUnit/BattleUnitIllusionEntityRoot";
 import { BattleUnitSummonEntityRoot } from "./components/BattleUnit/BattleUnitSummonEntityRoot";
@@ -29,7 +30,7 @@ import { RoundManagerComponent } from "./components/Round/RoundManagerComponent"
 import { GameServiceSystemComponent } from "./system/GameStateSystemComponent";
 import { PublicBagSystemComponent } from "./system/PublicBagSystemComponent";
 
-
+LuBanConfigComponent;
 GameServiceSystemComponent;
 
 AbilityEntityRoot;

@@ -8,21 +8,21 @@
   },
   {
     "id": 2,
-    "IsValid": 0,
+    "IsValid": 1,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""
   },
   {
     "id": 3,
-    "IsValid": 0,
+    "IsValid": 1,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""
   },
   {
     "id": 4,
-    "IsValid": 0,
+    "IsValid": 1,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""

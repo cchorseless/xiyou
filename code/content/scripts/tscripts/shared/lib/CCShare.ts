@@ -264,9 +264,10 @@ export module CCShare {
     }
 
     export function FromJson(v: string) {
+        if (typeof v !== "string") { return v }
         if (_CODE_IN_LUA_) {
             //#region LUA
-            const r = (_G as any).json.decode(v) as [any, number];
+            const r = json.decode(v) as [any, number];
             if (r[0] == null) {
                 GLogHelper.error("From json fail", v)
             }
@@ -283,7 +284,7 @@ export module CCShare {
     export function ToJson(v: any): string {
         if (_CODE_IN_LUA_) {
             //#region LUA
-            return (_G as any).json.encode(v);
+            return json.encode(v);
             //#endregion LUA
         }
         else {
