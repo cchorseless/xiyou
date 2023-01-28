@@ -17,8 +17,6 @@ export class TActivityMemberShipData extends TActivityData {
     }
 
     onReload() {
-        GLogHelper.print(this.SerializeETProps);
-        GLogHelper.print(this.toJsonObject());
         this.SyncClient(true, true);
     }
 

@@ -7,7 +7,7 @@ export module GameServiceConfig {
     /**
      * 数据同步客户端是否压缩
      */
-    export const SyncClientCompress = true;
+    export const SyncClientCompress = true;;
     /**
      * 数据同步客户端转成base64字符串
      */

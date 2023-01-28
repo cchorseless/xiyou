@@ -139,13 +139,15 @@ export module CCShare {
 
         public copy(obj: any) {
             if (this == obj || obj == null) return;
-            if (obj[0] && obj[1]) {
-                this._keys = [].concat(obj[0]);
-                this._values = [].concat(obj[1]);
-            }
-            else if (obj._keys && obj._values) {
+            if (obj._keys && obj._values) {
                 this._keys = [].concat(TryTransArrayLikeObject(obj._keys));
                 this._values = [].concat(TryTransArrayLikeObject(obj._values));
+            }
+            else {
+                const data: [K, V][] = obj;
+                for (let _v of data) {
+                    this.add(_v[0], _v[1]);
+                }
             }
         }
 

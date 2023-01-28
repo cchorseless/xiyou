@@ -13,7 +13,9 @@ export const serializeETProps = (params: string | null = null) =>
         if (params != null) {
             attr = params;
         }
-        target.SerializeETProps.push(attr);
+        if (!target.SerializeETProps.includes(attr)) {
+            target.SerializeETProps.push(attr);
+        }
         //#endregion LUA
     };
 export const serializeDomainProps = (params: string | null = null) =>
@@ -27,7 +29,9 @@ export const serializeDomainProps = (params: string | null = null) =>
         if (params != null) {
             attr = params;
         }
-        target.SerializeDomainProps.push(attr);
+        if (!target.SerializeDomainProps.includes(attr)) {
+            target.SerializeDomainProps.push(attr);
+        }
         //#endregion LUA
     };
 
@@ -269,16 +273,18 @@ export module ET {
             };
             if (this.SerializeETProps != null) {
                 for (let k of this.SerializeETProps) {
-                    if (props.includes(k)) {
-                        obj[k] = GameServiceConfig.TryEncodeData((this as any)[k]);
+                    let v = (this as any)[k];
+                    if (props.includes(k) && v !== null && typeof v !== "function") {
+                        obj[k] = GameServiceConfig.TryEncodeData(v);
                     }
                 }
             }
             if (this.Domain.SerializeDomainProps != null) {
                 obj._d_props = {};
                 for (let k of this.Domain.SerializeDomainProps) {
-                    if (props.includes(k)) {
-                        obj._d_props[k] = GameServiceConfig.TryEncodeData((this.Domain as any)[k]);
+                    let v = (this.Domain as any)[k];
+                    if (props.includes(k) && v !== null && typeof v !== "function") {
+                        obj._d_props[k] = GameServiceConfig.TryEncodeData(v);
                     }
                 }
             }
@@ -292,14 +298,20 @@ export module ET {
             };
             if (this.SerializeETProps != null) {
                 for (let k of this.SerializeETProps) {
-                    obj[k] = GameServiceConfig.TryEncodeData((this as any)[k]);
+                    let v = (this as any)[k];
+                    if (v !== null && typeof v !== "function") {
+                        obj[k] = GameServiceConfig.TryEncodeData(v);
+                    }
                 }
             }
             // 数据只绑定在EntityRoot上，其他组件不需要重复同步
             if (this.Domain.SerializeDomainProps != null && (this.Domain.ETRoot as any) == this) {
                 obj._d_props = {};
                 for (let k of this.Domain.SerializeDomainProps) {
-                    obj._d_props[k] = GameServiceConfig.TryEncodeData((this.Domain as any)[k]);
+                    let v = (this.Domain as any)[k];
+                    if (v !== null && typeof v !== "function") {
+                        obj._d_props[k] = GameServiceConfig.TryEncodeData(v);
+                    }
                 }
             }
             if (!ignoreChild) {

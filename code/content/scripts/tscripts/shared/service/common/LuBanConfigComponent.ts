@@ -1,4 +1,3 @@
-import { RefreshConfig } from "../../Gen/JsonConfig";
 import { ET, serializeETProps } from "../../lib/Entity";
 
 
@@ -22,10 +21,11 @@ export class LuBanConfigComponent extends ET.Component {
 
     onReload() {
         let obj: { [l: string]: string } = {};
-        this.ClientSyncConfig.forEach((k, v) => {
-            obj[k] = GFromJson(v);
-        })
-        RefreshConfig(obj);
-        this.SyncClient();
+        GLogHelper.print(this.ClientSyncConfig)
+        // this.ClientSyncConfig.forEach((k, v) => {
+        //     obj[k] = GFromJson(v);
+        // })
+        // RefreshConfig(obj);
+        // this.SyncClient();
     }
 }

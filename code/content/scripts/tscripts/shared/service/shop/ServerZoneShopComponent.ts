@@ -1,6 +1,5 @@
 
 import { ET, serializeETProps } from "../../lib/Entity";
-import { TCharacter } from "../account/TCharacter";
 import { TServerZone } from "../serverzone/TServerZone";
 
 
@@ -23,6 +22,7 @@ export class ServerZoneShopComponent extends ET.Component {
 
 
     onSerializeToEntity() {
+        GLogHelper.print(this.Id, "ServerZoneShopComponent")
         let serverzone = ET.EntitySystem.GetEntity(this.Id + "TServerZone");
         if (serverzone) {
             serverzone.AddOneComponent(this);

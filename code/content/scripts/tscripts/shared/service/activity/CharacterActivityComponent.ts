@@ -19,15 +19,15 @@ export class CharacterActivityComponent extends ET.Component {
     get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onSerializeToEntity() {
         let character = ET.EntitySystem.GetEntity(this.Id + "TCharacter");
-        GLogHelper.print(character != null, 111);
         if (character != null) {
             character.AddOneComponent(this);
             this.onReload();
         }
     }
     onReload() {
-        GLogHelper.print(this.SerializeETProps);
-        GLogHelper.print(this.toJsonObject());
+        // GLogHelper.print("----------")
+        // GLogHelper.print(this.toJsonObject());
+        // GLogHelper.print("----------")
         // this.SyncClient();
     }
 }

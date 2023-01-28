@@ -121,19 +121,31 @@ export class PlayerHttpComponent extends ET.Component {
                         LogHelper.print("http cb=>", GameProtocol.Protocol.Ping, a, b);
                         let msg: G2C_Ping = json.decode(b)[0];
                         if (msg.Message) {
+                            GLogHelper.print("Message length :", msg.Message.length)
                             let msgcb: any[] = json.decode(msg.Message)[0];
                             for (let entitystr of msgcb) {
+                                let _str = entitystr;
                                 try {
                                     if (GameServiceConfig.SyncClientToBase64) {
-                                        entitystr = FromBase64(entitystr)
+                                        _str = FromBase64(_str)
+                                        if (_str == null || _str == "null" || _str == "nil") {
+                                            GLogHelper.error("FromBase64 error: ", entitystr)
+                                        }
                                     }
                                     if (GameServiceConfig.SyncClientCompress) {
-                                        entitystr = DecompressZlib(entitystr)
+                                        _str = DecompressZlib(_str)
+                                        if (_str == null || _str == "null" || _str == "nil") {
+                                            GLogHelper.error("DecompressZlib error: ", entitystr)
+                                        }
                                     }
-                                    if (typeof entitystr === "string") {
-                                        entitystr = json.decode(entitystr)[0]
+                                    if (typeof _str === "string" && _str !== "null" && _str !== "nil") {
+                                        let tmpstr = json.decode(_str)[0];
+                                        if (tmpstr == null) {
+                                            GLogHelper.error("json.decode error: ", _str, typeof _str)
+                                        }
+                                        _str = tmpstr;
                                     }
-                                    ET.Entity.FromJson(entitystr);
+                                    ET.Entity.FromJson(_str);
                                 } catch (e) {
                                     LogHelper.print(entitystr);
                                     LogHelper.error(e);
