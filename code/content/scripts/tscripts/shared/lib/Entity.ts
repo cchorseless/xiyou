@@ -41,12 +41,15 @@ export module ET {
         onAwake?(...args: any[]): void;
         /**移除 */
         onRemove?(): void;
-        /**反序列化后 */
+        /**反序列化完成，包括子节点 */
         onSerializeToEntity?(): void;
         /**重载组件 */
         onReload?(): void;
         /**销毁前 */
         onDestroy?(): void;
+        /**获取玩家id */
+        onGetBelongPlayerid?(): PlayerID;
+
     }
 
     export interface IEntityRoot {
@@ -104,7 +107,13 @@ export module ET {
         * @returns
         */
         public static GetInstance<T extends typeof Entity>(typename: string, playerid: PlayerID): InstanceType<T> {
-            const typeList: Entity[] = (EntitySystem.AllTypeEntity[typename] || []).filter(instance => { return instance.BelongPlayerid == playerid });;
+            const typeList: Entity[] = [];
+            let allTypes: Entity[] = (EntitySystem.AllTypeEntity[typename] || []);
+            for (let instance of allTypes) {
+                if (instance.BelongPlayerid == playerid) {
+                    typeList.push(instance)
+                }
+            }
             if (typeList.length !== 1 || typeList[0].IsDisposed()) {
                 return null as InstanceType<T>;
             }
@@ -116,7 +125,13 @@ export module ET {
         * @returns
         */
         public static GetInstances<T extends typeof Entity>(typename: string, playerid: PlayerID): InstanceType<T>[] {
-            const typeList: Entity[] = (EntitySystem.AllTypeEntity[typename] || []).filter(instance => { return instance.BelongPlayerid == playerid });;
+            const typeList: Entity[] = [];
+            let allTypes: Entity[] = (EntitySystem.AllTypeEntity[typename] || []);
+            for (let instance of allTypes) {
+                if (instance.BelongPlayerid == playerid) {
+                    typeList.push(instance)
+                }
+            }
             if (typeList.length == 0) {
                 GLogHelper.error(typename + " is not a Muti instance");
             }
@@ -179,7 +194,7 @@ export module ET {
         onReload?(): void;
         onRemove?(): void;
         onDestroy?(): void;
-
+        onGetBelongPlayerid?(): PlayerID;
         /** 函数组件使用 */
         public HookRef() {
             // const { useState, useEffect } = require("react")
@@ -219,28 +234,19 @@ export module ET {
             GLogHelper.error(this.GetType() + " cant find BelongPlayerid")
         }
 
-        public get FixBelongPlayerid() {
-            if (_CODE_IN_LUA_) { return 0 }
-            if (this.BelongPlayerid == null) {
-                GLogHelper.error(this.GetType() + " cant find BelongPlayerid")
-            }
-            if (this.BelongPlayerid < 0) {
-                return Players.GetLocalPlayer();
-            }
-            return this.BelongPlayerid;
-        }
+
 
         public SyncClient(ignoreChild: boolean = false, isShare: boolean = false) {
+            GLogHelper.print(this.GetType(), this.BelongPlayerid);
             //#region LUA
             if (!_CODE_IN_LUA_) { return };
             if (this.BelongPlayerid == -1) {
-                (GGameScene as any).SyncClientEntity(this, ignoreChild);
+                GGameScene.SyncClientEntity(this, ignoreChild);
             }
             else {
-                const playerroot = GGameScene.GetPlayer(this.BelongPlayerid) as any;
+                const playerroot = GGameScene.GetPlayer(this.BelongPlayerid);
                 playerroot.SyncClientEntity(this, ignoreChild, isShare);
             }
-            GLogHelper.print(this.GetType(), this.BelongPlayerid);
             //#endregion LUA
         }
 
@@ -347,6 +353,9 @@ export module ET {
             if (json._d_props != null) {
                 (this.D_Props as any) = json._d_props;
             }
+            if (this.BelongPlayerid == -1 && json.BelongPlayerid == null && this.onGetBelongPlayerid) {
+                (this.BelongPlayerid as any) = this.onGetBelongPlayerid();
+            }
             if (json.Children) {
                 // 服务器那边发过来的是数组
                 let _childs: IEntityJson[] = Object.values(json.Children);
@@ -368,16 +377,13 @@ export module ET {
                 }
                 for (let info of _childs) {
                     if (this.GetChild(info._id) == null) {
-                        let entity = Entity.FromJson(info);
+                        let entity = Entity.FromJson(info, this.BelongPlayerid);
                         if (this.IsRegister) {
                             this.AddOneChild(entity);
                         }
                         else {
                             (entity.Parent as any) = this;
                             this.AddToChildren(entity);
-                        }
-                        if (this.BelongPlayerid != null) {
-                            (entity.BelongPlayerid as any) = this.BelongPlayerid;
                         }
                     }
                 }
@@ -403,21 +409,18 @@ export module ET {
                 }
                 for (let _comp of comps) {
                     if (this.Components == null || this.Components[_comp._t] == null) {
-                        let entity = Entity.FromJson(_comp);
+                        let entity = Entity.FromJson(_comp, this.BelongPlayerid);
                         if (this.IsRegister) {
                             this.AddOneComponent(entity as any);
                         } else {
                             (entity.Parent as any) = this;
                             this.AddToComponents(entity as any);
                         }
-                        if (this.BelongPlayerid != null) {
-                            (entity.BelongPlayerid as any) = this.BelongPlayerid;
-                        }
                     }
                 }
             }
         }
-        static FromJson(json: IEntityJson) {
+        static FromJson(json: IEntityJson, belongPlayerid = -1) {
             let entity = EntitySystem.GetEntity(json._id + json._t);
             if (entity != null) {
                 entity.updateFromJson(json);
@@ -435,6 +438,9 @@ export module ET {
             if (entity == null) {
                 entity = Entity.Create(type);
                 (entity.Id as any) = json._id;
+                if (belongPlayerid > -1) {
+                    (entity.BelongPlayerid as any) = belongPlayerid;
+                }
                 entity.setDomain(GameSceneRoot.GetInstance());
             }
             // 这里先创建注册然后SerializeToEntity，所以getinstance 比 getcomponent 更早拿到实体

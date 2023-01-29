@@ -2,7 +2,6 @@
 import React from "react";
 import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { CSSHelper } from "../../helper/CSSHelper";
-
 import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCMenuNavigation } from "../AllUIElement/CCNavigation/CCMenuNavigation";
@@ -12,6 +11,7 @@ import { CCVerticalTable } from "../AllUIElement/CCTable/CCVerticalTable";
 import { CCCoinAddPanel } from "./CCCoinAddPanel";
 import "./CCShopPanel.less";
 import { CCShopSellItem } from "./CCShopSellItem";
+
 interface ICCShopPanel extends NodePropsData {
 
 }
@@ -22,10 +22,10 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
     }
 
     onInitUI() {
-        GGameScene.Local.TCharacter.DataComp?.RegRef(this);
+        GGameScene.Local.TCharacter.DataComp!.RegRef(this);
         GTShopUnit.GetGroupInstance(GGameScene.Local.BelongPlayerid).forEach(e => {
             e.RegRef(this);
-        })
+        });
     }
 
     closeThis() {

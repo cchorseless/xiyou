@@ -107,13 +107,14 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
                     </CCPanel>
                 </Panel>
                 <Panel id="PlayerContainer" hittest={false}>
-                    {[...Array(GameServiceConfig.GAME_MAX_PLAYER)].map(
-                        (_, index) => {
-                            let iPlayerID = index as PlayerID;
-                            if (Players.IsValidPlayerID(iPlayerID)) {
-                                return <CCPlayerInTeamItem key={index + ""} id={"Player_" + index} iPlayerID={iPlayerID} />
-                            }
-                        }).filter(t => { return Boolean(t) })
+                    {
+                        [...Array(GameServiceConfig.GAME_MAX_PLAYER)].map(
+                            (_, index) => {
+                                let iPlayerID = index as PlayerID;
+                                if (Players.IsValidPlayerID(iPlayerID)) {
+                                    return <CCPlayerInTeamItem key={index + ""} id={"Player_" + index} iPlayerID={iPlayerID} />
+                                }
+                            }).filter(t => { return Boolean(t) })
                     }
                 </Panel>
                 <Panel id="Difficulties" hittest={false}>

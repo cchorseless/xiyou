@@ -73,7 +73,7 @@ export class ItemEntityRoot extends BaseEntityRoot {
         if (GameFunc.IsValid(item)) {
             item.GetContainer()?.Destroy();
             this.clearSceneContainer();
-            item.SafeDestroy();
+            GDestroyItem(item);
         }
     }
     config() {

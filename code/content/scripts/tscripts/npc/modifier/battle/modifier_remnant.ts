@@ -33,7 +33,7 @@ export class modifier_remnant extends BaseModifier_Plus {
     public OnDestroy(): void {
         super.OnDestroy();
         for (let k of this.remnants) {
-            k.SafeDestroy()
+            GDestroyUnit(k);
         }
         this.remnants = [];
     }

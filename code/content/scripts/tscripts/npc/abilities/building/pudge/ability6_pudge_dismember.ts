@@ -361,7 +361,7 @@ export class modifier_pudge_6_thinker extends BaseModifier_Plus {
     OnDestroy() {
         super.OnDestroy();
         if (IsServer()) {
-            this.GetParentPlus().SafeDestroy()
+            GDestroyUnit(this.GetParentPlus());
         }
     }
     CheckState() {

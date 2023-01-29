@@ -30,7 +30,7 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
     onDestroy(): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
         if (GameFunc.IsValid(npc)) {
-            npc.SafeDestroy();
+            GDestroyUnit(npc);
         }
     }
 

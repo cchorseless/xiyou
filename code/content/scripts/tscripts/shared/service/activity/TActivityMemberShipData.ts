@@ -11,7 +11,6 @@ export class TActivityMemberShipData extends TActivityData {
     public VipEndTime: string;
 
 
-
     onSerializeToEntity() {
         this.onReload()
     }

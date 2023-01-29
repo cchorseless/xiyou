@@ -15,12 +15,16 @@ export class CharacterTaskComponent extends ET.Component {
     public IsReplaceDailyTask: boolean;
 
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
-    onSerializeToEntity() {
+    onGetBelongPlayerid() {
         let character = ET.EntitySystem.GetEntity(this.Id + "TCharacter");
-        if (character) {
-            character.AddOneComponent(this);
-            this.onReload();
+        if (character != null) {
+            return character.BelongPlayerid;
         }
+        return -1;
+    }
+    onSerializeToEntity() {
+        GTCharacter.GetOneInstance(this.BelongPlayerid).AddOneComponent(this);
+        this.onReload();
     }
     onReload() {
         this.SyncClient();

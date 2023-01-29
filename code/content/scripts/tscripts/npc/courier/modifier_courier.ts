@@ -34,6 +34,7 @@ export class modifier_courier extends BaseModifier_Plus {
     iSkin: number;
     ambientModifiers: string;
     addAbilityName: string;
+    zOffset: number = 1;
     OnCreated(params: ModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
@@ -44,7 +45,7 @@ export class modifier_courier extends BaseModifier_Plus {
             this.iSkin = KVHelper.CourierUnits.GetCourierSkin(sCourierName)
             this.ambientModifiers = KVHelper.CourierUnits.GetCourierAmbientEffect(sCourierName)
             this.addAbilityName = KVHelper.CourierUnits.GetCourierAbility(sCourierName)
-            this.SetStackCount(KVHelper.CourierUnits.GetCourierVisualZDelta(sCourierName))
+            this.zOffset = KVHelper.CourierUnits.GetCourierVisualZDelta(sCourierName);
             this.StartIntervalThink(0)
         }
     }
@@ -86,6 +87,6 @@ export class modifier_courier extends BaseModifier_Plus {
     }
     @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.VISUAL_Z_DELTA)
     CC_GetVisualZDelta(params: ModifierTable) {
-        return this.GetStackCount()
+        return this.zOffset
     }
 }

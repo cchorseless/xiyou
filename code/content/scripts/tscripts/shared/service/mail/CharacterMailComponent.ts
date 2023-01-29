@@ -14,12 +14,16 @@ export class CharacterMailComponent extends ET.Component {
     public Mails: string[];
 
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
-    onSerializeToEntity() {
+    onGetBelongPlayerid() {
         let character = ET.EntitySystem.GetEntity(this.Id + "TCharacter");
         if (character != null) {
-            character.AddOneComponent(this);
-            this.onReload();
+            return character.BelongPlayerid;
         }
+        return -1;
+    }
+    onSerializeToEntity() {
+        GTCharacter.GetOneInstance(this.BelongPlayerid).AddOneComponent(this);
+        this.onReload();
     }
     onReload() {
         this.SyncClient();

@@ -293,6 +293,11 @@ export module CCShare {
             //#endregion JS
         }
     }
+
+    export function ToNumber(v: any): number {
+        if (v == null || v == "" || v == "null" || v == "nil") { return 0 }
+        return Number(v);
+    }
 }
 
 declare global {
@@ -307,6 +312,7 @@ declare global {
     var GFromJson: typeof CCShare.FromJson;
     var GToJson: typeof CCShare.ToJson;
     var GGenerateUUID: typeof CCShare.GenerateUUID;
+    var GToNumber: typeof CCShare.ToNumber;
     type IGDictionary<K, V> = CCShare.Dictionary<K, V>;
     var GDictionary: typeof CCShare.Dictionary;
 }
@@ -323,6 +329,7 @@ if (_G.GHandler == null) {
     _G.GFromJson = CCShare.FromJson;
     _G.GToJson = CCShare.ToJson;
     _G.GGenerateUUID = CCShare.GenerateUUID;
+    _G.GToNumber = CCShare.ToNumber;
     _G.GDictionary = CCShare.Dictionary;
     if (_CODE_IN_JS_) {
         (global as any).GameRules = Game;

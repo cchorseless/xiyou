@@ -1,7 +1,7 @@
 import React from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
-
 import { CCAvatar } from "../AllUIElement/CCAvatar/CCAvatar";
+
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCPlayerCard.less";
 
@@ -13,7 +13,6 @@ export class CCPlayerCard extends CCPanel<ICCPlayerCard> {
 
     onReady() {
         const iplayerID = this.props.iPlayerID;
-        GLogHelper.print(GTActivityMemberShipData.GetOneInstance(iplayerID), 1111111111)
         return Boolean(GTActivityMemberShipData.GetOneInstance(iplayerID))
     }
 
@@ -29,8 +28,10 @@ export class CCPlayerCard extends CCPanel<ICCPlayerCard> {
         const isPlus = MemberData.IsVip();
         const isPlus_p = MemberData.IsVipForever();
         const playerinfo = Game.GetPlayerInfo(iplayerID)
-        GLogHelper.print(playerinfo, 2222222222)
-        return <Panel id="CC_PlayerCard" className={CSSHelper.ClassMaker("CCPlayerCard", { Plus: isPlus && !isPlus_p, PlusPlus: isPlus_p })} hittest={false}>
+        GLogHelper.print(playerinfo.player_steamid);
+        return <Panel id="CC_PlayerCard"
+            className={CSSHelper.ClassMaker("CCPlayerCard", { Plus: isPlus && !isPlus_p, PlusPlus: isPlus_p })}
+            hittest={false} ref={this.__root__} {...this.initRootAttrs()}>
             {/* <Panel id="PlusBG" hittest={false}>
                 <AnimatedImageStrip id="PlusBG1" animating={true} frametime="0.06666667s"
                     src="file://{images}/custom_game/player_info/plus_bg_1.png"
@@ -49,6 +50,7 @@ export class CCPlayerCard extends CCPanel<ICCPlayerCard> {
             </Panel> */}
             <CCAvatar id="PlayerAvatar" width="48px" height="48px" steamid={playerinfo.player_steamid} />
             <Label id="PlayerName" text={playerinfo.player_name} hittest={false} />
+            {this.__root___childs}
             {this.props.children}
             {/* TODO:玩家天梯勋章 */}
         </Panel>;

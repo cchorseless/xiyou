@@ -61,7 +61,7 @@ export class modifier_tp extends BaseModifier_Plus {
             if (tPosition) {
                 hCaster.SetAbsOrigin(GetGroundPosition(tPosition, hParent));
             }
-            hParent.SafeDestroy();
+            GDestroyUnit(hParent)
         }
     }
 

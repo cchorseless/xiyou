@@ -17,9 +17,10 @@ export class CCRankEmblem extends CCPanel<ICCRankEmblem> {
             ref={this.__root__}  {...this.initRootAttrs()}>
             <Label id="EndlessRankEmblemRank" text={rankDes} hittest={false} />
             {/* {rank == 7 && <DOTAParticleScenePanel key="EndlessRankEmblemRankScenePanel" className="EndlessRankEmblemRankScenePanel" hittest={false} particleonly={true} particleName={`particles/ui/hud/rank_${rank}.vpcf`} cameraOrigin="100 0 0" lookAt="0 0 0" fov={40} />} */}
-            {rank == 7 && <Panel id="EndlessRankEmblemRank_Widget1" hittest={false} >
-                <Panel id="Widget1Div" />
-            </Panel>}
+            {rank == 7 &&
+                <Panel id="EndlessRankEmblemRank_Widget1" hittest={false} >
+                    <Panel id="Widget1Div" />
+                </Panel>}
         </Panel>
     }
 }

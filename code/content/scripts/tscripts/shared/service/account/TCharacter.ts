@@ -29,18 +29,18 @@ export class TCharacter extends ET.Component {
     IsFirstLoginToday: boolean;
     IsFirstLoginWeek: boolean;
     IsFirstLoginSeason: boolean;
-    onSerializeToEntity() {
-        //#region LUA
-        GLogHelper.print(this.Name + ": ")
+
+    onGetBelongPlayerid() {
         for (let i = 0; i < GameServiceConfig.GAME_MAX_PLAYER; i++) {
             let sPlayerSteamid = PlayerResource.GetSteamAccountID(i as PlayerID) + "";
-            GLogHelper.print(sPlayerSteamid + "----- ")
             if (sPlayerSteamid == this.Name) {
-                (this.BelongPlayerid as any) = i;
-                break;
+                return i as PlayerID;
             }
         }
-        //#endregion LUA
+        return -1;
+    }
+
+    onSerializeToEntity() {
         GGameScene.GetPlayer(this.BelongPlayerid).AddOneComponent(this);
         this.onReload()
     }

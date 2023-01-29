@@ -166,15 +166,15 @@ export module KVHelper {
         }
         export function GetCourierModelScale(sCourierName: string) {
             if (KvConfig().courier_units[sCourierName] == null) { return 1 }
-            return Number(KvConfig().courier_units[sCourierName].ModelScale) || 1
+            return GToNumber(KvConfig().courier_units[sCourierName].ModelScale)
         }
         export function GetCourierSkin(sCourierName: string) {
             if (KvConfig().courier_units[sCourierName] == null) { return 0 }
-            return Number(KvConfig().courier_units[sCourierName].Skin) || 0
+            return GToNumber(KvConfig().courier_units[sCourierName].Skin);
         }
         export function GetCourierVisualZDelta(sCourierName: string) {
             if (KvConfig().courier_units[sCourierName] == null) { return 0 }
-            return Number(KvConfig().courier_units[sCourierName].VisualZDelta) || 0
+            return GToNumber(KvConfig().courier_units[sCourierName].VisualZDelta);
         }
         export function GetCourierAmbientEffect(sCourierName: string) {
             if (KvConfig().courier_units[sCourierName] == null) { return }

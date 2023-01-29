@@ -1,5 +1,7 @@
+import { NetTablesHelper } from "../../helper/NetTablesHelper";
 import { ToBase64 } from "../../lib/Base64";
 import { CompressZlib } from "../../lib/zlib";
+import { GameServiceConfig } from "../../shared/GameServiceConfig";
 import { RefreshConfig } from "../../shared/Gen/JsonConfig";
 import { ET, serializeETProps } from "../../shared/lib/Entity";
 
@@ -28,7 +30,9 @@ export class LuBanConfigComponent extends ET.Component {
         this.ClientSyncConfig.forEach((k, v) => {
             obj[k] = GFromJson(v);
             let _str2 = ToBase64(CompressZlib(v));
-            this.ClientSyncConfig.add(k, _str2);
+            // 存到特定网表，一次一次的写数据，避免过大写不进去;
+            NetTablesHelper.SetData(GameServiceConfig.ENetTables.sheetconfig, k, { _: _str2 })
+            this.ClientSyncConfig.add(k, "");
         })
         RefreshConfig(obj);
         this.SyncClient();

@@ -7,12 +7,16 @@ import { CharacterInGameDataComponent } from "./CharacterInGameDataComponent";
 
 @GReloadable
 export class CharacterDataComponent extends ET.Component {
-    onSerializeToEntity() {
+    onGetBelongPlayerid() {
         let character = ET.EntitySystem.GetEntity(this.Id + "TCharacter");
         if (character != null) {
-            character.AddOneComponent(this);
-            this.onReload();
+            return character.BelongPlayerid;
         }
+        return -1;
+    }
+    onSerializeToEntity() {
+        GTCharacter.GetOneInstance(this.BelongPlayerid).AddOneComponent(this);
+        this.onReload();
     }
 
     onReload(): void {

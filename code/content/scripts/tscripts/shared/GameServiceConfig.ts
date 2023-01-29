@@ -141,6 +141,7 @@ export module GameServiceConfig {
     /**网表名称 */
     export enum ENetTables {
         common = "common",
+        sheetconfig = "sheetconfig",
         etentity = "etentity",
         etentity0 = "etentity0",
         etentity1 = "etentity1",

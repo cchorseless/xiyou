@@ -17,17 +17,21 @@ export class CharacterActivityComponent extends ET.Component {
         this._ActivityData.copy(data);
     }
     get Character(): TCharacter { return this.GetParent<TCharacter>(); }
-    onSerializeToEntity() {
+
+    onGetBelongPlayerid() {
         let character = ET.EntitySystem.GetEntity(this.Id + "TCharacter");
         if (character != null) {
-            character.AddOneComponent(this);
-            this.onReload();
+            return character.BelongPlayerid;
         }
+        return -1;
     }
+    onSerializeToEntity() {
+        GTCharacter.GetOneInstance(this.BelongPlayerid).AddOneComponent(this);
+        this.onReload();
+    }
+
     onReload() {
-        // GLogHelper.print("----------")
-        // GLogHelper.print(this.toJsonObject());
-        // GLogHelper.print("----------")
-        // this.SyncClient();
+        this.SyncClient();
     }
+
 }

@@ -4,6 +4,11 @@ import { GameServiceSystemComponent } from "./system/GameStateSystemComponent";
 import { PublicBagSystemComponent } from "./system/PublicBagSystemComponent";
 
 export class GameScene {
+    /**
+     * @abstract Construct
+     */
+    static SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false): void { }
+
     /**组件 */
     static get Scene() {
         return ET.GameSceneRoot.GetInstance();

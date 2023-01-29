@@ -13,40 +13,12 @@ export class BaseAbility implements ET.IEntityRoot {
     static findIn<T extends typeof BaseAbility>(this: T, target: CDOTA_BaseNPC) {
         return target.FindAbilityByName(this.name) as InstanceType<T>;
     }
-    SafeDestroy?() {
-        if (!IsServer()) {
-            return;
-        }
-        if (GameFunc.IsValid(this)) {
-            if (this.__safedestroyed__) {
-                return;
-            }
-            this.__safedestroyed__ = true;
-            GTimerHelper.ClearAll(this);
-            this.Destroy();
-            UTIL_Remove(this);
-        }
-    }
 }
 
 export interface BaseItem extends CDOTA_Item_Lua { }
 export class BaseItem implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
     __safedestroyed__?: boolean = false;
-    SafeDestroy?() {
-        if (!IsServer()) {
-            return;
-        }
-        if (GameFunc.IsValid(this)) {
-            if (this.__safedestroyed__) {
-                return;
-            }
-            this.__safedestroyed__ = true;
-            GTimerHelper.ClearAll(this);
-            this.Destroy();
-            UTIL_Remove(this);
-        }
-    }
 }
 
 export interface BaseModifier extends CDOTA_Modifier_Lua { }
@@ -559,26 +531,6 @@ export class BaseNpc implements ET.IEntityRoot {
     IsRealUnit?() {
         return !(this.IsIllusion() || this.IsSummoned());
     }
-    /**
-     * 安全销毁实体
-     */
-    SafeDestroy?() {
-        if (!IsServer()) {
-            return;
-        }
-        if (GameFunc.IsValid(this)) {
-            if (this.__safedestroyed__) {
-                return;
-            }
-            this.__safedestroyed__ = true;
-            let allm = this.FindAllModifiers();
-            for (let m of allm) {
-                m.Destroy();
-            }
-            GTimerHelper.ClearAll(this);
-            UTIL_Remove(this);
-        }
-    }
     //#region 天赋
     /**
      * 是否有天赋
@@ -673,7 +625,7 @@ export class BaseNpc implements ET.IEntityRoot {
     removeAbilityPlus?(abilityname: string) {
         let ability = this.FindAbilityByName(abilityname) as IBaseAbility_Plus;
         if (ability) {
-            ability.SafeDestroy();
+            GDestroyAbility(ability);
             this.RemoveAbility(abilityname);
         }
         else {
@@ -916,4 +868,66 @@ function toDotaClassInstance(instance: any, table: new () => any) {
         }
         prototype = getmetatable(prototype);
     }
+}
+
+
+function SafeDestroyAbility(ability: BaseAbility) {
+    if (!IsServer()) {
+        return;
+    }
+    if (GameFunc.IsValid(ability)) {
+        if (ability.__safedestroyed__) {
+            return;
+        }
+        ability.__safedestroyed__ = true;
+        GTimerHelper.ClearAll(ability);
+        ability.Destroy();
+        UTIL_Remove(ability);
+    }
+}
+
+
+function SafeDestroyItem(item: BaseItem) {
+    if (!IsServer()) {
+        return;
+    }
+    if (GameFunc.IsValid(item)) {
+        if (item.__safedestroyed__) {
+            return;
+        }
+        item.__safedestroyed__ = true;
+        GTimerHelper.ClearAll(item);
+        item.Destroy();
+        UTIL_Remove(item);
+    }
+}
+
+
+function SafeDestroyUnit(unit: BaseNpc) {
+    if (!IsServer()) {
+        return;
+    }
+    if (GameFunc.IsValid(unit)) {
+        if (unit.__safedestroyed__) {
+            return;
+        }
+        unit.__safedestroyed__ = true;
+        let allm = unit.FindAllModifiers();
+        for (let m of allm) {
+            m.Destroy();
+        }
+        GTimerHelper.ClearAll(unit);
+        UTIL_Remove(unit);
+    }
+}
+
+declare global {
+    var GDestroyAbility: typeof SafeDestroyAbility;
+    var GDestroyItem: typeof SafeDestroyItem;
+    var GDestroyUnit: typeof SafeDestroyUnit;
+}
+if (_G.GDestroyAbility == null) {
+    _G.GDestroyAbility = SafeDestroyAbility;
+    _G.GDestroyItem = SafeDestroyItem;
+    _G.GDestroyUnit = SafeDestroyUnit;
 }

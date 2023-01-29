@@ -12,7 +12,10 @@ import { PlayerDataComponent } from "./PlayerDataComponent";
 
 @GReloadable
 export class PlayerEntityRoot extends ET.Entity {
-
+    /**
+     * @abstract Construct
+     */
+    public SyncClientEntity(obj: ET.Entity, ignoreChild: boolean = false, isShare: boolean = false): void { }
     onAwake(playerid: PlayerID): void {
         (this.BelongPlayerid as any) = playerid;
         if (this.IsLocalPlayer) {

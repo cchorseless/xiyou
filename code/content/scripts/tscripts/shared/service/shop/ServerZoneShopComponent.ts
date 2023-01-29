@@ -22,7 +22,6 @@ export class ServerZoneShopComponent extends ET.Component {
 
 
     onSerializeToEntity() {
-        GLogHelper.print(this.Id, "ServerZoneShopComponent")
         let serverzone = ET.EntitySystem.GetEntity(this.Id + "TServerZone");
         if (serverzone) {
             serverzone.AddOneComponent(this);

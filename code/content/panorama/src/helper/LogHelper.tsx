@@ -76,25 +76,24 @@ export class LogHelper {
         if (!Game.IsInToolsMode()) {
             return;
         }
-        $.AssertHelper(...args);
-        // try {
-        //     throw new Error("")
-        // }
-        // catch (e) {
-        //     let stack = (e as any).stack;
-        //     let arr = stack.split("\n");
-        //     let a = arr[2].split(" ");
-        //     let b = a[5].split('.');
-        //     let c = a[6].split('/');
-        //     let file = c[c.length - 1].split(':');
-        //     let file_str = `${file[0]}:${parseInt(file[1]) + OffSetLine}|`;
-        //     let len = b.length;
-        //     let cls = b[len - 2];
-        //     let fun = b[len - 1];
-        //     if (cls == null) { cls = '?' }
-        //     let r = `[${file_str}${cls}:${fun}]:`
-        //     $.AssertHelper(r, ...args)
-        // }
+        try {
+            throw new Error("")
+        }
+        catch (e) {
+            let stack = (e as any).stack;
+            let arr = stack.split("\n");
+            let a = arr[2].split(" ");
+            let b = a[5].split('.');
+            let c = a[6].split('/');
+            let file = c[c.length - 1].split(':');
+            let file_str = `${file[0]}:${parseInt(file[1]) + LogHelper.OffSetLine}|`;
+            let len = b.length;
+            let cls = b[len - 2];
+            let fun = b[len - 1];
+            if (cls == null) { cls = '?' }
+            let r = `[${file_str}${cls}:${fun}]:`
+            $.Warning(r, ...args)
+        }
     }
 
     static DeepPrintTable(table?: Object) {
