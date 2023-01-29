@@ -2,6 +2,7 @@
 
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
+import { PathHelper } from "../../helper/PathHelper";
 import { CombinationDesItem } from "./CombinationDesItem";
 import { CombinationInfoDialog_UI } from "./CombinationInfoDialog_UI";
 
@@ -48,7 +49,7 @@ export class CombinationInfoDialog extends CombinationInfoDialog_UI<IProps> {
                 relationicon = relationicon || info.relationicon;
             }
         }
-        CSSHelper.setBgImageUrl(this.title_img_icon, `combination/icon/${relationicon}.png`);
+        PathHelper.setBgImageUrl(this.title_img_icon, `combination/icon/${relationicon}.png`);
         CSSHelper.setLocalText(this.lbl_des, p.itemname);
         CSSHelper.setLocalText(this.lbl_0, p.itemname + "_Des");
         CSSHelper.setLocalText(this.lbl_1, KV_DATA.lang_config.combination_rule.Des);

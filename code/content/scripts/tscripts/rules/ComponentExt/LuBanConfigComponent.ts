@@ -29,6 +29,7 @@ export class LuBanConfigComponent extends ET.Component {
         let obj: { [l: string]: any } = {};
         this.ClientSyncConfig.forEach((k, v) => {
             obj[k] = GFromJson(v);
+            // let _str2 = ToBase64(CompressZlib(v, { level: 9, strategy: "dynamic", }));
             let _str2 = ToBase64(CompressZlib(v));
             // 存到特定网表，一次一次的写数据，避免过大写不进去;
             NetTablesHelper.SetData(GameServiceConfig.ENetTables.sheetconfig, k, { _: _str2 })

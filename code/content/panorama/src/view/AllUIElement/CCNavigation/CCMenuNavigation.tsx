@@ -1,5 +1,6 @@
 import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
+import { PathHelper } from "../../../helper/PathHelper";
 
 import { CCImage } from "../CCImage/CCImage";
 import { CCPanel } from "../CCPanel/CCPanel";
@@ -38,7 +39,7 @@ export class CCMenuNavigation extends CCPanel<IMenuNavigationProps> {
 									}
 									this.setState({ select_name: this.state.select_name == sName ? "" : sName });
 								}} >
-								<CCImage id={`${sName}Icon`} className="LeftTopButtonIcon" backgroundImage={CSSHelper.getCustomImageUrl("icon/" + sName + ".png")} />
+								<CCImage id={`${sName}Icon`} className="LeftTopButtonIcon" backgroundImage={PathHelper.getCustomImageUrl("icon/" + sName + ".png")} />
 								<Label localizedText={"#lang_MenuButton_" + sName} />
 							</Button>
 						);

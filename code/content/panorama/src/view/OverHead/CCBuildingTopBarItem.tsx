@@ -1,5 +1,5 @@
 import React from "react";
-import { CSSHelper } from "../../helper/CSSHelper";
+import { PathHelper } from "../../helper/PathHelper";
 import { CCIcon_Star } from "../AllUIElement/CCIcons/CCIcon_Star";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCBuildingTopBarItem.less";
@@ -36,8 +36,8 @@ export class CCBuildingTopBarItem extends CCOverHeadBaseItem {
                     return <CCIcon_Star key={index + ""} type={BuildingComp.iStar > index ? "Filled" : "UnFilled"} />;
                 })}
             </CCPanel>
-            <CCPanel id="nameBg" flowChildren="right" backgroundImage={CSSHelper.getCustomImageUrl(`rarity/rare_${rare.toLowerCase()}.png`)}>
-                <CCPanel id="unitprop" backgroundImage={CSSHelper.getCustomImageUrl(`common/icon_prop_${BuildingComp.PrimaryAttribute}.png`)} />;
+            <CCPanel id="nameBg" flowChildren="right" backgroundImage={PathHelper.getCustomImageUrl(`rarity/rare_${rare.toLowerCase()}.png`)}>
+                <CCPanel id="unitprop" backgroundImage={PathHelper.getCustomImageUrl(`common/icon_prop_${BuildingComp.PrimaryAttribute}.png`)} />;
                 <Label id="unitname" localizedText={"#" + building!.ConfigID} />;
             </CCPanel>
             {

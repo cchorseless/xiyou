@@ -1,6 +1,6 @@
 /** Create By Editor*/
 import React from "react";
-import { CSSHelper } from "../../../helper/CSSHelper";
+import { PathHelper } from "../../../helper/PathHelper";
 
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCUnitSmallIcon.less";
@@ -29,7 +29,7 @@ export class CCUnitSmallIcon extends CCPanel<ICCUnitSmallIcon> {
         return (
             this.__root___isValid &&
             <Panel id="CC_UnitSmallIcon" ref={this.__root__}    {...this.initRootAttrs()}>
-                <CCPanel id="UnitIcon" backgroundImage={CSSHelper.getCustomImageUrl(`hero/hero_icon/${unit_name}.png`)} />
+                <CCPanel id="UnitIcon" backgroundImage={PathHelper.getCustomImageUrl(`hero/hero_icon/${unit_name}.png`)} />
                 {this.props.children}
                 {this.__root___childs}
             </Panel>

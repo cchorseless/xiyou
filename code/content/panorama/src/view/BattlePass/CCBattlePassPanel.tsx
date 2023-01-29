@@ -1,7 +1,7 @@
 
 import React from "react";
 import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
-import { CSSHelper } from "../../helper/CSSHelper";
+import { PathHelper } from "../../helper/PathHelper";
 
 import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
@@ -45,7 +45,7 @@ export class CCBattlePassPanel extends CCPanel<ICCBattlePassPanel> {
             <Panel id="CC_BattlePassPanel" className="CC_root" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPopUpDialog id="PanelBg" fullcontent={true} verticalAlign="top" marginTop="120px" onClose={() => this.closeThis()} >
                     <CCPanel id="PanelHeader" flowChildren="right">
-                        <CCImage id="PanelIcon" backgroundImage={CSSHelper.getCustomImageUrl("icon/" + sName + ".png")} />
+                        <CCImage id="PanelIcon" backgroundImage={PathHelper.getCustomImageUrl("icon/" + sName + ".png")} />
                         <CCLabel id="PanelName" localizedText={"#lang_MenuButton_" + sName} />
                         <CCPanel flowChildren="right" horizontalAlign="right" verticalAlign="center" marginRight={"20px"}>
                             <CCCoinAddPanel cointype="MetaStone" value={MetaStone} onaddcoin={() => this.addMetaStone()} />

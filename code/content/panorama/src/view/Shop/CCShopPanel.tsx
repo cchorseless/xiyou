@@ -2,6 +2,7 @@
 import React from "react";
 import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { PathHelper } from "../../helper/PathHelper";
 import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCMenuNavigation } from "../AllUIElement/CCNavigation/CCMenuNavigation";
@@ -45,16 +46,15 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
         const DataComp = this.GetStateEntity(GGameScene.Local.TCharacter.DataComp!)!;
         const MetaStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.MetaStone)
         const StarStone = DataComp.NumericComp!.GetAsInt(EEnum.EMoneyType.StarStone)
-        const selectindex = this.GetState<number>("selectindex") || 0;
+        const selectindex = this.GetState<number>("selectindex") || 1;
         const shopunits = GTShopUnit.GetGroupInstance(GGameScene.Local.BelongPlayerid).map((e) => { return this.GetStateEntity(e)! })
         shopunits.sort((a, b) => { return a.ConfigId - b.ConfigId })
-        const curshopunit = shopunits[selectindex];
-        const allsellitems = curshopunit.getAllSellItems();
+
         return (
             <Panel id="CC_ShopPanel" className="CC_root" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPopUpDialog id="PanelBg" fullcontent={true} verticalAlign="top" marginTop="120px" onClose={() => this.closeThis()} >
                     <CCPanel id="PanelHeader" flowChildren="right">
-                        <CCImage id="PanelIcon" backgroundImage={CSSHelper.getCustomImageUrl("icon/" + sName + ".png")} />
+                        <CCImage id="PanelIcon" backgroundImage={PathHelper.getCustomImageUrl("icon/" + sName + ".png")} />
                         <CCLabel id="PanelName" localizedText={"#lang_MenuButton_" + sName} />
                         <CCPanel flowChildren="right" horizontalAlign="right" verticalAlign="center" marginRight={"20px"}>
                             <CCCoinAddPanel cointype="MetaStone" value={MetaStone} onaddcoin={() => this.addMetaStone()} />
@@ -64,15 +64,23 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
                     <CCPanel id="PanelContent" flowChildren="right">
                         <CCVerticalTable marginTop={"20px"} list={shopunits.map(e => { return e.Config!.ShopName })}
                             onChange={(index: number, text: string) => { this.UpdateState({ selectindex: index }) }} />
-                        {
-                            <CCPanel flowChildren="right-wrap">
-                                {
-                                    allsellitems.map((e, index) => {
-                                        return <CCShopSellItem key={index + ""} entity={e} />
-                                    })
-                                }
-                            </CCPanel>
-                        }
+                        <CCPanel >
+                            {
+                                [...Array(shopunits.length)].map((_, _index) => {
+                                    const shopunit = shopunits[_index];
+                                    const allsellitems = shopunit.getAllSellItems();
+                                    return <CCPanel key={_index + ""}
+                                        className={CSSHelper.ClassMaker({ Hidden: selectindex !== _index + 1 })}
+                                        flowChildren="right-wrap" scroll={"y"}  >
+                                        {
+                                            allsellitems.map((e, index) => {
+                                                return <CCShopSellItem key={index + ""} entity={e} />
+                                            })
+                                        }
+                                    </CCPanel>
+                                })
+                            }
+                        </CCPanel>
                     </CCPanel>
                     {this.props.children}
                     {this.__root___childs}

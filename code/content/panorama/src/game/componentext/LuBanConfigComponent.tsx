@@ -2,6 +2,7 @@ import { Base64 } from 'js-base64';
 import { GameServiceConfig } from '../../../../scripts/tscripts/shared/GameServiceConfig';
 import { RefreshConfig } from '../../../../scripts/tscripts/shared/Gen/JsonConfig';
 import { ET } from "../../../../scripts/tscripts/shared/lib/Entity";
+import { FuncHelper } from '../../helper/FuncHelper';
 import { NetHelper } from '../../helper/NetHelper';
 
 
@@ -30,7 +31,8 @@ export class LuBanConfigComponent extends ET.Component {
                 const _config = NetHelper.GetTableValue(GameServiceConfig.ENetTables.sheetconfig, k) || {};
                 if (_config._) {
                     const _str = new zlib.Inflate(Base64.toUint8Array(_config._)).decompress() as any;
-                    let dataString = String.fromCharCode.apply(null, _str);
+                    let dataString = FuncHelper.Utf8ArrayToStr(_str);
+                    GLogHelper.print(dataString);
                     obj[k] = GFromJson(dataString);
                 }
             }

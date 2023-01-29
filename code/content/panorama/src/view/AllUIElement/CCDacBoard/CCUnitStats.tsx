@@ -1,5 +1,5 @@
 import React, { createRef } from "react";
-import { CSSHelper } from "../../../helper/CSSHelper";
+import { PathHelper } from "../../../helper/PathHelper";
 import { CCPanel } from "../CCPanel/CCPanel";
 
 
@@ -24,11 +24,11 @@ export class CCUnitStats extends CCPanel<ICCUnitStats>  {
         this.stragiint.current!.style.marginBottom = "0px";
         this.stragiint.current!.style.marginRight = "5px";
         let DamageIcon = this.stats.current!.FindChildTraverse("DamageIcon")!;
-        CSSHelper.setPanelBgImageUrl(DamageIcon, `custom_game/eom_design/ccunitstats/icon_props_damage.png`);
+        PathHelper.setPanelBgImageUrl(DamageIcon, `custom_game/eom_design/ccunitstats/icon_props_damage.png`);
         let armorIcon = this.stats.current!.FindChildTraverse("ArmorIcon")!;
-        CSSHelper.setPanelBgImageUrl(armorIcon, `custom_game/eom_design/ccunitstats/icon_props_armor.png`);
+        PathHelper.setPanelBgImageUrl(armorIcon, `custom_game/eom_design/ccunitstats/icon_props_armor.png`);
         let speedIcon = this.stats.current!.FindChildTraverse("MoveSpeedIcon")!;
-        CSSHelper.setPanelBgImageUrl(speedIcon, `custom_game/eom_design/ccunitstats/icon_props_speed.png`);
+        PathHelper.setPanelBgImageUrl(speedIcon, `custom_game/eom_design/ccunitstats/icon_props_speed.png`);
 
     }
 

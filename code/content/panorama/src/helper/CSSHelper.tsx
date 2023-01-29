@@ -945,13 +945,6 @@ export module CSSHelper {
     export function GetPanelData<T>(panel: Panel, key: string): T {
         return (panel.Data() as any)[key] as T;
     }
-    export function getCustomImageUrl(str: string) {
-        return `url("file://{images}/custom_game/${str}")`;
-    }
-    export function getItemImageUrl(str: string) {
-        return `url("file://{images}/items/${str}")`;
-    }
-
     export function getPanelSize(panel: Panel) {
         if (panel == null || !panel.IsValid()) {
             return [0, 0];
@@ -1017,24 +1010,6 @@ export module CSSHelper {
                 break;
         }
         (node.current.style.overflow as any) = style;
-    }
-    export function setBgImageUrl(node: React.RefObject<Panel>, str: string) {
-        if (node.current == null) {
-            return;
-        }
-        node.current.style.backgroundImage = `url("file://{images}/${str}")`;
-    }
-    export function setPanelBgImageUrl(panel: Panel, str: string) {
-        if (panel && !panel.IsValid()) {
-            return;
-        }
-        panel.style.backgroundImage = `url("file://{images}/${str}")`;
-    }
-    export function setImagePanelUrl(panel: ImagePanel, str: string) {
-        if (panel && !panel.IsValid()) {
-            return;
-        }
-        panel.SetImage(`file://{images}/${str}`);
     }
 
     /**

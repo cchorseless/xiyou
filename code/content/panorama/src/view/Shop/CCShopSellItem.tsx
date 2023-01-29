@@ -3,6 +3,7 @@ import React from "react";
 import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { TShopSellItem } from "../../../../scripts/tscripts/shared/service/shop/TShopSellItem";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCMainPanel } from "../MainPanel/CCMainPanel";
 import { CCShopItem } from "./CCShopItem";
@@ -66,7 +67,7 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
         return (
             <Panel className="CC_ShopSellItem" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 {/* 商品图 */}
-                <CCShopItem itemid={sellinfo.ItemConfigId} count={sellinfo.ItemCount} >
+                <CCShopItem itemname={sellinfo.ItemName} itemid={sellinfo.ItemConfigId} count={sellinfo.ItemCount} >
                     {/* 限购倒计时 */}
                     {end_time > 0 &&
                         <Countdown id="SaleCountingDown" className="HeadTag" endTime={Number(end_time) || 0} hittest={false}>
@@ -97,12 +98,12 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
                     {buttonID == "FreeBtn" && <Label localizedText="#DialogBox_Rcv" />}
                     {/* Moon */}
                     {buttonID == "MetaBtn" && <Panel id="MetaWithNum" hittest={false}>
-                        <Image />
+                        <CCIcon_CoinType cointype="MetaStone" />
                         <Label text={price} />
                     </Panel>}
                     {/* Star */}
                     {buttonID == "StarBtn" && <Panel id="StarWithNum" hittest={false}>
-                        <Image />
+                        <CCIcon_CoinType cointype="StarStone" />
                         <Label text={price} />
                     </Panel>}
                 </Button>

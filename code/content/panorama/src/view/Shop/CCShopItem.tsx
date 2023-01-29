@@ -1,13 +1,16 @@
 
-import React, { createRef, PureComponent } from "react";
+import React from "react";
 import { JsonConfigHelper } from "../../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { PathHelper } from "../../helper/PathHelper";
 import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import "./CCShopItem.less";
 
 interface ICCShopItem extends IItemInfo {
     isUnAvailable?: boolean;
+    itemname?: string;
+    itemicon?: string;
 }
 
 export class CCShopItem extends CCPanel<ICCShopItem> {
@@ -18,9 +21,11 @@ export class CCShopItem extends CCPanel<ICCShopItem> {
     render() {
         let config = JsonConfigHelper.GetRecordItemConfig(this.props.itemid);
         const num = this.props.count;
-        const picurl = CSSHelper.getItemImageUrl(config!.ItemIcon);
-        const itemname = $.Localize("#" + config!.ItemName);
+        GLogHelper.print(config!.ItemIcon, 1111)
+        const picurl = PathHelper.getCustomShopItemImageUrl((this.props.itemicon || config!.ItemIcon));
+        const itemname = $.Localize("#" + (this.props.itemname || config!.ItemName));
         const itemdes = $.Localize("#" + config!.ItemDes);
+
         return (
             this.__root___isValid &&
             <Panel ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
