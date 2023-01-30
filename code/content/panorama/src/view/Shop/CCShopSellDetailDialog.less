@@ -1,23 +1,25 @@
 .CC_ShopSellDetailDialog {
+    align: center center;
+
     #PopUpBg {
         width: 800px;
-        height: 520px;
+        height: 420px;
         padding: 7px;
 
         #ShopDetailDesc {
-            height: 290px;
+            height: 80px;
             width: 400px;
-            margin-left: 358px;
-            margin-top: 60px;
+            // margin-left: 358px;
+            // margin-top: 60px;
             color: #FFF;
             font-size: 20px;
             overflow: squish scroll;
         }
 
         #NumberEntry {
-            align: center bottom;
+            align: center top;
             // margin-right: 150px;
-            margin-bottom: 88px;
+            margin-top: 88px;
             flow-children: right;
 
             #NumberAdd,
@@ -37,11 +39,11 @@
             }
 
             #NumberAdd {
-                background-image: url("file://{images}/custom_game/hud/btn_add.png");
+                background-image: url("file://{images}/custom_game/shop/btn_add.png");
             }
 
             #NumberReduce {
-                background-image: url("file://{images}/custom_game/hud/btn_reduce.png");
+                background-image: url("file://{images}/custom_game/shop/btn_reduce.png");
             }
 
             TextEntry {
@@ -54,11 +56,11 @@
         .BuyButton {
             width: 180px;
             height: 51px;
-            align: center bottom;
+            align: center top;
             // margin-right: 160px;
-            margin-bottom: 24px;
+            margin-top: 20px;
             flow-children: right;
-            background-image: url("file://{images}/custom_game/hud/btn_gold.png");
+            background-image: url("file://{images}/custom_game/shop/btn_free.png");
             background-repeat: no-repeat;
             background-size: 100% 100%;
 
@@ -76,15 +78,15 @@
             }
 
             &.RMBBtn {
-                background-image: url("file://{images}/custom_game/hud/btn_purple.png");
+                background-image: url("file://{images}/custom_game/shop/btn_money.png");
             }
 
             &.FreeBtn {
-                background-image: url("file://{images}/custom_game/hud_shop/combine_btn.png");
+                background-image: url("file://{images}/custom_game/shop/btn_free.png");
             }
 
-            &.MoonBtn {
-                background-image: url("file://{images}/custom_game/hud/btn_gold.png");
+            &.MetaBtn {
+                background-image: url("file://{images}/custom_game/shop/btn_meta.png");
 
                 &.PriceNotEnought {
                     Label {
@@ -96,14 +98,6 @@
                     align: center center;
                     flow-children: right;
 
-                    Image {
-                        width: 21px;
-                        height: 21px;
-                        background-image: url("file://{images}/custom_game/icons/moon.png");
-                        background-repeat: no-repeat;
-                        background-size: 100% 100%;
-                    }
-
                     Label {
                         margin-left: 6px;
                     }
@@ -114,14 +108,6 @@
                 #StarWithNum {
                     align: center center;
                     flow-children: right;
-
-                    Image {
-                        width: 21px;
-                        height: 21px;
-                        background-image: url("file://{images}/custom_game/icons/star.png");
-                        background-repeat: no-repeat;
-                        background-size: 100% 100%;
-                    }
 
                     Label {
                         margin-left: 6px;

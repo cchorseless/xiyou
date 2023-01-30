@@ -72,7 +72,7 @@ export module ResHelper {
         /**有效时间 */
         validtime?: number;
     }
-
+    @GReloadable
     export class ParticleInfo implements IParticleInfo {
         /**资源路径 */
         resPath: string;

@@ -5,7 +5,6 @@
  * @LastEditTime: 2021-04-30 15:35:55
  * @Description: file content
  */
-import { GameFunc } from "../GameFunc"
 
 interface triggerInfo {
     // 激活
@@ -14,7 +13,7 @@ interface triggerInfo {
     caller: CDOTA_BaseNPC
 }
 
-
+@GReloadable
 export class TriggerHelper {
     /**
      * 打印对象

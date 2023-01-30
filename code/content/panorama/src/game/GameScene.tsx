@@ -1,4 +1,4 @@
-import { ET } from "../../../scripts/tscripts/shared/lib/Entity";
+import { ET, ETGameSceneRoot } from "../../../scripts/tscripts/shared/lib/Entity";
 import { GameEventSystemComponent } from "./system/GameEventSystemComponent";
 import { GameServiceSystemComponent } from "./system/GameStateSystemComponent";
 import { PublicBagSystemComponent } from "./system/PublicBagSystemComponent";
@@ -11,7 +11,7 @@ export class GameScene {
 
     /**组件 */
     static get Scene() {
-        return ET.GameSceneRoot.GetInstance();
+        return ETGameSceneRoot.GetInstance();
     }
     static readonly Local: IPlayerEntityRoot;
 

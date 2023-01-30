@@ -32,7 +32,6 @@ export class LuBanConfigComponent extends ET.Component {
                 if (_config._) {
                     const _str = new zlib.Inflate(Base64.toUint8Array(_config._)).decompress() as any;
                     let dataString = FuncHelper.Utf8ArrayToStr(_str);
-                    GLogHelper.print(dataString);
                     obj[k] = GFromJson(dataString);
                 }
             }

@@ -77,13 +77,13 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
         return (
             <Panel ref={this.__root__} id="CC_Hero_Select" hittest={false} {...this.initRootAttrs()}>
                 <CCMenuDashBoardBackAndSetting />
-                <Label id="TimerTitle" localizedText="#TimerTitle" />
+                <Label id="TimerTitle" localizedText="#lang_TimerTitle" />
                 <Panel id="Timer" hittest={false} ref={this.TimerRef}>
                     <CCImageNumber id="RoundTime" type="4" value={Math.floor(iTimeLeft)} />
                 </Panel>
                 {/* 左边信使选择 */}
                 <Panel id="PlayerCourier" hittest={false} >
-                    <Label id="PlayerCourierTitle" localizedText="#CourierSelectionTitle" />
+                    <Label id="PlayerCourierTitle" localizedText="#lang_CourierSelectionTitle" />
                     {/* 第一次点击列表，列表总是会自动回到最顶上，SetFocus可以解决，虽然我不知道为什么能解决 */}
                     <CCPanel id="PlayerCourierList" onload={p => p.SetFocus()} scroll="y" >
                         {
@@ -118,7 +118,7 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
                     }
                 </Panel>
                 <Panel id="Difficulties" hittest={false}>
-                    <Label id="DifficultiesTitle" localizedText="#Select_Difficulties" />
+                    <Label id="DifficultiesTitle" localizedText="#lang_Select_Difficulties" />
                     {[...Array(GameServiceConfig.DIFFICULTY_LAST + 1)].map(
                         (_, index) => {
                             let charpter = index + 1;

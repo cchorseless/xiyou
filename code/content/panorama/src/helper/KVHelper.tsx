@@ -1,5 +1,4 @@
 
-import { FuncHelper } from "./FuncHelper";
 
 export module KVHelper {
 
@@ -72,7 +71,9 @@ export module KVHelper {
     export function KVData() {
         return (GameUI.CustomUIConfig() as any).KVDATA as KvAllInterface
     }
-
+    export function KVLang() {
+        return KVData().lang_config;
+    }
     export function KVAbilitys() {
         return (GameUI.CustomUIConfig() as any).KV_Abilitys as KV_AllAbilitys
     }

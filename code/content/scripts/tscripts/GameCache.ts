@@ -1,6 +1,7 @@
 import { BattleHelper } from "./helper/BattleHelper";
 import { BaseModifier } from "./npc/entityPlus/Base_Plus";
 /**全局缓存变量 */
+@GReloadable
 export class GameCache {
     /**攻击伤害记录 */
     static readonly RECORD_SYSTEM_DUMMY: {
@@ -23,7 +24,8 @@ export class GameCache {
     /**所有报错信息 */
     static readonly allErrorInfo: { [key: string]: any } = {};
 
-    static Init() { }
+    static Init() {
+    }
 
 }
 

@@ -1,7 +1,7 @@
 import { AbilityEntityRoot } from "../../rules/Components/Ability/AbilityEntityRoot";
 import { ERoundBoard } from "../../rules/Components/Round/ERoundBoard";
 import { BaseAbility_Plus } from "../entityPlus/BaseAbility_Plus";
-
+@GReloadable
 export class ActiveRootAbility extends BaseAbility_Plus {
     ETRoot: IAbilityEntityRoot = null;
     constructor() {

@@ -15,6 +15,13 @@ export class GameServiceSystemComponent extends GameServiceSystem {
 
     }
 
+    onDebugReload(): void {
+        GEventHelper.RemoveCaller(this);
+        EventHelper.removeCallerProtocolEvent(this);
+        this.addEvent();
+    }
+
+
     StartGameModeSelection() {
         this.BeforeGameEndTime = GameRules.GetGameTime() + GameServiceSystemComponent.SelectionTime;
         const Allplayerids = GPlayerEntityRoot.GetAllPlayerid();
@@ -138,9 +145,12 @@ export class GameServiceSystemComponent extends GameServiceSystem {
         }));
 
         const hander = GHandler.create(this, async (e: JS_TO_LUA_DATA) => {
+            GLogHelper.print(2222222);
             const playeroot = GGameScene.GetPlayer(e.PlayerID);
             if (playeroot) {
                 e.data = await playeroot.PlayerHttpComp().PostAsync(e.protocol, e.data);
+                GLogHelper.print(e.data);
+                GLogHelper.print(22222222);
                 if (e.isawait && e.sendClientCB) {
                     e.sendClientCB()
                 }
@@ -245,6 +255,6 @@ declare global {
      */
     var GGameServiceSystem: typeof GameServiceSystemComponent;
 }
-if (_G.GGameServiceSystem == undefined) {
+if (_G.GGameServiceSystem == null) {
     _G.GGameServiceSystem = GameServiceSystemComponent;
 }

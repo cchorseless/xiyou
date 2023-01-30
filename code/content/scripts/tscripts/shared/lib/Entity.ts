@@ -45,6 +45,8 @@ export module ET {
         onSerializeToEntity?(): void;
         /**重载组件 */
         onReload?(): void;
+        /**调试重载脚本 */
+        onDebugReload?(): void;
         /**销毁前 */
         onDestroy?(): void;
         /**获取玩家id */
@@ -55,106 +57,6 @@ export module ET {
     export interface IEntityRoot {
         ETRoot?: EntityRoot;
         SerializeDomainProps?: string[];
-    }
-
-    export class EntitySystem {
-        private static AllEntity: { [instanceId: string]: Entity } = {};
-        private static AllTypeEntity: { [typename: string]: Entity[] } = {};
-        static RegisterSystem(entity: Entity, b: boolean) {
-            const typekey = entity.GetType();
-            if (b) {
-                if (entity.InstanceId == null || EntitySystem.AllEntity[entity.InstanceId] != null) {
-                    GLogHelper.error("RegisterSystem error");
-                }
-                EntitySystem.AllEntity[entity.InstanceId] = entity;
-                EntitySystem.AllTypeEntity[typekey] = EntitySystem.AllTypeEntity[typekey] || [];
-                EntitySystem.AllTypeEntity[typekey].push(entity);
-                if (entity.IsComponent) {
-                    let comp = entity as Component;
-                    if (comp.IsSingleton) {
-                        (GGetRegClass(comp.constructor.name) as typeof SingletonComponent)._instance_ = comp;
-                    }
-                }
-            } else {
-                if (entity.InstanceId == null || EntitySystem.AllEntity[entity.InstanceId] == null) {
-                    GLogHelper.error("UnRegisterSystem error");
-                }
-                delete EntitySystem.AllEntity[entity.InstanceId];
-                if (EntitySystem.AllTypeEntity[typekey]) {
-                    const typelist = EntitySystem.AllTypeEntity[typekey];
-                    if (typelist) {
-                        const index = typelist.indexOf(entity);
-                        if (index > -1) {
-                            typelist.splice(index, 1)
-                        }
-                    }
-                }
-                if (entity.IsComponent) {
-                    let comp = entity as Component;
-                    if (comp.IsSingleton) {
-                        (GGetRegClass(comp.constructor.name) as typeof SingletonComponent)._instance_ = null as any;
-                    }
-                }
-            }
-
-        }
-
-        static GetEntity(instanceId: string) {
-            return EntitySystem.AllEntity[instanceId];
-        }
-        /**
-        * 获取一个单例
-        * @returns
-        */
-        public static GetInstance<T extends typeof Entity>(typename: string, playerid: PlayerID): InstanceType<T> {
-            const typeList: Entity[] = [];
-            let allTypes: Entity[] = (EntitySystem.AllTypeEntity[typename] || []);
-            for (let instance of allTypes) {
-                if (instance.BelongPlayerid == playerid) {
-                    typeList.push(instance)
-                }
-            }
-            if (typeList.length !== 1 || typeList[0].IsDisposed()) {
-                return null as InstanceType<T>;
-            }
-            return typeList[0] as InstanceType<T>;
-        }
-
-        /**
-        * 获取一组
-        * @returns
-        */
-        public static GetInstances<T extends typeof Entity>(typename: string, playerid: PlayerID): InstanceType<T>[] {
-            const typeList: Entity[] = [];
-            let allTypes: Entity[] = (EntitySystem.AllTypeEntity[typename] || []);
-            for (let instance of allTypes) {
-                if (instance.BelongPlayerid == playerid) {
-                    typeList.push(instance)
-                }
-            }
-            if (typeList.length == 0) {
-                GLogHelper.error(typename + " is not a Muti instance");
-            }
-            return typeList as InstanceType<T>[];
-        }
-
-        public static GetAllInstances<T extends typeof Entity>(typename: string): InstanceType<T>[] {
-            const typeList: Entity[] = (EntitySystem.AllTypeEntity[typename] || []);
-            let rlist: InstanceType<T>[] = [];
-            rlist = rlist.concat(typeList as any[]);
-            return rlist;
-        }
-
-        static Awake(entity: Entity, ...args: any[]) {
-            entity.onAwake && entity.onAwake(...args);
-        }
-
-        static SerializeToEntity(entity: Entity) {
-            entity.onSerializeToEntity && entity.onSerializeToEntity();
-        }
-        static Destroy(entity: Entity) {
-            entity.onDestroy && entity.onDestroy();
-        }
     }
 
     export class EntityRef<T>{
@@ -190,8 +92,9 @@ export module ET {
         onSerializeToEntity?(): void;
         /**初始化 */
         onAwake?(...args: any[]): void;
-        /**重载组件 */
+        /**序列化重载组件 */
         onReload?(): void;
+        onDebugReload?(): void;
         onRemove?(): void;
         onDestroy?(): void;
         onGetBelongPlayerid?(): PlayerID;
@@ -209,6 +112,7 @@ export module ET {
             // return v.Ref;
         }
         private _Ref: EntityRef<this>;
+
         public Ref(v: boolean = false) {
             if (!this._Ref || v) {
                 this._Ref = new EntityRef(this);
@@ -256,7 +160,7 @@ export module ET {
          * @returns
          */
         public static GetOneInstance<T extends typeof Entity>(this: T, playerid: PlayerID): InstanceType<T> {
-            return EntitySystem.GetInstance(this.name, playerid)
+            return ETEntitySystem.GetInstance(this.name, playerid)
         }
 
         /**
@@ -264,11 +168,11 @@ export module ET {
          * @returns
          */
         public static GetGroupInstance<T extends typeof Entity>(this: T, playerid: PlayerID): InstanceType<T>[] {
-            return EntitySystem.GetInstances(this.name, playerid)
+            return ETEntitySystem.GetInstances(this.name, playerid)
         }
 
         public static GetAllInstance<T extends typeof Entity>(this: T): InstanceType<T>[] {
-            return EntitySystem.GetAllInstances(this.name)
+            return ETEntitySystem.GetAllInstances(this.name)
         }
 
         public toJsonPartObject(props: string[]) {
@@ -421,7 +325,7 @@ export module ET {
             }
         }
         static FromJson(json: IEntityJson, belongPlayerid = -1) {
-            let entity = EntitySystem.GetEntity(json._id + json._t);
+            let entity = ETEntitySystem.GetEntity(json._id + json._t);
             if (entity != null) {
                 entity.updateFromJson(json);
                 if (entity.onReload) {
@@ -434,23 +338,23 @@ export module ET {
             if (type == null) {
                 GLogHelper.error("cant find class" + json._t);
             }
-            entity = EntitySystem.GetEntity(json._id + json._t);
+            entity = ETEntitySystem.GetEntity(json._id + json._t);
             if (entity == null) {
                 entity = Entity.Create(type);
                 (entity.Id as any) = json._id;
                 if (belongPlayerid > -1) {
                     (entity.BelongPlayerid as any) = belongPlayerid;
                 }
-                entity.setDomain(GameSceneRoot.GetInstance());
+                entity.setDomain(ETGameSceneRoot.GetInstance());
             }
             // 这里先创建注册然后SerializeToEntity，所以getinstance 比 getcomponent 更早拿到实体
             entity.updateFromJson(json);
-            EntitySystem.SerializeToEntity(entity);
+            ETEntitySystem.SerializeToEntity(entity);
             return entity;
         }
 
         static UpdateFromJson(json: IEntityJson) {
-            let entity = EntitySystem.GetEntity(json._id + json._t);
+            let entity = ETEntitySystem.GetEntity(json._id + json._t);
             if (entity == null) {
                 GLogHelper.error("cant find entity to update");
             }
@@ -475,7 +379,7 @@ export module ET {
                 return;
             }
             (this.IsRegister as any) = value;
-            EntitySystem.RegisterSystem(this, value);
+            ETEntitySystem.RegisterSystem(this, value);
         }
 
         protected setParent(value: Entity) {
@@ -611,7 +515,7 @@ export module ET {
             }
 
             // 触发Destroy事件
-            EntitySystem.Destroy(this);
+            ETEntitySystem.Destroy(this);
 
             (this.Domain as any) = null;
 
@@ -743,7 +647,7 @@ export module ET {
             (component.Id as any) = this.Id;
             component.setParent(this);
             args = args || [];
-            EntitySystem.Awake(component, ...args);
+            ETEntitySystem.Awake(component, ...args);
 
             return component;
         }
@@ -757,7 +661,7 @@ export module ET {
             let component = Entity.Create(type);
             component.setParent(this);
             args = args || [];
-            EntitySystem.Awake(component, ...args);
+            ETEntitySystem.Awake(component, ...args);
             return component;
         }
 
@@ -766,7 +670,7 @@ export module ET {
             (component.Id as any) = id;
             component.setParent(this);
             args = args || [];
-            EntitySystem.Awake(component, ...args);
+            ETEntitySystem.Awake(component, ...args);
             return component;
         }
     }
@@ -831,9 +735,9 @@ export module ET {
                 etroot.ETRoot = this;
                 if (this.PreAwakeArgs) {
                     for (let k in this.PreAwakeArgs) {
-                        let unawake = EntitySystem.GetEntity(k);
+                        let unawake = ETEntitySystem.GetEntity(k);
                         if (unawake != null) {
-                            EntitySystem.Awake(unawake, ...this.PreAwakeArgs[k]);
+                            ETEntitySystem.Awake(unawake, ...this.PreAwakeArgs[k]);
                         }
                     }
                 }
@@ -954,24 +858,134 @@ export module ET {
         }
     }
 
-    export class GameSceneRoot extends EntityRoot {
-        private static Instance: GameSceneRoot;
-        ETRoot?: EntityRoot | undefined;
-        constructor() {
-            super();
-            (this.Id as any) = GGenerateUUID();
-            (this.Parent as any) = this;
-            this.ETRoot = this;
-            this.setDomain(this);
-        }
-        static GetInstance() {
-            if (GameSceneRoot.Instance == null) {
-                GameSceneRoot.Instance = new GameSceneRoot();
+}
+@GReloadable
+export class ETEntitySystem {
+    public static readonly AllEntity: { [instanceId: string]: ET.Entity } = {};
+    public static readonly AllTypeEntity: { [typename: string]: ET.Entity[] } = {};
+    static DebugReload() {
+        for (let instanceId in this.AllEntity) {
+            let instance = this.AllEntity[instanceId];
+            if (instance && instance.onDebugReload) {
+                instance.onDebugReload();
+                GLogHelper.print("DebugReload:" + instanceId);
             }
-            return GameSceneRoot.Instance;
         }
-        onDestroy(): void {
-            (GameSceneRoot.Instance as any) = null
+    }
+    static RegisterSystem(entity: ET.Entity, b: boolean) {
+        const typekey = entity.GetType();
+        if (b) {
+            if (entity.InstanceId == null || this.AllEntity[entity.InstanceId] != null) {
+                GLogHelper.error("RegisterSystem error");
+            }
+            this.AllEntity[entity.InstanceId] = entity;
+            this.AllTypeEntity[typekey] = this.AllTypeEntity[typekey] || [];
+            this.AllTypeEntity[typekey].push(entity);
+            if (entity.IsComponent) {
+                let comp = entity as ET.Component;
+                if (comp.IsSingleton) {
+                    (GGetRegClass(comp.constructor.name) as typeof ET.SingletonComponent)._instance_ = comp;
+                }
+            }
+        } else {
+            if (entity.InstanceId == null || this.AllEntity[entity.InstanceId] == null) {
+                GLogHelper.error("UnRegisterSystem error");
+            }
+            delete this.AllEntity[entity.InstanceId];
+            if (this.AllTypeEntity[typekey]) {
+                const typelist = this.AllTypeEntity[typekey];
+                if (typelist) {
+                    const index = typelist.indexOf(entity);
+                    if (index > -1) {
+                        typelist.splice(index, 1)
+                    }
+                }
+            }
+            if (entity.IsComponent) {
+                let comp = entity as ET.Component;
+                if (comp.IsSingleton) {
+                    (GGetRegClass(comp.constructor.name) as typeof ET.SingletonComponent)._instance_ = null as any;
+                }
+            }
         }
+    }
+
+    static GetEntity(instanceId: string) {
+        return this.AllEntity[instanceId];
+    }
+    /**
+    * 获取一个单例
+    * @returns
+    */
+    public static GetInstance<T extends typeof ET.Entity>(typename: string, playerid: PlayerID): InstanceType<T> {
+        const typeList: ET.Entity[] = [];
+        let allTypes: ET.Entity[] = (this.AllTypeEntity[typename] || []);
+        for (let instance of allTypes) {
+            if (instance.BelongPlayerid == playerid) {
+                typeList.push(instance)
+            }
+        }
+        if (typeList.length !== 1 || typeList[0].IsDisposed()) {
+            return null as InstanceType<T>;
+        }
+        return typeList[0] as InstanceType<T>;
+    }
+
+    /**
+    * 获取一组
+    * @returns
+    */
+    public static GetInstances<T extends typeof ET.Entity>(typename: string, playerid: PlayerID): InstanceType<T>[] {
+        const typeList: ET.Entity[] = [];
+        let allTypes: ET.Entity[] = (this.AllTypeEntity[typename] || []);
+        for (let instance of allTypes) {
+            if (instance.BelongPlayerid == playerid) {
+                typeList.push(instance)
+            }
+        }
+        if (typeList.length == 0) {
+            GLogHelper.error(typename + " is not a Muti instance");
+        }
+        return typeList as InstanceType<T>[];
+    }
+
+    public static GetAllInstances<T extends typeof ET.Entity>(typename: string): InstanceType<T>[] {
+        const typeList: ET.Entity[] = (this.AllTypeEntity[typename] || []);
+        let rlist: InstanceType<T>[] = [];
+        rlist = rlist.concat(typeList as any[]);
+        return rlist;
+    }
+
+    static Awake(entity: ET.Entity, ...args: any[]) {
+        entity.onAwake && entity.onAwake(...args);
+    }
+
+    static SerializeToEntity(entity: ET.Entity) {
+        entity.onSerializeToEntity && entity.onSerializeToEntity();
+    }
+    static Destroy(entity: ET.Entity) {
+        entity.onDestroy && entity.onDestroy();
+    }
+}
+
+@GReloadable
+export class ETGameSceneRoot extends ET.EntityRoot {
+    public static Instance: ETGameSceneRoot;
+    ETRoot?: ET.EntityRoot | undefined;
+    constructor() {
+        super();
+        (this.Id as any) = GGenerateUUID();
+        (this.Parent as any) = this;
+        this.ETRoot = this;
+        this.setDomain(this);
+    }
+    static GetInstance() {
+        if (ETGameSceneRoot.Instance == null) {
+            ETGameSceneRoot.Instance = new ETGameSceneRoot();
+        }
+        return ETGameSceneRoot.Instance;
+    }
+    onDestroy(): void {
+        (ETGameSceneRoot.Instance as any) = null
     }
 }

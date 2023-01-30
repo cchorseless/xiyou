@@ -19,9 +19,8 @@ export class CCShopItem extends CCPanel<ICCShopItem> {
     }
 
     render() {
-        let config = JsonConfigHelper.GetRecordItemConfig(this.props.itemid);
+        let config = JsonConfigHelper.GetRecordItemConfig(this.props.itemid) || {} as any;
         const num = this.props.count;
-        GLogHelper.print(config!.ItemIcon, 1111)
         const picurl = PathHelper.getCustomShopItemImageUrl((this.props.itemicon || config!.ItemIcon));
         const itemname = $.Localize("#" + (this.props.itemname || config!.ItemName));
         const itemdes = $.Localize("#" + config!.ItemDes);

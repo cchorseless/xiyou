@@ -62,7 +62,7 @@ export class CCShopPanel extends CCPanel<ICCShopPanel> {
                         </CCPanel>
                     </CCPanel>
                     <CCPanel id="PanelContent" flowChildren="right">
-                        <CCVerticalTable marginTop={"20px"} list={shopunits.map(e => { return e.Config!.ShopName })}
+                        <CCVerticalTable marginTop={"20px"} list={shopunits.map(e => { return $.Localize("#" + e.Config!.ShopName) })}
                             onChange={(index: number, text: string) => { this.UpdateState({ selectindex: index }) }} />
                         <CCPanel >
                             {

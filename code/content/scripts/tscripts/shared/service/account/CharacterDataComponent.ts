@@ -1,5 +1,5 @@
 import { GameProtocol } from "../../GameProtocol";
-import { ET, serializeETProps } from "../../lib/Entity";
+import { ET, ETEntitySystem, serializeETProps } from "../../lib/Entity";
 import { GEventHelper } from "../../lib/GEventHelper";
 import { NumericComponent } from "../common/NumericComponent";
 import { CharacterInGameDataComponent } from "./CharacterInGameDataComponent";
@@ -8,7 +8,7 @@ import { CharacterInGameDataComponent } from "./CharacterInGameDataComponent";
 @GReloadable
 export class CharacterDataComponent extends ET.Component {
     onGetBelongPlayerid() {
-        let character = ET.EntitySystem.GetEntity(this.Id + "TCharacter");
+        let character = ETEntitySystem.GetEntity(this.Id + "TCharacter");
         if (character != null) {
             return character.BelongPlayerid;
         }

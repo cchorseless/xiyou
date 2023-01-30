@@ -19,7 +19,7 @@ import { PlayerDataComponent } from "./PlayerDataComponent";
 import { PlayerHttpComponent } from "./PlayerHttpComponent";
 import { PlayerScene } from "./PlayerScene";
 
-
+@GReloadable
 export class PlayerSystem extends ET.EntityRoot {
     static readonly HeroSpawnPoint: Vector[] = [];
     static Init() {

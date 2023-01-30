@@ -1,4 +1,4 @@
-import { ET, serializeETProps } from "../../lib/Entity";
+import { ET, ETEntitySystem, serializeETProps } from "../../lib/Entity";
 import { TServerZone } from "../serverzone/TServerZone";
 
 
@@ -9,7 +9,7 @@ export class TGameRecordItem extends ET.Entity {
     public Players: string[];
 
     onSerializeToEntity() {
-        let serverzone = ET.EntitySystem.GetEntity(this.Id + "TServerZone") as TServerZone;
+        let serverzone = ETEntitySystem.GetEntity(this.Id + "TServerZone") as TServerZone;
         if (serverzone != null && serverzone.GameRecordComp != null) {
             serverzone.GameRecordComp.addRecord(this);
         }

@@ -1,10 +1,8 @@
-import React, { } from "react";
+import React from "react";
+import { ETEntitySystem } from "../../../../scripts/tscripts/shared/lib/Entity";
 import { ECombination } from "../../game/components/Combination/ECombination";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { KVHelper } from "../../helper/KVHelper";
-import { LogHelper } from "../../helper/LogHelper";
-import { ET } from "../../../../scripts/tscripts/shared/lib/Entity";
-import { CCImage } from "../AllUIElement/CCImage/CCImage";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCCombinationIcon } from "./CCCombinationIcon";
 import { CCCombinationInfoDialog } from "./CCCombinationInfoDialog";
@@ -21,7 +19,7 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
         const InstanceIdList: string[] = this.props.InstanceIdList;
         let r = true;
         InstanceIdList.forEach(entityid => {
-            let entity = ET.EntitySystem.GetEntity(entityid) as ECombination;
+            let entity = ETEntitySystem.GetEntity(entityid) as ECombination;
             if (entity == null) {
                 r = false;
             }
@@ -32,7 +30,7 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
     onInitUI() {
         let InstanceIdList: string[] = this.props.InstanceIdList;
         InstanceIdList.forEach(entityid => {
-            let entity = ET.EntitySystem.GetEntity(entityid) as ECombination;
+            let entity = ETEntitySystem.GetEntity(entityid) as ECombination;
             entity?.RegRef(this);
         })
     }
@@ -54,7 +52,7 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
         if (!this.__root___isValid) {
             return this.defaultRender("CC_CombinationSingleBottomItem");
         }
-        const entityList = this.props.InstanceIdList.map((entityId, index) => { return this.GetStateEntity(ET.EntitySystem.GetEntity(entityId) as ECombination) })
+        const entityList = this.props.InstanceIdList.map((entityId, index) => { return this.GetStateEntity(ETEntitySystem.GetEntity(entityId) as ECombination) })
         const lastentity = entityList[entityList.length - 1]!
         if (lastentity.IsEmpty()) {
             return this.defaultRender("CC_CombinationSingleBottomItem");

@@ -71,15 +71,15 @@ export class CCLoading extends CCPanel<NodePropsData> {
                 <CCIntervalTips id="LoadingCustomTip" tick={5} tipQueue={tips} />
                 <Panel id="EOM" hittest={false}>
                     <Image id="EOM_Logo" />
-                    <Label localizedText="#EOMPublish" />
+                    <Label localizedText="#lang_FishManPublish" />
                 </Panel>
-                <Label id="BugEmail" localizedText="#BugEmail" />
+                <Label id="BugEmail" localizedText="#lang_BugEmail" />
                 <Panel id="QQGroups" hittest={false}>
                     <CCLinkLabel text="点击加入秘境奇兵玩家一群" url="https://jq.qq.com/?_wv=1027&k=HehiYlTP" />
                     <CCLinkLabel text="点击加入秘境奇兵玩家二群" url="https://jq.qq.com/?_wv=1027&k=RChzYOC9" />
                 </Panel>
                 <Panel id="Discord" hittest={false}>
-                    <CCLinkLabel text={$.Localize("#DiscordLink")} url="https://discord.gg/9GMEaq3re8" />
+                    <CCLinkLabel text={$.Localize("#lang_DiscordLink")} url="https://discord.gg/9GMEaq3re8" />
                     <Image id="DiscordImg" />
                 </Panel>
                 {/* <Panel id="DouyuActivity" hittest={false}>

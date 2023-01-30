@@ -112,6 +112,20 @@ export module CCShare {
         return _G._GReloadClassTypeCache[className];
     }
 
+    export function GetReloadCache<T>(key: string, defaultv: T): T {
+        //#region LUA
+        if (_CODE_IN_LUA_) {
+            if (_G._GReloadCacheData[key] == null) {
+                _G._GReloadCacheData[key] = defaultv;
+            }
+            return _G._GReloadCacheData[key];
+        }
+        //#endregion LUA
+        return defaultv;
+    }
+
+
+
     export function GetRegClass<T>(className: string, ignoreExt: boolean = false) {
         let r;
         if (ignoreExt) { r = _G._GReloadClassTypeCache[className]; }
@@ -307,7 +321,9 @@ declare global {
     var GHandler: typeof CCShare.CCHandler;
     type IGHandler<R = any> = CCShare.CCHandler<R>;
     var _GReloadClassTypeCache: Record<string, any>;
+    var _GReloadCacheData: Record<string, any>;
     var GReloadable: typeof CCShare.Reloadable;
+    var GGetReloadCache: typeof CCShare.GetReloadCache;
     var GGetRegClass: typeof CCShare.GetRegClass;
     var GFromJson: typeof CCShare.FromJson;
     var GToJson: typeof CCShare.ToJson;
@@ -324,7 +340,9 @@ if (_CODE_IN_JS_) {
 if (_G.GHandler == null) {
     _G.GHandler = CCShare.CCHandler;
     _G._GReloadClassTypeCache = {};
+    _G._GReloadCacheData = {};
     _G.GReloadable = CCShare.Reloadable;
+    _G.GGetReloadCache = CCShare.GetReloadCache;
     _G.GGetRegClass = CCShare.GetRegClass;
     _G.GFromJson = CCShare.FromJson;
     _G.GToJson = CCShare.ToJson;

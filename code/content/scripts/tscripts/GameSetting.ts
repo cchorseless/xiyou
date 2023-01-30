@@ -1,6 +1,6 @@
 import { GameFunc } from "./GameFunc";
 import { GameServiceConfig } from "./shared/GameServiceConfig";
-
+@GReloadable
 export class GameSetting {
     /**版本号 */
     public static readonly GAME_VERSION: string = "1.0.0";

@@ -50,7 +50,7 @@ export class CCPlayerInTeamItem extends CCPanel<ICCPlayerInTeamItem> {
                 <Panel id="PlayerDifficulty" hittest={false} >
                     {
                         (iDifficulty == GameServiceConfig.EDifficultyChapter.endless) ?
-                            <Label id="PlayerDifficultyEndless" localizedText="#Difficult_999" /> :
+                            <Label id="PlayerDifficultyEndless" localizedText="#lang_Difficult_999" /> :
                             <Panel id="PlayerDifficultyNum" />
                     }
                 </Panel>
@@ -58,14 +58,14 @@ export class CCPlayerInTeamItem extends CCPanel<ICCPlayerInTeamItem> {
                     {
                         tGameSelection.IsReady ?
                             <Panel id="PlayerReady" /> :
-                            <Label id="PlayerNotReady" localizedText="#PlayerNotReady" />
+                            <Label id="PlayerNotReady" localizedText="#lang_PlayerNotReady" />
                     }
                 </Panel>
                 <CCPlayerCard iPlayerID={iPlayerID} />
                 <CCRankEmblem id="PlayerEndlessRankEmblem" rank={tGameSelection.EndlessRank} />
                 {tGameSelection.bNewPlayer &&
                     <Panel id="NewPlayerMain">
-                        <Label id="NewPlayer_lbl" localizedText="#Help_new_player" />
+                        <Label id="NewPlayer_lbl" localizedText="#lang_Help_new_player" />
                         <Image id="NewPlayer_Img" />
                     </Panel>}
             </Panel>

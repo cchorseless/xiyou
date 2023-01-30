@@ -1,4 +1,4 @@
-import { ET } from "../../../scripts/tscripts/shared/lib/Entity";
+import { ET, ETEntitySystem } from "../../../scripts/tscripts/shared/lib/Entity";
 
 export class BaseEntityRoot extends ET.EntityRoot {
     readonly ConfigID: string;
@@ -17,7 +17,7 @@ export class BaseEntityRoot extends ET.EntityRoot {
     static GetEntity<T extends typeof BaseEntityRoot>(this: T, entityid: string | EntityIndex | number) {
         const instanceID = BaseEntityRoot.AllEntity[entityid + ""];
         if (instanceID) {
-            const entity = ET.EntitySystem.GetEntity(instanceID) as InstanceType<T>;
+            const entity = ETEntitySystem.GetEntity(instanceID) as InstanceType<T>;
             if (entity && entity.GetType() == this.name)
                 return entity;
         }

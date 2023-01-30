@@ -23,7 +23,7 @@ import { PublicBagSystemComponent } from "./rules/System/PublicBagSystemComponen
 import { RoundSystemComponent } from "./rules/System/RoundSystemComponent";
 import { WearableSystemComponent } from "./rules/System/WearableSystemComponent";
 import { GameEnum } from "./shared/GameEnum";
-import { ET } from "./shared/lib/Entity";
+import { ET, ETGameSceneRoot } from "./shared/lib/Entity";
 
 /**
  * 避免循环加载导入模块，尽量避免用.文件路径更改需要批量替换
@@ -39,11 +39,11 @@ import { ET } from "./shared/lib/Entity";
 // export const _item_towerchange_custom = () => {
 //     return requirePlus<typeof item_towerchange_custom>("npc/items/avalon/item_towerchange_custom")
 // };
-
+@GReloadable
 export class GameScene {
 
     static get Scene() {
-        return ET.GameSceneRoot.GetInstance();
+        return ETGameSceneRoot.GetInstance();
     }
     static GetPlayer(playerid: PlayerID | number) {
         return GPlayerEntityRoot.GetOneInstance(playerid as PlayerID)

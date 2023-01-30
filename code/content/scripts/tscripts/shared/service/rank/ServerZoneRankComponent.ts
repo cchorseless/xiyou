@@ -1,6 +1,5 @@
 
-import { ET, serializeETProps } from "../../lib/Entity";
-import { TCharacter } from "../account/TCharacter";
+import { ET, ETEntitySystem, serializeETProps } from "../../lib/Entity";
 import { TServerZone } from "../serverzone/TServerZone";
 import { TSeasonRankData } from "./TSeasonRankData";
 
@@ -31,7 +30,7 @@ export class ServerZoneRankComponent extends ET.Component {
 
 
     onSerializeToEntity() {
-        let serverzone = ET.EntitySystem.GetEntity(this.Id + "TServerZone");
+        let serverzone = ETEntitySystem.GetEntity(this.Id + "TServerZone");
         if (serverzone) {
             serverzone.AddOneComponent(this);
             this.onReload()

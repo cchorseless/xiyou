@@ -1,4 +1,4 @@
-import { ET, serializeETProps } from "../../lib/Entity";
+import { ET, ETEntitySystem, serializeETProps } from "../../lib/Entity";
 import { TServerZone } from "../serverzone/TServerZone";
 import { TGameRecordItem } from "./TGameRecordItem";
 
@@ -16,7 +16,7 @@ export class ServerZoneGameRecordComponent extends ET.Component {
     public ServerZone(): TServerZone { return this.GetParent<TServerZone>(); }
 
     onSerializeToEntity() {
-        let serverzone = ET.EntitySystem.GetEntity(this.Id + "TServerZone");
+        let serverzone = ETEntitySystem.GetEntity(this.Id + "TServerZone");
         if (serverzone != null) {
             serverzone.AddOneComponent(this);
             this.onReload();

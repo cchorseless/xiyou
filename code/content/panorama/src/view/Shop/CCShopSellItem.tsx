@@ -3,6 +3,8 @@ import React from "react";
 import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
 import { TShopSellItem } from "../../../../scripts/tscripts/shared/service/shop/TShopSellItem";
 import { CSSHelper } from "../../helper/CSSHelper";
+import { KVHelper } from "../../helper/KVHelper";
+import { TipsHelper } from "../../helper/TipsHelper";
 import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCMainPanel } from "../MainPanel/CCMainPanel";
@@ -21,15 +23,13 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
     }
 
     onBtnBuyClick() {
+        let MemberShip = GTActivityMemberShipData.GetOneInstance(GGameScene.Local.BelongPlayerid);
         const sellitem = this.GetStateEntity(this.props.entity)!;
-        if (sellitem.SellConfig!.VipLimit == 1) {
-            let MemberShip = GTActivityMemberShipData.GetOneInstance(GGameScene.Local.BelongPlayerid);
-            if (!MemberShip?.IsVip()) {
-                // TipsHelper.showErrorMessage()
-                return;
-            }
-            CCMainPanel.GetInstance()!.addOnlyPanel(CCShopSellDetailDialog, { entity: this.props.entity })
+        if (sellitem.SellConfig!.VipLimit == 1 && !MemberShip?.IsVip()) {
+            TipsHelper.showErrorMessage("vip limit")
+            return;
         }
+        CCMainPanel.GetInstance()!.addOnlyPanel(CCShopSellDetailDialog, { entity: this.props.entity })
     }
 
     render() {
@@ -63,7 +63,7 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
         if (iLimitCount > 0) {
             bEnable = sellitem.BuyCount < iLimitCount;
         }
-        let discont = 100 - sellinfo.Discount;
+        let discont = sellinfo.Discount;
         return (
             <Panel className="CC_ShopSellItem" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 {/* 商品图 */}
@@ -77,7 +77,7 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
                     {/* 期间限购 */}
                     {iLimitCount > 0 &&
                         <Panel id="SaleLimit" hittest={false}>
-                            <Label key={iLimitCount} localizedText={`#Shop_Goods_limit_${sellinfo.SellRefreshType}`} dialogVariables={{ current: sellitem.BuyCount || 0, total: iLimitCount || 0 }} />
+                            <Label key={iLimitCount} localizedText={`#lang_Shop_Goods_limit_${sellinfo.SellRefreshType}`} dialogVariables={{ current: sellitem.BuyCount || 0, total: iLimitCount || 0 }} />
                         </Panel>}
                     {/* 折扣 */}
                     {discont > 0 && discont < 100 &&
@@ -86,16 +86,15 @@ export class CCShopSellItem extends CCPanel<ICCShopSellItem> {
                         </Panel>
                     }
                     {
-                        sellinfo.VipLimit == 1 &&
-                        <Panel id="VipLimit" hittest={false} />
+                        sellinfo.VipLimit == 1 && <CCPanel id="VipLimit" hittest={false} tooltip={"会员专属"} />
                     }
                 </CCShopItem>
                 {/* 购买按钮 */}
                 <Button className={CSSHelper.ClassMaker("ShopItemButton ", buttonID)} onactivate={() => this.onBtnBuyClick()} enabled={bEnable}>
                     {/* RMB */}
-                    {buttonID == "RMBBtn" && <Label localizedText="#Shop_Buy_With_Money" dialogVariables={{ price: String(price) }} />}
+                    {buttonID == "RMBBtn" && <Label localizedText={"#" + KVHelper.KVLang().Shop_Buy_With_Money.Des} dialogVariables={{ price: String(price) }} />}
                     {/* Free */}
-                    {buttonID == "FreeBtn" && <Label localizedText="#DialogBox_Rcv" />}
+                    {buttonID == "FreeBtn" && <Label localizedText={"#" + KVHelper.KVLang().Free.Des} />}
                     {/* Moon */}
                     {buttonID == "MetaBtn" && <Panel id="MetaWithNum" hittest={false}>
                         <CCIcon_CoinType cointype="MetaStone" />

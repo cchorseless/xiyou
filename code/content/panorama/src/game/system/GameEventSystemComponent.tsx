@@ -1,6 +1,6 @@
 import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
 import { GameServiceConfig } from "../../../../scripts/tscripts/shared/GameServiceConfig";
-import { ET } from "../../../../scripts/tscripts/shared/lib/Entity";
+import { ET, ETEntitySystem } from "../../../../scripts/tscripts/shared/lib/Entity";
 import { LogHelper } from "../../helper/LogHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
@@ -101,7 +101,7 @@ export class GameEventSystemComponent extends ET.SingletonComponent {
             }
         }
         else {
-            ET.EntitySystem.GetEntity(key)?.Dispose();
+            ETEntitySystem.GetEntity(key)?.Dispose();
         }
     }
 }

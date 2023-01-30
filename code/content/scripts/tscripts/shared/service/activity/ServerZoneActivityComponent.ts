@@ -1,6 +1,6 @@
 
 
-import { ET, serializeETProps } from "../../lib/Entity";
+import { ET, ETEntitySystem, serializeETProps } from "../../lib/Entity";
 
 @GReloadable
 export class ServerZoneActivityComponent extends ET.Component {
@@ -18,7 +18,7 @@ export class ServerZoneActivityComponent extends ET.Component {
     }
 
     onSerializeToEntity() {
-        let serverzone = ET.EntitySystem.GetEntity(this.Id + "TServerZone");
+        let serverzone = ETEntitySystem.GetEntity(this.Id + "TServerZone");
         if (serverzone) {
             serverzone.AddOneComponent(this);
             this.onReload();

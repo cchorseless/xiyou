@@ -1,6 +1,6 @@
 
 import { JSONConfig } from "../../Gen/JsonConfig";
-import { ET, serializeETProps } from "../../lib/Entity";
+import { ET, ETEntitySystem, serializeETProps } from "../../lib/Entity";
 import { TShopSellItem } from "./TShopSellItem";
 
 
@@ -29,7 +29,7 @@ export class TShopUnit extends ET.Entity {
     getAllSellItems() {
         let items: TShopSellItem[] = [];
         this.ShopSellItem.forEach((k, v) => {
-            let item = ET.EntitySystem.GetEntity(v + "TShopSellItem")
+            let item = ETEntitySystem.GetEntity(v + "TShopSellItem")
             if (item) {
                 items.push(item as any);
             }

@@ -28,14 +28,14 @@ export class CCGameDifficulty extends CCPanel<ICCGameDifficulty, RadioButton> {
                 enabled={forceEnable || iDifficulty <= max}
                 group="DifficultySelected"
                 onactivate={p => GGameScene.GameServiceSystem.SelectDifficultyChapter(iDifficulty)}
-                onmouseover={p => { $.DispatchEvent("DOTAShowTextTooltip", p, $.Localize("#Difficult_" + iDifficulty + "_Description")); }}
+                onmouseover={p => { $.DispatchEvent("DOTAShowTextTooltip", p, $.Localize("#lang_Difficult_" + iDifficulty + "_Description")); }}
                 onmouseout={p => { $.DispatchEvent("DOTAHideTextTooltip", p); }}
                 ref={this.__root__}      {...this.initRootAttrs()}
             >
                 {/* <Label localizedText={"#Difficult_" + iDifficulty} /> */}
                 < Panel id="DifficultyNumMain" hittest={false} >
                     <Image id="DifficultyHover" />
-                    <Label id="DifficultyLabel" key={iDifficulty} localizedText={"#Difficult_" + iDifficulty} />
+                    <Label id="DifficultyLabel" key={iDifficulty} localizedText={"#lang_Difficult_" + iDifficulty} />
                     {/* <Image id="DifficultyNum" /> */}
                 </Panel >
                 <Image id="Lock" />
@@ -112,7 +112,7 @@ export class CCGameEndlessDifficulty extends CCPanel<IEndlessDifficulty, RadioBu
                     }
                     GGameScene.GameServiceSystem.SelectDifficultyEndlessLevel(iNumber)
                 }}
-                onmouseover={p => $.DispatchEvent("DOTAShowTextTooltip", p, $.Localize("#Difficult_" + 999 + "_Description"))}
+                onmouseover={p => $.DispatchEvent("DOTAShowTextTooltip", p, $.Localize("#lang_Difficult_" + 999 + "_Description"))}
                 onmouseout={p => $.DispatchEvent("DOTAHideTextTooltip", p)}
                 ref={this.__root__}  {...this.initRootAttrs()}
             >
@@ -125,7 +125,7 @@ export class CCGameEndlessDifficulty extends CCPanel<IEndlessDifficulty, RadioBu
                     })}
                 </Panel>
                 <Image id="Lock" />
-                <Label id="endlessName" localizedText="#Difficult_999" />
+                <Label id="endlessName" localizedText="#lang_Difficult_999" />
                 <Panel id="TextEntryAndButtons" hittest={false}>
                     <TextEntry id="OperatorEndlessTextEntry" enabled={enable} textmode="numeric" multiline={false} placeholder="1" ref={this.refText} text={layers + ""}
                         ontextentrychange={(pSelf) => { this.onTextChange(pSelf) }} />

@@ -1,13 +1,13 @@
 import { GameServiceConfig } from "../../GameServiceConfig";
 import { EEnum } from "../../Gen/Types";
-import { ET, serializeETProps } from "../../lib/Entity";
+import { ET, ETEntitySystem, serializeETProps } from "../../lib/Entity";
 import { TItem } from "./TItem";
 
 
 @GReloadable
 export class BagComponent extends ET.Component {
     onGetBelongPlayerid() {
-        let character = ET.EntitySystem.GetEntity(this.Id + "TCharacter");
+        let character = ETEntitySystem.GetEntity(this.Id + "TCharacter");
         if (character != null) {
             return character.BelongPlayerid;
         }

@@ -5,6 +5,7 @@ import { KVHelper } from "./helper/KVHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { PrecacheHelper } from "./helper/PrecacheHelper";
 import { modifier_event } from "./npc/propertystat/modifier_event";
+import { ETEntitySystem } from "./shared/lib/Entity";
 declare global {
     interface CDOTAGameRules {
         Addon: GameMode;
@@ -54,7 +55,6 @@ export class GameMode {
     }
     // Called on script_reload
     public Reload() {
-        // debug
         if (!IsInToolsMode()) {
             return;
         }
@@ -65,6 +65,7 @@ export class GameMode {
         /**更新KV */
         KVHelper.initKVFile();
         GameRules.Playtesting_UpdateAddOnKeyValues();
+        (ETEntitySystem).DebugReload();
         // let units = Entities.FindAllByClassname("npc_dota_creature") as IBaseNpc_Plus[]
         // LogHelper.print(modifier_test.GetAllInstance(), 111)
         // let s = []

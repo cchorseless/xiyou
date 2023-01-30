@@ -1,4 +1,4 @@
-import { ET, serializeETProps } from "../../lib/Entity";
+import { ET, ETGameSceneRoot, serializeETProps } from "../../lib/Entity";
 import { ServerZoneActivityComponent } from "../activity/ServerZoneActivityComponent";
 import { ServerZoneBuffComponent } from "../buff/ServerZoneBuffComponent";
 import { ServerZoneGameRecordComponent } from "../gamerecord/ServerZoneGameRecordComponent";
@@ -18,7 +18,7 @@ export class TServerZone extends ET.SingletonComponent {
     public ServerID: number;
     public CreateTime: string;
     onSerializeToEntity() {
-        ET.GameSceneRoot.GetInstance().AddOneComponent(this)
+        ETGameSceneRoot.GetInstance().AddOneComponent(this)
         this.onReload();
     }
 

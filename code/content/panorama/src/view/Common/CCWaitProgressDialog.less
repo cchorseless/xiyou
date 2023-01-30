@@ -1,4 +1,6 @@
 .CC_WaitProgressDialog {
+    align: center center;
+
     #PopUpBg {
         width: 452px;
         height: 288px;
@@ -14,6 +16,16 @@
                 horizontal-align: center;
                 font-size: 18px;
                 color: #FFF;
+            }
+
+            @keyframes RequestAnimation {
+                0% {
+                    transform: rotateZ(0deg);
+                }
+
+                100% {
+                    transform: rotateZ(180deg);
+                }
             }
 
             #refresh {

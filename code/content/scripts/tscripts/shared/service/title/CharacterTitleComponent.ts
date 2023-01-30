@@ -1,5 +1,5 @@
 
-import { ET, serializeETProps } from "../../lib/Entity";
+import { ET, ETEntitySystem, serializeETProps } from "../../lib/Entity";
 import { TCharacter } from "../account/TCharacter";
 
 
@@ -21,7 +21,7 @@ export class CharacterTitleComponent extends ET.Component {
         return this.GetParent<TCharacter>();
     }
     onGetBelongPlayerid() {
-        let character = ET.EntitySystem.GetEntity(this.Id + "TCharacter");
+        let character = ETEntitySystem.GetEntity(this.Id + "TCharacter");
         if (character != null) {
             return character.BelongPlayerid;
         }

@@ -1,5 +1,5 @@
 
-import { ET } from "../../lib/Entity";
+import { ET, ETEntitySystem } from "../../lib/Entity";
 import { TCharacter } from "../account/TCharacter";
 
 
@@ -18,7 +18,7 @@ export class CharacterBuffComponent extends ET.Component {
     }
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onGetBelongPlayerid() {
-        let character = ET.EntitySystem.GetEntity(this.Id + "TCharacter");
+        let character = ETEntitySystem.GetEntity(this.Id + "TCharacter");
         if (character != null) {
             return character.BelongPlayerid;
         }

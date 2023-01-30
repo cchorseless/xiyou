@@ -1,5 +1,5 @@
 
-import { ET, serializeETProps } from "../../lib/Entity";
+import { ET, ETEntitySystem, serializeETProps } from "../../lib/Entity";
 import { TServerZone } from "../serverzone/TServerZone";
 
 
@@ -22,7 +22,7 @@ export class ServerZoneShopComponent extends ET.Component {
 
 
     onSerializeToEntity() {
-        let serverzone = ET.EntitySystem.GetEntity(this.Id + "TServerZone");
+        let serverzone = ETEntitySystem.GetEntity(this.Id + "TServerZone");
         if (serverzone) {
             serverzone.AddOneComponent(this);
             this.onReload();

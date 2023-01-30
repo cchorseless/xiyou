@@ -16,9 +16,9 @@ interface ICCWaitProgressDialog {
 
 export class CCWaitProgressDialog extends CCPanel<ICCWaitProgressDialog> {
     static defaultProps = {
-        waitMsg: "DialogBox_PleaseWait",
-        successMsg: "DialogBox_Get_Success",
-        failMsg: "DialogBox_Get_Fail"
+        waitMsg: "lang_DialogBox_PleaseWait",
+        successMsg: "lang_DialogBox_Get_Success",
+        failMsg: "lang_DialogBox_Get_Fail"
     }
 
     onInitUI() {

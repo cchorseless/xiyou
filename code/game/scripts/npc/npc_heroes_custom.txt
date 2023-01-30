@@ -17,6 +17,7 @@
 		"Ability3" "courier_draw_card_v3"
 		"Ability4" "courier_auto_gold"
 		"Ability5" "courier_recovery_chess"
+		"Ability6" "ability_empty"
 		"AbilityLayout" "7"
 		"HealthBarOffset" "200"
 		"MovementSpeed" "550"

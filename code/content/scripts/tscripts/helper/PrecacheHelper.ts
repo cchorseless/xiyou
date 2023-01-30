@@ -7,7 +7,6 @@
  */
 import { Assert_Precache } from "../assert/Assert_Precache";
 import { KVHelper } from "./KVHelper";
-import { LogHelper } from "./LogHelper";
 
 /**资源类型枚举 */
 export enum ResType {
@@ -23,7 +22,7 @@ export enum ResType {
     SoundSet = "SoundSet",
     VoiceFile = "VoiceFile",
 }
-type p = any;
+@GReloadable
 export class PrecacheHelper {
     /**所有缓存的资源 */
     public static allRes: { [k: string]: Array<string> } = {};
