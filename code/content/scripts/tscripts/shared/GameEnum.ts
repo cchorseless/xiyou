@@ -2540,6 +2540,10 @@ export module GameEnum {
         push_error_message = "push_error_message",
         push_update_minimap = "push_update_minimap",
         push_update_minimap_nodraw = "push_update_minimap_nodraw",
+
+        /**客户端重载 */
+
+
         req_DebugGameOver = "req_DebugGameOver",
         req_DebugReload = "req_DebugReload",
         req_DebugRestart = "req_DebugRestart",

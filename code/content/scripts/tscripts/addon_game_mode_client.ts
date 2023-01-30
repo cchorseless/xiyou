@@ -20,12 +20,17 @@ export class GameMode_Client extends SingletonClass {
     }
 
     public addEvent() {
+        EventHelper.addGameEvent(GameEnum.GameEvent.client_reload_game_keyvalues, GHandler.create(this, this.OnReload));
         EventHelper.addGameEvent(GameEnum.GameEvent.NpcSpawnedEvent, GHandler.create(this, this.OnNPCSpawned));
         EventHelper.addGameEvent(GameEnum.CustomCallClientLua.call_get_ability_data, GHandler.create(this, this.OnCall_get_ability_data));
         EventHelper.addGameEvent(GameEnum.CustomCallClientLua.call_get_unit_data, GHandler.create(this, this.OnCall_get_unit_data));
         EventHelper.addGameEvent(GameEnum.CustomCallClientLua.call_get_player_data, GHandler.create(this, this.OnCall_get_player_data));
+
     }
 
+    private OnReload(e: any) {
+
+    }
     private OnNPCSpawned(e: NpcSpawnedEvent) {
         let spawnedUnit = EntIndexToHScript(e.entindex) as IBaseNpc_Plus;
         if (spawnedUnit == null) return;

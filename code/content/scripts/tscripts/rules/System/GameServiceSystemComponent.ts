@@ -145,7 +145,6 @@ export class GameServiceSystemComponent extends GameServiceSystem {
         }));
 
         const hander = GHandler.create(this, async (e: JS_TO_LUA_DATA) => {
-            GLogHelper.print(2222222);
             const playeroot = GGameScene.GetPlayer(e.PlayerID);
             if (playeroot) {
                 e.data = await playeroot.PlayerHttpComp().PostAsync(e.protocol, e.data);
