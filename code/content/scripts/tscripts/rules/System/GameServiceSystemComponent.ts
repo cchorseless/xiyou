@@ -147,9 +147,10 @@ export class GameServiceSystemComponent extends GameServiceSystem {
         const hander = GHandler.create(this, async (e: JS_TO_LUA_DATA) => {
             const playeroot = GGameScene.GetPlayer(e.PlayerID);
             if (playeroot) {
-                e.data = await playeroot.PlayerHttpComp().PostAsync(e.protocol, e.data);
-                GLogHelper.print(e.data);
-                GLogHelper.print(22222222);
+                const cbdata: H2C_CommonResponse = await playeroot.PlayerHttpComp().PostAsync(e.protocol, e.data);
+                GLogHelper.print(cbdata);
+                e.state = cbdata.Error == 0;
+                e.data = cbdata.Message;
                 if (e.isawait && e.sendClientCB) {
                     e.sendClientCB()
                 }

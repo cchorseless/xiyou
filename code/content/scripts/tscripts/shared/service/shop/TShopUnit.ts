@@ -11,6 +11,8 @@ export class TShopUnit extends ET.Entity {
     public ConfigId: number;
     @serializeETProps()
     public IsValid: boolean;
+    @serializeETProps()
+    public CharacterId: number;
     private _ShopSellItem = new GDictionary<
         number,
         string
@@ -36,6 +38,10 @@ export class TShopUnit extends ET.Entity {
         });
         items.sort((a, b) => { return a.ConfigId - b.ConfigId })
         return items;
+    }
+
+    onReload(): void {
+        this.SyncClient()
     }
 }
 

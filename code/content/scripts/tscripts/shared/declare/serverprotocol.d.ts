@@ -38,8 +38,8 @@ declare interface G2C_Ping {
 //ResponseType H2C_CommonResponse
 declare interface C2H_Buy_ShopItem // IRequest
 {
-    ShopId: string;
-    ItemId: string;
+    ShopConfigId: number;
+    SellConfigId: number;
     PriceType: number;
     ItemCount: number;
 }

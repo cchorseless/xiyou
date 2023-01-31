@@ -24,7 +24,7 @@ async function importless(source, b, c) {
         if (includeList.includes(lessPath)) { continue }
         includeList.push(lessPath);
         let importPath = path.relative(this.context, lessPath);
-        console.log("less auto import =>", importPath);
+        // console.log("less auto import =>", importPath);
         if (importPath[0] != ".") {
             importPath = "./" + importPath;
         }

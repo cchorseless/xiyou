@@ -1,13 +1,14 @@
 import { GameServiceConfig } from "../../GameServiceConfig";
 import { EEnum } from "../../Gen/Types";
-import { ET, ETEntitySystem, serializeETProps } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
+import { TEquipItem } from "../equip/TEquipItem";
 import { TItem } from "./TItem";
 
 
 @GReloadable
 export class BagComponent extends ET.Component {
     onGetBelongPlayerid() {
-        let character = ETEntitySystem.GetEntity(this.Id + "TCharacter");
+        let character = GTCharacter.GetOneInstanceById(this.Id);
         if (character != null) {
             return character.BelongPlayerid;
         }
@@ -19,7 +20,7 @@ export class BagComponent extends ET.Component {
     }
 
     onReload() {
-        this.SyncClient();
+        this.SyncClient(true);
     }
 
     @serializeETProps()
@@ -27,11 +28,34 @@ export class BagComponent extends ET.Component {
     @serializeETProps()
     public MaxSize: number;
 
+
+    addItem(item: TItem) {
+        if (this.GetChild(item.Id) == null) {
+            this.AddOneChild(item);
+            if (!this.Items.includes(item.Id)) {
+                this.Items.push(item.Id);
+                this.onReload();
+            }
+        }
+    }
+
+    getAllItem() {
+        let items: TItem[] = [];
+        const allitems = TItem.GetGroupInstance(this.BelongPlayerid);
+        const allTEquipItems = TEquipItem.GetGroupInstance(this.BelongPlayerid);
+        allitems.concat(allTEquipItems).forEach(entity => {
+            if (entity && this.Items.includes(entity.Id) && entity.IsValid && entity.Config) {
+                items.push(entity)
+            }
+        })
+        return items;
+    }
+
     getItemByType(itemtype: EEnum.EItemType) {
         let items: TItem[] = [];
-        this.Items.forEach(entityid => {
-            let entity = this.GetChild<TItem>(entityid);
-            if (entity && entity.IsValid && entity.Config && entity.Config.ItemType == itemtype) {
+        const allitems = this.getAllItem();
+        allitems.forEach(entity => {
+            if (entity.Config.ItemType == itemtype) {
                 items.push(entity)
             }
         })

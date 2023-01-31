@@ -1,0 +1,73 @@
+.CCStorageItem {
+    width: 80px;
+    height: 80px;
+
+    background-image: url("file://{images}/custom_game/rarity/frame_d.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    overflow: noclip;
+
+    border: 2px solid #00000000;
+    border-radius: 4px;
+
+    transition-property: brightness, border;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+
+    &.Rarity_C {
+        background-image: url("file://{images}/custom_game/rarity/frame_c.png");
+    }
+
+    &.Rarity_B {
+        background-image: url("file://{images}/custom_game/rarity/frame_b.png");
+    }
+
+    &.Rarity_A {
+        background-image: url("file://{images}/custom_game/rarity/frame_a.png");
+    }
+
+    &.Rarity_R {
+        background-image: url("file://{images}/custom_game/rarity/frame_r.png");
+    }
+
+    &.Rarity_SS {
+        background-image: url("file://{images}/custom_game/rarity/frame_ss.png");
+    }
+
+    &.Rarity_SSS {
+        background-image: url("file://{images}/custom_game/rarity/frame_sss.png");
+    }
+
+    &:hover {
+        brightness: 1.5;
+        border-color: #54EDFF;
+    }
+
+    #StorageItemImg {
+        width: 90%;
+        height: 90%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        align: center center;
+    }
+
+
+
+    #StorageItemNumBG {
+        width: 40px;
+        height: 20px;
+        align: right bottom;
+        margin-top: 10px;
+        background-image: url("file://{images}/custom_game/shop/item_num.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        #StorageItemNum {
+            align: center center;
+            font-size: 26px;
+            color: #D6A661;
+            text-shadow: 0px 0px 3px 2 #000000;
+            text-overflow: shrink;
+        }
+    }
+}

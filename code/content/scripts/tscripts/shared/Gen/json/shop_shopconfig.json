@@ -43,7 +43,7 @@
         "OverSeaOriginPrice": 110,
         "OverSeaRealPrice": 55,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
@@ -62,7 +62,7 @@
         "OverSeaOriginPrice": 120,
         "OverSeaRealPrice": 60,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
@@ -81,7 +81,7 @@
         "OverSeaOriginPrice": 130,
         "OverSeaRealPrice": 65,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
@@ -100,7 +100,7 @@
         "OverSeaOriginPrice": 140,
         "OverSeaRealPrice": 70,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
@@ -119,7 +119,7 @@
         "OverSeaOriginPrice": 150,
         "OverSeaRealPrice": 75,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
@@ -138,7 +138,7 @@
         "OverSeaOriginPrice": 160,
         "OverSeaRealPrice": 80,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
@@ -157,7 +157,7 @@
         "OverSeaOriginPrice": 170,
         "OverSeaRealPrice": 85,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
@@ -176,7 +176,7 @@
         "OverSeaOriginPrice": 180,
         "OverSeaRealPrice": 90,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
@@ -195,7 +195,7 @@
         "OverSeaOriginPrice": 190,
         "OverSeaRealPrice": 95,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
@@ -214,7 +214,7 @@
         "OverSeaOriginPrice": 200,
         "OverSeaRealPrice": 100,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
@@ -233,7 +233,7 @@
         "OverSeaOriginPrice": 210,
         "OverSeaRealPrice": 105,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
@@ -290,13 +290,13 @@
         "OverSeaOriginPrice": 240,
         "OverSeaRealPrice": 120,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
         "SellConfigid": 1016,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 20,
         "SellRefreshType": 1,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -309,7 +309,7 @@
         "OverSeaOriginPrice": 250,
         "OverSeaRealPrice": 125,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       }
     ]
@@ -326,7 +326,7 @@
       {
         "SellConfigid": 1017,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 20,
         "SellRefreshType": 1,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -339,13 +339,13 @@
         "OverSeaOriginPrice": 260,
         "OverSeaRealPrice": 130,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
         "SellConfigid": 1018,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 20,
         "SellRefreshType": 1,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -358,13 +358,13 @@
         "OverSeaOriginPrice": 270,
         "OverSeaRealPrice": 135,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
         "SellConfigid": 1019,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 20,
         "SellRefreshType": 1,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -377,13 +377,13 @@
         "OverSeaOriginPrice": 280,
         "OverSeaRealPrice": 140,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
         "SellConfigid": 1020,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 20,
         "SellRefreshType": 1,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -396,13 +396,13 @@
         "OverSeaOriginPrice": 290,
         "OverSeaRealPrice": 145,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
         "SellConfigid": 1021,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 20,
         "SellRefreshType": 2,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -415,13 +415,13 @@
         "OverSeaOriginPrice": 300,
         "OverSeaRealPrice": 150,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
         "SellConfigid": 1022,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 20,
         "SellRefreshType": 2,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -434,13 +434,13 @@
         "OverSeaOriginPrice": 310,
         "OverSeaRealPrice": 155,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
         "SellConfigid": 1023,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 20,
         "SellRefreshType": 2,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -453,13 +453,13 @@
         "OverSeaOriginPrice": 320,
         "OverSeaRealPrice": 160,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
         "SellConfigid": 1024,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 20,
         "SellRefreshType": 2,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -472,7 +472,7 @@
         "OverSeaOriginPrice": 330,
         "OverSeaRealPrice": 165,
         "Discount": 50,
-        "VipLimit": 1,
+        "VipLimit": 0,
         "isVaild": 1
       },
       {
@@ -592,7 +592,7 @@
       {
         "SellConfigid": 1031,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -611,7 +611,7 @@
       {
         "SellConfigid": 1032,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -641,7 +641,7 @@
       {
         "SellConfigid": 1033,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -660,7 +660,7 @@
       {
         "SellConfigid": 1034,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -679,7 +679,7 @@
       {
         "SellConfigid": 1035,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -698,7 +698,7 @@
       {
         "SellConfigid": 1036,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -717,7 +717,7 @@
       {
         "SellConfigid": 1037,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -736,7 +736,7 @@
       {
         "SellConfigid": 1038,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -755,7 +755,7 @@
       {
         "SellConfigid": 1039,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -774,7 +774,7 @@
       {
         "SellConfigid": 1040,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -793,7 +793,7 @@
       {
         "SellConfigid": 1041,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -812,7 +812,7 @@
       {
         "SellConfigid": 1042,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -831,7 +831,7 @@
       {
         "SellConfigid": 1043,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -850,7 +850,7 @@
       {
         "SellConfigid": 1044,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -869,7 +869,7 @@
       {
         "SellConfigid": 1045,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -888,7 +888,7 @@
       {
         "SellConfigid": 1046,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -907,7 +907,7 @@
       {
         "SellConfigid": 1047,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,
@@ -926,7 +926,7 @@
       {
         "SellConfigid": 1048,
         "Selllabel": "",
-        "SellCount": 1,
+        "SellCount": 50,
         "SellRefreshType": 0,
         "SellStartTime": 0,
         "SellValidTime": 0,

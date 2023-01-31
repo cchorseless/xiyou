@@ -24,7 +24,7 @@ export class CCWaitProgressDialog extends CCPanel<ICCWaitProgressDialog> {
     onInitUI() {
         if (this.props.protocol) {
             NetHelper.SendToCSharp(this.props.protocol, this.props.data, GHandler.create(this, (e) => {
-                this.changeState(Boolean(e.state));
+                this.changeState(Boolean(e.state), e.data);
             }))
         }
     }
@@ -33,18 +33,19 @@ export class CCWaitProgressDialog extends CCPanel<ICCWaitProgressDialog> {
         CCMainPanel.GetInstance()!.addOnlyPanel(CCWaitProgressDialog, data)
     }
 
-    changeState(issuccess: boolean) {
+    changeState(issuccess: boolean, des: string) {
         if (issuccess) {
             this.UpdateState({ sMsg: this.props.successMsg });
         }
         else {
-            this.UpdateState({ sMsg: this.props.failMsg });
+            this.UpdateState({ sMsg: this.props.failMsg, sMsgDes: des });
         }
     }
 
     render() {
         const waitMsg = this.props.waitMsg;
         const sMsg = this.GetState<string>("sMsg");
+        const sMsgDes = this.GetState<string>("sMsgDes") || "";
         return (
             <Panel className="CC_WaitProgressDialog" ref={this.__root__} hittest={false} {...this.initRootAttrs()}>
                 <CCPopUpDialog id="PopUpBg" onClose={() => this.close()}>
@@ -52,7 +53,7 @@ export class CCWaitProgressDialog extends CCPanel<ICCWaitProgressDialog> {
                         <Label id="waitMsg" key={waitMsg} localizedText={"#" + waitMsg} />
                         <Image id="refresh" />
                     </Panel>
-                    <Label visible={sMsg != null} id="Msg" key={sMsg} localizedText={"#" + sMsg} />
+                    <Label visible={sMsg != null} id="Msg" key={sMsg} text={$.Localize("#" + sMsg) + "\n" + sMsgDes} />
                     {this.props.children}
                     {this.__root___childs}
                 </CCPopUpDialog>

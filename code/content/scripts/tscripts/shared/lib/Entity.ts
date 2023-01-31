@@ -163,6 +163,10 @@ export module ET {
             return ETEntitySystem.GetInstance(this.name, playerid)
         }
 
+        public static GetOneInstanceById<T extends typeof Entity>(this: T, entityid: string): InstanceType<T> {
+            return ETEntitySystem.GetEntity(entityid + this.name) as InstanceType<T>;
+        }
+
         /**
          * 获取一组
          * @returns
@@ -393,14 +397,14 @@ export module ET {
 
             // 严格限制parent必须要有domain,也就是说parent必须在数据树上面
             if (value.Domain == null) {
-                GLogHelper.error("cant set parent because parent domain is null: {this.GetType().Name} {value.GetType().Name}");
+                GLogHelper.error(`cant set parent because parent domain is null: ${this.GetType()} ${value.GetType()}`);
             }
 
             if (this.Parent != null) {
                 // 之前有parent
                 // parent相同，不设置
                 if (this.Parent == value) {
-                    GLogHelper.error("重复设置了Parent: {this.GetType().Name} parent: {this.parent.GetType().Name}");
+                    GLogHelper.error(`重复设置了Parent: ${this.GetType()} parent: ${this.Parent.GetType()}`);
                     return;
                 }
                 if (this.IsComponent) {

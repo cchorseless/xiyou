@@ -6,7 +6,7 @@ const {
 } = require('@aabao/webpack-panorama');
 
 /** @type {import('webpack').Configuration} */
-const isProduction = true;;
+const isProduction = false;;
 const fileList = () => {
     let viewdir = [
         "config","zlib"
@@ -21,10 +21,10 @@ const fileList = () => {
     return r
 };
 module.exports = {
-    optimization: { // 1. 这个配置必须
-        minimize: false,
-    },
-    devtool: isProduction ? false : 'eval',/**-cheap-module-source-map */
+    // optimization: { // 1. 这个配置必须
+    //     minimize: false,
+    // },
+    // devtool: isProduction ? false : 'eval',/**-cheap-module-source-map */
     mode: isProduction ? 'production' : 'development',
     context: path.resolve(__dirname, 'src'),
     output: {

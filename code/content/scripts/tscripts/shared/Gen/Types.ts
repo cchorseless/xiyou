@@ -192,7 +192,7 @@ export enum EActivityType {
 export namespace EEnum {
 export enum EItemType {
     /**
-     * 空值
+     * 道具
      */
     None = 0,
     /**
@@ -200,13 +200,21 @@ export enum EItemType {
      */
     Equip = 1,
     /**
+     * 礼包
+     */
+    Treasure = 2,
+    /**
+     * 限时道具
+     */
+    TimeItem = 3,
+    /**
      * 信使
      */
-    Courier = 2,
+    Courier = 4,
     /**
      * 祝福
      */
-    Buff = 3,
+    Buff = 5,
 }
 }
 

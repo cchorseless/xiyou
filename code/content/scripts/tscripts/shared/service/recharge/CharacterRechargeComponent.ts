@@ -1,4 +1,4 @@
-import { ET, ETEntitySystem } from "../../lib/Entity";
+import { ET } from "../../lib/Entity";
 import { TCharacter } from "../account/TCharacter";
 
 
@@ -7,7 +7,7 @@ export class CharacterRechargeComponent extends ET.Component {
     public TotalCharge: number;
     public get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onGetBelongPlayerid() {
-        let character = ETEntitySystem.GetEntity(this.Id + "TCharacter");
+        let character = GTCharacter.GetOneInstanceById(this.Id);
         if (character != null) {
             return character.BelongPlayerid;
         }

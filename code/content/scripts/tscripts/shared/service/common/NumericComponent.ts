@@ -32,6 +32,8 @@ export class NumericComponent extends ET.Component {
         }
         return 0.0
     }
-    onSerializeToEntity() {
+
+    onReload(): void {
+        GCharacterDataComponent.GetOneInstance(this.BelongPlayerid).SyncClient()
     }
 }

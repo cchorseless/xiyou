@@ -1,6 +1,6 @@
 
 
-import { ET, ETEntitySystem, serializeETProps } from "../../lib/Entity";
+import { ET, serializeETProps } from "../../lib/Entity";
 import { TCharacter } from "../account/TCharacter";
 
 @GReloadable
@@ -18,7 +18,7 @@ export class CharacterAchievementComponent extends ET.Component {
     }
     get Character(): TCharacter { return this.GetParent<TCharacter>(); }
     onGetBelongPlayerid() {
-        let character = ETEntitySystem.GetEntity(this.Id + "TCharacter");
+        let character = GTCharacter.GetOneInstanceById(this.Id);
         if (character != null) {
             return character.BelongPlayerid;
         }

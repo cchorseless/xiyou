@@ -10,6 +10,8 @@ export class TShopSellItem extends ET.Entity {
     public ShopId: number;
     @serializeETProps()
     public BuyCount: number;
+    @serializeETProps()
+    public CharacterId: number;
     public get SellConfig() {
         const json = JSONConfig.ShopConfig.get(this.ShopId);
         if (json) {
@@ -25,4 +27,9 @@ export class TShopSellItem extends ET.Entity {
     //     this.SellConfig = GFromJson(s);
     //     this._ConfigJson = s;
     // }
+
+    onReload(): void {
+        this.SyncClient()
+    }
+
 }

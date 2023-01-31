@@ -18,6 +18,8 @@ export class TItem extends ET.Entity {
     @serializeETProps()
     public ItemQuality: number;
 
+    @serializeETProps()
+    public CharacterId: string;
     /// <summary>
     /// 是否锁定
     /// </summary>
@@ -30,4 +32,18 @@ export class TItem extends ET.Entity {
         return JSONConfig.ItemConfig.get(this.ConfigId)!;
     }
 
+    onSerializeToEntity(): void {
+        // 新增道具 BelongPlayerid == -1
+        let bagcomp = GBagComponent.GetOneInstanceById(this.CharacterId);
+        if (this.BelongPlayerid == -1) {
+            if (bagcomp && this.Parent == null) {
+                bagcomp.addItem(this)
+            }
+        }
+        this.onReload()
+    }
+
+    onReload(): void {
+        this.SyncClient()
+    }
 }

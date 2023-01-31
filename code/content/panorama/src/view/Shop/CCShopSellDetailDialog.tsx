@@ -36,8 +36,8 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
         CCWaitProgressDialog.showProgressDialog({
             protocol: GameProtocol.Protocol.Buy_ShopItem,
             data: {
-                ShopId: sellitem.ShopId + "",
-                ItemId: sellitem.SellConfig!.ItemConfigId + "",
+                ShopConfigId: sellitem.ShopId,
+                SellConfigId: sellitem.SellConfig!.SellConfigid,
                 PriceType: CSSHelper.IsChineseLanguage() ? 0 : 1,
                 ItemCount: iNum
             } as C2H_Buy_ShopItem,

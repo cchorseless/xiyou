@@ -1,11 +1,11 @@
 
-import { ET, ETEntitySystem } from "../../lib/Entity";
+import { ET } from "../../lib/Entity";
 
 
 @GReloadable
 export class CharacterSteamComponent extends ET.Component {
     onGetBelongPlayerid() {
-        let character = ETEntitySystem.GetEntity(this.Id + "TCharacter");
+        let character = GTCharacter.GetOneInstanceById(this.Id);
         if (character != null) {
             return character.BelongPlayerid;
         }
