@@ -1,6 +1,5 @@
 import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { ERound } from "./ERound";
-import { ERoundBoard } from "./ERoundBoard";
 
 @GReloadable
 export class RoundManagerComponent extends ET.Component {
@@ -18,10 +17,5 @@ export class RoundManagerComponent extends ET.Component {
         this.RoundInfo[r.configID] = r;
         this.AddOneChild(r);
     }
-
-    public getCurrentBoardRound() {
-        return this.RoundInfo[this.curRoundBoard] as ERoundBoard;
-    }
-
 
 }

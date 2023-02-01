@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_jump } from "../../../npc/modifier/modifier_jump";
 import { modifier_run } from "../../../npc/modifier/modifier_run";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
@@ -11,11 +12,16 @@ import { ChessVector } from "./ChessVector";
 export class ChessMoveComponent extends ET.Component {
     public ChessVector: ChessVector;
     readonly isAlive: boolean = true;
+    readonly isInBattle: boolean = false;
+    readonly isMoving: boolean = false;
     onAwake(): void {
         let domain = this.GetDomain<IBaseNpc_Plus>();
         domain.SetForwardVector(Vector(0, 1, 0));
         this.updateBoardPos();
-        let etroot = domain.ETRoot.As<IBattleUnitEntityRoot>()
+        let etroot = domain.ETRoot.As<IBattleUnitEntityRoot>();
+        if (!this.isInBattle) {
+            modifier_jiaoxie_wudi.applyOnly(domain, domain);
+        }
         if (etroot.IsBuilding()) {
             this.setMoving(false);
         }
@@ -25,6 +31,9 @@ export class ChessMoveComponent extends ET.Component {
     updateBoardPos() {
         let location = this.GetDomain<IBaseNpc_Plus>().GetAbsOrigin();
         this.ChessVector = GChessControlSystem.GetInstance().GetBoardLocalVector2(location);
+        if (!this.isMoving) {
+            (this.isInBattle as any) = this.isPosInBattle();
+        }
     }
 
     updateForward(position: Vector) {
@@ -37,14 +46,14 @@ export class ChessMoveComponent extends ET.Component {
     }
 
     isInBoardAndBattle() {
-        return this.ChessVector.y >= 1 && this.isInBoard();
+        return this.isInBattle && this.isInBoard();
     }
 
     isInBattleAlive() {
-        return this.isInBattle() && this.isAlive;
+        return this.isInBattle && this.isAlive;
     }
 
-    isInBattle() {
+    isPosInBattle() {
         return !this.ChessVector.isY(0);
     }
 
@@ -59,7 +68,6 @@ export class ChessMoveComponent extends ET.Component {
     }
 
     setMoving(ismoving: boolean) {
-        (this.isMoving as any) = ismoving;
         let npc = this.GetDomain<IBaseNpc_Plus>();
         if (ismoving) {
             npc.SetMoveCapability(DOTAUnitMoveCapability_t.DOTA_UNIT_CAP_MOVE_GROUND);
@@ -71,11 +79,11 @@ export class ChessMoveComponent extends ET.Component {
 
 
     blink_start_p: Vector;
-    readonly isMoving: boolean = false;
     blinkChessX(v: Vector, isjump: boolean = true) {
         if (this.isMoving) {
             return;
         }
+        (this.isMoving as any) = true;
         this.setMoving(true);
         let domain = this.GetDomain<IBaseNpc_Plus>();
         domain.Stop();
@@ -92,6 +100,7 @@ export class ChessMoveComponent extends ET.Component {
                 vy: v.y,
             });
         } else {
+            // todo
             domain.MoveToPositionAggressive(v)
             // modifier_run.applyOnly(domain, domain, null, {
             //     vx: v.x,
@@ -105,14 +114,17 @@ export class ChessMoveComponent extends ET.Component {
         let etroot = npc.ETRoot.As<IBattleUnitEntityRoot>()
         if (!etroot.IsBuilding()) { return }
         let building = etroot.As<IBuildingEntityRoot>();
-        if (this.isInBattle()) {
+        if (this.isInBattle) {
             if (to.isY(0)) {
+                modifier_jiaoxie_wudi.applyOnly(npc, npc);
+                (this.isInBattle as any) = false;
                 GEventHelper.FireEvent(ChessControlConfig.Event.ChessControl_LeaveBattle, null,
                     building.BelongPlayerid, building)
             }
         }
         else {
             if (!to.isY(0)) {
+                (this.isInBattle as any) = true;
                 GEventHelper.FireEvent(ChessControlConfig.Event.ChessControl_JoinBattle, null,
                     building.BelongPlayerid, building)
             }
@@ -134,6 +146,7 @@ export class ChessMoveComponent extends ET.Component {
             }
         }
         this.setMoving(false);
+        (this.isMoving as any) = false;
         this.updateBoardPos();
     }
 
@@ -186,7 +199,6 @@ export class ChessMoveComponent extends ET.Component {
             return false;
         }
     }
-
 
     RemoveMovingModifier() {
         let domain = this.GetDomain<IBaseNpc_Plus>();

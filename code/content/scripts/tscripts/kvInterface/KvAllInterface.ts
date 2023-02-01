@@ -1,5 +1,6 @@
 
 export interface KvAllInterface  {
+"npc_heroes_custom": npc_heroes_custom.OBJ_1_1,
 "shipin_config": shipin_config.OBJ_1_1,
 "pool_config": pool_config.OBJ_1_1,
 "pool_group_config": pool_group_config.OBJ_1_1,
@@ -25,6 +26,7 @@ export interface KvAllInterface  {
 "courier_abilities": courier_abilities.OBJ_1_1,
 }
 export const KvAllPath = {
+"npc_heroes_custom": "scripts/npc/npc_heroes_custom.txt",
 "shipin_config": "scripts/npc/kvConfig/shipin_config.kv",
 "pool_config": "scripts/npc/kvConfig/pool_config.kv",
 "pool_group_config": "scripts/npc/kvConfig/pool_group_config.kv",
@@ -50,6 +52,7 @@ export const KvAllPath = {
 "courier_abilities": "scripts/npc/abilities/courier_abilities.kv",
 }
 export interface KvServerInterface   {
+"npc_heroes_custom": npc_heroes_custom.OBJ_1_1,
 "shipin_config": shipin_config.OBJ_1_1,
 "pool_config": pool_config.OBJ_1_1,
 "pool_group_config": pool_group_config.OBJ_1_1,
@@ -75,6 +78,7 @@ export interface KvServerInterface   {
 "courier_abilities": courier_abilities.OBJ_1_1,
 }
 export const KvServer = {
+"npc_heroes_custom": "scripts/npc/npc_heroes_custom.txt",
 "shipin_config": "scripts/npc/kvConfig/shipin_config.kv",
 "pool_config": "scripts/npc/kvConfig/pool_config.kv",
 "pool_group_config": "scripts/npc/kvConfig/pool_group_config.kv",
@@ -100,6 +104,7 @@ export const KvServer = {
 "courier_abilities": "scripts/npc/abilities/courier_abilities.kv",
 }
 export interface KvClientInterface   {
+"npc_heroes_custom": npc_heroes_custom.OBJ_1_1,
 "shipin_config": shipin_config.OBJ_1_1,
 "pool_config": pool_config.OBJ_1_1,
 "pool_group_config": pool_group_config.OBJ_1_1,
@@ -125,6 +130,7 @@ export interface KvClientInterface   {
 "courier_abilities": courier_abilities.OBJ_1_1,
 }
 export const KvClient = {
+"npc_heroes_custom": "scripts/npc/npc_heroes_custom.txt",
 "shipin_config": "scripts/npc/kvConfig/shipin_config.kv",
 "pool_config": "scripts/npc/kvConfig/pool_config.kv",
 "pool_group_config": "scripts/npc/kvConfig/pool_group_config.kv",

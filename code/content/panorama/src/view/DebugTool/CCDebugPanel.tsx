@@ -1,6 +1,7 @@
 import React from "react";
 
 import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
+import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool, CCDebugTool_Category, CCDebugTool_DemoButton, CCDebugTool_DemoSelectionButton, CCDebugTool_DemoSlider, CCDebugTool_DemoTextEntry, CCDebugTool_DemoToggle } from "./CCDebugTool";
 import { CCDebugTool_AbilityPicker } from "./CCDebugTool_AbilityPicker";
@@ -36,7 +37,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
         const sectFilterFunc = (...args: any[]) => { return true };
         const positionList: string[] = [];
         const lock_camera: boolean = true;
-        const is_pause: boolean = true;
+        const is_pause: boolean = false;
         const free_spells: boolean = true;
         const is_frozen: boolean = true;
         return (
@@ -48,10 +49,10 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                     onRefresh={() => { }}
                 >
                     <CCDebugTool_Category title="游戏" >
-                        <CCDebugTool_DemoTextEntry eventName="ChangeHostTimescale" localtext="主机速度" />
+                        <CCDebugTool_DemoTextEntry eventName={GameProtocol.Protocol.ChangeHostTimescale} localtext="主机速度" />
                         <CCDebugTool_DemoButton eventName="NextStateButtonPressed" btncolor="GreenButton" localtext="下一阶段" />
                         <CCDebugTool_DemoToggle eventName="LockCameraPauseButtonPressed" localtext="锁定镜头" selected={lock_camera} />
-                        <CCDebugTool_DemoToggle eventName="ToggleStatePauseButtonPressed" localtext="暂停阶段" selected={is_pause} />
+                        <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.PauseRoundStage} localtext="暂停阶段" selected={is_pause} />
                         <CCDebugTool_DemoSelectionButton eventName="SelectStateButtonPressed" localtext="选择阶段" />
                         <CCDebugTool_DemoButton eventName="ReturnMenuButtonPressed" btncolor="RedButton" localtext="回到菜单" />
                         <CCDebugTool_DemoSelectionButton eventName="TeleportButtonPressed" localtext="跳转到特定区域" />

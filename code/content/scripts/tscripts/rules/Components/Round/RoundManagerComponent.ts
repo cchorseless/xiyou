@@ -45,6 +45,13 @@ export class RoundManagerComponent extends ET.Component {
         (this.RoundInfo[roundid] as ERoundBoard).OnStart();
         this.SyncClient(true);
     }
+    /**
+     * 暂停回合
+     * @param isPaused 
+     */
+    public debugPauseBoardRound(isPaused: boolean) {
+        (this.RoundInfo[this.curRoundBoard] as ERoundBoard)._debug_StageStopped = isPaused;
+    }
 
     public getCurrentBoardRound() {
         return this.RoundInfo[this.curRoundBoard] as ERoundBoard;

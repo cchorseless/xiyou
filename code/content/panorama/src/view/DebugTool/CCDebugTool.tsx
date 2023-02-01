@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from "react";
+import React, { Children, createRef, ReactNode } from "react";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { NetHelper } from "../../helper/NetHelper";
 import { CCDropDownButton } from "../AllUIElement/CCButton/CCDropDownButton";
@@ -197,7 +197,9 @@ export class CCDebugTool_DemoToggle extends CCPanel<ICCDebugTool_DemoToggle, Tog
 	render() {
 		return (
 			this.__root___isValid &&
-			<ToggleButton ref={this.__root__}  {...this.initRootAttrs()} />
+			<ToggleButton ref={this.__root__}  {...this.initRootAttrs()} onactivate={self => {
+				NetHelper.SendToLua(this.props.eventName, GToBoolean(this.__root__.current?.IsSelected()))
+			}} />
 		);
 	}
 }
@@ -259,22 +261,23 @@ export class CCDebugTool_DemoDropDown extends CCPanel<ICCDebugTool_DemoDropDown>
 
 // 文本输入按钮
 interface ICCDebugTool_DemoTextEntry {
-	onBtnClick?: (item: Panel) => void,
-	onTxtInput?: (item: Panel) => void,
 	eventName: string, localtext: string, defaultValue?: string;
 }
 export class CCDebugTool_DemoTextEntry extends CCPanel<ICCDebugTool_DemoTextEntry, TextButton> {
 	static defaultProps = {
-		onBtnClick: (item: Panel) => { },
-		onTxtInput: (item: Panel) => { },
 		defaultValue: ""
 	};
+	textentry = createRef<TextEntry>();
 	render() {
 		return (
 			this.__root___isValid &&
 			<Panel ref={this.__root__}  {...this.initRootAttrs()} >
-				<TextButton className="DemoTextEntry" style={{ flowChildren: "right" }} onactivate={this.props.onBtnClick} localizedText={this.props.localtext}>
-					<TextEntry id="DemoTextEntry" text={this.props.defaultValue} oninputsubmit={this.props.onTxtInput}>
+				<TextButton className="DemoTextEntry" style={{ flowChildren: "right" }} onactivate={
+					(p) => {
+						NetHelper.SendToLua(this.props.eventName, this.textentry.current?.text)
+					}}
+					localizedText={this.props.localtext}>
+					<TextEntry id="DemoTextEntry" ref={this.textentry} text={this.props.defaultValue}>
 					</TextEntry>
 				</TextButton>
 			</Panel>

@@ -1,6 +1,7 @@
 
 import React from "react";
 import { JsonConfigHelper } from "../../../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
+import { ECombination } from "../../../game/components/Combination/ECombination";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { AbilityHelper, UnitHelper } from "../../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
@@ -116,7 +117,8 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         const tData = KVHelper.KVAbilitys()[abilityname] || {};
         const iLevel = this.props.level || -1;
         const combinationLabel = tData.CombinationLabel! as string;
-        const entity = GGameScene.Local.CombinationManager.getCombinationByCombinationName(combinationLabel)
+        const allcombs = ECombination.GetCombinationByCombinationName(GGameScene.Local.BelongPlayerid, combinationLabel) || [];
+        const entity = allcombs[0];
         const uniqueConfigList = entity?.uniqueConfigList || [];
         const herolist: string[] = [];
         for (let k in KVHelper.KVData().building_combination_ability) {

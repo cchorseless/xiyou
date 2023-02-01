@@ -28,7 +28,7 @@ export class ECombinationLabelItem extends ET.Entity {
 
     addSelfToManager() {
         let building = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBuildingEntityRoot>();
-        if (this.IsActive && building.ChessComp().isInBattle()) {
+        if (this.IsActive && building.ChessComp().isInBattle) {
             building.GetPlayer().CombinationManager().addCombination(this);
         }
     }

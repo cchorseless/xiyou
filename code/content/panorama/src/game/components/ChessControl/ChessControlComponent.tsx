@@ -54,7 +54,8 @@ export class ChessControlComponent extends ET.Component {
                     return CONTINUE_EVENT;
                 }
                 if (mouseButton === RIGHT_BUTTON && this.IS_CURSOR_HERO_ICON_SHOWING) {
-                    // 右键点击，当前显示英雄小图标
+                    GLogHelper.print("");
+                    // 右键点击，隐藏当前英雄小图标
                     this.OnShowCursorHeroIcon(false);
                     return CONSUME_EVENT;
                 }

@@ -38,7 +38,7 @@ export class EnemyManagerComponent extends ET.Component {
             let heroroot = hero.ETRoot.As<ICourierEntityRoot>();
             Assert_MsgEffect.CreateNumberEffect(hero, damage, 2, Assert_MsgEffect.EMsgEffect.MSG_MISS, Assert_Color.red);
             EmitSoundOn(projectileInfo.sound, hero);
-            heroroot.CourierDataComp().ApplyDamage(damage);
+            heroroot.CourierDataComp().ApplyDamageByEnemy(damage);
         }
     }
 

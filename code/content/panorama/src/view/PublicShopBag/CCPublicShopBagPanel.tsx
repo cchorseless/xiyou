@@ -1,6 +1,7 @@
 
 import React from "react";
 import { PublicBagConfig } from "../../../../scripts/tscripts/shared/PublicBagConfig";
+import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
 
 import { CSSHelper } from "../../helper/CSSHelper";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
@@ -249,9 +250,8 @@ export class CCRandomShop extends CCPanel<{}> {
         if (!this.__root___isValid) { return this.defaultRender("CC_RandomShop") }
         const courierShop = this.GetStateEntity(GGameScene.Local.CourierShopComp)!;
         const PlayerDataComp = this.GetStateEntity(GGameScene.Local.PlayerDataComp)!;
-        const RoundManagerComp = this.GetStateEntity(GGameScene.Local.RoundManagerComp)!;
         const RandomItems = courierShop.getSellItem(PublicBagConfig.EPublicShopType.RandomShop);
-        const currentround = Number(RoundManagerComp.getCurrentBoardRound()!.config.round_show)
+        const currentround = Number(ERoundBoard.CurRoundBoard.config.round_show)
         const Unlock = courierShop.randomLockRound >= currentround;
 
         return (

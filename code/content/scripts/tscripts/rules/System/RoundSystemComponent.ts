@@ -4,6 +4,7 @@ import { KVHelper } from "../../helper/KVHelper";
 import { unit_base_equip_bag } from "../../npc/units/common/unit_base_equip_bag";
 import { unit_base_gold_bag } from "../../npc/units/common/unit_base_gold_bag";
 import { GameEnum } from "../../shared/GameEnum";
+import { GameProtocol } from "../../shared/GameProtocol";
 import { ET } from "../../shared/lib/Entity";
 import { RoundPrizeUnitEntityRoot } from "../Components/Round/RoundPrizeUnitEntityRoot";
 
@@ -33,8 +34,17 @@ export class RoundSystemComponent extends ET.SingletonComponent {
     }
     public addEvent() {
         EventHelper.addGameEvent(GameEnum.GameEvent.EntityHurtEvent, GHandler.create(this, this.OnEntityHurtEvent));
-
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.PauseRoundStage, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            const ispause = GToBoolean(e.data);
+            GPlayerEntityRoot.GetAllInstance()
+                .forEach((player) => {
+                    player.RoundManagerComp().debugPauseBoardRound(ispause)
+                });
+        }));
     }
+
+
+
 
     public StartGame() {
         this.runBoardRound(this.GetFirstBoardRoundid());
@@ -69,13 +79,16 @@ export class RoundSystemComponent extends ET.SingletonComponent {
                     allWaiting = false;
                 }
             });
+        GLogHelper.print("endBoardRound", allWaiting)
         if (allWaiting) {
-            GTimerHelper.AddTimer(3, GHandler.create(this, () => {
-                let nextid = this.GetNextBoardRoundid();
-                if (nextid != null) {
-                    this.runBoardRound(nextid);
-                }
-            }));
+            GTimerHelper.AddTimer(3,
+                GHandler.create(this, () => {
+                    let nextid = this.GetNextBoardRoundid();
+                    GLogHelper.print("endBoardRound", nextid)
+                    if (nextid != null) {
+                        this.runBoardRound(nextid);
+                    }
+                }));
         }
     }
 

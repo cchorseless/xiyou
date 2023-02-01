@@ -1,8 +1,10 @@
+import { GEventHelper } from "../../../../../scripts/tscripts/shared/lib/GEventHelper";
 import { RoundConfig } from "../../../../../scripts/tscripts/shared/RoundConfig";
 import { KVHelper } from "../../../helper/KVHelper";
 import { ERound } from "./ERound";
 @GReloadable
 export class ERoundBoard extends ERound {
+    static CurRoundBoard: ERoundBoard;
     roundLeftTime: number = -1;
     configID: string;
     unitSpawned: number = 0;
@@ -28,17 +30,14 @@ export class ERoundBoard extends ERound {
         this.onReload();
     }
     onReload(): void {
-        if (this.isCurrentRound()) {
-
+        if (this.bRunning) {
+            ERoundBoard.CurRoundBoard = this;
+            GEventHelper.FireEvent(ERoundBoard.name, null, null, this);
         }
     }
 
-    isCurrentRound() {
-        if (GGameScene.Local.RoundManagerComp && GGameScene.Local.RoundManagerComp.curRoundBoard && GGameScene.Local.RoundManagerComp.getCurrentBoardRound()) {
-            return this.configID == GGameScene.Local.RoundManagerComp.curRoundBoard;
-        }
-        return false;
-    }
+
+
 
     getCurStateDes() {
         let str = "";

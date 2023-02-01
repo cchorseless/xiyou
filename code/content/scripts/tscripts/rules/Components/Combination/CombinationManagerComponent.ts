@@ -24,7 +24,6 @@ export class CombinationManagerComponent extends ET.Component {
             }
             combina.addConfig(info);
         }
-        this.SyncClient(true);
     }
 
     private addEvent() {

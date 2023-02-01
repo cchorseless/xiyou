@@ -4,6 +4,7 @@ import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { ActiveRootItem } from "./npc/items/ActiveRootItem";
 import { GameEnum } from "./shared/GameEnum";
+import { GameProtocol } from "./shared/GameProtocol";
 import { GameServiceConfig } from "./shared/GameServiceConfig";
 import { SingletonClass } from "./shared/lib/SingletonClass";
 
@@ -135,6 +136,10 @@ export class GameDebugger extends SingletonClass {
         // 清除打印
         EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_DebugClearAll, GHandler.create(this, this.onDebugClearAll));
         EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_addBot, GHandler.create(this, this.onreq_addBot));
+        // 主机速度
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.ChangeHostTimescale, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            SendToConsole("host_timescale " + e.data);
+        }));
 
         //#endregion
     }

@@ -1,6 +1,8 @@
 
 import React from "react";
+import { GEventHelper } from "../../../../scripts/tscripts/shared/lib/GEventHelper";
 import { PlayerDataComponent } from "../../game/components/Player/PlayerDataComponent";
+import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { CCImageNumber } from "../AllUIElement/CCImageNumber/CCImageNumber";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -16,22 +18,17 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
     }
 
     onReady() {
-        return Boolean(GGameScene.Local.PlayerDataComp && GGameScene.Local.RoundManagerComp?.getCurrentBoardRound());
+        return Boolean(ERoundBoard.CurRoundBoard);
     }
 
     onInitUI() {
-        GGameScene.Local.PlayerDataComp.RegRef(this);
-        GGameScene.Local.RoundManagerComp.RegRef(this);
-        GGameScene.Local.RoundManagerComp!.getCurrentBoardRound().RegRef(this);
-        this.useEffectState(() => {
-            let curround = GGameScene.Local.RoundManagerComp!.getCurrentBoardRound();
-            if (!this.hasState(curround.InstanceId)) {
-                curround.RegRef(this);
-            }
-        }, GGameScene.Local.RoundManagerComp.InstanceId)
+        GEventHelper.AddEvent(ERoundBoard.name, GHandler.create(this,
+            () => {
+                this.updateSelf();
+            }));
         this.UpdateState({ gametime: -1 });
         GTimerHelper.AddTimer(1, GHandler.create(this, () => {
-            let round = GGameScene.Local.RoundManagerComp!.getCurrentBoardRound();
+            let round = ERoundBoard.CurRoundBoard;
             let lefttime = -1;
             if (round) {
                 lefttime = round.roundLeftTime - Game.GetGameTime();
@@ -53,8 +50,7 @@ export class CCTopBarCenter<T extends NodePropsData> extends CCPanel<T> {
         if (!this.__root___isValid) {
             return this.defaultRender("CC_TopBarCenter");
         }
-        const playerdata = this.GetStateEntity(GGameScene.Local.PlayerDataComp)!;
-        const round = this.GetStateEntity(GGameScene.Local.RoundManagerComp.getCurrentBoardRound())!;
+        const round = ERoundBoard.CurRoundBoard;
         const gametime = this.GetState<number>("gametime");
         return (
             <Panel id="CC_TopBarCenter" ref={this.__root__}    {...this.initRootAttrs()} hittest={false}>

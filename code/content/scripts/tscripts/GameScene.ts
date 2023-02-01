@@ -326,11 +326,6 @@ export class GameScene {
                 spawnedUnit.AddAbility(ability_propertytool.name);
             }
             modifier_property.applyOnly(spawnedUnit, spawnedUnit);
-            // spawnedUnit.SetPhysicalArmorBaseValue(0);
-            // spawnedUnit.SetBaseMagicalResistanceValue(0);
-            // spawnedUnit.SetBaseDamageMax(0);
-            // spawnedUnit.SetBaseDamageMin(0);
-            // spawnedUnit.SetBaseHealthRegen(0);
             // spawnedUnit.SetMaximumGoldBounty(0);
             // spawnedUnit.SetMinimumGoldBounty(0);
             // spawnedUnit.SetDeathXP(0);

@@ -140,12 +140,6 @@ export class BuildingManagerComponent extends ET.Component {
         building.SetTeam(DOTATeam_t.DOTA_TEAM_GOODGUYS);
         /**互相绑定 */
         building.SetControllableByPlayer(playerID, true);
-        building.addSpawnedHandler(
-            GHandler.create(this, () => {
-                // modifier_no_health_bar.applyOnly(building, building);
-                // modifier_building.apply(this.createUnit, domain)
-            })
-        );
         BuildingEntityRoot.Active(building, playerID, towerID);
         let buildingroot = building.ETRoot.As<IBuildingEntityRoot>();
         playerroot.AddDomainChild(buildingroot);
@@ -196,7 +190,7 @@ export class BuildingManagerComponent extends ET.Component {
         let r: IBuildingEntityRoot[] = [];
         if (includeSelfHelper) {
             r = this.getAllBuilding().filter((b) => {
-                return b.ChessComp().isInBattle();
+                return b.ChessComp().isInBattle;
             });
         }
         else {
@@ -206,7 +200,7 @@ export class BuildingManagerComponent extends ET.Component {
         }
         if (includeOtherHelper) {
             r = r.concat(this.allBuildingHelper.filter((b) => {
-                return b.ChessComp().isInBattle();
+                return b.ChessComp().isInBattle;
             }));
         }
         return r;
@@ -241,16 +235,14 @@ export class BuildingManagerComponent extends ET.Component {
 
     }
     OnRoundStartPrize(round: ERoundBoard) {
-        this.getAllBattleBuilding()
-            .forEach((b) => {
-                if (b.RuntimeBuilding) {
-                    b.RuntimeBuilding.BattleUnitManager().ClearRuntimeBattleUnit();
-                    if (b.RuntimeBuilding.ChessComp().isInBattleAlive()) {
-                        b.RuntimeBuilding.RoundStateComp().OnBoardRound_Prize_RuntimeBuilding(round);
-                    }
+        this.getAllBattleBuilding().forEach((b) => {
+            if (b.RuntimeBuilding) {
+                b.RuntimeBuilding.BattleUnitManager().ClearRuntimeBattleUnit();
+                if (b.RuntimeBuilding.ChessComp().isInBattleAlive()) {
+                    b.RuntimeBuilding.RoundStateComp().OnBoardRound_Prize_RuntimeBuilding(round);
                 }
-
-            });
+            }
+        });
         let player = this.GetDomain<PlayerScene>().ETRoot;
         player.CombinationManager().OnRoundStartPrize(round);
 

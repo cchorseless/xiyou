@@ -11,11 +11,16 @@ export module GameProtocol {
         static readonly SetServerKey = "/SetServerKey";
         static readonly Buy_ShopItem = "/Buy_ShopItem";
         static readonly UploadCharacterGameRecord = "UploadCharacterGameRecord";
+        // debug
+        static readonly ChangeHostTimescale = "/ChangeHostTimescale";
+        static readonly PauseRoundStage = "/PauseRoundStage";
+
         // 开局
         static readonly SelectDifficultyChapter = "/SelectDifficultyChapter";
         static readonly SelectDifficultyEndlessLevel = "/SelectDifficultyEndlessLevel";
         static readonly SelectCourier = "/SelectCourier";
         static readonly SelectReady = "/SelectReady";
+
 
     }
 

@@ -23,9 +23,22 @@ export class CourierEntityRoot extends BattleUnitEntityRoot {
         this.AddComponent(GGetRegClass<typeof CourierBagComponent>("CourierBagComponent"));
         this.AddComponent(GGetRegClass<typeof CourierShopComponent>("CourierShopComponent"));
         this.RefreshCourier()
-
+        this.SyncClient(true)
     }
-
+    onKilled(e: any) {
+        let hHero = this.GetDomain<IBaseNpc_Hero_Plus>();
+        hHero.StartGesture(GameActivity_t.ACT_DOTA_DIE);
+        hHero.ForceKill(false);
+        let isgameend = true;
+        CourierDataComponent.GetAllInstance().forEach((instance) => {
+            if (instance.health > 0) {
+                isgameend = false;
+            }
+        });
+        if (isgameend) {
+            GGameScene.Defeat();
+        }
+    }
     RefreshCourier() {
         let hHero = this.GetDomain<IBaseNpc_Hero_Plus>();
         if (!GameFunc.IsValid(hHero) || !hHero.IsAlive()) {

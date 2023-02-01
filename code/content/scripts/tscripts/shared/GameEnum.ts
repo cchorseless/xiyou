@@ -971,6 +971,8 @@ export module GameEnum {
             SPELL_AMPLIFY_BONUS_UNIQUE,
             /**TODO */
             STATS_NO_ALL_ARMOR,
+            /**基础生命值 */
+            HP_BASE,
             /**额外生命值
              * hero no use
              */
@@ -2564,49 +2566,9 @@ export module GameEnum {
         req_Update_Setting = "req_Update_Setting",
         /**添加机器人 */
         req_addBot = "req_addBot",
-        /**获取自己身份信息 */
-        req_get_self_shen_fen_info = "req_get_self_shen_fen_info",
-        /**获取所有知道的身份信息 */
-        req_get_know_other_shen_fen_info = "req_get_know_other_shen_fen_info",
-        /**获取当前断线重连数据 */
-        req_get_current_reconnect_data = "req_get_current_reconnect_data",
-        /**获取回合信息 */
-        req_get_current_round_info = "req_get_current_round_info",
-        /**创建队伍 */
-        req_send_to_make_team = "req_send_to_make_team",
-        req_send_to_make_team_finish = "req_send_to_make_team_finish",
-        /**提交发言顺序 */
-        req_send_to_sure_chat_turn = "req_send_to_sure_chat_turn",
-        /**结束本轮发言 */
-        req_end_current_player_chat = "req_end_current_player_chat",
-        /**投票組隊意见 */
-        req_send_to_make_team_idea = "req_send_to_make_team_idea",
-        /**投票組隊结果 */
-        req_send_to_make_team_idea_result = "req_send_to_make_team_idea_result",
-        /**投票任务意见 */
-        req_send_to_finish_task_idea = "req_send_to_finish_task_idea",
-        /**投票任务结果 */
-        req_send_to_finish_task_idea_result = "req_send_to_finish_task_idea_result",
-        /**投票任务结果 */
-        req_send_to_sync_task_record = "req_send_to_sync_task_record",
-        /**刺杀界面 */
-        req_send_to_goto_ci_sha = "req_send_to_goto_ci_sha",
-        /**游戏结果 */
-        req_send_to_game_result = "req_send_to_game_result",
-        //#region 任务系统
-        /**请求所有任务 */
-        req_self_all_task = "req_self_all_task",
 
-        /**接到任务 */
-        req_new_task = "req_new_task",
-        /**更新单个任务进度 */
-        req_update_one_task = "req_update_one_task",
-        /**客户端请求完成任务 */
-        req_finish_task_from_client = "req_finish_task_from_client",
-        /**请求任务奖励 */
-        req_task_prize = "req_task_prize",
-        /**采集物采集 */
-        req_collect_entity = "req_collect_entity",
+
+
         //#endregion
     }
     export enum CustomCallClientLua {

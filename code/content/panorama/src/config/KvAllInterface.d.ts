@@ -1,5 +1,6 @@
 
 declare interface KvAllInterface extends 
+npc_heroes_custom.OBJ_0_1,
 shipin_config.OBJ_0_1,
 pool_config.OBJ_0_1,
 pool_group_config.OBJ_0_1,

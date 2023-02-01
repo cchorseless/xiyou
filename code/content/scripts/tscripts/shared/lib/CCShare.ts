@@ -125,7 +125,6 @@ export module CCShare {
     }
 
 
-
     export function GetRegClass<T>(className: string, ignoreExt: boolean = false) {
         let r;
         if (ignoreExt) { r = _G._GReloadClassTypeCache[className]; }
@@ -312,6 +311,11 @@ export module CCShare {
         if (v == null || v == "" || v == "null" || v == "nil") { return 0 }
         return Number(v);
     }
+
+    export function ToBoolean(v: any): boolean {
+        if (v == 0 || v == "0" || v == null || v == "" || v == "null" || v == "nil") { return false }
+        return !!v;
+    }
 }
 
 declare global {
@@ -329,6 +333,7 @@ declare global {
     var GToJson: typeof CCShare.ToJson;
     var GGenerateUUID: typeof CCShare.GenerateUUID;
     var GToNumber: typeof CCShare.ToNumber;
+    var GToBoolean: typeof CCShare.ToBoolean;
     type IGDictionary<K, V> = CCShare.Dictionary<K, V>;
     var GDictionary: typeof CCShare.Dictionary;
 }
@@ -348,6 +353,7 @@ if (_G.GHandler == null) {
     _G.GToJson = CCShare.ToJson;
     _G.GGenerateUUID = CCShare.GenerateUUID;
     _G.GToNumber = CCShare.ToNumber;
+    _G.GToBoolean = CCShare.ToBoolean;
     _G.GDictionary = CCShare.Dictionary;
     if (_CODE_IN_JS_) {
         (global as any).GameRules = Game;

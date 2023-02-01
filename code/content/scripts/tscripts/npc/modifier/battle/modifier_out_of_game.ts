@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../GameFunc";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
@@ -27,5 +26,18 @@ export class modifier_out_of_game extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_UNSELECTABLE]: true,
             [modifierstate.MODIFIER_STATE_FROZEN]: true,
         };
+    }
+
+    public Init(params?: object): void {
+        if (IsServer()) {
+            this.GetParent().AddNoDraw()
+        }
+    }
+
+    OnDestroy(): void {
+        super.OnDestroy()
+        if (IsServer()) {
+            this.GetParent().RemoveNoDraw()
+        }
     }
 }

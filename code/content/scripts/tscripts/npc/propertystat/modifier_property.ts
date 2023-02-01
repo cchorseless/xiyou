@@ -1,5 +1,6 @@
 import { GameFunc } from "../../GameFunc";
 import { BattleHelper } from "../../helper/BattleHelper";
+import { KVHelper } from "../../helper/KVHelper";
 import { ResHelper } from "../../helper/ResHelper";
 import { GameEnum } from "../../shared/GameEnum";
 import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
@@ -233,6 +234,18 @@ export class modifier_property extends BaseModifier_Plus {
     }
     /**最大气血 */
     currentMaxHp: number;
+
+    GetBaseMaxHealth(hUnit: IBaseNpc_Plus) {
+        let fDefault = 0;
+        if (GameFunc.IsValid(hUnit) && hUnit.__BaseStatusHealth == null) {
+            hUnit.__BaseStatusHealth = GToNumber(KVHelper.GetUnitData(hUnit.GetUnitName(), "StatusHealth"));
+        }
+        if (hUnit.__BaseStatusHealth != null) {
+            fDefault = hUnit.__BaseStatusHealth;
+        }
+        let hp_base = modifier_property.SumProps(hUnit, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_BASE)
+        return fDefault + hp_base;
+    }
     /**用于计算气血属性 */
     Calculate_Hp() {
         let parent = this.GetParentPlus();
@@ -241,11 +254,12 @@ export class modifier_property extends BaseModifier_Plus {
         let extraHp = modifier_property.SumProps(parent, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_BONUS)
         let extraPect = modifier_property.SumProps(parent, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_BONUS_PERCENTAGE)
         let hpPect = modifier_property.SumProps(parent, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_PERCENTAGE)
-        let baseMaxHealth = parent.GetBaseMaxHealth();
+        let baseMaxHealth = this.GetBaseMaxHealth(parent);
         let maxhp = (baseMaxHealth + extraHp * (1 + extraPect * 0.01)) * (1 + hpPect * 0.01);
         let fCorrectHealth = math.floor(maxhp);
         if (this.currentMaxHp != fCorrectHealth) {
             this.currentMaxHp = fCorrectHealth;
+            parent.SetBaseMaxHealth(fCorrectHealth);
             parent.SetMaxHealth(fCorrectHealth);
             parent.ModifyHealth(math.floor(fHealthPercent * fCorrectHealth), null, false, 0)
         }

@@ -93,12 +93,12 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
                                             curitems = allbagitems.filter(item => { return item.Config.ItemType == EEnum.EItemType.Treasure })
                                             break;
                                     }
-                                    return <CCPanel key={_index + ""}
+                                    return <CCPanel key={_index + "1111"}
                                         className={CSSHelper.ClassMaker({ Hidden: selectindex !== _index + 1 })}
                                         flowChildren="right-wrap" scroll={"y"}  >
                                         {
                                             curitems.map((e, index) => {
-                                                return <CCStorageItem key={index + ""} entity={e} onclick={() => {
+                                                return <CCStorageItem key={index + "CCStorageItem"} entity={e} onclick={() => {
                                                     this.UpdateState({ selectitem: e })
                                                 }} />
                                             })
@@ -109,14 +109,14 @@ export class CCStoragePanel extends CCPanel<ICCStoragePanel> {
                         </CCPanel>
                         <CCPanel className={CSSHelper.ClassMaker({ Hidden: selectitem == null })}>
                             {
-                                [0].map(() => {
+                                [0].map((_, index) => {
                                     if (selectitem != null) {
                                         const num = selectitem.ItemCount;
                                         const picurl = PathHelper.getCustomShopItemImageUrl((selectitem.Config!.ItemIcon));
                                         const itemname = $.Localize("#" + (selectitem.Config!.ItemName));
                                         const itemdes = $.Localize("#" + selectitem.Config!.ItemDes);
                                         const rarity = "Rarity_" + EEnum.ERarity[selectitem.ItemQuality || 1];
-                                        return <CCPanel id="StorageItemInfo" flowChildren="down">
+                                        return <CCPanel id="StorageItemInfo" flowChildren="down" key={index + ""}>
                                             <CCImage id="StorageItemImg" backgroundImage={picurl} />
                                             {(num != undefined && Number(num) > 1) &&
                                                 <Panel id="StorageItemNumBG" >

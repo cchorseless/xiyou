@@ -21,7 +21,7 @@ export module KVHelper {
     /**所有道具 */
     export const KvItems: Readonly<KV_Items> = {} as Readonly<KV_Items>;
     /**所有单位 */
-    export const KvUnits: Readonly<KV_Units> = {} as Readonly<KV_Units>;
+    export const KvUnits: Readonly<npc_heroes_custom.OBJ_1_1 & KV_Units> = {} as Readonly<npc_heroes_custom.OBJ_1_1 & KV_Units>;
 
     export function KvConfig() {
         if (IsServer()) {
@@ -30,6 +30,14 @@ export module KVHelper {
             return KvClientConfig;
         }
 
+    }
+    export function GetUnitData(unitname: string, k: string) {
+        if (KvUnits[unitname]) {
+            return KvUnits[unitname][k];
+        }
+        else {
+            return null;
+        }
     }
 
     export function initKVFile() {
@@ -62,6 +70,8 @@ export module KVHelper {
         allItems.forEach((file: any) => {
             Object.assign(KvItems, (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]))
         });
+        /**英雄也加进去 */
+        allUnits.push("npc_heroes_custom");
         allUnits.forEach((file: any) => {
             Object.assign(KvUnits, (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]))
         });

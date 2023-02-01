@@ -9,6 +9,7 @@ export class ERound extends ET.Entity {
     config: building_round.OBJ_2_1 | any;
     @serializeETProps()
     unitSpawned: number = 0;
+    @serializeETProps()
     bRunning: boolean = false;
     @serializeETProps()
     tTotalDamage: number = 0; // 回合总伤害
@@ -39,7 +40,9 @@ export class ERound extends ET.Entity {
 
     OnEnd() {
         this.bRunning = false;
+        GRoundSystem.GetInstance().endBoardRound();
     }
+
     private onEntitySpawn(enemy: IBaseNpc_Plus) { }
     onEntityHurt(entindex: EntityIndex, damage: number) {
         this.tTowerDamage[entindex] = this.tTowerDamage[entindex] || 0;

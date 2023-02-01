@@ -969,6 +969,7 @@ export class ETEntitySystem {
     }
     static Destroy(entity: ET.Entity) {
         entity.onDestroy && entity.onDestroy();
+        GLogHelper.print(`${entity.Id} ${entity.GetType()} Destroy`)
     }
 }
 

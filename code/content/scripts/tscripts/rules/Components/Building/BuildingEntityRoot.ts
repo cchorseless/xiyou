@@ -25,7 +25,6 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         let hCaster = this.GetDomain<IBaseNpc_Plus>();
         let vLocation = hCaster.GetAbsOrigin();
         let iTeamNumber = hCaster.GetTeamNumber()
-        // hCaster.AddNoDraw();
         modifier_out_of_game.applyOnly(hCaster, hCaster);
         this.BuildingComp().SetUIOverHead(false)
         let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
@@ -54,7 +53,6 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         }
         this.RuntimeBuilding = null;
         let hCaster = this.GetDomain<IBaseNpc_Plus>();
-        // hCaster.RemoveNoDraw();
         this.BuildingComp().SetUIOverHead(true)
         hCaster.removeBuff<modifier_out_of_game>("modifier_out_of_game");
     }

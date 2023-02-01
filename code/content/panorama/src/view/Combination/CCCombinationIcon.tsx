@@ -110,10 +110,10 @@ export class CCCombinationIcon extends CCPanel<ICCCombinationIcon> {
     render() {
         return (
             <Panel ref={this.__root__}   {...this.initRootAttrs()}>
-                <CCImage className="SectIconBGBorder" backgroundImage={PathHelper.getCustomImageUrl("combination/icon/iconbg/leftcapsule_border" + this.getIndex() + "_psd.png")} />
-                <CCImage className="SectIconBG" washColor={this.getColor()} backgroundImage={PathHelper.getCustomImageUrl("combination/icon/iconbg/leftcapsule" + this.getIndex() + "_psd.png")} />
-                <CCImage className="SectIconBGBottom" washColor={this.getColor()} backgroundImage={PathHelper.getCustomImageUrl("combination/icon/iconbg/leftcapsule_border_bottom_pop" + this.getIndex() + "_psd.png")} />
-                <CCImage className="SectImage" backgroundImage={PathHelper.getCustomImageUrl("combination/icon/" + this.getSectImage() + ".png")} />
+                <CCImage className="SectIconBGBorder" backgroundImage={PathHelper.getCustomImageUrl("combination/icons/iconbg/leftcapsule_border" + this.getIndex() + "_psd.png")} />
+                <CCImage className="SectIconBG" washColor={this.getColor()} backgroundImage={PathHelper.getCustomImageUrl("combination/icons/iconbg/leftcapsule" + this.getIndex() + "_psd.png")} />
+                <CCImage className="SectIconBGBottom" washColor={this.getColor()} backgroundImage={PathHelper.getCustomImageUrl("combination/icons/iconbg/leftcapsule_border_bottom_pop" + this.getIndex() + "_psd.png")} />
+                <CCImage className="SectImage" backgroundImage={PathHelper.getCustomImageUrl("combination/icons/" + this.getSectImage() + ".png")} />
                 {this.__root___childs}
                 {this.props.children}
             </Panel>

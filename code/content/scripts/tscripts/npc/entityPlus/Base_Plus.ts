@@ -486,7 +486,8 @@ export class BaseNpc implements ET.IEntityRoot {
     __bIsFirstSpawn?: boolean;
     /**所有的BUFF信息 */
     __allModifiersInfo__?: { [v: string]: Array<any> };
-
+    /**初始生命值 */
+    __BaseStatusHealth?: number;
     private __SpawnedHandler__?: Array<IGHandler>;
     /**是否已经被安全销毁 */
     __safedestroyed__?: boolean = false;

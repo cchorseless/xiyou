@@ -1,8 +1,7 @@
 import React from "react";
+import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { DotaUIHelper } from "../../../helper/DotaUIHelper";
-import { LogHelper } from "../../../helper/LogHelper";
-import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { CCIntervalTips } from "../CCIntervalTips/CCIntervalTips";
 import { CCPanel } from "../CCPanel/CCPanel";
 import "./CCPausePanel.less";
@@ -27,7 +26,7 @@ export class CCPausePanel extends CCPanel<ICCPausePanel> {
         const tips = this.props.tipQueue;
         return (this.__root___isValid &&
             <Panel id="CC_PausePanel" className={CSSHelper.ClassMaker({ "Paused": Game.IsGamePaused() })} ref={this.__root__} hittest={false}   {...this.initRootAttrs()}>
-                <Label id="CC_PausePausing" localizedText="#CustomPausing" hittest={false} />
+                <Label id="CC_PausePausing" localizedText="#lang_CustomPausing" hittest={false} />
                 {
                     tips && tips.length > 0 && <CCIntervalTips id="CC_PauseIntervalTip" tick={5} tipQueue={tips} />
                 }

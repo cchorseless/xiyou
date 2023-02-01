@@ -1,6 +1,5 @@
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
 import { KVHelper } from "../../../helper/KVHelper";
-import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { serializeETProps } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
 import { RoundConfig } from "../../../shared/RoundConfig";
@@ -16,6 +15,9 @@ export class ERoundBoard extends ERound {
     roundLeftTime: number = 0;
     @serializeETProps()
     isWin: boolean = false;
+
+    _debug_StageStopped: boolean = false;
+
     config: building_round_board.OBJ_2_1 = null;
     onAwake(configid: string): void {
         this.configID = configid;
@@ -33,6 +35,9 @@ export class ERoundBoard extends ERound {
         playerroot.BuildingManager().OnRoundStartBegin(this);
         playerroot.FakerHeroRoot().OnRoundStartBegin(this);
         GTimerHelper.AddTimer(delaytime, GHandler.create(this, () => {
+            if (this._debug_StageStopped) {
+                return 1;
+            }
             this.OnBattle();
         }));
     }
@@ -42,7 +47,7 @@ export class ERoundBoard extends ERound {
         let player = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
         this.roundState = RoundConfig.ERoundBoardState.battle;
         this.roundLeftTime = GameRules.GetGameTime() + delaytime;
-        this.SyncClient(false);
+        this.SyncClient();
         player.ChessControlComp().OnRoundStartBattle();
         player.BuildingManager().OnRoundStartBattle();
         player.FakerHeroRoot().OnRoundStartBattle();
@@ -59,6 +64,9 @@ export class ERoundBoard extends ERound {
                 if (buildingCount > 0 && enemyCount > 0) {
                     return 1;
                 }
+                if (this._debug_StageStopped) {
+                    return 1;
+                }
             }
             this.OnPrize();
         }));
@@ -72,17 +80,20 @@ export class ERoundBoard extends ERound {
         if (this.roundState == RoundConfig.ERoundBoardState.prize) {
             return;
         }
-        let delaytime = Number(20 || 20);
+        let delaytime = 20;
         this.roundState = RoundConfig.ERoundBoardState.prize;
         this.roundLeftTime = GameRules.GetGameTime() + delaytime;
         let playerroot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
-        this.SyncClient();
-        let aliveEnemy = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid).EnemyManagerComp().getAllBattleUnitAlive();
+        let aliveEnemy = playerroot.EnemyManagerComp().getAllBattleUnitAlive();
         this.isWin = aliveEnemy.length == 0;
+        this.SyncClient();
         playerroot.CourierRoot().OnRoundStartPrize(this);
         playerroot.BuildingManager().OnRoundStartPrize(this);
         playerroot.FakerHeroRoot().OnRoundStartPrize(this);
         this.prizeTimer = GTimerHelper.AddTimer(delaytime, GHandler.create(this, () => {
+            if (this._debug_StageStopped) {
+                return 1;
+            }
             this.OnWaitingEnd();
         }));
     }
@@ -92,14 +103,21 @@ export class ERoundBoard extends ERound {
             this.prizeTimer.Clear()
             this.prizeTimer = null;
         }
+        GLogHelper.print(3333, this.roundState);
         if (this.roundState == RoundConfig.ERoundBoardState.waiting_next) {
             return;
         }
         this.roundState = RoundConfig.ERoundBoardState.waiting_next;
         this.roundLeftTime = -1;
-        this.SyncClient(false);
+        this.SyncClient();
         GEventHelper.FireEvent(RoundConfig.Event.roundboard_onwaitingend, null, this.BelongPlayerid, this);
-        GRoundSystem.GetInstance().endBoardRound();
+        GTimerHelper.AddTimer(0.1,
+            GHandler.create(this, () => {
+                if (this._debug_StageStopped) {
+                    return 1;
+                }
+                this.OnEnd();
+            }));
     }
 
     IsBattle() {
@@ -171,7 +189,7 @@ export class ERoundBoard extends ERound {
                 this.unitDamageInfo[attack].bypureD += damage
             }
         }
-        NetTablesHelper.SetETEntityPart(this, ["unitDamageInfo"], this.BelongPlayerid)
+        this.SyncClient()
 
     }
 }

@@ -1,13 +1,9 @@
 import { BaseEntityRoot } from "../../../libs/BaseEntityRoot";
-import { FHeroCombinationManagerComponent } from "./FHeroCombinationManagerComponent";
 
 
 @GReloadable
 export class FakerHeroEntityRoot extends BaseEntityRoot {
 
-    get FHeroCombinationManager() {
-        return FHeroCombinationManagerComponent.GetOneInstance(this.BelongPlayerid);
-    }
 }
 
 

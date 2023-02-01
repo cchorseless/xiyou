@@ -1,6 +1,7 @@
 /** Create By Editor*/
 import React from "react";
 import { RoundConfig } from "../../../../scripts/tscripts/shared/RoundConfig";
+import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
 import { UnitHelper } from "../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 
@@ -14,7 +15,7 @@ interface ICCUnitDamageInfo extends NodePropsData {
 }
 export class CCUnitDamageInfo extends CCPanel<ICCUnitDamageInfo> {
     onReady() {
-        return Boolean(GGameScene.Local.RoundManagerComp && GGameScene.Local.RoundManagerComp.getCurrentBoardRound());
+        return Boolean(ERoundBoard.CurRoundBoard);
     }
     onInitUI() {
         GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
@@ -27,7 +28,7 @@ export class CCUnitDamageInfo extends CCPanel<ICCUnitDamageInfo> {
         if (!this.__root___isValid) {
             return this.defaultRender("CC_UnitDamageInfo");
         }
-        let round = GGameScene.Local.RoundManagerComp.getCurrentBoardRound();
+        let round = ERoundBoard.CurRoundBoard;
         if (round.roundState == RoundConfig.ERoundBoardState.start) {
             return this.defaultRender("CC_UnitDamageInfo");
         }

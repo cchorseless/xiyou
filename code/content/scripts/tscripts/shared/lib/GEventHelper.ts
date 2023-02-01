@@ -1,6 +1,6 @@
 
 export module GEventHelper {
-    const AllEventInfo: { [eventName: string]: [{ isonce: boolean; playerid: PlayerID | null, handler: IGHandler }] } = {};
+    const AllEventInfo: { [eventName: string]: [{ isonce: boolean; playerid: PlayerID | null, handler: IGHandler }] } = GGetReloadCache("GEventHelper.AllEventInfo", {});
 
     export function AddEvent(eventName: string, handler: IGHandler, playerid: PlayerID | null = null, isOnce = false) {
         if (AllEventInfo[eventName] == null) {

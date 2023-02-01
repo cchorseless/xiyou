@@ -9,7 +9,6 @@ import { BuildingManagerComponent } from "./components/Building/BuildingManagerC
 import { BuildingRuntimeEntityRoot } from "./components/Building/BuildingRuntimeEntityRoot";
 import { ChessControlComponent } from "./components/ChessControl/ChessControlComponent";
 import { ChessDataComponent } from "./components/ChessControl/ChessDataComponent";
-import { CombinationManagerComponent } from "./components/Combination/CombinationManagerComponent";
 import { ECombination } from "./components/Combination/ECombination";
 import { CourierBagComponent } from "./components/Courier/CourierBagComponent";
 import { CourierDataComponent } from "./components/Courier/CourierDataComponent";
@@ -20,7 +19,6 @@ import { EnemyUnitComponent } from "./components/Enemy/EnemyUnitComponent";
 import { EnemyUnitEntityRoot } from "./components/Enemy/EnemyUnitEntityRoot";
 import { FakerHeroEntityRoot } from "./components/FakerHero/FakerHeroEntityRoot";
 import { FHeroCombination } from "./components/FakerHero/FHeroCombination";
-import { FHeroCombinationManagerComponent } from "./components/FakerHero/FHeroCombinationManagerComponent";
 import { ItemEntityRoot } from "./components/Item/ItemEntityRoot";
 import { PlayerDataComponent } from "./components/Player/PlayerDataComponent";
 import { PlayerEntityRoot } from "./components/Player/PlayerEntityRoot";
@@ -46,7 +44,6 @@ BuildingManagerComponent;
 BuildingRuntimeEntityRoot;
 
 
-CombinationManagerComponent;
 
 CourierDataComponent;
 CourierEntityRoot;
@@ -59,7 +56,6 @@ EnemyUnitEntityRoot;
 EnemyUnitComponent;
 
 FakerHeroEntityRoot;
-FHeroCombinationManagerComponent;
 FHeroCombination;
 
 ChessControlComponent;
