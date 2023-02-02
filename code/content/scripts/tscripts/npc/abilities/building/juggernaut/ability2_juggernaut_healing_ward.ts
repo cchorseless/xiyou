@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
@@ -72,7 +71,7 @@ export class modifier_juggernaut_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -187,7 +186,7 @@ export class modifier_juggernaut_2_aura extends BaseModifier_Plus {
     GetAuraDuration() {
         return 1
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             modifier_kill.apply(this.GetParentPlus(), this.GetParentPlus(), null, { duration: this.GetDuration() })
@@ -205,7 +204,7 @@ export class modifier_juggernaut_2_aura extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
     }
     OnDestroy() {
@@ -227,8 +226,8 @@ export class modifier_juggernaut_2_aura extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true,
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/heroes/juggernaut/jugg_healing_ward.vmdl", this.GetCasterPlus())
     }
 }
@@ -254,7 +253,7 @@ export class modifier_juggernaut_2_crit_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()
@@ -269,14 +268,14 @@ export class modifier_juggernaut_2_crit_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, true, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_crit_damage = this.GetSpecialValueFor("bonus_crit_damage")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE)
     G_CRITICALSTRIKE_DAMAGE() {
         return this.bonus_crit_damage
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.bonus_crit_damage
     }

@@ -1,7 +1,6 @@
-import { LogHelper } from "../../helper/LogHelper";
-import { NetHelper } from "../../helper/NetHelper";
+import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
 import { ET } from "../../../../scripts/tscripts/shared/lib/Entity";
-import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
+import { NetHelper } from "../../helper/NetHelper";
 
 const KeyCode: { [key: string]: string; } = {
     // Q: "Q",
@@ -118,7 +117,7 @@ export class ControlComponent extends ET.Component {
             Game.CreateCustomKeyBind(KeyCode[key], "+" + key);
             // 按下事件
             Game.AddCommand("+" + key, (name: string, ...args: string[]) => {
-                NetHelper.SendToLua(GameEnum.CustomProtocol.req_KEY_DOWN, {
+                NetHelper.SendToLua(GameProtocol.Protocol.req_KEY_DOWN, {
                     entindex: Players.GetLocalPlayerPortraitUnit(),
                     key: key,
                     camerayaw: GameUI.GetCameraYaw()
@@ -126,7 +125,7 @@ export class ControlComponent extends ET.Component {
             }, "", 67108864);
             // 抬起事件
             Game.AddCommand("-" + key, () => {
-                NetHelper.SendToLua(GameEnum.CustomProtocol.req_KEY_UP, {
+                NetHelper.SendToLua(GameProtocol.Protocol.req_KEY_UP, {
                     entindex: Players.GetLocalPlayerPortraitUnit(),
                     key: key,
                     camerayaw: GameUI.GetCameraYaw()

@@ -1,5 +1,4 @@
 import { GameFunc } from "../../../../GameFunc";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -104,7 +103,7 @@ export class modifier_alchemist_2 extends BaseModifier_Plus {
     public damage_pct: number;
     public duration: number;
     public death_radius: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage_pct = this.GetSpecialValueFor("damage_pct");
         this.duration = this.GetSpecialValueFor("duration");
         this.OnAbilityUpgradesUpdated();
@@ -116,7 +115,7 @@ export class modifier_alchemist_2 extends BaseModifier_Plus {
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    On_AttackLanded(params: ModifierTable) {
+    On_AttackLanded(params: IModifierTable) {
         let hAbility = this.GetAbilityPlus();
         let hParent = this.GetParentPlus();
         let hTarget = params.target;
@@ -134,7 +133,7 @@ export class modifier_alchemist_2 extends BaseModifier_Plus {
         // });
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    OnDeath(params: ModifierTable) {
+    OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker;
         let hKilled = params.unit;
         let hParent = this.GetParentPlus();
@@ -169,7 +168,7 @@ export class modifier_alchemist_2_buff extends BaseModifier_Plus {
     }
     public bonus_gold_stacking: number;
     public max_count: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_gold_stacking = this.GetSpecialValueFor("bonus_gold_stacking");
         this.max_count = this.GetSpecialValueFor("max_count");
         if (IsServer()) {
@@ -189,7 +188,7 @@ export class modifier_alchemist_2_buff extends BaseModifier_Plus {
         // PlayerData.ModifyGold(iPlayerID, iGold, true);
         // SendOverheadEventMessage(hParent.GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hParent, iGold, null);
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     OnTooltip() {
         return this.bonus_gold_stacking * this.GetStackCount();
     }

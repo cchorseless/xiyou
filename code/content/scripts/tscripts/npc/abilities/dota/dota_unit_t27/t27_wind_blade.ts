@@ -1,6 +1,5 @@
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -43,20 +42,20 @@ export class modifier_t27_wind_blade extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.arrow_count = this.GetSpecialValueFor("arrow_count")
         this.bonus_attack_speed = this.GetSpecialValueFor("bonus_attack_speed")
 
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         return this.bonus_attack_speed
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
 
-    GetProjectileName(params: ModifierTable) {
+    GetProjectileName(params: IModifierTable) {
         return "particles/units/heroes/hero_brewmaster/brewmaster_storm_attack.vpcf"
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)

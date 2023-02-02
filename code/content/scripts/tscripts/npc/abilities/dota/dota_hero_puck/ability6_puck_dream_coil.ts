@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -98,7 +97,7 @@ export class modifier_puck_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -176,7 +175,7 @@ export class modifier_puck_6_thinker extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.attack_time = 5 /** GetAbilityNameLevelSpecialValueFor("special_bonus_unique_puck_custom_8", "value", 0)*/
         this.coil_break_radius = this.GetSpecialValueFor("coil_break_radius")
@@ -249,7 +248,7 @@ export class modifier_puck_6_coiled extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -314,8 +313,8 @@ export class modifier_puck_6_coiled extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_TETHERED]: true,
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (params.attacker == this.GetCasterPlus()) {
             return this.coil_incoming_damage
         }
@@ -349,7 +348,7 @@ export class modifier_puck_6_debuff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.coil_stun_incoming_damage = this.GetSpecialValueFor("coil_stun_incoming_damage")
     }
 
@@ -358,11 +357,11 @@ export class modifier_puck_6_debuff extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_STUNNED]: true,
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_DISABLED
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     g_INCOMING_DAMAGE_PERCENTAGE() {
         return this.coil_stun_incoming_damage
     }

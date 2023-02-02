@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -134,7 +133,7 @@ export class modifier_tinker_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -241,7 +240,7 @@ export class modifier_tinker_6_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.radius = this.GetSpecialValueFor("radius")
         this.collision_radius = this.GetSpecialValueFor("collision_radius")
@@ -332,15 +331,15 @@ export class modifier_tinker_6_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.damage = this.GetSpecialValueFor("damage") + hCaster.GetTalentValue("special_bonus_unique_tinker_custom_3") * hCaster.GetIntellect()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PHYSICAL_DAMAGE_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PHYSICAL_DAMAGE_CONSTANT)
     G_OUTGOING_PHYSICAL_DAMAGE_CONSTANT() {
         return this.damage
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
         return this.damage
     }
@@ -349,7 +348,7 @@ export class modifier_tinker_6_buff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_tinker_6_particle_cast extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (IsClient()) {

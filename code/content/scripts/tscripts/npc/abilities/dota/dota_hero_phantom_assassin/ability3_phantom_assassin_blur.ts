@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -70,7 +69,7 @@ export class modifier_phantom_assassin_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.cast_point_percent = this.GetSpecialValueFor("cast_point_percent")
         if (params.IsOnCreated && IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -109,8 +108,8 @@ export class modifier_phantom_assassin_3 extends BaseModifier_Plus {
             )
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CASTTIME_PERCENTAGE)
-    GetPercentageCasttime(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CASTTIME_PERCENTAGE)
+    GetPercentageCasttime(params: IModifierTable) {
         return this.cast_point_percent
     }
 }
@@ -138,7 +137,7 @@ export class modifier_phantom_assassin_3_blur_attack extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             let iStackCount = (params.blur_count || 0)

@@ -1,16 +1,11 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_keeper_of_the_light_chakra_magic = { "ID": "5473", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_FRIENDLY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "AbilitySound": "Hero_KeeperOfTheLight.ChakraMagic.Target", "AbilityCastRange": "900 900 900 900", "AbilityCastPoint": "0.3 0.3 0.3 0.3", "AbilityCooldown": "20 18 16 14", "AbilityManaCost": "0", "AbilityModifierSupportValue": "3.0", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "mana_restore": "100 180 260 340", "LinkedSpecialBonus": "special_bonus_unique_keeper_of_the_light_2" }, "02": { "var_type": "FIELD_INTEGER", "cooldown_reduction": "3 4 5 6" }, "03": { "var_type": "FIELD_FLOAT", "mana_leak_pct": "4.5 5 5.5 6.0" }, "04": { "var_type": "FIELD_FLOAT", "duration": "5" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };
@@ -72,13 +67,13 @@ export class modifier_keeper_of_the_light_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_mana = this.GetSpecialValueFor("bonus_mana")
     }
     OnIntervalThink() {
@@ -122,7 +117,7 @@ export class modifier_keeper_of_the_light_3 extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
 
-    death(params: ModifierTable) {
+    death(params: IModifierTable) {
         let hAttacker = params.attacker
         let hTarget = params.unit
         if (!GameFunc.IsValid(hAttacker)) {
@@ -168,7 +163,7 @@ export class modifier_keeper_of_the_light_3_buff extends BaseModifier_Plus {
         return "keeper_of_the_light_chakra_magic"
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.promote_mana_limit_percent = this.GetSpecialValueFor("promote_mana_limit_percent")
@@ -189,16 +184,16 @@ export class modifier_keeper_of_the_light_3_buff extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(iParticleID)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_PERCENTAGE)
     G_MANA_PERCENTAGE() {
         return this.promote_mana_limit_percent
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.promote_mana_limit_percent
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (params != null && GameFunc.IsValid(params.target) && params.target.GetMana() <= 0) {
             return this.increase_all_damage_pct
         }

@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -138,14 +137,14 @@ export class modifier_skeleton_king_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.records = []
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.crit_chance = this.GetSpecialValueFor("crit_chance")
         this.crit_mult = this.GetSpecialValueFor("crit_mult")
         this.kill_charges = this.GetSpecialValueFor("kill_charges")
@@ -160,8 +159,8 @@ export class modifier_skeleton_king_2 extends BaseModifier_Plus {
             GameFunc.ArrayFunc.ArrayRemove(this.records, params.record)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
+    EOM_GetModifierCriticalStrike(params: IModifierTable) {
         if (params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             if (GameFunc.mathUtil.PRD(this.crit_chance, params.attacker, "skeleton_king_2")) {
                 if (!params.attacker.IsIllusion()) {
@@ -249,7 +248,7 @@ export class modifier_skeleton_king_2_summon extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_PERMANENT
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.respawn_time = this.GetSpecialValueFor("respawn_time")
         this.model_scale = this.GetSpecialValueFor("model_scale")
@@ -293,28 +292,28 @@ export class modifier_skeleton_king_2_summon extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
-    GetBaseAttackTimeConstant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
+    GetBaseAttackTimeConstant(params: IModifierTable) {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetBaseAttackTime()
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetIncreasedAttackSpeed() * 100
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/creeps/neutral_creeps/n_creep_troll_skeleton/n_creep_skeleton_melee.vmdl", this.GetCasterPlus())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_SCALE)
-    GetModelScale(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_SCALE)
+    GetModelScale(params: IModifierTable) {
         return (this.GetStackCount() - 1) * this.model_scale
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    OnDeath(params: ModifierTable) {
+    OnDeath(params: IModifierTable) {
         if (IsServer() && params.unit == this.GetParentPlus()) {
             let hParent = this.GetParentPlus()
             if (this.bCanRespawn == true) {

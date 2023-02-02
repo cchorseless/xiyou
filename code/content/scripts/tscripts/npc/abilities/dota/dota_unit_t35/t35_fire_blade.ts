@@ -1,20 +1,12 @@
 import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { EntityHelper } from "../../../../helper/EntityHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
-import { LogHelper } from "../../../../helper/LogHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
+import { modifier_particle } from "../../../modifier/modifier_particle";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { GameEnum } from "../../../../shared/GameEnum";
 
 
 @registerAbility()
@@ -52,7 +44,7 @@ export class modifier_t35_fire_blade extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.max_stack_count = this.GetSpecialValueFor("max_stack_count")
         this.attack_bonus = this.GetSpecialValueFor("attack_bonus")
@@ -86,7 +78,7 @@ export class modifier_t35_fire_blade extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.max_stack_count = this.GetSpecialValueFor("max_stack_count")
         this.attack_bonus = this.GetSpecialValueFor("attack_bonus")
@@ -121,7 +113,7 @@ export class modifier_t35_fire_blade extends BaseModifier_Plus {
             modifier_t35_fire_blade_cannot_miss.remove(params.attacker);
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage(params: ModifierAttackEvent) {
         if (IsServer() && params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion()) {
             if (this.records.indexOf(params.record) != -1) {
@@ -220,7 +212,7 @@ export class modifier_t35_fire_blade_cannot_miss extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_t35_particle_atk extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let splash_radius = this.GetSpecialValueFor("splash_radius")
         if (IsClient()) {

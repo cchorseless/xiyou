@@ -1,6 +1,5 @@
 
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -45,7 +44,7 @@ export class modifier_huskar_3 extends BaseModifier_Plus {
     HeroEffectPriority() {
         return 100
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(0)
@@ -68,7 +67,7 @@ export class modifier_huskar_3 extends BaseModifier_Plus {
             this.AddParticle(this.particleID2, false, false, this.HeroEffectPriority(), true, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.maximum_attack_speed = this.GetSpecialValueFor("maximum_attack_speed")
         this.maximum_health_regen = this.GetSpecialValueFor("maximum_health_regen")
         this.maximum_strength = this.GetSpecialValueFor("maximum_strength")
@@ -97,35 +96,35 @@ export class modifier_huskar_3 extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_BASE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BASE_PERCENTAGE)
     EOM_GetModifierBaseStats_Strength_Percentage() {
         if (this.GetParentPlus().PassivesDisabled()) {
             return 0
         }
         return this.maximum_strength / 100 * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
     EOM_GetModifierSpellCriticalStrikeDamage() {
         if (this.GetParentPlus().PassivesDisabled()) {
             return 0
         }
         return this.maximum_spell_crit_damage / 100 * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_REGEN_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_PERCENTAGE)
     GetHealthRegenPercentage() {
         if (this.GetParentPlus().PassivesDisabled()) {
             return 0
         }
         return this.maximum_health_regen / 100 * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         if (this.GetParentPlus().PassivesDisabled()) {
             return 0
         }
         return this.maximum_attack_speed / 100 * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_SCALE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_SCALE)
     GetModelScale() {
         return 1 + this.model_scalle_max / 100 * this.GetStackCount()
     }

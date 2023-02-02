@@ -2,7 +2,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -59,13 +58,13 @@ export class modifier_drow_ranger_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.records = []
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.agility_multiplier = this.GetSpecialValueFor("agility_multiplier")
         this.frost_arrows_duration = this.GetSpecialValueFor("frost_arrows_duration")
     }
@@ -124,7 +123,7 @@ export class modifier_drow_ranger_1 extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
     GetProcAttack_BonusDamage_Physical(params: ModifierAttackEvent) {
         if (!params.attacker.IsIllusion()) {
             if (this.records.indexOf(params.record) != -1) {
@@ -159,8 +158,8 @@ export class modifier_drow_ranger_1_projectile extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_ULTRA
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         if (modifier_drow_ranger_6_projectile.exist(this.GetParentPlus())) {
             return ResHelper.GetParticleReplacement("particles/units/heroes/hero_drow/drow_marksmanship_frost_arrow.vpcf", this.GetCasterPlus())
         } else {
@@ -190,7 +189,7 @@ export class modifier_drow_ranger_1_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iPtclID = ResHelper.CreateParticle({
@@ -211,11 +210,11 @@ export class modifier_drow_ranger_1_slow extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, true, 10, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.frost_arrows_movement_speed = this.GetSpecialValueFor("frost_arrows_movement_speed")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         return this.frost_arrows_movement_speed
     }
 }
@@ -243,7 +242,7 @@ export class modifier_drow_ranger_1_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.frost_arrows_burst_num = this.GetSpecialValueFor("frost_arrows_burst_num") + hCaster.GetTalentValue("special_bonus_unique_drow_ranger_custom_7")
         this.frost_arrows_burst_multi = this.GetSpecialValueFor("frost_arrows_burst_multi")
@@ -311,8 +310,8 @@ export class modifier_drow_ranger_1_debuff extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             if (GameFunc.IsValid(hCaster)) {
@@ -353,7 +352,7 @@ export class modifier_drow_ranger_1_root extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_ROOTED]: true
         }
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iPtclID = ResHelper.CreateParticle({
@@ -370,7 +369,7 @@ export class modifier_drow_ranger_1_root extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_drow_ranger_1_particle_lich_frost_nova extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

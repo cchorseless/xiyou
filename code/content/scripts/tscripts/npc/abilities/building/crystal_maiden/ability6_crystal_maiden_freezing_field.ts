@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -93,7 +92,7 @@ export class modifier_crystal_maiden_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -177,7 +176,7 @@ export class modifier_crystal_maiden_6_caster extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius") + hCaster.GetTalentValue("special_bonus_unique_crystal_maiden_custom_1")
@@ -236,10 +235,10 @@ export class modifier_crystal_maiden_6_caster extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_crystal_maiden_6_particle_explosion extends modifier_particle_thinker {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -305,7 +304,7 @@ export class modifier_crystal_maiden_6_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         this.movespeed_slow = this.GetSpecialValueFor("movespeed_slow")
@@ -321,8 +320,8 @@ export class modifier_crystal_maiden_6_slow extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         return this.movespeed_slow
     }
 }
@@ -347,7 +346,7 @@ export class modifier_special_bonus_unique_crystal_maiden_custom_4 extends BaseM
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({

@@ -1,6 +1,5 @@
 
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -78,7 +77,7 @@ export class modifier_ursa_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -135,7 +134,7 @@ export class modifier_ursa_6 extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_ursa_6_buff extends BaseModifier_Plus {
     enrage_multiplier: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
     status_resistance: number;
     attack_rate: number;
     IsHidden() {
@@ -156,7 +155,7 @@ export class modifier_ursa_6_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
@@ -189,7 +188,7 @@ export class modifier_ursa_6_buff extends BaseModifier_Plus {
             this.AddParticle(particleID, false, false, 100, true, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_ursa_custom_4"
         this.enrage_multiplier = this.GetSpecialValueFor("enrage_multiplier") + hCaster.GetTalentValue("special_bonus_unique_ursa_custom_6")
@@ -197,16 +196,16 @@ export class modifier_ursa_6_buff extends BaseModifier_Plus {
         this.attack_rate = this.GetSpecialValueFor("attack_rate")
 
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
+    tooltip(params: IModifierTable) {
         return this.enrage_multiplier
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
-    tooltip2(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
+    tooltip2(params: IModifierTable) {
         return this.status_resistance
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
-    GetBaseAttackTimeConstant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
+    GetBaseAttackTimeConstant(params: IModifierTable) {
         return this.attack_rate
     }
 

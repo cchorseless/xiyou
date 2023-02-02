@@ -1,19 +1,11 @@
 import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { EntityHelper } from "../../../../helper/EntityHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
-import { LogHelper } from "../../../../helper/LogHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
+import { modifier_particle } from "../../../modifier/modifier_particle";
 
 
 @registerAbility()
@@ -50,7 +42,7 @@ export class modifier_t33_axe_crit extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.chance = this.GetSpecialValueFor("chance")
         this.aoe_radius = this.GetSpecialValueFor("aoe_radius")
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
@@ -58,8 +50,8 @@ export class modifier_t33_axe_crit extends BaseModifier_Plus {
         this.bonus_damage_per_health = this.GetSpecialValueFor("bonus_damage_per_health")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
-    GetProcAttack_BonusDamage_Physical(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
+    GetProcAttack_BonusDamage_Physical(params: IModifierTable) {
         if (!params.attacker.IsIllusion() && !params.attacker.PassivesDisabled() && !params.attacker.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             if (GameFunc.mathUtil.PRD(this.chance, params.attacker, "t33_axe_crit")) {
                 let hCaster = params.attacker
@@ -117,10 +109,10 @@ export class modifier_t33_axe_crit_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.slow_movespeed = this.GetSpecialValueFor("slow_movespeed")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage() {
         return this.slow_movespeed
     }
@@ -128,7 +120,7 @@ export class modifier_t33_axe_crit_slow extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_t33_axe_crit_particle extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hTarget = this.GetCasterPlus()
         let hCaster = this.GetParentPlus()

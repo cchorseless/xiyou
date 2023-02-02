@@ -1,4 +1,3 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -89,7 +88,7 @@ export class modifier_shredder_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.stack_duration = this.GetSpecialValueFor("stack_duration")
         this.cooldown = this.GetSpecialValueFor("cooldown")
@@ -98,7 +97,7 @@ export class modifier_shredder_2 extends BaseModifier_Plus {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.stack_duration = this.GetSpecialValueFor("stack_duration")
         this.cooldown = this.GetSpecialValueFor("cooldown")
@@ -146,9 +145,9 @@ export class modifier_shredder_2 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
 
-    EOM_GetModifierOutgoingDamagePercentage(params: ModifierTable) {
+    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (IsServer() && params != null) {
             if (this.GetParentPlus().PassivesDisabled()) {
                 return
@@ -196,7 +195,7 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -220,7 +219,7 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
             }
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -276,7 +275,7 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         this._tooltip = (this._tooltip || 0) % 3 + 1
         if (this._tooltip == 1) {
@@ -287,14 +286,14 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
             return this.bonus_spell_crit_damage * this.GetStackCount()
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
-    EOM_GetModifierSpellCriticalStrike(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
+    EOM_GetModifierSpellCriticalStrike(params: IModifierTable) {
         if (GameFunc.mathUtil.PRD(this.bonus_spell_crit_chance * this.GetStackCount(), this.GetParentPlus(), "modifier_shredder_2_buff")) {
             return this.base_spell_crit_damage
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
-    EOM_GetModifierSpellCriticalStrikeDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
+    EOM_GetModifierSpellCriticalStrikeDamage(params: IModifierTable) {
         return this.bonus_spell_crit_damage * this.GetStackCount()
     }
 }
@@ -328,7 +327,7 @@ export class modifier_shredder_2_fire_buff extends BaseModifier_Plus {
     GetTexture() {
         return "shredder_flamethrower"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.damage_per_second_factor = this.GetSpecialValueFor("damage_per_second_factor")
         this.length = this.GetSpecialValueFor("length")
@@ -350,7 +349,7 @@ export class modifier_shredder_2_fire_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.damage_per_second_factor = this.GetSpecialValueFor("damage_per_second_factor")
         this.length = this.GetSpecialValueFor("length")
@@ -424,7 +423,7 @@ export class modifier_shredder_2_fire_debuff extends BaseModifier_Plus {
     GetTexture() {
         return "shredder_flamethrower"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.reduce_move_speed_pct = this.GetSpecialValueFor("reduce_move_speed_pct")
         let hParent = this.GetParentPlus()
@@ -432,7 +431,7 @@ export class modifier_shredder_2_fire_debuff extends BaseModifier_Plus {
             hParent.EmitSound(ResHelper.GetSoundReplacement("Hero_Shredder.Flamethrower.Target", hParent))
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.reduce_move_speed_pct = this.GetSpecialValueFor("reduce_move_speed_pct")
     }
@@ -443,7 +442,7 @@ export class modifier_shredder_2_fire_debuff extends BaseModifier_Plus {
             this.GetParentPlus().StopSound(ResHelper.GetSoundReplacement("Hero_Shredder.Flamethrower.Target", hParent))
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage() {
         return -this.reduce_move_speed_pct
     }
@@ -456,7 +455,7 @@ export class modifier_shredder_2_particle extends modifier_particle {
     iParticleID_2: ParticleID;
     iParticleID_3: ParticleID;
     iParticleID_4: ParticleID;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let whirling_radius = this.GetSpecialValueFor("whirling_radius")
         if (IsServer()) {

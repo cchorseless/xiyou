@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -87,7 +86,7 @@ export class modifier_lycan_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -170,7 +169,7 @@ export class modifier_lycan_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.howl_attack_speed = this.GetSpecialValueFor("howl_attack_speed")
@@ -197,12 +196,12 @@ export class modifier_lycan_2_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
     G_HP_PERCENTAGE() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_lycan_custom_2")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         return this.howl_attack_speed
     }
 }
@@ -231,7 +230,7 @@ export class modifier_lycan_2_debuff extends BaseModifier_Plus {
     ShouldUseOverheadOffset() {
         return true
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.howl_armor = this.GetSpecialValueFor("howl_armor")
@@ -246,11 +245,11 @@ export class modifier_lycan_2_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, true)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     G_PHYSICAL_ARMOR_BONUS() {
         return this.howl_armor
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
 
     Tooltip() {
         return this.howl_armor
@@ -259,7 +258,7 @@ export class modifier_lycan_2_debuff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_lycan_2_particle_start extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()

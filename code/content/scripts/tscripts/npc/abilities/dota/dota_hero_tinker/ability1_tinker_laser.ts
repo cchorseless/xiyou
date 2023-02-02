@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -158,7 +157,7 @@ export class modifier_tinker_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -249,19 +248,19 @@ export class modifier_tinker_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.laser_damage = this.GetSpecialValueFor("laser_damage")
         this.laser_int_multiplier = this.GetSpecialValueFor("laser_int_multiplier")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_CONSTANT)
     EOM_GetModifierOutgoingPureDamageConstant() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return (this.laser_damage + this.GetCasterPlus().GetIntellect() * this.laser_int_multiplier)
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
 
     On_Tooltip2() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
@@ -292,7 +291,7 @@ export class modifier_tinker_1_buff_amplify_damage extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     G_INCOMING_DAMAGE_PERCENTAGE() {
         return GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_tinker_custom_6") || 0
     }
@@ -300,7 +299,7 @@ export class modifier_tinker_1_buff_amplify_damage extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_tinker_1_particle extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetParentPlus()
         let hTarget = this.GetCasterPlus()

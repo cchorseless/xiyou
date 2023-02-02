@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionVertical_Plus, BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -142,7 +141,7 @@ export class modifier_lion_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -224,7 +223,7 @@ export class modifier_lion_1_debuff extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_STUNNED]: true
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     goverrideAnimation() {
         return GameActivity_t.ACT_DOTA_DISABLED
     }
@@ -258,7 +257,7 @@ export class modifier_lion_1_motion extends BaseModifierMotionVertical_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.damage = this.GetSpecialValueFor("damage")
         this.damage_per_mana = this.GetSpecialValueFor("damage_per_mana")
@@ -312,7 +311,7 @@ export class modifier_lion_1_motion extends BaseModifierMotionVertical_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     G_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_FLAIL
     }
@@ -321,7 +320,7 @@ export class modifier_lion_1_motion extends BaseModifierMotionVertical_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_lion_1_particle_staff extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()
@@ -341,7 +340,7 @@ export class modifier_lion_1_particle_staff extends modifier_particle {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_lion_1_particle_spikes extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

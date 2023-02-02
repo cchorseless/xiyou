@@ -2,7 +2,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -138,7 +137,7 @@ export class modifier_shadow_shaman_3_hex extends BaseModifier_Plus {
     GetTexture() {
         return ResHelper.GetAbilityTextureReplacement("shadow_shaman_voodoo", this.GetCasterPlus())
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.movespeed = this.GetSpecialValueFor("hex_movespeed")
         let hCaster = this.GetCasterPlus()
@@ -165,15 +164,15 @@ export class modifier_shadow_shaman_3_hex extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BASE_OVERRIDE)
-    GetMoveSpeedOverride(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BASE_OVERRIDE)
+    GetMoveSpeedOverride(params: IModifierTable) {
         return this.movespeed
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/props_gameplay/chicken.vmdl", this.GetCasterPlus())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PRESERVE_PARTICLES_ON_MODEL_CHANGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PRESERVE_PARTICLES_ON_MODEL_CHANGE)
     g_PreserveParticlesOnModelChanged(params: any) {
         return 1
     }

@@ -1,5 +1,4 @@
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -65,7 +64,7 @@ export class modifier_lion_3_mana extends BaseModifier_Plus {
         return ResHelper.GetAbilityTextureReplacement("lion_mana_drain", this.GetCasterPlus())
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             let fMana = (params.overflow_mana || 0)
             this.changeStackCount(fMana)
@@ -81,11 +80,11 @@ export class modifier_lion_3_mana extends BaseModifier_Plus {
             this.SetStackCount(0)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_BONUS)
-    EOM_GetModifierManaBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
+    EOM_GetModifierManaBonus(params: IModifierTable) {
         return this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip() {
         return this.GetStackCount()
     }
@@ -93,7 +92,7 @@ export class modifier_lion_3_mana extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_lion_3_particle_drain extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

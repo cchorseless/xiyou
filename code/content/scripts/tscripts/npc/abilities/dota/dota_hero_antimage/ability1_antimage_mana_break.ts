@@ -3,7 +3,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -71,7 +70,7 @@ export class modifier_antimage_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.damage_per_burn = this.GetSpecialValueFor("damage_per_burn")
         this.mana_per_hit = this.GetSpecialValueFor("mana_per_hit")
@@ -84,7 +83,7 @@ export class modifier_antimage_1 extends BaseModifier_Plus {
         this.shard_trigger_chance = this.GetSpecialValueFor("shard_trigger_chance")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROCATTACK_FEEDBACK)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_FEEDBACK)
     GetProcAttack_Feedback(params: ModifierAttackEvent) {
         let hCaster = params.attacker as IBaseNpc_Plus
         let hTarget = params.target as IBaseNpc_Plus
@@ -160,7 +159,7 @@ export class modifier_antimage_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             let fValue = params.value || 0
             this.changeStackCount(fValue)
@@ -169,12 +168,12 @@ export class modifier_antimage_1_buff extends BaseModifier_Plus {
             })
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_AGILITY_BONUS)
-    EOM_GetModifierBonusStats_Agility(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
+    EOM_GetModifierBonusStats_Agility(params: IModifierTable) {
         return this.GetStackCount()
     }
 }
@@ -199,7 +198,7 @@ export class modifier_antimage_1_max_mana extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             let fValue = params.value || 0
             this.changeStackCount(fValue)
@@ -208,15 +207,15 @@ export class modifier_antimage_1_max_mana extends BaseModifier_Plus {
             })
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_BONUS)
-    EOM_GetModifierManaBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
+    EOM_GetModifierManaBonus(params: IModifierTable) {
         return this.GetStackCount()
     }
 }
 // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_antimage_1_max_mana_particle_generic_manaburn extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -114,7 +113,7 @@ export class modifier_undying_3 extends BaseModifier_Plus {
             this.hTombStone[index].FireSummonned(hParent)
         }
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.tomb_stone_max_distance = this.GetSpecialValueFor("tomb_stone_max_distance")
         if (IsServer()) {
@@ -166,7 +165,7 @@ export class modifier_undying_3 extends BaseModifier_Plus {
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    attackLanded(params: ModifierTable) {
+    attackLanded(params: IModifierTable) {
         if (!GameFunc.IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker == this.GetParentPlus() && this.GetParentPlus().HasTalent("special_bonus_unique_undying_custom_2") && !params.attacker.IsRangedAttacker() && !params.attacker.IsIllusion()) {
@@ -253,7 +252,7 @@ export class modifier_undying_3_aura extends BaseModifier_Plus {
     GetAura() {
         return "modifier_undying_3_aura_effect"
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.zombie_radius = this.GetSpecialValueFor("zombie_radius")
         this.zombie_duration = this.GetSpecialValueFor("zombie_duration")
     }
@@ -269,16 +268,16 @@ export class modifier_undying_3_aura extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_CAST_ANGLE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_CAST_ANGLE)
     GetMoveSpeedBonus_Percentage(tParams: any) {
         return 1
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DISABLE_TURNING)
-    GetDisableTurning(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_TURNING)
+    GetDisableTurning(params: IModifierTable) {
         return 1
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/heroes/undying/undying_tower.vmdl", this.GetCasterPlus())
     }
 }
@@ -308,7 +307,7 @@ export class modifier_undying_3_aura_effect extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.zombie_duration = this.GetSpecialValueFor("zombie_duration")
         this.zombie_base_damage = this.GetSpecialValueFor("zombie_base_damage")
@@ -383,13 +382,13 @@ export class modifier_undying_3_zombie_lifetime extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         this.sParentModel = (this.GetParentPlus().GetUnitName() == "npc_dota_unit_undying_zombie_custom" &&
             ResHelper.GetModelReplacement("models/heroes/undying/undying_minion.vmdl", this.GetCasterPlus()) ||
             ResHelper.GetModelReplacement("models/heroes/undying/undying_minion_torso.vmdl", this.GetCasterPlus()))
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.zombie_base_damage_factor = this.GetSpecialValueFor("zombie_base_damage_factor")
         this.duration = this.GetSpecialValueFor("duration")
     }
@@ -400,22 +399,22 @@ export class modifier_undying_3_zombie_lifetime extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
     EOM_GetModifierBaseAttack_BonusDamage() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return (this.GetCasterPlus() as BaseNpc_Hero_Plus).GetStrength() * this.zombie_base_damage_factor
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    attackLanded(params: ModifierTable) {
+    attackLanded(params: IModifierTable) {
         if (!GameFunc.IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion()) {
             modifier_undying_3_debuff.apply(params.target, this.GetCasterPlus(), this.GetAbilityPlus(), { duration: this.duration })
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return this.sParentModel
     }
 }
@@ -443,7 +442,7 @@ export class modifier_undying_3_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.max_stack = this.GetSpecialValueFor("max_stack")
@@ -453,13 +452,13 @@ export class modifier_undying_3_debuff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     EOM_GetModifierIncomingDamagePercentage(params: ModifierAttackEvent) {
         if (params != null && params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK) {
             return this.GetStackCount() * this.increase_attack_damage
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.GetStackCount() * this.increase_attack_damage
     }

@@ -1,11 +1,4 @@
-/*
- * @Author: Jaxh
- * @Date: 2021-05-07 16:05:35
- * @LastEditors: your name
- * @LastEditTime: 2021-06-15 19:08:54
- * @Description: file content
- */
-import { GameEnum } from "../../shared/GameEnum";
+import { PropertyConfig } from "../../shared/PropertyConfig";
 import { BaseModifier, BaseModifierMotionBoth, BaseModifierMotionHorizontal, BaseModifierMotionVertical } from "./Base_Plus";
 
 declare global {
@@ -35,7 +28,7 @@ export class BaseModifierMotionHorizontal_Plus extends BaseModifierMotionHorizon
  * @param params
  * @returns
  */
-export function registerProp(params: GameEnum.Property.Enum_MODIFIER_PROPERTY) {
+export function registerProp(params: PropertyConfig.EMODIFIER_PROPERTY) {
     // LogHelper.print(GameRules.State_Get(), 'registerModifier')
     // 首次加载时不需要
     // if (IsServer() && GameRules.State_Get() < DOTA_GameState.DOTA_GAMERULES_STATE_TEAM_SHOWCASE) {
@@ -66,5 +59,4 @@ export function registerProp(params: GameEnum.Property.Enum_MODIFIER_PROPERTY) {
         }
     }
 }
-
 

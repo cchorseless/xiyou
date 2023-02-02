@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -162,7 +161,7 @@ export class modifier_storm_spirit_3 extends BaseModifier_Plus {
         return false
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
-    OnAbilityExecuted(params: ModifierTable) {
+    OnAbilityExecuted(params: IModifierTable) {
         let hParent = this.GetParentPlus()
 
         if (hParent == params.unit && !hParent.PassivesDisabled() && !hParent.IsIllusion()) {
@@ -205,7 +204,7 @@ export class modifier_storm_spirit_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.overload_stack = this.GetSpecialValueFor("overload_stack") + (GameFunc.IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_storm_spirit_custom_6") || 0)
@@ -310,7 +309,7 @@ export class modifier_storm_spirit_3_buff extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     Get_ActivityTranslationModifiers() {
         return "overload"
     }
@@ -337,10 +336,10 @@ export class modifier_storm_spirit_3_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.overload_move_slow = this.GetSpecialValueFor("overload_move_slow")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
 
     GetMoveSpeedBonus_Percentage() {
         return this.overload_move_slow
@@ -367,7 +366,7 @@ export class modifier_storm_spirit_3_stack_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             this.IncrementStackCount()
             this.addTimer(params.duration, () => {
@@ -380,7 +379,7 @@ export class modifier_storm_spirit_3_stack_debuff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_storm_spirit_3_particle extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

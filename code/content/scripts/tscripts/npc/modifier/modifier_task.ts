@@ -17,7 +17,7 @@ export class modifier_task extends BaseModifier_Plus {
     //         [modifierstate.MODIFIER_STATE_ATTACK_IMMUNE]: true,
     //     }
     // }
-    // @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROVIDES_FOW_POSITION)
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION)
     // GetVision() {
     //     return 0
     // }

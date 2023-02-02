@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -52,7 +51,7 @@ export class modifier_drow_ranger_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -125,7 +124,7 @@ export class modifier_drow_ranger_3_hidden extends BaseModifier_Plus {
     GetAura() {
         return "modifier_drow_ranger_3_aura"
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
     }
 
@@ -153,19 +152,19 @@ export class modifier_drow_ranger_3_aura extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         this.trueshot_ranged_attack_speed = this.GetSpecialValueFor("trueshot_ranged_attack_speed")
         this.increase_agi_pct = this.GetSpecialValueFor("increase_agi_pct")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     G_MAX_ATTACKSPEED_BONUS() {
         return ((GameFunc.IsValid(this.GetCasterPlus()) && this.GetParentPlus().GetUnitLabel() == "HERO") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_drow_ranger_custom_8") || 0)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster) || hCaster.PassivesDisabled()) {
             return 0
@@ -175,8 +174,8 @@ export class modifier_drow_ranger_3_aura extends BaseModifier_Plus {
         let trueshot_ranged_attack_speed = this.trueshot_ranged_attack_speed + hCaster.GetTalentValue("special_bonus_unique_drow_ranger_custom_5")
         return iAgi * trueshot_ranged_attack_speed * 0.01
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_AGILITY_PERCENTAGE)
-    EOM_GetModifierStats_Agility_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_PERCENTAGE)
+    EOM_GetModifierStats_Agility_Percentage(params: IModifierTable) {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && this.GetParentPlus().IsRangedAttacker() && this.GetParentPlus().GetUnitLabel() == "HERO") {
             return this.increase_agi_pct
         }

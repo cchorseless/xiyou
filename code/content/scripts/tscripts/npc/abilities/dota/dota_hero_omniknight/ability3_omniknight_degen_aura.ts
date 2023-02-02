@@ -1,16 +1,9 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_omniknight_degen_aura = { "ID": "5265", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "AbilityCastRange": "375", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "speed_bonus": "10 18 26 34", "LinkedSpecialBonus": "special_bonus_unique_omniknight_2" }, "02": { "var_type": "FIELD_INTEGER", "radius": "375" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };
@@ -90,7 +83,7 @@ export class modifier_omniknight_3 extends BaseModifier_Plus {
     GetAuraDuration() {
         return 2
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
     }
 
@@ -117,7 +110,7 @@ export class modifier_omniknight_3_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.duration = this.GetSpecialValueFor("duration")
         if (IsClient() && params.IsOnCreated) {
@@ -133,7 +126,7 @@ export class modifier_omniknight_3_debuff extends BaseModifier_Plus {
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
-    OnTakeDamage(params: ModifierTable) {
+    OnTakeDamage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -168,7 +161,7 @@ export class modifier_omniknight_3_reduce_status extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let max_count = this.GetSpecialValueFor("max_count") + hCaster.GetTalentValue("special_bonus_unique_omniknight_custom_8")
@@ -181,15 +174,15 @@ export class modifier_omniknight_3_reduce_status extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
     G_STATUS_RESISTANCE_STACKING() {
         return -this.status_resistance_percent * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     g_INCOMING_DAMAGE_PERCENTAGE() {
         return this.bonus_damage_percent * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         this._tooltip = (this._tooltip || 0) % 2 + 1
         if (this._tooltip == 1) {

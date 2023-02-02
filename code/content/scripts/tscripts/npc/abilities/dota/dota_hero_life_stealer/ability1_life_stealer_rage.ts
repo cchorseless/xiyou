@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -72,7 +71,7 @@ export class modifier_life_stealer_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -154,7 +153,7 @@ export class modifier_life_stealer_1_buff extends BaseModifier_Plus {
     GetTexture() {
         return "life_stealer_rage"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -196,7 +195,7 @@ export class modifier_life_stealer_1_buff extends BaseModifier_Plus {
             }
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -246,22 +245,22 @@ export class modifier_life_stealer_1_buff extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_MAGIC_IMMUNE]: this.GetStackCount() != 0,
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         return this.attack_speed * this.GetStackCount() * 0.01
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_LIFESTEALER_RAGE
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
     GetDamageOutgoing_Percentage() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && this.GetCasterPlus() == this.GetParentPlus()) {
             return this.shard_attack_damage
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     G_MAX_ATTACKSPEED_BONUS() {
         return this.GetCasterPlus().HasTalent("special_bonus_unique_life_stealer_custom_7") && this.attack_speed * this.GetStackCount() * 0.01 || 0
     }

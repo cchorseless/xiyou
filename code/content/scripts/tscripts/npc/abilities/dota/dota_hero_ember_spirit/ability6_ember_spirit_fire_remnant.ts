@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -191,7 +190,7 @@ export class modifier_ember_spirit_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -279,17 +278,17 @@ export class modifier_ember_spirit_6 extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetIncreasedAttackSpeed() * 100
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_ABSOLUTE)
-    GetMoveSpeed_Absolute(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_ABSOLUTE)
+    GetMoveSpeed_Absolute(params: IModifierTable) {
         return this.move_speed
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DISABLE_AUTOATTACK)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_AUTOATTACK)
     Get_DisableAutoAttack() {
         return 1
     }
@@ -378,7 +377,7 @@ export class modifier_ember_spirit_6_remnant extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(0)
@@ -442,7 +441,7 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
@@ -481,7 +480,7 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
@@ -542,7 +541,7 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
             [modifierstate.MODIFIER_STATE_ROOTED]: true
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     G_PHYSICAL_ARMOR_BONUS() {
         return -this.GetStackCount()
     }
@@ -580,7 +579,7 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetParentPlus()
         if (!GameFunc.IsValid(hCaster)) {
@@ -634,7 +633,7 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
             }
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
@@ -741,14 +740,14 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_TELEPORTED)
-    OnTeleported(params: ModifierTable) {
+    OnTeleported(params: IModifierTable) {
         if (IsServer() && params.unit == this.GetParentPlus()) {
             this.vStartPosition = params.new_pos
             ParticleManager.SetParticleControl(this.particleID, 0, this.vStartPosition)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         if (IsServer()) {
             return this.bonus_damage * (1 + this.ability_4.GetSpecialValueFor("scepter_damage_percent") * 0.01)
         }
@@ -806,7 +805,7 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
     GetAuraEntityReject(hTarget: IBaseNpc_Plus) {
         return hTarget == this.GetParentPlus()
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let ReManatCaster = this.GetParentPlus()
@@ -856,7 +855,7 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         let ReManatCaster = this.GetParentPlus()
@@ -928,8 +927,8 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         return this.bonus_attack_damage_per_agi
     }
 }
@@ -960,7 +959,7 @@ export class modifier_ember_spirit_6_friend_ember_spirit_4 extends BaseModifier_
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus().GetSource()
             if (!GameFunc.IsValid(hCaster)) {
@@ -985,8 +984,8 @@ export class modifier_ember_spirit_6_friend_ember_spirit_4 extends BaseModifier_
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         return this.bouns_attack_damage
     }
 }
@@ -1034,7 +1033,7 @@ export class modifier_ember_spirit_6_enemy_arua_ember_spirit_4 extends BaseModif
     GetAuraSearchFlags() {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
     }
 
@@ -1065,7 +1064,7 @@ export class modifier_ember_spirit_6_enemy_arua_debuff_ember_spirit_4 extends Ba
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetAuraOwner() as IBaseNpc_Plus
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -1076,11 +1075,11 @@ export class modifier_ember_spirit_6_enemy_arua_debuff_ember_spirit_4 extends Ba
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
     g_MAGICAL_ARMOR_BONUS() {
         return this.GetStackCount()
     }
@@ -1109,10 +1108,10 @@ export class modifier_scepter_amplify_damage extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.scepter_damage_percent = this.GetSpecialValueFor("scepter_damage_percent")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     g_OUTGOING_DAMAGE_PERCENTAGE() {
         return this.scepter_damage_percent
     }

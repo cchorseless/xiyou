@@ -1,16 +1,9 @@
-import { GameEnum } from "../../../../shared/GameEnum";
-import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_medusa_mana_shield = { "ID": "5506", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_IMMEDIATE", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "AbilitySound": "Hero_Medusa.ManaShield.On", "AbilityCastPoint": "0.4 0.4 0.4 0.4", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "damage_per_mana": "1.6 1.9 2.2 2.5" }, "02": { "var_type": "FIELD_FLOAT", "absorption_pct": "70" }, "03": { "var_type": "FIELD_INTEGER", "bonus_mana": "100 150 200 250" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };
@@ -66,7 +59,7 @@ export class modifier_medusa_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.mana_damage = this.GetSpecialValueFor("mana_damage")
         this.triple_mana_damage = this.GetSpecialValueFor("triple_mana_damage")
         if (params.IsOnCreated && IsServer()) {
@@ -158,8 +151,8 @@ export class modifier_medusa_6_projectile extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_ULTRA
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return ResHelper.GetParticleReplacement("particles/particle_sr/medusa/medusa_3.vpcf", this.GetCasterPlus())
     }
 

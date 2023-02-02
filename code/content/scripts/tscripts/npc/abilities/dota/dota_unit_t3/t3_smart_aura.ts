@@ -1,18 +1,9 @@
 import { GameFunc } from "../../../../GameFunc";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { EntityHelper } from "../../../../helper/EntityHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
-import { LogHelper } from "../../../../helper/LogHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
+import { modifier_particle } from "../../../modifier/modifier_particle";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 
@@ -64,7 +55,7 @@ export class modifier_t3_smart_aura extends BaseModifier_Plus {
     GetAura() {
         return "modifier_t3_smart_aura_effect"
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.aura_radius = this.GetSpecialValueFor("aura_radius")
     }
 }
@@ -91,12 +82,12 @@ export class modifier_t3_smart_aura_effect extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.restore_chance = this.GetSpecialValueFor("restore_chance")
         this.restore_amount = this.GetSpecialValueFor("restore_amount")
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
-    OnAbilityExecuted(params: ModifierTable) {
+    OnAbilityExecuted(params: IModifierTable) {
         if (GameFunc.IsValid(this.GetAbilityPlus()) && GameFunc.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) {
             if (params.unit == this.GetParentPlus()) {
                 let hAbility = params.ability
@@ -124,7 +115,7 @@ export class modifier_t3_smart_aura_effect extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_t3_smart_aura_particle extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({

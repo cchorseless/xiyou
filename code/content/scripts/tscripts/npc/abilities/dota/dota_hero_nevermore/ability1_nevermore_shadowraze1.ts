@@ -147,13 +147,13 @@ export class modifier_nevermore_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.chance_scepter = this.GetSpecialValueFor("chance_scepter")
     }
 
@@ -233,7 +233,7 @@ export class modifier_nevermore_1_debuff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (!IsServer()) {
             let iParticleID = ResHelper.CreateParticle({
@@ -246,7 +246,7 @@ export class modifier_nevermore_1_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             this.IncrementStackCount()
         }
@@ -255,7 +255,7 @@ export class modifier_nevermore_1_debuff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_nevermore_1_particle_nevermore_shadowraze extends modifier_particle_thinker {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

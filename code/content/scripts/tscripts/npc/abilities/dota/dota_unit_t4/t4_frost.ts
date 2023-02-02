@@ -1,7 +1,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -49,7 +48,7 @@ export class modifier_t4_frost extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.records = []
@@ -126,8 +125,8 @@ export class modifier_t4_frost_projectile extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_ULTRA
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return "particles/neutral_fx/ghost_frost_attack.vpcf"
     }
 }
@@ -153,7 +152,7 @@ export class modifier_t4_frost_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
@@ -174,12 +173,12 @@ export class modifier_t4_frost_slow extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.movespeed_slow = this.GetSpecialValueFor("movespeed_slow")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
 
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         return this.movespeed_slow
     }
 

@@ -129,7 +129,7 @@ export class modifier_void_spirit_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             let hParent = this.GetParentPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActiveCount: number, iActivePct: number, iDamagePct: number, all_damage_amplify: number };
@@ -174,7 +174,7 @@ export class modifier_void_spirit_3 extends BaseModifier_Plus {
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_TELEPORTED)
-    OnTeleported(params: ModifierTable) {
+    OnTeleported(params: IModifierTable) {
         if (IsServer() && params.unit == this.GetParentPlus()) {
             let hAbility = this.GetAbilityPlus() as ability2_void_spirit_dissimilate
             if (hAbility && hAbility.GetOriCaster) {
@@ -219,7 +219,7 @@ export class modifier_void_spirit_3_create_ill extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
@@ -361,7 +361,7 @@ export class modifier_void_spirit_3_ill extends BaseModifier_Plus {
     StatusEffectPriority() {
         return 10
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
         hParent.IsDummy = true

@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -77,7 +76,7 @@ export class modifier_earthshaker_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -161,7 +160,7 @@ export class modifier_earthshaker_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -189,7 +188,7 @@ export class modifier_earthshaker_2_buff extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(iParticleID)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -214,19 +213,19 @@ export class modifier_earthshaker_2_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
-    Get_BaseDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    Get_BaseDamageOutgoing_Percentage(params: IModifierTable) {
         return this.totem_damage_percentage
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     Get_ActivityTranslationModifiers() {
         return "enchant_totem"
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
-    Get_AttackRangeBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
+    Get_AttackRangeBonus(params: IModifierTable) {
         return this.bonus_attack_range
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
     Get_CastRangeBonusStacking(params: ModifierAbilityEvent) {
         if (GameFunc.IsValid(params.ability) && GameFunc.IncludeArgs(params.ability.GetBehaviorInt(), DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_ATTACK)[0]) {
             return this.bonus_attack_range
@@ -234,7 +233,7 @@ export class modifier_earthshaker_2_buff extends BaseModifier_Plus {
         return 0
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    On_AttackLanded(params: ModifierTable) {
+    On_AttackLanded(params: IModifierTable) {
         if (!GameFunc.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
 
         if (params.attacker == this.GetParentPlus()) {
@@ -278,7 +277,7 @@ export class modifier_earthshaker_2_buff extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_earthshaker_2_particle_attack extends modifier_particle {
     splash_radius: number;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

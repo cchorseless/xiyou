@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_particle } from "../../../modifier/modifier_particle";
@@ -72,7 +71,7 @@ export class modifier_juggernaut_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -150,7 +149,7 @@ export class modifier_juggernaut_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -179,7 +178,7 @@ export class modifier_juggernaut_1_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.blade_fury_radius = this.GetSpecialValueFor("blade_fury_radius")
         this.bonus_attack_speed = this.GetSpecialValueFor("bonus_attack_speed")
@@ -229,24 +228,24 @@ export class modifier_juggernaut_1_buff extends BaseModifier_Plus {
             this.GetParentPlus().EmitSound(ResHelper.GetSoundReplacement("Hero_Juggernaut.BladeFuryStop", this.GetCasterPlus()))
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
     G_STATUS_RESISTANCE_STACKING() {
         return this.status_resistance
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     G_MAX_ATTACKSPEED_BONUS() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_juggernaut_custom_2")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         return this.bonus_attack_speed
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_1
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE_ILLUSION)
-    GetDamageOutgoing_Percentage_Illusion(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE_ILLUSION)
+    GetDamageOutgoing_Percentage_Illusion(params: IModifierTable) {
         if (params.target && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, this.GetParentPlus().GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             //  return -100
         }
@@ -276,10 +275,10 @@ export class modifier_juggernaut_1_shard_attack_damage extends BaseModifier_Plus
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.attack_damage_pct = this.GetSpecialValueFor("attack_damage_pct")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
     GetBaseDamageOutgoing_Percentage() {
         return this.attack_damage_pct - 100
     }
@@ -289,7 +288,7 @@ export class modifier_juggernaut_1_shard_attack_damage extends BaseModifier_Plus
 export class modifier_juggernaut_1_damage extends modifier_particle {
     blade_fury_damage: number;
     blade_fury_damage_tick: number;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

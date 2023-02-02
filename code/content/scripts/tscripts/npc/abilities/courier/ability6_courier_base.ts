@@ -1,13 +1,9 @@
 
-import { GameEnum } from "../../../shared/GameEnum";
-import { LogHelper } from "../../../helper/LogHelper";
 import { MiniMapHelper } from "../../../helper/MiniMapHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-import { modifier_test } from "../../modifier/modifier_test";
-import { modifier_tp } from "../../modifier/modifier_tp";
 /**标记 */
 @registerAbility()
 export class ability6_courier_base extends BaseAbility_Plus {
@@ -63,7 +59,7 @@ export class modifier_biaoji extends BaseModifier_Plus {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
 
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
@@ -90,7 +86,7 @@ export class modifier_biaoji extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROVIDES_FOW_POSITION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION)
     GetVision() {
         return 1
     }

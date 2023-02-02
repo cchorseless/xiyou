@@ -1,7 +1,6 @@
 
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -105,13 +104,13 @@ export class modifier_snapfire_1 extends BaseModifier_Plus {
         return false
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.attack_count = this.GetSpecialValueFor("attack_count")
         this.crit_shard = this.GetSpecialValueFor("crit_shard")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
-    EOM_GetModifierSpellCriticalStrike(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
+    EOM_GetModifierSpellCriticalStrike(params: IModifierTable) {
         if (IsServer()) {
             if (params.inflictor == this.GetAbilityPlus() && this.GetCasterPlus().HasShard()) {
                 return this.crit_shard
@@ -119,7 +118,7 @@ export class modifier_snapfire_1 extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    attackLanded(params: ModifierTable) {
+    attackLanded(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (params.target == null || params.target.GetClassname() == "dota_item_drop") {
@@ -177,10 +176,10 @@ export class modifier_snapfire_1_debuff extends BaseModifier_Plus {
         return false
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.reduce_move_speed_percent = this.GetSpecialValueFor("reduce_move_speed_percent")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage() {
         return -this.reduce_move_speed_percent
     }

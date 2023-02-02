@@ -3,7 +3,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
@@ -194,7 +193,7 @@ export class modifier_undying_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -285,7 +284,7 @@ export class modifier_undying_2_health_buff extends BaseModifier_Plus {
         return false
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage_per_unit = this.GetSpecialValueFor("damage_per_unit")
         this.damage_per_unit_pct = this.GetSpecialValueFor("damage_per_unit_pct")
         let iUnits = params.iUnits
@@ -299,17 +298,17 @@ export class modifier_undying_2_health_buff extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     EOM_GetModifierHealthBonus() {
         return this.GetStackCount() * this.damage_per_unit
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     EOM_GetModifierHealthPercentage() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.GetStackCount() * this.damage_per_unit_pct
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.GetStackCount() * this.damage_per_unit
     }
@@ -318,7 +317,7 @@ export class modifier_undying_2_health_buff extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_undying_2_particle_target extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hTarget = this.GetCasterPlus()
@@ -346,7 +345,7 @@ export class modifier_undying_2_particle_target extends modifier_particle {
 // 特效
 @registerModifier()
 export class modifier_undying_2_particle_start extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hTarget = this.GetCasterPlus()

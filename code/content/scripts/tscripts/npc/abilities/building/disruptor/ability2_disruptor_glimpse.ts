@@ -1,5 +1,4 @@
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -53,8 +52,8 @@ export class modifier_disruptor_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
-    GetTotalDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
+    GetTotalDamageOutgoing_Percentage(params: IModifierTable) {
         if (params.attacker == this.GetParentPlus()) {
             let hCaster = params.attacker
             let hTarget = params.target
@@ -74,7 +73,7 @@ export class modifier_disruptor_3 extends BaseModifier_Plus {
         })
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_SHOCK_APPLIED)
-    OnShockApplied(params: ModifierTable) {
+    OnShockApplied(params: IModifierTable) {
         this.Process(params.unit)
     }
 }
@@ -107,7 +106,7 @@ export class modifier_disruptor_3_debuff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_CENTER_FOLLOW
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.IncrementStackCount()
@@ -118,21 +117,21 @@ export class modifier_disruptor_3_debuff extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage() {
         return this.GetStackCount() * -this.GetSpecialValueFor("slow_pct")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_SHOCK_COUNT_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_COUNT_PERCENTAGE)
     EOM_GetModifierIncomingShockCountPercentage() {
         return this.GetStackCount() * (this.GetSpecialValueFor("shock_count_increase") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_disruptor_custom_8"))
     }
     //  减速
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.GetStackCount() * this.GetSpecialValueFor("slow_pct")
     }
     //  叠加层数
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     Tooltip2() {
         return this.GetStackCount() * (this.GetSpecialValueFor("shock_count_increase") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_disruptor_custom_8"))
     }

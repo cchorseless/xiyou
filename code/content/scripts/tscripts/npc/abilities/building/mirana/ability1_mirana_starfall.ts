@@ -96,7 +96,7 @@ export class modifier_mirana_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -156,7 +156,7 @@ export class modifier_mirana_1 extends BaseModifier_Plus {
 export class modifier_mirana_1_thinker extends modifier_particle_thinker {
     bIsSecondary: boolean;
     tTargetEntIndex: any[];
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -292,7 +292,7 @@ export class modifier_mirana_1_thinker extends modifier_particle_thinker {
 @registerModifier()
 export class modifier_mirana_1_effect extends modifier_particle_thinker {
     interval: number;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.interval = this.GetSpecialValueFor("interval")
         if (IsServer()) {
@@ -390,7 +390,7 @@ export class modifier_mirana_1_scepter extends BaseModifier_Plus {
             }
         }
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.max_charge = 1
         this.interval_scepter = this.GetSpecialValueFor("interval_scepter")
@@ -398,7 +398,7 @@ export class modifier_mirana_1_scepter extends BaseModifier_Plus {
             this.Init()
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.max_charge = 1
         this.interval_scepter = this.GetSpecialValueFor("interval_scepter")
@@ -440,7 +440,7 @@ export class modifier_mirana_1_counter extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.IncrementStackCount()

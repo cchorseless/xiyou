@@ -70,14 +70,14 @@ export class modifier_ogre_magi_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             modifier_ogre_magi_3_buff.apply(hParent, hParent, this.GetAbilityPlus(), {})
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         if (IsServer()) {
             let hParent = this.GetParentPlus()
@@ -115,7 +115,7 @@ export class modifier_ogre_magi_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.multicast_2_times = this.GetSpecialValueFor("multicast_2_times")
         this.multicast_3_times = this.GetSpecialValueFor("multicast_3_times")

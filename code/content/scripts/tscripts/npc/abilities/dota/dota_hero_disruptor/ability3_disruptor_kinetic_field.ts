@@ -1,18 +1,13 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_shock } from "../../../modifier/effect/modifier_shock";
 import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_disruptor_kinetic_field = { "ID": "5460", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "FightRecapLevel": "1", "AbilitySound": "Hero_Disruptor.KineticField", "AbilityCastAnimation": "ACT_DOTA_KINETIC_FIELD", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastPoint": "0.05 0.05 0.05 0.05", "AbilityCooldown": "19 16 13 10", "AbilityManaCost": "70 70 70 70", "AbilityCastRange": "900 900 900 900", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "350" }, "02": { "var_type": "FIELD_FLOAT", "formation_time": "1.2 1.2 1.2 1.2" }, "03": { "var_type": "FIELD_FLOAT", "duration": "2.6 3.2 3.8 4.4", "LinkedSpecialBonus": "special_bonus_unique_disruptor_5" } } };
@@ -68,14 +63,14 @@ export class modifier_disruptor_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
-    order(params: ModifierTable) {
+    order(params: IModifierTable) {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
             if (params.issuer_player_index != -1 && params.ability == hAbility) {
@@ -154,7 +149,7 @@ export class modifier_disruptor_2_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             this.iShockDamageIncrease = this.GetSpecialValueFor("shock_damage_increase") + hCaster.GetTalentValue("special_bonus_unique_disruptor_custom_6")
@@ -162,12 +157,12 @@ export class modifier_disruptor_2_debuff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_SHOCK_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_DAMAGE_PERCENTAGE)
     g_INCOMING_SHOCK_DAMAGE_PERCENTAGE() {
         return this.iShockDamageIncrease
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
+    tooltip(params: IModifierTable) {
         return this.GetStackCount()
     }
 }
@@ -196,7 +191,7 @@ export class modifier_disruptor_2_field_aura extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
@@ -264,7 +259,7 @@ export class modifier_disruptor_2_field extends BaseModifier_Plus {
     GetAuraDuration() {
         return 0
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.radius = this.GetSpecialValueFor("radius")
@@ -344,7 +339,7 @@ export class modifier_disruptor_2_thinker extends BaseModifier_Plus {
     GetAuraDuration() {
         return 0.1
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.radius = this.GetSpecialValueFor("radius")

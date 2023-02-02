@@ -140,7 +140,7 @@ export class modifier_shadow_shaman_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -240,7 +240,7 @@ export class modifier_shadow_shaman_1_totem extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_PERMANENT
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let extra_interval = this.GetCasterPlus().GetTalentValue("special_bonus_unique_shadow_shaman_custom_6")
         this.interval = this.GetSpecialValueFor("interval") - extra_interval

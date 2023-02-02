@@ -1,11 +1,10 @@
-import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
-import { EnemyUnitComponent } from "./EnemyUnitComponent";
+import { EnemyDataComponent } from "./EnemyDataComponent";
 
 @GReloadable
 export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
     get EnemyUnitComp() {
-        return this.GetComponentByName<EnemyUnitComponent>("EnemyUnitComponent");
+        return this.GetComponentByName<EnemyDataComponent>("EnemyDataComponent");
     }
 }
 declare global {

@@ -1,16 +1,12 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_disruptor_static_storm = { "ID": "5461", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "FightRecapLevel": "2", "AbilitySound": "Hero_Disruptor.StaticStorm.Cast", "HasScepterUpgrade": "1", "AbilityCastAnimation": "ACT_DOTA_STATIC_STORM", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastPoint": "0.05 0.05 0.05 0.05", "AbilityCooldown": "90 80 70", "AbilityManaCost": "125 175 225", "AbilityCastRange": "800 800 800 800", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "500" }, "02": { "var_type": "FIELD_INTEGER", "pulses": "20", "LinkedSpecialBonus": "special_bonus_unique_disruptor_7", "LinkedSpecialBonusField": "value2" }, "03": { "var_type": "FIELD_INTEGER", "damage_max": "200 275 350" }, "04": { "var_type": "FIELD_FLOAT", "duration": "5.0", "LinkedSpecialBonus": "special_bonus_unique_disruptor_7" } } };
@@ -81,7 +77,7 @@ export class modifier_disruptor_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -144,7 +140,7 @@ export class modifier_disruptor_6_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             this.iDamageIncrease = this.GetSpecialValueFor("shard_damage_increase")
@@ -152,11 +148,11 @@ export class modifier_disruptor_6_debuff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE)
     G_INCOMING_MAGICAL_DAMAGE_PERCENTAGE() {
         return this.iDamageIncrease
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.GetStackCount()
     }
@@ -209,7 +205,7 @@ export class modifier_disruptor_6_thinker extends BaseModifier_Plus {
     GetAuraDuration() {
         return 0.1
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()

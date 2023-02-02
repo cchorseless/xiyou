@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -127,13 +126,13 @@ export class modifier_dragon_knight_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_attack_range = this.GetSpecialValueFor("bonus_attack_range")
     }
 
@@ -213,7 +212,7 @@ export class modifier_dragon_knight_6_form extends BaseModifier_Plus {
     GetPriority() {
         return -1
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
@@ -287,15 +286,15 @@ export class modifier_dragon_knight_6_form extends BaseModifier_Plus {
             this.StartIntervalThink(-1)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     g_OUTGOING_DAMAGE_PERCENTAGE() {
         return this.GetParentPlus().HasScepter() && this.scepter_extra_damage_percent || this.extra_damage_percent
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
-    GetAttackRangeBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
+    GetAttackRangeBonus(params: IModifierTable) {
         return this.bonus_attack_range
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
     GetCastRangeBonusStacking(params: ModifierAbilityEvent) {
         if (GameFunc.IsValid(params.ability) &&
             GameFunc.IncludeArgs(params.ability.GetBehaviorInt(), DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_ATTACK)[0]) {
@@ -303,8 +302,8 @@ export class modifier_dragon_knight_6_form extends BaseModifier_Plus {
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         let sParticlePath = "particles/units/heroes/hero_dragon_knight/dragon_knight_elder_dragon_corrosive.vpcf"
         if (this.iLevel > 2 && this.iLevel <= 4) {
             sParticlePath = "particles/units/heroes/hero_dragon_knight/dragon_knight_elder_dragon_fire.vpcf"
@@ -315,15 +314,15 @@ export class modifier_dragon_knight_6_form extends BaseModifier_Plus {
         }
         return ResHelper.GetParticleReplacement(sParticlePath, this.GetParentPlus())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/heroes/dragon_knight/dragon_knight_dragon.vmdl", this.GetParentPlus())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_SCALE)
-    GetModelScale(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_SCALE)
+    GetModelScale(params: IModifierTable) {
         return this.model_scale
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
     Get_AttackSound() {
         let sSoundName = "Hero_DragonKnight.ElderDragonShoot1.Attack"
         if (this.iLevel > 2 && this.iLevel <= 4) {
@@ -394,7 +393,7 @@ export class modifier_dragon_knight_6_red extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return true
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.iLevel = GameFunc.IsValid(this.GetAbilityPlus()) && this.GetAbilityPlus().GetLevel() || 0
         if (this.iLevel > 0 && this.GetCasterPlus().HasScepter()) {
             this.iLevel = this.iLevel + 1
@@ -493,7 +492,7 @@ export class modifier_dragon_knight_6_frost extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
 
         if (IsClient()) {
             let hParent = this.GetParentPlus()
@@ -515,7 +514,7 @@ export class modifier_dragon_knight_6_frost extends BaseModifier_Plus {
             this.AddParticle(particleID, false, true, 10, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.iLevel = GameFunc.IsValid(this.GetAbilityPlus()) && this.GetAbilityPlus().GetLevel() || 0
         if (this.iLevel > 0 && this.GetCasterPlus().HasScepter()) {
             this.iLevel = this.iLevel + 1
@@ -524,8 +523,8 @@ export class modifier_dragon_knight_6_frost extends BaseModifier_Plus {
 
         this.isIllusion = this.GetCasterPlus().IsIllusion()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         if (this.isIllusion) {
             return
         }

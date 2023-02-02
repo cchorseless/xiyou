@@ -1,7 +1,6 @@
 
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -58,7 +57,7 @@ export class modifier_slardar_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(1)
@@ -129,7 +128,7 @@ export class modifier_slardar_6_hidden extends BaseModifier_Plus {
     GetAura() {
         return "modifier_slardar_6_aura"
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
     }
 
@@ -159,7 +158,7 @@ export class modifier_slardar_6_aura extends BaseModifier_Plus {
     ShouldUseOverheadOffset() {
         return true
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.armor_reduction = this.GetSpecialValueFor("armor_reduction")
         if (params.IsOnCreated && IsClient()) {
             let particleID = ResHelper.CreateParticle({
@@ -180,11 +179,11 @@ export class modifier_slardar_6_aura extends BaseModifier_Plus {
             this.AddParticle(particleID, false, true, 10, false, false)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     G_PHYSICAL_ARMOR_BONUS() {
         return this.armor_reduction - this.GetCasterPlus().GetTalentValue("special_bonus_unique_slardar_custom_7")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         if (!GameFunc.IsValid(this.GetCasterPlus()) || this.GetCasterPlus().PassivesDisabled()) {
             return 0

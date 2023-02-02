@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
@@ -123,7 +122,7 @@ export class modifier_windrunner_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -209,7 +208,7 @@ export class modifier_windrunner_1_debuff extends BaseModifier_Plus {
         return ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW
     }
     increase_range_damage_pct: number;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hCaster = this.GetCasterPlus();
@@ -224,7 +223,7 @@ export class modifier_windrunner_1_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.increase_range_damage_pct = this.GetSpecialValueFor("increase_range_damage_pct")
 
     }
@@ -235,12 +234,12 @@ export class modifier_windrunner_1_debuff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_DISABLED
     };
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     GetIncomingDamagePercentage(params: ModifierAttackEvent) {
         let hParent = this.GetParentPlus()
         if (params != null && params.target == hParent && params.attacker.GetAttackCapability() == DOTAUnitAttackCapability_t.DOTA_UNIT_CAP_RANGED_ATTACK) {

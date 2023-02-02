@@ -3,7 +3,7 @@ import { LuBanConfigComponent } from "./componentext/LuBanConfigComponent";
 import { AbilityEntityRoot } from "./components/Ability/AbilityEntityRoot";
 import { BattleUnitIllusionEntityRoot } from "./components/BattleUnit/BattleUnitIllusionEntityRoot";
 import { BattleUnitSummonEntityRoot } from "./components/BattleUnit/BattleUnitSummonEntityRoot";
-import { BuildingComponent } from "./components/Building/BuildingComponent";
+import { BuildingDataComponent } from "./components/Building/BuildingDataComponent";
 import { BuildingEntityRoot } from "./components/Building/BuildingEntityRoot";
 import { BuildingManagerComponent } from "./components/Building/BuildingManagerComponent";
 import { BuildingRuntimeEntityRoot } from "./components/Building/BuildingRuntimeEntityRoot";
@@ -15,7 +15,7 @@ import { CourierDataComponent } from "./components/Courier/CourierDataComponent"
 import { CourierEntityRoot } from "./components/Courier/CourierEntityRoot";
 import { CourierShopComponent } from "./components/Courier/CourierShopComponent";
 import { DrawComponent } from "./components/Draw/DrawComponent";
-import { EnemyUnitComponent } from "./components/Enemy/EnemyUnitComponent";
+import { EnemyDataComponent } from "./components/Enemy/EnemyDataComponent";
 import { EnemyUnitEntityRoot } from "./components/Enemy/EnemyUnitEntityRoot";
 import { FakerHeroEntityRoot } from "./components/FakerHero/FakerHeroEntityRoot";
 import { FHeroCombination } from "./components/FakerHero/FHeroCombination";
@@ -39,7 +39,7 @@ BattleUnitIllusionEntityRoot;
 BattleUnitSummonEntityRoot;
 
 BuildingEntityRoot;
-BuildingComponent;
+BuildingDataComponent;
 BuildingManagerComponent;
 BuildingRuntimeEntityRoot;
 
@@ -53,7 +53,7 @@ CourierShopComponent;
 ECombination;
 
 EnemyUnitEntityRoot;
-EnemyUnitComponent;
+EnemyDataComponent;
 
 FakerHeroEntityRoot;
 FHeroCombination;

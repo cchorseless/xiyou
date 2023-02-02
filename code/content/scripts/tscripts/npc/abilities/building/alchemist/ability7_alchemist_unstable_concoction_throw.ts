@@ -1,5 +1,4 @@
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -102,19 +101,19 @@ export class modifier_alchemist_4_buff_target extends BaseModifier_Plus {
         return false;
     }
     public bonus_all: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_all = this.GetSpecialValueFor("bonus_all");
         if (IsServer()) {
             // this.ModifyStackCount(this.bonus_all);
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_ALL_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_ALL_BONUS)
     EOM_GetModifierBonusStats_All() {
         return this.GetStackCount();
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     OnTooltip() {
         return this.GetStackCount();
     }
@@ -131,18 +130,18 @@ export class modifier_alchemist_4_buff_caster extends BaseModifier_Plus {
         return false;
     }
     public spell_amp_stack: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.spell_amp_stack = this.GetSpecialValueFor("spell_amp_stack");
         if (IsServer()) {
             // this.ModifyStackCount(this.spell_amp_stack);
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     EOM_GetModifierSpellAmplifyBonus() {
         return this.GetStackCount();
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     OnTooltip() {
         return this.GetStackCount();
     }

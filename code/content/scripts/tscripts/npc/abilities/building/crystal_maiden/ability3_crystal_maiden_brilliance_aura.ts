@@ -1,5 +1,4 @@
 import { GameFunc } from "../../../../GameFunc";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -110,7 +109,7 @@ export class modifier_crystal_maiden_3_aura extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.mana_regen = this.GetSpecialValueFor("mana_regen")
@@ -121,15 +120,15 @@ export class modifier_crystal_maiden_3_aura extends BaseModifier_Plus {
         this.extra_mana_cost_perent = this.GetSpecialValueFor("extra_mana_cost_perent")
         this.bonus_spell_amp = this.GetSpecialValueFor("bonus_spell_amp")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_REGEN_TOTAL_PERCENTAGE)
-    EOM_GetModifierConstantManaRegen(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_TOTAL_PERCENTAGE)
+    EOM_GetModifierConstantManaRegen(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
             return 0
         }
         return (this.GetParentPlus() == hCaster && this.mana_regen_self || this.mana_regen) + hCaster.GetTalentValue("special_bonus_unique_crystal_maiden_custom_2")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
@@ -137,8 +136,8 @@ export class modifier_crystal_maiden_3_aura extends BaseModifier_Plus {
         }
         return (this.GetParentPlus() == hCaster && this.mana_regen_self || this.mana_regen) + hCaster.GetTalentValue("special_bonus_unique_crystal_maiden_custom_2")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
-    GetTotalPercentageManaRegen(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
+    GetTotalPercentageManaRegen(params: IModifierTable) {
         return (this.GetParentPlus() == this.GetCasterPlus()) && this.mana_regen_percent_self || this.mana_regen_percent
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
@@ -161,8 +160,8 @@ export class modifier_crystal_maiden_3_aura extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
-    EOM_GetModifierPercentageCooldown(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
+    EOM_GetModifierPercentageCooldown(params: IModifierTable) {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_crystal_maiden_custom_8")
         }
@@ -191,17 +190,17 @@ export class modifier_crystal_maiden_3_spell_damage extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.bonus_spell_amp = this.GetSpecialValueFor("bonus_spell_amp")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     g_SPELL_AMPLIFY_BONUS() {
         return this.bonus_spell_amp
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip() {
         return this.bonus_spell_amp
     }

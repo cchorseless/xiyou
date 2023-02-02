@@ -1,13 +1,12 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle } from "../../../modifier/modifier_particle";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_bounty_hunter_1_caster } from "./ability1_bounty_hunter_shuriken_toss";
 
 /** dota原技能数据 */
@@ -69,7 +68,7 @@ export class modifier_bounty_hunter_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
         this.gold_steal = this.GetSpecialValueFor("gold_steal")
@@ -110,8 +109,8 @@ export class modifier_bounty_hunter_3 extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (IsServer() && params.attacker != null) {
             if (this.records.indexOf(params.record) != -1) {
@@ -169,7 +168,7 @@ export class modifier_bounty_hunter_3 extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_bounty_hunter_3_particle_bounty_hunter_jinda_slow extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -199,7 +198,7 @@ export class modifier_bounty_hunter_3_particle_bounty_hunter_jinda_slow extends 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_bounty_hunter_3_particle_bounty_hunter_hand_r extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

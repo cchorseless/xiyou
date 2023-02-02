@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -62,7 +61,7 @@ export class modifier_bounty_hunter_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -143,7 +142,7 @@ export class modifier_bounty_hunter_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_base_physics_damage = this.GetSpecialValueFor("bonus_base_physics_damage")
         this.bonus_attack_physics_damage_percent = this.GetSpecialValueFor("bonus_attack_physics_damage_percent")
         this.fade_time = this.GetSpecialValueFor("fade_time")
@@ -161,14 +160,14 @@ export class modifier_bounty_hunter_2_buff extends BaseModifier_Plus {
 
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         return this.bonus_base_physics_damage
     }
-    GetDamageOutgoing_Percentage(params: ModifierTable) {
+    GetDamageOutgoing_Percentage(params: IModifierTable) {
         return this.bonus_attack_physics_damage_percent
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE)
     G_OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE() {
         return this.GetSpecialValueFor("bonus_attack_physics_damage_percent")
     }

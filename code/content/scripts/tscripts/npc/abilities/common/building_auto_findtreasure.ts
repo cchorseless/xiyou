@@ -67,7 +67,7 @@ export class modifier_auto_findtreasure extends BaseModifier_Plus {
     //     };
     //     return state;
     // }
-    public Init(params: ModifierTable) {
+    public Init(params: IModifierTable) {
         if (IsServer() && params.IsOnCreated) {
             this.SetStackCount(3);
             GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {

@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -56,7 +55,7 @@ export class modifier_life_stealer_2 extends BaseModifier_Plus {
     GetTexture() {
         return "life_stealer_feast"
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.max_health_bonus_damage_pct = this.GetSpecialValueFor("max_health_bonus_damage_pct")
         if (IsServer()) {
             // 非继承技能字段值时100%
@@ -67,7 +66,7 @@ export class modifier_life_stealer_2 extends BaseModifier_Plus {
 
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    attackLanded(params: ModifierTable) {
+    attackLanded(params: IModifierTable) {
         if (!GameFunc.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
             return
         }
@@ -118,19 +117,19 @@ export class modifier_life_stealer_2_attack_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.SetStackCount(params.fDamage || 0)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         if (IsServer()) {
             this.SetStackCount(params.fDamage || 0)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage() {
         return this.GetStackCount()
     }

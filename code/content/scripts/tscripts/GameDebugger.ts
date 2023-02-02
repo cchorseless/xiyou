@@ -128,14 +128,14 @@ export class GameDebugger extends SingletonClass {
         //#endregion
         //#region  自定义事件
         // 游戏结束
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_DebugGameOver, GHandler.create(this, this.onDebugGameOver));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugGameOver, GHandler.create(this, this.onDebugGameOver));
         // 游戏重载
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_DebugReload, GHandler.create(this, this.onDebugReload));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugReload, GHandler.create(this, this.onDebugReload));
         // 游戏重新开始
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_DebugRestart, GHandler.create(this, this.onDebugRestart));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugRestart, GHandler.create(this, this.onDebugRestart));
         // 清除打印
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_DebugClearAll, GHandler.create(this, this.onDebugClearAll));
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_addBot, GHandler.create(this, this.onreq_addBot));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugClearAll, GHandler.create(this, this.onDebugClearAll));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_addBot, GHandler.create(this, this.onreq_addBot));
         // 主机速度
         EventHelper.addProtocolEvent(GameProtocol.Protocol.ChangeHostTimescale, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             SendToConsole("host_timescale " + e.data);

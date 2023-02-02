@@ -158,7 +158,7 @@ export class ability2_zuus_lightning_bolt extends BaseAbility_Plus {
 @registerModifier()
 export class modifier_zuus_2_particle_damage extends modifier_particle {
     damageInfo: BattleHelper.DamageOptions;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         ability2_zuus_lightning_bolt.playAni(this);
     }
 
@@ -172,7 +172,7 @@ export class modifier_zuus_2_particle_damage extends modifier_particle {
 }
 @registerModifier()
 export class modifier_zuus_2_particle_damage_thinker extends modifier_particle_thinker {
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         ability2_zuus_lightning_bolt.playAni(this)
     }
 

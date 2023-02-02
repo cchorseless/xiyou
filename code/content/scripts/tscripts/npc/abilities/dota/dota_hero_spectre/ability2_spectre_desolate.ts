@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -65,7 +64,7 @@ export class modifier_spectre_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.agi_factor = this.GetSpecialValueFor("agi_factor")
         this.radius = this.GetSpecialValueFor("radius")
         this.duration = this.GetSpecialValueFor("duration")
@@ -124,7 +123,7 @@ export class modifier_spectre_2_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.move_speed_percent = this.GetSpecialValueFor("move_speed_percent") + (GameFunc.IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_spectre_custom_2") || 0)
@@ -139,7 +138,7 @@ export class modifier_spectre_2_debuff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage() {
         return -this.move_speed_percent * this.GetStackCount()
     }

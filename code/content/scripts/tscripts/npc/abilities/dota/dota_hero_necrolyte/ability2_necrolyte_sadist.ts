@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -67,7 +66,7 @@ export class modifier_necrolyte_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -155,7 +154,7 @@ export class modifier_necrolyte_2_slow_aura extends BaseModifier_Plus {
     GetAura() {
         return "modifier_necrolyte_2_slow_debuff"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius")
@@ -181,7 +180,7 @@ export class modifier_necrolyte_2_slow_aura extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, true, 10, false, false)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_PERCENTAGE)
     G_OUTGOING_MAGICAL_DAMAGE_PERCENTAGE() {
         return this.bonus_magical_damage
     }
@@ -200,7 +199,7 @@ export class modifier_necrolyte_2_slow_aura extends BaseModifier_Plus {
             // }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.bonus_magical_damage
     }
@@ -227,7 +226,7 @@ export class modifier_necrolyte_2_slow_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.movement_speed = this.GetSpecialValueFor("movement_speed")
         if (IsClient() && params.IsOnCreated) {
             let iParticleID = ResHelper.CreateParticle({
@@ -240,7 +239,7 @@ export class modifier_necrolyte_2_slow_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage() {
         return -this.movement_speed
     }

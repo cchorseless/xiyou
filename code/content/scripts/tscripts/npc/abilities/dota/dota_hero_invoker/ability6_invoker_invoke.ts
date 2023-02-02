@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -153,7 +152,7 @@ export class ability6_invoker_invoke extends BaseAbility_Plus {
 export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
     tAutoCastMemory: any;
     _tooltip: number;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.tAutoCastMemory = {}
@@ -205,7 +204,7 @@ export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
-    OnOrder(params: ModifierTable) {
+    OnOrder(params: IModifierTable) {
         let hAbility = params.ability
         if (params.issuer_player_index != -1 && hAbility) {
             if (params.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION || params.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET || params.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET) {
@@ -223,7 +222,7 @@ export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
     EOM_GetModifierStatusResistanceStacking() {
         let hAbility = ability1_invoker_quas.findIn(this.GetCasterPlus())
         if (GameFunc.IsValid(hAbility)) {
@@ -235,7 +234,7 @@ export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
     EOM_GetModifierPercentageCooldown() {
         let hAbility = ability2_invoker_wex.findIn(this.GetCasterPlus())
         if (GameFunc.IsValid(hAbility)) {
@@ -247,7 +246,7 @@ export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     EOM_GetModifierSpellAmplifyBonus() {
         let hAbility = ability3_invoker_exort.findIn(this.GetCasterPlus())
         if (GameFunc.IsValid(hAbility)) {
@@ -259,12 +258,12 @@ export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
 
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_CONSTANT_LAYER
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         if (IsClient()) {
             let res = 0

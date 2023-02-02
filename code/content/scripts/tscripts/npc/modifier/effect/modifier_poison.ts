@@ -2,7 +2,6 @@ import { GameFunc } from "../../../GameFunc";
 import { BattleHelper } from "../../../helper/BattleHelper";
 import { HashTableHelper } from "../../../helper/HashTableHelper";
 import { ResHelper } from "../../../helper/ResHelper";
-import { GameEnum } from "../../../shared/GameEnum";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 import { modifier_property } from "../../propertystat/modifier_property";
@@ -32,7 +31,7 @@ export class modifier_poison extends BaseModifier_Plus {
         return false
     }
     tPoisonerInfos: { poisoner: IBaseNpc_Plus, ability: IBaseAbility_Plus, stack_count: number }[];
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
@@ -46,7 +45,7 @@ export class modifier_poison extends BaseModifier_Plus {
         }
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             this.tPoisonerInfos = this.tPoisonerInfos || [];
             let tPoisonInfo = HashTableHelper.GetHashtableByIndex(params.hashtableUUid) as any;
@@ -87,7 +86,7 @@ export class modifier_poison extends BaseModifier_Plus {
                 })
             }
             //  头顶绿色数字
-            let _incom = modifier_property.SumProps(hParent, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE);
+            let _incom = modifier_property.SumProps(hParent, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE);
             let fPercent = 1 + _incom / 100 || 1
             let iVisualNum = iTotalDamge * fPercent
             if (iVisualNum > 0) {
@@ -96,7 +95,7 @@ export class modifier_poison extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     OnShowTooltip() {
         return this.GetStackCount()
     }
@@ -116,8 +115,8 @@ export class modifier_poison extends BaseModifier_Plus {
         if (!IsServer()) { return };
         if (!GameFunc.IsValid(htarget)) return;
         if (iCount > 0) {
-            let _out = modifier_property.SumProps(hCaster, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE);
-            let _incom = modifier_property.SumProps(htarget, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE);
+            let _out = modifier_property.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE);
+            let _incom = modifier_property.SumProps(htarget, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE);
             iCount = iCount * (1 + _out * 0.01) * (1 + _incom * 0.01)
         }
         let iPoisonStack = math.min(iCount, modifier_poison.MAX_POISON_STACK)   //  毒层数
@@ -156,7 +155,7 @@ export class modifier_poison extends BaseModifier_Plus {
                     BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM +
                     BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
             })
-            let _incom = modifier_property.SumProps(htarget, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE);
+            let _incom = modifier_property.SumProps(htarget, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE);
             let fPoisonPercent = (1 + _incom * 0.01) || 1;
             let iVisualNum = iDamage * fPoisonPercent
             if (iVisualNum > 0) {

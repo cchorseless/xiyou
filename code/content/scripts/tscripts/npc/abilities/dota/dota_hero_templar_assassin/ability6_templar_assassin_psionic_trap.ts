@@ -1,4 +1,3 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -7,7 +6,6 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
@@ -80,7 +78,7 @@ export class modifier_templar_assassin_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.records = []
@@ -173,8 +171,8 @@ export class modifier_templar_assassin_6_movespeed extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             return -(this.move_speed_reduce + this.GetCasterPlus().GetTalentValue("special_bonus_unique_templar_assassin_custom"))
@@ -211,7 +209,7 @@ export class modifier_templar_assassin_6_thinker extends modifier_particle_think
     trap_radius: number;
     trap_damage: number;
     move_speed_reduce_time: number;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

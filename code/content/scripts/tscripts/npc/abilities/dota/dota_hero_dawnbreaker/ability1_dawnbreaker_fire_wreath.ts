@@ -1,12 +1,10 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
+import { BattleHelper } from "../../../../helper/BattleHelper";
+import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { ResHelper } from "../../../../helper/ResHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { EntityHelper } from "../../../../helper/EntityHelper";
+import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
 
 /** dota原技能数据 */
 export const Data_dawnbreaker_fire_wreath = { "ID": "7902", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CAN_SELF_CAST | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityUnitDamageType": "DAMAGE_TYPE_PHYSICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "FightRecapLevel": "1", "AbilityCastPoint": "0.2", "AbilityCooldown": "17 15 13 11", "AbilityManaCost": "80", "AbilitySpecial": { "10": { "var_type": "FIELD_FLOAT", "sweep_stun_duration": "0.12" }, "11": { "var_type": "FIELD_FLOAT", "self_stun_duration": "0.2" }, "12": { "var_type": "FIELD_INTEGER", "swipe_slow": "-100" }, "13": { "var_type": "FIELD_INTEGER", "smash_distance_from_hero": "120" }, "14": { "var_type": "FIELD_FLOAT", "animation_rate": "0" }, "15": { "var_type": "FIELD_FLOAT", "turn_rate": "90" }, "01": { "var_type": "FIELD_FLOAT", "duration": "1.1" }, "02": { "var_type": "FIELD_INTEGER", "swipe_radius": "360" }, "03": { "var_type": "FIELD_INTEGER", "swipe_damage": "25 35 45 55" }, "04": { "var_type": "FIELD_INTEGER", "smash_radius": "250" }, "05": { "var_type": "FIELD_INTEGER", "smash_damage": "40 65 90 115" }, "07": { "var_type": "FIELD_INTEGER", "movement_speed": "215" }, "08": { "var_type": "FIELD_INTEGER", "total_attacks": "3" }, "09": { "var_type": "FIELD_FLOAT", "smash_stun_duration": "0.8 1.0 1.2 1.4" } } };
@@ -77,7 +75,7 @@ export class modifier_dawnbreaker_1 extends BaseModifier_Plus {
     smash_radius: number;
     smash_stun_duration: number;
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.swipe_radius = this.GetSpecialValueFor("swipe_radius")
         this.swipe_damage_pct = this.GetSpecialValueFor("swipe_damage_pct")
         this.smash_radius = this.GetSpecialValueFor("smash_radius")
@@ -188,10 +186,10 @@ export class modifier_dawnbreaker_1 extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_dawnbreaker_1_buff extends BaseModifier_Plus {
     smash_damage_pct: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.smash_damage_pct = this.GetSpecialValueFor("smash_damage_pct")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     BonusDamage() {
         return this.smash_damage_pct * this.GetCaster().GetMaxHealth() * 0.01;
     }

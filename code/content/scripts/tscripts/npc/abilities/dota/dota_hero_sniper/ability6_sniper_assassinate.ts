@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -90,7 +89,7 @@ export class modifier_sniper_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -182,7 +181,7 @@ export class modifier_sniper_6_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -247,8 +246,8 @@ export class modifier_sniper_6_projectile extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_ULTRA
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return ResHelper.GetParticleReplacement("particles/units/heroes/hero_sniper/sniper_assassinate.vpcf", this.GetCasterPlus())
     }
 }
@@ -275,17 +274,17 @@ export class modifier_sniper_6_bonus_damage extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.inherit_attack_per = this.GetSpecialValueFor("inherit_attack_per")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
-    GetAttackRangeBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
+    GetAttackRangeBonus(params: IModifierTable) {
         return -1
     }
     // 额外增加攻击力百分比
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
-    GetDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    GetDamageOutgoing_Percentage(params: IModifierTable) {
         if (IsServer()) {
             let vlaue = this.GetParentPlus().HasTalent("special_bonus_unique_sniper_custom_4") && this.GetParentPlus().GetTalentValue("special_bonus_unique_sniper_custom_4") || 0
             return this.inherit_attack_per + vlaue - 100

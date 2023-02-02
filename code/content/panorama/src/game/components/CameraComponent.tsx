@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
+import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
 import { ET } from "../../../../scripts/tscripts/shared/lib/Entity";
 import { FuncHelper } from "../../helper/FuncHelper";
 import { NetHelper } from "../../helper/NetHelper";
@@ -118,7 +118,7 @@ export class CameraComponent extends ET.Component {
             this.last_g_yaw = this.g_yaw
             GameUI.SetCameraYaw(this.g_yaw);
             // 抛出事件
-            NetHelper.SendToLua(GameEnum.CustomProtocol.req_Camera_Yaw_Change, {
+            NetHelper.SendToLua(GameProtocol.Protocol.req_Camera_Yaw_Change, {
                 entindex: Players.GetLocalPlayerPortraitUnit(),
                 camerayaw: this.g_yaw,
             })

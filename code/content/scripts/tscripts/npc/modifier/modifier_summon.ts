@@ -1,4 +1,3 @@
-import { GameEnum } from "../../shared/GameEnum";
 import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../entityPlus/BaseNpc_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
@@ -29,7 +28,7 @@ export class modifier_summon extends BaseModifier_Plus {
         let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
         iTeamNumber = iTeamNumber || hCaster.GetTeamNumber()
         let hSummon = BaseNpc_Plus.CreateUnitByName(sUnitName, vLocation, iTeamNumber, bFindClearSpace, hHero, hHero)
-        fDuration = fDuration + modifier_property.SumProps(hCaster, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.SUMMON_DURATION_BONUS);
+        fDuration = fDuration + modifier_property.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.SUMMON_DURATION_BONUS);
         modifier_summon.apply(hSummon, hCaster, null, { duration: fDuration })
         modifier_event.FireEvent({
             attacker: hCaster,

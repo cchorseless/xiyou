@@ -1,6 +1,5 @@
 
 import { GameFunc } from "../../../../GameFunc";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -79,7 +78,7 @@ export class modifier_abyssal_underlord_3 extends BaseModifier_Plus {
     GetAuraSearchFlags() {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
     }
 
@@ -110,7 +109,7 @@ export class modifier_abyssal_underlord_3_aura extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -118,7 +117,7 @@ export class modifier_abyssal_underlord_3_aura extends BaseModifier_Plus {
             this.StartIntervalThink(0)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.permanent_damage = this.GetSpecialValueFor("permanent_damage")
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
@@ -161,7 +160,7 @@ export class modifier_abyssal_underlord_3_aura extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage() {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -193,14 +192,14 @@ export class modifier_abyssal_underlord_3_permanent_damage extends BaseModifier_
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.permanent_damage = this.GetSpecialValueFor("permanent_damage") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_abyssal_underlord_custom_2")
         if (IsServer()) {
             this.SetStackCount(this.GetStackCount() + (params.factor || 0))
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage() {
         return this.GetStackCount() * this.permanent_damage
     }
@@ -228,7 +227,7 @@ export class modifier_abyssal_underlord_3_bonus_attack extends BaseModifier_Plus
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
         if (IsServer()) {
             this.IncrementStackCount()
@@ -239,7 +238,7 @@ export class modifier_abyssal_underlord_3_bonus_attack extends BaseModifier_Plus
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage() {
         return this.GetStackCount() * this.bonus_damage
     }

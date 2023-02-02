@@ -67,7 +67,7 @@ export class modifier_kunkka_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -160,7 +160,7 @@ export class modifier_kunkka_2_buff extends BaseModifier_Plus {
     GetTexture() {
         return "kunkka_x_marks_the_spot"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -184,7 +184,7 @@ export class modifier_kunkka_2_buff extends BaseModifier_Plus {
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage_factor = this.GetSpecialValueFor("damage_factor")
     }
     OnDestroy() {

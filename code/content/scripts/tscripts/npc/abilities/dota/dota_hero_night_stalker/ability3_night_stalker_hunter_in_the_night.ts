@@ -1,7 +1,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -91,7 +90,7 @@ export class modifier_night_stalker_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     GetTotalDamageOutgoing_Percentage(params: ModifierAttackEvent) {
         if (IsServer()) {
             if (this.GetParentPlus().PassivesDisabled()) {
@@ -141,7 +140,7 @@ export class modifier_night_stalker_3_debuff extends BaseModifier_Plus {
     ShouldUseOverheadOffset() {
         return true
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -165,7 +164,7 @@ export class modifier_night_stalker_3_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, true)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -229,13 +228,13 @@ export class modifier_night_stalker_3_buff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(0)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.increase_all_damage_pct = this.GetSpecialValueFor("increase_all_damage_pct")
     }
 
@@ -248,7 +247,7 @@ export class modifier_night_stalker_3_buff extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     EOM_GetModifierOutgoingDamagePercentage() {
         return this.increase_all_damage_pct
     }

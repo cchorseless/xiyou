@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -104,7 +103,7 @@ export class modifier_arc_warden_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -173,7 +172,7 @@ export class modifier_arc_warden_1_debuff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_CENTER_FOLLOW
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.iSlow = params.iSlow
@@ -195,7 +194,7 @@ export class modifier_arc_warden_1_debuff extends BaseModifier_Plus {
             this.StartIntervalThink(0)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         if (IsServer()) {
             this.iSlow = params.iSlow
@@ -220,7 +219,7 @@ export class modifier_arc_warden_1_debuff extends BaseModifier_Plus {
             iShockDamageIncrease: this.iShockDamageIncrease
         }
     }
-    HandleCustomTransmitterData(params: ModifierTable) {
+    HandleCustomTransmitterData(params: IModifierTable) {
         this.iSlow = params.iSlow
         this.iExtraShockCount = params.iExtraShockCount
         this.iShockDamageIncrease = params.iShockDamageIncrease
@@ -260,21 +259,21 @@ export class modifier_arc_warden_1_debuff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage() {
         return this.iSlow
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.iExtraShockCount
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
         return this.iShockDamageIncrease
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_SHOCK_ACTIVATED)
-    OnShockActivated(params: ModifierTable) {
+    OnShockActivated(params: IModifierTable) {
         if (this.flag) {
             return
         }
@@ -288,7 +287,7 @@ export class modifier_arc_warden_1_debuff extends BaseModifier_Plus {
         }
         this.flag = null
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_SHOCK_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_DAMAGE_PERCENTAGE)
     EOM_GetModifierIncomingShockDamagePercentage() {
         return this.iShockDamageIncrease
     }

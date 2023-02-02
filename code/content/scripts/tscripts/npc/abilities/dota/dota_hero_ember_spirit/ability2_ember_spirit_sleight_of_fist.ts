@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -69,7 +68,7 @@ export class modifier_ember_spirit_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -147,7 +146,7 @@ export class modifier_ember_spirit_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius")
@@ -189,7 +188,7 @@ export class modifier_ember_spirit_2_buff extends BaseModifier_Plus {
             }
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius")
@@ -272,14 +271,14 @@ export class modifier_ember_spirit_2_buff extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TELEPORTED)
-    OnTeleported(params: ModifierTable) {
+    OnTeleported(params: IModifierTable) {
         if (IsServer() && params.unit == this.GetParentPlus()) {
             this.vStartPosition = params.new_pos
             ParticleManager.SetParticleControl(this.particleID, 0, this.vStartPosition)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         return this.bonus_damage
     }
 }
@@ -305,7 +304,7 @@ export class modifier_ember_spirit_2_invulnerability extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.GetParentPlus().AddNoDraw()
@@ -352,7 +351,7 @@ export class modifier_ember_spirit_2_marker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
@@ -396,7 +395,7 @@ export class modifier_ember_spirit_2_disarmed extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_ember_spirit_2_particle_ember_spirit_sleight_of_fist_cast extends modifier_particle_thinker {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -420,7 +419,7 @@ export class modifier_ember_spirit_2_particle_ember_spirit_sleight_of_fist_cast 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_ember_spirit_2_particle_ember_spirit_sleightoffist_trail extends modifier_particle_thinker {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -442,7 +441,7 @@ export class modifier_ember_spirit_2_particle_ember_spirit_sleightoffist_trail e
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_ember_spirit_2_particle_ember_spirit_sleightoffist_tgt extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

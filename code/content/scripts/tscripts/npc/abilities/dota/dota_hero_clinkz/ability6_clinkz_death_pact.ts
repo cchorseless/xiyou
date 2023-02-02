@@ -1,8 +1,6 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -116,7 +114,7 @@ export class modifier_clinkz_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -186,7 +184,7 @@ export class modifier_clinkz_6_summon extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_clinkz_custom_5"
@@ -214,7 +212,7 @@ export class modifier_clinkz_6_summon extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(iParticleID)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_clinkz_custom_5"
@@ -235,21 +233,21 @@ export class modifier_clinkz_6_summon extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
-    GetBaseAttackTimeConstant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
+    GetBaseAttackTimeConstant(params: IModifierTable) {
         return this.attack_rate
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BASE_OVERRIDE)
-    GetAttackRangeOverride(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BASE_OVERRIDE)
+    GetAttackRangeOverride(params: IModifierTable) {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().Script_GetAttackRange()
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/heroes/clinkz/clinkz_archer.vmdl", this.GetCasterPlus())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.LIFETIME_FRACTION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFETIME_FRACTION)
     Get_UnitLifetimeFraction() {
         return (this.GetDieTime() - GameRules.GetGameTime()) / this.GetDuration()
     }

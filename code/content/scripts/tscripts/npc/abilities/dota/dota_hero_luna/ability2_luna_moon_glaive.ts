@@ -4,7 +4,6 @@ import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -104,7 +103,7 @@ export class modifier_luna_2 extends BaseModifier_Plus {
     GetPriority() {
         return -1
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
@@ -118,14 +117,14 @@ export class modifier_luna_2 extends BaseModifier_Plus {
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.range = this.GetSpecialValueFor("range")
         this.bounces = this.GetSpecialValueFor("bounces")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return ResHelper.GetParticleReplacement("particles/units/heroes/hero_luna/luna_moon_glaive.vpcf", this.GetParentPlus())
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
@@ -159,8 +158,8 @@ export class modifier_luna_2 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
-    GetDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    GetDamageOutgoing_Percentage(params: IModifierTable) {
         if (params.target == null) {
             return
         }
@@ -168,7 +167,7 @@ export class modifier_luna_2 extends BaseModifier_Plus {
             return this.damage_percent - 100
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
     Get_AttackSound() {
         if (this.damage_percent != null) {
             return ResHelper.GetSoundReplacement("Hero_Luna.MoonGlaive.Impact", this.GetParentPlus())

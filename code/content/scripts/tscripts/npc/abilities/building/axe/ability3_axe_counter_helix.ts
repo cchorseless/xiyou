@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -95,7 +94,7 @@ export class modifier_axe_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.increase_str_pct = this.GetSpecialValueFor("increase_str_pct")
         this.shard_increase_str_pct = this.GetSpecialValueFor("shard_increase_str_pct")
         if (IsServer() && params.IsOnCreated) {
@@ -161,7 +160,7 @@ export class modifier_axe_3 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
     EOM_GetModifierStats_Strength_Percentage() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return (this.increase_str_pct + this.shard_increase_str_pct) * this.GetStackCount()
@@ -197,7 +196,7 @@ export class modifier_axe_3_debuff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
@@ -219,7 +218,7 @@ export class modifier_axe_3_debuff extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, true)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.reduce_move_speed = this.GetSpecialValueFor("reduce_move_speed")
         this.damage_str_factor = this.GetSpecialValueFor("damage_str_factor")
         this.damage_interval = this.GetSpecialValueFor("damage_interval")
@@ -256,8 +255,8 @@ export class modifier_axe_3_debuff extends BaseModifier_Plus {
             BattleHelper.GoApplyDamage(damage_table)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         return -this.reduce_move_speed
     }
 }

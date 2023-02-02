@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseModifierMotionVertical, registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -107,7 +106,7 @@ export class modifier_mirana_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -196,7 +195,7 @@ export class modifier_mirana_2_jump extends BaseModifierMotionVertical {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.fTime = 0
@@ -267,12 +266,12 @@ export class modifier_mirana_2_jump extends BaseModifierMotionVertical {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_3
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DISABLE_TURNING)
-    GetDisableTurning(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_TURNING)
+    GetDisableTurning(params: IModifierTable) {
         return 1
     }
 }
@@ -301,7 +300,7 @@ export class modifier_mirana_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.leap_radius = this.GetSpecialValueFor("leap_radius")
         this.duration = this.GetSpecialValueFor("leap_bonus_duration")
@@ -317,13 +316,13 @@ export class modifier_mirana_2_buff extends BaseModifier_Plus {
             // }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
 
     G_MAX_ATTACKSPEED_BONUS() {
         return (this.GetCasterPlus() == this.GetParentPlus() && this.GetCasterPlus().GetTalentValue("special_bonus_unique_mirana_custom_6") || 0)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         return this.GetParentPlus() == this.GetCasterPlus() && this.leap_speedbonus_as || (this.leap_speedbonus_as * this.leap_speedbonus_talent_pct * 0.01)
     }
 }
@@ -349,7 +348,7 @@ export class modifier_mirana_2_invis extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.leap_damage = this.GetSpecialValueFor("leap_damage")
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -371,8 +370,8 @@ export class modifier_mirana_2_invis extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             let extra_damage = hCaster.HasTalent("special_bonus_unique_mirana_custom_7") && hCaster.GetTalentValue("special_bonus_unique_mirana_custom_7") || 0
@@ -383,8 +382,8 @@ export class modifier_mirana_2_invis extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INVISIBILITY_LEVEL)
-    GetInvisibilityLevel(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INVISIBILITY_LEVEL)
+    GetInvisibilityLevel(params: IModifierTable) {
         return math.min(this.GetElapsedTime(), 1)
     }
 }

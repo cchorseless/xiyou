@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -123,7 +122,7 @@ export class modifier_death_prophet_2 extends BaseModifier_Plus {
     GetTexture() {
         return "death_prophet_spirit_siphon"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -170,7 +169,7 @@ export class modifier_death_prophet_2 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     EOM_GetModifierBonusStats_Intellect() {
         return this.GetStackCount()
     }
@@ -211,7 +210,7 @@ export class modifier_death_prophet_2_debuff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.radius = this.GetSpecialValueFor("radius")
@@ -324,7 +323,7 @@ export class modifier_death_prophet_2_debuff extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_SILENCED]: true,
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage() {
         return this.movement_slow * this.GetStackCount()
     }
@@ -353,7 +352,7 @@ export class modifier_death_prophet_2_buff extends BaseModifier_Plus {
     GetTexture() {
         return "death_prophet_spirit_siphon"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             let iInt = params.int || 0
@@ -365,12 +364,12 @@ export class modifier_death_prophet_2_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
 
-    tooltip(params: ModifierTable) {
+    tooltip(params: IModifierTable) {
         return this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     EOM_GetModifierBonusStats_Intellect() {
         return this.GetStackCount()
     }
@@ -396,7 +395,7 @@ export class modifier_death_prophet_2_talent_root extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({

@@ -56,7 +56,7 @@ export class modifier_leshrac_2 extends BaseModifier_Plus {
         return false
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
         this.interval = this.GetSpecialValueFor("interval")
         this.damage = this.GetSpecialValueFor("damage")

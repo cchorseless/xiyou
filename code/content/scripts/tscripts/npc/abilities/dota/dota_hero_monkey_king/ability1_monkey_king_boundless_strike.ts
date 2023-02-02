@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -102,7 +101,7 @@ export class modifier_monkey_king_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -153,10 +152,10 @@ export class modifier_monkey_king_1 extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_monkey_king_1_buff extends BaseModifier_Plus {
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE)
     ignore_armor: number;
     damage_bonus: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
     strike_crit_mult: number;
     IsHidden() {
         return true
@@ -176,7 +175,7 @@ export class modifier_monkey_king_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Initial(params: ModifierTable) {
+    Initial(params: IModifierTable) {
         this.ignore_armor = this.GetSpecialValueFor("ignore_armor")
         this.damage_bonus = this.GetParentPlus().GetMaxHealth() * (this.GetSpecialValueFor("damage_bonus_health"))
         this.strike_crit_mult = this.GetSpecialValueFor("strike_crit_mult") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_monkey_king_custom_4")
@@ -188,7 +187,7 @@ export class modifier_monkey_king_1_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage() {
         return this.damage_bonus
     }
@@ -214,7 +213,7 @@ export class modifier_monkey_king_1_stun extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
@@ -244,7 +243,7 @@ export class modifier_monkey_king_1_stun extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_STUNNED]: true
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_DISABLED
     }
@@ -252,7 +251,7 @@ export class modifier_monkey_king_1_stun extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_monkey_king_1_particle_monkey_king_strike extends modifier_particle_thinker {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -276,7 +275,7 @@ export class modifier_monkey_king_1_particle_monkey_king_strike extends modifier
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_monkey_king_1_particle_monkey_king_strike_cast extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (IsClient()) {

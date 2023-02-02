@@ -1,7 +1,6 @@
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -59,7 +58,7 @@ export class modifier_medusa_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.bonus_attack_damage_per = this.GetSpecialValueFor("bonus_attack_damage_per")
         this.arrow_count = this.GetSpecialValueFor("arrow_count")
@@ -80,20 +79,20 @@ export class modifier_medusa_1 extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
-    GetDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    GetDamageOutgoing_Percentage(params: IModifierTable) {
         return this.bonus_attack_damage_per
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     Get_ActivityTranslationModifiers() {
         return "split_shot"
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
     Get_AttackSound() {
         return ResHelper.GetSoundReplacement("Hero_Medusa.AttackSplit", this.GetParentPlus())
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
-    Attack(params: ModifierTable) {
+    Attack(params: IModifierTable) {
         if (params.target == null || params.target.GetClassname() == "dota_item_drop") {
             return
         }

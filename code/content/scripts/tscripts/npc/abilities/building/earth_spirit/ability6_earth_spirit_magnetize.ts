@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -95,7 +94,7 @@ export class modifier_earth_spirit_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -167,7 +166,7 @@ export class modifier_earth_spirit_6_magnetized extends BaseModifier_Plus {
         return false
     }
 
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.StartIntervalThink(0)
         if (IsServer()) {
@@ -176,7 +175,7 @@ export class modifier_earth_spirit_6_magnetized extends BaseModifier_Plus {
 
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage = this.GetSpecialValueFor("damage")
         this.shard_all_attribute_damage = this.GetSpecialValueFor("shard_all_attribute_damage")
         this.damage_pct_perS = this.GetSpecialValueFor("damage_pct_perS")
@@ -240,7 +239,7 @@ export class modifier_earth_spirit_6_magnetized extends BaseModifier_Plus {
 
         this.StartIntervalThink(1)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     G_INCOMING_DAMAGE_PERCENTAGE() {
         return this.GetCasterPlus().GetTalentValue('special_bonus_unique_earth_spirit_custom_8')
     }
@@ -290,14 +289,14 @@ export class modifier_earth_spirit_6_enhanced_aura extends BaseModifier_Plus {
     GetAuraDuration() {
         return this.duration
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         //   做一个特效标识光环范围
         if (IsClient()) {
             this.StartIntervalThink(0)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.duration = this.GetSpecialValueFor("duration") + this.GetCasterPlus().GetTalentValue('special_bonus_unique_earth_spirit_custom_6')
         this.radius = this.GetSpecialValueFor("radius")
     }
@@ -327,7 +326,7 @@ export class modifier_earth_spirit_6_enhanced_aura extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_earth_spirit_6_cast_particle extends modifier_particle_thinker {
     radius: number;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()

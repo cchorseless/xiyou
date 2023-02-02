@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -137,7 +136,7 @@ export class modifier_undying_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -226,7 +225,7 @@ export class modifier_undying_1_hero extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.str_scale_up = this.GetSpecialValueFor("str_scale_up")
         if (IsServer()) {
             let str_steal = params.str_steal || 0
@@ -237,16 +236,16 @@ export class modifier_undying_1_hero extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_SCALE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_SCALE)
     GetModelScale() {
         return math.min(this.str_scale_up * this.GetStackCount(), 50)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.GetStackCount()
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     EOM_GetModifierBonusStats_Strength() {
         return this.GetStackCount()
     }
@@ -272,7 +271,7 @@ export class modifier_undying_1_health_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             let fStealHealth = params.fStealHealth || 0
@@ -284,12 +283,12 @@ export class modifier_undying_1_health_debuff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.GetStackCount()
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     G_HP_BONUS() {
         return this.GetStackCount()
     }

@@ -1,8 +1,6 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -65,14 +63,14 @@ export class modifier_arc_warden_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
-    On_Order(params: ModifierTable) {
+    On_Order(params: IModifierTable) {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
             if (params.issuer_player_index != -1 && params.ability == hAbility) {
@@ -141,21 +139,21 @@ export class modifier_arc_warden_2_buff extends BaseModifier_Plus {
         }
         return true
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_SHOCK_COUNT_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_SHOCK_COUNT_PERCENTAGE)
     G_OUTGOING_SHOCK_COUNT_PERCENTAGE() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_arc_warden_custom_5")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     EOM_GetModifierOutgoingDamagePercentage() {
         if (string.find(this.GetParentPlus().GetUnitName(), "npc_dota_hero_arc_warden") && this.GetParentPlus().HasScepter()) {
             return this.GetSpecialValueFor("scepter_damage_bonus")
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_arc_warden_custom_5")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
         return this.EOM_GetModifierOutgoingDamagePercentage()
     }
@@ -165,7 +163,7 @@ export class modifier_arc_warden_2_buff extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_arc_warden_2_buff_extra extends BaseModifier_Plus {
     tAuraInfo: any;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             if (!this.tAuraInfo) {
@@ -181,7 +179,7 @@ export class modifier_arc_warden_2_buff_extra extends BaseModifier_Plus {
             this.StartIntervalThink(0.1)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         if (IsServer()) {
             let iSourceIndex = params.iSourceIndex
@@ -213,19 +211,19 @@ export class modifier_arc_warden_2_buff_extra extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         return this.GetSpecialValueFor("attack_speed_bonus") * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.GetAttackSpeedBonus_Constant()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
         return this.GetAttackSpeedBonus_Constant()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     G_MAX_ATTACKSPEED_BONUS() {
         return this.GetAttackSpeedBonus_Constant()
     }
@@ -254,7 +252,7 @@ export class modifier_arc_warden_2_aura extends BaseModifier_Plus {
     GetAuraDuration() {
         return 0.5
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.iRadius = params.iRadius || 300

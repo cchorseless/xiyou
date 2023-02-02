@@ -7,7 +7,7 @@ import { registerModifier } from "../../entityPlus/Base_Plus";
 // 残影
 @registerModifier()
 export class modifier_remnant extends BaseModifier_Plus {
-    Init(par: ModifierTable) {
+    Init(par: IModifierTable) {
         this.ReleaseRemnant();
     }
 
@@ -49,7 +49,7 @@ export class modifier_remnant_thinker extends BaseModifier_Plus {
     }
     iParticleSize: number = 1000;
     // todo
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         // let hParent = this.GetParentPlus();
         // let iParticleID = ResHelper.CreateParticle(
         //     //  "particles/units/towers/stormspirit/status_fx_remnant.vpcf"

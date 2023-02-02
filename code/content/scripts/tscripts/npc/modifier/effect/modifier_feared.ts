@@ -30,7 +30,7 @@ export class modifier_feared extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             // let hParent = this.GetParentPlus()
@@ -66,7 +66,7 @@ export class modifier_feared extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, true, 10, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params)
         // if (IsServer()) {
         //     let hParent = this.GetParentPlus()

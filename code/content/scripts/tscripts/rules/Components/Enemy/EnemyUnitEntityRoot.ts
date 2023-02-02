@@ -5,9 +5,9 @@ import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerCompo
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { ERound } from "../Round/ERound";
 import { ERoundBoard } from "../Round/ERoundBoard";
+import { EnemyDataComponent } from "./EnemyDataComponent";
 import { EnemyKillPrizeComponent } from "./EnemyKillPrizeComponent";
 import { EnemyMoveComponent } from "./EnemyMoveComponent";
-import { EnemyUnitComponent } from "./EnemyUnitComponent";
 
 @GReloadable
 export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
@@ -23,7 +23,7 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         this.AddComponent(GGetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
         this.AddComponent(GGetRegClass<typeof CombinationComponent>("CombinationComponent"));
         this.addBattleComp();
-        this.AddComponent(GGetRegClass<typeof EnemyUnitComponent>("EnemyUnitComponent"));
+        this.AddComponent(GGetRegClass<typeof EnemyDataComponent>("EnemyDataComponent"));
         this.AddComponent(GGetRegClass<typeof EnemyKillPrizeComponent>("EnemyKillPrizeComponent"));
     }
 
@@ -59,7 +59,7 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         }
     }
     EnemyUnitComp() {
-        return this.GetComponentByName<EnemyUnitComponent>("EnemyUnitComponent");
+        return this.GetComponentByName<EnemyDataComponent>("EnemyDataComponent");
     }
     EnemyKillPrize() {
         return this.GetComponentByName<EnemyKillPrizeComponent>("EnemyKillPrizeComponent");

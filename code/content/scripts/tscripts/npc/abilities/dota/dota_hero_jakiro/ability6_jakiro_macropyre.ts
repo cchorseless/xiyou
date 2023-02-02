@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -74,7 +73,7 @@ export class modifier_jakiro_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -178,7 +177,7 @@ export class modifier_jakiro_6_thinker extends BaseModifier_Plus {
         }
         return true
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -256,13 +255,13 @@ export class modifier_jakiro_6_burn_debuff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(this.burn_interval)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage = this.GetSpecialValueFor("damage")
         this.damage_int_factor = this.GetSpecialValueFor("damage_int_factor")
         this.burn_interval = this.GetSpecialValueFor("burn_interval")
@@ -289,8 +288,8 @@ export class modifier_jakiro_6_burn_debuff extends BaseModifier_Plus {
             BattleHelper.GoApplyDamage(damage_table)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (params != null && GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().IsAlive() && params.attacker == this.GetCasterPlus()) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_jakiro_custom_8")
         }

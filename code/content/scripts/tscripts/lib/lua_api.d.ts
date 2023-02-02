@@ -33,7 +33,7 @@ declare let OnStartTouch: any;
 
 
 /**创建modeifier数据结构 */
-interface ModifierTable {
+declare interface IModifierTable {
     /**时间 */
     duration?: number;
     /**hash id */
@@ -43,4 +43,8 @@ interface ModifierTable {
     /**在OnRefresh执行 */
     IsOnRefresh?: boolean;
     [k: string]: any;
+}
+
+declare interface ICustomModifierAttackEvent extends ModifierAttackEvent {
+
 }

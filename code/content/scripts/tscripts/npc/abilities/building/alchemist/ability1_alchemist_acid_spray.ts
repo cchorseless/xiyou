@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -91,7 +90,7 @@ export class modifier_alchemist_1 extends BaseModifier_Plus {
     public radius: number;
     public damage_interval: number;
     public iParticleID: ParticleID;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.radius = this.GetSpecialValueFor("radius");
         this.damage_interval = this.GetSpecialValueFor("damage_interval");
@@ -143,7 +142,7 @@ export class modifier_alchemist_1_aura extends BaseModifier_Plus {
     IsPurgeException() {
         return false;
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     public armor_reduce: number;
 
     public damage_interval: number;
@@ -151,7 +150,7 @@ export class modifier_alchemist_1_aura extends BaseModifier_Plus {
     public max_inc: number;
     public time: number;
 
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.damage_interval = this.GetSpecialValueFor("damage_interval");
         this.armor_reduce = this.GetSpecialValueFor("armor_reduce");
@@ -162,7 +161,7 @@ export class modifier_alchemist_1_aura extends BaseModifier_Plus {
             this.StartIntervalThink(this.damage_interval);
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         this.damage_interval = this.GetSpecialValueFor("damage_interval");
         this.armor_reduce = this.GetSpecialValueFor("armor_reduce");
         this.damage_inc = this.GetSpecialValueFor("damage_inc") / 100;

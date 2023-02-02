@@ -1,16 +1,14 @@
 
 import { AI_ability } from "../../../../ai/AI_ability";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { LogHelper } from "../../../../helper/LogHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_abyssal_underlord_firestorm = { "ID": "5613", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "HasShardUpgrade": "1", "AbilityCastRange": "600 625 650 675", "AbilityCastPoint": "0.5", "FightRecapLevel": "1", "AbilityCooldown": "12.0", "AbilityManaCost": "100 110 120 130", "AbilitySpecial": { "10": { "var_type": "FIELD_FLOAT", "building_damage": "33" }, "01": { "var_type": "FIELD_INTEGER", "radius": "425", "LinkedSpecialBonus": "special_bonus_unique_underlord_8" }, "02": { "var_type": "FIELD_FLOAT", "wave_duration": "7.0", "LinkedSpecialBonus": "special_bonus_unique_underlord_7" }, "03": { "var_type": "FIELD_INTEGER", "wave_count": "6", "LinkedSpecialBonus": "special_bonus_unique_underlord_7" }, "04": { "var_type": "FIELD_INTEGER", "wave_damage": "25 40 55 70", "LinkedSpecialBonus": "special_bonus_unique_underlord_2" }, "05": { "var_type": "FIELD_FLOAT", "wave_interval": "1.0" }, "06": { "var_type": "FIELD_FLOAT", "burn_damage": "1 2 3 4", "CalculateSpellDamageTooltip": "0" }, "07": { "var_type": "FIELD_FLOAT", "burn_interval": "1.0" }, "08": { "var_type": "FIELD_FLOAT", "burn_duration": "2.0" }, "09": { "var_type": "FIELD_FLOAT", "first_wave_delay": "0.0" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
@@ -103,7 +101,7 @@ export class modifier_abyssal_underlord_1_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.burn_damage = this.GetSpecialValueFor("burn_damage")
         this.shard_burn_damage = this.GetSpecialValueFor("shard_burn_damage")
         this.burn_interval = this.GetSpecialValueFor("burn_interval")
@@ -166,7 +164,7 @@ export class modifier_abyssal_underlord_1_thinker extends modifier_particle_thin
     wave_strength_damage: number;
     burn_duration: number;
     iCount: number;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -227,7 +225,7 @@ export class modifier_abyssal_underlord_1_thinker extends modifier_particle_thin
 // 特效
 @registerModifier()
 export class modifier_abyssal_underlord_1_particle_wave extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

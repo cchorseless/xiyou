@@ -1,5 +1,4 @@
 import { GameFunc } from "../../../../GameFunc";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -48,7 +47,7 @@ export class modifier_lone_druid_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(1)
@@ -68,7 +67,7 @@ export class modifier_lone_druid_1 extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_SPAWN_SUMMONNED)
-    OnSummonned(params: ModifierTable) {
+    OnSummonned(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (params.unit == hParent && GameFunc.IsValid(params.target)) {
@@ -100,13 +99,13 @@ export class modifier_lone_druid_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(0)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.bonus_attack_speed = this.GetSpecialValueFor("bonus_attack_speed")
         this.bonus_attack_speed_limit = this.GetSpecialValueFor("bonus_attack_speed_limit")
@@ -128,16 +127,16 @@ export class modifier_lone_druid_1_buff extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
 
     G_MAX_ATTACKSPEED_BONUS() {
         return this.bonus_attack_speed_limit
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         return this.bonus_attack_speed
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.bonus_attack_speed_limit
     }

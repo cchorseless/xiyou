@@ -1,5 +1,4 @@
 import { ResHelper } from "../../../helper/ResHelper";
-import { GameEnum } from "../../../shared/GameEnum";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
@@ -27,7 +26,7 @@ export class modifier_building extends BaseModifier_Plus {
     IsPermanent() {
         return true;
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             let hParent = this.GetParentPlus();
             let vColor = hParent.ETRoot.As<IBuildingEntityRoot>().GetPlayer().GetColor();
@@ -47,7 +46,7 @@ export class modifier_building extends BaseModifier_Plus {
         };
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IS_SCEPTER)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IS_SCEPTER)
     GetScepter() {
         return 1;
     }

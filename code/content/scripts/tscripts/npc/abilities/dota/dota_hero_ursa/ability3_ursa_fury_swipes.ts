@@ -1,7 +1,6 @@
 
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -62,7 +61,7 @@ export class modifier_ursa_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_reset_time = this.GetSpecialValueFor("bonus_reset_time")
         this.shard_bonus_reset_time = this.GetSpecialValueFor("shard_bonus_reset_time")
     }
@@ -109,7 +108,7 @@ export class modifier_ursa_3_buff extends BaseModifier_Plus {
     DestroyOnExpire() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (!IsServer()) {
             let particleID = ResHelper.CreateParticle({
@@ -122,7 +121,7 @@ export class modifier_ursa_3_buff extends BaseModifier_Plus {
             this.AddParticle(particleID, false, true, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_ursa_custom_5"
         this.damage_per_stack = hCaster.HasTalent(sTalentName) && this.GetSpecialValueFor("damage_per_stack") + hCaster.GetTalentValue(sTalentName) || this.GetSpecialValueFor("damage_per_stack")
@@ -167,16 +166,16 @@ export class modifier_ursa_3_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
     EOM_GetModifierBaseAttack_BonusDamage() {
         return this.damage_per_stack * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
-    tooltip2(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
+    tooltip2(params: IModifierTable) {
         return this.damage_per_stack * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
+    tooltip(params: IModifierTable) {
         return this.shock_chance_per_stack * this.GetStackCount()
     }
 }

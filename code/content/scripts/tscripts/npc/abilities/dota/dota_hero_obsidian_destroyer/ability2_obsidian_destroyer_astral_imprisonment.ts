@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -144,7 +143,7 @@ export class modifier_obsidian_destroyer_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -234,7 +233,7 @@ export class modifier_obsidian_destroyer_2_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -287,7 +286,7 @@ export class modifier_obsidian_destroyer_2_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
         this.damage = this.GetSpecialValueFor("damage")
         this.bonus_max_mana_damage_percent = this.GetSpecialValueFor("bonus_max_mana_damage_percent")
@@ -346,7 +345,7 @@ export class modifier_obsidian_destroyer_2_debuff extends BaseModifier_Plus {
             //  [modifierstate.MODIFIER_STATE_INVULNERABLE] = true,
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INVISIBILITY_LEVEL)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INVISIBILITY_LEVEL)
     GetInvisibilityLevel() {
         return 0.99
     }
@@ -373,7 +372,7 @@ export class modifier_obsidian_destroyer_2_invulnerable extends BaseModifier_Plu
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
     }
 
@@ -387,7 +386,7 @@ export class modifier_obsidian_destroyer_2_invulnerable extends BaseModifier_Plu
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_obsidian_destroyer_2_particle extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetParentPlus()
         let hParent = this.GetCasterPlus()

@@ -1,9 +1,3 @@
-import { GameEnum } from "../../../../shared/GameEnum";
-import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -51,20 +45,20 @@ export class modifier_invoker_wex_custom extends BaseModifier_Plus {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         return this.GetAbilityPlus().GetLevelSpecialValueFor("attack_speed_bonus", this.GetAbilityPlus().GetLevel())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
 
     EOM_GetModifierMaximumAttackSpeedBonus() {
         return this.GetAbilityPlus().GetLevelSpecialValueFor("attack_speed_limit_bonus", this.GetAbilityPlus().GetLevel())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.GetAttackSpeedBonus_Constant()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
         return this.EOM_GetModifierMaximumAttackSpeedBonus()
     }

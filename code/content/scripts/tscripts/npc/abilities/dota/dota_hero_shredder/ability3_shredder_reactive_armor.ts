@@ -1,7 +1,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -83,7 +82,7 @@ export class modifier_shredder_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -175,7 +174,7 @@ export class modifier_shredder_3_link_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -198,15 +197,15 @@ export class modifier_shredder_3_link_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.inherit_crit_spell_percent = this.GetSpecialValueFor("inherit_crit_spell_percent")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE)
     G_OUTGOING_PURE_DAMAGE_PERCENTAGE() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_shredder_custom_7")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
-    EOM_GetModifierSpellCriticalStrike(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
+    EOM_GetModifierSpellCriticalStrike(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let buff = modifier_shredder_2_buff.findIn(hCaster)
         if (GameFunc.IsValid(hCaster) && GameFunc.IsValid(buff)) {
@@ -217,8 +216,8 @@ export class modifier_shredder_3_link_buff extends BaseModifier_Plus {
         }
         this.SetStackCount(0)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
-    EOM_GetModifierSpellCriticalStrikeDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
+    EOM_GetModifierSpellCriticalStrikeDamage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let buff = modifier_shredder_2_buff.findIn(hCaster)
         if (GameFunc.IsValid(hCaster) && GameFunc.IsValid(buff)) {

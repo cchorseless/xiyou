@@ -37,14 +37,12 @@ export interface IBuffEventData {
 export class modifier_event extends BaseModifier_Plus {
     /**
      * 触发所有事件
+     * @Both
      * @param event
      * @param k
      * @returns
      */
     static FireEvent(event: IBuffEventData, ...k: Array<Enum_MODIFIER_EVENT>) {
-        if (!IsServer()) {
-            return;
-        }
         let a, b, c;
         if (event) {
             if (event.eventType == null) {
@@ -84,7 +82,18 @@ export class modifier_event extends BaseModifier_Plus {
             }
         }
     }
-
+    /**
+     * 触发单位事件
+     * @Both
+     * @param unit 
+     * @param k 
+     */
+    static FireUnitEvent(unit: IBaseNpc_Plus, ...k: Array<Enum_MODIFIER_EVENT>) {
+        let event: IBuffEventData = {};
+        event.unit = unit;
+        event.eventType = EventDataType.unitIsSelf;
+        this.FireEvent(event, ...k)
+    }
     OnCreated() {
         if (!IsServer()) {
             return;
@@ -560,9 +569,6 @@ export class modifier_event extends BaseModifier_Plus {
  * @returns
  */
 export function registerEvent(params: Enum_MODIFIER_EVENT, onSelf = true, onOther = false) {
-    if (!IsServer()) {
-        return;
-    }
     // 动态添加监听事件
     // if (Modifier_Event.DeclareEvent.indexOf(params as any) == -1) {
     //     LogHelper.print('DeclareEventChange', params);

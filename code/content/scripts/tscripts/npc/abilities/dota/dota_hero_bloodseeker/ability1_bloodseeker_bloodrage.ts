@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -82,7 +81,7 @@ export class modifier_bloodseeker_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -183,7 +182,7 @@ export class modifier_bloodseeker_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -200,7 +199,7 @@ export class modifier_bloodseeker_1_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.per_lose_max_health_ptg = this.GetSpecialValueFor("per_lose_max_health_ptg")
         this.bonus_amplify_damage = this.GetSpecialValueFor("bonus_amplify_damage") + hCaster.GetTalentValue("special_bonus_unique_bloodseeker_custom_8", "amplify_damage_ptg")
@@ -224,12 +223,12 @@ export class modifier_bloodseeker_1_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     EOM_GetModifierSpellAmplifyBonus() {
         return this.bonus_amplify_damage - this.reduce_amplify_damage_ptg * (100 - this.GetParentPlus().GetHealthPercent()) / this.per_lose_max_health_ptg
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    On_AttackLanded(params: ModifierTable) {
+    On_AttackLanded(params: IModifierTable) {
         if (!GameFunc.IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         let hCaster = this.GetCasterPlus()
@@ -251,11 +250,11 @@ export class modifier_bloodseeker_1_buff extends BaseModifier_Plus {
         }
     }
     // 百分比攻击力
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
     GetBaseDamageOutgoing_Percentage() {
         return this.bonus_attack_ptg - this.reduce_attack_ptg * (100 - this.GetParentPlus().GetHealthPercent()) / this.per_lose_max_health_ptg
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
         return this.bonus_amplify_damage - this.reduce_amplify_damage_ptg * (100 - this.GetParentPlus().GetHealthPercent()) / this.per_lose_max_health_ptg
     }

@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -124,7 +123,7 @@ export class modifier_shadow_shaman_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -237,7 +236,7 @@ export class modifier_shadow_shaman_6_summon extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let extra_attack_rate = hCaster.GetTalentValue("special_bonus_unique_shadow_shaman_custom_3")
         this.attack_rate = this.GetSpecialValueFor("attack_rate") - extra_attack_rate
@@ -276,13 +275,13 @@ export class modifier_shadow_shaman_6_summon extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/heroes/shadowshaman/shadowshaman_totem.vmdl", this.GetCasterPlus())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
 
-    GetBaseAttackTimeConstant(params: ModifierTable) {
+    GetBaseAttackTimeConstant(params: IModifierTable) {
         return this.attack_rate
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
@@ -323,7 +322,7 @@ export class modifier_shadow_shaman_6_summon extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
     GetAttackRangeBonus() {
         return this.attack_range
     }

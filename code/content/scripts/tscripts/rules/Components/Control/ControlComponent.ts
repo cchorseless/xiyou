@@ -1,7 +1,7 @@
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { BaseNpc } from "../../../npc/entityPlus/Base_Plus";
-import { GameEnum } from "../../../shared/GameEnum";
+import { GameProtocol } from "../../../shared/GameProtocol";
 import { ET } from "../../../shared/lib/Entity";
 
 
@@ -151,11 +151,11 @@ export class ControlComponent extends ET.Component {
         // 摄像机跟随
         PlayerResource.SetCameraTarget(domain.GetPlayerOwnerID(), domain);
         // 键盘输入
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_KEY_DOWN, GHandler.create(this, this.onKey_Down));
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_KEY_UP, GHandler.create(this, this.onKey_Up));
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_Camera_Yaw_Change, GHandler.create(this, this.onCamera_Yaw_Change));
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_Mouse_Event, GHandler.create(this, this.onMouse_Event));
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_Mouse_Position, GHandler.create(this, this.onMouse_Position));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_KEY_DOWN, GHandler.create(this, this.onKey_Down));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_KEY_UP, GHandler.create(this, this.onKey_Up));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_Camera_Yaw_Change, GHandler.create(this, this.onCamera_Yaw_Change));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_Mouse_Event, GHandler.create(this, this.onMouse_Event));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_Mouse_Position, GHandler.create(this, this.onMouse_Position));
         GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
             this.onUpdate();
             return 1;

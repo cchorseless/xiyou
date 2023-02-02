@@ -1,16 +1,10 @@
-import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
-import { PrecacheHelper } from "../../../helper/PrecacheHelper";
-import { ET } from "../../../shared/lib/Entity";
 import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerUnit } from "../../entityPlus/Base_Plus";
 import { modifier_portal } from "../../modifier/modifier_portal";
 /**传送门 */
 @registerUnit()
 export class unit_portal extends BaseNpc_Plus {
-    Precache(context: CScriptPrecacheContext) {
-        // PrecacheHelper.precachResByKV(entityKeyValues);
-    }
 
     Spawn(entityKeyValues: CScriptKeyValues) {
         LogHelper.print("Spawn", this.entindex(), this.GetUnitName());

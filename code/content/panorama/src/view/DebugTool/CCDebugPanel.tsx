@@ -1,6 +1,5 @@
 import React from "react";
 
-import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
 import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool, CCDebugTool_Category, CCDebugTool_DemoButton, CCDebugTool_DemoSelectionButton, CCDebugTool_DemoSlider, CCDebugTool_DemoTextEntry, CCDebugTool_DemoToggle } from "./CCDebugTool";
@@ -84,9 +83,9 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="其他" >
                         <CCDebugTool_DemoButton eventName="SetWinnerButtonPressed" btncolor="RedButton" localtext="游戏结束" />
-                        <CCDebugTool_DemoButton eventName={GameEnum.CustomProtocol.req_DebugRestart} btncolor="RedButton" localtext="重开游戏" />
-                        <CCDebugTool_DemoButton eventName={GameEnum.CustomProtocol.req_DebugClearAll} localtext="清理日志" />
-                        <CCDebugTool_DemoButton eventName={GameEnum.CustomProtocol.req_DebugReload} btncolor="GreenButton" localtext="重载脚本" />
+                        <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugRestart} btncolor="RedButton" localtext="重开游戏" />
+                        <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugClearAll} localtext="清理日志" />
+                        <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugReload} btncolor="GreenButton" localtext="重载脚本" />
                         <CCDebugTool_DemoButton eventName="RefreshServicePressed" localtext="更新后端数据" />
                         <CCDebugTool_DemoToggle eventName="GameTimeFrozenButtonPressed" localtext="冻结游戏" selected={is_frozen} />
                     </CCDebugTool_Category>

@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -163,7 +162,7 @@ export class modifier_ogre_magi_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -271,7 +270,7 @@ export class modifier_ogre_magi_6_buff extends BaseModifier_Plus {
     GetTexture() {
         return ResHelper.GetAbilityTextureReplacement("ogre_magi_bloodlust", this.GetCasterPlus())
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let extra_bonus_attack_speed = hCaster.GetTalentValue("special_bonus_unique_ogre_magi_custom_3")
         this.bonus_attack_damage = hCaster.GetTalentValue("special_bonus_unique_ogre_magi_custom_6")
@@ -304,23 +303,23 @@ export class modifier_ogre_magi_6_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     g_SPELL_AMPLIFY_BONUS() {
         return this.GetSpecialValueFor("spell_amplify")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         if (this.GetParentPlus() == this.GetCasterPlus()) {
             return this.self_bonus
         }
         return this.bonus_attack_speed
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         return this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_SCALE)
-    GetModelScale(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_SCALE)
+    GetModelScale(params: IModifierTable) {
         return this.modelscale
     }
 }
@@ -351,7 +350,7 @@ export class modifier_ogre_magi_6_buff_shard extends BaseModifier_Plus {
         return false
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.count_shard = this.GetSpecialValueFor("count_shard")
         if (IsServer()) {
             this.changeStackCount(this.count_shard)
@@ -436,7 +435,7 @@ export class modifier_ogre_magi_6_buff_shard extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_ogre_magi_6_particle_cast extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetParentPlus()

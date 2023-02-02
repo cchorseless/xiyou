@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -174,7 +173,7 @@ export class modifier_omniknight_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -265,7 +264,7 @@ export class modifier_omniknight_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -281,22 +280,22 @@ export class modifier_omniknight_1_buff extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.value = this.GetSpecialValueFor("value")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     G_HEALTH_BONUS() {
         return this.value
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
     G_MANA_BONUSS() {
         return this.value
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.value
     }
@@ -323,7 +322,7 @@ export class modifier_omniknight_1_self_animation extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     Get_ActivityTranslationModifiers() {
         return "this"
     }
@@ -331,7 +330,7 @@ export class modifier_omniknight_1_self_animation extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_omniknight_1_particle_start extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let radius = this.GetSpecialValueFor("radius")
         if (IsClient()) {
@@ -352,7 +351,7 @@ export class modifier_omniknight_1_particle_start extends modifier_particle {
 // 特效
 @registerModifier()
 export class modifier_omniknight_1_particle_cast extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hTarget = this.GetCasterPlus()

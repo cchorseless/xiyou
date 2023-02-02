@@ -1,19 +1,10 @@
 import { GameFunc } from "../../../../GameFunc";
+import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { EntityHelper } from "../../../../helper/EntityHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
-import { LogHelper } from "../../../../helper/LogHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
-import { GameSetting } from "../../../../GameSetting";
 
 
 @registerAbility()
@@ -59,7 +50,7 @@ export class modifier_t11_curse extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
@@ -137,7 +128,7 @@ export class modifier_t11_curse_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let thinker_duration = this.thinker_duration
         let hCaster = this.GetCasterPlus()
@@ -160,7 +151,7 @@ export class modifier_t11_curse_thinker extends BaseModifier_Plus {
         }
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.thinker_duration = this.GetSpecialValueFor("thinker_duration")
         this.think_interval = this.GetSpecialValueFor("think_interval")
         this.curse_chance = this.GetSpecialValueFor("curse_chance")
@@ -228,7 +219,7 @@ export class modifier_t11_curse_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({

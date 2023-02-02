@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -86,7 +85,7 @@ export class modifier_windrunner_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -176,7 +175,7 @@ export class modifier_windrunner_6_buff extends BaseModifier_Plus {
     split_count_scepter: number;
     bIsAttackTarget: boolean;
     hTarget: IBaseNpc_Plus;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.bonus_attack_speed = this.GetSpecialValueFor("bonus_attack_speed")
@@ -192,7 +191,7 @@ export class modifier_windrunner_6_buff extends BaseModifier_Plus {
             }
         }
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -318,7 +317,7 @@ export class modifier_windrunner_6_buff extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     GetSpellAmplifyBonus(params: ModifierAttackEvent) {
         if (params != null) {
             let hTarget = params.target
@@ -336,7 +335,7 @@ export class modifier_windrunner_6_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonusConstant(params: any) {
         if (IsServer()) {
             if (this.bIsAttackTarget) {
@@ -347,7 +346,7 @@ export class modifier_windrunner_6_buff extends BaseModifier_Plus {
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     activityTranslationModifiers() {
         return "focusfire"
     }
@@ -376,7 +375,7 @@ export class modifier_windrunner_6_attack_limit extends BaseModifier_Plus {
     }
     per_increase_attack_speed_limit: number;
     max_attack_speed_stack: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.per_increase_attack_speed_limit = this.GetSpecialValueFor("per_increase_attack_speed_limit")
         this.max_attack_speed_stack = this.GetSpecialValueFor("max_attack_speed_stack")
         if (IsServer()) {
@@ -385,12 +384,12 @@ export class modifier_windrunner_6_attack_limit extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     GetMaximumAttackSpeedBonus() {
         return this.per_increase_attack_speed_limit * this.GetStackCount()
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip() {
         return this.per_increase_attack_speed_limit * this.GetStackCount()
     }

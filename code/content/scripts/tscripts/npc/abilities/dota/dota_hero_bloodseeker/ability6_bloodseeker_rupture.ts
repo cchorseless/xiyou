@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -106,7 +105,7 @@ export class modifier_bloodseeker_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.trigger_chance = this.GetSpecialValueFor("trigger_chance")
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -167,7 +166,7 @@ export class modifier_bloodseeker_6 extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    On_AttackLanded(params: ModifierTable) {
+    On_AttackLanded(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         if (!GameFunc.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
             return
@@ -202,7 +201,7 @@ export class modifier_bloodseeker_6_amplify_pure extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_PURE_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PURE_DAMAGE_PERCENTAGE)
     G_INCOMING_PURE_DAMAGE_PERCENTAGE() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_bloodseeker_custom_5")
     }

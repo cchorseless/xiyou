@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../shared/GameEnum";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
@@ -22,17 +21,17 @@ export class item_ward_observer_custom extends BaseItem_Plus {
 @registerModifier()
 export class modifier_vision extends BaseModifier_Plus {
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BONUS_DAY_VISION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BONUS_DAY_VISION)
     day_vision() {
         return this.GetStackCount()
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BONUS_NIGHT_VISION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BONUS_NIGHT_VISION)
     night_vision() {
         return this.GetStackCount()
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (params.stack) {
             this.SetStackCount(params.stack)
         }

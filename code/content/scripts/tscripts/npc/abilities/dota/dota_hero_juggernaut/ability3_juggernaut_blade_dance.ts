@@ -1,16 +1,11 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
+import { modifier_particle } from "../../../modifier/modifier_particle";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_juggernaut_blade_dance = { "ID": "5027", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "blade_dance_crit_chance": "20 25 30 35" }, "02": { "var_type": "FIELD_INTEGER", "blade_dance_crit_mult": "180" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };
@@ -57,7 +52,7 @@ export class modifier_juggernaut_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.blade_dance_crit_chance = this.GetSpecialValueFor("blade_dance_crit_chance")
         this.blade_dance_crit_mult = this.GetSpecialValueFor("blade_dance_crit_mult")
     }
@@ -71,8 +66,8 @@ export class modifier_juggernaut_3 extends BaseModifier_Plus {
             EmitSoundOnLocationWithCaster(params.target.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Juggernaut.BladeDance", params.attacker), params.attacker)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
+    EOM_GetModifierCriticalStrike(params: IModifierTable) {
         if (params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             let extra_blade_dance_crit_chance = params.attacker.HasTalent("special_bonus_unique_juggernaut_custom_4") && params.attacker.GetTalentValue("special_bonus_unique_juggernaut_custom_4") || 0
             let blade_dance_crit_chance = this.blade_dance_crit_chance + extra_blade_dance_crit_chance
@@ -85,7 +80,7 @@ export class modifier_juggernaut_3 extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_juggernaut_3_crit_tgt_particle extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

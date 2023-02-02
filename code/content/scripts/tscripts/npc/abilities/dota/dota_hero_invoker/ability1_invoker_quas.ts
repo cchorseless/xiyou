@@ -1,9 +1,3 @@
-import { GameEnum } from "../../../../shared/GameEnum";
-import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -50,11 +44,11 @@ export class modifier_invoker_quas_custom extends BaseModifier_Plus {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
     EOM_GetModifierConstantManaRegen() {
         return this.GetAbilityPlus().GetLevelSpecialValueFor("mana_regen_per_level", this.GetAbilityPlus().GetLevel())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.EOM_GetModifierConstantManaRegen()
     }

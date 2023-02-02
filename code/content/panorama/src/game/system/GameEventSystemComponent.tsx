@@ -1,4 +1,5 @@
 import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
+import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
 import { GameServiceConfig } from "../../../../scripts/tscripts/shared/GameServiceConfig";
 import { ET, ETEntitySystem } from "../../../../scripts/tscripts/shared/lib/Entity";
 import { LogHelper } from "../../helper/LogHelper";
@@ -19,11 +20,11 @@ export class GameEventSystemComponent extends ET.SingletonComponent {
         this.GameEventListenerList.push(
             GameEvents.Subscribe(GameEnum.GameEvent.dota_inventory_changed, (e) => {
                 // 通知服务器
-                NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_SLOT_CHANGE, e);
+                NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_SLOT_CHANGE, e);
             })
         );
         /**监听错误信息 */
-        NetHelper.ListenOnLua(GameEnum.CustomProtocol.push_error_message,
+        NetHelper.ListenOnLua(GameProtocol.Protocol.push_error_message,
             GHandler.create(this, (event) => {
                 GLogHelper.print(event);
                 if (event.data != null) {

@@ -5,7 +5,7 @@ import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_out_of_game } from "../../../npc/modifier/battle/modifier_out_of_game";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { CombinationComponent } from "../Combination/CombinationComponent";
-import { BuildingComponent } from "./BuildingComponent";
+import { BuildingDataComponent } from "./BuildingDataComponent";
 import { BuildingRuntimeEntityRoot } from "./BuildingRuntimeEntityRoot";
 
 export class BuildingEntityRoot extends BattleUnitEntityRoot {
@@ -14,7 +14,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         (this.ConfigID as any) = conf;
         (this.EntityId as any) = this.GetDomain<IBaseNpc_Plus>().GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof CombinationComponent>("CombinationComponent"));
-        this.AddComponent(GGetRegClass<typeof BuildingComponent>("BuildingComponent"));
+        this.AddComponent(GGetRegClass<typeof BuildingDataComponent>("BuildingDataComponent"));
         this.addBattleComp();
         this.SyncClient();
     }
@@ -77,7 +77,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
     }
 
     BuildingComp() {
-        return this.GetComponentByName<BuildingComponent>("BuildingComponent");
+        return this.GetComponentByName<BuildingDataComponent>("BuildingDataComponent");
     }
 
 }

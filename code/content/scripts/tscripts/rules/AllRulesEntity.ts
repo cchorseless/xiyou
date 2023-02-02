@@ -1,7 +1,7 @@
 import { AbilityManagerComponent } from "./Components/Ability/AbilityManagerComponent";
 import { AiAttackComponent } from "./Components/AI/AiAttackComponent";
 import { BattleUnitManagerComponent } from "./Components/BattleUnit/BattleUnitManagerComponent";
-import { BuildingComponent } from "./Components/Building/BuildingComponent";
+import { BuildingDataComponent } from "./Components/Building/BuildingDataComponent";
 import { BuildingManagerComponent } from "./Components/Building/BuildingManagerComponent";
 import { BuildingPropsComponent } from "./Components/Building/BuildingPropsComponent";
 import { ChessControlComponent } from "./Components/ChessControl/ChessControlComponent";
@@ -11,10 +11,10 @@ import { CombinationManagerComponent } from "./Components/Combination/Combinatio
 import { ECombination } from "./Components/Combination/ECombination";
 import { ECombinationLabelItem } from "./Components/Combination/ECombinationLabelItem";
 import { DrawComponent } from "./Components/Draw/DrawComponent";
+import { EnemyDataComponent } from "./Components/Enemy/EnemyDataComponent";
 import { EnemyKillPrizeComponent } from "./Components/Enemy/EnemyKillPrizeComponent";
 import { EnemyManagerComponent } from "./Components/Enemy/EnemyManagerComponent";
 import { EnemyMoveComponent } from "./Components/Enemy/EnemyMoveComponent";
-import { EnemyUnitComponent } from "./Components/Enemy/EnemyUnitComponent";
 import { FakerHeroDataComponent } from "./Components/FakerHero/FakerHeroDataComponent";
 import { FHeroCombination } from "./Components/FakerHero/FHeroCombination";
 import { FHeroCombinationManagerComponent } from "./Components/FakerHero/FHeroCombinationManagerComponent";
@@ -71,11 +71,11 @@ import { WearableSystemComponent } from "./System/WearableSystemComponent";
     FHeroCombinationManagerComponent,
 
     BuffManagerComponent,
-    BuildingComponent,
+    BuildingDataComponent,
     BuildingPropsComponent,
     ChessMoveComponent,
 
-    EnemyUnitComponent,
+    EnemyDataComponent,
     EnemyKillPrizeComponent,
     EnemyMoveComponent,
     EWearableItem,

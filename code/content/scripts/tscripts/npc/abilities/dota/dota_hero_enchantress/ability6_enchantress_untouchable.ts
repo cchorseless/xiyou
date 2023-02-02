@@ -1,15 +1,8 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_enchantress_untouchable = { "ID": "5267", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "HasScepterUpgrade": "1", "AbilityDraftUltScepterAbility": "enchantress_bunny_hop", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "slow_attack_speed": "-120 -160 -200", "LinkedSpecialBonus": "special_bonus_unique_enchantress_3" }, "02": { "var_type": "FIELD_INTEGER", "slow_duration": "4" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
@@ -79,7 +72,7 @@ export class modifier_enchantress_6 extends BaseModifier_Plus {
     GetAura() {
         return 'modifier_enchantress_6_debuff'
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.max_radius = this.GetSpecialValueFor("max_radius")
     }
 
@@ -115,7 +108,7 @@ export class modifier_enchantress_6_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.max_radius = this.GetSpecialValueFor("max_radius")
         this.max_speed_radius = this.GetSpecialValueFor("max_speed_radius")
@@ -151,8 +144,8 @@ export class modifier_enchantress_6_debuff extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
@@ -168,7 +161,7 @@ export class modifier_enchantress_6_debuff extends BaseModifier_Plus {
             return this.max_speed + level * this.speed_per_level
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
@@ -186,8 +179,8 @@ export class modifier_enchantress_6_debuff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_PURE_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingPureDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PURE_DAMAGE_PERCENTAGE)
+    EOM_GetModifierIncomingPureDamagePercentage(params: IModifierTable) {
         return this.tooltip()
     }
 

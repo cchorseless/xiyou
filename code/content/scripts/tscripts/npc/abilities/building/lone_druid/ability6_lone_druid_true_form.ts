@@ -1,8 +1,6 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -94,7 +92,7 @@ export class modifier_lone_druid_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
@@ -169,7 +167,7 @@ export class modifier_lone_druid_6_transform extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.duration = this.GetSpecialValueFor("duration")
         let hParent = this.GetParentPlus()
@@ -203,11 +201,11 @@ export class modifier_lone_druid_6_transform extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_4
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION_RATE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION_RATE)
     Get_OverrideAnimationRate() {
         return 1.5 / this.GetDuration()
     }
@@ -240,7 +238,7 @@ export class modifier_lone_druid_6_form extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return true
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.attack_range = this.GetSpecialValueFor("attack_range")
         this.base_attack_interval = this.GetSpecialValueFor("base_attack_interval") + hParent.GetTalentValue("special_bonus_unique_lone_druid_custom_6")
@@ -276,30 +274,30 @@ export class modifier_lone_druid_6_form extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
-    GetBaseAttackTimeConstant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
+    GetBaseAttackTimeConstant(params: IModifierTable) {
         if (this.GetParentPlus().HasShard()) {
             return this.shard_interval
         }
         return this.base_attack_interval
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BASE_OVERRIDE)
-    GetAttackRangeOverride(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BASE_OVERRIDE)
+    GetAttackRangeOverride(params: IModifierTable) {
         if (this.GetParentPlus().HasShard()) {
             return this.shard_range
         }
         return this.attack_range
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/heroes/lone_druid/true_form.vmdl", this.GetParentPlus())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
-    EOM_GetModifierStatusResistanceStacking(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
+    EOM_GetModifierStatusResistanceStacking(params: IModifierTable) {
         return this.stats_resistance
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_PERCENTAGE)
-    EOM_GetModifierHealthPercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
+    EOM_GetModifierHealthPercentage(params: IModifierTable) {
         return this.bonus_health_per
     }
 }

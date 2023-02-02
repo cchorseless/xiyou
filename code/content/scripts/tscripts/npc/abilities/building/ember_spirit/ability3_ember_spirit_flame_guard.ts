@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -72,7 +71,7 @@ export class modifier_ember_spirit_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -169,7 +168,7 @@ export class modifier_ember_spirit_3_buff extends BaseModifier_Plus {
     GetAuraEntityReject(hTarget: IBaseNpc_Plus) {
         return hTarget == this.GetParentPlus()
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius")
@@ -203,7 +202,7 @@ export class modifier_ember_spirit_3_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius")
@@ -245,8 +244,8 @@ export class modifier_ember_spirit_3_buff extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         return this.bonus_attack_damage_per_agi * this.GetParentPlus().GetAgility()
     }
 }
@@ -273,7 +272,7 @@ export class modifier_ember_spirit_3_friend extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
@@ -281,7 +280,7 @@ export class modifier_ember_spirit_3_friend extends BaseModifier_Plus {
             this.bouns_attack_damage = this.bonus_attack_damage_per_agi * hCaster.GetAgility() * (hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_4") * 0.01)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
@@ -289,8 +288,8 @@ export class modifier_ember_spirit_3_friend extends BaseModifier_Plus {
             this.bouns_attack_damage = this.bonus_attack_damage_per_agi * hCaster.GetAgility() * (hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_4") * 0.01)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         return this.bouns_attack_damage
     }
 }
@@ -335,11 +334,11 @@ export class modifier_ember_spirit_3_enemy_arua extends BaseModifier_Plus {
     GetAuraSearchFlags() {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.radius = this.GetSpecialValueFor("radius")
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.radius = this.GetSpecialValueFor("radius")
     }
@@ -368,22 +367,22 @@ export class modifier_ember_spirit_3_enemy_arua_debuff extends BaseModifier_Plus
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         this.bonus_magic_resistance = hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_6")
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         this.bonus_magic_resistance = hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_6")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
 
     On_Tooltip() {
         return this.bonus_magic_resistance
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
     g_MAGICAL_ARMOR_BONUS() {
         return this.bonus_magic_resistance
     }

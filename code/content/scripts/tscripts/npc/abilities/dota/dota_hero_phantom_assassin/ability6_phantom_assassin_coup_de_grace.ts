@@ -1,12 +1,11 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle } from "../../../modifier/modifier_particle";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_phantom_assassin_1_caster } from "./ability1_phantom_assassin_stifling_dagger";
 import { modifier_phantom_assassin_3_blur_attack } from "./ability3_phantom_assassin_blur";
 
@@ -78,7 +77,7 @@ export class modifier_phantom_assassin_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.crit_chance = this.GetSpecialValueFor("crit_chance")
         this.crit_damage = this.GetSpecialValueFor("crit_damage")
         this.crit_chance_stack = this.GetSpecialValueFor("crit_chance_stack")
@@ -106,7 +105,7 @@ export class modifier_phantom_assassin_6 extends BaseModifier_Plus {
             modifier_phantom_assassin_6_stack.remove(hParent);
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
     EOM_GetModifierCriticalStrike(params: ModifierAttackEvent) {
         if (this.records.indexOf(params.record) != -1) {
             return this.crit_damage
@@ -140,7 +139,7 @@ export class modifier_phantom_assassin_6 extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    death(params: ModifierTable) {
+    death(params: IModifierTable) {
         let hAttacker = params.attacker
         if (!IsServer() || !GameFunc.IsValid(hAttacker) || hAttacker.GetTeamNumber() == params.unit.GetTeamNumber() || hAttacker == null || hAttacker.GetUnitLabel() == "builder" || hAttacker != this.GetParentPlus() || !hAttacker.HasScepter() || hAttacker.IsIllusion()) {
             return
@@ -185,7 +184,7 @@ export class modifier_phantom_assassin_6_stack extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.max_stack = this.GetSpecialValueFor("max_stack") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_phantom_assassin_custom_7")
         this.crit_chance_stack = this.GetSpecialValueFor("crit_chance_stack")
         this.crit_damage_stack = this.GetSpecialValueFor("crit_damage_stack")
@@ -196,15 +195,15 @@ export class modifier_phantom_assassin_6_stack extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE)
     G_CRITICALSTRIKE_DAMAGE() {
         return this.crit_damage_stack * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.crit_chance_stack * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     tooltip2() {
         return this.crit_damage_stack * this.GetStackCount()
     }
@@ -212,7 +211,7 @@ export class modifier_phantom_assassin_6_stack extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_phantom_assassin_6_particle_phantom_assassin_crit_impact_dagger extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

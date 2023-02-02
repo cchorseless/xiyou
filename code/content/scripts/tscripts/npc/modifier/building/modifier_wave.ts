@@ -1,4 +1,3 @@
-import { GameEnum } from "../../../shared/GameEnum";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
@@ -22,7 +21,7 @@ export class modifier_wave extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_SUPER_ULTRA
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             if (params.PhysicalArmor != null) {
@@ -41,13 +40,13 @@ export class modifier_wave extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE)
     public PhysicalArmor: number = 0;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BASE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BASE)
     public MagicalArmor: number = 0;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
     public Hp: number = 0;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
     public Mp: number = 0;
 
     CheckState() {
@@ -57,7 +56,7 @@ export class modifier_wave extends BaseModifier_Plus {
         }
     }
 
-    // @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_SCALE)
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_SCALE)
     // GetModelScale() {
     //     if (IsServer()) {
     //         let hParent = this.GetParentPlus()

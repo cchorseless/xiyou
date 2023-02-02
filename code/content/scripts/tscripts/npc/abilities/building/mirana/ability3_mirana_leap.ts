@@ -1,9 +1,4 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -72,20 +67,20 @@ export class modifier_mirana_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.count_per_kill = this.GetSpecialValueFor("count_per_kill")
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
         this.max_kills = this.GetSpecialValueFor("max_kills")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         let iExtraDamage = this.GetCasterPlus().HasTalent("special_bonus_unique_mirana_custom_7") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_mirana_custom_7") || 0
         return this.GetStackCount() * (this.bonus_damage + iExtraDamage)
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    OnDeath(params: ModifierTable) {
+    OnDeath(params: IModifierTable) {
         // if (Spawner.IsEndless()) {
         //     return
         // }
@@ -127,7 +122,7 @@ export class modifier_mirana_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     G_SPELL_AMPLIFY_BONUS() {
         return this.GetCasterPlus().GetTalentValue('special_bonus_unique_mirana_custom_8')
     }

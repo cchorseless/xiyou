@@ -3,7 +3,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -79,7 +78,7 @@ export class modifier_ursa_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.shock_chance = this.GetSpecialValueFor("shock_chance")
         this.shock_chance_per_stack = this.GetSpecialValueFor("shock_chance_per_stack")
         this.shock_radius = this.GetSpecialValueFor("shock_radius")
@@ -146,7 +145,7 @@ export class modifier_ursa_1_debuff extends BaseModifier_Plus {
     GetTexture() {
         return "ursa_earthshock"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
@@ -159,19 +158,19 @@ export class modifier_ursa_1_debuff extends BaseModifier_Plus {
             this.AddParticle(particleID, false, true, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.shock_movement_slow = this.GetSpecialValueFor("shock_movement_slow")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         return this.shock_movement_slow
     }
 }
 // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_ursa_1_particle_ursa_earthshock extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

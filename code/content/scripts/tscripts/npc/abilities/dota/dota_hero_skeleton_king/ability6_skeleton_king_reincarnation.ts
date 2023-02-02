@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -75,7 +74,7 @@ export class modifier_skeleton_king_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -169,7 +168,7 @@ export class modifier_skeleton_king_6_aura extends BaseModifier_Plus {
     GetAura() {
         return "modifier_skeleton_king_6_buff"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
@@ -188,7 +187,7 @@ export class modifier_skeleton_king_6_aura extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_skeleton_king_custom_5"
         this.damage_strength = this.GetSpecialValueFor("damage_strength") + hCaster.GetTalentValue(sTalentName)
@@ -235,7 +234,7 @@ export class modifier_skeleton_king_6_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.SetStackCount(modifier_skeleton_king_6_aura.findIn(this.GetCasterPlus()).bUseEnergy)
@@ -259,14 +258,14 @@ export class modifier_skeleton_king_6_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE_POST_CRIT)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE_POST_CRIT)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetStackCount() == 1) {
             return modifier_skeleton_king_6_aura.GetStackIn(this.GetCasterPlus(), this.GetCasterPlus())
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamagePostCrit(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamagePostCrit(params: IModifierTable) {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetStackCount() == 0) {
             return modifier_skeleton_king_6_aura.GetStackIn(this.GetCasterPlus(), this.GetCasterPlus())
         }
@@ -294,7 +293,7 @@ export class modifier_skeleton_king_6_damage extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_skeleton_king_custom_7"
         this.damage_pct = this.GetSpecialValueFor("damage_pct") + hCaster.GetTalentValue(sTalentName)
@@ -307,8 +306,8 @@ export class modifier_skeleton_king_6_damage extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
-    GetBaseDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    GetBaseDamageOutgoing_Percentage(params: IModifierTable) {
         return this.damage_pct * this.GetStackCount()
     }
 }

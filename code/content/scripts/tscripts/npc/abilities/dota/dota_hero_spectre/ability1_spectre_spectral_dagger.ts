@@ -4,7 +4,6 @@ import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -191,13 +190,13 @@ export class modifier_spectre_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
     }
     OnIntervalThink() {
@@ -295,7 +294,7 @@ export class modifier_spectre_1_path_thinker_aura extends BaseModifier_Plus {
     GetAuraSearchFlags() {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.tHashtable = HashTableHelper.GetHashtableByIndex(params.hashtable_index)
@@ -332,7 +331,7 @@ export class modifier_spectre_1_path_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.tHashtable = HashTableHelper.GetHashtableByIndex(params.hashtable_index);
@@ -406,11 +405,11 @@ export class modifier_spectre_1_debuff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_PURE_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PURE_DAMAGE_PERCENTAGE)
     g_INCOMING_PURE_DAMAGE_PERCENTAGE() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_spectre_custom_7")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage() {
         return -this.reduce_movespeed
     }
@@ -445,14 +444,14 @@ export class modifier_spectre_1_attack_speed extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.attack_speed = this.GetSpecialValueFor("attack_speed") + hCaster.GetTalentValue("special_bonus_unique_spectre_custom_4")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         return this.attack_speed
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)

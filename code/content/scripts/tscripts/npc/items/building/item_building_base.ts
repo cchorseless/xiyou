@@ -41,7 +41,7 @@ export class item_building_base extends ActiveRootItem {
     //     }
     //     if (IsServer()) {
     //         //  判断是否满星
-    //         let hBuilding = hTarget.ETRoot.GetComponent(BuildingComponent);
+    //         let hBuilding = hTarget.ETRoot.GetComponent(BuildingDataComponent);
     //         if (hBuilding && !hBuilding.checkCanStarUp()) {
     //             //  判断星级和升星
     //             this.errorStr = "dota_hud_error_star_limit";
@@ -111,7 +111,7 @@ export class item_building_base extends ActiveRootItem {
     //         if (!hTarget.IsRealUnit()) {
     //             return;
     //         }
-    //         let hBuilding = hTarget.ETRoot.GetComponent(BuildingComponent);
+    //         let hBuilding = hTarget.ETRoot.GetComponent(BuildingDataComponent);
     //         //  判断星级和升星
     //         if (hBuilding && hBuilding.checkCanStarUp()) {
     //             hBuilding.AddStar(1);

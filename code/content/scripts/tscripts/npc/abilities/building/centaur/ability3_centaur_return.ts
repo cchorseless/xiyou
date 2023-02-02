@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -76,7 +75,7 @@ export class modifier_centaur_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.max_stacks = this.GetSpecialValueFor("max_stacks")
         this.bonus_health_percent = this.GetSpecialValueFor("bonus_health_percent")
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
@@ -130,8 +129,8 @@ export class modifier_centaur_3 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    EOM_GetModifierSpellAmplifyBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    EOM_GetModifierSpellAmplifyBonus(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (params != null && params.attacker == hParent && GameFunc.IsValid(params.inflictor) && !params.inflictor.IsItem() && !BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_BLEEDING)) {
@@ -188,7 +187,7 @@ export class modifier_centaur_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -209,16 +208,16 @@ export class modifier_centaur_3_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_BASE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BASE_PERCENTAGE)
     g_STATS_STRENGTH_BASE_PERCENTAGE() {
         return this.base_strength_percent * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_REGEN_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_PERCENTAGE)
     GetHealthRegenPercentage() {
         return this.health_regen_percent
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
+    tooltip(params: IModifierTable) {
         this._tooltip = (this._tooltip || 0) % 2 + 1
         if (this._tooltip == 1) {
             return this.base_strength_percent * this.GetStackCount()
@@ -230,7 +229,7 @@ export class modifier_centaur_3_buff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_centaur_3_particle extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

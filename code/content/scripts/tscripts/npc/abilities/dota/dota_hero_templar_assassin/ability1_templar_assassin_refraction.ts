@@ -1,8 +1,5 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -85,14 +82,14 @@ export class modifier_templar_assassin_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
             modifier_templar_assassin_1_scepter.apply(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), null)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         if (IsServer()) {
             modifier_templar_assassin_1_scepter.apply(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), null)
@@ -167,7 +164,7 @@ export class modifier_templar_assassin_1_scepter extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.scepter_instances = this.GetSpecialValueFor("scepter_instances")
         this.scepter_interval = this.GetSpecialValueFor("scepter_interval")
         if (IsServer()) {
@@ -220,7 +217,7 @@ export class modifier_templar_assassin_1_bonus_attack extends BaseModifier_Plus 
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.instances = this.GetSpecialValueFor("instances")
@@ -253,8 +250,8 @@ export class modifier_templar_assassin_1_bonus_attack extends BaseModifier_Plus 
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         let iAgi = 0
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster) && hCaster.GetAgility != null) {
@@ -291,7 +288,7 @@ export class modifier_templar_assassin_1_magic_immune_talent extends BaseModifie
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({

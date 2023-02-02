@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -113,7 +112,7 @@ export class modifier_abyssal_underlord_2 extends BaseModifier_Plus {
     GetTexture() {
         return "abyssal_underlord_pit_of_malice"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -188,7 +187,7 @@ export class modifier_abyssal_underlord_2_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -273,7 +272,7 @@ export class modifier_abyssal_underlord_2_interval extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_PERMANENT + DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.ensnare_duration = this.GetSpecialValueFor("ensnare_duration")
         if (IsServer()) {
@@ -306,7 +305,7 @@ export class modifier_abyssal_underlord_2_root extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.pit_damage = this.GetSpecialValueFor("pit_damage")
         if (IsServer()) {
@@ -342,7 +341,7 @@ export class modifier_abyssal_underlord_2_root extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_ROOTED]: true
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE)
     G_INCOMING_MAGICAL_DAMAGE_PERCENTAGE() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_abyssal_underlord_custom_7")
     }

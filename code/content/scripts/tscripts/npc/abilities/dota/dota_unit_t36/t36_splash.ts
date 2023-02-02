@@ -1,21 +1,12 @@
 import { GameFunc } from "../../../../GameFunc";
+import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { EntityHelper } from "../../../../helper/EntityHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
-import { LogHelper } from "../../../../helper/LogHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
-import { GameSetting } from "../../../../GameSetting";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { GameEnum } from "../../../../shared/GameEnum";
 
 
 @registerAbility()
@@ -82,7 +73,7 @@ export class modifier_t36_splash extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetParentPlus()
         if (IsServer()) {
@@ -100,7 +91,7 @@ export class modifier_t36_splash extends BaseModifier_Plus {
             this.AddParticle(nIndexFX, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.inner_splash_radius = this.GetSpecialValueFor("inner_splash_radius")
         this.inner_splash_damage_percent = this.GetSpecialValueFor("inner_splash_damage_percent")
         this.outer_splash_radius = this.GetSpecialValueFor("outer_splash_radius")
@@ -143,7 +134,7 @@ export class modifier_t36_splash extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    OnDeath(params: ModifierTable) {
+    OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker
         if (!GameFunc.IsValid(hAttacker)) {
             return
@@ -175,8 +166,8 @@ export class modifier_t36_splash extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         let hCaster = this.GetParentPlus()
         // let _modifier_combination_t36_dragon_kill = modifier_combination_t36_dragon_kill.findIn(hCaster) as any;
         // let attack_extra_bonus_factor = (GameFunc.IsValid(_modifier_combination_t36_dragon_kill) && _modifier_combination_t36_dragon_kill.GetStackCount() > 0) && modifier_combination_t36_dragon_kill.attack_extra_bonus_factor || 0
@@ -246,7 +237,7 @@ export class modifier_t36_splash_attack_bonus extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -266,12 +257,12 @@ export class modifier_t36_splash_attack_bonus extends BaseModifier_Plus {
             }
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.extra_attack_factor = this.GetSpecialValueFor("extra_attack_factor")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
 
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {

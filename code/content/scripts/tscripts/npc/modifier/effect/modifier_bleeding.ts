@@ -1,7 +1,6 @@
 import { GameFunc } from "../../../GameFunc";
 import { BattleHelper } from "../../../helper/BattleHelper";
 import { ResHelper } from "../../../helper/ResHelper";
-import { GameEnum } from "../../../shared/GameEnum";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 import { modifier_property } from "../../propertystat/modifier_property";
@@ -25,7 +24,7 @@ export class modifier_bleeding extends BaseModifier_Plus {
     /**触发伤害距离 */
     static fTriggerDistance = 100
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             // 层数
             GTimerHelper.AddTimer(params.duration || 1, GHandler.create(this, () => {
@@ -34,7 +33,7 @@ export class modifier_bleeding extends BaseModifier_Plus {
             this.IncrementStackCount();
         }
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         if (IsServer()) {
             super.OnCreated(params);
             let hParent = this.GetParentPlus()
@@ -94,8 +93,8 @@ export class modifier_bleeding extends BaseModifier_Plus {
                 }
                 let vColor = Vector(255, 32, 32)
                 let fDuration = 1;
-                let _out = modifier_property.SumProps(hCaster, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_BLEED_DAMAGE_PERCENTAGE);
-                let _incom = modifier_property.SumProps(hParent, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_BLEED_DAMAGE_PERCENTAGE);
+                let _out = modifier_property.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_BLEED_DAMAGE_PERCENTAGE);
+                let _incom = modifier_property.SumProps(hParent, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_BLEED_DAMAGE_PERCENTAGE);
                 let iNumber = math.ceil(tDamageTable.damage * (1 + _incom * 0.01) * (1 + _out * 0.01))
                 // 造成伤害
                 while (fDamageFactor > 0) {

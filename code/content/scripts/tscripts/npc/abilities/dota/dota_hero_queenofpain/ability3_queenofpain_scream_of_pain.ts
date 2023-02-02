@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -77,13 +76,13 @@ export class modifier_queenofpain_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.loss_health_percent = this.GetSpecialValueFor("loss_health_percent")
         this.extra_damage_percent = this.GetSpecialValueFor("extra_damage_percent")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
-    GetTotalDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
+    GetTotalDamageOutgoing_Percentage(params: IModifierTable) {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             if (params.attacker == hParent && !hParent.PassivesDisabled()) {
@@ -98,8 +97,8 @@ export class modifier_queenofpain_3 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (!IsServer() || params == null) {
             return
         }

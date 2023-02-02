@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -107,7 +106,7 @@ export class modifier_spectre_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(this.illusion_interval)
@@ -131,7 +130,7 @@ export class modifier_spectre_3 extends BaseModifier_Plus {
             }
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage_change_percent = this.GetSpecialValueFor("damage_change_percent")
         this.str_factor = this.GetSpecialValueFor("str_factor")
         this.illusion_interval = this.GetSpecialValueFor("illusion_interval")
@@ -152,8 +151,8 @@ export class modifier_spectre_3 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
-    GetTotalDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
+    GetTotalDamageOutgoing_Percentage(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         if (!GameFunc.IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
@@ -199,7 +198,7 @@ export class modifier_spectre_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.str_factor = this.GetSpecialValueFor("str_factor")
         if (IsServer()) {
@@ -209,11 +208,11 @@ export class modifier_spectre_3_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.EOM_GetModifierHealthBonus()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     EOM_GetModifierHealthBonus() {
         return this.GetStackCount()
     }
@@ -244,13 +243,13 @@ export class modifier_spectre_3_ghost extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(0.1)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.attack_range = this.GetSpecialValueFor("attack_range")
         this.movespeed = this.GetSpecialValueFor("movespeed")
         this.radius = this.GetSpecialValueFor("radius")
@@ -317,12 +316,12 @@ export class modifier_spectre_3_ghost extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BASE_OVERRIDE)
-    GetAttackRangeOverride(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BASE_OVERRIDE)
+    GetAttackRangeOverride(params: IModifierTable) {
         return this.attack_range
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_ABSOLUTE)
-    GetMoveSpeed_Absolute(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_ABSOLUTE)
+    GetMoveSpeed_Absolute(params: IModifierTable) {
         return this.movespeed
     }
     CheckState() {
@@ -338,7 +337,7 @@ export class modifier_spectre_3_ghost extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_spectre_3_particle_illusion_created extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -358,7 +357,7 @@ export class modifier_spectre_3_particle_illusion_created extends modifier_parti
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_spectre_3_ghost_particle extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

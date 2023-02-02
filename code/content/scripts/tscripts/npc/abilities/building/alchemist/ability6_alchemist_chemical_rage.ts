@@ -1,7 +1,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -94,16 +93,16 @@ export class modifier_alchemist_3_buff extends BaseModifier_Plus {
     // StatusEffectPriority : 10,
     // GetHeroEffectName : "particles/units/heroes/hero_alchemist/alchemist_chemical_rage_hero_effect.vpcf",
     // HeroEffectPriority: 10,
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
     public base_attack_rate: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
     public mana_regen: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     public spell_amplify: number;
     public interval: number;
     public stun_duration: number;
     public projectile_speed: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.base_attack_rate = this.GetSpecialValueFor("base_attack_rate");
         this.mana_regen = this.GetSpecialValueFor("mana_regen");
         this.spell_amplify = this.GetSpecialValueFor("spell_amplify");
@@ -155,9 +154,9 @@ export class modifier_alchemist_3_buff extends BaseModifier_Plus {
             break;
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     public activity: string = "chemical_rage";
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
     public attack_sound: string = "Hero_Alchemist.ChemicalRage.Attack";
 }

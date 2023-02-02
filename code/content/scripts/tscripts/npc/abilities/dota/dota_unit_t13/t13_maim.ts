@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -49,18 +48,18 @@ export class modifier_t13_maim extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.duration = this.GetSpecialValueFor("duration")
         this.blood_chance = this.GetSpecialValueFor("blood_chance")
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.duration = this.GetSpecialValueFor("duration")
         this.blood_chance = this.GetSpecialValueFor("blood_chance")
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
-    OnTakeDamage(params: ModifierTable) {
+    OnTakeDamage(params: IModifierTable) {
         if (GameFunc.IsValid(params.unit) && params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && !params.attacker.IsIllusion()) {
             modifier_t13_maim_debuff.apply(params.unit, params.attacker, this.GetAbilityPlus(), { duration: this.duration * params.unit.GetStatusResistanceFactor(params.attacker) })
         }
@@ -104,7 +103,7 @@ export class modifier_t13_maim_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             if (this.GetStackCount() < this.max_stack_count) {
@@ -121,7 +120,7 @@ export class modifier_t13_maim_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.incoming_damage_pct = this.GetSpecialValueFor("incoming_damage_pct")
         this.max_stack_count = this.GetSpecialValueFor("max_stack_count")
@@ -131,11 +130,11 @@ export class modifier_t13_maim_debuff extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DOT_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DOT_DAMAGE_PERCENTAGE)
     G_INCOMING_DOT_DAMAGE_PERCENTAGE() {
         return this.incoming_damage_pct * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.incoming_damage_pct * this.GetStackCount()
     }

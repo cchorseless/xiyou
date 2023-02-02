@@ -1,5 +1,4 @@
 import { KVHelper } from "../../helper/KVHelper";
-import { GameEnum } from "../../shared/GameEnum";
 import { BaseModifier_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
 
@@ -35,7 +34,7 @@ export class modifier_courier extends BaseModifier_Plus {
     ambientModifiers: string;
     addAbilityName: string;
     zOffset: number = 1;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         const caster = this.GetParentPlus() as IBaseNpc_Hero_Plus
         GLogHelper.print(caster.GetUnitName());
@@ -84,20 +83,20 @@ export class modifier_courier extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    CC_GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    CC_GetModelChange(params: IModifierTable) {
         return this.model;
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_SCALE)
-    CC_GetModelScale(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_SCALE)
+    CC_GetModelScale(params: IModifierTable) {
         return (this.fModelScale - 1) * 100
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.VISUAL_Z_DELTA)
-    CC_GetVisualZDelta(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.VISUAL_Z_DELTA)
+    CC_GetVisualZDelta(params: IModifierTable) {
         return this.zOffset
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_BASE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BASE)
     CC_HP_BASE() {
         return 20
     }

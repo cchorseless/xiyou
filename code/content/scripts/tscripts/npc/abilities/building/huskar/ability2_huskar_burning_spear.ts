@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -55,13 +54,13 @@ export class modifier_huskar_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.records = []
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.health_cost = this.GetSpecialValueFor("health_cost")
         this.radius = this.GetSpecialValueFor("radius")
         if (IsServer()) {
@@ -168,8 +167,8 @@ export class modifier_huskar_2_projectile extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_ULTRA
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return "particles/units/heroes/hero_huskar/huskar_burning_spear.vpcf"
     }
 }
@@ -198,7 +197,7 @@ export class modifier_huskar_2_counter extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (!IsServer()) {
             let iPtclID = ResHelper.CreateParticle({
@@ -219,7 +218,7 @@ export class modifier_huskar_2_counter extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, true, 10, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.burn_damage = this.GetSpecialValueFor("burn_damage") * 0.01
         this.base_damage = this.GetSpecialValueFor("base_damage")
         this.health_cost = this.GetSpecialValueFor("health_cost") * 0.01

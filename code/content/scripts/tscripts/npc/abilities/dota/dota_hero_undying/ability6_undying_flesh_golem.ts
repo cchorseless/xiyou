@@ -1,13 +1,10 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
@@ -81,7 +78,7 @@ export class modifier_undying_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -165,14 +162,14 @@ export class modifier_undying_6_buff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.GetParentPlus().EmitSound("Hero_Undying.FleshGolem.Aura")
         }
 
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.fSlowDuration = this.GetSpecialValueFor("slow_duration")
         this.iStrPct = this.GetSpecialValueFor("str_percentage") + hParent.GetTalentValue("special_bonus_unique_undying_custom_7")
@@ -185,27 +182,27 @@ export class modifier_undying_6_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.iStrPct
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
     EOM_GetModifierStats_Strength_Percentage() {
         return this.iStrPct
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    attackLanded(params: ModifierTable) {
+    attackLanded(params: IModifierTable) {
         if (!GameFunc.IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         if (GameFunc.IsValid(this.GetCasterPlus()) && params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             modifier_undying_6_slow.apply(params.target, this.GetCasterPlus(), this.GetAbilityPlus(), { duration: this.fSlowDuration })
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
     GetModelChange() {
         return ResHelper.GetModelReplacement("models/heroes/undying/undying_flesh_golem.vmdl", this.GetCasterPlus())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CASTTIME_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CASTTIME_PERCENTAGE)
     GetPercentageCasttime() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter()) {
             return this.cast_point_scepter
@@ -241,23 +238,23 @@ export class modifier_undying_6_slow extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.iSlow = this.GetSpecialValueFor("slow")
         this.increase_all_damage_pct = this.GetSpecialValueFor("increase_all_damage_pct")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage(tParams: any) {
         return -this.iSlow
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.increase_all_damage_pct
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         return this.increase_all_damage_pct
     }
 }
@@ -283,7 +280,7 @@ export class modifier_undying_6_zombie_lifetime extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
     }
     OnDestroy() {
@@ -300,7 +297,7 @@ export class modifier_undying_6_zombie_lifetime extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.LIFETIME_FRACTION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFETIME_FRACTION)
     Get_UnitLifetimeFraction() {
         return this.GetRemainingTime() / this.GetDuration()
     }

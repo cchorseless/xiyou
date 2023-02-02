@@ -2,7 +2,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
@@ -127,7 +126,7 @@ export class modifier_venomancer_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -182,7 +181,7 @@ export class modifier_venomancer_6_debuff extends BaseModifier_Plus {
     poison_count_per_sec_agi: number;
     poison_count_per: number;
     count_multiple_scepter: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.POISON_TICKTIME_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.POISON_TICKTIME_PERCENTAGE)
     poison_ticktime: number;
     IsHidden() {
         return false
@@ -202,14 +201,14 @@ export class modifier_venomancer_6_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             modifier_poison.Poison(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), this.poison_count_per * 1) // 在一开始就毒一次
             this.StartIntervalThink(1)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus() as BaseNpc_Hero_Plus
         if (!GameFunc.IsValid(hCaster) || hCaster.GetAgility == null) {
             this.Destroy()
@@ -259,14 +258,14 @@ export class modifier_venomancer_6_debuff extends BaseModifier_Plus {
         }
         modifier_poison.Poison(hParent, hCaster, hAbility, this.poison_count_per * 1)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip() {
         return this.poison_count_per
     }
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 export class modifier_venomancer_6_particle_venomancer_poison_nova_cast extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -299,7 +298,7 @@ export class modifier_venomancer_6_particle_venomancer_poison_nova_cast extends 
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // //
 export class modifier_venomancer_6_particle_venomancer_3_infect extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

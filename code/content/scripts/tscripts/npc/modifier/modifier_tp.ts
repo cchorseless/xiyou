@@ -7,7 +7,7 @@ import { registerModifier } from "../entityPlus/Base_Plus";
 /**传送 */
 @registerModifier()
 export class modifier_tp extends BaseModifier_Plus {
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus();
         let hParent = this.GetParentPlus();
         let vPosition = hCaster.GetAbsOrigin();

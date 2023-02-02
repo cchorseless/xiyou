@@ -1,7 +1,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -92,7 +91,7 @@ export class modifier_pangolier_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.chance = this.GetSpecialValueFor("chance")
         this.duration = this.GetSpecialValueFor("duration")
         this.damage_amplify_percent = this.GetSpecialValueFor("damage_amplify_percent")
@@ -134,12 +133,12 @@ export class modifier_pangolier_3 extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.damage_amplify_percent * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         return this.damage_amplify_percent * this.GetStackCount()
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_RECORD)
@@ -295,7 +294,7 @@ export class modifier_pangolier_3_stun extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
@@ -313,8 +312,8 @@ export class modifier_pangolier_3_stun extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_STUNNED]: true
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
-    Get_OverrideAnimation(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    Get_OverrideAnimation(params: IModifierTable) {
         return GameActivity_t.ACT_DOTA_DISABLED
     }
 }
@@ -368,12 +367,12 @@ export class modifier_pangolier_3_remove_armor extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.raduce_armor = this.GetSpecialValueFor("raduce_armor")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
-    EOM_GetModifierPhysicalArmorBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    EOM_GetModifierPhysicalArmorBonus(params: IModifierTable) {
         return this.raduce_armor
     }
 }
@@ -400,10 +399,10 @@ export class modifier_pangolier_3_remove_magic_armor extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.raduce_magic_armor = this.GetSpecialValueFor("raduce_magic_armor")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
     G_MAGICAL_ARMOR_BONUS() {
         return this.raduce_magic_armor
     }
@@ -431,17 +430,17 @@ export class modifier_pangolier_3_reduce_health extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.raduce_health_percent = this.GetSpecialValueFor("raduce_health_percent")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.raduce_health_percent
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
     G_HP_PERCENTAGE() {
         return this.raduce_health_percent
     }

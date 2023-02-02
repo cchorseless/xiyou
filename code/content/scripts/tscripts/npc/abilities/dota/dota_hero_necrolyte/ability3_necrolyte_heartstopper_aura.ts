@@ -1,16 +1,10 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
-import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_necrolyte_heartstopper_aura = { "ID": "5159", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "HasScepterUpgrade": "1", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "aura_radius": "800" }, "02": { "var_type": "FIELD_FLOAT", "aura_damage": "0.6 1.2 1.8 2.4", "LinkedSpecialBonus": "special_bonus_unique_necrophos_2" }, "03": { "var_type": "FIELD_FLOAT", "health_regen": "4 5 6 7" }, "04": { "var_type": "FIELD_FLOAT", "mana_regen": "4 5 6 7" }, "05": { "var_type": "FIELD_INTEGER", "hero_multiplier": "6" }, "06": { "var_type": "FIELD_FLOAT", "regen_duration": "8" }, "07": { "var_type": "FIELD_FLOAT", "scepter_multiplier": "2", "RequiresScepter": "1" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3" };
@@ -74,7 +68,7 @@ export class modifier_necrolyte_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.base_damage = this.GetSpecialValueFor("base_damage")
         this.intellect_damage_factor = this.GetSpecialValueFor("intellect_damage_factor")
         this.intellect_bonus_factor = this.GetSpecialValueFor("intellect_bonus_factor")
@@ -118,7 +112,7 @@ export class modifier_necrolyte_3 extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    OnDeath(params: ModifierTable) {
+    OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker
         if (GameFunc.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
             if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
@@ -154,17 +148,17 @@ export class modifier_necrolyte_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             let fInt = params.int || 0
             this.changeStackCount(fInt)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     G_STATS_INTELLECT_BONUS() {
         return this.GetStackCount()
     }

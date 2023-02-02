@@ -18,7 +18,7 @@ export class CCEntityHpBarItem extends CCPanel<ICCEntityHpBarItem> {
 
     onInitUI() {
         const iUnitEntIndex = this.props.entityid;
-        let iBuff = UnitHelper.FindBuffByName(iUnitEntIndex, GameEnum.Dota2.EReserveModifierName.modifier_many_hp_bar);
+        let iBuff = UnitHelper.GetBuffByName(iUnitEntIndex, GameEnum.Dota2.EReserveModifierName.modifier_many_hp_bar);
         if (iBuff !== -1) {
             this.manyBuffCount = Buffs.GetStackCount(iUnitEntIndex, iBuff);
         }
@@ -52,7 +52,7 @@ export class CCEntityHpBarItem extends CCPanel<ICCEntityHpBarItem> {
     private updateManyHpBar() {
         const iUnitEntIndex = this.props.entityid;
         const HealthLossLastContainer = this.hpManyContainer.current!;
-        let iBuff = UnitHelper.FindBuffByName(iUnitEntIndex, GameEnum.Dota2.EReserveModifierName.modifier_many_hp_bar);
+        let iBuff = UnitHelper.GetBuffByName(iUnitEntIndex, GameEnum.Dota2.EReserveModifierName.modifier_many_hp_bar);
         if (iBuff != -1) {
             let buffcount = Buffs.GetStackCount(iUnitEntIndex, iBuff);
             let bNewLayer = this.manyBuffCount != buffcount;

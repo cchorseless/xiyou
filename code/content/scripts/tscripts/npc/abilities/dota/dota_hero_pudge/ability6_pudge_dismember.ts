@@ -3,7 +3,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -95,7 +94,7 @@ export class modifier_pudge_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -193,7 +192,7 @@ export class modifier_pudge_6_buff extends BaseModifierMotionHorizontal_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.per_damage = this.GetSpecialValueFor("per_damage")
         this.per_damage_str = this.GetSpecialValueFor("per_damage_str")
         this.damage_regen_health_pct = this.GetSpecialValueFor("damage_regen_health_pct")
@@ -292,7 +291,7 @@ export class modifier_pudge_6_buff extends BaseModifierMotionHorizontal_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_FLAIL
     }
@@ -319,7 +318,7 @@ export class modifier_pudge_6_buff_health_limit extends BaseModifierMotionHorizo
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             let fOverflowHealth = params.fOverflowHealth || 0
             this.changeStackCount(fOverflowHealth)
@@ -329,7 +328,7 @@ export class modifier_pudge_6_buff_health_limit extends BaseModifierMotionHorizo
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     EOM_GetModifierHealthBonus() {
         return this.GetStackCount()
     }
@@ -377,7 +376,7 @@ export class modifier_pudge_6_thinker extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_STUNNED]: true
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_CHANNEL_ABILITY_4
     }

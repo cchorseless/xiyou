@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -152,7 +151,7 @@ export class modifier_shredder_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -225,7 +224,7 @@ export class modifier_shredder_1_debuff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_shredder_custom_8"
@@ -249,11 +248,11 @@ export class modifier_shredder_1_debuff extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, this.ShouldUseOverheadOffset())
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_PERCENT_ENEMY)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENT_ENEMY)
     G_HEALTH_PERCENT_ENEMY() {
         return -this.health_loss_pct
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return -this.health_loss_pct
     }
@@ -262,7 +261,7 @@ export class modifier_shredder_1_debuff extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_shredder_1_particle_start extends modifier_particle_thinker {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let whirling_radius = this.GetSpecialValueFor("whirling_radius")
         if (IsServer()) {

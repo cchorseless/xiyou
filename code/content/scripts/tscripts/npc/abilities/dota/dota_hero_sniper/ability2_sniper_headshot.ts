@@ -1,7 +1,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -72,13 +71,13 @@ export class modifier_sniper_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.records = []
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage = this.GetSpecialValueFor("damage")
         this.proc_chance = this.GetSpecialValueFor("proc_chance")
         this.stun_duration = this.GetSpecialValueFor("stun_duration")
@@ -224,8 +223,8 @@ export class modifier_sniper_2_projectile extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_ULTRA
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return ResHelper.GetParticleReplacement("particles/units/heroes/hero_sniper/sniper_headshot_attack.vpcf", this.GetCasterPlus())
     }
 }
@@ -250,7 +249,7 @@ export class modifier_sniper_2_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
@@ -269,7 +268,7 @@ export class modifier_sniper_2_debuff extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_FROZEN]: true,
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_DISABLED
     }

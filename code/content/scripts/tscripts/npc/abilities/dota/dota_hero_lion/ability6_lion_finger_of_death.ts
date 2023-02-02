@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -180,14 +179,14 @@ export class modifier_lion_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.damage_per_kill = this.GetSpecialValueFor("damage_per_kill")
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.damage_per_kill = this.GetSpecialValueFor("damage_per_kill")
     }
@@ -233,8 +232,8 @@ export class modifier_lion_6 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
+    tooltip(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let extra_damage_per_kill = hCaster.HasTalent("special_bonus_unique_lion_custom_2") && hCaster.GetTalentValue("special_bonus_unique_lion_custom_2") || 0
         return this.GetStackCount() * (this.damage_per_kill + extra_damage_per_kill)
@@ -269,7 +268,7 @@ export class modifier_lion_6_damage extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let extra_damage_per_mana = hCaster.HasTalent("special_bonus_unique_lion_custom_5") && hCaster.GetTalentValue("special_bonus_unique_lion_custom_5") || 0
@@ -429,13 +428,13 @@ export class modifier_lion_6_extra_finger extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.IncrementStackCount()
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         if (IsServer()) {
             this.IncrementStackCount()
@@ -452,7 +451,7 @@ export class modifier_lion_6_extra_finger extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_lion_6_particle_pre extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (IsClient()) {

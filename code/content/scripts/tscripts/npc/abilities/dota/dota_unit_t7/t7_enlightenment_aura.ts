@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -37,7 +36,7 @@ export class modifier_t7_enlightenment_aura extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(1)
@@ -103,7 +102,7 @@ export class modifier_t7_enlightenment_aura_hidden extends BaseModifier_Plus {
     GetAuraEntityReject(hTarget: IBaseNpc_Plus) {
         return this.GetParentPlus() == hTarget
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.aura_radius = this.GetSpecialValueFor("aura_radius")
         if (IsServer()) {
@@ -120,7 +119,7 @@ export class modifier_t7_enlightenment_aura_hidden extends BaseModifier_Plus {
             }
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.aura_radius = this.GetSpecialValueFor("aura_radius")
     }
@@ -147,7 +146,7 @@ export class modifier_t7_enlightenment_aura_effect extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
@@ -160,16 +159,16 @@ export class modifier_t7_enlightenment_aura_effect extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.aura_intellect_pct = this.GetSpecialValueFor("aura_intellect_pct")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.EOM_GetModifierBonusStats_Intellect()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     EOM_GetModifierBonusStats_Intellect() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             let iInt = this.GetCasterPlus().GetIntellect()

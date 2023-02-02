@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -7,8 +6,8 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle } from "../../../modifier/modifier_particle";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_bounty_hunter_track = { "ID": "5288", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "AbilityUnitTargetFlags": "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "AbilitySound": "Hero_BountyHunter.Target", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO", "AbilityCastRange": "1000", "AbilityCastPoint": "0.3 0.3 0.3", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_4", "AbilityCooldown": "4", "AbilityManaCost": "60", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "target_crit_multiplier": "140 170 200" }, "02": { "var_type": "FIELD_INTEGER", "bonus_gold_radius": "1200" }, "03": { "var_type": "FIELD_INTEGER", "bonus_gold_self": "130 225 320", "LinkedSpecialBonus": "special_bonus_unique_bounty_hunter_3" }, "04": { "var_type": "FIELD_INTEGER", "bonus_gold": "40 80 120", "LinkedSpecialBonus": "special_bonus_unique_bounty_hunter_3" }, "05": { "var_type": "FIELD_FLOAT", "duration": "30.0 30.0 30.0" }, "06": { "var_type": "FIELD_FLOAT", "gold_steal": "0.3 0.4 0.5" }, "07": { "var_type": "FIELD_INTEGER", "bonus_move_speed_pct": "16 20 24" } } };
@@ -82,7 +81,7 @@ export class modifier_bounty_hunter_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.shard_bonus_attack_speed = this.GetSpecialValueFor("shard_bonus_attack_speed")
         this.shard_bonus_attack_speed_limit = this.GetSpecialValueFor("shard_bonus_attack_speed_limit")
@@ -153,7 +152,7 @@ export class modifier_bounty_hunter_6 extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         if (IsServer()) {
             if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && GameFunc.IsValid(this.GetCasterPlus().GetAttackTarget()) && this.GetCasterPlus().GetAttackTarget().GetClassname() != "dota_item_drop" && modifier_bounty_hunter_6_track.exist(this.GetCasterPlus().GetAttackTarget())) {
@@ -162,7 +161,7 @@ export class modifier_bounty_hunter_6 extends BaseModifier_Plus {
             return 0
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     EOM_GetModifierMaximumAttackSpeedBonus() {
         if (IsServer()) {
             if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && GameFunc.IsValid(this.GetCasterPlus().GetAttackTarget()) && this.GetCasterPlus().GetAttackTarget().GetClassname() != "dota_item_drop" && modifier_bounty_hunter_6_track.exist(this.GetCasterPlus().GetAttackTarget())) {
@@ -226,7 +225,7 @@ export class modifier_bounty_hunter_6_track extends BaseModifier_Plus {
     GetAura() {
         return "modifier_truesight"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let extra_target_crit_multiplier = hCaster.HasTalent("special_bonus_unique_bounty_hunter_custom_7") && hCaster.GetTalentValue("special_bonus_unique_bounty_hunter_custom_7") || 0
@@ -315,12 +314,12 @@ export class modifier_bounty_hunter_6_track extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROVIDES_FOW_POSITION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION)
     GetProvidesFOWVision() {
         return 1
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TARGET_CRITICALSTRIKE)
-    EOM_GetModifierTargetCriticalStrike(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TARGET_CRITICALSTRIKE)
+    EOM_GetModifierTargetCriticalStrike(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             if (!GameFunc.IsValid(hCaster)) {
@@ -334,7 +333,7 @@ export class modifier_bounty_hunter_6_track extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
-    OnTakeDamage(params: ModifierTable) {
+    OnTakeDamage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetParentPlus()
 
@@ -380,7 +379,7 @@ export class modifier_bounty_hunter_6_track extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_bounty_hunter_6_particle_bounty_hunter_track_reward extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

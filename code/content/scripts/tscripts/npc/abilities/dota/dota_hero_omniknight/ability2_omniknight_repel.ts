@@ -1,16 +1,10 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_omniknight_repel = { "ID": "5264", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_FRIENDLY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "SpellImmunityType": "SPELL_IMMUNITY_ALLIES_YES", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "FightRecapLevel": "1", "AbilitySound": "Hero_Omniknight.Repel", "AbilityCastRange": "500", "AbilityCastPoint": "0.25", "AbilityCooldown": "26 22 18 14", "AbilityManaCost": "80 90 100 110", "AbilityModifierSupportValue": "3.0", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "10" }, "02": { "var_type": "FIELD_INTEGER", "status_resistance": "50" }, "03": { "var_type": "FIELD_INTEGER", "bonus_str": "8 16 24 32" }, "04": { "var_type": "FIELD_INTEGER", "hp_regen": "8 12 16 20", "LinkedSpecialBonus": "special_bonus_unique_omniknight_5" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_2" };
@@ -81,7 +75,7 @@ export class modifier_omniknight_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -174,7 +168,7 @@ export class modifier_omniknight_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
@@ -208,15 +202,15 @@ export class modifier_omniknight_2_buff extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.attribute_per_level * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
     EOM_GetModifierStatusResistanceStacking() {
         return this.status_resistance_percent * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_PRIMARY_BASE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_PRIMARY_BASE)
     EOM_GetModifierBaseStats_Primary() {
         return this.GetStackCount() * this.attribute_per_level
     }

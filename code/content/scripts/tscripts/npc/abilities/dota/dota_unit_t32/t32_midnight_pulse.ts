@@ -1,20 +1,11 @@
 import { GameFunc } from "../../../../GameFunc";
+import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { EntityHelper } from "../../../../helper/EntityHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
-import { LogHelper } from "../../../../helper/LogHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
-import { GameSetting } from "../../../../GameSetting";
-import { GameEnum } from "../../../../shared/GameEnum";
 
 
 @registerAbility()
@@ -66,7 +57,7 @@ export class modifier_t32_midnight_pulse extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
@@ -146,7 +137,7 @@ export class modifier_t32_midnight_pulse_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.base_damage = this.GetSpecialValueFor("base_damage")
         this.intellect_damage_factor = this.GetSpecialValueFor("intellect_damage_factor")
@@ -310,7 +301,7 @@ export class modifier_t32_midnight_pulse_aura extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.radius = this.GetSpecialValueFor("radius")
         this.vPosition = this.GetCasterPlus().GetAbsOrigin()
@@ -327,8 +318,8 @@ export class modifier_t32_midnight_pulse_aura extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_LIMIT)
-    GetMoveSpeed_Limit(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_LIMIT)
+    GetMoveSpeed_Limit(params: IModifierTable) {
         if (IsServer() && this.vPosition != null) {
             let hParent = this.GetParentPlus()
             let vDirection = (this.vPosition - hParent.GetAbsOrigin()) as Vector

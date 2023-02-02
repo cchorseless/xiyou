@@ -4,7 +4,6 @@ import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { EntityHelper } from "../../../../helper/EntityHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -96,7 +95,7 @@ export class ability1_zuus_arc_lightning extends BaseAbility_Plus {
 @registerModifier()
 export class modifier_zuus_1_debuff extends BaseModifier_Plus {
     damage_percent: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage_percent = this.GetSpecialValueFor("damage_percent", 100);
         if (IsServer()) {
             this.addTimer(params.duration, () => {
@@ -106,7 +105,7 @@ export class modifier_zuus_1_debuff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     OnShowTooltip() {
         return this.damage_percent * this.GetStackCount()
     }

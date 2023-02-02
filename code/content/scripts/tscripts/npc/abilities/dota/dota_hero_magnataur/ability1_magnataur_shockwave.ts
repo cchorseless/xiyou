@@ -1,7 +1,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -85,7 +84,7 @@ export class modifier_magnataur_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let extra_shock_chance = hCaster.GetTalentValue("special_bonus_unique_magnataur_custom_5")
@@ -181,7 +180,7 @@ export class modifier_magnataur_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let extra_shock_chance = hCaster.HasTalent("special_bonus_unique_magnataur_custom_5") && hCaster.GetTalentValue("special_bonus_unique_magnataur_custom_5") || 0
@@ -274,23 +273,23 @@ export class modifier_magnataur_1_attack extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.shock_damage = this.GetSpecialValueFor("shock_damage")
         this.shock_attack_damage = this.GetSpecialValueFor("shock_attack_damage") - 100
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
     G_AttackSound() {
         return ResHelper.GetSoundReplacement("Hero_Magnataur.ShockWave.Target", this.GetCasterPlus())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         return this.shock_damage / ((this.shock_attack_damage + 100) * 0.01)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
-    GetDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    GetDamageOutgoing_Percentage(params: IModifierTable) {
         return this.shock_attack_damage
     }
 }
@@ -319,7 +318,7 @@ export class modifier_magnataur_1_shock_buff extends BaseModifier_Plus {
     GetTexture() {
         return ResHelper.GetAbilityTextureReplacement("magnataur_shockwave", this.GetCasterPlus())
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let extra_shock_bonus_damage_pct = this.GetCasterPlus().HasTalent("special_bonus_unique_magnataur_custom_7") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_magnataur_custom_7") || 0
         this.shock_bonus_damage_pct = this.GetSpecialValueFor("shock_bonus_damage_pct") + extra_shock_bonus_damage_pct
         if (IsServer()) {
@@ -331,15 +330,15 @@ export class modifier_magnataur_1_shock_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
-    GetBaseDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    GetBaseDamageOutgoing_Percentage(params: IModifierTable) {
         return this.shock_bonus_damage_pct * this.GetStackCount()
     }
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_magnataur_1_hit_particle extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({

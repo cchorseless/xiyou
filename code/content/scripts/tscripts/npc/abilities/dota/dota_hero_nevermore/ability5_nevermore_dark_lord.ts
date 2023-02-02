@@ -1,5 +1,4 @@
 import { GameFunc } from "../../../../GameFunc";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -67,15 +66,15 @@ export class modifier_nevermore_4 extends BaseModifier_Plus {
     GetAura() {
         return "modifier_nevermore_4_presence"
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.presence_radius = this.GetSpecialValueFor("presence_radius")
         this.max_damage_percent = this.GetSpecialValueFor("max_damage_percent")
         this.min_range = this.GetSpecialValueFor("min_range")
         this.range_decay_damage = this.GetSpecialValueFor("range_decay_damage")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (IsServer() && params != null) {
             let hParent = this.GetParentPlus()
             if (params.attacker == hParent && !hParent.PassivesDisabled()) {
@@ -117,22 +116,22 @@ export class modifier_nevermore_4_presence extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_LOW
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.presence_incoming_damage_ptg = this.GetSpecialValueFor("presence_incoming_damage_ptg")
         this.fear_incoming_damage_ptg = this.GetSpecialValueFor("fear_incoming_damage_ptg")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
-    GetIncomingPhysicalDamage_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
+    GetIncomingPhysicalDamage_Percentage(params: IModifierTable) {
         if (!GameFunc.IsValid(this.GetCasterPlus()) || this.GetCasterPlus().PassivesDisabled()) {
             return 0
         }
         return this.presence_incoming_damage_ptg
     }
     // 恐惧加深所有伤害
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (params.target == hParent && modifier_feared.exist(hParent) && GameFunc.IsValid(hCaster) && !hCaster.PassivesDisabled()) {

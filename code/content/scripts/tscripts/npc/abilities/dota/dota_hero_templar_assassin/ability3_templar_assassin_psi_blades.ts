@@ -1,7 +1,4 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -66,7 +63,7 @@ export class modifier_templar_assassin_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_attack_range = this.GetSpecialValueFor("bonus_attack_range")
         this.damage_range = this.GetSpecialValueFor("damage_range")
         this.damage_width = this.GetSpecialValueFor("damage_width")
@@ -74,12 +71,12 @@ export class modifier_templar_assassin_3 extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
     GetAttackRangeBonus() {
         return this.bonus_attack_range
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACKED)
-    On_Attacked(params: ModifierTable) { // onattacked才能获取到税后伤害
+    On_Attacked(params: IModifierTable) { // onattacked才能获取到税后伤害
         let hParent = this.GetParentPlus()
         let hAtkTarget = params.target
 

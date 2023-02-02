@@ -1,9 +1,4 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -62,20 +57,20 @@ export class modifier_sniper_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_attack_range = this.GetSpecialValueFor("bonus_attack_range")
         this.range_factor = this.GetSpecialValueFor("range_factor")
         this.damage_percent = this.GetSpecialValueFor("damage_percent")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
-    GetAttackRangeBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
+    GetAttackRangeBonus(params: IModifierTable) {
         if (!this.GetParentPlus().PassivesDisabled()) {
             return this.bonus_attack_range
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
     GetCastRangeBonusStacking(params: ModifierAbilityEvent) {
         if (this.GetParentPlus().PassivesDisabled()) {
             return 0
@@ -95,8 +90,8 @@ export class modifier_sniper_3 extends BaseModifier_Plus {
             return this.bonus_attack_range
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (IsServer() && params != null) {
             let hParent = this.GetParentPlus()
             if (params.attacker == hParent && !hParent.PassivesDisabled()) {

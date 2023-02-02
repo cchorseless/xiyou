@@ -1,12 +1,7 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { ability2_bristleback_quill_spray } from "./ability2_bristleback_quill_spray";
@@ -115,7 +110,7 @@ export class modifier_bristleback_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         this.max_stacks = this.GetSpecialValueFor("max_stacks") + hCaster.GetTalentValue("special_bonus_unique_bristleback_custom_5")
@@ -134,7 +129,7 @@ export class modifier_bristleback_3_buff extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
     GetBaseDamageOutgoing_Percentage() {
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             return this.per_stacks_base_attack_pct * this.GetStackCount()
@@ -142,7 +137,7 @@ export class modifier_bristleback_3_buff extends BaseModifier_Plus {
             return this.per_stacks_base_attack_pct * this.GetStackCount() * this.inherit_pct * 0.01
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             return this.per_stacks_attack_speed * this.GetStackCount()
@@ -150,15 +145,15 @@ export class modifier_bristleback_3_buff extends BaseModifier_Plus {
             return this.per_stacks_attack_speed * this.GetStackCount() * this.inherit_pct * 0.01
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    EOM_GetModifierSpellAmplifyBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    EOM_GetModifierSpellAmplifyBonus(params: IModifierTable) {
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             return this.per_stacks_amplify_damage_pct * this.GetStackCount()
         } else {
             return this.per_stacks_amplify_damage_pct * this.GetStackCount() * this.inherit_pct * 0.01
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             return this.per_stacks_amplify_damage_pct * this.GetStackCount()

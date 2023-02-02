@@ -1,8 +1,6 @@
-import { PanelAttributes } from "@demon673/react-panorama";
 import React from "react";
-import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
+import { GameProtocol } from "../../../../../scripts/tscripts/shared/GameProtocol";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { CCAbilityPanel, ICCAbilityPanel } from "../CCAbility/CCAbilityPanel";
 import { CCPanel } from "../CCPanel/CCPanel";
@@ -28,7 +26,7 @@ export class CCInventorySlot extends CCPanel<ICCInventorySlot> {
         if (entitys.length > 0) {
             for (let info of entitys) {
                 if (info.accurateCollision) {
-                    NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_GIVE_NPC, {
+                    NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_GIVE_NPC, {
                         npc: info.entityIndex,
                         slot: item_slot,
                         itementityid: itementityid
@@ -45,7 +43,7 @@ export class CCInventorySlot extends CCPanel<ICCInventorySlot> {
             }
             // 直接扔
             // let worldpos = GameUI.GetScreenWorldPosition(pos)!;
-            // NetHelper.SendToLua(GameEnum.CustomProtocol.req_ITEM_DROP_POSITION, {
+            // NetHelper.SendToLua(GameProtocol.Protocol.req_ITEM_DROP_POSITION, {
             //     pos: { x: worldpos[0], y: worldpos[1], z: worldpos[2] },
             //     slot: item_slot,
             //     itementityid: itementityid

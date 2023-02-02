@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -126,7 +125,7 @@ export class ability2_enchantress_enchant extends BaseAbility_Plus {
 // // // // // // // // // // // // // // // // // // // -modifier_enchantress_2_buff// // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_enchantress_2_buff extends BaseModifier_Plus {
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_ALL_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_ALL_BONUS)
     bonus_all_attr: number;
     cd_reduce: number;
     private _tooltip: number;
@@ -148,7 +147,7 @@ export class modifier_enchantress_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return true
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hParent = this.GetParentPlus()
@@ -178,18 +177,18 @@ export class modifier_enchantress_2_buff extends BaseModifier_Plus {
             this.StartIntervalThink(0)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_all_attr = this.GetSpecialValueFor("bonus_all_attr")
         this.cd_reduce = this.GetSpecialValueFor("cd_reduce")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
     EOM_GetModifierPercentageCooldown() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.cd_reduce
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         this._tooltip = (this._tooltip || 0) % 2 + 1
         if (this._tooltip == 1) {

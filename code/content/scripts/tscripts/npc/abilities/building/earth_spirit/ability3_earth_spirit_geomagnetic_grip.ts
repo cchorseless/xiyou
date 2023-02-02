@@ -96,7 +96,7 @@ export class modifier_earth_spirit_3 extends BaseModifier_Plus {
             }
         }
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         this.max_count = this.GetSpecialValueFor("max_count")
@@ -109,7 +109,7 @@ export class modifier_earth_spirit_3 extends BaseModifier_Plus {
             this.Init()
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         this.max_count = this.GetSpecialValueFor("max_count")
@@ -218,7 +218,7 @@ export class modifier_earth_spirit_3 extends BaseModifier_Plus {
         return false
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TELEPORTED)
-    teleported(params: ModifierTable) {
+    teleported(params: IModifierTable) {
         if (IsServer() && params.unit == this.GetParentPlus()) {
             let origin = this.GetParentPlus().GetAbsOrigin()
             for (let hStone of (this.tStones)) {
@@ -251,7 +251,7 @@ export class modifier_earth_spirit_3_cd extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.stone_interval = this.GetSpecialValueFor("stone_interval")
@@ -295,7 +295,7 @@ export class modifier_earth_spirit_3_stone extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()

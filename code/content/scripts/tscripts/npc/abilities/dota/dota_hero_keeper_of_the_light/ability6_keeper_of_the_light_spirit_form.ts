@@ -1,16 +1,12 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
+import { modifier_particle } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_keeper_of_the_light_spirit_form = { "ID": "5474", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "AbilitySound": "Hero_KeeperOfTheLight.SpiritForm", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_6", "AbilityDraftPreAbility": "keeper_of_the_light_blinding_light", "AbilityDraftUltScepterAbility": "keeper_of_the_light_will_o_wisp", "AbilityCooldown": "70", "AbilityManaCost": "75 125 175", "AbilityModifierSupportValue": "0.35", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "40.0 40.0 40.0", "LinkedSpecialBonus": "special_bonus_unique_keeper_of_the_light_11" }, "02": { "var_type": "FIELD_INTEGER", "movement_speed": "20 25 30" }, "03": { "var_type": "FIELD_INTEGER", "cast_range": "125 250 375" }, "04": { "var_type": "FIELD_INTEGER", "illuminate_heal": "30 45 60" } } };
@@ -176,7 +172,7 @@ export class modifier_keeper_of_the_light_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -467,7 +463,7 @@ export class modifier_keeper_of_the_light_6_slow extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_ABSOLUTE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_ABSOLUTE)
     GetMoveSpeed_Absolute() {
         return this.iFixedMovementSpeed
     }

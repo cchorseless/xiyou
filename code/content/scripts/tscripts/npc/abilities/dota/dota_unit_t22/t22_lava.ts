@@ -1,20 +1,12 @@
 import { GameFunc } from "../../../../GameFunc";
+import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { EntityHelper } from "../../../../helper/EntityHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
-import { LogHelper } from "../../../../helper/LogHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
-import { GameSetting } from "../../../../GameSetting";
-import { GameEnum } from "../../../../shared/GameEnum";
+import { modifier_particle } from "../../../modifier/modifier_particle";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { unit_dummy } from "../../../units/common/unit_dummy";
 
@@ -77,7 +69,7 @@ export class modifier_t22_lava extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
@@ -168,7 +160,7 @@ export class modifier_t22_lava_thinker extends BaseModifier_Plus {
     GetAura() {
         return "modifier_t22_lava_magic_resistance"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.death_count = 0
         // this.GetAbilityPlus().death_count = this.death_count
@@ -193,7 +185,7 @@ export class modifier_t22_lava_thinker extends BaseModifier_Plus {
         }
     }
 
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.duration = this.GetSpecialValueFor("duration")
         this.kill_damage_per_second = this.GetSpecialValueFor("kill_damage_per_second")
@@ -253,7 +245,7 @@ export class modifier_t22_lava_thinker extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    OnDeath(params: ModifierTable) {
+    OnDeath(params: IModifierTable) {
         if (!GameFunc.IsValid(this.GetAbilityPlus())) {
             return
         }
@@ -289,13 +281,13 @@ export class modifier_t22_lava_magic_resistance extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.incoming_spell_damage = this.GetSpecialValueFor("incoming_spell_damage")
         this.incoming_spell_damage_kill = this.GetSpecialValueFor("incoming_spell_damage_kill")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
@@ -303,15 +295,15 @@ export class modifier_t22_lava_magic_resistance extends BaseModifier_Plus {
             return this.incoming_spell_damage + this.incoming_spell_damage_kill * iStackCount
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingMagicalDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE)
+    EOM_GetModifierIncomingMagicalDamagePercentage(params: IModifierTable) {
         return this.On_Tooltip()
     }
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_t22_lava_particle_ogre_magi_multicast extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (IsClient()) {

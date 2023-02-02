@@ -3,7 +3,6 @@ import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -158,7 +157,7 @@ export class modifier_tinker_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(0)
@@ -227,13 +226,13 @@ export class modifier_tinker_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.damage = this.GetSpecialValueFor("damage")
         this.damage_per_int = this.GetSpecialValueFor("damage_per_int") + (GameFunc.IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_tinker_custom_5") || 0)
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_CONSTANT)
     EOM_GetModifierOutgoingMagicalDamageConstant() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
@@ -241,7 +240,7 @@ export class modifier_tinker_2_buff extends BaseModifier_Plus {
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
 
     On_Tooltip2() {
         let hCaster = this.GetCasterPlus()
@@ -255,7 +254,7 @@ export class modifier_tinker_2_buff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_tinker_2_projectile extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
@@ -278,7 +277,7 @@ export class modifier_tinker_2_projectile extends modifier_particle {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_tinker_2_particle_dud extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
@@ -299,7 +298,7 @@ export class modifier_tinker_2_particle_dud extends modifier_particle {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_tinker_2_particle_hit extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetParentPlus()
         let hParent = this.GetCasterPlus()

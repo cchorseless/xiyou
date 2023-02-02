@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionVertical_Plus, BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -116,7 +115,7 @@ export class modifier_kunkka_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.ebb_damage = this.GetSpecialValueFor("ebb_damage")
         if (IsServer() && params.IsOnCreated) {
             this.flTime = 0
@@ -165,16 +164,16 @@ export class modifier_kunkka_1 extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_CAST_ANGLE)
-    GetIgnoreCastAngle(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_CAST_ANGLE)
+    GetIgnoreCastAngle(params: IModifierTable) {
         if (IsServer()) {
             if (this.GetCasterPlus().GetCurrentActiveAbility() == this.GetAbilityPlus()) {
                 return 1
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DISABLE_TURNING)
-    GetDisableTurning(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_TURNING)
+    GetDisableTurning(params: IModifierTable) {
         if (IsServer()) {
             if (this.GetCasterPlus().GetCurrentActiveAbility() == this.GetAbilityPlus()) {
                 return 1
@@ -182,8 +181,8 @@ export class modifier_kunkka_1 extends BaseModifier_Plus {
         }
     }
     // 退潮 昆卡对受影响单位造成伤害提升xx%
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (params != null && params.attacker == this.GetParentPlus() && modifier_kunkka_1_slow.exist(params.target)) {
             return this.ebb_damage
         }
@@ -214,7 +213,7 @@ export class modifier_kunkka_1_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let caster = this.GetCasterPlus()
         let extra_radius = caster.GetTalentValue("special_bonus_unique_kunkka_custom")
@@ -306,7 +305,7 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius") + hCaster.GetTalentValue("special_bonus_unique_kunkka_custom")
@@ -337,7 +336,7 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, this.ShouldUseOverheadOffset())
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         let extra_radius = 0
@@ -425,7 +424,7 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
             [modifierstate.MODIFIER_STATE_STUNNED]: true
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_DISABLED
     }
@@ -452,11 +451,11 @@ export class modifier_kunkka_1_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.movespeed_bonus = this.GetSpecialValueFor("movespeed_bonus")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         return this.movespeed_bonus
     }
 }
@@ -482,7 +481,7 @@ export class modifier_kunkka_1_scepter extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.scepter_interval = this.GetSpecialValueFor("scepter_interval")
         if (IsServer()) {

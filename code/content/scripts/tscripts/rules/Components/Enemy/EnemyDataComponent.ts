@@ -3,7 +3,7 @@ import { EnemyConfig } from "../../../shared/EnemyConfig";
 import { ChessDataComponent } from "../ChessControl/ChessDataComponent";
 
 @GReloadable
-export class EnemyUnitComponent extends ChessDataComponent {
+export class EnemyDataComponent extends ChessDataComponent {
 
     onAwake(): void {
         super.onAwake();

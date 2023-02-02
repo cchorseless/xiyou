@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -71,7 +70,7 @@ export class ability3_sven_warcry extends BaseAbility_Plus {
 // Modifiers
 @registerModifier()
 export class modifier_sven_3 extends BaseModifier_Plus {
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     max_attackspeed = -100;
     IsHidden() {
         return true
@@ -91,7 +90,7 @@ export class modifier_sven_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -166,7 +165,7 @@ export class modifier_sven_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
@@ -190,12 +189,12 @@ export class modifier_sven_3_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, true)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage(params: any) {
         return this.bonus_damage
     }
@@ -223,7 +222,7 @@ export class modifier_sven_3_buff_attack_speed extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hParent = this.GetParentPlus()
         this.attack_speed = this.GetSpecialValueFor("attack_speed")
@@ -239,7 +238,7 @@ export class modifier_sven_3_buff_attack_speed extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.attack_speed = this.GetSpecialValueFor("attack_speed")
         if (IsServer()) {
@@ -249,11 +248,11 @@ export class modifier_sven_3_buff_attack_speed extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         return this.attack_speed * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     G_MAX_ATTACKSPEED_BONUS(params: any) {
         return this.attack_speed * this.GetStackCount()
     }

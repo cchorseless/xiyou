@@ -2,7 +2,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -72,14 +71,14 @@ export class modifier_lycan_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.tWolves = []
             this.StartIntervalThink(1)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.wolf_count = this.GetSpecialValueFor("wolf_count")
     }
     OnDestroy() {
@@ -198,7 +197,7 @@ export class modifier_lycan_1_summon extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         this.wolf_bat = this.GetSpecialValueFor("wolf_bat")
@@ -216,7 +215,7 @@ export class modifier_lycan_1_summon extends BaseModifier_Plus {
             hParent.SetBaseDamageMax(fBaseDamageMax + fDamageChanged)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hParent = this.GetParentPlus()
         this.wolf_bat = this.GetSpecialValueFor("wolf_bat")
@@ -276,25 +275,25 @@ export class modifier_lycan_1_summon extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
-    GetBaseAttackTimeConstant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
+    GetBaseAttackTimeConstant(params: IModifierTable) {
         return this.wolf_bat
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BASE_OVERRIDE)
-    GetMoveSpeedOverride(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BASE_OVERRIDE)
+    GetMoveSpeedOverride(params: IModifierTable) {
         if (!(this.GetParentPlus().FindModifierByName("modifier_lycan_6_aura") as modifier_lycan_6_aura)) {
             return this.wolf_movespeed
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/heroes/lycan/summon_wolves.vmdl", this.GetCasterPlus())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DISABLE_AUTOATTACK)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_AUTOATTACK)
     Get_DisableAutoAttack() {
         return 1
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
     EOM_GetModifierBaseAttack_BonusDamage() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.str_damage_factor * this.GetCasterPlus().GetStrength()
@@ -325,7 +324,7 @@ export class modifier_lycan_1_summon_charge extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         this.wolf_charge_bonus_movespeed = this.GetSpecialValueFor("wolf_charge_bonus_movespeed")
@@ -347,7 +346,7 @@ export class modifier_lycan_1_summon_charge extends BaseModifier_Plus {
             hParent.SetForceAttackTarget(this.hTarget)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hParent = this.GetParentPlus()
         this.wolf_charge_bonus_movespeed = this.GetSpecialValueFor("wolf_charge_bonus_movespeed")
@@ -378,7 +377,7 @@ export class modifier_lycan_1_summon_charge extends BaseModifier_Plus {
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    OnDeath(params: ModifierTable) {
+    OnDeath(params: IModifierTable) {
         if (params.unit == this.hTarget) {
             this.Destroy()
         }
@@ -389,18 +388,18 @@ export class modifier_lycan_1_summon_charge extends BaseModifier_Plus {
             this.Destroy()
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
+    EOM_GetModifierCriticalStrike(params: IModifierTable) {
         if (params.target == this.hTarget) {
             return this.wolf_charge_crit
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MOVESPEED_LIMIT)
-    GetIgnoreMovespeedLimit(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MOVESPEED_LIMIT)
+    GetIgnoreMovespeedLimit(params: IModifierTable) {
         return 1
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         return this.wolf_charge_bonus_movespeed
     }
 }
@@ -408,7 +407,7 @@ export class modifier_lycan_1_summon_charge extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_lycan_1_particle_spawn extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let radius = this.GetSpecialValueFor("radius")
         if (IsClient()) {
@@ -429,7 +428,7 @@ export class modifier_lycan_1_particle_spawn extends modifier_particle {
 // 特效
 @registerModifier()
 export class modifier_lycan_1_particle_cast extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let radius = this.GetSpecialValueFor("radius")
         if (IsClient()) {

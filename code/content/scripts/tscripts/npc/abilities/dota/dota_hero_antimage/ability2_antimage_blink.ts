@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -123,7 +122,7 @@ export class modifier_antimage_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -205,7 +204,7 @@ export class modifier_antimage_2_amplify_illusion extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     G_OUTGOING_DAMAGE_PERCENTAGE() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_antimage_custom_7")
     }
@@ -213,7 +212,7 @@ export class modifier_antimage_2_amplify_illusion extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_antimage_2_particle_antimage_blink_start extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -235,7 +234,7 @@ export class modifier_antimage_2_particle_antimage_blink_start extends modifier_
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_antimage_2_particle_antimage_blink_end extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -256,7 +255,7 @@ export class modifier_antimage_2_particle_antimage_blink_end extends modifier_pa
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_antimage_2_particle_antimage_blink_target extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

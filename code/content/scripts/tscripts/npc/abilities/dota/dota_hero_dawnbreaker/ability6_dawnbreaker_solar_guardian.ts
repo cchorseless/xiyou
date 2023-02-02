@@ -148,7 +148,7 @@ export class modifier_dawnbreaker_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -243,7 +243,7 @@ export class modifier_dawnbreaker_6_buff extends BaseModifier_Plus {
         }
     }
 
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
@@ -251,7 +251,7 @@ export class modifier_dawnbreaker_6_buff extends BaseModifier_Plus {
             this.StartIntervalThink(this.pluse_interval)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.pluse_interval = this.GetSpecialValueFor("pluse_interval")
         this.pluse_damage_pct = this.GetSpecialValueFor("pluse_damage_pct")
         this.boom_damage_pct = this.GetSpecialValueFor("boom_damage_pct")

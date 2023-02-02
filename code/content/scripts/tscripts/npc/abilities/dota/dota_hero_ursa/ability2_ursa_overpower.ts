@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -62,7 +61,7 @@ export class modifier_ursa_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.duration = this.GetSpecialValueFor("duration")
         this.chance = this.GetSpecialValueFor("chance")
     }
@@ -88,7 +87,7 @@ export class modifier_ursa_2 extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_ursa_2_buff extends BaseModifier_Plus {
     attack_speed_bonus_pct: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     max_attack_speed: number;
     IsHidden() {
         return false
@@ -108,7 +107,7 @@ export class modifier_ursa_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let parent = this.GetParentPlus()
         if (IsServer()) {
@@ -134,13 +133,13 @@ export class modifier_ursa_2_buff extends BaseModifier_Plus {
             this.AddParticle(particleID, false, true, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.attack_speed_bonus_pct = this.GetSpecialValueFor("attack_speed_bonus_pct")
         this.max_attack_speed = this.GetSpecialValueFor("max_attack_speed")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant(params: any) {
         return this.attack_speed_bonus_pct
     }

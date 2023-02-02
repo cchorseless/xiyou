@@ -1,9 +1,4 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -73,7 +68,7 @@ export class modifier_bloodseeker_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.base_attack_speed_limit = this.GetSpecialValueFor("base_attack_speed_limit")
         this.max_attack_speed = this.GetSpecialValueFor("max_attack_speed") + hParent.GetTalentValue("special_bonus_unique_bloodseeker_custom_4")
@@ -86,12 +81,12 @@ export class modifier_bloodseeker_3 extends BaseModifier_Plus {
         this.radius = this.GetSpecialValueFor("radius")
         this.duration = this.GetSpecialValueFor("duration")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     G_MAX_ATTACKSPEED_BONUS() {
         return this.base_attack_speed_limit
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    On_AttackLanded(params: ModifierTable) {
+    On_AttackLanded(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (!GameFunc.IsValid(params.target)) { return }
@@ -111,7 +106,7 @@ export class modifier_bloodseeker_3 extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    On_Death(params: ModifierTable) {
+    On_Death(params: IModifierTable) {
         let hAttacker = params.attacker
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -164,19 +159,19 @@ export class modifier_bloodseeker_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.SetStackCount(params.fp || 0)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         if (IsServer()) {
             this.SetStackCount(params.fp || 0)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         return this.GetStackCount()
     }
@@ -204,11 +199,11 @@ export class modifier_bloodseeker_3_Kill_enemy_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.max_attack_speed = this.GetSpecialValueFor("max_attack_speed") + hParent.GetTalentValue("special_bonus_unique_bloodseeker_custom_4")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         return this.max_attack_speed
     }

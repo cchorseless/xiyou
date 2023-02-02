@@ -1,16 +1,11 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_huskar_burning_spear = { "ID": "5272", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST | DOTA_ABILITY_BEHAVIOR_ATTACK", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "AbilitySound": "Hero_Huskar.Burning_Spear", "AbilityCastRange": "450", "AbilityCastPoint": "0.0 0.0 0.0 0.0", "AbilityCooldown": "0.0 0.0 0.0 0.0", "AbilityDuration": "8", "AbilityManaCost": "0 0 0 0", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "health_cost": "3" }, "02": { "var_type": "FIELD_INTEGER", "burn_damage": "5 10 15 20", "LinkedSpecialBonus": "special_bonus_unique_huskar_2" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_2" };
@@ -59,13 +54,13 @@ export class modifier_huskar_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.records = []
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.health_cost = this.GetSpecialValueFor("health_cost")
         this.radius = this.GetSpecialValueFor("radius")
         if (IsServer()) {
@@ -172,8 +167,8 @@ export class modifier_huskar_2_projectile extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_ULTRA
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return "particles/units/heroes/hero_huskar/huskar_burning_spear.vpcf"
     }
 }
@@ -202,7 +197,7 @@ export class modifier_huskar_2_counter extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (!IsServer()) {
             let iPtclID = ResHelper.CreateParticle({
@@ -223,7 +218,7 @@ export class modifier_huskar_2_counter extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, true, 10, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.burn_damage = this.GetSpecialValueFor("burn_damage") * 0.01
         this.base_damage = this.GetSpecialValueFor("base_damage")
         this.health_cost = this.GetSpecialValueFor("health_cost") * 0.01

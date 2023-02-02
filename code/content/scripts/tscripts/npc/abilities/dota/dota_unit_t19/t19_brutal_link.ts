@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -83,7 +82,7 @@ export class t19_brutal_link_break extends BaseAbility_Plus {
 // Modifiers
 @registerModifier()
 export class modifier_t19_brutal_link_buff extends BaseModifier_Plus {
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     bonus_strength: number;
     transform_damage_percent: number;
     _tooltip: number;
@@ -105,7 +104,7 @@ export class modifier_t19_brutal_link_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
@@ -124,7 +123,7 @@ export class modifier_t19_brutal_link_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.transform_damage_percent = this.GetSpecialValueFor("transform_damage_percent")
         this.bonus_strength = this.GetSpecialValueFor("bonus_strength")
     }
@@ -147,7 +146,7 @@ export class modifier_t19_brutal_link_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         this._tooltip = (this._tooltip || 0) % 2 + 1
         if (this._tooltip == 1) {
@@ -156,8 +155,8 @@ export class modifier_t19_brutal_link_buff extends BaseModifier_Plus {
             return this.transform_damage_percent
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             // let hModifier  = modifier_combination_t19_powerful_clap.findIn(  this.GetCasterPlus() ) as any;
             // if (GameFunc.IsValid(hModifier)) {

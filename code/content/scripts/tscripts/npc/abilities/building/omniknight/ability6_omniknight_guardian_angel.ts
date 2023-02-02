@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -96,7 +95,7 @@ export class modifier_omniknight_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -175,7 +174,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
     ShouldUseOverheadOffset() {
         return true
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -206,7 +205,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius")
         this.interval_scepter = this.GetSpecialValueFor("interval_scepter")
@@ -243,12 +242,12 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.all_primary_stat_percent
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
     EOM_GetModifierStats_Strength_Percentage() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) { return 0 }
@@ -257,7 +256,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
             return this.all_primary_stat_percent
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_AGILITY_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_PERCENTAGE)
     EOM_GetModifierStats_Agility_Percentage() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) { return 0 }
@@ -266,7 +265,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
             return this.all_primary_stat_percent
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_INTELLECT_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_PERCENTAGE)
     EOM_GetModifierStats_Intellect_Percentage() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) { return 0 }
@@ -275,7 +274,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
             return this.all_primary_stat_percent
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     EOM_GetModifierBonusStats_Strength() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) { return 0 }
@@ -284,7 +283,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
             return (hCaster.GetStrength() - (/**(GetStrengthWithoutPercentage(hCaster)*/1 * this.all_primary_stat_percent * 0.01)) * this.all_primary_stat_percent * 0.01
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_AGILITY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
     EOM_GetModifierBonusStats_Agility() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) { return 0 }
@@ -293,7 +292,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
             return (hCaster.GetAgility() - (/**(GetAgilityWithoutPercentage(hCaster)*/1 * this.all_primary_stat_percent * 0.01)) * this.all_primary_stat_percent * 0.01
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     EOM_GetModifierBonusStats_Intellect() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) { return 0 }
@@ -302,7 +301,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
             return (hCaster.GetIntellect() - (/**(GetIntellectWithoutPercentage(hCaster)*/1 * this.all_primary_stat_percent * 0.01)) * this.all_primary_stat_percent * 0.01
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
     EOM_GetModifierSpellCriticalStrike() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             if (GameFunc.mathUtil.PRD(this.spell_crit_chance, this.GetParentPlus(), "modifier_omniknight_6_buff_shard")) {

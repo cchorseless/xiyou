@@ -5,7 +5,6 @@
  * @LastEditTime: 2021-06-16 11:05:02
  * @Description: 眩晕BUFF
  */
-import { GameEnum } from "../../../shared/GameEnum";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
@@ -26,7 +25,7 @@ export class modifier_stunned extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     g_OverrideAnimation(): GameActivity_t {
         return GameActivity_t.ACT_DOTA_DISABLED;
     }

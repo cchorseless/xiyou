@@ -1,7 +1,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -44,7 +43,7 @@ export class modifier_t38_wind_thunder extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -63,14 +62,14 @@ export class modifier_t38_wind_thunder extends BaseModifier_Plus {
             }
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.damage_factor = this.GetSpecialValueFor("damage_factor")
         this.attack_speed = this.GetSpecialValueFor("attack_speed")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
-    GetProcAttack_BonusDamage_Physical(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
+    GetProcAttack_BonusDamage_Physical(params: IModifierTable) {
         if (params.attacker == this.GetParentPlus() && GameFunc.IsValid(this.GetAbilityPlus()) && !params.attacker.IsIllusion() && !params.attacker.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             let fDamage = (this.GetParentPlus().GetStrength() + this.GetParentPlus().GetAgility() + this.GetParentPlus().GetIntellect()) * this.damage_factor
             let iParticleID = ResHelper.CreateParticle({
@@ -92,11 +91,11 @@ export class modifier_t38_wind_thunder extends BaseModifier_Plus {
             BattleHelper.GoApplyDamage(damage_table)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         return this.attack_speed
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     EOM_GetModifierMaximumAttackSpeedBonus() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
@@ -105,7 +104,7 @@ export class modifier_t38_wind_thunder extends BaseModifier_Plus {
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE)
     EOM_GetModifierOutgoingPureDamagePercentage() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {

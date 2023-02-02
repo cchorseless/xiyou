@@ -1,6 +1,6 @@
+import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
-import { ResHelper } from "../../../helper/ResHelper";
 
 /**纯金羊咩咩 */
 @registerModifier()
@@ -23,7 +23,7 @@ export class modifier_courier_fx_ambient_34 extends BaseModifier_Plus {
     RemoveOnDeath() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             let iParticleID = ResHelper.CreateParticle(

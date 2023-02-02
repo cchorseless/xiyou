@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -97,13 +96,13 @@ export class modifier_clinkz_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.armor_reduction_duration = this.GetSpecialValueFor("armor_reduction_duration")
     }
 
@@ -118,7 +117,7 @@ export class modifier_clinkz_1 extends BaseModifier_Plus {
             modifier_clinkz_1_reduce_armor.apply(params.target, params.attacker, this.GetAbilityPlus(), { duration: this.armor_reduction_duration * target.GetStatusResistanceFactor(params.attacker) })
         }
     }
-    OnSummonned(params: ModifierTable) {
+    OnSummonned(params: IModifierTable) {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             let hSummon = params.unit //  召唤者
@@ -204,7 +203,7 @@ export class modifier_clinkz_1_summoned_attack_buff extends BaseModifier_Plus {
     IsPurgeException() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.armor_reduction_duration = this.GetSpecialValueFor("armor_reduction_duration")
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
@@ -240,7 +239,7 @@ export class modifier_clinkz_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.health_gain_percent = this.GetSpecialValueFor("health_gain_percent")
         if (IsServer()) {
@@ -249,11 +248,11 @@ export class modifier_clinkz_1_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
     g_HP_PERCENTAGE() {
         return this.health_gain_percent
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         this._tooltip = (this._tooltip || 0) % 2 + 1
         if (this._tooltip == 1) {
@@ -263,7 +262,7 @@ export class modifier_clinkz_1_buff extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    On_Death(params: ModifierTable) {
+    On_Death(params: IModifierTable) {
         let hAbility = this.GetAbilityPlus()
         let hParent = this.GetParentPlus()
         let hAttacker = params.attacker
@@ -307,14 +306,14 @@ export class modifier_clinkz_1_reduce_armor extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.armor_reduction = this.GetSpecialValueFor("armor_reduction")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return -this.armor_reduction
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     G_PHYSICAL_ARMOR_BONUS() {
         return -this.armor_reduction
     }
@@ -343,22 +342,22 @@ export class modifier_clinkz_1_attacker_damage extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.permanent_bonus_damage = this.GetSpecialValueFor("permanent_bonus_damage")
         if (IsServer()) {
             this.IncrementStackCount()
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         return this.GetStackCount() * this.permanent_bonus_damage
     }
 }
 // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_clinkz_1_particle extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

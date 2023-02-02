@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -76,7 +75,7 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.mana_pool_damage_pct = this.GetSpecialValueFor("mana_pool_damage_pct")
         this.int_steal_duration = this.GetSpecialValueFor("int_steal_duration")
@@ -230,8 +229,8 @@ export class modifier_obsidian_destroyer_1_projectile extends BaseModifier_Plus 
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_ULTRA
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return ResHelper.GetParticleReplacement("particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_arcane_orb.vpcf", this.GetParentPlus())
     }
 }

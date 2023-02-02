@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
@@ -109,13 +108,13 @@ export class modifier_juggernaut_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
     }
 
@@ -176,9 +175,9 @@ export class modifier_juggernaut_6 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
 
-    GetDamageOutgoing_Percentage(params: ModifierTable) {
+    GetDamageOutgoing_Percentage(params: IModifierTable) {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability6_juggernaut_omni_slash
             if (ability.hitting) {
@@ -211,7 +210,7 @@ export class modifier_juggernaut_6_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
@@ -362,16 +361,16 @@ export class modifier_juggernaut_6_thinker extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         return this.bonus_damage
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     overrideAnimation() {
         return GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_4
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_CAST_ANGLE)
-    GetIgnoreCastAngle(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_CAST_ANGLE)
+    GetIgnoreCastAngle(params: IModifierTable) {
         return 1
     }
 }
@@ -417,7 +416,7 @@ export class modifier_juggernaut_6_delay_remove extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_juggernaut_6_particle_slash_tgt extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -439,7 +438,7 @@ export class modifier_juggernaut_6_particle_slash_tgt extends modifier_particle 
 // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_juggernaut_6_particle_omni_end extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

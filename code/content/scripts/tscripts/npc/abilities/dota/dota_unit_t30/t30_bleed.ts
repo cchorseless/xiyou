@@ -39,7 +39,7 @@ export class modifier_t30_bleed extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bleed_chance = this.GetSpecialValueFor("bleed_chance")
         this.bleed_damage_per_str = this.GetSpecialValueFor("bleed_damage_per_str")
         this.bleed_duration = this.GetSpecialValueFor("bleed_duration")

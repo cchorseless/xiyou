@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
@@ -132,13 +131,13 @@ export class modifier_viper_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.poison_stack_pct = this.GetSpecialValueFor("poison_stack_pct")
     }
     OnIntervalThink() {
@@ -185,7 +184,7 @@ export class modifier_viper_2 extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE)
     EOM_GetModifierOutGoingPoisonCountPercentage() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.poison_stack_pct
@@ -222,7 +221,7 @@ export class modifier_viper_2_thinker extends BaseModifier_Plus {
         return DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC
     }
 
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -242,7 +241,7 @@ export class modifier_viper_2_thinker extends BaseModifier_Plus {
             this.AddParticle(iParticle, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage_radius = this.GetSpecialValueFor("damage_radius")
     }
 }
@@ -264,7 +263,7 @@ export class modifier_viper_2_debuff extends BaseModifier_Plus {
     IsPurgable() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
@@ -285,7 +284,7 @@ export class modifier_viper_2_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticle, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage_sec = this.GetSpecialValueFor("damage_sec")
         this.poison_percent = this.GetSpecialValueFor("poison_percent")
         this.shard_incoming_poison_damage_pct = this.GetSpecialValueFor("shard_incoming_poison_damage_pct")
@@ -320,14 +319,14 @@ export class modifier_viper_2_debuff extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE)
     EOM_GetModifierIncomingPoisonDamagePercentage() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.poison_percent + this.shard_incoming_poison_damage_pct
         }
         return this.poison_percent
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.poison_percent + this.shard_incoming_poison_damage_pct
@@ -356,7 +355,7 @@ export class modifier_viper_2_talent_root extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let info: ResHelper.ParticleInfo = {

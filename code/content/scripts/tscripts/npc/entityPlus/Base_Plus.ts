@@ -1,9 +1,10 @@
 import { GameFunc } from "../../GameFunc";
 import { AoiHelper } from "../../helper/AoiHelper";
+import { KVHelper } from "../../helper/KVHelper";
 import { LogHelper } from "../../helper/LogHelper";
-import { GameEnum } from "../../shared/GameEnum";
 import { CCShare } from "../../shared/lib/CCShare";
 import { ET } from "../../shared/lib/Entity";
+import { PropertyConfig } from "../../shared/PropertyConfig";
 
 export interface BaseAbility extends CDOTA_Ability_Lua { }
 export class BaseAbility implements ET.IEntityRoot {
@@ -28,13 +29,14 @@ export class BaseModifier {
 
     /**
      * 新增BUFF,只能在服务器运行
+     * @Server
      * @param target
      * @param caster
      * @param ability
      * @param modifierTable 注意：不会同步到客户端,这里最好不要传数据
      * @returns
      */
-    public static apply<T extends typeof BaseModifier>(this: T, target: IBaseNpc_Plus, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: ModifierTable): InstanceType<T> {
+    public static apply<T extends typeof BaseModifier>(this: T, target: IBaseNpc_Plus, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: IModifierTable): InstanceType<T> {
         if (IsServer()) {
             let m = target.AddNewModifier(caster, ability, this.name, modifierTable) as InstanceType<T>;
             if (m && m.UUID) {
@@ -47,6 +49,7 @@ export class BaseModifier {
 
     /**
      * 添加唯一的BUFF
+     * @Server
      * @param this
      * @param target
      * @param caster
@@ -54,7 +57,7 @@ export class BaseModifier {
      * @param modifierTable
      * @returns
      */
-    public static applyOnly<T extends typeof BaseModifier>(this: T, target: IBaseNpc_Plus, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: ModifierTable): InstanceType<T> {
+    public static applyOnly<T extends typeof BaseModifier>(this: T, target: IBaseNpc_Plus, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: IModifierTable): InstanceType<T> {
         if (IsServer()) {
             if (this.exist(target)) {
                 return this.findIn(target, caster);
@@ -66,6 +69,7 @@ export class BaseModifier {
 
     /**
      * 创造一个单位，并给他加BUFF
+     * @Server
      * @param this
      * @param position
      * @param caster
@@ -80,7 +84,7 @@ export class BaseModifier {
         position: Vector,
         caster: IBaseNpc_Plus,
         ability?: IBaseAbility_Plus,
-        modifierTable?: ModifierTable,
+        modifierTable?: IModifierTable,
         teamNumber?: DOTATeam_t,
         phantomBlocker: boolean = false
     ): IBaseNpc_Plus {
@@ -101,6 +105,7 @@ export class BaseModifier {
 
     /**
      * 移除BUFF
+     * @Server
      * @param this
      * @param target
      * @param caster
@@ -121,13 +126,17 @@ export class BaseModifier {
         }
     }
 
-    /**获取所有的实例数据 */
+    /**获取所有的实例数据
+     * @Server
+     */
     public static GetAllInstance<T extends typeof BaseModifier>(this: T) {
         if (GGameCache.allModifiersIntance[this.name]) {
             return GGameCache.allModifiersIntance[this.name] as Readonly<{ [UUID: string]: InstanceType<T> }>;
         }
     }
-    /**重载 */
+    /**重载 
+     * @Server
+    */
     public static reload<T extends typeof BaseModifier>(this: T) {
         if (!IsServer()) {
             return;
@@ -146,6 +155,7 @@ export class BaseModifier {
     }
     /**
      * 存在于
+     * @Both
      * @param this
      * @param target
      * @returns
@@ -158,6 +168,7 @@ export class BaseModifier {
 
     /**
      * 查找
+     * @Server
      * @param this
      * @param target
      * @returns
@@ -170,24 +181,23 @@ export class BaseModifier {
             return target.FindModifierByName(this.name) as InstanceType<T>;
         }
     }
-
+    /**
+     * @Both
+     * @param this 
+     * @param target 
+     * @param caster 
+     * @returns 
+     */
     public static GetStackIn<T extends typeof BaseModifier>(this: T, target: CDOTA_BaseNPC, caster: CDOTA_BaseNPC = null): number {
         if (target && this.exist(target)) {
-            let m;
-            if (caster) {
-                m = target.FindModifierByNameAndCaster(this.name, caster) as InstanceType<T>;
-            } else {
-                m = target.FindModifierByName(this.name) as InstanceType<T>;
-            }
-            if (m) {
-                return m.GetStackCount();
-            }
+            return target.GetModifierStackCount(this.name, caster)
         }
         return 0;
     }
 
     /**
      * 获取所有装饰器注册的buff
+     * @Both
      * @param hCaster
      * @returns
      */
@@ -235,7 +245,7 @@ export class BaseModifier {
         let _all_set = new Set<modifierfunction>();
         let _Property = this.__AllRegisterProperty;
         let _Function = this.__AllRegisterFunction;
-        let _hasExit = GameEnum.Property.CustomDeclarePropertyEvent;
+        let _hasExit = PropertyConfig.CustomDeclarePropertyEvent;
         if (_Function != null) {
             Object.keys(_Function).forEach((s: string) => {
                 let _s = tonumber(s);
@@ -256,16 +266,16 @@ export class BaseModifier {
             if (_hasExit.has(params as any)) {
                 return;
             }
-            let propName = GameEnum.Property.Enum_MODIFIER_PROPERTY[params];
+            let propName = GPropertyConfig.EMODIFIER_PROPERTY[params];
             if (propName != null) {
-                let funcName = (GameEnum.Property.Enum_MODIFIER_PROPERTY_FUNC as any)[propName];
+                let funcName = (GPropertyConfig.EMODIFIER_PROPERTY_FUNC as any)[propName];
                 if (funcName && (this as any)[funcName] == null) {
                     (this as any)[funcName] = (event?: any) => {
                         let _r = 0;
                         let _r_ = "";
                         let _Property = this.__AllRegisterProperty;
                         let _Function = this.__AllRegisterFunction;
-                        let _sum = GameEnum.Property.UNIQUE_PROPERTY.indexOf(params as any) == -1;
+                        let _sum = PropertyConfig.UNIQUE_PROPERTY.indexOf(params as any) == -1;
                         if (_Property && _Property[params]) {
                             _Property[params].forEach((attr: string) => {
                                 let r = (this as any)[attr];
@@ -322,8 +332,8 @@ export class BaseModifier {
         if (this.UUID == null) {
             this.UUID = GGenerateUUID();
         }
-        (params as ModifierTable).IsOnCreated = true;
-        (params as ModifierTable).IsOnRefresh = false;
+        (params as IModifierTable).IsOnCreated = true;
+        (params as IModifierTable).IsOnRefresh = false;
         // LogHelper.print("OnCreated :" + this.GetName());
         this.Init(params);
         if (this.__AllRegisterProperty == null && this.__AllRegisterFunction == null && this.__AllRegisterEvent == null) {
@@ -346,8 +356,8 @@ export class BaseModifier {
 
     public OnRefresh(params: object) {
         this.__destroyed = false;
-        (params as ModifierTable).IsOnCreated = false;
-        (params as ModifierTable).IsOnRefresh = true;
+        (params as IModifierTable).IsOnCreated = false;
+        (params as IModifierTable).IsOnRefresh = true;
         this.Init(params);
     }
     /**是否被销毁 */
@@ -400,6 +410,7 @@ export class BaseModifier {
 
     /**
      * 圆形范围找敌方单位
+     * @Server
      * @param radius
      * @param p
      * @returns
@@ -413,25 +424,37 @@ export class BaseModifier {
             return AoiHelper.FindEntityInRadius(teamNumber, p, radius);
         }
     }
-    /**获取施法技能 */
+    /**获取施法技能 
+     * @Both
+     * 
+    */
     GetAbilityPlus() {
         return this.GetAbility() as IBaseAbility_Plus;
     }
-    /**获取施法来源NPC，谁施法的 */
+    /**获取施法来源NPC，谁施法的 
+     * @Both
+     * 
+    */
     GetCasterPlus() {
         return this.GetCaster() as IBaseNpc_Plus;
     }
-    /**获取作用归属NPC，在谁身上 */
+    /**获取作用归属NPC，在谁身上 
+     * @Both
+     * 
+    */
     GetParentPlus() {
         return this.GetParent() as IBaseNpc_Plus;
     }
-    /**自己给自己施法的 */
+    /**自己给自己施法的 
+     * @Both
+    */
     IsCastBySelf() {
         return this.GetCasterPlus().GetEntityIndex() == this.GetParentPlus().GetEntityIndex();
     }
 
     /**
      * 獲取當前等級對應技能屬性
+     * @Both
      * @param s
      * @param default_V 默认值
      * @returns
@@ -449,7 +472,9 @@ export class BaseModifier {
             return default_V;
         }
     }
-
+    /**
+     * @Both
+     */
     GetLevelSpecialValueFor(s: string, lvl: number) {
         if (this.GetAbility() == null) {
             let r = (this as any)[s];
@@ -457,6 +482,10 @@ export class BaseModifier {
         }
         return this.GetAbility().GetLevelSpecialValueFor(s, lvl);
     }
+    /**
+     * @Both
+     * @returns 
+     */
     GetAbilityLevel() {
         if (this.GetAbility() == null) {
             return -1;
@@ -465,6 +494,7 @@ export class BaseModifier {
     }
     /**
      * 更改BUFF层数
+     * @Both
      * @param iCount +增加 +减少
      * @returns
      */
@@ -488,12 +518,16 @@ export class BaseNpc implements ET.IEntityRoot {
     __allModifiersInfo__?: { [v: string]: Array<any> };
     /**初始生命值 */
     __BaseStatusHealth?: number;
+    /**初始魔法值 */
+    __BaseStatusMana?: number;
     private __SpawnedHandler__?: Array<IGHandler>;
     /**是否已经被安全销毁 */
     __safedestroyed__?: boolean = false;
     /**缓存 */
     Precache?(context: CScriptPrecacheContext) { }
-    /**出生 */
+    /**出生 
+     * @both
+    */
     Spawn?(entityKeyValues: CScriptKeyValues) { }
     /**Spawn事件后执行
      * @both
@@ -506,6 +540,9 @@ export class BaseNpc implements ET.IEntityRoot {
      * 删除
      * */
     UpdateOnRemove?() { }
+    /**
+     * @Server
+     */
     addSpawnedHandler?(handler: IGHandler) {
         if (this.__bIsFirstSpawn == true) {
             handler.run();
@@ -516,7 +553,9 @@ export class BaseNpc implements ET.IEntityRoot {
             this.__SpawnedHandler__.push(handler);
         }
     }
-
+    /**
+     * @Server
+     */
     runSpawnedHandler?() {
         if (this.__SpawnedHandler__ && this.__SpawnedHandler__.length > 0) {
             this.__SpawnedHandler__.forEach((handler) => {
@@ -528,6 +567,7 @@ export class BaseNpc implements ET.IEntityRoot {
 
     /**
      * 是否是真实单位
+     * @Both
      */
     IsRealUnit?() {
         return !(this.IsIllusion() || this.IsSummoned());
@@ -592,25 +632,38 @@ export class BaseNpc implements ET.IEntityRoot {
      * @param n
      * @returns
      */
-    GetStatusResistanceFactor?(n: CDOTA_BaseNPC) {
-        return 1;
+    GetStatusResistanceFactor?(hCaster: CDOTA_BaseNPC) {
+        let d: number = 1 - Gmodifier_property.GetStatusResistance(this) * 0.01;
+        if (GameFunc.IsValid(hCaster)) {
+            d = d * (1 + Gmodifier_property.GetStatusResistanceCaster(hCaster) * 0.01)
+        }
+        return d
     }
-
+    /**
+     * @Both
+     * @param hTarget 
+     * @returns 
+     */
     IsFriendly?(hTarget: BaseNpc) {
         return this.GetTeamNumber() == hTarget.GetTeamNumber();
     }
+
+    /**
+     * @Server 
+     * @param fChanged 
+     */
     ModifyMaxHealth?(fChanged: number) {
-        // let fHealthPercent = this.GetHealth() / this.GetMaxHealth()
-        // this.fBaseHealth = (this.fBaseHealth || this.GetMaxHealth()) + fChanged
-        // let fAddHpPercent = GetHealthPercentage != null && (GetHealthPercentage(this) || 0) * 0.01 || 0
-        // let fEnemyHpPercent = GetHealthPercentageEnemy != null && (GetHealthPercentageEnemy(this) || 0) * 0.01 || 0
-        // let fBonusHealth = (fAddHpPercent + fEnemyHpPercent) * this.fBaseHealth
-        // let fHealth = this.fBaseHealth + fBonusHealth
-        // let fCorrectHealth = GameFunc.mathUtil.Clamp(fHealth, 1, MAX_HEALTH)
-        // this.SetBaseMaxHealth(fCorrectHealth)
-        // this.SetMaxHealth(fCorrectHealth)
-        // this.ModifyHealth(fHealthPercent * fCorrectHealth, null, false, 0)
+        if (GameFunc.IsValid(this) && this.__BaseStatusHealth == null) {
+            this.__BaseStatusHealth = GToNumber(KVHelper.GetUnitData(this.GetUnitName(), "StatusHealth"));
+        }
+        this.__BaseStatusHealth += fChanged
     }
+    /**
+     * @Server
+     * @param abilityname 
+     * @param level 
+     * @returns 
+     */
     addAbilityPlus?(abilityname: string, level: number = 1) {
         let ability = this.AddAbility(abilityname);
         if (ability) {
@@ -622,20 +675,32 @@ export class BaseNpc implements ET.IEntityRoot {
         }
         return ability as IBaseAbility_Plus;
     }
-
+    /**
+     * @Both
+     * @param abilityname 
+     */
     removeAbilityPlus?(abilityname: string) {
         let ability = this.FindAbilityByName(abilityname) as IBaseAbility_Plus;
         if (ability) {
             GDestroyAbility(ability);
-            this.RemoveAbility(abilityname);
+            if (IsServer()) {
+                this.RemoveAbility(abilityname);
+            }
         }
         else {
             GLogHelper.error("removeAbilityPlus ERROR ", abilityname)
         }
     }
 
-
-    public addBuff?<T extends BaseModifier>(buffname: string, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: ModifierTable): T {
+    /**
+     * @Server
+     * @param buffname 
+     * @param caster 
+     * @param ability 
+     * @param modifierTable 
+     * @returns 
+     */
+    public addBuff?<T extends BaseModifier>(buffname: string, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: IModifierTable): T {
         if (IsServer()) {
             let m = this.AddNewModifier(caster, ability, buffname, modifierTable) as T;
             if (m && m.UUID) {
@@ -646,10 +711,17 @@ export class BaseNpc implements ET.IEntityRoot {
         }
     }
 
-
-    public addOnlyBuff?<T extends BaseModifier>(buffname: string, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: ModifierTable): T {
+    /**
+     * @Server
+     * @param buffname 
+     * @param caster 
+     * @param ability 
+     * @param modifierTable 
+     * @returns 
+     */
+    public addOnlyBuff?<T extends BaseModifier>(buffname: string, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: IModifierTable): T {
         if (IsServer()) {
-            if (this.existBuff(buffname)) {
+            if (this.HasModifier(buffname)) {
                 return this.findBuff(buffname, caster);
             } else {
                 return this.addBuff<T>(buffname, caster, ability, modifierTable);
@@ -657,7 +729,11 @@ export class BaseNpc implements ET.IEntityRoot {
         }
     }
 
-
+    /**
+     * @Server
+     * @param buffname 
+     * @param caster 
+     */
     public removeBuff?<T extends BaseModifier>(buffname: string, caster?: CDOTA_BaseNPC) {
         if (IsServer()) {
             if (caster) {
@@ -673,17 +749,14 @@ export class BaseNpc implements ET.IEntityRoot {
             }
         }
     }
-
-
-    public existBuff?<T extends BaseModifier>(buffname: string): boolean {
-        if (buffname) {
-            return this.HasModifier(buffname);
-        }
-        return false;
-    }
-
+    /**
+     * @Server
+     * @param buffname 
+     * @param caster 
+     * @returns 
+     */
     public findBuff?<T extends BaseModifier>(buffname: string, caster: CDOTA_BaseNPC = null): T {
-        if (buffname && this.existBuff(buffname)) {
+        if (buffname && this.HasModifier(buffname)) {
             if (caster) {
                 return this.FindModifierByNameAndCaster(buffname, caster) as T;
             }
@@ -691,18 +764,10 @@ export class BaseNpc implements ET.IEntityRoot {
         }
     }
 
-
-    public getBuffStack?<T extends BaseModifier>(buffname: string, caster: CDOTA_BaseNPC = null): number {
-        let m = this.findBuff<T>(buffname, caster);
-        if (m) {
-            return m.GetStackCount();
-        }
-        return 0;
-    }
     /**
-        *
-        * @param entityKeyValues
-        */
+     * @Server
+     * @param entityKeyValues
+     */
     InitActivityModifier?() {
         if (this.__IN_DOTA_DATA__) {
             let entityKeyValues = this.__IN_DOTA_DATA__;
@@ -871,11 +936,15 @@ function toDotaClassInstance(instance: any, table: new () => any) {
     }
 }
 
-
+/**
+ * @Both
+ * @param ability 
+ * @returns 
+ */
 function SafeDestroyAbility(ability: BaseAbility) {
-    if (!IsServer()) {
-        return;
-    }
+    // if (!IsServer()) {
+    //     return;
+    // }
     if (GameFunc.IsValid(ability)) {
         if (ability.__safedestroyed__) {
             return;
@@ -887,11 +956,15 @@ function SafeDestroyAbility(ability: BaseAbility) {
     }
 }
 
-
+/**
+ * @Both
+ * @param item 
+ * @returns 
+ */
 function SafeDestroyItem(item: BaseItem) {
-    if (!IsServer()) {
-        return;
-    }
+    // if (!IsServer()) {
+    //     return;
+    // }
     if (GameFunc.IsValid(item)) {
         if (item.__safedestroyed__) {
             return;
@@ -903,19 +976,25 @@ function SafeDestroyItem(item: BaseItem) {
     }
 }
 
-
+/**
+ * @Both
+ * @param unit 
+ * @returns 
+ */
 function SafeDestroyUnit(unit: BaseNpc) {
-    if (!IsServer()) {
-        return;
-    }
+    // if (!IsServer()) {
+    //     return;
+    // }
     if (GameFunc.IsValid(unit)) {
         if (unit.__safedestroyed__) {
             return;
         }
         unit.__safedestroyed__ = true;
-        let allm = unit.FindAllModifiers();
-        for (let m of allm) {
-            m.Destroy();
+        if (IsServer()) {
+            let allm = unit.FindAllModifiers();
+            for (let m of allm) {
+                m.Destroy();
+            }
         }
         GTimerHelper.ClearAll(unit);
         UTIL_Remove(unit);

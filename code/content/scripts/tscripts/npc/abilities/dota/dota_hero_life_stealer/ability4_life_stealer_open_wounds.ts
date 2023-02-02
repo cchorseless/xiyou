@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -81,7 +80,7 @@ export class modifier_life_stealer_4 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -161,7 +160,7 @@ export class modifier_life_stealer_4_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.heal_percent = this.GetSpecialValueFor("heal_percent")
         this.duration = this.GetSpecialValueFor("duration")
@@ -188,14 +187,14 @@ export class modifier_life_stealer_4_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, true, 10, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.heal_percent = this.GetSpecialValueFor("heal_percent")
         this.duration = this.GetSpecialValueFor("duration")
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
-    //   OnDamageCalculated(params: ModifierTable) {
-    OnTakeDamage(params: ModifierTable) {
+    //   OnDamageCalculated(params: IModifierTable) {
+    OnTakeDamage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -262,7 +261,7 @@ export class modifier_life_stealer_4_max_health extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.heal_limit = this.GetSpecialValueFor("heal_limit")
@@ -272,7 +271,7 @@ export class modifier_life_stealer_4_max_health extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     EOM_GetModifierHealthBonus() {
         return this.GetStackCount()
     }
@@ -299,7 +298,7 @@ export class modifier_life_stealer_4_reduce_armor extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             this.IncrementStackCount()
             this.addTimer(params.duration, () => {
@@ -309,14 +308,14 @@ export class modifier_life_stealer_4_reduce_armor extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     EOM_GetModifierPhysicalArmorBonus() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetStackCount() * this.GetCasterPlus().GetTalentValue("special_bonus_unique_life_stealer_custom_3")
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
     EOM_GetModifierMagicalArmorBonus() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetStackCount() * this.GetCasterPlus().GetTalentValue("special_bonus_unique_life_stealer_custom_3")

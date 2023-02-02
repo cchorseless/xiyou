@@ -2,6 +2,7 @@ import { render } from "@demon673/react-panorama";
 import React from "react";
 import { AllShared } from "../../../../../scripts/tscripts/shared/AllShared";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
+import { GameProtocol } from "../../../../../scripts/tscripts/shared/GameProtocol";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { TimerHelper } from "../../../helper/TimerHelper";
@@ -57,7 +58,7 @@ export class CCLoading extends CCPanel<NodePropsData> {
     }
     LoginServer() {
         LogHelper.print("---------------LoginServer---------------");
-        NetHelper.SendToLua(GameEnum.CustomProtocol.req_LoginGame, null, GHandler.create(this, (e) => {
+        NetHelper.SendToLua(GameProtocol.Protocol.req_LoginGame, null, GHandler.create(this, (e) => {
             this.UpdateState({ login: e.state })
         }));
     }

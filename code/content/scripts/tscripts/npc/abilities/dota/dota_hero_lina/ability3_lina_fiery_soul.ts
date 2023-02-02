@@ -1,8 +1,3 @@
-import { GameEnum } from "../../../../shared/GameEnum";
-import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -55,7 +50,7 @@ export class modifier_lina_3 extends BaseModifier_Plus {
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
-    OnAbilityExecuted(params: ModifierTable) {
+    OnAbilityExecuted(params: IModifierTable) {
         let unit = params.unit
         let hAbility = params.ability
         if (unit == null || !unit.IsAlive() || unit != this.GetParentPlus() || unit.IsIllusion() || hAbility == null || hAbility.IsItem()) {
@@ -96,7 +91,7 @@ export class modifier_lina_3_fiery_soul extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         this.chance_factor = this.GetSpecialValueFor("chance_factor")
@@ -120,7 +115,7 @@ export class modifier_lina_3_fiery_soul extends BaseModifier_Plus {
             this.AddParticle(this.particleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hParent = this.GetParentPlus()
         this.chance_factor = this.GetSpecialValueFor("chance_factor")
@@ -137,31 +132,31 @@ export class modifier_lina_3_fiery_soul extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.fiery_soul_magic_bonus * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
         if (this.GetParentPlus().HasScepter()) {
             return this.chance_factor * this.GetStackCount()
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         return this.fiery_soul_attack_speed_bonus * this.GetStackCount()
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
-    EOM_GetModifierMaximumAttackSpeedBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    EOM_GetModifierMaximumAttackSpeedBonus(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         if (this.GetStackCount() >= this.fiery_soul_max_stacks && hParent.HasScepter()) {
             return this.max_attack_speed_scepter
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    EOM_GetModifierSpellAmplifyBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    EOM_GetModifierSpellAmplifyBonus(params: IModifierTable) {
         return this.fiery_soul_magic_bonus * this.GetStackCount()
     }
 }

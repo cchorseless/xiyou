@@ -1,4 +1,4 @@
-import { GameEnum } from "../../../scripts/tscripts/shared/GameEnum";
+import { GameProtocol } from "../../../scripts/tscripts/shared/GameProtocol";
 import { JsonConfigHelper } from "../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
 import { FuncHelper } from "./FuncHelper";
 import { KVHelper } from "./KVHelper";
@@ -6,7 +6,7 @@ import { KVHelper } from "./KVHelper";
 
 export module AbilityHelper {
 
-    export const AbilityPropertyTool = "ability_propertytool";
+
 
     export enum AbilityUpgradeOperator {
         ABILITY_UPGRADES_OP_ADD = 0,
@@ -879,7 +879,7 @@ export module AbilityHelper {
                     aValues = StringToValues(tData.AbilityDamage || "");
                     break;
                 default:
-                    if (GameEnum.Property.Enum_MODIFIER_PROPERTY[sValueName.toUpperCase() as any] != null) {
+                    if (GPropertyConfig.EMODIFIER_PROPERTY[sValueName.toUpperCase() as any] != null) {
                         aValues = GetSpecialValues(sAbilityName, sValueName, iEntityIndex);
                     }
                     break;
@@ -894,109 +894,84 @@ export module AbilityHelper {
         return r;
     }
 
-    export function GetLevelCooldown(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        GameEvents.SendEventClientSide(GameEnum.CustomCallClientLua.call_get_ability_data, {
+    export function GetAbilityData(iEntityIndex: AbilityEntityIndex, key: string, iLevel = -1) {
+        GameEvents.SendEventClientSide(GameProtocol.Protocol.call_get_ability_data, {
             ability_entindex: iEntityIndex,
             level: iLevel,
-            key_name: "cool_down"
+            key_name: key
         });
         let iCasterIndex = Abilities.GetCaster(iEntityIndex);
-        let iAbilityEntIndex = Entities.GetAbilityByName(iCasterIndex, AbilityPropertyTool);
-        if (iAbilityEntIndex != -1) {
-            let sCooldown = Abilities.GetAbilityTextureName(iAbilityEntIndex);
-            if (sCooldown == "") {
-                let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
-                let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
-                if (tData) {
-                    if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
-                    let aCooldowns = StringToValues(tData.AbilityCooldown || "");
-                    if (iLevel >= 0 && aCooldowns.length > 0) {
-                        return aCooldowns[Math.min(iLevel, aCooldowns.length - 1)];
-                    }
-                }
-                return 0;
-            }
-            return Number(sCooldown);
+        let ibuffid = UnitHelper.GetBuffByName(iCasterIndex, GPropertyConfig.UNIT_PROPERTY_BUFF_NAME);
+        if (ibuffid != -1) {
+            return Buffs.GetTexture(iCasterIndex, ibuffid as BuffID);
         }
-        return 0;
+        return "";
     };
-    export function GetLevelManaCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        GameEvents.SendEventClientSide(GameEnum.CustomCallClientLua.call_get_ability_data, {
-            ability_entindex: iEntityIndex,
-            level: iLevel,
-            key_name: "mana_cost",
-        });
-        let iCasterIndex = Abilities.GetCaster(iEntityIndex);
-        let iAbilityEntIndex = Entities.GetAbilityByName(iCasterIndex, AbilityPropertyTool);
-        if (iAbilityEntIndex != -1) {
-            let sManaCost = Abilities.GetAbilityTextureName(iAbilityEntIndex);
-            if (sManaCost == "") {
-                let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
-                let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
-                if (tData) {
-                    if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
-                    let aManaCosts = StringToValues(tData.AbilityManaCost || "");
-                    if (iLevel >= 0 && aManaCosts.length > 0) {
-                        return aManaCosts[Math.min(iLevel, aManaCosts.length - 1)];
-                    }
+
+    export function GetLevelCooldown(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
+        let sCooldown = GetAbilityData(iEntityIndex, "cool_down", iLevel)
+        if (sCooldown == "") {
+            let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
+            let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
+            if (tData) {
+                if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
+                let aCooldowns = StringToValues(tData.AbilityCooldown || "");
+                if (iLevel >= 0 && aCooldowns.length > 0) {
+                    return aCooldowns[Math.min(iLevel, aCooldowns.length - 1)];
                 }
-                return 0;
             }
-            return Number(sManaCost);
+            return 0;
         }
-        return 0;
+        return GToNumber(sCooldown);
+    };
+
+    export function GetLevelManaCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
+        let sManaCost = GetAbilityData(iEntityIndex, "mana_cost", iLevel)
+        if (sManaCost == "") {
+            let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
+            let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
+            if (tData) {
+                if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
+                let aManaCosts = StringToValues(tData.AbilityManaCost || "");
+                if (iLevel >= 0 && aManaCosts.length > 0) {
+                    return aManaCosts[Math.min(iLevel, aManaCosts.length - 1)];
+                }
+            }
+            return 0;
+        }
+        return GToNumber(sManaCost);
     };
     export function GetLevelGoldCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        GameEvents.SendEventClientSide(GameEnum.CustomCallClientLua.call_get_ability_data, {
-            ability_entindex: iEntityIndex,
-            level: iLevel,
-            key_name: "gold_cost",
-        });
-        let iCasterIndex = Abilities.GetCaster(iEntityIndex);
-        let iAbilityEntIndex = Entities.GetAbilityByName(iCasterIndex, AbilityPropertyTool);
-        if (iAbilityEntIndex != -1) {
-            let sGoldCost = Abilities.GetAbilityTextureName(iAbilityEntIndex);
-            if (sGoldCost == "") {
-                let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
-                let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
-                if (tData) {
-                    if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
-                    let aGoldCosts = StringToValues(tData.AbilityGoldCost || "");
-                    if (iLevel >= 0 && aGoldCosts.length > 0) {
-                        return aGoldCosts[Math.min(iLevel, aGoldCosts.length - 1)];
-                    }
+        let sGoldCost = GetAbilityData(iEntityIndex, "gold_cost", iLevel)
+        if (sGoldCost == "") {
+            let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
+            let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
+            if (tData) {
+                if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
+                let aGoldCosts = StringToValues(tData.AbilityGoldCost || "");
+                if (iLevel >= 0 && aGoldCosts.length > 0) {
+                    return aGoldCosts[Math.min(iLevel, aGoldCosts.length - 1)];
                 }
-                return 0;
             }
-            return Number(sGoldCost);
+            return 0;
         }
-        return 0;
+        return GToNumber(sGoldCost);
     };
     export function GetLevelEnergyCost(iEntityIndex: AbilityEntityIndex, iLevel = -1) {
-        GameEvents.SendEventClientSide(GameEnum.CustomCallClientLua.call_get_ability_data, {
-            ability_entindex: iEntityIndex,
-            level: iLevel,
-            key_name: "energy_cost",
-        });
-        let iCasterIndex = Abilities.GetCaster(iEntityIndex);
-        let iAbilityEntIndex = Entities.GetAbilityByName(iCasterIndex, AbilityPropertyTool);
-        if (iAbilityEntIndex != -1) {
-            let sEnergyCost = Abilities.GetAbilityTextureName(iAbilityEntIndex);
-            if (sEnergyCost == "") {
-                let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
-                let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
-                if (tData) {
-                    if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
-                    let aEnergyCosts = StringToValues(tData.AbilityEnergyCost || "");
-                    if (iLevel >= 0 && aEnergyCosts.length > 0) {
-                        return aEnergyCosts[Math.min(iLevel, aEnergyCosts.length - 1)];
-                    }
+        let sEnergyCost = GetAbilityData(iEntityIndex, "energy_cost", iLevel)
+        if (sEnergyCost == "") {
+            let sAbilityName = Abilities.GetAbilityName(iEntityIndex);
+            let [isitem, tData] = KVHelper.GetAbilityOrItemData(sAbilityName);
+            if (tData) {
+                if (iLevel == -1) iLevel = Abilities.GetLevel(iEntityIndex) - 1;
+                let aEnergyCosts = StringToValues(tData.AbilityEnergyCost || "");
+                if (iLevel >= 0 && aEnergyCosts.length > 0) {
+                    return aEnergyCosts[Math.min(iLevel, aEnergyCosts.length - 1)];
                 }
-                return 0;
             }
-            return Number(sEnergyCost);
+            return 0;
         }
-        return 0;
+        return GToNumber(sEnergyCost);
     };
 
 
@@ -1056,14 +1031,6 @@ export module UnitHelper {
         return false;
     };
 
-    export function FindBuffByName(unitEntIndex: EntityIndex, buffName: string): BuffID {
-        for (let index = 0; index < Entities.GetNumBuffs(unitEntIndex); index++) {
-            let buff = Entities.GetBuff(unitEntIndex, index);
-            if (Buffs.GetName(unitEntIndex, buff) == buffName)
-                return buff;
-        }
-        return -1 as BuffID;
-    };
     export function GetUnitRarety(unitname: string): Rarity {
         let unitobj = KVHelper.KVUnits()[unitname];
         if (unitobj && unitobj.Rarity) {
@@ -1076,6 +1043,8 @@ export module UnitHelper {
         return Entities.GetAttackSpeed(iUnitEntIndex) * 100;
     };
 
+
+
     export function GetMoveSpeed(iUnitEntIndex: EntityIndex) {
         return Entities.GetMoveSpeedModifier(iUnitEntIndex, Entities.GetBaseMoveSpeed(iUnitEntIndex));
     };
@@ -1083,14 +1052,28 @@ export module UnitHelper {
         return GetUnitData(iUnitEntIndex, "GetUltiPower");
     };
 
+    export function GetMaximumAttackSpeed(iUnitEntIndex: EntityIndex) {
+        return GToNumber(GetUnitData(iUnitEntIndex, "GetMaximumAttackSpeed"));
+    };
+    export function GetBuffByName(iUnitEntIndex: EntityIndex, buffName: string) {
+        const count = Entities.GetNumBuffs(iUnitEntIndex);
+        for (let i = 0; i < count; i++) {
+            const buffid = Entities.GetBuff(iUnitEntIndex, i);
+            if (Buffs.GetName(iUnitEntIndex, buffid) == buffName) {
+                return buffid;
+            }
+        }
+        return -1 as BuffID;
+    };
+
     export function GetUnitData(iUnitEntIndex: EntityIndex, sFuncName: string) {
-        GameEvents.SendEventClientSide("call_get_unit_data", {
+        GameEvents.SendEventClientSide(GameProtocol.Protocol.call_get_unit_data, {
             unit_entindex: iUnitEntIndex,
             func_name: sFuncName,
         });
-        let iAbilityEntIndex = Entities.GetAbilityByName(iUnitEntIndex, AbilityHelper.AbilityPropertyTool);
-        if (iAbilityEntIndex != -1) {
-            let sValue = Abilities.GetAbilityTextureName(iAbilityEntIndex);
+        let ibuffid = GetBuffByName(iUnitEntIndex, GPropertyConfig.UNIT_PROPERTY_BUFF_NAME);
+        if (ibuffid != -1) {
+            let sValue = Buffs.GetTexture(iUnitEntIndex, ibuffid as BuffID);
             if (sValue == "nil") {
                 return;
             }
@@ -1144,6 +1127,28 @@ export module UnitHelper {
     export function GetSpellAmplify(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetSpellAmplify")));
     };
+    export function GetOutgoingDamagePercent(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetOutgoingDamagePercent")));
+    };
+    export function GetOutgoingPhysicalDamagePercent(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetOutgoingPhysicalDamagePercent")));
+    };
+    export function GetOutgoingMagicalDamagePercent(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetOutgoingMagicalDamagePercent")));
+    };
+    export function GetOutgoingPureDamagePercent(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetOutgoingPureDamagePercent")));
+    };
+    export function GetIgnorePhysicalArmorPercentage(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetIgnorePhysicalArmorPercentage")));
+    };
+    export function GetIgnoreMagicalArmorPercentage(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetIgnoreMagicalArmorPercentage")));
+    };
+    export function GetCriticalStrikeChance(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetCriticalStrikeChance")));
+    };
+
     export function GetStatusResistance(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetStatusResistance")));
     };
@@ -1154,7 +1159,7 @@ export module UnitHelper {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetCooldownReduction")));
     };
     export function HasHeroAttribute(iUnitEntIndex: EntityIndex) {
-        return HasBuff(iUnitEntIndex, "modifier_hero_attribute");
+        return HasBuff(iUnitEntIndex, GPropertyConfig.HERO_PROPERTY_BUFF_NAME);
     };
     export function GetBaseStrength(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetBaseStrength")));
@@ -1182,10 +1187,11 @@ export module UnitHelper {
     };
     export function GetPrimaryAttribute(iUnitEntIndex: EntityIndex) {
         if (HasHeroAttribute(iUnitEntIndex)) {
-            let iBuffIndex = FindBuffByName(iUnitEntIndex, "modifier_hero_attribute");
+            let iBuffIndex = GetBuffByName(iUnitEntIndex, GPropertyConfig.HERO_PROPERTY_BUFF_NAME);
             if (iBuffIndex == -1) return -1;
             return Buffs.GetStackCount(iUnitEntIndex, iBuffIndex);
         }
+        return -1;
     };
 
     export function GetHealthBarWidth(iUnitEntIndex: EntityIndex) {

@@ -40,22 +40,23 @@ export class BaseNpc_Plus extends BaseNpc {
     }
 
     GetIntellect?() {
-        return 1
+        return Gmodifier_property.GetIntellect(this)
     }
     GetStrength?() {
-        return 1
+        return Gmodifier_property.GetStrength(this)
     }
     GetAgility?() {
-        return 1
+        return Gmodifier_property.GetAgility(this)
     }
     GetAllStats?() {
-        return 1
+        return this.GetIntellect() + this.GetStrength() + this.GetAgility();
     }
     /**
      * 获取主属性值
      * @returns
      */
     GetPrimaryStatValue?() {
+
         return 1
     }
     /**
@@ -63,7 +64,16 @@ export class BaseNpc_Plus extends BaseNpc {
      * @returns
      */
     GetPrimaryAttribute?() {
-        return Attributes.DOTA_ATTRIBUTE_AGILITY
+        const herobuff = GPropertyConfig.HERO_PROPERTY_BUFF_NAME;
+        if (this.HasModifier(herobuff)) {
+            return this.GetModifierStackCount(herobuff, this)
+        }
+        return Attributes.DOTA_ATTRIBUTE_INVALID
+    }
+
+
+    SetPrimaryAttribute?(iPrimaryAttribute: Attributes) {
+
     }
     GetSource?() {
         if (this.IsSummoned() || this.IsClone() || this.IsIllusion()) {

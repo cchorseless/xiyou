@@ -5,11 +5,9 @@
  * @LastEditTime: 2021-05-20 11:21:49
  * @Description: file content
  */
-import { LogHelper } from "../../../helper/LogHelper";
-import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { GameEnum } from "../../../shared/GameEnum";
+import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 
 @registerAbility()
 export class item_poor_mans_shield_custom extends BaseItem_Plus {
@@ -21,15 +19,15 @@ export class item_poor_mans_shield_custom extends BaseItem_Plus {
 @registerModifier()
 export class modifier_item_poor_mans_shield_custom extends BaseModifier_Plus {
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     public bonus_attack_speed: number;
 
     public per_reduce_gold: number;
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BONUSDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BONUSDAMAGEOUTGOING_PERCENTAGE)
     public damage_amplify_percent: number;
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_attack_speed = this.GetSpecialValueFor("bonus_attack_speed")
         this.per_reduce_gold = this.GetSpecialValueFor("per_reduce_gold")
         this.damage_amplify_percent = this.GetSpecialValueFor("damage_amplify_percent")

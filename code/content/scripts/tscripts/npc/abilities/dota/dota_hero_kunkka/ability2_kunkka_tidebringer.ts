@@ -1,15 +1,11 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
-import { BaseModifierMotionVertical_Plus, BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
+import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 import { modifier_kunkka_3_ebb, modifier_kunkka_3_tide } from "./ability3_kunkka_x_marks_the_spot";
 
 /** dota原技能数据 */
@@ -71,7 +67,7 @@ export class modifier_kunkka_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -164,7 +160,7 @@ export class modifier_kunkka_2_buff extends BaseModifier_Plus {
     GetTexture() {
         return "kunkka_x_marks_the_spot"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -188,7 +184,7 @@ export class modifier_kunkka_2_buff extends BaseModifier_Plus {
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage_factor = this.GetSpecialValueFor("damage_factor")
     }
     OnDestroy() {

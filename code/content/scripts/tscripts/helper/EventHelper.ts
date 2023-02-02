@@ -6,7 +6,7 @@
  * @Description: file content
  */
 
-import { GameEnum } from "../shared/GameEnum";
+import { GameProtocol } from "../shared/GameProtocol";
 
 export module EventHelper {
     /**
@@ -295,10 +295,10 @@ export module EventHelper {
         event.data = errorcode;
         // 全部玩家
         if (playerID == null || playerID.length == 0) {
-            EventHelper.fireProtocolEventToClient(GameEnum.CustomProtocol.push_error_message, event);
+            EventHelper.fireProtocolEventToClient(GameProtocol.Protocol.push_error_message, event);
         } else {
             playerID.forEach((_id) => {
-                EventHelper.fireProtocolEventToPlayer(GameEnum.CustomProtocol.push_error_message, event, _id as PlayerID);
+                EventHelper.fireProtocolEventToPlayer(GameProtocol.Protocol.push_error_message, event, _id as PlayerID);
             });
         }
     }

@@ -1,10 +1,12 @@
 import { CCShare } from "./lib/CCShare";
 import { TimeUtils } from "./lib/TimeUtils";
+import { PropertyConfig } from "./PropertyConfig";
 import { AllServiceEntity } from "./service/AllServiceEntity";
 
 [
     CCShare,
     TimeUtils,
+    PropertyConfig,
 ]
 
 export class AllShared {

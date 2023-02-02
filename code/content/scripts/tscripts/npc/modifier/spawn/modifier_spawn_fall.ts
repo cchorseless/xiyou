@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
-import { GameEnum } from "../../../shared/GameEnum";
 import { BaseModifierMotionVertical_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
@@ -23,7 +22,7 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
     }
     vStartPosition: Vector;
     vTargetPosition: Vector;
-    Init(kv: ModifierTable) {
+    Init(kv: IModifierTable) {
         if (IsServer()) {
             if (this.ApplyVerticalMotionController() == false) {
                 this.Destroy();
@@ -64,7 +63,7 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     g_GetOverrideAnimation() {
         return GameActivity_t.ACT_DOTA_FLAIL;
     }

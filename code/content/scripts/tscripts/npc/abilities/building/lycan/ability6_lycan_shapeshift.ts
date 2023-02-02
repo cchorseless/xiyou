@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -80,7 +79,7 @@ export class modifier_lycan_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.bonus_attack_range = this.GetSpecialValueFor("bonus_attack_range")
         if (IsServer()) {
@@ -155,7 +154,7 @@ export class modifier_lycan_6_transform extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
@@ -175,11 +174,11 @@ export class modifier_lycan_6_transform extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_4
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION_RATE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION_RATE)
     Get_OverrideAnimationRate() {
         return 1.5 / this.GetDuration()
     }
@@ -243,7 +242,7 @@ export class modifier_lycan_6_form extends BaseModifier_Plus {
     GetAura() {
         return "modifier_lycan_6_aura"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -261,7 +260,7 @@ export class modifier_lycan_6_form extends BaseModifier_Plus {
             }
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -303,15 +302,15 @@ export class modifier_lycan_6_form extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
-    GetAttackRangeBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
+    GetAttackRangeBonus(params: IModifierTable) {
         return this.bonus_attack_range
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         return this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
     GetCastRangeBonusStacking(params: ModifierAbilityEvent) {
         if (GameFunc.IsValid(params.ability) &&
             GameFunc.IncludeArgs(params.ability.GetBehaviorInt(), DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_ATTACK)[0]) {
@@ -319,8 +318,8 @@ export class modifier_lycan_6_form extends BaseModifier_Plus {
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/heroes/lycan/lycan_wolf.vmdl", this.GetParentPlus())
     }
 }
@@ -351,7 +350,7 @@ export class modifier_lycan_6_aura extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.speed = this.GetSpecialValueFor("speed")
         this.crit_chance = this.GetSpecialValueFor("crit_chance")
         this.crit_multiplier = this.GetSpecialValueFor("crit_multiplier") + (this.GetCasterPlus().HasShard() && this.GetSpecialValueFor("shard_crit_multiplier") || 0)
@@ -370,15 +369,15 @@ export class modifier_lycan_6_aura extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         if (!GameFunc.IsValid(this.GetCasterPlus()) || this.GetParentPlus() == this.GetCasterPlus()) {
             return 0
         }
         return modifier_lycan_6_form.GetStackIn(this.GetCasterPlus())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
+    EOM_GetModifierCriticalStrike(params: IModifierTable) {
         if (params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             let hCaster = this.GetCasterPlus()
             let extra_crit_chance = (GameFunc.IsValid(hCaster) && hCaster.HasTalent("special_bonus_unique_lycan_custom_7")) && hCaster.GetTalentValue("special_bonus_unique_lycan_custom_7") || 0
@@ -388,16 +387,16 @@ export class modifier_lycan_6_aura extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BASE_OVERRIDE)
-    GetMoveSpeedOverride(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BASE_OVERRIDE)
+    GetMoveSpeedOverride(params: IModifierTable) {
         return this.speed
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_ABSOLUTE_MIN)
-    GetMoveSpeed_AbsoluteMin(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_ABSOLUTE_MIN)
+    GetMoveSpeed_AbsoluteMin(params: IModifierTable) {
         return this.speed
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MOVESPEED_LIMIT)
-    GetIgnoreMovespeedLimit(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MOVESPEED_LIMIT)
+    GetIgnoreMovespeedLimit(params: IModifierTable) {
         return 1
     }
 }
@@ -405,7 +404,7 @@ export class modifier_lycan_6_aura extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_lycan_6_particle_buff extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hParent = this.GetParentPlus()

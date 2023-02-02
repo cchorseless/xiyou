@@ -1,5 +1,4 @@
 import { GameFunc } from "../../../../GameFunc";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -46,7 +45,7 @@ export class modifier_brewmaster_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         this.iPlayerOwnerID = hParent.GetPlayerOwnerID()
@@ -207,13 +206,13 @@ export class modifier_brewmaster_3_inherit_attribute extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(0)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.inherit_attribute_per = this.GetSpecialValueFor("inherit_attribute_per")
     }
     OnDestroy() {
@@ -232,21 +231,21 @@ export class modifier_brewmaster_3_inherit_attribute extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     EOM_GetModifierBonusStats_Strength() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return hCaster.GetStrength() * (this.inherit_attribute_per + hCaster.GetTalentValue("special_bonus_unique_brewmaster_custom_8")) * 0.01
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_AGILITY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
     EOM_GetModifierBonusStats_Agility() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return hCaster.GetAgility() * (this.inherit_attribute_per + hCaster.GetTalentValue("special_bonus_unique_brewmaster_custom_8")) * 0.01
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     EOM_GetModifierBonusStats_Intellect() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(this.GetCasterPlus())) {
@@ -279,7 +278,7 @@ export class modifier_brewmaster_3_amplify_damage extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -303,7 +302,7 @@ export class modifier_brewmaster_3_amplify_damage extends BaseModifier_Plus {
             this.StartIntervalThink(-1)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     G_OUTGOING_DAMAGE_PERCENTAGE() {
         return this.GetParentPlus().GetTalentValue("special_bonus_unique_brewmaster_custom_7")
     }

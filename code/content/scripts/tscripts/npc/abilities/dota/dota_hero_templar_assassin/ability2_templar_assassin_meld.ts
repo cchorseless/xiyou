@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -76,21 +75,21 @@ export class modifier_templar_assassin_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
             this.records = []
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.armor_duration = this.GetSpecialValueFor("armor_duration")
         this.bonus_attack_magnification = this.GetSpecialValueFor("bonus_attack_magnification")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
-    GetProcAttack_BonusDamage_Physical(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
+    GetProcAttack_BonusDamage_Physical(params: IModifierTable) {
         let attacker = params.attacker
         if (!attacker.IsIllusion()) {
             if (this.records.indexOf(params.record) != null) {
@@ -224,7 +223,7 @@ export class modifier_templar_assassin_2_meld extends BaseModifier_Plus {
         return false
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     Get_ActivityTranslationModifiers() {
         return "meld"
     }
@@ -254,7 +253,7 @@ export class modifier_templar_assassin_2_meld_armor extends BaseModifier_Plus {
     ShouldUseOverheadOffset() {
         return true
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -278,11 +277,11 @@ export class modifier_templar_assassin_2_meld_armor extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.armor_reduce = this.GetSpecialValueFor("armor_reduce") + hCaster.GetTalentValue("special_bonus_unique_templar_assassin_custom_8")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     G_PHYSICAL_ARMOR_BONUS() {
         return -this.armor_reduce
     }
@@ -290,7 +289,7 @@ export class modifier_templar_assassin_2_meld_armor extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_templar_assassin_2_particle_templar_assassin_meld_start extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

@@ -64,7 +64,7 @@ export class modifier_sven_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.cleave_starting_width = this.GetSpecialValueFor("cleave_starting_width")
         this.cleave_ending_width = this.GetSpecialValueFor("cleave_ending_width")
         this.cleave_distance = this.GetSpecialValueFor("cleave_distance")
@@ -73,7 +73,7 @@ export class modifier_sven_2 extends BaseModifier_Plus {
 
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    attackLanded(params: ModifierTable) {
+    attackLanded(params: IModifierTable) {
         if (params.target == null) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
 

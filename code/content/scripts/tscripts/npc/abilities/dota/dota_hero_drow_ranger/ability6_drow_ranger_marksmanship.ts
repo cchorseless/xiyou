@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -70,7 +69,7 @@ export class modifier_drow_ranger_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
 
         if (IsServer()) {
             this.records = []
@@ -94,7 +93,7 @@ export class modifier_drow_ranger_6 extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(particleID)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.chance = this.GetSpecialValueFor("chance")
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
@@ -147,8 +146,8 @@ export class modifier_drow_ranger_6 extends BaseModifier_Plus {
             this.start = false
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         if (params.target == null || params.target.GetClassname() == "dota_item_drop") {
             return
         }
@@ -158,8 +157,8 @@ export class modifier_drow_ranger_6 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE)
-    EOM_GetModifierIgnorePhysicalArmorPercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE)
+    EOM_GetModifierIgnorePhysicalArmorPercentage(params: IModifierTable) {
         if (params == null || params.target == null || params.target.GetClassname() == "dota_item_drop") {
             return
         }
@@ -222,8 +221,8 @@ export class modifier_drow_ranger_6_projectile extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_HIGH
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return ResHelper.GetParticleReplacement("particles/units/heroes/hero_drow/drow_marksmanship_attack.vpcf", this.GetCasterPlus())
     }
 }

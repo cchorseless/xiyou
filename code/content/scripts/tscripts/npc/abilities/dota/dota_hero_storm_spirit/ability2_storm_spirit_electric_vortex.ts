@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -101,7 +100,7 @@ export class modifier_storm_spirit_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -191,7 +190,7 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.electric_vortex_pull_units_per_second = this.GetSpecialValueFor("electric_vortex_pull_units_per_second")
         this.electric_vortex_incoming_damage = this.GetSpecialValueFor("electric_vortex_incoming_damage")
@@ -214,7 +213,7 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
             this.AddParticle(this.iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.electric_vortex_pull_units_per_second = this.GetSpecialValueFor("electric_vortex_pull_units_per_second")
         this.electric_vortex_incoming_damage = this.GetSpecialValueFor("electric_vortex_incoming_damage")
@@ -260,20 +259,20 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
             [modifierstate.MODIFIER_STATE_STUNNED]: true,
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_SHOCK_DAMAGE_PERCENTAG)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_DAMAGE_PERCENTAG)
     g_INCOMING_SHOCK_DAMAGE_PERCENTAG() {
         return this.GetSpecialValueFor("shock_damage_increase")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_FLAIL
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.electric_vortex_incoming_damage
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (IsServer() && params) {
             let hCaster = this.GetCasterPlus()
             if (GameFunc.IsValid(hCaster)) {
@@ -284,7 +283,7 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TELEPORTED)
-    OnTeleported(params: ModifierTable) {
+    OnTeleported(params: IModifierTable) {
         if (params.unit == this.GetCasterPlus()) {
             this.bTeleported = true
             ParticleManager.SetParticleControl(this.iParticleID, 0, this.vTargetPosition)

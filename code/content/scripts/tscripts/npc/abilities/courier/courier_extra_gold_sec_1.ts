@@ -37,7 +37,7 @@ export class modifier_courier_gold_sec_1 extends BaseModifier_Plus {
     gold_sec_min: number;
     gold_sec_max: number;
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.interval = this.GetSpecialValueFor("interval")
         this.gold_sec_min = this.GetSpecialValueFor("gold_sec_min")
         this.gold_sec_max = this.GetSpecialValueFor("gold_sec_max")

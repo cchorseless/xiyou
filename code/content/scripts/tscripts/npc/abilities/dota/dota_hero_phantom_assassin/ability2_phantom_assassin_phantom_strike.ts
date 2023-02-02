@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -76,7 +75,7 @@ export class modifier_phantom_assassin_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -129,7 +128,7 @@ export class modifier_phantom_assassin_2 extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_phantom_assassin_2_buff extends BaseModifier_Plus {
     bonus_attack_speed: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE)
     ignore_armor: number;
     IsHidden() {
         return false
@@ -149,7 +148,7 @@ export class modifier_phantom_assassin_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_attack_speed = this.GetSpecialValueFor("bonus_attack_speed")
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_phantom_assassin_custom_8"
@@ -157,15 +156,15 @@ export class modifier_phantom_assassin_2_buff extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         return this.bonus_attack_speed
     }
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_phantom_assassin_2_particle_phantom_assassin_phantom_strike_start extends modifier_particle_thinker {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

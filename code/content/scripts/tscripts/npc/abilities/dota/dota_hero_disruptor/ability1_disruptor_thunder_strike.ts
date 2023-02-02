@@ -1,16 +1,12 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
-import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
+import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_disruptor_thunder_strike = { "ID": "5458", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "FightRecapLevel": "1", "AbilitySound": "Hero_Disruptor.ThunderStrike.Target", "HasShardUpgrade": "1", "AbilityCastAnimation": "ACT_DOTA_THUNDER_STRIKE", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastPoint": "0.05 0.05 0.05 0.05", "AbilityCooldown": "18 15 12 9", "AbilityManaCost": "130 140 150 160", "AbilityCastRange": "800 800 800 800", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "240" }, "02": { "var_type": "FIELD_INTEGER", "strikes": "4", "LinkedSpecialBonus": "special_bonus_unique_disruptor" }, "03": { "var_type": "FIELD_FLOAT", "strike_interval": "2.0 2.0 2.0 2.0" }, "04": { "var_type": "FIELD_INTEGER", "strike_damage": "45 70 95 120", "LinkedSpecialBonus": "special_bonus_unique_disruptor_3" }, "05": { "var_type": "FIELD_FLOAT", "slow_duration": "0.1" }, "06": { "var_type": "FIELD_INTEGER", "slow_amount": "100" } } };
@@ -79,7 +75,7 @@ export class modifier_disruptor_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -146,7 +142,7 @@ export class modifier_disruptor_1_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()

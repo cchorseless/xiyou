@@ -1,6 +1,4 @@
 
-import { GameEnum } from "../../../shared/GameEnum";
-import { LogHelper } from "../../../helper/LogHelper";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
@@ -39,7 +37,7 @@ export class modifier_many_hp_bar extends BaseModifier_Plus {
         return 99
     }
 
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -60,13 +58,13 @@ export class modifier_many_hp_bar extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MIN_HEALTH)
-    CC_GetMinHealth(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MIN_HEALTH)
+    CC_GetMinHealth(params: IModifierTable) {
         return 1
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
-    CC_OnTakeDamage(params: ModifierTable) {
+    CC_OnTakeDamage(params: IModifierTable) {
         if (params.unit == this.GetParentPlus()) {
             let hParent = this.GetParentPlus()
             if (hParent.GetHealth() >= 1 && hParent.GetHealth() <= params.damage) {

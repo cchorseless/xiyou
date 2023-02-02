@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -78,13 +77,13 @@ export class modifier_sven_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_attack_range = this.GetSpecialValueFor("bonus_attack_range")
     }
 
@@ -131,11 +130,11 @@ export class modifier_sven_6 extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_sven_6_buff extends BaseModifier_Plus {
     gods_strength_damage: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     gods_strength_bonus_str: number;
     attenuation_interval: number;
     attenuation_percent: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
     str_percent: number;
     IsHidden() {
         return false
@@ -155,7 +154,7 @@ export class modifier_sven_6_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -200,7 +199,7 @@ export class modifier_sven_6_buff extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, false, 100, true, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.gods_strength_damage = this.GetSpecialValueFor("gods_strength_damage")
         this.gods_strength_bonus_str = this.GetSpecialValueFor("gods_strength_bonus_str")
@@ -214,11 +213,11 @@ export class modifier_sven_6_buff extends BaseModifier_Plus {
         this.gods_strength_bonus_str = this.gods_strength_bonus_str - this.GetSpecialValueFor("gods_strength_bonus_str") * this.attenuation_percent * 0.01
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
     GetBaseDamageOutgoing_Percentage(params: any) {
         return this.gods_strength_damage
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
     Get_AttackSound() {
         return ResHelper.GetSoundReplacement("Hero_Sven.GodsStrength.Attack", this.GetParentPlus())
     }

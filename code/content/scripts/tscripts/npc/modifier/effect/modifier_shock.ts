@@ -2,7 +2,6 @@
 import { GameFunc } from "../../../GameFunc";
 import { BattleHelper } from "../../../helper/BattleHelper";
 import { ResHelper } from "../../../helper/ResHelper";
-import { GameEnum } from "../../../shared/GameEnum";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
@@ -45,7 +44,7 @@ export class modifier_shock extends BaseModifier_Plus {
     /**上次伤害时间 */
     IsCooldown: boolean = false;
 
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let info: ResHelper.IParticleInfo = {
@@ -60,7 +59,7 @@ export class modifier_shock extends BaseModifier_Plus {
         }
 
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             let iShockStack = params.iShockStack;
             let duration = params.duration || modifier_shock.SHOCK_DURATION;
@@ -72,7 +71,7 @@ export class modifier_shock extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     OnShowTooltip() {
         return this.GetStackCount()
     }
@@ -97,8 +96,8 @@ export class modifier_shock extends BaseModifier_Plus {
     static Shock(target: IBaseNpc_Plus, hCaster: IBaseNpc_Plus, hAbility: IBaseAbility_Plus, iCount: number) {
         if (!IsServer()) { return };
         if (iCount > 0) {
-            let outpect = modifier_property.SumProps(hCaster, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_SHOCK_COUNT_PERCENTAGE);
-            let inpect = modifier_property.SumProps(target, null, GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_SHOCK_COUNT_PERCENTAGE);
+            let outpect = modifier_property.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_SHOCK_COUNT_PERCENTAGE);
+            let inpect = modifier_property.SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_COUNT_PERCENTAGE);
             iCount = math.floor(iCount * (1 + outpect * 0.01) * (1 + inpect * 0.01))
         }
         let iShockStack = math.min(iCount, modifier_shock.MAX_SHOCK_STACK)	//  触电层数

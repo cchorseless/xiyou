@@ -1,4 +1,3 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -64,7 +63,7 @@ export class modifier_leshrac_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -146,7 +145,7 @@ export class modifier_leshrac_1_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.duration = this.GetSpecialValueFor("duration")
         this.radius = this.GetSpecialValueFor("radius")
@@ -231,11 +230,11 @@ export class modifier_leshrac_1_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
     G_MAGICAL_ARMOR_BONUS() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_leshrac_custom_3")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_leshrac_custom_3")
@@ -283,7 +282,7 @@ export class modifier_leshrac_1_field extends BaseModifier_Plus {
     GetAuraDuration() {
         return 0.1
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.radius = this.GetSpecialValueFor("radius") + 25
         let hParent = this.GetParentPlus()
@@ -356,7 +355,7 @@ export class modifier_leshrac_1_field_aura extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.radius = this.GetSpecialValueFor("radius") + 25
         if (IsServer()) {
@@ -372,8 +371,8 @@ export class modifier_leshrac_1_field_aura extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, true, 10, false, false)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_LIMIT)
-    GetMoveSpeed_Limit(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_LIMIT)
+    GetMoveSpeed_Limit(params: IModifierTable) {
         if (IsServer()) {
             if (GameFunc.IsValid(this.GetParentPlus())) {
                 let vDirection = (this.vPosition - this.GetParentPlus().GetAbsOrigin()) as Vector

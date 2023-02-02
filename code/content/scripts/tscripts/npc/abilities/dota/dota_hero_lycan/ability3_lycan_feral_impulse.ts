@@ -1,7 +1,6 @@
 
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -73,7 +72,7 @@ export class modifier_lycan_3 extends BaseModifier_Plus {
     GetAura() {
         return "modifier_lycan_3_aura"
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
     }
 
@@ -103,11 +102,11 @@ export class modifier_lycan_3_aura extends BaseModifier_Plus {
     GetTexture() {
         return ResHelper.GetAbilityTextureReplacement("lycan_feral_impulse", this.GetCasterPlus())
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
     GetDamageOutgoing_Percentage() {
         let hCaster = this.GetCasterPlus()
         let extra_bonus_damage = (GameFunc.IsValid(hCaster) && hCaster.HasTalent("special_bonus_unique_lycan_custom_3")) && hCaster.GetTalentValue("special_bonus_unique_lycan_custom_3") || 0

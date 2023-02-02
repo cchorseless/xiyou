@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -7,8 +6,8 @@ import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle } from "../../../modifier/modifier_particle";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_slark_shadow_dance = { "ID": "5497", "AbilityType": "DOTA_ABILITY_TYPE_ULTIMATE", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "FightRecapLevel": "2", "AbilitySound": "Hero_Slark.ShadowDance", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_4", "AbilityDraftUltShardAbility": "slark_fish_bait", "AbilityCooldown": "80 65 50", "AbilityManaCost": "120 120 120", "AbilitySpecial": { "01": { "var_type": "FIELD_FLOAT", "duration": "4 4.25 4.5", "LinkedSpecialBonus": "special_bonus_unique_slark_3" }, "02": { "var_type": "FIELD_FLOAT", "fade_time": "0.0 0.0 0.0" }, "03": { "var_type": "FIELD_INTEGER", "bonus_movement_speed": "24 36 48" }, "04": { "var_type": "FIELD_INTEGER", "bonus_regen_pct": "5 6 7" }, "05": { "var_type": "FIELD_FLOAT", "activation_delay": "0.5 0.5 0.5" }, "06": { "var_type": "FIELD_FLOAT", "neutral_disable": "2.0 2.0 2.0" } } };
@@ -67,7 +66,7 @@ export class modifier_slark_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage_factor = this.GetSpecialValueFor("damage_factor")
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -124,7 +123,7 @@ export class modifier_slark_6 extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACKED)
-    attacked(params: ModifierTable) {
+    attacked(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         if (GameFunc.IsValid(hParent) && params.attacker == hParent && !params.attacker.IsIllusion() && !hParent.PassivesDisabled()) {
             if (!BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, hParent.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
@@ -162,7 +161,7 @@ export class modifier_slark_6 extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_slark_6_buff extends BaseModifier_Plus {
     bonus_attack_speed: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     bonus_max_attack_speed: number;
     scepter_bonus_all_stats: number;
     bHasScepter: boolean;
@@ -191,7 +190,7 @@ export class modifier_slark_6_buff extends BaseModifier_Plus {
     StatusEffectPriority() {
         return 10
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.bonus_attack_speed = this.GetSpecialValueFor("bonus_attack_speed")
         this.bonus_max_attack_speed = this.GetSpecialValueFor("bonus_max_attack_speed")
@@ -235,7 +234,7 @@ export class modifier_slark_6_buff extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_TRUESIGHT_IMMUNE]: true,
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_ALL_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_ALL_PERCENTAGE)
     G_STATS_ALL_PERCENTAGE() {
         if (this.bHasScepter) {
             return this.scepter_bonus_all_stats
@@ -243,7 +242,7 @@ export class modifier_slark_6_buff extends BaseModifier_Plus {
         return 0
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         this._tooltip = (this._tooltip || 0) % 2 + 1
         if (this._tooltip == 1) {
@@ -252,15 +251,15 @@ export class modifier_slark_6_buff extends BaseModifier_Plus {
             return this.bHasScepter && this.scepter_bonus_all_stats || 0
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     Get_ActivityTranslationModifiers() {
         return "shadow_dance"
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INVISIBILITY_LEVEL)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INVISIBILITY_LEVEL)
     GetInvisibilityLevel() {
         return 1
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         return this.bonus_attack_speed
     }
@@ -268,7 +267,7 @@ export class modifier_slark_6_buff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // -modifier_slark_6_particle_aoe// // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_slark_6_particle_aoe extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

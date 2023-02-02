@@ -1,18 +1,9 @@
 import { GameFunc } from "../../../../GameFunc";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { EntityHelper } from "../../../../helper/EntityHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
-import { modifier_shock } from "../../../modifier/effect/modifier_shock";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
-import { LogHelper } from "../../../../helper/LogHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 
 
 @registerAbility()
@@ -68,7 +59,7 @@ export class modifier_t29_permanent_immolation extends BaseModifier_Plus {
     GetAuraSearchFlags() {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.radius = this.GetSpecialValueFor("radius")
         if (IsClient()) {
@@ -83,7 +74,7 @@ export class modifier_t29_permanent_immolation extends BaseModifier_Plus {
             this.AddParticle(this.iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.radius = this.GetSpecialValueFor("radius")
         if (IsClient()) {
@@ -117,7 +108,7 @@ export class modifier_t29_permanent_immolation_debuff extends BaseModifier_Plus 
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.tick_interval = this.GetSpecialValueFor("tick_interval")
         this.mana_damage_per_second = this.GetSpecialValueFor("mana_damage_per_second")
@@ -138,7 +129,7 @@ export class modifier_t29_permanent_immolation_debuff extends BaseModifier_Plus 
             this.StartIntervalThink(this.tick_interval)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.tick_interval = this.GetSpecialValueFor("tick_interval")
         this.mana_damage_per_second = this.GetSpecialValueFor("mana_damage_per_second")

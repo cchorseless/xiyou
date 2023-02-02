@@ -1,16 +1,12 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
+import { modifier_particle } from "../../../modifier/modifier_particle";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 /** dota原技能数据 */
 export const Data_obsidian_destroyer_equilibrium = { "ID": "5684", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_PASSIVE", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_NO", "HasShardUpgrade": "1", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_5", "AbilityCastPoint": "0.75", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "proc_chance": "30" }, "02": { "var_type": "FIELD_INTEGER", "mana_restore": "20 30 40 50" }, "03": { "var_type": "FIELD_FLOAT", "mana_capacity_steal": "5" }, "04": { "var_type": "FIELD_FLOAT", "mana_capacity_duration": "30 40 50 60" } } };
 
@@ -80,7 +76,7 @@ export class modifier_obsidian_destroyer_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         this.chance = this.GetSpecialValueFor("chance")
@@ -90,7 +86,7 @@ export class modifier_obsidian_destroyer_3 extends BaseModifier_Plus {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hParent = this.GetParentPlus()
         this.chance = this.GetSpecialValueFor("chance")
@@ -111,7 +107,7 @@ export class modifier_obsidian_destroyer_3 extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
-    OnAbilityExecuted(params: ModifierTable) {
+    OnAbilityExecuted(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (params.ability == null || params.ability.IsItem() || !params.ability.ProcsMagicStick() || params.unit != hParent) {
@@ -189,7 +185,7 @@ export class modifier_obsidian_destroyer_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.pre_energy_mana_limit = this.GetSpecialValueFor("pre_energy_mana_limit") + hParent.GetTalentValue("special_bonus_unique_obsidian_destroyer_custom_7")
         if (IsServer()) {
@@ -201,11 +197,11 @@ export class modifier_obsidian_destroyer_3_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_BONUS)
-    EOM_GetModifierManaBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
+    EOM_GetModifierManaBonus(params: IModifierTable) {
         return this.GetStackCount() * this.pre_energy_mana_limit
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.GetStackCount() * this.pre_energy_mana_limit
     }
@@ -232,7 +228,7 @@ export class modifier_obsidian_destroyer_3_active extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.slow_duration = this.GetSpecialValueFor("slow_duration")
         if (IsClient() && params.IsOnCreated) {
             let iParticleID = ResHelper.CreateParticle({
@@ -247,7 +243,7 @@ export class modifier_obsidian_destroyer_3_active extends BaseModifier_Plus {
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
-    OnTakeDamage(params: ModifierTable) {
+    OnTakeDamage(params: IModifierTable) {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
@@ -279,7 +275,7 @@ export class modifier_obsidian_destroyer_3_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.movement_slow_percent = this.GetSpecialValueFor("movement_slow_percent")
         if (IsClient() && params.IsOnCreated) {
             let iParticleID = ResHelper.CreateParticle({
@@ -293,15 +289,15 @@ export class modifier_obsidian_destroyer_3_debuff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         return -this.movement_slow_percent
     }
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_obsidian_destroyer_3_particle_manasteal extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (IsClient()) {

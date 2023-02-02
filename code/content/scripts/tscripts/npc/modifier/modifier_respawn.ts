@@ -17,7 +17,7 @@ export class modifier_respawn extends BaseModifier_Plus {
     respawnTime: number = 3;
     /**复活handler */
     respawnHandler: () => void;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.respawnTime = params.respawnTime || this.respawnTime;

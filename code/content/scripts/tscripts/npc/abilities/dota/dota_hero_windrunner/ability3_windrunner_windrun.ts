@@ -3,7 +3,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
@@ -61,7 +60,7 @@ export class modifier_windrunner_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -169,24 +168,24 @@ export class modifier_windrunner_3_buff extends BaseModifier_Plus {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE
     }
     radius: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
     state_resistance: number;
     attack_interval: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
         this.state_resistance = this.GetSpecialValueFor("state_resistance")
         this.attack_interval = this.GetSpecialValueFor("attack_interval")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
     GetBaseAttackTimeConstant() {
         return this.attack_interval
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip() {
         return this.state_resistance
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
     GetDamageOutgoing_Percentage() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_windrunner_custom_6")
     }
@@ -220,7 +219,7 @@ export class modifier_windrunner_3_debuff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             this.StartIntervalThink(0.5)
@@ -228,7 +227,7 @@ export class modifier_windrunner_3_debuff extends BaseModifier_Plus {
     }
     per_damage: number;
     int_factor: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.per_damage = this.GetSpecialValueFor("per_damage")
         this.int_factor = this.GetSpecialValueFor("int_factor")
     }

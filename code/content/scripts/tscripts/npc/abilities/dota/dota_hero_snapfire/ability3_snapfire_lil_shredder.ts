@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -83,7 +82,7 @@ export class modifier_snapfire_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -144,7 +143,7 @@ export class modifier_snapfire_3_buff extends BaseModifier_Plus {
     reduce_armor_duration: number;
     base_attack_time: number;
     attack_stack: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     bonus_attack_speed: number;
     tAtkRecode: number[];
     IsHidden() {
@@ -165,7 +164,7 @@ export class modifier_snapfire_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -184,7 +183,7 @@ export class modifier_snapfire_3_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, 0, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         this.damage_percent = this.GetSpecialValueFor("damage_percent")
         this.bonus_attack_range = this.GetSpecialValueFor("bonus_attack_range")
@@ -267,23 +266,23 @@ export class modifier_snapfire_3_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ATTACK_DAMAGE)
-    GetOverrideAttackDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ATTACK_DAMAGE)
+    GetOverrideAttackDamage(params: IModifierTable) {
         return this.GetParentPlus().GetAverageTrueAttackDamage(this.GetParentPlus()) * this.damage_percent * 0.01
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
-    GetBaseAttackTimeConstant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
+    GetBaseAttackTimeConstant(params: IModifierTable) {
         return this.base_attack_time
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
-    GetAttackRangeBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
+    GetAttackRangeBonus(params: IModifierTable) {
         return this.bonus_attack_range
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         return this.bonus_attack_speed
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
     GetCastRangeBonusStacking(params: ModifierAbilityEvent) {
         if (IsServer()) {
             if (GameFunc.IsValid(params.ability) &&
@@ -320,7 +319,7 @@ export class modifier_snapfire_3_debuff_reduce_armor extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.reduce_armor = this.GetSpecialValueFor("reduce_armor")
         this.max_reduce_armor_stack = this.GetSpecialValueFor("max_reduce_armor_stack")
         this.mark_stack = this.GetSpecialValueFor("mark_stack")
@@ -346,11 +345,11 @@ export class modifier_snapfire_3_debuff_reduce_armor extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     EOM_GetModifierPhysicalArmorBonus() {
         return -this.reduce_armor * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
     EOM_GetModifierMagicalArmorBonus() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasTalent("special_bonus_unique_snapfire_custom_1")) {
             return -this.reduce_armor * this.GetStackCount()
@@ -358,7 +357,7 @@ export class modifier_snapfire_3_debuff_reduce_armor extends BaseModifier_Plus {
         return 0
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return -this.reduce_armor * this.GetStackCount()
     }
@@ -385,7 +384,7 @@ export class modifier_snapfire_3_debuff_mark extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             let iParticleID = ResHelper.CreateParticle({
@@ -421,8 +420,8 @@ export class modifier_snapfire_3_buff_projectile extends BaseModifier_Plus {
         return modifierpriority.MODIFIER_PRIORITY_SUPER_ULTRA
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return ResHelper.GetParticleReplacement("particles/units/heroes/hero_snapfire/hero_snapfire_shells_projectile.vpcf", this.GetParentPlus())
     }
 }

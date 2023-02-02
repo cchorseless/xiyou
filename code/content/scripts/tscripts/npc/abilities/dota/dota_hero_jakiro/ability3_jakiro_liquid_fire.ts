@@ -1,7 +1,4 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -58,14 +55,14 @@ export class modifier_jakiro_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
             this.records = []
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
         this.duration = this.GetSpecialValueFor("duration")
     }
@@ -194,8 +191,8 @@ export class modifier_jakiro_3_projectile extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_HIGH
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return "maps/reef_assets/particles/reef_effects_creep_null.vpcf"
     }
 }
@@ -230,13 +227,13 @@ export class modifier_jakiro_3_burn_debuff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(this.burn_interval)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.damage_int_factor = this.GetSpecialValueFor("damage_int_factor")
         this.burn_interval = this.GetSpecialValueFor("burn_interval")
@@ -262,11 +259,11 @@ export class modifier_jakiro_3_burn_debuff extends BaseModifier_Plus {
             BattleHelper.GoApplyDamage(damage_table)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
     G_STATUS_RESISTANCE_STACKING() {
         return -this.status_resistance
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
 
     On_Tooltip() {
         return this.status_resistance
@@ -305,7 +302,7 @@ export class modifier_jakiro_3_ice_debuff extends BaseModifier_Plus {
     //   GetEffectAttachType() {
     //  	return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     //  }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.shard_ice_damage_pct = this.GetSpecialValueFor("shard_ice_damage_pct")
         this.burn_interval = this.GetSpecialValueFor("burn_interval")
@@ -313,7 +310,7 @@ export class modifier_jakiro_3_ice_debuff extends BaseModifier_Plus {
             this.StartIntervalThink(this.burn_interval)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.shard_ice_damage_pct = this.GetSpecialValueFor("shard_ice_damage_pct")
         this.burn_interval = this.GetSpecialValueFor("burn_interval")

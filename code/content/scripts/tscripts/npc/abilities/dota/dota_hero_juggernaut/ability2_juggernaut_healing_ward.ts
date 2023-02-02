@@ -1,16 +1,11 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_kill } from "../../../modifier/modifier_kill";
-import { modifier_particle, modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_juggernaut_healing_ward = { "ID": "5029", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT", "AbilitySound": "Hero_Juggernaut.HealingWard.Cast", "SpellImmunityType": "SPELL_IMMUNITY_ALLIES_YES", "AbilityCastRange": "350", "AbilityCastPoint": "0.3 0.3 0.3 0.3", "AbilityCooldown": "60.0 60.0 60.0 60.0", "AbilityDuration": "25.0", "AbilityManaCost": "140", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "healing_ward_heal_amount": "2 3 4 5" }, "02": { "var_type": "FIELD_INTEGER", "healing_ward_aura_radius": "500" }, "03": { "var_type": "FIELD_INTEGER", "healing_ward_movespeed_tooltip": "350" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_2" };
@@ -75,7 +70,7 @@ export class modifier_juggernaut_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -190,7 +185,7 @@ export class modifier_juggernaut_2_aura extends BaseModifier_Plus {
     GetAuraDuration() {
         return 1
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             modifier_kill.apply(this.GetParentPlus(), this.GetParentPlus(), null, { duration: this.GetDuration() })
@@ -208,7 +203,7 @@ export class modifier_juggernaut_2_aura extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
     }
     OnDestroy() {
@@ -230,8 +225,8 @@ export class modifier_juggernaut_2_aura extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true,
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/heroes/juggernaut/jugg_healing_ward.vmdl", this.GetCasterPlus())
     }
 }
@@ -257,7 +252,7 @@ export class modifier_juggernaut_2_crit_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()
@@ -272,14 +267,14 @@ export class modifier_juggernaut_2_crit_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, true, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_crit_damage = this.GetSpecialValueFor("bonus_crit_damage")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE)
     G_CRITICALSTRIKE_DAMAGE() {
         return this.bonus_crit_damage
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.bonus_crit_damage
     }

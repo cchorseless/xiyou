@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -64,7 +63,7 @@ export class modifier_skywrath_mage_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.duration = this.GetSpecialValueFor("duration")
         this.chance = this.GetSpecialValueFor("chance")
         this.int_factor = this.GetSpecialValueFor("int_factor")
@@ -73,7 +72,7 @@ export class modifier_skywrath_mage_3 extends BaseModifier_Plus {
 
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
-    takeDamage(params: ModifierTable) {
+    takeDamage(params: IModifierTable) {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
@@ -92,7 +91,7 @@ export class modifier_skywrath_mage_3 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_PERCENTAGE)
     EOM_GetModifierOutgoingMagicalDamagePercentage() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return math.floor(this.GetParentPlus().GetIntellect() / this.int_factor) * this.int_factor_magical_damage_pct
@@ -122,7 +121,7 @@ export class modifier_skywrath_mage_3_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.resist_debuff_percent = this.GetSpecialValueFor("resist_debuff_percent") + hCaster.GetTalentValue("special_bonus_unique_skywrath_mage_custom_6")
         if (IsServer()) {
@@ -133,11 +132,11 @@ export class modifier_skywrath_mage_3_debuff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE)
     G_INCOMING_MAGICAL_DAMAGE_PERCENTAGE() {
         return this.resist_debuff_percent * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
 
     tooltip() {
         return this.resist_debuff_percent * this.GetStackCount()

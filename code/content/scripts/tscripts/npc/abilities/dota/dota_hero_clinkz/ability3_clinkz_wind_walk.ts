@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -54,13 +53,13 @@ export class modifier_clinkz_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.records = []
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage_bonus = this.GetSpecialValueFor("damage_bonus")
         this.agi_damage_factor = this.GetSpecialValueFor("agi_damage_factor")
     }
@@ -89,7 +88,7 @@ export class modifier_clinkz_3 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage(params: ModifierAttackEvent) {
         if (GameFunc.IsValid(params.attacker) && GameFunc.IsValid(params.target)) {
             let hCaster = (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().IsSummoned() && GameFunc.IsValid(this.GetCasterPlus().GetSummoner())) && this.GetCasterPlus().GetSummoner() || this.GetCasterPlus()
@@ -187,8 +186,8 @@ export class modifier_clinkz_3_projectile extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_ULTRA
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return ResHelper.GetParticleReplacement("particles/units/heroes/hero_clinkz/clinkz_searing_arrow.vpcf", this.GetCasterPlus())
     }
 }

@@ -1,6 +1,5 @@
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -67,7 +66,7 @@ export class modifier_monkey_king_3 extends BaseModifier_Plus {
     EOM_GetModifierLifestealAmplify_Percentage() {
         return this.GetSpecialValueFor("bonus_lifesteal")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE)
     On_AttackLanded(params: ModifierAttackEvent) {
         if (params.target == null || params.target.GetClassname() == "dota_item_drop") {
             return
@@ -113,7 +112,7 @@ export class modifier_monkey_king_3_counter extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.required_hits = this.GetSpecialValueFor("required_hits")
         this.max_duration = this.GetSpecialValueFor("max_duration")
@@ -131,7 +130,7 @@ export class modifier_monkey_king_3_counter extends BaseModifier_Plus {
             this.AddParticle(this.iParticleID, false, false, -1, false, true)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.required_hits = this.GetSpecialValueFor("required_hits")
         this.max_duration = this.GetSpecialValueFor("max_duration")
@@ -187,7 +186,7 @@ export class modifier_monkey_king_3_buff extends BaseModifier_Plus {
     ShouldUseOverheadOffset() {
         return true
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
@@ -218,17 +217,17 @@ export class modifier_monkey_king_3_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_damage_ptg = this.GetSpecialValueFor("bonus_damage_ptg")
         this.bonus_lifesteal = this.GetSpecialValueFor("bonus_lifesteal")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE)
 
     G_LIFESTEAL_AMPLIFY_PERCENTAGE() {
         return this.bonus_lifesteal
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
-    GetDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    GetDamageOutgoing_Percentage(params: IModifierTable) {
         return this.bonus_damage_ptg
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
@@ -242,7 +241,7 @@ export class modifier_monkey_king_3_buff extends BaseModifier_Plus {
             modifier_monkey_king_3_particle_monkey_king_quad_tap_hit.apply(caster, target, this.GetAbilityPlus(), { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     Get_ActivityTranslationModifiers() {
         if (this.GetStackCount() > 0) {
             return "iron_cudgel_charged_attack"
@@ -252,7 +251,7 @@ export class modifier_monkey_king_3_buff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_monkey_king_3_particle_monkey_king_quad_tap_hit extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

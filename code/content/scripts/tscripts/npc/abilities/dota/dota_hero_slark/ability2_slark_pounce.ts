@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -96,13 +95,13 @@ export class modifier_slark_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.shard_amplify_damage_pct = this.GetSpecialValueFor("shard_amplify_damage_pct")
     }
 
@@ -147,7 +146,7 @@ export class modifier_slark_2 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     EOM_GetModifierOutgoingDamagePercentage(params: ModifierAttackEvent) {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && params != null && modifier_slark_2_leash.exist(params.target)) {
             return this.shard_amplify_damage_pct
@@ -181,7 +180,7 @@ export class modifier_slark_2_leash extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -200,8 +199,8 @@ export class modifier_slark_2_leash extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_LIMIT)
-    GetMoveSpeed_Limit(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_LIMIT)
+    GetMoveSpeed_Limit(params: IModifierTable) {
         if (IsServer() && this.vPosition != null) {
             let hParent = this.GetParentPlus()
             let vDirection = (this.vPosition - hParent.GetAbsOrigin()) as Vector
@@ -238,7 +237,7 @@ export class modifier_slark_2_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         this.leash_radius = this.GetSpecialValueFor("leash_radius")
         if (IsClient()) {
@@ -277,7 +276,7 @@ export class modifier_slark_2_thinker extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_slark_2_particle_slark_pounce_start extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

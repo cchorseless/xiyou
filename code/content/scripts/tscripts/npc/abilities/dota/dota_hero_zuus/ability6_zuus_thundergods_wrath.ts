@@ -97,7 +97,7 @@ export class ability6_zuus_thundergods_wrath extends BaseAbility_Plus {
 @registerModifier()
 export class modifier_zuus_6_particle_damage extends modifier_particle {
     tDamageTable: BattleHelper.DamageOptions;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
@@ -125,7 +125,7 @@ export class modifier_zuus_6_particle_damage extends modifier_particle {
 
 @registerModifier()
 export class modifier_zuus_6_particle_pre extends modifier_particle_thinker {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (!IsServer()) {
             let iParticleID = ResHelper.CreateParticle({

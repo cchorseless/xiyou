@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -246,7 +245,7 @@ export class modifier_void_spirit_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -328,7 +327,7 @@ export class modifier_void_spirit_2_buff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iPtclID = ResHelper.CreateParticle({
@@ -343,7 +342,7 @@ export class modifier_void_spirit_2_buff extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.base_absorb_amount = this.GetSpecialValueFor("base_absorb_amount")
     }
     OnDestroy() {
@@ -352,7 +351,7 @@ export class modifier_void_spirit_2_buff extends BaseModifier_Plus {
             this.GetParentPlus().EmitSound('Hero_VoidSpirit.Pulse.Destroy')
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage() {
         return this.base_absorb_amount
     }
@@ -380,7 +379,7 @@ export class modifier_void_spirit_2_hit_charge extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.absorb_per_hero_hit = this.GetSpecialValueFor("absorb_per_hero_hit")
         if (IsServer()) {
             this.IncrementStackCount()
@@ -390,7 +389,7 @@ export class modifier_void_spirit_2_hit_charge extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage() {
         return this.absorb_per_hero_hit * this.GetStackCount()
     }

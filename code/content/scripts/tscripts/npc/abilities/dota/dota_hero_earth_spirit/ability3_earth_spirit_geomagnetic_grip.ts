@@ -1,16 +1,9 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
-import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
+import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
 
 /** dota原技能数据 */
 export const Data_earth_spirit_geomagnetic_grip = { "ID": "5610", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_FRIENDLY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP", "AbilityUnitTargetFlags": "DOTA_UNIT_TARGET_FLAG_INVULNERABLE", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "FightRecapLevel": "1", "AbilitySound": "Hero_EarthSpirit.GeomagneticGrip.Target", "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_3", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastRange": "1100", "AbilityCastPoint": "0.01", "AbilityCooldown": "13", "AbilityManaCost": "100", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "180" }, "02": { "var_type": "FIELD_INTEGER", "rock_damage": "50 100 150 200" }, "03": { "var_type": "FIELD_FLOAT", "duration": "2 2.5 3 3.5", "LinkedSpecialBonus": "special_bonus_unique_earth_spirit_5" }, "04": { "var_type": "FIELD_FLOAT", "pull_units_per_second_heroes": "600" }, "05": { "var_type": "FIELD_FLOAT", "pull_units_per_second": "900" }, "06": { "var_type": "FIELD_INTEGER", "speed": "800" }, "07": { "var_type": "FIELD_FLOAT", "total_pull_distance": "1400" } } };
@@ -103,7 +96,7 @@ export class modifier_earth_spirit_3 extends BaseModifier_Plus {
             }
         }
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         this.max_count = this.GetSpecialValueFor("max_count")
@@ -116,7 +109,7 @@ export class modifier_earth_spirit_3 extends BaseModifier_Plus {
             this.Init()
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         this.max_count = this.GetSpecialValueFor("max_count")
@@ -225,7 +218,7 @@ export class modifier_earth_spirit_3 extends BaseModifier_Plus {
         return false
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TELEPORTED)
-    teleported(params: ModifierTable) {
+    teleported(params: IModifierTable) {
         if (IsServer() && params.unit == this.GetParentPlus()) {
             let origin = this.GetParentPlus().GetAbsOrigin()
             for (let hStone of (this.tStones)) {
@@ -258,7 +251,7 @@ export class modifier_earth_spirit_3_cd extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.stone_interval = this.GetSpecialValueFor("stone_interval")
@@ -302,7 +295,7 @@ export class modifier_earth_spirit_3_stone extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()

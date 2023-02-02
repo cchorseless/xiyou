@@ -1,7 +1,6 @@
 
 import { GameFunc } from "../../GameFunc";
 import { ResHelper } from "../../helper/ResHelper";
-import { GameEnum } from "../../shared/GameEnum";
 import { BaseModifierMotionBoth_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
 
@@ -30,7 +29,7 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
     leap_traveled: number;
     sound: string;
     animation: GameActivity_t;
-    Init(kv: ModifierTable) {
+    Init(kv: IModifierTable) {
         if (IsServer()) {
             if (this.ApplyHorizontalMotionController() == false || this.ApplyVerticalMotionController() == false) {
                 this.Destroy();
@@ -76,7 +75,7 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
         return state;
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     g_OverrideAnimation() {
         return this.animation || GameActivity_t.ACT_DOTA_FLAIL;
     }

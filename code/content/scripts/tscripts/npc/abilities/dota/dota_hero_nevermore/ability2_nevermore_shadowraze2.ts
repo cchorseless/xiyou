@@ -1,14 +1,9 @@
-import { GameEnum } from "../../../../shared/GameEnum";
-import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 import { modifier_particle } from "../../../modifier/modifier_particle";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
 export const Data_nevermore_shadowraze2 = { "ID": "5060", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING", "OnLearnbar": "0", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "FightRecapLevel": "1", "LinkedAbility": "nevermore_shadowraze3", "AbilityCastAnimation": "ACT_DOTA_RAZE_2", "AbilityCastGestureSlot": "DEFAULT", "AbilityCastPoint": "0.55", "AbilityCooldown": "10", "AbilityManaCost": "75 80 85 90", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "shadowraze_damage": "90 160 230 300", "LinkedSpecialBonus": "special_bonus_unique_nevermore_2" }, "02": { "var_type": "FIELD_INTEGER", "shadowraze_radius": "250" }, "03": { "var_type": "FIELD_INTEGER", "shadowraze_range": "450" }, "04": { "var_type": "FIELD_INTEGER", "shadowraze_cooldown": "3" }, "05": { "var_type": "FIELD_INTEGER", "stack_bonus_damage": "50 60 70 80", "CalculateSpellDamageTooltip": "0" }, "06": { "var_type": "FIELD_FLOAT", "duration": "8" } } };
@@ -77,7 +72,7 @@ export class modifier_nevermore_2 extends BaseModifier_Plus {
     GetTexture() {
         return "nevermore_necromastery"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
 
         if (IsClient()) {
             this.iParticleID = ResHelper.CreateParticle({
@@ -91,7 +86,7 @@ export class modifier_nevermore_2 extends BaseModifier_Plus {
             this.AddParticle(this.iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.necromastery_damage_per_soul = this.GetSpecialValueFor("necromastery_damage_per_soul")
         this.necromastery_max_souls = this.GetSpecialValueFor("necromastery_max_souls")
         this.necromastery_max_souls_scepter = this.GetSpecialValueFor("necromastery_max_souls_scepter")
@@ -107,8 +102,8 @@ export class modifier_nevermore_2 extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let extra_necromastery_max_souls = hCaster.HasTalent("special_bonus_unique_nevermore_custom_3") && hCaster.GetTalentValue("special_bonus_unique_nevermore_custom_3") || 0
         let necromastery_max_souls = hCaster.HasScepter() && this.necromastery_max_souls_scepter || this.necromastery_max_souls
@@ -117,8 +112,8 @@ export class modifier_nevermore_2 extends BaseModifier_Plus {
         let necromastery_damage_per_soul = this.necromastery_damage_per_soul + extra_necromastery_damage_per_soul
         return math.min(this.GetStackCount(), necromastery_max_souls) * necromastery_damage_per_soul
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    EOM_GetModifierSpellAmplifyBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    EOM_GetModifierSpellAmplifyBonus(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (hCaster.HasShard()) {
             let extra_necromastery_max_souls = hCaster.HasTalent("special_bonus_unique_nevermore_custom_3") && hCaster.GetTalentValue("special_bonus_unique_nevermore_custom_3") || 0
@@ -129,7 +124,7 @@ export class modifier_nevermore_2 extends BaseModifier_Plus {
         return 0
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    OnDeath(params: ModifierTable) {
+    OnDeath(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         if (!hParent.IsIllusion() && params.unit.IsPositionInRange(hParent.GetAbsOrigin(), this.requiem_radius) && !hParent.PassivesDisabled()) {
             let iCount = 1
@@ -147,7 +142,7 @@ export class modifier_nevermore_2 extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_nevermore_2_particle_nevermore_necro_souls extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

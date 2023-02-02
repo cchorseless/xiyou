@@ -10,14 +10,14 @@ import { registerModifier } from "../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../propertystat/modifier_event";
 @registerModifier()
 export class modifier_activity extends BaseModifier_Plus {
-    params: ModifierTable;
+    params: IModifierTable;
     _move: any;
     _attack_range: any;
     _attackspeed: any;
 
     GetAttributes() { return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             this.params = params;
         }

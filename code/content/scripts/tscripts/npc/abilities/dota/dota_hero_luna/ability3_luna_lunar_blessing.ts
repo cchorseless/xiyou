@@ -1,5 +1,4 @@
 import { GameFunc } from "../../../../GameFunc";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -49,7 +48,7 @@ export class modifier_luna_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(1)
@@ -112,7 +111,7 @@ export class modifier_luna_3_hidden extends BaseModifier_Plus {
     GetAura() {
         return "modifier_luna_3_effect"
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
     }
 }
@@ -137,22 +136,22 @@ export class modifier_luna_3_effect extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.bonus_attribute = this.GetSpecialValueFor("bonus_attribute")
         this.primary_attribute_damage = this.GetSpecialValueFor("primary_attribute_damage")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_PRIMARY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_PRIMARY_BONUS)
     G_STATS_PRIMARY_BONUS() {
         return this.bonus_attribute + (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_luna_custom_8") || 0)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
     EOM_GetModifierBaseAttack_BonusDamage() {
         return this.GetParentPlus().GetPrimaryStatValue() * this.primary_attribute_damage
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip() {
         this._tooltip = (this._tooltip || 0) % 4 + 1
         if (this._tooltip == 1) {

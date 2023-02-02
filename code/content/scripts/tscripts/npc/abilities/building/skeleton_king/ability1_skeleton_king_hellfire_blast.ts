@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_particle } from "../../../modifier/modifier_particle";
@@ -181,7 +180,7 @@ export class modifier_skeleton_king_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -262,7 +261,7 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let extra_damage_factor = this.GetCasterPlus().HasTalent("special_bonus_unique_skeleton_king_custom_4") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_skeleton_king_custom_4") || 0
         this.damage_per_second = this.GetSpecialValueFor("damage_per_second") + extra_damage_factor * this.GetCasterPlus().GetStrength()
@@ -285,7 +284,7 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let extra_damage_factor = this.GetCasterPlus().HasTalent("special_bonus_unique_skeleton_king_custom_4") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_skeleton_king_custom_4") || 0
         this.damage_per_second = this.GetSpecialValueFor("damage_per_second") + extra_damage_factor * this.GetCasterPlus().GetStrength()
@@ -299,8 +298,8 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_ROOTED]: true
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE)
-    EOM_GetModifierIgnorePhysicalArmorPercentageTarget(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE)
+    EOM_GetModifierIgnorePhysicalArmorPercentageTarget(params: IModifierTable) {
         if (IsServer() && this.bUseEnergy) {
             //  骷髅王无视护甲
             if (params.attacker == this.GetCasterPlus()) {
@@ -408,13 +407,13 @@ export class modifier_special_bonus_unique_skeleton_king_custom_1 extends BaseMo
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_attackspeed = this.GetCasterPlus().GetTalentValue("special_bonus_unique_skeleton_king_custom_1")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         return this.bonus_attackspeed
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
@@ -427,7 +426,7 @@ export class modifier_special_bonus_unique_skeleton_king_custom_1 extends BaseMo
 // 特效
 @registerModifier()
 export class modifier_skeleton_king_1_particle_warmup extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({

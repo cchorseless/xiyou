@@ -9,7 +9,6 @@ import { EntityHelper } from "./helper/EntityHelper";
 import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { NetTablesHelper } from "./helper/NetTablesHelper";
-import { ability_propertytool } from "./npc/propertystat/ability_propertytool";
 import { Enum_MODIFIER_EVENT, EventDataType, IBuffEventData, modifier_event } from "./npc/propertystat/modifier_event";
 import { modifier_property } from "./npc/propertystat/modifier_property";
 import { BuildingSystemComponent } from "./rules/System/BuildingSystemComponent";
@@ -23,6 +22,7 @@ import { PublicBagSystemComponent } from "./rules/System/PublicBagSystemComponen
 import { RoundSystemComponent } from "./rules/System/RoundSystemComponent";
 import { WearableSystemComponent } from "./rules/System/WearableSystemComponent";
 import { GameEnum } from "./shared/GameEnum";
+import { GameProtocol } from "./shared/GameProtocol";
 import { ET, ETGameSceneRoot } from "./shared/lib/Entity";
 
 /**
@@ -181,7 +181,7 @@ export class GameScene {
             }
         }));
         // 道具位置改变
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_ITEM_SLOT_CHANGE, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_ITEM_SLOT_CHANGE, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
             let playerid = event.PlayerID;
             let hero = GPlayerEntityRoot.GetOneInstance(playerid).Hero!;
             if (hero != null) {
@@ -198,7 +198,7 @@ export class GameScene {
             }
         }));
         // 道具给人
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_ITEM_GIVE_NPC, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_ITEM_GIVE_NPC, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
             let playerid = event.PlayerID;
             let itemslot = event.data.slot;
             let npcentindex = event.data.npc;
@@ -227,7 +227,7 @@ export class GameScene {
             event.state = true;
         }));
         // 道具仍在地上
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_ITEM_DROP_POSITION, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_ITEM_DROP_POSITION, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
             let playerid = event.PlayerID;
             let itemslot = event.data.slot;
             let itementityid = event.data.itementityid;
@@ -322,9 +322,6 @@ export class GameScene {
             return;
         }
         if (EntityHelper.checkIsFirstSpawn(spawnedUnit)) {
-            if (!spawnedUnit.HasAbility(ability_propertytool.name)) {
-                spawnedUnit.AddAbility(ability_propertytool.name);
-            }
             modifier_property.applyOnly(spawnedUnit, spawnedUnit);
             // spawnedUnit.SetMaximumGoldBounty(0);
             // spawnedUnit.SetMinimumGoldBounty(0);
@@ -361,7 +358,6 @@ export class GameScene {
         }
         let allCB = GGameCache.allCustomProtocolEvent[event.protocol] || [];
         GLogHelper.DeepPrintTable(event);
-        GLogHelper.print("CBcount: " + allCB.length)
         event.sendClientCB = () => {
             event.sendClientCB = null;
             if (event.hasCB) {

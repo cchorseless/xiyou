@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -58,15 +57,15 @@ export class modifier_death_prophet_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.chance = this.GetSpecialValueFor("chance")
         this.radius = this.GetSpecialValueFor("radius")
         this.duration = this.GetSpecialValueFor("duration")
         this.damage_increase = this.GetSpecialValueFor("damage_increase")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (params == null) {
             return
         }
@@ -81,7 +80,7 @@ export class modifier_death_prophet_3 extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
-    OnAbilityExecuted(params: ModifierTable) {
+    OnAbilityExecuted(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hCaster = params.unit
         if (hCaster != null && hCaster == hParent && !hCaster.IsIllusion()) {
@@ -146,7 +145,7 @@ export class modifier_death_prophet_3_silence extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()

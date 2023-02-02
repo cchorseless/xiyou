@@ -1,4 +1,3 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -82,7 +81,7 @@ export class modifier_sniper_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -168,7 +167,7 @@ export class modifier_sniper_1_thinker extends BaseModifier_Plus {
     GetAura() {
         return "modifier_sniper_1_debuff"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
@@ -259,7 +258,7 @@ export class modifier_sniper_1_debuff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         // let modifier_sniper_1_debuff_table = Load(hParent, "modifier_sniper_1_debuff_table") || {}
@@ -271,7 +270,7 @@ export class modifier_sniper_1_debuff extends BaseModifier_Plus {
             this.StartIntervalThink(1)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.slow_movement_speed = this.GetSpecialValueFor("slow_movement_speed")
         this.shrapnel_damage = this.GetSpecialValueFor("shrapnel_damage")
         this.shrapnel_damage_per_agi = this.GetSpecialValueFor("shrapnel_damage_per_agi")
@@ -306,8 +305,8 @@ export class modifier_sniper_1_debuff extends BaseModifier_Plus {
             BattleHelper.GoApplyDamage(tDamageTable)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         if (!GameFunc.IsValid(this.GetCasterPlus()) || !GameFunc.IsValid(this.GetAbilityPlus())) {
             return
         }
@@ -323,7 +322,7 @@ export class modifier_sniper_1_debuff extends BaseModifier_Plus {
 export class modifier_sniper_1_particle_sniper_shrapnel extends modifier_particle {
     vDirection: Vector;
     radius: number;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

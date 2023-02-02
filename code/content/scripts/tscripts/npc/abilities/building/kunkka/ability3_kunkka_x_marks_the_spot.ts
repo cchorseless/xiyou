@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -96,14 +95,14 @@ export class modifier_kunkka_3 extends BaseModifier_Plus {
     DestroyOnExpire() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.records = []
             this.StartIntervalThink(0)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.cleave_start_length = this.GetSpecialValueFor("cleave_start_length")
         this.cleave_end_length = this.GetSpecialValueFor("cleave_end_length")
         this.cleave_distance = this.GetSpecialValueFor("cleave_distance")
@@ -134,8 +133,8 @@ export class modifier_kunkka_3 extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         if (IsServer() && params.attacker != null && this.records.indexOf(params.record) != -1) {
             let extar_attack_bonus = params.attacker.HasTalent("special_bonus_unique_kunkka_custom_5") && params.attacker.GetTalentValue("special_bonus_unique_kunkka_custom_5") || 0
@@ -207,7 +206,7 @@ export class modifier_kunkka_3 extends BaseModifier_Plus {
             }
         }
     }
-    // @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
     // Get_AttackSound() {
     //     if (IsServer() && params.attacker != null) {
     //         if (TableFindKey(this.records, params.record) != null) {
@@ -237,7 +236,7 @@ export class modifier_kunkka_3_animation extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     Get_ActivityTranslationModifiers() {
         return "tidebringer"
     }
@@ -272,13 +271,13 @@ export class modifier_kunkka_3_tide extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.records = []
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.cleave_start_length = this.GetSpecialValueFor("cleave_start_length")
         this.cleave_end_length = this.GetSpecialValueFor("cleave_end_length")
         this.cleave_distance = this.GetSpecialValueFor("cleave_distance")
@@ -373,8 +372,8 @@ export class modifier_kunkka_3_tide extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
+    EOM_GetModifierCriticalStrike(params: IModifierTable) {
         if (this.records.indexOf(params.record) != modifier_kunkka_3.GetStackIn(this.GetCasterPlus())) {
             if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
                 return this.shard_tide_damage_crit
@@ -408,7 +407,7 @@ export class modifier_kunkka_3_ebb extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.ebb_damage_pct = this.GetSpecialValueFor("ebb_damage_pct")
         this.base_attack_bonus = this.GetSpecialValueFor("base_attack_bonus")
         this.ebb_attack_time = this.GetSpecialValueFor("ebb_attack_time")
@@ -440,16 +439,16 @@ export class modifier_kunkka_3_ebb extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         let extar_attack_bonus = this.GetParentPlus().HasTalent("special_bonus_unique_kunkka_custom_5") && this.GetParentPlus().GetTalentValue("special_bonus_unique_kunkka_custom_5") || 0
         let atk = (this.base_attack_bonus + extar_attack_bonus) * this.ebb_damage_pct * 0.01
         //  pipixia add 附加生命最大值攻擊
         atk = atk + this.GetCasterPlus().GetMaxHealth() * this.add_atk_pct_perS / 100;
         return atk
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
-    GetBaseAttackTimeConstant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
+    GetBaseAttackTimeConstant(params: IModifierTable) {
         return 1.3 - this.ebb_attack_time
     }
 }
@@ -514,7 +513,7 @@ export class modifier_kunkka_3_talent extends BaseModifier_Plus {
             }
         }
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.max_charge = 1
         this.interval = this.GetCasterPlus().GetTalentValue("special_bonus_unique_kunkka_custom_8")
@@ -522,7 +521,7 @@ export class modifier_kunkka_3_talent extends BaseModifier_Plus {
             this.Init()
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.max_charge = 1
         this.interval = this.GetCasterPlus().GetTalentValue("special_bonus_unique_kunkka_custom_8")
@@ -547,7 +546,7 @@ export class modifier_kunkka_3_talent extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_kunkka_3_particle_weapon extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let caster = this.GetCasterPlus()

@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -69,7 +68,7 @@ export class modifier_enchantress_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -77,7 +76,7 @@ export class modifier_enchantress_3 extends BaseModifier_Plus {
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
-    order(params: ModifierTable) {
+    order(params: IModifierTable) {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus() as ability3_enchantress_natures_attendants
             if (params.issuer_player_index != -1 && params.ability == hAbility) {
@@ -176,7 +175,7 @@ export class modifier_enchantress_3_thinker extends BaseModifier_Plus {
     GetAura() {
         return 'modifier_enchantress_3_allies'
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -285,7 +284,7 @@ export class modifier_enchantress_3_thinker extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // -modifier_enchantress_3_allies// // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_enchantress_3_allies extends BaseModifier_Plus {
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE)
     pure_damage: number;
     IsHidden() {
         return false
@@ -305,7 +304,7 @@ export class modifier_enchantress_3_allies extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.pure_damage = this.GetSpecialValueFor("pure_damage")
         if (params.IsOnCreated && IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
@@ -321,7 +320,7 @@ export class modifier_enchantress_3_allies extends BaseModifier_Plus {
 
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.pure_damage
     }

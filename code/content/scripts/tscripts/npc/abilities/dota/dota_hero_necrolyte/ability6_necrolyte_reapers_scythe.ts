@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -144,7 +143,7 @@ export class modifier_necrolyte_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -216,8 +215,8 @@ export class modifier_necrolyte_6 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE)
-    EOM_GetModifierIgnoreMagicalArmorPercentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE)
+    EOM_GetModifierIgnoreMagicalArmorPercentage(params: IModifierTable) {
         if (IsServer()) {
             if (params != null && params.inflictor == this.GetAbilityPlus()) {
                 return this.GetCasterPlus().GetTalentValue("special_bonus_unique_necrolyte_custom_7")
@@ -252,7 +251,7 @@ export class modifier_necrolyte_6_stun extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hTarget = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_necrolyte_custom_6"
@@ -321,18 +320,18 @@ export class modifier_necrolyte_6_stun extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_DISABLED
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MIN_HEALTH)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MIN_HEALTH)
     GetMinHealth() {
         if (!this.passing) {
             return 1
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
-    OnTakeDamage(params: ModifierTable) {
+    OnTakeDamage(params: IModifierTable) {
         if (GameFunc.IsValid(params.unit) && params.unit == this.GetParentPlus() && !this.passing) {
             if (params.damage >= params.unit.GetHealth()) {
                 this.passing = true

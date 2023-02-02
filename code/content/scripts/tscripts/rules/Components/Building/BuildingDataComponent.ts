@@ -1,22 +1,18 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
-import { serializeETProps } from "../../../shared/lib/Entity";
 import { ChessDataComponent } from "../ChessControl/ChessDataComponent";
 /**塔防组件 */
 @GReloadable
-export class BuildingComponent extends ChessDataComponent {
+export class BuildingDataComponent extends ChessDataComponent {
 
     private iGoldCost: number;
     /**累计造成伤害 */
     public fDamage: number;
-    @serializeETProps()
-    public PrimaryAttribute: number = 1;
+
     onAwake() {
         super.onAwake();
         this.iStar = 1;
-        this.PrimaryAttribute = GameFunc.AsAttribute(this.Domain.ETRoot.As<IBuildingEntityRoot>().Config().AttributePrimary);
     }
 
     /**金币价格 */

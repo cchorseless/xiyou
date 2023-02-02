@@ -1,17 +1,13 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_poison } from "../../../modifier/effect/modifier_poison";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
-import { modifier_particle } from "../../../modifier/modifier_particle";
 import { ability1_venomancer_venomous_gale } from "./ability1_venomancer_venomous_gale";
 
 /** dota原技能数据 */
@@ -75,7 +71,7 @@ export class modifier_venomancer_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.sting_duration = this.GetSpecialValueFor("sting_duration")
         this.sting_poison_count = this.GetSpecialValueFor("sting_poison_count")
         this.active_poison_percent = this.GetSpecialValueFor("active_poison_percent")
@@ -138,12 +134,12 @@ export class modifier_venomancer_3_attack_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.sting_movement_slow = this.GetSpecialValueFor("sting_movement_slow")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage() {
 
         let hCaster = this.GetCasterPlus()

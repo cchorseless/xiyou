@@ -1,5 +1,4 @@
 import { GameFunc } from "../../../../GameFunc";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -51,12 +50,12 @@ export class modifier_dragon_knight_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_health_percent = this.GetSpecialValueFor("bonus_health_percent")
         this.dragon_bonus_health_percent = this.GetSpecialValueFor("dragon_bonus_health_percent")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
     EOM_GetModifierHealthPercentage() {
         let hParent = this.GetParentPlus()
         let bIsDragon = modifier_dragon_knight_6_form.findIn(hParent)
@@ -66,7 +65,7 @@ export class modifier_dragon_knight_3 extends BaseModifier_Plus {
         return this.bonus_health_percent
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    OnDeath(params: ModifierTable) {
+    OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker
         if (GameFunc.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
             if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
@@ -102,7 +101,7 @@ export class modifier_dragon_knight_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.bonus_health_per_kill = this.GetSpecialValueFor("bonus_health_per_kill")
         let iStackCount = this.GetStackCount()
@@ -123,22 +122,22 @@ export class modifier_dragon_knight_3_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     EOM_GetModifierHealthBonus() {
         return this.GetStackCount() * this.bonus_health_per_kill
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.GetStackCount() * this.bonus_health_per_kill
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     EOM_GetModifierSpellAmplifyBonus() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetStackCount() * this.GetCasterPlus().GetTalentValue("special_bonus_unique_dragon_knight_custom_8")
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetStackCount() * this.GetCasterPlus().GetTalentValue("special_bonus_unique_dragon_knight_custom_8")

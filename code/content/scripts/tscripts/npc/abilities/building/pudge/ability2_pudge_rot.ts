@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -93,7 +92,7 @@ export class modifier_pudge_2_buff extends BaseModifier_Plus {
     GetAuraRadius() {
         return this.GetSpecialValueFor("radius")
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -180,14 +179,14 @@ export class modifier_pudge_2_buff extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         if (this.GetParentPlus() == this.GetCasterPlus()) {
             return 0
         }
         return -this.reduce_move_speed_pct
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_PERCENTAGE)
     EOM_GetModifierMagicalArmorPercentage() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return -this.GetCasterPlus().GetTalentValue("special_bonus_unique_pudge_custom_7")

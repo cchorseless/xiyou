@@ -191,7 +191,7 @@ export class ability1_pudge_meat_hook extends BaseAbility_Plus {
         }
     }
 
-    OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: ModifierTable) {
+    OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: IModifierTable) {
         let tHashtable = HashTableHelper.GetHashtableByIndex(ExtraData.hashtableUUid) as HookInfo;
         if (hTarget == tHashtable.hCaster) {
             return false
@@ -315,7 +315,7 @@ export class ability1_pudge_meat_hook extends BaseAbility_Plus {
 
     }
 
-    OnProjectileThink_ExtraData(vLocation: Vector, ExtraData: ModifierTable) {
+    OnProjectileThink_ExtraData(vLocation: Vector, ExtraData: IModifierTable) {
         let tHashtable = HashTableHelper.GetHashtableByIndex(ExtraData.hashtableUUid)
         // 更新实时位置
         tHashtable.vProjectileLocation = vLocation
@@ -372,11 +372,11 @@ export class modifier_pudge_1_buff extends BaseModifierMotionHorizontal_Plus {
     }
 
     incoming_bleed_damage: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.incoming_bleed_damage = this.GetSpecialValueFor("incoming_bleed_damage")
     }
     iHashtableIndex: string;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.iHashtableIndex = params.hashtableUUid;
@@ -443,10 +443,10 @@ export class modifier_pudge_1_buff extends BaseModifierMotionHorizontal_Plus {
         return {}
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     OVERRIDE_ANIMATION = GameActivity_t.ACT_DOTA_FLAIL;
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_BLEED_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_BLEED_DAMAGE_PERCENTAGE)
     GetIncomingBleedDamagePercentage() {
         return this.incoming_bleed_damage
     }

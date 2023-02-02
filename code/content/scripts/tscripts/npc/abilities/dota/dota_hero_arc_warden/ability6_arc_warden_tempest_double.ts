@@ -135,14 +135,14 @@ export class modifier_arc_warden_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
-    On_Order(params: ModifierTable) {
+    On_Order(params: IModifierTable) {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
             if (params.issuer_player_index != -1 && params.ability == hAbility) {
@@ -203,7 +203,7 @@ export class modifier_arc_warden_6 extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_arc_warden_6_thinker extends BaseModifier_Plus {
     iCount: any;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.iCount = params.iCount
@@ -298,7 +298,7 @@ export class modifier_arc_warden_6_wraith extends BaseModifier_Plus {
         }
         return true
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.iRadius = params.iRadius || 300

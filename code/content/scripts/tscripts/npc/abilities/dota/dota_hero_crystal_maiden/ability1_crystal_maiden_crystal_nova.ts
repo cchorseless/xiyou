@@ -1,18 +1,14 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
-import { HashTableHelper } from "../../../../helper/HashTableHelper";
 import { LogHelper } from "../../../../helper/LogHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_particle_thinker } from "../../../modifier/modifier_particle";
-import { dota_hero_crystal_maiden } from "../../../units/dota/dota_hero_crystal_maiden";
 
 /** dota原技能数据 */
 export const Data_crystal_maiden_crystal_nova = { "ID": "5126", "AbilityType": "DOTA_ABILITY_TYPE_BASIC", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "SpellDispellableType": "SPELL_DISPELLABLE_YES", "FightRecapLevel": "1", "AbilitySound": "Hero_Crystal.CrystalNova", "AbilityCastRange": "700", "AbilityCastPoint": "0.3 0.3 0.3 0.3", "AbilityCooldown": "11 10 9 8", "AbilityManaCost": "130 145 160 175", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "radius": "425" }, "02": { "var_type": "FIELD_INTEGER", "movespeed_slow": "-20 -30 -40 -50" }, "03": { "var_type": "FIELD_INTEGER", "attackspeed_slow": "-20 -30 -40 -50" }, "04": { "var_type": "FIELD_FLOAT", "duration": "4.5" }, "05": { "var_type": "FIELD_FLOAT", "vision_duration": "6.0" }, "06": { "var_type": "FIELD_INTEGER", "nova_damage": "130 170 210 260", "LinkedSpecialBonus": "special_bonus_unique_crystal_maiden_2" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
@@ -97,7 +93,7 @@ export class modifier_crystal_maiden_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -167,19 +163,19 @@ export class modifier_crystal_maiden_1_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.movespeed_slow = this.GetSpecialValueFor("movespeed_slow")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         return this.movespeed_slow
     }
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_crystal_maiden_1_particle extends modifier_particle_thinker {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

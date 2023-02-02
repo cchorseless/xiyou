@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -75,14 +74,14 @@ export class modifier_night_stalker_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         // Save(this.GetParentPlus(), "modifier_night_stalker_2", this)
         if (IsServer()) {
             this.StartIntervalThink(0)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.kill_attack_damage = this.GetSpecialValueFor("kill_attack_damage")
         this.kill_void_damage = this.GetSpecialValueFor("kill_void_damage")
         this.kill_fear_dps = this.GetSpecialValueFor("kill_fear_dps")
@@ -121,11 +120,11 @@ export class modifier_night_stalker_2 extends BaseModifier_Plus {
         return this.kill_void_damage * this.GetStackCount()
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         return this.kill_attack_damage * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         this._tooltip = (this._tooltip || 0) % 2 + 1
         if (this._tooltip == 1) {
@@ -135,7 +134,7 @@ export class modifier_night_stalker_2 extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    OnDeath(params: ModifierTable) {
+    OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker
         if (!GameFunc.IsValid(hAttacker)) {
             return
@@ -179,7 +178,7 @@ export class modifier_night_stalker_2_form extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -232,7 +231,7 @@ export class modifier_night_stalker_2_form extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -277,27 +276,27 @@ export class modifier_night_stalker_2_form extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_CANNOT_MISS]: true
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     g_OUTGOING_DAMAGE_PERCENTAGE() {
         return ((GameFunc.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) && this.extra_damage_pct_night || 0)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     g_MAX_ATTACKSPEED_BONUS() {
         return ((GameFunc.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) && this.bonus_attack_speed_night || 0)
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     g_SPELL_AMPLIFY_BONUS() {
         return ((GameFunc.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) && this.bonus_spell_amp_night || 0)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         if (!GameFunc.IsValid(this.GetCasterPlus()) || this.GetCasterPlus().PassivesDisabled()) {
             return 0
         }
         return this.bonus_attack_speed_night
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.bonus_spell_amp_night
     }

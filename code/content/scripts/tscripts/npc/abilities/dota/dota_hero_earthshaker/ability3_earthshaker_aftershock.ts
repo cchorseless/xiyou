@@ -161,7 +161,7 @@ export class modifier_earthshaker_3 extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_earthshaker_3_particle extends modifier_particle {
     aftershock_range: number;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

@@ -1,6 +1,4 @@
-import { GameEnum } from "../../../shared/GameEnum";
-import { GameFunc } from "../../../GameFunc";
-import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
 @registerModifier()
@@ -23,7 +21,7 @@ export class modifier_findenemy extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_SUPER_ULTRA;
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
         }
     }

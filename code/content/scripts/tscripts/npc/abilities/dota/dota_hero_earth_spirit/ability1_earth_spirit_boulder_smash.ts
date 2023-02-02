@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -271,7 +270,7 @@ export class modifier_earth_spirit_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -279,7 +278,7 @@ export class modifier_earth_spirit_1 extends BaseModifier_Plus {
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
-    order(params: ModifierTable) {
+    order(params: IModifierTable) {
         if (IsServer()) {
             if (params.issuer_player_index != -1 && params.ability == this.GetAbilityPlus()) {
                 if (params.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION) {
@@ -406,7 +405,7 @@ export class modifier_earth_spirit_1 extends BaseModifier_Plus {
 export class modifier_earth_spirit_1_smash_target extends modifier_particle_thinker {
     distance: number;
     speed: number;
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             this.distance = this.GetSpecialValueFor("distance")
@@ -447,7 +446,7 @@ export class modifier_earth_spirit_illusion extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
@@ -519,7 +518,7 @@ export class modifier_earth_spirit_silence extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
@@ -561,7 +560,7 @@ export class modifier_earth_spirit_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
@@ -574,14 +573,14 @@ export class modifier_earth_spirit_slow extends BaseModifier_Plus {
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.slow_percent = this.GetSpecialValueFor("slow_percent")
         if (IsServer()) {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         return this.slow_percent
     }
 }

@@ -1,6 +1,5 @@
 
 import { GameFunc } from "../../GameFunc";
-import { GameEnum } from "../../shared/GameEnum";
 import { BaseModifierMotionHorizontal_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
 
@@ -29,7 +28,7 @@ export class modifier_run extends BaseModifierMotionHorizontal_Plus {
     leap_traveled: number;
     sound: string = "Courier.Footsteps";
     animation: GameActivity_t;
-    Init(kv: ModifierTable) {
+    Init(kv: IModifierTable) {
         if (IsServer()) {
             if (this.ApplyHorizontalMotionController() == false) {
                 this.Destroy();
@@ -86,7 +85,7 @@ export class modifier_run extends BaseModifierMotionHorizontal_Plus {
 
         return state;
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     g_GetOverrideAnimation() {
         if (this.GetParentPlus().IsStunned()) {
             return GameActivity_t.ACT_DOTA_DISABLED;
@@ -95,7 +94,7 @@ export class modifier_run extends BaseModifierMotionHorizontal_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DISABLE_AUTOATTACK)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_AUTOATTACK)
     g_DISABLE_AUTOATTACK() {
         return 0
     }

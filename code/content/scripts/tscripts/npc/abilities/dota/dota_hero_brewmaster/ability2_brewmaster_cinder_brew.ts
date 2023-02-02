@@ -1,4 +1,3 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
@@ -87,7 +86,7 @@ export class modifier_brewmaster_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -163,7 +162,7 @@ export class modifier_brewmaster_2_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(1)
@@ -178,7 +177,7 @@ export class modifier_brewmaster_2_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticle, false, true, 10, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.damage = this.GetSpecialValueFor("damage")
@@ -213,14 +212,14 @@ export class modifier_brewmaster_2_debuff extends BaseModifier_Plus {
             BattleHelper.GoApplyDamage(damage_table)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
 
     On_Tooltip() {
         if (this.GetStackCount() == 1) {
             return this.magic_armor
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
     G_MAGICAL_ARMOR_BONUS() {
         return (this.GetStackCount() == 1) && -this.magic_armor || 0
     }

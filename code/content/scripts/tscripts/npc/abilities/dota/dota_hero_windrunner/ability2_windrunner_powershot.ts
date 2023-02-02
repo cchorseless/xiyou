@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -126,7 +125,7 @@ export class modifier_windrunner_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -203,13 +202,13 @@ export class modifier_windrunner_2_buff extends BaseModifier_Plus {
         return false
     }
     powershot_damage: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.powershot_damage = this.GetSpecialValueFor("powershot_damage") + hCaster.GetTalentValue("special_bonus_unique_windrunner_custom_7")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
     GetModifierDamageOutgoing_Percentage() {
         return this.powershot_damage
     }
@@ -237,7 +236,7 @@ export class modifier_windrunner_2_buff_attack extends BaseModifier_Plus {
         return false
     }
     amplify_damage: number;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.amplify_damage = this.GetSpecialValueFor("amplify_damage")
         if (IsServer()) {
             this.IncrementStackCount()
@@ -247,7 +246,7 @@ export class modifier_windrunner_2_buff_attack extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage() {
         return this.amplify_damage * this.GetStackCount()
     }

@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -177,7 +176,7 @@ export class modifier_void_spirit_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -249,7 +248,7 @@ export class modifier_void_spirit_1_thinker extends BaseModifier_Plus {
     IsPurgable() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.radius = this.GetSpecialValueFor('radius')
         this.rooted_druation = this.GetSpecialValueFor('rooted_druation')
@@ -389,7 +388,7 @@ export class modifier_void_spirit_1_debuff extends BaseModifier_Plus {
     StatusEffectPriority() {
         return 10
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             let hParent = this.GetParentPlus()
@@ -415,7 +414,7 @@ export class modifier_void_spirit_1_debuff extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         if (IsServer()) {
             this.damage_income = (this.GetAbilityPlus() as ability1_void_spirit_aether_remnant).GetOriCaster().GetTalentValue('special_bonus_unique_void_spirit_custom_3')
@@ -430,7 +429,7 @@ export class modifier_void_spirit_1_debuff extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     G_INCOMING_DAMAGE_PERCENTAGE() {
         return this.damage_income
     }

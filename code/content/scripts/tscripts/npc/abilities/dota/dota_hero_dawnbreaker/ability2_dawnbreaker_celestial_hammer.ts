@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -303,7 +302,7 @@ export class modifier_dawnbreaker_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -382,12 +381,12 @@ export class modifier_dawnbreaker_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.powershot_damage = this.GetSpecialValueFor("powershot_damage") + hCaster.GetTalentValue("special_bonus_unique_dawnbreaker_custom_7")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
     GetDamageOutgoing_Percentage() {
         return this.powershot_damage
     }
@@ -416,14 +415,14 @@ export class modifier_dawnbreaker_2_buff_attack extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let parent = this.GetParentPlus() as IBaseNpc_Plus & { no_hammer: boolean }
         //  标记没有锤子的状态
         parent.no_hammer = true
 
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.atk_speed_add = this.GetSpecialValueFor("atk_speed_add")
         this.atk_speed_roof_add = this.GetSpecialValueFor("atk_speed_roof_add")
     }
@@ -433,18 +432,18 @@ export class modifier_dawnbreaker_2_buff_attack extends BaseModifier_Plus {
         parent.no_hammer = null
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     Get_ActivityTranslationModifiers() {
         return "no_hammer"
     }
     //  攻速提升
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         return this.atk_speed_add
     }
     //  攻速上限提升
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
-    EOM_GetModifierMaximumAttackSpeedBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    EOM_GetModifierMaximumAttackSpeedBonus(params: IModifierTable) {
         return this.atk_speed_roof_add
     }
 }

@@ -1,6 +1,5 @@
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -87,7 +86,7 @@ export class t21_magical_link_break extends BaseAbility_Plus {
 @registerModifier()
 export class modifier_t21_magical_link_buff extends BaseModifier_Plus {
     transform_damage_percent: number;
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     bonus_intellect: number;
     _tooltip: number;
     IsHidden() {
@@ -108,7 +107,7 @@ export class modifier_t21_magical_link_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
@@ -127,7 +126,7 @@ export class modifier_t21_magical_link_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.transform_damage_percent = this.GetSpecialValueFor("transform_damage_percent")
         this.bonus_intellect = this.GetSpecialValueFor("bonus_intellect")
     }
@@ -150,7 +149,7 @@ export class modifier_t21_magical_link_buff extends BaseModifier_Plus {
             this.ForceRefresh()
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         this._tooltip = (this._tooltip || 0) % 2 + 1
         if (this._tooltip == 1) {

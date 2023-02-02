@@ -2,7 +2,6 @@ import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -64,14 +63,14 @@ export class modifier_disruptor_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
-    order(params: ModifierTable) {
+    order(params: IModifierTable) {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
             if (params.issuer_player_index != -1 && params.ability == hAbility) {
@@ -150,7 +149,7 @@ export class modifier_disruptor_2_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             this.iShockDamageIncrease = this.GetSpecialValueFor("shock_damage_increase") + hCaster.GetTalentValue("special_bonus_unique_disruptor_custom_6")
@@ -158,12 +157,12 @@ export class modifier_disruptor_2_debuff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_SHOCK_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_DAMAGE_PERCENTAGE)
     g_INCOMING_SHOCK_DAMAGE_PERCENTAGE() {
         return this.iShockDamageIncrease
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
+    tooltip(params: IModifierTable) {
         return this.GetStackCount()
     }
 }
@@ -192,7 +191,7 @@ export class modifier_disruptor_2_field_aura extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
@@ -260,7 +259,7 @@ export class modifier_disruptor_2_field extends BaseModifier_Plus {
     GetAuraDuration() {
         return 0
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.radius = this.GetSpecialValueFor("radius")
@@ -340,7 +339,7 @@ export class modifier_disruptor_2_thinker extends BaseModifier_Plus {
     GetAuraDuration() {
         return 0.1
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.radius = this.GetSpecialValueFor("radius")

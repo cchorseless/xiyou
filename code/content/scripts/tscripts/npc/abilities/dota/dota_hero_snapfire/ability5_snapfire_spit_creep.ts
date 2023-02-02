@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -115,7 +114,7 @@ export class modifier_snapfire_5 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -203,7 +202,7 @@ export class modifier_snapfire_5_buff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             let vPosition = GameFunc.VectorFunctions.StringToVector(params.vTarget)
@@ -212,7 +211,7 @@ export class modifier_snapfire_5_buff extends BaseModifier_Plus {
             this.Spit(vPosition)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.projectile_count = this.GetSpecialValueFor("projectile_count") + hCaster.GetTalentValue("special_bonus_unique_snapfire_custom_5")
         this.projectile_speed = this.GetSpecialValueFor("projectile_speed")
@@ -278,7 +277,7 @@ export class modifier_snapfire_5_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TURN_RATE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TURN_RATE_PERCENTAGE)
     GetTurnRate_Percentage() {
         return 100
     }
@@ -308,7 +307,7 @@ export class modifier_snapfire_5_debuff_burn_ground extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -325,7 +324,7 @@ export class modifier_snapfire_5_debuff_burn_ground extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.impact_radius = this.GetSpecialValueFor("impact_radius")
         this.burn_duration = this.GetSpecialValueFor("burn_duration")
         if (IsServer()) {
@@ -382,7 +381,7 @@ export class modifier_snapfire_5_debuff_burn extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -408,7 +407,7 @@ export class modifier_snapfire_5_debuff_burn extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, true, 10, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.burn_interval = this.GetSpecialValueFor("burn_interval")
         this.impact_damage = this.GetSpecialValueFor("impact_damage")
         this.impact_damage_str_factor = this.GetSpecialValueFor("impact_damage_str_factor")

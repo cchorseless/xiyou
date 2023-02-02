@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionBoth_Plus, BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -187,7 +186,7 @@ export class modifier_pangolier_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.chance = this.GetSpecialValueFor("chance")
         this.duration = this.GetSpecialValueFor("duration")
@@ -272,16 +271,16 @@ export class modifier_pangolier_1 extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_CAST_ANGLE)
-    GetIgnoreCastAngle(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_CAST_ANGLE)
+    GetIgnoreCastAngle(params: IModifierTable) {
         if (IsServer()) {
             if (this.GetCasterPlus().GetCurrentActiveAbility() == this.GetAbilityPlus()) {
                 return 1
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DISABLE_TURNING)
-    GetDisableTurning(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_TURNING)
+    GetDisableTurning(params: IModifierTable) {
         if (IsServer()) {
             if (this.GetCasterPlus().GetCurrentActiveAbility() == this.GetAbilityPlus()) {
                 return 1
@@ -314,7 +313,7 @@ export class modifier_pangolier_1_dash extends BaseModifierMotionHorizontal_Plus
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.dash_speed = this.GetSpecialValueFor("dash_speed")
         if (IsServer()) {
@@ -352,7 +351,7 @@ export class modifier_pangolier_1_dash extends BaseModifierMotionHorizontal_Plus
         if (IsServer()) {
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_CAST_ABILITY_1
     }
@@ -390,7 +389,7 @@ export class modifier_pangolier_1_attack extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.range = this.GetSpecialValueFor("range")
         this.width = this.GetSpecialValueFor("width")
         this.attack_interval = this.GetSpecialValueFor("attack_interval")
@@ -461,12 +460,12 @@ export class modifier_pangolier_1_attack extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_CAST_ABILITY_1_END
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let bonus_damage = hCaster.HasTalent("special_bonus_unique_pangolier_custom_5") && hCaster.GetTalentValue("special_bonus_unique_pangolier_custom_5") || 0
@@ -474,8 +473,8 @@ export class modifier_pangolier_1_attack extends BaseModifier_Plus {
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
-    GetDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    GetDamageOutgoing_Percentage(params: IModifierTable) {
         return this.attack_damage_pct
     }
 }
@@ -506,7 +505,7 @@ export class modifier_pangolier_1_rolling_back extends BaseModifierMotionBoth_Pl
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.jump_height = this.GetSpecialValueFor("jump_height")
         this.jump_duration = this.GetSpecialValueFor("jump_duration")
@@ -607,7 +606,7 @@ export class modifier_pangolier_1_stun extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TELEPORTED)
-    teleported(params: ModifierTable) {
+    teleported(params: IModifierTable) {
         if (IsServer() && params.unit == this.GetParentPlus()) {
             (this.GetAbilityPlus() as ability1_pangolier_swashbuckle).vCasterLoc = params.new_pos
         }
@@ -636,14 +635,14 @@ export class modifier_pangolier_1_damage extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.damage = this.GetSpecialValueFor("damage")
         this.attack_damage_pct = this.GetSpecialValueFor("attack_damage_pct")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    GetPreAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    GetPreAttack_BonusDamage(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let bonus_damage = hCaster.HasTalent("special_bonus_unique_pangolier_custom_5") && hCaster.GetTalentValue("special_bonus_unique_pangolier_custom_5") || 0
@@ -651,15 +650,15 @@ export class modifier_pangolier_1_damage extends BaseModifier_Plus {
         }
         return 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
-    GetDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    GetDamageOutgoing_Percentage(params: IModifierTable) {
         return this.attack_damage_pct
     }
 }
 // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_pangolier_1_particle_pangolier_swashbuckler_dash extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         if (IsClient()) {

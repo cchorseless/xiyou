@@ -1,4 +1,5 @@
 
+import { modifier_hero_property } from "../../../npc/propertystat/modifier_hero_property";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { ET, serializeETProps } from "../../../shared/lib/Entity";
 /**棋子数据组件 */
@@ -11,13 +12,25 @@ export class ChessDataComponent extends ET.Component {
     public iStar: number = 1;
     @serializeETProps()
     public IsShowOverhead: boolean = false;
+    @serializeETProps()
+    public PrimaryAttribute: number = 1;
+
     SetUIOverHead(isshow: boolean) {
         this.IsShowOverhead = false;
         this.SyncClient(true);
-
     }
     onAwake() {
         this.iScale = this.GetDomain<IBaseNpc_Plus>().GetAbsScale();
+        let domain = this.GetDomain<IBaseNpc_Plus>();
+        domain.addSpawnedHandler(
+            GHandler.create(this, () => {
+                const m = modifier_hero_property.applyOnly(domain, domain);
+                m.StackCountHandler = GHandler.create(this, (attr: Attributes) => {
+                    this.PrimaryAttribute = attr;
+                    this.SyncClient(true);
+                }, null, false)
+            })
+        );
     }
     onDestroy(): void {
         this.Domain.ETRoot.As<IBattleUnitEntityRoot>().DelClientEntity(this);

@@ -5,7 +5,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
 import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
@@ -120,7 +119,7 @@ export class modifier_slardar_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -199,7 +198,7 @@ export class modifier_slardar_1_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.crush_extra_slow = this.GetSpecialValueFor("crush_extra_slow")
         this.shard_amplify_attack_damage_pct = this.GetSpecialValueFor("shard_amplify_attack_damage_pct")
         if (params.IsOnCreated && IsClient()) {
@@ -222,11 +221,11 @@ export class modifier_slardar_1_slow extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
-    GetMoveSpeedBonus_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         return this.crush_extra_slow
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     EOM_GetModifierIncomingDamagePercentage(params: ModifierAttackEvent) {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && params != null && params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK) {
             return this.shard_amplify_attack_damage_pct
@@ -238,7 +237,7 @@ export class modifier_slardar_1_slow extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_slardar_1_particle_pre extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
@@ -256,7 +255,7 @@ export class modifier_slardar_1_particle_pre extends modifier_particle {
 // 特效
 @registerModifier()
 export class modifier_slardar_1_particle_start extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
@@ -318,7 +317,7 @@ export class modifier_slardar_1_scepter_buff extends BaseModifier_Plus {
         return "modifier_slardar_1_aura_debuff"
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.puddle_radius = this.GetSpecialValueFor("puddle_radius")
         this.puddle_attack_bonus = this.GetSpecialValueFor("puddle_attack_bonus")
         this.puddle_attack_speed_bonus = this.GetSpecialValueFor("puddle_attack_speed_bonus")
@@ -338,20 +337,20 @@ export class modifier_slardar_1_scepter_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     G_MAX_ATTACKSPEED_BONUS() {
         return this.puddle_max_attack_speed_bonus
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
-    GetBaseDamageOutgoing_Percentage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
+    GetBaseDamageOutgoing_Percentage(params: IModifierTable) {
         return this.GetCasterPlus().HasScepter() && this.puddle_attack_bonus || 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         return this.GetCasterPlus().HasScepter() && this.puddle_attack_speed_bonus || 0
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
-    Tooltip(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
+    Tooltip(params: IModifierTable) {
         return this.GetCasterPlus().HasScepter() && this.puddle_max_attack_speed_bonus || 0
     }
 }
@@ -378,22 +377,22 @@ export class modifier_slardar_1_aura_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.puddle_stun_increase = this.GetSpecialValueFor("puddle_stun_increase")
         this.puddle_crit_damage_increase = this.GetSpecialValueFor("puddle_crit_damage_increase")
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
+    tooltip(params: IModifierTable) {
         return this.puddle_stun_increase
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP2)
-    tooltip2(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
+    tooltip2(params: IModifierTable) {
         return this.puddle_crit_damage_increase
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_CRITICALSTRIKE_PERCENT)
-    EOM_GetModifierIncomingCriticalStrikePercent(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_CRITICALSTRIKE_PERCENT)
+    EOM_GetModifierIncomingCriticalStrikePercent(params: IModifierTable) {
         if (params.attacker == this.GetCasterPlus()) {
             return this.puddle_crit_damage_increase
         }

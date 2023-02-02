@@ -4,7 +4,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
@@ -106,7 +105,7 @@ export class modifier_venomancer_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -194,7 +193,7 @@ export class modifier_venomancer_2_ward extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_ULTRA
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.health_percent = this.GetSpecialValueFor("health_percent")
         this.attack_percent = this.GetSpecialValueFor("attack_percent")
         this.attack_speed_percent = this.GetSpecialValueFor("attack_speed_percent")
@@ -231,20 +230,20 @@ export class modifier_venomancer_2_ward extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/heroes/venomancer/venomancer_ward.vmdl", this.GetCasterPlus())
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
-    GetBaseAttackTimeConstant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
+    GetBaseAttackTimeConstant(params: IModifierTable) {
         return this.fAttackTime
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         return this.fAttackSpeed * 100
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BASE_OVERRIDE)
-    GetAttackRangeOverride(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BASE_OVERRIDE)
+    GetAttackRangeOverride(params: IModifierTable) {
         return this.ward_attack_range
     }
 }
@@ -272,7 +271,7 @@ export class modifier_venomancer_2_ward_attack_talent extends BaseModifier_Plus 
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             let hParent = this.GetParentPlus()
@@ -326,7 +325,7 @@ export class modifier_venomancer_2_ward_armor_talent extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         // 技能的caster是英雄
         this.armor = this.GetAbilityPlus().GetCasterPlus().GetTalentValue('special_bonus_unique_venomancer_custom_4', "armor")
@@ -338,7 +337,7 @@ export class modifier_venomancer_2_ward_armor_talent extends BaseModifier_Plus {
             this.StartIntervalThink(0)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params)
         this.armor = this.GetAbilityPlus().GetCasterPlus().GetTalentValue('special_bonus_unique_venomancer_custom_4', "armor")
         if (IsServer()) {
@@ -380,15 +379,15 @@ export class modifier_venomancer_2_ward_armor_talent extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
-    EOM_GetModifierPhysicalArmorBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    EOM_GetModifierPhysicalArmorBonus(params: IModifierTable) {
         return -this.armor * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
-    EOM_GetModifierMagicalArmorBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
+    EOM_GetModifierMagicalArmorBonus(params: IModifierTable) {
         return -this.armor * this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip(params: any) {
         return this.armor * this.GetStackCount()
     }

@@ -1,8 +1,6 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -67,7 +65,7 @@ export class modifier_riki_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -113,7 +111,7 @@ export class modifier_riki_1 extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    OnDeath(params: ModifierTable) {
+    OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker
         if (GameFunc.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder" && hAttacker.GetTeamNumber() != params.unit.GetTeamNumber()) {
             hAttacker = hAttacker.GetSource()
@@ -169,7 +167,7 @@ export class modifier_riki_1_thinker extends BaseModifier_Plus {
     GetAuraSearchFlags() {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius")
@@ -190,7 +188,7 @@ export class modifier_riki_1_thinker extends BaseModifier_Plus {
             this.StartIntervalThink(0)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.radius = this.GetSpecialValueFor("radius")
         this.shard_interval = this.GetSpecialValueFor("shard_interval")
@@ -255,7 +253,7 @@ export class modifier_riki_1_debuff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.move_speed_pct = this.GetSpecialValueFor("move_speed_pct")
     }
     CheckState() {
@@ -263,7 +261,7 @@ export class modifier_riki_1_debuff extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_SILENCED]: true,
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage() {
         return -this.move_speed_pct
     }
@@ -314,14 +312,14 @@ export class modifier_riki_1_shard_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.shard_increase_physical_damage = this.GetSpecialValueFor("shard_increase_physical_damage")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
     EOM_GetModifierIncomingPhysicalDamagePercentage() {
         return this.shard_increase_physical_damage
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         return this.shard_increase_physical_damage
     }
@@ -353,19 +351,19 @@ export class modifier_riki_1_attack_damage extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.IncrementStackCount()
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         if (IsServer()) {
             this.IncrementStackCount()
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage() {
         return this.GetStackCount() * this.GetCasterPlus().GetTalentValue("special_bonus_unique_riki_custom_2")
     }

@@ -172,7 +172,7 @@ export class modifier_earth_spirit_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -248,7 +248,7 @@ export class modifier_earth_spirit_2_roll extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.launch_interval = this.GetSpecialValueFor("launch_interval") - this.GetCasterPlus().GetTalentValue('special_bonus_unique_earth_spirit_custom_5')
         this.speed = this.GetSpecialValueFor("speed")
@@ -275,7 +275,7 @@ export class modifier_earth_spirit_2_roll extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(particleID, 10, Vector(2, 0, 0))
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.launch_interval = this.GetSpecialValueFor("launch_interval") - this.GetCasterPlus().GetTalentValue('special_bonus_unique_earth_spirit_custom_5')
         this.speed = this.GetSpecialValueFor("speed")
@@ -379,7 +379,7 @@ export class modifier_earth_spirit_2_phantom extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()

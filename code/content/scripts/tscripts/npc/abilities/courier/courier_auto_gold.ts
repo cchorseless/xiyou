@@ -55,13 +55,13 @@ export class modifier_builder_gold extends BaseModifier_Plus {
     IsPurgeException() {
         return false;
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         if (IsServer()) {
             // this.StartIntervalThink(1)
             // this.SetStackCount(0)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         if (IsServer()) {
         }
     }

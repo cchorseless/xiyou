@@ -2,7 +2,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -129,7 +128,7 @@ export class modifier_vengefulspirit_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -212,7 +211,7 @@ export class modifier_vengefulspirit_6_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -254,7 +253,7 @@ export class modifier_vengefulspirit_6_buff extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(iParticleID)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.bonus_damage_percent = this.GetSpecialValueFor("bonus_damage_percent")
@@ -286,28 +285,28 @@ export class modifier_vengefulspirit_6_buff extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TELEPORTED)
-    teleported(params: ModifierTable) {
+    teleported(params: IModifierTable) {
         if (IsServer() && params.unit == this.GetParentPlus()) {
             this.vOrigin = params.new_pos
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     GetMAX_ATTACKSPEED_BONUS() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_vengefulspirit_custom_6")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE)
     Get_OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE() {
         return math.min(this.bonus_damage_percent * this.GetStackCount() * 0.01, this.max_bonus_damage_percent)
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             return hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_6")
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

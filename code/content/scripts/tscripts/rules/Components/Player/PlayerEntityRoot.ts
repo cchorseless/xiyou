@@ -4,7 +4,7 @@ import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { unit_base_baoxiang } from "../../../npc/units/common/unit_base_baoxiang";
-import { GameEnum } from "../../../shared/GameEnum";
+import { GameProtocol } from "../../../shared/GameProtocol";
 import { ET } from "../../../shared/lib/Entity";
 import { PlayerConfig } from "../../../shared/PlayerConfig";
 import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
@@ -34,7 +34,7 @@ export class PlayerSystem extends ET.EntityRoot {
     }
     private static addEvent() {
         /**客户端登陆 */
-        EventHelper.addProtocolEvent(GameEnum.CustomProtocol.req_LoginGame, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_LoginGame, GHandler.create(this, (event: JS_TO_LUA_DATA) => {
             event.state = true;
             this.OnClientLoginPlayer(event.PlayerID);
         }));

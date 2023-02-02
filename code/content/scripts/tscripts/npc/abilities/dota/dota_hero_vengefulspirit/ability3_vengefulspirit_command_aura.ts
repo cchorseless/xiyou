@@ -1,7 +1,6 @@
 
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -207,14 +206,14 @@ export class modifier_vengefulspirit_3 extends BaseModifier_Plus {
     GetAuraSearchFlags() {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.duration = this.GetSpecialValueFor("duration")
         this.aura_radius = this.GetSpecialValueFor("aura_radius")
     }
 
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
-    OnTakeDamage(params: ModifierTable) {
+    OnTakeDamage(params: IModifierTable) {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             if (hParent.PassivesDisabled() || hParent.IsIllusion()) {
@@ -275,7 +274,7 @@ export class modifier_vengefulspirit_3_aura extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_attack_range = this.GetSpecialValueFor("bonus_attack_range")
         this.bonus_cast_range = this.GetSpecialValueFor("bonus_cast_range")
     }
@@ -287,15 +286,15 @@ export class modifier_vengefulspirit_3_aura extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
-    GetAttackRangeBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
+    GetAttackRangeBonus(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             return this.bonus_attack_range + hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_4")
         }
         return this.bonus_attack_range
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
     GetCastRangeBonusStacking(params: ModifierAbilityEvent) {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(params.ability)) {
@@ -356,7 +355,7 @@ export class modifier_vengefulspirit_3_attributes extends BaseModifier_Plus {
         return "vengefulspirit_command_aura"
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.primary_attributes = this.GetSpecialValueFor("primary_attributes") + (GameFunc.IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_7") || 0)
         if (IsServer()) {
@@ -369,11 +368,11 @@ export class modifier_vengefulspirit_3_attributes extends BaseModifier_Plus {
 
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip() {
         return this.GetStackCount() * this.primary_attributes
     }
-    // @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_PRIMARY_BONUS)
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_PRIMARY_BONUS)
     EOM_GetModifierBonusStats_Primary() {
         return this.GetStackCount() * this.primary_attributes
     }
@@ -400,7 +399,7 @@ export class modifier_vengefulspirit_3_illusion extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             this.StartIntervalThink(0.1)
@@ -415,7 +414,7 @@ export class modifier_vengefulspirit_3_illusion extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, true, 10000, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.illusion_damage = this.GetSpecialValueFor("illusion_damage")
     }
     OnIntervalThink() {
@@ -463,8 +462,8 @@ export class modifier_vengefulspirit_3_illusion extends BaseModifier_Plus {
         }
     }
 
-    // @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE_SPECIAL)
-    EOM_GetModifierOutgoingDamagePercentageSpecial(params: ModifierTable) {
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE_SPECIAL)
+    EOM_GetModifierOutgoingDamagePercentageSpecial(params: IModifierTable) {
         return this.illusion_damage - 100
     }
 }

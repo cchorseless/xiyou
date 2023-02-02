@@ -64,7 +64,7 @@ export class modifier_t17_bedlam extends BaseModifier_Plus {
     GetAura() {
         return "modifier_t17_bedlam_slow"
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
     }
 
@@ -91,7 +91,7 @@ export class modifier_t17_bedlam_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
@@ -104,17 +104,17 @@ export class modifier_t17_bedlam_slow extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.slow_movespeed = this.GetSpecialValueFor("slow_movespeed")
     }
-    // @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     // GetMoveSpeedBonus_Percentage() {
     //     let hCaster = this.GetCasterPlus()
     //     let modifier_combination_t17_enhanced_bedlam = Load(hCaster, "modifier_combination_t17_enhanced_bedlam")
     //     let extra_slow_movespeed = (GameFunc.IsValid(modifier_combination_t17_enhanced_bedlam) && modifier_combination_t17_enhanced_bedlam.GetStackCount() > 0) && modifier_combination_t17_enhanced_bedlam.extra_slow_movespeed || 0
     //     return this.slow_movespeed + extra_slow_movespeed
     // }
-    // @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TURN_RATE_PERCENTAGE)
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TURN_RATE_PERCENTAGE)
     // GetTurnRate_Percentage() {
     //     let hCaster = this.GetCasterPlus()
     //     let modifier_combination_t17_enhanced_bedlam = Load(hCaster, "modifier_combination_t17_enhanced_bedlam")

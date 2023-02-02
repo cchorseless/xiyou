@@ -2,7 +2,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Hero_Plus } from "../../../entityPlus/BaseNpc_Hero_Plus";
@@ -106,7 +105,7 @@ export class modifier_viper_3 extends BaseModifier_Plus {
     GetAura() {
         return "modifier_viper_3_attack"
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.aura_radius = this.GetSpecialValueFor("aura_radius")
     }
 
@@ -141,13 +140,13 @@ export class modifier_viper_3_attack extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params)
         if (IsServer()) {
             this.records = []
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.poison_count = this.GetSpecialValueFor("poison_count")
         this.poison_count_agility = this.GetSpecialValueFor("poison_count_agility")
         this.duration = this.GetSpecialValueFor("duration")
@@ -213,7 +212,7 @@ export class modifier_viper_3_attack extends BaseModifier_Plus {
         }
         GameFunc.ArrayFunc.ArrayRemove(this.records, params.record)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip(params: any) {
         return this.CalPoisonCount()
     }
@@ -250,7 +249,7 @@ export class modifier_viper_3_debuff extends BaseModifier_Plus {
         return false
     }
 
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.movespeed_reduce = this.GetSpecialValueFor("movespeed_reduce")
         this.max_debuff_count = this.GetSpecialValueFor("max_debuff_count")
         if (IsServer()) {
@@ -270,7 +269,7 @@ export class modifier_viper_3_debuff extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage() {
         return -this.movespeed_reduce * this.GetStackCount() // * this.GetParentPlus().GetStatusResistanceFactor()
     }
@@ -300,8 +299,8 @@ export class modifier_viper_3_projectile extends BaseModifier_Plus {
         return modifierpriority.MODIFIER_PRIORITY_ULTRA
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROJECTILE_NAME)
-    GetProjectileName(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROJECTILE_NAME)
+    GetProjectileName(params: IModifierTable) {
         return ResHelper.GetParticleReplacement("particles/units/heroes/hero_viper/viper_poison_attack.vpcf", this.GetCasterPlus())
     }
 }

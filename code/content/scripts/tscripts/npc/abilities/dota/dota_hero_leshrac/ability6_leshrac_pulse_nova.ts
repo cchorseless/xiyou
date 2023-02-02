@@ -57,7 +57,7 @@ export class modifier_leshrac_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -68,7 +68,7 @@ export class modifier_leshrac_6 extends BaseModifier_Plus {
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
-    OnAbilityExecuted(params: ModifierTable) {
+    OnAbilityExecuted(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hCaster = params.unit
         if (hCaster != null && hCaster == hParent && !hCaster.IsIllusion() && hCaster.IsAlive()) {
@@ -105,7 +105,7 @@ export class modifier_leshrac_6_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
         this.damage_per_mana = this.GetSpecialValueFor("damage_per_mana")
         let hParent = this.GetParentPlus()

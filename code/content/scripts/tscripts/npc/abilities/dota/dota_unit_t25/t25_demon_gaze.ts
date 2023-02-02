@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -65,7 +64,7 @@ export class modifier_t25_demon_gaze extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
@@ -159,7 +158,7 @@ export class modifier_t25_demon_gaze_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.duration = this.GetSpecialValueFor("duration")
         this.damage_pct = this.GetSpecialValueFor("damage_pct")
@@ -185,7 +184,7 @@ export class modifier_t25_demon_gaze_debuff extends BaseModifier_Plus {
             this.AddParticle(nIndexFX, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.damage_pct = this.GetSpecialValueFor("damage_pct")
         this.damage_radius = this.GetSpecialValueFor("damage_radius")
@@ -251,11 +250,11 @@ export class modifier_t25_demon_gaze_debuff extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MIN_HEALTH)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MIN_HEALTH)
     Get_MinHealth() {
         return this.min_health
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DISABLE_HEALING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_HEALING)
     Get_DisableHealing() {
         return 1
     }

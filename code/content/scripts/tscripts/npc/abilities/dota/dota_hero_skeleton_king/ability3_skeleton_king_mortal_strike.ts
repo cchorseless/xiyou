@@ -1,5 +1,4 @@
 import { GameFunc } from "../../../../GameFunc";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -87,7 +86,7 @@ export class modifier_skeleton_king_3 extends BaseModifier_Plus {
         }
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.aura_radius = this.GetSpecialValueFor("aura_radius")
     }
@@ -115,7 +114,7 @@ export class modifier_skeleton_king_3_aura extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -133,7 +132,7 @@ export class modifier_skeleton_king_3_aura extends BaseModifier_Plus {
         this.regen = this.GetSpecialValueFor("regen")
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    OnDeath(params: ModifierTable) {
+    OnDeath(params: IModifierTable) {
         if (params.unit == this.GetParentPlus()) {
             let hCaster = this.GetCasterPlus()
             if (GameFunc.IsValid(hCaster) && GameFunc.IsValid(this.GetAbilityPlus())) {
@@ -175,24 +174,24 @@ export class modifier_skeleton_king_3_attack extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(0)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.increase_attack_pct = this.GetSpecialValueFor("increase_attack_pct")
         this.add_atk_pct_perS = this.GetSpecialValueFor("add_atk_pct_perS")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
     GetDamageOutgoing_Percentage() {
         return this.increase_attack_pct
     }
 
     //  pipixia add 增加攻擊具體數值
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage() {
         let r = this.add_atk_pct_perS * this.GetParentPlus().GetMaxHealth() * 0.01;
         return r;

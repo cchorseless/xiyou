@@ -1,6 +1,5 @@
 
 import { GameFunc } from "../../../../GameFunc";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -53,13 +52,13 @@ export class modifier_pudge_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_health = this.GetSpecialValueFor("bonus_health")
     }
 
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
-    Death(params: ModifierTable) {
+    Death(params: IModifierTable) {
         let hAttacker = params.attacker
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -81,11 +80,11 @@ export class modifier_pudge_3 extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     EOM_GetModifierHealthBonus() {
         return this.GetStackCount() * this.bonus_health * (1 + this.GetCasterPlus().GetTalentValue("special_bonus_unique_pudge_custom_8") * 0.01)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip() {
         return this.GetStackCount() * this.bonus_health * (1 + this.GetCasterPlus().GetTalentValue("special_bonus_unique_pudge_custom_8") * 0.01)
     }
@@ -113,18 +112,18 @@ export class modifier_pudge_3_bonus_str extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_str = this.GetSpecialValueFor("bonus_str")
         if (IsServer()) {
             this.SetStackCount(this.GetStackCount() + (params.factor || 0))
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     EOM_GetModifierBonusStats_Strength() {
         return this.GetStackCount() * this.bonus_str * (1 + this.GetCasterPlus().GetTalentValue("special_bonus_unique_pudge_custom_8") * 0.01)
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.GetStackCount() * this.bonus_str * (1 + this.GetCasterPlus().GetTalentValue("special_bonus_unique_pudge_custom_8") * 0.01)
     }

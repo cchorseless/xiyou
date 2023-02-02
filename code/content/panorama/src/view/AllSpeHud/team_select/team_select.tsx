@@ -30,7 +30,7 @@
 
 //     addEvent() {
 //         NetHelper.ListenOnLua(
-//             GameEnum.CustomProtocol.req_addBot, GHandler.create(this, (e) => {
+//             GameProtocol.Protocol.req_addBot, GHandler.create(this, (e) => {
 //                 if (e.state) {
 //                     Game.AutoAssignPlayersToTeams();
 //                     this.updateSelf();
@@ -51,7 +51,7 @@
 //         //     return
 //         // }
 //         // this.isAdding = true
-//         // NetHelper.SendToLua(GameEnum.CustomProtocol.req_addBot)
+//         // NetHelper.SendToLua(GameProtocol.Protocol.req_addBot)
 //     };
 
 //     OnLockAndStartPressed() {

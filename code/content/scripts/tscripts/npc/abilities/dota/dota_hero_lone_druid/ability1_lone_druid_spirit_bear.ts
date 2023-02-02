@@ -1,8 +1,4 @@
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
-import { GameSetting } from "../../../../GameSetting";
-import { AoiHelper } from "../../../../helper/AoiHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -93,7 +89,7 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(0)
@@ -164,40 +160,40 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
-    EOM_GetModifierBaseAttack_BonusDamage(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
+    EOM_GetModifierBaseAttack_BonusDamage(params: IModifierTable) {
         return this.GetSpecialValueFor("bear_base_damage")
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_BASE)
-    EOM_GetModifierBaseStats_Strength(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BASE)
+    EOM_GetModifierBaseStats_Strength(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             let inherit_attribute_per = this.GetSpecialValueFor("inherit_attribute_per") + hCaster.GetTalentValue("special_bonus_unique_lone_druid_custom_7")
             return hCaster.GetStrength() * inherit_attribute_per / 100
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_AGILITY_BASE)
-    EOM_GetModifierBaseStats_Agility(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BASE)
+    EOM_GetModifierBaseStats_Agility(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             let inherit_attribute_per = this.GetSpecialValueFor("inherit_attribute_per") + hCaster.GetTalentValue("special_bonus_unique_lone_druid_custom_7")
             return hCaster.GetAgility() * inherit_attribute_per / 100
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_INTELLECT_BASE)
-    EOM_GetModifierBaseStats_Intellect(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BASE)
+    EOM_GetModifierBaseStats_Intellect(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             let inherit_attribute_per = this.GetSpecialValueFor("inherit_attribute_per") + hCaster.GetTalentValue("special_bonus_unique_lone_druid_custom_7")
             return hCaster.GetIntellect() * inherit_attribute_per / 100
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_BONUS)
-    EOM_GetModifierHealthBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    EOM_GetModifierHealthBonus(params: IModifierTable) {
         return this.GetSpecialValueFor("bear_hp") - 1000 //  NOTE.1000是小熊的kv血量
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_QUALIFICATION_CHANGED)
-    OnQualificationChanged(params: ModifierTable) {
+    OnQualificationChanged(params: IModifierTable) {
         if (this.sQulificationAbility != params.ability_name) {
             let hParent = this.GetParentPlus()
             let hCaster = this.GetCasterPlus()
@@ -226,9 +222,9 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
 
-    GetModelChange(params: ModifierTable) {
+    GetModelChange(params: IModifierTable) {
         return ResHelper.GetModelReplacement("models/heroes/lone_druid/spirit_bear.vmdl", this.GetCasterPlus())
     }
 

@@ -1,5 +1,4 @@
 import { GameFunc } from "../../../../GameFunc";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -51,7 +50,7 @@ export class modifier_puck_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.chance = this.GetSpecialValueFor("chance")
         this.bonus_random_stat = this.GetSpecialValueFor("bonus_random_stat")
     }
@@ -107,7 +106,7 @@ export class modifier_puck_3_buff extends BaseModifier_Plus {
     HandleCustomTransmitterData(tData: any) {
         this.tData = tData
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.SetHasCustomTransmitterData(true)
 
@@ -123,7 +122,7 @@ export class modifier_puck_3_buff extends BaseModifier_Plus {
             this.SetStackCount(this.tData.iStack)
         }
     }
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         if (IsServer()) {
             let iStackCount = params.stack || 0
@@ -143,7 +142,7 @@ export class modifier_puck_3_buff extends BaseModifier_Plus {
             this.SetStackCount(this.tData.iStack)
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         this._tooltip = (this._tooltip || 0) % 3 + 1
         if (this._tooltip == 1) {
@@ -155,19 +154,19 @@ export class modifier_puck_3_buff extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     EOM_GetModifierBonusStats_Strength() {
         if (this.tData) {
             return this.tData.iStr || 0
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_AGILITY_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
     EOM_GetModifierBonusStats_Agility() {
         if (this.tData) {
             return this.tData.iAgi || 0
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     EOM_GetModifierBonusStats_Intellect() {
         if (this.tData) {
             return this.tData.iInt || 0

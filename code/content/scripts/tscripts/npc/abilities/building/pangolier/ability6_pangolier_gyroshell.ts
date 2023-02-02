@@ -3,7 +3,6 @@ import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionBoth_Plus, BaseModifierMotionHorizontal_Plus, BaseModifierMotionVertical_Plus, BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -149,7 +148,7 @@ export class modifier_pangolier_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -216,16 +215,16 @@ export class modifier_pangolier_6 extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_CAST_ANGLE)
-    GetIgnoreCastAngle(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_CAST_ANGLE)
+    GetIgnoreCastAngle(params: IModifierTable) {
         if (IsServer()) {
             if (this.GetCasterPlus().GetCurrentActiveAbility() == this.GetAbilityPlus()) {
                 return 1
             }
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DISABLE_TURNING)
-    GetDisableTurning(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_TURNING)
+    GetDisableTurning(params: IModifierTable) {
         if (IsServer()) {
             if (this.GetCasterPlus().GetCurrentActiveAbility() == this.GetAbilityPlus()) {
                 return 1
@@ -263,7 +262,7 @@ export class modifier_pangolier_6_jump_start extends BaseModifierMotionBoth_Plus
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.jump_height = this.GetSpecialValueFor("jump_height")
         this.jump_duration = this.GetSpecialValueFor("jump_duration")
@@ -327,7 +326,7 @@ export class modifier_pangolier_6_jump_start extends BaseModifierMotionBoth_Plus
             [modifierstate.MODIFIER_STATE_STUNNED]: true
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_CAST_ABILITY_2
     }
@@ -368,7 +367,7 @@ export class modifier_pangolier_6_rolling extends BaseModifierMotionHorizontal_P
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.forward_move_speed = this.GetSpecialValueFor("forward_move_speed")
         this.damage = this.GetSpecialValueFor("damage")
@@ -460,12 +459,12 @@ export class modifier_pangolier_6_rolling extends BaseModifierMotionHorizontal_P
             [modifierstate.MODIFIER_STATE_INVULNERABLE]: true
         }
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_RUN
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MODEL_CHANGE)
-    GetModelChange(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MODEL_CHANGE)
+    GetModelChange(params: IModifierTable) {
         return "models/heroes/pangolier/pangolier_gyroshell2.vmdl"
     }
 }
@@ -496,7 +495,7 @@ export class modifier_pangolier_6_jump_back extends BaseModifierMotionBoth_Plus 
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.jump_height = this.GetSpecialValueFor("jump_height")
         this.jump_recover_time = this.GetSpecialValueFor("jump_recover_time")
@@ -754,13 +753,13 @@ export class modifier_pangolier_6_straight extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.DISABLE_TURNING)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_TURNING)
     GetDisableTurning() {
         return 1
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_TELEPORTED)
-    OnTeleported(params: ModifierTable) {
+    OnTeleported(params: IModifierTable) {
         if (IsServer() && params.unit == this.GetParentPlus()) {
             (this.GetAbilityPlus() as ability6_pangolier_gyroshell).vCasterLoc = params.new_pos
         }
@@ -852,7 +851,7 @@ export class modifier_pangolier_6_swashbuckle extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_pangolier_6_particle_pangolier_swashbuckler_dash extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
@@ -872,7 +871,7 @@ export class modifier_pangolier_6_particle_pangolier_swashbuckler_dash extends m
 // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_pangolier_6_particle_pangolier_gyroshell_cast extends modifier_particle {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()

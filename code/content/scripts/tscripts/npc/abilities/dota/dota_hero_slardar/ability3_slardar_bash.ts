@@ -1,6 +1,5 @@
 
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -55,20 +54,20 @@ export class modifier_slardar_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.max_speed = this.GetSpecialValueFor("max_speed")
         this.bonus_speed = this.GetSpecialValueFor("bonus_speed")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant() {
         if (this.GetStackCount() == 1) {
             return this.bonus_speed
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
-    EOM_GetModifierMaximumAttackSpeedBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+    EOM_GetModifierMaximumAttackSpeedBonus(params: IModifierTable) {
         return this.max_speed
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_START)

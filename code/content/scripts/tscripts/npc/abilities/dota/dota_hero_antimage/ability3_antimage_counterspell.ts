@@ -1,5 +1,4 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
 import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -53,7 +52,7 @@ export class modifier_antimage_3_buff extends BaseModifier_Plus {
     GetTexture() {
         return "antimage_counterspell"
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
             return
@@ -81,14 +80,14 @@ export class modifier_antimage_3_buff extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_BONUS)
-    EOM_GetModifierManaBonus(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
+    EOM_GetModifierManaBonus(params: IModifierTable) {
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             return 0
         }
         return this.GetStackCount()
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             return 0

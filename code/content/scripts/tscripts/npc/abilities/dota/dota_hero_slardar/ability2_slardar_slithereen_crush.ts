@@ -2,7 +2,6 @@
 import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
-import { GameEnum } from "../../../../shared/GameEnum";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -72,13 +71,13 @@ export class modifier_slardar_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.duration = this.GetSpecialValueFor("duration")
         this.chance = this.GetSpecialValueFor("chance")
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
     GetProcAttack_BonusDamage_Physical(params: ModifierAttackEvent) {
         let hAttacker = params.attacker as IBaseNpc_Plus
         let hAbility = this.GetAbilityPlus()
@@ -131,7 +130,7 @@ export class modifier_slardar_2_bashed extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.bonus_physical_damage = this.GetSpecialValueFor("bonus_physical_damage")
         if (params.IsOnCreated && IsClient()) {
             let particleID = ResHelper.CreateParticle({
@@ -151,15 +150,15 @@ export class modifier_slardar_2_bashed extends BaseModifier_Plus {
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OVERRIDE_ANIMATION)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
     Get_OverrideAnimation() {
         return GameActivity_t.ACT_DOTA_DISABLED
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.TOOLTIP)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     tooltip() {
         return this.bonus_physical_damage
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
     G_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE() {
         return this.bonus_physical_damage
     }
@@ -185,15 +184,15 @@ export class modifier_slardar_2_talent_attackspeed extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let sTalentName = "special_bonus_unique_slardar_custom_3"
         if (IsServer()) {
             this.SetStackCount(this.GetCasterPlus().GetTalentValue(sTalentName) - 1)
         }
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    GetAttackSpeedBonus_Constant(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    GetAttackSpeedBonus_Constant(params: IModifierTable) {
         if (IsServer() && this.GetStackCount() >= 1) {
             return 9999
         }

@@ -35,7 +35,7 @@ export class modifier_portal extends BaseModifier_Plus {
     vPosition: Vector;
     tParticleID: EntityIndex[];
     targetname: string;
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         let iParticleID = ResHelper.CreateParticle(
             new ResHelper.ParticleInfo()
                 .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
@@ -85,7 +85,7 @@ export class modifier_portal extends BaseModifier_Plus {
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
-    OnOrder(params: ModifierTable) {
+    OnOrder(params: IModifierTable) {
         if (params.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_TARGET) {
             GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
                 if (GameFunc.IsValid(this) && GameFunc.IsValid(this.GetParentPlus())) {

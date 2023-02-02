@@ -210,7 +210,7 @@ export class modifier_kunkka_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -316,7 +316,7 @@ export class modifier_kunkka_6_marks extends BaseModifier_Plus {
     GetTexture() {
         return "kunkka_x_marks_the_spot"
     }
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.stun_radius = this.GetSpecialValueFor("stun_radius")
         let caster = this.GetCasterPlus()
@@ -338,7 +338,7 @@ export class modifier_kunkka_6_marks extends BaseModifier_Plus {
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.stun_radius = this.GetSpecialValueFor("stun_radius")
     }
     OnDestroy() {
@@ -357,7 +357,7 @@ export class modifier_kunkka_6_marks extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_kunkka_6_particle_marker extends modifier_particle_thinker {
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         let stun_radius = this.GetSpecialValueFor("stun_radius")
         if (IsClient()) {

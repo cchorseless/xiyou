@@ -1,14 +1,9 @@
 
-import { GameEnum } from "../../../../shared/GameEnum";
-import { GameFunc } from "../../../../GameFunc";
+import { AoiHelper } from "../../../../helper/AoiHelper";
+import { BattleHelper } from "../../../../helper/BattleHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
-import { modifier_stunned } from "../../../modifier/effect/modifier_stunned";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
-import { ResHelper } from "../../../../helper/ResHelper";
-import { BattleHelper } from "../../../../helper/BattleHelper";
-import { EntityHelper } from "../../../../helper/EntityHelper";
-import { AoiHelper } from "../../../../helper/AoiHelper";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../../propertystat/modifier_event";
 
 /** dota原技能数据 */
@@ -71,8 +66,8 @@ export class modifier_dawnbreaker_3_buff extends BaseModifier_Plus {
     }
 
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: ModifierTable) {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
+    EOM_GetModifierCriticalStrike(params: IModifierTable) {
         return this.bonus_damage_pct
     }
 
@@ -87,13 +82,13 @@ export class modifier_dawnbreaker_3_buff extends BaseModifier_Plus {
         return attack_count
     }
 
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         if (IsServer()) {
             this.SetStackCount(this.attack_count)
         }
     }
-    Init(params: ModifierTable) {
+    Init(params: IModifierTable) {
         this.heal_radius = this.GetSpecialValueFor("heal_radius")
         this.bonus_damage_pct = 100
         this.attack_count = 0
@@ -101,7 +96,7 @@ export class modifier_dawnbreaker_3_buff extends BaseModifier_Plus {
     }
 
 
-    updateAttack_count(params: ModifierTable) {
+    updateAttack_count(params: IModifierTable) {
         //  显示BUFF剩余攻击暴击次数
         if ((this.attack_count == this.getAttack_count())) {
             if (this.hasHeal == false) {
@@ -188,11 +183,11 @@ export class modifier_dawnbreaker_3_buff_heal extends BaseModifier_Plus {
         return false
     }
 
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_BONUS)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
     EOM_GetModifierHealthBonus() {
         return this.healthMax_add
     }
-    @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HP_PERCENTAGE)
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
     EOM_GetModifierHealthPercentage() {
         //  天赋  熠熠生辉治疗附带提升7%最大生命值的效果
         let caster = this.GetCasterPlus()
@@ -230,7 +225,7 @@ export class modifier_dawnbreaker_3_buff_heal extends BaseModifier_Plus {
         }
     }
 
-    OnCreated(params: ModifierTable) {
+    OnCreated(params: IModifierTable) {
         super.OnCreated(params);
         this.healthMax_add = 0
         this.heal_strength_pct = this.GetSpecialValueFor("heal_strength_pct")
@@ -239,7 +234,7 @@ export class modifier_dawnbreaker_3_buff_heal extends BaseModifier_Plus {
         this.healSelf()
     }
 
-    OnRefresh(params: ModifierTable) {
+    OnRefresh(params: IModifierTable) {
         super.OnRefresh(params);
         this.heal_strength_pct = this.GetSpecialValueFor("heal_strength_pct")
         this.heal_base = this.GetSpecialValueFor("heal_base")
