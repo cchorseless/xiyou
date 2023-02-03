@@ -10,6 +10,10 @@ export class BaseItem_Plus extends BaseItem {
     /**使用报错提示信息 */
     public errorStr: string;
 
+    /**
+     * @client
+     * @returns 
+     */
     public GetAbilityTextureName(): string {
         // 默认使用dota默认技能ICON
         if (this.__IN_DOTA_NAME__) {
@@ -23,18 +27,28 @@ export class BaseItem_Plus extends BaseItem {
         return iconpath;
     }
 
-    /**获取施法来源NPC，谁施法的 */
+    /**获取施法来源NPC，谁施法的 
+     * @Both
+    */
     GetCasterPlus() {
         return this.GetCaster() as IBaseNpc_Plus;
     }
-    /**获取作用归属NPC，在谁身上 */
+    /**获取作用归属NPC，在谁身上 
+     * @Server
+    */
     GetParentPlus() {
         return this.GetParent() as IBaseNpc_Plus;
     }
+    /**
+     * @Server
+     * @returns 
+     */
     GetOwnerPlus() {
         return this.GetOwnerEntity() as IBaseNpc_Plus;
     }
-    /**自己给自己施法的 */
+    /**自己给自己施法的 
+     * @Server
+    */
     IsCastBySelf() {
         return this.GetCasterPlus().GetEntityIndex() == this.GetOwnerPlus().GetEntityIndex();
     }
@@ -111,7 +125,13 @@ export class BaseItem_Plus extends BaseItem {
         return true
 
     }
-
+    /**
+     * @Server
+     * @param itemName 
+     * @param owner 
+     * @param purchaser 
+     * @returns 
+     */
     static CreateItem(
         itemName: string,
         owner: CDOTAPlayerController | undefined,

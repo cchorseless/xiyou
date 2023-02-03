@@ -12,9 +12,9 @@ export module GameProtocol {
         static readonly Buy_ShopItem = "/Buy_ShopItem";
         static readonly UploadCharacterGameRecord = "/UploadCharacterGameRecord";
         // js-clientlua
-        static readonly call_get_ability_data = "call_get_ability_data";
-        static readonly call_get_unit_data = "call_get_unit_data";
-        static readonly call_get_player_data = "call_get_player_data";
+        static readonly custom_call_get_ability_data = "custom_call_get_ability_data";
+        static readonly custom_call_get_unit_data = "custom_call_get_unit_data";
+        static readonly custom_call_get_player_data = "custom_call_get_player_data";
         // debug
         static readonly ChangeHostTimescale = "/ChangeHostTimescale";
         static readonly PauseRoundStage = "/PauseRoundStage";

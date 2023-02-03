@@ -4,7 +4,6 @@ import { HashTableHelper } from "../../../helper/HashTableHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
-import { modifier_property } from "../../propertystat/modifier_property";
 
 /**中毒BUFF */
 @registerModifier()
@@ -86,7 +85,7 @@ export class modifier_poison extends BaseModifier_Plus {
                 })
             }
             //  头顶绿色数字
-            let _incom = modifier_property.SumProps(hParent, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE);
+            let _incom = GPropertyCalculate.SumProps(hParent, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE);
             let fPercent = 1 + _incom / 100 || 1
             let iVisualNum = iTotalDamge * fPercent
             if (iVisualNum > 0) {
@@ -115,8 +114,8 @@ export class modifier_poison extends BaseModifier_Plus {
         if (!IsServer()) { return };
         if (!GameFunc.IsValid(htarget)) return;
         if (iCount > 0) {
-            let _out = modifier_property.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE);
-            let _incom = modifier_property.SumProps(htarget, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE);
+            let _out = GPropertyCalculate.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE);
+            let _incom = GPropertyCalculate.SumProps(htarget, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE);
             iCount = iCount * (1 + _out * 0.01) * (1 + _incom * 0.01)
         }
         let iPoisonStack = math.min(iCount, modifier_poison.MAX_POISON_STACK)   //  毒层数
@@ -155,7 +154,7 @@ export class modifier_poison extends BaseModifier_Plus {
                     BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM +
                     BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
             })
-            let _incom = modifier_property.SumProps(htarget, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE);
+            let _incom = GPropertyCalculate.SumProps(htarget, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE);
             let fPoisonPercent = (1 + _incom * 0.01) || 1;
             let iVisualNum = iDamage * fPoisonPercent
             if (iVisualNum > 0) {

@@ -28,7 +28,7 @@
 		"MagicalResistance" "0"
 		"StatusHealth" "100"
 		"StatusHealthRegen" "0"
-		"StatusMana" "0"
+		"StatusMana" "100"
 		"StatusManaRegen" "0"
 		"AttackCapabilities" "DOTA_UNIT_CAP_NO_ATTACK"
 		"AttributeBaseStrength" "0"

@@ -20,18 +20,18 @@
 
 "CustomEvents"
 {
-	"call_get_ability_data"
+	"custom_call_get_ability_data"
 	{
 		"ability_entindex"			"short"
 		"level"						"short"
 		"key_name"					"string"
 	}
-	"call_get_unit_data"
+	"custom_call_get_unit_data"
 	{
 		"unit_entindex"			"short"
 		"func_name"				"string"
 	}
-	"call_get_player_data"
+	"custom_call_get_player_data"
 	{
 		"playerid"					"short"
 		"func_name"				"string"

@@ -11,6 +11,7 @@ import { GameProtocol } from "../shared/GameProtocol";
 export module EventHelper {
     /**
      * 添加监听事件
+     * @Both
      * @param eventName
      * @param func
      * @param context
@@ -38,13 +39,10 @@ export module EventHelper {
     }
     /**
      * 移除所有事件监听
+     * @Both
      * @param eventName
      */
     export function removeGameEvent(eventName: keyof GameEventDeclarations, context: any = null) {
-        if (!IsServer()) {
-            return;
-        }
-
         if (GGameCache.allGameEvent[eventName] != null) {
             const handlers = GGameCache.allGameEvent[eventName];
             for (let i = 0, len = handlers.length; i < len; i++) {
@@ -60,8 +58,27 @@ export module EventHelper {
         }
     }
 
+    export function removeGameEventCaller(context: any) {
+        const keys = Object.keys(GGameCache.allGameEvent);
+        for (let eventName of keys) {
+            const handlers = GGameCache.allGameEvent[eventName];
+            for (let i = 0, len = handlers.length; i < len; i++) {
+                const handler = handlers[i];
+                if (context == null || handler.caller == context) {
+                    handler.tmpArg && StopListeningToGameEvent(handler.tmpArg);
+                    handler.recover();
+                    handlers.splice(i, 1);
+                    i--;
+                    len--;
+                }
+            }
+        }
+    }
+
+
     /**
      * 添加全局的自定义事件
+     * @Server
      * @param eventName
      * @param func
      * @param context
@@ -91,6 +108,7 @@ export module EventHelper {
     }
     /**
      * 移除所有事件监听
+     * @Server
      * @param eventName
      */
     export function removeCustomEvent(eventName: keyof CustomGameEventDeclarations, context: any = null) {
@@ -114,6 +132,7 @@ export module EventHelper {
 
     /**
      * 新增协议事件监听
+     * @Server
      * @param eventName
      * @param func
      * @param context
@@ -137,6 +156,7 @@ export module EventHelper {
     }
     /**
      * 移除协议事件监听
+     * @Server
      * @param eventName
      * @param func
      * @param context
@@ -171,6 +191,7 @@ export module EventHelper {
     }
     /**
      * 删除所有协议事件监听
+     * @Server
      */
     export function removeCallerProtocolEvent(context: any) {
         if (!IsServer()) {
@@ -193,6 +214,7 @@ export module EventHelper {
     }
     /**
      * 模拟客户端给服务器发协议,同帧触发服务器协议事件（服务器AI用）
+     * @Server
      * @param protocol
      * @param data
      * @param cb
@@ -228,6 +250,7 @@ export module EventHelper {
 
     /**
      * 推送协议给全部客户端
+     * @Server
      * @param eventName
      * @param eventData
      */
@@ -244,6 +267,7 @@ export module EventHelper {
     }
     /**
      * 推送协议给队伍
+     * @Server
      * @param eventName
      * @param eventData
      * @param team
@@ -261,6 +285,7 @@ export module EventHelper {
     }
     /**
      * 推送协议给玩家，默认自己
+     * @Server
      * @param eventName
      * @param eventData
      * @param playerid
@@ -282,6 +307,7 @@ export module EventHelper {
 
     /**
      * 推送錯誤信息給玩家
+     * @Server
      * @param message
      * @param sound
      * @param playerID

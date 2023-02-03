@@ -35,27 +35,28 @@ export function registerProp(params: PropertyConfig.EMODIFIER_PROPERTY) {
     //     return
     // }
     return (target: BaseModifier_Plus, attr: string, desc: any = null) => {
+        const params_key = params + "";
         // 处理属性
         if (desc == null) {
             if (target.__AllRegisterProperty == null) {
                 target.__AllRegisterProperty = {}
             }
-            if (target.__AllRegisterProperty[params] == null) {
-                target.__AllRegisterProperty[params] = new Set();
+            if (target.__AllRegisterProperty[params_key] == null) {
+                target.__AllRegisterProperty[params_key] = new Set();
             }
-            target.__AllRegisterProperty[params].add(attr);
-            // LogHelper.print(target.constructor.name, params, attr, target.__AllRegisterProperty[params].size)
+            target.__AllRegisterProperty[params_key].add(attr);
+            // LogHelper.print(target.constructor.name, params_key, attr, target.__AllRegisterProperty[params_key].size)
         }
         // 处理函数
         else {
             if (target.__AllRegisterFunction == null) {
                 target.__AllRegisterFunction = {}
             }
-            if (target.__AllRegisterFunction[params] == null) {
-                target.__AllRegisterFunction[params] = new Set();
+            if (target.__AllRegisterFunction[params_key] == null) {
+                target.__AllRegisterFunction[params_key] = new Set();
             }
-            target.__AllRegisterFunction[params].add(desc.value);
-            // LogHelper.print(target.constructor.name, params, target.__AllRegisterFunction[params].size)
+            target.__AllRegisterFunction[params_key].add(attr);
+            // LogHelper.print(target.constructor.name, params_key, target.__AllRegisterFunction[params_key].size)
         }
     }
 }

@@ -895,7 +895,7 @@ export module AbilityHelper {
     }
 
     export function GetAbilityData(iEntityIndex: AbilityEntityIndex, key: string, iLevel = -1) {
-        GameEvents.SendEventClientSide(GameProtocol.Protocol.call_get_ability_data, {
+        GameEvents.SendEventClientSide(GameProtocol.Protocol.custom_call_get_ability_data as any, {
             ability_entindex: iEntityIndex,
             level: iLevel,
             key_name: key
@@ -1067,7 +1067,7 @@ export module UnitHelper {
     };
 
     export function GetUnitData(iUnitEntIndex: EntityIndex, sFuncName: string) {
-        GameEvents.SendEventClientSide(GameProtocol.Protocol.call_get_unit_data, {
+        GameEvents.SendEventClientSide(GameProtocol.Protocol.custom_call_get_unit_data as any, {
             unit_entindex: iUnitEntIndex,
             func_name: sFuncName,
         });
@@ -1083,15 +1083,9 @@ export module UnitHelper {
             if (sValue == "false") {
                 return false;
             }
-            if (sValue != "") {
-                let fValue = Number(sValue);
-                if (isFinite(fValue)) {
-                    return fValue;
-                } else {
-                    return sValue;
-                }
-            }
+            return GToNumber(sValue);
         }
+        return 0;
     };
 
     export function GetCustomMaxHealth(iUnitEntIndex: EntityIndex) {

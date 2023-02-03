@@ -3,7 +3,6 @@ import { BattleHelper } from "../../../helper/BattleHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
-import { modifier_property } from "../../propertystat/modifier_property";
 /**流血BUFF */
 @registerModifier()
 export class modifier_bleeding extends BaseModifier_Plus {
@@ -93,8 +92,8 @@ export class modifier_bleeding extends BaseModifier_Plus {
                 }
                 let vColor = Vector(255, 32, 32)
                 let fDuration = 1;
-                let _out = modifier_property.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_BLEED_DAMAGE_PERCENTAGE);
-                let _incom = modifier_property.SumProps(hParent, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_BLEED_DAMAGE_PERCENTAGE);
+                let _out = GPropertyCalculate.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_BLEED_DAMAGE_PERCENTAGE);
+                let _incom = GPropertyCalculate.SumProps(hParent, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_BLEED_DAMAGE_PERCENTAGE);
                 let iNumber = math.ceil(tDamageTable.damage * (1 + _incom * 0.01) * (1 + _out * 0.01))
                 // 造成伤害
                 while (fDamageFactor > 0) {

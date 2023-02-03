@@ -1,7 +1,13 @@
 
 export module GEventHelper {
     const AllEventInfo: { [eventName: string]: [{ isonce: boolean; playerid: PlayerID | null, handler: IGHandler }] } = GGetReloadCache("GEventHelper.AllEventInfo", {});
-
+    /**
+     * @Both
+     * @param eventName 
+     * @param handler 
+     * @param playerid 
+     * @param isOnce 
+     */
     export function AddEvent(eventName: string, handler: IGHandler, playerid: PlayerID | null = null, isOnce = false) {
         if (AllEventInfo[eventName] == null) {
             AllEventInfo[eventName] = [] as any;
@@ -9,7 +15,14 @@ export module GEventHelper {
         handler.once = false;
         AllEventInfo[eventName].push({ isonce: isOnce, playerid: playerid, handler: handler });
     }
-
+    /**
+     * @Both
+     * @param eventName 
+     * @param context 
+     * @param playerid 
+     * @param args 
+     * @returns 
+     */
     export function FireEvent(eventName: string, context: any, playerid: PlayerID | null, ...args: any[]) {
         if (AllEventInfo[eventName] == null) {
             return;
@@ -36,6 +49,12 @@ export module GEventHelper {
             }
         }
     }
+    /**
+     * @Both
+     * @param context 
+     * @param handler 
+     * @returns 
+     */
     export function RemoveCaller(context: any, handler: IGHandler | null = null) {
         if (context == null) {
             return;
@@ -67,7 +86,12 @@ export module GEventHelper {
             }
         }
     }
-
+    /**
+     * @Both
+     * @param eventName 
+     * @param context 
+     * @returns 
+     */
     export function RemoveEvent(eventName: string, context: any) {
         if (AllEventInfo[eventName] == null) {
             return;

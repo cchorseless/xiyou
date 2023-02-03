@@ -61,7 +61,7 @@ declare interface IGet_player_data {
  * 客户端JS调用客户端lua
  */
 declare interface GameEventDeclarations {
-    call_get_ability_data: IGet_ability_data;
-    call_get_unit_data: IGet_unit_data;
-    call_get_player_data: IGet_player_data;
+    custom_call_get_ability_data: IGet_ability_data;
+    custom_call_get_unit_data: IGet_unit_data;
+    custom_call_get_player_data: IGet_player_data;
 }

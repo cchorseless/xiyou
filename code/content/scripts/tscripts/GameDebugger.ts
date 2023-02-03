@@ -109,9 +109,9 @@ export class GameDebugger extends SingletonClass {
                 );
                 LogHelper.print(
                     string.format(
-                        "[Globalcache]: allRegisterEvent => event:  %.1f | listener:  %.1f",
-                        Object.keys(GGameCache.allRegisterEvent).length,
-                        countSet(Object.values(GGameCache.allRegisterEvent))
+                        "[Globalcache]: allBuffRegisterEvent => event:  %.1f | listener:  %.1f",
+                        Object.keys(GGameCache.allBuffRegisterEvent).length,
+                        countSet(Object.values(GGameCache.allBuffRegisterEvent))
                     )
                 );
                 LogHelper.print(string.format("[Globalcache]: allTimers =>  %.1f", GTimerHelper.mUseTimerTasks.length));

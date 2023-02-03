@@ -5,7 +5,6 @@ import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
-import { modifier_property } from "../../propertystat/modifier_property";
 
 /**触电 */
 @registerModifier()
@@ -96,8 +95,8 @@ export class modifier_shock extends BaseModifier_Plus {
     static Shock(target: IBaseNpc_Plus, hCaster: IBaseNpc_Plus, hAbility: IBaseAbility_Plus, iCount: number) {
         if (!IsServer()) { return };
         if (iCount > 0) {
-            let outpect = modifier_property.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_SHOCK_COUNT_PERCENTAGE);
-            let inpect = modifier_property.SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_COUNT_PERCENTAGE);
+            let outpect = GPropertyCalculate.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_SHOCK_COUNT_PERCENTAGE);
+            let inpect = GPropertyCalculate.SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_COUNT_PERCENTAGE);
             iCount = math.floor(iCount * (1 + outpect * 0.01) * (1 + inpect * 0.01))
         }
         let iShockStack = math.min(iCount, modifier_shock.MAX_SHOCK_STACK)	//  触电层数

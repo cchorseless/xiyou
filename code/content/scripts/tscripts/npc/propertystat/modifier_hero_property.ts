@@ -49,9 +49,9 @@ export class modifier_hero_property extends BaseModifier_Plus {
             }
             else {
                 let tStats = {
-                    [Attributes.DOTA_ATTRIBUTE_STRENGTH + ""]: Gmodifier_property.GetStrengthWithoutPrimaryStat(hParent),
-                    [Attributes.DOTA_ATTRIBUTE_AGILITY + ""]: Gmodifier_property.GetAgilityWithoutPrimaryStat(hParent),
-                    [Attributes.DOTA_ATTRIBUTE_INTELLECT + ""]: Gmodifier_property.GetIntellectWithoutPrimaryStat(hParent),
+                    [Attributes.DOTA_ATTRIBUTE_STRENGTH + ""]: GPropertyCalculate.GetStrengthWithoutPrimaryStat(hParent),
+                    [Attributes.DOTA_ATTRIBUTE_AGILITY + ""]: GPropertyCalculate.GetAgilityWithoutPrimaryStat(hParent),
+                    [Attributes.DOTA_ATTRIBUTE_INTELLECT + ""]: GPropertyCalculate.GetIntellectWithoutPrimaryStat(hParent),
                 }
                 const keys = Object.keys(tStats);
                 keys.sort((a, b) => {
@@ -70,7 +70,16 @@ export class modifier_hero_property extends BaseModifier_Plus {
             }
         }
     }
-
+    /**
+     * @Both
+     * @param attr 
+     */
+    SetPrimaryStat(attr: Attributes) {
+        if (IsServer()) {
+            this.forceSetAttributes = attr;
+            this.CalculatePrimaryStat()
+        }
+    }
     public OnDestroy(): void {
         super.OnDestroy();
         if (this.StackCountHandler) {
@@ -79,13 +88,15 @@ export class modifier_hero_property extends BaseModifier_Plus {
         }
     }
     // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    // GetAttackSpeedBonus_Constant(params: IModifierTable) {
-    //     return Gmodifier_property.GetAgility(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_AGILITY_ATTACK_SPEED
+    // CC_GetAttackSpeedBonus_Constant() {
+    //     return 150
     // }
     // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
     // CC_GetModifierBaseAttack_BonusDamage(params: IModifierTable) {
-    //     return Gmodifier_property.GetStrength(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_STRENGTH_ATTACK_DAMAGE
+    //     // return Gmodifier_property.GetStrength(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_STRENGTH_ATTACK_DAMAGE
+    //     return 20
     // }
+
     // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ENERGY_REGEN_PERCENTAGE)
     // CC_GetModifierEnergyRegenPercentage(params: IModifierTable) {
     //     return (this.GetStackCount() == Attributes.DOTA_ATTRIBUTE_STRENGTH) && Gmodifier_property.GetStrength(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_STRENGTH_ENERGY_GET || 0

@@ -13,4 +13,6 @@ export class AllEntity {
         AllServiceEntity.init();
         LogHelper.print("register all entity");
     }
+
+
 }

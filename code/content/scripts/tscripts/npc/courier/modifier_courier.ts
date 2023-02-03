@@ -36,13 +36,6 @@ export class modifier_courier extends BaseModifier_Plus {
     zOffset: number = 1;
     OnCreated(params: IModifierTable) {
         super.OnCreated(params)
-        const caster = this.GetParentPlus() as IBaseNpc_Hero_Plus
-        GLogHelper.print(caster.GetUnitName());
-        caster.SetBaseMaxHealth(100)
-        caster.SetBaseHealthRegen(0)
-        caster.SetBaseManaRegen(0);
-        caster.SetBaseStrength(0)
-        caster.SetBaseAgility(0)
         if (IsServer()) {
             let sCourierName = params.courier_name
             this.sCourierName = sCourierName
@@ -96,9 +89,6 @@ export class modifier_courier extends BaseModifier_Plus {
         return this.zOffset
     }
 
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BASE)
-    CC_HP_BASE() {
-        return 20
-    }
+
 
 }

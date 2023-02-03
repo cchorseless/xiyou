@@ -2,7 +2,6 @@ import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
 import { BaseNpc_Plus } from "../entityPlus/BaseNpc_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, EventDataType, modifier_event } from "../propertystat/modifier_event";
-import { modifier_property } from "../propertystat/modifier_property";
 
 @registerModifier()
 export class modifier_illusion extends BaseModifier_Plus {
@@ -28,7 +27,7 @@ export class modifier_illusion extends BaseModifier_Plus {
         let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
         iTeamNumber = iTeamNumber || hCaster.GetTeamNumber()
         let hSummon = BaseNpc_Plus.CreateUnitByName(sUnitName, vLocation, iTeamNumber, bFindClearSpace, hHero, hHero)
-        fDuration = fDuration + modifier_property.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.SUMMON_DURATION_BONUS);
+        fDuration = fDuration + GPropertyCalculate.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.SUMMON_DURATION_BONUS);
         modifier_illusion.apply(hSummon, hCaster, null, { duration: fDuration })
         modifier_event.FireEvent({
             attacker: hCaster,

@@ -127,8 +127,9 @@ export module FuncHelper {
         let i = Math.pow(10, prec);
         return Math.round(fNumber * i) / i;
     }
-    export function SignNumber(fNumber: number) {
-        return fNumber == 0 ? "" : (fNumber > 0 ? "+" + fNumber : "-" + fNumber);
+    export function SignNumber(fNumber: number, ispect = false) {
+        const pect = ispect ? '%' : "";
+        return fNumber == 0 ? "" : (fNumber > 0 ? "+" + fNumber + pect : "-" + fNumber + pect);
     }
     export function RemapValClamped(num: number, a: number, b: number, c: number, d: number) {
         if (a == b) return c;

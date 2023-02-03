@@ -52,7 +52,7 @@ export class modifier_event extends BaseModifier_Plus {
         }
         while (k.length > 0) {
             let _k = k.shift();
-            let allM = GGameCache.allRegisterEvent[_k];
+            let allM = GGameCache.allBuffRegisterEvent[_k];
             if (allM == null || allM.size == 0) return;
             for (let m of allM) {
                 if (m == null || m.IsNull() || m.UUID == null) {
@@ -67,14 +67,16 @@ export class modifier_event extends BaseModifier_Plus {
                     // 自己事件
                     if (event == null || (a && event.attacker == parent) || (b && event.unit == parent)) {
                         _Event[_k][0].forEach((func) => {
-                            pcall(func, m, event);
+                            if ((m as any)[func] == null || type((m as any)[func]) != 'function') { return }
+                            event == null ? (m as any)[func]() : (m as any)[func](event);
                         });
                     }
                     // 他人事件
                     if (event) {
                         if ((a && event.target == parent) || (a && event.unit == parent) || (b && event.attacker == parent) || c) {
                             _Event[_k][1].forEach((func) => {
-                                pcall(func, m, event);
+                                if ((m as any)[func] == null || type((m as any)[func]) != 'function') { return }
+                                event == null ? (m as any)[func]() : (m as any)[func](event);
                             });
                         }
                     }
@@ -577,19 +579,20 @@ export function registerEvent(params: Enum_MODIFIER_EVENT, onSelf = true, onOthe
     // 首次加载时不需要
     // if (GameRules.State_Get() < DOTA_GameState.DOTA_GAMERULES_STATE_TEAM_SHOWCASE) { return }
     return (target: BaseModifier_Plus, methodName: string, desc: any) => {
+        const params_key = params + "";
         if (target.__AllRegisterEvent == null) {
             target.__AllRegisterEvent = {};
         }
-        if (target.__AllRegisterEvent[params] == null) {
-            target.__AllRegisterEvent[params] = [new Set(), new Set()];
+        if (target.__AllRegisterEvent[params_key] == null) {
+            target.__AllRegisterEvent[params_key] = [new Set(), new Set()];
         }
         if (onSelf) {
             // 针对自己的监听，自己是施法者
-            target.__AllRegisterEvent[params][0].add(desc.value);
+            target.__AllRegisterEvent[params_key][0].add(methodName);
         }
         if (onOther) {
             // 针对其他人的监听，其他人是施法者
-            target.__AllRegisterEvent[params][1].add(desc.value);
+            target.__AllRegisterEvent[params_key][1].add(methodName);
         }
         // LogHelper.print(target.constructor.name, methodName);
     };

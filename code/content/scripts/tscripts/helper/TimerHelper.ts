@@ -1,14 +1,21 @@
-import { GameEnum } from "../shared/GameEnum";
 import { LogHelper } from "./LogHelper";
 
 export module TimerHelper {
+    /**
+     * @Both
+     */
     export function Init() {
         // 函数覆盖掉
         GTimerHelper.NowUnix = NowUnix;
         if (GGameCache.TimerEntity != null) {
             return;
         }
-        (GGameCache.TimerEntity as any) = Entities.CreateByClassname(GameEnum.Unit.UnitNames.info_target); //-- Entities: FindByClassname(nil, 'CWorld')
+        let TimerEntity = Entities.First();
+        while (TimerEntity == null) {
+            TimerEntity = Entities.Next(TimerEntity);
+        }
+        // (GGameCache.TimerEntity as any) = Entities.CreateByClassname(GameEnum.Unit.UnitNames.info_target); //-- Entities: FindByClassname(nil, 'CWorld')
+        (GGameCache.TimerEntity as any) = TimerEntity; //-- Entities: FindByClassname(nil, 'CWorld')
         LogHelper.print("TimeWorker Start ...");
         let interval = GTimerHelper.GetUpdateInterval();
         GGameCache.TimerEntity.SetContextThink("__TIME_THINK__", () => {

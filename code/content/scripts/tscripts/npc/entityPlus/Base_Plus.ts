@@ -1,10 +1,10 @@
 import { GameFunc } from "../../GameFunc";
 import { AoiHelper } from "../../helper/AoiHelper";
-import { KVHelper } from "../../helper/KVHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { CCShare } from "../../shared/lib/CCShare";
 import { ET } from "../../shared/lib/Entity";
 import { PropertyConfig } from "../../shared/PropertyConfig";
+import { PropertyCalculate } from "../propertystat/PropertyCalculate";
 
 export interface BaseAbility extends CDOTA_Ability_Lua { }
 export class BaseAbility implements ET.IEntityRoot {
@@ -39,10 +39,6 @@ export class BaseModifier {
     public static apply<T extends typeof BaseModifier>(this: T, target: IBaseNpc_Plus, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: IModifierTable): InstanceType<T> {
         if (IsServer()) {
             let m = target.AddNewModifier(caster, ability, this.name, modifierTable) as InstanceType<T>;
-            if (m && m.UUID) {
-                GGameCache.allModifiersIntance[this.name] = GGameCache.allModifiersIntance[this.name] || {};
-                GGameCache.allModifiersIntance[this.name][m.UUID] = m;
-            }
             return m;
         }
     }
@@ -95,10 +91,6 @@ export class BaseModifier {
             let n = CreateModifierThinker(caster, ability, this.name, modifierTable, position, teamNumber, phantomBlocker) as BaseNpc;
             GameFunc.BindInstanceToCls(n, BaseNpc);
             let m = n.FindModifierByNameAndCaster(this.name, caster) as InstanceType<T>;
-            if (m && m.UUID) {
-                GGameCache.allModifiersIntance[this.name] = GGameCache.allModifiersIntance[this.name] || {};
-                GGameCache.allModifiersIntance[this.name][m.UUID] = m;
-            }
             return n as IBaseNpc_Plus;
         }
     }
@@ -127,29 +119,23 @@ export class BaseModifier {
     }
 
     /**获取所有的实例数据
-     * @Server
+     * @Both
      */
     public static GetAllInstance<T extends typeof BaseModifier>(this: T) {
-        if (GGameCache.allModifiersIntance[this.name]) {
-            return GGameCache.allModifiersIntance[this.name] as Readonly<{ [UUID: string]: InstanceType<T> }>;
+        if (GGameCache.allBuffIntance[this.name]) {
+            return GGameCache.allBuffIntance[this.name] as Readonly<{ [UUID: string]: InstanceType<T> }>;
         }
     }
     /**重载 
-     * @Server
-    */
-    public static reload<T extends typeof BaseModifier>(this: T) {
-        if (!IsServer()) {
-            return;
-        }
+     * @Both
+     */
+    public static DebugReload<T extends typeof BaseModifier>(this: T) {
         let _instanceArr = this.GetAllInstance();
         if (_instanceArr) {
             for (let uuid in _instanceArr) {
                 let m = _instanceArr[uuid] as any;
                 let _ma = getmetatable(m).__index as any;
                 Object.assign(_ma, this.prototype);
-                m.SendBuffRefreshToClients();
-                // LogHelper.print(m.aaa())
-                break;
             }
         }
     }
@@ -195,27 +181,12 @@ export class BaseModifier {
         return 0;
     }
 
-    /**
-     * 获取所有装饰器注册的buff
-     * @Both
-     * @param hCaster
-     * @returns
-     */
-    public static GetAllModifiersInfo<T extends BaseModifier>(hCaster: IBaseNpc_Plus): { [v: string]: Array<T> } {
-        if (hCaster == null) {
-            return;
-        }
-        if (hCaster.__allModifiersInfo__ == null) {
-            hCaster.__allModifiersInfo__ = {};
-        }
-        return hCaster.__allModifiersInfo__;
-    }
     /**所有注册的属性 */
     public __AllRegisterProperty: { [v: string]: Set<string> };
     /**所有注册的属性函数 */
-    public __AllRegisterFunction: { [v: string]: Set<(...args: any[]) => number> };
+    public __AllRegisterFunction: { [v: string]: Set<string> };
     /**所有注册的事件函数 */
-    public __AllRegisterEvent: { [v: string]: [Set<(...args: any[]) => void>, Set<(...args: any[]) => void>] };
+    public __AllRegisterEvent: { [v: string]: [Set<string>, Set<string>] };
 
     /**是否隐藏 */
     public IsHidden() {
@@ -241,6 +212,12 @@ export class BaseModifier {
     }
     /**初始化自己，OnCreated和OnRefresh都会调用 */
     public Init(params?: object) { }
+
+
+    /**
+     * modifier_property 注册方法的补充
+     * @returns 
+     */
     public DeclareFunctions?(): modifierfunction[] {
         let _all_set = new Set<modifierfunction>();
         let _Property = this.__AllRegisterProperty;
@@ -262,6 +239,7 @@ export class BaseModifier {
                 }
             });
         }
+        const buff = this;
         _all_set.forEach((params) => {
             if (_hasExit.has(params as any)) {
                 return;
@@ -270,55 +248,9 @@ export class BaseModifier {
             if (propName != null) {
                 let funcName = (GPropertyConfig.EMODIFIER_PROPERTY_FUNC as any)[propName];
                 if (funcName && (this as any)[funcName] == null) {
+                    // 注册回调函数
                     (this as any)[funcName] = (event?: any) => {
-                        let _r = 0;
-                        let _r_ = "";
-                        let _Property = this.__AllRegisterProperty;
-                        let _Function = this.__AllRegisterFunction;
-                        let _sum = PropertyConfig.UNIQUE_PROPERTY.indexOf(params as any) == -1;
-                        if (_Property && _Property[params]) {
-                            _Property[params].forEach((attr: string) => {
-                                let r = (this as any)[attr];
-                                if (r) {
-                                    switch (typeof r) {
-                                        case "number":
-                                            if (_sum) {
-                                                _r += r;
-                                            } else {
-                                                _r = math.max(_r, r);
-                                            }
-                                            break;
-                                        case "string":
-                                            _r_ = r;
-                                            break;
-                                    }
-                                }
-                            });
-                        }
-                        if (_Function && _Function[params]) {
-                            _Function[params].forEach((func) => {
-                                let [func_finish, r] = pcall(func, this, event);
-                                if (func_finish && r) {
-                                    switch (typeof r) {
-                                        case "number":
-                                            if (_sum) {
-                                                _r += r;
-                                            } else {
-                                                _r = math.max(_r, r);
-                                            }
-                                            break;
-                                        case "string":
-                                            _r_ = r;
-                                            break;
-                                    }
-                                }
-                            });
-                        }
-                        // 优先返回字符串
-                        if (_r_.length != 0) {
-                            return _r_;
-                        }
-                        return _r;
+                        return PropertyCalculate.RunModifierFunc(buff, params, event);
                     };
                 }
             }
@@ -334,24 +266,9 @@ export class BaseModifier {
         }
         (params as IModifierTable).IsOnCreated = true;
         (params as IModifierTable).IsOnRefresh = false;
-        // LogHelper.print("OnCreated :" + this.GetName());
         this.Init(params);
-        if (this.__AllRegisterProperty == null && this.__AllRegisterFunction == null && this.__AllRegisterEvent == null) {
-            return;
-        }
-        let info = BaseModifier.GetAllModifiersInfo(this.GetParentPlus());
-        if (info == null) return;
-        if (info[this.GetName()] == null) {
-            info[this.GetName()] = [];
-        }
-        info[this.GetName()].push(this);
-        // 同步事件
-        if (this.__AllRegisterEvent) {
-            for (let k in this.__AllRegisterEvent) {
-                GGameCache.allRegisterEvent[k] = GGameCache.allRegisterEvent[k] || new Set();
-                GGameCache.allRegisterEvent[k].add(this);
-            }
-        }
+        PropertyCalculate.RegModifiersInfo(this, true);
+        GGameCache.RegBuff(this, true);
     }
 
     public OnRefresh(params: object) {
@@ -366,48 +283,24 @@ export class BaseModifier {
     }
     private __destroyed: boolean = true;
     public OnDestroy() {
-        let info = BaseModifier.GetAllModifiersInfo(this.GetParentPlus());
-        let classname = this.GetName();
-        // 删除数据
-        if (info && info[classname]) {
-            let len = info[classname].length;
-            for (let i = 0; i < len; i++) {
-                if (this.UUID == info[classname][i].UUID) {
-                    // 删除元素
-                    info[classname].splice(i, 1);
-                    break;
-                }
-            }
-            if (info[classname].length == 0) {
-                delete info[classname];
-            }
-        }
+        PropertyCalculate.RegModifiersInfo(this, false);
+        GGameCache.RegBuff(this, false);
         this.__AllRegisterFunction = null;
         this.__AllRegisterProperty = null;
-        // 删除事件
-        if (this.__AllRegisterEvent) {
-            for (let k in this.__AllRegisterEvent) {
-                if (GGameCache.allRegisterEvent[k]) {
-                    GGameCache.allRegisterEvent[k].delete(this);
-                }
-            }
-        }
         this.__AllRegisterEvent = null;
         // 计时器处理
         GTimerHelper.ClearAll(this);
         this.StartIntervalThink(-1);
-        if (this.UUID && GGameCache.allModifiersIntance[classname]) {
-            if (GGameCache.allModifiersIntance[classname][this.UUID]) {
-                delete GGameCache.allModifiersIntance[classname][this.UUID];
-            }
-            if (Object.keys(GGameCache.allModifiersIntance[classname]).length == 0) {
-                delete GGameCache.allModifiersIntance[classname];
-            }
-        }
         this.__destroyed = true;
-        // LogHelper.print(this.GetName() + " destroy ");
     }
 
+
+    /**重载 
+     * @Both
+     */
+    public onDebugReload<T extends typeof BaseModifier>(cls: T) {
+        Object.assign(getmetatable(this).__index, cls.prototype);
+    }
     /**
      * 圆形范围找敌方单位
      * @Server
@@ -516,8 +409,9 @@ export class BaseNpc implements ET.IEntityRoot {
     __bIsFirstSpawn?: boolean;
     /**所有的BUFF信息 */
     __allModifiersInfo__?: { [v: string]: Array<any> };
-    /**初始生命值 */
-    __BaseStatusHealth?: number;
+    /**配置表数据 */
+    __IN_KV_CACHE__?: { [v: string]: any };
+
     /**初始魔法值 */
     __BaseStatusMana?: number;
     private __SpawnedHandler__?: Array<IGHandler>;
@@ -617,8 +511,6 @@ export class BaseNpc implements ET.IEntityRoot {
     }
     //#endregion
 
-
-
     /**
      * 是否拥有魔晶
      * @param hCaster
@@ -633,9 +525,9 @@ export class BaseNpc implements ET.IEntityRoot {
      * @returns
      */
     GetStatusResistanceFactor?(hCaster: CDOTA_BaseNPC) {
-        let d: number = 1 - Gmodifier_property.GetStatusResistance(this) * 0.01;
+        let d: number = 1 - PropertyCalculate.GetStatusResistance(this) * 0.01;
         if (GameFunc.IsValid(hCaster)) {
-            d = d * (1 + Gmodifier_property.GetStatusResistanceCaster(hCaster) * 0.01)
+            d = d * (1 + PropertyCalculate.GetStatusResistanceCaster(hCaster) * 0.01)
         }
         return d
     }
@@ -653,10 +545,9 @@ export class BaseNpc implements ET.IEntityRoot {
      * @param fChanged 
      */
     ModifyMaxHealth?(fChanged: number) {
-        if (GameFunc.IsValid(this) && this.__BaseStatusHealth == null) {
-            this.__BaseStatusHealth = GToNumber(KVHelper.GetUnitData(this.GetUnitName(), "StatusHealth"));
+        if (GameFunc.IsValid(this)) {
+            PropertyCalculate.SetUnitCache(this, "StatusHealth", PropertyCalculate.GetUnitCache(this, "StatusHealth") + fChanged)
         }
-        this.__BaseStatusHealth += fChanged
     }
     /**
      * @Server
@@ -703,10 +594,6 @@ export class BaseNpc implements ET.IEntityRoot {
     public addBuff?<T extends BaseModifier>(buffname: string, caster?: IBaseNpc_Plus, ability?: IBaseAbility_Plus, modifierTable?: IModifierTable): T {
         if (IsServer()) {
             let m = this.AddNewModifier(caster, ability, buffname, modifierTable) as T;
-            if (m && m.UUID) {
-                GGameCache.allModifiersIntance[buffname] = GGameCache.allModifiersIntance[buffname] || {};
-                GGameCache.allModifiersIntance[buffname][m.UUID] = m;
-            }
             return m;
         }
     }
@@ -942,9 +829,6 @@ function toDotaClassInstance(instance: any, table: new () => any) {
  * @returns 
  */
 function SafeDestroyAbility(ability: BaseAbility) {
-    // if (!IsServer()) {
-    //     return;
-    // }
     if (GameFunc.IsValid(ability)) {
         if (ability.__safedestroyed__) {
             return;
@@ -962,9 +846,6 @@ function SafeDestroyAbility(ability: BaseAbility) {
  * @returns 
  */
 function SafeDestroyItem(item: BaseItem) {
-    // if (!IsServer()) {
-    //     return;
-    // }
     if (GameFunc.IsValid(item)) {
         if (item.__safedestroyed__) {
             return;
@@ -982,9 +863,6 @@ function SafeDestroyItem(item: BaseItem) {
  * @returns 
  */
 function SafeDestroyUnit(unit: BaseNpc) {
-    // if (!IsServer()) {
-    //     return;
-    // }
     if (GameFunc.IsValid(unit)) {
         if (unit.__safedestroyed__) {
             return;

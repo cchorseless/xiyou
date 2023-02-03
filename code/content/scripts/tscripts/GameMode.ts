@@ -68,6 +68,7 @@ export class GameMode {
         GameRules.Playtesting_UpdateAddOnKeyValues();
         FireGameEvent(GameEnum.GameEvent.client_reload_game_keyvalues, {});
         ETEntitySystem.DebugReload();
+        GGameCache.DebugReload();
         // let units = Entities.FindAllByClassname("npc_dota_creature") as IBaseNpc_Plus[]
         // LogHelper.print(modifier_test.GetAllInstance(), 111)
         // let s = []

@@ -30,13 +30,7 @@ export module TimeUtils {
 
         //更新
         public Update(interval: number): boolean {
-            let isPause = GameRules.IsGamePaused();
-            // if (_CODE_IN_LUA_) {
-            //     isPause = GameRules.IsGamePaused()
-            // }
-            // else {
-            //     isPause = Game.IsGamePaused()
-            // }
+            let isPause = GameRules.GetGameFrameTime() == 0;
             if (!this.isIgnorePauseTime && isPause) {
                 return true;
             }
