@@ -1142,13 +1142,33 @@ export module UnitHelper {
     export function GetIgnorePhysicalArmorPercentage(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetIgnorePhysicalArmorPercentage")));
     };
+    export function GetManaRegen(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetManaRegen")));
+    };
     export function GetIgnoreMagicalArmorPercentage(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetIgnoreMagicalArmorPercentage")));
     };
     export function GetCriticalStrikeChance(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetCriticalStrikeChance")));
     };
-
+    export function GetCriticalStrikeDamage(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetCriticalStrikeDamage")));
+    };
+    export function GetSpellCriticalStrikeChance(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetSpellCriticalStrikeChance")));
+    };
+    export function GetEnergyRegenPercentage(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetEnergyRegenPercentage")));
+    };
+    export function GetSpellCriticalStrikeDamage(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetSpellCriticalStrikeDamage")));
+    };
+    export function GetPhysicalArmor(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetPhysicalArmor")));
+    };
+    export function GetBasePhysicalArmor(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetBasePhysicalArmor")));
+    };
     export function GetStatusResistance(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetStatusResistance")));
     };

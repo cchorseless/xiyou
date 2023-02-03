@@ -153,8 +153,17 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
         let istop = pos.y <= windowheight / 2;
         let setPosFunc = () => {
             let dialogpanel = this.CustomToolTip!.__root__.current!;
+            dialogpanel.hittest = false;
+            dialogpanel.hittestchildren = false;
             let posdialog = { x: 0, y: 0 };
             let size = CSSHelper.getPanelSize(dialogpanel);
+            if (dialogpanel.IsSizeValid()) {
+                dialogpanel.style.opacity = 1 + ""
+            }
+            else {
+                // 设置成0 不计算
+                dialogpanel.style.opacity = 0.01 + ""
+            }
             let dialogwidth = size[0];
             let dialogheight = size[1];
             if (layoutleftRight) {
@@ -185,6 +194,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                 }
             }
             dialogpanel.SetPositionInPixels(posdialog.x, posdialog.y, 0);
+
         }
         setPosFunc();
         let i = 0;
@@ -199,7 +209,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                 return
             }
             return 0.1
-        }));
+        }), true);
     }
     /**显示tooltip弹窗 */
     public async ShowCustomToolTip<M extends NodePropsData, T extends typeof CCPanel<M>>(bindpanel: Panel, dialoginfo: dialogTooltipInfo<T, any>) {

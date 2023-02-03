@@ -25,11 +25,22 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         });
     }
 
+
+    getRowClassName(v1: number) {
+        if (v1 === 0) {
+            return "NoBonus";
+        }
+        else if (v1 < 0) {
+            return "NegativeValue";
+        }
+    }
+
+
     render() {
         let iLocalPortraitUnit = this.GetState<EntityIndex>("curunit")
         let sUnitName = Entities.GetUnitName(iLocalPortraitUnit);
         let tData = KVHelper.KVUnits()[sUnitName];
-        let bIsHero = UnitHelper.HasHeroAttribute(iLocalPortraitUnit);// NOTE:是否是防御塔，懒得改变量名了
+        let bIsHero = UnitHelper.HasHeroAttribute(iLocalPortraitUnit);
         let bEnemy = Entities.IsEnemy(iLocalPortraitUnit);
         let bFriendlySummon = !bEnemy && !bIsHero && !Entities.IsHero(iLocalPortraitUnit);
         let iPrimaryAttribute = Attributes.DOTA_ATTRIBUTE_INVALID;
@@ -40,62 +51,29 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         let iStrength = UnitHelper.GetStrength(iLocalPortraitUnit);
         let iBaseStrength = UnitHelper.GetBaseStrength(iLocalPortraitUnit);
         let iBonusStrength = iStrength - iBaseStrength;
-        let sSign = iBonusStrength == 0 ? "" : (iBonusStrength > 0 ? "+" : "-");
-        let sBonusStrength;
-        if (sSign == "") {
-            sBonusStrength = "";
-        }
-        else if (sSign == "+") {
-            sBonusStrength = sSign + iBonusStrength.toFixed(0);
-        }
-        else {
-            sBonusStrength = iBonusStrength.toFixed(0);
-        }
+        let sBonusStrength = FuncHelper.SignNumber(iBonusStrength);
         const base_strength = iBaseStrength || 0;
         const bonus_strength = sBonusStrength;
         const total_strength = iStrength;
-        const NegativeValue_strength = sSign == "-";
-        const NoBonus_strength = sSign == "";
+        const rowcls_strength = this.getRowClassName(iBaseStrength);
         // 敏捷
         let iAgility = UnitHelper.GetAgility(iLocalPortraitUnit);
         let iBaseAgility = UnitHelper.GetBaseAgility(iLocalPortraitUnit);
         let iBonusAgility = iAgility - iBaseAgility;
-        sSign = iBonusAgility == 0 ? "" : (iBonusAgility > 0 ? "+" : "-");
-        let sBonusAgility;
-        if (sSign == "") {
-            sBonusAgility = "";
-        }
-        else if (sSign == "+") {
-            sBonusAgility = sSign + iBonusAgility.toFixed(0);
-        }
-        else {
-            sBonusAgility = iBonusAgility.toFixed(0);
-        }
+        let sBonusAgility = FuncHelper.SignNumber(iBonusAgility);
         const base_agility = iBaseAgility || 0;
         const bonus_agility = sBonusAgility;
         const total_agility = iAgility;
-        const NegativeValue_agility = sSign == "-";
-        const NoBonus_agility = sSign == "";
+        const rowcls_agility = this.getRowClassName(iBonusAgility);
         // 智力
         let iIntellect = UnitHelper.GetIntellect(iLocalPortraitUnit);
         let iBaseIntellect = UnitHelper.GetBaseIntellect(iLocalPortraitUnit);
         let iBonusIntellect = iIntellect - iBaseIntellect;
-        sSign = iBonusIntellect == 0 ? "" : (iBonusIntellect > 0 ? "+" : "-");
-        let sBonusIntellect;
-        if (sSign == "") {
-            sBonusIntellect = "";
-        }
-        else if (sSign == "+") {
-            sBonusIntellect = sSign + iBonusIntellect.toFixed(0);
-        }
-        else {
-            sBonusIntellect = iBonusIntellect.toFixed(0);
-        }
+        let sBonusIntellect = FuncHelper.SignNumber(iBonusIntellect);;
         const base_intellect = iIntellect || 0;
         const bonus_intellect = sBonusIntellect;
         const total_intellect = iIntellect;
-        const NegativeValue_intellect = sSign == "-";
-        const NoBonus_intellect = sSign == "";
+        const rowcls_intellect = this.getRowClassName(iBonusIntellect);
 
         // 攻击速度
         let fAttackSpeed = UnitHelper.GetAttackSpeedPercent(iLocalPortraitUnit);
@@ -108,32 +86,19 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         let fMinDamage = Entities.GetDamageMin(iLocalPortraitUnit);
         let fMaxDamage = Entities.GetDamageMax(iLocalPortraitUnit);
         let fBaseDamage = (fMinDamage + fMaxDamage) / 2;
-        sSign = fBonusDamage == 0 ? "" : (fBonusDamage > 0 ? "+" : "-");
-        let sBonusDamage;
-        if (sSign == "") {
-            sBonusDamage = "";
-        }
-        else if (sSign == "+") {
-            sBonusDamage = sSign + fBonusDamage.toFixed(0);
-        }
-        else {
-            sBonusDamage = fBonusDamage.toFixed(0);
-        }
-
-        // pSelf.SetDialogVariableInt("base_damage_min", fMinDamage);
-        // pSelf.SetDialogVariableInt("base_damage_max", fMaxDamage);
+        let sBonusDamage = FuncHelper.SignNumber(fBonusDamage);;
+        const base_damage_min = fMinDamage;
+        const base_damage_max = fMaxDamage;
         const base_damage = fBaseDamage;
         const bonus_damage = sBonusDamage;
-        const NegativeValue_damage = sSign == "-";
-        const NoBonus_damage = sSign == "";
+        const rowcls_damage = this.getRowClassName(fBonusDamage);
         // 技能增强
-        // let fBaseSpellAmplify = Entities.GetBaseSpellAmplify(iLocalPortraitUnit);
+        let fBaseSpellAmplify = UnitHelper.GetBaseSpellAmplify(iLocalPortraitUnit);
         let fSpellAmplify = UnitHelper.GetSpellAmplify(iLocalPortraitUnit);
-        // let fBonusSpellAmplify = Round(fSpellAmplify - fBaseSpellAmplify, 1);
+        let fBonusSpellAmplify = FuncHelper.Round(fSpellAmplify - fBaseSpellAmplify, 1);
         const base_spell_amplify = FuncHelper.Round(fSpellAmplify, 1);
-        // pSpellAmpRow.SetDialogVariable("bonus_spell_amplify", signNumber(fBonusSpellAmplify));
-        // pSpellAmpRow.SetHasClass("NegativeValue", fBonusSpellAmplify < 0);
-        // pSpellAmpRow.SetHasClass("NoBonus", fBonusSpellAmplify == 0);
+        const bonus_spell_amplify = FuncHelper.SignNumber(fBonusSpellAmplify);
+        const rowcls_spell_amplify = this.getRowClassName(fBonusSpellAmplify);
         // 额外全伤害
         let fTotalDamagePercent = UnitHelper.GetOutgoingDamagePercent(iLocalPortraitUnit);
         const total_damage_percent = FuncHelper.Round(fTotalDamagePercent, 2);
@@ -150,45 +115,22 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         let fAttackRange = Entities.GetAttackRange(iLocalPortraitUnit);
         let fBaseAttackRange = (tData && tData.AttackRange) ? FuncHelper.ToFloat(tData.AttackRange) : 0;
         let fBonusAttackRange = fAttackRange - fBaseAttackRange;
-        sSign = fBonusAttackRange == 0 ? "" : (fBonusAttackRange > 0 ? "+" : "-");
-        let sBonusAttackRange;
-        if (sSign == "") {
-            sBonusAttackRange = "";
-        }
-        else if (sSign == "+") {
-            sBonusAttackRange = sSign + fBonusAttackRange.toFixed(0);
-        }
-        else {
-            sBonusAttackRange = fBonusAttackRange.toFixed(0);
-        }
+        let sBonusAttackRange = FuncHelper.SignNumber(fBonusAttackRange);
         const base_attack_range = fBaseAttackRange;
         const bonus_attack_range = sBonusAttackRange;
-        const NegativeValue_attack_range = sSign == "-";
-        const NoBonus_attack_range = sSign == "";
+        const rowcls_attack_range = this.getRowClassName(fBonusAttackRange);
         // 冷却减少
         let fCooldownReduction = UnitHelper.GetCooldownReduction(iLocalPortraitUnit);
         const cooldown_reduction = FuncHelper.Round(fCooldownReduction, 1);
         // 魔法恢复
-        // let fBaseManaRegen = (tData && tData.StatusManaRegen) ? FuncHelper.ToFloat(tData.StatusManaRegen as string) : 0;
-        // let fManaRegen = Entities.GetManaRegen(iLocalPortraitUnit) + fBaseManaRegen;
-        // // fBaseManaRegen += fExtraBaseManaRegen;
-        // let fBonusManaRegen = fManaRegen - fBaseManaRegen;
-        // sSign = fBonusManaRegen == 0 ? "" : (fBonusManaRegen > 0 ? "+" : "-");
-        // let sBonusManaRegen: string | number;
-        // if (sSign == "") {
-        //     sBonusManaRegen = "";
-        // }
-        // else if (sSign == "+") {
-        //     sBonusManaRegen = sSign + FuncHelper.Round(fBonusManaRegen, 1);
-        // }
-        // else {
-        //     sBonusManaRegen = FuncHelper.Round(fBonusManaRegen, 1);
-        // }
-
-        // pSelf.SetDialogVariable("base_mana_regen", Round(fBaseManaRegen, 1));
-        // pSelf.SetDialogVariable("bonus_mana_regen", sBonusManaRegen);
-        // pSelf.SetHasClass("NegativeValue", sSign == "-");
-        // pSelf.SetHasClass("NoBonus", sSign == "");
+        let fBaseManaRegen = (tData && tData.StatusManaRegen) ? FuncHelper.ToFloat(tData.StatusManaRegen as string) : 0;
+        let fManaRegen = UnitHelper.GetManaRegen(iLocalPortraitUnit) + fBaseManaRegen;
+        // fBaseManaRegen += fExtraBaseManaRegen;
+        let fBonusManaRegen = fManaRegen - fBaseManaRegen;
+        let sBonusManaRegen = FuncHelper.SignNumber(fBonusManaRegen);
+        const base_mana_regen = FuncHelper.Round(fBaseManaRegen, 1)
+        const bonus_mana_regen = sBonusManaRegen;
+        const rowcls_mana_regen = this.getRowClassName(fBonusManaRegen);
         // 物理防御穿透
         let fIgnorePhysicalArmorPercent = UnitHelper.GetIgnorePhysicalArmorPercentage(iLocalPortraitUnit);
         const ignore_physical_armor_percent = FuncHelper.Round(fIgnorePhysicalArmorPercent, 2);
@@ -199,52 +141,79 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         let fBase = GPropertyConfig.BASE_ATTACK_CRITICALSTRIKE_CHANCE;
         let fTotal = FuncHelper.Round(UnitHelper.GetCriticalStrikeChance(iLocalPortraitUnit), 2);
         let fBonus = fTotal - fBase;
-        let sBonus = String(fBonus);
-        if (fBonus > 0) {
-            sBonus = "+" + sBonus;
-            sSign = "+"
-        }
-        else if (fBonus == 0) {
-            sBonus = "";
-            sSign = ""
-        }
-        else {
-            sSign = "-"
-        }
+        let sBonus = FuncHelper.SignNumber(fBonus);
         const base_attack_crit_chance = fBase;
         const bonus_attack_crit_chance = sBonus;
-        const NegativeValue_Crit = sSign == "-";
-        const NoBonus_Crit = sSign == "";
+        const rowcls_Crit = this.getRowClassName(fBonus);
         // 暴击伤害
-
-
-
-        const base_attack_crit_damage = this.GetState<number>("base_attack_crit_damage", 0);
-        const bonus_attack_crit_damage = this.GetState<number>("bonus_attack_crit_damage", 0);
-        const base_spell_crit_chance = this.GetState<number>("base_spell_crit_chance", 0);
-        const bonus_spell_crit_chance = this.GetState<number>("bonus_spell_crit_chance", 0);
-        const spell_crit_damage = this.GetState<number>("spell_crit_damage", 0);
-        const bonus_spell_crit_damage = this.GetState<number>("bonus_spell_crit_damage", 0);
-        const status_resistance = this.GetState<number>("status_resistance", 0);
-        const energy_regen_percent = this.GetState<number>("energy_regen_percent", 0);
-        const base_physical_armor = this.GetState<number>("base_physical_armor", 0);
-        const bonus_physical_armor = this.GetState<number>("bonus_physical_armor", 0);
-        const physical_resistance = this.GetState<number>("physical_resistance", 0);
-        const base_magical_armor = this.GetState<number>("base_magical_armor", 0);
-        const bonus_magical_armor = this.GetState<number>("bonus_magical_armor", 0);
-        const magical_resistance = this.GetState<number>("magical_resistance", 0);
-        const evasion = this.GetState<number>("evasion", 0);
+        let fBaseCritDamage = GPropertyConfig.BASE_ATTACK_CRITICALSTRIKE_DAMAGE;// 基础暴击伤害
+        let fBonusCritDamage = UnitHelper.GetCriticalStrikeDamage(iLocalPortraitUnit) - fBaseCritDamage;
+        let sBonusCritDamage = FuncHelper.SignNumber(fBonusCritDamage);
+        const base_attack_crit_damage = FuncHelper.Round(fBaseCritDamage, 2);
+        const bonus_attack_crit_damage = sBonusCritDamage;
+        const rowcls_Crit_damage = this.getRowClassName(fBonusCritDamage);
+        // 技能暴击概率
+        let fBase_crit_chance = GPropertyConfig.BASE_SPELL_CRITICALSTRIKE_CHANCE;
+        let fTotal_crit_chance = FuncHelper.Round(UnitHelper.GetSpellCriticalStrikeChance(iLocalPortraitUnit), 2);
+        let fBonus_crit_chance = fTotal_crit_chance - fBase_crit_chance;
+        let sBonus_crit_chance = FuncHelper.SignNumber(fBonus_crit_chance);
+        const base_spell_crit_chance = fBase_crit_chance;
+        const bonus_spell_crit_chance = sBonus_crit_chance;
+        const rowcls_crit_chance = this.getRowClassName(fBonus_crit_chance);
+        // 怒气恢复加成
+        const energy_regen_percent = FuncHelper.Round(UnitHelper.GetEnergyRegenPercentage(iLocalPortraitUnit), 2)
+        // 技能暴击伤害
+        let fBaseSpellCritDamage = GPropertyConfig.BASE_SPELL_CRITICALSTRIKE_DAMAGE;// 基础暴击概率
+        let fBonusSpellCritDamage = UnitHelper.GetSpellCriticalStrikeDamage(iLocalPortraitUnit) - fBaseSpellCritDamage;
+        let sBonusSpellCritDamage = FuncHelper.SignNumber(fBonusSpellCritDamage);
+        const spell_crit_damage = FuncHelper.Round(fBaseSpellCritDamage, 2);
+        const bonus_spell_crit_damage = sBonusSpellCritDamage;
+        const rowcls_spell_crit_damage = this.getRowClassName(fBonusSpellCritDamage);
+        // 物理防御
+        let fPhysicalArmor = UnitHelper.GetPhysicalArmor(iLocalPortraitUnit);
+        let fBasePhysicalArmor = UnitHelper.GetBasePhysicalArmor(iLocalPortraitUnit);
+        let fBonusPhysicalArmor = fPhysicalArmor - fBasePhysicalArmor;
+        let fPhysicalArmorReduction = (() => {
+            let iSign = fPhysicalArmor >= 0 ? 1 : -1;
+            return iSign * GPropertyConfig.PHYSICAL_ARMOR_FACTOR * Math.abs(fPhysicalArmor) / (1 + GPropertyConfig.PHYSICAL_ARMOR_FACTOR * Math.abs(fPhysicalArmor));
+        })();
+        let sBonusPhysicalArmor = FuncHelper.SignNumber(fBonusPhysicalArmor);;
+        const base_physical_armor = FuncHelper.Round(fBasePhysicalArmor, 1)
+        const bonus_physical_armor = sBonusPhysicalArmor;
+        const physical_resistance = FuncHelper.Round(fPhysicalArmorReduction * 100, 1);
+        const rowcls_physical_armor = this.getRowClassName(fBonusPhysicalArmor);
+        // 魔法防御
+        let fMagicalArmor = UnitHelper.GetMagicalArmor(iLocalPortraitUnit);
+        let fBaseMagicalArmor = UnitHelper.GetBaseMagicalArmor(iLocalPortraitUnit);
+        let fBonusMagicalArmor = fMagicalArmor - fBaseMagicalArmor;
+        let fMagicalArmorReduction = (() => {
+            let iSign = fMagicalArmor >= 0 ? 1 : -1;
+            return iSign * GPropertyConfig.MAGICAL_ARMOR_FACTOR * Math.abs(fMagicalArmor) / (1 + GPropertyConfig.MAGICAL_ARMOR_FACTOR * Math.abs(fMagicalArmor));
+        })();
+        let sBonusMagicalArmor = FuncHelper.SignNumber(fBonusMagicalArmor);;
+        const base_magical_armor = FuncHelper.Round(fBaseMagicalArmor, 1);
+        const bonus_magical_armor = sBonusMagicalArmor;
+        const magical_resistance = FuncHelper.Round(fMagicalArmorReduction * 100, 1);
+        const rowcls_magical_armor = this.getRowClassName(fBonusMagicalArmor);
+        // 闪避
+        let fEvasion = UnitHelper.GetEvasion(iLocalPortraitUnit);
+        const evasion = fEvasion.toFixed(0);
         // 移动速度
-        const base_move_speed = this.GetState<number>("base_move_speed", 0);
-        const bonus_move_speed = this.GetState<number>("bonus_move_speed", 0);
+        let fBaseMoveSpeed = Entities.GetBaseMoveSpeed(iLocalPortraitUnit);
+        let fBonusMoveSpeed = UnitHelper.GetMoveSpeed(iLocalPortraitUnit) - fBaseMoveSpeed;
+        let sBonusMoveSpeed = FuncHelper.SignNumber(fBonusMoveSpeed);;
+        const base_move_speed = fBaseMoveSpeed.toFixed(0);
+        const bonus_move_speed = sBonusMoveSpeed;
+        const rowcls_move_speed = this.getRowClassName(fBonusMoveSpeed);
+        // 状态抗性
+        let fStatusResistance = UnitHelper.GetStatusResistance(iLocalPortraitUnit);
+        const status_resistance = FuncHelper.Round(fStatusResistance, 1);
 
-
-        // className="unitStatsRoot">
         return <Panel className={CSSHelper.ClassMaker("CCUnitStatsDialog", { Hero: bIsHero })} ref={this.__root__}    {...this.initRootAttrs()}>
             <Panel id="unitStatsTopMain">
                 <Panel id="HeroAttackContainer" className={CSSHelper.ClassMaker("SecondaryContainer TopBottomFlow", { Hidden: !bIsHero })}>
                     {/* <Label id="AttackHeader" className="ContainerHeader" text="#Unit_Stats_Label_Outgoing" /> */}
-                    <Panel id="DamageRow" className={CSSHelper.ClassMaker("StatRow", { NegativeValue: NegativeValue_damage, NoBonus: NoBonus_damage })}>
+                    <Panel id="DamageRow" className={CSSHelper.ClassMaker("StatRow", rowcls_damage)}>
                         <Image id="DamageIcon" />
                         <Label id="DamageLabel" text="#DOTA_HUD_Damage" className="StatName" />
                         <Panel className="LeftRightFlow">
@@ -260,14 +229,14 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                             <Label id="AttacksPerSecond" text={` (${seconds_per_attack})`} className="BaseValue AdditionalValue" />
                         </Panel>
                     </Panel>
-                    <Panel className={CSSHelper.ClassMaker("AttackCritRow StatRow", { NegativeValue: NegativeValue_Crit, NoBonus: NoBonus_Crit })} >
+                    <Panel className={CSSHelper.ClassMaker("AttackCritRow StatRow", rowcls_Crit)} >
                         <Label id="AttackCritLabel" text="#DOTA_HUD_AttackCrit" className="StatName" html={true} />
                         <Panel className="LeftRightFlow">
                             <Label id="BaseAttackCrit" text={`${base_attack_crit_chance}%`} className="BaseValue" />
                             <Label id="BonusAttackCrit" text={`${bonus_attack_crit_chance}%`} className="BonusValue" />
                         </Panel>
                     </Panel>
-                    <Panel id="AttackCritDamageRow" className="StatRow">
+                    <Panel id="AttackCritDamageRow" className={CSSHelper.ClassMaker("StatRow", rowcls_Crit_damage)}>
                         <Label id="AttackCritDamageLabel" text="#DOTA_HUD_AttackCritDamage" className="StatName" html={true} />
                         <Panel className="LeftRightFlow">
                             <Label id="AttackCritDamage" text={`${base_attack_crit_damage}%`} className="BaseValue" />
@@ -279,7 +248,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         <Label id="SpellAmpLabel" text="#DOTA_HUD_SpellAmp" className="StatName" />
                         <Panel className="LeftRightFlow">
                             <Label id="SpellAmp" text={`${base_spell_amplify}%`} className="BaseValue" />
-                            {/* <Label id="SpellAmpBonus" text={`${bonus_spell_amplify}%`} className="BonusValue" />  */}
+                            <Label id="SpellAmpBonus" text={`${bonus_spell_amplify}%`} className="BonusValue" />
                         </Panel>
                     </Panel>
                     <Panel id="CooldownReductionRow" className="StatRow">
@@ -288,14 +257,14 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                             <Label id="CooldownReduction" text={`${cooldown_reduction}%`} className="BaseValue" />
                         </Panel>
                     </Panel>
-                    <Panel className="SpellCritRow StatRow">
+                    <Panel className={CSSHelper.ClassMaker("SpellCritRow StatRow", rowcls_crit_chance)}>
                         <Label id="SpellCritLabel" text="#DOTA_HUD_SpellCrit" className="StatName" html={true} />
                         <Panel className="LeftRightFlow">
                             <Label id="BaseSpellCrit" text={`${base_spell_crit_chance}%`} className="BaseValue" />
                             <Label id="BonusSpellCrit" text={`${bonus_spell_crit_chance}%`} className="BonusValue" />
                         </Panel>
                     </Panel>
-                    <Panel id="SpellCritDamageRow" className="StatRow">
+                    <Panel id="SpellCritDamageRow" className={CSSHelper.ClassMaker("StatRow", rowcls_spell_crit_damage)} >
                         <Label id="SpellCritDamageLabel" text="#DOTA_HUD_SpellCritDamage" className="StatName" html={true} />
                         <Panel className="LeftRightFlow">
                             <Label id="SpellCritDamage" text={`${spell_crit_damage}%`} className="BaseValue" />
@@ -305,7 +274,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                 </Panel>
                 <Panel id="HeroOtherContainer" className={CSSHelper.ClassMaker("SecondaryContainer TopBottomFlow", { Hidden: !bIsHero })}>
                     <Label id="OtherDamageHeader" className="ContainerHeader" text="#Unit_Stats_Label_Other" />
-                    <Panel id="AttackRangeRow" className={CSSHelper.ClassMaker("StatRow", { NegativeValue: NegativeValue_attack_range, NoBonus: NoBonus_attack_range })}>
+                    <Panel id="AttackRangeRow" className={CSSHelper.ClassMaker("StatRow", rowcls_attack_range)}>
                         <Label id="RangeLabel" text="#DOTA_HUD_AttackRange" className="StatName" />
                         <Panel className="LeftRightFlow">
                             <Label id="Range" text={`${base_attack_range}`} className="BaseValue" />
@@ -363,7 +332,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                 </Panel>
                 <Panel id="EnermyContainer" className={CSSHelper.ClassMaker("SecondaryContainer TopBottomFlow", { Hidden: !bEnemy })}>
                     <Label id="DefenseHeader" className="ContainerHeader" text="#DOTA_HUD_Defense" />
-                    <Panel id="PhysicalArmorRow" className="StatRow">
+                    <Panel id="PhysicalArmorRow" className={CSSHelper.ClassMaker("StatRow", rowcls_physical_armor)}>
                         <Label id="PhysicalArmorLabel" text="#DOTA_HUD_PhysicalArmor_Custom" className="StatName" />
                         <Panel className="LeftRightFlow">
                             <Label id="PhysicalArmor" text={`${base_physical_armor}`} className="BaseValue" />
@@ -371,7 +340,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                             <Label id="PhysicalResist" text={` (${physical_resistance})`} className="BaseValue AdditionalValue" />
                         </Panel>
                     </Panel>
-                    <Panel id="MagicalArmorRow" className="StatRow">
+                    <Panel id="MagicalArmorRow" className={CSSHelper.ClassMaker("StatRow", rowcls_magical_armor)}>
                         <Label id="MagicalArmorLabel" text="#DOTA_HUD_MagicalArmor_Custom" className="StatName" />
                         <Panel className="LeftRightFlow">
                             <Label id="MagicalArmor" text={`${base_magical_armor}`} className="BaseValue" />
@@ -391,7 +360,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                             <Label id="Evasion" text={`${evasion}%`} className="BaseValue" />
                         </Panel>
                     </Panel>
-                    <Panel id="MoveSpeedRow" className="StatRow">
+                    <Panel id="MoveSpeedRow" className={CSSHelper.ClassMaker("StatRow", rowcls_move_speed)}>
                         <Label id="MoveSpeedLabel" text="#DOTA_HUD_MoveSpeed" className="StatName" />
                         <Panel className="LeftRightFlow">
                             <Label id="MoveSpeed" text={`${base_move_speed}`} className="BaseValue" />
@@ -400,7 +369,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                     </Panel>
                 </Panel>
                 <Panel id="FriendlySummonContainer" className={CSSHelper.ClassMaker("SecondaryContainer TopBottomFlow", { Hidden: !bFriendlySummon })}>
-                    <Panel id="DamageRow" className={CSSHelper.ClassMaker("StatRow", { NegativeValue: NegativeValue_damage, NoBonus: NoBonus_damage })}>
+                    <Panel id="DamageRow" className={CSSHelper.ClassMaker("StatRow", rowcls_damage)}>
                         <Label id="DamageLabel" text="#DOTA_HUD_Damage" className="StatName" />
                         <Panel className="LeftRightFlow">
                             {/* <Label id="Damage" text="{d:base_damage_min} - {d:base_damage_max}" className="BaseValue" /> */}
@@ -415,14 +384,14 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                             <Label id="AttacksPerSecond" text={` (${seconds_per_attack})`} className="BaseValue AdditionalValue" />
                         </Panel>
                     </Panel>
-                    <Panel className={CSSHelper.ClassMaker("AttackCritRow StatRow", { NegativeValue: NegativeValue_Crit, NoBonus: NoBonus_Crit })}>
+                    <Panel className={CSSHelper.ClassMaker("AttackCritRow StatRow", rowcls_Crit)}>
                         <Label id="AttackCritLabel" text="#DOTA_HUD_AttackCrit" className="StatName" html={true} />
                         <Panel className="LeftRightFlow">
                             <Label id="BaseAttackCrit" text={`${base_attack_crit_chance}%`} className="BaseValue" />
                             <Label id="BonusAttackCrit" text={`${bonus_attack_crit_chance}%`} className="BonusValue" />
                         </Panel>
                     </Panel>
-                    <Panel id="AttackCritDamageRow" className="StatRow">
+                    <Panel id="AttackCritDamageRow" className={CSSHelper.ClassMaker("StatRow", rowcls_Crit_damage)}>
                         <Label id="AttackCritDamageLabel" text="#DOTA_HUD_AttackCritDamage" className="StatName" html={true} />
                         <Panel className="LeftRightFlow">
                             <Label id="AttackCritDamage" text={`${base_attack_crit_damage}%`} className="BaseValue" />
@@ -449,10 +418,9 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
             </Panel>
             <Panel id="AttributesContainer" className="TopBottomFlow">
                 <Panel id="StrengthContainer" className={CSSHelper.ClassMaker("LeftRightFlow AttributeRow",
+                    rowcls_strength,
                     {
                         PrimaryAttribute: iPrimaryAttribute == Attributes.DOTA_ATTRIBUTE_STRENGTH,
-                        NegativeValue: NegativeValue_strength,
-                        NoBonus: NoBonus_strength,
                     })}>
                     <Panel id="StrengthIcon" className="AttributeIcon" />
                     <Panel className="AttributeDetails TopBottomFlow">
@@ -465,10 +433,9 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         <Label id="StrengthDetails" className="StatBreakdownLabel" text="#P6_StrengthDetails_Custom" />
                     </Panel>
                 </Panel>
-                <Panel id="AgilityContainer" className={CSSHelper.ClassMaker("LeftRightFlow AttributeRow", {
+                <Panel id="AgilityContainer" className={CSSHelper.ClassMaker("LeftRightFlow AttributeRow",
+                    rowcls_agility, {
                     PrimaryAttribute: iPrimaryAttribute == Attributes.DOTA_ATTRIBUTE_AGILITY,
-                    NegativeValue: NegativeValue_agility,
-                    NoBonus: NoBonus_agility,
                 })}>
                     <Panel id="AgilityIcon" className="AttributeIcon" />
                     <Panel className="AttributeDetails TopBottomFlow">
@@ -481,10 +448,8 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         <Label id="AgilityDetails" className="StatBreakdownLabel" text="#P6_AgilityDetails_Custom" />
                     </Panel>
                 </Panel>
-                <Panel id="IntellectContainer" className={CSSHelper.ClassMaker("LeftRightFlow AttributeRow", {
+                <Panel id="IntellectContainer" className={CSSHelper.ClassMaker("LeftRightFlow AttributeRow", rowcls_intellect, {
                     PrimaryAttribute: iPrimaryAttribute == Attributes.DOTA_ATTRIBUTE_INTELLECT,
-                    NegativeValue: NegativeValue_intellect,
-                    NoBonus: NoBonus_intellect,
                 })}>
                     <Panel id="IntellectIcon" className="AttributeIcon" />
                     <Panel className="AttributeDetails TopBottomFlow">

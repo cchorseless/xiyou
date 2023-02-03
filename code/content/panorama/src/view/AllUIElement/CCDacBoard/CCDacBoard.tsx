@@ -1,14 +1,13 @@
 import React from "react";
+import { CSSHelper } from "../../../helper/CSSHelper";
+import { CCUnitStatsDialog } from "../../Unit/CCUnitStatsDialog";
 import { CCAbilityList } from "../CCAbility/CCAbilityList";
 import { CCInventory } from "../CCInventory/CCInventory";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { CCBuffList } from "./CCBuffList";
+import "./CCDacBoard.less";
 import { CCHealthMana } from "./CCHealthMana";
 import { CCPortraitGroup } from "./CCPortraitGroup";
-import { CCDOTAHudTalentDisplay } from "./CCDOTAHudTalentDisplay";
-import { CCDOTAAghsStatusDisplay } from "./CCDOTAAghsStatusDisplay";
-import { CSSHelper } from "../../../helper/CSSHelper";
-import "./CCDacBoard.less";
 
 interface ICCDacBoard {
     type?: "Tui3" | "Style1";
@@ -34,7 +33,7 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
                 <CCPanel id="DacBoardBG" className={CSSHelper.ClassMaker(this.props.type)} />
                 <CCPanel id="DacBoardDiv">
                     <Panel id="DacBoardLeft" hittest={false}>
-                        <CCPortraitGroup particleAttrs={{}} align="right bottom" />
+                        <CCPortraitGroup particleAttrs={{}} align="right bottom" dialogTooltip={{ cls: CCUnitStatsDialog, posRight: false }} />
                     </Panel>
                     <CCPanel id="DacBoardCenter" hittest={false}>
                         <CCPanel flowChildren="right" hittest={false} verticalAlign="bottom" marginBottom={"60px"} >
