@@ -3,7 +3,6 @@ import { Assert_MsgEffect } from "../../../assert/Assert_MsgEffect";
 import { IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
 import { ISpawnEffectInfo, SpawnEffectModifier } from "../../../assert/Assert_SpawnEffect";
 
-import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_spawn_breaksoil } from "../../../npc/modifier/spawn/modifier_spawn_breaksoil";
@@ -24,7 +23,6 @@ export class EnemyManagerComponent extends ET.Component {
 
     onAwake(...args: any[]): void {
         this.addEvent();
-        this.iMaxEnemyBonus = tonumber(KVHelper.KvServerConfig.building_config.MAX_ENERMY_EACH_PLAYER.configValue);
     }
     GetEnemySpawnPos() {
         return GEnemySystem.GetInstance().SpawnEnemyPoint[this.BelongPlayerid];

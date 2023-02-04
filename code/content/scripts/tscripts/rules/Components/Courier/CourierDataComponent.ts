@@ -80,6 +80,7 @@ export class CourierDataComponent extends CourierData {
     ApplyDamageByEnemy(damage: number) {
         let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
         this.health -= damage;
+        hero.SetHealth(this.health);
         this.updateNetTable();
         if (this.health <= 0) {
             let courierroot = hero.ETRoot as ICourierEntityRoot;

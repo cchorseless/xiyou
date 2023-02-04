@@ -4,6 +4,7 @@ const program = require('commander');
 const chokidar = require('chokidar');
 const { read_all_files, read_sub_directories } = require('./utils');
 const {all_excel_to_locatlization} = require('./excel_2_kv');
+const {all_lubanexcel_to_locatlization} = require('./lubanlocalization');
 const localization_path = 'localization';
 
 function combine_localization_files() {
@@ -30,8 +31,10 @@ function combine_localization_files() {
 }
 
 (async () => {
+    all_lubanexcel_to_locatlization().then(() => {
     all_excel_to_locatlization().then(() => {
     combine_localization_files();
+    })
     })
     program.option('-w, --watch', 'Watch Mode').parse(process.argv);
     if (program.watch) {

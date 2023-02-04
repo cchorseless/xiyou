@@ -1,5 +1,6 @@
 
 import React, { createRef } from "react";
+import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
 import { CSSHelper } from "../../helper/CSSHelper";
 import { TipsHelper } from "../../helper/TipsHelper";
 import { BaseEasyPureComponent, BasePureComponent } from "../../libs/BasePureComponent";
@@ -25,15 +26,19 @@ import { CCUnitDamageInfo } from "../Unit/CCUnitDamageInfo";
 
 
 export class CCMainPanel extends CCPanel<NodePropsData> {
-    panel_base: React.RefObject<Panel>;
-    panel_allpanel: React.RefObject<Panel>;
-    panel_alldialog: React.RefObject<Panel>;
+    panel_base: React.RefObject<Panel> = createRef<Panel>();;
+    panel_allpanel: React.RefObject<Panel> = createRef<Panel>();;
+    panel_alldialog: React.RefObject<Panel> = createRef<Panel>();
     NODENAME = { __root__: '__root__', panel_base: 'panel_base', panel_allpanel: 'panel_allpanel', panel_alldialog: 'panel_alldialog', };
 
     onInitUI() {
-        this.panel_base = createRef<Panel>();
-        this.panel_allpanel = createRef<Panel>();
-        this.panel_alldialog = createRef<Panel>();
+        this.UpdateState({ curunit: Players.GetLocalPlayerPortraitUnit() || -1 });
+        this.addGameEvent(GameEnum.GameEvent.dota_player_update_selected_unit, (e) => {
+            this.UpdateState({ curunit: Players.GetLocalPlayerPortraitUnit() });
+        });
+        this.addGameEvent(GameEnum.GameEvent.dota_player_update_query_unit, (e) => {
+            this.UpdateState({ curunit: Players.GetLocalPlayerPortraitUnit() });
+        });
 
     };
 
@@ -46,8 +51,11 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
     panel_alldialog_childs: Array<JSX.Element> = [];
 
     render() {
+        const curunit = this.GetState<EntityIndex>('curunit');
+        const courier = GCourierEntityRoot.GetEntity(curunit);
+        const fakerhero = GFakerHeroEntityRoot.GetEntity(curunit);
+        const BShowBuffList = (courier == null && fakerhero == null);
         return (
-            this.__root___isValid &&
             <Panel ref={this.__root__} className="CC_root" hittest={false} {...this.initRootAttrs()}>
                 {this.panel_base_isValid &&
                     <Panel ref={this.panel_base} className="CC_root" hittest={false}>
@@ -58,10 +66,10 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
                         <CCTopBarGameCoin />
                         <CCPlayerListPanel />
                         <CCMiniMap />
-                        <CCCombinationBottomPanel />
                         <CCChallengeShopPanel />
-                        <CCDacBoard />
+                        <CCDacBoard BShowBuffList={BShowBuffList} />
                         <CCUnitDamageInfo />
+                        <CCCombinationBottomPanel CurSelectUnit={curunit} />
                         <CCArtifactListPanel />
                         {/* <CCPublicShopBagPanel /> */}
                         {this.panel_base_childs}

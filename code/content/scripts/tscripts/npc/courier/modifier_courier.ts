@@ -45,7 +45,9 @@ export class modifier_courier extends BaseModifier_Plus {
             this.ambientModifiers = KVHelper.CourierUnits.GetCourierAmbientEffect(sCourierName)
             this.addAbilityName = KVHelper.CourierUnits.GetCourierAbility(sCourierName)
             this.zOffset = KVHelper.CourierUnits.GetCourierVisualZDelta(sCourierName);
-            this.StartIntervalThink(0)
+            this.StartIntervalThink(0);
+            let parent = this.GetParentPlus() as IBaseNpc_Hero_Plus;
+            parent.GetBonusManaRegen();
         }
     }
     OnDestroy() {
@@ -88,7 +90,14 @@ export class modifier_courier extends BaseModifier_Plus {
     CC_GetVisualZDelta(params: IModifierTable) {
         return this.zOffset
     }
+    /**让气血恢复=0 */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
+    CC_HEALTH_REGEN_CONSTANT(params: IModifierTable) {
+        return -10000
+    }
 
-
-
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
+    // CC_MANA_REGEN_CONSTANT(params: IModifierTable) {
+    //     return -10000
+    // }
 }

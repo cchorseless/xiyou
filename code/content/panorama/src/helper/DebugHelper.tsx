@@ -1,6 +1,5 @@
 import { GameEnum } from "../../../scripts/tscripts/shared/GameEnum";
 import { BasePureComponentSystem } from "../libs/BasePureComponent";
-import { LogHelper } from "./LogHelper";
 
 export module DebugHelper {
     export let IsDebug = true;
@@ -21,8 +20,8 @@ export module DebugHelper {
                 data[_c.constructor.name] += 1;
                 count += 1;
             }
-            LogHelper.warn("AllComponentCount:", count)
-            LogHelper.warn("AllComponentInfo:", data)
+            // LogHelper.warn("AllComponentCount:", count)
+            // LogHelper.warn("AllComponentInfo:", data)
             return 10
         }));
     }

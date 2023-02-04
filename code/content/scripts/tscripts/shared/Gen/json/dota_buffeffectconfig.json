@@ -1,0 +1,32 @@
+[
+  {
+    "effectid": "modifier_phy_arm_base_3",
+    "target": "team",
+    "propinfo": [
+      [
+        "PHYSICAL_ARMOR_BASE",
+        3
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_phy_arm_base_6",
+    "target": "team",
+    "propinfo": [
+      [
+        "PHYSICAL_ARMOR_BASE",
+        6
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_phy_arm_base_9",
+    "target": "team",
+    "propinfo": [
+      [
+        "PHYSICAL_ARMOR_BASE",
+        9
+      ]
+    ]
+  }
+]

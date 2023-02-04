@@ -1121,6 +1121,12 @@ export module UnitHelper {
     export function GetSpellAmplify(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetSpellAmplify")));
     };
+    export function GetSpellLifeStealPercent(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetSpellLifeStealPercent")));
+    };
+    export function GetLifeStealPercent(iUnitEntIndex: EntityIndex) {
+        return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetLifeStealPercent")));
+    };
     export function GetOutgoingDamagePercent(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetOutgoingDamagePercent")));
     };

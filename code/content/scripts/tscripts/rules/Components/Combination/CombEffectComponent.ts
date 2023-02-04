@@ -1,5 +1,4 @@
 
-import { KVHelper } from "../../../helper/KVHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { BaseModifier_Plus } from "../../../npc/entityPlus/BaseModifier_Plus";
 import { CombinationConfig } from "../../../shared/CombinationConfig";
@@ -32,7 +31,7 @@ export class CombEffectComponent extends ET.Component {
             }
             bufflist.forEach(buff => {
                 if (buff && buff.length > 0) {
-                    let buffconfig = KVHelper.KvServerConfig.effect_config[buff];
+                    let buffconfig = GJSONConfig.BuffEffectConfig.get(buff);
                     let type = GGetRegClass<typeof BaseModifier_Plus>(buff);
                     if (buffconfig && type) {
                         let battleunits: IBattleUnitEntityRoot[];

@@ -1,5 +1,5 @@
 import { GameFunc } from "../../GameFunc"
-import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus"
+import { BaseModifier_Plus, registerProp } from "../entityPlus/BaseModifier_Plus"
 import { registerModifier } from "../entityPlus/Base_Plus"
 
 @registerModifier()
@@ -55,7 +55,7 @@ export class modifier_hero_property extends BaseModifier_Plus {
                 }
                 const keys = Object.keys(tStats);
                 keys.sort((a, b) => {
-                    return tStats[a] - tStats[b];
+                    return tStats[b] - tStats[a];
                 })
                 this.SetStackCount(GToNumber(keys[0]));
             }
@@ -87,10 +87,10 @@ export class modifier_hero_property extends BaseModifier_Plus {
             this.StackCountHandler = null;
         }
     }
-    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-    // CC_GetAttackSpeedBonus_Constant() {
-    //     return 150
-    // }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE)
+    CC_LIFESTEAL_PERCENTAGE() {
+        return 150
+    }
     // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
     // CC_GetModifierBaseAttack_BonusDamage(params: IModifierTable) {
     //     // return Gmodifier_property.GetStrength(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_STRENGTH_ATTACK_DAMAGE

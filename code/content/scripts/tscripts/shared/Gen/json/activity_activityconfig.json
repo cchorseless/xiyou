@@ -1,28 +1,28 @@
 [
   {
     "id": 1,
-    "IsValid": 1,
+    "IsValid": true,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""
   },
   {
     "id": 2,
-    "IsValid": 1,
+    "IsValid": true,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""
   },
   {
     "id": 3,
-    "IsValid": 1,
+    "IsValid": true,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""
   },
   {
     "id": 4,
-    "IsValid": 1,
+    "IsValid": true,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""

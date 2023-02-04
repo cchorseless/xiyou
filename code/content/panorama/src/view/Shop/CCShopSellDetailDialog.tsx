@@ -29,7 +29,7 @@ export class CCShopSellDetailDialog extends CCPanel<ICCShopSellDetailDialog> {
         const iNum = this.GetState<number>("iNum");
         const sellitem = this.GetStateEntity(this.props.entity)!;
         let MemberShip = GTActivityMemberShipData.GetOneInstance(GGameScene.Local.BelongPlayerid);
-        if (!MemberShip.IsVip() && sellitem.SellConfig!.VipLimit == 1) {
+        if (!MemberShip.IsVip() && sellitem.SellConfig!.VipLimit) {
             TipsHelper.showErrorMessage("not vip")
             return;
         }

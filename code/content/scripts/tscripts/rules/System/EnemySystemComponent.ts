@@ -1,5 +1,4 @@
 
-import { KVHelper } from "../../helper/KVHelper";
 import { ET } from "../../shared/lib/Entity";
 
 @GReloadable
@@ -65,7 +64,7 @@ export class EnemySystemComponent extends ET.SingletonComponent {
     public SetWarnState(b: boolean) {
         if (b) {
             if (this.warnTimer == null) {
-                let fWarningDefeatTime = GameRules.GetGameTime() + tonumber(KVHelper.KvServerConfig.building_config.WARNING_TIME.configValue);
+                let fWarningDefeatTime = GameRules.GetGameTime() + 15;
                 this.warnTimer = GTimerHelper.AddTimer(1, GHandler.create(this, () => {
                     if (GameRules.GetGameTime() > fWarningDefeatTime) {
                         if (GRoundSystem.GetInstance().IsEndlessRound()) {

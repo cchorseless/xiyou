@@ -11,6 +11,7 @@ import { CCPortraitGroup } from "./CCPortraitGroup";
 
 interface ICCDacBoard {
     type?: "Tui3" | "Style1";
+    BShowBuffList: boolean;
 }
 export class CCDacBoard extends CCPanel<ICCDacBoard> {
 
@@ -41,7 +42,7 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
                             {/* <CCDOTAAghsStatusDisplay /> */}
                         </CCPanel>
                         <CCHealthMana verticalAlign="bottom" marginBottom={"0px"} />
-                        <CCBuffList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"140px"} />
+                        {this.props.BShowBuffList && <CCBuffList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"140px"} />}
                     </CCPanel>
                     <Panel id="DacBoardRight" hittest={false}>
                         <CCInventory verticalAlign="bottom" marginBottom={"0px"} />

@@ -1,0 +1,308 @@
+[
+  {
+    "LevelId": "0",
+    "PopulationRoof": 2,
+    "goldcost": 100,
+    "woodcost": 10
+  },
+  {
+    "LevelId": "1",
+    "PopulationRoof": 4,
+    "goldcost": 200,
+    "woodcost": 20
+  },
+  {
+    "LevelId": "2",
+    "PopulationRoof": 6,
+    "goldcost": 300,
+    "woodcost": 30
+  },
+  {
+    "LevelId": "3",
+    "PopulationRoof": 8,
+    "goldcost": 400,
+    "woodcost": 40
+  },
+  {
+    "LevelId": "4",
+    "PopulationRoof": 10,
+    "goldcost": 500,
+    "woodcost": 50
+  },
+  {
+    "LevelId": "5",
+    "PopulationRoof": 12,
+    "goldcost": 600,
+    "woodcost": 60
+  },
+  {
+    "LevelId": "6",
+    "PopulationRoof": 14,
+    "goldcost": 700,
+    "woodcost": 70
+  },
+  {
+    "LevelId": "7",
+    "PopulationRoof": 16,
+    "goldcost": 800,
+    "woodcost": 80
+  },
+  {
+    "LevelId": "8",
+    "PopulationRoof": 18,
+    "goldcost": 900,
+    "woodcost": 90
+  },
+  {
+    "LevelId": "9",
+    "PopulationRoof": 20,
+    "goldcost": 1000,
+    "woodcost": 100
+  },
+  {
+    "LevelId": "10",
+    "PopulationRoof": 22,
+    "goldcost": 1100,
+    "woodcost": 110
+  },
+  {
+    "LevelId": "11",
+    "PopulationRoof": 24,
+    "goldcost": 1200,
+    "woodcost": 120
+  },
+  {
+    "LevelId": "12",
+    "PopulationRoof": 26,
+    "goldcost": 1300,
+    "woodcost": 130
+  },
+  {
+    "LevelId": "13",
+    "PopulationRoof": 28,
+    "goldcost": 1400,
+    "woodcost": 140
+  },
+  {
+    "LevelId": "14",
+    "PopulationRoof": 30,
+    "goldcost": 1500,
+    "woodcost": 150
+  },
+  {
+    "LevelId": "15",
+    "PopulationRoof": 32,
+    "goldcost": 1600,
+    "woodcost": 160
+  },
+  {
+    "LevelId": "16",
+    "PopulationRoof": 34,
+    "goldcost": 1700,
+    "woodcost": 170
+  },
+  {
+    "LevelId": "17",
+    "PopulationRoof": 36,
+    "goldcost": 1800,
+    "woodcost": 180
+  },
+  {
+    "LevelId": "18",
+    "PopulationRoof": 38,
+    "goldcost": 1900,
+    "woodcost": 190
+  },
+  {
+    "LevelId": "19",
+    "PopulationRoof": 40,
+    "goldcost": 2000,
+    "woodcost": 200
+  },
+  {
+    "LevelId": "20",
+    "PopulationRoof": 42,
+    "goldcost": 2100,
+    "woodcost": 210
+  },
+  {
+    "LevelId": "21",
+    "PopulationRoof": 44,
+    "goldcost": 2200,
+    "woodcost": 220
+  },
+  {
+    "LevelId": "22",
+    "PopulationRoof": 46,
+    "goldcost": 2300,
+    "woodcost": 230
+  },
+  {
+    "LevelId": "23",
+    "PopulationRoof": 48,
+    "goldcost": 2400,
+    "woodcost": 240
+  },
+  {
+    "LevelId": "24",
+    "PopulationRoof": 50,
+    "goldcost": 2500,
+    "woodcost": 250
+  },
+  {
+    "LevelId": "25",
+    "PopulationRoof": 52,
+    "goldcost": 2600,
+    "woodcost": 260
+  },
+  {
+    "LevelId": "26",
+    "PopulationRoof": 54,
+    "goldcost": 2700,
+    "woodcost": 270
+  },
+  {
+    "LevelId": "27",
+    "PopulationRoof": 56,
+    "goldcost": 2800,
+    "woodcost": 280
+  },
+  {
+    "LevelId": "28",
+    "PopulationRoof": 58,
+    "goldcost": 2900,
+    "woodcost": 290
+  },
+  {
+    "LevelId": "29",
+    "PopulationRoof": 60,
+    "goldcost": 3000,
+    "woodcost": 300
+  },
+  {
+    "LevelId": "30",
+    "PopulationRoof": 62,
+    "goldcost": 3100,
+    "woodcost": 310
+  },
+  {
+    "LevelId": "31",
+    "PopulationRoof": 64,
+    "goldcost": 3200,
+    "woodcost": 320
+  },
+  {
+    "LevelId": "32",
+    "PopulationRoof": 66,
+    "goldcost": 3300,
+    "woodcost": 330
+  },
+  {
+    "LevelId": "33",
+    "PopulationRoof": 68,
+    "goldcost": 3400,
+    "woodcost": 340
+  },
+  {
+    "LevelId": "34",
+    "PopulationRoof": 70,
+    "goldcost": 3500,
+    "woodcost": 350
+  },
+  {
+    "LevelId": "35",
+    "PopulationRoof": 72,
+    "goldcost": 3600,
+    "woodcost": 360
+  },
+  {
+    "LevelId": "36",
+    "PopulationRoof": 74,
+    "goldcost": 3700,
+    "woodcost": 370
+  },
+  {
+    "LevelId": "37",
+    "PopulationRoof": 76,
+    "goldcost": 3800,
+    "woodcost": 380
+  },
+  {
+    "LevelId": "38",
+    "PopulationRoof": 78,
+    "goldcost": 3900,
+    "woodcost": 390
+  },
+  {
+    "LevelId": "39",
+    "PopulationRoof": 80,
+    "goldcost": 4000,
+    "woodcost": 400
+  },
+  {
+    "LevelId": "40",
+    "PopulationRoof": 82,
+    "goldcost": 4100,
+    "woodcost": 410
+  },
+  {
+    "LevelId": "41",
+    "PopulationRoof": 84,
+    "goldcost": 4200,
+    "woodcost": 420
+  },
+  {
+    "LevelId": "42",
+    "PopulationRoof": 86,
+    "goldcost": 4300,
+    "woodcost": 430
+  },
+  {
+    "LevelId": "43",
+    "PopulationRoof": 88,
+    "goldcost": 4400,
+    "woodcost": 440
+  },
+  {
+    "LevelId": "44",
+    "PopulationRoof": 90,
+    "goldcost": 4500,
+    "woodcost": 450
+  },
+  {
+    "LevelId": "45",
+    "PopulationRoof": 92,
+    "goldcost": 4600,
+    "woodcost": 460
+  },
+  {
+    "LevelId": "46",
+    "PopulationRoof": 94,
+    "goldcost": 4700,
+    "woodcost": 470
+  },
+  {
+    "LevelId": "47",
+    "PopulationRoof": 96,
+    "goldcost": 4800,
+    "woodcost": 480
+  },
+  {
+    "LevelId": "48",
+    "PopulationRoof": 98,
+    "goldcost": 4900,
+    "woodcost": 490
+  },
+  {
+    "LevelId": "49",
+    "PopulationRoof": 100,
+    "goldcost": 5000,
+    "woodcost": 500
+  },
+  {
+    "LevelId": "50",
+    "PopulationRoof": 102,
+    "goldcost": 5100,
+    "woodcost": 510
+  }
+]

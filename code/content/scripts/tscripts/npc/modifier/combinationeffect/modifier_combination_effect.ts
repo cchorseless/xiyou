@@ -1,4 +1,3 @@
-import { KVHelper } from "../../../helper/KVHelper";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 
 export class modifier_combination_effect extends BaseModifier_Plus {
@@ -8,13 +7,13 @@ export class modifier_combination_effect extends BaseModifier_Plus {
     }
 
     config() {
-        return KVHelper.KvConfig().effect_config[this.constructor.name];
+        return GJSONConfig.BuffEffectConfig.get(this.GetName());
     }
 
     getData(prop: string) {
         let conf = this.config();
-        if (conf && conf[prop]) {
-            return tonumber(conf[prop]);
+        if (conf && conf.propinfo.has(prop)) {
+            return conf.propinfo.get(prop);
         }
         return 0;
     }

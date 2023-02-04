@@ -1,7 +1,7 @@
 [
   {
     "id": 10001,
-    "isVaild": 1,
+    "isVaild": true,
     "ShopType": 1001,
     "ShopName": "lang_HUD_Shop_Home",
     "ShopRefreshType": 0,
@@ -24,8 +24,8 @@
         "OverSeaOriginPrice": 100,
         "OverSeaRealPrice": 50,
         "Discount": 50,
-        "VipLimit": 1,
-        "isVaild": 1
+        "VipLimit": true,
+        "isVaild": true
       },
       {
         "SellConfigid": 1002,
@@ -43,8 +43,8 @@
         "OverSeaOriginPrice": 110,
         "OverSeaRealPrice": 55,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1003,
@@ -62,8 +62,8 @@
         "OverSeaOriginPrice": 120,
         "OverSeaRealPrice": 60,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1004,
@@ -81,8 +81,8 @@
         "OverSeaOriginPrice": 130,
         "OverSeaRealPrice": 65,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1005,
@@ -100,8 +100,8 @@
         "OverSeaOriginPrice": 140,
         "OverSeaRealPrice": 70,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1006,
@@ -119,8 +119,8 @@
         "OverSeaOriginPrice": 150,
         "OverSeaRealPrice": 75,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1007,
@@ -138,8 +138,8 @@
         "OverSeaOriginPrice": 160,
         "OverSeaRealPrice": 80,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1008,
@@ -157,8 +157,8 @@
         "OverSeaOriginPrice": 170,
         "OverSeaRealPrice": 85,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1009,
@@ -176,8 +176,8 @@
         "OverSeaOriginPrice": 180,
         "OverSeaRealPrice": 90,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1010,
@@ -195,8 +195,8 @@
         "OverSeaOriginPrice": 190,
         "OverSeaRealPrice": 95,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1011,
@@ -214,8 +214,8 @@
         "OverSeaOriginPrice": 200,
         "OverSeaRealPrice": 100,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1012,
@@ -233,8 +233,8 @@
         "OverSeaOriginPrice": 210,
         "OverSeaRealPrice": 105,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1013,
@@ -252,8 +252,8 @@
         "OverSeaOriginPrice": 220,
         "OverSeaRealPrice": 110,
         "Discount": 50,
-        "VipLimit": 1,
-        "isVaild": 1
+        "VipLimit": true,
+        "isVaild": true
       },
       {
         "SellConfigid": 1014,
@@ -271,8 +271,8 @@
         "OverSeaOriginPrice": 230,
         "OverSeaRealPrice": 115,
         "Discount": 50,
-        "VipLimit": 1,
-        "isVaild": 1
+        "VipLimit": true,
+        "isVaild": true
       },
       {
         "SellConfigid": 1015,
@@ -290,8 +290,8 @@
         "OverSeaOriginPrice": 240,
         "OverSeaRealPrice": 120,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1016,
@@ -309,14 +309,14 @@
         "OverSeaOriginPrice": 250,
         "OverSeaRealPrice": 125,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       }
     ]
   },
   {
     "id": 10002,
-    "isVaild": 1,
+    "isVaild": true,
     "ShopType": 1002,
     "ShopName": "lang_HUD_Shop_Props",
     "ShopRefreshType": 0,
@@ -339,8 +339,8 @@
         "OverSeaOriginPrice": 260,
         "OverSeaRealPrice": 130,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1018,
@@ -358,8 +358,8 @@
         "OverSeaOriginPrice": 270,
         "OverSeaRealPrice": 135,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1019,
@@ -377,8 +377,8 @@
         "OverSeaOriginPrice": 280,
         "OverSeaRealPrice": 140,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1020,
@@ -396,8 +396,8 @@
         "OverSeaOriginPrice": 290,
         "OverSeaRealPrice": 145,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1021,
@@ -415,8 +415,8 @@
         "OverSeaOriginPrice": 300,
         "OverSeaRealPrice": 150,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1022,
@@ -434,8 +434,8 @@
         "OverSeaOriginPrice": 310,
         "OverSeaRealPrice": 155,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1023,
@@ -453,8 +453,8 @@
         "OverSeaOriginPrice": 320,
         "OverSeaRealPrice": 160,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1024,
@@ -472,8 +472,8 @@
         "OverSeaOriginPrice": 330,
         "OverSeaRealPrice": 165,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1025,
@@ -491,8 +491,8 @@
         "OverSeaOriginPrice": 340,
         "OverSeaRealPrice": 170,
         "Discount": 50,
-        "VipLimit": 1,
-        "isVaild": 1
+        "VipLimit": true,
+        "isVaild": true
       },
       {
         "SellConfigid": 1026,
@@ -510,8 +510,8 @@
         "OverSeaOriginPrice": 350,
         "OverSeaRealPrice": 175,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1027,
@@ -529,8 +529,8 @@
         "OverSeaOriginPrice": 360,
         "OverSeaRealPrice": 180,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1028,
@@ -548,8 +548,8 @@
         "OverSeaOriginPrice": 370,
         "OverSeaRealPrice": 185,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1029,
@@ -567,8 +567,8 @@
         "OverSeaOriginPrice": 380,
         "OverSeaRealPrice": 190,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1030,
@@ -586,8 +586,8 @@
         "OverSeaOriginPrice": 390,
         "OverSeaRealPrice": 195,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1031,
@@ -605,8 +605,8 @@
         "OverSeaOriginPrice": 400,
         "OverSeaRealPrice": 200,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1032,
@@ -624,14 +624,14 @@
         "OverSeaOriginPrice": 410,
         "OverSeaRealPrice": 205,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       }
     ]
   },
   {
     "id": 10003,
-    "isVaild": 1,
+    "isVaild": true,
     "ShopType": 1003,
     "ShopName": "lang_HUD_Shop_Chest",
     "ShopRefreshType": 0,
@@ -654,8 +654,8 @@
         "OverSeaOriginPrice": 420,
         "OverSeaRealPrice": 210,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1034,
@@ -673,8 +673,8 @@
         "OverSeaOriginPrice": 430,
         "OverSeaRealPrice": 215,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1035,
@@ -692,8 +692,8 @@
         "OverSeaOriginPrice": 440,
         "OverSeaRealPrice": 220,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1036,
@@ -711,8 +711,8 @@
         "OverSeaOriginPrice": 450,
         "OverSeaRealPrice": 225,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1037,
@@ -730,8 +730,8 @@
         "OverSeaOriginPrice": 460,
         "OverSeaRealPrice": 230,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1038,
@@ -749,8 +749,8 @@
         "OverSeaOriginPrice": 470,
         "OverSeaRealPrice": 235,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1039,
@@ -768,8 +768,8 @@
         "OverSeaOriginPrice": 480,
         "OverSeaRealPrice": 240,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1040,
@@ -787,8 +787,8 @@
         "OverSeaOriginPrice": 490,
         "OverSeaRealPrice": 245,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1041,
@@ -806,8 +806,8 @@
         "OverSeaOriginPrice": 500,
         "OverSeaRealPrice": 250,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1042,
@@ -825,8 +825,8 @@
         "OverSeaOriginPrice": 510,
         "OverSeaRealPrice": 255,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1043,
@@ -844,8 +844,8 @@
         "OverSeaOriginPrice": 520,
         "OverSeaRealPrice": 260,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1044,
@@ -863,8 +863,8 @@
         "OverSeaOriginPrice": 530,
         "OverSeaRealPrice": 265,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1045,
@@ -882,8 +882,8 @@
         "OverSeaOriginPrice": 540,
         "OverSeaRealPrice": 270,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1046,
@@ -901,8 +901,8 @@
         "OverSeaOriginPrice": 550,
         "OverSeaRealPrice": 275,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1047,
@@ -920,8 +920,8 @@
         "OverSeaOriginPrice": 560,
         "OverSeaRealPrice": 280,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1048,
@@ -939,8 +939,8 @@
         "OverSeaOriginPrice": 570,
         "OverSeaRealPrice": 285,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       }
     ]
   }

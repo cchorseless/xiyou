@@ -55,6 +55,8 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const base_strength = iBaseStrength || 0;
         const bonus_strength = sBonusStrength;
         const total_strength = iStrength;
+
+        GLogHelper.print(base_strength, bonus_strength)
         const strength_attack_damage = iStrength * GPropertyConfig.ATTRIBUTE_STRENGTH_ATTACK_DAMAGE;
         const strength_energy_regen = FuncHelper.Round(iStrength * GPropertyConfig.ATTRIBUTE_STRENGTH_ENERGY_GET, 2);
         const strength_all_damage = FuncHelper.Clamp(FuncHelper.Round(iStrength * GPropertyConfig.ATTRIBUTE_STRENGTH_ALL_DAMAGE, 2), 0, GPropertyConfig.ATTRIBUTE_STRENGTH_ALL_DAMAGE_MAX);
@@ -75,8 +77,8 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const bonus_agility = sBonusAgility;
         const total_agility = iAgility;
         const rowcls_agility = this.getRowClassName(iBonusAgility);
-        const agility_attack_speed = iAgility * GPropertyConfig.ATTRIBUTE_AGILITY_ATTACK_SPEED;
-        const agility_max_attack_speed = iAgility * GPropertyConfig.ATTRIBUTE_AGILITY_MAX_ATTACK_SPEED;
+        const agility_attack_speed = FuncHelper.Round(iAgility * GPropertyConfig.ATTRIBUTE_AGILITY_ATTACK_SPEED, 3);
+        const agility_max_attack_speed = FuncHelper.Round(iAgility * GPropertyConfig.ATTRIBUTE_AGILITY_MAX_ATTACK_SPEED, 3);
         // const agility_max_energy = iAgility * GPropertyConfig.ATTRIBUTE_AGILITY_MAX_ENERGY;
         // const primary_attribute_damage = Math.floor(FuncHelper.ToFloat(iAgility * GPropertyConfig.ATTRIBUTE_PRIMARY_ATTACK_DAMAGE));
         const agilitydialogVariable = {
@@ -130,6 +132,25 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const base_spell_amplify = FuncHelper.Round(fSpellAmplify, 1);
         const bonus_spell_amplify = FuncHelper.SignNumber(fBonusSpellAmplify, true);
         const rowcls_spell_amplify = this.getRowClassName(fBonusSpellAmplify);
+
+        // 额外全伤害
+        let fIncomingTotalDamagePercent = UnitHelper.GetOutgoingDamagePercent(iLocalPortraitUnit);
+        const Incomingtotal_damage_percent = FuncHelper.Round(fIncomingTotalDamagePercent, 2);
+        // 额外物理伤害
+        let fIncomingPhysicalDamagePercent = UnitHelper.GetOutgoingPhysicalDamagePercent(iLocalPortraitUnit);
+        const Incomingphysical_damage_percent = FuncHelper.Round(fIncomingPhysicalDamagePercent, 2);
+        // 额外魔法伤害
+        let fIncomingMagicalDamagePercent = UnitHelper.GetOutgoingMagicalDamagePercent(iLocalPortraitUnit);
+        const Incomingmagical_damage_percent = FuncHelper.Round(fIncomingMagicalDamagePercent, 2);
+        // 额外纯粹伤害
+        let fIncomingPureDamagePercent = UnitHelper.GetOutgoingPureDamagePercent(iLocalPortraitUnit);
+        const Incomingpure_damage_percent = FuncHelper.Round(fIncomingPureDamagePercent, 2);
+        // 攻击吸血
+        let fBloodSuckingAttackPercent = UnitHelper.GetLifeStealPercent(iLocalPortraitUnit);
+        const blood_sucking_attack = FuncHelper.Round(fBloodSuckingAttackPercent, 2);;
+        // 技能吸血
+        let fBloodSuckingSkillPercent = UnitHelper.GetSpellLifeStealPercent(iLocalPortraitUnit);
+        const blood_sucking_skill = FuncHelper.Round(fBloodSuckingSkillPercent, 2);;
         // 额外全伤害
         let fTotalDamagePercent = UnitHelper.GetOutgoingDamagePercent(iLocalPortraitUnit);
         const total_damage_percent = FuncHelper.Round(fTotalDamagePercent, 2);
@@ -192,7 +213,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const bonus_spell_crit_chance = sBonus_crit_chance;
         const rowcls_crit_chance = this.getRowClassName(fBonus_crit_chance);
         // 怒气恢复加成
-        const energy_regen_percent = FuncHelper.Round(UnitHelper.GetEnergyRegenPercentage(iLocalPortraitUnit), 2)
+        // const energy_regen_percent = FuncHelper.Round(UnitHelper.GetEnergyRegenPercentage(iLocalPortraitUnit), 2)
         // 技能暴击伤害
         let fBaseSpellCritDamage = GPropertyConfig.BASE_SPELL_CRITICALSTRIKE_DAMAGE;// 基础暴击概率
         let fBonusSpellCritDamage = UnitHelper.GetSpellCriticalStrikeDamage(iLocalPortraitUnit) - fBaseSpellCritDamage;
@@ -253,6 +274,13 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                             <Label id="DamageBonus" text={`${bonus_damage}`} className="BonusValue" />
                         </Panel>
                     </Panel>
+                    <Panel id="AttackRangeRow" className={CSSHelper.ClassMaker("StatRow", rowcls_attack_range)}>
+                        <Label id="RangeLabel" localizedText="#DOTA_HUD_AttackRange" className="StatName" />
+                        <Panel className="LeftRightFlow">
+                            <Label id="Range" text={`${base_attack_range}`} className="BaseValue" />
+                            <Label id="RangeBonus" text={`${bonus_attack_range}`} className="BonusValue" />
+                        </Panel>
+                    </Panel>
                     <Panel id="AttackSpeedRow" className="StatRow">
                         <Label id="AttackSpeedLabel" localizedText="#DOTA_HUD_AttackSpeed" className="StatName" />
                         <Panel className="LeftRightFlow">
@@ -303,65 +331,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         </Panel>
                     </Panel>
                 </Panel>
-                <Panel id="HeroOtherContainer" className={CSSHelper.ClassMaker("SecondaryContainer TopBottomFlow", { Hidden: !bIsHero })}>
-                    <Label id="OtherDamageHeader" className="ContainerHeader" localizedText="#Unit_Stats_Label_Other" />
-                    <Panel id="AttackRangeRow" className={CSSHelper.ClassMaker("StatRow", rowcls_attack_range)}>
-                        <Label id="RangeLabel" localizedText="#DOTA_HUD_AttackRange" className="StatName" />
-                        <Panel className="LeftRightFlow">
-                            <Label id="Range" text={`${base_attack_range}`} className="BaseValue" />
-                            <Label id="RangeBonus" text={`${bonus_attack_range}`} className="BonusValue" />
-                        </Panel>
-                    </Panel>
-                    <Panel id="IgnorePhysicalArmorPercentRow" className="StatRow">
-                        <Label id="IgnorePhysicalArmorPercentLabel" localizedText="#DOTA_HUD_IgnorePhysicalArmorPercent" className="StatName" html={true} />
-                        <Panel className="LeftRightFlow">
-                            <Label id="IgnorePhysicalArmorPercent" text={`${ignore_physical_armor_percent}%`} className="BaseValue" />
-                        </Panel>
-                    </Panel>
-                    <Panel id="IgnoreMagicalArmorPercentRow" className="StatRow">
-                        <Label id="IgnoreMagicalArmorPercentLabel" localizedText="#DOTA_HUD_IgnoreMagicalArmorPercent" className="StatName" html={true} />
-                        <Panel className="LeftRightFlow">
-                            <Label id="IgnoreMagicalArmorPercent" text={`${ignore_magical_armor_percent}%`} className="BaseValue" />
-                        </Panel>
-                    </Panel>
-                    <Panel id="StatusResistRow" className="StatRow">
-                        <Label id="StatusResistLabel" localizedText="#DOTA_HUD_StatusResist" className="StatName" />
-                        <Panel className="LeftRightFlow">
-                            <Label id="StatusResist=" text={`${status_resistance}%`} className="BaseValue" />
-                        </Panel>
-                    </Panel>
-                    <Panel id="EnergyRegenRow" className="StatRow">
-                        <Label id="EnergyRegenLabel" localizedText="#DOTA_HUD_EnergyRegen" className="StatName" />
-                        <Panel className="LeftRightFlow">
-                            <Label id="EnergyRegen=" text={`${energy_regen_percent}%`} className="BaseValue" />
-                        </Panel>
-                    </Panel>
-                    <Panel id="TotalDamagePercentRow" className="StatRow">
-                        <Label id="TotalDamagePercentLabel" localizedText="#DOTA_HUD_TotalDamagePercent" className="StatName" html={true} />
-                        <Panel className="LeftRightFlow">
-                            <Label id="TotalDamagePercent" text={`${total_damage_percent}%`} className="BaseValue" />
-                        </Panel>
-                    </Panel>
-                    <Panel id="PhysicalDamagePercentRow" className="StatRow">
-                        <Label id="PhysicalDamagePercentLabel" localizedText="#DOTA_HUD_PhysicalDamagePercent" className="StatName" html={true} />
-                        <Panel className="LeftRightFlow">
-                            <Label id="PhysicalDamagePercent" text={`${physical_damage_percent}%`} className="BaseValue" />
-                        </Panel>
-                    </Panel>
-                    <Panel id="MagicalDamagePercentRow" className="StatRow">
-                        <Label id="MagicalDamagePercentLabel" localizedText="#DOTA_HUD_MagicalDamagePercent" className="StatName" html={true} />
-                        <Panel className="LeftRightFlow">
-                            <Label id="MagicalDamagePercent" text={`${magical_damage_percent}%`} className="BaseValue" />
-                        </Panel>
-                    </Panel>
-                    <Panel id="PureDamagePercentRow" className="StatRow">
-                        <Label id="PureDamagePercentLabel" localizedText="#DOTA_HUD_PureDamagePercent" className="StatName" html={true} />
-                        <Panel className="LeftRightFlow">
-                            <Label id="PureDamagePercent" text={`${pure_damage_percent}%`} className="BaseValue" />
-                        </Panel>
-                    </Panel>
-                </Panel>
-                <Panel id="EnermyContainer" className={CSSHelper.ClassMaker("SecondaryContainer TopBottomFlow", { Hidden: !bEnemy })}>
+                <Panel id="DefenseContainer" className={CSSHelper.ClassMaker("SecondaryContainer TopBottomFlow", { Hidden: !bIsHero })}>
                     <Label id="DefenseHeader" className="ContainerHeader" localizedText="#DOTA_HUD_Defense" />
                     <Panel id="PhysicalArmorRow" className={CSSHelper.ClassMaker("StatRow", rowcls_physical_armor)}>
                         <Label id="PhysicalArmorLabel" localizedText="#DOTA_HUD_PhysicalArmor_Custom" className="StatName" />
@@ -391,6 +361,31 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                             <Label id="Evasion" text={`${evasion}%`} className="BaseValue" />
                         </Panel>
                     </Panel>
+                    <Panel id="IncomingTotalDamagePercentRow" className="StatRow">
+                        <Label id="IncomingTotalDamagePercentLabel" localizedText="#DOTA_HUD_IncomingTotalDamagePercent" className="StatName" html={true} />
+                        <Panel className="LeftRightFlow">
+                            <Label id="IncomingTotalDamagePercent" text={`${Incomingtotal_damage_percent}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel>
+                    <Panel id="IncomingPhysicalDamagePercentRow" className="StatRow">
+                        <Label id="IncomingPhysicalDamagePercentLabel" localizedText="#DOTA_HUD_IncomingPhysicalDamagePercent" className="StatName" html={true} />
+                        <Panel className="LeftRightFlow">
+                            <Label id="IncomingPhysicalDamagePercent" text={`${Incomingphysical_damage_percent}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel>
+                    <Panel id="IncomingMagicalDamagePercentRow" className="StatRow">
+                        <Label id="IncomingMagicalDamagePercentLabel" localizedText="#DOTA_HUD_IncomingMagicalDamagePercent" className="StatName" html={true} />
+                        <Panel className="LeftRightFlow">
+                            <Label id="IncomingMagicalDamagePercent" text={`${Incomingmagical_damage_percent}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel>
+                    <Panel id="IncomingPureDamagePercentRow" className="StatRow">
+                        <Label id="IncomingPureDamagePercentLabel" localizedText="#DOTA_HUD_IncomingPureDamagePercent" className="StatName" html={true} />
+                        <Panel className="LeftRightFlow">
+                            <Label id="IncomingPureDamagePercent" text={`${Incomingpure_damage_percent}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel>
+
                     <Panel id="MoveSpeedRow" className={CSSHelper.ClassMaker("StatRow", rowcls_move_speed)}>
                         <Label id="MoveSpeedLabel" localizedText="#DOTA_HUD_MoveSpeed" className="StatName" />
                         <Panel className="LeftRightFlow">
@@ -398,6 +393,64 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                             <Label id="MoveSpeedBonus" text={`${bonus_move_speed}`} className="BonusValue" />
                         </Panel>
                     </Panel>
+                </Panel>
+                <Panel id="HeroOtherContainer" className={CSSHelper.ClassMaker("SecondaryContainer TopBottomFlow", { Hidden: !bIsHero })}>
+                    <Label id="OtherDamageHeader" className="ContainerHeader" localizedText="#Unit_Stats_Label_Other" />
+                    <Panel id="IgnorePhysicalArmorPercentRow" className="StatRow">
+                        <Label id="IgnorePhysicalArmorPercentLabel" localizedText="#DOTA_HUD_IgnorePhysicalArmorPercent" className="StatName" html={true} />
+                        <Panel className="LeftRightFlow">
+                            <Label id="IgnorePhysicalArmorPercent" text={`${ignore_physical_armor_percent}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel>
+                    <Panel id="IgnoreMagicalArmorPercentRow" className="StatRow">
+                        <Label id="IgnoreMagicalArmorPercentLabel" localizedText="#DOTA_HUD_IgnoreMagicalArmorPercent" className="StatName" html={true} />
+                        <Panel className="LeftRightFlow">
+                            <Label id="IgnoreMagicalArmorPercent" text={`${ignore_magical_armor_percent}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel>
+                    <Panel id="BloodSucking_Attack" className="StatRow">
+                        <Label id="BloodSucking_AttackLabel" localizedText="#DOTA_HUD_LifeSteal" className="StatName" html={true} />
+                        <Panel className="LeftRightFlow">
+                            <Label id="BloodSucking_AttackPercent" text={`${blood_sucking_attack}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel>
+                    <Panel id="BloodSucking_Skill" className="StatRow">
+                        <Label id="BloodSucking_SkillLabel" localizedText="#DOTA_HUD_SpellLifeSteal" className="StatName" html={true} />
+                        <Panel className="LeftRightFlow">
+                            <Label id="BloodSucking_SkillPercent" text={`${blood_sucking_skill}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel>
+
+                    <Panel id="TotalDamagePercentRow" className="StatRow">
+                        <Label id="TotalDamagePercentLabel" localizedText="#DOTA_HUD_TotalDamagePercent" className="StatName" html={true} />
+                        <Panel className="LeftRightFlow">
+                            <Label id="TotalDamagePercent" text={`${total_damage_percent}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel>
+                    <Panel id="PhysicalDamagePercentRow" className="StatRow">
+                        <Label id="PhysicalDamagePercentLabel" localizedText="#DOTA_HUD_PhysicalDamagePercent" className="StatName" html={true} />
+                        <Panel className="LeftRightFlow">
+                            <Label id="PhysicalDamagePercent" text={`${physical_damage_percent}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel>
+                    <Panel id="MagicalDamagePercentRow" className="StatRow">
+                        <Label id="MagicalDamagePercentLabel" localizedText="#DOTA_HUD_MagicalDamagePercent" className="StatName" html={true} />
+                        <Panel className="LeftRightFlow">
+                            <Label id="MagicalDamagePercent" text={`${magical_damage_percent}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel>
+                    <Panel id="PureDamagePercentRow" className="StatRow">
+                        <Label id="PureDamagePercentLabel" localizedText="#DOTA_HUD_PureDamagePercent" className="StatName" html={true} />
+                        <Panel className="LeftRightFlow">
+                            <Label id="PureDamagePercent" text={`${pure_damage_percent}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel>
+                    {/* <Panel id="EnergyRegenRow" className="StatRow">
+                        <Label id="EnergyRegenLabel" localizedText="#DOTA_HUD_EnergyRegen" className="StatName" />
+                        <Panel className="LeftRightFlow">
+                            <Label id="EnergyRegen=" text={`${energy_regen_percent}%`} className="BaseValue" />
+                        </Panel>
+                    </Panel> */}
                 </Panel>
                 <Panel id="FriendlySummonContainer" className={CSSHelper.ClassMaker("SecondaryContainer TopBottomFlow", { Hidden: !bFriendlySummon })}>
                     <Panel id="DamageRow" className={CSSHelper.ClassMaker("StatRow", rowcls_damage)}>
@@ -458,7 +511,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         <Panel id="AttributeValues" className="LeftRightFlow">
                             <Label id="BaseStrengthLabel" className="BaseAttributeValue" text={`${base_strength}`} />
                             <Label id="BonusStrengthLabel" className="BonusAttributeValue" text={`${bonus_strength}`} />
-                            <Label id="TotalStrengthLabel" className="TotalAttributeValue" text={`${total_strength}`} />
+                            {/* <Label id="TotalStrengthLabel" className="TotalAttributeValue" text={`${total_strength}`} /> */}
                         </Panel>
                         <Label id="StrengthDamageLabel" className="PrimaryAttributeBonus" localizedText="#P6_StrengthDetails_Custom_Primary" html={true} dialogVariables={strengthdialogVariable} />
                         <Label id="StrengthDetails" className="StatBreakdownLabel" localizedText="#P6_StrengthDetails_Custom" dialogVariables={strengthdialogVariable} />
@@ -473,7 +526,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         <Panel id="AttributeValues" className="LeftRightFlow">
                             <Label id="BaseAgilityLabel" className="BaseAttributeValue" text={`${base_agility}`} />
                             <Label id="BonusAgilityabel" className="BonusAttributeValue" text={`${bonus_agility}`} />
-                            <Label id="TotalAgilityabel" className="TotalAttributeValue" text={`${total_agility}`} />
+                            {/* <Label id="TotalAgilityabel" className="TotalAttributeValue" text={`${total_agility}`} /> */}
                         </Panel>
                         <Label id="AgilityDamageLabel" className="PrimaryAttributeBonus" localizedText="#P6_AgilityDetails_Custom_Primary" dialogVariables={agilitydialogVariable} />
                         <Label id="AgilityDetails" className="StatBreakdownLabel" localizedText="#P6_AgilityDetails_Custom" dialogVariables={agilitydialogVariable} />
@@ -487,7 +540,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         <Panel id="AttributeValues" className="LeftRightFlow">
                             <Label id="BaseIntellectLabel" className="BaseAttributeValue" text={`${base_intellect}`} />
                             <Label id="BonusIntellectLabel" className="BonusAttributeValue" text={`${bonus_intellect}`} />
-                            <Label id="TotalIntellectLabel" className="TotalAttributeValue" text={`${total_intellect}`} />
+                            {/* <Label id="TotalIntellectLabel" className="TotalAttributeValue" text={`${total_intellect}`} /> */}
                         </Panel>
                         <Label id="IntellectDamageLabel" className="PrimaryAttributeBonus" localizedText="#P6_IntellectDetails_Custom_Primary" dialogVariables={intellectdialogVariable} />
                         <Label id="IntellectDetails" className="StatBreakdownLabel" localizedText="#P6_IntellectDetails_Custom" dialogVariables={intellectdialogVariable} />

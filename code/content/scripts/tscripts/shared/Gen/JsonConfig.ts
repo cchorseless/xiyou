@@ -27,28 +27,28 @@
 "activity_activityconfig":[
   {
     "id": 1,
-    "IsValid": 1,
+    "IsValid": true,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""
   },
   {
     "id": 2,
-    "IsValid": 1,
+    "IsValid": true,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""
   },
   {
     "id": 3,
-    "IsValid": 1,
+    "IsValid": true,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""
   },
   {
     "id": 4,
-    "IsValid": 1,
+    "IsValid": true,
     "IsCyclicActivity": true,
     "ActivityName": "",
     "ActivityScript": ""
@@ -845,7 +845,7 @@
 "activity_tactivitygiftcommond":[
   {
     "id": 1,
-    "IsValid": 1,
+    "IsValid": true,
     "GiftCommond": "HappyNewYear",
     "GiftCount": 100,
     "ActivityStartTime": 1655913600,
@@ -863,7 +863,7 @@
   },
   {
     "id": 10,
-    "IsValid": 1,
+    "IsValid": true,
     "GiftCommond": "",
     "GiftCount": 0,
     "ActivityStartTime": 1655913600,
@@ -913,7 +913,7 @@
   },
   {
     "id": 110,
-    "IsValid": 1,
+    "IsValid": true,
     "GiftCommond": "",
     "GiftCount": 0,
     "ActivityStartTime": 1655913600,
@@ -987,7 +987,7 @@
   },
   {
     "id": 270,
-    "IsValid": 1,
+    "IsValid": true,
     "GiftCommond": "",
     "GiftCount": 0,
     "ActivityStartTime": 1655913600,
@@ -1393,7 +1393,7 @@
 "activity_tactivitymentorshiptree":[
   {
     "id": 1001,
-    "IsValid": 1,
+    "IsValid": true,
     "TreeLevel": 0,
     "PrizeConditionType": "BuildRelation",
     "PrizeCondition": 0,
@@ -1410,7 +1410,7 @@
   },
   {
     "id": 1002,
-    "IsValid": 1,
+    "IsValid": true,
     "TreeLevel": 1,
     "PrizeConditionType": "BuildRelation",
     "PrizeCondition": 0,
@@ -1431,7 +1431,7 @@
   },
   {
     "id": 1003,
-    "IsValid": 1,
+    "IsValid": true,
     "TreeLevel": 2,
     "PrizeConditionType": "BuildRelation",
     "PrizeCondition": 0,
@@ -1456,7 +1456,7 @@
   },
   {
     "id": 1004,
-    "IsValid": 1,
+    "IsValid": true,
     "TreeLevel": 3,
     "PrizeConditionType": "Recharge",
     "PrizeCondition": 0,
@@ -1481,7 +1481,7 @@
   },
   {
     "id": 2001,
-    "IsValid": 1,
+    "IsValid": true,
     "TreeLevel": 1,
     "PrizeConditionType": "Online",
     "PrizeCondition": 30,
@@ -1498,7 +1498,7 @@
   },
   {
     "id": 2002,
-    "IsValid": 1,
+    "IsValid": true,
     "TreeLevel": -1,
     "PrizeConditionType": "",
     "PrizeCondition": 30,
@@ -1515,7 +1515,7 @@
   },
   {
     "id": 2003,
-    "IsValid": 1,
+    "IsValid": true,
     "TreeLevel": 1,
     "PrizeConditionType": "",
     "PrizeCondition": 648,
@@ -1532,7 +1532,7 @@
   },
   {
     "id": 2004,
-    "IsValid": 1,
+    "IsValid": true,
     "TreeLevel": -1,
     "PrizeConditionType": "",
     "PrizeCondition": 648,
@@ -1557,7 +1557,7 @@
   },
   {
     "id": 3001,
-    "IsValid": 1,
+    "IsValid": true,
     "TreeLevel": 1,
     "PrizeConditionType": "",
     "PrizeCondition": 1,
@@ -1590,7 +1590,7 @@
   },
   {
     "id": 3002,
-    "IsValid": 1,
+    "IsValid": true,
     "TreeLevel": -1,
     "PrizeConditionType": "",
     "PrizeCondition": 1,
@@ -2741,6 +2741,603 @@
     ]
   }
 ] ,
+"dota_buffeffectconfig":[
+  {
+    "effectid": "modifier_phy_arm_base_3",
+    "target": "team",
+    "propinfo": [
+      [
+        "PHYSICAL_ARMOR_BASE",
+        3
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_phy_arm_base_6",
+    "target": "team",
+    "propinfo": [
+      [
+        "PHYSICAL_ARMOR_BASE",
+        6
+      ]
+    ]
+  },
+  {
+    "effectid": "modifier_phy_arm_base_9",
+    "target": "team",
+    "propinfo": [
+      [
+        "PHYSICAL_ARMOR_BASE",
+        9
+      ]
+    ]
+  }
+] ,
+"dota_populationconfig":[
+  {
+    "LevelId": "0",
+    "PopulationRoof": 2,
+    "goldcost": 100,
+    "woodcost": 10
+  },
+  {
+    "LevelId": "1",
+    "PopulationRoof": 4,
+    "goldcost": 200,
+    "woodcost": 20
+  },
+  {
+    "LevelId": "2",
+    "PopulationRoof": 6,
+    "goldcost": 300,
+    "woodcost": 30
+  },
+  {
+    "LevelId": "3",
+    "PopulationRoof": 8,
+    "goldcost": 400,
+    "woodcost": 40
+  },
+  {
+    "LevelId": "4",
+    "PopulationRoof": 10,
+    "goldcost": 500,
+    "woodcost": 50
+  },
+  {
+    "LevelId": "5",
+    "PopulationRoof": 12,
+    "goldcost": 600,
+    "woodcost": 60
+  },
+  {
+    "LevelId": "6",
+    "PopulationRoof": 14,
+    "goldcost": 700,
+    "woodcost": 70
+  },
+  {
+    "LevelId": "7",
+    "PopulationRoof": 16,
+    "goldcost": 800,
+    "woodcost": 80
+  },
+  {
+    "LevelId": "8",
+    "PopulationRoof": 18,
+    "goldcost": 900,
+    "woodcost": 90
+  },
+  {
+    "LevelId": "9",
+    "PopulationRoof": 20,
+    "goldcost": 1000,
+    "woodcost": 100
+  },
+  {
+    "LevelId": "10",
+    "PopulationRoof": 22,
+    "goldcost": 1100,
+    "woodcost": 110
+  },
+  {
+    "LevelId": "11",
+    "PopulationRoof": 24,
+    "goldcost": 1200,
+    "woodcost": 120
+  },
+  {
+    "LevelId": "12",
+    "PopulationRoof": 26,
+    "goldcost": 1300,
+    "woodcost": 130
+  },
+  {
+    "LevelId": "13",
+    "PopulationRoof": 28,
+    "goldcost": 1400,
+    "woodcost": 140
+  },
+  {
+    "LevelId": "14",
+    "PopulationRoof": 30,
+    "goldcost": 1500,
+    "woodcost": 150
+  },
+  {
+    "LevelId": "15",
+    "PopulationRoof": 32,
+    "goldcost": 1600,
+    "woodcost": 160
+  },
+  {
+    "LevelId": "16",
+    "PopulationRoof": 34,
+    "goldcost": 1700,
+    "woodcost": 170
+  },
+  {
+    "LevelId": "17",
+    "PopulationRoof": 36,
+    "goldcost": 1800,
+    "woodcost": 180
+  },
+  {
+    "LevelId": "18",
+    "PopulationRoof": 38,
+    "goldcost": 1900,
+    "woodcost": 190
+  },
+  {
+    "LevelId": "19",
+    "PopulationRoof": 40,
+    "goldcost": 2000,
+    "woodcost": 200
+  },
+  {
+    "LevelId": "20",
+    "PopulationRoof": 42,
+    "goldcost": 2100,
+    "woodcost": 210
+  },
+  {
+    "LevelId": "21",
+    "PopulationRoof": 44,
+    "goldcost": 2200,
+    "woodcost": 220
+  },
+  {
+    "LevelId": "22",
+    "PopulationRoof": 46,
+    "goldcost": 2300,
+    "woodcost": 230
+  },
+  {
+    "LevelId": "23",
+    "PopulationRoof": 48,
+    "goldcost": 2400,
+    "woodcost": 240
+  },
+  {
+    "LevelId": "24",
+    "PopulationRoof": 50,
+    "goldcost": 2500,
+    "woodcost": 250
+  },
+  {
+    "LevelId": "25",
+    "PopulationRoof": 52,
+    "goldcost": 2600,
+    "woodcost": 260
+  },
+  {
+    "LevelId": "26",
+    "PopulationRoof": 54,
+    "goldcost": 2700,
+    "woodcost": 270
+  },
+  {
+    "LevelId": "27",
+    "PopulationRoof": 56,
+    "goldcost": 2800,
+    "woodcost": 280
+  },
+  {
+    "LevelId": "28",
+    "PopulationRoof": 58,
+    "goldcost": 2900,
+    "woodcost": 290
+  },
+  {
+    "LevelId": "29",
+    "PopulationRoof": 60,
+    "goldcost": 3000,
+    "woodcost": 300
+  },
+  {
+    "LevelId": "30",
+    "PopulationRoof": 62,
+    "goldcost": 3100,
+    "woodcost": 310
+  },
+  {
+    "LevelId": "31",
+    "PopulationRoof": 64,
+    "goldcost": 3200,
+    "woodcost": 320
+  },
+  {
+    "LevelId": "32",
+    "PopulationRoof": 66,
+    "goldcost": 3300,
+    "woodcost": 330
+  },
+  {
+    "LevelId": "33",
+    "PopulationRoof": 68,
+    "goldcost": 3400,
+    "woodcost": 340
+  },
+  {
+    "LevelId": "34",
+    "PopulationRoof": 70,
+    "goldcost": 3500,
+    "woodcost": 350
+  },
+  {
+    "LevelId": "35",
+    "PopulationRoof": 72,
+    "goldcost": 3600,
+    "woodcost": 360
+  },
+  {
+    "LevelId": "36",
+    "PopulationRoof": 74,
+    "goldcost": 3700,
+    "woodcost": 370
+  },
+  {
+    "LevelId": "37",
+    "PopulationRoof": 76,
+    "goldcost": 3800,
+    "woodcost": 380
+  },
+  {
+    "LevelId": "38",
+    "PopulationRoof": 78,
+    "goldcost": 3900,
+    "woodcost": 390
+  },
+  {
+    "LevelId": "39",
+    "PopulationRoof": 80,
+    "goldcost": 4000,
+    "woodcost": 400
+  },
+  {
+    "LevelId": "40",
+    "PopulationRoof": 82,
+    "goldcost": 4100,
+    "woodcost": 410
+  },
+  {
+    "LevelId": "41",
+    "PopulationRoof": 84,
+    "goldcost": 4200,
+    "woodcost": 420
+  },
+  {
+    "LevelId": "42",
+    "PopulationRoof": 86,
+    "goldcost": 4300,
+    "woodcost": 430
+  },
+  {
+    "LevelId": "43",
+    "PopulationRoof": 88,
+    "goldcost": 4400,
+    "woodcost": 440
+  },
+  {
+    "LevelId": "44",
+    "PopulationRoof": 90,
+    "goldcost": 4500,
+    "woodcost": 450
+  },
+  {
+    "LevelId": "45",
+    "PopulationRoof": 92,
+    "goldcost": 4600,
+    "woodcost": 460
+  },
+  {
+    "LevelId": "46",
+    "PopulationRoof": 94,
+    "goldcost": 4700,
+    "woodcost": 470
+  },
+  {
+    "LevelId": "47",
+    "PopulationRoof": 96,
+    "goldcost": 4800,
+    "woodcost": 480
+  },
+  {
+    "LevelId": "48",
+    "PopulationRoof": 98,
+    "goldcost": 4900,
+    "woodcost": 490
+  },
+  {
+    "LevelId": "49",
+    "PopulationRoof": 100,
+    "goldcost": 5000,
+    "woodcost": 500
+  },
+  {
+    "LevelId": "50",
+    "PopulationRoof": 102,
+    "goldcost": 5100,
+    "woodcost": 510
+  }
+] ,
+"dota_techconfig":[
+  {
+    "LevelId": "0",
+    "ExtraWood": 2,
+    "goldcost": 10
+  },
+  {
+    "LevelId": "1",
+    "ExtraWood": 4,
+    "goldcost": 20
+  },
+  {
+    "LevelId": "2",
+    "ExtraWood": 6,
+    "goldcost": 30
+  },
+  {
+    "LevelId": "3",
+    "ExtraWood": 8,
+    "goldcost": 40
+  },
+  {
+    "LevelId": "4",
+    "ExtraWood": 10,
+    "goldcost": 50
+  },
+  {
+    "LevelId": "5",
+    "ExtraWood": 12,
+    "goldcost": 60
+  },
+  {
+    "LevelId": "6",
+    "ExtraWood": 14,
+    "goldcost": 70
+  },
+  {
+    "LevelId": "7",
+    "ExtraWood": 16,
+    "goldcost": 80
+  },
+  {
+    "LevelId": "8",
+    "ExtraWood": 18,
+    "goldcost": 90
+  },
+  {
+    "LevelId": "9",
+    "ExtraWood": 20,
+    "goldcost": 100
+  },
+  {
+    "LevelId": "10",
+    "ExtraWood": 22,
+    "goldcost": 110
+  },
+  {
+    "LevelId": "11",
+    "ExtraWood": 24,
+    "goldcost": 120
+  },
+  {
+    "LevelId": "12",
+    "ExtraWood": 26,
+    "goldcost": 130
+  },
+  {
+    "LevelId": "13",
+    "ExtraWood": 28,
+    "goldcost": 140
+  },
+  {
+    "LevelId": "14",
+    "ExtraWood": 30,
+    "goldcost": 150
+  },
+  {
+    "LevelId": "15",
+    "ExtraWood": 32,
+    "goldcost": 160
+  },
+  {
+    "LevelId": "16",
+    "ExtraWood": 34,
+    "goldcost": 170
+  },
+  {
+    "LevelId": "17",
+    "ExtraWood": 36,
+    "goldcost": 180
+  },
+  {
+    "LevelId": "18",
+    "ExtraWood": 38,
+    "goldcost": 190
+  },
+  {
+    "LevelId": "19",
+    "ExtraWood": 40,
+    "goldcost": 200
+  },
+  {
+    "LevelId": "20",
+    "ExtraWood": 42,
+    "goldcost": 210
+  },
+  {
+    "LevelId": "21",
+    "ExtraWood": 44,
+    "goldcost": 220
+  },
+  {
+    "LevelId": "22",
+    "ExtraWood": 46,
+    "goldcost": 230
+  },
+  {
+    "LevelId": "23",
+    "ExtraWood": 48,
+    "goldcost": 240
+  },
+  {
+    "LevelId": "24",
+    "ExtraWood": 50,
+    "goldcost": 250
+  },
+  {
+    "LevelId": "25",
+    "ExtraWood": 52,
+    "goldcost": 260
+  },
+  {
+    "LevelId": "26",
+    "ExtraWood": 54,
+    "goldcost": 270
+  },
+  {
+    "LevelId": "27",
+    "ExtraWood": 56,
+    "goldcost": 280
+  },
+  {
+    "LevelId": "28",
+    "ExtraWood": 58,
+    "goldcost": 290
+  },
+  {
+    "LevelId": "29",
+    "ExtraWood": 60,
+    "goldcost": 300
+  },
+  {
+    "LevelId": "30",
+    "ExtraWood": 62,
+    "goldcost": 310
+  },
+  {
+    "LevelId": "31",
+    "ExtraWood": 64,
+    "goldcost": 320
+  },
+  {
+    "LevelId": "32",
+    "ExtraWood": 66,
+    "goldcost": 330
+  },
+  {
+    "LevelId": "33",
+    "ExtraWood": 68,
+    "goldcost": 340
+  },
+  {
+    "LevelId": "34",
+    "ExtraWood": 70,
+    "goldcost": 350
+  },
+  {
+    "LevelId": "35",
+    "ExtraWood": 72,
+    "goldcost": 360
+  },
+  {
+    "LevelId": "36",
+    "ExtraWood": 74,
+    "goldcost": 370
+  },
+  {
+    "LevelId": "37",
+    "ExtraWood": 76,
+    "goldcost": 380
+  },
+  {
+    "LevelId": "38",
+    "ExtraWood": 78,
+    "goldcost": 390
+  },
+  {
+    "LevelId": "39",
+    "ExtraWood": 80,
+    "goldcost": 400
+  },
+  {
+    "LevelId": "40",
+    "ExtraWood": 82,
+    "goldcost": 410
+  },
+  {
+    "LevelId": "41",
+    "ExtraWood": 84,
+    "goldcost": 420
+  },
+  {
+    "LevelId": "42",
+    "ExtraWood": 86,
+    "goldcost": 430
+  },
+  {
+    "LevelId": "43",
+    "ExtraWood": 88,
+    "goldcost": 440
+  },
+  {
+    "LevelId": "44",
+    "ExtraWood": 90,
+    "goldcost": 450
+  },
+  {
+    "LevelId": "45",
+    "ExtraWood": 92,
+    "goldcost": 460
+  },
+  {
+    "LevelId": "46",
+    "ExtraWood": 94,
+    "goldcost": 470
+  },
+  {
+    "LevelId": "47",
+    "ExtraWood": 96,
+    "goldcost": 480
+  },
+  {
+    "LevelId": "48",
+    "ExtraWood": 98,
+    "goldcost": 490
+  },
+  {
+    "LevelId": "49",
+    "ExtraWood": 100,
+    "goldcost": 500
+  },
+  {
+    "LevelId": "50",
+    "ExtraWood": 102,
+    "goldcost": 510
+  }
+] ,
 "draw_drawtreasureconfig":[
   {
     "id": 1,
@@ -2792,7 +3389,7 @@
 "hero_heroconfig":[
   {
     "id": 10001,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆1号",
     "TalentInfo": [
       {
@@ -2899,7 +3496,7 @@
   },
   {
     "id": 10002,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆2",
     "TalentInfo": [
       {
@@ -3006,139 +3603,139 @@
   },
   {
     "id": 10003,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆2号",
     "TalentInfo": []
   },
   {
     "id": 10004,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆3",
     "TalentInfo": []
   },
   {
     "id": 10005,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆3号",
     "TalentInfo": []
   },
   {
     "id": 10006,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆4",
     "TalentInfo": []
   },
   {
     "id": 10007,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆4号",
     "TalentInfo": []
   },
   {
     "id": 10008,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆5",
     "TalentInfo": []
   },
   {
     "id": 10009,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆5号",
     "TalentInfo": []
   },
   {
     "id": 10010,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆6",
     "TalentInfo": []
   },
   {
     "id": 10011,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆6号",
     "TalentInfo": []
   },
   {
     "id": 10012,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆7",
     "TalentInfo": []
   },
   {
     "id": 10013,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆7号",
     "TalentInfo": []
   },
   {
     "id": 10014,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆8",
     "TalentInfo": []
   },
   {
     "id": 10015,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆8号",
     "TalentInfo": []
   },
   {
     "id": 10016,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆9",
     "TalentInfo": []
   },
   {
     "id": 10017,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆9号",
     "TalentInfo": []
   },
   {
     "id": 10018,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆10",
     "TalentInfo": []
   },
   {
     "id": 10019,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆10号",
     "TalentInfo": []
   },
   {
     "id": 10020,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆11",
     "TalentInfo": []
   },
   {
     "id": 10021,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆11号",
     "TalentInfo": []
   },
   {
     "id": 10022,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆12",
     "TalentInfo": []
   },
   {
     "id": 10023,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆12号",
     "TalentInfo": []
   },
   {
     "id": 10024,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆13",
     "TalentInfo": []
   },
   {
     "id": 10025,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆13号",
     "TalentInfo": []
   }
@@ -3537,7 +4134,7 @@
 "item_itemconfig":[
   {
     "id": 1,
-    "isVaild": 1,
+    "isVaild": true,
     "ItemName": "金币",
     "ItemIcon": "",
     "ItemQuality": 0,
@@ -3552,7 +4149,7 @@
   },
   {
     "id": 2,
-    "isVaild": 1,
+    "isVaild": true,
     "ItemName": "木材",
     "ItemIcon": "",
     "ItemQuality": 0,
@@ -3567,7 +4164,7 @@
   },
   {
     "id": 100,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "",
     "ItemIcon": "",
     "ItemQuality": 0,
@@ -3582,7 +4179,7 @@
   },
   {
     "id": 1000,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "",
     "ItemIcon": "",
     "ItemQuality": 0,
@@ -3597,7 +4194,7 @@
   },
   {
     "id": 10001,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱",
     "ItemIcon": "320001",
     "ItemQuality": 5,
@@ -3615,7 +4212,7 @@
   },
   {
     "id": 10002,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "宝箱",
     "ItemIcon": "330001",
     "ItemQuality": 5,
@@ -3630,7 +4227,7 @@
   },
   {
     "id": 10003,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "宝箱",
     "ItemIcon": "500001",
     "ItemQuality": 10,
@@ -3645,7 +4242,7 @@
   },
   {
     "id": 10004,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "史莱姆装备1",
     "ItemIcon": "320002",
     "ItemQuality": 10,
@@ -3665,7 +4262,7 @@
   },
   {
     "id": 10005,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "",
     "ItemIcon": "410001",
     "ItemQuality": 10,
@@ -3680,7 +4277,7 @@
   },
   {
     "id": 10006,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "英雄经验",
     "ItemIcon": "410002",
     "ItemQuality": 10,
@@ -3703,7 +4300,7 @@
   },
   {
     "id": 10007,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "",
     "ItemIcon": "410003",
     "ItemQuality": 10,
@@ -3718,7 +4315,7 @@
   },
   {
     "id": 10008,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "",
     "ItemIcon": "410004",
     "ItemQuality": 10,
@@ -3733,7 +4330,7 @@
   },
   {
     "id": 10009,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "祝福1",
     "ItemIcon": "410005",
     "ItemQuality": 5,
@@ -3750,7 +4347,7 @@
   },
   {
     "id": 10010,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "称号1",
     "ItemIcon": "410008",
     "ItemQuality": 5,
@@ -3772,7 +4369,7 @@
   },
   {
     "id": 10011,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱2",
     "ItemIcon": "300001",
     "ItemQuality": 4,
@@ -3787,7 +4384,7 @@
   },
   {
     "id": 10012,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱3",
     "ItemIcon": "300001",
     "ItemQuality": 4,
@@ -3802,7 +4399,7 @@
   },
   {
     "id": 10013,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱4",
     "ItemIcon": "110001",
     "ItemQuality": 4,
@@ -3817,7 +4414,7 @@
   },
   {
     "id": 10014,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱5",
     "ItemIcon": "202001",
     "ItemQuality": 4,
@@ -3832,7 +4429,7 @@
   },
   {
     "id": 10015,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱6",
     "ItemIcon": "204001",
     "ItemQuality": 5,
@@ -3847,7 +4444,7 @@
   },
   {
     "id": 10016,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱7",
     "ItemIcon": "201001",
     "ItemQuality": 5,
@@ -5680,7 +6277,7 @@
 "shop_shopconfig":[
   {
     "id": 10001,
-    "isVaild": 1,
+    "isVaild": true,
     "ShopType": 1001,
     "ShopName": "lang_HUD_Shop_Home",
     "ShopRefreshType": 0,
@@ -5703,8 +6300,8 @@
         "OverSeaOriginPrice": 100,
         "OverSeaRealPrice": 50,
         "Discount": 50,
-        "VipLimit": 1,
-        "isVaild": 1
+        "VipLimit": true,
+        "isVaild": true
       },
       {
         "SellConfigid": 1002,
@@ -5722,8 +6319,8 @@
         "OverSeaOriginPrice": 110,
         "OverSeaRealPrice": 55,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1003,
@@ -5741,8 +6338,8 @@
         "OverSeaOriginPrice": 120,
         "OverSeaRealPrice": 60,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1004,
@@ -5760,8 +6357,8 @@
         "OverSeaOriginPrice": 130,
         "OverSeaRealPrice": 65,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1005,
@@ -5779,8 +6376,8 @@
         "OverSeaOriginPrice": 140,
         "OverSeaRealPrice": 70,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1006,
@@ -5798,8 +6395,8 @@
         "OverSeaOriginPrice": 150,
         "OverSeaRealPrice": 75,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1007,
@@ -5817,8 +6414,8 @@
         "OverSeaOriginPrice": 160,
         "OverSeaRealPrice": 80,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1008,
@@ -5836,8 +6433,8 @@
         "OverSeaOriginPrice": 170,
         "OverSeaRealPrice": 85,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1009,
@@ -5855,8 +6452,8 @@
         "OverSeaOriginPrice": 180,
         "OverSeaRealPrice": 90,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1010,
@@ -5874,8 +6471,8 @@
         "OverSeaOriginPrice": 190,
         "OverSeaRealPrice": 95,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1011,
@@ -5893,8 +6490,8 @@
         "OverSeaOriginPrice": 200,
         "OverSeaRealPrice": 100,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1012,
@@ -5912,8 +6509,8 @@
         "OverSeaOriginPrice": 210,
         "OverSeaRealPrice": 105,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1013,
@@ -5931,8 +6528,8 @@
         "OverSeaOriginPrice": 220,
         "OverSeaRealPrice": 110,
         "Discount": 50,
-        "VipLimit": 1,
-        "isVaild": 1
+        "VipLimit": true,
+        "isVaild": true
       },
       {
         "SellConfigid": 1014,
@@ -5950,8 +6547,8 @@
         "OverSeaOriginPrice": 230,
         "OverSeaRealPrice": 115,
         "Discount": 50,
-        "VipLimit": 1,
-        "isVaild": 1
+        "VipLimit": true,
+        "isVaild": true
       },
       {
         "SellConfigid": 1015,
@@ -5969,8 +6566,8 @@
         "OverSeaOriginPrice": 240,
         "OverSeaRealPrice": 120,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1016,
@@ -5988,14 +6585,14 @@
         "OverSeaOriginPrice": 250,
         "OverSeaRealPrice": 125,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       }
     ]
   },
   {
     "id": 10002,
-    "isVaild": 1,
+    "isVaild": true,
     "ShopType": 1002,
     "ShopName": "lang_HUD_Shop_Props",
     "ShopRefreshType": 0,
@@ -6018,8 +6615,8 @@
         "OverSeaOriginPrice": 260,
         "OverSeaRealPrice": 130,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1018,
@@ -6037,8 +6634,8 @@
         "OverSeaOriginPrice": 270,
         "OverSeaRealPrice": 135,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1019,
@@ -6056,8 +6653,8 @@
         "OverSeaOriginPrice": 280,
         "OverSeaRealPrice": 140,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1020,
@@ -6075,8 +6672,8 @@
         "OverSeaOriginPrice": 290,
         "OverSeaRealPrice": 145,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1021,
@@ -6094,8 +6691,8 @@
         "OverSeaOriginPrice": 300,
         "OverSeaRealPrice": 150,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1022,
@@ -6113,8 +6710,8 @@
         "OverSeaOriginPrice": 310,
         "OverSeaRealPrice": 155,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1023,
@@ -6132,8 +6729,8 @@
         "OverSeaOriginPrice": 320,
         "OverSeaRealPrice": 160,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1024,
@@ -6151,8 +6748,8 @@
         "OverSeaOriginPrice": 330,
         "OverSeaRealPrice": 165,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1025,
@@ -6170,8 +6767,8 @@
         "OverSeaOriginPrice": 340,
         "OverSeaRealPrice": 170,
         "Discount": 50,
-        "VipLimit": 1,
-        "isVaild": 1
+        "VipLimit": true,
+        "isVaild": true
       },
       {
         "SellConfigid": 1026,
@@ -6189,8 +6786,8 @@
         "OverSeaOriginPrice": 350,
         "OverSeaRealPrice": 175,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1027,
@@ -6208,8 +6805,8 @@
         "OverSeaOriginPrice": 360,
         "OverSeaRealPrice": 180,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1028,
@@ -6227,8 +6824,8 @@
         "OverSeaOriginPrice": 370,
         "OverSeaRealPrice": 185,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1029,
@@ -6246,8 +6843,8 @@
         "OverSeaOriginPrice": 380,
         "OverSeaRealPrice": 190,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1030,
@@ -6265,8 +6862,8 @@
         "OverSeaOriginPrice": 390,
         "OverSeaRealPrice": 195,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1031,
@@ -6284,8 +6881,8 @@
         "OverSeaOriginPrice": 400,
         "OverSeaRealPrice": 200,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1032,
@@ -6303,14 +6900,14 @@
         "OverSeaOriginPrice": 410,
         "OverSeaRealPrice": 205,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       }
     ]
   },
   {
     "id": 10003,
-    "isVaild": 1,
+    "isVaild": true,
     "ShopType": 1003,
     "ShopName": "lang_HUD_Shop_Chest",
     "ShopRefreshType": 0,
@@ -6333,8 +6930,8 @@
         "OverSeaOriginPrice": 420,
         "OverSeaRealPrice": 210,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1034,
@@ -6352,8 +6949,8 @@
         "OverSeaOriginPrice": 430,
         "OverSeaRealPrice": 215,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1035,
@@ -6371,8 +6968,8 @@
         "OverSeaOriginPrice": 440,
         "OverSeaRealPrice": 220,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1036,
@@ -6390,8 +6987,8 @@
         "OverSeaOriginPrice": 450,
         "OverSeaRealPrice": 225,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1037,
@@ -6409,8 +7006,8 @@
         "OverSeaOriginPrice": 460,
         "OverSeaRealPrice": 230,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1038,
@@ -6428,8 +7025,8 @@
         "OverSeaOriginPrice": 470,
         "OverSeaRealPrice": 235,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1039,
@@ -6447,8 +7044,8 @@
         "OverSeaOriginPrice": 480,
         "OverSeaRealPrice": 240,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1040,
@@ -6466,8 +7063,8 @@
         "OverSeaOriginPrice": 490,
         "OverSeaRealPrice": 245,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1041,
@@ -6485,8 +7082,8 @@
         "OverSeaOriginPrice": 500,
         "OverSeaRealPrice": 250,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1042,
@@ -6504,8 +7101,8 @@
         "OverSeaOriginPrice": 510,
         "OverSeaRealPrice": 255,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1043,
@@ -6523,8 +7120,8 @@
         "OverSeaOriginPrice": 520,
         "OverSeaRealPrice": 260,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1044,
@@ -6542,8 +7139,8 @@
         "OverSeaOriginPrice": 530,
         "OverSeaRealPrice": 265,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1045,
@@ -6561,8 +7158,8 @@
         "OverSeaOriginPrice": 540,
         "OverSeaRealPrice": 270,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1046,
@@ -6580,8 +7177,8 @@
         "OverSeaOriginPrice": 550,
         "OverSeaRealPrice": 275,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1047,
@@ -6599,8 +7196,8 @@
         "OverSeaOriginPrice": 560,
         "OverSeaRealPrice": 280,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       },
       {
         "SellConfigid": 1048,
@@ -6618,8 +7215,8 @@
         "OverSeaOriginPrice": 570,
         "OverSeaRealPrice": 285,
         "Discount": 50,
-        "VipLimit": 0,
-        "isVaild": 1
+        "VipLimit": false,
+        "isVaild": true
       }
     ]
   }
@@ -6879,7 +7476,6 @@
     function JsonDataLoader(filename:string){
         return JSONData[filename];
     };
-    export let JSONConfig: Readonly<Tables>;
     export function RefreshConfig(data: { [k: string]: any }) {
       for (let k in data) {
         JSONData[k] = data[k];
@@ -6891,7 +7487,9 @@
       catch (error) {
         GLogHelper.error(error)
       }
-      JSONConfig = tabledata
+      _G.GJSONConfig = tabledata;
     };
-    RefreshConfig({});
+    declare global {
+      var GJSONConfig: Readonly<Tables>;
+    }
     

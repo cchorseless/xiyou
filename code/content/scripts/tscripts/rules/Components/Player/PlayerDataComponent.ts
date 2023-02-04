@@ -1,6 +1,5 @@
 
 import { EventHelper } from "../../../helper/EventHelper";
-import { KVHelper } from "../../../helper/KVHelper";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { EEnum } from "../../../shared/Gen/Types";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
@@ -133,19 +132,16 @@ export class PlayerDataComponent extends PlayerData {
     }
     applyPopuLevelUp(addlevel: number) {
         this.popuLevel += addlevel;
-        let popu = KVHelper.KvServerConfig.population_config[this.popuLevel + ""].PopulationRoof;
-        this.populationRoof += tonumber(popu);
-        let popuLevelUpCostGold = KVHelper.KvServerConfig.population_config[this.popuLevel + ""].goldcost;
-        let popuLevelUpCostWood = KVHelper.KvServerConfig.population_config[this.popuLevel + ""].woodcost;
-        this.popuLevelUpCostGold += tonumber(popuLevelUpCostGold);
-        this.popuLevelUpCostWood += tonumber(popuLevelUpCostWood);
+        const config = GJSONConfig.PopulationConfig.get(this.popuLevel + "");
+        this.populationRoof += config.PopulationRoof;
+        this.popuLevelUpCostGold += config.goldcost;
+        this.popuLevelUpCostWood += config.woodcost;
     }
     applyTechLevelUp(addlevel: number) {
         this.techLevel += addlevel;
-        let extraWood = KVHelper.KvServerConfig.tech_config[this.techLevel + ""].ExtraWood;
-        this.perIntervalWood += tonumber(extraWood);
-        let techLevelUpCostGold = KVHelper.KvServerConfig.tech_config[this.techLevel + ""].goldcost;
-        this.techLevelUpCostGold += tonumber(techLevelUpCostGold);
+        const config = GJSONConfig.TechConfig.get(this.popuLevel + "");
+        this.perIntervalWood += config.ExtraWood;
+        this.techLevelUpCostGold += config.goldcost;
     }
 
     OnRoundStartBegin(round: ERoundBoard) {

@@ -15,9 +15,10 @@ function jsontots() {
     typestr = typestr.replace(/throw new Error\(\)/g, "GLogHelper.error(1);")
     typestr = typestr.replace(/constructor\(_json_: any\) {\s+this._dataMap/g, "constructor(_json_: any[]) {\n this._dataMap ")
     typestr = typestr.replace(/constructor\(_json_: any\) {\s+if \(_json_.length/g, "constructor(_json_: any[]) {\n if (_json_.length ")
+    typestr = typestr.replace(/for \(let _entry_ of _json_\.\S*\)/g, (s) => {
+      let cc = s.substring(0, s.length - 1) + " as any[][])";
+      return cc;})
     fs.writeFileSync(typepath, typestr);
-
-
     let filestr = "";
     const files = read_all_files(jsonpath);
     files.forEach((file) => {
@@ -31,7 +32,6 @@ function jsontots() {
     function JsonDataLoader(filename:string){
         return JSONData[filename];
     };
-    export let JSONConfig: Readonly<Tables>;
     export function RefreshConfig(data: { [k: string]: any }) {
       for (let k in data) {
         JSONData[k] = data[k];
@@ -43,9 +43,11 @@ function jsontots() {
       catch (error) {
         GLogHelper.error(error)
       }
-      JSONConfig = tabledata
+      _G.GJSONConfig = tabledata;
     };
-    RefreshConfig({});
+    declare global {
+      var GJSONConfig: Readonly<Tables>;
+    }
     `;
     fs.writeFileSync(outtspath, filestr);
 

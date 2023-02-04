@@ -1,4 +1,3 @@
-import { JSONConfig } from "../../Gen/JsonConfig";
 import { ET, serializeETProps } from "../../lib/Entity";
 
 
@@ -13,7 +12,7 @@ export class TShopSellItem extends ET.Entity {
     @serializeETProps()
     public CharacterId: number;
     public get SellConfig() {
-        const json = JSONConfig.ShopConfig.get(this.ShopId);
+        const json = GJSONConfig.ShopConfig.get(this.ShopId);
         if (json) {
             return json.sellinfo.find(info => info.SellConfigid == this.ConfigId)
         }

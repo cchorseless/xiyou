@@ -434,7 +434,7 @@ export module ET {
 
         protected setDomain(value: IEntityRoot) {
             if (value == null) {
-                GLogHelper.error("domain cant set null: {this.GetType().Name}");
+                GLogHelper.error(`domain cant set null: ${this.GetType()}`);
             }
 
             if (this.Domain == value) {
@@ -637,7 +637,7 @@ export module ET {
         public AddOneComponent(component: Component) {
             let type = component.GetType();
             if (this.Components != null && this.Components[type] != null) {
-                GLogHelper.error("entity already has component: {type.FullName}");
+                GLogHelper.error(`entity already has component: ${type}`);
             }
             component.setParent(this);
             return component;

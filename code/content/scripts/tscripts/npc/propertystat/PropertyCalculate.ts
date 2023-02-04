@@ -179,10 +179,10 @@ export module PropertyCalculate {
     }
 
     /**
-         * @Both
-         * @param k 
-         * @returns 
-         */
+    * @Both
+    * @param k 
+    * @returns 
+    */
     export function GetUnitCache(hUnit: IBaseNpc_Plus, k: string) {
         let fDefault = 0;
         if (GameFunc.IsValid(hUnit)) {
@@ -456,6 +456,13 @@ export module PropertyCalculate {
     export function GetPoisonImmune(hUnit: IBaseNpc_Plus, tParams: ICustomModifierAttackEvent) {
         return SumProps(hUnit, tParams, GPropertyConfig.EMODIFIER_PROPERTY.POISON_IMMUNE,)
     }
+    // 吸血
+    export function GetLifeStealPercent(hUnit: IBaseNpc_Plus) {
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE,)
+    }
+    export function GetSpellLifeStealPercent(hUnit: IBaseNpc_Plus) {
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_PERCENTAGE,)
+    }
 
     /**-------------基础三围-------------------- */
     export function GetBaseStrength(hUnit: IBaseNpc_Plus) {
@@ -476,7 +483,7 @@ export module PropertyCalculate {
         if (!GameFunc.IsValid(hUnit) || !hUnit.HasModifier(GPropertyConfig.HERO_PROPERTY_BUFF_NAME)) {
             return 0
         }
-        const BaseIntellect = GetUnitCache(hUnit, "AttributeBaseIntellect");
+        const BaseIntellect = GetUnitCache(hUnit, "AttributeBaseIntelligence");
         return math.max(BaseIntellect + math.floor(SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BASE)), 0) + GetBaseAllStat(hUnit)
     }
     /**-------------基础三围百分比-------------------- */

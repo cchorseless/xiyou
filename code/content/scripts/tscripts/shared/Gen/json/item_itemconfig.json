@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "isVaild": 1,
+    "isVaild": true,
     "ItemName": "金币",
     "ItemIcon": "",
     "ItemQuality": 0,
@@ -16,7 +16,7 @@
   },
   {
     "id": 2,
-    "isVaild": 1,
+    "isVaild": true,
     "ItemName": "木材",
     "ItemIcon": "",
     "ItemQuality": 0,
@@ -31,7 +31,7 @@
   },
   {
     "id": 100,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "",
     "ItemIcon": "",
     "ItemQuality": 0,
@@ -46,7 +46,7 @@
   },
   {
     "id": 1000,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "",
     "ItemIcon": "",
     "ItemQuality": 0,
@@ -61,7 +61,7 @@
   },
   {
     "id": 10001,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱",
     "ItemIcon": "320001",
     "ItemQuality": 5,
@@ -79,7 +79,7 @@
   },
   {
     "id": 10002,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "宝箱",
     "ItemIcon": "330001",
     "ItemQuality": 5,
@@ -94,7 +94,7 @@
   },
   {
     "id": 10003,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "宝箱",
     "ItemIcon": "500001",
     "ItemQuality": 10,
@@ -109,7 +109,7 @@
   },
   {
     "id": 10004,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "史莱姆装备1",
     "ItemIcon": "320002",
     "ItemQuality": 10,
@@ -129,7 +129,7 @@
   },
   {
     "id": 10005,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "",
     "ItemIcon": "410001",
     "ItemQuality": 10,
@@ -144,7 +144,7 @@
   },
   {
     "id": 10006,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "英雄经验",
     "ItemIcon": "410002",
     "ItemQuality": 10,
@@ -167,7 +167,7 @@
   },
   {
     "id": 10007,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "",
     "ItemIcon": "410003",
     "ItemQuality": 10,
@@ -182,7 +182,7 @@
   },
   {
     "id": 10008,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "",
     "ItemIcon": "410004",
     "ItemQuality": 10,
@@ -197,7 +197,7 @@
   },
   {
     "id": 10009,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "祝福1",
     "ItemIcon": "410005",
     "ItemQuality": 5,
@@ -214,7 +214,7 @@
   },
   {
     "id": 10010,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "称号1",
     "ItemIcon": "410008",
     "ItemQuality": 5,
@@ -236,7 +236,7 @@
   },
   {
     "id": 10011,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱2",
     "ItemIcon": "300001",
     "ItemQuality": 4,
@@ -251,7 +251,7 @@
   },
   {
     "id": 10012,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱3",
     "ItemIcon": "300001",
     "ItemQuality": 4,
@@ -266,7 +266,7 @@
   },
   {
     "id": 10013,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱4",
     "ItemIcon": "110001",
     "ItemQuality": 4,
@@ -281,7 +281,7 @@
   },
   {
     "id": 10014,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱5",
     "ItemIcon": "202001",
     "ItemQuality": 4,
@@ -296,7 +296,7 @@
   },
   {
     "id": 10015,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱6",
     "ItemIcon": "204001",
     "ItemQuality": 5,
@@ -311,7 +311,7 @@
   },
   {
     "id": 10016,
-    "isVaild": 0,
+    "isVaild": false,
     "ItemName": "测试宝箱7",
     "ItemIcon": "201001",
     "ItemQuality": 5,

@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "IsValid": 1,
+    "IsValid": true,
     "GiftCommond": "HappyNewYear",
     "GiftCount": 100,
     "ActivityStartTime": 1655913600,
@@ -19,7 +19,7 @@
   },
   {
     "id": 10,
-    "IsValid": 1,
+    "IsValid": true,
     "GiftCommond": "",
     "GiftCount": 0,
     "ActivityStartTime": 1655913600,
@@ -69,7 +69,7 @@
   },
   {
     "id": 110,
-    "IsValid": 1,
+    "IsValid": true,
     "GiftCommond": "",
     "GiftCount": 0,
     "ActivityStartTime": 1655913600,
@@ -143,7 +143,7 @@
   },
   {
     "id": 270,
-    "IsValid": 1,
+    "IsValid": true,
     "GiftCommond": "",
     "GiftCount": 0,
     "ActivityStartTime": 1655913600,

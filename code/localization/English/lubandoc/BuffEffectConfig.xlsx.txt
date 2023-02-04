@@ -1,0 +1,6 @@
+"DOTA_Tooltip_modifier_phy_arm_base_3"       "加甲流_3"
+"DOTA_Tooltip_modifier_phy_arm_base_3_description"       "全队增加3点护甲"
+"DOTA_Tooltip_modifier_phy_arm_base_6"       "加甲流_6"
+"DOTA_Tooltip_modifier_phy_arm_base_6_description"       "全队增加6点护甲"
+"DOTA_Tooltip_modifier_phy_arm_base_9"       "加甲流_9"
+"DOTA_Tooltip_modifier_phy_arm_base_9_description"       "全队增加9点护甲"

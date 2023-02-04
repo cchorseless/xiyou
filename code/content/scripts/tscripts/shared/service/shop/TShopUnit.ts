@@ -1,5 +1,4 @@
 
-import { JSONConfig } from "../../Gen/JsonConfig";
 import { ET, ETEntitySystem, serializeETProps } from "../../lib/Entity";
 import { TShopSellItem } from "./TShopSellItem";
 
@@ -25,7 +24,7 @@ export class TShopUnit extends ET.Entity {
         this._ShopSellItem.copy(data);
     }
     public get Config() {
-        return JSONConfig.ShopConfig.get(this.ConfigId);
+        return GJSONConfig.ShopConfig.get(this.ConfigId);
     }
 
     getAllSellItems() {

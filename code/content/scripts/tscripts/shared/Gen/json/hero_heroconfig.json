@@ -1,7 +1,7 @@
 [
   {
     "id": 10001,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆1号",
     "TalentInfo": [
       {
@@ -108,7 +108,7 @@
   },
   {
     "id": 10002,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆2",
     "TalentInfo": [
       {
@@ -215,139 +215,139 @@
   },
   {
     "id": 10003,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆2号",
     "TalentInfo": []
   },
   {
     "id": 10004,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆3",
     "TalentInfo": []
   },
   {
     "id": 10005,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆3号",
     "TalentInfo": []
   },
   {
     "id": 10006,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆4",
     "TalentInfo": []
   },
   {
     "id": 10007,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆4号",
     "TalentInfo": []
   },
   {
     "id": 10008,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆5",
     "TalentInfo": []
   },
   {
     "id": 10009,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆5号",
     "TalentInfo": []
   },
   {
     "id": 10010,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆6",
     "TalentInfo": []
   },
   {
     "id": 10011,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆6号",
     "TalentInfo": []
   },
   {
     "id": 10012,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆7",
     "TalentInfo": []
   },
   {
     "id": 10013,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆7号",
     "TalentInfo": []
   },
   {
     "id": 10014,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆8",
     "TalentInfo": []
   },
   {
     "id": 10015,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆8号",
     "TalentInfo": []
   },
   {
     "id": 10016,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆9",
     "TalentInfo": []
   },
   {
     "id": 10017,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆9号",
     "TalentInfo": []
   },
   {
     "id": 10018,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆10",
     "TalentInfo": []
   },
   {
     "id": 10019,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆10号",
     "TalentInfo": []
   },
   {
     "id": 10020,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆11",
     "TalentInfo": []
   },
   {
     "id": 10021,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆11号",
     "TalentInfo": []
   },
   {
     "id": 10022,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆12",
     "TalentInfo": []
   },
   {
     "id": 10023,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆12号",
     "TalentInfo": []
   },
   {
     "id": 10024,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆13",
     "TalentInfo": []
   },
   {
     "id": 10025,
-    "IsValid": 0,
+    "IsValid": false,
     "HeroName": "史莱姆13号",
     "TalentInfo": []
   }
