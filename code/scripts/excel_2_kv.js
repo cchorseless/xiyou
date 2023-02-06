@@ -386,10 +386,11 @@ function createLanguageTXT(file, rows) {
                             }
                         }
                     }
-                    if (_kk != null) {
+                    let _vv=rows[i][result_txt_obj[k].temp_value[jj]]
+                    if (_kk != null&&_vv != null)  {
                         f_str += `"${_kk}"`;
                         f_str += "       ";
-                        f_str += `"${rows[i][result_txt_obj[k].temp_value[jj]]}"`;
+                        f_str += `"${_vv}"`;
                         f_str += "\n";
                     }
 

@@ -33,18 +33,17 @@ export class CombinationInfoDialog extends CombinationInfoDialog_UI<IProps> {
         this.clearNode(this.NODENAME.panel_des);
         this.clearNode(this.NODENAME.panel_heroicon);
         let KV_DATA = KVHelper.KVData();
-        let config = KV_DATA.building_combination_ability;
+        let config = GJSONConfig.CombinationConfig.getDataList()
         let heronamemap: { [key: string]: string } = {};
         let common_effectmap: { [key: string]: string } = {};
         let relationicon = null;
-        for (let k in config) {
-            let info = config[k];
+        for (let info of config) {
             if (info.relation == p.itemname) {
                 if (info.index && info.heroid) {
                     heronamemap[info.index] = info.heroid;
                 }
-                if (info.active_count && info.acitve_common_effect) {
-                    common_effectmap[info.active_count] = info.acitve_common_effect;
+                if (info.activeCount && info.acitveCommonEffect) {
+                    common_effectmap[info.activeCount + ""] = info.acitveCommonEffect;
                 }
                 relationicon = relationicon || info.relationicon;
             }

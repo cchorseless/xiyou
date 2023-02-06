@@ -1,20 +1,19 @@
 
 import React from "react";
-import { JsonConfigHelper } from "../../../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
-import { ECombination } from "../../../game/components/Combination/ECombination";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { AbilityHelper, UnitHelper } from "../../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../../helper/FuncHelper";
 import { KVHelper } from "../../../helper/KVHelper";
+import { CCCombinationUnitIconGroup } from "../../Combination/CCCombinationUnitIconGroup";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { CCPanelBG } from "../CCPanel/CCPanelPart";
-import { CCUnitSmallIcon } from "../CCUnit/CCUnitSmallIcon";
 import "./CCAbilityInfoDialog.less";
 
 interface ICCAbilityInfoDialog extends NodePropsData {
     abilityname: string,
-    castentityindex?: EntityIndex,
+    castentityindex?: AbilityEntityIndex,
     level?: number,
+    playerid?: PlayerID;
     // mode?: "description_only" | "show_scepter_only" | "normal",
     // showextradescription?: boolean,
     // onlynowlevelvalue?: boolean
@@ -35,6 +34,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
     static defaultProps = {
         castentityindex: -1,
         level: -1,
+        playerid: -1,
         mode: "normal",
         // showextradescription: false,
         // onlynowlevelvalue: false,
@@ -117,28 +117,13 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
         const tData = KVHelper.KVAbilitys()[abilityname] || {};
         const iLevel = this.props.level || -1;
         const combinationLabel = tData.CombinationLabel! as string;
-        const allcombs = ECombination.GetCombinationByCombinationName(GGameScene.Local.BelongPlayerid, combinationLabel) || [];
-        const entity = allcombs[0];
-        const uniqueConfigList = entity?.uniqueConfigList || [];
-        const herolist: string[] = [];
-        for (let k in KVHelper.KVData().building_combination_ability) {
-            let data = KVHelper.KVData().building_combination_ability[k];
-            if (data.relation == combinationLabel && data.heroid && !herolist.includes(data.heroid)) {
-                herolist.push(data.heroid);
-            }
-        }
-        herolist.sort((a, b) => {
-            const r_a = JsonConfigHelper.ToRarityNumber(KVHelper.KVData().building_unit_tower[a].Rarity as any);
-            const r_b = JsonConfigHelper.ToRarityNumber(KVHelper.KVData().building_unit_tower[b].Rarity as any);
-            return r_a - r_b
-        });
         // const mode = this.props.mode;
         // const showextradescription = this.props.showextradescription!;
         // const onlynowlevelvalue = this.props.onlynowlevelvalue!;
         dialogVariables['level'] = iLevel.toString();
         let iAbilityIndex = -1 as AbilityEntityIndex;
         if (castentityindex && castentityindex != -1) {
-            iAbilityIndex = Entities.GetAbilityByName(castentityindex, abilityname)
+            iAbilityIndex = Entities.GetAbilityByName(castentityindex, abilityname);
         }
         let iMaxLevel = iAbilityIndex != -1 ? Abilities.GetMaxLevel(iAbilityIndex) : -1;
         let iBehavior = iAbilityIndex != -1 ? Abilities.GetBehavior(iAbilityIndex) : AbilityHelper.SBehavior2IBehavior(tData.AbilityBehavior || "");
@@ -373,12 +358,9 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                         <Label id="AbilityLore" className={CSSHelper.ClassMaker({ 'Hidden': $.Localize("#" + sLore) == "#" + sLore || $.Localize("#" + sLore) == "" })} localizedText="#DOTA_AbilityTooltip_Lore" html={true} dialogVariables={dialogVariables} />
                         {/* <Label id="AbilityUpgradeLevel" className={CSSHelper.ClassMaker({ 'Hidden': iAbilityLearnResult != AbilityLearnResult_t.ABILITY_CANNOT_BE_UPGRADED_REQUIRES_LEVEL })} localizedText="#DOTA_AbilityTooltip_UpgradeLevel" html={true} /> */}
                     </Panel>
-                    <CCPanel id="AbilityCombination" flowChildren="right-wrap">
-                        {herolist.length > 0 && herolist.map(
-                            (name, index) => {
-                                return <CCUnitSmallIcon key={index + ""} width="35px" height="35px" itemname={name} rarity={KVHelper.KVData().building_unit_tower[name].Rarity as Rarity} brightness={uniqueConfigList.includes(name) ? "1" : "0.1"} />
-                            })}
-                    </CCPanel>
+                    {
+                        combinationLabel && <CCCombinationUnitIconGroup sectName={combinationLabel} playerid={this.props.playerid} unitentityindex={Abilities.GetCaster(castentityindex)} />
+                    }
                     {this.props.children}
                     {this.__root___childs}
                 </CCPanelBG>

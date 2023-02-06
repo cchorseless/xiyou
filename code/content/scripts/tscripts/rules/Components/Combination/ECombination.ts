@@ -1,5 +1,6 @@
 
 import { LogHelper } from "../../../helper/LogHelper";
+import { Dota } from "../../../shared/Gen/Types";
 import { ET, serializeETProps } from "../../../shared/lib/Entity";
 import { CombEffectComponent } from "./CombEffectComponent";
 import { ECombinationLabelItem } from "./ECombinationLabelItem";
@@ -8,7 +9,7 @@ import { ECombinationLabelItem } from "./ECombinationLabelItem";
 @GReloadable
 export class ECombination extends ET.Entity {
 
-    public config: { [k: string]: building_combination_ability.OBJ_2_1 } = {};
+    public config: { [k: string]: Dota.CombinationConfigRecord } = {};
     private combination: { [k: string]: ECombinationLabelItem[] } = {};
     @serializeETProps()
     public combinationName: string;
@@ -28,9 +29,9 @@ export class ECombination extends ET.Entity {
         return this.GetComponent(GGetRegClass<typeof CombEffectComponent>("CombEffectComponent"));
     }
 
-    addConfig(c: building_combination_ability.OBJ_2_1) {
+    addConfig(c: Dota.CombinationConfigRecord) {
         this.config[c.index] = c;
-        this.activeNeedCount = tonumber(c.active_count);
+        this.activeNeedCount = tonumber(c.activeCount);
         this.combinationName = c.relation;
     }
 

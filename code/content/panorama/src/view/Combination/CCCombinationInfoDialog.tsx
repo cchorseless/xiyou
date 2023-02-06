@@ -1,16 +1,14 @@
-import React, { } from "react";
-import { CSSHelper } from "../../helper/CSSHelper";
-import { CCImage } from "../AllUIElement/CCImage/CCImage";
-import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
+import React from "react";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCPanelBG, CCPanelHeader } from "../AllUIElement/CCPanel/CCPanelPart";
-import { CCProgressBar } from "../AllUIElement/CCProgressBar/CCProgressBar";
 import { CCCombinationIcon } from "./CCCombinationIcon";
 
 import "./CCCombinationInfoDialog.less";
+import { CCCombinationUnitIconGroup } from "./CCCombinationUnitIconGroup";
 
 interface ICCCombinationInfoDialog {
-    sectName: string
+    sectName: string,
+    playerid: PlayerID
 }
 
 export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
@@ -22,7 +20,8 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                     <CCPanelHeader flowChildren="right">
                         <CCCombinationIcon id="SectIcon" sectName={sectName} />
                         <CCPanel className="SectDes" flowChildren="down" marginLeft="8px" >
-                            <Label id="SectNameHeader" html={true} text={$.Localize("#DOTA_Tooltip_ability_" + sectName)} />
+                            <Label id="SectNameHeader" html={true} text={$.Localize("#lang_" + sectName)} />
+                            <Label html={true} text={$.Localize("#lang_" + sectName + "_Des")} />
                             {/* <Label id="SectNameDescription" html={true} text={replaceValues({
                                 sStr: $.Localize("#DOTA_Tooltip_ability_" + sectName + "_description"),
                                 sAbilityName: sectName,
@@ -32,12 +31,12 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                             })} /> */}
                         </CCPanel>
                     </CCPanelHeader>
-                    <CCProgressBar id="RemainProgress" max={100} value={50} >
+                    {/* <CCProgressBar id="RemainProgress" max={100} value={50} >
                         <CCLabel align="center center" localizedText={"剩余:{d:value}%"} dialogVariables={{ value: 50 }} />
-                    </CCProgressBar>
+                    </CCProgressBar> */}
                     <CCPanel id="LoreContainer">
-                        <Label html={true} text={$.Localize("#DOTA_Tooltip_ability_" + sectName + "_Lore")} />
                     </CCPanel>
+                    <CCCombinationUnitIconGroup sectName={sectName} playerid={this.props.playerid} />
                 </CCPanelBG>
             </Panel>
         )

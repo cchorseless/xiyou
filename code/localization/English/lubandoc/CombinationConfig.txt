@@ -1,0 +1,2 @@
+"lang_phyarm_up"       "加甲流"
+"lang_phyarm_up_Des"       "加甲流可以是英雄的护甲提升。"

@@ -1,5 +1,4 @@
 
-import { KVHelper } from "../../../helper/KVHelper";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { ET } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
@@ -12,10 +11,9 @@ export class CombinationManagerComponent extends ET.Component {
 
     onAwake(): void {
         this.addEvent();
-        let config = KVHelper.KvServerConfig.building_combination_ability;
+        let config = GJSONConfig.CombinationConfig.getDataList();
         let type = GGetRegClass<typeof ECombination>("ECombination");
-        for (let key in config) {
-            let info = config[key];
+        for (let info of config) {
             this.allCombination[info.relation] = this.allCombination[info.relation] || {};
             let combina = this.allCombination[info.relation][info.relationid];
             if (combina == null) {

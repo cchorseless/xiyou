@@ -16,8 +16,8 @@ export class CombEffectComponent extends ET.Component {
             let bufflist: Set<string> = new Set<string>();
             for (let key in configMap) {
                 let config = configMap[key];
-                let combuff = config.acitve_common_effect;
-                let spebuff = config.acitve_special_effect;
+                let combuff = config.acitveCommonEffect;
+                let spebuff = config.acitveSpecialEffect;
                 if (combuff && combuff.length > 0) {
                     combuff.split("|").forEach(buff => {
                         buff && bufflist.add(buff);

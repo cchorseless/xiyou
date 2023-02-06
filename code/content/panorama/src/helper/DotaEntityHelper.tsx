@@ -1,5 +1,5 @@
 import { GameProtocol } from "../../../scripts/tscripts/shared/GameProtocol";
-import { JsonConfigHelper } from "../../../scripts/tscripts/shared/Gen/JsonConfigHelper";
+import { EEnum } from "../../../scripts/tscripts/shared/Gen/Types";
 import { FuncHelper } from "./FuncHelper";
 import { KVHelper } from "./KVHelper";
 
@@ -1039,6 +1039,11 @@ export module UnitHelper {
         return ("A") as Rarity;
     };
 
+    export function GetUnitRaretyNumber(unitname: string): EEnum.ERarity {
+        const rarity = GetUnitRarety(unitname);
+        return GToNumber(EEnum.ERarity[rarity]);
+    };
+
     export function GetAttackSpeedPercent(iUnitEntIndex: EntityIndex) {
         return Entities.GetAttackSpeed(iUnitEntIndex) * 100;
     };
@@ -1088,6 +1093,9 @@ export module UnitHelper {
         return 0;
     };
 
+    export function GetEntityIndex(iUnitEntIndex: EntityIndex) {
+        return (Number(GetUnitData(iUnitEntIndex, "GetEntityIndex")));
+    };
     export function GetCustomMaxHealth(iUnitEntIndex: EntityIndex) {
         return FuncHelper.ToFiniteNumber(Number(GetUnitData(iUnitEntIndex, "GetHealth")));
     };
@@ -1246,11 +1254,12 @@ export module ItemHelper {
     export function GetItemCost(sItemName: string) {
         return Number(GetItemValue(sItemName, "ItemCost")) || 0;
     }
-    export function GetItemRarity(sItemName: string) {
-        return GetItemValue(sItemName, "Rarity") || "A";
+    export function GetItemRarity(sItemName: string): Rarity {
+        return (GetItemValue(sItemName, "Rarity") || "A") as Rarity;
     }
-    export function GetItemRarityNumber(sItemName: string) {
-        return JsonConfigHelper.ToRarityNumber(GetItemValue(sItemName, "Rarity") as any);
+    export function GetItemRarityNumber(sItemName: string): EEnum.ERarity {
+        const rarity = GetItemRarity(sItemName);
+        return GToNumber(EEnum.ERarity[rarity]);
     }
 
     export function GetItemRecipes(sItemName: string) {

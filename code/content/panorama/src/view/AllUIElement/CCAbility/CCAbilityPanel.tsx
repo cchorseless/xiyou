@@ -293,7 +293,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
 
         // 物品等级，用中立物品的样式来显示
         let iNeutralTier = ItemHelper.GetItemRarityNumber(Abilities.GetAbilityName(overrideentityindex));
-        pSelf.SetHasClass("is_neutral_item", bIsItem && iNeutralTier != -1);
+        pSelf.SetHasClass("is_neutral_item", bIsItem && iNeutralTier != 0);
         if (pSelf.BHasClass("is_neutral_item")) {
             pSelf.SwitchClass("NeutralTier", "NeutralTier" + (iNeutralTier + 1));
             this.updateDialogVariables("neutral_item_tier_number", iNeutralTier + 1);
@@ -547,7 +547,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                         level: Abilities.GetLevel(overrideentityindex),
                         inventoryslot: slot
                     },
-                    posRight: true,
+                    posRight: false,
                 };
             }
             else {
@@ -558,7 +558,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                         castentityindex: overrideentityindex,
                         level: Abilities.GetLevel(overrideentityindex),
                     },
-                    posRight: true,
+                    posRight: false,
                 };
             }
             ccMainPanel.ShowCustomToolTip(this.AbilityButton.current!, dialoginfo);

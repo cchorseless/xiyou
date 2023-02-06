@@ -2,7 +2,6 @@ import React from "react";
 import { ETEntitySystem } from "../../../../scripts/tscripts/shared/lib/Entity";
 import { ECombination } from "../../game/components/Combination/ECombination";
 import { CSSHelper } from "../../helper/CSSHelper";
-import { KVHelper } from "../../helper/KVHelper";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCCombinationIcon } from "./CCCombinationIcon";
 import { CCCombinationInfoDialog } from "./CCCombinationInfoDialog";
@@ -38,11 +37,10 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
     getIcon() {
         const combinationName = this.props.combinationName;
         if (combinationName == null) { return; };
-        let KV_DATA = KVHelper.KVData();
-        let data = KV_DATA.building_combination_ability
-        for (let k in data) {
-            if (data[k].relation == combinationName) {
-                return data[k].relationicon;
+        let data = GJSONConfig.CombinationConfig.getDataList()
+        for (let info of data) {
+            if (info.relation == combinationName) {
+                return info.relationicon;
             }
         }
         return ""
@@ -60,11 +58,12 @@ export class CCCombinationSingleBottomItem extends CCPanel<ICCCombinationSingleB
         const sectName = this.props.combinationName;
         return (
             <Panel ref={this.__root__} id="CC_CombinationSingleBottomItem"  {...this.initRootAttrs()}>
-                <CCPanel flowChildren="down" brightness={lastentity.IsActive() ? "1" : "0.1"} dialogTooltip={
+                <CCPanel flowChildren="down" brightness={lastentity.IsActive() ? "1" : "0.3"} dialogTooltip={
                     {
                         cls: CCCombinationInfoDialog,
                         props: {
-                            sectName: sectName
+                            sectName: sectName,
+                            playerid: lastentity.BelongPlayerid,
                         }
                     }
                 } >

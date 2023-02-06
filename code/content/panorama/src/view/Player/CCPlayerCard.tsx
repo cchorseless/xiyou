@@ -28,7 +28,6 @@ export class CCPlayerCard extends CCPanel<ICCPlayerCard> {
         const isPlus = MemberData.IsVip();
         const isPlus_p = MemberData.IsVipForever();
         const playerinfo = Game.GetPlayerInfo(iplayerID)
-        GLogHelper.print(playerinfo.player_steamid);
         return <Panel id="CC_PlayerCard"
             className={CSSHelper.ClassMaker("CCPlayerCard", { Plus: isPlus && !isPlus_p, PlusPlus: isPlus_p })}
             hittest={false} ref={this.__root__} {...this.initRootAttrs()}>

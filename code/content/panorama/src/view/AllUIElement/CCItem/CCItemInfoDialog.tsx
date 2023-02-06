@@ -359,7 +359,7 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
         let iNeutralTier = ItemHelper.GetItemRarityNumber(itemname);
         let IsNeutralItem = false;
         let siNeutralTiercls = "";
-        if (iNeutralTier != -1) {
+        if (iNeutralTier != 0) {
             IsNeutralItem = iNeutralTier >= 0;
             siNeutralTiercls = 'NeutralTier' + (iNeutralTier + 1);
             dialogVariables['neutral_item_tier_number'] = iNeutralTier + 1;

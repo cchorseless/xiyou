@@ -768,6 +768,10 @@ export module PropertyCalculate {
     export function GetEnergyRegenPercentage(hUnit: IBaseNpc_Plus) {
         return math.max(-100, SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.ENERGY_REGEN_PERCENTAGE))
     }
+    export function GetEntityIndex(hUnit: IBaseNpc_Plus) {
+        return hUnit.GetEntityIndex()
+    }
+
 }
 declare global {
     /**

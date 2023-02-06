@@ -11,8 +11,9 @@ import "./CCAbilityIcon.less";
 
 interface ICCAbilityIcon extends DOTAAbilityImageAttributes {
     abilityname: string;
-    castEntityIndex?: EntityIndex;
+    castentityindex?: AbilityEntityIndex,
     rarity?: Rarity;
+    playerid?: PlayerID;
     tipsInfo?: {
         level?: number,
         mode?: "description_only" | "show_scepter_only" | "normal",
@@ -30,6 +31,7 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
     static defaultProps = {
         rarity: "A",
         castEntityIndex: -1,
+        playerid: -1,
         showTips: true,
     }
 
@@ -37,7 +39,8 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
         if (this.props.tipsInfo) {
             let obj = Object.assign({
                 abilityname: this.props.abilityname,
-                entityindex: this.props.castEntityIndex,
+                castentityindex: this.props.castEntityIndex,
+                playerid: this.props.playerid,
             }, this.props.tipsInfo)
             return {
                 dialogTooltip: {

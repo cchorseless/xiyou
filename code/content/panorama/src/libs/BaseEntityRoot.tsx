@@ -22,5 +22,16 @@ export class BaseEntityRoot extends ET.EntityRoot {
                 return entity;
         }
     }
+    static GetEntityBelongPlayerId(entityid: string | EntityIndex | number): PlayerID {
+        GLogHelper.print(Object.keys(BaseEntityRoot.AllEntity));
+        const instanceID = BaseEntityRoot.AllEntity[entityid + ""];
+        if (instanceID) {
+            const entity = ETEntitySystem.GetEntity(instanceID);
+            if (entity)
+                return entity.BelongPlayerid;
+        }
+        return -1;
+    }
+
 }
 

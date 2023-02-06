@@ -12,7 +12,7 @@ import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus
 export const Data_zuus_arc_lightning = { "ID": "5110", "AbilityBehavior": "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET", "AbilityUnitTargetTeam": "DOTA_UNIT_TARGET_TEAM_ENEMY", "AbilityUnitTargetType": "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC", "AbilityUnitDamageType": "DAMAGE_TYPE_MAGICAL", "SpellImmunityType": "SPELL_IMMUNITY_ENEMIES_NO", "AbilitySound": "Hero_Zuus.ArcLightning.Cast", "AbilityCastRange": "850", "AbilityCastPoint": "0.2", "AbilityCooldown": "1.6", "AbilityManaCost": "80", "AbilitySpecial": { "01": { "var_type": "FIELD_INTEGER", "arc_damage": "75 100 125 150", "LinkedSpecialBonus": "special_bonus_unique_zeus_2" }, "02": { "var_type": "FIELD_INTEGER", "radius": "500 500 500 500" }, "03": { "var_type": "FIELD_INTEGER", "jump_count": "5 7 9 15" }, "04": { "var_type": "FIELD_FLOAT", "jump_delay": "0.25 0.25 0.25 0.25" } }, "AbilityCastAnimation": "ACT_DOTA_CAST_ABILITY_1" };
 
 @registerAbility()
-export class ability1_zuus_arc_lightning extends BaseAbility_Plus {
+export class ability1_zeus_arc_lightning extends BaseAbility_Plus {
     /**对应dota内的名字 */
     __IN_DOTA_NAME__ = "zuus_arc_lightning";
     /**对应dota内的数据 */

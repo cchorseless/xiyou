@@ -57,7 +57,7 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
             this.GetParentPlus().RemoveVerticalMotionController(this);
             //  this.GetParentPlus().SetForwardVector(Vector(0,-1,0))
             let enemyroot = this.GetParentPlus().ETRoot;
-            if (enemyroot.AsValid<IEnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
+            if (enemyroot && enemyroot.AsValid<IEnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
                 enemyroot.As<IEnemyUnitEntityRoot>().OnSpawnAnimalFinish();
             }
         }

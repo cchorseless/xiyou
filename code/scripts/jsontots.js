@@ -15,8 +15,9 @@ function jsontots() {
     typestr = typestr.replace(/throw new Error\(\)/g, "GLogHelper.error(1);")
     typestr = typestr.replace(/constructor\(_json_: any\) {\s+this._dataMap/g, "constructor(_json_: any[]) {\n this._dataMap ")
     typestr = typestr.replace(/constructor\(_json_: any\) {\s+if \(_json_.length/g, "constructor(_json_: any[]) {\n if (_json_.length ")
-    typestr = typestr.replace(/for \(let _entry_ of _json_\.\S*\)/g, (s) => {
+    typestr = typestr.replace(/let _entry_ of _json_\.\S*\)/g, (s) => {
       let cc = s.substring(0, s.length - 1) + " as any[][])";
+      console.log(cc)
       return cc;})
     fs.writeFileSync(typepath, typestr);
     let filestr = "";

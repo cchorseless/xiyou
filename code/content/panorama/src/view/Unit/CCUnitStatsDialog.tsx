@@ -56,7 +56,6 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const bonus_strength = sBonusStrength;
         const total_strength = iStrength;
 
-        GLogHelper.print(base_strength, bonus_strength)
         const strength_attack_damage = iStrength * GPropertyConfig.ATTRIBUTE_STRENGTH_ATTACK_DAMAGE;
         const strength_energy_regen = FuncHelper.Round(iStrength * GPropertyConfig.ATTRIBUTE_STRENGTH_ENERGY_GET, 2);
         const strength_all_damage = FuncHelper.Clamp(FuncHelper.Round(iStrength * GPropertyConfig.ATTRIBUTE_STRENGTH_ALL_DAMAGE, 2), 0, GPropertyConfig.ATTRIBUTE_STRENGTH_ALL_DAMAGE_MAX);
@@ -338,7 +337,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
                         <Panel className="LeftRightFlow">
                             <Label id="PhysicalArmor" text={`${base_physical_armor}`} className="BaseValue" />
                             <Label id="PhysicalArmorBonus" text={`${bonus_physical_armor}`} className="BonusValue" />
-                            <Label id="PhysicalResist" text={` (${physical_resistance})`} className="BaseValue AdditionalValue" />
+                            <Label id="PhysicalResist" text={` (${physical_resistance}%)`} className="BaseValue AdditionalValue" />
                         </Panel>
                     </Panel>
                     <Panel id="MagicalArmorRow" className={CSSHelper.ClassMaker("StatRow", rowcls_magical_armor)}>

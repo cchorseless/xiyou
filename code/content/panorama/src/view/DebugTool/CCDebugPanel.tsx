@@ -6,6 +6,7 @@ import { CCDebugTool, CCDebugTool_Category, CCDebugTool_DemoButton, CCDebugTool_
 import { CCDebugTool_AbilityPicker } from "./CCDebugTool_AbilityPicker";
 import { CCDebugTool_HeroPicker } from "./CCDebugTool_HeroPicker";
 import { CCDebugTool_ItemPicker } from "./CCDebugTool_ItemPicker";
+import { CCDebugTool_NetTableInfo } from "./CCDebugTool_NetTableInfo";
 import { CCDebugTool_Setting } from "./CCDebugTool_Setting";
 import { CCDebugTool_TextPicker } from "./CCDebugTool_TextPicker";
 import { CCDebugTool_UnitInfo } from "./CCDebugTool_UnitInfo";
@@ -57,6 +58,10 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoSelectionButton eventName="TeleportButtonPressed" localtext="跳转到特定区域" />
                         <CCDebugTool_DemoButton eventName="StandbyButtonPressed" localtext="备用按钮" />
                         <CCDebugTool_DemoSlider eventName="CameraDistance" titletext="镜头高度" min={600} max={1600} defaultValue={1100} onChange={value => GameUI.SetCameraDistance(value)} />
+                    </CCDebugTool_Category>
+                    <CCDebugTool_Category title="网表和实体" >
+                        <CCDebugTool_DemoSelectionButton eventName="CreateAllyButtonPressed" localtext="todo" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_TextPicker, { title: "创建友方单位", itemNames: unitList }) }} />
+                        <CCDebugTool_DemoSelectionButton eventName="CC_DebugTool_UnitInfo" localtext="网表信息面板" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_NetTableInfo) }} />
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="技能和物品" >
                         <CCDebugTool_DemoSelectionButton eventName="AddItemButtonPressed" localtext="添加物品" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_ItemPicker, { title: "添加物品", itemNames: itemsNames }) }} />
