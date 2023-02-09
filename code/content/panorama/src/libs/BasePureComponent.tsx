@@ -248,14 +248,19 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         return null;
     }
 
-    public addOnlyOneNodeChild<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M = {} as any) {
+    public addOnlyOneNodeChild<M extends NodePropsData, T extends typeof BasePureComponent<M>>(nodeName: string, nodeType: T, nodeData: M = {} as any, bforceNew: boolean = false) {
         let comp = this.GetOneNodeChild<M, T>(nodeName, nodeType);
         if (comp) {
-            comp.__root__.current!.visible = true;
-            comp.updateSelf();
-        } else {
-            this.addNodeChildAt<M, T>(nodeName, nodeType, nodeData);
+            if (!bforceNew) {
+                comp.__root__.current!.visible = true;
+                comp.updateSelf();
+                return
+            }
+            else {
+                comp.close();
+            }
         }
+        this.addNodeChildAt<M, T>(nodeName, nodeType, nodeData);
     }
 
 
@@ -492,6 +497,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
             }
         }
         (this as any).InstanceId = this.props.__onlykey__ || GGenerateUUID();
+        CSSHelper.SavePanelData(this.__root__.current!, "__onlykey__", this.InstanceId);
         this.setRegister(true);
         // 下一帧开始刷新
         // GTimerHelper.AddFrameTimer(1,

@@ -1,7 +1,15 @@
+import { render } from "@demon673/react-panorama";
+import React from "react";
+import { CCCombinationInfoDialog } from "../view/Combination/CCCombinationInfoDialog";
 import { CCMainPanel } from "../view/MainPanel/CCMainPanel";
+import { EventHelper } from "./EventHelper";
+import { KVHelper } from "./KVHelper";
 import { LogHelper } from "./LogHelper";
+import { TipsHelper } from "./TipsHelper";
 
 export module DotaUIHelper {
+    const EventObj = {};
+
     /**UI根节点 */
     let WindowRoot: Panel;
     /**
@@ -218,44 +226,37 @@ export module DotaUIHelper {
         lower_hud = "lower_hud",
     }
 
-    const DragHander = {
-        DragStart: 0,
-        DragEnter: 0,
-        DragLeave: 0,
-        DragDrop: 0,
-        DragEnd: 0,
-    }
 
     function RegDragEvent() {
-        DragHander.DragStart = $.RegisterForUnhandledEvent("DragStart", (pPanel: Panel, tDragCallbacks: DragSettings) => {
+        EventHelper.addUnhandledEvent("DragStart", GHandler.create(EventObj, (pPanel: Panel, tDragCallbacks: DragSettings) => {
             LogHelper.print("DragStart", "111111")
             // runDragHandler(pDraggedPanel, "DragStart", pPanel)
-        });
-        DragHander.DragEnter = $.RegisterForUnhandledEvent("DragEnter", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
-            CCMainPanel.GetInstance()!.HideToolTip();
+        }));
+        EventHelper.addUnhandledEvent("DragEnter", GHandler.create(EventObj, (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
+            CCMainPanel.GetInstance()?.HideToolTip();
             if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 let brightness = pPanel.style.brightness || 1;
                 pPanel.style.brightness = Number(brightness) + 0.5 + "";
                 runDragHandler(pDraggedPanel, "DragEnter", pPanel);
             }
-        });
-        DragHander.DragLeave = $.RegisterForUnhandledEvent("DragLeave", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
+        }));
+        EventHelper.addUnhandledEvent("DragLeave", GHandler.create(EventObj, (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
             if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 let brightness = pPanel.style.brightness || 1.5;
                 pPanel.style.brightness = Number(brightness) - 0.5 + "";
                 runDragHandler(pDraggedPanel, "DragLeave", pPanel);
             }
-        });
-        DragHander.DragDrop = $.RegisterForUnhandledEvent("DragDrop", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
+        }));
+        EventHelper.addUnhandledEvent("DragDrop", GHandler.create(EventObj, (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
             if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 runDragHandler(pDraggedPanel, "DragDrop", pPanel);
             }
-        });
-        DragHander.DragEnd = $.RegisterForUnhandledEvent("DragEnd", (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
+        }));
+        EventHelper.addUnhandledEvent("DragEnd", GHandler.create(EventObj, (pPanel: Panel, pDraggedPanel: ItemImage | AbilityImage) => {
             if (pPanel.BHasClass && pPanel.IsValid() && pPanel.BHasClass(IsDragTargetPanel)) {
                 runDragHandler(pDraggedPanel, "DragEnd", pPanel);
             }
-        });
+        }));
     }
     const AllEventInfo: { [eventName: string]: [{ pDraggedPanel: ItemImage | AbilityImage, isonce: boolean; handler: IGHandler }] } = {};
     function runDragHandler(pDraggedPanel: ItemImage | AbilityImage, eventName: string, ...args: any[]) {
@@ -312,35 +313,58 @@ export module DotaUIHelper {
     }
     /**标记可拖拽目标 */
     const IsDragTargetPanel = "IsDragTargetPanel";
-
-
     function RegAbilityItemToolTipEvent() {
-
-        let WindowRoot = GetWindowRoot()!;
-        let tooltips = WindowRoot.FindChildTraverse("Tooltips")!;
-        let AbilityDetail = tooltips.FindChildTraverse("AbilityDetails")!;
-        let AbilityCoreDetails = AbilityDetail.FindChildTraverse("AbilityCoreDetails")!;
-        let AbilityDescriptionContainer = AbilityCoreDetails.FindChildTraverse("AbilityDescriptionContainer")!;
-        let AbilityLore = AbilityCoreDetails.FindChildTraverse("AbilityLore")!;
-
-        $.RegisterForUnhandledEvent("DOTAShowAbilityTooltip", (ability, ability_name, c, d) => {
-            LogHelper.print("1", ability, ability_name);
-        });
-        $.RegisterForUnhandledEvent("DOTAShowAbilityTooltipForEntityIndex", (ability, ability_name, iEntityIndex, d) => {
-            // LogHelper.print("2",ability, ability_name);
-            LogHelper.print("2", d);
-        });
-        $.RegisterForUnhandledEvent("DOTAShowAbilityInventoryItemTooltip", (pPanel, iEntityIndex, iInventorySlot, d) => {
-            LogHelper.print("3", pPanel, iEntityIndex, iInventorySlot);
-        });
-        $.RegisterForUnhandledEvent("DOTAShowAbilityShopItemTooltip", (pPanel, iEntityIndex, iInventorySlot, d) => {
-            LogHelper.print("4", pPanel, iEntityIndex, iInventorySlot);
-        });
-
-    }
-
-    function OnShowAbilityTooltip(ability_name: string) {
-
+        const WindowRoot = GetWindowRoot()!;
+        const tooltips = WindowRoot.FindChildTraverse("Tooltips")!;
+        let DOTAAbilityToolTip: Panel;
+        let DOTAAbilityToolTip_Contents: Panel;
+        let TextToolTip: Panel;
+        let CustomTooltipPanel: Panel;
+        const customPanelid = "CustomTooltipPanel";
+        const abilityShowTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, ability_name: string | AbilityEntityIndex, c, d) => {
+            GLogHelper.print(ability_name, 111111);
+            if (typeof ability_name == "number") {
+                ability_name = Abilities.GetAbilityName(ability_name as AbilityEntityIndex);
+            }
+            DOTAAbilityToolTip = DOTAAbilityToolTip || tooltips.FindChildTraverse("DOTAAbilityTooltip");
+            if (DOTAAbilityToolTip == null) { return }
+            DOTAAbilityToolTip_Contents = DOTAAbilityToolTip_Contents || DOTAAbilityToolTip.FindChildTraverse("Contents")!;
+            DOTAAbilityToolTip_Contents.style.flowChildren = "right";
+            const AbilityDetails = DOTAAbilityToolTip_Contents.FindChild("AbilityDetails")!;
+            if (AbilityDetails) {
+                AbilityDetails.style.width = "340px";
+            }
+            DOTAAbilityToolTip_Contents.style.width = "fit-children";
+            let config = KVHelper.KVAbilitys()[ability_name] || KVHelper.KVItems()[ability_name];
+            let CombinationLabel: string | null = null;
+            if (config) {
+                let _CombinationLabel = config.CombinationLabel;
+                if (_CombinationLabel && typeof _CombinationLabel == "string" && _CombinationLabel.length > 0) {
+                    CombinationLabel = _CombinationLabel;
+                }
+            }
+            CustomTooltipPanel = CustomTooltipPanel || DOTAAbilityToolTip_Contents.FindChild(customPanelid);
+            if (CustomTooltipPanel) {
+                if (CombinationLabel) {
+                    render(<CCCombinationInfoDialog key={Math.random() * 1000 + ""} sectName={CombinationLabel} abilityitemname={ability_name as string} />, CustomTooltipPanel);
+                }
+                else {
+                    render(< ></>, CustomTooltipPanel);
+                }
+            }
+            else {
+                render(<Panel id={customPanelid} />, DOTAAbilityToolTip_Contents)
+            }
+        })
+        const abilityHideTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, ability_name: string | AbilityEntityIndex, c, d) => {
+        })
+        EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltip, abilityShowTooltipHandler);
+        EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForEntityIndex, abilityShowTooltipHandler);
+        EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityInventoryItemTooltip, abilityShowTooltipHandler);
+        EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityShopItemTooltip, abilityShowTooltipHandler);
+        EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForGuide, abilityShowTooltipHandler);
+        EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForHero, abilityShowTooltipHandler);
+        EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForLevel, abilityShowTooltipHandler);
     }
 
     export function Init() {
@@ -358,16 +382,12 @@ export module DotaUIHelper {
         FindDotaHudElement("HUDSkinMinimap")!.style.opacity = "0";
         // 计分板按钮
         FindDotaHudElement("ToggleScoreboardButton")!.style.opacity = "0";
+        RegAbilityItemToolTipEvent()
         RegDragEvent();
 
     }
     export function Quit() {
-        for (let k in DragHander) {
-            const eventid = (DragHander as any)[k];
-            if (eventid != 0) {
-                $.UnregisterForUnhandledEvent(k, eventid)
-            }
-        }
+        EventHelper.removeUnhandledEventCaller(EventObj);
     }
 
 }

@@ -17,9 +17,9 @@ export module KVHelper {
     /**客戶端KV配置 */
     export const KvClientConfig: Readonly<KvClientInterface> = {} as Readonly<KvClientInterface>;
     /**所有技能 */
-    export const KvAbilitys: Readonly<KV_Abilitys> = {} as Readonly<KV_Abilitys>;
+    export const KvAbilitys: Readonly<dota_abilities.OBJ_1_1 & KV_Abilitys> = {} as Readonly<dota_abilities.OBJ_1_1 & KV_Abilitys>;
     /**所有道具 */
-    export const KvItems: Readonly<KV_Items> = {} as Readonly<KV_Items>;
+    export const KvItems: Readonly<dota_items.OBJ_1_1 & KV_Items> = {} as Readonly<dota_items.OBJ_1_1 & KV_Items>;
     /**所有单位 */
     export const KvUnits: Readonly<npc_heroes_custom.OBJ_1_1 & KV_Units> = {} as Readonly<npc_heroes_custom.OBJ_1_1 & KV_Units>;
 
@@ -64,12 +64,15 @@ export module KVHelper {
             }
         }
         // 合并
+        allAbilitys.push("dota_abilities");
         allAbilitys.forEach((file: any) => {
             Object.assign(KvAbilitys, (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]))
         });
+        allUnits.push("dota_items");
         allItems.forEach((file: any) => {
             Object.assign(KvItems, (KvServerConfig as any)[file] || (KvClientConfig as any)[file] || LoadKeyValues((KvAllPath as any)[file]))
         });
+
         /**英雄也加进去 */
         allUnits.push("npc_heroes_custom");
         allUnits.forEach((file: any) => {

@@ -52,39 +52,6 @@ export class BaseAbility_Plus extends BaseAbility {
         return ResHelper.GetAbilityTextureReplacement(iconpath, this.GetCaster())
     }
 
-    /**默认值 */
-    public __DefaultSpecialValue__: { [k: string]: number | number[] };
-    /**
-     * 设置Special默认值
-     * @param s
-     * @param default_V
-     * @returns
-     */
-    public SetDefaultSpecialValue(s: string, default_V: number | number[]) {
-        this.__DefaultSpecialValue__ = this.__DefaultSpecialValue__ || {};
-        this.__DefaultSpecialValue__[s] = default_V;
-    }
-
-    public GetSpecialValueFor(s: string, default_V = 0): number {
-        let r = super.GetSpecialValueFor(s);
-        if (r && r != 0) {
-            return r
-        }
-        else if (this.__DefaultSpecialValue__ && this.__DefaultSpecialValue__[s] && this.__DefaultSpecialValue__[s] != 0) {
-            let data = this.__DefaultSpecialValue__[s];
-            if (type(data) == 'number') {
-                return data as number
-            }
-            else {
-                let level = this.GetLevel();
-                return (data as number[])[level - 1] as number
-            }
-        }
-        else {
-            return default_V
-        }
-    }
-
     /**
      * 技能施法可以释放
      * @returns

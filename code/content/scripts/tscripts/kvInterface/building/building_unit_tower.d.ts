@@ -127,7 +127,7 @@ declare namespace building_unit_tower {
 "building_hero_winter_wyvern" :OBJ_2_1 ,
 "building_hero_wisp" :OBJ_2_1 ,
 "building_hero_witch_doctor" :OBJ_2_1 ,
-"building_hero_zuus" :OBJ_2_1 ,
+"building_hero_zeus" :OBJ_2_1 ,
 "building_hero_t01" :OBJ_2_1 ,
 "building_hero_t02" :OBJ_2_1 ,
 "building_hero_t03" :OBJ_2_1 ,

@@ -133,6 +133,12 @@ declare namespace lang_config {
 "DOTA_HUD_IncomingPureDamagePercent" :OBJ_2_1 ,
 "DOTA_HUD_LifeSteal" :OBJ_2_1 ,
 "DOTA_HUD_SpellLifeSteal" :OBJ_2_1 ,
+"DOTA_HUD_ABILITYCASTRANGE" :OBJ_2_1 ,
+"DOTA_HUD_ABILITYCASTPOINT" :OBJ_2_1 ,
+"DOTA_HUD_ABILITYDURATION" :OBJ_2_1 ,
+"DOTA_HUD_ABILITYCHANNELTIME" :OBJ_2_1 ,
+"DOTA_HUD_ABILITYDAMAGE" :OBJ_2_1 ,
+"DOTA_HUD_ABILITYCOOLDOWN" :OBJ_2_1 ,
 [k:string] : OBJ_2_1 }
  interface OBJ_2_1 {
 "Des" :string ,

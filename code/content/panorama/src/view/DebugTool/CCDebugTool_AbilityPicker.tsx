@@ -1,4 +1,6 @@
 import React from "react";
+import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
+import { NetHelper } from "../../helper/NetHelper";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
@@ -51,7 +53,13 @@ export class CCDebugTool_AbilityPicker extends CCPanel<ICCDebugTool_AbilityPicke
                                 }
                             }
                             return (
-                                <CCButton type="Empty" className="CC_DebugTool_AbilityPickerItem" key={index + ""} width="64px" flowChildren="down" onactivate={self => { }}>
+                                <CCButton type="Empty" className="CC_DebugTool_AbilityPickerItem" key={index + ""} width="64px" flowChildren="down" onactivate={self => {
+                                    let entityindex = Players.GetLocalPlayerPortraitUnit();
+                                    NetHelper.SendToLua(GameProtocol.Protocol.req_DebugAddAbility, {
+                                        entityindex: entityindex,
+                                        abilityname: abilityname
+                                    })
+                                }}>
                                     <DOTAAbilityImage abilityname={abilityname} showtooltip />
                                     <Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? abilityname : $.Localize("#DOTA_Tooltip_ability_" + abilityname)} />
                                 </CCButton>

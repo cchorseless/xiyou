@@ -18,6 +18,43 @@ export class GameMode_Client extends SingletonClass {
     public Init() {
         this.addEvent();
         KVHelper.initKVFile();
+        this.PreLoadLua();
+    }
+
+    public PreLoadLua() {
+        for (let k in KVHelper.KvUnits) {
+            let kv = KVHelper.KvUnits[k] as { vscripts: string };
+            if (kv && type(kv) == "table" && kv.vscripts && kv.vscripts != "" && type(kv.vscripts) == "string") {
+                try {
+                    require(kv.vscripts.replace(".lua", ""));
+                }
+                catch (err) {
+                    GLogHelper.warn(err);
+                }
+            }
+        }
+        for (let k in KVHelper.KvAbilitys) {
+            let kv = KVHelper.KvAbilitys[k] as { ScriptFile: string };
+            if (kv && type(kv) == "table" && kv.ScriptFile && kv.ScriptFile != "" && type(kv.ScriptFile) == "string") {
+                try {
+                    require(kv.ScriptFile.replace(".lua", ""));
+                }
+                catch (err) {
+                    GLogHelper.warn(err);
+                }
+            }
+        }
+        for (let k in KVHelper.KvItems) {
+            let kv = KVHelper.KvItems[k] as { ScriptFile: string };
+            if (kv && type(kv) == "table" && kv.ScriptFile && kv.ScriptFile != "" && type(kv.ScriptFile) == "string") {
+                try {
+                    require(kv.ScriptFile.replace(".lua", ""));
+                }
+                catch (err) {
+                    GLogHelper.warn(err);
+                }
+            }
+        }
     }
 
     public addEvent() {
@@ -44,12 +81,11 @@ export class GameMode_Client extends SingletonClass {
         if (EntityHelper.checkIsFirstSpawn(spawnedUnit)) {
             let className = spawnedUnit.GetClassname();
             if (className == GameEnum.Unit.UnitClass.npc_dota_creature) {
-                GameFunc.BindInstanceToCls(spawnedUnit, BaseNpc_Plus);
-                // (_G as any).EntityFramework.CreateCppClassProxy(className);
-            } else {
-            }
-            if (spawnedUnit.onSpawned) {
-                spawnedUnit.onSpawned(e);
+                let cls = GGetRegClass<typeof BaseNpc_Plus>(sUnitName) || BaseNpc_Plus;
+                GameFunc.BindInstanceToCls(spawnedUnit, cls);
+                if (spawnedUnit.onSpawned) {
+                    spawnedUnit.onSpawned(e);
+                }
             }
         }
     }

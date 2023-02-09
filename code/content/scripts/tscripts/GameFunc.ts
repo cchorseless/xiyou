@@ -90,9 +90,9 @@ export module GameFunc {
      * @param instance 实例
      * @param table 类
      */
-    export function BindInstanceToCls(_instance: any, table: new () => any) {
+    export function _BindInstanceToCls(_instance: any, table: new () => any) {
         if (_instance instanceof table) { return }
-        let instance = GetmetatableIndex(_instance) as any;
+        let instance = getmetatable(_instance).__index as any;
         let { prototype } = table;
         while (prototype) {
             for (const key in prototype) {
@@ -104,6 +104,10 @@ export module GameFunc {
             }
             prototype = getmetatable(prototype);
         }
+    }
+    export function BindInstanceToCls(_instance: any, table: new () => any, bforce = false) {
+        if (!bforce && _instance instanceof table) { return }
+        Object.assign(getmetatable(_instance).__index, table.prototype);
     }
     /**
      * 获取对象原表索引数据

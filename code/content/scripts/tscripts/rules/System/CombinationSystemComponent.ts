@@ -1,5 +1,4 @@
 
-import { KVHelper } from "../../helper/KVHelper";
 import { ET } from "../../shared/lib/Entity";
 
 @GReloadable
@@ -11,16 +10,6 @@ export class CombinationSystemComponent extends ET.SingletonComponent {
     public onAwake(...args: any[]): void {
 
     }
-
-    public LoadConfig() {
-        let config = KVHelper.KvServerConfig.building_combination;
-        for (let key in config) {
-            let info = config[key as "1001"];
-
-        }
-
-    }
-
 }
 
 declare global {

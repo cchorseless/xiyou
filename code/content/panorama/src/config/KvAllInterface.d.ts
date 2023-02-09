@@ -1,14 +1,14 @@
 
 declare interface KvAllInterface extends 
 npc_heroes_custom.OBJ_0_1,
+dota_items.OBJ_0_1,
+dota_abilities.OBJ_0_1,
 shipin_config.OBJ_0_1,
 pool_config.OBJ_0_1,
 pool_group_config.OBJ_0_1,
 lang_config.OBJ_0_1,
 publicshop_config.OBJ_0_1,
 courier_units.OBJ_0_1,
-building_combination.OBJ_0_1,
-building_combination_ability.OBJ_0_1,
 building_item_card.OBJ_0_1,
 building_round.OBJ_0_1,
 building_round_board.OBJ_0_1,

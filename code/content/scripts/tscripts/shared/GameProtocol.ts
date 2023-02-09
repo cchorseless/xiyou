@@ -15,17 +15,22 @@ export module GameProtocol {
         static readonly custom_call_get_ability_data = "custom_call_get_ability_data";
         static readonly custom_call_get_unit_data = "custom_call_get_unit_data";
         static readonly custom_call_get_player_data = "custom_call_get_player_data";
-        // debug
+        //#region DEBUG
         static readonly ChangeHostTimescale = "/ChangeHostTimescale";
         static readonly PauseRoundStage = "/PauseRoundStage";
         static readonly req_DebugGameOver = "/req_DebugGameOver";
         static readonly req_DebugReload = "/req_DebugReload";
         static readonly req_DebugRestart = "/req_DebugRestart";
         static readonly req_DebugClearAll = "/req_DebugClearAll";
+        static readonly req_DebugAddItem = "/req_DebugAddItem";
+        static readonly req_DebugAddAbility = "/req_DebugAddAbility";
+        static readonly req_DebugRemoveAllAbility = "/req_DebugRemoveAllAbility";
+        static readonly req_DebugRemoveAllItem = "/req_DebugRemoveAllItem";
         static readonly req_KEY_DOWN = "/req_KEY_DOWN";
         static readonly req_KEY_UP = "/req_KEY_UP";
         /**添加机器人 */
         static readonly req_addBot = "/req_addBot";
+        //#endregion DEBUG
         /**道具位置改变 */
         static readonly req_ITEM_SLOT_CHANGE = "req_ITEM_SLOT_CHANGE";
         /**道具给他人 */
@@ -51,6 +56,9 @@ export module GameProtocol {
 
 
     }
+
+
+
 
     // export const HTTP_URL = "http://139.196.182.10:8080";
     export const HTTP_URL = "http://127.0.0.1:11199";

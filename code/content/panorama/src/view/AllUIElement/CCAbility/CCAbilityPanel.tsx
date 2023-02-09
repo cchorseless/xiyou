@@ -80,8 +80,8 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     if (typeof dragstartcallback == "function" && !dragstartcallback(tDragCallbacks, overrideentityindex, overridedisplaykeybind, slot, dragtype)) {
                         return true;
                     }
-                    const ccMainPanel = CCMainPanel.GetInstance()!;
-                    ccMainPanel.HideToolTip();
+                    const ccMainPanel = CCMainPanel.GetInstance();
+                    ccMainPanel && ccMainPanel.HideToolTip();
                     let iAbilityIndex = overrideentityindex;
                     if (iAbilityIndex != -1) {
                         let sAbilityName = Abilities.GetAbilityName(iAbilityIndex);
@@ -565,8 +565,8 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
         }
     }
     private onbtn_moveout() {
-        const ccMainPanel = CCMainPanel.GetInstance()!;
-        ccMainPanel.HideToolTip();
+        const ccMainPanel = CCMainPanel.GetInstance();
+        ccMainPanel?.HideToolTip();
     }
     render() {
         const m_is_item = this.GetState("m_is_item", false);

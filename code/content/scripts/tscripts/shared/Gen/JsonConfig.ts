@@ -2743,34 +2743,158 @@
 ] ,
 "dota_buffeffectconfig":[
   {
-    "effectid": "modifier_phy_arm_base_3",
+    "effectid": "modifier_phyarm_up_base_3",
     "target": "team",
     "propinfo": [
       [
-        "PHYSICAL_ARMOR_BASE",
+        "phyarm",
         3
       ]
     ]
   },
   {
-    "effectid": "modifier_phy_arm_base_6",
+    "effectid": "modifier_phyarm_up_base_6",
     "target": "team",
     "propinfo": [
       [
-        "PHYSICAL_ARMOR_BASE",
+        "phyarm",
         6
       ]
     ]
   },
   {
-    "effectid": "modifier_phy_arm_base_9",
+    "effectid": "modifier_phyarm_up_base_9",
     "target": "team",
     "propinfo": [
       [
-        "PHYSICAL_ARMOR_BASE",
+        "phyarm",
         9
+      ],
+      [
+        "baseatk_per_phyarm",
+        2
       ]
     ]
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_ursa_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_ursa_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_kunkka_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_kunkka_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_tusk_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_tusk_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_axe_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_axe_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_juggernaut_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_juggernaut_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_troll_warlord_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_troll_warlord_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_slardar_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_slardar_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_sven_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_sven_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_mars_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_mars_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_primal_beast_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_primal_beast_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_skeleton_king_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_skeleton_king_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_pudge_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_pudge_9",
+    "target": "team",
+    "propinfo": []
   }
 ] ,
 "dota_combinationconfig":[
@@ -2781,7 +2905,7 @@
     "relationid": "phyarm_up_3",
     "index": 1,
     "active_count": 3,
-    "acitve_common_effect": "modifier_phy_arm_base_3",
+    "acitve_common_effect": "modifier_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_ursa",
     "Abilityid": "ability1_ursa_earthshock"
@@ -2793,8 +2917,8 @@
     "relationid": "phyarm_up_6",
     "index": 1,
     "active_count": 6,
-    "acitve_common_effect": "modifier_phy_arm_base_6",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_6",
+    "acitve_special_effect": "modifier_phyarm_up_hero_ursa_6",
     "heroid": "building_hero_ursa",
     "Abilityid": "ability1_ursa_earthshock"
   },
@@ -2805,8 +2929,8 @@
     "relationid": "phyarm_up_9",
     "index": 1,
     "active_count": 9,
-    "acitve_common_effect": "modifier_phy_arm_base_9",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_9",
+    "acitve_special_effect": "modifier_phyarm_up_hero_ursa_9",
     "heroid": "building_hero_ursa",
     "Abilityid": "ability1_ursa_earthshock"
   },
@@ -2817,7 +2941,7 @@
     "relationid": "phyarm_up_3",
     "index": 2,
     "active_count": 3,
-    "acitve_common_effect": "modifier_phy_arm_base_3",
+    "acitve_common_effect": "modifier_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_kunkka",
     "Abilityid": "ability1_kunkka_torrent"
@@ -2829,8 +2953,8 @@
     "relationid": "phyarm_up_6",
     "index": 2,
     "active_count": 6,
-    "acitve_common_effect": "modifier_phy_arm_base_6",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_6",
+    "acitve_special_effect": "modifier_phyarm_up_hero_kunkka_6",
     "heroid": "building_hero_kunkka",
     "Abilityid": "ability1_kunkka_torrent"
   },
@@ -2841,8 +2965,8 @@
     "relationid": "phyarm_up_9",
     "index": 2,
     "active_count": 9,
-    "acitve_common_effect": "modifier_phy_arm_base_9",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_9",
+    "acitve_special_effect": "modifier_phyarm_up_hero_kunkka_9",
     "heroid": "building_hero_kunkka",
     "Abilityid": "ability1_kunkka_torrent"
   },
@@ -2853,7 +2977,7 @@
     "relationid": "phyarm_up_3",
     "index": 3,
     "active_count": 3,
-    "acitve_common_effect": "modifier_phy_arm_base_3",
+    "acitve_common_effect": "modifier_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_tusk",
     "Abilityid": "ability1_tusk_ice_shards"
@@ -2865,8 +2989,8 @@
     "relationid": "phyarm_up_6",
     "index": 3,
     "active_count": 6,
-    "acitve_common_effect": "modifier_phy_arm_base_6",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_6",
+    "acitve_special_effect": "modifier_phyarm_up_hero_tusk_6",
     "heroid": "building_hero_tusk",
     "Abilityid": "ability1_tusk_ice_shards"
   },
@@ -2877,8 +3001,8 @@
     "relationid": "phyarm_up_9",
     "index": 3,
     "active_count": 9,
-    "acitve_common_effect": "modifier_phy_arm_base_9",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_9",
+    "acitve_special_effect": "modifier_phyarm_up_hero_tusk_9",
     "heroid": "building_hero_tusk",
     "Abilityid": "ability1_tusk_ice_shards"
   },
@@ -2889,7 +3013,7 @@
     "relationid": "phyarm_up_3",
     "index": 4,
     "active_count": 3,
-    "acitve_common_effect": "modifier_phy_arm_base_3",
+    "acitve_common_effect": "modifier_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_axe",
     "Abilityid": "ability1_axe_berserkers_call"
@@ -2901,8 +3025,8 @@
     "relationid": "phyarm_up_6",
     "index": 4,
     "active_count": 6,
-    "acitve_common_effect": "modifier_phy_arm_base_6",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_6",
+    "acitve_special_effect": "modifier_phyarm_up_hero_axe_6",
     "heroid": "building_hero_axe",
     "Abilityid": "ability1_axe_berserkers_call"
   },
@@ -2913,8 +3037,8 @@
     "relationid": "phyarm_up_9",
     "index": 4,
     "active_count": 9,
-    "acitve_common_effect": "modifier_phy_arm_base_9",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_9",
+    "acitve_special_effect": "modifier_phyarm_up_hero_axe_9",
     "heroid": "building_hero_axe",
     "Abilityid": "ability1_axe_berserkers_call"
   },
@@ -2925,7 +3049,7 @@
     "relationid": "phyarm_up_3",
     "index": 5,
     "active_count": 3,
-    "acitve_common_effect": "modifier_phy_arm_base_3",
+    "acitve_common_effect": "modifier_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_juggernaut",
     "Abilityid": "ability1_juggernaut_blade_fury"
@@ -2937,8 +3061,8 @@
     "relationid": "phyarm_up_6",
     "index": 5,
     "active_count": 6,
-    "acitve_common_effect": "modifier_phy_arm_base_6",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_6",
+    "acitve_special_effect": "modifier_phyarm_up_hero_juggernaut_6",
     "heroid": "building_hero_juggernaut",
     "Abilityid": "ability1_juggernaut_blade_fury"
   },
@@ -2949,8 +3073,8 @@
     "relationid": "phyarm_up_9",
     "index": 5,
     "active_count": 9,
-    "acitve_common_effect": "modifier_phy_arm_base_9",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_9",
+    "acitve_special_effect": "modifier_phyarm_up_hero_juggernaut_9",
     "heroid": "building_hero_juggernaut",
     "Abilityid": "ability1_juggernaut_blade_fury"
   },
@@ -2961,7 +3085,7 @@
     "relationid": "phyarm_up_3",
     "index": 6,
     "active_count": 3,
-    "acitve_common_effect": "modifier_phy_arm_base_3",
+    "acitve_common_effect": "modifier_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_troll_warlord",
     "Abilityid": "ability1_troll_warlord_berserkers_rage"
@@ -2973,8 +3097,8 @@
     "relationid": "phyarm_up_6",
     "index": 6,
     "active_count": 6,
-    "acitve_common_effect": "modifier_phy_arm_base_6",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_6",
+    "acitve_special_effect": "modifier_phyarm_up_hero_troll_warlord_6",
     "heroid": "building_hero_troll_warlord",
     "Abilityid": "ability1_troll_warlord_berserkers_rage"
   },
@@ -2985,8 +3109,8 @@
     "relationid": "phyarm_up_9",
     "index": 6,
     "active_count": 9,
-    "acitve_common_effect": "modifier_phy_arm_base_9",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_9",
+    "acitve_special_effect": "modifier_phyarm_up_hero_troll_warlord_9",
     "heroid": "building_hero_troll_warlord",
     "Abilityid": "ability1_troll_warlord_berserkers_rage"
   },
@@ -2997,7 +3121,7 @@
     "relationid": "phyarm_up_3",
     "index": 7,
     "active_count": 3,
-    "acitve_common_effect": "modifier_phy_arm_base_3",
+    "acitve_common_effect": "modifier_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_slardar",
     "Abilityid": "ability1_slardar_sprint"
@@ -3009,8 +3133,8 @@
     "relationid": "phyarm_up_6",
     "index": 7,
     "active_count": 6,
-    "acitve_common_effect": "modifier_phy_arm_base_6",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_6",
+    "acitve_special_effect": "modifier_phyarm_up_hero_slardar_6",
     "heroid": "building_hero_slardar",
     "Abilityid": "ability1_slardar_sprint"
   },
@@ -3021,8 +3145,8 @@
     "relationid": "phyarm_up_9",
     "index": 7,
     "active_count": 9,
-    "acitve_common_effect": "modifier_phy_arm_base_9",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_9",
+    "acitve_special_effect": "modifier_phyarm_up_hero_slardar_9",
     "heroid": "building_hero_slardar",
     "Abilityid": "ability1_slardar_sprint"
   },
@@ -3033,7 +3157,7 @@
     "relationid": "phyarm_up_3",
     "index": 8,
     "active_count": 3,
-    "acitve_common_effect": "modifier_phy_arm_base_3",
+    "acitve_common_effect": "modifier_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_sven",
     "Abilityid": "ability1_sven_storm_bolt"
@@ -3045,8 +3169,8 @@
     "relationid": "phyarm_up_6",
     "index": 8,
     "active_count": 6,
-    "acitve_common_effect": "modifier_phy_arm_base_6",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_6",
+    "acitve_special_effect": "modifier_phyarm_up_hero_sven_6",
     "heroid": "building_hero_sven",
     "Abilityid": "ability1_sven_storm_bolt"
   },
@@ -3057,8 +3181,8 @@
     "relationid": "phyarm_up_9",
     "index": 8,
     "active_count": 9,
-    "acitve_common_effect": "modifier_phy_arm_base_9",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_9",
+    "acitve_special_effect": "modifier_phyarm_up_hero_sven_9",
     "heroid": "building_hero_sven",
     "Abilityid": "ability1_sven_storm_bolt"
   },
@@ -3069,7 +3193,7 @@
     "relationid": "phyarm_up_3",
     "index": 9,
     "active_count": 3,
-    "acitve_common_effect": "modifier_phy_arm_base_3",
+    "acitve_common_effect": "modifier_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_mars",
     "Abilityid": "ability1_mars_spear"
@@ -3081,8 +3205,8 @@
     "relationid": "phyarm_up_6",
     "index": 9,
     "active_count": 6,
-    "acitve_common_effect": "modifier_phy_arm_base_6",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_6",
+    "acitve_special_effect": "modifier_phyarm_up_hero_mars_6",
     "heroid": "building_hero_mars",
     "Abilityid": "ability1_mars_spear"
   },
@@ -3093,8 +3217,8 @@
     "relationid": "phyarm_up_9",
     "index": 9,
     "active_count": 9,
-    "acitve_common_effect": "modifier_phy_arm_base_9",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_9",
+    "acitve_special_effect": "modifier_phyarm_up_hero_mars_9",
     "heroid": "building_hero_mars",
     "Abilityid": "ability1_mars_spear"
   },
@@ -3105,7 +3229,7 @@
     "relationid": "phyarm_up_3",
     "index": 10,
     "active_count": 3,
-    "acitve_common_effect": "modifier_phy_arm_base_3",
+    "acitve_common_effect": "modifier_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_primal_beast",
     "Abilityid": "ability1_primal_beast_onslaught"
@@ -3117,8 +3241,8 @@
     "relationid": "phyarm_up_6",
     "index": 10,
     "active_count": 6,
-    "acitve_common_effect": "modifier_phy_arm_base_6",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_6",
+    "acitve_special_effect": "modifier_phyarm_up_hero_primal_beast_6",
     "heroid": "building_hero_primal_beast",
     "Abilityid": "ability1_primal_beast_onslaught"
   },
@@ -3129,8 +3253,8 @@
     "relationid": "phyarm_up_9",
     "index": 10,
     "active_count": 9,
-    "acitve_common_effect": "modifier_phy_arm_base_9",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_9",
+    "acitve_special_effect": "modifier_phyarm_up_hero_primal_beast_9",
     "heroid": "building_hero_primal_beast",
     "Abilityid": "ability1_primal_beast_onslaught"
   },
@@ -3141,7 +3265,7 @@
     "relationid": "phyarm_up_3",
     "index": 11,
     "active_count": 3,
-    "acitve_common_effect": "modifier_phy_arm_base_3",
+    "acitve_common_effect": "modifier_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_skeleton_king",
     "Abilityid": "ability1_skeleton_king_hellfire_blast"
@@ -3153,8 +3277,8 @@
     "relationid": "phyarm_up_6",
     "index": 11,
     "active_count": 6,
-    "acitve_common_effect": "modifier_phy_arm_base_6",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_6",
+    "acitve_special_effect": "modifier_phyarm_up_hero_skeleton_king_6",
     "heroid": "building_hero_skeleton_king",
     "Abilityid": "ability1_skeleton_king_hellfire_blast"
   },
@@ -3165,8 +3289,8 @@
     "relationid": "phyarm_up_9",
     "index": 11,
     "active_count": 9,
-    "acitve_common_effect": "modifier_phy_arm_base_9",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_9",
+    "acitve_special_effect": "modifier_phyarm_up_hero_skeleton_king_9",
     "heroid": "building_hero_skeleton_king",
     "Abilityid": "ability1_skeleton_king_hellfire_blast"
   },
@@ -3177,7 +3301,7 @@
     "relationid": "phyarm_up_3",
     "index": 12,
     "active_count": 3,
-    "acitve_common_effect": "modifier_phy_arm_base_3",
+    "acitve_common_effect": "modifier_phyarm_up_base_3",
     "acitve_special_effect": "",
     "heroid": "building_hero_pudge",
     "Abilityid": "ability1_pudge_meat_hook"
@@ -3189,8 +3313,8 @@
     "relationid": "phyarm_up_6",
     "index": 12,
     "active_count": 6,
-    "acitve_common_effect": "modifier_phy_arm_base_6",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_6",
+    "acitve_special_effect": "modifier_phyarm_up_hero_pudge_6",
     "heroid": "building_hero_pudge",
     "Abilityid": "ability1_pudge_meat_hook"
   },
@@ -3201,8 +3325,8 @@
     "relationid": "phyarm_up_9",
     "index": 12,
     "active_count": 9,
-    "acitve_common_effect": "modifier_phy_arm_base_9",
-    "acitve_special_effect": "",
+    "acitve_common_effect": "modifier_phyarm_up_base_9",
+    "acitve_special_effect": "modifier_phyarm_up_hero_pudge_9",
     "heroid": "building_hero_pudge",
     "Abilityid": "ability1_pudge_meat_hook"
   }

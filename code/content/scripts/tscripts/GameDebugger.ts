@@ -140,7 +140,26 @@ export class GameDebugger extends SingletonClass {
         EventHelper.addProtocolEvent(GameProtocol.Protocol.ChangeHostTimescale, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             SendToConsole("host_timescale " + e.data);
         }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugAddItem, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            let { entityindex, itemname } = e.data;
+            let unit = EntIndexToHScript(entityindex) as IBaseNpc_Plus;
+            if (unit && itemname) {
+                ActiveRootItem.CreateOneToUnit(unit, itemname);
+            }
+        }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugAddAbility, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            let { entityindex, abilityname } = e.data;
+            let unit = EntIndexToHScript(entityindex) as IBaseNpc_Plus;
+            if (unit && abilityname) {
+                unit.addAbilityPlus(abilityname);
+            }
+        }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugRemoveAllItem, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
 
+        }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugRemoveAllAbility, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+
+        }));
         //#endregion
     }
 

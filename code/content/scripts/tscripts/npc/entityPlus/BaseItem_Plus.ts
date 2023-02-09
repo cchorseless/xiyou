@@ -138,7 +138,7 @@ export class BaseItem_Plus extends BaseItem {
         purchaser: CDOTAPlayerController | undefined,
     ) {
         let hItem = CreateItem(itemName, owner, purchaser) as IBaseItem_Plus;
-        GameFunc.BindInstanceToCls(hItem, BaseItem_Plus);
+        GameFunc.BindInstanceToCls(hItem, GGetRegClass(itemName) || BaseItem_Plus);
         return hItem
     }
     /**

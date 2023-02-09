@@ -1,6 +1,7 @@
 import { ChessControlConfig } from "../../../../../scripts/tscripts/shared/ChessControlConfig";
 import { GameEnum } from "../../../../../scripts/tscripts/shared/GameEnum";
 import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
+import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetHelper } from "../../../helper/NetHelper";
 import { CCMainPanel } from "../../../view/MainPanel/CCMainPanel";
@@ -16,25 +17,30 @@ export class ChessControlComponent extends ET.Component {
     IS_SEASON_AWARD_AVAILABLE = true;
     addEvent() {
         this.OnMouseCallback();
-        GameEvents.Subscribe(GameEnum.GameEvent.dota_player_update_query_unit, async (e) => {
+        EventHelper.addGameEvent(GameEnum.GameEvent.dota_player_update_query_unit, GHandler.create(this, async (e) => {
             await this.OnPlayerQueryUnit(e);
-        });
-        GameEvents.Subscribe(GameEnum.GameEvent.dota_player_update_selected_unit, async (e) => {
+        }));
+        EventHelper.addGameEvent(GameEnum.GameEvent.dota_player_update_selected_unit, GHandler.create(this, async (e) => {
             await this.OnPlayerQueryUnit(e);
-        });
+        }));
         GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
             this.UpdateHeroIcon();
             return 1
         }));
     }
 
+    onDestroy(): void {
+        EventHelper.removeGameEventCaller(this);
+        GTimerHelper.ClearAll(this);
+    }
     OnMouseCallback() {
+        const CONSUME_EVENT = true;
+        const CONTINUE_EVENT = false;
+        const LEFT_BUTTON = 0;
+        const RIGHT_BUTTON = 1;
         GameUI.SetMouseCallback((eventName, mouseButton) => {
-            if (Game.IsGamePaused()) { return true; }
-            const CONSUME_EVENT = true;
-            const CONTINUE_EVENT = false;
-            const LEFT_BUTTON = 0;
-            const RIGHT_BUTTON = 1;
+            if (Game.IsGamePaused()) { return CONSUME_EVENT; }
+            if (this.IsDisposed()) { return CONTINUE_EVENT; }
             if (GameUI.GetClickBehaviors() !== CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_NONE) return CONTINUE_EVENT;
             if (eventName === "pressed") {
                 if (mouseButton === LEFT_BUTTON) {
@@ -45,8 +51,8 @@ export class ChessControlComponent extends ET.Component {
                     //     $.Schedule(0.01, () => {
                     //         // this.OnPlayerSelectUnit();
                     //     });
-
                     //     return CONTINUE_EVENT;
+                    GLogHelper.print(222222, this.IS_CURSOR_HERO_ICON_SHOWING)
                     if (this.IS_CURSOR_HERO_ICON_SHOWING) {
                         this.Jump_cursor_hero();
                         return CONSUME_EVENT;
@@ -63,7 +69,6 @@ export class ChessControlComponent extends ET.Component {
             if (eventName == "doublepressed") {
                 return CONTINUE_EVENT;
             }
-
             if (eventName === "wheeled") {
                 // g_targetDistance += mouseButton * -100;
                 return CONTINUE_EVENT;

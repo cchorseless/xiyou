@@ -1,4 +1,4 @@
-#CC_CombinationBottomPanel {
+.CCCombinationInfoDialog {
     #SectIcon {
         width: 54px;
         height: 54px;
@@ -43,6 +43,50 @@
 
     }
 
+    #ECombContainer {
+        width: 100%;
+        background-color: #0c1316;
+
+        .InfoContent {
+            margin-top: 5px;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-position: top;
+            background-size: 100%;
+            background-image: url("s2r://panorama/images/hud/item_tooltip_passive_psd.vtex");
+
+            &.Active {
+                background-image: url("s2r://panorama/images/hud/item_tooltip_active_psd.vtex");
+            }
+        }
+
+        .InfoHeader {
+            font-size: 25px;
+            padding-top: 4px;
+            height: 30px;
+            width: 30px;
+            vertical-align: center;
+            brightness: 0.5;
+
+            &.Active {
+                brightness: 1.2;
+            }
+        }
+
+        .InfoDes {
+            font-size: 20px;
+            color: #cccccc;
+            text-overflow: shrink;
+            margin-top: 5px;
+            brightness: 0.5;
+
+            &.Active {
+                brightness: 1.2;
+            }
+        }
+    }
+
+
     #LoreContainer {
         width: 100%;
         padding: 5px 10px 5px 10px;
@@ -56,4 +100,6 @@
             font-style: italic;
         }
     }
+
+
 }

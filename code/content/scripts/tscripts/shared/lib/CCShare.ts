@@ -132,7 +132,7 @@ export module CCShare {
             r = _G._GReloadClassTypeCache[className + "Ext"] || _G._GReloadClassTypeCache[className];
         }
         if (r == null) {
-            GLogHelper.error("NOT Reg Reload Class " + className);
+            GLogHelper.warn("NOT Reg Reload Class " + className);
         }
         return r as T;
     }

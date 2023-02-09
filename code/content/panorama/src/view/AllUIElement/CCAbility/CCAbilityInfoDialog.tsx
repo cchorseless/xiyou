@@ -338,13 +338,13 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                             </Panel>
                             <Label className="ScepterUpgradeBodyLabel" localizedText="{s:scepter_upgrade_description}" html={true} dialogVariables={dialogVariables} />
                         </Panel>
-                        <Panel id="AbilityDraftDescriptionContainer">
+                        {/* <Panel id="AbilityDraftDescriptionContainer">
                             <Panel className="AbilityDraftUpgradeHeader">
                                 <Panel className="AbilityDraftIcon" />
                                 <Label className="AbilityDraftHeaderLabel" localizedText="#DOTA_AbilityTooltip_AbilityDraftNote_Header" />
                             </Panel>
                             <Label className="ScepterUpgradeBodyLabel" localizedText="{s:ability_draft_note}" html={true} dialogVariables={dialogVariables} />
-                        </Panel>
+                        </Panel> */}
                         <Label id="AbilityExtraDescription" className={CSSHelper.ClassMaker({ 'Hidden': sExtraDescription == "" })} localizedText="#DOTA_AbilityTooltip_ExtraDescription" html={true} dialogVariables={dialogVariables} />
                         <Label id="ItemScepterDescription" className={CSSHelper.ClassMaker({ 'Hidden': true })} localizedText="{s:itemscepterdescription}" html={true} />
                         <Label id="AbilityCharges" localizedText="#DOTA_AbilityTooltip_AbilityCharges" html={true} />
@@ -359,7 +359,7 @@ export class CCAbilityInfoDialog extends CCPanel<ICCAbilityInfoDialog> {
                         {/* <Label id="AbilityUpgradeLevel" className={CSSHelper.ClassMaker({ 'Hidden': iAbilityLearnResult != AbilityLearnResult_t.ABILITY_CANNOT_BE_UPGRADED_REQUIRES_LEVEL })} localizedText="#DOTA_AbilityTooltip_UpgradeLevel" html={true} /> */}
                     </Panel>
                     {
-                        combinationLabel && <CCCombinationUnitIconGroup sectName={combinationLabel} playerid={this.props.playerid} unitentityindex={Abilities.GetCaster(castentityindex)} />
+                        combinationLabel && <CCCombinationUnitIconGroup marginTop={"10px"} sectName={combinationLabel} playerid={this.props.playerid} castentityindex={castentityindex} />
                     }
                     {this.props.children}
                     {this.__root___childs}

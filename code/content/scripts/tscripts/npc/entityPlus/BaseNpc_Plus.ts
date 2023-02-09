@@ -37,7 +37,7 @@ export class BaseNpc_Plus extends BaseNpc {
         entityOwner: IBaseNpc_Plus = null
     ) {
         let unit = CreateUnitByName(unitname, v, findClearSpace, npcOwner, entityOwner, team);
-        GameFunc.BindInstanceToCls(unit, BaseNpc_Plus);
+        GameFunc.BindInstanceToCls(unit, GGetRegClass(unitname) || BaseNpc_Plus);
         return unit as IBaseNpc_Plus;
     }
     /**

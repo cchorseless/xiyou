@@ -34,8 +34,8 @@ export class CCPublicBagSlotItem extends CCPanel<ICCPublicBagSlotItem> {
                 if (!Entities.IsValidEntity(itemIndex)) {
                     return true;
                 }
-                const ccMainPanel = CCMainPanel.GetInstance()!;
-                ccMainPanel.HideToolTip();
+                const ccMainPanel = CCMainPanel.GetInstance();
+                ccMainPanel?.HideToolTip();
                 // Tooltips.TogglePublicAreaNotice();
                 let pDisplayPanel = $.CreatePanel("Panel", $.GetContextPanel(), "dragImage") as IDragItem;
                 render(<CCItemImage itemname={Abilities.GetAbilityName(itemIndex)} contextEntityIndex={itemIndex} showtooltip={false} />, pDisplayPanel);

@@ -9,7 +9,7 @@ import "./CCCombinationUnitIconGroup.less";
 
 interface ICCCombinationUnitIconGroup {
     sectName: string;
-    unitentityindex?: EntityIndex
+    castentityindex?: AbilityEntityIndex,
     playerid?: PlayerID
 }
 
@@ -17,17 +17,20 @@ interface ICCCombinationUnitIconGroup {
 export class CCCombinationUnitIconGroup extends CCPanel<ICCCombinationUnitIconGroup> {
 
     static defaultProps = {
-        playerid: -1
+        playerid: -1,
+        castentityindex: -1,
     }
 
     render() {
-        let { sectName, unitentityindex, playerid } = this.props;
+        let { sectName, castentityindex, playerid } = this.props;
         if (playerid == -1) {
-            if (unitentityindex != -1) {
-                playerid = BaseEntityRoot.GetEntityBelongPlayerId(unitentityindex!);
+            if (castentityindex != -1) {
+                let unit_entindex = Abilities.GetCaster(castentityindex!)
+                playerid = BaseEntityRoot.GetEntityBelongPlayerId(unit_entindex!);
             }
         }
         const herolist: string[] = [];
+        const itemlist: string[] = [];
         let uniqueConfigList: string[] = [];
         if (playerid !== -1) {
             const allcombs = ECombination.GetCombinationByCombinationName(playerid!, sectName) || [];
@@ -36,8 +39,14 @@ export class CCCombinationUnitIconGroup extends CCPanel<ICCCombinationUnitIconGr
             }
         }
         for (let data of GJSONConfig.CombinationConfig.getDataList()) {
-            if (data.relation == sectName && data.heroid && !herolist.includes(data.heroid)) {
-                herolist.push(data.heroid);
+            if (data.relation == sectName) {
+                if (data.heroid.length > 0) {
+                    (!herolist.includes(data.heroid)) && herolist.push(data.heroid);
+                }
+                else if (data.heroid == "" && data.Abilityid.length > 0) {
+
+                }
+
             }
         }
         herolist.sort((a, b) => {
@@ -52,6 +61,12 @@ export class CCCombinationUnitIconGroup extends CCPanel<ICCCombinationUnitIconGr
                         return <CCUnitSmallIcon key={index + ""} width="40px" height="40px" itemname={name} rarity={UnitHelper.GetUnitRarety(name)} brightness={uniqueConfigList.includes(name) ? "1" : "0.2"} />
                     })}
             </CCPanel>
+            {/* <CCPanel id="ItemCombination" flowChildren="right-wrap">
+                {herolist.length > 0 && herolist.map(
+                    (name, index) => {
+                        return <CCUnitSmallIcon key={index + ""} width="40px" height="40px" itemname={name} rarity={UnitHelper.GetUnitRarety(name)} brightness={uniqueConfigList.includes(name) ? "1" : "0.2"} />
+                    })}
+            </CCPanel> */}
         </Panel>
     }
 }

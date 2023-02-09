@@ -472,7 +472,7 @@ export module AbilityHelper {
                     }
                 }
             }
-            aSpecials = aSpecials.concat("abilitycastrange", "abilitycastpoint", "abilityduration", "abilitychanneltime", "abilitydamage");
+            aSpecials = aSpecials.concat("abilitycastrange", "abilitycastpoint", "abilityduration", "abilitychanneltime", "abilitydamage", "abilitycooldown");
         }
         if (iEntityIndex != -1) {
             // let a = GetAbilityMechanicsUpgradeSpecialNames(iEntityIndex, sAbilityName);
@@ -680,6 +680,9 @@ export module AbilityHelper {
                 case "abilitydamage":
                     aValues = StringToValues(tData.AbilityDamage || "");
                     break;
+                case "abilitycooldown":
+                    aValues = StringToValues(tData.AbilityCooldown || "");
+                    break;
                 default:
                     if (bIsDescription) {
                         aValues = tResult.aValues;
@@ -832,12 +835,18 @@ export module AbilityHelper {
                 case "abilitydamage":
                     aValues = StringToValues(tData.AbilityDamage || "");
                     break;
+                case "abilitycooldown":
+                    aValues = StringToValues(tData.AbilityCooldown || "");
+                    break;
                 default:
                     break;
             }
             let [sValues, sValuesPS] = AbilityDescriptionCompose(aValues, iLevel, iLevel != -1);
             sStr = sStr.replace(blockPS, sValuesPS);
             sStr = sStr.replace(block, sValues);
+            // GLogHelper.print(sStr);
+
+            // $.Msg(sStr)
         }
         return sStr;
     }
@@ -878,6 +887,9 @@ export module AbilityHelper {
                 case "abilitydamage":
                     aValues = StringToValues(tData.AbilityDamage || "");
                     break;
+                case "abilitycooldown":
+                    aValues = StringToValues(tData.AbilityCooldown || "");
+                    break;
                 default:
                     if (GPropertyConfig.EMODIFIER_PROPERTY[sValueName.toUpperCase() as any] != null) {
                         aValues = GetSpecialValues(sAbilityName, sValueName, iEntityIndex);
@@ -889,7 +901,7 @@ export module AbilityHelper {
             }
             let [sValues, sValuesPS] = AbilityDescriptionCompose(aValues, iLevel, iLevel != -1);
             const isPect = sValueName.toUpperCase().includes("CHANCE") || sValueName.toUpperCase().includes("PERCENTAGE");
-            r.push(`${$.Localize(sValueName)} : ${isPect ? sValuesPS : sValues}`)
+            r.push(`${$.Localize("#DOTA_HUD_" + sValueName.toUpperCase())} : ${isPect ? sValuesPS : sValues}`)
         }
         return r;
     }

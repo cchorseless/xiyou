@@ -112,7 +112,8 @@ export class ability1_pudge_meat_hook extends ActiveRootAbility {
         tHashtable.bChainAttached = false
         tHashtable.hCaster = caster
         tHashtable.hook_speed = this.GetSpecialValueFor("hook_speed")
-        tHashtable.hook_width = this.GetSpecialValueFor("hook_width") + caster.GetTalentValue(2);
+        tHashtable.hook_width = this.GetSpecialValueFor("hook_width")
+        // + caster.GetTalentValue(2);
         tHashtable.bleed_damage = /**this.GetSpecialValueFor("bleed_damage")|| */ 1000;
         tHashtable.bleed_damage_str = this.GetSpecialValueFor("bleed_damage_str")
         tHashtable.bleed_duration = this.GetSpecialValueFor("duration")

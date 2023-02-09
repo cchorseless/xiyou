@@ -945,6 +945,11 @@ export module CSSHelper {
     export function GetPanelData<T>(panel: Panel, key: string): T {
         return (panel.Data() as any)[key] as T;
     }
+
+    export function GetPanelOnlyKey(panel: Panel): string {
+        return GetPanelData(panel, "__onlykey__")
+    }
+
     export function getPanelSize(panel: Panel) {
         if (panel == null || !panel.IsValid()) {
             return [0, 0];

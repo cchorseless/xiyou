@@ -1,7 +1,7 @@
 import React from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
 import { CCUnitStatsDialog } from "../../Unit/CCUnitStatsDialog";
-import { CCAbilityList } from "../CCAbility/CCAbilityList";
+import { CCAbilityList2 } from "../CCAbility/CCAbilityList";
 import { CCInventory } from "../CCInventory/CCInventory";
 import { CCPanel } from "../CCPanel/CCPanel";
 import { CCBuffList } from "./CCBuffList";
@@ -38,7 +38,7 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
                     </Panel>
                     <CCPanel id="DacBoardCenter" hittest={false}>
                         <CCPanel flowChildren="right" hittest={false} verticalAlign="bottom" marginBottom={"60px"} >
-                            <CCAbilityList horizontalAlign={"center"} verticalAlign="center" />
+                            <CCAbilityList2 horizontalAlign={"center"} verticalAlign="center" />
                             {/* <CCDOTAAghsStatusDisplay /> */}
                         </CCPanel>
                         <CCHealthMana verticalAlign="bottom" marginBottom={"0px"} />

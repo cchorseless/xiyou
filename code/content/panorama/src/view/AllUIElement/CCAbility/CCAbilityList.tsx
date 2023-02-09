@@ -71,3 +71,56 @@ export class CCAbilityList extends CCPanel<ICCAbilityList> {
     }
 
 }
+
+export class CCAbilityList2 extends CCPanel<ICCAbilityList> {
+    abilities = createRef<Panel>();
+
+    onReady() {
+        return CSSHelper.IsReadyUI()
+    }
+    onStartUI() {
+        GLogHelper.print(this.abilities.current == null, 4444)
+        if (this.abilities.current) {
+            const abilitypanel = this.abilities.current;
+            GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+                let len = abilitypanel.GetChildCount()
+                if (len == 0) { return 1 }
+                for (let i = 0; i < len; i++) {
+                    const p = abilitypanel.GetChild(i)!;
+                    const AbilityButton = p.FindChildTraverse("AbilityButton");
+                    if (AbilityButton) {
+                        AbilityButton.style.tooltipPosition = "top"
+                    }
+                }
+
+            }))
+            GTimerHelper.AddFrameTimer(5, GHandler.create(this, () => {
+                let len = abilitypanel.GetChildCount()
+                if (len == 0) { return 1 }
+                this.updateAbilityList();
+                return 5;
+            }))
+
+        }
+    }
+
+    private updateAbilityList() {
+        const abilitypanel = this.abilities.current!;
+        let iLocalPortraitUnit = Players.GetLocalPlayerPortraitUnit();
+        for (let i = 0; i < Entities.GetAbilityCount(iLocalPortraitUnit); i++) {
+            let iAbilityEntIndex = Entities.GetAbility(iLocalPortraitUnit, i);
+            if (iAbilityEntIndex == -1) continue;
+            let sAbilityName = Abilities.GetAbilityName(iAbilityEntIndex);
+            const ishidden = KVHelper.KVAbilitys()[sAbilityName] && KVHelper.KVAbilitys()[sAbilityName].CustomHidden == "1";
+            const p = abilitypanel.GetChild(i)!;
+            if (p) {
+                p.SetHasClass("Hidden", Boolean(ishidden));
+            }
+        }
+    }
+    render() {
+        return <Panel id="CC_AbilityList" ref={this.__root__}  {...this.initRootAttrs()}>
+            <GenericPanel ref={this.abilities} type="DOTAAbilityList" id="abilities" hittest={false} tooltiPosition="top" />
+        </Panel>
+    }
+}

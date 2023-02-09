@@ -46,6 +46,7 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
     onDestroy() {
         this.__root___isValid = false;
         TimerHelper.Stop();
+        DotaUIHelper.Quit();
         GameScene.Scene.Dispose();
         LogHelper.print("----------------CCHero_Select close----------------")
     }

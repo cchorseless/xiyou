@@ -1,7 +1,7 @@
 import { PanelAttributes } from "@demon673/react-panorama";
 import React, { createRef } from "react";
 import { CSSHelper } from "../../../helper/CSSHelper";
-import { BasePureComponent } from "../../../libs/BasePureComponent";
+import { BasePureComponent, BasePureComponentSystem } from "../../../libs/BasePureComponent";
 import { CCMainPanel } from "../../MainPanel/CCMainPanel";
 
 type CC_PanelScroll = "clip" | "noclip" | "none" | "squish" | "scroll";
@@ -32,6 +32,11 @@ interface ICCPanelProps extends NodePropsData {
     scroll?: "x" | "y" | "both" | CC_PanelScroll | [CC_PanelScroll, CC_PanelScroll] | undefined,
 }
 export class CCPanel<T = {}, P extends Panel = Panel> extends BasePureComponent<ICCPanelProps & T & Omit<PanelAttributes, "ref">, P>{
+
+    static GetInstanceByOnlyKey(__onlykey__: string) {
+        return BasePureComponentSystem.GetBasePureComp(__onlykey__);
+    }
+
     constructor(props: any) {
         super(props);
         this.__root__ = createRef<P>();

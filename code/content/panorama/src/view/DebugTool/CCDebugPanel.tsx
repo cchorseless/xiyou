@@ -1,6 +1,7 @@
 import React from "react";
 
 import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
+import { KVHelper } from "../../helper/KVHelper";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool, CCDebugTool_Category, CCDebugTool_DemoButton, CCDebugTool_DemoSelectionButton, CCDebugTool_DemoSlider, CCDebugTool_DemoTextEntry, CCDebugTool_DemoToggle } from "./CCDebugTool";
 import { CCDebugTool_AbilityPicker } from "./CCDebugTool_AbilityPicker";
@@ -21,14 +22,16 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
 
     addOnlyDebugDialog<M extends NodePropsData, T extends typeof CCPanel<M>>(nodeType: T, nodeData: M | any = {}) {
         Object.assign(nodeData, { align: "center center" });
-        this.addOnlyOneNodeChild(this.NODENAME.__root__, nodeType, nodeData);
+        this.addOnlyOneNodeChild(this.NODENAME.__root__, nodeType, nodeData, true);
         this.updateSelf();
     }
 
 
     render() {
-        const abilityList: string[] = [];
-        const itemsNames: string[] = [];
+        const itemsNames: string[] = Object.keys(KVHelper.KVItems()).filter((s) => { return KVHelper.KVData().dota_items[s] == null });;
+        const abilitiesNames: string[] = Object.keys(KVHelper.KVAbilitys()).filter((s) => { return KVHelper.KVData().dota_abilities[s] == null });;
+        const dotaitemsNames: string[] = Object.keys(KVHelper.KVData().dota_items);
+        const dotaabilitiesNames: string[] = Object.keys(KVHelper.KVData().dota_abilities);
         const unitList: string[] = ["111", "222"];
         const commonHeroList: string[] = [];
         const stateList: string[] = [];
@@ -64,9 +67,11 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoSelectionButton eventName="CC_DebugTool_UnitInfo" localtext="网表信息面板" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_NetTableInfo) }} />
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="技能和物品" >
+                        <CCDebugTool_DemoSelectionButton eventName="AddItemButtonPressed" localtext="添加Dota物品" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_ItemPicker, { title: "添加Dota物品", itemNames: dotaitemsNames }) }} />
+                        <CCDebugTool_DemoSelectionButton eventName="AddItemButtonPressed" localtext="添加Dota技能" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_AbilityPicker, { title: "添加Dota技能", abilityNames: dotaabilitiesNames }) }} />
                         <CCDebugTool_DemoSelectionButton eventName="AddItemButtonPressed" localtext="添加物品" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_ItemPicker, { title: "添加物品", itemNames: itemsNames }) }} />
                         <CCDebugTool_DemoButton eventName="RemoveInventoryItemsButtonPressed" localtext="移除物品栏的物品" />
-                        <CCDebugTool_DemoSelectionButton eventName="AddAbilityButtonPressed" localtext="添加技能" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_AbilityPicker, { title: "添加技能", abilityNames: abilityList }) }} />
+                        <CCDebugTool_DemoSelectionButton eventName="AddAbilityButtonPressed" localtext="添加技能" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_AbilityPicker, { title: "添加技能", abilityNames: abilitiesNames }) }} />
                         <CCDebugTool_DemoSelectionButton eventName="AddSectButtonPressed" localtext="添加流派" />
                         <CCDebugTool_DemoButton eventName="AddSelectionSectAbility" localtext="添加技能选择" />
                     </CCDebugTool_Category>

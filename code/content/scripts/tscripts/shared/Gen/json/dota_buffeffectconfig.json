@@ -1,32 +1,156 @@
 [
   {
-    "effectid": "modifier_phy_arm_base_3",
+    "effectid": "modifier_phyarm_up_base_3",
     "target": "team",
     "propinfo": [
       [
-        "PHYSICAL_ARMOR_BASE",
+        "phyarm",
         3
       ]
     ]
   },
   {
-    "effectid": "modifier_phy_arm_base_6",
+    "effectid": "modifier_phyarm_up_base_6",
     "target": "team",
     "propinfo": [
       [
-        "PHYSICAL_ARMOR_BASE",
+        "phyarm",
         6
       ]
     ]
   },
   {
-    "effectid": "modifier_phy_arm_base_9",
+    "effectid": "modifier_phyarm_up_base_9",
     "target": "team",
     "propinfo": [
       [
-        "PHYSICAL_ARMOR_BASE",
+        "phyarm",
         9
+      ],
+      [
+        "baseatk_per_phyarm",
+        2
       ]
     ]
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_ursa_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_ursa_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_kunkka_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_kunkka_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_tusk_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_tusk_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_axe_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_axe_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_juggernaut_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_juggernaut_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_troll_warlord_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_troll_warlord_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_slardar_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_slardar_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_sven_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_sven_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_mars_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_mars_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_primal_beast_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_primal_beast_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_skeleton_king_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_skeleton_king_9",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_pudge_6",
+    "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_phyarm_up_hero_pudge_9",
+    "target": "team",
+    "propinfo": []
   }
 ]
