@@ -639,7 +639,7 @@ export class CCAbilityPanel extends CCPanel<ICCAbilityPanel> {
                     </Panel>
                     <Panel hittest={false} id="AbilityLevelContainer" >
                         {m_max_level > 0 && [...Array(m_max_level).keys()].map((key) => {
-                            return <Panel key={key.toString()} className={CSSHelper.ClassMaker("LevelPanel", { "next_level": key == m_level, "active_level": key < m_level })} />;
+                            return <Panel key={key.toString()} className={CSSHelper.ClassMaker("LevelPanel", { "next_level": key == m_level, "active_level": key < m_level })} />
                         })}
                     </Panel>
                 </Panel>

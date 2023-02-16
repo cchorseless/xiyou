@@ -1,23 +1,59 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
+import { ResHelper } from "../../../helper/ResHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
 import { modifier_out_of_game } from "../../../npc/modifier/battle/modifier_out_of_game";
+import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { CombinationComponent } from "../Combination/CombinationComponent";
-import { BuildingDataComponent } from "./BuildingDataComponent";
 import { BuildingRuntimeEntityRoot } from "./BuildingRuntimeEntityRoot";
 
 export class BuildingEntityRoot extends BattleUnitEntityRoot {
+    private iGoldCost: number;
+    /**累计造成伤害 */
+    public fDamage: number;
     public onAwake(playerid: PlayerID, conf: string) {
         (this.BelongPlayerid as any) = playerid;
         (this.ConfigID as any) = conf;
         (this.EntityId as any) = this.GetDomain<IBaseNpc_Plus>().GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof CombinationComponent>("CombinationComponent"));
-        this.AddComponent(GGetRegClass<typeof BuildingDataComponent>("BuildingDataComponent"));
         this.addBattleComp();
+        this.onInit()
+    }
+    /**金币价格 */
+    GetGoldCost() {
+        return this.iGoldCost || 0;
+    }
+
+    GetPopulation(): number {
+        return GBuildingSystem.GetInstance().GetBuildingPopulation(this.ConfigID)
+    }
+    /**
+     * 升星
+     * @param n
+     */
+    AddStar(n: number) {
+        this.iStar += n;
+        let domain = this.GetDomain<IBaseNpc_Plus>();
+        // "particles/generic_hero_status/hero_levelup.vpcf"
+        // "particles/units/heroes/hero_oracle/oracle_false_promise_cast_enemy.vpcf"
+        let iParticleID = ResHelper.CreateParticle(
+            new ResHelper.ParticleInfo()
+                .set_resPath("particles/generic_hero_status/hero_levelup.vpcf")
+                .set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
+                .set_owner(domain)
+                .set_validtime(3)
+        );
+        EmitSoundOn("lvl_up", domain);
+        // 变大
+        domain.SetModelScale(this.iScale * BuildingConfig.MODEL_SCALE[this.iStar - 1]);
+        // 技能升级
+        this.AbilityManagerComp().levelUpAllAbility();
+        // 通知跑马灯
         this.SyncClient();
     }
+
     IsBuilding() { return true }
     public RuntimeBuilding: BuildingRuntimeEntityRoot;
     public CreateCloneRuntimeBuilding() {
@@ -26,7 +62,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         let vLocation = hCaster.GetAbsOrigin();
         let iTeamNumber = hCaster.GetTeamNumber()
         modifier_out_of_game.applyOnly(hCaster, hCaster);
-        this.BuildingComp().SetUIOverHead(false)
+        this.SetUIOverHead(false, true)
         let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
         let cloneRuntime = BaseNpc_Plus.CreateUnitByName(this.ConfigID, vLocation, iTeamNumber, true, hHero, hHero) as IBaseNpc_Plus;
         if (cloneRuntime) {
@@ -36,7 +72,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
             let runtimeroot = cloneRuntime.ETRoot.As<BuildingRuntimeEntityRoot>();
             this.AddDomainChild(runtimeroot);
             this.RuntimeBuilding = runtimeroot;
-            runtimeroot.BuildingComp().SetStar(this.BuildingComp().iStar);
+            runtimeroot.SetStar(this.iStar);
             // wearable
             runtimeroot.WearableComp().WearCopy(this.WearableComp());
             // equip
@@ -55,7 +91,7 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
         }
         this.RuntimeBuilding = null;
         let hCaster = this.GetDomain<IBaseNpc_Plus>();
-        this.BuildingComp().SetUIOverHead(true)
+        this.SetUIOverHead(true, false)
         hCaster.removeBuff<modifier_out_of_game>("modifier_out_of_game");
     }
 
@@ -76,10 +112,6 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
 
     GetDotaHeroName() {
         return this.Config().DotaHeroName;
-    }
-
-    BuildingComp() {
-        return this.GetComponentByName<BuildingDataComponent>("BuildingDataComponent");
     }
 
 }

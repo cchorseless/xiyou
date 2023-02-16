@@ -52,7 +52,7 @@ export class CCPlayerCard extends CCPanel<ICCPlayerCard> {
             {this.__root___childs}
             {this.props.children}
             {/* TODO:玩家天梯勋章 */}
-        </Panel>;
+        </Panel>
     }
 
 }

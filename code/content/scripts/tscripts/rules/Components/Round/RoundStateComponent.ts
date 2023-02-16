@@ -64,6 +64,9 @@ export class RoundStateComponent extends ET.Component {
                 battleunit.AiAttackComp().startFindEnemyAttack();
             }))
         }
+        if (battleunit.IsEnemy()) {
+            (battleunit as IEnemyUnitEntityRoot).SetUIOverHead(false, true);
+        }
     }
 
     OnBoardRound_Prize_RuntimeBuilding(round: ERoundBoard) {
@@ -85,7 +88,7 @@ export class RoundStateComponent extends ET.Component {
         battleunit.AbilityManagerComp().OnBoardRound_Prize(round);
         battleunit.InventoryComp().OnBoardRound_Prize(round);
         modifier_jiaoxie_wudi.applyOnly(domain, domain);
-        let ProjectileInfo = battleunit.GetPlayer().FakerHeroRoot().FakerHeroDataComp().ProjectileInfo;
+        let ProjectileInfo = battleunit.GetPlayer().FakerHeroRoot().ProjectileInfo;
         this.playDamageHeroAni(ProjectileInfo);
     }
 

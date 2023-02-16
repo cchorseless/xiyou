@@ -2,35 +2,116 @@
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { modifier_courier } from "../../../npc/courier/modifier_courier";
+import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
+import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
+import { serializeETProps } from "../../../shared/lib/Entity";
+import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
-import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { InventoryComponent } from "../Inventory/InventoryComponent";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { CourierBagComponent } from "./CourierBagComponent";
-import { CourierDataComponent } from "./CourierDataComponent";
 import { CourierShopComponent } from "./CourierShopComponent";
 
-export class CourierEntityRoot extends BattleUnitEntityRoot {
+export class CourierEntityRoot extends BaseEntityRoot {
+    @serializeETProps()
+    health: number = 100;
+    @serializeETProps()
+    maxHealth: number = 100;
+    @serializeETProps()
+    steamID: string;
+    @serializeETProps()
+    damage: number = 0;
+    /**出生点 */
+    firstSpawnPoint: Vector;
+    /**玩家物品信息 */
+    itemSlotData: EntityIndex[] = [];
     onAwake() {
         let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
         (this.BelongPlayerid as any) = hero.GetPlayerOwnerID();
         (this.ConfigID as any) = hero.GetUnitName();
         (this.EntityId as any) = hero.GetEntityIndex();
-        this.AddComponent(GGetRegClass<typeof CourierDataComponent>("CourierDataComponent"));
         this.AddComponent(GGetRegClass<typeof AbilityManagerComponent>("AbilityManagerComponent"));
         this.AddComponent(GGetRegClass<typeof InventoryComponent>("InventoryComponent"));
         this.AddComponent(GGetRegClass<typeof CourierBagComponent>("CourierBagComponent"));
         this.AddComponent(GGetRegClass<typeof CourierShopComponent>("CourierShopComponent"));
-        this.RefreshCourier()
-        this.SyncClient(true)
+        this.RefreshCourier();
+        this.firstSpawnPoint = hero.GetAbsOrigin();
+        this.steamID = PlayerResource.GetSteamAccountID(this.BelongPlayerid).toString();
+        modifier_wait_portal.applyOnly(hero, hero);
+        modifier_jiaoxie_wudi.applyOnly(hero, hero);
+        this.SyncClient(true, true)
     }
+    /**
+     * 检查位置是否变动
+     * @returns 改变的slot [number[],0 | 1 | 2]
+     */
+    CheckItemSlotChange() {
+        let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
+        let data: EntityIndex[] = [];
+        for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM; i++) {
+            let itemEnity = hero.GetItemInSlot(i);
+            if (itemEnity != null) {
+                data.push(itemEnity.entindex());
+            } else {
+                data.push(-1 as EntityIndex);
+            }
+        }
+        let r = [];
+        for (let i = 0; i < data.length; i++) {
+            if (data[i] != this.itemSlotData[i]) {
+                r.push(i);
+            }
+        }
+        this.itemSlotData = data;
+        if (r.length > 0) {
+            /**获取|丢失|位置更换 */
+            let state: 0 | 1 | 2 = 0;
+            if (r.length == 1) {
+                if (data[r[0]] > 0) {
+                    state = 0;
+                } else {
+                    state = 1;
+                }
+            } else if (r.length == 2) {
+                state = 2;
+            }
+            return [r, state];
+        }
+    }
+    /**
+     * 查找道具数量
+     * @param playerid
+     * @param itemname
+     * @returns
+     */
+    GetItemCount(itemname: string): number {
+        let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
+        let r = 0;
+        for (let i = 0; i < DOTAScriptInventorySlot_t.DOTA_ITEM_TRANSIENT_ITEM; i++) {
+            let item = hero.GetItemInSlot(i);
+            if (item && item.GetAbilityName() == itemname) {
+                r += 1;
+            }
+        }
+        return r;
+    }
+    ApplyDamageByEnemy(damage: number) {
+        let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
+        this.health -= damage;
+        hero.SetHealth(this.health);
+        this.SyncClient(true, true)
+        if (this.health <= 0) {
+            this.onKilled({})
+        }
+    }
+
     onKilled(e: any) {
         let hHero = this.GetDomain<IBaseNpc_Hero_Plus>();
         hHero.StartGesture(GameActivity_t.ACT_DOTA_DIE);
         hHero.ForceKill(false);
         let isgameend = true;
-        CourierDataComponent.GetAllInstance().forEach((instance) => {
+        CourierEntityRoot.GetAllInstance().forEach((instance) => {
             if (instance.health > 0) {
                 isgameend = false;
             }
@@ -62,10 +143,12 @@ export class CourierEntityRoot extends BattleUnitEntityRoot {
         }
         return GameServiceConfig.DefaultCourier;
     }
-
-
-    CourierDataComp() {
-        return this.GetComponentByName<CourierDataComponent>("CourierDataComponent");
+    onVictory() {
+        let npc = this.GetDomain<IBaseNpc_Plus>();
+        if (GameFunc.IsValid(npc)) {
+            npc.Stop();
+            npc.StartGesture(GameActivity_t.ACT_DOTA_VICTORY);
+        }
     }
 
     AbilityManagerComp() {
@@ -99,6 +182,8 @@ export class CourierEntityRoot extends BattleUnitEntityRoot {
             )
         }
     }
+
+    OnRoundWaitingEnd(round: ERoundBoard) { }
 }
 
 declare global {

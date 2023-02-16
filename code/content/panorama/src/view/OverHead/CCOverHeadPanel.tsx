@@ -12,16 +12,12 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
         GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
             this.onUpdate();
             return 1
-        }));
+        }), true);
     }
     onUpdate() {
-        // let iCursorEntIndex = GameUI.CustomUIConfig().GetCursorEntity();
-        // let iLocalPortraitUnit = Players.GetLocalPlayerPortraitUnit();
-        // // 所有英雄
-        // Entities.GetAllHeroEntities().forEach((iUnitEntIndex) => {});
-        // //
-        this.updateEnemy();
-        this.updateBuilding();
+        let scale = 800 / GameUI.GetCameraPosition()[2];
+        this.updateEnemy(scale);
+        this.updateBuilding(scale);
         for (let k in this.allOverHeadUI) {
             let entityid = Number(k) as EntityIndex;
             if (this.allOverHeadUI[k])
@@ -34,15 +30,14 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
     }
 
     private allOverHeadUI: { [k: string]: ReactElement } = {};
-    updateEnemy() {
+    updateEnemy(scale: number) {
         // 所有的怪物
         const allenemy = GEnemyUnitEntityRoot.GetAllInstance();
-        let scale = 800 / GameUI.GetCameraPosition()[2];
         for (let entityroot of allenemy) {
             const entityid = entityroot.EntityId;
-            if (entityroot && entityroot.EnemyUnitComp!.IsShowOverhead) {
+            if (entityroot && entityroot.IsShowOverhead) {
                 if (this.allOverHeadUI[entityid] == null) {
-                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, CCEnemyTopBarItem, { "entityid": Number(entityid) })!;
+                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, CCEnemyTopBarItem, { entityid: Number(entityid) })!;
                 } else {
                     this.getPureCompByNode<CCEnemyTopBarItem>(this.allOverHeadUI[entityid] as any)?.updatePos(scale);
                 }
@@ -56,14 +51,13 @@ export class CCOverHeadPanel extends CCPanel<NodePropsData> {
         }
     }
 
-    updateBuilding() {
-        let scale = 800 / GameUI.GetCameraPosition()[2];
+    updateBuilding(scale: number) {
         const allbuilding = GBuildingEntityRoot.GetAllInstance();
         for (let entityroot of allbuilding) {
             const entityid = entityroot.EntityId;
-            if (entityroot && entityroot.BuildingComp!.IsShowOverhead) {
+            if (entityroot && entityroot.IsShowOverhead) {
                 if (this.allOverHeadUI[entityid] == null) {
-                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, CCBuildingTopBarItem, { "entityid": Number(entityid) })!;
+                    this.allOverHeadUI[entityid] = this.addNodeChildAt(this.NODENAME.__root__, CCBuildingTopBarItem, { entityid: Number(entityid) })!;
                 } else {
                     this.getPureCompByNode<CCBuildingTopBarItem>(this.allOverHeadUI[entityid] as any)?.updatePos(scale);
                 }

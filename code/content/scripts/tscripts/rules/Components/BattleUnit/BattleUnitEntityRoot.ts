@@ -1,5 +1,9 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health_bar";
+import { modifier_hero_property } from "../../../npc/propertystat/modifier_hero_property";
+import { BuildingConfig } from "../../../shared/BuildingConfig";
+import { serializeETProps } from "../../../shared/lib/Entity";
 import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 import { AbilityManagerComponent } from "../Ability/AbilityManagerComponent";
 import { AiAttackComponent } from "../AI/AiAttackComponent";
@@ -11,6 +15,55 @@ import { RoundStateComponent } from "../Round/RoundStateComponent";
 import { WearableComponent } from "../Wearable/WearableComponent";
 
 export class BattleUnitEntityRoot extends BaseEntityRoot {
+    public iScale: number = 1;
+    @serializeETProps()
+    public iLevel: number = 1;
+    @serializeETProps()
+    public iStar: number = 1;
+    @serializeETProps()
+    public IsShowOverhead: boolean = false;
+    @serializeETProps()
+    public PrimaryAttribute: number = 1;
+
+    onInit() {
+        this.iScale = this.GetDomain<IBaseNpc_Plus>().GetAbsScale();
+        let domain = this.GetDomain<IBaseNpc_Plus>();
+        const m = modifier_hero_property.applyOnly(domain, domain);
+        m.StackCountHandler = GHandler.create(this, (attr: Attributes) => {
+            this.PrimaryAttribute = attr;
+            this.SyncClient(true);
+        }, null, false);
+        this.SetUIOverHead(true, false);
+    }
+
+    SetUIOverHead(isshowCustom: boolean, isshowdota: boolean) {
+        this.IsShowOverhead = isshowCustom;
+        let domain = this.GetDomain<IBaseNpc_Plus>();
+        if (isshowdota) {
+            modifier_no_health_bar.remove(domain);
+        }
+        else {
+            modifier_no_health_bar.applyOnly(domain, domain);
+        }
+        this.SyncClient(true);
+    }
+
+    /**是否可以升星 */
+    checkCanStarUp() {
+        return this.iStar < BuildingConfig.MAX_STAR;
+    }
+
+    SetStar(n: number) {
+        this.iStar = n;
+        let domain = this.GetDomain<IBaseNpc_Plus>();
+        let building = domain.ETRoot.As<IBattleUnitEntityRoot>();
+        // 变大
+        domain.SetModelScale(this.iScale * BuildingConfig.MODEL_SCALE[this.iStar - 1]);
+        // 技能升级
+        building.AbilityManagerComp().setAllAbilityLevel(n);
+        // 属性
+    }
+
 
     onVictory() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
@@ -47,6 +100,9 @@ export class BattleUnitEntityRoot extends BaseEntityRoot {
     IsBuilding() {
         return false;
     }
+    IsEnemy() {
+        return !this.IsFriendly();
+    }
     addBattleComp() {
         this.AddComponent(GGetRegClass<typeof ChessMoveComponent>("ChessMoveComponent"));
         this.AddComponent(GGetRegClass<typeof AiAttackComponent>("AiAttackComponent"));
@@ -55,7 +111,6 @@ export class BattleUnitEntityRoot extends BaseEntityRoot {
         this.AddComponent(GGetRegClass<typeof InventoryComponent>("InventoryComponent"));
         this.AddComponent(GGetRegClass<typeof BuffManagerComponent>("BuffManagerComponent"));
         this.AddComponent(GGetRegClass<typeof RoundStateComponent>("RoundStateComponent"));
-
     }
 
     GetDotaHeroName() {

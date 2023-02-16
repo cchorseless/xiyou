@@ -130,7 +130,7 @@ export class CCDebugTool_Setting extends CCPanel<ICCDebugTool_Setting> {
                             <Panel className="SectionHeaderLine" />
                             {/* 默认设置 */}
                             {eventNameList.length > 0 && defaultSettingList.map((eventName, index) => {
-                                return <CCKeyBinder key={"defaultSettingList" + eventName + index} text={buttonTextList[eventNameList.indexOf(eventName)]} initKey={tSettings["hotkey_" + eventName]} callback={(key) => this.RegisterDemoButton(key, "hotkey_" + eventName, false)} />;
+                                return <CCKeyBinder key={"defaultSettingList" + eventName + index} text={buttonTextList[eventNameList.indexOf(eventName)]} initKey={tSettings["hotkey_" + eventName]} callback={(key) => this.RegisterDemoButton(key, "hotkey_" + eventName, false)} />
                             })}
                             {/* 已保存的自定义热键设置 */}
                             {buttonTextList.length > 0 && Object.keys(tSettings).map((eventName, index) => {

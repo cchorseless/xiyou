@@ -335,7 +335,7 @@ export class CCKeyBinder extends CCPanel<ICCKeyBinder>{
                         }
                     }} index={initDropIndex}>
                         {text.map((value, index) => {
-                            return <Label className="EOM_DropDownChild" key={index} text={value} />;
+                            return <Label className="EOM_DropDownChild" key={index} text={value} />
                         })}
                     </CCDropDownButton>
                 }

@@ -66,7 +66,7 @@ export class CCDebugTool_UnitInfo extends CCPanel {
                         <Label text={"魔法：" + mp} />
                         <Label text={"Modifier："} />
                         {buff?.map((_, index) => {
-                            return <Label key={index} text={"		" + Buffs.GetName(unitIndex, Entities.GetBuff(unitIndex, index))} />;
+                            return <Label key={index} text={"		" + Buffs.GetName(unitIndex, Entities.GetBuff(unitIndex, index))} />
                         })}
                     </CCPanel>
                 </CCDebugTool_SelectContainer>

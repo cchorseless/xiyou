@@ -6,7 +6,6 @@ import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { ChessControlConfig } from "../../../shared/ChessControlConfig";
 import { ET } from "../../../shared/lib/Entity";
 import { GEventHelper } from "../../../shared/lib/GEventHelper";
-import { RoundConfig } from "../../../shared/RoundConfig";
 import { PlayerScene } from "../Player/PlayerScene";
 import { ERoundBoard } from "../Round/ERoundBoard";
 import { BuildingEntityRoot } from "./BuildingEntityRoot";
@@ -88,18 +87,17 @@ export class BuildingManagerComponent extends ET.Component {
      * @returns
      */
     public sellBuilding(target: IBuildingEntityRoot, fGoldReturn = 0.5) {
-        if (!this.allBuilding.includes(target.Id)) {
+        if (target == null || !target.IsBuilding()) {
             return;
         }
-        let building = target.BuildingComp();
-        if (building == null) {
+        if (!this.allBuilding.includes(target.Id)) {
             return;
         }
         let index = this.allBuilding.indexOf(target.Id);
         this.allBuilding.splice(index, 1);
         GEventHelper.FireEvent(ChessControlConfig.Event.ChessControl_LeaveBattle, null,
-            target.BelongPlayerid, building);
-        let iGoldCost = building.GetGoldCost();
+            target.BelongPlayerid, target);
+        let iGoldCost = target.GetGoldCost();
         let iGoldReturn = math.floor(iGoldCost * fGoldReturn);
         target.Dispose();
     }
@@ -113,8 +111,8 @@ export class BuildingManagerComponent extends ET.Component {
         let buildings = this.getBuilding(towerID);
         if (buildings.length >= 1) {
             for (let build of buildings) {
-                if (build.BuildingComp().checkCanStarUp()) {
-                    build.BuildingComp().AddStar(1);
+                if (build.checkCanStarUp()) {
+                    build.AddStar(1);
                     return build;
                 }
             }
@@ -148,15 +146,6 @@ export class BuildingManagerComponent extends ET.Component {
     }
 
     public addEvent() {
-        GEventHelper.AddEvent(RoundConfig.Event.roundboard_onwaitingend,
-            GHandler.create(this, (round: ERoundBoard) => {
-                this.getAllBattleBuilding()
-                    .forEach((b) => {
-                        b.RoundStateComp().OnBoardRound_WaitingEnd();
-                    });
-            }),
-            this.BelongPlayerid,
-        );
 
     }
     public getBuilding(towerID: string) {
@@ -247,4 +236,11 @@ export class BuildingManagerComponent extends ET.Component {
         player.CombinationManager().OnRoundStartPrize(round);
 
     }
+    OnRoundWaitingEnd(round: ERoundBoard) {
+        this.getAllBattleBuilding()
+            .forEach((b) => {
+                b.RoundStateComp().OnBoardRound_WaitingEnd();
+            });
+    }
+
 }

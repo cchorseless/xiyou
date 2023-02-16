@@ -9,7 +9,7 @@ export class EnemyMoveComponent extends ET.Component {
 
     onAwake(...args: any[]): void { }
     public getMoveWay() {
-        let unitComp = this.Domain.ETRoot.As<IEnemyUnitEntityRoot>().EnemyUnitComp();
+        let unitComp = this.Domain.ETRoot.As<IEnemyUnitEntityRoot>()
         let playerid = unitComp.GetPlayerId();
         if (unitComp.IsWave()) {
             return EnemyConfig.ENEMY_CORNERS[playerid];

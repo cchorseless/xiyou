@@ -251,7 +251,7 @@ export class CCDebugTool_DemoDropDown extends CCPanel<ICCDebugTool_DemoDropDown>
 			<Panel ref={this.__root__}  {...this.initRootAttrs()} >
 				<CCDropDownButton index={this.props.index} onChange={(index, item) => { this.props.onChange(index, item); }}>
 					{this.props.list.map((tData: any, key: any) => {
-						return <Label key={String(tData)} id={String(tData)} text={String(tData)} />;
+						return <Label key={String(tData)} id={String(tData)} text={String(tData)} />
 					})}
 				</CCDropDownButton >
 			</Panel>
@@ -475,7 +475,7 @@ export class CCDebugTool_SelectContainer extends CCPanel<ICCDebugTool_SelectCont
 										}}>
 											<Label id="CC_DropDown_Clear" text="X 清除筛选" />
 											{Object.keys(toggleList!).map((key, _index) => {
-												return <Label key={_index} text={toggleList![key]} />;
+												return <Label key={_index} text={toggleList![key]} />
 											})}
 										</CCDropDownButton>
 									}

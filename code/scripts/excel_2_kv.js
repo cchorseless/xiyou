@@ -96,7 +96,7 @@ function parse_paramSheet(file, sheet_data, sheet_param) {
  */
 function parse_paramSheetBaseData(sheet_param) {
     let r = ""
-    if (sheet_param.data.length > 6 && sheet_param.data[4] == '#base') {
+    if (sheet_param.data.length >= 6 && sheet_param.data[4] == '#base') {
         for (let i = 5; i < sheet_param.data.length; i++) {
             let v = sheet_param.data[i][0]
             if (v && ((v + "").endsWith('.kv') || (v + "").endsWith('.txt'))) {

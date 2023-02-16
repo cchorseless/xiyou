@@ -48,7 +48,7 @@ export class CCDebugTool_SectPicker extends CCPanel<IDebugTool_SectPicker> {
                                 }
                             }
                             if (this.state.filterWord != "") {
-                                if (sectName.search(new RegExp(this.state.filterWord, "gim")) == -1 && $.Localize("#DOTA_Tooltip_ability_mechanics_" + sectName).search(new RegExp(this.state.filterWord, "gim")) == -1) {
+                                if (sectName.search(new RegExp(this.state.filterWord, "gim")) == -1 && $.Localize("#lang_" + sectName).search(new RegExp(this.state.filterWord, "gim")) == -1) {
                                     return;
                                 }
                             }

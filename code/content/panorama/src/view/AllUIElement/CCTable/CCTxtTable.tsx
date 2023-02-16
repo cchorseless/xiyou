@@ -41,7 +41,7 @@ export class CCTxtTable extends CCPanel<ICCTxtTable> {
 							</Fragment>
 						);
 					} else {
-						return <TabButton key={index} selected={this.props.selected != undefined ? this.props.selected - 1 == index : this.state.selectedIndex == index} group={this.props.group} onactivate={() => this.onSelect(index)} localizedText={name} />;
+						return <TabButton key={index} selected={this.props.selected != undefined ? this.props.selected - 1 == index : this.state.selectedIndex == index} group={this.props.group} onactivate={() => this.onSelect(index)} localizedText={name} />
 					}
 				})}
 				{this.__root___childs}

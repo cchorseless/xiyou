@@ -1,10 +1,9 @@
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
-import { EnemyDataComponent } from "./EnemyDataComponent";
 
 @GReloadable
 export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
-    get EnemyUnitComp() {
-        return this.GetComponentByName<EnemyDataComponent>("EnemyDataComponent");
+
+    onDestroy(): void {
     }
 }
 declare global {

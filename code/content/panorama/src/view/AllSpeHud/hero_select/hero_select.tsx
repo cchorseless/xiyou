@@ -139,9 +139,9 @@ export class CCHero_Select extends CCPanel<NodePropsData> {
                                 }
                             }
                             if (charpter == GameServiceConfig.EDifficultyChapter.endless) {
-                                return <CCGameEndlessDifficulty key={index + ""} selected={selected} enable={maxDiff == GameServiceConfig.EDifficultyChapter.endless} layers={layers} aPlayerIDs={aPlayerIDs} />;
+                                return <CCGameEndlessDifficulty key={index + ""} selected={selected} enable={maxDiff == GameServiceConfig.EDifficultyChapter.endless} layers={layers} aPlayerIDs={aPlayerIDs} />
                             }
-                            return <CCGameDifficulty key={index + ""} iDifficulty={charpter} selected={selected} max={maxDiff} aPlayerIDs={aPlayerIDs} />;
+                            return <CCGameDifficulty key={index + ""} iDifficulty={charpter} selected={selected} max={maxDiff} aPlayerIDs={aPlayerIDs} />
                         })}
                 </Panel>
                 {/* 准备 */}

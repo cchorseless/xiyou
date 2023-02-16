@@ -11,9 +11,6 @@ interface ICCPlayerInfoDialog extends NodePropsData {
 }
 
 export class CCPlayerInfoDialog extends CCPanel<ICCPlayerInfoDialog> {
-    onInitUI() {
-        GGameScene.GetPlayer(this.props.Playerid)?.CourierDataComp?.RegRef(this)
-    }
 
     render() {
         const heroData = this.GetState<any>("heroData");

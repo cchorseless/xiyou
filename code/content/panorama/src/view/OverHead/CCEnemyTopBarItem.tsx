@@ -8,7 +8,7 @@ export class CCEnemyTopBarItem extends CCOverHeadBaseItem {
 
     HasOverhead(iEntIndex: EntityIndex): boolean {
         let entityroot = GEnemyUnitEntityRoot.GetEntity(iEntIndex);
-        if (entityroot && entityroot.EnemyUnitComp!.IsShowOverhead) {
+        if (entityroot && entityroot.IsShowOverhead) {
             return Entities.IsValidEntity(iEntIndex) && Entities.IsAlive(iEntIndex) && !Entities.IsInvisible(iEntIndex);
         }
         return false;

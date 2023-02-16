@@ -19,7 +19,6 @@ export class AbilityManagerComponent extends ET.Component {
                 }
                 this.addAbilityRoot(ability.ETRoot as IAbilityEntityRoot);
             }
-
         }
     }
     // 战吼
@@ -111,7 +110,7 @@ export class AbilityManagerComponent extends ET.Component {
         }
         battleunit.AddDomainChild(root);
         this.allAbilityRoot.push(root.Id);
-        if (battleunit.CombinationComp()) {
+        if (battleunit.CombinationComp && battleunit.CombinationComp()) {
             battleunit.CombinationComp().addAbilityRoot(root);
         }
     }
@@ -124,7 +123,7 @@ export class AbilityManagerComponent extends ET.Component {
         battleunit.RemoveDomainChild(root);
         let index = this.allAbilityRoot.indexOf(root.Id);
         this.allAbilityRoot.splice(index, 1);
-        if (battleunit.CombinationComp()) {
+        if (battleunit.CombinationComp && battleunit.CombinationComp()) {
             battleunit.CombinationComp().removeAbilityRoot(root);
         }
         root.Dispose();

@@ -3,19 +3,15 @@ import { LuBanConfigComponent } from "./componentext/LuBanConfigComponent";
 import { AbilityEntityRoot } from "./components/Ability/AbilityEntityRoot";
 import { BattleUnitIllusionEntityRoot } from "./components/BattleUnit/BattleUnitIllusionEntityRoot";
 import { BattleUnitSummonEntityRoot } from "./components/BattleUnit/BattleUnitSummonEntityRoot";
-import { BuildingDataComponent } from "./components/Building/BuildingDataComponent";
 import { BuildingEntityRoot } from "./components/Building/BuildingEntityRoot";
 import { BuildingManagerComponent } from "./components/Building/BuildingManagerComponent";
 import { BuildingRuntimeEntityRoot } from "./components/Building/BuildingRuntimeEntityRoot";
 import { ChessControlComponent } from "./components/ChessControl/ChessControlComponent";
-import { ChessDataComponent } from "./components/ChessControl/ChessDataComponent";
 import { ECombination } from "./components/Combination/ECombination";
 import { CourierBagComponent } from "./components/Courier/CourierBagComponent";
-import { CourierDataComponent } from "./components/Courier/CourierDataComponent";
 import { CourierEntityRoot } from "./components/Courier/CourierEntityRoot";
 import { CourierShopComponent } from "./components/Courier/CourierShopComponent";
 import { DrawComponent } from "./components/Draw/DrawComponent";
-import { EnemyDataComponent } from "./components/Enemy/EnemyDataComponent";
 import { EnemyUnitEntityRoot } from "./components/Enemy/EnemyUnitEntityRoot";
 import { FakerHeroEntityRoot } from "./components/FakerHero/FakerHeroEntityRoot";
 import { FHeroCombination } from "./components/FakerHero/FHeroCombination";
@@ -34,18 +30,15 @@ GameServiceSystemComponent;
 AbilityEntityRoot;
 ItemEntityRoot;
 
-ChessDataComponent;
 BattleUnitIllusionEntityRoot;
 BattleUnitSummonEntityRoot;
 
 BuildingEntityRoot;
-BuildingDataComponent;
 BuildingManagerComponent;
 BuildingRuntimeEntityRoot;
 
 
 
-CourierDataComponent;
 CourierEntityRoot;
 CourierBagComponent;
 CourierShopComponent;
@@ -53,7 +46,6 @@ CourierShopComponent;
 ECombination;
 
 EnemyUnitEntityRoot;
-EnemyDataComponent;
 
 FakerHeroEntityRoot;
 FHeroCombination;

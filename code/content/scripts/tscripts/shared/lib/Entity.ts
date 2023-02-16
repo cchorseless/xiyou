@@ -82,6 +82,7 @@ export module ET {
         public readonly Children: { [uuid: string]: Entity };
         public readonly Components: { [name: string]: Component };
         public readonly SerializeETProps: string[];
+        public readonly NetTableNames: string[];
         public get IsSerializeEntity() {
             // 数据只绑定在EntityRoot上，其他组件不需要重复同步
             return this.SerializeETProps != null || (this.Domain.SerializeDomainProps != null && (this.Domain.ETRoot as any) == this);
@@ -137,8 +138,37 @@ export module ET {
             }
             GLogHelper.error(this.GetType() + " cant find BelongPlayerid")
         }
-
-
+        /**
+         * 第一个是缓存的InstanceId
+         * @param key 
+         */
+        public AddNetTableKey(key: string) {
+            (this.NetTableNames as any) = this.NetTableNames || [this.InstanceId];
+            if (!this.NetTableNames.includes(key)) {
+                this.NetTableNames.push(key);
+            }
+        }
+        public DelNetTableData() {
+            //#region LUA
+            if (!IsServer()) {
+                return;
+            }
+            if (!this.NetTableNames || this.IsDisposed()) {
+                return;
+            }
+            const InstanceId = this.NetTableNames[0];
+            for (let i = 1; i < this.NetTableNames.length; i++) {
+                // 先通知删除
+                (CustomNetTables as any).SetTableValue(this.NetTableNames[i] as never, InstanceId, { _: "" } as never);
+                // 下一帧删除，不然会合并掉
+                GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
+                    (CustomNetTables as any).SetTableValue(this.NetTableNames[i] as never, InstanceId, null as never);
+                }))
+            }
+            GLogHelper.print(this.NetTableNames, "DelNetTableData");
+            (this.NetTableNames as any) = null;
+            //#endregion LUA
+        }
 
         public SyncClient(ignoreChild: boolean = false, isShare: boolean = false) {
             GLogHelper.print(this.GetType(), this.BelongPlayerid);
@@ -498,6 +528,7 @@ export module ET {
             if (this.IsDisposed()) {
                 return;
             }
+            this.DelNetTableData();
             this.setRegister(false);
             GEventHelper.RemoveCaller(this);
             GTimerHelper.ClearAll(this);
@@ -517,12 +548,9 @@ export module ET {
                 }
                 (this.Children as any) = null;
             }
-
             // 触发Destroy事件
             ETEntitySystem.Destroy(this);
-
             (this.Domain as any) = null;
-
             if (this.Parent != null && !this.Parent.IsDisposed()) {
                 if (this.IsComponent) {
                     this.Parent.RemoveComponent(this as any);

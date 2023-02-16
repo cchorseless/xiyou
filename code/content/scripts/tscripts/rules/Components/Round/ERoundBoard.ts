@@ -1,7 +1,6 @@
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
 import { KVHelper } from "../../../helper/KVHelper";
 import { serializeETProps } from "../../../shared/lib/Entity";
-import { GEventHelper } from "../../../shared/lib/GEventHelper";
 import { RoundConfig } from "../../../shared/RoundConfig";
 import { ChessVector } from "../ChessControl/ChessVector";
 import { ERound } from "./ERound";
@@ -103,14 +102,16 @@ export class ERoundBoard extends ERound {
             this.prizeTimer.Clear()
             this.prizeTimer = null;
         }
-        GLogHelper.print(3333, this.roundState);
         if (this.roundState == RoundConfig.ERoundBoardState.waiting_next) {
             return;
         }
         this.roundState = RoundConfig.ERoundBoardState.waiting_next;
         this.roundLeftTime = -1;
         this.SyncClient();
-        GEventHelper.FireEvent(RoundConfig.Event.roundboard_onwaitingend, null, this.BelongPlayerid, this);
+        let playerroot = GPlayerEntityRoot.GetOneInstance(this.BelongPlayerid);
+        playerroot.CourierRoot().OnRoundWaitingEnd(this);
+        playerroot.BuildingManager().OnRoundWaitingEnd(this);
+        playerroot.FakerHeroRoot().OnRoundWaitingEnd(this);
         GTimerHelper.AddTimer(0.1,
             GHandler.create(this, () => {
                 if (this._debug_StageStopped) {

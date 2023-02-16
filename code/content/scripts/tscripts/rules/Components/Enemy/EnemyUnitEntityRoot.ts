@@ -1,12 +1,11 @@
 import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
+import { EnemyConfig } from "../../../shared/EnemyConfig";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { ERound } from "../Round/ERound";
 import { ERoundBoard } from "../Round/ERoundBoard";
-import { EnemyDataComponent } from "./EnemyDataComponent";
-import { EnemyKillPrizeComponent } from "./EnemyKillPrizeComponent";
 import { EnemyMoveComponent } from "./EnemyMoveComponent";
 
 @GReloadable
@@ -19,12 +18,34 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         (this.ConfigID as any) = confid;
         (this.RoundID as any) = roundid;
         (this.OnlyKey as any) = onlyKey;
-        (this.EntityId as any) = this.GetDomain<IBaseNpc_Plus>().GetEntityIndex();
+        const domain = this.GetDomain<IBaseNpc_Plus>();
+        (this.EntityId as any) = domain.GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
         this.AddComponent(GGetRegClass<typeof CombinationComponent>("CombinationComponent"));
         this.addBattleComp();
-        this.AddComponent(GGetRegClass<typeof EnemyDataComponent>("EnemyDataComponent"));
-        this.AddComponent(GGetRegClass<typeof EnemyKillPrizeComponent>("EnemyKillPrizeComponent"));
+        this.onInit()
+    }
+
+    GetPlayerId() {
+        return this.Domain.ETRoot.As<IEnemyUnitEntityRoot>().BelongPlayerid;
+    }
+    EnemyUnitType() {
+        return this.Domain.ETRoot.As<IEnemyUnitEntityRoot>().Config().UnitLabel;
+    }
+    IsWave() {
+        return this.EnemyUnitType() == EnemyConfig.EEnemyUnitType.wave;
+    }
+    IsBoss() {
+        return this.EnemyUnitType() == EnemyConfig.EEnemyUnitType.BOSS;
+    }
+    IsGOLD_BOSS() {
+        return this.EnemyUnitType() == EnemyConfig.EEnemyUnitType.GOLD_BOSS;
+    }
+    IsCANDY_BOSS() {
+        return this.EnemyUnitType() == EnemyConfig.EEnemyUnitType.CANDY_BOSS;
+    }
+    IsCANDY_WAVE() {
+        return this.EnemyUnitType() == EnemyConfig.EEnemyUnitType.CANDY_WAVE;
     }
 
     onDestroy(): void {
@@ -35,7 +56,7 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
     }
 
     OnSpawnAnimalFinish() {
-        this.EnemyUnitComp()?.SyncClient()
+        this.SyncClient()
     }
 
     onKilled(events: EntityKilledEvent): void {
@@ -58,16 +79,10 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
             return this.GetRound<ERoundBoard>().config.unitinfo[this.OnlyKey];
         }
     }
-    EnemyUnitComp() {
-        return this.GetComponentByName<EnemyDataComponent>("EnemyDataComponent");
-    }
-    EnemyKillPrize() {
-        return this.GetComponentByName<EnemyKillPrizeComponent>("EnemyKillPrizeComponent");
-    }
+
     EnemyMoveComp() {
         return this.GetComponentByName<EnemyMoveComponent>("EnemyMoveComponent");
     }
-
 
     BattleUnitManager() {
         return this.GetComponentByName<BattleUnitManagerComponent>("BattleUnitManagerComponent");

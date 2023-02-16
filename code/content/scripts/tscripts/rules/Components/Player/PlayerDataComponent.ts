@@ -76,14 +76,14 @@ export class PlayerDataComponent extends PlayerData {
     addEvent() {
         GEventHelper.AddEvent(ChessControlConfig.Event.ChessControl_JoinBattle,
             GHandler.create(this, (building: IBuildingEntityRoot) => {
-                let popu = building.BuildingComp().GetPopulation();
+                let popu = building.GetPopulation();
                 this.changePopulation(popu);
             }),
             this.BelongPlayerid
         );
         GEventHelper.AddEvent(ChessControlConfig.Event.ChessControl_LeaveBattle,
             GHandler.create(this, (building: IBuildingEntityRoot) => {
-                let popu = building.BuildingComp().GetPopulation();
+                let popu = building.GetPopulation();
                 this.changePopulation(-popu);
             }),
             this.BelongPlayerid);

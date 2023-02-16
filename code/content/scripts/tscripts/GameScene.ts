@@ -186,7 +186,7 @@ export class GameScene {
             let hero = GPlayerEntityRoot.GetOneInstance(playerid).Hero!;
             if (hero != null) {
                 // 检查位置是否改变
-                let changeData = hero.ETRoot.As<ICourierEntityRoot>().CourierDataComp().CheckItemSlotChange();
+                let changeData = hero.ETRoot.As<ICourierEntityRoot>().CheckItemSlotChange();
                 if (changeData) {
                     let _event: IBuffEventData = {};
                     (_event as IBuffEventData).eventType = EventDataType.unitIsSelf + EventDataType.OtherCanBeAnyOne;

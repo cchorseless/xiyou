@@ -60,7 +60,7 @@ export class CCAbilityList extends CCPanel<ICCAbilityList> {
                 <Panel id="CC_AbilityList" ref={this.__root__}  {...this.initRootAttrs()}>
                     <Panel id="abilities" className={CSSHelper.ClassMaker(classDes)} hittest={false} ref={this.abilityList}>
                         {abilities.map((overrideentityindex, key) => {
-                            return <CCAbilityPanel key={key.toString()} overrideentityindex={overrideentityindex as any} hittest={false} />;
+                            return <CCAbilityPanel key={key.toString()} overrideentityindex={overrideentityindex as any} hittest={false} />
                         })}
                     </Panel>
                     {this.props.children}

@@ -5,7 +5,6 @@ import { building_auto_findtreasure } from "../../../npc/abilities/common/buildi
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerComponent";
-import { BuildingDataComponent } from "./BuildingDataComponent";
 
 export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
     public IsRuntimeBuilding(): boolean {
@@ -17,7 +16,6 @@ export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
         (this.EntityId as any) = this.GetDomain<IBaseNpc_Plus>().GetEntityIndex();
         this.AddComponent(GGetRegClass<typeof BattleUnitManagerComponent>("BattleUnitManagerComponent"));
         this.addBattleComp();
-        this.AddComponent(GGetRegClass<typeof BuildingDataComponent>("BuildingDataComponent"));
     }
     onDestroy(): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
@@ -65,9 +63,7 @@ export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
     BattleUnitManager() {
         return this.GetComponentByName<BattleUnitManagerComponent>("BattleUnitManagerComponent");
     }
-    BuildingComp() {
-        return this.GetComponentByName<BuildingDataComponent>("BuildingDataComponent");
-    }
+
 
 
 }

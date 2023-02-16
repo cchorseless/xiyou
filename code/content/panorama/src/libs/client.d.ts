@@ -19,3 +19,5 @@ declare interface IDragItem extends IDragPanel {
 declare const PlayerResource: any;
 declare const json: any;
 declare const GameRules: CScriptBindingPR_Game;
+
+declare const IsServer: Function;

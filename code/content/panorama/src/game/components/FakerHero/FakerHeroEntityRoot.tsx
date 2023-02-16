@@ -6,7 +6,6 @@ export class FakerHeroEntityRoot extends BaseEntityRoot {
 
 }
 
-
 declare global {
     type IFakerHeroEntityRoot = FakerHeroEntityRoot;
     var GFakerHeroEntityRoot: typeof FakerHeroEntityRoot;

@@ -36,7 +36,7 @@ export class CCDebugTool_EnemyPicker extends CCPanel<ICCDebugTool_EnemyPicker> {
                                 }
                             }
                             if (this.state.filterWord != "") {
-                                if (unitName.search(new RegExp(this.state.filterWord, "gim")) == -1 && $.Localize("#DOTA_Tooltip_ability_" + unitName).search(new RegExp(this.state.filterWord, "gim")) == -1) {
+                                if (unitName.search(new RegExp(this.state.filterWord, "gim")) == -1 && $.Localize("#" + unitName).search(new RegExp(this.state.filterWord, "gim")) == -1) {
                                     return;
                                 }
                             }

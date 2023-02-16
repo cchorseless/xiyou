@@ -2,7 +2,6 @@ import { ET } from "../../../../../scripts/tscripts/shared/lib/Entity";
 import { BuildingManagerComponent } from "../Building/BuildingManagerComponent";
 import { ChessControlComponent } from "../ChessControl/ChessControlComponent";
 import { CourierBagComponent } from "../Courier/CourierBagComponent";
-import { CourierDataComponent } from "../Courier/CourierDataComponent";
 import { CourierShopComponent } from "../Courier/CourierShopComponent";
 import { DrawComponent } from "../Draw/DrawComponent";
 import { PublicShopComponent } from "../Public/PublicShopComponent";
@@ -77,8 +76,8 @@ export class PlayerEntityRoot extends ET.Entity {
     get RoundManagerComp() {
         return RoundManagerComponent.GetOneInstance(this.BelongPlayerid);
     }
-    get CourierDataComp() {
-        return CourierDataComponent.GetOneInstance(this.BelongPlayerid);
+    get CourierComp() {
+        return GCourierEntityRoot.GetOneInstance(this.BelongPlayerid);
     }
     get CourierBagComp() {
         return CourierBagComponent.GetOneInstance(this.BelongPlayerid);

@@ -90,7 +90,7 @@ export class CCChallengeShopPanel extends CCPanel<ICCChallengeShopPanel> {
                     <CCPanel flowChildren="right" horizontalAlign="center" marginTop={"10px"}>
                         {["gold", "wood", "equip", "artifact"].map((ability, index) => {
                             let abilityname = "courier_challenge_" + ability;
-                            return <CCChallengeAbilityIcon key={ability} abilityname={abilityname} />;
+                            return <CCChallengeAbilityIcon key={ability} abilityname={abilityname} />
                         })}
                     </CCPanel>
                     <CCDividerLine />

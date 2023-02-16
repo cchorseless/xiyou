@@ -1,31 +1,36 @@
 
+import { Assert_ProjectileEffect, IProjectileEffectInfo } from "../../../assert/Assert_ProjectileEffect";
+import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
 import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 import { ERoundBoard } from "../Round/ERoundBoard";
-import { FakerHeroDataComponent } from "./FakerHeroDataComponent";
 import { FHeroCombinationManagerComponent } from "./FHeroCombinationManagerComponent";
 
 export class FakerHeroEntityRoot extends BaseEntityRoot {
-
+    ProjectileInfo: IProjectileEffectInfo = Assert_ProjectileEffect.p000;
+    SpawnEffect: ISpawnEffectInfo = Assert_SpawnEffect.Effect.Spawn_fall;
 
     onAwake(playerid: PlayerID, conf: string) {
         let npc = this.GetDomain<IBaseNpc_Plus>();
         (this.BelongPlayerid as any) = playerid;
         (this.ConfigID as any) = conf;
         (this.EntityId as any) = npc.GetEntityIndex();
-        this.SyncClient(true);
-        this.AddComponent(GGetRegClass<typeof FakerHeroDataComponent>("FakerHeroDataComponent"));
         this.AddComponent(GGetRegClass<typeof FHeroCombinationManagerComponent>("FHeroCombinationManagerComponent"));
+        this.SyncClient(true);
+
     }
+    public RefreshFakerHero() {
+
+    }
+
     OnRoundStartBegin(round: ERoundBoard) {
         let player = this.GetPlayer();
         player.EnemyManagerComp().removeAllEnemy();
         this.FHeroCombinationManager().getAllActiveCombination().forEach(comb => {
             comb.removeAllCombination();
         })
-        this.FakerHeroDataComp().RefreshFakerHero();
-        round.CreateAllRoundBasicEnemy(this.FakerHeroDataComp().SpawnEffect);
+        this.RefreshFakerHero();
+        round.CreateAllRoundBasicEnemy(this.SpawnEffect);
     }
-
     OnRoundStartBattle() {
         let player = this.GetPlayer();
         player.EnemyManagerComp().getAllBattleUnitAlive().forEach(b => {
@@ -46,7 +51,6 @@ export class FakerHeroEntityRoot extends BaseEntityRoot {
             let damage = 0;
             let delay_time = 0.5;
             let aliveEnemy = player.EnemyManagerComp().getAllAliveEnemy();
-            let ProjectileInfo = this.FakerHeroDataComp().ProjectileInfo;
             aliveEnemy.forEach((b) => {
                 b.RoundStateComp().OnBoardRound_Prize_Enemy(round);
                 damage += Number(b.GetRoundBasicUnitConfig().failure_count || "0");
@@ -54,16 +58,20 @@ export class FakerHeroEntityRoot extends BaseEntityRoot {
             });
             GTimerHelper.AddTimer(
                 delay_time, GHandler.create(this, () => {
-                    player.EnemyManagerComp().ApplyDamageHero(damage, ProjectileInfo);
+                    player.EnemyManagerComp().ApplyDamageHero(damage, this.ProjectileInfo);
                 })
             );
         }
     }
+    OnRoundWaitingEnd(round: ERoundBoard) {
+        let player = this.GetPlayer();
+        player.EnemyManagerComp().getAllAliveEnemy()
+            .forEach((b) => {
+                b.RoundStateComp().OnBoardRound_WaitingEnd();
+            });
+    }
     FHeroCombinationManager() {
         return this.GetComponentByName<FHeroCombinationManagerComponent>("FHeroCombinationManagerComponent");
-    }
-    FakerHeroDataComp() {
-        return this.GetComponentByName<FakerHeroDataComponent>("FakerHeroDataComponent");
     }
 }
 declare global {

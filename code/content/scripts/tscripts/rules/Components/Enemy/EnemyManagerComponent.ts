@@ -30,13 +30,14 @@ export class EnemyManagerComponent extends ET.Component {
     addEvent() {
 
     }
+
     ApplyDamageHero(damage: number, projectileInfo: IProjectileEffectInfo) {
         if (damage > 0) {
             let hero = this.GetDomain<PlayerScene>().ETRoot.Hero;
             let heroroot = hero.ETRoot.As<ICourierEntityRoot>();
             Assert_MsgEffect.CreateNumberEffect(hero, damage, 2, Assert_MsgEffect.EMsgEffect.MSG_MISS, Assert_Color.red);
             EmitSoundOn(projectileInfo.sound, hero);
-            heroroot.CourierDataComp().ApplyDamageByEnemy(damage);
+            heroroot.ApplyDamageByEnemy(damage);
         }
     }
 
