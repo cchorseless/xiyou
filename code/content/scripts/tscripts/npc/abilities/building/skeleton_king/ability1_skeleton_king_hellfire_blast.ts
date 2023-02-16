@@ -141,7 +141,7 @@ export class ability1_skeleton_king_hellfire_blast extends ActiveRootAbility {
             let shard_point = this.GetSpecialValueFor("shard_point")
             let hModifier = caster.findBuff<modifier_skeleton_king_3>("modifier_skeleton_king_3");
             if (GameFunc.IsValid(hModifier)) {
-                hModifier.changeStackCount(shard_point)
+                hModifier.ChangeStackCount(shard_point)
             }
         }
 

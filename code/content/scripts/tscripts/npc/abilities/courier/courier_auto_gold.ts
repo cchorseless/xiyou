@@ -2,7 +2,6 @@ import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 
-// 高级抽卡
 @registerAbility()
 export class courier_auto_gold extends BaseAbility_Plus {
     GetBehavior() {

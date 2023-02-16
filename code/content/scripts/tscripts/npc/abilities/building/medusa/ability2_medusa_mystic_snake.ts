@@ -321,9 +321,9 @@ export class modifier_medusa_2_buff extends BaseModifier_Plus {
 
             let iTargetCount = params.target_count || 0
             let iValue = this.snake_agility_gain * iTargetCount
-            this.changeStackCount(iValue)
+            this.ChangeStackCount(iValue)
             GTimerHelper.AddTimer(params.duration, GHandler.create(this, () => {
-                this.changeStackCount(-iValue)
+                this.ChangeStackCount(-iValue)
             }))
         }
     }
@@ -361,9 +361,9 @@ export class modifier_medusa_2_mana extends BaseModifier_Plus {
     Init(params: IModifierTable) {
         if (IsServer()) {
             let fMana = (params.overflow_mana || 0)
-            this.changeStackCount(fMana)
+            this.ChangeStackCount(fMana)
             GTimerHelper.AddTimer(params.duration, GHandler.create(this, () => {
-                this.changeStackCount(-fMana)
+                this.ChangeStackCount(-fMana)
             }))
         }
     }

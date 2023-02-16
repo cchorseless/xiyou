@@ -107,7 +107,7 @@ export class modifier_dragon_knight_3_buff extends BaseModifier_Plus {
         let iStackCount = this.GetStackCount()
         if (IsServer()) {
             this.SetStackCount(0)
-            this.changeStackCount((params.count || 0))
+            this.ChangeStackCount((params.count || 0))
         }
     }
 

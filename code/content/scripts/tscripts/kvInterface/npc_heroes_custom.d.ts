@@ -5,7 +5,7 @@ declare namespace npc_heroes_custom {
 }
  interface OBJ_1_1 {
 "Version" :string ,
-"npc_dota_hero_phoenix" :OBJ_2_1 ,
+"npc_dota_hero_wisp" :OBJ_2_1 ,
 [k:string] : string | OBJ_2_1 }
  interface OBJ_2_1 {
 "override_hero" :string ,

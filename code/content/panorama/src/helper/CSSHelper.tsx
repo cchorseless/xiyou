@@ -878,16 +878,133 @@ export module CSSHelper {
 
         zIndex,
     }
+    // 海蓝#70DB93 土灰玫瑰红色 #856363 中石板蓝色 #7F00FF 
 
-    export enum enumColor {
+    // 巧克力色 #5C3317 长石色 #D19275 中春绿色 #7FFF00 天蓝 #3299CC
+
+    // 蓝紫色 #9F5F9F  中绿松石色 #70DBDB 石板蓝 #007FFF
+
+    // 黄铜色 #B5A642 森林绿 #238E23 中紫红色 #DB7093 艳粉红色 #FF1CAE
+
+    //   中木色 #A68064 春绿色 #00FF7F
+
+    // 棕色#A67D3D 鲜黄色 #DBDB70  钢蓝色 #236B8E
+
+    // 青铜色 #8C7853 灰色 #C0C0C0 海军蓝 #23238E 亮天蓝色 #38B0DE
+
+    // 2号青铜色 #A67D3D 铜绿色 #527F76 霓虹篮 #4D4DFF 棕褐色 #DB9370
+
+    // 士官服蓝色 #5F9F9F 青黄色 #93DB70 霓虹粉红 #FF6EC7 紫红色 #D8BFD8
+
+    // 冷铜色 #D98719 新深藏青色 #00009C 石板蓝色 #ADEAEA
+
+    // 铜色#B87333 印度红 #4E2F2F 新棕褐色 #EBC79E 浓深棕色 #5C4033
+
+    // 珊瑚红 #FF7F00 土黄色 #9F9F5F  淡浅灰色 #CDCDCD
+
+    //  浅蓝色 #C0D9D9 橙色 #FF7F00 紫罗兰色 #4F2F4F
+
+    //  浅灰色 #A8A8A8 橙红色 #FF2400 
+    export enum EColor {
         White = "#FFFFFFFF",
         Red = "#ff0000FF",
         Green = "#00ff00FF",
         Blue = "#00ffffFF",
         Purple = "#990099FF",
         Yellow = "#ffff00FF",
+        /**金色 */
+        Gold = "#CD7F32",
+        /**深紫色 */
+        color1 = "#871F78",
+        /**深兰花色 */
+        color2 = "#9932CD",
+        /**桔黄色 */
+        color3 = "#E47833",
+        /**李子色 */
+        color4 = "#EAADEA",
+        /**深橄榄绿 */
+        color5 = "#4F4F2F",
+        /**石灰绿色 */
+        color6 = "#32CD32",
+        /**粉红色 */
+        color7 = "#BC8F8F",
+        /**深铜绿色 */
+        color8 = "#4A766E",
+        /**浅木色 */
+        color9 = "#E9C2A6",
+        /**黄绿色 */
+        color10 = "#99CC32",
+        /**深绿 */
+        color11 = "#2F4F2F",
+        /**浅钢蓝色 */
+        color12 = "#8F8FBD",
+        /**淡紫色 */
+        color13 = "#DB70DB",
+        /**麦黄色 */
+        color14 = "#D8D8BF",
+        /**猎人绿 */
+        color15 = "#215E21",
+        /**深棕 */
+        color16 = "#5C4033",
+        /**珊瑚红 */
+        color17 = "#FF7F00",
+        /**暗金黄色 */
+        color18 = "#CFB53B",
+        /**紫罗兰红色 */
+        color19 = "#CC3299",
+        /**银色 */
+        color20 = "#E6E8FA",
+        /**火砖色 */
+        color21 = "#D19275",
+        /**亮金色 */
+        color22 = "#D9D919",
+        /**深藏青色 */
+        color23 = "#2F2F4F",
+        /**赭色 */
+        color24 = "#8E6B23",
+        /**淡灰色 */
+        color25 = "#545454",
+        /**半甜巧克力色 */
+        color26 = "#6B4226",
+        /**中兰花色 */
+        color27 = "#9370DB",
+        /**暗木色 */
+        color28 = "#855E42",
+        /**海绿色 */
+        color29 = "#238E68",
+        /**中鲜黄色 */
+        color30 = "#EAEAAE",
+        /**深绿松石色 */
+        color31 = "#7093DB",
+        /**青色 */
+        color32 = "#00FFFF",
+        /**猩红色 */
+        color33 = "#BC1717",
+        /**中森林绿 */
+        color34 = "#6B8E23",
+        /**深棕褐色 */
+        color35 = "#97694F",
+        /**牡丹红 */
+        color36 = "#FF00FF",
+        /**鲑鱼色 */
+        color37 = "#6F4242",
+        /**中蓝色 */
+        color38 = "#3232CD",
+        /**深铅灰色 */
+        color39 = "#2F4F4F",
+        /**艳蓝色 */
+        color40 = "#5959AB",
+        /**中海蓝色 */
+        color41 = "#32CD99",
+        /**石英色 */
+        color43 = "#D9D9F3",
+        /**褐红色 */
+        color44 = "#8E236B",
     }
-    export enum enumColorDes {
+
+    export const EColorList = Object.keys(EColor);
+
+    export enum EColorDes {
         White = "white",
         Red = "red",
         Green = "green",
@@ -1023,7 +1140,7 @@ export module CSSHelper {
      * @param color
      * @returns
      */
-    export function addBorderStyle(panel: Panel, color: enumColor = enumColor.White) {
+    export function addBorderStyle(panel: Panel, color: EColor = EColor.White) {
         if (panel == null || !panel.IsValid()) {
             return;
         }
@@ -1043,7 +1160,7 @@ export module CSSHelper {
 
     export namespace HtmlTxt {
         interface HtmlTxtStyle {
-            color?: enumColorDes;
+            color?: EColorDes;
             fontSize?: number;
         }
         export function createHtmlTxt(string: string, style: HtmlTxtStyle | null = null) {

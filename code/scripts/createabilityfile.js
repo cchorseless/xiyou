@@ -211,31 +211,28 @@ function unitbuildingCreate(type) {
     let kv_s = fs.readFileSync(building_unit_path, "utf8");
     let obj = keyvalues.decode(kv_s);
     let info = obj.building_unit_tower;
+    let basecls = "Building_BaseNpc";
     if (type == 1) {
         info = obj.building_unit_enemy;
+     basecls = "BuildingEnemy_BaseNpc";
     }
 
     const unit_file_str = `
-    import { PrecacheHelper } from "../../../../helper/PrecacheHelper";
-    import { BaseNpc_Plus } from "../../../entityPlus/BaseNpc_Plus";
     import { registerUnit } from "../../../entityPlus/Base_Plus";
+    import { ${basecls} } from "../${basecls}";
     
     @registerUnit()
-    export class $1 extends BaseNpc_Plus {
-        Spawn(entityKeyValues: CScriptKeyValues) {
-            // PrecacheHelper.precachResByKV(entityKeyValues);
-        }
-        onSpawned(event: NpcSpawnedEvent) {
-        }
+    export class $1 extends ${basecls} {
     }
     `;
     if (!fs.existsSync(building_unit_ts_path)) fs.mkdirSync(building_unit_ts_path);
     // let txt_itemname = '';
+    const forcecover = true;
     for (let k in info) {
         let _item_file_name = k;
         let unit_file_path = building_unit_ts_path + "/" + _item_file_name + ".ts";
         // txt_itemname += k + '\n';
-        if (!fs.existsSync(unit_file_path)) {
+        if (forcecover||!fs.existsSync(unit_file_path)) {
             let str_1 = unit_file_str.replace(/\$1/g, _item_file_name);
             // str_1 = str_1.replace('$0', JSON.stringify(info[k] || {}));
             // str_1 = str_1.replace('$3', k);

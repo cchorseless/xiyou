@@ -94,7 +94,7 @@ export class modifier_mirana_3 extends BaseModifier_Plus {
         hAttacker = hAttacker.GetSource()
         if (hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion()) {
             let factor = params.unit.IsConsideredHero() && 5 || 1
-            this.changeStackCount(factor * this.count_per_kill)
+            this.ChangeStackCount(factor * this.count_per_kill)
             if (!modifier_mirana_3_buff.exist(hAttacker) && this.GetStackCount() >= this.max_kills) {
                 modifier_mirana_3_buff.apply(hAttacker, hAttacker, this.GetAbilityPlus(), null)
             }

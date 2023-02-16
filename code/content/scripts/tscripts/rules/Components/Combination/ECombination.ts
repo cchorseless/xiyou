@@ -20,6 +20,8 @@ export class ECombination extends ET.Entity {
     @serializeETProps()
     public uniqueConfigList: string[] = [];
 
+
+
     onAwake(CombinationId: string): void {
         this.combinationId = CombinationId;
         this.AddComponent(GGetRegClass<typeof CombEffectComponent>("CombEffectComponent"));
@@ -84,6 +86,8 @@ export class ECombination extends ET.Entity {
         }
         return r;
     }
+
+
 
     addCombination(entity: ECombinationLabelItem) {
         let c = entity.SourceEntityConfigId;

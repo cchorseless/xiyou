@@ -334,9 +334,9 @@ export module GameFunc {
          * @param count 数量
          * @param isRepeat 是否重复
          */
-        export function RandomArray<T>(arr: Array<T>, count: number = 1, isRepeat: boolean = false) {
+        export function RandomArray<T>(arr: Array<T>, count: number = 1, isRepeat: boolean = false): T[] {
             let len = arr.length;
-            count = math.min(count, len);
+            count = Math.min(count, len);
             let r: T[] = [];
             if (count <= 0) {
                 return r;
@@ -372,7 +372,7 @@ export module GameFunc {
          * @param weight
          * @param count
          */
-        export function RandomArrayByWeight<T>(arr: Array<T>, weight: Array<number | string>, count: number = 1) {
+        export function RandomArrayByWeight<T>(arr: Array<T>, weight: Array<number | string>, count: number = 1): T[] {
             let _arr = [].concat(arr);
             let _weight: number[] = [];
             weight.forEach((v) => {
@@ -394,7 +394,7 @@ export module GameFunc {
                 }
                 he += math.abs(_k);
             }
-            let r = [];
+            let r: T[] = [];
             while (he > 0 && _count > 0) {
                 _count -= 1;
                 let _rand = RandomInt(1, he);

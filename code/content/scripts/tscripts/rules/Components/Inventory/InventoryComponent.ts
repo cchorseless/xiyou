@@ -157,7 +157,7 @@ export class InventoryComponent extends ET.Component {
             let itemroot = battleunit.GetDomainChild<IItemEntityRoot>(str);
             if (itemroot) {
                 let item = itemroot.GetDomain<IBaseItem_Plus>()
-                if (item.IsItemReady()) {
+                if (item.IsAbilityReady()) {
                     r.push(item)
                 }
             }

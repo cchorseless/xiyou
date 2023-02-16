@@ -89,9 +89,14 @@ export class CCCombinationInfoDialog extends CCPanel<ICCCombinationInfoDialog> {
                             })
                             let commoneffect = _config.acitveCommonEffect;
                             let Specialeffect = _config.acitveSpecialEffect;
+                            let activeNeedCount = _config.activeCount;
+                            const len = allcombs.length;
+                            if (len > 0) {
+                                activeNeedCount = allcombs[len - 1 - index].activeNeedCount;
+                            }
                             return (
                                 <CCPanel key={"" + index} className={CSSHelper.ClassMaker('InfoContent', { 'Active': isactive })} flowChildren="right">
-                                    <Label className={CSSHelper.ClassMaker('InfoHeader', { 'Active': isactive })} text={`(${_config.activeCount})`} html={true} />
+                                    <Label className={CSSHelper.ClassMaker('InfoHeader', { 'Active': isactive })} text={`(${activeNeedCount})`} html={true} />
                                     <CCPanel key={"" + index} marginLeft="5px" flowChildren="down" minHeight={"30px"}>
                                         {
                                             commoneffect.length > 0 && <Label key={commoneffect} html={true} className={CSSHelper.ClassMaker('InfoDes', { 'Active': isactive })}

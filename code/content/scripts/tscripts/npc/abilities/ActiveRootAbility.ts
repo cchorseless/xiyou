@@ -6,9 +6,7 @@ export class ActiveRootAbility extends BaseAbility_Plus {
     ETRoot: IAbilityEntityRoot = null;
     constructor() {
         super();
-        if (IsServer()) {
-            AbilityEntityRoot.Active(this);
-        }
+        AbilityEntityRoot.TryToActive(this);
     }
     IsOwnersManaEnough() {
         return super.IsOwnersManaEnough() && this.ETRoot.isManaEnoughForActive();

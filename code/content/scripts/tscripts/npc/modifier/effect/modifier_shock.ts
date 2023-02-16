@@ -63,9 +63,9 @@ export class modifier_shock extends BaseModifier_Plus {
             let iShockStack = params.iShockStack;
             let duration = params.duration || modifier_shock.SHOCK_DURATION;
             GTimerHelper.AddTimer(duration, GHandler.create(this, () => {
-                this.changeStackCount(-iShockStack);
+                this.ChangeStackCount(-iShockStack);
             }))
-            this.changeStackCount(iShockStack);
+            this.ChangeStackCount(iShockStack);
         }
     }
 

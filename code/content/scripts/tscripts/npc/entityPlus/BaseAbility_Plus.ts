@@ -21,9 +21,7 @@ export class BaseAbility_Plus extends BaseAbility {
             // this.ToggleAutoCast()
         }
     }
-    public IsHiddenWhenStolen() {
-        return false
-    }
+
     public GetPlayer() {
         let caster = this.GetCaster()
         if (caster) {
@@ -46,68 +44,55 @@ export class BaseAbility_Plus extends BaseAbility {
     /**技能ICON */
     public GetAbilityTextureName(): string {
         let iconpath = super.GetAbilityTextureName();
-        if (iconpath == null || iconpath == this.constructor.name) {
+        if (iconpath == null || iconpath == this.GetAbilityName()) {
             iconpath = this.__IN_DOTA_NAME__;
         }
         return ResHelper.GetAbilityTextureReplacement(iconpath, this.GetCaster())
     }
 
-    /**
-     * 技能施法可以释放
-     * @returns
-     */
-    public IsAbilityReady(): boolean {
-        let hCaster = this.GetCaster()
-        let iBehavior = this.GetBehaviorInt()
-        if (this.IsHidden()) {
-            return false
-        }
-        if (!hCaster) {
-            return false
-        }
-        if (!(this.IsFullyCastable() && this.IsActivated() && this.IsCooldownReady() && this.GetLevel() > 0 && this.IsOwnersManaEnough())) {
-            return false
-        }
-        if (hCaster.IsHexed() || hCaster.IsCommandRestricted()) {
-            return false
-        }
-        // 被控是否可以施法
-        if (hCaster.IsStunned() && !GameFunc.IncludeArgs(iBehavior, DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE)[0]) {
-            return false
-        }
-        if (hCaster.IsChanneling() && !GameFunc.IncludeArgs(iBehavior, DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL)[0]) {
-            return false
-        }
-        if (IsServer()) {
-            if (hCaster.IsSilenced()) {
-                return false
-            }
-        }
-        else {
-            if (!this.IsPassive() && hCaster.IsSilenced()) {
-                return false
-            }
-            if (this.IsPassive() && hCaster.PassivesDisabled()) {
-                return false
-            }
-        }
-        return true
+    // /**
+    //  * 技能施法可以释放
+    //  * @returns
+    //  */
+    // public IsAbilityReady(): boolean {
+    //     let hCaster = this.GetCaster()
+    //     let iBehavior = this.GetBehaviorInt()
+    //     if (this.IsHidden()) {
+    //         return false
+    //     }
+    //     if (!hCaster) {
+    //         return false
+    //     }
+    //     if (!(this.IsFullyCastable() && this.IsActivated() && this.IsCooldownReady() && this.GetLevel() > 0 && this.IsOwnersManaEnough())) {
+    //         return false
+    //     }
+    //     if (hCaster.IsHexed() || hCaster.IsCommandRestricted()) {
+    //         return false
+    //     }
+    //     // 被控是否可以施法
+    //     if (hCaster.IsStunned() && !GameFunc.IncludeArgs(iBehavior, DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE)[0]) {
+    //         return false
+    //     }
+    //     if (hCaster.IsChanneling() && !GameFunc.IncludeArgs(iBehavior, DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL)[0]) {
+    //         return false
+    //     }
+    //     if (IsServer()) {
+    //         if (hCaster.IsSilenced()) {
+    //             return false
+    //         }
+    //     }
+    //     else {
+    //         if (!this.IsPassive() && hCaster.IsSilenced()) {
+    //             return false
+    //         }
+    //         if (this.IsPassive() && hCaster.PassivesDisabled()) {
+    //             return false
+    //         }
+    //     }
+    //     return true
 
-    }
-    /**
-     * @both
-     * @returns 
-     */
-    public GetCasterPlus() {
-        return this.GetCaster() as IBaseNpc_Plus
-    }
-    /**
-     * @server
-     * @returns 
-     */
-    public GetOwnerPlus() {
-        return this.GetOwner() as IBaseNpc_Plus
-    }
+    // }
+
     /**
      * 自动施法后，调AI
      */
@@ -145,10 +130,6 @@ export class BaseAbility_Plus extends BaseAbility {
 
         }
     }
-
-
-    /**尝试智能施法,AI会调用 */
-    public AutoSpellSelf(): boolean { return true };
 
     /**
      * 释放技能

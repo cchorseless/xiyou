@@ -1,6 +1,2871 @@
 [
   {
-    "effectid": "modifier_phyarm_up_base_3",
+    "effectid": "modifier_sect_archer_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_ancient_apparition_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_ancient_apparition_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_clinkz_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_clinkz_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_dark_willow_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_dark_willow_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_drow_ranger_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_drow_ranger_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_enchantress_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_enchantress_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_furion_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_furion_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_gyrocopter_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_gyrocopter_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_hoodwink_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_hoodwink_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_medusa_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_medusa_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_mirana_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_mirana_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_morphling_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_morphling_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_snapfire_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_snapfire_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_sniper_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_sniper_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_windrunner_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_archer_windrunner_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_centaur_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_centaur_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_earth_spirit_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_earth_spirit_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_magnataur_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_magnataur_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_marci_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_marci_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_phantom_lancer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_phantom_lancer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_primal_beast_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_primal_beast_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_slark_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_slark_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_snapfire_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_snapfire_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_spirit_breaker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_spirit_breaker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_tusk_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_tusk_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_ursa_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_assault_ursa_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_beastmaster_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_beastmaster_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_bloodseeker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_bloodseeker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_dark_willow_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_dark_willow_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_enchantress_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_enchantress_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_huskar_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_huskar_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_invoker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_invoker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_legion_commander_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_legion_commander_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_life_stealer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_life_stealer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_lina_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_lina_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_lone_druid_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_lone_druid_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_ogre_magi_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_ogre_magi_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_troll_warlord_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_troll_warlord_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_visage_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_visage_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_wisp_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_atkspeed_wisp_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_chen_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_chen_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_enchantress_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_enchantress_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_medusa_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_medusa_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_naga_siren_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_naga_siren_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_pugna_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_pugna_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_rubick_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_rubick_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_shadow_shaman_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_shadow_shaman_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_warlock_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_black_art_warlock_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_antimage_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_antimage_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_dawnbreaker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_dawnbreaker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_faceless_void_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_faceless_void_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_furion_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_furion_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_mirana_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_mirana_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_morphling_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_morphling_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_phantom_assassin_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_phantom_assassin_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_phoenix_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_phoenix_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_rattletrap_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_rattletrap_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_riki_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_riki_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_shredder_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_shredder_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_vengefulspirit_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_blink_vengefulspirit_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_antimage_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_antimage_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_bane_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_bane_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_crystal_maiden_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_crystal_maiden_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_invoker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_invoker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_keeper_of_the_light_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_keeper_of_the_light_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_lich_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_lich_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_lion_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_lion_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_nyx_assassin_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_nyx_assassin_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_obsidian_destroyer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cabala_obsidian_destroyer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_base_1",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_base_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_clinkz_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_clinkz_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_doom_bringer_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_doom_bringer_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_life_stealer_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_life_stealer_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_pudge_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_pudge_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_snapfire_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cannibalism_snapfire_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_dazzle_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_dazzle_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_elder_titan_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_elder_titan_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_mars_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_mars_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_mirana_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_mirana_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_necrolyte_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_necrolyte_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_obsidian_destroyer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_obsidian_destroyer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_oracle_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_oracle_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_tinker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_tinker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_zeus_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cd_down_zeus_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_faceless_void_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_faceless_void_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_kunkka_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_kunkka_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_luna_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_luna_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_magnataur_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_magnataur_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_medusa_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_medusa_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_sven_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_sven_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_templar_assassin_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_templar_assassin_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_void_spirit_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_void_spirit_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_weaver_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_cleave_weaver_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_base_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_base_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_beastmaster_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_beastmaster_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_centaur_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_centaur_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_earthshaker_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_earthshaker_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_grimstroke_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_grimstroke_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_invoker_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_invoker_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_kunkka_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_kunkka_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_magnataur_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_magnataur_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_nyx_assassin_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_nyx_assassin_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_primal_beast_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_primal_beast_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_sandking_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_sandking_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_slardar_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_slardar_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_sven_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_sven_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_tidehunter_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_tidehunter_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_tiny_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_tiny_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_windrunner_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_windrunner_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_witch_doctor_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_control_witch_doctor_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_antimage_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_antimage_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_arc_warden_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_arc_warden_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_chaos_knight_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_chaos_knight_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_dark_seer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_dark_seer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_meepo_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_meepo_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_naga_siren_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_naga_siren_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_phantom_lancer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_phantom_lancer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_shadow_demon_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_shadow_demon_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_spectre_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_spectre_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_terrorblade_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_copy_terrorblade_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_abyssal_underlord_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_abyssal_underlord_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_bloodseeker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_bloodseeker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_chaos_knight_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_chaos_knight_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_doom_bringer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_doom_bringer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_enigma_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_enigma_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_leshrac_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_leshrac_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_lion_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_lion_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_nevermore_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_nevermore_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_night_stalker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_night_stalker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_obsidian_destroyer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_obsidian_destroyer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_queenofpain_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_queenofpain_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_shadow_demon_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_shadow_demon_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_terrorblade_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_demon_terrorblade_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_bane_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_bane_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_dark_willow_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_dark_willow_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_huskar_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_huskar_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_kunkka_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_kunkka_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_lone_druid_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_lone_druid_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_nevermore_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_nevermore_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_night_stalker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_night_stalker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_pangolier_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_pangolier_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_sniper_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_sniper_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_techies_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_techies_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_terrorblade_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_terrorblade_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_tiny_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_tiny_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_viper_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_disarm_viper_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_double_head_alchemist_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_double_head_alchemist_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_double_head_base_1",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_double_head_base_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_double_head_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_double_head_jakiro_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_double_head_jakiro_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_double_head_ogre_magi_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_double_head_ogre_magi_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_double_head_techies_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_double_head_techies_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_base_1",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_base_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_brewmaster_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_brewmaster_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_earth_spirit_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_earth_spirit_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_ember_spirit_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_ember_spirit_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_storm_spirit_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_storm_spirit_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_void_spirit_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_fish_chess_void_spirit_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_abyssal_underlord_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_abyssal_underlord_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_brewmaster_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_brewmaster_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_dragon_knight_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_dragon_knight_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_ember_spirit_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_ember_spirit_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_invoker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_invoker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_jakiro_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_jakiro_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_lina_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_lina_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_ogre_magi_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_ogre_magi_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_phoenix_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_phoenix_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_shredder_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_shredder_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_skeleton_king_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_flame_skeleton_king_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_abaddon_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_abaddon_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_clinkz_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_clinkz_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_death_prophet_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_death_prophet_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_lich_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_lich_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_necrolyte_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_necrolyte_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_pugna_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_pugna_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_skeleton_king_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_skeleton_king_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_undying_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_undying_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_vengefulspirit_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_vengefulspirit_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_visage_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ghost_visage_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_abaddon_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_abaddon_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_bloodseeker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_bloodseeker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_centaur_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_centaur_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_dazzle_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_dazzle_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_huskar_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_huskar_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_necrolyte_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_necrolyte_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_pudge_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_pudge_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_slark_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_slark_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_terrorblade_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_health_terrorblade_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_ancient_apparition_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_ancient_apparition_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_base_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_base_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_crystal_maiden_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_crystal_maiden_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_drow_ranger_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_drow_ranger_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_invoker_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_invoker_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_jakiro_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_jakiro_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_lich_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_lich_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_tusk_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_tusk_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_winter_wyvern_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_ice_winter_wyvern_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_base_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_gyrocopter_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_gyrocopter_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_rattletrap_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_rattletrap_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_shredder_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_shredder_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_sniper_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_sniper_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_techies_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_techies_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_tinker_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_invent_tinker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_base_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_dawnbreaker_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_dawnbreaker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_keeper_of_the_light_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_keeper_of_the_light_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_lina_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_lina_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_luna_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_luna_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_omniknight_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_omniknight_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_skywrath_mage_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_skywrath_mage_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_zeus_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_light_zeus_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_antimage_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_antimage_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_base_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_omniknight_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_omniknight_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_oracle_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_oracle_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_razor_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_razor_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_spirit_breaker_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_spirit_breaker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_viper_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magarm_up_viper_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_base_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_base_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_disruptor_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_disruptor_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_grimstroke_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_grimstroke_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_invoker_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_invoker_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_keeper_of_the_light_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_keeper_of_the_light_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_leshrac_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_leshrac_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_lina_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_lina_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_lion_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_lion_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_ogre_magi_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_ogre_magi_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_puck_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_puck_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_pugna_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_pugna_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_queenofpain_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_queenofpain_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_razor_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_razor_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_rubick_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_rubick_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_shadow_shaman_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_shadow_shaman_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_skywrath_mage_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_skywrath_mage_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_storm_spirit_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_storm_spirit_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_zeus_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_magic_zeus_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_arc_warden_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_arc_warden_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_brewmaster_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_brewmaster_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_broodmother_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_broodmother_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_hoodwink_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_hoodwink_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_keeper_of_the_light_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_keeper_of_the_light_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_phantom_assassin_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_phantom_assassin_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_riki_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_riki_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_tinker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_tinker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_windrunner_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_miss_windrunner_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_alchemist_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_alchemist_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_bristleback_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_bristleback_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_chaos_knight_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_chaos_knight_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_dazzle_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_dazzle_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_elder_titan_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_elder_titan_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_lycan_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_lycan_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_naga_siren_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_naga_siren_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_nevermore_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_nevermore_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_razor_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_razor_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_slardar_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_slardar_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_snapfire_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_snapfire_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_tidehunter_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_tidehunter_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_vengefulspirit_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_vengefulspirit_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_weaver_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_down_weaver_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phyarm_up_base_3",
     "target": "team",
     "propinfo": [
       [
@@ -10,7 +2875,7 @@
     ]
   },
   {
-    "effectid": "modifier_phyarm_up_base_6",
+    "effectid": "modifier_sect_phyarm_up_base_6",
     "target": "team",
     "propinfo": [
       [
@@ -20,7 +2885,7 @@
     ]
   },
   {
-    "effectid": "modifier_phyarm_up_base_9",
+    "effectid": "modifier_sect_phyarm_up_base_9",
     "target": "team",
     "propinfo": [
       [
@@ -34,123 +2899,2078 @@
     ]
   },
   {
-    "effectid": "modifier_phyarm_up_hero_ursa_6",
+    "effectid": "modifier_sect_phyarm_up_axe_6",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_ursa_9",
+    "effectid": "modifier_sect_phyarm_up_axe_9",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_kunkka_6",
+    "effectid": "modifier_sect_phyarm_up_chen_6",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_kunkka_9",
+    "effectid": "modifier_sect_phyarm_up_chen_9",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_tusk_6",
+    "effectid": "modifier_sect_phyarm_up_dragon_knight_6",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_tusk_9",
+    "effectid": "modifier_sect_phyarm_up_dragon_knight_9",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_axe_6",
+    "effectid": "modifier_sect_phyarm_up_elder_titan_6",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_axe_9",
+    "effectid": "modifier_sect_phyarm_up_elder_titan_9",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_juggernaut_6",
+    "effectid": "modifier_sect_phyarm_up_monkey_king_6",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_juggernaut_9",
+    "effectid": "modifier_sect_phyarm_up_monkey_king_9",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_troll_warlord_6",
+    "effectid": "modifier_sect_phyarm_up_primal_beast_6",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_troll_warlord_9",
+    "effectid": "modifier_sect_phyarm_up_primal_beast_9",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_slardar_6",
+    "effectid": "modifier_sect_phyarm_up_shredder_6",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_slardar_9",
+    "effectid": "modifier_sect_phyarm_up_shredder_9",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_sven_6",
+    "effectid": "modifier_sect_phyarm_up_slardar_6",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_sven_9",
+    "effectid": "modifier_sect_phyarm_up_slardar_9",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_mars_6",
+    "effectid": "modifier_sect_phyarm_up_sven_6",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_mars_9",
+    "effectid": "modifier_sect_phyarm_up_sven_9",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_primal_beast_6",
+    "effectid": "modifier_sect_phyarm_up_tiny_6",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_primal_beast_9",
+    "effectid": "modifier_sect_phyarm_up_tiny_9",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_skeleton_king_6",
+    "effectid": "modifier_sect_phyarm_up_treant_6",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_skeleton_king_9",
+    "effectid": "modifier_sect_phyarm_up_treant_9",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_pudge_6",
+    "effectid": "modifier_sect_phyarm_up_troll_warlord_6",
     "target": "team",
     "propinfo": []
   },
   {
-    "effectid": "modifier_phyarm_up_hero_pudge_9",
+    "effectid": "modifier_sect_phyarm_up_troll_warlord_9",
     "target": "team",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_chaos_knight_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_chaos_knight_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_dawnbreaker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_dawnbreaker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_juggernaut_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_juggernaut_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_mars_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_mars_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_monkey_king_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_monkey_king_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_nyx_assassin_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_nyx_assassin_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_pangolier_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_pangolier_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_phantom_assassin_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_phantom_assassin_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_skeleton_king_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_skeleton_king_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_slardar_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_slardar_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_sniper_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_sniper_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_spirit_breaker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_spirit_breaker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_tusk_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_phycrit_tusk_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_dazzle_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_dazzle_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_pudge_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_pudge_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_queenofpain_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_queenofpain_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_sandking_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_sandking_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_shadow_demon_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_shadow_demon_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_venomancer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_venomancer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_viper_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_viper_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_witch_doctor_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_poision_witch_doctor_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_bloodseeker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_bloodseeker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_death_prophet_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_death_prophet_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_disruptor_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_disruptor_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_doom_bringer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_doom_bringer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_drow_ranger_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_drow_ranger_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_earth_spirit_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_earth_spirit_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_puck_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_puck_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_silencer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_silencer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_skywrath_mage_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_scilence_skywrath_mage_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_clinkz_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_clinkz_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_drow_ranger_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_drow_ranger_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_juggernaut_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_juggernaut_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_marci_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_marci_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_snapfire_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_snapfire_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_ursa_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_ursa_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_windrunner_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_seckill_windrunner_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_base_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_base_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_bristleback_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_bristleback_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_dark_seer_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_dark_seer_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_ember_spirit_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_ember_spirit_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_lich_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_lich_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_mars_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_mars_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_medusa_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_medusa_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_ogre_magi_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_ogre_magi_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_omniknight_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_omniknight_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_pangolier_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_pangolier_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_skywrath_mage_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_skywrath_mage_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_templar_assassin_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_templar_assassin_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_tidehunter_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_tidehunter_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_tinker_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_tinker_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_visage_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_visage_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_void_spirit_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_shield_void_spirit_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_alchemist_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_alchemist_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_bounty_hunter_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_bounty_hunter_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_obsidian_destroyer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_obsidian_destroyer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_razor_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_razor_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_rubick_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_rubick_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_silencer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_silencer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_slark_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_slark_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_undying_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_steal_undying_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_bane_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_bane_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_broodmother_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_broodmother_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_chaos_knight_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_chaos_knight_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_death_prophet_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_death_prophet_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_legion_commander_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_legion_commander_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_life_stealer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_life_stealer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_marci_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_marci_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_meepo_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_meepo_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_monkey_king_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_monkey_king_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_pugna_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_pugna_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_shadow_shaman_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_shadow_shaman_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_skeleton_king_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_skeleton_king_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_troll_warlord_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_suck_blood_troll_warlord_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_keeper_of_the_light_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_keeper_of_the_light_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_arc_warden_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_arc_warden_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_base_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_base_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_beastmaster_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_beastmaster_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_broodmother_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_broodmother_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_earth_spirit_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_earth_spirit_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_furion_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_furion_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_grimstroke_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_grimstroke_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_gyrocopter_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_gyrocopter_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_invoker_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_invoker_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_lone_druid_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_lone_druid_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_lycan_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_lycan_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_shadow_shaman_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_shadow_shaman_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_tusk_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_tusk_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_venomancer_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_venomancer_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_warlock_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_warlock_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_witch_doctor_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_witch_doctor_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_zeus_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_summon_zeus_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_treant_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_treant_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_abyssal_underlord_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_abyssal_underlord_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_base_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_base_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_broodmother_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_broodmother_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_dark_willow_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_dark_willow_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_disruptor_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_disruptor_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_earthshaker_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_earthshaker_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_elder_titan_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_elder_titan_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_enigma_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_enigma_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_furion_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_furion_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_leshrac_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_leshrac_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_mars_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_mars_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_nyx_assassin_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_nyx_assassin_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_rattletrap_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_rattletrap_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_sandking_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_sandking_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_templar_assassin_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_templar_assassin_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_warlock_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_territory_warlock_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_abaddon_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_abaddon_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_axe_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_axe_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_base_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_base_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_bristleback_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_bristleback_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_centaur_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_centaur_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_nyx_assassin_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_nyx_assassin_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_rattletrap_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_rattletrap_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_spectre_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_spectre_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_visage_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_thorns_visage_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_alchemist_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_alchemist_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_brewmaster_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_brewmaster_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_dragon_knight_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_dragon_knight_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_keeper_of_the_light_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_keeper_of_the_light_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_lone_druid_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_lone_druid_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_lycan_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_lycan_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_night_stalker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_night_stalker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_pangolier_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_pangolier_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_phoenix_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_phoenix_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_sven_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_sven_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_terrorblade_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_terrorblade_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_undying_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_undying_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_ursa_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_ursa_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_witch_doctor_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_transform_witch_doctor_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_abaddon_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_abaddon_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_base_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_base_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_chen_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_chen_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_dazzle_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_dazzle_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_enchantress_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_enchantress_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_juggernaut_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_juggernaut_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_necrolyte_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_necrolyte_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_omniknight_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_omniknight_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_oracle_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_oracle_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_phoenix_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_phoenix_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_treant_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_treant_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_undying_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_undying_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_warlock_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_warlock_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_winter_wyvern_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_winter_wyvern_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_witch_doctor_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_treatment_witch_doctor_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_antimage_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_antimage_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_base_2",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_dark_seer_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_dark_seer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_enigma_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_enigma_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_faceless_void_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_faceless_void_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_night_stalker_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_night_stalker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_void_spirit_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_vanity_void_spirit_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_abyssal_underlord_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_abyssal_underlord_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_base_3",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_base_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_base_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_bristleback_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_bristleback_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_earthshaker_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_earthshaker_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_legion_commander_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_legion_commander_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_life_stealer_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_life_stealer_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_luna_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_luna_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_lycan_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_lycan_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_omniknight_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_omniknight_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_spectre_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_spectre_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_tidehunter_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_tidehunter_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_ursa_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_ursa_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_vengefulspirit_6",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_warpath_vengefulspirit_9",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_axe_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_axe_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_base_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_base_4",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_base_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_beastmaster_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_beastmaster_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_bounty_hunter_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_bounty_hunter_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_dawnbreaker_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_dawnbreaker_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_doom_bringer_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_doom_bringer_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_juggernaut_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_juggernaut_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_legion_commander_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_legion_commander_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_phantom_assassin_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_phantom_assassin_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_pudge_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_pudge_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_riki_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_riki_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_shredder_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_shredder_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_spectre_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_spectre_8",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_troll_warlord_12",
+    "target": "",
+    "propinfo": []
+  },
+  {
+    "effectid": "modifier_sect_weapon_troll_warlord_8",
+    "target": "",
     "propinfo": []
   }
 ]

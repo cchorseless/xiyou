@@ -1,114 +1,10 @@
 
 import { GameFunc } from "../../GameFunc";
-import { modifier_hero_property } from "../propertystat/modifier_hero_property";
-import { PropertyCalculate } from "../propertystat/PropertyCalculate";
 import { BaseItem_Plus } from "./BaseItem_Plus";
 import { BaseNpc } from "./Base_Plus";
 /**普通NPC单位基类 */
 export class BaseNpc_Plus extends BaseNpc {
 
-    /**
-     *
-     * @param v
-     * @param team
-     * @param creater 创建者
-     * @param findClearSpace
-     * @param npcOwner
-     * @param entityOwner
-     * @returns
-     */
-    static CreateOne<T extends typeof BaseNpc_Plus>(
-        this: T,
-        v: Vector,
-        team: DOTATeam_t,
-        findClearSpace: boolean = true,
-        npcOwner: CBaseEntity | undefined = null,
-        entityOwner: IBaseNpc_Plus = null
-    ): InstanceType<T> {
-        return BaseNpc_Plus.CreateUnitByName(this.name, v, team, findClearSpace, npcOwner, entityOwner) as InstanceType<T>;
-    }
-
-    static CreateUnitByName(
-        unitname: string,
-        v: Vector,
-        team: DOTATeam_t,
-        findClearSpace: boolean = true,
-        npcOwner: CBaseEntity | undefined = null,
-        entityOwner: IBaseNpc_Plus = null
-    ) {
-        let unit = CreateUnitByName(unitname, v, findClearSpace, npcOwner, entityOwner, team);
-        GameFunc.BindInstanceToCls(unit, GGetRegClass(unitname) || BaseNpc_Plus);
-        return unit as IBaseNpc_Plus;
-    }
-    /**
-     * @Server
-     * @returns 
-     */
-    GetIntellect?() {
-        return PropertyCalculate.GetIntellect(this)
-    }
-    /**
-     * @Server
-     * @returns 
-     */
-    GetStrength?() {
-        return PropertyCalculate.GetStrength(this)
-    }
-    /**
-     * @Server
-     * @returns 
-     */
-    GetAgility?() {
-        return PropertyCalculate.GetAgility(this)
-    }
-    /**
-     * @Server
-     * @returns 
-     */
-    GetAllStats?() {
-        return this.GetIntellect() + this.GetStrength() + this.GetAgility();
-    }
-    /**
-     * 获取主属性值
-     * @returns
-     */
-    GetPrimaryStatValue?() {
-        const Primary = this.GetPrimaryAttribute();
-        if (Primary == Attributes.DOTA_ATTRIBUTE_AGILITY) {
-            return this.GetAgility()
-        }
-        else if (Primary == Attributes.DOTA_ATTRIBUTE_STRENGTH) {
-            return this.GetStrength()
-        }
-        else if (Primary == Attributes.DOTA_ATTRIBUTE_INTELLECT) {
-            return this.GetIntellect()
-        }
-        return 0;
-    }
-    /**
-     * 获取主属性
-     * @Both
-     * @returns
-     */
-    GetPrimaryAttribute?() {
-        const herobuff = GPropertyConfig.HERO_PROPERTY_BUFF_NAME;
-        if (this.HasModifier(herobuff)) {
-            return this.GetModifierStackCount(herobuff, this)
-        }
-        return Attributes.DOTA_ATTRIBUTE_INVALID
-    }
-    /**
-     * @Server
-     */
-    SetPrimaryAttribute?(iPrimaryAttribute: Attributes) {
-        if (iPrimaryAttribute > Attributes.DOTA_ATTRIBUTE_INVALID && iPrimaryAttribute < Attributes.DOTA_ATTRIBUTE_MAX) {
-            const herobuff = GPropertyConfig.HERO_PROPERTY_BUFF_NAME;
-            const buff = this.findBuff(herobuff, this) as modifier_hero_property;
-            if (buff) {
-                buff.SetPrimaryStat(iPrimaryAttribute)
-            }
-        }
-    }
     GetSource?() {
         if (this.IsSummoned() || this.IsClone() || this.IsIllusion()) {
             return GameFunc.IsValid(this.GetSummoner()) && this.GetSummoner() || this;
@@ -122,8 +18,6 @@ export class BaseNpc_Plus extends BaseNpc {
     GetSummoner?() {
         return this
     }
-
-
     /**
       * 创建幻象
       * @param vLocation

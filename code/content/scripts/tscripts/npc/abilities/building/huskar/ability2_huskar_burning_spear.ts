@@ -224,9 +224,9 @@ export class modifier_huskar_2_counter extends BaseModifier_Plus {
         this.health_cost = this.GetSpecialValueFor("health_cost") * 0.01
         if (IsServer()) {
             let iStack = (params.iCount || 1)
-            this.changeStackCount(iStack);
+            this.ChangeStackCount(iStack);
             GTimerHelper.AddTimer(params.duration, GHandler.create(this, () => {
-                this.changeStackCount(-iStack);
+                this.ChangeStackCount(-iStack);
             }))
         }
     }

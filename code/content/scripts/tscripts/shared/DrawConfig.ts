@@ -2,9 +2,9 @@ export module DrawConfig {
     /**抽卡类型 对应poolgroupid */
     export enum EDrawCardType {
         RoundStart,
-        DrawCardV1 = 10001,
-        DrawCardV2 = 10002,
-        DrawCardV3 = 10003,
+        DrawCardV1 = 10000,
+        DrawCardV2 = 10001,
+        DrawCardV3 = 10002,
     }
 
     export enum EProtocol {

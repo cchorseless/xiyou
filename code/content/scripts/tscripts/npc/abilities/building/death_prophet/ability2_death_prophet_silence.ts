@@ -357,9 +357,9 @@ export class modifier_death_prophet_2_buff extends BaseModifier_Plus {
         if (IsServer()) {
             let iInt = params.int || 0
             let hParent = this.GetParentPlus()
-            this.changeStackCount(iInt)
+            this.ChangeStackCount(iInt)
             GTimerHelper.AddTimer(params.duration, GHandler.create(this, () => {
-                this.changeStackCount(-iInt)
+                this.ChangeStackCount(-iInt)
             }))
         }
     }

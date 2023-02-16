@@ -98,10 +98,10 @@ export class CombEffectComponent extends ET.Component {
         let ecomb = this.GetParent<ECombination>();
         let combinationName = ecomb.combinationName;
         let combinationId = ecomb.combinationId;
-        if (combinationName === CombinationConfig.ECombinationLabel.suck_blood) {
+        if (combinationName === CombinationConfig.ECombinationLabel.sect_suck_blood) {
 
         }
-        else if (combinationName === CombinationConfig.ECombinationLabel.suck_blood) {
+        else if (combinationName === CombinationConfig.ECombinationLabel.sect_suck_blood) {
 
         }
     }

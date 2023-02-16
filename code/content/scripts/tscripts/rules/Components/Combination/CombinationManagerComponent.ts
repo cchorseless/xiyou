@@ -51,7 +51,25 @@ export class CombinationManagerComponent extends ET.Component {
             }
         })
     }
-
+    /**
+     * 减少羁绊需求数量
+     * @param sectname 
+     * @param v 
+     * @returns 
+     */
+    public ChangeCombinationActiveNeedCount(sectname: string, v = -1) {
+        let combs = this.allCombination[sectname];
+        if (combs == null) return;
+        let r: ECombination[] = Object.values(combs);
+        r.sort((a, b) => { return a.activeNeedCount - b.activeNeedCount })
+        for (let i = 0, len = r.length; i < len; i++) {
+            let ecomb = r[i];
+            if (ecomb.activeNeedCount + v > i) {
+                ecomb.activeNeedCount += v;
+                ecomb.checkActive()
+            }
+        }
+    }
 
     private allCombination: { [relation: string]: { [relationid: string]: ECombination } } = {};
     public addBuilding(entity: IBuildingEntityRoot) {

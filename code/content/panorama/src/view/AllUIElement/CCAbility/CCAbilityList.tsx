@@ -79,7 +79,6 @@ export class CCAbilityList2 extends CCPanel<ICCAbilityList> {
         return CSSHelper.IsReadyUI()
     }
     onStartUI() {
-        GLogHelper.print(this.abilities.current == null, 4444)
         if (this.abilities.current) {
             const abilitypanel = this.abilities.current;
             GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
@@ -94,12 +93,12 @@ export class CCAbilityList2 extends CCPanel<ICCAbilityList> {
                 }
 
             }))
-            GTimerHelper.AddFrameTimer(5, GHandler.create(this, () => {
-                let len = abilitypanel.GetChildCount()
-                if (len == 0) { return 1 }
-                this.updateAbilityList();
-                return 5;
-            }))
+            // GTimerHelper.AddFrameTimer(5, GHandler.create(this, () => {
+            //     let len = abilitypanel.GetChildCount()
+            //     if (len == 0) { return 1 }
+            //     this.updateAbilityList();
+            //     return 5;
+            // }))
 
         }
     }

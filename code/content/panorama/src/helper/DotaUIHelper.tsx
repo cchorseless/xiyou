@@ -358,13 +358,17 @@ export module DotaUIHelper {
         })
         const abilityHideTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, ability_name: string | AbilityEntityIndex, c, d) => {
         })
+        const abilityShowDropItemTooltipHandler = GHandler.create(EventObj, (abilitypanel: Panel, x: number, y: number, ability_name: string) => {
+            abilityShowTooltipHandler.runWith([abilitypanel, ability_name, x, y])
+        })
         EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltip, abilityShowTooltipHandler);
         EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForEntityIndex, abilityShowTooltipHandler);
         EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityInventoryItemTooltip, abilityShowTooltipHandler);
         EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityShopItemTooltip, abilityShowTooltipHandler);
-        EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForGuide, abilityShowTooltipHandler);
-        EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForHero, abilityShowTooltipHandler);
-        EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForLevel, abilityShowTooltipHandler);
+        EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowDroppedItemTooltip, abilityShowDropItemTooltipHandler);
+        // EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForGuide, abilityShowTooltipHandler);
+        // EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForHero, abilityShowTooltipHandler);
+        // EventHelper.addUnhandledEvent(TipsHelper.ToolTipType.DOTAShowAbilityTooltipForLevel, abilityShowTooltipHandler);
     }
 
     export function Init() {

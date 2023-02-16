@@ -1,0 +1,52 @@
+[
+  {
+    "poolgroupid": "10000",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1000",
+        "PoolWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "PoolConfigId": "1001",
+        "PoolWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10001",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1001",
+        "PoolWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "PoolConfigId": "1002",
+        "PoolWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  },
+  {
+    "poolgroupid": "10002",
+    "PoolGroup": [
+      {
+        "PoolConfigId": "1000",
+        "PoolWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "PoolConfigId": "1001",
+        "PoolWeight": 1,
+        "IsVaild": true
+      },
+      {
+        "PoolConfigId": "1002",
+        "PoolWeight": 1,
+        "IsVaild": true
+      }
+    ]
+  }
+]

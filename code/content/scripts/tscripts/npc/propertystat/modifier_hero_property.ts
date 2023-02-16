@@ -123,3 +123,7 @@ export class modifier_hero_property extends BaseModifier_Plus {
     //     return (this.GetStackCount() == Attributes.DOTA_ATTRIBUTE_AGILITY) && Gmodifier_property.GetAgility(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_AGILITY_MAX_ATTACK_SPEED || 0
     // }
 }
+
+declare global {
+    type Imodifier_hero_property = modifier_hero_property;
+}

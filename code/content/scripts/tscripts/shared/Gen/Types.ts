@@ -749,8 +749,8 @@ export class ItemPrizePoolBean {
         this.ItemCount = _json_.ItemCount
         if (_json_.ItemWeight === undefined) { GLogHelper.error(1); }
         this.ItemWeight = _json_.ItemWeight
-        if (_json_.isVaild === undefined) { GLogHelper.error(1); }
-        this.isVaild = _json_.isVaild
+        if (_json_.IsVaild === undefined) { GLogHelper.error(1); }
+        this.IsVaild = _json_.IsVaild
     }
 
     /**
@@ -772,7 +772,7 @@ export class ItemPrizePoolBean {
     /**
      * 是否启用
      */
-    readonly isVaild: number
+    readonly IsVaild: boolean
 
     resolve(_tables: Map<string, any>) {
     }
@@ -1026,8 +1026,8 @@ export class ShopSellItemBean {
         this.Discount = _json_.Discount
         if (_json_.VipLimit === undefined) { GLogHelper.error(1); }
         this.VipLimit = _json_.VipLimit
-        if (_json_.isVaild === undefined) { GLogHelper.error(1); }
-        this.isVaild = _json_.isVaild
+        if (_json_.IsVaild === undefined) { GLogHelper.error(1); }
+        this.IsVaild = _json_.IsVaild
     }
 
     /**
@@ -1097,7 +1097,7 @@ export class ShopSellItemBean {
     /**
      * 是否启用
      */
-    readonly isVaild: boolean
+    readonly IsVaild: boolean
 
     resolve(_tables: Map<string, any>) {
     }
@@ -3292,6 +3292,192 @@ export class CombinationConfigRecord {
 
 }
 
+export namespace Dota {
+export class PoolConfig{
+    private _dataMap: Map<string, Dota.PoolConfigRecord>
+    private _dataList: Dota.PoolConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<string, Dota.PoolConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.PoolConfigRecord
+            _v = new Dota.PoolConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.poolid, _v)
+        }
+    }
+
+    getDataMap(): Map<string, Dota.PoolConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.PoolConfigRecord[] { return this._dataList; }
+
+    get(key: string): Dota.PoolConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class PoolConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.poolid === undefined) { GLogHelper.error(1); }
+        this.poolid = _json_.poolid
+        if (_json_.PoolInfo === undefined) { GLogHelper.error(1); }
+        { this.PoolInfo = []; for(let _ele of _json_.PoolInfo) { let _e : Dota.PoolInfoBean; _e = new Dota.PoolInfoBean(_ele); this.PoolInfo.push(_e);}}
+    }
+
+    /**
+     * 池子id
+     */
+    readonly poolid: string
+    readonly PoolInfo: Dota.PoolInfoBean[]
+
+    resolve(_tables: Map<string, any>) {
+        for(let _e of this.PoolInfo) { if (_e != null ) {_e.resolve(_tables);} }
+    }
+}
+
+}
+
+
+
+export namespace Dota {
+export class PoolInfoBean {
+
+    constructor(_json_: any) {
+        if (_json_.ItemConfigId === undefined) { GLogHelper.error(1); }
+        this.ItemConfigId = _json_.ItemConfigId
+        if (_json_.ItemName === undefined) { GLogHelper.error(1); }
+        this.ItemName = _json_.ItemName
+        if (_json_.ItemCount === undefined) { GLogHelper.error(1); }
+        this.ItemCount = _json_.ItemCount
+        if (_json_.ItemWeight === undefined) { GLogHelper.error(1); }
+        this.ItemWeight = _json_.ItemWeight
+        if (_json_.IsVaild === undefined) { GLogHelper.error(1); }
+        this.IsVaild = _json_.IsVaild
+    }
+
+    /**
+     * 道具索引
+     */
+    readonly ItemConfigId: string
+    /**
+     * 道具名称
+     */
+    readonly ItemName: string
+    /**
+     * 道具数量
+     */
+    readonly ItemCount: number
+    /**
+     * 道具权重
+     */
+    readonly ItemWeight: number
+    /**
+     * 是否启用
+     */
+    readonly IsVaild: boolean
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
+export namespace Dota {
+export class PoolGroupConfig{
+    private _dataMap: Map<string, Dota.PoolGroupConfigRecord>
+    private _dataList: Dota.PoolGroupConfigRecord[]
+    constructor(_json_: any[]) {
+ this._dataMap  = new Map<string, Dota.PoolGroupConfigRecord>()
+        this._dataList = []
+        for(let _json2_ of _json_) {
+            let _v: Dota.PoolGroupConfigRecord
+            _v = new Dota.PoolGroupConfigRecord(_json2_)
+            this._dataList.push(_v)
+            this._dataMap.set(_v.poolgroupid, _v)
+        }
+    }
+
+    getDataMap(): Map<string, Dota.PoolGroupConfigRecord> { return this._dataMap; }
+    getDataList(): Dota.PoolGroupConfigRecord[] { return this._dataList; }
+
+    get(key: string): Dota.PoolGroupConfigRecord | undefined { return this._dataMap.get(key); }
+
+    resolve(_tables: Map<string, any>) {
+        for(let v of this._dataList) {
+            v.resolve(_tables)
+        }
+    }
+
+}
+}
+
+
+
+export namespace Dota {
+export class PoolGroupConfigRecord {
+
+    constructor(_json_: any) {
+        if (_json_.poolgroupid === undefined) { GLogHelper.error(1); }
+        this.poolgroupid = _json_.poolgroupid
+        if (_json_.PoolGroup === undefined) { GLogHelper.error(1); }
+        { this.PoolGroup = []; for(let _ele of _json_.PoolGroup) { let _e : Dota.PoolGroupBean; _e = new Dota.PoolGroupBean(_ele); this.PoolGroup.push(_e);}}
+    }
+
+    /**
+     * 池子组id
+     */
+    readonly poolgroupid: string
+    readonly PoolGroup: Dota.PoolGroupBean[]
+
+    resolve(_tables: Map<string, any>) {
+        for(let _e of this.PoolGroup) { if (_e != null ) {_e.resolve(_tables);} }
+    }
+}
+
+}
+
+
+
+export namespace Dota {
+export class PoolGroupBean {
+
+    constructor(_json_: any) {
+        if (_json_.PoolConfigId === undefined) { GLogHelper.error(1); }
+        this.PoolConfigId = _json_.PoolConfigId
+        if (_json_.PoolWeight === undefined) { GLogHelper.error(1); }
+        this.PoolWeight = _json_.PoolWeight
+        if (_json_.IsVaild === undefined) { GLogHelper.error(1); }
+        this.IsVaild = _json_.IsVaild
+    }
+
+    /**
+     * 池子索引
+     */
+    readonly PoolConfigId: string
+    /**
+     * 池子权重
+     */
+    readonly PoolWeight: number
+    /**
+     * 是否有效
+     */
+    readonly IsVaild: boolean
+
+    resolve(_tables: Map<string, any>) {
+    }
+}
+
+}
+
 
 type JsonLoader = (file: string) => any
 
@@ -3364,6 +3550,10 @@ export class Tables {
     get TechConfig(): Dota.TechConfig  { return this._TechConfig;}
     private _CombinationConfig: Dota.CombinationConfig
     get CombinationConfig(): Dota.CombinationConfig  { return this._CombinationConfig;}
+    private _PoolConfig: Dota.PoolConfig
+    get PoolConfig(): Dota.PoolConfig  { return this._PoolConfig;}
+    private _PoolGroupConfig: Dota.PoolGroupConfig
+    get PoolGroupConfig(): Dota.PoolGroupConfig  { return this._PoolGroupConfig;}
 
     constructor(loader: JsonLoader) {
         let tables = new Map<string, any>()
@@ -3435,6 +3625,10 @@ export class Tables {
         tables.set('Dota.TechConfig', this._TechConfig)
         this._CombinationConfig = new Dota.CombinationConfig(loader('dota_combinationconfig'))
         tables.set('Dota.CombinationConfig', this._CombinationConfig)
+        this._PoolConfig = new Dota.PoolConfig(loader('dota_poolconfig'))
+        tables.set('Dota.PoolConfig', this._PoolConfig)
+        this._PoolGroupConfig = new Dota.PoolGroupConfig(loader('dota_poolgroupconfig'))
+        tables.set('Dota.PoolGroupConfig', this._PoolGroupConfig)
 
         this._ItemConfig.resolve(tables)
         this._ItemEquipConfig.resolve(tables)
@@ -3470,5 +3664,7 @@ export class Tables {
         this._PopulationConfig.resolve(tables)
         this._TechConfig.resolve(tables)
         this._CombinationConfig.resolve(tables)
+        this._PoolConfig.resolve(tables)
+        this._PoolGroupConfig.resolve(tables)
     }
 }

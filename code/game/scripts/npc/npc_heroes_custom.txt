@@ -2,11 +2,11 @@
 
 "DOTAHeroes" {
 	"Version" "1"
-	"npc_dota_hero_phoenix" {
-		"override_hero" "npc_dota_hero_phoenix"
+	"npc_dota_hero_wisp" {
+		"override_hero" "npc_dota_hero_wisp"
 		"Name" "信使"
 		"vscripts" "npc/courier/courier_base.lua"
-		"Model" "models/courier/donkey_ti7/donkey_ti7.vmdl"
+		"Model" "models/items/courier/mighty_chicken/mighty_chicken.vmdl"
 		"ModelScale" "1"
 		"BoundsHullName" "DOTA_HULL_SIZE_HERO"
 		"RingRadius" "70"

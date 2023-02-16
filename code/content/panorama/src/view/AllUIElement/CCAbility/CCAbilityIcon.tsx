@@ -9,7 +9,7 @@ import { CCAbilityInfoDialog } from "./CCAbilityInfoDialog";
 
 import "./CCAbilityIcon.less";
 
-interface ICCAbilityIcon extends DOTAAbilityImageAttributes {
+interface ICCAbilityIcon_Custom extends DOTAAbilityImageAttributes {
     abilityname: string;
     castentityindex?: AbilityEntityIndex,
     rarity?: Rarity;
@@ -24,7 +24,7 @@ interface ICCAbilityIcon extends DOTAAbilityImageAttributes {
 }
 
 
-export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
+export class CCAbilityIcon_Custom extends CCPanel<ICCAbilityIcon_Custom> {
     NODENAME = { __root__: '__root__', abilityImage: 'abilityImage' };
     abilityImage_childs: Array<JSX.Element> = [];
     abilityImage: React.RefObject<AbilityImage>;
@@ -112,11 +112,46 @@ export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
         const remainingtime = this.GetState<number>("remainingtime") || 1;
         return (
             this.__root___isValid &&
-            <Panel ref={this.__root__} id="CC_AbilityIcon" {...this.initRootAttrs()}  >
+            <Panel ref={this.__root__} className="CCAbilityIcon" {...this.initRootAttrs()}  >
                 <Image id="img_AbilityIcon" className={this.props.rarity} >
                     <DOTAAbilityImage ref={this.abilityImage} abilityname={abilityname} onmouseactivate={this.onbtn_castability}>
                         {lefttime >= 0 && <CCPanel width="100%" height="100%" backgroundColor="#000000DD" clip={"radial(50.0% 50.0%, 0.0deg, " + -(lefttime / remainingtime) * 360 + "deg)"} />}
                         {lefttime >= 0 && <CCLabel type="UnitName" align="center center" text={"" + (lefttime / 10).toFixed(1)} />}
+                        {this.abilityImage_childs}
+                    </DOTAAbilityImage>
+                </Image>
+                {this.props.children}
+                {this.__root___childs}
+            </Panel >
+        )
+    }
+}
+
+interface ICCAbilityIcon extends DOTAAbilityImageAttributes {
+    abilityname: string;
+    castentityindex?: AbilityEntityIndex,
+    rarity?: Rarity;
+    playerid?: PlayerID;
+    showTips?: boolean;
+
+}
+export class CCAbilityIcon extends CCPanel<ICCAbilityIcon> {
+    NODENAME = { __root__: '__root__', abilityImage: 'abilityImage' };
+    abilityImage_childs: Array<JSX.Element> = [];
+    abilityImage: React.RefObject<AbilityImage>;
+    static defaultProps = {
+        castEntityIndex: -1,
+        playerid: -1,
+        showTips: true,
+    }
+    render() {
+        const abilityname = this.props.abilityname;
+        const castEntityIndex = this.props.castEntityIndex!;
+        const showTips = this.props.showTips!;
+        return (
+            <Panel ref={this.__root__} className="CCAbilityIcon" {...this.initRootAttrs()}  >
+                <Image id="img_AbilityIcon" className={this.props.rarity} >
+                    <DOTAAbilityImage ref={this.abilityImage} showtooltip={showTips} abilityname={abilityname} contextEntityIndex={castEntityIndex} >
                         {this.abilityImage_childs}
                     </DOTAAbilityImage>
                 </Image>

@@ -1,13 +1,16 @@
 import React from "react";
+import { CombinationConfig } from "../../../../scripts/tscripts/shared/CombinationConfig";
 
 import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
 import { KVHelper } from "../../helper/KVHelper";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 import { CCDebugTool, CCDebugTool_Category, CCDebugTool_DemoButton, CCDebugTool_DemoSelectionButton, CCDebugTool_DemoSlider, CCDebugTool_DemoTextEntry, CCDebugTool_DemoToggle } from "./CCDebugTool";
 import { CCDebugTool_AbilityPicker } from "./CCDebugTool_AbilityPicker";
+import { CCDebugTool_EnemyPicker } from "./CCDebugTool_EnemyPicker";
 import { CCDebugTool_HeroPicker } from "./CCDebugTool_HeroPicker";
 import { CCDebugTool_ItemPicker } from "./CCDebugTool_ItemPicker";
 import { CCDebugTool_NetTableInfo } from "./CCDebugTool_NetTableInfo";
+import { CCDebugTool_SectPicker } from "./CCDebugTool_SectPicker";
 import { CCDebugTool_Setting } from "./CCDebugTool_Setting";
 import { CCDebugTool_TextPicker } from "./CCDebugTool_TextPicker";
 import { CCDebugTool_UnitInfo } from "./CCDebugTool_UnitInfo";
@@ -32,10 +35,10 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
         const abilitiesNames: string[] = Object.keys(KVHelper.KVAbilitys()).filter((s) => { return KVHelper.KVData().dota_abilities[s] == null });;
         const dotaitemsNames: string[] = Object.keys(KVHelper.KVData().dota_items);
         const dotaabilitiesNames: string[] = Object.keys(KVHelper.KVData().dota_abilities);
-        const unitList: string[] = ["111", "222"];
-        const commonHeroList: string[] = [];
+        const heroList: string[] = Object.keys(KVHelper.KVData().building_unit_tower);
+        const enemylist: string[] = [];
         const stateList: string[] = [];
-        const sectList: string[] = [];
+        const sectList: string[] = [...CombinationConfig.ECombinationLabelList];
         const sectToggleList: { [k: string]: any } = {};
         const sectFilterFunc = (...args: any[]) => { return true };
         const positionList: string[] = [];
@@ -63,7 +66,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoSlider eventName="CameraDistance" titletext="镜头高度" min={600} max={1600} defaultValue={1100} onChange={value => GameUI.SetCameraDistance(value)} />
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="网表和实体" >
-                        <CCDebugTool_DemoSelectionButton eventName="CreateAllyButtonPressed" localtext="todo" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_TextPicker, { title: "创建友方单位", itemNames: unitList }) }} />
+                        <CCDebugTool_DemoSelectionButton eventName="CreateAllyButtonPressed" localtext="todo" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_TextPicker, { title: "创建友方单位", itemNames: heroList }) }} />
                         <CCDebugTool_DemoSelectionButton eventName="CC_DebugTool_UnitInfo" localtext="网表信息面板" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_NetTableInfo) }} />
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="技能和物品" >
@@ -72,8 +75,8 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoSelectionButton eventName="AddItemButtonPressed" localtext="添加物品" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_ItemPicker, { title: "添加物品", itemNames: itemsNames }) }} />
                         <CCDebugTool_DemoButton eventName="RemoveInventoryItemsButtonPressed" localtext="移除物品栏的物品" />
                         <CCDebugTool_DemoSelectionButton eventName="AddAbilityButtonPressed" localtext="添加技能" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_AbilityPicker, { title: "添加技能", abilityNames: abilitiesNames }) }} />
-                        <CCDebugTool_DemoSelectionButton eventName="AddSectButtonPressed" localtext="添加流派" />
-                        <CCDebugTool_DemoButton eventName="AddSelectionSectAbility" localtext="添加技能选择" />
+                        <CCDebugTool_DemoSelectionButton eventName="AddSectButtonPressed" localtext="添加流派" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_SectPicker, { title: "添加流派", abilityNames: sectList }) }} />
+                        <CCDebugTool_DemoButton eventName="AddSelectionSectAbility" localtext="添加神器选择" />
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="英雄" >
                         <CCDebugTool_DemoButton eventName="RefreshButtonPressed" localtext="刷新状态" />
@@ -82,12 +85,11 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoSelectionButton eventName="ChangeHeroButtonPressed" localtext="更换英雄" />
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="单位" >
-                        <CCDebugTool_DemoSelectionButton eventName="SwitchHero" localtext="切换英雄" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_HeroPicker, { title: "切换英雄", unitNames: unitList }) }} />
+                        <CCDebugTool_DemoSelectionButton eventName="SwitchHero" localtext="创建友方单位" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_HeroPicker, { title: "创建友方单位", unitNames: heroList }) }} />
+                        <CCDebugTool_DemoSelectionButton eventName="CreateEnemyButtonPressed" localtext="创建敌方单位" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_EnemyPicker, { title: "创建敌方单位", itemNames: enemylist }) }} />
                         <CCDebugTool_DemoButton eventName="DummyTargetButtonPressed" localtext="傀儡目标" />
                         <CCDebugTool_DemoButton eventName="RemoveSpawnedUnitsButtonPressed" localtext="移除目标" />
                         <CCDebugTool_DemoButton eventName="RespawnHeroButtonPressed" localtext="复活英雄" />
-                        <CCDebugTool_DemoSelectionButton eventName="CreateAllyButtonPressed" localtext="创建友方单位" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_TextPicker, { title: "创建友方单位", itemNames: unitList }) }} />
-                        <CCDebugTool_DemoSelectionButton eventName="CreateEnemyButtonPressed" localtext="创建敌方单位" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_TextPicker, { title: "创建敌方单位", itemNames: unitList }) }} />
                         <CCDebugTool_DemoButton eventName="ControlUnitButtonPressed" localtext="切换控制权" />
                         <CCDebugTool_DemoSelectionButton eventName="CC_DebugTool_UnitInfo" localtext="单位信息面板" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_UnitInfo) }} />
                     </CCDebugTool_Category>

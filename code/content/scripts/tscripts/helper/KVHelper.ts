@@ -135,37 +135,38 @@ export module KVHelper {
         });
         return r;
     }
-
     export function RandomPoolGroupConfig(str: string): string {
-        let _config = KvServerConfig.pool_group_config[str as "10001"];
+        let _config = GJSONConfig.PoolGroupConfig.get(str);;
         if (_config == null) {
-            LogHelper.error("cant find in pool group : key=> " + str);
+            GLogHelper.error("cant find in pool group : key=> " + str);
             return;
         }
-        let r_arr = [];
-        let weight_arr = [];
-        for (let k in _config) {
-            r_arr.push(k);
-            weight_arr.push(_config[k as "1001"].PoolWeight);
+        let r_arr: string[] = [];
+        let weight_arr: number[] = [];
+        for (let k of _config.PoolGroup) {
+            if (k.IsVaild) {
+                r_arr.push(k.PoolConfigId);
+                weight_arr.push(k.PoolWeight);
+            }
         }
         return GameFunc.ArrayFunc.RandomArrayByWeight(r_arr, weight_arr)[0];
     }
-
     export function RandomPoolConfig(str: string): string {
-        let _config = KvServerConfig.pool_config[str as "1001"];
+        let _config = GJSONConfig.PoolConfig.get(str);
         if (_config == null) {
-            LogHelper.error("cant find in pool  : key=> " + str);
+            GLogHelper.error("cant find in pool  : key=> " + str);
             return;
         }
-        let r_arr = [];
-        let weight_arr = [];
-        for (let k in _config) {
-            r_arr.push(k);
-            weight_arr.push(_config[k as "building_hero_axe"].ItemWeight);
+        let r_arr: string[] = [];
+        let weight_arr: number[] = [];
+        for (let k of _config.PoolInfo) {
+            if (k.IsVaild) {
+                r_arr.push(k.ItemConfigId);
+                weight_arr.push(k.ItemWeight);
+            }
         }
         return GameFunc.ArrayFunc.RandomArrayByWeight(r_arr, weight_arr)[0];
     }
-
 
     export namespace CourierUnits {
 

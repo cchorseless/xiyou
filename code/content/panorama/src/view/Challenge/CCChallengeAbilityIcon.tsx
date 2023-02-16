@@ -1,14 +1,13 @@
-import React, { } from "react";
+import React from "react";
 import { AbilityEntityRoot } from "../../game/components/Ability/AbilityEntityRoot";
-import { GameEnum } from "../../../../scripts/tscripts/shared/GameEnum";
 
-import { CCAbilityIcon } from "../AllUIElement/CCAbility/CCAbilityIcon";
+import { CCAbilityIcon_Custom } from "../AllUIElement/CCAbility/CCAbilityIcon";
 import { CCIcon_CoinType } from "../AllUIElement/CCIcons/CCIcon_CoinType";
 import { CCLabel } from "../AllUIElement/CCLabel/CCLabel";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
 
-import "./CCChallengeAbilityIcon.less";
 import { EEnum } from "../../../../scripts/tscripts/shared/Gen/Types";
+import "./CCChallengeAbilityIcon.less";
 
 export interface ICCChallengeAbilityIcon {
     abilityname: string
@@ -42,9 +41,9 @@ export class CCChallengeAbilityIcon extends CCPanel<ICCChallengeAbilityIcon> {
         const ability = this.GetStateEntity(this.abilityEntity);
         return (
             <Panel id="CC_ChallengeAbilityIcon" ref={this.__root__}      {...this.initRootAttrs()}>
-                <CCAbilityIcon abilityname={abilityname} castEntityIndex={castentity} horizontalAlign={"center"}>
+                <CCAbilityIcon_Custom abilityname={abilityname} abilityid={castentity} horizontalAlign={"center"}>
                     <CCLabel type="Level" text={`Lv.${Abilities.GetLevel(abilityindex)}`} align={"left bottom"} />
-                </CCAbilityIcon>
+                </CCAbilityIcon_Custom>
                 <CCLabel type="AbilityName" text={$.Localize("#DOTA_Tooltip_ability_" + abilityname)} horizontalAlign={"center"} />
                 {
                     ability && <CCPanel flowChildren="right" horizontalAlign="center">

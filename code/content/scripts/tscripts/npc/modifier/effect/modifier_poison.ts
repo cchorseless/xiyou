@@ -50,9 +50,9 @@ export class modifier_poison extends BaseModifier_Plus {
             let tPoisonInfo = HashTableHelper.GetHashtableByIndex(params.hashtableUUid) as any;
             if (tPoisonInfo != null) {
                 GTimerHelper.AddTimer(params.duration || modifier_poison.POISON_DURATION, GHandler.create(this, () => {
-                    this.changeStackCount(-tPoisonInfo.stack_count);
+                    this.ChangeStackCount(-tPoisonInfo.stack_count);
                 }))
-                this.changeStackCount(tPoisonInfo.stack_count);
+                this.ChangeStackCount(tPoisonInfo.stack_count);
                 table.insert(this.tPoisonerInfos, tPoisonInfo)
                 HashTableHelper.RemoveHashtable(tPoisonInfo)
             }

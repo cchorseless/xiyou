@@ -1,7 +1,9 @@
 import React from "react";
-import { KVHelper } from "../../helper/KVHelper";
+import { GameProtocol } from "../../../../scripts/tscripts/shared/GameProtocol";
+import { NetHelper } from "../../helper/NetHelper";
 import { CCButton } from "../AllUIElement/CCButton/CCButton";
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
+import { CCCombinationIcon } from "../Combination/CCCombinationIcon";
 import { CCDebugTool_SelectContainer } from "./CCDebugTool";
 
 interface IDebugTool_SectPicker {
@@ -37,27 +39,28 @@ export class CCDebugTool_SectPicker extends CCPanel<IDebugTool_SectPicker> {
                     onToggleType={text => this.UpdateState({ toggleType: text })}
                     onChangeRawMode={rawMode => this.UpdateState({ rawMode: rawMode })}
                     DomainPanel={this}
-
                 >
                     <CCPanel className="CC_DebugTool_AbilityPicker" flowChildren="right-wrap" width="100%" scroll="y" >
-                        {this.props.abilityNames?.map((abilityUpgradeID, index) => {
+                        {this.props.abilityNames?.map((sectName, index) => {
                             if (this.props.filterFunc) {
-                                if (!this.props.filterFunc(this.state.toggleType, abilityUpgradeID)) {
+                                if (!this.props.filterFunc(this.state.toggleType, sectName)) {
                                     return;
                                 }
                             }
                             if (this.state.filterWord != "") {
-                                if (abilityUpgradeID.search(new RegExp(this.state.filterWord, "gim")) == -1 && $.Localize("#DOTA_Tooltip_ability_mechanics_" + abilityUpgradeID).search(new RegExp(this.state.filterWord, "gim")) == -1) {
+                                if (sectName.search(new RegExp(this.state.filterWord, "gim")) == -1 && $.Localize("#DOTA_Tooltip_ability_mechanics_" + sectName).search(new RegExp(this.state.filterWord, "gim")) == -1) {
                                     return;
                                 }
                             }
-                            const abilityUpgradeInfo = KVHelper.KVAbilitys()[abilityUpgradeID];
                             return (
                                 <CCButton type="Empty" className="CC_DebugTool_AbilityPickerItem" key={index + ""} width="64px" flowChildren="down"
-                                    onactivate={self => { }}
-                                    customTooltip={{ name: "sect_ability", abilityUpgradeID: abilityUpgradeID }}>
-                                    <Image className="DOTAAbilityImage" src={`file://{images}/spellicons/${abilityUpgradeInfo.Texture}.png`} />
-                                    <Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? abilityUpgradeID : $.Localize("#DOTA_Tooltip_ability_mechanics_" + abilityUpgradeID)} />
+                                    onactivate={self => {
+                                        NetHelper.SendToLua(GameProtocol.Protocol.req_DebugAddSect, {
+                                            sectname: sectName
+                                        })
+                                    }} >
+                                    <CCCombinationIcon sectName={sectName} horizontalAlign="center" />
+                                    <Label className="CC_DebugTool_AbilityPickerItemName" text={this.state.rawMode ? sectName : $.Localize("#lang_" + sectName)} />
                                 </CCButton>
                             );
                         })}

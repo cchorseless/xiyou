@@ -9,7 +9,6 @@ declare global {
  * 执行顺讯 装饰器=>DeclareFunctions=>constructor=>OnCreate=>Init
  */
 export class BaseModifier_Plus extends BaseModifier {
-
 }
 
 export class BaseModifierMotionBoth_Plus extends BaseModifierMotionBoth {

@@ -2,7 +2,6 @@
 import React from "react";
 import { RoundConfig } from "../../../../scripts/tscripts/shared/RoundConfig";
 import { ERoundBoard } from "../../game/components/Round/ERoundBoard";
-import { UnitHelper } from "../../helper/DotaEntityHelper";
 import { FuncHelper } from "../../helper/FuncHelper";
 
 import { CCPanel } from "../AllUIElement/CCPanel/CCPanel";
@@ -32,7 +31,7 @@ export class CCUnitDamageInfo extends CCPanel<ICCUnitDamageInfo> {
         if (round.roundState == RoundConfig.ERoundBoardState.start) {
             return this.defaultRender("CC_UnitDamageInfo");
         }
-        const isdamage = this.GetState<Boolean>("isdamage");
+        const isdamage = this.GetState<Boolean>("isdamage", true);
         let infos = Object.keys(round.unitDamageInfo).map(key => {
             let _info = round.unitDamageInfo[key];
             return {
@@ -106,7 +105,7 @@ export class CCUnitDamageProgressItem extends CCPanel<ICCUnitDamageProgressItem>
                     </CCPanel>
                     <Label className="TotalDamage" text={Math.floor(fDamageTotal) + ""} hittest={false} />
                 </Panel>
-                <CCUnitSmallIcon itemname={SUnitName} rarity={UnitHelper.GetUnitRarety(SUnitName)} width="40px" height="40px" />
+                <CCUnitSmallIcon itemname={SUnitName} width="40px" height="40px" />
                 {this.props.children}
                 {this.__root___childs}
             </Panel>

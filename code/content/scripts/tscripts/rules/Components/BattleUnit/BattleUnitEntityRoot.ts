@@ -50,7 +50,6 @@ export class BattleUnitEntityRoot extends BaseEntityRoot {
     addBattleComp() {
         this.AddComponent(GGetRegClass<typeof ChessMoveComponent>("ChessMoveComponent"));
         this.AddComponent(GGetRegClass<typeof AiAttackComponent>("AiAttackComponent"));
-        // this.AddComponent(GGetRegClass<typeof CombinationComponent>("CombinationComponent"));
         this.AddComponent(GGetRegClass<typeof WearableComponent>("WearableComponent"), this.GetDotaHeroName());
         this.AddComponent(GGetRegClass<typeof AbilityManagerComponent>("AbilityManagerComponent"));
         this.AddComponent(GGetRegClass<typeof InventoryComponent>("InventoryComponent"));

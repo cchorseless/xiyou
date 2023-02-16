@@ -632,6 +632,8 @@ declare namespace dota_abilities {
 [k:string] : OBJ_2_1 }
  interface OBJ_2_1 {
 "BaseClass" :string ,
+"CombinationLabel" :string ,
+"CombinationCondition" :string ,
 "AbilityBehavior" :string ,
 "AbilityUnitDamageType" :string ,
 "SpellImmunityType" :string ,
@@ -650,7 +652,6 @@ declare namespace dota_abilities {
 "AbilityUnitTargetTeam" :string ,
 "AbilityUnitTargetType" :string ,
 "AbilityType" :string ,
-"CombinationLabel" :string ,
 "AbilityDamage" :string ,
 "AbilityDuration" :string ,
 "AbilitySpecial" :OBJ_3_1 ,

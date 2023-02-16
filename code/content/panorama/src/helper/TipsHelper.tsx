@@ -11,6 +11,7 @@ export module TipsHelper {
         DOTAShowAbilityTooltipForGuide = "DOTAShowAbilityTooltipForGuide",
         DOTAShowAbilityTooltipForHero = "DOTAShowAbilityTooltipForHero",
         DOTAShowAbilityTooltipForLevel = "DOTAShowAbilityTooltipForLevel",
+        DOTAShowDroppedItemTooltip = "DOTAShowDroppedItemTooltip",
         DOTAShowBuffTooltip = "DOTAShowBuffTooltip",
         DOTAShowEconItemTooltip = "DOTAShowEconItemTooltip",
         DOTAShowProfileCardBattleCupTooltip = "DOTAShowProfileCardBattleCupTooltip",

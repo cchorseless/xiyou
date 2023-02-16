@@ -1,4 +1,4 @@
-declare type Rarity = "A" | "B" | "C" | "D" | "R" | "S" | "SS";
+declare type Rarity = "A" | "B" | "C" | "D" | "S" | "SS";
 declare type CoinType = "Gold" | "SoulCrystal" | "Wood" | "Population" | "MetaStone" | "StarStone";
 
 declare interface IItemInfo {

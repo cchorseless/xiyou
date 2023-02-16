@@ -281,9 +281,9 @@ export class modifier_ogre_magi_6_buff extends BaseModifier_Plus {
             let hParent = this.GetParentPlus()
             hParent.EmitSound(ResHelper.GetSoundReplacement("Hero_OgreMagi.Bloodlust.Target.FP", hCaster))
             let fDamage = (hCaster.GetBaseDamageMin() + hCaster.GetBaseDamageMax()) / 2 * this.bonus_attack_damage * 0.01
-            this.changeStackCount(fDamage)
+            this.ChangeStackCount(fDamage)
             GTimerHelper.AddTimer(params.duration, GHandler.create(this, () => {
-                this.changeStackCount(-fDamage)
+                this.ChangeStackCount(-fDamage)
             }))
             //  给非蓝胖增加当前等级的多重施法buff
             if (!hParent.HasAbility("ogre_magi_4")) {
@@ -353,7 +353,7 @@ export class modifier_ogre_magi_6_buff_shard extends BaseModifier_Plus {
     Init(params: IModifierTable) {
         this.count_shard = this.GetSpecialValueFor("count_shard")
         if (IsServer()) {
-            this.changeStackCount(this.count_shard)
+            this.ChangeStackCount(this.count_shard)
             if (this.iParticleID) {
                 ParticleManager.DestroyParticle(this.iParticleID, true)
             }

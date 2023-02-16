@@ -58,7 +58,7 @@ export class CCCombinationUnitIconGroup extends CCPanel<ICCCombinationUnitIconGr
             <CCPanel id="AbilityCombination" flowChildren="right-wrap">
                 {herolist.length > 0 && herolist.map(
                     (name, index) => {
-                        return <CCUnitSmallIcon key={index + ""} width="40px" height="40px" itemname={name} rarity={UnitHelper.GetUnitRarety(name)} brightness={uniqueConfigList.includes(name) ? "1" : "0.2"} />
+                        return <CCUnitSmallIcon key={index + ""} width="40px" height="40px" itemname={name} brightness={uniqueConfigList.includes(name) ? "1" : "0.2"} />
                     })}
             </CCPanel>
             {/* <CCPanel id="ItemCombination" flowChildren="right-wrap">

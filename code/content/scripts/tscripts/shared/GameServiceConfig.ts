@@ -13,7 +13,7 @@ export module GameServiceConfig {
      */
     export const SyncClientToBase64 = true;
     /**玩家初始英雄 */
-    export const DEFAULT_PICKED_HERO = GameEnum.Dota2.enum_HeroName.phoenix;
+    export const DEFAULT_PICKED_HERO = GameEnum.Dota2.enum_HeroName.wisp;
     /**网表存数据是否是存字符串的形式 */
     export const NetTableSaveDataAsSring = true;
     /**lua服务器特殊处理一些数据类型 todo 循环嵌套的结构没有处理*/

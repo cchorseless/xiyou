@@ -20,8 +20,10 @@ export class ECombinationLabelItem extends ET.Entity {
     // todo 套装检查
     checkActive() {
         let entity = this.getSourceEntity()
-        let condition = entity.config().CombinationCondition
-        if (condition && condition.length > 0) {
+        let CombinationCondition = entity.config().CombinationCondition;
+        let condition = GToNumber(CombinationCondition);
+        // 11标记的是大招，需要套装检查
+        if (condition == 11) {
             this.IsActive = false;
         }
     }

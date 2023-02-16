@@ -200,7 +200,7 @@ export class modifier_axe_6_health_buff extends BaseModifier_Plus {
     }
     Init(params: IModifierTable) {
         if (IsServer()) {
-            this.changeStackCount(this.GetSpecialValueFor("max_health"))
+            this.ChangeStackCount(this.GetSpecialValueFor("max_health"))
         }
     }
 
@@ -237,7 +237,7 @@ export class modifier_axe_6_str_buff extends BaseModifier_Plus {
     }
     Init(params: IModifierTable) {
         if (IsServer()) {
-            this.changeStackCount(this.GetSpecialValueFor("bonus_str"))
+            this.ChangeStackCount(this.GetSpecialValueFor("bonus_str"))
         }
     }
 

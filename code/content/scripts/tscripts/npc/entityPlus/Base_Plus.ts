@@ -1,5 +1,4 @@
 import { GameFunc } from "../../GameFunc";
-import { AoiHelper } from "../../helper/AoiHelper";
 import { LogHelper } from "../../helper/LogHelper";
 import { CCShare } from "../../shared/lib/CCShare";
 import { ET } from "../../shared/lib/Entity";
@@ -12,8 +11,10 @@ BaseClassExt.Init()
 export interface BaseAbility extends CDOTA_Ability_Lua { }
 export class BaseAbility implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
-    __safedestroyed__?: boolean = false;
-    /**查找技能 */
+    __safedestroyed__: boolean = false;
+    /**查找技能 
+     * @Both
+    */
     static findIn<T extends typeof BaseAbility>(this: T, target: CDOTA_BaseNPC) {
         return target.FindAbilityByName(this.name) as InstanceType<T>;
     }
@@ -22,7 +23,54 @@ export class BaseAbility implements ET.IEntityRoot {
 export interface BaseItem extends CDOTA_Item_Lua { }
 export class BaseItem implements ET.IEntityRoot {
     ETRoot?: ET.EntityRoot;
-    __safedestroyed__?: boolean = false;
+    __safedestroyed__: boolean = false;
+    /**
+     * @Server
+     * @param itemName 
+     * @param owner 
+     * @param purchaser 
+     * @returns 
+     */
+    static CreateItem(
+        itemName: string,
+        owner: CDOTAPlayerController | undefined,
+        purchaser: CDOTAPlayerController | undefined,
+    ) {
+        let hItem = CreateItem(itemName, owner, purchaser) as IBaseItem_Plus;
+        GameFunc.BindInstanceToCls(hItem, GGetRegClass(itemName) || BaseItem);
+        return hItem
+    }
+    /**
+     * 创建一个物品给单位，如果单位身上没地方放了，就扔在他附近随机位置
+     * @Server
+     * @param this
+     * @param hUnit
+     * @returns
+     */
+    static CreateOneOnUnit<T extends typeof BaseItem>(this: T, hUnit: IBaseNpc_Plus, itemname: string = null): InstanceType<T> {
+        let player = hUnit.GetPlayerOwner();
+        if (itemname == null) {
+            itemname = this.name;
+        }
+        let hItem = BaseItem.CreateItem(itemname, player, player)
+        hItem.SetPurchaseTime(0);
+        hUnit.AddItem(hItem);
+        if (GameFunc.IsValid(hItem) && hItem.GetOwnerPlus() != hUnit && hItem.GetContainer() == null) {
+            hItem.SetParent(hUnit, "");
+            hItem.CreateItemOnPositionRandom(hUnit.GetAbsOrigin());
+        }
+        return hItem as InstanceType<T>;
+    }
+    /**
+     * @Server
+     * @param this 
+     * @param hUnit 
+     * @returns 
+     */
+    static findInUnit<T extends typeof BaseItem>(this: T, hUnit: IBaseNpc_Plus): InstanceType<T> {
+        let item = hUnit.FindItemInInventory(this.name);
+        return item as InstanceType<T>;
+    }
 }
 
 export interface BaseModifier extends CDOTA_Modifier_Lua { }
@@ -216,8 +264,6 @@ export class BaseModifier {
     /**初始化自己，OnCreated和OnRefresh都会调用 */
     public Init(params?: object) {
     }
-
-
     /**
      * modifier_property 注册方法的补充
      * @returns 
@@ -281,7 +327,6 @@ export class BaseModifier {
         (params as IModifierTable).IsOnRefresh = true;
         this.Init(params);
     }
-
     __destroyed: boolean = true;
     public OnDestroy() {
         PropertyCalculate.RegModifiersInfo(this, false);
@@ -294,73 +339,12 @@ export class BaseModifier {
         this.StartIntervalThink(-1);
         this.__destroyed = true;
     }
-
-
     /**重载 
      * @Both
      */
     public onDebugReload<T extends typeof BaseModifier>(cls: T) {
         Object.assign(getmetatable(this).__index, cls.prototype);
     }
-    /**
-     * 圆形范围找敌方单位
-     * @Server
-     * @param radius
-     * @param p
-     * @returns
-     */
-    FindEnemyInRadius(radius: number, p: Vector = null) {
-        if (IsServer()) {
-            if (p == null) {
-                p = this.GetCaster().GetAbsOrigin();
-            }
-            let teamNumber = this.GetCaster().GetTeamNumber();
-            return AoiHelper.FindEntityInRadius(teamNumber, p, radius);
-        }
-    }
-
-
-    /**
-     * 獲取當前等級對應技能屬性
-     * @Both
-     * @param s
-     * @param default_V 默认值
-     * @returns
-     */
-    GetSpecialValueFor(s: string, default_V = 0): number {
-        let r = 0;
-        if (this.GetAbility() == null) {
-            r = (this as any)[s];
-        } else {
-            r = this.GetAbilityPlus().GetSpecialValueFor(s) || 0;
-        }
-        if (r && r != 0) {
-            return r;
-        } else {
-            return default_V;
-        }
-    }
-    /**
-     * @Both
-     */
-    GetLevelSpecialValueFor(s: string, lvl: number) {
-        if (this.GetAbility() == null) {
-            let r = (this as any)[s];
-            return r || 0;
-        }
-        return this.GetAbility().GetLevelSpecialValueFor(s, lvl);
-    }
-    /**
-     * @Both
-     * @returns 
-     */
-    GetAbilityLevel() {
-        if (this.GetAbility() == null) {
-            return -1;
-        }
-        return this.GetAbility().GetLevel();
-    }
-
 }
 
 export interface BaseNpc extends CDOTA_BaseNPC {
@@ -371,17 +355,48 @@ export class BaseNpc implements ET.IEntityRoot {
     __IN_DOTA_NAME__?: string;
     /**对应dota内的数据 */
     __IN_DOTA_DATA__?: any;
-    /**是否是第一次创建 */
-    __bIsFirstSpawn?: boolean;
     /**所有的BUFF信息 */
     __allModifiersInfo__?: { [v: string]: Array<any> };
     /**配置表数据 */
     __IN_KV_CACHE__?: { [v: string]: any };
-    /**初始魔法值 */
-    __BaseStatusMana?: number;
+
     private __SpawnedHandler__?: Array<IGHandler>;
-    /**是否已经被安全销毁 */
-    __safedestroyed__?: boolean = false;
+    __safedestroyed__: boolean = false;
+
+    /**
+     *
+     * @param v
+     * @param team
+     * @param creater 创建者
+     * @param findClearSpace
+     * @param npcOwner
+     * @param entityOwner
+     * @returns
+     */
+    static CreateOne<T extends typeof BaseNpc>(
+        this: T,
+        v: Vector,
+        team: DOTATeam_t,
+        findClearSpace: boolean = true,
+        npcOwner: CBaseEntity | undefined = null,
+        entityOwner: IBaseNpc_Plus = null
+    ): InstanceType<T> {
+        return BaseNpc.CreateUnitByName(this.name, v, team, findClearSpace, npcOwner, entityOwner) as InstanceType<T>;
+    }
+
+    static CreateUnitByName(
+        unitname: string,
+        v: Vector,
+        team: DOTATeam_t,
+        findClearSpace: boolean = true,
+        npcOwner: CBaseEntity | undefined = null,
+        entityOwner: IBaseNpc_Plus = null
+    ) {
+        let unit = CreateUnitByName(unitname, v, findClearSpace, npcOwner, entityOwner, team);
+        GameFunc.BindInstanceToCls(unit, GGetRegClass(unitname) || BaseNpc);
+        return unit as IBaseNpc_Plus;
+    }
+
     /**缓存 */
     Precache?(context: CScriptPrecacheContext) { }
     /**出生 不知道为啥，客户端不执行
@@ -393,9 +408,7 @@ export class BaseNpc implements ET.IEntityRoot {
      */
     onSpawned?(event: NpcSpawnedEvent) { }
     /**onSpawned之后执行，激活 */
-    Activate?() {
-
-    }
+    Activate?() { }
     /**
      * @override
      * 删除
@@ -444,28 +457,7 @@ export class BaseNpc implements ET.IEntityRoot {
         // return hCaster.HasModifier()
         return false;
     }
-    /**
-     * 异常状态抵抗百分比，用于异常状态持续时间
-     * @param n
-     * @returns
-     */
-    GetStatusResistanceFactor?(hCaster: CDOTA_BaseNPC) {
-        let d: number = 1 - PropertyCalculate.GetStatusResistance(this) * 0.01;
-        if (GameFunc.IsValid(hCaster)) {
-            d = d * (1 + PropertyCalculate.GetStatusResistanceCaster(hCaster) * 0.01)
-        }
-        return d
-    }
 
-    /**
-     * @Server 
-     * @param fChanged 
-     */
-    ModifyMaxHealth?(fChanged: number) {
-        if (GameFunc.IsValid(this)) {
-            PropertyCalculate.SetUnitCache(this, "StatusHealth", PropertyCalculate.GetUnitCache(this, "StatusHealth") + fChanged)
-        }
-    }
 
     /**
      * @Server

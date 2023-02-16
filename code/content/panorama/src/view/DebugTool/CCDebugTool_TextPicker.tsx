@@ -24,12 +24,12 @@ export class CCDebugTool_TextPicker extends CCPanel<ICCDebugTool_TextPicker> {
                     onChangeRawMode={rawMode => this.UpdateState({ rawMode: rawMode })}
                     DomainPanel={this}
                     width="620px"
-                    height="360px"
+                    height="500px"
                 >
                     <CCPanel className="CC_DebugTool_TextPicker" flowChildren="right-wrap" width="100%" scroll="y" >
                         {this.props.itemNames?.map((itemName, index) => {
                             return (
-                                <TextButton key={index} className="CC_DebugTool_TextPickerItem" localizedText={"#" + itemName} onactivate={self => { }} />
+                                <TextButton key={index} className="CC_DebugTool_TextPickerItem" localizedText={"#" + itemName} />
                             );
                         })}
                     </CCPanel>

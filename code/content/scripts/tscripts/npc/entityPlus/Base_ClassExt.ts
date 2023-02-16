@@ -1,131 +1,11 @@
 /** @noSelfInFile */
 
 import { GameFunc } from "../../GameFunc";
+import { AoiHelper } from "../../helper/AoiHelper";
 import { KVHelper } from "../../helper/KVHelper";
-
-declare global {
-    interface CDOTABaseAbility {
-        /**默认值 */
-        __DefaultSpecialValue__: { [k: string]: number | number[] };
-        GetLevelSpecialValueFor_Engine: typeof CDOTABaseAbility.GetLevelSpecialValueFor;
-        GetSpecialValueFor_Engine: typeof CDOTABaseAbility.GetSpecialValueFor;
-        /**
-         * 获取技能等级键值
-         * @param sKey 键名
-         * @param iLevel 等级，-1为取当前等级，1级填值为0
-         * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
-         * @param bAdded 是否计算附加值，不填默认为true
-         * @param hUnit 附加值函数计算者，不填默认为技能拥有者
-         * @returns 值
-         */
-        GetLevelSpecialValue(sKey: string, iLevel: number, bAbilityUpgrade?: boolean, bAdded?: boolean, hUnit?: CDOTA_BaseNPC): number;
-        /**
-         * 获取技能等级键附加值
-         * @param sKey 键名
-         * @param iLevel 等级，-1为取当前等级，1级填值为0
-         * @param sAddedKey 键附加值名
-         * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
-         * @returns 值
-         */
-        GetLevelSpecialAddedValue(sKey: string, iLevel: number, sAddedKey: string, bAbilityUpgrade?: boolean): string | number | undefined;
+import { PropertyCalculate } from "../propertystat/PropertyCalculate";
 
 
-        SetDefaultSpecialValue(sKey: string, v: any): void;
-        /**
-         * 获取技能当前等级键值
-         * @param sKey 键名
-         * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
-         * @param bAdded 是否计算附加值，不填默认为true
-         * @param hUnit 附加值函数计算者，不填默认为技能拥有者
-         * @returns 值
-         */
-        GetSpecialValue(sKey: string, bAbilityUpgrade?: boolean, bAdded?: boolean, hUnit?: CDOTA_BaseNPC): number;
-        /**
-         * 获取技能当前等级键附加值
-         * @param sKey 键名
-         * @param sAddedKey 键附加值名
-         * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
-         * @returns 值
-         */
-        GetSpecialAddedValue(sKey: string, sAddedKey: string, bAbilityUpgrade?: boolean): string | number | undefined;
-
-        /**
-         * 技能是否准备就绪可以施放
-         * @serverOnly
-         */
-        IsAbilityReady(): boolean;
-        /**
-         * 是否拥有天赋
-         * @param sTalent 天赋名
-         * @returns 值
-         */
-        HasTalent(sTalent: string): boolean;
-        /**
-         * 获取天赋数值
-         * @param sKey 键名
-         * @returns 值
-         */
-        GetTalentValue(sTalent: string, sKey: string): number;
-        /**
-         * 获取自定义技能类型
-         * @returns 值
-         */
-        // GetCustomAbilityType(): CUSTOM_ABILITY_TYPE;
-
-        SpeakTrigger(): number;
-
-        /** 获取伤害类型 */
-        // GetDamageType(): EOM_DAMAGE_TYPES;
-    }
-    interface CDOTA_Buff {
-        IsNull(): boolean;
-        /**
-         * 获取buff来源技能当前等级键值，如获取不到则会返回0
-         * @param sKey 键名
-         * @returns 值
-         */
-        GetAbilitySpecialValueFor(sKey: string): number;
-        /**
-         * 获取天赋数值
-         * @param sKey 键名
-         * @returns 值
-         */
-        GetAbilityTalentValue(sTalent: string, sKey: string): number;
-        /**
-         * 是否拥有天赋
-         * @param sTalent 天赋名
-         * @returns 值
-         */
-        HasTalent(sTalent: string): boolean;
-        /**
-         * 获取buff来源技能等级键值，如获取不到则会返回0
-         * @param sKey 键名
-         * @param iLevel 等级，-1为取当前等级，1级填值为0
-         * @returns 值
-         */
-        GetAbilityLevelSpecialValueFor(sKey: string, iLevel: number): number;
-        /** 获取流派数值 */
-        GetSectSpecialValueFor(id: string, sKey: string): number;
-
-        /** 增加层数 
-         * @Both
-        */
-        IncrementStackCount(iStackCount?: number): void;
-        /** 减少层数 
-         * @Both
-        */
-        DecrementStackCount(iStackCount?: number): void;
-        /**
-         * 获取自定义技能键值
-         * @returns 值
-         */
-        GetCustomAbilityValueFor(id: string, sKey: string): number;
-        /** 触发自定义技能效果 */
-        customAbilityEffect(): void;
-
-    }
-
-}
 
 
 //----------------------------------------------------------------------------------------------------
@@ -336,19 +216,104 @@ let tAddedValues: Record<string, string> = {
     _ulti: "GetUltiPower",
 };
 
-const CBaseAbility = IsServer() ? CDOTABaseAbility : C_DOTABaseAbility;
-if (IsClient()) {
-    CBaseAbility.GetManaCost = function (level: number) {
-        let data = KVHelper.KvAbilitys[this.GetAbilityName()] || KVHelper.KvItems[this.GetAbilityName()];
-        if (data && data.AbilityManaCost) {
-            return GToNumber(data.AbilityManaCost.split(' ')[level - 1]);
-        }
-        return 0;
-    }
-    CBaseAbility.GetGoldCost = function (level: number) {
-        return 0;
+declare global {
+    interface CDOTABaseAbility {
+        /**默认值 */
+        __DefaultSpecialValue__: { [k: string]: number | number[] };
+        /**是否销毁 */
+        __safedestroyed__: boolean;
+
+        /**
+         * @both
+         * @returns 
+         */
+        GetCasterPlus(): IBaseNpc_Plus;
+        /**
+         * @Server
+         * @returns 
+         */
+        GetOwnerPlus(): IBaseNpc_Plus;
+        GetLevelSpecialValueFor_Engine: typeof CDOTABaseAbility.GetLevelSpecialValueFor;
+        GetSpecialValueFor_Engine: typeof CDOTABaseAbility.GetSpecialValueFor;
+        /**
+         * 获取技能等级键值
+         * @param sKey 键名
+         * @param iLevel 等级，-1为取当前等级，1级填值为0
+         * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
+         * @param bAdded 是否计算附加值，不填默认为true
+         * @param hUnit 附加值函数计算者，不填默认为技能拥有者
+         * @returns 值
+         */
+        GetLevelSpecialValue(sKey: string, iLevel: number, bAbilityUpgrade?: boolean, bAdded?: boolean, hUnit?: CDOTA_BaseNPC): number;
+        /**
+         * 获取技能等级键附加值
+         * @param sKey 键名
+         * @param iLevel 等级，-1为取当前等级，1级填值为0
+         * @param sAddedKey 键附加值名
+         * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
+         * @returns 值
+         */
+        GetLevelSpecialAddedValue(sKey: string, iLevel: number, sAddedKey: string, bAbilityUpgrade?: boolean): string | number | undefined;
+
+
+        SetDefaultSpecialValue(sKey: string, v: any): void;
+        /**
+         * 获取技能当前等级键值
+         * @param sKey 键名
+         * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
+         * @param bAdded 是否计算附加值，不填默认为true
+         * @param hUnit 附加值函数计算者，不填默认为技能拥有者
+         * @returns 值
+         */
+        GetSpecialValue(sKey: string, bAbilityUpgrade?: boolean, bAdded?: boolean, hUnit?: CDOTA_BaseNPC): number;
+        /**
+         * 获取技能当前等级键附加值
+         * @param sKey 键名
+         * @param sAddedKey 键附加值名
+         * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
+         * @returns 值
+         */
+        GetSpecialAddedValue(sKey: string, sAddedKey: string, bAbilityUpgrade?: boolean): string | number | undefined;
+
+        /**
+         * 技能是否准备就绪可以施放
+         * @serverOnly
+         */
+        IsAbilityReady(): boolean;
+
+        /**尝试智能施法,AI会调用 
+         * @serverOnly
+        */
+        AutoSpellSelf(): boolean;
+        /**
+         * 是否拥有天赋
+         * @param sTalent 天赋名
+         * @returns 值
+         */
+        HasTalent(sTalent: string): boolean;
+        /**
+         * 获取天赋数值
+         * @param sKey 键名
+         * @returns 值
+         */
+        GetTalentValue(sTalent: string, sKey: string): number;
+        /**
+         * 获取自定义技能类型
+         * @returns 值
+         */
+        // GetCustomAbilityType(): CUSTOM_ABILITY_TYPE;
+        SpeakTrigger(): number;
+        /** 获取伤害类型 */
+        // GetDamageType(): EOM_DAMAGE_TYPES;
     }
 }
+
+const CBaseAbility = IsServer() ? CDOTABaseAbility : C_DOTABaseAbility;
+
+CBaseAbility.GetCasterPlus = function () {
+    return this.GetCaster() as IBaseNpc_Plus
+}
+
 if (CBaseAbility.GetLevelSpecialValueFor_Engine == undefined) {
     CBaseAbility.GetLevelSpecialValueFor_Engine = CBaseAbility.GetLevelSpecialValueFor;
 }
@@ -568,80 +533,96 @@ CBaseAbility.GetSpecialValueFor = function (s: string, default_V = 0): number {
 //     return KVHelper.KvAbilitys[this.GetAbilityName()].DamageType;
 // };
 
-// if (IsServer()) {
-//     CBaseAbility.IsAbilityReady = function () {
-//         let hCaster = this.GetCaster();
-//         let iBehavior = this.GetBehaviorInt();
+if (IsServer()) {
+    CBaseAbility.GetOwnerPlus = function () {
+        return this.GetOwner() as IBaseNpc_Plus
+    }
+    CBaseAbility.IsAbilityReady = function () {
+        let hCaster = this.GetCaster();
+        let iBehavior = this.GetBehaviorInt();
 
-//         if (!IsValid(hCaster)) {
-//             return false;
-//         }
+        if (!IsValid(hCaster)) {
+            return false;
+        }
 
-//         let hAbility = hCaster.GetCurrentActiveAbility();
-//         if (IsValid(hAbility) && hAbility.IsInAbilityPhase()) {
-//             return false;
-//         }
+        let hAbility = hCaster.GetCurrentActiveAbility();
+        if (IsValid(hAbility) && hAbility.IsInAbilityPhase()) {
+            return false;
+        }
 
-//         if (hCaster.HasModifier("modifier_passive_cast")) {
-//             return false;
-//         }
+        if (hCaster.HasModifier("modifier_passive_cast")) {
+            return false;
+        }
 
-//         if (this.GetLevel() <= 0) {
-//             return false;
-//         }
+        if (this.GetLevel() <= 0) {
+            return false;
+        }
 
-//         if (this.IsHidden()) {
-//             return false;
-//         }
+        if (this.IsHidden()) {
+            return false;
+        }
 
-//         if (!this.IsActivated()) {
-//             return false;
-//         }
+        if (!this.IsActivated()) {
+            return false;
+        }
 
-//         if (!this.IsCooldownReady()) {
-//             return false;
-//         }
+        if (!this.IsCooldownReady()) {
+            return false;
+        }
 
-//         if (!this.IsOwnersManaEnough()) {
-//             return false;
-//         }
+        if (!this.IsOwnersManaEnough()) {
+            return false;
+        }
 
-//         if (!this.IsOwnersGoldEnough(hCaster.GetPlayerOwnerID())) {
-//             return false;
-//         }
+        if (!this.IsOwnersGoldEnough(hCaster.GetPlayerOwnerID())) {
+            return false;
+        }
 
-//         if (hCaster.IsHexed() || hCaster.IsCommandRestricted()) {
-//             return false;
-//         }
+        if (hCaster.IsHexed() || hCaster.IsCommandRestricted()) {
+            return false;
+        }
 
-//         if ((iBehavior & DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE) != DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE && hCaster.IsStunned()) {
-//             return false;
-//         }
+        if ((iBehavior & DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE) != DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE && hCaster.IsStunned()) {
+            return false;
+        }
 
-//         if (!this.IsItem() && !this.IsPassive() && hCaster.IsSilenced()) {
-//             return false;
-//         }
+        if (!this.IsItem() && !this.IsPassive() && hCaster.IsSilenced()) {
+            return false;
+        }
 
-//         if (!this.IsItem() && this.IsPassive() && hCaster.PassivesDisabled()) {
-//             return false;
-//         }
+        if (!this.IsItem() && this.IsPassive() && hCaster.PassivesDisabled()) {
+            return false;
+        }
 
-//         if (this.IsItem() && !this.IsPassive() && hCaster.IsMuted()) {
-//             return false;
-//         }
+        if (this.IsItem() && !this.IsPassive() && hCaster.IsMuted()) {
+            return false;
+        }
 
-//         if ((iBehavior & DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL) != DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL && hCaster.IsChanneling()) {
-//             return false;
-//         }
+        if ((iBehavior & DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL) != DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL && hCaster.IsChanneling()) {
+            return false;
+        }
 
-//         if (!this.IsFullyCastable()) {
-//             return false;
-//         }
+        if (!this.IsFullyCastable()) {
+            return false;
+        }
 
-//         return true;
-//     };
+        return true;
+    };
+    CBaseAbility.AutoSpellSelf = function () { return true; }
+}
 
-// }
+if (IsClient()) {
+    CBaseAbility.GetManaCost = function (level: number) {
+        let data = KVHelper.KvAbilitys[this.GetAbilityName()] || KVHelper.KvItems[this.GetAbilityName()];
+        if (data && data.AbilityManaCost) {
+            return GToNumber(data.AbilityManaCost.split(' ')[level - 1]);
+        }
+        return 0;
+    }
+    CBaseAbility.GetGoldCost = function (level: number) {
+        return 0;
+    }
+}
 //----------------------------------------------------------------------------------------------------
 
 declare global {
@@ -671,11 +652,36 @@ declare global {
          */
         IsCastBySelf(): boolean;
         /**
-         * 获取buff来源技能当前等级键值，如获取不到则会返回0
+         * 獲取當前等級對應技能屬性
+         * @Both
+         * @param s
+         * @param default_V 默认值
+         * @returns
+         */
+        GetSpecialValueFor(sKey: string, default_V?: number): number;
+        /**
+         * 获取buff来源技能等级键值，如获取不到则会返回0
+         * @Both
          * @param sKey 键名
+         * @param iLevel 等级，-1为取当前等级，1级填值为0
          * @returns 值
          */
-        GetAbilitySpecialValueFor(sKey: string): number;
+        GetLevelSpecialValueFor(sKey: string, iLevel: number): number;
+
+        /**
+         * @Both
+         * @returns 
+         */
+        GetAbilityLevel(): number;
+
+        /**
+         * 圆形范围找敌方单位
+         * @Server
+         * @param radius
+         * @param p
+         * @returns
+         */
+        FindEnemyInRadius(radius: number, p?: Vector): IBaseNpc_Plus[]
         /**
          * 获取天赋数值
          * @param sKey 键名
@@ -687,14 +693,8 @@ declare global {
          * @param sTalent 天赋名
          * @returns 值
          */
-        HasTalent(sTalent: string): boolean;
-        /**
-         * 获取buff来源技能等级键值，如获取不到则会返回0
-         * @param sKey 键名
-         * @param iLevel 等级，-1为取当前等级，1级填值为0
-         * @returns 值
-         */
-        GetAbilityLevelSpecialValueFor(sKey: string, iLevel: number): number;
+        HasTalent(sTalent: string): IBaseAbility_Plus | null;
+
         /** 获取流派数值 */
         GetSectSpecialValueFor(id: string, sKey: string): number;
 
@@ -742,33 +742,58 @@ CDOTA_Buff.GetParentPlus = function () {
 CDOTA_Buff.IsCastBySelf = function () {
     return this.GetCasterPlus().GetEntityIndex() == this.GetParentPlus().GetEntityIndex();
 }
-// CDOTA_Buff.GetAbilitySpecialValueFor = function (sKey: string) {
-//     if (!IsValid(this) || !IsValid(this.GetAbility())) return 0;
-//     return this.GetAbility()!.GetSpecialValueFor(sKey);
-// };
-// CDOTA_Buff.GetAbilityTalentValue = function (sTalent: string, sKey: string) {
-//     if (!IsValid(this)) return 0;
-//     const hCaster = this.GetCaster();
-//     const hTalent = hCaster?.FindAbilityByName(sTalent);
-//     if (!IsValid(hTalent) || hTalent.GetLevel() == 0) {
-//         return 0;
-//     }
-//     return hTalent.GetSpecialValueFor(sKey);
-// };
-// CDOTA_Buff.HasTalent = function (sTalent: string) {
-//     if (!IsValid(this)) return false;
-//     const hCaster = this.GetCaster();
-//     const hTalent = hCaster?.FindAbilityByName(sTalent);
-//     if (!IsValid(hTalent) || hTalent.GetLevel() == 0) {
-//         return false;
-//     }
-//     return true;
-// };
+CDOTA_Buff.GetSpecialValueFor = function (s: string, default_V = 0) {
+    if (!IsValid(this)) return 0;
+    let r = 0;
+    if (this.GetAbility() == null) {
+        r = (this as any)[s];
+    } else {
+        r = this.GetAbilityPlus().GetSpecialValueFor(s) || 0;
+    }
+    if (r && r != 0) {
+        return r;
+    } else {
+        return default_V;
+    }
+};
 
-// CDOTA_Buff.GetAbilityLevelSpecialValueFor = function (sKey: string, iLevel: number) {
-//     if (!IsValid(this) || !IsValid(this.GetAbility())) return 0;
-//     return this.GetAbility()!.GetLevelSpecialValueFor(sKey, iLevel);
-// };
+CDOTA_Buff.GetLevelSpecialValueFor = function (s: string, lvl: number) {
+    if (!IsValid(this) || !IsValid(this.GetAbility())) return 0;
+    if (this.GetAbility() == null) {
+        let r = (this as any)[s];
+        return r || 0;
+    }
+    return this.GetAbility().GetLevelSpecialValueFor(s, lvl);
+};
+
+
+CDOTA_Buff.GetAbilityLevel = function () {
+    if (this.GetAbility() == null) {
+        return -1;
+    }
+    return this.GetAbility().GetLevel();
+}
+
+
+
+CDOTA_Buff.GetAbilityTalentValue = function (sTalent: string, sKey: string) {
+    if (!IsValid(this)) return 0;
+    const hCaster = this.GetCaster();
+    const hTalent = hCaster?.FindAbilityByName(sTalent);
+    if (!IsValid(hTalent) || hTalent.GetLevel() == 0) {
+        return 0;
+    }
+    return hTalent.GetSpecialValueFor(sKey);
+};
+CDOTA_Buff.HasTalent = function (sTalent: string) {
+    if (!IsValid(this)) return null;
+    const hCaster = this.GetCaster();
+    const hTalent = hCaster.FindAbilityByName(sTalent);
+    if (!IsValid(hTalent) || hTalent.GetLevel() == 0) {
+        return null;
+    }
+    return hTalent as IBaseAbility_Plus;
+};
 
 // CDOTA_Buff.GetSectSpecialValueFor = function (id: string, sKey: string): number {
 //     if (!IsValid(this) || !IsValid(this.GetAbility())) return 0;
@@ -875,10 +900,24 @@ CDOTA_Buff.DecrementStackCount = function (iStackCount?: number) {
         this.SetStackCount(this.GetStackCount() - iStackCount);
     }
 };
-
+if (IsServer()) {
+    CDOTA_Buff.FindEnemyInRadius = function (radius: number, p: Vector = null) {
+        if (IsServer()) {
+            if (p == null) {
+                p = this.GetCaster().GetAbsOrigin();
+            }
+            let teamNumber = this.GetCaster().GetTeamNumber();
+            return AoiHelper.FindEntityInRadius(teamNumber, p, radius);
+        }
+    }
+}
 //#region BaseNPC
 declare global {
     interface CDOTA_BaseNPC {
+        /**是否已经被安全销毁 */
+        __safedestroyed__: boolean;
+        /**是否是第一次创建 */
+        __bIsFirstSpawn: boolean;
         /**
          * @Both
          */
@@ -902,6 +941,55 @@ declare global {
          * @Both
          */
         IsRealUnit(): boolean;
+
+        /**
+         * @Both
+         */
+        GetIntellect(): number;
+        /**
+         * @Both
+         */
+        GetStrength(): number;
+        /**
+         * @Both
+         */
+        GetAgility(): number;
+        /**
+         * @Both
+         */
+        GetAllStats(): number;
+        /**
+         * 获取主属性值
+         * @Server
+         * @returns
+         */
+        GetPrimaryStatValue(): number;
+        /**
+         * 获取主属性
+         * @Both
+         * @returns
+         */
+        GetPrimaryAttribute(): Attributes;
+        /**
+         * 设置主属性值
+         * @Server
+         * @returns
+         */
+        SetPrimaryAttribute(v: Attributes): void;
+
+        /**
+         * 异常状态抵抗百分比，用于异常状态持续时间
+         * @Both
+         * @param n
+         * @returns
+         */
+        GetStatusResistanceFactor(hCaster: CDOTA_BaseNPC): number;
+
+        /**
+         * @Server 
+         * @param fChanged 
+         */
+        ModifyMaxHealth(fChanged: number): void;
         /**
          * @Server
          * @param abilityname 
@@ -984,7 +1072,66 @@ BaseNPC.IsRealUnit = function () {
     return !(this.IsIllusion() || this.IsSummoned());
 }
 
+BaseNPC.GetIntellect = function () {
+    return PropertyCalculate.GetIntellect(this)
+}
+
+BaseNPC.GetStrength = function () {
+    return PropertyCalculate.GetStrength(this)
+}
+
+BaseNPC.GetAgility = function () {
+    return PropertyCalculate.GetAgility(this)
+}
+
+BaseNPC.GetAllStats = function () {
+    return this.GetIntellect() + this.GetStrength() + this.GetAgility();
+}
+
+BaseNPC.GetPrimaryStatValue = function () {
+    const Primary = this.GetPrimaryAttribute();
+    if (Primary == Attributes.DOTA_ATTRIBUTE_AGILITY) {
+        return this.GetAgility()
+    }
+    else if (Primary == Attributes.DOTA_ATTRIBUTE_STRENGTH) {
+        return this.GetStrength()
+    }
+    else if (Primary == Attributes.DOTA_ATTRIBUTE_INTELLECT) {
+        return this.GetIntellect()
+    }
+    return 0;
+}
+
+BaseNPC.GetPrimaryAttribute = function () {
+    const herobuff = GPropertyConfig.HERO_PROPERTY_BUFF_NAME;
+    if (this.HasModifier(herobuff)) {
+        return this.GetModifierStackCount(herobuff, this)
+    }
+    return Attributes.DOTA_ATTRIBUTE_INVALID
+}
+
+BaseNPC.GetStatusResistanceFactor = function (hCaster: CDOTA_BaseNPC) {
+    let d: number = 1 - PropertyCalculate.GetStatusResistance(this) * 0.01;
+    if (IsValid(hCaster)) {
+        d = d * (1 + PropertyCalculate.GetStatusResistanceCaster(hCaster) * 0.01)
+    }
+    return d
+}
 if (IsServer()) {
+    BaseNPC.SetPrimaryAttribute = function (iPrimaryAttribute: Attributes) {
+        if (iPrimaryAttribute > Attributes.DOTA_ATTRIBUTE_INVALID && iPrimaryAttribute < Attributes.DOTA_ATTRIBUTE_MAX) {
+            const herobuff = GPropertyConfig.HERO_PROPERTY_BUFF_NAME;
+            const buff = this.findBuff(herobuff, this) as Imodifier_hero_property;
+            if (buff) {
+                buff.SetPrimaryStat(iPrimaryAttribute)
+            }
+        }
+    }
+    BaseNPC.ModifyMaxHealth = function (fChanged: number) {
+        if (IsValid(this)) {
+            PropertyCalculate.SetUnitCache(this, "StatusHealth", PropertyCalculate.GetUnitCache(this, "StatusHealth") + fChanged)
+        }
+    }
     BaseNPC.addAbilityPlus = function (abilityname: string, level: number = 1) {
         let ability = this.AddAbility(abilityname);
         if (ability) {

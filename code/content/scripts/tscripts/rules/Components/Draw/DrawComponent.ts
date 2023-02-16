@@ -2,8 +2,8 @@
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
-import { ET, serializeETProps } from "../../../shared/lib/Entity";
 import { DrawConfig } from "../../../shared/DrawConfig";
+import { ET, serializeETProps } from "../../../shared/lib/Entity";
 import { PlayerScene } from "../Player/PlayerScene";
 
 @GReloadable

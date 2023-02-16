@@ -625,9 +625,9 @@ export class modifier_death_prophet_6_intellect_buff extends BaseModifier_Plus {
         this.scepter_ghost_steal_intellect = this.GetSpecialValueFor("scepter_ghost_steal_intellect")
         if (IsServer()) {
             let ghost_steal_intellect = this.GetParentPlus().HasScepter() && this.scepter_ghost_steal_intellect || this.ghost_steal_intellect
-            this.changeStackCount(ghost_steal_intellect)
+            this.ChangeStackCount(ghost_steal_intellect)
             GTimerHelper.AddTimer(params.duration, GHandler.create(this, () => {
-                this.changeStackCount(-ghost_steal_intellect)
+                this.ChangeStackCount(-ghost_steal_intellect)
             }))
         }
     }

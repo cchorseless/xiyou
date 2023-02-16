@@ -322,9 +322,9 @@ export class modifier_pudge_6_buff_health_limit extends BaseModifierMotionHorizo
     Init(params: IModifierTable) {
         if (IsServer()) {
             let fOverflowHealth = params.fOverflowHealth || 0
-            this.changeStackCount(fOverflowHealth)
+            this.ChangeStackCount(fOverflowHealth)
             GTimerHelper.AddTimer(params.duration, GHandler.create(this, () => {
-                this.changeStackCount(-fOverflowHealth)
+                this.ChangeStackCount(-fOverflowHealth)
             }))
         }
     }

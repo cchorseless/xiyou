@@ -3,6 +3,7 @@ import { LogHelper } from "../../../helper/LogHelper";
 import { ActiveRootAbility } from "../../../npc/abilities/ActiveRootAbility";
 import { ET } from "../../../shared/lib/Entity";
 import { ERoundBoard } from "../Round/ERoundBoard";
+import { AbilityEntityRoot } from "./AbilityEntityRoot";
 
 @GReloadable
 export class AbilityManagerComponent extends ET.Component {
@@ -12,9 +13,13 @@ export class AbilityManagerComponent extends ET.Component {
         let len = npc.GetAbilityCount();
         for (let i = 0; i < len; i++) {
             let ability = npc.GetAbilityByIndex(i) as IBaseAbility_Plus;
-            if (ability && ability.ETRoot) {
+            if (ability) {
+                if (ability.ETRoot == null) {
+                    AbilityEntityRoot.TryToActive(ability)
+                }
                 this.addAbilityRoot(ability.ETRoot as IAbilityEntityRoot);
             }
+
         }
     }
     // 战吼
@@ -99,6 +104,7 @@ export class AbilityManagerComponent extends ET.Component {
     }
 
     addAbilityRoot(root: IAbilityEntityRoot) {
+        if (root == null) return;
         let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();
         if (root.DomainParent || root.DomainParent == battleunit) {
             return;

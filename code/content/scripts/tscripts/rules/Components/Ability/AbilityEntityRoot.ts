@@ -5,8 +5,18 @@ import { CombinationConfig } from "../../../shared/CombinationConfig";
 import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
 
 export class AbilityEntityRoot extends BaseEntityRoot {
-
     public readonly CombinationLabels: string[] = [];
+
+    static TryToActive(ability: IBaseAbility_Plus) {
+        if (IsServer()) {
+            if (ability == null) return;
+            const abilityname = ability.GetAbilityName();
+            if (abilityname.includes("_empty")) {
+                return;
+            }
+            AbilityEntityRoot.Active(ability);
+        }
+    }
 
     onAwake() {
         let ability = this.GetDomain<IBaseAbility_Plus>();
@@ -72,7 +82,7 @@ export class AbilityEntityRoot extends BaseEntityRoot {
     OnRoundStartBattle() {
         let ability = this.GetDomain<IBaseAbility_Plus>();
         let npc = ability.GetOwnerPlus();
-        if (this.isCombinationLabel(CombinationConfig.ECombinationLabel.suck_blood)) {
+        if (this.isCombinationLabel(CombinationConfig.ECombinationLabel.sect_suck_blood)) {
             EmitSoundOn("dac.warlock.soul_ring", npc);
             ResHelper.CreateParticle(new ResHelper.ParticleInfo().set_iAttachment(ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW)
                 .set_owner(npc)

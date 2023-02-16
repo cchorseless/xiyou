@@ -5,5 +5,4 @@ export module JsonConfigHelper {
         return GJSONConfig.ItemConfig.get(itemid);
     }
 
-
 }

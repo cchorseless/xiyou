@@ -1,7 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { modifier_taunt } from "../../../npc/modifier/effect/modifier_taunt";
-import { IBuilding_BaseNpc } from "../../../npc/units/building/Building_BaseNpc";
 import { ET } from "../../../shared/lib/Entity";
 
 @GReloadable
@@ -78,14 +77,14 @@ export class AiAttackComponent extends ET.Component {
         return false;
     }
     findAroundEnemyToAttack(): IBaseNpc_Plus {
-        let u = this.GetDomain<IBaseNpc_Plus>();
+        let u = this.GetDomain<IBuilding_BaseNpc>();
         let building = u.ETRoot.As<IBattleUnitEntityRoot>();
         if (!GameFunc.IsValid(u)) {
             return;
         }
         let new_target: IBaseNpc_Plus = null;
-        if ((u as IBuilding_BaseNpc).FindEnemyToAttack) {
-            new_target = (u as IBuilding_BaseNpc).FindEnemyToAttack();
+        if (u.FindEnemyToAttack) {
+            new_target = u.FindEnemyToAttack();
         }
         if (!GameFunc.IsValid(new_target)) {
             let current_target = u.GetAttackTarget() as IBaseNpc_Plus;
