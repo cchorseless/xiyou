@@ -67,7 +67,7 @@ export class BaseItem implements ET.IEntityRoot {
      * @param hUnit 
      * @returns 
      */
-    static findInUnit<T extends typeof BaseItem>(this: T, hUnit: IBaseNpc_Plus): InstanceType<T> {
+    static FindInUnit<T extends typeof BaseItem>(this: T, hUnit: IBaseNpc_Plus): InstanceType<T> {
         let item = hUnit.FindItemInInventory(this.name);
         return item as InstanceType<T>;
     }

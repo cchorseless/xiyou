@@ -6,6 +6,7 @@ export interface KvAllInterface  {
 "shipin_config": shipin_config.OBJ_1_1,
 "lang_config": lang_config.OBJ_1_1,
 "publicshop_config": publicshop_config.OBJ_1_1,
+"common_units": common_units.OBJ_1_1,
 "courier_units": courier_units.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
 "building_round": building_round.OBJ_1_1,
@@ -26,6 +27,7 @@ export const KvAllPath = {
 "shipin_config": "scripts/npc/kvConfig/shipin_config.kv",
 "lang_config": "scripts/npc/kvConfig/lang_config.kv",
 "publicshop_config": "scripts/npc/kvConfig/publicshop_config.kv",
+"common_units": "scripts/npc/units/common_units.kv",
 "courier_units": "scripts/npc/units/courier_units.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
 "building_round": "scripts/npc/building/building_round.kv",
@@ -46,6 +48,7 @@ export interface KvServerInterface   {
 "shipin_config": shipin_config.OBJ_1_1,
 "lang_config": lang_config.OBJ_1_1,
 "publicshop_config": publicshop_config.OBJ_1_1,
+"common_units": common_units.OBJ_1_1,
 "courier_units": courier_units.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
 "building_round": building_round.OBJ_1_1,
@@ -66,6 +69,7 @@ export const KvServer = {
 "shipin_config": "scripts/npc/kvConfig/shipin_config.kv",
 "lang_config": "scripts/npc/kvConfig/lang_config.kv",
 "publicshop_config": "scripts/npc/kvConfig/publicshop_config.kv",
+"common_units": "scripts/npc/units/common_units.kv",
 "courier_units": "scripts/npc/units/courier_units.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
 "building_round": "scripts/npc/building/building_round.kv",
@@ -86,6 +90,7 @@ export interface KvClientInterface   {
 "shipin_config": shipin_config.OBJ_1_1,
 "lang_config": lang_config.OBJ_1_1,
 "publicshop_config": publicshop_config.OBJ_1_1,
+"common_units": common_units.OBJ_1_1,
 "courier_units": courier_units.OBJ_1_1,
 "building_item_card": building_item_card.OBJ_1_1,
 "building_round": building_round.OBJ_1_1,
@@ -106,6 +111,7 @@ export const KvClient = {
 "shipin_config": "scripts/npc/kvConfig/shipin_config.kv",
 "lang_config": "scripts/npc/kvConfig/lang_config.kv",
 "publicshop_config": "scripts/npc/kvConfig/publicshop_config.kv",
+"common_units": "scripts/npc/units/common_units.kv",
 "courier_units": "scripts/npc/units/courier_units.kv",
 "building_item_card": "scripts/npc/building/building_item_card.kv",
 "building_round": "scripts/npc/building/building_round.kv",
@@ -123,5 +129,5 @@ export const allAbilitys = ["courier_abilities","building_ability_tower"];
 export type KV_Abilitys = courier_abilities.OBJ_1_1|building_ability_tower.OBJ_1_1;
 export const allItems = ["building_item_card"];
 export type KV_Items = building_item_card.OBJ_1_1;
-export const allUnits = ["building_unit_enemy","building_unit_tower","building_unit_summoned"];
-export type KV_Units = building_unit_enemy.OBJ_1_1|building_unit_tower.OBJ_1_1|building_unit_summoned.OBJ_1_1;
+export const allUnits = ["building_unit_enemy","building_unit_tower","building_unit_summoned","common_units"];
+export type KV_Units = building_unit_enemy.OBJ_1_1|building_unit_tower.OBJ_1_1|building_unit_summoned.OBJ_1_1|common_units.OBJ_1_1;

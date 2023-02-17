@@ -339,7 +339,7 @@ export class CCMainPanel extends CCPanel<NodePropsData> {
             for (let k of Object.keys(this.allPanelInMain)) {
                 let _zorder = parseInt(k);
                 if (_zorder > zorder) {
-                    this.allPanelInMain[k].forEach(c => c.close(true));
+                    this.allPanelInMain[k].forEach(c => c.close());
                     delete this.allPanelInMain[k];
                 }
             }

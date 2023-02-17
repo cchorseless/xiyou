@@ -1,7 +1,5 @@
 
-import { GameEnum } from "../../../shared/GameEnum";
-import { LogHelper } from "../../../helper/LogHelper";
-import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
 
 @registerModifier()

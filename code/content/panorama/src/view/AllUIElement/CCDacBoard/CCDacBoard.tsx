@@ -31,6 +31,7 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
         }
         return (
             <Panel ref={this.__root__} id="CC_DacBoardPanel"  {...this.initRootAttrs()} hittest={false}>
+                {this.props.BShowBuffList && <CCBuffList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"140px"} />}
                 <CCPanel id="DacBoardBG" className={CSSHelper.ClassMaker(this.props.type)} />
                 <CCPanel id="DacBoardDiv">
                     <Panel id="DacBoardLeft" hittest={false}>
@@ -42,7 +43,6 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
                             {/* <CCDOTAAghsStatusDisplay /> */}
                         </CCPanel>
                         <CCHealthMana verticalAlign="bottom" marginBottom={"0px"} />
-                        {this.props.BShowBuffList && <CCBuffList horizontalAlign={"center"} verticalAlign="bottom" marginBottom={"140px"} />}
                     </CCPanel>
                     <Panel id="DacBoardRight" hittest={false}>
                         <CCInventory verticalAlign="bottom" marginBottom={"0px"} />

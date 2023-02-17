@@ -98,7 +98,6 @@
 "building_hero_spirit_breaker"       "裂魂人"
 "building_hero_storm_spirit"       "风暴之灵"
 "building_hero_sven"       "斯文"
-"building_hero_target_dummy"       "傀儡目标"
 "building_hero_techies"       "地精工程师"
 "building_hero_templar_assassin"       "圣堂刺客"
 "building_hero_terrorblade"       "灵魂守卫"

@@ -6,7 +6,6 @@ import { BattleUnitManagerComponent } from "../BattleUnit/BattleUnitManagerCompo
 import { CombinationComponent } from "../Combination/CombinationComponent";
 import { ERound } from "../Round/ERound";
 import { ERoundBoard } from "../Round/ERoundBoard";
-import { EnemyMoveComponent } from "./EnemyMoveComponent";
 
 @GReloadable
 export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
@@ -26,11 +25,9 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         this.onInit()
     }
 
-    GetPlayerId() {
-        return this.Domain.ETRoot.As<IEnemyUnitEntityRoot>().BelongPlayerid;
-    }
+
     EnemyUnitType() {
-        return this.Domain.ETRoot.As<IEnemyUnitEntityRoot>().Config().UnitLabel;
+        return this.Config().UnitLabel;
     }
     IsWave() {
         return this.EnemyUnitType() == EnemyConfig.EEnemyUnitType.wave;
@@ -80,9 +77,7 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
         }
     }
 
-    EnemyMoveComp() {
-        return this.GetComponentByName<EnemyMoveComponent>("EnemyMoveComponent");
-    }
+
 
     BattleUnitManager() {
         return this.GetComponentByName<BattleUnitManagerComponent>("BattleUnitManagerComponent");

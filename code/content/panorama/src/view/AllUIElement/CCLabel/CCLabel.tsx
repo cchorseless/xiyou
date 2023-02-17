@@ -36,7 +36,6 @@ export class CCLabel extends CCPanel<ICCLabelProps, LabelPanel>{
 
     render() {
         return (
-            this.__root___isValid &&
             <Label ref={this.__root__ as any}  {...this.initRootAttrs()}  >
                 {this.props.children}
                 {this.__root___childs}

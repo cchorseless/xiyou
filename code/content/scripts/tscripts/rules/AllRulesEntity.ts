@@ -12,7 +12,6 @@ import { ECombinationLabelItem } from "./Components/Combination/ECombinationLabe
 import { DrawComponent } from "./Components/Draw/DrawComponent";
 import { EnemyKillPrizeComponent } from "./Components/Enemy/EnemyKillPrizeComponent";
 import { EnemyManagerComponent } from "./Components/Enemy/EnemyManagerComponent";
-import { EnemyMoveComponent } from "./Components/Enemy/EnemyMoveComponent";
 import { FHeroCombination } from "./Components/FakerHero/FHeroCombination";
 import { FHeroCombinationManagerComponent } from "./Components/FakerHero/FHeroCombinationManagerComponent";
 import { InventoryComponent } from "./Components/Inventory/InventoryComponent";
@@ -67,7 +66,6 @@ import { WearableSystemComponent } from "./System/WearableSystemComponent";
     ChessMoveComponent,
 
     EnemyKillPrizeComponent,
-    EnemyMoveComponent,
     EWearableItem,
     WearableComponent,
     WearableSystemComponent,

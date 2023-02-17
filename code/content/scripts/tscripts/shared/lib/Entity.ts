@@ -165,7 +165,6 @@ export module ET {
                     (CustomNetTables as any).SetTableValue(this.NetTableNames[i] as never, InstanceId, null as never);
                 }))
             }
-            GLogHelper.print(this.NetTableNames, "DelNetTableData");
             (this.NetTableNames as any) = null;
             //#endregion LUA
         }

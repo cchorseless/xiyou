@@ -6,6 +6,7 @@ dota_abilities.OBJ_0_1,
 shipin_config.OBJ_0_1,
 lang_config.OBJ_0_1,
 publicshop_config.OBJ_0_1,
+common_units.OBJ_0_1,
 courier_units.OBJ_0_1,
 building_item_card.OBJ_0_1,
 building_round.OBJ_0_1,
@@ -20,4 +21,4 @@ building_ability_tower.OBJ_0_1,
 courier_abilities.OBJ_0_1{ }
 declare type KV_AllAbilitys =  courier_abilities.OBJ_1_1 | building_ability_tower.OBJ_1_1 ;
 declare type KV_AllItems  = building_item_card.OBJ_1_1 ;
-declare type KV_AllUnits  = building_unit_enemy.OBJ_1_1 |building_unit_tower.OBJ_1_1 |building_unit_summoned.OBJ_1_1 ;
+declare type KV_AllUnits  = building_unit_enemy.OBJ_1_1 |building_unit_tower.OBJ_1_1 |building_unit_summoned.OBJ_1_1 |common_units.OBJ_1_1 ;

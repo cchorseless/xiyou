@@ -10,17 +10,16 @@ export class EnemyMoveComponent extends ET.Component {
     onAwake(...args: any[]): void { }
     public getMoveWay() {
         let unitComp = this.Domain.ETRoot.As<IEnemyUnitEntityRoot>()
-        let playerid = unitComp.GetPlayerId();
         if (unitComp.IsWave()) {
-            return EnemyConfig.ENEMY_CORNERS[playerid];
+            return EnemyConfig.ENEMY_CORNERS[this.BelongPlayerid];
         } else if (unitComp.IsBoss()) {
-            return EnemyConfig.BOSS_CORNERS[playerid];
+            return EnemyConfig.BOSS_CORNERS[this.BelongPlayerid];
         } else if (unitComp.IsGOLD_BOSS()) {
-            return EnemyConfig.CHALLENGE_CORNERS[playerid];
+            return EnemyConfig.CHALLENGE_CORNERS[this.BelongPlayerid];
         } else if (unitComp.IsCANDY_WAVE()) {
-            return EnemyConfig.CHALLENGE_CORNERS[playerid];
+            return EnemyConfig.CHALLENGE_CORNERS[this.BelongPlayerid];
         } else if (unitComp.IsCANDY_BOSS()) {
-            return EnemyConfig.CANDY_BOSS_CORNERS[playerid];
+            return EnemyConfig.CANDY_BOSS_CORNERS[this.BelongPlayerid];
         }
     }
 

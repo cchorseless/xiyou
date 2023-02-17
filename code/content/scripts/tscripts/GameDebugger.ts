@@ -1,8 +1,11 @@
+import { GameFunc } from "./GameFunc";
 import { GameSetting } from "./GameSetting";
 import { BotHelper } from "./helper/BotHelper";
 import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { ActiveRootItem } from "./npc/items/ActiveRootItem";
+import { modifier_dummy_damage } from "./npc/modifier/battle/modifier_dummy_damage";
+import { unit_target_dummy } from "./npc/units/common/unit_target_dummy";
 import { GameEnum } from "./shared/GameEnum";
 import { GameProtocol } from "./shared/GameProtocol";
 import { GameServiceConfig } from "./shared/GameServiceConfig";
@@ -159,6 +162,32 @@ export class GameDebugger extends SingletonClass {
         }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugRemoveAllAbility, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
 
+        }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugAddDummyTarget, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            let player = GGameScene.GetPlayer(e.PlayerID);
+            if (!player) return;
+            let hero = player.Hero;
+            let hDummy = unit_target_dummy.CreateOne(hero.GetAbsOrigin(), DOTATeam_t.DOTA_TEAM_BADGUYS, true, hero, hero)
+            if (GameFunc.IsValid(hDummy)) {
+                modifier_dummy_damage.apply(hDummy, hDummy);
+                hDummy.SetControllableByPlayer(e.PlayerID, false);
+                hDummy.Hold();
+                hDummy.SetIdleAcquire(false);
+                hDummy.SetAcquisitionRange(0);
+            }
+        }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugRemoveDummyTarget, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            let player = GGameScene.GetPlayer(e.PlayerID);
+            if (!player) return;
+            const buffinfo = modifier_dummy_damage.GetAllInstance();
+            Object.values(buffinfo).forEach((buff) => {
+                const hUnit = buff.GetParentPlus();
+                if (GameFunc.IsValid(hUnit)) {
+                    hUnit.MakeIllusion();
+                    hUnit.AddNoDraw();
+                    GDestroyUnit(hUnit);
+                }
+            })
         }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugAddSect, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
             let { sectname } = e.data;

@@ -49,7 +49,7 @@ export class GameMode {
      */
     private InitGlobalBaseNPC() {
         if (this.globalNpc_MODIFIER_EVENTS) {
-            UTIL_Remove(this.globalNpc_MODIFIER_EVENTS);
+            GDestroyUnit(this.globalNpc_MODIFIER_EVENTS);
             this.globalNpc_MODIFIER_EVENTS = null;
         }
         this.globalNpc_MODIFIER_EVENTS = modifier_event.applyThinker(Vector(0, 0, 0), this.Instance as any, null, null, DOTATeam_t.DOTA_TEAM_NOTEAM, false);
@@ -69,24 +69,6 @@ export class GameMode {
         FireGameEvent(GameEnum.GameEvent.client_reload_game_keyvalues, {});
         ETEntitySystem.DebugReload();
         GGameCache.DebugReload();
-        // let units = Entities.FindAllByClassname("npc_dota_creature") as IBaseNpc_Plus[]
-        // LogHelper.print(modifier_test.GetAllInstance(), 111)
-        // let s = []
-        // for (let unit of units) {
-        //     let unitname = (unit as IBaseNpc_Plus).GetUnitName();
-        //     if (unitname == 'dota_hero_axe') {
-        //         let modef = unit.FindModifierByName('modifier_test')
-        //         LogHelper.print(Object.keys(modef.constructor.prototype))
-        //         LogHelper.print(Object.keys(modifier_test))
-        //         LogHelper.print(modef.constructor == modifier_test)
-        //         LogHelper.print((modef.constructor as any).mmmm, modifier_test.mmmm)
-        //         LogHelper.print((modef.constructor as any).reload(), modifier_test.reload())
-        //         modef.constructor = modifier_test;
-        //         // s.push(modef.constructor)
-        //         break
-        //     }
-        // }
-        // LogHelper.print(s[0] == s[1])
         // 更新全局NPC
         // this.InitGlobalBaseNPC();
         LogHelper.print("Script reloaded end!");

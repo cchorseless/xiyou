@@ -382,7 +382,7 @@ export class modifier_pudge_1_buff extends BaseModifierMotionHorizontal_Plus {
         super.OnCreated(params);
         if (IsServer()) {
             this.iHashtableIndex = params.hashtableUUid;
-            let item = item_towerchange_custom.findInUnit(this.GetParentPlus())
+            let item = item_towerchange_custom.FindInUnit(this.GetParentPlus())
             if (item) {
                 item.SetShareability(EShareAbility.ITEM_FULLY_SHAREABLE)
                 this.GetCasterPlus().AddItem(item);

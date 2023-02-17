@@ -93,6 +93,7 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
     /**全局唯一UUID，用于标识 */
     readonly InstanceId: string;
     readonly IsRegister: boolean = false;
+    readonly IsClosed: boolean = false;
     /**所有子节点名称数据 */
     NODENAME = { __root__: "__root__" };
     /**所有注册的事件毁掉函数 */
@@ -434,14 +435,14 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
      * 关闭界面
      * @param destroy 是否销毁自己
      */
-    public close(destroy = true) {
+    public close() {
+        if (this.IsClosed) { return; }
+        (this.IsClosed as any) = true;
         if (this.__root__ && this.__root__.current) {
             this.__root__.current.visible = false;
             this.updateSelf();
         }
-        if (destroy) {
-            this.destroy();
-        }
+        this.destroy();
     }
     public show() {
         if (this.__root__ && this.__root__.current) {
@@ -499,14 +500,6 @@ export class BasePureComponent<P extends NodePropsData, B extends Panel = Panel>
         (this as any).InstanceId = this.props.__onlykey__ || GGenerateUUID();
         CSSHelper.SavePanelData(this.__root__.current!, "__onlykey__", this.InstanceId);
         this.setRegister(true);
-        // 下一帧开始刷新
-        // GTimerHelper.AddFrameTimer(1,
-        //     GHandler.create(this, () => {
-        //         if (this.IsRegister) {
-        //             this.onStartUI();
-        //         }
-        //     })
-        // );
         this.onStartUI();
     }
     private useEffectPropList: { func: () => void, prop: string[] }[];

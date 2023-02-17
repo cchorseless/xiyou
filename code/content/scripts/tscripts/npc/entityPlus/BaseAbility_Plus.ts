@@ -1,5 +1,6 @@
 import { GameFunc } from "../../GameFunc";
 import { GameSetting } from "../../GameSetting";
+import { KVHelper } from "../../helper/KVHelper";
 import { ResHelper } from "../../helper/ResHelper";
 import { BaseAbility } from "./Base_Plus";
 
@@ -43,11 +44,11 @@ export class BaseAbility_Plus extends BaseAbility {
 
     /**技能ICON */
     public GetAbilityTextureName(): string {
-        let iconpath = super.GetAbilityTextureName();
-        if (iconpath == null || iconpath == this.GetAbilityName()) {
+        let iconpath = KVHelper.KvAbilitys[this.GetAbilityName()].AbilityTextureName || "";
+        if (iconpath == "") {
             iconpath = this.__IN_DOTA_NAME__;
         }
-        return ResHelper.GetAbilityTextureReplacement(iconpath, this.GetCaster())
+        return ResHelper.GetAbilityTextureReplacement(iconpath as string, this.GetCaster())
     }
 
     // /**

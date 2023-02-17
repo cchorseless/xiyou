@@ -75,6 +75,9 @@ export class GameMode_Client extends SingletonClass {
         let spawnedUnit = EntIndexToHScript(e.entindex) as IBaseNpc_Plus;
         if (spawnedUnit == null) return;
         let sUnitName = spawnedUnit.GetUnitName();
+        if (!sUnitName || sUnitName.length == 0) {
+            return;
+        }
         if (sUnitName == GameEnum.Unit.UnitNames.npc_dota_thinker) {
             return;
         }

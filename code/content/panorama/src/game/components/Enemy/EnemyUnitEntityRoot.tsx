@@ -3,8 +3,6 @@ import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
 @GReloadable
 export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
 
-    onDestroy(): void {
-    }
 }
 declare global {
     type IEnemyUnitEntityRoot = EnemyUnitEntityRoot;
