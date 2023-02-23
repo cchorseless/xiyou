@@ -30,8 +30,8 @@ export class modifier_poison extends BaseModifier_Plus {
         return false
     }
     tPoisonerInfos: { poisoner: IBaseNpc_Plus, ability: IBaseAbility_Plus, stack_count: number }[];
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_venomancer/venomancer_gale_poison_debuff.vpcf",
@@ -81,7 +81,7 @@ export class modifier_poison extends BaseModifier_Plus {
                     damage: tPoisonInfo.stack_count,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
                     damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-                    eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_POISON + BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT + BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM + BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_POISON + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                 })
             }
             //  头顶绿色数字
@@ -149,10 +149,10 @@ export class modifier_poison extends BaseModifier_Plus {
                 damage: iDamage,
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_POISON +
-                    BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT +
-                    BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM +
-                    BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_POISON +
+                    BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT +
+                    BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM +
+                    BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
             })
             let _incom = GPropertyCalculate.SumProps(htarget, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE);
             let fPoisonPercent = (1 + _incom * 0.01) || 1;

@@ -48,8 +48,8 @@ export class modifier_luna_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(1)
         }
@@ -65,8 +65,8 @@ export class modifier_luna_3 extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.modifier)) {
                 this.modifier.Destroy()
@@ -148,7 +148,7 @@ export class modifier_luna_3_effect extends BaseModifier_Plus {
         return this.bonus_attribute + (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_luna_custom_8") || 0)
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
-    EOM_GetModifierBaseAttack_BonusDamage() {
+    CC_GetModifierBaseAttack_BonusDamage() {
         return this.GetParentPlus().GetPrimaryStatValue() * this.primary_attribute_damage
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)

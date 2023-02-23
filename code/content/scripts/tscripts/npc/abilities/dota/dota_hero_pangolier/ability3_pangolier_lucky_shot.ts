@@ -112,8 +112,8 @@ export class modifier_pangolier_3 extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
             // hAbility.AddOutgoingDamagePercent = null
@@ -134,11 +134,11 @@ export class modifier_pangolier_3 extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.damage_amplify_percent * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         return this.damage_amplify_percent * this.GetStackCount()
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_RECORD)
@@ -294,8 +294,8 @@ export class modifier_pangolier_3_stun extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/generic_gameplay/generic_stunned.vpcf",
@@ -372,7 +372,7 @@ export class modifier_pangolier_3_remove_armor extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
-    EOM_GetModifierPhysicalArmorBonus(params: IModifierTable) {
+    CC_GetModifierPhysicalArmorBonus(params: IModifierTable) {
         return this.raduce_armor
     }
 }

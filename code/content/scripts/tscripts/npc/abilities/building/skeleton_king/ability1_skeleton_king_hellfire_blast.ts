@@ -180,8 +180,8 @@ export class modifier_skeleton_king_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -261,8 +261,8 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let extra_damage_factor = this.GetCasterPlus().HasTalent("special_bonus_unique_skeleton_king_custom_4") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_skeleton_king_custom_4") || 0
         this.damage_per_second = this.GetSpecialValueFor("damage_per_second") + extra_damage_factor * this.GetCasterPlus().GetStrength()
         this.damage_interval = this.GetSpecialValueFor("damage_interval")
@@ -284,8 +284,8 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let extra_damage_factor = this.GetCasterPlus().HasTalent("special_bonus_unique_skeleton_king_custom_4") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_skeleton_king_custom_4") || 0
         this.damage_per_second = this.GetSpecialValueFor("damage_per_second") + extra_damage_factor * this.GetCasterPlus().GetStrength()
         this.damage_interval = this.GetSpecialValueFor("damage_interval")
@@ -299,7 +299,7 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE)
-    EOM_GetModifierIgnorePhysicalArmorPercentageTarget(params: IModifierTable) {
+    CC_GetModifierIgnorePhysicalArmorPercentageTarget(params: IModifierTable) {
         if (IsServer() && this.bUseEnergy) {
             //  骷髅王无视护甲
             if (params.attacker == this.GetCasterPlus()) {
@@ -352,7 +352,7 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
                 attacker: caster,
                 damage: damage,
                 damage_type: this.damage_type,
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(damage_table)
         }
@@ -426,8 +426,8 @@ export class modifier_special_bonus_unique_skeleton_king_custom_1 extends BaseMo
 // 特效
 @registerModifier()
 export class modifier_skeleton_king_1_particle_warmup extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_skeletonking/skeletonking_hellfireblast_warmup.vpcf",

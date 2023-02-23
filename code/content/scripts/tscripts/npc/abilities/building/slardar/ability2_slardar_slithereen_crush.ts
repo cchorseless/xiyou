@@ -145,7 +145,7 @@ export class modifier_slardar_2_bashed extends BaseModifier_Plus {
         return GameActivity_t.ACT_DOTA_DISABLED
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.bonus_physical_damage
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)

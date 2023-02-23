@@ -93,8 +93,8 @@ export class modifier_storm_spirit_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -190,8 +190,8 @@ export class modifier_storm_spirit_1_thinker extends BaseModifier_Plus {
     GetAuraSearchFlags() {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.static_remnant_radius = this.GetSpecialValueFor("static_remnant_radius")
@@ -230,8 +230,8 @@ export class modifier_storm_spirit_1_thinker extends BaseModifier_Plus {
             this.StartIntervalThink(-1)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             let hCaster = this.GetCasterPlus()

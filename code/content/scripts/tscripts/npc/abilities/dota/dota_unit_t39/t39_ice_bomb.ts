@@ -99,8 +99,8 @@ export class modifier_t39_ice_bomb extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
         }
@@ -179,8 +179,8 @@ export class modifier_t39_ice_bomb_debuff extends BaseModifier_Plus {
     GetTexture() {
         return "lich/ti8_immortal_wrist/lich_chain_frost_immortal"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (!IsServer()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_ancient_apparition/ancient_apparition_ice_blast_debuff.vpcf",

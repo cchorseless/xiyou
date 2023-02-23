@@ -91,7 +91,7 @@ export class modifier_sniper_3 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (IsServer() && params != null) {
             let hParent = this.GetParentPlus()
             if (params.attacker == hParent && !hParent.PassivesDisabled()) {

@@ -148,8 +148,8 @@ export class modifier_dawnbreaker_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -243,8 +243,8 @@ export class modifier_dawnbreaker_6_buff extends BaseModifier_Plus {
         }
     }
 
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
             hAbility.SetActivated(false)
@@ -259,8 +259,8 @@ export class modifier_dawnbreaker_6_buff extends BaseModifier_Plus {
         this.damage_range = this.GetSpecialValueFor("damage_range")
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()

@@ -81,8 +81,8 @@ export class modifier_bloodseeker_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -182,8 +182,8 @@ export class modifier_bloodseeker_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -208,8 +208,8 @@ export class modifier_bloodseeker_1_buff extends BaseModifier_Plus {
         this.reduce_attack_ptg = this.GetSpecialValueFor("reduce_attack_ptg")
         this.damage_max_health_pct = this.GetSpecialValueFor("damage_max_health_pct")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.StartIntervalThink(-1)
         }
@@ -224,7 +224,7 @@ export class modifier_bloodseeker_1_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    EOM_GetModifierSpellAmplifyBonus() {
+    CC_GetModifierSpellAmplifyBonus() {
         return this.bonus_amplify_damage - this.reduce_amplify_damage_ptg * (100 - this.GetParentPlus().GetHealthPercent()) / this.per_lose_max_health_ptg
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
@@ -243,7 +243,7 @@ export class modifier_bloodseeker_1_buff extends BaseModifier_Plus {
                 damage: fDamage,
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_USE_COMBAT_PROFICIENCY,
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT + BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY,
 
             }
             BattleHelper.GoApplyDamage(damage_table)

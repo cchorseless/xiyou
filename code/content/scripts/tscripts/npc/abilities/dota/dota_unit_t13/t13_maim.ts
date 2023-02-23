@@ -52,8 +52,8 @@ export class modifier_t13_maim extends BaseModifier_Plus {
         this.duration = this.GetSpecialValueFor("duration")
         this.blood_chance = this.GetSpecialValueFor("blood_chance")
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.duration = this.GetSpecialValueFor("duration")
         this.blood_chance = this.GetSpecialValueFor("blood_chance")
     }
@@ -103,8 +103,8 @@ export class modifier_t13_maim_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             if (this.GetStackCount() < this.max_stack_count) {
                 this.IncrementStackCount()
@@ -120,8 +120,8 @@ export class modifier_t13_maim_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.incoming_damage_pct = this.GetSpecialValueFor("incoming_damage_pct")
         this.max_stack_count = this.GetSpecialValueFor("max_stack_count")
         if (IsServer()) {

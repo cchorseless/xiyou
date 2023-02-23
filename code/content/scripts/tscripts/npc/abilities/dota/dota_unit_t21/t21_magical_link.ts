@@ -107,8 +107,8 @@ export class modifier_t21_magical_link_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
@@ -130,8 +130,8 @@ export class modifier_t21_magical_link_buff extends BaseModifier_Plus {
         this.transform_damage_percent = this.GetSpecialValueFor("transform_damage_percent")
         this.bonus_intellect = this.GetSpecialValueFor("bonus_intellect")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus() as t21_magical_link

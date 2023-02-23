@@ -104,7 +104,7 @@ export class modifier_templar_assassin_3 extends BaseModifier_Plus {
                 damage: fDamage,
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
             }
             for (let hTarget of (tTargets)) {
                 if (hTarget != hAtkTarget) {

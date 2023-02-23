@@ -121,8 +121,8 @@ export class modifier_mirana_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.arrow_chance = this.GetSpecialValueFor("arrow_chance")
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -200,8 +200,8 @@ export class modifier_mirana_6_stun extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/generic_gameplay/generic_stunned.vpcf",
@@ -228,7 +228,7 @@ export class modifier_mirana_6_stun extends BaseModifier_Plus {
         return GameActivity_t.ACT_DOTA_DISABLED
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (params.target == hParent && params.attacker == hCaster && modifier_mirana_3_buff.exist(hCaster)) {

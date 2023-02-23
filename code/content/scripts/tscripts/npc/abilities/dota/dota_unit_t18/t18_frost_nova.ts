@@ -53,8 +53,8 @@ export class modifier_t18_frost_nova extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
         }
@@ -119,8 +119,8 @@ export class modifier_t18_frost_nova_thinker extends modifier_particle_thinker {
     slow_duration: number;
     damage_per_second: number;
     tTargetCount: any[];
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.radius = this.GetSpecialValueFor("radius")
         this.think_interval = this.GetSpecialValueFor("think_interval")
         this.slow_duration = this.GetSpecialValueFor("slow_duration")
@@ -203,8 +203,8 @@ export class modifier_t18_frost_nova_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/generic_gameplay/generic_slowed_cold.vpcf",
@@ -235,8 +235,8 @@ export class modifier_t18_frost_nova_slow extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_t18_frost_nova_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let vPosition = hParent.GetAbsOrigin()

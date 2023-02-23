@@ -30,8 +30,8 @@ export class modifier_remnant extends BaseModifier_Plus {
         hCaster.EmitSound("Hero_StormSpirit.StaticRemnantPlant");
     }
 
-    public OnDestroy(): void {
-        super.OnDestroy();
+    public BeDestroy(): void {
+
         for (let k of this.remnants) {
             GDestroyUnit(k);
         }
@@ -64,8 +64,8 @@ export class modifier_remnant_thinker extends BaseModifier_Plus {
         // ParticleManager.SetParticleControl(iParticleID, 11, pos);
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus();
             let vPosition = hParent.GetAbsOrigin();

@@ -76,8 +76,8 @@ export class modifier_obsidian_destroyer_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         this.chance = this.GetSpecialValueFor("chance")
         this.max_mana_ragen_percent = this.GetSpecialValueFor("max_mana_ragen_percent")
@@ -86,8 +86,8 @@ export class modifier_obsidian_destroyer_3 extends BaseModifier_Plus {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         this.chance = this.GetSpecialValueFor("chance")
         this.max_mana_ragen_percent = this.GetSpecialValueFor("max_mana_ragen_percent")
@@ -198,11 +198,11 @@ export class modifier_obsidian_destroyer_3_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
-    EOM_GetModifierManaBonus(params: IModifierTable) {
+    CC_GetModifierManaBonus(params: IModifierTable) {
         return this.GetStackCount() * this.pre_energy_mana_limit
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.GetStackCount() * this.pre_energy_mana_limit
     }
 }
@@ -297,8 +297,8 @@ export class modifier_obsidian_destroyer_3_debuff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_obsidian_destroyer_3_particle_manasteal extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (IsClient()) {
             let sParticleName = modifier_obsidian_destroyer_3_active.exist(hCaster) && "particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_essence_effect.vpcf" || "particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_matter_manasteal.vpcf"

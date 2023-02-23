@@ -136,8 +136,8 @@ export class modifier_undying_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -241,12 +241,12 @@ export class modifier_undying_1_hero extends BaseModifier_Plus {
         return math.min(this.str_scale_up * this.GetStackCount(), 50)
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.GetStackCount()
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
-    EOM_GetModifierBonusStats_Strength() {
+    CC_GetModifierBonusStats_Strength() {
         return this.GetStackCount()
     }
 }
@@ -271,8 +271,8 @@ export class modifier_undying_1_health_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let fStealHealth = params.fStealHealth || 0
             let hParent = this.GetParentPlus()
@@ -284,7 +284,7 @@ export class modifier_undying_1_health_debuff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.GetStackCount()
     }
 

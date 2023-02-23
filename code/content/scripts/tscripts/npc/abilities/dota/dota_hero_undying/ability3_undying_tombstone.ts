@@ -113,8 +113,8 @@ export class modifier_undying_3 extends BaseModifier_Plus {
             this.hTombStone[index].FireSummonned(hParent)
         }
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.tomb_stone_max_distance = this.GetSpecialValueFor("tomb_stone_max_distance")
         if (IsServer()) {
             let hParent = this.GetParentPlus()
@@ -130,8 +130,8 @@ export class modifier_undying_3 extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (this.hTombStone != null && GameFunc.IsValid(this.hTombStone[0])) {
                 this.hTombStone[0].ForceKill(false)
@@ -190,7 +190,7 @@ export class modifier_undying_3 extends BaseModifier_Plus {
                         damage: params.original_damage * this.GetParentPlus().GetTalentValue("special_bonus_unique_undying_custom_2") * 0.01,
                         damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_USE_COMBAT_PROFICIENCY,
-                        eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                        eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                     }
                     BattleHelper.GoApplyDamage(tDamageTable)
                     n = n + 1
@@ -307,8 +307,8 @@ export class modifier_undying_3_aura_effect extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.zombie_duration = this.GetSpecialValueFor("zombie_duration")
         this.zombie_base_damage = this.GetSpecialValueFor("zombie_base_damage")
         this.zombie_damag_str_factor = this.GetSpecialValueFor("zombie_damag_str_factor")
@@ -348,8 +348,8 @@ export class modifier_undying_3_aura_effect extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.hZombie)) {
                 this.hZombie.ForceKill(false)
@@ -382,8 +382,8 @@ export class modifier_undying_3_zombie_lifetime extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         this.sParentModel = (this.GetParentPlus().GetUnitName() == "npc_dota_unit_undying_zombie_custom" &&
             ResHelper.GetModelReplacement("models/heroes/undying/undying_minion.vmdl", this.GetCasterPlus()) ||
             ResHelper.GetModelReplacement("models/heroes/undying/undying_minion_torso.vmdl", this.GetCasterPlus()))
@@ -392,15 +392,15 @@ export class modifier_undying_3_zombie_lifetime extends BaseModifier_Plus {
         this.zombie_base_damage_factor = this.GetSpecialValueFor("zombie_base_damage_factor")
         this.duration = this.GetSpecialValueFor("duration")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().ForceKill(false)
         }
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
-    EOM_GetModifierBaseAttack_BonusDamage() {
+    CC_GetModifierBaseAttack_BonusDamage() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return (this.GetCasterPlus() as BaseNpc_Hero_Plus).GetStrength() * this.zombie_base_damage_factor
         }
@@ -453,13 +453,13 @@ export class modifier_undying_3_debuff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: ModifierAttackEvent) {
+    CC_GetModifierIncomingDamagePercentage(params: ModifierAttackEvent) {
         if (params != null && params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK) {
             return this.GetStackCount() * this.increase_attack_damage
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.GetStackCount() * this.increase_attack_damage
     }
 

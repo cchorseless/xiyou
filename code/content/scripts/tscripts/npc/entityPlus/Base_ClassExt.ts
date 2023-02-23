@@ -216,6 +216,7 @@ let tAddedValues: Record<string, string> = {
     _ulti: "GetUltiPower",
 };
 
+
 declare global {
     interface CDOTABaseAbility {
         /**默认值 */
@@ -227,12 +228,12 @@ declare global {
          * @both
          * @returns 
          */
-        GetCasterPlus(): IBaseNpc_Plus;
+        GetCasterPlus<T extends IBaseNpc_Plus>(): T;
         /**
          * @Server
          * @returns 
          */
-        GetOwnerPlus(): IBaseNpc_Plus;
+        GetOwnerPlus<T extends IBaseNpc_Plus>(): T;
         GetLevelSpecialValueFor_Engine: typeof CDOTABaseAbility.GetLevelSpecialValueFor;
         GetSpecialValueFor_Engine: typeof CDOTABaseAbility.GetSpecialValueFor;
         /**
@@ -304,7 +305,7 @@ declare global {
         // GetCustomAbilityType(): CUSTOM_ABILITY_TYPE;
         SpeakTrigger(): number;
         /** 获取伤害类型 */
-        // GetDamageType(): EOM_DAMAGE_TYPES;
+        // GetDamageType(): CC_DAMAGE_TYPES;
     }
 }
 
@@ -636,17 +637,17 @@ declare global {
          * @Both
          * 
         */
-        GetAbilityPlus(): IBaseAbility_Plus;
+        GetAbilityPlus<T extends IBaseAbility_Plus>(): T;
         /**获取施法来源NPC，谁施法的 
          * @Both
          * 
          */
-        GetCasterPlus(): IBaseNpc_Plus;
+        GetCasterPlus<T extends IBaseNpc_Plus>(): T;
         /**获取作用归属NPC，在谁身上 
          * @Both
          * 
          */
-        GetParentPlus(): IBaseNpc_Plus;
+        GetParentPlus<T extends IBaseNpc_Plus>(): T;
         /**自己给自己施法的 
          * @Both
          */
@@ -999,6 +1000,11 @@ declare global {
         addAbilityPlus(abilityname: string, level?: number): IBaseAbility_Plus;
 
         /**
+         * @BOTH
+         * @param abilityname 
+         */
+        findAbliityPlus<T extends CDOTABaseAbility>(abilityname: string): T | null;
+        /**
          * @Server
          * @param abilityname 
          */
@@ -1036,6 +1042,14 @@ declare global {
          * @returns 
          */
         findBuff<T extends CDOTA_Buff>(buffname: string, caster?: CDOTA_BaseNPC): T;
+
+        /**
+         * @Both
+         * @param buffname 
+         * @param caster 
+         */
+        findBuffStack(buffname: string, caster?: CDOTA_BaseNPC): number;
+
     }
 }
 
@@ -1117,6 +1131,9 @@ BaseNPC.GetStatusResistanceFactor = function (hCaster: CDOTA_BaseNPC) {
     }
     return d
 }
+BaseNPC.findBuffStack = function (buffname: string, caster: CDOTA_BaseNPC = null) {
+    return this.GetModifierStackCount(buffname, caster)
+}
 if (IsServer()) {
     BaseNPC.SetPrimaryAttribute = function (iPrimaryAttribute: Attributes) {
         if (iPrimaryAttribute > Attributes.DOTA_ATTRIBUTE_INVALID && iPrimaryAttribute < Attributes.DOTA_ATTRIBUTE_MAX) {
@@ -1143,7 +1160,10 @@ if (IsServer()) {
         }
         return ability as IBaseAbility_Plus;
     };
-
+    BaseNPC.findAbliityPlus = function (abilityname: string) {
+        let ability = this.FindAbilityByName(abilityname);
+        return ability;
+    };
     BaseNPC.removeAbilityPlus = function (abilityname: string) {
         let ability = this.FindAbilityByName(abilityname) as IBaseAbility_Plus;
         if (ability) {

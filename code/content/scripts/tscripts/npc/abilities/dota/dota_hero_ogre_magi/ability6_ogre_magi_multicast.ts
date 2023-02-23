@@ -162,8 +162,8 @@ export class modifier_ogre_magi_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -292,8 +292,8 @@ export class modifier_ogre_magi_6_buff extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             this.StartIntervalThink(-1)
@@ -304,7 +304,7 @@ export class modifier_ogre_magi_6_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    g_SPELL_AMPLIFY_BONUS() {
+    CC_SPELL_AMPLIFY_BONUS() {
         return this.GetSpecialValueFor("spell_amplify")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
@@ -435,8 +435,8 @@ export class modifier_ogre_magi_6_buff_shard extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_ogre_magi_6_particle_cast extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetParentPlus()
         if (IsClient()) {

@@ -145,8 +145,8 @@ export class modifier_ursa_1_debuff extends BaseModifier_Plus {
     GetTexture() {
         return "ursa_earthshock"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_ursa/ursa_earthshock_modifier.vpcf",
@@ -170,8 +170,8 @@ export class modifier_ursa_1_debuff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_ursa_1_particle_ursa_earthshock extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

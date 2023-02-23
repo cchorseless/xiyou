@@ -104,8 +104,8 @@ export class modifier_shadow_shaman_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -203,8 +203,8 @@ export class modifier_shadow_shaman_2_totem extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_PERMANENT
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.interval = this.GetSpecialValueFor("interval")
         this.radius = this.GetSpecialValueFor("radius") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_shadow_shaman_custom_1")
         this.channel_time = this.GetSpecialValueFor("channel_time")
@@ -214,8 +214,8 @@ export class modifier_shadow_shaman_2_totem extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.GetCasterPlus())) {
                 let hAbility = ability3_shadow_shaman_shackles.findIn(this.GetCasterPlus()) as ability3_shadow_shaman_shackles;
@@ -276,8 +276,8 @@ export class modifier_shadow_shaman_2_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let extra_amlify_damage_pct = this.GetCasterPlus().GetTalentValue("special_bonus_unique_shadow_shaman_custom_8")
         this.amlify_damage_pct = this.GetSpecialValueFor("amlify_damage_pct") + extra_amlify_damage_pct
         this.damage_per_sec = this.GetSpecialValueFor("damage_per_sec")
@@ -303,8 +303,8 @@ export class modifier_shadow_shaman_2_debuff extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.modifier_truesight)) {
                 this.modifier_truesight.Destroy()
@@ -326,7 +326,7 @@ export class modifier_shadow_shaman_2_debuff extends BaseModifier_Plus {
                 victim: hParent,
                 damage: this.damage_per_sec,
                 damage_type: hAbility.GetAbilityDamageType(),
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             if (modifier_shadow_shaman_3_hex.exist(damage_table.victim) && hCaster.HasShard()) {
                 damage_table.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PURE
@@ -358,7 +358,7 @@ export class modifier_shadow_shaman_2_debuff extends BaseModifier_Plus {
         return GameActivity_t.ACT_DOTA_DISABLED
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage() {
+    CC_GetModifierIncomingDamagePercentage() {
         return this.GetStackCount() * this.amlify_damage_pct
     }
 }
@@ -412,8 +412,8 @@ export class modifier_shadow_shaman_2_armor extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.armor = this.GetSpecialValueFor("armor")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE_PERCENTAGE)

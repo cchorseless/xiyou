@@ -59,8 +59,8 @@ export class modifier_biaoji extends BaseModifier_Plus {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
 
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
@@ -92,8 +92,8 @@ export class modifier_biaoji extends BaseModifier_Plus {
     }
 
 
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         MiniMapHelper.noshowPlayerOnMiniForPlayer(this.GetParentPlus().GetPlayerOwnerID(), this.GetCasterPlus().GetPlayerOwnerID())
     }
 }

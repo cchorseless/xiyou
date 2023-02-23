@@ -26,7 +26,7 @@ export class modifier_stunned extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
-    g_OverrideAnimation(): GameActivity_t {
+    CC_OverrideAnimation(): GameActivity_t {
         return GameActivity_t.ACT_DOTA_DISABLED;
     }
 }

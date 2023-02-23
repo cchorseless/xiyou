@@ -106,8 +106,8 @@ export class modifier_mirana_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -195,8 +195,8 @@ export class modifier_mirana_2_jump extends BaseModifierMotionVertical {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.fTime = 0
             this.GetAbilityPlus().SetActivated(false)
@@ -243,8 +243,8 @@ export class modifier_mirana_2_jump extends BaseModifierMotionVertical {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetAbilityPlus().SetActivated(true)
             this.GetParentPlus().StartGesture(GameActivity_t.ACT_MIRANA_LEAP_END)
@@ -308,8 +308,8 @@ export class modifier_mirana_2_buff extends BaseModifier_Plus {
         this.leap_speedbonus_talent_pct = hCaster.GetTalentValue("special_bonus_unique_mirana_custom_3")
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             // if (GameFunc.IsValid(this.hPtclThinker)) {
             //      this.hPtclThinker.sBuffName.remove( this.hPtclThinker );

@@ -45,8 +45,8 @@ export class modifier_brewmaster_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         this.iPlayerOwnerID = hParent.GetPlayerOwnerID()
         if (IsServer()) {
@@ -54,8 +54,8 @@ export class modifier_brewmaster_3 extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.DeletAbility()
         }
@@ -206,8 +206,8 @@ export class modifier_brewmaster_3_inherit_attribute extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(0)
         }
@@ -215,8 +215,8 @@ export class modifier_brewmaster_3_inherit_attribute extends BaseModifier_Plus {
     Init(params: IModifierTable) {
         this.inherit_attribute_per = this.GetSpecialValueFor("inherit_attribute_per")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.StartIntervalThink(-1)
         }
@@ -232,21 +232,21 @@ export class modifier_brewmaster_3_inherit_attribute extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
-    EOM_GetModifierBonusStats_Strength() {
+    CC_GetModifierBonusStats_Strength() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return hCaster.GetStrength() * (this.inherit_attribute_per + hCaster.GetTalentValue("special_bonus_unique_brewmaster_custom_8")) * 0.01
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
-    EOM_GetModifierBonusStats_Agility() {
+    CC_GetModifierBonusStats_Agility() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return hCaster.GetAgility() * (this.inherit_attribute_per + hCaster.GetTalentValue("special_bonus_unique_brewmaster_custom_8")) * 0.01
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
-    EOM_GetModifierBonusStats_Intellect() {
+    CC_GetModifierBonusStats_Intellect() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return hCaster.GetIntellect() * (this.inherit_attribute_per + hCaster.GetTalentValue("special_bonus_unique_brewmaster_custom_8")) * 0.01
@@ -278,8 +278,8 @@ export class modifier_brewmaster_3_amplify_damage extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             this.StartIntervalThink(0)
@@ -296,8 +296,8 @@ export class modifier_brewmaster_3_amplify_damage extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.StartIntervalThink(-1)
         }

@@ -75,8 +75,8 @@ export class modifier_skull_bones_prison_custom_root extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             // 缠绕特效
             let iParticleID = ResHelper.CreateParticle({
@@ -99,7 +99,7 @@ export class modifier_skull_bones_prison_custom_root extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (GameFunc.IsValid(hCaster) && hCaster.IsAlive() && params != null && params.target == hParent && (params.attacker == hCaster || params.attacker == hCaster.GetSource())) {

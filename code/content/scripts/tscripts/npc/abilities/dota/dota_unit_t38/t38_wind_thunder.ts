@@ -43,8 +43,8 @@ export class modifier_t38_wind_thunder extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -96,7 +96,7 @@ export class modifier_t38_wind_thunder extends BaseModifier_Plus {
         return this.attack_speed
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
-    EOM_GetModifierMaximumAttackSpeedBonus() {
+    CC_GetModifierMaximumAttackSpeedBonus() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             // let _modifier_combination_t38_thor_mark = modifier_combination_t38_thor_mark.findIn(hCaster) as any;
@@ -105,7 +105,7 @@ export class modifier_t38_wind_thunder extends BaseModifier_Plus {
         return 0
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingPureDamagePercentage() {
+    CC_GetModifierOutgoingPureDamagePercentage() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             // let modifier_combination_t38_thor_mark = modifier_combination_t38_thor_mark.findIn(hCaster) as any;

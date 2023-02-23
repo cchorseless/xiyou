@@ -90,8 +90,8 @@ export class modifier_sven_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -165,8 +165,8 @@ export class modifier_sven_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_sven/sven_warcry_buff.vpcf",
@@ -222,8 +222,8 @@ export class modifier_sven_3_buff_attack_speed extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         this.attack_speed = this.GetSpecialValueFor("attack_speed")
         if (!IsServer()) {

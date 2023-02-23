@@ -157,6 +157,11 @@ export class GameDebugger extends SingletonClass {
                 unit.addAbilityPlus(abilityname);
             }
         }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugChangeServerPing, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            let player = GGameScene.GetPlayer(e.PlayerID);
+            if (!player) return;
+            player.PlayerHttpComp().DebugStopPing = GToBoolean(e.data);
+        }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugRemoveAllItem, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
 
         }));

@@ -132,7 +132,7 @@ export class modifier_abyssal_underlord_1_debuff extends BaseModifier_Plus {
                     attacker: hCaster,
                     damage: (hCaster.HasShard() && (this.burn_damage + this.shard_burn_damage) || this.burn_damage) * hCaster.GetMaxHealth() * 0.01,
                     damage_type: hAbility.GetAbilityDamageType(),
-                    eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
                 }
                 BattleHelper.GoApplyDamage(tDamageTable)
             }
@@ -164,8 +164,8 @@ export class modifier_abyssal_underlord_1_thinker extends modifier_particle_thin
     wave_strength_damage: number;
     burn_duration: number;
     iCount: number;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -225,8 +225,8 @@ export class modifier_abyssal_underlord_1_thinker extends modifier_particle_thin
 // 特效
 @registerModifier()
 export class modifier_abyssal_underlord_1_particle_wave extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let vPosition = hParent.GetAbsOrigin()

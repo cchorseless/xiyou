@@ -123,8 +123,8 @@ export class modifier_shadow_shaman_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -256,8 +256,8 @@ export class modifier_shadow_shaman_6_summon extends BaseModifier_Plus {
 
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().ForceKill(false)
             if (GameFunc.IsValid(this.GetCasterPlus())) {

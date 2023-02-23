@@ -16,6 +16,8 @@ export class PlayerHttpComponent extends ET.Component {
     public Address = "";
     public Port = "";
     public ServerPlayerID = "";
+    public ReConnectTime = 10;
+    public DebugStopPing = false;
     public readonly IsOnline: boolean = false;
     public static readonly GateId: number = 0;
 
@@ -31,6 +33,7 @@ export class PlayerHttpComponent extends ET.Component {
         url = url || this.getAdressPort();
         return await HttpHelper.PostRequestAsync(sAction, hParams, url, this.TOKEN);
     }
+
 
     public async PlayerLogin(playerid: PlayerID) {
         let accountid = GPlayerEntityRoot.GetAccountID(playerid);
@@ -51,6 +54,7 @@ export class PlayerHttpComponent extends ET.Component {
             this.ServerPlayerID = cbmsg1.UserId;
             let cbmsg2: H2C_CommonResponse = await this.PostAsync(GameProtocol.Protocol.LoginGate, { UserId: cbmsg1.UserId, Key: cbmsg1.Key, ServerId: 1 });
             if (cbmsg2.Error == 0) {
+                this.ReConnectTime = 10;
                 this.TOKEN = "Bearer " + cbmsg2.Message;
                 (this.IsOnline as any) = true;
                 LogHelper.print(`Login success => steamid:${accountid}  playerid:${playerid}`);
@@ -59,6 +63,15 @@ export class PlayerHttpComponent extends ET.Component {
             }
         }
         LogHelper.error(`Login error => steamid:${accountid}  playerid:${playerid}`);
+        if (this.ReConnectTime > 0) {
+            // this.ReConnectTime--;
+            // GTimerHelper.AddTimer(5, GHandler.create(this, async () => {
+            //     await this.PlayerLogin(playerid);
+            // }));
+        }
+        else {
+            // todo 重连失败
+        }
     }
 
     public async PlayerLoginOut() {
@@ -110,6 +123,12 @@ export class PlayerHttpComponent extends ET.Component {
     }
 
     public Ping() {
+        if (this.DebugStopPing) {
+            GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+                this.Ping();
+            }));
+            return;
+        }
         if (this.IsDisposed()) {
             return;
         }

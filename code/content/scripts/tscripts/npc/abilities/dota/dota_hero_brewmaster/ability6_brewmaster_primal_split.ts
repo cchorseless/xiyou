@@ -60,8 +60,8 @@ export class modifier_brewmaster_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -110,7 +110,7 @@ export class modifier_brewmaster_6 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE)
-    g_CRITICALSTRIKE_DAMAGE() {
+    CC_CRITICALSTRIKE_DAMAGE() {
         // 侍从技为风元素，
         let hCaster = this.GetCasterPlus()
         // let hAbility_t27  = qualification_build_t27.findIn(  hCaster )
@@ -145,8 +145,8 @@ export class modifier_brewmaster_6_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticle = ResHelper.CreateParticle({
                 resPath: "particles/status_fx/status_effect_drunken_brawler.vpcf",
@@ -182,7 +182,7 @@ export class modifier_brewmaster_6_buff extends BaseModifier_Plus {
         return this.bonus_attack_speed
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: IModifierTable) {
+    CC_GetModifierCriticalStrike(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             if (UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {

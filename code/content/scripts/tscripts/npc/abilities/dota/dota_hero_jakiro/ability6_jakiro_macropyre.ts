@@ -73,8 +73,8 @@ export class modifier_jakiro_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -177,8 +177,8 @@ export class modifier_jakiro_6_thinker extends BaseModifier_Plus {
         }
         return true
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.path_radius = this.GetSpecialValueFor("path_radius")
@@ -203,8 +203,8 @@ export class modifier_jakiro_6_thinker extends BaseModifier_Plus {
             hCaster.EmitSound(ResHelper.GetSoundReplacement("hero_jakiro.macropyre", hCaster))
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
@@ -255,8 +255,8 @@ export class modifier_jakiro_6_burn_debuff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(this.burn_interval)
         }
@@ -289,7 +289,7 @@ export class modifier_jakiro_6_burn_debuff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (params != null && GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().IsAlive() && params.attacker == this.GetCasterPlus()) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_jakiro_custom_8")
         }

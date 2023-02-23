@@ -85,8 +85,8 @@ export class modifier_t9_blasphemy extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
         }
@@ -159,8 +159,8 @@ export class modifier_t9_blasphemy_debuff extends BaseModifier_Plus {
     ShouldUseOverheadOffset() {
         return true
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/neutral_fx/neutral_prowler_shaman_stomp_debuff.vpcf",
@@ -176,7 +176,7 @@ export class modifier_t9_blasphemy_debuff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE_PERCENTAGE)
-    EOM_GetModifierPhysicalArmorBasePercentage(params: IModifierTable) {
+    CC_GetModifierPhysicalArmorBasePercentage(params: IModifierTable) {
         return -this.armor_reduce_pct
     }
 
@@ -188,8 +188,8 @@ export class modifier_t9_blasphemy_debuff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_t9_blasphemy_particle_neutral_prowler_shaman_stomp extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

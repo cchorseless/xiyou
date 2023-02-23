@@ -56,8 +56,8 @@ export class modifier_enchantress_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.records = []
             this._scepter_records = []
@@ -167,7 +167,7 @@ export class modifier_enchantress_1 extends BaseModifier_Plus {
                 victim: hTarget,
                 damage: fDamage,
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER,
             })
             EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Enchantress.ImpetusDamage", this.GetCasterPlus()), this.GetCasterPlus())
         }

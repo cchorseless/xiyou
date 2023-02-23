@@ -55,6 +55,12 @@ export class PlayerSystem extends ET.EntityRoot {
         }
         let playerRoot = this.GetOneOnlinePlayer();;
         await playerRoot.PlayerHttpComp().CreateGameRecord(allServerPlayerId);
+        GLogHelper.print("登录服务器成功");
+        // GTimerHelper.AddTimer(5, GHandler.create(this, () => {
+        //     GLogHelper.print("开始游戏");
+        //     playerRoot.PlayerHttpComp().PlayerLogin(0);
+        //     return 5
+        // }))
         this.ListenPlayerDisconnect();
     }
     static readonly IsAllLogin: boolean = false;

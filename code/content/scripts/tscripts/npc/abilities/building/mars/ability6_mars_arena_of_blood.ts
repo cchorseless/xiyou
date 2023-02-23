@@ -78,8 +78,8 @@ export class modifier_mars_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -170,8 +170,8 @@ export class modifier_mars_6_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.delay = this.GetSpecialValueFor("formation_time")
@@ -202,8 +202,8 @@ export class modifier_mars_6_thinker extends BaseModifier_Plus {
             StopSoundOn("Hero_Mars.ArenaOfBlood", this.GetParentPlus())
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }
@@ -282,8 +282,8 @@ export class modifier_mars_6_blocker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -300,8 +300,8 @@ export class modifier_mars_6_blocker extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().ForceKill(false)
         }
@@ -403,8 +403,8 @@ export class modifier_mars_6_wall_aura extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -523,8 +523,8 @@ export class modifier_mars_6_spear_aura extends BaseModifier_Plus {
         }
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -597,8 +597,8 @@ export class modifier_mars_6_spear_aura extends BaseModifier_Plus {
             }
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.radius = this.GetSpecialValueFor("radius")
     }
 }

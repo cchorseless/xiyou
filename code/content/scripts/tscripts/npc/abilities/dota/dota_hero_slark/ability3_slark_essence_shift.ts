@@ -132,11 +132,11 @@ export class modifier_slark_3_buff extends BaseModifier_Plus {
 
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: IModifierTable) {
+    CC_tooltip(params: IModifierTable) {
         return this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_ALL_BONUS)
-    EOM_GetModifierBonusStats_All() {
+    CC_GetModifierBonusStats_All() {
         return this.GetStackCount()
     }
 }
@@ -171,7 +171,7 @@ export class modifier_slark_3_buff_kill extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: IModifierTable) {
+    CC_tooltip(params: IModifierTable) {
         return this.kill * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_ALL_BONUS)
@@ -183,8 +183,8 @@ export class modifier_slark_3_buff_kill extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_slark_3_particle_slark_essence_shift extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsClient()) {

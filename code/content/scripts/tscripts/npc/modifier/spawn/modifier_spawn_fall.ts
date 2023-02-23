@@ -50,7 +50,7 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
         }
     }
 
-    OnDestroy() {
+    BeDestroy() {
         super.Destroy();
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
@@ -64,7 +64,7 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
-    g_GetOverrideAnimation() {
+    CC_GetOverrideAnimation() {
         return GameActivity_t.ACT_DOTA_FLAIL;
     }
 

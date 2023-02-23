@@ -120,8 +120,8 @@ export class modifier_t33_axe_crit_slow extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_t33_axe_crit_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hTarget = this.GetCasterPlus()
         let hCaster = this.GetParentPlus()
         if (IsClient()) {

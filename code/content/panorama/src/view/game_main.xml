@@ -10,6 +10,7 @@
         <!-- <include src="s2r://panorama/styles/hud/dota_hud_stats_region.vcss_c"></include> -->
         <!-- <include src="s2r://panorama/styles/hud/dota_hud_str_agi_int.vcss_c"></include> -->
         <include src="s2r://panorama/styles/hud/dota_hud_aghs_status_display.vcss_c"></include>
+        <include src="s2r://panorama/styles/hud/dota_hud_stat_branch.vcss_c" />
         <include src="./game_main.less" />
         <include src="./res_image.less" />
     </styles>
@@ -18,5 +19,5 @@
         <include src="s2r://panorama/scripts/sequence_actions.vjs_c" />
         <include src="./game_main.tsx" />
     </scripts>
-    <Panel  class="root" hittest="false"> </Panel>
+    <Panel class="root" hittest="false"> </Panel>
 </root>

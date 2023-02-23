@@ -34,8 +34,8 @@ export class modifier_out_of_game extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy(): void {
-        super.OnDestroy()
+    BeDestroy(): void {
+
         if (IsServer()) {
             this.GetParent().RemoveNoDraw()
         }

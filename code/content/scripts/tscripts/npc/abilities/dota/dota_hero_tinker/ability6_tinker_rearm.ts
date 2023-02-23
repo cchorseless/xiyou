@@ -133,8 +133,8 @@ export class modifier_tinker_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -240,8 +240,8 @@ export class modifier_tinker_6_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.radius = this.GetSpecialValueFor("radius")
         this.collision_radius = this.GetSpecialValueFor("collision_radius")
         this.speed = this.GetSpecialValueFor("speed")
@@ -255,8 +255,8 @@ export class modifier_tinker_6_thinker extends BaseModifier_Plus {
             this.GetParentPlus().EmitSound(this.sSoundName)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().StopSound(this.sSoundName)
             UTIL_Remove(this.GetParentPlus())
@@ -348,8 +348,8 @@ export class modifier_tinker_6_buff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_tinker_6_particle_cast extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({

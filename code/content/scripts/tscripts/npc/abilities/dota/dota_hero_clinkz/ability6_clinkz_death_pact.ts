@@ -114,8 +114,8 @@ export class modifier_clinkz_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -184,8 +184,8 @@ export class modifier_clinkz_6_summon extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_clinkz_custom_5"
         this.attack_rate = this.GetSpecialValueFor("attack_rate") - hCaster.GetTalentValue(sTalentName)
@@ -212,14 +212,14 @@ export class modifier_clinkz_6_summon extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(iParticleID)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_clinkz_custom_5"
         this.attack_rate = this.GetSpecialValueFor("attack_rate") - hCaster.GetTalentValue(sTalentName)
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.GetAbilityPlus())) {
                 GameFunc.ArrayFunc.ArrayRemove((this.GetAbilityPlus() as ability6_clinkz_death_pact).tArmys, this.GetParentPlus())

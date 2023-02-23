@@ -94,8 +94,8 @@ export class modifier_pudge_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -214,8 +214,8 @@ export class modifier_pudge_6_buff extends BaseModifierMotionHorizontal_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
@@ -329,7 +329,7 @@ export class modifier_pudge_6_buff_health_limit extends BaseModifierMotionHorizo
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
-    EOM_GetModifierHealthBonus() {
+    CC_GetModifierHealthBonus() {
         return this.GetStackCount()
     }
 }
@@ -356,8 +356,8 @@ export class modifier_pudge_6_thinker extends BaseModifier_Plus {
         return false
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().SafeDestroy()
         }

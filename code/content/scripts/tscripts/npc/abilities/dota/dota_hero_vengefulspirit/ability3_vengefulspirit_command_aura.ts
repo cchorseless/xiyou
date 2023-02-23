@@ -279,8 +279,8 @@ export class modifier_vengefulspirit_3_aura extends BaseModifier_Plus {
         this.bonus_cast_range = this.GetSpecialValueFor("bonus_cast_range")
     }
 
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (IsServer()) {
             modifier_vengefulspirit_3_attributes.remove(this.GetParentPlus());
         }
@@ -373,7 +373,7 @@ export class modifier_vengefulspirit_3_attributes extends BaseModifier_Plus {
         return this.GetStackCount() * this.primary_attributes
     }
     // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_PRIMARY_BONUS)
-    EOM_GetModifierBonusStats_Primary() {
+    CC_GetModifierBonusStats_Primary() {
         return this.GetStackCount() * this.primary_attributes
     }
 }
@@ -399,8 +399,8 @@ export class modifier_vengefulspirit_3_illusion extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(0.1)
         } else {
@@ -452,8 +452,8 @@ export class modifier_vengefulspirit_3_illusion extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -463,7 +463,7 @@ export class modifier_vengefulspirit_3_illusion extends BaseModifier_Plus {
     }
 
     // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE_SPECIAL)
-    EOM_GetModifierOutgoingDamagePercentageSpecial(params: IModifierTable) {
+    CC_GetModifierOutgoingDamagePercentageSpecial(params: IModifierTable) {
         return this.illusion_damage - 100
     }
 }

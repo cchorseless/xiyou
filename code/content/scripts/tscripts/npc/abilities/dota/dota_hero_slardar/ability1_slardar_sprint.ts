@@ -130,8 +130,8 @@ export class modifier_slardar_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -237,7 +237,7 @@ export class modifier_slardar_1_slow extends BaseModifier_Plus {
         return this.crush_extra_slow
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: ModifierAttackEvent) {
+    CC_GetModifierIncomingDamagePercentage(params: ModifierAttackEvent) {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && params != null && params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK) {
             return this.shard_amplify_attack_damage_pct
         }
@@ -248,8 +248,8 @@ export class modifier_slardar_1_slow extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_slardar_1_particle_pre extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_slardar/slardar_crush_start.vpcf",
@@ -266,8 +266,8 @@ export class modifier_slardar_1_particle_pre extends modifier_particle {
 // 特效
 @registerModifier()
 export class modifier_slardar_1_particle_start extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
             let vPosition = hCaster.GetAbsOrigin()
@@ -395,15 +395,15 @@ export class modifier_slardar_1_aura_debuff extends BaseModifier_Plus {
 
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: IModifierTable) {
+    CC_tooltip(params: IModifierTable) {
         return this.puddle_stun_increase
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
-    tooltip2(params: IModifierTable) {
+    CC_tooltip2(params: IModifierTable) {
         return this.puddle_crit_damage_increase
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_CRITICALSTRIKE_PERCENT)
-    EOM_GetModifierIncomingCriticalStrikePercent(params: IModifierTable) {
+    CC_GetModifierIncomingCriticalStrikePercent(params: IModifierTable) {
         if (params.attacker == this.GetCasterPlus()) {
             return this.puddle_crit_damage_increase
         }

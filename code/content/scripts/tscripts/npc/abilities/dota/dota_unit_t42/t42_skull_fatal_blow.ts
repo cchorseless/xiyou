@@ -40,7 +40,7 @@ export class modifier_skull_fatal_blow_custom extends BaseModifier_Plus {
         this.crit_multiplier = this.GetSpecialValueFor("crit_multiplier")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: IModifierTable) {
+    CC_GetModifierCriticalStrike(params: IModifierTable) {
         if (UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             if (GameFunc.mathUtil.PRD(this.crit_chance, params.target, "skull_fatal_blow")) {
                 return this.crit_multiplier

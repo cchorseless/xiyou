@@ -44,8 +44,8 @@ export class modifier_t35_fire_blade extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.max_stack_count = this.GetSpecialValueFor("max_stack_count")
         this.attack_bonus = this.GetSpecialValueFor("attack_bonus")
         this.splash_radius = this.GetSpecialValueFor("splash_radius")
@@ -78,8 +78,8 @@ export class modifier_t35_fire_blade extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.max_stack_count = this.GetSpecialValueFor("max_stack_count")
         this.attack_bonus = this.GetSpecialValueFor("attack_bonus")
         this.splash_radius = this.GetSpecialValueFor("splash_radius")
@@ -212,8 +212,8 @@ export class modifier_t35_fire_blade_cannot_miss extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_t35_particle_atk extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let splash_radius = this.GetSpecialValueFor("splash_radius")
         if (IsClient()) {
             let caster = this.GetCasterPlus()

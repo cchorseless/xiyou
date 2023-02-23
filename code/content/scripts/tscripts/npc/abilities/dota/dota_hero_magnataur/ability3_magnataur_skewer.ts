@@ -167,8 +167,8 @@ export class modifier_magnataur_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -250,8 +250,8 @@ export class modifier_magnataur_3_thinker extends BaseModifierMotionHorizontal_P
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             if (this.ApplyHorizontalMotionController()) {
                 this.vPosition = this.GetParentPlus().GetAbsOrigin()
@@ -270,8 +270,8 @@ export class modifier_magnataur_3_thinker extends BaseModifierMotionHorizontal_P
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this)
         }
@@ -314,8 +314,8 @@ export class modifier_magnataur_3_dummy extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }
@@ -362,8 +362,8 @@ export class modifier_magnataur_3_move extends BaseModifierMotionHorizontal_Plus
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         this.skewer_damage_distance = this.GetSpecialValueFor("skewer_damage_distance")
         this.skewer_damage = this.GetSpecialValueFor("skewer_damage")
@@ -379,8 +379,8 @@ export class modifier_magnataur_3_move extends BaseModifierMotionHorizontal_Plus
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this)
         }

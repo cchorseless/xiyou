@@ -243,7 +243,7 @@ export class modifier_slark_6_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         this._tooltip = (this._tooltip || 0) % 2 + 1
         if (this._tooltip == 1) {
             return this.bonus_max_attack_speed
@@ -267,8 +267,8 @@ export class modifier_slark_6_buff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // -modifier_slark_6_particle_aoe// // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_slark_6_particle_aoe extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

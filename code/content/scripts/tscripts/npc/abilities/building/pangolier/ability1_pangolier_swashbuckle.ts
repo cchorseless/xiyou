@@ -185,8 +185,8 @@ export class modifier_pangolier_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.chance = this.GetSpecialValueFor("chance")
         this.duration = this.GetSpecialValueFor("duration")
         this.range = this.GetSpecialValueFor("range")
@@ -312,8 +312,8 @@ export class modifier_pangolier_1_dash extends BaseModifierMotionHorizontal_Plus
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.dash_speed = this.GetSpecialValueFor("dash_speed")
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
@@ -327,8 +327,8 @@ export class modifier_pangolier_1_dash extends BaseModifierMotionHorizontal_Plus
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.hParticleModifier)) {
                 this.hParticleModifier.Destroy()
@@ -406,8 +406,8 @@ export class modifier_pangolier_1_attack extends BaseModifier_Plus {
             this.StartIntervalThink(this.attack_interval)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
@@ -502,8 +502,8 @@ export class modifier_pangolier_1_rolling_back extends BaseModifierMotionBoth_Pl
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.jump_height = this.GetSpecialValueFor("jump_height")
         this.jump_duration = this.GetSpecialValueFor("jump_duration")
         if (IsServer()) {
@@ -533,8 +533,8 @@ export class modifier_pangolier_1_rolling_back extends BaseModifierMotionBoth_Pl
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.hParticleModifier)) {
                 this.hParticleModifier.Destroy()
@@ -655,8 +655,8 @@ export class modifier_pangolier_1_damage extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_pangolier_1_particle_pangolier_swashbuckler_dash extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({

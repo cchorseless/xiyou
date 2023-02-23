@@ -30,8 +30,8 @@ export class modifier_feared extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             // let hParent = this.GetParentPlus()
             // if (hParent.Spawner_lastCornerName == null) {
@@ -66,8 +66,7 @@ export class modifier_feared extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, true, 10, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params)
+    BeRefresh(params: IModifierTable) {
         // if (IsServer()) {
         //     let hParent = this.GetParentPlus()
         //     if (hParent.Spawner_lastCornerName == null) {
@@ -90,8 +89,8 @@ export class modifier_feared extends BaseModifier_Plus {
             // }
         }
     }
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (IsServer()) {
             // Spawner.MoveOrder(this.GetParentPlus())
         }

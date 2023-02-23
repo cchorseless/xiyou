@@ -115,8 +115,8 @@ export class modifier_t3_smart_aura_effect extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_t3_smart_aura_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/units/towers/smart_aura_effect.vpcf",

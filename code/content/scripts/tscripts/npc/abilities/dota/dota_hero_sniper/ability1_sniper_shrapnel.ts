@@ -81,8 +81,8 @@ export class modifier_sniper_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -167,8 +167,8 @@ export class modifier_sniper_1_thinker extends BaseModifier_Plus {
     GetAura() {
         return "modifier_sniper_1_debuff"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius") + hCaster.GetTalentValue("special_bonus_unique_sniper_custom")
@@ -193,8 +193,8 @@ export class modifier_sniper_1_thinker extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(iParticleID)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             hParent.StopSound(this.sSoundName)
@@ -258,8 +258,8 @@ export class modifier_sniper_1_debuff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         // let modifier_sniper_1_debuff_table = Load(hParent, "modifier_sniper_1_debuff_table") || {}
         // table.insert(modifier_sniper_1_debuff_table, this)
@@ -275,8 +275,8 @@ export class modifier_sniper_1_debuff extends BaseModifier_Plus {
         this.shrapnel_damage = this.GetSpecialValueFor("shrapnel_damage")
         this.shrapnel_damage_per_agi = this.GetSpecialValueFor("shrapnel_damage_per_agi")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         // let modifier_sniper_1_debuff_table = Load(hParent, "modifier_sniper_1_debuff_table") || {}
         // ArrayRemove(modifier_sniper_1_debuff_table, this)
@@ -322,8 +322,8 @@ export class modifier_sniper_1_debuff extends BaseModifier_Plus {
 export class modifier_sniper_1_particle_sniper_shrapnel extends modifier_particle {
     vDirection: Vector;
     radius: number;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

@@ -233,7 +233,7 @@ export class ability2_dawnbreaker_celestial_hammer extends BaseAbility_Plus {
                     attacker: hCaster,
                     damage: this.iDamage,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
-                    eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
                 }
                 BattleHelper.GoApplyDamage(tDamageTable)
                 //  音效
@@ -302,8 +302,8 @@ export class modifier_dawnbreaker_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -415,8 +415,8 @@ export class modifier_dawnbreaker_2_buff_attack extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let parent = this.GetParentPlus() as IBaseNpc_Plus & { no_hammer: boolean }
         //  标记没有锤子的状态
         parent.no_hammer = true
@@ -426,8 +426,8 @@ export class modifier_dawnbreaker_2_buff_attack extends BaseModifier_Plus {
         this.atk_speed_add = this.GetSpecialValueFor("atk_speed_add")
         this.atk_speed_roof_add = this.GetSpecialValueFor("atk_speed_roof_add")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let parent = this.GetParentPlus() as IBaseNpc_Plus & { no_hammer: boolean }
         parent.no_hammer = null
     }
@@ -443,7 +443,7 @@ export class modifier_dawnbreaker_2_buff_attack extends BaseModifier_Plus {
     }
     //  攻速上限提升
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
-    EOM_GetModifierMaximumAttackSpeedBonus(params: IModifierTable) {
+    CC_GetModifierMaximumAttackSpeedBonus(params: IModifierTable) {
         return this.atk_speed_roof_add
     }
 }

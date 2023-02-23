@@ -184,7 +184,7 @@ export class modifier_axe_2_pure_damage_income extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PURE_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingPureDamagePercentage() {
+    CC_GetModifierIncomingPureDamagePercentage() {
         return this.pure_damage_income * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)

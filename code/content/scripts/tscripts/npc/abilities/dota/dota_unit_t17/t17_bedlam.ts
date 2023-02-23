@@ -91,8 +91,8 @@ export class modifier_t17_bedlam_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_invoker/invoker_ghost_walk_debuff.vpcf",

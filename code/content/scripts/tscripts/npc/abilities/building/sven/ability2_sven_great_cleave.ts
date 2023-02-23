@@ -109,7 +109,7 @@ export class modifier_sven_2 extends BaseModifier_Plus {
                         damage: params.original_damage * (this.great_cleave_damage + params.attacker.GetTalentValue("special_bonus_unique_sven_custom_2")) * 0.01,
                         damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_USE_COMBAT_PROFICIENCY,
-                        eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                        eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                     }
                     BattleHelper.GoApplyDamage(tDamageTable)
                     n = n + 1

@@ -53,8 +53,8 @@ export class modifier_property extends BaseModifier_Plus {
         return "";
     }
 
-    OnCreated(params: object) {
-        super.OnCreated(params);
+    BeCreated(params: object) {
+
         this.SetHasCustomTransmitterData(true)
         if (IsServer()) {
             this.Calculate_Hp();
@@ -256,11 +256,11 @@ export class modifier_property extends BaseModifier_Plus {
         let iDamageCategory = params.damage_category
         let fPercent = 100
         let hTarget = params.target as IBaseNpc_Plus;
-        if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_BEFORE_TRANSFORMED_DAMAGE)) {
+        if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_BEFORE_TRANSFORMED_DAMAGE)) {
             return 0
         }
         // 技能暴击特效
-        if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_SPELL_CRIT) && params.original_damage > 0) {
+        if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SPELL_CRIT) && params.original_damage > 0) {
             let iNumber = math.floor(params.original_damage)
             let sNumber = tostring(iNumber)
             let fDuration = 3
@@ -278,7 +278,7 @@ export class modifier_property extends BaseModifier_Plus {
         }
         if (GameFunc.IsValid(hTarget)) {
             // 无视伤害加深
-            let bDamageAmplify = !BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY);
+            let bDamageAmplify = !BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY);
             let _tmp = 0
             switch (iDamageType) {
                 case DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL:
@@ -289,7 +289,7 @@ export class modifier_property extends BaseModifier_Plus {
                         fPercent = fPercent * (1 + _tmp * 0.01)
                     }
                     //  受到额外毒伤害 NOTE:若是以后毒伤害不是魔法伤害了，记得改到其他位置上
-                    if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_POISON)) {
+                    if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_POISON)) {
                         _tmp = PropertyCalculate.SumProps(hTarget, params, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE)
                         fPercent = fPercent * (1 + _tmp * 0.01)
                     }
@@ -308,7 +308,7 @@ export class modifier_property extends BaseModifier_Plus {
                         fPercent = fPercent * (1 + _tmp * 0.01)
                     }
                     //  流血伤害加深
-                    if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_BLEEDING)) {
+                    if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_BLEEDING)) {
                         _tmp = PropertyCalculate.SumProps(hTarget, params, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_BLEED_DAMAGE_PERCENTAGE)
                         fPercent = fPercent * (1 + _tmp * 0.01)
                     }
@@ -326,7 +326,7 @@ export class modifier_property extends BaseModifier_Plus {
             //  敌方的减伤，例如无尽的减伤
             // fPercent = fPercent * (1 + GetIncomingDamagePercentEnemy(hTarget, params) * 0.01)
             //  受到额外持续伤害
-            if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT)) {
+            if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT)) {
                 _tmp = PropertyCalculate.SumProps(hTarget, params, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DOT_DAMAGE_PERCENTAGE)
                 fPercent = fPercent * (1 + _tmp * 0.01)
             }

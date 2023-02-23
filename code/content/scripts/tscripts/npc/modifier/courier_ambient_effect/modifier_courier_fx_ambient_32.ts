@@ -23,8 +23,8 @@ export class modifier_courier_fx_ambient_32 extends BaseModifier_Plus {
     RemoveOnDeath() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let iParticleID = ResHelper.CreateParticle(
                 new ResHelper.ParticleInfo()

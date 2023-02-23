@@ -113,8 +113,8 @@ export class modifier_bristleback_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -203,8 +203,8 @@ export class modifier_bristleback_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -257,11 +257,11 @@ export class modifier_bristleback_1_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
 
-    EOM_GetModifierPhysicalArmorBonus() {
+    CC_GetModifierPhysicalArmorBonus() {
         return -(this.reduce_armor + this.per_layer_reduce_armor * this.GetStackCount())
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return -(this.reduce_armor + this.per_layer_reduce_armor * this.GetStackCount())
     }
 }

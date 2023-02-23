@@ -201,7 +201,7 @@ export class ability6_void_spirit_astral_step extends BaseAbility_Plus {
             attacker: hCaster,
             damage: fDamage,
             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
-            eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER,
+            eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER,
         }
         BattleHelper.GoApplyDamage(damage_table)
     }
@@ -237,8 +237,8 @@ export class modifier_void_spirit_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -327,8 +327,8 @@ export class modifier_void_spirit_6_slow extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.movement_slow_pct = this.GetSpecialValueFor("movement_slow_pct")
         let iPtclID = ResHelper.CreateParticle({
             resPath: 'particles/units/heroes/hero_void_spirit/astral_step/void_spirit_astral_step_impact.vpcf',
@@ -340,8 +340,8 @@ export class modifier_void_spirit_6_slow extends BaseModifier_Plus {
         this.AddParticle(iPtclID, false, false, -1, false, true)
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             let hCaster = this.GetCasterPlus()

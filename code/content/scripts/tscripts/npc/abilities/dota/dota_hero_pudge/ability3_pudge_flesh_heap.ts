@@ -81,7 +81,7 @@ export class modifier_pudge_3 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
-    EOM_GetModifierHealthBonus() {
+    CC_GetModifierHealthBonus() {
         return this.GetStackCount() * this.bonus_health * (1 + this.GetCasterPlus().GetTalentValue("special_bonus_unique_pudge_custom_8") * 0.01)
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
@@ -120,11 +120,11 @@ export class modifier_pudge_3_bonus_str extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
-    EOM_GetModifierBonusStats_Strength() {
+    CC_GetModifierBonusStats_Strength() {
         return this.GetStackCount() * this.bonus_str * (1 + this.GetCasterPlus().GetTalentValue("special_bonus_unique_pudge_custom_8") * 0.01)
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.GetStackCount() * this.bonus_str * (1 + this.GetCasterPlus().GetTalentValue("special_bonus_unique_pudge_custom_8") * 0.01)
     }
 }

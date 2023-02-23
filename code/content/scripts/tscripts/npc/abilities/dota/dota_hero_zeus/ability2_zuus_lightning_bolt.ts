@@ -162,8 +162,8 @@ export class modifier_zuus_2_particle_damage extends modifier_particle {
         ability2_zuus_lightning_bolt.playAni(this);
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (this.damageInfo) {
             BattleHelper.GoApplyDamage(this.damageInfo);
         }

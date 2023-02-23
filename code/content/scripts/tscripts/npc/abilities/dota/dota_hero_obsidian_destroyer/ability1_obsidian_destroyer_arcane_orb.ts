@@ -184,7 +184,7 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
                             damage_type: this.GetAbilityPlus().GetAbilityDamageType(),
                         }
                         if (target == params.target) {
-                            damage_table.eom_flags = BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER
+                            damage_table.eom_flags = BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER
                         }
                         BattleHelper.GoApplyDamage(damage_table)
                         // 提供精华能量 每次伤害一个目标提供一点能量

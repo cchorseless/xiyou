@@ -57,7 +57,7 @@ export class ability3_zuus_static_field extends BaseAbility_Plus {
             damage: fDamage,
             damage_type: this.GetAbilityDamageType(),
             damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-            eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY
+            eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY
         }
         let zuus_2 = ability2_zuus_lightning_bolt.findIn(hCaster)
         if (modifier_zuus_3_scepter.exist(hCaster)
@@ -143,7 +143,7 @@ export class modifier_zuus_3 extends BaseModifier_Plus {
             if (this.GetParentPlus().PassivesDisabled()) {
                 return
             }
-            if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_AFTER_TRANSFORMED_DAMAGE)) {
+            if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_AFTER_TRANSFORMED_DAMAGE)) {
                 return
             }
             let hAbility = params.inflictor
@@ -159,8 +159,8 @@ export class modifier_zuus_3 extends BaseModifier_Plus {
 }
 @registerModifier()
 export class modifier_zuus_3_particle_damage extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetParentPlus()
         let hParent = this.GetCasterPlus()
         if (IsServer()) {
@@ -199,8 +199,8 @@ export class modifier_zuus_3_scepter extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }

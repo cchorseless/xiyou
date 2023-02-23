@@ -65,7 +65,7 @@ export class modifier_death_prophet_3 extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (params == null) {
             return
         }
@@ -145,8 +145,8 @@ export class modifier_death_prophet_3_silence extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()

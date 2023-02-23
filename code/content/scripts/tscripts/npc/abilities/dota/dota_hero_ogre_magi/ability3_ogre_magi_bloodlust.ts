@@ -70,22 +70,22 @@ export class modifier_ogre_magi_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             modifier_ogre_magi_3_buff.apply(hParent, hParent, this.GetAbilityPlus(), {})
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             modifier_ogre_magi_3_buff.apply(hParent, hParent, this.GetAbilityPlus(), {})
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             modifier_ogre_magi_3_buff.remove(hParent);

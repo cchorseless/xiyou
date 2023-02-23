@@ -118,8 +118,8 @@ export class modifier_centaur_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -229,7 +229,7 @@ export class modifier_centaur_6_bonus_physical_damage extends BaseModifier_Plus 
 
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: IModifierTable) {
+    CC_tooltip(params: IModifierTable) {
         return this.bonus_physical_damage
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
@@ -265,15 +265,14 @@ export class modifier_centaur_6_buff extends BaseModifier_Plus {
     ShouldUseOverheadOffset() {
         return true
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         this.damage_per_health = this.GetSpecialValueFor("damage_per_health") + hCaster.GetTalentValue("special_bonus_unique_centaur_custom_8")
 
         if (IsServer()) {
             this.SetStackCount(this.damage_per_health * this.GetCasterPlus().GetMaxHealth())
         }
-        else if (params.IsOnCreated) {
+        else {
             let iPtclID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_centaur/centaur_stampede_overhead.vpcf",
                 resNpc: this.GetCasterPlus(),
@@ -294,8 +293,8 @@ export class modifier_centaur_6_buff extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_centaur_6_particle_start extends modifier_particle_thinker {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let distance = this.GetSpecialValueFor("distance")
 
         if (IsClient()) {

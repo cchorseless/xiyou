@@ -50,8 +50,8 @@ export class modifier_t24_open_wounds extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
         }
@@ -147,8 +147,8 @@ export class modifier_t24_open_wounds_effect extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_life_stealer/life_stealer_open_wounds.vpcf",
@@ -173,7 +173,7 @@ export class modifier_t24_open_wounds_effect extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingPhysicalDamagePercentage() {
+    CC_GetModifierIncomingPhysicalDamagePercentage() {
         return this.GetStackCount() * this.damage_outgoing_percent
     }
 }

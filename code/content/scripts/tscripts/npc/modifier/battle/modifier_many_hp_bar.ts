@@ -37,8 +37,8 @@ export class modifier_many_hp_bar extends BaseModifier_Plus {
         return 99
     }
 
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             this.StartIntervalThink(this.GetDuration())

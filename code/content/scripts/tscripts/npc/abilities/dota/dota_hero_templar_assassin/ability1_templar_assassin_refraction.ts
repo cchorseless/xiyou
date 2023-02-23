@@ -82,21 +82,21 @@ export class modifier_templar_assassin_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
             modifier_templar_assassin_1_scepter.apply(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), null)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         if (IsServer()) {
             modifier_templar_assassin_1_scepter.apply(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), null)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             modifier_templar_assassin_1_scepter.remove(this.GetParentPlus());
         }
@@ -288,8 +288,8 @@ export class modifier_templar_assassin_1_magic_immune_talent extends BaseModifie
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/items_fx/black_king_bar_avatar.vpcf",

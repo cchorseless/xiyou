@@ -78,8 +78,8 @@ export class modifier_ember_spirit_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -156,8 +156,8 @@ export class modifier_ember_spirit_1_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -180,8 +180,8 @@ export class modifier_ember_spirit_1_debuff extends BaseModifier_Plus {
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -194,8 +194,8 @@ export class modifier_ember_spirit_1_debuff extends BaseModifier_Plus {
             this.damage_type = hAbility.GetAbilityDamageType()
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.modifier_truesight)) {
                 this.modifier_truesight.Destroy()
@@ -217,7 +217,7 @@ export class modifier_ember_spirit_1_debuff extends BaseModifier_Plus {
                 attacker: hCaster,
                 damage: this.damage * this.tick_interval + this.agility * hCaster.GetAgility(),
                 damage_type: this.damage_type,
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(damage_table)
         }
@@ -232,7 +232,7 @@ export class modifier_ember_spirit_1_debuff extends BaseModifier_Plus {
         return -this.armor_reduction
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingPhysicalDamagePercentage(params: IModifierTable) {
+    CC_GetModifierIncomingPhysicalDamagePercentage(params: IModifierTable) {
         if (params.damage_category != 1) { return }
         return this.GetSpecialValueFor("damage_increase")
     }
@@ -240,8 +240,8 @@ export class modifier_ember_spirit_1_debuff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_ember_spirit_1_particle_ember_spirit_searing_chains_cast extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -261,8 +261,8 @@ export class modifier_ember_spirit_1_particle_ember_spirit_searing_chains_cast e
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_ember_spirit_1_particle_ember_spirit_searing_chains_start extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

@@ -84,8 +84,8 @@ export class modifier_keeper_of_the_light_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -183,8 +183,8 @@ export class modifier_keeper_of_the_light_2_thinker extends modifier_particle_th
     GetAura() {
         return "modifier_special_bonus_unique_keeper_of_the_light_custom_1_buff"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.damage_per_second = this.GetSpecialValueFor("damage_per_second")
         this.radius = this.GetSpecialValueFor("radius")
         this.day_time_pct = this.GetSpecialValueFor("day_time_pct")
@@ -209,8 +209,8 @@ export class modifier_keeper_of_the_light_2_thinker extends modifier_particle_th
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             let hAbility = ability6_keeper_of_the_light_spirit_form.findIn(hCaster)
@@ -273,8 +273,8 @@ export class modifier_special_bonus_unique_keeper_of_the_light_custom_1_buff ext
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let extra_mana_leak_pct = this.GetCasterPlus().HasTalent("special_bonus_unique_keeper_of_the_light_custom_6") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_keeper_of_the_light_custom_6") || 0
         this.mana_leak_pct = this.GetSpecialValueFor("mana_leak_pct") + extra_mana_leak_pct
         this.max_stun = this.GetSpecialValueFor("max_stun")
@@ -283,8 +283,8 @@ export class modifier_special_bonus_unique_keeper_of_the_light_custom_1_buff ext
             this.StartIntervalThink(1)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let flStunDuration = math.min((100 - this.GetParentPlus().GetManaPercent()) * 0.01 * this.max_stun, this.max_stun)
             modifier_stunned.apply(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), { duration: flStunDuration * this.GetParentPlus().GetStatusResistanceFactor(this.GetCasterPlus()) })
@@ -301,7 +301,7 @@ export class modifier_special_bonus_unique_keeper_of_the_light_custom_1_buff ext
         return -this.movespeed
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.mana_leak_pct * this.GetParentPlus().GetMaxMana() * 0.01
     }
 }

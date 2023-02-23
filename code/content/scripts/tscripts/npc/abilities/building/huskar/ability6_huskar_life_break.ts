@@ -76,8 +76,8 @@ export class modifier_huskar_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -182,8 +182,8 @@ export class modifier_huskar_6_buff extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (!GameFunc.IsValid(hCaster)) {
@@ -194,7 +194,7 @@ export class modifier_huskar_6_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
@@ -234,7 +234,7 @@ export class modifier_huskar_6_debuff extends BaseModifier_Plus {
         return -this.health_cost_percent
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
-    g_HEALTH_PERCENTAGE() {
+    CC_HEALTH_PERCENTAGE() {
         return -this.health_cost_percent
     }
 }

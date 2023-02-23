@@ -96,8 +96,8 @@ export class modifier_earth_spirit_3 extends BaseModifier_Plus {
             }
         }
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         this.max_count = this.GetSpecialValueFor("max_count")
         this.scepter_max_count_add = this.GetSpecialValueFor("scepter_max_count_add")
@@ -109,8 +109,8 @@ export class modifier_earth_spirit_3 extends BaseModifier_Plus {
             this.Init()
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         this.max_count = this.GetSpecialValueFor("max_count")
         this.scepter_max_count_add = this.GetSpecialValueFor("scepter_max_count_add")
@@ -121,8 +121,8 @@ export class modifier_earth_spirit_3 extends BaseModifier_Plus {
         }
 
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             //  移除所有的stone
@@ -251,8 +251,8 @@ export class modifier_earth_spirit_3_cd extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.stone_interval = this.GetSpecialValueFor("stone_interval")
             if (this.GetCasterPlus().HasScepter()) {
@@ -261,8 +261,8 @@ export class modifier_earth_spirit_3_cd extends BaseModifier_Plus {
             this.SetDuration(this.stone_interval, true)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
@@ -295,8 +295,8 @@ export class modifier_earth_spirit_3_stone extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {

@@ -122,8 +122,8 @@ export class modifier_antimage_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -212,8 +212,8 @@ export class modifier_antimage_2_amplify_illusion extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_antimage_2_particle_antimage_blink_start extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -234,8 +234,8 @@ export class modifier_antimage_2_particle_antimage_blink_start extends modifier_
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_antimage_2_particle_antimage_blink_end extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -255,8 +255,8 @@ export class modifier_antimage_2_particle_antimage_blink_end extends modifier_pa
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_antimage_2_particle_antimage_blink_target extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

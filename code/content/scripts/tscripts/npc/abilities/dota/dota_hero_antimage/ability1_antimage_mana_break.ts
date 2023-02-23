@@ -169,11 +169,11 @@ export class modifier_antimage_1_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
-    EOM_GetModifierBonusStats_Agility(params: IModifierTable) {
+    CC_GetModifierBonusStats_Agility(params: IModifierTable) {
         return this.GetStackCount()
     }
 }
@@ -208,15 +208,15 @@ export class modifier_antimage_1_max_mana extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
-    EOM_GetModifierManaBonus(params: IModifierTable) {
+    CC_GetModifierManaBonus(params: IModifierTable) {
         return this.GetStackCount()
     }
 }
 // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_antimage_1_max_mana_particle_generic_manaburn extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

@@ -190,8 +190,8 @@ export class modifier_ember_spirit_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -225,8 +225,8 @@ export class modifier_ember_spirit_6 extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
             this.GetParentPlus().AddNoDraw()
@@ -377,8 +377,8 @@ export class modifier_ember_spirit_6_remnant extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(0)
         }
@@ -441,8 +441,8 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
             this.Destroy()
@@ -480,8 +480,8 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
             this.Destroy()
@@ -506,8 +506,8 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
             this.damage_type = this.GetAbilityPlus().GetAbilityDamageType()
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.modifier_truesight)) {
                 this.modifier_truesight.Destroy()
@@ -531,7 +531,7 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
                 attacker: hCaster,
                 damage: iDamage,
                 damage_type: this.damage_type,
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(damage_table)
         }
@@ -579,8 +579,8 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetParentPlus()
         if (!GameFunc.IsValid(hCaster)) {
             this.Destroy()
@@ -633,8 +633,8 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
             }
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
             this.Destroy()
@@ -655,8 +655,8 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
             this.attack_interval = this.GetSpecialValueFor("attack_interval")
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetParentPlus()
             let RemnantCaster = this.GetCasterPlus()
@@ -805,8 +805,8 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
     GetAuraEntityReject(hTarget: IBaseNpc_Plus) {
         return hTarget == this.GetParentPlus()
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let ReManatCaster = this.GetParentPlus()
         if (!GameFunc.IsValid(hCaster)) {
@@ -855,8 +855,8 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let ReManatCaster = this.GetParentPlus()
         if (!GameFunc.IsValid(hCaster)) {
@@ -890,8 +890,8 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
             this.SetStackCount(0)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let ReManatCaster = this.GetParentPlus()
@@ -920,7 +920,7 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
                         attacker: hCaster,
                         damage: iDamage,
                         damage_type: this.damage_type,
-                        eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                        eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
                     }
                     BattleHelper.GoApplyDamage(tDamageTable)
                 }
@@ -1080,7 +1080,7 @@ export class modifier_ember_spirit_6_enemy_arua_debuff_ember_spirit_4 extends Ba
         return this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
-    g_MAGICAL_ARMOR_BONUS() {
+    CC_MAGICAL_ARMOR_BONUS() {
         return this.GetStackCount()
     }
 }
@@ -1112,7 +1112,7 @@ export class modifier_scepter_amplify_damage extends BaseModifier_Plus {
         this.scepter_damage_percent = this.GetSpecialValueFor("scepter_damage_percent")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    g_OUTGOING_DAMAGE_PERCENTAGE() {
+    CC_OUTGOING_DAMAGE_PERCENTAGE() {
         return this.scepter_damage_percent
     }
 }

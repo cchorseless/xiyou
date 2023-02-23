@@ -101,8 +101,8 @@ export class modifier_tinker_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.bAnimation = false
             this.bUsing = false
@@ -158,7 +158,7 @@ export class modifier_tinker_3 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage() {
+    CC_GetModifierOutgoingDamagePercentage() {
         return this.GetParentPlus().GetTalentValue("special_bonus_unique_tinker_custom_7")
     }
 }

@@ -130,10 +130,10 @@ export class modifier_centaur_3 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    EOM_GetModifierSpellAmplifyBonus(params: IModifierTable) {
+    CC_GetModifierSpellAmplifyBonus(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (params != null && params.attacker == hParent && GameFunc.IsValid(params.inflictor) && !params.inflictor.IsItem() && !BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_BLEEDING)) {
+        if (params != null && params.attacker == hParent && GameFunc.IsValid(params.inflictor) && !params.inflictor.IsItem() && !BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_BLEEDING)) {
             let iMaxHealth = hParent.GetMaxHealth()
             let iCurHealth = hParent.GetHealth()
             let iConsumeHealth = iMaxHealth * this.bonus_health_percent * 0.01
@@ -187,8 +187,8 @@ export class modifier_centaur_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.base_strength_percent = this.GetSpecialValueFor("base_strength_percent") + hCaster.GetTalentValue("special_bonus_unique_centaur_custom_4")
@@ -196,20 +196,20 @@ export class modifier_centaur_3_buff extends BaseModifier_Plus {
         if (IsServer()) {
             let iStrengthPercent = params.modifier_count || 0
             this.SetStackCount(params.modifier_count)
-        } else if (params.IsOnCreated) {
+        }
+        else {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_centaur/centaur_return_buff.vpcf",
                 resNpc: this.GetCasterPlus(),
                 iAttachment: ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,
                 owner: this.GetParentPlus()
             });
-
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BASE_PERCENTAGE)
-    g_STATS_STRENGTH_BASE_PERCENTAGE() {
+    CC_STATS_STRENGTH_BASE_PERCENTAGE() {
         return this.base_strength_percent * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_PERCENTAGE)
@@ -217,7 +217,7 @@ export class modifier_centaur_3_buff extends BaseModifier_Plus {
         return this.health_regen_percent
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: IModifierTable) {
+    CC_tooltip(params: IModifierTable) {
         this._tooltip = (this._tooltip || 0) % 2 + 1
         if (this._tooltip == 1) {
             return this.base_strength_percent * this.GetStackCount()
@@ -229,8 +229,8 @@ export class modifier_centaur_3_buff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_centaur_3_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
 

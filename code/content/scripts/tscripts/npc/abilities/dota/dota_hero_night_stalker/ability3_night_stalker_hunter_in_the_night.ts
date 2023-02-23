@@ -140,8 +140,8 @@ export class modifier_night_stalker_3_debuff extends BaseModifier_Plus {
     ShouldUseOverheadOffset() {
         return true
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.damage_per_seconds = this.GetSpecialValueFor("damage_per_seconds") + hCaster.GetTalentValue("special_bonus_unique_night_stalker_custom_2")
@@ -164,8 +164,8 @@ export class modifier_night_stalker_3_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, true)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.damage_per_seconds = this.GetSpecialValueFor("damage_per_seconds") + hCaster.GetTalentValue("special_bonus_unique_night_stalker_custom_2")
@@ -228,8 +228,8 @@ export class modifier_night_stalker_3_buff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(0)
         }
@@ -248,7 +248,7 @@ export class modifier_night_stalker_3_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage() {
+    CC_GetModifierOutgoingDamagePercentage() {
         return this.increase_all_damage_pct
     }
 }

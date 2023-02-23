@@ -95,8 +95,12 @@ export class ERoundBoard extends ERound {
             }
             this.OnWaitingEnd();
         }));
+
     }
 
+    onDestroy(): void {
+        GLogHelper.print("onDestroy ERoundBoard");
+    }
     OnWaitingEnd() {
         if (this.prizeTimer != null) {
             this.prizeTimer.Clear()

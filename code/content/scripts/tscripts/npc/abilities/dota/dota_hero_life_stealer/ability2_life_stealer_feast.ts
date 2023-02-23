@@ -87,7 +87,7 @@ export class modifier_life_stealer_2 extends BaseModifier_Plus {
                     attacker: hParent,
                     victim: params.target,
                     damage: fDamage,
-                    eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL
                 }
                 BattleHelper.GoApplyDamage(damage_table)
@@ -117,14 +117,14 @@ export class modifier_life_stealer_2_attack_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.SetStackCount(params.fDamage || 0)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         if (IsServer()) {
             this.SetStackCount(params.fDamage || 0)
         }

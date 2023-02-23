@@ -90,8 +90,8 @@ export class modifier_alchemist_1 extends BaseModifier_Plus {
     public radius: number;
     public damage_interval: number;
     public iParticleID: ParticleID;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.radius = this.GetSpecialValueFor("radius");
         this.damage_interval = this.GetSpecialValueFor("damage_interval");
         if (IsServer()) {
@@ -104,8 +104,8 @@ export class modifier_alchemist_1 extends BaseModifier_Plus {
             this.iParticleID = iParticleID;
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsClient()) {
             if (this.iParticleID != null) {
                 ParticleManager.DestroyParticle(this.iParticleID, false);
@@ -150,8 +150,8 @@ export class modifier_alchemist_1_aura extends BaseModifier_Plus {
     public max_inc: number;
     public time: number;
 
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.damage_interval = this.GetSpecialValueFor("damage_interval");
         this.armor_reduce = this.GetSpecialValueFor("armor_reduce");
         this.damage_inc = this.GetSpecialValueFor("damage_inc") / 100;
@@ -161,7 +161,7 @@ export class modifier_alchemist_1_aura extends BaseModifier_Plus {
             this.StartIntervalThink(this.damage_interval);
         }
     }
-    OnRefresh(params: IModifierTable) {
+    BeRefresh(params: IModifierTable) {
         this.damage_interval = this.GetSpecialValueFor("damage_interval");
         this.armor_reduce = this.GetSpecialValueFor("armor_reduce");
         this.damage_inc = this.GetSpecialValueFor("damage_inc") / 100;

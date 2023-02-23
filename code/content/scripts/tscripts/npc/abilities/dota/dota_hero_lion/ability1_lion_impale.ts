@@ -141,8 +141,8 @@ export class modifier_lion_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -257,8 +257,8 @@ export class modifier_lion_1_motion extends BaseModifierMotionVertical_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.damage = this.GetSpecialValueFor("damage")
         this.damage_per_mana = this.GetSpecialValueFor("damage_per_mana")
         if (IsServer()) {
@@ -276,8 +276,8 @@ export class modifier_lion_1_motion extends BaseModifierMotionVertical_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
@@ -320,8 +320,8 @@ export class modifier_lion_1_motion extends BaseModifierMotionVertical_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_lion_1_particle_staff extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsClient()) {
@@ -340,8 +340,8 @@ export class modifier_lion_1_particle_staff extends modifier_particle {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_lion_1_particle_spikes extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsClient()) {

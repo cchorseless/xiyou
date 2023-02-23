@@ -4,7 +4,7 @@ import { BattleHelper } from "./helper/BattleHelper";
 export class GameCache {
     /**攻击伤害记录 */
     static readonly RECORD_SYSTEM_DUMMY: {
-        DAMAGE_SYSTEM: { [k: string]: BattleHelper.enum_EOM_DAMAGE_FLAGS },
+        DAMAGE_SYSTEM: { [k: string]: BattleHelper.enum_CC_DAMAGE_FLAGS },
         ATTACK_SYSTEM: { [k: string]: BattleHelper.AttackOptions },
         iLastRecord: number;
     } = {} as any;

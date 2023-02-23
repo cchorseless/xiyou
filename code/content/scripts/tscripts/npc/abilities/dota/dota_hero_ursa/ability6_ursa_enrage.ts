@@ -77,8 +77,8 @@ export class modifier_ursa_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -155,8 +155,8 @@ export class modifier_ursa_6_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
@@ -197,11 +197,11 @@ export class modifier_ursa_6_buff extends BaseModifier_Plus {
 
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: IModifierTable) {
+    CC_tooltip(params: IModifierTable) {
         return this.enrage_multiplier
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
-    tooltip2(params: IModifierTable) {
+    CC_tooltip2(params: IModifierTable) {
         return this.status_resistance
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)

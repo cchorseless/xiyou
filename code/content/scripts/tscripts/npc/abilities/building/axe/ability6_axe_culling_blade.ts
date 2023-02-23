@@ -28,9 +28,6 @@ export class ability6_axe_culling_blade extends BaseAbility_Plus {
 
     }
 
-
-
-
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let radius = this.GetSpecialValueFor("radius")
@@ -121,19 +118,19 @@ export class modifier_axe_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         if (IsServer()) {
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
         }
     }
@@ -205,7 +202,7 @@ export class modifier_axe_6_health_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
-    EOM_GetModifierHealthBonus() {
+    CC_GetModifierHealthBonus() {
         return this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
@@ -242,7 +239,7 @@ export class modifier_axe_6_str_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
-    EOM_GetModifierBonusStats_Strength() {
+    CC_GetModifierBonusStats_Strength() {
         return this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
@@ -293,8 +290,8 @@ export class modifier_axe_6_attack_buff extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_axe_6_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
@@ -313,8 +310,8 @@ export class modifier_axe_6_particle extends modifier_particle {
 // 特效
 @registerModifier()
 export class modifier_axe_6_particle_kill extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()

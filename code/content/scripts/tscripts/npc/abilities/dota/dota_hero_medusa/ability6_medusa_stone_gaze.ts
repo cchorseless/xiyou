@@ -55,7 +55,7 @@ export class modifier_medusa_3 extends BaseModifier_Plus {
         this.duration = this.GetSpecialValueFor("duration")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let chance = this.chance + hCaster.GetTalentValue("special_bonus_unique_medusa_custom_2")
@@ -94,8 +94,8 @@ export class modifier_medusa_3_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         this.bonus_physical_damage = this.GetSpecialValueFor("bonus_physical_damage") + hCaster.GetTalentValue("special_bonus_unique_medusa_custom_8")
         if (params.IsOnCreated && IsClient()) {
@@ -138,7 +138,7 @@ export class modifier_medusa_3_debuff extends BaseModifier_Plus {
         return this.bonus_physical_damage
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
-    g_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE() {
+    CC_INCOMING_PHYSICAL_DAMAGE_PERCENTAGE() {
         return this.bonus_physical_damage
     }
 }

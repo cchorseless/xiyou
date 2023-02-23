@@ -87,8 +87,8 @@ export class modifier_t37_flash_ghost extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
         }
@@ -172,8 +172,8 @@ export class modifier_t37_flash_ghost_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         this.activation_delay = this.GetSpecialValueFor("activation_delay")
         this.think_interval = this.GetSpecialValueFor("think_interval")
@@ -196,15 +196,15 @@ export class modifier_t37_flash_ghost_thinker extends BaseModifier_Plus {
             this.AddParticle(iParticleID, true, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.activation_delay = this.GetSpecialValueFor("activation_delay")
         this.think_interval = this.GetSpecialValueFor("think_interval")
         this.radius = this.GetSpecialValueFor("radius")
         this.wraith_speed = this.GetSpecialValueFor("wraith_speed")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             StopSoundOn(this.sound_loop, this.GetParentPlus())
             this.GetParentPlus().ForceKill(false)

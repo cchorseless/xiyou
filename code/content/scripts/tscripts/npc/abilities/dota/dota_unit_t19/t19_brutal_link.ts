@@ -104,8 +104,8 @@ export class modifier_t19_brutal_link_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
@@ -127,8 +127,8 @@ export class modifier_t19_brutal_link_buff extends BaseModifier_Plus {
         this.transform_damage_percent = this.GetSpecialValueFor("transform_damage_percent")
         this.bonus_strength = this.GetSpecialValueFor("bonus_strength")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus() as t19_brutal_link
             if (GameFunc.IsValid(hAbility) && hAbility.LinkBreak) {

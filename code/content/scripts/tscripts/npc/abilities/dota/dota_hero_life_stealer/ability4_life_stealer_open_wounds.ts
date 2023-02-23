@@ -80,8 +80,8 @@ export class modifier_life_stealer_4 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -160,8 +160,8 @@ export class modifier_life_stealer_4_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.heal_percent = this.GetSpecialValueFor("heal_percent")
         this.duration = this.GetSpecialValueFor("duration")
         let hCaster = this.GetCasterPlus()
@@ -187,8 +187,8 @@ export class modifier_life_stealer_4_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, true, 10, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.heal_percent = this.GetSpecialValueFor("heal_percent")
         this.duration = this.GetSpecialValueFor("duration")
     }
@@ -198,7 +198,7 @@ export class modifier_life_stealer_4_buff extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (GameFunc.IsValid(hCaster) && GameFunc.IsValid(params.attacker) && params.attacker.GetUnitLabel() == "HERO" && !params.attacker.IsIllusion() && !params.attacker.IsClone() && params.attacker.GetTeamNumber() == hCaster.GetTeamNumber() && params.unit == hParent && !BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_BLEEDING)) {
+        if (GameFunc.IsValid(hCaster) && GameFunc.IsValid(params.attacker) && params.attacker.GetUnitLabel() == "HERO" && !params.attacker.IsIllusion() && !params.attacker.IsClone() && params.attacker.GetTeamNumber() == hCaster.GetTeamNumber() && params.unit == hParent && !BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_BLEEDING)) {
             let fMaxHealth = params.attacker.GetMaxHealth()
             let fCurHealth = params.attacker.GetHealth()
             let fLossHealth = fMaxHealth - fCurHealth
@@ -272,7 +272,7 @@ export class modifier_life_stealer_4_max_health extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
-    EOM_GetModifierHealthBonus() {
+    CC_GetModifierHealthBonus() {
         return this.GetStackCount()
     }
 }
@@ -309,14 +309,14 @@ export class modifier_life_stealer_4_reduce_armor extends BaseModifier_Plus {
 
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
-    EOM_GetModifierPhysicalArmorBonus() {
+    CC_GetModifierPhysicalArmorBonus() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetStackCount() * this.GetCasterPlus().GetTalentValue("special_bonus_unique_life_stealer_custom_3")
         }
         return 0
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
-    EOM_GetModifierMagicalArmorBonus() {
+    CC_GetModifierMagicalArmorBonus() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetStackCount() * this.GetCasterPlus().GetTalentValue("special_bonus_unique_life_stealer_custom_3")
         }

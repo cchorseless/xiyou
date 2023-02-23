@@ -47,11 +47,11 @@ export class modifier_invoker_exort_custom extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingMagicalDamagePercentage() {
+    CC_GetModifierOutgoingMagicalDamagePercentage() {
         return this.GetAbilityPlus().GetLevelSpecialValueFor("magic_damage_bonus", this.GetAbilityPlus().GetLevel())
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
-        return this.EOM_GetModifierOutgoingMagicalDamagePercentage()
+        return this.CC_GetModifierOutgoingMagicalDamagePercentage()
     }
 }

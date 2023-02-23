@@ -141,8 +141,8 @@ export class modifier_t16_electricity_touch_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.armor_reduce = this.GetSpecialValueFor("armor_reduce")
         if (IsServer()) {
             this.IncrementStackCount()
@@ -157,8 +157,8 @@ export class modifier_t16_electricity_touch_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.armor_reduce = this.GetSpecialValueFor("armor_reduce")
         if (IsServer()) {
             this.IncrementStackCount()
@@ -166,7 +166,7 @@ export class modifier_t16_electricity_touch_debuff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
 
-    g_PHYSICAL_ARMOR_BONUS() {
+    CC_PHYSICAL_ARMOR_BONUS() {
         return -this.armor_reduce * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
@@ -177,8 +177,8 @@ export class modifier_t16_electricity_touch_debuff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_t16_electricity_touch_particle_electricity_touch extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

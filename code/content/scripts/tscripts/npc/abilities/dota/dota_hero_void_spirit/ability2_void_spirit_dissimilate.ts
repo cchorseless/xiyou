@@ -129,8 +129,8 @@ export class modifier_void_spirit_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActiveCount: number, iActivePct: number, iDamagePct: number, all_damage_amplify: number };
             let hAbility = this.GetAbilityPlus()
@@ -219,8 +219,8 @@ export class modifier_void_spirit_3_create_ill extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
             if (hCaster.IsIllusion()
@@ -264,8 +264,8 @@ export class modifier_void_spirit_3_create_ill extends BaseModifier_Plus {
             })
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             //  销毁特效
             if (this.tDoorPtclIDs) {

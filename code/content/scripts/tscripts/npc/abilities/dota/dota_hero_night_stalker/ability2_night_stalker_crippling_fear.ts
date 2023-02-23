@@ -74,8 +74,8 @@ export class modifier_night_stalker_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         // Save(this.GetParentPlus(), "modifier_night_stalker_2", this)
         if (IsServer()) {
             this.StartIntervalThink(0)
@@ -89,8 +89,8 @@ export class modifier_night_stalker_2 extends BaseModifier_Plus {
             this.CheckNightTime()
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         // Save(this.GetParentPlus(), "modifier_night_stalker_2", null)
         if (IsServer()) {
             modifier_night_stalker_2_form.remove(this.GetParentPlus());
@@ -178,8 +178,8 @@ export class modifier_night_stalker_2_form extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.bonus_attack_speed_night = this.GetSpecialValueFor("bonus_attack_speed_night")
@@ -231,16 +231,16 @@ export class modifier_night_stalker_2_form extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.bonus_attack_speed_night = this.GetSpecialValueFor("bonus_attack_speed_night")
         this.bonus_spell_amp_night = this.GetSpecialValueFor("bonus_spell_amp_night")
         this.extra_damage_pct_night = this.GetSpecialValueFor("extra_damage_pct_night") + hCaster.GetTalentValue("special_bonus_unique_night_stalker_custom_7")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             hParent.SetOriginalModel("models/heroes/nightstalker/nightstalker.vmdl")
@@ -277,16 +277,16 @@ export class modifier_night_stalker_2_form extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    g_OUTGOING_DAMAGE_PERCENTAGE() {
+    CC_OUTGOING_DAMAGE_PERCENTAGE() {
         return ((GameFunc.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) && this.extra_damage_pct_night || 0)
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
-    g_MAX_ATTACKSPEED_BONUS() {
+    CC_MAX_ATTACKSPEED_BONUS() {
         return ((GameFunc.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) && this.bonus_attack_speed_night || 0)
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    g_SPELL_AMPLIFY_BONUS() {
+    CC_SPELL_AMPLIFY_BONUS() {
         return ((GameFunc.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) && this.bonus_spell_amp_night || 0)
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)

@@ -245,8 +245,8 @@ export class modifier_void_spirit_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -327,8 +327,8 @@ export class modifier_void_spirit_2_buff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iPtclID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_void_spirit/pulse/void_spirit_pulse_shield.vpcf",
@@ -345,8 +345,8 @@ export class modifier_void_spirit_2_buff extends BaseModifier_Plus {
     Init(params: IModifierTable) {
         this.base_absorb_amount = this.GetSpecialValueFor("base_absorb_amount")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().EmitSound('Hero_VoidSpirit.Pulse.Destroy')
         }

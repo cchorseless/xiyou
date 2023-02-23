@@ -69,7 +69,7 @@ export class modifier_drow_ranger_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
+    BeCreated(params: IModifierTable) {
 
         if (IsServer()) {
             this.records = []
@@ -158,7 +158,7 @@ export class modifier_drow_ranger_6 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE)
-    EOM_GetModifierIgnorePhysicalArmorPercentage(params: IModifierTable) {
+    CC_GetModifierIgnorePhysicalArmorPercentage(params: IModifierTable) {
         if (params == null || params.target == null || params.target.GetClassname() == "dota_item_drop") {
             return
         }

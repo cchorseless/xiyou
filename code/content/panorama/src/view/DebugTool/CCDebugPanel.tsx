@@ -44,6 +44,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
         const positionList: string[] = [];
         const lock_camera: boolean = true;
         const is_pause: boolean = false;
+        const stop_ping: boolean = false;
         const free_spells: boolean = true;
         const is_frozen: boolean = true;
         return (
@@ -57,7 +58,8 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                     <CCDebugTool_Category title="游戏" >
                         <CCDebugTool_DemoTextEntry eventName={GameProtocol.Protocol.ChangeHostTimescale} localtext="主机速度" />
                         <CCDebugTool_DemoButton eventName="NextStateButtonPressed" btncolor="GreenButton" localtext="下一阶段" />
-                        <CCDebugTool_DemoToggle eventName="LockCameraPauseButtonPressed" localtext="锁定镜头" selected={lock_camera} />
+                        <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.req_DebugChangeServerPing} localtext="暂停Ping" selected={stop_ping} />
+                        {/* <CCDebugTool_DemoToggle eventName="LockCameraPauseButtonPressed" localtext="锁定镜头" selected={lock_camera} /> */}
                         <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.PauseRoundStage} localtext="暂停阶段" selected={is_pause} />
                         <CCDebugTool_DemoSelectionButton eventName="SelectStateButtonPressed" localtext="选择阶段" />
                         <CCDebugTool_DemoButton eventName="ReturnMenuButtonPressed" btncolor="RedButton" localtext="回到菜单" />
@@ -93,6 +95,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                         <CCDebugTool_DemoButton eventName="ControlUnitButtonPressed" localtext="切换控制权" />
                         <CCDebugTool_DemoSelectionButton eventName="CC_DebugTool_UnitInfo" localtext="单位信息面板" onactivate={() => { this.addOnlyDebugDialog(CCDebugTool_UnitInfo) }} />
                     </CCDebugTool_Category>
+
                     <CCDebugTool_Category title="其他" >
                         <CCDebugTool_DemoButton eventName="SetWinnerButtonPressed" btncolor="RedButton" localtext="游戏结束" />
                         <CCDebugTool_DemoButton eventName={GameProtocol.Protocol.req_DebugRestart} btncolor="RedButton" localtext="重开游戏" />

@@ -63,7 +63,7 @@ export class modifier_monkey_king_3 extends BaseModifier_Plus {
     }
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
-    EOM_GetModifierLifestealAmplify_Percentage() {
+    CC_GetModifierLifestealAmplify_Percentage() {
         return this.GetSpecialValueFor("bonus_lifesteal")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_AMPLIFY_PERCENTAGE)
@@ -112,8 +112,8 @@ export class modifier_monkey_king_3_counter extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.required_hits = this.GetSpecialValueFor("required_hits")
         this.max_duration = this.GetSpecialValueFor("max_duration")
         if (IsServer()) {
@@ -130,8 +130,8 @@ export class modifier_monkey_king_3_counter extends BaseModifier_Plus {
             this.AddParticle(this.iParticleID, false, false, -1, false, true)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.required_hits = this.GetSpecialValueFor("required_hits")
         this.max_duration = this.GetSpecialValueFor("max_duration")
         if (IsServer()) {
@@ -186,8 +186,8 @@ export class modifier_monkey_king_3_buff extends BaseModifier_Plus {
     ShouldUseOverheadOffset() {
         return true
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_monkey_king/monkey_king_quad_tap_start.vpcf",
@@ -251,8 +251,8 @@ export class modifier_monkey_king_3_buff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_monkey_king_3_particle_monkey_king_quad_tap_hit extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

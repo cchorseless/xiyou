@@ -149,8 +149,13 @@ export class GameServiceSystemComponent extends GameServiceSystem {
             if (playeroot) {
                 const cbdata: H2C_CommonResponse = await playeroot.PlayerHttpComp().PostAsync(e.protocol, e.data);
                 GLogHelper.print(cbdata);
-                e.state = cbdata.Error == 0;
-                e.data = cbdata.Message;
+                if (cbdata) {
+                    e.state = cbdata.Error == 0;
+                    e.data = cbdata.Message;
+                }
+                else {
+                    e.state = false;
+                }
                 if (e.isawait && e.sendClientCB) {
                     e.sendClientCB()
                 }

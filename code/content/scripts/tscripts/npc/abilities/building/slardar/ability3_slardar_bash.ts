@@ -67,7 +67,7 @@ export class modifier_slardar_3 extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
-    EOM_GetModifierMaximumAttackSpeedBonus(params: IModifierTable) {
+    CC_GetModifierMaximumAttackSpeedBonus(params: IModifierTable) {
         return this.max_speed
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_START)

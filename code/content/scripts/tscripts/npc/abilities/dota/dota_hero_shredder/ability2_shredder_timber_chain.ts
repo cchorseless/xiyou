@@ -88,8 +88,8 @@ export class modifier_shredder_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.stack_duration = this.GetSpecialValueFor("stack_duration")
         this.cooldown = this.GetSpecialValueFor("cooldown")
         if (IsServer()) {
@@ -97,8 +97,8 @@ export class modifier_shredder_2 extends BaseModifier_Plus {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.stack_duration = this.GetSpecialValueFor("stack_duration")
         this.cooldown = this.GetSpecialValueFor("cooldown")
     }
@@ -147,7 +147,7 @@ export class modifier_shredder_2 extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
 
-    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (IsServer() && params != null) {
             if (this.GetParentPlus().PassivesDisabled()) {
                 return
@@ -195,8 +195,8 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.base_spell_crit_damage = this.GetSpecialValueFor("base_spell_crit_damage")
@@ -219,8 +219,8 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
             }
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.base_spell_crit_damage = this.GetSpecialValueFor("base_spell_crit_damage")
@@ -243,8 +243,8 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.hBuffPtcl)) {
                 this.hBuffPtcl.Destroy()
@@ -287,13 +287,13 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
-    EOM_GetModifierSpellCriticalStrike(params: IModifierTable) {
+    CC_GetModifierSpellCriticalStrike(params: IModifierTable) {
         if (GameFunc.mathUtil.PRD(this.bonus_spell_crit_chance * this.GetStackCount(), this.GetParentPlus(), "modifier_shredder_2_buff")) {
             return this.base_spell_crit_damage
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
-    EOM_GetModifierSpellCriticalStrikeDamage(params: IModifierTable) {
+    CC_GetModifierSpellCriticalStrikeDamage(params: IModifierTable) {
         return this.bonus_spell_crit_damage * this.GetStackCount()
     }
 }
@@ -327,8 +327,8 @@ export class modifier_shredder_2_fire_buff extends BaseModifier_Plus {
     GetTexture() {
         return "shredder_flamethrower"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.damage_per_second_factor = this.GetSpecialValueFor("damage_per_second_factor")
         this.length = this.GetSpecialValueFor("length")
         this.width = this.GetSpecialValueFor("width")
@@ -349,15 +349,15 @@ export class modifier_shredder_2_fire_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.damage_per_second_factor = this.GetSpecialValueFor("damage_per_second_factor")
         this.length = this.GetSpecialValueFor("length")
         this.width = this.GetSpecialValueFor("width")
         this.debuff_duration = this.GetSpecialValueFor("debuff_duration")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             this.GetParentPlus().StopSound(ResHelper.GetSoundReplacement("Hero_Shredder.Flamethrower", hParent))
@@ -423,20 +423,20 @@ export class modifier_shredder_2_fire_debuff extends BaseModifier_Plus {
     GetTexture() {
         return "shredder_flamethrower"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.reduce_move_speed_pct = this.GetSpecialValueFor("reduce_move_speed_pct")
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             hParent.EmitSound(ResHelper.GetSoundReplacement("Hero_Shredder.Flamethrower.Target", hParent))
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.reduce_move_speed_pct = this.GetSpecialValueFor("reduce_move_speed_pct")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             this.GetParentPlus().StopSound(ResHelper.GetSoundReplacement("Hero_Shredder.Flamethrower.Target", hParent))
@@ -455,8 +455,8 @@ export class modifier_shredder_2_particle extends modifier_particle {
     iParticleID_2: ParticleID;
     iParticleID_3: ParticleID;
     iParticleID_4: ParticleID;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let whirling_radius = this.GetSpecialValueFor("whirling_radius")
         if (IsServer()) {
             if (params.flag) {

@@ -196,16 +196,16 @@ export class modifier_death_prophet_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.tScepterGhosts = []
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             for (let hGhost of (this.tScepterGhosts)) {
                 if (GameFunc.IsValid(hGhost)) {
@@ -306,8 +306,8 @@ export class modifier_death_prophet_6_buff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let bonus_radius = hCaster.GetTalentValue("special_bonus_unique_death_prophet_custom")
         let bonus_spirits = hCaster.GetTalentValue("special_bonus_unique_death_prophet_custom_5")
@@ -457,8 +457,8 @@ export class modifier_death_prophet_6_buff extends BaseModifier_Plus {
             )
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             if (GameFunc.IsValid(hParent)) {
@@ -523,8 +523,8 @@ export class modifier_death_prophet_6_ghost extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -541,8 +541,8 @@ export class modifier_death_prophet_6_ghost extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().ForceKill(false)
         }
@@ -622,8 +622,8 @@ export class modifier_death_prophet_6_intellect_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.ghost_steal_intellect = this.GetSpecialValueFor("ghost_steal_intellect")
         this.scepter_ghost_steal_intellect = this.GetSpecialValueFor("scepter_ghost_steal_intellect")
         if (IsServer()) {
@@ -638,7 +638,7 @@ export class modifier_death_prophet_6_intellect_buff extends BaseModifier_Plus {
 
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
-    EOM_GetModifierBonusStats_Intellect() {
+    CC_GetModifierBonusStats_Intellect() {
         return this.GetStackCount()
     }
 }

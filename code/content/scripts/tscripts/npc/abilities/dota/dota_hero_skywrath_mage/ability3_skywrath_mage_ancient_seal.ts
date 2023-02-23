@@ -92,7 +92,7 @@ export class modifier_skywrath_mage_3 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingMagicalDamagePercentage() {
+    CC_GetModifierOutgoingMagicalDamagePercentage() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return math.floor(this.GetParentPlus().GetIntellect() / this.int_factor) * this.int_factor_magical_damage_pct
         }
@@ -138,10 +138,10 @@ export class modifier_skywrath_mage_3_debuff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
 
-    tooltip() {
+    CC_tooltip() {
         return this.resist_debuff_percent * this.GetStackCount()
     }
-    //   EOM_GetModifierIncomingMagicalDamagePercentage() {
+    //   CC_GetModifierIncomingMagicalDamagePercentage() {
     //  	return this.resist_debuff_percent * this.GetStackCount()
     //  }
 }

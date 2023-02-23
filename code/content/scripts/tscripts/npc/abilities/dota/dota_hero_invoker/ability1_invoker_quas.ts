@@ -45,11 +45,11 @@ export class modifier_invoker_quas_custom extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
-    EOM_GetModifierConstantManaRegen() {
+    CC_GetModifierConstantManaRegen() {
         return this.GetAbilityPlus().GetLevelSpecialValueFor("mana_regen_per_level", this.GetAbilityPlus().GetLevel())
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
-        return this.EOM_GetModifierConstantManaRegen()
+        return this.CC_GetModifierConstantManaRegen()
     }
 }

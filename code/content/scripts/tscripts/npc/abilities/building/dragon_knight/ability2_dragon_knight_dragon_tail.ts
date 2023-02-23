@@ -183,8 +183,8 @@ export class modifier_dragon_knight_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -272,8 +272,8 @@ export class modifier_dragon_knight_2_health extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.health_percent = this.GetSpecialValueFor("health_percent")
 
         if (IsServer()) {
@@ -285,7 +285,7 @@ export class modifier_dragon_knight_2_health extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
-    EOM_GetModifierHealthPercentage() {
+    CC_GetModifierHealthPercentage() {
         return this.GetStackCount() * this.health_percent
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
@@ -297,8 +297,8 @@ export class modifier_dragon_knight_2_health extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_dragon_knight_2_particle_start_1 extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hTarget = this.GetCasterPlus()
             let hCaster = this.GetParentPlus()
@@ -319,8 +319,8 @@ export class modifier_dragon_knight_2_particle_start_1 extends modifier_particle
 // 特效
 @registerModifier()
 export class modifier_dragon_knight_2_particle_start_2 extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hTarget = this.GetCasterPlus()
             let hCaster = this.GetParentPlus()

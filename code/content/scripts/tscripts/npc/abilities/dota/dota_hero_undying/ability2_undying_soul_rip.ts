@@ -193,8 +193,8 @@ export class modifier_undying_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -299,17 +299,17 @@ export class modifier_undying_2_health_buff extends BaseModifier_Plus {
 
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
-    EOM_GetModifierHealthBonus() {
+    CC_GetModifierHealthBonus() {
         return this.GetStackCount() * this.damage_per_unit
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_BONUS)
-    EOM_GetModifierHealthPercentage() {
+    CC_GetModifierHealthPercentage() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.GetStackCount() * this.damage_per_unit_pct
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.GetStackCount() * this.damage_per_unit
     }
 }
@@ -317,8 +317,8 @@ export class modifier_undying_2_health_buff extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_undying_2_particle_target extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hTarget = this.GetCasterPlus()
             let hUnit = this.GetParentPlus()
@@ -345,8 +345,8 @@ export class modifier_undying_2_particle_target extends modifier_particle {
 // 特效
 @registerModifier()
 export class modifier_undying_2_particle_start extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hTarget = this.GetCasterPlus()
             let iParticle = ResHelper.CreateParticle({

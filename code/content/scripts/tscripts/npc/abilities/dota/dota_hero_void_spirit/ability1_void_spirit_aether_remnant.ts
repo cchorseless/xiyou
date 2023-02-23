@@ -176,8 +176,8 @@ export class modifier_void_spirit_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -248,8 +248,8 @@ export class modifier_void_spirit_1_thinker extends BaseModifier_Plus {
     IsPurgable() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.radius = this.GetSpecialValueFor('radius')
         this.rooted_druation = this.GetSpecialValueFor('rooted_druation')
         if (IsServer()) {
@@ -275,8 +275,8 @@ export class modifier_void_spirit_1_thinker extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.tTriggered = null
             let hAbility = this.GetAbilityPlus() as ability1_void_spirit_aether_remnant
@@ -388,8 +388,8 @@ export class modifier_void_spirit_1_debuff extends BaseModifier_Plus {
     StatusEffectPriority() {
         return 10
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus() as ability1_void_spirit_aether_remnant
@@ -414,14 +414,14 @@ export class modifier_void_spirit_1_debuff extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         if (IsServer()) {
             this.damage_income = (this.GetAbilityPlus() as ability1_void_spirit_aether_remnant).GetOriCaster().GetTalentValue('special_bonus_unique_void_spirit_custom_3')
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus() as ability1_void_spirit_aether_remnant
             if (this.GetCasterPlus() == (hAbility && hAbility.GetOriCaster && hAbility.GetOriCaster())) {

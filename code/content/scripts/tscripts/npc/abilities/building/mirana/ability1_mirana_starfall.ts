@@ -96,8 +96,8 @@ export class modifier_mirana_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -156,8 +156,8 @@ export class modifier_mirana_1 extends BaseModifier_Plus {
 export class modifier_mirana_1_thinker extends modifier_particle_thinker {
     bIsSecondary: boolean;
     tTargetEntIndex: any[];
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -277,8 +277,8 @@ export class modifier_mirana_1_thinker extends modifier_particle_thinker {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             if (this.bIsSecondary && !modifier_mirana_1_effect.exist(hParent)) {
@@ -292,8 +292,8 @@ export class modifier_mirana_1_thinker extends modifier_particle_thinker {
 @registerModifier()
 export class modifier_mirana_1_effect extends modifier_particle_thinker {
     interval: number;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.interval = this.GetSpecialValueFor("interval")
         if (IsServer()) {
             this.StartIntervalThink(this.interval)
@@ -390,16 +390,16 @@ export class modifier_mirana_1_scepter extends BaseModifier_Plus {
             }
         }
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.max_charge = 1
         this.interval_scepter = this.GetSpecialValueFor("interval_scepter")
         if (IsServer()) {
             this.Init()
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.max_charge = 1
         this.interval_scepter = this.GetSpecialValueFor("interval_scepter")
         if (IsServer()) {
@@ -440,8 +440,8 @@ export class modifier_mirana_1_counter extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.IncrementStackCount()
             GTimerHelper.AddTimer(params.duration, GHandler.create(this, () => {

@@ -63,8 +63,8 @@ export class modifier_run extends BaseModifierMotionHorizontal_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_IDLE);
             this.GetParentPlus().RemoveHorizontalMotionController(this);
@@ -86,7 +86,7 @@ export class modifier_run extends BaseModifierMotionHorizontal_Plus {
         return state;
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
-    g_GetOverrideAnimation() {
+    CC_GetOverrideAnimation() {
         if (this.GetParentPlus().IsStunned()) {
             return GameActivity_t.ACT_DOTA_DISABLED;
         } else {
@@ -95,7 +95,7 @@ export class modifier_run extends BaseModifierMotionHorizontal_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_AUTOATTACK)
-    g_DISABLE_AUTOATTACK() {
+    CC_DISABLE_AUTOATTACK() {
         return 0
     }
 

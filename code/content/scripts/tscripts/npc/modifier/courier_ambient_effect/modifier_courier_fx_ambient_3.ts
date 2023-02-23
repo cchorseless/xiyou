@@ -23,8 +23,8 @@ export class modifier_courier_fx_ambient_3 extends BaseModifier_Plus {
     RemoveOnDeath() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let respath = "particles/econ/courier/courier_donkey_ti7/courier_donkey_ti7_ambient.vpcf"
             let iParticleID = ResHelper.CreateParticle(

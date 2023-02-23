@@ -44,8 +44,8 @@ export class modifier_huskar_3 extends BaseModifier_Plus {
     HeroEffectPriority() {
         return 100
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(0)
         } else {
@@ -97,14 +97,14 @@ export class modifier_huskar_3 extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BASE_PERCENTAGE)
-    EOM_GetModifierBaseStats_Strength_Percentage() {
+    CC_GetModifierBaseStats_Strength_Percentage() {
         if (this.GetParentPlus().PassivesDisabled()) {
             return 0
         }
         return this.maximum_strength / 100 * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
-    EOM_GetModifierSpellCriticalStrikeDamage() {
+    CC_GetModifierSpellCriticalStrikeDamage() {
         if (this.GetParentPlus().PassivesDisabled()) {
             return 0
         }

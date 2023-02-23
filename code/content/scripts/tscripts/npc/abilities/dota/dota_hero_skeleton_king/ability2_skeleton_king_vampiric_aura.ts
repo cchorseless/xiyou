@@ -137,8 +137,8 @@ export class modifier_skeleton_king_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.records = []
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -160,7 +160,7 @@ export class modifier_skeleton_king_2 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: IModifierTable) {
+    CC_GetModifierCriticalStrike(params: IModifierTable) {
         if (params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             if (GameFunc.mathUtil.PRD(this.crit_chance, params.attacker, "skeleton_king_2")) {
                 if (!params.attacker.IsIllusion()) {
@@ -248,8 +248,8 @@ export class modifier_skeleton_king_2_summon extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_PERMANENT
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.respawn_time = this.GetSpecialValueFor("respawn_time")
         this.model_scale = this.GetSpecialValueFor("model_scale")
         if (IsServer()) {
@@ -264,8 +264,8 @@ export class modifier_skeleton_king_2_summon extends BaseModifier_Plus {
         }
 
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus() as ability2_skeleton_king_vampiric_aura
             if (GameFunc.IsValid(hAbility)) {

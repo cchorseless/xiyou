@@ -65,8 +65,8 @@ export class modifier_riki_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -167,8 +167,8 @@ export class modifier_riki_1_thinker extends BaseModifier_Plus {
     GetAuraSearchFlags() {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius")
         this.shard_interval = this.GetSpecialValueFor("shard_interval")
@@ -188,14 +188,14 @@ export class modifier_riki_1_thinker extends BaseModifier_Plus {
             this.StartIntervalThink(0)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.radius = this.GetSpecialValueFor("radius")
         this.shard_interval = this.GetSpecialValueFor("shard_interval")
         this.shard_duration = this.GetSpecialValueFor("shard_duration")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }
@@ -316,7 +316,7 @@ export class modifier_riki_1_shard_debuff extends BaseModifier_Plus {
         this.shard_increase_physical_damage = this.GetSpecialValueFor("shard_increase_physical_damage")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingPhysicalDamagePercentage() {
+    CC_GetModifierIncomingPhysicalDamagePercentage() {
         return this.shard_increase_physical_damage
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
@@ -351,14 +351,14 @@ export class modifier_riki_1_attack_damage extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.IncrementStackCount()
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         if (IsServer()) {
             this.IncrementStackCount()
         }

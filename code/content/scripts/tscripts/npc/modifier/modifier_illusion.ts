@@ -41,8 +41,8 @@ export class modifier_illusion extends BaseModifier_Plus {
         return
     }
 
-    public OnDestroy(): void {
-        super.OnDestroy();
+    public BeDestroy(): void {
+
     }
 }
 

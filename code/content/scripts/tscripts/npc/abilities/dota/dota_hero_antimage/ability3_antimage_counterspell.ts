@@ -81,14 +81,14 @@ export class modifier_antimage_3_buff extends BaseModifier_Plus {
 
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
-    EOM_GetModifierManaBonus(params: IModifierTable) {
+    CC_GetModifierManaBonus(params: IModifierTable) {
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             return 0
         }
         return this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             return 0
         }

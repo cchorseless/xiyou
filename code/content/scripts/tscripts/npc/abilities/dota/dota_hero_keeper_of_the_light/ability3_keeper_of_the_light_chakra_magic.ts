@@ -67,8 +67,8 @@ export class modifier_keeper_of_the_light_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -189,11 +189,11 @@ export class modifier_keeper_of_the_light_3_buff extends BaseModifier_Plus {
         return this.promote_mana_limit_percent
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.promote_mana_limit_percent
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (params != null && GameFunc.IsValid(params.target) && params.target.GetMana() <= 0) {
             return this.increase_all_damage_pct
         }

@@ -270,8 +270,8 @@ export class modifier_earth_spirit_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -405,8 +405,8 @@ export class modifier_earth_spirit_1 extends BaseModifier_Plus {
 export class modifier_earth_spirit_1_smash_target extends modifier_particle_thinker {
     distance: number;
     speed: number;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             this.distance = this.GetSpecialValueFor("distance")
             this.speed = this.GetSpecialValueFor("speed")
@@ -446,8 +446,8 @@ export class modifier_earth_spirit_illusion extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/status_fx/status_effect_earth_spirit_petrify.vpcf",
@@ -475,8 +475,8 @@ export class modifier_earth_spirit_illusion extends BaseModifier_Plus {
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }
@@ -518,8 +518,8 @@ export class modifier_earth_spirit_silence extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/items2_fx/orchid_silenced.vpcf",
@@ -560,8 +560,8 @@ export class modifier_earth_spirit_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_earth_spirit/espirit_bouldersmash_silence.vpcf",

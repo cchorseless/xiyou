@@ -43,8 +43,8 @@ export class modifier_shock extends BaseModifier_Plus {
     /**上次伤害时间 */
     IsCooldown: boolean = false;
 
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let info: ResHelper.IParticleInfo = {
                 resPath: "particles/econ/items/zeus/lightning_weapon_fx/zues_immortal_lightning_weapon_energy.vpcf",
@@ -77,7 +77,7 @@ export class modifier_shock extends BaseModifier_Plus {
     /**受到伤害 */
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     OnHurted(params: ModifierInstanceEvent) {
-        if (!BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_SHOCK)) {
+        if (!BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SHOCK)) {
             return
         }
         let hAttacker = params.attacker
@@ -135,7 +135,7 @@ export class modifier_shock extends BaseModifier_Plus {
             damage: damage,
             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
             damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-            eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_SHOCK + BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM + BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+            eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SHOCK + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
         }
         BattleHelper.GoApplyDamage(damageInfo);
         ResHelper.CreateParticle(

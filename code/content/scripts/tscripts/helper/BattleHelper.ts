@@ -11,7 +11,7 @@ import { GameFunc } from "../GameFunc";
 export module BattleHelper {
 
     export interface DamageOptions extends ApplyDamageOptions {
-        eom_flags?: enum_EOM_DAMAGE_FLAGS;
+        eom_flags?: enum_CC_DAMAGE_FLAGS;
     }
 
     export interface AttackOptions {
@@ -24,32 +24,32 @@ export module BattleHelper {
     /**
      *自定义伤害flag
      */
-    export enum enum_EOM_DAMAGE_FLAGS {
-        EOM_DAMAGE_FLAG_NONE = 0,
+    export enum enum_CC_DAMAGE_FLAGS {
+        CC_DAMAGE_FLAG_NONE = 0,
         /**无视大多数伤害加成效果(主要包含物理、魔法、纯粹、全伤害四种泛类型加成，ps=例如毒伤害拥有此flag，但是还是能收到毒伤害加成效果) */
-        EOM_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY = 1,
+        CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY = 1,
         /**技能暴击(√) */
-        EOM_DAMAGE_FLAG_SPELL_CRIT = EOM_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY * 2,
+        CC_DAMAGE_FLAG_SPELL_CRIT = CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY * 2,
         /**毒伤害(√) */
-        EOM_DAMAGE_FLAG_POISON = EOM_DAMAGE_FLAG_SPELL_CRIT * 2,
+        CC_DAMAGE_FLAG_POISON = CC_DAMAGE_FLAG_SPELL_CRIT * 2,
         /**持续伤害(√) */
-        EOM_DAMAGE_FLAG_DOT = EOM_DAMAGE_FLAG_POISON * 2,
+        CC_DAMAGE_FLAG_DOT = CC_DAMAGE_FLAG_POISON * 2,
         /** 分裂伤害(√) */
-        EOM_DAMAGE_FLAG_CLEAVE = EOM_DAMAGE_FLAG_DOT * 2,
+        CC_DAMAGE_FLAG_CLEAVE = CC_DAMAGE_FLAG_DOT * 2,
         /**不会触发技能暴击(√) */
-        EOM_DAMAGE_FLAG_NO_SPELL_CRIT = EOM_DAMAGE_FLAG_CLEAVE * 2,
+        CC_DAMAGE_FLAG_NO_SPELL_CRIT = CC_DAMAGE_FLAG_CLEAVE * 2,
         /**不能被两个链接棒子转换伤害类型（物理、魔法转换）(√) */
-        EOM_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM = EOM_DAMAGE_FLAG_NO_SPELL_CRIT * 2,
+        CC_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM = CC_DAMAGE_FLAG_NO_SPELL_CRIT * 2,
         /**标记被转化前的伤害(√) */
-        EOM_DAMAGE_FLAG_BEFORE_TRANSFORMED_DAMAGE = EOM_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM * 2,
+        CC_DAMAGE_FLAG_BEFORE_TRANSFORMED_DAMAGE = CC_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM * 2,
         /**标记被转化后的伤害(√) */
-        EOM_DAMAGE_FLAG_AFTER_TRANSFORMED_DAMAGE = EOM_DAMAGE_FLAG_BEFORE_TRANSFORMED_DAMAGE * 2,
+        CC_DAMAGE_FLAG_AFTER_TRANSFORMED_DAMAGE = CC_DAMAGE_FLAG_BEFORE_TRANSFORMED_DAMAGE * 2,
         /** 流血伤害(√) */
-        EOM_DAMAGE_FLAG_BLEEDING = EOM_DAMAGE_FLAG_AFTER_TRANSFORMED_DAMAGE * 2,
+        CC_DAMAGE_FLAG_BLEEDING = CC_DAMAGE_FLAG_AFTER_TRANSFORMED_DAMAGE * 2,
         /** 显示数字(√) */
-        EOM_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER = EOM_DAMAGE_FLAG_BLEEDING * 2,
+        CC_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER = CC_DAMAGE_FLAG_BLEEDING * 2,
         /**触电伤害 */
-        EOM_DAMAGE_FLAG_SHOCK = EOM_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER * 2
+        CC_DAMAGE_FLAG_SHOCK = CC_DAMAGE_FLAG_SHOW_DAMAGE_NUMBER * 2
 
     }
 
@@ -120,7 +120,7 @@ export module BattleHelper {
      */
     export function GoApplyDamage(tDamageTable: DamageOptions) {
         if (!tDamageTable) { return }
-        let iEOMFlag = enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NONE
+        let iEOMFlag = enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NONE
         if (tDamageTable.eom_flags == null) {
             tDamageTable.eom_flags = iEOMFlag
         }
@@ -135,12 +135,12 @@ export module BattleHelper {
         ApplyDamage(tDamageTable)
     }
     /**
-     * 只要有参数中的任何一个EOM_DAMAGE_FLAG就返回true
+     * 只要有参数中的任何一个CC_DAMAGE_FLAG就返回true
      * @param iRecord
      * @param args
      * @returns
      */
-    export function DamageFilter(iRecord: string | number, ...args: enum_EOM_DAMAGE_FLAGS[]) {
+    export function DamageFilter(iRecord: string | number, ...args: enum_CC_DAMAGE_FLAGS[]) {
         let bool = false
         if (GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM) {
             let iEOMFlag = GetDamageFlag(iRecord);
@@ -193,7 +193,7 @@ export module BattleHelper {
     }
 
     export function GetDamageFlag(iRecord: string | number) {
-        let iEOMFlag = enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NONE
+        let iEOMFlag = enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NONE
         if (GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM != null) {
             return GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM['' + iRecord] || iEOMFlag
         }
@@ -222,10 +222,10 @@ export module BattleHelper {
     export function _BeforeTransformedDamage(iRecord: string | number) {
         iRecord = '' + iRecord;
         if (GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM == null) { GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM = {} }
-        if (GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM[iRecord] == null) { GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM[iRecord] = enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NONE }
-        let isIn = GameFunc.IncludeArgs(GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM[iRecord], enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_BEFORE_TRANSFORMED_DAMAGE)[0]
+        if (GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM[iRecord] == null) { GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM[iRecord] = enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NONE }
+        let isIn = GameFunc.IncludeArgs(GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM[iRecord], enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_BEFORE_TRANSFORMED_DAMAGE)[0]
         if (!isIn) {
-            GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM[iRecord] = GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM[iRecord] + enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_BEFORE_TRANSFORMED_DAMAGE
+            GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM[iRecord] = GGameCache.RECORD_SYSTEM_DUMMY.DAMAGE_SYSTEM[iRecord] + enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_BEFORE_TRANSFORMED_DAMAGE
         }
     }
 

@@ -118,7 +118,6 @@ export module ResHelper {
     }
 
     /**
-     * todo
      * @param res 资源路径
      * @param npc
      * @param iAttachment
@@ -131,8 +130,20 @@ export module ResHelper {
         }
         let p_id = ParticleManager.CreateParticle(ResHelper.GetParticleReplacement(resInfo.resPath, resInfo.resNpc), resInfo.iAttachment, resInfo.owner);
         if (resInfo.validtime != null && resInfo.validtime > 0) {
-            GTimerHelper.AddTimer(resInfo.validtime, GHandler.create(null, () => {
+            GTimerHelper.AddTimer(resInfo.validtime, GHandler.create({}, () => {
                 ParticleManager.DestroyParticle(p_id, resInfo.isimmediately);
+                ParticleManager.ReleaseParticleIndex(p_id);
+            }));
+        }
+        return p_id;
+    }
+
+
+    export function CreateParticleEx(res: string, iAttachment: ParticleAttachment_t, owner: IBaseNpc_Plus, npc: IBaseNpc_Plus, validtime: number = -1, level: PARTICLE_DETAIL_LEVEL = PARTICLE_DETAIL_LEVEL.PARTICLE_DETAIL_LEVEL_ULTRA, isimmediately: boolean = false) {
+        let p_id = ParticleManager.CreateParticle(ResHelper.GetParticleReplacement(res, npc), iAttachment, owner);
+        if (validtime != null && validtime > 0) {
+            GTimerHelper.AddTimer(validtime, GHandler.create(null, () => {
+                ParticleManager.DestroyParticle(p_id, isimmediately);
                 ParticleManager.ReleaseParticleIndex(p_id);
             }));
         }

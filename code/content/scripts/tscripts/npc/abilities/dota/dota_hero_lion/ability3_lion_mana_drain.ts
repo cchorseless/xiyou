@@ -73,15 +73,15 @@ export class modifier_lion_3_mana extends BaseModifier_Plus {
             })
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             this.SetStackCount(0)
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
-    EOM_GetModifierManaBonus(params: IModifierTable) {
+    CC_GetModifierManaBonus(params: IModifierTable) {
         return this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
@@ -92,8 +92,8 @@ export class modifier_lion_3_mana extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_lion_3_particle_drain extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsClient()) {

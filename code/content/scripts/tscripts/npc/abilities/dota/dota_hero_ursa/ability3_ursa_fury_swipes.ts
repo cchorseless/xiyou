@@ -108,8 +108,8 @@ export class modifier_ursa_3_buff extends BaseModifier_Plus {
     DestroyOnExpire() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (!IsServer()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_ursa/ursa_fury_swipes_debuff.vpcf",
@@ -143,8 +143,8 @@ export class modifier_ursa_3_buff extends BaseModifier_Plus {
             this.StartIntervalThink((hCaster.HasShard() && this.shard_bonus_reset_time || this.bonus_reset_time))
         }
     }
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (IsServer()) {
             this.StartIntervalThink(-1)
         }
@@ -167,15 +167,15 @@ export class modifier_ursa_3_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
-    EOM_GetModifierBaseAttack_BonusDamage() {
+    CC_GetModifierBaseAttack_BonusDamage() {
         return this.damage_per_stack * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
-    tooltip2(params: IModifierTable) {
+    CC_tooltip2(params: IModifierTable) {
         return this.damage_per_stack * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: IModifierTable) {
+    CC_tooltip(params: IModifierTable) {
         return this.shock_chance_per_stack * this.GetStackCount()
     }
 }

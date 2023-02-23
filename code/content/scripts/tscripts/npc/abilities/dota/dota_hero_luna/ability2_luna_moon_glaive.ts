@@ -103,8 +103,8 @@ export class modifier_luna_2 extends BaseModifier_Plus {
     GetPriority() {
         return -1
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_luna/luna_ambient_moon_glaive.vpcf",

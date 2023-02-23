@@ -74,8 +74,8 @@ export class modifier_skeleton_king_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -168,8 +168,8 @@ export class modifier_skeleton_king_6_aura extends BaseModifier_Plus {
     GetAura() {
         return "modifier_skeleton_king_6_buff"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
             this.bUseEnergy = params.bUseEnergy
@@ -234,8 +234,8 @@ export class modifier_skeleton_king_6_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.SetStackCount(modifier_skeleton_king_6_aura.findIn(this.GetCasterPlus()).bUseEnergy)
         } else {
@@ -249,8 +249,8 @@ export class modifier_skeleton_king_6_buff extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (modifier_skeleton_king_2_summon.exist(this.GetParentPlus())) {
                 this.GetParentPlus().ForceKill(true)

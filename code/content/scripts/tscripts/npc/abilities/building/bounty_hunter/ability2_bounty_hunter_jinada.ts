@@ -61,8 +61,8 @@ export class modifier_bounty_hunter_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -142,11 +142,11 @@ export class modifier_bounty_hunter_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    Init(params: IModifierTable) {
+    BeCreated(params: IModifierTable) {
         this.bonus_base_physics_damage = this.GetSpecialValueFor("bonus_base_physics_damage")
         this.bonus_attack_physics_damage_percent = this.GetSpecialValueFor("bonus_attack_physics_damage_percent")
         this.fade_time = this.GetSpecialValueFor("fade_time")
-        if (params.IsOnCreated && IsClient()) {
+        if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk.vpcf",
                 resNpc: this.GetParentPlus(),

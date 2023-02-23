@@ -110,8 +110,8 @@ export class modifier_bristleback_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         this.max_stacks = this.GetSpecialValueFor("max_stacks") + hCaster.GetTalentValue("special_bonus_unique_bristleback_custom_5")
         this.per_stacks_base_attack_pct = this.GetSpecialValueFor("per_stacks_base_attack_pct")
@@ -146,7 +146,7 @@ export class modifier_bristleback_3_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    EOM_GetModifierSpellAmplifyBonus(params: IModifierTable) {
+    CC_GetModifierSpellAmplifyBonus(params: IModifierTable) {
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             return this.per_stacks_amplify_damage_pct * this.GetStackCount()
         } else {
@@ -154,7 +154,7 @@ export class modifier_bristleback_3_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         if (this.GetCasterPlus() == this.GetParentPlus()) {
             return this.per_stacks_amplify_damage_pct * this.GetStackCount()
         } else {

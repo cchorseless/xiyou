@@ -143,8 +143,8 @@ export class modifier_necrolyte_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -216,7 +216,7 @@ export class modifier_necrolyte_6 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE)
-    EOM_GetModifierIgnoreMagicalArmorPercentage(params: IModifierTable) {
+    CC_GetModifierIgnoreMagicalArmorPercentage(params: IModifierTable) {
         if (IsServer()) {
             if (params != null && params.inflictor == this.GetAbilityPlus()) {
                 return this.GetCasterPlus().GetTalentValue("special_bonus_unique_necrolyte_custom_7")
@@ -282,8 +282,8 @@ export class modifier_necrolyte_6_stun extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hTarget = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {

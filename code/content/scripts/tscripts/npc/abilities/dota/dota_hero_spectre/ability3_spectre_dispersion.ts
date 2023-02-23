@@ -106,8 +106,8 @@ export class modifier_spectre_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(this.illusion_interval)
             //  皮肤特效替换
@@ -210,10 +210,10 @@ export class modifier_spectre_3_buff extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
-        return this.EOM_GetModifierHealthBonus()
+        return this.CC_GetModifierHealthBonus()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
-    EOM_GetModifierHealthBonus() {
+    CC_GetModifierHealthBonus() {
         return this.GetStackCount()
     }
 }
@@ -243,8 +243,8 @@ export class modifier_spectre_3_ghost extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(0.1)
         }
@@ -258,8 +258,8 @@ export class modifier_spectre_3_ghost extends BaseModifier_Plus {
             this.hTarget = (params.hTargetIndex != null && EntIndexToHScript(params.hTargetIndex) || null) as IBaseNpc_Plus
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
@@ -337,8 +337,8 @@ export class modifier_spectre_3_ghost extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_spectre_3_particle_illusion_created extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -357,8 +357,8 @@ export class modifier_spectre_3_particle_illusion_created extends modifier_parti
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_spectre_3_ghost_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

@@ -33,8 +33,8 @@ export class modifier_particle extends BaseModifier_Plus {
     }
 }
 export class modifier_particle_thinker extends modifier_particle {
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.GetParentPlus())) {
                 GDestroyUnit(this.GetParentPlus())

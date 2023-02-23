@@ -105,8 +105,8 @@ export class modifier_venomancer_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -215,8 +215,8 @@ export class modifier_venomancer_2_ward extends BaseModifier_Plus {
         this.fAttackSpeed = hCaster.GetIncreasedAttackSpeed() * this.attack_speed_percent / 100
         this.fAttackTime = hCaster.GetBaseAttackTime()
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             modifier_venomancer_3.remove(this.GetParentPlus());
         }
@@ -271,8 +271,8 @@ export class modifier_venomancer_2_ward_attack_talent extends BaseModifier_Plus 
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
         }
@@ -325,8 +325,8 @@ export class modifier_venomancer_2_ward_armor_talent extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         // 技能的caster是英雄
         this.armor = this.GetAbilityPlus().GetCasterPlus().GetTalentValue('special_bonus_unique_venomancer_custom_4', "armor")
         if (IsServer()) {
@@ -337,8 +337,7 @@ export class modifier_venomancer_2_ward_armor_talent extends BaseModifier_Plus {
             this.StartIntervalThink(0)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params)
+    BeRefresh(params: IModifierTable) {
         this.armor = this.GetAbilityPlus().GetCasterPlus().GetTalentValue('special_bonus_unique_venomancer_custom_4', "armor")
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()// buff的caster是蛇棒
@@ -356,7 +355,7 @@ export class modifier_venomancer_2_ward_armor_talent extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
+    BeDestroy() {
         super.Destroy()
         if (IsServer()) {
             for (let i = this.tData.length - 1; i >= 0; i--) {
@@ -380,11 +379,11 @@ export class modifier_venomancer_2_ward_armor_talent extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
-    EOM_GetModifierPhysicalArmorBonus(params: IModifierTable) {
+    CC_GetModifierPhysicalArmorBonus(params: IModifierTable) {
         return -this.armor * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
-    EOM_GetModifierMagicalArmorBonus(params: IModifierTable) {
+    CC_GetModifierMagicalArmorBonus(params: IModifierTable) {
         return -this.armor * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)

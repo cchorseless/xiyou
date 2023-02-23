@@ -87,8 +87,8 @@ export class modifier_jakiro_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -168,8 +168,8 @@ export class modifier_jakiro_1_cast extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
@@ -214,8 +214,8 @@ export class modifier_jakiro_1_cast extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             this.info.EffectName = ResHelper.GetParticleReplacement("particles/units/heroes/hero_jakiro/jakiro_dual_breath_fire.vpcf", hCaster)
@@ -280,7 +280,7 @@ export class modifier_jakiro_1_ice extends BaseModifier_Plus {
         return -this.slow_movement_speed_pct
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (params != null && GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter() && params.attacker == this.GetCasterPlus()) {
             return this.scepter_amplify_all_damage
         }
@@ -326,8 +326,8 @@ export class modifier_jakiro_1_fire extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.StartIntervalThink(this.burn_damage_interval)
     }
     Init(params: IModifierTable) {
@@ -357,7 +357,7 @@ export class modifier_jakiro_1_fire extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (params != null && GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter() && params.attacker == this.GetCasterPlus()) {
             return this.scepter_amplify_all_damage
         }

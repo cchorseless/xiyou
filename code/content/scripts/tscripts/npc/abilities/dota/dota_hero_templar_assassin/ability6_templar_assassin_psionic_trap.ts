@@ -78,8 +78,8 @@ export class modifier_templar_assassin_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.records = []
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -153,7 +153,7 @@ export class modifier_templar_assassin_6_movespeed extends BaseModifier_Plus {
     GetTexture() {
         return "templar_assassin_psionic_trap"
     }
-    OnCreated() {
+    BeCreated() {
         if (IsServer()) {
             this.StartIntervalThink(this.attack_interval)
         }
@@ -209,8 +209,8 @@ export class modifier_templar_assassin_6_thinker extends modifier_particle_think
     trap_radius: number;
     trap_damage: number;
     move_speed_reduce_time: number;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

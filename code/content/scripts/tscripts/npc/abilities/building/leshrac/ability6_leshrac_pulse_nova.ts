@@ -57,8 +57,8 @@ export class modifier_leshrac_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             if (hParent.IsIllusion()) {
@@ -122,7 +122,6 @@ export class modifier_leshrac_6_buff extends BaseModifier_Plus {
                 iAttachment: ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,
                 owner: hParent
             });
-
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }

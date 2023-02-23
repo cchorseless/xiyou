@@ -56,13 +56,12 @@ export class FakerHeroEntityRoot extends BaseEntityRoot {
                 damage += Number(b.GetRoundBasicUnitConfig().failure_count || "0");
                 delay_time = math.min(delay_time, b.GetDistance2Player() / 1000);
             });
-            GTimerHelper.AddTimer(
-                delay_time, GHandler.create(this, () => {
-                    player.EnemyManagerComp().ApplyDamageHero(damage, this.ProjectileInfo);
-                })
-            );
+            GTimerHelper.AddTimer(delay_time, GHandler.create(this, () => {
+                player.EnemyManagerComp().ApplyDamageHero(damage, this.ProjectileInfo);
+            }));
         }
     }
+
     OnRoundWaitingEnd(round: ERoundBoard) {
         let player = this.GetPlayer();
         player.EnemyManagerComp().getAllAliveEnemy()

@@ -59,7 +59,7 @@ export class modifier_disruptor_3 extends BaseModifier_Plus {
             let hTarget = params.target
             let hAbility = this.GetAbilityPlus()
             let chance = hAbility.GetSpecialValueFor("scepter_proc_chance")
-            if (hCaster.HasScepter() && RandomInt(1, 100) <= chance && !BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_SHOCK)) {
+            if (hCaster.HasScepter() && RandomInt(1, 100) <= chance && !BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_SHOCK)) {
                 let iShockCount = params.original_damage * (hAbility.GetSpecialValueFor("scepter_proc_pct") * 0.01)
                 hTarget.Shock(hCaster, hAbility, iShockCount)
             }
@@ -106,8 +106,8 @@ export class modifier_disruptor_3_debuff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_CENTER_FOLLOW
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.IncrementStackCount()
             GTimerHelper.AddTimer(params.duration, GHandler.create(this, () => {
@@ -122,12 +122,12 @@ export class modifier_disruptor_3_debuff extends BaseModifier_Plus {
         return this.GetStackCount() * -this.GetSpecialValueFor("slow_pct")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_COUNT_PERCENTAGE)
-    EOM_GetModifierIncomingShockCountPercentage() {
+    CC_GetModifierIncomingShockCountPercentage() {
         return this.GetStackCount() * (this.GetSpecialValueFor("shock_count_increase") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_disruptor_custom_8"))
     }
     //  减速
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.GetStackCount() * this.GetSpecialValueFor("slow_pct")
     }
     //  叠加层数

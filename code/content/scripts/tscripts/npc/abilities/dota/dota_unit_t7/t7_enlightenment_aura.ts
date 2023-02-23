@@ -36,8 +36,8 @@ export class modifier_t7_enlightenment_aura extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(1)
         }
@@ -50,8 +50,8 @@ export class modifier_t7_enlightenment_aura extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.modifier)) {
                 this.modifier.Destroy()
@@ -102,8 +102,8 @@ export class modifier_t7_enlightenment_aura_hidden extends BaseModifier_Plus {
     GetAuraEntityReject(hTarget: IBaseNpc_Plus) {
         return this.GetParentPlus() == hTarget
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.aura_radius = this.GetSpecialValueFor("aura_radius")
         if (IsServer()) {
             this.SetStackCount(0)
@@ -119,8 +119,8 @@ export class modifier_t7_enlightenment_aura_hidden extends BaseModifier_Plus {
             }
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.aura_radius = this.GetSpecialValueFor("aura_radius")
     }
 }
@@ -146,8 +146,8 @@ export class modifier_t7_enlightenment_aura_effect extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/towers/combination_t07_enlightenment_aura_buff.vpcf",
@@ -166,10 +166,10 @@ export class modifier_t7_enlightenment_aura_effect extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
-        return this.EOM_GetModifierBonusStats_Intellect()
+        return this.CC_GetModifierBonusStats_Intellect()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
-    EOM_GetModifierBonusStats_Intellect() {
+    CC_GetModifierBonusStats_Intellect() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             let iInt = this.GetCasterPlus().GetIntellect()
             let iNew = math.floor(iInt * this.aura_intellect_pct * 0.01)

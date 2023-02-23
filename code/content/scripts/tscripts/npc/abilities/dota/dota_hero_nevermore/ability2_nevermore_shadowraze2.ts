@@ -72,7 +72,7 @@ export class modifier_nevermore_2 extends BaseModifier_Plus {
     GetTexture() {
         return "nevermore_necromastery"
     }
-    OnCreated(params: IModifierTable) {
+    BeCreated(params: IModifierTable) {
 
         if (IsClient()) {
             this.iParticleID = ResHelper.CreateParticle({
@@ -113,7 +113,7 @@ export class modifier_nevermore_2 extends BaseModifier_Plus {
         return math.min(this.GetStackCount(), necromastery_max_souls) * necromastery_damage_per_soul
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    EOM_GetModifierSpellAmplifyBonus(params: IModifierTable) {
+    CC_GetModifierSpellAmplifyBonus(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (hCaster.HasShard()) {
             let extra_necromastery_max_souls = hCaster.HasTalent("special_bonus_unique_nevermore_custom_3") && hCaster.GetTalentValue("special_bonus_unique_nevermore_custom_3") || 0
@@ -142,8 +142,8 @@ export class modifier_nevermore_2 extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_nevermore_2_particle_nevermore_necro_souls extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

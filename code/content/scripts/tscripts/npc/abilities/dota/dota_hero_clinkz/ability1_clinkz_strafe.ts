@@ -96,8 +96,8 @@ export class modifier_clinkz_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -249,7 +249,7 @@ export class modifier_clinkz_1_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
-    g_HP_PERCENTAGE() {
+    CC_HP_PERCENTAGE() {
         return this.health_gain_percent
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
@@ -357,8 +357,8 @@ export class modifier_clinkz_1_attacker_damage extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_clinkz_1_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

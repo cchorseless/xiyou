@@ -64,8 +64,8 @@ export class modifier_t25_demon_gaze extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
         }
@@ -158,8 +158,8 @@ export class modifier_t25_demon_gaze_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.duration = this.GetSpecialValueFor("duration")
         this.damage_pct = this.GetSpecialValueFor("damage_pct")
         this.damage_radius = this.GetSpecialValueFor("damage_radius")
@@ -184,16 +184,16 @@ export class modifier_t25_demon_gaze_debuff extends BaseModifier_Plus {
             this.AddParticle(nIndexFX, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.damage_pct = this.GetSpecialValueFor("damage_pct")
         this.damage_radius = this.GetSpecialValueFor("damage_radius")
         if (IsServer()) {
             this.min_health = this.GetParentPlus().GetHealth()
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hTarget = this.GetParentPlus()
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()

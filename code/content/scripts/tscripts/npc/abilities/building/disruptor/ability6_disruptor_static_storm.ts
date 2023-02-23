@@ -77,8 +77,8 @@ export class modifier_disruptor_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -205,8 +205,8 @@ export class modifier_disruptor_6_thinker extends BaseModifier_Plus {
     GetAuraDuration() {
         return 0.1
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             this.vPos = this.GetParentPlus().GetOrigin()
@@ -232,8 +232,8 @@ export class modifier_disruptor_6_thinker extends BaseModifier_Plus {
             EmitSoundOn("Hero_Disruptor.StaticStorm", this.GetParentPlus())
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.StartIntervalThink(-1)
             EmitSoundOn("Hero_Disruptor.StaticStorm.End", this.GetParentPlus())

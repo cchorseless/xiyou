@@ -75,8 +75,8 @@ export class modifier_omniknight_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -168,8 +168,8 @@ export class modifier_omniknight_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
             this.Destroy()
@@ -207,11 +207,11 @@ export class modifier_omniknight_2_buff extends BaseModifier_Plus {
         return this.attribute_per_level * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
-    EOM_GetModifierStatusResistanceStacking() {
+    CC_GetModifierStatusResistanceStacking() {
         return this.status_resistance_percent * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_PRIMARY_BASE)
-    EOM_GetModifierBaseStats_Primary() {
+    CC_GetModifierBaseStats_Primary() {
         return this.GetStackCount() * this.attribute_per_level
     }
 }

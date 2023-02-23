@@ -82,8 +82,8 @@ export class modifier_dawnbreaker_1 extends BaseModifier_Plus {
         this.smash_stun_duration = this.GetSpecialValueFor("smash_stun_duration")
     }
 
-    OnCreated(params: any) {
-        super.OnCreated(params)
+    BeCreated(params: any) {
+
         if (IsServer()) {
             this.GetAbility().SetActivated(false);
             let iAttackState = BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN;
@@ -174,8 +174,8 @@ export class modifier_dawnbreaker_1 extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetAbility().SetActivated(true);
         }

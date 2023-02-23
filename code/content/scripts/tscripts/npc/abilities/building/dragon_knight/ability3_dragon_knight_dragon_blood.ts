@@ -56,7 +56,7 @@ export class modifier_dragon_knight_3 extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
-    EOM_GetModifierHealthPercentage() {
+    CC_GetModifierHealthPercentage() {
         let hParent = this.GetParentPlus()
         let bIsDragon = modifier_dragon_knight_6_form.findIn(hParent)
         if (bIsDragon) {
@@ -123,7 +123,7 @@ export class modifier_dragon_knight_3_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
-    EOM_GetModifierHealthBonus() {
+    CC_GetModifierHealthBonus() {
         return this.GetStackCount() * this.bonus_health_per_kill
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
@@ -131,7 +131,7 @@ export class modifier_dragon_knight_3_buff extends BaseModifier_Plus {
         return this.GetStackCount() * this.bonus_health_per_kill
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    EOM_GetModifierSpellAmplifyBonus() {
+    CC_GetModifierSpellAmplifyBonus() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetStackCount() * this.GetCasterPlus().GetTalentValue("special_bonus_unique_dragon_knight_custom_8")
         }

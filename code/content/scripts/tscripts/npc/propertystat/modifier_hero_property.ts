@@ -26,8 +26,8 @@ export class modifier_hero_property extends BaseModifier_Plus {
     DestroyOnExpire() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.CalculatePrimaryStat();
             GTimerHelper.AddTimer(0.1, GHandler.create(this, () => {
@@ -80,8 +80,8 @@ export class modifier_hero_property extends BaseModifier_Plus {
             this.CalculatePrimaryStat()
         }
     }
-    public OnDestroy(): void {
-        super.OnDestroy();
+    public BeDestroy(): void {
+
         if (this.StackCountHandler) {
             this.StackCountHandler.recover();
             this.StackCountHandler = null;

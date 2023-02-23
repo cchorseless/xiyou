@@ -4,8 +4,10 @@ import { CCUnitStatsDialog } from "../../Unit/CCUnitStatsDialog";
 import { CCAbilityList2 } from "../CCAbility/CCAbilityList";
 import { CCInventory } from "../CCInventory/CCInventory";
 import { CCPanel } from "../CCPanel/CCPanel";
+import { CCTalentDisplayItem } from "../CCTalentBranch/CCTalentDisplayItem";
 import { CCBuffList } from "./CCBuffList";
 import "./CCDacBoard.less";
+import { CCDOTAAghsStatusDisplay } from "./CCDOTAAghsStatusDisplay";
 import { CCHealthMana } from "./CCHealthMana";
 import { CCPortraitGroup } from "./CCPortraitGroup";
 
@@ -39,8 +41,9 @@ export class CCDacBoard extends CCPanel<ICCDacBoard> {
                     </Panel>
                     <CCPanel id="DacBoardCenter" hittest={false}>
                         <CCPanel flowChildren="right" hittest={false} verticalAlign="bottom" marginBottom={"60px"} >
+                            <CCTalentDisplayItem />
                             <CCAbilityList2 horizontalAlign={"center"} verticalAlign="center" />
-                            {/* <CCDOTAAghsStatusDisplay /> */}
+                            <CCDOTAAghsStatusDisplay />
                         </CCPanel>
                         <CCHealthMana verticalAlign="bottom" marginBottom={"0px"} />
                     </CCPanel>

@@ -32,9 +32,9 @@ export class modifier_bleeding extends BaseModifier_Plus {
             this.IncrementStackCount();
         }
     }
-    OnCreated(params: IModifierTable) {
+    BeCreated(params: IModifierTable) {
         if (IsServer()) {
-            super.OnCreated(params);
+
             let hParent = this.GetParentPlus()
             this.vLastPosition = GameFunc.VectorFunctions.StringToVector(params.vLastPosition) || hParent.GetAbsOrigin()
             this.fDistance = params.fDistance || 0;
@@ -81,10 +81,10 @@ export class modifier_bleeding extends BaseModifier_Plus {
                     attacker: hCaster,
                     damage: 0,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
-                    eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_BLEEDING +
-                        BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT +
-                        BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM +
-                        BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT
+                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_BLEEDING +
+                        BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT +
+                        BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_TRANSFORM +
+                        BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT
                 };
                 tDamageTable.damage = this.bleedingHandler(tDamageTable)
                 if (this.GetStackCount() != 0) {

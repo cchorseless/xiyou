@@ -157,8 +157,8 @@ export class modifier_tinker_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -254,7 +254,7 @@ export class modifier_tinker_1_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_CONSTANT)
-    EOM_GetModifierOutgoingPureDamageConstant() {
+    CC_GetModifierOutgoingPureDamageConstant() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return (this.laser_damage + this.GetCasterPlus().GetIntellect() * this.laser_int_multiplier)
         }
@@ -299,8 +299,8 @@ export class modifier_tinker_1_buff_amplify_damage extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_tinker_1_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetParentPlus()
         let hTarget = this.GetCasterPlus()
         if (IsClient()) {

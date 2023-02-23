@@ -58,7 +58,7 @@ export class modifier_dawnbreaker_4_buff extends BaseModifier_Plus {
 
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: IModifierTable) {
+    CC_GetModifierCriticalStrike(params: IModifierTable) {
         return this.bonus_damage_pct
     }
 
@@ -73,8 +73,8 @@ export class modifier_dawnbreaker_4_buff extends BaseModifier_Plus {
         return attack_count
     }
 
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.SetStackCount(this.attack_count)
         }
@@ -176,11 +176,11 @@ export class modifier_dawnbreaker_4_buff_heal extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
-    EOM_GetModifierHealthBonus() {
+    CC_GetModifierHealthBonus() {
         return this.healthMax_add
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
-    EOM_GetModifierHealthPercentage() {
+    CC_GetModifierHealthPercentage() {
         //  天赋  熠熠生辉治疗附带提升7%最大生命值的效果
         let caster = this.GetCasterPlus()
         if (caster.HasTalent("special_bonus_unique_dawnbreaker_custom_8")) {
@@ -217,8 +217,8 @@ export class modifier_dawnbreaker_4_buff_heal extends BaseModifier_Plus {
         }
     }
 
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.healthMax_add = 0
     }
 
@@ -230,8 +230,8 @@ export class modifier_dawnbreaker_4_buff_heal extends BaseModifier_Plus {
     }
 
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         this.healthMax_add = 0
         this.SetStackCount(0)
     }

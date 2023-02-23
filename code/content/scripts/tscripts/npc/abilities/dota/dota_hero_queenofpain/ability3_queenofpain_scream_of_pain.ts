@@ -41,7 +41,7 @@ export class ability3_queenofpain_scream_of_pain extends BaseAbility_Plus {
         let bleeding_damage_int_factor = this.GetSpecialValueFor("bleeding_damage_int_factor") + hCaster.GetTalentValue("special_bonus_unique_queenofpain_custom_6")
 
         modifier_bleeding.Bleeding(hTarget, hCaster, this, bleeding_duration, (tDamageTable) => {
-            tDamageTable.eom_flags = tDamageTable.eom_flags + BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY
+            tDamageTable.eom_flags = tDamageTable.eom_flags + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY
             return hCaster.GetIntellect() * bleeding_damage_int_factor * 0.01
         }, true)
 
@@ -86,7 +86,7 @@ export class modifier_queenofpain_3 extends BaseModifier_Plus {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             if (params.attacker == hParent && !hParent.PassivesDisabled()) {
-                if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_AFTER_TRANSFORMED_DAMAGE)) {
+                if (BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_AFTER_TRANSFORMED_DAMAGE)) {
                     return
                 }
 
@@ -98,7 +98,7 @@ export class modifier_queenofpain_3 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (!IsServer() || params == null) {
             return
         }

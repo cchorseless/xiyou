@@ -63,8 +63,8 @@ export class modifier_leshrac_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -145,8 +145,8 @@ export class modifier_leshrac_1_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.duration = this.GetSpecialValueFor("duration")
         this.radius = this.GetSpecialValueFor("radius")
         if (IsServer()) {
@@ -235,7 +235,7 @@ export class modifier_leshrac_1_debuff extends BaseModifier_Plus {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_leshrac_custom_3")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_leshrac_custom_3")
         }
@@ -282,8 +282,8 @@ export class modifier_leshrac_1_field extends BaseModifier_Plus {
     GetAuraDuration() {
         return 0.1
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.radius = this.GetSpecialValueFor("radius") + 25
         let hParent = this.GetParentPlus()
         let hCaster = this.GetAbilityPlus().GetCasterPlus()
@@ -311,8 +311,8 @@ export class modifier_leshrac_1_field extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }
@@ -355,8 +355,8 @@ export class modifier_leshrac_1_field_aura extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.radius = this.GetSpecialValueFor("radius") + 25
         if (IsServer()) {
             this.vPosition = this.GetCasterPlus().GetAbsOrigin()

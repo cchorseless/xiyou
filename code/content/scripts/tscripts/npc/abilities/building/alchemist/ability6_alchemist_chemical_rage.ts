@@ -102,21 +102,20 @@ export class modifier_alchemist_3_buff extends BaseModifier_Plus {
     public interval: number;
     public stun_duration: number;
     public projectile_speed: number;
-    Init(params: IModifierTable) {
+    BeCreated(params: IModifierTable) {
         this.base_attack_rate = this.GetSpecialValueFor("base_attack_rate");
         this.mana_regen = this.GetSpecialValueFor("mana_regen");
         this.spell_amplify = this.GetSpecialValueFor("spell_amplify");
         this.interval = this.GetSpecialValueFor("interval");
         this.stun_duration = this.GetSpecialValueFor("stun_duration");
         this.projectile_speed = this.GetSpecialValueFor("projectile_speed");
-        if (IsServer() && params.IsOnCreated) {
+        if (IsServer()) {
             this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_ALCHEMIST_CONCOCTION);
             this.StartIntervalThink(this.interval);
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
         if (IsServer()) {
             this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_ALCHEMIST_CONCOCTION);
         }

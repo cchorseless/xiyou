@@ -58,8 +58,8 @@ export class modifier_drow_ranger_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.records = []
         }
@@ -189,8 +189,8 @@ export class modifier_drow_ranger_1_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iPtclID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_drow/drow_frost_arrow_debuff.vpcf",
@@ -252,8 +252,8 @@ export class modifier_drow_ranger_1_debuff extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let iStackCount = this.GetStackCount()
             if (!this.GetParentPlus().IsAlive() || iStackCount >= this.frost_arrows_burst_num) {
@@ -311,7 +311,7 @@ export class modifier_drow_ranger_1_debuff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             if (GameFunc.IsValid(hCaster)) {
@@ -352,8 +352,8 @@ export class modifier_drow_ranger_1_root extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_ROOTED]: true
         }
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iPtclID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_crystalmaiden/maiden_frostbite_buff.vpcf",
@@ -369,8 +369,8 @@ export class modifier_drow_ranger_1_root extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_drow_ranger_1_particle_lich_frost_nova extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

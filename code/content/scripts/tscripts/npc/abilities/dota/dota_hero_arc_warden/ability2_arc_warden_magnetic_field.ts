@@ -63,8 +63,8 @@ export class modifier_arc_warden_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -144,7 +144,7 @@ export class modifier_arc_warden_2_buff extends BaseModifier_Plus {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_arc_warden_custom_5")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage() {
+    CC_GetModifierOutgoingDamagePercentage() {
         if (string.find(this.GetParentPlus().GetUnitName(), "npc_dota_hero_arc_warden") && this.GetParentPlus().HasScepter()) {
             return this.GetSpecialValueFor("scepter_damage_bonus")
         }
@@ -155,7 +155,7 @@ export class modifier_arc_warden_2_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
-        return this.EOM_GetModifierOutgoingDamagePercentage()
+        return this.CC_GetModifierOutgoingDamagePercentage()
     }
 }
 //  Modifiers
@@ -163,8 +163,8 @@ export class modifier_arc_warden_2_buff extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_arc_warden_2_buff_extra extends BaseModifier_Plus {
     tAuraInfo: any;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             if (!this.tAuraInfo) {
                 this.tAuraInfo = []
@@ -179,8 +179,8 @@ export class modifier_arc_warden_2_buff_extra extends BaseModifier_Plus {
             this.StartIntervalThink(0.1)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         if (IsServer()) {
             let iSourceIndex = params.iSourceIndex
             let iRadius = params.iRadius
@@ -252,8 +252,8 @@ export class modifier_arc_warden_2_aura extends BaseModifier_Plus {
     GetAuraDuration() {
         return 0.5
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.iRadius = params.iRadius || 300
             this.fTickTime = 0
@@ -295,8 +295,8 @@ export class modifier_arc_warden_2_aura extends BaseModifier_Plus {
             this.fTickTime = fGameTime
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.StartIntervalThink(-1)
             UTIL_Remove(this.GetParentPlus())

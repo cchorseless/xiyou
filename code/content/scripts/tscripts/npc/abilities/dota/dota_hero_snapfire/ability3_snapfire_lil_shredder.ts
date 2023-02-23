@@ -82,8 +82,8 @@ export class modifier_snapfire_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -164,8 +164,8 @@ export class modifier_snapfire_3_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -346,11 +346,11 @@ export class modifier_snapfire_3_debuff_reduce_armor extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
-    EOM_GetModifierPhysicalArmorBonus() {
+    CC_GetModifierPhysicalArmorBonus() {
         return -this.reduce_armor * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
-    EOM_GetModifierMagicalArmorBonus() {
+    CC_GetModifierMagicalArmorBonus() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasTalent("special_bonus_unique_snapfire_custom_1")) {
             return -this.reduce_armor * this.GetStackCount()
         }
@@ -358,7 +358,7 @@ export class modifier_snapfire_3_debuff_reduce_armor extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return -this.reduce_armor * this.GetStackCount()
     }
 }
@@ -384,8 +384,8 @@ export class modifier_snapfire_3_debuff_mark extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_life_stealer/life_stealer_infested_unit.vpcf",
@@ -398,8 +398,8 @@ export class modifier_snapfire_3_debuff_mark extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { tMarkUnit: IBaseNpc_Plus[] }
         let hParent = this.GetParentPlus()
         if (GameFunc.IsValid(hCaster) && hCaster.tMarkUnit != null) {

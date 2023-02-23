@@ -151,8 +151,8 @@ export class modifier_shredder_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -224,8 +224,8 @@ export class modifier_shredder_1_debuff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_shredder_custom_8"
         this.health_loss_pct = this.GetSpecialValueFor("health_loss_pct") + hCaster.GetTalentValue(sTalentName)
@@ -261,8 +261,8 @@ export class modifier_shredder_1_debuff extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_shredder_1_particle_start extends modifier_particle_thinker {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let whirling_radius = this.GetSpecialValueFor("whirling_radius")
         if (IsServer()) {
             if (params.flag) {

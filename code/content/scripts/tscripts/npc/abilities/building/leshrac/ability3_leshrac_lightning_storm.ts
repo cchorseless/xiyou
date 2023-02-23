@@ -137,8 +137,8 @@ export class modifier_leshrac_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -223,8 +223,8 @@ export class modifier_leshrac_3_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_leshrac/leshrac_lightning_slow.vpcf",
@@ -248,8 +248,8 @@ export class modifier_leshrac_3_debuff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_leshrac_3_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetParentPlus()
         let hParent = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()

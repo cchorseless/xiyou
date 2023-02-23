@@ -147,8 +147,8 @@ export class modifier_enchantress_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return true
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hParent = this.GetParentPlus()
             let hCaster = this.GetCasterPlus()
@@ -182,7 +182,7 @@ export class modifier_enchantress_2_buff extends BaseModifier_Plus {
         this.cd_reduce = this.GetSpecialValueFor("cd_reduce")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
-    EOM_GetModifierPercentageCooldown() {
+    CC_GetModifierPercentageCooldown() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.cd_reduce
         }
@@ -194,7 +194,7 @@ export class modifier_enchantress_2_buff extends BaseModifier_Plus {
         if (this._tooltip == 1) {
             return this.bonus_all_attr
         } else if (this._tooltip == 2) {
-            return this.EOM_GetModifierPercentageCooldown()
+            return this.CC_GetModifierPercentageCooldown()
         }
 
     }

@@ -96,7 +96,7 @@ export class modifier_event extends BaseModifier_Plus {
         event.eventType = EventDataType.unitIsSelf;
         this.FireEvent(event, ...k)
     }
-    OnCreated() {
+    BeCreated() {
         if (!IsServer()) {
             return;
         }

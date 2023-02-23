@@ -112,8 +112,8 @@ export class modifier_abyssal_underlord_2 extends BaseModifier_Plus {
     GetTexture() {
         return "abyssal_underlord_pit_of_malice"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -187,8 +187,8 @@ export class modifier_abyssal_underlord_2_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.radius = this.GetSpecialValueFor("radius")
@@ -272,8 +272,8 @@ export class modifier_abyssal_underlord_2_interval extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_PERMANENT + DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.ensnare_duration = this.GetSpecialValueFor("ensnare_duration")
         if (IsServer()) {
             modifier_abyssal_underlord_2_root.apply(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), { duration: this.ensnare_duration * this.GetParentPlus().GetStatusResistanceFactor(this.GetCasterPlus()) })
@@ -305,8 +305,8 @@ export class modifier_abyssal_underlord_2_root extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.pit_damage = this.GetSpecialValueFor("pit_damage")
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()

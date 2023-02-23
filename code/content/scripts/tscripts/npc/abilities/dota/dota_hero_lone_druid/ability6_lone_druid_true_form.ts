@@ -92,8 +92,8 @@ export class modifier_lone_druid_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -167,8 +167,8 @@ export class modifier_lone_druid_6_transform extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.duration = this.GetSpecialValueFor("duration")
         let hParent = this.GetParentPlus()
         if (IsClient()) {
@@ -184,8 +184,8 @@ export class modifier_lone_druid_6_transform extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(iParticleID)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             if (GameFunc.IsValid(hParent) && hParent.IsAlive()) {
@@ -263,8 +263,8 @@ export class modifier_lone_druid_6_form extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
@@ -293,11 +293,11 @@ export class modifier_lone_druid_6_form extends BaseModifier_Plus {
         return ResHelper.GetModelReplacement("models/heroes/lone_druid/true_form.vmdl", this.GetParentPlus())
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
-    EOM_GetModifierStatusResistanceStacking(params: IModifierTable) {
+    CC_GetModifierStatusResistanceStacking(params: IModifierTable) {
         return this.stats_resistance
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HP_PERCENTAGE)
-    EOM_GetModifierHealthPercentage(params: IModifierTable) {
+    CC_GetModifierHealthPercentage(params: IModifierTable) {
         return this.bonus_health_per
     }
 }

@@ -57,8 +57,8 @@ export class modifier_slardar_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(1)
         }
@@ -79,8 +79,8 @@ export class modifier_slardar_6 extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.modifier)) {
                 this.modifier.Destroy()
@@ -184,7 +184,7 @@ export class modifier_slardar_6_aura extends BaseModifier_Plus {
         return this.armor_reduction - this.GetCasterPlus().GetTalentValue("special_bonus_unique_slardar_custom_7")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         if (!GameFunc.IsValid(this.GetCasterPlus()) || this.GetCasterPlus().PassivesDisabled()) {
             return 0
         }

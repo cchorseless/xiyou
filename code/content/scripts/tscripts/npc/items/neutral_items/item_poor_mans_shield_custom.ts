@@ -33,8 +33,8 @@ export class modifier_item_poor_mans_shield_custom extends BaseModifier_Plus {
         this.damage_amplify_percent = this.GetSpecialValueFor("damage_amplify_percent")
     }
 
-    OnCreated(params: any) {
-        super.OnCreated(params)
+    BeCreated(params: any) {
+
         if (IsServer()) {
             this.StartIntervalThink(1)
         }

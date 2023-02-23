@@ -50,8 +50,8 @@ export class modifier_t11_curse extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
         }
@@ -128,8 +128,8 @@ export class modifier_t11_curse_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let thinker_duration = this.thinker_duration
         let hCaster = this.GetCasterPlus()
         let vPosition = this.GetParentPlus().GetAbsOrigin()
@@ -158,8 +158,8 @@ export class modifier_t11_curse_thinker extends BaseModifier_Plus {
         this.curse_duration = this.GetSpecialValueFor("curse_duration")
         this.aoe_radius = this.GetSpecialValueFor("aoe_radius")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }
@@ -219,8 +219,8 @@ export class modifier_t11_curse_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/neutral_fx/prowler_shaman_shamanistic_ward.vpcf",

@@ -89,12 +89,10 @@ export class modifier_axe_1_root extends BaseModifier_Plus {
         return false
     }
 
-    Init(params: IModifierTable) {
+    BeCreated(params: IModifierTable) {
         this.attack_interval = this.GetSpecialValueFor("attack_interval")
-        if (params.IsOnCreated) {
-            if (IsServer()) {
-                this.StartIntervalThink(this.attack_interval)
-            }
+        if (IsServer()) {
+            this.StartIntervalThink(this.attack_interval)
         }
     }
 
@@ -139,21 +137,19 @@ export class modifier_special_bonus_unique_axe_custom_6 extends BaseModifier_Plu
         return false
     }
 
-    Init(params: IModifierTable) {
+    BeCreated(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_axe_custom_6"
         this.bonus_damage = hCaster.GetTalentValue(sTalentName)
-        if (params.IsOnCreated) {
-            if (!IsServer()) {
-                let iPtclID = ResHelper.CreateParticle({
-                    resPath: 'particles/units/heroes/hero_axe/axe_beserkers_call_hero_effect.vpcf',
-                    resNpc: null,
-                    iAttachment: ParticleAttachment_t.PATTACH_INVALID,
-                    owner: this.GetParentPlus()
-                });
+        if (!IsServer()) {
+            let iPtclID = ResHelper.CreateParticle({
+                resPath: 'particles/units/heroes/hero_axe/axe_beserkers_call_hero_effect.vpcf',
+                resNpc: null,
+                iAttachment: ParticleAttachment_t.PATTACH_INVALID,
+                owner: this.GetParentPlus()
+            });
 
-                this.AddParticle(iPtclID, false, false, 100, true, false)
-            }
+            this.AddParticle(iPtclID, false, false, 100, true, false)
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEDAMAGEOUTGOING_PERCENTAGE)
@@ -196,9 +192,9 @@ export class modifier_axe_1_attack_damage_pct extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_axe_1_particle_start extends modifier_particle {
-    Init(params: IModifierTable) {
+    BeCreated(params: IModifierTable) {
         let radius = this.GetSpecialValueFor("radius")
-        if (params.IsOnCreated && IsClient()) {
+        if (IsClient()) {
             let caster = this.GetCasterPlus()
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_axe/axe_beserkers_call_owner.vpcf",

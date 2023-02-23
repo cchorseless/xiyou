@@ -81,8 +81,8 @@ export class modifier_bounty_hunter_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.shard_bonus_attack_speed = this.GetSpecialValueFor("shard_bonus_attack_speed")
         this.shard_bonus_attack_speed_limit = this.GetSpecialValueFor("shard_bonus_attack_speed_limit")
         if (IsServer()) {
@@ -162,7 +162,7 @@ export class modifier_bounty_hunter_6 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
-    EOM_GetModifierMaximumAttackSpeedBonus() {
+    CC_GetModifierMaximumAttackSpeedBonus() {
         if (IsServer()) {
             if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && GameFunc.IsValid(this.GetCasterPlus().GetAttackTarget()) && this.GetCasterPlus().GetAttackTarget().GetClassname() != "dota_item_drop" && modifier_bounty_hunter_6_track.exist(this.GetCasterPlus().GetAttackTarget())) {
                 return this.shard_bonus_attack_speed_limit
@@ -225,8 +225,8 @@ export class modifier_bounty_hunter_6_track extends BaseModifier_Plus {
     GetAura() {
         return "modifier_truesight"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let extra_target_crit_multiplier = hCaster.HasTalent("special_bonus_unique_bounty_hunter_custom_7") && hCaster.GetTalentValue("special_bonus_unique_bounty_hunter_custom_7") || 0
         this.target_crit_multiplier = this.GetSpecialValueFor("target_crit_multiplier") + extra_target_crit_multiplier
@@ -280,8 +280,8 @@ export class modifier_bounty_hunter_6_track extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -319,7 +319,7 @@ export class modifier_bounty_hunter_6_track extends BaseModifier_Plus {
         return 1
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TARGET_CRITICALSTRIKE)
-    EOM_GetModifierTargetCriticalStrike(params: IModifierTable) {
+    CC_GetModifierTargetCriticalStrike(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             if (!GameFunc.IsValid(hCaster)) {
@@ -379,8 +379,8 @@ export class modifier_bounty_hunter_6_track extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_bounty_hunter_6_particle_bounty_hunter_track_reward extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

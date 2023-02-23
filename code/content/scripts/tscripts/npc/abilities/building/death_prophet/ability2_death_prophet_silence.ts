@@ -122,8 +122,8 @@ export class modifier_death_prophet_2 extends BaseModifier_Plus {
     GetTexture() {
         return "death_prophet_spirit_siphon"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -170,7 +170,7 @@ export class modifier_death_prophet_2 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
-    EOM_GetModifierBonusStats_Intellect() {
+    CC_GetModifierBonusStats_Intellect() {
         return this.GetStackCount()
     }
 }
@@ -287,7 +287,7 @@ export class modifier_death_prophet_2_debuff extends BaseModifier_Plus {
                     victim: hParent,
                     damage: fDamage,
                     damage_type: this.damage_type,
-                    eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
                 }
                 BattleHelper.GoApplyDamage(tDamageTable)
             }
@@ -352,8 +352,8 @@ export class modifier_death_prophet_2_buff extends BaseModifier_Plus {
     GetTexture() {
         return "death_prophet_spirit_siphon"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let iInt = params.int || 0
             let hParent = this.GetParentPlus()
@@ -366,11 +366,11 @@ export class modifier_death_prophet_2_buff extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
 
-    tooltip(params: IModifierTable) {
+    CC_tooltip(params: IModifierTable) {
         return this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
-    EOM_GetModifierBonusStats_Intellect() {
+    CC_GetModifierBonusStats_Intellect() {
         return this.GetStackCount()
     }
 }
@@ -395,8 +395,8 @@ export class modifier_death_prophet_2_talent_root extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/generic_gameplay/common_root.vpcf",

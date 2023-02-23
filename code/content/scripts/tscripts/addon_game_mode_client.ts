@@ -18,7 +18,7 @@ export class GameMode_Client extends SingletonClass {
     public Init() {
         this.addEvent();
         KVHelper.initKVFile();
-        this.PreLoadLua();
+        // this.PreLoadLua();
     }
 
     public PreLoadLua() {

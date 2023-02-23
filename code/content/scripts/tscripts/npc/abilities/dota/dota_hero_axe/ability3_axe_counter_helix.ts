@@ -161,7 +161,7 @@ export class modifier_axe_3 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
-    EOM_GetModifierStats_Strength_Percentage() {
+    CC_GetModifierStats_Strength_Percentage() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return (this.increase_str_pct + this.shard_increase_str_pct) * this.GetStackCount()
         }
@@ -196,8 +196,8 @@ export class modifier_axe_3_debuff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
             if (GameFunc.IsValid(hCaster)) {
@@ -223,8 +223,8 @@ export class modifier_axe_3_debuff extends BaseModifier_Plus {
         this.damage_str_factor = this.GetSpecialValueFor("damage_str_factor")
         this.damage_interval = this.GetSpecialValueFor("damage_interval")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
             if (GameFunc.IsValid(hCaster)) {
@@ -250,7 +250,7 @@ export class modifier_axe_3_debuff extends BaseModifier_Plus {
                 attacker: caster,
                 damage: caster.GetStrength() * this.damage_str_factor * this.damage_interval,
                 damage_type: ability.GetAbilityDamageType(),
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(damage_table)
         }

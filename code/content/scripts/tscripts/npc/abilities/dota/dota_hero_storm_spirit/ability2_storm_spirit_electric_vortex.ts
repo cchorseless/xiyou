@@ -100,8 +100,8 @@ export class modifier_storm_spirit_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -190,8 +190,8 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.electric_vortex_pull_units_per_second = this.GetSpecialValueFor("electric_vortex_pull_units_per_second")
         this.electric_vortex_incoming_damage = this.GetSpecialValueFor("electric_vortex_incoming_damage")
         if (IsServer()) {
@@ -213,8 +213,8 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
             this.AddParticle(this.iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.electric_vortex_pull_units_per_second = this.GetSpecialValueFor("electric_vortex_pull_units_per_second")
         this.electric_vortex_incoming_damage = this.GetSpecialValueFor("electric_vortex_incoming_damage")
         if (IsServer()) {
@@ -224,8 +224,8 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().StopSound(this.sSoundName)
             this.GetParentPlus().RemoveHorizontalMotionController(this)
@@ -260,7 +260,7 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_DAMAGE_PERCENTAG)
-    g_INCOMING_SHOCK_DAMAGE_PERCENTAG() {
+    CC_INCOMING_SHOCK_DAMAGE_PERCENTAG() {
         return this.GetSpecialValueFor("shock_damage_increase")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
@@ -272,7 +272,7 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
         return this.electric_vortex_incoming_damage
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (IsServer() && params) {
             let hCaster = this.GetCasterPlus()
             if (GameFunc.IsValid(hCaster)) {

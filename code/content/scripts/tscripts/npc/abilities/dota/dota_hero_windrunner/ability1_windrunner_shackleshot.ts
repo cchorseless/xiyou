@@ -122,8 +122,8 @@ export class modifier_windrunner_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -208,8 +208,8 @@ export class modifier_windrunner_1_debuff extends BaseModifier_Plus {
         return ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW
     }
     increase_range_damage_pct: number;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetCasterPlus();
             let resInfo: ResHelper.ParticleInfo = {

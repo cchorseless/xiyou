@@ -107,8 +107,8 @@ export class modifier_ursa_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let parent = this.GetParentPlus()
         if (IsServer()) {
             parent.EmitSound(ResHelper.GetSoundReplacement("Hero_Ursa.Overpower", parent))

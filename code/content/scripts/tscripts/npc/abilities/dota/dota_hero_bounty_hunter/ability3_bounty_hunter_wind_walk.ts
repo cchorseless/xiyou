@@ -68,8 +68,8 @@ export class modifier_bounty_hunter_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
         this.gold_steal = this.GetSpecialValueFor("gold_steal")
         this.bonus_gold_steal_percent = this.GetSpecialValueFor("bonus_gold_steal_percent")
@@ -168,8 +168,8 @@ export class modifier_bounty_hunter_3 extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_bounty_hunter_3_particle_bounty_hunter_jinda_slow extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -198,8 +198,8 @@ export class modifier_bounty_hunter_3_particle_bounty_hunter_jinda_slow extends 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_bounty_hunter_3_particle_bounty_hunter_hand_r extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

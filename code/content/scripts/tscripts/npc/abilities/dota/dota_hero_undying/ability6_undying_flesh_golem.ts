@@ -78,8 +78,8 @@ export class modifier_undying_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -162,8 +162,8 @@ export class modifier_undying_6_buff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.GetParentPlus().EmitSound("Hero_Undying.FleshGolem.Aura")
         }
@@ -175,19 +175,19 @@ export class modifier_undying_6_buff extends BaseModifier_Plus {
         this.iStrPct = this.GetSpecialValueFor("str_percentage") + hParent.GetTalentValue("special_bonus_unique_undying_custom_7")
         this.cast_point_scepter = this.GetSpecialValueFor("cast_point_scepter")
     }
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().EmitSound("Hero_Undying.FleshGolem.End")
         }
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.iStrPct
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
-    EOM_GetModifierStats_Strength_Percentage() {
+    CC_GetModifierStats_Strength_Percentage() {
         return this.iStrPct
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
@@ -250,11 +250,11 @@ export class modifier_undying_6_slow extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.increase_all_damage_pct
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         return this.increase_all_damage_pct
     }
 }
@@ -280,11 +280,11 @@ export class modifier_undying_6_zombie_lifetime extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         if (IsServer() && GameFunc.IsValid(hParent)) {
             hParent.AddNoDraw()

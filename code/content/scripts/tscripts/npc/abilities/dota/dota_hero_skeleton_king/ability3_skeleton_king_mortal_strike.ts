@@ -86,8 +86,8 @@ export class modifier_skeleton_king_3 extends BaseModifier_Plus {
         }
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.aura_radius = this.GetSpecialValueFor("aura_radius")
     }
 }
@@ -114,8 +114,8 @@ export class modifier_skeleton_king_3_aura extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.add_atk_pct_perS = this.GetSpecialValueFor("add_atk_pct_perS")
@@ -127,8 +127,8 @@ export class modifier_skeleton_king_3_aura extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         this.regen = this.GetSpecialValueFor("regen")
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
@@ -174,8 +174,8 @@ export class modifier_skeleton_king_3_attack extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(0)
         }

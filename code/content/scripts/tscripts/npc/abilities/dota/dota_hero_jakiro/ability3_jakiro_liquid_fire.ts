@@ -55,8 +55,8 @@ export class modifier_jakiro_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
             this.records = []
@@ -227,8 +227,8 @@ export class modifier_jakiro_3_burn_debuff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(this.burn_interval)
         }
@@ -302,16 +302,16 @@ export class modifier_jakiro_3_ice_debuff extends BaseModifier_Plus {
     //   GetEffectAttachType() {
     //  	return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     //  }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.shard_ice_damage_pct = this.GetSpecialValueFor("shard_ice_damage_pct")
         this.burn_interval = this.GetSpecialValueFor("burn_interval")
         if (IsServer()) {
             this.StartIntervalThink(this.burn_interval)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.shard_ice_damage_pct = this.GetSpecialValueFor("shard_ice_damage_pct")
         this.burn_interval = this.GetSpecialValueFor("burn_interval")
     }

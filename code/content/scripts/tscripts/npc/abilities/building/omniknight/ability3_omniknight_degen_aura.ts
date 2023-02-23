@@ -179,7 +179,7 @@ export class modifier_omniknight_3_reduce_status extends BaseModifier_Plus {
         return -this.status_resistance_percent * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    g_INCOMING_DAMAGE_PERCENTAGE() {
+    CC_INCOMING_DAMAGE_PERCENTAGE() {
         return this.bonus_damage_percent * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)

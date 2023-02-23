@@ -70,8 +70,8 @@ export class modifier_juggernaut_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -185,8 +185,8 @@ export class modifier_juggernaut_2_aura extends BaseModifier_Plus {
     GetAuraDuration() {
         return 1
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             modifier_kill.apply(this.GetParentPlus(), this.GetParentPlus(), null, { duration: this.GetDuration() })
             this.GetParentPlus().EmitSound("Hero_Juggernaut.HealingWard.Loop")
@@ -206,8 +206,8 @@ export class modifier_juggernaut_2_aura extends BaseModifier_Plus {
     Init(params: IModifierTable) {
         this.radius = this.GetSpecialValueFor("radius")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().StopSound("Hero_Juggernaut.HealingWard.Loop")
             EmitSoundOnLocationWithCaster(this.GetParentPlus().GetAbsOrigin(), "Hero_Juggernaut.HealingWard.Stop", this.GetCasterPlus())
@@ -252,8 +252,8 @@ export class modifier_juggernaut_2_crit_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsClient()) {
@@ -275,7 +275,7 @@ export class modifier_juggernaut_2_crit_buff extends BaseModifier_Plus {
         return this.bonus_crit_damage
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.bonus_crit_damage
     }
 }

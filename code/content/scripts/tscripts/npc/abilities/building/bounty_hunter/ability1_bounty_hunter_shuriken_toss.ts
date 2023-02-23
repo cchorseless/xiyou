@@ -179,8 +179,8 @@ export class modifier_bounty_hunter_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -272,7 +272,7 @@ export class modifier_bounty_hunter_1_caster extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
-    g_attackSound(params: IModifierTable) {
+    CC_attackSound(params: IModifierTable) {
         return ResHelper.GetSoundReplacement("Hero_BountyHunter.Shuriken.Impact", this.GetCasterPlus())
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)

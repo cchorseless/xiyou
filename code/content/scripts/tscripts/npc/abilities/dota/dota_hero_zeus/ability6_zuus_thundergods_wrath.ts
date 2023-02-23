@@ -97,8 +97,8 @@ export class ability6_zuus_thundergods_wrath extends BaseAbility_Plus {
 @registerModifier()
 export class modifier_zuus_6_particle_damage extends modifier_particle {
     tDamageTable: BattleHelper.DamageOptions;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (!IsServer()) {
@@ -115,8 +115,8 @@ export class modifier_zuus_6_particle_damage extends modifier_particle {
             ParticleManager.ReleaseParticleIndex(iParticleID)
         }
     }
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (this.tDamageTable) {
             BattleHelper.GoApplyDamage(this.tDamageTable)
         }
@@ -125,8 +125,8 @@ export class modifier_zuus_6_particle_damage extends modifier_particle {
 
 @registerModifier()
 export class modifier_zuus_6_particle_pre extends modifier_particle_thinker {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (!IsServer()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_zuus/zuus_thundergods_wrath_start.vpcf",

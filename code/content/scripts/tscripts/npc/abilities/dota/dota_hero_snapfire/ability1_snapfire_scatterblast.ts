@@ -110,7 +110,7 @@ export class modifier_snapfire_1 extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
-    EOM_GetModifierSpellCriticalStrike(params: IModifierTable) {
+    CC_GetModifierSpellCriticalStrike(params: IModifierTable) {
         if (IsServer()) {
             if (params.inflictor == this.GetAbilityPlus() && this.GetCasterPlus().HasShard()) {
                 return this.crit_shard

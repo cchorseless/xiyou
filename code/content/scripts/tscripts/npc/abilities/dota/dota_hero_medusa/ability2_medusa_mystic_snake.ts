@@ -310,8 +310,8 @@ export class modifier_medusa_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let sTalentName = "special_bonus_unique_medusa_custom_1"
         this.snake_agility_gain = hCaster.HasTalent(sTalentName)
@@ -329,11 +329,11 @@ export class modifier_medusa_2_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
-    EOM_GetModifierBonusStats_Agility(params: IModifierTable) {
+    CC_GetModifierBonusStats_Agility(params: IModifierTable) {
         return this.GetStackCount()
     }
 }
@@ -373,7 +373,7 @@ export class modifier_medusa_2_mana extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
 
-    EOM_GetModifierManaBonus(params: IModifierTable) {
+    CC_GetModifierManaBonus(params: IModifierTable) {
         return this.GetStackCount()
     }
 }

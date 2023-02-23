@@ -51,7 +51,7 @@ export class modifier_invoker_wex_custom extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
 
-    EOM_GetModifierMaximumAttackSpeedBonus() {
+    CC_GetModifierMaximumAttackSpeedBonus() {
         return this.GetAbilityPlus().GetLevelSpecialValueFor("attack_speed_limit_bonus", this.GetAbilityPlus().GetLevel())
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
@@ -60,6 +60,6 @@ export class modifier_invoker_wex_custom extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
-        return this.EOM_GetModifierMaximumAttackSpeedBonus()
+        return this.CC_GetModifierMaximumAttackSpeedBonus()
     }
 }

@@ -172,8 +172,8 @@ export class modifier_earth_spirit_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -248,8 +248,8 @@ export class modifier_earth_spirit_2_roll extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.launch_interval = this.GetSpecialValueFor("launch_interval") - this.GetCasterPlus().GetTalentValue('special_bonus_unique_earth_spirit_custom_5')
         this.speed = this.GetSpecialValueFor("speed")
         this.speed_enhanced = this.GetSpecialValueFor("speed_enhanced")
@@ -275,8 +275,8 @@ export class modifier_earth_spirit_2_roll extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(particleID, 10, Vector(2, 0, 0))
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.launch_interval = this.GetSpecialValueFor("launch_interval") - this.GetCasterPlus().GetTalentValue('special_bonus_unique_earth_spirit_custom_5')
         this.speed = this.GetSpecialValueFor("speed")
         this.speed_enhanced = this.GetSpecialValueFor("speed_enhanced")
@@ -286,8 +286,8 @@ export class modifier_earth_spirit_2_roll extends BaseModifier_Plus {
             this.enhanced = params.enhanced
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             hParent.RemoveGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_2_ES_ROLL)
@@ -379,8 +379,8 @@ export class modifier_earth_spirit_2_phantom extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
@@ -400,8 +400,8 @@ export class modifier_earth_spirit_2_phantom extends BaseModifier_Plus {
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().StopSound(ResHelper.GetSoundReplacement("Hero_EarthSpirit.RollingBoulder.Loop", this.GetCasterPlus()))
             UTIL_Remove(this.GetParentPlus())

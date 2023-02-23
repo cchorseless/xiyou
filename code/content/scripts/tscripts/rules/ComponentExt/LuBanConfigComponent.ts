@@ -38,4 +38,5 @@ export class LuBanConfigComponent extends ET.Component {
         RefreshConfig(obj);
         this.SyncClient();
     }
+
 }

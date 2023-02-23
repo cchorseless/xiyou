@@ -126,8 +126,8 @@ export class modifier_venomancer_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -201,8 +201,8 @@ export class modifier_venomancer_6_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             modifier_poison.Poison(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), this.poison_count_per * 1) // 在一开始就毒一次
             this.StartIntervalThink(1)
@@ -224,8 +224,8 @@ export class modifier_venomancer_6_debuff extends BaseModifier_Plus {
         }
         this.poison_ticktime = this.GetSpecialValueFor("poison_ticktime_pct") + hCaster.GetTalentValue("special_bonus_unique_venomancer_custom_6")
     }
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
@@ -265,8 +265,8 @@ export class modifier_venomancer_6_debuff extends BaseModifier_Plus {
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 export class modifier_venomancer_6_particle_venomancer_poison_nova_cast extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -298,8 +298,8 @@ export class modifier_venomancer_6_particle_venomancer_poison_nova_cast extends 
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // //
 export class modifier_venomancer_6_particle_venomancer_3_infect extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

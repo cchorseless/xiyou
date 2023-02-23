@@ -148,8 +148,8 @@ export class modifier_pangolier_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -262,8 +262,8 @@ export class modifier_pangolier_6_jump_start extends BaseModifierMotionBoth_Plus
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.jump_height = this.GetSpecialValueFor("jump_height")
         this.jump_duration = this.GetSpecialValueFor("jump_duration")
         this.duration = this.GetSpecialValueFor("duration")
@@ -290,8 +290,8 @@ export class modifier_pangolier_6_jump_start extends BaseModifierMotionBoth_Plus
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus() as ability6_pangolier_gyroshell
@@ -367,8 +367,8 @@ export class modifier_pangolier_6_rolling extends BaseModifierMotionHorizontal_P
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.forward_move_speed = this.GetSpecialValueFor("forward_move_speed")
         this.damage = this.GetSpecialValueFor("damage")
         this.jump_recover_time = this.GetSpecialValueFor("jump_recover_time")
@@ -401,8 +401,8 @@ export class modifier_pangolier_6_rolling extends BaseModifierMotionHorizontal_P
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
@@ -495,8 +495,8 @@ export class modifier_pangolier_6_jump_back extends BaseModifierMotionBoth_Plus 
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.jump_height = this.GetSpecialValueFor("jump_height")
         this.jump_recover_time = this.GetSpecialValueFor("jump_recover_time")
         if (IsServer()) {
@@ -519,8 +519,8 @@ export class modifier_pangolier_6_jump_back extends BaseModifierMotionBoth_Plus 
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             //  if ( GameFunc.IsValid(this.hPtclThinker) ) {
             //  	 this.hPtclThinker.sPtclName.remove( this.hPtclThinker );
@@ -595,7 +595,7 @@ export class modifier_pangolier_6_bounce_back extends BaseModifierMotionVertical
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated() {
+    BeCreated() {
         this.bounce_duration = this.GetSpecialValueFor("bounce_duration")
         this.flTime = 0
         if (IsServer()) {
@@ -616,8 +616,8 @@ export class modifier_pangolier_6_bounce_back extends BaseModifierMotionVertical
             [modifierstate.MODIFIER_STATE_STUNNED]: true
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let modifier = modifier_pangolier_6_rolling.findIn(hCaster)
@@ -665,7 +665,7 @@ export class modifier_pangolier_6_knockback extends BaseModifierMotionBoth_Plus 
             [modifierstate.MODIFIER_STATE_STUNNED]: true
         }
     }
-    OnCreated() {
+    BeCreated() {
         this.knockback_height = this.GetSpecialValueFor("knockback_height")
         this.knockback_duration = this.GetSpecialValueFor("knockback_duration")
         this.knockback_radius = this.GetSpecialValueFor("knockback_radius")
@@ -692,8 +692,8 @@ export class modifier_pangolier_6_knockback extends BaseModifierMotionBoth_Plus 
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             hParent.RemoveHorizontalMotionController(this)
@@ -814,7 +814,7 @@ export class modifier_pangolier_6_swashbuckle extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated() {
+    BeCreated() {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             this.interval = hCaster.HasTalent("special_bonus_unique_pangolier_custom_8") && hCaster.GetTalentValue("special_bonus_unique_pangolier_custom_8") || -1
@@ -851,8 +851,8 @@ export class modifier_pangolier_6_swashbuckle extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_pangolier_6_particle_pangolier_swashbuckler_dash extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -871,8 +871,8 @@ export class modifier_pangolier_6_particle_pangolier_swashbuckler_dash extends m
 // // // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_pangolier_6_particle_pangolier_gyroshell_cast extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

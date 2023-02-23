@@ -114,8 +114,8 @@ export class modifier_abyssal_underlord_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -201,8 +201,8 @@ export class modifier_abyssal_underlord_6_target extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_PERMANENT + DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE + DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.base_damage = this.GetSpecialValueFor("base_damage")
         this.damage = this.GetSpecialValueFor("damage")
         this.damage_per_unit = this.GetSpecialValueFor("damage_per_unit")
@@ -226,8 +226,8 @@ export class modifier_abyssal_underlord_6_target extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
@@ -328,7 +328,7 @@ export class modifier_abyssal_underlord_6_stun extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_abyssal_underlord_6_teleport extends modifier_particle {
-    OnCreated() {
+    BeCreated() {
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/heroes_underlord/abyssal_underlord_darkrift_target.vpcf",

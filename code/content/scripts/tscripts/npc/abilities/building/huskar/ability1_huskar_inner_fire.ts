@@ -124,8 +124,8 @@ export class modifier_huskar_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -194,8 +194,8 @@ export class modifier_huskar_1_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.movespeed = this.GetSpecialValueFor("movespeed")
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
@@ -220,8 +220,8 @@ export class modifier_huskar_1_debuff extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_huskar_1_particle_start extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let radius = this.GetSpecialValueFor("radius")
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()

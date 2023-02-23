@@ -137,8 +137,8 @@ export class modifier_shadow_shaman_3_hex extends BaseModifier_Plus {
     GetTexture() {
         return ResHelper.GetAbilityTextureReplacement("shadow_shaman_voodoo", this.GetCasterPlus())
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.movespeed = this.GetSpecialValueFor("hex_movespeed")
         let hCaster = this.GetCasterPlus()
         if (IsClient()) {
@@ -173,7 +173,7 @@ export class modifier_shadow_shaman_3_hex extends BaseModifier_Plus {
         return ResHelper.GetModelReplacement("models/props_gameplay/chicken.vmdl", this.GetCasterPlus())
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PRESERVE_PARTICLES_ON_MODEL_CHANGE)
-    g_PreserveParticlesOnModelChanged(params: any) {
+    CC_PreserveParticlesOnModelChanged(params: any) {
         return 1
     }
 }

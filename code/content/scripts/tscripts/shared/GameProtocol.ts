@@ -31,6 +31,7 @@ export module GameProtocol {
         static readonly req_DebugRemoveDummyTarget = "/req_DebugRemoveDummyTarget";
         static readonly req_DebugRemoveAllAbility = "/req_DebugRemoveAllAbility";
         static readonly req_DebugRemoveAllItem = "/req_DebugRemoveAllItem";
+        static readonly req_DebugChangeServerPing = "/req_DebugChangeServerPing";
         static readonly req_KEY_DOWN = "/req_KEY_DOWN";
         static readonly req_KEY_UP = "/req_KEY_UP";
         /**添加机器人 */

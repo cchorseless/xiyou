@@ -106,8 +106,8 @@ export class modifier_puck_3_buff extends BaseModifier_Plus {
     HandleCustomTransmitterData(tData: any) {
         this.tData = tData
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.SetHasCustomTransmitterData(true)
 
         if (IsServer()) {
@@ -122,8 +122,8 @@ export class modifier_puck_3_buff extends BaseModifier_Plus {
             this.SetStackCount(this.tData.iStack)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         if (IsServer()) {
             let iStackCount = params.stack || 0
             let iType = params.type || RandomInt(0, 2)
@@ -146,28 +146,28 @@ export class modifier_puck_3_buff extends BaseModifier_Plus {
     On_Tooltip() {
         this._tooltip = (this._tooltip || 0) % 3 + 1
         if (this._tooltip == 1) {
-            return this.EOM_GetModifierBonusStats_Strength()
+            return this.CC_GetModifierBonusStats_Strength()
         } else if (this._tooltip == 2) {
-            return this.EOM_GetModifierBonusStats_Agility()
+            return this.CC_GetModifierBonusStats_Agility()
         } else if (this._tooltip == 3) {
-            return this.EOM_GetModifierBonusStats_Intellect()
+            return this.CC_GetModifierBonusStats_Intellect()
         }
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
-    EOM_GetModifierBonusStats_Strength() {
+    CC_GetModifierBonusStats_Strength() {
         if (this.tData) {
             return this.tData.iStr || 0
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
-    EOM_GetModifierBonusStats_Agility() {
+    CC_GetModifierBonusStats_Agility() {
         if (this.tData) {
             return this.tData.iAgi || 0
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
-    EOM_GetModifierBonusStats_Intellect() {
+    CC_GetModifierBonusStats_Intellect() {
         if (this.tData) {
             return this.tData.iInt || 0
         }

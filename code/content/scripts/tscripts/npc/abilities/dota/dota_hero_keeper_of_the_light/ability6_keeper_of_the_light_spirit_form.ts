@@ -172,8 +172,8 @@ export class modifier_keeper_of_the_light_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -250,7 +250,7 @@ export class modifier_keeper_of_the_light_6_wisp extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated() {
+    BeCreated() {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let vParent = hParent.GetAbsOrigin()
@@ -289,8 +289,8 @@ export class modifier_keeper_of_the_light_6_wisp extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -446,8 +446,8 @@ export class modifier_keeper_of_the_light_6_slow extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, true, 11, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             // Spawner.MoveOrder(this.GetParentPlus())
             this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_DISABLED)
@@ -472,7 +472,7 @@ export class modifier_keeper_of_the_light_6_slow extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_keeper_of_the_light_6_particle_bling extends modifier_particle {
-    OnCreated() {
+    BeCreated() {
         let radius = this.GetSpecialValueFor("radius")
         let hParent = this.GetParentPlus()
         if (IsClient()) {
@@ -495,7 +495,7 @@ export class modifier_keeper_of_the_light_6_particle_daytime extends modifier_pa
     IsHidden() {
         return false
     }
-    OnCreated() {
+    BeCreated() {
         let radius = this.GetSpecialValueFor("radius")
         let hParent = this.GetParentPlus()
         if (IsServer()) {

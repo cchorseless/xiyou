@@ -262,8 +262,11 @@ export class BaseModifier {
         return false;
     }
     /**初始化自己，OnCreated和OnRefresh都会调用 */
-    public Init(params?: object) {
+    public Init(params?: IModifierTable) {
     }
+    public BeCreated?(params?: IModifierTable): void;
+    public BeRefresh?(params?: IModifierTable): void;
+    public BeDestroy?(): void;
     /**
      * modifier_property 注册方法的补充
      * @returns 
@@ -317,6 +320,7 @@ export class BaseModifier {
         (params as IModifierTable).IsOnCreated = true;
         (params as IModifierTable).IsOnRefresh = false;
         this.Init(params);
+        this.BeCreated && this.BeCreated(params);
         PropertyCalculate.RegModifiersInfo(this, true);
         GGameCache.RegBuff(this, true);
     }
@@ -326,9 +330,11 @@ export class BaseModifier {
         (params as IModifierTable).IsOnCreated = false;
         (params as IModifierTable).IsOnRefresh = true;
         this.Init(params);
+        this.BeRefresh && this.BeRefresh(params);
     }
     __destroyed: boolean = true;
     public OnDestroy() {
+        this.BeDestroy && this.BeDestroy();
         PropertyCalculate.RegModifiersInfo(this, false);
         GGameCache.RegBuff(this, false);
         this.__AllRegisterFunction = null;

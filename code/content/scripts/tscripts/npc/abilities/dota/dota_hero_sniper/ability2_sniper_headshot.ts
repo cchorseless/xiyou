@@ -71,8 +71,8 @@ export class modifier_sniper_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.records = []
         }
@@ -165,7 +165,7 @@ export class modifier_sniper_2 extends BaseModifier_Plus {
                             victim: target,
                             damage: fDamage,
                             damage_type: hAbility.GetAbilityDamageType(),
-                            eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                            eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                         }
                         BattleHelper.GoApplyDamage(tDamageTable)
                     }
@@ -177,7 +177,7 @@ export class modifier_sniper_2 extends BaseModifier_Plus {
                 victim: params.target,
                 damage: fDamage,
                 damage_type: hAbility.GetAbilityDamageType(),
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
             }
             BattleHelper.GoApplyDamage(tDamageTable)
             modifier_sniper_2_debuff.apply(params.target, hCaster, hAbility, { duration: this.stun_duration * (params.target as IBaseNpc_Plus).GetStatusResistanceFactor(hCaster) })
@@ -249,8 +249,8 @@ export class modifier_sniper_2_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_sniper/sniper_headshot_slow.vpcf",

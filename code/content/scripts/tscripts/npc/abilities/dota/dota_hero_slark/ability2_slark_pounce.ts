@@ -95,8 +95,8 @@ export class modifier_slark_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -147,7 +147,7 @@ export class modifier_slark_2 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: ModifierAttackEvent) {
+    CC_GetModifierOutgoingDamagePercentage(params: ModifierAttackEvent) {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && params != null && modifier_slark_2_leash.exist(params.target)) {
             return this.shard_amplify_damage_pct
         }
@@ -180,8 +180,8 @@ export class modifier_slark_2_leash extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.leash_radius = this.GetSpecialValueFor("leash_radius")
@@ -237,8 +237,8 @@ export class modifier_slark_2_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         this.leash_radius = this.GetSpecialValueFor("leash_radius")
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
@@ -255,8 +255,8 @@ export class modifier_slark_2_thinker extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().EmitSound(ResHelper.GetSoundReplacement("Hero_Slark.Pounce.End", this.GetCasterPlus()))
             if (GameFunc.IsValid(this.GetParentPlus())) {
@@ -276,8 +276,8 @@ export class modifier_slark_2_thinker extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_slark_2_particle_slark_pounce_start extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

@@ -100,8 +100,8 @@ export class modifier_crystal_maiden_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -172,12 +172,12 @@ export class modifier_crystal_maiden_2_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.damage_increase = hCaster.HasShard() && this.GetSpecialValueFor("damage_increase") || 0
-        if (IsServer() && params.IsOnCreated) {
+        if (IsServer()) {
             LogHelper.print(params)
             this.sSoundName = ResHelper.GetSoundReplacement("hero_Crystal.frostbite", hParent)
             this.modifier_truesight = modifier_truesight.apply(this.GetParentPlus(), hParent, this.GetAbilityPlus(), { duration: params.duration })
@@ -185,8 +185,8 @@ export class modifier_crystal_maiden_2_debuff extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().StopSound(this.sSoundName)
             if (GameFunc.IsValid(this.modifier_truesight as IBaseModifier_Plus)) {
@@ -195,12 +195,12 @@ export class modifier_crystal_maiden_2_debuff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SPELL_DAMAGE_PERCENTAGE)
-    g_INCOMING_SPELL_DAMAGE_PERCENTAGE() {
+    CC_INCOMING_SPELL_DAMAGE_PERCENTAGE() {
         return this.damage_increase
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
 
-    tooltip() {
+    CC_tooltip() {
         return this.damage_increase
     }
     CheckState() {
@@ -213,8 +213,8 @@ export class modifier_crystal_maiden_2_debuff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_crystal_maiden_2_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsClient()) {

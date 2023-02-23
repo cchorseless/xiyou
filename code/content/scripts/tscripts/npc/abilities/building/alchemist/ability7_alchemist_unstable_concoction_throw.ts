@@ -109,7 +109,7 @@ export class modifier_alchemist_4_buff_target extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_ALL_BONUS)
-    EOM_GetModifierBonusStats_All() {
+    CC_GetModifierBonusStats_All() {
         return this.GetStackCount();
     }
 
@@ -138,7 +138,7 @@ export class modifier_alchemist_4_buff_caster extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    EOM_GetModifierSpellAmplifyBonus() {
+    CC_GetModifierSpellAmplifyBonus() {
         return this.GetStackCount();
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)

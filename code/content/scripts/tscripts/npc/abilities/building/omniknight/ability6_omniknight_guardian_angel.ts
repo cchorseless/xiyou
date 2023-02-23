@@ -95,8 +95,8 @@ export class modifier_omniknight_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -174,8 +174,8 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
     ShouldUseOverheadOffset() {
         return true
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -248,7 +248,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
-    EOM_GetModifierStats_Strength_Percentage() {
+    CC_GetModifierStats_Strength_Percentage() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) { return 0 }
         let hParent = this.GetParentPlus()
@@ -257,7 +257,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_PERCENTAGE)
-    EOM_GetModifierStats_Agility_Percentage() {
+    CC_GetModifierStats_Agility_Percentage() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) { return 0 }
         let hParent = this.GetParentPlus()
@@ -266,7 +266,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_PERCENTAGE)
-    EOM_GetModifierStats_Intellect_Percentage() {
+    CC_GetModifierStats_Intellect_Percentage() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) { return 0 }
         let hParent = this.GetParentPlus()
@@ -275,7 +275,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
-    EOM_GetModifierBonusStats_Strength() {
+    CC_GetModifierBonusStats_Strength() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) { return 0 }
         let hParent = this.GetParentPlus()
@@ -284,7 +284,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
-    EOM_GetModifierBonusStats_Agility() {
+    CC_GetModifierBonusStats_Agility() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) { return 0 }
         let hParent = this.GetParentPlus()
@@ -293,7 +293,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
-    EOM_GetModifierBonusStats_Intellect() {
+    CC_GetModifierBonusStats_Intellect() {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) { return 0 }
         let hParent = this.GetParentPlus()
@@ -302,7 +302,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
-    EOM_GetModifierSpellCriticalStrike() {
+    CC_GetModifierSpellCriticalStrike() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             if (GameFunc.mathUtil.PRD(this.spell_crit_chance, this.GetParentPlus(), "modifier_omniknight_6_buff_shard")) {
                 return this.spell_crit_damage

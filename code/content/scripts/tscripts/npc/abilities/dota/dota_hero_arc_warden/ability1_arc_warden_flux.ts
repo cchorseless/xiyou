@@ -103,8 +103,8 @@ export class modifier_arc_warden_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -172,8 +172,8 @@ export class modifier_arc_warden_1_debuff extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_CENTER_FOLLOW
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.iSlow = params.iSlow
             this.iExtraShockCount = params.iExtraShockCount
@@ -194,8 +194,8 @@ export class modifier_arc_warden_1_debuff extends BaseModifier_Plus {
             this.StartIntervalThink(0)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         if (IsServer()) {
             this.iSlow = params.iSlow
             this.iExtraShockCount = params.iExtraShockCount
@@ -224,8 +224,8 @@ export class modifier_arc_warden_1_debuff extends BaseModifier_Plus {
         this.iExtraShockCount = params.iExtraShockCount
         this.iShockDamageIncrease = params.iShockDamageIncrease
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.StartIntervalThink(-1)
         }
@@ -288,7 +288,7 @@ export class modifier_arc_warden_1_debuff extends BaseModifier_Plus {
         this.flag = null
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingShockDamagePercentage() {
+    CC_GetModifierIncomingShockDamagePercentage() {
         return this.iShockDamageIncrease
     }
 }

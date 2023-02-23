@@ -76,8 +76,8 @@ export class modifier_earthshaker_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -160,8 +160,8 @@ export class modifier_earthshaker_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.totem_damage_percentage = this.GetSpecialValueFor("totem_damage_percentage") + hCaster.GetTalentValue("special_bonus_unique_earthshaker_custom_8")
@@ -188,8 +188,8 @@ export class modifier_earthshaker_2_buff extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(iParticleID)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.totem_damage_percentage = this.GetSpecialValueFor("totem_damage_percentage") + hCaster.GetTalentValue("special_bonus_unique_earthshaker_custom_8")
@@ -263,7 +263,7 @@ export class modifier_earthshaker_2_buff extends BaseModifier_Plus {
                     damage: params.original_damage * this.splash_damage * 0.01,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
                     damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-                    eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                 })
             }
 
@@ -277,8 +277,8 @@ export class modifier_earthshaker_2_buff extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_earthshaker_2_particle_attack extends modifier_particle {
     splash_radius: number;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

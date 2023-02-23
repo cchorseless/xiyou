@@ -378,8 +378,8 @@ export class modifier_pudge_1_buff extends BaseModifierMotionHorizontal_Plus {
         this.incoming_bleed_damage = this.GetSpecialValueFor("incoming_bleed_damage")
     }
     iHashtableIndex: string;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.iHashtableIndex = params.hashtableUUid;
             let item = item_towerchange_custom.FindInUnit(this.GetParentPlus())
@@ -402,8 +402,8 @@ export class modifier_pudge_1_buff extends BaseModifierMotionHorizontal_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParent().RemoveHorizontalMotionController(this)
             let tHashtable = HashTableHelper.GetHashtableByIndex(this.iHashtableIndex)

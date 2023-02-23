@@ -157,8 +157,8 @@ export class modifier_tinker_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(0)
         }
@@ -233,7 +233,7 @@ export class modifier_tinker_2_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_CONSTANT)
-    EOM_GetModifierOutgoingMagicalDamageConstant() {
+    CC_GetModifierOutgoingMagicalDamageConstant() {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             return this.damage + hCaster.GetIntellect() * this.damage_per_int
@@ -254,8 +254,8 @@ export class modifier_tinker_2_buff extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_tinker_2_projectile extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
@@ -277,8 +277,8 @@ export class modifier_tinker_2_projectile extends modifier_particle {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_tinker_2_particle_dud extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
             hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Tinker.Heat-Seeking_Missile_Dud", hCaster))
@@ -298,8 +298,8 @@ export class modifier_tinker_2_particle_dud extends modifier_particle {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_tinker_2_particle_hit extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetParentPlus()
         let hParent = this.GetCasterPlus()
         if (IsServer()) {

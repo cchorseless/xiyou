@@ -228,8 +228,8 @@ export class modifier_monkey_king_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -240,8 +240,8 @@ export class modifier_monkey_king_6 extends BaseModifier_Plus {
             modifier_monkey_king_6_scepter_buff.apply(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), null)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             modifier_monkey_king_6_scepter_buff.remove(this.GetParentPlus());
         }
@@ -367,8 +367,8 @@ export class modifier_monkey_king_6_soldier_active extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let extra_attack_range = hCaster.HasTalent("special_bonus_unique_monkey_king_custom_5") && hCaster.GetTalentValue("special_bonus_unique_monkey_king_custom_5") || 0
@@ -400,8 +400,8 @@ export class modifier_monkey_king_6_soldier_active extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().SetDayTimeVisionRange(0)
             this.GetParentPlus().SetNightTimeVisionRange(0)
@@ -529,8 +529,8 @@ export class modifier_monkey_king_6_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.radius = params.radius
             this.GetCasterPlus().EmitSound(ResHelper.GetSoundReplacement("Hero_MonkeyKing.FurArmy", this.GetCasterPlus()))
@@ -550,8 +550,8 @@ export class modifier_monkey_king_6_thinker extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             if (!GameFunc.IsValid(hCaster)) {
@@ -614,8 +614,8 @@ export class modifier_monkey_king_6_soldier extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.GetParentPlus().SetDayTimeVisionRange(0)
             this.GetParentPlus().SetNightTimeVisionRange(0)
@@ -716,8 +716,8 @@ export class modifier_monkey_king_6_status extends BaseModifier_Plus {
     StatusEffectPriority() {
         return 10
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/status_fx/status_effect_monkey_king_fur_army.vpcf",
@@ -730,8 +730,8 @@ export class modifier_monkey_king_6_status extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, true, this.StatusEffectPriority(), false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -822,8 +822,8 @@ export class modifier_monkey_king_6_scepter_active extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let extra_attack_speed = hCaster.HasTalent("special_bonus_unique_monkey_king_custom_7") && hCaster.GetTalentValue("special_bonus_unique_monkey_king_custom_7") || 0
@@ -849,8 +849,8 @@ export class modifier_monkey_king_6_scepter_active extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().AddNoDraw()
             this.GetParentPlus().Stop()
@@ -951,8 +951,8 @@ export class modifier_monkey_king_6_scepter_active extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_monkey_king_6_particle_monkey_king_fur_army_cast extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

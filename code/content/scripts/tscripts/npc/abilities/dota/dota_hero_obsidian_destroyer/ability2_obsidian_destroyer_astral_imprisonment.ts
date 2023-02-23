@@ -143,8 +143,8 @@ export class modifier_obsidian_destroyer_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -233,8 +233,8 @@ export class modifier_obsidian_destroyer_2_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -291,8 +291,8 @@ export class modifier_obsidian_destroyer_2_debuff extends BaseModifier_Plus {
         this.damage = this.GetSpecialValueFor("damage")
         this.bonus_max_mana_damage_percent = this.GetSpecialValueFor("bonus_max_mana_damage_percent")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -372,8 +372,8 @@ export class modifier_obsidian_destroyer_2_invulnerable extends BaseModifier_Plu
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
     }
 
 
@@ -386,8 +386,8 @@ export class modifier_obsidian_destroyer_2_invulnerable extends BaseModifier_Plu
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_obsidian_destroyer_2_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetParentPlus()
         let hParent = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()

@@ -51,14 +51,14 @@ export class modifier_drow_ranger_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             if (GameFunc.IsValid(this.modifier)) {
                 this.modifier.Destroy()
@@ -175,7 +175,7 @@ export class modifier_drow_ranger_3_aura extends BaseModifier_Plus {
         return iAgi * trueshot_ranged_attack_speed * 0.01
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_PERCENTAGE)
-    EOM_GetModifierStats_Agility_Percentage(params: IModifierTable) {
+    CC_GetModifierStats_Agility_Percentage(params: IModifierTable) {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && this.GetParentPlus().IsRangedAttacker() && this.GetParentPlus().GetUnitLabel() == "HERO") {
             return this.increase_agi_pct
         }

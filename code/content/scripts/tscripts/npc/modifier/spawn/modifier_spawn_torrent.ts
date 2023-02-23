@@ -50,8 +50,8 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
@@ -73,7 +73,7 @@ export class modifier_spawn_torrent extends BaseModifierMotionBoth_Plus {
         return state;
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
-    g_GetOverrideAnimation() {
+    CC_GetOverrideAnimation() {
         return GameActivity_t.ACT_DOTA_FLAIL;
     }
 

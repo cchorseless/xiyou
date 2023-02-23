@@ -68,8 +68,8 @@ export class modifier_enchantress_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -175,8 +175,8 @@ export class modifier_enchantress_3_thinker extends BaseModifier_Plus {
     GetAura() {
         return 'modifier_enchantress_3_allies'
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.radius = this.GetSpecialValueFor("radius") + hCaster.GetTalentValue("special_bonus_unique_enchantress_custom_4")
@@ -220,8 +220,8 @@ export class modifier_enchantress_3_thinker extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }
@@ -321,7 +321,7 @@ export class modifier_enchantress_3_allies extends BaseModifier_Plus {
 
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.pure_damage
     }
 

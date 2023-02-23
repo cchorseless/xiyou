@@ -165,8 +165,8 @@ export class modifier_mars_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -248,12 +248,12 @@ export class modifier_mars_1_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }
@@ -300,8 +300,8 @@ export class modifier_mars_1_move extends BaseModifierMotionHorizontal_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             if (this.ApplyHorizontalMotionController()) {
                 this.vStartPosition = GameFunc.VectorFunctions.StringToVector(params.start_position)
@@ -316,8 +316,8 @@ export class modifier_mars_1_move extends BaseModifierMotionHorizontal_Plus {
         this.stun_duration = this.GetSpecialValueFor("stun_duration") + hCaster.GetTalentValue("special_bonus_unique_mars_custom_4")
         this.hit_attack_damage_percent = this.GetSpecialValueFor("hit_attack_damage_percent")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this)
         }
@@ -410,8 +410,8 @@ export class modifier_mars_1_hit_obstacle_stun extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             let vDir = GameFunc.VectorFunctions.StringToVector(params.vDir)
@@ -445,7 +445,7 @@ export class modifier_mars_1_hit_obstacle_stun extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage() {
+    CC_GetModifierOutgoingDamagePercentage() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_mars_custom_6")
     }
 }

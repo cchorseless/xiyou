@@ -46,8 +46,8 @@ export class modifier_lone_druid_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(1)
         }
@@ -98,8 +98,8 @@ export class modifier_lone_druid_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(0)
         }
@@ -109,8 +109,8 @@ export class modifier_lone_druid_1_buff extends BaseModifier_Plus {
         this.bonus_attack_speed = this.GetSpecialValueFor("bonus_attack_speed")
         this.bonus_attack_speed_limit = this.GetSpecialValueFor("bonus_attack_speed_limit")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             this.StartIntervalThink(-1)

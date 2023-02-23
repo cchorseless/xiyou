@@ -21,8 +21,8 @@ export class modifier_wave extends BaseModifier_Plus {
     GetPriority() {
         return modifierpriority.MODIFIER_PRIORITY_SUPER_ULTRA
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             if (params.PhysicalArmor != null) {
                 this.PhysicalArmor = params.PhysicalArmor;

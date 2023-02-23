@@ -114,8 +114,8 @@ export class modifier_snapfire_5 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -202,8 +202,8 @@ export class modifier_snapfire_5_buff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let vPosition = GameFunc.VectorFunctions.StringToVector(params.vTarget)
             this.SetStackCount(this.projectile_count)
@@ -307,8 +307,8 @@ export class modifier_snapfire_5_debuff_burn_ground extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -331,8 +331,8 @@ export class modifier_snapfire_5_debuff_burn_ground extends BaseModifier_Plus {
             this.burn_damage = params.burn_damage || 0
         }
     }
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (IsServer()) {
             modifier_dummy.remove(this.GetParentPlus());
         }
@@ -381,8 +381,8 @@ export class modifier_snapfire_5_debuff_burn extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -430,7 +430,7 @@ export class modifier_snapfire_5_debuff_burn extends BaseModifier_Plus {
                     victim: hParent,
                     damage: this.burn_damage,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL,
-                    eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
                 }
                 BattleHelper.GoApplyDamage(damage_table)
             }

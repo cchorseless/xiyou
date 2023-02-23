@@ -158,8 +158,8 @@ export class modifier_life_stealer_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -242,8 +242,8 @@ export class modifier_life_stealer_6_buff extends BaseModifier_Plus {
     GetTexture() {
         return "life_stealer_infest"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -263,8 +263,8 @@ export class modifier_life_stealer_6_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, true)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -308,16 +308,16 @@ export class modifier_life_stealer_6_swallow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             hParent.AddNoDraw()
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             hParent.StartGesture(GameActivity_t.ACT_DOTA_LIFESTEALER_INFEST_END)
@@ -344,8 +344,8 @@ export class modifier_life_stealer_6_swallow extends BaseModifier_Plus {
 
 @registerModifier()
 export class modifier_life_stealer_6_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsClient()) {

@@ -126,8 +126,8 @@ export class modifier_dragon_knight_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -212,8 +212,8 @@ export class modifier_dragon_knight_6_form extends BaseModifier_Plus {
     GetPriority() {
         return -1
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
             this.Destroy()
@@ -264,8 +264,8 @@ export class modifier_dragon_knight_6_form extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(iParticleID)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().SetSkin(0)
             this.GetParentPlus().SetAttackCapability(DOTAUnitAttackCapability_t.DOTA_UNIT_CAP_MELEE_ATTACK)
@@ -287,7 +287,7 @@ export class modifier_dragon_knight_6_form extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    g_OUTGOING_DAMAGE_PERCENTAGE() {
+    CC_OUTGOING_DAMAGE_PERCENTAGE() {
         return this.GetParentPlus().HasScepter() && this.scepter_extra_damage_percent || this.extra_damage_percent
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
@@ -426,7 +426,7 @@ export class modifier_dragon_knight_6_red extends BaseModifier_Plus {
                         damage: params.original_damage * this.splash_damage_percent * 0.01,
                         damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-                        eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                        eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                     }
                     BattleHelper.GoApplyDamage(damage_table)
                 }
@@ -492,7 +492,7 @@ export class modifier_dragon_knight_6_frost extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
+    BeCreated(params: IModifierTable) {
 
         if (IsClient()) {
             let hParent = this.GetParentPlus()

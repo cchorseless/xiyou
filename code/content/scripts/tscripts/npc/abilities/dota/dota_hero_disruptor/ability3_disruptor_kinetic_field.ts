@@ -63,8 +63,8 @@ export class modifier_disruptor_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -158,11 +158,11 @@ export class modifier_disruptor_2_debuff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_DAMAGE_PERCENTAGE)
-    g_INCOMING_SHOCK_DAMAGE_PERCENTAGE() {
+    CC_INCOMING_SHOCK_DAMAGE_PERCENTAGE() {
         return this.iShockDamageIncrease
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip(params: IModifierTable) {
+    CC_tooltip(params: IModifierTable) {
         return this.GetStackCount()
     }
 }
@@ -191,8 +191,8 @@ export class modifier_disruptor_2_field_aura extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
@@ -204,8 +204,8 @@ export class modifier_disruptor_2_field_aura extends BaseModifier_Plus {
             })
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
@@ -259,8 +259,8 @@ export class modifier_disruptor_2_field extends BaseModifier_Plus {
     GetAuraDuration() {
         return 0
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.radius = this.GetSpecialValueFor("radius")
         } else {
@@ -278,8 +278,8 @@ export class modifier_disruptor_2_field extends BaseModifier_Plus {
             EmitSoundOn("Hero_Disruptor.KineticField", this.GetParentPlus())
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             EmitSoundOn("Hero_Disruptor.KineticField.End", this.GetParentPlus())
             UTIL_Remove(this.GetParentPlus())
@@ -339,14 +339,14 @@ export class modifier_disruptor_2_thinker extends BaseModifier_Plus {
     GetAuraDuration() {
         return 0.1
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.radius = this.GetSpecialValueFor("radius")
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }

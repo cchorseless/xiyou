@@ -135,8 +135,8 @@ export class modifier_arc_warden_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -203,8 +203,8 @@ export class modifier_arc_warden_6 extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_arc_warden_6_thinker extends BaseModifier_Plus {
     iCount: any;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.iCount = params.iCount
             let fSpawnInterval = params.fSpawnInterval || 0.3
@@ -212,8 +212,8 @@ export class modifier_arc_warden_6_thinker extends BaseModifier_Plus {
             this.Spawn()
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.StartIntervalThink(-1)
             UTIL_Remove(this.GetParentPlus())
@@ -298,8 +298,8 @@ export class modifier_arc_warden_6_wraith extends BaseModifier_Plus {
         }
         return true
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.iRadius = params.iRadius || 300
             this.fDamage = params.fDamage || 0
@@ -319,8 +319,8 @@ export class modifier_arc_warden_6_wraith extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, 0, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }

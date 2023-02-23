@@ -182,7 +182,7 @@ export class modifier_kunkka_1 extends BaseModifier_Plus {
     }
     // 退潮 昆卡对受影响单位造成伤害提升xx%
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
         if (params != null && params.attacker == this.GetParentPlus() && modifier_kunkka_1_slow.exist(params.target)) {
             return this.ebb_damage
         }
@@ -213,8 +213,8 @@ export class modifier_kunkka_1_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let caster = this.GetCasterPlus()
         let extra_radius = caster.GetTalentValue("special_bonus_unique_kunkka_custom")
         this.radius = this.GetSpecialValueFor("radius") + extra_radius
@@ -305,8 +305,8 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius") + hCaster.GetTalentValue("special_bonus_unique_kunkka_custom")
         this.stun_duration = this.GetSpecialValueFor("stun_duration")
@@ -336,8 +336,8 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, this.ShouldUseOverheadOffset())
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let extra_radius = 0
         let extra_damage_per_str = 0
@@ -354,8 +354,8 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
             this.damage_type = this.GetAbilityPlus().GetAbilityDamageType()
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.GetParentPlus().RemoveVerticalMotionController(this)
         }
@@ -381,7 +381,7 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
                 attacker: caster,
                 damage: damage_per_second * this.tick_interval,
                 damage_type: this.damage_type,
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(damage_table)
         }
@@ -481,8 +481,8 @@ export class modifier_kunkka_1_scepter extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.scepter_interval = this.GetSpecialValueFor("scepter_interval")
         if (IsServer()) {
             this.StartIntervalThink(this.scepter_interval)

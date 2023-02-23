@@ -172,8 +172,8 @@ export class modifier_pangolier_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -246,8 +246,8 @@ export class modifier_pangolier_2_jump extends BaseModifierMotionVertical_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.jump_height = this.GetSpecialValueFor("jump_height")
         this.jump_duration = this.GetSpecialValueFor("jump_duration")
         this.scepter_attack_count = this.GetSpecialValueFor("scepter_attack_count")
@@ -271,8 +271,8 @@ export class modifier_pangolier_2_jump extends BaseModifierMotionVertical_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
@@ -332,8 +332,8 @@ export class modifier_pangolier_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.unit_stacks = this.GetSpecialValueFor("unit_stacks")
         this.duration = this.GetSpecialValueFor("duration")
         let hCaster = this.GetCasterPlus()

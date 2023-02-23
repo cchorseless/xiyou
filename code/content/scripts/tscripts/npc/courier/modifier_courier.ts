@@ -34,8 +34,8 @@ export class modifier_courier extends BaseModifier_Plus {
     ambientModifiers: string;
     addAbilityName: string;
     zOffset: number = 1;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let sCourierName = params.courier_name
             this.sCourierName = sCourierName
@@ -50,8 +50,8 @@ export class modifier_courier extends BaseModifier_Plus {
             parent.GetBonusManaRegen();
         }
     }
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             hParent.SetSkin(0);

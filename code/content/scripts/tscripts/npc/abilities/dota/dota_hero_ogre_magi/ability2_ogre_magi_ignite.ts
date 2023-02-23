@@ -213,8 +213,8 @@ export class modifier_ogre_magi_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -306,8 +306,8 @@ export class modifier_ogre_magi_2_debuff extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let extra_burn_damage_factor = hCaster.GetTalentValue("special_bonus_unique_ogre_magi_custom_2")
         this.slow_movement_speed_pct = this.GetSpecialValueFor("slow_movement_speed_pct")
@@ -337,8 +337,8 @@ export class modifier_ogre_magi_2_debuff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let extra_burn_damage_factor = hCaster.GetTalentValue("special_bonus_unique_ogre_magi_custom_2")
         this.slow_movement_speed_pct = this.GetSpecialValueFor("slow_movement_speed_pct")
@@ -346,8 +346,8 @@ export class modifier_ogre_magi_2_debuff extends BaseModifier_Plus {
         this.burn_damage_per_str = this.GetSpecialValueFor("burn_damage_per_str") + extra_burn_damage_factor
         this.burn_damage_per_int = this.GetSpecialValueFor("burn_damage_per_int") + extra_burn_damage_factor
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
 
         // let modifier_ogre_magi_2_debuff = Load(hParent, "modifier_ogre_magi_2_debuff") || {}
@@ -384,7 +384,7 @@ export class modifier_ogre_magi_2_debuff extends BaseModifier_Plus {
                 attacker: hCaster,
                 damage: this.burn_damage + iStrength * this.burn_damage_per_str + iIntellect * this.burn_damage_per_int,
                 damage_type: this.damage_type,
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(tDamageTable)
         }

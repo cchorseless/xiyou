@@ -106,7 +106,7 @@ export class modifier_phantom_assassin_6 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: ModifierAttackEvent) {
+    CC_GetModifierCriticalStrike(params: ModifierAttackEvent) {
         if (this.records.indexOf(params.record) != -1) {
             return this.crit_damage
         }
@@ -200,19 +200,19 @@ export class modifier_phantom_assassin_6_stack extends BaseModifier_Plus {
         return this.crit_damage_stack * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.crit_chance_stack * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
-    tooltip2() {
+    CC_tooltip2() {
         return this.crit_damage_stack * this.GetStackCount()
     }
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_phantom_assassin_6_particle_phantom_assassin_crit_impact_dagger extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

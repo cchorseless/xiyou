@@ -67,8 +67,8 @@ export class modifier_kunkka_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -160,8 +160,8 @@ export class modifier_kunkka_2_buff extends BaseModifier_Plus {
     GetTexture() {
         return "kunkka_x_marks_the_spot"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -187,8 +187,8 @@ export class modifier_kunkka_2_buff extends BaseModifier_Plus {
     Init(params: IModifierTable) {
         this.damage_factor = this.GetSpecialValueFor("damage_factor")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -215,7 +215,7 @@ export class modifier_kunkka_2_buff extends BaseModifier_Plus {
                     attacker: hCaster,
                     damage: fDamage,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
-                    eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY + BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                 }
                 BattleHelper.GoApplyDamage(damage_table)
             }

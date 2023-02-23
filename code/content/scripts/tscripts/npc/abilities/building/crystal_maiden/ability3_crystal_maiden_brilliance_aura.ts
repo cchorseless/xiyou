@@ -121,7 +121,7 @@ export class modifier_crystal_maiden_3_aura extends BaseModifier_Plus {
         this.bonus_spell_amp = this.GetSpecialValueFor("bonus_spell_amp")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_TOTAL_PERCENTAGE)
-    EOM_GetModifierConstantManaRegen(params: IModifierTable) {
+    CC_GetModifierConstantManaRegen(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
             return 0
@@ -161,7 +161,7 @@ export class modifier_crystal_maiden_3_aura extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
-    EOM_GetModifierPercentageCooldown(params: IModifierTable) {
+    CC_GetModifierPercentageCooldown(params: IModifierTable) {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_crystal_maiden_custom_8")
         }
@@ -197,7 +197,7 @@ export class modifier_crystal_maiden_3_spell_damage extends BaseModifier_Plus {
 
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    g_SPELL_AMPLIFY_BONUS() {
+    CC_SPELL_AMPLIFY_BONUS() {
         return this.bonus_spell_amp
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)

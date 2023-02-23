@@ -89,15 +89,15 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(0)
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.StartIntervalThink(-1)
         }
@@ -161,11 +161,11 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE)
-    EOM_GetModifierBaseAttack_BonusDamage(params: IModifierTable) {
+    CC_GetModifierBaseAttack_BonusDamage(params: IModifierTable) {
         return this.GetSpecialValueFor("bear_base_damage")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BASE)
-    EOM_GetModifierBaseStats_Strength(params: IModifierTable) {
+    CC_GetModifierBaseStats_Strength(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             let inherit_attribute_per = this.GetSpecialValueFor("inherit_attribute_per") + hCaster.GetTalentValue("special_bonus_unique_lone_druid_custom_7")
@@ -173,7 +173,7 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BASE)
-    EOM_GetModifierBaseStats_Agility(params: IModifierTable) {
+    CC_GetModifierBaseStats_Agility(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             let inherit_attribute_per = this.GetSpecialValueFor("inherit_attribute_per") + hCaster.GetTalentValue("special_bonus_unique_lone_druid_custom_7")
@@ -181,7 +181,7 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BASE)
-    EOM_GetModifierBaseStats_Intellect(params: IModifierTable) {
+    CC_GetModifierBaseStats_Intellect(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         if (GameFunc.IsValid(hCaster)) {
             let inherit_attribute_per = this.GetSpecialValueFor("inherit_attribute_per") + hCaster.GetTalentValue("special_bonus_unique_lone_druid_custom_7")
@@ -189,7 +189,7 @@ export class modifier_lone_druid_2_buff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
-    EOM_GetModifierHealthBonus(params: IModifierTable) {
+    CC_GetModifierHealthBonus(params: IModifierTable) {
         return this.GetSpecialValueFor("bear_hp") - 1000 //  NOTE.1000是小熊的kv血量
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_QUALIFICATION_CHANGED)

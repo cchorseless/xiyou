@@ -23,14 +23,13 @@ export module TimeUtils {
             this.isIgnorePauseTime = _isIgnorePauseTime;
             this.mRunTime = 0;
             this.mEndCallBack!.once = false;
-            if (this.mDelay == 0) {
-                this.mEndCallBack?.run();
+            if (this.mDelay <= 0 && this.mEndCallBack) {
+                this.mEndCallBack.run();
             }
         }
 
         //更新
-        public Update(interval: number): boolean {
-            let isPause = GameRules.GetGameFrameTime() == 0;
+        public Update(interval: number, isPause: boolean): boolean {
             if (!this.isIgnorePauseTime && isPause) {
                 return true;
             }
@@ -44,7 +43,8 @@ export module TimeUtils {
             this.mRunTime += deltaTime;
             let isFinish = this.mRunTime >= this.mDelay;
             if (isFinish) {
-                const nextDelay = (this.mEndCallBack?.run() || -1);
+                let nextDelay = this.mEndCallBack!.run();
+                if (!nextDelay) { nextDelay = -1 }
                 this.mDelay = Math.floor(nextDelay * 1000);
                 this.mRunTime = 0;
                 if (this.mDelay <= 0) {
@@ -70,7 +70,7 @@ export module TimeUtils {
             this.mEndCallBack!.recover();
             this.mEndCallBack = null;
             this.mRunTime = 0;
-            TimerManage.GetInstance().Clear(this);
+            GTimerHelper.Clear(this);
         }
     }
 
@@ -147,13 +147,13 @@ export module TimeUtils {
 
         //尝试从空闲池中取一个TimerTask
         GetTimerTask() {
-            let data = null;
-            if (this.mNotUseTimerTasks.length == 0) {
-                data = new TimerTask();
-            } else {
-                data = this.mNotUseTimerTasks[0];
-                this.mNotUseTimerTasks.shift();
-            }
+            // let data = this.mNotUseTimerTasks.pop() || new TimerTask();
+            let data = new TimerTask();
+            // if (this.mNotUseTimerTasks.length == 0) {
+
+            // } else {
+            //     data = this.mNotUseTimerTasks.pop();
+            // }
             this.mUseTimerTasks.push(data);
             data.IsInPool = false;
             return data;
@@ -207,7 +207,7 @@ export module TimeUtils {
             if (index > -1) {
                 this.mUseTimerTasks.splice(index, 1);
                 data.IsInPool = true;
-                this.mNotUseTimerTasks.push(data);
+                // this.mNotUseTimerTasks.push(data);
             }
         }
         public ClearAll(bindObj: any) {
@@ -221,10 +221,13 @@ export module TimeUtils {
             });
         }
         public Update(interval: number) {
-            for (let i = 0; i < this.mUseTimerTasks.length; ++i) {
-                if (!this.mUseTimerTasks[i].Update(interval)) {
+            let isPause = GameRules.GetGameFrameTime() == 0;
+            for (let i = 0, len = this.mUseTimerTasks.length; i < len; i++) {
+                if (!this.mUseTimerTasks[i].Update(interval, isPause)) {
                     //没更新成功，mUseTimerTasks长度减1，所以需要--i
-                    --i;
+                    // hander 也可能往里面加计时器，所以需要重新计算长度
+                    len = this.mUseTimerTasks.length;
+                    i--;
                 }
             }
         }

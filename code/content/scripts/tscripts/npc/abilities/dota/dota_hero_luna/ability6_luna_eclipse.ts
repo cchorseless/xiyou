@@ -83,8 +83,8 @@ export class modifier_luna_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.shard_interval = this.GetSpecialValueFor("duration") + GameRules.GetGameTime()
             this.ai_interval = GameSetting.AI_TIMER_TICK_TIME_HERO + GameRules.GetGameTime()
@@ -171,8 +171,8 @@ export class modifier_luna_6_thinker extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let extra_beams = this.GetCasterPlus().HasTalent("special_bonus_unique_luna_custom_4") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_luna_custom_4") || 0
         this.damage = this.GetSpecialValueFor("damage")
         this.beams = this.GetSpecialValueFor("beams") + extra_beams

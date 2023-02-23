@@ -69,8 +69,8 @@ export class modifier_t22_lava extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
         }
@@ -160,8 +160,8 @@ export class modifier_t22_lava_thinker extends BaseModifier_Plus {
     GetAura() {
         return "modifier_t22_lava_magic_resistance"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.death_count = 0
         // this.GetAbilityPlus().death_count = this.death_count
         let duration = this.duration
@@ -185,16 +185,16 @@ export class modifier_t22_lava_thinker extends BaseModifier_Plus {
         }
     }
 
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.duration = this.GetSpecialValueFor("duration")
         this.kill_damage_per_second = this.GetSpecialValueFor("kill_damage_per_second")
         this.damage_per_second = this.GetSpecialValueFor("damage_per_second")
         this.damage_interval = this.GetSpecialValueFor("damage_interval")
         this.aoe_radius = this.GetSpecialValueFor("aoe_radius")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }
@@ -220,7 +220,7 @@ export class modifier_t22_lava_thinker extends BaseModifier_Plus {
                     damage: fDamage,
                     damage_type: hAbility.GetAbilityDamageType(),
                     ability: hAbility,
-                    eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
                 }
                 BattleHelper.GoApplyDamage(tDamageTable)
 
@@ -296,15 +296,15 @@ export class modifier_t22_lava_magic_resistance extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingMagicalDamagePercentage(params: IModifierTable) {
+    CC_GetModifierIncomingMagicalDamagePercentage(params: IModifierTable) {
         return this.On_Tooltip()
     }
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_t22_lava_particle_ogre_magi_multicast extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({

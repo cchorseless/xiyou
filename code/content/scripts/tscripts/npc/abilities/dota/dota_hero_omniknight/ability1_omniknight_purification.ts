@@ -173,8 +173,8 @@ export class modifier_omniknight_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -264,8 +264,8 @@ export class modifier_omniknight_1_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.value = this.GetSpecialValueFor("value")
@@ -280,8 +280,8 @@ export class modifier_omniknight_1_buff extends BaseModifier_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.value = this.GetSpecialValueFor("value")
@@ -330,8 +330,8 @@ export class modifier_omniknight_1_self_animation extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_omniknight_1_particle_start extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let radius = this.GetSpecialValueFor("radius")
         if (IsClient()) {
             let hTarget = this.GetCasterPlus()
@@ -351,8 +351,8 @@ export class modifier_omniknight_1_particle_start extends modifier_particle {
 // 特效
 @registerModifier()
 export class modifier_omniknight_1_particle_cast extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hTarget = this.GetCasterPlus()
             let hCaster = this.GetParentPlus()

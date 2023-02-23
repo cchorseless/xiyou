@@ -162,7 +162,7 @@ export class modifier_enchantress_6_debuff extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (!GameFunc.IsValid(hCaster)) {
@@ -180,7 +180,7 @@ export class modifier_enchantress_6_debuff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PURE_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingPureDamagePercentage(params: IModifierTable) {
+    CC_GetModifierIncomingPureDamagePercentage(params: IModifierTable) {
         return this.tooltip()
     }
 

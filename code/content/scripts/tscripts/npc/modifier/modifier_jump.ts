@@ -49,8 +49,8 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let npc = this.GetParentPlus();
             npc.RemoveHorizontalMotionController(this);
@@ -76,7 +76,7 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OVERRIDE_ANIMATION)
-    g_OverrideAnimation() {
+    CC_OverrideAnimation() {
         return this.animation || GameActivity_t.ACT_DOTA_FLAIL;
     }
 

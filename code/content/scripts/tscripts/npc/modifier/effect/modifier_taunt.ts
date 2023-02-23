@@ -37,8 +37,8 @@ export class modifier_taunt extends BaseModifier_Plus {
         }
     }
 
-    public OnDestroy(): void {
-        super.OnDestroy();
+    public BeDestroy(): void {
+
         this.TauntUnit = null;
     }
 

@@ -57,8 +57,8 @@ export class modifier_leshrac_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             if (hParent.IsIllusion()) {

@@ -190,8 +190,8 @@ export class modifier_spectre_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -294,14 +294,14 @@ export class modifier_spectre_1_path_thinker_aura extends BaseModifier_Plus {
     GetAuraSearchFlags() {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.tHashtable = HashTableHelper.GetHashtableByIndex(params.hashtable_index)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }
@@ -331,8 +331,8 @@ export class modifier_spectre_1_path_debuff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.tHashtable = HashTableHelper.GetHashtableByIndex(params.hashtable_index);
             (this.GetAbilityPlus() as ability1_spectre_spectral_dagger).AddShadow(this.tHashtable, this.GetParentPlus().GetAbsOrigin(), this.tHashtable.dagger_path_duration)
@@ -406,7 +406,7 @@ export class modifier_spectre_1_debuff extends BaseModifier_Plus {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PURE_DAMAGE_PERCENTAGE)
-    g_INCOMING_PURE_DAMAGE_PERCENTAGE() {
+    CC_INCOMING_PURE_DAMAGE_PERCENTAGE() {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_spectre_custom_7")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)

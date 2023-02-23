@@ -103,8 +103,8 @@ export class modifier_razor_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -167,8 +167,8 @@ export class modifier_razor_2_link extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             let iMaxDistance = params.iMaxDistance
             let fDamageTick = params.fDamageTick
@@ -189,8 +189,8 @@ export class modifier_razor_2_link extends BaseModifier_Plus {
             EmitSoundOn("Ability.static.loop", this.GetParentPlus())
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.StartIntervalThink(-1)
         } else {
@@ -238,7 +238,7 @@ export class modifier_razor_2_debuff extends BaseModifier_Plus {
         return false
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_SHOCK_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingShockDamagePercentage() {
+    CC_GetModifierIncomingShockDamagePercentage() {
         return this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)

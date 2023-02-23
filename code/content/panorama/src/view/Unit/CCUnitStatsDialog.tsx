@@ -164,7 +164,7 @@ export class CCUnitStatsDialog extends CCPanel<ICCUnitStatsDialog> {
         const pure_damage_percent = FuncHelper.Round(fPureDamagePercent, 2);
         // 攻击距离
         let fAttackRange = Entities.GetAttackRange(iLocalPortraitUnit);
-        let fBaseAttackRange = (tData && tData.AttackRange) ? FuncHelper.ToFloat(tData.AttackRange) : 0;
+        let fBaseAttackRange = (tData && tData.AttackRange) ? FuncHelper.ToFloat(tData.AttackRange as string) : 0;
         let fBonusAttackRange = fAttackRange - fBaseAttackRange;
         let sBonusAttackRange = FuncHelper.SignNumber(fBonusAttackRange);
         const base_attack_range = fBaseAttackRange;

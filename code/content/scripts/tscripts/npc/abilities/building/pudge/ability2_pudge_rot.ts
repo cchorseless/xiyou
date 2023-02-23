@@ -92,8 +92,8 @@ export class modifier_pudge_2_buff extends BaseModifier_Plus {
     GetAuraRadius() {
         return this.GetSpecialValueFor("radius")
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -133,8 +133,8 @@ export class modifier_pudge_2_buff extends BaseModifier_Plus {
         }
     }
 
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -187,7 +187,7 @@ export class modifier_pudge_2_buff extends BaseModifier_Plus {
         return -this.reduce_move_speed_pct
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_PERCENTAGE)
-    EOM_GetModifierMagicalArmorPercentage() {
+    CC_GetModifierMagicalArmorPercentage() {
         if (GameFunc.IsValid(this.GetCasterPlus())) {
             return -this.GetCasterPlus().GetTalentValue("special_bonus_unique_pudge_custom_7")
         }

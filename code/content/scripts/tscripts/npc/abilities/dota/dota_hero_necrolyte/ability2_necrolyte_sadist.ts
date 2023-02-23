@@ -66,8 +66,8 @@ export class modifier_necrolyte_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -154,8 +154,8 @@ export class modifier_necrolyte_2_slow_aura extends BaseModifier_Plus {
     GetAura() {
         return "modifier_necrolyte_2_slow_debuff"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         this.radius = this.GetSpecialValueFor("radius")
         this.bonus_health_mana = this.GetSpecialValueFor("bonus_health_mana")

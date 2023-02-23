@@ -113,8 +113,8 @@ export class modifier_bloodseeker_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -186,8 +186,8 @@ export class modifier_bloodseeker_2_silence extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
@@ -234,7 +234,7 @@ export class modifier_bloodseeker_2_bleed_damage_amplify extends BaseModifier_Pl
         this.bleed_amplify_damage_pct = this.GetSpecialValueFor("bleed_amplify_damage_pct")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_BLEED_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingBleedDamagePercentage() {
+    CC_GetModifierIncomingBleedDamagePercentage() {
         return this.bleed_amplify_damage_pct
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)

@@ -59,8 +59,8 @@ export class modifier_t29_permanent_immolation extends BaseModifier_Plus {
     GetAuraSearchFlags() {
         return DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.radius = this.GetSpecialValueFor("radius")
         if (IsClient()) {
             this.iParticleID = ResHelper.CreateParticle({
@@ -74,8 +74,8 @@ export class modifier_t29_permanent_immolation extends BaseModifier_Plus {
             this.AddParticle(this.iParticleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.radius = this.GetSpecialValueFor("radius")
         if (IsClient()) {
             if (this.iParticleID != null) {
@@ -108,8 +108,8 @@ export class modifier_t29_permanent_immolation_debuff extends BaseModifier_Plus 
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.tick_interval = this.GetSpecialValueFor("tick_interval")
         this.mana_damage_per_second = this.GetSpecialValueFor("mana_damage_per_second")
         if (IsServer()) {
@@ -129,8 +129,8 @@ export class modifier_t29_permanent_immolation_debuff extends BaseModifier_Plus 
             this.StartIntervalThink(this.tick_interval)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.tick_interval = this.GetSpecialValueFor("tick_interval")
         this.mana_damage_per_second = this.GetSpecialValueFor("mana_damage_per_second")
         if (IsServer()) {

@@ -95,8 +95,8 @@ export class modifier_night_stalker_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -192,8 +192,8 @@ export class modifier_night_stalker_6_buff extends BaseModifier_Plus {
     GetAura() {
         return "modifier_night_stalker_6_night"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.bHasScepter = hCaster.HasScepter()
@@ -247,8 +247,8 @@ export class modifier_night_stalker_6_buff extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetParentPlus()
             if (!GameFunc.IsValid(hCaster)) {

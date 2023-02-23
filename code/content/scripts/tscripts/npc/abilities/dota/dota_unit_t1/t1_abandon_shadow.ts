@@ -26,8 +26,8 @@ export class t1_abandon_shadow extends BaseAbility_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_t1_abandon_shadow_particle extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/towers/abandon_shadow.vpcf",

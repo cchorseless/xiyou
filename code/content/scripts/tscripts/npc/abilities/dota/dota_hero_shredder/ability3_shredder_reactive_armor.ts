@@ -82,8 +82,8 @@ export class modifier_shredder_3 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -174,8 +174,8 @@ export class modifier_shredder_3_link_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -205,25 +205,25 @@ export class modifier_shredder_3_link_buff extends BaseModifier_Plus {
         return this.GetCasterPlus().GetTalentValue("special_bonus_unique_shredder_custom_7")
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
-    EOM_GetModifierSpellCriticalStrike(params: IModifierTable) {
+    CC_GetModifierSpellCriticalStrike(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let buff = modifier_shredder_2_buff.findIn(hCaster)
         if (GameFunc.IsValid(hCaster) && GameFunc.IsValid(buff)) {
             this.bonus_spell_crit_chance = (buff.bonus_spell_crit_chance || 0) * this.inherit_crit_spell_percent * 0.01
             this.base_spell_crit_damage = buff.base_spell_crit_damage || 0
             this.SetStackCount(buff.GetStackCount())
-            return buff.EOM_GetModifierSpellCriticalStrike(params)
+            return buff.CC_GetModifierSpellCriticalStrike(params)
         }
         this.SetStackCount(0)
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
-    EOM_GetModifierSpellCriticalStrikeDamage(params: IModifierTable) {
+    CC_GetModifierSpellCriticalStrikeDamage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let buff = modifier_shredder_2_buff.findIn(hCaster)
         if (GameFunc.IsValid(hCaster) && GameFunc.IsValid(buff)) {
             this.bonus_spell_crit_damage = (buff.bonus_spell_crit_damage || 0) * this.inherit_crit_spell_percent * 0.01
             this.SetStackCount(buff.GetStackCount())
-            return buff.EOM_GetModifierSpellCriticalStrikeDamage(params)
+            return buff.CC_GetModifierSpellCriticalStrikeDamage(params)
         }
         this.SetStackCount(0)
     }

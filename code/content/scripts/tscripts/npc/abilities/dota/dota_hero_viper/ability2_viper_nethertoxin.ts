@@ -131,8 +131,8 @@ export class modifier_viper_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -185,7 +185,7 @@ export class modifier_viper_2 extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE)
-    EOM_GetModifierOutGoingPoisonCountPercentage() {
+    CC_GetModifierOutGoingPoisonCountPercentage() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.poison_stack_pct
         }
@@ -221,8 +221,8 @@ export class modifier_viper_2_thinker extends BaseModifier_Plus {
         return DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC
     }
 
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
@@ -263,8 +263,8 @@ export class modifier_viper_2_debuff extends BaseModifier_Plus {
     IsPurgable() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
@@ -320,7 +320,7 @@ export class modifier_viper_2_debuff extends BaseModifier_Plus {
 
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingPoisonDamagePercentage() {
+    CC_GetModifierIncomingPoisonDamagePercentage() {
         if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.poison_percent + this.shard_incoming_poison_damage_pct
         }
@@ -355,8 +355,8 @@ export class modifier_viper_2_talent_root extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let info: ResHelper.ParticleInfo = {
                 resPath: "particles/particle_sr/viper/viper_2_root.vpcf",

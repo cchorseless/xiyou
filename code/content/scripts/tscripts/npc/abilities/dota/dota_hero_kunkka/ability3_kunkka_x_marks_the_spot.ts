@@ -95,8 +95,8 @@ export class modifier_kunkka_3 extends BaseModifier_Plus {
     DestroyOnExpire() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.records = []
             this.StartIntervalThink(0)
@@ -111,8 +111,8 @@ export class modifier_kunkka_3 extends BaseModifier_Plus {
         this.base_attack_bonus = this.GetSpecialValueFor("base_attack_bonus")
         this.cooldown = this.GetSpecialValueFor("cooldown")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (GameFunc.IsValid(this.hBuffPtcl)) {
             this.hBuffPtcl.Destroy()
         }
@@ -177,7 +177,7 @@ export class modifier_kunkka_3 extends BaseModifier_Plus {
                             damage: params.original_damage * this.cleave_percent * 0.01,
                             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
                             damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_USE_COMBAT_PROFICIENCY,
-                            eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                            eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                         })
 
                         n = n + 1
@@ -271,8 +271,8 @@ export class modifier_kunkka_3_tide extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.records = []
         }
@@ -358,7 +358,7 @@ export class modifier_kunkka_3_tide extends BaseModifier_Plus {
                             damage: damage,
                             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
                             damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_USE_COMBAT_PROFICIENCY,
-                            eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_NO_SPELL_CRIT,
+                            eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_CLEAVE + BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_SPELL_CRIT,
                         })
 
                         n = n + 1
@@ -373,7 +373,7 @@ export class modifier_kunkka_3_tide extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: IModifierTable) {
+    CC_GetModifierCriticalStrike(params: IModifierTable) {
         if (this.records.indexOf(params.record) != modifier_kunkka_3.GetStackIn(this.GetCasterPlus())) {
             if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
                 return this.shard_tide_damage_crit
@@ -513,16 +513,16 @@ export class modifier_kunkka_3_talent extends BaseModifier_Plus {
             }
         }
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.max_charge = 1
         this.interval = this.GetCasterPlus().GetTalentValue("special_bonus_unique_kunkka_custom_8")
         if (IsServer()) {
             this.Init()
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         this.max_charge = 1
         this.interval = this.GetCasterPlus().GetTalentValue("special_bonus_unique_kunkka_custom_8")
         if (IsServer()) {
@@ -546,8 +546,8 @@ export class modifier_kunkka_3_talent extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_kunkka_3_particle_weapon extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let caster = this.GetCasterPlus()
             let particleID = ResHelper.CreateParticle({

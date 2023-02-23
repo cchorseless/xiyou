@@ -79,8 +79,8 @@ export class modifier_lycan_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.bonus_attack_range = this.GetSpecialValueFor("bonus_attack_range")
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
@@ -154,8 +154,8 @@ export class modifier_lycan_6_transform extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
             let iParticleID = ResHelper.CreateParticle({
@@ -242,8 +242,8 @@ export class modifier_lycan_6_form extends BaseModifier_Plus {
     GetAura() {
         return "modifier_lycan_6_aura"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let extra_bonus_health_damage = hCaster.HasTalent("special_bonus_unique_lycan_custom_5") && hCaster.GetTalentValue("special_bonus_unique_lycan_custom_5") || 0
@@ -260,8 +260,8 @@ export class modifier_lycan_6_form extends BaseModifier_Plus {
             }
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let extra_bonus_health_damage = hCaster.HasTalent("special_bonus_unique_lycan_custom_5") && hCaster.GetTalentValue("special_bonus_unique_lycan_custom_5") || 0
@@ -288,8 +288,8 @@ export class modifier_lycan_6_form extends BaseModifier_Plus {
             this.SetStackCount(hParent.GetMaxHealth() * this.bonus_health_damage * 0.01)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         let hParent = this.GetParentPlus()
         if (IsServer()) {
             let modifier_lycan1 = modifier_lycan_1.findIn(hParent)
@@ -377,7 +377,7 @@ export class modifier_lycan_6_aura extends BaseModifier_Plus {
         return modifier_lycan_6_form.GetStackIn(this.GetCasterPlus())
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
-    EOM_GetModifierCriticalStrike(params: IModifierTable) {
+    CC_GetModifierCriticalStrike(params: IModifierTable) {
         if (params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             let hCaster = this.GetCasterPlus()
             let extra_crit_chance = (GameFunc.IsValid(hCaster) && hCaster.HasTalent("special_bonus_unique_lycan_custom_7")) && hCaster.GetTalentValue("special_bonus_unique_lycan_custom_7") || 0
@@ -404,8 +404,8 @@ export class modifier_lycan_6_aura extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_lycan_6_particle_buff extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hParent = this.GetParentPlus()
             let iParticleID = ResHelper.CreateParticle({

@@ -57,8 +57,8 @@ export class modifier_t32_midnight_pulse extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
         }
@@ -137,8 +137,8 @@ export class modifier_t32_midnight_pulse_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.base_damage = this.GetSpecialValueFor("base_damage")
         this.intellect_damage_factor = this.GetSpecialValueFor("intellect_damage_factor")
         this.damage_percent = this.GetSpecialValueFor("damage_percent")
@@ -213,8 +213,8 @@ export class modifier_t32_midnight_pulse_thinker extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             modifier_t32_midnight_pulse_bound.remove(this.GetParentPlus());
             UTIL_Remove(this.GetParentPlus())
@@ -301,8 +301,8 @@ export class modifier_t32_midnight_pulse_aura extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.radius = this.GetSpecialValueFor("radius")
         this.vPosition = this.GetCasterPlus().GetAbsOrigin()
         if (IsClient()) {

@@ -91,8 +91,8 @@ export class modifier_lina_3_fiery_soul extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         this.chance_factor = this.GetSpecialValueFor("chance_factor")
         this.fiery_soul_max_stacks = this.GetSpecialValueFor("fiery_soul_max_stacks") + hParent.GetTalentValue("special_bonus_unique_lina_custom_7")
@@ -115,8 +115,8 @@ export class modifier_lina_3_fiery_soul extends BaseModifier_Plus {
             this.AddParticle(this.particleID, false, false, -1, false, false)
         }
     }
-    OnRefresh(params: IModifierTable) {
-        super.OnRefresh(params);
+    BeRefresh(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         this.chance_factor = this.GetSpecialValueFor("chance_factor")
         this.fiery_soul_max_stacks = this.GetSpecialValueFor("fiery_soul_max_stacks") + hParent.GetTalentValue("special_bonus_unique_lina_custom_7")
@@ -149,14 +149,14 @@ export class modifier_lina_3_fiery_soul extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
-    EOM_GetModifierMaximumAttackSpeedBonus(params: IModifierTable) {
+    CC_GetModifierMaximumAttackSpeedBonus(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         if (this.GetStackCount() >= this.fiery_soul_max_stacks && hParent.HasScepter()) {
             return this.max_attack_speed_scepter
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    EOM_GetModifierSpellAmplifyBonus(params: IModifierTable) {
+    CC_GetModifierSpellAmplifyBonus(params: IModifierTable) {
         return this.fiery_soul_magic_bonus * this.GetStackCount()
     }
 }

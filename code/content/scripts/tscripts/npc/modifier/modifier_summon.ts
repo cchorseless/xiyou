@@ -42,7 +42,7 @@ export class modifier_summon extends BaseModifier_Plus {
     }
 
     public OnDestroy(): void {
-        super.OnDestroy();
+
     }
 }
 

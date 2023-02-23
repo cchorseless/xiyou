@@ -124,8 +124,8 @@ export class modifier_centaur_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -218,19 +218,19 @@ export class modifier_centaur_2_shard_buff extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
-    EOM_GetModifierStats_Strength_Percentage() {
+    CC_GetModifierStats_Strength_Percentage() {
         return this.str_percent * this.GetStackCount()
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
-        return this.EOM_GetModifierStats_Strength_Percentage()
+    CC_tooltip() {
+        return this.CC_GetModifierStats_Strength_Percentage()
     }
 }
 // 特效
 @registerModifier()
 export class modifier_centaur_2_particle_pre extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
@@ -250,8 +250,8 @@ export class modifier_centaur_2_particle_pre extends modifier_particle {
 // 特效
 @registerModifier()
 export class modifier_centaur_2_particle_start extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let radius = this.GetSpecialValueFor("radius")
         if (IsClient()) {
             let target = this.GetCasterPlus()

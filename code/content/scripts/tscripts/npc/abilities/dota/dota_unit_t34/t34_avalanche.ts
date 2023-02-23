@@ -68,8 +68,8 @@ export class modifier_t34_avalanche extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
         }
@@ -166,8 +166,8 @@ export class modifier_t34_avalanche_stone extends BaseModifier_Plus {
     GetAura() {
         return "modifier_t34_avalanche_rooted"
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.obstacle_radius = this.GetSpecialValueFor("obstacle_radius")
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
@@ -181,8 +181,8 @@ export class modifier_t34_avalanche_stone extends BaseModifier_Plus {
             this.AddParticle(iParticleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             EmitSoundOnLocationWithCaster(this.GetParentPlus().GetAbsOrigin(), "Hero_EarthShaker.FissureDestroy", this.GetCasterPlus())
             UTIL_Remove(this.GetParentPlus())

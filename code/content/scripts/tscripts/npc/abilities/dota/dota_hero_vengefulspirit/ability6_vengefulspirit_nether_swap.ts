@@ -128,8 +128,8 @@ export class modifier_vengefulspirit_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -211,8 +211,8 @@ export class modifier_vengefulspirit_6_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.bonus_damage_percent = this.GetSpecialValueFor("bonus_damage_percent")
@@ -259,8 +259,8 @@ export class modifier_vengefulspirit_6_buff extends BaseModifier_Plus {
         this.bonus_damage_percent = this.GetSpecialValueFor("bonus_damage_percent")
         this.max_bonus_damage_percent = this.GetSpecialValueFor("max_bonus_damage_percent") + hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_8")
     }
-    OnDestroy() {
-        super.OnDestroy()
+    BeDestroy() {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {

@@ -94,8 +94,8 @@ export class modifier_earth_spirit_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -166,8 +166,8 @@ export class modifier_earth_spirit_6_magnetized extends BaseModifier_Plus {
         return false
     }
 
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.StartIntervalThink(0)
         if (IsServer()) {
             table.insert((this.GetCasterPlus() as IBaseNpc_Plus & { tMagnetized: Array<any> }).tMagnetized, this.GetParentPlus())
@@ -180,8 +180,8 @@ export class modifier_earth_spirit_6_magnetized extends BaseModifier_Plus {
         this.shard_all_attribute_damage = this.GetSpecialValueFor("shard_all_attribute_damage")
         this.damage_pct_perS = this.GetSpecialValueFor("damage_pct_perS")
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { tMagnetized: Array<any> }
             if (GameFunc.IsValid(hCaster)) {
@@ -289,8 +289,8 @@ export class modifier_earth_spirit_6_enhanced_aura extends BaseModifier_Plus {
     GetAuraDuration() {
         return this.duration
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         //   做一个特效标识光环范围
         if (IsClient()) {
             this.StartIntervalThink(0)
@@ -326,8 +326,8 @@ export class modifier_earth_spirit_6_enhanced_aura extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_earth_spirit_6_cast_particle extends modifier_particle_thinker {
     radius: number;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()

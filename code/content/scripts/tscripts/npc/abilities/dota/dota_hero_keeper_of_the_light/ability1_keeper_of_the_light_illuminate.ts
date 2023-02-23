@@ -126,8 +126,8 @@ export class modifier_keeper_of_the_light_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.kill_stack_creep = this.GetSpecialValueFor("kill_stack_creep")
         this.kill_stack_hero = this.GetSpecialValueFor("kill_stack_hero")
         if (IsServer()) {
@@ -233,7 +233,7 @@ export class modifier_keeper_of_the_light_1 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
-    tooltip() {
+    CC_tooltip() {
         return this.GetStackCount()
     }
 }
@@ -272,8 +272,8 @@ export class modifier_keeper_of_the_light_1_thinker extends BaseModifier_Plus {
     DestroyOnExpire() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.radius = this.GetSpecialValueFor("radius")
@@ -426,8 +426,8 @@ export class modifier_keeper_of_the_light_1_thinker extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_keeper_of_the_light_1_particle_mark extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let hCaster = this.GetParentPlus()
             let hParent = this.GetCasterPlus()

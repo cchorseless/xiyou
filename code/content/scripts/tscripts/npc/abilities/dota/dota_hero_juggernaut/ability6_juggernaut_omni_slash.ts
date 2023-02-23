@@ -107,8 +107,8 @@ export class modifier_juggernaut_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -209,8 +209,8 @@ export class modifier_juggernaut_6_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage")
         this.omni_slash_radius = this.GetSpecialValueFor("omni_slash_radius")
@@ -277,8 +277,8 @@ export class modifier_juggernaut_6_thinker extends BaseModifier_Plus {
             this.AddParticle(particleID, false, true, 10, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             modifier_juggernaut_6_delay_remove.apply(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), { duration: 0.5 })
         }
@@ -394,8 +394,8 @@ export class modifier_juggernaut_6_delay_remove extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }
@@ -415,8 +415,8 @@ export class modifier_juggernaut_6_delay_remove extends BaseModifier_Plus {
 // // // // // // // // // // // // // // // // // // // // //
 @registerModifier()
 export class modifier_juggernaut_6_particle_slash_tgt extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
@@ -437,8 +437,8 @@ export class modifier_juggernaut_6_particle_slash_tgt extends modifier_particle 
 // // // // // // // // // // // // // // // // // // // // // // // -
 @registerModifier()
 export class modifier_juggernaut_6_particle_omni_end extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()

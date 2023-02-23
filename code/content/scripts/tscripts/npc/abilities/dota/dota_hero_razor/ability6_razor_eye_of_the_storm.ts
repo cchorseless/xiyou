@@ -79,8 +79,8 @@ export class modifier_razor_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -149,8 +149,8 @@ export class modifier_razor_6_buff extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.iRadius = params.iRadius
             this.fDamageTick = params.fDamageTick
@@ -204,8 +204,8 @@ export class modifier_razor_6_buff extends BaseModifier_Plus {
         ParticleManager.ReleaseParticleIndex(iParticleID)
         EmitSoundOn("Hero_razor.lightning", hTarget)
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             this.StartIntervalThink(-1)
         } else {

@@ -110,8 +110,8 @@ export class modifier_tiny_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME)
         }
@@ -199,8 +199,8 @@ export class modifier_tiny_2_toss extends BaseModifierMotionBoth_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params)
+    BeCreated(params: IModifierTable) {
+
         this.toss_duration = this.GetSpecialValueFor("toss_duration")
         this.toss_radius = this.GetSpecialValueFor("toss_radius")
         this.toss_damage = this.GetSpecialValueFor("toss_damage")
@@ -229,8 +229,8 @@ export class modifier_tiny_2_toss extends BaseModifierMotionBoth_Plus {
             this.AddParticle(iPtclID, false, false, -1, false, this.ShouldUseOverheadOffset())
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus() as ability2_tiny_toss

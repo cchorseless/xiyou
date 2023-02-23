@@ -152,8 +152,8 @@ export class ability6_invoker_invoke extends BaseAbility_Plus {
 export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
     tAutoCastMemory: any;
     _tooltip: number;
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.tAutoCastMemory = {}
             this.StartIntervalThink(0)
@@ -223,7 +223,7 @@ export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
-    EOM_GetModifierStatusResistanceStacking() {
+    CC_GetModifierStatusResistanceStacking() {
         let hAbility = ability1_invoker_quas.findIn(this.GetCasterPlus())
         if (GameFunc.IsValid(hAbility)) {
             let mult = this.GetCasterPlus().GetTalentValue("special_bonus_unique_invoker_custom_3")
@@ -235,7 +235,7 @@ export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
-    EOM_GetModifierPercentageCooldown() {
+    CC_GetModifierPercentageCooldown() {
         let hAbility = ability2_invoker_wex.findIn(this.GetCasterPlus())
         if (GameFunc.IsValid(hAbility)) {
             let mult = this.GetCasterPlus().GetTalentValue("special_bonus_unique_invoker_custom_3")
@@ -247,7 +247,7 @@ export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
-    EOM_GetModifierSpellAmplifyBonus() {
+    CC_GetModifierSpellAmplifyBonus() {
         let hAbility = ability3_invoker_exort.findIn(this.GetCasterPlus())
         if (GameFunc.IsValid(hAbility)) {
             let mult = this.GetCasterPlus().GetTalentValue("special_bonus_unique_invoker_custom_3")
@@ -268,11 +268,11 @@ export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
         if (IsClient()) {
             let res = 0
             if (this._tooltip == 0) {
-                res = this.EOM_GetModifierStatusResistanceStacking()
+                res = this.CC_GetModifierStatusResistanceStacking()
             } else if (this._tooltip == 1) {
-                res = this.EOM_GetModifierPercentageCooldown()
+                res = this.CC_GetModifierPercentageCooldown()
             } else if (this._tooltip == 2) {
-                res = this.EOM_GetModifierSpellAmplifyBonus()
+                res = this.CC_GetModifierSpellAmplifyBonus()
             }
             this._tooltip = this._tooltip + 1
             if (this._tooltip >= 3) {

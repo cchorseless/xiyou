@@ -97,8 +97,8 @@ export class modifier_puck_6 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -175,8 +175,8 @@ export class modifier_puck_6_thinker extends BaseModifier_Plus {
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.attack_time = 5 /** GetAbilityNameLevelSpecialValueFor("special_bonus_unique_puck_custom_8", "value", 0)*/
         this.coil_break_radius = this.GetSpecialValueFor("coil_break_radius")
         if (IsServer()) {
@@ -199,8 +199,8 @@ export class modifier_puck_6_thinker extends BaseModifier_Plus {
             }
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
         }
@@ -248,8 +248,8 @@ export class modifier_puck_6_coiled extends BaseModifier_Plus {
     GetAttributes() {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         this.coil_break_radius = this.GetSpecialValueFor("coil_break_radius")
@@ -314,7 +314,7 @@ export class modifier_puck_6_coiled extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    EOM_GetModifierIncomingDamagePercentage(params: IModifierTable) {
+    CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (params.attacker == this.GetCasterPlus()) {
             return this.coil_incoming_damage
         }
@@ -362,7 +362,7 @@ export class modifier_puck_6_debuff extends BaseModifier_Plus {
         return GameActivity_t.ACT_DOTA_DISABLED
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
-    g_INCOMING_DAMAGE_PERCENTAGE() {
+    CC_INCOMING_DAMAGE_PERCENTAGE() {
         return this.coil_stun_incoming_damage
     }
 }

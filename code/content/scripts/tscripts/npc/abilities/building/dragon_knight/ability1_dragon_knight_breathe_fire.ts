@@ -143,8 +143,8 @@ export class modifier_dragon_knight_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -229,8 +229,8 @@ export class modifier_dragon_knight_1_thinker extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         this.burning_dps_percent = this.GetSpecialValueFor("burning_dps_percent")
         this.form_burning_dps_percent = this.GetSpecialValueFor("form_burning_dps_percent")
         this.burning_radius = this.GetSpecialValueFor("burning_radius")
@@ -260,8 +260,8 @@ export class modifier_dragon_knight_1_thinker extends BaseModifier_Plus {
             this.AddParticle(particleID, false, false, -1, false, false)
         }
     }
-    OnDestroy() {
-        super.OnDestroy();
+    BeDestroy() {
+
         if (IsServer()) {
             UTIL_Remove(this.GetParentPlus())
             let ability = this.GetAbilityPlus() as ability1_dragon_knight_breathe_fire
@@ -297,7 +297,7 @@ export class modifier_dragon_knight_1_thinker extends BaseModifier_Plus {
                     attacker: caster,
                     damage: damage * this.tick_time,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
-                    eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                    eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
                 }
                 BattleHelper.GoApplyDamage(tDamageTable)
             }
@@ -334,8 +334,8 @@ export class modifier_dragon_knight_1_burning extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(1)
         } else {
@@ -366,7 +366,7 @@ export class modifier_dragon_knight_1_burning extends BaseModifier_Plus {
                 attacker: caster,
                 damage: damage,
                 damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL,
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(tDamageTable)
         }
@@ -394,8 +394,8 @@ export class modifier_dragon_knight_1_slow extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/generic_gameplay/generic_slowed_cold.vpcf",
@@ -452,8 +452,8 @@ export class modifier_dragon_knight_1_reduction extends BaseModifier_Plus {
     ShouldUseOverheadOffset() {
         return true
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hParent = this.GetParentPlus()
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({

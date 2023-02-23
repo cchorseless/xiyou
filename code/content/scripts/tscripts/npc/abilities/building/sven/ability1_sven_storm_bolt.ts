@@ -158,8 +158,8 @@ export class modifier_sven_1 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.StartIntervalThink(GameSetting.AI_TIMER_TICK_TIME_HERO)
         }
@@ -214,8 +214,8 @@ export class modifier_sven_1 extends BaseModifier_Plus {
 // 特效
 @registerModifier()
 export class modifier_sven_1_particle_pre extends modifier_particle {
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsClient()) {
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_sven/sven_spell_storm_bolt_lightning.vpcf",

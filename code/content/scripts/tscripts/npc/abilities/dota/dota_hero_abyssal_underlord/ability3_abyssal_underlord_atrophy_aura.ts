@@ -109,8 +109,8 @@ export class modifier_abyssal_underlord_3_aura extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (hCaster.GetTeamNumber() == hParent.GetTeamNumber()) {

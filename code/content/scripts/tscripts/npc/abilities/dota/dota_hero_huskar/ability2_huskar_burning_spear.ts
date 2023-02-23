@@ -54,8 +54,8 @@ export class modifier_huskar_2 extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (IsServer()) {
             this.records = []
         }
@@ -197,8 +197,8 @@ export class modifier_huskar_2_counter extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false
     }
-    OnCreated(params: IModifierTable) {
-        super.OnCreated(params);
+    BeCreated(params: IModifierTable) {
+
         if (!IsServer()) {
             let iPtclID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_huskar/huskar_burning_spear_debuff.vpcf",
@@ -246,7 +246,7 @@ export class modifier_huskar_2_counter extends BaseModifier_Plus {
                 attacker: hCaster,
                 damage: this.base_damage + ((this.burn_damage * hCaster.GetMaxHealth() * health_cost) * this.GetStackCount() || 0),
                 damage_type: hAbility.GetAbilityDamageType(),
-                eom_flags: BattleHelper.enum_EOM_DAMAGE_FLAGS.EOM_DAMAGE_FLAG_DOT,
+                eom_flags: BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_DOT,
             }
             BattleHelper.GoApplyDamage(damage_table)
         }
