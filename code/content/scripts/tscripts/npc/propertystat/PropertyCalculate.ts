@@ -130,6 +130,7 @@ export module PropertyCalculate {
         for (let ModifierName in info) {
             let allM: Array<IModifier_Plus> = info[ModifierName];
             for (let m of allM) {
+                if (m.__destroyed) { continue; }
                 let _Property = m.__AllRegisterProperty
                 let _Function = m.__AllRegisterFunction
                 while (k.length > 0) {

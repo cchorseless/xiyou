@@ -25,20 +25,25 @@ export module AI_ability {
         return false;
     }
 
-    export function POSITION_if_enemy(ability: IBaseAbility_Plus, range: number) {
+    export function TARGET_if_enemy(ability: IBaseAbility_Plus, range: number, _filter: (enemy: IBaseNpc_Plus) => boolean) {
         let caster = ability.GetCasterPlus()
         let teamFilter = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY
         let typeFilter = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC
         let flagFilter = DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE
         let order = FindOrder.FIND_CLOSEST
-        let targets = AoiHelper.FindOneUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), range, null, teamFilter, typeFilter, flagFilter, order)
-        if (targets != null) {
-            ExecuteOrderFromTable({
-                UnitIndex: caster.entindex(),
-                OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET,
-                AbilityIndex: ability.entindex(),
-            })
+        let targets = AoiHelper.FindEntityInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), range, null, teamFilter, typeFilter, flagFilter, order)
+        for (let target of targets) {
+            if (_filter(target)) {
+                ExecuteOrderFromTable({
+                    UnitIndex: caster.entindex(),
+                    OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET,
+                    AbilityIndex: ability.entindex(),
+                    TargetIndex: target.entindex()
+                });
+                return true;
+            }
         }
+        return false;
     }
 
     /**

@@ -1,29 +1,68 @@
-import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 
+import { GameFunc } from "../../../GameFunc";
+import { ResHelper } from "../../../helper/ResHelper";
+import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
+import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
+
+function getOverChannelDamageIncrease(caster: IBaseNpc_Plus) {
+    if (caster.HasModifier("modifier_over_channel_handler")) {
+        let over_channel = caster.FindAbilityByName("imba_abaddon_over_channel");
+        if (over_channel) {
+            return over_channel.GetSpecialValueFor("extra_dmg") * (1 + caster.GetTalentValue("special_bonus_imba_abaddon_6"));
+        }
+    }
+    return 0;
+}
+function getOverChannelMistIncrease(caster: IBaseNpc_Plus) {
+    if (caster.HasModifier("modifier_over_channel_handler")) {
+        let over_channel = caster.FindAbilityByName("imba_abaddon_over_channel");
+        if (over_channel) {
+            let ability_level = over_channel.GetLevel() - 1;
+            return over_channel.GetSpecialValueFor("extra_mist_duration") * (1 + caster.GetTalentValue("special_bonus_imba_abaddon_6"));
+        }
+    }
+    return 0;
+}
+function getOverChannelShieldIncrease(caster: IBaseNpc_Plus) {
+    if (caster.HasModifier("modifier_over_channel_handler")) {
+        let over_channel = caster.FindAbilityByName("imba_abaddon_over_channel");
+        if (over_channel) {
+            let ability_level = over_channel.GetLevel() - 1;
+            return over_channel.GetSpecialValueFor("extra_dmg") * (1 + caster.GetTalentValue("special_bonus_imba_abaddon_6"));
+        }
+    }
+    return 0;
+}
+
+@registerAbility()
 export class imba_abaddon_death_coil extends BaseAbility_Plus {
-    public overchannel_damage_increase: any;
+    public overchannel_damage_increase: number;
     public overchannel_mist_increase: any;
-    public killed: any;
+    public killed: boolean;
     GetIntrinsicModifierName(): string {
         return "modifier_imba_mist_coil_passive";
     }
     IsHiddenWhenStolen(): boolean {
         return false;
     }
-    OnSpellStart( /** unit */  /** , special_cast */): void {
+    OnSpellStart() {
+        this._OnSpellStart(null, false);
+    }
+    _OnSpellStart(unit: IBaseNpc_Plus, special_cast: boolean): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let target = unit || this.GetCursorTarget();
             caster.EmitSound("Hero_Abaddon.DeathCoil.Cast");
             if (!special_cast) {
-                let responses = {
-                    1: "abaddon_abad_deathcoil_01",
-                    2: "abaddon_abad_deathcoil_02",
-                    3: "abaddon_abad_deathcoil_06",
-                    4: "abaddon_abad_deathcoil_08"
-                }
-                caster.EmitCasterSound("npc_dota_hero_abaddon", responses, 25, DOTA_CAST_SOUND_FLAG_NONE, 20, "coil");
+                let responses = [
+                    "abaddon_abad_deathcoil_01",
+                    "abaddon_abad_deathcoil_02",
+                    "abaddon_abad_deathcoil_06",
+                    "abaddon_abad_deathcoil_08"
+                ]
+                caster.EmitCasterSound(responses, 25, ResHelper.EDOTA_CAST_SOUND.FLAG_NONE, 20, "coil");
                 let health_cost = this.GetSpecialValue("self_damage");
                 if (getOverChannelDamageIncrease) {
                     ApplyDamage({
@@ -97,7 +136,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
                     damage_type: damage_type
                 });
                 if (caster.HasModifier(this.GetIntrinsicModifierName())) {
-                    caster.FindModifierByName(this.GetIntrinsicModifierName()).applied_damage = dealt_damage;
+                    caster.findBuff<modifier_imba_mist_coil_passive>(this.GetIntrinsicModifierName()).applied_damage = dealt_damage;
                 }
                 let curse_of_avernus = caster.findAbliityPlus<imba_abaddon_frostmourne>("imba_abaddon_frostmourne");
                 if (curse_of_avernus) {
@@ -110,8 +149,8 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
                 }
             } else {
                 let heal = (this.GetSpecialValue("heal_amount") + this.overchannel_damage_increase);
-                target.Heal(heal, caster);
-                target.AddNewModifier(caster, null, "modifier_imba_mist_coil_mist_ally", {
+                target.Heal(heal, this);
+                target.AddNewModifier(caster, this, "modifier_imba_mist_coil_mist_ally", {
                     duration: mist_duration
                 });
                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, heal, undefined);
@@ -121,24 +160,24 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
                 }
             }
             if (!special_cast && caster.HasModifier("modifier_over_channel_handler")) {
-                let over_channel_particle = ParticleManager.CreateParticle("particles/dev/library/base_dust_hit_detail.vpcf", ParticleAttachment_t.PATTACH_POINT, target);
+                let over_channel_particle = ResHelper.CreateParticleEx("particles/dev/library/base_dust_hit_detail.vpcf", ParticleAttachment_t.PATTACH_POINT, target);
                 ParticleManager.ReleaseParticleIndex(over_channel_particle);
-                over_channel_particle = ParticleManager.CreateParticle("particles/dev/library/base_dust_hit_smoke.vpcf", ParticleAttachment_t.PATTACH_POINT, target);
+                over_channel_particle = ResHelper.CreateParticleEx("particles/dev/library/base_dust_hit_smoke.vpcf", ParticleAttachment_t.PATTACH_POINT, target);
                 ParticleManager.ReleaseParticleIndex(over_channel_particle);
             }
             if (!special_cast && caster.GetName() == "npc_dota_hero_abaddon") {
-                Timers.CreateTimer(0.4, () => {
+                this.AddTimer(0.4, () => {
                     if (this.killed) {
-                        let responses = {
-                            1: "abaddon_abad_deathcoil_03",
-                            2: "abaddon_abad_deathcoil_07",
-                            3: "abaddon_abad_deathcoil_04",
-                            4: "abaddon_abad_deathcoil_05",
-                            5: "abaddon_abad_deathcoil_09",
-                            6: "abaddon_abad_deathcoil_10"
-                        }
-                        caster.EmitCasterSound("npc_dota_hero_abaddon", responses, 25, DOTA_CAST_SOUND_FLAG_BOTH_TEAMS, undefined, undefined);
-                        this.killed = undefined;
+                        let responses = [
+                            "abaddon_abad_deathcoil_03",
+                            "abaddon_abad_deathcoil_07",
+                            "abaddon_abad_deathcoil_04",
+                            "abaddon_abad_deathcoil_05",
+                            "abaddon_abad_deathcoil_09",
+                            "abaddon_abad_deathcoil_10"
+                        ];
+                        caster.EmitCasterSound(responses, 25, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS);
+                        this.killed = false;
                     }
                 });
             }
@@ -149,14 +188,16 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
             let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetCastRange(this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus()), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
             for (const [_, unit] of ipairs(units)) {
                 if (unit != this.GetCasterPlus()) {
-                    this.OnSpellStart(unit, true);
+                    this._OnSpellStart(unit, true);
                 }
             }
         }
     }
 }
+@registerModifier()
 export class modifier_imba_mist_coil_passive extends BaseModifier_Plus {
     public record: any;
+    public applied_damage: number = 0;
     IsDebuff(): boolean {
         return false;
     }
@@ -175,19 +216,20 @@ export class modifier_imba_mist_coil_passive extends BaseModifier_Plus {
     RemoveOnDeath(): boolean {
         return false;
     }
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         let decFuns = {
-            1: modifierfunction.MODIFIER_EVENT_ON_DEATH,
-            2: modifierfunction.MODIFIER_EVENT_ON_TAKEDAMAGE
+            1: Enum_MODIFIER_EVENT.ON_DEATH,
+            2: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         }
         return Object.values(decFuns);
-    }
-    OnDeath(keys: ModifierInstanceEvent): void {
+    } */
+    @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
+    CC_OnDeath(keys: ModifierInstanceEvent): void {
         if (this.applied_damage) {
             if (keys.attacker == this.GetParentPlus()) {
                 if (this.record) {
                     if (this.record == keys.record) {
-                        let ability = this.GetAbilityPlus();
+                        let ability = this.GetAbilityPlus<imba_abaddon_death_coil>();
                         if (ability) {
                             ability.killed = true;
                         }
@@ -196,7 +238,8 @@ export class modifier_imba_mist_coil_passive extends BaseModifier_Plus {
             }
         }
     }
-    OnTakeDamage(keys: ModifierInstanceEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (this.applied_damage) {
             if (keys.attacker == this.GetParentPlus()) {
                 if (keys.damage == this.applied_damage) {
@@ -206,8 +249,9 @@ export class modifier_imba_mist_coil_passive extends BaseModifier_Plus {
         }
     }
 }
+@registerModifier()
 export class modifier_imba_mist_coil_mist_ally extends BaseModifier_Plus {
-    public damage_heal_pct: any;
+    public damage_heal_pct: number;
     IsDebuff(): boolean {
         return false;
     }
@@ -220,33 +264,36 @@ export class modifier_imba_mist_coil_mist_ally extends BaseModifier_Plus {
     RemoveOnDeath(): boolean {
         return true;
     }
-    Init(keys: IModifierTable): void {
+    Init(keys: any): void {
         if (!this.GetAbilityPlus()) {
             this.Destroy();
             return;
         }
-        this.damage_heal_pct = this.GetAbilityPlus().GetSpecialValueFor("damage_heal_pct") / 100;
+        this.damage_heal_pct = this.GetSpecialValueFor("damage_heal_pct") / 100;
     }
+
     BeDestroy( /** keys */): void {
         if (!this.GetAbilityPlus()) {
             return;
         }
         if (IsServer() && this.GetParentPlus().IsAlive()) {
-            this.GetParentPlus().Heal(this.GetStackCount(), this.GetCasterPlus());
+            this.GetParentPlus().Heal(this.GetStackCount(), this.GetAbilityPlus());
             SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), this.GetStackCount(), undefined);
         }
     }
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: modifierfunction.MODIFIER_EVENT_ON_TAKEDAMAGE
+            1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         });
-    }
-    OnTakeDamage(keys: ModifierInstanceEvent): void {
+    } */
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (keys.unit == this.GetParentPlus()) {
             this.SetStackCount(this.GetStackCount() + math.floor(keys.damage * this.damage_heal_pct));
         }
     }
 }
+@registerAbility()
 export class imba_abaddon_aphotic_shield extends BaseAbility_Plus {
     IsHiddenWhenStolen(): boolean {
         return false;
@@ -256,16 +303,16 @@ export class imba_abaddon_aphotic_shield extends BaseAbility_Plus {
             let caster = this.GetCasterPlus();
             let target = this.GetCursorTarget();
             caster.EmitSound("Hero_Abaddon.AphoticShield.Cast");
-            // let responses = {
-            //     1: "abaddon_abad_aphoticshield_01",
-            //     2: "abaddon_abad_aphoticshield_02",
-            //     3: "abaddon_abad_aphoticshield_03",
-            //     4: "abaddon_abad_aphoticshield_04",
-            //     5: "abaddon_abad_aphoticshield_05",
-            //     6: "abaddon_abad_aphoticshield_06",
-            //     7: "abaddon_abad_aphoticshield_07"
-            // }
-            // caster.EmitCasterSound("npc_dota_hero_abaddon", responses, 50, DOTA_CAST_SOUND_FLAG_NONE, 20, "aphotic_shield");
+            let responses = [
+                "abaddon_abad_aphoticshield_01",
+                "abaddon_abad_aphoticshield_02",
+                "abaddon_abad_aphoticshield_03",
+                "abaddon_abad_aphoticshield_04",
+                "abaddon_abad_aphoticshield_05",
+                "abaddon_abad_aphoticshield_06",
+                "abaddon_abad_aphoticshield_07"
+            ];
+            caster.EmitCasterSound(responses, 50, ResHelper.EDOTA_CAST_SOUND.FLAG_NONE, 20, "aphotic_shield");
             let health_cost = getOverChannelDamageIncrease(caster);
             if (health_cost > 0) {
                 ApplyDamage({
@@ -281,18 +328,19 @@ export class imba_abaddon_aphotic_shield extends BaseAbility_Plus {
             let modifier_name_aphotic_shield = "modifier_imba_aphotic_shield_buff_block";
             target.RemoveModifierByName(modifier_name_aphotic_shield);
             let duration = this.GetSpecialValue("duration");
-            target.AddNewModifier(caster, null, modifier_name_aphotic_shield, {
+            target.AddNewModifier(caster, this, modifier_name_aphotic_shield, {
                 duration: duration
             });
         }
     }
 }
+@registerModifier()
 export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
     public shield_init_value: any;
     public shield_remaining: any;
     public target_current_health: any;
     public has_talent: any;
-    public damage_absorption_end: any;
+    public damage_absorption_end: number;
     public invulnerability_expired: any;
     IsHidden() {
         return false;
@@ -303,11 +351,11 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
     IsDebuff() {
         return false;
     }
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: modifierfunction.MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK
+            1: GPropertyConfig.EMODIFIER_PROPERTY.TOTAL_CONSTANT_BLOCK
         });
-    }
+    } */
     BeCreated(p_0: any,): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
@@ -325,7 +373,7 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
                 this.damage_absorption_end = GameRules.GetGameTime() + caster.GetTalentValue("special_bonus_imba_abaddon_3");
                 this.invulnerability_expired = false;
             }
-            let particle = ParticleManager.CreateParticle("particles/units/heroes/hero_abaddon/abaddon_aphotic_shield.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
+            let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_abaddon/abaddon_aphotic_shield.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
             let common_vector = Vector(shield_size, 0, shield_size);
             ParticleManager.SetParticleControl(particle, 1, common_vector);
             ParticleManager.SetParticleControl(particle, 2, common_vector);
@@ -334,10 +382,10 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
             ParticleManager.SetParticleControlEnt(particle, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, attach_hitloc, target_origin, true);
             this.AddParticle(particle, false, false, -1, false, false);
             if (caster.HasModifier("modifier_over_channel_handler")) {
-                let over_channel_particle = ParticleManager.CreateParticle("particles/econ/courier/courier_baekho/courier_baekho_ambient_vapor.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
+                let over_channel_particle = ResHelper.CreateParticleEx("particles/econ/courier/courier_baekho/courier_baekho_ambient_vapor.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
                 ParticleManager.SetParticleControlEnt(over_channel_particle, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, attach_hitloc, target_origin, true);
                 this.AddParticle(over_channel_particle, false, false, -1, false, false);
-                over_channel_particle = ParticleManager.CreateParticle("particles/econ/courier/courier_baekho/courier_baekho_ambient_swirl.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
+                over_channel_particle = ResHelper.CreateParticleEx("particles/econ/courier/courier_baekho/courier_baekho_ambient_swirl.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
                 ParticleManager.SetParticleControlEnt(over_channel_particle, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, attach_hitloc, target_origin, true);
                 this.AddParticle(over_channel_particle, false, false, -1, false, false);
             }
@@ -354,7 +402,7 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
             let explode_target_type = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC;
             let target_vector = target.GetAbsOrigin();
             target.EmitSound("Hero_Abaddon.AphoticShield.Destroy");
-            let particle = ParticleManager.CreateParticle("particles/units/heroes/hero_abaddon/abaddon_aphotic_shield_explosion.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
+            let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_abaddon/abaddon_aphotic_shield_explosion.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
             ParticleManager.SetParticleControl(particle, 0, target_vector);
             ParticleManager.ReleaseParticleIndex(particle);
             let units = FindUnitsInRadius(caster.GetTeamNumber(), target_vector, undefined, radius, explode_target_team, explode_target_type, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
@@ -387,14 +435,14 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
                                 duration: debuff_duration * (1 - unit.GetStatusResistance())
                             });
                         }
-                        particle = ParticleManager.CreateParticle("particles/units/heroes/hero_abaddon/abaddon_aphotic_shield_hit.vpcf", ParticleAttachment_t.PATTACH_POINT, unit);
+                        particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_abaddon/abaddon_aphotic_shield_hit.vpcf", ParticleAttachment_t.PATTACH_POINT, unit);
                         ParticleManager.SetParticleControlEnt(particle, 0, unit, ParticleAttachment_t.PATTACH_POINT, "attach_hitloc", unit.GetAbsOrigin(), true);
                         let hit_size = unit.GetModelRadius() * 0.3;
                         ParticleManager.SetParticleControl(particle, 1, Vector(hit_size, hit_size, hit_size));
                         ParticleManager.ReleaseParticleIndex(particle);
                     }
                 }
-                if (mist_coil_ability && CalculateDistance(target, unit) < mist_coil_range) {
+                if (mist_coil_ability && GameFunc.CalculateDistance(target, unit) < mist_coil_range) {
                     let info = {
                         Target: unit,
                         Source: target,
@@ -416,7 +464,8 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
             }
         }
     }
-    GetModifierTotal_ConstantBlock(kv: ModifierAttackEvent): number {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTAL_CONSTANT_BLOCK)
+    CC_GetModifierTotal_ConstantBlock(kv: ModifierAttackEvent): number {
         if (IsServer()) {
             let target = this.GetParentPlus();
             let original_shield_amount = this.shield_remaining;
@@ -447,11 +496,12 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
             }
         }
     }
-    ResetAndExtendBy(seconds) {
+    ResetAndExtendBy(seconds: number) {
         this.shield_remaining = this.shield_init_value;
         this.SetDuration(this.GetRemainingTime() + seconds, true);
     }
 }
+@registerAbility()
 export class imba_abaddon_frostmourne extends BaseAbility_Plus {
     public curse_of_avernus_target: any;
     GetIntrinsicModifierName(): string {
@@ -482,9 +532,11 @@ export class imba_abaddon_frostmourne extends BaseAbility_Plus {
         return this.GetCasterPlus().Script_GetAttackRange();
     }
 }
+@registerModifier()
 export class modifier_imba_curse_of_avernus_passive extends BaseModifier_Plus {
-    public caster: any;
-    public ability: any;
+    public caster: IBaseNpc_Plus;
+    public ability: imba_abaddon_frostmourne;
+    public damage: number = 0;
     IsHidden() {
         return true;
     }
@@ -519,17 +571,18 @@ export class modifier_imba_curse_of_avernus_passive extends BaseModifier_Plus {
         }
         return false;
     }
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: modifierfunction.MODIFIER_EVENT_ON_ATTACK,
-            2: modifierfunction.MODIFIER_EVENT_ON_ATTACK_LANDED,
-            3: modifierfunction.MODIFIER_EVENT_ON_ATTACK_FAIL,
-            4: modifierfunction.MODIFIER_PROPERTY_PROCATTACK_BONUS_DAMAGE_PHYSICAL,
-            5: modifierfunction.MODIFIER_EVENT_ON_ORDER
+            1: Enum_MODIFIER_EVENT.ON_ATTACK,
+            2: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
+            3: Enum_MODIFIER_EVENT.ON_ATTACK_FAIL,
+            4: GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL,
+            5: Enum_MODIFIER_EVENT.ON_ORDER
         }
         return Object.values(funcs);
-    }
-    OnAttack(kv: ModifierAttackEvent): void {
+    } */
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
+    CC_OnAttack(kv: ModifierAttackEvent): void {
         if (IsServer()) {
             if (!this.GetCasterPlus().PassivesDisabled()) {
                 let attacker = kv.attacker;
@@ -540,7 +593,7 @@ export class modifier_imba_curse_of_avernus_passive extends BaseModifier_Plus {
                             this.GetCasterPlus().RemoveModifierByName("modifier_imba_curse_of_avernus_buff_haste");
                         }
                         if (this.GetAbilityPlus()) {
-                            let slow_duration = this.GetAbilityPlus().GetSpecialValue("slow_duration");
+                            let slow_duration = this.GetSpecialValueFor("slow_duration");
                             target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_curse_of_avernus_debuff_counter", {
                                 duration: slow_duration * (1 - target.GetStatusResistance())
                             });
@@ -550,41 +603,46 @@ export class modifier_imba_curse_of_avernus_passive extends BaseModifier_Plus {
             }
         }
     }
-    OnOrder(kv: ModifierUnitEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
+    CC_OnOrder(kv: ModifierUnitEvent): void {
         let order_type = kv.order_type;
         if (order_type != dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_TARGET) {
             this.ability.curse_of_avernus_target = undefined;
         }
     }
-    OnAttackFail(kv: ModifierAttackEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_FAIL)
+    CC_OnAttackFail(kv: ModifierAttackEvent): void {
         if (this.GetParentPlus() == kv.attacker) {
             this.ability.curse_of_avernus_target = undefined;
         }
     }
-    OnAttackLanded(kv: ModifierAttackEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
+    CC_OnAttackLanded(kv: ModifierAttackEvent): void {
         if (this.GetParentPlus() == kv.attacker) {
             this.ability.curse_of_avernus_target = undefined;
         }
     }
-    GetModifierProcAttack_BonusDamage_Physical(kv: ModifierAttackEvent): number {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
+    CC_GetModifierProcAttack_BonusDamage_Physical(kv: ModifierAttackEvent): number {
         if (kv.attacker == this.GetCasterPlus() && this.ability.curse_of_avernus_target == kv.target) {
             return this.damage;
         }
         return 0;
     }
 }
+@registerModifier()
 export class modifier_imba_curse_of_avernus_debuff_counter extends BaseModifier_Plus {
     public has_talent: any;
-    public duration_extend: any;
+    public duration_extend: number;
     public hits: any;
-    public base_duration: any;
+    public base_duration: number;
     public pfx: any;
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: modifierfunction.MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
+            1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE
         }
         return Object.values(funcs);
-    }
+    } */
     BeCreated(kv: any): void {
         if (!IsServer()) {
             return;
@@ -607,16 +665,17 @@ export class modifier_imba_curse_of_avernus_debuff_counter extends BaseModifier_
                 duration: this.GetAbilityPlus().GetSpecialValue("curse_duration")
             });
             this.GetParentPlus().RemoveModifierByName("modifier_imba_curse_of_avernus_debuff_counter");
-            let responses = {
-                1: "abaddon_abad_frostmourne_01",
-                2: "abaddon_abad_frostmourne_02",
-                3: "abaddon_abad_frostmourne_03",
-                4: "abaddon_abad_frostmourne_04",
-                5: "abaddon_abad_frostmourne_05",
-                6: "abaddon_abad_frostmourne_06",
-                7: "abaddon_abad_frostmourne_06"
-            }
-            this.GetCasterPlus().EmitCasterSound("npc_dota_hero_abaddon", responses, 50, DOTA_CAST_SOUND_FLAG_NONE, 30, "curse_of_avernus");
+            let responses = [
+                "abaddon_abad_frostmourne_01",
+                "abaddon_abad_frostmourne_02",
+                "abaddon_abad_frostmourne_03",
+                "abaddon_abad_frostmourne_04",
+                "abaddon_abad_frostmourne_05",
+                "abaddon_abad_frostmourne_06",
+                "abaddon_abad_frostmourne_06",
+            ];
+
+            this.GetCasterPlus().EmitCasterSound(responses, 50, ResHelper.EDOTA_CAST_SOUND.FLAG_NONE, 30, "curse_of_avernus");
             this.GetCasterPlus().EmitSound("Hero_Abaddon.Curse.Proc");
         }
     }
@@ -625,7 +684,7 @@ export class modifier_imba_curse_of_avernus_debuff_counter extends BaseModifier_
             return;
         }
         if (!this.pfx) {
-            this.pfx = ParticleManager.CreateParticle("particles/units/heroes/hero_abaddon/abaddon_curse_counter_stack.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.GetParentPlus());
+            this.pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_abaddon/abaddon_curse_counter_stack.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.GetParentPlus());
         }
         ParticleManager.SetParticleControl(this.pfx, 1, Vector(0, this.GetStackCount(), 0));
     }
@@ -638,15 +697,17 @@ export class modifier_imba_curse_of_avernus_debuff_counter extends BaseModifier_
             ParticleManager.ReleaseParticleIndex(this.pfx);
         }
     }
-    GetModifierMoveSpeedBonus_Percentage(): number {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    CC_GetModifierMoveSpeedBonus_Percentage(): number {
         return this.GetAbilityPlus().GetSpecialValue("movement_speed") * (-1);
     }
 }
+@registerModifier()
 export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plus {
     public has_talent: any;
-    public duration_extend: any;
+    public duration_extend: number;
     public hits: any;
-    public base_duration: any;
+    public base_duration: number;
     public heal_convert: any;
     IsHidden() {
         return false;
@@ -663,16 +724,16 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
     GetEffectAttachType() {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
     }
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: modifierfunction.MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
-            2: modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
-            3: modifierfunction.MODIFIER_EVENT_ON_ATTACK,
-            4: modifierfunction.MODIFIER_EVENT_ON_ATTACK_LANDED,
-            5: modifierfunction.MODIFIER_EVENT_ON_TAKEDAMAGE
+            1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
+            3: Enum_MODIFIER_EVENT.ON_ATTACK,
+            4: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED,
+            5: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         }
         return Object.values(funcs);
-    }
+    } */
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {
             [modifierstate.MODIFIER_STATE_SILENCED]: true
@@ -696,7 +757,7 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
             } else {
                 current_buff.ForceRefresh();
             }
-            this.heal_convert = (this.GetAbilityPlus().GetSpecialValueFor("heal_convert") / 100);
+            this.heal_convert = (this.GetSpecialValueFor("heal_convert") / 100);
         }
     }
     BeRefresh(kv: any): void {
@@ -704,7 +765,8 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
             this.SetDuration(this.base_duration + this.hits * this.duration_extend, true);
         }
     }
-    OnAttack(kv: ModifierAttackEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
+    CC_OnAttack(kv: ModifierAttackEvent): void {
         if (IsServer()) {
             let target = kv.target;
             if (target == this.GetParentPlus()) {
@@ -723,12 +785,14 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
             }
         }
     }
-    OnAttackLanded(kv: ModifierAttackEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
+    CC_OnAttackLanded(kv: ModifierAttackEvent): void {
         if (this.has_talent && (kv.attacker == this.GetCasterPlus()) && (kv.target == this.GetParentPlus())) {
             this.hits = this.hits + 1;
         }
     }
-    OnTakeDamage(kv: ModifierInstanceEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    CC_OnTakeDamage(kv: ModifierInstanceEvent): void {
         if (IsServer()) {
             let heal_convert = this.heal_convert;
             if (heal_convert > 0) {
@@ -745,17 +809,17 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
                     }
                     heal_amount = heal_amount * heal_convert;
                     let life_steal_particle_name = "particles/generic_gameplay/generic_lifesteal.vpcf";
-                    let healFX = ParticleManager.CreateParticle("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
+                    let healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, caster);
                     ParticleManager.ReleaseParticleIndex(healFX);
-                    caster.Heal(heal_amount, caster);
+                    caster.Heal(heal_amount, this.GetAbilityPlus());
                     if (caster.HasModifier("modifier_imba_borrowed_time_buff_hot_caster")) {
-                        let buffed_allies = caster._borrowed_time_buffed_allies;
+                        let buffed_allies: IBaseNpc_Plus[] = caster.TempData()._borrowed_time_buffed_allies;
                         if (buffed_allies && caster.HasScepter()) {
-                            for (const [k, _] of ipairs(buffed_allies)) {
-                                healFX = ParticleManager.CreateParticle("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, k);
+                            for (const [_, k] of ipairs(buffed_allies)) {
+                                healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, k);
                                 ParticleManager.ReleaseParticleIndex(healFX);
                                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, k, heal_amount, undefined);
-                                k.Heal(heal_amount, caster);
+                                k.Heal(heal_amount, this.GetAbilityPlus());
                             }
                         }
                     }
@@ -763,10 +827,12 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
             }
         }
     }
-    GetModifierMoveSpeedBonus_Percentage(): number {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    CC_GetModifierMoveSpeedBonus_Percentage(): number {
         return this.GetAbilityPlus().GetSpecialValue("curse_slow") * (-1);
     }
 }
+@registerModifier()
 export class modifier_imba_curse_of_avernus_buff_haste extends BaseModifier_Plus {
     public attack_increase: any;
     IsHidden() {
@@ -796,17 +862,19 @@ export class modifier_imba_curse_of_avernus_buff_haste extends BaseModifier_Plus
     BeRefresh(params: any): void {
         this._UpdateIncreaseValues();
     }
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: modifierfunction.MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
-            2: modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT
+            1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT
         }
         return Object.values(funcs);
-    }
-    GetModifierAttackSpeedBonus_Constant(): number {
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.attack_increase;
     }
 }
+@registerAbility()
 export class imba_abaddon_over_channel extends BaseAbility_Plus {
     IsStealable() {
         return false;
@@ -816,12 +884,13 @@ export class imba_abaddon_over_channel extends BaseAbility_Plus {
     }
     OnToggle(): void {
         if (this.GetToggleState() && !this.GetCasterPlus().HasModifier("modifier_over_channel_handler")) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), null, "modifier_over_channel_handler", {});
+            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_over_channel_handler", {});
         } else if (!this.GetToggleState() && this.GetCasterPlus().HasModifier("modifier_over_channel_handler")) {
             this.GetCasterPlus().RemoveModifierByName("modifier_over_channel_handler");
         }
     }
 }
+@registerModifier()
 export class modifier_over_channel_handler extends BaseModifier_Plus {
     IsHidden() {
         return false;
@@ -842,29 +911,30 @@ export class modifier_over_channel_handler extends BaseModifier_Plus {
         let target = this.GetParentPlus();
         let target_origin = target.GetAbsOrigin();
         let particle_name = "particles/econ/courier/courier_hyeonmu_ambient/courier_hyeonmu_ambient_trail_steam_blue.vpcf";
-        let particle = ParticleManager.CreateParticle(particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN, target);
+        let particle = ResHelper.CreateParticleEx(particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN, target);
         ParticleManager.SetParticleControlEnt(particle, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target_origin, true);
         this.AddParticle(particle, false, false, -1, false, false);
-        particle = ParticleManager.CreateParticle(particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN, target);
+        particle = ResHelper.CreateParticleEx(particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN, target);
         ParticleManager.SetParticleControlEnt(particle, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", target_origin, true);
         this.AddParticle(particle, false, false, -1, false, false);
     }
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: modifierfunction.MODIFIER_EVENT_ON_ABILITY_EXECUTED
+            1: Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED
         }
         return Object.values(funcs);
-    }
-    OnAbilityExecuted(keys: ModifierAbilityEvent): void {
+    } */
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
+    CC_OnAbilityExecuted(keys: ModifierAbilityEvent): void {
         if (!IsServer()) {
             return;
         }
         if (keys.unit == this.GetParentPlus() && !keys.ability.IsItem() && keys.ability.GetName() != "imba_abaddon_over_channel" && keys.ability.GetName() != "ability_capture") {
             this.GetParentPlus().AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_over_channel_reduction", {
-                duration: this.GetAbilityPlus().GetSpecialValueFor("reduction_duration")
+                duration: this.GetSpecialValueFor("reduction_duration")
             });
             let parent = this.GetParentPlus();
-            Timers.CreateTimer(this.GetAbilityPlus().GetSpecialValueFor("reduction_duration"), () => {
+            this.AddTimer(this.GetSpecialValueFor("reduction_duration"), () => {
                 let overchannel_modifier = parent.findBuff<modifier_over_channel_reduction>("modifier_over_channel_reduction");
                 if (overchannel_modifier) {
                     overchannel_modifier.DecrementStackCount();
@@ -873,6 +943,7 @@ export class modifier_over_channel_handler extends BaseModifier_Plus {
         }
     }
 }
+@registerModifier()
 export class modifier_over_channel_reduction extends BaseModifier_Plus {
     IsHidden() {
         return false;
@@ -898,19 +969,22 @@ export class modifier_over_channel_reduction extends BaseModifier_Plus {
         }
         this.IncrementStackCount();
     }
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         return Object.values({
-            1: modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
-            2: modifierfunction.MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_CONSTANT
         });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    CC_GetModifierAttackSpeedBonus_Constant(): number {
+        return -this.GetStackCount() * this.GetSpecialValueFor("reduction_multiplier");
     }
-    GetModifierAttackSpeedBonus_Constant(): number {
-        return -this.GetStackCount() * this.GetAbilityPlus().GetSpecialValueFor("reduction_multiplier");
-    }
-    GetModifierMoveSpeedBonus_Constant(): number {
-        return -this.GetStackCount() * this.GetAbilityPlus().GetSpecialValueFor("reduction_multiplier");
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_CONSTANT)
+    CC_GetModifierMoveSpeedBonus_Constant(): number {
+        return -this.GetStackCount() * this.GetSpecialValueFor("reduction_multiplier");
     }
 }
+@registerAbility()
 export class imba_abaddon_borrowed_time extends BaseAbility_Plus {
     GetIntrinsicModifierName(): string {
         if (this.GetCasterPlus().IsRealHero()) {
@@ -934,7 +1008,7 @@ export class imba_abaddon_borrowed_time extends BaseAbility_Plus {
             if (caster.HasScepter()) {
                 buff_duration = this.GetSpecialValue("duration_scepter");
             }
-            caster.AddNewModifier(caster, null, "modifier_imba_borrowed_time_buff_hot_caster", {
+            caster.AddNewModifier(caster, this, "modifier_imba_borrowed_time_buff_hot_caster", {
                 duration: buff_duration
             });
             let responses = {
@@ -949,19 +1023,17 @@ export class imba_abaddon_borrowed_time extends BaseAbility_Plus {
                 9: "abaddon_abad_borrowedtime_10",
                 10: "abaddon_abad_borrowedtime_11"
             }
-            if (!caster.EmitCasterSound("npc_dota_hero_abaddon", responses, 50, DOTA_CAST_SOUND_FLAG_BOTH_TEAMS, undefined, undefined)) {
-                caster.EmitCasterSound("npc_dota_hero_abaddon", {
-                    1: "abaddon_abad_borrowedtime_01"
-                }, 1, DOTA_CAST_SOUND_FLAG_BOTH_TEAMS, undefined, undefined);
+            if (!caster.EmitCasterSound(Object.values(responses), 50, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS)) {
+                caster.EmitCasterSound(["abaddon_abad_borrowedtime_01"], 1, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS);
             }
             if (caster.HasTalent("special_bonus_imba_abaddon_7")) {
                 let target_team = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY;
                 let target_type = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO;
                 let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, target_team, target_type, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
                 for (const [_, unit] of ipairs(allies)) {
-                    let over_channel_particle = ParticleManager.CreateParticle("particles/dev/library/base_dust_hit_detail.vpcf", ParticleAttachment_t.PATTACH_POINT, unit);
+                    let over_channel_particle = ResHelper.CreateParticleEx("particles/dev/library/base_dust_hit_detail.vpcf", ParticleAttachment_t.PATTACH_POINT, unit);
                     ParticleManager.ReleaseParticleIndex(over_channel_particle);
-                    over_channel_particle = ParticleManager.CreateParticle("particles/dev/library/base_dust_hit_smoke.vpcf", ParticleAttachment_t.PATTACH_POINT, unit);
+                    over_channel_particle = ResHelper.CreateParticleEx("particles/dev/library/base_dust_hit_smoke.vpcf", ParticleAttachment_t.PATTACH_POINT, unit);
                     ParticleManager.ReleaseParticleIndex(over_channel_particle);
                     unit.Purge(false, true, false, true, false);
                 }
@@ -969,6 +1041,7 @@ export class imba_abaddon_borrowed_time extends BaseAbility_Plus {
         }
     }
 }
+@registerModifier()
 export class modifier_imba_borrowed_time_handler extends BaseModifier_Plus {
     public hp_threshold: any;
     IsHidden() {
@@ -983,7 +1056,7 @@ export class modifier_imba_borrowed_time_handler extends BaseModifier_Plus {
     AllowIllusionDuplicate() {
         return false;
     }
-    _CheckHealth(damage) {
+    _CheckHealth(damage: number): void {
         let target = this.GetParentPlus();
         let ability = this.GetAbilityPlus();
         if (!ability.IsHidden() && ability.IsCooldownReady() && !target.PassivesDisabled() && target.IsAlive()) {
@@ -1005,14 +1078,15 @@ export class modifier_imba_borrowed_time_handler extends BaseModifier_Plus {
             }
         }
     }
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: modifierfunction.MODIFIER_EVENT_ON_TAKEDAMAGE,
-            2: modifierfunction.MODIFIER_EVENT_ON_STATE_CHANGED
+            1: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE,
+            2: Enum_MODIFIER_EVENT.ON_STATE_CHANGED
         }
         return Object.values(funcs);
-    }
-    OnTakeDamage(kv: ModifierInstanceEvent): void {
+    } */
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    CC_OnTakeDamage(kv: ModifierInstanceEvent): void {
         if (IsServer()) {
             let target = this.GetParentPlus();
             if (target == kv.unit) {
@@ -1020,7 +1094,8 @@ export class modifier_imba_borrowed_time_handler extends BaseModifier_Plus {
             }
         }
     }
-    OnStateChanged(kv: ModifierUnitEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_STATE_CHANGED)
+    CC_OnStateChanged(kv: ModifierUnitEvent): void {
         if (IsServer()) {
             let target = this.GetParentPlus();
             if (target == kv.unit) {
@@ -1029,10 +1104,11 @@ export class modifier_imba_borrowed_time_handler extends BaseModifier_Plus {
         }
     }
 }
+@registerModifier()
 export class modifier_imba_borrowed_time_buff_hot_caster extends BaseModifier_Plus {
     public has_talent: any;
     public ratio: any;
-    public mist_duration: any;
+    public mist_duration: number;
     public target_current_health: any;
     IsHidden() {
         return false;
@@ -1070,15 +1146,15 @@ export class modifier_imba_borrowed_time_buff_hot_caster extends BaseModifier_Pl
     StatusEffectPriority() {
         return 15;
     }
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: modifierfunction.MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
-            2: modifierfunction.MODIFIER_EVENT_ON_TAKEDAMAGE
+            1: GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE,
+            2: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE
         }
         return Object.values(funcs);
-    }
+    } */
     GetAuraRadius(): number {
-        return this.GetAbilityPlus().GetSpecialValueFor("redirect_range");
+        return this.GetSpecialValueFor("redirect_range");
     }
     GetAuraEntityReject(hEntity: CDOTA_BaseNPC): boolean {
         if (hEntity == this.GetParentPlus() || hEntity.HasModifier("modifier_imba_borrowed_time_buff_hot_caster")) {
@@ -1092,10 +1168,10 @@ export class modifier_imba_borrowed_time_buff_hot_caster extends BaseModifier_Pl
             if (target.HasTalent("special_bonus_imba_abaddon_8")) {
                 this.has_talent = true;
                 this.ratio = 1 / target.GetTalentValue("special_bonus_imba_abaddon_8", "ratio_pct") * 100;
-                this.mist_duration = target.FindTalentValue("special_bonus_imba_abaddon_8", "mist_duration");
+                this.mist_duration = target.GetTalentValue("special_bonus_imba_abaddon_8", "mist_duration");
             }
             this.target_current_health = target.GetHealth();
-            target._borrowed_time_buffed_allies = {}
+            target.TempData()._borrowed_time_buffed_allies = [];
             if (RollPercentage(15)) {
                 target.EmitSound("Imba.AbaddonHeyYou");
             }
@@ -1117,26 +1193,28 @@ export class modifier_imba_borrowed_time_buff_hot_caster extends BaseModifier_Pl
             }
         }
     }
-    OnTakeDamage(kv: ModifierInstanceEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    CC_OnTakeDamage(kv: ModifierInstanceEvent): void {
         if (IsServer()) {
-            if ((kv.unit.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Length2D() <= this.GetAbilityPlus().GetSpecialValue("redirect_range_scepter") && this.GetCasterPlus().HasScepter() && kv.unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && !kv.unit.IsBuilding()) {
-                if (!kv.unit.borrowed_time_damage_taken) {
-                    kv.unit.borrowed_time_damage_taken = 0;
+            if (GameFunc.AsVector(kv.unit.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Length2D() <= this.GetAbilityPlus().GetSpecialValue("redirect_range_scepter") && this.GetCasterPlus().HasScepter() && kv.unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && !kv.unit.IsBuilding()) {
+                if (!kv.unit.TempData().borrowed_time_damage_taken) {
+                    kv.unit.TempData().borrowed_time_damage_taken = 0;
                 }
-                kv.unit.borrowed_time_damage_taken = kv.unit.borrowed_time_damage_taken + kv.damage;
-                if (kv.unit.borrowed_time_damage_taken / this.GetAbilityPlus().GetSpecialValue("ally_threshold_scepter") >= 1) {
-                    for (let i = 1; i <= kv.unit.borrowed_time_damage_taken / this.GetAbilityPlus().GetSpecialValue("ally_threshold_scepter"); i += 1) {
-                        kv.unit.borrowed_time_damage_taken = kv.unit.borrowed_time_damage_taken - this.GetAbilityPlus().GetSpecialValue("ally_threshold_scepter");
-                        this.GetCasterPlus().findAbliityPlus<imba_abaddon_death_coil>("imba_abaddon_death_coil").OnSpellStart(kv.unit, true);
+                kv.unit.TempData().borrowed_time_damage_taken = kv.unit.TempData().borrowed_time_damage_taken + kv.damage;
+                if (kv.unit.TempData().borrowed_time_damage_taken / this.GetAbilityPlus().GetSpecialValue("ally_threshold_scepter") >= 1) {
+                    for (let i = 1; i <= kv.unit.TempData().borrowed_time_damage_taken / this.GetAbilityPlus().GetSpecialValue("ally_threshold_scepter"); i += 1) {
+                        kv.unit.TempData().borrowed_time_damage_taken = kv.unit.TempData().borrowed_time_damage_taken - this.GetAbilityPlus().GetSpecialValue("ally_threshold_scepter");
+                        this.GetCasterPlus().findAbliityPlus<imba_abaddon_death_coil>("imba_abaddon_death_coil")._OnSpellStart(kv.unit, true);
                     }
                 }
             }
         }
     }
-    GetModifierIncomingDamage_Percentage(kv: ModifierAttackEvent): number {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    CC_GetModifierIncomingDamage_Percentage(kv: ModifierAttackEvent): number {
         if (IsServer()) {
             let target = this.GetParentPlus();
-            let heal_particle = ParticleManager.CreateParticle("particles/units/heroes/hero_abaddon/abaddon_borrowed_time_heal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
+            let heal_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_abaddon/abaddon_borrowed_time_heal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
             let target_vector = target.GetAbsOrigin();
             ParticleManager.SetParticleControl(heal_particle, 0, target_vector);
             ParticleManager.SetParticleControl(heal_particle, 1, target_vector);
@@ -1146,11 +1224,12 @@ export class modifier_imba_borrowed_time_buff_hot_caster extends BaseModifier_Pl
                 let max_health = target.GetMaxHealth();
                 this.SetStackCount(this.GetStackCount() + math.floor(kv.damage / this.ratio));
             }
-            target.Heal(kv.damage, target);
+            target.Heal(kv.damage, this.GetAbilityPlus());
             return -9999999;
         }
     }
 }
+@registerModifier()
 export class modifier_imba_borrowed_time_buff_hot_ally extends BaseModifier_Plus {
     IsHidden() {
         return false;
@@ -1161,26 +1240,26 @@ export class modifier_imba_borrowed_time_buff_hot_ally extends BaseModifier_Plus
     IsDebuff() {
         return false;
     }
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         let funcs = {
-            1: modifierfunction.MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE
+            1: GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE
         }
         return Object.values(funcs);
-    }
+    } */
     BeCreated(p_0: any,): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let target = this.GetParentPlus();
-            let buff_list = caster._borrowed_time_buffed_allies;
+            let buff_list: any[] = caster.TempData()._borrowed_time_buffed_allies;
             if (buff_list) {
-                buff_list[target] = true;
+                buff_list.push(target);
             }
             let target_origin = target.GetAbsOrigin();
             let particle_name = "particles/econ/courier/courier_hyeonmu_ambient/courier_hyeonmu_ambient_trail_steam.vpcf";
-            let particle = ParticleManager.CreateParticle(particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN, target);
+            let particle = ResHelper.CreateParticleEx(particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN, target);
             ParticleManager.SetParticleControlEnt(particle, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target_origin, true);
             this.AddParticle(particle, false, false, -1, false, false);
-            particle = ParticleManager.CreateParticle(particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN, target);
+            particle = ResHelper.CreateParticleEx(particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN, target);
             ParticleManager.SetParticleControlEnt(particle, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", target_origin, true);
             this.AddParticle(particle, false, false, -1, false, false);
         }
@@ -1188,13 +1267,15 @@ export class modifier_imba_borrowed_time_buff_hot_ally extends BaseModifier_Plus
     OnRemoved(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            let buff_list = caster._borrowed_time_buffed_allies;
+            let buff_list: IBaseNpc_Plus[] = caster.TempData()._borrowed_time_buffed_allies;
             if (buff_list) {
-                buff_list[this.GetParentPlus()] = undefined;
+                let index = buff_list.indexOf(this.GetParentPlus());
+                buff_list.splice(index, 1);
             }
         }
     }
-    GetModifierIncomingDamage_Percentage(kv: ModifierAttackEvent): number {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
+    CC_GetModifierIncomingDamage_Percentage(kv: ModifierAttackEvent): number {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let target = this.GetParentPlus();
@@ -1213,8 +1294,9 @@ export class modifier_imba_borrowed_time_buff_hot_ally extends BaseModifier_Plus
         }
     }
 }
+@registerModifier()
 export class modifier_imba_borrowed_time_buff_mist extends BaseModifier_Plus {
-    public duration: any;
+    public duration: number;
     IsHidden() {
         return false;
     }
@@ -1233,16 +1315,18 @@ export class modifier_imba_borrowed_time_buff_mist extends BaseModifier_Plus {
     BeCreated(params: any): void {
         this.duration = this.GetDuration();
     }
-    DeclareFunctions(): modifierfunction[] {
+    /** DeclareFunctions():modifierfunction[] {
         let decFuns = {
-            1: modifierfunction.MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT
         }
         return Object.values(decFuns);
-    }
-    GetModifierConstantHealthRegen(): number {
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
+    CC_GetModifierConstantHealthRegen(): number {
         return this.GetStackCount() / this.duration;
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_abaddon_1 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
@@ -1254,6 +1338,7 @@ export class modifier_special_bonus_imba_abaddon_1 extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_abaddon_2 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
@@ -1265,6 +1350,7 @@ export class modifier_special_bonus_imba_abaddon_2 extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_abaddon_3 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
@@ -1276,6 +1362,7 @@ export class modifier_special_bonus_imba_abaddon_3 extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_abaddon_4 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
@@ -1290,12 +1377,13 @@ export class modifier_special_bonus_imba_abaddon_4 extends BaseModifier_Plus {
         if (IsServer()) {
             let curse_of_avernus_ability = this.GetParentPlus().findAbliityPlus<imba_abaddon_frostmourne>("imba_abaddon_frostmourne");
             if (curse_of_avernus_ability) {
-                curse_of_avernus_ability.GetBehavior();
-                curse_of_avernus_ability.GetCooldown();
+                // curse_of_avernus_ability.GetBehavior();
+                // curse_of_avernus_ability.GetCooldown();
             }
         }
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_abaddon_6 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
@@ -1307,6 +1395,7 @@ export class modifier_special_bonus_imba_abaddon_6 extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_abaddon_7 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
@@ -1318,6 +1407,7 @@ export class modifier_special_bonus_imba_abaddon_7 extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_abaddon_8 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;

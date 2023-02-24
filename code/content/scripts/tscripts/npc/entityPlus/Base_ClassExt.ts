@@ -216,7 +216,6 @@ let tAddedValues: Record<string, string> = {
     _ulti: "GetUltiPower",
 };
 
-
 declare global {
     interface CDOTABaseAbility {
         /**默认值 */
@@ -224,6 +223,13 @@ declare global {
         /**是否销毁 */
         __safedestroyed__: boolean;
 
+        /**
+         * @both
+         * @param fInterval 
+         * @param fCallback 
+         * @param _isIgnorePauseTime true 忽视游戏暂停.default false
+         */
+        AddTimer(fInterval: number, fCallback: () => number | void, _isIgnorePauseTime?: boolean): void;
         /**
          * @both
          * @returns 
@@ -310,6 +316,13 @@ declare global {
 }
 
 const CBaseAbility = IsServer() ? CDOTABaseAbility : C_DOTABaseAbility;
+
+CBaseAbility.AddTimer = function (fInterval: number, fCallback: () => number | void, _isIgnorePauseTime = false) {
+    GTimerHelper.AddTimer(fInterval, GHandler.create(this,
+        () => {
+            return fCallback();
+        }), _isIgnorePauseTime);
+}
 
 CBaseAbility.GetCasterPlus = function () {
     return this.GetCaster() as IBaseNpc_Plus
@@ -609,7 +622,7 @@ if (IsServer()) {
 
         return true;
     };
-    CBaseAbility.AutoSpellSelf = function () { return true; }
+    CBaseAbility.AutoSpellSelf = function () { return false; }
 }
 
 if (IsClient()) {
@@ -629,6 +642,13 @@ if (IsClient()) {
 declare global {
     interface CDOTA_Buff {
         __destroyed: boolean;
+        /**
+         * @both
+         * @param fInterval 
+         * @param fCallback 
+         * @param _isIgnorePauseTime true 忽视游戏暂停.default false
+         */
+        AddTimer(fInterval: number, fCallback: () => number | void): void;
         /**是否被销毁
          * @Both
          */
@@ -727,6 +747,9 @@ declare global {
 
 CDOTA_Buff.IsNull = function () {
     return this.__destroyed;
+}
+CDOTA_Buff.AddTimer = function (fInterval: number, fCallback: () => number | void, _isIgnorePauseTime = false) {
+    GTimerHelper.AddTimer(fInterval, GHandler.create(this, () => { return fCallback() }), _isIgnorePauseTime);
 }
 CDOTA_Buff.GetAbilityPlus = function () {
     return this.GetAbility() as IBaseAbility_Plus;
@@ -919,6 +942,14 @@ declare global {
         __safedestroyed__: boolean;
         /**是否是第一次创建 */
         __bIsFirstSpawn: boolean;
+
+        __TempData: { [k: string]: any };
+
+        /**
+         * @Both
+         */
+        TempData(): { [k: string]: any };
+
         /**
          * @Both
          */
@@ -1054,6 +1085,13 @@ declare global {
 }
 
 const BaseNPC = IsServer() ? CDOTA_BaseNPC : C_DOTA_BaseNPC;
+
+BaseNPC.TempData = function (this: CDOTA_BaseNPC) {
+    if (this.__TempData == null) {
+        this.__TempData = {};
+    }
+    return this.__TempData;
+}
 BaseNPC.IsFriendly = function (hTarget: CDOTA_BaseNPC) {
     if (IsValid(this) && IsValid(hTarget)) {
         return this.GetTeamNumber() == hTarget.GetTeamNumber();

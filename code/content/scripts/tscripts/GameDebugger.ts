@@ -162,6 +162,14 @@ export class GameDebugger extends SingletonClass {
             if (!player) return;
             player.PlayerHttpComp().DebugStopPing = GToBoolean(e.data);
         }));
+        EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugWTF, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
+            if (GToBoolean(e.data)) {
+                SendToConsole("dota_ability_debug 1")
+            }
+            else {
+                SendToConsole("dota_ability_debug 0")
+            }
+        }));
         EventHelper.addProtocolEvent(GameProtocol.Protocol.req_DebugRemoveAllItem, GHandler.create(this, (e: JS_TO_LUA_DATA) => {
 
         }));

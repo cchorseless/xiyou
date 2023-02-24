@@ -48,3 +48,48 @@ declare interface IModifierTable {
 declare interface ICustomModifierAttackEvent extends ModifierAttackEvent {
 
 }
+
+// interface Number  {
+//     /**
+//      * Cross product of two vectors.
+//      *
+//      * @both
+//      */
+//     Cross(b: Vector): Vector;
+//     /**
+//      * Dot product of two vectors.
+//      *
+//      * @both
+//      */
+//     Dot(b: Vector): number;
+//     /**
+//      * Length of the Vector.
+//      *
+//      * @both
+//      */
+//     Length(): number;
+//     /**
+//      * Length of the Vector in the XY plane.
+//      *
+//      * @both
+//      */
+//     Length2D(): number;
+//     /**
+//      * Returns the vector normalized.
+//      *
+//      * @both
+//      */
+//     Normalized(): Vector;
+//     /**
+//      * Linearly interpolates between two vectors.
+//      *
+//      * This is most commonly used to find a point some fraction of the way along a
+//      * line between two endpoints.
+//      *
+//      * Same as `this + (b - this) * t`.
+//      *
+//      * @param t Interpolant
+//      * @both
+//      */
+//     Lerp(b: Vector, t: number): Vector;
+// }

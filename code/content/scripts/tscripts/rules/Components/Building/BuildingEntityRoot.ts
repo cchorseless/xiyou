@@ -3,6 +3,8 @@ import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
+import { modifier_mana_control } from "../../../npc/modifier/battle/modifier_mana_control";
+import { modifier_never_death } from "../../../npc/modifier/battle/modifier_never_death";
 import { modifier_out_of_game } from "../../../npc/modifier/battle/modifier_out_of_game";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
@@ -82,6 +84,10 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
             // buff
             runtimeroot.BuffManagerComp().cloneRuntimeBuff(this.BuffManagerComp())
             runtimeroot.SyncClient();
+            // 不死
+            modifier_never_death.applyOnly(cloneRuntime, cloneRuntime);
+            // 回蓝
+            modifier_mana_control.applyOnly(cloneRuntime, cloneRuntime);
         }
     }
 

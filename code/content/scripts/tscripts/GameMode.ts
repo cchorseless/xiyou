@@ -4,7 +4,6 @@ import { GameSetting } from "./GameSetting";
 import { KVHelper } from "./helper/KVHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { PrecacheHelper } from "./helper/PrecacheHelper";
-import { modifier_event } from "./npc/propertystat/modifier_event";
 import { GameEnum } from "./shared/GameEnum";
 import { ETEntitySystem } from "./shared/lib/Entity";
 declare global {
@@ -36,24 +35,9 @@ export class GameMode {
         GameDebugger.GetInstance().init();
         // 启动模块
         GameScene.init()
-        // 初始化全局对象
-        this.InitGlobalBaseNPC();
     }
 
-    /**全局战斗伤害记录 */
-    public globalNpc_RECORD_SYSTEM: CDOTA_BaseNPC;
-    /**全局buff事件监听 */
-    public globalNpc_MODIFIER_EVENTS: CDOTA_BaseNPC;
-    /**
-     * 初始化全局NPC
-     */
-    private InitGlobalBaseNPC() {
-        if (this.globalNpc_MODIFIER_EVENTS) {
-            GDestroyUnit(this.globalNpc_MODIFIER_EVENTS);
-            this.globalNpc_MODIFIER_EVENTS = null;
-        }
-        this.globalNpc_MODIFIER_EVENTS = modifier_event.applyThinker(Vector(0, 0, 0), this.Instance as any, null, null, DOTATeam_t.DOTA_TEAM_NOTEAM, false);
-    }
+
     // Called on script_reload
     public Reload() {
         if (!IsInToolsMode()) {

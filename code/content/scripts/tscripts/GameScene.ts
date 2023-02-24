@@ -11,6 +11,7 @@ import { LogHelper } from "./helper/LogHelper";
 import { NetTablesHelper } from "./helper/NetTablesHelper";
 import { Enum_MODIFIER_EVENT, EventDataType, IBuffEventData, modifier_event } from "./npc/propertystat/modifier_event";
 import { modifier_property } from "./npc/propertystat/modifier_property";
+import { BattleSystemComponent } from "./rules/System/BattleSystemComponent";
 import { BuildingSystemComponent } from "./rules/System/BuildingSystemComponent";
 import { ChessControlSystemComponent } from "./rules/System/ChessControlSystemComponent";
 import { CombinationSystemComponent } from "./rules/System/CombinationSystemComponent";
@@ -68,6 +69,7 @@ export class GameScene {
     static init() {
         this.addEvent();
         GPlayerEntityRoot.Init()
+        this.Scene.AddComponent(BattleSystemComponent);
         this.Scene.AddComponent(GameServiceSystemComponent);
         this.Scene.AddComponent(MapSystemComponent);
         this.Scene.AddComponent(DrawSystemComponent);

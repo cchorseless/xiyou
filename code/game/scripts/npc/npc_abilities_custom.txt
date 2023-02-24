@@ -2,6 +2,7 @@
 
 #base  "abilities/courier_abilities.kv"
 #base  "abilities/common_abilities.kv"
+#base  "abilities/imba_abilities.kv"
 #base  "building/building_ability_tower.kv"
 "DOTAAbilities" {
 	"version" "1"

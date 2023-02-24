@@ -1,19 +1,33 @@
+
+import { AI_ability } from "../../../ai/AI_ability";
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifierMotionBoth_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
+
+
+@registerAbility()
 export class imba_axe_berserkers_call extends BaseAbility_Plus {
-    public called_targets: any;
+    public called_targets: { [k: string]: IBaseNpc_Plus };
     OnAbilityPhaseStart(): boolean {
         if (IsServer()) {
             EmitSoundOn("Hero_Axe.BerserkersCall.Start", this.GetCasterPlus());
         }
         return true;
     }
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        let range = this.GetSpecialValueFor("radius")
+        return AI_ability.NO_TARGET_if_enemy(this, range);
+    }
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        let ability = this;
-        let radius = ability.GetSpecialValueFor("radius");
+        let radius = this.GetSpecialValueFor("radius");
         this.GetCasterPlus().EmitSound("Hero_Axe.Berserkers_Call");
         let responses_1_or_more_enemies = "axe_axe_ability_berserk_0" + math.random(1, 9);
         let responses_zero_enemy = "axe_axe_anger_0" + math.random(1, 3);
@@ -36,22 +50,23 @@ export class imba_axe_berserkers_call extends BaseAbility_Plus {
                 ExecuteOrderFromTable(newOrder);
             }
             this.AddCalledTarget(target);
-            target.AddNewModifier(caster, null, "modifier_imba_berserkers_call_debuff_cmd", {
-                duration: ability.GetSpecialValueFor("duration") * (1 - target.GetStatusResistance())
+            modifier_imba_berserkers_call_debuff_cmd.applyOnly(target, caster, this, {
+                duration: this.GetSpecialValueFor("duration") * (1 - target.GetStatusResistance())
             });
+
         }
         if (next(enemies_in_radius) == undefined) {
             this.GetCasterPlus().EmitSound(responses_zero_enemy);
         } else {
             this.GetCasterPlus().EmitSound(responses_1_or_more_enemies);
         }
-        caster.AddNewModifier(caster, null, "modifier_imba_berserkers_call_buff_armor", {
-            duration: ability.GetSpecialValueFor("duration")
+        caster.AddNewModifier(caster, this, "modifier_imba_berserkers_call_buff_armor", {
+            duration: this.GetSpecialValueFor("duration")
         });
         if (caster.HasTalent("special_bonus_imba_axe_2")) {
             let talent_duration = caster.GetTalentValue("special_bonus_imba_axe_2");
-            caster.AddNewModifier(caster, null, "modifier_imba_berserkers_call_talent", {
-                duration: ability.GetSpecialValueFor("duration") + talent_duration
+            caster.AddNewModifier(caster, this, "modifier_imba_berserkers_call_talent", {
+                duration: this.GetSpecialValueFor("duration") + talent_duration
             });
         }
     }
@@ -72,9 +87,9 @@ export class imba_axe_berserkers_call extends BaseAbility_Plus {
     }
     RemoveCalledTarget(target: IBaseNpc_Plus) {
         if (!this.called_targets) {
-            return undefined;
+            return;
         }
-        this.called_targets[target.entindex()] = undefined;
+        delete this.called_targets[target.entindex()];
     }
     GetCalledUnits() {
         if (!this.called_targets) {
@@ -83,23 +98,26 @@ export class imba_axe_berserkers_call extends BaseAbility_Plus {
         return this.called_targets;
     }
 }
+@registerModifier()
 export class modifier_imba_berserkers_call_buff_armor extends BaseModifier_Plus {
-    DeclareFunctions(): modifierfunction[] {
-        return Object.values({
-            1: modifierfunction.MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS
-        });
+    /** DeclareFunctions():modifierfunction[] {
+    return Object.values({
+        1: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS
+    });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
+        return this.bonus_armor;
     }
-    GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
-        return this.GetAbilityPlus().GetSpecialValueFor("bonus_armor");
-    }
+    bonus_armor = 0;
     BeCreated(p_0: any,): void {
+        this.bonus_armor = this.GetSpecialValueFor("bonus_armor");
         if (!IsServer()) {
             return;
         }
         let caster_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_axe/axe_beserkers_call_owner.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus());
         ParticleManager.SetParticleControl(caster_particle, 2, Vector(0, 0, 0));
         ParticleManager.ReleaseParticleIndex(caster_particle);
-        return true;
     }
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_gods_strength.vpcf";
@@ -107,25 +125,28 @@ export class modifier_imba_berserkers_call_buff_armor extends BaseModifier_Plus 
     IsPurgable(): boolean {
         return false;
     }
-    IsBuff() {
-        return true;
+    IsHidden() {
+        return false;
     }
     RemoveOnDeath(): boolean {
         return true;
     }
 }
+@registerModifier()
 export class modifier_imba_berserkers_call_talent extends BaseModifier_Plus {
-    DeclareFunctions(): modifierfunction[] {
-        return Object.values({
-            1: modifierfunction.MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS,
-            2: modifierfunction.MODIFIER_EVENT_ON_ATTACKED
-        });
-    }
-    GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
+    /** DeclareFunctions():modifierfunction[] {
+    return Object.values({
+        1: GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS,
+        2: Enum_MODIFIER_EVENT.ON_ATTACKED
+    });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+    CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
         let stack_count = this.GetCasterPlus().findBuffStack("modifier_imba_berserkers_call_talent",);
         return stack_count;
     }
-    OnAttacked(keys: ModifierAttackEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACKED)
+    CC_OnAttacked(keys: ModifierAttackEvent): void {
         if (IsServer()) {
             if (keys.target == this.GetParentPlus()) {
                 if (this.GetCasterPlus().HasModifier("modifier_imba_berserkers_call_buff_armor")) {
@@ -145,30 +166,33 @@ export class modifier_imba_berserkers_call_talent extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_imba_berserkers_call_debuff_cmd extends BaseModifier_Plus {
-    public bonus_as: any;
+    public bonus_as: number = 0;
     BeCreated(p_0: any,): void {
+        this.bonus_as = this.GetSpecialValueFor("bonus_as");
         if (!this.GetAbilityPlus()) {
             this.Destroy();
             return;
         }
-        this.bonus_as = this.GetAbilityPlus().GetSpecialValueFor("bonus_as");
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {
             [modifierstate.MODIFIER_STATE_COMMAND_RESTRICTED]: true
         };
     }
-    DeclareFunctions(): modifierfunction[] {
-        return Object.values({
-            1: modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT,
-            2: modifierfunction.MODIFIER_EVENT_ON_DEATH
-        });
-    }
-    GetModifierAttackSpeedBonus_Constant(): number {
+    /** DeclareFunctions():modifierfunction[] {
+    return Object.values({
+        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT,
+        2: Enum_MODIFIER_EVENT.ON_DEATH
+    });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    CC_GetModifierAttackSpeedBonus_Constant(): number {
         return this.bonus_as + this.GetCasterPlus().GetTalentValue("special_bonus_imba_axe_5");
     }
-    OnDeath(event: ModifierInstanceEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH, false, true)
+    CC_OnDeath(event: ModifierInstanceEvent): void {
         if (IsServer()) {
             if (event.unit == this.GetCasterPlus()) {
                 this.Destroy();
@@ -179,7 +203,7 @@ export class modifier_imba_berserkers_call_debuff_cmd extends BaseModifier_Plus 
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let parent = this.GetParentPlus();
-            let ability = this.GetAbilityPlus();
+            let ability = this.GetAbilityPlus<imba_axe_berserkers_call>();
             if (parent.IsCreep()) {
                 parent.SetForceAttackTarget(undefined);
             }
@@ -204,6 +228,7 @@ export class modifier_imba_berserkers_call_debuff_cmd extends BaseModifier_Plus 
         return false;
     }
 }
+@registerAbility()
 export class imba_axe_battle_hunger extends BaseAbility_Plus {
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
         if (IsServer()) {
@@ -278,7 +303,7 @@ export class imba_axe_battle_hunger extends BaseAbility_Plus {
         let target_modifier = "modifier_imba_battle_hunger_debuff_dot";
         let duration = this.GetSpecialValueFor("duration");
         if (!caster.HasModifier(caster_modifier)) {
-            caster.AddNewModifier(caster, null, caster_modifier, {});
+            caster.AddNewModifier(caster, this, caster_modifier, {});
             caster.SetModifierStackCount(caster_modifier, null, 1);
         } else {
             if (!target.HasModifier(target_modifier)) {
@@ -286,30 +311,25 @@ export class imba_axe_battle_hunger extends BaseAbility_Plus {
                 caster.SetModifierStackCount(caster_modifier, null, stack_count + 1);
             }
         }
-        if (target.IsRoshan()) {
-            target.AddNewModifier(caster, null, target_modifier, {
-                duration: duration * (1 - target.GetStatusResistance()),
-                no_pause: true
-            });
-        } else {
-            target.AddNewModifier(caster, null, target_modifier, {
-                duration: duration * (1 - target.GetStatusResistance()),
-                no_pause: false
-            });
-        }
-    }
-}
-export class modifier_imba_battle_hunger_buff_haste extends BaseModifier_Plus {
-    public speed_bonus: any;
-    BeCreated(p_0: any,): void {
-        this.speed_bonus = this.GetAbilityPlus().GetSpecialValueFor("speed_bonus");
-    }
-    DeclareFunctions(): modifierfunction[] {
-        return Object.values({
-            1: modifierfunction.MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
+        target.AddNewModifier(caster, this, target_modifier, {
+            duration: duration * (1 - target.GetStatusResistance()),
+            no_pause: false
         });
     }
-    GetModifierMoveSpeedBonus_Percentage(): number {
+}
+@registerModifier()
+export class modifier_imba_battle_hunger_buff_haste extends BaseModifier_Plus {
+    public speed_bonus: number;
+    BeCreated(p_0: any,): void {
+        this.speed_bonus = this.GetSpecialValueFor("speed_bonus");
+    }
+    /** DeclareFunctions():modifierfunction[] {
+    return Object.values({
+        1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE
+    });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    CC_GetModifierMoveSpeedBonus_Percentage(): number {
         return this.speed_bonus * this.GetStackCount();
     }
     IsHidden(): boolean {
@@ -319,24 +339,25 @@ export class modifier_imba_battle_hunger_buff_haste extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_imba_battle_hunger_debuff_dot extends BaseModifier_Plus {
-    public caster: any;
-    public ability: any;
-    public parent: any;
+    public caster: IBaseNpc_Plus;
+    public ability: IBaseAbility_Plus;
+    public parent: IBaseNpc_Plus;
     public tick_rate: any;
     public cmd_restrict_modifier: any;
     public deny_allow_modifier: any;
-    public damage_over_time: any;
-    public maddening_chance_pct: any;
-    public max_maddening_duration: any;
-    public maddening_buffer_distance: any;
-    public scepter_damage_reduction: any;
+    public damage_over_time: number;
+    public maddening_chance_pct: number;
+    public max_maddening_duration: number;
+    public maddening_buffer_distance: number;
+    public scepter_damage_reduction: number;
     public pause_time: any;
-    public units: any;
+    public units: number;
     public slow: any;
     public no_pause: any;
-    public kill_count: any;
-    public last_damage_time: any;
+    public kill_count: number;
+    public last_damage_time: number;
     public enemy_particle: any;
     public cmd_restricted: any;
     public restrict_modifier: any;
@@ -353,25 +374,21 @@ export class modifier_imba_battle_hunger_debuff_dot extends BaseModifier_Plus {
     IsPurgable(): boolean {
         return true;
     }
-    BeCreated(params: any): void {
-        if (!this.GetAbilityPlus()) {
-            this.Destroy();
-            return;
-        }
+    Init(params: any): void {
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
         this.tick_rate = 1;
         this.cmd_restrict_modifier = "modifier_imba_battle_hunger_debuff_cmd";
         this.deny_allow_modifier = "modifier_imba_battle_hunger_debuff_deny";
-        this.damage_over_time = this.GetAbilityPlus().GetSpecialValueFor("damage");
-        this.maddening_chance_pct = this.GetAbilityPlus().GetSpecialValueFor("maddening_chance_pct");
-        this.max_maddening_duration = this.GetAbilityPlus().GetSpecialValueFor("max_maddening_duration");
-        this.maddening_buffer_distance = this.GetAbilityPlus().GetSpecialValueFor("maddening_buffer_distance");
-        this.scepter_damage_reduction = this.GetAbilityPlus().GetSpecialValueFor("scepter_damage_reduction");
-        this.pause_time = this.GetAbilityPlus().GetSpecialValueFor("pause_time");
-        this.units = this.GetAbilityPlus().GetSpecialValueFor("units");
-        this.slow = this.GetAbilityPlus().GetSpecialValueFor("slow") * (-1);
+        this.damage_over_time = this.GetSpecialValueFor("damage");
+        this.maddening_chance_pct = this.GetSpecialValueFor("maddening_chance_pct");
+        this.max_maddening_duration = this.GetSpecialValueFor("max_maddening_duration");
+        this.maddening_buffer_distance = this.GetSpecialValueFor("maddening_buffer_distance");
+        this.scepter_damage_reduction = this.GetSpecialValueFor("scepter_damage_reduction");
+        this.pause_time = this.GetSpecialValueFor("pause_time");
+        this.units = this.GetSpecialValueFor("units");
+        this.slow = this.GetSpecialValueFor("slow") * (-1);
         if (!IsServer()) {
             return;
         }
@@ -384,15 +401,13 @@ export class modifier_imba_battle_hunger_debuff_dot extends BaseModifier_Plus {
         this.SetStackCount(this.units);
         this.StartIntervalThink(this.tick_rate);
     }
-    BeRefresh(params: any): void {
-        this.OnCreated(params);
-    }
+
     OnIntervalThink(): void {
         if (IsServer()) {
-            if (IsNearFriendlyClass(this.parent, 1360, "ent_dota_fountain")) {
-                this.Destroy();
-                return undefined;
-            }
+            // if (IsNearFriendlyClass(this.parent, 1360, "ent_dota_fountain")) {
+            //     this.Destroy();
+            //     return undefined;
+            // }
             let damageTable = {
                 victim: this.parent,
                 attacker: this.caster,
@@ -422,28 +437,31 @@ export class modifier_imba_battle_hunger_debuff_dot extends BaseModifier_Plus {
             }
         }
     }
-    DeclareFunctions(): modifierfunction[] {
-        return Object.values({
-            1: modifierfunction.MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
-            2: modifierfunction.MODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE,
-            3: modifierfunction.MODIFIER_EVENT_ON_DEATH,
-            4: modifierfunction.MODIFIER_EVENT_ON_TAKEDAMAGE,
-            5: modifierfunction.MODIFIER_EVENT_ON_ATTACK_START,
-            6: modifierfunction.MODIFIER_EVENT_ON_ATTACK,
-            7: modifierfunction.MODIFIER_PROPERTY_TOOLTIP
-        });
-    }
-    GetModifierMoveSpeedBonus_Percentage(): number {
+    /** DeclareFunctions():modifierfunction[] {
+    return Object.values({
+        1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
+        2: GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE,
+        3: Enum_MODIFIER_EVENT.ON_DEATH,
+        4: Enum_MODIFIER_EVENT.ON_TAKEDAMAGE,
+        5: Enum_MODIFIER_EVENT.ON_ATTACK_START,
+        6: Enum_MODIFIER_EVENT.ON_ATTACK,
+        7: GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP
+    });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    CC_GetModifierMoveSpeedBonus_Percentage(): number {
         return this.slow;
     }
-    GetModifierTotalDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
+    CC_GetModifierTotalDamageOutgoing_Percentage(p_0: ModifierAttackEvent,): number {
         if (this.GetCasterPlus() && !this.GetCasterPlus().IsNull() && this.GetCasterPlus().HasScepter()) {
             return this.scepter_damage_reduction;
         } else {
             return 0;
         }
     }
-    OnDeath(keys: ModifierInstanceEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
+    CC_OnDeath(keys: ModifierInstanceEvent): void {
         if (keys.attacker == this.parent) {
             this.kill_count = this.kill_count + 1;
             this.DecrementStackCount();
@@ -452,19 +470,21 @@ export class modifier_imba_battle_hunger_debuff_dot extends BaseModifier_Plus {
             }
         }
     }
-    OnTakeDamage(keys: ModifierInstanceEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             if (keys.attacker == this.parent && keys.damage > 0) {
                 this.last_damage_time = GameRules.GetGameTime();
             }
         }
     }
-    OnAttackStart(keys: ModifierAttackEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_START)
+    CC_OnAttackStart(keys: ModifierAttackEvent): void {
         if (IsServer()) {
             if (keys.attacker == this.parent && this.parent.IsHero() && keys.target != this.caster) {
-                if (!this.cmd_restricted && RollPseudoRandom(this.maddening_chance_pct,)) {
+                if (!this.cmd_restricted && GameFunc.PRD(this.maddening_chance_pct, this)) {
                     let targets = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.parent.Script_GetAttackRange() + this.maddening_buffer_distance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-                    if (lualength(targets) <= 2) {
+                    if (GameFunc.GetCount(targets) <= 2) {
                         return;
                     }
                     this.cmd_restricted = true;
@@ -491,7 +511,8 @@ export class modifier_imba_battle_hunger_debuff_dot extends BaseModifier_Plus {
             }
         }
     }
-    OnAttack(keys: ModifierAttackEvent): void {
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
+    CC_OnAttack(keys: ModifierAttackEvent): void {
         if (IsServer()) {
             if (keys.attacker == this.GetParentPlus() && this.cmd_restricted) {
                 this.cmd_restricted = false;
@@ -502,23 +523,26 @@ export class modifier_imba_battle_hunger_debuff_dot extends BaseModifier_Plus {
                     this.deny_modifier.Destroy();
                 }
                 if (keys.target.GetTeamNumber() == keys.attacker.GetTeamNumber()) {
-                    if (this.GetAbilityPlus() && this.GetAbilityPlus().ApplyBattleHunger) {
-                        this.GetAbilityPlus().ApplyBattleHunger(this.caster, keys.target);
+                    if (this.GetAbilityPlus() && this.GetAbilityPlus<imba_axe_battle_hunger>().ApplyBattleHunger) {
+                        this.GetAbilityPlus<imba_axe_battle_hunger>().ApplyBattleHunger(this.caster, keys.target);
                     }
                 }
             }
         }
     }
-    OnTooltip( /** keys */): number {
-        if (keys.fail_type == 2) {
-            return this.damage_over_time;
-        } else if (keys.fail_type == 3) {
-            return this.GetStackCount();
-        } else if (keys.fail_type == 4) {
-            return this.pause_time;
-        }
-    }
+
+    // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
+    // CC_OnTooltip( /** keys */): number {
+    //     if (keys.fail_type == 2) {
+    //         return this.damage_over_time;
+    //     } else if (keys.fail_type == 3) {
+    //         return this.GetStackCount();
+    //     } else if (keys.fail_type == 4) {
+    //         return this.pause_time;
+    //     }
+    // }
 }
+@registerModifier()
 export class modifier_imba_battle_hunger_debuff_cmd extends BaseModifier_Plus {
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {
@@ -541,6 +565,7 @@ export class modifier_imba_battle_hunger_debuff_cmd extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_imba_battle_hunger_debuff_deny extends BaseModifier_Plus {
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {
@@ -557,6 +582,7 @@ export class modifier_imba_battle_hunger_debuff_deny extends BaseModifier_Plus {
         return false;
     }
 }
+@registerAbility()
 export class imba_axe_counter_helix extends BaseAbility_Plus {
     GetCastRange(p_0: Vector, p_1: CDOTA_BaseNPC | undefined,): number {
         return this.GetSpecialValueFor("radius");
@@ -565,40 +591,41 @@ export class imba_axe_counter_helix extends BaseAbility_Plus {
         return "modifier_imba_counter_helix_passive";
     }
 }
+@registerModifier()
 export class modifier_imba_counter_helix_passive extends BaseModifier_Plus {
-    public caster: any;
-    public ability: any;
+    public caster: IBaseNpc_Plus;
+    public ability: IBaseAbility_Plus;
     public modifier_enemy_taunt: any;
     public spin_to_win_modifier: any;
-    public radius: any;
-    public radius_increase_per_stack: any;
-    public stack_limit: any;
-    public stack_duration: any;
-    public proc_chance: any;
-    public base_damage: any;
+    public radius: number;
+    public radius_increase_per_stack: number;
+    public stack_limit: number;
+    public stack_duration: number;
+    public proc_chance: number;
+    public base_damage: number;
     public allow_repeat: any;
-    public repeat_chance_pct: any;
-    public taunted_damage_bonus_pct: any;
+    public repeat_chance_pct: number;
+    public taunted_damage_bonus_pct: number;
     public str: any;
     public talent_4_value: any;
-    public bonus_damage: any;
-    public total_damage: any;
+    public bonus_damage: number;
+    public total_damage: number;
     public helix_pfx_1: any;
-    public enemies: any;
-    BeCreated(p_0: any,): void {
+    public enemies: IBaseNpc_Plus[];
+    Init(p_0: any,): void {
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.modifier_enemy_taunt = "modifier_imba_berserkers_call_debuff_cmd";
         this.spin_to_win_modifier = "modifier_imba_counter_helix_spin_stacks";
-        this.radius = this.ability.GetSpecialValueFor("radius");
-        this.radius_increase_per_stack = this.ability.GetSpecialValueFor("radius_increase_per_stack");
-        this.stack_limit = this.ability.GetSpecialValueFor("stack_limit");
-        this.stack_duration = this.ability.GetSpecialValueFor("stack_duration");
-        this.proc_chance = this.ability.GetSpecialValueFor("proc_chance");
-        this.base_damage = this.ability.GetSpecialValueFor("base_damage");
+        this.radius = this.GetSpecialValueFor("radius");
+        this.radius_increase_per_stack = this.GetSpecialValueFor("radius_increase_per_stack");
+        this.stack_limit = this.GetSpecialValueFor("stack_limit");
+        this.stack_duration = this.GetSpecialValueFor("stack_duration");
+        this.proc_chance = this.GetSpecialValueFor("proc_chance");
+        this.base_damage = this.GetSpecialValueFor("base_damage");
         if (this.caster.HasTalent("special_bonus_imba_axe_5")) {
             this.proc_chance = this.proc_chance * this.caster.GetTalentValue("special_bonus_imba_axe_5", "proc_chance_multiplier");
-            this.base_damage = this.base_damage * this.caster.FindTalentValue("special_bonus_imba_axe_5", "damage_multiplier") * 0.01;
+            this.base_damage = this.base_damage * this.caster.GetTalentValue("special_bonus_imba_axe_5", "damage_multiplier") * 0.01;
         }
         if (this.caster.HasTalent("special_bonus_imba_axe_6")) {
             this.allow_repeat = true;
@@ -606,23 +633,19 @@ export class modifier_imba_counter_helix_passive extends BaseModifier_Plus {
         } else {
             this.allow_repeat = false;
         }
-        this.taunted_damage_bonus_pct = this.ability.GetSpecialValueFor("taunted_damage_bonus_pct");
+        this.taunted_damage_bonus_pct = this.GetSpecialValueFor("taunted_damage_bonus_pct");
     }
-    BeRefresh(p_0: any,): void {
-        this.OnCreated();
-    }
-    DeclareFunctions(): modifierfunction[] {
-        return Object.values({
-            1: modifierfunction.MODIFIER_EVENT_ON_ATTACK_LANDED
-        });
-    }
-    OnAttackLanded(keys: ModifierAttackEvent): void {
+    /** DeclareFunctions():modifierfunction[] {
+    return Object.values({
+        1: Enum_MODIFIER_EVENT.ON_ATTACK_LANDED
+    });
+    } */
+    @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED, false, true)
+    CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (this.GetAbilityPlus() && !this.GetCasterPlus().PassivesDisabled() && ((keys.target == this.GetParentPlus() && !keys.attacker.IsBuilding() && !keys.attacker.IsOther() && keys.attacker.GetTeamNumber() != keys.target.GetTeamNumber()) || (keys.attacker == this.GetCasterPlus() && this.GetCasterPlus().HasTalent("special_bonus_imba_axe_9")))) {
-            this.proc_chance = this.GetAbilityPlus().GetSpecialValueFor("proc_chance");
-            this.base_damage = this.GetAbilityPlus().GetSpecialValueFor("base_damage");
             if (this.caster.HasTalent("special_bonus_imba_axe_5")) {
                 this.proc_chance = this.proc_chance * this.caster.GetTalentValue("special_bonus_imba_axe_5", "proc_chance_multiplier");
-                this.base_damage = this.base_damage * this.caster.FindTalentValue("special_bonus_imba_axe_5", "damage_multiplier") * 0.01;
+                this.base_damage = this.base_damage * this.caster.GetTalentValue("special_bonus_imba_axe_5", "damage_multiplier") * 0.01;
             }
             if (this.caster.HasTalent("special_bonus_imba_axe_4")) {
                 this.str = this.caster.GetStrength() / 100;
@@ -635,19 +658,19 @@ export class modifier_imba_counter_helix_passive extends BaseModifier_Plus {
             if (this.caster.HasTalent("special_bonus_imba_axe_7")) {
                 this.total_damage = this.total_damage + this.caster.GetPhysicalArmorValue(false) * this.caster.GetTalentValue("special_bonus_imba_axe_7");
             }
-            if (RollPseudoRandom(this.proc_chance,)) {
+            if (GameFunc.PRD(this.proc_chance, this)) {
                 this.Spin(this.allow_repeat);
             }
         }
     }
-    Spin(repeat_allowed) {
+    Spin(repeat_allowed: boolean = true) {
         this.helix_pfx_1 = ResHelper.CreateParticleEx("particles/units/heroes/hero_axe/axe_attack_blur_counterhelix.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster, this.caster);
         ParticleManager.SetParticleControl(this.helix_pfx_1, 0, this.caster.GetAbsOrigin());
-        if (Battlepass && Battlepass.HasArcana(this.caster.GetPlayerID(), "axe")) {
-            ParticleManager.SetParticleControlEnt(this.helix_pfx_1, 1, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.caster.GetAbsOrigin(), true);
-            ParticleManager.SetParticleControlEnt(this.helix_pfx_1, 2, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", this.caster.GetAbsOrigin(), true);
-            ParticleManager.SetParticleControl(this.helix_pfx_1, 3, this.caster.GetAbsOrigin());
-        }
+        // if (Battlepass && Battlepass.HasArcana(this.caster.GetPlayerID(), "axe")) {
+        ParticleManager.SetParticleControlEnt(this.helix_pfx_1, 1, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.caster.GetAbsOrigin(), true);
+        ParticleManager.SetParticleControlEnt(this.helix_pfx_1, 2, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", this.caster.GetAbsOrigin(), true);
+        ParticleManager.SetParticleControl(this.helix_pfx_1, 3, this.caster.GetAbsOrigin());
+        // }
         ParticleManager.ReleaseParticleIndex(this.helix_pfx_1);
         this.caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
         this.caster.EmitSound("Hero_Axe.CounterHelix");
@@ -699,10 +722,11 @@ export class modifier_imba_counter_helix_passive extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_imba_counter_helix_spin_stacks extends BaseModifier_Plus {
-    public stack_limit: any;
+    public stack_limit: number;
     BeCreated(p_0: any,): void {
-        this.stack_limit = this.GetAbilityPlus().GetSpecialValueFor("stack_limit");
+        this.stack_limit = this.GetSpecialValueFor("stack_limit");
     }
     OnStackCountChanged(oldstacks: number): void {
         if (this.GetStackCount() > this.stack_limit) {
@@ -719,60 +743,83 @@ export class modifier_imba_counter_helix_spin_stacks extends BaseModifier_Plus {
         return false;
     }
 }
+@registerAbility()
 export class imba_axe_culling_blade extends BaseAbility_Plus {
-    public caster: any;
-    public ability: any;
-    public target: any;
-    public target_location: any;
+    public caster: IBaseNpc_Plus;
+    public target: IBaseNpc_Plus;
+    public target_location: Vector;
     public scepter: any;
     public kill_enemy_response: any;
     public culling_modifier: any;
     public kill_threshold: any;
-    public kill_threshold_max_hp_pct: any;
-    public damage: any;
-    public speed_bonus: any;
-    public as_bonus: any;
-    public speed_duration: any;
-    public speed_aoe_radius: any;
-    public max_health_kill_heal_pct: any;
-    public scepter_battle_hunger_radius: any;
-    public culling_stack_duration: any;
+    public kill_threshold_max_hp_pct: number;
+    public damage: number;
+    public speed_bonus: number;
+    public as_bonus: number;
+    public speed_duration: number;
+    public speed_aoe_radius: number;
+    public max_health_kill_heal_pct: number;
+    public scepter_battle_hunger_radius: number;
+    public culling_stack_duration: number;
     public threshold_increase: any;
-    public threshold_max_hp_pct_increase: any;
-    public damageTable: any;
+    public threshold_max_hp_pct_increase: number;
+    public damageTable: ApplyDamageOptions;
     public item: any;
     public blink_cd_remaining: any;
     public blink_cd_total_minus_two: any;
-    public allies_in_radius: any;
-    public targets: any;
+    public allies_in_radius: IBaseNpc_Plus[];
+    public targets: IBaseNpc_Plus[];
     public battle_hunger_ability: any;
-    public heal_amount: any;
+    public heal_amount: number;
     public culling_kill_particle: any;
-    GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
-        return this.BaseClass.GetCastRange(location, target) + this.GetCasterPlus().GetTalentValue("special_bonus_imba_axe_8");
+
+    GetCooldown(level: number): number {
+        return 20;
     }
+    GetManaCost(level: number): number {
+        return 100;
+    }
+    AutoSpellSelf() {
+        let range = 200;
+        return AI_ability.TARGET_if_enemy(this, range, (enemy) => {
+            return this.checkCanKill(enemy)
+        });
+    }
+    GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
+        return super.GetCastRange(location, target) + this.GetCasterPlus().GetTalentValue("special_bonus_imba_axe_8");
+    }
+
+    checkCanKill(target: IBaseNpc_Plus) {
+        let r = (target.GetHealth() <= this.kill_threshold || (target.GetHealth() / target.GetMaxHealth() <= this.kill_threshold_max_hp_pct)) && !target.HasModifier("modifier_imba_reincarnation_scepter_wraith");
+        GLogHelper.print(r, "checkCanKill");
+        return true;
+    }
+
+    Init(): void {
+        this.kill_enemy_response = "axe_axe_ability_cullingblade_0" + math.random(1, 2);
+        this.culling_modifier = "modifier_imba_culling_blade_cull_stacks";
+        this.kill_threshold = this.GetSpecialValueFor("kill_threshold");
+        this.kill_threshold_max_hp_pct = this.GetSpecialValueFor("kill_threshold_max_hp_pct") / 100;
+        this.damage = this.GetSpecialValueFor("damage");
+        this.speed_bonus = this.GetSpecialValueFor("speed_bonus");
+        this.as_bonus = this.GetSpecialValueFor("as_bonus");
+        this.speed_duration = this.GetSpecialValueFor("speed_duration");
+        this.speed_aoe_radius = this.GetSpecialValueFor("speed_aoe");
+        this.max_health_kill_heal_pct = this.GetSpecialValueFor("max_health_kill_heal_pct");
+        this.scepter_battle_hunger_radius = this.GetSpecialValueFor("scepter_battle_hunger_radius");
+        this.culling_stack_duration = this.GetSpecialValueFor("stack_duration");
+        this.threshold_increase = this.GetSpecialValueFor("threshold_increase");
+        this.threshold_max_hp_pct_increase = this.GetSpecialValueFor("threshold_max_hp_pct_increase");
+    }
+
     OnSpellStart(): void {
         this.caster = this.GetCasterPlus();
-        this.ability = this;
         this.target = this.GetCursorTarget();
         this.target_location = this.target.GetAbsOrigin();
         this.scepter = this.caster.HasScepter();
-        this.kill_enemy_response = "axe_axe_ability_cullingblade_0" + math.random(1, 2);
-        this.culling_modifier = "modifier_imba_culling_blade_cull_stacks";
-        this.kill_threshold = this.ability.GetSpecialValueFor("kill_threshold");
-        this.kill_threshold_max_hp_pct = this.ability.GetSpecialValueFor("kill_threshold_max_hp_pct") / 100;
-        this.damage = this.ability.GetSpecialValueFor("damage");
-        this.speed_bonus = this.ability.GetSpecialValueFor("speed_bonus");
-        this.as_bonus = this.ability.GetSpecialValueFor("as_bonus");
-        this.speed_duration = this.ability.GetSpecialValueFor("speed_duration");
-        this.speed_aoe_radius = this.ability.GetSpecialValueFor("speed_aoe");
-        this.max_health_kill_heal_pct = this.ability.GetSpecialValueFor("max_health_kill_heal_pct");
-        this.scepter_battle_hunger_radius = this.ability.GetSpecialValueFor("scepter_battle_hunger_radius");
-        this.culling_stack_duration = this.ability.GetSpecialValueFor("stack_duration");
-        this.threshold_increase = this.ability.GetSpecialValueFor("threshold_increase");
-        this.threshold_max_hp_pct_increase = this.ability.GetSpecialValueFor("threshold_max_hp_pct_increase");
+        this.Init();
         if (this.target.GetTeamNumber() != this.caster.GetTeamNumber()) {
-            if (this.target.TriggerSpellAbsorb(this.ability)) {
+            if (this.target.TriggerSpellAbsorb(this)) {
                 this.caster.RemoveModifierByName(this.culling_modifier);
                 return;
             }
@@ -786,8 +833,8 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
             victim: this.target,
             attacker: this.caster,
             damage: this.damage,
-            damage_type: this.ability.GetAbilityDamageType(),
-            ability: this.ability
+            damage_type: this.GetAbilityDamageType(),
+            ability: this
         }
         let vLocation = this.GetCursorPosition();
         let kv = {
@@ -795,11 +842,12 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
             vLocY: vLocation.y,
             vLocZ: vLocation.z
         }
-        if ((this.target.GetHealth() <= this.kill_threshold || (this.target.GetHealth() / this.target.GetMaxHealth() <= this.kill_threshold_max_hp_pct)) && !this.target.HasModifier("modifier_imba_reincarnation_scepter_wraith")) {
-            if (this.caster.HasTalent("special_bonus_imba_axe_8") && (this.GetCasterPlus().GetAbsOrigin() - this.target_location).Length2D() > this.BaseClass.GetCastRange(this.target_location, this.target)) {
-                this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), null, "modifier_imba_culling_blade_motion", kv);
+        if (this.checkCanKill(this.target)) {
+            if (this.caster.HasTalent("special_bonus_imba_axe_8") &&
+                GameFunc.Length2D(this.GetCasterPlus().GetAbsOrigin() - this.target_location) > super.GetCastRange(this.target_location, this.target)) {
+                this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_culling_blade_motion", kv);
                 this.GetCasterPlus().StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_CAST_ABILITY_4, 1);
-                Timers.CreateTimer(0.40, () => {
+                this.AddTimer(0.40, () => {
                     this.KillUnit(this.target);
                     this.GetCasterPlus().EmitSound("Hero_Axe.Culling_Blade_Success");
                 });
@@ -822,16 +870,16 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
             this.GetCasterPlus().EmitSoundParams(this.kill_enemy_response, 200, 1000, 1);
             this.allies_in_radius = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.speed_aoe_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, target] of ipairs(this.allies_in_radius)) {
-                target.AddNewModifier(this.caster, null, "modifier_imba_culling_blade_buff_haste", {
+                target.AddNewModifier(this.caster, this, "modifier_imba_culling_blade_buff_haste", {
                     duration: this.speed_duration
                 });
             }
             if ((this.target.IsHero())) {
-                this.ability.EndCooldown();
+                this.EndCooldown();
                 if (dunk_modifier) {
                     dunk_modifier.ForceRefresh();
                 } else {
-                    dunk_modifier = this.caster.AddNewModifier(this.caster, null, this.culling_modifier, {
+                    dunk_modifier = this.caster.AddNewModifier(this.caster, this, this.culling_modifier, {
                         duration: this.culling_stack_duration
                     });
                 }
@@ -846,11 +894,12 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
                     }
                 }
             }
-        } else {
-            if (this.caster.HasTalent("special_bonus_imba_axe_8") && (this.GetCasterPlus().GetAbsOrigin() - this.target_location).Length2D() > this.GetCastRange(this.target_location, this.target)) {
-                this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), null, "modifier_imba_culling_blade_motion", kv);
+        }
+        else {
+            if (this.caster.HasTalent("special_bonus_imba_axe_8") && GameFunc.Length2D(this.GetCasterPlus().GetAbsOrigin() - this.target_location) > super.GetCastRange(this.target_location, this.target)) {
+                this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_culling_blade_motion", kv);
                 this.GetCasterPlus().StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_CAST_ABILITY_4, 1);
-                Timers.CreateTimer(0.4, () => {
+                this.AddTimer(0.4, () => {
                     EmitSoundOn("Hero_Axe.Culling_Blade_Fail", this.GetCasterPlus());
                     ApplyDamage(this.damageTable);
                 });
@@ -862,15 +911,15 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
         }
     }
     KillUnit(target: IBaseNpc_Plus) {
-        TrueKill(this.caster, target,);
+        target.TrueKilled(this.caster, this);
         this.heal_amount = (this.caster.GetMaxHealth() / 100) * this.max_health_kill_heal_pct;
-        this.caster.Heal(this.heal_amount, this.caster);
+        this.caster.Heal(this.heal_amount, this);
         this.culling_kill_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_axe/axe_culling_blade_kill.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, this.caster, this.caster);
         ParticleManager.SetParticleControl(this.culling_kill_particle, 4, this.target_location);
         ParticleManager.ReleaseParticleIndex(this.culling_kill_particle);
     }
     GetCastAnimation(): GameActivity_t {
-        if (this.target && this.target_location && this.GetCasterPlus().HasTalent("special_bonus_imba_axe_8") && (this.GetCasterPlus().GetAbsOrigin() - this.target_location).Length2D() > this.BaseClass.GetCastRange(this.target_location, this.target)) {
+        if (this.target && this.target_location && this.GetCasterPlus().HasTalent("special_bonus_imba_axe_8") && GameFunc.Length2D(this.GetCasterPlus().GetAbsOrigin() - this.target_location) > super.GetCastRange(this.target_location, this.target)) {
             return GameActivity_t.ACT_SHOTGUN_PUMP;
         } else {
             return GameActivity_t.ACT_DOTA_CAST_ABILITY_4;
@@ -882,10 +931,11 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
         }
     }
 }
+@registerModifier()
 export class modifier_imba_culling_blade_cull_stacks extends BaseModifier_Plus {
-    public stack_limit: any;
+    public stack_limit: number;
     BeCreated(p_0: any,): void {
-        this.stack_limit = this.GetAbilityPlus().GetSpecialValueFor("stack_limit");
+        this.stack_limit = this.GetSpecialValueFor("stack_limit");
     }
     OnStackCountChanged(oldstacks: number): void {
         if (this.GetStackCount() > this.stack_limit) {
@@ -893,6 +943,7 @@ export class modifier_imba_culling_blade_cull_stacks extends BaseModifier_Plus {
         }
     }
 }
+@registerModifier()
 export class modifier_imba_culling_blade_buff_haste extends BaseModifier_Plus {
     public axe_culling_blade_boost: any;
     public pfx: any;
@@ -905,17 +956,19 @@ export class modifier_imba_culling_blade_buff_haste extends BaseModifier_Plus {
         this.pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_axe/axe_cullingblade_sprint_axe.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus());
         this.AddParticle(this.pfx, false, false, -1, false, false);
     }
-    DeclareFunctions(): modifierfunction[] {
-        return Object.values({
-            1: modifierfunction.MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
-            2: modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT
-        });
+    /** DeclareFunctions():modifierfunction[] {
+    return Object.values({
+        1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
+        2: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT
+    });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
+    CC_GetModifierMoveSpeedBonus_Percentage(): number {
+        return this.GetSpecialValueFor("speed_bonus");
     }
-    GetModifierMoveSpeedBonus_Percentage(): number {
-        return this.GetAbilityPlus().GetSpecialValueFor("speed_bonus");
-    }
-    GetModifierAttackSpeedBonus_Constant(): number {
-        return this.GetAbilityPlus().GetSpecialValueFor("as_bonus");
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    CC_GetModifierAttackSpeedBonus_Constant(): number {
+        return this.GetSpecialValueFor("as_bonus");
     }
     IsBuff() {
         return true;
@@ -942,12 +995,13 @@ export class modifier_imba_culling_blade_buff_haste extends BaseModifier_Plus {
         }
     }
 }
-export class modifier_imba_culling_blade_motion extends BaseModifier_Plus {
+@registerModifier()
+export class modifier_imba_culling_blade_motion extends BaseModifierMotionBoth_Plus {
     public axe_minimum_height_above_lowest: any;
     public axe_minimum_height_above_highest: any;
     public axe_acceleration_z: any;
     public axe_max_horizontal_acceleration: any;
-    public vStartPosition: any;
+    public vStartPosition: Vector;
     public flCurrentTimeHoriz: any;
     public flCurrentTimeVert: any;
     public vLoc: any;
@@ -988,7 +1042,7 @@ export class modifier_imba_culling_blade_motion extends BaseModifier_Plus {
             this.flCurrentTimeVert = 0.0;
             this.vLoc = Vector(kv.vLocX, kv.vLocY, kv.vLocZ);
             this.vLastKnownTargetPos = this.vLoc;
-            let duration = this.GetAbilityPlus().GetSpecialValueFor("duration");
+            let duration = this.GetSpecialValueFor("duration");
             let flDesiredHeight = this.axe_minimum_height_above_lowest * duration * duration;
             let flLowZ = math.min(this.vLastKnownTargetPos.z, this.vStartPosition.z);
             let flHighZ = math.max(this.vLastKnownTargetPos.z, this.vStartPosition.z);
@@ -1000,38 +1054,38 @@ export class modifier_imba_culling_blade_motion extends BaseModifier_Plus {
             this.flPredictedTotalTime = math.max((this.flInitialVelocityZ + flSqrtDet) / this.axe_acceleration_z, (this.flInitialVelocityZ - flSqrtDet) / this.axe_acceleration_z);
             this.vHorizontalVelocity = (this.vLastKnownTargetPos - this.vStartPosition) / this.flPredictedTotalTime;
             this.vHorizontalVelocity.z = 0.0;
-            this.frametime = FrameTime();
-            this.StartIntervalThink(this.frametime);
+
         }
     }
-    OnIntervalThink(): void {
-        if (!this.CheckMotionControllers()) {
-            this.Destroy();
-            return undefined;
-        }
-        this.HorizontalMotion(this.GetParentPlus(), this.frametime);
-        this.VerticalMotion(this.GetParentPlus(), this.frametime);
+
+    ApplyHorizontalMotionController() {
+        return true;
     }
-    HorizontalMotion(me: IBaseNpc_Plus, dt: number) {
+
+    ApplyVerticalMotionController() {
+        return true;
+    }
+
+    UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             this.flCurrentTimeHoriz = math.min(this.flCurrentTimeHoriz + dt, this.flPredictedTotalTime);
             let t = this.flCurrentTimeHoriz / this.flPredictedTotalTime;
             let vStartToTarget = this.vLastKnownTargetPos - this.vStartPosition;
             let vDesiredPos = this.vStartPosition + t * vStartToTarget;
             let vOldPos = me.GetOrigin();
-            let vToDesired = vDesiredPos - vOldPos;
+            let vToDesired = (vDesiredPos - vOldPos) as Vector;
             vToDesired.z = 0.0;
             let vDesiredVel = vToDesired / dt;
-            let vVelDif = vDesiredVel - this.vHorizontalVelocity;
+            let vVelDif = (vDesiredVel - this.vHorizontalVelocity) as Vector;
             let flVelDif = vVelDif.Length2D();
             vVelDif = vVelDif.Normalized();
             let flVelDelta = math.min(flVelDif, this.axe_max_horizontal_acceleration);
             this.vHorizontalVelocity = this.vHorizontalVelocity + vVelDif * flVelDelta * dt;
             let vNewPos = vOldPos + this.vHorizontalVelocity * dt;
-            me.SetOrigin(vNewPos);
+            me.SetOrigin(vNewPos as Vector);
         }
     }
-    VerticalMotion(me: IBaseNpc_Plus, dt: number) {
+    UpdateVerticalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             if (!this.GetParentPlus().IsAlive()) {
                 this.GetParentPlus().InterruptMotionControllers(true);
@@ -1059,6 +1113,7 @@ export class modifier_imba_culling_blade_motion extends BaseModifier_Plus {
         }
     }
 }
+@registerModifier()
 export class modifier_axe_arcana extends BaseModifier_Plus {
     RemoveOnDeath(): boolean {
         return false;
@@ -1066,15 +1121,17 @@ export class modifier_axe_arcana extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
     }
-    DeclareFunctions(): modifierfunction[] {
-        return Object.values({
-            1: modifierfunction.MODIFIER_PROPERTY_TRANSLATE_ATTACK_SOUND
-        });
-    }
-    GetAttackSound(): string {
+    /** DeclareFunctions():modifierfunction[] {
+    return Object.values({
+        1: GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND
+    });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ATTACK_SOUND)
+    CC_GetAttackSound(): string {
         return "Hero_Axe.Attack.Jungle";
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_axe_2 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
@@ -1086,6 +1143,7 @@ export class modifier_special_bonus_imba_axe_2 extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_axe_3 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
@@ -1097,6 +1155,7 @@ export class modifier_special_bonus_imba_axe_3 extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_axe_4 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
@@ -1108,6 +1167,7 @@ export class modifier_special_bonus_imba_axe_4 extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_axe_5 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
@@ -1119,6 +1179,7 @@ export class modifier_special_bonus_imba_axe_5 extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_axe_8 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;
@@ -1130,6 +1191,7 @@ export class modifier_special_bonus_imba_axe_8 extends BaseModifier_Plus {
         return false;
     }
 }
+@registerModifier()
 export class modifier_special_bonus_imba_axe_9 extends BaseModifier_Plus {
     IsHidden(): boolean {
         return true;

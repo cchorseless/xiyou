@@ -150,7 +150,7 @@ export class AbilityManagerComponent extends ET.Component {
     getAllCanCastAbility() {
         let r: ActiveRootAbility[] = [];
         let caster = this.GetDomain<IBaseNpc_Plus>();
-        if (caster.IsIllusion()) {
+        if (caster == null || caster.IsIllusion()) {
             return r;
         }
         let battleunit = this.GetDomain<IBaseNpc_Plus>().ETRoot.As<IBattleUnitEntityRoot>();

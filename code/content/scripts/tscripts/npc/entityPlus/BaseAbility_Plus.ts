@@ -44,7 +44,13 @@ export class BaseAbility_Plus extends BaseAbility {
 
     /**技能ICON */
     public GetAbilityTextureName(): string {
-        let iconpath = KVHelper.KvAbilitys[this.GetAbilityName()].AbilityTextureName || "";
+        let abilityname = this.GetAbilityName();
+        if (abilityname == null) { return "" }
+        let config = KVHelper.KvAbilitys[this.GetAbilityName()];
+        let iconpath = "";
+        if (config && config.AbilityTextureName) {
+            iconpath = config.AbilityTextureName;
+        }
         if (iconpath == "") {
             iconpath = this.__IN_DOTA_NAME__;
         }

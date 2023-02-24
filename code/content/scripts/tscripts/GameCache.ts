@@ -38,6 +38,7 @@ export class GameCache {
             if (isreg) {
                 if (buff.__AllRegisterEvent) {
                     for (let k in buff.__AllRegisterEvent) {
+                        k = k + "";
                         GGameCache.allBuffRegisterEvent[k] = GGameCache.allBuffRegisterEvent[k] || new Set();
                         GGameCache.allBuffRegisterEvent[k].add(buff);
                     }
@@ -49,6 +50,7 @@ export class GameCache {
                 // 删除事件
                 if (buff.__AllRegisterEvent) {
                     for (let k in buff.__AllRegisterEvent) {
+                        k = k + "";
                         if (GGameCache.allBuffRegisterEvent[k]) {
                             GGameCache.allBuffRegisterEvent[k].delete(buff);
                         }

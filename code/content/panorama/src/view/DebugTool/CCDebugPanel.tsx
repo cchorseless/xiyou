@@ -45,7 +45,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
         const lock_camera: boolean = true;
         const is_pause: boolean = false;
         const stop_ping: boolean = false;
-        const free_spells: boolean = true;
+        const free_spells: boolean = false;
         const is_frozen: boolean = true;
         return (
             this.__root___isValid &&
@@ -82,7 +82,7 @@ export class CCDebugPanel extends CCPanel<ICCDebugPanel> {
                     </CCDebugTool_Category>
                     <CCDebugTool_Category title="英雄" >
                         <CCDebugTool_DemoButton eventName="RefreshButtonPressed" localtext="刷新状态" />
-                        <CCDebugTool_DemoToggle eventName="FreeSpellsButtonPressed" localtext="无限技能" selected={free_spells} />
+                        <CCDebugTool_DemoToggle eventName={GameProtocol.Protocol.req_DebugWTF} localtext="无限技能" selected={free_spells} />
                         <CCDebugTool_DemoTextEntry eventName="LevelUpButtonPressed" localtext="升级" />
                         <CCDebugTool_DemoSelectionButton eventName="ChangeHeroButtonPressed" localtext="更换英雄" />
                     </CCDebugTool_Category>

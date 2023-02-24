@@ -57,8 +57,10 @@ export class AiAttackComponent extends ET.Component {
         let abilityM = battleUnit.AbilityManagerComp();
         if (abilityM) {
             let abilitys = abilityM.getAllCanCastAbility();
+            // GLogHelper.print(abilitys.length)
             while (abilitys.length > 0) {
                 let ability = abilitys.shift();
+                // GLogHelper.print(ability.GetAbilityName())
                 if (ability && ability.AutoSpellSelf()) {
                     return true;
                 }

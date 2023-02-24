@@ -1,5 +1,13 @@
 
 export module ResHelper {
+
+    export enum EDOTA_CAST_SOUND {
+        FLAG_NONE = 0,
+        FLAG_BOTH_TEAMS = 1,
+        FLAG_WHILE_DEAD = 2,
+        FLAG_GLOBAL = 4,
+    }
+
     export function GetAbilityTextureReplacement(res: string, npc: IBaseNpc_Plus): string {
         if (npc && npc.ETRoot) {
             let wearComp = npc.ETRoot.GetComponentByName<IWearableComponent>("WearableComponent");
@@ -139,7 +147,8 @@ export module ResHelper {
     }
 
 
-    export function CreateParticleEx(res: string, iAttachment: ParticleAttachment_t, owner: IBaseNpc_Plus, npc: IBaseNpc_Plus, validtime: number = -1, level: PARTICLE_DETAIL_LEVEL = PARTICLE_DETAIL_LEVEL.PARTICLE_DETAIL_LEVEL_ULTRA, isimmediately: boolean = false) {
+    export function CreateParticleEx(res: string, iAttachment: ParticleAttachment_t, owner: IBaseNpc_Plus, npc: IBaseNpc_Plus = null, validtime: number = -1, level: PARTICLE_DETAIL_LEVEL = PARTICLE_DETAIL_LEVEL.PARTICLE_DETAIL_LEVEL_ULTRA, isimmediately: boolean = false) {
+        if (npc == null) npc = owner;
         let p_id = ParticleManager.CreateParticle(ResHelper.GetParticleReplacement(res, npc), iAttachment, owner);
         if (validtime != null && validtime > 0) {
             GTimerHelper.AddTimer(validtime, GHandler.create(null, () => {

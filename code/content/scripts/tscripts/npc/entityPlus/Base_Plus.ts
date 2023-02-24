@@ -243,9 +243,10 @@ export class BaseModifier {
     public IsHidden() {
         return true;
     }
+    public IsBuff(): boolean { return true; }
     /**是否是debuff */
     public IsDebuff() {
-        return false;
+        return !this.IsBuff();
     }
     /**是否可以驱散 */
     public IsPurgable() {
@@ -334,6 +335,7 @@ export class BaseModifier {
     }
     __destroyed: boolean = true;
     public OnDestroy() {
+        this.__destroyed = true;
         this.BeDestroy && this.BeDestroy();
         PropertyCalculate.RegModifiersInfo(this, false);
         GGameCache.RegBuff(this, false);
@@ -343,7 +345,6 @@ export class BaseModifier {
         // 计时器处理
         GTimerHelper.ClearAll(this);
         this.StartIntervalThink(-1);
-        this.__destroyed = true;
     }
     /**重载 
      * @Both

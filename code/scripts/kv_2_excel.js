@@ -447,12 +447,12 @@ function createSound() {
                             newRow[index] = ab_info;
                         }
                         break;
-                        // default:
-                        //     let index2 = keyrow.indexOf(ability_k);
-                        //     if (index2 > -1) {
-                        //         newRow[index2] = "" + ab_info;
-                        //     }
-                        //     break;
+                    // default:
+                    //     let index2 = keyrow.indexOf(ability_k);
+                    //     if (index2 > -1) {
+                    //         newRow[index2] = "" + ab_info;
+                    //     }
+                    //     break;
                 }
                 if (ability_k == "vsnd_files") {
                     let index = keyrow.indexOf(ability_k);
@@ -586,14 +586,165 @@ function createShiPin() {
     fs.writeFileSync(old_shipin_out_path, xlsx.build(sheets));
 }
 
+const imbabasepath = "E:/project/dota_project/dota_imba-master/game/scripts/npc/";
+const imbaabilitypath = imbabasepath + "npc_abilities_custom.txt";
+const imbaabilityOutPath = "excels/abilities/imba_abilities.xlsx";
+function createImbaAbility() {
+    const abilitystr = fs.readFileSync(imbaabilitypath, "utf8");
+    const lines = abilitystr.split("\n");
+    let abilitys = [];
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith("#base")) {
+            let _kvpath = imbabasepath + lines[i].substring(6);
+            if (fs.existsSync(_kvpath)) {
+                abilitys.push(fs.readFileSync(_kvpath, "utf8"));
+            }
+        }
+        if (lines[i].includes("DOTAAbilities")) {
+            let newlines = lines.slice(i, lines.length - 1);
+            abilitys.push(newlines.join("\n"));
+            break;
+        }
+    }
+
+    const _str_start = "imba_";
+    const excludehero = ["npc_dota_hero_base"];
+    if (!fs.existsSync(imbaabilityOutPath)) {
+        return;
+    }
+    let sheets = xlsx.parse(imbaabilityOutPath);
+    if (sheets.length < 2) {
+        console.error("缺少参数表:", imbaabilityOutPath);
+        return;
+    }
+    let sheet = sheets[0];
+    let rows = sheet.data;
+    let nrows = rows.length;
+    let keyrow = rows[1];
+    let sheet_param = sheets[1];
+    let rows_param = sheet_param.data;
+    //空两行
+    rows.push([]);
+    let vscripts_index = keyrow.indexOf("ScriptFile");
+    let BaseClass_index = keyrow.indexOf("BaseClass");
+    for (let str of abilitys) {
+        let obj = keyvalues.decode(str);
+        let info_ability = obj.DOTAAbilities;
+        if (!info_ability) { continue; }
+        for (let abilityname in info_ability) {
+            if (abilityname.includes(_str_start) && excludehero.indexOf(abilityname) == -1) {
+                let abilityinfo = info_ability[abilityname];
+                let newRow = [abilityname];
+                newRow[vscripts_index] = ``;
+                newRow[BaseClass_index] = `ability_lua`;
+                for (let ability_k in abilityinfo) {
+                    let ab_info = abilityinfo[ability_k];
+                    switch (typeof ab_info) {
+                        case "string":
+                            let index = keyrow.indexOf(ability_k);
+                            if (index > -1) {
+                                newRow[index] = ab_info;
+                            }
+                            break;
+                        case "object":
+                            if (ability_k == "AbilitySpecial") {
+                                for (let index_kk in ab_info) {
+                                    let _kk = index_kk + ">K&";
+                                    let _VV = index_kk + ">V&";
+                                    let _k_str = "";
+                                    let _v_str = "";
+                                    let temp_index_kk = rows_param[2].indexOf(_kk);
+                                    let temp_index_vv = rows_param[2].indexOf(_VV);
+                                    let trueIndex_kk = rows[0].indexOf(rows_param[0][temp_index_kk]);
+                                    let trueIndex_vv = rows[0].indexOf(rows_param[0][temp_index_vv]);
+                                    let obj_keys = Object.keys(ab_info[index_kk]);
+                                    for (let i = 0; i < obj_keys.length; i++) {
+                                        let trueK = obj_keys[i];
+                                        let temp_v_str = null;
+                                        if (trueK == "LinkedSpecialBonus" || trueK == "ad_linked_ability") {
+                                            temp_v_str = ability_name_new_old[ab_info[index_kk][trueK]];
+                                        } else {
+                                            temp_v_str = ab_info[index_kk][trueK];
+                                        }
+                                        if (temp_v_str != null) {
+                                            _k_str += trueK;
+                                            _v_str += temp_v_str;
+                                        }
+                                        if (i < obj_keys.length - 1) {
+                                            _k_str += "\n";
+                                            _v_str += "\n";
+                                        }
+                                    }
+                                    newRow[trueIndex_kk] = _k_str;
+                                    newRow[trueIndex_vv] = _v_str;
+                                }
+                            }
+                            break;
+                    }
+                }
+                rows.push(newRow);
+                console.log(abilityname);
+            }
+        }
+    }
+    fs.writeFileSync(imbaabilityOutPath, xlsx.build(sheets));
+}
+const imbanpcpath = imbabasepath + "npc_heroes_custom.txt";
+const imbanpcexcelPath = "excels/abilities/npcability.xlsx";
+function createImbaNpc() {
+    const abilitystr = fs.readFileSync(imbanpcpath, "utf8");
+    const lines = abilitystr.split("\n");
+    let npcs = [];
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith("#base")) {
+            let _kvpath = imbabasepath + lines[i].substring(6);
+            if (fs.existsSync(_kvpath)) {
+                npcs.push(fs.readFileSync(_kvpath, "utf8"));
+            }
+        }
+        if (lines[i].includes("DOTAHeroes")) {
+            let newlines = lines.slice(i, lines.length - 1);
+            npcs.push(newlines.join("\n"));
+            break;
+        }
+    }
+    const _str_start = "npc_dota_";
+    const excludehero = ["npc_dota_hero_base"];
+    if (!fs.existsSync(imbanpcexcelPath)) {
+        return;
+    }
+    let sheets = xlsx.parse(imbanpcexcelPath);
+    let sheet = sheets[0];
+    let rows = sheet.data;
+    for (let str of npcs) {
+        let obj = keyvalues.decode(str);
+        let info_ability = obj.DOTAHeroes;
+        if (!info_ability) { continue; }
+        for (let abilityname in info_ability) {
+            if (abilityname.includes(_str_start) && excludehero.indexOf(abilityname) == -1) {
+                let abilityinfo = info_ability[abilityname];
+                let newRow = [abilityname];
+                for (let j = 1; j < 20; j++) {
+                    if (abilityinfo["Ability" + j]) {
+                        newRow[j] = abilityinfo["Ability" + j];
+                    }
+                }
+                rows.push(newRow);
+                console.log(abilityname);
+            }
+        }
+    }
+    fs.writeFileSync(imbanpcexcelPath, xlsx.build(sheets));
+}
 
 (async () => {
     // var args = process.argv.splice(2);
     // readDATA();
     // createNpc()
-    createShiPin()
+    // createShiPin()
     // createItem()
     // createSound();
+    // createImbaNpc();
 })().catch((error) => {
     console.error(error);
     process.exit(1);

@@ -1,3 +1,4 @@
+import { BattleSystemComponent } from "./System/BattleSystemComponent";
 import { BuildingSystemComponent } from "./System/BuildingSystemComponent";
 import { ChessControlSystemComponent } from "./System/ChessControlSystemComponent";
 import { CombinationSystemComponent } from "./System/CombinationSystemComponent";
@@ -14,6 +15,7 @@ import { RoundSystemComponent } from "./System/RoundSystemComponent";
 
 
 [
+    BattleSystemComponent,
     GameServiceSystemComponent,
     MapSystemComponent,
     RoundSystemComponent,

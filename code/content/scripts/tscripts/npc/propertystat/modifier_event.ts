@@ -51,7 +51,7 @@ export class modifier_event extends BaseModifier_Plus {
             [a, b, c] = GameFunc.IncludeArgs(event.eventType, EventDataType.attackerIsSelf, EventDataType.unitIsSelf, EventDataType.OtherCanBeAnyOne);
         }
         while (k.length > 0) {
-            let _k = k.shift();
+            let _k = "" + k.shift();
             let allM = GGameCache.allBuffRegisterEvent[_k];
             if (allM == null || allM.size == 0) return;
             for (let m of allM) {
@@ -96,13 +96,6 @@ export class modifier_event extends BaseModifier_Plus {
         event.eventType = EventDataType.unitIsSelf;
         this.FireEvent(event, ...k)
     }
-    BeCreated() {
-        if (!IsServer()) {
-            return;
-        }
-        // this.addGameEvent();
-    }
-
 
 
     DeclareFunctions() {

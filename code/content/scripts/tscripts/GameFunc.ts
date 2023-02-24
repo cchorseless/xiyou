@@ -2,6 +2,44 @@ import { NetTablesHelper } from "./helper/NetTablesHelper";
 import { GameServiceConfig } from "./shared/GameServiceConfig";
 
 export module GameFunc {
+
+    const chances_table = [
+        0, 0.015604, 0.062009, 0.138618, 0.244856, 0.380166, 0.544011, 0.735871, 0.955242,
+        1.201637, 1.474584, 1.773627, 2.098323, 2.448241, 2.822965, 3.222091, 3.645227,
+        4.091991, 4.562014, 5.054934, 5.570404, 6.108083, 6.667640, 7.248754, 7.851112,
+        8.474409, 9.118346, 9.782638, 10.46702, 11.17117, 11.89491, 12.63793, 13.40008,
+        14.18052, 14.98100, 15.79831, 16.63287, 17.49092, 18.36246, 19.24859, 20.15474,
+        21.09200, 22.03645, 22.98986, 23.95401, 24.93070, 25.98723, 27.04529, 28.10076,
+        29.15522, 30.21030, 31.26766, 32.32905, 33.41199, 34.73699, 36.03978, 37.32168,
+        38.58396, 39.82783, 41.05446, 42.26497, 43.46044, 44.64192, 45.81044, 46.96699,
+        48.11254, 49.24807, 50.74626, 52.94117, 55.07246, 57.14285, 59.15493, 61.11111,
+        63.01369, 64.86486, 66.66666, 68.42105, 70.12987, 71.79487, 73.41772, 75.00000,
+        76.54321, 78.04878, 79.51807, 80.95238, 82.35294, 83.72093, 85.05747, 86.36363,
+        87.64044, 88.88888, 90.10989, 91.30434, 92.47311, 93.61702, 94.73684, 95.83333,
+        96.90721, 97.95918, 98.98989, 100];
+
+    export function PRD(chance: number, entity: any): boolean {
+        if (chance >= 100) { return true; }
+        entity.pseudoRandomModifier = entity.pseudoRandomModifier || 0;
+        let prngBase = chances_table[chance - 1];
+        if (!prngBase) {
+            return false;
+        }
+        if (RollPercentage(prngBase + entity.pseudoRandomModifier)) {
+            entity.pseudoRandomModifier = 0;
+            return true;
+        } else {
+            entity.pseudoRandomModifier = entity.pseudoRandomModifier + prngBase;
+            return false;
+        }
+    }
+    export function Length2D(r: number | Vector): number {
+        return (r as Vector).Length2D();
+    }
+    export function GetCount(obj: any[]): number {
+        return obj.length
+    }
+
     export function AsVector(obj: any) {
         return obj as Vector;
     }
@@ -21,6 +59,11 @@ export module GameFunc {
         }
         return Attributes.DOTA_ATTRIBUTE_INVALID;
     }
+
+    export function CalculateDistance(a: IBaseNpc_Plus, b: IBaseNpc_Plus): number {
+        return AsVector(a.GetAbsOrigin() - b.GetAbsOrigin()).Length2D();
+    }
+
 
     /**
      * 位运算判断参数是否包含
