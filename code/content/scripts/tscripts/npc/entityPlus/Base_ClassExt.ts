@@ -242,6 +242,15 @@ declare global {
         GetOwnerPlus<T extends IBaseNpc_Plus>(): T;
         GetLevelSpecialValueFor_Engine: typeof CDOTABaseAbility.GetLevelSpecialValueFor;
         GetSpecialValueFor_Engine: typeof CDOTABaseAbility.GetSpecialValueFor;
+        GetSpecialValueFor(sKey: string, default_V?: number): number;
+        /**
+         * @Both
+         * 获取技能和天赋值
+         * @param sKey 键名
+         * @param default_V 默认值
+         * @returns 值
+         */
+        GetTalentSpecialValueFor(sKey: string, default_V?: number): number;
         /**
          * 获取技能等级键值
          * @param sKey 键名
@@ -251,7 +260,7 @@ declare global {
          * @param hUnit 附加值函数计算者，不填默认为技能拥有者
          * @returns 值
          */
-        GetLevelSpecialValue(sKey: string, iLevel: number, bAbilityUpgrade?: boolean, bAdded?: boolean, hUnit?: CDOTA_BaseNPC): number;
+        // GetLevelSpecialValue(sKey: string, iLevel: number, bAbilityUpgrade?: boolean, bAdded?: boolean, hUnit?: CDOTA_BaseNPC): number;
         /**
          * 获取技能等级键附加值
          * @param sKey 键名
@@ -260,27 +269,25 @@ declare global {
          * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
          * @returns 值
          */
-        GetLevelSpecialAddedValue(sKey: string, iLevel: number, sAddedKey: string, bAbilityUpgrade?: boolean): string | number | undefined;
+        // GetLevelSpecialAddedValue(sKey: string, iLevel: number, sAddedKey: string, bAbilityUpgrade?: boolean): string | number | undefined;
 
-
+        /**
+         * @Both
+         * 设置技能默认值
+         * @param sKey 
+         * @param v 
+         */
         SetDefaultSpecialValue(sKey: string, v: any): void;
-        /**
-         * 获取技能当前等级键值
-         * @param sKey 键名
-         * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
-         * @param bAdded 是否计算附加值，不填默认为true
-         * @param hUnit 附加值函数计算者，不填默认为技能拥有者
-         * @returns 值
-         */
-        GetSpecialValue(sKey: string, bAbilityUpgrade?: boolean, bAdded?: boolean, hUnit?: CDOTA_BaseNPC): number;
-        /**
-         * 获取技能当前等级键附加值
-         * @param sKey 键名
-         * @param sAddedKey 键附加值名
-         * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
-         * @returns 值
-         */
-        GetSpecialAddedValue(sKey: string, sAddedKey: string, bAbilityUpgrade?: boolean): string | number | undefined;
+        // /**
+        //  * 获取技能当前等级键值
+        //  * @param sKey 键名
+        //  * @param bAbilityUpgrade 是否为计算技能升级，不填默认为true
+        //  * @param bAdded 是否计算附加值，不填默认为true
+        //  * @param hUnit 附加值函数计算者，不填默认为技能拥有者
+        //  * @returns 值
+        //  */
+        // GetSpecialValue(sKey: string, bAbilityUpgrade?: boolean, bAdded?: boolean, hUnit?: CDOTA_BaseNPC): number;
+
 
         /**
          * 技能是否准备就绪可以施放
@@ -297,8 +304,9 @@ declare global {
          * @param sTalent 天赋名
          * @returns 值
          */
-        HasTalent(sTalent: string): boolean;
+        HasTalent(sTalent: string): IBaseAbility_Plus | null;
         /**
+         * @Both
          * 获取天赋数值
          * @param sKey 键名
          * @returns 值
@@ -350,7 +358,7 @@ CBaseAbility.GetSpecialValueFor = function (s: string, default_V = 0): number {
     if (r && r != 0) {
         return r
     }
-    else if (this.__DefaultSpecialValue__ && this.__DefaultSpecialValue__[s] && this.__DefaultSpecialValue__[s] != 0) {
+    else if (this.__DefaultSpecialValue__ && this.__DefaultSpecialValue__[s] && this.__DefaultSpecialValue__[s] != null) {
         let data = this.__DefaultSpecialValue__[s];
         if (type(data) == 'number') {
             return data as number
@@ -360,9 +368,52 @@ CBaseAbility.GetSpecialValueFor = function (s: string, default_V = 0): number {
             return (data as number[])[level - 1] as number
         }
     }
-    else {
-        return default_V
+    let data = KVHelper.KvAbilitys[this.GetAbilityName()] || KVHelper.KvItems[this.GetAbilityName()];
+    if (data && data[s] != null && data[s] != "") {
+        let dataV = data[s] as string;
+        if (type(dataV) == 'string') {
+            let datalist = dataV.split(' ').map((v) => { return GToNumber(v) });
+            let index = math.min(this.GetLevel(), datalist.length);
+            return (datalist)[index - 1] as number
+        }
     }
+    GLogHelper.warn("GetSpecialValueFor Miss ", this.GetAbilityName(), s);
+    return default_V
+}
+CBaseAbility.GetTalentSpecialValueFor = function (s: string, default_V = 0): number {
+    let base = this.GetSpecialValueFor(s, default_V);
+    let talentName;
+    const link = "LinkedSpecialBonus";
+    let data: { [k: string]: any } = KVHelper.KvAbilitys[this.GetAbilityName()] || KVHelper.KvItems[this.GetAbilityName()];
+    for (const k in data) {
+        const v: { [k: string]: any } = data[k];
+        if (k == "AbilitySpecial") {
+            for (const [l, m] of ipairs(v)) {
+                if (m[s] && m[link]) {
+                    talentName = m[link];
+                    break;
+                }
+            }
+        }
+        else if (k == "AbilityValues") {
+            for (const [l, m] of ipairs(v)) {
+                if (type(m) == "table") {
+                    if (m[s] && m[link]) {
+                        talentName = m[link];
+                        break;
+                    }
+                }
+            }
+        }
+        if (talentName) break;
+    }
+    if (talentName) {
+        let talent = this.GetCasterPlus().FindAbilityByName(talentName);
+        if (talent && talent.GetLevel() > 0) {
+            base = base + talent.GetSpecialValueFor("value");
+        }
+    }
+    return base;
 }
 
 // CBaseAbility.GetLevelSpecialValue = function (sKey: string, iLevel: number, bAbilityUpgrade: boolean = true, bAdded: boolean = true, hUnit?: CDOTA_BaseNPC) {
@@ -424,10 +475,7 @@ CBaseAbility.GetSpecialValueFor = function (s: string, default_V = 0): number {
 //     }
 //     return value;
 // };
-// CBaseAbility.GetLevelSpecialValueFor = function (sKey: string, iLevel: number) {
-//     if (!IsValid(this)) return 0;
-//     return this.GetLevelSpecialValue(sKey, iLevel);
-// };
+
 // CBaseAbility.GetLevelSpecialAddedValue = function (sKey: string, iLevel: number, sAddedKey: string, bAbilityUpgrade: boolean = true) {
 //     if (!IsValid(this)) return;
 //     if (iLevel == -1) iLevel = this.GetLevel() - 1;
@@ -447,9 +495,7 @@ CBaseAbility.GetSpecialValueFor = function (s: string, default_V = 0): number {
 //     return value;
 // };
 
-// if (CBaseAbility.GetSpecialValueFor_Engine == undefined) {
-//     CBaseAbility.GetSpecialValueFor_Engine = CBaseAbility.GetSpecialValueFor;
-// }
+
 // CBaseAbility.GetSpecialValue = function (sKey: string, bAbilityUpgrade: boolean = true, bAdded: boolean = true, hUnit?: CDOTA_BaseNPC) {
 //     if (!IsValid(this)) return 0;
 //     let iLevel = this.GetLevel() - 1;
@@ -509,32 +555,28 @@ CBaseAbility.GetSpecialValueFor = function (s: string, default_V = 0): number {
 //     }
 //     return value;
 // };
-// CBaseAbility.GetSpecialValueFor = function (sKey: string) {
-//     if (!IsValid(this)) return 0;
-//     return this.GetSpecialValue(sKey);
-// };
+
 // CBaseAbility.GetSpecialAddedValue = function (sKey: string, sAddedKey: string, bAbilityUpgrade: boolean = true) {
 //     return this.GetLevelSpecialAddedValue(sKey, this.GetLevel() - 1, sAddedKey, bAbilityUpgrade);
 // };
 
-// CBaseAbility.HasTalent = function (sTalent: string) {
-//     if (!IsValid(this)) return false;
-//     const hCaster = this.GetCaster();
-//     const hTalent = hCaster?.FindAbilityByName(sTalent);
-//     if (!IsValid(hTalent) || hTalent.GetLevel() == 0) {
-//         return false;
-//     }
-//     return true;
-// };
-// CBaseAbility.GetTalentValue = function (sTalent: string, sKey: string) {
-//     if (!IsValid(this)) return 0;
-//     const hCaster = this.GetCaster();
-//     const hTalent = hCaster?.FindAbilityByName(sTalent);
-//     if (!IsValid(hTalent) || hTalent.GetLevel() == 0) {
-//         return 0;
-//     }
-//     return hTalent.GetSpecialValueFor(sKey);
-// };
+CBaseAbility.HasTalent = function (sTalent: string) {
+    if (!IsValid(this)) return;
+    const hCaster = this.GetCaster();
+    const hTalent = hCaster.FindAbilityByName(sTalent);
+    if (IsValid(hTalent) && hTalent.GetLevel() > 0) {
+        return hTalent as IBaseAbility_Plus;
+    }
+};
+CBaseAbility.GetTalentValue = function (sTalent: string, sKey: string) {
+    if (!IsValid(this)) return 0;
+    const hCaster = this.GetCasterPlus();
+    const hTalent = hCaster.FindAbilityByName(sTalent);
+    if (!IsValid(hTalent) || hTalent.GetLevel() == 0) {
+        return 0;
+    }
+    return hTalent.GetSpecialValueFor(sKey);
+};
 // CBaseAbility.GetCustomAbilityType = function () {
 //     let customAbilityType = KVHelper.KvAbilitys[this.GetAbilityName()].CustomAbilityType;
 //     if (customAbilityType == undefined || customAbilityType == "") {
@@ -681,6 +723,14 @@ declare global {
          */
         GetSpecialValueFor(sKey: string, default_V?: number): number;
         /**
+         * @Both
+         * 获取技能当前等级键附加值
+         * @param sKey 键名
+         * @param default_V 默认值
+         * @returns 值
+         */
+        GetTalentSpecialValueFor(sKey: string, default_V?: number): number;
+        /**
          * 获取buff来源技能等级键值，如获取不到则会返回0
          * @Both
          * @param sKey 键名
@@ -780,7 +830,20 @@ CDOTA_Buff.GetSpecialValueFor = function (s: string, default_V = 0) {
         return default_V;
     }
 };
-
+CDOTA_Buff.GetTalentSpecialValueFor = function (s: string, default_V = 0) {
+    if (!IsValid(this)) return 0;
+    let r = 0;
+    if (this.GetAbility() == null) {
+        r = (this as any)[s];
+    } else {
+        r = this.GetAbilityPlus().GetTalentSpecialValueFor(s) || 0;
+    }
+    if (r && r != 0) {
+        return r;
+    } else {
+        return default_V;
+    }
+}
 CDOTA_Buff.GetLevelSpecialValueFor = function (s: string, lvl: number) {
     if (!IsValid(this) || !IsValid(this.GetAbility())) return 0;
     if (this.GetAbility() == null) {
@@ -948,7 +1011,7 @@ declare global {
         /**
          * @Both
          */
-        TempData(): { [k: string]: any };
+        TempData<T = any>(): { [k: string]: T };
 
         /**
          * @Both
@@ -1028,13 +1091,13 @@ declare global {
          * @param level 
          * @returns 
          */
-        addAbilityPlus(abilityname: string, level?: number): IBaseAbility_Plus;
+        addAbilityPlus<T extends IBaseAbility_Plus>(abilityname: string, level?: number): T;
 
         /**
          * @BOTH
          * @param abilityname 
          */
-        findAbliityPlus<T extends CDOTABaseAbility>(abilityname: string): T | null;
+        findAbliityPlus<T extends IBaseAbility_Plus>(abilityname: string): T | null;
         /**
          * @Server
          * @param abilityname 
@@ -1081,6 +1144,11 @@ declare global {
          */
         findBuffStack(buffname: string, caster?: CDOTA_BaseNPC): number;
 
+        /**
+         * @Server
+         * 单位放到地面上
+         */
+        SetUnitOnClearGround(): void;
     }
 }
 
@@ -1173,6 +1241,10 @@ BaseNPC.findBuffStack = function (buffname: string, caster: CDOTA_BaseNPC = null
     return this.GetModifierStackCount(buffname, caster)
 }
 if (IsServer()) {
+
+
+
+
     BaseNPC.SetPrimaryAttribute = function (iPrimaryAttribute: Attributes) {
         if (iPrimaryAttribute > Attributes.DOTA_ATTRIBUTE_INVALID && iPrimaryAttribute < Attributes.DOTA_ATTRIBUTE_MAX) {
             const herobuff = GPropertyConfig.HERO_PROPERTY_BUFF_NAME;
@@ -1200,7 +1272,7 @@ if (IsServer()) {
     };
     BaseNPC.findAbliityPlus = function (abilityname: string) {
         let ability = this.FindAbilityByName(abilityname);
-        return ability;
+        return ability as IBaseAbility_Plus;
     };
     BaseNPC.removeAbilityPlus = function (abilityname: string) {
         let ability = this.FindAbilityByName(abilityname) as IBaseAbility_Plus;
@@ -1249,6 +1321,15 @@ if (IsServer()) {
             }
             return this.FindModifierByName(buffname);
         }
+    }
+
+    BaseNPC.SetUnitOnClearGround = function () {
+        GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+            let pos = this.GetAbsOrigin();
+            this.SetAbsOrigin(Vector(pos.x, pos.y, GetGroundPosition(pos, this).z));
+            FindClearSpaceForUnit(this, this.GetAbsOrigin(), true);
+            ResolveNPCPositions(this.GetAbsOrigin(), 64);
+        }));
     }
 }
 

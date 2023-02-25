@@ -737,6 +737,218 @@ function createImbaNpc() {
     fs.writeFileSync(imbanpcexcelPath, xlsx.build(sheets));
 }
 
+const imbaunitpath = imbabasepath + "npc_units_custom.txt";
+const imbaunitexcelPath = "excels/units/imba_units.xlsx";
+function createImbaUnit() {
+    const abilitystr = fs.readFileSync(imbaunitpath, "utf8");
+    const lines = abilitystr.split("\n");
+    let npcs = [];
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith("#base")) {
+            let _kvpath = imbabasepath + lines[i].substring(6);
+            if (fs.existsSync(_kvpath)) {
+                npcs.push(fs.readFileSync(_kvpath, "utf8"));
+            }
+        }
+        if (lines[i].includes("DOTAUnits")) {
+            let newlines = lines.slice(i, lines.length - 1);
+            npcs.push(newlines.join("\n"));
+            break;
+        }
+    }
+
+
+    const _str_start = "npc_imba_";
+    const excludehero = ["npc_dota_hero_base"];
+    if (!fs.existsSync(imbaunitexcelPath)) {
+        return;
+    }
+    let sheets = xlsx.parse(imbaunitexcelPath);
+    if (sheets.length < 2) {
+        console.error("缺少参数表:", imbaunitexcelPath);
+        return;
+    }
+    let sheet = sheets[0];
+    let rows = sheet.data;
+    let nrows = rows.length;
+    let keyrow = rows[1];
+    let sheet_param = sheets[1];
+    let rows_param = sheet_param.data;
+    //空两行
+    rows.push([]);
+    let vscripts_index = keyrow.indexOf("vscripts");
+    let BaseClass_index = keyrow.indexOf("BaseClass");
+    let shipin_index = keyrow.indexOf("AttachWearables");
+    for (let str of npcs) {
+        let obj = keyvalues.decode(str);
+        let info = obj.DOTAUnits || obj.DOTAHeroes;
+        if (!info) { continue; }
+        for (let k in info) {
+            if (k.indexOf(_str_start) > -1 && excludehero.indexOf(k) == -1) {
+                let npcinfo = info[k];
+                let npc_name = k;
+                let newRow = [npc_name];
+                newRow[vscripts_index] = `npc/units/imba/${npc_name}`;
+                newRow[BaseClass_index] = `npc_dota_creature`;
+                for (let npc_key in npcinfo) {
+                    let value = npcinfo[npc_key];
+                    switch (typeof value) {
+                        case "string":
+                            let index = keyrow.indexOf(npc_key);
+                            if (index > -1) {
+                                switch (npc_key) {
+                                    case "Ability1":
+                                    case "Ability2":
+                                    case "Ability3":
+                                    case "Ability4":
+                                    case "Ability5":
+                                    case "Ability6":
+                                    case "Ability7":
+                                    case "Ability8":
+                                    case "Ability9":
+                                    case "Ability10":
+                                    case "Ability11":
+                                    case "Ability12":
+                                    case "Ability13":
+                                    case "Ability14":
+                                    case "Ability15":
+                                    case "Ability16":
+                                    case "Ability17":
+                                        if (value != "generic_hidden") {
+                                            newRow[index] = npc_key.toLowerCase() + "_" + value;
+                                        }
+                                        break;
+                                    default:
+                                        newRow[index] = value;
+                                        break;
+                                }
+                            }
+                            break;
+                        case "object":
+                            let start = 0;
+                            let allindex = [];
+                            let index1 = rows_param[1].indexOf(npc_key, start);
+                            while (index1 > -1) {
+                                allindex.push(index1);
+                                start = index1 + 1;
+                                index1 = rows_param[1].indexOf(npc_key, start);
+                            }
+                            allindex.forEach((index) => {
+                                let trueIndex = rows[0].indexOf(rows_param[0][index]);
+                                let all_ks = Object.keys(value);
+                                switch (rows_param[2][index]) {
+                                    case "K&":
+                                    case "V&":
+                                        let k_str_ = "";
+                                        let v_str_ = "";
+                                        for (let i = 0; i < all_ks.length; i++) {
+                                            k_str_ += all_ks[i];
+                                            v_str_ += value[all_ks[i]];
+                                            if (i < all_ks.length - 1) {
+                                                k_str_ += "\n";
+                                                v_str_ += "\n";
+                                            }
+                                        }
+                                        if (rows_param[2][index] == "K&") {
+                                            newRow[trueIndex] = k_str_;
+                                        } else {
+                                            newRow[trueIndex] = v_str_;
+                                        }
+                                        break;
+                                }
+                            });
+                            break;
+                    }
+                }
+                // 饰品数据  默认饰品
+                // if (shiPinData[k] && shiPinData[k]["default_item"]) {
+                //     let shipin = shiPinData[k]["default_item"];
+                //     for (let jj = 0; jj < shipin.length; jj++) {
+                //         newRow[shipin_index + jj] = shipin[jj];
+                //     }
+                // }
+                rows.push(newRow);
+                console.log(k);
+            }
+        }
+    }
+    fs.writeFileSync(imbaunitexcelPath, xlsx.build(sheets));
+}
+const imbakvtmpPath = "excels/abilities/111.xlsx";
+function addkvvaluetoexcel() {
+    const checkreg = /[A-Z]/g;
+    const exkey = ["LinkedSpecialBonus", "var_type", "CalculateSpellDamageTooltip"]
+    const abilitystr = fs.readFileSync(old_ability_path, "utf8");
+    let dotaobj = keyvalues.decode(abilitystr).DOTAAbilities;
+    const imbastr = fs.readFileSync("game/scripts/npc/abilities/imba_abilities.kv", "utf8");
+    let imbaobj = keyvalues.decode(imbastr).imbaAbility;
+    let sheets = xlsx.parse(imbaabilityOutPath);
+    let sheet = sheets[0];
+    let rows = sheet.data;
+
+    let excelnameobj = {};
+    for (let i = 1; i < rows.length; i++) {
+        excelnameobj[rows[i][0]] = i;
+    }
+    for (let abilityname in imbaobj) {
+        let imbainfo = imbaobj[abilityname];
+        let imbaspe = {};
+        let imbaAbilitySpecial = imbainfo.AbilitySpecial;
+        if (imbaAbilitySpecial) {
+            for (let index in imbaAbilitySpecial) {
+                let imbaAbilitySpecialinfo = imbaAbilitySpecial[index];
+                for (let kkk in imbaAbilitySpecialinfo) {
+                    if (exkey.indexOf(kkk) == -1) {
+                        imbaspe[kkk] = imbaAbilitySpecialinfo[kkk];
+                    }
+                }
+            }
+        }
+
+        let kk = abilityname.replace("imba_", "");
+        if (dotaobj[kk]) {
+            let extraspe = {};
+            let AbilityValues = dotaobj[kk].AbilityValues;
+            if (AbilityValues) {
+                for (let k in AbilityValues) {
+                    if (imbaspe[k] == null && !checkreg.test(k)) {
+                        let v = typeof AbilityValues[k] == "object" ? AbilityValues[k].value : AbilityValues[k];
+                        if (v != null) extraspe[k] = v;
+                    }
+                }
+            }
+            let AbilitySpecial = dotaobj[kk].AbilitySpecial;
+            if (AbilitySpecial) {
+                for (let index in AbilitySpecial) {
+                    let AbilitySpecialinfo = AbilitySpecial[index];
+                    for (let kkk in AbilitySpecialinfo) {
+                        if (exkey.indexOf(kkk) == -1 && kkk != "var_type" && !checkreg.test(kkk)) {
+                            if (imbaspe[kkk] == null) {
+                                extraspe[kkk] = AbilitySpecialinfo[kkk];
+                            }
+                        }
+                    }
+                }
+            }
+            let index = excelnameobj[abilityname];
+            if (Object.keys(extraspe).length > 0 && index != null) {
+                let beginindex = 30;
+                while (rows[index][beginindex] != null) {
+                    beginindex++;
+                }
+                for (let k in extraspe) {
+                    rows[index][beginindex] = k;
+                    rows[index][beginindex + 1] = extraspe[k];
+                    beginindex += 2;
+                }
+            }
+        }
+    }
+    fs.writeFileSync(imbaabilityOutPath, xlsx.build(sheets));
+
+}
+
+
 (async () => {
     // var args = process.argv.splice(2);
     // readDATA();
@@ -745,6 +957,7 @@ function createImbaNpc() {
     // createItem()
     // createSound();
     // createImbaNpc();
+    // addkvvaluetoexcel();
 })().catch((error) => {
     console.error(error);
     process.exit(1);

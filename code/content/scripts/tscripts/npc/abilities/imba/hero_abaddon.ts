@@ -1,4 +1,5 @@
 
+import { AI_ability } from "../../../ai/AI_ability";
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -38,6 +39,15 @@ function getOverChannelShieldIncrease(caster: IBaseNpc_Plus) {
 
 @registerAbility()
 export class imba_abaddon_death_coil extends BaseAbility_Plus {
+
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        let range = 200;
+        return AI_ability.TARGET_if_enemy(this, range);
+    }
+
     public overchannel_damage_increase: number;
     public overchannel_mist_increase: any;
     public killed: boolean;
@@ -63,7 +73,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
                     "abaddon_abad_deathcoil_08"
                 ]
                 caster.EmitCasterSound(responses, 25, ResHelper.EDOTA_CAST_SOUND.FLAG_NONE, 20, "coil");
-                let health_cost = this.GetSpecialValue("self_damage");
+                let health_cost = this.GetSpecialValueFor("self_damage");
                 if (getOverChannelDamageIncrease) {
                     ApplyDamage({
                         victim: caster,
@@ -99,7 +109,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
                 bProvidesVision: true,
                 bVisibleToEnemies: true,
                 bReplaceExisting: false,
-                iMoveSpeed: this.GetSpecialValue("missile_speed"),
+                iMoveSpeed: this.GetSpecialValueFor("missile_speed"),
                 iVisionRadius: 0,
                 iVisionTeamNumber: caster.GetTeamNumber(),
                 ExtraData: {
@@ -127,7 +137,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
                 if (target.TriggerSpellAbsorb(this)) {
                     return undefined;
                 }
-                let damage = this.GetSpecialValue("target_damage") + this.overchannel_damage_increase;
+                let damage = this.GetSpecialValueFor("target_damage") + this.overchannel_damage_increase;
                 let damage_type = DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL;
                 let dealt_damage = ApplyDamage({
                     victim: target,
@@ -140,7 +150,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
                 }
                 let curse_of_avernus = caster.findAbliityPlus<imba_abaddon_frostmourne>("imba_abaddon_frostmourne");
                 if (curse_of_avernus) {
-                    let debuff_duration = curse_of_avernus.GetSpecialValue("slow_duration");
+                    let debuff_duration = curse_of_avernus.GetSpecialValueFor("slow_duration");
                     if (debuff_duration > 0 && !caster.PassivesDisabled()) {
                         target.AddNewModifier(caster, curse_of_avernus, "modifier_imba_curse_of_avernus_debuff_counter", {
                             duration: debuff_duration * (1 - target.GetStatusResistance())
@@ -148,7 +158,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
                     }
                 }
             } else {
-                let heal = (this.GetSpecialValue("heal_amount") + this.overchannel_damage_increase);
+                let heal = (this.GetSpecialValueFor("heal_amount") + this.overchannel_damage_increase);
                 target.Heal(heal, this);
                 target.AddNewModifier(caster, this, "modifier_imba_mist_coil_mist_ally", {
                     duration: mist_duration
@@ -295,6 +305,15 @@ export class modifier_imba_mist_coil_mist_ally extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_abaddon_aphotic_shield extends BaseAbility_Plus {
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        let range = 200;
+        return AI_ability.TARGET_if_friend(this, range);
+    }
+
+
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -327,7 +346,8 @@ export class imba_abaddon_aphotic_shield extends BaseAbility_Plus {
             target.Purge(false, true, false, true, true);
             let modifier_name_aphotic_shield = "modifier_imba_aphotic_shield_buff_block";
             target.RemoveModifierByName(modifier_name_aphotic_shield);
-            let duration = this.GetSpecialValue("duration");
+            let duration = this.GetSpecialValueFor("duration", 2);
+            GLogHelper.print(duration, "duration");
             target.AddNewModifier(caster, this, modifier_name_aphotic_shield, {
                 duration: duration
             });
@@ -365,7 +385,7 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
             let ability_level = ability.GetLevel();
             let target_origin = target.GetAbsOrigin();
             let attach_hitloc = "attach_hitloc";
-            this.shield_init_value = ability.GetSpecialValue("damage_absorb") + getOverChannelShieldIncrease(caster);
+            this.shield_init_value = ability.GetSpecialValueFor("damage_absorb") + getOverChannelShieldIncrease(caster);
             this.shield_remaining = this.shield_init_value;
             this.target_current_health = target.GetHealth();
             if (caster.HasTalent("special_bonus_imba_abaddon_3")) {
@@ -397,7 +417,7 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
             let caster = this.GetCasterPlus();
             let ability = this.GetAbilityPlus();
             let ability_level = ability.GetLevel();
-            let radius = ability.GetSpecialValue("radius");
+            let radius = ability.GetSpecialValueFor("radius");
             let explode_target_team = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH;
             let explode_target_type = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC;
             let target_vector = target.GetAbsOrigin();
@@ -411,7 +431,7 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
             let curse_of_avernus = caster.findAbliityPlus<imba_abaddon_frostmourne>("imba_abaddon_frostmourne");
             let debuff_duration;
             if (curse_of_avernus) {
-                debuff_duration = curse_of_avernus.GetSpecialValue("slow_duration");
+                debuff_duration = curse_of_avernus.GetSpecialValueFor("slow_duration");
             }
             let mist_coil_ability;
             let mist_coil_range;
@@ -452,7 +472,7 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
                         bProvidesVision: true,
                         bVisibleToEnemies: true,
                         bReplaceExisting: false,
-                        iMoveSpeed: mist_coil_ability.GetSpecialValue("missile_speed"),
+                        iMoveSpeed: mist_coil_ability.GetSpecialValueFor("missile_speed"),
                         iVisionRadius: 0,
                         iVisionTeamNumber: caster.GetTeamNumber(),
                         ExtraData: {
@@ -660,9 +680,9 @@ export class modifier_imba_curse_of_avernus_debuff_counter extends BaseModifier_
             return;
         }
         this.IncrementStackCount();
-        if (this.GetStackCount() >= this.GetAbilityPlus().GetSpecialValue("hit_count")) {
+        if (this.GetStackCount() >= this.GetSpecialValueFor("hit_count")) {
             this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_curse_of_avernus_debuff_slow", {
-                duration: this.GetAbilityPlus().GetSpecialValue("curse_duration")
+                duration: this.GetSpecialValueFor("curse_duration")
             });
             this.GetParentPlus().RemoveModifierByName("modifier_imba_curse_of_avernus_debuff_counter");
             let responses = [
@@ -699,7 +719,7 @@ export class modifier_imba_curse_of_avernus_debuff_counter extends BaseModifier_
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     CC_GetModifierMoveSpeedBonus_Percentage(): number {
-        return this.GetAbilityPlus().GetSpecialValue("movement_speed") * (-1);
+        return this.GetSpecialValueFor("movement_speed") * (-1);
     }
 }
 @registerModifier()
@@ -750,7 +770,7 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
                 this.base_duration = kv.duration;
             }
             if (!current_buff) {
-                let buff_duration = this.GetAbilityPlus().GetSpecialValue("slow_duration");
+                let buff_duration = this.GetSpecialValueFor("slow_duration");
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), buff_name, {
                     duration: buff_duration
                 });
@@ -774,7 +794,7 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
                 let attacker = kv.attacker;
                 if (caster.GetTeamNumber() == attacker.GetTeamNumber()) {
                     let ability = this.GetAbilityPlus();
-                    let buff_duration = ability.GetSpecialValue("slow_duration");
+                    let buff_duration = ability.GetSpecialValueFor("slow_duration");
                     if (this.has_talent) {
                         buff_duration = buff_duration + this.hits * this.duration_extend;
                     }
@@ -829,7 +849,7 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     CC_GetModifierMoveSpeedBonus_Percentage(): number {
-        return this.GetAbilityPlus().GetSpecialValue("curse_slow") * (-1);
+        return this.GetSpecialValueFor("curse_slow") * (-1);
     }
 }
 @registerModifier()
@@ -851,7 +871,7 @@ export class modifier_imba_curse_of_avernus_buff_haste extends BaseModifier_Plus
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
     }
     _UpdateIncreaseValues() {
-        this.attack_increase = this.GetAbilityPlus().GetSpecialValue("curse_attack_speed");
+        this.attack_increase = this.GetSpecialValueFor("curse_attack_speed");
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_abaddon_2")) {
             this.attack_increase = this.attack_increase + this.GetCasterPlus().GetTalentValue("special_bonus_imba_abaddon_2", "value");
         }
@@ -1004,9 +1024,9 @@ export class imba_abaddon_borrowed_time extends BaseAbility_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let ability_level = this.GetLevel();
-            let buff_duration = this.GetSpecialValue("duration");
+            let buff_duration = this.GetSpecialValueFor("duration");
             if (caster.HasScepter()) {
-                buff_duration = this.GetSpecialValue("duration_scepter");
+                buff_duration = this.GetSpecialValueFor("duration_scepter");
             }
             caster.AddNewModifier(caster, this, "modifier_imba_borrowed_time_buff_hot_caster", {
                 duration: buff_duration
@@ -1073,7 +1093,7 @@ export class modifier_imba_borrowed_time_handler extends BaseModifier_Plus {
             if (target.IsIllusion()) {
                 this.Destroy();
             } else {
-                this.hp_threshold = this.GetAbilityPlus().GetSpecialValue("hp_threshold");
+                this.hp_threshold = this.GetSpecialValueFor("hp_threshold");
                 this._CheckHealth(0);
             }
         }
@@ -1085,7 +1105,7 @@ export class modifier_imba_borrowed_time_handler extends BaseModifier_Plus {
         }
         return Object.values(funcs);
     } */
-    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
+    @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE, false, true)
     CC_OnTakeDamage(kv: ModifierInstanceEvent): void {
         if (IsServer()) {
             let target = this.GetParentPlus();
@@ -1196,14 +1216,14 @@ export class modifier_imba_borrowed_time_buff_hot_caster extends BaseModifier_Pl
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     CC_OnTakeDamage(kv: ModifierInstanceEvent): void {
         if (IsServer()) {
-            if (GameFunc.AsVector(kv.unit.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Length2D() <= this.GetAbilityPlus().GetSpecialValue("redirect_range_scepter") && this.GetCasterPlus().HasScepter() && kv.unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && !kv.unit.IsBuilding()) {
+            if (GameFunc.AsVector(kv.unit.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Length2D() <= this.GetSpecialValueFor("redirect_range_scepter") && this.GetCasterPlus().HasScepter() && kv.unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && !kv.unit.IsBuilding()) {
                 if (!kv.unit.TempData().borrowed_time_damage_taken) {
                     kv.unit.TempData().borrowed_time_damage_taken = 0;
                 }
                 kv.unit.TempData().borrowed_time_damage_taken = kv.unit.TempData().borrowed_time_damage_taken + kv.damage;
-                if (kv.unit.TempData().borrowed_time_damage_taken / this.GetAbilityPlus().GetSpecialValue("ally_threshold_scepter") >= 1) {
-                    for (let i = 1; i <= kv.unit.TempData().borrowed_time_damage_taken / this.GetAbilityPlus().GetSpecialValue("ally_threshold_scepter"); i += 1) {
-                        kv.unit.TempData().borrowed_time_damage_taken = kv.unit.TempData().borrowed_time_damage_taken - this.GetAbilityPlus().GetSpecialValue("ally_threshold_scepter");
+                if (kv.unit.TempData().borrowed_time_damage_taken / this.GetSpecialValueFor("ally_threshold_scepter") >= 1) {
+                    for (let i = 1; i <= kv.unit.TempData().borrowed_time_damage_taken / this.GetSpecialValueFor("ally_threshold_scepter"); i += 1) {
+                        kv.unit.TempData().borrowed_time_damage_taken = kv.unit.TempData().borrowed_time_damage_taken - this.GetSpecialValueFor("ally_threshold_scepter");
                         this.GetCasterPlus().findAbliityPlus<imba_abaddon_death_coil>("imba_abaddon_death_coil")._OnSpellStart(kv.unit, true);
                     }
                 }

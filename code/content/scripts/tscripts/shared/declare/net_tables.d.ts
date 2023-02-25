@@ -8,7 +8,7 @@ declare interface CustomNetTableInfo extends CustomNetTableDeclarations {
             _: string;
         };
     };
-
+    dotaentity: { [k: string]: any };
     etentity: { [k: string]: any };
     etentity0: { [k: string]: any };
     etentity1: { [k: string]: any };

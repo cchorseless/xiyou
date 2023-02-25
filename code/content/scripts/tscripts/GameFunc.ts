@@ -371,6 +371,10 @@ export module GameFunc {
     }
 
     export namespace ArrayFunc {
+
+        export function RandomOne<T>(arr: Array<T>): T {
+            return RandomArray(arr, 1, false)[0];
+        }
         /**
          * 随机数组 TODO 优化算法，count与数组长度接近，需要反向删选
          * @param arr

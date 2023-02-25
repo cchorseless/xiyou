@@ -51,7 +51,7 @@
 "DOTA_Tooltip_ability_imba_ancient_apparition_chilling_touch_Description"       "111"
 "DOTA_Tooltip_ability_imba_ancient_apparition_ice_blast"       "冰晶爆轰"
 "DOTA_Tooltip_ability_imba_ancient_apparition_ice_blast_Description"       "111"
-"DOTA_Tooltip_ability_imba_ancient_apparition_ice_blast_release"       "未定义"
+"DOTA_Tooltip_ability_imba_ancient_apparition_ice_blast_release"       "冰晶爆轰释放"
 "DOTA_Tooltip_ability_imba_ancient_apparition_ice_blast_release_Description"       "111"
 "DOTA_Tooltip_ability_imba_ancient_apparition_anti_abrasion_Description"       "111"
 "DOTA_Tooltip_ability_imba_ancient_apparition_imbued_ice_Description"       "111"

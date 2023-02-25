@@ -160,8 +160,23 @@ export class BaseAbility_Plus extends BaseAbility {
 
 }
 
-
+/**
+ * 法球技能
+ */
+export class BaseOrbAbility_Plus extends BaseAbility_Plus {
+    /**
+     * 获取法球名称
+     */
+    public GetProjectileName?(): string;
+    public OnOrbRecord?(params: ModifierAttackEvent): void;
+    public OnOrbFire?(params: ModifierAttackEvent): void;
+    public OnOrbImpact?(params: ModifierAttackEvent): number;
+    public OnOrbFail?(params: ModifierAttackEvent): void;
+    public OnOrbRecordDestroy?(params: ModifierAttackEvent): void;
+}
 declare global {
     type IBaseAbility_Plus = BaseAbility_Plus;
+    type IBaseOrbAbility_Plus = BaseOrbAbility_Plus;
+
 }
 

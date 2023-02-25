@@ -149,5 +149,37 @@ export class PlayerDataComponent extends PlayerData {
             this.addMoneyRoundStart(tonumber(round.config.roundprize_gold), tonumber(round.config.roundprize_wood));
         }
     }
+
+    SpendGold(gold: number, reason: EDOTA_ModifyGold_Reason = 0) {
+        this.gold -= gold;
+    }
+
+    GetGold() {
+        return this.gold;
+    }
+
+    FlyGoldEffect(vStart: Vector, iGold: number, reliable: boolean = true, reason: EDOTA_ModifyGold_Reason = 0) {
+        let hHero = GGameScene.GetPlayer(this.BelongPlayerid).Hero;
+        if (hHero != null && !hHero.IsNull()) {
+            let iParticleID = ParticleManager.CreateParticle("particles/econ/courier/courier_beetlejaw/courier_beetlejaw_ambient_gold.vpcf", ParticleAttachment_t.PATTACH_POINT, hHero)
+            ParticleManager.SetParticleControl(iParticleID, 0, vStart)
+            ParticleManager.SetParticleControlEnt(iParticleID, 1, hHero, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hHero.GetAbsOrigin(), false)
+            ParticleManager.ReleaseParticleIndex(iParticleID)
+            GTimerHelper.AddTimer(1, GHandler.create(this, () => {
+                this.ModifyGold(iGold, reliable, reason);
+                SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hHero, iGold, null)
+            }))
+        }
+        else {
+            this.ModifyGold(iGold, reliable, reason);
+            SendOverheadEventMessage(PlayerResource.GetPlayer(this.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, hHero, iGold, null)
+        }
+    }
+
+    ModifyGold(goldChange: number, reliable: boolean = true, reason: EDOTA_ModifyGold_Reason = 0) {
+        this.gold += goldChange;
+    }
+
+
 }
 

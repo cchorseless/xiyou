@@ -316,7 +316,7 @@ export class BaseModifier {
     public OnCreated(params: object) {
         this.__destroyed = false;
         if (this.UUID == null) {
-            this.UUID = GGenerateUUID();
+            this.UUID = GGenerateUUID() + this.GetName();
         }
         (params as IModifierTable).IsOnCreated = true;
         (params as IModifierTable).IsOnRefresh = false;
@@ -335,6 +335,7 @@ export class BaseModifier {
     }
     __destroyed: boolean = true;
     public OnDestroy() {
+        if (this.__destroyed) { return; }
         this.__destroyed = true;
         this.BeDestroy && this.BeDestroy();
         PropertyCalculate.RegModifiersInfo(this, false);

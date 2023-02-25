@@ -1,37 +1,37 @@
 //  额外基础攻击力
-static GetBaseBonusDamage(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE, tParams)
+function GetBaseBonusDamage(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.BASEATTACK_BONUSDAMAGE, tParams)
 }
 //  物理防御
-static GetBasePhysicalArmor(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE)
+function GetBasePhysicalArmor(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE)
 }
-static GetBonusPhysicalArmor(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
+function GetBonusPhysicalArmor(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
 }
-static GetBasePhysicalArmorPercentage(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE_PERCENTAGE)
+function GetBasePhysicalArmorPercentage(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_BASE_PERCENTAGE)
 }
-static GetPhysicalArmorPercentage(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_PERCENTAGE)
+function GetPhysicalArmorPercentage(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.PHYSICAL_ARMOR_PERCENTAGE)
 }
-static GetPhysicalArmor(hUnit: IBaseNpc_Plus) {
+function GetPhysicalArmor(hUnit)
 	let fTotalPercent = GetPhysicalArmorPercentage(hUnit) * 0.01 //  不要调用两遍
 	return GetBasePhysicalArmor(hUnit) * (1 + GetBasePhysicalArmorPercentage(hUnit) * 0.01 + fTotalPercent) + GetBonusPhysicalArmor(hUnit) * (1 + fTotalPercent)
 }
-static GetIgnorePhysicalArmorPercentage(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return SubtractionMultiplicationPercentage(this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE, tParams), this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE, tParams))
+function GetIgnorePhysicalArmorPercentage(hUnit, tParams)
+	return SubtractionMultiplicationPercentage(GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE, tParams), GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE_UNIQUE, tParams))
 }
-static GetIgnorePhysicalArmorPercentageTarget(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE_TARGET, tParams)
+function GetIgnorePhysicalArmorPercentageTarget(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_PERCENTAGE_TARGET, tParams)
 }
-static GetPhysicalReduction(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
+function GetPhysicalReduction(hUnit, tParams)
 	let fValue = GetPhysicalArmor(hUnit)
 	//  负甲的时候不计算无视护甲
 	if ( fValue > 0 ) {
 		let fIgnore = GetIgnorePhysicalArmorPercentageTarget(hUnit, tParams) //  自身被百分比无视护甲
 		if ( tParams && GameFunc.IsValid(tParams.attacker) ) {
-			fValue = math.max(0, fValue - this.SumProps(tParams.attacker, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_CONSTANT, tParams))
+			fValue = math.max(0, fValue - GetProperty(tParams.attacker, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_PHYSICAL_ARMOR_CONSTANT, tParams))
 			fIgnore = SubtractionMultiplicationPercentage(fIgnore, GetIgnorePhysicalArmorPercentage(tParams.attacker, tParams))
 		}
 		fValue = fValue - math.max(fValue * fIgnore * 0.01, 0)
@@ -39,31 +39,31 @@ static GetPhysicalReduction(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttack
 	return PHYSICAL_ARMOR_FACTOR * fValue / (1 + PHYSICAL_ARMOR_FACTOR * math.abs(fValue))
 }
 //  魔法防御
-static GetBaseMagicalArmor(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BASE)
+function GetBaseMagicalArmor(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BASE)
 }
-static GetBonusMagicalArmor(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
+function GetBonusMagicalArmor(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BONUS)
 }
-static GetBaseMagicalArmorPercentage(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BASE_PERCENTAGE)
+function GetBaseMagicalArmorPercentage(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_BASE_PERCENTAGE)
 }
-static GetMagicalArmorPercentage(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_PERCENTAGE)
+function GetMagicalArmorPercentage(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAGICAL_ARMOR_PERCENTAGE)
 }
-static GetMagicalArmor(hUnit: IBaseNpc_Plus) {
+function GetMagicalArmor(hUnit)
 	return GetBaseMagicalArmor(hUnit) * (1 + GetBaseMagicalArmorPercentage(hUnit) * 0.01 + GetMagicalArmorPercentage(hUnit) * 0.01) + GetBonusMagicalArmor(hUnit) * (1 + GetMagicalArmorPercentage(hUnit) * 0.01)
 }
-static GetIgnoreMagicalArmorPercentage(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return SubtractionMultiplicationPercentage(this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE, tParams), this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE, tParams))
+function GetIgnoreMagicalArmorPercentage(hUnit, tParams)
+	return SubtractionMultiplicationPercentage(GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE, tParams), GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE_UNIQUE, tParams))
 }
-static GetIgnoreMagicalArmorConstant(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_CONSTANT, tParams)
+function GetIgnoreMagicalArmorConstant(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_CONSTANT, tParams)
 }
-static GetIgnoreMagicalArmorPercentageTarget(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE_TARGET, tParams)
+function GetIgnoreMagicalArmorPercentageTarget(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.IGNORE_MAGICAL_ARMOR_PERCENTAGE_TARGET, tParams)
 }
-static GetMagicalReduction(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
+function GetMagicalReduction(hUnit, tParams)
 	let fValue = GetMagicalArmor(hUnit)
 	//  负甲的时候不计算无视护甲
 	if ( fValue > 0 ) {
@@ -78,40 +78,40 @@ static GetMagicalReduction(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackE
 	return MAGICAL_ARMOR_FACTOR * fValue / (1 + MAGICAL_ARMOR_FACTOR * math.abs(fValue))
 }
 //  技能增强
-static GetBaseSpellAmplify(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BASE, tParams)
+function GetBaseSpellAmplify(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BASE, tParams)
 }
-static GetBonusSpellAmplify(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS, tParams)
+function GetBonusSpellAmplify(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS, tParams)
 }
-static GetBonusSpellAmplifyUnique(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS_UNIQUE, tParams)
+function GetBonusSpellAmplifyUnique(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS_UNIQUE, tParams)
 }
-static GetSpellAmplify(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
+function GetSpellAmplify(hUnit, tParams)
 	return GetBaseSpellAmplify(hUnit, tParams) + GetBonusSpellAmplify(hUnit, tParams) + GetBonusSpellAmplifyUnique(hUnit, tParams)
 }
 //  生命值
-static GetHealthBonus(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_BONUS)
+function GetHealthBonus(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_BONUS)
 }
-static GetHealthPercentage(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_PERCENTAGE)
+function GetHealthPercentage(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_PERCENTAGE)
 }
-static GetHealthPercentageEnemy(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_PERCENT_ENEMY)
+function GetHealthPercentageEnemy(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_PERCENT_ENEMY)
 }
 //  生命恢复
-static GetHealthRegen(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
+function GetHealthRegen(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
 }
 //  魔法值
-static GetManaBonus(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_BONUS)
+function GetManaBonus(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_BONUS)
 }
-static GetManaPercentage(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_PERCENTAGE)
+function GetManaPercentage(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_PERCENTAGE)
 }
-static GetBaseMana(hUnit: IBaseNpc_Plus) {
+function GetBaseMana(hUnit)
 	let fValue = 0
 	if ( hUnit != null ) {
 		if ( GameFunc.IsValid(hUnit) && hUnit._StatusMana == null ) {
@@ -127,153 +127,153 @@ static GetBaseMana(hUnit: IBaseNpc_Plus) {
 	}
 	return fValue
 }
-static GetTotalManaBonus(hUnit: IBaseNpc_Plus) {
+function GetTotalManaBonus(hUnit)
 	let fPercent = GetManaPercentage(hUnit) * 0.01
 	return GetManaBonus(hUnit) * (1 + fPercent) + GetBaseMana(hUnit) * fPercent
 }
 //  魔法恢复
-static GetManaRegen(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_REGEN_CONSTANT) + this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_REGEN_CONSTANT_UNIQUE)
+function GetManaRegen(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_REGEN_CONSTANT) + GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MANA_REGEN_CONSTANT_UNIQUE)
 }
 
-static GetManaRegenAmplify(hUnit, params){
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.MP_REGEN_AMPLIFY_PERCENTAGE, params)
+function GetManaRegenAmplify(hUnit, params)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MP_REGEN_AMPLIFY_PERCENTAGE, params)
 }
 
-static GetManaRegenTotal(hUnit: IBaseNpc_Plus) {
+function GetManaRegenTotal(hUnit)
 	return (hUnit.GetStatusManaRegen() + GetManaRegen(hUnit)) * (1 + GetManaRegenAmplify(hUnit) / 100)
 }
 //  状态抗性
-static GetStatusResistanceStack(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
+function GetStatusResistanceStack(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
 }
-static GetStatusResistanceUnique(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_UNIQUE)
+function GetStatusResistanceUnique(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_UNIQUE)
 }
-static GetStatusResistance(hUnit: IBaseNpc_Plus) {
+function GetStatusResistance(hUnit)
 	return (1 - (1 - GetStatusResistanceStack(hUnit) * 0.01) * (1 - GetStatusResistanceUnique(hUnit) * 0.01)) * 100
 }
-static GetStatusResistanceCaster(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_CASTER)
+function GetStatusResistanceCaster(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.STATUS_RESISTANCE_CASTER)
 }
 //  闪避
-static GetEvasion(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.EVASION_CONSTANT, tParams)
+function GetEvasion(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.EVASION_CONSTANT, tParams)
 }
 //  技能闪避
-static GetSpellEvasion(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_EVASION, tParams)
+function GetSpellEvasion(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_EVASION, tParams)
 }
 //  冷却减少
-static GetCooldownReduction(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	let cd_reduction = this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.COOLDOWN_PERCENTAGE, tParams)
+function GetCooldownReduction(hUnit, tParams)
+	let cd_reduction = GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.COOLDOWN_PERCENTAGE, tParams)
 	let max_cd_reduction = GetMaxCooldownReduction(hUnit, tParams)
 	if ( max_cd_reduction > 0 && max_cd_reduction < cd_reduction ) {
 		return max_cd_reduction
 	}
 	return cd_reduction
 }
-static GetMaxCooldownReduction(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_COOLDOWN_PERCENTAGE, tParams)
+function GetMaxCooldownReduction(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_COOLDOWN_PERCENTAGE, tParams)
 }
 //  物理暴击
-static GetCriticalStrikeChance(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	if ( this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.NO_CRITICALSTRIKE, tParams) >= 1 ) {
+function GetCriticalStrikeChance(hUnit, tParams)
+	if ( GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.NO_CRITICALSTRIKE, tParams) >= 1 ) {
 		return 0
 	}
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_CHANCE, tParams) + BASE_ATTACK_CRITICALSTRIKE_CHANCE
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_CHANCE, tParams) + BASE_ATTACK_CRITICALSTRIKE_CHANCE
 }
 //  物理暴击伤害
-static GetCriticalStrikeDamage(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	let fDamage = BASE_ATTACK_CRITICALSTRIKE_DAMAGE + this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE, tParams)
+function GetCriticalStrikeDamage(hUnit, tParams)
+	let fDamage = BASE_ATTACK_CRITICALSTRIKE_DAMAGE + GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE, tParams)
 	if ( tParams && GameFunc.IsValid(tParams.target) ) {
-		fDamage = fDamage + this.SumProps(tParams.target, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_CRITICALSTRIKE_DAMAGE_CONSTANT, tParams)
+		fDamage = fDamage + GetProperty(tParams.target, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_CRITICALSTRIKE_DAMAGE_CONSTANT, tParams)
 	}
-	let fPercent = this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE_TOTAL, tParams)
+	let fPercent = GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_DAMAGE_TOTAL, tParams)
 	return fDamage * (1 + fPercent / 100)
 }
 // 物理暴击时技能暴击补偿
-static GetCriticalStrikeDamage_Mix(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_MIX_PERCENT, tParams) * 0.01  * GetSpellCriticalStrikeDamage(hUnit, tParams)
+function GetCriticalStrikeDamage_Mix(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.CRITICALSTRIKE_MIX_PERCENT, tParams) * 0.01  * GetSpellCriticalStrikeDamage(hUnit, tParams)
 }
 //  技能暴击概率
-static GetSpellCriticalStrikeChance(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	if ( this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.NO_SPELL_CRITICALSTRIKE, tParams) >= 1 ) {
+function GetSpellCriticalStrikeChance(hUnit, tParams)
+	if ( GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.NO_SPELL_CRITICALSTRIKE, tParams) >= 1 ) {
 		return 0
 	}
-	let fChance = this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_CHANCE, tParams) + BASE_SPELL_CRITICALSTRIKE_CHANCE
+	let fChance = GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_CHANCE, tParams) + BASE_SPELL_CRITICALSTRIKE_CHANCE
 	if ( tParams && GameFunc.IsValid(tParams.target) ) {
-		fChance = fChance + this.SumProps(tParams.target, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_CHANCE_TARGET, tParams)
+		fChance = fChance + GetProperty(tParams.target, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_CHANCE_TARGET, tParams)
 	}
 	return fChance
 }
 //  技能暴击伤害
-static GetSpellCriticalStrikeDamage(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	let fDamage = BASE_SPELL_CRITICALSTRIKE_DAMAGE + this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
+function GetSpellCriticalStrikeDamage(hUnit, tParams)
+	let fDamage = BASE_SPELL_CRITICALSTRIKE_DAMAGE + GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE)
 	if ( tParams && GameFunc.IsValid(tParams.target) ) {
-		fDamage = fDamage + this.SumProps(tParams.target, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_SPELL_CRITICALSTRIKE_DAMAGE_CONSTANT, tParams)
+		fDamage = fDamage + GetProperty(tParams.target, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_SPELL_CRITICALSTRIKE_DAMAGE_CONSTANT, tParams)
 	}
-	let fPercent = this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE_TOTAL, tParams)
+	let fPercent = GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_DAMAGE_TOTAL, tParams)
 	return fDamage * (1 + fPercent / 100)
 }
 // 技能暴击时物理暴击补偿
-static GetSpellCriticalStrikeDamage_Mix(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_MIX_PERCENT, tParams) * 0.01  * GetCriticalStrikeDamage(hUnit, tParams)
+function GetSpellCriticalStrikeDamage_Mix(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.SPELL_CRITICALSTRIKE_MIX_PERCENT, tParams) * 0.01  * GetCriticalStrikeDamage(hUnit, tParams)
 }
 //  最大攻击速度
-static GetBonusMaximumAttackSpeed(hUnit: IBaseNpc_Plus) {
-	if ( this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS_UNABLE) >= 1 ) {
+function GetBonusMaximumAttackSpeed(hUnit)
+	if ( GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS_UNABLE) >= 1 ) {
 		return 0
 	}
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
 }
-static GetMaximumAttackSpeed(hUnit: IBaseNpc_Plus) {
+function GetMaximumAttackSpeed(hUnit)
 	return GetBonusMaximumAttackSpeed(hUnit) + MAXIMUM_ATTACK_SPEED
 }
-static GetOutgoingDamagePercent(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE, tParams)
+function GetOutgoingDamagePercent(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE, tParams)
 }
-static GetOutgoingPhysicalDamagePercent(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE, tParams)
+function GetOutgoingPhysicalDamagePercent(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PHYSICAL_DAMAGE_PERCENTAGE, tParams)
 }
-static GetOutgoingMagicalDamagePercent(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_PERCENTAGE, tParams)
+function GetOutgoingMagicalDamagePercent(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_MAGICAL_DAMAGE_PERCENTAGE, tParams)
 }
-static GetOutgoingPureDamagePercent(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE, tParams)
+function GetOutgoingPureDamagePercent(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_PERCENTAGE, tParams)
 }
 //  受到的伤害
-static GetIncomingDamagePercent(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE, tParams)
+function GetIncomingDamagePercent(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE, tParams)
 }
-static GetIncomingPhysicalDamagePercent(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE, tParams)
+function GetIncomingPhysicalDamagePercent(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE, tParams)
 }
-static GetIncomingMagicalDamagePercent(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE, tParams)
+function GetIncomingMagicalDamagePercent(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE, tParams)
 }
-static GetIncomingPureDamagePercent(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_PURE_DAMAGE_PERCENTAGE, tParams)
+function GetIncomingPureDamagePercent(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_PURE_DAMAGE_PERCENTAGE, tParams)
 }
-static GetIncomingDamagePercentEnemy(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE_ENEMY, tParams)
+function GetIncomingDamagePercentEnemy(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE_ENEMY, tParams)
 }
 // 毒伤害相关
-static GetIncomingPoisonDamagePercent(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE, tParams)
+function GetIncomingPoisonDamagePercent(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE, tParams)
 }
-static GetOutgoingPoisonCountPercent(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE)
+function GetOutgoingPoisonCountPercent(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE)
 }
-static GetIncomingPoisonCountPercent(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE)
+function GetIncomingPoisonCountPercent(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE)
 }
-static GetPoisonActiveTimePercent(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.POISON_ACTIVE_TIME_PERCENTAGE)
+function GetPoisonActiveTimePercent(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.POISON_ACTIVE_TIME_PERCENTAGE)
 }
-static GetPoisonActiveIncreasePercent(hUnit: IBaseNpc_Plus) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.POISON_ACTIVE_INCREASE_PERCENTAGE)
+function GetPoisonActiveIncreasePercent(hUnit)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.POISON_ACTIVE_INCREASE_PERCENTAGE)
 }
-static GetPoisonImmune(hUnit: IBaseNpc_Plus ,tParams: ICustomModifierAttackEvent) {
-	return this.SumProps(hUnit, null,GameEnum.Property.Enum_MODIFIER_PROPERTY.POISON_IMMUNE, tParams)
+function GetPoisonImmune(hUnit, tParams)
+	return GetProperty(hUnit, @registerProp(GameEnum.Property.Enum_MODIFIER_PROPERTY.POISON_IMMUNE, tParams)
 }

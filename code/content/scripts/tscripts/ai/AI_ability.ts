@@ -24,8 +24,14 @@ export module AI_ability {
         }
         return false;
     }
-
-    export function TARGET_if_enemy(ability: IBaseAbility_Plus, range: number, _filter: (enemy: IBaseNpc_Plus) => boolean) {
+    /**
+     * @Server
+     * @param ability 
+     * @param range 
+     * @param _filter 不填，选择最近的敌人
+     * @returns 
+     */
+    export function TARGET_if_enemy(ability: IBaseAbility_Plus, range: number, _filter: (enemy: IBaseNpc_Plus) => boolean = (enemy) => true) {
         let caster = ability.GetCasterPlus()
         let teamFilter = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY
         let typeFilter = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC
@@ -68,4 +74,31 @@ export module AI_ability {
         }
     }
 
+    /**
+     * @Server
+     * @param ability 
+     * @param range 
+     * @param _filter 不填，选择最近的敌人
+     * @returns 
+     */
+    export function TARGET_if_friend(ability: IBaseAbility_Plus, range: number, _filter: (enemy: IBaseNpc_Plus) => boolean = (enemy) => true) {
+        let caster = ability.GetCasterPlus()
+        let teamFilter = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY
+        let typeFilter = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC
+        let flagFilter = DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE
+        let order = FindOrder.FIND_CLOSEST
+        let targets = AoiHelper.FindEntityInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), range, null, teamFilter, typeFilter, flagFilter, order)
+        for (let target of targets) {
+            if (_filter(target)) {
+                ExecuteOrderFromTable({
+                    UnitIndex: caster.entindex(),
+                    OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET,
+                    AbilityIndex: ability.entindex(),
+                    TargetIndex: target.entindex()
+                });
+                return true;
+            }
+        }
+        return false;
+    }
 }

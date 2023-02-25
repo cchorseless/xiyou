@@ -386,8 +386,8 @@ function createLanguageTXT(file, rows) {
                             }
                         }
                     }
-                    let _vv=rows[i][result_txt_obj[k].temp_value[jj]]
-                    if (_kk != null&&_vv != null)  {
+                    let _vv = rows[i][result_txt_obj[k].temp_value[jj]]
+                    if (_kk != null && _vv != null) {
                         f_str += `"${_kk}"`;
                         f_str += "       ";
                         f_str += `"${_vv}"`;
@@ -410,7 +410,35 @@ function createLanguageTXT(file, rows) {
     }
 
 }
-
+// excel 不用填写技能特殊值类型
+function dealAbilitySpecial(s) {
+    let str = "" + s;
+    const floattxt = `\t\t\t\t"var_type" "FIELD_FLOAT"\n`;
+    const inttxt = `\t\t\t\t"var_type" "FIELD_INTEGER"\n`;
+    if (!str.includes(`"AbilitySpecial" {`)) {
+        return str;
+    }
+    for (let i = 1; i < 30; i++) {
+        let reg = i < 10 ? "0" + i : "" + i;
+        let regr = new RegExp(`"${reg}" {[^}]*}`, "g");
+        let group = str.match(regr);
+        if (group) {
+            for (let g of group) {
+                if (!g.includes("var_type")) {
+                    let rr = "";
+                    if (g.includes(".")) {
+                        rr = g.replace("{\n", `{\n${floattxt}`);
+                    }
+                    else {
+                        rr = g.replace("{\n", `{\n${inttxt}`);
+                    }
+                    str = str.replace(g, rr);
+                }
+            }
+        }
+    }
+    return str;
+}
 
 function single_excel_to_kv(file) {
     if ((path.extname(file) != '.xlsx' && path.extname(file) != '.xls') || file.indexOf('~$') >= 0) {
@@ -463,6 +491,7 @@ function single_excel_to_kv(file) {
     if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir);
     let r_s = "// generate with  kv generator \n\n" + parse_paramSheetBaseData(sheet_param);
     r_s += keyvalues.encode(result).replace(/\\\"/g, "'");
+    r_s = dealAbilitySpecial(r_s)
     fs.writeFileSync(outpath, r_s);
     console.log('success xlsx->kv', outpath);
     createLanguageTXT(file, rows)

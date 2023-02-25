@@ -20,6 +20,7 @@ export interface KvAllInterface  {
 "building_ability_tower": building_ability_tower.OBJ_1_1,
 "courier_abilities": courier_abilities.OBJ_1_1,
 "imba_abilities": imba_abilities.OBJ_1_1,
+"imba_units": imba_units.OBJ_1_1,
 }
 export const KvAllPath = {
 "npc_heroes_custom": "scripts/npc/npc_heroes_custom.txt",
@@ -42,6 +43,7 @@ export const KvAllPath = {
 "building_ability_tower": "scripts/npc/building/building_ability_tower.kv",
 "courier_abilities": "scripts/npc/abilities/courier_abilities.kv",
 "imba_abilities": "scripts/npc/abilities/imba_abilities.kv",
+"imba_units": "scripts/npc/units/imba_units.kv",
 }
 export interface KvServerInterface   {
 "npc_heroes_custom": npc_heroes_custom.OBJ_1_1,
@@ -64,6 +66,7 @@ export interface KvServerInterface   {
 "building_ability_tower": building_ability_tower.OBJ_1_1,
 "courier_abilities": courier_abilities.OBJ_1_1,
 "imba_abilities": imba_abilities.OBJ_1_1,
+"imba_units": imba_units.OBJ_1_1,
 }
 export const KvServer = {
 "npc_heroes_custom": "scripts/npc/npc_heroes_custom.txt",
@@ -86,6 +89,7 @@ export const KvServer = {
 "building_ability_tower": "scripts/npc/building/building_ability_tower.kv",
 "courier_abilities": "scripts/npc/abilities/courier_abilities.kv",
 "imba_abilities": "scripts/npc/abilities/imba_abilities.kv",
+"imba_units": "scripts/npc/units/imba_units.kv",
 }
 export interface KvClientInterface   {
 "npc_heroes_custom": npc_heroes_custom.OBJ_1_1,
@@ -108,6 +112,7 @@ export interface KvClientInterface   {
 "building_ability_tower": building_ability_tower.OBJ_1_1,
 "courier_abilities": courier_abilities.OBJ_1_1,
 "imba_abilities": imba_abilities.OBJ_1_1,
+"imba_units": imba_units.OBJ_1_1,
 }
 export const KvClient = {
 "npc_heroes_custom": "scripts/npc/npc_heroes_custom.txt",
@@ -130,10 +135,11 @@ export const KvClient = {
 "building_ability_tower": "scripts/npc/building/building_ability_tower.kv",
 "courier_abilities": "scripts/npc/abilities/courier_abilities.kv",
 "imba_abilities": "scripts/npc/abilities/imba_abilities.kv",
+"imba_units": "scripts/npc/units/imba_units.kv",
 }
 export const allAbilitys = ["courier_abilities","imba_abilities","building_ability_tower"];
 export type KV_Abilitys = courier_abilities.OBJ_1_1|imba_abilities.OBJ_1_1|building_ability_tower.OBJ_1_1;
 export const allItems = ["building_item_card"];
 export type KV_Items = building_item_card.OBJ_1_1;
-export const allUnits = ["building_unit_enemy","building_unit_tower","building_unit_summoned","common_units"];
-export type KV_Units = building_unit_enemy.OBJ_1_1|building_unit_tower.OBJ_1_1|building_unit_summoned.OBJ_1_1|common_units.OBJ_1_1;
+export const allUnits = ["building_unit_enemy","building_unit_tower","building_unit_summoned","common_units","imba_units"];
+export type KV_Units = building_unit_enemy.OBJ_1_1|building_unit_tower.OBJ_1_1|building_unit_summoned.OBJ_1_1|common_units.OBJ_1_1|imba_units.OBJ_1_1;

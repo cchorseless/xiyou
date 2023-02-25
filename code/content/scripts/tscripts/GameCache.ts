@@ -34,6 +34,7 @@ export class GameCache {
      */
     static RegBuff(buff: IModifier_Plus, isreg: boolean) {
         if (buff && buff.UUID) {
+            // let buffname = buff.UUID.split("@")[1];
             let buffname = buff.GetName();
             if (isreg) {
                 if (buff.__AllRegisterEvent) {

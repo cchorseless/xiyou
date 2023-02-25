@@ -4,6 +4,25 @@ import { LogHelper } from "./LogHelper";
 
 export module NetTablesHelper {
     /**
+     * @Both
+     * @param entityid 
+     * @returns 
+     */
+    export function GetDotaEntityData(entityid: EntityIndex) {
+        let _tablename = GameServiceConfig.ENetTables.dotaentity as never;
+        return (CustomNetTables.GetTableValue(_tablename, entityid + "") || {}) as { [key: string]: any };
+    }
+    /**
+     * @Server
+     * @param entityid 
+     * @param data 
+     * @returns 
+     */
+    export function SetDotaEntityData(entityid: EntityIndex, data: { [key: string]: any }) {
+        let _tablename = GameServiceConfig.ENetTables.dotaentity as never;
+        return (CustomNetTables.SetTableValue(_tablename, entityid + "", data as never));
+    }
+    /**
      * 获取表
      * @param tablename
      * @param key

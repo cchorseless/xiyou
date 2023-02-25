@@ -26,6 +26,7 @@ import { modifier_courier_fx_ambient_6 } from "./courier_ambient_effect/modifier
 import { modifier_courier_fx_ambient_7 } from "./courier_ambient_effect/modifier_courier_fx_ambient_7";
 import { modifier_courier_fx_ambient_8 } from "./courier_ambient_effect/modifier_courier_fx_ambient_8";
 import { modifier_courier_fx_ambient_9 } from "./courier_ambient_effect/modifier_courier_fx_ambient_9";
+import { modifier_generic_orb_effect_lua } from "./generic/modifier_generic_orb_effect_lua";
 import { modifier_activity } from "./modifier_activity";
 
 [
@@ -36,6 +37,10 @@ import { modifier_activity } from "./modifier_activity";
     modifier_sect_phyarm_up_base_3,
     modifier_sect_phyarm_up_base_6,
     modifier_sect_phyarm_up_base_9,
+];
+
+[
+    modifier_generic_orb_effect_lua,
 ];
 
 [

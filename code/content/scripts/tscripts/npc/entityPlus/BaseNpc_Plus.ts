@@ -5,18 +5,29 @@ import { BaseItem_Plus } from "./BaseItem_Plus";
 import { BaseNpc } from "./Base_Plus";
 /**普通NPC单位基类 */
 export class BaseNpc_Plus extends BaseNpc {
-
+    /**
+     * 是否恐惧
+     */
+    IsFeared?() {
+        return false;
+    }
+    /**是否沉睡 */
+    IsHypnotized?() {
+        return false;
+    }
     EmitCasterSound?(tSoundNames: string[], fChancePct: number, flags: number, fCooldown: number = 0, sCooldownindex: string = "") {
         flags = flags || 0;
         if (fCooldown > 0 && sCooldownindex) {
-            // if (this[sCooldownindex]) {
-            //     return true;
-            // } else {
-            //     this[sCooldownindex] = true;
-            //    GTimerHelper.AddTimer(fCooldown, GHandler.create(this, ()=> {
-            //         this[sCooldownindex] = undefined;
-            //     }));
-            // }
+            let key = `EmitCasterSound_${sCooldownindex}`;
+            if (this.TempData()[key]) {
+                return true;
+            }
+            else {
+                this.TempData()[key] = true;
+                GTimerHelper.AddTimer(fCooldown, GHandler.create(this, () => {
+                    delete this.TempData()[key];
+                }));
+            }
         }
         if (fChancePct) {
             if (fChancePct <= math.random(1, 100)) {
@@ -76,14 +87,6 @@ export class BaseNpc_Plus extends BaseNpc {
     GetPlayerID?() {
         return this.GetPlayerOwnerID();
     }
-    SetUnitOnClearGround?() {
-        GTimerHelper.AddTimer(1, GHandler.create(this, () => {
-            let pos = this.GetAbsOrigin();
-            this.SetAbsOrigin(Vector(pos.x, pos.y, GetGroundPosition(pos, this).z));
-            FindClearSpaceForUnit(this, this.GetAbsOrigin(), true);
-            ResolveNPCPositions(this.GetAbsOrigin(), 64);
-        }));
-    }
 
     GetSource?() {
         if (this.IsSummoned() || this.IsClone() || this.IsIllusion()) {
@@ -110,106 +113,149 @@ export class BaseNpc_Plus extends BaseNpc {
       * @param fIncomingDamage
       * @returns
       */
-    CreateIllusion?(vLocation: Vector,
-        bFindClearSpace: boolean,
-        hNPCOwner: IBaseNpc_Plus,
-        hUnitOwner: IBaseNpc_Plus,
-        iTeamNumber: DOTATeam_t,
-        fDuration: number,
-        fOutgoingDamage: number,
-        fIncomingDamage: number) {
-        let illusion = BaseNpc_Plus.CreateUnitByName(this.GetUnitName(), vLocation, iTeamNumber, bFindClearSpace, hNPCOwner, hUnitOwner) as IBaseNpc_Plus;
-        illusion.MakeIllusion()
-        illusion.SetForwardVector(this.GetForwardVector())
-        if (hUnitOwner != null) {
-            illusion.SetControllableByPlayer(hUnitOwner.GetPlayerOwnerID(), !bFindClearSpace)
-        }
-        let iLevel = this.GetLevel();
-        illusion.SetBaseDamageMin(this.GetBaseDamageMin())
-        illusion.SetBaseDamageMax(this.GetBaseDamageMax())
-        illusion.SetAttackCapability(this.GetAttackCapability())
-        illusion.SetRangedProjectileName(this.GetRangedProjectileName())
-        illusion.SetModel(this.GetModelName())
-        illusion.SetOriginalModel(this.GetModelName())
-        illusion.SetModelScale(this.GetModelScale());
-        // buff
-        let modifiers = this.FindAllModifiers() as IBaseModifier_Plus[];
-        for (let modifier of (modifiers)) {
-            if (modifier.AllowIllusionDuplicate && modifier.AllowIllusionDuplicate()) {
-                let buff = illusion.addBuff(modifier.GetName(), modifier.GetCasterPlus(), modifier.GetAbilityPlus())
-                buff.SetStackCount(modifier.GetStackCount())
-            }
-        }
-        for (let i = 0; i <= this.GetAbilityCount() - 1; i++) {
-            let ability = this.GetAbilityByIndex(i)
-            if (ability != null) {
-                let illusion_ability = illusion.FindAbilityByName(ability.GetAbilityName())
-                if (illusion_ability == null) {
-                    illusion_ability = illusion.addAbilityPlus(ability.GetAbilityName())
-                }
-                if (illusion_ability != null) {
-                    if (illusion_ability.GetLevel() < ability.GetLevel()) {
-                        while (illusion_ability.GetLevel() < ability.GetLevel()) {
-                            illusion_ability.UpgradeAbility(true)
-                        }
-                    }
-                    else if (illusion_ability.GetLevel() >= ability.GetLevel()) {
-                        illusion_ability.SetLevel(ability.GetLevel())
-                        if (illusion_ability.GetLevel() == 0) {
-                            if (illusion_ability.GetAutoCastState()) {
-                                illusion_ability.ToggleAutoCast()
-                            }
-                            if (illusion_ability.GetToggleState()) {
-                                illusion_ability.ToggleAbility()
-                            }
-                            illusion.RemoveModifierByName(illusion_ability.GetIntrinsicModifierName() || "")
-                        }
-                    }
+    CreateIllusion?(
+        copyunit: IBaseNpc_Plus,
+        hModifierKeys: CreateIllusionsModifierKeys & { duration?: number },
+        vLocation: Vector = null,
+        nNumIllusions: number = 1,
+        bFindClearSpace = true,
+    ) {
+        let r: IBaseNpc_Plus[] = [];
+        vLocation = vLocation || copyunit.GetAbsOrigin();
+        for (let i = 0; i < nNumIllusions; i++) {
+            let illusion = BaseNpc_Plus.CreateUnitByName(copyunit.GetUnitName(), vLocation, this.GetTeam(), bFindClearSpace, this, this) as IBaseNpc_Plus;
+            illusion.MakeIllusion()
+            illusion.SetForwardVector(this.GetForwardVector())
+            illusion.SetControllableByPlayer(this.GetPlayerOwnerID(), !bFindClearSpace)
+            illusion.SetBaseDamageMin(this.GetBaseDamageMin())
+            illusion.SetBaseDamageMax(this.GetBaseDamageMax())
+            illusion.SetAttackCapability(this.GetAttackCapability())
+            illusion.SetRangedProjectileName(this.GetRangedProjectileName())
+            illusion.SetModel(this.GetModelName())
+            illusion.SetOriginalModel(this.GetModelName())
+            illusion.SetModelScale(this.GetModelScale());
+            // buff
+            let modifiers = this.FindAllModifiers() as IBaseModifier_Plus[];
+            for (let modifier of (modifiers)) {
+                if (modifier.AllowIllusionDuplicate && modifier.AllowIllusionDuplicate()) {
+                    let buff = illusion.addBuff(modifier.GetName(), modifier.GetCasterPlus(), modifier.GetAbilityPlus())
+                    buff.SetStackCount(modifier.GetStackCount())
                 }
             }
-        }
-        for (let i = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; i <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
-            let item = illusion.GetItemInSlot(i)
-            if (item != null) {
-                UTIL_Remove(item)
-            }
-        }
-        for (let i = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; i <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
-            let item = this.GetItemInSlot(i)
-            if (item != null) {
-                let illusion_item = BaseItem_Plus.CreateItem(item.GetName(), illusion as any, illusion as any)
-                if (GameFunc.IsValid(illusion_item)) {
-                    illusion_item.EndCooldown()
-                    illusion_item.SetPurchaser(null)
-                    illusion_item.SetShareability(EShareAbility.ITEM_FULLY_SHAREABLE)
-                    illusion_item.SetPurchaseTime(item.GetPurchaseTime())
-                    illusion_item.SetCurrentCharges(item.GetCurrentCharges())
-                    illusion_item.SetItemState(item.GetItemState())
-                    if (illusion_item.GetToggleState() != item.GetToggleState()) {
-                        illusion_item.ToggleAbility()
+            for (let i = 0; i <= this.GetAbilityCount() - 1; i++) {
+                let ability = this.GetAbilityByIndex(i)
+                if (ability != null) {
+                    let illusion_ability = illusion.FindAbilityByName(ability.GetAbilityName())
+                    if (illusion_ability == null) {
+                        illusion_ability = illusion.addAbilityPlus(ability.GetAbilityName())
                     }
-                    if (illusion_item.GetAutoCastState() != item.GetAutoCastState()) {
-                        illusion_item.ToggleAutoCast()
-                    }
-                    illusion.AddItem(illusion_item)
-                    for (let j = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; j <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; j++) {
-                        let _item = illusion.GetItemInSlot(j)
-                        if (_item == illusion_item) {
-                            if (i != j) {
-                                illusion.SwapItems(i, j)
+                    if (illusion_ability != null) {
+                        if (illusion_ability.GetLevel() < ability.GetLevel()) {
+                            while (illusion_ability.GetLevel() < ability.GetLevel()) {
+                                illusion_ability.UpgradeAbility(true)
                             }
-                            break
+                        }
+                        else if (illusion_ability.GetLevel() >= ability.GetLevel()) {
+                            illusion_ability.SetLevel(ability.GetLevel())
+                            if (illusion_ability.GetLevel() == 0) {
+                                if (illusion_ability.GetAutoCastState()) {
+                                    illusion_ability.ToggleAutoCast()
+                                }
+                                if (illusion_ability.GetToggleState()) {
+                                    illusion_ability.ToggleAbility()
+                                }
+                                illusion.RemoveModifierByName(illusion_ability.GetIntrinsicModifierName() || "")
+                            }
                         }
                     }
                 }
             }
+            for (let i = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; i <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
+                let item = illusion.GetItemInSlot(i)
+                if (item != null) {
+                    UTIL_Remove(item)
+                }
+            }
+            for (let i = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; i <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i++) {
+                let item = this.GetItemInSlot(i)
+                if (item != null) {
+                    let illusion_item = BaseItem_Plus.CreateItem(item.GetName(), illusion as any, illusion as any)
+                    if (GameFunc.IsValid(illusion_item)) {
+                        illusion_item.EndCooldown()
+                        illusion_item.SetPurchaser(null)
+                        illusion_item.SetShareability(EShareAbility.ITEM_FULLY_SHAREABLE)
+                        illusion_item.SetPurchaseTime(item.GetPurchaseTime())
+                        illusion_item.SetCurrentCharges(item.GetCurrentCharges())
+                        illusion_item.SetItemState(item.GetItemState())
+                        if (illusion_item.GetToggleState() != item.GetToggleState()) {
+                            illusion_item.ToggleAbility()
+                        }
+                        if (illusion_item.GetAutoCastState() != item.GetAutoCastState()) {
+                            illusion_item.ToggleAutoCast()
+                        }
+                        illusion.AddItem(illusion_item)
+                        for (let j = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; j <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; j++) {
+                            let _item = illusion.GetItemInSlot(j)
+                            if (_item == illusion_item) {
+                                if (i != j) {
+                                    illusion.SwapItems(i, j)
+                                }
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+            illusion.addBuff("modifier_illusion", this, null, hModifierKeys)
+            illusion.SetHealth(this.GetHealth())
+            illusion.SetMana(this.GetMana())
+            let particleID = ParticleManager.CreateParticle("particles/generic_gameplay/illusion_created.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, illusion)
+            ParticleManager.ReleaseParticleIndex(particleID);
+            r.push(illusion);
         }
-        illusion.addBuff("modifier_illusion", hUnitOwner, null, { duration: fDuration, outgoing_damage: fOutgoingDamage, incoming_damage: fIncomingDamage })
-        illusion.SetHealth(this.GetHealth())
-        illusion.SetMana(this.GetMana())
-        let particleID = ParticleManager.CreateParticle("particles/generic_gameplay/illusion_created.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, illusion)
-        ParticleManager.ReleaseParticleIndex(particleID)
-        return illusion
+        return r;
+    }
+    FindAbilityWithHighestCooldown?() {
+        let highest_cd_ability: CDOTABaseAbility;
+        for (let i = 0; i <= 24; i += 1) {
+            let ability = this.GetAbilityByIndex(i);
+            if (ability) {
+                if (highest_cd_ability == null) {
+                    highest_cd_ability = ability;
+                }
+                else if (ability.IsTrained()) {
+                    if (ability.GetCooldownTimeRemaining() > highest_cd_ability.GetCooldownTimeRemaining()) {
+                        highest_cd_ability = ability;
+                    }
+                }
+            }
+        }
+        return highest_cd_ability;
+    }
+    /**
+     * 不好用，只能复制英雄
+     * @param hHeroToCopy 
+     * @param hModifierKeys 
+     * @param nNumIllusions 
+     * @param nPadding 
+     * @param bScramblePosition 
+     * @param bFindClearSpace 
+     * @returns 
+     */
+    CreateIllusionPlus?(hHeroToCopy: IBaseNpc_Plus,
+        hModifierKeys: CreateIllusionsModifierKeys & { duration?: number },
+        nNumIllusions: number,
+        nPadding: number,
+        bScramblePosition: boolean,
+        bFindClearSpace: boolean): IBaseNpc_Plus[] {
+        let r = CreateIllusions(this, hHeroToCopy as any, hModifierKeys, nNumIllusions, nPadding, bScramblePosition, bFindClearSpace)
+        if (r && hModifierKeys.duration && hModifierKeys.duration > 0) {
+            for (let i = 0; i < r.length; i++) {
+                let npc = r[i] as IBaseNpc_Plus;
+                npc.AddNewModifier(this, null, "modifier_kill", { duration: hModifierKeys.duration })
+            }
+        }
+        return r;
     }
 }
 declare global {

@@ -230,6 +230,15 @@ export class modifier_imba_berserkers_call_debuff_cmd extends BaseModifier_Plus 
 }
 @registerAbility()
 export class imba_axe_battle_hunger extends BaseAbility_Plus {
+    GetManaCost(level: number): number {
+        return 0;
+    }
+    AutoSpellSelf() {
+        let range = this.GetSpecialValueFor("radius")
+        return AI_ability.TARGET_if_enemy(this, range);
+    }
+
+
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
         if (IsServer()) {
             let caster = this.GetCasterPlus();

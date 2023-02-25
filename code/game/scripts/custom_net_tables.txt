@@ -4,6 +4,7 @@
     custom_net_tables =
     [
 		"common",
+        "dotaentity",
         "sheetconfig",
         "etentity",
         "etentity0",
