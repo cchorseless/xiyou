@@ -5,6 +5,13 @@ import { BaseItem_Plus } from "./BaseItem_Plus";
 import { BaseNpc } from "./Base_Plus";
 /**普通NPC单位基类 */
 export class BaseNpc_Plus extends BaseNpc {
+
+
+
+    IsRoshan?() {
+        return false;
+    }
+
     /**
      * 是否恐惧
      */
@@ -44,8 +51,13 @@ export class BaseNpc_Plus extends BaseNpc {
         }
         return true;
     }
-
-
+    /**
+     * @Server
+     * @returns 
+     */
+    GetPlayerRoot?() {
+        return GGameScene.GetPlayer(this.GetPlayerOwnerID());
+    }
 
     TrueKilled?(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus) {
         if (caster.HasModifier("modifier_item_blade_mail_reflect")) {

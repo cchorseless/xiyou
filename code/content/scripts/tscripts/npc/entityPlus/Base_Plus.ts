@@ -401,6 +401,9 @@ export class BaseNpc implements ET.IEntityRoot {
         entityOwner: IBaseNpc_Plus = null
     ) {
         let unit = CreateUnitByName(unitname, v, findClearSpace, npcOwner, entityOwner, team);
+        if (unit == null) {
+            GLogHelper.error("创建单位失败", unitname);
+        }
         GameFunc.BindInstanceToCls(unit, GGetRegClass(unitname) || BaseNpc);
         return unit as IBaseNpc_Plus;
     }
@@ -499,15 +502,74 @@ export class BaseNpc implements ET.IEntityRoot {
 export interface BaseNpc_Hero extends CDOTA_BaseNPC_Hero {
 }
 export class BaseNpc_Hero extends BaseNpc { }
+/**影响移动buff */
+export class BaseModifierMotion extends BaseModifier {
+    CheckMotionControllers?(): boolean {
+        let parent = this.GetParent();
+        let modifier_priority = this.GetPriority();
+        let is_motion_controller = false;
+        let motion_controller_priority = -100;
+        let found_modifier_handler: IBaseModifier_Plus;
+        let non_imba_motion_controllers = [
+            "modifier_brewmaster_storm_cyclone",
+            "modifier_dark_seer_vacuum",
+            "modifier_eul_cyclone",
+            "modifier_earth_spirit_rolling_boulder_caster",
+            "modifier_huskar_life_break_charge",
+            "modifier_invoker_tornado",
+            "modifier_item_forcestaff_active",
+            "modifier_rattletrap_hookshot",
+            "modifier_phoenix_icarus_dive",
+            "modifier_shredder_timber_chain",
+            "modifier_slark_pounce",
+            "modifier_spirit_breaker_charge_of_darkness",
+            "modifier_tusk_walrus_punch_air_time",
+            "modifier_earthshaker_enchant_totem_leap"
+        ]
+        let modifiers = parent.FindAllModifiers() as IBaseModifier_Plus[];
+        for (const modifier of (modifiers)) {
+            if (this != modifier && modifier instanceof BaseModifierMotion) {
+                is_motion_controller = true;
+                let _p = modifier.GetPriority();
+                if (non_imba_motion_controllers.includes(modifier.GetName())) {
+                    _p = modifierpriority.MODIFIER_PRIORITY_SUPER_ULTRA;
+                }
+                if (_p > motion_controller_priority) {
+                    found_modifier_handler = modifier;
+                    motion_controller_priority = _p;
+                }
+            }
+        }
+        if (is_motion_controller && motion_controller_priority) {
+            if (motion_controller_priority > modifier_priority) {
+                return false;
+            }
+            else if (motion_controller_priority == modifier_priority) {
+                if (found_modifier_handler.GetCreationTime() >= this.GetCreationTime()) {
+                    return false;
+                } else {
+                    found_modifier_handler.Destroy();
+                    return true;
+                }
+            } else {
+                parent.InterruptMotionControllers(true);
+                found_modifier_handler.Destroy();
+                return true;
+            }
+        } else {
+            return true;
+        }
+    }
+}
 
 export interface BaseModifierMotionHorizontal extends CDOTA_Modifier_Lua_Horizontal_Motion { }
-export class BaseModifierMotionHorizontal extends BaseModifier { }
+export class BaseModifierMotionHorizontal extends BaseModifierMotion { }
 
 export interface BaseModifierMotionVertical extends CDOTA_Modifier_Lua_Vertical_Motion { }
-export class BaseModifierMotionVertical extends BaseModifier { }
+export class BaseModifierMotionVertical extends BaseModifierMotion { }
 
 export interface BaseModifierMotionBoth extends CDOTA_Modifier_Lua_Motion_Both { }
-export class BaseModifierMotionBoth extends BaseModifier { }
+export class BaseModifierMotionBoth extends BaseModifierMotion { }
 
 LogHelper.print(`-------------------setmetatable IsServer: ${IsServer()}------------------------------`);
 // Add standard base classes to prototype chain to make `super.*` work as `self.BaseClass.*`

@@ -480,12 +480,16 @@ export class modifier_imba_batrider_firefly extends BaseModifier_Plus {
     OnIntervalThink(): void {
         this.counter = this.counter + this.think_interval;
         if (this.GetStackCount() >= 0) {
-            table.insert(this.damage_spots, this.GetParentPlus().GetAbsOrigin());
+            this.damage_spots.push(this.GetParentPlus().GetAbsOrigin());
             GridNav.DestroyTreesAroundPoint(this.GetParentPlus().GetAbsOrigin(), this.tree_radius, true);
         }
         if (this.counter >= this.time_to_tick) {
-            for (let damage_spot = 1; damage_spot <= GameFunc.GetCount(this.damage_spots); damage_spot += 1) {
-                this.enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.damage_spots[damage_spot], undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
+            for (let damage_spot = 0; damage_spot < this.damage_spots.length; damage_spot++) {
+                this.enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(),
+                    this.damage_spots[damage_spot], undefined, this.radius,
+                    DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY,
+                    DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
+                    DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
                 for (const [_, enemy] of ipairs(this.enemies)) {
                     if (!this.damaged_enemies.includes(enemy)) {
                         this.damage_table.victim = enemy;
@@ -493,7 +497,7 @@ export class modifier_imba_batrider_firefly extends BaseModifier_Plus {
                         ParticleManager.ReleaseParticleIndex(this.firefly_debuff_particle);
                         ApplyDamage(this.damage_table);
                         this.damaged_enemies.push(enemy);
-                        if (enemy.IsRealHero() && !enemy.IsAlive() && this.GetCasterPlus().GetName() == "npc_dota_hero_batrider" && RollPercentage(50)) {
+                        if (enemy.IsRealHero() && !enemy.IsAlive() && RollPercentage(50)) {
                             if (!this.responses) {
                                 this.responses = {
                                     1: "batrider_bat_ability_firefly_02",

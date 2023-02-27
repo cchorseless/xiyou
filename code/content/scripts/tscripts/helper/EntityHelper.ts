@@ -16,6 +16,10 @@ export module EntityHelper {
         }
     };
 
+    export function Custom_bIsStrongIllusion(unit: IBaseNpc_Plus) {
+        return unit && (unit.HasModifier("modifier_chaos_knight_phantasm_illusion") || unit.HasModifier("modifier_imba_chaos_knight_phantasm_illusion") || unit.HasModifier("modifier_vengefulspirit_hybrid_special"));
+    };
+
 
     /**
      * 回复怒气

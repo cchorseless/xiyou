@@ -1016,6 +1016,11 @@ declare global {
         /**
          * @Both
          */
+        IsInvisiblePlus(): boolean;
+
+        /**
+         * @Both
+         */
         IsFriendly(hTarget: CDOTA_BaseNPC): boolean;
         /**
          * @Both
@@ -1160,6 +1165,44 @@ BaseNPC.TempData = function (this: CDOTA_BaseNPC) {
     }
     return this.__TempData;
 }
+
+BaseNPC.IsInvisiblePlus = function () {
+    if (this.IsInvisible()) {
+        return true;
+    }
+    const IMBA_INVISIBLE_MODIFIERS = [
+        "modifier_imba_moonlight_shadow_invis",
+        "modifier_item_imba_shadow_blade_invis",
+        "modifier_imba_vendetta",
+        "modifier_nyx_assassin_burrow",
+        "modifier_item_imba_silver_edge_invis",
+        "modifier_item_glimmer_cape_fade",
+        "modifier_weaver_shukuchi",
+        "modifier_imba_weaver_shukuchi",
+        "modifier_treant_natures_guise_invis",
+        "modifier_templar_assassin_meld",
+        "modifier_imba_templar_assassin_meld",
+        "modifier_imba_skeleton_walk_dummy",
+        "modifier_invoker_ghost_walk_self",
+        "modifier_rune_invis",
+        "modifier_imba_skeleton_walk_invis",
+        "modifier_imba_riki_invisibility",
+        "modifier_imba_riki_cloak_and_dagger_723",
+        "modifier_imba_riki_smoke_screen_723_buff",
+        "modifier_imba_shadow_walk_buff_invis",
+        "modifier_imba_invisibility_rune",
+        "modifier_imba_blur_smoke",
+        "modifier_windrunner_windrun_invis",
+        "modifier_imba_windranger_windrun_invis",
+    ]
+    for (const modifier of (IMBA_INVISIBLE_MODIFIERS)) {
+        if (this.HasModifier(modifier)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 BaseNPC.IsFriendly = function (hTarget: CDOTA_BaseNPC) {
     if (IsValid(this) && IsValid(hTarget)) {
         return this.GetTeamNumber() == hTarget.GetTeamNumber();

@@ -1,3 +1,7 @@
+import { modifier_animation } from "./animation/modifier_animation";
+import { modifier_animation_freeze } from "./animation/modifier_animation_freeze";
+import { modifier_animation_translate } from "./animation/modifier_animation_translate";
+import { modifier_animation_translate_permanent } from "./animation/modifier_animation_translate_permanent";
 import { modifier_sect_phyarm_up_base_3, modifier_sect_phyarm_up_base_6, modifier_sect_phyarm_up_base_9 } from "./combinationeffect/modifier_sect_phyarm_up";
 import { modifier_courier_fx_ambient_1 } from "./courier_ambient_effect/modifier_courier_fx_ambient_1";
 import { modifier_courier_fx_ambient_10 } from "./courier_ambient_effect/modifier_courier_fx_ambient_10";
@@ -28,6 +32,14 @@ import { modifier_courier_fx_ambient_8 } from "./courier_ambient_effect/modifier
 import { modifier_courier_fx_ambient_9 } from "./courier_ambient_effect/modifier_courier_fx_ambient_9";
 import { modifier_generic_orb_effect_lua } from "./generic/modifier_generic_orb_effect_lua";
 import { modifier_activity } from "./modifier_activity";
+
+
+[
+    modifier_animation_freeze,
+    modifier_animation_translate_permanent,
+    modifier_animation_translate,
+    modifier_animation,
+];
 
 [
     modifier_activity,

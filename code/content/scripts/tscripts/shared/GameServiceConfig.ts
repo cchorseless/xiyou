@@ -40,7 +40,9 @@ export module GameServiceConfig {
         return d;
     }
 
-
+    export const GAME_bounty_multiplier = 100;
+    export const USE_MEME_SOUNDS = true;		// Should we use meme/fun sounds on abilities occasionally?
+    export const MEME_SOUNDS_CHANCE = 50;
     export enum EDifficultyChapter {
         n1 = 1,
         n2 = 2,

@@ -1730,6 +1730,7 @@ declare namespace imba_abilities {
 "spell_amp" :string ,
 "damage_pct" :string ,
 "shard_max_health_dmg_pct" :string ,
+"allied_damage" :string ,
 "damage_increase_outgoing_pct" :string ,
 "damage_increase_incoming_pct" :string ,
 "health_bonus_pct" :string ,

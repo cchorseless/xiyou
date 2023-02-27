@@ -2658,7 +2658,7 @@
 	"imba_beastmaster_summon_hawk" {
 		"BaseClass" "ability_lua"
 		"ScriptFile" "npc/abilities/imba/hero_beastmaster"
-		"AbilityTextureName" "beastmaster_call_of_the_wild"
+		"AbilityTextureName" "beastmaster_call_of_the_wild_hawk"
 		"MaxLevel" "4"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"FightRecapLevel" "1"
@@ -2710,8 +2710,8 @@
 		"AbilityCooldown" "0"
 		"AbilitySpecial" {
 			"01" {
-				"var_type" "FIELD_INTEGER"
-				"fade_time" "0"
+				"var_type" "FIELD_FLOAT"
+				"fade_time" "0.1"
 
 			}
 
@@ -2854,6 +2854,11 @@
 			"15" {
 				"var_type" "FIELD_FLOAT"
 				"shard_max_health_dmg_pct" "1.8"
+
+			}
+			"16" {
+				"var_type" "FIELD_INTEGER"
+				"allied_damage" "40"
 
 			}
 			"01" {

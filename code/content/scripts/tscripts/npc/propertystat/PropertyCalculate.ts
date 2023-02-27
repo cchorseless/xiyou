@@ -755,7 +755,10 @@ export module PropertyCalculate {
         return BonusPhysicalArmor_UNIQUE_ACTIVE * (1 + PhysicalArmorPercentage * 0.01)
     }
 
+    export function GetCastRangeBonus(target: IBaseNpc_Plus) {
+        return SumProps(target, null, GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS);
 
+    }
     /**
      * 无视物理护甲百分比
      * @param target
@@ -772,6 +775,7 @@ export module PropertyCalculate {
     export function GetEntityIndex(hUnit: IBaseNpc_Plus) {
         return hUnit.GetEntityIndex()
     }
+
 
 }
 declare global {

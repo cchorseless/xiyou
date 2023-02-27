@@ -3,6 +3,9 @@ import { GameServiceConfig } from "./shared/GameServiceConfig";
 
 export module GameFunc {
 
+
+
+
     const chances_table = [
         0, 0.015604, 0.062009, 0.138618, 0.244856, 0.380166, 0.544011, 0.735871, 0.955242,
         1.201637, 1.474584, 1.773627, 2.098323, 2.448241, 2.822965, 3.222091, 3.645227,

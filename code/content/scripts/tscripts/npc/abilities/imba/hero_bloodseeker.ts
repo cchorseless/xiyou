@@ -49,7 +49,7 @@ export class modifier_imba_bloodrage_buff_stats extends BaseModifier_Plus {
     public alliedpct: number;
     public damage_type: number;
     GetEffectName(): string {
-        return "particles/hero/bloodseeker/bloodseeker_boiling_blood.vpcf";
+        return "particles/econ/items/bloodseeker/bloodseeker_eztzhok_weapon/bloodseeker_bloodrage_eztzhok.vpcf";
     }
     GetStatusEffectName(): string {
         return "particles/status_fx/status_effect_bloodrage.vpcf";
@@ -859,7 +859,9 @@ export class modifier_imba_rupture_debuff_dot extends BaseModifier_Plus {
         this.damagecap = this.ability.GetTalentSpecialValueFor("damage_cap_amount");
         this.prevLoc = this.parent.GetAbsOrigin();
         this.movedamage_think = this.ability.GetSpecialValueFor("movement_damage_pct") / 100;
-        this.StartIntervalThink(this.GetSpecialValueFor("damage_cap_interval"));
+        if (IsServer()) {
+            this.StartIntervalThink(this.GetSpecialValueFor("damage_cap_interval"));
+        }
     }
 
     OnIntervalThink() {

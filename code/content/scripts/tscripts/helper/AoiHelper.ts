@@ -1,6 +1,85 @@
 import { GameFunc } from "../GameFunc";
 
 export module AoiHelper {
+    export function FindUnitsInCone(
+        teamNumber: DOTATeam_t,
+        vDirection: Vector,
+        vPosition: Vector,
+        startRadius: number,
+        endRadius: number,
+        flLength: number,
+        hCacheUnit: IBaseNpc_Plus,
+        targetTeam: DOTA_UNIT_TARGET_TEAM,
+        targetUnit: DOTA_UNIT_TARGET_TYPE,
+        targetFlags: DOTA_UNIT_TARGET_FLAGS,
+        findOrder: FindOrder,
+        bCache: boolean) {
+        let vDirectionCone = Vector(vDirection.y, -vDirection.x, 0.0);
+        let enemies = FindUnitsInRadius(teamNumber, vPosition, hCacheUnit, endRadius + flLength, targetTeam, targetUnit, targetFlags, findOrder, bCache);
+        let unitTable: IBaseNpc_Plus[] = []
+        if ((enemies.length) > 0) {
+            for (const enemy of (enemies)) {
+                if (enemy != undefined) {
+                    let vToPotentialTarget = enemy.GetOrigin() - vPosition as Vector;
+                    let flSideAmount = math.abs(vToPotentialTarget.x * vDirectionCone.x + vToPotentialTarget.y * vDirectionCone.y + vToPotentialTarget.z * vDirectionCone.z);
+                    let enemy_distance_from_caster = (vToPotentialTarget.x * vDirection.x + vToPotentialTarget.y * vDirection.y + vToPotentialTarget.z * vDirection.z);
+                    let max_increased_radius_from_distance = endRadius - startRadius;
+                    let pct_distance = enemy_distance_from_caster / flLength;
+                    let radius_increase_from_distance = max_increased_radius_from_distance * pct_distance;
+                    if ((flSideAmount < startRadius + radius_increase_from_distance) && (enemy_distance_from_caster > 0.0) && (enemy_distance_from_caster < flLength)) {
+                        unitTable.push(enemy);
+                    }
+                }
+            }
+        }
+        return unitTable;
+    }
+
+    export function CalculateDirection(ent1: Vector | IBaseNpc_Plus, ent2: Vector | IBaseNpc_Plus) {
+        let pos1 = ent1 as Vector;
+        let pos2 = ent2 as Vector;
+        if ((ent1 as IBaseNpc_Plus).GetAbsOrigin) {
+            pos1 = (ent1 as IBaseNpc_Plus).GetAbsOrigin();
+        }
+        if ((ent2 as IBaseNpc_Plus).GetAbsOrigin) {
+            pos2 = (ent2 as IBaseNpc_Plus).GetAbsOrigin();
+        }
+        let direction = (pos1 - pos2 as Vector).Normalized();
+        return direction;
+    }
+    export function FindUnitsInBicycleChain(
+        nTeamNumber: DOTATeam_t,
+        vCenterPos: Vector,
+        vStartPos: Vector,
+        vEndPos: Vector,
+        fStartRadius: number,
+        fEndRadius: number,
+        hCacheUnit: IBaseNpc_Plus,
+        nTeamFilter: DOTA_UNIT_TARGET_TEAM,
+        nTypeFilter: DOTA_UNIT_TARGET_TYPE,
+        nFlagFilter: DOTA_UNIT_TARGET_FLAGS,
+        nOrderFilter: FindOrder,
+        bCanGrowCache: boolean) {
+        let direction = vEndPos - vStartPos as Vector;
+        direction.z = 0;
+        let distance = direction.Length2D();
+        direction = direction.Normalized();
+        let big_radius = distance + math.max(fStartRadius, fEndRadius);
+        let units = FindUnitsInRadius(nTeamNumber, vCenterPos, hCacheUnit, big_radius, nTeamFilter, nTypeFilter, nFlagFilter, nOrderFilter, bCanGrowCache);
+        let targets: IBaseNpc_Plus[] = []
+        for (const [_, unit] of ipairs(units)) {
+            let vUnitPos = unit.GetOrigin() - vStartPos as Vector;
+            let fProjection = vUnitPos.x * direction.x + vUnitPos.y * direction.y + vUnitPos.z * direction.z;
+            fProjection = math.max(math.min(fProjection, distance), 0);
+            let vProjection = direction * fProjection;
+            let fUnitRadius = (vUnitPos - vProjection as Vector).Length2D();
+            let fInterpRadius = (fProjection / distance) * (fEndRadius - fStartRadius) + fStartRadius;
+            if (fUnitRadius <= fInterpRadius && math.abs(AngleDiff(VectorToAngles(vCenterPos - vStartPos as Vector).y, VectorToAngles(unit.GetAbsOrigin() - vStartPos as Vector).y)) <= 90) {
+                table.insert(targets, unit);
+            }
+        }
+        return targets;
+    }
     /**
      * 圆形区域找敌方单位
      * @param team
@@ -419,4 +498,31 @@ export module AoiHelper {
         }
         return tUnits
     }
+
+    export function IsNearFountain(location: Vector, distance: number) {
+        for (const [_, fountain] of ipairs(Entities.FindAllByClassname("ent_dota_fountain"))) {
+            if ((fountain.GetAbsOrigin() - location as Vector).Length2D() <= distance) {
+                return true;
+            }
+        }
+        return false;
+    }
+    export function IsNearEntity(entities: string, location: Vector, distance: number, owner: IBaseNpc_Plus) {
+        for (const [_, entity] of ipairs(Entities.FindAllByClassname(entities))) {
+            if ((entity.GetAbsOrigin() - location as Vector).Length2D() <= distance || owner && (entity.GetAbsOrigin() - location as Vector).Length2D() <= distance && entity.GetOwner() == owner) {
+                return true;
+            }
+        }
+        return false;
+    }
+    export function IsNearPosition(entities: string, location: Vector, distance: number) {
+        for (const [_, fountain] of ipairs(Entities.FindAllByClassname(entities))) {
+            if ((fountain.GetAbsOrigin() - location as Vector).Length2D() <= distance) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
