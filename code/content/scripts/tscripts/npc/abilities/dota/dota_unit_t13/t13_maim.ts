@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -60,7 +59,7 @@ export class modifier_t13_maim extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     OnTakeDamage(params: IModifierTable) {
-        if (GameFunc.IsValid(params.unit) && params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && !params.attacker.IsIllusion()) {
+        if (GFuncEntity.IsValid(params.unit) && params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && !params.attacker.IsIllusion()) {
             modifier_t13_maim_debuff.apply(params.unit, params.attacker, this.GetAbilityPlus(), { duration: this.duration * params.unit.GetStatusResistanceFactor(params.attacker) })
         }
     }
@@ -73,7 +72,7 @@ export class modifier_t13_maim extends BaseModifier_Plus {
             return
         }
         if (params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && !params.attacker.IsIllusion()) {
-            if (GameFunc.mathUtil.PRD(this.blood_chance, params.attacker, "modifier_t13_maim")) {
+            if (GFuncMath.PRD(this.blood_chance, params.attacker, "modifier_t13_maim")) {
                 (this.GetAbilityPlus() as t13_maim).Bleeding(params.target)
             }
         }

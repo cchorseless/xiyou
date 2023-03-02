@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -92,7 +91,7 @@ export class modifier_sniper_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -150,7 +149,7 @@ export class modifier_sniper_1_thinker extends BaseModifier_Plus {
         return false
     }
     IsAura() {
-        return this.GetStackCount() == 1 && GameFunc.IsValid(this.GetCasterPlus()) && GameFunc.IsValid(this.GetAbilityPlus())
+        return this.GetStackCount() == 1 && GFuncEntity.IsValid(this.GetCasterPlus()) && GFuncEntity.IsValid(this.GetAbilityPlus())
     }
     GetAuraSearchTeam() {
         return DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY
@@ -189,7 +188,7 @@ export class modifier_sniper_1_thinker extends BaseModifier_Plus {
             });
 
             ParticleManager.SetParticleControlEnt(iParticleID, 0, hCaster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", hCaster.GetAbsOrigin(), true)
-            ParticleManager.SetParticleControl(iParticleID, 1, GameFunc.VectorFunctions.VectorLerp(0.5, hCaster.GetAbsOrigin(), ((hParent.GetAbsOrigin()) + Vector(0, 0, 1000)) as Vector))
+            ParticleManager.SetParticleControl(iParticleID, 1, GFuncVector.VectorLerp(0.5, hCaster.GetAbsOrigin(), ((hParent.GetAbsOrigin()) + Vector(0, 0, 1000)) as Vector))
             ParticleManager.ReleaseParticleIndex(iParticleID)
         }
     }
@@ -205,7 +204,7 @@ export class modifier_sniper_1_thinker extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -287,7 +286,7 @@ export class modifier_sniper_1_debuff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -307,7 +306,7 @@ export class modifier_sniper_1_debuff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE)
     GetMoveSpeedBonus_Percentage(params: IModifierTable) {
-        if (!GameFunc.IsValid(this.GetCasterPlus()) || !GameFunc.IsValid(this.GetAbilityPlus())) {
+        if (!GFuncEntity.IsValid(this.GetCasterPlus()) || !GFuncEntity.IsValid(this.GetAbilityPlus())) {
             return
         }
         let hParent = this.GetParentPlus()

@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -64,8 +63,8 @@ export class modifier_brewmaster_3 extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hAbility = hParent.FindAbilityByName(sAbilityName)
         let hAbility_t27 = hUnit.FindAbilityByName(sAbilityName)
-        if (GameFunc.IsValid(hAbility)) {
-            if (!GameFunc.IsValid(hAbility_t27)) {
+        if (GFuncEntity.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hAbility_t27)) {
                 hAbility_t27 = hUnit.AddAbility(sAbilityName)
                 hAbility_t27.SetLevel(hAbility.GetLevel())
                 hUnit.SwapAbilities(sAbilityName, "empty_5", true, false)
@@ -85,7 +84,7 @@ export class modifier_brewmaster_3 extends BaseModifier_Plus {
         if (IsServer()) {
             // BuildSystem.EachBuilding(this.iPlayerOwnerID, (hBuilding) => {
             //     let hUnit = hBuilding.GetUnitEntity()
-            //     if (GameFunc.IsValid(hUnit)) {
+            //     if (GFuncEntity.IsValid(hUnit)) {
             //         // 风元素使
             //         if (hUnit.GetUnitName() == "t27" && hUnit.HasAbility("brewmaster_3")) {
             //             let empty_5 = hUnit.AddAbility("empty_5")
@@ -118,7 +117,7 @@ export class modifier_brewmaster_3 extends BaseModifier_Plus {
             let hAbility = this.GetAbilityPlus()
             // BuildSystem.EachBuilding(hParent.GetPlayerOwnerID(), (hBuilding) => {
             //     let hUnit = hBuilding.GetUnitEntity()
-            //     if (GameFunc.IsValid(hUnit)) {
+            //     if (GFuncEntity.IsValid(hUnit)) {
             //         // 风元素使
             //         if (hUnit.GetUnitName() == "t27") {
             //             // 继承属性
@@ -132,7 +131,7 @@ export class modifier_brewmaster_3 extends BaseModifier_Plus {
             //             }
             //             // 天赋提升30%全伤害
             //             let hModifier = hParent.FindModifierByNameAndCaster("modifier_brewmaster_3_amplify_damage", hUnit) as IBaseModifier_Plus
-            //             if (hParent.HasTalent("special_bonus_unique_brewmaster_custom_7") && !GameFunc.IsValid(hModifier)) {
+            //             if (hParent.HasTalent("special_bonus_unique_brewmaster_custom_7") && !GFuncEntity.IsValid(hModifier)) {
             //                  modifier_brewmaster_3_amplify_damage.apply( hParent , hUnit, hAbility, null)
             //             }
             //         }
@@ -149,7 +148,7 @@ export class modifier_brewmaster_3 extends BaseModifier_Plus {
             //             }
             //             // 天赋提升30%全伤害
             //             let hModifier = hParent.FindModifierByNameAndCaster("modifier_brewmaster_3_amplify_damage", hUnit) as IBaseModifier_Plus
-            //             if (hParent.HasTalent("special_bonus_unique_brewmaster_custom_7") && !GameFunc.IsValid(hModifier)) {
+            //             if (hParent.HasTalent("special_bonus_unique_brewmaster_custom_7") && !GFuncEntity.IsValid(hModifier)) {
             //                  modifier_brewmaster_3_amplify_damage.apply( hParent , hUnit, hAbility, null)
             //             }
             //         }
@@ -166,7 +165,7 @@ export class modifier_brewmaster_3 extends BaseModifier_Plus {
             //             }
             //             // 天赋提升30%全伤害
             //             let hModifier = hParent.FindModifierByNameAndCaster("modifier_brewmaster_3_amplify_damage", hUnit) as IBaseModifier_Plus
-            //             if (hParent.HasTalent("special_bonus_unique_brewmaster_custom_7") && !GameFunc.IsValid(hModifier)) {
+            //             if (hParent.HasTalent("special_bonus_unique_brewmaster_custom_7") && !GFuncEntity.IsValid(hModifier)) {
             //                  modifier_brewmaster_3_amplify_damage.apply( hParent , hUnit, hAbility, null)
             //             }
             //         }
@@ -174,7 +173,7 @@ export class modifier_brewmaster_3 extends BaseModifier_Plus {
             //         if (hUnit.GetUnitName() == "npc_void_element_custom") {
             //             // 天赋提升30%全伤害
             //             let hModifier = hParent.FindModifierByNameAndCaster("modifier_brewmaster_3_amplify_damage", hUnit) as IBaseModifier_Plus
-            //             if (hParent.HasTalent("special_bonus_unique_brewmaster_custom_7") && !GameFunc.IsValid(hModifier)) {
+            //             if (hParent.HasTalent("special_bonus_unique_brewmaster_custom_7") && !GFuncEntity.IsValid(hModifier)) {
             //                  modifier_brewmaster_3_amplify_damage.apply( hParent , hUnit, hAbility, null)
             //             }
             //         }
@@ -225,7 +224,7 @@ export class modifier_brewmaster_3_inherit_attribute extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }
@@ -234,21 +233,21 @@ export class modifier_brewmaster_3_inherit_attribute extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     CC_GetModifierBonusStats_Strength() {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return hCaster.GetStrength() * (this.inherit_attribute_per + hCaster.GetTalentValue("special_bonus_unique_brewmaster_custom_8")) * 0.01
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
     CC_GetModifierBonusStats_Agility() {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return hCaster.GetAgility() * (this.inherit_attribute_per + hCaster.GetTalentValue("special_bonus_unique_brewmaster_custom_8")) * 0.01
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     CC_GetModifierBonusStats_Intellect() {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return hCaster.GetIntellect() * (this.inherit_attribute_per + hCaster.GetTalentValue("special_bonus_unique_brewmaster_custom_8")) * 0.01
         }
     }
@@ -290,7 +289,7 @@ export class modifier_brewmaster_3_amplify_damage extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }

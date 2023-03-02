@@ -2,7 +2,7 @@
 import { AllEntity } from "./AllEntity";
 import { GameCache } from "./GameCache";
 import { GameFunc } from "./GameFunc";
-import { EntityHelper } from "./helper/EntityHelper";
+import { GameRulesExt } from "./GameRulesExt";
 import { EventHelper } from "./helper/EventHelper";
 import { KVHelper } from "./helper/KVHelper";
 import { LogHelper } from "./helper/LogHelper";
@@ -16,6 +16,7 @@ import { SingletonClass } from "./shared/lib/SingletonClass";
 export class GameMode_Client extends SingletonClass {
 
     public Init() {
+        GameRulesExt.Init();
         this.addEvent();
         KVHelper.initKVFile();
         // this.PreLoadLua();
@@ -81,7 +82,7 @@ export class GameMode_Client extends SingletonClass {
         if (sUnitName == GameEnum.Unit.UnitNames.npc_dota_thinker) {
             return;
         }
-        if (EntityHelper.checkIsFirstSpawn(spawnedUnit)) {
+        if (GFuncEntity.checkIsFirstSpawn(spawnedUnit)) {
             let className = spawnedUnit.GetClassname();
             if (className == GameEnum.Unit.UnitClass.npc_dota_creature) {
                 let cls = GGetRegClass<typeof BaseNpc_Plus>(sUnitName) || BaseNpc_Plus;
@@ -111,6 +112,7 @@ export class GameMode_Client extends SingletonClass {
 
 LogHelper.print("IsClient start ----------------------");
 GameCache.Init();
+GameFunc.Init();
 AllEntity.Init();
 TimerHelper.Init();
 GameMode_Client.GetInstance().Init();

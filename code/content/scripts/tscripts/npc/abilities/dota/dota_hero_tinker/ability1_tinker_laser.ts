@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -117,7 +116,7 @@ export class ability1_tinker_laser extends BaseAbility_Plus {
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget() as IBaseNpc_Plus
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (hTarget.TriggerSpellAbsorb(this)) {
@@ -167,7 +166,7 @@ export class modifier_tinker_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -255,7 +254,7 @@ export class modifier_tinker_1_buff extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_PURE_DAMAGE_CONSTANT)
     CC_GetModifierOutgoingPureDamageConstant() {
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return (this.laser_damage + this.GetCasterPlus().GetIntellect() * this.laser_int_multiplier)
         }
         return 0
@@ -263,7 +262,7 @@ export class modifier_tinker_1_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
 
     On_Tooltip2() {
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return (this.laser_damage + this.GetCasterPlus().GetIntellect() * this.laser_int_multiplier)
         }
         return 0
@@ -293,7 +292,7 @@ export class modifier_tinker_1_buff_amplify_damage extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     G_INCOMING_DAMAGE_PERCENTAGE() {
-        return GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_tinker_custom_6") || 0
+        return GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().GetTalentValue("special_bonus_unique_tinker_custom_6") || 0
     }
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // -

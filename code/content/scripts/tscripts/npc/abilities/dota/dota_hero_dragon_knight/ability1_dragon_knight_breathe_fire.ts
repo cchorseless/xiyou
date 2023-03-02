@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -56,7 +55,7 @@ export class ability1_dragon_knight_breathe_fire extends BaseAbility_Plus {
 
         let iDragonLevel = 0
         let hModifier = modifier_dragon_knight_6_form.findIn(hCaster)
-        if (GameFunc.IsValid(hModifier)) {
+        if (GFuncEntity.IsValid(hModifier)) {
             iDragonLevel = hModifier.iLevel || iDragonLevel
         }
 
@@ -95,7 +94,7 @@ export class ability1_dragon_knight_breathe_fire extends BaseAbility_Plus {
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_DragonKnight.BreathFire", hCaster))
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
-        if (GameFunc.IsValid(hTarget)) {
+        if (GFuncEntity.IsValid(hTarget)) {
             let hCaster = this.GetCasterPlus()
             let sTalentName = "special_bonus_unique_dragon_knight_custom_6"
             let burning_duration = this.GetSpecialValueFor("burning_duration") + hCaster.GetTalentValue(sTalentName)
@@ -154,7 +153,7 @@ export class modifier_dragon_knight_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -242,7 +241,7 @@ export class modifier_dragon_knight_1_thinker extends BaseModifier_Plus {
                 this.burning_radius = this.burning_radius + this.extra_burning_radius
             }
             let ability = this.GetAbilityPlus() as ability1_dragon_knight_breathe_fire
-            if (GameFunc.IsValid(this.GetAbilityPlus())) {
+            if (GFuncEntity.IsValid(this.GetAbilityPlus())) {
                 ability.burning_count = (ability.burning_count || 0) + 1
             }
 
@@ -266,7 +265,7 @@ export class modifier_dragon_knight_1_thinker extends BaseModifier_Plus {
             UTIL_Remove(this.GetParentPlus())
             let ability = this.GetAbilityPlus() as ability1_dragon_knight_breathe_fire
 
-            if (GameFunc.IsValid(this.GetAbilityPlus())) {
+            if (GFuncEntity.IsValid(this.GetAbilityPlus())) {
                 ability.burning_count = (ability.burning_count || 0) - 1
             }
         }
@@ -274,7 +273,7 @@ export class modifier_dragon_knight_1_thinker extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let caster = this.GetCasterPlus()
-            if (!GameFunc.IsValid(caster)) {
+            if (!GFuncEntity.IsValid(caster)) {
                 this.Destroy()
                 return
             }
@@ -355,7 +354,7 @@ export class modifier_dragon_knight_1_burning extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let caster = this.GetCasterPlus()
-            if (!GameFunc.IsValid(caster)) {
+            if (!GFuncEntity.IsValid(caster)) {
                 this.Destroy()
                 return
             }

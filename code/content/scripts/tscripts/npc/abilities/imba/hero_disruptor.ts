@@ -1,6 +1,5 @@
 
 import { GameFunc } from "../../../GameFunc";
-import { EntityHelper } from "../../../helper/EntityHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -390,7 +389,7 @@ export class imba_disruptor_glimpse extends BaseAbility_Plus {
                     return;
                 }
             }
-            if (target.IsIllusion() && !EntityHelper.Custom_bIsStrongIllusion(target)) {
+            if (target.IsIllusion() && !GFuncEntity.Custom_bIsStrongIllusion(target)) {
                 target.Kill(this, this.GetCasterPlus());
                 return;
             }

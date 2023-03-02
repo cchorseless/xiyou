@@ -1,4 +1,3 @@
-import { GameFunc } from "../../GameFunc";
 import { ResHelper } from "../../helper/ResHelper";
 import { BaseItem } from "./Base_Plus";
 
@@ -43,7 +42,7 @@ export class BaseItem_Plus extends BaseItem {
 
     CanGiveToNpc(npc: IBaseNpc_Plus) {
         // let hPurchaser = this.GetPurchaser();
-        // if (GameFunc.IsValid(hPurchaser)) {
+        // if (GFuncEntity.IsValid(hPurchaser)) {
         //     if( )
         // }
         // let iPurchaserID = IsValid(hPurchaser) and hPurchaser: GetPlayerOwnerID() or - 1
@@ -53,8 +52,8 @@ export class BaseItem_Plus extends BaseItem {
         // ErrorMessage(iPlayerID, "dota_hud_error_not_shareable")
         // return false
         // end
-        if (GameFunc.IsValid(this) &&
-            GameFunc.IsValid(npc) &&
+        if (GFuncEntity.IsValid(this) &&
+            GFuncEntity.IsValid(npc) &&
             this.IsDroppable() &&
             this.CanUnitPickUp(npc) &&
             npc.IsAlive() &&

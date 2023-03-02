@@ -83,10 +83,10 @@ export class modifier_sniper_3 extends BaseModifier_Plus {
             DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_RUNE_TARGET,
             DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING,
         )
-        if (GameFunc.IsValid(params.ability) && !inarr[0] && inarr[1] || inarr[2] || inarr[3] || inarr[4] || inarr[5] || inarr[6]) {
+        if (GFuncEntity.IsValid(params.ability) && !inarr[0] && inarr[1] || inarr[2] || inarr[3] || inarr[4] || inarr[5] || inarr[6]) {
             return this.bonus_attack_range
         }
-        else if (!GameFunc.IsValid(params.ability)) {
+        else if (!GFuncEntity.IsValid(params.ability)) {
             return this.bonus_attack_range
         }
     }

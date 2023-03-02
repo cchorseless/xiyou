@@ -1,6 +1,5 @@
 
 import { AI_ability } from "../../../../ai/AI_ability";
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -61,7 +60,7 @@ export class ability3_zuus_static_field extends BaseAbility_Plus {
         }
         let zuus_2 = ability2_zuus_lightning_bolt.findIn(hCaster)
         if (modifier_zuus_3_scepter.exist(hCaster)
-            && GameFunc.IsValid(zuus_2)
+            && GFuncEntity.IsValid(zuus_2)
             && zuus_2.FireZuus2
             && zuus_2.GetLevel() > 0) {
             let hUnits = AoiHelper.FindEntityInRadius(
@@ -77,7 +76,7 @@ export class ability3_zuus_static_field extends BaseAbility_Plus {
             let hMaxHealthUnit = null
             let fMaxHealth = 0
             for (let hUnit of (hUnits as IBaseNpc_Plus[])) {
-                if (GameFunc.IsValid(hUnit)) {
+                if (GFuncEntity.IsValid(hUnit)) {
                     let fHelath = hUnit.GetHealth()
                     if (fHelath > fMaxHealth) {
                         fMaxHealth = fHelath
@@ -85,7 +84,7 @@ export class ability3_zuus_static_field extends BaseAbility_Plus {
                     }
                 }
             }
-            if (GameFunc.IsValid(hMaxHealthUnit)) {
+            if (GFuncEntity.IsValid(hMaxHealthUnit)) {
                 zuus_2.FireZuus2(hMaxHealthUnit, this)
             }
         }
@@ -147,7 +146,7 @@ export class modifier_zuus_3 extends BaseModifier_Plus {
                 return
             }
             let hAbility = params.inflictor
-            if (GameFunc.IsValid(hAbility) &&
+            if (GFuncEntity.IsValid(hAbility) &&
                 (hAbility.GetAbilityName() == ability1_zuus_arc_lightning.name ||
                     hAbility.GetAbilityName() == ability2_zuus_lightning_bolt.name ||
                     hAbility.GetAbilityName() == ability6_zuus_thundergods_wrath.name) &&
@@ -211,7 +210,7 @@ export class modifier_zuus_3_scepter extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return

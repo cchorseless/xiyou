@@ -5,7 +5,6 @@
  * @LastEditTime: 2021-05-19 14:36:43
  * @Description:出生自带BUFF标签
  */
-import { GameFunc } from "../../GameFunc";
 import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
 
 export class modifier_particle extends BaseModifier_Plus {
@@ -36,8 +35,8 @@ export class modifier_particle_thinker extends modifier_particle {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GameFunc.IsValid(this.GetParentPlus())) {
-                GDestroyUnit(this.GetParentPlus())
+            if (GFuncEntity.IsValid(this.GetParentPlus())) {
+                GFuncEntity.SafeDestroyUnit(this.GetParentPlus())
             }
         }
     }

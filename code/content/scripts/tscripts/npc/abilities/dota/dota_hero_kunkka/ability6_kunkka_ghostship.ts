@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -52,7 +51,7 @@ export class ability6_kunkka_ghostship extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particleID, 0, vTargetPosition)
         ParticleManager.SetParticleControl(particleID, 1, Vector(stun_radius, stun_radius, stun_radius))
         let hModifier = modifier_kunkka_6.findIn(caster)
-        if (GameFunc.IsValid(hModifier)) {
+        if (GFuncEntity.IsValid(hModifier)) {
             hModifier.AddParticle(particleID, false, false, -1, false, false)
         }
         let thinker = unit_dummy.CreateOne(vStartPosition, caster.GetTeamNumber(), false, caster, caster)
@@ -221,7 +220,7 @@ export class modifier_kunkka_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability6_kunkka_ghostship
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

@@ -8,24 +8,44 @@ import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { BaseModifierMotionHorizontal, registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
-function SearchForEngimaThinker(caster: IBaseNpc_Plus, victim: IBaseNpc_Plus, length, talent) {
+function CalculatePullLength(caster: IBaseNpc_Plus, target: IBaseNpc_Plus, length: number) {
+    if (!IsServer()) {
+        return;
+    }
+    let son = caster.FindAbilityByName("imba_enigma_demonic_conversion") as imba_enigma_demonic_conversion;
+    let iLenght = length;
+    if (son) {
+        let debuff = target.FindModifierByName("modifier_imba_enigma_eidolon_attack_counter");
+        if (debuff) {
+            iLenght = iLenght * (1 + son.GetSpecialValueFor("increased_mass_pull_pct") * 0.01 * debuff.GetStackCount());
+        }
+    }
+    return iLenght;
+}
+
+function SearchForEngimaThinker(caster: IBaseNpc_Plus, victim: IBaseNpc_Plus, length: number, talent: boolean = false) {
     if (!IsServer()) {
         return;
     }
     talent = talent || false;
-    let Black_Hole = caster.FindAbilityByName("imba_enigma_black_hole");
+    let Black_Hole = caster.FindAbilityByName("imba_enigma_black_hole") as imba_enigma_black_hole;
     let hThinker = caster;
     if (talent) {
-        let Thinkers = FindUnitsInRadius(victim.GetTeamNumber(), victim.GetAbsOrigin(), undefined, 9999999, globals.DOTA_UNIT_TARGET_TEAM_FRIENDLY, globals.DOTA_UNIT_TARGET_HERO + globals.DOTA_UNIT_TARGET_BASIC, globals.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + globals.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, globals.FIND_CLOSEST, false);
-        for (const [_, thinker] of pairs(Thinkers)) {
+        let Thinkers = FindUnitsInRadius(victim.GetTeamNumber(), victim.GetAbsOrigin(), undefined, 9999999,
+            DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY,
+            DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
+            DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD,
+            FindOrder.FIND_CLOSEST, false);
+        for (const [_, thinker] of ipairs(Thinkers)) {
             if (thinker.FindModifierByNameAndCaster("modifier_imba_enigma_malefice", caster) && thinker != victim) {
                 hThinker = thinker;
                 return;
             }
         }
     }
-    for (const [_, ent] of pairs(Entities.FindAllByName("npc_dota_thinker"))) {
-        if (ent.midnight) {
+    let allthinker = Entities.FindAllByName("npc_dota_thinker") as IBaseNpc_Plus[];
+    for (const [_, ent] of ipairs(allthinker)) {
+        if (ent.TempData().midnight) {
             hThinker = ent;
             return;
         }
@@ -404,7 +424,7 @@ export class modifier_imba_enigma_eidolon extends BaseModifier_Plus {
         this.health_bonus = this.parent.GetMaxHealth() * this.trans_pct * 0.01;
         // TODO 
         if (this.parent.HasModifier("modifier_imba_echo_rapier_haste")) {
-            let echo_buf = this.parent.findBuff("modifier_imba_echo_rapier_haste");
+            let echo_buf = this.parent.findBuff("modifier_imba_echo_rapier_haste") as IBaseModifier_Plus & { attack_speed_buff: number };
             this.attack_speed_bonus = ((this.parent.GetAttacksPerSecond() * this.parent.GetBaseAttackTime() * 100) - echo_buf.attack_speed_buff) * this.trans_pct * 0.01;
         }
         this.damage_bonus = this.trans_pct * this.parent.GetAverageTrueAttackDamage(this.parent) * 0.01;
@@ -753,12 +773,12 @@ export class modifier_imba_enigma_black_hole_thinker extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().black_hole_effect) {
-            this.pfx_ulti = ResHelper.CreateParticleEx("particles/econ/items/slark/slark_ti6_blade/slark_ti6_pounce_leash_gold_body_energy_pull.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
-            ParticleManager.SetParticleControlEnt(this.pfx_ulti, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), false);
-            ParticleManager.SetParticleControlEnt(this.pfx_ulti, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), false);
-            ParticleManager.SetParticleControl(this.pfx_ulti, 3, this.GetParentPlus().GetAbsOrigin());
-        }
+        // if (this.GetCasterPlus().black_hole_effect) {
+        this.pfx_ulti = ResHelper.CreateParticleEx("particles/econ/items/slark/slark_ti6_blade/slark_ti6_pounce_leash_gold_body_energy_pull.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
+        ParticleManager.SetParticleControlEnt(this.pfx_ulti, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), false);
+        ParticleManager.SetParticleControlEnt(this.pfx_ulti, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), false);
+        ParticleManager.SetParticleControl(this.pfx_ulti, 3, this.GetParentPlus().GetAbsOrigin());
+        // }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
         if (GameFunc.GetCount(enemies) >= PlayerResource.GetPlayerCountForTeam(this.GetParentPlus().GetOpposingTeamNumber())) {
             EmitSoundOn("Imba.EnigmaBlackHoleTobi0" + math.random(1, 5), this.GetParentPlus());

@@ -104,18 +104,18 @@ export class BaseAbility_Plus extends BaseAbility {
      * 自动施法后，调AI
      */
     public ToggleAutoCast() {
-        if (!GameFunc.IsValid(this)) {
+        if (!GFuncEntity.IsValid(this)) {
             return
         }
         let caster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(caster) || caster.IsTempestDouble() || caster.IsIllusion()) {
+        if (!GFuncEntity.IsValid(caster) || caster.IsTempestDouble() || caster.IsIllusion()) {
             return
         }
         super.ToggleAutoCast();
         if (IsServer()) {
             if (this.__autoSpellTimer != null) { return }
             this.__autoSpellTimer = GTimerHelper.AddTimer(GameSetting.AI_TIMER_TICK_TIME_HERO, GHandler.create(this, () => {
-                if (!GameFunc.IsValid(this)) {
+                if (!GFuncEntity.IsValid(this)) {
                     this.__autoSpellTimer = null;
                     return
                 }
@@ -148,13 +148,13 @@ export class BaseAbility_Plus extends BaseAbility {
             DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_POINT,
             DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET)
         if (info[0]) {
-            // GameFunc.ExecuteOrder(this.GetCaster(), dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET, null, this)
+            // GFuncEntity.ExecuteOrder(this.GetCaster(), dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET, null, this)
         }
         else if (info[1]) {
-            // GameFunc.ExecuteOrder(this.GetCaster(), dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION, null, this)
+            // GFuncEntity.ExecuteOrder(this.GetCaster(), dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION, null, this)
         }
         else if (info[2]) {
-            // GameFunc.ExecuteOrder(this.GetCaster(), dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET, null, this)
+            // GFuncEntity.ExecuteOrder(this.GetCaster(), dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET, null, this)
         }
     }
 

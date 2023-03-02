@@ -150,7 +150,7 @@ export class modifier_imba_bloodrage_buff_stats extends BaseModifier_Plus {
                 params.attacker.Heal(heal, this.GetAbilityPlus());
                 let healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetParentPlus());
                 ParticleManager.ReleaseParticleIndex(healFX);
-            } else if (params.unit.IsRealHero() && GameFunc.AsVector(this.GetParentPlus().GetAbsOrigin() - params.unit.GetAbsOrigin()).Length2D() <= this.health_bonus_aoe) {
+            } else if (params.unit.IsRealHero() && GFuncVector.AsVector(this.GetParentPlus().GetAbsOrigin() - params.unit.GetAbsOrigin()).Length2D() <= this.health_bonus_aoe) {
                 let heal = params.unit.GetMaxHealth() * (this.health_bonus_pct / 100) * (this.health_bonus_share_percent * 0.01);
                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), heal, undefined);
                 this.GetParentPlus().Heal(heal, this.GetAbilityPlus());
@@ -242,7 +242,7 @@ export class imba_bloodseeker_blood_bath extends BaseAbility_Plus {
             let circles = caster.GetTalentValue("special_bonus_imba_bloodseeker_5", "circles");
             let distance = caster.GetTalentValue("special_bonus_imba_bloodseeker_5", "distance");
             let caster_pos = caster.GetAbsOrigin();
-            let direction = GameFunc.AsVector(vPos - caster_pos).Normalized();
+            let direction = GFuncVector.AsVector(vPos - caster_pos).Normalized();
             let front_point = vPos + direction * distance as Vector;
             this.FormBloodRiteCircle(caster, front_point);
             for (let i = 1; i <= circles - 1; i += 1) {
@@ -290,7 +290,7 @@ export class imba_bloodseeker_blood_bath extends BaseAbility_Plus {
                         rupture.from_blood_rite = true;
                         rupture.OnSpellStart(target);
                     }
-                    let distance = radius - GameFunc.AsVector(target.GetAbsOrigin() - vPos).Length2D();
+                    let distance = radius - GFuncVector.AsVector(target.GetAbsOrigin() - vPos).Length2D();
                     let knockback = {
                         should_stun: false,
                         knockback_duration: 0.3,
@@ -865,7 +865,7 @@ export class modifier_imba_rupture_debuff_dot extends BaseModifier_Plus {
     }
 
     OnIntervalThink() {
-        let distance = GameFunc.AsVector(this.prevLoc - this.parent.GetAbsOrigin()).Length2D();
+        let distance = GFuncVector.AsVector(this.prevLoc - this.parent.GetAbsOrigin()).Length2D();
         if (distance < this.damagecap) {
             this.movedamage = this.movedamage_think;
             let move_damage = distance * this.movedamage;

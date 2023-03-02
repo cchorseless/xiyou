@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -67,7 +66,7 @@ export class ability2_windrunner_powershot extends BaseAbility_Plus {
             for (let i = 0; i <= extra_count - 1; i++) {
                 let x = (i % 2 == 0) && 1 || -1
                 let y = math.floor(i / 2) + 1
-                tInfo.vVelocity = (GameFunc.VectorFunctions.Rotation2D(vDirection, math.rad(extra_angle * x * y)) * arrow_speed) as Vector
+                tInfo.vVelocity = (GFuncVector.Rotation2D(vDirection, math.rad(extra_angle * x * y)) * arrow_speed) as Vector
                 ProjectileManager.CreateLinearProjectile(tInfo)
             }
         }
@@ -75,7 +74,7 @@ export class ability2_windrunner_powershot extends BaseAbility_Plus {
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Ability.Powershot", hCaster))
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, extraData: any) {
-        if (!GameFunc.IsValid(hTarget)) {
+        if (!GFuncEntity.IsValid(hTarget)) {
             return
         }
         let hCaster = this.GetCasterPlus()
@@ -135,7 +134,7 @@ export class modifier_windrunner_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hAbility)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

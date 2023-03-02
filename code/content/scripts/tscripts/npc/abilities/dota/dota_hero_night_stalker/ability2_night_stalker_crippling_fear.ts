@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -40,7 +39,7 @@ export class ability2_night_stalker_crippling_fear extends BaseAbility_Plus {
     CheckNightTime() {
         let hCaster = this.GetCasterPlus()
         let hModifier = modifier_night_stalker_2.findIn(hCaster);
-        if (GameFunc.IsValid(hModifier) && hModifier.CheckNightTime != null) {
+        if (GFuncEntity.IsValid(hModifier) && hModifier.CheckNightTime != null) {
             hModifier.CheckNightTime()
         }
     }
@@ -136,7 +135,7 @@ export class modifier_night_stalker_2 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker
-        if (!GameFunc.IsValid(hAttacker)) {
+        if (!GFuncEntity.IsValid(hAttacker)) {
             return
         }
         if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
@@ -249,7 +248,7 @@ export class modifier_night_stalker_2_form extends BaseModifier_Plus {
 
 
                     if (hModel != null) {
-                        if (GameFunc.IsValid(hModel) && hModel.GetModelName != null) {
+                        if (GFuncEntity.IsValid(hModel) && hModel.GetModelName != null) {
                             if (hModel.GetModelName() == ResHelper.GetModelReplacement("models/heroes/nightstalker/nightstalker_legarmor_night.vmdl", hParent)) {
                                 hModel.SetModel(ResHelper.GetModelReplacement("models/heroes/nightstalker/nightstalker_legarmor.vmdl", hParent))
                             }
@@ -278,20 +277,20 @@ export class modifier_night_stalker_2_form extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     CC_OUTGOING_DAMAGE_PERCENTAGE() {
-        return ((GameFunc.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) && this.extra_damage_pct_night || 0)
+        return ((GFuncEntity.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) && this.extra_damage_pct_night || 0)
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAX_ATTACKSPEED_BONUS)
     CC_MAX_ATTACKSPEED_BONUS() {
-        return ((GameFunc.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) && this.bonus_attack_speed_night || 0)
+        return ((GFuncEntity.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) && this.bonus_attack_speed_night || 0)
     }
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     CC_SPELL_AMPLIFY_BONUS() {
-        return ((GameFunc.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) && this.bonus_spell_amp_night || 0)
+        return ((GFuncEntity.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) && this.bonus_spell_amp_night || 0)
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant(params: IModifierTable) {
-        if (!GameFunc.IsValid(this.GetCasterPlus()) || this.GetCasterPlus().PassivesDisabled()) {
+        if (!GFuncEntity.IsValid(this.GetCasterPlus()) || this.GetCasterPlus().PassivesDisabled()) {
             return 0
         }
         return this.bonus_attack_speed_night

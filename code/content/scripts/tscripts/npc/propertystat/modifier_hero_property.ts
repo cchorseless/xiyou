@@ -1,4 +1,3 @@
-import { GameFunc } from "../../GameFunc"
 import { BaseModifier_Plus, registerProp } from "../entityPlus/BaseModifier_Plus"
 import { registerModifier } from "../entityPlus/Base_Plus"
 
@@ -41,7 +40,7 @@ export class modifier_hero_property extends BaseModifier_Plus {
     CalculatePrimaryStat() {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
-            if (!GameFunc.IsValid(hParent)) {
+            if (!GFuncEntity.IsValid(hParent)) {
                 return
             }
             if (this.forceSetAttributes != Attributes.DOTA_ATTRIBUTE_INVALID) {
@@ -103,7 +102,7 @@ export class modifier_hero_property extends BaseModifier_Plus {
     // }
     // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_ALL_DAMAGE_PERCENTAGE)
     // CC_GetModifierOutgoingAllDamagePercentage(params: IModifierTable) {
-    //     return (this.GetStackCount() == Attributes.DOTA_ATTRIBUTE_STRENGTH) && GameFunc.mathUtil.Clamp(Gmodifier_property.GetStrength(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_STRENGTH_ALL_DAMAGE, 0, Gmodifier_property.ATTRIBUTE_STRENGTH_ALL_DAMAGE_MAX) || 0
+    //     return (this.GetStackCount() == Attributes.DOTA_ATTRIBUTE_STRENGTH) && GFuncMath.Clamp(Gmodifier_property.GetStrength(this.GetParentPlus()) * Gmodifier_property.ATTRIBUTE_STRENGTH_ALL_DAMAGE, 0, Gmodifier_property.ATTRIBUTE_STRENGTH_ALL_DAMAGE_MAX) || 0
     // }
     // @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_BONUS)
     // CC_GetModifierManaBonus(params: IModifierTable) {

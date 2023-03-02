@@ -6,7 +6,6 @@
  * @Description: file content
  */
 
-import { GameFunc } from "../GameFunc";
 import { allAbilitys, allItems, allUnits, KvAllPath, KvClient, KvClientInterface, KvServer, KvServerInterface, KV_Abilitys, KV_Items, KV_Units } from "../kvInterface/KvAllInterface";
 import { LogHelper } from "./LogHelper";
 
@@ -96,7 +95,7 @@ export module KVHelper {
         //             tonumber(info.position_z)
         //         );
         //         if (v) {
-        //             if (GameFunc.VectorFunctions.IsValidDiatance(pos, Vector(v[0], v[1], v[2]))) {
+        //             if (GFuncVector.IsValidDiatance(pos, Vector(v[0], v[1], v[2]))) {
         //                 return k
         //             }
         //         }
@@ -149,7 +148,7 @@ export module KVHelper {
                 weight_arr.push(k.PoolWeight);
             }
         }
-        return GameFunc.ArrayFunc.RandomArrayByWeight(r_arr, weight_arr)[0];
+        return GFuncRandom.RandomArrayByWeight(r_arr, weight_arr)[0];
     }
     export function RandomPoolConfig(str: string): string {
         let _config = GJSONConfig.PoolConfig.get(str);
@@ -165,7 +164,7 @@ export module KVHelper {
                 weight_arr.push(k.ItemWeight);
             }
         }
-        return GameFunc.ArrayFunc.RandomArrayByWeight(r_arr, weight_arr)[0];
+        return GFuncRandom.RandomArrayByWeight(r_arr, weight_arr)[0];
     }
 
     export namespace CourierUnits {

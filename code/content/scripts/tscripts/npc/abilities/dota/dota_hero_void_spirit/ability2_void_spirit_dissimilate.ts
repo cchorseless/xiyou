@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
@@ -39,7 +38,7 @@ export class ability2_void_spirit_dissimilate extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
         if (hCaster && hCaster.tIlls) {
             for (let v of (hCaster.tIlls)) {
-                if (GameFunc.IsValid(v)) {
+                if (GFuncEntity.IsValid(v)) {
                     UTIL_Remove(v)
                 }
             }
@@ -68,7 +67,7 @@ export class ability2_void_spirit_dissimilate extends BaseAbility_Plus {
             let tInvi = [] as any[]
             let tActiveCount = [] as any[]
             for (let hIll of (hCaster.tIlls)) {
-                if (GameFunc.IsValid(hIll)) {
+                if (GFuncEntity.IsValid(hIll)) {
                     if (!hIll.bActive) {
                         table.insert(tInvi, hIll)
                     } else {
@@ -81,15 +80,15 @@ export class ability2_void_spirit_dissimilate extends BaseAbility_Plus {
             if (iActiveCount > active_count) {
                 for (let i = 1; i <= iActiveCount - active_count; i++) {
                     let hIll = tActiveCount[i]
-                    if (GameFunc.IsValid(hIll)) {
+                    if (GFuncEntity.IsValid(hIll)) {
                         modifier_invisible.apply(hIll, hCaster, this, null)
                         hIll.bActive = false
                     }
                 }
             } else {
                 for (let i = 1; i <= active_count - iActiveCount; i++) {
-                    let hIll = GameFunc.ArrayFunc.RandomArray(tInvi)
-                    if (GameFunc.IsValid(hIll as any)) {
+                    let hIll = GFuncRandom.RandomArray(tInvi)
+                    if (GFuncEntity.IsValid(hIll as any)) {
                         //  modifier_invisible.remove( hIll );
                         // hIll.bActive = true
                     }
@@ -99,7 +98,7 @@ export class ability2_void_spirit_dissimilate extends BaseAbility_Plus {
     }
     GetOriCaster() {
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActiveCount: number, iActivePct: number, iDamagePct: number, all_damage_amplify: number };
-        if (GameFunc.IsValid(hCaster.hParent)
+        if (GFuncEntity.IsValid(hCaster.hParent)
             || hCaster.IsDummy) {
             hCaster = hCaster.hParent as any
         }
@@ -150,8 +149,8 @@ export class modifier_void_spirit_3 extends BaseModifier_Plus {
             let damage_radius = this.GetSpecialValueFor("damage_radius")
 
             hParent.addTimer(0, () => {
-                if (!GameFunc.IsValid(hAbility)
-                    || !GameFunc.IsValid(hParent)
+                if (!GFuncEntity.IsValid(hAbility)
+                    || !GFuncEntity.IsValid(hParent)
                     || hParent.tIlls && hParent.tIlls.length > 0
                     || hAbility.GetLevel() < 1
                     || modifier_void_spirit_3_create_ill.exist(hParent)
@@ -184,7 +183,7 @@ export class modifier_void_spirit_3 extends BaseModifier_Plus {
                     for (let hIll of (hCaster.tIlls)) {
 
 
-                        if (GameFunc.IsValid(hIll) && hIll.vOffset) {
+                        if (GFuncEntity.IsValid(hIll) && hIll.vOffset) {
                             let pos = vOrigin + hIll.vOffset
                             hIll.SetAbsOrigin(GetGroundPosition(pos, hIll))
                         }
@@ -281,7 +280,7 @@ export class modifier_void_spirit_3_create_ill extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
             let hAbility = this.GetAbilityPlus() as ability2_void_spirit_dissimilate
 
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive() || hCaster.IsIllusion() || hCaster.IsDummy) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive() || hCaster.IsIllusion() || hCaster.IsDummy) {
                 return
             }
 

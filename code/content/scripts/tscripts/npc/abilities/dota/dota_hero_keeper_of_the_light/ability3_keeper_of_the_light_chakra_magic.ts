@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -34,7 +33,7 @@ export class ability3_keeper_of_the_light_chakra_magic extends BaseAbility_Plus 
         let duration = this.GetSpecialValueFor("duration")
         let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
         for (let unit of (tTarget)) {
-            if (GameFunc.IsValid(unit) && unit.IsAlive()) {
+            if (GFuncEntity.IsValid(unit) && unit.IsAlive()) {
                 modifier_keeper_of_the_light_3_buff.apply(unit, hCaster, this, { duration: duration })
             }
         }
@@ -79,7 +78,7 @@ export class modifier_keeper_of_the_light_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -120,7 +119,7 @@ export class modifier_keeper_of_the_light_3 extends BaseModifier_Plus {
     death(params: IModifierTable) {
         let hAttacker = params.attacker
         let hTarget = params.unit
-        if (!GameFunc.IsValid(hAttacker)) {
+        if (!GFuncEntity.IsValid(hAttacker)) {
             return
         }
         if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
@@ -194,7 +193,7 @@ export class modifier_keeper_of_the_light_3_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     CC_GetModifierOutgoingDamagePercentage(params: IModifierTable) {
-        if (params != null && GameFunc.IsValid(params.target) && params.target.GetMana() <= 0) {
+        if (params != null && GFuncEntity.IsValid(params.target) && params.target.GetMana() <= 0) {
             return this.increase_all_damage_pct
         }
     }

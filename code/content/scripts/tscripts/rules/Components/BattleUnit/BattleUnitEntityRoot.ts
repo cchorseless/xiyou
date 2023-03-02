@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { modifier_no_health_bar } from "../../../npc/modifier/modifier_no_health_bar";
 import { modifier_hero_property } from "../../../npc/propertystat/modifier_hero_property";
 import { BuildingConfig } from "../../../shared/BuildingConfig";
@@ -67,7 +66,7 @@ export class BattleUnitEntityRoot extends BaseEntityRoot {
 
     onVictory() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        if (GameFunc.IsValid(npc)) {
+        if (GFuncEntity.IsValid(npc)) {
             npc.Stop();
             npc.StartGesture(GameActivity_t.ACT_DOTA_VICTORY);
         }

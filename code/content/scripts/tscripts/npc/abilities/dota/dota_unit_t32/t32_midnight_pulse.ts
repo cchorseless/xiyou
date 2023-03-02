@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -20,7 +19,7 @@ export class t32_midnight_pulse extends BaseAbility_Plus {
         let duration = this.GetSpecialValueFor("duration")
 
         // let combination_t32_midnight_pulse_twine = combination_t32_midnight_pulse_twine.findIn(hCaster)
-        // if (GameFunc.IsValid(combination_t32_midnight_pulse_twine) && combination_t32_midnight_pulse_twine.IsActivated()) {
+        // if (GFuncEntity.IsValid(combination_t32_midnight_pulse_twine) && combination_t32_midnight_pulse_twine.IsActivated()) {
         //     duration = duration + combination_t32_midnight_pulse_twine.GetSpecialValueFor("extra_duration")
         // }
 
@@ -68,7 +67,7 @@ export class modifier_t32_midnight_pulse extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -166,19 +165,19 @@ export class modifier_t32_midnight_pulse_thinker extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
             let hAbility = this.GetAbilityPlus()
 
-            if (!GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
 
             // let combination_t32_midnight_pulse_erase  = combination_t32_midnight_pulse_erase.findIn(  hCaster )
-            // let has_combination_t32_midnight_pulse_erase = GameFunc.IsValid(combination_t32_midnight_pulse_erase) && combination_t32_midnight_pulse_erase.IsActivated()
+            // let has_combination_t32_midnight_pulse_erase = GFuncEntity.IsValid(combination_t32_midnight_pulse_erase) && combination_t32_midnight_pulse_erase.IsActivated()
 
             let vPosition = this.GetParentPlus().GetAbsOrigin()
 
@@ -251,12 +250,12 @@ export class modifier_t32_midnight_pulse_bound extends BaseModifier_Plus {
         return false
     }
     IsAura() {
-        if (!GameFunc.IsValid(this.GetAbilityPlus())) {
+        if (!GFuncEntity.IsValid(this.GetAbilityPlus())) {
             return false
         }
         let hCaster = this.GetAbilityPlus().GetCasterPlus()
         // let modifier_combination_t32_midnight_pulse_twine = Load(hCaster, "modifier_combination_t32_midnight_pulse_twine")
-        // return (GameFunc.IsValid(modifier_combination_t32_midnight_pulse_twine) && modifier_combination_t32_midnight_pulse_twine.GetStackCount() > 0)
+        // return (GFuncEntity.IsValid(modifier_combination_t32_midnight_pulse_twine) && modifier_combination_t32_midnight_pulse_twine.GetStackCount() > 0)
         return true
     }
     GetAuraRadius() {

@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
 import { modifier_jump } from "../../../npc/modifier/modifier_jump";
 import { modifier_run } from "../../../npc/modifier/modifier_run";
@@ -183,7 +182,7 @@ export class ChessMoveComponent extends ET.Component {
         }
         let attacker = this.GetDomain<IBaseNpc_Plus>();
         let targetUnit = target.GetDomain<IBaseNpc_Plus>();
-        if (!GameFunc.IsValid(attacker) || !GameFunc.IsValid(targetUnit)) {
+        if (!GFuncEntity.IsValid(attacker) || !GFuncEntity.IsValid(targetUnit)) {
             return false;
         }
         if (!attacker.IsAlive() || !targetUnit.IsAlive()) {
@@ -197,7 +196,7 @@ export class ChessMoveComponent extends ET.Component {
         let targetpos = targetUnit.GetAbsOrigin();
         let p = Vector(x, y, targetpos.z);
         let p2 = targetpos;
-        if (!targetUnit.IsInvisible() && GameFunc.AsVector(p - p2).Length2D() < attacker.Script_GetAttackRange() + targetUnit.GetHullRadius() + attacker.GetHullRadius()) {
+        if (!targetUnit.IsInvisible() && GFuncVector.AsVector(p - p2).Length2D() < attacker.Script_GetAttackRange() + targetUnit.GetHullRadius() + attacker.GetHullRadius()) {
             return true;
         } else {
             return false;

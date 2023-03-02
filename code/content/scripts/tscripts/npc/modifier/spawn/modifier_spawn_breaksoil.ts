@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifierMotionVertical_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
@@ -29,7 +28,7 @@ export class modifier_spawn_breaksoil extends BaseModifierMotionVertical_Plus {
                 return;
             }
             // 初始化高度
-            this.vStartPosition = GameFunc.AsVector(GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus()) + Vector(0, 0, -200));
+            this.vStartPosition = GFuncVector.AsVector(GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus()) + Vector(0, 0, -200));
             this.GetParentPlus().SetOrigin(this.vStartPosition);
             let ppp = ResHelper.CreateParticle(
                 new ResHelper.ParticleInfo().set_resPath("particles/units/heroes/hero_sandking/sandking_loadout.vpcf").set_iAttachment(ParticleAttachment_t.PATTACH_WORLDORIGIN).set_validtime(5).set_owner(this.GetParentPlus())
@@ -67,10 +66,10 @@ export class modifier_spawn_breaksoil extends BaseModifierMotionVertical_Plus {
 
     UpdateVerticalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
-            let curr_position = GameFunc.AsVector(this.GetParentPlus().GetOrigin() + Vector(0, 0, 10));
+            let curr_position = GFuncVector.AsVector(this.GetParentPlus().GetOrigin() + Vector(0, 0, 10));
             me.SetAbsOrigin(curr_position);
             //  判断是否到达了地面
-            if (GameFunc.AsVector(me.GetOrigin() - this.vTargetPosition).Length() < 20) {
+            if (GFuncVector.AsVector(me.GetOrigin() - this.vTargetPosition).Length() < 20) {
                 // 到终点了
                 me.SetAbsOrigin(this.vTargetPosition);
                 me.InterruptMotionControllers(true);

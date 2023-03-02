@@ -243,7 +243,7 @@ export class modifier_jakiro_3_burn_debuff extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }
@@ -320,7 +320,7 @@ export class modifier_jakiro_3_ice_debuff extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }

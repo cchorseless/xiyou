@@ -357,7 +357,7 @@
 //                     let control_point_index = cp_table.control_point_index;
 //                     if (cp_table.attach_type == "vector") {
 //                         //  控制点设置向量
-//                         let vPosition = GameFunc.VectorFunctions.StringToVector(cp_table.cp_position);
+//                         let vPosition = GFuncVector.StringToVector(cp_table.cp_position);
 //                         //  print(p, control_point_index, vPosition)
 //                         ParticleManager.SetParticleControl(p, control_point_index, vPosition);
 //                     } else {
@@ -371,7 +371,7 @@
 //                         }
 //                         let position = hUnit.GetAbsOrigin();
 //                         if (cp_table.position) {
-//                             position = GameFunc.VectorFunctions.StringToVector(cp_table.position);
+//                             position = GFuncVector.StringToVector(cp_table.position);
 //                         }
 //                         attach_type = WearableConfig.EWearableAttach[cp_table.attach_type] as any;
 //                         //  绑定饰品模型，且attachment为空饰品没attachment会让特效消失

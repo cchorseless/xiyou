@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -49,7 +48,7 @@ export class ability6_ogre_magi_multicast extends BaseAbility_Plus {
         return UnitFilter(hTarget, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, this.GetCasterPlus().GetTeamNumber())
     }
     Bloodlust(hTarget: IBaseNpc_Plus) {
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
 
@@ -66,7 +65,7 @@ export class ability6_ogre_magi_multicast extends BaseAbility_Plus {
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         this.Bloodlust(hTarget)
@@ -78,7 +77,7 @@ export class ability6_ogre_magi_multicast extends BaseAbility_Plus {
 
         //  嗜血术多重施法特殊处理，其他对友方的指向性技能无法触发多重施法
         let hAbility4 = ability3_ogre_magi_bloodlust.findIn(hCaster) as ability3_ogre_magi_bloodlust;
-        if ((!GameFunc.IsValid(hAbility4)) || hAbility4.GetLevel() <= 0) {
+        if ((!GFuncEntity.IsValid(hAbility4)) || hAbility4.GetLevel() <= 0) {
             return
         }
         let multicast_bloodlust_aoe = this.GetSpecialValueFor("multicast_bloodlust_aoe")
@@ -116,7 +115,7 @@ export class ability6_ogre_magi_multicast extends BaseAbility_Plus {
                 let duration = this.GetSpecialValueFor("duration")
                 if (ExtraData.hParent != null) {
                     let hParent = EntIndexToHScript(ExtraData.hParent) as IBaseNpc_Plus
-                    if (GameFunc.IsValid(hParent)) {
+                    if (GFuncEntity.IsValid(hParent)) {
                         BattleHelper.GoApplyDamage({
                             ability: this,
                             attacker: hParent,
@@ -173,7 +172,7 @@ export class modifier_ogre_magi_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability6_ogre_magi_multicast
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -197,7 +196,7 @@ export class modifier_ogre_magi_6 extends BaseModifier_Plus {
             let range = ability.GetCastRange(caster.GetAbsOrigin(), caster) + caster.GetCastRangeBonus() + caster.GetHullRadius()
 
             //  优先上一个目标
-            let target = GameFunc.IsValid(ability.hLastTarget) && ability.hLastTarget || null
+            let target = GFuncEntity.IsValid(ability.hLastTarget) && ability.hLastTarget || null
             if (target != null && !target.IsPositionInRange(caster.GetAbsOrigin(), range + target.GetHullRadius())) {
                 target = null
             }
@@ -391,10 +390,10 @@ export class modifier_ogre_magi_6_buff_shard extends BaseModifier_Plus {
         // let hCaster = params.unit
         // let hTarget = params.target
         // let hAbility = params.ability
-        // if (!(GameFunc.IsValid(hCaster) && hCaster.IsAlive()) || hCaster.GetTeamNumber() == hTarget.GetTeamNumber()) {
+        // if (!(GFuncEntity.IsValid(hCaster) && hCaster.IsAlive()) || hCaster.GetTeamNumber() == hTarget.GetTeamNumber()) {
         //     return
         // }
-        // if (!GameFunc.IsValid(hAbility) || (hAbility.GetName() != "ogre_magi_1" && hAbility.GetName() != "ogre_magi_2" && hAbility.GetName() != "ogre_magi_1_scepter" && TableFindKey(MULTICAST_BLACK_LIST, hAbility.GetName()))) {
+        // if (!GFuncEntity.IsValid(hAbility) || (hAbility.GetName() != "ogre_magi_1" && hAbility.GetName() != "ogre_magi_2" && hAbility.GetName() != "ogre_magi_1_scepter" && TableFindKey(MULTICAST_BLACK_LIST, hAbility.GetName()))) {
         //     return
         // }
 
@@ -410,7 +409,7 @@ export class modifier_ogre_magi_6_buff_shard extends BaseModifier_Plus {
     }
     ActiveTarget(hTarget: IBaseNpc_Plus, bUseCount: number) {
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             return
         }
         let hParent = this.GetParentPlus()

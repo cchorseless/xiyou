@@ -1,6 +1,5 @@
 
 import { AI_ability } from "../../../../ai/AI_ability";
-import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -38,14 +37,14 @@ export class ability6_zuus_thundergods_wrath extends BaseAbility_Plus {
         return true
     }
     OnAbilityPhaseInterrupted() {
-        if (GameFunc.IsValid(this.hPtclThinker)) {
+        if (GFuncEntity.IsValid(this.hPtclThinker)) {
             this.hPtclThinker.SafeDestroy();
             this.hPtclThinker = null
         }
         this.GetCasterPlus().StopSound(ResHelper.GetSoundReplacement("Hero_Zuus.GodsWrath.PreCast", this.GetCasterPlus()))
     }
     OnSpellStart() {
-        if (GameFunc.IsValid(this.hPtclThinker)) {
+        if (GFuncEntity.IsValid(this.hPtclThinker)) {
             this.hPtclThinker.SafeDestroy();
             this.hPtclThinker = null
         }

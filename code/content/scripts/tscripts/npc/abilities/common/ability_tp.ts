@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../GameFunc";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { registerAbility } from "../../entityPlus/Base_Plus";
 
@@ -6,7 +5,7 @@ import { registerAbility } from "../../entityPlus/Base_Plus";
 export class ability_tp extends BaseAbility_Plus {
     CastFilterResultLocation(vLocation: Vector) {
         let hCaster = this.GetCasterPlus();
-        if (GameFunc.IsValid(hCaster)) {
+        if (GFuncEntity.IsValid(hCaster)) {
             if (IsServer()) {
                 if (!this.ValidPosition(vLocation)) {
                     this.errorStr = "dota_hud_error_cant_build_at_location";

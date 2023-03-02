@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -78,7 +77,7 @@ export class ability1_ogre_magi_fireblast extends BaseAbility_Plus {
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (hTarget.TriggerSpellAbsorb(this)) {
@@ -89,7 +88,7 @@ export class ability1_ogre_magi_fireblast extends BaseAbility_Plus {
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_OgreMagi.Fireblast.Cast", hCaster))
         //  嗜血术多重施法特殊处理
         let hAbility4 = ability3_ogre_magi_bloodlust.findIn(hCaster) as ability3_ogre_magi_bloodlust;
-        if ((!GameFunc.IsValid(hAbility4)) || hAbility4.GetLevel() <= 0) {
+        if ((!GFuncEntity.IsValid(hAbility4)) || hAbility4.GetLevel() <= 0) {
             return
         }
         let multicast_delay = this.GetSpecialValueFor("multicast_delay")
@@ -108,7 +107,7 @@ export class ability1_ogre_magi_fireblast extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(iParticleID)
 
             GTimerHelper.AddTimer(multicast_delay, GHandler.create(this, () => {
-                if (!GameFunc.IsValid(hTarget)) {
+                if (!GFuncEntity.IsValid(hTarget)) {
                     return
                 }
 
@@ -173,7 +172,7 @@ export class modifier_ogre_magi_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

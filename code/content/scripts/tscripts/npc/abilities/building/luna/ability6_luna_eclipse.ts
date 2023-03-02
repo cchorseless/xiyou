@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -95,7 +94,7 @@ export class modifier_luna_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -188,7 +187,7 @@ export class modifier_luna_6_thinker extends BaseModifier_Plus {
             this.targets = []
             this.damage_type = this.GetAbilityPlus().GetAbilityDamageType()
             if (params.position != null) {
-                this.position = GameFunc.VectorFunctions.StringToVector(params.position)
+                this.position = GFuncVector.StringToVector(params.position)
             }
             let particleID = ResHelper.CreateParticle({
                 resPath: "particles/particle_sr/luna/luna_3.vpcf",
@@ -273,7 +272,7 @@ export class modifier_luna_6_thinker extends BaseModifier_Plus {
         EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Luna.Eclipse.Target", hCaster), hCaster)
 
         let luna_1 = ability1_luna_lucent_beam.findIn(hCaster)
-        if (GameFunc.IsValid(luna_1) && luna_1.GetLevel() > 0) {
+        if (GFuncEntity.IsValid(luna_1) && luna_1.GetLevel() > 0) {
             let beam_damage = luna_1.GetSpecialValueFor("beam_damage")
             let beam_damage_per_agi = luna_1.GetSpecialValueFor("beam_damage_per_agi") + hCaster.GetTalentValue("special_bonus_unique_luna_custom_3")
 

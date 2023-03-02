@@ -20,7 +20,7 @@ export class imba_brewmaster_thunder_clap extends BaseAbility_Plus {
         let slow_duration = undefined;
         let debris_targets = 0;
         for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius") + this.GetSpecialValueFor("debris_buffer_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
-            if (GameFunc.AsVector((enemy.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()) * Vector(1, 1, 0)).Length2D() <= this.GetSpecialValueFor("radius")) {
+            if (GFuncVector.AsVector((enemy.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()) * Vector(1, 1, 0)).Length2D() <= this.GetSpecialValueFor("radius")) {
                 enemy.EmitSound("Hero_Brewmaster.ThunderClap.Target");
                 if (this.GetCasterPlus().GetName() == "npc_dota_hero_brewmaster" && RollPercentage(75)) {
                     if (!this.responses) {
@@ -52,7 +52,7 @@ export class imba_brewmaster_thunder_clap extends BaseAbility_Plus {
                 });
             } else if (debris_targets <= this.GetSpecialValueFor("debris_max_targets")) {
                 debris_targets = debris_targets + 1;
-                let v = this.GetCasterPlus().GetAbsOrigin() + GameFunc.AsVector(enemy.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Normalized() * this.GetSpecialValueFor("radius") as Vector
+                let v = this.GetCasterPlus().GetAbsOrigin() + GFuncVector.AsVector(enemy.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Normalized() * this.GetSpecialValueFor("radius") as Vector
                 ProjectileManager.CreateTrackingProjectile({
                     EffectName: "particles/units/heroes/hero_brewmaster/brewmaster_hurl_boulder.vpcf",
                     Ability: this,
@@ -130,7 +130,7 @@ export class modifier_imba_brewmaster_thunder_clap extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (keys.attacker == this.GetParentPlus() && !keys.target.IsMagicImmune() && GameFunc.PRD(this.conduction_chance, this)) {
+        if (keys.attacker == this.GetParentPlus() && !keys.target.IsMagicImmune() && GFuncRandom.PRD(this.conduction_chance, this)) {
             CreateModifierThinker(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_brewmaster_thunder_clap_conductive_thinker", {
                 starting_unit_entindex: this.GetParentPlus().entindex(),
                 conduction_max_targets: this.conduction_max_targets,
@@ -384,7 +384,7 @@ export class modifier_imba_brewmaster_cinder_brew extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     CC_GetModifierTotalDamageOutgoing_Percentage(keys: ModifierAttackEvent): number {
-        if (this.bIgnited && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS && GameFunc.PRD(this.remnants_self_damage_chance, this)) {
+        if (this.bIgnited && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_REFLECTION && bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS && GFuncRandom.PRD(this.remnants_self_damage_chance, this)) {
             this.GetParentPlus().EmitSound("Hero_BrewMaster.CinderBrew.SelfAttack");
             this.self_attack_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_self_attack.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.GetParentPlus());
             ParticleManager.ReleaseParticleIndex(this.self_attack_particle);
@@ -565,7 +565,7 @@ export class modifier_imba_brewmaster_drunken_brawler extends BaseModifier_Plus 
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE)
     CC_GetModifierPreAttack_CriticalStrike(p_0: ModifierAttackEvent,): number {
-        if (GameFunc.PRD(this.crit_chance, this)) {
+        if (GFuncRandom.PRD(this.crit_chance, this)) {
             this.GetParentPlus().EmitSound("Hero_Brewmaster.Brawler.Crit");
             return this.crit_multiplier;
         }
@@ -1034,19 +1034,19 @@ export class imba_brewmaster_primal_unison extends BaseAbility_Plus {
 
                 for (const [_, ent] of ipairs(Entities.FindAllByName("npc_dota_brewmaster_fire"))) {
                     if (ent.GetOwner() == owner) {
-                        GDestroyUnit(ent as IBaseNpc_Plus);
+                        GFuncEntity.SafeDestroyUnit(ent as IBaseNpc_Plus);
                     }
                 }
                 for (const [_, ent] of ipairs(Entities.FindAllByName("npc_dota_brewmaster_storm"))) {
                     if (ent.GetOwner() == owner) {
-                        GDestroyUnit(ent as IBaseNpc_Plus);
+                        GFuncEntity.SafeDestroyUnit(ent as IBaseNpc_Plus);
                     }
                 }
 
                 for (const [_, ent] of ipairs(Entities.FindAllByName("npc_dota_brewmaster_earth"))) {
                     if (ent.GetOwner() == owner) {
                         FindClearSpaceForUnit(owner, ent.GetAbsOrigin(), true);
-                        GDestroyUnit(ent as IBaseNpc_Plus);
+                        GFuncEntity.SafeDestroyUnit(ent as IBaseNpc_Plus);
                     }
                 }
                 owner.RemoveModifierByName("modifier_imba_brewmaster_primal_split_duration");

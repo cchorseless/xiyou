@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -91,7 +90,7 @@ export class modifier_queenofpain_3 extends BaseModifier_Plus {
                 }
 
                 let hAbility = params.inflictor
-                if (GameFunc.IsValid(hAbility) && hAbility != this.GetAbilityPlus() && !hAbility.IsItem() && !hAbility.IsToggle()) {
+                if (GFuncEntity.IsValid(hAbility) && hAbility != this.GetAbilityPlus() && !hAbility.IsItem() && !hAbility.IsToggle()) {
                     (this.GetAbilityPlus() as ability3_queenofpain_scream_of_pain).Trigger(params.target as IBaseNpc_Plus)
                 }
             }

@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -67,12 +66,12 @@ export class modifier_dragon_knight_3 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker
-        if (GameFunc.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
+        if (GFuncEntity.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
             if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
                 return
             }
             hAttacker = hAttacker.GetSource()
-            // if (GameFunc.IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled() && !Spawner.IsEndless()) {
+            // if (GFuncEntity.IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled() && !Spawner.IsEndless()) {
             //     let factor = params.unit.IsConsideredHero() && 5 || 1
             //      modifier_dragon_knight_3_buff.apply( hAttacker , hAttacker, this.GetAbilityPlus(), { count = factor })
             // }
@@ -132,14 +131,14 @@ export class modifier_dragon_knight_3_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     CC_GetModifierSpellAmplifyBonus() {
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return this.GetStackCount() * this.GetCasterPlus().GetTalentValue("special_bonus_unique_dragon_knight_custom_8")
         }
         return 0
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP2)
     On_Tooltip2() {
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return this.GetStackCount() * this.GetCasterPlus().GetTalentValue("special_bonus_unique_dragon_knight_custom_8")
         }
         return 0

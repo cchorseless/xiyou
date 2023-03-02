@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -75,7 +74,7 @@ export class modifier_t25_demon_gaze extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -198,7 +197,7 @@ export class modifier_t25_demon_gaze_debuff extends BaseModifier_Plus {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
             let hCaster = this.GetCasterPlus()
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 return
             }
             hCaster.EmitSound("Hero_Grimstroke.InkSwell.Stun")

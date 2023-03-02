@@ -41,13 +41,13 @@ export class ability6_sniper_assassinate extends BaseAbility_Plus {
         let radius = this.GetSpecialValueFor("radius")
         let target_count = this.GetSpecialValueFor("target_count")
         let hModifier = modifier_sniper_6.findIn(hCaster)
-        if (GameFunc.IsValid(hModifier) && hModifier.targetSign == null) {
+        if (GFuncEntity.IsValid(hModifier) && hModifier.targetSign == null) {
             hModifier.targetSign = []
         }
         let targets = FindUnitsInRadius(hCaster.GetTeamNumber(), vPosition, hCaster, radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST, false)
         let count = 0
         for (let target of (targets)) {
-            if (GameFunc.IsValid(target) && target.IsAlive()) {
+            if (GFuncEntity.IsValid(target) && target.IsAlive()) {
                 if (hModifier.targetSign != null && !hModifier.targetSign.indexOf(target)) {
                     // 添加标记
                     modifier_sniper_6_debuff.apply(target, hCaster, this, null)
@@ -100,12 +100,12 @@ export class modifier_sniper_6 extends BaseModifier_Plus {
         if (params.target == null) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
 
-        if (params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion() && GameFunc.IsValid(this.GetAbilityPlus())) {
+        if (params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion() && GFuncEntity.IsValid(this.GetAbilityPlus())) {
             if (!BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK)) {
                 let attacker = params.attacker as IBaseNpc_Plus
                 if (this.targetSign != null) {
                     for (let target of (this.targetSign)) {
-                        if (GameFunc.IsValid(target) && target.IsAlive() && modifier_sniper_6_debuff.exist(target)) {
+                        if (GFuncEntity.IsValid(target) && target.IsAlive() && modifier_sniper_6_debuff.exist(target)) {
                             modifier_sniper_6_projectile.apply(attacker, params.attacker, this.GetAbilityPlus(), null)
                             modifier_sniper_6_bonus_damage.apply(attacker, params.attacker, this.GetAbilityPlus(), null)
                             BattleHelper.Attack(attacker, target, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_IGNOREINVIS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NEVERMISS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK)
@@ -122,7 +122,7 @@ export class modifier_sniper_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -203,14 +203,14 @@ export class modifier_sniper_6_debuff extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GameFunc.IsValid(this.modifier_truesight)) {
+            if (GFuncEntity.IsValid(this.modifier_truesight)) {
                 this.modifier_truesight.Destroy()
             }
         }
     }
     OnIntervalThink() {
         if (IsServer()) {
-            if (!GameFunc.IsValid(this.GetCasterPlus()) || !GameFunc.IsValid(this.GetAbilityPlus())) {
+            if (!GFuncEntity.IsValid(this.GetCasterPlus()) || !GFuncEntity.IsValid(this.GetAbilityPlus())) {
                 this.Destroy()
                 return
             }

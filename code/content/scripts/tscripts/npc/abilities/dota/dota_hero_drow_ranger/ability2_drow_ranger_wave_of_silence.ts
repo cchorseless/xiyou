@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -99,11 +98,11 @@ export class ability2_drow_ranger_wave_of_silence extends BaseAbility_Plus {
                 vDirection = vDirection.Normalized()
 
                 let n = RemapValClamped((this.iCount - 1) % 4, 0, 3, 2, -1)
-                vDirection = GameFunc.VectorFunctions.Rotation2D(vDirection, -math.rad(arrow_angle / 5 * n))
+                vDirection = GFuncVector.Rotation2D(vDirection, -math.rad(arrow_angle / 5 * n))
 
                 let sParticlePath = "particles/units/heroes/hero_drow/drow_base_attack_linear_proj.vpcf"
                 let hAbility = ability1_drow_ranger_frost_arrows.findIn(hCaster)
-                if (GameFunc.IsValid(hAbility) && hAbility.IsActivated() && hAbility.GetLevel() > 0) {
+                if (GFuncEntity.IsValid(hAbility) && hAbility.IsActivated() && hAbility.GetLevel() > 0) {
                     sParticlePath = "particles/units/heroes/hero_drow/drow_multishot_proj_linear_proj.vpcf"
                     hCaster.EmitSound("Hero_DrowRanger.Multishot.FrostArrows")
                 } else {
@@ -157,7 +156,7 @@ export class ability2_drow_ranger_wave_of_silence extends BaseAbility_Plus {
                     BattleHelper.Attack(hCaster, hTarget, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_IGNOREINVIS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NEVERMISS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)
                     modifier_drow_ranger_2_buff.remove(hCaster);
                     let hAbility = ability1_drow_ranger_frost_arrows.findIn(hCaster) as ability1_drow_ranger_frost_arrows;
-                    if (GameFunc.IsValid(hAbility) && hAbility.IsActivated() && hAbility.GetLevel() > 0) {
+                    if (GFuncEntity.IsValid(hAbility) && hAbility.IsActivated() && hAbility.GetLevel() > 0) {
                         for (let i = 1; i <= add_stack; i++) {
                             modifier_drow_ranger_1_debuff.apply(hTarget, hCaster, hAbility, null)
                         }
@@ -217,7 +216,7 @@ export class modifier_drow_ranger_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

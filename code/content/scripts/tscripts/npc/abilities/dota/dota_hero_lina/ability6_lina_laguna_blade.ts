@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -63,22 +62,22 @@ export class ability6_lina_laguna_blade extends BaseAbility_Plus {
         let chance_scepter = this.GetSpecialValueFor("chance_scepter")
         let hAbility_4 = ability3_lina_fiery_soul.findIn(hCaster)
         let hModifier = modifier_lina_3_fiery_soul.findIn(hCaster) as IBaseModifier_Plus;
-        if (hCaster.HasScepter() && GameFunc.IsValid(hAbility_4) && GameFunc.IsValid(hModifier)) {
+        if (hCaster.HasScepter() && GFuncEntity.IsValid(hAbility_4) && GFuncEntity.IsValid(hModifier)) {
             chance_scepter = chance_scepter + hModifier.GetStackCount() * hAbility_4.GetSpecialValueFor("chance_factor")
         }
-        if (!hCaster.HasScepter() || !GameFunc.mathUtil.PRD(chance_scepter, hCaster, "lina_3_scepter")) {
+        if (!hCaster.HasScepter() || !GFuncMath.PRD(chance_scepter, hCaster, "lina_3_scepter")) {
             return
         }
         this.addTimer(0.5, () => {
             // 死亡了就再随机选取一个单位
-            if (!GameFunc.IsValid(target) || !target.IsAlive()) {
+            if (!GFuncEntity.IsValid(target) || !target.IsAlive()) {
                 let radius = this.GetCastRange(hCaster.GetAbsOrigin(), hCaster)
                 let targets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), radius, null, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags() + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER)
                 if (targets[0] != null) {
                     target = targets[0]
                 }
             }
-            if (GameFunc.IsValid(target) && target.IsAlive()) {
+            if (GFuncEntity.IsValid(target) && target.IsAlive()) {
                 this.EmitSkill(target, true, true)
                 hCaster.EmitSound("Ability.LagunaBlade")
             }
@@ -138,9 +137,9 @@ export class ability6_lina_laguna_blade extends BaseAbility_Plus {
                 EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Ability.LagunaBladeImpact", hCaster), hCaster)
             }
         }
-        if (hCaster.HasScepter() && GameFunc.IsValid(hAbility_4) && GameFunc.IsValid(hModifier)) {
+        if (hCaster.HasScepter() && GFuncEntity.IsValid(hAbility_4) && GFuncEntity.IsValid(hModifier)) {
             chance_scepter = chance_scepter + hModifier.GetStackCount() * hAbility_4.GetSpecialValueFor("chance_factor")
-            if (GameFunc.mathUtil.PRD(chance_scepter, hCaster, "lina_3_scepter")) {
+            if (GFuncMath.PRD(chance_scepter, hCaster, "lina_3_scepter")) {
                 hCaster.addTimer(0.5, () => {
                     this.ShardOnSpellStart(vPosition)
                 })
@@ -191,7 +190,7 @@ export class modifier_lina_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -302,7 +301,7 @@ export class modifier_lina_6_damage extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let target = this.GetParentPlus()
             let damage = this.damage
-            if (GameFunc.IsValid(hCaster)) {
+            if (GFuncEntity.IsValid(hCaster)) {
                 damage = damage + hCaster.GetMaxMana() * this.mana_coef / 100
             }
 

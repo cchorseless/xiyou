@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -72,7 +71,7 @@ export class ability2_venomancer_poison_sting extends BaseAbility_Plus {
     OnOwnerDied() {
         if (this.tWards != null) {
             for (let hWard of (this.tWards)) {
-                if (GameFunc.IsValid(hWard)) {
+                if (GFuncEntity.IsValid(hWard)) {
                     hWard.ForceKill(false)
                 }
             }
@@ -117,7 +116,7 @@ export class modifier_venomancer_2 extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
@@ -284,9 +283,9 @@ export class modifier_venomancer_2_ward_attack_talent extends BaseModifier_Plus 
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hTarget)
-            || !GameFunc.IsValid(hCaster)
-            || !GameFunc.IsValid(hAbility)
+        if (!GFuncEntity.IsValid(hTarget)
+            || !GFuncEntity.IsValid(hCaster)
+            || !GFuncEntity.IsValid(hAbility)
             || hTarget.GetClassname() == "dota_item_drop"
             || params.attacker != hParent
             || !hCaster.HasTalent('special_bonus_unique_venomancer_custom_4')

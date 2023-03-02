@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -83,7 +82,7 @@ export class ability6_invoker_invoke extends BaseAbility_Plus {
         });
 
         let orb = this._orbs[this._cursor]
-        if (GameFunc.IsValid(orb.hBuff)) {
+        if (GFuncEntity.IsValid(orb.hBuff)) {
             orb.hBuff.Destroy()
         }
         orb.sType = sOrb
@@ -225,7 +224,7 @@ export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATUS_RESISTANCE_STACKING)
     CC_GetModifierStatusResistanceStacking() {
         let hAbility = ability1_invoker_quas.findIn(this.GetCasterPlus())
-        if (GameFunc.IsValid(hAbility)) {
+        if (GFuncEntity.IsValid(hAbility)) {
             let mult = this.GetCasterPlus().GetTalentValue("special_bonus_unique_invoker_custom_3")
             if (mult != 0) {
                 return hAbility.GetSpecialValueFor("status_resistance_per_level") * hAbility.GetLevel() * mult
@@ -237,7 +236,7 @@ export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.COOLDOWN_PERCENTAGE)
     CC_GetModifierPercentageCooldown() {
         let hAbility = ability2_invoker_wex.findIn(this.GetCasterPlus())
-        if (GameFunc.IsValid(hAbility)) {
+        if (GFuncEntity.IsValid(hAbility)) {
             let mult = this.GetCasterPlus().GetTalentValue("special_bonus_unique_invoker_custom_3")
             if (mult != 0) {
                 return hAbility.GetSpecialValueFor("cooldown_reduce_per_level") * hAbility.GetLevel() * mult
@@ -249,7 +248,7 @@ export class modifier_invoker_invoke_custom extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_AMPLIFY_BONUS)
     CC_GetModifierSpellAmplifyBonus() {
         let hAbility = ability3_invoker_exort.findIn(this.GetCasterPlus())
-        if (GameFunc.IsValid(hAbility)) {
+        if (GFuncEntity.IsValid(hAbility)) {
             let mult = this.GetCasterPlus().GetTalentValue("special_bonus_unique_invoker_custom_3")
             if (mult != 0) {
                 return hAbility.GetSpecialValueFor("spell_amplify_per_level") * hAbility.GetLevel() * mult

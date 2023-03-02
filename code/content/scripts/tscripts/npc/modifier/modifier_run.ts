@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../GameFunc";
 import { BaseModifierMotionHorizontal_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
 
@@ -49,9 +48,9 @@ export class modifier_run extends BaseModifierMotionHorizontal_Plus {
             }
             this.vStartPosition = GetGroundPosition(this.GetParentPlus().GetOrigin(), this.GetParentPlus());
             this.vTargetPosition = Vector(tonumber(kv.vx), tonumber(kv.vy), 128);
-            this.vDirection = GameFunc.AsVector(this.vTargetPosition - this.vStartPosition).Normalized();
+            this.vDirection = GFuncVector.AsVector(this.vTargetPosition - this.vStartPosition).Normalized();
             this.flHorizontalSpeed = speed / 30;
-            this.flDistance = GameFunc.AsVector(this.vTargetPosition - this.vStartPosition).Length2D() + this.flHorizontalSpeed;
+            this.flDistance = GFuncVector.AsVector(this.vTargetPosition - this.vStartPosition).Length2D() + this.flHorizontalSpeed;
             this.leap_traveled = 0;
             this.GetParentPlus().SetForwardVector(this.vDirection)
             this.sound = "Courier.Footsteps";
@@ -103,11 +102,11 @@ export class modifier_run extends BaseModifierMotionHorizontal_Plus {
         if (IsServer()) {
             //  判断是否到达了终点
             //  if ( this.leap_traveled < this.flDistance ) {
-            if (GameFunc.AsVector(me.GetAbsOrigin() - this.vTargetPosition).Length2D() > this.flHorizontalSpeed) {
+            if (GFuncVector.AsVector(me.GetAbsOrigin() - this.vTargetPosition).Length2D() > this.flHorizontalSpeed) {
                 // 没到终点
                 if (me.IsStunned() != true && me.IsFrozen() != true) {
                     me.MoveToPositionAggressive(this.vTargetPosition)
-                    // me.SetAbsOrigin(GetGroundPosition(GameFunc.AsVector(me.GetAbsOrigin() + this.vDirection * this.flHorizontalSpeed), me));
+                    // me.SetAbsOrigin(GetGroundPosition(GFuncVector.AsVector(me.GetAbsOrigin() + this.vDirection * this.flHorizontalSpeed), me));
                     this.leap_traveled += this.flHorizontalSpeed;
                 } else {
                     // 眩晕或冰冻，不位移

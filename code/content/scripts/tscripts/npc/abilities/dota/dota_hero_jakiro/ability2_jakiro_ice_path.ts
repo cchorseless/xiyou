@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -43,8 +42,8 @@ export class ability2_jakiro_ice_path extends BaseAbility_Plus {
         vTargetPosition = GetGroundPosition((vStartPosition + vDirection.Normalized() * (fissure_range - distance_between_blocker * 2) as Vector), hCaster)
         modifier_jakiro_2_thinker.applyThinker(((vStartPosition + vTargetPosition) / 2) as Vector, hCaster, this, {
             duration: duration,
-            vStartPosition: GameFunc.VectorFunctions.VectorToString(vStartPosition),
-            vTargetPosition: GameFunc.VectorFunctions.VectorToString(vTargetPosition),
+            vStartPosition: GFuncVector.VectorToString(vStartPosition),
+            vTargetPosition: GFuncVector.VectorToString(vTargetPosition),
         }, hCaster.GetTeamNumber(), false)
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Jakiro.IcePath.Cast", hCaster))
         EmitSoundOnLocationWithCaster(((vStartPosition + vTargetPosition) / 2) as Vector, ResHelper.GetSoundReplacement("Hero_Jakiro.IcePath", hCaster), hCaster)
@@ -102,7 +101,7 @@ export class modifier_jakiro_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -202,8 +201,8 @@ export class modifier_jakiro_2_thinker extends BaseModifier_Plus {
         this.path_range = this.GetAbilityPlus().GetCastRange(hCaster.GetAbsOrigin(), null) + hCaster.GetCastRangeBonus()
 
         if (IsServer()) {
-            this.vStartPosition = GameFunc.VectorFunctions.StringToVector(params.vStartPosition)
-            this.vTargetPosition = GameFunc.VectorFunctions.StringToVector(params.vTargetPosition)
+            this.vStartPosition = GFuncVector.StringToVector(params.vStartPosition)
+            this.vTargetPosition = GFuncVector.StringToVector(params.vTargetPosition)
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_jakiro/jakiro_ice_path.vpcf",
                 resNpc: hCaster,
@@ -242,7 +241,7 @@ export class modifier_jakiro_2_thinker extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
-            if (GameFunc.IsValid(hParent)) {
+            if (GFuncEntity.IsValid(hParent)) {
                 UTIL_Remove(hParent)
             }
         }
@@ -313,7 +312,7 @@ export class modifier_jakiro_2_root extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingMagicalDamagePercentage() {
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_jakiro_custom_7")
         }
     }

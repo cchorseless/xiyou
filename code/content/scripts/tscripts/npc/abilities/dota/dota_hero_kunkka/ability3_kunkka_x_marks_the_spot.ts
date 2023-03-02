@@ -113,7 +113,7 @@ export class modifier_kunkka_3 extends BaseModifier_Plus {
     }
     BeDestroy() {
 
-        if (GameFunc.IsValid(this.hBuffPtcl)) {
+        if (GFuncEntity.IsValid(this.hBuffPtcl)) {
             this.hBuffPtcl.Destroy()
         }
     }
@@ -148,7 +148,7 @@ export class modifier_kunkka_3 extends BaseModifier_Plus {
         }
         if (params.attacker == this.GetParentPlus()) {
             if (this.records.indexOf(params.record) != -1) {
-                if (GameFunc.IsValid(this.hBuffPtcl)) {
+                if (GFuncEntity.IsValid(this.hBuffPtcl)) {
                     this.hBuffPtcl.Destroy()
                 }
                 this.StartIntervalThink(this.GetCasterPlus().HasTalent("special_bonus_unique_kunkka_custom_7") && 0 || this.cooldown)
@@ -350,7 +350,7 @@ export class modifier_kunkka_3_tide extends BaseModifier_Plus {
                     this.cleave_distance,
                     (hTarget) => {
                         //  pipixia add 增加生命最大百分比攻擊
-                        let damage = params.original_damage * this.cleave_percent * 0.01 * (((GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard())) && this.shard_tide_damage_pct || this.tide_damage_pct) * 0.01
+                        let damage = params.original_damage * this.cleave_percent * 0.01 * (((GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard())) && this.shard_tide_damage_pct || this.tide_damage_pct) * 0.01
                         BattleHelper.GoApplyDamage({
                             ability: this.GetAbilityPlus(),
                             victim: hTarget,
@@ -375,7 +375,7 @@ export class modifier_kunkka_3_tide extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
     CC_GetModifierCriticalStrike(params: IModifierTable) {
         if (this.records.indexOf(params.record) != modifier_kunkka_3.GetStackIn(this.GetCasterPlus())) {
-            if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
+            if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
                 return this.shard_tide_damage_crit
             }
         }

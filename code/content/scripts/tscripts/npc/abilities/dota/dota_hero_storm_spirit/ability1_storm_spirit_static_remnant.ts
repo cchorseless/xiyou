@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -58,7 +57,7 @@ export class ability1_storm_spirit_static_remnant extends BaseAbility_Plus {
         hThinker.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_1)
         for (let i = hThinker.GetAbilityCount() - 1; i >= 0; i--) {
             let ability = hThinker.GetAbilityByIndex(i) as IBaseAbility_Plus
-            if (GameFunc.IsValid(ability)) {
+            if (GFuncEntity.IsValid(ability)) {
                 hThinker.RemoveAbilityByHandle(ability)
             }
         }
@@ -104,7 +103,7 @@ export class modifier_storm_spirit_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -238,7 +237,7 @@ export class modifier_storm_spirit_1_thinker extends BaseModifier_Plus {
             let hAbility = this.GetAbilityPlus()
             let vPosition = hParent.GetAbsOrigin()
             UTIL_Remove(hParent)
-            if (GameFunc.IsValid(hCaster) && GameFunc.IsValid(hAbility)) {
+            if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(hAbility)) {
                 let fDamage = this.static_remnant_damage + hCaster.GetIntellect() * this.intellect_factor
                 let iShockCount = hAbility.GetSpecialValueFor("shock_bonus_int") * hCaster.GetIntellect()
                 let tTargets = FindUnitsInRadius(hCaster.GetTeamNumber(), vPosition, null, this.static_remnant_damage_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)

@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -69,7 +68,7 @@ export class modifier_slark_3 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     attackLanded(params: IModifierTable) {
         let hParent = this.GetParentPlus()
-        if (GameFunc.IsValid(hParent) && params.attacker == hParent && !params.attacker.IsIllusion()) {
+        if (GFuncEntity.IsValid(hParent) && params.attacker == hParent && !params.attacker.IsIllusion()) {
             if (!hParent.PassivesDisabled() && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, hParent.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
                 modifier_slark_3_particle_slark_essence_shift.apply(hParent, params.target, this.GetAbilityPlus(), { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
 
@@ -81,7 +80,7 @@ export class modifier_slark_3 extends BaseModifier_Plus {
     death(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hAttacker = params.attacker
-        if (!GameFunc.IsValid(hAttacker) || hAttacker.GetUnitLabel() == "builder") {
+        if (!GFuncEntity.IsValid(hAttacker) || hAttacker.GetUnitLabel() == "builder") {
             return
         }
         if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {

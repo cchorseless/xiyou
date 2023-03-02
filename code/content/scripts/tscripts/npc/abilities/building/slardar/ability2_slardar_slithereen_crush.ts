@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -72,17 +71,17 @@ export class modifier_slardar_2 extends BaseModifier_Plus {
         let hAttacker = params.attacker as IBaseNpc_Plus
         let hAbility = this.GetAbilityPlus()
         let target = params.target as IBaseNpc_Plus
-        if (GameFunc.IsValid(hAbility) &&
+        if (GFuncEntity.IsValid(hAbility) &&
             !hAttacker.IsIllusion() &&
             hAbility.IsCooldownReady() &&
             !hAttacker.PassivesDisabled() &&
             !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, hAttacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
-            if (GameFunc.mathUtil.PRD(this.chance, hAttacker, "slardar_2")) {
+            if (GFuncMath.PRD(this.chance, hAttacker, "slardar_2")) {
                 EmitSoundOnLocationWithCaster(params.target.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Slardar.Bash", hAttacker), hAttacker)
                 let stun_duration = this.duration * target.GetStatusResistanceFactor(hAttacker)
                 // 1技能水洼提升眩晕时间效果
                 let hAbility1 = ability1_slardar_sprint.findIn(hAttacker)
-                if (GameFunc.IsValid(hAbility1) && hAbility1.GetIncreasedStunDuration) {
+                if (GFuncEntity.IsValid(hAbility1) && hAbility1.GetIncreasedStunDuration) {
                     stun_duration = stun_duration * hAbility1.GetIncreasedStunDuration(params.target)
                 }
                 modifier_slardar_2_bashed.apply(params.target, hAttacker, this.GetAbilityPlus(), { duration: stun_duration })

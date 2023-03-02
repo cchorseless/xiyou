@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -31,7 +30,7 @@ export class t9_blasphemy extends BaseAbility_Plus {
 
         // let combination_t09_enhanced_petrify = combination_t09_enhanced_petrify.findIn(hCaster)
         // let has_combination_t09_enhanced_petrify = false
-        // if (GameFunc.IsValid(combination_t09_enhanced_petrify) && combination_t09_enhanced_petrify.IsActivated()) {
+        // if (GFuncEntity.IsValid(combination_t09_enhanced_petrify) && combination_t09_enhanced_petrify.IsActivated()) {
         //     has_combination_t09_enhanced_petrify = true
         // }
 
@@ -95,7 +94,7 @@ export class modifier_t9_blasphemy extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

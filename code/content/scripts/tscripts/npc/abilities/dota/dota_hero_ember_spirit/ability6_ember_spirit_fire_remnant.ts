@@ -45,7 +45,7 @@ export class ability6_ember_spirit_fire_remnant extends BaseAbility_Plus {
         modifier_ember_spirit_6.apply(hRemnant, hCaster, this, { vPosition: vPosition })
         for (let i = 0; i <= hRemnant.GetAbilityCount() - 1, 1; i++) {
             let hAbility = hRemnant.GetAbilityByIndex(i)
-            if (GameFunc.IsValid(hAbility)) {
+            if (GFuncEntity.IsValid(hAbility)) {
                 hRemnant.RemoveAbility(hAbility.GetAbilityName())
             }
         }
@@ -63,7 +63,7 @@ export class ability6_ember_spirit_fire_remnant extends BaseAbility_Plus {
         }
         for (let i = this.tRemnant.length - 1; i >= 0; i--) {
             let Remnant = this.tRemnant[i]
-            if (GameFunc.IsValid(Remnant)) {
+            if (GFuncEntity.IsValid(Remnant)) {
                 if (Remnant.bIsUse == false) {
                     if (hRemnant == null) {
                         Remnant.bIsUse = true
@@ -109,7 +109,7 @@ export class ability6_ember_spirit_fire_remnant extends BaseAbility_Plus {
         if (this.tRemnant != null) {
             for (let i = this.tRemnant.length - 1; i >= 0; i--) {
                 let hRemnant = this.tRemnant[i]
-                if (GameFunc.IsValid(hRemnant)) {
+                if (GFuncEntity.IsValid(hRemnant)) {
                     UTIL_Remove(hRemnant)
                 }
                 table.remove(this.tRemnant, i)
@@ -119,7 +119,7 @@ export class ability6_ember_spirit_fire_remnant extends BaseAbility_Plus {
     }
     Ability1(sourcehAbility: IBaseAbility_Plus, hRemnant: IBaseNpc_Plus) {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(hRemnant)) {
+        if (GFuncEntity.IsValid(hRemnant)) {
             let radius = sourcehAbility.GetSpecialValueFor("radius")
             let unit_count = sourcehAbility.GetSpecialValueFor("unit_count")
             let duration = sourcehAbility.GetSpecialValueFor("duration")
@@ -141,7 +141,7 @@ export class ability6_ember_spirit_fire_remnant extends BaseAbility_Plus {
     }
     Ability2(sourcehAbility: IBaseAbility_Plus, hRemnant: IBaseNpc_Plus) {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(hRemnant)) {
+        if (GFuncEntity.IsValid(hRemnant)) {
             let position = this.GetCursorPosition()
             let radius = this.GetSpecialValueFor("radius")
             modifier_ember_spirit_2_particle_ember_spirit_sleight_of_fist_cast.applyThinker(position, hCaster, sourcehAbility,
@@ -156,7 +156,7 @@ export class ability6_ember_spirit_fire_remnant extends BaseAbility_Plus {
     }
     Ability3(sourceAbility: IBaseAbility_Plus, hRemnant: IBaseNpc_Plus) {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(hRemnant)) {
+        if (GFuncEntity.IsValid(hRemnant)) {
             let duration = sourceAbility.GetSpecialValueFor("duration")
             modifier_ember_spirit_6_buff_ember_spirit_4.apply(hRemnant, hCaster, sourceAbility, { duration: duration, ability_4_entindex: this.entindex() })
             hRemnant.EmitSound(ResHelper.GetSoundReplacement("Hero_EmberSpirit.FlameGuard.Cast", hCaster))
@@ -198,7 +198,7 @@ export class modifier_ember_spirit_6 extends BaseModifier_Plus {
         let speed_multiplier = this.GetSpecialValueFor("speed_multiplier")
         this.move_speed = hCaster.GetMoveSpeedModifier(hCaster.GetBaseMoveSpeed(), false) * speed_multiplier * 0.01
         if (IsServer()) {
-            this.vTargetPosition = GameFunc.VectorFunctions.StringToVector(params.vPosition)
+            this.vTargetPosition = GFuncVector.StringToVector(params.vPosition)
             this.StartIntervalThink(((this.vTargetPosition - hParent.GetAbsOrigin()) as Vector).Length() / this.move_speed)
             this.fAttackTimeRecord = GameRules.GetGameTime()
             this.iPhase = "moving"
@@ -230,7 +230,7 @@ export class modifier_ember_spirit_6 extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
             this.GetParentPlus().AddNoDraw()
-            if (GameFunc.IsValid(hCaster)) {
+            if (GFuncEntity.IsValid(hCaster)) {
                 this.GetParentPlus().SetAbsOrigin(hCaster.GetAbsOrigin())
             }
             if (modifier_rooted.exist(this.GetParentPlus())) {
@@ -242,7 +242,7 @@ export class modifier_ember_spirit_6 extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -254,7 +254,7 @@ export class modifier_ember_spirit_6 extends BaseModifier_Plus {
             if (this.iPhase == "stand") {
                 let targets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), hParent.Script_GetAttackRange() + hParent.GetHullRadius(), null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_CLOSEST)
                 let target = targets[0]
-                if (GameFunc.IsValid(target)) {
+                if (GFuncEntity.IsValid(target)) {
                     if (GameRules.GetGameTime() > this.fAttackTimeRecord) {
                         ExecuteOrderFromTable(
                             {
@@ -280,7 +280,7 @@ export class modifier_ember_spirit_6 extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant(params: IModifierTable) {
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetIncreasedAttackSpeed() * 100
         }
     }
@@ -297,7 +297,7 @@ export class modifier_ember_spirit_6 extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus() as ability6_ember_spirit_fire_remnant
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             this.Destroy()
             return
         }
@@ -336,7 +336,7 @@ export class modifier_ember_spirit_6 extends BaseModifier_Plus {
     On_AttackLanded(params: ModifierAttackEvent) {
         if (params.attacker == this.GetParentPlus()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 return
             }
 
@@ -444,7 +444,7 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
     BeCreated(params: IModifierTable) {
 
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             this.Destroy()
             return
         }
@@ -483,7 +483,7 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
     BeRefresh(params: IModifierTable) {
 
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             this.Destroy()
             return
         }
@@ -509,7 +509,7 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
     BeDestroy() {
 
         if (IsServer()) {
-            if (GameFunc.IsValid(this.modifier_truesight)) {
+            if (GFuncEntity.IsValid(this.modifier_truesight)) {
                 this.modifier_truesight.Destroy()
             }
         }
@@ -517,7 +517,7 @@ export class modifier_ember_spirit_1_debuff_ember_spirit_4 extends BaseModifier_
     OnIntervalThink() {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }
@@ -582,7 +582,7 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
     BeCreated(params: IModifierTable) {
 
         let hCaster = this.GetParentPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             this.Destroy()
             return
         }
@@ -598,7 +598,7 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage") + extra_bonus_damage
         this.attack_interval = this.GetSpecialValueFor("attack_interval")
         if (IsServer()) {
-            let target_position = GameFunc.VectorFunctions.StringToVector(params.target_position)
+            let target_position = GFuncVector.StringToVector(params.target_position)
             this.ability_4 = EntIndexToHScript(params.ability_4_entindex) as IBaseAbility_Plus
             let RemnantCaster = this.GetCasterPlus()
 
@@ -636,7 +636,7 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
     BeRefresh(params: IModifierTable) {
 
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             this.Destroy()
             return
         }
@@ -671,7 +671,7 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
 
             for (let i = this.targets.length - 1; i >= 0; i--) {
                 let _target = this.targets[i]
-                if (GameFunc.IsValid(_target)) {
+                if (GFuncEntity.IsValid(_target)) {
                     modifier_ember_spirit_2_marker.remove(_target);
                 }
                 table.remove(this.targets, i)
@@ -689,7 +689,7 @@ export class modifier_ember_spirit_2_buff_ember_spirit_4 extends BaseModifier_Pl
             for (let i = this.targets.length - 1; i >= 0; i--) {
                 let _target = this.targets[i]
                 table.remove(this.targets, i)
-                if (GameFunc.IsValid(_target)) {
+                if (GFuncEntity.IsValid(_target)) {
                     modifier_ember_spirit_2_marker.remove(_target);
                     if (UnitFilter(_target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, hCaster.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
                         target = _target
@@ -809,7 +809,7 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
 
         let hCaster = this.GetCasterPlus()
         let ReManatCaster = this.GetParentPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             this.Destroy()
             return
         }
@@ -859,7 +859,7 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
 
         let hCaster = this.GetCasterPlus()
         let ReManatCaster = this.GetParentPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             this.Destroy()
             return
         }
@@ -895,7 +895,7 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let ReManatCaster = this.GetParentPlus()
-            if (GameFunc.IsValid(hCaster)) {
+            if (GFuncEntity.IsValid(hCaster)) {
                 ReManatCaster.StopSound(ResHelper.GetSoundReplacement("Hero_EmberSpirit.FlameGuard.Loop", hCaster))
             }
         }
@@ -904,7 +904,7 @@ export class modifier_ember_spirit_6_buff_ember_spirit_4 extends BaseModifier_Pl
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let ReManatCaster = this.GetParentPlus()
-            if (GameFunc.IsValid(hCaster)) {
+            if (GFuncEntity.IsValid(hCaster)) {
                 let hAbility = this.GetAbilityPlus()
                 let radius = this.radius
                 let iDamage = this.damage_per_second * this.tick_interval + hCaster.GetAgility() * this.GetSpecialValueFor("ageility") * this.attribute_percent * 0.01
@@ -962,7 +962,7 @@ export class modifier_ember_spirit_6_friend_ember_spirit_4 extends BaseModifier_
     Init(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus().GetSource()
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -1068,7 +1068,7 @@ export class modifier_ember_spirit_6_enemy_arua_debuff_ember_spirit_4 extends Ba
         let hCaster = this.GetAuraOwner() as IBaseNpc_Plus
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (GameFunc.IsValid(hCaster) && GameFunc.IsValid(hCaster.GetSource())) {
+            if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(hCaster.GetSource())) {
                 this.bonus_magic_resistance = hCaster.GetSource().GetTalentValue("special_bonus_unique_ember_spirit_custom_6")
                 this.SetStackCount(this.bonus_magic_resistance)
             }

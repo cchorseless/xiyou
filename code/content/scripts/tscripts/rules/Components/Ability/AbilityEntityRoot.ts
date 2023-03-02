@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { CombinationConfig } from "../../../shared/CombinationConfig";
@@ -52,8 +51,8 @@ export class AbilityEntityRoot extends BaseEntityRoot {
 
     onDestroy(): void {
         let ability = this.GetDomain<IBaseAbility_Plus>();
-        if (!GameFunc.IsValid(ability)) { return }
-        GDestroyAbility(ability);
+        if (!GFuncEntity.IsValid(ability)) { return }
+        GFuncEntity.SafeDestroyAbility(ability);
     }
 
     config() {

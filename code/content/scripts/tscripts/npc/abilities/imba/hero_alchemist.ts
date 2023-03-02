@@ -38,7 +38,7 @@ export class imba_alchemist_acid_spray extends BaseAbility_Plus {
                 11: "alchemist_alch_ability_acid_11",
                 12: "alchemist_alch_ability_acid_12"
             }
-            EmitSoundOn(GameFunc.ArrayFunc.RandomOne(Object.values(cast_responses)), caster);
+            EmitSoundOn(GFuncRandom.RandomOne(Object.values(cast_responses)), caster);
         }
         let thinker = CreateModifierThinker(caster, this, "modifier_imba_acid_spray_thinker", {
             duration: this.GetSpecialValueFor("duration")
@@ -395,7 +395,7 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
             if (modifier_unstable_handler) {
                 let remaining_time = modifier_unstable_handler.GetRemainingTime();
                 if (remaining_time < 1) {
-                    EmitSoundOn(GameFunc.ArrayFunc.RandomOne(Object.values(last_second_throw_response)), this.GetCasterPlus());
+                    EmitSoundOn(GFuncRandom.RandomOne(Object.values(last_second_throw_response)), this.GetCasterPlus());
                 }
             }
             this.GetCasterPlus().RemoveModifierByName("modifier_imba_unstable_concoction_handler");
@@ -417,7 +417,7 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
             });
             return;
         }
-        EmitSoundOn(GameFunc.ArrayFunc.RandomOne(Object.values(cast_response)), this.GetCasterPlus());
+        EmitSoundOn(GFuncRandom.RandomOne(Object.values(cast_response)), this.GetCasterPlus());
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_ALCHEMIST_CONCOCTION);
         this.brew_start = GameRules.GetGameTime();
         this.brew_time = this.vanilla_ability.GetSpecialValueFor("brew_time");
@@ -521,7 +521,7 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
                         });
                         this.AddTimer(FrameTime(), () => {
                             if (!unit.IsAlive() && RollPercentage(50)) {
-                                EmitSoundOn(GameFunc.ArrayFunc.RandomOne(Object.values(kill_response)), caster);
+                                EmitSoundOn(GFuncRandom.RandomOne(Object.values(kill_response)), caster);
                             }
                         });
                         if (unit.HasModifier("modifier_imba_acid_spray_handler")) {
@@ -684,7 +684,7 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
             let integer = math.floor(number);
             if (integer <= 0 && !this.last_second_responded) {
                 this.last_second_responded = true;
-                EmitSoundOn(GameFunc.ArrayFunc.RandomOne(Object.values(last_second_response)), caster);
+                EmitSoundOn(GFuncRandom.RandomOne(Object.values(last_second_response)), caster);
             }
             let digits = math.floor(math.log10(number)) + 2;
             let decimal = number % 1;
@@ -714,7 +714,7 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
                 }
             } else {
                 ability.time_charged = GameRules.GetGameTime() - ability.brew_start;
-                EmitSoundOn(GameFunc.ArrayFunc.RandomOne(Object.values(self_blow_response)), caster);
+                EmitSoundOn(GFuncRandom.RandomOne(Object.values(self_blow_response)), caster);
                 let info = {
                     Target: caster,
                     Source: caster,
@@ -1091,7 +1091,7 @@ export class imba_alchemist_chemical_rage extends BaseAbility_Plus {
         if (GameFunc.GetCount(enemies) >= swamp_maximum_occupancy) {
             caster.EmitSound("Imba.AlchemistMySwamp");
         } else {
-            EmitSoundOn(GameFunc.ArrayFunc.RandomOne(Object.values(cast_response)), caster);
+            EmitSoundOn(GFuncRandom.RandomOne(Object.values(cast_response)), caster);
         }
         caster.Purge(false, true, false, false, false);
         caster.AddNewModifier(caster, this, "modifier_imba_chemical_rage_handler", {});

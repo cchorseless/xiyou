@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -31,7 +30,7 @@ export class ability1_mars_spear extends BaseAbility_Plus {
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let delay = this.GetSpecialValueFor("delay")
@@ -69,7 +68,7 @@ export class ability1_mars_spear extends BaseAbility_Plus {
 
         for (let i = hThinker.GetAbilityCount() - 1; i >= 0; i--) {
             let ability = hThinker.GetAbilityByIndex(i)
-            if (GameFunc.IsValid(ability)) {
+            if (GFuncEntity.IsValid(ability)) {
                 hThinker.RemoveAbilityByHandle(ability)
             }
         }
@@ -106,7 +105,7 @@ export class ability1_mars_spear extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(hTarget)) {
+        if (GFuncEntity.IsValid(hTarget)) {
             if (ExtraData.target_position_x != null && ExtraData.target_position_y != null && ExtraData.target_position_z != null) {
                 let speed = this.GetSpecialValueFor("speed")
                 let radius = this.GetSpecialValueFor("radius")
@@ -173,7 +172,7 @@ export class modifier_mars_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -303,8 +302,8 @@ export class modifier_mars_1_move extends BaseModifierMotionHorizontal_Plus {
 
         if (IsServer()) {
             if (this.ApplyHorizontalMotionController()) {
-                this.vStartPosition = GameFunc.VectorFunctions.StringToVector(params.start_position)
-                this.vTargetPosition = GameFunc.VectorFunctions.StringToVector(params.target_position)
+                this.vStartPosition = GFuncVector.StringToVector(params.start_position)
+                this.vTargetPosition = GFuncVector.StringToVector(params.target_position)
             } else {
                 this.Destroy()
             }
@@ -326,8 +325,8 @@ export class modifier_mars_1_move extends BaseModifierMotionHorizontal_Plus {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
             let fPercent = this.GetElapsedTime() / this.GetDuration()
-            if (GameFunc.IsValid(hCaster) && hCaster.IsAlive()) {
-                let vPosition = GameFunc.VectorFunctions.VectorLerp(fPercent, this.vStartPosition, this.vTargetPosition)
+            if (GFuncEntity.IsValid(hCaster) && hCaster.IsAlive()) {
+                let vPosition = GFuncVector.VectorLerp(fPercent, this.vStartPosition, this.vTargetPosition)
                 let vDirection = ((this.vTargetPosition - this.vStartPosition) as Vector).Normalized()
                 hParent.SetAbsOrigin(vPosition)
                 let arena_walls = Entities.FindAllByClassnameWithin("npc_dota_phantomassassin_gravestone", hParent.GetAbsOrigin(), 160)
@@ -413,7 +412,7 @@ export class modifier_mars_1_hit_obstacle_stun extends BaseModifier_Plus {
 
         if (IsServer()) {
             let hParent = this.GetParentPlus()
-            let vDir = GameFunc.VectorFunctions.StringToVector(params.vDir)
+            let vDir = GFuncVector.StringToVector(params.vDir)
             let delta = 200
             let location = GetGroundPosition(hParent.GetAbsOrigin(), hParent) + vDir * delta
             let iParticleID = ResHelper.CreateParticle({

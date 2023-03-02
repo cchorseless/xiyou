@@ -4,8 +4,6 @@
  */
 
 import { Assert_Sounds } from "./assert/Assert_Sounds";
-import { GameFunc } from "./GameFunc";
-import { EntityHelper } from "./helper/EntityHelper";
 import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { NetTablesHelper } from "./helper/NetTablesHelper";
@@ -215,7 +213,7 @@ export class GameScene {
             }
             let itemEnity = EntIndexToHScript(itementityid) as IBaseItem_Plus;
             let npc = EntIndexToHScript(npcentindex) as IBaseNpc_Plus;
-            if (!GameFunc.IsValid(itemEnity) || !GameFunc.IsValid(npc) || itemEnity.ETRoot == null || npc.ETRoot == null) {
+            if (!GFuncEntity.IsValid(itemEnity) || !GFuncEntity.IsValid(npc) || itemEnity.ETRoot == null || npc.ETRoot == null) {
                 event.state = false;
                 EventHelper.ErrorMessage("not valid item or npc", playerid);
                 return;
@@ -243,7 +241,7 @@ export class GameScene {
                 return;
             }
             let itemEnity = EntIndexToHScript(itementityid) as IBaseItem_Plus;
-            if (!GameFunc.IsValid(itemEnity) || itemEnity.ETRoot == null) {
+            if (!GFuncEntity.IsValid(itemEnity) || itemEnity.ETRoot == null) {
                 event.state = false;
                 EventHelper.ErrorMessage("not valid item ", playerid);
                 return;
@@ -325,7 +323,7 @@ export class GameScene {
         if (sUnitName == GameEnum.Unit.UnitNames.npc_dota_thinker) {
             return;
         }
-        if (EntityHelper.checkIsFirstSpawn(spawnedUnit)) {
+        if (GFuncEntity.checkIsFirstSpawn(spawnedUnit)) {
             modifier_property.applyOnly(spawnedUnit, spawnedUnit);
             // spawnedUnit.SetMaximumGoldBounty(0);
             // spawnedUnit.SetMinimumGoldBounty(0);
@@ -341,7 +339,7 @@ export class GameScene {
     }
     static OnEntityKilled(events: EntityKilledEvent) {
         let hUnit = EntIndexToHScript(events.entindex_killed) as IBaseNpc_Plus;
-        if (!GameFunc.IsValid(hUnit)) {
+        if (!GFuncEntity.IsValid(hUnit)) {
             return;
         }
         if (!hUnit.ETRoot) {

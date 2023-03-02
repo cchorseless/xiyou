@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -120,7 +119,7 @@ export class modifier_skeleton_king_3_aura extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         this.add_atk_pct_perS = this.GetSpecialValueFor("add_atk_pct_perS")
         if (IsServer()) {
-            if (GameFunc.IsValid(hCaster)) {
+            if (GFuncEntity.IsValid(hCaster)) {
                 if (hCaster.GetTeamNumber() == hParent.GetTeamNumber() && modifier_skeleton_king_2_summon.exist(hParent)) {
                     modifier_skeleton_king_3_attack.apply(hCaster, hParent, this.GetAbilityPlus(), null)
                 }
@@ -135,9 +134,9 @@ export class modifier_skeleton_king_3_aura extends BaseModifier_Plus {
     OnDeath(params: IModifierTable) {
         if (params.unit == this.GetParentPlus()) {
             let hCaster = this.GetCasterPlus()
-            if (GameFunc.IsValid(hCaster) && GameFunc.IsValid(this.GetAbilityPlus())) {
+            if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(this.GetAbilityPlus())) {
                 let hBuff = hCaster.FindModifierByName(this.GetAbilityPlus().GetIntrinsicModifierName()) as IBaseModifier_Plus;
-                if (GameFunc.IsValid(hBuff)) {
+                if (GFuncEntity.IsValid(hBuff)) {
                     let iCount = this.regen
                     for (let i = 1; i <= iCount; i++) {
                         hBuff.IncrementStackCount()
@@ -200,7 +199,7 @@ export class modifier_skeleton_king_3_attack extends BaseModifier_Plus {
     //  // pipixia }
     OnIntervalThink() {
         if (IsServer()) {
-            if (!GameFunc.IsValid(this.GetCasterPlus()) || !this.GetCasterPlus().IsAlive()) {
+            if (!GFuncEntity.IsValid(this.GetCasterPlus()) || !this.GetCasterPlus().IsAlive()) {
                 this.Destroy()
                 return
             }

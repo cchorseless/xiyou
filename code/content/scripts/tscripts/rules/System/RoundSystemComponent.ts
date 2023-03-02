@@ -1,4 +1,3 @@
-import { GameFunc } from "../../GameFunc";
 import { EventHelper } from "../../helper/EventHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { unit_base_equip_bag } from "../../npc/units/common/unit_base_equip_bag";
@@ -53,7 +52,7 @@ export class RoundSystemComponent extends ET.SingletonComponent {
 
     private OnEntityHurtEvent(events: EntityHurtEvent) {
         let hUnit = EntIndexToHScript(events.entindex_attacker) as IBaseNpc_Plus;
-        if (!GameFunc.IsValid(hUnit)) {
+        if (!GFuncEntity.IsValid(hUnit)) {
             return;
         }
         if (!hUnit.ETRoot || !hUnit.ETRoot.AsValid<IEnemyUnitEntityRoot>("EnemyUnitEntityRoot")) {
@@ -119,7 +118,7 @@ export class RoundSystemComponent extends ET.SingletonComponent {
 
     public randomRoundPrizeUnit() {
         let allunit = this.Domain.ETRoot.GetDomainChilds(RoundPrizeUnitEntityRoot);
-        return GameFunc.ArrayFunc.RandomArray(allunit);
+        return GFuncRandom.RandomArray(allunit);
     }
 
     public runBasicRound(round: string) {

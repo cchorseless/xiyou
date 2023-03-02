@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -114,7 +113,7 @@ export class modifier_brewmaster_6 extends BaseModifier_Plus {
         // 侍从技为风元素，
         let hCaster = this.GetCasterPlus()
         // let hAbility_t27  = qualification_build_t27.findIn(  hCaster )
-        // if (GameFunc.IsValid(hAbility_t27) && hAbility_t27.GetLevel() >= 1) {
+        // if (GFuncEntity.IsValid(hAbility_t27) && hAbility_t27.GetLevel() >= 1) {
         //     return this.bonus_crit_mutipier
         // }
     }
@@ -186,7 +185,7 @@ export class modifier_brewmaster_6_buff extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             if (UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
-                if (GameFunc.mathUtil.PRD(this.crit_chance, hCaster, "brewmaster_3")) {
+                if (GFuncMath.PRD(this.crit_chance, hCaster, "brewmaster_3")) {
                     // 音效
                     EmitSoundOnLocationWithCaster(hCaster.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Brewmaster.Brawler.Crit", hCaster), hCaster)
                     return this.crit_multiplier

@@ -156,28 +156,28 @@ export class modifier_pangolier_3 extends BaseModifier_Plus {
                 if (modifier_pangolier_6_rolling.exist(hParent)) {
                     let hModifier = modifier_pangolier_6_rolling.findIn(hParent)
                     let hAbility3 = hModifier.GetAbilityPlus()
-                    if (GameFunc.IsValid(hAbility3)) {
+                    if (GFuncEntity.IsValid(hAbility3)) {
                         chance = chance + hAbility3.GetSpecialValueFor("lucky_shot_chance")
                     }
                 }
 
-                if (GameFunc.mathUtil.PRD(chance, hParent, "modifier_pangolier_3_stun")) {
+                if (GFuncMath.PRD(chance, hParent, "modifier_pangolier_3_stun")) {
                     bProc = true
                     table.insert(this.tRecords[0], params.record)
                 }
-                if (GameFunc.mathUtil.PRD(chance, hParent, "modifier_pangolier_3_silent")) {
+                if (GFuncMath.PRD(chance, hParent, "modifier_pangolier_3_silent")) {
                     bProc = true
                     table.insert(this.tRecords[2], params.record)
                 }
-                if (GameFunc.mathUtil.PRD(chance, hParent, "modifier_pangolier_3_remove_armor")) {
+                if (GFuncMath.PRD(chance, hParent, "modifier_pangolier_3_remove_armor")) {
                     bProc = true
                     table.insert(this.tRecords[3], params.record)
                 }
-                if (GameFunc.mathUtil.PRD(chance, hParent, "modifier_pangolier_3_remove_magic_armor")) {
+                if (GFuncMath.PRD(chance, hParent, "modifier_pangolier_3_remove_magic_armor")) {
                     bProc = true
                     table.insert(this.tRecords[4], params.record)
                 }
-                if (GameFunc.mathUtil.PRD(chance, hParent, "modifier_pangolier_3_reduce_health")) {
+                if (GFuncMath.PRD(chance, hParent, "modifier_pangolier_3_reduce_health")) {
                     bProc = true
                     table.insert(this.tRecords[5], params.record)
                 }

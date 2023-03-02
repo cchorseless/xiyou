@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -67,7 +66,7 @@ export class ability2_ogre_magi_ignite extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         let projectile_speed = this.GetSpecialValueFor("projectile_speed")
 
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
 
@@ -139,7 +138,7 @@ export class ability2_ogre_magi_ignite extends BaseAbility_Plus {
         this.Ignite(hTarget)
         //  嗜血术多重施法特殊处理
         let hAbility4 = ability3_ogre_magi_bloodlust.findIn(hCaster) as ability3_ogre_magi_bloodlust;
-        if ((!GameFunc.IsValid(hAbility4)) || hAbility4.GetLevel() <= 0) {
+        if ((!GFuncEntity.IsValid(hAbility4)) || hAbility4.GetLevel() <= 0) {
             return
         }
         let multicast_delay = this.GetSpecialValueFor("multicast_delay")
@@ -164,7 +163,7 @@ export class ability2_ogre_magi_ignite extends BaseAbility_Plus {
                 if (hTargets[0] != null) {
                     this.Ignite(hTargets[0], 1400, iMulticastCount)
                     EmitSoundOnLocationWithCaster(hTargets[0].GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_OgreMagi.Fireblast.x" + iCount, hCaster), hCaster)
-                } else if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+                } else if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
                     this.Ignite(hTarget, 1400, iMulticastCount)
                     EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_OgreMagi.Fireblast.x" + iCount, hCaster), hCaster)
                 }
@@ -224,7 +223,7 @@ export class modifier_ogre_magi_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -364,7 +363,7 @@ export class modifier_ogre_magi_2_debuff extends BaseModifier_Plus {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
 
-            if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
                 this.Destroy()
                 return
             }

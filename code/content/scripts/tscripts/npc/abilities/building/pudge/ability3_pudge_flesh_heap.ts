@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -62,12 +61,12 @@ export class modifier_pudge_3 extends BaseModifier_Plus {
         let hAttacker = params.attacker
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (GameFunc.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
+        if (GFuncEntity.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
             if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
                 return
             }
             hAttacker = hAttacker.GetSource()
-            if (GameFunc.IsValid(hAttacker) && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled()
+            if (GFuncEntity.IsValid(hAttacker) && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled()
                 // && !Spawner.IsEndless()
             ) {
                 // 非击杀

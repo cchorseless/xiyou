@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -94,7 +93,7 @@ export class modifier_enchantress_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus() as ability3_enchantress_natures_attendants
-            if (!GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hAbility)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -114,7 +113,7 @@ export class modifier_enchantress_3 extends BaseModifier_Plus {
             if (!hAbility.IsAbilityReady()) {
                 return
             }
-            if (GameFunc.IsValid((hAbility).hThinker)) {
+            if (GFuncEntity.IsValid((hAbility).hThinker)) {
                 return
             }
 
@@ -240,7 +239,7 @@ export class modifier_enchantress_3_thinker extends BaseModifier_Plus {
                         for (let i = 0; i < this.tPoints.length; i++) {
                             let hUnit = (this.tPoints)[i];
 
-                            if (hUnit == hThinker || !GameFunc.IsValid(hUnit) || ((hUnit.GetAbsOrigin() - hThinker.GetAbsOrigin()) as Vector).Length2D() > this.radius) {
+                            if (hUnit == hThinker || !GFuncEntity.IsValid(hUnit) || ((hUnit.GetAbsOrigin() - hThinker.GetAbsOrigin()) as Vector).Length2D() > this.radius) {
                                 this.tPoints[i] = hTarget
                                 ParticleManager.SetParticleControlEnt(this.iParticleID, i, hTarget, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hTarget.GetAbsOrigin(), false)
                                 break
@@ -253,14 +252,14 @@ export class modifier_enchantress_3_thinker extends BaseModifier_Plus {
                     let hUnit = (this.tPoints)[i];
 
                     if (hUnit != hThinker) {
-                        if (!GameFunc.IsValid(hUnit) || ((hUnit.GetAbsOrigin() - hThinker.GetAbsOrigin()) as Vector).Length2D() > this.radius) {
+                        if (!GFuncEntity.IsValid(hUnit) || ((hUnit.GetAbsOrigin() - hThinker.GetAbsOrigin()) as Vector).Length2D() > this.radius) {
                             this.tPoints[i] = hThinker
                             ParticleManager.SetParticleControlEnt(this.iParticleID, i, hThinker, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hThinker.GetAbsOrigin(), false)
                         }
                     }
                 }
                 //  造成伤害
-                if (GameFunc.IsValid(hCaster)) {
+                if (GFuncEntity.IsValid(hCaster)) {
                     this.last_int = hCaster.GetIntellect()
                 }
                 let fDamage = (this.dps + this.last_int * this.int_coef) * this.interval

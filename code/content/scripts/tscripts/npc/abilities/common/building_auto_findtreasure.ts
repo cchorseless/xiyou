@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { BuildingRuntimeEntityRoot } from "../../../rules/Components/Building/BuildingRuntimeEntityRoot";
 import { RoundPrizeUnitEntityRoot } from "../../../rules/Components/Round/RoundPrizeUnitEntityRoot";
@@ -80,8 +79,8 @@ export class modifier_auto_findtreasure extends BaseModifier_Plus {
     CheckIntervalThink() {
         let hParent = this.GetParentPlus();
         let hAbility = this.GetAbilityPlus();
-        if (GameFunc.IsValid(hParent)) {
-            if (GameFunc.IsValid(hAbility) && hAbility.IsCooldownReady()) {
+        if (GFuncEntity.IsValid(hParent)) {
+            if (GFuncEntity.IsValid(hAbility) && hAbility.IsCooldownReady()) {
                 if (hAbility.GetAutoCastState()) {
                     this.AutoFindTreasure();
                 } else {
@@ -110,7 +109,7 @@ export class modifier_auto_findtreasure extends BaseModifier_Plus {
         this.findTimer = GTimerHelper.AddTimer(0.5, GHandler.create(this,
             () => {
                 if (building.ChessComp().isInBoard()) {
-                    if (GameFunc.AsVector(moveto - hParent.GetAbsOrigin()).Length2D() > 60) {
+                    if (GFuncVector.AsVector(moveto - hParent.GetAbsOrigin()).Length2D() > 60) {
                         hParent.MoveToPosition(moveto);
                     }
                 } else if (building.ChessComp().isInBaseRoom()) {
@@ -123,7 +122,7 @@ export class modifier_auto_findtreasure extends BaseModifier_Plus {
                             ability.GoBackBoard();
                             return;
                         } else {
-                            GameFunc.ExecuteOrder(hParent, dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_TARGET, targetnpc.GetDomain<IBaseNpc_Plus>(), null);
+                            GFuncEntity.ExecuteOrder(hParent, dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_TARGET, targetnpc.GetDomain<IBaseNpc_Plus>(), null);
                         }
                     }
                 }
@@ -145,7 +144,7 @@ export class modifier_auto_findtreasure extends BaseModifier_Plus {
                 targetnpc = prizeUnits[0];
             }
         } else {
-            targetnpc = GameFunc.ArrayFunc.RandomArray(targets)[0].ETRoot.As<RoundPrizeUnitEntityRoot>();
+            targetnpc = GFuncRandom.RandomArray(targets)[0].ETRoot.As<RoundPrizeUnitEntityRoot>();
         }
         return targetnpc;
     }

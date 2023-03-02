@@ -29,7 +29,7 @@ export class ability6_drow_ranger_marksmanship extends BaseAbility_Plus {
         if (hTarget != null) {
             let caster = this.GetCasterPlus()
             let modifier = modifier_drow_ranger_6.findIn(caster)
-            if (GameFunc.IsValid(modifier)) {
+            if (GFuncEntity.IsValid(modifier)) {
                 modifier.split_attack = true
                 BattleHelper.Attack(caster, hTarget, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_IGNOREINVIS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)
                 modifier.split_attack = null
@@ -123,7 +123,7 @@ export class modifier_drow_ranger_6 extends BaseModifier_Plus {
             this.start = true
             let sTalentName = "special_bonus_unique_drow_ranger_custom_3"
             let chance = this.chance + (params.attacker as IBaseNpc_Plus).GetTalentValue(sTalentName)
-            if (GameFunc.mathUtil.PRD(chance, params.attacker, "drow_ranger_3") && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
+            if (GFuncMath.PRD(chance, params.attacker, "drow_ranger_3") && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
                 modifier_drow_ranger_6_projectile.apply(params.attacker, params.attacker, this.GetAbilityPlus(), null)
             }
         }
@@ -139,7 +139,7 @@ export class modifier_drow_ranger_6 extends BaseModifier_Plus {
             let chance = this.chance + attacker.GetTalentValue(sTalentName)
             if (this.start && modifier_drow_ranger_6_projectile.exist(params.attacker)) {
                 table.insert(this.records, params.record)
-            } else if (!this.start && GameFunc.mathUtil.PRD(chance, params.attacker, "drow_ranger_3") && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
+            } else if (!this.start && GFuncMath.PRD(chance, params.attacker, "drow_ranger_3") && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
                 table.insert(this.records, params.record)
             }
             modifier_drow_ranger_6_projectile.remove(params.attacker);

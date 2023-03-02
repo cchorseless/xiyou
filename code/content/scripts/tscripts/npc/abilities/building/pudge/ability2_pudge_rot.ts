@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -148,7 +147,7 @@ export class modifier_pudge_2_buff extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hAbility) || !GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -188,7 +187,7 @@ export class modifier_pudge_2_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MAGICAL_ARMOR_PERCENTAGE)
     CC_GetModifierMagicalArmorPercentage() {
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return -this.GetCasterPlus().GetTalentValue("special_bonus_unique_pudge_custom_7")
         }
     }

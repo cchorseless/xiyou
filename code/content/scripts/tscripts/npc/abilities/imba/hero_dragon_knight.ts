@@ -156,7 +156,7 @@ export class imba_dragon_knight_dragon_tail extends BaseAbility_Plus {
                     let particle_fx = ResHelper.CreateParticleEx(cleave_particle, ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
                     ParticleManager.SetParticleControl(particle_fx, 0, this.GetCasterPlus().GetAbsOrigin());
                     ParticleManager.ReleaseParticleIndex(particle_fx);
-                    let enemies_to_cleave = AoiHelper.FindUnitsInCone(this.GetCasterPlus().GetTeamNumber(), AoiHelper.CalculateDirection(this.main_target, this.GetCasterPlus()), this.GetCasterPlus().GetAbsOrigin(), this.GetSpecialValueFor("start_radius"), this.GetSpecialValueFor("end_radius"), this.GetSpecialValueFor("dragon_cast_range"), undefined, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
+                    let enemies_to_cleave = AoiHelper.FindUnitsInCone(this.GetCasterPlus().GetTeamNumber(), GFuncVector.CalculateDirection(this.main_target, this.GetCasterPlus()), this.GetCasterPlus().GetAbsOrigin(), this.GetSpecialValueFor("start_radius"), this.GetSpecialValueFor("end_radius"), this.GetSpecialValueFor("dragon_cast_range"), undefined, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
                     for (const [_, enemy] of ipairs(enemies_to_cleave)) {
                         this.main_target.EmitSound("Hero_DragonKnight.DragonTail.Target");
                         ResHelper.CreateParticleEx("particles/units/heroes/hero_dragon_knight/dragon_knight_dragon_tail.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.main_target);

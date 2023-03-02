@@ -59,7 +59,7 @@ export class ability2_skeleton_king_vampiric_aura extends BaseAbility_Plus {
             let sTalentName = "special_bonus_unique_skeleton_king_custom_8"
             let max_skeleton_charges = hCaster.HasTalent(sTalentName) && this.GetSpecialValueFor("max_skeleton_charges") + hCaster.GetTalentValue(sTalentName) || this.GetSpecialValueFor("max_skeleton_charges")
             let hModifier = modifier_skeleton_king_3.findIn(hCaster) as IBaseModifier_Plus;
-            if (GameFunc.IsValid(hModifier) && hModifier.GetStackCount() >= this.GetLevelSpecialValueFor("energy_cost", 0) && this.tSkeletons.length < max_skeleton_charges) {
+            if (GFuncEntity.IsValid(hModifier) && hModifier.GetStackCount() >= this.GetLevelSpecialValueFor("energy_cost", 0) && this.tSkeletons.length < max_skeleton_charges) {
                 return UnitFilterResult.UF_SUCCESS
             } else {
                 this.errorStr = "dota_hud_error_ability_inactive"
@@ -93,7 +93,7 @@ export class ability2_skeleton_king_vampiric_aura extends BaseAbility_Plus {
         let skeleton_duration = this.GetSpecialValueFor("skeleton_duration") + hCaster.GetTalentValue(sTalentName)
         let hHero = PlayerResource.GetSelectedHeroEntity(hCaster.GetPlayerOwnerID())
         let location = hCaster.GetAbsOrigin()
-        let summon_loc = location + GameFunc.VectorFunctions.Rotation2D(Vector(100, 0, 0), math.rad(360 / max_skeleton_charges * this.iIndex))
+        let summon_loc = location + GFuncVector.Rotation2D(Vector(100, 0, 0), math.rad(360 / max_skeleton_charges * this.iIndex))
         let hUnit = CreateUnitByName("npc_dota_wraith_king_skeleton_warrior_custom", summon_loc as Vector, false, hHero, hHero, hCaster.GetTeamNumber())
         hUnit.SetBaseDamageMin(skeleton_attack)
         hUnit.SetBaseDamageMax(skeleton_attack)
@@ -162,13 +162,13 @@ export class modifier_skeleton_king_2 extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
     CC_GetModifierCriticalStrike(params: IModifierTable) {
         if (params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
-            if (GameFunc.mathUtil.PRD(this.crit_chance, params.attacker, "skeleton_king_2")) {
+            if (GFuncMath.PRD(this.crit_chance, params.attacker, "skeleton_king_2")) {
                 if (!params.attacker.IsIllusion()) {
                     table.insert(this.records, params.record)
                 }
                 if (params.attacker == this.GetCasterPlus() && params.attacker.HasScepter()) {
                     let hBuff = modifier_skeleton_king_3.findIn(this.GetCasterPlus()) as IBaseModifier_Plus;
-                    if (GameFunc.IsValid(hBuff)) {
+                    if (GFuncEntity.IsValid(hBuff)) {
                         hBuff.IncrementStackCount()
                     }
                 }
@@ -179,7 +179,7 @@ export class modifier_skeleton_king_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -268,7 +268,7 @@ export class modifier_skeleton_king_2_summon extends BaseModifier_Plus {
 
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus() as ability2_skeleton_king_vampiric_aura
-            if (GameFunc.IsValid(hAbility)) {
+            if (GFuncEntity.IsValid(hAbility)) {
                 GameFunc.ArrayFunc.ArrayRemove(hAbility.tSkeletons, this.GetParentPlus())
                 this.GetParentPlus().ForceKill(false)
                 this.IncreaseAttack()
@@ -284,7 +284,7 @@ export class modifier_skeleton_king_2_summon extends BaseModifier_Plus {
 
     IncreaseAttack() {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(hCaster)) {
+        if (GFuncEntity.IsValid(hCaster)) {
             let hAbility = ability6_skeleton_king_reincarnation.findIn(hCaster)
             let duration = hAbility.GetSpecialValueFor("duration")
             if (hAbility.GetLevel() > 0) {
@@ -294,13 +294,13 @@ export class modifier_skeleton_king_2_summon extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.BASE_ATTACK_TIME_CONSTANT)
     GetBaseAttackTimeConstant(params: IModifierTable) {
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetBaseAttackTime()
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
     GetAttackSpeedBonus_Constant(params: IModifierTable) {
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().GetIncreasedAttackSpeed() * 100
         }
     }
@@ -328,7 +328,7 @@ export class modifier_skeleton_king_2_summon extends BaseModifier_Plus {
     }
     OnIntervalThink() {
         if (IsServer()) {
-            if (GameFunc.IsValid(this.GetParentPlus())) {
+            if (GFuncEntity.IsValid(this.GetParentPlus())) {
                 this.GetParentPlus().RespawnUnit()
                 modifier_kill.apply(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), { duration: this.GetRemainingTime() })
                 modifier_building.apply(this.GetParentPlus(), this.GetCasterPlus(), this.GetAbilityPlus(), null)

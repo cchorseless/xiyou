@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -15,7 +14,7 @@ export class t18_frost_nova extends BaseAbility_Plus {
     GetAOERadius() {
         let hCaster = this.GetCasterPlus()
         // let modifier_combination_t18_frost_condense = modifier_combination_t18_frost_condense.findIn(hCaster) as IBaseModifier_Plus & { extra_radius: number };
-        // let extra_radius = (GameFunc.IsValid(modifier_combination_t18_frost_condense) && modifier_combination_t18_frost_condense.GetStackCount() > 0) && modifier_combination_t18_frost_condense.extra_radius || 0
+        // let extra_radius = (GFuncEntity.IsValid(modifier_combination_t18_frost_condense) && modifier_combination_t18_frost_condense.GetStackCount() > 0) && modifier_combination_t18_frost_condense.extra_radius || 0
         return this.GetSpecialValueFor("radius")
     }
     OnSpellStart() {
@@ -64,7 +63,7 @@ export class modifier_t18_frost_nova extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -138,13 +137,13 @@ export class modifier_t18_frost_nova_thinker extends modifier_particle_thinker {
         let hAbility = this.GetAbilityPlus()
 
         if (IsServer()) {
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
 
             // let combination_t18_frost_condense  = combination_t18_frost_condense.findIn(  hCaster )
-            // let has_combination_t18_frost_condense = GameFunc.IsValid(combination_t18_frost_condense) && combination_t18_frost_condense.IsActivated() && combination_t18_frost_condense.FrostCondense != null
+            // let has_combination_t18_frost_condense = GFuncEntity.IsValid(combination_t18_frost_condense) && combination_t18_frost_condense.IsActivated() && combination_t18_frost_condense.FrostCondense != null
             // let extra_radius = has_combination_t18_frost_condense && combination_t18_frost_condense.GetSpecialValueFor("extra_radius") || 0
             // + extra_radius
             let radius = this.radius
@@ -242,7 +241,7 @@ export class modifier_t18_frost_nova_particle extends modifier_particle {
         let vPosition = hParent.GetAbsOrigin()
         let hAbility = this.GetAbilityPlus()
         // let hModifier = modifier_combination_t18_frost_condense.findIn(hCaster) as IBaseModifier_Plus & { extra_radius: number };
-        // let extra_radius = (GameFunc.IsValid(hModifier) && hModifier.GetStackCount() == 1) && hModifier.extra_radius || 0
+        // let extra_radius = (GFuncEntity.IsValid(hModifier) && hModifier.GetStackCount() == 1) && hModifier.extra_radius || 0
         let radius = this.GetSpecialValueFor("radius")
         if (IsClient()) {
             let iParticleID = ResHelper.CreateParticle({

@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -39,11 +38,11 @@ export class ability3_ogre_magi_bloodlust extends BaseAbility_Plus {
         let multicast_3_times = this.GetSpecialValueFor("multicast_3_times")
         let multicast_4_times = this.GetSpecialValueFor("multicast_4_times")
 
-        if (GameFunc.mathUtil.PRD(multicast_4_times, hCaster, "ogre_magi_3_multicast_4_times")) {
+        if (GFuncMath.PRD(multicast_4_times, hCaster, "ogre_magi_3_multicast_4_times")) {
             return 3
-        } else if (GameFunc.mathUtil.PRD(multicast_3_times, hCaster, "ogre_magi_3_multicast_3_times")) {
+        } else if (GFuncMath.PRD(multicast_3_times, hCaster, "ogre_magi_3_multicast_3_times")) {
             return 2
-        } else if (GameFunc.mathUtil.PRD(multicast_2_times, hCaster, "ogre_magi_3_multicast_2_times")) {
+        } else if (GFuncMath.PRD(multicast_2_times, hCaster, "ogre_magi_3_multicast_2_times")) {
             return 1
         }
         return 0
@@ -130,13 +129,13 @@ export class modifier_ogre_magi_3_buff extends BaseModifier_Plus {
         // if (!IsServer()) {
         //     return
         // }
-        // if (!(GameFunc.IsValid(hCaster) && hCaster.IsAlive() && hCaster == this.GetParentPlus())) {
+        // if (!(GFuncEntity.IsValid(hCaster) && hCaster.IsAlive() && hCaster == this.GetParentPlus())) {
         //     return
         // }
         // if (hCaster.GetTeamNumber() == hTarget.GetTeamNumber()) {
         //     return
         // }
-        // if (!GameFunc.IsValid(hAbility)) {
+        // if (!GFuncEntity.IsValid(hAbility)) {
         //     return
         // }
         // //  如果是仅对友方生效的技能，就不触发了
@@ -147,7 +146,7 @@ export class modifier_ogre_magi_3_buff extends BaseModifier_Plus {
         // if (TableFindKey(MULTICAST_BLACK_LIST, hAbility.GetName()) != null) {
         //     return
         // }
-        // if (!GameFunc.IsValid(this.GetAbilityPlus()) || this.GetAbilityPlus().Roll == null) {
+        // if (!GFuncEntity.IsValid(this.GetAbilityPlus()) || this.GetAbilityPlus().Roll == null) {
         //     return
         // }
 
@@ -169,15 +168,15 @@ export class modifier_ogre_magi_3_buff extends BaseModifier_Plus {
 
         //     let hRecordTarget = hCaster.GetCursorCastTarget()
         //     let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), fRange + 600, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, hAbility.GetAbilityTargetType(), hAbility.GetAbilityTargetFlags() + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, 0)
-        //     let bValidTaget = GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasTalent("special_bonus_unique_ogre_magi_custom_8")
+        //     let bValidTaget = GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasTalent("special_bonus_unique_ogre_magi_custom_8")
 
         //     //  先所有敌人打一遍
         //     for (let hUnit of (tTargets)) {
-        //         if (GameFunc.IsValid(hUnit) && hUnit.IsAlive() && (hUnit != hTarget || bValidTaget)) {
+        //         if (GFuncEntity.IsValid(hUnit) && hUnit.IsAlive() && (hUnit != hTarget || bValidTaget)) {
         //             if (hAbility.CastFilterResultTarget(hUnit) == UnitFilterResult.UF_SUCCESS) {
         //                 hCaster.SetCursorCastTarget(hUnit)
         //                 hAbility.OnSpellStart()
-        //                 if (GameFunc.IsValid(modifier_ogre_magi_3_buff_shard)) {
+        //                 if (GFuncEntity.IsValid(modifier_ogre_magi_3_buff_shard)) {
         //                     modifier_ogre_magi_3_buff_shard.ActiveTarget(hTarget: IBaseNpc_Plus)
         //                 }
         //                 iExtraCount = iExtraCount - 1
@@ -190,12 +189,12 @@ export class modifier_ogre_magi_3_buff extends BaseModifier_Plus {
         //     // 天赋可以对同一目标多次使用 随机打目标,如果是第一个第一个目标延迟攻击
         //     if (iExtraCount > 0 && bValidTaget) {
         //         hAbility.GameTimer(0.6, () => {
-        //             let hUnit = GameFunc.ArrayFunc.RandomArray(tTargets)[0]
-        //             if (GameFunc.IsValid(hUnit) && hUnit.IsAlive() && GameFunc.IsValid(hCaster) && hCaster.IsAlive()) {
+        //             let hUnit = GFuncRandom.RandomArray(tTargets)[0]
+        //             if (GFuncEntity.IsValid(hUnit) && hUnit.IsAlive() && GFuncEntity.IsValid(hCaster) && hCaster.IsAlive()) {
         //                 if (hAbility.CastFilterResultTarget(hUnit) == UnitFilterResult.UF_SUCCESS) {
         //                     hCaster.SetCursorCastTarget(hUnit)
         //                     hAbility.OnSpellStart()
-        //                     if (GameFunc.IsValid(modifier_ogre_magi_3_buff_shard)) {
+        //                     if (GFuncEntity.IsValid(modifier_ogre_magi_3_buff_shard)) {
         //                         modifier_ogre_magi_3_buff_shard.ActiveTarget(hTarget: IBaseNpc_Plus)
         //                     }
         //                     iExtraCount = iExtraCount - 1

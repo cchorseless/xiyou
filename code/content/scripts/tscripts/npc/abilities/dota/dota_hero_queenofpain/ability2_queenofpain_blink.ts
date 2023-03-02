@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -72,7 +71,7 @@ export class ability2_queenofpain_blink extends BaseAbility_Plus {
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_QueenOfPain.ScreamOfPain", hCaster))
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
-        if (GameFunc.IsValid(hTarget)) {
+        if (GFuncEntity.IsValid(hTarget)) {
             let hCaster = this.GetCasterPlus()
             let fDamage = this.GetAbilityDamage()
             let damage_per_int = this.GetSpecialValueFor("damage_per_int")
@@ -145,7 +144,7 @@ export class modifier_queenofpain_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -34,7 +33,7 @@ export class ability3_leshrac_lightning_storm extends BaseAbility_Plus {
     }
 
     Jump(target: IBaseNpc_Plus, units: IBaseNpc_Plus[], count: number) {
-        if (!GameFunc.IsValid(target)) { return }
+        if (!GFuncEntity.IsValid(target)) { return }
         let caster = this.GetCasterPlus()
         let damage_per_int = caster.GetTalentValue("special_bonus_unique_leshrac_custom_4")
         let damage = this.GetAbilityDamage()
@@ -47,7 +46,7 @@ export class ability3_leshrac_lightning_storm extends BaseAbility_Plus {
 
         GTimerHelper.AddTimer(jump_delay, GHandler.create(this, () => {
             let new_target = AoiHelper.GetBounceTarget([target], caster.GetTeamNumber(), radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags() + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, position, FindOrder.FIND_CLOSEST)
-            if (GameFunc.IsValid(new_target)) {
+            if (GFuncEntity.IsValid(new_target)) {
                 modifier_leshrac_3_particle.apply(caster, new_target, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
                 modifier_leshrac_3_debuff.apply(new_target, caster, this, { duration: slow_duration * new_target.GetStatusResistanceFactor(caster) })
                 damage = damage + damage_per_int * caster.GetIntellect()
@@ -79,7 +78,7 @@ export class ability3_leshrac_lightning_storm extends BaseAbility_Plus {
         let jump_count = this.GetSpecialValueFor("jump_count")
         let jump_delay = this.GetSpecialValueFor("jump_delay")
         let slow_duration = this.GetSpecialValueFor("slow_duration")
-        if (!GameFunc.IsValid(target) || !target.IsAlive()) {
+        if (!GFuncEntity.IsValid(target) || !target.IsAlive()) {
             return
         }
         let position = target.GetAbsOrigin()
@@ -92,7 +91,7 @@ export class ability3_leshrac_lightning_storm extends BaseAbility_Plus {
             if (1 < jump_count) {
                 this.Jump(target, [target], 2)
             }
-            if (GameFunc.IsValid(target)) {
+            if (GFuncEntity.IsValid(target)) {
                 modifier_leshrac_3_particle.apply(caster, target, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
                 damage = damage + damage_per_int * caster.GetIntellect()
                 let damage_table =
@@ -147,7 +146,7 @@ export class modifier_leshrac_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

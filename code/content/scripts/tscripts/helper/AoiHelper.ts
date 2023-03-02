@@ -1,4 +1,3 @@
-import { GameFunc } from "../GameFunc";
 
 export module AoiHelper {
     export function FindUnitsInCone(
@@ -35,18 +34,6 @@ export module AoiHelper {
         return unitTable;
     }
 
-    export function CalculateDirection(ent1: Vector | IBaseNpc_Plus, ent2: Vector | IBaseNpc_Plus) {
-        let pos1 = ent1 as Vector;
-        let pos2 = ent2 as Vector;
-        if ((ent1 as IBaseNpc_Plus).GetAbsOrigin) {
-            pos1 = (ent1 as IBaseNpc_Plus).GetAbsOrigin();
-        }
-        if ((ent2 as IBaseNpc_Plus).GetAbsOrigin) {
-            pos2 = (ent2 as IBaseNpc_Plus).GetAbsOrigin();
-        }
-        let direction = (pos1 - pos2 as Vector).Normalized();
-        return direction;
-    }
     export function FindUnitsInBicycleChain(
         nTeamNumber: DOTATeam_t,
         vCenterPos: Vector,
@@ -141,7 +128,7 @@ export module AoiHelper {
         let find = FindEntityInRadius(team, location, radius, exclude, teamFilter, typeFilter, flagFilter, findOrder);
         while (find.length > 0) {
             let r = find.shift();
-            if (GameFunc.IsValid(r) && r.IsAlive()) {
+            if (GFuncEntity.IsValid(r) && r.IsAlive()) {
                 return r
             }
         }
@@ -237,7 +224,7 @@ export module AoiHelper {
                         }
                         else {
                             let fHalfLength = math.sqrt(radius ^ 2 - (fDistance / 2) ^ 2)
-                            let v = GameFunc.VectorFunctions.Rotation2D(vDirection.Normalized(), math.rad(90))
+                            let v = GFuncVector.Rotation2D(vDirection.Normalized(), math.rad(90))
                             let p = [
                                 vMid - v * fHalfLength,
                                 vMid + v * fHalfLength
@@ -269,14 +256,14 @@ export module AoiHelper {
                 }
             }
             //  如果
-            if (GameFunc.VectorFunctions.VectorIsZero(position)) {
+            if (GFuncVector.VectorIsZero(position)) {
                 let vDirection = (targets[1].GetAbsOrigin() - search_position) as Vector;
                 vDirection.z = 0
                 position = GetGroundPosition((search_position + vDirection.Normalized() * math.min(search_radius - 1, vDirection.Length2D())) as Vector, null)
             }
         }
         //  获取地面坐标
-        if (!GameFunc.VectorFunctions.VectorIsZero(position)) {
+        if (!GFuncVector.VectorIsZero(position)) {
             position = GetGroundPosition(position, null)
             return position
         }
@@ -321,7 +308,7 @@ export module AoiHelper {
                     vDirection2.z = 0
                     let vDirection = ((vDirection1 + vDirection2) / 2) as Vector
                     vDirection.z = 0
-                    let v = GameFunc.VectorFunctions.Rotation2D(vDirection.Normalized(), math.rad(90))
+                    let v = GFuncVector.Rotation2D(vDirection.Normalized(), math.rad(90))
                     let vEndPosition = (search_position + vDirection.Normalized() * (search_radius - 1)) as Vector
                     let tPolygon = [
                         search_position + v * start_width,
@@ -330,14 +317,14 @@ export module AoiHelper {
                         vEndPosition - v * end_width,
                         search_position - v * start_width
                     ] as Vector[];
-                    if ((GameFunc.VectorFunctions.IsPointInPolygon(first_target.GetAbsOrigin(), tPolygon) || first_target.IsPositionInRange(tPolygon[3], end_width + first_target.GetHullRadius()))
-                        && (GameFunc.VectorFunctions.IsPointInPolygon(second_target.GetAbsOrigin(), tPolygon) || second_target.IsPositionInRange(tPolygon[3], end_width + second_target.GetHullRadius()))) {
+                    if ((GFuncVector.IsPointInPolygon(first_target.GetAbsOrigin(), tPolygon) || first_target.IsPositionInRange(tPolygon[3], end_width + first_target.GetHullRadius()))
+                        && (GFuncVector.IsPointInPolygon(second_target.GetAbsOrigin(), tPolygon) || second_target.IsPositionInRange(tPolygon[3], end_width + second_target.GetHullRadius()))) {
                         tPolygons.push(tPolygon)
                     }
                 }
                 let vDirection = (first_target.GetAbsOrigin() - search_position) as Vector
                 vDirection.z = 0
-                let v = GameFunc.VectorFunctions.Rotation2D(vDirection.Normalized(), math.rad(90))
+                let v = GFuncVector.Rotation2D(vDirection.Normalized(), math.rad(90))
                 let vEndPosition = search_position + vDirection.Normalized() * (search_radius - 1)
                 let tPolygon = [
                     search_position + v * start_width,
@@ -356,7 +343,7 @@ export module AoiHelper {
                 for (let j = 1; j <= targets.length; j++) {
                     //  N = N + 1
                     let target = targets[j]
-                    if (GameFunc.VectorFunctions.IsPointInPolygon(target.GetAbsOrigin(), tPolygon) || target.IsPositionInRange(tPolygon[3], end_width + target.GetHullRadius())) {
+                    if (GFuncVector.IsPointInPolygon(target.GetAbsOrigin(), tPolygon) || target.IsPositionInRange(tPolygon[3], end_width + target.GetHullRadius())) {
                         n = n + 1
                     }
                 }
@@ -398,7 +385,7 @@ export module AoiHelper {
         order: FindOrder = FindOrder.FIND_CLOSEST,
         can_bounce_bounced_unit = false): IBaseNpc_Plus | null {
         let last_target = unit_table[unit_table.length - 1];
-        if (!GameFunc.IsValid(last_target)) {
+        if (!GFuncEntity.IsValid(last_target)) {
             return
         }
         if (position == null) {
@@ -412,7 +399,7 @@ export module AoiHelper {
         let first_targets = FindEntityInRadius(team_number, position, radius, exclude, team_filter, type_filter, flag_filter, order)
         while (first_targets.length > 0) {
             let nextUnit = first_targets.shift();
-            if (GameFunc.IsValid(nextUnit) && nextUnit.IsAlive()) {
+            if (GFuncEntity.IsValid(nextUnit) && nextUnit.IsAlive()) {
                 return nextUnit
             }
         }
@@ -447,7 +434,7 @@ export module AoiHelper {
         vDirection.z = 0
         vDirection = vDirection.Normalized()
         let vEnd = (vStart + vDirection * fDistance) as Vector
-        let v = GameFunc.VectorFunctions.Rotation2D(vDirection, math.rad(90))
+        let v = GFuncVector.Rotation2D(vDirection, math.rad(90))
         let tPolygon = [
             vStart + v * fStartWidth,
             vEnd + v * fEndWidth,
@@ -461,7 +448,7 @@ export module AoiHelper {
         let iTeamNumber = hAttacker.GetTeamNumber()
         let tTargets = AoiHelper.FindEntityInRadius(iTeamNumber, vStart, fRadius + 100, [hTarget], iTeamFilter, iTypeFilter, iFlagFilter, FindOrder.FIND_CLOSEST)
         for (let hUnit of (tTargets)) {
-            if (GameFunc.VectorFunctions.IsPointInPolygon(hUnit.GetAbsOrigin(), tPolygon)) {
+            if (GFuncVector.IsPointInPolygon(hUnit.GetAbsOrigin(), tPolygon)) {
                 if (func(hUnit)) {
                     break
                 }
@@ -523,6 +510,14 @@ export module AoiHelper {
         }
         return false;
     }
-
+    export function IsNearEnemyClass(unit: IBaseNpc_Plus, radius: number, cls: string) {
+        let class_units = Entities.FindAllByClassnameWithin(cls, unit.GetAbsOrigin(), radius);
+        for (const found_unit of (class_units)) {
+            if (found_unit.GetTeam() != unit.GetTeam()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

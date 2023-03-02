@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { PublicBagConfig } from "../../../shared/PublicBagConfig";
 import { BaseEntityRoot } from "../../Entity/BaseEntityRoot";
@@ -70,10 +69,10 @@ export class ItemEntityRoot extends BaseEntityRoot {
 
     onDestroy(): void {
         let item = this.GetDomain<IBaseItem_Plus>();
-        if (GameFunc.IsValid(item)) {
+        if (GFuncEntity.IsValid(item)) {
             item.GetContainer()?.Destroy();
             this.clearSceneContainer();
-            GDestroyItem(item);
+            GFuncEntity.SafeDestroyItem(item);
         }
     }
     config() {
@@ -89,8 +88,8 @@ export class ItemEntityRoot extends BaseEntityRoot {
         }
         let item = this.GetDomain<IBaseItem_Plus>();
         let npc = unitroot.GetDomain<IBaseNpc_Plus>();
-        if (GameFunc.IsValid(item) &&
-            GameFunc.IsValid(npc) &&
+        if (GFuncEntity.IsValid(item) &&
+            GFuncEntity.IsValid(npc) &&
             item.IsDroppable() &&
             item.CanUnitPickUp(npc) &&
             npc.IsAlive() &&

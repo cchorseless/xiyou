@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -63,7 +62,7 @@ export class ability6_night_stalker_darkness extends BaseAbility_Plus {
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Nightstalker.Darkness", hCaster))
 
         let hAbility = ability2_night_stalker_crippling_fear.findIn(hCaster) as ability2_night_stalker_crippling_fear;;
-        if (GameFunc.IsValid(hAbility) && hAbility.CheckNightTime != null) {
+        if (GFuncEntity.IsValid(hAbility) && hAbility.CheckNightTime != null) {
             hAbility.CheckNightTime()
         }
     }
@@ -106,7 +105,7 @@ export class modifier_night_stalker_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -251,11 +250,11 @@ export class modifier_night_stalker_6_buff extends BaseModifier_Plus {
 
         if (IsServer()) {
             let hCaster = this.GetParentPlus()
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 return
             }
             let hAbility = ability2_night_stalker_crippling_fear.findIn(hCaster) as ability2_night_stalker_crippling_fear;
-            if (GameFunc.IsValid(hAbility) && hAbility.CheckNightTime != null) {
+            if (GFuncEntity.IsValid(hAbility) && hAbility.CheckNightTime != null) {
                 hAbility.CheckNightTime()
             }
         }
@@ -266,7 +265,7 @@ export class modifier_night_stalker_6_buff extends BaseModifier_Plus {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
 
-            if (!GameFunc.IsValid(hAbility) || !GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
                 this.Destroy()
                 return
             }

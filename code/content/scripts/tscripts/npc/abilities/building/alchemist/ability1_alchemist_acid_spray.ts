@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -115,7 +114,7 @@ export class modifier_alchemist_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         let hAbility = this.GetAbilityPlus();
         let hCaster = this.GetCasterPlus();
-        if (!(GameFunc.IsValid(hAbility) && GameFunc.IsValid(hCaster))) {
+        if (!(GFuncEntity.IsValid(hAbility) && GFuncEntity.IsValid(hCaster))) {
             this.Destroy();
             return;
         }
@@ -170,7 +169,7 @@ export class modifier_alchemist_1_aura extends BaseModifier_Plus {
     OnIntervalThink() {
         let hAbility = this.GetAbilityPlus();
         let hCaster = this.GetCasterPlus();
-        if (!(GameFunc.IsValid(hAbility) && GameFunc.IsValid(hCaster))) {
+        if (!(GFuncEntity.IsValid(hAbility) && GFuncEntity.IsValid(hCaster))) {
             this.Destroy();
             return;
         }

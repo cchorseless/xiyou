@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -73,7 +72,7 @@ export class modifier_spectre_2 extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: ModifierAttackEvent) {
-        if (!GameFunc.IsValid(params.target)) { return }
+        if (!GFuncEntity.IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         // 攻击者是幽鬼或者幻象
         let hParent = this.GetParentPlus()
@@ -83,7 +82,7 @@ export class modifier_spectre_2 extends BaseModifier_Plus {
         let attacker = params.attacker as IBaseNpc_Plus
         if (params.attacker == hParent && hParent.GetAgility != null) {
             let hModifier = modifier_spectre_2_debuff.apply(params.target, attacker.GetSource(), this.GetAbilityPlus(), { duration: this.duration })
-            if (GameFunc.IsValid(hModifier)) {
+            if (GFuncEntity.IsValid(hModifier)) {
                 let iStack = hModifier.GetStackCount()
                 let fDamage = math.floor(iStack * hParent.GetAgility() * (this.agi_factor + hParent.GetTalentValue("special_bonus_unique_spectre_custom_8")))
                 let damage_table = {
@@ -126,7 +125,7 @@ export class modifier_spectre_2_debuff extends BaseModifier_Plus {
     Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
-        this.move_speed_percent = this.GetSpecialValueFor("move_speed_percent") + (GameFunc.IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_spectre_custom_2") || 0)
+        this.move_speed_percent = this.GetSpecialValueFor("move_speed_percent") + (GFuncEntity.IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_spectre_custom_2") || 0)
         this.attack_count = this.GetSpecialValueFor("attack_count")
         this.shard_extra_count = this.GetSpecialValueFor("shard_extra_count")
         if (IsServer()) {

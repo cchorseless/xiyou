@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -74,7 +73,7 @@ export class ability6_shadow_shaman_mass_serpent_ward extends BaseAbility_Plus {
         }
         let hAbility = ability3_shadow_shaman_shackles.findIn(hCaster) as ability3_shadow_shaman_shackles;
         for (let i = 1; i <= ward_count; i++) {
-            let vSummonLoc = (vLocation + GameFunc.VectorFunctions.Rotation2D(Vector(1, 0, 0), i * ((2 * math.pi) / ward_count)) * spawn_radius) as Vector
+            let vSummonLoc = (vLocation + GFuncVector.Rotation2D(Vector(1, 0, 0), i * ((2 * math.pi) / ward_count)) * spawn_radius) as Vector
             let hWard = CreateUnitByName("npc_dota_shadow_shaman_ward_custom", vSummonLoc, false, hHero, hHero, hCaster.GetTeamNumber())
             hWard.SetBaseDamageMin(min_damage)
             hWard.SetBaseDamageMax(max_damage)
@@ -83,7 +82,7 @@ export class ability6_shadow_shaman_mass_serpent_ward extends BaseAbility_Plus {
 
             modifier_shadow_shaman_6_summon.apply(hWard, hCaster, this, { duration: ward_duration })
             // hWard.FireSummonned(hCaster)
-            if (GameFunc.IsValid(hAbility) && hAbility.FireTotem != null) {
+            if (GFuncEntity.IsValid(hAbility) && hAbility.FireTotem != null) {
                 hAbility.FireTotem(hWard)
             }
         }
@@ -133,7 +132,7 @@ export class modifier_shadow_shaman_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability6_shadow_shaman_mass_serpent_ward
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -260,9 +259,9 @@ export class modifier_shadow_shaman_6_summon extends BaseModifier_Plus {
 
         if (IsServer()) {
             this.GetParentPlus().ForceKill(false)
-            if (GameFunc.IsValid(this.GetCasterPlus())) {
+            if (GFuncEntity.IsValid(this.GetCasterPlus())) {
                 let hAblt = ability3_shadow_shaman_shackles.findIn(this.GetCasterPlus()) as ability3_shadow_shaman_shackles;
-                if (GameFunc.IsValid(hAblt) && hAblt.RemoveTotem) {
+                if (GFuncEntity.IsValid(hAblt) && hAblt.RemoveTotem) {
                     hAblt.RemoveTotem(this.GetParentPlus())
                 }
             }
@@ -296,9 +295,9 @@ export class modifier_shadow_shaman_6_summon extends BaseModifier_Plus {
             return
         }
         if (params.attacker == this.GetParentPlus() && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK)) {
-            if (GameFunc.IsValid(this) && GameFunc.IsValid(this.GetCasterPlus())) {
+            if (GFuncEntity.IsValid(this) && GFuncEntity.IsValid(this.GetCasterPlus())) {
                 let hAblt = ability3_shadow_shaman_shackles.findIn(this.GetCasterPlus()) as ability3_shadow_shaman_shackles;
-                if (GameFunc.IsValid(hAblt) && hAblt.tTotems && hAblt.tTotems["shackles"] && (hAblt.tTotems["shackles"].length) > 0) {
+                if (GFuncEntity.IsValid(hAblt) && hAblt.tTotems && hAblt.tTotems["shackles"] && (hAblt.tTotems["shackles"].length) > 0) {
                     let count = 0
                     let targets = AoiHelper.FindEntityInRadius(params.attacker.GetTeamNumber(), params.attacker.GetAbsOrigin(), params.attacker.Script_GetAttackRange() + params.attacker.GetHullRadius(), null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_CLOSEST)
                     for (let target of (targets)) {
@@ -313,10 +312,10 @@ export class modifier_shadow_shaman_6_summon extends BaseModifier_Plus {
                 }
             }
         }
-        if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter()) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter()) {
             let hAblt = ability3_shadow_shaman_shackles.findIn(this.GetCasterPlus()) as ability3_shadow_shaman_shackles;
-            if (GameFunc.IsValid(hAblt) && hAblt.tTotems) {
-                if (hAblt.tTotems["ether_shock"].length > 0 && GameFunc.mathUtil.PRD(this.scepter_chance, this.GetCasterPlus(), "shadow_shaman_3")) {
+            if (GFuncEntity.IsValid(hAblt) && hAblt.tTotems) {
+                if (hAblt.tTotems["ether_shock"].length > 0 && GFuncMath.PRD(this.scepter_chance, this.GetCasterPlus(), "shadow_shaman_3")) {
                     ability1_shadow_shaman_ether_shock.findIn(this.GetCasterPlus()).EtherShock(params.target, this.GetParentPlus())
                 }
             }

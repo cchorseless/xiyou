@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
@@ -88,22 +87,22 @@ export class modifier_t3_smart_aura_effect extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ABILITY_EXECUTED)
     OnAbilityExecuted(params: IModifierTable) {
-        if (GameFunc.IsValid(this.GetAbilityPlus()) && GameFunc.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) {
+        if (GFuncEntity.IsValid(this.GetAbilityPlus()) && GFuncEntity.IsValid(this.GetCasterPlus()) && !this.GetCasterPlus().PassivesDisabled()) {
             if (params.unit == this.GetParentPlus()) {
                 let hAbility = params.ability
                 if (hAbility != null && !hAbility.IsItem() && hAbility.ProcsMagicStick()) {
-                    if (GameFunc.mathUtil.PRD(this.restore_chance, this.GetParentPlus(), "t3_smart_aura")) {
+                    if (GFuncMath.PRD(this.restore_chance, this.GetParentPlus(), "t3_smart_aura")) {
                         // 魔力崩坏侍从技开启时无法回蓝
                         // let hAbility_qualification_build_t21 = qualification_build_t21.findIn(this.GetParentPlus())
-                        // if ((GameFunc.IsValid(hAbility_qualification_build_t21) && !hAbility_qualification_build_t21.GetToggleState()) || // 有技能且开启状态，则光环不给他回魔
-                        //     !GameFunc.IsValid(hAbility_qualification_build_t21)
+                        // if ((GFuncEntity.IsValid(hAbility_qualification_build_t21) && !hAbility_qualification_build_t21.GetToggleState()) || // 有技能且开启状态，则光环不给他回魔
+                        //     !GFuncEntity.IsValid(hAbility_qualification_build_t21)
                         // ) { // 没有技能，就给他回魔
                         modifier_t3_smart_aura_particle.apply(this.GetParentPlus(), this.GetParentPlus(), hAbility, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
 
                         this.GetParentPlus().GiveMana(this.GetParentPlus().GetMaxMana() * this.restore_amount * 0.01)
 
                         // let qualification_build_t03 = qualification_build_t03.findIn(this.GetParentPlus())
-                        // if (GameFunc.IsValid(qualification_build_t03)) {
+                        // if (GFuncEntity.IsValid(qualification_build_t03)) {
                         //     qualification_build_t03.Trigger()
                         // }
                     }

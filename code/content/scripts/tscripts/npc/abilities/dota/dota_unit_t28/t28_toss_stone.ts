@@ -24,12 +24,12 @@ export class t28_toss_stone extends BaseAbility_Plus {
 
         let duration = 0
         // let combination_t28_bonus_damage = combination_t28_bonus_damage.findIn(hCaster)
-        // let bValid = GameFunc.IsValid(combination_t28_bonus_damage) && combination_t28_bonus_damage.IsActivated()
+        // let bValid = GFuncEntity.IsValid(combination_t28_bonus_damage) && combination_t28_bonus_damage.IsActivated()
         // if (bValid) {
         //     duration = combination_t28_bonus_damage.GetSpecialValueFor("duration")
         // }
 
-        if (GameFunc.IsValid(hTarget)) {
+        if (GFuncEntity.IsValid(hTarget)) {
             vLocation = hTarget.GetAbsOrigin()
         }
         modifier_t28_toss_stone_particle_t28_toss_stone.applyThinker(vLocation, hCaster, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION }, hCaster.GetTeamNumber(), false)
@@ -62,7 +62,7 @@ export class t28_toss_stone extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), "Brewmaster_Earth.Boulder.Target", hCaster)
 
         let hThinker = EntIndexToHScript(ExtraData.thinker_index || -1)
-        if (GameFunc.IsValid(hThinker)) {
+        if (GFuncEntity.IsValid(hThinker)) {
             UTIL_Remove(hThinker)
         }
     }
@@ -175,7 +175,7 @@ export class modifier_t28_toss_stone extends BaseModifier_Plus {
                 hAbility.TossStone(vPosition)
 
                 // let combination_t28_multi_toss  = combination_t28_multi_toss.findIn(  hCaster )
-                // let has_combination_t28_multi_toss = GameFunc.IsValid(combination_t28_multi_toss) && combination_t28_multi_toss.IsActivated()
+                // let has_combination_t28_multi_toss = GFuncEntity.IsValid(combination_t28_multi_toss) && combination_t28_multi_toss.IsActivated()
 
                 // if (has_combination_t28_multi_toss) {
                 //     let extra_target_count = combination_t28_multi_toss.GetSpecialValueFor("extra_target_count")

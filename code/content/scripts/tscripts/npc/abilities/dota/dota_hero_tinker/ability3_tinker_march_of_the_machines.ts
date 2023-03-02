@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -115,7 +114,7 @@ export class modifier_tinker_3 extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus() as ability3_tinker_march_of_the_machines
-            if (!GameFunc.IsValid(hCaster) && !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) && !GFuncEntity.IsValid(hAbility)) {
                 this.Destroy()
                 return
             }

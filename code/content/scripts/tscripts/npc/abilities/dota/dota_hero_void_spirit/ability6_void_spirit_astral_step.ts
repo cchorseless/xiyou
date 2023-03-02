@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -38,18 +37,18 @@ export class ability6_void_spirit_astral_step extends BaseAbility_Plus {
     }
     //  触发被动
     UseIllusionSpell() {
-        if (!GameFunc.IsValid(this)
-            || !GameFunc.IsValid(this.GetCasterPlus())) {
+        if (!GFuncEntity.IsValid(this)
+            || !GFuncEntity.IsValid(this.GetCasterPlus())) {
             return
         }
 
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
-        if (GameFunc.IsValid(hCaster)
+        if (GFuncEntity.IsValid(hCaster)
             && !hCaster.IsIllusion()
             && !hCaster.IsDummy
             && hCaster.tIlls) {
             let hOriAbility = ability6_void_spirit_astral_step.findIn(hCaster)
-            let iOriLevel = GameFunc.IsValid(hOriAbility) && hOriAbility.GetLevel() || -1
+            let iOriLevel = GFuncEntity.IsValid(hOriAbility) && hOriAbility.GetLevel() || -1
             if (iOriLevel <= 0) {
                 return
             }
@@ -57,12 +56,12 @@ export class ability6_void_spirit_astral_step extends BaseAbility_Plus {
             //  灵扉施法
             for (let hIll of (hCaster.tIlls)) {
 
-                if (GameFunc.IsValid(hIll) && hIll.bActive) {
+                if (GFuncEntity.IsValid(hIll) && hIll.bActive) {
                     //  激活概率判断
                     let iActivePct = hCaster.iActivePct
                     if (RandomInt(1, 100) < iActivePct) {
                         let hAbility = ability6_void_spirit_astral_step.findIn(hIll)
-                        if (!GameFunc.IsValid(hAbility)) {
+                        if (!GFuncEntity.IsValid(hAbility)) {
                             hAbility = hIll.AddAbility("ability6_void_spirit_astral_step")
                             hAbility.SetLevel(iOriLevel)
                         }
@@ -121,8 +120,8 @@ export class ability6_void_spirit_astral_step extends BaseAbility_Plus {
         }
     }
     UseSpell(vOrigin: Vector, vTarget: Vector, vDir: Vector, fDealy: number) {
-        if (!GameFunc.IsValid(this)
-            || !GameFunc.IsValid(this.GetCasterPlus())) {
+        if (!GFuncEntity.IsValid(this)
+            || !GFuncEntity.IsValid(this.GetCasterPlus())) {
             return
         }
 
@@ -142,7 +141,7 @@ export class ability6_void_spirit_astral_step extends BaseAbility_Plus {
 
         // 造成攻击
         let hAttacker = hCaster
-        if (GameFunc.IsValid(hCaster.hParent)
+        if (GFuncEntity.IsValid(hCaster.hParent)
             && hCaster.IsDummy) {
             hAttacker = hCaster.hParent as any
         }
@@ -179,7 +178,7 @@ export class ability6_void_spirit_astral_step extends BaseAbility_Plus {
 
     //  这个技能都用这个应用伤害
     GoApplyDamage(hTarget: IBaseNpc_Plus) {
-        if (!GameFunc.IsValid(hTarget)) {
+        if (!GFuncEntity.IsValid(hTarget)) {
             return
         }
 
@@ -188,7 +187,7 @@ export class ability6_void_spirit_astral_step extends BaseAbility_Plus {
         //  引爆智力伤害系数
         let chain_damage_intellect = this.GetSpecialValueFor("chain_damage_intellect") + hCaster.GetTalentValue('special_bonus_unique_void_spirit_custom_4')
         let iDamagePct = 100
-        if (GameFunc.IsValid(hCaster.hParent) && hCaster.IsDummy) {
+        if (GFuncEntity.IsValid(hCaster.hParent) && hCaster.IsDummy) {
             // hCaster = hCaster.hParent
             // iDamagePct = hCaster.iDamagePct
             // iDamagePct = iDamagePct + (hCaster.HasShard() && hCaster.all_damage_amplify || 0) + hCaster.GetTalentValue('special_bonus_unique_void_spirit_custom_8')
@@ -207,7 +206,7 @@ export class ability6_void_spirit_astral_step extends BaseAbility_Plus {
     }
     GetOriCaster() {
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
-        if (GameFunc.IsValid(hCaster.hParent)
+        if (GFuncEntity.IsValid(hCaster.hParent)
             && hCaster.IsDummy) {
             hCaster = hCaster.hParent as any
         }
@@ -248,7 +247,7 @@ export class modifier_void_spirit_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -348,7 +347,7 @@ export class modifier_void_spirit_6_slow extends BaseModifier_Plus {
             let hAbility = this.GetAbilityPlus() as ability6_void_spirit_astral_step
             let damage_radius = this.GetSpecialValueFor("damage_radius")
 
-            if (GameFunc.IsValid(hParent) && GameFunc.IsValid(hAbility)) {
+            if (GFuncEntity.IsValid(hParent) && GFuncEntity.IsValid(hAbility)) {
                 let tEnemies = FindUnitsInRadius(
                     hCaster.GetTeamNumber(),
                     hParent.GetAbsOrigin(),

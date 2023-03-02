@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../GameFunc";
 import { AoiHelper } from "../../helper/AoiHelper";
 import { EventHelper } from "../../helper/EventHelper";
 import { ChessControlConfig } from "../../shared/ChessControlConfig";
@@ -19,7 +18,7 @@ export class ChessControlSystemComponent extends ET.SingletonComponent {
             let playersys = GPlayerEntityRoot.GetOneInstance(event.PlayerID);
             let v = Vector(event.data.x, event.data.y, event.data.z);
             let entity = EntIndexToHScript(event.data.entityid as EntityIndex) as IBaseNpc_Plus;
-            if (!GameFunc.IsValid(entity) || entity.ETRoot == null || !entity.ETRoot.AsValid<IBuildingEntityRoot>("BuildingEntityRoot")) {
+            if (!GFuncEntity.IsValid(entity) || entity.ETRoot == null || !entity.ETRoot.AsValid<IBuildingEntityRoot>("BuildingEntityRoot")) {
                 [event.state, event.message] = [false, "cant find entity"];
             } else {
                 [event.state, event.message] = playersys.ChessControlComp().moveChess(entity.ETRoot.As<IBuildingEntityRoot>(), v);

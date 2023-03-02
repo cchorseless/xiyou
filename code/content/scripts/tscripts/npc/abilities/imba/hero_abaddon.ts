@@ -1,6 +1,5 @@
 
 import { AI_ability } from "../../../ai/AI_ability";
-import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -462,7 +461,7 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
                         ParticleManager.ReleaseParticleIndex(particle);
                     }
                 }
-                if (mist_coil_ability && GameFunc.CalculateDistance(target, unit) < mist_coil_range) {
+                if (mist_coil_ability && GFuncVector.CalculateDistance(target, unit) < mist_coil_range) {
                     let info = {
                         Target: unit,
                         Source: target,
@@ -1216,7 +1215,7 @@ export class modifier_imba_borrowed_time_buff_hot_caster extends BaseModifier_Pl
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     CC_OnTakeDamage(kv: ModifierInstanceEvent): void {
         if (IsServer()) {
-            if (GameFunc.AsVector(kv.unit.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Length2D() <= this.GetSpecialValueFor("redirect_range_scepter") && this.GetCasterPlus().HasScepter() && kv.unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && !kv.unit.IsBuilding()) {
+            if (GFuncVector.AsVector(kv.unit.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Length2D() <= this.GetSpecialValueFor("redirect_range_scepter") && this.GetCasterPlus().HasScepter() && kv.unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && !kv.unit.IsBuilding()) {
                 if (!kv.unit.TempData().borrowed_time_damage_taken) {
                     kv.unit.TempData().borrowed_time_damage_taken = 0;
                 }

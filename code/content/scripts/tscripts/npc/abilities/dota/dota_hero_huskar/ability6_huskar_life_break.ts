@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -36,7 +35,7 @@ export class ability6_huskar_life_break extends BaseAbility_Plus {
         let hTarget = this.GetCursorTarget()
         let duration = this.GetSpecialValueFor("duration")
         let health_cost_percent = this.GetSpecialValueFor("health_cost_percent")
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (modifier_huskar_6_debuff.exist(hTarget)) {
@@ -87,7 +86,7 @@ export class modifier_huskar_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability6_huskar_life_break
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -111,7 +110,7 @@ export class modifier_huskar_6 extends BaseModifier_Plus {
             let range = ability.GetCastRange(caster.GetAbsOrigin(), caster) + caster.GetCastRangeBonus() + caster.GetHullRadius()
 
             //  优先上一个目标
-            let target = GameFunc.IsValid(ability.hLastTarget) && ability.hLastTarget || null
+            let target = GFuncEntity.IsValid(ability.hLastTarget) && ability.hLastTarget || null
             if (target != null && !target.IsPositionInRange(caster.GetAbsOrigin(), range + target.GetHullRadius())) {
                 target = null
             }
@@ -173,7 +172,7 @@ export class modifier_huskar_6_buff extends BaseModifier_Plus {
     Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             return
         }
         if (IsServer()) {
@@ -186,7 +185,7 @@ export class modifier_huskar_6_buff extends BaseModifier_Plus {
 
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             return
         }
         if (IsServer()) {

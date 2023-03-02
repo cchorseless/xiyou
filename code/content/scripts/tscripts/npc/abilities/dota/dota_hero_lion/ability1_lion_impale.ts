@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -107,7 +106,7 @@ export class ability1_lion_impale extends BaseAbility_Plus {
             modifier_lion_1_particle_spikes.apply(hTarget, hCaster, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
             EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Lion.ImpaleHitTarget", hCaster), hCaster)
             let hAbility4 = ability3_lion_mana_drain.findIn(hCaster)
-            if (GameFunc.IsValid(hAbility4) && hAbility4.GetTargetMana != null) {
+            if (GFuncEntity.IsValid(hAbility4) && hAbility4.GetTargetMana != null) {
                 hAbility4.GetTargetMana(hTarget)
             }
         }
@@ -151,7 +150,7 @@ export class modifier_lion_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -283,7 +282,7 @@ export class modifier_lion_1_motion extends BaseModifierMotionVertical_Plus {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
             hParent.RemoveVerticalMotionController(this)
-            if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
                 return
             }
             let tDamageTable = {

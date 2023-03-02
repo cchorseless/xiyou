@@ -2,8 +2,8 @@
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifierMotion, registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerModifier()
 export class modifier_imba_faceless_void_chronocharges extends BaseModifier_Plus {
@@ -94,7 +94,7 @@ export class imba_faceless_void_time_walk extends BaseAbility_Plus {
         return false;
     }
     GetCooldown(level: number): number {
-        return this.GetVanillaKeyValue("AbilityCooldown", level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_faceless_void_11");
+        return this.GetSpecialValueFor("AbilityCooldown", level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_faceless_void_11");
     }
     GetIntrinsicModifierName(): string {
         if (!this.GetCasterPlus().IsIllusion()) {
@@ -166,8 +166,8 @@ export class imba_faceless_void_time_walk extends BaseAbility_Plus {
                 return undefined;
             }, this.GetSpecialValueFor("time_walk_reverse_timer"));
         }
-        if (caster.time_walk_damage_taken) {
-            caster.Heal(caster.time_walk_damage_taken, this.GetCasterPlus());
+        if (caster.TempData().time_walk_damage_taken) {
+            caster.Heal(caster.TempData().time_walk_damage_taken, this);
         }
         let aoe_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_faceless_void/faceless_void_time_walk_slow.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
         ParticleManager.SetParticleControl(aoe_pfx, 1, Vector(slow_radius, 0, 0));
@@ -207,8 +207,8 @@ export class modifier_imba_faceless_void_time_walk_damage_counter extends BaseMo
         this.ability = this.GetAbilityPlus();
         this.damage_time = this.ability.GetSpecialValueFor("backtrack_duration");
         if (IsServer()) {
-            if (!this.caster.time_walk_damage_taken) {
-                this.caster.time_walk_damage_taken = 0;
+            if (!this.caster.TempData().time_walk_damage_taken) {
+                this.caster.TempData().time_walk_damage_taken = 0;
             }
         }
     }
@@ -218,10 +218,10 @@ export class modifier_imba_faceless_void_time_walk_damage_counter extends BaseMo
             let unit = keys.unit;
             let damage_taken = keys.damage;
             if (unit == this.caster) {
-                this.caster.time_walk_damage_taken = this.caster.time_walk_damage_taken + damage_taken;
+                this.caster.TempData().time_walk_damage_taken = this.caster.TempData().time_walk_damage_taken + damage_taken;
                 this.AddTimer(this.damage_time, () => {
-                    if (this.caster.time_walk_damage_taken) {
-                        this.caster.time_walk_damage_taken = this.caster.time_walk_damage_taken - damage_taken;
+                    if (this.caster.TempData().time_walk_damage_taken) {
+                        this.caster.TempData().time_walk_damage_taken = this.caster.TempData().time_walk_damage_taken - damage_taken;
                     }
                 });
             }
@@ -277,7 +277,7 @@ export class modifier_imba_faceless_void_time_walk_buff_ms extends BaseModifier_
     }
 }
 @registerModifier()
-export class modifier_imba_faceless_void_time_walk_cast extends BaseModifier_Plus {
+export class modifier_imba_faceless_void_time_walk_cast extends BaseModifierMotionHorizontal_Plus {
     public radius_scepter: number;
     public velocity: any;
     public direction: any;
@@ -285,7 +285,6 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifier_Plu
     public distance: number;
     public as_stolen: any;
     public ms_stolen: any;
-    public frametime: number;
     GetAttributes(): DOTAModifierAttribute_t {
         return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE;
     }
@@ -330,32 +329,28 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifier_Plu
             if (caster.HasShard()) {
                 max_distance = max_distance + 200;
             }
-            let distance = math.min((caster.GetAbsOrigin() - position).Length2D(), max_distance);
+            let distance = math.min((caster.GetAbsOrigin() - position as Vector).Length2D(), max_distance);
             if (ability.GetAbilityName() == "imba_faceless_void_time_walk_reverse") {
-                distance = (caster.GetAbsOrigin() - position).Length2D();
+                distance = (caster.GetAbsOrigin() - position as Vector).Length2D();
             }
             this.velocity = ability.GetSpecialValueFor("speed");
-            this.direction = (position - this.GetParentPlus().GetAbsOrigin()).Normalized();
+            this.direction = (position - this.GetParentPlus().GetAbsOrigin() as Vector).Normalized();
             this.distance_traveled = 0;
             this.distance = distance;
             let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_faceless_void/faceless_void_time_walk_preimage.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetParentPlus());
             ParticleManager.SetParticleControl(particle, 0, this.GetParentPlus().GetAbsOrigin());
-            ParticleManager.SetParticleControl(particle, 1, this.GetParentPlus().GetAbsOrigin() + this.direction * distance);
+            ParticleManager.SetParticleControl(particle, 1, this.GetParentPlus().GetAbsOrigin() + this.direction * distance as Vector);
             ParticleManager.SetParticleControlEnt(particle, 2, this.GetParentPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", this.GetParentPlus().GetForwardVector(), true);
             ParticleManager.ReleaseParticleIndex(particle);
             this.as_stolen = 0;
             this.ms_stolen = 0;
-            this.frametime = FrameTime();
-            this.OnIntervalThink();
-            this.StartIntervalThink(this.frametime);
         }
     }
-    OnIntervalThink(): void {
+    ApplyHorizontalMotionController(): boolean {
         if (!this.CheckMotionControllers()) {
             this.Destroy();
-            return undefined;
+            return false;
         }
-        this.HorizontalMotion(this.GetParentPlus(), this.frametime);
         let ability = this.GetAbilityPlus();
         if (ability.GetAbilityName() == "imba_faceless_void_time_walk") {
             let caster = this.GetParentPlus();
@@ -386,6 +381,7 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifier_Plu
                 this.GetParentPlus().findBuff<modifier_imba_faceless_void_chronocharges>("modifier_imba_faceless_void_chronocharges").SetStackCount(this.GetParentPlus().FindModifierByName("modifier_imba_faceless_void_chronocharges").GetStackCount() + chronocharges);
             }
         }
+        return true;
     }
     OnRemoved(): void {
         if (IsServer()) {
@@ -418,11 +414,9 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifier_Plu
         if (IsServer()) {
         }
     }
-    HorizontalMotion(me: IBaseNpc_Plus, dt: number) {
-        print(this.distance_traveled);
-        print(this.distance);
+    UpdateHorizontalMotion(me: IBaseNpc_Plus, dt: number) {
         if (this.distance_traveled < this.distance) {
-            this.GetCasterPlus().SetAbsOrigin(this.GetCasterPlus().GetAbsOrigin() + (this.direction * math.min(this.velocity * dt, this.distance - this.distance_traveled)));
+            this.GetCasterPlus().SetAbsOrigin(this.GetCasterPlus().GetAbsOrigin() + (this.direction * math.min(this.velocity * dt, this.distance - this.distance_traveled)) as Vector);
             this.distance_traveled = this.distance_traveled + math.min(this.velocity * dt, this.distance - this.distance_traveled);
         } else {
             this.Destroy();
@@ -482,11 +476,11 @@ export class imba_faceless_void_time_dilation extends BaseAbility_Plus {
             if (this.IsStolen()) {
                 if (this.GetLevel() == 1) {
                     let caster = this.GetCasterPlus();
-                    let originalCaster = caster.spellStealTarget;
+                    let originalCaster = caster.TempData().spellStealTarget as IBaseNpc_Plus;
                     if (originalCaster) {
                         let chronochargeModifier = originalCaster.findBuff<modifier_imba_faceless_void_chronocharges>("modifier_imba_faceless_void_chronocharges");
                         if (chronochargeModifier) {
-                            this.GetParentPlus().findBuff<modifier_imba_faceless_void_chronocharges>("modifier_imba_faceless_void_chronocharges").SetStackCount(this.GetParentPlus().FindModifierByName("modifier_imba_faceless_void_chronocharges").GetStackCount());
+                            caster.findBuff<modifier_imba_faceless_void_chronocharges>("modifier_imba_faceless_void_chronocharges").SetStackCount(caster.FindModifierByName("modifier_imba_faceless_void_chronocharges").GetStackCount());
                         }
                     }
                 }
@@ -666,13 +660,11 @@ export class modifier_imba_faceless_void_time_dilation_slow extends BaseModifier
     GetEffectAttachType(): ParticleAttachment_t {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
     }
-    BeCreated(p_0: any,): void {
+    Init(p_0: any,): void {
         this.ms_debuff = this.GetSpecialValueFor("ms_debuff");
         this.as_debuff = this.GetSpecialValueFor("as_debuff");
     }
-    BeRefresh(p_0: any,): void {
-        this.OnCreated();
-    }
+
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
@@ -782,7 +774,7 @@ export class modifier_imba_faceless_void_time_lock extends BaseModifier_Plus {
                 let creep_bash_duration = ability.GetSpecialValueFor("creep_bash_duration");
                 let cdIncrease = ability.GetSpecialValueFor("cd_increase");
                 let talent_cd_increase = 0;
-                if (GameFunc.PRD(bashChance,)) {
+                if (GFuncRandom.PRD(bashChance, this)) {
                     bonus_damage_to_main_target = bonus_damage_to_main_target + bashDamage;
                     if (!target.findBuff<modifier_imba_faceless_void_chronosphere_handler>("modifier_imba_faceless_void_chronosphere_handler")) {
                         if (target.findBuff<modifier_imba_faceless_void_time_dilation_slow>("modifier_imba_faceless_void_time_dilation_slow")) {
@@ -860,7 +852,8 @@ export class modifier_imba_faceless_void_time_lock extends BaseModifier_Plus {
                                 }
                                 EmitSoundOn("Hero_FacelessVoid.TimeLockImpact", enemy);
                                 if (enemy.IsRealHero()) {
-                                    AddStacksLua(ability, parent, parent, "modifier_imba_faceless_void_chronocharges", 1, false);
+                                    modifier_imba_faceless_void_chronocharges.findIn(parent).IncrementStackCount(1);
+                                    // AddStacksLua(ability, parent, parent, "modifier_imba_faceless_void_chronocharges", 1, false);
                                 }
                                 for (let i = 0; i <= 23; i += 1) {
                                     let enemyAbility = enemy.GetAbilityByIndex(i);
@@ -936,7 +929,7 @@ export class imba_faceless_void_chronosphere extends BaseAbility_Plus {
         }
         return aoe;
     }
-    OnSpellStart( /** mini_chrono */  /** , target_location */): void {
+    OnSpellStart(mini_chrono = false, target_location: Vector = null): void {
         let caster = this.GetCasterPlus();
         let ability = this;
         let chrono_center = this.GetCursorPosition();
@@ -995,13 +988,13 @@ export class imba_faceless_void_chronosphere extends BaseAbility_Plus {
 @registerModifier()
 export class modifier_imba_faceless_void_chronosphere_aura extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
-    public ability: IBaseAbility_Plus;
+    public ability: imba_faceless_void_chronosphere;
     public parent: IBaseNpc_Plus;
     public mini_chrono: any;
     public base_radius: number;
     public bonus_radius: number;
     public total_radius: number;
-    public modifiers: any;
+    public modifiers: { [k: string]: IBaseModifier_Plus };
     IsPurgable(): boolean {
         return false;
     }
@@ -1040,7 +1033,7 @@ export class modifier_imba_faceless_void_chronosphere_aura extends BaseModifier_
     BeCreated(p_0: any,): void {
         if (IsServer()) {
             this.caster = this.GetCasterPlus();
-            this.ability = this.GetAbilityPlus();
+            this.ability = this.GetAbilityPlus<imba_faceless_void_chronosphere>();
             this.parent = this.GetParentPlus();
             this.mini_chrono = this.ability.mini_chrono;
             if (!this.mini_chrono) {
@@ -1090,13 +1083,14 @@ export class modifier_imba_faceless_void_chronosphere_aura extends BaseModifier_
                 if (!this.modifiers[unit.GetEntityIndex()]) {
                     let mod = unit.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_faceless_void_chronosphere_caster_buff", {});
                     mod.SetStackCount(this.GetStackCount());
-                    table.insert(this.modifiers, unit.GetEntityIndex(), mod);
+                    this.modifiers[unit.GetEntityIndex()] = mod as IBaseModifier_Plus;
                 }
             }
         }
         let parent = this.GetParentPlus();
-        for (const [id, mod] of ipairs(this.modifiers)) {
-            let unit = EntIndexToHScript(id);
+        for (const id in (this.modifiers)) {
+            let unit = EntIndexToHScript(GToNumber(id) as EntityIndex);
+            const mod = this.modifiers[id];
             if (CalcDistanceBetweenEntityOBB(parent, unit) > this.GetAuraRadius()) {
                 if (!mod.IsNull()) {
                     mod.Destroy();
@@ -1131,7 +1125,7 @@ export class modifier_imba_faceless_void_chronosphere_handler extends BaseModifi
         if (IsServer()) {
             this.parent = this.GetParentPlus();
             this.caster = this.GetCasterPlus();
-            this.mini_chrono = this.GetAbilityPlus().mini_chrono;
+            this.mini_chrono = this.GetAbilityPlus<imba_faceless_void_chronosphere>().mini_chrono;
             this.projectile_speed = this.GetParentPlus().GetProjectileSpeed();
             if (this.parent == this.caster || this.parent.GetPlayerOwner() == this.caster.GetPlayerOwner()) {
                 if (!this.mini_chrono) {
@@ -1156,12 +1150,10 @@ export class modifier_imba_faceless_void_chronosphere_handler extends BaseModifi
                     duration: FrameTime()
                 });
                 this.parent.InterruptMotionControllers(true);
-                let modifiers = this.parent.FindAllModifiers();
+                let modifiers = BaseModifierMotion.FindAllMotionBuff(this.parent);
                 for (const [_, modifier] of ipairs(modifiers)) {
-                    if (modifier.IsMotionController) {
-                        if (modifier.IsMotionController()) {
-                            modifier.Destroy();
-                        }
+                    if (modifier.CheckMotionControllers()) {
+                        modifier.Destroy();
                     }
                 }
             }
@@ -1320,7 +1312,7 @@ export class modifier_imba_faceless_void_time_lock_720 extends BaseModifier_Plus
         if (keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && !keys.target.IsOther() && !keys.target.IsBuilding()) {
             let ability = this.GetAbilityPlus();
             let chance_pct = ability.GetSpecialValueFor("chance_pct");
-            if (GameFunc.PRD(chance_pct,)) {
+            if (GFuncRandom.PRD(chance_pct, this)) {
                 this.ApplyTimeLock(keys.target);
             }
         }
@@ -1495,7 +1487,7 @@ export class imba_faceless_void_time_walk_reverse extends BaseAbility_Plus {
         }
         let position = this.GetCasterPlus().findAbliityPlus<imba_faceless_void_time_walk>("imba_faceless_void_time_walk").old_position;
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_faceless_void_time_walk_cast", {
-            duration: (position - this.GetCasterPlus().GetAbsOrigin()).Length2D() / this.GetSpecialValueFor("speed"),
+            duration: (position - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D() / this.GetSpecialValueFor("speed"),
             x: position.x,
             y: position.y,
             z: position.z

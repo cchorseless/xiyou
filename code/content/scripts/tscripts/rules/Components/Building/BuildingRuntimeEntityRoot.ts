@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { building_auto_findtreasure } from "../../../npc/abilities/common/building_auto_findtreasure";
 import { modifier_wait_portal } from "../../../npc/modifier/modifier_portal";
@@ -19,8 +18,8 @@ export class BuildingRuntimeEntityRoot extends BattleUnitEntityRoot {
     }
     onDestroy(): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        if (GameFunc.IsValid(npc) && !npc.__safedestroyed__) {
-            GDestroyUnit(npc);
+        if (GFuncEntity.IsValid(npc) && !npc.__safedestroyed__) {
+            GFuncEntity.SafeDestroyUnit(npc);
         }
     }
 

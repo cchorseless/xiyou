@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -160,7 +159,7 @@ export class ability2_medusa_mystic_snake extends BaseAbility_Plus {
             }
         }
 
-        if (GameFunc.IsValid(hCaster)) {
+        if (GFuncEntity.IsValid(hCaster)) {
             let return_speed = this.GetSpecialValueFor("return_speed")
             let tInfo = {
                 Source: hTarget,
@@ -215,7 +214,7 @@ export class modifier_medusa_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -272,11 +271,11 @@ export class modifier_medusa_2 extends BaseModifier_Plus {
     attackLanded(params: ModifierAttackEvent) {
         if (IsServer()) {
             let hTarget = params.target
-            if (GameFunc.IsValid(hTarget) && hTarget.GetClassname() != "dota_item_drop") {
+            if (GFuncEntity.IsValid(hTarget) && hTarget.GetClassname() != "dota_item_drop") {
                 if (!BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS)) {
                     let hParent = this.GetParentPlus()
                     if (hParent.HasScepter()) {
-                        if (GameFunc.mathUtil.PRD(this.scepter_chance, hParent, "medusa_2_scepter")) {
+                        if (GFuncMath.PRD(this.scepter_chance, hParent, "medusa_2_scepter")) {
                             let hAbility = this.GetAbilityPlus() as ability2_medusa_mystic_snake
                             if (type(hAbility.FireSnake) == "function") {
                                 hAbility.FireSnake(hTarget)

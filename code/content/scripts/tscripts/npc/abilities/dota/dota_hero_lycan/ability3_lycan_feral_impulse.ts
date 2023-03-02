@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -109,7 +108,7 @@ export class modifier_lycan_3_aura extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
     GetDamageOutgoing_Percentage() {
         let hCaster = this.GetCasterPlus()
-        let extra_bonus_damage = (GameFunc.IsValid(hCaster) && hCaster.HasTalent("special_bonus_unique_lycan_custom_3")) && hCaster.GetTalentValue("special_bonus_unique_lycan_custom_3") || 0
+        let extra_bonus_damage = (GFuncEntity.IsValid(hCaster) && hCaster.HasTalent("special_bonus_unique_lycan_custom_3")) && hCaster.GetTalentValue("special_bonus_unique_lycan_custom_3") || 0
         return this.bonus_damage + extra_bonus_damage
     }
 

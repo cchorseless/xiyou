@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -70,7 +69,7 @@ export class ability2_viper_nethertoxin extends BaseAbility_Plus {
         let vDirection = (vLocation - vCaster) as Vector
         let fDistance = vDirection.Length2D()
         let fSpeed = math.max(2000, fDistance * 2.1)
-        vDirection = GameFunc.VectorFunctions.HorizonVector(vDirection)
+        vDirection = GFuncVector.HorizonVector(vDirection)
         ProjectileManager.CreateLinearProjectile(
             {
                 Source: hCaster,
@@ -99,7 +98,7 @@ export class ability2_viper_nethertoxin extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(iParticle)
     }
     OnProjectileHit(hTarget: IBaseNpc_Plus, vLocation: Vector) {
-        if (GameFunc.IsValid(hTarget)) {
+        if (GFuncEntity.IsValid(hTarget)) {
             return false
         }
         modifier_viper_2_thinker.applyThinker(vLocation, this.GetCasterPlus(), this, { duration: this.GetSpecialValueFor("duration") }, this.GetCasterPlus().GetTeamNumber(), false)
@@ -145,7 +144,7 @@ export class modifier_viper_2 extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
@@ -186,7 +185,7 @@ export class modifier_viper_2 extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE)
     CC_GetModifierOutGoingPoisonCountPercentage() {
-        if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.poison_stack_pct
         }
         return 0
@@ -298,7 +297,7 @@ export class modifier_viper_2_debuff extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus() as BaseNpc_Hero_Plus
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             return
         }
@@ -321,14 +320,14 @@ export class modifier_viper_2_debuff extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingPoisonDamagePercentage() {
-        if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.poison_percent + this.shard_incoming_poison_damage_pct
         }
         return this.poison_percent
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     Tooltip() {
-        if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
             return this.poison_percent + this.shard_incoming_poison_damage_pct
         }
         return this.poison_percent

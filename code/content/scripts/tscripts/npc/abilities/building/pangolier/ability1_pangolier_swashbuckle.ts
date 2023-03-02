@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -88,7 +87,7 @@ export class ability1_pangolier_swashbuckle extends BaseAbility_Plus {
 
             let direction_count = hCaster.HasTalent("special_bonus_unique_pangolier_custom_3") && 4 || 1
             for (let i = 1; i <= direction_count; i++) {
-                let vPosition = GameFunc.VectorFunctions.Rotation2D(vDirection, math.rad(i * 90 - 90)) * iRange + hCaster.GetAbsOrigin()
+                let vPosition = GFuncVector.Rotation2D(vDirection, math.rad(i * 90 - 90)) * iRange + hCaster.GetAbsOrigin()
                 this.Swashbuckle(hCaster.GetAbsOrigin(), vPosition as Vector, strikes)
             }
 
@@ -97,7 +96,7 @@ export class ability1_pangolier_swashbuckle extends BaseAbility_Plus {
             return
         }
 
-        if (!GameFunc.IsValid(hTarget)) {
+        if (!GFuncEntity.IsValid(hTarget)) {
             return
         }
         // this.vCasterLoc = GetGroundPosition(hCaster.GetBuilding == null && hCaster.GetAbsOrigin() || hCaster.GetBuilding().GetLocation(), hCaster)
@@ -198,7 +197,7 @@ export class modifier_pangolier_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -330,7 +329,7 @@ export class modifier_pangolier_1_dash extends BaseModifierMotionHorizontal_Plus
     BeDestroy() {
 
         if (IsServer()) {
-            if (GameFunc.IsValid(this.hParticleModifier)) {
+            if (GFuncEntity.IsValid(this.hParticleModifier)) {
                 this.hParticleModifier.Destroy()
             }
             let hCaster = this.GetCasterPlus()
@@ -514,7 +513,7 @@ export class modifier_pangolier_1_rolling_back extends BaseModifierMotionBoth_Pl
                 let iRange = hAbility.GetSpecialValueFor("range")
                 let vDirection = Vector(iRange, 0, 0)
                 for (let i = 1; i <= 4; i++) {
-                    let vPosition = (GameFunc.VectorFunctions.Rotation2D(vDirection, math.rad(i * 90)) + hCaster.GetAbsOrigin()) as Vector
+                    let vPosition = (GFuncVector.Rotation2D(vDirection, math.rad(i * 90)) + hCaster.GetAbsOrigin()) as Vector
                     undefined
                 }
             }
@@ -536,7 +535,7 @@ export class modifier_pangolier_1_rolling_back extends BaseModifierMotionBoth_Pl
     BeDestroy() {
 
         if (IsServer()) {
-            if (GameFunc.IsValid(this.hParticleModifier)) {
+            if (GFuncEntity.IsValid(this.hParticleModifier)) {
                 this.hParticleModifier.Destroy()
             }
             let hCaster = this.GetCasterPlus()

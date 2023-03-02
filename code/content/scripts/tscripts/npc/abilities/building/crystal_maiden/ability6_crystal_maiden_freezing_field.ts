@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -103,7 +102,7 @@ export class modifier_crystal_maiden_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -221,7 +220,7 @@ export class modifier_crystal_maiden_6_caster extends BaseModifier_Plus {
             let parent = this.GetParentPlus()
             let radian = math.rad(this.count * 90 + RandomFloat(0, 90))
             let distance = RandomFloat(this.explosion_min_dist, this.explosion_max_dist)
-            let vPosition = GetGroundPosition((parent.GetAbsOrigin() + GameFunc.VectorFunctions.Rotation2D(Vector(1, 0, 0), radian) * distance) as Vector, parent)
+            let vPosition = GetGroundPosition((parent.GetAbsOrigin() + GFuncVector.Rotation2D(Vector(1, 0, 0), radian) * distance) as Vector, parent)
             let damage = this.damage + this.damage_per_intellect * parent.GetIntellect()
             let crystal_maiden_1 = ability1_crystal_maiden_crystal_nova.findIn(parent)
             let bCanTriggerScepter = parent.HasScepter() && crystal_maiden_1 != null && crystal_maiden_1.GetLevel() > 0

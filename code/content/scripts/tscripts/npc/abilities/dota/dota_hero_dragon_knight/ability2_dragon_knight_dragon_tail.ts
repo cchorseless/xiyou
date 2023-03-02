@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -46,7 +45,7 @@ export class ability2_dragon_knight_dragon_tail extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         if (!iDragonLevel) {
             let hModifier = modifier_dragon_knight_6_form.findIn(hCaster)
-            if (GameFunc.IsValid(hModifier)) {
+            if (GFuncEntity.IsValid(hModifier)) {
                 iDragonLevel = hModifier.iLevel || 0
             }
         }
@@ -93,12 +92,12 @@ export class ability2_dragon_knight_dragon_tail extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
         let projectile_speed = this.GetSpecialValueFor("projectile_speed")
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         let iDragonLevel = 0
         let hModifier = modifier_dragon_knight_6_form.findIn(hCaster)
-        if (GameFunc.IsValid(hModifier)) {
+        if (GFuncEntity.IsValid(hModifier)) {
             iDragonLevel = hModifier.iLevel || iDragonLevel
         }
 
@@ -194,7 +193,7 @@ export class modifier_dragon_knight_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

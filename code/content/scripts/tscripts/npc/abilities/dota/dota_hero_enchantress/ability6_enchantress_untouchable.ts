@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -148,7 +147,7 @@ export class modifier_enchantress_6_debuff extends BaseModifier_Plus {
     GetMoveSpeedBonus_Percentage(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             return
         }
         let fDistance = ((hParent.GetAbsOrigin() - hCaster.GetAbsOrigin()) as Vector).Length2D()
@@ -165,7 +164,7 @@ export class modifier_enchantress_6_debuff extends BaseModifier_Plus {
     CC_tooltip() {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             return
         }
         let fDistance = ((hParent.GetAbsOrigin() - hCaster.GetAbsOrigin()) as Vector).Length2D()

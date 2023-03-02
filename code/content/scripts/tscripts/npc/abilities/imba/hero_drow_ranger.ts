@@ -1631,7 +1631,7 @@ export class modifier_imba_drow_ranger_marksmanship_723 extends BaseModifier_Plu
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_RECORD)
     CC_OnAttackRecord(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetParentPlus()) {
-            if (!this.GetParentPlus().PassivesDisabled() && !this.GetParentPlus().IsIllusion() && this.start_particle && !keys.target.IsOther() && !keys.target.IsBuilding() && keys.target.GetTeamNumber() != keys.attacker.GetTeamNumber() && GameFunc.PRD(this.GetAbilityPlus().GetTalentSpecialValueFor("chance"), this)) {
+            if (!this.GetParentPlus().PassivesDisabled() && !this.GetParentPlus().IsIllusion() && this.start_particle && !keys.target.IsOther() && !keys.target.IsBuilding() && keys.target.GetTeamNumber() != keys.attacker.GetTeamNumber() && GFuncRandom.PRD(this.GetAbilityPlus().GetTalentSpecialValueFor("chance"), this)) {
                 this.procs[keys.record] = true;
                 this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_drow_ranger_marksmanship_723_proc_damage", {});
             } else {

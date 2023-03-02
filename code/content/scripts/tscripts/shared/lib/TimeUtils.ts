@@ -87,6 +87,7 @@ export module TimeUtils {
             return inter;
         }
         /**
+         * @Server
          * @override TimerHelper 覆盖掉
          * @returns unix mills时间戳
          */

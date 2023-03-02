@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -56,10 +55,10 @@ export class ability2_lina_light_strike_array extends BaseAbility_Plus {
         let chance_scepter = this.GetSpecialValueFor("chance_scepter")
         let hAbility_4 = ability3_lina_fiery_soul.findIn(hCaster)
         let hModifier = modifier_lina_3_fiery_soul.findIn(hCaster) as IBaseModifier_Plus;
-        if (hCaster.HasScepter() && GameFunc.IsValid(hAbility_4) && GameFunc.IsValid(hModifier)) {
+        if (hCaster.HasScepter() && GFuncEntity.IsValid(hAbility_4) && GFuncEntity.IsValid(hModifier)) {
             chance_scepter = chance_scepter + hModifier.GetStackCount() * hAbility_4.GetSpecialValueFor("chance_factor")
         }
-        if (!hCaster.HasScepter() || !GameFunc.mathUtil.PRD(chance_scepter, hCaster, "lina_2_scepter")) {
+        if (!hCaster.HasScepter() || !GFuncMath.PRD(chance_scepter, hCaster, "lina_2_scepter")) {
             return
         }
         GTimerHelper.AddTimer(0.5, GHandler.create(this, () => {
@@ -105,7 +104,7 @@ export class modifier_lina_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -225,7 +224,7 @@ export class modifier_lina_2_thinker extends modifier_particle_thinker {
         let hAbility = this.GetAbilityPlus()
         let vPosition = hParent.GetAbsOrigin()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hAbility) || !GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
                 return
             }
             GridNav.DestroyTreesAroundPoint(vPosition, this.light_strike_array_aoe, false)
@@ -258,10 +257,10 @@ export class modifier_lina_2_thinker extends modifier_particle_thinker {
             //  光击阵中心释十字放龙破斩
             let sTalentName = "special_bonus_unique_lina_custom_2"
             let lina_1 = ability1_lina_dragon_slave.findIn(hCaster) as ability1_lina_dragon_slave;
-            if (hCaster.HasTalent(sTalentName) && GameFunc.IsValid(lina_1) && lina_1.GetLevel() > 0 && type(lina_1.DragonSlave) == "function") {
+            if (hCaster.HasTalent(sTalentName) && GFuncEntity.IsValid(lina_1) && lina_1.GetLevel() > 0 && type(lina_1.DragonSlave) == "function") {
                 let vDirection = Vector(1, 0, 0)
                 for (let i = 1; i <= 4; i++) {
-                    lina_1.DragonSlave(vPosition, (GameFunc.VectorFunctions.Rotation2D(vDirection, math.rad(i * 90)) + vPosition) as Vector, false)
+                    lina_1.DragonSlave(vPosition, (GFuncVector.Rotation2D(vDirection, math.rad(i * 90)) + vPosition) as Vector, false)
                 }
             }
         } else {

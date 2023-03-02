@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -64,7 +63,7 @@ export class ability6_life_stealer_infest extends BaseAbility_Plus {
         let max_health_pct = this.GetSpecialValueFor("max_health_pct") * (1 + hCaster.GetTalentValue("special_bonus_unique_life_stealer_custom_4") * 0.01)
         let duration = this.GetSpecialValueFor("duration")
         let inherit_ability_pct = this.GetSpecialValueFor("inherit_ability_pct")
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         // 音效
@@ -82,7 +81,7 @@ export class ability6_life_stealer_infest extends BaseAbility_Plus {
             let fMaxHealth = hCaster.GetMaxHealth()
             let fDamage = fMaxHealth * max_health_pct * 0.01
             for (let hTarget of (tTarget)) {
-                if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+                if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
                     let damage_table =
                     {
                         ability: this,
@@ -101,7 +100,7 @@ export class ability6_life_stealer_infest extends BaseAbility_Plus {
                 modifier_life_stealer_6_buff.apply(hTarget, hCaster, this, { duration: duration })
                 // 施加一次狂暴
                 let hLifeStealer1 = ability1_life_stealer_rage.findIn(hCaster)
-                if (GameFunc.IsValid(hLifeStealer1) && hLifeStealer1.GetLevel() >= 1 && hLifeStealer1.InheritAbility != null) {
+                if (GFuncEntity.IsValid(hLifeStealer1) && hLifeStealer1.GetLevel() >= 1 && hLifeStealer1.InheritAbility != null) {
                     hLifeStealer1.InheritAbility(hTarget, inherit_ability_pct, false)
                 }
                 // 临时吞噬
@@ -111,12 +110,12 @@ export class ability6_life_stealer_infest extends BaseAbility_Plus {
                 modifier_life_stealer_6_buff.apply(hTarget, hCaster, this, null)
                 // 永久获得狂暴效果
                 let hLifeStealer1 = ability1_life_stealer_rage.findIn(hCaster)
-                if (GameFunc.IsValid(hLifeStealer1) && hLifeStealer1.GetLevel() >= 1 && hLifeStealer1.InheritAbility != null) {
+                if (GFuncEntity.IsValid(hLifeStealer1) && hLifeStealer1.GetLevel() >= 1 && hLifeStealer1.InheritAbility != null) {
                     hLifeStealer1.InheritAbility(hTarget, inherit_ability_pct, true)
                 }
                 // 永久获得盛宴效果
                 let hLifeStealer4 = ability2_life_stealer_feast.findIn(hCaster)
-                if (GameFunc.IsValid(hLifeStealer4) && hLifeStealer4.GetLevel() >= 1 && hLifeStealer4.InheritAbility != null) {
+                if (GFuncEntity.IsValid(hLifeStealer4) && hLifeStealer4.GetLevel() >= 1 && hLifeStealer4.InheritAbility != null) {
                     hLifeStealer4.InheritAbility(hTarget, inherit_ability_pct)
                 }
                 // 删除小狗身上的装备
@@ -169,7 +168,7 @@ export class modifier_life_stealer_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

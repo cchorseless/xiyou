@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -93,7 +92,7 @@ export class ability1_nevermore_shadowraze1 extends BaseAbility_Plus {
         let vPosition = this.GetCursorPosition()
         if (this.GetCursorTarget() != null) {
             vPosition = this.GetCursorTarget().GetAbsOrigin()
-        } else if (GameFunc.IsValid(hTarget)) {
+        } else if (GFuncEntity.IsValid(hTarget)) {
             vPosition = hTarget.GetAbsOrigin()
         }
         let vStartPosition = hCaster.GetAbsOrigin()
@@ -160,7 +159,7 @@ export class modifier_nevermore_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -203,7 +202,7 @@ export class modifier_nevermore_1 extends BaseModifier_Plus {
             return
         }
         if (params.attacker == this.GetParentPlus() && params.attacker.HasScepter() && !params.attacker.PassivesDisabled() && !params.attacker.IsIllusion() && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
-            if (GameFunc.mathUtil.PRD(this.chance_scepter, params.attacker, "nevermore_1")) {
+            if (GFuncMath.PRD(this.chance_scepter, params.attacker, "nevermore_1")) {
                 (this.GetAbilityPlus() as ability1_nevermore_shadowraze1).OnSpellStart(params.target)
             }
         }

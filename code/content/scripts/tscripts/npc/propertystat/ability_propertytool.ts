@@ -1,4 +1,3 @@
-import { GameFunc } from "../../GameFunc";
 import { BaseAbility_Plus } from "../entityPlus/BaseAbility_Plus";
 import { registerAbility } from "../entityPlus/Base_Plus";
 
@@ -19,7 +18,7 @@ export class ability_propertytool extends BaseAbility_Plus {
             ability_propertytool.call_ability = null;
             ability_propertytool.call_ability = null;
             ability_propertytool.call_key = null;
-            if (GameFunc.IsValid(hAbility) && hAbility.GetLevelSpecialValueFor != null) {
+            if (GFuncEntity.IsValid(hAbility) && hAbility.GetLevelSpecialValueFor != null) {
                 switch (sKeyName) {
                     case "cool_down":
                         return tostring(hAbility.GetCooldown(iLevel));
@@ -39,7 +38,7 @@ export class ability_propertytool extends BaseAbility_Plus {
             ability_propertytool.call_unit = null;
             ability_propertytool.call_func = null;
             let func = (hUnit as any)[sFunctionName];
-            if (GameFunc.IsValid(hUnit) && func != null && typeof func == "function") {
+            if (GFuncEntity.IsValid(hUnit) && func != null && typeof func == "function") {
                 return tostring(func());
             }
             return "";

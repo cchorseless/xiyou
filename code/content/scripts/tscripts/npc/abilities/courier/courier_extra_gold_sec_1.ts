@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { EEnum } from "../../../shared/Gen/Types";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
@@ -50,7 +49,7 @@ export class modifier_courier_gold_sec_1 extends BaseModifier_Plus {
     CC_IntervalThink() {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hAbility)) {
             this.Destroy()
             return
         }

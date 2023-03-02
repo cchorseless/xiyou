@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -102,7 +101,7 @@ export class modifier_skull_bones_prison_custom_root extends BaseModifier_Plus {
     CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
-        if (GameFunc.IsValid(hCaster) && hCaster.IsAlive() && params != null && params.target == hParent && (params.attacker == hCaster || params.attacker == hCaster.GetSource())) {
+        if (GFuncEntity.IsValid(hCaster) && hCaster.IsAlive() && params != null && params.target == hParent && (params.attacker == hCaster || params.attacker == hCaster.GetSource())) {
             return this.bonus_damage_per
         }
     }

@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -67,7 +66,7 @@ export class modifier_life_stealer_2 extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     attackLanded(params: IModifierTable) {
-        if (!GameFunc.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
+        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
             return
         }
         let hCaster = this.GetCasterPlus()

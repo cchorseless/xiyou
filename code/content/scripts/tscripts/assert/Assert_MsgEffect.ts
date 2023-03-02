@@ -1,4 +1,3 @@
-import { GameFunc } from "../GameFunc";
 import { ResHelper } from "../helper/ResHelper";
 
 export module Assert_MsgEffect {
@@ -20,7 +19,7 @@ export module Assert_MsgEffect {
 
     export function CreateNumberEffect(entity: IBaseNpc_Plus, number: number, duration: number, msg_type: EMsgEffect, color: Vector = null, icon_type: number = 9) {
         // 判断实体
-        if (!GameFunc.IsValid(entity) || !entity.IsAlive()) {
+        if (!GFuncEntity.IsValid(entity) || !entity.IsAlive()) {
             return;
         }
         if (color == null) {

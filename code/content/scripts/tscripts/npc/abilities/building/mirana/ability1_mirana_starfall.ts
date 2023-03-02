@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -166,7 +165,7 @@ export class modifier_mirana_1_thinker extends modifier_particle_thinker {
             this.tTargetEntIndex = HashTableHelper.GetHashtableByIndex(params.hashtable_index || -1).data as Array<any>
             for (let iTargetEntIndex of (this.tTargetEntIndex)) {
                 let hTarget = EntIndexToHScript(iTargetEntIndex)
-                if (GameFunc.IsValid(hTarget)) {
+                if (GFuncEntity.IsValid(hTarget)) {
                     let iParticleID = ResHelper.CreateParticle({
                         resPath: "particles/units/heroes/hero_mirana/mirana_starfall_attack.vpcf",
                         resNpc: hCaster,
@@ -201,7 +200,7 @@ export class modifier_mirana_1_thinker extends modifier_particle_thinker {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hAbility) || !GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
                 return
             }
             let duration = hAbility.GetSpecialValueFor("duration")
@@ -228,11 +227,11 @@ export class modifier_mirana_1_thinker extends modifier_particle_thinker {
             }
             for (let iTargetEntIndex of (this.tTargetEntIndex)) {
                 let hTarget = EntIndexToHScript(iTargetEntIndex) as IBaseNpc_Plus
-                if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+                if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
                     let iStackCount = 0
                     if (this.bIsSecondary) {
                         let hModifier = modifier_mirana_1_counter.findIn(hTarget) as IBaseModifier_Plus;
-                        if (GameFunc.IsValid(hModifier)) {
+                        if (GFuncEntity.IsValid(hModifier)) {
                             iStackCount = hModifier.GetStackCount()
                         }
                     }
@@ -268,7 +267,7 @@ export class modifier_mirana_1_thinker extends modifier_particle_thinker {
                 }
 
                 let hModifier = modifier_mirana_1_thinker.apply(hParent, hCaster, hAbility, { duration: ability1_mirana_starfall.delay, is_secondary: 1, hashtable_index: HashTableHelper.GetHashtableIndex(tTargetEntIndex) }) as IBaseModifier_Plus
-                if (GameFunc.IsValid(hModifier)) {
+                if (GFuncEntity.IsValid(hModifier)) {
                     hModifier.SetStackCount(1)
                 }
                 if (modifier_mirana_3_buff.exist(hCaster)) {
@@ -304,7 +303,7 @@ export class modifier_mirana_1_effect extends modifier_particle_thinker {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hAbility) || !GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -316,7 +315,7 @@ export class modifier_mirana_1_effect extends modifier_particle_thinker {
                 table.insert(tTargetEntIndex.data, v.entindex())
             }
             let hModifier = modifier_mirana_1_thinker.apply(hParent, hCaster, hAbility, { duration: ability1_mirana_starfall.delay, is_secondary: 1, hashtable_index: HashTableHelper.GetHashtableIndex(tTargetEntIndex) }) as IBaseModifier_Plus
-            if (GameFunc.IsValid(hModifier)) {
+            if (GFuncEntity.IsValid(hModifier)) {
                 hModifier.SetStackCount(1)
             }
         }

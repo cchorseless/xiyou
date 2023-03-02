@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -67,7 +66,7 @@ export class ability2_shadow_shaman_voodoo extends BaseAbility_Plus {
         modifier_kill.apply(hTotem, hCaster, this, { duration: totem_duration - 1 / 30 })
 
         let hAbility = ability3_shadow_shaman_shackles.findIn(hCaster) as ability3_shadow_shaman_shackles;
-        if (GameFunc.IsValid(hAbility) && hAbility.FireTotem != null) {
+        if (GFuncEntity.IsValid(hAbility) && hAbility.FireTotem != null) {
             hAbility.FireTotem(hTotem)
         }
         //  记录上一次释放的位置
@@ -115,7 +114,7 @@ export class modifier_shadow_shaman_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability2_shadow_shaman_voodoo
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -217,9 +216,9 @@ export class modifier_shadow_shaman_2_totem extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GameFunc.IsValid(this.GetCasterPlus())) {
+            if (GFuncEntity.IsValid(this.GetCasterPlus())) {
                 let hAbility = ability3_shadow_shaman_shackles.findIn(this.GetCasterPlus()) as ability3_shadow_shaman_shackles;
-                if (GameFunc.IsValid(hAbility) && hAbility.RemoveTotem) {
+                if (GFuncEntity.IsValid(hAbility) && hAbility.RemoveTotem) {
                     hAbility.RemoveTotem(this.GetParentPlus())
                 }
             }
@@ -229,7 +228,7 @@ export class modifier_shadow_shaman_2_totem extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 hParent.ForceKill(false)
                 this.Destroy()
                 this.StartIntervalThink(-1)
@@ -306,7 +305,7 @@ export class modifier_shadow_shaman_2_debuff extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GameFunc.IsValid(this.modifier_truesight)) {
+            if (GFuncEntity.IsValid(this.modifier_truesight)) {
                 this.modifier_truesight.Destroy()
             }
         }
@@ -316,7 +315,7 @@ export class modifier_shadow_shaman_2_debuff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive() || !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive() || !GFuncEntity.IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -333,11 +332,11 @@ export class modifier_shadow_shaman_2_debuff extends BaseModifier_Plus {
             }
             BattleHelper.GoApplyDamage(damage_table)
             this.IncrementStackCount()
-            // if (GameFunc.IsValid(this.GetCasterPlus().GetSummoner()) && this.GetCasterPlus().GetSummoner().HasScepter()) {
+            // if (GFuncEntity.IsValid(this.GetCasterPlus().GetSummoner()) && this.GetCasterPlus().GetSummoner().HasScepter()) {
             //     undefined
             // }
 
-            // if (GameFunc.IsValid(this.GetCasterPlus().GetSummoner()) && this.GetCasterPlus().GetSummoner().HasScepter()) {
+            // if (GFuncEntity.IsValid(this.GetCasterPlus().GetSummoner()) && this.GetCasterPlus().GetSummoner().HasScepter()) {
             //     undefined
             //          modifier_shadow_shaman_2_resistance.apply( this.GetParentPlus() , this.GetCasterPlus().GetSummoner(), this.GetAbilityPlus(), { duration = this.GetRemainingTime() })
             //     }

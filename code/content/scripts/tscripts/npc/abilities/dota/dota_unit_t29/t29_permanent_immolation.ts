@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -142,7 +141,7 @@ export class modifier_t29_permanent_immolation_debuff extends BaseModifier_Plus 
             let caster = this.GetCasterPlus()
             let target = this.GetParentPlus()
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(caster) || !GameFunc.IsValid(ability) || caster.PassivesDisabled()) {
+            if (!GFuncEntity.IsValid(caster) || !GFuncEntity.IsValid(ability) || caster.PassivesDisabled()) {
                 this.Destroy()
                 return
             }

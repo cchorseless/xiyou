@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { modifier_courier } from "../../../npc/courier/modifier_courier";
 import { modifier_jiaoxie_wudi } from "../../../npc/modifier/battle/modifier_jiaoxie_wudi";
@@ -122,7 +121,7 @@ export class CourierEntityRoot extends BaseEntityRoot {
     }
     RefreshCourier() {
         let hHero = this.GetDomain<IBaseNpc_Hero_Plus>();
-        if (!GameFunc.IsValid(hHero) || !hHero.IsAlive()) {
+        if (!GFuncEntity.IsValid(hHero) || !hHero.IsAlive()) {
             return
         }
         let sCurrentCourierName = this.GetCourierName()
@@ -138,14 +137,14 @@ export class CourierEntityRoot extends BaseEntityRoot {
     GetCourierName() {
         let hero = this.GetDomain<IBaseNpc_Hero_Plus>();
         let hModifier = modifier_courier.findIn(hero);
-        if (GameFunc.IsValid(hModifier)) {
+        if (GFuncEntity.IsValid(hModifier)) {
             return hModifier.GetCourierName() || GameServiceConfig.DefaultCourier;
         }
         return GameServiceConfig.DefaultCourier;
     }
     onVictory() {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        if (GameFunc.IsValid(npc)) {
+        if (GFuncEntity.IsValid(npc)) {
             npc.Stop();
             npc.StartGesture(GameActivity_t.ACT_DOTA_VICTORY);
         }

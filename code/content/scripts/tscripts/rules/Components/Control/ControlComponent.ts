@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { BaseNpc } from "../../../npc/entityPlus/Base_Plus";
 import { GameProtocol } from "../../../shared/GameProtocol";
@@ -255,10 +254,10 @@ export class ControlComponent extends ET.Component {
         if (hUnit.GetCurrentActiveAbility() == null) {
             if (tKeySetting.EnableKeyboardMove) {
                 //----------------------------------------键盘移动----------------------------------------
-                if (!GameFunc.VectorFunctions.VectorIsZero(vDirection)) {
+                if (!GFuncVector.VectorIsZero(vDirection)) {
                     vDirection = vDirection.Normalized();
                     hUnit.SetLocalAngles(0, VectorToAngles(vDirection).y, 0);
-                    GameFunc.ExecuteOrder(hUnit, dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_POSITION, null, null, (GetGroundPosition(hUnit.GetAbsOrigin(), hUnit) + vDirection * 100) as Vector)
+                    GFuncEntity.ExecuteOrder(hUnit, dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_POSITION, null, null, (GetGroundPosition(hUnit.GetAbsOrigin(), hUnit) + vDirection * 100) as Vector)
                 }
                 else {
                     if (!hUnit.IsIdle()) {
@@ -270,7 +269,7 @@ export class ControlComponent extends ET.Component {
                 //----------------------------------------鼠标移动----------------------------------------
                 // if (bMove) {
                 //     hUnit.SetLocalAngles(0, VectorToAngles(((vCursorPosition - hUnit.GetAbsOrigin()) as Vector).Normalized()).y, 0)
-                //     GameFunc.ExecuteOrder(hUnit, dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_POSITION, null, null, vCursorPosition)
+                //     GFuncEntity.ExecuteOrder(hUnit, dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_POSITION, null, null, vCursorPosition)
                 // }
             }
         }
@@ -304,7 +303,7 @@ export class ControlComponent extends ET.Component {
         // }
 
         //--------------------------施法-----------------------------
-        // let vCastDirection = GameFunc.VectorFunctions.VectorIsZero(vDirection) && hUnit.GetForwardVector() || vDirection;
+        // let vCastDirection = GFuncVector.VectorIsZero(vDirection) && hUnit.GetForwardVector() || vDirection;
         // bUseAbility.forEach(
         //     (bUseAbility: boolean, index: number) => {
         //         if (!bUseAbility) { return };
@@ -341,7 +340,7 @@ export class ControlComponent extends ET.Component {
                 let hItem = hUnit.GetItemInSlot(i)
                 if (hItem) {
                     hItem.CastAbility()
-                    //--GameFunc.ExecuteOrder(hUnit, DOTA_UNIT_ORDER_CAST_NO_TARGET, nil, hItem)
+                    //--GFuncEntity.ExecuteOrder(hUnit, DOTA_UNIT_ORDER_CAST_NO_TARGET, nil, hItem)
                 }
                 this.releaseKey(iEntIndex, (tKeySetting as any)['Item' + i])
             }
@@ -350,11 +349,11 @@ export class ControlComponent extends ET.Component {
         // if (bDodge) {
         //     if (hUnit.GetAbilityByIndex(1).IsFullyCastable()) {
         //         hUnit.Stop();
-        //         // let vDodgeDirection = GameFunc.VectorFunctions.VectorIsZero(vDirection) && hUnit.GetForwardVector() || vDirection;
+        //         // let vDodgeDirection = GFuncVector.VectorIsZero(vDirection) && hUnit.GetForwardVector() || vDirection;
         //         // hUnit.GetAbilityByIndex(1).OnKeyboardFire(vDodgeDirection, vCursorPosition)
         //         this.releaseKey(iEntIndex, tKeySetting.Dodge)
         //     }
-        //     //--GameFunc.ExecuteOrder(hUnit, dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION, nil, hUnit: GetAbilityByIndex(1), hUnit: GetAbsOrigin() + vDodgeDirection * 600)
+        //     //--GFuncEntity.ExecuteOrder(hUnit, dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION, nil, hUnit: GetAbilityByIndex(1), hUnit: GetAbsOrigin() + vDodgeDirection * 600)
         // }
     }
 
@@ -398,7 +397,7 @@ export class ControlComponent extends ET.Component {
         let tData = this.tKeyboardData[entindex];
         if (tData) {
             tData.tKeyDown = tData.tKeyDown || [];
-            GameFunc.ArrayFunc.RemoveAll(tData.tKeyDown, sKey);
+            GFuncArray.RemoveAll(tData.tKeyDown, sKey);
         }
     }
 }

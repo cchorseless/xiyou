@@ -46,7 +46,7 @@ export class ability6_clinkz_death_pact extends BaseAbility_Plus {
         let iBaseMaxDamage = hCaster.GetAverageTrueAttackDamage(null) * damage_percent * 0.01
 
         let clinkz_4 = ability3_clinkz_wind_walk.findIn(hCaster)
-        let iAbilityLevel = GameFunc.IsValid(clinkz_4) && clinkz_4.GetLevel() || 0
+        let iAbilityLevel = GFuncEntity.IsValid(clinkz_4) && clinkz_4.GetLevel() || 0
 
         if (this.tArmys == null) {
             this.tArmys = []
@@ -54,7 +54,7 @@ export class ability6_clinkz_death_pact extends BaseAbility_Plus {
 
 
         for (let i = 1; i <= iCount; i++) {
-            let vPosition = (hCaster.GetAbsOrigin() + GameFunc.VectorFunctions.Rotation2D(vDirection, math.rad(360 / iCount * (i - 1))) * radius) as Vector
+            let vPosition = (hCaster.GetAbsOrigin() + GFuncVector.Rotation2D(vDirection, math.rad(360 / iCount * (i - 1))) * radius) as Vector
 
             let hArmy = CreateUnitByName("npc_dota_clinkz_skeleton_archer", vPosition, false, hHero, hHero, hCaster.GetTeamNumber())
             hArmy.SetBaseDamageMin(iBaseMinDamage)
@@ -125,7 +125,7 @@ export class modifier_clinkz_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -221,7 +221,7 @@ export class modifier_clinkz_6_summon extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GameFunc.IsValid(this.GetAbilityPlus())) {
+            if (GFuncEntity.IsValid(this.GetAbilityPlus())) {
                 GameFunc.ArrayFunc.ArrayRemove((this.GetAbilityPlus() as ability6_clinkz_death_pact).tArmys, this.GetParentPlus())
             }
             this.GetParentPlus().ForceKill(false)
@@ -239,7 +239,7 @@ export class modifier_clinkz_6_summon extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BASE_OVERRIDE)
     GetAttackRangeOverride(params: IModifierTable) {
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             return this.GetCasterPlus().Script_GetAttackRange()
         }
     }

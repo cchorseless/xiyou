@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
@@ -50,7 +49,7 @@ export class modifier_t30_bleed extends BaseModifier_Plus {
         if (params.target == null || params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion()) {
             if (!params.attacker.PassivesDisabled() && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
-                if (GameFunc.mathUtil.PRD(this.bleed_chance, params.attacker, "t30_bleed")) {
+                if (GFuncMath.PRD(this.bleed_chance, params.attacker, "t30_bleed")) {
                     let hCaster = params.attacker as IBaseNpc_Plus
                     let hTarget = params.target
                     modifier_bleeding.Bleeding(hTarget, hCaster, this.GetAbilityPlus(), this.bleed_duration, (tDamageTable) => {

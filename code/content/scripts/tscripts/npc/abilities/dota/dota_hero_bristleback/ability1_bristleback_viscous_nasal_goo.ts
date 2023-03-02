@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -76,10 +75,10 @@ export class ability1_bristleback_viscous_nasal_goo extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         let radius = this.GetSpecialValueFor("radius")
         let duration = this.GetSpecialValueFor("duration")
-        if (GameFunc.IsValid(hTarget)) {
+        if (GFuncEntity.IsValid(hTarget)) {
             let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hTarget.GetAbsOrigin(), null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
             for (let hTarget of (tTarget)) {
-                if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+                if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
                     modifier_bristleback_1_buff.apply(hTarget, hCaster, this, { duration: duration })
                 }
             }
@@ -124,7 +123,7 @@ export class modifier_bristleback_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -215,7 +214,7 @@ export class modifier_bristleback_1_buff extends BaseModifier_Plus {
         this.max_layer = this.GetSpecialValueFor("max_layer")
         if (IsServer()) {
             let hAbility3 = ability6_bristleback_warpath.findIn(hCaster)
-            if (GameFunc.IsValid(hAbility3) && hAbility3.GetLevel() >= 1) {
+            if (GFuncEntity.IsValid(hAbility3) && hAbility3.GetLevel() >= 1) {
                 let bonus_max_stacks = hAbility3.GetSpecialValueFor("bonus_max_stacks")
                 this.max_layer = this.max_layer + bonus_max_stacks
             }

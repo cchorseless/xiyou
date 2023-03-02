@@ -107,7 +107,7 @@ export class modifier_riki_3 extends BaseModifier_Plus {
     On_AttackLanded(params: ModifierAttackEvent) {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
+        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
             return
         }
         if (params.attacker == hParent && !params.attacker.IsIllusion()) {

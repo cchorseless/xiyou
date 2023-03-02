@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -85,7 +84,7 @@ export class modifier_mars_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -127,12 +126,12 @@ export class modifier_mars_3 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker
-        if (GameFunc.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
+        if (GFuncEntity.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
             if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
                 return
             }
             hAttacker = hAttacker.GetSource()
-            if (GameFunc.IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled()) {
+            if (GFuncEntity.IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled()) {
                 if ((this.GetParentPlus().HasTalent("special_bonus_unique_mars_custom_3"))) {
                     let hAbility = this.GetAbilityPlus()
                     let flCooldown = hAbility.GetCooldownTimeRemaining() + this.GetParentPlus().GetTalentValue("special_bonus_unique_mars_custom_3")

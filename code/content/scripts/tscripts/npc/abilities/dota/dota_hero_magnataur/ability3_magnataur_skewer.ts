@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -67,7 +66,7 @@ export class ability3_magnataur_skewer extends BaseAbility_Plus {
         let hThinker = CreateUnitByName(hCaster.GetUnitName(), vStartPosition, false, hCaster, hCaster, hCaster.GetTeamNumber())
         for (let i = hThinker.GetAbilityCount() - 1; i >= 0; i--) {
             let hAbility = hThinker.GetAbilityByIndex(i)
-            if (GameFunc.IsValid(hAbility)) {
+            if (GFuncEntity.IsValid(hAbility)) {
                 hThinker.RemoveAbilityByHandle(hAbility)
             }
         }
@@ -100,7 +99,7 @@ export class ability3_magnataur_skewer extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(hTarget)) {
+        if (GFuncEntity.IsValid(hTarget)) {
             if (ExtraData.target_position_x != null && ExtraData.target_position_y != null && ExtraData.target_position_z != null) {
                 let skewer_speed = this.GetSpecialValueFor("skewer_speed")
                 let skewer_radius = this.GetSpecialValueFor("skewer_radius")
@@ -120,11 +119,11 @@ export class ability3_magnataur_skewer extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(vLocation, ResHelper.GetSoundReplacement("Hero_Magnataur.Skewer.Target", hCaster), hCaster)
 
         let hThinker = EntIndexToHScript(ExtraData.thinker_ent_index || -1) as IBaseNpc_Plus
-        if (GameFunc.IsValid(hThinker)) {
+        if (GFuncEntity.IsValid(hThinker)) {
             hThinker.StartGesture(GameActivity_t.ACT_DOTA_MAGNUS_SKEWER_END)
             modifier_magnataur_3_thinker.remove(hThinker);
             let hModifier = modifier_magnataur_3_dummy.apply(hThinker, hCaster, this)
-            if (GameFunc.IsValid(hModifier)) {
+            if (GFuncEntity.IsValid(hModifier)) {
                 hModifier.SetDuration(1, true)
             }
         }
@@ -132,9 +131,9 @@ export class ability3_magnataur_skewer extends BaseAbility_Plus {
     }
     OnProjectileThink_ExtraData(vLocation: Vector, ExtraData: any) {
         let hThinker = EntIndexToHScript(ExtraData.thinker_ent_index || -1) as IBaseNpc_Plus
-        if (GameFunc.IsValid(hThinker)) {
+        if (GFuncEntity.IsValid(hThinker)) {
             let hModifier = modifier_magnataur_3_thinker.findIn(hThinker)
-            if (GameFunc.IsValid(hModifier)) {
+            if (GFuncEntity.IsValid(hModifier)) {
                 hModifier.vPosition = vLocation
             }
         }
@@ -176,7 +175,7 @@ export class modifier_magnataur_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -371,8 +370,8 @@ export class modifier_magnataur_3_move extends BaseModifierMotionHorizontal_Plus
         this.skewer_damage_per_str = this.GetSpecialValueFor("skewer_damage_per_str") + extra_skewer_damage_per_str
         if (IsServer()) {
             if (this.ApplyHorizontalMotionController()) {
-                this.vStartPosition = GameFunc.VectorFunctions.StringToVector(params.start_position)
-                this.vTargetPosition = GameFunc.VectorFunctions.StringToVector(params.target_position)
+                this.vStartPosition = GFuncVector.StringToVector(params.start_position)
+                this.vTargetPosition = GFuncVector.StringToVector(params.target_position)
                 this.fDistance = 0
             } else {
                 this.Destroy()
@@ -390,7 +389,7 @@ export class modifier_magnataur_3_move extends BaseModifierMotionHorizontal_Plus
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
                 return
             }
 

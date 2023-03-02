@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -97,49 +96,49 @@ export class ability2_pangolier_shield_crash extends BaseAbility_Plus {
             BattleHelper.GoApplyDamage(damage_table)
             if (hCaster.HasShard()) {
                 let hAbility4 = ability3_pangolier_lucky_shot.findIn(hCaster)
-                if (GameFunc.IsValid(hAbility4) && hAbility4.GetLevel() >= 1) {
+                if (GFuncEntity.IsValid(hAbility4) && hAbility4.GetLevel() >= 1) {
                     hAbility4._OnSpellStart(hTarget)
                 }
             }
             // 幸运一击效果延长一秒
             let hModifierStun = modifier_pangolier_3_stun.findIn(hTarget)
-            if (GameFunc.IsValid(hModifierStun)) {
-                if (GameFunc.IsValid(modifier_pangolier4) && modifier_pangolier4.tData) {
+            if (GFuncEntity.IsValid(hModifierStun)) {
+                if (GFuncEntity.IsValid(modifier_pangolier4) && modifier_pangolier4.tData) {
                     modifier_pangolier4.tData[0] = math.max(GameRules.GetGameTime() + lucky_duration * hTarget.GetStatusResistanceFactor(hCaster), modifier_pangolier4.tData[0])
                 }
                 hModifierStun.SetDuration(hModifierStun.GetRemainingTime() + lucky_duration * hTarget.GetStatusResistanceFactor(hCaster), true)
             }
             let hModifierSilent = modifier_pangolier_3_silent.findIn(hTarget) as modifier_pangolier_3_silent;
-            if (GameFunc.IsValid(hModifierSilent)) {
-                if (GameFunc.IsValid(modifier_pangolier4) && modifier_pangolier4.tData) {
+            if (GFuncEntity.IsValid(hModifierSilent)) {
+                if (GFuncEntity.IsValid(modifier_pangolier4) && modifier_pangolier4.tData) {
                     modifier_pangolier4.tData[2] = math.max(GameRules.GetGameTime() + lucky_duration * hTarget.GetStatusResistanceFactor(hCaster), modifier_pangolier4.tData[2])
                 }
                 hModifierSilent.SetDuration(hModifierSilent.GetRemainingTime() + lucky_duration * hTarget.GetStatusResistanceFactor(hCaster), true)
             }
             let hModifierRemoveAllArmor = modifier_pangolier_3_remove_armor.findIn(hTarget) as modifier_pangolier_3_remove_armor;
-            if (GameFunc.IsValid(hModifierRemoveAllArmor)) {
-                if (GameFunc.IsValid(modifier_pangolier4) && modifier_pangolier4.tData) {
+            if (GFuncEntity.IsValid(hModifierRemoveAllArmor)) {
+                if (GFuncEntity.IsValid(modifier_pangolier4) && modifier_pangolier4.tData) {
                     modifier_pangolier4.tData[3] = math.max(GameRules.GetGameTime() + lucky_duration * hTarget.GetStatusResistanceFactor(hCaster), modifier_pangolier4.tData[3])
                 }
                 hModifierRemoveAllArmor.SetDuration(hModifierRemoveAllArmor.GetRemainingTime() + lucky_duration * hTarget.GetStatusResistanceFactor(hCaster), true)
             }
             let hModifierRemoveAllMagicArmor = modifier_pangolier_3_remove_magic_armor.findIn(hTarget) as modifier_pangolier_3_remove_magic_armor;
-            if (GameFunc.IsValid(hModifierRemoveAllMagicArmor)) {
-                if (GameFunc.IsValid(modifier_pangolier4) && modifier_pangolier4.tData) {
+            if (GFuncEntity.IsValid(hModifierRemoveAllMagicArmor)) {
+                if (GFuncEntity.IsValid(modifier_pangolier4) && modifier_pangolier4.tData) {
                     modifier_pangolier4.tData[4] = math.max(GameRules.GetGameTime() + lucky_duration * hTarget.GetStatusResistanceFactor(hCaster), modifier_pangolier4.tData[4])
                 }
                 hModifierRemoveAllMagicArmor.SetDuration(hModifierRemoveAllMagicArmor.GetRemainingTime() + lucky_duration * hTarget.GetStatusResistanceFactor(hCaster), true)
             }
             let hModifierReduceHealth = modifier_pangolier_3_reduce_health.findIn(hTarget) as modifier_pangolier_3_reduce_health;
-            if (GameFunc.IsValid(hModifierReduceHealth)) {
-                if (GameFunc.IsValid(modifier_pangolier4) && modifier_pangolier4.tData) {
+            if (GFuncEntity.IsValid(hModifierReduceHealth)) {
+                if (GFuncEntity.IsValid(modifier_pangolier4) && modifier_pangolier4.tData) {
                     modifier_pangolier4.tData[5] = math.max(GameRules.GetGameTime() + lucky_duration * hTarget.GetStatusResistanceFactor(hCaster), modifier_pangolier4.tData[5])
                 }
                 hModifierReduceHealth.SetDuration(hModifierReduceHealth.GetRemainingTime() + lucky_duration * hTarget.GetStatusResistanceFactor(hCaster), true)
             }
 
             let hModifier = modifier_pangolier_2_buff.apply(hCaster, hCaster, this, { duration: duration }) as modifier_pangolier_2_buff
-            if (GameFunc.IsValid(hModifier)) {
+            if (GFuncEntity.IsValid(hModifier)) {
                 hModifier.IncrementStackCount()
             }
         }
@@ -182,7 +181,7 @@ export class modifier_pangolier_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -258,7 +257,7 @@ export class modifier_pangolier_2_jump extends BaseModifierMotionVertical_Plus {
                 let iRange = ability1_pangolier_swashbuckle.findIn(hCaster).GetSpecialValueFor("range");
                 let vDirection = (hCaster.GetForwardVector() * iRange) as Vector
                 for (let i = 1; i <= 4; i++) {
-                    let vPosition = GameFunc.VectorFunctions.Rotation2D(vDirection, math.rad(i * 90)) + hCaster.GetAbsOrigin()
+                    let vPosition = GFuncVector.Rotation2D(vDirection, math.rad(i * 90)) + hCaster.GetAbsOrigin()
                     // undefined
                 }
             }

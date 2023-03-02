@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -125,7 +124,7 @@ export class modifier_kunkka_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -240,7 +239,7 @@ export class modifier_kunkka_1_thinker extends BaseModifier_Plus {
         let ability = this.GetAbilityPlus()
 
         if (IsServer()) {
-            if (GameFunc.IsValid(caster)) {
+            if (GFuncEntity.IsValid(caster)) {
                 let targets = AoiHelper.FindEntityInRadius(caster.GetTeamNumber(), position, this.radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_CLOSEST)
                 for (let target of (targets)) {
                     if (!modifier_kunkka_1_sign.exist(target)) {
@@ -341,7 +340,7 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
         let hCaster = this.GetCasterPlus()
         let extra_radius = 0
         let extra_damage_per_str = 0
-        if (GameFunc.IsValid(hCaster)) {
+        if (GFuncEntity.IsValid(hCaster)) {
             extra_radius = hCaster.GetTalentValue("special_bonus_unique_kunkka_custom")
             extra_damage_per_str = hCaster.GetTalentValue("special_bonus_unique_kunkka_custom_2")
         }
@@ -364,7 +363,7 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus()
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(caster) || !GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(caster) || !GFuncEntity.IsValid(ability)) {
                 this.Destroy()
                 return
             }
@@ -397,7 +396,7 @@ export class modifier_kunkka_1_torrent extends BaseModifierMotionVertical_Plus {
                 let hParent = this.GetParentPlus()
                 let hAbility = this.GetAbilityPlus()
                 hParent.RemoveVerticalMotionController(this)
-                if (GameFunc.IsValid(hCaster) && modifier_kunkka_3_tide.exist(hCaster)) {
+                if (GFuncEntity.IsValid(hCaster) && modifier_kunkka_3_tide.exist(hCaster)) {
                     let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), this.radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_CLOSEST)
                     for (let hUnit of (tTargets)) {
                         modifier_stunned.apply(hUnit, hCaster, hAbility, { duration: this.stun_duration * this.tide_pct * 0.01 * hUnit.GetStatusResistanceFactor(hCaster) })
@@ -495,7 +494,7 @@ export class modifier_kunkka_1_scepter extends BaseModifier_Plus {
             let hAbility = this.GetAbilityPlus() as ability1_kunkka_torrent
             let flRange = hAbility.GetCastRange(hCaster.GetAbsOrigin(), hCaster) + hCaster.GetCastRangeBonus()
             let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), flRange, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_ANY_ORDER)
-            if (tTargets.length > 0 && GameFunc.IsValid(tTargets[0])) {
+            if (tTargets.length > 0 && GFuncEntity.IsValid(tTargets[0])) {
                 hAbility.Torrent(tTargets[0].GetAbsOrigin())
             }
         }

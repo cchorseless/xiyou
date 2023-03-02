@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -54,7 +53,7 @@ export class ability2_brewmaster_cinder_brew extends BaseAbility_Plus {
         let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), vPosition, null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
         for (let hTarget of (tTarget)) {
 
-            if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+            if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
                 modifier_brewmaster_2_debuff.apply(hTarget, hCaster, this, { duration: duration })
             }
         }
@@ -97,7 +96,7 @@ export class modifier_brewmaster_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -185,7 +184,7 @@ export class modifier_brewmaster_2_debuff extends BaseModifier_Plus {
         this.magic_armor = this.GetSpecialValueFor("magic_armor")
         if (IsServer()) {
             // let hAbility_t29 = qualification_build_t29.findIn(hCaster)
-            // if (GameFunc.IsValid(hAbility_t29) && hAbility_t29.GetLevel() >= 1) {
+            // if (GFuncEntity.IsValid(hAbility_t29) && hAbility_t29.GetLevel() >= 1) {
             //     this.SetStackCount(1)
             // }
         }
@@ -195,7 +194,7 @@ export class modifier_brewmaster_2_debuff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }

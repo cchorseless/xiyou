@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -65,7 +64,7 @@ export class modifier_slardar_6 extends BaseModifier_Plus {
     }
     OnIntervalThink() {
         if (IsServer()) {
-            if (!GameFunc.IsValid(this.modifier) ||
+            if (!GFuncEntity.IsValid(this.modifier) ||
                 this.level == null ||
                 this.level != this.GetAbilityPlus().GetLevel() ||
                 this.has_talent == null ||
@@ -82,7 +81,7 @@ export class modifier_slardar_6 extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GameFunc.IsValid(this.modifier)) {
+            if (GFuncEntity.IsValid(this.modifier)) {
                 this.modifier.Destroy()
             }
         }
@@ -185,7 +184,7 @@ export class modifier_slardar_6_aura extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     CC_tooltip() {
-        if (!GameFunc.IsValid(this.GetCasterPlus()) || this.GetCasterPlus().PassivesDisabled()) {
+        if (!GFuncEntity.IsValid(this.GetCasterPlus()) || this.GetCasterPlus().PassivesDisabled()) {
             return 0
         }
         return this.armor_reduction - this.GetCasterPlus().GetTalentValue("special_bonus_unique_slardar_custom_7")

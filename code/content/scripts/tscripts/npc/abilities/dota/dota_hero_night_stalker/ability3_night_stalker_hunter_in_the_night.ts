@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -39,7 +38,7 @@ export class ability3_night_stalker_hunter_in_the_night extends BaseAbility_Plus
 
 
     CripplingFear(hTarget: IBaseNpc_Plus) {
-        if (!GameFunc.IsValid(hTarget)) {
+        if (!GFuncEntity.IsValid(hTarget)) {
             return
         }
 
@@ -57,7 +56,7 @@ export class ability3_night_stalker_hunter_in_the_night extends BaseAbility_Plus
         let duration_night = this.GetSpecialValueFor("duration_night")
         let duration = bIsNighttime && duration_night || duration_day
 
-        if (GameFunc.mathUtil.PRD(chance, hCaster, "night_stalker_4")) {
+        if (GFuncMath.PRD(chance, hCaster, "night_stalker_4")) {
             modifier_night_stalker_3_debuff.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
             // 魔晶每个伤残恐惧单位提供20%全伤害
             if (hCaster.HasShard()) {
@@ -102,7 +101,7 @@ export class modifier_night_stalker_3 extends BaseModifier_Plus {
             }
 
             let hAbility = params.inflictor
-            if (params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK || (params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL && GameFunc.IsValid(hAbility) && !hAbility.IsItem())) {
+            if (params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK || (params.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_SPELL && GFuncEntity.IsValid(hAbility) && !hAbility.IsItem())) {
                 let ability = this.GetAbilityPlus() as ability3_night_stalker_hunter_in_the_night
                 if (ability.CripplingFear != null) {
                     ability.CripplingFear(params.target as IBaseNpc_Plus)
@@ -147,7 +146,7 @@ export class modifier_night_stalker_3_debuff extends BaseModifier_Plus {
         this.damage_per_seconds = this.GetSpecialValueFor("damage_per_seconds") + hCaster.GetTalentValue("special_bonus_unique_night_stalker_custom_2")
         this.damage_interval = this.GetSpecialValueFor("damage_interval")
         let hModifier = modifier_night_stalker_2.findIn(hCaster)
-        if (GameFunc.IsValid(hModifier) && hModifier.GetCripplingFearDPS != null) {
+        if (GFuncEntity.IsValid(hModifier) && hModifier.GetCripplingFearDPS != null) {
             this.damage_per_seconds = this.damage_per_seconds + hModifier.GetCripplingFearDPS()
         }
         if (IsServer()) {
@@ -171,7 +170,7 @@ export class modifier_night_stalker_3_debuff extends BaseModifier_Plus {
         this.damage_per_seconds = this.GetSpecialValueFor("damage_per_seconds") + hCaster.GetTalentValue("special_bonus_unique_night_stalker_custom_2")
         this.damage_interval = this.GetSpecialValueFor("damage_interval")
         let hModifier = modifier_night_stalker_2.findIn(hCaster)
-        if (GameFunc.IsValid(hModifier) && hModifier.GetCripplingFearDPS != null) {
+        if (GFuncEntity.IsValid(hModifier) && hModifier.GetCripplingFearDPS != null) {
             this.damage_per_seconds = this.damage_per_seconds + hModifier.GetCripplingFearDPS()
         }
     }
@@ -180,7 +179,7 @@ export class modifier_night_stalker_3_debuff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hAbility) || !GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -242,7 +241,7 @@ export class modifier_night_stalker_3_buff extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
             }
         }

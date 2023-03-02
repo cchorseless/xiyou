@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -80,7 +79,7 @@ export class ability3_shadow_shaman_shackles extends BaseAbility_Plus {
         }
         if (iCount >= totem_count) {
             // for i, tInfo in ipairs(shallowcopy(this.tTotems[sElderType])) do
-            //     if (GameFunc.IsValid(tInfo.hHandle)) {
+            //     if (GFuncEntity.IsValid(tInfo.hHandle)) {
             //         tInfo.hHandle.ForceKill(false)
             //     }
         }
@@ -92,7 +91,7 @@ export class ability3_shadow_shaman_shackles extends BaseAbility_Plus {
             let tInfo = allinfo[i]
             if (tInfo.hHandle == hTotem) {
                 table.remove(this.tTotems[hTotem.GetUnitLabel()], i)
-                if (GameFunc.IsValid(hTotem)) {
+                if (GFuncEntity.IsValid(hTotem)) {
                     hTotem.ForceKill(false)
                 }
                 break

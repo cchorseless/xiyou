@@ -233,7 +233,7 @@ export class modifier_huskar_2_counter extends BaseModifier_Plus {
     OnIntervalThink() {
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return

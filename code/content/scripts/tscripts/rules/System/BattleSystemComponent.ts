@@ -12,7 +12,7 @@ export class BattleSystemComponent extends ET.SingletonComponent {
      */
     private CreateGlobalEventNPC() {
         if (this.Npc_MODIFIER_EVENTS) {
-            GDestroyUnit(this.Npc_MODIFIER_EVENTS);
+            GFuncEntity.SafeDestroyUnit(this.Npc_MODIFIER_EVENTS);
             this.Npc_MODIFIER_EVENTS = null;
         }
         this.Npc_MODIFIER_EVENTS = modifier_event.applyThinker(Vector(0, 0, 0), GameRules.Addon.Instance as any, null, null, DOTATeam_t.DOTA_TEAM_NOTEAM, false);
@@ -24,7 +24,7 @@ export class BattleSystemComponent extends ET.SingletonComponent {
 
     onDestroy(): void {
         if (this.Npc_MODIFIER_EVENTS) {
-            GDestroyUnit(this.Npc_MODIFIER_EVENTS);
+            GFuncEntity.SafeDestroyUnit(this.Npc_MODIFIER_EVENTS);
             this.Npc_MODIFIER_EVENTS = null;
         }
     }

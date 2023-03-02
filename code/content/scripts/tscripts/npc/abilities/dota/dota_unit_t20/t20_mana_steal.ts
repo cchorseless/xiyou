@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -22,10 +21,10 @@ export class t20_mana_steal extends BaseAbility_Plus {
         this.addTimer(
             bounce_interval,
             () => {
-                if (!GameFunc.IsValid(hCaster)) {
+                if (!GFuncEntity.IsValid(hCaster)) {
                     return
                 }
-                if (!GameFunc.IsValid(hTarget)) {
+                if (!GFuncEntity.IsValid(hTarget)) {
                     return
                 }
 
@@ -33,7 +32,7 @@ export class t20_mana_steal extends BaseAbility_Plus {
                 if (hNewTarget != null) {
                     //  净魂 减魔抗
                     // let combination_t20_diffusal = combination_t20_diffusal.findIn(hCaster)
-                    // let has_combination_t20_diffusal = GameFunc.IsValid(combination_t20_diffusal) && combination_t20_diffusal.IsActivated()
+                    // let has_combination_t20_diffusal = GFuncEntity.IsValid(combination_t20_diffusal) && combination_t20_diffusal.IsActivated()
                     // if (has_combination_t20_diffusal) {
                     //     // combination_t20_diffusal.Diffusal(hNewTarget)
                     // }
@@ -79,7 +78,7 @@ export class t20_mana_steal extends BaseAbility_Plus {
 
         //  净魂 减魔抗
         // let combination_t20_diffusal  = combination_t20_diffusal.findIn(  hCaster )
-        // let has_combination_t20_diffusal = GameFunc.IsValid(combination_t20_diffusal) && combination_t20_diffusal.IsActivated()
+        // let has_combination_t20_diffusal = GFuncEntity.IsValid(combination_t20_diffusal) && combination_t20_diffusal.IsActivated()
         // if (has_combination_t20_diffusal) {
         //     // combination_t20_diffusal.Diffusal(hTarget)
         // }
@@ -113,7 +112,7 @@ export class t20_mana_steal extends BaseAbility_Plus {
 
     RegainManaInRaius(fDamage: number) {
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             return
         }
         let mana_regain_pct = this.GetSpecialValueFor("mana_regain_pct")
@@ -177,7 +176,7 @@ export class modifier_t20_mana_steal extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

@@ -99,7 +99,7 @@ export class modifier_phantom_assassin_6 extends BaseModifier_Plus {
         if (stack_modifier) {
             chance = chance + stack_modifier.GetStackCount() * this.crit_chance_stack
         }
-        if (GameFunc.mathUtil.PRD(chance, params.attacker, "phantom_assassin_3") || modifier_phantom_assassin_3_blur_attack.exist(hParent)) {
+        if (GFuncMath.PRD(chance, params.attacker, "phantom_assassin_3") || modifier_phantom_assassin_3_blur_attack.exist(hParent)) {
             table.insert(this.records, params.record)
         } else {
             modifier_phantom_assassin_6_stack.remove(hParent);
@@ -125,7 +125,7 @@ export class modifier_phantom_assassin_6 extends BaseModifier_Plus {
             blur_attack_modifier.DecrementStackCount()
         }
 
-        let vDirection = GameFunc.VectorFunctions.HorizonVector((params.attacker.GetAbsOrigin() - params.target.GetAbsOrigin()) as Vector)
+        let vDirection = GFuncVector.HorizonVector((params.attacker.GetAbsOrigin() - params.target.GetAbsOrigin()) as Vector)
         modifier_phantom_assassin_6_particle_phantom_assassin_crit_impact_dagger.apply(params.attacker, params.target, this.GetAbilityPlus(), { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
         EmitSoundOnLocationWithCaster(params.target.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_PhantomAssassin.CoupDeGrace", params.attacker), params.attacker)
     }
@@ -141,7 +141,7 @@ export class modifier_phantom_assassin_6 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     death(params: IModifierTable) {
         let hAttacker = params.attacker
-        if (!IsServer() || !GameFunc.IsValid(hAttacker) || hAttacker.GetTeamNumber() == params.unit.GetTeamNumber() || hAttacker == null || hAttacker.GetUnitLabel() == "builder" || hAttacker != this.GetParentPlus() || !hAttacker.HasScepter() || hAttacker.IsIllusion()) {
+        if (!IsServer() || !GFuncEntity.IsValid(hAttacker) || hAttacker.GetTeamNumber() == params.unit.GetTeamNumber() || hAttacker == null || hAttacker.GetUnitLabel() == "builder" || hAttacker != this.GetParentPlus() || !hAttacker.HasScepter() || hAttacker.IsIllusion()) {
             return
         }
         hAttacker = hAttacker.GetSource()
@@ -217,7 +217,7 @@ export class modifier_phantom_assassin_6_particle_phantom_assassin_crit_impact_d
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsClient()) {
-            let vDirection = GameFunc.VectorFunctions.HorizonVector((hParent.GetAbsOrigin() - hCaster.GetAbsOrigin()) as Vector)
+            let vDirection = GFuncVector.HorizonVector((hParent.GetAbsOrigin() - hCaster.GetAbsOrigin()) as Vector)
             let sParticlePath = modifier_phantom_assassin_1_caster.exist(hParent) && "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact_dagger.vpcf" || "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
             let iParticleID = ResHelper.CreateParticle({
                 resPath: sParticlePath,

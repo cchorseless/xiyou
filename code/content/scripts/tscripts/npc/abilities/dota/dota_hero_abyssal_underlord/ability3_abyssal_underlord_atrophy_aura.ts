@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -92,10 +91,10 @@ export class modifier_abyssal_underlord_3_aura extends BaseModifier_Plus {
     duration: number;
     bonus_damage_percent: number;
     IsHidden() {
-        return GameFunc.IsValid(this.GetCasterPlus()) && this.GetParentPlus().GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()
+        return GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetParentPlus().GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()
     }
     IsDebuff() {
-        return GameFunc.IsValid(this.GetCasterPlus()) && this.GetParentPlus().GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()
+        return GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetParentPlus().GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()
     }
     IsPurgable() {
         return false
@@ -130,7 +129,7 @@ export class modifier_abyssal_underlord_3_aura extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (GameFunc.IsValid(hCaster) && hCaster.IsAlive() && !params.unit.IsIllusion() && hCaster.GetTeamNumber() != hParent.GetTeamNumber()) {
+        if (GFuncEntity.IsValid(hCaster) && hCaster.IsAlive() && !params.unit.IsIllusion() && hCaster.GetTeamNumber() != hParent.GetTeamNumber()) {
             let factor = params.unit.IsConsideredHero() && 5 || 1
             // if (!Spawner.IsEndless()) {
             //     this.hModifier1  =  modifier_abyssal_underlord_3_permanent_damage.apply(  hCaster , hCaster, hAbility, { factor=factor })
@@ -142,7 +141,7 @@ export class modifier_abyssal_underlord_3_aura extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.StartIntervalThink(-1)
                 return
             }
@@ -150,10 +149,10 @@ export class modifier_abyssal_underlord_3_aura extends BaseModifier_Plus {
                 let hModifier1 = modifier_abyssal_underlord_3_permanent_damage.findIn(hCaster)
                 let hModifier2 = modifier_abyssal_underlord_3_bonus_attack.findIn(hCaster)
                 let bonus_damage = 0
-                if (GameFunc.IsValid(hModifier1)) {
+                if (GFuncEntity.IsValid(hModifier1)) {
                     bonus_damage = bonus_damage + hModifier1.GetStackCount() * this.permanent_damage
                 }
-                if (GameFunc.IsValid(hModifier2)) {
+                if (GFuncEntity.IsValid(hModifier2)) {
                     bonus_damage = bonus_damage + hModifier2.GetStackCount() * this.bonus_damage
                 }
                 this.SetStackCount(bonus_damage * this.bonus_damage_percent * 0.01)
@@ -164,7 +163,7 @@ export class modifier_abyssal_underlord_3_aura extends BaseModifier_Plus {
     GetPreAttack_BonusDamage() {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
-        if (GameFunc.IsValid(hCaster) && hCaster.GetTeamNumber() == hParent.GetTeamNumber()) {
+        if (GFuncEntity.IsValid(hCaster) && hCaster.GetTeamNumber() == hParent.GetTeamNumber()) {
             return this.GetStackCount()
         }
     }

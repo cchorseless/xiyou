@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -50,12 +49,12 @@ export class ability1_sven_storm_bolt extends ActiveRootAbility {
         return true
     }
     OnAbilityPhaseInterrupted() {
-        if (GameFunc.IsValid(this.hBuffPtcl)) {
+        if (GFuncEntity.IsValid(this.hBuffPtcl)) {
             this.hBuffPtcl.Destroy()
         }
     }
     OnSpellStart() {
-        if (GameFunc.IsValid(this.hBuffPtcl)) {
+        if (GFuncEntity.IsValid(this.hBuffPtcl)) {
             this.hBuffPtcl.Destroy()
         }
 
@@ -168,7 +167,7 @@ export class modifier_sven_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -58,7 +57,7 @@ export class modifier_juggernaut_3 extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: ModifierAttackEvent) {
-        if (!GameFunc.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
+        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
             return
         }
         if (params.attacker == this.GetParentPlus() && BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_CRIT)) {
@@ -71,7 +70,7 @@ export class modifier_juggernaut_3 extends BaseModifier_Plus {
         if (params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             let extra_blade_dance_crit_chance = params.attacker.HasTalent("special_bonus_unique_juggernaut_custom_4") && params.attacker.GetTalentValue("special_bonus_unique_juggernaut_custom_4") || 0
             let blade_dance_crit_chance = this.blade_dance_crit_chance + extra_blade_dance_crit_chance
-            if (GameFunc.mathUtil.PRD(params.attacker, blade_dance_crit_chance, "juggernaut_4")) {
+            if (GFuncMath.PRD(params.attacker, blade_dance_crit_chance, "juggernaut_4")) {
                 return this.blade_dance_crit_mult
             }
         }

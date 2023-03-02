@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -85,7 +84,7 @@ export class modifier_templar_assassin_3 extends BaseModifier_Plus {
         }
 
         let hAbility = this.GetAbilityPlus()
-        let direct = GameFunc.VectorFunctions.HorizonVector((hAtkTarget.GetAbsOrigin() - hParent.GetAbsOrigin()) as Vector)
+        let direct = GFuncVector.HorizonVector((hAtkTarget.GetAbsOrigin() - hParent.GetAbsOrigin()) as Vector)
         let iPositionMove = this.damage_width * 0.5 * direct // 需要按方向移动100码，防止溅射到前面的怪
         let vEndPosition = direct * this.damage_range + iPositionMove + hAtkTarget.GetAbsOrigin()
         let tTargets = []

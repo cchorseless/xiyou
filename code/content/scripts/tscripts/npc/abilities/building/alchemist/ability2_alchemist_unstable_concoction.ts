@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -119,7 +118,7 @@ export class modifier_alchemist_2 extends BaseModifier_Plus {
         let hAbility = this.GetAbilityPlus();
         let hParent = this.GetParentPlus();
         let hTarget = params.target;
-        if (!GameFunc.IsValid(hAbility) || hParent.PassivesDisabled() || !GameFunc.IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop") {
+        if (!GFuncEntity.IsValid(hAbility) || hParent.PassivesDisabled() || !GFuncEntity.IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop") {
             return;
         }
 
@@ -139,11 +138,11 @@ export class modifier_alchemist_2 extends BaseModifier_Plus {
         let hParent = this.GetParentPlus();
         let hAbility = this.GetAbilityPlus();
 
-        if (!GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hAbility)) {
             return;
         }
 
-        if (GameFunc.IsValid(hAttacker) && hAttacker.GetTeamNumber() != hKilled.GetTeamNumber()) {
+        if (GFuncEntity.IsValid(hAttacker) && hAttacker.GetTeamNumber() != hKilled.GetTeamNumber()) {
             let hSource = hAttacker.GetSource();
             if (hSource == hParent || (this.death_radius > 0 && CalcDistanceBetweenEntityOBB(hKilled, hParent) <= this.death_radius)) {
                 hParent.AddNewModifier(hParent, hAbility, "modifier_alchemist_2_buff", { duration: this.duration });

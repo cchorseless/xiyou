@@ -616,14 +616,14 @@ export module AnimationHelper {
     }
 
     interface IAnimationInfo {
-        duration: number;
+        duration?: number;
         activity: number;
         translate?: string;
         translate2?: string;
         rate: number;
     }
     export function StartAnimation(unit: IBaseNpc_Plus, table: IAnimationInfo) {
-        let duration = table.duration;
+        let duration = table.duration || 0;
         let activity = table.activity;
         let translate = table.translate;
         let translate2 = table.translate2;

@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -69,13 +68,13 @@ export class modifier_ursa_2 extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     attackLanded(params: ModifierAttackEvent) {
-        if (!GameFunc.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
+        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker != null && params.attacker == this.GetParentPlus() && !params.attacker.PassivesDisabled()) {
             if (!modifier_ursa_2_buff.exist(params.attacker) || params.attacker.HasScepter()) {
                 let hCaster = this.GetCasterPlus()
                 let chance = this.chance + hCaster.GetTalentValue("special_bonus_unique_ursa_custom_1")
                 let duration = this.duration
-                if (GameFunc.mathUtil.PRD(chance, params.attacker, "ursa_2")) {
+                if (GFuncMath.PRD(chance, params.attacker, "ursa_2")) {
                     modifier_ursa_2_buff.apply(params.attacker, params.attacker, this.GetAbilityPlus(), { duration: duration })
                     params.attacker.StartGesture(GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_3)
                 }

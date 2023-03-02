@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -77,8 +76,8 @@ export class ability1_earthshaker_fissure extends BaseAbility_Plus {
         }
         modifier_earthshaker_1_thinker.applyThinker(((vStartPosition + vTargetPosition) / 2) as Vector, hCaster, this, {
             duration: fissure_duration,
-            vStartPosition: GameFunc.VectorFunctions.VectorToString(vStartPosition),
-            vTargetPosition: GameFunc.VectorFunctions.VectorToString(vTargetPosition),
+            vStartPosition: GFuncVector.VectorToString(vStartPosition),
+            vTargetPosition: GFuncVector.VectorToString(vTargetPosition),
         }, hCaster.GetTeamNumber(), false)
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_EarthShaker.Fissure.Cast", hCaster))
         EmitSoundOnLocationWithCaster(((vStartPosition + vTargetPosition) / 2) as Vector, ResHelper.GetSoundReplacement("Hero_EarthShaker.Fissure", hCaster), hCaster)
@@ -122,7 +121,7 @@ export class modifier_earthshaker_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hAbility)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -264,8 +263,8 @@ export class modifier_earthshaker_1_thinker extends BaseModifier_Plus {
         this.blocker_collision = 64
         this.fissure_range = this.GetAbilityPlus().GetCastRange(hCaster.GetAbsOrigin(), null) + hCaster.GetCastRangeBonus()
         if (IsServer()) {
-            this.vStartPosition = GameFunc.VectorFunctions.StringToVector(params.vStartPosition)
-            this.vTargetPosition = GameFunc.VectorFunctions.StringToVector(params.vTargetPosition)
+            this.vStartPosition = GFuncVector.StringToVector(params.vStartPosition)
+            this.vTargetPosition = GFuncVector.StringToVector(params.vTargetPosition)
             LogHelper.print(params, this.vStartPosition, this.vTargetPosition, 1)
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_earthshaker/earthshaker_fissure.vpcf",
@@ -289,7 +288,7 @@ export class modifier_earthshaker_1_thinker extends BaseModifier_Plus {
             EmitSoundOnLocationWithCaster(this.vStartPosition, ResHelper.GetSoundReplacement("Hero_EarthShaker.FissureDestroy", hCaster), hCaster)
             EmitSoundOnLocationWithCaster(this.vTargetPosition, ResHelper.GetSoundReplacement("Hero_EarthShaker.FissureDestroy", hCaster), hCaster)
             EmitSoundOnLocationWithCaster(((this.vStartPosition + this.vTargetPosition) / 2) as Vector, ResHelper.GetSoundReplacement("Hero_EarthShaker.FissureDestroy", hCaster), hCaster)
-            if (GameFunc.IsValid(hParent)) {
+            if (GFuncEntity.IsValid(hParent)) {
                 UTIL_Remove(hParent)
             }
         }
@@ -309,13 +308,13 @@ export class modifier_earthshaker_1_thinker extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             this.Destroy()
             return
         }
         if (hCaster.HasShard() && params.unit != null && params.unit == hCaster && params.ability != null && !params.ability.IsItem() && params.ability.ProcsMagicStick() && params.unit.IsAlive()) {
             let hAbility4 = hCaster.FindAbilityByName('ability3_earthshaker_aftershock') as ability3_earthshaker_aftershock;
-            if (GameFunc.IsValid(hAbility4) && hAbility4.GetLevel() >= 1 && !hCaster.PassivesDisabled()) {
+            if (GFuncEntity.IsValid(hAbility4) && hAbility4.GetLevel() >= 1 && !hCaster.PassivesDisabled()) {
                 let aftershock_range = hAbility4.GetSpecialValueFor("aftershock_range")
                 let tTargets = FindUnitsInLine(hCaster.GetTeamNumber(), this.vStartPosition, this.vTargetPosition, null, aftershock_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE)
                 let count = math.floor(((this.vTargetPosition - this.vStartPosition) as Vector).Length2D() / 128)

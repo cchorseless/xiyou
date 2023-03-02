@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -98,7 +97,7 @@ export class modifier_monkey_king_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -190,9 +189,9 @@ export class modifier_monkey_king_2_active extends BaseModifierMotionBoth_Plus {
     GetScepterSoldierCount() {
         let hCaster = this.GetCasterPlus()
         let ActivehSoldierCount = 0
-        if (GameFunc.IsValid(hCaster) && hCaster.HasScepter()) {
+        if (GFuncEntity.IsValid(hCaster) && hCaster.HasScepter()) {
             let hAbility3 = ability6_monkey_king_wukongs_command.findIn(hCaster) as ability6_monkey_king_wukongs_command;
-            if (GameFunc.IsValid(hAbility3) && hAbility3.GetLevel() >= 1) {
+            if (GFuncEntity.IsValid(hAbility3) && hAbility3.GetLevel() >= 1) {
                 if (hAbility3.tScepterSoldiers != null) {
                     for (let hSoldier of (hAbility3.tScepterSoldiers)) {
                         if (modifier_monkey_king_6_scepter_active.exist(hSoldier)) {
@@ -277,7 +276,7 @@ export class modifier_monkey_king_2_active extends BaseModifierMotionBoth_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
 
-            if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(this.hTarget)) {
+            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(this.hTarget)) {
                 this.Destroy()
                 return
             }

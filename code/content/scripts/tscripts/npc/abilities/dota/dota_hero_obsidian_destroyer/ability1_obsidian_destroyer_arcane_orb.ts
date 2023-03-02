@@ -94,7 +94,7 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
         let hTarget = params.target
         let hAbility = this.GetAbilityPlus()
 
-        if (!(GameFunc.IsValid(hTarget) && hTarget.GetClassname() != "dota_item_drop" && hAbility.CastFilterResult() == UnitFilterResult.UF_SUCCESS)) {
+        if (!(GFuncEntity.IsValid(hTarget) && hTarget.GetClassname() != "dota_item_drop" && hAbility.CastFilterResult() == UnitFilterResult.UF_SUCCESS)) {
             return
         }
         if (hParent.IsIllusion() || hParent.IsSilenced()) {
@@ -104,7 +104,7 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
             return
         }
         let hBuff = modifier_obsidian_destroyer_1_projectile.apply(hParent, hParent, hAbility)
-        if (GameFunc.IsValid(hBuff)) {
+        if (GFuncEntity.IsValid(hBuff)) {
             print("add success")
         }
     }
@@ -123,7 +123,7 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
     On_Attack(params: ModifierAttackEvent) {
         let hParent = this.GetParentPlus()
         let hTarget = params.target
-        if (!GameFunc.IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop") { return }
+        if (!GFuncEntity.IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop") { return }
 
         if (!params.attacker.IsIllusion() && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USECASTATTACKORB, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS)) {
             if (this.records.indexOf(params.record) != null) {
@@ -134,7 +134,7 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
                 if (hAbility_4 && hAbility_4.GetLevel() >= 1) {
                     let chance = hAbility_4.GetSpecialValueFor("chance")
                     let max_mana_ragen_percent = hAbility_4.GetSpecialValueFor("max_mana_ragen_percent")
-                    if (GameFunc.mathUtil.PRD(chance, this.GetParentPlus(), "obsidian_destroyer_1")) {
+                    if (GFuncMath.PRD(chance, this.GetParentPlus(), "obsidian_destroyer_1")) {
                         // 吸蓝特效
                         let iMaxMana = this.GetParentPlus().GetMaxMana()
                         let iGiveMana = iMaxMana * max_mana_ragen_percent * 0.01
@@ -175,7 +175,7 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
 
                 let targets = AoiHelper.FindEntityInRadius(params.attacker.GetTeamNumber(), params.target.GetAbsOrigin(), radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0)
                 for (let target of (targets)) {
-                    if (GameFunc.IsValid(target) && target.IsAlive()) {
+                    if (GFuncEntity.IsValid(target) && target.IsAlive()) {
                         let damage_table: BattleHelper.DamageOptions = {
                             ability: this.GetAbilityPlus(),
                             victim: target,
@@ -189,7 +189,7 @@ export class modifier_obsidian_destroyer_1 extends BaseModifier_Plus {
                         BattleHelper.GoApplyDamage(damage_table)
                         // 提供精华能量 每次伤害一个目标提供一点能量
                         let hModifier = modifier_obsidian_destroyer_3.findIn(this.GetParentPlus()) as IBaseModifier_Plus;
-                        if (GameFunc.IsValid(hModifier)) {
+                        if (GFuncEntity.IsValid(hModifier)) {
                             hModifier.SetStackCount(this.essence_energy + this.GetParentPlus().GetTalentValue("special_bonus_unique_obsidian_destroyer_custom_4"))
                         }
                     }

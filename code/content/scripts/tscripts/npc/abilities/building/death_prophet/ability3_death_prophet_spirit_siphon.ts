@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -94,7 +93,7 @@ export class modifier_death_prophet_3 extends BaseModifier_Plus {
     SilenceAround() {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (GameFunc.mathUtil.PRD(this.chance, hParent, "death_prophet_4")) {
+        if (GFuncMath.PRD(this.chance, hParent, "death_prophet_4")) {
             let tTargets = FindUnitsInRadius(
                 hParent.GetTeamNumber(),
                 hParent.GetAbsOrigin(),

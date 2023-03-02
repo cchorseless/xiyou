@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -113,7 +112,7 @@ export class modifier_obsidian_destroyer_3 extends BaseModifier_Plus {
         if (params.ability == null || params.ability.IsItem() || !params.ability.ProcsMagicStick() || params.unit != hParent) {
             return
         }
-        if (GameFunc.mathUtil.PRD(this.chance, hParent, "obsidian_destroyer_4")) {
+        if (GFuncMath.PRD(this.chance, hParent, "obsidian_destroyer_4")) {
             // 吸蓝特效
             let iMaxMana = hParent.GetMaxMana()
             let iGiveMana = iMaxMana * this.max_mana_ragen_percent * 0.01
@@ -123,7 +122,7 @@ export class modifier_obsidian_destroyer_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -247,7 +246,7 @@ export class modifier_obsidian_destroyer_3_active extends BaseModifier_Plus {
         if (IsServer()) {
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (GameFunc.IsValid(params.inflictor) && params.attacker == hParent && !params.attacker.IsIllusion() && GameFunc.IsValid(params.unit) && params.unit.IsAlive()) {
+            if (GFuncEntity.IsValid(params.inflictor) && params.attacker == hParent && !params.attacker.IsIllusion() && GFuncEntity.IsValid(params.unit) && params.unit.IsAlive()) {
                 modifier_obsidian_destroyer_3_debuff.apply(params.unit, hParent, hAbility, { duration: this.slow_duration })
             }
         }

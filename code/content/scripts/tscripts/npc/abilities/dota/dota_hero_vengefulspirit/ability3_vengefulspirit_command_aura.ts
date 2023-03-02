@@ -220,7 +220,7 @@ export class modifier_vengefulspirit_3 extends BaseModifier_Plus {
                 return
             }
             let hAbility = params.inflictor
-            if (GameFunc.IsValid(hAbility) && hAbility.IsItem != null && GameFunc.IsValid(params.unit) && hAbility != this.GetAbilityPlus() && !hAbility.IsItem() && !hAbility.IsToggle() && hAbility.ProcsMagicStick()) {
+            if (GFuncEntity.IsValid(hAbility) && hAbility.IsItem != null && GFuncEntity.IsValid(params.unit) && hAbility != this.GetAbilityPlus() && !hAbility.IsItem() && !hAbility.IsToggle() && hAbility.ProcsMagicStick()) {
                 // let vengefulspirit_4_table = Load(hParent, "vengefulspirit_4_table") || {}
                 let vengefulspirit_4_table = [] as any[]
                 // 给主身范围内的友方单位添加主属性
@@ -233,7 +233,7 @@ export class modifier_vengefulspirit_3 extends BaseModifier_Plus {
                 }
                 for (let i = vengefulspirit_4_table.length - 1; i >= 0; i--) {
                     let hClone = vengefulspirit_4_table[i]
-                    if (GameFunc.IsValid(hClone)) {
+                    if (GFuncEntity.IsValid(hClone)) {
                         // 给分身范围内的友方单位添加主属性
                         let tTargets = FindUnitsInRadius(hParent.GetTeamNumber(), hClone.GetAbsOrigin(), null, this.aura_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false)
                         for (let hTarget of (tTargets)) {
@@ -289,7 +289,7 @@ export class modifier_vengefulspirit_3_aura extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
     GetAttackRangeBonus(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(hCaster)) {
+        if (GFuncEntity.IsValid(hCaster)) {
             return this.bonus_attack_range + hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_4")
         }
         return this.bonus_attack_range
@@ -297,7 +297,7 @@ export class modifier_vengefulspirit_3_aura extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CAST_RANGE_BONUS_STACKING)
     GetCastRangeBonusStacking(params: ModifierAbilityEvent) {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(params.ability)) {
+        if (GFuncEntity.IsValid(params.ability)) {
             let arrinfo = GameFunc.IncludeArgs(params.ability.GetBehaviorInt(),
                 DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_ATTACK,
                 DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET,
@@ -308,20 +308,20 @@ export class modifier_vengefulspirit_3_aura extends BaseModifier_Plus {
                 DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_VECTOR_TARGETING,
             )
             if (arrinfo[0]) {
-                if (GameFunc.IsValid(hCaster)) {
+                if (GFuncEntity.IsValid(hCaster)) {
                     return this.bonus_attack_range + hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_4")
                 }
                 return this.bonus_attack_range
             }
             else if (arrinfo[1] || arrinfo[2] || arrinfo[3] || arrinfo[4] || arrinfo[5] || arrinfo[6]) {
-                if (GameFunc.IsValid(hCaster)) {
+                if (GFuncEntity.IsValid(hCaster)) {
                     return this.bonus_cast_range + hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_4")
                 }
                 return this.bonus_cast_range
             }
         }
-        else if (!GameFunc.IsValid(params.ability)) {
-            if (GameFunc.IsValid(hCaster)) {
+        else if (!GFuncEntity.IsValid(params.ability)) {
+            if (GFuncEntity.IsValid(hCaster)) {
                 return this.bonus_cast_range + hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_4")
             }
             return this.bonus_cast_range
@@ -357,7 +357,7 @@ export class modifier_vengefulspirit_3_attributes extends BaseModifier_Plus {
 
     Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
-        this.primary_attributes = this.GetSpecialValueFor("primary_attributes") + (GameFunc.IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_7") || 0)
+        this.primary_attributes = this.GetSpecialValueFor("primary_attributes") + (GFuncEntity.IsValid(hCaster) && hCaster.GetTalentValue("special_bonus_unique_vengefulspirit_custom_7") || 0)
         if (IsServer()) {
             this.IncrementStackCount()
             this.addTimer(params.duration, () => {
@@ -422,7 +422,7 @@ export class modifier_vengefulspirit_3_illusion extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
 
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }
@@ -433,9 +433,9 @@ export class modifier_vengefulspirit_3_illusion extends BaseModifier_Plus {
             }
             for (let i = 0; i <= hParent.GetAbilityCount() - 1, 1; i++) {
                 let hAbility = hParent.GetAbilityByIndex(i)
-                if (GameFunc.IsValid(hAbility)) {
+                if (GFuncEntity.IsValid(hAbility)) {
                     let _hAbility = hCaster.FindAbilityByName(hAbility.GetName())
-                    if (GameFunc.IsValid(_hAbility)) {
+                    if (GFuncEntity.IsValid(_hAbility)) {
                         if (hAbility.GetLevel() != _hAbility.GetLevel()) {
                             hAbility.SetLevel(_hAbility.GetLevel())
                         }

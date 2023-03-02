@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -85,7 +84,7 @@ export class modifier_skeleton_king_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -260,13 +259,13 @@ export class modifier_skeleton_king_6_buff extends BaseModifier_Plus {
 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE_POST_CRIT)
     GetPreAttack_BonusDamage(params: IModifierTable) {
-        if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetStackCount() == 1) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetStackCount() == 1) {
             return modifier_skeleton_king_6_aura.GetStackIn(this.GetCasterPlus(), this.GetCasterPlus())
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamagePostCrit(params: IModifierTable) {
-        if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetStackCount() == 0) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetStackCount() == 0) {
             return modifier_skeleton_king_6_aura.GetStackIn(this.GetCasterPlus(), this.GetCasterPlus())
         }
     }

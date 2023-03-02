@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -106,7 +105,7 @@ export class modifier_shredder_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -246,7 +245,7 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GameFunc.IsValid(this.hBuffPtcl)) {
+            if (GFuncEntity.IsValid(this.hBuffPtcl)) {
                 this.hBuffPtcl.Destroy()
             }
         }
@@ -254,7 +253,7 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
 
     OnStackCountChanged(iOldStackCount: number) {
         if (IsServer()) {
-            if (GameFunc.IsValid(this.hBuffPtcl)) {
+            if (GFuncEntity.IsValid(this.hBuffPtcl)) {
                 let iStackCount = this.GetStackCount()
 
                 let iStackCountPtcl = 0
@@ -288,7 +287,7 @@ export class modifier_shredder_2_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
     CC_GetModifierSpellCriticalStrike(params: IModifierTable) {
-        if (GameFunc.mathUtil.PRD(this.bonus_spell_crit_chance * this.GetStackCount(), this.GetParentPlus(), "modifier_shredder_2_buff")) {
+        if (GFuncMath.PRD(this.bonus_spell_crit_chance * this.GetStackCount(), this.GetParentPlus(), "modifier_shredder_2_buff")) {
             return this.base_spell_crit_damage
         }
     }

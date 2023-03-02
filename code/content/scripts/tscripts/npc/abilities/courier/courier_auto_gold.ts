@@ -66,11 +66,11 @@ export class modifier_builder_gold extends BaseModifier_Plus {
     }
     OnIntervalThink() {
         // let hParent = this.GetParentPlus()
-        // if ( GameFunc.IsValid(hParent) ) {
+        // if ( GFuncEntity.IsValid(hParent) ) {
         // 	if ( PlayerProperty.HasPlus(hParent.GetPlayerOwnerID()) ) {
         // 		this.SetStackCount(1)
         // 		let hAbility = this.GetAbilityPlus()
-        // 		if ( GameFunc.IsValid(hAbility) && hAbility.IsCooldownReady() ) {
+        // 		if ( GFuncEntity.IsValid(hAbility) && hAbility.IsCooldownReady() ) {
         // 			if ( hAbility.GetAutoCastState() ) {
         // 				hAbility.OnSpellStart()
         // 				hAbility.UseResources(false, false, true)

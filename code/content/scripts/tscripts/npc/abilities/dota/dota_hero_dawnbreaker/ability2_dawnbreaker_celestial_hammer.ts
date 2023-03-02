@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -225,7 +224,7 @@ export class ability2_dawnbreaker_celestial_hammer extends BaseAbility_Plus {
     OnProjectileHitHandle(hTarget: IBaseNpc_Plus, vLocation: Vector, projectileHandle: any) {
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
-            if (GameFunc.IsValid(hTarget)) {
+            if (GFuncEntity.IsValid(hTarget)) {
                 //  造成伤害
                 let tDamageTable = {
                     ability: this,
@@ -313,7 +312,7 @@ export class modifier_dawnbreaker_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hAbility)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

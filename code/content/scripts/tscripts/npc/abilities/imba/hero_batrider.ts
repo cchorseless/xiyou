@@ -64,7 +64,7 @@ export class modifier_imba_batrider_sticky_napalm_handler extends BaseModifier_P
             return;
         }
         if (keys.ability == this.GetAbilityPlus()) {
-            if (keys.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION && GameFunc.AsVector(keys.new_pos - this.GetCasterPlus().GetAbsOrigin()).Length2D() <= this.GetAbilityPlus().GetCastRange(this.GetCasterPlus().GetCursorPosition(), this.GetCasterPlus()) + this.GetCasterPlus().GetCastRangeBonus()) {
+            if (keys.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION && GFuncVector.AsVector(keys.new_pos - this.GetCasterPlus().GetAbsOrigin()).Length2D() <= this.GetAbilityPlus().GetCastRange(this.GetCasterPlus().GetCursorPosition(), this.GetCasterPlus()) + this.GetCasterPlus().GetCastRangeBonus()) {
                 this.bActive = true;
             } else {
                 this.bActive = false;
@@ -230,9 +230,9 @@ export class imba_batrider_flamebreak extends BaseAbility_Plus {
             }
         }
         this.projectile_table.vSpawnOrigin = this.GetCasterPlus().GetAbsOrigin();
-        this.projectile_table.fDistance = GameFunc.AsVector(this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Length2D();
+        this.projectile_table.fDistance = GFuncVector.AsVector(this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Length2D();
         this.projectile_table.fExpireTime = GameRules.GetGameTime() + 10.0;
-        this.projectile_table.vVelocity = GameFunc.AsVector(this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Normalized() * this.GetSpecialValueFor("speed") * Vector(1, 1, 0);
+        this.projectile_table.vVelocity = GFuncVector.AsVector(this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Normalized() * this.GetSpecialValueFor("speed") * Vector(1, 1, 0);
         this.projectile_table.ExtraData = {
             flamebreak_dummy_entindex: flamebreak_dummy.entindex(),
             flamebreak_particle: flamebreak_particle
@@ -268,14 +268,14 @@ export class imba_batrider_flamebreak extends BaseAbility_Plus {
         for (const [_, enemy] of ipairs(enemies)) {
             this.initial_damage_table.victim = enemy;
             ApplyDamage(this.initial_damage_table);
-            let v = GameFunc.AsVector(enemy.GetAbsOrigin() - location).Normalized()
+            let v = GFuncVector.AsVector(enemy.GetAbsOrigin() - location).Normalized()
             enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_motion_controller", {
                 distance: this.GetSpecialValueFor("knockback_distance"),
                 direction_x: v.x,
                 direction_y: v.y,
                 direction_z: v.z,
                 duration: this.GetSpecialValueFor("knockback_duration"),
-                height: this.GetSpecialValueFor("knockback_height") * (GameFunc.AsVector(enemy.GetAbsOrigin() - location).Length2D() / this.GetSpecialValueFor("knockback_distance")),
+                height: this.GetSpecialValueFor("knockback_height") * (GFuncVector.AsVector(enemy.GetAbsOrigin() - location).Length2D() / this.GetSpecialValueFor("knockback_distance")),
                 bGroundStop: false,
                 bDecelerate: false,
                 bInterruptible: false,
@@ -396,7 +396,7 @@ export class imba_batrider_firefly extends BaseAbility_Plus {
                     5: "batrider_bat_ability_firefly_09"
                 }
             }
-            this.GetCasterPlus().EmitSound(GameFunc.ArrayFunc.RandomOne(Object.values(this.responses)));
+            this.GetCasterPlus().EmitSound(GFuncRandom.RandomOne(Object.values(this.responses)));
         }
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_batrider_firefly", {
             duration: this.GetTalentSpecialValueFor("duration")
@@ -505,7 +505,7 @@ export class modifier_imba_batrider_firefly extends BaseModifier_Plus {
                                     3: "batrider_bat_ability_firefly_06"
                                 }
                             }
-                            this.GetCasterPlus().EmitSound(GameFunc.ArrayFunc.RandomOne(Object.values(this.responses)));
+                            this.GetCasterPlus().EmitSound(GFuncRandom.RandomOne(Object.values(this.responses)));
                         }
                     }
                 }
@@ -747,12 +747,12 @@ export class modifier_imba_batrider_flaming_lasso extends BaseModifier_Plus {
     }
 
     OnIntervalThink(): void {
-        if (GameFunc.AsVector(this.GetCasterPlus().GetAbsOrigin() - this.current_position).Length2D() > this.break_distance || !this.GetCasterPlus().IsAlive()) {
+        if (GFuncVector.AsVector(this.GetCasterPlus().GetAbsOrigin() - this.current_position).Length2D() > this.break_distance || !this.GetCasterPlus().IsAlive()) {
             this.Destroy();
         } else {
             this.vector = this.GetParentPlus().GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin();
             this.current_position = this.GetCasterPlus().GetAbsOrigin();
-            if (GameFunc.AsVector(this.GetParentPlus().GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Length2D() > this.drag_distance) {
+            if (GFuncVector.AsVector(this.GetParentPlus().GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Length2D() > this.drag_distance) {
                 this.GetParentPlus().SetAbsOrigin(GetGroundPosition(this.GetCasterPlus().GetAbsOrigin() + this.vector.Normalized() * this.drag_distance as Vector, undefined));
             }
         }

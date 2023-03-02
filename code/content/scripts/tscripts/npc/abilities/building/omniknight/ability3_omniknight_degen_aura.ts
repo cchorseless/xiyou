@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -130,7 +129,7 @@ export class modifier_omniknight_3_debuff extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive() || hCaster != params.attacker || hParent != params.unit) {
+        if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive() || hCaster != params.attacker || hParent != params.unit) {
             return
         }
         modifier_omniknight_3_reduce_status.apply(params.unit, hCaster, hAbility, { duration: this.duration })

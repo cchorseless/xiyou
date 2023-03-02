@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -53,7 +52,7 @@ export class modifier_t33_axe_crit extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
     GetProcAttack_BonusDamage_Physical(params: IModifierTable) {
         if (!params.attacker.IsIllusion() && !params.attacker.PassivesDisabled() && !params.attacker.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
-            if (GameFunc.mathUtil.PRD(this.chance, params.attacker, "t33_axe_crit")) {
+            if (GFuncMath.PRD(this.chance, params.attacker, "t33_axe_crit")) {
                 let hCaster = params.attacker
                 let hTarget = params.target
                 let hAbility = this.GetAbilityPlus()

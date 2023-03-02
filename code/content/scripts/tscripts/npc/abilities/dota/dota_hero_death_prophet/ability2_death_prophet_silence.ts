@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -49,11 +48,11 @@ export class ability2_death_prophet_silence extends BaseAbility_Plus {
         let count
         // 单位小于max_count时，可以对同一目标施法多次，但是不超过single_max_count
         for (let hTarget of (tTargets)) {
-            if (GameFunc.IsValid(death_prophet_3) && death_prophet_3.GetLevel() > 0) {
+            if (GFuncEntity.IsValid(death_prophet_3) && death_prophet_3.GetLevel() > 0) {
                 death_prophet_3.ScepterSpirit(hTarget)
             }
             let hModifier = modifier_death_prophet_2_debuff.findIn(hTarget)
-            if (GameFunc.IsValid(hModifier)) {
+            if (GFuncEntity.IsValid(hModifier)) {
                 hModifier.SetDuration(duration, true)
                 hModifier.ForceRefresh()
             } else {
@@ -66,7 +65,7 @@ export class ability2_death_prophet_silence extends BaseAbility_Plus {
             //     let tTempTargets = shallowcopy(tTargets)
             //     let hTarget = GetRandomElement(tTempTargets)
             //     let hModifier  = modifier_death_prophet_2_debuff.findIn(  hTarget )
-            //     while (GameFunc.IsValid(hModifier) && hModifier.GetStackCount() >= single_max_count) {
+            //     while (GFuncEntity.IsValid(hModifier) && hModifier.GetStackCount() >= single_max_count) {
             //         ArrayRemove(tTempTargets, hTarget)
             //         if (tTempTargets.length <= 0) {
             //             break
@@ -74,12 +73,12 @@ export class ability2_death_prophet_silence extends BaseAbility_Plus {
             //         hTarget = GetRandomElement(tTempTargets)
             //         hModifier  = modifier_death_prophet_2_debuff.findIn(  hTarget )
             //     }
-            //     if (GameFunc.IsValid(hTarget)) {
-            //         if (GameFunc.IsValid(death_prophet_3) && death_prophet_3.GetLevel() > 0) {
+            //     if (GFuncEntity.IsValid(hTarget)) {
+            //         if (GFuncEntity.IsValid(death_prophet_3) && death_prophet_3.GetLevel() > 0) {
             //             death_prophet_3.ScepterSpirit(hTarget)
             //         }
             //         let hModifier = hTarget.FindModifierByNameAndCaster("modifier_death_prophet_2_debuff", hCaster)
-            //         if (GameFunc.IsValid(hModifier)) {
+            //         if (GFuncEntity.IsValid(hModifier)) {
             //             hModifier.SetDuration(duration, true)
             //             hModifier.ForceRefresh()
             //         } else {
@@ -133,7 +132,7 @@ export class modifier_death_prophet_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -265,7 +264,7 @@ export class modifier_death_prophet_2_debuff extends BaseModifier_Plus {
             let hAbility = this.GetAbilityPlus()
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
-            if (!GameFunc.IsValid(hAbility) || !GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }
@@ -308,12 +307,12 @@ export class modifier_death_prophet_2_debuff extends BaseModifier_Plus {
             // let iChangedInt = math.floor(iInt) - math.floor(this.iInt)
             // this.iInt = iInt
 
-            // if (!GameFunc.IsValid(hAbility) || !GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            // if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
             //     return
             // }
 
             // let hModifier  = hAbility.GetIntrinsicModifierName(.findIn(  hCaster )
-            // if (GameFunc.IsValid(hModifier)) {
+            // if (GFuncEntity.IsValid(hModifier)) {
             //     hModifier.SetStackCount(hModifier.GetStackCount() + iChangedInt)
             // }
         }

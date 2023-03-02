@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -17,7 +16,7 @@ export class t36_splash extends BaseAbility_Plus {
         let duration = this.GetSpecialValueFor("duration")
         let iStackCount = modifier_t36_splash.GetStackIn(hCaster)
         // let modifier_combination_t36_dragon_kill = Load(hCaster, "modifier_combination_t36_dragon_kill")
-        // let aura_friend_radius = (GameFunc.IsValid(modifier_combination_t36_dragon_kill) && modifier_combination_t36_dragon_kill.GetStackCount() > 0) && modifier_combination_t36_dragon_kill.aura_friend_radius || 0
+        // let aura_friend_radius = (GFuncEntity.IsValid(modifier_combination_t36_dragon_kill) && modifier_combination_t36_dragon_kill.GetStackCount() > 0) && modifier_combination_t36_dragon_kill.aura_friend_radius || 0
         let aura_friend_radius = 1
         if (aura_friend_radius != 0) {
             let teamFilter = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY
@@ -136,7 +135,7 @@ export class modifier_t36_splash extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker
-        if (!GameFunc.IsValid(hAttacker)) {
+        if (!GFuncEntity.IsValid(hAttacker)) {
             return
         }
         if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
@@ -170,14 +169,14 @@ export class modifier_t36_splash extends BaseModifier_Plus {
     GetPreAttack_BonusDamage(params: IModifierTable) {
         let hCaster = this.GetParentPlus()
         // let _modifier_combination_t36_dragon_kill = modifier_combination_t36_dragon_kill.findIn(hCaster) as any;
-        // let attack_extra_bonus_factor = (GameFunc.IsValid(_modifier_combination_t36_dragon_kill) && _modifier_combination_t36_dragon_kill.GetStackCount() > 0) && modifier_combination_t36_dragon_kill.attack_extra_bonus_factor || 0
+        // let attack_extra_bonus_factor = (GFuncEntity.IsValid(_modifier_combination_t36_dragon_kill) && _modifier_combination_t36_dragon_kill.GetStackCount() > 0) && modifier_combination_t36_dragon_kill.attack_extra_bonus_factor || 0
 
         // return this.GetStackCount() * (this.attack_factor + attack_extra_bonus_factor)
     }
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -265,12 +264,12 @@ export class modifier_t36_splash_attack_bonus extends BaseModifier_Plus {
     GetPreAttack_BonusDamage(params: IModifierTable) {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             this.Destroy()
             return
         }
         // let modifier_combination_t36_dragon_kill = modifier_combination_t36_dragon_kill.findIn(hCaster) as any;
-        // let activate_attack_bonus_factor = (GameFunc.IsValid(modifier_combination_t36_dragon_kill) && modifier_combination_t36_dragon_kill.GetStackCount() > 0) && modifier_combination_t36_dragon_kill.activate_attack_bonus_factor || 0
+        // let activate_attack_bonus_factor = (GFuncEntity.IsValid(modifier_combination_t36_dragon_kill) && modifier_combination_t36_dragon_kill.GetStackCount() > 0) && modifier_combination_t36_dragon_kill.activate_attack_bonus_factor || 0
         // return this.GetStackCount() * (this.extra_attack_factor + activate_attack_bonus_factor)
     }
 }

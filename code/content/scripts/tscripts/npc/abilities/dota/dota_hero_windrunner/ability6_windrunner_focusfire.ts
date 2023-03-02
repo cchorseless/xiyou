@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -94,7 +93,7 @@ export class modifier_windrunner_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -185,7 +184,7 @@ export class modifier_windrunner_6_buff extends BaseModifier_Plus {
         this.split_count_scepter = this.GetSpecialValueFor("split_count_scepter")
         if (IsServer()) {
             this.hTarget = EntIndexToHScript(params.iTargetIndex || -1) as IBaseNpc_Plus
-            if (!GameFunc.IsValid(this.hTarget) || !this.hTarget.IsAlive()) {
+            if (!GFuncEntity.IsValid(this.hTarget) || !this.hTarget.IsAlive()) {
                 this.Destroy()
                 return
             }
@@ -198,7 +197,7 @@ export class modifier_windrunner_6_buff extends BaseModifier_Plus {
         if (IsServer()) {
             this.bIsAttackTarget = false
             this.hTarget = EntIndexToHScript(params.iTargetIndex || -1) as IBaseNpc_Plus
-            if (!GameFunc.IsValid(this.hTarget) || !this.hTarget.IsAlive()) {
+            if (!GFuncEntity.IsValid(this.hTarget) || !this.hTarget.IsAlive()) {
                 this.Destroy()
                 return
             }
@@ -237,7 +236,7 @@ export class modifier_windrunner_6_buff extends BaseModifier_Plus {
     OnIntervalThink() {
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(this.hTarget) || !this.hTarget.IsAlive()) {
+            if (!GFuncEntity.IsValid(this.hTarget) || !this.hTarget.IsAlive()) {
                 this.Destroy()
                 return
             }
@@ -276,10 +275,10 @@ export class modifier_windrunner_6_buff extends BaseModifier_Plus {
         let hTarget = params.target
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop") {
+        if (!GFuncEntity.IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop") {
             return
         }
-        if (GameFunc.IsValid(this.hTarget)
+        if (GFuncEntity.IsValid(this.hTarget)
             && this.hTarget == hTarget
             && params.attacker == hParent
             && !BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)) {
@@ -324,9 +323,9 @@ export class modifier_windrunner_6_buff extends BaseModifier_Plus {
             let hAttacker = params.attacker
             let hinflictor = params.inflictor
             let hParent = this.GetParentPlus()
-            if (GameFunc.IsValid(this.hTarget)
-                && GameFunc.IsValid(hAttacker)
-                && GameFunc.IsValid(hinflictor)
+            if (GFuncEntity.IsValid(this.hTarget)
+                && GFuncEntity.IsValid(hAttacker)
+                && GFuncEntity.IsValid(hinflictor)
                 && this.hTarget == hTarget
                 && hAttacker == hParent
                 && hinflictor.IsItem()) {

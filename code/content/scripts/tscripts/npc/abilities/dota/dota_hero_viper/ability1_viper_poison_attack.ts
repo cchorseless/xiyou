@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -85,7 +84,7 @@ export class modifier_viper_1 extends BaseModifier_Plus {
         let hTarget = params.target
         let hParent = params.attacker
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hTarget) ||
+        if (!GFuncEntity.IsValid(hTarget) ||
             hTarget.GetClassname() == "dota_item_drop" ||
             hParent != this.GetParentPlus() ||
             hParent.IsIllusion() ||
@@ -104,7 +103,7 @@ export class modifier_viper_1 extends BaseModifier_Plus {
         let hTarget = params.target
         let hParent = params.attacker
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop" || hParent != this.GetParentPlus() || hParent.IsIllusion()) {
+        if (!GFuncEntity.IsValid(hTarget) || hTarget.GetClassname() == "dota_item_drop" || hParent != this.GetParentPlus() || hParent.IsIllusion()) {
             return
         }
         modifier_viper_1_projectile.remove(hParent);
@@ -123,7 +122,7 @@ export class modifier_viper_1 extends BaseModifier_Plus {
         let hTarget = params.target
         let hParent = params.attacker
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hTarget) || hParent != this.GetParentPlus() || this.records.indexOf(params.record) == -1) {
+        if (!GFuncEntity.IsValid(hTarget) || hParent != this.GetParentPlus() || this.records.indexOf(params.record) == -1) {
             return
         }
         hParent.EmitSound(ResHelper.GetSoundReplacement("hero_viper.poisonAttack.Cast", hParent))
@@ -134,7 +133,7 @@ export class modifier_viper_1 extends BaseModifier_Plus {
         let hTarget = params.target as IBaseNpc_Plus
         let hParent = params.attacker as BaseNpc_Hero_Plus
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hTarget) || hParent != this.GetParentPlus() || this.records.indexOf(params.record) == -1) {
+        if (!GFuncEntity.IsValid(hTarget) || hParent != this.GetParentPlus() || this.records.indexOf(params.record) == -1) {
             return
         }
         let iCount = this.poison_count
@@ -153,7 +152,7 @@ export class modifier_viper_1 extends BaseModifier_Plus {
         let hParent = params.attacker
         let hAbility = this.GetAbilityPlus()
         let index = this.records.indexOf(params.record)
-        if (!GameFunc.IsValid(hTarget) || hParent != this.GetParentPlus() || index == -1) {
+        if (!GFuncEntity.IsValid(hTarget) || hParent != this.GetParentPlus() || index == -1) {
             return
         }
         this.records.splice(index, 1)

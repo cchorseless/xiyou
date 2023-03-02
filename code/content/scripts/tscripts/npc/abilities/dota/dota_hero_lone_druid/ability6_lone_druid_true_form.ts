@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -188,7 +187,7 @@ export class modifier_lone_druid_6_transform extends BaseModifier_Plus {
 
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (GameFunc.IsValid(hParent) && hParent.IsAlive()) {
+            if (GFuncEntity.IsValid(hParent) && hParent.IsAlive()) {
                 if (!hParent.HasShard()) {
                     modifier_lone_druid_6_form.apply(hParent, hParent, this.GetAbilityPlus(), { duration: this.duration })
                 }

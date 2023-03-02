@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -66,25 +65,25 @@ export class ability6_lion_finger_of_death extends BaseAbility_Plus {
     }
 
     OnAbilityPhaseInterrupted() {
-        if (GameFunc.IsValid(this.hParticleModifier)) {
+        if (GFuncEntity.IsValid(this.hParticleModifier)) {
             this.hParticleModifier.Destroy()
         }
         let hTarget = this.GetCursorTarget()
-        if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+        if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
             let hModifier = modifier_lion_6_extra_finger.findIn(hTarget)
-            if (GameFunc.IsValid(hModifier)) {
+            if (GFuncEntity.IsValid(hModifier)) {
                 hModifier.Destroy()
             }
         }
     }
 
     OnSpellStart() {
-        if (GameFunc.IsValid(this.hParticleModifier)) {
+        if (GFuncEntity.IsValid(this.hParticleModifier)) {
             this.hParticleModifier.Destroy()
         }
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         this.tTarget = []
@@ -94,7 +93,7 @@ export class ability6_lion_finger_of_death extends BaseAbility_Plus {
             table.insert(this.tTarget, hTarget)
             this.FingerOfDeath(hTarget)
             for (let unit of (tTargets)) {
-                if (GameFunc.IsValid(unit) && unit.IsAlive() && unit != hTarget) {
+                if (GFuncEntity.IsValid(unit) && unit.IsAlive() && unit != hTarget) {
                     this.FingerOfDeath(unit)
                     table.insert(this.tTarget, unit)
                 }
@@ -117,7 +116,7 @@ export class ability6_lion_finger_of_death extends BaseAbility_Plus {
 
         let vDirection = (hTarget.GetAttachmentOrigin(hTarget.ScriptLookupAttachment("attach_hitloc")) - hCaster.GetAttachmentOrigin(hTarget.ScriptLookupAttachment("attach_attack2"))) as Vector
         let iSign = RollPercentage(50) && 1 || -1
-        let vVector = hCaster.GetAbsOrigin() + vDirection / 2 + iSign * GameFunc.VectorFunctions.Rotation2D(vDirection.Normalized(), math.rad(90)) * 200
+        let vVector = hCaster.GetAbsOrigin() + vDirection / 2 + iSign * GFuncVector.Rotation2D(vDirection.Normalized(), math.rad(90)) * 200
         let vForward = hCaster.GetForwardVector()
 
 
@@ -132,7 +131,7 @@ export class ability6_lion_finger_of_death extends BaseAbility_Plus {
         ParticleManager.SetParticleControlEnt(iParticleID, 1, hTarget, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hTarget.GetAbsOrigin(), true)
         ParticleManager.SetParticleControlEnt(iParticleID, 2, hTarget, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, null, hTarget.GetAbsOrigin(), true)
         ParticleManager.SetParticleControlEnt(iParticleID, 3, hCaster, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, null, hCaster.GetAbsOrigin(), true)
-        ParticleManager.SetParticleControl(iParticleID, 6, (hCaster.GetAbsOrigin() + vDirection / 2 + iSign * GameFunc.VectorFunctions.Rotation2D(vDirection.Normalized(), math.rad(90)) * 200) as Vector)
+        ParticleManager.SetParticleControl(iParticleID, 6, (hCaster.GetAbsOrigin() + vDirection / 2 + iSign * GFuncVector.Rotation2D(vDirection.Normalized(), math.rad(90)) * 200) as Vector)
         ParticleManager.SetParticleControl(iParticleID, 10, hCaster.GetAbsOrigin())
         ParticleManager.SetParticleControlForward(iParticleID, 10, hCaster.GetForwardVector())
         ParticleManager.ReleaseParticleIndex(iParticleID)
@@ -143,7 +142,7 @@ export class ability6_lion_finger_of_death extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_Lion.FingerOfDeathImpact", hCaster), hCaster)
 
         let hAbility4 = ability3_lion_mana_drain.findIn(hCaster)
-        if (GameFunc.IsValid(hAbility4) && hAbility4.GetTargetMana != null) {
+        if (GFuncEntity.IsValid(hAbility4) && hAbility4.GetTargetMana != null) {
             hAbility4.GetTargetMana(hTarget)
         }
     }
@@ -194,7 +193,7 @@ export class modifier_lion_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -286,7 +285,7 @@ export class modifier_lion_6_damage extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus() as ability6_lion_finger_of_death
-            if (GameFunc.IsValid(hCaster) && GameFunc.IsValid(hAbility) && hParent.IsAlive()) {
+            if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(hAbility) && hParent.IsAlive()) {
                 let extra_damage_per_kill = hCaster.GetTalentValue("special_bonus_unique_lion_custom_2")
                 let damage_per_kill = this.damage_per_kill + extra_damage_per_kill
                 let fDamage = hCaster.HasScepter() && this.damage_scepter || this.damage
@@ -312,7 +311,7 @@ export class modifier_lion_6_damage extends BaseModifier_Plus {
                     }
                     if (this.IsAllAlive != null && this.IsAllAlive(tTarget)) {
                         let hModifier = modifier_lion_6_extra_finger.apply(tTarget[0], hCaster, hAbility, null)
-                        if (GameFunc.IsValid(hModifier)) {
+                        if (GFuncEntity.IsValid(hModifier)) {
                             let iCurLevelManaCost = hAbility.GetManaCost(hAbility.GetLevel() - 1)
                             let iExtraStack = this.GetExtraStock(hModifier.GetStackCount())
                             let iCurManaCost = iCurLevelManaCost * iExtraStack
@@ -341,7 +340,7 @@ export class modifier_lion_6_damage extends BaseModifier_Plus {
     }
     IsAllAlive(t: Array<any>) {
         for (let v of (t)) {
-            if (!GameFunc.IsValid(v) || !v.IsAlive()) {
+            if (!GFuncEntity.IsValid(v) || !v.IsAlive()) {
                 return false
             }
         }
@@ -383,14 +382,14 @@ export class modifier_lion_6_delay extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hAbility = this.GetAbilityPlus()
 
-            if (!GameFunc.IsValid(hParent) || !hParent.IsAlive()) {
-                if (GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hParent) || !hParent.IsAlive()) {
+                if (GFuncEntity.IsValid(hCaster)) {
                     let factor = hParent.IsConsideredHero() && 5 || 1
                     let hmodifier_lion_6 = modifier_lion_6.findIn(hCaster)
-                    // if (GameFunc.IsValid(hmodifier_lion_6) && !Spawner.IsEndless()) {
+                    // if (GFuncEntity.IsValid(hmodifier_lion_6) && !Spawner.IsEndless()) {
                     //     hmodifier_lion_6.SetStackCount(hmodifier_lion_6.GetStackCount() + factor)
                     // }
-                    if (GameFunc.IsValid(hAbility)) {
+                    if (GFuncEntity.IsValid(hAbility)) {
                         let kill_cooldown_reduce = hAbility.GetSpecialValueFor("kill_cooldown_reduce")
                         if (!hAbility.IsCooldownReady()) {
                             let fCooldownTime = hAbility.GetCooldownTimeRemaining()
@@ -443,7 +442,7 @@ export class modifier_lion_6_extra_finger extends BaseModifier_Plus {
     BeDestroy() {
 
         let ability = this.GetAbilityPlus() as ability6_lion_finger_of_death
-        if (GameFunc.IsValid(this.GetAbilityPlus()) && ability.fManaCostFactor != null) {
+        if (GFuncEntity.IsValid(this.GetAbilityPlus()) && ability.fManaCostFactor != null) {
             ability.fManaCostFactor = null
         }
     }

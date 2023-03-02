@@ -53,7 +53,7 @@ export class ability6_keeper_of_the_light_spirit_form extends BaseAbility_Plus {
     }
     Bling() {
         for (let hModifier of (this.tModifiers)) {
-            if (GameFunc.IsValid(hModifier)) {
+            if (GFuncEntity.IsValid(hModifier)) {
                 let iCount = this.GetCasterPlus().HasTalent("special_bonus_unique_keeper_of_the_light_custom_5") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_keeper_of_the_light_custom_5") || 1
                 hModifier.SetStackCount(hModifier.GetStackCount() + iCount)
             }
@@ -99,10 +99,10 @@ export class ability6_keeper_of_the_light_spirit_form extends BaseAbility_Plus {
                                 //     this.GetCasterPlus().GetPlayerOwnerID(),
                                 //     (hBuilding) => {
                                 //         let hUnit = hBuilding.GetUnitEntity()
-                                //         if (GameFunc.IsValid(hUnit) && hUnit.GetUnitLabel() == "HERO") {
+                                //         if (GFuncEntity.IsValid(hUnit) && hUnit.GetUnitLabel() == "HERO") {
                                 //             for (let i = 0; i <= 16; i++) {
                                 //                 let hAbility = hBuilding.GetUnitEntity().GetAbilityByIndex(i)
-                                //                 if (GameFunc.IsValid(hAbility) && hAbility.GetLevel() > 0 && hAbility.GetCooldownTimeRemaining() > 0) {
+                                //                 if (GFuncEntity.IsValid(hAbility) && hAbility.GetLevel() > 0 && hAbility.GetCooldownTimeRemaining() > 0) {
                                 //                     let flCooldown = hAbility.GetCooldownTimeRemaining() - flCooldownReduce
                                 //                     hAbility.EndCooldown()
                                 //                     if (flCooldown > 0) {
@@ -183,7 +183,7 @@ export class modifier_keeper_of_the_light_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -284,7 +284,7 @@ export class modifier_keeper_of_the_light_6_wisp extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
             }
         }
@@ -298,11 +298,11 @@ export class modifier_keeper_of_the_light_6_wisp extends BaseModifier_Plus {
             this.GetParentPlus().StopSound("Hero_KeeperOfTheLight.Wisp.Aura")
             this.GetParentPlus().StopSound("Hero_KeeperOfTheLight.Wisp.Destroy")
 
-            if (GameFunc.IsValid(this.GetParentPlus()) && this.GetParentPlus().IsAlive()) {
+            if (GFuncEntity.IsValid(this.GetParentPlus()) && this.GetParentPlus().IsAlive()) {
                 this.GetParentPlus().ForceKill(false)
             }
             hParent.EmitSound("Hero_KeeperOfTheLight.BlindingLight")
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 return
             }
             GameFunc.ArrayFunc.ArrayRemove((this.GetAbilityPlus() as ability6_keeper_of_the_light_spirit_form).tWisp, hParent)
@@ -340,7 +340,7 @@ export class modifier_keeper_of_the_light_6_wisp extends BaseModifier_Plus {
                 }
             }
         } else {
-            if (GameFunc.IsValid(hCaster) && hCaster.HasScepter()) {
+            if (GFuncEntity.IsValid(hCaster) && hCaster.HasScepter()) {
                 let radius = this.GetSpecialValueFor("radius")
                 let iParticleID = ResHelper.CreateParticle({
                     resPath: "particles/units/heroes/hero_keeper_of_the_light/keeper_of_the_light_blinding_light_aoe.vpcf",
@@ -360,7 +360,7 @@ export class modifier_keeper_of_the_light_6_wisp extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let vParent = hParent.GetAbsOrigin()
-        if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hParent)) {
+        if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hParent)) {
             this.Destroy()
             return
         }
@@ -383,7 +383,7 @@ export class modifier_keeper_of_the_light_6_wisp extends BaseModifier_Plus {
     UnBling() {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
-        if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hParent)) {
+        if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hParent)) {
             this.Destroy()
             return
         }

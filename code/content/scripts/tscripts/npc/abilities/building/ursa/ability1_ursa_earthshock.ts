@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -108,12 +107,12 @@ export class modifier_ursa_1 extends BaseModifier_Plus {
 
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     attackLanded(params: ModifierAttackEvent) {
-        if (!GameFunc.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
+        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
             return;
         }
         if (params.attacker != null && params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion() && !params.attacker.PassivesDisabled()) {
             let hAbility = this.GetAbilityPlus();
-            if (!GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hAbility)) {
                 return;
             }
             if (
@@ -127,7 +126,7 @@ export class modifier_ursa_1 extends BaseModifier_Plus {
                 ) == UnitFilterResult.UF_SUCCESS
             ) {
                 let chance = this.shock_chance + modifier_ursa_6_buff.GetStackIn(params.attacker) * this.shock_chance_per_stack;
-                if (GameFunc.mathUtil.PRD(chance, params.attacker, "ursa_1_earthshock")) {
+                if (GFuncMath.PRD(chance, params.attacker, "ursa_1_earthshock")) {
                     hAbility.UseResources(true, true, true);
                     let fDamage =
                         this.shock_damage +

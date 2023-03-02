@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -56,7 +55,7 @@ export class ability6_necrolyte_reapers_scythe extends BaseAbility_Plus {
         let damage_factor = this.GetSpecialValueFor("damage_factor")
         let scepter_aoe_radius = this.GetSpecialValueFor("scepter_aoe_radius")
         let scepter_extra_count = this.GetSpecialValueFor("scepter_extra_count")
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (hTarget.TriggerSpellAbsorb(this)) {
@@ -65,11 +64,11 @@ export class ability6_necrolyte_reapers_scythe extends BaseAbility_Plus {
         // 声音
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Necrolyte.ReapersScythe.Cast", hCaster))
 
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         this.ApplyDamage(hTarget)
-        if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+        if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
             modifier_necrolyte_6_stun.apply(hTarget, hCaster, this, { duration: stun_duration })
         }
 
@@ -82,7 +81,7 @@ export class ability6_necrolyte_reapers_scythe extends BaseAbility_Plus {
             for (let hUnit of (tTargets)) {
                 if (hUnit != hTarget) {
                     this.ApplyDamage(hTarget)
-                    if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+                    if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
                         modifier_necrolyte_6_stun.apply(hUnit, hCaster, this, { duration: stun_duration })
                     }
 
@@ -99,7 +98,7 @@ export class ability6_necrolyte_reapers_scythe extends BaseAbility_Plus {
         return "modifier_necrolyte_6"
     }
     ApplyDamage(hUnit: IBaseNpc_Plus) {
-        if (!GameFunc.IsValid(hUnit)
+        if (!GFuncEntity.IsValid(hUnit)
             || !hUnit.IsAlive()) {
             return
         }
@@ -287,7 +286,7 @@ export class modifier_necrolyte_6_stun extends BaseModifier_Plus {
         let hTarget = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hTarget)) {
+            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hTarget)) {
                 return
             }
             let fLoseHealth = math.max(hTarget.GetMaxHealth() - hTarget.GetHealth(), 0)
@@ -332,7 +331,7 @@ export class modifier_necrolyte_6_stun extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     OnTakeDamage(params: IModifierTable) {
-        if (GameFunc.IsValid(params.unit) && params.unit == this.GetParentPlus() && !this.passing) {
+        if (GFuncEntity.IsValid(params.unit) && params.unit == this.GetParentPlus() && !this.passing) {
             if (params.damage >= params.unit.GetHealth()) {
                 this.passing = true
                 params.unit.Kill(this.GetAbilityPlus(), this.GetCasterPlus())

@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -78,7 +77,7 @@ export class modifier_slark_6 extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
@@ -125,7 +124,7 @@ export class modifier_slark_6 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACKED)
     attacked(params: IModifierTable) {
         let hParent = this.GetParentPlus()
-        if (GameFunc.IsValid(hParent) && params.attacker == hParent && !params.attacker.IsIllusion() && !hParent.PassivesDisabled()) {
+        if (GFuncEntity.IsValid(hParent) && params.attacker == hParent && !params.attacker.IsIllusion() && !hParent.PassivesDisabled()) {
             if (!BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS) && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, hParent.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
                 let damage_factor = this.damage_factor + hParent.GetTalentValue("special_bonus_unique_slark_custom_4")
                 let fDamage = (hParent.GetStrength() + hParent.GetAgility() + hParent.GetIntellect()) * damage_factor

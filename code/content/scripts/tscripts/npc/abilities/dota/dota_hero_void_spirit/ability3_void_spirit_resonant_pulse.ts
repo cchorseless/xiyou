@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -66,8 +65,8 @@ export class ability3_void_spirit_resonant_pulse extends BaseAbility_Plus {
         }
     }
     UseSpell() {
-        if (!GameFunc.IsValid(this)
-            || !GameFunc.IsValid(this.GetCasterPlus())) {
+        if (!GFuncEntity.IsValid(this)
+            || !GFuncEntity.IsValid(this.GetCasterPlus())) {
             return
         }
 
@@ -139,12 +138,12 @@ export class ability3_void_spirit_resonant_pulse extends BaseAbility_Plus {
     }
     //  这个技能都用这个应用伤害
     GoApplyDamage(hTarget: IBaseNpc_Plus) {
-        if (!GameFunc.IsValid(hTarget)) {
+        if (!GFuncEntity.IsValid(hTarget)) {
             return
         }
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
         let iDamagePct = 100
-        if (GameFunc.IsValid(hCaster.hParent)
+        if (GFuncEntity.IsValid(hCaster.hParent)
             && hCaster.IsDummy) {
             hCaster = hCaster.hParent as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
             //  灵扉只造成一定百分比伤害
@@ -171,29 +170,29 @@ export class ability3_void_spirit_resonant_pulse extends BaseAbility_Plus {
     }
     //  触发被动
     UseIllusionSpell() {
-        if (!GameFunc.IsValid(this)
-            || !GameFunc.IsValid(this.GetCasterPlus())) {
+        if (!GFuncEntity.IsValid(this)
+            || !GFuncEntity.IsValid(this.GetCasterPlus())) {
             return
         }
 
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
-        if (GameFunc.IsValid(hCaster)
+        if (GFuncEntity.IsValid(hCaster)
             && !hCaster.IsIllusion()
             && !hCaster.IsDummy
             && hCaster.tIlls) {
             let hOriAbility = ability3_void_spirit_resonant_pulse.findIn(hCaster)
-            let iOriLevel = GameFunc.IsValid(hOriAbility) && hOriAbility.GetLevel() || -1
+            let iOriLevel = GFuncEntity.IsValid(hOriAbility) && hOriAbility.GetLevel() || -1
             if (iOriLevel <= 0) {
                 return
             }
             //  灵扉施法
             for (let hIll of (hCaster.tIlls)) {
-                if (GameFunc.IsValid(hIll) && hIll.bActive) {
+                if (GFuncEntity.IsValid(hIll) && hIll.bActive) {
                     //  激活概率判断
                     let iActivePct = hCaster.iActivePct
                     if (RandomInt(1, 100) < iActivePct) {
                         let hAbility = ability3_void_spirit_resonant_pulse.findIn(hIll)
-                        if (!GameFunc.IsValid(hAbility)) {
+                        if (!GFuncEntity.IsValid(hAbility)) {
                             hAbility = hIll.AddAbility("void_spirit_2")
                             hAbility.SetLevel(iOriLevel)
                         }
@@ -215,7 +214,7 @@ export class ability3_void_spirit_resonant_pulse extends BaseAbility_Plus {
     }
     GetOriCaster() {
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
-        if (GameFunc.IsValid(hCaster.hParent)
+        if (GFuncEntity.IsValid(hCaster.hParent)
             && hCaster.IsDummy) {
             hCaster = hCaster.hParent as any
         }
@@ -257,7 +256,7 @@ export class modifier_void_spirit_2 extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return

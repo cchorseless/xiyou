@@ -1,6 +1,5 @@
 
 import { AI_ability } from "../../../../ai/AI_ability";
-import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -125,7 +124,7 @@ export class modifier_abyssal_underlord_1_debuff extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (GameFunc.IsValid(hCaster) && GameFunc.IsValid(hParent) && GameFunc.IsValid(hAbility)) {
+            if (GFuncEntity.IsValid(hCaster) && GFuncEntity.IsValid(hParent) && GFuncEntity.IsValid(hAbility)) {
                 let tDamageTable: BattleHelper.DamageOptions = {
                     ability: this.GetAbilityPlus(),
                     victim: hParent,
@@ -141,7 +140,7 @@ export class modifier_abyssal_underlord_1_debuff extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     on_death(params: ModifierInstanceEvent) {
         let hAttacker = params.attacker
-        if (!GameFunc.IsValid(hAttacker)) {
+        if (!GFuncEntity.IsValid(hAttacker)) {
             return
         }
         if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
@@ -191,7 +190,7 @@ export class modifier_abyssal_underlord_1_thinker extends modifier_particle_thin
         let hAbility = this.GetAbilityPlus()
         let vPosition = hParent.GetAbsOrigin()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
                 this.Destroy()
                 return
             }

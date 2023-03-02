@@ -7,11 +7,11 @@ declare global {
         hAbility: IBaseAbility_Plus;
         iMoveSpeed: number;
         EffectName: string;
-        SoundName: string;
+        SoundName?: string;
         flRadius: number;
         bDodgeable: boolean;
         bDestroyOnDodge: boolean;
-        iSourceAttachment: DOTAProjectileAttachment_t;
+        iSourceAttachment?: DOTAProjectileAttachment_t;
         OnProjectileHitUnit?: IGHandler;
         OnProjectileDestroy?: IGHandler
         flMaxDistance?: number;

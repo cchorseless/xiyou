@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -61,7 +60,7 @@ export class ability3_spectre_dispersion extends BaseAbility_Plus {
             hIllusion.SetControllableByPlayer(-1, true)
             // hIllusion.ModifyMaxHealth(fMaxHealth - hIllusion.GetMaxHealth())
             hIllusion.SetForceAttackTarget(null)
-            modifier_spectre_3_ghost.apply(hIllusion, hCaster, this, { duration: illusion_duration, hTargetIndex: GameFunc.IsValid(hTarget) && hTarget.GetEntityIndex() || null })
+            modifier_spectre_3_ghost.apply(hIllusion, hCaster, this, { duration: illusion_duration, hTargetIndex: GFuncEntity.IsValid(hTarget) && hTarget.GetEntityIndex() || null })
             // modifier_building.remove(hIllusion);
         } else {
             this.addTimer(fDelay, () => {
@@ -71,7 +70,7 @@ export class ability3_spectre_dispersion extends BaseAbility_Plus {
                 hIllusion.SetControllableByPlayer(-1, true)
                 // hIllusion.ModifyMaxHealth(fMaxHealth - hIllusion.GetMaxHealth())
                 hIllusion.SetForceAttackTarget(null)
-                modifier_spectre_3_ghost.apply(hIllusion, hCaster, this, { duration: illusion_duration, hTargetIndex: GameFunc.IsValid(hTarget) && hTarget.GetEntityIndex() || null })
+                modifier_spectre_3_ghost.apply(hIllusion, hCaster, this, { duration: illusion_duration, hTargetIndex: GFuncEntity.IsValid(hTarget) && hTarget.GetEntityIndex() || null })
                 // modifier_building.remove(hIllusion);
             })
         }
@@ -142,10 +141,10 @@ export class modifier_spectre_3 extends BaseModifier_Plus {
             let hAbility = this.GetAbilityPlus() as ability3_spectre_dispersion
             let hTarget = hCaster.GetAttackTarget() as IBaseNpc_Plus
             let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), null, hCaster.Script_GetAttackRange(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
-            if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+            if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
                 hTarget = tTarget[0] as IBaseNpc_Plus
             }
-            if (GameFunc.IsValid(hAbility)) {
+            if (GFuncEntity.IsValid(hAbility)) {
                 hAbility.CreateGhost(hTarget)
                 modifier_spectre_3_particle_illusion_created.apply(hCaster, hCaster, hAbility, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
             }
@@ -154,7 +153,7 @@ export class modifier_spectre_3 extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOTALDAMAGEOUTGOING_PERCENTAGE)
     GetTotalDamageOutgoing_Percentage(params: IModifierTable) {
         let hParent = this.GetParentPlus()
-        if (!GameFunc.IsValid(params.target)) { return }
+        if (!GFuncEntity.IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         if (params.attacker == hParent && !params.attacker.IsIllusion()) {
             // * hParent.GetLifestealAmplifyFactor()
@@ -164,7 +163,7 @@ export class modifier_spectre_3 extends BaseModifier_Plus {
                 return
             }
             let hModifier = modifier_spectre_3_buff.findIn(hParent) as modifier_spectre_3_buff;
-            if (GameFunc.IsValid(hModifier)) {
+            if (GFuncEntity.IsValid(hModifier)) {
                 let iStackCount = hModifier.GetStackCount()
                 if (iStackCount >= hParent.GetStrength() * this.str_factor) {
                     return
@@ -264,7 +263,7 @@ export class modifier_spectre_3_ghost extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
                 return
             }
             let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), this.radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, 0)
@@ -290,15 +289,15 @@ export class modifier_spectre_3_ghost extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
                 this.StartIntervalThink(-1)
                 return
             }
-            if (!GameFunc.IsValid(this.hTarget) || !this.hTarget.IsAlive()) {
+            if (!GFuncEntity.IsValid(this.hTarget) || !this.hTarget.IsAlive()) {
                 // let iPlayerID = hCaster.GetPlayerOwnerID()
                 // let tTargets = ShuffledList(Spawner.GetMissing(iPlayerID))
                 // let hTarget = tTargets[0]
-                // if (GameFunc.IsValid(hTarget)) {
+                // if (GFuncEntity.IsValid(hTarget)) {
                 //     hParent.SetForceAttackTarget(null)
                 //     this.hTarget = hTarget
                 //     if (((hTarget.GetAbsOrigin() - hParent.GetAbsOrigin()) as Vector).Length2D() > 1000) {

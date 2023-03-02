@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -91,11 +90,11 @@ export class ability6_pangolier_gyroshell extends BaseAbility_Plus {
             modifier_pangolier_6_jump_start.apply(hCaster, hCaster, this, { duration: jump_duration })
             //  添加反向技能
             // let pangolier_3_bounce = pangolier_3_bounce.findIn(hCaster)
-            // if (!GameFunc.IsValid(pangolier_3_bounce)) {
+            // if (!GFuncEntity.IsValid(pangolier_3_bounce)) {
             //     pangolier_3_bounce = hCaster.AddAbility("pangolier_3_bounce")
             //     hCaster.SwapAbilities("pangolier_3", "pangolier_3_bounce", false, true)
             // }
-            // if (GameFunc.IsValid(pangolier_3_bounce)) {
+            // if (GFuncEntity.IsValid(pangolier_3_bounce)) {
             //     pangolier_3_bounce.SetLevel(1)
             //     this.SetActivated(false)
             //     if (pangolier_3_bounce.GetAutoCastState() != this.GetAutoCastState()) {
@@ -159,7 +158,7 @@ export class modifier_pangolier_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -412,7 +411,7 @@ export class modifier_pangolier_6_rolling extends BaseModifierMotionHorizontal_P
             modifier_pangolier_6_jump_back.apply(hCaster, hCaster, hAbility, { duration: this.jump_recover_time })
             modifier_pangolier_6_swashbuckle.remove(hCaster);
             let hParticleModifier = modifier_pangolier_6_particle_pangolier_gyroshell_cast.findIn(hCaster)
-            if (GameFunc.IsValid(hParticleModifier)) {
+            if (GFuncEntity.IsValid(hParticleModifier)) {
                 hParticleModifier.Destroy()
             }
         }
@@ -522,10 +521,10 @@ export class modifier_pangolier_6_jump_back extends BaseModifierMotionBoth_Plus 
     BeDestroy() {
 
         if (IsServer()) {
-            //  if ( GameFunc.IsValid(this.hPtclThinker) ) {
+            //  if ( GFuncEntity.IsValid(this.hPtclThinker) ) {
             //  	 this.hPtclThinker.sPtclName.remove( this.hPtclThinker );
             //  }
-            if (GameFunc.IsValid(this.hParticleModifier)) {
+            if (GFuncEntity.IsValid(this.hParticleModifier)) {
                 this.hParticleModifier.Destroy()
             }
             let hCaster = this.GetCasterPlus()
@@ -843,7 +842,7 @@ export class modifier_pangolier_6_swashbuckle extends BaseModifier_Plus {
 
         let direction_count = hCaster.HasTalent("special_bonus_unique_pangolier_custom_3") && 4 || 1
         for (let i = 1; i <= direction_count; i++) {
-            let vPosition = GameFunc.VectorFunctions.Rotation2D(vDirection, math.rad(i * 90 - 90)) * iRange + hCaster.GetAbsOrigin()
+            let vPosition = GFuncVector.Rotation2D(vDirection, math.rad(i * 90 - 90)) * iRange + hCaster.GetAbsOrigin()
             hAbility.Swashbuckle(hCaster.GetAbsOrigin(), vPosition as Vector, strikes)
         }
     }

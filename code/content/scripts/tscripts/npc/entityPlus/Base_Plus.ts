@@ -55,7 +55,7 @@ export class BaseItem implements ET.IEntityRoot {
         let hItem = BaseItem.CreateItem(itemname, player, player)
         hItem.SetPurchaseTime(0);
         hUnit.AddItem(hItem);
-        if (GameFunc.IsValid(hItem) && hItem.GetOwnerPlus() != hUnit && hItem.GetContainer() == null) {
+        if (GFuncEntity.IsValid(hItem) && hItem.GetOwnerPlus() != hUnit && hItem.GetContainer() == null) {
             hItem.SetParent(hUnit, "");
             hItem.CreateItemOnPositionRandom(hUnit.GetAbsOrigin());
         }
@@ -560,6 +560,20 @@ export class BaseModifierMotion extends BaseModifier {
             return true;
         }
     }
+    static FindAllMotionBuff?(parent: CDOTA_BaseNPC) {
+        let modifiers = parent.FindAllModifiers() as IBaseModifier_Plus[];
+        let motion_buffs = [];
+        for (const modifier of (modifiers)) {
+            if (modifier instanceof BaseModifierMotion) {
+                motion_buffs.push(modifier);
+            }
+        }
+        return motion_buffs;
+    }
+
+    static RemoveAllMotionBuff?(parent: CDOTA_BaseNPC) {
+        this.FindAllMotionBuff(parent).forEach((motion_buff) => { motion_buff.Destroy() });
+    }
 }
 
 export interface BaseModifierMotionHorizontal extends CDOTA_Modifier_Lua_Horizontal_Motion { }
@@ -702,69 +716,3 @@ function toDotaClassInstance(instance: any, table: new () => any) {
     }
 }
 
-/**
- * @Both
- * @param ability 
- * @returns 
- */
-function SafeDestroyAbility(ability: BaseAbility) {
-    if (GameFunc.IsValid(ability)) {
-        if (ability.__safedestroyed__) {
-            return;
-        }
-        ability.__safedestroyed__ = true;
-        GTimerHelper.ClearAll(ability);
-        ability.Destroy();
-        UTIL_Remove(ability);
-    }
-}
-
-/**
- * @Both
- * @param item 
- * @returns 
- */
-function SafeDestroyItem(item: BaseItem) {
-    if (GameFunc.IsValid(item)) {
-        if (item.__safedestroyed__) {
-            return;
-        }
-        item.__safedestroyed__ = true;
-        GTimerHelper.ClearAll(item);
-        item.Destroy();
-        UTIL_Remove(item);
-    }
-}
-
-/**
- * @Both
- * @param unit 
- * @returns 
- */
-function SafeDestroyUnit(unit: BaseNpc) {
-    if (GameFunc.IsValid(unit)) {
-        if (unit.__safedestroyed__) {
-            return;
-        }
-        unit.__safedestroyed__ = true;
-        if (IsServer()) {
-            let allm = unit.FindAllModifiers();
-            for (let m of allm) {
-                m.Destroy();
-            }
-        }
-        GTimerHelper.ClearAll(unit);
-        UTIL_Remove(unit);
-    }
-}
-
-declare global {
-    var GDestroyAbility: typeof SafeDestroyAbility;
-    var GDestroyItem: typeof SafeDestroyItem;
-    var GDestroyUnit: typeof SafeDestroyUnit;
-}
-if (_G.GDestroyAbility == null) {
-    _G.GDestroyAbility = SafeDestroyAbility;
-    _G.GDestroyItem = SafeDestroyItem;
-    _G.GDestroyUnit = SafeDestroyUnit;
-}

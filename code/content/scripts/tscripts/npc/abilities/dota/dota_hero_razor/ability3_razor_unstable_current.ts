@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -57,7 +56,7 @@ export class modifier_razor_3 extends BaseModifier_Plus {
     ATtackLanded(params: ModifierAttackEvent) {
         let hAttacker = params.attacker as IBaseNpc_Plus
         let hTarget = params.target as IBaseNpc_Plus
-        if (GameFunc.IsValid(hAttacker) && GameFunc.IsValid(hTarget)) {
+        if (GFuncEntity.IsValid(hAttacker) && GFuncEntity.IsValid(hTarget)) {
             let iAttackDamage = hAttacker.GetAverageTrueAttackDamage(null)
             let iShockCount = this.GetSpecialValueFor("attack_damage_shock_pct")
             let iShockDamagePct = this.GetSpecialValueFor("attack_shock_damage_pct")

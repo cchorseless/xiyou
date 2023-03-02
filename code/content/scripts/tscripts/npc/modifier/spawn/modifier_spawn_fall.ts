@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifierMotionVertical_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
@@ -30,7 +29,7 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
             }
 
             // 初始化高度
-            this.vStartPosition = GameFunc.AsVector(GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus()) + Vector(0, 0, 1000));
+            this.vStartPosition = GFuncVector.AsVector(GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus()) + Vector(0, 0, 1000));
             this.GetParentPlus().SetOrigin(this.vStartPosition);
 
             //  play_particle("particles/econ/items/natures_prophet/natures_prophet_weapon_sufferwood/furion_teleport_end_team_sufferwood.vpcf",ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW,this.GetParentPlus(),5)
@@ -46,7 +45,7 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
             //  })
 
             // 目标点
-            this.vTargetPosition = GameFunc.AsVector(GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus()));
+            this.vTargetPosition = GFuncVector.AsVector(GetGroundPosition(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus()));
         }
     }
 
@@ -70,10 +69,10 @@ export class modifier_spawn_fall extends BaseModifierMotionVertical_Plus {
 
     UpdateVerticalMotion(me: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
-            let curr_position = GameFunc.AsVector(this.GetParentPlus().GetOrigin() + Vector(0, 0, -60));
+            let curr_position = GFuncVector.AsVector(this.GetParentPlus().GetOrigin() + Vector(0, 0, -60));
             me.SetAbsOrigin(curr_position);
             //  判断是否到达了地面
-            if (GameFunc.AsVector(me.GetOrigin() - this.vTargetPosition).Length() < 30) {
+            if (GFuncVector.AsVector(me.GetOrigin() - this.vTargetPosition).Length() < 30) {
                 // 到终点了
                 me.SetAbsOrigin(this.vTargetPosition);
                 me.InterruptMotionControllers(true);

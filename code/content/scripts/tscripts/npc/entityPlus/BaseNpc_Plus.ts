@@ -1,12 +1,27 @@
 
-import { GameFunc } from "../../GameFunc";
 import { ResHelper } from "../../helper/ResHelper";
 import { BaseItem_Plus } from "./BaseItem_Plus";
 import { BaseNpc } from "./Base_Plus";
 /**普通NPC单位基类 */
 export class BaseNpc_Plus extends BaseNpc {
+    /**
+     * todo
+     * @returns 
+     */
+    WillReincarnatePlus?() {
+        return true;
+    }
+    /**
+     * todo
+     * @returns 
+     */
+    GetAdditionalOwnedUnitsPlus?() {
+        return [] as BaseNpc_Plus[];
+    }
 
-
+    GetIllusionBounty?() {
+        return this.GetLevel() * 2;
+    }
 
     IsRoshan?() {
         return false;
@@ -42,7 +57,7 @@ export class BaseNpc_Plus extends BaseNpc {
             }
         }
         if ((bit.band(flags, ResHelper.EDOTA_CAST_SOUND.FLAG_WHILE_DEAD) > 0) || this.IsAlive()) {
-            let sound = GameFunc.ArrayFunc.RandomArray(tSoundNames)[0];
+            let sound = GFuncRandom.RandomArray(tSoundNames)[0];
             if (bit.band(flags, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS) > 0) {
                 this.EmitSound(sound);
             } else {
@@ -102,7 +117,7 @@ export class BaseNpc_Plus extends BaseNpc {
 
     GetSource?() {
         if (this.IsSummoned() || this.IsClone() || this.IsIllusion()) {
-            return GameFunc.IsValid(this.GetSummoner()) && this.GetSummoner() || this;
+            return GFuncEntity.IsValid(this.GetSummoner()) && this.GetSummoner() || this;
         }
         return this
     }
@@ -192,7 +207,7 @@ export class BaseNpc_Plus extends BaseNpc {
                 let item = this.GetItemInSlot(i)
                 if (item != null) {
                     let illusion_item = BaseItem_Plus.CreateItem(item.GetName(), illusion as any, illusion as any)
-                    if (GameFunc.IsValid(illusion_item)) {
+                    if (GFuncEntity.IsValid(illusion_item)) {
                         illusion_item.EndCooldown()
                         illusion_item.SetPurchaser(null)
                         illusion_item.SetShareability(EShareAbility.ITEM_FULLY_SHAREABLE)

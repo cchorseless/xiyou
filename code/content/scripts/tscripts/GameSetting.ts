@@ -1,4 +1,3 @@
-import { GameFunc } from "./GameFunc";
 import { GameServiceConfig } from "./shared/GameServiceConfig";
 @GReloadable
 export class GameSetting {
@@ -118,7 +117,7 @@ export class GameSetting {
             // let hAbility = EntIndexToHScript(event.entindex_inflictor_const || -1 as any)
             let hVictim = EntIndexToHScript(event.entindex_victim_const || -1 as any) as IBaseNpc_Plus;
             let hAttacker = EntIndexToHScript(event.entindex_attacker_const || -1 as any) as IBaseNpc_Plus;
-            if (GameFunc.IsValid(hAttacker) && hAttacker != hVictim && event.damage > 0) {
+            if (GFuncEntity.IsValid(hAttacker) && hAttacker != hVictim && event.damage > 0) {
                 let fDamage = event.damage;
                 let iDamageType = event.damagetype_const;
                 [hAttacker, hVictim].forEach(unit => {

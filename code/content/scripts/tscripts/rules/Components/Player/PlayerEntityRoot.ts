@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { LogHelper } from "../../../helper/LogHelper";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
@@ -366,7 +365,7 @@ export class PlayerEntityRoot extends PlayerSystem {
     }
 
     GetColor() {
-        return GameFunc.VectorFunctions.ArrayToVector(PlayerConfig.playerColor[this.BelongPlayerid]);
+        return GFuncVector.ArrayToVector(PlayerConfig.playerColor[this.BelongPlayerid]);
     }
 
 }

@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -34,7 +33,7 @@ export class ability1_life_stealer_rage extends BaseAbility_Plus {
         hTarget.Purge(false, true, false, false, false)
         if (bPermanent) {
             let hAbility3 = hCaster.FindAbilityByName("ability6_life_stealer_infest")
-            if (GameFunc.IsValid(hAbility3) && hAbility3.GetLevel() > 0) {
+            if (GFuncEntity.IsValid(hAbility3) && hAbility3.GetLevel() > 0) {
                 let scepter_interval = hAbility3.GetSpecialValueFor("scepter_interval")
                 modifier_life_stealer_1_buff.apply(hTarget, hCaster, this, { bPermanent: 1, _duration: this.GetSpecialValueFor("duration"), scepter_interval: scepter_interval, InheritPct: InheritPct })
             }
@@ -200,7 +199,7 @@ export class modifier_life_stealer_1_buff extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             return
         }
         this.attack_speed = this.GetSpecialValueFor("attack_speed") + hCaster.GetTalentValue("special_bonus_unique_life_stealer_custom_2")
@@ -255,7 +254,7 @@ export class modifier_life_stealer_1_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DAMAGEOUTGOING_PERCENTAGE)
     GetDamageOutgoing_Percentage() {
-        if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && this.GetCasterPlus() == this.GetParentPlus()) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && this.GetCasterPlus() == this.GetParentPlus()) {
             return this.shard_attack_damage
         }
         return 0

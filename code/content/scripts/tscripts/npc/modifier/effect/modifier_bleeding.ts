@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../GameFunc";
 import { BattleHelper } from "../../../helper/BattleHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
@@ -36,7 +35,7 @@ export class modifier_bleeding extends BaseModifier_Plus {
         if (IsServer()) {
 
             let hParent = this.GetParentPlus()
-            this.vLastPosition = GameFunc.VectorFunctions.StringToVector(params.vLastPosition) || hParent.GetAbsOrigin()
+            this.vLastPosition = GFuncVector.StringToVector(params.vLastPosition) || hParent.GetAbsOrigin()
             this.fDistance = params.fDistance || 0;
             // 伤害计算
             GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
@@ -62,7 +61,7 @@ export class modifier_bleeding extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
@@ -131,14 +130,14 @@ export class modifier_bleeding extends BaseModifier_Plus {
         bleedingHandler: (V: BattleHelper.DamageOptions) => number,
         bMultiple: boolean = false) {
         if (!IsServer()) { return };
-        if (!GameFunc.IsValid(hTarget)) return;
+        if (!GFuncEntity.IsValid(hTarget)) return;
         let tModifiers = hTarget.FindAllModifiersByName(modifier_bleeding.name) as modifier_bleeding[];
         let vLastPosition;
         let fDistance;
         let hModifier;
         if (tModifiers && tModifiers.length > 0) {
             for (let _hModifier of tModifiers) {
-                if (GameFunc.IsValid(_hModifier) && GameFunc.IsValid(_hModifier.GetAbilityPlus()) && GameFunc.IsValid(hAbility)) {
+                if (GFuncEntity.IsValid(_hModifier) && GFuncEntity.IsValid(_hModifier.GetAbilityPlus()) && GFuncEntity.IsValid(hAbility)) {
                     if (_hModifier.GetAbilityPlus().GetAbilityName() == hAbility.GetAbilityName()) {
                         if (!bMultiple) {
                             vLastPosition = _hModifier.vLastPosition
@@ -155,7 +154,7 @@ export class modifier_bleeding extends BaseModifier_Plus {
 
         }
 
-        if (!GameFunc.IsValid(hModifier)) {
+        if (!GFuncEntity.IsValid(hModifier)) {
             hModifier = modifier_bleeding.apply(hTarget, hCaster, hAbility, {
                 vLastPosition: vLastPosition,
                 fDistance: fDistance,
@@ -166,7 +165,7 @@ export class modifier_bleeding extends BaseModifier_Plus {
             hModifier.SetDuration(fDuration, true)
             hModifier.ForceRefresh()
         }
-        if (GameFunc.IsValid(hModifier)) {
+        if (GFuncEntity.IsValid(hModifier)) {
             hModifier.bleedingHandler = bleedingHandler
         }
     }

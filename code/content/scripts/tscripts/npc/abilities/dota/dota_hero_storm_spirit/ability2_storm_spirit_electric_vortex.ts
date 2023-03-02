@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -63,7 +62,7 @@ export class ability2_storm_spirit_electric_vortex extends BaseAbility_Plus {
             }
         } else {
             let hTarget = this.GetCursorTarget() as IBaseNpc_Plus
-            if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+            if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
                 return
             }
             if (hTarget.TriggerSpellAbsorb(this)) {
@@ -111,7 +110,7 @@ export class modifier_storm_spirit_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -234,7 +233,7 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
     UpdateHorizontalMotion(hParent: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            if (!GameFunc.IsValid(hCaster) && !this.bTeleported) {
+            if (!GFuncEntity.IsValid(hCaster) && !this.bTeleported) {
                 this.bTeleported = true
                 ParticleManager.SetParticleControl(this.iParticleID, 0, this.vTargetPosition)
             }
@@ -275,7 +274,7 @@ export class modifier_storm_spirit_2_pull extends BaseModifierMotionHorizontal_P
     CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (IsServer() && params) {
             let hCaster = this.GetCasterPlus()
-            if (GameFunc.IsValid(hCaster)) {
+            if (GFuncEntity.IsValid(hCaster)) {
                 if (hCaster.HasTalent("special_bonus_unique_storm_spirit_custom_5") || params.attacker == hCaster) {
                     return this.electric_vortex_incoming_damage
                 }

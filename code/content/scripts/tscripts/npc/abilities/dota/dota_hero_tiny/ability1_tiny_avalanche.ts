@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -92,7 +91,7 @@ export class ability1_tiny_avalanche extends BaseAbility_Plus {
         ParticleManager.SetParticleControlForward(iParticleID, 0, vDirection)
         ParticleManager.SetParticleControl(iParticleID, 1, Vector(radius, radius, radius))
         let hModifier = modifier_tiny_1.findIn(hCaster)
-        if (GameFunc.IsValid(hModifier)) {
+        if (GFuncEntity.IsValid(hModifier)) {
             hModifier.AddParticle(iParticleID, false, false, -1, false, false)
         }
 
@@ -186,7 +185,7 @@ export class modifier_tiny_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

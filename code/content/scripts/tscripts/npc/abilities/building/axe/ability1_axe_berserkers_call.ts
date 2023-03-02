@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -36,7 +35,7 @@ export class ability1_axe_berserkers_call extends ActiveRootAbility {
         let targets = AoiHelper.FindEntityInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST)
         for (let target of (targets)) {
             let hAbility3 = ability3_axe_counter_helix.findIn(caster)
-            if (GameFunc.IsValid(hAbility3) && hAbility3.GetLevel() >= 1 && caster.HasTalent("special_bonus_unique_axe_custom_7")) {
+            if (GFuncEntity.IsValid(hAbility3) && hAbility3.GetLevel() >= 1 && caster.HasTalent("special_bonus_unique_axe_custom_7")) {
                 hAbility3._OnSpellStart(target)
             }
             modifier_axe_1_root.apply(target, caster, this, { duration: root_duration * target.GetStatusResistanceFactor(caster) })
@@ -101,7 +100,7 @@ export class modifier_axe_1_root extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
-            if (GameFunc.IsValid(hCaster) && hCaster.IsAlive()) {
+            if (GFuncEntity.IsValid(hCaster) && hCaster.IsAlive()) {
                 modifier_axe_1_attack_damage_pct.apply(hCaster, hCaster, hAbility)
                 BattleHelper.Attack(hCaster, hParent, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOOLDOWN + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_IGNOREINVIS + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_USEPROJECTILE + BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)
                 modifier_axe_1_attack_damage_pct.remove(hCaster)

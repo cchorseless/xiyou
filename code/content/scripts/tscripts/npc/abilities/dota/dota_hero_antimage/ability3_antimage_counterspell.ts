@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -54,7 +53,7 @@ export class modifier_antimage_3_buff extends BaseModifier_Plus {
     }
     Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             return
         }
         let hParent = this.GetParentPlus()

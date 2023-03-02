@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -87,7 +86,7 @@ export class modifier_t5_absorbed_aura extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CRITICALSTRIKE)
     CC_GetModifierCriticalStrike(params: IModifierTable) {
         if (UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
-            if (GameFunc.mathUtil.PRD(this.aura_crit_chance, params.target, "modifier_t5_absorbed_aura")) {
+            if (GFuncMath.PRD(this.aura_crit_chance, params.target, "modifier_t5_absorbed_aura")) {
                 return this.aura_crit_multiplier
             }
         }

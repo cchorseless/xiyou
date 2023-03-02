@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -85,7 +84,7 @@ export class modifier_necrolyte_3 extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -114,12 +113,12 @@ export class modifier_necrolyte_3 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker
-        if (GameFunc.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
+        if (GFuncEntity.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder") {
             if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
                 return
             }
             hAttacker = hAttacker.GetSource()
-            // if (GameFunc.IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled() && !Spawner.IsEndless()) {
+            // if (GFuncEntity.IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled() && !Spawner.IsEndless()) {
             //     let factor = params.unit.IsConsideredHero() && 5 || 1
             //     let fInt = this.intellect_bonus_factor + (hAttacker.HasScepter() && this.scepter_intellect_bonus_factor || 0) + this.GetParentPlus().GetTalentValue("special_bonus_unique_necrolyte_custom_3")
             //      modifier_necrolyte_3_buff.apply( hAttacker , hAttacker, this.GetAbilityPlus(), { int=fInt * factor })

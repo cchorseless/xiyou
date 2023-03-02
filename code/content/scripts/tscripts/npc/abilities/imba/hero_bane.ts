@@ -607,7 +607,7 @@ export class imba_bane_brain_sap extends BaseAbility_Plus {
                     original_target: 1,
                     baby: true
                 });
-                let direction = GameFunc.AsVector(target.GetAbsOrigin() - baby_bane.GetAbsOrigin()).Normalized();
+                let direction = GFuncVector.AsVector(target.GetAbsOrigin() - baby_bane.GetAbsOrigin()).Normalized();
                 baby_bane.SetForwardVector(direction);
             }
             if (enfeeble_debuff) {
@@ -1067,7 +1067,7 @@ export class imba_bane_fiends_grip extends BaseAbility_Plus {
                 for (const [_, enemy] of ipairs(nearby_enemies)) {
                     if (!enemy.HasModifier("modifier_imba_fiends_grip_handler")) {
                         let enemy_location = enemy.GetAbsOrigin();
-                        let enemy_to_caster_direction = GameFunc.AsVector(caster_location - enemy_location).Normalized();
+                        let enemy_to_caster_direction = GFuncVector.AsVector(caster_location - enemy_location).Normalized();
                         let enemy_forward_vector = enemy.GetForwardVector();
                         let view_angle = math.abs(RotationDelta(VectorToAngles(enemy_to_caster_direction), VectorToAngles(enemy_forward_vector)).y);
                         if (view_angle <= (vision_cone / 2) && enemy.CanEntityBeSeenByMyTeam(caster)) {
@@ -1302,7 +1302,7 @@ export class modifier_imba_fiends_grip_talent extends BaseModifier_Plus {
                 for (const [_, enemy] of ipairs(nearby_enemies)) {
                     if (!enemy.HasModifier("modifier_imba_fiends_grip_handler")) {
                         let enemy_location = enemy.GetAbsOrigin();
-                        let enemy_to_caster_direction = GameFunc.AsVector(caster_location - enemy_location).Normalized();
+                        let enemy_to_caster_direction = GFuncVector.AsVector(caster_location - enemy_location).Normalized();
                         let enemy_forward_vector = enemy.GetForwardVector();
                         let view_angle = math.abs(RotationDelta(VectorToAngles(enemy_to_caster_direction), VectorToAngles(enemy_forward_vector)).y);
                         if (view_angle <= (vision_cone / 2) && enemy.CanEntityBeSeenByMyTeam(caster)) {

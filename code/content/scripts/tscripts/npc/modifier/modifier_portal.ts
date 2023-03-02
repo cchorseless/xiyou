@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../GameFunc";
 import { AoiHelper } from "../../helper/AoiHelper";
 import { ResHelper } from "../../helper/ResHelper";
 import { BaseModifier_Plus } from "../entityPlus/BaseModifier_Plus";
@@ -47,7 +46,7 @@ export class modifier_portal extends BaseModifier_Plus {
         }
         this.AddParticle(iParticleID, false, false, -1, false, false);
         if (IsServer()) {
-            this.vPosition = GameFunc.VectorFunctions.StringToVector(params.vPosition);
+            this.vPosition = GFuncVector.StringToVector(params.vPosition);
             this.iHasArrow = params.iHasArrow;
             if (this.iHasArrow) {
                 // this.tParticleID = {}
@@ -88,8 +87,8 @@ export class modifier_portal extends BaseModifier_Plus {
     OnOrder(params: IModifierTable) {
         if (params.order_type == dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_TARGET) {
             GTimerHelper.AddFrameTimer(1, GHandler.create(this, () => {
-                if (GameFunc.IsValid(this) && GameFunc.IsValid(this.GetParentPlus())) {
-                    GameFunc.ExecuteOrder(params.unit, dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_POSITION, null, null, this.GetParentPlus().GetAbsOrigin());
+                if (GFuncEntity.IsValid(this) && GFuncEntity.IsValid(this.GetParentPlus())) {
+                    GFuncEntity.ExecuteOrder(params.unit, dotaunitorder_t.DOTA_UNIT_ORDER_MOVE_TO_POSITION, null, null, this.GetParentPlus().GetAbsOrigin());
                 }
             }));
         }

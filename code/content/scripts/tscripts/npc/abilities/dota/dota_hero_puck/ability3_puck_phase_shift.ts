@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -60,7 +59,7 @@ export class modifier_puck_3 extends BaseModifier_Plus {
         // && !Spawner.IsEndless()
         if (hAttacker == this.GetParentPlus()) {
             let chance = this.chance + hAttacker.GetTalentValue("special_bonus_unique_puck_custom_6") - (hAttacker.HasShard() && this.GetSpecialValueFor("shard_chance_reduce") || 0)
-            if (GameFunc.mathUtil.PRD(chance, hAttacker, "puck_4")) {
+            if (GFuncMath.PRD(chance, hAttacker, "puck_4")) {
                 this.Process(hAttacker, hAttacker)
             }
         }

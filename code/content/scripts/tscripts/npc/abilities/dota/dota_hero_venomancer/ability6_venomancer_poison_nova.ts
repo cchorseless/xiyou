@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -138,7 +137,7 @@ export class modifier_venomancer_6 extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
@@ -210,7 +209,7 @@ export class modifier_venomancer_6_debuff extends BaseModifier_Plus {
     }
     Init(params: IModifierTable) {
         let hCaster = this.GetCasterPlus() as BaseNpc_Hero_Plus
-        if (!GameFunc.IsValid(hCaster) || hCaster.GetAgility == null) {
+        if (!GFuncEntity.IsValid(hCaster) || hCaster.GetAgility == null) {
             this.Destroy()
             return
         }
@@ -229,14 +228,14 @@ export class modifier_venomancer_6_debuff extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 return
             }
             let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hParent.GetAbsOrigin(), null, this.extend_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false)
             for (let hTarget of (tTarget)) {
-                if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+                if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
                     let hModifier = modifier_venomancer_6_debuff.findIn(hTarget) as IBaseModifier_Plus;
-                    if (GameFunc.IsValid(hModifier)) {
+                    if (GFuncEntity.IsValid(hModifier)) {
                         hModifier.SetDuration(hModifier.GetRemainingTime() + this.extend_duration, true)
                         modifier_venomancer_6_particle_venomancer_3_infect.apply(hTarget, hParent, this.GetAbilityPlus(), { duration: modifier_venomancer_6_debuff.LOCAL_PARTICLE_MODIFIER_DURATION })
                     }
@@ -251,7 +250,7 @@ export class modifier_venomancer_6_debuff extends BaseModifier_Plus {
         let hAbility = this.GetAbilityPlus()
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
-        if (!GameFunc.IsValid(hAbility) || !GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return

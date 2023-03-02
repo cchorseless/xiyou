@@ -1,6 +1,5 @@
 import { Assert_SpawnEffect, ISpawnEffectInfo } from "../../../assert/Assert_SpawnEffect";
 
-import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { ERound } from "./ERound";
 
@@ -20,7 +19,7 @@ export class ERoundBoardChallenge extends ERound {
             unitWeight.push(tonumber(this.config.unitinfo[k].unit_weight));
         }
         for (let i = 0; i < unitcount; i++) {
-            let enemy = GameFunc.ArrayFunc.RandomArrayByWeight(unitinfoid, unitWeight);
+            let enemy = GFuncRandom.RandomArrayByWeight(unitinfoid, unitWeight);
             this.CreateChallengeEnemy(enemy[0], Assert_SpawnEffect.Effect.Spawn_portal);
         }
     }

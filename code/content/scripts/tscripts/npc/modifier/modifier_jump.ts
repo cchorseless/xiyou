@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../GameFunc";
 import { ResHelper } from "../../helper/ResHelper";
 import { BaseModifierMotionBoth_Plus, registerProp } from "../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../entityPlus/Base_Plus";
@@ -84,8 +83,8 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
         if (IsServer()) {
             //  判断是否到达了终点
             //  if ( this.leap_traveled < this.flDistance ) {
-            if (GameFunc.AsVector(me.GetAbsOrigin() - this.vTargetPosition).Length2D() > this.flHorizontalSpeed) {
-                me.SetAbsOrigin(GameFunc.AsVector(me.GetAbsOrigin() + this.vDirection * this.flHorizontalSpeed));
+            if (GFuncVector.AsVector(me.GetAbsOrigin() - this.vTargetPosition).Length2D() > this.flHorizontalSpeed) {
+                me.SetAbsOrigin(GFuncVector.AsVector(me.GetAbsOrigin() + this.vDirection * this.flHorizontalSpeed));
                 this.leap_traveled = this.leap_traveled + this.flHorizontalSpeed;
             } else {
                 // 到终点了
@@ -111,7 +110,7 @@ export class modifier_jump extends BaseModifierMotionBoth_Plus {
         if (IsServer()) {
             if (this.flDistance > 300) {
                 let z = (math.sin((this.leap_traveled / this.flDistance) * 3.1415926) * 2 * this.flDistance) / 3.1415926;
-                me.SetAbsOrigin(GameFunc.AsVector(GetGroundPosition(me.GetAbsOrigin(), me) + Vector(0, 0, z / 2)));
+                me.SetAbsOrigin(GFuncVector.AsVector(GetGroundPosition(me.GetAbsOrigin(), me) + Vector(0, 0, z / 2)));
                 //  } else {
                 //      this.animation = GameActivity_t.ACT_DOTA_RUN
             }

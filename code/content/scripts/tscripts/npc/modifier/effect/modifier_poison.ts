@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../GameFunc";
 import { BattleHelper } from "../../../helper/BattleHelper";
 import { HashTableHelper } from "../../../helper/HashTableHelper";
 import { ResHelper } from "../../../helper/ResHelper";
@@ -69,7 +68,7 @@ export class modifier_poison extends BaseModifier_Plus {
                 // 根据毒来源造成伤害
                 let this_poisoner = tPoisonInfo.poisoner
                 // 如果这个单位已经不存在了，就用上个单位来造成伤害
-                if (GameFunc.IsValid(this_poisoner) && this_poisoner.IsAlive()) {
+                if (GFuncEntity.IsValid(this_poisoner) && this_poisoner.IsAlive()) {
                     lastPoisoner = this_poisoner
                 } else {
                     this_poisoner = lastPoisoner
@@ -112,7 +111,7 @@ export class modifier_poison extends BaseModifier_Plus {
      */
     static Poison(htarget: IBaseNpc_Plus, hCaster: IBaseNpc_Plus, hAbility: IBaseAbility_Plus, iCount: number, duration: number = modifier_poison.POISON_DURATION) {
         if (!IsServer()) { return };
-        if (!GameFunc.IsValid(htarget)) return;
+        if (!GFuncEntity.IsValid(htarget)) return;
         if (iCount > 0) {
             let _out = GPropertyCalculate.SumProps(hCaster, null, GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_POISON_COUNT_PERCENTAGE);
             let _incom = GPropertyCalculate.SumProps(htarget, null, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_POISON_COUNT_PERCENTAGE);
@@ -120,7 +119,7 @@ export class modifier_poison extends BaseModifier_Plus {
         }
         let iPoisonStack = math.min(iCount, modifier_poison.MAX_POISON_STACK)   //  毒层数
         let hPoisonModifier = modifier_poison.findIn(htarget);
-        if (GameFunc.IsValid(hPoisonModifier)) {
+        if (GFuncEntity.IsValid(hPoisonModifier)) {
             let iStack = hPoisonModifier.GetStackCount()
             let iTargetStack = modifier_poison.MAX_POISON_STACK - iStack
             iPoisonStack = iTargetStack > iPoisonStack && iPoisonStack || iTargetStack
@@ -169,7 +168,7 @@ export class modifier_poison extends BaseModifier_Plus {
      */
     static GetPoisonStackCount(htarget: IBaseNpc_Plus) {
         let modifier = htarget.FindModifierByName(modifier_poison.name) as modifier_poison;
-        if (GameFunc.IsValid(modifier)) {
+        if (GFuncEntity.IsValid(modifier)) {
             return modifier.GetStackCount()
         }
         else {

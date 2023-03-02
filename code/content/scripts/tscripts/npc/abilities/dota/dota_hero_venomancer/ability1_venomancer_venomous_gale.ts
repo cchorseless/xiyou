@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -51,7 +50,7 @@ export class ability1_venomancer_venomous_gale extends BaseAbility_Plus {
         let hAbility2 = ability2_venomancer_poison_sting.findIn(hCaster)
         if (hAbility2 != null && hAbility2.tWards != null && hAbility2.tWards.length > 0) {
             for (let hWard of (hAbility2.tWards)) {
-                if (GameFunc.IsValid(hWard) && hWard.IsAlive()) {
+                if (GFuncEntity.IsValid(hWard) && hWard.IsAlive()) {
                     this.CreateLinearProjectile(hWard.GetAttachmentOrigin(hWard.ScriptLookupAttachment("attach_attack1")), vPos)
                 }
             }
@@ -61,7 +60,7 @@ export class ability1_venomancer_venomous_gale extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         let speed = this.GetSpecialValueFor("speed")
         let radius = this.GetSpecialValueFor("radius")
-        let vDirection = GameFunc.VectorFunctions.HorizonVector((vEndPos - vStartPos) as Vector)
+        let vDirection = GFuncVector.HorizonVector((vEndPos - vStartPos) as Vector)
 
         ProjectileManager.CreateLinearProjectile({
             Ability: this,
@@ -78,7 +77,7 @@ export class ability1_venomancer_venomous_gale extends BaseAbility_Plus {
         })
     }
     OnProjectileHit(hTarget: IBaseNpc_Plus, vLocation: Vector) {
-        if (!GameFunc.IsValid(hTarget)) { return }
+        if (!GFuncEntity.IsValid(hTarget)) { return }
 
         let hCaster = this.GetCasterPlus()
         let base_damage = this.GetSpecialValueFor("base_damage")
@@ -136,7 +135,7 @@ export class modifier_venomancer_1 extends BaseModifier_Plus {
             return
         }
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hAbility)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return

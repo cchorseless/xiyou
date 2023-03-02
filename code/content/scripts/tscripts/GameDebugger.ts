@@ -1,4 +1,3 @@
-import { GameFunc } from "./GameFunc";
 import { GameSetting } from "./GameSetting";
 import { BotHelper } from "./helper/BotHelper";
 import { EventHelper } from "./helper/EventHelper";
@@ -181,7 +180,7 @@ export class GameDebugger extends SingletonClass {
             if (!player) return;
             let hero = player.Hero;
             let hDummy = unit_target_dummy.CreateOne(hero.GetAbsOrigin(), DOTATeam_t.DOTA_TEAM_BADGUYS, true, hero, hero)
-            if (GameFunc.IsValid(hDummy)) {
+            if (GFuncEntity.IsValid(hDummy)) {
                 modifier_dummy_damage.apply(hDummy, hDummy);
                 hDummy.SetControllableByPlayer(e.PlayerID, false);
                 hDummy.Hold();
@@ -195,10 +194,10 @@ export class GameDebugger extends SingletonClass {
             const buffinfo = modifier_dummy_damage.GetAllInstance();
             Object.values(buffinfo).forEach((buff) => {
                 const hUnit = buff.GetParentPlus();
-                if (GameFunc.IsValid(hUnit)) {
+                if (GFuncEntity.IsValid(hUnit)) {
                     hUnit.MakeIllusion();
                     hUnit.AddNoDraw();
-                    GDestroyUnit(hUnit);
+                    GFuncEntity.SafeDestroyUnit(hUnit);
                 }
             })
         }));

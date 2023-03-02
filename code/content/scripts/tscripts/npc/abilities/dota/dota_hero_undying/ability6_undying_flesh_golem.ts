@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -88,14 +87,14 @@ export class modifier_undying_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
             }
 
             let caster = ability.GetCasterPlus()
-            if (!GameFunc.IsValid(caster)) {
+            if (!GFuncEntity.IsValid(caster)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -192,9 +191,9 @@ export class modifier_undying_6_buff extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     attackLanded(params: IModifierTable) {
-        if (!GameFunc.IsValid(params.target)) { return }
+        if (!GFuncEntity.IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
-        if (GameFunc.IsValid(this.GetCasterPlus()) && params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus()) && params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             modifier_undying_6_slow.apply(params.target, this.GetCasterPlus(), this.GetAbilityPlus(), { duration: this.fSlowDuration })
         }
     }
@@ -204,7 +203,7 @@ export class modifier_undying_6_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.CASTTIME_PERCENTAGE)
     GetPercentageCasttime() {
-        if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter()) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasScepter()) {
             return this.cast_point_scepter
         }
     }
@@ -286,7 +285,7 @@ export class modifier_undying_6_zombie_lifetime extends BaseModifier_Plus {
     BeDestroy() {
 
         let hParent = this.GetParentPlus()
-        if (IsServer() && GameFunc.IsValid(hParent)) {
+        if (IsServer() && GFuncEntity.IsValid(hParent)) {
             hParent.AddNoDraw()
             hParent.ForceKill(false)
         }

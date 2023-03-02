@@ -25,7 +25,7 @@ export class ability6_bristleback_warpath extends BaseAbility_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             // let hAbility2 = _ability2_bristleback_quill_spray().findIn(hCaster)
-            // if (!GameFunc.IsValid(hAbility2) || hAbility2.GetLevel() < 1) {
+            // if (!GFuncEntity.IsValid(hAbility2) || hAbility2.GetLevel() < 1) {
             //     this.errorStr = "dota_hud_error_upgrade_bristleback_2"
             //     return UnitFilterResult.UF_FAIL_CUSTOM
             // }
@@ -38,7 +38,7 @@ export class ability6_bristleback_warpath extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         // let hAbility2 = _ability2_bristleback_quill_spray().findIn(hCaster)
         // // 释放一次特殊的被刺，对敌方单位造成针刺扫射伤害，对范围内友方单位继承一定比例的战意效果// 在战意技能里监听三技能的释放
-        // if (GameFunc.IsValid(hAbility2) && hAbility2.GetLevel() >= 1 && hAbility2.OnCastAbility2 != null) {
+        // if (GFuncEntity.IsValid(hAbility2) && hAbility2.GetLevel() >= 1 && hAbility2.OnCastAbility2 != null) {
         //     hAbility2.OnCastAbility2()
         // }
     }
@@ -100,7 +100,7 @@ export class modifier_bristleback_6 extends BaseModifier_Plus {
                 return
             }
             // let hAbility2 = _ability2_bristleback_quill_spray().findIn(caster)
-            // if (!GameFunc.IsValid(hAbility2) || hAbility2.GetLevel() < 1) {
+            // if (!GFuncEntity.IsValid(hAbility2) || hAbility2.GetLevel() < 1) {
             //     return
             // }
 

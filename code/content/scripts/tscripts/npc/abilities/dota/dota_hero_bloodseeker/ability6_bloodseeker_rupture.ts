@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -37,7 +36,7 @@ export class ability6_bloodseeker_rupture extends BaseAbility_Plus {
         let bleed_damage = this.GetSpecialValueFor("bleed_damage")
         let duration = this.GetSpecialValueFor("duration")
         let all_stats_bleed_damage = this.GetSpecialValueFor("all_stats_bleed_damage") + hCaster.GetTalentValue("special_bonus_unique_bloodseeker_custom_7")
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (hTarget.TriggerSpellAbsorb(this)) {
@@ -49,7 +48,7 @@ export class ability6_bloodseeker_rupture extends BaseAbility_Plus {
         let fDamage = bleed_damage + (hCaster.GetStrength() + hCaster.GetAgility() + hCaster.GetIntellect()) * all_stats_bleed_damage
         for (let hTarget of (tTarget as IBaseNpc_Plus[])) {
 
-            if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+            if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
                 // 添加流血层数
                 modifier_bleeding.Bleeding(hTarget, hCaster, this, duration, (tDamageTable) => {
                     return fDamage
@@ -67,7 +66,7 @@ export class ability6_bloodseeker_rupture extends BaseAbility_Plus {
         let duration = this.GetSpecialValueFor("duration")
         let all_stats_bleed_damage = this.GetSpecialValueFor("all_stats_bleed_damage") + hCaster.GetTalentValue("special_bonus_unique_bloodseeker_custom_7")
         let fDamage = bleed_damage + (hCaster.GetStrength() + hCaster.GetAgility() + hCaster.GetIntellect()) * all_stats_bleed_damage
-        if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+        if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
             // 添加流血层数
             modifier_bleeding.Bleeding(hTarget, hCaster, this, duration, (tDamageTable) => {
                 return fDamage
@@ -114,7 +113,7 @@ export class modifier_bloodseeker_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -168,12 +167,12 @@ export class modifier_bloodseeker_6 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: IModifierTable) {
         let hParent = this.GetParentPlus()
-        if (!GameFunc.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
+        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
             return
         }
         if (params.attacker == hParent && !params.attacker.IsIllusion() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, hParent.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
             let ability = this.GetAbilityPlus() as ability6_bloodseeker_rupture
-            if (hParent.HasScepter() && GameFunc.mathUtil.PRD(this.trigger_chance, hParent, "modifier_bloodseeker_6") && ability.OnCastAbility != null) {
+            if (hParent.HasScepter() && GFuncMath.PRD(this.trigger_chance, hParent, "modifier_bloodseeker_6") && ability.OnCastAbility != null) {
                 ability.OnCastAbility(params.target)
             }
         }

@@ -275,7 +275,7 @@ export class modifier_drow_ranger_1_debuff extends BaseModifier_Plus {
         let hAbility = this.GetAbilityPlus()
         let iStackCount = this.GetStackCount()
 
-        if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
             return
         }
         modifier_drow_ranger_1_particle_lich_frost_nova.apply(hCaster, hParent, hAbility, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
@@ -314,9 +314,9 @@ export class modifier_drow_ranger_1_debuff extends BaseModifier_Plus {
     CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            if (GameFunc.IsValid(hCaster)) {
+            if (GFuncEntity.IsValid(hCaster)) {
                 let hAbility = ability3_drow_ranger_multishot.findIn(hCaster)
-                if (GameFunc.IsValid(hAbility) && hAbility.IsActivated() && hAbility.GetLevel() > 0) {
+                if (GFuncEntity.IsValid(hAbility) && hAbility.IsActivated() && hAbility.GetLevel() > 0) {
                     return this.GetStackCount() * hAbility.GetSpecialValueFor("increase_damage_pct")
                 }
             }

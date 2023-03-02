@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -34,7 +33,7 @@ export class ability3_lone_druid_savage_roar extends BaseAbility_Plus {
 
         let tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
         this.SavageRoar(hCaster, tTarget)
-        if (GameFunc.IsValid(hCaster.hSpiritBear) && hCaster.hSpiritBear.IsAlive()) {
+        if (GFuncEntity.IsValid(hCaster.hSpiritBear) && hCaster.hSpiritBear.IsAlive()) {
             tTarget = FindUnitsInRadius(hCaster.GetTeamNumber(), hCaster.hSpiritBear.GetAbsOrigin(), null, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false)
             this.SavageRoar(hCaster.hSpiritBear, tTarget)
         }
@@ -42,7 +41,7 @@ export class ability3_lone_druid_savage_roar extends BaseAbility_Plus {
             modifier_lone_druid_3_scepter_buff.apply(hCaster, hCaster, this, { duration: duration })
             if (hCaster.tSummonUnit != null) {
                 for (let unit of (hCaster.tSummonUnit)) {
-                    if (GameFunc.IsValid(unit) && unit.IsAlive()) {
+                    if (GFuncEntity.IsValid(unit) && unit.IsAlive()) {
                         modifier_lone_druid_3_scepter_buff.apply(unit, hCaster, this, { duration: duration })
                     }
                 }
@@ -58,7 +57,7 @@ export class ability3_lone_druid_savage_roar extends BaseAbility_Plus {
         EmitSoundOnLocationWithCaster(hCaster.GetAbsOrigin(), ResHelper.GetSoundReplacement("Hero_LoneDruid.SavageRoar.Cast", hCaster), hCaster)
         for (let hTarget of (tTarget)) {
 
-            if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+            if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
                 modifier_feared.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
                 modifier_lone_druid_3_debuff.apply(hTarget, hCaster, this, { duration: duration * hTarget.GetStatusResistanceFactor(hCaster) })
             }

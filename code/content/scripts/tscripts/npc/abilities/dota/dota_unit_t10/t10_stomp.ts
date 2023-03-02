@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -31,7 +30,7 @@ export class t10_stomp extends BaseAbility_Plus {
         modifier_t10_stomp_particle_neutral_centaur_khan_war_stomp.apply(caster, caster, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
 
         // let combination_t10_barbaric_stomp  = combination_t10_barbaric_stomp.findIn(  caster )
-        // let has_combination_t10_barbaric_stomp = GameFunc.IsValid(combination_t10_barbaric_stomp) && combination_t10_barbaric_stomp.IsActivated()
+        // let has_combination_t10_barbaric_stomp = GFuncEntity.IsValid(combination_t10_barbaric_stomp) && combination_t10_barbaric_stomp.IsActivated()
 
         let targets = AoiHelper.FindEntityInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), radius, null, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST)
         for (let target of (targets)) {
@@ -79,7 +78,7 @@ export class modifier_t10_stomp extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

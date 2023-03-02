@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { KVHelper } from "../../../helper/KVHelper";
 import { DrawConfig } from "../../../shared/DrawConfig";
@@ -122,7 +121,7 @@ export class DrawComponent extends ET.Component {
         // let hItem = BaseItem_Plus.CreateOneToUnit(this.GetDomain<BaseNpc_Hero_Plus>(), cardItemName);
         let hItem = this.GetDomain<PlayerScene>().ETRoot.Hero.AddItemByName(cardItemName);
         // hItem.OnSpellStart()
-        if (GameFunc.IsValid(hItem) && b2Public) {
+        if (GFuncEntity.IsValid(hItem) && b2Public) {
             // Items.TryMoveEmptyPublic(iPlayerID, hHero, hItem);
             this.tLastCards = [];
         }
@@ -145,7 +144,7 @@ export class DrawComponent extends ET.Component {
         //     }
 
         //     let hItem = hHero.GiveItem(sCardName);
-        //     if (GameFunc.IsValid(hItem) && b2Public) {
+        //     if (GFuncEntity.IsValid(hItem) && b2Public) {
         //         Items.TryMoveEmptyPublic(iPlayerID, hHero, hItem);
         //     }
 

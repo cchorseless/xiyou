@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -77,7 +76,7 @@ export class ability6_mirana_invis extends BaseAbility_Plus {
         ProjectileManager.CreateTrackingProjectile(tInfo)
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
-        if (GameFunc.IsValid(hTarget)) {
+        if (GFuncEntity.IsValid(hTarget)) {
             if (hTarget.IsMagicImmune && !hTarget.IsMagicImmune()) {
                 modifier_mirana_6_stun.apply(hTarget, this.GetCasterPlus(), this, { duration: ExtraData.iDuration * hTarget.GetStatusResistanceFactor(this.GetCasterPlus()) })
                 EmitSoundOnLocationWithCaster(hTarget.GetAbsOrigin(), "Hero_Mirana.ArrowImpact", this.GetCasterPlus())
@@ -171,7 +170,7 @@ export class modifier_mirana_6 extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         if (params.attacker == this.GetParentPlus() && modifier_mirana_3_buff.exist(hParent) && !hParent.IsIllusion()) {
             if (!BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NOT_PROCESSPROCS, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)) {
-                if (GameFunc.mathUtil.PRD(this.arrow_chance, params.attacker, "modifier_mirana_6")) {
+                if (GFuncMath.PRD(this.arrow_chance, params.attacker, "modifier_mirana_6")) {
                     (this.GetAbilityPlus() as ability6_mirana_invis).Arrow(params.target)
                 }
             }

@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../GameFunc";
 import { KVHelper } from "../../helper/KVHelper";
 import { BuildingConfig } from "../../shared/BuildingConfig";
 import { ET } from "../../shared/lib/Entity";
@@ -55,7 +54,7 @@ export class BuildingSystemComponent extends ET.SingletonComponent {
         for (let pos of points) {
             let pOk = false
             for (let polygon of this.tAllowsPosition) {
-                if (GameFunc.VectorFunctions.IsPointInPolygon(pos, polygon)) {
+                if (GFuncVector.IsPointInPolygon(pos, polygon)) {
                     pOk = true
                     break
                 }
@@ -67,7 +66,7 @@ export class BuildingSystemComponent extends ET.SingletonComponent {
         //  已建造区域检测
         for (let polygon of this.tBlockersPosition) {
             for (let pos of points) {
-                if (GameFunc.VectorFunctions.IsPointInPolygon(pos, polygon)) {
+                if (GFuncVector.IsPointInPolygon(pos, polygon)) {
                     return false
                 }
             }

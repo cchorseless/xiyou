@@ -294,7 +294,7 @@ export class modifier_imba_searing_chains_attack extends BaseModifier_Plus {
                 if (attacker.findAbliityPlus("special_bonus_ember_chains_on_attack") && attacker.FindAbilityByName("special_bonus_ember_chains_on_attack").GetLevel() > 0) {
                     let talent_ability = attacker.findAbliityPlus("special_bonus_ember_chains_on_attack");
                     let target = keys.target;
-                    if (!(target.IsBuilding() || target.IsMagicImmune()) && GameFunc.PRD(talent_ability.GetSpecialValueFor("chance"), this)) {
+                    if (!(target.IsBuilding() || target.IsMagicImmune()) && GFuncRandom.PRD(talent_ability.GetSpecialValueFor("chance"), this)) {
                         ApplySearingChains(attacker, attacker, target, this.GetAbilityPlus(), talent_ability.GetSpecialValueFor("duration"));
                     }
                 }

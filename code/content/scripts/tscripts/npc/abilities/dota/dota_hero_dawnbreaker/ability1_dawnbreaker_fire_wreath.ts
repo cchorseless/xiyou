@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -135,7 +134,7 @@ export class modifier_dawnbreaker_1 extends BaseModifier_Plus {
                             let caster = this.GetCasterPlus();
                             modifier_dawnbreaker_1_buff.apply(caster, caster, this.GetAbilityPlus(), { duration: this.smash_stun_duration })
                             // -- 锤子位置
-                            let vpoint = GameFunc.VectorFunctions.Add(this.GetCaster().GetForwardVector() * 200 as Vector,
+                            let vpoint = GFuncVector.Add(this.GetCaster().GetForwardVector() * 200 as Vector,
                                 this.GetCaster().GetAbsOrigin())
                             // -- 给目标造成眩晕和伤害
                             let _tTargets = this.FindEnemyInRadius(this.smash_radius, vpoint)

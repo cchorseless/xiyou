@@ -1,11 +1,13 @@
 // LogHelper必须放第一行先导入
 import { AllEntity } from "./AllEntity";
 import { GameCache } from "./GameCache";
+import { GameFunc } from "./GameFunc";
 import { GameMode } from "./GameMode";
 import { LogHelper } from "./helper/LogHelper";
 import { TimerHelper } from "./helper/TimerHelper";
-LogHelper.print("IsServer start-----------------------------------")
+LogHelper.print("IsServer start-----------------------------------");
 GameCache.Init();
+GameFunc.Init();
 AllEntity.Init();
 TimerHelper.Init();
 Object.assign(getfenv(), {

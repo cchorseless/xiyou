@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -59,7 +58,7 @@ export class ability6_earthshaker_echo_slam extends BaseAbility_Plus {
             let _tTargets = AoiHelper.FindUnitsInRadiusByModifierName("modifier_earthshaker_1_root", hCaster.GetTeamNumber(), Vector(0, 0, 0), 5000, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST)
             for (let v of (_tTargets)) {
                 let hModifier = modifier_earthshaker_1_root.findIn(v) as modifier_earthshaker_1_root;
-                if (GameFunc.IsValid(hModifier) && GameFunc.IsValid(hModifier.GetCasterPlus()) && hModifier.GetCasterPlus().GetPlayerOwnerID() == hCaster.GetPlayerOwnerID()) {
+                if (GFuncEntity.IsValid(hModifier) && GFuncEntity.IsValid(hModifier.GetCasterPlus()) && hModifier.GetCasterPlus().GetPlayerOwnerID() == hCaster.GetPlayerOwnerID()) {
                     table.insert(tTargets, v)
                 }
             }
@@ -92,7 +91,7 @@ export class ability6_earthshaker_echo_slam extends BaseAbility_Plus {
                 iCount = iCount + 1
                 if (hTarget.IsConsideredHero()) {
                     for (let hEchoTarget of (tEchoTargets)) {
-                        if (GameFunc.IsValid(hEchoTarget) && hEchoTarget.IsAlive()) {
+                        if (GFuncEntity.IsValid(hEchoTarget) && hEchoTarget.IsAlive()) {
                             if (hEchoTarget != hTarget) {
                                 let tInfo = {
                                     Ability: this,
@@ -125,7 +124,7 @@ export class ability6_earthshaker_echo_slam extends BaseAbility_Plus {
             let _tTargets = AoiHelper.FindUnitsInRadiusByModifierName("modifier_earthshaker_1_root", hCaster.GetTeamNumber(), Vector(0, 0, 0), 5000, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST)
             for (let v of (_tTargets)) {
                 let hModifier = modifier_earthshaker_1_root.findIn(v) as modifier_earthshaker_1_root;
-                if (GameFunc.IsValid(hModifier) && GameFunc.IsValid(hModifier.GetCasterPlus()) && hModifier.GetCasterPlus().GetPlayerOwnerID() == hCaster.GetPlayerOwnerID()) {
+                if (GFuncEntity.IsValid(hModifier) && GFuncEntity.IsValid(hModifier.GetCasterPlus()) && hModifier.GetCasterPlus().GetPlayerOwnerID() == hCaster.GetPlayerOwnerID()) {
                     table.insert(tTargets, v)
                 }
             }
@@ -140,7 +139,7 @@ export class ability6_earthshaker_echo_slam extends BaseAbility_Plus {
                 damage_type: this.GetAbilityDamageType()
             })
 
-            if (GameFunc.IsValid(hTarget) && hTarget.IsConsideredHero() && !hTarget.IsAlive()) {
+            if (GFuncEntity.IsValid(hTarget) && hTarget.IsConsideredHero() && !hTarget.IsAlive()) {
                 modifier_earthshaker_6_particle_death.apply(hCaster, hTarget, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
             }
         }
@@ -163,7 +162,7 @@ export class ability6_earthshaker_echo_slam extends BaseAbility_Plus {
 
         for (let iTargetEntIndex of (tHeroes)) {
             let hTarget = EntIndexToHScript(iTargetEntIndex)
-            if (GameFunc.IsValid(hTarget)) {
+            if (GFuncEntity.IsValid(hTarget)) {
                 let iParticleID = ResHelper.CreateParticle({
                     resPath: "particles/units/heroes/hero_earthshaker/earthshaker_echoslam_tgt.vpcf",
                     resNpc: hCaster,
@@ -180,7 +179,7 @@ export class ability6_earthshaker_echo_slam extends BaseAbility_Plus {
         }
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
-        if (GameFunc.IsValid(hTarget)) {
+        if (GFuncEntity.IsValid(hTarget)) {
             if (hTarget.IsMagicImmune() || !hTarget.IsAlive()) {
                 return true
             }
@@ -194,7 +193,7 @@ export class ability6_earthshaker_echo_slam extends BaseAbility_Plus {
                 damage_type: this.GetAbilityDamageType()
             })
 
-            if (GameFunc.IsValid(hTarget) && hTarget.IsConsideredHero() && !hTarget.IsAlive()) {
+            if (GFuncEntity.IsValid(hTarget) && hTarget.IsConsideredHero() && !hTarget.IsAlive()) {
                 modifier_earthshaker_6_particle_death.apply(hCaster, hTarget, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
             }
         }
@@ -239,7 +238,7 @@ export class modifier_earthshaker_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

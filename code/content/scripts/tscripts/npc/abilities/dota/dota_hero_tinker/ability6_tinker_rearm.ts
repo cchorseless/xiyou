@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -144,7 +143,7 @@ export class modifier_tinker_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability6_tinker_rearm
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -266,14 +265,14 @@ export class modifier_tinker_6_thinker extends BaseModifier_Plus {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
             let hCaster = this.GetCasterPlus()
-            if (!GameFunc.IsValid(hAbility) && !GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hAbility) && !GFuncEntity.IsValid(hCaster)) {
                 this.Destroy()
                 return
             }
             let hParent = this.GetParentPlus()
             let vPosition = hParent.GetAbsOrigin()
 
-            let vStartPosition = (vPosition - this.vDirection * this.radius + GameFunc.VectorFunctions.Rotation2D(this.vDirection, math.rad(90)) * RandomFloat(-this.radius, this.radius)) as Vector
+            let vStartPosition = (vPosition - this.vDirection * this.radius + GFuncVector.Rotation2D(this.vDirection, math.rad(90)) * RandomFloat(-this.radius, this.radius)) as Vector
 
             let tInfo: CreateLinearProjectileOptions = {
                 Ability: hAbility,

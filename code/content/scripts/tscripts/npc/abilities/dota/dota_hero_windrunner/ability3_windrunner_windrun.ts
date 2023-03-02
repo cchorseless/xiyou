@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -78,7 +77,7 @@ export class modifier_windrunner_3 extends BaseModifier_Plus {
 
             let hCaster = ability.GetCasterPlus()
 
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -237,7 +236,7 @@ export class modifier_windrunner_3_debuff extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
-            if (GameFunc.IsValid(hCaster)) {
+            if (GFuncEntity.IsValid(hCaster)) {
                 let damage_table =
                 {
                     ability: hAbility,

@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { HashTableHelper } from "../../../../helper/HashTableHelper";
@@ -58,7 +57,7 @@ export class ability1_pudge_meat_hook extends ActiveRootAbility {
 
     AutoSpellSelf() {
         if (IsServer()) {
-            if (!GameFunc.IsValid(this)) {
+            if (!GFuncEntity.IsValid(this)) {
                 this.Destroy()
                 return
             }
@@ -180,7 +179,7 @@ export class ability1_pudge_meat_hook extends ActiveRootAbility {
             }
             hModel = hModel.NextMovePeer()
         }
-        let vDirection = GameFunc.VectorFunctions.HorizonVector((this.GetCursorPosition() - hCaster.GetAbsOrigin()) as Vector)
+        let vDirection = GFuncVector.HorizonVector((this.GetCursorPosition() - hCaster.GetAbsOrigin()) as Vector)
         this.LaunchHook(vDirection)
         if (hCaster.HasShard()) {
             let extra_count = this.GetSpecialValueFor("extra_count")
@@ -188,7 +187,7 @@ export class ability1_pudge_meat_hook extends ActiveRootAbility {
             for (let i = 0; i <= extra_count - 1; i++) {
                 let x = (i % 2 == 0) && 1 || -1
                 let y = math.floor(i / 2) + 1
-                this.LaunchHook(GameFunc.VectorFunctions.Rotation2D(vDirection, math.rad(extra_angle * x * y)))
+                this.LaunchHook(GFuncVector.Rotation2D(vDirection, math.rad(extra_angle * x * y)))
             }
         }
     }
@@ -296,7 +295,7 @@ export class ability1_pudge_meat_hook extends ActiveRootAbility {
                 }
                 for (let i = tHashtable.tVictim.length - 1; i >= 0; i--) {
                     let hVictim = tHashtable.tVictim[i]
-                    if (GameFunc.IsValid(hVictim)) {
+                    if (GFuncEntity.IsValid(hVictim)) {
                         let vFinalHookPos = vLocation
                         modifier_pudge_1_buff.remove(hVictim)
                         let vVictimPosCheck = (hVictim.GetOrigin() - vFinalHookPos) as Vector;
@@ -407,7 +406,7 @@ export class modifier_pudge_1_buff extends BaseModifierMotionHorizontal_Plus {
         if (IsServer()) {
             this.GetParent().RemoveHorizontalMotionController(this)
             let tHashtable = HashTableHelper.GetHashtableByIndex(this.iHashtableIndex)
-            if (GameFunc.IsValid(tHashtable.hCaster)) {
+            if (GFuncEntity.IsValid(tHashtable.hCaster)) {
                 ParticleManager.SetParticleControlEnt(tHashtable.iParticleID, 1, tHashtable.hCaster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_weapon_chain_rt", tHashtable.hCaster.GetAbsOrigin() + tHashtable.vHookOffset, true)
             }
             this.GetParent().StopSound("Hero_Pudge.AttackHookRetract")

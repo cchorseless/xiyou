@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -41,8 +40,8 @@ export class ability6_jakiro_macropyre extends BaseAbility_Plus {
         vTargetPosition = GetGroundPosition((vStartPosition + vDirection.Normalized() * (fissure_range - distance_between_blocker * 2)) as Vector, hCaster)
         modifier_jakiro_6_thinker.applyThinker(((vStartPosition + vTargetPosition) / 2) as Vector, hCaster, this, {
             duration: duration,
-            vStartPosition: GameFunc.VectorFunctions.VectorToString(vStartPosition),
-            vTargetPosition: GameFunc.VectorFunctions.VectorToString(vTargetPosition),
+            vStartPosition: GFuncVector.VectorToString(vStartPosition),
+            vTargetPosition: GFuncVector.VectorToString(vTargetPosition),
         }, hCaster.GetTeamNumber(), false)
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Jakiro.Macropyre.Cast", hCaster))
     }
@@ -84,7 +83,7 @@ export class modifier_jakiro_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -187,8 +186,8 @@ export class modifier_jakiro_6_thinker extends BaseModifier_Plus {
         this.path_range = this.GetAbilityPlus().GetCastRange(hCaster.GetAbsOrigin(), null) + hCaster.GetCastRangeBonus()
 
         if (IsServer()) {
-            this.vStartPosition = GameFunc.VectorFunctions.StringToVector(params.vStartPosition)
-            this.vTargetPosition = GameFunc.VectorFunctions.StringToVector(params.vTargetPosition)
+            this.vStartPosition = GFuncVector.StringToVector(params.vStartPosition)
+            this.vTargetPosition = GFuncVector.StringToVector(params.vTargetPosition)
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_jakiro/jakiro_macropyre.vpcf",
                 resNpc: hCaster,
@@ -208,7 +207,7 @@ export class modifier_jakiro_6_thinker extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hCaster = this.GetCasterPlus()
         if (IsServer()) {
-            if (GameFunc.IsValid(hParent)) {
+            if (GFuncEntity.IsValid(hParent)) {
                 UTIL_Remove(hParent)
             }
         }
@@ -272,7 +271,7 @@ export class modifier_jakiro_6_burn_debuff extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive() || !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive() || !GFuncEntity.IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -290,7 +289,7 @@ export class modifier_jakiro_6_burn_debuff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingDamagePercentage(params: IModifierTable) {
-        if (params != null && GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().IsAlive() && params.attacker == this.GetCasterPlus()) {
+        if (params != null && GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().IsAlive() && params.attacker == this.GetCasterPlus()) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_unique_jakiro_custom_8")
         }
     }

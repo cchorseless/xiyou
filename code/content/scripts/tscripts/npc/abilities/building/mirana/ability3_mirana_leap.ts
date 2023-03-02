@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../../entityPlus/Base_Plus";
@@ -85,7 +84,7 @@ export class modifier_mirana_3 extends BaseModifier_Plus {
         //     return
         // }
         let hAttacker = params.attacker
-        if (!GameFunc.IsValid(hAttacker) || hAttacker.GetUnitLabel() == "builder") {
+        if (!GFuncEntity.IsValid(hAttacker) || hAttacker.GetUnitLabel() == "builder") {
             return
         }
         if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {

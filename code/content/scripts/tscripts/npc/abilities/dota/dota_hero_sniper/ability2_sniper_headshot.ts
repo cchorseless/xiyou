@@ -101,7 +101,7 @@ export class modifier_sniper_2 extends BaseModifier_Plus {
         }
         if (params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion()) {
             if (UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
-                if (GameFunc.mathUtil.PRD(this.proc_chance, params.attacker as IBaseNpc_Plus, "sniper_2")) {
+                if (GFuncMath.PRD(this.proc_chance, params.attacker as IBaseNpc_Plus, "sniper_2")) {
                     modifier_sniper_2_projectile.apply(params.attacker, params.attacker, this.GetAbilityPlus(), null)
                 }
             }
@@ -122,7 +122,7 @@ export class modifier_sniper_2 extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: ModifierAttackEvent) {
-        if (!GameFunc.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
+        if (!GFuncEntity.IsValid(params.target) || params.target.GetClassname() == "dota_item_drop") {
             return
         }
         if (this.records.indexOf(params.record) != null) {
@@ -158,7 +158,7 @@ export class modifier_sniper_2 extends BaseModifier_Plus {
             if (hCaster.HasScepter()) {
                 let targets = FindUnitsInRadius(hCaster.GetTeamNumber(), params.target.GetAbsOrigin(), hCaster, this.scepter_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false)
                 for (let target of (targets)) {
-                    if (GameFunc.IsValid(target) && target.IsAlive() && target != params.target) {
+                    if (GFuncEntity.IsValid(target) && target.IsAlive() && target != params.target) {
                         let tDamageTable = {
                             ability: hAbility,
                             attacker: params.attacker,

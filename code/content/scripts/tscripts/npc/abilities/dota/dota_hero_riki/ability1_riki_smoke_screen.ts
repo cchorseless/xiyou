@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -76,7 +75,7 @@ export class modifier_riki_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -113,9 +112,9 @@ export class modifier_riki_1 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     OnDeath(params: IModifierTable) {
         let hAttacker = params.attacker
-        if (GameFunc.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder" && hAttacker.GetTeamNumber() != params.unit.GetTeamNumber()) {
+        if (GFuncEntity.IsValid(hAttacker) && hAttacker.GetUnitLabel() != "builder" && hAttacker.GetTeamNumber() != params.unit.GetTeamNumber()) {
             hAttacker = hAttacker.GetSource()
-            if (GameFunc.IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled()) {
+            if (GFuncEntity.IsValid(hAttacker) && hAttacker == this.GetParentPlus() && !hAttacker.IsIllusion() && !hAttacker.PassivesDisabled()) {
                 // && !Spawner.IsEndless()
                 if (this.GetParentPlus().HasTalent("special_bonus_unique_riki_custom_2") && modifier_riki_1_debuff.exist(params.unit)) {
                     modifier_riki_1_attack_damage.apply(params.attacker, params.attacker, this.GetAbilityPlus(), null)
@@ -204,7 +203,7 @@ export class modifier_riki_1_thinker extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }

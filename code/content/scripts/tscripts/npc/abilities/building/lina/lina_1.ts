@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -56,7 +55,7 @@ export class lina_1 extends BaseAbility_Plus {
         let dragon_slave_distance = this.GetSpecialValueFor("dragon_slave_distance") + hCaster.GetCastRangeBonus();
         let dragon_slave_damage = this.GetAbilityDamage() + hCaster.GetTalentValue(sTalentName) * hCaster.GetIntellect();
 
-        let vDirection = GameFunc.VectorFunctions.HorizonVector((vTargetPosition - vStartPosition) as Vector);
+        let vDirection = GFuncVector.HorizonVector((vTargetPosition - vStartPosition) as Vector);
 
         let info = {
             Ability: this,
@@ -98,10 +97,10 @@ export class lina_1 extends BaseAbility_Plus {
         let chance_scepter = this.GetSpecialValueFor("chance_scepter");
         let hAbility_4 = lina_3.findIn(caster);
         let hModifier = modifier_lina_3_fiery_soul.findIn(caster) as IBaseModifier_Plus;
-        if (caster.HasScepter() && GameFunc.IsValid(hAbility_4) && GameFunc.IsValid(hModifier)) {
+        if (caster.HasScepter() && GFuncEntity.IsValid(hAbility_4) && GFuncEntity.IsValid(hModifier)) {
             chance_scepter = chance_scepter + hModifier.GetStackCount() * hAbility_4.GetSpecialValueFor("chance_factor");
         }
-        if (!caster.HasScepter() || !GameFunc.mathUtil.PRD(chance_scepter, caster, "lina_1_scepter")) {
+        if (!caster.HasScepter() || !GFuncMath.PRD(chance_scepter, caster, "lina_1_scepter")) {
             return;
         }
         GTimerHelper.AddTimer(0.5, GHandler.create(this, () => {
@@ -160,7 +159,7 @@ export class modifier_lina_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus();
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1);
                 this.Destroy();
                 return;

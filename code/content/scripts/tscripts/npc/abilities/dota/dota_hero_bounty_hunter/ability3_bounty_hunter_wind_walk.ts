@@ -144,7 +144,7 @@ export class modifier_bounty_hunter_3 extends BaseModifier_Plus {
                 //     let gold_steal = this.gold_steal + extra_gold_steal
                 //     gold_steal = gold_steal + math.ceil(params.original_damage * this.bonus_gold_steal_percent * 0.01)
                 //     let track_bounty  = modifier_bounty_hunter_track_bounty.findIn(  hCaster )
-                //     if (GameFunc.IsValid(track_bounty) && type(track_bounty.AddTotalGold) == "function") {
+                //     if (GFuncEntity.IsValid(track_bounty) && type(track_bounty.AddTotalGold) == "function") {
                 //         track_bounty.AddTotalGold(gold_steal)
                 //     }
                 //     // let actual = Clamp(gold_steal, 0, math.max(PlayerData.GetMaxGold(iPlayerID) - PlayerData.GetGold(iPlayerID), 0))
@@ -153,7 +153,7 @@ export class modifier_bounty_hunter_3 extends BaseModifier_Plus {
                 // }
 
                 if (!BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_SKIPCOUNTING)) {
-                    // if (GameFunc.IsValid(this.weaponEffectModifier1)) {
+                    // if (GFuncEntity.IsValid(this.weaponEffectModifier1)) {
                     //     this.weaponEffectModifier1.Destroy()
                     // }
 

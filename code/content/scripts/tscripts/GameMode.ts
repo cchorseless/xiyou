@@ -1,4 +1,5 @@
 import { GameDebugger } from "./GameDebugger";
+import { GameRulesExt } from "./GameRulesExt";
 import { GameScene } from "./GameScene";
 import { GameSetting } from "./GameSetting";
 import { KVHelper } from "./helper/KVHelper";
@@ -6,11 +7,6 @@ import { LogHelper } from "./helper/LogHelper";
 import { PrecacheHelper } from "./helper/PrecacheHelper";
 import { GameEnum } from "./shared/GameEnum";
 import { ETEntitySystem } from "./shared/lib/Entity";
-declare global {
-    interface CDOTAGameRules {
-        Addon: GameMode;
-    }
-}
 
 @GReloadable
 export class GameMode {
@@ -29,6 +25,7 @@ export class GameMode {
             this.Instance = GameRules.GetGameModeEntity();
         }
         LogHelper.print("Entering Game:InitGameMode");
+        GameRulesExt.Init();
         // 初始化配置
         GameSetting.init();
         // 初始化debugger

@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -56,7 +55,7 @@ export class ability6_omniknight_guardian_angel extends BaseAbility_Plus {
         modifier_omniknight_6_buff.remove(hCaster);
         for (let i = tTargets.length - 1; i >= 0; i--) {
             let hTarget = tTargets[i]
-            if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+            if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
                 if (hTarget.GetUnitLabel() != "builder" && hTarget.GetUnitLabel() == "HERO") {
                     modifier_omniknight_6_buff.remove(hTarget);
                     modifier_omniknight_6_buff.apply(hTarget, hCaster, this, { duration: duration })
@@ -218,7 +217,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 return
             }
             if (hCaster.HasScepter()) {
@@ -226,10 +225,10 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
                 if (fCurGameTime >= this.fGameTime + this.interval_scepter) {
                     this.fGameTime = fCurGameTime
                     let hAbility = ability1_omniknight_purification.findIn(hCaster)
-                    if (GameFunc.IsValid(hAbility) && hAbility.GetLevel() > 0) {
+                    if (GFuncEntity.IsValid(hAbility) && hAbility.GetLevel() > 0) {
                         let tTargets = FindUnitsInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), null, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false)
                         for (let hTarget of (tTargets)) {
-                            if (GameFunc.IsValid(hTarget) && hAbility.OnSpellStart != null) {
+                            if (GFuncEntity.IsValid(hTarget) && hAbility.OnSpellStart != null) {
                                 let hRecordTarget = hCaster.GetCursorCastTarget()
                                 hCaster.SetCursorCastTarget(hTarget)
                                 // hAbility.OnSpellStart(hTarget)
@@ -250,7 +249,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_PERCENTAGE)
     CC_GetModifierStats_Strength_Percentage() {
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) { return 0 }
+        if (!GFuncEntity.IsValid(hCaster)) { return 0 }
         let hParent = this.GetParentPlus()
         if (hCaster == hParent) {
             return this.all_primary_stat_percent
@@ -259,7 +258,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_PERCENTAGE)
     CC_GetModifierStats_Agility_Percentage() {
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) { return 0 }
+        if (!GFuncEntity.IsValid(hCaster)) { return 0 }
         let hParent = this.GetParentPlus()
         if (hCaster == hParent) {
             return this.all_primary_stat_percent
@@ -268,7 +267,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_PERCENTAGE)
     CC_GetModifierStats_Intellect_Percentage() {
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) { return 0 }
+        if (!GFuncEntity.IsValid(hCaster)) { return 0 }
         let hParent = this.GetParentPlus()
         if (hCaster == hParent) {
             return this.all_primary_stat_percent
@@ -277,7 +276,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     CC_GetModifierBonusStats_Strength() {
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) { return 0 }
+        if (!GFuncEntity.IsValid(hCaster)) { return 0 }
         let hParent = this.GetParentPlus()
         if (hCaster != hParent) {
             return (hCaster.GetStrength() - (/**(GetStrengthWithoutPercentage(hCaster)*/1 * this.all_primary_stat_percent * 0.01)) * this.all_primary_stat_percent * 0.01
@@ -286,7 +285,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
     CC_GetModifierBonusStats_Agility() {
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) { return 0 }
+        if (!GFuncEntity.IsValid(hCaster)) { return 0 }
         let hParent = this.GetParentPlus()
         if (hCaster != hParent) {
             return (hCaster.GetAgility() - (/**(GetAgilityWithoutPercentage(hCaster)*/1 * this.all_primary_stat_percent * 0.01)) * this.all_primary_stat_percent * 0.01
@@ -295,7 +294,7 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     CC_GetModifierBonusStats_Intellect() {
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) { return 0 }
+        if (!GFuncEntity.IsValid(hCaster)) { return 0 }
         let hParent = this.GetParentPlus()
         if (hCaster != hParent) {
             return (hCaster.GetIntellect() - (/**(GetIntellectWithoutPercentage(hCaster)*/1 * this.all_primary_stat_percent * 0.01)) * this.all_primary_stat_percent * 0.01
@@ -303,8 +302,8 @@ export class modifier_omniknight_6_buff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.SPELL_CRITICALSTRIKE)
     CC_GetModifierSpellCriticalStrike() {
-        if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
-            if (GameFunc.mathUtil.PRD(this.spell_crit_chance, this.GetParentPlus(), "modifier_omniknight_6_buff_shard")) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard()) {
+            if (GFuncMath.PRD(this.spell_crit_chance, this.GetParentPlus(), "modifier_omniknight_6_buff_shard")) {
                 return this.spell_crit_damage
             }
         }

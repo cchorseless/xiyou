@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -61,7 +60,7 @@ export class modifier_t11_curse extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -167,17 +166,17 @@ export class modifier_t11_curse_thinker extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 return
             }
             let hAbility = this.GetAbilityPlus()
             // let combination_t11_corrode_curse  = combination_t11_corrode_curse.findIn(  hCaster )
-            // let has_combination_t11_corrode_curse = GameFunc.IsValid(combination_t11_corrode_curse) && combination_t11_corrode_curse.IsActivated()
+            // let has_combination_t11_corrode_curse = GFuncEntity.IsValid(combination_t11_corrode_curse) && combination_t11_corrode_curse.IsActivated()
 
             let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), this.aoe_radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_CLOSEST)
             for (let hTarget of (tTargets)) {
 
-                if (GameFunc.mathUtil.PRD(this.curse_chance, hCaster, "t11_curse")) {
+                if (GFuncMath.PRD(this.curse_chance, hCaster, "t11_curse")) {
                     modifier_t11_curse_debuff.apply(hTarget, hCaster, this.GetAbilityPlus(), { duration: this.curse_duration * hTarget.GetStatusResistanceFactor(hCaster) })
 
                     // if (has_combination_t11_corrode_curse && combination_t11_corrode_curse.CorrodeCurse) {

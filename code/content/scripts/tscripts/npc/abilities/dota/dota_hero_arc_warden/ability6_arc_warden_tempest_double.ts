@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -50,7 +49,7 @@ export class ability6_arc_warden_tempest_double extends BaseAbility_Plus {
         }, hCaster.GetTeam(), false)
     }
     FireProjectile(vPos: Vector, hTarget: IBaseNpc_Plus, fDamage: number, iShockCount: number, iTalent: any, iFireCount: number) {
-        if (!GameFunc.IsValid(this.GetCasterPlus())) {
+        if (!GFuncEntity.IsValid(this.GetCasterPlus())) {
             return
         }
         if (iFireCount <= 0) {
@@ -73,7 +72,7 @@ export class ability6_arc_warden_tempest_double extends BaseAbility_Plus {
         ProjectileManager.CreateTrackingProjectile(tProjInfo)
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
-        if (!GameFunc.IsValid(hTarget)) {
+        if (!GFuncEntity.IsValid(hTarget)) {
             return
         }
         let hCaster = this.GetCasterPlus()
@@ -160,7 +159,7 @@ export class modifier_arc_warden_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -220,7 +219,7 @@ export class modifier_arc_warden_6_thinker extends BaseModifier_Plus {
         }
     }
     OnIntervalThink() {
-        if (!GameFunc.IsValid(this.GetCasterPlus()) || !GameFunc.IsValid(this.GetAbilityPlus())) {
+        if (!GFuncEntity.IsValid(this.GetCasterPlus()) || !GFuncEntity.IsValid(this.GetAbilityPlus())) {
             this.Destroy()
             return
         }
@@ -289,9 +288,9 @@ export class modifier_arc_warden_6_wraith extends BaseModifier_Plus {
         return 0.1
     }
     GetAuraEntityReject(hEntity: IBaseNpc_Plus) {
-        if (GameFunc.IsValid(hEntity)) {
+        if (GFuncEntity.IsValid(hEntity)) {
             let ability = this.GetAbilityPlus() as ability6_arc_warden_tempest_double
-            if (GameFunc.IsValid(this.GetCasterPlus()) && GameFunc.IsValid(this.GetAbilityPlus()) && ability.FireProjectile) {
+            if (GFuncEntity.IsValid(this.GetCasterPlus()) && GFuncEntity.IsValid(this.GetAbilityPlus()) && ability.FireProjectile) {
                 ability.FireProjectile(this.GetParentPlus().GetOrigin(), hEntity, this.fDamage, this.iShockCount, this.iTalent, this.iFireCount)
             }
             this.Destroy()

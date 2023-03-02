@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -57,7 +56,7 @@ export class ability1_keeper_of_the_light_illuminate extends BaseAbility_Plus {
         let abilitycount = hThinker.GetAbilityCount()
         for (let i = abilitycount - 1; i >= 0; i--) {
             let hAbility = hThinker.GetAbilityByIndex(i)
-            if (GameFunc.IsValid(hAbility)) {
+            if (GFuncEntity.IsValid(hAbility)) {
                 hThinker.RemoveAbilityByHandle(hAbility)
             }
         }
@@ -65,14 +64,14 @@ export class ability1_keeper_of_the_light_illuminate extends BaseAbility_Plus {
         hThinker.EmitSound(ResHelper.GetSoundReplacement("Hero_KeeperOfTheLight.Illuminate.Charge", hCaster))
         let hModifier = modifier_keeper_of_the_light_1_thinker.apply(hThinker, hCaster, this, { duration: max_channel_time, vPosition: vPosition, vDirection: vDirection })
         let hAbility = ability6_keeper_of_the_light_spirit_form.findIn(hCaster)
-        if (GameFunc.IsValid(hAbility)) {
+        if (GFuncEntity.IsValid(hAbility)) {
             // hAbility.SaveModifier(hModifier)
         }
         //  记录上一次释放的位置
         this.vLastPosition = vPosition
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
-        if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+        if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
             let hCaster = this.GetCasterPlus()
             let base_damage = this.GetSpecialValueFor("base_damage")
             let extra_intellect_pct = this.GetCasterPlus().HasTalent("special_bonus_unique_keeper_of_the_light_custom_8") && this.GetCasterPlus().GetTalentValue("special_bonus_unique_keeper_of_the_light_custom_8") || 0
@@ -139,7 +138,7 @@ export class modifier_keeper_of_the_light_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability1_keeper_of_the_light_illuminate
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -215,7 +214,7 @@ export class modifier_keeper_of_the_light_1 extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     death(params: IModifierTable) {
         let hAttacker = params.attacker
-        if (!GameFunc.IsValid(hAttacker)) {
+        if (!GFuncEntity.IsValid(hAttacker)) {
             return
         }
         if (hAttacker.GetTeamNumber() == params.unit.GetTeamNumber()) {
@@ -286,8 +285,8 @@ export class modifier_keeper_of_the_light_1_thinker extends BaseModifier_Plus {
         this.shard_count = this.GetSpecialValueFor("shard_count")
         if (IsServer()) {
             this.left_launch_count = hCaster.HasShard() && this.shard_count || 1
-            this.vPosition = GameFunc.VectorFunctions.StringToVector(params.vPosition)
-            this.vDirection = GameFunc.VectorFunctions.StringToVector(params.vDirection)
+            this.vPosition = GFuncVector.StringToVector(params.vPosition)
+            this.vDirection = GFuncVector.StringToVector(params.vDirection)
             this.bFirst = true
             this.GetParentPlus().StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_CAST_ABILITY_7, 5 / this.GetDuration())
             this.StartIntervalThink(0)
@@ -322,9 +321,9 @@ export class modifier_keeper_of_the_light_1_thinker extends BaseModifier_Plus {
     }
     OnRemoved() {
         if (IsServer()) {
-            if (GameFunc.IsValid(this.GetCasterPlus())) {
+            if (GFuncEntity.IsValid(this.GetCasterPlus())) {
                 // let hAbility  = keeper_of_the_light_3.findIn(  this.GetCasterPlus() )
-                // if (GameFunc.IsValid(hAbility) && hAbility.RemoveModifier != null) {
+                // if (GFuncEntity.IsValid(hAbility) && hAbility.RemoveModifier != null) {
                 //     hAbility.RemoveModifier(this)
                 // }
             }
@@ -333,7 +332,7 @@ export class modifier_keeper_of_the_light_1_thinker extends BaseModifier_Plus {
     }
     OnIntervalThink() {
         if (IsServer()) {
-            if (!GameFunc.IsValid(this.GetCasterPlus())) {
+            if (!GFuncEntity.IsValid(this.GetCasterPlus())) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

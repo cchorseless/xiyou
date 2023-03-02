@@ -1,6 +1,5 @@
 /** @noSelfInFile */
 
-import { GameFunc } from "../../GameFunc";
 import { AoiHelper } from "../../helper/AoiHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { PropertyCalculate } from "../propertystat/PropertyCalculate";
@@ -193,7 +192,7 @@ function RecordTableCount() {
  * @returns 
  */
 function KnockBackFunction(fPercent: number, fStartHeight: number, fMaxHeight: number, fEndHeight: number) {
-    fPercent = GameFunc.mathUtil.Clamp(fPercent, 0, 1);
+    fPercent = GFuncMath.Clamp(fPercent, 0, 1);
     return (2 * fEndHeight + 2 * fStartHeight - 4 * fMaxHeight) * (fPercent * fPercent) + (4 * fMaxHeight - fEndHeight - 3 * fStartHeight) * fPercent + fStartHeight;
 }
 
@@ -1017,7 +1016,12 @@ declare global {
          * @Both
          */
         IsInvisiblePlus(): boolean;
-
+        /**
+         * @Server
+         * @param sItemName 
+         * @param bStash 
+         */
+        RemoveItemByName(sItemName: string, bStash?: boolean): void;
         /**
          * @Both
          */
@@ -1036,6 +1040,15 @@ declare global {
          * @returns
          */
         GetTalentValue(TalentName: string, sSpecialName?: string, default_V?: number): number;
+        /**
+         * @Server
+         */
+        GetOwnerPlus<T extends IBaseNpc_Plus>(): T;
+        /**
+         * kv数据
+         * @Both
+         */
+        GetKVData<T>(key: string, defaultv?: T): T;
         /**
          * 是否是真实单位
          * @Both
@@ -1203,6 +1216,22 @@ BaseNPC.IsInvisiblePlus = function () {
     return false;
 }
 
+BaseNPC.RemoveItemByName = function (ItemName, bStash) {
+    let count = 8;
+    if (bStash) {
+        count = 14;
+    }
+    for (let slot = 0; slot <= count; slot += 1) {
+        let item = this.GetItemInSlot(slot);
+        if (item) {
+            if (item.GetName() == ItemName) {
+                this.RemoveItem(item);
+                return;
+            }
+        }
+    }
+}
+
 BaseNPC.IsFriendly = function (hTarget: CDOTA_BaseNPC) {
     if (IsValid(this) && IsValid(hTarget)) {
         return this.GetTeamNumber() == hTarget.GetTeamNumber();
@@ -1285,8 +1314,13 @@ BaseNPC.findBuffStack = function (buffname: string, caster: CDOTA_BaseNPC = null
 }
 if (IsServer()) {
 
+    BaseNPC.GetOwnerPlus = function () {
+        return this.GetOwner() as IBaseNpc_Plus;
+    }
 
-
+    BaseNPC.GetKVData = function (key: string, defaultValue: any = "") {
+        return KVHelper.KvUnits[this.GetUnitName()][key] || defaultValue;
+    }
 
     BaseNPC.SetPrimaryAttribute = function (iPrimaryAttribute: Attributes) {
         if (iPrimaryAttribute > Attributes.DOTA_ATTRIBUTE_INVALID && iPrimaryAttribute < Attributes.DOTA_ATTRIBUTE_MAX) {
@@ -1320,7 +1354,7 @@ if (IsServer()) {
     BaseNPC.removeAbilityPlus = function (abilityname: string) {
         let ability = this.FindAbilityByName(abilityname) as IBaseAbility_Plus;
         if (ability) {
-            GDestroyAbility(ability);
+            GFuncEntity.SafeDestroyAbility(ability);
             this.RemoveAbility(abilityname);
         }
         else {

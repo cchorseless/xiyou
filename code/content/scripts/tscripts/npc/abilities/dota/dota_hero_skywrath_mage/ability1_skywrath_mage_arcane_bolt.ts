@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -95,7 +94,7 @@ export class ability1_skywrath_mage_arcane_bolt extends BaseAbility_Plus {
         if (ExtraData && ExtraData.hashtable_index != null) {
             let tHashtable = HashTableHelper.GetHashtableByIndex(ExtraData.hashtable_index || -1)
             if (tHashtable != null) {
-                if (GameFunc.IsValid(tHashtable.hModifier)) {
+                if (GFuncEntity.IsValid(tHashtable.hModifier)) {
                     tHashtable.hModifier.Destroy()
                 }
             }
@@ -104,7 +103,7 @@ export class ability1_skywrath_mage_arcane_bolt extends BaseAbility_Plus {
     OnSpellStart() {
         let hCaster = this.GetCasterPlus()
         let hTarget = this.GetCursorTarget()
-        if (!GameFunc.IsValid(hTarget) || !hTarget.IsAlive()) {
+        if (!GFuncEntity.IsValid(hTarget) || !hTarget.IsAlive()) {
             return
         }
         if (!hTarget.TriggerSpellAbsorb(this)) {
@@ -120,7 +119,7 @@ export class ability1_skywrath_mage_arcane_bolt extends BaseAbility_Plus {
             let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), scepter_radius, null, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST)
             for (let hUnit of (tTargets)) {
                 if (extra_count > 0) {
-                    if (GameFunc.IsValid(hUnit) && hUnit != hTarget) {
+                    if (GFuncEntity.IsValid(hUnit) && hUnit != hTarget) {
                         extra_count = extra_count - 1
                         this.ArcaneBolt(hUnit)
                     }
@@ -166,7 +165,7 @@ export class modifier_skywrath_mage_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

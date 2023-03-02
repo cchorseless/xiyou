@@ -435,7 +435,7 @@ export class modifier_imba_bristleback_quill_spray_autocaster extends BaseModifi
             }
         }
         if (this.ability.GetAutoCastState() && !this.caster.IsOutOfGame() && !this.caster.IsInvulnerable()) {
-            this.distance = this.distance + GameFunc.AsVector(this.caster.GetAbsOrigin() - this.last_position).Length();
+            this.distance = this.distance + GFuncVector.AsVector(this.caster.GetAbsOrigin() - this.last_position).Length();
             if (this.distance >= this.cardio_threshold && !this.parent.IsIllusion() && !this.parent.PassivesDisabled()) {
                 this.ability.OnSpellStart();
                 this.distance = 0;

@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { modifier_auto_findtreasure } from "../../../npc/abilities/common/building_auto_findtreasure";
 import { ET } from "../../../shared/lib/Entity";
 
@@ -15,7 +14,7 @@ export class RoundPrizeUnitKillPrizeComponent extends ET.Component {
     }
     OnKillByEntity(entityid: EntityIndex) {
         let hUnit = EntIndexToHScript(entityid) as IBaseNpc_Plus;
-        if (!GameFunc.IsValid(hUnit)) {
+        if (!GFuncEntity.IsValid(hUnit)) {
             return;
         }
         if (!hUnit.ETRoot) {

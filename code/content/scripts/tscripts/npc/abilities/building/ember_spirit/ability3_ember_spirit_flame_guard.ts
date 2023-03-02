@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -82,7 +81,7 @@ export class modifier_ember_spirit_3 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -275,7 +274,7 @@ export class modifier_ember_spirit_3_friend extends BaseModifier_Plus {
     BeCreated(params: IModifierTable) {
 
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(hCaster)) {
+        if (GFuncEntity.IsValid(hCaster)) {
             this.bonus_attack_damage_per_agi = this.GetSpecialValueFor("bonus_attack_damage_per_agi") + hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_2")
             this.bouns_attack_damage = this.bonus_attack_damage_per_agi * hCaster.GetAgility() * (hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_4") * 0.01)
         }
@@ -283,7 +282,7 @@ export class modifier_ember_spirit_3_friend extends BaseModifier_Plus {
     BeRefresh(params: IModifierTable) {
 
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(hCaster)) {
+        if (GFuncEntity.IsValid(hCaster)) {
             this.bonus_attack_damage_per_agi = this.GetSpecialValueFor("bonus_attack_damage_per_agi") + hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_2")
             this.bouns_attack_damage = this.bonus_attack_damage_per_agi * hCaster.GetAgility() * (hCaster.GetTalentValue("special_bonus_unique_ember_spirit_custom_4") * 0.01)
         }

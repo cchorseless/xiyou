@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -232,8 +231,8 @@ export class modifier_imba_shuriken_toss_debuff_pull extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         if (IsServer()) {
-            let distance = GameFunc.AsVector(this.parent.GetAbsOrigin() - this.toss_hit_location).Length2D();
-            let direction = GameFunc.AsVector(this.toss_hit_location - this.parent.GetAbsOrigin()).Normalized();
+            let distance = GFuncVector.AsVector(this.parent.GetAbsOrigin() - this.toss_hit_location).Length2D();
+            let direction = GFuncVector.AsVector(this.toss_hit_location - this.parent.GetAbsOrigin()).Normalized();
             if (distance <= this.minimum_pull_distance) {
                 return undefined;
             }
@@ -335,10 +334,10 @@ export class imba_bounty_hunter_jinada extends BaseAbility_Plus {
                 return;
             }
         }
-        let blink_direction = GameFunc.AsVector(target.GetAbsOrigin() - caster.GetAbsOrigin()).Normalized();
+        let blink_direction = GFuncVector.AsVector(target.GetAbsOrigin() - caster.GetAbsOrigin()).Normalized();
         let target_pos = target.GetAbsOrigin() + blink_direction * (-50) as Vector;
         FindClearSpaceForUnit(caster, target_pos, false);
-        caster.SetForwardVector(GameFunc.AsVector(target.GetAbsOrigin() - caster.GetAbsOrigin()).Normalized());
+        caster.SetForwardVector(GFuncVector.AsVector(target.GetAbsOrigin() - caster.GetAbsOrigin()).Normalized());
         ability.UseResources(false, false, true);
         this.AddTimer(1, () => {
             if (caster.HasModifier("modifier_imba_jinada_buff_crit")) {

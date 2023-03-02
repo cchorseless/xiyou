@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
@@ -51,7 +50,7 @@ export class ability6_alchemist_chemical_rage extends BaseAbility_Plus {
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
         let hCaster = this.GetCasterPlus();
 
-        if (!GameFunc.IsValid(hTarget) || hTarget.TriggerSpellAbsorb(this)) {
+        if (!GFuncEntity.IsValid(hTarget) || hTarget.TriggerSpellAbsorb(this)) {
             return true;
         }
 
@@ -123,7 +122,7 @@ export class modifier_alchemist_3_buff extends BaseModifier_Plus {
     OnIntervalThink() {
         let hAbility = this.GetAbilityPlus();
         let hCaster = this.GetCasterPlus();
-        if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+        if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
             this.Destroy();
             return;
         }

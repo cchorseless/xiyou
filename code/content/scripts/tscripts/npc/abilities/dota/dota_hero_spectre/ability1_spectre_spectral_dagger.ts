@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -109,7 +108,7 @@ export class ability1_spectre_spectral_dagger extends BaseAbility_Plus {
         this.AddShadow(tHashtable, vLocation, tHashtable.dagger_path_duration)
         let tTargets = FindUnitsInRadius(tHashtable.hCaster.GetTeamNumber(), vLocation, null, tHashtable.dagger_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false)
         for (let hTarget of (tTargets as IBaseNpc_Plus[])) {
-            if (GameFunc.IsValid(hTarget) && hTarget != tHashtable.hCaster && tHashtable.tTargets.indexOf(hTarget) == null) {
+            if (GFuncEntity.IsValid(hTarget) && hTarget != tHashtable.hCaster && tHashtable.tTargets.indexOf(hTarget) == null) {
                 if (hTarget.IsConsideredHero()) {
                     modifier_spectre_1_path_debuff.apply(hTarget, tHashtable.hCaster, this, { duration: tHashtable.dagger_path_duration * hTarget.GetStatusResistanceFactor(tHashtable.hCaster), hashtable_index: ExtraData.hashtable_index })
                 }
@@ -202,7 +201,7 @@ export class modifier_spectre_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -270,7 +269,7 @@ export class modifier_spectre_1_path_thinker_aura extends BaseModifier_Plus {
         return true
     }
     GetAuraEntityReject(hEntity: IBaseNpc_Plus) {
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             for (let vPosition of (this.tHashtable.tAuraPositions)) {
                 if (hEntity.IsPositionInRange(vPosition, this.tHashtable.path_radius)) {
                     if (UnitFilter(hEntity, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, this.GetCasterPlus().GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
@@ -353,7 +352,7 @@ export class modifier_spectre_1_path_debuff extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus() as ability1_spectre_spectral_dagger
-            if (!GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -416,7 +415,7 @@ export class modifier_spectre_1_debuff extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_START)
     On_AttackStart(params: ModifierAttackEvent) {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(hCaster) && (params.attacker as IBaseNpc_Plus).GetSource() == hCaster) {
+        if (GFuncEntity.IsValid(hCaster) && (params.attacker as IBaseNpc_Plus).GetSource() == hCaster) {
             modifier_spectre_1_attack_speed.apply(params.attacker, params.attacker, this.GetAbilityPlus(), null)
         }
     }

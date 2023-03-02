@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -30,18 +29,18 @@ export class ability1_void_spirit_aether_remnant extends BaseAbility_Plus {
 
     //  触发被动
     UseIllusionSpell() {
-        if (!GameFunc.IsValid(this)
-            || !GameFunc.IsValid(this.GetCasterPlus())) {
+        if (!GFuncEntity.IsValid(this)
+            || !GFuncEntity.IsValid(this.GetCasterPlus())) {
             return
         }
 
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { IsDummy: boolean, tIlls: any[], iActivePct: number };
-        if (GameFunc.IsValid(hCaster)
+        if (GFuncEntity.IsValid(hCaster)
             && !hCaster.IsIllusion()
             && !hCaster.IsDummy
             && hCaster.tIlls) {
             let hOriAbility = ability1_void_spirit_aether_remnant.findIn(hCaster)
-            let iOriLevel = GameFunc.IsValid(hOriAbility) && hOriAbility.GetLevel() || -1
+            let iOriLevel = GFuncEntity.IsValid(hOriAbility) && hOriAbility.GetLevel() || -1
             if (iOriLevel <= 0) {
                 return
             }
@@ -50,14 +49,14 @@ export class ability1_void_spirit_aether_remnant extends BaseAbility_Plus {
             let iUse = 0
             //  灵扉施法
             for (let hIll of (hCaster.tIlls)) {
-                if (GameFunc.IsValid(hIll) && hIll.bActive) {
+                if (GFuncEntity.IsValid(hIll) && hIll.bActive) {
                     iActive = iActive + 1
                     //  激活概率判断
                     let iActivePct = hCaster.iActivePct
                     if (RandomInt(1, 100) < iActivePct) {
                         iUse = iUse + 1
                         let hAbility = ability1_void_spirit_aether_remnant.findIn(hIll)
-                        if (!GameFunc.IsValid(hAbility)) {
+                        if (!GFuncEntity.IsValid(hAbility)) {
                             hAbility = hIll.AddAbility("void_spirit_1")
                             hAbility.SetLevel(iOriLevel)
                         }
@@ -121,12 +120,12 @@ export class ability1_void_spirit_aether_remnant extends BaseAbility_Plus {
 
     //  这个技能都用这个应用伤害
     GoApplyDamage(hTarget: IBaseNpc_Plus) {
-        if (!GameFunc.IsValid(hTarget)) {
+        if (!GFuncEntity.IsValid(hTarget)) {
             return
         }
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
         let iDamagePct = 100
-        if (GameFunc.IsValid(hCaster.hParent)
+        if (GFuncEntity.IsValid(hCaster.hParent)
             && hCaster.IsDummy) {
             // hCaster = hCaster.hParent
             // iDamagePct = hCaster.iDamagePct + (hCaster.HasShard() && hCaster.all_damage_amplify || 0) + hCaster.GetTalentValue('special_bonus_unique_void_spirit_custom_8')
@@ -147,7 +146,7 @@ export class ability1_void_spirit_aether_remnant extends BaseAbility_Plus {
     }
     GetOriCaster() {
         let hCaster = this.GetCasterPlus() as IBaseNpc_Plus & { hParent: IBaseNpc_Plus, IsDummy: boolean, tIlls: any[], iActivePct: number };
-        if (GameFunc.IsValid(hCaster.hParent) && hCaster.IsDummy) {
+        if (GFuncEntity.IsValid(hCaster.hParent) && hCaster.IsDummy) {
             hCaster = hCaster.hParent as any
         }
         return hCaster
@@ -187,7 +186,7 @@ export class modifier_void_spirit_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability1_void_spirit_aether_remnant
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -293,14 +292,14 @@ export class modifier_void_spirit_1_thinker extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus() as ability1_void_spirit_aether_remnant
 
-        if (!GameFunc.IsValid(hAbility) || !GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hAbility) || !GFuncEntity.IsValid(hCaster)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
         }
 
         let hOriCaster = hAbility.GetOriCaster && hAbility.GetOriCaster() || null
-        if (!GameFunc.IsValid(hOriCaster)) {
+        if (!GFuncEntity.IsValid(hOriCaster)) {
             this.StartIntervalThink(-1)
             this.Destroy()
             return
@@ -321,7 +320,7 @@ export class modifier_void_spirit_1_thinker extends BaseModifier_Plus {
         let iTotalCanRooted = 1 + hOriCaster.GetTalentValue('special_bonus_unique_void_spirit_custom_1')
         this.tTriggered = this.tTriggered || []
         for (let hTarget of (tTargets as IBaseNpc_Plus[])) {
-            if (GameFunc.IsValid(hTarget)
+            if (GFuncEntity.IsValid(hTarget)
                 && hTarget.IsAlive()
                 && this.tTriggered.length < iTotalCanRooted
                 && this.tTriggered.indexOf(hTarget) == null) {
@@ -340,7 +339,7 @@ export class modifier_void_spirit_1_thinker extends BaseModifier_Plus {
         }
     }
     RootedEmmy(hTarget: IBaseNpc_Plus) {
-        if (GameFunc.IsValid(hTarget) && hTarget.IsAlive()) {
+        if (GFuncEntity.IsValid(hTarget) && hTarget.IsAlive()) {
             let hAbility = this.GetAbilityPlus() as ability1_void_spirit_aether_remnant
             if (this.GetCasterPlus() == (hAbility && hAbility.GetOriCaster && hAbility.GetOriCaster())) {
                 hTarget.EmitSound('Hero_VoidSpirit.AetherRemnant.Target')

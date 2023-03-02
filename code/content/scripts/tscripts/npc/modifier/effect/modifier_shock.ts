@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { BattleHelper } from "../../../helper/BattleHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -82,7 +81,7 @@ export class modifier_shock extends BaseModifier_Plus {
         }
         let hAttacker = params.attacker
         let hAbility = params.inflictor as IBaseAbility_Plus;
-        if (GameFunc.IsValid(hAttacker) && !this.IsCooldown) {
+        if (GFuncEntity.IsValid(hAttacker) && !this.IsCooldown) {
             modifier_shock.ShockActive(this.GetParentPlus(), hAttacker, hAbility, 100, false)
         }
     }
@@ -101,7 +100,7 @@ export class modifier_shock extends BaseModifier_Plus {
         }
         let iShockStack = math.min(iCount, modifier_shock.MAX_SHOCK_STACK)	//  触电层数
         let hShockModifier = modifier_shock.findIn(target);
-        if (GameFunc.IsValid(hShockModifier)) {
+        if (GFuncEntity.IsValid(hShockModifier)) {
             let iStack = hShockModifier.GetStackCount()
             let iTargetStack = modifier_shock.MAX_SHOCK_STACK - iStack
             iShockStack = iTargetStack > iShockStack && iShockStack || iTargetStack
@@ -114,14 +113,14 @@ export class modifier_shock extends BaseModifier_Plus {
     }
 
     static ShockActive(target: IBaseNpc_Plus, hCaster: IBaseNpc_Plus, hAbility: IBaseAbility_Plus, fPercent: number, bIgnoreCooldown = true) {
-        if (!GameFunc.IsValid(target)) {
+        if (!GFuncEntity.IsValid(target)) {
             return
         }
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             return
         }
         let m_shock = modifier_shock.findIn(target);
-        if (!GameFunc.IsValid(m_shock)) {
+        if (!GFuncEntity.IsValid(m_shock)) {
             return
         }
         if (m_shock.IsCooldown && !bIgnoreCooldown) {

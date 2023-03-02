@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -46,7 +45,7 @@ export class ability1_arc_warden_flux extends BaseAbility_Plus {
         EmitSoundOn(ResHelper.GetSoundReplacement("Hero_ArcWarden.Flux.Cast", hCaster), hCaster)
     }
     Process(hTarget: IBaseNpc_Plus) {
-        if (!GameFunc.IsValid(hTarget)) {
+        if (!GFuncEntity.IsValid(hTarget)) {
             return
         }
         let hCaster = this.GetCasterPlus()
@@ -112,7 +111,7 @@ export class modifier_arc_warden_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

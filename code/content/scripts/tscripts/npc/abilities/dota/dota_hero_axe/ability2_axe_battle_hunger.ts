@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -95,7 +94,7 @@ export class modifier_axe_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -145,7 +144,7 @@ export class modifier_axe_2 extends BaseModifier_Plus {
             let targets = AoiHelper.FindEntityInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), this.radius, null, teamFilter, typeFilter, flagFilter, order)
             let extar_trigger_chance = caster.HasTalent("special_bonus_unique_axe_custom_5") && caster.GetTalentValue("special_bonus_unique_axe_custom_5") || 0
             let chance = this.trigger_chance + extar_trigger_chance + targets.length * this.chance_per_unit
-            if (GameFunc.mathUtil.PRD(chance, caster, "axe_2")) {
+            if (GFuncMath.PRD(chance, caster, "axe_2")) {
                 ability.CounterHelix()
             }
         }

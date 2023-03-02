@@ -47,7 +47,7 @@ export class imba_enchantress_untouchable extends BaseAbility_Plus {
         caster.AddNewModifier(caster, this, "modifier_imba_enchantress_untouchable_peace_on_earth", {
             duration: peace_on_earth_duration
         });
-        EmitGlobalSound(GameFunc.ArrayFunc.RandomOne(Object.values(responses)));
+        EmitGlobalSound(GFuncRandom.RandomOne(Object.values(responses)));
         EmitGlobalSound("DOTA_Item.HeavensHalberd.Activate");
     }
     OnOwnerSpawned(): void {

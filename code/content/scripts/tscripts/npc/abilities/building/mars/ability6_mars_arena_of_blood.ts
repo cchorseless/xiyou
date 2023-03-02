@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -89,7 +88,7 @@ export class modifier_mars_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability6_mars_arena_of_blood
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -234,7 +233,7 @@ export class modifier_mars_6_thinker extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
         let origin = hParent.GetAbsOrigin()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             this.Destroy()
             return
         }
@@ -310,7 +309,7 @@ export class modifier_mars_6_blocker extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         if (IsServer()) {
-            if (!GameFunc.IsValid(hCaster) || !hCaster.IsAlive()) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.IsAlive()) {
                 this.Destroy()
                 return
             }
@@ -528,7 +527,7 @@ export class modifier_mars_6_spear_aura extends BaseModifier_Plus {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             this.Destroy()
             return
         }
@@ -571,7 +570,7 @@ export class modifier_mars_6_spear_aura extends BaseModifier_Plus {
                 //  Create Sound
                 EmitSoundOnLocationWithCaster(hParent.GetAbsOrigin(), "Hero_Mars.Phalanx.Attack", this.GetCasterPlus())
                 EmitSoundOn("Hero_Mars.Phalanx.Target", hParent)
-                if (GameFunc.IsValid(arena_walls[0])) {
+                if (GFuncEntity.IsValid(arena_walls[0])) {
                     let vCenter = arena_walls[0].GetAbsOrigin()
                     let modifierKnockback = {
                         center_x: vCenter.x,

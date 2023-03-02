@@ -1,4 +1,3 @@
-import { GameFunc } from "../../GameFunc";
 import { BattleHelper } from "../../helper/BattleHelper";
 import { ResHelper } from "../../helper/ResHelper";
 import { PropertyConfig } from "../../shared/PropertyConfig";
@@ -23,7 +22,7 @@ export class modifier_property extends BaseModifier_Plus {
             GPropertyCalculate.call_ability = null;
             GPropertyCalculate.call_ability = null;
             GPropertyCalculate.call_key = null;
-            if (GameFunc.IsValid(hAbility) && hAbility.GetLevelSpecialValueFor != null) {
+            if (GFuncEntity.IsValid(hAbility) && hAbility.GetLevelSpecialValueFor != null) {
                 switch (sKeyName) {
                     case "cool_down":
                         return tostring(hAbility.GetCooldown(iLevel));
@@ -43,7 +42,7 @@ export class modifier_property extends BaseModifier_Plus {
             GPropertyCalculate.call_unit = null;
             GPropertyCalculate.call_func = null;
             let func = (GPropertyCalculate as any)[sFunctionName];
-            if (GameFunc.IsValid(hUnit) && func != null && typeof func == "function") {
+            if (GFuncEntity.IsValid(hUnit) && func != null && typeof func == "function") {
                 let r = tostring(func(hUnit))
                 return r;
             }
@@ -147,7 +146,7 @@ export class modifier_property extends BaseModifier_Plus {
         let current = 1 + parent.GetIncreasedAttackSpeed();
         let minpect = GPropertyConfig.MINIMUM_ATTACK_SPEED * 0.01;
         let maxpect = (GPropertyConfig.MAXIMUM_ATTACK_SPEED + fBonus) * 0.01
-        return GameFunc.mathUtil.Clamp(current, minpect, maxpect)
+        return GFuncMath.Clamp(current, minpect, maxpect)
     }
     /**额外攻速 */
     GetModifierAttackSpeedBonus_Constant(): number {
@@ -202,7 +201,7 @@ export class modifier_property extends BaseModifier_Plus {
                     // 目标受击暴击概率
                     let tChance = PropertyCalculate.SumProps(hTarget, event, GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_TARGET_CRITICALSTRIKE);
                     fChance = fChance * (1 + tChance * 0.01)
-                    if (GameFunc.mathUtil.PRD(fChance, this.GetParentPlus(), 'GetModifierPreAttack_CriticalStrike')) {
+                    if (GFuncRandom.PRD(fChance, this.GetParentPlus(), 'GetModifierPreAttack_CriticalStrike')) {
                         bool = true;
                     }
                 }
@@ -276,7 +275,7 @@ export class modifier_property extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(iParticleID, 3, vColor)
             ParticleManager.ReleaseParticleIndex(iParticleID)
         }
-        if (GameFunc.IsValid(hTarget)) {
+        if (GFuncEntity.IsValid(hTarget)) {
             // 无视伤害加深
             let bDamageAmplify = !BattleHelper.DamageFilter(params.record, BattleHelper.enum_CC_DAMAGE_FLAGS.CC_DAMAGE_FLAG_NO_DAMAGE_AMPLIFY);
             let _tmp = 0

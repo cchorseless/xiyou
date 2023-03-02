@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { EntityHelper } from "../../../../helper/EntityHelper";
@@ -31,13 +30,13 @@ export class ability1_zeus_arc_lightning extends BaseAbility_Plus {
         if (tUnits.length >= jump_count) { return }
         this.addTimer(this.GetSpecialValueFor("jump_delay", 0.25), () => {
             let hTarget = tUnits[tUnits.length - 1];
-            if (!GameFunc.IsValid(hTarget)) {
+            if (!GFuncEntity.IsValid(hTarget)) {
                 return
             }
             let hCaster = this.GetCasterPlus()
             let radius = this.GetSpecialValueFor("radius")
             let hNewTarget = AoiHelper.GetBounceTarget(tUnits, hCaster.GetTeamNumber(), radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags() + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS)
-            if (GameFunc.IsValid(hNewTarget)) {
+            if (GFuncEntity.IsValid(hNewTarget)) {
                 this.ArcLightning(hTarget, hNewTarget);
                 tUnits.push(hNewTarget);
                 this.Jump(tUnits);
@@ -60,7 +59,7 @@ export class ability1_zeus_arc_lightning extends BaseAbility_Plus {
         // if (AbilityUpgrades.HasAbilityMechanicsUpgrade(hCaster, this.GetAbilityName(), "fs")) {
         //     let iStackCount = 0
         //     let hModifier = modifier_zuus_1_debuff.findIn(hTarget);
-        //     if (GameFunc.IsValid(hModifier)) {
+        //     if (GFuncEntity.IsValid(hModifier)) {
         //         iStackCount = hModifier.GetStackCount()
         //     }
         //     arc_damage = arc_damage * (1 + iStackCount * this.GetSpecialValueFor("damage_percent") * 0.01)
@@ -82,7 +81,7 @@ export class ability1_zeus_arc_lightning extends BaseAbility_Plus {
     }
     OnSpellStart() {
         let hTarget = this.GetCursorTarget() as IBaseNpc_Plus
-        if (GameFunc.IsValid(hTarget) && !hTarget.TriggerSpellAbsorb(this)) {
+        if (GFuncEntity.IsValid(hTarget) && !hTarget.TriggerSpellAbsorb(this)) {
             this.ArcLightning(this.GetCasterPlus(), hTarget);
             this.Jump([hTarget]);
         }

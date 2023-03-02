@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -108,7 +107,7 @@ export class modifier_slark_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -148,7 +147,7 @@ export class modifier_slark_2 extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.OUTGOING_DAMAGE_PERCENTAGE)
     CC_GetModifierOutgoingDamagePercentage(params: ModifierAttackEvent) {
-        if (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && params != null && modifier_slark_2_leash.exist(params.target)) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().HasShard() && params != null && modifier_slark_2_leash.exist(params.target)) {
             return this.shard_amplify_damage_pct
         }
         return 0
@@ -186,7 +185,7 @@ export class modifier_slark_2_leash extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         this.leash_radius = this.GetSpecialValueFor("leash_radius")
         if (IsServer()) {
-            this.vPosition = GameFunc.VectorFunctions.StringToVector(params.position)
+            this.vPosition = GFuncVector.StringToVector(params.position)
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_slark/slark_pounce_leash.vpcf",
                 resNpc: hCaster,
@@ -259,7 +258,7 @@ export class modifier_slark_2_thinker extends BaseModifier_Plus {
 
         if (IsServer()) {
             this.GetParentPlus().EmitSound(ResHelper.GetSoundReplacement("Hero_Slark.Pounce.End", this.GetCasterPlus()))
-            if (GameFunc.IsValid(this.GetParentPlus())) {
+            if (GFuncEntity.IsValid(this.GetParentPlus())) {
                 this.GetParentPlus().SafeDestroy()
             }
         }

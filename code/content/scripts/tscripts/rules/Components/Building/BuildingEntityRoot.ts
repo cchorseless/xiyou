@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseNpc_Plus } from "../../../npc/entityPlus/BaseNpc_Plus";
@@ -103,8 +102,8 @@ export class BuildingEntityRoot extends BattleUnitEntityRoot {
 
     onDestroy(): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        if (GameFunc.IsValid(npc)) {
-            GDestroyUnit(npc);
+        if (GFuncEntity.IsValid(npc)) {
+            GFuncEntity.SafeDestroyUnit(npc);
         }
     }
 

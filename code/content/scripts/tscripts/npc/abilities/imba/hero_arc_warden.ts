@@ -236,7 +236,7 @@ export class modifier_imba_arc_warden_magnetic_field_evasion extends BaseModifie
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT)
     CC_GetModifierEvasion_Constant(keys: ModifierAttackEvent): number {
-        if (keys.attacker && this.GetAuraOwner() && this.GetAuraOwner().HasModifier("modifier_imba_arc_warden_magnetic_field_thinker_evasion") && this.GetAuraOwner().findBuff<modifier_imba_arc_warden_magnetic_field_thinker_evasion>("modifier_imba_arc_warden_magnetic_field_thinker_evasion").radius && GameFunc.AsVector(keys.attacker.GetAbsOrigin() - this.GetAuraOwner().GetAbsOrigin()).Length2D() > this.GetAuraOwner().findBuff<modifier_imba_arc_warden_magnetic_field_thinker_evasion>("modifier_imba_arc_warden_magnetic_field_thinker_evasion").radius) {
+        if (keys.attacker && this.GetAuraOwner() && this.GetAuraOwner().HasModifier("modifier_imba_arc_warden_magnetic_field_thinker_evasion") && this.GetAuraOwner().findBuff<modifier_imba_arc_warden_magnetic_field_thinker_evasion>("modifier_imba_arc_warden_magnetic_field_thinker_evasion").radius && GFuncVector.AsVector(keys.attacker.GetAbsOrigin() - this.GetAuraOwner().GetAbsOrigin()).Length2D() > this.GetAuraOwner().findBuff<modifier_imba_arc_warden_magnetic_field_thinker_evasion>("modifier_imba_arc_warden_magnetic_field_thinker_evasion").radius) {
             return this.evasion_chance;
         }
     }
@@ -265,7 +265,7 @@ export class imba_arc_warden_spark_wraith extends BaseAbility_Plus {
                 Ability: this,
                 Source: this.GetCasterPlus(),
                 vSpawnOrigin: this.GetCasterPlus().GetAbsOrigin(),
-                vVelocity: GameFunc.AsVector((this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()) * Vector(1, 1, 0)).Normalized() * this.GetSpecialValueFor("wraith_speed") as Vector,
+                vVelocity: GFuncVector.AsVector((this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()) * Vector(1, 1, 0)).Normalized() * this.GetSpecialValueFor("wraith_speed") as Vector,
                 vAcceleration: undefined,
                 fMaxSpeed: undefined,
                 fDistance: super.GetCastRange(this.GetCursorPosition(), this.GetCasterPlus()) + this.GetCasterPlus().GetCastRangeBonus(),

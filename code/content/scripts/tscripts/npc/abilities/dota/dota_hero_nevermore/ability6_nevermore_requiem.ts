@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -83,7 +82,7 @@ export class ability6_nevermore_requiem extends BaseAbility_Plus {
         let hCaster = this.GetCasterPlus()
         if (hCaster.HasTalent("special_bonus_unique_nevermore_custom")) {
         } else {
-            if (GameFunc.IsValid(this.ParticleModifier)) {
+            if (GFuncEntity.IsValid(this.ParticleModifier)) {
                 this.ParticleModifier.Destroy()
             }
             hCaster.StopSound(ResHelper.GetSoundReplacement("Hero_Nevermore.RequiemOfSoulsCast", hCaster))
@@ -110,18 +109,18 @@ export class ability6_nevermore_requiem extends BaseAbility_Plus {
         hCaster.EmitSound(ResHelper.GetSoundReplacement("Hero_Nevermore.RequiemOfSouls", hCaster))
 
         let nevermore_1 = ability1_nevermore_shadowraze1.findIn(hCaster)
-        if (GameFunc.IsValid(nevermore_1) && nevermore_1.GetLevel() > 0) {
+        if (GFuncEntity.IsValid(nevermore_1) && nevermore_1.GetLevel() > 0) {
             let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), requiem_radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_CLOSEST)
             for (let hTarget of (tTargets)) {
 
                 let hModifier = modifier_nevermore_1_debuff.findIn(hTarget) as modifier_nevermore_1_debuff;
                 let iStack = 0
-                if (!GameFunc.IsValid(hModifier)) {
+                if (!GFuncEntity.IsValid(hModifier)) {
                     hModifier = modifier_nevermore_1_debuff.apply(hTarget, hCaster, nevermore_1, { duration: nevermore_1.GetSpecialValueFor("duration") }) as modifier_nevermore_1_debuff
                 } else {
                     iStack = hModifier.GetStackCount()
                 }
-                if (GameFunc.IsValid(hModifier)) {
+                if (GFuncEntity.IsValid(hModifier)) {
                     iStack = math.max(iStack + 1, math.floor(iStack * (1 + shadowraze_stack_increase * 0.01)))
                     hModifier.SetStackCount(iStack)
                 }
@@ -131,7 +130,7 @@ export class ability6_nevermore_requiem extends BaseAbility_Plus {
         let vDiretion = Vector(1, 0, 0)
         let vStartPosition = hCaster.GetAbsOrigin()
         for (let i = 0; i <= iReleaseSouls - 1; i++) {
-            let vTempDiretion = GameFunc.VectorFunctions.Rotation2D(vDiretion, math.rad((360 / iReleaseSouls) * i))
+            let vTempDiretion = GFuncVector.Rotation2D(vDiretion, math.rad((360 / iReleaseSouls) * i))
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_nevermore/nevermore_requiemofsouls_line.vpcf",
                 resNpc: hCaster,
@@ -165,18 +164,18 @@ export class ability6_nevermore_requiem extends BaseAbility_Plus {
         if (hCaster.HasScepter()) {
             this.addTimer(requiem_radius / requiem_line_speed, () => {
                 let nevermore_1 = ability1_nevermore_shadowraze1.findIn(hCaster)
-                if (GameFunc.IsValid(nevermore_1) && nevermore_1.GetLevel() > 0) {
+                if (GFuncEntity.IsValid(nevermore_1) && nevermore_1.GetLevel() > 0) {
                     let tTargets = AoiHelper.FindEntityInRadius(hCaster.GetTeamNumber(), hCaster.GetAbsOrigin(), requiem_radius, null, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, FindOrder.FIND_CLOSEST)
                     for (let hTarget of (tTargets)) {
 
                         let hModifier = modifier_nevermore_1_debuff.findIn(hTarget) as modifier_nevermore_1_debuff;
                         let iStack = 0
-                        if (!GameFunc.IsValid(hModifier)) {
+                        if (!GFuncEntity.IsValid(hModifier)) {
                             hModifier = modifier_nevermore_1_debuff.apply(hTarget, hCaster, nevermore_1, { duration: nevermore_1.GetSpecialValueFor("duration") }) as modifier_nevermore_1_debuff
                         } else {
                             iStack = hModifier.GetStackCount()
                         }
-                        if (GameFunc.IsValid(hModifier)) {
+                        if (GFuncEntity.IsValid(hModifier)) {
                             iStack = math.max(iStack + 1, math.floor(iStack * (1 + shadowraze_stack_increase * 0.01)))
                             hModifier.SetStackCount(iStack)
                         }
@@ -186,7 +185,7 @@ export class ability6_nevermore_requiem extends BaseAbility_Plus {
                 let vDiretion = Vector(1, 0, 0)
                 let vEndPosition = hCaster.GetAbsOrigin()
                 for (let i = 0; i <= iReleaseSouls - 1; i++) {
-                    let vTempDiretion = GameFunc.VectorFunctions.Rotation2D(vDiretion, math.rad((360 / iReleaseSouls) * i))
+                    let vTempDiretion = GFuncVector.Rotation2D(vDiretion, math.rad((360 / iReleaseSouls) * i))
                     let vStartPosition = (vEndPosition + vTempDiretion * requiem_radius) as Vector
                     vTempDiretion = (-vTempDiretion) as Vector
                     let iParticleID = ResHelper.CreateParticle({
@@ -312,7 +311,7 @@ export class modifier_nevermore_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

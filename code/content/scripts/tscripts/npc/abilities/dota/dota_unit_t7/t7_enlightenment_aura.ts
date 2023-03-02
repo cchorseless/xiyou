@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -44,7 +43,7 @@ export class modifier_t7_enlightenment_aura extends BaseModifier_Plus {
     }
     OnIntervalThink() {
         if (IsServer()) {
-            if (!GameFunc.IsValid(this.modifier) || this.level == null || this.level != this.GetAbilityPlus().GetLevel()) {
+            if (!GFuncEntity.IsValid(this.modifier) || this.level == null || this.level != this.GetAbilityPlus().GetLevel()) {
                 this.level = this.GetAbilityPlus().GetLevel()
                 this.modifier = modifier_t7_enlightenment_aura_hidden.apply((this.GetParentPlus(), this.GetParentPlus(), this.GetAbilityPlus(), null)) as IBaseModifier_Plus
             }
@@ -53,7 +52,7 @@ export class modifier_t7_enlightenment_aura extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GameFunc.IsValid(this.modifier)) {
+            if (GFuncEntity.IsValid(this.modifier)) {
                 this.modifier.Destroy()
             }
         }
@@ -112,7 +111,7 @@ export class modifier_t7_enlightenment_aura_hidden extends BaseModifier_Plus {
     }
     OnIntervalThink() {
         if (IsServer()) {
-            if (GameFunc.IsValid(this.GetAbilityPlus()) && this.GetAbilityPlus().IsActivated()) {
+            if (GFuncEntity.IsValid(this.GetAbilityPlus()) && this.GetAbilityPlus().IsActivated()) {
                 this.SetStackCount(0)
             } else {
                 this.SetStackCount(1)
@@ -170,7 +169,7 @@ export class modifier_t7_enlightenment_aura_effect extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     CC_GetModifierBonusStats_Intellect() {
-        if (GameFunc.IsValid(this.GetCasterPlus())) {
+        if (GFuncEntity.IsValid(this.GetCasterPlus())) {
             let iInt = this.GetCasterPlus().GetIntellect()
             let iNew = math.floor(iInt * this.aura_intellect_pct * 0.01)
             return iNew

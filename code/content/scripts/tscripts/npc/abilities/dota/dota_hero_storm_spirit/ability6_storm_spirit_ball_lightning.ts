@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -52,7 +51,7 @@ export class ability6_storm_spirit_ball_lightning extends BaseAbility_Plus {
 
     GetManaCost(iLevel: number) {
         let hCaster = this.GetCasterPlus()
-        if (!GameFunc.IsValid(hCaster)) {
+        if (!GFuncEntity.IsValid(hCaster)) {
             return super.GetManaCost(iLevel)
         }
         let fMaxMana = hCaster.GetMaxMana()
@@ -124,7 +123,7 @@ export class modifier_storm_spirit_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -214,8 +213,8 @@ export class modifier_storm_spirit_6_buff extends BaseModifierMotionHorizontal_P
         this.ball_lightning_min_distance = this.GetSpecialValueFor("ball_lightning_min_distance")
         if (IsServer()) {
             this.special_bonus_unique_storm_spirit_custom_8_count = 0
-            this.vStartPosition = GameFunc.VectorFunctions.StringToVector(params.start_position)
-            this.vTargetPosition = GameFunc.VectorFunctions.StringToVector(params.target_position)
+            this.vStartPosition = GFuncVector.StringToVector(params.start_position)
+            this.vTargetPosition = GFuncVector.StringToVector(params.target_position)
             this.fTotalDistance = 0
             this.iSign = 1
             this.tTargets = []
@@ -248,7 +247,7 @@ export class modifier_storm_spirit_6_buff extends BaseModifierMotionHorizontal_P
             FindClearSpaceForUnit(hParent, this.vStartPosition, true)
             hParent.StopSound("Hero_StormSpirit.BallLightning.Loop")
             hParent.RemoveHorizontalMotionController(this)
-            if (GameFunc.IsValid(this.modifier_no_health_bar)) {
+            if (GFuncEntity.IsValid(this.modifier_no_health_bar)) {
                 this.modifier_no_health_bar.Destroy()
             }
         }
@@ -256,7 +255,7 @@ export class modifier_storm_spirit_6_buff extends BaseModifierMotionHorizontal_P
     UpdateHorizontalMotion(hParent: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus() as ability6_storm_spirit_ball_lightning
-            if (!GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hAbility)) {
                 this.Destroy()
                 return
             }
@@ -278,13 +277,13 @@ export class modifier_storm_spirit_6_buff extends BaseModifierMotionHorizontal_P
                 this.fTotalDistance = this.fTotalDistance + fDistance
                 if (hParent.HasTalent("special_bonus_unique_storm_spirit_custom_8")) {
                     let storm_spirit_1 = ability1_storm_spirit_static_remnant.findIn(hParent) as ability1_storm_spirit_static_remnant;
-                    if (GameFunc.IsValid(storm_spirit_1) && storm_spirit_1.GetLevel() > 0) {
+                    if (GFuncEntity.IsValid(storm_spirit_1) && storm_spirit_1.GetLevel() > 0) {
                         let fValue = hParent.GetTalentValue("special_bonus_unique_storm_spirit_custom_8")
                         if (math.floor(this.fTotalDistance / fValue) > this.special_bonus_unique_storm_spirit_custom_8_count) {
                             this.special_bonus_unique_storm_spirit_custom_8_count = this.special_bonus_unique_storm_spirit_custom_8_count + 1
                             storm_spirit_1.ReleaseRemnant(vPosition)
                             let storm_spirit_4 = ability3_storm_spirit_overload.findIn(hParent) as ability3_storm_spirit_overload;
-                            if (GameFunc.IsValid(storm_spirit_4) && storm_spirit_4.GetLevel() > 0) {
+                            if (GFuncEntity.IsValid(storm_spirit_4) && storm_spirit_4.GetLevel() > 0) {
                                 storm_spirit_4.Overload()
                             }
                         }

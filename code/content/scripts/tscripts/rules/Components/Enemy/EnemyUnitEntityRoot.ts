@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../GameFunc";
 import { KVHelper } from "../../../helper/KVHelper";
 import { EnemyConfig } from "../../../shared/EnemyConfig";
 import { BattleUnitEntityRoot } from "../BattleUnit/BattleUnitEntityRoot";
@@ -47,8 +46,8 @@ export class EnemyUnitEntityRoot extends BattleUnitEntityRoot {
 
     onDestroy(): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        if (GameFunc.IsValid(npc)) {
-            GDestroyUnit(npc);
+        if (GFuncEntity.IsValid(npc)) {
+            GFuncEntity.SafeDestroyUnit(npc);
         }
     }
 

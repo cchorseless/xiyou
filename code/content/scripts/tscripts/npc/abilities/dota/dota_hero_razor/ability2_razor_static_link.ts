@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -112,7 +111,7 @@ export class modifier_razor_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -201,7 +200,7 @@ export class modifier_razor_2_link extends BaseModifier_Plus {
     OnIntervalThink() {
         let hCaster = this.GetCasterPlus()
         let hParent = this.GetParentPlus()
-        if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hParent)) {
+        if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hParent)) {
             this.Destroy()
         }
         let fDistance = CalcDistanceBetweenEntityOBB(hCaster, hParent)

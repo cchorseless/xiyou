@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -56,7 +55,7 @@ export class ability1_skeleton_king_hellfire_blast extends ActiveRootAbility {
     UseEnergy(iCount: number) {
         let hCaster = this.GetCasterPlus()
         let hModifier = hCaster.findBuff<modifier_skeleton_king_3>("modifier_skeleton_king_3");
-        if (GameFunc.IsValid(hModifier) && hModifier.GetStackCount() >= iCount) {
+        if (GFuncEntity.IsValid(hModifier) && hModifier.GetStackCount() >= iCount) {
             hModifier.SetStackCount(hModifier.GetStackCount() - iCount)
             return 1
         }
@@ -70,7 +69,7 @@ export class ability1_skeleton_king_hellfire_blast extends ActiveRootAbility {
         let _type = GGetRegClass<typeof ability2_skeleton_king_vampiric_aura>("ability2_skeleton_king_vampiric_aura");
         let hAbility = _type.findIn(hCaster);
         for (let hUnit of (hAbility.tSkeletons)) {
-            if (GameFunc.IsValid(hUnit) && hUnit.GetStackCount("modifier_skeleton_king_2_summon", hCaster) == 3) {
+            if (GFuncEntity.IsValid(hUnit) && hUnit.GetStackCount("modifier_skeleton_king_2_summon", hCaster) == 3) {
                 this.HellFireBlast(0, hUnit)
             }
         }
@@ -133,14 +132,14 @@ export class ability1_skeleton_king_hellfire_blast extends ActiveRootAbility {
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
         let caster = this.GetCasterPlus()
 
-        if (!GameFunc.IsValid(hTarget)) {
+        if (!GFuncEntity.IsValid(hTarget)) {
             return true
         }
 
         if (caster.HasShard()) {
             let shard_point = this.GetSpecialValueFor("shard_point")
             let hModifier = caster.findBuff<modifier_skeleton_king_3>("modifier_skeleton_king_3");
-            if (GameFunc.IsValid(hModifier)) {
+            if (GFuncEntity.IsValid(hModifier)) {
                 hModifier.ChangeStackCount(shard_point)
             }
         }
@@ -191,7 +190,7 @@ export class modifier_skeleton_king_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -308,7 +307,7 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
                 //  小骷髅无视护甲
                 let _type = GGetRegClass<typeof modifier_skeleton_king_2_summon>("modifier_skeleton_king_2_summon");
                 let hSummonBuff = _type.findIn(params.attacker)
-                if (GameFunc.IsValid(hSummonBuff) && hSummonBuff.GetCasterPlus() == this.GetCasterPlus()) {
+                if (GFuncEntity.IsValid(hSummonBuff) && hSummonBuff.GetCasterPlus() == this.GetCasterPlus()) {
                     return this.ignore_armor
                 }
             }
@@ -340,7 +339,7 @@ export class modifier_skeleton_king_1_debuff extends BaseModifier_Plus {
             let target = this.GetParentPlus()
             let ability = this.GetAbilityPlus()
 
-            if (!GameFunc.IsValid(ability) || !GameFunc.IsValid(caster)) {
+            if (!GFuncEntity.IsValid(ability) || !GFuncEntity.IsValid(caster)) {
                 this.Destroy()
                 return
             }

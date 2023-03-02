@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -34,7 +33,7 @@ export class ability2_juggernaut_healing_ward extends BaseAbility_Plus {
         let vPosition = this.GetCursorPosition()
         let duration = this.GetDuration()
 
-        if (GameFunc.IsValid(this.hHealingWard) && this.hHealingWard.IsAlive()) {
+        if (GFuncEntity.IsValid(this.hHealingWard) && this.hHealingWard.IsAlive()) {
             this.hHealingWard.ForceKill(false)
         }
         this.hHealingWard = CreateUnitByName("npc_dota_juggernaut_healing_ward", vPosition, false, hCaster, hCaster, hCaster.GetTeamNumber())
@@ -81,7 +80,7 @@ export class modifier_juggernaut_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability2_juggernaut_healing_ward
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -102,7 +101,7 @@ export class modifier_juggernaut_2 extends BaseModifier_Plus {
                 return
             }
 
-            if (GameFunc.IsValid(ability.hHealingWard) && ability.hHealingWard.IsAlive()) {
+            if (GFuncEntity.IsValid(ability.hHealingWard) && ability.hHealingWard.IsAlive()) {
                 return
             }
 

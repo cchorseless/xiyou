@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus, BaseOrbAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -87,7 +86,7 @@ export class modifier_imba_ancient_apparition_cold_feet extends BaseModifier_Plu
         this.StartIntervalThink(this.interval);
     }
     OnIntervalThink(): void {
-        if (GameFunc.AsVector(this.GetParentPlus().GetAbsOrigin() - this.original_position).Length2D() < this.break_distance) {
+        if (GFuncVector.AsVector(this.GetParentPlus().GetAbsOrigin() - this.original_position).Length2D() < this.break_distance) {
             this.counter = this.counter + this.interval;
             if (this.counter >= 1) {
                 if (this.ticks < this.duration) {
@@ -608,7 +607,7 @@ export class imba_ancient_apparition_ice_blast extends BaseAbility_Plus {
             this.GetCasterPlus().SetCursorPosition((this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector()) as Vector);
         }
         EmitSoundOnClient("Hero_Ancient_Apparition.IceBlast.Tracker", this.GetCasterPlus().GetPlayerOwner());
-        let velocity = GameFunc.AsVector(this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Normalized() * this.GetSpecialValueFor("speed") as Vector;
+        let velocity = GFuncVector.AsVector(this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Normalized() * this.GetSpecialValueFor("speed") as Vector;
         this.ice_blast_dummy = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_ice_blast_thinker", {
             x: velocity.x,
             y: velocity.y

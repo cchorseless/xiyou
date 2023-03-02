@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -120,7 +119,7 @@ export class ability1_night_stalker_void extends BaseAbility_Plus {
         let stun_duration = bIsNighttime && stun_duration_night || stun_duration_day
         let night_damage_pct = this.GetSpecialValueFor("night_damage_pct")
         let hModifier = modifier_night_stalker_2.findIn(hCaster)
-        if (GameFunc.IsValid(hModifier) && hModifier.GetVoidDamage != null) {
+        if (GFuncEntity.IsValid(hModifier) && hModifier.GetVoidDamage != null) {
             damage = damage + hModifier.GetVoidDamage()
         }
 
@@ -193,7 +192,7 @@ export class modifier_night_stalker_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return

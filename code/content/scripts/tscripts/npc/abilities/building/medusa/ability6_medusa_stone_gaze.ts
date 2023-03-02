@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { ResHelper } from "../../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../../entityPlus/BaseModifier_Plus";
@@ -61,7 +60,7 @@ export class modifier_medusa_3 extends BaseModifier_Plus {
             let chance = this.chance + hCaster.GetTalentValue("special_bonus_unique_medusa_custom_2")
             let duration = this.duration + hCaster.GetTalentValue("special_bonus_unique_medusa_custom_4")
             if (params != null && params.attacker == this.GetParentPlus() && !params.attacker.IsIllusion() && UnitFilter(params.target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, params.attacker.GetTeamNumber()) == UnitFilterResult.UF_SUCCESS) {
-                if (GameFunc.mathUtil.PRD(chance, params.attacker, "medusa_4")) {
+                if (GFuncMath.PRD(chance, params.attacker, "medusa_4")) {
                     modifier_medusa_3_debuff.apply(params.target, params.attacker, this.GetAbilityPlus(), { duration: duration * params.target.GetStatusResistanceFactor(params.attacker) })
                     // if (!Spawner.IsEndless()) {
                     //      modifier_medusa_3_stack.apply( params.attacker , params.attacker, this.GetAbilityPlus(), null)

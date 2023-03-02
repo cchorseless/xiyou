@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../GameFunc";
 import { modifier_taunt } from "../../../npc/modifier/effect/modifier_taunt";
 import { ET } from "../../../shared/lib/Entity";
 
@@ -34,7 +33,7 @@ export class AiAttackComponent extends ET.Component {
                         // chessComp.blinkChessX(pos, false);
                     }
                 } else {
-                    GameFunc.ExecuteOrder(domain, dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_TARGET, enemy, null);
+                    GFuncEntity.ExecuteOrder(domain, dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_TARGET, enemy, null);
                 }
                 return 1;
             }
@@ -81,14 +80,14 @@ export class AiAttackComponent extends ET.Component {
     findAroundEnemyToAttack(): IBaseNpc_Plus {
         let u = this.GetDomain<IBuilding_BaseNpc>();
         let building = u.ETRoot.As<IBattleUnitEntityRoot>();
-        if (!GameFunc.IsValid(u)) {
+        if (!GFuncEntity.IsValid(u)) {
             return;
         }
         let new_target: IBaseNpc_Plus = null;
         if (u.FindEnemyToAttack) {
             new_target = u.FindEnemyToAttack();
         }
-        if (!GameFunc.IsValid(new_target)) {
+        if (!GFuncEntity.IsValid(new_target)) {
             let current_target = u.GetAttackTarget() as IBaseNpc_Plus;
             let all_unit: IBattleUnitEntityRoot[];
             if (u.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_GOODGUYS) {
@@ -102,12 +101,12 @@ export class AiAttackComponent extends ET.Component {
             }
             // 优先1：嘲讽
             let _taunt = modifier_taunt.findIn(u);
-            if (_taunt && GameFunc.IsValid(_taunt.TauntUnit)) {
+            if (_taunt && GFuncEntity.IsValid(_taunt.TauntUnit)) {
                 // 有嘲讽目标，优先打嘲讽目标
                 new_target = _taunt.TauntUnit;
             }
             // 优先3：已经在打合适的目标
-            if (new_target == null && GameFunc.IsValid(current_target)) {
+            if (new_target == null && GFuncEntity.IsValid(current_target)) {
                 new_target = current_target;
             }
             // 优先4：找最近的
@@ -115,8 +114,8 @@ export class AiAttackComponent extends ET.Component {
                 let closest_distance = 9999;
                 for (let enemy of all_unit) {
                     let v = enemy.GetDomain<IBaseNpc_Plus>();
-                    if (GameFunc.IsValid(v)) {
-                        let d = GameFunc.AsVector(v.GetAbsOrigin() - u.GetAbsOrigin()).Length2D();
+                    if (GFuncEntity.IsValid(v)) {
+                        let d = GFuncVector.AsVector(v.GetAbsOrigin() - u.GetAbsOrigin()).Length2D();
                         if (d < closest_distance) {
                             new_target = v;
                             closest_distance = d;

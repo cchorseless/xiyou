@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -26,10 +25,10 @@ export class t22_lava extends BaseAbility_Plus {
         //  hCaster.EmitSound("RoshanDT.Fireball.Cast")
         //  多重魔火
         // let combination_t22_multi_lava = combination_t22_multi_lava.findIn(hCaster)
-        // let has_combination_t22_multi_lava = GameFunc.IsValid(combination_t22_multi_lava) && combination_t22_multi_lava.IsActivated()
+        // let has_combination_t22_multi_lava = GFuncEntity.IsValid(combination_t22_multi_lava) && combination_t22_multi_lava.IsActivated()
         // if (has_combination_t22_multi_lava) {
         //     let chance = combination_t22_multi_lava.GetSpecialValueFor("chance")
-        //     if (GameFunc.mathUtil.PRD(chance, hCaster, "t22_lava")) {
+        //     if (GFuncMath.PRD(chance, hCaster, "t22_lava")) {
         //         modifier_t22_lava_particle_ogre_magi_multicast.apply(hCaster, hCaster, this, { duration: BaseModifier_Plus.LOCAL_PARTICLE_MODIFIER_DURATION })
 
         //         let hThinker = unit_dummy.CreateOne( vPosition, hCaster.GetTeamNumber(), false, hCaster, hCaster)
@@ -79,7 +78,7 @@ export class modifier_t22_lava extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -202,11 +201,11 @@ export class modifier_t22_lava_thinker extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hAbility)) {
                 return
             }
             let hCaster = hAbility.GetCasterPlus()
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 return
             }
 
@@ -227,7 +226,7 @@ export class modifier_t22_lava_thinker extends BaseModifier_Plus {
                 //  火焰附体
                 // let combination_t22_burning  = combination_t22_burning.findIn(  hCaster )
                 // // && combination_t22_burning.Burning != null
-                // let has_combination_t22_burning = GameFunc.IsValid(combination_t22_burning) && combination_t22_burning.IsActivated()
+                // let has_combination_t22_burning = GFuncEntity.IsValid(combination_t22_burning) && combination_t22_burning.IsActivated()
                 // if (has_combination_t22_burning) {
                 //     // combination_t22_burning.Burning(hTarget)
                 // }
@@ -246,7 +245,7 @@ export class modifier_t22_lava_thinker extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     OnDeath(params: IModifierTable) {
-        if (!GameFunc.IsValid(this.GetAbilityPlus())) {
+        if (!GFuncEntity.IsValid(this.GetAbilityPlus())) {
             return
         }
         if (IsServer() && params.unit.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
@@ -290,7 +289,7 @@ export class modifier_t22_lava_magic_resistance extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TOOLTIP)
     On_Tooltip() {
         let hCaster = this.GetCasterPlus()
-        if (GameFunc.IsValid(hCaster)) {
+        if (GFuncEntity.IsValid(hCaster)) {
             let iStackCount = modifier_t22_lava_thinker.GetStackIn(hCaster, hCaster)
             return this.incoming_spell_damage + this.incoming_spell_damage_kill * iStackCount
         }

@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -75,7 +74,7 @@ export class ability2_bristleback_quill_spray extends BaseAbility_Plus {
 
             ParticleManager.SetParticleControlEnt(iParticleID, 1, hTarget, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hTarget.GetAbsOrigin(), true)
             ParticleManager.ReleaseParticleIndex(iParticleID)
-            let iStock = GameFunc.IsValid(hModifier) && hModifier.GetStackCount() || 0
+            let iStock = GFuncEntity.IsValid(hModifier) && hModifier.GetStackCount() || 0
             let fDamage = damage + hCaster.GetStrength() * damage_str_factor * iStock
             let damage_table =
             {
@@ -172,7 +171,7 @@ export class modifier_bristleback_2 extends BaseModifier_Plus {
         if (params.target == null || params.target.GetClassname() == "dota_item_drop") {
             return
         }
-        if (params.attacker == this.GetParentPlus() && GameFunc.mathUtil.PRD(this.GetCasterPlus().GetTalentValue("special_bonus_unique_bristleback_custom_6"), this.GetParentPlus(), "modifier_bristleback_2")) {
+        if (params.attacker == this.GetParentPlus() && GFuncMath.PRD(this.GetCasterPlus().GetTalentValue("special_bonus_unique_bristleback_custom_6"), this.GetParentPlus(), "modifier_bristleback_2")) {
             (this.GetAbilityPlus() as ability2_bristleback_quill_spray).OnCastAbility2()
         }
     }
@@ -211,7 +210,7 @@ export class modifier_bristleback_2_buff extends BaseModifier_Plus {
                 this.IncrementStackCount()
             } else {
                 let hAbility6 = ability6_bristleback_warpath.findIn(hCaster);
-                if (GameFunc.IsValid(hAbility6) && hAbility6.GetLevel() >= 1) {
+                if (GFuncEntity.IsValid(hAbility6) && hAbility6.GetLevel() >= 1) {
                     let bonus_max_stacks = hAbility6.GetSpecialValueFor("bonus_max_stacks")
                     this.max_layer = this.max_layer + bonus_max_stacks
                 }

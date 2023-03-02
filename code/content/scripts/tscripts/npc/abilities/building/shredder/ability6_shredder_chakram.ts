@@ -75,7 +75,7 @@ export class ability6_shredder_chakram extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(iParticleID, 16, Vector(0, 0, 0))
 
         let hModifier = modifier_shredder_6.findIn(hCaster)
-        if (GameFunc.IsValid(hModifier)) {
+        if (GFuncEntity.IsValid(hModifier)) {
             hModifier.AddParticle(iParticleID, false, false, -1, false, false)
             // hModifier.hPtclThinker = hPtclThinker
         }
@@ -215,7 +215,7 @@ export class ability6_shredder_chakram extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(iParticleID, 16, Vector(0, 0, 0))
 
         let hModifier = modifier_shredder_6.findIn(hCaster)
-        if (GameFunc.IsValid(hModifier)) {
+        if (GFuncEntity.IsValid(hModifier)) {
             hModifier.AddParticle(iParticleID, false, false, -1, false, false)
         }
 
@@ -273,7 +273,7 @@ export class modifier_shredder_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -385,7 +385,7 @@ export class modifier_shredder_6_thinker extends BaseModifier_Plus {
             let hAbility = this.GetAbilityPlus() as ability6_shredder_chakram
             hParent.StopSound(this.sSoundName)
             UTIL_Remove(hParent)
-            if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
                 HashTableHelper.RemoveHashtable(this.iHashtableIndex)
                 return
             }
@@ -399,7 +399,7 @@ export class modifier_shredder_6_thinker extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hCaster) || !GameFunc.IsValid(hAbility)) {
+            if (!GFuncEntity.IsValid(hCaster) || !GFuncEntity.IsValid(hAbility)) {
                 this.Destroy()
                 return
             }

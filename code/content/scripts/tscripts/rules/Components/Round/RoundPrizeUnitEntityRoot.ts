@@ -9,7 +9,7 @@ export class RoundPrizeUnitEntityRoot extends ET.EntityRoot {
 
     public onDestroy(): void {
         let npc = this.GetDomain<IBaseNpc_Plus>();
-        GDestroyUnit(npc);
+        GFuncEntity.SafeDestroyUnit(npc);
     }
 
     onAwake(confid: string, roundid: string, onlyKey: string = null) {

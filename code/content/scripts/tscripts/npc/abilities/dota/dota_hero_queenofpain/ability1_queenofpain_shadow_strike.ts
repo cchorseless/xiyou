@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -100,7 +99,7 @@ export class ability1_queenofpain_shadow_strike extends BaseAbility_Plus {
         }
     }
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus, vLocation: Vector, ExtraData: any) {
-        if (GameFunc.IsValid(hTarget)) {
+        if (GFuncEntity.IsValid(hTarget)) {
             let hCaster = this.GetCasterPlus()
             let fDuration = this.GetDuration()
             let strike_damage = this.GetSpecialValueFor("strike_damage")
@@ -135,7 +134,7 @@ export class ability1_queenofpain_shadow_strike extends BaseAbility_Plus {
         if (ExtraData && ExtraData.hashtable_index != null) {
             let tHashtable = HashTableHelper.GetHashtableByIndex(ExtraData.hashtable_index || -1)
             if (tHashtable != null) {
-                if (GameFunc.IsValid(tHashtable.hModifier)) {
+                if (GFuncEntity.IsValid(tHashtable.hModifier)) {
                     tHashtable.hModifier.Destroy()
                 }
             }
@@ -184,7 +183,7 @@ export class modifier_queenofpain_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -243,7 +242,7 @@ export class modifier_queenofpain_1 extends BaseModifier_Plus {
 
         let hParent = this.GetParentPlus()
         if (params.attacker == hParent && !hParent.PassivesDisabled() && !hParent.IsIllusion() && hParent.HasScepter()) {
-            if (GameFunc.mathUtil.PRD(this.scepter_chance, hParent, "queenofpain_1")) {
+            if (GFuncMath.PRD(this.scepter_chance, hParent, "queenofpain_1")) {
                 (this.GetAbilityPlus() as ability1_queenofpain_shadow_strike).ShadowStrike(params.target as IBaseNpc_Plus)
             }
         }

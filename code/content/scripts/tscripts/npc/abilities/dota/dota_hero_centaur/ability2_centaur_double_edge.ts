@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -43,19 +42,19 @@ export class ability2_centaur_double_edge extends BaseAbility_Plus {
         return true
     }
     OnAbilityPhaseInterrupted() {
-        if (GameFunc.IsValid(this.hParticleModifier)) {
+        if (GFuncEntity.IsValid(this.hParticleModifier)) {
             this.hParticleModifier.Destroy()
         }
     }
     OnSpellStart() {
-        if (GameFunc.IsValid(this.hParticleModifier)) {
+        if (GFuncEntity.IsValid(this.hParticleModifier)) {
             this.hParticleModifier.Destroy()
         }
 
         let caster = this.GetCasterPlus()
         let target = this.GetCursorTarget()
 
-        if (!GameFunc.IsValid(target) || !target.IsAlive()) {
+        if (!GFuncEntity.IsValid(target) || !target.IsAlive()) {
             return
         }
         if (target.TriggerSpellAbsorb(this)) {
@@ -134,7 +133,7 @@ export class modifier_centaur_2 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -174,12 +173,12 @@ export class modifier_centaur_2 extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     On_AttackLanded(params: ModifierAttackEvent) {
-        if (!GameFunc.IsValid(params.target)) { return }
+        if (!GFuncEntity.IsValid(params.target)) { return }
         if (params.target.GetClassname() == "dota_item_drop") { return }
         let hParent = this.GetParentPlus()
         let hAbility = this.GetAbilityPlus() as ability2_centaur_double_edge
         if (params.attacker == hParent && hParent.HasTalent("special_bonus_unique_centaur_custom_7")) {
-            if (hAbility.CostCentaur2Ability != null && GameFunc.mathUtil.PRD(hParent.GetTalentValue("special_bonus_unique_centaur_custom_7"), hParent, "special_bonus_unique_centaur_custom_7")) {
+            if (hAbility.CostCentaur2Ability != null && GFuncMath.PRD(hParent.GetTalentValue("special_bonus_unique_centaur_custom_7"), hParent, "special_bonus_unique_centaur_custom_7")) {
                 hAbility.CostCentaur2Ability(params.target)
             }
         }

@@ -491,7 +491,7 @@ export class modifier_imba_battle_hunger_debuff_dot extends BaseModifier_Plus {
     CC_OnAttackStart(keys: ModifierAttackEvent): void {
         if (IsServer()) {
             if (keys.attacker == this.parent && this.parent.IsHero() && keys.target != this.caster) {
-                if (!this.cmd_restricted && GameFunc.PRD(this.maddening_chance_pct, this)) {
+                if (!this.cmd_restricted && GFuncRandom.PRD(this.maddening_chance_pct, this)) {
                     let targets = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.parent.Script_GetAttackRange() + this.maddening_buffer_distance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
                     if (GameFunc.GetCount(targets) <= 2) {
                         return;
@@ -667,7 +667,7 @@ export class modifier_imba_counter_helix_passive extends BaseModifier_Plus {
             if (this.caster.HasTalent("special_bonus_imba_axe_7")) {
                 this.total_damage = this.total_damage + this.caster.GetPhysicalArmorValue(false) * this.caster.GetTalentValue("special_bonus_imba_axe_7");
             }
-            if (GameFunc.PRD(this.proc_chance, this)) {
+            if (GFuncRandom.PRD(this.proc_chance, this)) {
                 this.Spin(this.allow_repeat);
             }
         }
@@ -853,7 +853,7 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
         }
         if (this.checkCanKill(this.target)) {
             if (this.caster.HasTalent("special_bonus_imba_axe_8") &&
-                GameFunc.Length2D(this.GetCasterPlus().GetAbsOrigin() - this.target_location) > super.GetCastRange(this.target_location, this.target)) {
+                (this.GetCasterPlus().GetAbsOrigin() - this.target_location as Vector).Length2D() > super.GetCastRange(this.target_location, this.target)) {
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_culling_blade_motion", kv);
                 this.GetCasterPlus().StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_CAST_ABILITY_4, 1);
                 this.AddTimer(0.40, () => {
@@ -905,7 +905,7 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
             }
         }
         else {
-            if (this.caster.HasTalent("special_bonus_imba_axe_8") && GameFunc.Length2D(this.GetCasterPlus().GetAbsOrigin() - this.target_location) > super.GetCastRange(this.target_location, this.target)) {
+            if (this.caster.HasTalent("special_bonus_imba_axe_8") && (this.GetCasterPlus().GetAbsOrigin() - this.target_location as Vector).Length2D() > super.GetCastRange(this.target_location, this.target)) {
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_culling_blade_motion", kv);
                 this.GetCasterPlus().StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_CAST_ABILITY_4, 1);
                 this.AddTimer(0.4, () => {
@@ -928,7 +928,7 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(this.culling_kill_particle);
     }
     GetCastAnimation(): GameActivity_t {
-        if (this.target && this.target_location && this.GetCasterPlus().HasTalent("special_bonus_imba_axe_8") && GameFunc.Length2D(this.GetCasterPlus().GetAbsOrigin() - this.target_location) > super.GetCastRange(this.target_location, this.target)) {
+        if (this.target && this.target_location && this.GetCasterPlus().HasTalent("special_bonus_imba_axe_8") && (this.GetCasterPlus().GetAbsOrigin() - this.target_location as Vector).Length2D() > super.GetCastRange(this.target_location, this.target)) {
             return GameActivity_t.ACT_SHOTGUN_PUMP;
         } else {
             return GameActivity_t.ACT_DOTA_CAST_ABILITY_4;

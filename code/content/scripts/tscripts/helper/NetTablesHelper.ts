@@ -8,9 +8,9 @@ export module NetTablesHelper {
      * @param entityid 
      * @returns 
      */
-    export function GetDotaEntityData(entityid: EntityIndex) {
+    export function GetDotaEntityData(entityid: EntityIndex | string, extkey = "") {
         let _tablename = GameServiceConfig.ENetTables.dotaentity as never;
-        return (CustomNetTables.GetTableValue(_tablename, entityid + "") || {}) as { [key: string]: any };
+        return (CustomNetTables.GetTableValue(_tablename, entityid + extkey) || {}) as { [key: string]: any };
     }
     /**
      * @Server
@@ -18,9 +18,9 @@ export module NetTablesHelper {
      * @param data 
      * @returns 
      */
-    export function SetDotaEntityData(entityid: EntityIndex, data: { [key: string]: any }) {
+    export function SetDotaEntityData(entityid: EntityIndex | string, data: { [key: string]: any }, extkey = "") {
         let _tablename = GameServiceConfig.ENetTables.dotaentity as never;
-        return (CustomNetTables.SetTableValue(_tablename, entityid + "", data as never));
+        return (CustomNetTables.SetTableValue(_tablename, entityid + extkey, data as never));
     }
     /**
      * 获取表

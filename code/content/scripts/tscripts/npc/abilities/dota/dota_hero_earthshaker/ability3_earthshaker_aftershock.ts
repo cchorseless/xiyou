@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
 import { ResHelper } from "../../../../helper/ResHelper";
@@ -51,7 +50,7 @@ export class ability3_earthshaker_aftershock extends BaseAbility_Plus {
             let _tTargets = AoiHelper.FindUnitsInRadiusByModifierName("modifier_earthshaker_1_root", hCaster.GetTeamNumber(), Vector(0, 0, 0), 5000, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST)
             for (let v of (_tTargets)) {
                 let hModifier = modifier_earthshaker_1_root.findIn(v) as modifier_earthshaker_1_root;
-                if (GameFunc.IsValid(hModifier) && GameFunc.IsValid(hModifier.GetCasterPlus()) && hModifier.GetCasterPlus().GetPlayerOwnerID() == hCaster.GetPlayerOwnerID()) {
+                if (GFuncEntity.IsValid(hModifier) && GFuncEntity.IsValid(hModifier.GetCasterPlus()) && hModifier.GetCasterPlus().GetPlayerOwnerID() == hCaster.GetPlayerOwnerID()) {
                     table.insert(tTargets, v)
                 }
             }
@@ -88,7 +87,7 @@ export class ability3_earthshaker_aftershock extends BaseAbility_Plus {
             let _tTargets = AoiHelper.FindUnitsInRadiusByModifierName("modifier_earthshaker_1_root", hCaster.GetTeamNumber(), Vector(0, 0, 0), 5000, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST)
             for (let v of (_tTargets)) {
                 let hModifier = modifier_earthshaker_1_root.findIn(v) as modifier_earthshaker_1_root;
-                if (GameFunc.IsValid(hModifier) && GameFunc.IsValid(hModifier.GetCasterPlus()) && hModifier.GetCasterPlus().GetPlayerOwnerID() == hCaster.GetPlayerOwnerID()) {
+                if (GFuncEntity.IsValid(hModifier) && GFuncEntity.IsValid(hModifier.GetCasterPlus()) && hModifier.GetCasterPlus().GetPlayerOwnerID() == hCaster.GetPlayerOwnerID()) {
                     table.insert(tTargets, v)
                 }
             }
@@ -148,7 +147,7 @@ export class modifier_earthshaker_3 extends BaseModifier_Plus {
         let hParent = this.GetParentPlus()
         if (params.unit == hParent) {
             let hAbility = params.ability
-            if (GameFunc.IsValid(hAbility) && !hAbility.IsItem() && !hAbility.IsToggle() && hAbility.ProcsMagicStick()) {
+            if (GFuncEntity.IsValid(hAbility) && !hAbility.IsItem() && !hAbility.IsToggle() && hAbility.ProcsMagicStick()) {
                 let ability = this.GetAbilityPlus() as ability3_earthshaker_aftershock
                 if (ability.TriggerAfterShock != null) {
                     ability.TriggerAfterShock()

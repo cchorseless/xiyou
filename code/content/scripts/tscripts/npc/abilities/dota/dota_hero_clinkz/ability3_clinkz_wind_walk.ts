@@ -90,8 +90,8 @@ export class modifier_clinkz_3 extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     GetPreAttack_BonusDamage(params: ModifierAttackEvent) {
-        if (GameFunc.IsValid(params.attacker) && GameFunc.IsValid(params.target)) {
-            let hCaster = (GameFunc.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().IsSummoned() && GameFunc.IsValid(this.GetCasterPlus().GetSummoner())) && this.GetCasterPlus().GetSummoner() || this.GetCasterPlus()
+        if (GFuncEntity.IsValid(params.attacker) && GFuncEntity.IsValid(params.target)) {
+            let hCaster = (GFuncEntity.IsValid(this.GetCasterPlus()) && this.GetCasterPlus().IsSummoned() && GFuncEntity.IsValid(this.GetCasterPlus().GetSummoner())) && this.GetCasterPlus().GetSummoner() || this.GetCasterPlus()
             let sTalentName = "special_bonus_unique_clinkz_custom_1"
             if (!params.attacker.IsIllusion() && hCaster.GetAgility != null) {
                 if (this.records.indexOf(params.record) != null) {
@@ -104,7 +104,7 @@ export class modifier_clinkz_3 extends BaseModifier_Plus {
                     if (modifier_clinkz_2_bonus_attackspeed.exist(hCaster)) {
                         let hModifier = modifier_clinkz_2_bonus_attackspeed.findIn(hCaster) as IBaseModifier_Plus;
                         let hAbility = hModifier.GetAbilityPlus()
-                        if (GameFunc.IsValid(hAbility)) {
+                        if (GFuncEntity.IsValid(hAbility)) {
                             damage = damage + damage * hAbility.GetSpecialValueFor("bonus_damage_percent") * 0.01
                         }
                     }
@@ -124,7 +124,7 @@ export class modifier_clinkz_3 extends BaseModifier_Plus {
                 // }
                 if (!BattleHelper.AttackFilter(params.record, BattleHelper.enum_ATTACK_STATE.ATTACK_STATE_NO_EXTENDATTACK)) {
                     let sTalentName = "special_bonus_unique_clinkz_custom_3"
-                    let hCaster = (this.GetCasterPlus().IsSummoned() && GameFunc.IsValid(this.GetCasterPlus().GetSummoner())) && this.GetCasterPlus().GetSummoner() || this.GetCasterPlus()
+                    let hCaster = (this.GetCasterPlus().IsSummoned() && GFuncEntity.IsValid(this.GetCasterPlus().GetSummoner())) && this.GetCasterPlus().GetSummoner() || this.GetCasterPlus()
                     if (hCaster.HasTalent(sTalentName)) {
                         let arrow_count = hCaster.GetTalentValue(sTalentName)
                         let count = 0

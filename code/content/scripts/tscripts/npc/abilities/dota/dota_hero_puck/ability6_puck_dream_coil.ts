@@ -1,4 +1,3 @@
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -108,7 +107,7 @@ export class modifier_puck_6 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -258,7 +257,7 @@ export class modifier_puck_6_coiled extends BaseModifier_Plus {
         this.coil_break_damage = this.GetSpecialValueFor("coil_break_damage")
         this.coil_break_damage_factor = this.GetSpecialValueFor("coil_break_damage_factor")
         if (IsServer()) {
-            this.vPosition = GameFunc.VectorFunctions.StringToVector(params.position)
+            this.vPosition = GFuncVector.StringToVector(params.position)
             this.damage_type = this.GetAbilityPlus().GetAbilityDamageType()
             let iParticleID = ResHelper.CreateParticle({
                 resPath: "particles/units/heroes/hero_puck/puck_dreamcoil_tether.vpcf",
@@ -279,7 +278,7 @@ export class modifier_puck_6_coiled extends BaseModifier_Plus {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
             let hAbility = this.GetAbilityPlus()
-            if (!GameFunc.IsValid(hCaster)) {
+            if (!GFuncEntity.IsValid(hCaster)) {
                 this.Destroy()
                 return
             }

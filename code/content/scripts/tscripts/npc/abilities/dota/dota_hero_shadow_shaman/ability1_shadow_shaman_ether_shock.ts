@@ -1,5 +1,4 @@
 
-import { GameFunc } from "../../../../GameFunc";
 import { GameSetting } from "../../../../GameSetting";
 import { AoiHelper } from "../../../../helper/AoiHelper";
 import { BattleHelper } from "../../../../helper/BattleHelper";
@@ -62,7 +61,7 @@ export class ability1_shadow_shaman_ether_shock extends BaseAbility_Plus {
         modifier_kill.apply(hTotem, hCaster, this, { duration: totem_duration })
         // hTotem.FireSummonned(hCaster)
         let hAbility = ability3_shadow_shaman_shackles.findIn(hCaster) as ability3_shadow_shaman_shackles;
-        if (GameFunc.IsValid(hAbility) && hAbility.FireTotem != null) {
+        if (GFuncEntity.IsValid(hAbility) && hAbility.FireTotem != null) {
             hAbility.FireTotem(hTotem)
         }
         //  记录上一次释放的位置
@@ -87,7 +86,7 @@ export class ability1_shadow_shaman_ether_shock extends BaseAbility_Plus {
             owner: null
         });
 
-        if (GameFunc.IsValid(hSource)) {
+        if (GFuncEntity.IsValid(hSource)) {
             ParticleManager.SetParticleControlEnt(particleID, 0, hSource, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", hSource.GetAbsOrigin(), true)
             ParticleManager.SetParticleControlForward(particleID, 10, ((hTarget.GetAbsOrigin() - hSource.GetAbsOrigin()) as Vector).Normalized())
         }
@@ -150,7 +149,7 @@ export class modifier_shadow_shaman_1 extends BaseModifier_Plus {
     OnIntervalThink() {
         if (IsServer()) {
             let ability = this.GetAbilityPlus() as ability1_shadow_shaman_ether_shock
-            if (!GameFunc.IsValid(ability)) {
+            if (!GFuncEntity.IsValid(ability)) {
                 this.StartIntervalThink(-1)
                 this.Destroy()
                 return
@@ -259,9 +258,9 @@ export class modifier_shadow_shaman_1_totem extends BaseModifier_Plus {
     BeDestroy() {
 
         if (IsServer()) {
-            if (GameFunc.IsValid(this.GetCasterPlus())) {
+            if (GFuncEntity.IsValid(this.GetCasterPlus())) {
                 let hAblt = ability3_shadow_shaman_shackles.findIn(this.GetCasterPlus());
-                if (GameFunc.IsValid(hAblt) && hAblt.RemoveTotem != null) {
+                if (GFuncEntity.IsValid(hAblt) && hAblt.RemoveTotem != null) {
                     hAblt.RemoveTotem(this.GetParentPlus())
                 }
             }
@@ -271,7 +270,7 @@ export class modifier_shadow_shaman_1_totem extends BaseModifier_Plus {
         if (IsServer()) {
             let hCaster = this.GetCasterPlus()
             let hParent = this.GetParentPlus()
-            if (!GameFunc.IsValid(hCaster) || !hCaster.GetIntellect) {
+            if (!GFuncEntity.IsValid(hCaster) || !hCaster.GetIntellect) {
                 hParent.ForceKill(false)
                 this.Destroy()
                 this.StartIntervalThink(-1)

@@ -160,7 +160,7 @@ export class modifier_viper_3_attack extends BaseModifier_Plus {
         let hParent = params.attacker
         let hAbility = this.GetAbilityPlus()
 
-        if (!GameFunc.IsValid(hTarget) || !GameFunc.IsValid(hAbility) || hTarget.GetClassname() == "dota_item_drop" || hParent != this.GetParentPlus() || hParent.IsIllusion() || hAbility.CastFilterResult() != UnitFilterResult.UF_SUCCESS) {
+        if (!GFuncEntity.IsValid(hTarget) || !GFuncEntity.IsValid(hAbility) || hTarget.GetClassname() == "dota_item_drop" || hParent != this.GetParentPlus() || hParent.IsIllusion() || hAbility.CastFilterResult() != UnitFilterResult.UF_SUCCESS) {
             return
         }
 
@@ -171,7 +171,7 @@ export class modifier_viper_3_attack extends BaseModifier_Plus {
         let hTarget = params.target
         let hParent = params.attacker
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hTarget) || !GameFunc.IsValid(hAbility) || hTarget.GetClassname() == "dota_item_drop" || hParent != this.GetParentPlus() || hParent.IsIllusion() || !modifier_viper_3_projectile.exist(hParent)) {
+        if (!GFuncEntity.IsValid(hTarget) || !GFuncEntity.IsValid(hAbility) || hTarget.GetClassname() == "dota_item_drop" || hParent != this.GetParentPlus() || hParent.IsIllusion() || !modifier_viper_3_projectile.exist(hParent)) {
 
             return
         }
@@ -186,7 +186,7 @@ export class modifier_viper_3_attack extends BaseModifier_Plus {
     On_Attack(params: ModifierAttackEvent) {
         let hTarget = params.target
         let hParent = params.attacker
-        if (!GameFunc.IsValid(hTarget) || hParent != this.GetParentPlus() || this.records.indexOf(params.record) == -1) {
+        if (!GFuncEntity.IsValid(hTarget) || hParent != this.GetParentPlus() || this.records.indexOf(params.record) == -1) {
             return
         }
         hParent.EmitSound(ResHelper.GetSoundReplacement("hero_viper.poisonAttack.Cast", hParent))
@@ -197,7 +197,7 @@ export class modifier_viper_3_attack extends BaseModifier_Plus {
         let hParent = params.attacker
         let hCaster = this.GetCasterPlus()
         let hAbility = this.GetAbilityPlus()
-        if (!GameFunc.IsValid(hTarget) || !GameFunc.IsValid(hAbility) || hParent != this.GetParentPlus() || this.records.indexOf(params.record) == -1) {
+        if (!GFuncEntity.IsValid(hTarget) || !GFuncEntity.IsValid(hAbility) || hParent != this.GetParentPlus() || this.records.indexOf(params.record) == -1) {
             return
         }
         modifier_poison.Poison(hTarget, hParent, hAbility, this.CalPoisonCount())
@@ -207,7 +207,7 @@ export class modifier_viper_3_attack extends BaseModifier_Plus {
     On_AttackRecordDestroy(params: ModifierAttackEvent) {
         let hTarget = params.target
         let hParent = params.attacker
-        if (!GameFunc.IsValid(hTarget) || hParent != this.GetParentPlus() || this.records.indexOf(params.record) == -1) {
+        if (!GFuncEntity.IsValid(hTarget) || hParent != this.GetParentPlus() || this.records.indexOf(params.record) == -1) {
             return
         }
         GameFunc.ArrayFunc.ArrayRemove(this.records, params.record)
@@ -219,7 +219,7 @@ export class modifier_viper_3_attack extends BaseModifier_Plus {
     CalPoisonCount() {
         let hCaster = this.GetCasterPlus() as BaseNpc_Hero_Plus
         let iCount = this.poison_count
-        if (GameFunc.IsValid(hCaster) && hCaster.GetAgility) {
+        if (GFuncEntity.IsValid(hCaster) && hCaster.GetAgility) {
             iCount = iCount + hCaster.GetAgility() * this.poison_count_agility
         }
         return iCount
