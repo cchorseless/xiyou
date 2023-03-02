@@ -1,8 +1,10 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionVertical_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseNpc_Plus } from "../../entityPlus/BaseNpc_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -15,7 +17,7 @@ export class imba_phantom_assassin_stifling_dagger extends BaseAbility_Plus {
         let target = this.GetCursorTarget();
         let scepter = caster.HasScepter();
         this.scepter_knives_interval = this.GetSpecialValueFor("scepter_knives_interval");
-        this.cast_range = this.GetSpecialValueFor("cast_range") + GetCastRangeIncrease(caster);
+        this.cast_range = this.GetSpecialValueFor("cast_range") + GPropertyCalculate.GetCastRangeBonus(caster);
         this.playbackrate = 1 + this.scepter_knives_interval;
         let bonus_damage: number;
         if (caster.HasTalent("special_bonus_imba_phantom_assassin_1")) {
@@ -169,9 +171,9 @@ export class modifier_imba_stifling_dagger_slow extends BaseModifier_Plus {
 }
 @registerModifier()
 export class modifier_imba_stifling_dagger_silence extends BaseModifier_Plus {
-    public stifling_dagger_modifier_silence_particle: any;
+    public stifling_dagger_modifier_silence_particle: ParticleID;
     BeCreated(p_0: any,): void {
-        this.stifling_dagger_modifier_silence_particle = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_silenced.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.target, this.GetCasterPlus());
+        this.stifling_dagger_modifier_silence_particle = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_silenced.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.GetCasterPlus());
         ParticleManager.ReleaseParticleIndex(this.stifling_dagger_modifier_silence_particle);
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
@@ -275,8 +277,8 @@ export class imba_phantom_assassin_phantom_strike extends BaseAbility_Plus {
             }
             this.caster_pos = this.caster.GetAbsOrigin();
             this.target_pos = this.target.GetAbsOrigin();
-            this.direction = (this.target_pos - this.caster_pos).Normalized();
-            this.distance = (this.target_pos - this.caster_pos).Length2D();
+            this.direction = (this.target_pos - this.caster_pos as Vector).Normalized();
+            this.distance = (this.target_pos - this.caster_pos as Vector).Length2D();
             if (this.target.GetTeamNumber() != this.caster.GetTeamNumber()) {
                 if (this.target.TriggerSpellAbsorb(this)) {
                     return undefined;
@@ -302,9 +304,9 @@ export class imba_phantom_assassin_phantom_strike extends BaseAbility_Plus {
             }
             ProjectileManager.CreateLinearProjectile(this.blink_projectile);
             StartSoundEvent("Hero_PhantomAssassin.Strike.Start", this.GetCasterPlus());
-            let distance = (this.target.GetAbsOrigin() - this.caster.GetAbsOrigin()).Length2D();
-            let direction = (this.target.GetAbsOrigin() - this.caster.GetAbsOrigin()).Normalized();
-            let blink_point = this.caster.GetAbsOrigin() + direction * (distance - 128);
+            let distance = (this.target.GetAbsOrigin() - this.caster.GetAbsOrigin() as Vector).Length2D();
+            let direction = (this.target.GetAbsOrigin() - this.caster.GetAbsOrigin() as Vector).Normalized();
+            let blink_point = this.caster.GetAbsOrigin() + direction * (distance - 128) as Vector;
             this.caster.SetAbsOrigin(blink_point);
             this.AddTimer(FrameTime(), () => {
                 FindClearSpaceForUnit(this.caster, blink_point, true);
@@ -313,7 +315,7 @@ export class imba_phantom_assassin_phantom_strike extends BaseAbility_Plus {
             ProjectileManager.ProjectileDodge(this.caster);
             let blink_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_phantom_assassin/phantom_assassin_phantom_strike_end.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster, this.caster);
             ParticleManager.ReleaseParticleIndex(blink_pfx);
-            this.target.EmitSound("Hero_PhantomAssassin.Strike.End", this.GetCasterPlus());
+            this.target.EmitSound("Hero_PhantomAssassin.Strike.End");
             if (this.target.GetTeamNumber() != this.caster.GetTeamNumber()) {
                 this.caster.AddNewModifier(this.caster, this, "modifier_imba_phantom_strike", {
                     duration: this.buff_duration
@@ -321,6 +323,7 @@ export class imba_phantom_assassin_phantom_strike extends BaseAbility_Plus {
                 this.caster.AddNewModifier(this.caster, this, "modifier_imba_phantom_strike_coup_de_grace", {
                     duration: this.buff_duration
                 });
+                let attacks_count = 0;
                 if (this.caster.HasTalent("special_bonus_imba_phantom_assassin_6")) {
                     attacks_count = this.caster.GetTalentValue("special_bonus_imba_phantom_assassin_6") + 4;
                 } else {
@@ -435,11 +438,11 @@ export class modifier_imba_blur extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public parent: IBaseNpc_Plus;
     public modifier_aura: any;
-    public modifier_speed: number;
+    public modifier_speed: string;
     public radius: number;
     public evasion: any;
     public ms_duration: number;
-    BeCreated(p_0: any,): void {
+    Init(p_0: any,): void {
         this.caster = this.GetCasterPlus();
         this.parent = this.GetParentPlus();
         this.modifier_aura = "modifier_imba_blur_blur";
@@ -451,9 +454,7 @@ export class modifier_imba_blur extends BaseModifier_Plus {
             this.StartIntervalThink(0.2);
         }
     }
-    BeRefresh(p_0: any,): void {
-        this.OnCreated();
-    }
+
     OnIntervalThink(): void {
         if (IsServer()) {
             let nearby_enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
@@ -466,7 +467,7 @@ export class modifier_imba_blur extends BaseModifier_Plus {
                     2: "phantom_assassin_phass_ability_blur_02",
                     3: "phantom_assassin_phass_ability_blur_03"
                 }
-                this.caster.EmitCasterSound("npc_dota_hero_phantom_assassin", responses, 10, ResHelper.EDOTA_CAST_SOUND.FLAG_NONE, 50, "blur");
+                this.caster.EmitCasterSound(Object.values(responses), 10, ResHelper.EDOTA_CAST_SOUND.FLAG_NONE, 50, "blur");
             }
         }
     }
@@ -486,7 +487,7 @@ export class modifier_imba_blur extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingDamage_Percentage(p_0: ModifierAttackEvent,): number {
-        if (GFuncRandom.PRD(this.caster.GetTalentValue("special_bonus_imba_phantom_assassin_8"),)) {
+        if (GFuncRandom.PRD(this.caster.GetTalentValue("special_bonus_imba_phantom_assassin_8"), this)) {
             SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_EVADE, this.caster, 0, undefined);
             return -100;
         }
@@ -539,14 +540,14 @@ export class modifier_imba_blur_speed extends BaseModifier_Plus {
     public parent: IBaseNpc_Plus;
     public speed_bonus_duration: number;
     public blur_ms: any;
-    public stacks_table: number;
+    public stacks_table: number[];
     BeCreated(p_0: any,): void {
         this.caster = this.GetCasterPlus();
         this.parent = this.GetParentPlus();
         this.speed_bonus_duration = this.GetSpecialValueFor("speed_bonus_duration");
         this.blur_ms = this.GetSpecialValueFor("blur_ms");
         if (IsServer()) {
-            this.stacks_table = {}
+            this.stacks_table = []
             this.StartIntervalThink(0.1);
         }
     }
@@ -563,7 +564,7 @@ export class modifier_imba_blur_speed extends BaseModifier_Plus {
                 } else {
                     this.SetStackCount(GameFunc.GetCount(this.stacks_table));
                 }
-                this.GetParentPlus().CalculateStatBonus(true);
+                // this.GetParentPlus().CalculateStatBonus(true);
             } else {
                 this.Destroy();
             }
@@ -636,7 +637,7 @@ export class modifier_imba_blur_smoke extends BaseModifierMotionVertical_Plus {
     GetEffectAttachType(): ParticleAttachment_t {
         return ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW;
     }
-    BeCreated(p_0: any,): void {
+    Init(p_0: any,): void {
         if (!this.GetAbilityPlus()) {
             this.Destroy();
             return;
@@ -650,9 +651,7 @@ export class modifier_imba_blur_smoke extends BaseModifierMotionVertical_Plus {
             this.StartIntervalThink(FrameTime());
         }
     }
-    BeRefresh(p_0: any,): void {
-        this.OnCreated();
-    }
+
     OnIntervalThink(): void {
         if (this.linger == true) {
             return;
@@ -689,7 +688,7 @@ export class modifier_imba_blur_smoke extends BaseModifierMotionVertical_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (keys.attacker == this.GetParentPlus() && keys.target.IsRoshan()) {
+        if (keys.attacker == this.GetParentPlus() && (keys.target as IBaseNpc_Plus).IsRoshan()) {
             this.SetDuration(math.min(this.fade_duration, this.GetRemainingTime()), true);
         }
     }
@@ -705,11 +704,11 @@ export class modifier_imba_coup_de_grace extends BaseModifier_Plus {
     public caster: IBaseNpc_Plus;
     public parent: IBaseNpc_Plus;
     public ps_coup_modifier: any;
-    public modifier_stacks: number;
+    public modifier_stacks: string;
     public crit_increase_duration: number;
     public crit_bonus: number;
     public crit_strike: any;
-    BeCreated(p_0: any,): void {
+    Init(p_0: any,): void {
         this.caster = this.GetCasterPlus();
         if (this.caster.IsIllusion()) {
             return;
@@ -720,9 +719,7 @@ export class modifier_imba_coup_de_grace extends BaseModifier_Plus {
         this.crit_increase_duration = this.GetSpecialValueFor("crit_increase_duration");
         this.crit_bonus = this.GetSpecialValueFor("crit_bonus");
     }
-    BeRefresh(p_0: any,): void {
-        this.OnCreated();
-    }
+
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_CRITICALSTRIKE,
@@ -744,18 +741,18 @@ export class modifier_imba_coup_de_grace extends BaseModifier_Plus {
                 if (ps_coup_modifier_handler) {
                     let bonus_coup_de_grace_chance = ps_coup_modifier_handler.GetSpecialValueFor("bonus_coup_de_grace");
                     bonus_coup_de_grace_chance = bonus_coup_de_grace_chance + this.GetCasterPlus().GetTalentValue("special_bonus_imba_phantom_assassin_4");
-                    let crit_chance_total = crit_chance_total + bonus_coup_de_grace_chance;
+                    crit_chance_total = crit_chance_total + bonus_coup_de_grace_chance;
                 }
             }
-            if (GFuncRandom.PRD(crit_chance_total,)) {
-                target.EmitSound("Hero_PhantomAssassin.CoupDeGrace", this.GetCasterPlus());
+            if (GFuncRandom.PRD(crit_chance_total, this)) {
+                target.EmitSound("Hero_PhantomAssassin.CoupDeGrace");
                 let responses = {
                     1: "phantom_assassin_phass_ability_coupdegrace_01",
                     2: "phantom_assassin_phass_ability_coupdegrace_02",
                     3: "phantom_assassin_phass_ability_coupdegrace_03",
                     4: "phantom_assassin_phass_ability_coupdegrace_04"
                 }
-                this.caster.EmitCasterSound("npc_dota_hero_phantom_assassin", responses, 50, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS, 20, "coup_de_grace");
+                this.caster.EmitCasterSound(Object.values(responses), 50, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS, 20, "coup_de_grace");
                 let crit_bonus = this.crit_bonus + this.caster.GetTalentValue("special_bonus_imba_phantom_assassin_5");
                 this.crit_strike = true;
                 return crit_bonus;
@@ -768,7 +765,7 @@ export class modifier_imba_coup_de_grace extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (IsServer()) {
-            let target = keys.target;
+            let target = keys.target as IBaseNpc_Plus;
             let attacker = keys.attacker;
             let fatality = this.GetSpecialValueFor("fatality_chance");
             if (this.GetCasterPlus() == attacker) {
@@ -779,19 +776,19 @@ export class modifier_imba_coup_de_grace extends BaseModifier_Plus {
                     if (target.GetHealthPercent() >= this.GetSpecialValueFor("fatality_threshold")) {
                         return;
                     }
-                    TrueKill(this.caster, target, this.GetAbilityPlus());
+                    target.TrueKilled(this.caster, this.GetAbilityPlus());
                     SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_CRITICAL, target, 999999, undefined);
                     if (target.IsRealHero()) {
                         let blood_pfx = ResHelper.CreateParticleEx("particles/hero/phantom_assassin/screen_blood_splatter.vpcf", ParticleAttachment_t.PATTACH_EYES_FOLLOW, target, attacker);
-                        Notifications.BottomToAll({
-                            text: "FATALITY!",
-                            duration: 4.0,
-                            style: {
-                                ["font-size"]: "50px",
-                                color: "Red"
-                            }
-                        });
-                        target.EmitSound("Hero_PhantomAssassin.CoupDeGrace", this.GetCasterPlus());
+                        // Notifications.BottomToAll({
+                        //     text: "FATALITY!",
+                        //     duration: 4.0,
+                        //     style: {
+                        //         ["font-size"]: "50px",
+                        //         color: "Red"
+                        //     }
+                        // });
+                        target.EmitSound("Hero_PhantomAssassin.CoupDeGrace");
                         this.GetCasterPlus().EmitSound("Imba.PhantomAssassinFatality");
                         if (this.GetParentPlus().HasModifier("modifier_phantom_assassin_arcana")) {
                             this.KillingBlowDamage("Fatality!");
@@ -799,7 +796,7 @@ export class modifier_imba_coup_de_grace extends BaseModifier_Plus {
                         let coup_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target, this.caster);
                         ParticleManager.SetParticleControlEnt(coup_pfx, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin(), true);
                         ParticleManager.SetParticleControl(coup_pfx, 1, target.GetAbsOrigin());
-                        ParticleManager.SetParticleControlOrientation(coup_pfx, 1, this.GetParentPlus().GetForwardVector() * (-1), this.GetParentPlus().GetRightVector(), this.GetParentPlus().GetUpVector());
+                        ParticleManager.SetParticleControlOrientation(coup_pfx, 1, this.GetParentPlus().GetForwardVector() * (-1) as Vector, this.GetParentPlus().GetRightVector(), this.GetParentPlus().GetUpVector());
                         ParticleManager.ReleaseParticleIndex(coup_pfx);
                         return undefined;
                     }
@@ -808,7 +805,7 @@ export class modifier_imba_coup_de_grace extends BaseModifier_Plus {
                     let coup_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target, this.caster);
                     ParticleManager.SetParticleControlEnt(coup_pfx, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin(), true);
                     ParticleManager.SetParticleControl(coup_pfx, 1, target.GetAbsOrigin());
-                    ParticleManager.SetParticleControlOrientation(coup_pfx, 1, this.GetParentPlus().GetForwardVector() * (-1), this.GetParentPlus().GetRightVector(), this.GetParentPlus().GetUpVector());
+                    ParticleManager.SetParticleControlOrientation(coup_pfx, 1, this.GetParentPlus().GetForwardVector() * (-1) as Vector, this.GetParentPlus().GetRightVector(), this.GetParentPlus().GetUpVector());
                     ParticleManager.ReleaseParticleIndex(coup_pfx);
                     if (this.GetParentPlus().HasModifier("modifier_phantom_assassin_arcana")) {
                         this.KillingBlowDamage(tostring(keys.damage));
@@ -817,16 +814,16 @@ export class modifier_imba_coup_de_grace extends BaseModifier_Plus {
             }
         }
     }
-    KillingBlowDamage(damage_count) {
+    KillingBlowDamage(damage_count: string) {
         if (!IsServer()) {
             return;
         }
-        this.GetParentPlus().cdp_damage = damage_count;
+        this.GetParentPlus().TempData().cdp_damage = damage_count;
         this.StartIntervalThink(0.1);
     }
     OnIntervalThink(): void {
         this.StartIntervalThink(-1);
-        this.GetParentPlus().cdp_damage = undefined;
+        this.GetParentPlus().TempData().cdp_damage = undefined;
     }
     IsPassive(): boolean {
         return true;
@@ -845,14 +842,14 @@ export class modifier_imba_coup_de_grace_crit extends BaseModifier_Plus {
     public parent: IBaseNpc_Plus;
     public crit_increase_duration: number;
     public crit_increase_damage: number;
-    public stacks_table: number;
+    public stacks_table: number[];
     BeCreated(params: any): void {
         this.caster = this.GetCasterPlus();
         this.parent = this.GetParentPlus();
         this.crit_increase_duration = params.duration;
         this.crit_increase_damage = this.GetSpecialValueFor("crit_increase_damage");
         if (IsServer()) {
-            this.stacks_table = {}
+            this.stacks_table = []
             this.StartIntervalThink(0.1);
         }
     }
@@ -869,7 +866,7 @@ export class modifier_imba_coup_de_grace_crit extends BaseModifier_Plus {
                 } else {
                     this.SetStackCount(GameFunc.GetCount(this.stacks_table));
                 }
-                this.GetParentPlus().CalculateStatBonus(true);
+                // this.GetParentPlus().CalculateStatBonus(true);
             } else {
                 this.Destroy();
             }
@@ -937,17 +934,13 @@ export class modifier_phantom_assassin_gravestone extends BaseModifier_Plus {
         this.StartIntervalThink(0.25);
     }
     OnIntervalThink(): void {
-        for (let i = 0; i <= PlayerResource.GetPlayerCount() - 1; i += 1) {
-            if (PlayerResource.IsUnitSelected(i, this.GetParentPlus()) && PlayerResource.GetMainSelectedEntity(i) == this.GetParentPlus().entindex()) {
-                CustomGameEventManager.Send_ServerToPlayer(PlayerResource.GetPlayer(i), "update_pa_arcana_tooltips", {
-                    victim: this.GetStackCount(),
-                    victim_id: this.GetParentPlus().victim_id,
-                    killer_id: i,
-                    epitaph: this.GetParentPlus().epitaph_number,
-                    cdp_damage: this.cdp_damage
-                });
-            }
-        }
+        NetTablesHelper.SetDotaEntityData("update_pa_arcana_tooltips", {
+            victim: this.GetStackCount(),
+            victim_id: this.GetParentPlus().TempData().victim_id,
+            killer_id: this.GetParentPlus().entindex(),
+            epitaph: this.GetParentPlus().TempData().epitaph_number,
+            cdp_damage: this.cdp_damage
+        })
     }
 }
 @registerModifier()
@@ -976,38 +969,39 @@ export class modifier_phantom_assassin_arcana extends BaseModifier_Plus {
         }
         if (params.attacker == this.GetParentPlus() && params.target.IsRealHero() && params.attacker.GetTeam() != params.target.GetTeam()) {
             this.IncrementStackCount();
-            let gravestone = BaseNpc_Plus.CreateUnitByName("npc_dota_phantom_assassin_gravestone", params.target.GetAbsOrigin(), true, this.GetParentPlus(), this.GetParentPlus(), DOTATeam_t.DOTA_TEAM_NEUTRALS);
+            let gravestone = BaseNpc_Plus.CreateUnitByName("npc_dota_phantom_assassin_gravestone", params.target.GetAbsOrigin(), DOTATeam_t.DOTA_TEAM_NEUTRALS, true, this.GetParentPlus(), this.GetParentPlus());
             gravestone.SetOwner(this.GetParentPlus());
             this.AddTimer(FrameTime(), () => {
-                gravestone.AddNewModifier(gravestone, undefined, "modifier_phantom_assassin_gravestone", {
-                    cdp_damage: params.attacker.cdp_damage
+                gravestone.AddNewModifier(gravestone, undefined,
+                    "modifier_phantom_assassin_gravestone", {
+                    cdp_damage: params.attacker.TempData().cdp_damage
                 }).SetStackCount(params.target.entindex());
             });
-            gravestone.epitaph_number = RandomInt(1, 13);
-            gravestone.victim_id = params.target.GetPlayerID();
+            gravestone.TempData().epitaph_number = RandomInt(1, 13);
+            gravestone.TempData().victim_id = params.target.GetPlayerID();
             for (let i = 0; i <= PlayerResource.GetPlayerCount() - 1; i += 1) {
-                gravestone.SetControllableByPlayer(i, false);
+                gravestone.SetControllableByPlayer(i as PlayerID, false);
             }
             if (this.GetStackCount() == 400) {
-                Wearable._WearProp(this.GetParentPlus(), "7247", "weapon", 1);
-                Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
-                    image: "file://{images}/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style1.png",
-                    duration: 5.0
-                });
-                Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
-                    text: "Style 1 unlocked!",
-                    duration: 10.0
-                });
+                // Wearable._WearProp(this.GetParentPlus(), "7247", "weapon", 1);
+                // Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
+                //     image: "file://{images}/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style1.png",
+                //     duration: 5.0
+                // });
+                // Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
+                //     text: "Style 1 unlocked!",
+                //     duration: 10.0
+                // });
             } else if (this.GetStackCount() == 1000) {
-                Wearable._WearProp(this.GetParentPlus(), "7247", "weapon", 2);
-                Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
-                    image: "file://{images}/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style2.png",
-                    duration: 5.0
-                });
-                Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
-                    text: "Style 2 unlocked!",
-                    duration: 10.0
-                });
+                // Wearable._WearProp(this.GetParentPlus(), "7247", "weapon", 2);
+                // Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
+                //     image: "file://{images}/econ/items/phantom_assassin/manifold_paradox/arcana_pa_style2.png",
+                //     duration: 5.0
+                // });
+                // Notifications.Bottom(this.GetParentPlus().GetPlayerID(), {
+                //     text: "Style 2 unlocked!",
+                //     duration: 10.0
+                // });
             }
             let style = 0;
             if (this.GetStackCount() >= 400 && this.GetStackCount() < 1000) {

@@ -1,9 +1,70 @@
 
+import { Assert_Color } from "../../assert/Assert_Color";
 import { ResHelper } from "../../helper/ResHelper";
 import { BaseItem_Plus } from "./BaseItem_Plus";
 import { BaseNpc } from "./Base_Plus";
 /**普通NPC单位基类 */
 export class BaseNpc_Plus extends BaseNpc {
+
+
+    /**
+     * todo
+     * @param slot 
+     * @returns 
+     */
+    GetTogglableWearablePlus?(slot: DOTASlotType_t): CBaseFlex | undefined {
+        return
+    }
+    /**
+     * @Both
+     */
+    GetHeroType?(): string {
+        if (this.GetKVData("GibType")) {
+            return this.GetKVData("GibType");
+        } else {
+            return "default";
+        }
+    }
+    GetHeroColorPrimary?() {
+        let heroname = this.GetName();
+        for (let k in Assert_Color.hero_theme) {
+            if (heroname.includes(k)) {
+                return Assert_Color.hero_theme[k as keyof typeof Assert_Color.hero_theme];
+            };
+        }
+
+    }
+    GetHeroColorSecondary?() {
+        let heroname = this.GetName();
+        for (let k in Assert_Color.hero_theme_second) {
+            if (heroname.includes(k)) {
+                return Assert_Color.hero_theme_second[k as keyof typeof Assert_Color.hero_theme_second];
+            };
+        }
+    }
+    GetFittingColor?() {
+        if (this.FindModifierByName("modifier_item_imba_rapier_cursed")) {
+            return Vector(1, 1, 1);
+        } else if (this.FindModifierByName("modifier_item_imba_skadi")) {
+            return Vector(50, 255, 255);
+        } else if (this.IsHero()) {
+            let hero_color = this.GetHeroColorPrimary();
+            if (hero_color) {
+                return hero_color;
+            }
+            let r = this.GetStrength();
+            let g = this.GetAgility();
+            let b = this.GetIntellect();
+            let highest = math.max(r, math.max(g, b));
+            r = math.max(255 - (highest - r) * 20, 0);
+            g = math.max(255 - (highest - g) * 20, 0);
+            b = math.max(255 - (highest - b) * 20, 0);
+            return Vector(r, g, b);
+        } else {
+            return Vector(253, 144, 63);
+        }
+    }
+
     /**
      * todo
      * @returns 

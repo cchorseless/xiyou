@@ -19,6 +19,25 @@ export class BaseAbility implements ET.IEntityRoot {
         return target.FindAbilityByName(this.name) as InstanceType<T>;
     }
 }
+export interface BaseDataDriven extends CDOTA_Ability_DataDriven { }
+export class BaseDataDriven {
+    /**
+     * @Server
+     * @param itemName 
+     * @param owner 
+     * @param purchaser 
+     * @returns 
+     */
+    static CreateItem(
+        itemName: string,
+        owner: IBaseNpc_Plus | undefined,
+    ) {
+        let player = owner.GetPlayerOwner();
+        let hItem = CreateItem(itemName, player, player) as any as BaseDataDriven;
+        // GameFunc.BindInstanceToCls(hItem, GGetRegClass(itemName) || BaseDataDriven);
+        return hItem
+    }
+}
 
 export interface BaseItem extends CDOTA_Item_Lua { }
 export class BaseItem implements ET.IEntityRoot {
@@ -587,6 +606,7 @@ export class BaseModifierMotionBoth extends BaseModifierMotion { }
 
 LogHelper.print(`-------------------setmetatable IsServer: ${IsServer()}------------------------------`);
 // Add standard base classes to prototype chain to make `super.*` work as `self.BaseClass.*`
+setmetatable(BaseDataDriven.prototype, { __index: IsServer() ? CDOTA_Ability_DataDriven : CDOTA_Ability_DataDriven });
 setmetatable(BaseAbility.prototype, { __index: IsServer() ? CDOTA_Ability_Lua : C_DOTA_Ability_Lua });
 setmetatable(BaseItem.prototype, { __index: IsServer() ? CDOTA_Item_Lua : C_DOTA_Item_Lua });
 setmetatable(BaseModifier.prototype, { __index: IsServer() ? CDOTA_Modifier_Lua : C_DOTA_Modifier_Lua });
