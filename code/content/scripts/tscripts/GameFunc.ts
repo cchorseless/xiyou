@@ -166,7 +166,24 @@ export module FuncEntity {
         }
     }
 
-
+    export function AddRangeIndicator(unit: IBaseNpc_Plus, hCaster: IBaseNpc_Plus,
+        hAbility: IBaseAbility_Plus, sAttribute: string, iRange: number,
+        iRed: number, iGreen: number, iBlue: number,
+        bShowOnCooldown = false, bShowAlways = false, bWithCastRangeIncrease = false, bRemoveOnDeath = false) {
+        let modifier = unit.AddNewModifier(hCaster || unit,
+            hAbility, "modifier_imba_range_indicator", {
+            sAttribute: sAttribute,
+            iRange: iRange,
+            iRed: iRed,
+            iGreen: iGreen,
+            iBlue: iBlue,
+            bShowOnCooldown: bShowOnCooldown,
+            bShowAlways: bShowAlways,
+            bWithCastRangeIncrease: bWithCastRangeIncrease,
+            bRemoveOnDeath: bRemoveOnDeath
+        });
+        return modifier;
+    }
     export function Custom_IsUnderForcedMovement(unit: IBaseNpc_Plus) {
         let forced_movement_modifiers: { [k: string]: boolean } = {
             modifier_knockback: true,

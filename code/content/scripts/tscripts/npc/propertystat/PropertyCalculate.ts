@@ -689,7 +689,7 @@ export module PropertyCalculate {
      * @param target
      * @param event
      */
-    export function GetPhysicalReduction(target: IBaseNpc_Plus, event: ModifierAttackEvent) {
+    export function GetPhysicalReductionPect(target: IBaseNpc_Plus, event: ModifierAttackEvent) {
         let iDamageFlags = event.damage_flags;
         // 无视魔法护甲
         if (iDamageFlags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_IGNORES_PHYSICAL_ARMOR) {

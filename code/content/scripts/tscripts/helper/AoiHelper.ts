@@ -1,5 +1,26 @@
 
 export module AoiHelper {
+
+    export function FindUnitsInRing(
+        teamNumber: DOTATeam_t,
+        position: Vector,
+        cacheUnit: IBaseNpc_Plus,
+        ring_radius: number,
+        ring_width: number,
+        teamFilter: DOTA_UNIT_TARGET_TEAM,
+        typeFilter: DOTA_UNIT_TARGET_TYPE,
+        flagFilter: DOTA_UNIT_TARGET_FLAGS,
+        order: FindOrder,
+        canGrowCache: boolean) {
+        let all_units = FindUnitsInRadius(teamNumber, position, cacheUnit, ring_radius, teamFilter, typeFilter, flagFilter, order, canGrowCache);
+        let outer_ring_units: IBaseNpc_Plus[] = []
+        for (const unit of (all_units)) {
+            if (GFuncVector.CalculateDistance(unit.GetAbsOrigin(), position) >= ring_radius - ring_width) {
+                outer_ring_units.push(unit);
+            }
+        }
+        return outer_ring_units;
+    }
     export function FindUnitsInCone(
         teamNumber: DOTATeam_t,
         vDirection: Vector,

@@ -294,7 +294,7 @@ export class modifier_property extends BaseModifier_Plus {
                     }
                     break
                 case DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL:
-                    fPercent = fPercent * (1 - PropertyCalculate.GetPhysicalReduction(hTarget, params))
+                    fPercent = fPercent * (1 - PropertyCalculate.GetPhysicalReductionPect(hTarget, params))
                     //  物理护甲
                     if (bDamageAmplify) {
                         _tmp = PropertyCalculate.SumProps(hTarget, params, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_PHYSICAL_DAMAGE_PERCENTAGE)
