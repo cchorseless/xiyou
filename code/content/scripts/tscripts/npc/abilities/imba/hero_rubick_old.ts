@@ -2,7 +2,7 @@
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { BaseModifierMotionBoth_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
@@ -10,7 +10,7 @@ export class imba_rubick_telekinesis extends BaseAbility_Plus {
     public telekinesis_marker_pfx: any;
     public target: IBaseNpc_Plus;
     public target_origin: any;
-    public target_modifier: any;
+    public target_modifier: modifier_imba_telekinesis;
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -29,17 +29,17 @@ export class imba_rubick_telekinesis extends BaseAbility_Plus {
             let target_loc = this.GetCursorPosition();
             let maximum_distance;
             if (this.target.GetTeam() == caster.GetTeam()) {
-                maximum_distance = this.GetSpecialValueFor("ally_range") + GetCastRangeIncrease(caster) + caster.GetTalentValue("special_bonus_unique_rubick");
+                maximum_distance = this.GetSpecialValueFor("ally_range") + GPropertyCalculate.GetCastRangeBonus(caster) + caster.GetTalentValue("special_bonus_unique_rubick");
             } else {
-                maximum_distance = this.GetSpecialValueFor("enemy_range") + GetCastRangeIncrease(caster) + caster.GetTalentValue("special_bonus_unique_rubick");
+                maximum_distance = this.GetSpecialValueFor("enemy_range") + GPropertyCalculate.GetCastRangeBonus(caster) + caster.GetTalentValue("special_bonus_unique_rubick");
             }
             if (this.telekinesis_marker_pfx) {
                 ParticleManager.DestroyParticle(this.telekinesis_marker_pfx, false);
                 ParticleManager.ReleaseParticleIndex(this.telekinesis_marker_pfx);
             }
-            let marked_distance = (target_loc - this.target_origin).Length2D();
+            let marked_distance = (target_loc - this.target_origin as Vector).Length2D();
             if (marked_distance > maximum_distance) {
-                target_loc = this.target_origin + (target_loc - this.target_origin).Normalized() * maximum_distance;
+                target_loc = this.target_origin + (target_loc - this.target_origin as Vector).Normalized() * maximum_distance;
             }
             this.telekinesis_marker_pfx = ParticleManager.CreateParticleForTeam("particles/units/heroes/hero_rubick/rubick_telekinesis_marker.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, caster, caster.GetTeam());
             ParticleManager.SetParticleControl(this.telekinesis_marker_pfx, 0, target_loc);
@@ -71,7 +71,7 @@ export class imba_rubick_telekinesis extends BaseAbility_Plus {
             }
             this.target_modifier = this.target.AddNewModifier(caster, this, "modifier_imba_telekinesis", {
                 duration: duration
-            });
+            }) as modifier_imba_telekinesis;
             if (is_ally) {
                 this.target_modifier.is_ally = true;
             }
@@ -134,7 +134,7 @@ export class modifier_imba_telekinesis_caster extends BaseModifier_Plus {
         return false;
     }
     BeDestroy(): void {
-        let ability = this.GetAbilityPlus();
+        let ability = this.GetAbilityPlus<imba_rubick_telekinesis>();
         if (ability.telekinesis_marker_pfx) {
             ParticleManager.DestroyParticle(ability.telekinesis_marker_pfx, false);
             ParticleManager.ReleaseParticleIndex(ability.telekinesis_marker_pfx);
@@ -153,6 +153,9 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
     public transition_end_commenced: any;
     public distance: number;
     public changed_target: any;
+    is_ally: boolean;
+    tele_pfx: ParticleID;
+    final_loc: Vector;
     IsDebuff(): boolean {
         if (this.GetParentPlus().GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
             return true;
@@ -174,11 +177,8 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
     IgnoreTenacity() {
         return true;
     }
-    IsMotionController() {
-        return true;
-    }
-    GetMotionControllerPriority() {
-        return DOTA_MOTION_CONTROLLER_PRIORITY.DOTA_MOTION_CONTROLLER_PRIORITY_MEDIUM;
+    GetPriority() {
+        return modifierpriority.MODIFIER_PRIORITY_HIGH;
     }
     BeCreated(params: any): void {
         if (IsServer()) {
@@ -194,20 +194,29 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             this.StartIntervalThink(FrameTime());
         }
     }
-    OnIntervalThink(): void {
+    ApplyHorizontalMotionController() {
         if (IsServer()) {
             if (!this.CheckMotionControllers()) {
                 this.Destroy();
-                return undefined;
+                return false;
             }
-            this.VerticalMotion(this.parent, this.frametime);
-            this.HorizontalMotion(this.parent, this.frametime);
         }
+        return true;
+    }
+
+    ApplyVerticalMotionController(): boolean {
+        if (IsServer()) {
+            if (!this.CheckMotionControllers()) {
+                this.Destroy();
+                return false;
+            }
+        }
+        return true;
     }
     EndTransition() {
         if (IsServer()) {
             if (this.transition_end_commenced) {
-                return undefined;
+                return;
             }
             this.transition_end_commenced = true;
             let caster = this.GetCasterPlus();
@@ -217,17 +226,15 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             parent.RemoveModifierByName("modifier_imba_telekinesis_stun");
             parent.RemoveModifierByName("modifier_imba_telekinesis_root");
             let parent_pos = parent.GetAbsOrigin();
-            let ability = this.GetAbilityPlus();
             let impact_radius = ability.GetSpecialValueFor("impact_radius");
             GridNav.DestroyTreesAroundPoint(parent_pos, impact_radius, true);
             let damage = ability.GetSpecialValueFor("damage");
             let impact_stun_duration = ability.GetSpecialValueFor("impact_stun_duration");
-            let impact_radius = ability.GetSpecialValueFor("impact_radius");
             let cooldown;
             if (this.is_ally) {
                 cooldown = ability.GetSpecialValueFor("ally_cooldown");
             } else {
-                cooldown = ability.BaseClass.GetCooldown(ability, ability.GetLevel());
+                cooldown = ability.GetCooldown(ability.GetLevel());
             }
             cooldown = (cooldown - caster.GetTalentValue("special_bonus_unique_rubick_4")) - this.GetDuration();
             parent.StopSound("Hero_Rubick.Telekinesis.Target");
@@ -260,19 +267,19 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             ability.StartCooldown(cooldown);
         }
     }
-    VerticalMotion(unit: IBaseNpc_Plus, dt) {
+    UpdateVerticalMotion(unit: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             this.current_time = this.current_time + dt;
             let max_height = this.GetSpecialValueFor("max_height");
             if (this.current_time <= this.lift_animation) {
                 this.z_height = this.z_height + ((dt / this.lift_animation) * max_height);
-                unit.SetAbsOrigin(GetGroundPosition(unit.GetAbsOrigin(), unit) + Vector(0, 0, this.z_height));
+                unit.SetAbsOrigin(GetGroundPosition(unit.GetAbsOrigin(), unit) + Vector(0, 0, this.z_height) as Vector);
             } else if (this.current_time > (this.duration - this.fall_animation)) {
                 this.z_height = this.z_height - ((dt / this.fall_animation) * max_height);
                 if (this.z_height < 0) {
                     this.z_height = 0;
                 }
-                unit.SetAbsOrigin(GetGroundPosition(unit.GetAbsOrigin(), unit) + Vector(0, 0, this.z_height));
+                unit.SetAbsOrigin(GetGroundPosition(unit.GetAbsOrigin(), unit) + Vector(0, 0, this.z_height) as Vector);
             } else {
                 max_height = this.z_height;
             }
@@ -282,20 +289,20 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             }
         }
     }
-    HorizontalMotion(unit: IBaseNpc_Plus, dt) {
+    UpdateHorizontalMotion(unit: IBaseNpc_Plus, dt: number) {
         if (IsServer()) {
             this.distance = this.distance || 0;
             if ((this.current_time > (this.duration - this.fall_animation))) {
                 if (this.changed_target) {
                     let frames_to_end = math.ceil((this.duration - this.current_time) / dt);
-                    this.distance = (unit.GetAbsOrigin() - this.final_loc).Length2D() / frames_to_end;
+                    this.distance = (unit.GetAbsOrigin() - this.final_loc as Vector).Length2D() / frames_to_end;
                     this.changed_target = false;
                 }
                 if ((this.current_time + dt) >= this.duration) {
                     unit.SetAbsOrigin(this.final_loc);
                     this.EndTransition();
                 } else {
-                    unit.SetAbsOrigin(unit.GetAbsOrigin() + ((this.final_loc - unit.GetAbsOrigin()).Normalized() * this.distance));
+                    unit.SetAbsOrigin(unit.GetAbsOrigin() + ((this.final_loc - unit.GetAbsOrigin() as Vector).Normalized() * this.distance) as Vector);
                 }
             }
         }
@@ -377,7 +384,7 @@ export class imba_rubick_spell_steal_controller extends BaseAbility_Plus {
 }
 @registerModifier()
 export class modifier_imba_rubick_spell_steal_controller extends BaseModifier_Plus {
-    public talent_ability: any;
+    public talent_ability: IBaseAbility_Plus[];
     IsDebuff(): boolean {
         return false;
     }
@@ -400,7 +407,7 @@ export class modifier_imba_rubick_spell_steal_controller extends BaseModifier_Pl
         if (!IsServer()) {
             return;
         }
-        this.talent_ability = {}
+        this.talent_ability = []
     }
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
@@ -434,7 +441,7 @@ export class modifier_imba_rubick_spell_steal_controller extends BaseModifier_Pl
                 if (string.find(name, "special_bonus_")) {
                     if (talent.GetLevel() > 0) {
                         rubick.AddAbility(name);
-                        table.insert(this.talent_ability, rubick.FindAbilityByName(name));
+                        this.talent_ability.push(rubick.FindAbilityByName(name) as IBaseAbility_Plus);
                     }
                 }
             }

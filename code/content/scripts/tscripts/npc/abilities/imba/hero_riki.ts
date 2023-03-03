@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { AStarHelper } from "../../../helper/AStarHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -365,6 +366,8 @@ export class imba_riki_smoke_screen_723 extends BaseAbility_Plus {
         }
     }
 }
+
+
 @registerModifier()
 export class modifier_imba_riki_smoke_screen_723_aura extends BaseModifier_Plus {
     public radius: number;
@@ -509,7 +512,7 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
     public hTarget: any;
     public thinker: any;
     public tMarkedTargets: IBaseNpc_Plus[];
-    public tStoredTargets: IBaseNpc_Plus[];
+    public tStoredTargets: IAStarNode[];
     public index: any;
     public trail_pfx: any;
     public hCaster: IBaseNpc_Plus;
@@ -568,13 +571,13 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
                 return false;
             }
             let jump_interval_frames = this.GetSpecialValueFor("jump_interval_frames");
-            let cast_range = super.GetCastRange(hCaster.GetAbsOrigin(), hTarget) + GetCastRangeIncrease(hCaster);
+            let cast_range = super.GetCastRange(hCaster.GetAbsOrigin(), hTarget) + GPropertyCalculate.GetCastRangeBonus(hCaster);
             let current_distance = CalcDistanceBetweenEntityOBB(hCaster, hTarget);
             if ((this.GetTalentSpecialValueFor("max_jumps") >= 1) && (current_distance > cast_range) && this.tStoredTargets) {
                 this.tMarkedTargets = []
-                for (const [_, target_entindex] of ipairs(this.tStoredTargets)) {
+                for (const target_entindex of (this.tStoredTargets)) {
                     if (!(target_entindex.IsCaster || target_entindex.IsTarget)) {
-                        table.insert(this.tMarkedTargets, EntIndexToHScript(target_entindex.entity_index));
+                        this.tMarkedTargets.push(EntIndexToHScript(target_entindex.entity_index) as IBaseNpc_Plus);
                     }
                 }
             } else {
@@ -585,9 +588,9 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
             this.index = index;
             let counter = 0;
             let marked_counter = 1;
-            let current_target;
+            let current_target: IBaseNpc_Plus;
             let last_position = hCaster.GetAbsOrigin();
-            let tMarkedTargets;
+            let tMarkedTargets: IBaseNpc_Plus[];
             if (this.tMarkedTargets) {
                 tMarkedTargets = this.tMarkedTargets;
                 current_target = tMarkedTargets[marked_counter];
@@ -737,7 +740,7 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
             this.hTarget = undefined;
         }
     }
-    DoJumpAttack(hTarget, hNextTarget) {
+    DoJumpAttack(hTarget: IBaseNpc_Plus, hNextTarget: IBaseNpc_Plus) {
         this.hCaster.FadeGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_4);
         this.hCaster.FadeGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_2);
         EmitSoundOn("Hero_Riki.Blink_Strike", hTarget);
@@ -771,7 +774,7 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
         let direction = (target_loc - next_target_loc as Vector).Normalized();
         if ((hTarget.GetTeamNumber() == this.hCaster.GetTeamNumber())) {
             this.hCaster.SetForwardVector(direction);
-            let start_loc = target_loc + Vector(0, 0, 100);
+            let start_loc = target_loc + Vector(0, 0, 100) as Vector;
             let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_riki/riki_blink_strike.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.hCaster);
             ParticleManager.SetParticleControl(particle, 1, start_loc);
             ParticleManager.ReleaseParticleIndex(particle);
@@ -810,11 +813,17 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
         }
     }
 }
+@registerAbility()
+export class imba_riki_blink_strike_723 extends imba_riki_blink_strike {
+    GetAbilityTextureName(): string {
+        return "modifier_generic_charges";
+    }
+}
 @registerModifier()
 export class modifier_imba_blink_strike_thinker extends BaseModifier_Plus {
     public hCaster: any;
     public hTarget: any;
-    public hAbility: any;
+    public hAbility: imba_riki_blink_strike;
     public jump_range: number;
     public max_jumps: any;
     public jump_interval_time: number;
@@ -869,11 +878,11 @@ export class modifier_imba_blink_strike_thinker extends BaseModifier_Plus {
                 this.Destroy();
             }
             this.hAbility = this.GetAbilityPlus();
-            this.jump_range = this.hAbility.GetSpecialValueFor("jump_range") + GetCastRangeIncrease(this.hCaster);
+            this.jump_range = this.hAbility.GetSpecialValueFor("jump_range") + GPropertyCalculate.GetCastRangeBonus(this.hCaster);
             this.max_jumps = this.hAbility.GetTalentSpecialValueFor("max_jumps");
             this.jump_interval_time = this.hAbility.GetSpecialValueFor("jump_interval_time");
             this.lagg_threshold = this.hAbility.GetSpecialValueFor("lagg_threshold");
-            this.cast_range = this.hAbility.BaseClass.GetCastRange(this.hAbility, this.hCaster.GetAbsOrigin(), this.hTarget) + GetCastRangeIncrease(this.hCaster);
+            this.cast_range = this.hAbility.GetCastRange(this.hCaster.GetAbsOrigin(), this.hTarget) + GPropertyCalculate.GetCastRangeBonus(this.hCaster);
             this.max_range = this.cast_range + this.max_jumps * this.jump_range;
             this.AddTimer(FrameTime(), () => {
                 this.created_flag = true;
@@ -888,46 +897,45 @@ export class modifier_imba_blink_strike_thinker extends BaseModifier_Plus {
                 let current_distance = CalcDistanceBetweenEntityOBB(this.hCaster, this.hTarget);
                 if ((current_distance <= this.max_range) || (current_distance < this.cast_range)) {
                     let tJumpableUnits = FindUnitsInRadius(this.hCaster.GetTeamNumber(), this.hCaster.GetAbsOrigin(), undefined, this.max_range, this.hAbility.GetAbilityTargetTeam(), this.hAbility.GetAbilityTargetType(), DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_FARTHEST, false);
-                    let graph = {}
-                    let caster_index = false;
-                    let target_index = false;
-                    for (let i = 1; i <= math.min(GameFunc.GetCount(tJumpableUnits), this.lagg_threshold); i += 1) {
+                    let graph: { [k: string]: any } = {}
+                    let caster_index: number;
+                    let target_index: number;
+                    for (let i = 0; i < math.min(GameFunc.GetCount(tJumpableUnits), this.lagg_threshold); i += 1) {
                         let pos = tJumpableUnits[i].GetAbsOrigin();
-                        graph[i] = {}
-                        graph[i].x = pos.x;
-                        graph[i].y = pos.y;
-                        graph[i].entity_index = tJumpableUnits[i].entindex();
+                        graph[i + ""] = {}
+                        graph[i + ""].x = pos.x;
+                        graph[i + ""].y = pos.y;
+                        graph[i + ""].entity_index = tJumpableUnits[i].entindex();
                         if ((tJumpableUnits[i] == this.hCaster)) {
                             caster_index = i;
-                            graph[i].IsCaster = true;
+                            graph[i + ""].IsCaster = true;
                         } else if ((tJumpableUnits[i] == this.hTarget)) {
                             target_index = i;
-                            graph[i].IsTarget = true;
+                            graph[i + ""].IsTarget = true;
                         }
                     }
-                    if (!caster_index) {
+                    if (caster_index != null) {
                         let pos = this.hCaster.GetAbsOrigin();
                         caster_index = 0;
-                        graph[caster_index] = {}
-                        graph[caster_index].x = pos.x;
-                        graph[caster_index].y = pos.y;
-                        graph[caster_index].IsCaster = true;
+                        graph[caster_index + ""] = {}
+                        graph[caster_index + ""].x = pos.x;
+                        graph[caster_index + ""].y = pos.y;
+                        graph[caster_index + ""].IsCaster = true;
                     }
-                    if (!target_index) {
+                    if (target_index != null) {
                         let pos = this.hTarget.GetAbsOrigin();
                         target_index = this.lagg_threshold + 1;
-                        graph[target_index] = {}
-                        graph[target_index].x = pos.x;
-                        graph[target_index].y = pos.y;
-                        graph[target_index].IsTarget = true;
+                        graph[target_index + ""] = {}
+                        graph[target_index + ""].x = pos.x;
+                        graph[target_index + ""].y = pos.y;
+                        graph[target_index + ""].IsTarget = true;
                     }
-                    let valid_node_func = function (node, neighbor) {
-                        if ((node.IsCaster && (astar.distance(node.x, node.y, neighbor.x, neighbor.y) < this.cast_range)) || (astar.distance(node.x, node.y, neighbor.x, neighbor.y) < this.jump_range)) {
+                    let path = new AStarHelper.AStar().path(graph[caster_index + ""], graph[target_index + ""], graph, true, (node, neighbor) => {
+                        if ((node.IsCaster && (AStarHelper.distance(node.x, node.y, neighbor.x, neighbor.y) < this.cast_range)) || (AStarHelper.distance(node.x, node.y, neighbor.x, neighbor.y) < this.jump_range)) {
                             return true;
                         }
                         return false;
-                    }
-                    let path = astar.path(graph[caster_index], graph[target_index], graph, true, valid_node_func);
+                    });
                     if (path) {
                         if ((GameFunc.GetCount(path) <= this.max_jumps + 2) && (!(GameFunc.GetCount(path) == 2))) {
                             this.hAbility.tStoredTargets = path;
@@ -1015,10 +1023,11 @@ export class modifier_imba_blink_strike_cmd extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     CC_GetActivityTranslationModifiers(): string {
-        if (this.GetParentPlus().GetName() == "npc_dota_hero_riki") {
-            return "backstab";
-        }
-        return 0;
+        // if (this.GetParentPlus().GetName() == "npc_dota_hero_riki") {
+        //     return "backstab";
+        // }
+        // return 0;
+        return "backstab";
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.DISABLE_TURNING)
     CC_GetModifierDisableTurning(): 0 | 1 {
@@ -1152,7 +1161,7 @@ export class modifier_imba_riki_cloak_and_dagger extends BaseModifier_Plus {
                 let sucker_punch_particle = "particles/hero/riki/riki_sucker_punch.vpcf";
                 let backbreak = false;
                 if (!parent.HasModifier("modifier_imba_riki_tricks_of_the_trade_primary") && !target.IsBuilding() && !parent.PassivesDisabled()) {
-                    if (ability.IsCooldownReady() && parent.IsImbaInvisible()) {
+                    if (ability.IsCooldownReady() && parent.IsInvisiblePlus()) {
                         agility_multiplier = agility_multiplier * agility_multiplier_invis_break;
                         agility_multiplier_smoke = agility_multiplier_smoke * agility_multiplier_invis_break;
                         agility_multiplier_side = agility_multiplier_side * agility_multiplier_invis_break;
@@ -1217,7 +1226,7 @@ export class modifier_imba_riki_cloak_and_dagger extends BaseModifier_Plus {
                             });
                             backbreak = true;
                         }
-                        parent.AddNewModifier(parent, this, "modifier_imba_riki_backstab_translation", {
+                        parent.AddNewModifier(parent, this.GetAbilityPlus(), "modifier_imba_riki_backstab_translation", {
                             duration: parent.GetAttackSpeed()
                         });
                         if (parent.HasTalent("special_bonus_imba_riki_1")) {
@@ -1265,7 +1274,7 @@ export class modifier_imba_riki_cloak_and_dagger extends BaseModifier_Plus {
                             });
                             backbreak = true;
                         }
-                        parent.AddNewModifier(parent, this, "modifier_imba_riki_backstab_translation", {
+                        parent.AddNewModifier(parent, this.GetAbilityPlus(), "modifier_imba_riki_backstab_translation", {
                             duration: parent.GetAttackSpeed()
                         });
                     } else if (target.HasModifier("modifier_imba_smoke_screen_debuff_miss")) {
@@ -1288,7 +1297,7 @@ export class modifier_imba_riki_cloak_and_dagger extends BaseModifier_Plus {
                             });
                             backbreak = true;
                         }
-                        parent.AddNewModifier(parent, this, "modifier_imba_riki_backstab_translation", {
+                        parent.AddNewModifier(parent, this.GetAbilityPlus(), "modifier_imba_riki_backstab_translation", {
                             duration: parent.GetAttackSpeed()
                         });
                     } else if (parent.HasTalent("special_bonus_imba_riki_4") && result_angle >= (180 - (parent.GetTalentValue("special_bonus_imba_riki_4", "sidestab_angle") / 2)) && result_angle <= (180 + (parent.GetTalentValue("special_bonus_imba_riki_4", "sidestab_angle") / 2))) {
@@ -1438,7 +1447,7 @@ export class modifier_imba_riki_backbreaker extends BaseModifier_Plus {
                 ParticleManager.ReleaseParticleIndex(backbreak_particle_fx);
                 EmitSoundOn("Imba.RikiCritStab", parent);
                 parent.AddNewModifier(caster, ability, "modifier_imba_riki_backbroken", {
-                    duration: caster.GetTalentValue("special_bonus_imba_riki_7", "break_duration") * (1 - target.GetStatusResistance())
+                    duration: caster.GetTalentValue("special_bonus_imba_riki_7", "break_duration") * (1 - parent.GetStatusResistance())
                 });
                 this.Destroy();
             }
@@ -1706,7 +1715,7 @@ export class modifier_imba_riki_tricks_of_the_trade_primary extends BaseModifier
                                 } else {
                                     backbreaker_mod = unit.AddNewModifier(caster, backstab_ability, "modifier_imba_riki_backbreaker", {
                                         duration: caster.GetTalentValue("special_bonus_imba_riki_7", "duration") * (1 - unit.GetStatusResistance())
-                                    });
+                                    }) as modifier_imba_riki_backbreaker;
                                 }
                             }
                         }
@@ -1739,14 +1748,15 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
         if (IsServer()) {
             let ability = this.GetAbilityPlus();
             let caster = ability.GetCasterPlus();
+            let parent = this.GetParentPlus();
             let origin = caster.GetAbsOrigin();
-            if (caster.HasScepter() && target) {
+            if (caster.HasScepter() && parent) {
                 let target = ability.GetCursorTarget();
                 origin = target.GetAbsOrigin();
                 caster.SetAbsOrigin(origin);
             }
             let aoe = ability.GetSpecialValueFor("area_of_effect");
-            let backstab_ability = caster.findAbliityPlus<imba_riki_cloak_and_dagger>("imba_riki_cloak_and_dagger") || caster.FindAbilityByName("imba_riki_cloak_and_dagger_723");
+            let backstab_ability = caster.findAbliityPlus<imba_riki_cloak_and_dagger>("imba_riki_cloak_and_dagger") || caster.FindAbilityByName("imba_riki_cloak_and_dagger_723") as IBaseAbility_Plus;
             let backstab_particle = "particles/units/heroes/hero_riki/riki_backstab.vpcf";
             let backstab_sound = "Hero_Riki.Backstab";
             let targets = FindUnitsInRadius(caster.GetTeamNumber(), origin, undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
@@ -1770,7 +1780,7 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
             if (martyrs_mark_targets) {
                 let martyrs_mark_stacks;
                 let martyrs_mark_target = undefined;
-                let martyrs_mark_checklist = {}
+                let martyrs_mark_checklist: IBaseNpc_Plus[] = []
                 let highest_stack = 0;
                 let martyrs_mark_checked = false;
                 for (let i = 1; i <= GameFunc.GetCount(martyrs_mark_targets); i += 1) {
@@ -1778,7 +1788,7 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
                         martyrs_mark_checked = false;
                         let martyrs_mark_mod = target.findBuff<modifier_imba_martyrs_mark>("modifier_imba_martyrs_mark");
                         if (martyrs_mark_mod) {
-                            for (const [_, check_target] of ipairs(martyrs_mark_checklist)) {
+                            for (const check_target of (martyrs_mark_checklist)) {
                                 if (check_target == target) {
                                     martyrs_mark_checked = true;
                                 }
@@ -1795,8 +1805,7 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
                     let proc_chance = (1 / GameFunc.GetCount(targets)) * (1 + martyrs_mark_stacks * caster.GetTalentValue("special_bonus_imba_riki_2") * 0.01) * 100;
                     if (RollPercentage(proc_chance) || proc_chance >= 100) {
                         this.ProcTricks(caster, ability, martyrs_mark_target, backstab_ability, backstab_particle, backstab_sound, caster.GetTalentValue("special_bonus_imba_riki_2", "duration"));
-                        let caster = this.GetParentPlus();
-                        let aps = caster.GetAttacksPerSecond();
+                        let aps = parent.GetAttacksPerSecond();
                         this.StartIntervalThink((1 / aps) * (1 / (this.GetSpecialValueFor("martyr_aspd_pct") * 0.01)));
                         return;
                     }
@@ -1806,15 +1815,14 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
             for (const [_, unit] of ipairs(targets)) {
                 if (unit.IsAlive() && !unit.IsAttackImmune()) {
                     this.ProcTricks(caster, ability, unit, backstab_ability, backstab_particle, backstab_sound, caster.GetTalentValue("special_bonus_imba_riki_2", "duration"));
-                    let caster = this.GetParentPlus();
-                    let aps = caster.GetAttacksPerSecond();
+                    let aps = parent.GetAttacksPerSecond();
                     this.StartIntervalThink((1 / aps) * (1 / (this.GetSpecialValueFor("martyr_aspd_pct") * 0.01)));
                     return;
                 }
             }
         }
     }
-    ProcTricks(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target: IBaseNpc_Plus, backstab_ability, backstab_particle, backstab_sound, talent_duration) {
+    ProcTricks(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target: IBaseNpc_Plus, backstab_ability: IBaseAbility_Plus, backstab_particle: string, backstab_sound: string, talent_duration: number) {
         if (caster.HasTalent("special_bonus_imba_riki_2")) {
             let martyrs_mark_mod = target.findBuff<modifier_imba_martyrs_mark>("modifier_imba_martyrs_mark");
             if (martyrs_mark_mod) {
@@ -1982,7 +1990,7 @@ export class modifier_imba_riki_cloak_and_dagger_723 extends BaseModifier_Plus {
         }
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage( /** keys */): number {
+    CC_GetModifierPreAttack_BonusDamage(keys?: any): number {
         if (keys.attacker == this.GetParentPlus() && keys.target) {
             if (!this.GetParentPlus().PassivesDisabled() && !keys.target.IsBuilding() && !keys.target.IsOther() && math.abs(AngleDiff(VectorToAngles(keys.target.GetForwardVector()).y, VectorToAngles(this.GetParentPlus().GetForwardVector()).y)) <= this.GetSpecialValueFor("backstab_angle")) {
                 this.bBackstab = true;
