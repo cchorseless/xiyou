@@ -700,6 +700,7 @@ export class modifier_imba_heartstopper_aura_damage extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_necrolyte_reapers_scythe extends BaseAbility_Plus {
+    ghost_death: boolean = false;
     GetAbilityTextureName(): string {
         return "necrolyte_reapers_scythe";
     }

@@ -224,7 +224,7 @@ export class modifier_imba_chaos_knight_phantasm_cast extends BaseModifier_Plus 
             outgoing_damage_structure: undefined,
             outgoing_damage_roshan: undefined,
             duration: this.illusion_duration
-        }, null, this.images_count, true,);
+        }, this.images_count);
         for (const [_, illusion] of ipairs(this.phantasm_illusions)) {
             illusion.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_chaos_knight_phantasm_illusion", {});
             table.insert(ability.phantasm_illusions, illusion);

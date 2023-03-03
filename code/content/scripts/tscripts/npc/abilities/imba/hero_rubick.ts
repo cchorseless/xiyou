@@ -886,15 +886,15 @@ export class modifier_imba_rubick_clandestine_librarian extends BaseModifier_Plu
 }
 
 class TRubick_animations_reference {
-    static animations: [string, boolean, GameActivity_t, string, number?][] = [
+    static animations: [string, boolean, number, string, number?][] = [
         //  AbilityName, bNormalWhenStolen, nActivity, nTranslate, fPlaybackRate
-        ["default", null, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "bolt"],
+        ["default", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "bolt"],
 
         ["imba_abaddon_death_coil", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_3, "", 1.4],
 
         ["imba_axe_berserkers_call", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_3, "", 1.0],
 
-        ["imba_antimage_blink", null, null, "am_blink"],
+        ["imba_antimage_blink", false, 0, "am_blink"],
         ["imba_antimage_mana_void", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "mana_void"],
 
         ["imba_bane_brain_sap", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "brain_sap"],
@@ -923,40 +923,40 @@ class TRubick_animations_reference {
         ["furion_force_of_nature", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "summon"],
         ["furion_wrath_of_nature", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "wrath"],
 
-        ["imba_lina_dragon_slave", false, null, "wave"],
-        ["imba_lina_light_strike_array", false, null, "lsa"],
-        ["imba_lina_laguna_blade", false, null, "laguna"],
+        ["imba_lina_dragon_slave", false, 0, "wave"],
+        ["imba_lina_light_strike_array", false, 0, "lsa"],
+        ["imba_lina_laguna_blade", false, 0, "laguna"],
 
-        ["ogre_magi_fireblast", false, null, "frostbite"],
+        ["ogre_magi_fireblast", false, 0, "frostbite"],
 
-        ["imba_omniknight_purification", true, null, "purification", 1.4],
-        ["imba_omniknight_repel", false, null, "repel"],
-        ["imba_omniknight_guardian_angel", true, null, "guardian_angel", 1.3],
+        ["imba_omniknight_purification", true, 0, "purification", 1.4],
+        ["imba_omniknight_repel", false, 0, "repel"],
+        ["imba_omniknight_guardian_angel", true, 0, "guardian_angel", 1.3],
 
         ["imba_phantom_assassin_stifling_dagger", false, GameActivity_t.ACT_DOTA_ATTACK, "", 2.0],
-        ["imba_phantom_assassin_shadow_strike", false, null, "qop_blink"],
+        ["imba_phantom_assassin_shadow_strike", false, 0, "qop_blink"],
 
-        ["imba_queen_of_pain_shadow_strike", false, null, "shadow_strike"],
-        ["imba_queen_of_pain_blink", false, null, "qop_blink"],
-        ["imba_queen_of_pain_scream_of_pain", false, null, "scream"],
-        ["imba_queen_of_pain_sonic_wave", false, null, "sonic_wave"],
+        ["imba_queen_of_pain_shadow_strike", false, 0, "shadow_strike"],
+        ["imba_queen_of_pain_blink", false, 0, "qop_blink"],
+        ["imba_queen_of_pain_scream_of_pain", false, 0, "scream"],
+        ["imba_queen_of_pain_sonic_wave", false, 0, "sonic_wave"],
 
         ["imba_nevermore_shadowraze_close", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "shadowraze", 2.0],
         ["imba_nevermore_shadowraze_medium", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "shadowraze", 2.0],
         ["imba_nevermore_shadowraze_far", false, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "shadowraze", 2.0],
         ["imba_nevermore_requiem_of_souls", true, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "requiem"],
 
-        ["imba_sven_warcry", null, GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_3, "strength"],
-        ["imba_sven_gods_strength", null, GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_4, "strength"],
+        ["imba_sven_warcry", false, GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_3, "strength"],
+        ["imba_sven_gods_strength", false, GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_4, "strength"],
 
-        ["imba_slardar_slithereen_crush", false, GameActivity_t.ACT_DOTA_MK_SPRING_END, null],
+        ["imba_slardar_slithereen_crush", false, GameActivity_t.ACT_DOTA_MK_SPRING_END, ""],
 
         ["imba_ursa_earthshock", true, GameActivity_t.ACT_DOTA_CAST_ABILITY_5, "earthshock", 1.7],
         ["imba_ursa_overpower", true, GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_3, "overpower"],
         ["imba_ursa_enrage", true, GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_4, "enrage"],
 
-        ["imba_vengefulspirit_wave_of_terror", null, null, "roar"],
-        ["imba_vengefulspirit_nether_swap", null, null, "qop_blink"],
+        ["imba_vengefulspirit_wave_of_terror", false, 0, "roar"],
+        ["imba_vengefulspirit_nether_swap", false, 0, "qop_blink"],
     ];
 
     current = 1;

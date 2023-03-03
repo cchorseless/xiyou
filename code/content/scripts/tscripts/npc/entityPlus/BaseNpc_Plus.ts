@@ -204,8 +204,8 @@ export class BaseNpc_Plus extends BaseNpc {
     CreateIllusion?(
         copyunit: IBaseNpc_Plus,
         hModifierKeys: CreateIllusionsModifierKeys & { duration?: number },
-        vLocation: Vector = null,
         nNumIllusions: number = 1,
+        vLocation: Vector = null,
         bFindClearSpace = true,
     ) {
         let r: IBaseNpc_Plus[] = [];

@@ -57,7 +57,7 @@ export class imba_naga_siren_mirror_image extends BaseAbility_Plus {
                     outgoing_damage_structure: undefined,
                     outgoing_damage_roshan: undefined,
                     duration: undefined
-                }, this.GetCasterPlus().GetAbsOrigin(), image_count, true);
+                }, image_count);
             for (let i = 0; i < this.illusions.length; i++) {
                 let illusion = this.illusions[i];
                 let pos = this.GetCasterPlus().GetAbsOrigin() + vRandomSpawnPos[i] as Vector;
