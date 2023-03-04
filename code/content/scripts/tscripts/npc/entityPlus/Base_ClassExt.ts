@@ -699,6 +699,11 @@ declare global {
          * 
         */
         GetAbilityPlus<T extends IBaseAbility_Plus>(): T;
+        /**获取施法技能 
+         * @Both
+         * 
+        */
+        GetItemPlus<T extends IBaseItem_Plus>(): T;
         /**获取施法来源NPC，谁施法的 
          * @Both
          * 
@@ -803,7 +808,9 @@ CDOTA_Buff.AddTimer = function (fInterval: number, fCallback: () => number | voi
 CDOTA_Buff.GetAbilityPlus = function () {
     return this.GetAbility() as IBaseAbility_Plus;
 }
-
+CDOTA_Buff.GetItemPlus = function () {
+    return this.GetAbility() as IBaseItem_Plus;
+}
 CDOTA_Buff.GetCasterPlus = function () {
     return this.GetCaster() as IBaseNpc_Plus;
 }

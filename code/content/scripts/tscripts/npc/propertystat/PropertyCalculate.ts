@@ -774,7 +774,13 @@ export module PropertyCalculate {
     export function GetEntityIndex(hUnit: IBaseNpc_Plus) {
         return hUnit.GetEntityIndex()
     }
+    export function GetSpellLifesteal(hUnit: IBaseNpc_Plus) {
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.SPELL_LIFESTEAL_PERCENTAGE);
+    }
 
+    export function GetLifesteal(hUnit: IBaseNpc_Plus) {
+        return SumProps(hUnit, null, GPropertyConfig.EMODIFIER_PROPERTY.LIFESTEAL_PERCENTAGE);
+    }
 
 }
 declare global {

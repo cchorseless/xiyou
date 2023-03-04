@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -833,330 +834,329 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(area_pfx, 1, caster_loc);
             ParticleManager.SetParticleControlForward(area_pfx, 1, direction);
             ParticleManager.ReleaseParticleIndex(area_pfx);
-            // for (let i = 0; i <= spawn_duration * robots_per_sec; i += 1) {
-            //     this.AddTimer(i * (1 / robots_per_sec), () => {
-            //         let position_ran = (math.random() - 0.5) * travel_distance;
-            //         let projectile;
-            //         let bot_random = math.random(1, 100);
-            //         if ((bot_random <= touch_chance_pct) && unlock_flame) {
-            //             let index = "projectile_" + DoUniqueString("projectile");
-            //             this.tempdata[index] = {}
-            //             projectile = {
-            //                 EffectName: "particles/hero/tinker/tinker_march_flame.vpcf",
-            //                 vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran),
-            //                 fDistance: travel_distance,
-            //                 fStartRadius: collision_radius,
-            //                 fEndRadius: collision_radius,
-            //                 Source: caster,
-            //                 fExpireTime: GameRules.GetGameTime() + 10.0,
-            //                 vVelocity: Vector(direction.x, direction.y, 0) * speed,
-            //                 UnitBehavior: PROJECTILES_DESTROY,
-            //                 bMultipleHits: false,
-            //                 bIgnoreSource: true,
-            //                 TreeBehavior: PROJECTILES_NOTHING,
-            //                 bCutTrees: false,
-            //                 bTreeFullCollision: false,
-            //                 WallBehavior: PROJECTILES_NOTHING,
-            //                 GroundBehavior: PROJECTILES_NOTHING,
-            //                 fGroundOffset: 80,
-            //                 nChangeMax: 1,
-            //                 bRecreateOnChange: false,
-            //                 bDestroyImmediate: false,
-            //                 bZCheck: false,
-            //                 bGroundLock: true,
-            //                 bProvidesVision: false,
-            //                 OnThink: function (self) {
-            //                     ability.OnProjectileThink_ExtraData(projectile.GetPosition(), {
-            //                         index: index,
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius,
-            //                         flame_radius: flame_radius,
-            //                         flame_duration: flame_duration
-            //                     });
-            //                 },
-            //                 UnitTest: function (self, unit) {
-            //                     return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
-            //                 },
-            //                 OnUnitHit: function (self, unit) {
-            //                     ability.OnProjectileHit_ExtraData(unit, projectile.GetPosition(), {
-            //                         index: index,
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius,
-            //                         flame_radius: flame_radius,
-            //                         flame_duration: flame_duration
-            //                     });
-            //                 }
-            //             }
-            //         } else if (((bot_random <= (2 * touch_chance_pct)) && (bot_random > (touch_chance_pct))) && unlock_tesla) {
-            //             projectile = {
-            //                 EffectName: "particles/hero/tinker/tinker_march_tesla.vpcf",
-            //                 vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran),
-            //                 fDistance: travel_distance,
-            //                 fStartRadius: collision_radius,
-            //                 fEndRadius: collision_radius,
-            //                 Source: caster,
-            //                 fExpireTime: GameRules.GetGameTime() + 10.0,
-            //                 vVelocity: Vector(direction.x, direction.y, 0) * speed,
-            //                 UnitBehavior: PROJECTILES_DESTROY,
-            //                 bMultipleHits: false,
-            //                 bIgnoreSource: true,
-            //                 TreeBehavior: PROJECTILES_NOTHING,
-            //                 bCutTrees: false,
-            //                 bTreeFullCollision: false,
-            //                 WallBehavior: PROJECTILES_NOTHING,
-            //                 GroundBehavior: PROJECTILES_NOTHING,
-            //                 fGroundOffset: 80,
-            //                 nChangeMax: 1,
-            //                 bRecreateOnChange: false,
-            //                 bDestroyImmediate: false,
-            //                 bZCheck: false,
-            //                 bGroundLock: true,
-            //                 bProvidesVision: false,
-            //                 OnThink: function (self) {
-            //                     ability.OnProjectileThink_ExtraData(projectile.GetPosition(), {
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius,
-            //                         tesla_stun_duration: tesla_stun_duration
-            //                     });
-            //                 },
-            //                 UnitTest: function (self, unit) {
-            //                     return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
-            //                 },
-            //                 OnUnitHit: function (self, unit) {
-            //                     ability.OnProjectileHit_ExtraData(unit, projectile.GetPosition(), {
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius,
-            //                         tesla_stun_duration: tesla_stun_duration
-            //                     });
-            //                 }
-            //             }
-            //         } else if (((bot_random <= (3 * touch_chance_pct)) && (bot_random > (2 * touch_chance_pct))) && unlock_drone) {
-            //             let index = "projectile_" + DoUniqueString("projectile");
-            //             this.tempdata[index] = {}
-            //             projectile = {
-            //                 EffectName: "particles/hero/tinker/tinker_march_drone.vpcf",
-            //                 vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran),
-            //                 fDistance: travel_distance,
-            //                 fStartRadius: collision_radius,
-            //                 fEndRadius: collision_radius,
-            //                 Source: caster,
-            //                 fExpireTime: GameRules.GetGameTime() + 10.0,
-            //                 vVelocity: Vector(direction.x, direction.y, 0) * speed,
-            //                 UnitBehavior: PROJECTILES_DESTROY,
-            //                 bMultipleHits: false,
-            //                 bIgnoreSource: true,
-            //                 TreeBehavior: PROJECTILES_NOTHING,
-            //                 bCutTrees: false,
-            //                 bTreeFullCollision: false,
-            //                 WallBehavior: PROJECTILES_NOTHING,
-            //                 GroundBehavior: PROJECTILES_NOTHING,
-            //                 fGroundOffset: 80,
-            //                 nChangeMax: 1,
-            //                 bRecreateOnChange: false,
-            //                 bDestroyImmediate: false,
-            //                 bZCheck: false,
-            //                 bGroundLock: true,
-            //                 bProvidesVision: false,
-            //                 OnThink: function (self) {
-            //                     ability.OnProjectileThink_ExtraData(projectile.GetPosition(), {
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius,
-            //                         drone_duration: drone_duration
-            //                     });
-            //                 },
-            //                 UnitTest: function (self, unit) {
-            //                     return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
-            //                 },
-            //                 OnUnitHit: function (self, unit) {
-            //                     ability.OnProjectileHit_ExtraData(unit, projectile.GetPosition(), {
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius,
-            //                         drone_duration: drone_duration
-            //                     });
-            //                 }
-            //             }
-            //         } else if (((bot_random <= (4 * touch_chance_pct)) && (bot_random > (3 * touch_chance_pct))) && unlock_sticky) {
-            //             projectile = {
-            //                 EffectName: "particles/hero/tinker/tinker_march_sticky.vpcf",
-            //                 vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran),
-            //                 fDistance: travel_distance,
-            //                 fStartRadius: collision_radius,
-            //                 fEndRadius: collision_radius,
-            //                 Source: caster,
-            //                 fExpireTime: GameRules.GetGameTime() + 10.0,
-            //                 vVelocity: Vector(direction.x, direction.y, 0) * speed,
-            //                 UnitBehavior: PROJECTILES_DESTROY,
-            //                 bMultipleHits: false,
-            //                 bIgnoreSource: true,
-            //                 TreeBehavior: PROJECTILES_NOTHING,
-            //                 bCutTrees: false,
-            //                 bTreeFullCollision: false,
-            //                 WallBehavior: PROJECTILES_NOTHING,
-            //                 GroundBehavior: PROJECTILES_NOTHING,
-            //                 fGroundOffset: 80,
-            //                 nChangeMax: 1,
-            //                 bRecreateOnChange: false,
-            //                 bDestroyImmediate: false,
-            //                 bZCheck: false,
-            //                 bGroundLock: true,
-            //                 bProvidesVision: false,
-            //                 OnThink: function (self) {
-            //                     ability.OnProjectileThink_ExtraData(projectile.GetPosition(), {
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius,
-            //                         sticky_duration: sticky_duration
-            //                     });
-            //                 },
-            //                 UnitTest: function (self, unit) {
-            //                     return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
-            //                 },
-            //                 OnUnitHit: function (self, unit) {
-            //                     ability.OnProjectileHit_ExtraData(unit, projectile.GetPosition(), {
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius,
-            //                         sticky_duration: sticky_duration
-            //                     });
-            //                 }
-            //             }
-            //         } else if (((bot_random <= (5 * touch_chance_pct)) && (bot_random > (4 * touch_chance_pct))) && unlock_dismantle) {
-            //             projectile = {
-            //                 EffectName: "particles/hero/tinker/tinker_march_dismantle.vpcf",
-            //                 vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran),
-            //                 fDistance: travel_distance,
-            //                 fStartRadius: collision_radius,
-            //                 fEndRadius: collision_radius,
-            //                 Source: caster,
-            //                 fExpireTime: GameRules.GetGameTime() + 10.0,
-            //                 vVelocity: Vector(direction.x, direction.y, 0) * speed,
-            //                 UnitBehavior: PROJECTILES_DESTROY,
-            //                 bMultipleHits: false,
-            //                 bIgnoreSource: true,
-            //                 TreeBehavior: PROJECTILES_NOTHING,
-            //                 bCutTrees: false,
-            //                 bTreeFullCollision: false,
-            //                 WallBehavior: PROJECTILES_NOTHING,
-            //                 GroundBehavior: PROJECTILES_NOTHING,
-            //                 fGroundOffset: 80,
-            //                 nChangeMax: 1,
-            //                 bRecreateOnChange: false,
-            //                 bDestroyImmediate: false,
-            //                 bZCheck: false,
-            //                 bGroundLock: true,
-            //                 bProvidesVision: false,
-            //                 OnThink: function (self) {
-            //                     ability.OnProjectileThink_ExtraData(projectile.GetPosition(), {
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius,
-            //                         dismantle_duration: dismantle_duration
-            //                     });
-            //                 },
-            //                 UnitTest: function (self, unit) {
-            //                     return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
-            //                 },
-            //                 OnUnitHit: function (self, unit) {
-            //                     ability.OnProjectileHit_ExtraData(unit, projectile.GetPosition(), {
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius,
-            //                         dismantle_duration: dismantle_duration
-            //                     });
-            //                 }
-            //             }
-            //         } else if (((bot_random <= (6 * touch_chance_pct)) && (bot_random > (5 * touch_chance_pct))) && unlock_railgun) {
-            //             let index = "projectile_" + DoUniqueString("projectile");
-            //             this.tempdata[index] = {}
-            //             projectile = {
-            //                 EffectName: "particles/hero/tinker/tinker_march_railgun.vpcf",
-            //                 vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran),
-            //                 fDistance: travel_distance,
-            //                 fStartRadius: collision_radius,
-            //                 fEndRadius: collision_radius,
-            //                 Source: caster,
-            //                 fExpireTime: GameRules.GetGameTime() + 10.0,
-            //                 vVelocity: Vector(direction.x, direction.y, 0) * speed,
-            //                 UnitBehavior: PROJECTILES_DESTROY,
-            //                 bMultipleHits: false,
-            //                 bIgnoreSource: true,
-            //                 TreeBehavior: PROJECTILES_NOTHING,
-            //                 bCutTrees: false,
-            //                 bTreeFullCollision: false,
-            //                 WallBehavior: PROJECTILES_NOTHING,
-            //                 GroundBehavior: PROJECTILES_NOTHING,
-            //                 fGroundOffset: 80,
-            //                 nChangeMax: 1,
-            //                 bRecreateOnChange: false,
-            //                 bDestroyImmediate: false,
-            //                 bZCheck: false,
-            //                 bGroundLock: true,
-            //                 bProvidesVision: false,
-            //                 OnThink: function (self) {
-            //                     ability.OnProjectileThink_ExtraData(projectile.GetPosition(), {
-            //                         index: index,
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius,
-            //                         railgun_damage: railgun_damage,
-            //                         railgun_range: railgun_range,
-            //                         railgun_radius: railgun_radius,
-            //                         direction_x: direction.x,
-            //                         direction_y: direction.y
-            //                     });
-            //                 },
-            //                 UnitTest: function (self, unit) {
-            //                     return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
-            //                 },
-            //                 OnUnitHit: function (self, unit) {
-            //                     ability.OnProjectileHit_ExtraData(unit, projectile.GetPosition(), {
-            //                         index: index,
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius,
-            //                         railgun_damage: railgun_damage,
-            //                         railgun_range: railgun_range,
-            //                         railgun_radius: railgun_radius,
-            //                         direction_x: direction.x,
-            //                         direction_y: direction.y
-            //                     });
-            //                 }
-            //             }
-            //         } else {
-            //             projectile = {
-            //                 EffectName: "particles/units/heroes/hero_tinker/tinker_machine.vpcf",
-            //                 vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran),
-            //                 fDistance: travel_distance,
-            //                 fStartRadius: collision_radius,
-            //                 fEndRadius: collision_radius,
-            //                 Source: caster,
-            //                 fExpireTime: GameRules.GetGameTime() + 10.0,
-            //                 vVelocity: Vector(direction.x, direction.y, 0) * speed,
-            //                 UnitBehavior: PROJECTILES_DESTROY,
-            //                 bMultipleHits: false,
-            //                 bIgnoreSource: true,
-            //                 TreeBehavior: PROJECTILES_NOTHING,
-            //                 bCutTrees: false,
-            //                 bTreeFullCollision: false,
-            //                 WallBehavior: PROJECTILES_NOTHING,
-            //                 GroundBehavior: PROJECTILES_NOTHING,
-            //                 fGroundOffset: 80,
-            //                 nChangeMax: 1,
-            //                 bRecreateOnChange: false,
-            //                 bDestroyImmediate: false,
-            //                 bZCheck: false,
-            //                 bGroundLock: true,
-            //                 bProvidesVision: false,
-            //                 OnThink: function (self) {
-            //                 },
-            //                 UnitTest: function (self, unit) {
-            //                     return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
-            //                 },
-            //                 OnUnitHit: function (self, unit) {
-            //                     ability.OnProjectileHit_ExtraData(unit, this.GetPosition(), {
-            //                         damage: damage,
-            //                         explosion_radius: explosion_radius
-            //                     });
-            //                 }
-            //             }
-            //         }
-            //         Projectiles.CreateProjectile(projectile);
-            //     });
-            // }
+            for (let i = 0; i <= spawn_duration * robots_per_sec; i += 1) {
+                this.AddTimer(i * (1 / robots_per_sec), () => {
+                    let position_ran = (math.random() - 0.5) * travel_distance;
+                    let projectile: ILineProjectile;
+                    let bot_random = math.random(1, 100);
+                    if ((bot_random <= touch_chance_pct) && unlock_flame) {
+                        let index = "projectile_" + DoUniqueString("projectile");
+                        this.tempdata[index] = {}
+                        projectile = {
+                            EffectName: "particles/hero/tinker/tinker_march_flame.vpcf",
+                            vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran) as Vector,
+                            fDistance: travel_distance,
+                            fStartRadius: collision_radius,
+                            fEndRadius: collision_radius,
+                            Source: caster,
+                            fExpireTime: GameRules.GetGameTime() + 10.0,
+                            vVelocity: Vector(direction.x, direction.y, 0) * speed as Vector,
+                            UnitBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_DESTROY,
+                            bMultipleHits: false,
+                            bIgnoreSource: true,
+                            TreeBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            bCutTrees: false,
+                            bTreeFullCollision: false,
+                            WallBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            GroundBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            fGroundOffset: 80,
+                            nChangeMax: 1,
+                            bRecreateOnChange: false,
+                            bDestroyImmediate: false,
+                            bZCheck: false,
+                            bGroundLock: true,
+                            bProvidesVision: false,
+                            OnThink: GHandler.create(this, (pinfo: GLineProjectile) => {
+                                ability.OnProjectileThink_ExtraData(pinfo.GetPosition(), {
+                                    index: index,
+                                    damage: damage,
+                                    explosion_radius: explosion_radius,
+                                    flame_radius: flame_radius,
+                                    flame_duration: flame_duration
+                                });
+                            }),
+                            UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit) => {
+                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                            }),
+                            OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit) => {
+                                ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
+                                    index: index,
+                                    damage: damage,
+                                    explosion_radius: explosion_radius,
+                                    flame_radius: flame_radius,
+                                    flame_duration: flame_duration
+                                });
+                            })
+                        }
+                    } else if (((bot_random <= (2 * touch_chance_pct)) && (bot_random > (touch_chance_pct))) && unlock_tesla) {
+                        projectile = {
+                            EffectName: "particles/hero/tinker/tinker_march_tesla.vpcf",
+                            vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran) as Vector,
+                            fDistance: travel_distance,
+                            fStartRadius: collision_radius,
+                            fEndRadius: collision_radius,
+                            Source: caster,
+                            fExpireTime: GameRules.GetGameTime() + 10.0,
+                            vVelocity: Vector(direction.x, direction.y, 0) * speed as Vector,
+                            UnitBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_DESTROY,
+                            bMultipleHits: false,
+                            bIgnoreSource: true,
+                            TreeBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            bCutTrees: false,
+                            bTreeFullCollision: false,
+                            WallBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            GroundBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            fGroundOffset: 80,
+                            nChangeMax: 1,
+                            bRecreateOnChange: false,
+                            bDestroyImmediate: false,
+                            bZCheck: false,
+                            bGroundLock: true,
+                            bProvidesVision: false,
+                            OnThink: GHandler.create(this, (pinfo: GLineProjectile) => {
+                                ability.OnProjectileThink_ExtraData(pinfo.GetPosition(), {
+                                    damage: damage,
+                                    explosion_radius: explosion_radius,
+                                    tesla_stun_duration: tesla_stun_duration
+                                });
+                            }),
+                            UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
+                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                            }),
+                            OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
+                                ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
+                                    damage: damage,
+                                    explosion_radius: explosion_radius,
+                                    tesla_stun_duration: tesla_stun_duration
+                                });
+                            })
+                        }
+                    } else if (((bot_random <= (3 * touch_chance_pct)) && (bot_random > (2 * touch_chance_pct))) && unlock_drone) {
+                        let index = "projectile_" + DoUniqueString("projectile");
+                        this.tempdata[index] = {}
+                        projectile = {
+                            EffectName: "particles/hero/tinker/tinker_march_drone.vpcf",
+                            vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran) as Vector,
+                            fDistance: travel_distance,
+                            fStartRadius: collision_radius,
+                            fEndRadius: collision_radius,
+                            Source: caster,
+                            fExpireTime: GameRules.GetGameTime() + 10.0,
+                            vVelocity: Vector(direction.x, direction.y, 0) * speed as Vector,
+                            UnitBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_DESTROY,
+                            bMultipleHits: false,
+                            bIgnoreSource: true,
+                            TreeBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            bCutTrees: false,
+                            bTreeFullCollision: false,
+                            WallBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            GroundBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            fGroundOffset: 80,
+                            nChangeMax: 1,
+                            bRecreateOnChange: false,
+                            bDestroyImmediate: false,
+                            bZCheck: false,
+                            bGroundLock: true,
+                            bProvidesVision: false,
+                            OnThink: GHandler.create(this, (pinfo: GLineProjectile) => {
+                                ability.OnProjectileThink_ExtraData(pinfo.GetPosition(), {
+                                    damage: damage,
+                                    explosion_radius: explosion_radius,
+                                    drone_duration: drone_duration
+                                });
+                            }),
+                            UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
+                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                            }),
+                            OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
+                                ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
+                                    damage: damage,
+                                    explosion_radius: explosion_radius,
+                                    drone_duration: drone_duration
+                                });
+                            })
+                        }
+                    } else if (((bot_random <= (4 * touch_chance_pct)) && (bot_random > (3 * touch_chance_pct))) && unlock_sticky) {
+                        projectile = {
+                            EffectName: "particles/hero/tinker/tinker_march_sticky.vpcf",
+                            vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran) as Vector,
+                            fDistance: travel_distance,
+                            fStartRadius: collision_radius,
+                            fEndRadius: collision_radius,
+                            Source: caster,
+                            fExpireTime: GameRules.GetGameTime() + 10.0,
+                            vVelocity: Vector(direction.x, direction.y, 0) * speed as Vector,
+                            UnitBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_DESTROY,
+                            bMultipleHits: false,
+                            bIgnoreSource: true,
+                            TreeBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            bCutTrees: false,
+                            bTreeFullCollision: false,
+                            WallBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            GroundBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            fGroundOffset: 80,
+                            nChangeMax: 1,
+                            bRecreateOnChange: false,
+                            bDestroyImmediate: false,
+                            bZCheck: false,
+                            bGroundLock: true,
+                            bProvidesVision: false,
+                            OnThink: GHandler.create(this, (pinfo: GLineProjectile) => {
+                                ability.OnProjectileThink_ExtraData(pinfo.GetPosition(), {
+                                    damage: damage,
+                                    explosion_radius: explosion_radius,
+                                    sticky_duration: sticky_duration
+                                });
+                            }),
+                            UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
+                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                            }),
+                            OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
+                                ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
+                                    damage: damage,
+                                    explosion_radius: explosion_radius,
+                                    sticky_duration: sticky_duration
+                                });
+                            })
+                        }
+                    } else if (((bot_random <= (5 * touch_chance_pct)) && (bot_random > (4 * touch_chance_pct))) && unlock_dismantle) {
+                        projectile = {
+                            EffectName: "particles/hero/tinker/tinker_march_dismantle.vpcf",
+                            vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran) as Vector,
+                            fDistance: travel_distance,
+                            fStartRadius: collision_radius,
+                            fEndRadius: collision_radius,
+                            Source: caster,
+                            fExpireTime: GameRules.GetGameTime() + 10.0,
+                            vVelocity: Vector(direction.x, direction.y, 0) * speed as Vector,
+                            UnitBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_DESTROY,
+                            bMultipleHits: false,
+                            bIgnoreSource: true,
+                            TreeBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            bCutTrees: false,
+                            bTreeFullCollision: false,
+                            WallBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            GroundBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            fGroundOffset: 80,
+                            nChangeMax: 1,
+                            bRecreateOnChange: false,
+                            bDestroyImmediate: false,
+                            bZCheck: false,
+                            bGroundLock: true,
+                            bProvidesVision: false,
+                            OnThink: GHandler.create(this, (pinfo: GLineProjectile) => {
+                                ability.OnProjectileThink_ExtraData(pinfo.GetPosition(), {
+                                    damage: damage,
+                                    explosion_radius: explosion_radius,
+                                    dismantle_duration: dismantle_duration
+                                });
+                            }),
+                            UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
+                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                            }),
+                            OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
+                                ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
+                                    damage: damage,
+                                    explosion_radius: explosion_radius,
+                                    dismantle_duration: dismantle_duration
+                                });
+                            })
+                        }
+                    } else if (((bot_random <= (6 * touch_chance_pct)) && (bot_random > (5 * touch_chance_pct))) && unlock_railgun) {
+                        let index = "projectile_" + DoUniqueString("projectile");
+                        this.tempdata[index] = {}
+                        projectile = {
+                            EffectName: "particles/hero/tinker/tinker_march_railgun.vpcf",
+                            vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran) as Vector,
+                            fDistance: travel_distance,
+                            fStartRadius: collision_radius,
+                            fEndRadius: collision_radius,
+                            Source: caster,
+                            fExpireTime: GameRules.GetGameTime() + 10.0,
+                            vVelocity: Vector(direction.x, direction.y, 0) * speed as Vector,
+                            UnitBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_DESTROY,
+                            bMultipleHits: false,
+                            bIgnoreSource: true,
+                            TreeBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            bCutTrees: false,
+                            bTreeFullCollision: false,
+                            WallBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            GroundBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            fGroundOffset: 80,
+                            nChangeMax: 1,
+                            bRecreateOnChange: false,
+                            bDestroyImmediate: false,
+                            bZCheck: false,
+                            bGroundLock: true,
+                            bProvidesVision: false,
+                            OnThink: GHandler.create(this, (pinfo: GLineProjectile) => {
+                                ability.OnProjectileThink_ExtraData(pinfo.GetPosition(), {
+                                    index: index,
+                                    damage: damage,
+                                    explosion_radius: explosion_radius,
+                                    railgun_damage: railgun_damage,
+                                    railgun_range: railgun_range,
+                                    railgun_radius: railgun_radius,
+                                    direction_x: direction.x,
+                                    direction_y: direction.y
+                                });
+                            }),
+                            UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
+                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                            }),
+                            OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
+                                ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
+                                    index: index,
+                                    damage: damage,
+                                    explosion_radius: explosion_radius,
+                                    railgun_damage: railgun_damage,
+                                    railgun_range: railgun_range,
+                                    railgun_radius: railgun_radius,
+                                    direction_x: direction.x,
+                                    direction_y: direction.y
+                                });
+                            })
+                        }
+                    } else {
+                        projectile = {
+                            EffectName: "particles/units/heroes/hero_tinker/tinker_machine.vpcf",
+                            vSpawnOrigin: target_loc - (direction * spawn_radius) + (spawn_line_direction * position_ran) as Vector,
+                            fDistance: travel_distance,
+                            fStartRadius: collision_radius,
+                            fEndRadius: collision_radius,
+                            Source: caster,
+                            fExpireTime: GameRules.GetGameTime() + 10.0,
+                            vVelocity: Vector(direction.x, direction.y, 0) * speed as Vector,
+                            UnitBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_DESTROY,
+                            bMultipleHits: false,
+                            bIgnoreSource: true,
+                            TreeBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            bCutTrees: false,
+                            bTreeFullCollision: false,
+                            WallBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            GroundBehavior: ProjectileHelper.ELineProjectBehavior.PROJECTILES_NOTHING,
+                            fGroundOffset: 80,
+                            nChangeMax: 1,
+                            bRecreateOnChange: false,
+                            bDestroyImmediate: false,
+                            bZCheck: false,
+                            bGroundLock: true,
+                            bProvidesVision: false,
+
+                            UnitTest: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
+                                return unit.GetUnitName() != "npc_dummy_unit" && unit.GetTeamNumber() != caster.GetTeamNumber();
+                            }),
+                            OnUnitHit: GHandler.create(this, (pinfo: GLineProjectile, unit: IBaseNpc_Plus) => {
+                                ability.OnProjectileHit_ExtraData(unit, pinfo.GetPosition(), {
+                                    damage: damage,
+                                    explosion_radius: explosion_radius
+                                });
+                            })
+                        }
+                    }
+                    ProjectileHelper.LineProjectiles.CreateProjectile(projectile);
+                });
+            }
         }
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, ExtraData: any): boolean | void {

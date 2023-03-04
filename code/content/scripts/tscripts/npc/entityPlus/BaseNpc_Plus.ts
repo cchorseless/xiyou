@@ -6,7 +6,40 @@ import { BaseNpc } from "./Base_Plus";
 /**普通NPC单位基类 */
 export class BaseNpc_Plus extends BaseNpc {
 
-
+    DropItem?(hItem: IBaseItem_Plus, bLaunchLoot = false, sNewItemName = "") {
+        let vLocation = GetGroundPosition(this.GetAbsOrigin(), this);
+        let sName: string;
+        let vRandomVector = RandomVector(100);
+        if (hItem) {
+            sName = hItem.GetName();
+            this.DropItemAtPositionImmediate(hItem, vLocation);
+        } else {
+            sName = sNewItemName;
+            hItem = BaseItem_Plus.CreateItem(sNewItemName, undefined, undefined);
+            CreateItemOnPositionSync(vLocation, hItem);
+        }
+        if (sName == "item_imba_rapier") {
+            hItem.GetContainer().SetRenderColor(230, 240, 35);
+        } else if (sName == "item_imba_rapier_2") {
+            hItem.GetContainer().SetRenderColor(240, 150, 30);
+            hItem.rapier_pfx = ResHelper.CreateParticleEx("particles/item/rapier/item_rapier_trinity.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
+            ParticleManager.SetParticleControl(hItem.rapier_pfx, 0, vLocation + vRandomVector as Vector);
+        } else if (sName == "item_imba_rapier_magic") {
+            hItem.GetContainer().SetRenderColor(35, 35, 240);
+        } else if (sName == "item_imba_rapier_magic_2") {
+            hItem.GetContainer().SetRenderColor(140, 70, 220);
+            hItem.rapier_pfx = ResHelper.CreateParticleEx("particles/item/rapier/item_rapier_archmage.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
+            ParticleManager.SetParticleControl(hItem.rapier_pfx, 0, vLocation + vRandomVector as Vector);
+        } else if (sName == "item_imba_rapier_cursed") {
+            hItem.rapier_pfx = ResHelper.CreateParticleEx("particles/item/rapier/item_rapier_cursed.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
+            ParticleManager.SetParticleControl(hItem.rapier_pfx, 0, vLocation + vRandomVector as Vector);
+            hItem.x_pfx = ResHelper.CreateParticleEx("particles/item/rapier/cursed_x.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
+            ParticleManager.SetParticleControl(hItem.x_pfx, 0, vLocation + vRandomVector as Vector);
+        }
+        if (bLaunchLoot) {
+            hItem.LaunchLoot(false, 250, 0.5, vLocation + vRandomVector as Vector);
+        }
+    }
     /**
      * todo
      * @param slot 

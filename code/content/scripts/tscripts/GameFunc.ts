@@ -1,4 +1,5 @@
 import { NetTablesHelper } from "./helper/NetTablesHelper";
+import { ResHelper } from "./helper/ResHelper";
 import { GameServiceConfig } from "./shared/GameServiceConfig";
 
 export module GameFunc {
@@ -133,6 +134,40 @@ export module GameFunc {
 
 export module FuncEntity {
 
+
+
+    export function Blink(unit: IBaseNpc_Plus, position: Vector, bTeamOnlyParticle: boolean, bPlaySound = true) {
+        if (unit.IsNull()) {
+            return;
+        }
+        if (bPlaySound == true) {
+            EmitSoundOn("DOTA_Item.BlinkDagger.Activate", unit);
+        }
+        let blink_pfx;
+        let blink_pfx_name = "particles/items_fx/blink_dagger_start.vpcf";
+        if (bTeamOnlyParticle == true) {
+            blink_pfx = ParticleManager.CreateParticleForTeam(blink_pfx_name, ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined, unit.GetTeamNumber(),);
+            ParticleManager.SetParticleControl(blink_pfx, 0, unit.GetAbsOrigin());
+        } else {
+            blink_pfx = ResHelper.CreateParticleEx(blink_pfx_name, ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined,);
+            ParticleManager.SetParticleControl(blink_pfx, 0, unit.GetAbsOrigin());
+        }
+        ParticleManager.ReleaseParticleIndex(blink_pfx);
+        FindClearSpaceForUnit(unit, position, true);
+        ProjectileManager.ProjectileDodge(unit);
+        let blink_end_pfx;
+        let blink_end_pfx_name = "particles/items_fx/blink_dagger_end.vpcf";
+        if (bTeamOnlyParticle == true) {
+            blink_end_pfx = ParticleManager.CreateParticleForTeam(blink_end_pfx_name, ParticleAttachment_t.PATTACH_ABSORIGIN, unit, unit.GetTeamNumber(),);
+        } else {
+            blink_end_pfx = ResHelper.CreateParticleEx(blink_end_pfx_name, ParticleAttachment_t.PATTACH_ABSORIGIN, unit,);
+        }
+        ParticleManager.ReleaseParticleIndex(blink_end_pfx);
+        if (bPlaySound == true) {
+            EmitSoundOn("DOTA_Item.BlinkDagger.NailedIt", unit);
+        }
+    }
+
     export function ChangeAttackProjectileImba(unit: IBaseNpc_Plus) {
         let particle_deso = "particles/items_fx/desolator_projectile.vpcf";
         let particle_skadi = "particles/items2_fx/skadi_projectile.vpcf";
@@ -165,7 +200,14 @@ export module FuncEntity {
             unit.SetRangedProjectileName(unit.GetKVData("ProjectileModel"));
         }
     }
-
+    export function IsHeroDamage(unit: IBaseNpc_Plus, damage: number) {
+        if (damage > 0) {
+            if (unit.GetName() == "npc_dota_roshan" || unit.IsControllableByAnyPlayer() || unit.GetName() == "npc_dota_shadowshaman_serpentward") {
+                return true;
+            }
+        }
+        return false;
+    }
     export function AddRangeIndicator(unit: IBaseNpc_Plus, hCaster: IBaseNpc_Plus,
         hAbility: IBaseAbility_Plus, sAttribute: string, iRange: number,
         iRed: number, iGreen: number, iBlue: number,
@@ -572,6 +614,13 @@ export module FuncMath {
 
 /**向量 */
 export module FuncVector {
+
+    export function GetRandomPosition2D(v: Vector, dis: number): Vector {
+        let v2 = RandomVector(dis);
+        return v + v2 as Vector;
+    }
+
+
     export function CalculateDistance(ent1: Vector | IBaseNpc_Plus, ent2: Vector | IBaseNpc_Plus): number {
         let pos1 = ent1 as Vector;
         let pos2 = ent2 as Vector;

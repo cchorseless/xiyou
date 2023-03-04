@@ -38,7 +38,17 @@ export module KVHelper {
             return null;
         }
     }
-
+    export function GetItemData(itemname: string, k: string, bnumber = false) {
+        if (KvItems[itemname]) {
+            if (bnumber) {
+                return GToNumber(KvItems[itemname][k]);
+            }
+            return KvUnits[itemname][k];
+        }
+        else {
+            return null;
+        }
+    }
     export function initKVFile() {
         // 服务器
         if (IsServer()) {

@@ -43,6 +43,17 @@ export module GameServiceConfig {
     export const GAME_bounty_multiplier = 100;
     export const USE_MEME_SOUNDS = true;		// Should we use meme/fun sounds on abilities occasionally?
     export const MEME_SOUNDS_CHANCE = 50;
+
+    export const IMBA_DISABLED_SKULL_BASHER = [
+        "npc_dota_hero_faceless_void",
+        "npc_dota_hero_spirit_breaker",
+        "npc_dota_hero_slardar",
+    ];
+    export const IMBA_EtherealAbilities = [
+        "modifier_imba_ghost_shroud_active",
+        "modifier_imba_ghost_state",
+        "modifier_item_imba_ethereal_blade_ethereal",
+    ];
     export enum EDifficultyChapter {
         n1 = 1,
         n2 = 2,

@@ -646,7 +646,7 @@ export class imba_tiny_avalanche extends BaseAbility_Plus {
         let wearables = caster.GetChildren();
         for (const [_, wearable] of ipairs(wearables)) {
             if (wearable.GetClassname() == "dota_item_wearable") {
-                if (wearable.GetModelName().match("tree")) {
+                if (wearable.GetModelName().includes("tree")) {
                 }
             }
         }

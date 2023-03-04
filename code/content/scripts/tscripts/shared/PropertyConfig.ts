@@ -853,6 +853,8 @@ export module PropertyConfig {
          */
         ATTACKSPEED_PERCENTAGE = modifierfunction.MODIFIER_PROPERTY_ATTACKSPEED_PERCENTAGE,
 
+        COOLDOWN_PERCENTAGE_STACKING = modifierfunction.MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE_STACKING,
+
         //#region 自定义属性
         /**属性开始 */
         CUSTOM_PROPS_START = modifierfunction.MODIFIER_FUNCTION_INVALID + 1000,
