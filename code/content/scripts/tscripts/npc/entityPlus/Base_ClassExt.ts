@@ -310,7 +310,7 @@ declare global {
          * @param sKey 键名
          * @returns 值
          */
-        GetTalentValue(sTalent: string, sKey: string): number;
+        GetTalentValue(sTalent: string, sKey?: string): number;
         /**
          * 获取自定义技能类型
          * @returns 值
@@ -567,7 +567,7 @@ CBaseAbility.HasTalent = function (sTalent: string) {
         return hTalent as IBaseAbility_Plus;
     }
 };
-CBaseAbility.GetTalentValue = function (sTalent: string, sKey: string) {
+CBaseAbility.GetTalentValue = function (sTalent: string, sKey: string = "value") {
     if (!IsValid(this)) return 0;
     const hCaster = this.GetCasterPlus();
     const hTalent = hCaster.FindAbilityByName(sTalent);

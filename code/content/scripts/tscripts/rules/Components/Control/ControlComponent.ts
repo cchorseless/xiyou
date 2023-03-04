@@ -397,7 +397,7 @@ export class ControlComponent extends ET.Component {
         let tData = this.tKeyboardData[entindex];
         if (tData) {
             tData.tKeyDown = tData.tKeyDown || [];
-            GFuncArray.RemoveAll(tData.tKeyDown, sKey);
+            GFuncArray.ArrayRemove(tData.tKeyDown, sKey, true);
         }
     }
 }

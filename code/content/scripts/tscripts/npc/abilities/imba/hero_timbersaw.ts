@@ -28,7 +28,7 @@ export class imba_timbersaw_whirling_death extends BaseAbility_Plus {
             });
         }
     }
-    WhirlingDeath(revving_down_efficacy) {
+    WhirlingDeath(revving_down_efficacy = 0) {
         let efficacy = 1;
         if (revving_down_efficacy) {
             efficacy = revving_down_efficacy * 0.01;
@@ -74,7 +74,7 @@ export class imba_timbersaw_whirling_death extends BaseAbility_Plus {
 }
 @registerModifier()
 export class modifier_imba_timbersaw_whirling_death_thinker extends BaseModifier_Plus {
-    public revving_down_efficacy: any;
+    public revving_down_efficacy: number;
     IsHidden(): boolean {
         return true;
     }
@@ -93,7 +93,7 @@ export class modifier_imba_timbersaw_whirling_death_thinker extends BaseModifier
         this.StartIntervalThink(this.GetSpecialValueFor("revving_down_interval"));
     }
     OnIntervalThink(): void {
-        this.GetAbilityPlus().WhirlingDeath(this.revving_down_efficacy);
+        this.GetAbilityPlus<imba_timbersaw_whirling_death>().WhirlingDeath(this.revving_down_efficacy);
     }
 }
 @registerModifier()
@@ -127,18 +127,18 @@ export class modifier_imba_timbersaw_whirling_death_debuff extends BaseModifier_
         this.StartIntervalThink(FrameTime());
     }
     OnIntervalThink(): void {
-        if (this.GetParentPlus().CalculateStatBonus) {
-            this.GetParentPlus().CalculateStatBonus(true);
-        }
+        // if (this.GetParentPlus().CalculateStatBonus) {
+        // this.GetParentPlus().CalculateStatBonus(true);
+        // }
         this.StartIntervalThink(-1);
     }
     BeDestroy(): void {
         if (!IsServer()) {
             return;
         }
-        if (this.GetParentPlus().CalculateStatBonus) {
-            this.GetParentPlus().CalculateStatBonus(true);
-        }
+        // if (this.GetParentPlus().CalculateStatBonus) {
+        // this.GetParentPlus().CalculateStatBonus(true);
+        // }
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
@@ -148,22 +148,23 @@ export class modifier_imba_timbersaw_whirling_death_debuff extends BaseModifier_
         });
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
-CC_    GetModifierBonusStats_Strength(): number {
+    CC_GetModifierBonusStats_Strength(): number {
         if (this.GetParentPlus().GetPrimaryAttribute() == Attributes.DOTA_ATTRIBUTE_STRENGTH) {
             return this.primary_stat_loss;
         }
     }
-    modifier_imba_timbersaw_whirling_death_debuff.GetModifierBonusStats_Agility = function () {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
+    CC_GetModifierBonusStats_Agility() {
         if (this.GetParentPlus().GetPrimaryAttribute() == Attributes.DOTA_ATTRIBUTE_AGILITY) {
             return this.primary_stat_loss;
         }
     }
-    modifier_imba_timbersaw_whirling_death_debuff.GetModifierBonusStats_Intellect = function () {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
+    CC_GetModifierBonusStats_Intellect() {
         if (this.GetParentPlus().GetPrimaryAttribute() == Attributes.DOTA_ATTRIBUTE_INTELLECT) {
             return this.primary_stat_loss;
         }
     }
-}
 }
 @registerModifier()
 export class modifier_imba_timbersaw_whirling_death_oil extends BaseModifier_Plus {
@@ -181,14 +182,14 @@ export class modifier_imba_timbersaw_whirling_death_oil extends BaseModifier_Plu
         this.StartIntervalThink(FrameTime());
     }
     OnIntervalThink(): void {
-        this.GetParentPlus().CalculateStatBonus(true);
+        // this.GetParentPlus().CalculateStatBonus(true);
         this.StartIntervalThink(-1);
     }
     BeDestroy(): void {
         if (!IsServer()) {
             return;
         }
-        this.GetParentPlus().CalculateStatBonus(true);
+        // this.GetParentPlus().CalculateStatBonus(true);
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({
@@ -198,40 +199,42 @@ export class modifier_imba_timbersaw_whirling_death_oil extends BaseModifier_Plu
         });
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
-CC_    GetModifierBonusStats_Strength(): number {
+    CC_GetModifierBonusStats_Strength(): number {
         if (this.attribute == Attributes.DOTA_ATTRIBUTE_STRENGTH) {
             return this.stat_gain;
         }
     }
-    modifier_imba_timbersaw_whirling_death_oil.GetModifierBonusStats_Agility = function () {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
+    CC_GetModifierBonusStats_Agility() {
         if (this.attribute == Attributes.DOTA_ATTRIBUTE_AGILITY) {
             return this.stat_gain;
         }
     }
-    modifier_imba_timbersaw_whirling_death_oil.GetModifierBonusStats_Intellect = function () {
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
+    CC_GetModifierBonusStats_Intellect() {
         if (this.attribute == Attributes.DOTA_ATTRIBUTE_INTELLECT) {
             return this.stat_gain;
         }
     }
 }
-}
 @registerAbility()
 export class imba_timbersaw_timber_chain extends BaseAbility_Plus {
-    public projectiles: any;
+    public projectiles: { [k: string]: any };
     public responses: any;
     public response_keys: any;
     public random_selection: any;
+    whirling_ability: imba_timbersaw_whirling_death;
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
         return super.GetCastRange(location, target) + this.GetCasterPlus().GetTalentValue("special_bonus_imba_timbersaw_timber_chain_range");
     }
     OnSpellStart(): void {
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
-            this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector());
+            this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
         }
         this.GetCasterPlus().EmitSound("Hero_Shredder.TimberChain.Cast");
         let timber_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_shredder/shredder_timberchain.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, this.GetCasterPlus());
         ParticleManager.SetParticleControlEnt(timber_particle, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.GetCasterPlus().GetAbsOrigin(), true);
-        ParticleManager.SetParticleControl(timber_particle, 1, this.GetCasterPlus().GetAbsOrigin() + ((this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Normalized() * (this.GetTalentSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus())));
+        ParticleManager.SetParticleControl(timber_particle, 1, this.GetCasterPlus().GetAbsOrigin() + ((this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * (this.GetTalentSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus())) as Vector);
         ParticleManager.SetParticleControl(timber_particle, 2, Vector(this.GetSpecialValueFor("speed"), 0, 0));
         ParticleManager.SetParticleControl(timber_particle, 3, Vector(((this.GetTalentSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus()) / this.GetSpecialValueFor("speed")) * 2, 0, 0));
         if (!this.projectiles) {
@@ -247,16 +250,16 @@ export class imba_timbersaw_timber_chain extends BaseAbility_Plus {
             Source: this.GetCasterPlus(),
             Ability: this,
             vSpawnOrigin: this.GetCasterPlus().GetAbsOrigin(),
-            bDeleteOnHit: false,
+            // bDeleteOnHit: false,
             fDistance: this.GetTalentSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus(),
-            vVelocity: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Normalized() * this.GetSpecialValueFor("speed") * Vector(1, 1, 0),
+            vVelocity: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * this.GetSpecialValueFor("speed") * Vector(1, 1, 0) as Vector,
             fStartRadius: this.GetSpecialValueFor("chain_radius"),
             fEndRadius: this.GetSpecialValueFor("chain_radius"),
             iUnitTargetTeam: DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH,
             iUnitTargetFlags: DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE,
             iUnitTargetType: DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_TREE,
             bHasFrontalCone: true,
-            bReplaceExisting: false,
+            // bReplaceExisting: false,
             fExpireTime: GameRules.GetGameTime() + 10.0,
             bProvidesVision: true,
             iVisionRadius: 100,
@@ -265,8 +268,8 @@ export class imba_timbersaw_timber_chain extends BaseAbility_Plus {
         });
         this.projectiles[timber_projectile] = ExtraData;
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_shredder") {
-            if (this.GetCasterPlus().GetTogglableWearable(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON)) {
-                this.GetCasterPlus().GetTogglableWearable(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON).AddEffects(EntityEffects.EF_NODRAW);
+            if (this.GetCasterPlus().GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON)) {
+                this.GetCasterPlus().GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON).AddEffects(EntityEffects.EF_NODRAW);
             }
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_timbersaw_timber_chain_claw", {
                 duration: ((this.GetSpecialValueFor("range") + this.GetCasterPlus().GetCastRangeBonus()) / this.GetSpecialValueFor("speed")) * 2
@@ -279,7 +282,7 @@ export class imba_timbersaw_timber_chain extends BaseAbility_Plus {
             let tree = undefined;
             let original_caster_location = Vector(this.projectiles[projectileHandle].cast_pos_x, this.projectiles[projectileHandle].cast_pos_y, this.projectiles[projectileHandle].cast_pos_z);
             for (const [_, other_tree] of ipairs(valid_trees)) {
-                if ((tree == undefined || (other_tree != tree && (other_tree.GetAbsOrigin() - ProjectileManager.GetLinearProjectileLocation(projectileHandle)).Length2D() < (tree.GetAbsOrigin() - ProjectileManager.GetLinearProjectileLocation(projectileHandle)).Length2D())) && math.abs(AngleDiff(VectorToAngles(other_tree.GetAbsOrigin() - original_caster_location).y, VectorToAngles(ProjectileManager.GetLinearProjectileLocation(projectileHandle) - original_caster_location).y)) <= 90) {
+                if ((tree == undefined || (other_tree != tree && (other_tree.GetAbsOrigin() - ProjectileManager.GetLinearProjectileLocation(projectileHandle) as Vector).Length2D() < (tree.GetAbsOrigin() - ProjectileManager.GetLinearProjectileLocation(projectileHandle) as Vector).Length2D())) && math.abs(AngleDiff(VectorToAngles(other_tree.GetAbsOrigin() - original_caster_location as Vector).y, VectorToAngles(ProjectileManager.GetLinearProjectileLocation(projectileHandle) - original_caster_location as Vector).y)) <= 90) {
                     tree = other_tree;
                 }
             }
@@ -287,9 +290,9 @@ export class imba_timbersaw_timber_chain extends BaseAbility_Plus {
                 EmitSoundOnLocationWithCaster(tree.GetAbsOrigin(), "Hero_Shredder.TimberChain.Impact", this.GetCasterPlus());
                 this.GetCasterPlus().EmitSound("Hero_Shredder.TimberChain.Retract");
                 ParticleManager.SetParticleControl(this.projectiles[projectileHandle].timber_particle, 1, tree.GetAbsOrigin());
-                let direction = (tree.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Normalized();
+                let direction = (tree.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized();
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_timbersaw_timber_chain", {
-                    duration: math.max(((tree.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Length2D() - (this.GetCasterPlus().GetHullRadius() * 8)), 0) / this.GetSpecialValueFor("speed"),
+                    duration: math.max(((tree.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D() - (this.GetCasterPlus().GetHullRadius() * 8)), 0) / this.GetSpecialValueFor("speed"),
                     autocast_state: this.GetAutoCastState(),
                     direction_x: direction.x,
                     direction_y: direction.y,
@@ -311,14 +314,14 @@ export class imba_timbersaw_timber_chain extends BaseAbility_Plus {
                 }
             }
         } else {
-            for (const [_, ent] of ipairs(Entities.FindAllByClassname("npc_dota_thinker"))) {
-                if (ent.bTimberChainTarget && (ProjectileManager.GetLinearProjectileLocation(projectileHandle) - ent.GetAbsOrigin()).Length2D() <= this.GetSpecialValueFor("chain_radius")) {
+            for (const ent of (Entities.FindAllByClassname("npc_dota_thinker") as IBaseNpc_Plus[])) {
+                if (ent.TempData().bTimberChainTarget && (ProjectileManager.GetLinearProjectileLocation(projectileHandle) - ent.GetAbsOrigin() as Vector).Length2D() <= this.GetSpecialValueFor("chain_radius")) {
                     EmitSoundOnLocationWithCaster(ent.GetAbsOrigin(), "Hero_Shredder.TimberChain.Impact", this.GetCasterPlus());
                     this.GetCasterPlus().EmitSound("Hero_Shredder.TimberChain.Retract");
                     ParticleManager.SetParticleControl(this.projectiles[projectileHandle].timber_particle, 1, ent.GetAbsOrigin());
-                    let direction = (ent.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Normalized();
+                    let direction = (ent.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized();
                     this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_timbersaw_timber_chain", {
-                        duration: (ent.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Length2D() / this.GetSpecialValueFor("speed"),
+                        duration: (ent.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D() / this.GetSpecialValueFor("speed"),
                         autocast_state: this.GetAutoCastState(),
                         direction_x: direction.x,
                         direction_y: direction.y,
@@ -393,10 +396,10 @@ export class modifier_imba_timbersaw_timber_chain extends BaseModifierMotionHori
     public distance: number;
     public direction: any;
     public velocity: any;
-    public damaged_targets: number;
+    public damaged_targets: IBaseNpc_Plus[];
     public tree_particle: any;
     public dendrophobia_modifier: any;
-    public damage_particle: number;
+    public damage_particle: ParticleID;
     IsPurgable(): boolean {
         return false;
     }
@@ -423,10 +426,10 @@ export class modifier_imba_timbersaw_timber_chain extends BaseModifierMotionHori
         if (this.autocast_state == 1) {
             this.damage = this.damage * this.side_hooks_damage_reduction * 0.01;
         }
-        this.distance = (Vector(params.direction_x, params.direction_y, params.direction_z) - this.GetCasterPlus().GetAbsOrigin()).Length2D();
+        this.distance = (Vector(params.direction_x, params.direction_y, params.direction_z) - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D();
         this.direction = Vector(params.direction_x, params.direction_y, params.direction_z).Normalized();
         this.velocity = this.direction * params.speed;
-        this.damaged_targets = {}
+        this.damaged_targets = []
         if (this.ApplyHorizontalMotionController() == false) {
             this.Destroy();
         }
@@ -445,18 +448,16 @@ export class modifier_imba_timbersaw_timber_chain extends BaseModifierMotionHori
                 this.dendrophobia_modifier = this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_timbersaw_chakram_3", this.GetCasterPlus());
             }
             if (this.tree.CutDown || (this.tree.Kill && !this.tree.HasModifier)) {
-                if (this.GetCasterPlus().GetName() == "npc_dota_hero_shredder" && RollPercentage(50)) {
-                    if (this.GetAbilityPlus() && !this.GetAbilityPlus().tree_responses) {
-                        this.GetAbilityPlus().tree_responses = {
-                            1: "shredder_timb_timberchain_02",
-                            2: "shredder_timb_timberchain_04",
-                            3: "shredder_timb_timberchain_05",
-                            4: "shredder_timb_timberchain_07",
-                            5: "shredder_timb_timberchain_08",
-                            6: "shredder_timb_timberchain_09"
-                        }
+                if (RollPercentage(50)) {
+                    let tree_responses = {
+                        1: "shredder_timb_timberchain_02",
+                        2: "shredder_timb_timberchain_04",
+                        3: "shredder_timb_timberchain_05",
+                        4: "shredder_timb_timberchain_07",
+                        5: "shredder_timb_timberchain_08",
+                        6: "shredder_timb_timberchain_09"
                     }
-                    this.GetCasterPlus().EmitSound(this.GetAbilityPlus().tree_responses[RandomInt(1, GameFunc.GetCount(this.GetAbilityPlus().tree_responses))]);
+                    this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(tree_responses));
                 }
                 if (this.tree.CutDown) {
                     this.tree.CutDown(this.GetParentPlus().GetTeamNumber());
@@ -470,17 +471,17 @@ export class modifier_imba_timbersaw_timber_chain extends BaseModifierMotionHori
         }
         ParticleManager.DestroyParticle(this.timber_particle, true);
         ParticleManager.ReleaseParticleIndex(this.timber_particle);
-        if (this.GetCasterPlus().GetTogglableWearable(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON)) {
-            this.GetCasterPlus().GetTogglableWearable(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON).RemoveEffects(EntityEffects.EF_NODRAW);
+        if (this.GetCasterPlus().GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON)) {
+            this.GetCasterPlus().GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON).RemoveEffects(EntityEffects.EF_NODRAW);
         }
     }
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
         if (!IsServer()) {
             return;
         }
-        me.SetOrigin(me.GetOrigin() + this.velocity * dt);
+        me.SetOrigin(me.GetOrigin() + this.velocity * dt as Vector);
         for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
-            if (!this.damaged_targets[enemy]) {
+            if (!this.damaged_targets.includes(enemy)) {
                 enemy.EmitSound("Hero_Shredder.TimberChain.Damage");
                 this.damage_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_shredder/shredder_timber_dmg.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy);
                 ParticleManager.ReleaseParticleIndex(this.damage_particle);
@@ -492,24 +493,25 @@ export class modifier_imba_timbersaw_timber_chain extends BaseModifierMotionHori
                     attacker: this.GetParentPlus(),
                     ability: this.GetAbilityPlus()
                 });
-                this.damaged_targets[enemy] = true;
-                if (this.GetAbilityPlus() && this.GetCasterPlus().HasAbility("imba_timbersaw_whirling_death")) {
-                    if (!this.GetAbilityPlus().whirling_ability || this.GetAbilityPlus().whirling_ability.IsNull()) {
-                        this.GetAbilityPlus().whirling_ability = this.GetCasterPlus().findAbliityPlus<imba_timbersaw_whirling_death>("imba_timbersaw_whirling_death");
+                this.damaged_targets.push(enemy);
+                let ability = this.GetAbilityPlus<imba_timbersaw_timber_chain>();
+                if (ability && this.GetCasterPlus().HasAbility("imba_timbersaw_whirling_death")) {
+                    if (!ability.whirling_ability || ability.whirling_ability.IsNull()) {
+                        ability.whirling_ability = this.GetCasterPlus().findAbliityPlus<imba_timbersaw_whirling_death>("imba_timbersaw_whirling_death");
                     }
-                    if (this.GetAbilityPlus().whirling_ability) {
+                    if (ability.whirling_ability) {
                         enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_timbersaw_whirling_death_debuff", {
-                            duration: this.GetAbilityPlus().whirling_ability.GetSpecialValueFor("duration") * (1 - enemy.GetStatusResistance()),
-                            blood_oil_convert_pct: this.GetAbilityPlus().whirling_ability.GetSpecialValueFor("blood_oil_convert_pct"),
-                            blood_oil_duration: this.GetAbilityPlus().whirling_ability.GetSpecialValueFor("blood_oil_duration"),
+                            duration: ability.whirling_ability.GetSpecialValueFor("duration") * (1 - enemy.GetStatusResistance()),
+                            blood_oil_convert_pct: ability.whirling_ability.GetSpecialValueFor("blood_oil_convert_pct"),
+                            blood_oil_duration: ability.whirling_ability.GetSpecialValueFor("blood_oil_duration"),
                             stat_loss_pct: this.whirling_chain_stat_loss_pct
                         });
                     }
                 }
                 if (this.autocast_state && this.autocast_state == 1) {
-                    let direction = (this.tree.GetAbsOrigin() - enemy.GetAbsOrigin()).Normalized();
+                    let direction = (this.tree.GetAbsOrigin() - enemy.GetAbsOrigin() as Vector).Normalized();
                     enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_timbersaw_timber_chain_side_hooks", {
-                        duration: ((this.tree.GetAbsOrigin() - enemy.GetAbsOrigin()).Length2D() / this.speed) * this.side_hooks_drag_pct * 0.01 * (1 - enemy.GetStatusResistance()),
+                        duration: ((this.tree.GetAbsOrigin() - enemy.GetAbsOrigin() as Vector).Length2D() / this.speed) * this.side_hooks_drag_pct * 0.01 * (1 - enemy.GetStatusResistance()),
                         direction_x: direction.x,
                         direction_y: direction.y,
                         direction_z: direction.z,
@@ -519,7 +521,7 @@ export class modifier_imba_timbersaw_timber_chain extends BaseModifierMotionHori
                 }
             }
         }
-        if (this.GetParentPlus().IsStunned() || (this.tree.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin()).Length2D() <= this.GetParentPlus().GetHullRadius()) {
+        if (this.GetParentPlus().IsStunned() || (this.tree.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetParentPlus().GetHullRadius()) {
             this.Destroy();
         }
     }
@@ -545,7 +547,7 @@ export class modifier_imba_timbersaw_timber_chain_side_hooks extends BaseModifie
         }
         this.tree = EntIndexToHScript(params.tree_entindex);
         this.speed = params.speed;
-        this.distance = (Vector(params.direction_x, params.direction_y, params.direction_z) - this.GetParentPlus().GetAbsOrigin()).Length2D();
+        this.distance = (Vector(params.direction_x, params.direction_y, params.direction_z) - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D();
         this.direction = Vector(params.direction_x, params.direction_y, params.direction_z).Normalized();
         this.velocity = this.direction * this.speed;
         if (this.ApplyHorizontalMotionController() == false) {
@@ -562,8 +564,8 @@ export class modifier_imba_timbersaw_timber_chain_side_hooks extends BaseModifie
         if (!IsServer()) {
             return;
         }
-        me.SetOrigin(me.GetOrigin() + this.velocity * dt);
-        if ((this.tree.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin()).Length2D() <= this.GetParentPlus().GetHullRadius()) {
+        me.SetOrigin(me.GetOrigin() + this.velocity * dt as Vector);
+        if ((this.tree.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetParentPlus().GetHullRadius()) {
             this.Destroy();
         }
     }
@@ -602,8 +604,8 @@ export class modifier_imba_timbersaw_timber_chain_claw extends BaseModifier_Plus
         if (!IsServer() || this.GetRemainingTime() > 0) {
             return;
         }
-        if (this.GetCasterPlus().GetTogglableWearable(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON)) {
-            this.GetCasterPlus().GetTogglableWearable(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON).RemoveEffects(EntityEffects.EF_NODRAW);
+        if (this.GetCasterPlus().GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON)) {
+            this.GetCasterPlus().GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON).RemoveEffects(EntityEffects.EF_NODRAW);
         }
     }
 }
@@ -797,7 +799,7 @@ export class modifier_imba_timbersaw_reactive_armor_debuff extends BaseModifier_
 }
 @registerAbility()
 export class imba_timbersaw_chakram extends BaseAbility_Plus {
-    public projectiles: any;
+    public projectiles: { [k: string]: any };
     public responses: any;
     public response_keys: any;
     public random_selection: any;
@@ -832,7 +834,7 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
-            this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector());
+            this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
         }
         if (!this.projectiles) {
             this.projectiles = {}
@@ -866,30 +868,30 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
         }
         if (!this.effect_name) {
             this.effect_name = "particles/units/heroes/hero_shredder/shredder_chakram.vpcf";
-            if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
-                this.effect_name = "particles/econ/items/timbersaw/timbersaw_ti9_gold/timbersaw_ti9_chakram_gold.vpcf";
-            }
+            // if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
+            //     this.effect_name = "particles/econ/items/timbersaw/timbersaw_ti9_gold/timbersaw_ti9_chakram_gold.vpcf";
+            // }
         }
         let chakram_projectile = ProjectileManager.CreateLinearProjectile({
             Source: this.GetCasterPlus(),
             Ability: this,
             vSpawnOrigin: this.GetCasterPlus().GetAbsOrigin(),
-            bDeleteOnHit: false,
+            // bDeleteOnHit: false,
             EffectName: this.effect_name,
-            fDistance: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Length2D(),
-            vVelocity: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Normalized() * this.GetSpecialValueFor("speed") * Vector(1, 1, 0),
+            fDistance: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D(),
+            vVelocity: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * this.GetSpecialValueFor("speed") * Vector(1, 1, 0) as Vector,
             fStartRadius: this.GetSpecialValueFor("radius"),
             fEndRadius: this.GetSpecialValueFor("radius"),
             iUnitTargetTeam: DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY,
             iUnitTargetFlags: DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE,
             iUnitTargetType: DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
             bHasFrontalCone: false,
-            bReplaceExisting: false,
+            // bReplaceExisting: false,
             fExpireTime: GameRules.GetGameTime() + 10.0,
             bProvidesVision: false,
             ExtraData: ExtraData
         });
-        this.projectiles[chakram_projectile] = ExtraData;
+        this.projectiles[chakram_projectile + ""] = ExtraData;
         if (!this.IsHidden() && this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram") && this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram>("imba_timbersaw_return_chakram").IsHidden()) {
             if (this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram>("imba_timbersaw_return_chakram").GetLevel() != this.GetLevel()) {
                 this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram>("imba_timbersaw_return_chakram").SetLevel(this.GetLevel());
@@ -927,10 +929,11 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
                 GridNav.DestroyTreesAroundPoint(location, this.GetSpecialValueFor("radius"), false);
             }
             for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
-                if (this.projectiles[data.id] && !this.projectiles[data.id].returning_enemies) {
-                    this.projectiles[data.id].returning_enemies = {}
+                if (this.projectiles[data.id + ""] && !this.projectiles[data.id].returning_enemies) {
+                    this.projectiles[data.id + ""].returning_enemies = []
                 }
-                if (this.projectiles[data.id].returning_enemies && !this.projectiles[data.id].returning_enemies[enemy]) {
+                let returning_enemies: IBaseNpc_Plus[] = this.projectiles[data.id + ""].returning_enemies;
+                if (!returning_enemies.includes(enemy)) {
                     enemy.EmitSound("Hero_Shredder.Chakram.Target");
                     ApplyDamage({
                         victim: enemy,
@@ -943,17 +946,19 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_timbersaw_chakram_debuff", {
                         duration: this.GetSpecialValueFor("pass_slow_duration") * (1 - enemy.GetStatusResistance())
                     });
-                    this.projectiles[data.id].returning_enemies[enemy] = true;
+                    returning_enemies.push(enemy);
                 }
             }
         }
     }
-    OnProjectileHitHandle(target: IBaseNpc_Plus, location, projectileHandle) {
+    OnProjectileHitHandle(target: IBaseNpc_Plus, location: Vector, _projectileHandle: ProjectileID) {
+        let projectileHandle = "" + _projectileHandle;
         if (target && target != this.GetCasterPlus()) {
             if (!this.projectiles[projectileHandle].launching_enemies) {
-                this.projectiles[projectileHandle].launching_enemies = {}
+                this.projectiles[projectileHandle].launching_enemies = []
             }
-            if (this.projectiles[projectileHandle].launching_enemies && !this.projectiles[projectileHandle].launching_enemies[enemy]) {
+            let launching_enemies: IBaseNpc_Plus[] = this.projectiles[projectileHandle].launching_enemies;
+            if (!launching_enemies.includes(target)) {
                 target.EmitSound("Hero_Shredder.Chakram.Target");
                 ApplyDamage({
                     victim: target,
@@ -966,9 +971,10 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
                 target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_timbersaw_chakram_debuff", {
                     duration: this.GetSpecialValueFor("pass_slow_duration") * (1 - target.GetStatusResistance())
                 });
-                this.projectiles[projectileHandle].launching_enemies[target] = true;
+                launching_enemies.push(target);
             }
-        } else if (!target && this.projectiles && this.projectiles[projectileHandle]) {
+        }
+        else if (!target && this.projectiles && this.projectiles[projectileHandle]) {
             let auto_cast_flag = 0;
             if (this.projectiles[projectileHandle].bAutoCastState) {
                 auto_cast_flag = 1;
@@ -993,8 +999,8 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, data: any): boolean | void {
         if (target && target == this.GetCasterPlus() && data.bReturning) {
-            if (this.projectiles && this.projectiles[data.id]) {
-                this.projectiles[data.id] = undefined;
+            if (this.projectiles && this.projectiles[data.id + ""]) {
+                this.projectiles[data.id + ""] = undefined;
             }
             if (this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram") && !this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram>("imba_timbersaw_return_chakram").IsHidden() && this.IsHidden()) {
                 this.GetCasterPlus().SwapAbilities(this.GetName(), "imba_timbersaw_return_chakram", true, false);
@@ -1057,7 +1063,7 @@ export class imba_timbersaw_chakram_2 extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
-            this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector());
+            this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
         }
         if (!this.projectiles) {
             this.projectiles = {}
@@ -1091,30 +1097,30 @@ export class imba_timbersaw_chakram_2 extends BaseAbility_Plus {
         }
         if (!this.effect_name) {
             this.effect_name = "particles/units/heroes/hero_shredder/shredder_chakram_aghs.vpcf";
-            if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
-                this.effect_name = "particles/econ/items/timbersaw/timbersaw_ti9_gold/timbersaw_ti9_chakram_gold_aghs.vpcf";
-            }
+            // if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
+            //     this.effect_name = "particles/econ/items/timbersaw/timbersaw_ti9_gold/timbersaw_ti9_chakram_gold_aghs.vpcf";
+            // }
         }
         let chakram_projectile = ProjectileManager.CreateLinearProjectile({
             Source: this.GetCasterPlus(),
             Ability: this,
             vSpawnOrigin: this.GetCasterPlus().GetAbsOrigin(),
-            bDeleteOnHit: false,
+            // bDeleteOnHit: false,
             EffectName: this.effect_name,
-            fDistance: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Length2D(),
-            vVelocity: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Normalized() * this.GetSpecialValueFor("speed") * Vector(1, 1, 0),
+            fDistance: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D(),
+            vVelocity: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * this.GetSpecialValueFor("speed") * Vector(1, 1, 0) as Vector,
             fStartRadius: this.GetSpecialValueFor("radius"),
             fEndRadius: this.GetSpecialValueFor("radius"),
             iUnitTargetTeam: DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY,
             iUnitTargetFlags: DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE,
             iUnitTargetType: DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
             bHasFrontalCone: false,
-            bReplaceExisting: false,
+            // bReplaceExisting: false,
             fExpireTime: GameRules.GetGameTime() + 10.0,
             bProvidesVision: false,
             ExtraData: ExtraData
         });
-        this.projectiles[chakram_projectile] = ExtraData;
+        this.projectiles[chakram_projectile + ""] = ExtraData;
         if (!this.IsHidden() && this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram_2") && this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram_2>("imba_timbersaw_return_chakram_2").IsHidden()) {
             if (this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram_2>("imba_timbersaw_return_chakram_2").GetLevel() != this.GetLevel()) {
                 this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram_2>("imba_timbersaw_return_chakram_2").SetLevel(this.GetLevel());
@@ -1152,10 +1158,11 @@ export class imba_timbersaw_chakram_2 extends BaseAbility_Plus {
                 GridNav.DestroyTreesAroundPoint(location, this.GetSpecialValueFor("radius"), false);
             }
             for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
-                if (this.projectiles[data.id] && !this.projectiles[data.id].returning_enemies) {
-                    this.projectiles[data.id].returning_enemies = {}
+                if (this.projectiles[data.id + ""] && !this.projectiles[data.id].returning_enemies) {
+                    this.projectiles[data.id + ""].returning_enemies = []
                 }
-                if (this.projectiles[data.id].returning_enemies && !this.projectiles[data.id].returning_enemies[enemy]) {
+                let returning_enemies = this.projectiles[data.id + ""].returning_enemies as IBaseNpc_Plus[];
+                if (returning_enemies && !returning_enemies.includes(enemy)) {
                     enemy.EmitSound("Hero_Shredder.Chakram.Target");
                     ApplyDamage({
                         victim: enemy,
@@ -1168,17 +1175,19 @@ export class imba_timbersaw_chakram_2 extends BaseAbility_Plus {
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_timbersaw_chakram_debuff", {
                         duration: this.GetSpecialValueFor("pass_slow_duration") * (1 - enemy.GetStatusResistance())
                     });
-                    this.projectiles[data.id].returning_enemies[enemy] = true;
+                    returning_enemies.push(enemy);
                 }
             }
         }
     }
-    OnProjectileHitHandle(target: IBaseNpc_Plus, location, projectileHandle) {
+    OnProjectileHitHandle(target: IBaseNpc_Plus, location: Vector, _projectileHandle: ProjectileID) {
+        let projectileHandle = _projectileHandle + "";
         if (target && target != this.GetCasterPlus()) {
             if (!this.projectiles[projectileHandle].launching_enemies) {
-                this.projectiles[projectileHandle].launching_enemies = {}
+                this.projectiles[projectileHandle].launching_enemies = []
             }
-            if (this.projectiles[projectileHandle].launching_enemies && !this.projectiles[projectileHandle].launching_enemies[enemy]) {
+            let launching_enemies = this.projectiles[projectileHandle].launching_enemies as IBaseNpc_Plus[];
+            if (launching_enemies && !launching_enemies.includes(target)) {
                 target.EmitSound("Hero_Shredder.Chakram.Target");
                 ApplyDamage({
                     victim: target,
@@ -1191,7 +1200,7 @@ export class imba_timbersaw_chakram_2 extends BaseAbility_Plus {
                 target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_timbersaw_chakram_debuff", {
                     duration: this.GetSpecialValueFor("pass_slow_duration") * (1 - target.GetStatusResistance())
                 });
-                this.projectiles[projectileHandle].launching_enemies[target] = true;
+                launching_enemies.push(target);
             }
         } else if (!target && this.projectiles && this.projectiles[projectileHandle]) {
             let auto_cast_flag = 0;
@@ -1213,13 +1222,13 @@ export class imba_timbersaw_chakram_2 extends BaseAbility_Plus {
                 observe_tick_scale: this.GetSpecialValueFor("observe_tick_scale"),
                 observe_max_scale: this.GetSpecialValueFor("observe_max_scale")
             }, GetGroundPosition(location, undefined), this.GetCasterPlus().GetTeamNumber(), false);
-            this.projectiles[projectileHandle] = undefined;
+            delete this.projectiles[projectileHandle];
         }
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, data: any): boolean | void {
         if (target && target == this.GetCasterPlus() && data.bReturning) {
-            if (this.projectiles && this.projectiles[data.id]) {
-                this.projectiles[data.id] = undefined;
+            if (this.projectiles && this.projectiles[data.id + ""]) {
+                delete this.projectiles[data.id + ""];
             }
             if (this.GetCasterPlus().HasAbility("imba_timbersaw_return_chakram_2") && !this.GetCasterPlus().findAbliityPlus<imba_timbersaw_return_chakram_2>("imba_timbersaw_return_chakram_2").IsHidden() && this.IsHidden()) {
                 this.GetCasterPlus().SwapAbilities(this.GetName(), "imba_timbersaw_return_chakram_2", true, false);
@@ -1248,6 +1257,8 @@ export class modifier_imba_timbersaw_chakram_thinker extends BaseModifierMotionH
     public chakram_particle: any;
     public dendrophobia_modifier: any;
     public counter: number;
+    cast_pos: Vector;
+    angle: number
     IsPurgable(): boolean {
         return false;
     }
@@ -1282,9 +1293,10 @@ export class modifier_imba_timbersaw_chakram_thinker extends BaseModifierMotionH
         if (this.GetAbilityPlus()) {
             this.damage_type = this.GetAbilityPlus().GetAbilityDamageType();
             this.effect_name = "particles/units/heroes/hero_shredder/shredder_chakram_return.vpcf";
-            if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
-                this.effect_name = "particles/econ/items/timbersaw/timbersaw_ti9/timbersaw_ti9_chakram_return.vpcf";
-            } else if (this.GetAbilityPlus().GetName() == "imba_timbersaw_chakram_2") {
+            /**   if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
+                  this.effect_name = "particles/econ/items/timbersaw/timbersaw_ti9/timbersaw_ti9_chakram_return.vpcf";
+              } else */
+            if (this.GetAbilityPlus().GetName() == "imba_timbersaw_chakram_2") {
                 this.effect_name = "particles/econ/items/shredder/hero_shredder_icefx/shredder_chakram_return_ice.vpcf";
             }
         } else {
@@ -1296,14 +1308,14 @@ export class modifier_imba_timbersaw_chakram_thinker extends BaseModifierMotionH
         }
         this.interval = this.damage_interval;
         this.stay_effect = "particles/units/heroes/hero_shredder/shredder_chakram_stay.vpcf";
-        if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
-            this.stay_effect = "particles/econ/items/timbersaw/timbersaw_ti9_gold/timbersaw_ti9_chakram_gold_stay.vpcf";
-        }
+        // if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
+        //     this.stay_effect = "particles/econ/items/timbersaw/timbersaw_ti9_gold/timbersaw_ti9_chakram_gold_stay.vpcf";
+        // }
         this.chakram_particle = ResHelper.CreateParticleEx(this.stay_effect, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         if (this.GetAbilityPlus()) {
             if (this.GetAbilityPlus().GetName() == "imba_timbersaw_chakram") {
                 if (this.GetAbilityPlus().GetAutoCastState()) {
-                    this.GetParentPlus().bTimberChainTarget = true;
+                    this.GetParentPlus().TempData().bTimberChainTarget = true;
                     ParticleManager.SetParticleControl(this.chakram_particle, 15, Vector(255, 255, 255));
                     ParticleManager.SetParticleControl(this.chakram_particle, 16, Vector(1, 0, 0));
                 } else {
@@ -1311,7 +1323,7 @@ export class modifier_imba_timbersaw_chakram_thinker extends BaseModifierMotionH
                 }
             } else if (this.GetAbilityPlus().GetName() == "imba_timbersaw_chakram_2") {
                 if (this.GetAbilityPlus().GetAutoCastState()) {
-                    this.GetParentPlus().bTimberChainTarget = true;
+                    this.GetParentPlus().TempData().bTimberChainTarget = true;
                     ParticleManager.SetParticleControl(this.chakram_particle, 15, Vector(128, 128, 255));
                     ParticleManager.SetParticleControl(this.chakram_particle, 60, Vector(255, 255, 255));
                     ParticleManager.SetParticleControl(this.chakram_particle, 61, Vector(1, 0, 0));
@@ -1337,7 +1349,7 @@ export class modifier_imba_timbersaw_chakram_thinker extends BaseModifierMotionH
         }
         GridNav.DestroyTreesAroundPoint(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus().GetHullRadius(), true);
         if (this.interval == this.damage_interval || (this.interval != this.damage_interval && this.counter >= this.damage_interval)) {
-            if (this.GetCasterPlus().GetMana() >= this.mana_per_second && (this.GetParentPlus().GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()).Length2D() <= this.break_distance) {
+            if (this.GetCasterPlus().GetMana() >= this.mana_per_second && (this.GetParentPlus().GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D() <= this.break_distance) {
                 this.GetCasterPlus().ReduceMana(this.mana_per_second);
                 for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                     ApplyDamage({
@@ -1389,7 +1401,7 @@ export class modifier_imba_timbersaw_chakram_thinker extends BaseModifierMotionH
                 bProvidesVision: false,
                 ExtraData: ExtraData
             });
-            this.GetAbilityPlus().projectiles[GameRules.GetGameTime()] = ExtraData;
+            this.GetAbilityPlus<imba_timbersaw_chakram_2>().projectiles[GameRules.GetGameTime() + ""] = ExtraData;
         }
     }
     UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
@@ -1508,7 +1520,7 @@ export class imba_timbersaw_return_chakram extends BaseAbility_Plus {
     public responses: any;
     public response_keys: any;
     public random_selection: any;
-    public chakram_ability: any;
+    public chakram_ability: imba_timbersaw_chakram;
     public effect_name: any;
     GetAssociatedPrimaryAbilities(): string {
         return "imba_timbersaw_chakram";
@@ -1542,17 +1554,18 @@ export class imba_timbersaw_return_chakram extends BaseAbility_Plus {
             this.chakram_ability = this.GetCasterPlus().findAbliityPlus<imba_timbersaw_chakram>("imba_timbersaw_chakram");
         }
         if (this.chakram_ability && this.chakram_ability.projectiles) {
-            for (const [_, data] of ipairs(this.chakram_ability.projectiles)) {
-                if (ProjectileManager.GetLinearProjectileLocation(_) && ProjectileManager.GetLinearProjectileRadius(_) == this.chakram_ability.GetSpecialValueFor("radius")) {
+            for (const [_, data] of GameFunc.Pair(this.chakram_ability.projectiles)) {
+                let pid = GToNumber(_) as ProjectileID;
+                if (ProjectileManager.GetLinearProjectileLocation(pid) && ProjectileManager.GetLinearProjectileRadius(pid) == this.chakram_ability.GetSpecialValueFor("radius")) {
                     let ExtraData = {
                         bReturning: true,
                         id: GameRules.GetGameTime()
                     }
                     if (!this.effect_name) {
                         this.effect_name = "particles/units/heroes/hero_shredder/shredder_chakram_return.vpcf";
-                        if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
-                            this.effect_name = "particles/econ/items/timbersaw/timbersaw_ti9/timbersaw_ti9_chakram_return.vpcf";
-                        }
+                        // if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
+                        //     this.effect_name = "particles/econ/items/timbersaw/timbersaw_ti9/timbersaw_ti9_chakram_return.vpcf";
+                        // }
                     }
                     let chakram_projectile = ProjectileManager.CreateTrackingProjectile({
                         Target: this.GetCasterPlus(),
@@ -1560,7 +1573,7 @@ export class imba_timbersaw_return_chakram extends BaseAbility_Plus {
                         Ability: this.chakram_ability,
                         EffectName: this.effect_name,
                         iMoveSpeed: this.chakram_ability.GetSpecialValueFor("speed"),
-                        vSourceLoc: ProjectileManager.GetLinearProjectileLocation(_),
+                        vSourceLoc: ProjectileManager.GetLinearProjectileLocation(pid),
                         bDrawsOnMinimap: false,
                         bDodgeable: false,
                         bIsAttack: false,
@@ -1570,8 +1583,8 @@ export class imba_timbersaw_return_chakram extends BaseAbility_Plus {
                         ExtraData: ExtraData
                     });
                     this.chakram_ability.projectiles[GameRules.GetGameTime()] = ExtraData;
-                    ProjectileManager.DestroyLinearProjectile(_);
-                    this.chakram_ability.projectiles[_] = undefined;
+                    ProjectileManager.DestroyLinearProjectile(pid);
+                    delete this.chakram_ability.projectiles[_];
                 }
             }
         }
@@ -1614,16 +1627,17 @@ export class imba_timbersaw_return_chakram_2 extends BaseAbility_Plus {
         }
         if (this.chakram_ability) {
             for (const [_, data] of ipairs(this.chakram_ability.projectiles)) {
-                if (ProjectileManager.GetLinearProjectileLocation(_) && ProjectileManager.GetLinearProjectileRadius(_) == this.chakram_ability.GetSpecialValueFor("radius")) {
+                const pid = GToNumber(_) as ProjectileID;
+                if (ProjectileManager.GetLinearProjectileLocation(pid) && ProjectileManager.GetLinearProjectileRadius(pid) == this.chakram_ability.GetSpecialValueFor("radius")) {
                     let ExtraData = {
                         bReturning: true,
                         id: GameRules.GetGameTime()
                     }
                     if (!this.effect_name) {
                         this.effect_name = "particles/econ/items/shredder/hero_shredder_icefx/shredder_chakram_return_ice.vpcf";
-                        if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
-                            this.effect_name = "particles/econ/items/timbersaw/timbersaw_ti9/timbersaw_ti9_chakram_return.vpcf";
-                        }
+                        // if (Wearables.GetWearable(this.GetCasterPlus(), "models/items/shredder/timbersaw_ti9_immortal_offhand/timbersaw_ti9_immortal_offhand")) {
+                        //     this.effect_name = "particles/econ/items/timbersaw/timbersaw_ti9/timbersaw_ti9_chakram_return.vpcf";
+                        // }
                     }
                     let chakram_projectile = ProjectileManager.CreateTrackingProjectile({
                         Target: this.GetCasterPlus(),
@@ -1631,7 +1645,7 @@ export class imba_timbersaw_return_chakram_2 extends BaseAbility_Plus {
                         Ability: this.chakram_ability,
                         EffectName: this.effect_name,
                         iMoveSpeed: this.chakram_ability.GetSpecialValueFor("speed"),
-                        vSourceLoc: ProjectileManager.GetLinearProjectileLocation(_),
+                        vSourceLoc: ProjectileManager.GetLinearProjectileLocation(pid),
                         bDrawsOnMinimap: false,
                         bDodgeable: false,
                         bIsAttack: false,
@@ -1641,8 +1655,8 @@ export class imba_timbersaw_return_chakram_2 extends BaseAbility_Plus {
                         ExtraData: ExtraData
                     });
                     this.chakram_ability.projectiles[GameRules.GetGameTime()] = ExtraData;
-                    ProjectileManager.DestroyLinearProjectile(_);
-                    this.chakram_ability.projectiles[_] = undefined;
+                    ProjectileManager.DestroyLinearProjectile(pid);
+                    delete this.chakram_ability.projectiles[_];
                 }
             }
         }
@@ -1650,7 +1664,7 @@ export class imba_timbersaw_return_chakram_2 extends BaseAbility_Plus {
 }
 @registerAbility()
 export class imba_timbersaw_chakram_3 extends BaseAbility_Plus {
-    public projectiles: any;
+    public projectiles: { [k: string]: any };
     public dendrophobia_modifier: any;
     IsInnateAbility() {
         return true;
@@ -1672,7 +1686,7 @@ export class imba_timbersaw_chakram_3 extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
-            this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector());
+            this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector)
         }
         if (!this.projectiles) {
             this.projectiles = {}
@@ -1688,22 +1702,22 @@ export class imba_timbersaw_chakram_3 extends BaseAbility_Plus {
             Source: this.GetCasterPlus(),
             Ability: this,
             vSpawnOrigin: this.GetCasterPlus().GetAbsOrigin(),
-            bDeleteOnHit: false,
+            // bDeleteOnHit: false,
             EffectName: "particles/econ/items/timbersaw/timbersaw_ti9_gold/timbersaw_ti9_chakram_gold.vpcf",
             fDistance: this.GetCastRange(this.GetCursorPosition(), this.GetCasterPlus()) + this.GetCasterPlus().GetCastRangeBonus(),
-            vVelocity: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin()).Normalized() * this.GetSpecialValueFor("speed") * Vector(1, 1, 0),
+            vVelocity: (this.GetCursorPosition() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * this.GetSpecialValueFor("speed") * Vector(1, 1, 0) as Vector,
             fStartRadius: this.GetSpecialValueFor("radius"),
             fEndRadius: this.GetSpecialValueFor("radius"),
             iUnitTargetTeam: DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY,
             iUnitTargetFlags: DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE,
             iUnitTargetType: DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
             bHasFrontalCone: false,
-            bReplaceExisting: false,
+            // bReplaceExisting: false,
             fExpireTime: GameRules.GetGameTime() + 10.0,
             bProvidesVision: false,
             ExtraData: ExtraData
         });
-        this.projectiles[chakram_projectile] = ExtraData;
+        this.projectiles[chakram_projectile + ""] = ExtraData;
     }
     OnProjectileThinkHandle(projectileHandle: ProjectileID): void {
         if (GameFunc.GetCount(GridNav.GetAllTreesAroundPoint(ProjectileManager.GetLinearProjectileLocation(projectileHandle), this.GetSpecialValueFor("radius"), true)) >= 1) {
@@ -1719,7 +1733,7 @@ export class imba_timbersaw_chakram_3 extends BaseAbility_Plus {
             GridNav.DestroyTreesAroundPoint(ProjectileManager.GetLinearProjectileLocation(projectileHandle), this.GetSpecialValueFor("radius"), false);
         }
     }
-    OnProjectileHitHandle(target: IBaseNpc_Plus, location, projectileHandle) {
+    OnProjectileHitHandle(target: IBaseNpc_Plus, location: Vector, projectileHandle: ProjectileID) {
         if (target && target != this.GetCasterPlus()) {
             target.EmitSound("Hero_Shredder.Chakram.Target");
             ApplyDamage({

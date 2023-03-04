@@ -490,12 +490,13 @@ export module FuncArray {
      * @param v
      * @returns
      */
-    export function RemoveAll(t: Array<any>, v: any) {
+    export function FitterRemove<T>(t: Array<T>, f: (v: T, index: number) => boolean) {
         if (t == null || t.length == 0) return;
         let len = t.length;
         for (let i = len - 1; i > -1; i--) {
-            if (t[i] == v) {
+            if (!f(t[i], i)) {
                 t.splice(i, 1);
+                i--;
             }
         }
     }
