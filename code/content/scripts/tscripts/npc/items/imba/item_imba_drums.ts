@@ -17,7 +17,7 @@ export class item_imba_ancient_janggo extends BaseItem_Plus {
         let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false);
         let stacks = 0;
         for (const [_, ally] of GameFunc.iPair(allies)) {
-            if (ally.IsRealHero()) {
+            if (ally.IsRealUnit()) {
                 stacks = stacks + this.GetSpecialValueFor("hero_multiplier");
             } else {
                 stacks = stacks + 1;

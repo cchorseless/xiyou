@@ -978,7 +978,7 @@ export class modifier_imba_corrosive_haze_debuff extends BaseModifierMotionHoriz
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().HasTalent("special_bonus_imba_slardar_11") && this.GetParentPlus().IsRealHero()) {
+        if (this.GetCasterPlus().HasTalent("special_bonus_imba_slardar_11") && this.GetParentPlus().IsRealUnit()) {
             this.caster_buff = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_corrosive_haze_talent_buff", {
                 duration: this.GetDuration()
             });

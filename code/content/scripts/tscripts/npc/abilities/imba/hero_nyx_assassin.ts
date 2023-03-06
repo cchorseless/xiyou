@@ -643,7 +643,7 @@ export class modifier_imba_mana_burn_parasite extends BaseModifier_Plus {
         if (!this.scarab_retrieve || !IsServer() || keys.target != this.parent) {
             return undefined;
         }
-        if (!this.parent.IsRealHero()) {
+        if (!this.parent.IsRealUnit()) {
             return undefined;
         }
         this.caster.AddNewModifier(this.caster, this.ability, this.scarab_modifier, {
@@ -753,7 +753,7 @@ export class modifier_imba_mana_burn_parasite_charged extends BaseModifier_Plus 
         if (!this.scarab_retrieve || !IsServer() || keys.target != this.parent) {
             return undefined;
         }
-        if (!this.parent.IsRealHero()) {
+        if (!this.parent.IsRealUnit()) {
             return undefined;
         }
         this.skip_damage = true;

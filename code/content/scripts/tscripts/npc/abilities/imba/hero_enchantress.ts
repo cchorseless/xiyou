@@ -950,7 +950,7 @@ export class modifier_imba_enchantress_impetus_huntmastery_timer extends BaseMod
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (keys.unit == this.GetParentPlus() && keys.unit.IsRealHero() && (keys.unit.IsReincarnating && !keys.unit.IsReincarnating())) {
+        if (keys.unit == this.GetParentPlus() && keys.unit.IsRealUnit() && (keys.unit.IsReincarnating && !keys.unit.IsReincarnating())) {
             if (this.GetAbilityPlus().GetName() == "imba_enchantress_impetus_723") {
                 if (!this.GetCasterPlus().HasModifier("modifier_imba_enchantress_impetus_723")) {
                     let impetus_modifier = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_enchantress_impetus_723", {});

@@ -858,7 +858,7 @@ export class modifier_imba_undying_tombstone_aura extends BaseModifier_Plus {
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (keys.target == this.caster) {
             let damage_to_tombstone;
-            if (keys.attacker.IsRealHero() || keys.attacker.IsClone() || keys.attacker.IsTempestDouble()) {
+            if (keys.attacker.IsRealUnit() || keys.attacker.IsClone() || keys.attacker.IsTempestDouble()) {
                 damage_to_tombstone = this.tombstone_damage_hero;
             } else {
                 damage_to_tombstone = this.tombstone_damage_creep;
@@ -1014,7 +1014,7 @@ export class modifier_imba_undying_zombie_deathlust extends BaseModifier_Plus {
         let attacker = keys.attacker;
         if (target == this.caster) {
             let damage_to_zombie;
-            if (attacker.IsRealHero() || attacker.IsClone() || attacker.IsTempestDouble() || attacker.IsTower()) {
+            if (attacker.IsRealUnit() || attacker.IsClone() || attacker.IsTempestDouble() || attacker.IsTower()) {
                 damage_to_zombie = this.hero_tower_damage;
             } else {
                 damage_to_zombie = this.other_damage;
@@ -1371,7 +1371,7 @@ export class modifier_imba_undying_flesh_golem_illusion_check extends BaseModifi
         if (this.GetAbilityPlus() && this.GetParentPlus().IsIllusion()) {
             let undyings = Entities.FindAllByName(this.GetParentPlus().GetName());
             for (const [_, undying] of GameFunc.iPair(undyings)) {
-                if (/**undying.IsRealHero() && */undying.GetTeamNumber() == this.GetParentPlus().GetTeamNumber()) {
+                if (/**undying.IsRealUnit() && */undying.GetTeamNumber() == this.GetParentPlus().GetTeamNumber()) {
                     this.GetParentPlus().AddNewModifier(this.GetParentPlus().GetPlayerOwner().GetAssignedHero(), this.GetAbilityPlus(), "modifier_imba_undying_flesh_golem", {
                         duration: this.GetSpecialValueFor("duration")
                     });
@@ -1549,7 +1549,7 @@ export class modifier_imba_undying_flesh_golem_plague_aura extends BaseModifier_
             let heal_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_undying/undying_fg_heal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
             ParticleManager.SetParticleControlEnt(heal_particle, 1, keys.unit, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", keys.unit.GetAbsOrigin(), true);
             ParticleManager.ReleaseParticleIndex(heal_particle);
-            if (keys.unit.IsRealHero()) {
+            if (keys.unit.IsRealUnit()) {
                 this.GetCasterPlus().Heal(this.GetCasterPlus().GetMaxHealth() * this.remnants_max_health_heal_pct_hero * 0.01, this.GetAbilityPlus());
                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetCasterPlus(), this.GetCasterPlus().GetMaxHealth() * this.remnants_max_health_heal_pct_hero * 0.01, undefined);
             } else {

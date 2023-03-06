@@ -776,7 +776,7 @@ export class modifier_imba_keeper_of_the_light_recall extends BaseModifier_Plus 
         if (!IsServer()) {
             return;
         }
-        if (keys.unit == this.GetParentPlus() && keys.attacker != this.GetParentPlus() && (keys.attacker.IsRealHero() || (keys.attacker as IBaseNpc_Plus).IsRoshan()) && keys.original_damage > 0) {
+        if (keys.unit == this.GetParentPlus() && keys.attacker != this.GetParentPlus() && (keys.attacker.IsRealUnit() || (keys.attacker as IBaseNpc_Plus).IsRoshan()) && keys.original_damage > 0) {
             this.GetParentPlus().EmitSound("Hero_KeeperOfTheLight.Recall.Fail");
             let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_keeper_of_the_light/keeper_of_the_light_recall_failure.vpcf", ParticleAttachment_t.PATTACH_POINT, this.GetParentPlus());
             ParticleManager.ReleaseParticleIndex(particle);
@@ -1070,7 +1070,7 @@ export class modifier_imba_keeper_of_the_light_will_o_wisp extends BaseModifier_
         if (!IsServer()) {
             return;
         }
-        if (keys.target == this.parent && (keys.attacker.IsRealHero() || keys.attacker.IsClone() || keys.attacker.IsTempestDouble())) {
+        if (keys.target == this.parent && (keys.attacker.IsRealUnit() || keys.attacker.IsClone() || keys.attacker.IsTempestDouble())) {
             if (this.parent.GetTeam() != keys.attacker.GetTeam()) {
                 this.parent.SetHealth(this.parent.GetHealth() - this.health_increments);
                 if (this.parent.GetHealth() <= 0) {

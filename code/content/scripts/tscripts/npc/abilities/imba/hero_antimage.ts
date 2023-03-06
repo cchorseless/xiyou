@@ -346,7 +346,7 @@ export class modifier_imba_antimage_blink_charges extends BaseModifier_Plus {
             this.charge_replenish_rate = this.ability.GetCooldown(this.ability.GetLevel() - 1);
             this.SetStackCount(this.max_charge_count);
 
-            if (this.caster.IsRealHero()) {
+            if (this.caster.IsRealUnit()) {
                 // this.SetStackCount(this.max_charge_count);
             }
             else {
@@ -508,7 +508,7 @@ export class imba_antimage_spell_shield extends BaseAbility_Plus {
             let shield_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_antimage/antimage_blink_end_glow.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, caster);
             ParticleManager.ReleaseParticleIndex(shield_pfx);
             caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
-            if (this.GetCasterPlus().IsRealHero() && this.GetCasterPlus().HasScepter()) {
+            if (this.GetCasterPlus().IsRealUnit() && this.GetCasterPlus().HasScepter()) {
                 for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
                     if (unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID() && unit.IsIllusion() && unit.HasAbility("imba_antimage_spell_shield") && unit.HasModifier("modifier_imba_antimage_blink_command_restricted")) {
                         unit.findAbliityPlus<imba_antimage_spell_shield>("imba_antimage_spell_shield").OnSpellStart();

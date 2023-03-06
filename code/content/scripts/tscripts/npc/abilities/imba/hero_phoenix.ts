@@ -1490,7 +1490,7 @@ export class modifier_imba_phoenix_sun_ray_buff extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(pfx);
             let explode_stack = this.explode_min_time / this.tick_interval;
             let current_stack = this.GetStackCount();
-            if (current_stack > explode_stack && taker.IsRealHero()) {
+            if (current_stack > explode_stack && taker.IsRealUnit()) {
                 let pfx_explode = ResHelper.CreateParticleEx("particles/hero/phoenix/phoenix_sun_ray_explode.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, taker);
                 ParticleManager.SetParticleControlEnt(pfx_explode, 0, taker, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", taker.GetAbsOrigin(), true);
                 ParticleManager.ReleaseParticleIndex(pfx_explode);
@@ -2183,7 +2183,7 @@ export class modifier_imba_phoenix_supernova_egg_thinker extends BaseModifier_Pl
         }
         let max_attack = egg.TempData().max_attack;
         let current_attack = egg.TempData().current_attack;
-        if (attacker.IsRealHero() || attacker.IsClone() || attacker.IsTempestDouble()) {
+        if (attacker.IsRealUnit() || attacker.IsClone() || attacker.IsTempestDouble()) {
             egg.TempData().current_attack = egg.TempData().current_attack + 1;
         }
         if (egg.TempData().current_attack >= egg.TempData().max_attack) {
@@ -2266,7 +2266,7 @@ export class modifier_imba_phoenix_supernova_scepter_passive extends BaseModifie
         return false;
     }
     RemoveOnDeath(): boolean {
-        if (this.GetCasterPlus().IsRealHero()) {
+        if (this.GetCasterPlus().IsRealUnit()) {
             return false;
         } else {
             return true;
@@ -2284,7 +2284,7 @@ export class modifier_imba_phoenix_supernova_scepter_passive extends BaseModifie
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MIN_HEALTH)
     CC_GetMinHealth(): number {
-        if (this.GetCasterPlus().PassivesDisabled() || this.GetCasterPlus().HasModifier("modifier_imba_phoenix_supernova_caster_dummy") || this.GetCasterPlus().HasModifier("modifier_imba_phoenix_supernova_scepter_passive_cooldown") || !this.GetCasterPlus().IsRealHero()) {
+        if (this.GetCasterPlus().PassivesDisabled() || this.GetCasterPlus().HasModifier("modifier_imba_phoenix_supernova_caster_dummy") || this.GetCasterPlus().HasModifier("modifier_imba_phoenix_supernova_scepter_passive_cooldown") || !this.GetCasterPlus().IsRealUnit()) {
             return undefined;
         }
         if (!this.GetCasterPlus().HasScepter()) {
@@ -2307,7 +2307,7 @@ export class modifier_imba_phoenix_supernova_scepter_passive extends BaseModifie
         if (this.GetCasterPlus().findBuff<modifier_imba_phoenix_supernova_caster_dummy>("modifier_imba_phoenix_supernova_caster_dummy") || this.GetCasterPlus().HasModifier("modifier_imba_phoenix_supernova_scepter_passive_cooldown")) {
             return;
         }
-        if (this.GetCasterPlus().PassivesDisabled() || !this.GetCasterPlus().IsRealHero()) {
+        if (this.GetCasterPlus().PassivesDisabled() || !this.GetCasterPlus().IsRealUnit()) {
             return;
         }
         if (this.GetCasterPlus().GetHealth() <= 1) {

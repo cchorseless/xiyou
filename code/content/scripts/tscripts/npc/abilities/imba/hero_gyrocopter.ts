@@ -1257,7 +1257,7 @@ export class modifier_imba_gyrocopter_call_down_thinker extends BaseModifier_Plu
                     attacker: this.GetCasterPlus(),
                     ability: this.GetAbilityPlus()
                 });
-                if (this.GetCasterPlus().GetName().includes("gyrocopter") && (enemy.IsRealHero() || enemy.IsClone()) && !enemy.IsAlive()) {
+                if (this.GetCasterPlus().GetName().includes("gyrocopter") && (enemy.IsRealUnit() || enemy.IsClone()) && !enemy.IsAlive()) {
                     EmitSoundOnClient("gyrocopter_gyro_call_down_1" + RandomInt(1, 2), this.GetCasterPlus().GetPlayerOwner());
                 }
             }
@@ -1276,7 +1276,7 @@ export class modifier_imba_gyrocopter_call_down_thinker extends BaseModifier_Plu
                     attacker: this.GetCasterPlus(),
                     ability: this.GetAbilityPlus()
                 });
-                if (this.GetCasterPlus().GetName().includes("gyrocopter") && (enemy.IsRealHero() || enemy.IsClone()) && !enemy.IsAlive()) {
+                if (this.GetCasterPlus().GetName().includes("gyrocopter") && (enemy.IsRealUnit() || enemy.IsClone()) && !enemy.IsAlive()) {
                     EmitSoundOnClient("gyrocopter_gyro_call_down_1" + RandomInt(1, 2), this.GetCasterPlus().GetPlayerOwner());
                 }
             }

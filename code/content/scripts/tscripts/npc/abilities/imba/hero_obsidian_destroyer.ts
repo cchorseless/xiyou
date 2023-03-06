@@ -320,7 +320,7 @@ export class modifier_imba_arcane_orb_thinker extends BaseModifier_Plus {
                     }
                 });
             }
-            if (!target.IsRealHero()) {
+            if (!target.IsRealUnit()) {
                 return;
             }
             let int_steal_count = this.int_steal_count;
@@ -687,7 +687,7 @@ export class modifier_imba_astral_imprisonment extends BaseModifier_Plus {
             this.int_steal_duration = this.ability.GetSpecialValueFor("int_steal_duration");
             EmitSoundOn(this.sound_astral, this.parent);
             this.parent.AddNoDraw();
-            if (this.scepter && this.parent.GetTeamNumber() != this.caster.GetTeamNumber() && ((this.parent.IsRealHero() && !this.parent.IsClone()) || this.parent.IsTempestDouble())) {
+            if (this.scepter && this.parent.GetTeamNumber() != this.caster.GetTeamNumber() && ((this.parent.IsRealUnit() && !this.parent.IsClone()) || this.parent.IsTempestDouble())) {
                 ApplyIntelligenceSteal(this.caster, this.ability, this.parent, this.scepter_int_steal_count, this.int_steal_duration);
             }
             this.AddTimer(FrameTime(), () => {

@@ -556,7 +556,7 @@ export class imba_mars_gods_rebuke extends BaseAbility_Plus {
                         IsStun: this.GetCasterPlus().HasTalent("special_bonus_imba_mars_2")
                     });
                 }
-                if (enemy.IsRealHero()) {
+                if (enemy.IsRealUnit()) {
                     heroes_count = heroes_count + 1;
                 }
                 this.PlayEffects2(enemy, origin, cast_direction);

@@ -8,7 +8,7 @@ export class rapier_base_class extends BaseItem_Plus {
     corruption_total_time: number;
     OnOwnerDied( /** params */): void {
         let hOwner = this.GetOwnerPlus();
-        if (!hOwner.IsRealHero()) {
+        if (!hOwner.IsRealUnit()) {
             hOwner.DropItem(this, true,);
             return;
         }

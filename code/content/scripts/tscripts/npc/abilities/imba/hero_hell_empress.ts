@@ -163,7 +163,7 @@ export class modifier_imba_royal_wrath extends BaseModifier_Plus {
                 let attacker = keys.attacker;
                 let ability = this.GetAbilityPlus();
                 let ability_curse = parent.findAbliityPlus<imba_empress_eleven_curses>("imba_empress_eleven_curses");
-                if (attacker.IsRealHero() && attacker.IsAlive() && ability.IsCooldownReady() && attacker.GetTeam() != parent.GetTeam() && ability_curse && ability_curse.GetLevel() > 0 && !parent.PassivesDisabled() && !attacker.IsMagicImmune()) {
+                if (attacker.IsRealUnit() && attacker.IsAlive() && ability.IsCooldownReady() && attacker.GetTeam() != parent.GetTeam() && ability_curse && ability_curse.GetLevel() > 0 && !parent.PassivesDisabled() && !attacker.IsMagicImmune()) {
                     ability_curse.OnSpellStart(attacker.GetAbsOrigin(), 1);
                     let ability_hellbolt = parent.findAbliityPlus<imba_empress_hellbolt>("imba_empress_hellbolt");
                     if (ability_hellbolt && ability_hellbolt.GetLevel() > 0) {

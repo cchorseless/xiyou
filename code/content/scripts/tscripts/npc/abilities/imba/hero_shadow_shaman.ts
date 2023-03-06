@@ -634,7 +634,7 @@ export class modifier_imba_shadow_shaman_shackles extends BaseModifier_Plus {
                 ability: this.GetAbilityPlus()
             }
             ApplyDamage(damageTable);
-            if (this.GetParentPlus().IsRealHero() && this.GetParentPlus().GetPlayerID() /**&& this.GetParentPlus().ModifyGold && this.GetCasterPlus().ModifyGold*/) {
+            if (this.GetParentPlus().IsRealUnit() && this.GetParentPlus().GetPlayerID() /**&& this.GetParentPlus().ModifyGold && this.GetCasterPlus().ModifyGold*/) {
                 let actual_gold_to_steal = math.min(this.swindle_gold_per_tick, PlayerResource.GetUnreliableGold(this.GetParentPlus().GetPlayerID()));
                 // this.GetParentPlus().ModifyGold(-actual_gold_to_steal, false, 0);
                 // this.GetCasterPlus().ModifyGold(actual_gold_to_steal, false, 0);
@@ -915,7 +915,7 @@ export class modifier_imba_mass_serpent_ward extends BaseModifier_Plus {
             return;
         }
         if (keys.attacker == this.GetParentPlus() && keys.attacker != keys.unit && this.GetAbilityPlus() && !keys.unit.IsOther() && keys.unit.GetName() != "npc_dota_unit_undying_zombie") {
-            if (!keys.unit.IsRealHero() && !keys.unit.IsBuilding()) {
+            if (!keys.unit.IsRealUnit() && !keys.unit.IsBuilding()) {
                 this.GetParentPlus().SetMaxHealth(this.GetParentPlus().GetMaxHealth() + this.snake_charmer_creep_count);
                 this.GetParentPlus().Heal(this.snake_charmer_creep_count, this.GetAbilityPlus());
                 this.GetParentPlus().SetBaseAttackTime(this.GetParentPlus().GetBaseAttackTime() * (1 - (this.snake_charmer_creep_bat_reduction_pct * 0.01)));

@@ -290,7 +290,7 @@ export class modifier_imba_visage_soul_assumption extends BaseModifier_Plus {
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
-        if ((keys.unit.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetSpecialValueFor("radius") && (keys.attacker.IsControllableByAnyPlayer() /**|| keys.attacker.IsRoshan()*/) && (keys.unit.IsRealHero() || string.find(keys.attacker.GetDebugName(), "npc_dota_visage_familiar")) && keys.unit != keys.attacker && keys.damage >= this.GetSpecialValueFor("damage_min") && keys.damage <= this.GetSpecialValueFor("damage_max") && keys.inflictor != this.GetAbilityPlus()) {
+        if ((keys.unit.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetSpecialValueFor("radius") && (keys.attacker.IsControllableByAnyPlayer() /**|| keys.attacker.IsRoshan()*/) && (keys.unit.IsRealUnit() || string.find(keys.attacker.GetDebugName(), "npc_dota_visage_familiar")) && keys.unit != keys.attacker && keys.damage >= this.GetSpecialValueFor("damage_min") && keys.damage <= this.GetSpecialValueFor("damage_max") && keys.inflictor != this.GetAbilityPlus()) {
             this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_visage_soul_assumption_counter", {
                 duration: this.GetSpecialValueFor("stack_duration"),
                 stacks: keys.damage

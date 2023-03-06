@@ -185,7 +185,7 @@ export class modifier_item_imba_the_triumvirate_v2_sange extends BaseModifier_Pl
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (keys.target == this.GetParentPlus() && keys.attacker.IsRealHero() && keys.attacker.GetTeam() != keys.target.GetTeam()) {
+        if (keys.target == this.GetParentPlus() && keys.attacker.IsRealUnit() && keys.attacker.GetTeam() != keys.target.GetTeam()) {
             this.IncrementStackCount();
             // this.GetParentPlus().CalculateStatBonus(true);
             this.SetDuration(this.GetRemainingTime() + this.sange_extension, true);
@@ -233,7 +233,7 @@ export class modifier_item_imba_the_triumvirate_v2_yasha extends BaseModifier_Pl
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (keys.attacker == this.GetParentPlus() && keys.target.IsRealHero() && keys.attacker.GetTeam() != keys.target.GetTeam()) {
+        if (keys.attacker == this.GetParentPlus() && keys.target.IsRealUnit() && keys.attacker.GetTeam() != keys.target.GetTeam()) {
             this.IncrementStackCount();
             // this.GetParentPlus().CalculateStatBonus(true);
             this.SetDuration(this.GetRemainingTime() + this.yasha_extension, true);
@@ -288,7 +288,7 @@ export class modifier_item_imba_the_triumvirate_v2_kaya extends BaseModifier_Plu
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
-        if (((keys.attacker == this.GetParentPlus() && keys.unit.IsRealHero()) || (keys.unit == this.GetParentPlus() && keys.attacker.IsRealHero())) && keys.damage_category == 0 && keys.attacker.GetTeam() != keys.unit.GetTeam()) {
+        if (((keys.attacker == this.GetParentPlus() && keys.unit.IsRealUnit()) || (keys.unit == this.GetParentPlus() && keys.attacker.IsRealUnit())) && keys.damage_category == 0 && keys.attacker.GetTeam() != keys.unit.GetTeam()) {
             if ((keys.damage >= this.kaya_min_health_dmg)) {
                 this.IncrementStackCount();
                 // this.GetParentPlus().CalculateStatBonus(true);

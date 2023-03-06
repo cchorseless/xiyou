@@ -329,7 +329,7 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
             this.illusion_3.ForceKill(false);
         }
         for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("search_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false))) {
-            if (unit.GetName() != this.GetCasterPlus().GetName() && (unit.IsRealHero() || unit.IsClone() || unit.IsTempestDouble() || unit.IsIllusion())) {
+            if (unit.GetName() != this.GetCasterPlus().GetName() && (unit.IsRealUnit() || unit.IsClone() || unit.IsTempestDouble() || unit.IsIllusion())) {
                 this.illusion_3 = this.GetCasterPlus().CreateIllusion(unit, {
                     outgoing_damage: -100,
                     incoming_damage: 0,
@@ -846,10 +846,10 @@ export class modifier_imba_phantom_lancer_juxtapose extends BaseModifier_Plus {
         }
         this.owner = this.GetParentPlus();
         this.owner.TempData().juxtapose_table = []
-        // if (this.GetParentPlus().IsRealHero()) {
+        // if (this.GetParentPlus().IsRealUnit()) {
         //     this.owner = this.GetParentPlus();
         //     this.owner.juxtapose_table = {}
-        // } else if (!this.GetParentPlus().IsRealHero() && this.GetParentPlus().GetOwnerPlus() &&
+        // } else if (!this.GetParentPlus().IsRealUnit() && this.GetParentPlus().GetOwnerPlus() &&
         //     this.GetParentPlus().GetOwnerPlus().GetAssignedHero()) {
         //     this.owner = this.GetParentPlus().GetOwnerPlus().GetAssignedHero();
         // }
@@ -863,9 +863,9 @@ export class modifier_imba_phantom_lancer_juxtapose extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && !keys.target.IsBuilding() && this.owner && this.owner.TempData().juxtapose_table && !this.owner.PassivesDisabled()) {
-            if (this.GetParentPlus().IsRealHero() && GFuncRandom.PRD(this.GetSpecialValueFor("proc_chance_pct"), this.owner.findBuff<modifier_imba_phantom_lancer_juxtapose>("modifier_imba_phantom_lancer_juxtapose"))) {
+            if (this.GetParentPlus().IsRealUnit() && GFuncRandom.PRD(this.GetSpecialValueFor("proc_chance_pct"), this.owner.findBuff<modifier_imba_phantom_lancer_juxtapose>("modifier_imba_phantom_lancer_juxtapose"))) {
                 this.duration = this.GetSpecialValueFor("illusion_duration");
-            } else if (!this.GetParentPlus().IsRealHero() && GFuncRandom.PRD(this.GetSpecialValueFor("illusion_proc_chance_pct"), this.owner.findBuff<modifier_imba_phantom_lancer_juxtapose>("modifier_imba_phantom_lancer_juxtapose"))) {
+            } else if (!this.GetParentPlus().IsRealUnit() && GFuncRandom.PRD(this.GetSpecialValueFor("illusion_proc_chance_pct"), this.owner.findBuff<modifier_imba_phantom_lancer_juxtapose>("modifier_imba_phantom_lancer_juxtapose"))) {
                 this.duration = this.GetSpecialValueFor("illusion_from_illusion_duration");
             }
             if (GameFunc.GetCount((this.owner.TempData().juxtapose_table)) < this.GetAbilityPlus().GetTalentSpecialValueFor("max_illusions") && this.duration > 0 && this.owner.TempData().juxtapose_table) {

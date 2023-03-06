@@ -63,7 +63,7 @@
 //     let caster = keys.caster;
 //     let item = keys.ability;
 //     let item_level = item.GetLevel() - 1;
-//     if (caster.HasModifier("modifier_arc_warden_tempest_double") || (!caster.IsRealHero())) {
+//     if (caster.HasModifier("modifier_arc_warden_tempest_double") || (!caster.IsRealUnit())) {
 //         return undefined;
 //     }
 //     if (caster.WillReincarnate()) {

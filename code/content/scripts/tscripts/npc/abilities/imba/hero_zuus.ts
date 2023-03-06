@@ -649,7 +649,7 @@ export class modifier_zuus_nimbus_storm extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACKED)
     CC_OnAttacked(params: ModifierAttackEvent): void {
         if (params.target == this.GetParentPlus()) {
-            if (params.attacker.IsRealHero()) {
+            if (params.attacker.IsRealUnit()) {
                 if (params.attacker.IsRangedAttacker()) {
                     this.GetParentPlus().SetHealth(this.GetParentPlus().GetHealth() - this.GetParentPlus().GetMaxHealth() / this.GetSpecialValueFor("ranged_hero_attack"));
                 } else {

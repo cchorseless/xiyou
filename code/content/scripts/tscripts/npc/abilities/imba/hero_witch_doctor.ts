@@ -65,7 +65,7 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
     OnProjectileHit_ExtraData(hTarget: IBaseNpc_Plus | undefined, vLocation: Vector, ExtraData: any): boolean | void {
         EmitSoundOn("Hero_WitchDoctor.Paralyzing_Cask_Bounce", hTarget);
         if (hTarget) {
-            if (hTarget.IsRealHero() || hTarget.IsConsideredHero() || hTarget.IsRoshan()) {
+            if (hTarget.IsRealUnit() || hTarget.IsConsideredHero() || hTarget.IsRoshan()) {
                 if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
                     if (!hTarget.IsMagicImmune() && (ExtraData.bFirstCast == 0 || !hTarget.TriggerSpellAbsorb(this))) {
                         if (IsServer() && this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_4")) {
@@ -970,7 +970,7 @@ export class modifier_imba_death_ward extends BaseModifier_Plus {
         if (params.attacker == this.GetParentPlus()) {
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_5")) {
                 if (!params.unit.IsAlive()) {
-                    if (params.unit.IsRealHero()) {
+                    if (params.unit.IsRealUnit()) {
                         let talent_ward = this.GetAbilityPlus<imba_witch_doctor_death_ward>().CreateWard(params.unit.GetAbsOrigin(), true);
                         talent_ward.TempData().bIsMiniDeathWard = true;
                         talent_ward.EmitSound("Hero_WitchDoctor.Death_WardBuild");

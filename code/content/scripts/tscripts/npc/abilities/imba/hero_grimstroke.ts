@@ -166,7 +166,7 @@ export class imba_grimstroke_dark_artistry extends BaseAbility_Plus {
                         }
                     }
                 }
-                if ((target.IsRealHero() || target.IsClone()) && this.GetIntrinsicModifierName()) {
+                if ((target.IsRealUnit() || target.IsClone()) && this.GetIntrinsicModifierName()) {
                     let brush_extend_modifier = this.GetCasterPlus().FindModifierByNameAndCaster(this.GetIntrinsicModifierName(), this.GetCasterPlus());
                     if (brush_extend_modifier) {
                         brush_extend_modifier.SetStackCount(brush_extend_modifier.GetStackCount() + this.GetSpecialValueFor("brush_extend_range_per_hero"));

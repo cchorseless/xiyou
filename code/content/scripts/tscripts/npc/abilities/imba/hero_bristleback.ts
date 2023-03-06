@@ -339,7 +339,7 @@ export class modifier_imba_bristleback_quillspray_thinker extends BaseModifier_P
                     duration: this.quill_stack_duration * (1 - enemy.GetStatusResistance())
                 });
                 table.insert(this.hit_enemies, enemy);
-                if (!enemy.IsAlive() && enemy.IsRealHero() && (enemy.IsReincarnating && !enemy.IsReincarnating())) {
+                if (!enemy.IsAlive() && enemy.IsRealUnit() && (enemy.IsReincarnating && !enemy.IsReincarnating())) {
                     this.caster.EmitSound("bristleback_bristle_quill_spray_0" + math.random(1, 6));
                 }
             }

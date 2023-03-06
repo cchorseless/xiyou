@@ -200,7 +200,7 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
             if (GameFunc.GetCount(enemies) > 0) {
                 for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     target_unit = target_unit || enemy;
-                    if (enemy.IsRealHero()) {
+                    if (enemy.IsRealUnit()) {
                         target_unit = enemy;
                         return;
                     }
@@ -1312,7 +1312,7 @@ export class modifier_imba_gyroshell_impact_check extends BaseModifier_Plus {
             let enemies_hit = 0;
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.hit_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
-                if (enemy.IsRealHero() && !enemy.IsMagicImmune()) {
+                if (enemy.IsRealUnit() && !enemy.IsMagicImmune()) {
                     if (!enemy.HasModifier("modifier_pangolier_gyroshell_timeout")) {
                         enemies_hit = enemies_hit + 1;
                         if (this.GetCasterPlus().HasTalent("special_bonus_imba_pangolier_7")) {

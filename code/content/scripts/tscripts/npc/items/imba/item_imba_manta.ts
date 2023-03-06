@@ -116,7 +116,7 @@ export class modifier_item_manta_passive extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (this.GetItemPlus() && this.GetItemPlus().GetName() == "item_imba_manta_2" && keys.unit == this.GetParentPlus() && this.GetParentPlus().IsRealHero() && keys.attacker != this.GetParentPlus() && (!this.GetParentPlus().IsReincarnating || (this.GetParentPlus().IsReincarnating && !this.GetParentPlus().IsReincarnating())) && (keys.attacker.IsRealHero() || keys.attacker.IsClone() || keys.attacker.IsTempestDouble() || keys.attacker.IsIllusion())) {
+        if (this.GetItemPlus() && this.GetItemPlus().GetName() == "item_imba_manta_2" && keys.unit == this.GetParentPlus() && this.GetParentPlus().IsRealUnit() && keys.attacker != this.GetParentPlus() && (!this.GetParentPlus().IsReincarnating || (this.GetParentPlus().IsReincarnating && !this.GetParentPlus().IsReincarnating())) && (keys.attacker.IsRealUnit() || keys.attacker.IsClone() || keys.attacker.IsTempestDouble() || keys.attacker.IsIllusion())) {
             if (!keys.attacker.IsRangedAttacker()) {
                 this.outgoing_damage = this.GetItemPlus().GetSpecialValueFor("images_do_damage_percent_melee");
                 this.incoming_damage = this.GetItemPlus().GetSpecialValueFor("images_take_damage_percent_melee");

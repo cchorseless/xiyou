@@ -920,7 +920,7 @@ export class modifier_imba_broodmother_insatiable_hunger extends BaseModifier_Pl
         let target = keys.unit;
         let attacker = keys.attacker;
         if (attacker == this.caster || (IsSpiderling(attacker) && attacker.GetOwner() == this.caster)) {
-            if (target.IsRealHero() && this.caster.IsAlive()) {
+            if (target.IsRealUnit() && this.caster.IsAlive()) {
                 this.caster.AddNewModifier(this.caster, this.ability, this.modifier_satistied, {
                     duration: this.satisfied_duration
                 });
@@ -1223,7 +1223,7 @@ export class modifier_imba_broodmother_poison_sting_debuff extends BaseModifier_
             for (const entindex of (this.spiders)) {
                 let npc = EntIndexToHScript(entindex) as IBaseNpc_Plus;
                 if (npc && !npc.IsNull() && npc.IsAlive() && npc.HasModifier("modifier_imba_broodmother_poison_sting")) {
-                    if ((keys.unit.IsRealHero() || keys.unit.IsClone())) {
+                    if ((keys.unit.IsRealUnit() || keys.unit.IsClone())) {
                         npc.findBuff<modifier_imba_broodmother_poison_sting>("modifier_imba_broodmother_poison_sting").SetStackCount(npc.FindModifierByName("modifier_imba_broodmother_poison_sting").GetStackCount() + this.hero_scale);
                     } else {
                         npc.findBuff<modifier_imba_broodmother_poison_sting>("modifier_imba_broodmother_poison_sting").SetStackCount(npc.FindModifierByName("modifier_imba_broodmother_poison_sting").GetStackCount() + this.scale);
@@ -1509,7 +1509,7 @@ export class modifier_imba_broodmother_spiderking_poison_sting_debuff extends Ba
             for (const entindex of this.spiders) {
                 let npc = EntIndexToHScript(entindex) as IBaseNpc_Plus;
                 if (npc && !npc.IsNull() && npc.IsAlive() && npc.HasModifier("modifier_imba_broodmother_spiderking_poison_sting")) {
-                    if ((keys.unit.IsRealHero() || keys.unit.IsClone())) {
+                    if ((keys.unit.IsRealUnit() || keys.unit.IsClone())) {
                         npc.findBuff<modifier_imba_broodmother_spiderking_poison_sting>("modifier_imba_broodmother_spiderking_poison_sting").SetStackCount(npc.FindModifierByName("modifier_imba_broodmother_spiderking_poison_sting").GetStackCount() + this.hero_scale);
                     } else {
                         npc.findBuff<modifier_imba_broodmother_spiderking_poison_sting>("modifier_imba_broodmother_spiderking_poison_sting").SetStackCount(npc.FindModifierByName("modifier_imba_broodmother_spiderking_poison_sting").GetStackCount() + this.scale);

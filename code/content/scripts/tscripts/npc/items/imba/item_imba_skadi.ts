@@ -32,7 +32,7 @@ export class item_imba_skadi extends BaseItem_Plus {
             let radius = this.GetSpecialValueFor("base_radius");
             let duration = this.GetSpecialValueFor("base_duration");
             let damage = this.GetSpecialValueFor("base_damage");
-            if (caster.IsRealHero() && caster.GetStrength && caster.GetAgility && caster.GetIntellect) {
+            if (caster.IsRealUnit() && caster.GetStrength && caster.GetAgility && caster.GetIntellect) {
                 radius = radius + caster.GetStrength() * this.GetSpecialValueFor("radius_per_str");
                 duration = duration + caster.GetIntellect() * this.GetSpecialValueFor("duration_per_int");
                 damage = damage + caster.GetAgility() * this.GetSpecialValueFor("damage_per_agi");

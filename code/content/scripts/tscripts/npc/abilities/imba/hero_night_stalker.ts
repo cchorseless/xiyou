@@ -30,7 +30,7 @@ export class modifier_imba_stalker_in_the_night extends BaseModifier_Plus {
             if (this.caster.IsIllusion()) {
                 let heroes = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_DEAD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_CLOSEST, false);
                 for (const [_, hero] of GameFunc.iPair(heroes)) {
-                    if (hero.IsRealHero() && hero.GetUnitName() == this.caster.GetUnitName()) {
+                    if (hero.IsRealUnit() && hero.GetUnitName() == this.caster.GetUnitName()) {
                         let modifier_stalker_handler = hero.FindModifierByName(this.modifier_stalker);
                         if (modifier_stalker_handler) {
                             let stacks = modifier_stalker_handler.GetStackCount();
@@ -402,7 +402,7 @@ export class modifier_imba_crippling_fear_silence extends BaseModifier_Plus {
         if (IsServer()) {
             let target = keys.target;
             if (this.parent == target) {
-                if (!this.parent.IsRealHero()) {
+                if (!this.parent.IsRealUnit()) {
                     return undefined;
                 }
                 this.caster.StartGesture(GameActivity_t.ACT_DOTA_VICTORY);
@@ -585,7 +585,7 @@ export class modifier_imba_hunter_in_the_night extends BaseModifier_Plus {
         this.as_increase_per_stack = this.ability.GetSpecialValueFor("as_increase_per_stack");
         if (IsServer()) {
             this.AddTimer(FrameTime(), () => {
-                if (this.caster.IsRealHero()) {
+                if (this.caster.IsRealUnit()) {
                     this.particle_change_fx = ResHelper.CreateParticleEx(this.particle_change, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster);
                     ParticleManager.SetParticleControl(this.particle_change_fx, 0, this.caster.GetAbsOrigin());
                     ParticleManager.SetParticleControl(this.particle_change_fx, 1, this.caster.GetAbsOrigin());

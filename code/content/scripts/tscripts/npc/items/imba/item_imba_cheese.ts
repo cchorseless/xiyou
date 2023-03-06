@@ -72,7 +72,7 @@ export class modifier_item_imba_cheese_death_prevention extends BaseModifier_Plu
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MIN_HEALTH)
     CC_GetMinHealth(): number {
-        if (this.GetItemPlus().IsCooldownReady() && this.GetParentPlus().IsRealHero()) {
+        if (this.GetItemPlus().IsCooldownReady() && this.GetParentPlus().IsRealUnit()) {
             return 1;
         }
         return undefined;

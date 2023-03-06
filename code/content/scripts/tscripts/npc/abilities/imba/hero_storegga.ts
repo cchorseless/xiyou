@@ -237,7 +237,7 @@ export class storegga_grab_throw extends BaseAbility_Plus {
             EmitSoundOnLocationWithCaster(vLocation, "Ability.TossImpact", this.GetCasterPlus());
             if (this.hThrowTarget != undefined) {
                 this.hThrowBuff.Destroy();
-                if (this.hThrowTarget.IsRealHero()) {
+                if (this.hThrowTarget.IsRealUnit()) {
                     let damageInfo = {
                         victim: this.hThrowTarget,
                         attacker: this.GetCasterPlus(),

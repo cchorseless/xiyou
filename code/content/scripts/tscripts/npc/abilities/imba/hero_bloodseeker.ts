@@ -150,7 +150,7 @@ export class modifier_imba_bloodrage_buff_stats extends BaseModifier_Plus {
                 params.attacker.Heal(heal, this.GetAbilityPlus());
                 let healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetParentPlus());
                 ParticleManager.ReleaseParticleIndex(healFX);
-            } else if (params.unit.IsRealHero() && GFuncVector.AsVector(this.GetParentPlus().GetAbsOrigin() - params.unit.GetAbsOrigin()).Length2D() <= this.health_bonus_aoe) {
+            } else if (params.unit.IsRealUnit() && GFuncVector.AsVector(this.GetParentPlus().GetAbsOrigin() - params.unit.GetAbsOrigin()).Length2D() <= this.health_bonus_aoe) {
                 let heal = params.unit.GetMaxHealth() * (this.health_bonus_pct / 100) * (this.health_bonus_share_percent * 0.01);
                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetParentPlus(), heal, undefined);
                 this.GetParentPlus().Heal(heal, this.GetAbilityPlus());
@@ -337,7 +337,7 @@ export class modifier_imba_blood_bath_debuff_silence extends BaseModifier_Plus {
     // }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(params: ModifierInstanceEvent) {
-        if (params.unit == this.GetParentPlus() && params.unit.IsRealHero()) {
+        if (params.unit == this.GetParentPlus() && params.unit.IsRealUnit()) {
             for (let i = 0; i < 16; i++) {
                 let ability = this.GetCasterPlus().GetAbilityByIndex(i);
                 if (ability && !ability.IsCooldownReady()) {
@@ -478,7 +478,7 @@ export class modifier_imba_thirst_passive extends BaseModifier_Plus {
                     enemy.RemoveModifierByName("modifier_imba_thirst_debuff_vision");
                 } else {
                     enemy.TempData().thirstDeathTimer = enemy.TempData().thirstDeathTimer || 0;
-                    if (enemy && !enemy.IsNull() && (enemy.IsRealHero() || enemy.IsClone()) && enemy.IsAlive() || (!enemy.IsAlive() && enemy.TempData().thirstDeathTimer < this.deathstick)) {
+                    if (enemy && !enemy.IsNull() && (enemy.IsRealUnit() || enemy.IsClone()) && enemy.IsAlive() || (!enemy.IsAlive() && enemy.TempData().thirstDeathTimer < this.deathstick)) {
                         if (enemy.GetHealthPercent() < this.minhp) {
                             let enemyHp = (this.minhp - enemy.GetHealthPercent());
                             if (enemyHp > (this.minhp - this.maxhp) && !enemy.IsMagicImmune()) {
@@ -524,7 +524,7 @@ export class modifier_imba_thirst_passive extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         if (IsServer()) {
-            if (params.attacker && params.attacker.GetTeam() == this.GetCasterPlus().GetTeam() && params.unit.GetTeam() != this.GetCasterPlus().GetTeam() && params.attacker.IsRealHero() && params.unit.IsRealHero()) {
+            if (params.attacker && params.attacker.GetTeam() == this.GetCasterPlus().GetTeam() && params.unit.GetTeam() != this.GetCasterPlus().GetTeam() && params.attacker.IsRealUnit() && params.unit.IsRealUnit()) {
                 let duration = this.GetAbilityPlus().GetTalentSpecialValueFor("atk_buff_duration");
                 let attackList = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_thirst_haste") as modifier_imba_thirst_haste[];
                 let confirmTheKill = false;
@@ -660,7 +660,7 @@ export class modifier_bloodseeker_thirst_v2 extends BaseModifier_Plus {
         this.max_thirst_enemies = 0;
         if (!this.GetParentPlus().PassivesDisabled()) {
             for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_DEAD, FindOrder.FIND_ANY_ORDER, false))) {
-                if ((enemy.IsRealHero() || enemy.IsClone() || enemy.IsTempestDouble()) && enemy.GetHealthPercent() <= this.GetSpecialValueFor("min_bonus_pct") && (enemy.IsAlive() || enemy.HasModifier("modifier_bloodseeker_thirst_v2_vision"))) {
+                if ((enemy.IsRealUnit() || enemy.IsClone() || enemy.IsTempestDouble()) && enemy.GetHealthPercent() <= this.GetSpecialValueFor("min_bonus_pct") && (enemy.IsAlive() || enemy.HasModifier("modifier_bloodseeker_thirst_v2_vision"))) {
                     this.health_percent_sum = this.health_percent_sum + (this.GetSpecialValueFor("min_bonus_pct") - math.max(enemy.GetHealthPercent(), this.GetSpecialValueFor("max_bonus_pct")));
                     if (enemy.GetHealthPercent() <= this.GetSpecialValueFor("visibility_threshold_pct")) {
                         this.max_thirst_enemies = this.max_thirst_enemies + 1;
@@ -974,7 +974,7 @@ export class modifier_imba_rupture_charges extends BaseModifier_Plus {
             this.charge_replenish_rate = this.ability.GetSpecialValueFor("scepter_charge_replenish_rate");
             this.SetStackCount(this.max_charge_count);
 
-            // if (this.caster.IsRealHero()) {
+            // if (this.caster.IsRealUnit()) {
             //     this.SetStackCount(this.max_charge_count);
             // } else {
             //     let playerid = this.caster.GetPlayerID();

@@ -59,7 +59,7 @@ export class imba_medusa_split_shot extends BaseAbility_Plus {
         this.toggle_state = this.GetToggleState();
     }
     OnUpgrade(): void {
-        if (this.GetCasterPlus().IsIllusion() && this.GetCasterPlus().GetPlayerOwner() && this.GetCasterPlus().GetPlayerOwner().GetAssignedHero() && this.GetCasterPlus().GetPlayerOwner().GetAssignedHero().IsRealHero() && this.GetCasterPlus().GetPlayerOwner().GetAssignedHero().FindAbilityByName(this.GetName()) && this.GetCasterPlus().GetPlayerOwner().GetAssignedHero().FindAbilityByName(this.GetName()).GetToggleState() && !this.GetToggleState()) {
+        if (this.GetCasterPlus().IsIllusion() && this.GetCasterPlus().GetPlayerOwner() && this.GetCasterPlus().GetPlayerOwner().GetAssignedHero() && this.GetCasterPlus().GetPlayerOwner().GetAssignedHero().IsRealUnit() && this.GetCasterPlus().GetPlayerOwner().GetAssignedHero().FindAbilityByName(this.GetName()) && this.GetCasterPlus().GetPlayerOwner().GetAssignedHero().FindAbilityByName(this.GetName()).GetToggleState() && !this.GetToggleState()) {
             this.ToggleAbility();
         }
     }

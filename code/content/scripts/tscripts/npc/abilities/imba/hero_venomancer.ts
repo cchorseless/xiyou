@@ -492,7 +492,7 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
                 duration: ExtraData.duration * (1 - target.GetStatusResistance())
             });
             target.EmitSound("Hero_Venomancer.VenomousGaleImpact");
-            if ((target.IsRealHero() || target.IsClone()) && this.GetCasterPlus().HasTalent("special_bonus_imba_venomancer_venomous_gale_plague_wards") && this.GetCasterPlus().HasAbility("imba_venomancer_plague_ward_v2") && this.GetCasterPlus().findAbliityPlus<imba_venomancer_plague_ward_v2>("imba_venomancer_plague_ward_v2").IsTrained()) {
+            if ((target.IsRealUnit() || target.IsClone()) && this.GetCasterPlus().HasTalent("special_bonus_imba_venomancer_venomous_gale_plague_wards") && this.GetCasterPlus().HasAbility("imba_venomancer_plague_ward_v2") && this.GetCasterPlus().findAbliityPlus<imba_venomancer_plague_ward_v2>("imba_venomancer_plague_ward_v2").IsTrained()) {
                 let starting_position = target.GetAbsOrigin() + RandomVector(100) as Vector;
                 for (let num = 1; num <= this.GetCasterPlus().GetTalentValue("special_bonus_imba_venomancer_venomous_gale_plague_wards"); num++) {
                     this.GetCasterPlus().findAbliityPlus<imba_venomancer_plague_ward_v2>("imba_venomancer_plague_ward_v2").OnSpellStart(RotatePosition(target.GetAbsOrigin(), QAngle(0, (360 / this.GetCasterPlus().GetTalentValue("special_bonus_imba_venomancer_venomous_gale_plague_wards")) * num, 0), starting_position));

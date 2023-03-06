@@ -194,7 +194,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
         }
     }
     OnOwnerDied(): void {
-        if (this.GetCasterPlus().IsRealHero()) {
+        if (this.GetCasterPlus().IsRealUnit()) {
             let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetCastRange(this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus()), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
             for (const unit of (units)) {
                 if (unit != this.GetCasterPlus()) {
@@ -1005,7 +1005,7 @@ export class modifier_over_channel_reduction extends BaseModifier_Plus {
 @registerAbility()
 export class imba_abaddon_borrowed_time extends BaseAbility_Plus {
     GetIntrinsicModifierName(): string {
-        if (this.GetCasterPlus().IsRealHero()) {
+        if (this.GetCasterPlus().IsRealUnit()) {
             return "modifier_imba_borrowed_time_handler";
         }
     }

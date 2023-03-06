@@ -322,7 +322,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (hTarget == this.GetCasterPlus() || (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsRoshan()) && hTarget.GetLevel() <= this.GetSpecialValueFor("level_req") && (!hTarget.IsAncient() || (hTarget.IsAncient() && this.GetCasterPlus().HasAbility("imba_chen_hand_of_god") && this.GetCasterPlus().findAbliityPlus<imba_chen_hand_of_god>("imba_chen_hand_of_god").IsTrained() && this.GetCasterPlus().HasScepter())) || (hTarget.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && (hTarget.IsRealHero() || hTarget.IsClone() || hTarget.GetOwnerEntity() == this.GetCasterPlus() || (hTarget.GetPlayerID && this.GetCasterPlus().GetPlayerID && hTarget.GetPlayerID() == this.GetCasterPlus().GetPlayerID()) || hTarget.IsOther()))) {
+        if (hTarget == this.GetCasterPlus() || (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsRoshan()) && hTarget.GetLevel() <= this.GetSpecialValueFor("level_req") && (!hTarget.IsAncient() || (hTarget.IsAncient() && this.GetCasterPlus().HasAbility("imba_chen_hand_of_god") && this.GetCasterPlus().findAbliityPlus<imba_chen_hand_of_god>("imba_chen_hand_of_god").IsTrained() && this.GetCasterPlus().HasScepter())) || (hTarget.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && (hTarget.IsRealUnit() || hTarget.IsClone() || hTarget.GetOwnerEntity() == this.GetCasterPlus() || (hTarget.GetPlayerID && this.GetCasterPlus().GetPlayerID && hTarget.GetPlayerID() == this.GetCasterPlus().GetPlayerID()) || hTarget.IsOther()))) {
             return UnitFilterResult.UF_SUCCESS;
         } else if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && hTarget.IsCreep() && !hTarget.IsRoshan() && hTarget.GetLevel() > this.GetSpecialValueFor("level_req")) {
             return UnitFilterResult.UF_FAIL_CUSTOM;
@@ -676,7 +676,7 @@ export class modifier_imba_chen_holy_persuasion_teleport extends BaseModifier_Pl
         if (!IsServer()) {
             return;
         }
-        if (keys.unit == this.GetParentPlus() && keys.attacker != this.GetParentPlus() && (keys.attacker.IsRealHero() || (keys.attacker as IBaseNpc_Plus).IsRoshan()) && keys.original_damage > 0) {
+        if (keys.unit == this.GetParentPlus() && keys.attacker != this.GetParentPlus() && (keys.attacker.IsRealUnit() || (keys.attacker as IBaseNpc_Plus).IsRoshan()) && keys.original_damage > 0) {
             this.Destroy();
         }
     }
@@ -922,11 +922,11 @@ export class imba_chen_hand_of_god extends BaseAbility_Plus {
             voiceline = "chen_chen_ability_handgod_0" + RandomInt(1, 3);
         }
         for (const [_, ally] of GameFunc.iPair(allies)) {
-            if (ally.IsRealHero() || ally.IsClone() || ally.GetOwnerEntity() == this.GetCasterPlus() || (ally.GetPlayerID() == this.GetCasterPlus().GetPlayerID())) {
-                if (voiceline && ally.IsRealHero()) {
+            if (ally.IsRealUnit() || ally.IsClone() || ally.GetOwnerEntity() == this.GetCasterPlus() || (ally.GetPlayerID() == this.GetCasterPlus().GetPlayerID())) {
+                if (voiceline && ally.IsRealUnit()) {
                     ally.EmitSound(voiceline);
                 }
-                if (ally.IsRealHero()) {
+                if (ally.IsRealUnit()) {
                     ally.EmitSound("Hero_Chen.HandOfGodHealHero");
                 } else if (ally.IsCreep()) {
                     ally.EmitSound("Hero_Chen.HandOfGodHealCreep");

@@ -428,7 +428,7 @@ export class modifier_imba_slark_pounce extends BaseModifierMotionBoth_Plus {
             return;
         }
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.pounce_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_CLOSEST, false))) {
-            if (enemy.IsRealHero() || enemy.IsClone() || enemy.IsTempestDouble()) {
+            if (enemy.IsRealUnit() || enemy.IsClone() || enemy.IsTempestDouble()) {
                 enemy.EmitSound("Hero_Slark.Pounce.Impact");
                 if (this.GetParentPlus().GetName().includes("slark")) {
                     this.GetParentPlus().EmitSound("slark_slark_pounce_0" + RandomInt(1, 6));
@@ -677,7 +677,7 @@ export class modifier_imba_slark_essence_shift extends BaseModifier_Plus {
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (this.GetAbilityPlus().IsTrained() && keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && !this.GetParentPlus().IsIllusion() && /** (keys.target.IsRealHero() || keys.target.IsClone()) && **/ !keys.target.IsTempestDouble() && keys.attacker.GetTeam() != keys.target.GetTeam()) {
+        if (this.GetAbilityPlus().IsTrained() && keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && !this.GetParentPlus().IsIllusion() && /** (keys.target.IsRealUnit() || keys.target.IsClone()) && **/ !keys.target.IsTempestDouble() && keys.attacker.GetTeam() != keys.target.GetTeam()) {
             this.shift_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_slark/slark_essence_shift.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, keys.target);
             ParticleManager.ReleaseParticleIndex(this.shift_particle);
             table.insert(this.stack_table, {
@@ -769,7 +769,7 @@ export class modifier_imba_slark_essence_shift_debuff_counter extends BaseModifi
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && (keys.target.IsRealHero() || keys.target.IsClone()) && !keys.target.IsTempestDouble()) {
+        if (keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && (keys.target.IsRealUnit() || keys.target.IsClone()) && !keys.target.IsTempestDouble()) {
             table.insert(this.stack_table, {
                 apply_game_time: GameRules.GetDOTATime(true, true),
                 duration: this.GetAbilityPlus().GetTalentSpecialValueFor("duration")

@@ -60,7 +60,7 @@ export class modifier_item_imba_gem_of_true_sight extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetParentPlus().IsCourier() || (this.GetParentPlus().IsConsideredHero() && !this.GetParentPlus().IsRealHero())) {
+        if (this.GetParentPlus().IsCourier() || (this.GetParentPlus().IsConsideredHero() && !this.GetParentPlus().IsRealUnit())) {
             this.GetParentPlus().RemoveModifierByName("modifier_item_imba_gem_of_true_sight");
             return;
         }
@@ -88,7 +88,7 @@ export class modifier_item_imba_gem_of_true_sight extends BaseModifier_Plus {
             }
         }
         let item = this.GetItemPlus<item_imba_gem>();
-        if (!this.GetParentPlus().IsRealHero()) {
+        if (!this.GetParentPlus().IsRealUnit()) {
             this.GetParentPlus().DropItem(item, true);
             item.dummy_unit = BaseNpc_Plus.CreateUnitByName("npc_dummy_unit_perma", pos, this.GetCasterPlus().GetTeam(), true, undefined, undefined);
             item.dummy_unit.AddNewModifier(this.GetCasterPlus(), item, "modifier_item_imba_gem_of_true_sight_dropped", {});

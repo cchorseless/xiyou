@@ -164,7 +164,7 @@ export class modifier_imba_terrorblade_reflection_unit extends BaseModifier_Plus
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (EntIndexToHScript(this.enemy_entindex) && !EntIndexToHScript(this.enemy_entindex).IsNull() && keys.unit == EntIndexToHScript(this.enemy_entindex) && keys.unit.IsRealHero() && this.GetParentPlus().GetOwnerPlus() /**&& this.GetParentPlus().GetOwnerPlus().GetAssignedHero()*/ && this.GetParentPlus().GetOwnerPlus()/**.GetAssignedHero() */.HasModifier("modifier_imba_terrorblade_reflection_infinity_mirror_stacks")) {
+        if (EntIndexToHScript(this.enemy_entindex) && !EntIndexToHScript(this.enemy_entindex).IsNull() && keys.unit == EntIndexToHScript(this.enemy_entindex) && keys.unit.IsRealUnit() && this.GetParentPlus().GetOwnerPlus() /**&& this.GetParentPlus().GetOwnerPlus().GetAssignedHero()*/ && this.GetParentPlus().GetOwnerPlus()/**.GetAssignedHero() */.HasModifier("modifier_imba_terrorblade_reflection_infinity_mirror_stacks")) {
             this.GetParentPlus().GetOwnerPlus()/**.GetAssignedHero() */.findBuff<modifier_imba_terrorblade_reflection_infinity_mirror_stacks>("modifier_imba_terrorblade_reflection_infinity_mirror_stacks").IncrementStackCount();
         }
     }

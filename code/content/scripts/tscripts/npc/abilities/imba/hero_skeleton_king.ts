@@ -547,7 +547,7 @@ export class modifier_imba_vampiric_aura_buff extends BaseModifier_Plus {
                                 ParticleManager.SetParticleControlEnt(particle_lifesteal_fx, 0, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", caster.GetAbsOrigin(), true);
                                 ParticleManager.SetParticleControlEnt(particle_lifesteal_fx, 1, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
                                 ParticleManager.ReleaseParticleIndex(particle_lifesteal_fx);
-                                if (caster.IsRealHero()) {
+                                if (caster.IsRealUnit()) {
                                     let caster_heal = heal_amount * this.caster_heal * 0.01;
                                     caster.Heal(caster_heal, this.GetAbilityPlus());
                                 }
@@ -580,7 +580,7 @@ export class modifier_imba_vampiric_aura_buff extends BaseModifier_Plus {
                                 ParticleManager.SetParticleControlEnt(particle_lifesteal_fx, 0, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", caster.GetAbsOrigin(), true);
                                 ParticleManager.SetParticleControlEnt(particle_lifesteal_fx, 1, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
                                 ParticleManager.ReleaseParticleIndex(particle_lifesteal_fx);
-                                if (caster.IsRealHero()) {
+                                if (caster.IsRealUnit()) {
                                     let caster_heal = heal_amount * this.caster.GetTalentValue("special_bonus_imba_skeleton_king_1") * 0.01;
                                     caster.Heal(caster_heal, this.GetAbilityPlus());
                                 }
@@ -809,7 +809,7 @@ export class modifier_imba_mortal_strike extends BaseModifier_Plus {
                 this.mortal_critical_strike = false;
                 let bonus_health_pct = this.bonus_health_pct;
                 let new_stacks = damage * bonus_health_pct * 0.01;
-                if (target.IsRealHero()) {
+                if (target.IsRealUnit()) {
                     new_stacks = new_stacks * this.bonus_health_hero_mult;
                 }
                 new_stacks = math.ceil(new_stacks / this.stack_value);
@@ -823,7 +823,7 @@ export class modifier_imba_mortal_strike extends BaseModifier_Plus {
                     }
                 }
                 if (this.caster.HasTalent("special_bonus_imba_skeleton_king_8")) {
-                    if (target.IsRealHero()) {
+                    if (target.IsRealUnit()) {
                         if (!this.caster.HasModifier(this.modifier_strength)) {
                             this.caster.AddNewModifier(this.caster, this.ability, this.modifier_strength, {
                                 duration: this.bonus_health_duration
@@ -1148,7 +1148,7 @@ export class modifier_imba_reincarnation extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.REINCARNATION)
     CC_ReincarnateTime(): number {
         if (IsServer()) {
-            if (!this.can_die && this.caster.IsRealHero()) {
+            if (!this.can_die && this.caster.IsRealUnit()) {
                 return this.reincarnate_delay;
             }
             return undefined;
@@ -1193,7 +1193,7 @@ export class modifier_imba_reincarnation extends BaseModifier_Plus {
         return "modifier_imba_reincarnation_wraith_form_buff";
     }
     IsAura(): boolean {
-        if (!this.caster.IsNull() && this.caster.IsRealHero() && this.caster.HasScepter() && this.caster == this.GetParentPlus()) {
+        if (!this.caster.IsNull() && this.caster.IsRealUnit() && this.caster.HasScepter() && this.caster == this.GetParentPlus()) {
             return true;
         }
         return false;
@@ -1531,7 +1531,7 @@ export class modifier_imba_kingdom_come extends BaseModifier_Plus {
     CC_OnDeath(keys: ModifierInstanceEvent): void {
         if (IsServer() && !this.GetParentPlus().PassivesDisabled()) {
             let unit = keys.unit;
-            if (this.caster == unit && this.caster.IsRealHero()) {
+            if (this.caster == unit && this.caster.IsRealUnit()) {
                 this.create_kingdom();
             }
         }
@@ -1600,7 +1600,7 @@ export class modifier_imba_kingdom_come_slow extends BaseModifier_Plus {
             if (distance > this.radius) {
                 return undefined;
             }
-            if (this.parent.IsRealHero()) {
+            if (this.parent.IsRealUnit()) {
                 this.parent.AddNewModifier(this.caster, this.ability, this.modifier_stun, {
                     duration: this.stun_duration * (1 - this.parent.GetStatusResistance())
                 });

@@ -108,7 +108,7 @@ function CastShadowRazeOnPoint(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus
         }
         if (caster.HasModifier(modifier_harvest)) {
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
-                if (enemy.IsRealHero()) {
+                if (enemy.IsRealUnit()) {
                     return true;
                 }
             }
@@ -135,7 +135,7 @@ function ApplyShadowRazeDamage(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus
     if (caster.HasModifier(modifier_souls)) {
         let stacks = caster.findBuffStack(modifier_souls, caster);
         damage = damage + (stacks * damage_per_soul) + debuff_boost;
-        if (enemy.IsRealHero()) {
+        if (enemy.IsRealUnit()) {
             AddNecromasterySouls(caster, souls_per_raze);
         }
         if (!caster.PassivesDisabled()) {
@@ -862,7 +862,7 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
                 if (this.caster.HasTalent("special_bonus_imba_nevermore_4")) {
                     if (target.GetTeamNumber() != this.caster.GetTeamNumber() && target.IsCreep() || target.IsRealUnit()) {
                         let particle_lifesteal = "particles/generic_gameplay/generic_lifesteal.vpcf";
-                        if (this.caster.IsRealHero()) {
+                        if (this.caster.IsRealUnit()) {
                             let damage = keys.damage;
                             let stacks = this.GetStackCount();
                             let lifesteal_per_soul = this.caster.GetTalentValue("special_bonus_imba_nevermore_4");
@@ -877,7 +877,7 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
                         }
                     }
                 }
-                if (!target.IsRealHero() || attacker.GetTeam() == target.GetTeam()) {
+                if (!target.IsRealUnit() || attacker.GetTeam() == target.GetTeam()) {
                     return undefined;
                 }
                 AddNecromasterySouls(this.caster, this.hero_attack_soul_count);
@@ -922,7 +922,7 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
                     return;
                 }
                 let soul_count = 0;
-                if (target.IsRealHero()) {
+                if (target.IsRealUnit()) {
                     // todo GetKills?
                     // this.ability.hero_killed = (this.ability.hero_killed || (this.caster.GetKills() - 1)) + 1;
                     soul_count = this.hero_kill_soul_count;
@@ -1060,7 +1060,7 @@ export class modifier_imba_dark_lord_aura extends BaseModifier_Plus {
                         }
                         ProjectileManager.CreateTrackingProjectile(soul_projectile);
                     }
-                    if (enemy_hero.IsRealHero()) {
+                    if (enemy_hero.IsRealUnit()) {
                         AddNecromasterySouls(this.caster, soul_drain_count);
                     }
                 }
@@ -1318,7 +1318,7 @@ export class imba_nevermore_requiem extends BaseAbility_Plus {
         target.AddNewModifier(caster, ability, modifier_debuff, {
             duration: slow_duration * (1 - target.GetStatusResistance())
         });
-        if (caster.HasModifier(modifier_harvest) && target.IsRealHero()) {
+        if (caster.HasModifier(modifier_harvest) && target.IsRealUnit()) {
             let modifier_harvest_handler = caster.FindModifierByName(modifier_harvest);
             if (modifier_harvest_handler) {
                 modifier_harvest_handler.SetDuration(modifier_harvest_handler.GetRemainingTime() + harvest_line_duration_inc, true);
@@ -1388,7 +1388,7 @@ export class modifier_imba_reqiuem_debuff extends BaseModifier_Plus {
         this.ms_slow_pct = this.ability.GetSpecialValueFor("ms_slow_pct") * (-1);
         if (IsServer()) {
             this.scepter = this.caster.HasScepter();
-            if (this.scepter && this.parent.IsRealHero()) {
+            if (this.scepter && this.parent.IsRealUnit()) {
                 let requiem_screen_particle = ParticleManager.CreateParticleForPlayer(this.particle_black_screen, ParticleAttachment_t.PATTACH_EYES_FOLLOW, this.parent, PlayerResource.GetPlayer(this.parent.GetPlayerID()));
                 this.AddParticle(requiem_screen_particle, false, false, -1, false, false);
             }

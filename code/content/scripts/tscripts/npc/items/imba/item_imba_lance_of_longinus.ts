@@ -248,7 +248,7 @@ export class modifier_item_imba_lance_of_longinus_force_ally extends BaseModifie
             if (!this.attacked_target[enemy.entindex()]) {
                 attacker.PerformAttack(enemy, true, true, true, true, true, false, true);
                 this.attacked_target[enemy.entindex()] = enemy.entindex();
-                if (enemy.IsRealHero()) {
+                if (enemy.IsRealUnit()) {
                     let god_piercing_modifier = attacker.AddNewModifier(this.GetCasterPlus(), this.GetItemPlus(), "modifier_item_imba_lance_of_longinus_god_piercing_ally", {
                         duration: this.GetItemPlus().GetSpecialValueFor("god_piercing_duration")
                     }) as modifier_item_imba_lance_of_longinus_god_piercing_ally;

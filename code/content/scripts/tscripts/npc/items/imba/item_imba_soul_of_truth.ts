@@ -70,7 +70,7 @@ export class modifier_imba_soul_of_truth_buff extends BaseModifier_Plus {
             this.radius = hItem.GetSpecialValueFor("radius");
             this.armor = hItem.GetSpecialValueFor("armor");
             this.health_regen = hItem.GetSpecialValueFor("health_regen");
-        } else if (!this.GetParentPlus().IsRealHero()) {
+        } else if (!this.GetParentPlus().IsRealUnit()) {
             let main_hero = this.GetParentPlus().GetOwnerPlus();
             let main_hero_modifier = main_hero.FindModifierByName(this.GetName()) as modifier_imba_soul_of_truth_buff;
             if (main_hero && main_hero_modifier) {

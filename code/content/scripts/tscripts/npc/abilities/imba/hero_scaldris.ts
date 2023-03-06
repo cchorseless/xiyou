@@ -241,7 +241,7 @@ export class modifier_imba_antipode_passive extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (keys.attacker == this.GetParentPlus() && this.GetCasterPlus().HasScepter() && keys.unit.IsRealHero() && this.last_ability_cast && !this.last_ability_cast.IsNull() && this.GetParentPlus().HasAbility(this.last_ability_cast.GetName())) {
+        if (keys.attacker == this.GetParentPlus() && this.GetCasterPlus().HasScepter() && keys.unit.IsRealUnit() && this.last_ability_cast && !this.last_ability_cast.IsNull() && this.GetParentPlus().HasAbility(this.last_ability_cast.GetName())) {
             this.last_ability_cast.EndCooldown();
         }
     }

@@ -112,7 +112,7 @@ export class modifier_imba_black_queen_cape_passive extends BaseModifier_Plus {
         }
         let target = params.target;
         let cape_item_name = "item_imba_black_queen_cape";
-        if (!target.IsRealHero()) {
+        if (!target.IsRealUnit()) {
             return undefined;
         }
         if (this.parent.IsIllusion()) {

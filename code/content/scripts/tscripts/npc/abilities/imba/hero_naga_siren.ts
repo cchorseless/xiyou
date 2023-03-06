@@ -124,7 +124,7 @@ export class modifier_imba_naga_siren_mirror_image_perfect_image extends BaseMod
             return;
         }
         if (params.attacker == this.GetParentPlus()) {
-            if (params.unit.IsRealHero()) {
+            if (params.unit.IsRealUnit()) {
                 this.SetIllusionsStackCount(this.perfect_image_max_stacks);
             } else {
                 this.SetIllusionsStackCount(math.min(this.GetStackCount() + 1, this.perfect_image_max_stacks));

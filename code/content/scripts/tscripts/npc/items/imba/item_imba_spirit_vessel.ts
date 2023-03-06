@@ -127,7 +127,7 @@ export class modifier_item_imba_spirit_vessel extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (this.GetItemPlus() && keys.unit.IsRealHero() && this.GetCasterPlus().IsRealHero() && this.GetCasterPlus().GetTeam() != keys.unit.GetTeam() && (!keys.unit.IsReincarnating || (keys.unit.IsReincarnating && !keys.unit.IsReincarnating())) && this.GetCasterPlus().IsAlive() && (this.GetCasterPlus().GetAbsOrigin() - keys.unit.GetAbsOrigin() as Vector).Length2D() <= this.GetItemPlus().GetSpecialValueFor("soul_radius")) {
+        if (this.GetItemPlus() && keys.unit.IsRealUnit() && this.GetCasterPlus().IsRealUnit() && this.GetCasterPlus().GetTeam() != keys.unit.GetTeam() && (!keys.unit.IsReincarnating || (keys.unit.IsReincarnating && !keys.unit.IsReincarnating())) && this.GetCasterPlus().IsAlive() && (this.GetCasterPlus().GetAbsOrigin() - keys.unit.GetAbsOrigin() as Vector).Length2D() <= this.GetItemPlus().GetSpecialValueFor("soul_radius")) {
             let nearbyAllies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), keys.unit.GetAbsOrigin(), undefined, this.GetItemPlus().GetSpecialValueFor("soul_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_CLOSEST, false);
             for (const [_, ally] of GameFunc.iPair(nearbyAllies)) {
                 if (ally == this.GetCasterPlus()) {

@@ -382,7 +382,7 @@ export class modifier_imba_void_spirit_resonant_pulse_ring extends BaseModifier_
                     attacker: this.GetCasterPlus(),
                     ability: this.GetAbilityPlus()
                 });
-                if (enemy.IsRealHero() || enemy.IsClone() || enemy.IsTempestDouble()) {
+                if (enemy.IsRealUnit() || enemy.IsClone() || enemy.IsTempestDouble()) {
                     ProjectileManager.CreateTrackingProjectile({
                         EffectName: "particles/units/heroes/hero_void_spirit/pulse/void_spirit_pulse_absorb.vpcf",
                         Ability: this.GetAbilityPlus(),

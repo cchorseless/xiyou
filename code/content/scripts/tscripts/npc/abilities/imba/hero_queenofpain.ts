@@ -64,7 +64,7 @@ export class modifier_imba_delightful_torment_thinker extends BaseModifier_Plus 
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
         let parent = this.GetParentPlus();
         if (params.attacker == parent) {
-            if (params.unit.IsRealHero() && !parent.PassivesDisabled()) {
+            if (params.unit.IsRealUnit() && !parent.PassivesDisabled()) {
                 let cooldown_reduction = this.GetSpecialValueFor("cooldown_reduction");
                 for (let i = 0; i <= 15; i++) {
                     let current_ability = parent.GetAbilityByIndex(i);
@@ -879,7 +879,7 @@ export class modifier_imba_sonic_wave extends BaseModifier_Plus {
                     ParticleManager.ReleaseParticleIndex(lifesteal_pfx);
                     let self_lifesteal_pfx = ResHelper.CreateParticleEx("particles/hero/queenofpain/self_lifesteal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, parent);
                     ParticleManager.SetParticleControlEnt(self_lifesteal_pfx, 0, parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", parent.GetAbsOrigin(), true);
-                    if (params.unit.IsRealHero()) {
+                    if (params.unit.IsRealUnit()) {
                         parent.Heal(params.damage * lifesteal_amount * 0.01, ability);
                     } else {
                         parent.Heal(params.damage * lifesteal_amount * 0.005, ability);

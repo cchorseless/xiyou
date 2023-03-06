@@ -970,7 +970,7 @@ export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
                 }
                 let nonHeroes = FindUnitsInRadius(this.casterTeam, this.caster.GetAbsOrigin(), undefined, this.hitRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
                 for (const [_, nonHero] of GameFunc.iPair(nonHeroes)) {
-                    if (!this.hitEnemies[nonHero.GetEntityIndex()] && !nonHero.IsRealHero() && !nonHero.IsClone() && !nonHero.IsTempestDouble()) {
+                    if (!this.hitEnemies[nonHero.GetEntityIndex()] && !nonHero.IsRealUnit() && !nonHero.IsClone() && !nonHero.IsTempestDouble()) {
                         this.hitEnemies[nonHero.GetEntityIndex()] = true;
                         ApplyDamage({
                             victim: nonHero,

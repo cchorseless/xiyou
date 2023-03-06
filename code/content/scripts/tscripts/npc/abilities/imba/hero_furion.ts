@@ -290,7 +290,7 @@ export class modifier_imba_furion_wrath_of_nature_spawn extends BaseModifier_Plu
         if (keys.unit == this.GetParentPlus() && (!this.GetParentPlus().IsReincarnating || !this.GetParentPlus().IsReincarnating())) {
             if (this.GetCasterPlus().HasModifier("modifier_imba_furion_wrath_of_nature")) {
                 if (this.GetCasterPlus().HasScepter()) {
-                    if ((this.GetParentPlus().IsRealHero() || this.GetParentPlus().IsClone()) && this.treant_bonus_damage_hero) {
+                    if ((this.GetParentPlus().IsRealUnit() || this.GetParentPlus().IsClone()) && this.treant_bonus_damage_hero) {
                         this.GetCasterPlus().findBuff<modifier_imba_furion_wrath_of_nature>("modifier_imba_furion_wrath_of_nature").SetStackCount(this.GetCasterPlus().FindModifierByName("modifier_imba_furion_wrath_of_nature").GetStackCount() + this.treant_bonus_damage_hero);
                     } else if (this.treant_bonus_damage) {
                         this.GetCasterPlus().findBuff<modifier_imba_furion_wrath_of_nature>("modifier_imba_furion_wrath_of_nature").SetStackCount(this.GetCasterPlus().FindModifierByName("modifier_imba_furion_wrath_of_nature").GetStackCount() + this.treant_bonus_damage);

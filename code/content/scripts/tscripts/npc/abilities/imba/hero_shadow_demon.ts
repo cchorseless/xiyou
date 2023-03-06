@@ -595,7 +595,7 @@ export class modifier_imba_soul_catcher_debuff extends BaseModifier_Plus {
             return;
         }
         let unit = keys.unit;
-        if (unit == this.parent && this.parent.IsRealHero()) {
+        if (unit == this.parent && this.parent.IsRealUnit()) {
             if (this.caster.HasAbility(this.shadow_poison_ability)) {
                 let shadow_poison_ability_handle = this.caster.FindAbilityByName(this.shadow_poison_ability) as imba_shadow_demon_shadow_poison;
                 if (shadow_poison_ability_handle && shadow_poison_ability_handle.GetLevel() >= 1) {

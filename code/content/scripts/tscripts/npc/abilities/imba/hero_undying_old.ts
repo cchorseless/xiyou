@@ -699,7 +699,7 @@ export class modifier_imba_undying_tombstone_zombie_aura extends BaseModifier_Pl
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (keys.target == this.GetParentPlus()) {
-            if ((keys.attacker.IsRealHero() || keys.attacker.IsClone() || keys.attacker.IsTempestDouble())) {
+            if ((keys.attacker.IsRealUnit() || keys.attacker.IsClone() || keys.attacker.IsTempestDouble())) {
                 this.GetParentPlus().SetHealth(this.GetParentPlus().GetHealth() - 4);
             } else {
                 this.GetParentPlus().SetHealth(this.GetParentPlus().GetHealth() - 1);
@@ -780,7 +780,7 @@ export class modifier_imba_undying_tombstone_zombie_modifier extends BaseModifie
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (keys.target == this.GetParentPlus()) {
-            if ((keys.attacker.IsRealHero() || keys.attacker.IsClone() || keys.attacker.IsTempestDouble() || keys.attacker.IsBuilding())) {
+            if ((keys.attacker.IsRealUnit() || keys.attacker.IsClone() || keys.attacker.IsTempestDouble() || keys.attacker.IsBuilding())) {
                 this.GetParentPlus().Kill(undefined, keys.attacker);
                 this.Destroy();
             } else {
@@ -1318,7 +1318,7 @@ export class modifier_imba_undying_flesh_golem_plague_aura extends BaseModifier_
             let heal_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_undying/undying_fg_heal.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
             ParticleManager.SetParticleControlEnt(heal_particle, 1, keys.unit, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", keys.unit.GetAbsOrigin(), true);
             ParticleManager.ReleaseParticleIndex(heal_particle);
-            if (keys.unit.IsRealHero()) {
+            if (keys.unit.IsRealUnit()) {
                 this.GetCasterPlus().Heal(this.GetCasterPlus().GetMaxHealth() * this.remnants_max_health_heal_pct_hero * 0.01, this.GetAbilityPlus());
                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetCasterPlus(), this.GetCasterPlus().GetMaxHealth() * this.remnants_max_health_heal_pct_hero * 0.01, undefined);
             } else {

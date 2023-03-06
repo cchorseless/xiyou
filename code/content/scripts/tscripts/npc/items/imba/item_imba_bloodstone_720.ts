@@ -158,7 +158,7 @@ export class modifier_item_imba_bloodstone_720 extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (keys.unit.IsRealHero() && this.parent.IsRealHero()) {
+        if (keys.unit.IsRealUnit() && this.parent.IsRealUnit()) {
             if (this.parent.GetTeam() != keys.unit.GetTeam() && ((keys.unit.GetAbsOrigin() - this.parent.GetAbsOrigin() as Vector).Length2D() <= this.charge_range || this.parent == keys.attacker) && this.parent.IsAlive()) {
                 if (this == this.parent.FindAllModifiersByName(this.GetName())[0]) {
                     for (let itemSlot = 0; itemSlot <= 5; itemSlot++) {

@@ -422,7 +422,7 @@ export class modifier_imba_clinkz_death_pact_723 extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
-        if (keys.attacker == this.GetParentPlus() && keys.target.IsRealHero()) {
+        if (keys.attacker == this.GetParentPlus() && keys.target.IsRealUnit()) {
             keys.target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_clinkz_death_pact_723_enemy", {
                 duration: this.debuff_duration * (1 - keys.target.GetStatusResistance()),
                 armor_reduction: this.armor_reduction,
@@ -466,7 +466,7 @@ export class modifier_imba_clinkz_death_pact_723_enemy extends BaseModifier_Plus
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (keys.unit == this.GetParentPlus() && keys.unit.IsRealHero() && (!keys.unit.IsReincarnating || (keys.unit.IsReincarnating && !keys.unit.IsReincarnating()))) {
+        if (keys.unit == this.GetParentPlus() && keys.unit.IsRealUnit() && (!keys.unit.IsReincarnating || (keys.unit.IsReincarnating && !keys.unit.IsReincarnating()))) {
             let pact_modifier = this.GetCasterPlus().findBuff<modifier_imba_clinkz_death_pact_723_permanent_buff>("modifier_imba_clinkz_death_pact_723_permanent_buff");
             if (pact_modifier) {
                 pact_modifier.SetStackCount(pact_modifier.GetStackCount() + this.permanent_bonus);

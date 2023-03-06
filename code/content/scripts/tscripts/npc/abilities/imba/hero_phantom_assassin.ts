@@ -778,7 +778,7 @@ export class modifier_imba_coup_de_grace extends BaseModifier_Plus {
                     }
                     target.TrueKilled(this.caster, this.GetAbilityPlus());
                     SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_CRITICAL, target, 999999, undefined);
-                    if (target.IsRealHero()) {
+                    if (target.IsRealUnit()) {
                         let blood_pfx = ResHelper.CreateParticleEx("particles/hero/phantom_assassin/screen_blood_splatter.vpcf", ParticleAttachment_t.PATTACH_EYES_FOLLOW, target, attacker);
                         // Notifications.BottomToAll({
                         //     text: "FATALITY!",
@@ -967,7 +967,7 @@ export class modifier_phantom_assassin_arcana extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (params.attacker == this.GetParentPlus() && params.target.IsRealHero() && params.attacker.GetTeam() != params.target.GetTeam()) {
+        if (params.attacker == this.GetParentPlus() && params.target.IsRealUnit() && params.attacker.GetTeam() != params.target.GetTeam()) {
             this.IncrementStackCount();
             let gravestone = BaseNpc_Plus.CreateUnitByName("npc_dota_phantom_assassin_gravestone", params.target.GetAbsOrigin(), DOTATeam_t.DOTA_TEAM_NEUTRALS, true, this.GetParentPlus(), this.GetParentPlus());
             gravestone.SetOwner(this.GetParentPlus());

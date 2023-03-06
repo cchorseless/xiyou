@@ -131,7 +131,7 @@ export class modifier_imba_urn_of_shadows_passive extends BaseModifier_Plus {
         let black_queen_cape_modifier = "modifier_imba_black_queen_cape_passive";
         let urn_item_name = "item_imba_urn_of_shadows";
         let cape_item_name = "item_imba_black_queen_cape";
-        if (!target.IsRealHero()) {
+        if (!target.IsRealUnit()) {
             return undefined;
         }
         if (this.parent.IsIllusion()) {

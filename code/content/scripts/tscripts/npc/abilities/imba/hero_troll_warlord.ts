@@ -173,7 +173,7 @@ export class modifier_imba_berserkers_rage_melee extends BaseModifier_Plus {
                 return undefined;
             }
             let parent = this.GetParentPlus();
-            if ((parent == params.attacker) && (parent.IsRealHero() || parent.IsClone()) && params.attacker.GetTeam() != params.target.GetTeam() && !params.target.IsOther() && !params.target.IsBuilding()) {
+            if ((parent == params.attacker) && (parent.IsRealUnit() || parent.IsClone()) && params.attacker.GetTeam() != params.target.GetTeam() && !params.target.IsOther() && !params.target.IsBuilding()) {
                 let ability = this.GetAbilityPlus();
                 if (parent.HasTalent("special_bonus_imba_troll_warlord_9")) {
                     if (!this.bash_talent) {
@@ -287,7 +287,7 @@ export class modifier_imba_berserkers_rage_ranged extends BaseModifier_Plus {
             if (params.attacker.PassivesDisabled()) {
                 return undefined;
             }
-            if ((parent == params.attacker) && (parent.IsRealHero() || parent.IsClone())) {
+            if ((parent == params.attacker) && (parent.IsRealUnit() || parent.IsClone())) {
                 let ability = this.GetAbilityPlus();
                 if (GFuncRandom.PRD(ability.GetSpecialValueFor("ensnare_chance"), ability)) {
                     let hamstring_duration = ability.GetSpecialValueFor("hamstring_duration");
@@ -699,7 +699,7 @@ export class imba_troll_warlord_fervor extends BaseAbility_Plus {
     }
     GetIntrinsicModifierName(): string {
         let hCaster = this.GetCasterPlus();
-        if (hCaster.IsRealHero() || hCaster.IsClone()) {
+        if (hCaster.IsRealUnit() || hCaster.IsClone()) {
             return "modifier_imba_fervor";
         }
         return undefined;
@@ -747,7 +747,7 @@ export class modifier_imba_fervor extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(params: ModifierAttackEvent): void {
         let parent = this.GetParentPlus();
-        if (((params.attacker == parent) || ((params.attacker.GetTeamNumber() == parent.GetTeamNumber()) && params.attacker.HasModifier("modifier_imba_battle_trance") && parent.HasScepter())) && (params.attacker.IsRealHero() || params.attacker.IsClone()) && params.original_damage > 0) {
+        if (((params.attacker == parent) || ((params.attacker.GetTeamNumber() == parent.GetTeamNumber()) && params.attacker.HasModifier("modifier_imba_battle_trance") && parent.HasScepter())) && (params.attacker.IsRealUnit() || params.attacker.IsClone()) && params.original_damage > 0) {
             let modifier = params.attacker.FindModifierByNameAndCaster("modifier_imba_fervor_stacks", parent) as modifier_imba_fervor_stacks;
             if (modifier) {
                 if (modifier.last_target == params.target) {
@@ -911,7 +911,7 @@ export class modifier_imba_battle_trance extends BaseModifier_Plus {
         let parent = this.GetParentPlus();
         this.bonus_as = ability.GetTalentSpecialValueFor("bonus_as");
         this.bonus_bat = math.min(ability.GetTalentSpecialValueFor("bonus_bat"), parent.GetBaseAttackTime());
-        if (parent.IsRealHero() && IsServer()) {
+        if (parent.IsRealUnit() && IsServer()) {
             EmitSoundOnClient("Hero_TrollWarlord.BattleTrance.Cast.Team", parent.GetPlayerOwner());
             if (this.sound == "Imba.TrollAK47") {
                 EmitSoundOnClient("Imba.TrollAK47.Team", parent.GetPlayerOwner());

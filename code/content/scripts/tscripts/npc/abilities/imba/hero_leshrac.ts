@@ -99,7 +99,7 @@ export class imba_leshrac_split_earth extends BaseAbility_Plus {
                     ability: ability
                 }
                 ApplyDamage(damageTable);
-                if (enemy.IsRealHero()) {
+                if (enemy.IsRealUnit()) {
                     if (!caster.HasModifier(modifier_empowered)) {
                         caster.AddNewModifier(caster, ability, modifier_empowered, {
                             duration: empowered_split_duration
@@ -110,7 +110,7 @@ export class imba_leshrac_split_earth extends BaseAbility_Plus {
                         modifier_empowered_handle.IncrementStackCount();
                     }
                 }
-                if (enemy.IsRealHero() || enemy.IsConsideredHero()) {
+                if (enemy.IsRealUnit() || enemy.IsConsideredHero()) {
                     energy_orb_count = energy_orb_count + splitter_blast_hero_energy_count;
                 } else {
                     energy_orb_count = energy_orb_count + splitter_blast_unit_energy_count;
@@ -455,7 +455,7 @@ export class modifier_imba_leshrac_diabolic_edict extends BaseModifier_Plus {
                     modifier_weakening_handle.ForceRefresh();
                 }
             }
-            if (target.IsRealHero()) {
+            if (target.IsRealUnit()) {
                 this.explosion_radius = this.explosion_radius + this.diabolic_adapt_radius_inc;
                 this.SetDuration(this.GetRemainingTime() + this.diabolic_adapt_duration_inc, true);
             }

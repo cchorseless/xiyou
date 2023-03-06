@@ -2514,7 +2514,7 @@ export class modifier_imba_invoker_emp extends BaseModifier_Plus {
             damage: enemy_mana_to_burn * (damage_per_mana_pct / 100),
             damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE
         });
-        if (enemy.IsRealHero()) {
+        if (enemy.IsRealUnit()) {
             enemy.AddNewModifier(caster, ability, "modifier_imba_invoker_emp_overload", {
                 duration: after_shock_duration * (1 - enemy.GetStatusResistance())
             });

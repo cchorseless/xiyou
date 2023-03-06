@@ -126,7 +126,7 @@ export class modifier_imba_shrapnel_attack extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         if (IsServer()) {
-            if (this.caster.IsRealHero()) {
+            if (this.caster.IsRealUnit()) {
                 let heroes = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, 5000, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
                 for (const [_, hero] of GameFunc.iPair(heroes)) {
                     if (hero.GetUnitName() == this.caster.GetUnitName() && hero.IsIllusion() && !hero.HasModifier(this.modifier_attack)) {
@@ -777,7 +777,7 @@ export class modifier_imba_take_aim_range extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             this.caster.SetAcquisitionRange(this.caster.Script_GetAttackRange() + 100);
-            if (this.ability.IsCooldownReady() && this.ability.GetAutoCastState() && this.caster.IsRealHero()) {
+            if (this.ability.IsCooldownReady() && this.ability.GetAutoCastState() && this.caster.IsRealUnit()) {
                 this.SetStackCount(0);
             } else {
                 this.SetStackCount(1);
@@ -1082,7 +1082,7 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
             target.AddNewModifier(caster, this, modifier_ministun, {
                 duration: ministun_duration * (1 - target.GetStatusResistance())
             });
-            if (target.IsRealHero() && !target.IsAlive() && RollPercentage(100) && (!this.meme_cooldown || GameRules.GetGameTime() - this.meme_cooldown >= 2.0)) {
+            if (target.IsRealUnit() && !target.IsAlive() && RollPercentage(100) && (!this.meme_cooldown || GameRules.GetGameTime() - this.meme_cooldown >= 2.0)) {
                 target.EmitSound("Hero_Sniper.Boom_Headshot");
                 this.meme_cooldown = GameRules.GetGameTime();
             }

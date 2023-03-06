@@ -93,7 +93,7 @@ export class modifier_imba_smoke_of_deceit extends BaseModifier_Plus {
         }
         let enemies = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.visibility_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            if (enemy.IsRealHero() || enemy.IsClone() || enemy.IsTower()) {
+            if (enemy.IsRealUnit() || enemy.IsClone() || enemy.IsTower()) {
                 this.SurpriseAttack();
                 this.Destroy();
                 return undefined;
@@ -105,7 +105,7 @@ export class modifier_imba_smoke_of_deceit extends BaseModifier_Plus {
             if (ally.HasModifier(this.modifier_smoke)) {
                 if (ally.IsIllusion()) {
                     stacks = stacks + 0;
-                } else if (ally.IsRealHero()) {
+                } else if (ally.IsRealUnit()) {
                     stacks = stacks + this.gank_hero_ms_bonus_pct;
                 } else {
                     stacks = stacks + this.gank_unit_ms_bonus_pct;

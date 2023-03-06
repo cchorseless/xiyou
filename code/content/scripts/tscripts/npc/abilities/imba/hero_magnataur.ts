@@ -555,7 +555,7 @@ export class imba_magnataur_shockwave extends BaseAbility_Plus {
                             });
                         }
                         table.insert(this.tempdata[ExtraData.index], target);
-                        if ((this.tempdata[ExtraData.index + "_counter"] > 0) && target.HasModifier("modifier_imba_polarize_debuff") && target.IsRealHero()) {
+                        if ((this.tempdata[ExtraData.index + "_counter"] > 0) && target.HasModifier("modifier_imba_polarize_debuff") && target.IsRealUnit()) {
                             this.tempdata[ExtraData.index + "_counter"] = this.tempdata[ExtraData.index + "_counter"] - 1;
                             let start_angle;
                             let interval_angle = 0;
@@ -747,7 +747,7 @@ export class modifier_imba_empower_aura extends BaseModifier_Plus {
                     this.particle = ResHelper.CreateParticleEx("particles/auras/aura_empower.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, parent);
                     this.AddParticle(this.particle, false, false, -1, false, false);
                 }
-                if (target.IsRealHero()) {
+                if (target.IsRealUnit()) {
                     return false;
                 }
             } else {
@@ -764,7 +764,7 @@ export class modifier_imba_empower_aura extends BaseModifier_Plus {
         }
     }
     GetAuraRadius(): number {
-        if (this.GetCasterPlus().IsRealHero()) {
+        if (this.GetCasterPlus().IsRealUnit()) {
             return this.GetSpecialValueFor("radius_scepter");
         }
         return 0;
@@ -1925,7 +1925,7 @@ export class imba_magnataur_reverse_polarity extends BaseAbility_Plus {
                     enemy.AddNewModifier(caster, this, "modifier_knockback", knockbackProperties);
                     particle_loc = enemy_pos + ((final_loc - enemy_pos as Vector).Normalized() * pull_distance) as Vector;
                 }
-                if (enemy.IsRealHero() && AoiHelper.IsNearEnemyClass(enemy, 1700, "ent_dota_fountain")) {
+                if (enemy.IsRealUnit() && AoiHelper.IsNearEnemyClass(enemy, 1700, "ent_dota_fountain")) {
                     let fountain_loc;
                     if (enemy.GetTeam() == DOTATeam_t.DOTA_TEAM_GOODGUYS) {
                         fountain_loc = Vector(7472, 6912, 512);

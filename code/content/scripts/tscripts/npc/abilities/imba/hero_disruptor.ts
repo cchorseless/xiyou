@@ -297,7 +297,7 @@ export class modifier_imba_thunder_strike_debuff extends BaseModifier_Plus {
                 enemy.AddNewModifier(this.GetCaster(), this.GetAbility(), "modifier_imba_thunder_strike_slow", {
                     duration: this.slow_duration * (1 - enemy.GetStatusResistance())
                 });
-                if (this.caster.HasModifier(stormbearer_buff) && enemy.IsRealHero()) {
+                if (this.caster.HasModifier(stormbearer_buff) && enemy.IsRealUnit()) {
                     IncrementStormbearerStacks(this.caster);
                 }
             }
@@ -736,7 +736,7 @@ export class modifier_imba_glimpse_storm_debuff extends BaseModifier_Plus {
                     ability: this.ability
                 }
                 ApplyDamage(damageTable);
-                if (this.caster.HasModifier(this.stormbearer_buff) && this.target.IsRealHero()) {
+                if (this.caster.HasModifier(this.stormbearer_buff) && this.target.IsRealUnit()) {
                     IncrementStormbearerStacks(this.caster);
                 }
             }
@@ -1042,7 +1042,7 @@ export class modifier_imba_kinetic_field_barrier extends BaseModifier_Plus {
                 ApplyDamage(damageTable);
             }
             let kinetic_recharge = true;
-            if (!kinetic_recharge && target.IsRealHero()) {
+            if (!kinetic_recharge && target.IsRealUnit()) {
                 let cd_remaining = ability.GetCooldownTimeRemaining();
                 ability.EndCooldown();
                 if (cd_remaining > cooldown_reduction) {
@@ -1336,7 +1336,7 @@ export class modifier_imba_static_storm extends BaseModifier_Plus {
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL
                 }
                 ApplyDamage(damageTable);
-                if (this.caster.HasModifier(this.stormbearer_buff) && enemy.IsRealHero()) {
+                if (this.caster.HasModifier(this.stormbearer_buff) && enemy.IsRealUnit()) {
                     IncrementStormbearerStacks(this.caster);
                 }
             }

@@ -1106,7 +1106,7 @@ export class modifier_imba_juggernaut_blade_dance_passive extends BaseModifier_P
                 this.critProc = false;
                 if (this.GetCasterPlus().HasModifier("modifier_juggernaut_arcana")) {
                     this.AddTimer(FrameTime(), () => {
-                        if (params.target.IsRealHero() && !params.target.IsAlive()) {
+                        if (params.target.IsRealUnit() && !params.target.IsAlive()) {
                             ArcanaKill(this.GetParentPlus());
                         }
                     });
@@ -1115,7 +1115,7 @@ export class modifier_imba_juggernaut_blade_dance_passive extends BaseModifier_P
         }
     }
     HandleWindDance(bCrit: boolean) {
-        if (this.GetCasterPlus().IsRealHero()) {
+        if (this.GetCasterPlus().IsRealUnit()) {
             if (this.GetCasterPlus().HasModifier("modifier_imba_juggernaut_blade_dance_empowered_slice")) {
                 return;
             }
@@ -1135,7 +1135,7 @@ export class modifier_imba_juggernaut_blade_dance_passive extends BaseModifier_P
         }
     }
     HandleSecretBlade() {
-        if (this.GetCasterPlus().IsRealHero()) {
+        if (this.GetCasterPlus().IsRealUnit()) {
             if (this.GetCasterPlus().HasModifier("modifier_imba_juggernaut_blade_dance_empowered_slice")) {
                 return;
             }
@@ -1151,7 +1151,7 @@ export class modifier_imba_juggernaut_blade_dance_passive extends BaseModifier_P
         }
     }
     HandleJadeBlossom(bCrit: boolean) {
-        if (this.GetCasterPlus().IsRealHero()) {
+        if (this.GetCasterPlus().IsRealUnit()) {
             if (bCrit) {
                 if (this.GetCasterPlus().HasTalent("special_bonus_imba_juggernaut_8")) {
                     let jade_blossom = this.GetCasterPlus().findBuff<modifier_imba_juggernaut_blade_dance_jade_blossom>("modifier_imba_juggernaut_blade_dance_jade_blossom");
@@ -1797,7 +1797,7 @@ export class modifier_imba_juggernaut_omni_slash_cdr extends BaseModifier_Plus {
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(params: ModifierAttackEvent): void {
-        if (params.attacker == this.GetParentPlus() && params.target.IsRealHero() && !this.GetAbilityPlus().IsCooldownReady()) {
+        if (params.attacker == this.GetParentPlus() && params.target.IsRealUnit() && !this.GetAbilityPlus().IsCooldownReady()) {
             let cd = this.GetAbilityPlus().GetCooldownTimeRemaining();
             this.GetAbilityPlus().EndCooldown();
             this.GetAbilityPlus().StartCooldown(cd);

@@ -312,7 +312,7 @@ export class imba_enigma_demonic_conversion extends BaseAbility_Plus {
     CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            if (caster.HasTalent("special_bonus_imba_enigma_8") && target.IsRealHero()) {
+            if (caster.HasTalent("special_bonus_imba_enigma_8") && target.IsRealUnit()) {
                 return UnitFilterResult.UF_SUCCESS;
             }
             let nResult = UnitFilter(target, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), this.GetCasterPlus().GetTeamNumber());
@@ -1089,7 +1089,7 @@ export class modifier_imba_singularity extends BaseModifier_Plus {
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (IsServer() && keys.unit == this.GetParentPlus() && this.GetParentPlus().HasTalent("special_bonus_imba_enigma_4") && this.GetParentPlus().IsRealHero()) {
+        if (IsServer() && keys.unit == this.GetParentPlus() && this.GetParentPlus().HasTalent("special_bonus_imba_enigma_4") && this.GetParentPlus().IsRealUnit()) {
             let ability = this.GetAbilityPlus<imba_enigma_black_hole>();
             let duration = ability.GetSpecialValueFor("duration") / this.GetParentPlus().GetTalentValue("special_bonus_imba_enigma_4");
             let base_radius = ability.GetSpecialValueFor("radius");

@@ -383,7 +383,7 @@ export class imba_lich_frost_nova extends BaseAbility_Plus {
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             this.AddTimer(FrameTime(), () => {
-                if (!enemy.IsAlive() && enemy.IsRealHero()) {
+                if (!enemy.IsAlive() && enemy.IsRealUnit()) {
                     if (enemy.GetUnitName().includes("crystal_maiden")) {
                         if (RollPercentage(25)) {
                             EmitSoundOn(cm_kill_response, caster);
@@ -1682,7 +1682,7 @@ export class imba_lich_sinister_gaze extends BaseAbility_Plus {
         } else {
             this.AddTimer(FrameTime(), () => {
                 if (this.target) {
-                    if (!this.target.IsAlive() && !this.target.IsReincarnating() && (this.target.IsRealHero() || this.target.IsClone())) {
+                    if (!this.target.IsAlive() && !this.target.IsReincarnating() && (this.target.IsRealUnit() || this.target.IsClone())) {
                         let consumption_health = this.target.GetMaxHealth();
                         this.caster.AddNewModifier(this.caster, this, "modifier_imba_lich_sinister_gaze_bonus_health", {
                             duration: this.soul_consumption_duration

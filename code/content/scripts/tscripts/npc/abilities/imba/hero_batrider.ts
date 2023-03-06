@@ -330,7 +330,7 @@ export class modifier_imba_batrider_flamebreak_damage extends BaseModifier_Plus 
     OnIntervalThink(): void {
         ApplyDamage(this.damage_table);
         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, this.GetParentPlus(), this.damage_per_second, undefined);
-        if (this.GetParentPlus().IsRealHero() && !this.GetParentPlus().IsAlive() && this.GetCasterPlus().GetName().includes("batrider") && RollPercentage(50)) {
+        if (this.GetParentPlus().IsRealUnit() && !this.GetParentPlus().IsAlive() && this.GetCasterPlus().GetName().includes("batrider") && RollPercentage(50)) {
             this.GetCasterPlus().EmitSound("batrider_bat_ability_firefly_0" + RandomInt(1, 6));
         }
     }
@@ -497,7 +497,7 @@ export class modifier_imba_batrider_firefly extends BaseModifier_Plus {
                         ParticleManager.ReleaseParticleIndex(this.firefly_debuff_particle);
                         ApplyDamage(this.damage_table);
                         this.damaged_enemies.push(enemy);
-                        if (enemy.IsRealHero() && !enemy.IsAlive() && RollPercentage(50)) {
+                        if (enemy.IsRealUnit() && !enemy.IsAlive() && RollPercentage(50)) {
                             if (!this.responses) {
                                 this.responses = {
                                     "1": "batrider_bat_ability_firefly_02",

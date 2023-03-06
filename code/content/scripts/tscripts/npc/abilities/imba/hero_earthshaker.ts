@@ -665,7 +665,7 @@ export class imba_earthshaker_echo_slam extends BaseAbility_Plus {
                         }
                     }
                     ProjectileManager.CreateTrackingProjectile(projectile);
-                    if (echo_enemy.IsRealHero()) {
+                    if (echo_enemy.IsRealUnit()) {
                         effect_counter = effect_counter + 1;
                         ProjectileManager.CreateTrackingProjectile(projectile);
                         this.AddTimer(0.1, () => {

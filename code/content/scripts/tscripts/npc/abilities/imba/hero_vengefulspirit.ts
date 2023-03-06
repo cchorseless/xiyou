@@ -29,7 +29,7 @@ export class modifier_special_bonus_imba_vengefulspirit_4 extends BaseModifier_P
     }
     GetAuraRadius(): number {
         let caster = this.GetCasterPlus();
-        if (caster.IsRealHero()) {
+        if (caster.IsRealUnit()) {
             return this.GetCasterPlus().GetTalentValue("special_bonus_imba_vengefulspirit_4", "radius");
         } else {
             return 0;
@@ -99,7 +99,7 @@ export class modifier_imba_rancor extends BaseModifier_Plus {
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     CC_OnTakeDamage(params: ModifierInstanceEvent): void {
-        if (this.GetAbilityPlus() && ((this.GetParentPlus() == params.unit) || params.unit.HasModifier("modifier_imba_rancor_allies")) && params.damage > 0 && !this.GetParentPlus().PassivesDisabled() && params.unit.IsRealHero()) {
+        if (this.GetAbilityPlus() && ((this.GetParentPlus() == params.unit) || params.unit.HasModifier("modifier_imba_rancor_allies")) && params.damage > 0 && !this.GetParentPlus().PassivesDisabled() && params.unit.IsRealUnit()) {
             if (params.unit.HasModifier("modifier_imba_rancor_allies") && !(this.GetParentPlus() == params.unit)) {
                 if (params.unit.FindModifierByNameAndCaster("modifier_imba_rancor_allies", this.GetParentPlus())) {
                     this.dmg_received_pct = this.dmg_received_pct + ((100 / this.GetParentPlus().GetMaxHealth()) * math.min(params.damage, this.GetParentPlus().GetHealth())) * (this.GetParentPlus().GetTalentValue("special_bonus_imba_vengefulspirit_4", "rate_pct") / 100);
@@ -214,7 +214,7 @@ export class modifier_imba_rancor_stack extends BaseModifier_Plus {
         }
     }
     GetAuraRadius(): number {
-        if (this.GetCasterPlus().IsRealHero() && this.GetAbilityPlus()) {
+        if (this.GetCasterPlus().IsRealUnit() && this.GetAbilityPlus()) {
             return this.GetSpecialValueFor("aura_radius");
         }
     }
@@ -752,7 +752,7 @@ export class modifier_imba_command_aura_positive_aura extends BaseModifier_Plus 
     CC_OnDeath(params: ModifierInstanceEvent): void {
         if (IsServer()) {
             if (params.unit == this.GetParentPlus()) {
-                if (!params.unit.IsRealHero()) {
+                if (!params.unit.IsRealUnit()) {
                     return undefined;
                 }
                 let ability = this.GetAbilityPlus<imba_vengefulspirit_command_aura>();
@@ -916,7 +916,7 @@ export class modifier_imba_vengefulspirit_command_aura_723 extends BaseModifier_
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (keys.unit == this.GetParentPlus() && keys.unit.IsRealHero()) {
+        if (keys.unit == this.GetParentPlus() && keys.unit.IsRealUnit()) {
             keys.attacker.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_vengefulspirit_command_negative_aura_723", {});
             this.GetCasterPlus().SetContextThink(DoUniqueString(this.GetName()), () => {
                 for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {

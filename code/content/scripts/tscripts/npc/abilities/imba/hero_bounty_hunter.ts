@@ -107,7 +107,7 @@ export class imba_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
                 let jinada_ability = this.GetCasterPlus().findAbliityPlus<imba_bounty_hunter_jinada>("imba_bounty_hunter_jinada");
                 damage = damage + jinada_ability.GetSpecialValueFor("bonus_damage");
                 this.GetCasterPlus().EmitSound("Hero_BountyHunter.Jinada");
-                if (target.IsRealHero() && target.GetPlayerID()) {
+                if (target.IsRealUnit() && target.GetPlayerID()) {
                     let actual_gold_to_steal = math.min(jinada_ability.GetTalentSpecialValueFor("bonus_gold"), PlayerResource.GetUnreliableGold(target.GetPlayerID()));
                     if (actual_gold_to_steal > 0) {
                         this.money_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_bounty_hunter/bounty_hunter_jinada.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
@@ -479,7 +479,7 @@ export class modifier_imba_jinada_buff_crit extends BaseModifier_Plus {
         if (IsServer()) {
             let attacker = keys.attacker;
             let target = keys.target;
-            if (!attacker.IsRealHero()) {
+            if (!attacker.IsRealUnit()) {
                 return undefined;
             }
             if (attacker.PassivesDisabled()) {
@@ -493,7 +493,7 @@ export class modifier_imba_jinada_buff_crit extends BaseModifier_Plus {
                 if (this.ability.IsCooldownReady()) {
                     this.ability.UseResources(false, false, true);
                 }
-                if (target.IsRealHero() && target.GetPlayerID()) {
+                if (target.IsRealUnit() && target.GetPlayerID()) {
                     let actual_gold_to_steal = math.min(this.GetAbilityPlus().GetTalentSpecialValueFor("bonus_gold"), PlayerResource.GetUnreliableGold(target.GetPlayerID()));
                     if (actual_gold_to_steal > 0) {
                         this.money_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_bounty_hunter/bounty_hunter_jinada.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
@@ -925,7 +925,7 @@ export class modifier_imba_track_debuff_mark extends BaseModifier_Plus {
             let target = keys.unit;
             // let reincarnate = keys.reincarnate;
             if (target == this.parent) {
-                if (!target.IsRealHero()) {
+                if (!target.IsRealUnit()) {
                     this.Destroy();
                     return undefined;
                 }

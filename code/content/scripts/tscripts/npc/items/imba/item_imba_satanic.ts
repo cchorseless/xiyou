@@ -83,7 +83,7 @@ export class modifier_imba_satanic extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (this.GetItemPlus() && keys.attacker == this.GetParentPlus() && keys.unit.IsRealHero() && keys.attacker != keys.unit && !keys.inflictor) {
+        if (this.GetItemPlus() && keys.attacker == this.GetParentPlus() && keys.unit.IsRealUnit() && keys.attacker != keys.unit && !keys.inflictor) {
             this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetItemPlus(), "modifier_imba_satanic_soul_slaughter_counter", {
                 duration: this.GetItemPlus().GetSpecialValueFor("soul_slaughter_duration")
             });

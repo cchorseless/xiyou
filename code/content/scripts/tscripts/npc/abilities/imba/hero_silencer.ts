@@ -196,7 +196,7 @@ export class modifier_imba_arcane_curse_debuff extends BaseModifier_Plus {
                 let ability = this.GetAbilityPlus();
                 let caster = ability.GetCasterPlus();
                 let AoE = caster.GetTalentValue("special_bonus_imba_silencer_2");
-                if (AoE > 0  /**&& parent.IsRealHero()*/ && !parent.IsClone()) {
+                if (AoE > 0  /**&& parent.IsRealUnit()*/ && !parent.IsClone()) {
                     let base_duration = ability.GetSpecialValueFor("base_duration");
                     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), parent.GetAbsOrigin(), undefined, AoE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, ability.GetAbilityTargetType(), DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
                     for (const [_, unit] of GameFunc.iPair(enemies)) {
@@ -542,7 +542,7 @@ export class modifier_imba_silencer_glaives_of_wisdom extends BaseModifier_Plus 
             let target = keys.target;
             if (this.caster == attacker) {
                 if (target.IsAlive() && this.glaive_attack) {
-                    if (keys.target.IsRealHero && (keys.target.IsRealHero() || keys.target.IsTempestDouble()) && !keys.target.IsClone()) {
+                    if (keys.target.IsRealHero && (keys.target.IsRealUnit() || keys.target.IsTempestDouble()) && !keys.target.IsClone()) {
                         let modifier_buff = this.caster.findBuff<modifier_imba_silencer_glaives_of_wisdom_buff>("modifier_imba_silencer_glaives_of_wisdom_buff");
                         if (!modifier_buff) {
                             modifier_buff = this.caster.AddNewModifier(this.caster, this.ability, "modifier_imba_silencer_glaives_of_wisdom_buff", {
@@ -659,7 +659,7 @@ export class modifier_imba_silencer_glaives_int_damage extends BaseModifier_Plus
     }
     BeCreated(kv: any): void {
         if (IsServer()) {
-            if (!this.GetParentPlus().IsRealHero()) {
+            if (!this.GetParentPlus().IsRealUnit()) {
                 return;
             }
             this.caster = this.GetCasterPlus();
@@ -671,7 +671,7 @@ export class modifier_imba_silencer_glaives_int_damage extends BaseModifier_Plus
     OnStackCountChanged(old_stack_count: number): void {
         if (IsServer()) {
             let target = this.GetParentPlus();
-            if (target.IsRealHero() && target.GetIntellect() > 1) {
+            if (target.IsRealUnit() && target.GetIntellect() > 1) {
                 let int_to_steal = math.max(1, math.floor(this.target_intelligence * this.int_reduction_pct / 100));
                 let int_taken;
                 if (((this.target_intelligence - int_to_steal) >= 1)) {
@@ -1102,8 +1102,8 @@ export class modifier_imba_silencer_arcane_supremacy extends BaseModifier_Plus {
         if (IsServer()) {
             this.steal_amount = this.GetAbilityPlus().GetTalentSpecialValueFor("int_steal_amount");
             this.global_silence_steal = this.GetAbilityPlus().GetTalentSpecialValueFor("global_silence_steal");
-            if (this.caster.GetUnitName().includes("silencer") && this.caster.IsRealHero()) {
-                if (params.unit.IsRealHero() && params.unit != this.caster && params.unit.GetTeam() != this.caster.GetTeam()/** && !params.reincarnate */) {
+            if (this.caster.GetUnitName().includes("silencer") && this.caster.IsRealUnit()) {
+                if (params.unit.IsRealUnit() && params.unit != this.caster && params.unit.GetTeam() != this.caster.GetTeam()/** && !params.reincarnate */) {
                     let stealType = undefined;
                     let distance = (this.caster.GetAbsOrigin() - params.unit.GetAbsOrigin() as Vector).Length2D();
                     if (distance <= this.steal_range || params.attacker == this.caster) {
@@ -1195,7 +1195,7 @@ export class imba_silencer_global_silence extends BaseAbility_Plus {
                 enemy.AddNewModifier(caster, this, "modifier_imba_silencer_global_silence", {
                     duration: this.GetDuration() * (1 - enemy.GetStatusResistance())
                 });
-                if (enemy.IsRealHero()) {
+                if (enemy.IsRealUnit()) {
                     EmitSoundOnClient("Hero_Silencer.GlobalSilence.Effect", enemy.GetPlayerOwner());
                 }
             }
@@ -1378,7 +1378,7 @@ export class imba_silencer_global_silence_v2 extends BaseAbility_Plus {
                         duration: this.GetDuration() * (1 - enemy.GetStatusResistance())
                     });
                 }
-                if (enemy.IsRealHero()) {
+                if (enemy.IsRealUnit()) {
                     EmitSoundOnClient("Hero_Silencer.GlobalSilence.Effect", enemy.GetPlayerOwner());
                 }
             }

@@ -448,7 +448,7 @@ export class modifier_imba_feral_impulse_aura extends BaseModifier_Plus {
             let units = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.aura_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, unit] of GameFunc.iPair(units)) {
                 if (unit != this.caster) {
-                    if (unit.IsRealHero()) {
+                    if (unit.IsRealUnit()) {
                         value_increase = value_increase + 1 * this.hero_inc_multiplier;
                     } else {
                         value_increase = value_increase + 1;
@@ -725,7 +725,7 @@ export class modifier_imba_shapeshift_aura extends BaseModifier_Plus {
     }
     GetAuraEntityReject(target: CDOTA_BaseNPC): boolean {
         if (IsServer()) {
-            if (target.IsRealHero()) {
+            if (target.IsRealUnit()) {
                 if (target == this.caster) {
                     return false;
                 }

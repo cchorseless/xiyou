@@ -57,7 +57,7 @@ export class imba_outworld_devourer_arcane_orb extends BaseOrbAbility_Plus {
                     SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, damage - this.GetSpecialValueFor("universe_bonus_dmg"), undefined);
                 }
             }
-            if (this.GetCasterPlus().HasAbility("imba_outworld_devourer_sanity_eclipse") && this.GetCasterPlus().findAbliityPlus<imba_outworld_devourer_sanity_eclipse>("imba_outworld_devourer_sanity_eclipse").IsTrained() && (keys.target.IsRealHero() || keys.target.IsIllusion()) && keys.target.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
+            if (this.GetCasterPlus().HasAbility("imba_outworld_devourer_sanity_eclipse") && this.GetCasterPlus().findAbliityPlus<imba_outworld_devourer_sanity_eclipse>("imba_outworld_devourer_sanity_eclipse").IsTrained() && (keys.target.IsRealUnit() || keys.target.IsIllusion()) && keys.target.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus<imba_outworld_devourer_sanity_eclipse>("imba_outworld_devourer_sanity_eclipse"), "modifier_imba_outworld_devourer_sanity_eclipse_charge", {
                     duration: this.GetSpecialValueFor("counter_duration"),
                     charges: 1
@@ -114,7 +114,7 @@ export class imba_outworld_devourer_astral_imprisonment extends BaseAbility_Plus
                     duration: this.GetSpecialValueFor("prison_duration")
                 });
             }
-            if (this.GetCasterPlus().HasAbility("imba_outworld_devourer_sanity_eclipse") && this.GetCasterPlus().findAbliityPlus<imba_outworld_devourer_sanity_eclipse>("imba_outworld_devourer_sanity_eclipse").IsTrained() && (target.IsRealHero() || target.IsIllusion()) && target.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
+            if (this.GetCasterPlus().HasAbility("imba_outworld_devourer_sanity_eclipse") && this.GetCasterPlus().findAbliityPlus<imba_outworld_devourer_sanity_eclipse>("imba_outworld_devourer_sanity_eclipse").IsTrained() && (target.IsRealUnit() || target.IsIllusion()) && target.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetCasterPlus().findAbliityPlus<imba_outworld_devourer_sanity_eclipse>("imba_outworld_devourer_sanity_eclipse"), "modifier_imba_outworld_devourer_sanity_eclipse_charge", {
                     duration: this.GetSpecialValueFor("counter_duration"),
                     charges: 3

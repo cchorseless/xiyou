@@ -49,7 +49,7 @@ export class item_diretide_candy extends BaseItem_Plus {
                 if (AImod) {
                     // AImod.Candy(target);
                 }
-            } else if (target.IsRealHero()) {
+            } else if (target.IsRealUnit()) {
                 return;
             } else {
                 // print("NIL target, do nothing.");

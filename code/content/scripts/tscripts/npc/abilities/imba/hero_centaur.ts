@@ -72,7 +72,7 @@ export class imba_centaur_hoof_stomp extends BaseAbility_Plus {
                     attacker: this.GetCasterPlus(),
                     ability: this
                 });
-                if (enemy.IsRealHero() && !enemy.IsAlive() && this.GetCasterPlus().GetName().includes("centaur") && RollPercentage(25)) {
+                if (enemy.IsRealUnit() && !enemy.IsAlive() && this.GetCasterPlus().GetName().includes("centaur") && RollPercentage(25)) {
                     EmitSoundOn("centaur_cent_hoof_stomp_0" + RandomInt(4, 5), this.GetCasterPlus());
                 }
             }
@@ -412,7 +412,7 @@ export class modifier_imba_return_passive extends BaseModifier_Plus {
             let damage = ability.GetTalentSpecialValueFor("damage");
             let str_pct_as_damage = ability.GetSpecialValueFor("str_pct_as_damage");
             let damage_block = ability.GetSpecialValueFor("damage_block");
-            if (!target.IsRealHero()) {
+            if (!target.IsRealUnit()) {
                 return undefined;
             }
             if (parent.PassivesDisabled()) {
@@ -644,7 +644,7 @@ export class modifier_imba_stampede_haste extends BaseModifier_Plus {
                     enemy.AddNewModifier(this.caster, this.ability, this.modifier_trample_slow, {
                         duration: (this.stun_duration + this.slow_duration) * (1 - enemy.GetStatusResistance())
                     });
-                    if (this.caster.HasTalent("special_bonus_imba_centaur_8") && enemy.IsRealHero()) {
+                    if (this.caster.HasTalent("special_bonus_imba_centaur_8") && enemy.IsRealUnit()) {
                         let bonus_stampede_duration = this.caster.GetTalentValue("special_bonus_imba_centaur_8");
                         let allies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, 50000, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
                         for (const [_, ally] of GameFunc.iPair(allies)) {

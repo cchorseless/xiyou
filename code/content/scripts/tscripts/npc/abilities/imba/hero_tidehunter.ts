@@ -149,7 +149,7 @@ export class imba_tidehunter_gush extends BaseAbility_Plus {
                         ability: this
                     }
                     ApplyDamage(damageTable);
-                    if (this.GetCasterPlus().GetName().includes("tidehunter") && target.IsRealHero() && !target.IsAlive() && RollPercentage(25)) {
+                    if (this.GetCasterPlus().GetName().includes("tidehunter") && target.IsRealUnit() && !target.IsAlive() && RollPercentage(25)) {
                         this.GetCasterPlus().EmitSound("tidehunter_tide_ability_gush_0" + RandomInt(1, 2));
                     }
                 }
@@ -752,7 +752,7 @@ export class modifier_imba_tidehunter_ravage_creeping_wave extends BaseModifier_
                     ability: ability
                 }
                 ApplyDamage(damageTable);
-                if (caster.GetName().includes("tidehunter") && !enemy.IsAlive() && enemy.IsRealHero() && RollPercentage(25)) {
+                if (caster.GetName().includes("tidehunter") && !enemy.IsAlive() && enemy.IsRealUnit() && RollPercentage(25)) {
                     caster.EmitSound("tidehunter_tide_ability_ravage_0" + RandomInt(1, 2));
                 }
             });

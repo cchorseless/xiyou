@@ -141,7 +141,7 @@ export class imba_elder_titan_echo_stomp extends BaseAbility_Plus {
                         enemy.AddNewModifier(caster, ability, "modifier_stunned", {
                             duration: stun_duration * (1 - enemy.GetStatusResistance())
                         });
-                        if (enemy.IsRealHero()) {
+                        if (enemy.IsRealUnit()) {
                             heroes_hit = heroes_hit + 1;
                         }
                     }
@@ -313,7 +313,7 @@ export class modifier_imba_elder_titan_ancestral_spirit_self extends BaseModifie
                     });
                 }
                 this.targets_hit[GameFunc.GetCount(this.targets_hit) + 1] = enemy;
-                if (enemy.IsRealHero()) {
+                if (enemy.IsRealUnit()) {
                     this.bonus_damage = this.bonus_damage + this.damage_heroes;
                     this.bonus_ms = this.bonus_ms + this.speed_heroes;
                     this.bonus_armor = this.bonus_armor + this.armor_heroes;

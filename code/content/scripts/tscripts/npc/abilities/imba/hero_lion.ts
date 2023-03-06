@@ -113,11 +113,11 @@ export class imba_lion_earth_spike extends BaseAbility_Plus {
         caster.EmitSound(sound_impact);
         let should_branch = false;
         if (caster.HasTalent("special_bonus_imba_lion_1")) {
-            if (bounces_left > 0 && (target.IsRealHero() || target.IsCreep())) {
+            if (bounces_left > 0 && (target.IsRealUnit() || target.IsCreep())) {
                 should_branch = true;
             }
         } else {
-            if (bounces_left > 0 && target.IsRealHero()) {
+            if (bounces_left > 0 && target.IsRealUnit()) {
                 should_branch = true;
             }
         }
@@ -1061,7 +1061,7 @@ export class modifier_imba_finger_of_death_delay extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (!this.GetParentPlus().IsAlive() && (this.GetParentPlus().IsRealHero() || this.GetParentPlus().IsClone()) && (!this.GetParentPlus().IsReincarnating || (this.GetParentPlus().IsReincarnating && !this.GetParentPlus().IsReincarnating()))) {
+        if (!this.GetParentPlus().IsAlive() && (this.GetParentPlus().IsRealUnit() || this.GetParentPlus().IsClone()) && (!this.GetParentPlus().IsReincarnating || (this.GetParentPlus().IsReincarnating && !this.GetParentPlus().IsReincarnating()))) {
             this.GetParentPlus().EmitSound("Hero_Lion.KillCounter");
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_finger_of_death_counter", {});
         }

@@ -85,7 +85,7 @@ export class modifier_imba_power_treads_2 extends BaseModifier_Plus {
             if (this.GetParentPlus().IsRealUnit()) {
                 let ability = this.GetItemPlus();
                 let parent = this.GetParentPlus();
-                if (parent.IsRealHero()) {
+                if (parent.IsRealUnit()) {
                     this.StartIntervalThink(0.2);
                 } else {
                     this.AddTimer(FrameTime(), () => {
@@ -142,7 +142,7 @@ export class modifier_imba_power_treads_2 extends BaseModifier_Plus {
             let state = this.GetStackCount();
             let ability = this.GetItemPlus();
             let parent = this.GetParentPlus();
-            if (!parent.IsRealHero()) {
+            if (!parent.IsRealUnit()) {
                 return;
             }
             if (!parent.HasModifier("modifier_imba_mega_treads_stat_multiplier_0" + state)) {

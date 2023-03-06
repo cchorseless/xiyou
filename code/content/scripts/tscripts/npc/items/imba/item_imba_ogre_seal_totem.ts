@@ -145,7 +145,7 @@ export class modifier_ogreseal_flop extends BaseModifierMotionBoth_Plus {
                 ParticleManager.SetParticleControlEnt(nFXIndex, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetParentPlus().GetOrigin(), true);
                 this.AddParticle(nFXIndex, false, false, -1, false, false);
             }
-            if (this.GetCasterPlus().IsRealHero()) {
+            if (this.GetCasterPlus().IsRealUnit()) {
                 this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_FLAIL);
             }
             this.bHorizontalMotionInterrupted = false;
@@ -179,7 +179,7 @@ export class modifier_ogreseal_flop extends BaseModifierMotionBoth_Plus {
         if (IsServer()) {
             this.GetParentPlus().RemoveHorizontalMotionController(this);
             this.GetParentPlus().RemoveVerticalMotionController(this);
-            if (this.GetCasterPlus().IsRealHero()) {
+            if (this.GetCasterPlus().IsRealUnit()) {
                 this.GetCasterPlus().RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);
             }
         }
@@ -201,7 +201,7 @@ export class modifier_ogreseal_flop extends BaseModifierMotionBoth_Plus {
             let t = this.flCurrentTimeHoriz / this.flPredictedTotalTime;
             let vStartToTarget = this.vLastKnownTargetPos - this.vStartPosition;
             let vDesiredPos = this.vStartPosition + t * vStartToTarget;
-            if (me.IsRealHero()) {
+            if (me.IsRealUnit()) {
                 if ((!GridNav.CanFindPath(me.GetOrigin(), vDesiredPos))) {
                     this.Destroy();
                     return;

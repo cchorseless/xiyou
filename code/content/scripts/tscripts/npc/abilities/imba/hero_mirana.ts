@@ -398,7 +398,7 @@ export class imba_mirana_arrow extends BaseAbility_Plus {
         if (stun_duration > max_stun_duration) {
             stun_duration = max_stun_duration;
         }
-        if (target.IsRealHero()) {
+        if (target.IsRealUnit()) {
             if (stun_duration >= max_stun_duration) {
                 EmitSoundOn(cast_response_hero_perfect, caster);
             } else {

@@ -436,7 +436,7 @@ export class modifier_item_imba_guardian_greaves_aura extends BaseModifier_Plus 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_ARMOR_BONUS)
     CC_GetModifierPhysicalArmorBonus(p_0: ModifierAttackEvent,): number {
         let owner = this.GetParentPlus();
-        if (owner.IsRealHero()) {
+        if (owner.IsRealUnit()) {
             let bonus_power = (1 - math.max(owner.GetHealthPercent(), this.aura_bonus_threshold) * 0.01) / (1 - this.aura_bonus_threshold * 0.01);
             return this.aura_armor + (this.aura_armor_bonus - this.aura_armor) * bonus_power;
         }
@@ -445,7 +445,7 @@ export class modifier_item_imba_guardian_greaves_aura extends BaseModifier_Plus 
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
     CC_GetModifierConstantHealthRegen(): number {
         let owner = this.GetParentPlus();
-        if (owner.IsRealHero()) {
+        if (owner.IsRealUnit()) {
             let bonus_power = (1 - math.max(owner.GetHealthPercent(), this.aura_bonus_threshold) * 0.01) / (1 - this.aura_bonus_threshold * 0.01);
             return this.aura_health_regen + (this.aura_health_regen_bonus - this.aura_health_regen) * bonus_power;
         }

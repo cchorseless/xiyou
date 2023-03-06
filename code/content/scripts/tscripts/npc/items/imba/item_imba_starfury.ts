@@ -104,7 +104,7 @@ export class modifier_imba_shotgun_passive extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
     CC_OnAttack(params: ModifierAttackEvent): void {
-        if (params.attacker == this.parent  /**&& this.parent.IsRealHero() */ && this.parent.GetAgility) {
+        if (params.attacker == this.parent  /**&& this.parent.IsRealUnit() */ && this.parent.GetAgility) {
             if (this.item.IsCooldownReady() && (this.CheckUniqueValue(1, ["modifier_imba_starfury_passive"]) == 1)) {
                 let hero = this.parent;
                 let damage: number;
@@ -292,7 +292,7 @@ export class modifier_imba_starfury_passive extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(params: ModifierAttackEvent): void {
         if (params.attacker == this.parent && !this.parent.IsIllusion() && this.parent.GetAgility) {
-            if ((GFuncRandom.PRD(this.proc_chance, this.item) && (this.CheckUniqueValue(1, []) == 1) && (this.parent.IsClone() || this.parent.IsRealHero()))) {
+            if ((GFuncRandom.PRD(this.proc_chance, this.item) && (this.CheckUniqueValue(1, []) == 1) && (this.parent.IsClone() || this.parent.IsRealUnit()))) {
                 this.parent.AddNewModifier(this.parent, this.item, "modifier_imba_starfury_buff_increase", {
                     duration: this.proc_duration
                 });

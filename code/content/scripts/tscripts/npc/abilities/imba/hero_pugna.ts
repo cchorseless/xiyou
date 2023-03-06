@@ -455,7 +455,7 @@ export class modifier_imba_nether_ward_aura extends BaseModifier_Plus {
         let attacker = keys.attacker as IBaseNpc_Plus;
         if (target == this.caster) {
             let damage;
-            if (attacker.IsRealHero() || attacker.IsTower() || attacker.IsRoshan()) {
+            if (attacker.IsRealUnit() || attacker.IsTower() || attacker.IsRoshan()) {
                 damage = this.hero_damage;
             } else {
                 damage = this.creep_damage;

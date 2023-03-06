@@ -362,7 +362,7 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifierMoti
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.HasModifier("modifier_imba_faceless_void_time_walk_slow")) {
-                    if (enemy.IsRealHero()) {
+                    if (enemy.IsRealUnit()) {
                         this.as_stolen = this.as_stolen + enemy.GetAttackSpeed() * as_steal;
                         this.ms_stolen = this.ms_stolen + enemy.GetMoveSpeedModifier(enemy.GetBaseMoveSpeed(), false) * ms_steal;
                         chronocharges = chronocharges + 1;
@@ -516,7 +516,7 @@ export class imba_faceless_void_time_dilation extends BaseAbility_Plus {
         }
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_CLOSEST, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            if (enemy.IsRealHero()) {
+            if (enemy.IsRealUnit()) {
                 enemy.EmitSound("Hero_FacelessVoid.TimeDilation.Target");
                 let hit_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_faceless_void/faceless_void_backtrack.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, enemy);
                 ParticleManager.SetParticleControl(hit_pfx, 0, enemy.GetAbsOrigin());
@@ -802,7 +802,7 @@ export class modifier_imba_faceless_void_time_lock extends BaseModifier_Plus {
                             });
                         }
                         EmitSoundOn("Hero_FacelessVoid.TimeLockImpact", target);
-                        if (target.IsRealHero()) {
+                        if (target.IsRealUnit()) {
                             this.GetParentPlus().findBuff<modifier_imba_faceless_void_chronocharges>("modifier_imba_faceless_void_chronocharges").SetStackCount(this.GetParentPlus().FindModifierByName("modifier_imba_faceless_void_chronocharges").GetStackCount() + 1);
                         }
                         for (let i = 0; i <= 23; i++) {
@@ -851,7 +851,7 @@ export class modifier_imba_faceless_void_time_lock extends BaseModifier_Plus {
                                     });
                                 }
                                 EmitSoundOn("Hero_FacelessVoid.TimeLockImpact", enemy);
-                                if (enemy.IsRealHero()) {
+                                if (enemy.IsRealUnit()) {
                                     modifier_imba_faceless_void_chronocharges.findIn(parent).IncrementStackCount(1);
                                     // AddStacksLua(ability, parent, parent, "modifier_imba_faceless_void_chronocharges", 1, false);
                                 }
@@ -1244,7 +1244,7 @@ export class modifier_imba_faceless_void_chronosphere_handler extends BaseModifi
         let caster = this.GetCasterPlus();
         if (caster.HasTalent("special_bonus_imba_faceless_void_8")) {
             let ability = this.GetAbilityPlus();
-            if ((params.attacker == caster) && caster.IsRealHero() && (params.target.GetTeamNumber() != caster.GetTeamNumber()) && this.GetStackCount() == 1) {
+            if ((params.attacker == caster) && caster.IsRealUnit() && (params.target.GetTeamNumber() != caster.GetTeamNumber()) && this.GetStackCount() == 1) {
                 let cleave_particle = "particles/econ/items/faceless_void/faceless_void_weapon_bfury/faceless_void_weapon_bfury_cleave.vpcf";
                 let cleave_damage_pct = caster.GetTalentValue("special_bonus_imba_faceless_void_8", "cleave_damage_pct") / 100;
                 let cleave_radius_start = caster.GetTalentValue("special_bonus_imba_faceless_void_8", "cleave_starting_width");
@@ -1336,7 +1336,7 @@ export class modifier_imba_faceless_void_time_lock_720 extends BaseModifier_Plus
                 duration: duration_creep * (1 - target.GetStatusResistance())
             });
         }
-        if (target.IsRealHero() && this.GetParentPlus().findBuff<modifier_imba_faceless_void_chronocharges>("modifier_imba_faceless_void_chronocharges")) {
+        if (target.IsRealUnit() && this.GetParentPlus().findBuff<modifier_imba_faceless_void_chronocharges>("modifier_imba_faceless_void_chronocharges")) {
             this.GetParentPlus().findBuff<modifier_imba_faceless_void_chronocharges>("modifier_imba_faceless_void_chronocharges").SetStackCount(this.GetParentPlus().FindModifierByName("modifier_imba_faceless_void_chronocharges").GetStackCount() + 1);
         }
         for (let i = 0; i <= 23; i++) {

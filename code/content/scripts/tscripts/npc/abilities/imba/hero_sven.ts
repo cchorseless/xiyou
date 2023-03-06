@@ -363,7 +363,7 @@ export class modifier_imba_great_cleave extends BaseModifier_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let ability = this.GetAbilityPlus();
-            if ((params.attacker == caster) && caster.IsRealHero() && (params.target.GetTeamNumber() != caster.GetTeamNumber()) && (!caster.HasModifier("modifier_imba_great_cleave_active")) && !caster.PassivesDisabled()) {
+            if ((params.attacker == caster) && caster.IsRealUnit() && (params.target.GetTeamNumber() != caster.GetTeamNumber()) && (!caster.HasModifier("modifier_imba_great_cleave_active")) && !caster.PassivesDisabled()) {
                 let cleave_particle = "particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf";
                 let cleave_damage_pct = ability.GetSpecialValueFor("great_cleave_damage") / 100;
                 let cleave_radius_start = ability.GetSpecialValueFor("cleave_starting_width");

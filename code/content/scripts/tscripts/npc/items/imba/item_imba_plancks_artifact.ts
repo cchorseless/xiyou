@@ -133,7 +133,7 @@ export class modifier_imba_plancks_artifact_unique extends BaseModifier_Plus {
         let caster = this.GetItemPlus().GetCasterPlus();
         let target = args.unit as IBaseNpc_Plus;
         if (target != caster) {
-            // if (!target.IsRealHero() || target.IsClone()) {
+            // if (!target.IsRealUnit() || target.IsClone()) {
             //     return undefined;
             // }
             if ((this.GetItemPlus().GetCasterPlus().GetAbsOrigin() - target.GetAbsOrigin() as Vector).Length2D() > this.GetItemPlus().GetSpecialValueFor("stack_gain_radius")) {

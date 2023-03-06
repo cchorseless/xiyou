@@ -291,7 +291,7 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
                     SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_DAMAGE, hTarget, actually_dmg, undefined);
                     hTarget.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_hook_target_enemy", {});
                     if (this.GetCasterPlus().HasModifier("modifier_pudge_arcana")) {
-                        if (hTarget.IsRealHero()) {
+                        if (hTarget.IsRealUnit()) {
                             this.GetCasterPlus().TempData().successful_hooks = this.GetCasterPlus().TempData().successful_hooks + 1;
                         } else {
                             this.GetCasterPlus().TempData().successful_hooks = 0;
@@ -972,7 +972,7 @@ export class modifier_imba_pudge_flesh_heap_handler extends BaseModifier_Plus {
     CC_OnDeath(params: ModifierInstanceEvent): void {
         let caster = this.GetCasterPlus();
         let target = params.unit;
-        if (this.GetCasterPlus().IsRealHero() && target.IsRealHero() && caster.GetTeamNumber() != target.GetTeamNumber() && (!params.unit.IsReincarnating || !params.unit.IsReincarnating())) {
+        if (this.GetCasterPlus().IsRealUnit() && target.IsRealUnit() && caster.GetTeamNumber() != target.GetTeamNumber() && (!params.unit.IsReincarnating || !params.unit.IsReincarnating())) {
             let flesh_heap_range = this.GetSpecialValueFor("range");
             if (flesh_heap_range == 0) {
                 flesh_heap_range = 2000;

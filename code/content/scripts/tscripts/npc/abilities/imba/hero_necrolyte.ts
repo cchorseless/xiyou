@@ -43,7 +43,7 @@ export class modifier_imba_sadist extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(params: ModifierAttackEvent): void {
         if (IsServer()) {
-            if (!params.attacker.IsRealHero()) {
+            if (!params.attacker.IsRealUnit()) {
                 return undefined;
             }
             if (params.attacker.PassivesDisabled()) {
@@ -70,14 +70,14 @@ export class modifier_imba_sadist extends BaseModifier_Plus {
         if (IsServer()) {
             let unit = params.unit;
             if (params.attacker == this.GetParentPlus()) {
-                if (!params.attacker.IsRealHero()) {
+                if (!params.attacker.IsRealUnit()) {
                     return undefined;
                 }
                 if (params.attacker.PassivesDisabled()) {
                     return undefined;
                 }
                 let stacks = 1;
-                if (unit.IsRealHero()) {
+                if (unit.IsRealUnit()) {
                     stacks = this.hero_multiplier;
                 }
                 if (!this.caster.HasModifier(this.modifier_sadist)) {
