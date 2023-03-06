@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -113,7 +114,7 @@ export class imba_phoenix_icarus_dive extends BaseAbility_Plus {
             caster.SetAngles(casterAngles.x, yaw, casterAngles.z);
             GridNav.DestroyTreesAroundPoint(pos, 80, false);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, effect_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != caster) {
                     if (enemy.GetTeamNumber() != caster.GetTeamNumber()) {
                         enemy.AddNewModifier(caster, this, "modifier_imba_phoenix_icarus_dive_slow_debuff", {
@@ -227,7 +228,7 @@ export class modifier_imba_phoenix_icarus_dive_dash_dummy extends BaseModifier_P
             stop_dmg_heal = hpCost;
         }
         let units = FindUnitsInRadius(caster.GetTeamNumber(), point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             if (unit.GetTeamNumber() == caster.GetTeamNumber() && unit != caster) {
                 let heal_amp = 1 + (caster.GetSpellAmplification(false) * 0.01);
                 stop_dmg_heal = stop_dmg_heal * heal_amp;
@@ -417,7 +418,7 @@ export class modifier_imba_phoenix_icarus_dive_extend_burn extends BaseModifier_
         let caster = this.GetCasterPlus();
         let ability = this.GetAbilityPlus();
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, this.hit_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             enemy.AddNewModifier(caster, ability, "modifier_imba_phoenix_icarus_dive_slow_debuff", {
                 duration: this.burn_duration * (1 - enemy.GetStatusResistance())
             });
@@ -524,7 +525,7 @@ export class imba_phoenix_fire_spirits extends BaseAbility_Plus {
         let particleName = "particles/units/heroes/hero_phoenix/phoenix_fire_spirits.vpcf";
         let pfx = ResHelper.CreateParticleEx(particleName, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, caster);
         ParticleManager.SetParticleControl(pfx, 1, Vector(numSpirits, 0, 0));
-        for (let i = 1; i <= numSpirits; i += 1) {
+        for (let i = 0; i < numSpirits; i++) {
             ParticleManager.SetParticleControl(pfx, 8 + i, Vector(1, 0, 0));
         }
         caster.TempData().fire_spirits_numSpirits = numSpirits;
@@ -600,7 +601,7 @@ export class modifier_imba_phoenix_fire_spirits_count extends BaseModifier_Plus 
         let caster = this.GetCasterPlus();
         let ability = caster.findAbliityPlus<imba_phoenix_launch_fire_spirit>("imba_phoenix_launch_fire_spirit");
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, 192, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             enemy.AddNewModifier(caster, ability, "modifier_imba_phoenix_fire_spirits_debuff", {
                 duration: ability.GetSpecialValueFor("duration") * (1 - enemy.GetStatusResistance())
             });
@@ -680,7 +681,7 @@ export class imba_phoenix_launch_fire_spirit extends BaseAbility_Plus {
             }
             let pfx = caster.TempData().fire_spirits_pfx;
             ParticleManager.SetParticleControl(pfx, 1, Vector(currentStack, 0, 0));
-            for (let i = 1; i <= caster.TempData().fire_spirits_numSpirits; i += 1) {
+            for (let i = 0; i < caster.TempData().fire_spirits_numSpirits; i++) {
                 let radius = 0;
                 if (i <= currentStack) {
                     radius = 1;
@@ -721,7 +722,7 @@ export class imba_phoenix_launch_fire_spirit extends BaseAbility_Plus {
         }
         let caster = this.GetCasterPlus();
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), vLocation, undefined, 20, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (enemy.GetTeamNumber() != caster.GetTeamNumber()) {
                 enemy.AddNewModifier(caster, this, "modifier_imba_phoenix_fire_spirits_debuff", {
                     duration: this.GetSpecialValueFor("duration") * (1 - enemy.GetStatusResistance())
@@ -753,7 +754,7 @@ export class imba_phoenix_launch_fire_spirit extends BaseAbility_Plus {
         EmitSoundOn("Hero_Phoenix.FireSpirits.Target", DummyUnit);
         AddFOWViewer(caster.GetTeamNumber(), DummyUnit.GetAbsOrigin(), 175, 1, true);
         let units = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             if (unit != caster) {
                 if (unit.GetTeamNumber() != caster.GetTeamNumber()) {
                     unit.AddNewModifier(caster, this, "modifier_imba_phoenix_fire_spirits_debuff", {
@@ -1076,12 +1077,12 @@ export class imba_phoenix_sun_ray extends BaseAbility_Plus {
             endcapPos.z = endcapPos.z + 92;
             ParticleManager.SetParticleControl(pfx, 1, endcapPos);
             let units = FindUnitsInLine(caster.GetTeamNumber(), caster.GetAbsOrigin() + caster.GetForwardVector() * 32 as Vector, endcapPos, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE);
-            for (const [_, unit] of ipairs(units)) {
+            for (const [_, unit] of GameFunc.iPair(units)) {
                 unit.AddNewModifier(caster, this, "modifier_imba_phoenix_sun_ray_dummy_buff", {
                     duration: this.GetSpecialValueFor("tick_interval")
                 });
             }
-            for (let i = 1; i <= numVision; i += 1) {
+            for (let i = 0; i < numVision; i++) {
                 AddFOWViewer(caster.GetTeamNumber(), (casterOrigin + casterForward * (vision_radius * 2 * (i - 1)) as Vector), vision_radius, deltaTime, false);
             }
             return deltaTime;
@@ -1202,7 +1203,7 @@ export class modifier_imba_phoenix_sun_ray_caster_dummy extends BaseModifier_Plu
         if (caster.HasTalent("special_bonus_imba_phoenix_4")) {
             let endcapPos = caster.GetAbsOrigin() + caster.GetForwardVector() * ability.GetSpecialValueFor("beam_range") as Vector;
             let units = FindUnitsInLine(caster.GetTeamNumber(), caster.GetAbsOrigin() + caster.GetForwardVector() * 32 as Vector, endcapPos, undefined, ability.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE);
-            for (const [_, unit] of ipairs(units)) {
+            for (const [_, unit] of GameFunc.iPair(units)) {
                 if (unit != caster) {
                     unit.Purge(false, true, false, true, true);
                 }
@@ -1495,7 +1496,7 @@ export class modifier_imba_phoenix_sun_ray_buff extends BaseModifier_Plus {
                 ParticleManager.ReleaseParticleIndex(pfx_explode);
                 let damage_this_tick = this.explode_dmg / (1 / this.tick_interval);
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), taker.GetAbsOrigin(), undefined, this.explode_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     let damageTable = {
                         victim: enemy,
                         attacker: caster,
@@ -1768,7 +1769,7 @@ export class modifier_imba_phoenix_supernova_caster_dummy extends BaseModifier_P
         }
         this.abilities = []
         if (this.GetCasterPlus() == this.GetParentPlus()) {
-            for (let slot = 0; slot <= 10; slot += 1) {
+            for (let slot = 0; slot <= 10; slot++) {
                 let ability = this.GetParentPlus().GetAbilityByIndex(slot);
                 if (ability && ability.IsActivated() && (!this.GetParentPlus().HasScepter() || (this.GetParentPlus().HasScepter() && ability.GetName() != "imba_phoenix_sun_ray"))) {
                     ability.SetActivated(false);
@@ -1788,7 +1789,7 @@ export class modifier_imba_phoenix_supernova_caster_dummy extends BaseModifier_P
                 caster.TempData().ally = undefined;
             }
             let eggs = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, 2500, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, egg] of ipairs(eggs)) {
+            for (const [_, egg] of GameFunc.iPair(eggs)) {
                 if (egg.GetUnitName() == "npc_dota_phoenix_sun" && egg.GetTeamNumber() == this.GetParentPlus().GetTeamNumber() && egg.GetOwnerPlus() == this.GetParentPlus().GetOwnerPlus()) {
                     egg.Kill(this.GetAbilityPlus(), keys.attacker);
                 }
@@ -1854,7 +1855,7 @@ export class modifier_imba_phoenix_supernova_bird_thinker extends BaseModifier_P
         let distance = ability.GetSpecialValueFor("aura_radius") + 1;
         let target;
         let target_num = 0;
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             target_num = target_num + 1;
             if (enemy.GetAttackTarget() == egg) {
                 target = enemy;
@@ -1911,7 +1912,7 @@ export class modifier_imba_phoenix_supernova_bird_thinker extends BaseModifier_P
         EmitSoundOn("Hero_Phoenix.FireSpirits.Target", DummyUnit);
         AddFOWViewer(caster.GetTeamNumber(), DummyUnit.GetAbsOrigin(), 175, 1, true);
         let units = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, caster.findAbliityPlus<imba_phoenix_launch_fire_spirit>("imba_phoenix_launch_fire_spirit").GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             if (unit != caster) {
                 if (unit.GetTeamNumber() != caster.GetTeamNumber()) {
                     unit.AddNewModifier(caster, caster.findAbliityPlus<imba_phoenix_launch_fire_spirit>("imba_phoenix_launch_fire_spirit"), "modifier_imba_phoenix_fire_spirits_debuff", {
@@ -2062,7 +2063,7 @@ export class modifier_imba_phoenix_supernova_egg_thinker extends BaseModifier_Pl
         }
         AddFOWViewer(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), this.aura_radius, math.min(1, this.GetRemainingTime()), false);
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), egg.GetAbsOrigin(), undefined, ability.GetSpecialValueFor("aura_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let damageTable = {
                 victim: enemy,
                 attacker: caster,
@@ -2111,7 +2112,7 @@ export class modifier_imba_phoenix_supernova_egg_thinker extends BaseModifier_Pl
                 caster.TempData().ally.SetHealth(caster.TempData().ally.GetMaxHealth());
             }
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), egg.GetAbsOrigin(), undefined, ability.GetSpecialValueFor("aura_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let item = BaseDataDriven.CreateItem("item_imba_dummy", caster);
                 item.ApplyDataDrivenModifier(caster, enemy, "modifier_stunned", {
                     duration: ability.GetSpecialValueFor("stun_duration")
@@ -2158,7 +2159,7 @@ export class modifier_imba_phoenix_supernova_egg_thinker extends BaseModifier_Pl
         this.bIsFirstAttacked = undefined;
     }
     ResetUnit(unit: IBaseNpc_Plus) {
-        for (let i = 0; i <= 10; i += 1) {
+        for (let i = 0; i <= 10; i++) {
             let abi = unit.GetAbilityByIndex(i);
             if (abi) {
                 if (abi.GetAbilityType() != 1 && !abi.IsItem()) {
@@ -2340,7 +2341,7 @@ export class modifier_imba_phoenix_supernova_scepter_passive extends BaseModifie
             egg.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_IDLE, egg_playback_rate);
             caster.TempData().egg = egg;
             caster.SetHealth(caster.GetMaxHealth());
-            for (let i = 0; i <= 5; i += 1) {
+            for (let i = 0; i <= 5; i++) {
                 let aghs = caster.GetItemInSlot(i);
                 if (aghs != undefined) {
                     if (aghs.GetName() == 'item_ultimate_scepter') {
@@ -2500,7 +2501,7 @@ export class modifier_imba_phoenix_burning_wings_buff extends BaseModifier_Plus 
         }
         let particleName = "particles/hero/phoenix/phoenix_burning_wings_2.vpcf";
         this.pfx = {}
-        for (let i = 1; i <= 5; i += 1) {
+        for (let i = 0; i < 5; i++) {
             this.pfx[i] = ResHelper.CreateParticleEx(particleName, ParticleAttachment_t.PATTACH_POINT_FOLLOW, bird);
             ParticleManager.SetParticleControlEnt(this.pfx[i], 0, bird, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", bird.GetAbsOrigin(), true);
             ParticleManager.SetParticleControlEnt(this.pfx[i], 1, bird, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", bird.GetAbsOrigin(), true);
@@ -2544,7 +2545,7 @@ export class modifier_imba_phoenix_burning_wings_buff extends BaseModifier_Plus 
             4: ability4,
             5: ability5
         }
-        for (const [_, abi] of ipairs(abi_table)) {
+        for (const [_, abi] of GameFunc.Pair(abi_table)) {
             if (keys.inflictor == abi) {
                 let damage = keys.damage;
                 caster.Heal(damage, this.GetAbilityPlus());
@@ -2556,7 +2557,7 @@ export class modifier_imba_phoenix_burning_wings_buff extends BaseModifier_Plus 
         if (!IsServer()) {
             return;
         }
-        for (let i = 1; i <= 5; i += 1) {
+        for (let i = 0; i < 5; i++) {
             ParticleManager.DestroyParticle(this.pfx[i], false);
             ParticleManager.ReleaseParticleIndex(this.pfx[i]);
             this.pfx[i] = undefined;

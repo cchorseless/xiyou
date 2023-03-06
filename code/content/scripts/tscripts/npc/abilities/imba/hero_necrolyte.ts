@@ -87,7 +87,7 @@ export class modifier_imba_sadist extends BaseModifier_Plus {
                 }
                 let modifier_sadist_handler = this.caster.FindModifierByName(this.modifier_sadist);
                 if (modifier_sadist_handler) {
-                    for (let i = 1; i <= stacks; i += 1) {
+                    for (let i = 0; i < stacks; i++) {
                         modifier_sadist_handler.IncrementStackCount();
                         modifier_sadist_handler.ForceRefresh();
                     }
@@ -206,7 +206,7 @@ export class imba_necrolyte_death_pulse extends BaseAbility_Plus {
                 caster.EmitSound("necrolyte_necr_ability_tox_0" + math.random(1, 3));
             }
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_loc, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 ApplyDamage({
                     attacker: caster,
                     victim: enemy,
@@ -233,7 +233,7 @@ export class imba_necrolyte_death_pulse extends BaseAbility_Plus {
                 ProjectileManager.CreateTrackingProjectile(enemy_projectile);
             }
             let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster_loc, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, ally] of ipairs(allies)) {
+            for (const [_, ally] of GameFunc.iPair(allies)) {
                 let ally_projectile = {
                     Target: ally,
                     Source: caster,
@@ -268,7 +268,7 @@ export class imba_necrolyte_death_pulse extends BaseAbility_Plus {
             }
             if (extraData.radius) {
                 let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster_loc, undefined, extraData.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, ally] of ipairs(allies)) {
+                for (const [_, ally] of GameFunc.iPair(allies)) {
                     let ally_projectile = {
                         Target: ally,
                         Source: caster,

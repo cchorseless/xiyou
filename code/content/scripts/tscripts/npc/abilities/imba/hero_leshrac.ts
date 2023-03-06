@@ -82,7 +82,7 @@ export class imba_leshrac_split_earth extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(particle_spikes_fx, 1, Vector(radius, 1, 1));
             ParticleManager.ReleaseParticleIndex(particle_spikes_fx);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 enemy.AddNewModifier(caster, ability, modifier_stun, {
                     duration: duration * (1 - enemy.GetStatusResistance())
                 });
@@ -259,7 +259,7 @@ export class modifier_imba_split_earth_empowered_split extends BaseModifier_Plus
     OnIntervalThink(): void {
         let repeat_needed = true;
         while (repeat_needed) {
-            let item_time = this.stack_table[1];
+            let item_time = this.stack_table[0];
             if (GameRules.GetGameTime() - item_time >= this.empowered_split_duration) {
                 if (this.GetStackCount() == 1) {
                     this.Destroy();
@@ -463,7 +463,7 @@ export class modifier_imba_leshrac_diabolic_edict extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(pfx, 2, Vector(math.max(this.explosion_radius, RandomInt(50, 100)), 0, 0));
             if (this.explosion_radius > 0) {
                 let explosion_enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.explosion_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, explosion_enemy] of ipairs(explosion_enemies)) {
+                for (const [_, explosion_enemy] of GameFunc.iPair(explosion_enemies)) {
                     if (explosion_enemy != target) {
                         let damageTable = {
                             victim: explosion_enemy,
@@ -497,7 +497,7 @@ export class modifier_imba_leshrac_diabolic_edict extends BaseModifier_Plus {
         ParticleManager.ReleaseParticleIndex(this.particle_ring_fx);
         let damage = this.purity_casing_fixed_dmg + this.purity_casing_dmg_per_stack * this.GetStackCount();
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.purity_casing_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let damageTable = {
                 victim: enemy,
                 attacker: this.caster,
@@ -601,7 +601,7 @@ export class imba_leshrac_lightning_storm extends BaseAbility_Plus {
         }
         if (tormented_cast) {
             let marked_units = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, tormented_soul_aoe_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, marked_unit] of ipairs(marked_units)) {
+            for (const [_, marked_unit] of GameFunc.iPair(marked_units)) {
                 marked_unit.AddNewModifier(caster, ability, modifier_tormented_mark, {
                     duration: tormented_soul_mark_duration * (1 - marked_unit.GetStatusResistance())
                 });
@@ -615,7 +615,7 @@ export class imba_leshrac_lightning_storm extends BaseAbility_Plus {
             remaining_jumps = remaining_jumps - 1;
             if (remaining_jumps > 0) {
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (!enemies_table[enemy.entindex()] && enemy != target) {
                         target = enemy;
                         return jump_delay;
@@ -780,7 +780,7 @@ export class modifier_imba_leshrac_lightning_storm_scepter_thinker extends BaseM
         }
         let enemy_found = false;
         let chosen_enemy;
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (enemy.IsHero()) {
                 enemy_found = true;
                 chosen_enemy = enemy;
@@ -1156,7 +1156,7 @@ export class modifier_imba_leshrac_pulse_nova extends BaseModifier_Plus {
         if (this.caster.HasTalent("special_bonus_unique_imba_leshrac_pulse_nova_damage")) {
             damage = damage + this.caster.GetTalentValue("special_bonus_unique_imba_leshrac_pulse_nova_damage") * GameFunc.GetCount(enemies);
         }
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             EmitSoundOn(this.sound_hit, enemy);
             this.particle_hit_fx = ResHelper.CreateParticleEx(this.particle_hit, ParticleAttachment_t.PATTACH_ABSORIGIN, enemy, this.caster);
             ParticleManager.SetParticleControl(this.particle_hit_fx, 0, enemy.GetAbsOrigin());

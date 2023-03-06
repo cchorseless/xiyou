@@ -154,7 +154,7 @@ export class modifier_item_imba_cyclone_active extends BaseModifierMotionHorizon
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         this.GetParentPlus().SetAbsOrigin(this.abs);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
-        this.GetParentPlus().SetAngles(this.angle[1], this.angle[2], this.angle[3]);
+        this.GetParentPlus().SetAngles(this.angle[0], this.angle[2], this.angle[3]);
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         let state = {
@@ -246,7 +246,7 @@ export class modifier_item_imba_cyclone_active_debuff extends BaseModifierMotion
         this.GetParentPlus().FadeGesture(GameActivity_t.ACT_DOTA_FLAIL);
         this.GetParentPlus().SetAbsOrigin(this.abs);
         ResolveNPCPositions(this.GetParentPlus().GetAbsOrigin(), 128);
-        this.GetParentPlus().SetAngles(this.angle[1], this.angle[2], this.angle[3]);
+        this.GetParentPlus().SetAngles(this.angle[0], this.angle[2], this.angle[3]);
         let damageTable = {
             victim: this.GetParentPlus(),
             attacker: this.GetCasterPlus(),

@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -86,7 +87,7 @@ export class modifier_imba_zuus_arc_lightning extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         this.zapped = false;
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.current_unit.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.current_unit.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false))) {
             if (!this.units_affected[enemy.GetEntityIndex() + ""] || (this.GetCasterPlus().HasTalent("special_bonus_imba_zuus_8") && this.units_affected[enemy.GetEntityIndex() + ""] < this.GetCasterPlus().GetTalentValue("special_bonus_imba_zuus_8", "additional_hits")) && enemy != this.current_unit && enemy != this.previous_unit) {
                 enemy.EmitSound("Hero_Zuus.ArcLightning.Target");
                 this.lightning_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_zuus/zuus_arc_lightning_.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.current_unit);
@@ -118,7 +119,7 @@ export class modifier_imba_zuus_arc_lightning extends BaseModifier_Plus {
             }
         }
         if ((this.unit_counter >= this.jump_count && this.jump_count > 0) || !this.zapped) {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.current_unit.GetAbsOrigin(), undefined, this.radius * this.static_chain_mult, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.current_unit.GetAbsOrigin(), undefined, this.radius * this.static_chain_mult, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false))) {
                 if ((!this.units_affected[enemy.GetEntityIndex() + ""] || (this.GetCasterPlus().HasTalent("special_bonus_imba_zuus_8") && this.units_affected[enemy.GetEntityIndex() + ""] < this.GetCasterPlus().GetTalentValue("special_bonus_imba_zuus_8", "additional_hits"))) && enemy != this.current_unit && enemy != this.previous_unit && enemy.HasModifier("modifier_imba_zuus_static_charge")) {
                     enemy.EmitSound("Hero_Zuus.ArcLightning.Target");
                     this.lightning_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_zuus/zuus_arc_lightning_.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.current_unit);
@@ -230,7 +231,7 @@ export class imba_zuus_lightning_bolt extends BaseAbility_Plus {
                 }
                 let nearby_enemy_units = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, spread_aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, target_flags, FindOrder.FIND_CLOSEST, false);
                 // let closest = radius;
-                for (const [i, unit] of ipairs(nearby_enemy_units)) {
+                for (const [i, unit] of GameFunc.iPair(nearby_enemy_units)) {
                     if (!unit.IsMagicImmune() || pierce_spellimmunity) {
                         target = unit;
                         return;
@@ -246,7 +247,7 @@ export class imba_zuus_lightning_bolt extends BaseAbility_Plus {
             }
             if (target == undefined) {
                 let nearby_enemy_units = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, spread_aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, ability.GetAbilityTargetType(), DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-                for (const [i, unit] of ipairs(nearby_enemy_units)) {
+                for (const [i, unit] of GameFunc.iPair(nearby_enemy_units)) {
                     target = unit;
                     return;
                 }
@@ -441,7 +442,7 @@ export class modifier_imba_zuus_static_field extends BaseModifier_Plus {
                 damage_table.attacker = this.GetCasterPlus();
                 damage_table.ability = ability;
                 damage_table.damage_type = ability.GetAbilityDamageType();
-                for (const [_, unit] of ipairs(nearby_enemy_units as IBaseNpc_Plus[])) {
+                for (const [_, unit] of GameFunc.iPair(nearby_enemy_units as IBaseNpc_Plus[])) {
                     if (unit.IsAlive() && unit != caster && !unit.IsRoshan()) {
                         let current_health = unit.GetHealth();
                         damage_table.damage = (current_health / 100) * damage_health_pct;
@@ -634,7 +635,7 @@ export class modifier_zuus_nimbus_storm extends BaseModifier_Plus {
         if (IsServer()) {
             if (this.lightning_bolt.GetLevel() > 0 && this.counter >= this.cloud_bolt_interval) {
                 let nearby_enemy_units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.cloud_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, this.lightning_bolt.GetAbilityTargetType(), DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-                for (const [_, unit] of ipairs(nearby_enemy_units)) {
+                for (const [_, unit] of GameFunc.iPair(nearby_enemy_units)) {
                     if (unit.IsAlive()) {
                         imba_zuus_lightning_bolt.CastLightningBolt(this.GetCasterPlus(), this.lightning_bolt, unit, unit.GetAbsOrigin(), this.GetParentPlus());
                         this.counter = 0;
@@ -680,7 +681,7 @@ export class modifier_zuus_nimbus_storm extends BaseModifier_Plus {
                 caster.RemoveModifierByName("modifier_imba_zuus_nimbus_z");
                 FindClearSpaceForUnit(caster, this.GetCasterPlus().GetAbsOrigin(), false);
             }
-            for (const [_, nimbus] of ipairs(Entities.FindAllByName("npc_dota_zeus_cloud"))) {
+            for (const [_, nimbus] of GameFunc.iPair(Entities.FindAllByName("npc_dota_zeus_cloud"))) {
                 if (nimbus.IsAlive()) {
                     nimbusRemaining = true;
                     return;
@@ -742,7 +743,7 @@ export class imba_zuus_nimbus_zap extends BaseAbility_Plus {
             }
             let nimbus_ability = this.GetCasterPlus().findAbliityPlus<imba_zuus_cloud>("imba_zuus_cloud");
             this.nimbus = nimbus_ability.zuus_nimbus_unit;
-            for (const [_, nimbus] of ipairs(Entities.FindAllByName("npc_dota_zeus_cloud"))) {
+            for (const [_, nimbus] of GameFunc.iPair(Entities.FindAllByName("npc_dota_zeus_cloud"))) {
                 if (nimbus.IsAlive() && (target_point - nimbus.GetAbsOrigin() as Vector).Length2D() < distance) {
                     distance = (target_point - nimbus.GetAbsOrigin() as Vector).Length2D();
                     target_loc = nimbus.GetAbsOrigin();
@@ -964,7 +965,7 @@ export class imba_zuus_thundergods_wrath extends BaseAbility_Plus {
             damage_table.damage_type = ability.GetAbilityDamageType();
             // todo 找到所有敌人
             const enemyList: IBaseNpc_Plus[] = [];
-            for (const [_, hero] of ipairs(enemyList)) {
+            for (const [_, hero] of GameFunc.iPair(enemyList)) {
                 if (hero.IsAlive() && hero.GetTeam() != caster.GetTeam() && (!hero.IsIllusion()) && !hero.IsClone()) {
                     let target_point = hero.GetAbsOrigin();
                     let thundergod_strike_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_zuus/zuus_thundergods_wrath.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, hero, this.GetCasterPlus());
@@ -1056,7 +1057,7 @@ export class modifier_imba_zuus_thundergods_focus extends BaseModifier_Plus {
                 this.bonus_turn_rate = caster.GetTalentValue("special_bonus_imba_zuus_4", "turn_rate");
             }
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_zuus_6")) {
-                for (let i = 0; i <= 7; i += 1) {
+                for (let i = 0; i <= 7; i++) {
                     let ability = this.GetParentPlus().GetAbilityByIndex(i);
                     if (ability) {
                         let remaining_cooldown = ability.GetCooldownTimeRemaining();

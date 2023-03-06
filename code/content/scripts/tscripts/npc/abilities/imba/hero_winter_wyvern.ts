@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -269,7 +270,7 @@ export class imba_winter_wyvern_splinter_blast extends BaseAbility_Plus {
     OnTrackingProjectileHit(keys: any) {
         let nearby_enemy_units = FindUnitsInRadius(keys.caster.GetTeam(), keys.target.GetAbsOrigin(), undefined, keys.split_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         keys.caster.EmitSound("Hero_Winter_Wyvern.SplinterBlast.Target");
-        for (const [_, enemy] of ipairs(nearby_enemy_units)) {
+        for (const [_, enemy] of GameFunc.iPair(nearby_enemy_units)) {
             if (enemy != keys.target && enemy.IsAlive()) {
                 let extra_data = {
                     damage: keys.damage,

@@ -46,7 +46,7 @@ export class imba_phantom_assassin_stifling_dagger extends BaseAbility_Plus {
                 main_dagger: false
             }
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, this.cast_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FIND_UNITS_EVERYWHERE, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != target) {
                     this.LaunchDagger(enemy, extra_data);
                     secondary_knives_thrown = secondary_knives_thrown + 1;
@@ -84,10 +84,10 @@ export class imba_phantom_assassin_stifling_dagger extends BaseAbility_Plus {
             return false;
         }
         let responses = {
-            1: "phantom_assassin_phass_ability_stiflingdagger_01",
-            2: "phantom_assassin_phass_ability_stiflingdagger_02",
-            3: "phantom_assassin_phass_ability_stiflingdagger_03",
-            4: "phantom_assassin_phass_ability_stiflingdagger_04"
+            "1": "phantom_assassin_phass_ability_stiflingdagger_01",
+            "2": "phantom_assassin_phass_ability_stiflingdagger_02",
+            "3": "phantom_assassin_phass_ability_stiflingdagger_03",
+            "4": "phantom_assassin_phass_ability_stiflingdagger_04"
         }
         caster.EmitCasterSound(Object.values(responses), 20, ResHelper.EDOTA_CAST_SOUND.FLAG_NONE, 20, "stifling_dagger");
         if (target.GetTeamNumber() != caster.GetTeamNumber()) {
@@ -463,9 +463,9 @@ export class modifier_imba_blur extends BaseModifier_Plus {
             } else if (GameFunc.GetCount(nearby_enemies) == 0 && !this.caster.HasModifier(this.modifier_aura)) {
                 this.caster.AddNewModifier(this.caster, this.GetAbilityPlus(), this.modifier_aura, {});
                 let responses = {
-                    1: "phantom_assassin_phass_ability_blur_01",
-                    2: "phantom_assassin_phass_ability_blur_02",
-                    3: "phantom_assassin_phass_ability_blur_03"
+                    "1": "phantom_assassin_phass_ability_blur_01",
+                    "2": "phantom_assassin_phass_ability_blur_02",
+                    "3": "phantom_assassin_phass_ability_blur_03"
                 }
                 this.caster.EmitCasterSound(Object.values(responses), 10, ResHelper.EDOTA_CAST_SOUND.FLAG_NONE, 50, "blur");
             }
@@ -516,7 +516,7 @@ export class modifier_imba_blur extends BaseModifier_Plus {
             return;
         }
         if (keys.attacker == this.GetParentPlus() && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && this.GetAbilityPlus().IsTrained()) {
-            for (let abilities = 0; abilities <= 23; abilities += 1) {
+            for (let abilities = 0; abilities <= 23; abilities++) {
                 let ability = this.GetParentPlus().GetAbilityByIndex(abilities);
                 if (ability && ability.GetAbilityType() != ABILITY_TYPES.ABILITY_TYPE_ULTIMATE) {
                     ability.EndCooldown();
@@ -747,10 +747,10 @@ export class modifier_imba_coup_de_grace extends BaseModifier_Plus {
             if (GFuncRandom.PRD(crit_chance_total, this)) {
                 target.EmitSound("Hero_PhantomAssassin.CoupDeGrace");
                 let responses = {
-                    1: "phantom_assassin_phass_ability_coupdegrace_01",
-                    2: "phantom_assassin_phass_ability_coupdegrace_02",
-                    3: "phantom_assassin_phass_ability_coupdegrace_03",
-                    4: "phantom_assassin_phass_ability_coupdegrace_04"
+                    "1": "phantom_assassin_phass_ability_coupdegrace_01",
+                    "2": "phantom_assassin_phass_ability_coupdegrace_02",
+                    "3": "phantom_assassin_phass_ability_coupdegrace_03",
+                    "4": "phantom_assassin_phass_ability_coupdegrace_04"
                 }
                 this.caster.EmitCasterSound(Object.values(responses), 50, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS, 20, "coup_de_grace");
                 let crit_bonus = this.crit_bonus + this.caster.GetTalentValue("special_bonus_imba_phantom_assassin_5");
@@ -979,7 +979,7 @@ export class modifier_phantom_assassin_arcana extends BaseModifier_Plus {
             });
             gravestone.TempData().epitaph_number = RandomInt(1, 13);
             gravestone.TempData().victim_id = params.target.GetPlayerID();
-            for (let i = 0; i <= PlayerResource.GetPlayerCount() - 1; i += 1) {
+            for (let i = 0; i <= PlayerResource.GetPlayerCount() - 1; i++) {
                 gravestone.SetControllableByPlayer(i as PlayerID, false);
             }
             if (this.GetStackCount() == 400) {

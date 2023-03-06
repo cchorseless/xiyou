@@ -34,7 +34,7 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
         }
     }
     OnAbilityPhaseStart(): boolean {
-        for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("fake_lance_distance"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("fake_lance_distance"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
             if (unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID() && unit != this.GetCasterPlus()) {
                 unit.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_1);
                 if (unit.IsIdle()) {
@@ -50,14 +50,14 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_phantom_lancer") {
             if (!this.responses) {
                 this.responses = {
-                    1: "phantom_lancer_plance_ability_spiritlance_01",
-                    2: "phantom_lancer_plance_ability_spiritlance_03",
-                    3: "phantom_lancer_plance_ability_spiritlance_05",
-                    4: "phantom_lancer_plance_ability_spiritlance_06",
-                    5: "phantom_lancer_plance_ability_spiritlance_08"
+                    "1": "phantom_lancer_plance_ability_spiritlance_01",
+                    "2": "phantom_lancer_plance_ability_spiritlance_03",
+                    "3": "phantom_lancer_plance_ability_spiritlance_05",
+                    "4": "phantom_lancer_plance_ability_spiritlance_06",
+                    "5": "phantom_lancer_plance_ability_spiritlance_08"
                 }
             }
-            this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+            this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
         }
         let lance_speed = this.GetSpecialValueFor("lance_speed");
         if (target.HasModifier("modifier_imba_phantom_lancer_sun_catcher_aura")) {
@@ -74,7 +74,7 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
             bReplaceExisting: false,
             bProvidesVision: false
         });
-        for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("fake_lance_distance"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("fake_lance_distance"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
             if (unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID() && unit != this.GetCasterPlus() && unit.IsIllusion()) {
                 ProjectileManager.CreateTrackingProjectile({
                     Target: target,
@@ -122,7 +122,7 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
                     outgoing_damage_roshan: undefined,
                     duration: this.GetSpecialValueFor("illusion_duration")
                 });
-                for (const [_, illusion] of ipairs(illusions)) {
+                for (const [_, illusion] of GameFunc.iPair(illusions)) {
                     this.spawn_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_phantom_lancer/phantom_lancer_spawn_illusion.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, illusion);
                     ParticleManager.SetParticleControlEnt(this.spawn_particle, 0, illusion, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", illusion.GetAbsOrigin(), true);
                     ParticleManager.SetParticleControlEnt(this.spawn_particle, 1, illusion, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", illusion.GetAbsOrigin(), true);
@@ -150,7 +150,7 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
                     outgoing_damage_roshan: undefined,
                     duration: this.GetSpecialValueFor("illusion_duration") + this.GetSpecialValueFor("illusory_heart_bonus_duration")
                 });
-                for (const [_, illusion] of ipairs(illusions)) {
+                for (const [_, illusion] of GameFunc.iPair(illusions)) {
                     this.spawn_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_phantom_lancer/phantom_lancer_spawn_illusion.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, illusion);
                     ParticleManager.SetParticleControlEnt(this.spawn_particle, 0, illusion, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", illusion.GetAbsOrigin(), true);
                     ParticleManager.SetParticleControlEnt(this.spawn_particle, 1, illusion, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", illusion.GetAbsOrigin(), true);
@@ -271,21 +271,21 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
             if (RollPercentage(5)) {
                 if (!this.rare_responses) {
                     this.rare_responses = {
-                        1: "phantom_lancer_plance_ability_dopplewalk_01",
-                        2: "phantom_lancer_plance_ability_dopplewalk_06"
+                        "1": "phantom_lancer_plance_ability_dopplewalk_01",
+                        "2": "phantom_lancer_plance_ability_dopplewalk_06"
                     }
                 }
-                this.GetCasterPlus().EmitSound(this.rare_responses[RandomInt(1, GameFunc.GetCount(this.rare_responses))]);
+                this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.rare_responses));
             } else {
                 if (!this.responses) {
                     this.responses = {
-                        1: "phantom_lancer_plance_ability_dopplewalk_02",
-                        2: "phantom_lancer_plance_ability_dopplewalk_04",
-                        3: "phantom_lancer_plance_ability_dopplewalk_05",
-                        4: "phantom_lancer_plance_ability_juxtapose_02"
+                        "1": "phantom_lancer_plance_ability_dopplewalk_02",
+                        "2": "phantom_lancer_plance_ability_dopplewalk_04",
+                        "3": "phantom_lancer_plance_ability_dopplewalk_05",
+                        "4": "phantom_lancer_plance_ability_juxtapose_02"
                     }
                 }
-                this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+                this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
             }
         }
         this.first_unit = undefined;
@@ -328,7 +328,7 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
         if (this.illusion_3 && !this.illusion_3.IsNull() && this.illusion_3.IsAlive()) {
             this.illusion_3.ForceKill(false);
         }
-        for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("search_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false))) {
+        for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("search_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false))) {
             if (unit.GetName() != this.GetCasterPlus().GetName() && (unit.IsRealHero() || unit.IsClone() || unit.IsTempestDouble() || unit.IsIllusion())) {
                 this.illusion_3 = this.GetCasterPlus().CreateIllusion(unit, {
                     outgoing_damage: -100,
@@ -347,7 +347,7 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
             }
         }
         table.insert(affected_units, this.illusion_3);
-        for (const [_, unit] of ipairs(affected_units)) {
+        for (const [_, unit] of GameFunc.iPair(affected_units)) {
             if (unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID() && (unit == this.GetCasterPlus() || unit.IsIllusion())) {
                 unit.Purge(false, true, false, false, false);
                 ProjectileManager.ProjectileDodge(unit);
@@ -655,7 +655,7 @@ export class modifier_imba_phantom_lancer_phantom_edge_agility extends BaseModif
         if (!IsServer()) {
             return;
         }
-        for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.mob_mentality_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.mob_mentality_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
             if (unit != this.GetParentPlus() && unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID()) {
                 this.bonus_agility = this.bonus_agility + this.mob_mentality_additional_agility;
             }
@@ -889,10 +889,10 @@ export class modifier_imba_phantom_lancer_juxtapose extends BaseModifier_Plus {
                 }
                 if (this.owner.findAbliityPlus<imba_phantom_lancer_juxtapose>("imba_phantom_lancer_juxtapose") && this.owner.FindAbilityByName("imba_phantom_lancer_juxtapose").GetToggleState() && this.owner.FindAbilityByName("imba_phantom_lancer_juxtapose").IsCooldownReady()) {
                     this.confusion_positions = {}
-                    for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.owner.findAbliityPlus<imba_phantom_lancer_juxtapose>("imba_phantom_lancer_juxtapose").GetSpecialValueFor("confusion_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
+                    for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.owner.findAbliityPlus<imba_phantom_lancer_juxtapose>("imba_phantom_lancer_juxtapose").GetSpecialValueFor("confusion_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
                         table.insert(this.confusion_positions, unit.GetAbsOrigin());
                     }
-                    for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.owner.findAbliityPlus<imba_phantom_lancer_juxtapose>("imba_phantom_lancer_juxtapose").GetSpecialValueFor("confusion_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
+                    for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.owner.findAbliityPlus<imba_phantom_lancer_juxtapose>("imba_phantom_lancer_juxtapose").GetSpecialValueFor("confusion_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
                         FindClearSpaceForUnit(unit, this.confusion_positions[_], true);
                     }
                     this.confusion_positions = undefined;
@@ -900,7 +900,7 @@ export class modifier_imba_phantom_lancer_juxtapose extends BaseModifier_Plus {
                 }
             }
             if (this.duration > 0 && (GameFunc.GetCount((this.owner.TempData().juxtapose_table)) >= this.GetAbilityPlus().GetTalentSpecialValueFor("max_illusions"))) {
-                for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
+                for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
                     if (unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID()) {
                         let assault_modifier = unit.AddNewModifier(this.GetParentPlus().GetOwnerPlus(), this.GetAbilityPlus(), "modifier_imba_phantom_lancer_juxtapose_assault", {
                             duration: this.GetSpecialValueFor("assault_duration")

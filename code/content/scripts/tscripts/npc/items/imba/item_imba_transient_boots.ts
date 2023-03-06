@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -158,7 +159,7 @@ export class modifier_item_imba_transient_boots_invis extends BaseModifier_Plus 
             return;
         }
         let present_mod = false;
-        for (const [_, modifier] of ipairs(this.parent.FindAllModifiersByName("modifier_invisible"))) {
+        for (const [_, modifier] of GameFunc.iPair(this.parent.FindAllModifiersByName("modifier_invisible"))) {
             if (modifier.GetItemPlus() == this.ability) {
                 present_mod = true;
                 return;

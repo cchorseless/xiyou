@@ -61,7 +61,7 @@ export class imba_invoker {
         if (orb_modifier != undefined) {
             let modifiers = caster.FindAllModifiersByName(orb_modifier);
             let oldest;
-            for (let i = 0; i <= 2; i += 1) {
+            for (let i = 0; i <= 2; i++) {
                 if (oldest == undefined) {
                     oldest = modifiers[i];
                 } else if (modifiers[i] != undefined && modifiers[i].GetCreationTime() > oldest.GetCreationTime()) {
@@ -793,7 +793,7 @@ export class imba_invoker_sun_strike extends BaseAbility_Plus {
                     ability.CreateVisibilityNode(target_point2, vision_distance, vision_duration);
                     EmitSoundOnLocationWithCaster(target_point1, "Hero_Invoker.Cataclysm.Ignite", caster);
                     EmitSoundOnLocationWithCaster(target_point2, "Hero_Invoker.Cataclysm.Ignite", caster);
-                    for (const [_, hero2] of ipairs(all_heroes)) {
+                    for (const [_, hero2] of GameFunc.iPair(all_heroes)) {
                         if (hero2.GetPlayerID() == caster.GetPlayerID()) {
                             CreateModifierThinker(caster, ability, "modifier_imba_invoker_sun_strike_cataclysm", {
                                 duration: delay,
@@ -892,7 +892,7 @@ export class modifier_imba_invoker_sun_strike_thinker extends BaseModifier_Plus 
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
             for (const enemy of (enemies)) {
                 if ((enemy.IsRealUnit() || enemy.IsTempestDouble())) {
-                    for (let beam = 1; beam <= 2; beam += 1) {
+                    for (let beam = 1; beam <= 2; beam++) {
                         if (beam == 1) {
                             this.cataclysm_point = enemy.GetAbsOrigin() + RandomVector(this.cataclysm_min_range);
                         } else if (beam == 2) {
@@ -914,7 +914,7 @@ export class modifier_imba_invoker_sun_strike_thinker extends BaseModifier_Plus 
         if (!IsServer()) {
             return;
         }
-        for (let location = 1; location <= GameFunc.GetCount(this.sun_strike_points); location += 1) {
+        for (let location = 0; location < GameFunc.GetCount(this.sun_strike_points); location++) {
             EmitSoundOnLocationWithCaster(this.sun_strike_points[location], "Hero_Invoker.SunStrike.Ignite", this.GetCasterPlus());
             let sun_strike_crater = ResHelper.CreateParticleEx("particles/units/heroes/hero_invoker/invoker_sun_strike.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, undefined);
             ParticleManager.SetParticleControl(sun_strike_crater, 0, this.sun_strike_points[location]);
@@ -923,7 +923,7 @@ export class modifier_imba_invoker_sun_strike_thinker extends BaseModifier_Plus 
             let nearby_enemy_units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.sun_strike_points[location], undefined, this.area_of_effect + (this.mini_beam_radius / 2), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
             let incinerate_modifier = undefined;
             if (GameFunc.GetCount(nearby_enemy_units) > 0) {
-                for (const [_, enemy] of ipairs(nearby_enemy_units)) {
+                for (const [_, enemy] of GameFunc.iPair(nearby_enemy_units)) {
                     if ((GetGroundPosition(enemy.GetAbsOrigin(), undefined) - this.sun_strike_points[location] as Vector).Length2D() <= this.area_of_effect) {
                         ApplyDamage({
                             victim: enemy,
@@ -1002,7 +1002,7 @@ export class modifier_imba_invoker_sun_strike extends BaseModifier_Plus {
             let nearby_enemy_units = FindUnitsInRadius(this.caster.GetTeam(), this.target_point, undefined, search_area, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
             let hit_table: IBaseNpc_Plus[] = []
             if (nearby_enemy_units != undefined) {
-                for (const [_, hero] of ipairs(nearby_enemy_units)) {
+                for (const [_, hero] of GameFunc.iPair(nearby_enemy_units)) {
                     hero.AddNewModifier(this.caster, this.ability, "modifier_imba_invoker_sun_strike_incinerate", {
                         duration: this.incinerate_duration,
                         damage: this.damage
@@ -1055,7 +1055,7 @@ export class modifier_imba_invoker_sun_strike_cataclysm extends BaseModifier_Plu
             ParticleManager.SetParticleControl(sun_strike_crater, 1, Vector(this.area_of_effect, 0, 0));
             let nearby_enemy_units = FindUnitsInRadius(this.caster.GetTeam(), this.target_point, undefined, this.area_of_effect, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
             if (nearby_enemy_units != undefined) {
-                for (const [_, hero] of ipairs(nearby_enemy_units)) {
+                for (const [_, hero] of GameFunc.iPair(nearby_enemy_units)) {
                     hero.AddNewModifier(this.caster, this.ability, "modifier_imba_invoker_sun_strike_incinerate", {
                         duration: this.incinerate_duration,
                         damage: this.damage
@@ -1611,7 +1611,7 @@ export class imba_invoker_alacrity extends BaseAbility_Plus {
             let bonus_damage = ability.GetLevelSpecialValueFor("bonus_damage", exort_level);
             EmitSoundOn("Hero_Invoker.Alacrity", caster);
             if (caster.HasTalent("imba_special_bonus_unique_invoker_6") && target == caster) {
-                for (const [_, hero] of ipairs(HeroList.GetAllHeroes())) {
+                for (const [_, hero] of GameFunc.iPair(HeroList.GetAllHeroes())) {
                     if (hero == caster) {
                         hero.AddNewModifier(caster, ability, "modifier_imba_invoker_alacrity", {
                             duration: alacrity_duration * 2,
@@ -1665,7 +1665,7 @@ export class imba_invoker_alacrity extends BaseAbility_Plus {
                 let caster = this.GetCasterPlus();
                 let chain_particle = attacker.GetRangedProjectileName();
                 let chain_enemies = FindUnitsInRadius(caster.GetTeam(), target.GetAbsOrigin(), undefined, chain_distance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
-                for (const [_, enemy] of ipairs(chain_enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(chain_enemies)) {
                     if (enemy != target) {
                         chains = chains - 1;
                         let attack_projectile;
@@ -1757,7 +1757,7 @@ export class modifier_imba_invoker_alacrity extends BaseModifier_Plus {
                 let chain_particle = attacker.GetRangedProjectileName();
                 let chain_distance = ability.GetSpecialValueFor("chain_distance");
                 let chain_enemies = FindUnitsInRadius(caster.GetTeam(), target.GetAbsOrigin(), undefined, chain_distance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
-                for (const [_, enemy] of ipairs(chain_enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(chain_enemies)) {
                     if (enemy != target) {
                         chains = chains - 1;
                         let attack_projectile;
@@ -1799,7 +1799,7 @@ export class modifier_imba_invoker_alacrity extends BaseModifier_Plus {
                 let chain_particle = "particles/hero/invoker/alacrity/imba_invoker_alacrity_chain_lightning.vpcf";
                 let chain_distance = ability.GetSpecialValueFor("chain_distance");
                 let chain_enemies = FindUnitsInRadius(caster.GetTeam(), target.GetAbsOrigin(), undefined, chain_distance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
-                for (const [_, enemy] of ipairs(chain_enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(chain_enemies)) {
                     if (enemy != target) {
                         let chain_pfx = ResHelper.CreateParticleEx(chain_particle, ParticleAttachment_t.PATTACH_WORLDORIGIN, target);
                         ParticleManager.SetParticleControl(chain_pfx, 0, Vector(target.GetAbsOrigin().x, target.GetAbsOrigin().y, target.GetAbsOrigin().z + target.GetBoundingMaxs().z));
@@ -1883,7 +1883,7 @@ export class imba_invoker_forge_spirit extends BaseAbility_Plus {
                 }
             }
             this.forged_spirits = updated_spirit_array;
-            for (let i = 1; i <= spirit_count; i += 1) {
+            for (let i = 0; i < spirit_count; i++) {
                 let forged_spirit = BaseNpc_Plus.CreateUnitByName(spirit_name, caster.GetAbsOrigin() + RandomVector(100) as Vector, caster.GetTeamNumber(), true, caster, caster);
                 if (caster.TempData().bPersona) {
                     forged_spirit.SetOriginalModel("models/heroes/invoker_kid/invoker_kid_trainer_dragon.vmdl");
@@ -2004,7 +2004,7 @@ export class modifier_imba_invoker_forge_spirit extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(pfx);
             let nearby_enemy_units = FindUnitsInRadius(this.caster.GetTeam(), this.GetParentPlus().GetAbsOrigin(), undefined, this.death_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
             if (nearby_enemy_units != undefined) {
-                for (const [_, enemy] of ipairs(nearby_enemy_units)) {
+                for (const [_, enemy] of GameFunc.iPair(nearby_enemy_units)) {
                     let damage_table: ApplyDamageOptions = {} as any;
                     damage_table.attacker = this.caster;
                     damage_table.victim = enemy;
@@ -2475,7 +2475,7 @@ export class modifier_imba_invoker_emp extends BaseModifier_Plus {
             EmitSoundOnLocationWithCaster(this.target_point, "Hero_Invoker.EMP.Discharge", this.caster);
             let nearby_enemy_units = FindUnitsInRadius(this.caster.GetTeam(), this.target_point, undefined, this.area_of_effect, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MANA_ONLY, FindOrder.FIND_ANY_ORDER, false);
             let enemy_heroes_hit = 0;
-            for (const [i, individual_enemy] of ipairs(nearby_enemy_units)) {
+            for (const [i, individual_enemy] of GameFunc.iPair(nearby_enemy_units)) {
                 if (this.OnHit(this.caster, this.ability, individual_enemy, this.mana_burned, this.after_shock_duration, this.damage_per_mana_pct, this.mana_gain_per_mana_pct) && individual_enemy.IsHero()) {
                     enemy_heroes_hit = enemy_heroes_hit + 1;
                 }
@@ -2592,7 +2592,7 @@ export class imba_invoker_ice_wall extends BaseAbility_Plus {
                 z_offset = 75;
                 this.ice_wall_effect = "particles/hero/invoker/icewall/imba_invoker_ice_wall.vpcf";
             }
-            for (let i = 0; i <= (ice_walls - 1); i += 1) {
+            for (let i = 0; i <= (ice_walls - 1); i++) {
                 let target_point = caster_point + (caster_direction * ice_wall_placement_distance + (ice_wall_offset * i)) as Vector;
                 target_point = GetGroundPosition(target_point, caster);
                 let ice_wall_point = target_point;
@@ -2679,7 +2679,7 @@ export class modifier_imba_invoker_ice_wall extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             let nearby_enemy_units = FindUnitsInRadius(this.GetTeam, this.origin, undefined, this.search_area, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(nearby_enemy_units)) {
+            for (const [_, enemy] of GameFunc.iPair(nearby_enemy_units)) {
                 if (enemy != undefined && enemy.IsAlive()) {
                     let target_position = enemy.GetAbsOrigin();
                     if (modifier_imba_invoker_ice_wall.IsUnitInProximity(this.ice_wall_start_point, this.ice_wall_end_point, target_position, this.ice_wall_area_of_effect)) {
@@ -3036,11 +3036,11 @@ export class modifier_imba_invoker_chaos_meteor_aura extends BaseModifier_Plus {
         if (IsServer()) {
             let start_point = this.GetParentPlus().GetAbsOrigin();
             let end_point = start_point - (this.direction * 500) as Vector;
-            for (const [_, enemy] of ipairs(this.hit_table)) {
+            for (const [_, enemy] of GameFunc.Pair(this.hit_table)) {
                 if (enemy.IsNull() == false && enemy.HasModifier("modifier_imba_invoker_chaos_meteor_burn")) {
                     if (modifier_imba_invoker_ice_wall.IsUnitInProximity(start_point, end_point, enemy.GetAbsOrigin(), 300)) {
                         let burn_modifiers = enemy.FindAllModifiersByName("modifier_imba_invoker_chaos_meteor_burn");
-                        for (const [_, modifier] of ipairs(burn_modifiers)) {
+                        for (const [_, modifier] of GameFunc.iPair(burn_modifiers)) {
                             modifier.ForceRefresh();
                         }
                         let burn_effect_modifier = enemy.findBuff<modifier_imba_invoker_chaos_meteor_burn_effect>("modifier_imba_invoker_chaos_meteor_burn_effect");
@@ -3051,7 +3051,7 @@ export class modifier_imba_invoker_chaos_meteor_aura extends BaseModifier_Plus {
                 }
             }
             let nearby_enemy_units = FindUnitsInRadius(this.GetTeam, this.GetParentPlus().GetAbsOrigin(), undefined, this.area_of_effect, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(nearby_enemy_units)) {
+            for (const [_, enemy] of GameFunc.iPair(nearby_enemy_units)) {
                 if (this.hit_table[enemy.GetName()] == undefined) {
                     this.hit_table[enemy.GetName()] = enemy;
                 }
@@ -3225,7 +3225,7 @@ export class imba_invoker_deafening_blast extends BaseAbility_Plus {
             direction.z = 0;
             let degrees = 360 / num_blasts;
             EmitSoundOnLocationWithCaster(caster_location, "Hero_Invoker.DeafeningBlast", caster);
-            for (let index = 1; index <= num_blasts; index += 1) {
+            for (let index = 1; index <= num_blasts; index++) {
                 let deafening_blast_projectile_table: CreateLinearProjectileOptions = {
                     EffectName: imba_invoker_deafening_blast.ability_effect_path_aoe,
                     Ability: ability,

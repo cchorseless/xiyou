@@ -225,24 +225,24 @@ export class modifier_imba_slark_dark_pact_pulses extends BaseModifier_Plus {
                 this.bStoreHealth = false;
                 if (!this.weapon_table) {
                     this.weapon_table = {
-                        1: "models/heroes/slark/weapon.vmdl",
-                        2: "models/items/slark/ancient_imbued_spinal_blade/ancient_imbued_spinal_blade.vmdl",
-                        3: "models/items/slark/anuxi_encore_dagger/anuxi_encore_dagger.vmdl",
-                        4: "models/items/slark/barb_of_skadi/barb_of_skadi.vmdl",
-                        5: "models/items/slark/crawblade/crawblade.vmdl",
-                        6: "models/items/slark/dark_reef_weapon/dark_reef_weapon.vmdl",
-                        7: "models/items/slark/deep_warden_scimitar/deep_warden_scimitar.vmdl",
-                        8: "models/items/slark/deepscoundrel_weapon/deepscoundrel_weapon.vmdl",
-                        9: "models/items/slark/golden_barb_of_skadi/golden_barb_of_skadi.vmdl",
-                        10: "models/items/slark/hydrakan_latch/mesh/hydrkan_latch_model.vmdl",
-                        11: "models/items/slark/oceanconquerer_weapon/oceanconquerer_weapon.vmdl",
-                        12: "models/items/slark/pale_justice/pale_justice.vmdl",
-                        13: "models/items/slark/shell_dagger/shell_dagger.vmdl",
-                        14: "models/items/slark/slicer_of_the_depths/slicer_of_the_depths.vmdl",
-                        15: "models/items/slark/spanky_daggerfish/spanky_daggerfish.vmdl",
-                        16: "models/items/slark/the_silent_ripper/the_silent_ripper.vmdl",
-                        17: "models/items/slark/ti9_cache_slark_jungle_rule_weapon/ti9_cache_slark_jungle_rule_weapon.vmdl",
-                        18: "models/items/slark/tidal_blade/tidal_blade.vmdl"
+                        "1": "models/heroes/slark/weapon.vmdl",
+                        "2": "models/items/slark/ancient_imbued_spinal_blade/ancient_imbued_spinal_blade.vmdl",
+                        "3": "models/items/slark/anuxi_encore_dagger/anuxi_encore_dagger.vmdl",
+                        "4": "models/items/slark/barb_of_skadi/barb_of_skadi.vmdl",
+                        "5": "models/items/slark/crawblade/crawblade.vmdl",
+                        "6": "models/items/slark/dark_reef_weapon/dark_reef_weapon.vmdl",
+                        "7": "models/items/slark/deep_warden_scimitar/deep_warden_scimitar.vmdl",
+                        "8": "models/items/slark/deepscoundrel_weapon/deepscoundrel_weapon.vmdl",
+                        "9": "models/items/slark/golden_barb_of_skadi/golden_barb_of_skadi.vmdl",
+                        "10": "models/items/slark/hydrakan_latch/mesh/hydrkan_latch_model.vmdl",
+                        "11": "models/items/slark/oceanconquerer_weapon/oceanconquerer_weapon.vmdl",
+                        "12": "models/items/slark/pale_justice/pale_justice.vmdl",
+                        "13": "models/items/slark/shell_dagger/shell_dagger.vmdl",
+                        "14": "models/items/slark/slicer_of_the_depths/slicer_of_the_depths.vmdl",
+                        "15": "models/items/slark/spanky_daggerfish/spanky_daggerfish.vmdl",
+                        "16": "models/items/slark/the_silent_ripper/the_silent_ripper.vmdl",
+                        "17": "models/items/slark/ti9_cache_slark_jungle_rule_weapon/ti9_cache_slark_jungle_rule_weapon.vmdl",
+                        "18": "models/items/slark/tidal_blade/tidal_blade.vmdl"
                     }
                 }
                 this.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {
@@ -257,7 +257,7 @@ export class modifier_imba_slark_dark_pact_pulses extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         this.GetParentPlus().Purge(false, true, false, true, true);
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             this.damage_table.victim = enemy;
             ApplyDamage(this.damage_table);
         }
@@ -427,7 +427,7 @@ export class modifier_imba_slark_pounce extends BaseModifierMotionBoth_Plus {
         if (!IsServer()) {
             return;
         }
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.pounce_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_CLOSEST, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.pounce_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_CLOSEST, false))) {
             if (enemy.IsRealHero() || enemy.IsClone() || enemy.IsTempestDouble()) {
                 enemy.EmitSound("Hero_Slark.Pounce.Impact");
                 if (this.GetParentPlus().GetName() == "npc_dota_hero_slark") {
@@ -602,14 +602,14 @@ export class modifier_imba_slark_pounce_charge_counter extends BaseModifier_Plus
             if (!GameRules.IsCheatMode()) {
                 wtf_mode = false;
             } else {
-                for (let ability = 0; ability <= 24 - 1; ability += 1) {
+                for (let ability = 0; ability <= 24 - 1; ability++) {
                     if (this.GetParentPlus().GetAbilityByIndex(ability) && this.GetParentPlus().GetAbilityByIndex(ability).GetCooldownTimeRemaining() > 0) {
                         wtf_mode = false;
                         break;
                     }
                 }
                 if (wtf_mode == false) {
-                    for (let item = 0; item <= 15; item += 1) {
+                    for (let item = 0; item <= 15; item++) {
                         if (this.GetParentPlus().GetItemInSlot(item) && this.GetParentPlus().GetItemInSlot(item).GetCooldownTimeRemaining() > 0) {
                             wtf_mode = false;
                             return;
@@ -890,15 +890,15 @@ export class imba_slark_shadow_dance extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_slark" && RollPercentage(30)) {
             if (!this.responses) {
                 this.responses = {
-                    1: "slark_slark_dark_pact_05",
-                    2: "slark_slark_dark_pact_06",
-                    3: "slark_slark_shadow_dance_01",
-                    4: "slark_slark_shadow_dance_02",
-                    5: "slark_slark_shadow_dance_03",
-                    6: "slark_slark_shadow_dance_04"
+                    "1": "slark_slark_dark_pact_05",
+                    "2": "slark_slark_dark_pact_06",
+                    "3": "slark_slark_shadow_dance_01",
+                    "4": "slark_slark_shadow_dance_02",
+                    "5": "slark_slark_shadow_dance_03",
+                    "6": "slark_slark_shadow_dance_04"
                 }
             }
-            this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+            this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
         }
         if (!this.GetAutoCastState()) {
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_slark_shadow_dance_aura", {
@@ -1053,12 +1053,12 @@ export class modifier_imba_slark_shadow_dance_aura extends BaseModifier_Plus {
         } else {
             ParticleManager.SetParticleControlEnt(this.shadow_particle, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "", this.GetParentPlus().GetAbsOrigin(), true);
             this.aoe = this.GetSpecialValueFor("dark_reef_radius");
-            for (let arr = 1; arr <= 20; arr += 1) {
+            for (let arr = 1; arr <= 20; arr++) {
                 this.shadow_dummy_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_slark/slark_shadow_dance_dummy_sceptor.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetParentPlus());
                 ParticleManager.SetParticleControl(this.shadow_dummy_particle, 1, GetGroundPosition(this.GetParentPlus().GetAbsOrigin() + RotatePosition(Vector(0, 0, 0), QAngle(0, (360 / 20) * arr, 0), Vector(800, 0, 0)) as Vector, undefined));
                 this.AddParticle(this.shadow_dummy_particle, false, false, -1, false, false);
             }
-            for (let arr = 1; arr <= 10; arr += 1) {
+            for (let arr = 1; arr <= 10; arr++) {
                 this.shadow_dummy_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_slark/slark_shadow_dance_dummy_sceptor.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetParentPlus());
                 ParticleManager.SetParticleControl(this.shadow_dummy_particle, 1, GetGroundPosition(this.GetParentPlus().GetAbsOrigin() + RotatePosition(Vector(0, 0, 0), QAngle(0, (360 / 10) * arr, 0), Vector(300, 0, 0)) as Vector, undefined));
                 this.AddParticle(this.shadow_dummy_particle, false, false, -1, false, false);

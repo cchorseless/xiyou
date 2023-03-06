@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
@@ -18,7 +19,7 @@ export class imba_death_prophet_silence extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(pfx, 0, this.GetCursorPosition());
         ParticleManager.SetParticleControl(pfx, 1, Vector(this.GetSpecialValueFor("radius"), 0, 1));
         ParticleManager.ReleaseParticleIndex(pfx);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_death_prophet/death_prophet_silence_impact.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy, this.GetCasterPlus());
             ParticleManager.SetParticleControl(pfx, 0, enemy.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(pfx);

@@ -55,7 +55,7 @@ export class imba_dark_seer_vacuum extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particle, 1, Vector(this.GetSpecialValueFor("radius"), 1, 1));
         ParticleManager.ReleaseParticleIndex(particle);
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.IsCourier || !enemy.IsCourier()) {
                 if (enemy.IsInvulnerable() && !enemy.HasModifier("modifier_eul_cyclone")) {
                     enemy.AddNewModifier(enemy, this, "modifier_imba_dark_seer_vacuum", {
@@ -394,7 +394,7 @@ export class modifier_imba_dark_seer_vacuum_entry_portal extends BaseModifier_Pl
         this.enemy_tracker = []
         this.camera_tracker = {}
         if (this.GetCasterPlus().HasAbility("imba_dark_seer_wormhole") && this.GetCasterPlus().findAbliityPlus<imba_dark_seer_wormhole>("imba_dark_seer_wormhole").enemy_tracker) {
-            for (const [_, enemy] of ipairs(this.GetCasterPlus().findAbliityPlus<imba_dark_seer_wormhole>("imba_dark_seer_wormhole").enemy_tracker)) {
+            for (const [_, enemy] of GameFunc.iPair(this.GetCasterPlus().findAbliityPlus<imba_dark_seer_wormhole>("imba_dark_seer_wormhole").enemy_tracker)) {
                 this.enemy_tracker.push(enemy.entindex());
             }
         }
@@ -404,7 +404,7 @@ export class modifier_imba_dark_seer_vacuum_entry_portal extends BaseModifier_Pl
             return;
         }
         let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.teleport_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             if (this.GetElapsedTime() >= 0.1 && !this.ported_units[unit.entindex()] && !unit.HasModifier("modifier_imba_dark_seer_wormhole") && (unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() || !AoiHelper.IsNearFountain(this.exit_portal.GetAbsOrigin(), 1700))) {
                 if (unit.IsHero()) {
                     EmitSoundOnLocationWithCaster(unit.GetAbsOrigin(), "Wormhole.Disappear", this.GetCasterPlus());
@@ -531,7 +531,7 @@ export class modifier_imba_dark_seer_ion_shell extends BaseModifier_Plus {
             return;
         }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (enemy != this.GetParentPlus()) {
                 let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_dark_seer/dark_seer_ion_shell_damage.vpcf", ParticleAttachment_t.PATTACH_POINT, this.GetParentPlus(), this.GetCasterPlus());
                 ParticleManager.SetParticleControlEnt(particle, 0, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetParentPlus().GetAbsOrigin(), true);
@@ -563,7 +563,7 @@ export class modifier_imba_dark_seer_ion_shell extends BaseModifier_Plus {
             let particle = ResHelper.CreateParticleEx("particles/econ/items/abaddon/abaddon_alliance/abaddon_aphotic_shield_alliance_explosion.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
             ParticleManager.ReleaseParticleIndex(particle);
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.proton_explosion_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != this.GetParentPlus()) {
                     let damageTable = {
                         victim: enemy,
@@ -653,7 +653,7 @@ export class modifier_imba_dark_seer_ion_shell_negation extends BaseModifier_Plu
             return;
         }
         let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             if (unit != this.GetParentPlus()) {
                 let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_dark_seer/dark_seer_ion_shell_damage.vpcf", ParticleAttachment_t.PATTACH_POINT, this.GetParentPlus(), this.GetCasterPlus());
                 ParticleManager.SetParticleControlEnt(particle, 0, unit, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", unit.GetAbsOrigin(), true);
@@ -681,7 +681,7 @@ export class modifier_imba_dark_seer_ion_shell_negation extends BaseModifier_Plu
             let particle = ResHelper.CreateParticleEx("particles/econ/items/abaddon/abaddon_alliance/abaddon_aphotic_shield_alliance_explosion.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
             ParticleManager.ReleaseParticleIndex(particle);
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.proton_explosion_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != this.GetParentPlus()) {
                     ApplyDamage({
                         victim: enemy,
@@ -726,12 +726,12 @@ export class imba_dark_seer_surge extends BaseAbility_Plus {
         if (GameFunc.GetCount(allies) > 0) {
             EmitSoundOnLocationWithCaster(this.GetCursorPosition(), "Hero_Dark_Seer.Surge", this.GetCasterPlus());
         }
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             ally.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_dark_seer_surge", {
                 duration: this.GetSpecialValueFor("duration")
             });
         }
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("surge_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("surge_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             enemy.EmitSound("Hero_Dark_Seer.Surge_Sonic_Boom");
             enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_motion_controller", {
                 distance: this.GetSpecialValueFor("sonic_boom_knockback_speed") * this.GetSpecialValueFor("sonic_boom_knockback_duration"),
@@ -965,7 +965,7 @@ export class modifier_imba_dark_seer_wall_of_replica extends BaseModifier_Plus {
         if (this.GetAbilityPlus()) {
             this.slow_duration = this.GetAbilityPlus().GetTalentSpecialValueFor("slow_duration");
         }
-        for (const [_, enemy] of ipairs(FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), this.wall_start, this.wall_end, undefined, this.thickness, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), this.wall_start, this.wall_end, undefined, this.thickness, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES))) {
             this.wall_slow_modifier = enemy.FindModifierByNameAndCaster("modifier_imba_dark_seer_wall_of_replica_slow", this.GetParentPlus());
             if (this.wall_slow_modifier) {
                 this.wall_slow_modifier.SetDuration(this.slow_duration * (1 - enemy.GetStatusResistance()), true);

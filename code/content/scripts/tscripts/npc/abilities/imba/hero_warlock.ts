@@ -34,7 +34,7 @@ export class imba_warlock_fatal_bonds extends BaseAbility_Plus {
         let bond_target = target;
         for (let link = 0; link < max_targets; link++) {
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), bond_target.GetAbsOrigin(), undefined, link_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!linked_units.includes(enemy.GetEntityIndex())) {
                     let bond_modifier = enemy.AddNewModifier(caster, ability, modifier_bonds, {
                         duration: duration * (1 - enemy.GetStatusResistance())
@@ -121,7 +121,7 @@ export class modifier_imba_fatal_bonds extends BaseModifier_Plus {
         if (!IsServer() || this.GetParentPlus().IsAlive()) {
             return;
         }
-        for (const [_, enemy] of ipairs(this.bond_table)) {
+        for (const [_, enemy] of GameFunc.iPair(this.bond_table)) {
             if (enemy != this.GetParentPlus()) {
                 let bond_modifiers = enemy.FindAllModifiersByName("modifier_imba_fatal_bonds") as modifier_imba_fatal_bonds[];
                 for (const modifier of (bond_modifiers)) {
@@ -149,7 +149,7 @@ export class modifier_imba_fatal_bonds extends BaseModifier_Plus {
             let damage_type = keys.damage_type;
             let inflictor = keys.inflictor;
             if (unit == this.GetParentPlus() && this.bond_table) {
-                for (const [_, bonded_enemy] of ipairs(this.bond_table)) {
+                for (const [_, bonded_enemy] of GameFunc.iPair(this.bond_table)) {
                     if (!bonded_enemy.IsNull() && bonded_enemy != this.GetParentPlus()) {
                         let damageTable = {
                             victim: bonded_enemy,
@@ -256,7 +256,7 @@ export class imba_warlock_shadow_word extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(particle_aoe_fx);
         AddFOWViewer(caster.GetTeamNumber(), target_point, radius, 2, true);
         let units = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             unit.AddNewModifier(caster, ability, modifier_word, {
                 duration: duration
             });
@@ -500,7 +500,7 @@ export class modifier_imba_upheaval extends BaseModifier_Plus {
             this.slow = this.max_slow_pct;
         }
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let modifier_debuff_handler = enemy.AddNewModifier(this.caster, this.ability, this.modifier_debuff, {
                 duration: this.linger_duration * (1 - enemy.GetStatusResistance())
             }) as modifier_imba_upheaval_debuff;
@@ -509,7 +509,7 @@ export class modifier_imba_upheaval extends BaseModifier_Plus {
             }
         }
         let units = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             if (string.find(unit.GetUnitName(), "warlock_golem")) {
                 let modifier_golem_buff_handler = unit.AddNewModifier(this.caster, this.ability, this.modifier_golem_buff, {
                     duration: (this.tick_interval * 2)
@@ -628,7 +628,7 @@ export class imba_warlock_rain_of_chaos extends BaseAbility_Plus {
     OnSpellStart(): void {
         let cursor_position = this.GetCursorPosition();
         if (this.GetCasterPlus().HasScepter()) {
-            for (let golems = 0; golems <= this.GetSpecialValueFor("number_of_golems_scepter") - 1; golems += 1) {
+            for (let golems = 0; golems <= this.GetSpecialValueFor("number_of_golems_scepter") - 1; golems++) {
                 this.AddTimer(0.4 * golems, () => {
                     this.SummonGolem(cursor_position, true, false);
                 });
@@ -653,7 +653,7 @@ export class imba_warlock_rain_of_chaos extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(particle_main_fx, 1, Vector(this.GetSpecialValueFor("radius"), 0, 0));
             ParticleManager.ReleaseParticleIndex(particle_main_fx);
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target_point, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_rain_of_chaos_stun", {
                     duration: this.GetSpecialValueFor("stun_duration") * (1 - enemy.GetStatusResistance())
                 });
@@ -845,7 +845,7 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
                 if (GameFunc.GetCount(this.demon_table) < this.scepter_demon_count) {
                     return FrameTime();
                 } else {
-                    for (let i = 1; i <= this.scepter_demon_count; i += 1) {
+                    for (let i = 0; i < this.scepter_demon_count; i++) {
                         this.particle_table[i] = ResHelper.CreateParticleEx(this.particle_link, ParticleAttachment_t.PATTACH_CUSTOMORIGIN_FOLLOW, this.demon_table[i]);
                         ParticleManager.SetParticleControlEnt(this.particle_table[i], 0, this.demon_table[i], ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.demon_table[i].GetAbsOrigin(), true);
                         ParticleManager.SetParticleControlEnt(this.particle_table[i], 1, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
@@ -859,7 +859,7 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
         }
     }
     OnIntervalThink(): void {
-        for (let i = 1; i <= GameFunc.GetCount(this.demon_table); i += 1) {
+        for (let i = 0; i < GameFunc.GetCount(this.demon_table); i++) {
             if (!this.parent.IsNull() && this.parent.GetAbsOrigin && !this.demon_table[i].IsNull() && this.demon_table[i].GetAbsOrigin) {
                 let direction = (this.parent.GetAbsOrigin() - this.demon_table[i].GetAbsOrigin() as Vector).Normalized();
                 this.demon_table[i].SetForwardVector(direction);
@@ -877,7 +877,7 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingDamage_Percentage(p_0: ModifierAttackEvent,): number {
-        for (let i = 1; i <= GameFunc.GetCount(this.demon_table); i += 1) {
+        for (let i = 0; i < GameFunc.GetCount(this.demon_table); i++) {
             if (!this.demon_table[i] || !this.demon_table[i].IsAlive()) {
                 return 0;
             }
@@ -921,7 +921,7 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
     CC_OnDeath(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let unit = keys.unit;
-            for (let i = 1; i <= GameFunc.GetCount(this.demon_table); i += 1) {
+            for (let i = 0; i < GameFunc.GetCount(this.demon_table); i++) {
                 if (unit == this.demon_table[i]) {
                     this.DecrementStackCount();
                     if (!this.particle_table[i]) {
@@ -939,7 +939,7 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
         }
     }
     OnRemoved(): void {
-        for (let i = 1; i <= GameFunc.GetCount(this.demon_table); i += 1) {
+        for (let i = 0; i < GameFunc.GetCount(this.demon_table); i++) {
             if (this.particle_table[i]) {
                 this.demon_table[i].Kill(this.ability, this.caster);
                 ParticleManager.DestroyParticle(this.particle_table[i], false);
@@ -1050,7 +1050,7 @@ export class modifier_imba_flaming_fists extends BaseModifier_Plus {
                     }
                 }
                 let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (enemy != target) {
                         let damageTable = {
                             victim: enemy,
@@ -1122,7 +1122,7 @@ export class modifier_imba_permanent_immolation_aura extends BaseModifier_Plus {
             this.actual_radius = this.radius;
         }
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.actual_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (enemy.HasModifier(this.modifier_burn)) {
                 ApplyDamage({
                     victim: enemy,

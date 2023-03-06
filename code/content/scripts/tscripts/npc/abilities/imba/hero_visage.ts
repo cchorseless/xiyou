@@ -17,11 +17,11 @@ export class imba_visage_grave_chill extends BaseAbility_Plus {
         target.EmitSound("Hero_Visage.GraveChill.Target");
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_visage" && RollPercentage(25)) {
             let responses = {
-                1: "visage_visa_gravechill_04",
-                2: "visage_visa_gravechill_05",
-                3: "visage_visa_gravechill_14",
-                4: "visage_visa_gravechill_21",
-                5: "visage_visa_gravechill_22"
+                "1": "visage_visa_gravechill_04",
+                "2": "visage_visa_gravechill_05",
+                "3": "visage_visa_gravechill_14",
+                "4": "visage_visa_gravechill_21",
+                "5": "visage_visa_gravechill_22"
             }
             this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
         }
@@ -33,7 +33,7 @@ export class imba_visage_grave_chill extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("chill_duration") * (1 - target.GetStatusResistance())
         });
         let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, 1200, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             if (string.find(ally.GetDebugName(), "npc_dota_visage_familiar")) {
                 ally.AddNewModifier(target, this, "modifier_imba_visage_grave_chill_buff", {
                     duration: this.GetSpecialValueFor("chill_duration") * (1 - target.GetStatusResistance())
@@ -161,18 +161,18 @@ export class imba_visage_soul_assumption extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_visage") {
             if (RollPercentage(10)) {
                 let responses_rare = {
-                    1: "visage_visa_soulassumption01",
-                    2: "visage_visa_soulassumption02",
-                    3: "visage_visa_soulassumption07"
+                    "1": "visage_visa_soulassumption01",
+                    "2": "visage_visa_soulassumption02",
+                    "3": "visage_visa_soulassumption07"
                 }
                 this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses_rare));
             } else {
                 let responses = {
-                    1: "visage_visa_gravechill_24",
-                    2: "visage_visa_gravechill_26",
-                    3: "visage_visa_gravechill_27",
-                    4: "visage_visa_gravechill_28",
-                    5: "visage_visa_gravechill_32"
+                    "1": "visage_visa_gravechill_24",
+                    "2": "visage_visa_gravechill_26",
+                    "3": "visage_visa_gravechill_27",
+                    "4": "visage_visa_gravechill_28",
+                    "5": "visage_visa_gravechill_32"
                 }
                 this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
             }
@@ -188,7 +188,7 @@ export class imba_visage_soul_assumption extends BaseAbility_Plus {
                 effect_name = "particles/units/heroes/hero_visage/visage_soul_assumption_bolt" + damage_bars + ".vpcf";
             }
             let assumption_stack_modifiers = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_visage_soul_assumption_stacks");
-            for (const [_, mod] of ipairs(assumption_stack_modifiers)) {
+            for (const [_, mod] of GameFunc.iPair(assumption_stack_modifiers)) {
                 mod.Destroy();
             }
             assumption_counter_modifier.Destroy();
@@ -216,7 +216,7 @@ export class imba_visage_soul_assumption extends BaseAbility_Plus {
         ProjectileManager.CreateTrackingProjectile(projectile);
         let target_counter = 1;
         let enemy_heroes = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, this.GetCastRange(this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus()) + this.GetCasterPlus().GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemy_heroes)) {
+        for (const [_, enemy] of GameFunc.iPair(enemy_heroes)) {
             if (target_counter >= this.GetTalentSpecialValueFor("targets")) {
                 return;
             }
@@ -228,7 +228,7 @@ export class imba_visage_soul_assumption extends BaseAbility_Plus {
         }
         if (target_counter < this.GetTalentSpecialValueFor("targets")) {
             let enemy_creeps = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, this.GetCastRange(this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus()) + this.GetCasterPlus().GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemy_creeps)) {
+            for (const [_, enemy] of GameFunc.iPair(enemy_creeps)) {
                 if (target_counter >= this.GetTalentSpecialValueFor("targets")) {
                     return;
                 }
@@ -326,7 +326,7 @@ export class modifier_imba_visage_soul_assumption_stacks extends BaseModifier_Pl
         let assumption_counter_modifier = this.GetParentPlus().FindModifierByNameAndCaster("modifier_imba_visage_soul_assumption_counter", this.GetCasterPlus());
         if (assumption_modifier && assumption_modifier.particle && assumption_counter_modifier) {
             assumption_counter_modifier.SetStackCount(assumption_counter_modifier.GetStackCount() + params.stacks);
-            for (let bar = 1; bar <= this.stack_limit; bar += 1) {
+            for (let bar = 1; bar <= this.stack_limit; bar++) {
                 ParticleManager.SetParticleControl(assumption_modifier.particle, bar, Vector(assumption_counter_modifier.GetStackCount() - (this.damage_limit * bar), 0, 0));
             }
         }
@@ -340,7 +340,7 @@ export class modifier_imba_visage_soul_assumption_stacks extends BaseModifier_Pl
         if (assumption_counter_modifier) {
             assumption_counter_modifier.SetStackCount(assumption_counter_modifier.GetStackCount() - this.GetStackCount());
             if (assumption_modifier && assumption_modifier.particle) {
-                for (let bar = 1; bar <= this.stack_limit; bar += 1) {
+                for (let bar = 1; bar <= this.stack_limit; bar++) {
                     ParticleManager.SetParticleControl(assumption_modifier.particle, bar, Vector(assumption_counter_modifier.GetStackCount() - (this.damage_limit * bar), 0, 0));
                 }
             }
@@ -385,7 +385,7 @@ export class modifier_imba_visage_gravekeepers_cloak extends BaseModifier_Plus {
             return;
         }
         this.cloak_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_visage/visage_cloak_ambient.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
-        for (let layer = 2; layer <= 5; layer += 1) {
+        for (let layer = 2; layer <= 5; layer++) {
             ParticleManager.SetParticleControl(this.cloak_particle, layer, Vector(1, 0, 0));
         }
         this.AddParticle(this.cloak_particle, false, false, -1, false, false);
@@ -394,7 +394,7 @@ export class modifier_imba_visage_gravekeepers_cloak extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (this.GetStackCount() < this.GetSpecialValueFor("max_layers")) {
             this.IncrementStackCount();
-            for (let layer = 2; layer <= 5; layer += 1) {
+            for (let layer = 2; layer <= 5; layer++) {
                 if (this.GetStackCount() + 1 >= layer) {
                     ParticleManager.SetParticleControl(this.cloak_particle, layer, Vector(1, 0, 0));
                 } else {
@@ -403,7 +403,7 @@ export class modifier_imba_visage_gravekeepers_cloak extends BaseModifier_Plus {
             }
         } else {
             let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-            for (const [_, ally] of ipairs(allies)) {
+            for (const [_, ally] of GameFunc.iPair(allies)) {
                 if (ally != this.GetParentPlus() && !string.find(ally.GetDebugName(), "npc_dota_visage_familiar")) {
                     let secondary_cloak_modifier = ally.FindModifierByNameAndCaster("modifier_imba_visage_gravekeepers_cloak_secondary_ally", this.GetCasterPlus());
                     if (!secondary_cloak_modifier || secondary_cloak_modifier.GetStackCount() < this.GetSpecialValueFor("max_layers")) {
@@ -426,7 +426,7 @@ export class modifier_imba_visage_gravekeepers_cloak extends BaseModifier_Plus {
     CC_GetModifierIncomingDamage_Percentage(keys: ModifierAttackEvent): number {
         if (!this.GetParentPlus().PassivesDisabled() && keys.attacker.IsControllableByAnyPlayer() && keys.attacker != this.GetParentPlus() && keys.damage > this.GetSpecialValueFor("minimum_damage") && this.GetStackCount() > 0) {
             this.DecrementStackCount();
-            for (let layer = 2; layer <= 5; layer += 1) {
+            for (let layer = 2; layer <= 5; layer++) {
                 if (this.GetStackCount() + 1 >= layer) {
                     ParticleManager.SetParticleControl(this.cloak_particle, layer, Vector(1, 0, 0));
                 } else {
@@ -542,7 +542,7 @@ export class imba_visage_stone_form_self_cast extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false);
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             if (string.find(ally.GetDebugName(), "npc_dota_visage_familiar")) {
                 let stone_form_ability = ally.findAbliityPlus<imba_visage_summon_familiars_stone_form>("imba_visage_summon_familiars_stone_form");
                 if (stone_form_ability && stone_form_ability.IsCooldownReady() && !(ally.IsStunned() || ally.IsSilenced() || ally.IsNightmared() || ally.IsOutOfGame())) {
@@ -574,7 +574,7 @@ export class modifier_imba_visage_stone_form_self_cast extends BaseModifier_Plus
     OnIntervalThink(): void {
         if (this.summon_familiars_ability && this.summon_familiars_ability.familiar_table) {
             this.bValidFamiliars = false;
-            for (let num = 1; num <= GameFunc.GetCount(this.summon_familiars_ability.familiar_table); num += 1) {
+            for (let num = 0; num < GameFunc.GetCount(this.summon_familiars_ability.familiar_table); num++) {
                 if (this.summon_familiars_ability.familiar_table[num] && EntIndexToHScript(this.summon_familiars_ability.familiar_table[num]) && EntIndexToHScript(this.summon_familiars_ability.familiar_table[num]).IsAlive()) {
                     this.bValidFamiliars = true;
                     return;
@@ -588,7 +588,7 @@ export class modifier_imba_visage_stone_form_self_cast extends BaseModifier_Plus
             }
             this.lowest_cooldown = 99;
             let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false);
-            for (const [_, ally] of ipairs(allies)) {
+            for (const [_, ally] of GameFunc.iPair(allies)) {
                 if (string.find(ally.GetDebugName(), "npc_dota_visage_familiar")) {
                     this.stone_form_ability = ally.findAbliityPlus<imba_visage_summon_familiars_stone_form>("imba_visage_summon_familiars_stone_form");
                     if (this.stone_form_ability && this.stone_form_ability.GetCooldownTimeRemaining() <= this.lowest_cooldown) {
@@ -606,7 +606,7 @@ export class modifier_imba_visage_stone_form_self_cast extends BaseModifier_Plus
 }
 @registerAbility()
 export class imba_visage_summon_familiars extends BaseAbility_Plus {
-    public responses: any;
+    public responses: { [K: string]: string };
     public familiar_table: any;
     GetAssociatedPrimaryAbilities(): string {
         return "imba_visage_stone_form_self_cast";
@@ -626,12 +626,12 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_visage") {
             if (!this.responses) {
                 this.responses = {
-                    1: "visage_visa_summon_03",
-                    2: "visage_visa_summon_04"
+                    "1": "visage_visa_summon_03",
+                    "2": "visage_visa_summon_04"
                 }
             }
             if (this.responses) {
-                this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+                this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
             }
         }
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_4);
@@ -643,7 +643,7 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
             unit_count = unit_count + 1;
         }
         if (this.familiar_table) {
-            for (let num = 1; num <= GameFunc.GetCount(this.familiar_table); num += 1) {
+            for (let num = 0; num < GameFunc.GetCount(this.familiar_table); num++) {
                 let unit = EntIndexToHScript(this.familiar_table[num]) as IBaseNpc_Plus;
                 if (this.familiar_table[num] && unit && unit.IsNull && !unit.IsNull() && unit.IsAlive()) {
                     unit.ForceKill(false);
@@ -655,7 +655,7 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
         let spawn_location: Vector = undefined;
         let stone_form_ability = undefined;
         let summon_particle = undefined;
-        for (let num = 1; num <= unit_count; num += 1) {
+        for (let num = 1; num <= unit_count; num++) {
             spawn_location = this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 200) + (this.GetCasterPlus().GetRightVector() * ((math.max(unit_count - 1, 0) * 120) * (-0.5 + ((math.max(num - 1, 0)) / (unit_count - 1))))) as Vector;
             familiar = BaseNpc_Plus.CreateUnitByName("npc_dota_visage_familiar" + math.min(this.GetLevel(), 3), spawn_location, this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
             summon_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_visage/visage_summon_familiars.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, familiar);
@@ -712,7 +712,7 @@ export class modifier_imba_visage_summon_familiars extends BaseModifier_Plus {
             this.GetParentPlus().ForceKill(false);
         }
         let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetParentPlus().GetHullRadius(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             if (ally != this.GetParentPlus() && string.find(ally.GetDebugName(), "npc_dota_visage_familiar") && !ally.IsMoving()) {
                 ally.SetAbsOrigin(GetGroundPosition(ally.GetAbsOrigin() + (ally.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin()) as Vector, ally));
             }
@@ -860,7 +860,7 @@ export class modifier_imba_visage_summon_familiars_stone_form_buff extends BaseM
         if (GameFunc.GetCount(enemies) >= 1) {
             this.GetParentPlus().EmitSound("Visage_Familar.StoneForm.Stun");
         }
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             enemy.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_stunned", {
                 duration: this.stun_duration * (1 - enemy.GetStatusResistance())
             });

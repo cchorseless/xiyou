@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { AnimationHelper } from "../../../helper/AnimationHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -51,7 +52,7 @@ export class imba_chaos_knight_reality_rift extends BaseAbility_Plus {
             ParticleManager.SetParticleControlOrientation(particle, 2, direction, Vector(0, 1, 0), Vector(1, 0, 0));
             ParticleManager.ReleaseParticleIndex(particle);
             let units = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false);
-            for (const [_, unit] of ipairs(units)) {
+            for (const [_, unit] of GameFunc.iPair(units)) {
                 if (unit.GetPlayerOwnerID() == caster.GetPlayerID()) {
                     AnimationHelper.StartAnimation(unit, {
                         duration: 0.4,
@@ -94,7 +95,7 @@ export class imba_chaos_knight_reality_rift extends BaseAbility_Plus {
                 }
                 ExecuteOrderFromTable(order);
                 let units = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_CLOSEST, false);
-                for (const [_, unit] of ipairs(units)) {
+                for (const [_, unit] of GameFunc.iPair(units)) {
                     if (unit.GetPlayerOwnerID() == caster.GetPlayerID()) {
                         FindClearSpaceForUnit(unit, this.random_point, true);
                         unit.Stop();
@@ -209,7 +210,7 @@ export class modifier_imba_chaos_knight_phantasm_cast extends BaseModifier_Plus 
         }
         AddFOWViewer(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), this.vision_radius, 1, false);
         if (ability.phantasm_illusions) {
-            for (const [_, illusion] of ipairs(ability.phantasm_illusions)) {
+            for (const [_, illusion] of GameFunc.iPair(ability.phantasm_illusions)) {
                 if (illusion && !illusion.IsNull()) {
                     illusion.ForceKill(false);
                 }
@@ -225,7 +226,7 @@ export class modifier_imba_chaos_knight_phantasm_cast extends BaseModifier_Plus 
             outgoing_damage_roshan: undefined,
             duration: this.illusion_duration
         }, this.images_count);
-        for (const [_, illusion] of ipairs(this.phantasm_illusions)) {
+        for (const [_, illusion] of GameFunc.iPair(this.phantasm_illusions)) {
             illusion.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_chaos_knight_phantasm_illusion", {});
             table.insert(ability.phantasm_illusions, illusion);
         }

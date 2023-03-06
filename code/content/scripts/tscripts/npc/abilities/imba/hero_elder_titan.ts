@@ -62,7 +62,7 @@ export class imba_elder_titan_echo_stomp extends BaseAbility_Plus {
             let stomp_damage = this.GetSpecialValueFor("stomp_damage");
             EmitSoundOn("Hero_ElderTitan.EchoStomp", caster);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsMagicImmune()) {
                     let damageTable = {
                         victim: enemy,
@@ -120,7 +120,7 @@ export class imba_elder_titan_echo_stomp extends BaseAbility_Plus {
                 ParticleManager.ReleaseParticleIndex(magical_particle);
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
                 let heroes_hit = 0;
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (!enemy.IsMagicImmune()) {
                         ApplyDamage({
                             victim: enemy,
@@ -280,9 +280,9 @@ export class modifier_imba_elder_titan_ancestral_spirit_self extends BaseModifie
         let owner = this.GetParentPlus().GetOwner() as IBaseNpc_Plus;
         let duration = this.GetAbilityPlus().GetCaster().GetTalentValue("special_bonus_imba_elder_titan_3");
         let nearby_enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(nearby_enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {
             let enemy_has_been_hit = false;
-            for (const [_, enemy_hit] of ipairs(this.targets_hit)) {
+            for (const [_, enemy_hit] of GameFunc.iPair(this.targets_hit)) {
                 if (enemy == enemy_hit) {
                     enemy_has_been_hit = true;
                     return;
@@ -709,7 +709,7 @@ export class imba_elder_titan_echo_stomp_spirit extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(particle_stomp_fx, 2, caster.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(particle_stomp_fx);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsMagicImmune()) {
                     let damageTable = {
                         victim: enemy,
@@ -787,7 +787,7 @@ export class imba_elder_titan_earth_splitter extends BaseAbility_Plus {
         this.AddTimer(effect_delay, () => {
             EmitSoundOn("Hero_ElderTitan.EarthSplitter.Destroy", caster);
             let enemies = FindUnitsInLine(caster.GetTeamNumber(), caster_position, crack_ending, undefined, crack_width, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags());
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 enemy.Interrupt();
                 enemy.AddNewModifier(caster, this, "modifier_imba_earth_splitter", {
                     duration: slow_duration * (1 - enemy.GetStatusResistance())

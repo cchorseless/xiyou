@@ -164,7 +164,7 @@ export class imba_nyx_assassin_impale extends BaseAbility_Plus {
             let modifier_suffering_handler = target.FindAllModifiersByName("modifier_imba_impale_suffering_damage_counter");
             let suffering_damage = 0;
             if (main_spike == 1 && modifier_suffering_handler) {
-                for (const [_, damage] of ipairs(modifier_suffering_handler)) {
+                for (const [_, damage] of GameFunc.iPair(modifier_suffering_handler)) {
                     suffering_damage = suffering_damage + damage.GetStackCount();
                 }
                 suffering_damage = suffering_damage * damage_repeat_pct * 0.01;
@@ -806,7 +806,7 @@ export class modifier_imba_mana_burn_talent_parasite extends BaseModifier_Plus {
     OnIntervalThink(): void {
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
         if (GameFunc.GetCount(enemies) > 0 && this.mana_burn_ability) {
-            this.mana_burn_ability.OnSpellStart(enemies[1]);
+            this.mana_burn_ability.OnSpellStart(enemies[0]);
             this.Destroy();
         }
     }
@@ -829,8 +829,8 @@ export class imba_nyx_assassin_spiked_carapace extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let ability = this;
         let cast_response = {
-            1: "nyx_assassin_nyx_spikedcarapace_03",
-            2: "nyx_assassin_nyx_spikedcarapace_05"
+            "1": "nyx_assassin_nyx_spikedcarapace_03",
+            "2": "nyx_assassin_nyx_spikedcarapace_05"
         }
         let sound_cast = "Hero_NyxAssassin.SpikedCarapace";
         let modifier_spikes = "modifier_imba_spiked_carapace";
@@ -898,7 +898,7 @@ export class modifier_imba_spiked_carapace extends BaseModifier_Plus {
             }
             if (this.caster.HasModifier(this.modifier_burrowed)) {
                 let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.burrowed_stun_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     enemy.AddNewModifier(this.caster, this.ability, this.modifier_stun, {
                         duration: this.stun_duration * (1 - enemy.GetStatusResistance())
                     });
@@ -1038,10 +1038,10 @@ export class imba_nyx_assassin_vendetta extends BaseAbility_Plus {
         // todo nyx_assassin_unburrow
         let burrow_ability = caster.findAbliityPlus("nyx_assassin_unburrow");
         let cast_response = {
-            1: "nyx_assassin_nyx_vendetta_01",
-            2: "nyx_assassin_nyx_vendetta_02",
-            3: "nyx_assassin_nyx_vendetta_03",
-            4: "nyx_assassin_nyx_vendetta_09"
+            "1": "nyx_assassin_nyx_vendetta_01",
+            "2": "nyx_assassin_nyx_vendetta_02",
+            "3": "nyx_assassin_nyx_vendetta_03",
+            "4": "nyx_assassin_nyx_vendetta_09"
         }
         let sound_cast = "Hero_NyxAssassin.Vendetta";
         let modifier_vendetta = "modifier_imba_vendetta";

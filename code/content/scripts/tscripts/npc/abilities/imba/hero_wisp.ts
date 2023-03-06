@@ -785,7 +785,7 @@ export class modifier_imba_wisp_spirits extends BaseModifier_Plus {
             damage_table.ability = ability;
             damage_table.damage_type = ability.GetAbilityDamageType();
             damage_table.damage = explosion_damage;
-            for (const [_, enemy] of ipairs(nearby_enemy_units)) {
+            for (const [_, enemy] of GameFunc.iPair(nearby_enemy_units)) {
                 if (enemy != undefined) {
                     damage_table.victim = enemy;
                     ApplyDamage(damage_table);
@@ -1096,7 +1096,7 @@ export class imba_wisp_swap_spirits extends BaseAbility_Plus {
                 disarm = true;
             }
             if (ability.spirits_spiritsSpawned) {
-                for (const [k, spirit] of ipairs(ability.spirits_spiritsSpawned)) {
+                for (const [k, spirit] of GameFunc.Pair(ability.spirits_spiritsSpawned)) {
                     if (!spirit.IsNull()) {
                         if (this.particles[k]) {
                             ParticleManager.DestroyParticle(this.particles[k], false);
@@ -1257,7 +1257,7 @@ export class modifier_imba_wisp_overcharge_aura extends BaseModifier_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let nearby_friendly_units = FindUnitsInRadius(caster.GetTeam(), caster.GetAbsOrigin(), undefined, this.scepter_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, unit] of ipairs(nearby_friendly_units)) {
+            for (const [_, unit] of GameFunc.iPair(nearby_friendly_units)) {
                 if (unit != caster && unit != this.tether_ability.target /** && unit != "npc_dota_hero" */) {
                     imba_wisp_overcharge.AddOvercharge(caster, unit, this.scepter_efficiency, 1);
                 }

@@ -648,7 +648,7 @@ export module PropertyCalculate {
      * @param target
      * @param event
      */
-    export function GetMagicalReduction(target: IBaseNpc_Plus, event: ModifierAttackEvent) {
+    export function GetMagicalReductionPect(target: IBaseNpc_Plus, event: ModifierAttackEvent) {
         let iDamageFlags = event.damage_flags;
         // 无视魔法护甲
         if (iDamageFlags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_IGNORES_MAGIC_ARMOR) {

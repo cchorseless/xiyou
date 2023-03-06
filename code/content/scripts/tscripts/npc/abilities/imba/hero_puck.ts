@@ -34,7 +34,7 @@ export class imba_puck_illusory_orb extends BaseAbility_Plus {
             this.orbs = {}
         }
         this.talent_cast_range_increases = 0;
-        for (let ability = 0; ability <= 23; ability += 1) {
+        for (let ability = 0; ability <= 23; ability++) {
             let found_ability = this.GetCasterPlus().GetAbilityByIndex(ability);
             if (found_ability && string.find(found_ability.GetName(), "cast_range") && this.GetCasterPlus().HasTalent(found_ability.GetName())) {
                 this.talent_cast_range_increases = this.talent_cast_range_increases + this.GetCasterPlus().GetTalentValue(found_ability.GetName());
@@ -155,7 +155,7 @@ export class imba_puck_waning_rift extends BaseAbility_Plus {
             FindClearSpaceForUnit(this.GetCasterPlus(), this.GetCursorPosition(), true);
         }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetTalentSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let damageTable = {
                 victim: enemy,
                 damage: this.GetTalentSpecialValueFor("damage"),
@@ -281,7 +281,7 @@ export class imba_puck_phase_shift extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("duration") + FrameTime()
         });
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_puck_phase_shift_attacks")) {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetAbsOrigin(), undefined, this.GetCasterPlus().Script_GetAttackRange() + 200, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetAbsOrigin(), undefined, this.GetCasterPlus().Script_GetAttackRange() + 200, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false))) {
                 if (enemy.GetName() != "npc_dota_unit_undying_zombie") {
                     this.GetCasterPlus().PerformAttack(enemy, true, true, true, false, true, false, false);
                 }
@@ -432,7 +432,7 @@ export class imba_puck_dream_coil extends BaseAbility_Plus {
             target_type = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC;
         }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("coil_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, target_type, target_flag, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             ApplyDamage({
                 victim: enemy,
                 damage: this.GetSpecialValueFor("coil_initial_damage"),
@@ -451,7 +451,7 @@ export class imba_puck_dream_coil extends BaseAbility_Plus {
             if (!refreshDuration) {
                 coil_modifier.SetDuration(latch_duration * (1 - enemy.GetStatusResistance()), true);
             }
-            for (let index = 0; index <= 23; index += 1) {
+            for (let index = 0; index <= 23; index++) {
                 let ability = enemy.GetAbilityByIndex(index);
                 if (ability && ability.GetAbilityType() == ABILITY_TYPES.ABILITY_TYPE_ULTIMATE) {
                     this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), ability, "modifier_imba_puck_dream_coil_visionary", {

@@ -413,9 +413,9 @@ export class imba_vengefulspirit_magic_missile extends BaseAbility_Plus {
             EmitSoundOnLocationWithCaster(location, "Hero_VengefulSpirit.MagicMissileImpact", caster);
             let valid_targets: IBaseNpc_Plus[] = []
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, ExtraData.split_radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let already_hit = false;
-                for (const [_, stored_target] of ipairs(this.tempdata[proj_index])) {
+                for (const [_, stored_target] of GameFunc.iPair(this.tempdata[proj_index])) {
                     if (stored_target == enemy) {
                         already_hit = true;
                         return;
@@ -427,7 +427,7 @@ export class imba_vengefulspirit_magic_missile extends BaseAbility_Plus {
             }
             let target_missiles = math.min(GameFunc.GetCount(valid_targets), ExtraData.split_amount);
             if (target) {
-                for (let i = 1; i <= target_missiles; i += 1) {
+                for (let i = 0; i < target_missiles; i++) {
                     this.OnSpellStart(valid_targets[i], ExtraData.split_reduce_pct, target, ExtraData.index);
                     table.insert(this.tempdata[proj_index], valid_targets[i]);
                 }
@@ -643,7 +643,7 @@ export class imba_vengefulspirit_command_aura extends BaseAbility_Plus {
                 outgoing_damage_roshan: undefined,
                 duration: undefined
             }, num_illusions_on_death);
-            for (const [_, illusion] of ipairs(super_illusions)) {
+            for (const [_, illusion] of GameFunc.iPair(super_illusions)) {
                 illusion.SetHealth(illusion.GetMaxHealth());
                 illusion.AddNewModifier(this.GetCasterPlus(), this, "modifier_vengefulspirit_hybrid_special", {});
                 FindClearSpaceForUnit(illusion, this.GetCasterPlus().GetAbsOrigin() + Vector(RandomInt(0, 1), RandomInt(0, 1), 0) * 108 as Vector, true);
@@ -919,7 +919,7 @@ export class modifier_imba_vengefulspirit_command_aura_723 extends BaseModifier_
         if (keys.unit == this.GetParentPlus() && keys.unit.IsRealHero()) {
             keys.attacker.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_vengefulspirit_command_negative_aura_723", {});
             this.GetCasterPlus().SetContextThink(DoUniqueString(this.GetName()), () => {
-                for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {
+                for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {
                     if (unit.GetName() == this.GetCasterPlus().GetName() && unit != this.GetCasterPlus() && unit.GetOwnerPlus() && unit.GetOwnerPlus() && unit.GetOwnerPlus() == this.GetCasterPlus()) {
                         if (unit.HasTalent("special_bonus_imba_vengefulspirit_5") && !unit.HasModifier("modifier_special_bonus_imba_vengefulspirit_5")) {
                             unit.AddNewModifier(unit, unit.findAbliityPlus("special_bonus_imba_vengefulspirit_5"), "modifier_special_bonus_imba_vengefulspirit_5", {});
@@ -1219,7 +1219,7 @@ export class imba_vengefulspirit_nether_swap extends BaseAbility_Plus {
             FindClearSpaceForUnit(target, caster_loc, true);
             if (caster.HasTalent("special_bonus_imba_vengefulspirit_6")) {
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_loc, undefined, caster.GetTalentValue("special_bonus_imba_vengefulspirit_6", "radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     this.CastTalentMeteor(enemy);
                 }
                 if (GameFunc.GetCount(enemies) >= 1) {
@@ -1227,7 +1227,7 @@ export class imba_vengefulspirit_nether_swap extends BaseAbility_Plus {
                 }
             }
             if (this.GetCasterPlus().HasScepter()) {
-                for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target_loc, undefined, this.GetSpecialValueFor("scepter_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+                for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target_loc, undefined, this.GetSpecialValueFor("scepter_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_vengefulspirit_wave_of_terror_fear", {
                         duration: this.GetSpecialValueFor("scepter_duration") * (1 - enemy.GetStatusResistance())
                     });
@@ -1349,7 +1349,7 @@ export class imba_vengefulspirit_swap_back extends BaseAbility_Plus {
             FindClearSpaceForUnit(caster, target_loc, true);
             if (caster.HasTalent("special_bonus_imba_vengefulspirit_6")) {
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_loc, undefined, caster.GetTalentValue("special_bonus_imba_vengefulspirit_6", "radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     ability_handle.CastTalentMeteor(enemy);
                 }
             }

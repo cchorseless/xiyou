@@ -110,7 +110,7 @@ export class modifier_imba_broodmother_spawn_spiderlings extends BaseModifier_Pl
             ParticleManager.SetParticleControl(pfx, 0, this.parent.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(pfx);
             this.parent.EmitSound("Hero_Broodmother.SpawnSpiderlings");
-            for (let i = 1; i <= this.count; i += 1) {
+            for (let i = 0; i < this.count; i++) {
                 let spiderling = BaseNpc_Plus.CreateUnitByName("npc_dota_broodmother_spiderling", this.parent.GetAbsOrigin(), this.caster.GetTeamNumber(), false, this.caster, this.caster);
                 spiderling.SetOwner(this.caster);
                 spiderling.SetControllableByPlayer(this.caster.GetPlayerID(), false);
@@ -120,7 +120,7 @@ export class modifier_imba_broodmother_spawn_spiderlings extends BaseModifier_Pl
                 });
                 this.parent.EmitSound("Hero_Broodmother.SpawnSpiderlings");
                 let ability_level = this.ability.GetLevel();
-                for (let i = 0; i <= spiderling.GetAbilityCount() - 1; i += 1) {
+                for (let i = 0; i < spiderling.GetAbilityCount(); i++) {
                     let ability = spiderling.GetAbilityByIndex(i);
                     if (ability) {
                         ability.SetLevel(ability_level);
@@ -269,7 +269,7 @@ export class imba_broodmother_spin_web extends BaseAbility_Plus {
         if (GameFunc.GetCount(webs) >= web_count) {
             let table_position = undefined;
             let oldest_web: IBaseNpc_Plus = undefined;
-            for (const [k, web] of ipairs(webs)) {
+            for (const [k, web] of GameFunc.iPair(webs)) {
                 if (table_position == undefined) {
                     table_position = k;
                 }
@@ -291,7 +291,7 @@ export class imba_broodmother_spin_web extends BaseAbility_Plus {
         web.SetOwner(caster);
         web.SetControllableByPlayer(caster.GetPlayerID(), false);
         web.TempData().spawn_time = math.floor(GameRules.GetDOTATime(false, false));
-        for (let i = 0; i <= web.GetAbilityCount() - 1; i += 1) {
+        for (let i = 0; i < web.GetAbilityCount(); i++) {
             let ability = web.GetAbilityByIndex(i);
             if (ability) {
                 ability.SetLevel(1);
@@ -1069,7 +1069,7 @@ export class modifier_imba_broodmother_spawn_spiderking_hatch extends BaseModifi
         spiderking.SetControllableByPlayer(this.caster.GetPlayerID(), false);
         spiderking.SetUnitOnClearGround();
         spiderking.TempData().spawn_time = spiderking.GetCreationTime();
-        for (let i = 0; i <= spiderking.GetAbilityCount() - 1; i += 1) {
+        for (let i = 0; i < spiderking.GetAbilityCount(); i++) {
             let ability = spiderking.GetAbilityByIndex(i);
             if (ability) {
                 ability.SetLevel(this.ability.GetLevel());
@@ -1287,7 +1287,7 @@ export class modifier_imba_broodmother_spiderling_volatile extends BaseModifier_
                 return undefined;
             }
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsMagicImmune()) {
                     let damageTable = {
                         victim: enemy,
@@ -1573,7 +1573,7 @@ export class modifier_imba_broodmother_spiderking_volatile extends BaseModifier_
                 return undefined;
             }
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsMagicImmune()) {
                     let damageTable = {
                         victim: enemy,

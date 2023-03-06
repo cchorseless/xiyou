@@ -281,7 +281,7 @@ export class modifier_property extends BaseModifier_Plus {
             let _tmp = 0
             switch (iDamageType) {
                 case DAMAGE_TYPES.DAMAGE_TYPE_MAGICAL:
-                    fPercent = fPercent * (1 - PropertyCalculate.GetMagicalReduction(hTarget, params))
+                    fPercent = fPercent * (1 - PropertyCalculate.GetMagicalReductionPect(hTarget, params))
                     //  魔法伤害加深
                     if (bDamageAmplify) {
                         _tmp = PropertyCalculate.SumProps(hTarget, params, GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_MAGICAL_DAMAGE_PERCENTAGE)

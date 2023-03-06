@@ -75,7 +75,7 @@ export module AoiHelper {
         let big_radius = distance + math.max(fStartRadius, fEndRadius);
         let units = FindUnitsInRadius(nTeamNumber, vCenterPos, hCacheUnit, big_radius, nTeamFilter, nTypeFilter, nFlagFilter, nOrderFilter, bCanGrowCache);
         let targets: IBaseNpc_Plus[] = []
-        for (const [_, unit] of ipairs(units)) {
+        for (const unit of (units)) {
             let vUnitPos = unit.GetOrigin() - vStartPos as Vector;
             let fProjection = vUnitPos.x * direction.x + vUnitPos.y * direction.y + vUnitPos.z * direction.z;
             fProjection = math.max(math.min(fProjection, distance), 0);
@@ -83,7 +83,7 @@ export module AoiHelper {
             let fUnitRadius = (vUnitPos - vProjection as Vector).Length2D();
             let fInterpRadius = (fProjection / distance) * (fEndRadius - fStartRadius) + fStartRadius;
             if (fUnitRadius <= fInterpRadius && math.abs(AngleDiff(VectorToAngles(vCenterPos - vStartPos as Vector).y, VectorToAngles(unit.GetAbsOrigin() - vStartPos as Vector).y)) <= 90) {
-                table.insert(targets, unit);
+                targets.push(unit);
             }
         }
         return targets;
@@ -239,9 +239,9 @@ export module AoiHelper {
                     vDirection.z = 0
                     let fDistance = vDirection.Length2D()
                     if (fDistance <= radius * 2 && fDistance > 0) {
-                        let vMid = (second_target.GetAbsOrigin() + first_target.GetAbsOrigin()) / 2
+                        let vMid = (second_target.GetAbsOrigin() + first_target.GetAbsOrigin()) / 2 as Vector;
                         if (((vMid - search_position) as Vector).Length2D() <= search_radius) {
-                            table.insert(tPoints, vMid)
+                            tPoints.push(vMid);
                         }
                         else {
                             let fHalfLength = math.sqrt(radius ^ 2 - (fDistance / 2) ^ 2)
@@ -249,10 +249,10 @@ export module AoiHelper {
                             let p = [
                                 vMid - v * fHalfLength,
                                 vMid + v * fHalfLength
-                            ];
+                            ] as Vector[];
                             for (let vPoint of p) {
                                 if (((vPoint - search_position) as Vector).Length2D() <= search_radius) {
-                                    table.insert(tPoints, vPoint)
+                                    tPoints.push(vPoint);
                                 }
                             }
                         }
@@ -508,7 +508,7 @@ export module AoiHelper {
     }
 
     export function IsNearFountain(location: Vector, distance: number) {
-        for (const [_, fountain] of ipairs(Entities.FindAllByClassname("ent_dota_fountain"))) {
+        for (const fountain of (Entities.FindAllByClassname("ent_dota_fountain"))) {
             if ((fountain.GetAbsOrigin() - location as Vector).Length2D() <= distance) {
                 return true;
             }
@@ -516,7 +516,7 @@ export module AoiHelper {
         return false;
     }
     export function IsNearEntity(entities: string, location: Vector, distance: number, owner: IBaseNpc_Plus) {
-        for (const [_, entity] of ipairs(Entities.FindAllByClassname(entities))) {
+        for (const entity of (Entities.FindAllByClassname(entities))) {
             if ((entity.GetAbsOrigin() - location as Vector).Length2D() <= distance || owner && (entity.GetAbsOrigin() - location as Vector).Length2D() <= distance && entity.GetOwner() == owner) {
                 return true;
             }
@@ -524,7 +524,7 @@ export module AoiHelper {
         return false;
     }
     export function IsNearPosition(entities: string, location: Vector, distance: number) {
-        for (const [_, fountain] of ipairs(Entities.FindAllByClassname(entities))) {
+        for (const fountain of (Entities.FindAllByClassname(entities))) {
             if ((fountain.GetAbsOrigin() - location as Vector).Length2D() <= distance) {
                 return true;
             }

@@ -214,7 +214,7 @@ export class modifier_item_imba_witchblade extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetItemPlus() && keys.attacker == this.GetCasterPlus() && keys.attacker.GetTeam() != keys.target.GetTeam() && keys.target.GetMaxMana() > 0 && !keys.target.IsMagicImmune() && this.GetCasterPlus().FindAllModifiersByName(this.GetName())[1] == this) {
+        if (this.GetItemPlus() && keys.attacker == this.GetCasterPlus() && keys.attacker.GetTeam() != keys.target.GetTeam() && keys.target.GetMaxMana() > 0 && !keys.target.IsMagicImmune() && this.GetCasterPlus().FindAllModifiersByName(this.GetName())[0] == this) {
             let particle = ResHelper.CreateParticleEx("particles/item/diffusal/diffusal_manaburn_3.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.target);
             ParticleManager.ReleaseParticleIndex(particle);
             let mana_burn = 0;
@@ -247,7 +247,7 @@ export class modifier_item_imba_witchblade extends BaseModifier_Plus {
             return;
         }
         let target = keys.unit;
-        if (this.GetItemPlus() && keys.attacker == this.GetCasterPlus() && keys.attacker.GetTeam() != target.GetTeam() && target.GetMaxMana() > 0 && !target.IsMagicImmune() && this.GetCasterPlus().FindAllModifiersByName(this.GetName())[1] == this && keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK && keys.damage > 0) {
+        if (this.GetItemPlus() && keys.attacker == this.GetCasterPlus() && keys.attacker.GetTeam() != target.GetTeam() && target.GetMaxMana() > 0 && !target.IsMagicImmune() && this.GetCasterPlus().FindAllModifiersByName(this.GetName())[0] == this && keys.damage_category == DamageCategory_t.DOTA_DAMAGE_CATEGORY_ATTACK && keys.damage > 0) {
             if (GFuncRandom.PRD(this.GetItemPlus().GetSpecialValueFor("severance_chance"), this)) {
                 target.EmitSound("DOTA_Item.DiffusalBlade.Target");
                 let particle = ResHelper.CreateParticleEx("particles/item/diffusal/diffusal_manaburn_3.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);

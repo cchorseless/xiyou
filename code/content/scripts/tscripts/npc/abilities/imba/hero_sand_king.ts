@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
@@ -312,7 +313,7 @@ export class modifier_imba_sandstorm extends BaseModifier_Plus {
                 this.damage_instance_time = this.damage_instance_time + this.damage_interval;
             }
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (damage_enemies) {
                     let damageTable = {
                         victim: enemy,
@@ -461,7 +462,7 @@ export class modifier_imba_sandstorm_aura extends BaseModifier_Plus {
                 this.damage_instance_time = this.damage_instance_time + this.damage_interval;
             }
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (damage_enemies) {
                     let damageTable = {
                         victim: enemy,
@@ -646,7 +647,7 @@ export class modifier_imba_caustic_finale_poison extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(this.particle_explode_fx);
             let slow_modifier = undefined;
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damageTable = {
                     victim: enemy,
                     attacker: this.caster,
@@ -828,7 +829,7 @@ export class modifier_imba_epicenter_pulse extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(this.particle_epicenter_fx, 1, Vector(this.radius, this.radius, 1));
             ParticleManager.ReleaseParticleIndex(this.particle_epicenter_fx);
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damageTable = {
                     victim: enemy,
                     attacker: this.caster,
@@ -842,7 +843,7 @@ export class modifier_imba_epicenter_pulse extends BaseModifier_Plus {
                 });
             }
             enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.pull_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let distance = (enemy.GetAbsOrigin() - this.caster.GetAbsOrigin() as Vector).Length2D();
                 let direction = (enemy.GetAbsOrigin() - this.caster.GetAbsOrigin() as Vector).Normalized();
                 if ((distance - this.pull_speed) > 50) {
@@ -996,7 +997,7 @@ export class modifier_imba_sandking_sand_storm_720_thinker extends BaseModifier_
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.sand_storm_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         let frameTime = FrameTime();
         this.damage_counter = this.damage_counter + frameTime;
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!AoiHelper.IsNearFountain(enemy.GetAbsOrigin(), 1200)) {
                 let direction = (this.parent.GetAbsOrigin() - enemy.GetAbsOrigin() as Vector).Normalized();
                 let pull_location = enemy.GetAbsOrigin() + (direction * this.pull_speed * frameTime) as Vector;
@@ -1005,7 +1006,7 @@ export class modifier_imba_sandking_sand_storm_720_thinker extends BaseModifier_
             }
         }
         if (this.damage_counter >= this.damage_tick_rate) {
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damageTable = {
                     victim: enemy,
                     damage: this.sand_storm_damage * this.damage_tick_rate,

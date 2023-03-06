@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -97,7 +98,7 @@ export class ghost_revenant_blackjack extends BaseAbility_Plus {
             main_direction = caster.GetForwardVector();
         }
         let angle_step = projectile_cone / (projectile_amount - 1);
-        for (let i = 0; i < projectile_amount; i += 1) {
+        for (let i = 0; i < projectile_amount; i++) {
             projectile_directions.push(RotatePosition(caster_loc, QAngle(0, (i - 1) * angle_step - projectile_cone * 0.5, 0), caster_loc + main_direction * 50 as Vector));
         }
         let blackjack_projectile: CreateLinearProjectileOptions = {
@@ -221,7 +222,7 @@ export class ghost_revenant_miasma extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(miasma_pfx);
         });
         let targets = FindUnitsInRadius(caster.GetTeamNumber(), target, undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(targets)) {
+        for (const [_, unit] of GameFunc.iPair(targets)) {
             unit.AddNewModifier(caster, this, "modifier_ghost_revenant_miasma", {
                 duration: duration * (1 - unit.GetStatusResistance())
             });
@@ -279,23 +280,23 @@ export class modifier_ghost_revenant_miasma extends BaseModifier_Plus {
             return 0;
         }
         let invisModifiers = {
-            1: "modifier_invisible",
-            2: "modifier_mirana_moonlight_shadow",
-            3: "modifier_item_imba_shadow_blade_invis",
-            4: "modifier_item_shadow_amulet_fade",
-            5: "modifier_imba_vendetta",
-            6: "modifier_nyx_assassin_burrow",
-            7: "modifier_item_imba_silver_edge_invis",
-            8: "modifier_item_glimmer_cape_fade",
-            9: "modifier_weaver_shukuchi",
-            10: "modifier_treant_natures_guise_invis",
-            11: "modifier_templar_assassin_meld",
-            12: "modifier_imba_skeleton_walk_dummy",
-            13: "modifier_invoker_ghost_walk_self",
-            14: "modifier_rune_invis",
-            15: "modifier_item_imba_silver_edge_invis"
+            "1": "modifier_invisible",
+            "2": "modifier_mirana_moonlight_shadow",
+            "3": "modifier_item_imba_shadow_blade_invis",
+            "4": "modifier_item_shadow_amulet_fade",
+            "5": "modifier_imba_vendetta",
+            "6": "modifier_nyx_assassin_burrow",
+            "7": "modifier_item_imba_silver_edge_invis",
+            "8": "modifier_item_glimmer_cape_fade",
+            "9": "modifier_weaver_shukuchi",
+            "10": "modifier_treant_natures_guise_invis",
+            "11": "modifier_templar_assassin_meld",
+            "12": "modifier_imba_skeleton_walk_dummy",
+            "13": "modifier_invoker_ghost_walk_self",
+            "14": "modifier_rune_invis",
+            "15": "modifier_item_imba_silver_edge_invis"
         }
-        for (const [_, v] of ipairs(invisModifiers)) {
+        for (const [_, v] of GameFunc.Pair(invisModifiers)) {
             if (parent.HasModifier(v)) {
                 return 1;
             }
@@ -308,23 +309,23 @@ export class modifier_ghost_revenant_miasma extends BaseModifier_Plus {
         let ability = this.GetAbilityPlus();
         let slow = 0;
         let invisModifiers = {
-            1: "modifier_invisible",
-            2: "modifier_mirana_moonlight_shadow",
-            3: "modifier_item_imba_shadow_blade_invis",
-            4: "modifier_item_shadow_amulet_fade",
-            5: "modifier_imba_vendetta",
-            6: "modifier_nyx_assassin_burrow",
-            7: "modifier_item_imba_silver_edge_invis",
-            8: "modifier_item_glimmer_cape_fade",
-            9: "modifier_weaver_shukuchi",
-            10: "modifier_treant_natures_guise_invis",
-            11: "modifier_templar_assassin_meld",
-            12: "modifier_imba_skeleton_walk_dummy",
-            13: "modifier_invoker_ghost_walk_self",
-            14: "modifier_rune_invis",
-            15: "modifier_item_imba_silver_edge_invis"
+            "1": "modifier_invisible",
+            "2": "modifier_mirana_moonlight_shadow",
+            "3": "modifier_item_imba_shadow_blade_invis",
+            "4": "modifier_item_shadow_amulet_fade",
+            "5": "modifier_imba_vendetta",
+            "6": "modifier_nyx_assassin_burrow",
+            "7": "modifier_item_imba_silver_edge_invis",
+            "8": "modifier_item_glimmer_cape_fade",
+            "9": "modifier_weaver_shukuchi",
+            "10": "modifier_treant_natures_guise_invis",
+            "11": "modifier_templar_assassin_meld",
+            "12": "modifier_imba_skeleton_walk_dummy",
+            "13": "modifier_invoker_ghost_walk_self",
+            "14": "modifier_rune_invis",
+            "15": "modifier_item_imba_silver_edge_invis"
         }
-        for (const [_, v] of ipairs(invisModifiers)) {
+        for (const [_, v] of GameFunc.Pair(invisModifiers)) {
             if (parent.HasModifier(v)) {
                 slow = ability.GetSpecialValueFor("invisible_slow");
             }
@@ -435,7 +436,7 @@ export class modifier_ghost_revenant_ghost_immolation_debuff extends BaseModifie
         if (IsServer()) {
             let ghost_revenant = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
             this.lose_hp = false;
-            for (const [_, ghost] of ipairs(ghost_revenant)) {
+            for (const [_, ghost] of GameFunc.iPair(ghost_revenant)) {
                 if (ghost.GetUnitName() == this.GetCasterPlus().GetUnitName()) {
                     this.lose_hp = true;
                 }
@@ -483,7 +484,7 @@ export class ghost_revenant_exhaustion extends BaseAbility_Plus {
         let duration = this.GetSpecialValueFor("duration");
         this.GetCasterPlus().EmitSound("DOTA_Item.DustOfAppearance.Activate");
         let targets = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), Vector(0, 0, 0), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(targets)) {
+        for (const [_, unit] of GameFunc.iPair(targets)) {
             unit.AddNewModifier(this.GetCasterPlus(), this, "modifier_ghost_revenant_exhaustion", {
                 duration: duration * (1 - unit.GetStatusResistance())
             });

@@ -79,7 +79,7 @@ export class modifier_imba_nian_frenzy_swipes extends BaseModifier_Plus {
                 let frenzy_swipe_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_nian/frenzy_swipes.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
                 ParticleManager.ReleaseParticleIndex(frenzy_swipe_particle);
                 let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetParentPlus().Script_GetAttackRange() + this.bonus_attack_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (math.abs(AngleDiff(VectorToAngles(this.GetParentPlus().GetForwardVector()).y, VectorToAngles(enemy.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).y)) <= this.attack_angle) {
                         this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_nian_frenzy_swipes_suppression", {});
                         this.GetParentPlus().PerformAttack(enemy, false, true, true, false, true, false, false);
@@ -312,7 +312,7 @@ export class modifier_imba_nian_crushing_leap_movement extends BaseModifierMotio
             ParticleManager.SetParticleControl(slam_particle, 1, Vector(this.radius, this.radius, this.radius));
             ParticleManager.ReleaseParticleIndex(slam_particle);
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damageTable = {
                     victim: enemy,
                     damage: this.damage,
@@ -482,7 +482,7 @@ export class imba_nian_tail_spin extends BaseAbility_Plus {
         if (GameFunc.GetCount(enemies) >= 1) {
             this.GetCasterPlus().EmitSound("Hero_Nian.Tail_Spin_Impact");
         }
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let damageTable = {
                 victim: enemy,
                 damage: this.GetSpecialValueFor("damage"),
@@ -605,7 +605,7 @@ export class imba_nian_volcanic_burster extends BaseAbility_Plus {
             EntIndexToHScript(data.volcanic_dummy).SetAbsOrigin(location);
         }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.FindModifierByNameAndCaster("modifier_imba_nian_volcanic_burster_cooldown", this.GetCasterPlus())) {
                 enemy.EmitSound("BodyImpact_Common.Heavy");
                 let damageTable = {
@@ -725,7 +725,7 @@ export class modifier_imba_nian_volcanic_burster_tracker extends BaseModifier_Pl
             return;
         }
         if (this.GetAbilityPlus()) {
-            for (let projectile = 1; projectile <= this.projectiles_per_tick; projectile += 1) {
+            for (let projectile = 1; projectile <= this.projectiles_per_tick; projectile++) {
                 let random_vector = RandomVector(this.radius);
                 let spawn_vector = GetGroundPosition(this.GetParentPlus().GetAbsOrigin() + random_vector as Vector, undefined);
                 spawn_vector.z = spawn_vector.z + 50;

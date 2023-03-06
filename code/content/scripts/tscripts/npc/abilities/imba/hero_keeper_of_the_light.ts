@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -219,7 +220,7 @@ export class modifier_imba_keeper_of_the_light_illuminate extends BaseModifier_P
         let targets = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         let damage = math.min((this.channel_time + this.ability.GetCastPoint()) * this.damage_per_second, this.total_damage);
         let valid_targets: IBaseNpc_Plus[] = []
-        for (const [_, target] of ipairs(targets)) {
+        for (const [_, target] of GameFunc.iPair(targets)) {
             let target_pos = target.GetAbsOrigin();
             let target_angle = math.deg(math.atan2((target_pos.x - this.parent.GetAbsOrigin().x), target_pos.y - this.parent.GetAbsOrigin().y));
             let difference = math.abs(this.direction_angle - target_angle);
@@ -227,9 +228,9 @@ export class modifier_imba_keeper_of_the_light_illuminate extends BaseModifier_P
                 table.insert(valid_targets, target);
             }
         }
-        for (const [_, target] of ipairs(valid_targets)) {
+        for (const [_, target] of GameFunc.iPair(valid_targets)) {
             let hit_already = false;
-            for (const [_, hit_target] of ipairs(this.hit_targets)) {
+            for (const [_, hit_target] of GameFunc.iPair(this.hit_targets)) {
                 if (hit_target == target) {
                     hit_already = true;
                     return;
@@ -407,7 +408,7 @@ export class imba_keeper_of_the_light_blinding_light extends BaseAbility_Plus {
             spotlight_modifier.Spotlight(position, this.radius, spotlight_modifier.GetSpecialValueFor("attack_duration"));
         }
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), position, undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let damageTable = {
                 victim: enemy,
                 damage: this.damage,
@@ -572,7 +573,7 @@ export class imba_keeper_of_the_light_chakra_magic extends BaseAbility_Plus {
             if (this.target.IsHero()) {
                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_MANA_ADD, this.target, this.mana_restore, undefined);
             }
-            for (let abilities = 0; abilities <= 23; abilities += 1) {
+            for (let abilities = 0; abilities <= 23; abilities++) {
                 let ability = this.target.GetAbilityByIndex(abilities);
                 if (ability && ability.GetAbilityType() != ABILITY_TYPES.ABILITY_TYPE_ULTIMATE && ability != this) {
                     let remaining_cooldown = ability.GetCooldownTimeRemaining();
@@ -607,7 +608,7 @@ export class imba_keeper_of_the_light_chakra_magic extends BaseAbility_Plus {
                 if (this.target.IsHero()) {
                     SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_MANA_LOSS, this.target, this.mana_restore * inhibition_multiplier, undefined);
                 }
-                for (let abilities = 0; abilities <= 23; abilities += 1) {
+                for (let abilities = 0; abilities <= 23; abilities++) {
                     let ability = this.target.GetAbilityByIndex(abilities);
                     if (ability && ability.GetAbilityType() != ABILITY_TYPES.ABILITY_TYPE_ULTIMATE) {
                         let remaining_cooldown = ability.GetCooldownTimeRemaining();
@@ -716,7 +717,7 @@ export class imba_keeper_of_the_light_recall extends BaseAbility_Plus {
         this.GetCasterPlus().EmitSound("Hero_KeeperOfTheLight.Recall.Cast");
         if (!this.GetCursorTarget() || this.GetCursorTarget() == this.GetCasterPlus()) {
             let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-            for (const [_, ally] of ipairs(allies)) {
+            for (const [_, ally] of GameFunc.iPair(allies)) {
                 if (ally != this.GetCasterPlus()) {
                     this.GetCasterPlus().SetCursorCastTarget(ally);
                     return;
@@ -1001,7 +1002,7 @@ export class modifier_imba_keeper_of_the_light_will_o_wisp extends BaseModifier_
                 this.timer = 0;
             } else {
                 let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (!enemy.HasModifier("modifier_imba_keeper_of_the_light_will_o_wisp_aura")) {
                         enemy.AddNewModifier(this.parent, this.ability, "modifier_imba_keeper_of_the_light_will_o_wisp_aura", {
                             duration: this.on_duration - this.timer
@@ -1026,7 +1027,7 @@ export class modifier_imba_keeper_of_the_light_will_o_wisp extends BaseModifier_
         this.parent.EmitSound("Hero_KeeperOfTheLight.Wisp.Destroy");
         this.parent.StopSound("Hero_KeeperOfTheLight.Wisp.Aura");
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let hypnotize_modifier = enemy.FindModifierByNameAndCaster("modifier_imba_keeper_of_the_light_will_o_wisp_aura", this.parent);
             if (hypnotize_modifier) {
                 hypnotize_modifier.Destroy();

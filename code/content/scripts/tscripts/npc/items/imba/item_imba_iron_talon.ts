@@ -132,7 +132,7 @@ export class modifier_item_imba_iron_talon extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if ((this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_iron_talon")[1] == this) && keys.target && !keys.target.IsHero() && !keys.target.IsOther() && !keys.target.IsBuilding() && !string.find(keys.target.GetUnitName(), "npc_dota_lone_druid_bear") && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
+        if ((this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_iron_talon")[0] == this) && keys.target && !keys.target.IsHero() && !keys.target.IsOther() && !keys.target.IsBuilding() && !string.find(keys.target.GetUnitName(), "npc_dota_lone_druid_bear") && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
             if (this.GetParentPlus().HasItemInInventory("item_quelling_blade")) {
                 return this.GetStackCount();
             } else if (!this.GetParentPlus().IsRangedAttacker()) {
@@ -151,7 +151,7 @@ export class modifier_item_imba_iron_talon extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (!this.GetParentPlus().IsIllusion() && (this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_iron_talon")[1] == this) && keys.attacker == this.GetParentPlus() && keys.unit.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_NEUTRALS && ((!this.GetParentPlus().IsRangedAttacker() && this.GetStackCount() < this.hunt_max) || (this.GetParentPlus().IsRangedAttacker() && this.GetStackCount() < this.hunt_max_ranged))) {
+        if (!this.GetParentPlus().IsIllusion() && (this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_iron_talon")[0] == this) && keys.attacker == this.GetParentPlus() && keys.unit.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_NEUTRALS && ((!this.GetParentPlus().IsRangedAttacker() && this.GetStackCount() < this.hunt_max) || (this.GetParentPlus().IsRangedAttacker() && this.GetStackCount() < this.hunt_max_ranged))) {
             if (!this.GetParentPlus().IsRangedAttacker()) {
                 this.SetStackCount(math.min(this.GetStackCount() + this.hunt_bonus, this.hunt_max));
             } else {

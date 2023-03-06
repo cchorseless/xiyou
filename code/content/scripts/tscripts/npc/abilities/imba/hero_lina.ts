@@ -186,7 +186,7 @@ export class imba_lina_dragon_slave extends BaseAbility_Plus {
                     start_angle = spread_angle * (-1);
                     interval_angle = spread_angle * 2 / (secondary_amount - 1);
                 }
-                for (let i = 1; i <= secondary_amount; i += 1) {
+                for (let i = 0; i < secondary_amount; i++) {
                     let angle = start_angle + (i - 1) * interval_angle;
                     velocity = GFuncVector.RotateVector2D(direction, angle, true) * speed as Vector;
                     let projectile = {
@@ -328,16 +328,16 @@ export class imba_lina_light_strike_array extends BaseAbility_Plus {
             if (caster.HasTalent("special_bonus_imba_lina_7")) {
                 let nuclear_radius = radius;
                 let nuclear_stun_duration = stun_duration;
-                for (let k = 1; k <= caster.GetTalentValue("special_bonus_imba_lina_7") - 1; k += 1) {
+                for (let k = 1; k <= caster.GetTalentValue("special_bonus_imba_lina_7") - 1; k++) {
                     nuclear_radius = nuclear_radius + caster.GetTalentValue("special_bonus_imba_lina_7", "add_radius") * k;
                     nuclear_stun_duration = nuclear_stun_duration * (1 / (caster.GetTalentValue("special_bonus_imba_lina_7", "stun_reduct") * k));
                     this.CreateStrike(target_loc, (cast_delay * k), cast_delay, nuclear_radius, damage, nuclear_stun_duration);
                 }
             }
-            for (let i = 0; i <= array_count - 1; i += 1) {
+            for (let i = 0; i <= array_count - 1; i++) {
                 let array_strike = i + 1;
                 let rings_direction = direction;
-                for (let j = 1; j <= array_rings_count; j += 1) {
+                for (let j = 1; j <= array_rings_count; j++) {
                     rings_direction = GFuncVector.RotateVector2D(rings_direction, ((360 / array_rings_count)), true);
                     let ring_distance = rings_radius * (array_strike + 1);
                     let ring_delay = math.abs((radius * (i + cast_delay + rings_distance)) / (rings_radius * 2)) * cast_delay;
@@ -363,7 +363,7 @@ export class imba_lina_light_strike_array extends BaseAbility_Plus {
             EmitSoundOnLocationWithCaster(position, "Ability.LightStrikeArray", caster);
             GridNav.DestroyTreesAroundPoint(position, radius, false);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), position, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 this.OnHit(enemy, damage, stun_duration);
             }
             if (caster.HasTalent("special_bonus_imba_lina_4")) {
@@ -440,7 +440,7 @@ export class modifier_imba_lsa_talent_magma extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damage_table = ({
                     victim: enemy,
                     attacker: this.caster,
@@ -527,7 +527,7 @@ export class modifier_imba_lina_light_strike_array_v2_thinker_single extends Bas
         ParticleManager.SetParticleControl(array_particle, 1, Vector(this.light_strike_array_aoe, 1, 1));
         ParticleManager.ReleaseParticleIndex(array_particle);
         GridNav.DestroyTreesAroundPoint(this.GetParentPlus().GetAbsOrigin(), this.light_strike_array_aoe, false);
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.light_strike_array_aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.light_strike_array_aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
                 duration: this.light_strike_array_stun_duration * (1 - enemy.GetStatusResistance())
             });
@@ -581,7 +581,7 @@ export class imba_lina_fiery_soul extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(blast_pfx);
             GridNav.DestroyTreesAroundPoint(caster_loc, immolation_aoe, false);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_loc, undefined, immolation_aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let distance = (caster_loc - enemy.GetAbsOrigin() as Vector).Length2D();
                 let immolation_damage;
                 if (distance >= min_damage_aoe) {
@@ -648,7 +648,7 @@ export class modifier_imba_fiery_soul extends BaseModifier_Plus {
                 parent.AddNewModifier(parent, this.GetAbilityPlus(), "modifier_imba_fiery_soul_counter", {
                     duration: this.GetSpecialValueFor("duration")
                 });
-                for (let ability_id = 0; ability_id <= 15; ability_id += 1) {
+                for (let ability_id = 0; ability_id <= 15; ability_id++) {
                     let caster_ability = caster.GetAbilityByIndex(ability_id);
                     if (caster_ability) {
                         let ability_name = caster_ability.GetAbilityName();
@@ -915,13 +915,13 @@ export class imba_lina_laguna_blade extends BaseAbility_Plus {
                     });
                 }
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_loc, undefined, bounce_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (let i = 1; i <= GameFunc.GetCount(enemies); i += 1) {
+                for (let i = 0; i < GameFunc.GetCount(enemies); i++) {
                     if (enemies[i] == target) {
                         table.remove(enemies, i);
                     }
                 }
                 this.AddTimer(bounce_delay, () => {
-                    for (let i = 1; i <= math.min(GameFunc.GetCount(enemies), bounce_amount); i += 1) {
+                    for (let i = 0; i < math.min(GameFunc.GetCount(enemies), bounce_amount); i++) {
                         let bounce_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_lina/lina_spell_laguna_blade.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, caster, caster);
                         ParticleManager.SetParticleControlEnt(bounce_pfx, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target_loc, true);
                         ParticleManager.SetParticleControlEnt(bounce_pfx, 1, enemies[i], ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", enemies[i].GetAbsOrigin(), true);

@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -28,7 +29,7 @@ function Purification(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target:
     target.Heal(heal, ability);
     SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, heal, undefined);
     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-    for (const [_, enemy] of ipairs(enemies)) {
+    for (const [_, enemy] of GameFunc.iPair(enemies)) {
         if (!enemy.IsMagicImmune()) {
             let damageTable = {
                 victim: enemy,
@@ -78,20 +79,20 @@ export class imba_omniknight_purification extends BaseAbility_Plus {
         let target = this.GetCursorTarget();
         let rare_cast_response = "omniknight_omni_ability_purif_03";
         let target_cast_response = {
-            1: "omniknight_omni_ability_purif_01",
-            2: "omniknight_omni_ability_purif_02",
-            3: "omniknight_omni_ability_purif_04",
-            4: "omniknight_omni_ability_purif_05",
-            5: "omniknight_omni_ability_purif_06",
-            6: "omniknight_omni_ability_purif_07",
-            7: "omniknight_omni_ability_purif_08"
+            "1": "omniknight_omni_ability_purif_01",
+            "2": "omniknight_omni_ability_purif_02",
+            "3": "omniknight_omni_ability_purif_04",
+            "4": "omniknight_omni_ability_purif_05",
+            "5": "omniknight_omni_ability_purif_06",
+            "6": "omniknight_omni_ability_purif_07",
+            "7": "omniknight_omni_ability_purif_08"
         }
         let self_cast_response = {
-            1: "omniknight_omni_ability_purif_01",
-            2: "omniknight_omni_ability_purif_05",
-            3: "omniknight_omni_ability_purif_06",
-            4: "omniknight_omni_ability_purif_07",
-            5: "omniknight_omni_ability_purif_08"
+            "1": "omniknight_omni_ability_purif_01",
+            "2": "omniknight_omni_ability_purif_05",
+            "3": "omniknight_omni_ability_purif_06",
+            "4": "omniknight_omni_ability_purif_07",
+            "5": "omniknight_omni_ability_purif_08"
         }
         let sound_cast = "Hero_Omniknight.Purification";
         if (caster == target) {
@@ -110,7 +111,7 @@ export class imba_omniknight_purification extends BaseAbility_Plus {
         if (caster.HasTalent("special_bonus_imba_omniknight_4")) {
             let bounce_radius = caster.GetTalentValue("special_bonus_imba_omniknight_4");
             let allies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, bounce_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, ally] of ipairs(allies)) {
+            for (const [_, ally] of GameFunc.iPair(allies)) {
                 if (ally != target) {
                     Purification(caster, ability, ally);
                     return;
@@ -299,9 +300,9 @@ export class imba_omniknight_repel extends BaseAbility_Plus {
         let target = this.GetCursorTarget();
         let target_cast_response = "omniknight_omni_ability_repel_0" + math.random(1, 6);
         let self_cast_response = {
-            1: "omniknight_omni_ability_repel_01",
-            2: "omniknight_omni_ability_repel_05",
-            3: "omniknight_omni_ability_repel_06"
+            "1": "omniknight_omni_ability_repel_01",
+            "2": "omniknight_omni_ability_repel_05",
+            "3": "omniknight_omni_ability_repel_06"
         }
         let sound_cast = "Hero_Omniknight.Repel";
         let duration = ability.GetSpecialValueFor("duration");
@@ -316,7 +317,7 @@ export class imba_omniknight_repel extends BaseAbility_Plus {
             let radius = caster.GetTalentValue("special_bonus_imba_omniknight_6", "radius");
             let talent_duration = caster.GetTalentValue("special_bonus_imba_omniknight_6", "duration");
             let allies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, ally] of ipairs(allies)) {
+            for (const [_, ally] of GameFunc.iPair(allies)) {
                 if (ally != target) {
                     this.Repel(caster, ability, ally, duration);
                 }
@@ -490,9 +491,9 @@ export class imba_omniknight_heavenly_grace extends BaseAbility_Plus {
                 this.GetCasterPlus().EmitSound("omniknight_omni_ability_repel_0" + math.random(1, 6));
             } else {
                 let responses = {
-                    1: "omniknight_omni_ability_repel_01",
-                    2: "omniknight_omni_ability_repel_05",
-                    3: "omniknight_omni_ability_repel_06"
+                    "1": "omniknight_omni_ability_repel_01",
+                    "2": "omniknight_omni_ability_repel_05",
+                    "3": "omniknight_omni_ability_repel_06"
                 }
                 this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
             }
@@ -662,7 +663,7 @@ export class modifier_imba_hammer_of_virtue extends BaseModifier_Plus {
                 ApplyDamage(damageTable);
                 let allies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
                 let heal = damage * this.damage_as_heal_pct * 0.01;
-                for (const [_, ally] of ipairs(allies)) {
+                for (const [_, ally] of GameFunc.iPair(allies)) {
                     ally.Heal(heal, this.ability);
                     SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, ally, heal, undefined);
                     this.particle_heal_fx = ResHelper.CreateParticleEx(this.particle_heal, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, ally);
@@ -729,10 +730,10 @@ export class imba_omniknight_guardian_angel extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let ability = this;
         let cast_response = {
-            1: "omniknight_omni_ability_guard_04",
-            2: "omniknight_omni_ability_guard_05",
-            3: "omniknight_omni_ability_guard_06",
-            4: "omniknight_omni_ability_guard_10"
+            "1": "omniknight_omni_ability_guard_04",
+            "2": "omniknight_omni_ability_guard_05",
+            "3": "omniknight_omni_ability_guard_06",
+            "4": "omniknight_omni_ability_guard_10"
         }
         let sound_cast = "Hero_Omniknight.GuardianAngel.Cast";
         let modifier_angel = "modifier_imba_guardian_angel";
@@ -747,7 +748,7 @@ export class imba_omniknight_guardian_angel extends BaseAbility_Plus {
             radius = 25000;
         }
         let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             ally.AddNewModifier(caster, ability, modifier_angel, {
                 duration: duration
             });

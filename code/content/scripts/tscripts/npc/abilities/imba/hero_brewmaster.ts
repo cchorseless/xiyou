@@ -8,7 +8,7 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 @registerAbility()
 export class imba_brewmaster_thunder_clap extends BaseAbility_Plus {
-    public responses: any;
+    public responses: { [k: string]: string };
     GetCastRange(location: Vector, target: CDOTA_BaseNPC | undefined): number {
         return this.GetSpecialValueFor("radius") - this.GetCasterPlus().GetCastRangeBonus();
     }
@@ -19,20 +19,20 @@ export class imba_brewmaster_thunder_clap extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(clap_particle);
         let slow_duration = undefined;
         let debris_targets = 0;
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius") + this.GetSpecialValueFor("debris_buffer_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius") + this.GetSpecialValueFor("debris_buffer_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             if (GFuncVector.AsVector((enemy.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()) * Vector(1, 1, 0)).Length2D() <= this.GetSpecialValueFor("radius")) {
                 enemy.EmitSound("Hero_Brewmaster.ThunderClap.Target");
                 if (this.GetCasterPlus().GetName() == "npc_dota_hero_brewmaster" && RollPercentage(75)) {
                     if (!this.responses) {
                         this.responses = {
-                            1: "brewmaster_brew_ability_thunderclap_01",
-                            2: "brewmaster_brew_ability_thunderclap_02",
-                            3: "brewmaster_brew_ability_thunderclap_03",
-                            4: "brewmaster_brew_ability_primalsplit_02",
-                            5: "brewmaster_brew_ability_primalsplit_03"
+                            "1": "brewmaster_brew_ability_thunderclap_01",
+                            "2": "brewmaster_brew_ability_thunderclap_02",
+                            "3": "brewmaster_brew_ability_thunderclap_03",
+                            "4": "brewmaster_brew_ability_primalsplit_02",
+                            "5": "brewmaster_brew_ability_primalsplit_03"
                         }
                     }
-                    this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+                    this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
                 }
                 if (enemy.IsHero()) {
                     slow_duration = this.GetTalentSpecialValueFor("duration");
@@ -177,7 +177,7 @@ export class modifier_imba_brewmaster_thunder_clap_conductive_thinker extends Ba
     OnIntervalThink(): void {
         this.zapped = false;
         let npcs = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.current_unit.GetAbsOrigin(), undefined, this.conduction_distance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-        for (const [_, enemy] of ipairs(npcs)) {
+        for (const [_, enemy] of GameFunc.iPair(npcs)) {
             if (!this.units_affected.includes(enemy)) {
                 enemy.EmitSound("Item.Maelstrom.Chain_Lightning.Jump");
                 this.zap_particle = ResHelper.CreateParticleEx("particles/econ/events/ti6/maelstorm_ti6.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.current_unit);
@@ -208,7 +208,7 @@ export class modifier_imba_brewmaster_thunder_clap_conductive_thinker extends Ba
 }
 @registerAbility()
 export class imba_brewmaster_cinder_brew extends BaseAbility_Plus {
-    public responses: any;
+    public responses: { [k: string]: string };
     public projectiles: any;
     public brew_modifier: any;
     GetAOERadius(): number {
@@ -222,15 +222,15 @@ export class imba_brewmaster_cinder_brew extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_brewmaster") {
             if (!this.responses) {
                 this.responses = {
-                    1: "brewmaster_brew_ability_drukenhaze_01",
-                    2: "brewmaster_brew_ability_drukenhaze_02",
-                    3: "brewmaster_brew_ability_drukenhaze_03",
-                    4: "brewmaster_brew_ability_drukenhaze_04",
-                    5: "brewmaster_brew_ability_drukenhaze_05",
-                    6: "brewmaster_brew_ability_drukenhaze_08"
+                    "1": "brewmaster_brew_ability_drukenhaze_01",
+                    "2": "brewmaster_brew_ability_drukenhaze_02",
+                    "3": "brewmaster_brew_ability_drukenhaze_03",
+                    "4": "brewmaster_brew_ability_drukenhaze_04",
+                    "5": "brewmaster_brew_ability_drukenhaze_05",
+                    "6": "brewmaster_brew_ability_drukenhaze_08"
                 }
             }
-            this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+            this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
         }
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
             this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
@@ -266,7 +266,7 @@ export class imba_brewmaster_cinder_brew extends BaseAbility_Plus {
         this.projectiles[brew_projectile]["destination"] = this.GetCursorPosition();
     }
     OnProjectileThinkHandle(projectileHandle: ProjectileID): void {
-        for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), ProjectileManager.GetLinearProjectileLocation(projectileHandle), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), ProjectileManager.GetLinearProjectileLocation(projectileHandle), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             if (this.projectiles[projectileHandle]["destination"] && ((this.projectiles[projectileHandle]["destination"] - ProjectileManager.GetLinearProjectileLocation(projectileHandle)) * Vector(1, 1, 0) as Vector).Length2D() <= this.GetSpecialValueFor("radius") && ((unit.GetAbsOrigin() - ProjectileManager.GetLinearProjectileLocation(projectileHandle)) * Vector(1, 1, 0) as Vector).Length2D() <= this.GetSpecialValueFor("radius") && !this.projectiles[projectileHandle][unit.entindex()]) {
                 this.projectiles[projectileHandle][unit.entindex()] = true;
                 if (unit.IsHero()) {
@@ -290,7 +290,7 @@ export class imba_brewmaster_cinder_brew extends BaseAbility_Plus {
     OnProjectileHitHandle(target: IBaseNpc_Plus, location: Vector, projectileHandle: ProjectileID) {
         if (!target && location) {
             EmitSoundOnLocationWithCaster(location, "Hero_Brewmaster.CinderBrew", this.GetCasterPlus());
-            for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                 if (!this.projectiles[projectileHandle][unit.entindex()]) {
                     this.projectiles[projectileHandle][unit.entindex()] = true;
                     if (unit.IsHero()) {
@@ -636,13 +636,13 @@ export class imba_brewmaster_primal_split extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_brewmaster") {
             if (!this.responses) {
                 this.responses = {
-                    1: "brewmaster_brew_ability_primalsplit_06",
-                    2: "brewmaster_brew_ability_primalsplit_08",
-                    3: "brewmaster_brew_ability_primalsplit_09",
-                    4: "brewmaster_brew_ability_primalsplit_13"
+                    "1": "brewmaster_brew_ability_primalsplit_06",
+                    "2": "brewmaster_brew_ability_primalsplit_08",
+                    "3": "brewmaster_brew_ability_primalsplit_09",
+                    "4": "brewmaster_brew_ability_primalsplit_13"
                 }
             }
-            this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+            this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
         }
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_4);
         return true;
@@ -779,31 +779,31 @@ export class modifier_imba_brewmaster_primal_split_split_delay extends BaseModif
             let storm_panda = BaseNpc_Plus.CreateUnitByName("npc_dota_brewmaster_storm_" + ability.GetLevel(), RotatePosition(parent.GetAbsOrigin(), QAngle(0, 120, 0), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector), caster.GetTeamNumber(), true, caster, caster);
             let fire_panda = BaseNpc_Plus.CreateUnitByName("npc_dota_brewmaster_fire_" + ability.GetLevel(), RotatePosition(parent.GetAbsOrigin(), QAngle(0, -120, 0), parent.GetAbsOrigin() + parent.GetForwardVector() * 100 as Vector), caster.GetTeamNumber(), true, caster, caster);
             this.standard_abilities = {
-                1: "brewmaster_earth_hurl_boulder",
-                2: "brewmaster_earth_spell_immunity",
-                3: "brewmaster_earth_pulverize",
-                4: "brewmaster_storm_dispel_magic",
-                5: "brewmaster_storm_cyclone",
-                6: "brewmaster_storm_wind_walk",
-                7: "brewmaster_fire_permanent_immolation"
+                "1": "brewmaster_earth_hurl_boulder",
+                "2": "brewmaster_earth_spell_immunity",
+                "3": "brewmaster_earth_pulverize",
+                "4": "brewmaster_storm_dispel_magic",
+                "5": "brewmaster_storm_cyclone",
+                "6": "brewmaster_storm_wind_walk",
+                "7": "brewmaster_fire_permanent_immolation"
             }
             this.brewmaster_vanilla_abilities = {
-                1: "brewmaster_thunder_clap",
-                2: "brewmaster_cinder_brew",
-                3: "brewmaster_drunken_brawler"
+                "1": "brewmaster_thunder_clap",
+                "2": "brewmaster_cinder_brew",
+                "3": "brewmaster_drunken_brawler"
             }
             this.brewmaster_abilities = {
-                1: "imba_brewmaster_thunder_clap",
-                2: "imba_brewmaster_cinder_brew",
-                3: "imba_brewmaster_drunken_brawler"
+                "1": "imba_brewmaster_thunder_clap",
+                "2": "imba_brewmaster_cinder_brew",
+                "3": "imba_brewmaster_drunken_brawler"
             }
-            table.insert(this.pandas, earth_panda);
-            table.insert(this.pandas, storm_panda);
-            table.insert(this.pandas, fire_panda);
-            table.insert(this.pandas_entindexes, earth_panda.entindex());
+            this.pandas.push(earth_panda);
+            this.pandas.push(storm_panda);
+            this.pandas.push(fire_panda);
+            this.pandas_entindexes.push(earth_panda.entindex());
             if (this.GetCasterPlus() == this.GetParentPlus()) {
-                table.insert(this.pandas_entindexes, storm_panda.entindex());
-                table.insert(this.pandas_entindexes, fire_panda.entindex());
+                this.pandas_entindexes.push(storm_panda.entindex());
+                this.pandas_entindexes.push(fire_panda.entindex());
             }
             this.GetParentPlus().FollowEntity(earth_panda, false);
             if (split_modifier) {
@@ -830,19 +830,19 @@ export class modifier_imba_brewmaster_primal_split_split_delay extends BaseModif
                     panda.SetControllableByPlayer(this.GetCasterPlus().GetPlayerID(), true);
                 }
                 // PlayerResource.AddToSelection(this.GetParentPlus().GetPlayerID(), panda);
-                for (const [_, ability] of ipairs(this.standard_abilities)) {
+                for (const [_, ability] of GameFunc.Pair(this.standard_abilities)) {
                     if (panda.HasAbility(ability)) {
                         panda.FindAbilityByName(ability).SetLevel(this.GetAbilityPlus().GetLevel());
                     }
                 }
-                for (const [_, ability] of ipairs(this.brewmaster_vanilla_abilities)) {
+                for (const [_, ability] of GameFunc.Pair(this.brewmaster_vanilla_abilities)) {
                     if (panda.HasAbility(ability)) {
                         panda.AddAbility(this.brewmaster_abilities[_]);
                         panda.SwapAbilities(this.brewmaster_abilities[_], ability, true, false);
                         panda.RemoveAbility(ability);
                     }
                 }
-                for (const [_, ability] of ipairs(this.brewmaster_abilities)) {
+                for (const [_, ability] of GameFunc.Pair(this.brewmaster_abilities)) {
                     if (panda.HasAbility(ability) && this.GetCasterPlus().HasAbility(ability)) {
                         panda.FindAbilityByName(ability).SetLevel(this.GetCasterPlus().FindAbilityByName(ability).GetLevel());
                     }
@@ -865,7 +865,7 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
     public scepter_attack_speed: number;
     public scepter_magic_resistance: any;
     public parent: IBaseNpc_Plus;
-    public responses: any;
+    public responses: string[];
     public death_particle: any;
     public pandas: IBaseNpc_Plus[];
     public pandas_entindexes: EntityIndex[];
@@ -897,15 +897,16 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
             this.GetParentPlus().EmitSound("Hero_Brewmaster.PrimalSplit.Return");
             if (this.GetRemainingTime() <= 0 && this.GetCasterPlus().GetName() == "npc_dota_hero_brewmaster") {
                 if (!this.responses) {
-                    this.responses = {
-                        1: "brewmaster_brew_ability_primalsplit_10",
-                        2: "brewmaster_brew_ability_primalsplit_12",
-                        3: "brewmaster_brew_ability_primalsplit_15",
-                        4: "brewmaster_brew_ability_primalsplit_16",
-                        5: "brewmaster_brew_ability_primalsplit_17"
-                    }
+                    this.responses = [
+                        "brewmaster_brew_ability_primalsplit_10",
+                        "brewmaster_brew_ability_primalsplit_12",
+                        "brewmaster_brew_ability_primalsplit_15",
+                        "brewmaster_brew_ability_primalsplit_16",
+                        "brewmaster_brew_ability_primalsplit_17",
+                    ];
+
                 }
-                this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+                this.GetCasterPlus().EmitSound(GFuncRandom.RandomOne(this.responses));
             }
             this.GetParentPlus().FollowEntity(undefined, false);
             this.GetParentPlus().RemoveNoDraw();
@@ -969,7 +970,7 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
                             bNoneAlive = false;
                             this.parent.FollowEntity(panda, false);
                             if (this.parent != this.GetCasterPlus()) {
-                                table.insert(this.parent.findBuff<modifier_imba_brewmaster_primal_split_duration>("modifier_imba_brewmaster_primal_split_duration").pandas_entindexes, panda.entindex());
+                                this.parent.findBuff<modifier_imba_brewmaster_primal_split_duration>("modifier_imba_brewmaster_primal_split_duration").pandas_entindexes.push(panda.entindex());
                                 panda.SetOwner(this.parent);
                                 panda.SetControllableByPlayer(this.parent.GetPlayerID(), true);
                             }
@@ -1032,18 +1033,18 @@ export class imba_brewmaster_primal_unison extends BaseAbility_Plus {
             let owner = this.GetCasterPlus().GetOwner() as IBaseNpc_Plus;
             if (owner) {
 
-                for (const [_, ent] of ipairs(Entities.FindAllByName("npc_dota_brewmaster_fire"))) {
+                for (const [_, ent] of GameFunc.iPair(Entities.FindAllByName("npc_dota_brewmaster_fire"))) {
                     if (ent.GetOwner() == owner) {
                         GFuncEntity.SafeDestroyUnit(ent as IBaseNpc_Plus);
                     }
                 }
-                for (const [_, ent] of ipairs(Entities.FindAllByName("npc_dota_brewmaster_storm"))) {
+                for (const [_, ent] of GameFunc.iPair(Entities.FindAllByName("npc_dota_brewmaster_storm"))) {
                     if (ent.GetOwner() == owner) {
                         GFuncEntity.SafeDestroyUnit(ent as IBaseNpc_Plus);
                     }
                 }
 
-                for (const [_, ent] of ipairs(Entities.FindAllByName("npc_dota_brewmaster_earth"))) {
+                for (const [_, ent] of GameFunc.iPair(Entities.FindAllByName("npc_dota_brewmaster_earth"))) {
                     if (ent.GetOwner() == owner) {
                         FindClearSpaceForUnit(owner, ent.GetAbsOrigin(), true);
                         GFuncEntity.SafeDestroyUnit(ent as IBaseNpc_Plus);

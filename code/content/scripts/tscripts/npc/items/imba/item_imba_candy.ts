@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { AnimationHelper } from "../../../helper/AnimationHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
@@ -15,7 +16,7 @@ export class item_diretide_candy extends BaseItem_Plus {
                 if (caster.GetTeamNumber() == 3) {
                     return;
                 }
-                for (const [_, hero] of ipairs(HeroList.GetAllHeroes())) {
+                for (const [_, hero] of GameFunc.iPair(HeroList.GetAllHeroes())) {
                     // hero.AddExperience(75, false, false);
                     hero.ModifyGold(50, true, 0);
                 }
@@ -31,7 +32,7 @@ export class item_diretide_candy extends BaseItem_Plus {
                 if (caster.GetTeamNumber() == 2) {
                     return;
                 }
-                for (const [_, hero] of ipairs(HeroList.GetAllHeroes())) {
+                for (const [_, hero] of GameFunc.iPair(HeroList.GetAllHeroes())) {
                     // hero.AddExperience(75, false, false);
                     hero.ModifyGold(50, true, 0);
                 }

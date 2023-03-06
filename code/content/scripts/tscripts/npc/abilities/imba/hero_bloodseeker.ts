@@ -88,7 +88,7 @@ export class modifier_imba_bloodrage_buff_stats extends BaseModifier_Plus {
     }
 
     OnIntervalThink(): void {
-        for (const [_, target] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false))) {
+        for (const [_, target] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false))) {
             ApplyDamage({
                 victim: target,
                 attacker: this.GetCasterPlus(),
@@ -245,7 +245,7 @@ export class imba_bloodseeker_blood_bath extends BaseAbility_Plus {
             let direction = GFuncVector.AsVector(vPos - caster_pos).Normalized();
             let front_point = vPos + direction * distance as Vector;
             this.FormBloodRiteCircle(caster, front_point);
-            for (let i = 1; i <= circles - 1; i += 1) {
+            for (let i = 0; i < circles; i++) {
                 let vector_direction;
                 if (i % 2 == 0) {
                     vector_direction = this.Orthogonal(direction, false);
@@ -280,7 +280,7 @@ export class imba_bloodseeker_blood_bath extends BaseAbility_Plus {
             if (caster.HasTalent("special_bonus_imba_bloodseeker_2") && caster.HasAbility("imba_bloodseeker_rupture")) {
                 rupture = caster.findAbliityPlus<imba_bloodseeker_rupture>("imba_bloodseeker_rupture");
             }
-            for (const [_, target] of ipairs(targets)) {
+            for (const [_, target] of GameFunc.iPair(targets)) {
                 let damage = this.GetSpecialValueFor("damage");
                 target.AddNewModifier(caster, this, "modifier_imba_blood_bath_debuff_silence", {
                     duration: this.GetSpecialValueFor("silence_duration") * (1 - target.GetStatusResistance())
@@ -338,7 +338,7 @@ export class modifier_imba_blood_bath_debuff_silence extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(params: ModifierInstanceEvent) {
         if (params.unit == this.GetParentPlus() && params.unit.IsRealHero()) {
-            for (let i = 0; i <= 16; i += 1) {
+            for (let i = 0; i < 16; i++) {
                 let ability = this.GetCasterPlus().GetAbilityByIndex(i);
                 if (ability && !ability.IsCooldownReady()) {
                     let cd = ability.GetCooldownTimeRemaining();
@@ -473,7 +473,7 @@ export class modifier_imba_thirst_passive extends BaseModifier_Plus {
             }
             let enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_DEAD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false);
             let hpDeficit = 0;
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (this.GetCasterPlus().PassivesDisabled() || !this.GetCasterPlus().IsAlive()) {
                     enemy.RemoveModifierByName("modifier_imba_thirst_debuff_vision");
                 } else {
@@ -528,7 +528,7 @@ export class modifier_imba_thirst_passive extends BaseModifier_Plus {
                 let duration = this.GetAbilityPlus().GetTalentSpecialValueFor("atk_buff_duration");
                 let attackList = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_thirst_haste") as modifier_imba_thirst_haste[];
                 let confirmTheKill = false;
-                for (const [_, modifier] of ipairs(attackList)) {
+                for (const [_, modifier] of GameFunc.iPair(attackList)) {
                     if (modifier.sourceUnit == params.unit) {
                         let attackerCount = 1;
                         if (params.attacker == this.GetCasterPlus()) {
@@ -659,7 +659,7 @@ export class modifier_bloodseeker_thirst_v2 extends BaseModifier_Plus {
         this.health_percent_sum = 0;
         this.max_thirst_enemies = 0;
         if (!this.GetParentPlus().PassivesDisabled()) {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_DEAD, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_DEAD, FindOrder.FIND_ANY_ORDER, false))) {
                 if ((enemy.IsRealHero() || enemy.IsClone() || enemy.IsTempestDouble()) && enemy.GetHealthPercent() <= this.GetSpecialValueFor("min_bonus_pct") && (enemy.IsAlive() || enemy.HasModifier("modifier_bloodseeker_thirst_v2_vision"))) {
                     this.health_percent_sum = this.health_percent_sum + (this.GetSpecialValueFor("min_bonus_pct") - math.max(enemy.GetHealthPercent(), this.GetSpecialValueFor("max_bonus_pct")));
                     if (enemy.GetHealthPercent() <= this.GetSpecialValueFor("visibility_threshold_pct")) {

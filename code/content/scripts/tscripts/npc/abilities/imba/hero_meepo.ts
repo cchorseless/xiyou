@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseModifier_Plus } from "../../entityPlus/BaseModifier_Plus";
 import { registerModifier } from "../../entityPlus/Base_Plus";
@@ -22,37 +23,37 @@ export class modifier_meepo_divided_we_stand_lua extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         let boots = {
-            1: "item_imba_guardian_greaves",
-            2: "item_imba_origin_treads",
-            3: "item_imba_arcane_boots",
-            4: "item_imba_lifesteal_boots",
-            5: "item_imba_blink_boots",
-            6: "item_imba_transient_boots"
+            "1": "item_imba_guardian_greaves",
+            "2": "item_imba_origin_treads",
+            "3": "item_imba_arcane_boots",
+            "4": "item_imba_lifesteal_boots",
+            "5": "item_imba_blink_boots",
+            "6": "item_imba_transient_boots"
         }
         let all_boots = {
-            1: "item_boots",
-            2: "item_travel_boots",
-            3: "item_travel_boots_2",
-            4: "item_tranquil_boots",
-            5: "item_imba_guardian_greaves",
-            6: "item_imba_origin_treads",
-            7: "item_imba_arcane_boots",
-            8: "item_imba_lifesteal_boots",
-            9: "item_imba_blink_boots",
-            10: "item_imba_transient_boots"
+            "1": "item_boots",
+            "2": "item_travel_boots",
+            "3": "item_travel_boots_2",
+            "4": "item_tranquil_boots",
+            "5": "item_imba_guardian_greaves",
+            "6": "item_imba_origin_treads",
+            "7": "item_imba_arcane_boots",
+            "8": "item_imba_lifesteal_boots",
+            "9": "item_imba_blink_boots",
+            "10": "item_imba_transient_boots"
         }
         let break_loop = false;
         let ignore_custom_boots = false;
         if (this.GetParentPlus().IsClone()) {
-            for (const [_, boots] of ipairs(all_boots)) {
+            for (const [_, boots] of GameFunc.Pair(all_boots)) {
                 if (this.GetParentPlus().HasItemInInventory(boots)) {
                     ignore_custom_boots = true;
                     return;
                 }
             }
             if (ignore_custom_boots == false) {
-                for (const [_, boots_name] of ipairs(boots)) {
-                    for (let i = 0; i <= 5; i += 1) {
+                for (const [_, boots_name] of GameFunc.Pair(boots)) {
+                    for (let i = 0; i <= 5; i++) {
                         this.GetParentPlus().GetCloneSource().TempData().main_boots = undefined;
                         let item = this.GetParentPlus().GetCloneSource().GetItemInSlot(i);
                         if (item) {
@@ -77,7 +78,7 @@ export class modifier_meepo_divided_we_stand_lua extends BaseModifier_Plus {
                     }
                 }
             } else {
-                for (const [_, boots_name] of ipairs(boots)) {
+                for (const [_, boots_name] of GameFunc.Pair(boots)) {
                     this.GetParentPlus().RemoveItemByName(boots_name);
                 }
             }

@@ -37,7 +37,7 @@ export class imba_templar_assassin_refraction extends BaseAbility_Plus {
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_templar_assassin_refraction_reality", {
             duration: this.GetSpecialValueFor("reality_duration")
         });
-        for (const [_, ally] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("disperse_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, ally] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("disperse_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             if (ally != this.GetCasterPlus()) {
                 ally.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_templar_assassin_refraction_absorb", {
                     duration: this.GetSpecialValueFor("disperse_duration")
@@ -335,7 +335,7 @@ export class modifier_imba_templar_assassin_meld extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        for (const [_, modifier] of ipairs(this.GetParentPlus().FindAllModifiersByName("modifier_imba_templar_assassin_meld_linger"))) {
+        for (const [_, modifier] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName("modifier_imba_templar_assassin_meld_linger"))) {
             if (modifier.GetDuration() == -1) {
                 modifier.SetDuration(this.inner_eye_after_duration, true);
             }
@@ -554,7 +554,7 @@ export class modifier_imba_templar_assassin_psi_blades extends BaseModifier_Plus
             } else if (keys.unit.IsIllusion()  /**&& keys.unit.GetPhysicalArmorValue && GetReductionFromArmor*/) {
                 damage_to_use = keys.original_damage * (1 - GPropertyCalculate.GetPhysicalReductionPect(keys.unit, keys as any));
             }
-            for (const [_, enemy] of ipairs(FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), keys.unit.GetAbsOrigin(), keys.unit.GetAbsOrigin() + ((keys.unit.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Normalized() * this.GetSpecialValueFor("attack_spill_range")) as Vector, undefined, this.GetSpecialValueFor("attack_spill_width"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), keys.unit.GetAbsOrigin(), keys.unit.GetAbsOrigin() + ((keys.unit.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Normalized() * this.GetSpecialValueFor("attack_spill_range")) as Vector, undefined, this.GetSpecialValueFor("attack_spill_width"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES))) {
                 if (enemy != keys.unit) {
                     enemy.EmitSound("Hero_TemplarAssassin.PsiBlade");
                     this.psi_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_templar_assassin/templar_assassin_psi_blade.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.unit, this.GetParentPlus());
@@ -615,7 +615,7 @@ export class imba_templar_assassin_trap extends BaseAbility_Plus {
         if (this.trap_ability && this.counter_modifier && this.counter_modifier.trap_table && GameFunc.GetCount(this.counter_modifier.trap_table) > 0) {
             let distance = undefined;
             let index = undefined;
-            for (let trap_number = 1; trap_number <= GameFunc.GetCount(this.counter_modifier.trap_table); trap_number += 1) {
+            for (let trap_number = 0; trap_number < GameFunc.GetCount(this.counter_modifier.trap_table); trap_number++) {
                 if (this.counter_modifier.trap_table[trap_number] && !this.counter_modifier.trap_table[trap_number].IsNull()) {
                     if (!distance) {
                         index = trap_number;
@@ -941,7 +941,7 @@ export class imba_templar_assassin_trap_teleport extends BaseAbility_Plus {
             if (this.trap_ability && this.counter_modifier && this.counter_modifier.trap_table && GameFunc.GetCount(this.counter_modifier.trap_table) > 0) {
                 let distance = undefined;
                 let index = undefined;
-                for (let trap_number = 1; trap_number <= GameFunc.GetCount(this.counter_modifier.trap_table); trap_number += 1) {
+                for (let trap_number = 1; trap_number <= GameFunc.GetCount(this.counter_modifier.trap_table); trap_number++) {
                     if (this.counter_modifier.trap_table[trap_number] && !this.counter_modifier.trap_table[trap_number].IsNull()) {
                         if (!distance) {
                             index = trap_number;
@@ -1018,8 +1018,8 @@ export class imba_templar_assassin_psionic_trap extends BaseAbility_Plus {
             }
             table.insert(this.counter_modifier.trap_table, trap_modifier);
             if (GameFunc.GetCount(this.counter_modifier.trap_table) > this.GetTalentSpecialValueFor("max_traps")) {
-                if (this.counter_modifier.trap_table[1].GetParentPlus()) {
-                    this.counter_modifier.trap_table[1].GetParentPlus().ForceKill(false);
+                if (this.counter_modifier.trap_table[0].GetParentPlus()) {
+                    this.counter_modifier.trap_table[0].GetParentPlus().ForceKill(false);
                 }
             }
             this.counter_modifier.SetStackCount(GameFunc.GetCount(this.counter_modifier.trap_table));
@@ -1145,7 +1145,7 @@ export class modifier_imba_templar_assassin_psionic_trap extends BaseModifier_Pl
             return;
         }
         if (this.trap_counter_modifier && this.trap_counter_modifier.trap_table) {
-            for (let trap_modifier = 1; trap_modifier <= GameFunc.GetCount(this.trap_counter_modifier.trap_table); trap_modifier += 1) {
+            for (let trap_modifier = 0; trap_modifier < GameFunc.GetCount(this.trap_counter_modifier.trap_table); trap_modifier++) {
                 if (this.trap_counter_modifier.trap_table[trap_modifier] == this) {
                     table.remove(this.trap_counter_modifier.trap_table, trap_modifier);
                     if (this.GetCasterPlus().HasModifier("modifier_imba_templar_assassin_psionic_trap_counter")) {
@@ -1175,7 +1175,7 @@ export class modifier_imba_templar_assassin_psionic_trap extends BaseModifier_Pl
         ParticleManager.SetParticleControl(this.explode_particle, 61, Vector(this.bColor, 0, 0));
         ParticleManager.ReleaseParticleIndex(this.explode_particle);
         if (this.GetParentPlus().GetOwnerPlus()) {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                 let slow_modifier = enemy.AddNewModifier(this.GetParentPlus().GetOwnerPlus(), ability, "modifier_imba_templar_assassin_trap_slow", {
                     duration: trap_duration,
                     slow: math.min(this.movement_speed_min + (((this.movement_speed_max - this.movement_speed_min) / this.trap_max_charge_duration) * math.floor(this.GetElapsedTime() * 10) / 10), this.movement_speed_max),

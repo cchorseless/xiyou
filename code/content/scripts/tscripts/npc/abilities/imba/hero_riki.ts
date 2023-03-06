@@ -94,7 +94,7 @@ export class modifier_imba_smoke_screen_handler extends BaseModifier_Plus {
         let remaining_duration = this.GetRemainingTime();
         if (caster.HasTalent("special_bonus_imba_riki_5")) {
             let allies = FindUnitsInRadius(parent.GetTeamNumber(), parent.GetAbsOrigin(), undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-            for (const [_, ally] of ipairs(allies)) {
+            for (const [_, ally] of GameFunc.iPair(allies)) {
                 if (ally == caster) {
                     let smoke_screen_invi = caster.AddNewModifier(caster, ability, "modifier_imba_smoke_screen_invi_indicator", {}) as modifier_imba_smoke_screen_invi_indicator;
                     if (smoke_screen_invi) {
@@ -106,7 +106,7 @@ export class modifier_imba_smoke_screen_handler extends BaseModifier_Plus {
             }
         }
         let targets = FindUnitsInRadius(parent.GetTeamNumber(), parent.GetAbsOrigin(), undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-        for (const [_, unit] of ipairs(targets)) {
+        for (const [_, unit] of GameFunc.iPair(targets)) {
             if (!afflicted[unit.entindex() + ""]) {
                 let mod = unit.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_smoke_screen_vision", {
                     duration: remaining_duration
@@ -123,7 +123,7 @@ export class modifier_imba_smoke_screen_handler extends BaseModifier_Plus {
                 let stacks = math.ceil(max_reduction * (100 - (distance * 100 / aoe)) / 100) + 1;
                 let isStrongest = true;
                 let duplicateMods = unit.FindAllModifiersByName("modifier_imba_smoke_screen_vision");
-                for (const [_, modifier] of ipairs(duplicateMods)) {
+                for (const [_, modifier] of GameFunc.iPair(duplicateMods)) {
                     if (!modifier.IsNull()) {
                         if (modifier != afflicted[unit.entindex() + ""]) {
                             if (modifier.GetStackCount() >= stacks) {
@@ -340,20 +340,20 @@ export class imba_riki_smoke_screen_723 extends BaseAbility_Plus {
             if (RollPercentage(15)) {
                 if (!this.uncommon_responses) {
                     this.uncommon_responses = {
-                        1: "riki_riki_ability_smokescreen_03",
-                        2: "riki_riki_ability_smokescreen_05"
+                        "1": "riki_riki_ability_smokescreen_03",
+                        "2": "riki_riki_ability_smokescreen_05"
                     }
                 }
-                this.GetCasterPlus().EmitSound(this.uncommon_responses[RandomInt(1, GameFunc.GetCount(this.uncommon_responses))]);
+                this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.uncommon_responses));
             } else if (RollPercentage(75)) {
                 if (!this.responses) {
                     this.responses = {
-                        1: "riki_riki_ability_smokescreen_01",
-                        2: "riki_riki_ability_smokescreen_02",
-                        3: "riki_riki_ability_smokescreen_04"
+                        "1": "riki_riki_ability_smokescreen_01",
+                        "2": "riki_riki_ability_smokescreen_02",
+                        "3": "riki_riki_ability_smokescreen_04"
                     }
                 }
-                this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+                this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
             }
         }
         CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_riki_smoke_screen_723_aura", {
@@ -677,7 +677,7 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
                     duration: jump_duration
                 });
                 table.insert(tMarkedTargets, hTarget);
-                for (let i = 1; i <= (GameFunc.GetCount(tMarkedTargets) - 1); i += 1) {
+                for (let i = 0; i < (GameFunc.GetCount(tMarkedTargets) - 1); i++) {
                     this.AddTimer(i * jump_interval_time, () => {
                         this.DoJumpAttack(tMarkedTargets[i], tMarkedTargets[(i + 1)]);
                     });
@@ -780,7 +780,7 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(particle);
             let distance = 200 / this.jump_interval_frames;
             this.hCaster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_4);
-            for (let i = 1; i <= (this.jump_interval_frames - 1); i += 1) {
+            for (let i = 0; i < (this.jump_interval_frames - 1); i++) {
                 this.AddTimer(FrameTime() * i, () => {
                     let location = (start_loc - direction * distance * i) as Vector;
                     this.hCaster.SetAbsOrigin(location);
@@ -900,7 +900,7 @@ export class modifier_imba_blink_strike_thinker extends BaseModifier_Plus {
                     let graph: { [k: string]: any } = {}
                     let caster_index: number;
                     let target_index: number;
-                    for (let i = 0; i < math.min(GameFunc.GetCount(tJumpableUnits), this.lagg_threshold); i += 1) {
+                    for (let i = 0; i < math.min(GameFunc.GetCount(tJumpableUnits), this.lagg_threshold); i++) {
                         let pos = tJumpableUnits[i].GetAbsOrigin();
                         graph[i + ""] = {}
                         graph[i + ""].x = pos.x;
@@ -1687,7 +1687,7 @@ export class modifier_imba_riki_tricks_of_the_trade_primary extends BaseModifier
             if (GameFunc.GetCount(targets) == 0 || this.GetAbilityPlus().GetName() == "imba_riki_tricks_of_the_trade_723") {
                 targets = FindUnitsInRadius(caster.GetTeamNumber(), origin, undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
             }
-            for (const [_, unit] of ipairs(targets)) {
+            for (const [_, unit] of GameFunc.iPair(targets)) {
                 if (unit.IsAlive() && !unit.IsAttackImmune()) {
                     if (this.GetAbilityPlus().GetName() == "imba_riki_tricks_of_the_trade_723") {
                         caster.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_riki_tricks_of_the_trade_723_damage_reduction", {});
@@ -1765,7 +1765,7 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
             }
             let martyrs_mark_targets: IBaseNpc_Plus[];
             if (caster.HasTalent("special_bonus_imba_riki_2")) {
-                for (const [_, unit] of ipairs(targets)) {
+                for (const [_, unit] of GameFunc.iPair(targets)) {
                     if (unit.IsAlive() && !unit.IsAttackImmune()) {
                         let martyrs_mark_mod = unit.findBuff<modifier_imba_martyrs_mark>("modifier_imba_martyrs_mark");
                         if (martyrs_mark_mod) {
@@ -1783,8 +1783,8 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
                 let martyrs_mark_checklist: IBaseNpc_Plus[] = []
                 let highest_stack = 0;
                 let martyrs_mark_checked = false;
-                for (let i = 1; i <= GameFunc.GetCount(martyrs_mark_targets); i += 1) {
-                    for (const [_, target] of ipairs(martyrs_mark_targets)) {
+                for (let i = 0; i < GameFunc.GetCount(martyrs_mark_targets); i++) {
+                    for (const [_, target] of GameFunc.iPair(martyrs_mark_targets)) {
                         martyrs_mark_checked = false;
                         let martyrs_mark_mod = target.findBuff<modifier_imba_martyrs_mark>("modifier_imba_martyrs_mark");
                         if (martyrs_mark_mod) {
@@ -1812,7 +1812,7 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
                     table.insert(martyrs_mark_checklist, martyrs_mark_target);
                 }
             }
-            for (const [_, unit] of ipairs(targets)) {
+            for (const [_, unit] of GameFunc.iPair(targets)) {
                 if (unit.IsAlive() && !unit.IsAttackImmune()) {
                     this.ProcTricks(caster, ability, unit, backstab_ability, backstab_particle, backstab_sound, caster.GetTalentValue("special_bonus_imba_riki_2", "duration"));
                     let aps = parent.GetAttacksPerSecond();

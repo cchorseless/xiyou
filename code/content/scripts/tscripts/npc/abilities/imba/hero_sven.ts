@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -26,7 +27,7 @@ export class imba_sven_warcry_723 extends BaseAbility_Plus {
         }
         ParticleManager.ReleaseParticleIndex(warcry_cast_particle);
         this.GetCasterPlus().Purge(false, true, false, false, false);
-        for (const [_, ally] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, ally] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             ally.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_sven_warcry_723", {
                 duration: duration
             });
@@ -183,7 +184,7 @@ export class imba_sven_storm_bolt extends BaseAbility_Plus {
                     duration: crit_max_duration
                 });
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, ExtraData.radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (enemy == target && target.TriggerSpellAbsorb(this)) {
                     } else {
                         ApplyDamage({
@@ -498,7 +499,7 @@ export class imba_sven_warcry extends BaseAbility_Plus {
             let radius = this.GetSpecialValueFor("radius");
             let duration = this.GetSpecialValueFor("duration") + caster.GetTalentValue("special_bonus_imba_sven_10");
             let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, ally] of ipairs(allies)) {
+            for (const [_, ally] of GameFunc.iPair(allies)) {
                 if (caster == ally) {
                     caster.AddNewModifier(caster, this, "modifier_imba_warcry", {
                         duration: duration

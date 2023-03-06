@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -135,9 +136,9 @@ export class imba_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
             });
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, bounce_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
             let projectile_fired = false;
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let enemy_found = false;
-                for (const [_, enemy_in_table] of ipairs(enemy_table)) {
+                for (const [_, enemy_in_table] of GameFunc.iPair(enemy_table)) {
                     if (enemy.GetEntityIndex() == enemy_in_table) {
                         enemy_found = true;
                         return;
@@ -936,7 +937,7 @@ export class modifier_imba_track_debuff_mark extends BaseModifier_Plus {
                 playerroot.PlayerDataComp().ModifyGold(this.bonus_gold_self, true, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
                 SendOverheadEventMessage(PlayerResource.GetPlayer(playerroot.BelongPlayerid), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, this.caster, this.bonus_gold_self, undefined);
                 let allies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.haste_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, ally] of ipairs(allies)) {
+                for (const [_, ally] of GameFunc.iPair(allies)) {
                     if (ally != this.caster) {
                         // ally.ModifyGold(this.bonus_gold_allies, true, EDOTA_ModifyGold_Reason.DOTA_ModifyGold_Unspecified);
                         // SendOverheadEventMessage(ally, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, ally, this.bonus_gold_allies, undefined);
@@ -1057,15 +1058,15 @@ export class modifier_imba_headhunter_passive extends BaseModifier_Plus {
             }
             // if (IsNearFriendlyClass(this.caster, 1360, "ent_dota_fountain")) {
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, 50000, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy.HasModifier(this.modifier_contract)) {
                     return;
                 }
             }
-            if (!enemies[1]) {
+            if (!enemies[0]) {
                 return;
             }
-            let contract_enemy = enemies[1];
+            let contract_enemy = enemies[0];
             let contract_projectile;
             contract_projectile = {
                 Target: contract_enemy,
@@ -1158,7 +1159,7 @@ export class modifier_imba_headhunter_debuff_handler extends BaseModifier_Plus {
                 return;
             }
             let heroes = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, hero] of ipairs(heroes)) {
+            for (const [_, hero] of GameFunc.iPair(heroes)) {
                 if (this.parent.GetPlayerID() == hero.GetPlayerOwnerID() && this.parent.GetUnitName() == hero.GetUnitName() && hero.IsIllusion()) {
                     hero.AddNewModifier(this.caster, this.ability, this.modifier_dummy, {
                         duration: this.GetRemainingTime()

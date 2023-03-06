@@ -43,20 +43,20 @@ export class imba_terrorblade_reflection extends BaseAbility_Plus {
             } else if (RollPercentage(20)) {
                 if (!this.responses) {
                     this.responses = {
-                        1: "terrorblade_terr_reflection_02",
-                        2: "terrorblade_terr_reflection_03",
-                        3: "terrorblade_terr_reflection_04",
-                        4: "terrorblade_terr_reflection_05",
-                        5: "terrorblade_terr_reflection_07"
+                        "1": "terrorblade_terr_reflection_02",
+                        "2": "terrorblade_terr_reflection_03",
+                        "3": "terrorblade_terr_reflection_04",
+                        "4": "terrorblade_terr_reflection_05",
+                        "5": "terrorblade_terr_reflection_07"
                     }
                 }
                 if (!this.responses_morph) {
                     this.responses_morph = {
-                        1: "terrorblade_terr_morph_reflection_02",
-                        2: "terrorblade_terr_morph_reflection_03",
-                        3: "terrorblade_terr_morph_reflection_04",
-                        4: "terrorblade_terr_morph_reflection_05",
-                        5: "terrorblade_terr_morph_reflection_07"
+                        "1": "terrorblade_terr_morph_reflection_02",
+                        "2": "terrorblade_terr_morph_reflection_03",
+                        "3": "terrorblade_terr_morph_reflection_04",
+                        "4": "terrorblade_terr_morph_reflection_05",
+                        "5": "terrorblade_terr_morph_reflection_07"
                     }
                 }
                 if (this.GetCasterPlus().HasModifier("modifier_imba_terrorblade_metamorphosis")) {
@@ -66,7 +66,7 @@ export class imba_terrorblade_reflection extends BaseAbility_Plus {
                 }
             }
         }
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("range") + (this.GetSpecialValueFor("infinity_radius_per_stack") * this.GetCasterPlus().findBuffStack("modifier_imba_terrorblade_reflection_infinity_mirror_stacks", this.GetCasterPlus())), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("range") + (this.GetSpecialValueFor("infinity_radius_per_stack") * this.GetCasterPlus().findBuffStack("modifier_imba_terrorblade_reflection_infinity_mirror_stacks", this.GetCasterPlus())), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false))) {
             if (enemy.GetHullRadius() > 8) {
                 spawn_range = 108;
             } else {
@@ -82,7 +82,7 @@ export class imba_terrorblade_reflection extends BaseAbility_Plus {
                 outgoing_damage_roshan: undefined,
                 duration: this.GetSpecialValueFor("illusion_duration") + (this.GetSpecialValueFor("infinity_duration_per_stack") * this.GetCasterPlus().findBuffStack("modifier_imba_terrorblade_reflection_infinity_mirror_stacks", this.GetCasterPlus()))
             });
-            for (const [_, illusion] of ipairs(illusions)) {
+            for (const [_, illusion] of GameFunc.iPair(illusions)) {
                 illusion.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_terrorblade_reflection_unit", {
                     enemy_entindex: enemy.entindex()
                 });
@@ -221,18 +221,18 @@ export class imba_terrorblade_conjure_image extends BaseAbility_Plus {
             } else if (RollPercentage(20)) {
                 if (!this.responses) {
                     this.responses = {
-                        1: "terrorblade_terr_conjureimage_02",
-                        2: "terrorblade_terr_demon_09",
-                        3: "terrorblade_terr_demon_10",
-                        4: "terrorblade_terr_demon_11"
+                        "1": "terrorblade_terr_conjureimage_02",
+                        "2": "terrorblade_terr_demon_09",
+                        "3": "terrorblade_terr_demon_10",
+                        "4": "terrorblade_terr_demon_11"
                     }
                 }
                 if (!this.responses_morph) {
                     this.responses_morph = {
-                        1: "terrorblade_terr_morph_conjureimage_02",
-                        2: "terrorblade_terr_morph_demon_09",
-                        3: "terrorblade_terr_morph_demon_10",
-                        4: "terrorblade_terr_morph_demon_11"
+                        "1": "terrorblade_terr_morph_conjureimage_02",
+                        "2": "terrorblade_terr_morph_demon_09",
+                        "3": "terrorblade_terr_morph_demon_10",
+                        "4": "terrorblade_terr_morph_demon_11"
                     }
                 }
                 if (this.GetCasterPlus().HasModifier("modifier_imba_terrorblade_metamorphosis")) {
@@ -252,7 +252,7 @@ export class imba_terrorblade_conjure_image extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("illusion_duration")
         });
         if (illusions) {
-            for (const [_, illusion] of ipairs(illusions)) {
+            for (const [_, illusion] of GameFunc.iPair(illusions)) {
                 illusion.AddNewModifier(this.GetCasterPlus(), this, "modifier_terrorblade_conjureimage", {});
                 illusion.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3_END);
             }
@@ -323,18 +323,18 @@ export class imba_terrorblade_metamorphosis extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_terrorblade") {
             if (!this.responses) {
                 this.responses = {
-                    1: "terrorblade_terr_morph_metamorphosis_01",
-                    2: "terrorblade_terr_morph_metamorphosis_02",
-                    3: "terrorblade_terr_morph_metamorphosis_03",
-                    4: "terrorblade_terr_morph_metamorphosis_04",
-                    5: "terrorblade_terr_morph_metamorphosis_05",
-                    6: "terrorblade_terr_morph_metamorphosis_06",
-                    7: "terrorblade_terr_morph_metamorphosis_07",
-                    8: "terrorblade_terr_morph_metamorphosis_08",
-                    9: "terrorblade_terr_morph_metamorphosis_09",
-                    10: "terrorblade_terr_morph_demon_12",
-                    11: "terrorblade_terr_morph_demon_13",
-                    12: "terrorblade_terr_morph_demon_14"
+                    "1": "terrorblade_terr_morph_metamorphosis_01",
+                    "2": "terrorblade_terr_morph_metamorphosis_02",
+                    "3": "terrorblade_terr_morph_metamorphosis_03",
+                    "4": "terrorblade_terr_morph_metamorphosis_04",
+                    "5": "terrorblade_terr_morph_metamorphosis_05",
+                    "6": "terrorblade_terr_morph_metamorphosis_06",
+                    "7": "terrorblade_terr_morph_metamorphosis_07",
+                    "8": "terrorblade_terr_morph_metamorphosis_08",
+                    "9": "terrorblade_terr_morph_metamorphosis_09",
+                    "10": "terrorblade_terr_morph_demon_12",
+                    "11": "terrorblade_terr_morph_demon_13",
+                    "12": "terrorblade_terr_morph_demon_14"
                 }
             }
             EmitSoundOnClient(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))], this.GetCasterPlus().GetPlayerOwner());
@@ -344,7 +344,7 @@ export class imba_terrorblade_metamorphosis extends BaseAbility_Plus {
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_terrorblade_metamorphosis_transform", {
             duration: this.GetSpecialValueFor("transformation_time")
         });
-        for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("metamorph_aura_tooltip"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("metamorph_aura_tooltip"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {
             if (unit != this.GetCasterPlus() && unit.IsIllusion() && unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID() && unit.GetName() == this.GetCasterPlus().GetName()) {
                 unit.RemoveModifierByName("modifier_imba_terrorblade_metamorphosis");
                 unit.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_terrorblade_metamorphosis_transform", {
@@ -612,7 +612,7 @@ export class modifier_imba_terrorblade_metamorphosis_fear_thinker extends BaseMo
             this.StartIntervalThink(-1);
             this.StartIntervalThink(FrameTime());
         } else {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, math.min(this.speed * (this.GetElapsedTime() - this.spawn_delay), this.radius), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, math.min(this.speed * (this.GetElapsedTime() - this.spawn_delay), this.radius), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                 if (!this.feared_units[enemy.entindex()] && (enemy.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() >= math.min(this.speed * (this.GetElapsedTime() - this.spawn_delay), this.radius) - 50) {
                     enemy.EmitSound("Hero_Terrorblade.Metamorphosis.Fear");
                     this.fear_modifier = enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_terrorblade_fear", {
@@ -789,30 +789,30 @@ export class imba_terrorblade_sunder extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_terrorblade") {
             if (!this.responses) {
                 this.responses = {
-                    1: "terrorblade_terr_demonattack_08",
-                    2: "terrorblade_terr_sunder_01",
-                    3: "terrorblade_terr_sunder_02",
-                    4: "terrorblade_terr_sunder_04",
-                    5: "terrorblade_terr_sunder_05",
-                    6: "terrorblade_terr_sunder_07",
-                    7: "terrorblade_terr_sunder_08",
-                    8: "terrorblade_terr_sunder_09",
-                    9: "terrorblade_terr_sunder_10",
-                    10: "terrorblade_terr_sunder_11"
+                    "1": "terrorblade_terr_demonattack_08",
+                    "2": "terrorblade_terr_sunder_01",
+                    "3": "terrorblade_terr_sunder_02",
+                    "4": "terrorblade_terr_sunder_04",
+                    "5": "terrorblade_terr_sunder_05",
+                    "6": "terrorblade_terr_sunder_07",
+                    "7": "terrorblade_terr_sunder_08",
+                    "8": "terrorblade_terr_sunder_09",
+                    "9": "terrorblade_terr_sunder_10",
+                    "10": "terrorblade_terr_sunder_11"
                 }
             }
             if (!this.responses_morph) {
                 this.responses_morph = {
-                    1: "terrorblade_terr_morph_demonattack_08",
-                    2: "terrorblade_terr_morph_sunder_01",
-                    3: "terrorblade_terr_morph_sunder_02",
-                    4: "terrorblade_terr_morph_sunder_04",
-                    5: "terrorblade_terr_morph_sunder_05",
-                    6: "terrorblade_terr_morph_sunder_07",
-                    7: "terrorblade_terr_morph_sunder_08",
-                    8: "terrorblade_terr_morph_sunder_09",
-                    9: "terrorblade_terr_morph_sunder_10",
-                    10: "terrorblade_terr_morph_sunder_11"
+                    "1": "terrorblade_terr_morph_demonattack_08",
+                    "2": "terrorblade_terr_morph_sunder_01",
+                    "3": "terrorblade_terr_morph_sunder_02",
+                    "4": "terrorblade_terr_morph_sunder_04",
+                    "5": "terrorblade_terr_morph_sunder_05",
+                    "6": "terrorblade_terr_morph_sunder_07",
+                    "7": "terrorblade_terr_morph_sunder_08",
+                    "8": "terrorblade_terr_morph_sunder_09",
+                    "9": "terrorblade_terr_morph_sunder_10",
+                    "10": "terrorblade_terr_morph_sunder_11"
                 }
             }
             if (this.GetCasterPlus().HasModifier("modifier_imba_terrorblade_metamorphosis")) {

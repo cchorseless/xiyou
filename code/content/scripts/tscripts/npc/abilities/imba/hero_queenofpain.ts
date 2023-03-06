@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -65,7 +66,7 @@ export class modifier_imba_delightful_torment_thinker extends BaseModifier_Plus 
         if (params.attacker == parent) {
             if (params.unit.IsRealHero() && !parent.PassivesDisabled()) {
                 let cooldown_reduction = this.GetSpecialValueFor("cooldown_reduction");
-                for (let i = 0; i <= 15; i += 1) {
+                for (let i = 0; i <= 15; i++) {
                     let current_ability = parent.GetAbilityByIndex(i);
                     if (current_ability) {
                         let cooldown_remaining = current_ability.GetCooldownTimeRemaining();
@@ -188,7 +189,7 @@ export class imba_queenofpain_shadow_strike extends BaseAbility_Plus {
         }
         ProjectileManager.CreateTrackingProjectile(projectile);
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_queen_of_pain_shadow_strike_aoe")) {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, this.GetCasterPlus().GetTalentValue("special_bonus_imba_queen_of_pain_shadow_strike_aoe"), this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, this.GetCasterPlus().GetTalentValue("special_bonus_imba_queen_of_pain_shadow_strike_aoe"), this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false))) {
                 if (enemy != target) {
                     ProjectileManager.CreateTrackingProjectile({
                         Target: enemy,
@@ -286,7 +287,7 @@ export class modifier_imba_shadow_strike_debuff extends BaseModifier_Plus {
             this.SetStackCount(this.slow * 100 * (-1));
             if (!this.dagger_pfx) {
                 this.dagger_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_queenofpain/queen_shadow_strike_debuff.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetCasterPlus());
-                for (const [_, cp] of ipairs({
+                for (const [_, cp] of GameFunc.Pair({
                     1: 0,
                     2: 2,
                     3: 3
@@ -525,7 +526,7 @@ export class imba_queenofpain_scream_of_pain extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(scream_pfx, 0, scream_loc);
             ParticleManager.ReleaseParticleIndex(scream_pfx);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), scream_loc, undefined, radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != scream_source) {
                     let projectile = {
                         Target: enemy,

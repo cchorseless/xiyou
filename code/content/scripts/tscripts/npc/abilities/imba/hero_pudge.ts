@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -181,19 +182,19 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
             let location = vLocation;
             let radius = ExtraData.hook_width;
             let runes = {
-                1: "models/props_gameplay/rune_goldxp.vmdl",
-                2: "models/props_gameplay/rune_haste01.vmdl",
-                3: "models/props_gameplay/rune_doubledamage01.vmdl",
-                4: "models/props_gameplay/rune_regeneration01.vmdl",
-                5: "models/props_gameplay/rune_arcane.vmdl",
-                6: "models/props_gameplay/rune_invisibility01.vmdl",
-                7: "models/props_gameplay/rune_illusion01.vmdl",
-                8: "models/props_gameplay/rune_frost.vmdl",
-                9: "models/props_gameplay/gold_coin001.vmdl"
+                "1": "models/props_gameplay/rune_goldxp.vmdl",
+                "2": "models/props_gameplay/rune_haste01.vmdl",
+                "3": "models/props_gameplay/rune_doubledamage01.vmdl",
+                "4": "models/props_gameplay/rune_regeneration01.vmdl",
+                "5": "models/props_gameplay/rune_arcane.vmdl",
+                "6": "models/props_gameplay/rune_invisibility01.vmdl",
+                "7": "models/props_gameplay/rune_illusion01.vmdl",
+                "8": "models/props_gameplay/rune_frost.vmdl",
+                "9": "models/props_gameplay/gold_coin001.vmdl"
             }
-            for (const [_, ent] of ipairs(Entities.FindAllInSphere(location, radius))) {
-                for (const [_, model] of ipairs(runes)) {
-                    for (const [_, rune] of ipairs(Entities.FindAllByModel(model))) {
+            for (const [_, ent] of GameFunc.iPair(Entities.FindAllInSphere(location, radius))) {
+                for (const [_, model] of GameFunc.Pair(runes)) {
+                    for (const [_, rune] of GameFunc.iPair(Entities.FindAllByModel(model))) {
                         if ((location - rune.GetAbsOrigin() as Vector).Length2D() < radius) {
                             ExtraData.rune = rune.entindex();
                             this.OnProjectileHit_ExtraData(undefined, location, ExtraData);
@@ -653,15 +654,15 @@ export class modifier_imba_pudge_meat_hook_caster_root extends BaseModifier_Plus
             return;
         }
         let disable_items = {
-            1: "item_tpscroll",
-            2: "item_travel_boots",
-            3: "item_travel_boots_2"
+            "1": "item_tpscroll",
+            "2": "item_travel_boots",
+            "3": "item_travel_boots_2"
         }
         let caster = this.GetCasterPlus();
         this.disable = []
-        for (let i = 0; i <= 8; i += 1) {
+        for (let i = 0; i <= 8; i++) {
             let item = caster.GetItemInSlot(i);
-            for (const [_, check] of ipairs(disable_items)) {
+            for (const [_, check] of GameFunc.Pair(disable_items)) {
                 if (item && item.GetAbilityName() == check) {
                     item.SetActivated(false);
                     table.insert(this.disable, item);
@@ -880,7 +881,7 @@ export class modifier_imba_pudge_rot extends BaseModifier_Plus {
             attacker: this.GetCasterPlus(),
             ability: this.GetAbilityPlus()
         });
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             if (enemy.FindModifierByNameAndCaster("modifier_imba_pudge_rot_slow", this.GetCasterPlus())) {
                 ApplyDamage({
                     victim: enemy,
@@ -1371,7 +1372,7 @@ export class modifier_imba_dismember_scepter extends BaseModifierMotionHorizonta
                 11: dotaunitorder_t.DOTA_UNIT_ORDER_PICKUP_ITEM,
                 12: dotaunitorder_t.DOTA_UNIT_ORDER_PICKUP_RUNE
             }
-            for (const [k, v] of ipairs(valid_orders)) {
+            for (const [k, v] of GameFunc.Pair(valid_orders)) {
                 if (params.order_type == v) {
                     this.Destroy();
                     return;

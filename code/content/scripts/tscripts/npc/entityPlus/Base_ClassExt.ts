@@ -1,5 +1,6 @@
 /** @noSelfInFile */
 
+import { GameFunc } from "../../GameFunc";
 import { AoiHelper } from "../../helper/AoiHelper";
 import { KVHelper } from "../../helper/KVHelper";
 import { PropertyCalculate } from "../propertystat/PropertyCalculate";
@@ -387,7 +388,7 @@ CBaseAbility.GetTalentSpecialValueFor = function (s: string, default_V = 0): num
     for (const k in data) {
         const v: { [k: string]: any } = data[k];
         if (k == "AbilitySpecial") {
-            for (const [l, m] of ipairs(v)) {
+            for (const [l, m] of GameFunc.Pair(v)) {
                 if (m[s] && m[link]) {
                     talentName = m[link];
                     break;
@@ -395,7 +396,7 @@ CBaseAbility.GetTalentSpecialValueFor = function (s: string, default_V = 0): num
             }
         }
         else if (k == "AbilityValues") {
-            for (const [l, m] of ipairs(v)) {
+            for (const [l, m] of GameFunc.Pair(v)) {
                 if (type(m) == "table") {
                     if (m[s] && m[link]) {
                         talentName = m[link];

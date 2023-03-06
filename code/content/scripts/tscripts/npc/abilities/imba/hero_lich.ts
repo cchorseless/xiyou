@@ -71,7 +71,7 @@ function FrostNova(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target: IB
         IncreaseStacksColdFront(caster, target, main_cold_front_stacks);
     }
     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-    for (const [_, enemy] of ipairs(enemies)) {
+    for (const [_, enemy] of GameFunc.iPair(enemies)) {
         if (!enemy.IsMagicImmune()) {
             let damageTable = {
                 victim: enemy,
@@ -101,7 +101,7 @@ function FrostNova(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target: IB
         let distance = (target.GetAbsOrigin() - caster_loc as Vector).Length2D();
         let direction = (target.GetAbsOrigin() - caster_loc as Vector).Normalized();
         let novas = math.floor(distance / distance_per_nova);
-        for (let i = 1; i <= novas; i += 1) {
+        for (let i = 0; i < novas; i++) {
             ability.AddTimer(creation_delay * i, () => {
                 let location = caster_loc + direction * distance_per_nova * i as Vector;
                 let particle_nova_flower_fx = ResHelper.CreateParticleEx(particle_nova_flower, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
@@ -117,7 +117,7 @@ function FrostNova(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target: IB
                     ParticleManager.SetParticleControl(particle_nova_fx, 2, location);
                     ParticleManager.ReleaseParticleIndex(particle_nova_fx);
                     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, damage_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         if (!enemy.IsMagicImmune()) {
                             let damageTable = {
                                 victim: enemy,
@@ -146,8 +146,8 @@ function FrostNova(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target: IB
         let target_loc = target.GetAbsOrigin();
         let deviation = RandomInt(0, 359);
         let angle = 360 / novae_per_ring;
-        for (let i = 1; i <= rings; i += 1) {
-            for (let j = 1; j <= novae_per_ring; j += 1) {
+        for (let i = 0; i < rings; i++) {
+            for (let j = 1; j <= novae_per_ring; j++) {
                 ability.AddTimer(creation_delay * i, () => {
                     let chaos_variable = RandomInt(-15, 15);
                     let location = target_loc + Vector(math.cos(math.rad((angle * j) + deviation + chaos_variable)), math.sin(math.rad((angle * j) + deviation + chaos_variable))) * (i * ring_distance) as Vector;
@@ -167,7 +167,7 @@ function FrostNova(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, target: IB
                         ParticleManager.SetParticleControl(particle_nova_fx, 2, location);
                         ParticleManager.ReleaseParticleIndex(particle_nova_fx);
                         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                        for (const [_, enemy] of ipairs(enemies)) {
+                        for (const [_, enemy] of GameFunc.iPair(enemies)) {
                             if (!enemy.IsMagicImmune()) {
                                 let damageTable = {
                                     victim: enemy,
@@ -381,7 +381,7 @@ export class imba_lich_frost_nova extends BaseAbility_Plus {
             EmitSoundOn(cast_response, caster);
         }
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             this.AddTimer(FrameTime(), () => {
                 if (!enemy.IsAlive() && enemy.IsRealHero()) {
                     if (enemy.GetUnitName() == "npc_dota_hero_crystal_maiden") {
@@ -614,7 +614,7 @@ export class modifier_imba_frost_armor_buff extends BaseModifier_Plus {
             return;
         }
         let enemies = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.caster.GetTalentValue("special_bonus_imba_lich_8", "aura_range"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (enemy.HasModifier("modifier_imba_frost_armor_freezing_point")) {
                 let modifier_handler = enemy.findBuff<modifier_imba_frost_armor_freezing_point>("modifier_imba_frost_armor_freezing_point");
                 if (modifier_handler) {
@@ -933,13 +933,13 @@ export class imba_lich_dark_ritual extends BaseAbility_Plus {
         let target = this.GetCursorTarget();
         let cast_response = "lich_lich_ability_ritual_";
         let cast_response_nums = {
-            1: "01",
-            2: "02",
-            3: "03",
-            4: "04",
-            5: "05",
-            6: "07",
-            7: "13"
+            "1": "01",
+            "2": "02",
+            "3": "03",
+            "4": "04",
+            "5": "05",
+            "6": "07",
+            "7": "13"
         }
         let sound_cast = "Ability.DarkRitual";
         let particle_sacrifice_allies = "particles/units/heroes/hero_lich/lich_dark_ritual.vpcf";
@@ -978,14 +978,14 @@ export class imba_lich_dark_ritual extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(particle, 2, Vector(1, digits + 1, 0));
             ParticleManager.SetParticleControl(particle, 3, Vector(170, 0, 250));
             let allied_creeps = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, allied_creeps_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_SUMMONED, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, creep] of ipairs(allied_creeps)) {
+            for (const [_, creep] of GameFunc.iPair(allied_creeps)) {
                 let modifier_creeps_handler = creep.AddNewModifier(caster, ability, modifier_creeps, {});
                 if (modifier_creeps_handler) {
                     modifier_creeps_handler.SetStackCount(creep_hp);
                 }
             }
             let xp_per_hero = creep_xp / GameFunc.GetCount(heroes);
-            for (const [_, hero] of ipairs(heroes)) {
+            for (const [_, hero] of GameFunc.iPair(heroes)) {
                 // hero.AddExperience(xp_per_hero, false, false);
             }
         }
@@ -995,7 +995,7 @@ export class imba_lich_dark_ritual extends BaseAbility_Plus {
         } else {
             ally_creep = false;
         }
-        for (const [_, hero] of ipairs(heroes)) {
+        for (const [_, hero] of GameFunc.iPair(heroes)) {
             if (ally_creep) {
                 hero.AddNewModifier(caster, ability, modifier_allied_sacrifice, {
                     duration: sacrifice_duration
@@ -1244,7 +1244,7 @@ export class imba_lich_chain_frost extends BaseAbility_Plus {
                 }
                 let projectile_speed = extradata.current_projectile_speed + speed_increase_per_bounce;
                 let bounces_left = extradata.bounces_left - 1;
-                let bounce_target = enemies[1];
+                let bounce_target = enemies[0];
                 let chain_frost_projectile;
                 chain_frost_projectile = {
                     Target: bounce_target,
@@ -1268,7 +1268,7 @@ export class imba_lich_chain_frost extends BaseAbility_Plus {
                 ProjectileManager.CreateTrackingProjectile(chain_frost_projectile);
                 if (caster.HasTalent("special_bonus_imba_lich_7")) {
                     let projectiles_launched = 0;
-                    for (let i = 2; i <= GameFunc.GetCount(enemies); i += 1) {
+                    for (let i = 2; i <= GameFunc.GetCount(enemies); i++) {
                         if (projectiles_launched < bonus_projectiles) {
                             chain_frost_projectile = {
                                 Target: enemies[i],
@@ -1488,7 +1488,7 @@ export class modifier_imba_lich_frost_shield extends BaseModifier_Plus {
         ParticleManager.ReleaseParticleIndex(particle);
         this.parent.EmitSound("Hero_Lich.IceAge.Tick");
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             enemy.EmitSound("Hero_Lich.IceAge.Damage");
             let damageTable = {
                 victim: enemy,
@@ -1639,7 +1639,7 @@ export class imba_lich_sinister_gaze extends BaseAbility_Plus {
             if (GameFunc.GetCount(units) == 0) {
                 this.end_channel = true;
             } else {
-                for (const [_, unit] of ipairs(units)) {
+                for (const [_, unit] of GameFunc.iPair(units)) {
                     if (unit.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() || (unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && unit.IsCreep() && !unit.IsConsideredHero())) {
                         if (_ == 1) {
                             this.target = unit;

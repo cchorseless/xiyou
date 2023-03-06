@@ -1021,7 +1021,7 @@ export class modifier_imba_trueshot_talent_buff extends BaseModifier_Plus {
     GetTotalAgilityOfTeam() {
         let total_agility = 0;
         if (IsServer()) {
-            for (const [_, ally] of ipairs(FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, ally] of GameFunc.iPair(FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false))) {
                 if (ally.GetAgility) {
                     total_agility = total_agility + ally.GetAgility();
                 }
@@ -1348,7 +1348,7 @@ export class modifier_imba_marksmanship extends BaseModifier_Plus {
                 if (scepter) {
                     let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, this.splinter_radius_scepter, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
                     if (GameFunc.GetCount(enemies) > 0) {
-                        for (const [_, enemy] of ipairs(enemies)) {
+                        for (const [_, enemy] of GameFunc.iPair(enemies)) {
                             if (enemy != target) {
                                 let arrow_projectile = {
                                     hTarget: enemy,
@@ -1643,7 +1643,7 @@ export class modifier_imba_drow_ranger_marksmanship_723 extends BaseModifier_Plu
         if (keys.attacker == this.GetParentPlus() && this.procs[keys.record]) {
             this.GetParentPlus().RemoveModifierByName("modifier_imba_drow_ranger_marksmanship_723_proc_damage");
             if (this.GetParentPlus().HasAbility("imba_drow_ranger_frost_arrows_723") && !this.frost_arrow_modifier) {
-                for (const [_, mod] of ipairs(this.GetParentPlus().FindAllModifiersByName("modifier_generic_orb_effect_lua"))) {
+                for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName("modifier_generic_orb_effect_lua"))) {
                     if (mod.GetAbility().GetName() == "imba_drow_ranger_frost_arrows_723") {
                         this.frost_arrow_modifier = mod as modifier_generic_orb_effect_lua;
                         return;
@@ -1687,7 +1687,7 @@ export class modifier_imba_drow_ranger_marksmanship_723 extends BaseModifier_Plu
             }
             if (this.GetParentPlus().HasScepter() && !this.GetParentPlus().PassivesDisabled() && this.start_particle && !keys.no_attack_cooldown) {
                 let splinter_counter = 0;
-                for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), keys.target.GetAbsOrigin(), undefined, this.GetSpecialValueFor("scepter_range"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false))) {
+                for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), keys.target.GetAbsOrigin(), undefined, this.GetSpecialValueFor("scepter_range"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false))) {
                     if (enemy != keys.target) {
                         if (splinter_counter < this.GetSpecialValueFor("split_count_scepter")) {
                             if (this.frost_arrow_modifier && this.frost_arrow_modifier.GetAbility() && (this.frost_arrow_modifier.cast || this.frost_arrow_modifier.GetAbility().GetAutoCastState()) && this.frost_arrow_modifier.GetAbility().IsFullyCastable()) {

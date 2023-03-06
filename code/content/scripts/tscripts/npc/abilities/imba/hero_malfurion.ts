@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -76,7 +77,7 @@ export class imba_malfurion_rejuvenation extends BaseAbility_Plus {
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Warlock.ShadowWordCastGood");
         let particle = undefined;
-        for (const [_, ally] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("radius"), this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, ally] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("radius"), this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false))) {
             particle = ResHelper.CreateParticleEx("particles/econ/items/leshrac/leshrac_tormented_staff_retro/leshrac_split_retro_sparks_tormented.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, ally);
             ParticleManager.ReleaseParticleIndex(particle);
             ally.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_rejuvenation", {

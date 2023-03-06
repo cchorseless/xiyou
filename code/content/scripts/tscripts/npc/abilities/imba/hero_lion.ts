@@ -277,14 +277,14 @@ export class imba_lion_hex extends BaseAbility_Plus {
         let ability = this;
         let target = this.GetCursorTarget();
         let cast_response = {
-            1: "lion_lion_ability_voodoo_03",
-            2: "lion_lion_ability_voodoo_04",
-            3: "lion_lion_ability_voodoo_05",
-            4: "lion_lion_ability_voodoo_06",
-            5: "lion_lion_ability_voodoo_07",
-            6: "lion_lion_ability_voodoo_08",
-            7: "lion_lion_ability_voodoo_09",
-            8: "lion_lion_ability_voodoo_10"
+            "1": "lion_lion_ability_voodoo_03",
+            "2": "lion_lion_ability_voodoo_04",
+            "3": "lion_lion_ability_voodoo_05",
+            "4": "lion_lion_ability_voodoo_06",
+            "5": "lion_lion_ability_voodoo_07",
+            "6": "lion_lion_ability_voodoo_08",
+            "7": "lion_lion_ability_voodoo_09",
+            "8": "lion_lion_ability_voodoo_10"
         }
         let sound_cast = "Hero_Lion.Voodoo";
         let particle_hex = "particles/units/heroes/hero_lion/lion_spell_voodoo.vpcf";
@@ -312,7 +312,7 @@ export class imba_lion_hex extends BaseAbility_Plus {
             let targetPos = this.GetCursorPosition();
             EmitSoundOnLocationWithCaster(targetPos, sound_cast, caster);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), targetPos, undefined, this.GetCasterPlus().GetTalentValue("special_bonus_imba_lion_10"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let particle_hex_fx = ResHelper.CreateParticleEx(particle_hex, ParticleAttachment_t.PATTACH_CUSTOMORIGIN, enemy);
                 ParticleManager.SetParticleControl(particle_hex_fx, 0, enemy.GetAbsOrigin());
                 ParticleManager.ReleaseParticleIndex(particle_hex_fx);
@@ -385,7 +385,7 @@ export class modifier_imba_lion_hex extends BaseModifier_Plus {
         if (IsServer()) {
             let hexed_enemies = 0;
             let enemies = FindUnitsInRadius(this.caster_team, this.parent.GetAbsOrigin(), undefined, this.hex_bounce_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (this.parent != enemy && !enemy.HasModifier(this.modifier_hex) && !enemy.HasModifier("modifier_imba_lion_hex_chain_cooldown")) {
                     EmitSoundOn(this.sound_cast, enemy);
                     if (enemy.GetTeam() != this.caster_team) {
@@ -552,7 +552,7 @@ export class imba_lion_mana_drain extends BaseAbility_Plus {
                 }
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, aura_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MANA_ONLY, FindOrder.FIND_ANY_ORDER, false);
                 if (GameFunc.GetCount(enemies) > 0) {
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         enemy.AddNewModifier(caster, ability, modifier_manadrain, {
                             duration: interval * 2
                         });
@@ -904,15 +904,15 @@ export class imba_lion_finger_of_death extends BaseAbility_Plus {
         if (scepter) {
             let finger_scepter_enemies: IBaseNpc_Plus[] = []
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, enemies_frog_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsMagicImmune() && !enemy.HasModifier(modifier_hex)) {
                     table.insert(finger_scepter_enemies, enemy);
                 }
             }
             enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, scepter_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let marked = false;
-                for (const [_, marked_enemy] of ipairs(finger_scepter_enemies)) {
+                for (const [_, marked_enemy] of GameFunc.iPair(finger_scepter_enemies)) {
                     if (marked_enemy == enemy) {
                         marked = true;
                         return;

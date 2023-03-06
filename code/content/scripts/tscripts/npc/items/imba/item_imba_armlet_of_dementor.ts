@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
@@ -8,7 +9,7 @@ export class item_imba_armlet_of_dementor extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         this.AddTimer(FrameTime(), () => {
             if (!this.IsNull()) {
-                for (const [_, modifier] of ipairs(this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_armlet_of_dementor"))) {
+                for (const [_, modifier] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_armlet_of_dementor"))) {
                     modifier.SetStackCount(_);
                 }
             }
@@ -76,7 +77,7 @@ export class modifier_item_imba_armlet_of_dementor extends BaseModifier_Plus {
         if (this.parent.IsIllusion() && this.parent.GetPlayerOwner().GetAssignedHero().HasModifier("modifier_item_imba_armlet_of_dementor_active")) {
             this.parent.AddNewModifier(this.parent, this.ability, "modifier_item_imba_armlet_of_dementor_active", {});
         }
-        for (const [_, mod] of ipairs(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
+        for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
             mod.GetItemPlus().SetSecondaryCharges(_);
         }
     }
@@ -84,7 +85,7 @@ export class modifier_item_imba_armlet_of_dementor extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        for (const [_, modifier] of ipairs(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
+        for (const [_, modifier] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
             modifier.SetStackCount(_);
             modifier.GetItemPlus().SetSecondaryCharges(_);
         }

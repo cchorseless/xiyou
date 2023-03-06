@@ -36,13 +36,13 @@ export class imba_sniper_shrapnel extends BaseAbility_Plus {
         let ability = this;
         let target_point = this.GetCursorPosition();
         let cast_response = {
-            1: "sniper_snip_ability_shrapnel_01",
-            2: "sniper_snip_ability_shrapnel_03"
+            "1": "sniper_snip_ability_shrapnel_01",
+            "2": "sniper_snip_ability_shrapnel_03"
         }
         let group_cast_response = {
-            1: "sniper_snip_ability_shrapnel_02",
-            2: "sniper_snip_ability_shrapnel_04",
-            3: "sniper_snip_ability_shrapnel_06"
+            "1": "sniper_snip_ability_shrapnel_02",
+            "2": "sniper_snip_ability_shrapnel_04",
+            "3": "sniper_snip_ability_shrapnel_06"
         }
         let rare_group_cast_response = "sniper_snip_ability_shrapnel_06";
         let sound_cast = "Hero_Sniper.ShrapnelShoot";
@@ -128,7 +128,7 @@ export class modifier_imba_shrapnel_attack extends BaseModifier_Plus {
         if (IsServer()) {
             if (this.caster.IsRealHero()) {
                 let heroes = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, 5000, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, hero] of ipairs(heroes)) {
+                for (const [_, hero] of GameFunc.iPair(heroes)) {
                     if (hero.GetUnitName() == this.caster.GetUnitName() && hero.IsIllusion() && !hero.HasModifier(this.modifier_attack)) {
                         hero.AddNewModifier(this.caster, this.ability, this.modifier_attack, {
                             duration: this.GetRemainingTime()
@@ -250,7 +250,7 @@ export class modifier_imba_shrapnel_charges extends BaseModifier_Plus {
                 if (this.caster.HasAbility("special_bonus_imba_sniper_4") && this.caster.findAbliityPlus("special_bonus_imba_sniper_4").GetLevel() == 1) {
                     replenish_count = this.caster.GetTalentValue("special_bonus_imba_sniper_4", "charges_per_recharge");
                 }
-                for (let i = 1; i <= replenish_count; i += 1) {
+                for (let i = 0; i < replenish_count; i++) {
                     this.IncrementStackCount();
                     if (this.GetStackCount() == this.max_charge_count) {
                         return;
@@ -873,10 +873,10 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let ability = this;
         let cast_response = {
-            1: "sniper_snip_ability_assass_02",
-            2: "sniper_snip_ability_assass_06",
-            3: "sniper_snip_ability_assass_07",
-            4: "sniper_snip_ability_assass_08"
+            "1": "sniper_snip_ability_assass_02",
+            "2": "sniper_snip_ability_assass_06",
+            "3": "sniper_snip_ability_assass_07",
+            "4": "sniper_snip_ability_assass_08"
         }
         let modifier_cross = "modifier_imba_assassinate_cross";
         let sight_duration = ability.GetSpecialValueFor("sight_duration");
@@ -909,7 +909,7 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
         }
         let targets = [this.GetCursorTarget()]
         EmitSoundOn(GFuncRandom.RandomValue(cast_response), caster);
-        for (const [_, target] of ipairs(targets)) {
+        for (const [_, target] of GameFunc.iPair(targets)) {
             target.AddNewModifier(caster, ability, modifier_cross, {
                 duration: sight_duration
             });
@@ -927,7 +927,7 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
             this.timer = undefined;
         }
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (enemy.HasModifier(modifier_cross)) {
                 enemy.RemoveModifierByName(modifier_cross);
             }
@@ -963,7 +963,7 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
             EmitSoundOn(sound_assassinate, caster);
             EmitSoundOn(sound_assassinate_launch, caster);
             let travel_speed = this.GetSpecialValueFor("travel_speed");
-            for (const [_, target] of ipairs(targets)) {
+            for (const [_, target] of GameFunc.iPair(targets)) {
                 target.TempData().primary_assassination_target = true;
                 let assassinate_projectile;
                 assassinate_projectile = {
@@ -991,12 +991,12 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let ability = this;
         let almost_kill_responses = {
-            1: "sniper_snip_ability_fail_02",
-            2: "sniper_snip_ability_fail_04",
-            3: "sniper_snip_ability_fail_05",
-            4: "sniper_snip_ability_fail_06",
-            5: "sniper_snip_ability_fail_07",
-            6: "sniper_snip_ability_fail_08"
+            "1": "sniper_snip_ability_fail_02",
+            "2": "sniper_snip_ability_fail_04",
+            "3": "sniper_snip_ability_fail_05",
+            "4": "sniper_snip_ability_fail_06",
+            "5": "sniper_snip_ability_fail_07",
+            "6": "sniper_snip_ability_fail_08"
         }
         let modifier_cross = "modifier_imba_assassinate_cross";
         let modifier_ministun = "modifier_imba_assassinate_ministun";
@@ -1025,16 +1025,16 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
     AssassinateHit(target: IBaseNpc_Plus, projectile_num: number) {
         let caster = this.GetCasterPlus();
         let kill_responses = {
-            1: "sniper_snip_ability_assass_03",
-            2: "sniper_snip_ability_assass_04",
-            3: "sniper_snip_ability_assass_05",
-            4: "sniper_snip_ability_assass_03",
-            5: "sniper_snip_kill_03",
-            6: "sniper_snip_kill_08",
-            7: "sniper_snip_kill_10",
-            8: "sniper_snip_kill_13",
-            9: "sniper_snip_tf2_01",
-            10: "sniper_snip_tf2_01"
+            "1": "sniper_snip_ability_assass_03",
+            "2": "sniper_snip_ability_assass_04",
+            "3": "sniper_snip_ability_assass_05",
+            "4": "sniper_snip_ability_assass_03",
+            "5": "sniper_snip_kill_03",
+            "6": "sniper_snip_kill_08",
+            "7": "sniper_snip_kill_10",
+            "8": "sniper_snip_kill_13",
+            "9": "sniper_snip_tf2_01",
+            "10": "sniper_snip_tf2_01"
         }
         let particle_sparks = "particles/units/heroes/hero_sniper/sniper_assassinate_impact_sparks.vpcf";
         let particle_light = "particles/units/heroes/hero_sniper/sniper_assassinate_endpoint.vpcf";
@@ -1049,7 +1049,7 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
             ministun_duration = this.GetSpecialValueFor("scepter_stun_duration");
         }
         let target_key = target.entindex() + tostring(projectile_num);
-        for (const [_, enemy] of ipairs(this.enemies_hit)) {
+        for (const [_, enemy] of GameFunc.iPair(this.enemies_hit)) {
             if (enemy == target_key) {
                 return;
             }
@@ -1116,7 +1116,7 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
         let projectile_num = extradata.projectile_num;
         let bullet_radius = ability.GetSpecialValueFor("bullet_radius");
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, bullet_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.TempData().primary_assassination_target) {
                 this.AssassinateHit(enemy, projectile_num);
             }

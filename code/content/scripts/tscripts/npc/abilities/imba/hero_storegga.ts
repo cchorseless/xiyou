@@ -265,7 +265,7 @@ export class storegga_grab_throw extends BaseAbility_Plus {
                 ParticleManager.SetParticleControl(nFXIndex, 1, Vector(this.impact_radius, this.impact_radius, this.impact_radius));
                 ParticleManager.ReleaseParticleIndex(nFXIndex);
                 let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), vLocation, this.GetCasterPlus(), this.impact_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (enemy != undefined && enemy.IsInvulnerable() == false && enemy != this.hThrowTarget) {
                         let damageInfo = {
                             victim: enemy,
@@ -349,13 +349,13 @@ export class modifier_storegga_arm_slam extends BaseModifier_Plus {
             let Locations = [] as Vector[]
             table.insert(Locations, vLocation1);
             table.insert(Locations, vLocation2);
-            for (const [_, vPos] of ipairs(Locations)) {
+            for (const [_, vPos] of GameFunc.iPair(Locations)) {
                 let nFXIndex = ResHelper.CreateParticleEx("particles/test_particle/ogre_melee_smash.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetCasterPlus());
                 ParticleManager.SetParticleControl(nFXIndex, 0, vPos);
                 ParticleManager.SetParticleControl(nFXIndex, 1, Vector(this.damage_radius, this.damage_radius, this.damage_radius));
                 ParticleManager.ReleaseParticleIndex(nFXIndex);
                 let enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), vPos, this.GetParentPlus(), this.damage_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (enemy != undefined && enemy.IsInvulnerable() == false && this.HasHitTarget(enemy) == false) {
                         let damageInfo: ApplyDamageOptions = {
                             victim: enemy,
@@ -408,7 +408,7 @@ export class modifier_storegga_arm_slam extends BaseModifier_Plus {
         return -99;
     }
     HasHitTarget(hTarget: IBaseNpc_Plus) {
-        for (const [_, target] of ipairs(this.hHitTargets)) {
+        for (const [_, target] of GameFunc.iPair(this.hHitTargets)) {
             if (target == hTarget) {
                 return true;
             }
@@ -491,12 +491,12 @@ export class modifier_storegga_avalanche_thinker extends BaseModifier_Plus {
             }
             table.insert(this.Avalanches, Avalanche1);
             table.insert(this.Avalanches, Avalanche2);
-            for (const [_, ava] of ipairs(this.Avalanches)) {
+            for (const [_, ava] of GameFunc.iPair(this.Avalanches)) {
                 let vNewPos = ava.vCurPos + ava.vDir * this.movement;
                 ava.vCurPos = vNewPos;
                 ParticleManager.SetParticleControl(ava.nFX, 0, vNewPos);
                 let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), vNewPos, undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (enemy != undefined && enemy.IsInvulnerable() == false && enemy.IsMagicImmune() == false) {
                         let damageInfo = {
                             victim: enemy,

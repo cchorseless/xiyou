@@ -7,7 +7,7 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 
 @registerAbility()
 export class imba_windranger_shackleshot extends BaseAbility_Plus {
-    public responses: any;
+    public responses: { [k: string]: string };
 
     GetCooldown(level: number): number {
         return super.GetCooldown(level) - this.GetCasterPlus().GetTalentValue("special_bonus_imba_windranger_shackle_shot_cooldown");
@@ -85,7 +85,7 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
         }
         if (!shackleTarget && target.GetName() != "npc_dota_thinker") {
             let trees = GridNav.GetAllTreesAroundPoint(target.GetAbsOrigin(), this.GetSpecialValueFor("shackle_distance"), false);
-            for (const [_, tree] of ipairs(trees)) {
+            for (const [_, tree] of GameFunc.iPair(trees)) {
                 if (!ignore_list.includes(tree as any) && math.abs(AngleDiff(target_angle, VectorToAngles(tree.GetAbsOrigin() - target.GetAbsOrigin() as Vector).y)) <= this.GetSpecialValueFor("shackle_angle")) {
                     shackleTarget = tree as any;
                     if (target.AddNewModifier) {
@@ -118,7 +118,7 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
             let shackled_targets: IBaseNpc_Plus[] = []
             target.EmitSound("Hero_Windrunner.ShackleshotStun");
             let next_target = target;
-            for (let targets = 0; targets < this.GetSpecialValueFor("shackle_count"); targets += 1) {
+            for (let targets = 0; targets < this.GetSpecialValueFor("shackle_count"); targets++) {
                 if (next_target) {
                     next_target = this.SearchForShackleTarget(next_target, VectorToAngles(next_target.GetAbsOrigin() - Vector(ExtraData.location_x, ExtraData.location_y, ExtraData.location_z) as Vector).y, shackled_targets, targets);
                     if (next_target) {
@@ -126,12 +126,12 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
                         if (targets == 0 && this.GetCasterPlus().GetName() == "npc_dota_hero_windrunner" && RollPercentage(35)) {
                             if (!this.responses) {
                                 this.responses = {
-                                    1: "windrunner_wind_ability_shackleshot_05",
-                                    2: "windrunner_wind_ability_shackleshot_06",
-                                    3: "windrunner_wind_ability_shackleshot_07"
+                                    "1": "windrunner_wind_ability_shackleshot_05",
+                                    "2": "windrunner_wind_ability_shackleshot_06",
+                                    "3": "windrunner_wind_ability_shackleshot_07"
                                 }
                             }
-                            this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+                            this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
                         }
                     } else if (targets == 0) {
                         let stun_modifier = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
@@ -182,7 +182,7 @@ export class modifier_imba_windranger_shackle_shot extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetCasterPlus() && keys.target == this.GetParentPlus() && !keys.no_attack_cooldown && this.GetAbilityPlus() && this.GetAbilityPlus().GetAutoCastState()) {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetCasterPlus().Script_GetAttackRange(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetCasterPlus().Script_GetAttackRange(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_ANY_ORDER, false))) {
                 if (enemy != this.GetParentPlus() && enemy.FindModifierByNameAndCaster("modifier_imba_windranger_shackle_shot", this.GetCasterPlus()) && this.GetAbilityPlus()) {
                     EmitSoundOnLocationWithCaster(this.GetParentPlus().GetAbsOrigin(), "Hero_Windrunner.Attack", this.GetCasterPlus());
                     ProjectileManager.CreateTrackingProjectile({
@@ -432,7 +432,7 @@ export class modifier_imba_windranger_powershot_overstretch extends BaseModifier
 
 @registerAbility()
 export class imba_windranger_windrun extends BaseAbility_Plus {
-    public responses: any;
+    public responses: { [k: string]: string };
 
     GetCooldown(level: number): number {
         if (!this.GetCasterPlus().HasScepter()) {
@@ -446,7 +446,7 @@ export class imba_windranger_windrun extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasScepter()) {
             if (this.GetCasterPlus().HasModifier("modifier_generic_charges")) {
                 let has_rightful_modifier = false;
-                for (const [_, mod] of ipairs(this.GetCasterPlus().FindAllModifiersByName("modifier_generic_charges"))) {
+                for (const [_, mod] of GameFunc.iPair(this.GetCasterPlus().FindAllModifiersByName("modifier_generic_charges"))) {
                     if (mod.GetAbilityPlus().GetAbilityName() == this.GetAbilityName()) {
                         has_rightful_modifier = true;
                         return;
@@ -466,12 +466,12 @@ export class imba_windranger_windrun extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_windrunner" && RollPercentage(75)) {
             if (!this.responses) {
                 this.responses = {
-                    1: "windrunner_wind_spawn_04",
-                    2: "windrunner_wind_move_08",
-                    3: "windrunner_wind_move_10"
+                    "1": "windrunner_wind_spawn_04",
+                    "2": "windrunner_wind_move_08",
+                    "3": "windrunner_wind_move_10"
                 }
             }
-            this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+            this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
         }
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_windranger_windrun", {
             duration: this.GetSpecialValueFor("duration")
@@ -524,7 +524,7 @@ export class modifier_imba_windranger_windrun extends BaseModifier_Plus {
     }
 
     OnIntervalThink(): void {
-        for (const [_, ally] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.gale_enchantment_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, ally] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.gale_enchantment_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             if (this.GetCasterPlus() == this.GetParentPlus() && ally != this.GetCasterPlus()) {
                 ally.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_windranger_windrun", {
                     duration: this.gale_enchantment_duration

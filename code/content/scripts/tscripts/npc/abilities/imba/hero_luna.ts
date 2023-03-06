@@ -37,10 +37,10 @@ export class imba_luna_lucent_beam extends BaseAbility_Plus {
         this.GetCursorTarget().EmitSound("Hero_Luna.LucentBeam.Target");
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_luna" && RollPercentage(50)) {
             let responses = {
-                1: "luna_luna_ability_lucentbeam_01",
-                2: "luna_luna_ability_lucentbeam_02",
-                3: "luna_luna_ability_lucentbeam_04",
-                4: "luna_luna_ability_lucentbeam_05"
+                "1": "luna_luna_ability_lucentbeam_01",
+                "2": "luna_luna_ability_lucentbeam_02",
+                "3": "luna_luna_ability_lucentbeam_04",
+                "4": "luna_luna_ability_lucentbeam_05"
             }
             this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
         }
@@ -73,7 +73,7 @@ export class imba_luna_lucent_beam extends BaseAbility_Plus {
             this.AddTimer(refraction_delay, () => {
                 wave_count = wave_count + 1;
                 random_vector = random_vector.Normalized() + (refraction_distance * wave_count) as Vector;
-                for (let inner_beam = 1; inner_beam <= refraction_beams; inner_beam += 1) {
+                for (let inner_beam = 1; inner_beam <= refraction_beams; inner_beam++) {
                     let beam_pos = GetGroundPosition(RotatePosition(target_pos, QAngle(0, 360 * inner_beam / 4, 0), target_pos + random_vector as Vector), undefined);
                     let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_luna/luna_lucent_beam.vpcf", ParticleAttachment_t.PATTACH_POINT, this.GetCasterPlus());
                     ParticleManager.SetParticleControl(particle, 1, beam_pos);
@@ -83,7 +83,7 @@ export class imba_luna_lucent_beam extends BaseAbility_Plus {
                     ParticleManager.SetParticleControl(particle, 61, Vector(1, 0, 0));
                     ParticleManager.ReleaseParticleIndex(particle);
                     let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), beam_pos, undefined, refraction_damage_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         let damageTable = {
                             victim: enemy,
                             damage: this.GetTalentSpecialValueFor("beam_damage"),
@@ -145,13 +145,13 @@ export class imba_luna_moon_glaive extends BaseAbility_Plus {
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), vLocation, undefined, this.GetSpecialValueFor("range"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
         if (ExtraData.bounces < this.GetSpecialValueFor("bounces") && GameFunc.GetCount(enemies) > 1) {
             let all_enemies_bounced = true;
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != hTarget && !this.target_tracker[ExtraData.record][enemy.GetEntityIndex()]) {
                     all_enemies_bounced = false;
                     return;
                 }
             }
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != hTarget && (!this.target_tracker[ExtraData.record][enemy.GetEntityIndex()] || all_enemies_bounced)) {
                     let glaive = {
                         Target: enemy,
@@ -219,7 +219,7 @@ export class modifier_imba_luna_moon_glaive extends BaseModifier_Plus {
         if (keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled()) {
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), keys.target.GetAbsOrigin(), undefined, this.GetSpecialValueFor("range"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
             let crescents = 0;
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != keys.target) {
                     let glaive = {
                         Target: enemy,
@@ -528,10 +528,10 @@ export class imba_luna_eclipse extends BaseAbility_Plus {
         }
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_luna") {
             let responses = {
-                1: "luna_luna_ability_eclipse_01",
-                2: "luna_luna_ability_eclipse_02",
-                3: "luna_luna_ability_eclipse_03",
-                4: "luna_luna_ability_eclipse_07"
+                "1": "luna_luna_ability_eclipse_01",
+                "2": "luna_luna_ability_eclipse_02",
+                "3": "luna_luna_ability_eclipse_03",
+                "4": "luna_luna_ability_eclipse_07"
             }
             this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
         }
@@ -637,7 +637,7 @@ export class modifier_imba_luna_eclipse extends BaseModifier_Plus {
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.target_position || this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
         let valid_targets = false;
         let lucent_beam_ability = this.GetCasterPlus().findAbliityPlus<imba_luna_lucent_beam>("imba_luna_lucent_beam");
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!this.targets[enemy.GetEntityIndex()]) {
                 this.targets[enemy.GetEntityIndex()] = 0;
             }
@@ -681,7 +681,7 @@ export class modifier_imba_luna_eclipse extends BaseModifier_Plus {
         } else {
             this.think_interval = this.beam_interval;
         }
-        for (let outer_beam = 0; outer_beam <= this.moonscraper_beams - 1; outer_beam += 1) {
+        for (let outer_beam = 0; outer_beam <= this.moonscraper_beams - 1; outer_beam++) {
             this.AddTimer((outer_beam / this.moonscraper_beams) * this.think_interval, () => {
                 if (this && this.IsNull && !this.IsNull() && this.GetParent && this.GetParentPlus() && this.GetParentPlus().IsNull && !this.GetParentPlus().IsNull() && this.GetCaster && this.GetCasterPlus().IsNull && !this.GetCasterPlus().IsNull()) {
                     let beam_pos = GetGroundPosition(RotatePosition(this.cast_pos, QAngle(0, this.moonscraper_spread * outer_beam, 0), this.refraction_pos), undefined);
@@ -692,7 +692,7 @@ export class modifier_imba_luna_eclipse extends BaseModifier_Plus {
                     ParticleManager.SetParticleControl(particle, 61, Vector(1, 0, 0));
                     ParticleManager.ReleaseParticleIndex(particle);
                     let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), beam_pos, undefined, this.moonscraper_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         if (lucent_beam_ability) {
                             let damageTable = {
                                 victim: enemy,

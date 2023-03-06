@@ -159,7 +159,7 @@ export class modifier_imba_venomancer_plague_ward_v2 extends BaseModifier_Plus {
     CC_OnAttack(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetParentPlus() && keys.target && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && !keys.no_attack_cooldown && !this.GetParentPlus().PassivesDisabled()) {
             let target_number = 0;
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetParentPlus().Script_GetAttackRange(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetParentPlus().Script_GetAttackRange(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false))) {
                 if (enemy != keys.target) {
                     if (target_number >= this.split_count) {
                         return;
@@ -246,7 +246,7 @@ export class modifier_imba_toxicity extends BaseModifier_Plus {
             let caster = this.GetCasterPlus();
             let ability = this.GetAbilityPlus();
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, ability.GetAbilityTargetTeam(), ability.GetAbilityTargetType(), ability.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let debuff = enemy.FindModifierByNameAndCaster("modifier_imba_toxicity_debuff", caster);
                 let poisons: IBaseModifier_Plus[] = []
                 table.insert(poisons, enemy.FindModifierByNameAndCaster("modifier_imba_venomous_gale", caster));
@@ -254,13 +254,13 @@ export class modifier_imba_toxicity extends BaseModifier_Plus {
                 table.insert(poisons, enemy.FindModifierByNameAndCaster("modifier_imba_poison_sting_debuff_ward", caster));
                 table.insert(poisons, enemy.FindModifierByNameAndCaster("modifier_imba_poison_sting_v2_ward", caster));
                 let novas = enemy.FindAllModifiersByName("modifier_imba_poison_nova");
-                for (const [_, nova] of ipairs(novas)) {
+                for (const [_, nova] of GameFunc.iPair(novas)) {
                     if (nova.GetCasterPlus() == this.GetCasterPlus()) {
                         table.insert(poisons, nova);
                     }
                 }
                 if (!caster.PassivesDisabled()) {
-                    for (const [_, poison] of ipairs(poisons)) {
+                    for (const [_, poison] of GameFunc.iPair(poisons)) {
                         if (debuff) {
                             debuff.IncrementStackCount();
                         } else {
@@ -334,7 +334,7 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
         if (IsClient()) {
             return super.GetCastRange(location, target);
         } else {
-            for (const [_, ally] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("ward_range") + this.GetCasterPlus().GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false))) {
+            for (const [_, ally] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("ward_range") + this.GetCasterPlus().GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false))) {
                 if (ally.GetName() == "npc_dota_venomancer_plagueward" && ally.GetOwnerPlus() == this.GetCasterPlus()) {
                     return 25000;
                 }
@@ -356,7 +356,7 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
         let cast_range = this.GetSpecialValueFor("cast_range");
         let ward_range = this.GetSpecialValueFor("ward_range") + GPropertyCalculate.GetCastRangeBonus(caster);
         if ((this.GetCasterPlus().GetAbsOrigin() - this.GetCursorPosition() as Vector).Length2D() > this.GetSpecialValueFor("cast_range") + this.GetCasterPlus().GetCastRangeBonus()) {
-            for (const [_, ally] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("ward_range") + this.GetCasterPlus().GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false))) {
+            for (const [_, ally] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("ward_range") + this.GetCasterPlus().GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false))) {
                 if (ally.GetName() == "npc_dota_venomancer_plagueward" && ally.GetOwnerPlus() == this.GetCasterPlus() && (ally.GetAbsOrigin() - this.GetCursorPosition() as Vector).Length2D() < (this.GetCasterPlus().GetAbsOrigin() - this.GetCursorPosition() as Vector).Length2D()) {
                     this.bWardCaster = ally;
                     return;
@@ -401,7 +401,7 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
         }
         ParticleManager.SetParticleControlEnt(mouth_pfx, 0, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_mouth", caster.GetAbsOrigin(), true);
         ParticleManager.ReleaseParticleIndex(mouth_pfx);
-        for (let i = 1; i <= projectile_count; i += 1) {
+        for (let i = 0; i < projectile_count; i++) {
             let angle = 360 - (360 / projectile_count) * i;
             let velocity = GFuncVector.RotateVector2D(direction, angle, true);
             let projectile;
@@ -470,7 +470,7 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         if (target) {
             let was_hit = false;
-            for (const [_, stored_target] of ipairs(this.tempdata[ExtraData.index])) {
+            for (const [_, stored_target] of GameFunc.iPair(this.tempdata[ExtraData.index])) {
                 if (target == stored_target) {
                     was_hit = true;
                     return;
@@ -494,7 +494,7 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
             target.EmitSound("Hero_Venomancer.VenomousGaleImpact");
             if ((target.IsRealHero() || target.IsClone()) && this.GetCasterPlus().HasTalent("special_bonus_imba_venomancer_venomous_gale_plague_wards") && this.GetCasterPlus().HasAbility("imba_venomancer_plague_ward_v2") && this.GetCasterPlus().findAbliityPlus<imba_venomancer_plague_ward_v2>("imba_venomancer_plague_ward_v2").IsTrained()) {
                 let starting_position = target.GetAbsOrigin() + RandomVector(100) as Vector;
-                for (let num = 1; num <= this.GetCasterPlus().GetTalentValue("special_bonus_imba_venomancer_venomous_gale_plague_wards"); num += 1) {
+                for (let num = 1; num <= this.GetCasterPlus().GetTalentValue("special_bonus_imba_venomancer_venomous_gale_plague_wards"); num++) {
                     this.GetCasterPlus().findAbliityPlus<imba_venomancer_plague_ward_v2>("imba_venomancer_plague_ward_v2").OnSpellStart(RotatePosition(target.GetAbsOrigin(), QAngle(0, (360 / this.GetCasterPlus().GetTalentValue("special_bonus_imba_venomancer_venomous_gale_plague_wards")) * num, 0), starting_position));
                 }
             }
@@ -936,7 +936,7 @@ export class imba_venomancer_plague_ward extends BaseAbility_Plus {
                     duration: duration
                 }) as modifier_imba_plague_ward;
                 mod_ward.ward_list = []
-                for (let i = 1; i <= plague_count; i += 1) {
+                for (let i = 0; i < plague_count; i++) {
                     let plague_loc = target_loc + GFuncVector.RotateVector2D(direction, start_angle + (angle * i), true) * plague_radius as Vector;
                     let plague_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_venomancer_plague_ward", plague_loc, caster.GetTeamNumber(), true, caster, caster);
                     plague_ward.SetControllableByPlayer(caster.GetPlayerID(), true);
@@ -997,7 +997,7 @@ export class modifier_imba_plague_ward extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(params: ModifierInstanceEvent): void {
         if (IsServer()) {
-            for (let i = 1; i <= GameFunc.GetCount(this.ward_list); i += 1) {
+            for (let i = 0; i < GameFunc.GetCount(this.ward_list); i++) {
                 if (params.unit == this.ward_list[i]) {
                     table.remove(this.ward_list, i);
                 }
@@ -1128,7 +1128,7 @@ export class modifier_imba_poison_nova_ring extends BaseModifier_Plus {
         this.StartIntervalThink(FrameTime());
     }
     OnIntervalThink(): void {
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.cast_location, undefined, math.min(this.start_radius + (this.GetElapsedTime() * this.speed), this.radius), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.cast_location, undefined, math.min(this.start_radius + (this.GetElapsedTime() * this.speed), this.radius), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
             if (!this.hit_enemies[enemy.entindex()]) {
                 enemy.EmitSound("Hero_Venomancer.PoisonNovaImpact");
                 enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_poison_nova", {
@@ -1207,11 +1207,11 @@ export class modifier_imba_poison_nova extends BaseModifier_Plus {
         }
         if (!bFirst) {
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), parent.GetAbsOrigin(), undefined, this.contagion_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!(enemy == parent)) {
                     let bAlreadyAffected = false;
                     let nova_poison = enemy.FindAllModifiersByName("modifier_imba_poison_nova") as modifier_imba_poison_nova[];
-                    for (const [_, poison] of ipairs(nova_poison)) {
+                    for (const [_, poison] of GameFunc.iPair(nova_poison)) {
                         if (poison.index == this.index) {
                             bAlreadyAffected = true;
                             return;

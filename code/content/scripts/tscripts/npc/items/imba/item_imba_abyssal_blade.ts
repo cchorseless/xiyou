@@ -117,7 +117,7 @@ export class modifier_imba_abyssal_blade extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
     CC_OnAttack(keys: ModifierAttackEvent): void {
-        if (this.GetAbilityPlus() && keys.attacker == this.GetParentPlus() && keys.attacker.FindAllModifiersByName(this.GetName())[1] == this && this.GetAbilityPlus().IsCooldownReady() && !keys.attacker.IsIllusion() && !keys.target.IsBuilding() && !keys.target.IsOther() && !keys.attacker.HasModifier("modifier_monkey_king_fur_army_soldier") && !keys.attacker.HasModifier("modifier_monkey_king_fur_army_soldier_hidden") && !keys.attacker.HasModifier("modifier_imba_abyssal_blade_internal_cd")) {
+        if (this.GetAbilityPlus() && keys.attacker == this.GetParentPlus() && keys.attacker.FindAllModifiersByName(this.GetName())[0] == this && this.GetAbilityPlus().IsCooldownReady() && !keys.attacker.IsIllusion() && !keys.target.IsBuilding() && !keys.target.IsOther() && !keys.attacker.HasModifier("modifier_monkey_king_fur_army_soldier") && !keys.attacker.HasModifier("modifier_monkey_king_fur_army_soldier_hidden") && !keys.attacker.HasModifier("modifier_imba_abyssal_blade_internal_cd")) {
             if (this.GetParentPlus().IsRangedAttacker()) {
                 if (GFuncRandom.PRD(this.GetSpecialValueFor("bash_chance_ranged"), this)) {
                     this.bash_proc = true;

@@ -80,7 +80,7 @@ export class imba_grimstroke_dark_artistry extends BaseAbility_Plus {
         let projectile_start_location = this.GetCasterPlus().GetAbsOrigin() + offset_start_vector as Vector;
         this.Stroke(projectile_start_location, this.GetCursorPosition(), true, this.GetAutoCastState());
         if (this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_grimstroke_ink_gods_incarnation", this.GetCasterPlus())) {
-            for (let extra_strokes = 1; extra_strokes <= 3; extra_strokes += 1) {
+            for (let extra_strokes = 0; extra_strokes < 3; extra_strokes++) {
                 let start_position = RotatePosition(this.GetCasterPlus().GetAbsOrigin(), QAngle(0, 90 * extra_strokes, 0), projectile_start_location);
                 let end_position = RotatePosition(this.GetCasterPlus().GetAbsOrigin(), QAngle(0, 90 * extra_strokes, 0), this.GetCursorPosition());
                 this.Stroke(start_position, end_position, true);
@@ -160,7 +160,7 @@ export class imba_grimstroke_dark_artistry extends BaseAbility_Plus {
             if (data.bPrimary == 1) {
                 if (unitnpc.TempData<number>().hit_units == 1) {
                     let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, this.GetSpecialValueFor("stain_spread_max_distance"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_FARTHEST, false);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         if (target != enemy && target.FindModifierByNameAndCaster("modifier_grimstroke_soul_chain", this.GetCasterPlus()) && enemy.FindModifierByNameAndCaster("modifier_grimstroke_soul_chain", this.GetCasterPlus())) {
                             this.Stroke(target.GetAbsOrigin(), enemy.GetAbsOrigin(), false);
                         }
@@ -817,7 +817,7 @@ export class modifier_imba_grimstroke_spirit_walk_buff extends BaseModifier_Plus
             return;
         }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (this.GetParentPlus() != enemy) {
                 enemy.EmitSound("Hero_Grimstroke.InkSwell.Damage");
                 let ink_swell_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_grimstroke/grimstroke_ink_swell_tick_damage.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
@@ -851,7 +851,7 @@ export class modifier_imba_grimstroke_spirit_walk_buff extends BaseModifier_Plus
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             let ink_gods_incarnation_modifier = this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_grimstroke_ink_gods_incarnation", this.GetCasterPlus()) as modifier_imba_grimstroke_ink_gods_incarnation;
             let stunned_table: IBaseNpc_Plus[] = []
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (this.GetParentPlus() != enemy) {
                     enemy.EmitSound("Hero_Grimstroke.InkSwell.Target");
                     let damageTable = {

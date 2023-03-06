@@ -167,7 +167,7 @@ export class imba_mars_spear extends BaseAbility_Plus {
             }
         }
         let thinkers = Entities.FindAllByClassnameWithin("npc_dota_thinker", data.location, wall_radius) as IBaseNpc_Plus[];
-        for (const [_, thinker] of ipairs(thinkers)) {
+        for (const [_, thinker] of GameFunc.iPair(thinkers)) {
             if (thinker.IsPhantomBlocker()) {
                 this.Pinned(iProjectileHandle);
                 return;
@@ -354,7 +354,7 @@ export class modifier_imba_mars_spear_trailblazer_thinker extends BaseModifier_P
             enemies = FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), this.start_pos, this.GetParentPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("trailblazer_radius"), this.GetAbilityPlus().GetAbilityTargetTeam(), this.GetAbilityPlus().GetAbilityTargetType(), this.GetAbilityPlus().GetAbilityTargetFlags());
         }
         if (GameFunc.GetCount(enemies) > 0) {
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 ApplyDamage({
                     attacker: this.GetCasterPlus(),
                     victim: enemy,
@@ -540,7 +540,7 @@ export class imba_mars_gods_rebuke extends BaseAbility_Plus {
         let cast_angle = VectorToAngles(cast_direction).y;
         let caught = false;
         let heroes_count = 0;
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let enemy_direction = (enemy.GetOrigin() - origin as Vector).Normalized();
             let enemy_angle = VectorToAngles(enemy_direction).y;
             let angle_diff = math.abs(AngleDiff(cast_angle, enemy_angle));
@@ -883,7 +883,7 @@ export class modifier_imba_mars_bulwark_jupiters_strength extends BaseModifier_P
             return;
         }
         let item_time = this.stack_table[0][0];
-        let stacks = this.stack_table[0][1];
+        let stacks = this.stack_table[0][0];
         if (item_time) {
             if (GameRules.GetGameTime() - item_time >= this.duration) {
                 this.stack_table.shift();
@@ -1084,7 +1084,7 @@ export class modifier_imba_mars_arena_of_blood_blocker extends BaseModifier_Plus
         let alpha = 0;
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.origin, undefined, this.fade_max, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
         if (GameFunc.GetCount(enemies) > 0) {
-            let enemy = enemies[1];
+            let enemy = enemies[0];
             let range = math.max(this.GetParentPlus().GetRangeToUnit(enemy), this.fade_min);
             range = math.min(range, this.fade_max) - this.fade_min;
             alpha = this.Interpolate(range / this.fade_range, 255, 0);
@@ -1505,7 +1505,7 @@ export class modifier_imba_mars_arena_of_blood_thinker extends BaseModifier_Plus
         let one = Vector(1, 0, 0);
         let count = 28;
         let angle_diff = 360 / count;
-        for (let i = 0; i <= count - 1; i += 1) {
+        for (let i = 0; i <= count - 1; i++) {
             let location = RotatePosition(origin, QAngle(0, angle_diff * i, 0), vector);
             let facing = RotatePosition(zero, QAngle(0, 200 + angle_diff * i, 0), one);
             CreateUnitByNameAsync("npc_dota_imba_mars_arena_of_blood_soldier", location, false, caster, undefined, caster.GetTeamNumber(), (unit: IBaseNpc_Plus) => {

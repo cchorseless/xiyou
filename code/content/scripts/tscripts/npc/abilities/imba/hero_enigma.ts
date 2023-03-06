@@ -36,7 +36,7 @@ function SearchForEngimaThinker(caster: IBaseNpc_Plus, victim: IBaseNpc_Plus, le
             DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
             DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD,
             FindOrder.FIND_CLOSEST, false);
-        for (const [_, thinker] of ipairs(Thinkers)) {
+        for (const [_, thinker] of GameFunc.iPair(Thinkers)) {
             if (thinker.FindModifierByNameAndCaster("modifier_imba_enigma_malefice", caster) && thinker != victim) {
                 hThinker = thinker;
                 return;
@@ -44,7 +44,7 @@ function SearchForEngimaThinker(caster: IBaseNpc_Plus, victim: IBaseNpc_Plus, le
         }
     }
     let allthinker = Entities.FindAllByName("npc_dota_thinker") as IBaseNpc_Plus[];
-    for (const [_, ent] of ipairs(allthinker)) {
+    for (const [_, ent] of GameFunc.iPair(allthinker)) {
         if (ent.TempData().midnight) {
             hThinker = ent;
             return;
@@ -241,7 +241,7 @@ export class imba_enigma_malefice extends BaseAbility_Plus {
         } else {
             let talent_radius = caster.GetTalentValue("special_bonus_imba_enigma_2");
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, talent_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let final_duration = CalculateDuration(enemy);
                 enemy.AddNewModifier(caster, ability, "modifier_imba_enigma_malefice", {
                     duration: final_duration
@@ -335,7 +335,7 @@ export class imba_enigma_demonic_conversion extends BaseAbility_Plus {
         }
         let eidolon_count = this.GetSpecialValueFor("spawn_count") + caster.GetTalentValue("special_bonus_imba_enigma_6");
         if (eidolon_count > 0) {
-            for (let i = 1; i <= eidolon_count; i += 1) {
+            for (let i = 0; i < eidolon_count; i++) {
                 this.CreateEidolon(target, location, 1, this.GetSpecialValueFor("AbilityDuration"));
             }
         }
@@ -606,7 +606,7 @@ export class modifier_imba_enigma_midnight_pulse_thinker extends BaseModifier_Pl
         GridNav.DestroyTreesAroundPoint(parent.GetAbsOrigin(), this.radius, false);
         let dmg_pct = ability.GetSpecialValueFor("damage_percent") * 0.01;
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.IsRoshan()) {
                 let dmg = enemy.GetMaxHealth() * dmg_pct;
                 let damageTable = {
@@ -622,7 +622,7 @@ export class modifier_imba_enigma_midnight_pulse_thinker extends BaseModifier_Pl
             }
         }
         let eidolons = FindUnitsInRadius(caster.GetTeamNumber(), parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, eidolon] of ipairs(eidolons)) {
+        for (const [_, eidolon] of GameFunc.iPair(eidolons)) {
             if (eidolon.HasModifier("modifier_imba_enigma_eidolon")) {
                 eidolon.Heal(ability.GetSpecialValueFor("eidolon_hp_regen"), undefined);
                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, eidolon, ability.GetSpecialValueFor("eidolon_hp_regen"), undefined);
@@ -803,7 +803,7 @@ export class modifier_imba_enigma_black_hole_thinker extends BaseModifier_Plus {
         this.particle = ResHelper.CreateParticleEx("particles/hero/enigma/enigma_blackhole_scaleable.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined, this.GetCasterPlus());
         ParticleManager.SetParticleControl(this.particle, 0, Vector(this.GetParentPlus().GetAbsOrigin().x, this.GetParentPlus().GetAbsOrigin().y, this.GetParentPlus().GetAbsOrigin().z + 64));
         ParticleManager.SetParticleControl(this.particle, 10, Vector(this.radius, actual_vision, 0));
-        for (let i = DOTATeam_t.DOTA_TEAM_FIRST; i <= DOTATeam_t.DOTA_TEAM_CUSTOM_MAX; i += 1) {
+        for (let i = DOTATeam_t.DOTA_TEAM_FIRST; i <= DOTATeam_t.DOTA_TEAM_CUSTOM_MAX; i++) {
             if (i == this.GetParentPlus().GetTeamNumber()) {
                 AddFOWViewer(i, this.GetParentPlus().GetAbsOrigin(), actual_vision, FrameTime() * 2, false);
             } else {
@@ -823,7 +823,7 @@ export class modifier_imba_enigma_black_hole_thinker extends BaseModifier_Plus {
             return;
         }
         this.think_time = this.think_time + FrameTime();
-        for (let i = DOTATeam_t.DOTA_TEAM_FIRST; i <= DOTATeam_t.DOTA_TEAM_CUSTOM_MAX; i += 1) {
+        for (let i = DOTATeam_t.DOTA_TEAM_FIRST; i <= DOTATeam_t.DOTA_TEAM_CUSTOM_MAX; i++) {
             if (i == this.GetParentPlus().GetTeamNumber()) {
                 AddFOWViewer(i, this.GetParentPlus().GetAbsOrigin(), this.pull_radius, FrameTime() * 2, false);
             } else {
@@ -832,7 +832,7 @@ export class modifier_imba_enigma_black_hole_thinker extends BaseModifier_Plus {
         }
         if (this.GetCasterPlus().HasShard()) {
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.pull_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsRoshan()) {
                     enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_enigma_black_hole_pull", {});
                 }
@@ -848,7 +848,7 @@ export class modifier_imba_enigma_black_hole_thinker extends BaseModifier_Plus {
                 }
             }
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsRoshan()) {
                     ApplyDamage({
                         victim: enemy,
@@ -871,7 +871,7 @@ export class modifier_imba_enigma_black_hole_thinker extends BaseModifier_Plus {
             let singularity = this.GetCasterPlus().findBuff<modifier_imba_singularity>("modifier_imba_singularity");
             if (singularity && singularity.GetStackCount() >= this.GetSpecialValueFor("singularity_cap") && !AoiHelper.IsNearFountain(this.GetCasterPlus().GetAbsOrigin(), 2500)) {
                 let buildings = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, building] of ipairs(buildings)) {
+                for (const [_, building] of GameFunc.iPair(buildings)) {
                     ApplyDamage({
                         victim: building,
                         attacker: this.GetCasterPlus(),

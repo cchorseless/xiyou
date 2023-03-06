@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -311,7 +312,7 @@ export class imba_snapfire_firesnap_cookie extends BaseAbility_Plus {
                 victim: null,
             }
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 damageTable.victim = enemy;
                 ApplyDamage(damageTable);
                 if (!this.toggle_state) {
@@ -625,7 +626,7 @@ export class imba_snapfire_mortimer_kisses extends BaseAbility_Plus {
             victim: null,
         }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, impact_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             damageTable.victim = enemy;
             ApplyDamage(damageTable);
         }
@@ -644,7 +645,7 @@ export class imba_snapfire_mortimer_kisses extends BaseAbility_Plus {
             let blob_rings_count = this.GetSpecialValueFor("blob_rings_count");
             let rings_distance = this.GetSpecialValueFor("rings_distance");
             let angle_diff = 360 / blob_rings_count;
-            for (let i = 0; i < blob_rings_count; i += 1) {
+            for (let i = 0; i < blob_rings_count; i++) {
                 let blob_pos = RotatePosition(location, QAngle(0, angle_diff * i, 0), location + (forward * rings_distance) as Vector);
                 let target_pos = GetGroundPosition(blob_pos, undefined);
                 let travel_time = this.GetSpecialValueFor("rings_delay");

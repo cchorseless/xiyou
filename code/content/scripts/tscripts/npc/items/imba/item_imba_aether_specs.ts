@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -9,7 +10,7 @@ export class item_imba_aether_specs extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         this.AddTimer(FrameTime(), () => {
             if (!this.IsNull()) {
-                for (const [_, modifier] of ipairs(this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_aether_specs"))) {
+                for (const [_, modifier] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_aether_specs"))) {
                     modifier.SetStackCount(_);
                 }
             }
@@ -119,7 +120,7 @@ export class modifier_item_imba_aether_specs extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        for (const [_, mod] of ipairs(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
+        for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
             mod.GetItemPlus().SetSecondaryCharges(_);
         }
     }
@@ -127,7 +128,7 @@ export class modifier_item_imba_aether_specs extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        for (const [_, modifier] of ipairs(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
+        for (const [_, modifier] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
             modifier.SetStackCount(_);
             modifier.GetItemPlus().SetSecondaryCharges(_);
         }

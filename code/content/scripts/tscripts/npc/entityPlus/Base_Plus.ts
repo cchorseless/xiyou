@@ -97,6 +97,7 @@ export class BaseModifier {
     /**本地特效时间 */
     public static LOCAL_PARTICLE_MODIFIER_DURATION = 3 / 30;
 
+
     /**
      * 新增BUFF,只能在服务器运行
      * @Server
@@ -345,6 +346,9 @@ export class BaseModifier {
         GGameCache.RegBuff(this, true);
     }
 
+    public IsMotionBuff() {
+        return false;
+    }
     public OnRefresh(params: object) {
         this.__destroyed = false;
         (params as IModifierTable).IsOnCreated = false;
@@ -523,6 +527,9 @@ export interface BaseNpc_Hero extends CDOTA_BaseNPC_Hero {
 export class BaseNpc_Hero extends BaseNpc { }
 /**影响移动buff */
 export class BaseModifierMotion extends BaseModifier {
+    public IsMotionBuff() {
+        return true;
+    }
     CheckMotionControllers?(): boolean {
         let parent = this.GetParent();
         let modifier_priority = this.GetPriority();
@@ -579,7 +586,7 @@ export class BaseModifierMotion extends BaseModifier {
             return true;
         }
     }
-    static FindAllMotionBuff?(parent: CDOTA_BaseNPC) {
+    static FindAllMotionBuff?(parent: CDOTA_BaseNPC): BaseModifierMotion[] {
         let modifiers = parent.FindAllModifiers() as IBaseModifier_Plus[];
         let motion_buffs = [];
         for (const modifier of (modifiers)) {

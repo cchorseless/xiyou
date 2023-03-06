@@ -107,7 +107,7 @@ function CastShadowRazeOnPoint(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus
             modifier_combo_handler.ForceRefresh();
         }
         if (caster.HasModifier(modifier_harvest)) {
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy.IsRealHero()) {
                     return true;
                 }
@@ -185,7 +185,7 @@ function AddNecromasterySouls(caster: IBaseNpc_Plus, soul_count: number) {
     if (caster.HasModifier(modifier_souls)) {
         let modifier_souls_handler = caster.FindModifierByName(modifier_souls);
         if (modifier_souls_handler) {
-            for (let i = 1; i <= soul_count; i += 1) {
+            for (let i = 0; i < soul_count; i++) {
                 modifier_souls_handler.IncrementStackCount();
             }
         }
@@ -310,9 +310,9 @@ export class imba_nevermore_shadowraze_close extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let ability = this;
         let cast_response = {
-            1: "nevermore_nev_ability_shadow_07",
-            2: "nevermore_nev_ability_shadow_18",
-            3: "nevermore_nev_ability_shadow_21"
+            "1": "nevermore_nev_ability_shadow_07",
+            "2": "nevermore_nev_ability_shadow_18",
+            "3": "nevermore_nev_ability_shadow_21"
         }
         let sound_raze = "Hero_Nevermore.Shadowraze";
         let modifier_harvest = "modifier_imba_reqiuem_harvest";
@@ -367,9 +367,9 @@ export class imba_nevermore_shadowraze_medium extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let ability = this;
         let cast_response = {
-            1: "nevermore_nev_ability_shadow_08",
-            2: "nevermore_nev_ability_shadow_20",
-            3: "nevermore_nev_ability_shadow_22"
+            "1": "nevermore_nev_ability_shadow_08",
+            "2": "nevermore_nev_ability_shadow_20",
+            "3": "nevermore_nev_ability_shadow_22"
         }
         let sound_raze = "Hero_Nevermore.Shadowraze";
         let modifier_combo = "modifier_shadow_raze_combo";
@@ -443,9 +443,9 @@ export class imba_nevermore_shadowraze_far extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let ability = this;
         let cast_response = {
-            1: "nevermore_nev_ability_shadow_11",
-            2: "nevermore_nev_ability_shadow_19",
-            3: "nevermore_nev_ability_shadow_23"
+            "1": "nevermore_nev_ability_shadow_11",
+            "2": "nevermore_nev_ability_shadow_19",
+            "3": "nevermore_nev_ability_shadow_23"
         }
         let sound_raze = "Hero_Nevermore.Shadowraze";
         let modifier_combo = "modifier_shadow_raze_combo";
@@ -498,7 +498,7 @@ export class modifier_shadow_raze_combo extends BaseModifier_Plus {
             this.caster = this.GetCasterPlus();
             this.ability = this.GetAbilityPlus();
             this.razes = {}
-            this.razes[1] = "imba_nevermore_shadowraze_close";
+            this.razes[0] = "imba_nevermore_shadowraze_close";
             this.razes[2] = "imba_nevermore_shadowraze_medium";
             this.razes[3] = "imba_nevermore_shadowraze_far";
             this.modifier_prevention = "modifier_shadow_raze_prevention";
@@ -522,7 +522,7 @@ export class modifier_shadow_raze_combo extends BaseModifier_Plus {
                 return undefined;
             }
             this.AddTimer(FrameTime(), () => {
-                for (let i = 1; i <= GameFunc.GetCount(this.razes); i += 1) {
+                for (let i = 0; i < GameFunc.GetCount(this.razes); i++) {
                     if (this.caster.HasAbility(this.razes[i])) {
                         this.raze_close_handler = this.caster.FindAbilityByName(this.razes[i]);
                         if (this.raze_close_handler) {
@@ -583,7 +583,7 @@ export class modifier_imba_shadow_raze_pool extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damage_table = ({
                     victim: enemy,
                     attacker: this.caster,
@@ -757,7 +757,7 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
             if (this.ability.IsStolen()) {
                 let enemy_heroes = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, 5000, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_DEAD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
                 let modifier_souls = "modifier_imba_necromastery_souls";
-                for (const [_, enemy_hero] of ipairs(enemy_heroes)) {
+                for (const [_, enemy_hero] of GameFunc.iPair(enemy_heroes)) {
                     if (enemy_hero.HasModifier(modifier_souls)) {
                         let modifier_souls_handler = enemy_hero.FindModifierByName(modifier_souls);
                         if (modifier_souls_handler) {
@@ -992,9 +992,9 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
     }
     IsGinger(unit: IBaseNpc_Plus) {
         let ginger_hero_names = {
-            1: "npc_dota_hero_enchantress",
-            2: "npc_dota_hero_lina",
-            3: "npc_dota_hero_windrunner"
+            "1": "npc_dota_hero_enchantress",
+            "2": "npc_dota_hero_lina",
+            "3": "npc_dota_hero_windrunner"
         }
         let unit_name = unit.GetName();
         for (const [_, name] of GameFunc.Pair(ginger_hero_names)) {
@@ -1046,7 +1046,7 @@ export class modifier_imba_dark_lord_aura extends BaseModifier_Plus {
                     soul_projectile_speed = modifier_souls_handler.GetSpecialValueFor("soul_projectile_speed");
                 }
                 let enemy_heroes = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.aura_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy_hero] of ipairs(enemy_heroes)) {
+                for (const [_, enemy_hero] of GameFunc.iPair(enemy_heroes)) {
                     if (!this.caster.IsInvisiblePlus()) {
                         let soul_projectile = {
                             Target: this.caster,
@@ -1213,18 +1213,18 @@ export class imba_nevermore_requiem extends BaseAbility_Plus {
     OnSpellStart(death_cast = false): void {
         let caster = this.GetCasterPlus();
         let cast_response = {
-            1: "nevermore_nev_ability_requiem_01",
-            2: "nevermore_nev_ability_requiem_02",
-            3: "nevermore_nev_ability_requiem_03",
-            4: "nevermore_nev_ability_requiem_04",
-            5: "nevermore_nev_ability_requiem_05",
-            6: "nevermore_nev_ability_requiem_06",
-            7: "nevermore_nev_ability_requiem_07",
-            8: "nevermore_nev_ability_requiem_08",
-            9: "nevermore_nev_ability_requiem_11",
-            10: "nevermore_nev_ability_requiem_12",
-            11: "nevermore_nev_ability_requiem_13",
-            12: "nevermore_nev_ability_requiem_14"
+            "1": "nevermore_nev_ability_requiem_01",
+            "2": "nevermore_nev_ability_requiem_02",
+            "3": "nevermore_nev_ability_requiem_03",
+            "4": "nevermore_nev_ability_requiem_04",
+            "5": "nevermore_nev_ability_requiem_05",
+            "6": "nevermore_nev_ability_requiem_06",
+            "7": "nevermore_nev_ability_requiem_07",
+            "8": "nevermore_nev_ability_requiem_08",
+            "9": "nevermore_nev_ability_requiem_11",
+            "10": "nevermore_nev_ability_requiem_12",
+            "11": "nevermore_nev_ability_requiem_13",
+            "12": "nevermore_nev_ability_requiem_14"
         }
         let sound_cast = "Hero_Nevermore.RequiemOfSouls";
         let particle_caster_souls = "particles/units/heroes/hero_nevermore/nevermore_requiemofsouls_a.vpcf";
@@ -1290,7 +1290,7 @@ export class imba_nevermore_requiem extends BaseAbility_Plus {
             CreateRequiemSoulLine(caster, this, line_position, death_cast);
         }
         let qangle_rotation_rate = 360 / line_count;
-        for (let i = 1; i <= line_count - 1; i += 1) {
+        for (let i = 0; i < line_count - 1; i++) {
             let qangle = QAngle(0, qangle_rotation_rate, 0);
             line_position = RotatePosition(caster.GetAbsOrigin(), qangle, line_position);
             CreateRequiemSoulLine(caster, this, line_position, death_cast);
@@ -1428,10 +1428,10 @@ export class modifier_imba_reqiuem_harvest extends BaseModifier_Plus {
             this.caster = this.GetCasterPlus();
             this.ability = this.GetAbilityPlus();
             this.razes = {}
-            this.razes[1] = "imba_nevermore_shadowraze_close";
+            this.razes[0] = "imba_nevermore_shadowraze_close";
             this.razes[2] = "imba_nevermore_shadowraze_medium";
             this.razes[3] = "imba_nevermore_shadowraze_far";
-            for (let i = 1; i <= GameFunc.GetCount(this.razes); i += 1) {
+            for (let i = 0; i < GameFunc.GetCount(this.razes); i++) {
                 if (this.caster.HasAbility(this.razes[i])) {
                     let raze_handler = this.caster.FindAbilityByName(this.razes[i]);
                     if (raze_handler) {

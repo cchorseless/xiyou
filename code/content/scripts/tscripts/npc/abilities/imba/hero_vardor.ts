@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -51,7 +52,7 @@ export class modifier_vardor_yari_unit extends BaseModifier_Plus {
             return;
         }
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.HasModifier(this.mind_bleed_modifier)) {
                 enemy.AddNewModifier(this.caster, this.mental_ability, this.mind_bleed_modifier, {
                     duration: this.duration
@@ -59,7 +60,7 @@ export class modifier_vardor_yari_unit extends BaseModifier_Plus {
             }
             let modifier = enemy.FindModifierByName(this.mind_bleed_modifier);
             if (modifier) {
-                for (let i = 1; i <= this.mind_bleed_stacks; i += 1) {
+                for (let i = 0; i < this.mind_bleed_stacks; i++) {
                     modifier.IncrementStackCount();
                 }
             }
@@ -238,7 +239,7 @@ export class vardor_piercing_shot extends BaseAbility_Plus {
                     duration: root_duration
                 });
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     let damageTable = {
                         victim: enemy,
                         attacker: caster,
@@ -299,7 +300,7 @@ export class modifier_vardor_piercing_shot_charges extends BaseModifier_Plus {
         let expected_charges = this.ability.GetTalentSpecialValueFor("initial_yari_count");
         let yaris = 0;
         let units = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             if (unit.GetUnitName() == "npc_dota_vardor_spear_dummy") {
                 let modifier = unit.findBuff<modifier_vardor_yari_unit>("modifier_vardor_yari_unit");
                 if (modifier.is_charge_yari == 1) {
@@ -308,7 +309,7 @@ export class modifier_vardor_piercing_shot_charges extends BaseModifier_Plus {
             }
         }
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (enemy.HasModifier("modifier_vardor_piercing_shot_target_debuff")) {
                 let modifier_debuff = enemy.findBuff<modifier_vardor_piercing_shot_target_debuff>("modifier_vardor_piercing_shot_target_debuff");
                 if (modifier_debuff) {
@@ -428,7 +429,7 @@ export class modifier_vardor_yari_dummy extends BaseModifier_Plus {
                     return;
                 }
             } else {
-                for (let i = newCount + 1; i <= 10; i += 1) {
+                for (let i = newCount + 1; i <= 10; i++) {
                     if (this.particles[i]) {
                         ParticleManager.DestroyParticle(this.particles[i], true);
                     }
@@ -437,7 +438,7 @@ export class modifier_vardor_yari_dummy extends BaseModifier_Plus {
                 return;
             }
         }
-        for (let i = startIndex; i <= newCount; i += 1) {
+        for (let i = startIndex; i <= newCount; i++) {
             let particleIndex = tostring(i - 1);
             let tempParticle = ResHelper.CreateParticleEx("particles/hero/vardor/vardor_yari_belt_smoother.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN_FOLLOW, parent);
             ParticleManager.SetParticleControl(tempParticle, 10, Vector(ret, 0, 0));
@@ -448,7 +449,7 @@ export class modifier_vardor_yari_dummy extends BaseModifier_Plus {
         this.currentCount = newCount;
     }
     Hide(refresh = false) {
-        for (const [_, particle] of ipairs(this.particles)) {
+        for (const [_, particle] of GameFunc.iPair(this.particles)) {
             ParticleManager.DestroyParticle(particle, true);
         }
         this.particles = []
@@ -484,7 +485,7 @@ export class modifier_vardor_yari_dummy extends BaseModifier_Plus {
     }
     BeDestroy(): void {
         if (IsServer()) {
-            for (const [_, particle] of ipairs(this.particles)) {
+            for (const [_, particle] of GameFunc.iPair(this.particles)) {
                 ParticleManager.DestroyParticle(particle, true);
             }
         }
@@ -564,7 +565,7 @@ export class modifier_vardor_piercing_shot_target_debuff extends BaseModifier_Pl
                     let modifier = this.parent.FindModifierByName(this.modifier_mind_bleed);
                     if (modifier) {
                         let stacks_to_add = this.mind_bleed_stacks * stacks;
-                        for (let i = 1; i <= stacks_to_add; i += 1) {
+                        for (let i = 0; i < stacks_to_add; i++) {
                             modifier.IncrementStackCount();
                         }
                     }
@@ -690,7 +691,7 @@ export class vardor_graceful_jump extends BaseAbility_Plus {
         let yari_search_radius = this.GetSpecialValueFor("yari_search_radius");
         yari_search_radius = yari_search_radius + cast_range;
         let units = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, yari_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_CLOSEST, false);
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             if (unit.GetUnitName() == "npc_dota_vardor_spear_dummy") {
                 return UnitFilterResult.UF_SUCCESS;
             }
@@ -711,7 +712,7 @@ export class vardor_graceful_jump extends BaseAbility_Plus {
         if (!target) {
             yari_search_radius = yari_search_radius + cast_range;
             let units = FindUnitsInRadius(caster.GetTeamNumber(), this.GetCursorPosition(), undefined, yari_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_CLOSEST, false);
-            for (const [_, unit] of ipairs(units)) {
+            for (const [_, unit] of GameFunc.iPair(units)) {
                 if (unit.GetUnitName() == "npc_dota_vardor_spear_dummy") {
                     target = unit;
                     return;
@@ -723,7 +724,7 @@ export class vardor_graceful_jump extends BaseAbility_Plus {
             this.EndCooldown();
             this.RefundManaCost();
             if (this.GetCasterPlus().HasModifier("modifier_generic_charges")) {
-                for (const [_, mod] of ipairs(this.GetCasterPlus().FindAllModifiersByName("modifier_generic_charges"))) {
+                for (const [_, mod] of GameFunc.iPair(this.GetCasterPlus().FindAllModifiersByName("modifier_generic_charges"))) {
                     if (mod.GetAbilityPlus().GetAbilityName() == this.GetAbilityName()) {
                         mod.SetStackCount(mod.GetStackCount() + 1);
                         return;
@@ -772,7 +773,7 @@ export class vardor_graceful_jump extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(particle);
         FindClearSpaceForUnit(caster, location, true);
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, damage_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let damageTable = {
                 victim: enemy,
                 attacker: caster,
@@ -1134,10 +1135,10 @@ export class vardor_celestial_rain_of_yari extends BaseAbility_Plus {
         let new_point = target_point;
         let angle;
         let yari_drop_points: Vector[] = []
-        for (let i = 1; i <= additional_rings; i += 1) {
+        for (let i = 0; i < additional_rings; i++) {
             yari_count = yari_count + additional_yaris_per_ring;
             distance_from_center = distance_from_center + ring_distance;
-            for (let j = 1; j <= yari_count; j += 1) {
+            for (let j = 1; j <= yari_count; j++) {
                 angle = QAngle(0, (j - 1) * (360 / yari_count), 0);
                 new_point = target_point + distance_from_center * direction as Vector;
                 new_point = RotatePosition(target_point, angle, new_point);

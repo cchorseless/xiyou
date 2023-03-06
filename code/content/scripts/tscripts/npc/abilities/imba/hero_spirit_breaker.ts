@@ -37,9 +37,9 @@ export class imba_spirit_breaker_charge_of_darkness extends BaseAbility_Plus {
         this.GetCasterPlus().EmitSound("Hero_Spirit_Breaker.ChargeOfDarkness");
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_spirit_breaker" && RollPercentage(10)) {
             let responses = {
-                1: "spirit_breaker_spir_ability_charge_02",
-                2: "spirit_breaker_spir_ability_charge_14",
-                3: "spirit_breaker_spir_ability_charge_19"
+                "1": "spirit_breaker_spir_ability_charge_02",
+                "2": "spirit_breaker_spir_ability_charge_14",
+                "3": "spirit_breaker_spir_ability_charge_19"
             }
             this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
         }
@@ -132,7 +132,7 @@ export class modifier_imba_spirit_breaker_charge_of_darkness extends BaseModifie
                 this.Destroy();
                 return;
             }
-            for (const [_, target] of ipairs(new_targets)) {
+            for (const [_, target] of GameFunc.iPair(new_targets)) {
                 if (target != this.clothesline_target) {
                     this.target = target;
                     this.vision_modifier = this.target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_spirit_breaker_charge_of_darkness_vision", {});
@@ -162,7 +162,7 @@ export class modifier_imba_spirit_breaker_charge_of_darkness extends BaseModifie
         }
         let taxi_tracker_modifier = this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_spirit_breaker_charge_of_darkness_taxi_tracker", this.GetCasterPlus()) as modifier_imba_spirit_breaker_charge_of_darkness_taxi_tracker;
         let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.taxi_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             if (ally != this.GetParentPlus() && (this.attempting_to_board.includes(ally) || (taxi_tracker_modifier && taxi_tracker_modifier.attempting_to_board.includes(ally)))) {
                 let taxi_modifier = ally.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_spirit_breaker_charge_of_darkness_taxi", {
                     passenger_num: 1,
@@ -172,7 +172,7 @@ export class modifier_imba_spirit_breaker_charge_of_darkness extends BaseModifie
                     ent_index: ally.GetEntityIndex()
                 });
                 let counter_modifiers = this.GetParentPlus().FindAllModifiersByName("modifier_imba_spirit_breaker_charge_of_darkness_taxi_counter");
-                for (let num = 1; num <= GameFunc.GetCount(counter_modifiers); num += 1) {
+                for (let num = 0; num < GameFunc.GetCount(counter_modifiers); num++) {
                     if (taxi_counter_modifier == counter_modifiers[num]) {
                         taxi_modifier.passenger_num = num;
                         return;
@@ -252,7 +252,7 @@ export class modifier_imba_spirit_breaker_charge_of_darkness extends BaseModifie
             this.vision_modifier.Destroy();
         }
         let counter_modifiers = this.GetParentPlus().FindAllModifiersByName("modifier_imba_spirit_breaker_charge_of_darkness_taxi_counter");
-        for (const [_, mod] of ipairs(counter_modifiers)) {
+        for (const [_, mod] of GameFunc.iPair(counter_modifiers)) {
             mod.Destroy();
         }
     }
@@ -453,14 +453,14 @@ export class modifier_imba_spirit_breaker_charge_of_darkness_taxi extends BaseMo
             charge_modifier.passengers = math.max(charge_modifier.passengers - 1, 0);
         }
         let counter_modifiers = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_spirit_breaker_charge_of_darkness_taxi_counter") as modifier_imba_spirit_breaker_charge_of_darkness_taxi_counter[];
-        for (let num = 0; num < GameFunc.GetCount(counter_modifiers); num += 1) {
+        for (let num = 0; num < GameFunc.GetCount(counter_modifiers); num++) {
             if (counter_modifiers[num].target == this.GetParentPlus()) {
                 counter_modifiers[num].Destroy();
                 counter_modifiers.splice(num, 1);
                 break;
             }
         }
-        for (let num = 0; num < GameFunc.GetCount(counter_modifiers); num += 1) {
+        for (let num = 0; num < GameFunc.GetCount(counter_modifiers); num++) {
             if (counter_modifiers[num].target) {
                 let taxi_modifier = counter_modifiers[num].target.findBuff<modifier_imba_spirit_breaker_charge_of_darkness_taxi>("modifier_imba_spirit_breaker_charge_of_darkness_taxi");
                 if (taxi_modifier) {
@@ -551,9 +551,9 @@ export class imba_spirit_breaker_bulldoze extends BaseAbility_Plus {
         this.GetCasterPlus().EmitSound("Hero_Spirit_Breaker.Bulldoze.Cast");
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_spirit_breaker" && RollPercentage(50)) {
             let responses = {
-                1: "spirit_breaker_spir_ability_charge_03",
-                2: "spirit_breaker_spir_ability_charge_05",
-                3: "spirit_breaker_spir_ability_charge_13"
+                "1": "spirit_breaker_spir_ability_charge_03",
+                "2": "spirit_breaker_spir_ability_charge_05",
+                "3": "spirit_breaker_spir_ability_charge_13"
             }
             this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
         }
@@ -903,7 +903,7 @@ export class imba_spirit_breaker_nether_strike extends BaseAbility_Plus {
                     duration: this.GetSpecialValueFor("planeswalker_duration")
                 });
                 let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetCastRange(this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus()), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (enemy != target && !target.FindModifierByNameAndCaster("modifier_imba_spirit_breaker_nether_strike_planeswalker_enemy", this.GetCasterPlus())) {
                         enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_spirit_breaker_nether_strike_planeswalker_enemy", {
                             duration: this.GetSpecialValueFor("planeswalker_duration")

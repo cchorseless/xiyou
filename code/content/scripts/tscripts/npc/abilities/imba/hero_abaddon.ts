@@ -1,5 +1,6 @@
 
 import { AI_ability } from "../../../ai/AI_ability";
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -195,7 +196,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
     OnOwnerDied(): void {
         if (this.GetCasterPlus().IsRealHero()) {
             let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetCastRange(this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus()), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, unit] of ipairs(units)) {
+            for (const unit of (units)) {
                 if (unit != this.GetCasterPlus()) {
                     this._OnSpellStart(unit, true);
                 }
@@ -440,7 +441,7 @@ export class modifier_imba_aphotic_shield_buff_block extends BaseModifier_Plus {
                     mist_coil_range = caster.GetTalentValue("special_bonus_imba_abaddon_1");
                 }
             }
-            for (const [_, unit] of ipairs(units)) {
+            for (const [_, unit] of GameFunc.iPair(units)) {
                 if (unit.GetTeam() != caster.GetTeam()) {
                     ApplyDamage({
                         victim: unit,
@@ -834,7 +835,7 @@ export class modifier_imba_curse_of_avernus_debuff_slow extends BaseModifier_Plu
                     if (caster.HasModifier("modifier_imba_borrowed_time_buff_hot_caster")) {
                         let buffed_allies: IBaseNpc_Plus[] = caster.TempData()._borrowed_time_buffed_allies;
                         if (buffed_allies && caster.HasScepter()) {
-                            for (const [_, k] of ipairs(buffed_allies)) {
+                            for (const [_, k] of GameFunc.iPair(buffed_allies)) {
                                 healFX = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_lifesteal.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, k);
                                 ParticleManager.ReleaseParticleIndex(healFX);
                                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, k, heal_amount, undefined);
@@ -875,12 +876,10 @@ export class modifier_imba_curse_of_avernus_buff_haste extends BaseModifier_Plus
             this.attack_increase = this.attack_increase + this.GetCasterPlus().GetTalentValue("special_bonus_imba_abaddon_2", "value");
         }
     }
-    BeCreated(p_0: any,): void {
+    Init(p_0: any,): void {
         this._UpdateIncreaseValues();
     }
-    BeRefresh(params: any): void {
-        this._UpdateIncreaseValues();
-    }
+
     /** DeclareFunctions():modifierfunction[] {
         let funcs = {
             1: GPropertyConfig.EMODIFIER_PROPERTY.MOVESPEED_BONUS_PERCENTAGE,
@@ -1031,16 +1030,16 @@ export class imba_abaddon_borrowed_time extends BaseAbility_Plus {
                 duration: buff_duration
             });
             let responses = {
-                1: "abaddon_abad_borrowedtime_02",
-                2: "abaddon_abad_borrowedtime_03",
-                3: "abaddon_abad_borrowedtime_04",
-                4: "abaddon_abad_borrowedtime_05",
-                5: "abaddon_abad_borrowedtime_06",
-                6: "abaddon_abad_borrowedtime_07",
-                7: "abaddon_abad_borrowedtime_08",
-                8: "abaddon_abad_borrowedtime_09",
-                9: "abaddon_abad_borrowedtime_10",
-                10: "abaddon_abad_borrowedtime_11"
+                "1": "abaddon_abad_borrowedtime_02",
+                "2": "abaddon_abad_borrowedtime_03",
+                "3": "abaddon_abad_borrowedtime_04",
+                "4": "abaddon_abad_borrowedtime_05",
+                "5": "abaddon_abad_borrowedtime_06",
+                "6": "abaddon_abad_borrowedtime_07",
+                "7": "abaddon_abad_borrowedtime_08",
+                "8": "abaddon_abad_borrowedtime_09",
+                "9": "abaddon_abad_borrowedtime_10",
+                "10": "abaddon_abad_borrowedtime_11"
             }
             if (!caster.EmitCasterSound(Object.values(responses), 50, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS)) {
                 caster.EmitCasterSound(["abaddon_abad_borrowedtime_01"], 1, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS);
@@ -1049,7 +1048,7 @@ export class imba_abaddon_borrowed_time extends BaseAbility_Plus {
                 let target_team = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY;
                 let target_type = DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO;
                 let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, target_team, target_type, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, unit] of ipairs(allies)) {
+                for (const [_, unit] of GameFunc.iPair(allies)) {
                     let over_channel_particle = ResHelper.CreateParticleEx("particles/dev/library/base_dust_hit_detail.vpcf", ParticleAttachment_t.PATTACH_POINT, unit);
                     ParticleManager.ReleaseParticleIndex(over_channel_particle);
                     over_channel_particle = ResHelper.CreateParticleEx("particles/dev/library/base_dust_hit_smoke.vpcf", ParticleAttachment_t.PATTACH_POINT, unit);
@@ -1221,7 +1220,7 @@ export class modifier_imba_borrowed_time_buff_hot_caster extends BaseModifier_Pl
                 }
                 kv.unit.TempData().borrowed_time_damage_taken = kv.unit.TempData().borrowed_time_damage_taken + kv.damage;
                 if (kv.unit.TempData().borrowed_time_damage_taken / this.GetSpecialValueFor("ally_threshold_scepter") >= 1) {
-                    for (let i = 1; i <= kv.unit.TempData().borrowed_time_damage_taken / this.GetSpecialValueFor("ally_threshold_scepter"); i += 1) {
+                    for (let i = 0; i < kv.unit.TempData().borrowed_time_damage_taken / this.GetSpecialValueFor("ally_threshold_scepter"); i++) {
                         kv.unit.TempData().borrowed_time_damage_taken = kv.unit.TempData().borrowed_time_damage_taken - this.GetSpecialValueFor("ally_threshold_scepter");
                         this.GetCasterPlus().findAbliityPlus<imba_abaddon_death_coil>("imba_abaddon_death_coil")._OnSpellStart(kv.unit, true);
                     }

@@ -22,7 +22,7 @@ export class item_imba_dust_of_appearance extends BaseItem_Plus {
         ParticleManager.SetParticleControl(particle, 1, Vector(aoe, aoe, aoe));
         let true_sight_modifier = undefined;
         let targets = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(targets)) {
+        for (const [_, unit] of GameFunc.iPair(targets)) {
             if (unit.IsInvisible() || unit.IsInvisiblePlus()) {
                 foundInvis = foundInvis + 1;
             }
@@ -68,20 +68,20 @@ export class modifier_imba_dust_of_appearance extends BaseModifier_Plus {
         }
         this.invisible_slow = this.GetItemPlus().GetSpecialValueFor("invisible_slow");
         this.invisModifiers = {
-            1: "modifier_invisible",
-            2: "modifier_mirana_moonlight_shadow",
-            3: "modifier_item_imba_shadow_blade_invis",
-            4: "modifier_item_shadow_amulet_fade",
-            5: "modifier_imba_vendetta",
-            6: "modifier_nyx_assassin_burrow",
-            7: "modifier_item_imba_silver_edge_invis",
-            8: "modifier_item_glimmer_cape_fade",
-            9: "modifier_weaver_shukuchi",
-            10: "modifier_treant_natures_guise_invis",
-            11: "modifier_templar_assassin_meld",
-            12: "modifier_imba_skeleton_walk_dummy",
-            13: "modifier_invoker_ghost_walk_self",
-            14: "modifier_rune_invis"
+            "1": "modifier_invisible",
+            "2": "modifier_mirana_moonlight_shadow",
+            "3": "modifier_item_imba_shadow_blade_invis",
+            "4": "modifier_item_shadow_amulet_fade",
+            "5": "modifier_imba_vendetta",
+            "6": "modifier_nyx_assassin_burrow",
+            "7": "modifier_item_imba_silver_edge_invis",
+            "8": "modifier_item_glimmer_cape_fade",
+            "9": "modifier_weaver_shukuchi",
+            "10": "modifier_treant_natures_guise_invis",
+            "11": "modifier_templar_assassin_meld",
+            "12": "modifier_imba_skeleton_walk_dummy",
+            "13": "modifier_invoker_ghost_walk_self",
+            "14": "modifier_rune_invis"
         }
     }
     /** DeclareFunctions():modifierfunction[] {

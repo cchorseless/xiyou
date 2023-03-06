@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionBoth_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -67,7 +68,7 @@ export class imba_ursa_earthshock extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(earthshock_particle_fx, 1, Vector(1, 1, 1));
             ParticleManager.ReleaseParticleIndex(earthshock_particle_fx);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsMagicImmune()) {
                     let distance = (enemy.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Length2D();
                     let edge_distance = radius - distance;
@@ -307,7 +308,7 @@ export class modifier_imba_trembling_steps_buff extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(particle_step_fx, 1, Vector(1, 1, 1));
             ParticleManager.ReleaseParticleIndex(particle_step_fx);
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsMagicImmune()) {
                     let damageTable = {
                         victim: enemy,
@@ -443,7 +444,7 @@ export class imba_ursa_overpower extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(disarm_particle_fx, 3, caster.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(disarm_particle_fx);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, disarm_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsMagicImmune()) {
                     enemy.AddNewModifier(caster, ability, disarm_debuff, {
                         duration: disarm_duration * (1 - enemy.GetStatusResistance())

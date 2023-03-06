@@ -125,20 +125,20 @@ export class modifier_imba_ebb_and_flow_thinker extends BaseModifier_Plus {
         let tide_list: { [key: string]: string };
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_kunkka_1")) {
             tide_list = {
-                1: "modifier_imba_ebb_and_flow_tide_low",
-                2: "modifier_imba_ebb_and_flow_tide_red",
-                3: "modifier_imba_ebb_and_flow_tide_flood",
-                4: "modifier_imba_ebb_and_flow_tide_high",
-                5: "modifier_imba_ebb_and_flow_tide_wave",
-                6: "modifier_imba_ebb_and_flow_tsunami"
+                "1": "modifier_imba_ebb_and_flow_tide_low",
+                "2": "modifier_imba_ebb_and_flow_tide_red",
+                "3": "modifier_imba_ebb_and_flow_tide_flood",
+                "4": "modifier_imba_ebb_and_flow_tide_high",
+                "5": "modifier_imba_ebb_and_flow_tide_wave",
+                "6": "modifier_imba_ebb_and_flow_tsunami"
             }
         } else {
             tide_list = {
-                1: "modifier_imba_ebb_and_flow_tide_low",
-                2: "modifier_imba_ebb_and_flow_tide_red",
-                3: "modifier_imba_ebb_and_flow_tide_flood",
-                4: "modifier_imba_ebb_and_flow_tide_high",
-                5: "modifier_imba_ebb_and_flow_tide_wave"
+                "1": "modifier_imba_ebb_and_flow_tide_low",
+                "2": "modifier_imba_ebb_and_flow_tide_red",
+                "3": "modifier_imba_ebb_and_flow_tide_flood",
+                "4": "modifier_imba_ebb_and_flow_tide_high",
+                "5": "modifier_imba_ebb_and_flow_tide_wave"
             }
         }
         tide_list['tide_count'] = Object.keys(tide_list).length + "";
@@ -307,7 +307,7 @@ export class imba_kunkka_torrent extends BaseAbility_Plus {
             let damage_type = this.GetAbilityDamageType();
             let sec_torrent_radius = this.GetSpecialValueFor("sec_torrent_radius");
             this.torrent_count = 0;
-            for (let torrent_count = 0; torrent_count < sec_torrent_count; torrent_count += 1) {
+            for (let torrent_count = 0; torrent_count < sec_torrent_count; torrent_count++) {
                 let delay = first_delay + (torrent_count * 2);
                 this.AddTimer(delay, () => {
                     this.torrent_count = torrent_count;
@@ -334,7 +334,7 @@ export class imba_kunkka_torrent extends BaseAbility_Plus {
                             caster.EmitSound("kunkka_kunk_ability_torrent_0" + math.random(1, 4));
                         }
                     }
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         ApplyDamage({
                             victim: enemy,
                             attacker: caster,
@@ -407,7 +407,7 @@ export class imba_kunkka_torrent extends BaseAbility_Plus {
                         ParticleManager.SetParticleControl(torrent_tsunami_fx, 0, target);
                         ParticleManager.ReleaseParticleIndex(torrent_tsunami_fx);
                         let count_mini = math.floor(radius / 35);
-                        for (let i = 0; i <= count_mini; i += 1) {
+                        for (let i = 0; i <= count_mini; i++) {
                             this.AddTimer(math.random(80) * 0.01, () => {
                                 let radius_mini = math.random(50) + 15;
                                 let angle = (360 / count_mini) * i;
@@ -664,7 +664,7 @@ export class modifier_imba_kunkka_torrent_talent_thinker extends BaseModifier_Pl
                         this.caster.EmitSound("kunkka_kunk_ability_torrent_0" + math.random(1, 4));
                     }
                 }
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     ApplyDamage({
                         victim: enemy,
                         attacker: this.caster,
@@ -925,10 +925,10 @@ export class modifier_imba_tidebringer extends BaseModifier_Plus {
                     if (parent.HasTalent("special_bonus_imba_kunkka_7")) {
                         let enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
                         let hit_enemy = false;
-                        for (const [_, enemy] of ipairs(enemies)) {
+                        for (const [_, enemy] of GameFunc.iPair(enemies)) {
                             if (enemy.HasModifier("modifier_imba_torrent_slow") || enemy.HasModifier("modifier_imba_torrent_slow_tide") || enemy.HasModifier("modifier_imba_sec_torrent_slow") || enemy.HasModifier("modifier_imba_torrent_phase")) {
                                 hit_enemy = true;
-                                for (const [_, enemy_hit] of ipairs(enemies_to_cleave)) {
+                                for (const [_, enemy_hit] of GameFunc.iPair(enemies_to_cleave)) {
                                     if (enemy == enemy_hit) {
                                         hit_enemy = false;
                                     }
@@ -951,7 +951,7 @@ export class modifier_imba_tidebringer extends BaseModifier_Plus {
                     }
                     if (parent.HasTalent("special_bonus_imba_kunkka_7")) {
                         if (params.target.HasModifier("modifier_imba_torrent_slow") || params.target.HasModifier("modifier_imba_torrent_slow_tide") || params.target.HasModifier("modifier_imba_sec_torrent_slow") || params.target.HasModifier("modifier_imba_torrent_phase")) {
-                            for (const [_, enemy_to_hit] of ipairs(enemies_to_cleave)) {
+                            for (const [_, enemy_to_hit] of GameFunc.iPair(enemies_to_cleave)) {
                                 let tidebringer_hit_fx = ResHelper.CreateParticleEx("particles/units/heroes/hero_kunkka/kunkka_spell_tidebringer.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, this.GetParentPlus());
                                 ParticleManager.SetParticleControlEnt(tidebringer_hit_fx, 0, enemy_to_hit, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", enemy_to_hit.GetAbsOrigin(), true);
                                 ParticleManager.SetParticleControlEnt(tidebringer_hit_fx, 1, enemy_to_hit, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", enemy_to_hit.GetAbsOrigin(), true);
@@ -1128,7 +1128,7 @@ export class imba_kunkka_x_marks_the_spot extends BaseAbility_Plus {
             if (caster.HasTalent("special_bonus_imba_kunkka_5")) {
                 let radius = caster.GetTalentValue("special_bonus_imba_kunkka_5");
                 let enemies = FindUnitsInRadius(caster.GetTeam(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, 0, 0, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (enemy != target) {
                         talent_hits = true;
                         enemy.AddNewModifier(caster, this, "modifier_imba_x_marks_the_spot", {
@@ -1360,17 +1360,17 @@ export class imba_kunkka_return extends BaseAbility_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let targets = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_DEAD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false);
-            for (const [_, target] of ipairs(targets)) {
+            for (const [_, target] of GameFunc.iPair(targets)) {
                 if (target.HasModifier("modifier_imba_x_marks_the_spot")) {
                     let modifiers = target.FindAllModifiersByName("modifier_imba_x_marks_the_spot") as modifier_imba_x_marks_the_spot[];
-                    for (const [_, modifier] of ipairs(modifiers)) {
+                    for (const [_, modifier] of GameFunc.iPair(modifiers)) {
                         if (((modifier.GetCasterPlus() == this.GetCasterPlus()) && ((modifier.sec_duration > 0) || (modifier.IsDebuff() == false)))) {
                             modifier.Destroy();
                         }
                     }
                 }
             }
-            for (const [_, modifier] of ipairs(caster.FindAllModifiersByName("modifier_imba_x_marks_the_spot_return"))) {
+            for (const [_, modifier] of GameFunc.iPair(caster.FindAllModifiersByName("modifier_imba_x_marks_the_spot_return"))) {
                 modifier.Destroy();
             }
         }
@@ -1485,7 +1485,7 @@ export class imba_kunkka_ghostship extends BaseAbility_Plus {
                             ParticleManager.ReleaseParticleIndex(water_fx);
                         });
                         let enemies = FindUnitsInRadius(caster.GetTeam(), target, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, this.GetAbilityTargetType(), 0, 0, false);
-                        for (const [k, enemy] of ipairs(enemies)) {
+                        for (const [k, enemy] of GameFunc.iPair(enemies)) {
                             ApplyDamage({
                                 victim: enemy,
                                 attacker: caster,
@@ -1548,7 +1548,7 @@ export class imba_kunkka_ghostship extends BaseAbility_Plus {
                             caster.EmitSound("kunkka_kunk_ability_failure_0" + math.random(1, 2));
                         }
                     }
-                    for (const [k, enemy] of ipairs(enemies)) {
+                    for (const [k, enemy] of GameFunc.iPair(enemies)) {
                         ApplyDamage({
                             victim: enemy,
                             attacker: caster,

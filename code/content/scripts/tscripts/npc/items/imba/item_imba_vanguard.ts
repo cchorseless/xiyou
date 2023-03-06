@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -194,7 +195,7 @@ export class item_imba_crimson_guard extends BaseItem_Plus {
         ParticleManager.SetParticleControl(cast_pfx, 2, Vector(active_radius, 0, 0));
         ParticleManager.ReleaseParticleIndex(cast_pfx);
         let nearby_allies = FindUnitsInRadius(caster.GetTeamNumber(), caster_loc, undefined, active_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, ally] of ipairs(nearby_allies)) {
+        for (const [_, ally] of GameFunc.iPair(nearby_allies)) {
             if (!ally.HasModifier("modifier_item_imba_sogat_cuirass_buff")) {
                 if (!non_relevant_units[ally.GetUnitName()] && !ally.HasModifier("modifier_item_imba_sogat_cuirass_nostack")) {
                     ally.AddNewModifier(caster, this, "modifier_item_imba_crimson_guard_buff", {

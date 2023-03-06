@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
@@ -53,7 +54,7 @@ export class imba_doom_bringer_doom extends BaseAbility_Plus {
         } else {
             if (!this.GetCursorTarget().TriggerSpellAbsorb(this)) {
                 let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("aoe_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_doom_bringer_doom_enemies", {
                         duration: (this.GetSpecialValueFor("duration") + this.GetCasterPlus().GetTalentValue("special_bonus_unique_doom_7")) * (1 - enemy.GetStatusResistance())
                     });

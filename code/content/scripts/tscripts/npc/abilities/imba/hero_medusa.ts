@@ -107,7 +107,7 @@ export class modifier_imba_medusa_split_shot extends BaseModifier_Plus {
             let enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetParentPlus().Script_GetAttackRange() + this.GetSpecialValueFor("split_shot_bonus_range"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_ANY_ORDER, false);
             let target_number = 0;
             let apply_modifiers = this.GetParentPlus().HasTalent("special_bonus_imba_medusa_split_shot_modifiers") != null;
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != keys.target) {
                     this.split_shot_target = true;
                     this.GetParentPlus().PerformAttack(enemy, false, apply_modifiers, true, true, true, false, false);
@@ -753,7 +753,7 @@ export class modifier_imba_medusa_stone_gaze extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (math.abs(AngleDiff(VectorToAngles(enemy.GetForwardVector()).y, VectorToAngles(this.GetParentPlus().GetAbsOrigin() - enemy.GetAbsOrigin() as Vector).y)) <= this.vision_cone * 1000 && enemy.GetTeamNumber() != DOTATeam_t.DOTA_TEAM_NEUTRALS) {
                 let facing_modifier = enemy.FindModifierByNameAndCaster("modifier_imba_medusa_stone_gaze_facing", this.GetParentPlus());
                 let stone_modifier = enemy.FindModifierByNameAndCaster("modifier_imba_medusa_stone_gaze_stone", this.GetParentPlus());
@@ -961,7 +961,7 @@ export class modifier_imba_medusa_stone_gaze_red_eyes extends BaseModifier_Plus 
 
     OnIntervalThink(): void {
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.red_eyes_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let facing_modifier = enemy.FindModifierByNameAndCaster("modifier_imba_medusa_stone_gaze_red_eyes_facing", this.GetParentPlus());
             let stone_modifier = enemy.FindModifierByNameAndCaster("modifier_imba_medusa_stone_gaze_stone", this.GetParentPlus());
             if (math.abs(AngleDiff(VectorToAngles(enemy.GetForwardVector()).y, VectorToAngles(this.GetParentPlus().GetAbsOrigin() - enemy.GetAbsOrigin() as Vector).y)) <= this.red_eyes_vision_cone * 1000 && math.abs(AngleDiff(VectorToAngles(this.GetParentPlus().GetForwardVector()).y, VectorToAngles(enemy.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).y)) <= this.red_eyes_vision_cone * 1000 && enemy.GetTeamNumber() != DOTATeam_t.DOTA_TEAM_NEUTRALS && !this.GetParentPlus().PassivesDisabled() && !this.GetParentPlus().IsIllusion() && this.GetParentPlus().IsAlive()) {

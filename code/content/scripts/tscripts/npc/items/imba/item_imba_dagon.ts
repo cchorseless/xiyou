@@ -34,11 +34,11 @@ export class item_imba_dagon extends BaseItem_Plus {
         }
         this.DagonizeIt(caster, this, caster, target, damage);
         while (GameFunc.GetCount(search_sources) > 0) {
-            for (const [potential_source_index, potential_source] of ipairs(search_sources)) {
+            for (const [potential_source_index, potential_source] of GameFunc.iPair(search_sources)) {
                 let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), potential_source.GetAbsOrigin(), undefined, bounce_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, potential_target] of ipairs(nearby_enemies)) {
+                for (const [_, potential_target] of GameFunc.iPair(nearby_enemies)) {
                     let already_hit = false;
-                    for (const [_, hit_target] of ipairs(targets_hit)) {
+                    for (const [_, hit_target] of GameFunc.iPair(targets_hit)) {
                         if (potential_target == hit_target) {
                             already_hit = true;
                             return;

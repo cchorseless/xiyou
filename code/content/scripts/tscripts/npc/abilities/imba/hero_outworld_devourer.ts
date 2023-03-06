@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus, BaseOrbAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -44,7 +45,7 @@ export class imba_outworld_devourer_arcane_orb extends BaseOrbAbility_Plus {
                 ParticleManager.SetParticleControl(this.particle_explosion_scatter_fx, 0, keys.target.GetAbsOrigin());
                 ParticleManager.SetParticleControl(this.particle_explosion_scatter_fx, 3, Vector(this.GetSpecialValueFor("universe_splash_radius"), 0, 0));
                 ParticleManager.ReleaseParticleIndex(this.particle_explosion_scatter_fx);
-                for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), keys.target.GetAbsOrigin(), undefined, this.GetSpecialValueFor("universe_splash_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+                for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), keys.target.GetAbsOrigin(), undefined, this.GetSpecialValueFor("universe_splash_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                     ApplyDamage({
                         victim: enemy,
                         damage: damage - this.GetSpecialValueFor("universe_bonus_dmg"),
@@ -190,7 +191,7 @@ export class modifier_imba_outworld_devourer_astral_imprisonment_prison extends 
         ParticleManager.SetParticleControl(end_particle, 1, Vector(this.radius, this.radius, this.radius));
         ParticleManager.ReleaseParticleIndex(end_particle);
         FindClearSpaceForUnit(this.GetParentPlus(), this.GetParentPlus().GetAbsOrigin(), true);
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             ApplyDamage({
                 victim: enemy,
                 damage: this.damage,
@@ -359,7 +360,7 @@ export class imba_outworld_devourer_astral_imprisonment_movement extends BaseAbi
         }
     }
     OnSpellStart(): void {
-        for (const [_, astral_mod] of ipairs(this.GetCasterPlus().FindAllModifiersByName("modifier_imba_outworld_devourer_astral_imprisonment_movement"))) {
+        for (const [_, astral_mod] of GameFunc.iPair(this.GetCasterPlus().FindAllModifiersByName("modifier_imba_outworld_devourer_astral_imprisonment_movement"))) {
             if (astral_mod.GetCasterPlus().HasModifier("modifier_imba_outworld_devourer_astral_imprisonment_prison")) {
                 let prison_modifier = astral_mod.GetCasterPlus().findBuff<modifier_imba_outworld_devourer_astral_imprisonment_prison>("modifier_imba_outworld_devourer_astral_imprisonment_prison");
                 prison_modifier.movement_position = this.GetCursorPosition();
@@ -403,7 +404,7 @@ export class imba_outworld_devourer_sanity_eclipse extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(this.eclipse_cast_particle, 1, Vector(this.GetSpecialValueFor("radius"), this.GetSpecialValueFor("radius"), 1));
         ParticleManager.SetParticleControl(this.eclipse_cast_particle, 2, Vector(1, 1, this.GetSpecialValueFor("radius")));
         ParticleManager.ReleaseParticleIndex(this.eclipse_cast_particle);
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {
             if (((!enemy.IsInvulnerable() && !enemy.IsOutOfGame()) || enemy.HasModifier("modifier_imba_outworld_devourer_astral_imprisonment_prison")) && enemy.GetMaxMana) {
                 this.eclipse_damage_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_obsidian_destroyer/obsidian_destroyer_sanity_eclipse_damage.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy);
                 ParticleManager.ReleaseParticleIndex(this.eclipse_damage_particle);

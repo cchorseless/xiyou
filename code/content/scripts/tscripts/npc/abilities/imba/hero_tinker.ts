@@ -78,57 +78,57 @@ export class imba_tinker_rearm extends BaseAbility_Plus {
             let caster = this.GetCasterPlus();
             if (!bInterrupted) {
                 let forbidden_items = {
-                    1: "item_aeon_disk",
-                    2: "item_imba_aeon_disk",
-                    3: "item_imba_aether_specs",
-                    4: "item_imba_arcane_boots",
-                    5: "item_imba_black_king_bar",
-                    6: "item_imba_bloodstone",
-                    7: "item_imba_guardian_greaves",
-                    8: "item_imba_hand_of_midas",
-                    9: "item_imba_mekansm",
-                    10: "item_meteor_hammer",
-                    11: "item_imba_necronomicon",
-                    12: "item_imba_necronomicon_2",
-                    13: "item_imba_necronomicon_3",
-                    14: "item_imba_necronomicon_4",
-                    15: "item_imba_necronomicon_5",
-                    16: "item_imba_pipe",
-                    17: "item_refresher",
-                    18: "item_refresher_shard",
-                    19: "item_imba_skadi",
-                    20: "item_imba_sphere",
-                    21: "item_imba_plancks_artifact",
-                    22: "item_minotaur_horn",
-                    23: "item_imba_white_queen_cape",
-                    24: "item_imba_black_queen_cape",
-                    25: "item_helm_of_the_dominator",
-                    26: "item_imba_sange",
-                    27: "item_imba_heavens_halberd",
-                    28: "item_imba_yasha",
-                    29: "item_imba_kaya",
-                    30: "item_imba_sange_yasha",
-                    31: "item_imba_kaya_and_sange",
-                    32: "item_imba_yasha_and_kaya",
-                    33: "item_imba_arcane_nexus",
-                    34: "item_imba_manta",
-                    35: "item_imba_meteor_hammer",
-                    36: "item_imba_meteor_hammer_2",
-                    37: "item_imba_meteor_hammer_3",
-                    38: "item_imba_meteor_hammer_4",
-                    39: "item_imba_the_triumvirate_v2",
-                    40: "item_tome_of_knowledge"
+                    "1": "item_aeon_disk",
+                    "2": "item_imba_aeon_disk",
+                    "3": "item_imba_aether_specs",
+                    "4": "item_imba_arcane_boots",
+                    "5": "item_imba_black_king_bar",
+                    "6": "item_imba_bloodstone",
+                    "7": "item_imba_guardian_greaves",
+                    "8": "item_imba_hand_of_midas",
+                    "9": "item_imba_mekansm",
+                    "10": "item_meteor_hammer",
+                    "11": "item_imba_necronomicon",
+                    "12": "item_imba_necronomicon_2",
+                    "13": "item_imba_necronomicon_3",
+                    "14": "item_imba_necronomicon_4",
+                    "15": "item_imba_necronomicon_5",
+                    "16": "item_imba_pipe",
+                    "17": "item_refresher",
+                    "18": "item_refresher_shard",
+                    "19": "item_imba_skadi",
+                    "20": "item_imba_sphere",
+                    "21": "item_imba_plancks_artifact",
+                    "22": "item_minotaur_horn",
+                    "23": "item_imba_white_queen_cape",
+                    "24": "item_imba_black_queen_cape",
+                    "25": "item_helm_of_the_dominator",
+                    "26": "item_imba_sange",
+                    "27": "item_imba_heavens_halberd",
+                    "28": "item_imba_yasha",
+                    "29": "item_imba_kaya",
+                    "30": "item_imba_sange_yasha",
+                    "31": "item_imba_kaya_and_sange",
+                    "32": "item_imba_yasha_and_kaya",
+                    "33": "item_imba_arcane_nexus",
+                    "34": "item_imba_manta",
+                    "35": "item_imba_meteor_hammer",
+                    "36": "item_imba_meteor_hammer_2",
+                    "37": "item_imba_meteor_hammer_3",
+                    "38": "item_imba_meteor_hammer_4",
+                    "39": "item_imba_the_triumvirate_v2",
+                    "40": "item_tome_of_knowledge"
                 }
-                for (let i = 0; i <= 8; i += 1) {
+                for (let i = 0; i <= 8; i++) {
                     let current_ability = caster.GetAbilityByIndex(i);
                     if (current_ability) {
                         current_ability.EndCooldown();
                     }
                 }
-                for (let i = 0; i <= 8; i += 1) {
+                for (let i = 0; i <= 8; i++) {
                     let current_item = caster.GetItemInSlot(i);
                     let should_refresh = true;
-                    for (const [_, forbidden_item] of ipairs(forbidden_items)) {
+                    for (const [_, forbidden_item] of GameFunc.Pair(forbidden_items)) {
                         if (current_item && (current_item.GetName() == forbidden_item || current_item.GetPurchaser() != caster)) {
                             should_refresh = false;
                         }
@@ -511,7 +511,7 @@ export class imba_tinker_heat_seeking_missile extends BaseAbility_Plus {
                 return undefined;
             }
             let hero_missiles = math.min(GameFunc.GetCount(heroes), missile_count);
-            for (let i = 1; i <= hero_missiles; i += 1) {
+            for (let i = 0; i < hero_missiles; i++) {
                 let hero_projectile = {
                     Target: heroes[i],
                     Source: caster,
@@ -539,7 +539,7 @@ export class imba_tinker_heat_seeking_missile extends BaseAbility_Plus {
             }
             missile_count = missile_count - hero_missiles;
             if (GameFunc.GetCount(units) > 0) {
-                for (let i = 1; i <= missile_count; i += 1) {
+                for (let i = 0; i < missile_count; i++) {
                     let random_projectile = {
                         Target: units[i],
                         Source: caster,
@@ -592,7 +592,7 @@ export class imba_tinker_heat_seeking_missile extends BaseAbility_Plus {
                     return undefined;
                 }
                 let hero_missiles = math.min(GameFunc.GetCount(heroes), ExtraData.mini_missile_count);
-                for (let i = 1; i <= hero_missiles; i += 1) {
+                for (let i = 0; i < hero_missiles; i++) {
                     let hero_projectile = {
                         Target: heroes[i],
                         vSourceLoc: location,
@@ -614,7 +614,7 @@ export class imba_tinker_heat_seeking_missile extends BaseAbility_Plus {
                 let remaining_missiles = ExtraData.mini_missile_count;
                 remaining_missiles = remaining_missiles - hero_missiles;
                 if (GameFunc.GetCount(units) > 0) {
-                    for (let i = 1; i <= remaining_missiles; i += 1) {
+                    for (let i = 0; i < remaining_missiles; i++) {
                         let random_projectile = {
                             Target: units[i],
                             vSourceLoc: location,
@@ -652,7 +652,7 @@ export class imba_tinker_heat_seeking_missile extends BaseAbility_Plus {
                 ParticleManager.ReleaseParticleIndex(particle_explosion_fx);
                 EmitSoundOn("Hero_Techies.LandMine.Detonate", target);
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, technomancy.GetSpecialValueFor("missile_aoe"), this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     let modifier_defence_break = enemy.findBuff<modifier_imba_heat_seeking_missile_break>("modifier_imba_heat_seeking_missile_break");
                     if (modifier_defence_break) {
                         modifier_defence_break.ForceRefresh();
@@ -672,7 +672,7 @@ export class imba_tinker_heat_seeking_missile extends BaseAbility_Plus {
                 ParticleManager.ReleaseParticleIndex(particle_explosion_fx);
                 EmitSoundOn("Hero_Techies.RemoteMine.Detonate", target);
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, technomancy.GetSpecialValueFor("missile_aoe"), this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     let explosion_damage = technomancy.GetSpecialValueFor("explosion_damage");
                     let explosion_damage_main = technomancy.GetSpecialValueFor("explosion_damage_main");
                     let modifier_defence_break = enemy.findBuff<modifier_imba_heat_seeking_missile_break>("modifier_imba_heat_seeking_missile_break");
@@ -834,7 +834,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(area_pfx, 1, caster_loc);
             ParticleManager.SetParticleControlForward(area_pfx, 1, direction);
             ParticleManager.ReleaseParticleIndex(area_pfx);
-            for (let i = 0; i <= spawn_duration * robots_per_sec; i += 1) {
+            for (let i = 0; i <= spawn_duration * robots_per_sec; i++) {
                 this.AddTimer(i * (1 / robots_per_sec), () => {
                     let position_ran = (math.random() - 0.5) * travel_distance;
                     let projectile: ILineProjectile;
@@ -1178,7 +1178,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
                 }
             } else {
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, ExtraData.explosion_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     ApplyDamage({
                         attacker: caster,
                         victim: enemy,

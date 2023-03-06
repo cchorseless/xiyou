@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -35,7 +36,7 @@ export class imba_silencer_arcane_curse extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(aoe, 0, point);
         ParticleManager.SetParticleControl(aoe, 1, Vector(radius, radius, radius));
         EmitSoundOn("Hero_Silencer.Curse.Cast", caster);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             enemy.AddNewModifier(caster, this, "modifier_imba_arcane_curse_debuff", {
                 duration: base_duration * (1 - enemy.GetStatusResistance())
             });
@@ -155,25 +156,25 @@ export class modifier_imba_arcane_curse_debuff extends BaseModifier_Plus {
                         return;
                     }
                     let uneffected_spells = {
-                        1: "monkey_king_tree_dance",
-                        2: "monkey_king_primal_spring_early",
-                        3: "monkey_king_mischief",
-                        4: "monkey_king_untransform",
-                        5: "naga_siren_song_of_the_siren_cancel",
-                        6: "nyx_assassin_burrow",
-                        7: "nyx_assassin_unburrow",
-                        8: "shadow_demon_shadow_poison_release",
-                        9: "imba_techies_minefield_sign",
-                        10: "techies_focused_detonate",
-                        11: "imba_drow_ranger_frost_arrows",
-                        12: "imba_jakiro_liquid_fire",
-                        13: "imba_obsidian_destroyer_arcane_orb",
-                        14: "imba_sniper_take_aim",
-                        15: "imba_kunkka_ebb_and_flow",
-                        16: "imba_kunkka_tidebringer",
-                        17: "imba_outworld_devourer_astral_imprisonment_movement"
+                        "1": "monkey_king_tree_dance",
+                        "2": "monkey_king_primal_spring_early",
+                        "3": "monkey_king_mischief",
+                        "4": "monkey_king_untransform",
+                        "5": "naga_siren_song_of_the_siren_cancel",
+                        "6": "nyx_assassin_burrow",
+                        "7": "nyx_assassin_unburrow",
+                        "8": "shadow_demon_shadow_poison_release",
+                        "9": "imba_techies_minefield_sign",
+                        "10": "techies_focused_detonate",
+                        "11": "imba_drow_ranger_frost_arrows",
+                        "12": "imba_jakiro_liquid_fire",
+                        "13": "imba_obsidian_destroyer_arcane_orb",
+                        "14": "imba_sniper_take_aim",
+                        "15": "imba_kunkka_ebb_and_flow",
+                        "16": "imba_kunkka_tidebringer",
+                        "17": "imba_outworld_devourer_astral_imprisonment_movement"
                     }
-                    for (const [_, spell] of ipairs(uneffected_spells)) {
+                    for (const [_, spell] of GameFunc.Pair(uneffected_spells)) {
                         if (params.ability.GetName() == spell) {
                             return;
                         }
@@ -198,7 +199,7 @@ export class modifier_imba_arcane_curse_debuff extends BaseModifier_Plus {
                 if (AoE > 0  /**&& parent.IsRealHero()*/ && !parent.IsClone()) {
                     let base_duration = ability.GetSpecialValueFor("base_duration");
                     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), parent.GetAbsOrigin(), undefined, AoE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, ability.GetAbilityTargetType(), DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, unit] of ipairs(enemies)) {
+                    for (const [_, unit] of GameFunc.iPair(enemies)) {
                         unit.AddNewModifier(caster, ability, "modifier_imba_arcane_curse_debuff", {
                             duration: base_duration
                         });
@@ -247,7 +248,7 @@ export class modifier_imba_silencer_glaives_of_wisdom_buff extends BaseModifier_
     OnIntervalThink(): void {
         let repeat_needed = true;
         while (repeat_needed) {
-            let item_time = this.stack_table[1];
+            let item_time = this.stack_table[0];
             if (GameRules.GetGameTime() - item_time >= this.duration) {
                 if (this.GetStackCount() == 1) {
                     this.Destroy();
@@ -309,7 +310,7 @@ export class modifier_imba_silencer_glaives_of_wisdom_debuff extends BaseModifie
     OnIntervalThink(): void {
         let repeat_needed = true;
         while (repeat_needed) {
-            let item_time = this.stack_table[1];
+            let item_time = this.stack_table[0];
             if (GameRules.GetGameTime() - item_time >= this.duration) {
                 if (this.GetStackCount() == 1) {
                     this.Destroy();
@@ -792,7 +793,7 @@ export class imba_silencer_last_word extends BaseAbility_Plus {
                 duration: this.GetDuration()
             });
         } else {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(caster.GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("scepter_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(caster.GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("scepter_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                 enemy.AddNewModifier(caster, this, "modifier_imba_silencer_last_word_debuff", {
                     duration: this.GetDuration()
                 });
@@ -1190,7 +1191,7 @@ export class imba_silencer_global_silence extends BaseAbility_Plus {
                 EmitSoundOn("Hero_Silencer.Penn", caster);
             }
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 enemy.AddNewModifier(caster, this, "modifier_imba_silencer_global_silence", {
                     duration: this.GetDuration() * (1 - enemy.GetStatusResistance())
                 });
@@ -1361,7 +1362,7 @@ export class imba_silencer_global_silence_v2 extends BaseAbility_Plus {
             EmitSoundOn("Hero_Silencer.Penn", this.GetCasterPlus());
         }
         let hero_silence_particle = undefined;
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false))) {
             if (!enemy.IsCourier || !enemy.IsCourier()) {
                 if (enemy.IsHero()) {
                     hero_silence_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_silencer/silencer_global_silence_hero.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy);

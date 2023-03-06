@@ -20,7 +20,7 @@ export class imba_treant_natures_grasp extends BaseAbility_Plus {
             this.thinker_tracker = {}
         }
         this.GetCasterPlus().EmitSound("Hero_Treant.NaturesGrasp.Cast");
-        for (let thicket = 1; thicket <= math.floor((this.GetCastRange(cursor_position, this.GetCasterPlus()) - 100) / this.GetSpecialValueFor("vine_spawn_interval")); thicket += 1) {
+        for (let thicket = 1; thicket <= math.floor((this.GetCastRange(cursor_position, this.GetCasterPlus()) - 100) / this.GetSpecialValueFor("vine_spawn_interval")); thicket++) {
             this.GetCasterPlus().SetContextThink(DoUniqueString("grasp_thinker"),
                 () => {
                     thicket_thinker = CreateModifierThinker(this.GetCasterPlus(), this, "modifier_imba_treant_natures_grasp_creation_thinker", {
@@ -380,26 +380,26 @@ export class modifier_imba_treant_leech_seed extends BaseModifier_Plus {
         this.GetParentPlus().EmitSound("Hero_Treant.LeechSeed.Tick");
         this.enemy_heroes = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         if (GameFunc.GetCount(this.enemy_heroes) >= 1) {
-            this.damage_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_treant/treant_leech_seed_damage_pulse.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.enemy_heroes[1]);
+            this.damage_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_treant/treant_leech_seed_damage_pulse.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.enemy_heroes[0]);
             ParticleManager.ReleaseParticleIndex(this.damage_particle);
             this.damage_particle = undefined;
             ApplyDamage({
-                victim: this.enemy_heroes[1],
+                victim: this.enemy_heroes[0],
                 damage: this.leech_damage * this.damage_interval,
                 damage_type: this.damage_type,
                 damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                 attacker: this.GetCasterPlus(),
                 ability: this.GetAbilityPlus()
             });
-            this.enemy_heroes[1].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_treant_leech_seed_slow", {
-                duration: this.slow_duration * (1 - this.enemy_heroes[1].GetStatusResistance()),
+            this.enemy_heroes[0].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_treant_leech_seed_slow", {
+                duration: this.slow_duration * (1 - this.enemy_heroes[0].GetStatusResistance()),
                 movement_slow: this.movement_slow
             });
             ProjectileManager.CreateTrackingProjectile({
                 EffectName: "particles/units/heroes/hero_treant/treant_leech_seed_projectile.vpcf",
                 Ability: this.GetAbilityPlus(),
-                Source: this.enemy_heroes[1],
-                vSourceLoc: this.enemy_heroes[1].GetAbsOrigin(),
+                Source: this.enemy_heroes[0],
+                vSourceLoc: this.enemy_heroes[0].GetAbsOrigin(),
                 Target: this.GetCasterPlus(),
                 iMoveSpeed: this.projectile_speed,
                 flExpireTime: undefined,
@@ -419,26 +419,26 @@ export class modifier_imba_treant_leech_seed extends BaseModifier_Plus {
         } else {
             this.enemy_creeps = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             if (GameFunc.GetCount(this.enemy_creeps) >= 1) {
-                this.damage_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_treant/treant_leech_seed_damage_pulse.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.enemy_creeps[1]);
+                this.damage_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_treant/treant_leech_seed_damage_pulse.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.enemy_creeps[0]);
                 ParticleManager.ReleaseParticleIndex(this.damage_particle);
                 this.damage_particle = undefined;
                 ApplyDamage({
-                    victim: this.enemy_creeps[1],
+                    victim: this.enemy_creeps[0],
                     damage: this.leech_damage * this.damage_interval,
                     damage_type: this.damage_type,
                     damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
                     attacker: this.GetCasterPlus(),
                     ability: this.GetAbilityPlus()
                 });
-                this.enemy_creeps[1].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_treant_leech_seed_slow", {
-                    duration: this.slow_duration * (1 - this.enemy_creeps[1].GetStatusResistance()),
+                this.enemy_creeps[0].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_treant_leech_seed_slow", {
+                    duration: this.slow_duration * (1 - this.enemy_creeps[0].GetStatusResistance()),
                     movement_slow: this.movement_slow
                 });
                 ProjectileManager.CreateTrackingProjectile({
                     EffectName: "particles/units/heroes/hero_treant/treant_leech_seed_projectile.vpcf",
                     Ability: this.GetAbilityPlus(),
-                    Source: this.enemy_heroes[1],
-                    vSourceLoc: this.enemy_heroes[1].GetAbsOrigin(),
+                    Source: this.enemy_heroes[0],
+                    vSourceLoc: this.enemy_heroes[0].GetAbsOrigin(),
                     Target: this.GetCasterPlus(),
                     iMoveSpeed: this.projectile_speed,
                     flExpireTime: undefined,
@@ -517,7 +517,7 @@ export class modifier_imba_treant_leech_seed_enemy_target extends BaseModifier_P
             attacker: this.GetCasterPlus(),
             ability: this.GetAbilityPlus()
         });
-        for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.remnants_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.remnants_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             ProjectileManager.CreateTrackingProjectile({
                 EffectName: "particles/units/heroes/hero_treant/treant_leech_seed_projectile.vpcf",
                 Ability: this.GetAbilityPlus(),
@@ -545,7 +545,7 @@ export class imba_treant_living_armor extends BaseAbility_Plus {
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Treant.LivingArmor.Cast");
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_treant_living_armor_aoe")) {
-            for (const [_, ally] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetCasterPlus().GetTalentValue("special_bonus_imba_treant_living_armor_aoe"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, ally] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetCasterPlus().GetTalentValue("special_bonus_imba_treant_living_armor_aoe"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO, FindOrder.FIND_ANY_ORDER, false))) {
                 ally.EmitSound("Hero_Treant.LivingArmor.Target");
                 ally.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_treant_living_armor", {
                     duration: this.GetSpecialValueFor("duration")
@@ -560,8 +560,8 @@ export class imba_treant_living_armor extends BaseAbility_Plus {
             } else {
                 let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
                 if (GameFunc.GetCount(allies) >= 1) {
-                    allies[1].EmitSound("Hero_Treant.LivingArmor.Target");
-                    allies[1].AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_treant_living_armor", {
+                    allies[0].EmitSound("Hero_Treant.LivingArmor.Target");
+                    allies[0].AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_treant_living_armor", {
                         duration: this.GetSpecialValueFor("duration")
                     });
                 }
@@ -901,7 +901,7 @@ export class imba_treant_overgrowth extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(cast_particle);
         let overgrowth_primary_enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetTalentSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
         enemies_hit = enemies_hit + GameFunc.GetCount(overgrowth_primary_enemies);
-        for (const [_, enemy] of ipairs(overgrowth_primary_enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(overgrowth_primary_enemies)) {
             enemy.Stop();
             enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_treant_overgrowth", {
                 duration: this.GetSpecialValueFor("duration") * (1 - enemy.GetStatusResistance())
@@ -914,7 +914,7 @@ export class imba_treant_overgrowth extends BaseAbility_Plus {
                 if (ent.IsAlive() && ent.GetOwnerPlus() == this.GetCasterPlus()) {
                     overgrowth_eyes_enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), ent.GetAbsOrigin(), undefined, this.GetTalentSpecialValueFor("eyes_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
                     enemies_hit = enemies_hit + GameFunc.GetCount(overgrowth_eyes_enemies);
-                    for (const [_, enemy] of ipairs(overgrowth_eyes_enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(overgrowth_eyes_enemies)) {
                         if (!enemies_hit_table[enemy.entindex()]) {
                             enemy.Stop();
                             enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_treant_overgrowth", {

@@ -82,21 +82,21 @@ export class modifier_item_imba_bottle_texture_controller extends BaseModifier_P
             2: tostring(item.bottle_icon) + "_1",
             3: tostring(item.bottle_icon) + "_2",
             4: tostring(item.bottle_icon) + "_3",
-            5: "arcane",
-            6: "double_damage",
-            7: "haste",
-            8: "regeneration",
-            9: "illusion",
-            10: "invisibility",
-            11: "frost",
-            12: "bounty"
+            "5": "arcane",
+            "6": "double_damage",
+            "7": "haste",
+            "8": "regeneration",
+            "9": "illusion",
+            "10": "invisibility",
+            "11": "frost",
+            "12": "bounty"
         }
         if (IsServer()) {
             if (this.GetItemPlus().IsCooldownReady() && this.GetParentPlus().HasModifier("modifier_fountain_aura_effect_lua")) {
                 this.GetItemPlus().SetCurrentCharges(3);
             }
             let stack = this.GetItemPlus().GetCurrentCharges() + 1;
-            for (let i = 5; i <= 12; i += 1) {
+            for (let i = 5; i <= 12; i++) {
                 if (item.RuneStorage == rune_table[i + ""]) {
                     stack = i;
                     return;

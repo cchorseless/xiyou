@@ -96,7 +96,7 @@ export class modifier_imba_guardian_sprint_buff extends BaseModifier_Plus {
         if (IsServer()) {
             if (this.caster.HasTalent("special_bonus_imba_slardar_2")) {
                 let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     enemy.AddNewModifier(this.caster, this.ability, this.modifier_talent_slow, {
                         duration: 0.3 * (1 - enemy.GetStatusResistance())
                     });
@@ -296,7 +296,7 @@ export class modifier_imba_rip_current_movement extends BaseModifierMotionHorizo
         }
         EmitSoundOn(this.sound_land, this.caster);
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.IsMagicImmune()) {
                 let damageTable = {
                     victim: enemy,
@@ -953,7 +953,7 @@ export class imba_slardar_corrosive_haze extends BaseAbility_Plus {
         if (caster.HasTalent("special_bonus_imba_slardar_7")) {
             let radius = caster.GetTalentValue("special_bonus_imba_slardar_7", "radius");
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != target && !enemy.HasModifier(modifier_debuff)) {
                     enemy.AddNewModifier(caster, ability, modifier_secondary_debuff, {
                         duration: duration * (1 - enemy.GetStatusResistance())
@@ -1371,7 +1371,7 @@ export class modifier_imba_rain_cloud_dummy extends BaseModifierMotionHorizontal
                 velocity_pct = velocity_pct * caster.GetTalentValue("special_bonus_imba_slardar_10");
                 if (this.GetCasterPlus().HasAbility("imba_slardar_slithereen_crush") && this.GetCasterPlus().HasAbility("imba_slardar_corrosive_haze")) {
                     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), dummy.GetAbsOrigin(), undefined, ability.GetSpecialValueFor("aura_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         enemy.AddNewModifier(caster, caster.findAbliityPlus<imba_slardar_slithereen_crush>("imba_slardar_slithereen_crush"), "modifier_imba_slithereen_crush_slow", {
                             duration: 1 * (1 - enemy.GetStatusResistance())
                         });

@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus, BaseOrbAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -27,7 +28,7 @@ export class imba_ancient_apparition_cold_feet extends BaseAbility_Plus {
             }
         } else {
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetCasterPlus().GetTalentValue("special_bonus_imba_ancient_apparition_cold_feet_aoe"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.HasModifier("imba_ancient_apparition_cold_feet")) {
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_cold_feet", {});
                 }
@@ -425,7 +426,7 @@ export class imba_ancient_apparition_imbued_ice extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("buff_duration")
         });
         let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), position, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             if (ally != this.GetCasterPlus()) {
                 ally.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_ancient_apparition_imbued_ice", {
                     duration: this.GetSpecialValueFor("buff_duration")
@@ -888,7 +889,7 @@ export class imba_ancient_apparition_ice_blast_release extends BaseAbility_Plus 
             if (this.GetCasterPlus().HasScepter()) {
                 duration = this.ice_blast_ability.GetSpecialValueFor("frostbite_duration_scepter");
             }
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy.IsInvulnerable()) {
                     enemy.AddNewModifier(enemy, this.ice_blast_ability, "modifier_imba_ancient_apparition_ice_blast", {
                         duration: duration * (1 - enemy.GetStatusResistance()),
@@ -927,7 +928,7 @@ export class imba_ancient_apparition_ice_blast_release extends BaseAbility_Plus 
             if (this.GetCasterPlus().HasScepter()) {
                 duration = this.ice_blast_ability.GetSpecialValueFor("frostbite_duration_scepter");
             }
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy.IsInvulnerable()) {
                     enemy.AddNewModifier(enemy, this.ice_blast_ability, "modifier_imba_ancient_apparition_ice_blast", {
                         duration: duration * (1 - enemy.GetStatusResistance()),

@@ -59,7 +59,7 @@ export class modifier_imba_echo_sabre extends BaseModifier_Plus {
     CC_OnAttack(keys: ModifierAttackEvent): void {
         let item = this.GetItemPlus();
         let parent = this.GetParentPlus();
-        if (keys.attacker == parent && item && !parent.IsIllusion() && this.GetParentPlus().FindAllModifiersByName(this.GetName())[1] == this && !this.GetParentPlus().HasItemInInventory("item_imba_reverb_rapier")) {
+        if (keys.attacker == parent && item && !parent.IsIllusion() && this.GetParentPlus().FindAllModifiersByName(this.GetName())[0] == this && !this.GetParentPlus().HasItemInInventory("item_imba_reverb_rapier")) {
             if (!parent.IsRangedAttacker()) {
                 if (item.IsCooldownReady() && !keys.no_attack_cooldown) {
                     item.UseResources(false, false, true);
@@ -249,7 +249,7 @@ export class modifier_imba_reverb_rapier_passive extends BaseModifier_Plus {
     CC_OnAttack(keys: ModifierAttackEvent): void {
         let item = this.GetItemPlus();
         let parent = this.GetParentPlus();
-        if (keys.attacker == parent && item && !parent.IsIllusion() && this.GetParentPlus().FindAllModifiersByName(this.GetName())[1] == this) {
+        if (keys.attacker == parent && item && !parent.IsIllusion() && this.GetParentPlus().FindAllModifiersByName(this.GetName())[0] == this) {
             if (!parent.IsRangedAttacker()) {
                 if (item.IsCooldownReady() && !keys.no_attack_cooldown) {
                     item.UseResources(false, false, true);

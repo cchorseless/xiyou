@@ -64,7 +64,7 @@ export class modifier_item_imba_diffusal extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
     CC_GetModifierProcAttack_BonusDamage_Physical(keys: ModifierAttackEvent): number {
-        if (this.GetItemPlus() && keys.attacker == this.GetParentPlus() && keys.attacker.FindAllModifiersByName(this.GetName())[1] == this && !keys.attacker.HasModifier("modifier_item_imba_diffusal_2") && !keys.attacker.HasModifier("modifier_item_imba_witchblade") && keys.attacker.GetTeamNumber() != keys.target.GetTeamNumber() && (keys.target.GetMaxMana && keys.target.GetMaxMana() > 0) && !keys.target.IsMagicImmune()) {
+        if (this.GetItemPlus() && keys.attacker == this.GetParentPlus() && keys.attacker.FindAllModifiersByName(this.GetName())[0] == this && !keys.attacker.HasModifier("modifier_item_imba_diffusal_2") && !keys.attacker.HasModifier("modifier_item_imba_witchblade") && keys.attacker.GetTeamNumber() != keys.target.GetTeamNumber() && (keys.target.GetMaxMana && keys.target.GetMaxMana() > 0) && !keys.target.IsMagicImmune()) {
             let particle_manaburn_fx = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_manaburn.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.target);
             ParticleManager.ReleaseParticleIndex(particle_manaburn_fx);
             let mana_burn = undefined;
@@ -216,7 +216,7 @@ export class modifier_item_imba_diffusal_2 extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PHYSICAL)
     CC_GetModifierProcAttack_BonusDamage_Physical(keys: ModifierAttackEvent): number {
-        if (this.GetItemPlus() && keys.attacker == this.GetParentPlus() && keys.attacker.FindAllModifiersByName(this.GetName())[1] == this && !keys.attacker.HasModifier("modifier_item_imba_witchblade") && keys.attacker.GetTeamNumber() != keys.target.GetTeamNumber() && (keys.target.GetMaxMana && keys.target.GetMaxMana() > 0) && !keys.target.IsMagicImmune()) {
+        if (this.GetItemPlus() && keys.attacker == this.GetParentPlus() && keys.attacker.FindAllModifiersByName(this.GetName())[0] == this && !keys.attacker.HasModifier("modifier_item_imba_witchblade") && keys.attacker.GetTeamNumber() != keys.target.GetTeamNumber() && (keys.target.GetMaxMana && keys.target.GetMaxMana() > 0) && !keys.target.IsMagicImmune()) {
             let particle_manaburn_fx = ResHelper.CreateParticleEx("particles/generic_gameplay/generic_manaburn.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, keys.target);
             ParticleManager.ReleaseParticleIndex(particle_manaburn_fx);
             let mana_burn = undefined;
@@ -236,7 +236,7 @@ export class modifier_item_imba_diffusal_2 extends BaseModifier_Plus {
             keys.target.ReduceMana(mana_burn);
             if (GFuncRandom.PRD(this.GetItemPlus().GetSpecialValueFor("dispel_chance_pct"), this)) {
                 let purgable_buffs = [] as IBaseModifier_Plus[]
-                for (const [_, modifier] of ipairs(keys.target.FindAllModifiers() as IBaseModifier_Plus[])) {
+                for (const [_, modifier] of GameFunc.iPair(keys.target.FindAllModifiers() as IBaseModifier_Plus[])) {
                     if (modifier.IsDebuff && modifier.IsPurgable) {
                         if (!modifier.IsDebuff() && modifier.IsPurgable()) {
                             table.insert(purgable_buffs, modifier);

@@ -26,7 +26,7 @@ export class imba_storm_spirit_static_remnant extends BaseAbility_Plus {
             ]
 
             if (remnant_count > 1) {
-                for (let i = 1; i <= remnant_count; i += 1) {
+                for (let i = 0; i < remnant_count; i++) {
                     let dummy = BaseNpc_Plus.CreateUnitByName("npc_imba_dota_stormspirit_remnant", caster.GetAbsOrigin() + remnant_pos[i] as Vector, caster.GetTeamNumber(), false, caster, undefined);
                     dummy.AddNewModifier(caster, this, "modifier_imba_static_remnant", {
                         duration: remnant_duration
@@ -112,7 +112,7 @@ export class modifier_imba_static_remnant extends BaseModifier_Plus {
             let lingering_sound = "Hero_StormSpirit.ElectricVortex";
             let cast_sound = "Hero_StormSpirit.ElectricVortexCast";
             let electric_sound = false;
-            for (const [_, enemy] of ipairs(nearby_enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {
                 let damageTable = {
                     victim: enemy,
                     damage: damage,
@@ -198,7 +198,7 @@ export class imba_storm_spirit_electric_vortex extends BaseAbility_Plus {
                 });
             } else {
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_loc, undefined, this.GetCastRange(null, null), this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     let direction = (caster.GetAbsOrigin() - enemy.GetAbsOrigin() as Vector).Normalized();
                     enemy.AddNewModifier(caster, this, "modifier_imba_vortex_pull", {
                         duration: pull_duration * (1 - enemy.GetStatusResistance()),
@@ -533,7 +533,7 @@ export class modifier_imba_overload_buff extends BaseModifier_Plus {
                     ParticleManager.ReleaseParticleIndex(particle_fx);
                     keys.target.EmitSound("Hero_StormSpirit.Overload");
                     let enemies = FindUnitsInRadius(parent.GetTeamNumber(), keys.target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, target_flag, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         let damageTable = {
                             victim: enemy,
                             damage: damage,
@@ -698,29 +698,29 @@ export class imba_storm_spirit_ball_lightning extends BaseAbility_Plus {
             }
         } else {
             let responses = {
-                1: "stormspirit_ss_ability_lightning_04",
-                2: "stormspirit_ss_ability_lightning_05",
-                3: "stormspirit_ss_ability_lightning_06",
-                4: "stormspirit_ss_ability_lightning_07",
-                5: "stormspirit_ss_ability_lightning_08",
-                6: "stormspirit_ss_ability_lightning_09",
-                7: "stormspirit_ss_ability_lightning_10",
-                8: "stormspirit_ss_ability_lightning_13",
-                9: "stormspirit_ss_ability_lightning_14",
-                10: "stormspirit_ss_ability_lightning_18",
-                11: "stormspirit_ss_ability_lightning_20",
-                12: "stormspirit_ss_ability_lightning_21",
-                13: "stormspirit_ss_ability_lightning_22",
-                14: "stormspirit_ss_ability_lightning_23",
-                15: "stormspirit_ss_ability_lightning_24",
-                16: "stormspirit_ss_ability_lightning_25",
-                17: "stormspirit_ss_ability_lightning_26",
-                18: "stormspirit_ss_ability_lightning_27",
-                19: "stormspirit_ss_ability_lightning_28",
-                20: "stormspirit_ss_ability_lightning_29",
-                21: "stormspirit_ss_ability_lightning_30",
-                22: "stormspirit_ss_ability_lightning_31",
-                23: "stormspirit_ss_ability_lightning_32"
+                "1": "stormspirit_ss_ability_lightning_04",
+                "2": "stormspirit_ss_ability_lightning_05",
+                "3": "stormspirit_ss_ability_lightning_06",
+                "4": "stormspirit_ss_ability_lightning_07",
+                "5": "stormspirit_ss_ability_lightning_08",
+                "6": "stormspirit_ss_ability_lightning_09",
+                "7": "stormspirit_ss_ability_lightning_10",
+                "8": "stormspirit_ss_ability_lightning_13",
+                "9": "stormspirit_ss_ability_lightning_14",
+                "10": "stormspirit_ss_ability_lightning_18",
+                "11": "stormspirit_ss_ability_lightning_20",
+                "12": "stormspirit_ss_ability_lightning_21",
+                "13": "stormspirit_ss_ability_lightning_22",
+                "14": "stormspirit_ss_ability_lightning_23",
+                "15": "stormspirit_ss_ability_lightning_24",
+                "16": "stormspirit_ss_ability_lightning_25",
+                "17": "stormspirit_ss_ability_lightning_26",
+                "18": "stormspirit_ss_ability_lightning_27",
+                "19": "stormspirit_ss_ability_lightning_28",
+                "20": "stormspirit_ss_ability_lightning_29",
+                "21": "stormspirit_ss_ability_lightning_30",
+                "22": "stormspirit_ss_ability_lightning_31",
+                "23": "stormspirit_ss_ability_lightning_32"
             }
             // if (caster.GetName() == "npc_dota_hero_storm_spirit") {
             // }
@@ -757,8 +757,8 @@ export class imba_storm_spirit_ball_lightning extends BaseAbility_Plus {
                 ApplyDamage(damageTable);
                 if (!target.IsAlive()) {
                     let responses = {
-                        1: "stormspirit_ss_ability_lightning_01",
-                        2: "stormspirit_ss_ability_lightning_03"
+                        "1": "stormspirit_ss_ability_lightning_01",
+                        "2": "stormspirit_ss_ability_lightning_03"
                     }
                     if (RollPercentage(10)) {
                         caster.EmitCasterSound(Object.values(responses), 100, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS, undefined, undefined);

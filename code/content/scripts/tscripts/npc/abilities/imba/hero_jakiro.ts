@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -146,7 +147,7 @@ export class base_modifier_dual_breath_caster extends BaseModifierMotionHorizont
         let affected_unit_list = this.affected_unit_list;
         let debuff_duration = this.debuff_duration;
         let modifier_debuff_name = this.modifier_debuff_name;
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!affected_unit_list.includes(enemy)) {
                 affected_unit_list.push(enemy);
                 enemy.AddNewModifier(caster, ability, modifier_debuff_name, {
@@ -726,7 +727,7 @@ export class modifier_imba_ice_path_thinker extends BaseModifier_Plus {
                 ParticleManager.SetParticleControl(pfx_ice_path_explode, 1, end_pos);
                 ParticleManager.ReleaseParticleIndex(pfx_ice_path_explode);
                 let current_point = start_pos as Vector;
-                for (let i = 1; i <= viewpoint_amount; i += 1) {
+                for (let i = 0; i < viewpoint_amount; i++) {
                     AddFOWViewer(caster.GetTeamNumber(), current_point, viewpoint_view, path_duration, false);
                     current_point = current_point + direction_vector * viewpoint_distance as Vector;
                 }
@@ -1052,7 +1053,7 @@ export class modifier_imba_liquid_fire_caster extends BaseModifier_Plus {
                 ParticleManager.SetParticleControl(fire_pfx, 1, Vector(radius * 2, 0, 0));
                 ParticleManager.ReleaseParticleIndex(fire_pfx);
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, ability.GetAbilityTargetTeam(), ability.GetAbilityTargetType(), DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     enemy.AddNewModifier(caster, ability, modifier_liquid_fire_debuff, {
                         duration: duration * (1 - enemy.GetStatusResistance())
                     });
@@ -1186,7 +1187,7 @@ export class modifier_imba_macropyre_thinker extends BaseModifier_Plus {
             this.GetParentPlus().EmitSound(sound_fire_loop);
             let common_vector = start_pos + direction * path_length as Vector;
             this.thinker_pos_list = [];
-            for (let trail = trail_start; trail <= trail_end; trail += 1) {
+            for (let trail = trail_start; trail <= trail_end; trail++) {
                 let macropyre_pfx = ResHelper.CreateParticleEx(particle_name, ParticleAttachment_t.PATTACH_WORLDORIGIN, caster);
                 let end_pos = RotatePosition(start_pos, QAngle(0, trail * trail_angle, 0), common_vector);
                 ParticleManager.SetParticleAlwaysSimulate(macropyre_pfx);
@@ -1195,7 +1196,7 @@ export class modifier_imba_macropyre_thinker extends BaseModifier_Plus {
                 ParticleManager.SetParticleControl(macropyre_pfx, 2, Vector(path_duration, 0, 0));
                 ParticleManager.SetParticleControl(macropyre_pfx, 3, start_pos);
                 this.AddParticle(macropyre_pfx, false, false, -1, false, false);
-                for (let i = 0; i <= math.floor(path_length / path_radius); i += 1) {
+                for (let i = 0; i <= math.floor(path_length / path_radius); i++) {
                     let thinker_pos = start_pos + i * path_radius * (end_pos - start_pos as Vector).Normalized();
                     table.insert(this.thinker_pos_list, thinker_pos);
                 }
@@ -1224,11 +1225,11 @@ export class modifier_imba_macropyre_thinker extends BaseModifier_Plus {
                     ability_target_flags = ability_target_flags + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES;
                 }
                 let modifier_list = {
-                    1: "modifier_imba_liquid_fire_debuff",
-                    2: "modifier_imba_fire_breath_debuff",
-                    3: "modifier_imba_ice_breath_debuff"
+                    "1": "modifier_imba_liquid_fire_debuff",
+                    "2": "modifier_imba_fire_breath_debuff",
+                    "3": "modifier_imba_ice_breath_debuff"
                 }
-                for (const [_, thinker_pos] of ipairs(thinker_pos_list)) {
+                for (const [_, thinker_pos] of GameFunc.iPair(thinker_pos_list)) {
                     GridNav.DestroyTreesAroundPoint(thinker_pos, path_radius, false);
                     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), thinker_pos, undefined, path_radius, ability_target_team, ability_target_type, ability_target_flags, FindOrder.FIND_ANY_ORDER, false);
                     for (const enemy of (enemies)) {
@@ -1242,7 +1243,7 @@ export class modifier_imba_macropyre_thinker extends BaseModifier_Plus {
                     enemy.AddNewModifier(caster, ability, "modifier_imba_macropyre_debuff", {
                         duration: debuff_duration
                     });
-                    for (const [_, modifier_name] of ipairs(modifier_list)) {
+                    for (const [_, modifier_name] of GameFunc.Pair(modifier_list)) {
                         let other_modifier = enemy.FindModifierByNameAndCaster(modifier_name, caster);
                         if (other_modifier) {
                             other_modifier.SetDuration(other_modifier.GetRemainingTime() + 0.25, true);

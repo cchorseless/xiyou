@@ -36,7 +36,7 @@ export class modifier_imba_polarize_debuff extends BaseModifier_Plus {
         if (IsServer()) {
             if (this.caster.HasTalent("special_bonus_imba_magnataur_7")) {
                 let enemies = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (enemy != this.parent) {
                         let direction = (enemy.GetAbsOrigin() - this.parent.GetAbsOrigin() as Vector).Normalized();
                         let new_point = this.parent.GetAbsOrigin() + direction * this.parent.GetIdealSpeed() * this.caster.GetTalentValue("special_bonus_imba_magnataur_7", "pull_strength") * 0.01 as Vector;
@@ -78,7 +78,7 @@ export class modifier_imba_polarize_debuff_stack extends BaseModifier_Plus {
                 modifier.IncrementStackCount();
                 let max_duration = params.duration;
                 let modifier_counter = parent.FindAllModifiersByName("modifier_imba_polarize_debuff_stack");
-                for (const [_, modi] of ipairs(modifier_counter)) {
+                for (const [_, modi] of GameFunc.iPair(modifier_counter)) {
                     let current_duration = modi.GetDuration();
                     if (current_duration > max_duration) {
                         max_duration = current_duration;
@@ -175,7 +175,7 @@ export class modifier_imba_magnetize_debuff_stack extends BaseModifier_Plus {
                 let modifier = parent.findBuff<modifier_imba_magnetize_debuff>("modifier_imba_magnetize_debuff");
                 modifier.IncrementStackCount();
                 let modifier_counter = parent.FindAllModifiersByName("modifier_imba_magnetize_debuff_stack");
-                for (const [_, modi] of ipairs(modifier_counter)) {
+                for (const [_, modi] of GameFunc.iPair(modifier_counter)) {
                     let current_duration = modi.GetDuration();
                     if (current_duration < duration) {
                         duration = current_duration;
@@ -196,7 +196,7 @@ export class modifier_imba_magnetize_debuff_stack extends BaseModifier_Plus {
             this.max_duration = this.GetSpecialValueFor("magnetize_duration");
             let parent = this.GetParentPlus();
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), parent.GetAbsOrigin(), undefined, this.distance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let direction: Vector;
                 if (enemy == parent && GameFunc.GetCount(enemies) > 1) {
                 } else {
@@ -406,7 +406,7 @@ export class imba_magnataur_shockwave extends BaseAbility_Plus {
                     start_angle = ExtraData.spread_angle * (-1);
                     interval_angle = (ExtraData.spread_angle * 2 / ExtraData.secondary_amount);
                 }
-                for (let i = 1; i <= ExtraData.secondary_amount; i += 1) {
+                for (let i = 0; i < ExtraData.secondary_amount; i++) {
                     let angle = start_angle + i * interval_angle + 45;
                     let new_direction = GFuncVector.RotateVector2D(direction, angle, true);
                     let velocity = new_direction * ExtraData.speed as Vector;
@@ -494,7 +494,7 @@ export class imba_magnataur_shockwave extends BaseAbility_Plus {
                     }
                 } else {
                     let was_hit = false;
-                    for (const [_, hit_target] of ipairs(this.tempdata[ExtraData.index])) {
+                    for (const [_, hit_target] of GameFunc.iPair(this.tempdata[ExtraData.index])) {
                         if (hit_target == target) {
                             was_hit = true;
                         }
@@ -566,7 +566,7 @@ export class imba_magnataur_shockwave extends BaseAbility_Plus {
                                 start_angle = ExtraData.spread_angle * (-1);
                                 interval_angle = (ExtraData.spread_angle * 2 / ExtraData.secondary_amount);
                             }
-                            for (let i = 1; i <= ExtraData.secondary_amount; i += 1) {
+                            for (let i = 0; i < ExtraData.secondary_amount; i++) {
                                 let angle = start_angle + i * interval_angle + 45;
                                 let new_direction = GFuncVector.RotateVector2D(direction, angle, true);
                                 let velocity = new_direction * ExtraData.speed as Vector;
@@ -713,10 +713,10 @@ export class imba_magnataur_empower extends BaseAbility_Plus {
                 duration: empower_duration
             });
             if (!caster.EmitCasterSound(Object.values({
-                1: "magnataur_magn_empower_01",
-                2: "magnataur_magn_empower_03",
-                3: "magnataur_magn_empower_04",
-                4: "magnataur_magn_empower_05"
+                "1": "magnataur_magn_empower_01",
+                "2": "magnataur_magn_empower_03",
+                "3": "magnataur_magn_empower_04",
+                "4": "magnataur_magn_empower_05"
             }), 25, ResHelper.EDOTA_CAST_SOUND.FLAG_NONE, 10, "empower")) {
                 caster.EmitCasterSound(["magnataur_magn_empower_02"], 15, ResHelper.EDOTA_CAST_SOUND.FLAG_NONE, 10, "empower");
             }
@@ -841,7 +841,7 @@ export class modifier_imba_empower extends BaseModifier_Plus {
                         splash_radius = this.super_splash_radius;
                     }
                     let enemies = FindUnitsInRadius(params.attacker.GetTeamNumber(), params.target.GetAbsOrigin(), undefined, splash_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         if (enemy != params.target && !enemy.IsAttackImmune()) {
                             ApplyDamage({
                                 attacker: params.attacker,
@@ -875,7 +875,7 @@ export class modifier_imba_empower extends BaseModifier_Plus {
                                 cleave_splash_particle = "particles/hero/magnataur/magnataur_empower_cleave_splash_red_effect_plus.vpcf";
                             }
                             let enemies = FindUnitsInRadius(params.attacker.GetTeamNumber(), params.target.GetAbsOrigin(), undefined, cleave_distance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_ANY_ORDER, false);
-                            for (const [_, enemy] of ipairs(enemies)) {
+                            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                                 if (enemy != params.target) {
                                     ApplyDamage({
                                         attacker: params.attacker,
@@ -1059,7 +1059,7 @@ export class modifier_imba_empower_polarizer extends BaseModifier_Plus {
             this.search_radius = this.ability.GetSpecialValueFor("search_radius");
             let empower_search = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             let refresh_interval = this.ability.GetSpecialValueFor("refresh_interval");
-            for (const [_, enemy] of ipairs(empower_search)) {
+            for (const [_, enemy] of GameFunc.iPair(empower_search)) {
                 let polarize_debuff = enemy.findBuff<modifier_imba_polarize_debuff>("modifier_imba_polarize_debuff");
                 if ((!(polarize_debuff && polarize_debuff.GetDuration() > this.ability.GetSpecialValueFor("polarize_duration")))) {
                     enemy.AddNewModifier(this.caster, undefined, "modifier_imba_polarize_debuff", {
@@ -1078,7 +1078,7 @@ export class modifier_imba_empower_polarizer extends BaseModifier_Plus {
             }
             let empower_search = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             let refresh_interval = this.ability.GetSpecialValueFor("refresh_interval");
-            for (const [_, enemy] of ipairs(empower_search)) {
+            for (const [_, enemy] of GameFunc.iPair(empower_search)) {
                 let polarize_debuff = enemy.findBuff<modifier_imba_polarize_debuff>("modifier_imba_polarize_debuff");
                 if ((!(polarize_debuff && polarize_debuff.GetDuration() > this.ability.GetSpecialValueFor("polarize_duration")))) {
                     enemy.AddNewModifier(this.caster, undefined, "modifier_imba_polarize_debuff", {
@@ -1349,17 +1349,17 @@ export class imba_magnataur_skewer extends BaseAbility_Plus {
             }
             caster.EmitSound("Hero_Magnataur.Skewer.Cast");
             if (!caster.EmitCasterSound(Object.values({
-                1: "magnataur_magn_skewer_01",
-                2: "magnataur_magn_skewer_02",
-                3: "magnataur_magn_skewer_03",
-                4: "magnataur_magn_skewer_07",
-                5: "magnataur_magn_skewer_09",
-                6: "magnataur_magn_skewer_12",
-                7: "magnataur_magn_skewer_13",
-                8: "magnataur_magn_skewer_14"
+                "1": "magnataur_magn_skewer_01",
+                "2": "magnataur_magn_skewer_02",
+                "3": "magnataur_magn_skewer_03",
+                "4": "magnataur_magn_skewer_07",
+                "5": "magnataur_magn_skewer_09",
+                "6": "magnataur_magn_skewer_12",
+                "7": "magnataur_magn_skewer_13",
+                "8": "magnataur_magn_skewer_14"
             }), 25, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS, 3, "Skewer")) {
                 caster.EmitCasterSound(Object.values({
-                    1: "magnataur_magn_lasthit_09"
+                    "1": "magnataur_magn_lasthit_09"
                 }), 20, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS, 3, "Skewer");
             }
             caster.AddNewModifier(caster, this, "modifier_imba_skewer_motion_controller", {
@@ -1511,7 +1511,7 @@ export class modifier_imba_skewer_motion_controller extends BaseModifierMotionHo
             let ability = this.GetAbilityPlus<imba_magnataur_skewer>();
             GridNav.DestroyTreesAroundPoint(caster_loc, this.tree_radius, false);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_loc, undefined, this.skewer_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, 0, 0, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.HasModifier("modifier_imba_skewer_motion_controller_target")) {
                     let set_point = caster.GetAbsOrigin() + this.direction * this.horned_distance as Vector;
                     enemy.SetAbsOrigin(Vector(set_point.x, set_point.y, GetGroundPosition(set_point, enemy).z));
@@ -1538,12 +1538,12 @@ export class modifier_imba_skewer_motion_controller extends BaseModifierMotionHo
                     caster.StartGesture(GameActivity_t.ACT_DOTA_MAGNUS_SKEWER_END);
                 }
                 let responses = {
-                    1: "magnataur_magn_skewer_04",
-                    2: "magnataur_magn_skewer_05",
-                    3: "magnataur_magn_skewer_06",
-                    4: "magnataur_magn_skewer_08",
-                    5: "magnataur_magn_skewer_10",
-                    6: "magnataur_magn_skewer_11"
+                    "1": "magnataur_magn_skewer_04",
+                    "2": "magnataur_magn_skewer_05",
+                    "3": "magnataur_magn_skewer_06",
+                    "4": "magnataur_magn_skewer_08",
+                    "5": "magnataur_magn_skewer_10",
+                    "6": "magnataur_magn_skewer_11"
                 }
                 caster.EmitCasterSound(Object.values(responses), 25, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS, 2, "Skewer");
                 this.EndSkewer();
@@ -1569,7 +1569,7 @@ export class modifier_imba_skewer_motion_controller extends BaseModifierMotionHo
                     }
                 }
             }
-            for (const [_, enemy] of ipairs(piked_enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(piked_enemies)) {
                 let damage = this.damage;
                 if (ability.begged_for_pardon) {
                     damage = damage + this.pardon_extra_dmg;
@@ -1826,20 +1826,20 @@ export class imba_magnataur_reverse_polarity extends BaseAbility_Plus {
             let final_loc = caster_loc + (direction * pull_offset) as Vector;
             caster.EmitSound("Hero_Magnataur.ReversePolarity.Cast");
             let responses = {
-                1: "magnataur_magn_polarity_01",
-                2: "magnataur_magn_polarity_02",
-                3: "magnataur_magn_polarity_03",
-                4: "magnataur_magn_polarity_04",
-                5: "magnataur_magn_polarity_05",
-                6: "magnataur_magn_polarity_06",
-                7: "magnataur_magn_polarity_07",
-                8: "magnataur_magn_polarity_08",
-                9: "magnataur_magn_polarity_09",
-                10: "magnataur_magn_polarity_10"
+                "1": "magnataur_magn_polarity_01",
+                "2": "magnataur_magn_polarity_02",
+                "3": "magnataur_magn_polarity_03",
+                "4": "magnataur_magn_polarity_04",
+                "5": "magnataur_magn_polarity_05",
+                "6": "magnataur_magn_polarity_06",
+                "7": "magnataur_magn_polarity_07",
+                "8": "magnataur_magn_polarity_08",
+                "9": "magnataur_magn_polarity_09",
+                "10": "magnataur_magn_polarity_10"
             }
             caster.EmitCasterSound(Object.values(responses), 25, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS);
             let creeps = FindUnitsInRadius(caster.GetTeam(), caster_loc, undefined, radius, this.GetAbilityTargetTeam(), DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, creep] of ipairs(creeps)) {
+            for (const [_, creep] of GameFunc.iPair(creeps)) {
                 creep.SetAbsOrigin(final_loc);
                 FindClearSpaceForUnit(creep, final_loc, true);
                 creep.AddNewModifier(caster, this, "modifier_stunned", {
@@ -1855,7 +1855,7 @@ export class imba_magnataur_reverse_polarity extends BaseAbility_Plus {
                 creep.EmitSound("Hero_Magnataur.ReversePolarity.Stun");
             }
             let enemies = FindUnitsInRadius(caster.GetTeam(), caster_loc, undefined, FIND_UNITS_EVERYWHERE, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let particle_loc = final_loc as Vector;
                 let enemy_pos = enemy.GetAbsOrigin();
                 let current_distance = (caster_loc - enemy_pos as Vector).Length2D();

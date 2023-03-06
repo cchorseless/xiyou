@@ -365,7 +365,7 @@ export class modifier_imba_life_stealer_feast_banquet extends BaseModifier_Plus 
         let engorge_counter_modifier = this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_life_stealer_feast_engorge_counter", this.GetCasterPlus());
         if (engorge_counter_modifier) {
             this.SetStackCount(engorge_counter_modifier.GetStackCount());
-            for (const [_, engorge_modifier] of ipairs(this.GetCasterPlus().FindAllModifiersByName("modifier_imba_life_stealer_feast_engorge"))) {
+            for (const [_, engorge_modifier] of GameFunc.iPair(this.GetCasterPlus().FindAllModifiersByName("modifier_imba_life_stealer_feast_engorge"))) {
                 engorge_modifier.Destroy();
             }
             engorge_counter_modifier.Destroy();
@@ -498,7 +498,7 @@ export class modifier_imba_life_stealer_open_wounds extends BaseModifier_Plus {
         let impact_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_life_stealer/life_stealer_open_wounds.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target, this.GetCasterPlus());
         ParticleManager.ReleaseParticleIndex(impact_particle);
         this.slow_steps = []
-        for (let step = 0; step <= this.GetSpecialValueFor("duration") - 1; step += 1) {
+        for (let step = 0; step <= this.GetSpecialValueFor("duration") - 1; step++) {
             table.insert(this.slow_steps, this.GetAbilityPlus().GetLevelSpecialValueFor("slow_steps", step));
         }
         this.SetStackCount(this.slow_steps[math.floor(this.GetElapsedTime()) + 1]);
@@ -758,7 +758,7 @@ export class modifier_imba_life_stealer_infest extends BaseModifier_Plus {
             ParticleManager.ReleaseParticleIndex(infest_particle);
             this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_LIFESTEALER_INFEST_END);
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.target_ent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damageTable = {
                     victim: enemy,
                     damage: this.damage,
@@ -1061,7 +1061,7 @@ export class imba_life_stealer_control extends BaseAbility_Plus {
             }
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_life_stealer_control", {});
             // PlayerResource.NewSelection(this.GetCasterPlus().GetPlayerID(), target);
-            for (let slot = 0; slot <= 2; slot += 1) {
+            for (let slot = 0; slot <= 2; slot++) {
                 if (!target.GetAbilityByIndex(slot)) {
                     let empty_ability = target.AddAbility("life_stealer_empty_" + (slot + 1));
                     empty_ability.SetHidden(false);
@@ -1190,8 +1190,8 @@ export class imba_life_stealer_consume extends BaseAbility_Plus {
                     if (caster.GetName() == "npc_dota_hero_life_stealer") {
                         if (RollPercentage(5)) {
                             let rare_responses = {
-                                1: "life_stealer_lifest_ability_infest_burst_06",
-                                2: "life_stealer_lifest_ability_infest_burst_08"
+                                "1": "life_stealer_lifest_ability_infest_burst_06",
+                                "2": "life_stealer_lifest_ability_infest_burst_08"
                             }
                             caster.EmitSound(GFuncRandom.RandomValue(rare_responses));
                         } else if (RollPercentage(15)) {
@@ -1247,7 +1247,7 @@ export class imba_life_stealer_assimilate extends BaseAbility_Plus {
         } else {
             this.consume_radius = this.GetSpecialValueFor("consume_radius");
         }
-        for (const [_, target] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorTarget().GetAbsOrigin(), undefined, this.consume_radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, target] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorTarget().GetAbsOrigin(), undefined, this.consume_radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false))) {
             if (target != this.GetCasterPlus() && !PlayerResource.IsDisableHelpSetForPlayerID(target.GetPlayerOwnerID(), this.GetCasterPlus().GetPlayerOwnerID())) {
                 let infest_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_life_stealer/life_stealer_infest_cast.vpcf", ParticleAttachment_t.PATTACH_POINT, this.GetCasterPlus());
                 ParticleManager.SetParticleControl(infest_particle, 0, target.GetAbsOrigin());
@@ -1352,7 +1352,7 @@ export class modifier_imba_life_stealer_assimilate extends BaseModifier_Plus {
         ParticleManager.ReleaseParticleIndex(assimilate_particle);
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_LIFESTEALER_EJECT);
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let damageTable = {
                 victim: enemy,
                 damage: this.damage,
@@ -1504,7 +1504,7 @@ export class imba_life_stealer_assimilate_eject extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let assimilate_effect_modifiers = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_life_stealer_assimilate_effect") as modifier_imba_life_stealer_assimilate_effect[];
-        for (const [_, modifier] of ipairs(assimilate_effect_modifiers)) {
+        for (const [_, modifier] of GameFunc.iPair(assimilate_effect_modifiers)) {
             let assimilate_modifier = modifier.assimilate_modifier;
             if (assimilate_modifier && assimilate_modifier.Destroy) {
                 assimilate_modifier.Destroy();

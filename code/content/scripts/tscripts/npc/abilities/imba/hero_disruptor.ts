@@ -10,7 +10,7 @@ function IncrementStormbearerStacks(caster: IBaseNpc_Plus, stacks: number = 1) {
     if (caster.HasModifier(modifier_stormbearer) && !caster.PassivesDisabled()) {
         let modifier_stormbearer_handler = caster.FindModifierByName(modifier_stormbearer);
         if (modifier_stormbearer_handler) {
-            for (let i = 1; i <= stacks; i += 1) {
+            for (let i = 0; i < stacks; i++) {
                 modifier_stormbearer_handler.IncrementStackCount();
             }
         }
@@ -194,7 +194,7 @@ export class modifier_imba_thunder_strike_debuff extends BaseModifier_Plus {
             this.strikes_remaining = (enemies).length;
             if (this.caster.HasTalent("special_bonus_imba_disruptor_7")) {
                 let enemies_in_static_storm = 0;
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (enemy.HasModifier("modifier_imba_static_storm_debuff")) {
                         enemies_in_static_storm = enemies_in_static_storm + 1;
                     }
@@ -218,12 +218,12 @@ export class modifier_imba_thunder_strike_debuff extends BaseModifier_Plus {
         target.EmitSound("Item.Maelstrom.Chain_Lightning.Jump");
         this.ZapThem(caster, ability, target, target, damage);
         while (GameFunc.GetCount(search_sources) > 0) {
-            for (const [potential_source_index, potential_source] of ipairs(search_sources)) {
+            for (const [potential_source_index, potential_source] of GameFunc.iPair(search_sources)) {
                 let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), potential_source.GetAbsOrigin(), undefined, bounce_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
                 let source_removed = false;
-                for (const [_, potential_target] of ipairs(nearby_enemies)) {
+                for (const [_, potential_target] of GameFunc.iPair(nearby_enemies)) {
                     let already_hit = false;
-                    for (const [_, hit_target] of ipairs(targets_hit)) {
+                    for (const [_, hit_target] of GameFunc.iPair(targets_hit)) {
                         if (potential_target == hit_target) {
                             already_hit = true;
                             return;
@@ -285,7 +285,7 @@ export class modifier_imba_thunder_strike_debuff extends BaseModifier_Plus {
         this.aoe_particle_fx = ParticleManager.CreateParticle(aoe_particle, ParticleAttachment_t.PATTACH_ABSORIGIN, this.target);
         ParticleManager.SetParticleControl(this.aoe_particle_fx, 0, this.target.GetAbsOrigin());
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.target.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.IsMagicImmune() && !enemy.IsInvulnerable()) {
                 let damageTable: ApplyDamageOptions = {
                     victim: enemy,
@@ -574,7 +574,7 @@ export class modifier_imba_glimpse extends BaseModifier_Plus {
             this.interval = 0.1;
             this.possible_positions = this.backtrack_time / 0.1;
             this.vPositions = [];
-            for (let i = 1; i <= this.possible_positions; i += 1) {
+            for (let i = 0; i < this.possible_positions; i++) {
                 table.insert(this.vPositions, this.GetParentPlus().GetOrigin());
             }
             this.flExpireTime = -1;
@@ -590,14 +590,14 @@ export class modifier_imba_glimpse extends BaseModifier_Plus {
                 this.flExpireTime = -1;
                 this.hThinker = undefined;
             }
-            for (let i = 1; i <= GameFunc.GetCount(this.vPositions) - 1; i += 1) {
+            for (let i = 0; i < GameFunc.GetCount(this.vPositions); i++) {
                 this.vPositions[i] = this.vPositions[i + 1];
             }
             this.vPositions[GameFunc.GetCount(this.vPositions)] = this.GetParentPlus().GetOrigin();
         }
     }
     GetOldestPosition() {
-        return this.vPositions[1];
+        return this.vPositions[0];
     }
     SetExpireTime(flTime: number) {
         if (IsServer()) {
@@ -857,7 +857,7 @@ export class modifier_imba_kinetic_field extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         let enemies_in_field = FindUnitsInRadius(this.caster.GetTeamNumber(), this.target_point, undefined, this.field_radius + 200, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies_in_field)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies_in_field)) {
             enemy.AddNewModifier(this.caster, this.ability, "modifier_imba_kinetic_field_check_position", {
                 duration: this.GetRemainingTime(),
                 target_point_x: this.target_point.x,
@@ -867,7 +867,7 @@ export class modifier_imba_kinetic_field extends BaseModifier_Plus {
         }
         if (this.caster.HasTalent("special_bonus_imba_disruptor_5")) {
             let enemies_inside_field = FindUnitsInRadius(this.caster.GetTeamNumber(), this.target_point, undefined, this.field_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy_in_field] of ipairs(enemies_inside_field)) {
+            for (const [_, enemy_in_field] of GameFunc.iPair(enemies_inside_field)) {
                 enemy_in_field.AddNewModifier(this.caster, this.ability, "modifier_imba_kinetic_field_check_inside_field", {
                     duration: 0.01
                 });
@@ -1321,7 +1321,7 @@ export class modifier_imba_static_storm extends BaseModifier_Plus {
         }
         let enemies_in_field = FindUnitsInRadius(this.caster.GetTeamNumber(), this.target_point, undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         this.bonus_damage_per_enemy = GameFunc.GetCount(enemies_in_field) * this.damage_increase_enemy;
-        for (const [_, enemy] of ipairs(enemies_in_field)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies_in_field)) {
             if (!enemy.IsMagicImmune() && !enemy.IsInvulnerable()) {
                 if (this.caster.HasTalent("special_bonus_imba_disruptor_6")) {
                     if ((!enemy.HasModifier("modifier_imba_static_storm_talent"))) {

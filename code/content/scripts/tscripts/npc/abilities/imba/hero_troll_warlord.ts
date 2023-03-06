@@ -406,7 +406,7 @@ export class imba_troll_warlord_whirling_axes_ranged extends BaseAbility_Plus {
                 start_angle = axe_spread / 2 * (-1);
                 interval_angle = axe_spread / (axe_count - 1);
             }
-            for (let i = 1; i <= axe_count; i += 1) {
+            for (let i = 0; i < axe_count; i++) {
                 let angle = start_angle + (i - 1) * interval_angle;
                 let velocity = GFuncVector.RotateVector2D(direction, angle, true) * axe_speed as Vector;
                 let projectile = {
@@ -442,7 +442,7 @@ export class imba_troll_warlord_whirling_axes_ranged extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         if (target) {
             let was_hit = false;
-            for (const [_, stored_target] of ipairs(this.tempdata[ExtraData.index])) {
+            for (const [_, stored_target] of GameFunc.iPair(this.tempdata[ExtraData.index])) {
                 if (target == stored_target) {
                     was_hit = true;
                     return;
@@ -571,7 +571,7 @@ export class imba_troll_warlord_whirling_axes_melee extends BaseAbility_Plus {
             let axe_pfx: ParticleID[] = []
             let axe_loc: Vector[] = []
             let axe_random: number[] = []
-            for (let i = 0; i < 10; i += 1) {
+            for (let i = 0; i < 10; i++) {
                 table.insert(axe_pfx, ResHelper.CreateParticleEx("particles/units/heroes/hero_troll_warlord/troll_warlord_whirling_axe_melee.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, caster));
                 ParticleManager.SetParticleControl(axe_pfx[i], 1, caster_loc);
                 ParticleManager.SetParticleControl(axe_pfx[i], 4, Vector(whirl_duration, 0, 0));
@@ -583,23 +583,23 @@ export class imba_troll_warlord_whirling_axes_melee extends BaseAbility_Plus {
                 counter = counter + FrameTime();
                 caster_loc = caster.GetAbsOrigin();
                 if (counter <= (whirl_duration / 2)) {
-                    for (let i = 0; i < 10; i += 1) {
+                    for (let i = 0; i < 10; i++) {
                         axe_loc.push(counter * (max_range - axe_radius) * GFuncVector.RotateVector2D(direction, 36 * i + counter * axe_movement_speed, true).Normalized() as Vector);
                         this.DoAxeStuff(index, counter * (max_range - axe_radius) + axe_radius, caster_loc);
                     }
                 } else {
-                    for (let i = 0; i < 10; i += 1) {
+                    for (let i = 0; i < 10; i++) {
                         axe_loc.push((whirl_duration - counter / 2) * (max_range - axe_radius) * GFuncVector.RotateVector2D(direction, 36 * i + counter * axe_movement_speed * axe_random[i], true).Normalized() as Vector);
                         this.DoAxeStuff(index, (whirl_duration - counter / 2) * (max_range - axe_radius) + axe_radius, caster_loc);
                     }
                 }
-                for (let i = 1; i <= 10; i += 1) {
+                for (let i = 0; i < 10; i++) {
                     ParticleManager.SetParticleControl(axe_pfx[i], 1, caster_loc + axe_loc[i] + Vector(0, 0, 40) as Vector);
                 }
                 if (counter <= whirl_duration) {
                     return FrameTime();
                 } else {
-                    for (let i = 1; i <= 10; i += 1) {
+                    for (let i = 0; i < 10; i++) {
                         ParticleManager.DestroyParticle(axe_pfx[i], false);
                         ParticleManager.ReleaseParticleIndex(axe_pfx[i]);
                     }
@@ -613,9 +613,9 @@ export class imba_troll_warlord_whirling_axes_melee extends BaseAbility_Plus {
         let blind_duration = this.GetSpecialValueFor("blind_duration");
         let blind_stacks = this.GetSpecialValueFor("blind_stacks");
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_loc, undefined, range, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let was_hit = false;
-            for (const [_, stored_target] of ipairs(this.tempdata[index])) {
+            for (const [_, stored_target] of GameFunc.iPair(this.tempdata[index])) {
                 if (enemy == stored_target) {
                     was_hit = true;
                 }
@@ -842,7 +842,7 @@ export class imba_troll_warlord_battle_trance extends BaseAbility_Plus {
                 }
                 let allies = FindUnitsInRadius(caster.GetTeamNumber(), Vector(0, 0, 0), undefined, FIND_UNITS_EVERYWHERE, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
                 caster.EmitSound(sound);
-                for (const [_, ally] of ipairs(allies)) {
+                for (const [_, ally] of GameFunc.iPair(allies)) {
                     let mod = ally.AddNewModifier(caster, this, "modifier_imba_battle_trance", {
                         duration: duration
                     }) as modifier_imba_battle_trance;
@@ -1003,7 +1003,7 @@ export class modifier_imba_battle_trance_720 extends BaseModifier_Plus {
         }
         let hero_enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_CLOSEST, false);
         if (GameFunc.GetCount(hero_enemies) > 0) {
-            for (let enemy = 1; enemy <= GameFunc.GetCount(hero_enemies); enemy += 1) {
+            for (let enemy = 0; enemy < GameFunc.GetCount(hero_enemies); enemy++) {
                 if (this.caster.CanEntityBeSeenByMyTeam(hero_enemies[enemy])) {
                     this.caster.MoveToTargetToAttack(hero_enemies[enemy]);
                     this.target = hero_enemies[enemy];

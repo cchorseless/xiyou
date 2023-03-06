@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -256,8 +257,8 @@ export class modifier_sohei_flurry_self extends BaseModifier_Plus {
     PerformFlurryBlow() {
         let parent = this.GetParentPlus();
         let targets = FindUnitsInRadius(parent.GetTeamNumber(), this.positionGround, undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, bit.bor(DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE), FindOrder.FIND_ANY_ORDER, false);
-        if (targets[1]) {
-            let target = targets[1];
+        if (targets[0]) {
+            let target = targets[0];
             let targetOrigin = target.GetAbsOrigin();
             let abilityDash = parent.findAbliityPlus<sohei_dash>("sohei_dash");
             let abilityMomentum = parent.findAbliityPlus<sohei_momentum>("sohei_momentum");
@@ -279,7 +280,7 @@ export class modifier_sohei_flurry_self extends BaseModifier_Plus {
                     abilityMomentum.ToggleAbility();
                 }
             }
-            parent.PerformAttack(targets[1], true, true, true, false, false, false, false);
+            parent.PerformAttack(targets[0], true, true, true, false, false, false, false);
             return true;
         } else {
             parent.AddNoDraw();
@@ -318,7 +319,7 @@ export class sohei_wholeness_of_body extends BaseAbility_Plus {
         });
         let momentum_ability = this.GetCasterPlus().findAbliityPlus<sohei_momentum>("sohei_momentum");
         if (momentum_ability && momentum_ability.IsTrained()) {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, this.GetSpecialValueFor("knockback_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, this.GetSpecialValueFor("knockback_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
                 enemy.RemoveModifierByName("modifier_sohei_momentum_knockback");
                 enemy.AddNewModifier(this.GetCasterPlus(), momentum_ability, "modifier_sohei_momentum_knockback", {
                     duration: momentum_ability.GetSpecialValueFor("knockback_distance") / momentum_ability.GetSpecialValueFor("knockback_speed"),
@@ -672,7 +673,7 @@ export class modifier_sohei_momentum_knockback extends BaseModifierMotionHorizon
         let tickOrigin = parentOrigin + (tickSpeed * this.direction) as Vector;
         this.distance = this.distance - tickSpeed;
         let targets = FindUnitsInRadius(caster.GetTeamNumber(), tickOrigin, undefined, this.collision_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
-        let secondary_target = targets[1];
+        let secondary_target = targets[0];
         if (secondary_target == parent) {
             secondary_target = targets[2];
         }

@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -466,7 +467,7 @@ export class imba_scaldris_cold_front extends BaseAbility_Plus {
                 ParticleManager.SetParticleControl(blast_pfx, 3, location + Vector(0, 0, 100) as Vector);
                 ParticleManager.ReleaseParticleIndex(blast_pfx);
                 let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("blast_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_cold_front_root", {
                         duration: this.GetSpecialValueFor("root_duration") * (1 - enemy.GetStatusResistance())
                     });
@@ -607,7 +608,7 @@ export class imba_scaldris_scorch extends BaseAbility_Plus {
                 ParticleManager.ReleaseParticleIndex(scorch_pfx);
             });
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_loc, undefined, effect_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 enemy.AddNewModifier(caster, this, "modifier_imba_scorch_blind", {
                     duration: this.GetSpecialValueFor("blind_duration") * (1 - enemy.GetStatusResistance())
                 });
@@ -1180,7 +1181,7 @@ export class imba_scaldris_ice_floes extends BaseAbility_Plus {
                     ParticleManager.ReleaseParticleIndex(teleport_pfx);
                 });
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, this.GetSpecialValueFor("effect_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     enemy.AddNewModifier(caster, this, "modifier_imba_ice_floes_stun", {
                         duration: this.GetSpecialValueFor("stun_duration") * (1 - enemy.GetStatusResistance())
                     });

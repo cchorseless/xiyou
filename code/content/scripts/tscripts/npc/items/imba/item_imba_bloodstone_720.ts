@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -89,7 +90,7 @@ export class modifier_item_imba_bloodstone_720 extends BaseModifier_Plus {
             this.ability.initialized = true;
         }
         this.SetStackCount(this.ability.GetCurrentCharges());
-        for (const [_, mod] of ipairs(this.GetCasterPlus().FindAllModifiersByName(this.GetName()))) {
+        for (const [_, mod] of GameFunc.iPair(this.GetCasterPlus().FindAllModifiersByName(this.GetName()))) {
             mod.GetItemPlus().SetSecondaryCharges(_);
         }
     }
@@ -97,7 +98,7 @@ export class modifier_item_imba_bloodstone_720 extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        for (const [_, mod] of ipairs(this.GetCasterPlus().FindAllModifiersByName(this.GetName()))) {
+        for (const [_, mod] of GameFunc.iPair(this.GetCasterPlus().FindAllModifiersByName(this.GetName()))) {
             mod.GetItemPlus().SetSecondaryCharges(_);
         }
     }
@@ -159,8 +160,8 @@ export class modifier_item_imba_bloodstone_720 extends BaseModifier_Plus {
     CC_OnDeath(keys: ModifierInstanceEvent): void {
         if (keys.unit.IsRealHero() && this.parent.IsRealHero()) {
             if (this.parent.GetTeam() != keys.unit.GetTeam() && ((keys.unit.GetAbsOrigin() - this.parent.GetAbsOrigin() as Vector).Length2D() <= this.charge_range || this.parent == keys.attacker) && this.parent.IsAlive()) {
-                if (this == this.parent.FindAllModifiersByName(this.GetName())[1]) {
-                    for (let itemSlot = 0; itemSlot <= 5; itemSlot += 1) {
+                if (this == this.parent.FindAllModifiersByName(this.GetName())[0]) {
+                    for (let itemSlot = 0; itemSlot <= 5; itemSlot++) {
                         let item = this.parent.GetItemInSlot(itemSlot);
                         if (item && item.GetName() == this.ability.GetName()) {
                             item.SetCurrentCharges(item.GetCurrentCharges() + this.kill_charges);

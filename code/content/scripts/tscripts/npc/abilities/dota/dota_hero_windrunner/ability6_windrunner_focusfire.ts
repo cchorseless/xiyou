@@ -130,7 +130,7 @@ export class modifier_windrunner_6 extends BaseModifier_Plus {
                 let flagFilter = ability.GetAbilityTargetFlags() + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS
                 let order = FindOrder.FIND_CLOSEST
                 let targets = AoiHelper.FindEntityInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), range, null, teamFilter, typeFilter, flagFilter, order)
-                target = targets[1]
+                target = targets[0]
             }
 
             //  施法命令

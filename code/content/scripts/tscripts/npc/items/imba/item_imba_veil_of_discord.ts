@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -15,7 +16,7 @@ export class item_imba_veil_of_discord extends BaseItem_Plus {
         ParticleManager.SetParticleControl(particle_fx, 1, Vector(this.GetSpecialValueFor("debuff_radius"), 1, 1));
         ParticleManager.ReleaseParticleIndex(particle_fx);
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_loc, undefined, this.GetSpecialValueFor("debuff_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, 0, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             enemy.AddNewModifier(caster, this, "modifier_veil_active_debuff", {
                 duration: this.GetSpecialValueFor("resist_debuff_duration") * (1 - enemy.GetStatusResistance())
             });

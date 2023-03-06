@@ -948,6 +948,113 @@ function addkvvaluetoexcel() {
 
 }
 
+const imba_itemkv_path = imbabasepath + "npc_items_custom.txt";;
+const imba_itemexcel_Path = "excels/items/imba_items.xlsx";
+
+function createImbaItem() {
+    const _str_start = "item_";
+    const excludehero = [];
+    let kv_item = fs.readFileSync(imba_itemkv_path, "utf8");
+    let obj_item = keyvalues.decode(kv_item);
+    let info_item = obj_item.DOTAAbilities;
+    if (!fs.existsSync(imba_itemexcel_Path)) {
+        return;
+    }
+    let sheets = xlsx.parse(imba_itemexcel_Path);
+    if (sheets.length < 2) {
+        console.error("缺少参数表:", imba_itemexcel_Path);
+        return;
+    }
+    let sheet = sheets[0];
+    let rows = sheet.data;
+    let nrows = rows.length;
+    let keyrow = rows[1];
+    let sheet_param = sheets[1];
+    let rows_param = sheet_param.data;
+    rows.push([]);
+    let vscripts_index = keyrow.indexOf("ScriptFile");
+    let BaseClass_index = keyrow.indexOf("BaseClass");
+    for (let k in info_item) {
+        if (k.indexOf(_str_start) > -1 && excludehero.indexOf(k) == -1) {
+            let abilityinfo = info_item[k];
+            let itemname = k;
+            let newRow = [itemname];
+            // newRow[vscripts_index] = `npc/items/dota/${itemname}`;
+            newRow[BaseClass_index] = `item_lua`;
+            for (let ability_k in abilityinfo) {
+                let ab_info = abilityinfo[ability_k];
+                switch (typeof ab_info) {
+                    case "string":
+                        let index = keyrow.indexOf(ability_k);
+                        if (index > -1) {
+                            newRow[index] = ab_info;
+                        }
+                        break;
+                    case "object":
+                        if (ability_k == "AbilitySpecial") {
+                            for (let index_kk in ab_info) {
+                                let _kk = index_kk + ">K&";
+                                let _VV = index_kk + ">V&";
+                                let _k_str = "";
+                                let _v_str = "";
+                                let temp_index_kk = rows_param[2].indexOf(_kk);
+                                let temp_index_vv = rows_param[2].indexOf(_VV);
+                                let trueIndex_kk = rows[0].indexOf(rows_param[0][temp_index_kk]);
+                                let trueIndex_vv = rows[0].indexOf(rows_param[0][temp_index_vv]);
+                                let obj_keys = Object.keys(ab_info[index_kk]);
+                                for (let i = 0; i < obj_keys.length; i++) {
+                                    let trueK = obj_keys[i];
+                                    _k_str += trueK;
+                                    if (trueK == "LinkedSpecialBonus" || trueK == "ad_linked_ability") {
+                                        _v_str += ability_name_new_old[ab_info[index_kk][trueK]];
+                                    } else {
+                                        _v_str += ab_info[index_kk][trueK];
+                                    }
+                                    if (i < obj_keys.length - 1) {
+                                        _k_str += "\n";
+                                        _v_str += "\n";
+                                    }
+                                }
+                                newRow[trueIndex_kk] = _k_str;
+                                newRow[trueIndex_vv] = _v_str;
+                            }
+                        } else if (ability_k == "ItemRequirements") {
+                            let obj_keys = Object.keys(ab_info);
+                            let _k_str = "";
+                            let _v_str = "";
+                            let trueIndex_kk = rows[0].indexOf("合成需要_k");
+                            let trueIndex_vv = rows[0].indexOf("合成需要_v");
+                            for (let i = 0; i < obj_keys.length; i++) {
+                                let trueK = obj_keys[i];
+                                _k_str += trueK;
+                                let _tmp_ = [];
+                                ab_info[trueK].split(";").forEach((s) => {
+                                    if (s.indexOf("*") > -1) {
+                                        _tmp_.push(s.replace("*", "_custom*"));
+                                    } else {
+                                        _tmp_.push(s + "_custom");
+                                    }
+                                });
+                                _v_str += _tmp_.join(";");
+                                if (i < obj_keys.length - 1) {
+                                    _k_str += "\n";
+                                    _v_str += "\n";
+                                }
+                            }
+                            newRow[trueIndex_kk] = _k_str;
+                            newRow[trueIndex_vv] = _v_str;
+                        }
+                        break;
+                }
+            }
+            rows.push(newRow);
+            console.log(itemname);
+        }
+    }
+    fs.writeFileSync(imba_itemexcel_Path, xlsx.build(sheets));
+}
+
+
 
 (async () => {
     // var args = process.argv.splice(2);
@@ -958,6 +1065,7 @@ function addkvvaluetoexcel() {
     // createSound();
     // createImbaNpc();
     // addkvvaluetoexcel();
+    // createImbaItem()
 })().catch((error) => {
     console.error(error);
     process.exit(1);

@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -23,7 +24,7 @@ export class item_imba_blink extends BaseItem_Plus {
     }
     OnAbilityPhaseStart(): boolean {
         if (this.GetCursorTarget() && this.GetCursorTarget() == this.GetCasterPlus()) {
-            for (const [_, ent] of ipairs(Entities.FindAllByClassname("ent_dota_fountain"))) {
+            for (const [_, ent] of GameFunc.iPair(Entities.FindAllByClassname("ent_dota_fountain"))) {
                 if (ent.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber()) {
                     this.GetCasterPlus().SetCursorTargetingNothing(true);
                     if (this.GetCasterPlus().GetPlayerID) {
@@ -108,7 +109,7 @@ export class item_imba_blink_boots extends BaseItem_Plus {
     }
     OnAbilityPhaseStart(): boolean {
         if (this.GetCursorTarget() && this.GetCursorTarget() == this.GetCasterPlus()) {
-            for (const [_, building] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, building] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false))) {
                 if (string.find(building.GetName(), "ent_dota_fountain")) {
                     this.GetCasterPlus().SetCursorTargetingNothing(true);
                     this.GetCasterPlus().CastAbilityOnPosition(building.GetAbsOrigin(), this, this.GetCasterPlus().GetPlayerID());

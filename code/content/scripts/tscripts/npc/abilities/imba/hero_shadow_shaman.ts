@@ -240,7 +240,7 @@ export class modifier_imba_shadow_shaman_voodoo_handler extends BaseModifier_Plu
         if (!IsServer()) {
             return;
         }
-        if (keys.attacker == this.GetParentPlus() && this.GetCasterPlus().HasTalent("special_bonus_imba_shadow_shaman_hex_parlor_tricks") && !this.GetParentPlus().IsIllusion() && this.GetAbilityPlus() && this.GetAbilityPlus().IsTrained() && this == this.GetParentPlus().FindAllModifiersByName("modifier_imba_shadow_shaman_voodoo_handler")[1] && !keys.target.IsOther() && !keys.target.IsBuilding() && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
+        if (keys.attacker == this.GetParentPlus() && this.GetCasterPlus().HasTalent("special_bonus_imba_shadow_shaman_hex_parlor_tricks") && !this.GetParentPlus().IsIllusion() && this.GetAbilityPlus() && this.GetAbilityPlus().IsTrained() && this == this.GetParentPlus().FindAllModifiersByName("modifier_imba_shadow_shaman_voodoo_handler")[0] && !keys.target.IsOther() && !keys.target.IsBuilding() && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
             if (GFuncRandom.PRD(this.GetCasterPlus().GetTalentValue("special_bonus_imba_shadow_shaman_hex_parlor_tricks"), this)) {
                 keys.target.EmitSound("Hero_ShadowShaman.Hex.Target");
                 keys.target.EmitSound("General.Illusion.Create");
@@ -473,20 +473,20 @@ export class imba_shadow_shaman_shackles extends BaseAbility_Plus {
                 this.GetCasterPlus().EmitSound("Hero_ShadowShaman.Shackles.Cast");
                 if (this.GetCasterPlus().GetName() == "npc_dota_hero_shadow_shaman" && RollPercentage(75)) {
                     let responses = {
-                        1: "shadowshaman_shad_ability_shackle_01",
-                        2: "shadowshaman_shad_ability_shackle_02",
-                        3: "shadowshaman_shad_ability_shackle_03",
-                        4: "shadowshaman_shad_ability_shackle_04",
-                        5: "shadowshaman_shad_ability_shackle_05",
-                        6: "shadowshaman_shad_ability_shackle_06",
-                        7: "shadowshaman_shad_ability_shackle_08",
-                        8: "shadowshaman_shad_ability_entrap_02",
-                        9: "shadowshaman_shad_ability_entrap_03"
+                        "1": "shadowshaman_shad_ability_shackle_01",
+                        "2": "shadowshaman_shad_ability_shackle_02",
+                        "3": "shadowshaman_shad_ability_shackle_03",
+                        "4": "shadowshaman_shad_ability_shackle_04",
+                        "5": "shadowshaman_shad_ability_shackle_05",
+                        "6": "shadowshaman_shad_ability_shackle_06",
+                        "7": "shadowshaman_shad_ability_shackle_08",
+                        "8": "shadowshaman_shad_ability_entrap_02",
+                        "9": "shadowshaman_shad_ability_entrap_03"
                     }
                     this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
                 }
                 let enemies = FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), target.GetAbsOrigin(), undefined, this.GetSpecialValueFor("stronghold_width"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_shadow_shaman_shackles", {
                         duration: this.GetChannelTime()
                     });
@@ -756,13 +756,13 @@ export class imba_shadow_shaman_mass_serpent_ward extends BaseAbility_Plus {
         let spawn_particle_fx = ResHelper.CreateParticleEx(spawn_particle, ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
         ParticleManager.SetParticleControl(spawn_particle_fx, 0, target_point);
         let formation_vectors: Vector[] = []
-        for (let i = 1; i <= ward_count; i += 1) {
+        for (let i = 0; i < ward_count; i++) {
             table.insert(formation_vectors, Vector(math.cos(math.rad(((360 / ward_count) * i))), math.sin(math.rad(((360 / ward_count) * i))), 0) * 150);
         }
         let find_clear_space = true;
         let npc_owner = caster;
         let unit_owner = caster;
-        for (let i = 1; i <= ward_count; i += 1) {
+        for (let i = 0; i < ward_count; i++) {
             this.SummonWard(target_point + formation_vectors[i] as Vector);
         }
     }
@@ -871,7 +871,7 @@ export class modifier_imba_mass_serpent_ward extends BaseModifier_Plus {
         if (keys.attacker == this.GetParentPlus() && !keys.no_attack_cooldown && this.GetCasterPlus() && !this.GetCasterPlus().IsNull() && this.GetCasterPlus().HasScepter()) {
             let enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetParentPlus().Script_GetAttackRange(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_ANY_ORDER, false);
             let targets_aimed = 0;
-            for (let i = 1; i <= GameFunc.GetCount(enemies); i += 1) {
+            for (let i = 0; i < GameFunc.GetCount(enemies); i++) {
                 if (enemies[i] != keys.target) {
                     this.GetParentPlus().PerformAttack(enemies[i], false, false, true, true, true, false, false);
                     targets_aimed = targets_aimed + 1;

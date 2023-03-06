@@ -20,7 +20,7 @@ export class imba_weaver_the_swarm extends BaseAbility_Plus {
         let beetle_dummy: IBaseNpc_Plus = undefined;
         let projectile_table: CreateLinearProjectileOptions = undefined;
         let projectileID = undefined;
-        for (let beetles = 1; beetles <= this.GetSpecialValueFor("count"); beetles += 1) {
+        for (let beetles = 1; beetles <= this.GetSpecialValueFor("count"); beetles++) {
             start_pos = this.GetCasterPlus().GetAbsOrigin() + RandomVector(RandomInt(0, this.GetSpecialValueFor("spawn_radius"))) as Vector;
             beetle_dummy = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
             if (beetles == 1) {
@@ -463,7 +463,7 @@ export class modifier_imba_weaver_geminate_attack extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK)
     CC_OnAttack(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetParentPlus() && this.GetAbilityPlus().IsFullyCastable() && !this.GetParentPlus().IsIllusion() && !this.GetParentPlus().PassivesDisabled() && !keys.no_attack_cooldown && keys.target.GetUnitName() != "npc_dota_observer_wards" && keys.target.GetUnitName() != "npc_dota_sentry_wards") {
-            for (let geminate_attacks = 1; geminate_attacks <= this.GetAbilityPlus().GetTalentSpecialValueFor("tooltip_attack"); geminate_attacks += 1) {
+            for (let geminate_attacks = 1; geminate_attacks <= this.GetAbilityPlus().GetTalentSpecialValueFor("tooltip_attack"); geminate_attacks++) {
                 this.GetParentPlus().AddNewModifier(keys.target, this.GetAbilityPlus(), "modifier_imba_weaver_geminate_attack_delay", {
                     delay: this.GetSpecialValueFor("delay") * geminate_attacks
                 });
@@ -554,11 +554,11 @@ export class imba_weaver_time_lapse extends BaseAbility_Plus {
             if (!this.intrinsic_modifier) {
                 this.intrinsic_modifier = this.GetCasterPlus().FindModifierByName(this.GetIntrinsicModifierName());
             }
-            if (this.intrinsic_modifier && this.intrinsic_modifier.instances_health && this.intrinsic_modifier.instances_health[1] && this.intrinsic_modifier.instances_mana && this.intrinsic_modifier.instances_mana[1] && this.intrinsic_modifier.instances_position && this.intrinsic_modifier.instances_position[1]) {
+            if (this.intrinsic_modifier && this.intrinsic_modifier.instances_health && this.intrinsic_modifier.instances_health[0] && this.intrinsic_modifier.instances_mana && this.intrinsic_modifier.instances_mana[0] && this.intrinsic_modifier.instances_position && this.intrinsic_modifier.instances_position[0]) {
                 this.GetCasterPlus().EmitSound("Hero_Weaver.TimeLapse");
                 let time_lapse_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_weaver/weaver_timelapse.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetCasterPlus());
                 ParticleManager.SetParticleControl(time_lapse_particle, 0, this.GetCasterPlus().GetAbsOrigin());
-                ParticleManager.SetParticleControl(time_lapse_particle, 2, this.intrinsic_modifier.instances_position[1]);
+                ParticleManager.SetParticleControl(time_lapse_particle, 2, this.intrinsic_modifier.instances_position[0]);
                 ParticleManager.ReleaseParticleIndex(time_lapse_particle);
                 ProjectileManager.ProjectileDodge(this.GetCasterPlus());
                 this.GetCasterPlus().Purge(false, true, false, true, true);
@@ -572,17 +572,17 @@ export class imba_weaver_time_lapse extends BaseAbility_Plus {
                     outgoing_damage_roshan: undefined,
                     duration: 5
                 });
-                this.GetCasterPlus().SetHealth(math.max(this.intrinsic_modifier.instances_health[1], 1));
-                this.GetCasterPlus().SetMana(this.intrinsic_modifier.instances_mana[1]);
-                FindClearSpaceForUnit(this.GetCasterPlus(), this.intrinsic_modifier.instances_position[1], false);
+                this.GetCasterPlus().SetHealth(math.max(this.intrinsic_modifier.instances_health[0], 1));
+                this.GetCasterPlus().SetMana(this.intrinsic_modifier.instances_mana[0]);
+                FindClearSpaceForUnit(this.GetCasterPlus(), this.intrinsic_modifier.instances_position[0], false);
             }
         } else {
             let target_modifier = this.GetCursorTarget().findBuff<modifier_imba_weaver_time_lapse>("modifier_imba_weaver_time_lapse");
-            if (target_modifier && target_modifier.instances_health && target_modifier.instances_health[1] && target_modifier.instances_mana && target_modifier.instances_mana[1] && target_modifier.instances_position && target_modifier.instances_position[1]) {
+            if (target_modifier && target_modifier.instances_health && target_modifier.instances_health[0] && target_modifier.instances_mana && target_modifier.instances_mana[0] && target_modifier.instances_position && target_modifier.instances_position[0]) {
                 this.GetCursorTarget().EmitSound("Hero_Weaver.TimeLapse");
                 let time_lapse_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_weaver/weaver_timelapse.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetCursorTarget());
                 ParticleManager.SetParticleControl(time_lapse_particle, 0, this.GetCursorTarget().GetAbsOrigin());
-                ParticleManager.SetParticleControl(time_lapse_particle, 2, target_modifier.instances_position[1]);
+                ParticleManager.SetParticleControl(time_lapse_particle, 2, target_modifier.instances_position[0]);
                 ParticleManager.ReleaseParticleIndex(time_lapse_particle);
                 ProjectileManager.ProjectileDodge(this.GetCursorTarget());
                 let target = this.GetCursorTarget() as IBaseNpc_Plus;
@@ -596,9 +596,9 @@ export class imba_weaver_time_lapse extends BaseAbility_Plus {
                     outgoing_damage_roshan: undefined,
                     duration: 5
                 });
-                this.GetCursorTarget().SetHealth(math.max(target_modifier.instances_health[1], 1));
-                this.GetCursorTarget().SetMana(target_modifier.instances_mana[1]);
-                FindClearSpaceForUnit(this.GetCursorTarget(), target_modifier.instances_position[1], false);
+                this.GetCursorTarget().SetHealth(math.max(target_modifier.instances_health[0], 1));
+                this.GetCursorTarget().SetMana(target_modifier.instances_mana[0]);
+                FindClearSpaceForUnit(this.GetCursorTarget(), target_modifier.instances_position[0], false);
             }
         }
         if (!this.abilities_to_refresh) {

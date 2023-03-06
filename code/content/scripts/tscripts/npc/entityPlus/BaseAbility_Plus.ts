@@ -150,7 +150,7 @@ export class BaseAbility_Plus extends BaseAbility {
         if (info[0]) {
             // GFuncEntity.ExecuteOrder(this.GetCaster(), dotaunitorder_t.DOTA_UNIT_ORDER_CAST_NO_TARGET, null, this)
         }
-        else if (info[1]) {
+        else if (info[0]) {
             // GFuncEntity.ExecuteOrder(this.GetCaster(), dotaunitorder_t.DOTA_UNIT_ORDER_CAST_POSITION, null, this)
         }
         else if (info[2]) {

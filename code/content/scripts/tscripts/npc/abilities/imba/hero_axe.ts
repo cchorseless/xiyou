@@ -35,7 +35,7 @@ export class imba_axe_berserkers_call extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particle, 2, Vector(radius, radius, radius));
         ParticleManager.ReleaseParticleIndex(particle);
         let enemies_in_radius = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, target] of ipairs(enemies_in_radius)) {
+        for (const [_, target] of GameFunc.iPair(enemies_in_radius)) {
             if (target.IsCreep()) {
                 target.SetForceAttackTarget(caster);
                 target.MoveToTargetToAttack(caster);
@@ -279,7 +279,7 @@ export class imba_axe_battle_hunger extends BaseAbility_Plus {
         if (caster != target) {
             if (caster.HasScepter()) {
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetAOERadius(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     enemy.EmitSound("Hero_Axe.Battle_Hunger");
                     this.ApplyBattleHunger(caster, enemy);
                 }
@@ -300,7 +300,7 @@ export class imba_axe_battle_hunger extends BaseAbility_Plus {
             }
             let berserkers_call_modifier = "modifier_imba_berserkers_call_debuff_cmd";
             let called_units = berserkers_call.GetCalledUnits();
-            for (const [entindex, unit] of ipairs(called_units)) {
+            for (const [entindex, unit] of GameFunc.Pair(called_units)) {
                 if (unit.HasModifier(berserkers_call_modifier)) {
                     this.ApplyBattleHunger(caster, unit);
                 }
@@ -497,7 +497,7 @@ export class modifier_imba_battle_hunger_debuff_dot extends BaseModifier_Plus {
                         return;
                     }
                     this.cmd_restricted = true;
-                    for (const [_, unit] of ipairs(targets)) {
+                    for (const [_, unit] of GameFunc.iPair(targets)) {
                         if (unit != this.parent && unit != keys.target) {
                             let newOrder = {
                                 UnitIndex: this.parent.entindex(),
@@ -689,7 +689,7 @@ export class modifier_imba_counter_helix_passive extends BaseModifier_Plus {
             radius = radius + spin_to_win.GetStackCount() * this.radius_increase_per_stack;
         }
         this.enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(this.enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(this.enemies)) {
             let damage = this.total_damage;
             if (enemy.HasModifier(this.modifier_enemy_taunt)) {
                 damage = damage * (1 + this.taunted_damage_bonus_pct * 0.01);
@@ -864,7 +864,7 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
                 this.KillUnit(this.target);
                 this.GetCasterPlus().EmitSound("Hero_Axe.Culling_Blade_Success");
             }
-            for (let i = 0; i <= 5; i += 1) {
+            for (let i = 0; i <= 5; i++) {
                 this.item = this.caster.GetItemInSlot(i);
                 if (this.item && this.item.GetAbilityName().find("^item_imba_blink")) {
                     this.blink_cd_remaining = this.item.GetCooldownTimeRemaining();
@@ -878,7 +878,7 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
             }
             this.GetCasterPlus().EmitSoundParams(this.kill_enemy_response, 200, 1000, 1);
             this.allies_in_radius = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.speed_aoe_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, target] of ipairs(this.allies_in_radius)) {
+            for (const [_, target] of GameFunc.iPair(this.allies_in_radius)) {
                 target.AddNewModifier(this.caster, this, "modifier_imba_culling_blade_buff_haste", {
                     duration: this.speed_duration
                 });
@@ -898,7 +898,7 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
                 this.targets = FindUnitsInRadius(this.caster.GetTeamNumber(), this.target.GetAbsOrigin(), undefined, this.scepter_battle_hunger_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
                 this.battle_hunger_ability = this.caster.findAbliityPlus<imba_axe_battle_hunger>("imba_axe_battle_hunger");
                 if (this.battle_hunger_ability && this.battle_hunger_ability.GetLevel() > 0) {
-                    for (const [_, enemies] of ipairs(this.targets)) {
+                    for (const [_, enemies] of GameFunc.iPair(this.targets)) {
                         this.battle_hunger_ability.ApplyBattleHunger(this.caster, enemies);
                     }
                 }

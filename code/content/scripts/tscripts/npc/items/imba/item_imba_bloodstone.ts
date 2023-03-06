@@ -77,7 +77,7 @@
 //     let total_heal = heal_on_death_base + current_charges * heal_on_death_per_charge;
 //     item.SetCurrentCharges(math.floor(current_charges * on_death_charge_loss));
 //     let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, effect_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
-//     for (const [_, ally] of ipairs(allies)) {
+//     for (const [_, ally] of GameFunc.iPair(allies)) {
 //         ally.Heal(total_heal, caster);
 //     }
 // }

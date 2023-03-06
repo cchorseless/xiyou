@@ -253,7 +253,7 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             ParticleManager.SetParticleControl(landing_pfx, 1, parent_pos);
             ParticleManager.ReleaseParticleIndex(landing_pfx);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), parent_pos, undefined, impact_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != parent) {
                     enemy.AddNewModifier(caster, ability, "modifier_stunned", {
                         duration: impact_stun_duration * (1 - enemy.GetStatusResistance())
@@ -423,7 +423,7 @@ export class imba_rubick_fade_bolt extends BaseAbility_Plus {
                     ParticleManager.SetParticleControl(particle_explosion_fx, 2, Vector(this.GetSpecialValueFor("radius"), 1, 1));
                     ParticleManager.ReleaseParticleIndex(particle_explosion_fx);
                     EmitSoundOn("ParticleDriven.Rocket.Explode", current_target);
-                    for (const [_, unit] of ipairs(units)) {
+                    for (const [_, unit] of GameFunc.iPair(units)) {
                         if (unit != current_target) {
                             ApplyDamage({
                                 attacker: this.GetCasterPlus(),
@@ -458,7 +458,7 @@ export class imba_rubick_fade_bolt extends BaseAbility_Plus {
                 });
                 current_target.TempData().damaged_by_fade_bolt = true;
                 previous_unit = current_target;
-                for (const [_, unit] of ipairs(units)) {
+                for (const [_, unit] of GameFunc.iPair(units)) {
                     if (unit != previous_unit && unit.TempData().damaged_by_fade_bolt != true) {
                         current_target = unit;
                         return;
@@ -467,7 +467,7 @@ export class imba_rubick_fade_bolt extends BaseAbility_Plus {
                 if (previous_unit != current_target) {
                     return this.GetSpecialValueFor("jump_delay");
                 } else {
-                    for (const [_, damaged] of ipairs(entities_damaged)) {
+                    for (const [_, damaged] of GameFunc.iPair(entities_damaged)) {
                         damaged.TempData().damaged_by_fade_bolt = false;
                     }
                     if (this.GetCasterPlus().HasTalent("special_bonus_imba_rubick_7")) {
@@ -983,7 +983,7 @@ class TRubick_animations_reference {
     }
 
     IsNormal() {
-        return TRubick_animations_reference.animations[this.current][1] || false
+        return TRubick_animations_reference.animations[this.current][0] || false
     }
 
     GetActivity(): GameActivity_t {
@@ -1071,7 +1071,7 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
         if (this.is_stealing_spell == true) {
             return "You're already stealing a spell!";
         }
-        for (const [_, banned_ability] of ipairs(this.banned_abilities)) {
+        for (const [_, banned_ability] of GameFunc.iPair(this.banned_abilities)) {
             if (this.GetLastSpell(hTarget).primarySpell && this.GetLastSpell(hTarget).primarySpell.GetName && this.GetLastSpell(hTarget).primarySpell.GetName() == banned_ability) {
                 return "#dota_hud_error_spell_steal_banned_ability";
             } else if (this.GetLastSpell(hTarget).secondarySpell && this.GetLastSpell(hTarget).secondarySpell.GetName && this.GetLastSpell(hTarget).secondarySpell.GetName() == banned_ability) {
@@ -1165,10 +1165,10 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
         } else {
             primary = hSpell;
         }
-        for (let i = 1; i <= 8; i += 1) {
+        for (let i = 0; i < 8; i++) {
             let talent = hHero.FindAbilityByName("special_bonus_imba_" + hero_name + "_" + i);
             if (talent && talent.IsTrained()) {
-                // for (const [k, v] of ipairs(talent.GetAbilityKeyValues())) {
+                // for (const [k, v] of GameFunc.iPair(talent.GetAbilityKeyValues())) {
                 //     if (k == "LinkedAbility") {
                 //         if ((primary && v["01"] == primary.GetAbilityName()) || (secondary && v["01"] == secondary.GetAbilityName())) {
                 //             table.insert(linked_talents, talent.GetAbilityName());
@@ -1202,7 +1202,7 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
     }
     GetLastSpell(hHero: IBaseNpc_Plus) {
         let heroData = undefined;
-        for (const [_, data] of ipairs(this.heroesData)) {
+        for (const [_, data] of GameFunc.iPair(this.heroesData)) {
             if (data.handle == hHero) {
                 heroData = data;
                 break;
@@ -1214,7 +1214,7 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
     }
     PrintStatus() {
         // print("Heroes and spells:");
-        for (const [_, heroData] of ipairs(this.heroesData)) {
+        for (const [_, heroData] of GameFunc.iPair(this.heroesData)) {
             if (heroData.primarySpell != undefined) {
                 print(heroData.handle.GetUnitName(), heroData.handle, heroData.primarySpell.GetAbilityName(), heroData.primarySpell);
             }
@@ -1302,12 +1302,12 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
     }
     ForgetSpell() {
         if (this.CurrentSpellOwner != undefined) {
-            for (let i = 0; i <= this.GetCasterPlus().GetModifierCount() - 1; i += 1) {
+            for (let i = 0; i <= this.GetCasterPlus().GetModifierCount() - 1; i++) {
                 if (string.find(this.GetCasterPlus().GetModifierNameByIndex(i), string.gsub(this.CurrentSpellOwner, "npc_dota_hero_", "")[0])) {
                     this.GetCasterPlus().RemoveModifierByName(this.GetCasterPlus().GetModifierNameByIndex(i));
                 }
             }
-            for (let i = 0; i <= this.GetCasterPlus().GetAbilityCount() - 1; i += 1) {
+            for (let i = 0; i <= this.GetCasterPlus().GetAbilityCount() - 1; i++) {
                 let talent = this.GetCasterPlus().FindAbilityByName("special_bonus_imba_" + string.gsub(this.CurrentSpellOwner, "npc_dota_hero_", "")[0] + "_" + i);
                 if (talent) {
                     this.GetCasterPlus().RemoveAbility(talent.GetAbilityName());

@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
@@ -83,7 +84,7 @@ export class modifier_item_imba_the_triumvirate_v2 extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        for (const [_, mod] of ipairs(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
+        for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
             mod.GetItemPlus().SetSecondaryCharges(_);
         }
     }
@@ -91,7 +92,7 @@ export class modifier_item_imba_the_triumvirate_v2 extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        for (const [_, mod] of ipairs(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
+        for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
             mod.GetItemPlus().SetSecondaryCharges(_);
         }
     }

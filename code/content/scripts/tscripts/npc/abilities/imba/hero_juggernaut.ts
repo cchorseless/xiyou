@@ -137,7 +137,7 @@ export class modifier_imba_juggernaut_blade_fury extends BaseModifier_Plus {
                 ParticleManager.SetParticleControl(this.blade_fury_spin_pfx_2, 5, Vector(this.radius * 1.2, 0, 0));
             }
         }
-        for (const [_, enemy] of ipairs(furyEnemies)) {
+        for (const [_, enemy] of GameFunc.iPair(furyEnemies)) {
             enemy.EmitSound("Hero_Juggernaut.BladeFury.Impact");
             let slash_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_juggernaut/juggernaut_blade_fury_tgt.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy, this.GetCasterPlus());
             ParticleManager.SetParticleControl(slash_pfx, 0, enemy.GetAbsOrigin());
@@ -823,14 +823,14 @@ export class modifier_imba_juggernaut_blade_dance_empowered_slice extends BaseMo
         if (IsServer()) {
             let sliceEnemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, 150, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_ANY_ORDER, false);
             let enemy_hit = false;
-            for (const [_, enemy] of ipairs(sliceEnemies)) {
+            for (const [_, enemy] of GameFunc.iPair(sliceEnemies)) {
                 if (this.attack_count < 1) {
                     this.Destroy();
                     return;
                 }
                 enemy_hit = false;
                 if (this.enemies_hit) {
-                    for (const [_, hit_enemy] of ipairs(this.enemies_hit)) {
+                    for (const [_, hit_enemy] of GameFunc.iPair(this.enemies_hit)) {
                         if (hit_enemy == enemy) {
                             enemy_hit = true;
                         }
@@ -927,8 +927,8 @@ export class modifier_imba_juggernaut_blade_dance_empowered_slice extends BaseMo
                 this.Destroy();
                 return;
             }
-            for (let i = 1; i <= this.max_attack_count - 1; i += 1) {
-                for (const [_, enemy] of ipairs(this.enemies_hit)) {
+            for (let i = 0; i < this.max_attack_count; i++) {
+                for (const [_, enemy] of GameFunc.iPair(this.enemies_hit)) {
                     if (this.attack_count < 1) {
                         this.Destroy();
                         return;
@@ -1342,10 +1342,10 @@ export class imba_juggernaut_omni_slash extends BaseAbility_Plus {
         if (this.caster.HasTalent("special_bonus_imba_juggernaut_7") && !this.IsStolen()) {
             let omnislash_image = BaseNpc_Plus.CreateUnitByName(this.caster.GetUnitName(), this.caster.GetAbsOrigin(), this.caster.GetTeamNumber(), true, this.caster, this.caster.GetOwnerPlus());
             let caster_level = this.caster.GetLevel();
-            for (let i = 2; i <= caster_level; i += 1) {
+            for (let i = 2; i <= caster_level; i++) {
                 // omnislash_image.HeroLevelUp(false);
             }
-            for (let ability_id = 0; ability_id <= 15; ability_id += 1) {
+            for (let ability_id = 0; ability_id <= 15; ability_id++) {
                 let ability = omnislash_image.GetAbilityByIndex(ability_id);
                 if (ability) {
                     let caster_ability = this.caster.FindAbilityByName(ability.GetAbilityName());
@@ -1354,7 +1354,7 @@ export class imba_juggernaut_omni_slash extends BaseAbility_Plus {
                     }
                 }
             }
-            for (let item_id = 0; item_id <= 5; item_id += 1) {
+            for (let item_id = 0; item_id <= 5; item_id++) {
                 let item_in_caster = this.caster.GetItemInSlot(item_id);
                 if (item_in_caster != undefined) {
                     let item_name = item_in_caster.GetName();
@@ -1366,7 +1366,7 @@ export class imba_juggernaut_omni_slash extends BaseAbility_Plus {
                 }
             }
             let caster_modifiers = this.caster.FindAllModifiers();
-            for (const [_, modifier] of ipairs(caster_modifiers)) {
+            for (const [_, modifier] of GameFunc.iPair(caster_modifiers)) {
                 if (modifier.GetName() == "modifier_imba_juggernaut_blade_fury") {
                     let caster_blade_fury_modifier = this.caster.findBuff<modifier_imba_juggernaut_blade_fury>("modifier_imba_juggernaut_blade_fury");
                     let blade_fury_modifier = omnislash_image.AddNewModifier(omnislash_image, modifier.GetAbilityPlus(), modifier.GetName(), {
@@ -1610,7 +1610,7 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
             }
         }
         if (GameFunc.GetCount(this.nearby_enemies) >= 1) {
-            for (const [_, enemy] of ipairs(this.nearby_enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(this.nearby_enemies)) {
                 let previous_position = this.parent.GetAbsOrigin();
                 FindClearSpaceForUnit(this.parent, enemy.GetAbsOrigin() + RandomVector(100) as Vector, false);
                 if (!this.GetAbilityPlus()) {
@@ -1726,14 +1726,14 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
                 }
                 this.GetParentPlus().MakeIllusion();
                 this.GetParentPlus().RemoveModifierByName("modifier_imba_omni_slash_image");
-                for (let item_id = 0; item_id <= 5; item_id += 1) {
+                for (let item_id = 0; item_id <= 5; item_id++) {
                     let item_in_caster = this.parent.GetItemInSlot(item_id);
                     if (item_in_caster != undefined) {
                         GFuncEntity.SafeDestroyItem(item_in_caster as IBaseItem_Plus);
                     }
                 }
                 let caster_modifiers = this.parent.FindAllModifiers();
-                for (const [_, modifier] of ipairs(caster_modifiers)) {
+                for (const [_, modifier] of GameFunc.iPair(caster_modifiers)) {
                     if (modifier) {
                         modifier.Destroy();
                     }

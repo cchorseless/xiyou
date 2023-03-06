@@ -548,7 +548,7 @@ export class imba_clinkz_searing_arrows extends BaseAbility_Plus {
         ProjectileManager.CreateTrackingProjectile(searing_arrow_active);
         if (caster.HasTalent("special_bonus_imba_clinkz_4")) {
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, caster.GetTalentValue("special_bonus_imba_clinkz_4"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != target) {
                     let searing_arrow_active_seconday;
                     searing_arrow_active_seconday = {
@@ -652,7 +652,7 @@ export class modifier_imba_searing_arrows_passive extends BaseModifier_Plus {
     CC_OnAttack(keys: ModifierAttackEvent): void {
         let owner = this.GetParentPlus().GetOwner() as IBaseNpc_Plus;
         if (keys.attacker == this.GetParentPlus() && !keys.no_attack_cooldown && ((this.GetParentPlus().HasTalent && this.GetParentPlus().HasTalent("special_bonus_imba_clinkz_10")) || (this.GetParentPlus().GetOwner && owner && owner.HasTalent("special_bonus_imba_clinkz_10")))) {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetParentPlus().Script_GetAttackRange(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetParentPlus().Script_GetAttackRange(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false))) {
                 if (enemy != keys.target) {
                     this.GetParentPlus().PerformAttack(enemy, false, true, true, false, true, false, false);
                     return;
@@ -818,7 +818,7 @@ export class modifier_imba_skeleton_walk_invis extends BaseModifier_Plus {
             }
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_clinkz_3")) {
                 let enemy_heroes = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, 128, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-                for (const [_, enemy] of ipairs(enemy_heroes)) {
+                for (const [_, enemy] of GameFunc.iPair(enemy_heroes)) {
                     if (!enemy.IsMagicImmune()) {
                         enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_skeleton_walk_talent_root", {
                             duration: this.GetCasterPlus().GetTalentValue("special_bonus_imba_clinkz_3") * (1 - enemy.GetStatusResistance())
@@ -872,7 +872,7 @@ export class modifier_imba_skeleton_walk_invis extends BaseModifier_Plus {
             let caster = keys.unit;
             if (this.GetParentPlus() == caster) {
                 let enemy = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, 1000, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_CLOSEST, false);
-                if (enemy[1] && enemy[1].CanEntityBeSeenByMyTeam(this.GetParentPlus())) {
+                if (enemy[0] && enemy[0].CanEntityBeSeenByMyTeam(this.GetParentPlus())) {
                     this.detected = true;
                 }
                 this.Destroy();
@@ -885,7 +885,7 @@ export class modifier_imba_skeleton_walk_invis extends BaseModifier_Plus {
             let attacker = keys.attacker;
             if (this.GetParentPlus() == attacker) {
                 let enemy = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, 1000, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_CLOSEST, false);
-                if (enemy[1] && enemy[1].CanEntityBeSeenByMyTeam(this.GetParentPlus())) {
+                if (enemy[0] && enemy[0].CanEntityBeSeenByMyTeam(this.GetParentPlus())) {
                     this.detected = true;
                 }
                 this.Destroy();
@@ -896,7 +896,7 @@ export class modifier_imba_skeleton_walk_invis extends BaseModifier_Plus {
         if (IsServer()) {
             // todo 需要重写 clinkz_burning_army
             if (this.GetCasterPlus().HasScepter() && this.GetCasterPlus().findAbliityPlus("clinkz_burning_army") && this.GetCasterPlus().FindAbilityByName("clinkz_burning_army").IsTrained()) {
-                for (let i = 1; i <= this.GetSpecialValueFor("scepter_skeleton_count"); i += 1) {
+                for (let i = 0; i < this.GetSpecialValueFor("scepter_skeleton_count"); i++) {
                     let pos = this.GetCasterPlus().GetAbsOrigin() + RandomVector(250) as Vector;
                     if (i == 1) {
                         pos = this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetRightVector() * 250 * (-1)) as Vector;
@@ -927,7 +927,7 @@ export class modifier_imba_skeleton_walk_invis extends BaseModifier_Plus {
             }
             EmitSoundOn(this.sound_cast, this.GetParentPlus());
             let enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.spook_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsMagicImmune()) {
                     let distance = (enemy.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D();
                     let spook_duration = this.base_spook_duration + (((this.spook_radius - distance) / this.spook_distance_inc) * this.spook_added_duration);
@@ -1221,7 +1221,7 @@ export class imba_clinkz_death_pact extends BaseAbility_Plus {
             let current_hp = target.GetHealth();
             caster.RemoveModifierByName(modifier_bonus_spirited);
             let spirits_to_kill = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, 500, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, unit] of ipairs(spirits_to_kill)) {
+            for (const [_, unit] of GameFunc.iPair(spirits_to_kill)) {
                 if (unit.FindModifierByNameAndCaster(modifier_spirited_aura, caster)) {
                     unit.Kill(ability, caster);
                 }
@@ -1567,7 +1567,7 @@ export class modifier_imba_death_pact_bonus_spirited extends BaseModifier_Plus {
                 let target = this.GetParentPlus().GetAttackTarget();
                 let modifier_spirited_aura = "modifier_imba_death_pact_spirit_aura";
                 let nearby_allies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, 500, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, spirits] of ipairs(nearby_allies)) {
+                for (const [_, spirits] of GameFunc.iPair(nearby_allies)) {
                     if (spirits.FindModifierByNameAndCaster(modifier_spirited_aura, this.GetParentPlus())) {
                         spirits.SetForceAttackTarget(target);
                     }
@@ -1701,7 +1701,7 @@ export class modifier_imba_death_pact_hero_debuff extends BaseModifier_Plus {
                 let modifier_bonus_spirited = "modifier_imba_death_pact_bonus_spirited";
                 let modifier_spirited_aura = "modifier_imba_death_pact_spirit_aura";
                 let spirits_to_kill = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, 500, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, unit] of ipairs(spirits_to_kill)) {
+                for (const [_, unit] of GameFunc.iPair(spirits_to_kill)) {
                     if (unit.FindModifierByNameAndCaster(modifier_spirited_aura, this.GetCasterPlus())) {
                         unit.Kill(this.GetAbilityPlus(), this.GetCasterPlus());
                     }

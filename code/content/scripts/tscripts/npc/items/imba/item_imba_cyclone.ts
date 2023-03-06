@@ -30,7 +30,7 @@ export class item_imba_cyclone_2 extends BaseItem_Plus {
             } else {
                 target.Purge(false, true, false, false, false);
             }
-            for (let tornado = 1; tornado <= this.GetSpecialValueFor("tornado_count"); tornado += 1) {
+            for (let tornado = 1; tornado <= this.GetSpecialValueFor("tornado_count"); tornado++) {
                 CreateModifierThinker(this.GetCasterPlus(), this, "modifier_item_imba_cyclone_2_thinker", {
                     duration: this.GetSpecialValueFor("cyclone_duration")
                 }, target.GetAbsOrigin() + RotatePosition(Vector(0, 0, 0), QAngle(0, tornado * (360 / this.GetSpecialValueFor("tornado_count")), 0), this.GetCasterPlus().GetForwardVector() * this.GetSpecialValueFor("tornado_spacing") as Vector) as Vector, this.GetCasterPlus().GetTeamNumber(), false);
@@ -76,7 +76,7 @@ export class modifier_item_imba_cyclone_2 extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        for (const [_, mod] of ipairs(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
+        for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
             mod.GetItemPlus().SetSecondaryCharges(_);
         }
     }
@@ -84,7 +84,7 @@ export class modifier_item_imba_cyclone_2 extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        for (const [_, modifier] of ipairs(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
+        for (const [_, modifier] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
             modifier.SetStackCount(_);
             modifier.GetItemPlus().SetSecondaryCharges(_);
         }
@@ -174,13 +174,13 @@ export class modifier_item_imba_cyclone_2_thinker extends BaseModifier_Plus {
             }
         }
         this.effect_table = {
-            1: "particles/econ/events/ti5/cyclone_ti5.vpcf",
-            2: "particles/econ/events/ti6/cyclone_ti6.vpcf",
-            3: "particles/econ/events/fall_major_2016/cyclone_fm06.vpcf",
-            4: "particles/econ/events/ti7/cyclone_ti7.vpcf",
-            5: "particles/econ/events/winter_major_2017/cyclone_wm07.vpcf",
-            6: "particles/econ/events/ti8/cyclone_ti8.vpcf",
-            7: "particles/econ/events/ti9/cyclone_ti9.vpcf"
+            "1": "particles/econ/events/ti5/cyclone_ti5.vpcf",
+            "2": "particles/econ/events/ti6/cyclone_ti6.vpcf",
+            "3": "particles/econ/events/fall_major_2016/cyclone_fm06.vpcf",
+            "4": "particles/econ/events/ti7/cyclone_ti7.vpcf",
+            "5": "particles/econ/events/winter_major_2017/cyclone_wm07.vpcf",
+            "6": "particles/econ/events/ti8/cyclone_ti8.vpcf",
+            "7": "particles/econ/events/ti9/cyclone_ti9.vpcf"
         }
         this.effect = this.effect_table[RandomInt(1, GameFunc.GetCount(this.effect_table))];
         this.tornado_radius = this.GetItemPlus().GetSpecialValueFor("tornado_radius");

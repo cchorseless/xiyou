@@ -4,7 +4,7 @@ declare global {
     interface ITrackingProjectile {
         hTarget: IBaseNpc_Plus;
         hCaster: IBaseNpc_Plus;
-        hAbility: IBaseAbility_Plus;
+        hAbility: CDOTABaseAbility;
         iMoveSpeed: number;
         EffectName: string;
         SoundName?: string;

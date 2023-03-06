@@ -348,7 +348,7 @@ export class imba_bane_enfeeble extends BaseAbility_Plus {
             }
             if (caster.HasTalent("special_bonus_imba_bane_2")) {
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, talent_aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     enemy.AddNewModifier(caster, this, "modifier_imba_enfeeble_debuff", {
                         duration: enfeeble_duration * (1 - enemy.GetStatusResistance())
                     });
@@ -444,7 +444,7 @@ export class modifier_imba_enfeeble_debuff extends BaseModifier_Plus {
     BeRefresh(p_0: any,): void {
         if (IsServer()) {
             if (this.GetStackCount() < 5) {
-                table.insert(this.stacks_table, GameRules.GetGameTime());
+                this.stacks_table.push(GameRules.GetGameTime());
             }
             let caster = this.GetCasterPlus();
             this.strength_bonus = -(this.parent.GetStrength() * (caster.GetTalentValue("special_bonus_imba_bane_4") * 0.01));
@@ -612,7 +612,7 @@ export class imba_bane_brain_sap extends BaseAbility_Plus {
             }
             if (enfeeble_debuff) {
                 enfeeble_charges = target.findBuffStack("modifier_imba_enfeeble_debuff", caster);
-                for (const [k, v] of ipairs(enfeeble_debuff.stacks_table)) {
+                for (const [k, v] of GameFunc.iPair(enfeeble_debuff.stacks_table)) {
                     enfeeble_debuff.stacks_table[k] = undefined;
                 }
                 enfeeble_debuff.SetStackCount(0);
@@ -752,7 +752,7 @@ export class imba_bane_nightmare extends BaseAbility_Plus {
                 enfeeble_duration = enfeeble.GetSpecialValueFor("enfeeble_duration");
             }
             if (caster.GetTeamNumber() != target.GetTeamNumber() && caster.HasTalent("special_bonus_imba_bane_1")) {
-                for (let i = 1; i <= talent_enfeeble_stacks; i += 1) {
+                for (let i = 0; i < talent_enfeeble_stacks; i++) {
                     target.AddNewModifier(caster, enfeeble, "modifier_imba_enfeeble_debuff", {
                         duration: enfeeble_duration * (1 - target.GetStatusResistance())
                     });
@@ -797,7 +797,7 @@ export class imba_bane_nightmare_end extends BaseAbility_Plus {
             let caster = this.GetCasterPlus();
             EmitSoundOn("Hero_Bane.Nightmare.End", caster);
             let units = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, unit] of ipairs(units)) {
+            for (const [_, unit] of GameFunc.iPair(units)) {
                 if (unit.HasModifier("modifier_imba_nightmare_invul")) {
                     unit.RemoveModifierByName("modifier_imba_nightmare_invul");
                 }
@@ -1047,7 +1047,7 @@ export class imba_bane_fiends_grip extends BaseAbility_Plus {
             if (!this.fiendgriptable) {
                 return;
             }
-            for (const [k, v] of ipairs(this.fiendgriptable)) {
+            for (const [k, v] of GameFunc.iPair(this.fiendgriptable)) {
                 if (((v.HasModifier("modifier_imba_fiends_grip_handler")) && v.findBuff<modifier_imba_fiends_grip_handler>("modifier_imba_fiends_grip_handler").propogated == 0)) {
                     v.findBuff<modifier_imba_fiends_grip_handler>("modifier_imba_fiends_grip_handler").Destroy();
                 }
@@ -1064,7 +1064,7 @@ export class imba_bane_fiends_grip extends BaseAbility_Plus {
                 let fiends_grip_duration = this.GetTalentSpecialValueFor("fiends_grip_duration");
                 let caster_location = caster.GetAbsOrigin();
                 let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_location, undefined, vision_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(nearby_enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {
                     if (!enemy.HasModifier("modifier_imba_fiends_grip_handler")) {
                         let enemy_location = enemy.GetAbsOrigin();
                         let enemy_to_caster_direction = GFuncVector.AsVector(caster_location - enemy_location).Normalized();
@@ -1075,7 +1075,7 @@ export class imba_bane_fiends_grip extends BaseAbility_Plus {
                                 duration: fiends_grip_duration - (GameRules.GetGameTime() - this.GetChannelStartTime()),
                                 propogated: 0
                             });
-                            table.insert(this.fiendgriptable, enemy);
+                            this.fiendgriptable.push(enemy);
                         }
                     }
                 }
@@ -1254,7 +1254,7 @@ export class modifier_imba_fiends_grip_handler extends BaseModifier_Plus {
                     }
                     parent.TempData<any[]>().grip_link_particle_table = [];
                     let creatures = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, creature] of ipairs(creatures)) {
+                    for (const [_, creature] of GameFunc.iPair(creatures)) {
                         if (creature.GetUnitName() == "npc_imba_fiends_grip_demon" && creature.GetPlayerOwnerID() == caster.GetPlayerID()) {
                             creature.ForceKill(false);
                         }
@@ -1299,7 +1299,7 @@ export class modifier_imba_fiends_grip_talent extends BaseModifier_Plus {
                 let fiends_grip_duration = ability.GetTalentSpecialValueFor("fiends_grip_duration");
                 let caster_location = caster.GetAbsOrigin();
                 let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_location, undefined, vision_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(nearby_enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {
                     if (!enemy.HasModifier("modifier_imba_fiends_grip_handler")) {
                         let enemy_location = enemy.GetAbsOrigin();
                         let enemy_to_caster_direction = GFuncVector.AsVector(caster_location - enemy_location).Normalized();
@@ -1310,7 +1310,7 @@ export class modifier_imba_fiends_grip_talent extends BaseModifier_Plus {
                                 duration: fiends_grip_duration - (GameRules.GetGameTime() - this.GetCreationTime()),
                                 propogated: 0
                             });
-                            table.insert(ability.fiendgriptable, enemy);
+                            ability.fiendgriptable.push(enemy);
                         }
                     }
                 }
@@ -1329,7 +1329,7 @@ export class modifier_imba_fiends_grip_talent extends BaseModifier_Plus {
         let caster = this.GetCasterPlus();
         let ability = this.GetAbilityPlus<imba_bane_fiends_grip>();
         if (unit == caster && (caster.IsStunned() || caster.IsSilenced())) {
-            for (let num = 1; num <= GameFunc.GetCount(ability.fiendgriptable); num += 1) {
+            for (let num = 0; num < GameFunc.GetCount(ability.fiendgriptable); num++) {
                 if (ability.fiendgriptable[num] && ability.fiendgriptable[num].HasModifier && ability.fiendgriptable[num].HasModifier("modifier_imba_fiends_grip_handler") && ability.fiendgriptable[num].findBuff<modifier_imba_fiends_grip_handler>("modifier_imba_fiends_grip_handler").propogated == 0) {
                     ability.fiendgriptable[num].findBuff<modifier_imba_fiends_grip_handler>("modifier_imba_fiends_grip_handler").Destroy();
                 }

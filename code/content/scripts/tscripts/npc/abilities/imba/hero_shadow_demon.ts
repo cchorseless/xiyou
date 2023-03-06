@@ -19,24 +19,24 @@ export class imba_shadow_demon_disruption extends BaseAbility_Plus {
         let ability = this;
         let target = ability.GetCursorTarget();
         let responses_enemy = {
-            1: "shadow_demon_shadow_demon_ability_disruption_01",
-            2: "shadow_demon_shadow_demon_ability_disruption_02",
-            3: "shadow_demon_shadow_demon_ability_disruption_03",
-            4: "shadow_demon_shadow_demon_ability_disruption_04",
-            5: "shadow_demon_shadow_demon_ability_disruption_20"
+            "1": "shadow_demon_shadow_demon_ability_disruption_01",
+            "2": "shadow_demon_shadow_demon_ability_disruption_02",
+            "3": "shadow_demon_shadow_demon_ability_disruption_03",
+            "4": "shadow_demon_shadow_demon_ability_disruption_04",
+            "5": "shadow_demon_shadow_demon_ability_disruption_20"
         }
         let responses_friendly = {
-            1: "shadow_demon_shadow_demon_ability_disruption_09",
-            2: "shadow_demon_shadow_demon_ability_disruption_10",
-            3: "shadow_demon_shadow_demon_ability_disruption_11",
-            4: "shadow_demon_shadow_demon_ability_disruption_12"
+            "1": "shadow_demon_shadow_demon_ability_disruption_09",
+            "2": "shadow_demon_shadow_demon_ability_disruption_10",
+            "3": "shadow_demon_shadow_demon_ability_disruption_11",
+            "4": "shadow_demon_shadow_demon_ability_disruption_12"
         }
         let responses_self = {
-            1: "shadow_demon_shadow_demon_ability_disruption_15",
-            2: "shadow_demon_shadow_demon_ability_disruption_16",
-            3: "shadow_demon_shadow_demon_ability_disruption_17",
-            4: "shadow_demon_shadow_demon_ability_disruption_18",
-            5: "shadow_demon_shadow_demon_ability_disruption_19"
+            "1": "shadow_demon_shadow_demon_ability_disruption_15",
+            "2": "shadow_demon_shadow_demon_ability_disruption_16",
+            "3": "shadow_demon_shadow_demon_ability_disruption_17",
+            "4": "shadow_demon_shadow_demon_ability_disruption_18",
+            "5": "shadow_demon_shadow_demon_ability_disruption_19"
         }
         let cast_sound = "Hero_ShadowDemon.Disruption.Cast";
         let modifier_disruption = "modifier_imba_disruption_hidden";
@@ -109,14 +109,14 @@ export class modifier_imba_disruption_hidden extends BaseModifier_Plus {
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
         this.responses_enemy_end = {
-            1: "shadow_demon_shadow_demon_ability_disruption_05",
-            2: "shadow_demon_shadow_demon_ability_disruption_06",
-            3: "shadow_demon_shadow_demon_ability_disruption_07",
-            4: "shadow_demon_shadow_demon_ability_disruption_08"
+            "1": "shadow_demon_shadow_demon_ability_disruption_05",
+            "2": "shadow_demon_shadow_demon_ability_disruption_06",
+            "3": "shadow_demon_shadow_demon_ability_disruption_07",
+            "4": "shadow_demon_shadow_demon_ability_disruption_08"
         }
         this.responses_friendly_end = {
-            1: "shadow_demon_shadow_demon_ability_disruption_13",
-            2: "shadow_demon_shadow_demon_ability_disruption_14"
+            "1": "shadow_demon_shadow_demon_ability_disruption_13",
+            "2": "shadow_demon_shadow_demon_ability_disruption_14"
         }
         this.disruption_sound = "Hero_ShadowDemon.Disruption";
         this.disruption_end_sound = "Hero_ShadowDemon.Disruption.End";
@@ -185,7 +185,7 @@ export class modifier_imba_disruption_hidden extends BaseModifier_Plus {
                 bounty_base: this.GetCasterPlus().GetIllusionBounty(),
                 duration: this.illusion_duration
             }, this.illusion_count);
-            for (const [_, illusion] of ipairs(illusions)) {
+            for (const [_, illusion] of GameFunc.iPair(illusions)) {
                 illusion.SetHealth(this.current_health);
                 illusion.AddNewModifier(this.caster, this.ability, this.modifier_illusion_soul, {
                     soul_target: this.parent.entindex()
@@ -346,16 +346,16 @@ export class imba_shadow_demon_soul_catcher extends BaseAbility_Plus {
         let ability = this;
         let target_point = this.GetCursorPosition();
         let responses_catch = {
-            1: "shadow_demon_shadow_demon_ability_soul_catcher_01",
-            2: "shadow_demon_shadow_demon_ability_soul_catcher_02",
-            3: "shadow_demon_shadow_demon_ability_soul_catcher_03",
-            4: "shadow_demon_shadow_demon_ability_soul_catcher_08"
+            "1": "shadow_demon_shadow_demon_ability_soul_catcher_01",
+            "2": "shadow_demon_shadow_demon_ability_soul_catcher_02",
+            "3": "shadow_demon_shadow_demon_ability_soul_catcher_03",
+            "4": "shadow_demon_shadow_demon_ability_soul_catcher_08"
         }
         let responses_miss = {
-            1: "shadow_demon_shadow_demon_ability_soul_catcher_04",
-            2: "shadow_demon_shadow_demon_ability_soul_catcher_05",
-            3: "shadow_demon_shadow_demon_ability_soul_catcher_06",
-            4: "shadow_demon_shadow_demon_ability_soul_catcher_07"
+            "1": "shadow_demon_shadow_demon_ability_soul_catcher_04",
+            "2": "shadow_demon_shadow_demon_ability_soul_catcher_05",
+            "3": "shadow_demon_shadow_demon_ability_soul_catcher_06",
+            "4": "shadow_demon_shadow_demon_ability_soul_catcher_07"
         }
         let cast_sound = "Hero_ShadowDemon.Soul_Catcher.Cast";
         let hit_sound = "Hero_ShadowDemon.Soul_Catcher";
@@ -380,7 +380,7 @@ export class imba_shadow_demon_soul_catcher extends BaseAbility_Plus {
         });
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
         let total_health_stolen = 0;
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let valid_enemy = true;
             if (enemy.IsInvulnerable() && !enemy.HasModifier("modifier_imba_disruption_hidden")) {
                 valid_enemy = false;
@@ -431,7 +431,7 @@ export class imba_shadow_demon_soul_catcher extends BaseAbility_Plus {
             return;
         }
         let allied_heal = total_health_stolen / GameFunc.GetCount(allies);
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             let valid_ally = true;
             if (ally.IsInvulnerable() && !ally.HasModifier("modifier_imba_disruption_hidden")) {
                 valid_ally = false;
@@ -603,7 +603,7 @@ export class modifier_imba_soul_catcher_debuff extends BaseModifier_Plus {
                     let direction = this.parent.GetForwardVector();
                     let rotation_per_projectile = 360 / this.unleashed_projectile_count;
                     let new_direction: Vector;
-                    for (let i = 1; i <= this.unleashed_projectile_count; i += 1) {
+                    for (let i = 0; i < this.unleashed_projectile_count; i++) {
                         let angle = QAngle(0, (i - 1) * (rotation_per_projectile), 0);
                         new_direction = RotatePosition(origin_point, angle, direction);
                         shadow_poison_ability_handle.FireShadowPoisonProjectile(origin_point, new_direction, true);
@@ -751,7 +751,7 @@ export class imba_shadow_demon_shadow_poison extends BaseAbility_Plus {
         let total_stacks = 1 + additional_stacks;
         let modifier_shadow_poison_handle = target.FindModifierByName(modifier_shadow_poison);
         if (modifier_shadow_poison_handle) {
-            for (let i = 1; i <= total_stacks; i += 1) {
+            for (let i = 0; i < total_stacks; i++) {
                 modifier_shadow_poison_handle.IncrementStackCount();
                 modifier_shadow_poison_handle.ForceRefresh();
             }
@@ -816,11 +816,11 @@ export class modifier_shadow_poison_debuff extends BaseModifier_Plus {
         this.particle_kill = "particles/units/heroes/hero_shadow_demon/shadow_demon_shadow_poison_kill.vpcf";
         this.particle_illusion_blast = "particles/hero/shadow_demon/shadow_demon_shadow_poison_soul_illusion_blast.vpcf";
         this.kill_responses = {
-            1: "shadow_demon_shadow_demon_ability_shadow_poison_05",
-            2: "shadow_demon_shadow_demon_ability_shadow_poison_06",
-            3: "shadow_demon_shadow_demon_ability_shadow_poison_08",
-            4: "shadow_demon_shadow_demon_ability_shadow_poison_09",
-            5: "shadow_demon_shadow_demon_ability_shadow_poison_10"
+            "1": "shadow_demon_shadow_demon_ability_shadow_poison_05",
+            "2": "shadow_demon_shadow_demon_ability_shadow_poison_06",
+            "3": "shadow_demon_shadow_demon_ability_shadow_poison_08",
+            "4": "shadow_demon_shadow_demon_ability_shadow_poison_09",
+            "5": "shadow_demon_shadow_demon_ability_shadow_poison_10"
         }
         this.modifier_demonic_purge = "modifier_imba_demonic_purge_debuff";
         this.stack_damage = this.ability.GetSpecialValueFor("stack_damage") * (1 + (this.caster.GetTalentValue("special_bonus_imba_shadow_demon_shadow_poison_damage") * 0.01));
@@ -902,7 +902,7 @@ export class modifier_shadow_poison_debuff extends BaseModifier_Plus {
             SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, this.parent, damage, undefined);
             if (!this.parent.IsAlive()) {
                 if (RollPercentage(20)) {
-                    EmitSoundOn(this.kill_responses[RandomInt(1, GameFunc.GetCount(this.kill_responses))], this.caster);
+                    EmitSoundOn(GFuncRandom.RandomValue(this.kill_responses), this.caster);
                 }
             }
         } else if (this.parent.HasModifier("modifier_imba_disruption_soul_illusion")) {
@@ -918,7 +918,7 @@ export class modifier_shadow_poison_debuff extends BaseModifier_Plus {
             let damage = this.CalculateShadowPoisonDamage();
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.linked_pain_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
             let enemy_killed = false;
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let valid_enemy = true;
                 if (!enemy.IsAlive() || enemy.IsMagicImmune()) {
                     valid_enemy = false;
@@ -951,7 +951,7 @@ export class modifier_shadow_poison_debuff extends BaseModifier_Plus {
             if (enemy_killed) {
                 if (!this.parent.IsAlive()) {
                     if (RollPercentage(20)) {
-                        EmitSoundOn(this.kill_responses[RandomInt(1, GameFunc.GetCount(this.kill_responses))], this.caster);
+                        EmitSoundOn(GFuncRandom.RandomValue(this.kill_responses), this.caster);
                     }
                 }
             }
@@ -972,7 +972,7 @@ export class imba_shadow_demon_shadow_poison_release extends BaseAbility_Plus {
         let highest_stack = 0;
         let modifier_poison_handle;
         let stacks;
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (enemy.HasModifier(modifier_poison)) {
                 modifier_poison_handle = enemy.FindModifierByName(modifier_poison);
                 if (modifier_poison_handle) {
@@ -984,7 +984,7 @@ export class imba_shadow_demon_shadow_poison_release extends BaseAbility_Plus {
                 }
             }
         }
-        for (const [_, enemy] of ipairs(debuffed_enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(debuffed_enemies)) {
             modifier_poison_handle = enemy.FindModifierByName(modifier_poison) as modifier_shadow_poison_debuff;
             if (modifier_poison_handle) {
                 modifier_poison_handle.highest_stack = highest_stack;
@@ -992,7 +992,7 @@ export class imba_shadow_demon_shadow_poison_release extends BaseAbility_Plus {
             }
         }
         let illusions = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, illusion] of ipairs(illusions)) {
+        for (const [_, illusion] of GameFunc.iPair(illusions)) {
             if (illusion.IsIllusion() && illusion.HasModifier("modifier_imba_disruption_soul_illusion") && illusion.HasModifier(modifier_poison)) {
                 let modifier_poison_handle = illusion.FindModifierByName(modifier_poison);
                 if (modifier_poison_handle) {
@@ -1021,7 +1021,7 @@ export class imba_shadow_demon_demonic_purge extends BaseAbility_Plus {
             } else {
                 let modifiers = this.GetCasterPlus().FindAllModifiersByName("modifier_generic_charges");
                 let found_modifier = false;
-                for (const [_, modifier] of ipairs(modifiers)) {
+                for (const [_, modifier] of GameFunc.iPair(modifiers)) {
                     if (modifier.GetAbilityPlus() && modifier.GetAbilityPlus() == this) {
                         found_modifier = true;
                         return;
@@ -1039,15 +1039,15 @@ export class imba_shadow_demon_demonic_purge extends BaseAbility_Plus {
         let target = ability.GetCursorTarget();
         let cast_sound = "Hero_ShadowDemon.DemonicPurge.Cast";
         let cast_responses = {
-            1: "shadow_demon_shadow_demon_ability_demonic_purge_01",
-            2: "shadow_demon_shadow_demon_ability_demonic_purge_02",
-            3: "shadow_demon_shadow_demon_ability_demonic_purge_03",
-            4: "shadow_demon_shadow_demon_ability_demonic_purge_04",
-            5: "shadow_demon_shadow_demon_ability_demonic_purge_05",
-            6: "shadow_demon_shadow_demon_ability_demonic_purge_06",
-            7: "shadow_demon_shadow_demon_ability_demonic_purge_07",
-            8: "shadow_demon_shadow_demon_ability_demonic_purge_08",
-            9: "shadow_demon_shadow_demon_ability_demonic_purge_09"
+            "1": "shadow_demon_shadow_demon_ability_demonic_purge_01",
+            "2": "shadow_demon_shadow_demon_ability_demonic_purge_02",
+            "3": "shadow_demon_shadow_demon_ability_demonic_purge_03",
+            "4": "shadow_demon_shadow_demon_ability_demonic_purge_04",
+            "5": "shadow_demon_shadow_demon_ability_demonic_purge_05",
+            "6": "shadow_demon_shadow_demon_ability_demonic_purge_06",
+            "7": "shadow_demon_shadow_demon_ability_demonic_purge_07",
+            "8": "shadow_demon_shadow_demon_ability_demonic_purge_08",
+            "9": "shadow_demon_shadow_demon_ability_demonic_purge_09"
         }
         let particle_cast = "particles/units/heroes/hero_shadow_demon/shadow_demon_demonic_purge_cast.vpcf";
         let modifier_debuff = "modifier_imba_demonic_purge_debuff";
@@ -1289,7 +1289,7 @@ export class modifier_imba_demonic_purge_elated_demon_buff extends BaseModifier_
     OnIntervalThink(): void {
         let repeat_needed = true;
         while (repeat_needed) {
-            let item_time = this.stack_table[1];
+            let item_time = this.stack_table[0];
             if (GameRules.GetGameTime() - item_time >= this.elated_demon_duration) {
                 if (this.GetStackCount() == 1) {
                     this.Destroy();

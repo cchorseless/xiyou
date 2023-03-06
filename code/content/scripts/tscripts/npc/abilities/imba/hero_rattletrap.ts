@@ -70,11 +70,11 @@ export class modifier_imba_rattletrap_battery_assault extends BaseModifier_Plus 
         let particle2 = ResHelper.CreateParticleEx("particles/units/heroes/hero_rattletrap/rattletrap_battery_shrapnel.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
         if (GameFunc.GetCount(enemies) >= 1) {
-            enemies[1].EmitSound("Hero_Rattletrap.Battery_Assault_Impact");
-            ParticleManager.SetParticleControl(particle2, 1, enemies[1].GetAbsOrigin());
+            enemies[0].EmitSound("Hero_Rattletrap.Battery_Assault_Impact");
+            ParticleManager.SetParticleControl(particle2, 1, enemies[0].GetAbsOrigin());
             if (!this.GetAbilityPlus() || (this.GetAbilityPlus() && !this.GetAbilityPlus().GetAutoCastState())) {
                 let damageTable = {
-                    victim: enemies[1],
+                    victim: enemies[0],
                     damage: this.damage,
                     damage_type: this.damage_type,
                     damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
@@ -82,12 +82,12 @@ export class modifier_imba_rattletrap_battery_assault extends BaseModifier_Plus 
                     ability: this.GetAbilityPlus()
                 }
                 ApplyDamage(damageTable);
-                enemies[1].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
-                    duration: 0.1 * (1 - enemies[1].GetStatusResistance())
+                enemies[0].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
+                    duration: 0.1 * (1 - enemies[0].GetStatusResistance())
                 });
             } else {
                 let damageTable = {
-                    victim: enemies[1],
+                    victim: enemies[0],
                     damage: this.damage * this.fragmentation_damage * 0.01,
                     damage_type: this.damage_type,
                     damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE,
@@ -95,8 +95,8 @@ export class modifier_imba_rattletrap_battery_assault extends BaseModifier_Plus 
                     ability: this.GetAbilityPlus()
                 }
                 ApplyDamage(damageTable);
-                enemies[1].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_rattletrap_battery_assault_fragmentation_rend", {
-                    duration: this.fragmentation_duration * (1 - enemies[1].GetStatusResistance())
+                enemies[0].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_rattletrap_battery_assault_fragmentation_rend", {
+                    duration: this.fragmentation_duration * (1 - enemies[0].GetStatusResistance())
                 });
             }
         } else {
@@ -241,7 +241,7 @@ export class imba_rattletrap_power_cogs extends BaseAbility_Plus {
         let cog_vector = GetGroundPosition(caster_pos + Vector(0, cogs_radius, 0) as Vector, undefined);
         let second_cog_vector = GetGroundPosition(caster_pos + Vector(0, cogs_radius * 2, 0) as Vector, undefined);
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_RATTLETRAP_POWERCOGS);
-        for (let cog = 1; cog <= num_of_cogs; cog += 1) {
+        for (let cog = 0; cog < num_of_cogs; cog++) {
             let cog = BaseNpc_Plus.CreateUnitByName("npc_dota_rattletrap_cog", cog_vector, this.GetCasterPlus().GetTeamNumber(), false, this.GetCasterPlus(), this.GetCasterPlus());
             cog.EmitSound("Hero_Rattletrap.Power_Cogs");
             cog.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_rattletrap_power_cogs", {
@@ -272,14 +272,14 @@ export class imba_rattletrap_power_cogs extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(deploy_particle);
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_rattletrap" && RollPercentage(50)) {
             let responses = {
-                1: "rattletrap_ratt_ability_cogs_01",
-                2: "rattletrap_ratt_ability_cogs_02",
-                3: "rattletrap_ratt_ability_cogs_07"
+                "1": "rattletrap_ratt_ability_cogs_01",
+                "2": "rattletrap_ratt_ability_cogs_02",
+                "3": "rattletrap_ratt_ability_cogs_07"
             }
             this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
         }
         let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("cogs_radius") + 80, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             if ((unit.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetSpecialValueFor("cogs_radius")) {
                 if (unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber()) {
                     FindClearSpaceForUnit(unit, unit.GetAbsOrigin(), false);
@@ -361,7 +361,7 @@ export class modifier_imba_rattletrap_power_cogs extends BaseModifier_Plus {
             }
         }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.trigger_distance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MANA_ONLY, FindOrder.FIND_CLOSEST, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (this.powered && !enemy.HasModifier("modifier_imba_rattletrap_cog_push") && math.abs(AngleDiff(VectorToAngles(this.GetParentPlus().GetForwardVector()).y, VectorToAngles(enemy.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).y)) <= 90) {
                 enemy.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_rattletrap_cog_push", {
                     duration: this.push_duration * (1 - enemy.GetStatusResistance()),
@@ -421,7 +421,7 @@ export class modifier_imba_rattletrap_power_cogs extends BaseModifier_Plus {
         if (keys.target == this.GetParentPlus()) {
             if (keys.attacker == this.GetCasterPlus()) {
                 this.GetParentPlus().Kill(undefined, this.GetCasterPlus());
-                for (let count = 1; count <= this.attacks_to_destroy; count += 1) {
+                for (let count = 1; count <= this.attacks_to_destroy; count++) {
                     keys.attacker.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_rattletrap_power_cogs_charge_coil_counter", {
                         duration: this.charge_coil_duration,
                         push_duration: this.push_duration,
@@ -438,7 +438,7 @@ export class modifier_imba_rattletrap_power_cogs extends BaseModifier_Plus {
                 if (this.health <= 0) {
                     this.GetParentPlus().Kill(undefined, keys.attacker);
                     if (keys.attacker.GetTeamNumber() == this.GetParentPlus().GetTeamNumber()) {
-                        for (let count = 1; count <= this.attacks_to_destroy; count += 1) {
+                        for (let count = 1; count <= this.attacks_to_destroy; count++) {
                             keys.attacker.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_rattletrap_power_cogs_charge_coil_counter", {
                                 duration: this.charge_coil_duration,
                                 push_duration: this.push_duration,
@@ -548,7 +548,7 @@ export class modifier_imba_rattletrap_power_cogs_charge_coil_counter extends Bas
         if (this.GetStackCount() <= 0) {
             let charge_coil_instances = this.GetParentPlus().FindAllModifiersByName("modifier_imba_rattletrap_power_cogs_charge_coil_instance");
             if (GameFunc.GetCount(charge_coil_instances) >= 1) {
-                for (const [_, modifier] of ipairs(charge_coil_instances)) {
+                for (const [_, modifier] of GameFunc.iPair(charge_coil_instances)) {
                     modifier.Destroy();
                 }
             }
@@ -592,7 +592,7 @@ export class modifier_imba_rattletrap_power_cogs_charge_coil_counter extends Bas
                     mana_burn: this.mana_burn,
                     push_length: 0
                 });
-                charge_coil_instances[1].Destroy();
+                charge_coil_instances[0].Destroy();
             }
         }
     }
@@ -604,7 +604,7 @@ export class modifier_imba_rattletrap_power_cogs_charge_coil_counter extends Bas
         if (keys.attacker.IsRangedAttacker() && keys.attacker == this.GetParentPlus() && !keys.target.IsBuilding() && !keys.target.IsMagicImmune() && !keys.target.IsOther() && keys.target.GetName() != "npc_dota_rattletrap_cog" && !keys.target.HasModifier("modifier_imba_rattletrap_cog_push")) {
             let charge_coil_instances = this.GetParentPlus().FindAllModifiersByName("modifier_imba_rattletrap_power_cogs_charge_coil_instance");
             if (GameFunc.GetCount(charge_coil_instances) >= 1) {
-                charge_coil_instances[1].Destroy();
+                charge_coil_instances[0].Destroy();
             }
         }
     }
@@ -717,7 +717,7 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
             ProjectileManager.CreateTrackingProjectile(rocket);
             rocket_target.RemoveSelf();
         } else {
-            for (let instance = 0; instance <= this.GetSpecialValueFor("carpet_fire_rockets") - 1; instance += 1) {
+            for (let instance = 0; instance <= this.GetSpecialValueFor("carpet_fire_rockets") - 1; instance++) {
                 let cursor_position = this.GetCursorPosition();
                 this.AddTimer(this.GetSpecialValueFor("carpet_fire_delay") * instance, () => {
                     if (this) {
@@ -785,7 +785,7 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
             damage = damage * this.GetSpecialValueFor("carpet_fire_damage") * 0.01;
         }
         let cast_position = Vector(ExtraData.x, ExtraData.y, ExtraData.z);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let flare_damage = damage;
             let travel_distance = (enemy.GetAbsOrigin() - cast_position as Vector).Length2D();
             let target_distance = (enemy.GetAbsOrigin() - vLocation as Vector).Length2D();
@@ -934,7 +934,7 @@ export class imba_rattletrap_hookshot extends BaseAbility_Plus {
             return;
         }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), vLocation, undefined, this.GetSpecialValueFor("razor_wind_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let distance_vector = enemy.GetAbsOrigin() - vLocation as Vector;
             if (distance_vector.Length2D() > this.GetSpecialValueFor("latch_radius") && math.abs(math.abs(AngleDiff(VectorToAngles(distance_vector).y, VectorToAngles(this.direction).y)) - 90) <= 30 && !this.razor_wind[enemy.GetEntityIndex()]) {
                 enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
@@ -1049,12 +1049,12 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
             return;
         } else if (this.GetCasterPlus().GetName() == "npc_dota_hero_rattletrap") {
             let responses = {
-                1: "rattletrap_ratt_ability_batt_06",
-                2: "rattletrap_ratt_ability_batt_07",
-                3: "rattletrap_ratt_ability_batt_11",
-                4: "rattletrap_ratt_ability_hook_01",
-                5: "rattletrap_ratt_ability_hook_02",
-                6: "rattletrap_ratt_ability_hook_06"
+                "1": "rattletrap_ratt_ability_batt_06",
+                "2": "rattletrap_ratt_ability_batt_07",
+                "3": "rattletrap_ratt_ability_batt_11",
+                "4": "rattletrap_ratt_ability_hook_01",
+                "5": "rattletrap_ratt_ability_hook_02",
+                "6": "rattletrap_ratt_ability_hook_06"
             }
             this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
         }
@@ -1064,7 +1064,7 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
             return;
         }
         if (this.GetCasterPlus() == this.GetParentPlus()) {
-            for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.stun_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.stun_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
                 if (unit.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber() && !this.enemies_hit[unit.GetEntityIndex()]) {
                     unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
                         duration: this.stun_duration * (1 - unit.GetStatusResistance())
@@ -1112,9 +1112,9 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_rattletrap" && (this.GetCasterPlus().GetAbsOrigin() - this.target.GetAbsOrigin() as Vector).Length2D() <= this.latch_radius && RollPercentage(15)) {
             if (this.target.GetName() == "npc_dota_hero_pudge") {
                 let responses = {
-                    1: "rattletrap_ratt_ability_hook_08",
-                    2: "rattletrap_ratt_ability_hook_11",
-                    3: "rattletrap_ratt_ability_hook_12"
+                    "1": "rattletrap_ratt_ability_hook_08",
+                    "2": "rattletrap_ratt_ability_hook_11",
+                    "3": "rattletrap_ratt_ability_hook_12"
                 }
                 this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
             } else if (this.target.GetName() == "npc_dota_hero_tinker") {
@@ -1132,7 +1132,7 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
             this.GetCasterPlus().GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON).RemoveEffects(EntityEffects.EF_NODRAW);
         }
         if (this.GetCasterPlus() == this.GetParentPlus()) {
-            for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.stun_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.stun_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
                 if (!this.enemies_hit[unit.GetEntityIndex()]) {
                     unit.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
                         duration: this.stun_duration * (1 - unit.GetStatusResistance())

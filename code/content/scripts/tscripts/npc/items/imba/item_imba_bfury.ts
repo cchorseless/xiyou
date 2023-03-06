@@ -11,13 +11,13 @@
 // import { pairs } from "@wowts/lua";
 // function BattleFury(keys) {
 //     let caster = keys.caster;
-//     let target = keys.target_points[1];
+//     let target = keys.target_points[0];
 //     let ability = keys.ability;
 //     let ability_level = ability.GetLevel() - 1;
 //     let chop_radius = ability.GetLevelSpecialValueFor("chop_radius", ability_level);
 //     GridNav.DestroyTreesAroundPoint(target, chop_radius, false);
 //     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target, undefined, chop_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-//     for (const [_, enemy] of ipairs(enemies)) {
+//     for (const [_, enemy] of GameFunc.iPair(enemies)) {
 //         if (IsWardOrBomb(enemy)) {
 //             enemy.Kill(ability, caster);
 //         }
@@ -57,7 +57,7 @@
 //     let cleave_pfx = ResHelper.CreateParticleEx(particle_cleave, ParticleAttachment_t.PATTACH_ABSORIGIN, target);
 //     ParticleManager.SetParticleControl(cleave_pfx, 0, target_loc);
 //     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_loc, undefined, cleave_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-//     for (const [_, enemy] of ipairs(enemies)) {
+//     for (const [_, enemy] of GameFunc.iPair(enemies)) {
 //         if (enemy != target && !enemy.IsAttackImmune()) {
 //             ApplyDamage({
 //                 attacker: caster,

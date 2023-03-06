@@ -123,7 +123,7 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
                 let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), hTarget.GetAbsOrigin(), undefined, ExtraData.bounce_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, this.GetAbilityTargetType(), DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, 0, false);
                 let tJumpTargets: IBaseNpc_Plus[] = []
                 if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
-                    for (const [_, unit] of ipairs(enemies)) {
+                    for (const [_, unit] of GameFunc.iPair(enemies)) {
                         if (hTarget) {
                             if ((unit != hTarget) && (!unit.IsOther()) && ((this.tempdata["split_" + ExtraData.index] >= 1) || GameFunc.GetCount(tJumpTargets) == 0)) {
                                 table.insert(tJumpTargets, unit);
@@ -136,7 +136,7 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
                     }
                 } else {
                     if (GameFunc.GetCount(tJumpTargets) == 0) {
-                        for (const [_, unit] of ipairs(allies)) {
+                        for (const [_, unit] of GameFunc.iPair(allies)) {
                             if (hTarget) {
                                 if ((unit != hTarget) && (!unit.IsOther())) {
                                     table.insert(tJumpTargets, unit);
@@ -158,7 +158,7 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
                 } else if (GameFunc.GetCount(tJumpTargets) >= 2) {
                     this.tempdata["split_" + ExtraData.index] = this.tempdata["split_" + ExtraData.index] - 1;
                 }
-                for (const [_, hJumpTarget] of ipairs(tJumpTargets)) {
+                for (const [_, hJumpTarget] of GameFunc.iPair(tJumpTargets)) {
                     let projectile = {
                         Target: hJumpTarget,
                         Source: hTarget,
@@ -251,7 +251,7 @@ export class imba_witch_doctor_voodoo_restoration extends BaseAbility_Plus {
                 if (GameRules.GetGameTime() >= this.previous_dispell_time + this.GetCasterPlus().GetTalentValue("special_bonus_imba_witch_doctor_2")) {
                     this.previous_dispell_time = GameRules.GetGameTime();
                     let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), 0, false);
-                    for (const [_, hAlly] of ipairs(allies)) {
+                    for (const [_, hAlly] of GameFunc.iPair(allies)) {
                         let bRemoveStuns = false;
                         let bRemoveExceptions = false;
                         if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_3")) {
@@ -350,7 +350,7 @@ export class modifier_imba_voodoo_restoration extends BaseModifier_Plus {
         if (this.cleanse_counter >= this.cleanse_interval) {
             this.cleanse_counter = 0;
             let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.radius, hAbility.GetAbilityTargetTeam(), hAbility.GetAbilityTargetType(), hAbility.GetAbilityTargetFlags(), 0, false);
-            for (const [_, hAlly] of ipairs(allies)) {
+            for (const [_, hAlly] of GameFunc.iPair(allies)) {
                 let bRemoveStuns = false;
                 let bRemoveExceptions = false;
                 if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_3")) {
@@ -472,7 +472,7 @@ export class imba_witch_doctor_maledict extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(aoe_pfx, 1, Vector(radius, radius, radius));
         if (GameFunc.GetCount(enemies) > 0) {
             EmitSoundOn("Hero_WitchDoctor.Maledict_Cast", this.GetCasterPlus());
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_maledict", {
                     duration: duration + (FrameTime())
                 });
@@ -646,7 +646,7 @@ export class modifier_imba_maledict extends BaseModifier_Plus {
         EmitSoundOn("Hero_WitchDoctor.Maledict_Tick", hTarget);
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_1")) {
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), hTarget.GetAbsOrigin(), undefined, this.GetCasterPlus().GetTalentValue("special_bonus_imba_witch_doctor_1"), hAbility.GetAbilityTargetTeam(), hAbility.GetAbilityTargetType(), hAbility.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != hTarget) {
                     let DamageTable = {
                         victim: enemy,
@@ -720,7 +720,7 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
                     UTIL_Remove(talent_ward);
                     if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_5")) {
                         let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-                        for (const [_, unit] of ipairs(units)) {
+                        for (const [_, unit] of GameFunc.iPair(units)) {
                             if (unit.TempData().bIsMiniDeathWard) {
                                 UTIL_Remove(unit);
                             }
@@ -767,7 +767,7 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
             "item_imba_rapier_magic_2": true,
             "item_imba_rapier_cursed": true
         }
-        for (let i = 0; i <= 5; i += 1) {
+        for (let i = 0; i <= 5; i++) {
             let item = this.GetCasterPlus().GetItemInSlot(i);
             if (item && !exceptionList[item.GetName()]) {
                 death_ward.AddItemByName(item.GetName());
@@ -777,7 +777,7 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
             }
         }
         let damageOffset = death_ward.GetAverageTrueAttackDamage(death_ward);
-        for (let iteration = 1; iteration <= 100; iteration += 1) {
+        for (let iteration = 1; iteration <= 100; iteration++) {
             let temp = death_ward.GetAverageTrueAttackDamage(death_ward);
             if (temp < damageOffset) {
                 damageOffset = temp;
@@ -809,7 +809,7 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
             UTIL_Remove(this.death_ward);
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_witch_doctor_5")) {
                 let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, unit] of ipairs(units)) {
+                for (const [_, unit] of GameFunc.iPair(units)) {
                     if (unit.TempData().bIsMiniDeathWard) {
                         UTIL_Remove(unit);
                     }
@@ -839,7 +839,7 @@ export class imba_witch_doctor_death_ward extends BaseAbility_Plus {
     CreateBounceAttack(originalTarget: IBaseNpc_Plus, extraData: any) {
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), originalTarget.GetAbsOrigin(), undefined, this.GetSpecialValueFor("bounce_radius_scepter"), this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST, false);
         let target = originalTarget;
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (extraData[tostring(enemy.GetEntityIndex())] != 1 && !enemy.IsAttackImmune() && extraData.bounces_left > 0) {
                 extraData[tostring(enemy.GetEntityIndex())] = 1;
                 let projectile = {
@@ -934,7 +934,7 @@ export class modifier_imba_death_ward extends BaseModifier_Plus {
             }
             if (!this.attack_target) {
                 let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), hParent.GetAbsOrigin(), undefined, range, hAbility.GetAbilityTargetTeam(), hAbility.GetAbilityTargetType(), hAbility.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-                this.attack_target = units[1];
+                this.attack_target = units[0];
             }
             if (this.attack_target) {
                 let projectile = {

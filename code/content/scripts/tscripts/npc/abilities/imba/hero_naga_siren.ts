@@ -41,7 +41,7 @@ export class imba_naga_siren_mirror_image extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("invuln_duration")
         });
         if (this.illusions) {
-            for (const [_, illusion] of ipairs(this.illusions)) {
+            for (const [_, illusion] of GameFunc.iPair(this.illusions)) {
                 if (IsValidEntity(illusion) && illusion.IsAlive()) {
                     illusion.ForceKill(false);
                 }
@@ -158,7 +158,7 @@ export class imba_naga_siren_ensnare extends BaseAbility_Plus {
         }
         let mirror_image = this.GetCasterPlus().findAbliityPlus<imba_naga_siren_mirror_image>("imba_naga_siren_mirror_image");
         if (mirror_image && mirror_image.illusions) {
-            for (const [_, illusion] of ipairs(mirror_image.illusions)) {
+            for (const [_, illusion] of GameFunc.iPair(mirror_image.illusions)) {
                 if (IsValidEntity(illusion) && illusion.IsAlive()) {
                     illusion.FadeGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_2);
                 }
@@ -197,11 +197,11 @@ export class imba_naga_siren_ensnare extends BaseAbility_Plus {
         } else {
             this.GetCasterPlus().EmitSound("Hero_NagaSiren.Ensnare.Cast");
         }
-        for (const [_, naga] of ipairs(this.naga_sirens)) {
+        for (const [_, naga] of GameFunc.iPair(this.naga_sirens)) {
             if (IsValidEntity(naga) && naga.IsAlive()) {
                 let enemies = FindUnitsInRadius(naga.GetTeamNumber(), naga.GetAbsOrigin(), undefined, this.GetSpecialValueFor("fake_ensnare_distance"), this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST, false);
                 if (GameFunc.GetCount(enemies) > 0) {
-                    this.LaunchProjectile(naga, enemies[1], projectile_duration);
+                    this.LaunchProjectile(naga, enemies[0], projectile_duration);
                 }
             }
         }
@@ -316,7 +316,7 @@ export class modifier_imba_naga_siren_rip_tide extends BaseModifier_Plus {
                     table.insert(caster_table, unit);
                 }
             }
-            for (const [_, tide_caster] of ipairs(caster_table)) {
+            for (const [_, tide_caster] of GameFunc.iPair(caster_table)) {
                 tide_caster.EmitSound("Hero_NagaSiren.Riptide.Cast");
                 tide_caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
                 let pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_siren/naga_siren_riptide.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, tide_caster);
@@ -324,7 +324,7 @@ export class modifier_imba_naga_siren_rip_tide extends BaseModifier_Plus {
                 ParticleManager.SetParticleControl(pfx, 3, Vector(this.GetSpecialValueFor("radius"), this.GetSpecialValueFor("radius"), this.GetSpecialValueFor("radius")));
                 ParticleManager.ReleaseParticleIndex(pfx);
                 let victims = FindUnitsInRadius(tide_caster.GetTeamNumber(), tide_caster.GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), this.GetAbilityPlus().GetAbilityTargetTeam(), this.GetAbilityPlus().GetAbilityTargetType(), this.GetAbilityPlus().GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, victim] of ipairs(victims)) {
+                for (const [_, victim] of GameFunc.iPair(victims)) {
                     if (!victim_table.includes(victim.entindex())) {
                         let damage = this.GetSpecialValueFor("damage");
                         let mod = victim.findBuff<modifier_imba_naga_siren_rip_tide_debuff>("modifier_imba_naga_siren_rip_tide_debuff");

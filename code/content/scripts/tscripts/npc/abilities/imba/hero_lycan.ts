@@ -25,8 +25,8 @@ export class imba_lycan_summon_wolves extends BaseAbility_Plus {
         } else {
             return;
         }
-        for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
-            for (let i = 1; i <= 6; i += 1) {
+        for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
+            for (let i = 0; i < 6; i++) {
                 if (unit.GetUnitName() == "npc_lycan_wolf" + i || unit.GetUnitName() == "npc_lycan_summoned_wolf_talent" && unit.GetPlayerOwnerID() == player_id) {
                     unit.ForceKill(false);
                 }
@@ -41,7 +41,7 @@ export class imba_lycan_summon_wolves extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(particle_cast_fx);
         let wolves_spawn_particle = undefined;
         let wolf: IBaseNpc_Plus = undefined;
-        for (let i = 0; i <= this.GetTalentSpecialValueFor("wolves_count") - 1; i += 1) {
+        for (let i = 0; i <= this.GetTalentSpecialValueFor("wolves_count") - 1; i++) {
             wolf = BaseNpc_Plus.CreateUnitByName("npc_lycan_wolf" + (this.GetSpecialValueFor("wolf_type") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_lycan_1")), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * 200) + (this.GetCasterPlus().GetRightVector() * 120 * (i - ((this.GetTalentSpecialValueFor("wolves_count") - 1) / 2)) as Vector) as Vector, this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
             wolves_spawn_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_lycan/lycan_summon_wolves_spawn.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, wolf);
             ParticleManager.ReleaseParticleIndex(wolves_spawn_particle);
@@ -200,8 +200,8 @@ export class imba_lycan_howl extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particle_lycan_howl_fx, 1, caster.GetAbsOrigin());
         ParticleManager.SetParticleControl(particle_lycan_howl_fx, 2, caster.GetAbsOrigin());
         let creatures = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, creature] of ipairs(creatures)) {
-            for (let i = 1; i <= 6; i += 1) {
+        for (const [_, creature] of GameFunc.iPair(creatures)) {
+            for (let i = 0; i < 6; i++) {
                 if (creature.GetUnitName() == wolf_name + i || "npc_lycan_summoned_wolf_talent") {
                     if (creature.IsIdle()) {
                         creature.StartGesture(GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_1);
@@ -225,7 +225,7 @@ export class imba_lycan_howl extends BaseAbility_Plus {
             });
         }
         let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             ally.AddNewModifier(caster, ability, buff, {
                 duration: duration
             });
@@ -336,7 +336,7 @@ export class imba_lycan_howl_723 extends BaseAbility_Plus {
         let particle_lycan_howl_fx = ResHelper.CreateParticleEx("particles/units/heroes/hero_lycan/lycan_howl_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
         ParticleManager.SetParticleControl(particle_lycan_howl_fx, 0, this.GetCasterPlus().GetAbsOrigin());
         ParticleManager.SetParticleControlEnt(particle_lycan_howl_fx, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_mouth", this.GetCasterPlus().GetAbsOrigin(), true);
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_lycan_howl_723", {
                 duration: this.GetSpecialValueFor("howl_duration") * (1 - enemy.GetStatusResistance())
             });
@@ -346,8 +346,8 @@ export class imba_lycan_howl_723 extends BaseAbility_Plus {
                 });
             }
         }
-        for (const [_, creature] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
-            for (let i = 1; i <= 6; i += 1) {
+        for (const [_, creature] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
+            for (let i = 0; i < 6; i++) {
                 if (creature.GetUnitName() == "npc_lycan_wolf" + i || "npc_lycan_summoned_wolf_talent") {
                     if (creature.IsIdle()) {
                         creature.StartGesture(GameActivity_t.ACT_DOTA_OVERRIDE_ABILITY_1);
@@ -356,7 +356,7 @@ export class imba_lycan_howl_723 extends BaseAbility_Plus {
                     }
                     let particle_wolves_howl_fx = ResHelper.CreateParticleEx("particles/units/heroes/hero_lycan/lycan_howl_cast_wolves.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, creature);
                     ParticleManager.SetParticleControl(particle_wolves_howl_fx, 1, creature.GetAbsOrigin());
-                    for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), creature.GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+                    for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), creature.GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                         enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_lycan_howl_723", {
                             duration: this.GetSpecialValueFor("howl_duration") * (1 - enemy.GetStatusResistance())
                         });
@@ -446,7 +446,7 @@ export class modifier_imba_feral_impulse_aura extends BaseModifier_Plus {
         if (IsServer()) {
             let value_increase = 0;
             let units = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.aura_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, unit] of ipairs(units)) {
+            for (const [_, unit] of GameFunc.iPair(units)) {
                 if (unit != this.caster) {
                     if (unit.IsRealHero()) {
                         value_increase = value_increase + 1 * this.hero_inc_multiplier;
@@ -912,7 +912,7 @@ export class modifier_imba_wolfsbane_aura extends BaseModifier_Plus {
         }
         let wolf_name = "npc_lycan_wolf";
         let full_name = "";
-        for (let i = 1; i <= 6; i += 1) {
+        for (let i = 0; i < 6; i++) {
             full_name = wolf_name + i;
             if (full_name == target.GetUnitName()) {
                 wolf_found = true;
@@ -1016,7 +1016,7 @@ export class modifier_imba_wolfsbane_lycan extends BaseModifier_Plus {
                 let lycan_nearby = false;
                 let should_grants_stacks = false;
                 let units = FindUnitsInRadius(this.caster.GetTeamNumber(), killed_hero.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, unit] of ipairs(units)) {
+                for (const [_, unit] of GameFunc.iPair(units)) {
                     if (unit == this.caster) {
                         lycan_nearby = true;
                     }
@@ -1038,7 +1038,7 @@ export class modifier_imba_wolfsbane_lycan extends BaseModifier_Plus {
                     });
                     if (this.caster.HasTalent("special_bonus_imba_lycan_8")) {
                         let units = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
-                        for (const [_, unit] of ipairs(units)) {
+                        for (const [_, unit] of GameFunc.iPair(units)) {
                             if (unit.GetOwnerEntity() == this.caster) {
                                 unit.AddNewModifier(this.caster, this.ability, "modifier_imba_wolfsbane_talent", {
                                     duration: this.caster.GetTalentValue("special_bonus_imba_lycan_8", "duration")
@@ -1279,7 +1279,7 @@ export class modifier_imba_summoned_wolf_wicked_crunch_debuff extends BaseModifi
                     table.remove(this.stacks_table, 1);
                 }
             } else {
-                for (let i = 1; i <= GameFunc.GetCount(this.stacks_table); i += 1) {
+                for (let i = 0; i < GameFunc.GetCount(this.stacks_table); i++) {
                     table.remove(this.stacks_table, i);
                     table.insert(this.stacks_table, GameRules.GetGameTime());
                 }
@@ -1292,7 +1292,7 @@ export class modifier_imba_summoned_wolf_wicked_crunch_debuff extends BaseModifi
     OnIntervalThink(): void {
         if (IsServer()) {
             if (GameFunc.GetCount(this.stacks_table) > 0) {
-                for (let i = 1; i <= GameFunc.GetCount(this.stacks_table); i += 1) {
+                for (let i = 0; i < GameFunc.GetCount(this.stacks_table); i++) {
                     if (this.stacks_table[i]) {
                         if (this.stacks_table[i] + this.duration < GameRules.GetGameTime()) {
                             if (this.stacks_table) {
@@ -1418,7 +1418,7 @@ export class modifier_imba_summoned_wolf_wicked_crunch_damage extends BaseModifi
     OnIntervalThink(): void {
         if (IsServer()) {
             if (GameFunc.GetCount(this.stacks_table) > 0) {
-                for (let i = 1; i <= GameFunc.GetCount(this.stacks_table); i += 1) {
+                for (let i = 0; i < GameFunc.GetCount(this.stacks_table); i++) {
                     if (this.stacks_table[i]) {
                         if (this.stacks_table[i] + this.duration < GameRules.GetGameTime()) {
                             if (this.stacks_table) {

@@ -43,7 +43,7 @@ export class imba_void_spirit_dissimilate extends BaseAbility_Plus {
         if (this.GetAutoCastState()) {
             let cosmic_particle = undefined;
             let damage_radius = this.GetSpecialValueFor("damage_radius");
-            for (const [_, ally] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("damage_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_CHECK_DISABLE_HELP, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, ally] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("damage_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_CHECK_DISABLE_HELP, FindOrder.FIND_ANY_ORDER, false))) {
                 if (ally != this.GetCasterPlus()) {
                     cosmic_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_void_spirit/void_spirit_cosmic_assault.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, ally);
                     ParticleManager.SetParticleControl(cosmic_particle, 0, ally.GetAbsOrigin());
@@ -114,7 +114,7 @@ export class modifier_imba_void_spirit_dissimilate extends BaseModifier_Plus {
         this.portals[portal] = this.GetCasterPlus().GetAbsOrigin();
         this.closest_particle = portal;
         this.closest_position = this.GetCasterPlus().GetAbsOrigin();
-        for (let outer_portals = 1; outer_portals <= this.portals_per_ring; outer_portals += 1) {
+        for (let outer_portals = 1; outer_portals <= this.portals_per_ring; outer_portals++) {
             portal_position = GetGroundPosition(RotatePosition(this.GetCasterPlus().GetAbsOrigin(), QAngle(0, this.angle_per_ring_portal * (outer_portals - 1), 0), this.GetCasterPlus().GetAbsOrigin() + (this.GetCasterPlus().GetForwardVector() * (this.first_ring_distance_offset)) as Vector), undefined);
             EmitSoundOnLocationWithCaster(portal_position, "Hero_VoidSpirit.Dissimilate.Portals", this.GetCasterPlus());
             portal = ParticleManager.CreateParticleForTeam("particles/units/heroes/hero_void_spirit/dissimilate/void_spirit_dissimilate.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetParentPlus(), this.GetCasterPlus().GetOpposingTeamNumber());
@@ -142,7 +142,7 @@ export class modifier_imba_void_spirit_dissimilate extends BaseModifier_Plus {
         this.GetParentPlus().StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3_END);
         FindClearSpaceForUnit(this.GetParentPlus(), this.closest_position, false);
         this.GetParentPlus().Interrupt();
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.closest_position, undefined, this.damage_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.closest_position, undefined, this.damage_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             enemy.EmitSound("Hero_VoidSpirit.Dissimilate.Stun");
             ApplyDamage({
                 victim: enemy,
@@ -255,7 +255,7 @@ export class imba_void_spirit_resonant_pulse extends BaseAbility_Plus {
         if (this.GetCasterPlus().HasScepter()) {
             if (this.GetCasterPlus().HasModifier("modifier_generic_charges")) {
                 let has_rightful_modifier = false;
-                for (const [_, mod] of ipairs(this.GetCasterPlus().FindAllModifiersByName("modifier_generic_charges"))) {
+                for (const [_, mod] of GameFunc.iPair(this.GetCasterPlus().FindAllModifiersByName("modifier_generic_charges"))) {
                     if (mod.GetAbilityPlus().GetAbilityName() == this.GetAbilityName()) {
                         has_rightful_modifier = true;
                         return;
@@ -362,7 +362,7 @@ export class modifier_imba_void_spirit_resonant_pulse_ring extends BaseModifier_
         if (this.ring_size > this.radius) {
             this.ring_size = this.radius;
         }
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.center, undefined, this.ring_size, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.center, undefined, this.ring_size, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             let distance = GFuncVector.CalculateDistance(enemy, this.center);
             if (!this.hit_enemies[enemy.entindex()] && distance < this.ring_size + this.thickness && distance > this.ring_size - this.thickness) {
                 enemy.EmitSound("Hero_VoidSpirit.Pulse.Target");
@@ -663,14 +663,14 @@ export class imba_void_spirit_astral_step_helper_2 extends BaseAbility_Plus {
                 wtf_mode = false;
             }
             else {
-                for (let ability = 0; ability <= 24 - 1; ability += 1) {
+                for (let ability = 0; ability <= 24 - 1; ability++) {
                     if (this.GetCasterPlus().GetAbilityByIndex(ability) && this.GetCasterPlus().GetAbilityByIndex(ability).GetCooldownTimeRemaining() > 0) {
                         wtf_mode = false;
                         return;
                     }
                 }
                 if (!wtf_mode) {
-                    for (let item = 0; item <= 15; item += 1) {
+                    for (let item = 0; item <= 15; item++) {
                         if (this.GetCasterPlus().GetItemInSlot(item) && this.GetCasterPlus().GetItemInSlot(item).GetCooldownTimeRemaining() > 0) {
                             wtf_mode = false;
                             return;
@@ -839,7 +839,7 @@ export class imba_void_spirit_void_stasis extends BaseAbility_Plus {
             this.aoe_particle_impact = ResHelper.CreateParticleEx("particles/units/heroes/hero_void_spirit/planeshift/planeshift_aether_start.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetCasterPlus());
             ParticleManager.SetParticleControl(this.aoe_particle_impact, 0, this.GetCursorPosition());
             ParticleManager.ReleaseParticleIndex(this.aoe_particle_impact);
-            for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_CHECK_DISABLE_HELP, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_CHECK_DISABLE_HELP, FindOrder.FIND_ANY_ORDER, false))) {
                 unit.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_void_spirit_void_stasis", {
                     duration: this.GetSpecialValueFor("duration")
                 });
@@ -901,7 +901,7 @@ export class imba_void_spirit_astral_step extends BaseAbility_Plus {
             this.GetCasterPlus().findAbliityPlus<imba_void_spirit_astral_step_helper_2>("imba_void_spirit_astral_step_helper_2").SetLevel(this.GetLevel());
         }
         if (this.GetLevel() == 1) {
-            for (const [_, mod] of ipairs(this.GetCasterPlus().FindAllModifiersByName("modifier_generic_charges") as IBaseModifier_Plus[])) {
+            for (const [_, mod] of GameFunc.iPair(this.GetCasterPlus().FindAllModifiersByName("modifier_generic_charges") as IBaseModifier_Plus[])) {
                 if (mod.GetAbilityPlus() == this) {
                     mod.BeCreated();
                     if (this.GetCasterPlus().HasAbility("imba_void_spirit_astral_step_helper_2")) {
@@ -940,7 +940,7 @@ export class imba_void_spirit_astral_step extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(step_particle, 1, final_position);
         ParticleManager.ReleaseParticleIndex(step_particle);
         let bHeroHit = false;
-        for (const [_, enemy] of ipairs(FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), final_position, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), final_position, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES))) {
             this.impact_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_void_spirit/astral_step/void_spirit_astral_step_impact.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy);
             ParticleManager.SetParticleControlEnt(this.impact_particle, 0, enemy, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", enemy.GetAbsOrigin(), true);
             ParticleManager.ReleaseParticleIndex(this.impact_particle);

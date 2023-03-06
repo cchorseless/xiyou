@@ -71,7 +71,7 @@ export class imba_earth_spirit_stone_caller extends BaseAbility_Plus {
                 this.CreateVisibilityNode(target, effectRadius, visionDuration);
             }
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target, undefined, effectRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let mark = enemy.findBuff<modifier_imba_earths_mark>("modifier_imba_earths_mark");
                 if (mark) {
                     mark.IncrementStackCount();
@@ -166,7 +166,7 @@ export class modifier_imba_earth_spirit_remnant_handler extends BaseModifier_Plu
                 this.overdrawTimer = this.overdrawTimer - FrameTime() * 3;
             }
             let length = GameFunc.GetCount(this.remnants);
-            for (let i = 1; i <= length; i += 1) {
+            for (let i = 0; i < length; i++) {
                 if (this.remnants[length - i + 1]) {
                     if (!EntIndexToHScript(this.remnants[length - i + 1])) {
                         table.remove(this.remnants, length - i + 1);
@@ -184,7 +184,7 @@ export class modifier_imba_earth_spirit_remnant_handler extends BaseModifier_Plu
                 this.overdrawTimer = this.overdrawCooldown;
                 this.SetDuration(this.overdrawCooldown, true);
                 this.IncrementStackCount();
-                this.KillRemnant(this.remnants[1]);
+                this.KillRemnant(this.remnants[0]);
             } else if (this.overdrawTimer > 0) {
                 this.overdrawTimer = this.overdrawCooldown;
                 this.SetDuration(this.overdrawCooldown, true);
@@ -283,7 +283,7 @@ export class modifier_imba_stone_remnant extends BaseModifier_Plus {
                     let damage = this.PetrifyHandler.GetSpecialValueFor("damage");
                     let damageRadius = this.PetrifyHandler.GetSpecialValueFor("aoe");
                     let units = FindUnitsInRadius(this.PetrifyHandler.GetCaster().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, damageRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-                    for (const [_, unit] of ipairs(units)) {
+                    for (const [_, unit] of GameFunc.iPair(units)) {
                         ApplyDamage({
                             victim: unit,
                             attacker: this.PetrifyHandler.GetCaster(),
@@ -518,7 +518,7 @@ export class imba_earth_spirit_boulder_smash extends BaseAbility_Plus {
                 }
                 if (CalcDistanceBetweenEntityOBB(caster, target) <= searchRadius) {
                     let RemnantAroundCaster = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, searchRadius + 1, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_CLOSEST, false);
-                    for (const [_, r] of ipairs(RemnantAroundCaster)) {
+                    for (const [_, r] of GameFunc.iPair(RemnantAroundCaster)) {
                         if (r.HasModifier("modifier_imba_stone_remnant")) {
                             r.RemoveModifierByName("modifier_imba_boulder_smash_push");
                             r.RemoveModifierByName("modifier_imba_geomagnetic_grip_pull");
@@ -551,7 +551,7 @@ export class imba_earth_spirit_boulder_smash extends BaseAbility_Plus {
                     return true;
                 } else {
                     let RemnantAroundCaster = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, searchRadius + 1, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_CLOSEST, false);
-                    for (const [_, r] of ipairs(RemnantAroundCaster)) {
+                    for (const [_, r] of GameFunc.iPair(RemnantAroundCaster)) {
                         if (r.HasModifier("modifier_imba_stone_remnant")) {
                             r.RemoveModifierByName("modifier_imba_boulder_smash_push");
                             r.RemoveModifierByName("modifier_imba_geomagnetic_grip_pull");
@@ -579,7 +579,7 @@ export class imba_earth_spirit_boulder_smash extends BaseAbility_Plus {
                 }
             } else {
                 let RemnantAroundCaster = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, searchRadius + 1, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_CLOSEST, false);
-                for (const [_, r] of ipairs(RemnantAroundCaster)) {
+                for (const [_, r] of GameFunc.iPair(RemnantAroundCaster)) {
                     if (r.HasModifier("modifier_imba_stone_remnant")) {
                         r.RemoveModifierByName("modifier_imba_boulder_smash_push");
                         r.RemoveModifierByName("modifier_imba_geomagnetic_grip_pull");
@@ -594,7 +594,7 @@ export class imba_earth_spirit_boulder_smash extends BaseAbility_Plus {
                     }
                 }
                 let RemnantAroundCursor = FindUnitsInRadius(caster.GetTeamNumber(), pointTarget, undefined, searchRadius + 1, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_CLOSEST, false);
-                for (const [_, r] of ipairs(RemnantAroundCursor)) {
+                for (const [_, r] of GameFunc.iPair(RemnantAroundCursor)) {
                     if (r.HasModifier("modifier_imba_stone_remnant")) {
                         let orderTbl = {
                             UnitIndex: caster.entindex(),
@@ -700,7 +700,7 @@ export class modifier_imba_boulder_smash_push extends BaseModifier_Plus {
             this.HorizontalMotion(FrameTime());
             GridNav.DestroyTreesAroundPoint(this.parent.GetAbsOrigin(), this.hitRadius, false);
             let targets = FindUnitsInRadius(this.casterTeam, this.parent.GetAbsOrigin(), undefined, this.hitRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-            for (const [_, target] of ipairs(targets)) {
+            for (const [_, target] of GameFunc.iPair(targets)) {
                 if (!this.hitTargets[target.GetEntityIndex()]) {
                     this.hitTargets[target.GetEntityIndex()] = true;
                     let damage = this.damage;
@@ -952,7 +952,7 @@ export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
                 GridNav.DestroyTreesAroundPoint(this.caster.GetAbsOrigin(), this.hitRadius, false);
                 if (!this.hitRemnant) {
                     let RemnantFinder = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.hitRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_CLOSEST, false);
-                    for (const [_, r] of ipairs(RemnantFinder)) {
+                    for (const [_, r] of GameFunc.iPair(RemnantFinder)) {
                         if (r.HasModifier("modifier_imba_stone_remnant")) {
                             if (r.IsHero()) {
                                 this.enchanted_hero = r;
@@ -969,7 +969,7 @@ export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
                     }
                 }
                 let nonHeroes = FindUnitsInRadius(this.casterTeam, this.caster.GetAbsOrigin(), undefined, this.hitRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-                for (const [_, nonHero] of ipairs(nonHeroes)) {
+                for (const [_, nonHero] of GameFunc.iPair(nonHeroes)) {
                     if (!this.hitEnemies[nonHero.GetEntityIndex()] && !nonHero.IsRealHero() && !nonHero.IsClone() && !nonHero.IsTempestDouble()) {
                         this.hitEnemies[nonHero.GetEntityIndex()] = true;
                         ApplyDamage({
@@ -982,7 +982,7 @@ export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
                     }
                 }
                 let heroes = FindUnitsInRadius(this.casterTeam, this.caster.GetAbsOrigin(), undefined, this.hitRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_CLOSEST, false);
-                for (const [i, hero] of ipairs(heroes)) {
+                for (const [i, hero] of GameFunc.iPair(heroes)) {
                     if (!this.enchanted_hero || hero != this.enchanted_hero) {
                         ApplyDamage({
                             victim: hero,
@@ -1001,7 +1001,7 @@ export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
                             hero.AddNewModifier(this.caster, this.ability, "modifier_imba_earths_mark", {});
                         }
                         let magnetizedFinder = FindUnitsInRadius(this.casterTeam, Vector(0, 0, 0), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-                        for (const [_, unit] of ipairs(magnetizedFinder)) {
+                        for (const [_, unit] of GameFunc.iPair(magnetizedFinder)) {
                             if (unit.FindModifierByNameAndCaster("modifier_imba_magnetize", this.caster)) {
                                 let mark = unit.findBuff<modifier_imba_earths_mark>("modifier_imba_earths_mark");
                                 if (mark) {
@@ -1015,7 +1015,7 @@ export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
                             }
                         }
                         if (this.hitRemnant) {
-                            for (const [_, unit] of ipairs(magnetizedFinder)) {
+                            for (const [_, unit] of GameFunc.iPair(magnetizedFinder)) {
                                 if (unit.FindModifierByNameAndCaster("modifier_imba_magnetize", this.caster)) {
                                     unit.AddNewModifier(this.caster, this.ability, "modifier_imba_rolling_boulder_slow", {
                                         duration: this.stunDuration * (1 - unit.GetStatusResistance())
@@ -1152,7 +1152,7 @@ export class imba_earth_spirit_geomagnetic_grip extends BaseAbility_Plus {
             let pointTarget = this.GetCursorPosition();
             let caster = this.GetCasterPlus();
             let RemnantFinder = FindUnitsInRadius(caster.GetTeamNumber(), pointTarget, undefined, remnantSearchRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_CLOSEST, false);
-            for (const [_, r] of ipairs(RemnantFinder)) {
+            for (const [_, r] of GameFunc.iPair(RemnantFinder)) {
                 if (r.HasModifier("modifier_imba_stone_remnant")) {
                     r.RemoveModifierByName("modifier_imba_boulder_smash_push");
                     r.RemoveModifierByName("modifier_imba_geomagnetic_grip_pull");
@@ -1259,7 +1259,7 @@ export class modifier_imba_geomagnetic_grip_pull extends BaseModifier_Plus {
             this.HorizontalMotion(FrameTime());
             GridNav.DestroyTreesAroundPoint(this.parent.GetAbsOrigin(), this.hitRadius, false);
             let targets = FindUnitsInRadius(this.casterTeam, this.parent.GetAbsOrigin(), undefined, this.hitRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-            for (const [_, target] of ipairs(targets)) {
+            for (const [_, target] of GameFunc.iPair(targets)) {
                 if (!this.hitTargets[target.GetEntityIndex()]) {
                     this.hitTargets[target.GetEntityIndex()] = true;
                     target.AddNewModifier(this.caster, this.ability, "modifier_imba_geomagnetic_grip_silence", {
@@ -1286,7 +1286,7 @@ export class modifier_imba_geomagnetic_grip_pull extends BaseModifier_Plus {
                         }
                     }
                     let magnetizedFinder = FindUnitsInRadius(this.casterTeam, Vector(0, 0, 0), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-                    for (const [_, unit] of ipairs(magnetizedFinder)) {
+                    for (const [_, unit] of GameFunc.iPair(magnetizedFinder)) {
                         if (unit.FindModifierByNameAndCaster("modifier_imba_magnetize", this.caster)) {
                             unit.AddNewModifier(this.caster, this.ability, "modifier_imba_geomagnetic_grip_silence", {
                                 duration: this.silenceDuration * (1 - unit.GetStatusResistance())
@@ -1382,7 +1382,7 @@ export class imba_earth_spirit_magnetize extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(magnetize_particle, 2, Vector(searchRadius, 0, 0));
             ParticleManager.ReleaseParticleIndex(magnetize_particle);
             let units = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, searchRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_CLOSEST, false);
-            for (const [_, unit] of ipairs(units)) {
+            for (const [_, unit] of GameFunc.iPair(units)) {
                 if (unit.HasModifier("modifier_imba_magnetize")) {
                     unit.findBuff<modifier_imba_magnetize>("modifier_imba_magnetize").SetDuration(debuffDuration, true);
                 } else {
@@ -1473,11 +1473,11 @@ export class modifier_imba_magnetize extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(tickParticle, 2, Vector(this.remnantSearchRadius, this.remnantSearchRadius, this.remnantSearchRadius));
             ParticleManager.ReleaseParticleIndex(tickParticle);
             let remnantFinder = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.remnantSearchRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_CLOSEST, false);
-            for (const [_, r] of ipairs(remnantFinder)) {
+            for (const [_, r] of GameFunc.iPair(remnantFinder)) {
                 let remnantModifier = r.findBuff<modifier_imba_stone_remnant>("modifier_imba_stone_remnant");
                 if (remnantModifier && !remnantModifier.exploded) {
                     let units = FindUnitsInRadius(this.caster.GetTeamNumber(), r.GetAbsOrigin(), undefined, this.refreshRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_CLOSEST, false);
-                    for (const [_, unit] of ipairs(units)) {
+                    for (const [_, unit] of GameFunc.iPair(units)) {
                         let debuff = unit.findBuff<modifier_imba_magnetize>("modifier_imba_magnetize");
                         EmitSoundOn("Hero_EarthSpirit.Magnetize.StoneBolt", this.parent);
                         let zapParticle = ResHelper.CreateParticleEx("particles/units/heroes/hero_earth_spirit/espirit_magnet_arclightning.vpcf", ParticleAttachment_t.PATTACH_POINT, this.caster);

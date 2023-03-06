@@ -211,7 +211,7 @@ export class imba_beastmaster_summon_boar extends BaseAbility_Plus {
                     }
                 }
             }
-            for (let i = 1; i <= boar_count; i += 1) {
+            for (let i = 0; i < boar_count; i++) {
                 let boar = BaseNpc_Plus.CreateUnitByName(boar_name + boar_level, spawn_point, caster.GetTeamNumber(), true, caster, caster);
                 boar.AddNewModifier(caster, this, "modifier_imba_beastmaster_boar", {});
                 boar.AddNewModifier(caster, this, "modifier_kill", {

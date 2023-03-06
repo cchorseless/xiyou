@@ -161,9 +161,9 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
             let caster_loc = this.GetCasterPlus().GetAbsOrigin();
             let target_loc = caster_loc + direction * this.talent_radius as Vector;
             let enemies = FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), caster_loc, target_loc, undefined, this.talent_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let already_hit = false;
-                for (const [k, v] of ipairs(this.enemies_hit)) {
+                for (const [k, v] of GameFunc.iPair(this.enemies_hit)) {
                     if (v == enemy) {
                         already_hit = true;
                         return;
@@ -198,7 +198,7 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
             let target_unit = undefined;
             let target_direction = undefined;
             if (GameFunc.GetCount(enemies) > 0) {
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     target_unit = target_unit || enemy;
                     if (enemy.IsRealHero()) {
                         target_unit = enemy;
@@ -286,7 +286,7 @@ export class modifier_imba_swashbuckle_slashes extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(this.slash_particle[this.executed_strikes], 1, this.direction * this.range as Vector);
             EmitSoundOnLocationWithCaster(this.GetCasterPlus().GetAbsOrigin(), this.slashing_sound, this.GetCasterPlus());
             let enemies = FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), this.fixed_target, undefined, this.start_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 EmitSoundOn(this.hit_sound, enemy);
                 if (!enemy.IsAttackImmune()) {
                     let blood_particle = ResHelper.CreateParticleEx(this.hit_particle, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
@@ -470,17 +470,17 @@ export class imba_pangolier_shield_crash extends BaseAbility_Plus {
                 ParticleManager.ReleaseParticleIndex(particle);
             }
             this.slash_particles = {}
-            for (let pulses = 0; pulses <= 1; pulses += 1) {
+            for (let pulses = 0; pulses <= 1; pulses++) {
                 this.AddTimer(0.1 * pulses, () => {
                     let hit_enemies: IBaseNpc_Plus[] = []
-                    for (let slash = 1; slash <= 4; slash += 1) {
+                    for (let slash = 1; slash <= 4; slash++) {
                         let direction = RotatePosition(Vector(0, 0, 0), QAngle(0, 90 * slash, 0), this.GetCasterPlus().GetForwardVector());
                         let slash_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_pangolier/pangolier_swashbuckler.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
                         ParticleManager.SetParticleControl(slash_particle, 1, direction);
                         table.insert(this.slash_particles, slash_particle);
                         EmitSoundOnLocationWithCaster(this.GetCasterPlus().GetAbsOrigin(), "Hero_Pangolier.Swashbuckle", this.GetCasterPlus());
                         let enemies = FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetAbsOrigin() + (direction * swashbuckle_range) as Vector, undefined, swashbuckle_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE);
-                        for (const [_, enemy] of ipairs(enemies)) {
+                        for (const [_, enemy] of GameFunc.iPair(enemies)) {
                             if (!hit_enemies.includes(enemy)) {
                                 EmitSoundOn("Hero_Pangolier.Swashbuckle.Damage", enemy);
                                 let damageTable = {
@@ -552,9 +552,9 @@ export class modifier_imba_shield_crash_buff extends BaseModifier_Plus {
             this.SetStackCount(this.damage_reduction_pct * this.stacks);
             EmitSoundOnLocationWithCaster(this.GetCasterPlus().GetAbsOrigin(), this.sound, this.GetCasterPlus());
             if (this.stacks > 0) {
-                this.buff_particles[1] = ResHelper.CreateParticleEx(this.particle_1, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
-                ParticleManager.SetParticleControlEnt(this.buff_particles[1], 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, Vector(0, 0, 0), false);
-                this.AddParticle(this.buff_particles[1], false, false, -1, true, false);
+                this.buff_particles[0] = ResHelper.CreateParticleEx(this.particle_1, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
+                ParticleManager.SetParticleControlEnt(this.buff_particles[0], 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, Vector(0, 0, 0), false);
+                this.AddParticle(this.buff_particles[0], false, false, -1, true, false);
                 if (this.stacks >= 3) {
                     this.buff_particles[2] = ResHelper.CreateParticleEx(this.particle_2, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
                     ParticleManager.SetParticleControlEnt(this.buff_particles[2], 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, Vector(0, 0, 0), false);
@@ -665,7 +665,7 @@ export class modifier_imba_shield_crash_jump extends BaseModifierMotionBoth_Plus
         let enemy_heroes = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
         let damaged_heroes = GameFunc.GetCount(enemy_heroes);
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.IsMagicImmune()) {
                 let damage_table = ({
                     victim: enemy,
@@ -791,7 +791,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.EVASION_CONSTANT)
     CC_GetModifierEvasion_Constant(params: ModifierAttackEvent): number {
         let parried = false;
-        for (const [k, v] of ipairs(this.attackers)) {
+        for (const [k, v] of GameFunc.iPair(this.attackers)) {
             if (v == params.attacker) {
                 parried = true;
                 return;
@@ -851,7 +851,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
                     ParticleManager.SetParticleControl(slash_particle, 0, this.GetCasterPlus().GetAbsOrigin());
                     ParticleManager.SetParticleControl(slash_particle, 1, direction * this.counter_range as Vector);
                     let enemies = FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), caster_loc, target_point, undefined, this.start_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         EmitSoundOn(this.hit_sound, enemy);
                         if (!enemy.IsAttackImmune()) {
                             if (this.GetCasterPlus().HasTalent("special_bonus_imba_pangolier_8")) {
@@ -901,7 +901,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
             if (target == this.GetCasterPlus() && attacker.IsHero()) {
                 if (attacker.HasModifier("modifier_imba_shield_crash_block_miss")) {
                     attacker.RemoveModifierByName("modifier_imba_shield_crash_block_miss");
-                    for (const [k, v] of ipairs(this.attackers)) {
+                    for (const [k, v] of GameFunc.iPair(this.attackers)) {
                         if (v == attacker) {
                             table.remove(this.attackers, k);
                         }
@@ -1311,7 +1311,7 @@ export class modifier_imba_gyroshell_impact_check extends BaseModifier_Plus {
             }
             let enemies_hit = 0;
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.hit_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy.IsRealHero() && !enemy.IsMagicImmune()) {
                     if (!enemy.HasModifier("modifier_pangolier_gyroshell_timeout")) {
                         enemies_hit = enemies_hit + 1;
@@ -1327,7 +1327,7 @@ export class modifier_imba_gyroshell_impact_check extends BaseModifier_Plus {
                                 let extra_damage = this.GetAbilityPlus().GetAbilityDamage();
                                 if (times_hit > 1) {
                                     times_hit = times_hit - 1;
-                                    for (let i = 1; i <= times_hit; i += 1) {
+                                    for (let i = 0; i < times_hit; i++) {
                                         extra_damage = extra_damage * 2;
                                     }
                                 }

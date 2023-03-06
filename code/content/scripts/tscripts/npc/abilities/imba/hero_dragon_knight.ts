@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -157,7 +158,7 @@ export class imba_dragon_knight_dragon_tail extends BaseAbility_Plus {
                     ParticleManager.SetParticleControl(particle_fx, 0, this.GetCasterPlus().GetAbsOrigin());
                     ParticleManager.ReleaseParticleIndex(particle_fx);
                     let enemies_to_cleave = AoiHelper.FindUnitsInCone(this.GetCasterPlus().GetTeamNumber(), GFuncVector.CalculateDirection(this.main_target, this.GetCasterPlus()), this.GetCasterPlus().GetAbsOrigin(), this.GetSpecialValueFor("start_radius"), this.GetSpecialValueFor("end_radius"), this.GetSpecialValueFor("dragon_cast_range"), undefined, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(enemies_to_cleave)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies_to_cleave)) {
                         this.main_target.EmitSound("Hero_DragonKnight.DragonTail.Target");
                         ResHelper.CreateParticleEx("particles/units/heroes/hero_dragon_knight/dragon_knight_dragon_tail.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.main_target);
                         if (!enemy.HasModifier("modifier_imba_dragon_tail_debuff")) {
@@ -611,7 +612,7 @@ export class modifier_imba_elder_dragon_form extends BaseModifier_Plus {
             }
             if (this.GetParentPlus().HasTalent("special_bonus_imba_dragon_knight_6") && this.GetParentPlus().HasModifier("modifier_dragon_knight_dragon_form")) {
                 let enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetParentPlus().GetTalentValue("special_bonus_imba_dragon_knight_6", "radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     enemy.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_elder_dragon_form_debuff", {
                         duration: 1.0
                     });

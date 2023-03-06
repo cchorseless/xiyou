@@ -18,12 +18,12 @@ export class imba_enchantress_untouchable extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let peace_on_earth_duration = this.GetSpecialValueFor("peace_on_earth_duration");
         let responses = {
-            1: "enchantress_ench_cast_02",
-            2: "enchantress_ench_move_18",
-            3: "enchantress_ench_move_19",
-            4: "enchantress_ench_move_20",
-            5: "enchantress_ench_laugh_06",
-            6: "enchantress_ench_rare_01"
+            "1": "enchantress_ench_cast_02",
+            "2": "enchantress_ench_move_18",
+            "3": "enchantress_ench_move_19",
+            "4": "enchantress_ench_move_20",
+            "5": "enchantress_ench_laugh_06",
+            "6": "enchantress_ench_rare_01"
         }
         let enemies;
         if (caster.HasScepter()) {
@@ -31,7 +31,7 @@ export class imba_enchantress_untouchable extends BaseAbility_Plus {
         } else {
             enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false);
         }
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.IsCourier()) {
                 if (this.GetCasterPlus().HasTalent("special_bonus_imba_enchantress_5")) {
                     enemy.AddNewModifier(caster, this, "modifier_imba_enchantress_untouchable_peace_on_earth", {
@@ -190,7 +190,7 @@ export class modifier_imba_enchantress_untouchable_peace_on_earth extends BaseMo
         ParticleManager.SetParticleControl(this.particle2, 3, this.parent.GetAbsOrigin());
         this.AddParticle(this.particle2, false, false, -1, false, false);
         this.particle3 = ResHelper.CreateParticleEx("particles/units/heroes/hero_enchantress/enchantress_natures_attendants_test.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);
-        for (let wisp = 1; wisp <= 4; wisp += 1) {
+        for (let wisp = 0; wisp < 4; wisp++) {
             ParticleManager.SetParticleControlEnt(this.particle3, wisp, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
         }
         this.AddParticle(this.particle3, false, false, -1, false, false);
@@ -521,7 +521,7 @@ export class modifier_imba_enchantress_natures_attendants extends BaseModifier_P
         }
         this.particle_name = "particles/units/heroes/hero_enchantress/enchantress_natures_attendants_lvl" + this.level + ".vpcf";
         this.particle = ResHelper.CreateParticleEx(this.particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);
-        for (let wisp = 3; wisp <= 3 + (this.level * 2); wisp += 1) {
+        for (let wisp = 3; wisp <= 3 + (this.level * 2); wisp++) {
             ParticleManager.SetParticleControlEnt(this.particle, wisp, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
         }
         if (this.GetStackCount() == 1) {
@@ -547,17 +547,17 @@ export class modifier_imba_enchantress_natures_attendants extends BaseModifier_P
         }
         let hurt_allies: IBaseNpc_Plus[] = []
         let allies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             if (ally.GetHealthPercent() < 100) {
                 table.insert(hurt_allies, ally);
             }
         }
         if (GameFunc.GetCount(hurt_allies) == 0) {
-            for (let wisp = 3; wisp <= 3 + (this.level * 2); wisp += 1) {
+            for (let wisp = 3; wisp <= 3 + (this.level * 2); wisp++) {
                 ParticleManager.SetParticleControlEnt(this.particle, wisp, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
             }
         } else {
-            for (let wisp = 1; wisp <= this.wisp_count; wisp += 1) {
+            for (let wisp = 0; wisp < this.wisp_count; wisp++) {
                 let selected_unit = RandomInt(1, GameFunc.GetCount(hurt_allies));
                 ParticleManager.SetParticleControlEnt(this.particle, math.min(wisp + 2, 3 + (this.level * 2)), hurt_allies[selected_unit], ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hurt_allies[selected_unit].GetAbsOrigin(), true);
                 hurt_allies[selected_unit].Heal(this.heal, this.ability);
@@ -661,7 +661,7 @@ export class modifier_imba_enchantress_natures_attendants_mini extends BaseModif
             this.particle_name = "particles/units/heroes/hero_enchantress/enchantress_natures_attendants_lvl2.vpcf";
         }
         this.particle = ResHelper.CreateParticleEx(this.particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);
-        for (let wisp = 3; wisp <= 7; wisp += 1) {
+        for (let wisp = 3; wisp <= 7; wisp++) {
             ParticleManager.SetParticleControlEnt(this.particle, wisp, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
         }
         this.AddParticle(this.particle, false, false, -1, false, false);
@@ -672,7 +672,7 @@ export class modifier_imba_enchantress_natures_attendants_mini extends BaseModif
         if (!IsServer()) {
             return;
         }
-        for (let wisp = 1; wisp <= this.wisp_count_mini; wisp += 1) {
+        for (let wisp = 0; wisp < this.wisp_count_mini; wisp++) {
             this.parent.Heal(this.heal, this.ability);
         }
     }
@@ -867,7 +867,7 @@ export class modifier_imba_enchantress_impetus extends BaseModifier_Plus {
             return;
         }
         if (keys.attacker == this.caster && GameFunc.GetCount(this.attack_queue) > 0) {
-            if (this.attack_queue[1] && !keys.target.IsBuilding() && keys.target.IsAlive()) {
+            if (this.attack_queue[0] && !keys.target.IsBuilding() && keys.target.IsAlive()) {
                 keys.target.AddNewModifier(this.caster, this.ability, "modifier_imba_enchantress_impetus_huntmastery_timer", {
                     duration: this.huntmastery_grace_period
                 });

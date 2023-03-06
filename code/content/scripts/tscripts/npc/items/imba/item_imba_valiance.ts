@@ -320,7 +320,7 @@ export class modifier_item_imba_valiance_dash extends BaseModifierMotionHorizont
         } else {
             this.GetParentPlus().EmitSound("Valiance.Shield.Cast.Small");
         }
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (math.abs(AngleDiff(VectorToAngles(this.GetParentPlus().GetForwardVector()).y, VectorToAngles(enemy.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).y)) <= this.guard_angle) {
                 ApplyDamage({
                     victim: enemy,

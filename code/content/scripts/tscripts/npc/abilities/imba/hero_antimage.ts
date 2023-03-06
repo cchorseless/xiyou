@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -130,7 +131,7 @@ export class modifier_imba_mana_break_passive extends BaseModifier_Plus {
                     if (this.parent.IsIllusion()) {
                         blast_damage = blast_damage * this.illusions_efficiency_pct * 0.01;
                     }
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         if (!enemy.IsMagicImmune()) {
                             let damageTable = {
                                 victim: enemy,
@@ -152,7 +153,7 @@ export class modifier_imba_mana_break_passive extends BaseModifier_Plus {
                     ParticleManager.ReleaseParticleIndex(particle_aoe_mana_burn_fx);
                     let mana_aoe_break = target_mana_burn * mana_burn_pct * 0.01;
                     let enemies = FindUnitsInRadius(this.parent.GetTeamNumber(), target.GetAbsOrigin(), undefined, mana_burn_aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         if (enemy != target && !enemy.IsMagicImmune()) {
                             enemy.ReduceMana(mana_aoe_break);
                             SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_MANA_LOSS, enemy, mana_aoe_break, undefined);
@@ -248,7 +249,7 @@ export class imba_antimage_blink extends BaseAbility_Plus {
                         duration: this.GetTalentValue("special_bonus_imba_antimage_9", "illusion_duration")
                     });
 
-                for (const [_, illusion] of ipairs(illusions)) {
+                for (const [_, illusion] of GameFunc.iPair(illusions)) {
                     illusion.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_antimage_blink_command_restricted", {});
                     //  英雄选取
                     // this.AddTimer(FrameTime(),
@@ -269,7 +270,7 @@ export class imba_antimage_blink extends BaseAbility_Plus {
                     ParticleManager.SetParticleControl(mananova_pfx, 1, Vector((this.radius * 2), 1, 1));
                     ParticleManager.ReleaseParticleIndex(mananova_pfx);
                     let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(nearby_enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {
                         let mana_burn = enemy.GetMana() * (this.percent_mana_burn * 0.01);
                         if (mana_burn > 0) {
                             let this_enemy_damage = mana_burn * (this.percent_damage * 0.01);
@@ -508,7 +509,7 @@ export class imba_antimage_spell_shield extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(shield_pfx);
             caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
             if (this.GetCasterPlus().IsRealHero() && this.GetCasterPlus().HasScepter()) {
-                for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
+                for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
                     if (unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID() && unit.IsIllusion() && unit.HasAbility("imba_antimage_spell_shield") && unit.HasModifier("modifier_imba_antimage_blink_command_restricted")) {
                         unit.findAbliityPlus<imba_antimage_spell_shield>("imba_antimage_spell_shield").OnSpellStart();
                     }
@@ -564,7 +565,7 @@ export class modifier_imba_spell_shield_buff_passive extends BaseModifier_Plus {
         // 不清楚？？
         let tOldSpells = this.GetParentPlus().TempData<IBaseAbility_Plus[]>().tOldSpells;
         if (!tOldSpells) return;
-        for (let len = tOldSpells.length, i = len - 1; i >= 0; i--) {
+        for (let len = tOldSpells.length - 1, i = len - 1; i >= 0; i--) {
             let hSpell = tOldSpells[i];
             if (hSpell.NumModifiersUsingAbility() == 0 && !hSpell.IsChanneling()) {
                 hSpell.RemoveSelf();
@@ -671,7 +672,7 @@ export class imba_antimage_mana_void extends BaseAbility_Plus {
                     duration: mana_void_ministun
                 });
                 let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(nearby_enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {
                     let this_enemy_damage = 0;
                     if ((caster.HasTalent("special_bonus_imba_antimage_8")) || (enemy == target)) {
                         this_enemy_damage = (enemy.GetMaxMana() - enemy.GetMana()) * damage_per_mana;
@@ -685,7 +686,7 @@ export class imba_antimage_mana_void extends BaseAbility_Plus {
                         modifier_delay_handler.Destroy();
                     }
                 }
-                for (const [_, enemy] of ipairs(nearby_enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {
                     if (caster.HasScepter() && enemy.IsHero()) {
                         enemy.AddNewModifier(caster, this, "modifier_imba_mana_void_scepter", {});
                         this.AddTimer(mana_void_ministun, () => {

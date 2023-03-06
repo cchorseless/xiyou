@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
@@ -98,7 +99,7 @@ export class modifier_imba_ghost_state extends BaseModifier_Plus {
         AddFOWViewer(this.caster.GetTeam(), this.parent.GetAbsOrigin(), this.luminate_radius, FrameTime(), false);
         if (this.parent.IsMagicImmune()) {
             let truesight_modifiers = this.parent.FindAllModifiersByName("modifier_item_imba_gem_of_true_sight");
-            for (const [_, truesight_mod] of ipairs(truesight_modifiers)) {
+            for (const [_, truesight_mod] of GameFunc.iPair(truesight_modifiers)) {
                 if (truesight_mod.GetItemPlus() == this.ability) {
                     truesight_mod.Destroy();
                 }

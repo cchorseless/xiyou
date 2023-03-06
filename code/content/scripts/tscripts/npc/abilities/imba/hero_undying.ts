@@ -25,8 +25,8 @@ function IsUndyingTombstone(unit: IBaseNpc_Plus) {
 }
 function GenerateZombieType() {
     let zombie_types = {
-        1: "npc_dota_undying_imba_zombie_torso",
-        2: "npc_dota_undying_imba_zombie"
+        "1": "npc_dota_undying_imba_zombie_torso",
+        "2": "npc_dota_undying_imba_zombie"
     }
     let chosen_zombie = GFuncRandom.RandomValue(zombie_types);
     return chosen_zombie;
@@ -45,22 +45,22 @@ export class imba_undying_decay extends BaseAbility_Plus {
         let ability = this;
         let target_point = ability.GetCursorPosition();
         let responses = {
-            1: "undying_undying_decay_03",
-            2: "undying_undying_decay_04",
-            3: "undying_undying_decay_05",
-            4: "undying_undying_decay_07",
-            5: "undying_undying_decay_08",
-            6: "undying_undying_decay_09",
-            7: "undying_undying_decay_10"
+            "1": "undying_undying_decay_03",
+            "2": "undying_undying_decay_04",
+            "3": "undying_undying_decay_05",
+            "4": "undying_undying_decay_07",
+            "5": "undying_undying_decay_08",
+            "6": "undying_undying_decay_09",
+            "7": "undying_undying_decay_10"
         }
         let responses_big = {
-            1: "undying_undying_big_decay_03",
-            2: "undying_undying_big_decay_04",
-            3: "undying_undying_big_decay_05",
-            4: "undying_undying_big_decay_07",
-            5: "undying_undying_big_decay_08",
-            6: "undying_undying_big_decay_09",
-            7: "undying_undying_big_decay_10"
+            "1": "undying_undying_big_decay_03",
+            "2": "undying_undying_big_decay_04",
+            "3": "undying_undying_big_decay_05",
+            "4": "undying_undying_big_decay_07",
+            "5": "undying_undying_big_decay_08",
+            "6": "undying_undying_big_decay_09",
+            "7": "undying_undying_big_decay_10"
         }
         let cast_sound = "Hero_Undying.Decay.Cast";
         let flesh_golem_modifier = "modifier_imba_undying_flesh_golem";
@@ -80,7 +80,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(decay_particle);
         let clone_owner_units: IBaseNpc_Plus[] = []
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (enemy.IsClone() || enemy.IsTempestDouble() || enemy.GetName() == "npc_dota_hero_meepo" || enemy.GetName() == "npc_dota_hero_arc_warden") {
                 table.insert(clone_owner_units, enemy);
             } else {
@@ -104,7 +104,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
                 let selected_unit = table.remove(clone_owner_units, RandomInt(1, GameFunc.GetCount(clone_owner_units)));
                 this.DecayBuffCaster();
                 this.DecayDebuffEnemy(selected_unit);
-                for (let i = 1; i <= GameFunc.GetCount(clone_owner_units); i += 1) {
+                for (let i = 0; i < GameFunc.GetCount(clone_owner_units); i++) {
                     if (clone_owner_units[i] && selected_unit && clone_owner_units[i].GetName() == selected_unit.GetName()) {
                         this.DealDamageEnemy(clone_owner_units[i]);
                         clone_owner_units[i] = undefined;
@@ -194,11 +194,7 @@ export class modifier_imba_undying_decay_buff extends BaseModifier_Plus {
         return false;
     }
     BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            if (!this.GetAbilityPlus()) {
-                this.Destroy();
-            }
-        }
+
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
@@ -289,11 +285,7 @@ export class modifier_imba_undying_decay_debuff extends BaseModifier_Plus {
         return true;
     }
     BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            if (!this.GetAbilityPlus()) {
-                this.Destroy();
-            }
-        }
+
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
@@ -395,16 +387,16 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
         let ability = this;
         let target = this.GetCursorTarget();
         let responses = {
-            1: "undying_undying_soulrip_02",
-            2: "undying_undying_soulrip_03",
-            3: "undying_undying_soulrip_04",
-            4: "undying_undying_soulrip_07"
+            "1": "undying_undying_soulrip_02",
+            "2": "undying_undying_soulrip_03",
+            "3": "undying_undying_soulrip_04",
+            "4": "undying_undying_soulrip_07"
         }
         let responses_big = {
-            1: "undying_undying_big_soulrip_02",
-            2: "undying_undying_big_soulrip_03",
-            3: "undying_undying_big_soulrip_04",
-            4: "undying_undying_big_soulrip_07"
+            "1": "undying_undying_big_soulrip_02",
+            "2": "undying_undying_big_soulrip_03",
+            "3": "undying_undying_big_soulrip_04",
+            "4": "undying_undying_big_soulrip_07"
         }
         let cast_sound = "Hero_Undying.SoulRip.Cast";
         let flesh_golem_modifier = "modifier_imba_undying_flesh_golem";
@@ -426,7 +418,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
         let units_ripped = 0;
         let damage_particle = undefined;
         let units = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             if (unit != caster && unit != target) {
                 if (target.GetTeamNumber() != caster.GetTeamNumber()) {
                     damage_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_undying/undying_soul_rip_damage.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
@@ -471,7 +463,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
                 }
                 let injection_modifier = target.FindModifierByName(modifier_injection_debuff);
                 if (injection_modifier) {
-                    for (let i = 1; i <= units_ripped; i += 1) {
+                    for (let i = 0; i < units_ripped; i++) {
                         injection_modifier.IncrementStackCount();
                     }
                 }
@@ -489,7 +481,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
                 }
                 let injection_modifier = target.FindModifierByName(modifier_injection_buff);
                 if (injection_modifier) {
-                    for (let i = 1; i <= units_ripped; i += 1) {
+                    for (let i = 0; i < units_ripped; i++) {
                         injection_modifier.IncrementStackCount();
                     }
                 }
@@ -522,11 +514,7 @@ export class modifier_imba_undying_soul_rip_soul_injection_buff extends BaseModi
         return false;
     }
     BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            if (!this.GetAbilityPlus()) {
-                this.Destroy();
-            }
-        }
+
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
@@ -606,11 +594,7 @@ export class modifier_imba_undying_soul_rip_soul_injection_debuff extends BaseMo
         return true;
     }
     BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            if (!this.GetAbilityPlus()) {
-                this.Destroy();
-            }
-        }
+
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
@@ -679,34 +663,34 @@ export class imba_undying_tombstone extends BaseAbility_Plus {
         let ability = this;
         let target_point = ability.GetCursorPosition();
         let responses = {
-            1: "undying_undying_tombstone_01",
-            2: "undying_undying_tombstone_02",
-            3: "undying_undying_tombstone_03",
-            4: "undying_undying_tombstone_04",
-            5: "undying_undying_tombstone_05",
-            6: "undying_undying_tombstone_06",
-            7: "undying_undying_tombstone_07",
-            8: "undying_undying_tombstone_08",
-            9: "undying_undying_tombstone_09",
-            10: "undying_undying_tombstone_10",
-            11: "undying_undying_tombstone_11",
-            12: "undying_undying_tombstone_12",
-            13: "undying_undying_tombstone_13"
+            "1": "undying_undying_tombstone_01",
+            "2": "undying_undying_tombstone_02",
+            "3": "undying_undying_tombstone_03",
+            "4": "undying_undying_tombstone_04",
+            "5": "undying_undying_tombstone_05",
+            "6": "undying_undying_tombstone_06",
+            "7": "undying_undying_tombstone_07",
+            "8": "undying_undying_tombstone_08",
+            "9": "undying_undying_tombstone_09",
+            "10": "undying_undying_tombstone_10",
+            "11": "undying_undying_tombstone_11",
+            "12": "undying_undying_tombstone_12",
+            "13": "undying_undying_tombstone_13"
         }
         let responses_big = {
-            1: "undying_undying_big_tombstone_01",
-            2: "undying_undying_big_tombstone_02",
-            3: "undying_undying_big_tombstone_03",
-            4: "undying_undying_big_tombstone_04",
-            5: "undying_undying_big_tombstone_05",
-            6: "undying_undying_big_tombstone_06",
-            7: "undying_undying_big_tombstone_07",
-            8: "undying_undying_big_tombstone_08",
-            9: "undying_undying_big_tombstone_09",
-            10: "undying_undying_big_tombstone_10",
-            11: "undying_undying_big_tombstone_11",
-            12: "undying_undying_big_tombstone_12",
-            13: "undying_undying_big_tombstone_13"
+            "1": "undying_undying_big_tombstone_01",
+            "2": "undying_undying_big_tombstone_02",
+            "3": "undying_undying_big_tombstone_03",
+            "4": "undying_undying_big_tombstone_04",
+            "5": "undying_undying_big_tombstone_05",
+            "6": "undying_undying_big_tombstone_06",
+            "7": "undying_undying_big_tombstone_07",
+            "8": "undying_undying_big_tombstone_08",
+            "9": "undying_undying_big_tombstone_09",
+            "10": "undying_undying_big_tombstone_10",
+            "11": "undying_undying_big_tombstone_11",
+            "12": "undying_undying_big_tombstone_12",
+            "13": "undying_undying_big_tombstone_13"
         }
         let flesh_golem_modifier = "modifier_imba_undying_flesh_golem";
         if (caster.HasModifier(flesh_golem_modifier)) {
@@ -777,11 +761,7 @@ export class modifier_imba_undying_tombstone_aura extends BaseModifier_Plus {
         return false;
     }
     BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            if (!this.GetAbilityPlus()) {
-                this.Destroy();
-            }
-        }
+
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.deathlust_ability = "imba_undying_tombstone_zombie_deathlust";
@@ -804,7 +784,7 @@ export class modifier_imba_undying_tombstone_aura extends BaseModifier_Plus {
             return;
         }
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.IsCourier() && !IsUndyingZombie(enemy)) {
                 let zombie = BaseNpc_Plus.CreateUnitByName(GenerateZombieType(), enemy.GetAbsOrigin(), this.caster.GetTeamNumber(), true, this.owner, this.owner);
                 zombie.EmitSound("Undying_Zombie.Spawn");
@@ -939,11 +919,7 @@ export class modifier_imba_undying_zombie_deathlust extends BaseModifier_Plus {
         return false;
     }
     BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            if (!this.GetAbilityPlus()) {
-                this.Destroy();
-            }
-        }
+
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.modifier_deathlust_buff = "modifier_imba_undying_zombie_deathlust_buff";
@@ -957,7 +933,7 @@ export class modifier_imba_undying_zombie_deathlust extends BaseModifier_Plus {
             this.tombstone_aggro_target = this.ability.tombstone_aggro_target;
             if (!this.tombstone_aggro_target) {
                 let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, 256, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_CLOSEST, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (!enemy.IsCourier() && !IsUndyingZombie(enemy)) {
                         this.tombstone_aggro_target = enemy;
                         return;
@@ -1091,11 +1067,7 @@ export class modifier_imba_undying_zombie_deathlust_buff extends BaseModifier_Pl
         return false;
     }
     BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            if (!this.GetAbilityPlus()) {
-                this.Destroy();
-            }
-        }
+
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.bonus_move_speed_pct = this.ability.GetSpecialValueFor("bonus_move_speed_pct");
@@ -1135,11 +1107,7 @@ export class modifier_imba_undying_zombie_deathlust_debuff extends BaseModifier_
         return false;
     }
     BeCreated(p_0: any,): void {
-        if (IsServer()) {
-            if (!this.GetAbilityPlus()) {
-                this.Destroy();
-            }
-        }
+
         this.caster = this.GetCasterPlus();
         this.ability = this.GetAbilityPlus();
         this.parent = this.GetParentPlus();
@@ -1402,7 +1370,7 @@ export class modifier_imba_undying_flesh_golem_illusion_check extends BaseModifi
         }
         if (this.GetAbilityPlus() && this.GetParentPlus().IsIllusion()) {
             let undyings = Entities.FindAllByName(this.GetParentPlus().GetName());
-            for (const [_, undying] of ipairs(undyings)) {
+            for (const [_, undying] of GameFunc.iPair(undyings)) {
                 if (/**undying.IsRealHero() && */undying.GetTeamNumber() == this.GetParentPlus().GetTeamNumber()) {
                     this.GetParentPlus().AddNewModifier(this.GetParentPlus().GetPlayerOwner().GetAssignedHero(), this.GetAbilityPlus(), "modifier_imba_undying_flesh_golem", {
                         duration: this.GetSpecialValueFor("duration")

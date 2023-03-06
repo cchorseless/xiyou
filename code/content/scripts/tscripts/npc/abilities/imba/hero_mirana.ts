@@ -11,7 +11,7 @@ function StarfallWave(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, caster_
     let hit_delay = ability.GetSpecialValueFor("hit_delay");
     let sound_impact = "Ability.StarfallImpact";
     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_position, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
-    for (const [_, enemy] of ipairs(enemies)) {
+    for (const [_, enemy] of GameFunc.iPair(enemies)) {
         if (!enemy.IsMagicImmune()) {
             let particle_starfall_fx = ResHelper.CreateParticleEx(particle_starfall, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy);
             ParticleManager.SetParticleControl(particle_starfall_fx, 0, enemy.GetAbsOrigin());
@@ -43,9 +43,9 @@ function StarfallWave(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, caster_
 function SecondaryStarfall(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus, caster_position: Vector, radius: number, damage: number) {
     let secondary_delay = ability.GetSpecialValueFor("secondary_delay");
     let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_position, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false);
-    if (enemies[1]) {
+    if (enemies[0]) {
         ability.AddTimer(secondary_delay, () => {
-            SecondaryStarfallTarget(caster, ability, enemies[1], damage);
+            SecondaryStarfallTarget(caster, ability, enemies[0], damage);
         });
     }
 }
@@ -336,23 +336,23 @@ export class imba_mirana_arrow extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let ability = this;
         let cast_response_hero = {
-            1: "mirana_mir_ability_arrow_01",
-            2: "mirana_mir_ability_arrow_07",
-            3: "mirana_mir_lasthit_03"
+            "1": "mirana_mir_ability_arrow_01",
+            "2": "mirana_mir_ability_arrow_07",
+            "3": "mirana_mir_lasthit_03"
         }
         let cast_response_hero_perfect = "mirana_mir_ability_arrow_02";
         let cast_response_creep = {
-            1: "mirana_mir_ability_arrow_03",
-            2: "mirana_mir_ability_arrow_04",
-            3: "mirana_mir_ability_arrow_05",
-            4: "mirana_mir_ability_arrow_06",
-            5: "mirana_mir_ability_arrow_08"
+            "1": "mirana_mir_ability_arrow_03",
+            "2": "mirana_mir_ability_arrow_04",
+            "3": "mirana_mir_ability_arrow_05",
+            "4": "mirana_mir_ability_arrow_06",
+            "5": "mirana_mir_ability_arrow_08"
         }
         let cast_response_roshan = {
-            1: "mirana_mir_ability_arrow_09",
-            2: "mirana_mir_ability_arrow_10",
-            3: "mirana_mir_ability_arrow_11",
-            4: "mirana_mir_ability_arrow_12"
+            "1": "mirana_mir_ability_arrow_09",
+            "2": "mirana_mir_ability_arrow_10",
+            "3": "mirana_mir_ability_arrow_11",
+            "4": "mirana_mir_ability_arrow_12"
         }
         let sound_impact = "Hero_Mirana.ArrowImpact";
         let modifier_stun = "modifier_imba_sacred_arrow_stun";
@@ -482,7 +482,7 @@ export class modifier_imba_sacred_arrow_stun extends BaseModifier_Plus {
             let target = keys.unit;
             if (target == this.parent && target.GetTeamNumber() != attacker.GetTeamNumber()) {
                 if (GameFunc.GetCount(this.attackers_table) > 0) {
-                    for (let i = 1; i <= GameFunc.GetCount(this.attackers_table); i += 1) {
+                    for (let i = 0; i < GameFunc.GetCount(this.attackers_table); i++) {
                         if (attacker == this.attackers_table[i]) {
                             return undefined;
                         }
@@ -495,7 +495,7 @@ export class modifier_imba_sacred_arrow_stun extends BaseModifier_Plus {
     BeDestroy(): void {
         if (IsServer()) {
             let enemies = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy.HasModifier(this.modifier_haste)) {
                     enemy.RemoveModifierByName(this.modifier_haste);
                 }
@@ -925,11 +925,11 @@ export class imba_mirana_moonlight_shadow extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let ability = this;
         let cast_response = {
-            1: "mirana_mir_ability_moon_02",
-            2: "mirana_mir_ability_moon_03",
-            3: "mirana_mir_ability_moon_04",
-            4: "mirana_mir_ability_moon_07",
-            5: "mirana_mir_ability_moon_08"
+            "1": "mirana_mir_ability_moon_02",
+            "2": "mirana_mir_ability_moon_03",
+            "3": "mirana_mir_ability_moon_04",
+            "4": "mirana_mir_ability_moon_07",
+            "5": "mirana_mir_ability_moon_08"
         }
         let sound_cast = "Ability.MoonlightShadow";
         let particle_moon = "particles/units/heroes/hero_mirana/mirana_moonlight_cast.vpcf";
@@ -951,7 +951,7 @@ export class imba_mirana_moonlight_shadow extends BaseAbility_Plus {
             let starstorm_ability = caster.findAbliityPlus<imba_mirana_starfall>("imba_mirana_starfall");
             if (starstorm_ability) {
                 let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, ally] of ipairs(allies)) {
+                for (const [_, ally] of GameFunc.iPair(allies)) {
                     if (!ally.HasModifier("modifier_monkey_king_fur_army_soldier") && !ally.HasModifier("modifier_monkey_king_fur_army_soldier_hidden")) {
                         ally.AddNewModifier(caster, starstorm_ability, modifier_talent_starstorm, {
                             duration: duration
@@ -992,7 +992,7 @@ export class modifier_imba_moonlight_shadow extends BaseModifier_Plus {
         if (IsServer()) {
             let duration = this.GetRemainingTime();
             let allies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, ally] of ipairs(allies)) {
+            for (const [_, ally] of GameFunc.iPair(allies)) {
                 if (!ally.HasModifier(this.modifier_invis) && !ally.HasModifier("modifier_monkey_king_fur_army_soldier") && !ally.HasModifier("modifier_monkey_king_fur_army_soldier_hidden")) {
                     ally.AddNewModifier(this.caster, this.ability, this.modifier_dummy, {
                         duration: duration
@@ -1012,7 +1012,7 @@ export class modifier_imba_moonlight_shadow extends BaseModifier_Plus {
     BeDestroy(): void {
         if (IsServer()) {
             let allies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, ally] of ipairs(allies)) {
+            for (const [_, ally] of GameFunc.iPair(allies)) {
                 if (ally.HasModifier(this.modifier_invis)) {
                     ally.RemoveModifierByName(this.modifier_invis);
                     ally.RemoveModifierByName(this.modifier_dummy);

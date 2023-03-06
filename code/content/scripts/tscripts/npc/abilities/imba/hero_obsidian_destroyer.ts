@@ -87,7 +87,7 @@ function ApplyIntelligenceSteal(caster: IBaseNpc_Plus, ability: IBaseAbility_Plu
     }
     let modifier_debuff_handler = target.FindModifierByName(modifier_debuff);
     if (modifier_debuff_handler) {
-        for (let i = 1; i <= stack_count; i += 1) {
+        for (let i = 0; i < stack_count; i++) {
             target.ReduceMana(mana_per_int);
             modifier_debuff_handler.IncrementStackCount();
             modifier_debuff_handler.ForceRefresh();
@@ -100,7 +100,7 @@ function ApplyIntelligenceSteal(caster: IBaseNpc_Plus, ability: IBaseAbility_Plu
     }
     let modifier_buff_handler = caster.FindModifierByName(modifier_buff);
     if (modifier_buff_handler) {
-        for (let i = 1; i <= stack_count; i += 1) {
+        for (let i = 0; i < stack_count; i++) {
             modifier_buff_handler.IncrementStackCount();
             modifier_buff_handler.ForceRefresh();
         }
@@ -277,7 +277,7 @@ export class modifier_imba_arcane_orb_thinker extends BaseModifier_Plus {
         if (!target.IsMagicImmune()) {
             let damage = this.caster.GetMana() * this.mana_pool_damage_pct * 0.01;
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damage_instance = damage;
                 if (enemy.IsSummoned() || enemy.IsIllusion()) {
                     damage_instance = damage + this.illusion_bonus_dmg;
@@ -305,7 +305,7 @@ export class modifier_imba_arcane_orb_thinker extends BaseModifier_Plus {
                         ParticleManager.SetParticleControl(this.particle_explosion_scatter_fx, 3, Vector(this.splash_radius, 0, 0));
                         ParticleManager.ReleaseParticleIndex(this.particle_explosion_scatter_fx);
                         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, this.splash_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                        for (const [_, enemy] of ipairs(enemies)) {
+                        for (const [_, enemy] of GameFunc.iPair(enemies)) {
                             let damageTable = {
                                 victim: enemy,
                                 damage: (damage - this.illusion_bonus_dmg),
@@ -334,7 +334,7 @@ export class modifier_imba_arcane_orb_thinker extends BaseModifier_Plus {
                     ParticleManager.SetParticleControl(this.particle_explosion_fx, 1, target.GetAbsOrigin());
                     ParticleManager.ReleaseParticleIndex(this.particle_explosion_fx);
                     let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, this.caster.GetTalentValue("special_bonus_imba_obsidian_destroyer_1"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         let damageTable = {
                             victim: enemy,
                             damage: damage,
@@ -797,7 +797,7 @@ export class modifier_imba_astral_imprisonment_buff extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (this.caster.HasTalent("special_bonus_imba_obsidian_destroyer_4")) {
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.target.GetAbsOrigin(), undefined, this.caster.GetTalentValue("special_bonus_imba_obsidian_destroyer_4") + this.caster.GetIntellect(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy == this.target) {
                 } else {
                     if ((!enemy.HasModifier("modifier_imba_astral_imprisonment_sucked"))) {
@@ -832,7 +832,7 @@ export class modifier_imba_astral_imprisonment_buff extends BaseModifier_Plus {
         ParticleManager.SetParticleControl(this.particle_prison_fx, 3, this.target.GetAbsOrigin());
         if (this.caster.HasTalent("special_bonus_imba_obsidian_destroyer_4")) {
             let enemies_sucked = FindUnitsInRadius(this.caster.GetTeamNumber(), this.target.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies_sucked)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies_sucked)) {
                 if (enemy.HasModifier("modifier_imba_astral_imprisonment_sucked")) {
                     enemy.SetAbsOrigin(this.current_location);
                 }
@@ -906,7 +906,7 @@ export class modifier_imba_essence_aura extends BaseModifier_Plus {
         if (IsServer()) {
             if (this.caster.IsIllusion()) {
                 let casters = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_DEAD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_CLOSEST, false);
-                for (const [_, caster] of ipairs(casters)) {
+                for (const [_, caster] of GameFunc.iPair(casters)) {
                     if (caster.GetUnitName() == this.caster.GetUnitName()) {
                         let int = caster.GetIntellect();
                         this.SetStackCount(int);
@@ -1048,7 +1048,7 @@ export class modifier_imba_essence_aura_buff extends BaseModifier_Plus {
                             let modifier_overmana_handler = this.caster.FindModifierByName(this.modifier_overmana);
                             let modifier_overmana_indicator = this.caster.FindModifierByName(this.modifier_overmana_indicator);
                             if (modifier_overmana_handler) {
-                                for (let i = 1; i <= excess_mana; i += 1) {
+                                for (let i = 0; i < excess_mana; i++) {
                                     modifier_overmana_handler.IncrementStackCount();
                                     modifier_overmana_handler.ForceRefresh();
                                 }
@@ -1076,7 +1076,7 @@ export class modifier_imba_essence_aura_buff extends BaseModifier_Plus {
                     }
                     let modifier_proc_handler = this.caster.FindModifierByName(this.modifier_proc);
                     if (modifier_proc_handler) {
-                        for (let i = 1; i <= this.bonus_int_on_proc; i += 1) {
+                        for (let i = 0; i < this.bonus_int_on_proc; i++) {
                             modifier_proc_handler.IncrementStackCount();
                             modifier_proc_handler.ForceRefresh();
                         }
@@ -1309,7 +1309,7 @@ export class imba_obsidian_destroyer_sanity_eclipse extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particle_area_fx, 3, target_point);
         ParticleManager.ReleaseParticleIndex(particle_area_fx);
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (caster.HasTalent("special_bonus_imba_obsidian_destroyer_7") || !enemy.IsMagicImmune()) {
                 let particle_burn_fx = ResHelper.CreateParticleEx(particle_burn, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, caster);
                 ParticleManager.SetParticleControl(particle_burn_fx, 0, enemy.GetAbsOrigin());

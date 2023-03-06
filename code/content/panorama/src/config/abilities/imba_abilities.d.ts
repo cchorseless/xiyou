@@ -109,6 +109,7 @@ declare namespace imba_abilities {
 "special_bonus_imba_brewmaster_primal_split_health" :OBJ_2_1 ,
 "special_bonus_imba_brewmaster_druken_brawler_damage" :OBJ_2_1 ,
 "special_bonus_imba_brewmaster_primal_split_cooldown" :OBJ_2_1 ,
+"special_bonus_unique_beastmaster_2" :OBJ_2_1 ,
 "imba_bristleback_viscous_nasal_goo" :OBJ_2_1 ,
 "imba_bristleback_quill_spray" :OBJ_2_1 ,
 "imba_bristleback_bristleback" :OBJ_2_1 ,

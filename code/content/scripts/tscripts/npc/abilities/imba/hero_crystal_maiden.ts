@@ -178,7 +178,7 @@ export class imba_crystal_maiden_crystal_nova extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(nova_pfx, 2, target_point);
         ParticleManager.ReleaseParticleIndex(nova_pfx);
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, nova_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             enemy.AddNewModifier(caster, this, "modifier_imba_crystal_nova_slow", {
                 duration: nova_slow_duration * (1 - enemy.GetStatusResistance())
             });
@@ -299,7 +299,7 @@ export class modifier_imba_crystal_nova_snowfield_enemy_aura extends BaseModifie
     OnIntervalThink(): void {
         if (IsServer()) {
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.snowfield_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 ApplyDamage({
                     attacker: this.caster,
                     victim: enemy,
@@ -930,7 +930,7 @@ export class imba_crystal_maiden_freezing_field extends BaseAbility_Plus {
                 this.explosion_interval = this.explosion_interval * this.caster.GetTalentValue("special_bonus_imba_crystal_maiden_8");
             }
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.freezing_field_center, undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 enemy.AddNewModifier(enemy, this, "modifier_imba_crystal_maiden_frostbite_enemy", {
                     duration: this.frostbite_duration * (1 - enemy.GetStatusResistance())
                 });
@@ -978,7 +978,7 @@ export class imba_crystal_maiden_freezing_field extends BaseAbility_Plus {
             }
             this.quadrant = 4 % (this.quadrant + 1);
             let units = FindUnitsInRadius(this.caster.GetTeam(), attackPoint, undefined, this.explosion_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
-            for (const [_, v] of ipairs(units)) {
+            for (const [_, v] of GameFunc.iPair(units)) {
                 ApplyDamage({
                     victim: v,
                     attacker: this.caster,

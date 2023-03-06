@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -718,7 +719,7 @@ export class modifier_imba_tidehunter_ravage_creeping_wave extends BaseModifier_
         this.GetParentPlus().EmitSound("Ability.Ravage");
         this.ravage_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_tidehunter/tidehunter_spell_ravage.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetParentPlus());
         ParticleManager.SetParticleControl(this.ravage_particle, 0, this.GetParentPlus().GetAbsOrigin());
-        for (let i = 1; i <= 5; i += 1) {
+        for (let i = 0; i < 5; i++) {
             ParticleManager.SetParticleControl(this.ravage_particle, i, Vector(this.creeping_radius, 0, 0));
         }
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.creeping_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
@@ -832,7 +833,7 @@ export class imba_tidehunter_ravage extends BaseAbility_Plus {
             caster.EmitSound(cast_sound);
             this.particle_fx = ResHelper.CreateParticleEx(particle, ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
             ParticleManager.SetParticleControl(this.particle_fx, 0, caster_pos);
-            for (let i = 1; i <= 5; i += 1) {
+            for (let i = 0; i < 5; i++) {
                 ParticleManager.SetParticleControl(this.particle_fx, i, Vector(end_radius * 0.2 * i, 0, 0));
             }
             ParticleManager.ReleaseParticleIndex(this.particle_fx);
@@ -842,7 +843,7 @@ export class imba_tidehunter_ravage extends BaseAbility_Plus {
             let hit_units: IBaseNpc_Plus[] = []
             this.AddTimer(0, () => {
                 let enemies = AoiHelper.FindUnitsInRing(caster.GetTeamNumber(), caster_pos, undefined, ring * radius, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (!hit_units.includes(enemy)) {
                         enemy.EmitSound(hit_sound);
                         enemy.AddNewModifier(caster, this, "modifier_stunned", {

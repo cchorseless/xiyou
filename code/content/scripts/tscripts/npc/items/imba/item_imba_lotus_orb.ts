@@ -6,6 +6,7 @@ import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_P
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
 export class item_imba_lotus_orb extends BaseItem_Plus {
+    spell_shield_reflect: boolean = false;
     GetIntrinsicModifierName(): string {
         return "modifier_item_imba_lotus_orb_passive";
     }
@@ -184,7 +185,7 @@ export class modifier_item_imba_lotus_orb_active extends BaseModifier_Plus {
             return undefined;
         }
         if ((!exception_spell[reflected_spell_name]) && (!target.HasModifier("modifier_imba_spell_shield_buff_reflect"))) {
-            if (params.ability.spell_shield_reflect) {
+            if ((params.ability as item_imba_lotus_orb).spell_shield_reflect) {
                 return undefined;
             }
             let pfx = ResHelper.CreateParticleEx(this.reflect_pfx, ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetParentPlus());
@@ -197,11 +198,11 @@ export class modifier_item_imba_lotus_orb_active extends BaseModifier_Plus {
                     return;
                 }
             }
-            let ability: CDOTABaseAbility;
+            let ability: item_imba_lotus_orb;
             if (old_spell) {
-                ability = this.GetParentPlus().FindAbilityByName(reflected_spell_name);
+                ability = this.GetParentPlus().FindAbilityByName(reflected_spell_name) as item_imba_lotus_orb;
             } else {
-                ability = this.GetParentPlus().AddAbility(reflected_spell_name);
+                ability = this.GetParentPlus().AddAbility(reflected_spell_name) as item_imba_lotus_orb;
                 ability.SetStolen(true);
                 ability.SetHidden(true);
                 ability.spell_shield_reflect = true;

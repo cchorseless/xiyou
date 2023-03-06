@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -8,7 +9,7 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 export class item_imba_gungnir extends BaseItem_Plus {
     GetIntrinsicModifierName(): string {
         this.AddTimer(FrameTime(), () => {
-            for (const [_, modifier] of ipairs(this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_gungnir"))) {
+            for (const [_, modifier] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_gungnir"))) {
                 modifier.SetStackCount(_);
             }
         });
@@ -166,7 +167,7 @@ export class modifier_item_imba_gungnir extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        for (const [_, record] of ipairs(this.pierce_records)) {
+        for (const [_, record] of GameFunc.iPair(this.pierce_records)) {
             if (record == keys.record) {
                 table.remove(this.pierce_records, _);
                 if (!this.parent.IsIllusion() && this.GetStackCount() == 1 && !keys.target.IsBuilding()) {
@@ -256,7 +257,7 @@ export class modifier_item_imba_gungnir_force_ally extends BaseModifierMotionHor
         }
         let attacker = this.GetParentPlus();
         let enemies = FindUnitsInRadius(attacker.GetTeamNumber(), attacker.GetAbsOrigin(), undefined, this.god_piercing_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!this.attacked_target[enemy.entindex()]) {
                 attacker.PerformAttack(enemy, true, true, true, true, true, false, false);
                 this.attacked_target[enemy.entindex()] = enemy.entindex();

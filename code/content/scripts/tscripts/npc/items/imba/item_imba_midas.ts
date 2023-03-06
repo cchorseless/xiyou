@@ -1,139 +1,130 @@
 
-    import { AI_ability } from "../../../ai/AI_ability";
-    import { GameFunc } from "../../../GameFunc";
-    import { ResHelper } from "../../../helper/ResHelper";
-    import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-    import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
-    import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-    import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-    import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
-    @registerAbility()
+import { ResHelper } from "../../../helper/ResHelper";
+import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
+import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+@registerAbility()
 export class item_imba_hand_of_midas extends BaseItem_Plus {
-GetAbilityTextureName():string {
-    return "imba_hand_of_midas";
-}
-CastFilterResultTarget(target:CDOTA_BaseNPC):UnitFilterResult {
-    if (IsServer()) {
+
+    CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
+        if (IsServer()) {
+            let caster = this.GetCasterPlus();
+            if (target.GetTeamNumber() == caster.GetTeamNumber()) {
+                return UnitFilterResult.UF_FAIL_FRIENDLY;
+            }
+            if (target.IsHero()) {
+                return UnitFilterResult.UF_FAIL_HERO;
+            }
+            if (target.IsOther()) {
+                return UnitFilterResult.UF_FAIL_CUSTOM;
+            }
+            if (string.find(target.GetUnitName(), "necronomicon")) {
+                return UnitFilterResult.UF_FAIL_CUSTOM;
+            }
+            if (target.IsConsideredHero()) {
+                return UnitFilterResult.UF_FAIL_CONSIDERED_HERO;
+            }
+            if (target.IsBuilding()) {
+                return UnitFilterResult.UF_FAIL_BUILDING;
+            }
+            return UnitFilterResult.UF_SUCCESS;
+        }
+    }
+    GetCustomCastErrorTarget(target: CDOTA_BaseNPC): string {
+        if (IsServer()) {
+            let caster = this.GetCasterPlus();
+            if (target.IsOther()) {
+                return "#dota_hud_error_cant_use_on_wards";
+            }
+            if (string.find(target.GetUnitName(), "necronomicon")) {
+                return "#dota_hud_error_cant_use_on_necrobook";
+            }
+        }
+    }
+    GetAbilityTextureName(): string {
         let caster = this.GetCasterPlus();
-        if (target.GetTeamNumber() == caster.GetTeamNumber()) {
-            return UnitFilterResult.UF_FAIL_FRIENDLY;
+        let caster_name = caster.GetUnitName();
+        let animal_heroes: { [k: string]: boolean } = {
+            ["npc_dota_hero_brewmaster"]: true,
+            ["npc_dota_hero_magnataur"]: true,
+            ["npc_dota_hero_lone_druid"]: true,
+            ["npc_dota_lone_druid_bear1"]: true,
+            ["npc_dota_lone_druid_bear2"]: true,
+            ["npc_dota_lone_druid_bear3"]: true,
+            ["npc_dota_lone_druid_bear4"]: true,
+            ["npc_dota_lone_druid_bear5"]: true,
+            ["npc_dota_lone_druid_bear6"]: true,
+            ["npc_dota_lone_druid_bear7"]: true,
+            ["npc_dota_hero_broodmother"]: true,
+            ["npc_dota_hero_lycan"]: true,
+            ["npc_dota_hero_ursa"]: true,
+            ["npc_dota_hero_malfurion"]: true
         }
-        if (target.IsHero()) {
-            return UnitFilterResult.UF_FAIL_HERO;
+        if (animal_heroes[caster_name]) {
+            return "item_paw_of_midas";
         }
-        if (target.IsOther()) {
-            return UnitFilterResult.UF_FAIL_CUSTOM;
-        }
-        if (string.find(target.GetUnitName(), "necronomicon")) {
-            return UnitFilterResult.UF_FAIL_CUSTOM;
-        }
-        if (target.IsConsideredHero()) {
-            return UnitFilterResult.UF_FAIL_CONSIDERED_HERO;
-        }
-        if (target.IsBuilding()) {
-            return UnitFilterResult.UF_FAIL_BUILDING;
-        }
-        return UnitFilterResult.UF_SUCCESS;
+        return "imba_hand_of_midas";
     }
-}
-GetCustomCastErrorTarget(target:CDOTA_BaseNPC):string {
-    if (IsServer()) {
+    OnSpellStart(): void {
         let caster = this.GetCasterPlus();
-        if (target.IsOther()) {
-            return "#dota_hud_error_cant_use_on_wards";
+        let target = this.GetCursorTarget();
+        let ability = this;
+        let sound_cast = "DOTA_Item.Hand_Of_Midas";
+        let bonus_gold = ability.GetSpecialValueFor("bonus_gold");
+        let xp_multiplier = ability.GetSpecialValueFor("xp_multiplier");
+        let passive_gold_bonus = ability.GetSpecialValueFor("passive_gold_bonus");
+        let bonus_xp = target.GetDeathXP();
+        // let custom_xp_bonus = tonumber(CustomNetTables.GetTableValue("game_options", "exp_multiplier")["1"]);
+        // bonus_xp = bonus_xp * xp_multiplier * (custom_xp_bonus / 100);
+        // let custom_gold_bonus = tonumber(CustomNetTables.GetTableValue("game_options", "bounty_multiplier")["1"]);
+        // bonus_gold = bonus_gold * (custom_gold_bonus / 100);
+        bonus_gold = bonus_gold * (100 / 100);
+        target.EmitSound(sound_cast);
+        SendOverheadEventMessage(PlayerResource.GetPlayer(caster.GetPlayerOwnerID()), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, target, bonus_gold, undefined);
+        let midas_particle = ResHelper.CreateParticleEx("particles/items2_fx/hand_of_midas.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
+        ParticleManager.SetParticleControlEnt(midas_particle, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", caster.GetAbsOrigin(), false);
+        target.SetDeathXP(0);
+        target.SetMinimumGoldBounty(0);
+        target.SetMaximumGoldBounty(0);
+        target.Kill(ability, caster);
+        if (!caster.IsHero()) {
+            caster = caster.GetPlayerOwner().GetAssignedHero();
         }
-        if (string.find(target.GetUnitName(), "necronomicon")) {
-            return "#dota_hud_error_cant_use_on_necrobook";
-        }
+        // caster.AddExperience(bonus_xp, false, false);
+        // caster.ModifyGold(bonus_gold, true, 0);
     }
-}
-GetAbilityTextureName():string {
-    let caster = this.GetCasterPlus();
-    let caster_name = caster.GetUnitName();
-    let animal_heroes = {
-        ["npc_dota_hero_brewmaster"]: true,
-        ["npc_dota_hero_magnataur"]: true,
-        ["npc_dota_hero_lone_druid"]: true,
-        ["npc_dota_lone_druid_bear1"]: true,
-        ["npc_dota_lone_druid_bear2"]: true,
-        ["npc_dota_lone_druid_bear3"]: true,
-        ["npc_dota_lone_druid_bear4"]: true,
-        ["npc_dota_lone_druid_bear5"]: true,
-        ["npc_dota_lone_druid_bear6"]: true,
-        ["npc_dota_lone_druid_bear7"]: true,
-        ["npc_dota_hero_broodmother"]: true,
-        ["npc_dota_hero_lycan"]: true,
-        ["npc_dota_hero_ursa"]: true,
-        ["npc_dota_hero_malfurion"]: true
+    GetIntrinsicModifierName(): string {
+        return "modifier_item_imba_hand_of_midas";
     }
-    if (animal_heroes[caster_name]) {
-        return "item_paw_of_midas";
-    }
-    return "imba_hand_of_midas";
-}
-OnSpellStart():void {
-    let caster = this.GetCasterPlus();
-    let target = this.GetCursorTarget();
-    let ability = this;
-    let sound_cast = "DOTA_Item.Hand_Of_Midas";
-    let bonus_gold = ability.GetSpecialValueFor("bonus_gold");
-    let xp_multiplier = ability.GetSpecialValueFor("xp_multiplier");
-    let passive_gold_bonus = ability.GetSpecialValueFor("passive_gold_bonus");
-    let bonus_xp = target.GetDeathXP();
-    let custom_xp_bonus = tonumber(CustomNetTables.GetTableValue("game_options", "exp_multiplier")["1"]);
-    bonus_xp = bonus_xp * xp_multiplier * (custom_xp_bonus / 100);
-    let custom_gold_bonus = tonumber(CustomNetTables.GetTableValue("game_options", "bounty_multiplier")["1"]);
-    bonus_gold = bonus_gold * (custom_gold_bonus / 100);
-    target.EmitSound(sound_cast);
-    SendOverheadEventMessage(PlayerResource.GetPlayer(caster.GetPlayerOwnerID()), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_GOLD, target, bonus_gold, undefined);
-    let midas_particle = ResHelper.CreateParticleEx("particles/items2_fx/hand_of_midas.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
-    ParticleManager.SetParticleControlEnt(midas_particle, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", caster.GetAbsOrigin(), false);
-    target.SetDeathXP(0);
-    target.SetMinimumGoldBounty(0);
-    target.SetMaximumGoldBounty(0);
-    target.Kill(ability, caster);
-    if (!caster.IsHero()) {
-        caster = caster.GetPlayerOwner().GetAssignedHero();
-    }
-    caster.AddExperience(bonus_xp, false, false);
-    caster.ModifyGold(bonus_gold, true, 0);
-}
-GetIntrinsicModifierName():string {
-    return "modifier_item_imba_hand_of_midas";
-}
 }
 @registerModifier()
 export class modifier_item_imba_hand_of_midas extends BaseModifier_Plus {
-IsHidden():boolean {
-    return true;
-}
-IsPurgable():boolean {
-    return false;
-}
-RemoveOnDeath():boolean {
-    return false;
-}
-GetAttributes():DOTAModifierAttribute_t {
-    return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE;
-}
-/** DeclareFunctions():modifierfunction[] {
-    return Object.values({
-        1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT
-    });
-} */
-@registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
-CC_GetModifierAttackSpeedBonus_Constant():number {
-    let ability = this.GetItemPlus();
-    let bonus_attack_speed;
-    if (ability) {
-        bonus_attack_speed = ability.GetSpecialValueFor("bonus_attack_speed");
+
+    IsPurgable(): boolean {
+        return false;
     }
-    return bonus_attack_speed;
-}
-IsHidden():boolean {
-    return true;
-}
-RemoveOnDeath():boolean {
-    return false;
-}
+
+    GetAttributes(): DOTAModifierAttribute_t {
+        return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE;
+    }
+    /** DeclareFunctions():modifierfunction[] {
+        return Object.values({
+            1: GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT
+        });
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACKSPEED_BONUS_CONSTANT)
+    CC_GetModifierAttackSpeedBonus_Constant(): number {
+        let ability = this.GetItemPlus();
+        let bonus_attack_speed;
+        if (ability) {
+            bonus_attack_speed = ability.GetSpecialValueFor("bonus_attack_speed");
+        }
+        return bonus_attack_speed;
+    }
+    IsHidden(): boolean {
+        return true;
+    }
+    RemoveOnDeath(): boolean {
+        return false;
+    }
 }

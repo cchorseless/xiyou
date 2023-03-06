@@ -42,7 +42,7 @@ export class imba_pugna_nether_blast extends BaseAbility_Plus {
         let main_blast_radius = ability.GetSpecialValueFor("main_blast_radius");
         EmitSoundOn(sound_cast, caster);
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, mini_blast_distance + mini_blast_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (enemy.HasModifier(modifier_magic_res)) {
                 let modifier_magic_res_handler = enemy.FindModifierByName(modifier_magic_res);
                 if (modifier_magic_res_handler) {
@@ -51,7 +51,7 @@ export class imba_pugna_nether_blast extends BaseAbility_Plus {
                 }
             }
         }
-        for (let i = 1; i <= mini_blast_count; i += 1) {
+        for (let i = 0; i < mini_blast_count; i++) {
             let angle_gaps = 360 / mini_blast_count;
             let qangle = QAngle(0, (i - 1) * angle_gaps, 0);
             let direction = (target_point - caster.GetAbsOrigin() as Vector).Normalized();
@@ -62,7 +62,7 @@ export class imba_pugna_nether_blast extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(particle_blast_fx, 1, Vector(mini_blast_radius, 0, 0));
             ParticleManager.ReleaseParticleIndex(particle_blast_fx);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), mini_blast_center, undefined, mini_blast_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (caster.HasTalent("special_bonus_imba_pugna_5")) {
                     let damageTable = {
                         victim: enemy,
@@ -95,7 +95,7 @@ export class imba_pugna_nether_blast extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(particle_blast_fx, 1, Vector(main_blast_radius, 0, 0));
             ParticleManager.ReleaseParticleIndex(particle_blast_fx);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, main_blast_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let blast_damage = damage;
                 if (enemy.IsBuilding()) {
                     blast_damage = blast_damage * damage_buildings_pct * 0.01;
@@ -313,7 +313,7 @@ export class modifier_imba_decrepify extends BaseModifier_Plus {
                 ParticleManager.SetParticleControl(this.particle_blast_fx, 1, Vector(total_radius, 0, 0));
                 ParticleManager.ReleaseParticleIndex(this.particle_blast_fx);
                 let units = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, total_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, unit] of ipairs(units)) {
+                for (const [_, unit] of GameFunc.iPair(units)) {
                     if (unit.GetTeamNumber() == this.caster.GetTeamNumber()) {
                         unit.Heal(heal, this.ability);
                         SendOverheadEventMessage(unit.GetPlayerOwner(), DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, unit, heal, unit.GetPlayerOwner());
@@ -375,7 +375,7 @@ export class imba_pugna_nether_ward extends BaseAbility_Plus {
             RotatePosition(target_point, QAngle(0, -90, 0), target_point + (target_point - caster.GetAbsOrigin() as Vector).Normalized() * 64 as Vector),
         ]
         EmitSoundOn(sound_cast, caster);
-        for (let i = 1; i <= 1 + caster.GetTalentValue("special_bonus_imba_pugna_8"); i += 1) {
+        for (let i = 0; i < 1 + caster.GetTalentValue("special_bonus_imba_pugna_8"); i++) {
             let nether_ward = undefined;
             if (i != 1 || !this.GetCursorTarget() || this.GetCursorTarget() != this.GetCasterPlus()) {
                 nether_ward = BaseNpc_Plus.CreateUnitByName("npc_imba_pugna_nether_ward_" + (ability_level), point[i], caster.GetTeam(), true, caster, caster);
@@ -621,92 +621,92 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
             }
             let cast_ability_name = cast_ability.GetName();
             let forbidden_abilities = {
-                1: "ancient_apparition_ice_blast",
-                2: "furion_teleportation",
-                3: "furion_wrath_of_nature",
-                4: "life_stealer_infest",
-                5: "life_stealer_assimilate",
-                6: "life_stealer_assimilate_eject",
-                7: "storm_spirit_static_remnant",
-                8: "storm_spirit_ball_lightning",
-                9: "invoker_ghost_walk",
-                10: "shadow_demon_shadow_poison",
-                11: "shadow_demon_demonic_purge",
-                12: "phantom_lancer_doppelwalk",
-                13: "chaos_knight_phantasm",
-                14: "wisp_relocate",
-                15: "templar_assassin_refraction",
-                16: "templar_assassin_meld",
-                17: "naga_siren_mirror_image",
-                18: "imba_ember_spirit_activate_fire_remnant",
-                19: "legion_commander_duel",
-                20: "phoenix_fire_spirits",
-                21: "terrorblade_conjure_image",
-                22: "winter_wyvern_arctic_burn",
-                23: "beastmaster_call_of_the_wild",
-                24: "beastmaster_call_of_the_wild_boar",
-                25: "dark_seer_ion_shell",
-                26: "dark_seer_wall_of_replica",
-                27: "morphling_waveform",
-                28: "morphling_adaptive_strike",
-                29: "morphling_replicate",
-                30: "morphling_morph_replicate",
-                31: "morphling_hybrid",
-                32: "leshrac_pulse_nova",
-                33: "rattletrap_power_cogs",
-                34: "rattletrap_rocket_flare",
-                35: "rattletrap_hookshot",
-                36: "spirit_breaker_charge_of_darkness",
-                37: "shredder_timber_chain",
-                38: "shredder_chakram",
-                39: "shredder_chakram_2",
-                40: "spectre_haunt",
-                41: "windrunner_focusfire",
-                42: "viper_poison_attack",
-                43: "arc_warden_tempest_double",
-                44: "broodmother_insatiable_hunger",
-                45: "weaver_time_lapse",
-                46: "death_prophet_exorcism",
-                47: "treant_eyes_in_the_forest",
-                48: "treant_living_armor",
-                49: "imba_enchantress_impetus",
-                50: "chen_holy_persuasion",
-                51: "batrider_firefly",
-                52: "undying_decay",
-                53: "undying_tombstone",
-                54: "tusk_walrus_kick",
-                55: "tusk_walrus_punch",
-                56: "tusk_frozen_sigil",
-                57: "gyrocopter_flak_cannon",
-                58: "elder_titan_echo_stomp_spirit",
-                59: "imba_elder_titan_ancestral_spirit",
-                60: "visage_soul_assumption",
-                61: "visage_summon_familiars",
-                62: "earth_spirit_geomagnetic_grip",
-                63: "keeper_of_the_light_recall",
-                64: "monkey_king_boundless_strike",
-                65: "monkey_king_mischief",
-                66: "monkey_king_tree_dance",
-                67: "monkey_king_primal_spring",
-                68: "monkey_king_wukongs_command",
-                69: "doom_doom",
-                70: "zuus_cloud",
-                71: "void_spirit_aether_remnant",
-                72: "imba_rubick_spellsteal",
-                73: "rubick_spell_steal",
-                74: "imba_bristleback_bristleback",
-                75: "lone_druid_spirit_bear",
-                76: "imba_lone_druid_spirit_bear",
-                77: "lone_druid_true_form",
-                78: "imba_lone_druid_true_form",
-                79: "terrorblade_metamorphosis",
-                80: "imba_terrorblade_metamorphosis",
-                81: "undying_flesh_golem",
-                82: "imba_undying_flesh_golem",
-                83: "dragon_knight_elder_dragon_form",
-                84: "imba_dragon_knight_elder_dragon_form",
-                85: "imba_alchemist_unstable_concoction",
-                86: "imba_alchemist_chemical_rage"
+                "1": "ancient_apparition_ice_blast",
+                "2": "furion_teleportation",
+                "3": "furion_wrath_of_nature",
+                "4": "life_stealer_infest",
+                "5": "life_stealer_assimilate",
+                "6": "life_stealer_assimilate_eject",
+                "7": "storm_spirit_static_remnant",
+                "8": "storm_spirit_ball_lightning",
+                "9": "invoker_ghost_walk",
+                "10": "shadow_demon_shadow_poison",
+                "11": "shadow_demon_demonic_purge",
+                "12": "phantom_lancer_doppelwalk",
+                "13": "chaos_knight_phantasm",
+                "14": "wisp_relocate",
+                "15": "templar_assassin_refraction",
+                "16": "templar_assassin_meld",
+                "17": "naga_siren_mirror_image",
+                "18": "imba_ember_spirit_activate_fire_remnant",
+                "19": "legion_commander_duel",
+                "20": "phoenix_fire_spirits",
+                "21": "terrorblade_conjure_image",
+                "22": "winter_wyvern_arctic_burn",
+                "23": "beastmaster_call_of_the_wild",
+                "24": "beastmaster_call_of_the_wild_boar",
+                "25": "dark_seer_ion_shell",
+                "26": "dark_seer_wall_of_replica",
+                "27": "morphling_waveform",
+                "28": "morphling_adaptive_strike",
+                "29": "morphling_replicate",
+                "30": "morphling_morph_replicate",
+                "31": "morphling_hybrid",
+                "32": "leshrac_pulse_nova",
+                "33": "rattletrap_power_cogs",
+                "34": "rattletrap_rocket_flare",
+                "35": "rattletrap_hookshot",
+                "36": "spirit_breaker_charge_of_darkness",
+                "37": "shredder_timber_chain",
+                "38": "shredder_chakram",
+                "39": "shredder_chakram_2",
+                "40": "spectre_haunt",
+                "41": "windrunner_focusfire",
+                "42": "viper_poison_attack",
+                "43": "arc_warden_tempest_double",
+                "44": "broodmother_insatiable_hunger",
+                "45": "weaver_time_lapse",
+                "46": "death_prophet_exorcism",
+                "47": "treant_eyes_in_the_forest",
+                "48": "treant_living_armor",
+                "49": "imba_enchantress_impetus",
+                "50": "chen_holy_persuasion",
+                "51": "batrider_firefly",
+                "52": "undying_decay",
+                "53": "undying_tombstone",
+                "54": "tusk_walrus_kick",
+                "55": "tusk_walrus_punch",
+                "56": "tusk_frozen_sigil",
+                "57": "gyrocopter_flak_cannon",
+                "58": "elder_titan_echo_stomp_spirit",
+                "59": "imba_elder_titan_ancestral_spirit",
+                "60": "visage_soul_assumption",
+                "61": "visage_summon_familiars",
+                "62": "earth_spirit_geomagnetic_grip",
+                "63": "keeper_of_the_light_recall",
+                "64": "monkey_king_boundless_strike",
+                "65": "monkey_king_mischief",
+                "66": "monkey_king_tree_dance",
+                "67": "monkey_king_primal_spring",
+                "68": "monkey_king_wukongs_command",
+                "69": "doom_doom",
+                "70": "zuus_cloud",
+                "71": "void_spirit_aether_remnant",
+                "72": "imba_rubick_spellsteal",
+                "73": "rubick_spell_steal",
+                "74": "imba_bristleback_bristleback",
+                "75": "lone_druid_spirit_bear",
+                "76": "imba_lone_druid_spirit_bear",
+                "77": "lone_druid_true_form",
+                "78": "imba_lone_druid_true_form",
+                "79": "terrorblade_metamorphosis",
+                "80": "imba_terrorblade_metamorphosis",
+                "81": "undying_flesh_golem",
+                "82": "imba_undying_flesh_golem",
+                "83": "dragon_knight_elder_dragon_form",
+                "84": "imba_dragon_knight_elder_dragon_form",
+                "85": "imba_alchemist_unstable_concoction",
+                "86": "imba_alchemist_chemical_rage"
             }
             if (string.find(cast_ability_name, "item")) {
                 return;
@@ -751,7 +751,7 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
             if (cast_ability_name == "imba_omniknight_repel") {
                 let allies = FindUnitsInRadius(caster.GetTeamNumber(), ward.GetAbsOrigin(), undefined, ability_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_CLOSEST, false);
                 if (GameFunc.GetCount(allies) == 1) {
-                    target = allies[1];
+                    target = allies[0];
                     target_point = target.GetAbsOrigin();
                     ability_range = ability.GetCastRange(ward.GetAbsOrigin(), target);
                 } else {
@@ -785,14 +785,14 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
             if (cast_ability_name == "imba_sven_storm_bolt") {
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), ward_position, undefined, ability_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
                 if (GameFunc.GetCount(enemies) > 0) {
-                    if (enemies[1].findAbliityPlus("imba_sven_storm_bolt")) {
+                    if (enemies[0].findAbliityPlus("imba_sven_storm_bolt")) {
                         if (GameFunc.GetCount(enemies) > 1) {
                             target = enemies[2];
                         } else {
                             return;
                         }
                     } else {
-                        target = enemies[1];
+                        target = enemies[0];
                     }
                 } else {
                     return;
@@ -852,7 +852,7 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
                         ExecuteOrderFromTable({
                             UnitIndex: ward.GetEntityIndex(),
                             OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET,
-                            TargetIndex: allies[1].GetEntityIndex(),
+                            TargetIndex: allies[0].GetEntityIndex(),
                             AbilityIndex: ability.GetEntityIndex(),
                             Queue: queue
                         });
@@ -873,7 +873,7 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
                         ExecuteOrderFromTable({
                             UnitIndex: ward.GetEntityIndex(),
                             OrderType: dotaunitorder_t.DOTA_UNIT_ORDER_CAST_TARGET,
-                            TargetIndex: enemies[1].GetEntityIndex(),
+                            TargetIndex: enemies[0].GetEntityIndex(),
                             AbilityIndex: ability.GetEntityIndex(),
                             Queue: queue
                         });
@@ -1164,7 +1164,7 @@ export class imba_pugna_life_drain_end extends BaseAbility_Plus {
         let modifier_lifedrain = "modifier_imba_life_drain";
         let search_range = ability.GetSpecialValueFor("search_range");
         let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, search_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             if (ally.HasModifier(modifier_lifedrain)) {
                 let modifier_lifedrain_handler = ally.FindModifierByName(modifier_lifedrain);
                 if (modifier_lifedrain_handler) {

@@ -290,7 +290,7 @@ export class imba_dazzle_poison_touch_707 extends BaseAbility_Plus {
         }
         let enemies = AoiHelper.FindUnitsInBicycleChain(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetAbsOrigin() + ((target.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * (this.GetSpecialValueFor("end_distance") + this.GetCasterPlus().GetCastRangeBonus())) as Vector, this.GetSpecialValueFor("start_radius"), this.GetSpecialValueFor("end_radius"), undefined, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST, false);
         this.GetCasterPlus().EmitSound("Hero_Dazzle.Poison_Cast");
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (_ <= this.GetSpecialValueFor("targets")) {
                 ProjectileManager.CreateTrackingProjectile({
                     EffectName: "particles/units/heroes/hero_dazzle/dazzle_poison_touch.vpcf",
@@ -422,7 +422,7 @@ export class imba_dazzle_shallow_grave extends BaseAbility_Plus {
             EmitSoundOn("Hero_Dazzle.Shallow_Grave", target);
             if (this.GetCasterPlus().HasScepter()) {
                 let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, this.GetAOERadius(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, target] of ipairs(allies)) {
+                for (const [_, target] of GameFunc.iPair(allies)) {
                     if (target == this.GetCursorTarget()) {
                         target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_dazzle_shallow_grave", {
                             duration: this.GetSpecialValueFor("duration")
@@ -562,7 +562,7 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
         let heroTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let creepTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let newTarget: IBaseNpc_Plus;
-        for (const [_, hero] of ipairs(heroTable)) {
+        for (const [_, hero] of GameFunc.iPair(heroTable)) {
             if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit[hero.entindex()]) {
                 table.insert(this.targetsHit, hero.entindex(), true);
                 newTarget = hero;
@@ -570,7 +570,7 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
             }
         }
         if (!newTarget) {
-            for (const [_, hero] of ipairs(heroTable)) {
+            for (const [_, hero] of GameFunc.iPair(heroTable)) {
                 if (!this.targetsHit[hero.entindex()]) {
                     table.insert(this.targetsHit, hero.entindex(), true);
                     newTarget = hero;
@@ -579,7 +579,7 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
             }
         }
         if (!newTarget) {
-            for (const [_, creep] of ipairs(creepTable)) {
+            for (const [_, creep] of GameFunc.iPair(creepTable)) {
                 if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit[creep.entindex()]) {
                     table.insert(this.targetsHit, creep.entindex(), true);
                     newTarget = creep;
@@ -588,7 +588,7 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
             }
         }
         if (!newTarget) {
-            for (const [_, creep] of ipairs(creepTable)) {
+            for (const [_, creep] of GameFunc.iPair(creepTable)) {
                 if (!this.targetsHit[creep.entindex()]) {
                     table.insert(this.targetsHit, creep.entindex(), true);
                     newTarget = creep;
@@ -751,7 +751,7 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
         }
         if (this.GetAbilityPlus().GetCaster().HasTalent("special_bonus_imba_dazzle_6")) {
             if (this.auraTalentCooldowns) {
-                for (const [id, cd] of ipairs(this.auraTalentCooldowns)) {
+                for (const [id, cd] of GameFunc.Pair(this.auraTalentCooldowns)) {
                     if (cd > 0) {
                         this.auraTalentCooldowns[id] = cd - 1;
                     }
@@ -773,7 +773,7 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
         let heroTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let creepTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let newTarget: IBaseNpc_Plus;
-        for (const [_, hero] of ipairs(heroTable)) {
+        for (const [_, hero] of GameFunc.iPair(heroTable)) {
             if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit.includes(hero.entindex())) {
                 this.targetsHit.push(hero.entindex())
                 newTarget = hero;
@@ -781,7 +781,7 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
             }
         }
         if (!newTarget) {
-            for (const [_, hero] of ipairs(heroTable)) {
+            for (const [_, hero] of GameFunc.iPair(heroTable)) {
                 if (!this.targetsHit.includes(hero.entindex())) {
                     this.targetsHit.push(hero.entindex())
                     newTarget = hero;
@@ -790,7 +790,7 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
             }
         }
         if (!newTarget) {
-            for (const [_, creep] of ipairs(creepTable)) {
+            for (const [_, creep] of GameFunc.iPair(creepTable)) {
                 if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit.includes(creep.entindex())) {
                     this.targetsHit.push(creep.entindex())
                     newTarget = creep;
@@ -799,7 +799,7 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
             }
         }
         if (!newTarget) {
-            for (const [_, creep] of ipairs(creepTable)) {
+            for (const [_, creep] of GameFunc.iPair(creepTable)) {
                 if (!this.targetsHit.includes(creep.entindex())) {
                     this.targetsHit.push(creep.entindex())
                     newTarget = creep;
@@ -1044,7 +1044,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
         let heroTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let creepTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let newTarget: IBaseNpc_Plus;
-        for (const [_, hero] of ipairs(heroTable)) {
+        for (const [_, hero] of GameFunc.iPair(heroTable)) {
             if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit[hero.entindex()]) {
                 table.insert(this.targetsHit, hero.entindex(), true);
                 newTarget = hero;
@@ -1052,7 +1052,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
             }
         }
         if (!newTarget) {
-            for (const [_, hero] of ipairs(heroTable)) {
+            for (const [_, hero] of GameFunc.iPair(heroTable)) {
                 if (!this.targetsHit[hero.entindex()]) {
                     table.insert(this.targetsHit, hero.entindex(), true);
                     newTarget = hero;
@@ -1061,7 +1061,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
             }
         }
         if (!newTarget) {
-            for (const [_, creep] of ipairs(creepTable)) {
+            for (const [_, creep] of GameFunc.iPair(creepTable)) {
                 if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit[creep.entindex()]) {
                     table.insert(this.targetsHit, creep.entindex(), true);
                     newTarget = creep;
@@ -1070,7 +1070,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
             }
         }
         if (!newTarget) {
-            for (const [_, creep] of ipairs(creepTable)) {
+            for (const [_, creep] of GameFunc.iPair(creepTable)) {
                 if (!this.targetsHit[creep.entindex()]) {
                     table.insert(this.targetsHit, creep.entindex(), true);
                     newTarget = creep;
@@ -1108,31 +1108,31 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
             if (caster.HasTalent("special_bonus_imba_dazzle_1")) {
                 if (!this.talentWaveDelayed) {
                     this.talentWaveDelayed = {}
-                    for (let i = 1; i <= caster.GetTalentValue("special_bonus_imba_dazzle_1", "talent_delayed_wave_max_waves"); i += 1) {
+                    for (let i = 0; i < caster.GetTalentValue("special_bonus_imba_dazzle_1", "talent_delayed_wave_max_waves"); i++) {
                         this.talentWaveDelayed[i] = "empty";
                     }
                 }
                 let oldest = -1;
-                for (const [loc, dat] of ipairs(this.talentWaveDelayed)) {
+                for (const [loc, dat] of GameFunc.Pair(this.talentWaveDelayed)) {
                     if (dat == "empty") {
-                        oldest = loc;
+                        oldest = GToNumber(loc);
                         return;
                     }
                 }
                 if (oldest == -1) {
                     oldest = 1;
-                    for (const [loc, dat] of ipairs(this.talentWaveDelayed)) {
+                    for (const [loc, dat] of GameFunc.Pair(this.talentWaveDelayed)) {
                         if (dat.timeCreated <= this.talentWaveDelayed[oldest].timeCreated) {
-                            oldest = loc;
+                            oldest = GToNumber(loc);
                         }
                     }
                 }
                 if (this.talentWaveDelayed && this.talentWaveDelayed[oldest] && this.talentWaveDelayed[oldest].handler && !this.talentWaveDelayed[oldest].handler.IsNull()) {
                     this.talentWaveDelayed[oldest].handler.DestroyCustom();
                     let units = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_CLOSEST, false);
-                    for (const [_, unit] of ipairs(units)) {
+                    for (const [_, unit] of GameFunc.iPair(units)) {
                         let cooldownMods = unit.FindAllModifiersByName("modifier_imba_dazzle_shadow_wave_delayed_bounce_cooldown");
-                        for (const [_, mod] of ipairs(cooldownMods)) {
+                        for (const [_, mod] of GameFunc.iPair(cooldownMods)) {
                             if (mod.GetStackCount() == oldest) {
                                 mod.Destroy();
                             }
@@ -1184,8 +1184,8 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
                 targetTeam = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY;
             } else {
                 let poisonMods = target.FindAllModifiersByName("modifier_imba_dazzle_poison_touch_debuff");
-                if (poisonMods && poisonMods[1]) {
-                    for (const [_, modifier] of ipairs(poisonMods)) {
+                if (poisonMods && poisonMods[0]) {
+                    for (const [_, modifier] of GameFunc.iPair(poisonMods)) {
                         let stacks = modifier.GetStackCount();
                         if (!poisonTouched || poisonTouched < stacks) {
                             poisonTouched = stacks;
@@ -1195,7 +1195,7 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
             }
             let heroTable = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, bounceDistance, targetTeam, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
             let creepTable = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, bounceDistance, targetTeam, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
-            for (const [_, hero] of ipairs(heroTable)) {
+            for (const [_, hero] of GameFunc.iPair(heroTable)) {
                 if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit[hero.entindex()]) {
                     table.insert(this.targetsHit, hero.entindex(), true);
                     newTarget = hero;
@@ -1203,7 +1203,7 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
                 }
             }
             if (!newTarget) {
-                for (const [_, hero] of ipairs(heroTable)) {
+                for (const [_, hero] of GameFunc.iPair(heroTable)) {
                     if (!this.targetsHit[hero.entindex()]) {
                         table.insert(this.targetsHit, hero.entindex(), true);
                         newTarget = hero;
@@ -1212,7 +1212,7 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
                 }
             }
             if (!newTarget) {
-                for (const [_, creep] of ipairs(creepTable)) {
+                for (const [_, creep] of GameFunc.iPair(creepTable)) {
                     if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit[creep.entindex()]) {
                         table.insert(this.targetsHit, creep.entindex(), true);
                         newTarget = creep;
@@ -1221,7 +1221,7 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
                 }
             }
             if (!newTarget) {
-                for (const [_, creep] of ipairs(creepTable)) {
+                for (const [_, creep] of GameFunc.iPair(creepTable)) {
                     if (!this.targetsHit[creep.entindex()]) {
                         table.insert(this.targetsHit, creep.entindex(), true);
                         newTarget = creep;
@@ -1276,7 +1276,7 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
                 targetTeam = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH;
             }
             let aoeTargets = FindUnitsInRadius(caster.GetTeamNumber(), unit.GetAbsOrigin(), undefined, damageRadius, targetTeam, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
-            for (const [_, target] of ipairs(aoeTargets)) {
+            for (const [_, target] of GameFunc.iPair(aoeTargets)) {
                 if (target != unit) {
                     let damage_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_dazzle/dazzle_shadow_wave_impact_damage.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, caster);
                     ParticleManager.SetParticleControlEnt(damage_particle, 0, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin(), true);
@@ -1348,8 +1348,8 @@ export class modifier_imba_dazzle_shadow_wave_delayed_bounce extends BaseModifie
                     targetTeam = DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY;
                 } else {
                     let poisonMods = parent.FindAllModifiersByName("modifier_imba_dazzle_poison_touch_debuff");
-                    if (poisonMods && poisonMods[1]) {
-                        for (const [_, modifier] of ipairs(poisonMods)) {
+                    if (poisonMods && poisonMods[0]) {
+                        for (const [_, modifier] of GameFunc.iPair(poisonMods)) {
                             let stacks = modifier.GetStackCount();
                             if (!this.data.poisonTouched || this.data.poisonTouched < stacks) {
                                 this.data.poisonTouched = stacks;
@@ -1360,11 +1360,11 @@ export class modifier_imba_dazzle_shadow_wave_delayed_bounce extends BaseModifie
                 let heroTable = FindUnitsInRadius(caster.GetTeamNumber(), parent.GetAbsOrigin(), undefined, bounceDistance, targetTeam, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
                 let creepTable = FindUnitsInRadius(caster.GetTeamNumber(), parent.GetAbsOrigin(), undefined, bounceDistance, targetTeam, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
                 let stacks = this.GetStackCount();
-                for (const [_, hero] of ipairs(heroTable)) {
+                for (const [_, hero] of GameFunc.iPair(heroTable)) {
                     if (hero != parent && hero.GetHealth() < hero.GetMaxHealth()) {
                         let cooldownMods = hero.FindAllModifiersByName("modifier_imba_dazzle_shadow_wave_delayed_bounce_cooldown");
                         let hasCD = false;
-                        for (const [_, mod] of ipairs(cooldownMods)) {
+                        for (const [_, mod] of GameFunc.iPair(cooldownMods)) {
                             if (mod.GetStackCount() == stacks) {
                                 hasCD = true;
                                 return;
@@ -1377,11 +1377,11 @@ export class modifier_imba_dazzle_shadow_wave_delayed_bounce extends BaseModifie
                     }
                 }
                 if (!newTarget) {
-                    for (const [_, hero] of ipairs(heroTable)) {
+                    for (const [_, hero] of GameFunc.iPair(heroTable)) {
                         if (hero != parent) {
                             let cooldownMods = hero.FindAllModifiersByName("modifier_imba_dazzle_shadow_wave_delayed_bounce_cooldown");
                             let hasCD = false;
-                            for (const [_, mod] of ipairs(cooldownMods)) {
+                            for (const [_, mod] of GameFunc.iPair(cooldownMods)) {
                                 if (mod.GetStackCount() == stacks) {
                                     hasCD = true;
                                     return;
@@ -1395,11 +1395,11 @@ export class modifier_imba_dazzle_shadow_wave_delayed_bounce extends BaseModifie
                     }
                 }
                 if (!newTarget) {
-                    for (const [_, creep] of ipairs(creepTable)) {
+                    for (const [_, creep] of GameFunc.iPair(creepTable)) {
                         if (creep != parent && creep.GetHealth() < creep.GetMaxHealth()) {
                             let cooldownMods = creep.FindAllModifiersByName("modifier_imba_dazzle_shadow_wave_delayed_bounce_cooldown");
                             let hasCD = false;
-                            for (const [_, mod] of ipairs(cooldownMods)) {
+                            for (const [_, mod] of GameFunc.iPair(cooldownMods)) {
                                 if (mod.GetStackCount() == stacks) {
                                     hasCD = true;
                                     return;
@@ -1413,11 +1413,11 @@ export class modifier_imba_dazzle_shadow_wave_delayed_bounce extends BaseModifie
                     }
                 }
                 if (!newTarget) {
-                    for (const [_, creep] of ipairs(creepTable)) {
+                    for (const [_, creep] of GameFunc.iPair(creepTable)) {
                         if (creep != parent) {
                             let cooldownMods = creep.FindAllModifiersByName("modifier_imba_dazzle_shadow_wave_delayed_bounce_cooldown");
                             let hasCD = false;
-                            for (const [_, mod] of ipairs(cooldownMods)) {
+                            for (const [_, mod] of GameFunc.iPair(cooldownMods)) {
                                 if (mod.GetStackCount() == stacks) {
                                     hasCD = true;
                                     return;
@@ -1511,7 +1511,7 @@ export class modifier_imba_dazzle_bad_juju extends BaseModifier_Plus {
                     behavior = behavior + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING;
                 }
                 let units = FindUnitsInRadius(unit.GetTeamNumber(), unit.GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, behavior, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, unit] of ipairs(units)) {
+                for (const [_, unit] of GameFunc.iPair(units)) {
                     let modifier_name = "modifier_imba_dazzle_bad_juju_buff";
                     let duration = this.GetSpecialValueFor("duration");
                     if (unit.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
@@ -1531,7 +1531,7 @@ export class modifier_imba_dazzle_bad_juju extends BaseModifier_Plus {
                 if (this.GetCasterPlus().HasScepter()) {
                     let enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("scepter_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
                     let target_number = 0;
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         this.GetParentPlus().PerformAttack(enemy, false, true, true, false, true, false, false);
                         target_number = target_number + 1;
                         if (target_number >= this.GetSpecialValueFor("scepter_count")) {

@@ -46,7 +46,7 @@ export class earthshaker_fissure_lua extends BaseAbility_Plus {
         let blocks = distance / block_spacing;
         let block_pos = caster.GetHullRadius() + block_delta + block_width;
         let start_pos = caster.GetOrigin() + direction * block_pos as Vector;
-        for (let i = 1; i <= blocks; i += 1) {
+        for (let i = 0; i < blocks; i++) {
             let block_vec = caster.GetOrigin() + direction * block_pos as Vector;
             let blocker = CreateModifierThinker(caster, this, "modifier_earthshaker_fissure_lua_thinker", {
                 duration: duration
@@ -63,7 +63,7 @@ export class earthshaker_fissure_lua extends BaseAbility_Plus {
             ability: this,
             victim: null
         }
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             FindClearSpaceForUnit(unit, unit.GetOrigin(), true);
             if (unit.GetTeamNumber() != caster.GetTeamNumber() && !unit.IsMagicImmune()) {
                 damageTable.victim = unit;
@@ -588,7 +588,7 @@ export class modifier_earthshaker_aftershock_lua extends BaseModifier_Plus {
     }
     CastAftershock() {
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             enemy.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_stunned", {
                 duration: this.duration * (1 - enemy.GetStatusResistance())
             });
@@ -632,7 +632,7 @@ export class imba_earthshaker_echo_slam extends BaseAbility_Plus {
         });
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("echo_slam_damage_range"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         let effect_counter = 0;
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let damageTable = {
                 victim: enemy,
                 damage: this.GetSpecialValueFor("echo_slam_initial_damage"),
@@ -643,7 +643,7 @@ export class imba_earthshaker_echo_slam extends BaseAbility_Plus {
             }
             ApplyDamage(damageTable);
             let echo_enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), enemy.GetAbsOrigin(), undefined, this.GetSpecialValueFor("echo_slam_echo_range"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, echo_enemy] of ipairs(echo_enemies)) {
+            for (const [_, echo_enemy] of GameFunc.iPair(echo_enemies)) {
                 if (echo_enemy != enemy) {
                     echo_enemy.EmitSound("Hero_EarthShaker.EchoSlamEcho");
                     let projectile = {

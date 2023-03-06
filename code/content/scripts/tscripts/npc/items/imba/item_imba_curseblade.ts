@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -34,7 +35,7 @@ export class item_imba_curseblade extends BaseItem_Plus {
                 duration: duration * (1 - target.GetStatusResistance())
             });
             let modifiers = caster.FindAllModifiers() as IBaseModifier_Plus[];
-            for (const [_, modifier] of ipairs(modifiers)) {
+            for (const [_, modifier] of GameFunc.iPair(modifiers)) {
                 let modifier_found = false;
                 let modifier_name = modifier.GetName();
                 // if (modifier.IsDebuff && modifier.IsPurgable && modifier.ApplyHorizontalMotionController == undefined && modifier.ApplyVerticalMotionController == undefined) {
@@ -46,7 +47,7 @@ export class item_imba_curseblade extends BaseItem_Plus {
                 //     modifier_found = true;
                 // }
                 // if (!modifier_found) {
-                //     for (const [_, modifier_name_in_list] of ipairs(DISPELLABLE_DEBUFF_LIST)) {
+                //     for (const [_, modifier_name_in_list] of GameFunc.iPair(DISPELLABLE_DEBUFF_LIST)) {
                 //         if (modifier_name == modifier_name_in_list) {
                 //             modifier_found = true;
                 //         }
@@ -127,7 +128,7 @@ export class modifier_imba_souldrain extends BaseModifier_Plus {
             let heal_interval = item.GetSpecialValueFor("aura_damage_heal_interval");
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, radius, item.GetAbilityTargetTeam(), item.GetAbilityTargetType(), item.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
             let valid_enemies = 0;
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy.HasModifier("modifier_imba_souldrain_damage")) {
                     let actual_damage = ApplyDamage({
                         victim: enemy,

@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -16,7 +17,7 @@ export class imba_spectre_reality extends BaseAbility_Plus {
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_CLOSEST, false);
         let self_haunt_modifier = this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_spectre_haunt_self", this.GetCasterPlus()) as modifier_imba_spectre_haunt_self;
         if (self_haunt_modifier) {
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy.FindModifierByNameAndCaster("modifier_imba_spectre_haunt", this.GetCasterPlus()) && enemy != self_haunt_modifier.current_target) {
                     FindClearSpaceForUnit(this.GetCasterPlus(), enemy.GetAbsOrigin() + RandomVector(256) as Vector, false);
                     this.GetCasterPlus().FaceTowards(enemy.GetAbsOrigin());
@@ -74,7 +75,7 @@ export class imba_spectre_haunt extends BaseAbility_Plus {
             duration: this.GetSpecialValueFor("duration")
         });
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_spectre_haunt", {
                 duration: this.GetSpecialValueFor("duration")
             });

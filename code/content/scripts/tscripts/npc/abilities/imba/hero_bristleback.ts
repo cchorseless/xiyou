@@ -60,7 +60,7 @@ export class imba_bristleback_viscous_nasal_goo extends BaseAbility_Plus {
         this.caster.EmitSound("Hero_Bristleback.ViscousGoo.Cast");
         if (this.caster.HasScepter()) {
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.radius_scepter, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let projectile = {
                     Target: enemy,
                     Source: this.caster,
@@ -115,7 +115,7 @@ export class imba_bristleback_viscous_nasal_goo extends BaseAbility_Plus {
             });
             hTarget.EmitSound("Hero_Bristleback.ViscousGoo.Target");
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), hTarget.GetAbsOrigin(), undefined, this.disgust_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != hTarget) {
                     let knockback = {
                         should_stun: 0,
@@ -234,9 +234,9 @@ export class modifier_imba_bristleback_viscous_nasal_goo_autocaster extends Base
                 let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.ability.GetCastRange(this.caster.GetAbsOrigin(), this.caster) + this.caster.GetCastRangeBonus(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false);
                 if (GameFunc.GetCount(enemies) > 0) {
                     if (this.caster.GetPlayerID) {
-                        this.caster.CastAbilityOnTarget(enemies[1], this.ability, this.caster.GetPlayerID());
+                        this.caster.CastAbilityOnTarget(enemies[0], this.ability, this.caster.GetPlayerID());
                     } else if (this.caster.GetPlayerOwner && this.caster.GetPlayerOwner().GetPlayerID) {
-                        this.caster.CastAbilityOnTarget(enemies[1], this.ability, this.caster.GetPlayerOwner().GetPlayerID());
+                        this.caster.CastAbilityOnTarget(enemies[0], this.ability, this.caster.GetPlayerOwner().GetPlayerID());
                     }
                     this.AddTimer(this.ability.GetBackswingTime(), () => {
                         if (!this.ability.IsNull() && this.ability.GetCooldownTimeRemaining() > this.ability.GetBackswingTime()) {
@@ -308,9 +308,9 @@ export class modifier_imba_bristleback_quillspray_thinker extends BaseModifier_P
         }
         let radius_pct = math.min((this.GetDuration() - this.GetRemainingTime()) / this.GetDuration(), 1);
         let enemies = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius * radius_pct, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let hit_already = false;
-            for (const [_, hit_enemy] of ipairs(this.hit_enemies)) {
+            for (const [_, hit_enemy] of GameFunc.iPair(this.hit_enemies)) {
                 if (hit_enemy == enemy) {
                     hit_already = true;
                     return;
@@ -636,7 +636,7 @@ export class modifier_imba_bristleback_warpath extends BaseModifier_Plus {
         }
         if (this.parent.IsIllusion()) {
             let owners = Entities.FindAllByNameWithin("npc_dota_hero_bristleback", this.parent.GetAbsOrigin(), 100) as IBaseNpc_Plus[];
-            for (const [_, owner] of ipairs(owners)) {
+            for (const [_, owner] of GameFunc.iPair(owners)) {
                 if (!owner.IsIllusion() && owner.HasModifier("modifier_imba_bristleback_warpath") && owner.GetTeam() == this.parent.GetTeam()) {
                     this.SetStackCount(owner.findBuff<modifier_imba_bristleback_warpath>("modifier_imba_bristleback_warpath").GetStackCount());
                     this.SetDuration(this.stack_duration, true);
@@ -688,8 +688,8 @@ export class modifier_imba_bristleback_warpath extends BaseModifier_Plus {
                     this.counter = this.counter - 1;
                     this.SetStackCount(math.min(this.counter, this.max_stacks));
                     if (GameFunc.GetCount(this.particle_table) > 0) {
-                        ParticleManager.DestroyParticle(this.particle_table[1], false);
-                        ParticleManager.ReleaseParticleIndex(this.particle_table[1]);
+                        ParticleManager.DestroyParticle(this.particle_table[0], false);
+                        ParticleManager.ReleaseParticleIndex(this.particle_table[0]);
                         table.remove(this.particle_table, 1);
                     }
                 }

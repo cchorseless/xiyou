@@ -90,7 +90,7 @@ export class imba_techies_land_mines extends BaseAbility_Plus {
             let radius = mine_distance + trigger_range;
             let friendly_units = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             let mine_found = false;
-            for (const [_, unit] of ipairs(friendly_units)) {
+            for (const [_, unit] of GameFunc.iPair(friendly_units)) {
                 let unitName = unit.GetUnitName();
                 if (unitName == "npc_imba_techies_land_mines" || unitName == "npc_imba_techies_land_mines_big_boom") {
                     mine_found = true;
@@ -120,54 +120,54 @@ export class imba_techies_land_mines extends BaseAbility_Plus {
         let ability = this;
         let target_point = this.GetCursorPosition();
         let cast_response = {
-            1: "techies_tech_setmine_01",
-            2: "techies_tech_setmine_02",
-            3: "techies_tech_setmine_04",
-            4: "techies_tech_setmine_08",
-            5: "techies_tech_setmine_09",
-            6: "techies_tech_setmine_10",
-            7: "techies_tech_setmine_11",
-            8: "techies_tech_setmine_13",
-            9: "techies_tech_setmine_16",
-            10: "techies_tech_setmine_17",
-            11: "techies_tech_setmine_18",
-            12: "techies_tech_setmine_19",
-            13: "techies_tech_setmine_20",
-            14: "techies_tech_setmine_30",
-            15: "techies_tech_setmine_32",
-            16: "techies_tech_setmine_33",
-            17: "techies_tech_setmine_34",
-            18: "techies_tech_setmine_38",
-            19: "techies_tech_setmine_45",
-            20: "techies_tech_setmine_46",
-            21: "techies_tech_setmine_47",
-            22: "techies_tech_setmine_48",
-            23: "techies_tech_setmine_50",
-            24: "techies_tech_setmine_51",
-            25: "techies_tech_setmine_54",
-            26: "techies_tech_cast_02",
-            27: "techies_tech_cast_03",
-            28: "techies_tech_setmine_05",
-            29: "techies_tech_setmine_06",
-            30: "techies_tech_setmine_07",
-            31: "techies_tech_setmine_14",
-            32: "techies_tech_setmine_21",
-            33: "techies_tech_setmine_22",
-            34: "techies_tech_setmine_23",
-            35: "techies_tech_setmine_24",
-            36: "techies_tech_setmine_25",
-            37: "techies_tech_setmine_26",
-            38: "techies_tech_setmine_28",
-            39: "techies_tech_setmine_29",
-            40: "techies_tech_setmine_35",
-            41: "techies_tech_setmine_36",
-            42: "techies_tech_setmine_37",
-            43: "techies_tech_setmine_39",
-            44: "techies_tech_setmine_41",
-            45: "techies_tech_setmine_42",
-            46: "techies_tech_setmine_43",
-            47: "techies_tech_setmine_44",
-            48: "techies_tech_setmine_52"
+            "1": "techies_tech_setmine_01",
+            "2": "techies_tech_setmine_02",
+            "3": "techies_tech_setmine_04",
+            "4": "techies_tech_setmine_08",
+            "5": "techies_tech_setmine_09",
+            "6": "techies_tech_setmine_10",
+            "7": "techies_tech_setmine_11",
+            "8": "techies_tech_setmine_13",
+            "9": "techies_tech_setmine_16",
+            "10": "techies_tech_setmine_17",
+            "11": "techies_tech_setmine_18",
+            "12": "techies_tech_setmine_19",
+            "13": "techies_tech_setmine_20",
+            "14": "techies_tech_setmine_30",
+            "15": "techies_tech_setmine_32",
+            "16": "techies_tech_setmine_33",
+            "17": "techies_tech_setmine_34",
+            "18": "techies_tech_setmine_38",
+            "19": "techies_tech_setmine_45",
+            "20": "techies_tech_setmine_46",
+            "21": "techies_tech_setmine_47",
+            "22": "techies_tech_setmine_48",
+            "23": "techies_tech_setmine_50",
+            "24": "techies_tech_setmine_51",
+            "25": "techies_tech_setmine_54",
+            "26": "techies_tech_cast_02",
+            "27": "techies_tech_cast_03",
+            "28": "techies_tech_setmine_05",
+            "29": "techies_tech_setmine_06",
+            "30": "techies_tech_setmine_07",
+            "31": "techies_tech_setmine_14",
+            "32": "techies_tech_setmine_21",
+            "33": "techies_tech_setmine_22",
+            "34": "techies_tech_setmine_23",
+            "35": "techies_tech_setmine_24",
+            "36": "techies_tech_setmine_25",
+            "37": "techies_tech_setmine_26",
+            "38": "techies_tech_setmine_28",
+            "39": "techies_tech_setmine_29",
+            "40": "techies_tech_setmine_35",
+            "41": "techies_tech_setmine_36",
+            "42": "techies_tech_setmine_37",
+            "43": "techies_tech_setmine_39",
+            "44": "techies_tech_setmine_41",
+            "45": "techies_tech_setmine_42",
+            "46": "techies_tech_setmine_43",
+            "47": "techies_tech_setmine_44",
+            "48": "techies_tech_setmine_52"
         }
         let sound_cast = "Hero_Techies.LandMine.Plant";
         let modifier_charges = "modifier_generic_charges";
@@ -192,7 +192,7 @@ export class imba_techies_land_mines extends BaseAbility_Plus {
         if (mine_placement_count > 0) {
             let degree = 360 / mine_placement_count;
             let mine_spawn_point = target_point + direction * mine_distance as Vector;
-            for (let i = 1; i <= mine_placement_count; i += 1) {
+            for (let i = 0; i < mine_placement_count; i++) {
                 let qangle = QAngle(0, (i - 1) * degree, 0);
                 let mine_point = RotatePosition(target_point, qangle, mine_spawn_point);
                 PlantProximityMine(caster, ability, mine_point, false);
@@ -282,7 +282,7 @@ export class modifier_imba_proximity_mine extends BaseModifier_Plus {
             let enemy_found;
             if (GameFunc.GetCount(enemies) > 0) {
                 let non_flying_enemies = false;
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (!enemy.HasFlyMovementCapability()) {
                         non_flying_enemies = true;
                         return;
@@ -337,7 +337,7 @@ export class modifier_imba_proximity_mine extends BaseModifier_Plus {
                 duration: this.big_boom_shrapnel_duration
             }, casterAbsOrigin, caster.GetTeamNumber(), false);
         }
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.HasFlyMovementCapability()) {
                 let damage = this.mine_damage;
                 if (this.is_big_boom) {
@@ -371,17 +371,17 @@ export class modifier_imba_proximity_mine extends BaseModifier_Plus {
         if (RollPercentage(25)) {
             this.AddTimer(FrameTime() * 2, () => {
                 let kill_response = {
-                    1: "techies_tech_mineblowsup_01",
-                    2: "techies_tech_mineblowsup_02",
-                    3: "techies_tech_mineblowsup_03",
-                    4: "techies_tech_mineblowsup_04",
-                    5: "techies_tech_mineblowsup_05",
-                    6: "techies_tech_mineblowsup_06",
-                    7: "techies_tech_mineblowsup_08",
-                    8: "techies_tech_mineblowsup_09",
-                    9: "techies_tech_minekill_01",
-                    10: "techies_tech_minekill_02",
-                    11: "techies_tech_minekill_03"
+                    "1": "techies_tech_mineblowsup_01",
+                    "2": "techies_tech_mineblowsup_02",
+                    "3": "techies_tech_mineblowsup_03",
+                    "4": "techies_tech_mineblowsup_04",
+                    "5": "techies_tech_mineblowsup_05",
+                    "6": "techies_tech_mineblowsup_06",
+                    "7": "techies_tech_mineblowsup_08",
+                    "8": "techies_tech_mineblowsup_09",
+                    "9": "techies_tech_minekill_01",
+                    "10": "techies_tech_minekill_02",
+                    "11": "techies_tech_minekill_03"
                 }
                 if (enemy_killed) {
                     EmitSoundOn(GFuncRandom.RandomValue(kill_response), this.owner);
@@ -499,7 +499,7 @@ export class modifier_imba_proximity_mine_talent extends BaseModifier_Plus {
         if (IsServer()) {
             let enemies = FindUnitsInRadius(this.parent_team, this.parent_pos, undefined, this.big_boom_shrapnel_aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO,
                 DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damageTable = {
                     victim: enemy,
                     attacker: this.caster,
@@ -580,16 +580,16 @@ export class imba_techies_stasis_trap extends BaseAbility_Plus {
         let target_point = this.GetCursorPosition();
         let particle_creep = "particles/hero/techies/techies_stasis_trap_plant_creep.vpcf";
         let cast_response = {
-            1: "techies_tech_settrap_01",
-            2: "techies_tech_settrap_02",
-            3: "techies_tech_settrap_03",
-            4: "techies_tech_settrap_04",
-            5: "techies_tech_settrap_06",
-            6: "techies_tech_settrap_07",
-            7: "techies_tech_settrap_08",
-            8: "techies_tech_settrap_09",
-            9: "techies_tech_settrap_10",
-            10: "techies_tech_settrap_11"
+            "1": "techies_tech_settrap_01",
+            "2": "techies_tech_settrap_02",
+            "3": "techies_tech_settrap_03",
+            "4": "techies_tech_settrap_04",
+            "5": "techies_tech_settrap_06",
+            "6": "techies_tech_settrap_07",
+            "7": "techies_tech_settrap_08",
+            "8": "techies_tech_settrap_09",
+            "9": "techies_tech_settrap_10",
+            "10": "techies_tech_settrap_11"
         }
         let sound_cast = "Hero_Techies.StasisTrap.Plant";
         if (RollPercentage(75)) {
@@ -709,7 +709,7 @@ export class modifier_imba_statis_trap extends BaseModifier_Plus {
         let modifier_root = "modifier_imba_statis_trap_root";
         let modifier_electrocharge = "modifier_imba_statis_trap_electrocharge";
         let modifier_disarmed = "modifier_imba_statis_trap_disarmed";
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!caster.HasModifier(modifier_disarmed)) {
                 enemy.AddNewModifier(caster, this.ability, modifier_root, {
                     duration: this.root_duration * (1 - enemy.GetStatusResistance())
@@ -724,7 +724,7 @@ export class modifier_imba_statis_trap extends BaseModifier_Plus {
             }
         }
         let mines = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, this.root_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, mine] of ipairs(mines)) {
+        for (const [_, mine] of GameFunc.iPair(mines)) {
             if (mine.GetUnitName() == "npc_imba_techies_stasis_trap" && mine != caster) {
                 mine.AddNewModifier(caster, this.ability, modifier_disarmed, {});
             }
@@ -810,7 +810,7 @@ export class modifier_imba_statis_trap_electrocharge extends BaseModifier_Plus {
             let radius = this.base_magnetic_radius + this.magnetic_stack_radius * stacks;
             let parentAbsOrigin = this.parent.GetAbsOrigin();
             let mines = FindUnitsInRadius(this.teamnumber, parentAbsOrigin, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, mine] of ipairs(mines)) {
+            for (const [_, mine] of GameFunc.iPair(mines)) {
                 let mineUnitName = mine.GetUnitName();
                 if (mineUnitName == "npc_imba_techies_land_mines" || mineUnitName == "npc_imba_techies_land_mines_big_boom" || mineUnitName == "npc_imba_techies_stasis_trap" || mineUnitName == "npc_imba_techies_remote_mines") {
                     let mineAbsOrigin = mine.GetAbsOrigin();
@@ -967,7 +967,7 @@ export class modifier_imba_blast_off extends BaseModifier_Plus {
                     dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_MOVE,
                     dotaunitorder_t.DOTA_UNIT_ORDER_ATTACK_TARGET
                 ];
-                for (let i = 0; i < eligible_order_types.length; i += 1) {
+                for (let i = 0; i < eligible_order_types.length; i++) {
                     if (eligible_order_types[i] == order_type) {
                         this.Destroy();
                         return;
@@ -1108,7 +1108,7 @@ export class modifier_imba_blast_off_movement extends BaseModifierMotionBoth_Plu
             let enemies = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             let modifier_silence = "modifier_imba_blast_off_silence";
             let enemy_killed = false;
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damageTable = {
                     victim: enemy,
                     attacker: this.caster,
@@ -1130,15 +1130,15 @@ export class modifier_imba_blast_off_movement extends BaseModifierMotionBoth_Plu
                 let sound;
                 if (RollPercentage(15)) {
                     let rare_miss_response = {
-                        1: "techies_tech_suicidesquad_08",
-                        2: "techies_tech_failure_01"
+                        "1": "techies_tech_suicidesquad_08",
+                        "2": "techies_tech_failure_01"
                     }
                     sound = GFuncRandom.RandomValue(rare_miss_response);
                 } else {
                     let miss_response = {
-                        1: "techies_tech_suicidesquad_04",
-                        2: "techies_tech_suicidesquad_09",
-                        3: "techies_tech_suicidesquad_13"
+                        "1": "techies_tech_suicidesquad_04",
+                        "2": "techies_tech_suicidesquad_09",
+                        "3": "techies_tech_suicidesquad_13"
                     }
                     sound = GFuncRandom.RandomValue(miss_response);
                 }
@@ -1149,16 +1149,16 @@ export class modifier_imba_blast_off_movement extends BaseModifierMotionBoth_Plu
                     let sound;
                     if (RollPercentage(15)) {
                         let rare_kill_response = {
-                            1: "techies_tech_focuseddetonate_14"
+                            "1": "techies_tech_focuseddetonate_14"
                         }
                         sound = GFuncRandom.RandomValue(rare_kill_response);
                     } else {
                         let kill_response = {
-                            1: "techies_tech_suicidesquad_02",
-                            2: "techies_tech_suicidesquad_03",
-                            3: "techies_tech_suicidesquad_06",
-                            4: "techies_tech_suicidesquad_11",
-                            5: "techies_tech_suicidesquad_12"
+                            "1": "techies_tech_suicidesquad_02",
+                            "2": "techies_tech_suicidesquad_03",
+                            "3": "techies_tech_suicidesquad_06",
+                            "4": "techies_tech_suicidesquad_11",
+                            "5": "techies_tech_suicidesquad_12"
                         }
                         sound = GFuncRandom.RandomValue(kill_response);
                     }
@@ -1274,32 +1274,32 @@ export class imba_techies_remote_mines extends BaseAbility_Plus {
         let ability = this;
         let target_point = this.GetCursorPosition();
         let cast_response = {
-            1: "techies_tech_remotemines_03",
-            2: "techies_tech_remotemines_04",
-            3: "techies_tech_remotemines_05",
-            4: "techies_tech_remotemines_07",
-            5: "techies_tech_remotemines_08",
-            6: "techies_tech_remotemines_09",
-            7: "techies_tech_remotemines_13",
-            8: "techies_tech_remotemines_14",
-            9: "techies_tech_remotemines_15",
-            10: "techies_tech_remotemines_17",
-            11: "techies_tech_remotemines_18",
-            12: "techies_tech_remotemines_19",
-            13: "techies_tech_remotemines_20",
-            14: "techies_tech_remotemines_25",
-            15: "techies_tech_remotemines_26",
-            16: "techies_tech_remotemines_27",
-            17: "techies_tech_remotemines_30",
-            18: "techies_tech_remotemines_02",
-            19: "techies_tech_remotemines_10",
-            20: "techies_tech_remotemines_11",
-            21: "techies_tech_remotemines_16",
-            22: "techies_tech_remotemines_21",
-            23: "techies_tech_remotemines_22",
-            24: "techies_tech_remotemines_23",
-            25: "techies_tech_remotemines_28",
-            26: "techies_tech_remotemines_29"
+            "1": "techies_tech_remotemines_03",
+            "2": "techies_tech_remotemines_04",
+            "3": "techies_tech_remotemines_05",
+            "4": "techies_tech_remotemines_07",
+            "5": "techies_tech_remotemines_08",
+            "6": "techies_tech_remotemines_09",
+            "7": "techies_tech_remotemines_13",
+            "8": "techies_tech_remotemines_14",
+            "9": "techies_tech_remotemines_15",
+            "10": "techies_tech_remotemines_17",
+            "11": "techies_tech_remotemines_18",
+            "12": "techies_tech_remotemines_19",
+            "13": "techies_tech_remotemines_20",
+            "14": "techies_tech_remotemines_25",
+            "15": "techies_tech_remotemines_26",
+            "16": "techies_tech_remotemines_27",
+            "17": "techies_tech_remotemines_30",
+            "18": "techies_tech_remotemines_02",
+            "19": "techies_tech_remotemines_10",
+            "20": "techies_tech_remotemines_11",
+            "21": "techies_tech_remotemines_16",
+            "22": "techies_tech_remotemines_21",
+            "23": "techies_tech_remotemines_22",
+            "24": "techies_tech_remotemines_23",
+            "25": "techies_tech_remotemines_28",
+            "26": "techies_tech_remotemines_29"
         }
         let rare_cast_response = "techies_tech_remotemines_01";
         let sound_cast = "Hero_Techies.RemoteMine.Plant";
@@ -1381,7 +1381,7 @@ export class imba_techies_remote_mines_pinpoint_detonation extends BaseAbility_P
             damage = damage + inflammable_charge_radius * stacks;
             radius = radius + inflammable_charge_damage * stacks;
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damageTable = {
                     victim: enemy,
                     attacker: caster,
@@ -1393,7 +1393,7 @@ export class imba_techies_remote_mines_pinpoint_detonation extends BaseAbility_P
                 RefreshElectroCharge(enemy);
             }
             let mines = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, mine] of ipairs(mines)) {
+            for (const [_, mine] of GameFunc.iPair(mines)) {
                 if (mine.GetUnitName() == "npc_imba_techies_remote_mines") {
                     let modifier_inflammable_handler = mine.FindModifierByName(modifier_inflammable);
                     if (!modifier_inflammable_handler) {
@@ -1490,7 +1490,7 @@ export class imba_techies_focused_detonate extends BaseAbility_Plus {
         let detonate_ability = "imba_techies_remote_mines_pinpoint_detonation";
         let radius = ability.GetSpecialValueFor("radius");
         let remote_mines = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (let i = 1; i <= GameFunc.GetCount(remote_mines); i += 1) {
+        for (let i = 0; i < GameFunc.GetCount(remote_mines); i++) {
             this.AddTimer(FrameTime() * (i - 1), () => {
                 let detonate_ability_handler = remote_mines[i].FindAbilityByName(detonate_ability);
                 if (detonate_ability_handler) {

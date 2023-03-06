@@ -27,7 +27,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
                 }
             }
             if (this.debuff_modifier_table && GameFunc.GetCount(this.debuff_modifier_table) > 0) {
-                for (const [_, debuff] of ipairs(this.debuff_modifier_table)) {
+                for (const [_, debuff] of GameFunc.iPair(this.debuff_modifier_table)) {
                     if (!debuff.IsNull() && debuff.str_steal_scepter) {
                         debuff.SetStackCount(debuff.str_steal_scepter);
                     }
@@ -42,7 +42,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
                 }
             }
             if (this.debuff_modifier_table) {
-                for (const [_, debuff] of ipairs(this.debuff_modifier_table)) {
+                for (const [_, debuff] of GameFunc.iPair(this.debuff_modifier_table)) {
                     if (!debuff.IsNull() && debuff.str_steal) {
                         debuff.SetStackCount(debuff.str_steal);
                     }
@@ -60,24 +60,24 @@ export class imba_undying_decay extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_undying" && RollPercentage(50)) {
             if (!this.responses) {
                 this.responses = {
-                    1: "undying_undying_decay_03",
-                    2: "undying_undying_decay_04",
-                    3: "undying_undying_decay_05",
-                    4: "undying_undying_decay_07",
-                    5: "undying_undying_decay_08",
-                    6: "undying_undying_decay_09",
-                    7: "undying_undying_decay_10"
+                    "1": "undying_undying_decay_03",
+                    "2": "undying_undying_decay_04",
+                    "3": "undying_undying_decay_05",
+                    "4": "undying_undying_decay_07",
+                    "5": "undying_undying_decay_08",
+                    "6": "undying_undying_decay_09",
+                    "7": "undying_undying_decay_10"
                 }
             }
             if (!this.responses_big) {
                 this.responses_big = {
-                    1: "undying_undying_big_decay_03",
-                    2: "undying_undying_big_decay_04",
-                    3: "undying_undying_big_decay_05",
-                    4: "undying_undying_big_decay_07",
-                    5: "undying_undying_big_decay_08",
-                    6: "undying_undying_big_decay_09",
-                    7: "undying_undying_big_decay_10"
+                    "1": "undying_undying_big_decay_03",
+                    "2": "undying_undying_big_decay_04",
+                    "3": "undying_undying_big_decay_05",
+                    "4": "undying_undying_big_decay_07",
+                    "5": "undying_undying_big_decay_08",
+                    "6": "undying_undying_big_decay_09",
+                    "7": "undying_undying_big_decay_10"
                 }
             }
             if (this.GetCasterPlus().HasModifier("modifier_imba_undying_flesh_golem")) {
@@ -99,7 +99,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
         if (!this.debuff_modifier_table) {
             this.debuff_modifier_table = []
         }
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCursorPosition(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             if (enemy.IsClone() || enemy.IsTempestDouble()) {
                 if (enemy.GetPlayerOwner && enemy.GetPlayerOwner().GetAssignedHero && enemy.GetPlayerOwner().GetAssignedHero().entindex()) {
                     if (!clone_owner_units[enemy.GetPlayerOwner().entindex() + ""]) {
@@ -359,30 +359,30 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_undying" && RollPercentage(50)) {
             if (!this.responses) {
                 this.responses = {
-                    1: "undying_undying_soulrip_02",
-                    2: "undying_undying_soulrip_03",
-                    3: "undying_undying_soulrip_04",
-                    4: "undying_undying_soulrip_07"
+                    "1": "undying_undying_soulrip_02",
+                    "2": "undying_undying_soulrip_03",
+                    "3": "undying_undying_soulrip_04",
+                    "4": "undying_undying_soulrip_07"
                 }
             }
             if (!this.responses_big) {
                 this.responses_big = {
-                    1: "undying_undying_big_soulrip_02",
-                    2: "undying_undying_big_soulrip_03",
-                    3: "undying_undying_big_soulrip_04",
-                    4: "undying_undying_big_soulrip_07"
+                    "1": "undying_undying_big_soulrip_02",
+                    "2": "undying_undying_big_soulrip_03",
+                    "3": "undying_undying_big_soulrip_04",
+                    "4": "undying_undying_big_soulrip_07"
                 }
             }
             if (this.GetCasterPlus().HasModifier("modifier_imba_undying_flesh_golem")) {
-                EmitSoundOnClient(this.responses_big[RandomInt(1, GameFunc.GetCount(this.responses_big))], this.GetCasterPlus().GetPlayerOwner());
+                EmitSoundOnClient(GFuncRandom.RandomValue(this.responses_big), this.GetCasterPlus().GetPlayerOwner());
             } else {
-                EmitSoundOnClient(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))], this.GetCasterPlus().GetPlayerOwner());
+                EmitSoundOnClient(GFuncRandom.RandomValue(this.responses), this.GetCasterPlus().GetPlayerOwner());
             }
         }
         let target = this.GetCursorTarget();
         let units_ripped = 0;
         let damage_particle = undefined;
-        for (const [_, unit] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false))) {
             if (unit != this.GetCasterPlus() && unit != target) {
                 if (target.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
                     damage_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_undying/undying_soul_rip_damage.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
@@ -538,42 +538,42 @@ export class imba_undying_tombstone extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_undying") {
             if (!this.responses) {
                 this.responses = {
-                    1: "undying_undying_tombstone_01",
-                    2: "undying_undying_tombstone_02",
-                    3: "undying_undying_tombstone_03",
-                    4: "undying_undying_tombstone_04",
-                    5: "undying_undying_tombstone_05",
-                    6: "undying_undying_tombstone_06",
-                    7: "undying_undying_tombstone_07",
-                    8: "undying_undying_tombstone_08",
-                    9: "undying_undying_tombstone_09",
-                    10: "undying_undying_tombstone_10",
-                    11: "undying_undying_tombstone_11",
-                    12: "undying_undying_tombstone_12",
-                    13: "undying_undying_tombstone_13"
+                    "1": "undying_undying_tombstone_01",
+                    "2": "undying_undying_tombstone_02",
+                    "3": "undying_undying_tombstone_03",
+                    "4": "undying_undying_tombstone_04",
+                    "5": "undying_undying_tombstone_05",
+                    "6": "undying_undying_tombstone_06",
+                    "7": "undying_undying_tombstone_07",
+                    "8": "undying_undying_tombstone_08",
+                    "9": "undying_undying_tombstone_09",
+                    "10": "undying_undying_tombstone_10",
+                    "11": "undying_undying_tombstone_11",
+                    "12": "undying_undying_tombstone_12",
+                    "13": "undying_undying_tombstone_13"
                 }
             }
             if (!this.responses_big) {
                 this.responses_big = {
-                    1: "undying_undying_big_tombstone_01",
-                    2: "undying_undying_big_tombstone_02",
-                    3: "undying_undying_big_tombstone_03",
-                    4: "undying_undying_big_tombstone_04",
-                    5: "undying_undying_big_tombstone_05",
-                    6: "undying_undying_big_tombstone_06",
-                    7: "undying_undying_big_tombstone_07",
-                    8: "undying_undying_big_tombstone_08",
-                    9: "undying_undying_big_tombstone_09",
-                    10: "undying_undying_big_tombstone_10",
-                    11: "undying_undying_big_tombstone_11",
-                    12: "undying_undying_big_tombstone_12",
-                    13: "undying_undying_big_tombstone_13"
+                    "1": "undying_undying_big_tombstone_01",
+                    "2": "undying_undying_big_tombstone_02",
+                    "3": "undying_undying_big_tombstone_03",
+                    "4": "undying_undying_big_tombstone_04",
+                    "5": "undying_undying_big_tombstone_05",
+                    "6": "undying_undying_big_tombstone_06",
+                    "7": "undying_undying_big_tombstone_07",
+                    "8": "undying_undying_big_tombstone_08",
+                    "9": "undying_undying_big_tombstone_09",
+                    "10": "undying_undying_big_tombstone_10",
+                    "11": "undying_undying_big_tombstone_11",
+                    "12": "undying_undying_big_tombstone_12",
+                    "13": "undying_undying_big_tombstone_13"
                 }
             }
             if (this.GetCasterPlus().HasModifier("modifier_imba_undying_flesh_golem")) {
-                EmitSoundOnClient(this.responses_big[RandomInt(1, GameFunc.GetCount(this.responses_big))], this.GetCasterPlus().GetPlayerOwner());
+                EmitSoundOnClient(GFuncRandom.RandomValue(this.responses_big), this.GetCasterPlus().GetPlayerOwner());
             } else {
-                EmitSoundOnClient(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))], this.GetCasterPlus().GetPlayerOwner());
+                EmitSoundOnClient(GFuncRandom.RandomValue(this.responses), this.GetCasterPlus().GetPlayerOwner());
             }
         }
         let tombstone = BaseNpc_Plus.CreateUnitByName("npc_dota_unit_tombstone" + this.GetLevel(), position, this.GetCasterPlus().GetTeamNumber(), true, this.GetCasterPlus(), this.GetCasterPlus());
@@ -621,8 +621,8 @@ export class modifier_imba_undying_tombstone_zombie_aura extends BaseModifier_Pl
             return;
         }
         this.zombie_types = {
-            1: "npc_dota_unit_undying_zombie",
-            2: "npc_dota_unit_undying_zombie_torso"
+            "1": "npc_dota_unit_undying_zombie",
+            "2": "npc_dota_unit_undying_zombie_torso"
         }
         this.OnIntervalThink();
         this.StartIntervalThink(this.zombie_interval);
@@ -630,7 +630,7 @@ export class modifier_imba_undying_tombstone_zombie_aura extends BaseModifier_Pl
     OnIntervalThink(): void {
         let zombie = undefined;
         let deathstrike_ability = undefined;
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false))) {
             if (!enemy.IsCourier() && enemy.GetName() != "npc_dota_unit_undying_zombie") {
                 zombie = BaseNpc_Plus.CreateUnitByName(this.zombie_types[RandomInt(1, GameFunc.GetCount(this.zombie_types))], enemy.GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), true, this.GetParentPlus(), this.GetParentPlus());
                 zombie.EmitSound("Undying_Zombie.Spawn");

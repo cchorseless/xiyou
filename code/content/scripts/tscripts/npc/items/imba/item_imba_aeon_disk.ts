@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -11,7 +12,7 @@ export class item_imba_aeon_disk extends BaseItem_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Item.DropGemWorld");
-        for (const [_, mod] of ipairs(this.GetCasterPlus().FindAllModifiersByName("modifier_imba_aeon_disk_basic"))) {
+        for (const [_, mod] of GameFunc.iPair(this.GetCasterPlus().FindAllModifiersByName("modifier_imba_aeon_disk_basic"))) {
             if (mod.GetStackCount() == 2) {
                 mod.SetStackCount(1);
             } else {
@@ -78,7 +79,7 @@ export class modifier_imba_aeon_disk_basic extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.INCOMING_DAMAGE_PERCENTAGE)
     CC_GetModifierIncomingDamage_Percentage(kv: ModifierAttackEvent): number {
-        if (this.GetParentPlus().FindAllModifiersByName("modifier_imba_aeon_disk_basic")[1] == this && this.GetStackCount() == 2 && this.GetItemPlus() && this.GetItemPlus().IsCooldownReady() && kv.attacker != this.GetParentPlus() && !this.GetParentPlus().HasModifier("modifier_imba_aeon_disk") && !this.GetParentPlus().IsIllusion()) {
+        if (this.GetParentPlus().FindAllModifiersByName("modifier_imba_aeon_disk_basic")[0] == this && this.GetStackCount() == 2 && this.GetItemPlus() && this.GetItemPlus().IsCooldownReady() && kv.attacker != this.GetParentPlus() && !this.GetParentPlus().HasModifier("modifier_imba_aeon_disk") && !this.GetParentPlus().IsIllusion()) {
             let buff_duration = this.GetItemPlus().GetSpecialValueFor("buff_duration");
             let health_threshold_pct = this.GetItemPlus().GetSpecialValueFor("health_threshold_pct") / 100.0;
             let health_threshold = this.GetParentPlus().GetHealth() / this.GetParentPlus().GetMaxHealth();

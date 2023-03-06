@@ -308,7 +308,7 @@ export class item_imba_desolator_2 extends BaseItem_Plus {
             main_direction = caster.GetForwardVector();
         }
         let angle_step = projectile_cone / (projectile_amount - 1);
-        for (let i = 1; i <= projectile_amount; i += 1) {
+        for (let i = 0; i < projectile_amount; i++) {
             projectile_directions[i] = RotatePosition(caster_loc, QAngle(0, (i - 1) * angle_step - projectile_cone * 0.5, 0), caster_loc + main_direction * 50 as Vector);
         }
         let desolator_projectile: CreateLinearProjectileOptions = {

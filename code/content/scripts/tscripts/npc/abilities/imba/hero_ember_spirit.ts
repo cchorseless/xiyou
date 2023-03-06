@@ -95,7 +95,7 @@ export class modifier_imba_flame_guard_passive extends BaseModifier_Plus {
             }
             damage = damage * ability.GetSpecialValueFor("tick_interval");
             let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, ability.GetSpecialValueFor("effect_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(nearby_enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {
                 ApplyDamage({
                     victim: enemy,
                     attacker: caster,
@@ -160,7 +160,7 @@ export class modifier_imba_flame_guard_aura extends BaseModifier_Plus {
                 this.GetParentPlus().RemoveModifierByName("modifier_imba_flame_guard_aura");
             } else {
                 let nearby_enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.effect_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(nearby_enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {
                     ApplyDamage({
                         victim: enemy,
                         attacker: this.GetCasterPlus(),
@@ -568,17 +568,17 @@ export class imba_ember_spirit_searing_chains extends BaseAbility_Plus {
             ParticleManager.SetParticleControl(cast_pfx, 1, Vector(this.GetSpecialValueFor("effect_radius"), 1, 1));
             ParticleManager.ReleaseParticleIndex(cast_pfx);
             let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster_loc, undefined, this.GetSpecialValueFor("effect_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
-            for (let i = 1; i <= main_targets; i += 1) {
+            for (let i = 0; i < main_targets; i++) {
                 if (nearby_enemies[i]) {
                     ApplySearingChains(caster, caster, nearby_enemies[i], this, duration);
                 }
             }
             let active_remnants = FindActiveRemnants(caster);
             if (active_remnants) {
-                for (const [_, remnant] of ipairs(active_remnants)) {
+                for (const [_, remnant] of GameFunc.iPair(active_remnants)) {
                     remnant.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_1);
                     let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), remnant.GetAbsOrigin(), undefined, this.GetSpecialValueFor("effect_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
-                    for (let i = 1; i <= max_targets; i += 1) {
+                    for (let i = 0; i < max_targets; i++) {
                         if (nearby_enemies[i]) {
                             ApplySearingChains(caster, remnant, nearby_enemies[i], this, duration);
                         }
@@ -680,7 +680,7 @@ export class imba_ember_spirit_sleight_of_fist extends BaseAbility_Plus {
                                 FindClearSpaceForUnit(caster, caster_loc, true);
                             }
                             caster.RemoveModifierByName("modifier_imba_sleight_of_fist_caster");
-                            for (const [_, target] of ipairs(sleight_targets)) {
+                            for (const [_, target] of GameFunc.iPair(sleight_targets)) {
                                 (EntIndexToHScript(target) as IBaseNpc_Plus).RemoveModifierByName("modifier_imba_sleight_of_fist_marker");
                             }
                         });
@@ -812,7 +812,7 @@ export class imba_ember_spirit_flame_guard extends BaseAbility_Plus {
             caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
             let active_remnants = FindActiveRemnants(caster);
             if (active_remnants) {
-                for (const [_, remnant] of ipairs(active_remnants)) {
+                for (const [_, remnant] of GameFunc.iPair(active_remnants)) {
                     remnant.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
                     remnant.EmitSound("Hero_EmberSpirit.FlameGuard.Cast");
                     remnant.EmitSound("Hero_EmberSpirit.FlameGuard.Loop");
@@ -863,15 +863,15 @@ export class imba_ember_spirit_activate_fire_remnant extends BaseAbility_Plus {
             let target_loc = this.GetCursorPosition();
             let active_remnants = FindActiveRemnants(caster);
             if (active_remnants) {
-                let closest_remnant_position = active_remnants[1].GetAbsOrigin();
+                let closest_remnant_position = active_remnants[0].GetAbsOrigin();
                 let closest_distance = (closest_remnant_position - target_loc as Vector).Length2D();
-                for (const [_, remnant] of ipairs(active_remnants)) {
+                for (const [_, remnant] of GameFunc.iPair(active_remnants)) {
                     if ((remnant.GetAbsOrigin() - target_loc as Vector).Length2D() < closest_distance) {
                         closest_remnant_position = remnant.GetAbsOrigin();
                         closest_distance = (closest_remnant_position - target_loc as Vector).Length2D();
                     }
                     let nearby_enemies = FindUnitsInRadius(caster.GetTeamNumber(), remnant.GetAbsOrigin(), undefined, this.GetSpecialValueFor("effect_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(nearby_enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {
                         ApplyDamage({
                             victim: enemy,
                             attacker: caster,

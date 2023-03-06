@@ -25,18 +25,18 @@ export class imba_alchemist_acid_spray extends BaseAbility_Plus {
         let team_id = caster.GetTeamNumber();
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_alchemist") {
             let cast_responses = {
-                1: "alchemist_alch_ability_acid_01",
-                2: "alchemist_alch_ability_acid_02",
-                3: "alchemist_alch_ability_acid_03",
-                4: "alchemist_alch_ability_acid_04",
-                5: "alchemist_alch_ability_acid_05",
-                6: "alchemist_alch_ability_acid_06",
-                7: "alchemist_alch_ability_acid_07",
-                8: "alchemist_alch_ability_acid_08",
-                9: "alchemist_alch_ability_acid_09",
-                10: "alchemist_alch_ability_acid_10",
-                11: "alchemist_alch_ability_acid_11",
-                12: "alchemist_alch_ability_acid_12"
+                "1": "alchemist_alch_ability_acid_01",
+                "2": "alchemist_alch_ability_acid_02",
+                "3": "alchemist_alch_ability_acid_03",
+                "4": "alchemist_alch_ability_acid_04",
+                "5": "alchemist_alch_ability_acid_05",
+                "6": "alchemist_alch_ability_acid_06",
+                "7": "alchemist_alch_ability_acid_07",
+                "8": "alchemist_alch_ability_acid_08",
+                "9": "alchemist_alch_ability_acid_09",
+                "10": "alchemist_alch_ability_acid_10",
+                "11": "alchemist_alch_ability_acid_11",
+                "12": "alchemist_alch_ability_acid_12"
             }
             EmitSoundOn(GFuncRandom.RandomOne(Object.values(cast_responses)), caster);
         }
@@ -91,7 +91,7 @@ export class modifier_imba_acid_spray_thinker extends BaseModifier_Plus {
             ParticleManager.SetParticleControl(this.particle, 15, (Vector(25, 150, 25)));
             ParticleManager.SetParticleControl(this.particle, 16, (Vector(0, 0, 0)));
             let units = FindUnitsInRadius(this.thinker.GetTeamNumber(), this.thinker_loc, undefined, this.radius, this.ability_target_team, this.ability_target_type, this.ability_target_flags, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, unit] of ipairs(units)) {
+            for (const [_, unit] of GameFunc.iPair(units)) {
                 if (unit.HasModifier(this.modifier_spray)) {
                     let modifier_spray_handler = unit.findBuff<modifier_imba_acid_spray_handler>(this.modifier_spray);
                     if (modifier_spray_handler && !modifier_spray_handler.center) {
@@ -105,7 +105,7 @@ export class modifier_imba_acid_spray_thinker extends BaseModifier_Plus {
     OnIntervalThink(): void {
         let units = FindUnitsInRadius(this.thinker.GetTeamNumber(), this.thinker_loc, undefined, this.radius, this.ability_target_team, this.ability_target_type, this.ability_target_flags, FindOrder.FIND_ANY_ORDER, false);
         let damage = undefined;
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             if (unit.HasModifier(this.modifier_spray)) {
                 let modifier_spray_handler = unit.findBuff<modifier_imba_acid_spray_handler>(this.modifier_spray);
                 if (modifier_spray_handler && !modifier_spray_handler.center) {
@@ -181,7 +181,7 @@ export class modifier_imba_acid_spray_handler extends BaseModifier_Plus {
                 let bonus_damage = (caster.GetTalentValue("special_bonus_imba_alchemist_5") / 100) * greed_stacks;
                 this.modifier.damage = this.modifier.damage + bonus_damage;
             }
-            let tick_rate = this.StartIntervalThink(this.tick_rate);
+            this.StartIntervalThink(this.tick_rate);
         }
     }
     OnIntervalThink(): void {
@@ -271,7 +271,7 @@ export class modifier_imba_acid_spray_debuff_dot extends BaseModifier_Plus {
             let unit = this.GetParentPlus();
             if (unit.IsCourier()) {
                 this.Destroy();
-                return undefined;
+                return;
             }
             if (aura_tick || consume_stacks || (!unit.HasModifier("modifier_imba_acid_spray_handler") && !unit.HasModifier("modifier_imba_chemical_rage_aura"))) {
                 if (!aura_tick) {
@@ -373,19 +373,19 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         let cast_response = {
-            1: "alchemist_alch_ability_concoc_01",
-            2: "alchemist_alch_ability_concoc_02",
-            3: "alchemist_alch_ability_concoc_03",
-            4: "alchemist_alch_ability_concoc_04",
-            5: "alchemist_alch_ability_concoc_05",
-            6: "alchemist_alch_ability_concoc_06",
-            7: "alchemist_alch_ability_concoc_07",
-            8: "alchemist_alch_ability_concoc_08",
-            9: "alchemist_alch_ability_concoc_10"
+            "1": "alchemist_alch_ability_concoc_01",
+            "2": "alchemist_alch_ability_concoc_02",
+            "3": "alchemist_alch_ability_concoc_03",
+            "4": "alchemist_alch_ability_concoc_04",
+            "5": "alchemist_alch_ability_concoc_05",
+            "6": "alchemist_alch_ability_concoc_06",
+            "7": "alchemist_alch_ability_concoc_07",
+            "8": "alchemist_alch_ability_concoc_08",
+            "9": "alchemist_alch_ability_concoc_10"
         }
         let last_second_throw_response = {
-            1: "alchemist_alch_ability_concoc_16",
-            2: "alchemist_alch_ability_concoc_17"
+            "1": "alchemist_alch_ability_concoc_16",
+            "2": "alchemist_alch_ability_concoc_17"
         }
         if (this.GetCasterPlus().HasModifier("modifier_imba_unstable_concoction_handler")) {
             let target = this.GetCursorTarget();
@@ -464,8 +464,8 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
                 let damage = this.damage;
                 let radius = this.GetAOERadius();
                 let kill_response = {
-                    1: "alchemist_alch_ability_concoc_09",
-                    2: "alchemist_alch_ability_concoc_15"
+                    "1": "alchemist_alch_ability_concoc_09",
+                    "2": "alchemist_alch_ability_concoc_15"
                 }
                 if (target) {
                     location = target.GetAbsOrigin();
@@ -508,7 +508,7 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
                     }
                 }
                 let enemy_killed = false;
-                for (const [_, unit] of ipairs(units)) {
+                for (const [_, unit] of GameFunc.iPair(units)) {
                     if (unit.GetTeam() != caster.GetTeam()) {
                         ApplyDamage({
                             victim: unit,
@@ -538,7 +538,7 @@ export class imba_alchemist_unstable_concoction extends BaseAbility_Plus {
                             ParticleManager.ReleaseParticleIndex(particle_acid_blast_fx);
                             let acid_spray_units = FindUnitsInRadius(caster.GetTeam(), location, undefined, acid_spray_radius * 2, this.GetAbilityTargetTeam(), DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
                             let damage_multiplier = this.GetSpecialValueFor("acid_spray_damage") * 0.01;
-                            for (const [_, acid_spray_unit] of ipairs(acid_spray_units)) {
+                            for (const [_, acid_spray_unit] of GameFunc.iPair(acid_spray_units)) {
                                 let actual_damage = ApplyDamage({
                                     victim: acid_spray_unit,
                                     attacker: caster,
@@ -659,20 +659,20 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
             let caster = this.GetParentPlus();
             let ability = this.GetAbilityPlus<imba_alchemist_unstable_concoction>();
             let last_second_response = {
-                1: "alchemist_alch_ability_concoc_11",
-                2: "alchemist_alch_ability_concoc_12",
-                3: "alchemist_alch_ability_concoc_13",
-                4: "alchemist_alch_ability_concoc_14",
-                5: "alchemist_alch_ability_concoc_18",
-                6: "alchemist_alch_ability_concoc_19",
-                7: "alchemist_alch_ability_concoc_20"
+                "1": "alchemist_alch_ability_concoc_11",
+                "2": "alchemist_alch_ability_concoc_12",
+                "3": "alchemist_alch_ability_concoc_13",
+                "4": "alchemist_alch_ability_concoc_14",
+                "5": "alchemist_alch_ability_concoc_18",
+                "6": "alchemist_alch_ability_concoc_19",
+                "7": "alchemist_alch_ability_concoc_20"
             }
             let self_blow_response = {
-                1: "alchemist_alch_ability_concoc_21",
-                2: "alchemist_alch_ability_concoc_22",
-                3: "alchemist_alch_ability_concoc_23",
-                4: "alchemist_alch_ability_concoc_24",
-                5: "alchemist_alch_ability_concoc_25"
+                "1": "alchemist_alch_ability_concoc_21",
+                "2": "alchemist_alch_ability_concoc_22",
+                "3": "alchemist_alch_ability_concoc_23",
+                "4": "alchemist_alch_ability_concoc_24",
+                "5": "alchemist_alch_ability_concoc_25"
             }
             let brew_time_passed = this.GetDuration();
             let allHeroes = HeroList.GetAllHeroes();
@@ -696,7 +696,7 @@ export class modifier_imba_unstable_concoction_handler extends BaseModifier_Plus
                 return;
             }
             if (!(integer == 0 && decimal <= 1)) {
-                for (const [k, v] of ipairs(allHeroes)) {
+                for (const [k, v] of GameFunc.iPair(allHeroes)) {
                     if (v.GetPlayerID() && v.GetTeam() == caster.GetTeam()) {
                         let particle = ResHelper.CreateParticleEx(particleName, ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, caster);
                         ParticleManager.SetParticleControl(particle, 0, caster.GetAbsOrigin());
@@ -1060,30 +1060,30 @@ export class imba_alchemist_chemical_rage extends BaseAbility_Plus {
     OnSpellStart(): void {
         let caster = this.GetCasterPlus();
         let cast_response = {
-            1: "alchemist_alch_ability_rage_01",
-            2: "alchemist_alch_ability_rage_02",
-            3: "alchemist_alch_ability_rage_03",
-            4: "alchemist_alch_ability_rage_04",
-            5: "alchemist_alch_ability_rage_05",
-            6: "alchemist_alch_ability_rage_06",
-            7: "alchemist_alch_ability_rage_07",
-            8: "alchemist_alch_ability_rage_08",
-            9: "alchemist_alch_ability_rage_09",
-            10: "alchemist_alch_ability_rage_10",
-            11: "alchemist_alch_ability_rage_11",
-            12: "alchemist_alch_ability_rage_12",
-            13: "alchemist_alch_ability_rage_13",
-            14: "alchemist_alch_ability_rage_15",
-            15: "alchemist_alch_ability_rage_16",
-            16: "alchemist_alch_ability_rage_17",
-            17: "alchemist_alch_ability_rage_18",
-            18: "alchemist_alch_ability_rage_19",
-            19: "alchemist_alch_ability_rage_20",
-            20: "alchemist_alch_ability_rage_21",
-            21: "alchemist_alch_ability_rage_22",
-            22: "alchemist_alch_ability_rage_23",
-            23: "alchemist_alch_ability_rage_24",
-            24: "alchemist_alch_ability_rage_25"
+            "1": "alchemist_alch_ability_rage_01",
+            "2": "alchemist_alch_ability_rage_02",
+            "3": "alchemist_alch_ability_rage_03",
+            "4": "alchemist_alch_ability_rage_04",
+            "5": "alchemist_alch_ability_rage_05",
+            "6": "alchemist_alch_ability_rage_06",
+            "7": "alchemist_alch_ability_rage_07",
+            "8": "alchemist_alch_ability_rage_08",
+            "9": "alchemist_alch_ability_rage_09",
+            "10": "alchemist_alch_ability_rage_10",
+            "11": "alchemist_alch_ability_rage_11",
+            "12": "alchemist_alch_ability_rage_12",
+            "13": "alchemist_alch_ability_rage_13",
+            "14": "alchemist_alch_ability_rage_15",
+            "15": "alchemist_alch_ability_rage_16",
+            "16": "alchemist_alch_ability_rage_17",
+            "17": "alchemist_alch_ability_rage_18",
+            "18": "alchemist_alch_ability_rage_19",
+            "19": "alchemist_alch_ability_rage_20",
+            "20": "alchemist_alch_ability_rage_21",
+            "21": "alchemist_alch_ability_rage_22",
+            "22": "alchemist_alch_ability_rage_23",
+            "23": "alchemist_alch_ability_rage_24",
+            "24": "alchemist_alch_ability_rage_25"
         }
         let radius_of_swamp = 800;
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, radius_of_swamp, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);

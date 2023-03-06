@@ -29,7 +29,7 @@ export class imba_empress_eleven_curses extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(ground_pfx, 1, Vector(effect_radius, 0, 0));
         ParticleManager.ReleaseParticleIndex(ground_pfx);
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, effect_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let hit_pfx = ResHelper.CreateParticleEx("particles/hero/hell_empress/empress_curse_hit.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN_FOLLOW, enemy);
             ParticleManager.SetParticleControl(hit_pfx, 4, enemy.GetAbsOrigin() + Vector(0, 0, 100) as Vector);
             ParticleManager.ReleaseParticleIndex(hit_pfx);
@@ -75,7 +75,7 @@ export class imba_empress_hellbolt extends BaseAbility_Plus {
         let bolt_speed = this.GetSpecialValueFor("bolt_speed");
         caster.EmitSound("Hero_SkywrathMage.ConcussiveShot.Cast");
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, target_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let projectile = {
                 Target: enemy,
                 Source: caster,
@@ -199,7 +199,7 @@ export class imba_empress_hurl_through_hell extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(cast_pfx, 3, target_loc);
         ParticleManager.ReleaseParticleIndex(cast_pfx);
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_loc, undefined, hurl_radius, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             enemy.AddNewModifier(caster, this, "modifier_imba_hurl_through_hell", {
                 duration: hurl_duration
             });
@@ -283,7 +283,7 @@ export class modifier_imba_hurl_through_hell extends BaseModifier_Plus {
                 "modifier_imba_hurl_through_hell_break"
             ]
 
-            for (let i = 0; i < this.debuff_amount; i += 1) {
+            for (let i = 0; i < this.debuff_amount; i++) {
                 parent.AddNewModifier(caster, ability, table.remove(debuff_table, RandomInt(0, GameFunc.GetCount(debuff_table))),
                     {
                         duration: this.debuff_duration

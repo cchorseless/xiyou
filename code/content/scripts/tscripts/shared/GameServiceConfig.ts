@@ -43,6 +43,7 @@ export module GameServiceConfig {
     export const GAME_bounty_multiplier = 100;
     export const USE_MEME_SOUNDS = true;		// Should we use meme/fun sounds on abilities occasionally?
     export const MEME_SOUNDS_CHANCE = 50;
+    export const IMBA_DAMAGE_EFFECTS_DISTANCE_CUTOFF = 2500	//Range at which most on-damage effects no longer trigger
 
     export const IMBA_DISABLED_SKULL_BASHER = [
         "npc_dota_hero_faceless_void",

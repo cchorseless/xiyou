@@ -9,7 +9,7 @@ declare global {
  * 执行顺讯 装饰器=>DeclareFunctions=>constructor=>OnCreate=>Init
  */
 export class BaseModifier_Plus extends BaseModifier {
-    CheckUnique(bCreated = false) {
+    CheckUnique?(bCreated = false) {
         let hParent = this.GetParent();
         if (bCreated) {
             let mod = hParent.FindAllModifiersByName(this.GetName());
@@ -30,7 +30,7 @@ export class BaseModifier_Plus extends BaseModifier {
             return undefined;
         }
     }
-    CheckUniqueValue(value: number, tSuperiorModifierNames: string[]) {
+    CheckUniqueValue?(value: number, tSuperiorModifierNames: string[]) {
         let hParent = this.GetParent();
         if (tSuperiorModifierNames) {
             for (const sSuperiorMod of (tSuperiorModifierNames)) {

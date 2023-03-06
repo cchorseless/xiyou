@@ -360,7 +360,7 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifierMoti
             let ms_steal = this.GetSpecialValueFor("ms_steal_pcnt");
             let chronocharges = 0;
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.HasModifier("modifier_imba_faceless_void_time_walk_slow")) {
                     if (enemy.IsRealHero()) {
                         this.as_stolen = this.as_stolen + enemy.GetAttackSpeed() * as_steal;
@@ -398,7 +398,7 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifierMoti
             asBuff.SetStackCount(this.as_stolen);
             msBuff.SetStackCount(this.ms_stolen);
             if (this.GetCasterPlus().HasScepter() && this.GetCasterPlus().HasModifier("modifier_imba_faceless_void_time_lock_720")) {
-                for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.radius_scepter, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+                for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.radius_scepter, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                     this.GetCasterPlus().findBuff<modifier_imba_faceless_void_time_lock_720>("modifier_imba_faceless_void_time_lock_720").ApplyTimeLock(enemy);
                 }
             }
@@ -515,7 +515,7 @@ export class imba_faceless_void_time_dilation extends BaseAbility_Plus {
             caster.AddNewModifier(caster, this, "modifier_imba_faceless_void_chronocharges", {});
         }
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_CLOSEST, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (enemy.IsRealHero()) {
                 enemy.EmitSound("Hero_FacelessVoid.TimeDilation.Target");
                 let hit_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_faceless_void/faceless_void_backtrack.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, enemy);
@@ -524,7 +524,7 @@ export class imba_faceless_void_time_dilation extends BaseAbility_Plus {
                 let hit_pfx_2 = ResHelper.CreateParticleEx("particles/units/heroes/hero_faceless_void/faceless_void_dialatedebuf_d.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, enemy);
                 ParticleManager.ReleaseParticleIndex(hit_pfx_2);
                 let abilities_on_cooldown = 0;
-                for (let i = 0; i <= 23; i += 1) {
+                for (let i = 0; i <= 23; i++) {
                     let current_ability = enemy.GetAbilityByIndex(i);
                     if (current_ability && !current_ability.IsPassive() && !current_ability.IsAttributeBonus() && !current_ability.IsCooldownReady()) {
                         current_ability.StartCooldown(current_ability.GetCooldownTimeRemaining() + cd_increase);
@@ -549,14 +549,14 @@ export class imba_faceless_void_time_dilation extends BaseAbility_Plus {
         }
         let allies = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, aoe, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_CLOSEST, false);
         let charges_spent = 0;
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             if (!caster.HasTalent("special_bonus_imba_faceless_void_7")) {
                 if (chronocharges <= 0) {
                     return;
                 }
             }
             let abilities_on_cooldown = 0;
-            for (let i = 0; i <= 23; i += 1) {
+            for (let i = 0; i <= 23; i++) {
                 if (chronocharges > 0 || caster.HasTalent("special_bonus_imba_faceless_void_7")) {
                     let current_ability = ally.GetAbilityByIndex(i);
                     if (current_ability && current_ability != this && current_ability.GetLevel() > 0 && !current_ability.IsPassive() && !current_ability.IsAttributeBonus() && !current_ability.IsCooldownReady() && current_ability.GetAbilityType() != ABILITY_TYPES.ABILITY_TYPE_ULTIMATE) {
@@ -780,7 +780,7 @@ export class modifier_imba_faceless_void_time_lock extends BaseModifier_Plus {
                         if (target.findBuff<modifier_imba_faceless_void_time_dilation_slow>("modifier_imba_faceless_void_time_dilation_slow")) {
                             talent_cd_increase = attacker.GetTalentValue("special_bonus_imba_faceless_void_4", "target_increase");
                             let caster_cd_decrease = attacker.GetTalentValue("special_bonus_imba_faceless_void_4", "self_reduction");
-                            for (let i = 0; i <= 23; i += 1) {
+                            for (let i = 0; i <= 23; i++) {
                                 let casterAbility = attacker.GetAbilityByIndex(i);
                                 if (casterAbility && casterAbility.GetLevel() > 0 && !casterAbility.IsPassive() && !casterAbility.IsAttributeBonus() && !casterAbility.IsCooldownReady()) {
                                     let newCooldown = casterAbility.GetCooldownTimeRemaining() - caster_cd_decrease;
@@ -805,7 +805,7 @@ export class modifier_imba_faceless_void_time_lock extends BaseModifier_Plus {
                         if (target.IsRealHero()) {
                             this.GetParentPlus().findBuff<modifier_imba_faceless_void_chronocharges>("modifier_imba_faceless_void_chronocharges").SetStackCount(this.GetParentPlus().FindModifierByName("modifier_imba_faceless_void_chronocharges").GetStackCount() + 1);
                         }
-                        for (let i = 0; i <= 23; i += 1) {
+                        for (let i = 0; i <= 23; i++) {
                             let targetAbility = target.GetAbilityByIndex(i);
                             if (targetAbility && targetAbility.GetLevel() > 0 && !targetAbility.IsPassive() && !targetAbility.IsAttributeBonus() && !targetAbility.IsCooldownReady()) {
                                 let newCooldown = targetAbility.GetCooldownTimeRemaining() + cdIncrease + talent_cd_increase;
@@ -815,12 +815,12 @@ export class modifier_imba_faceless_void_time_lock extends BaseModifier_Plus {
                         }
                     } else {
                         let enemies = FindUnitsInRadius(attacker.GetTeamNumber(), target.GetAbsOrigin(), undefined, 5000, ability.GetAbilityTargetTeam(), ability.GetAbilityTargetType(), ability.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
-                        for (const [_, enemy] of ipairs(enemies)) {
+                        for (const [_, enemy] of GameFunc.iPair(enemies)) {
                             if (enemy.findBuff<modifier_imba_faceless_void_chronosphere_handler>("modifier_imba_faceless_void_chronosphere_handler")) {
                                 if (enemy.findBuff<modifier_imba_faceless_void_time_dilation_slow>("modifier_imba_faceless_void_time_dilation_slow")) {
                                     talent_cd_increase = attacker.GetTalentValue("special_bonus_imba_faceless_void_4", "target_increase");
                                     let caster_cd_decrease = attacker.GetTalentValue("special_bonus_imba_faceless_void_4", "self_reduction");
-                                    for (let i = 0; i <= 23; i += 1) {
+                                    for (let i = 0; i <= 23; i++) {
                                         let casterAbility = attacker.GetAbilityByIndex(i);
                                         if (casterAbility && casterAbility.GetLevel() > 0 && !casterAbility.IsPassive() && !casterAbility.IsAttributeBonus() && !casterAbility.IsCooldownReady()) {
                                             let newCooldown = casterAbility.GetCooldownTimeRemaining() - caster_cd_decrease;
@@ -855,7 +855,7 @@ export class modifier_imba_faceless_void_time_lock extends BaseModifier_Plus {
                                     modifier_imba_faceless_void_chronocharges.findIn(parent).IncrementStackCount(1);
                                     // AddStacksLua(ability, parent, parent, "modifier_imba_faceless_void_chronocharges", 1, false);
                                 }
-                                for (let i = 0; i <= 23; i += 1) {
+                                for (let i = 0; i <= 23; i++) {
                                     let enemyAbility = enemy.GetAbilityByIndex(i);
                                     if (enemyAbility && enemyAbility.GetLevel() > 0 && !enemyAbility.IsPassive() && !enemyAbility.IsAttributeBonus() && !enemyAbility.IsCooldownReady()) {
                                         let newCooldown = enemyAbility.GetCooldownTimeRemaining() + cdIncrease + talent_cd_increase;
@@ -1066,7 +1066,7 @@ export class modifier_imba_faceless_void_chronosphere_aura extends BaseModifier_
     OnRemoved(): void {
         if (IsServer()) {
             if (this.modifiers) {
-                for (const [_, mod] of ipairs(this.modifiers)) {
+                for (const [_, mod] of GameFunc.Pair(this.modifiers)) {
                     if (!mod.IsNull()) {
                         mod.Destroy();
                     }
@@ -1078,7 +1078,7 @@ export class modifier_imba_faceless_void_chronosphere_aura extends BaseModifier_
         let radius = this.GetAuraRadius();
         let caster = this.GetCasterPlus();
         let units = FindUnitsInRadius(caster.GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, unit] of ipairs(units)) {
+        for (const [_, unit] of GameFunc.iPair(units)) {
             if (unit == caster || unit.GetPlayerOwner() == caster.GetPlayerOwner()) {
                 if (!this.modifiers[unit.GetEntityIndex()]) {
                     let mod = unit.AddNewModifier(caster, this.GetAbilityPlus(), "modifier_imba_faceless_void_chronosphere_caster_buff", {});
@@ -1151,7 +1151,7 @@ export class modifier_imba_faceless_void_chronosphere_handler extends BaseModifi
                 });
                 this.parent.InterruptMotionControllers(true);
                 let modifiers = BaseModifierMotion.FindAllMotionBuff(this.parent);
-                for (const [_, modifier] of ipairs(modifiers)) {
+                for (const [_, modifier] of GameFunc.iPair(modifiers)) {
                     if (modifier.CheckMotionControllers()) {
                         modifier.Destroy();
                     }
@@ -1339,7 +1339,7 @@ export class modifier_imba_faceless_void_time_lock_720 extends BaseModifier_Plus
         if (target.IsRealHero() && this.GetParentPlus().findBuff<modifier_imba_faceless_void_chronocharges>("modifier_imba_faceless_void_chronocharges")) {
             this.GetParentPlus().findBuff<modifier_imba_faceless_void_chronocharges>("modifier_imba_faceless_void_chronocharges").SetStackCount(this.GetParentPlus().FindModifierByName("modifier_imba_faceless_void_chronocharges").GetStackCount() + 1);
         }
-        for (let i = 0; i <= 23; i += 1) {
+        for (let i = 0; i <= 23; i++) {
             let targetAbility = target.GetAbilityByIndex(i);
             if (targetAbility && targetAbility.GetLevel() > 0 && !targetAbility.IsAttributeBonus() && !targetAbility.IsCooldownReady()) {
                 let newCooldown = targetAbility.GetCooldownTimeRemaining() + moment_cd_increase;

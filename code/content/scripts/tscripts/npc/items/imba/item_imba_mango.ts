@@ -1,13 +1,5 @@
 
-    import { AI_ability } from "../../../ai/AI_ability";
-    import { GameFunc } from "../../../GameFunc";
-    import { ResHelper } from "../../../helper/ResHelper";
-    import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-    import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
-    import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-    import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-    import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
-    function Mango(keys) {
+function Mango(keys: any) {
     let caster = keys.caster;
     let target = keys.target;
     let ability = keys.ability;

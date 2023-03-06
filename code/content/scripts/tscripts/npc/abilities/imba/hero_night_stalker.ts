@@ -29,7 +29,7 @@ export class modifier_imba_stalker_in_the_night extends BaseModifier_Plus {
         if (IsServer()) {
             if (this.caster.IsIllusion()) {
                 let heroes = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_DEAD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_CLOSEST, false);
-                for (const [_, hero] of ipairs(heroes)) {
+                for (const [_, hero] of GameFunc.iPair(heroes)) {
                     if (hero.IsRealHero() && hero.GetUnitName() == this.caster.GetUnitName()) {
                         let modifier_stalker_handler = hero.FindModifierByName(this.modifier_stalker);
                         if (modifier_stalker_handler) {
@@ -79,14 +79,14 @@ export class modifier_imba_stalker_in_the_night extends BaseModifier_Plus {
             let ability = keys.ability;
             let name_ability = ability.GetName();
             let night_inducing_spells = {
-                1: "imba_night_stalker_darkness",
-                2: "luna_eclipse"
+                "1": "imba_night_stalker_darkness",
+                "2": "luna_eclipse"
             }
             let night_spell_used = false;
             if (GameRules.IsDaytime()) {
                 return undefined;
             }
-            for (const [_, spell_name] of ipairs(night_inducing_spells)) {
+            for (const [_, spell_name] of GameFunc.Pair(night_inducing_spells)) {
                 if (spell_name == name_ability) {
                     night_spell_used = true;
                 }
@@ -125,10 +125,10 @@ export class imba_night_stalker_void extends BaseAbility_Plus {
         let target = this.GetCursorTarget();
         let rare_cast_response = "night_stalker_nstalk_ability_dark_08";
         let cast_response = {
-            1: "night_stalker_nstalk_ability_void_01",
-            2: "night_stalker_nstalk_ability_void_02",
-            3: "night_stalker_nstalk_ability_void_03",
-            4: "night_stalker_nstalk_ability_void_04"
+            "1": "night_stalker_nstalk_ability_void_01",
+            "2": "night_stalker_nstalk_ability_void_02",
+            "3": "night_stalker_nstalk_ability_void_03",
+            "4": "night_stalker_nstalk_ability_void_04"
         }
         let sound_cast = "Hero_Nightstalker.Void";
         let modifier_ministun = "modifier_imba_void_ministun";
@@ -185,7 +185,7 @@ export class imba_night_stalker_void extends BaseAbility_Plus {
             }
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius_scepter"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             let hit_hero = false;
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_void_slow", {
                     duration: slow_duration * (1 - enemy.GetStatusResistance())
                 });
@@ -310,9 +310,9 @@ export class imba_night_stalker_crippling_fear extends BaseAbility_Plus {
         let ability = this;
         let target = this.GetCursorTarget();
         let cast_response = {
-            1: "night_stalker_nstalk_ability_cripfear_01",
-            2: "night_stalker_nstalk_ability_cripfear_02",
-            3: "night_stalker_nstalk_ability_cripfear_03"
+            "1": "night_stalker_nstalk_ability_cripfear_01",
+            "2": "night_stalker_nstalk_ability_cripfear_02",
+            "3": "night_stalker_nstalk_ability_cripfear_03"
         }
         let sound_cast = "Hero_Nightstalker.Trickling_Fear";
         let modifier_fear = "modifier_imba_crippling_fear_silence";
@@ -411,7 +411,7 @@ export class modifier_imba_crippling_fear_silence extends BaseModifier_Plus {
                 });
                 EmitSoundOn(this.sound_fear, this.caster);
                 let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius_fear, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (!enemy.IsMagicImmune()) {
                         enemy.AddNewModifier(this.caster, this.ability, this.modifier_fear, {
                             duration: this.fear_duartion * (1 - enemy.GetStatusResistance())
@@ -501,18 +501,18 @@ export class modifier_imba_hunter_in_the_night_thinker extends BaseModifier_Plus
             this.modifier_hunter = "modifier_imba_hunter_in_the_night";
             this.modifier_day = "modifier_imba_hunter_in_the_night_day_model";
             this.night_transform_response = {
-                1: "night_stalker_nstalk_ability_dark_01",
-                2: "night_stalker_nstalk_ability_dark_02",
-                3: "night_stalker_nstalk_ability_dark_04",
-                4: "night_stalker_nstalk_ability_dark_05",
-                5: "night_stalker_nstalk_ability_dark_06"
+                "1": "night_stalker_nstalk_ability_dark_01",
+                "2": "night_stalker_nstalk_ability_dark_02",
+                "3": "night_stalker_nstalk_ability_dark_04",
+                "4": "night_stalker_nstalk_ability_dark_05",
+                "5": "night_stalker_nstalk_ability_dark_06"
             }
             this.night_rare_transform_response = "night_stalker_nstalk_ability_dark_03";
             this.night_rarest_transform_response = "night_stalker_nstalk_ability_dark_07";
             this.day_transform_response = {
-                1: "night_stalker_nstalk_dayrise_01",
-                2: "night_stalker_nstalk_dayrise_02",
-                3: "night_stalker_nstalk_dayrise_03"
+                "1": "night_stalker_nstalk_dayrise_01",
+                "2": "night_stalker_nstalk_dayrise_02",
+                "3": "night_stalker_nstalk_dayrise_03"
             }
             this.day_rare_transform_response = "night_stalker_nstalk_dayrise_05";
             this.day_rarest_transform_response = "night_stalker_nstalk_dayrise_04";
@@ -786,7 +786,7 @@ export class imba_night_stalker_darkness extends BaseAbility_Plus {
             duration: duration
         });
         let enemy_heroes = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy_hero] of ipairs(enemy_heroes)) {
+        for (const [_, enemy_hero] of GameFunc.iPair(enemy_heroes)) {
             enemy_hero.AddNewModifier(caster, ability, modifier_fogivison, {
                 duration: enemy_vision_duration
             });

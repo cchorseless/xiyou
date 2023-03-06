@@ -406,7 +406,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
                 let persuaded_ancient_creeps_count = 0;
                 let first_ancient_creep = undefined;
                 let first_ancient_creep_modifier = undefined;
-                for (const [_, modifier] of ipairs(persuaded_creeps_modifiers)) {
+                for (const [_, modifier] of GameFunc.iPair(persuaded_creeps_modifiers)) {
                     if (!modifier.creep || modifier.creep.IsNull()) {
                         modifier.Destroy();
                     } else if (modifier.creep.IsAncient()) {
@@ -426,7 +426,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
                 }
                 persuaded_creeps_modifiers = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_chen_holy_persuasion_tracker") as modifier_imba_chen_holy_persuasion_tracker[];
                 persuaded_creeps_count = GameFunc.GetCount(persuaded_creeps_modifiers);
-                if (persuaded_creeps_count > this.GetTalentSpecialValueFor("max_units") && persuaded_creeps_modifiers[1]) {
+                if (persuaded_creeps_count > this.GetTalentSpecialValueFor("max_units") && persuaded_creeps_modifiers[0]) {
                     persuaded_creeps_modifiers[0].creep.ForceKill(false);
                     persuaded_creeps_modifiers[0].Destroy();
                 }
@@ -440,7 +440,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
                 let immortalized_ancient_creeps_count = 0;
                 let first_ancient_creep = undefined;
                 let first_ancient_creep_modifier = undefined;
-                for (const [_, modifier] of ipairs(immortalized_creeps_modifiers)) {
+                for (const [_, modifier] of GameFunc.iPair(immortalized_creeps_modifiers)) {
                     if (!modifier.creep || modifier.creep.IsNull()) {
                         modifier.Destroy();
                     } else if (modifier.creep.IsAncient()) {
@@ -460,9 +460,9 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
                 }
                 immortalized_creeps_modifiers = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_chen_holy_persuasion_immortalized_tracker") as modifier_imba_chen_holy_persuasion_tracker[];
                 immortalized_creeps_count = GameFunc.GetCount(immortalized_creeps_modifiers);
-                if (immortalized_creeps_count > this.GetTalentSpecialValueFor("immortalize_max_units") && immortalized_creeps_modifiers[1]) {
-                    immortalized_creeps_modifiers[1].creep.ForceKill(false);
-                    immortalized_creeps_modifiers[1].Destroy();
+                if (immortalized_creeps_count > this.GetTalentSpecialValueFor("immortalize_max_units") && immortalized_creeps_modifiers[0]) {
+                    immortalized_creeps_modifiers[0].creep.ForceKill(false);
+                    immortalized_creeps_modifiers[0].Destroy();
                 }
             }
             let target_xp = target.GetDeathXP();
@@ -484,7 +484,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
             let ally_num = PlayerResource.GetPlayerCountForTeam(this.GetCasterPlus().GetTeamNumber());
             let commonwealth_xp_others = math.max(commonwealth_xp_others_total / math.max(ally_num - 1, 1), 0);
             let commonwealth_gold_others = math.max(commonwealth_gold_others_total / math.max(ally_num - 1, 1), 0);
-            for (let ally = 1; ally <= ally_num; ally += 1) {
+            for (let ally = 0; ally < ally_num; ally++) {
                 let hero = PlayerResource.GetPlayer(PlayerResource.GetNthPlayerIDOnTeam(this.GetCasterPlus().GetTeamNumber(), ally)).GetAssignedHero();
                 if (hero != this.GetCasterPlus()) {
                     hero.AddExperience(commonwealth_xp_others, EDOTA_ModifyXP_Reason.DOTA_ModifyXP_CreepKill, true, true);
@@ -496,7 +496,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
         } else {
             if (target == this.GetCasterPlus()) {
                 let owned_units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
-                for (const [_, owned_unit] of ipairs(owned_units)) {
+                for (const [_, owned_unit] of GameFunc.iPair(owned_units)) {
                     if (owned_unit != this.GetCasterPlus() && !owned_unit.IsIllusion() && (owned_unit.GetOwnerEntity() == this.GetCasterPlus() || (owned_unit.GetPlayerID && this.GetCasterPlus().GetPlayerID && owned_unit.GetPlayerID() == this.GetCasterPlus().GetPlayerID())) && !owned_unit.HasModifier("modifier_imba_chen_holy_persuasion_teleport")) {
                         owned_unit.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_chen_holy_persuasion_teleport", {
                             duration: this.GetSpecialValueFor("teleport_delay")
@@ -562,7 +562,7 @@ export class modifier_imba_chen_holy_persuasion extends BaseModifier_Plus {
         }
         if (keys.unit == this.GetParentPlus()) {
             let persuaded_creeps_modifiers = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_chen_holy_persuasion_tracker") as modifier_imba_chen_holy_persuasion_tracker[];
-            for (const [_, modifier] of ipairs(persuaded_creeps_modifiers)) {
+            for (const [_, modifier] of GameFunc.iPair(persuaded_creeps_modifiers)) {
                 if (modifier.creep == this.GetParentPlus()) {
                     modifier.Destroy();
                     this.Destroy();
@@ -786,7 +786,7 @@ export class modifier_imba_chen_holy_persuasion_immortalized extends BaseModifie
         }
         if (keys.unit == this.GetParentPlus() || keys.unit == this.GetCasterPlus()) {
             let immortalized_creeps_modifiers = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_chen_holy_persuasion_immortalized_tracker") as modifier_imba_chen_holy_persuasion_immortalized_tracker[];
-            for (const [_, modifier] of ipairs(immortalized_creeps_modifiers)) {
+            for (const [_, modifier] of GameFunc.iPair(immortalized_creeps_modifiers)) {
                 if (modifier.creep == this.GetParentPlus()) {
                     modifier.Destroy();
                     this.Destroy();
@@ -921,7 +921,7 @@ export class imba_chen_hand_of_god extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_chen") {
             voiceline = "chen_chen_ability_handgod_0" + RandomInt(1, 3);
         }
-        for (const [_, ally] of ipairs(allies)) {
+        for (const [_, ally] of GameFunc.iPair(allies)) {
             if (ally.IsRealHero() || ally.IsClone() || ally.GetOwnerEntity() == this.GetCasterPlus() || (ally.GetPlayerID() == this.GetCasterPlus().GetPlayerID())) {
                 if (voiceline && ally.IsRealHero()) {
                     ally.EmitSound(voiceline);

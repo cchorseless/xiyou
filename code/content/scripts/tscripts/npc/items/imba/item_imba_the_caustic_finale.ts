@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -145,7 +146,7 @@ export class modifier_sand_king_boss_caustic_finale extends BaseModifier_Plus {
                 EmitSoundOn("Ability.SandKing_CausticFinale", this.GetParentPlus());
                 ParticleManager.ReleaseParticleIndex(ResHelper.CreateParticleEx("particles/units/heroes/hero_sandking/sandking_caustic_finale_explode.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetParentPlus()));
                 let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetOrigin(), undefined, this.caustic_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_CLOSEST, false);
-                for (const [_, hEnemy] of ipairs(enemies)) {
+                for (const [_, hEnemy] of GameFunc.iPair(enemies)) {
                     if (hEnemy != undefined && hEnemy.IsAlive() && hEnemy.IsInvulnerable() == false) {
                         let damageInfo = {
                             victim: hEnemy,

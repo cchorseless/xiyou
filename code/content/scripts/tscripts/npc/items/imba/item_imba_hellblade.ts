@@ -39,33 +39,33 @@ export class item_imba_hellblade extends BaseItem_Plus {
     TransferAllDebuffs(caster: IBaseNpc_Plus, target: IBaseNpc_Plus) {
         if (IsServer()) {
             let modifiers = caster.FindAllModifiers() as IBaseModifier_Plus[];
-            for (const [_, modifier] of ipairs(modifiers)) {
+            for (const [_, modifier] of GameFunc.iPair(modifiers)) {
                 let modifier_found = false;
                 let modifier_name = modifier.GetName();
-                if (modifier.IsDebuff && modifier.IsPurgable && modifier.ApplyHorizontalMotionController == undefined && modifier.ApplyVerticalMotionController == undefined) {
+                if (modifier.IsDebuff && modifier.IsPurgable && modifier.IsMotionBuff() == false) {
                     if (modifier.IsDebuff() && modifier.IsPurgable()) {
                         modifier_found = true;
                     }
                 }
-                if (IsVanillaDebuff(modifier_name)) {
-                    modifier_found = true;
-                }
-                if (!modifier_found) {
-                    for (const [_, modifier_name_in_list] of ipairs(DISPELLABLE_DEBUFF_LIST)) {
-                        if (modifier_name == modifier_name_in_list) {
-                            modifier_found = true;
-                        }
-                    }
-                }
+                // if (IsVanillaDebuff(modifier_name)) {
+                //     modifier_found = true;
+                // }
+                // if (!modifier_found) {
+                //     for (const [_, modifier_name_in_list] of GameFunc.iPair(DISPELLABLE_DEBUFF_LIST)) {
+                //         if (modifier_name == modifier_name_in_list) {
+                //             modifier_found = true;
+                //         }
+                //     }
+                // }
                 if (modifier_found && modifier_name != "modifier_item_imba_spirit_vessel_damage") {
                     let modifier_duration = modifier.GetDuration();
                     caster.RemoveModifierByName(modifier_name);
-                    print("Transferring modifier '" + modifier_name + "' via Hellblade.");
+                    // print("Transferring modifier '" + modifier_name + "' via Hellblade.");
                     let modifier_ability = modifier.GetItemPlus();
                     let modifier_class = modifier.GetClass();
                     if (modifier_ability != undefined) {
-                        if (modifier_class == datadrive_baseclass) {
-                            modifier_ability.ApplyDataDrivenModifier(caster, target, modifier_name, {
+                        if (modifier_class == "modifier_datadriven") {
+                            (modifier_ability as any as CDOTA_Item_DataDriven).ApplyDataDrivenModifier(caster, target, modifier_name, {
                                 duration: modifier_duration
                             });
                         } else {
@@ -105,7 +105,7 @@ export class modifier_imba_helldrain extends BaseModifier_Plus {
     GetModifierAura(): string {
         return "modifier_imba_helldrain_damage";
     }
-    BeCreated(p_0: any,): void {
+    Init(p_0: any,): void {
         if (IsServer()) {
             if (!this.GetItemPlus()) {
                 this.Destroy();
@@ -115,11 +115,7 @@ export class modifier_imba_helldrain extends BaseModifier_Plus {
             this.StartIntervalThink(this.GetItemPlus().GetSpecialValueFor("aura_damage_heal_interval"));
         }
     }
-    BeRefresh(p_0: any,): void {
-        if (IsServer()) {
-            this.OnCreated();
-        }
-    }
+
     OnIntervalThink(): void {
         if (IsServer()) {
             let item = this.GetItemPlus();
@@ -133,7 +129,7 @@ export class modifier_imba_helldrain extends BaseModifier_Plus {
             }
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), location, undefined, radius, item.GetAbilityTargetTeam(), item.GetAbilityTargetType(), item.GetAbilityTargetFlags(), FindOrder.FIND_ANY_ORDER, false);
             let valid_enemies = 0;
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy.HasModifier("modifier_imba_helldrain_damage")) {
                     let actual_damage = ApplyDamage({
                         victim: enemy,
@@ -142,9 +138,8 @@ export class modifier_imba_helldrain extends BaseModifier_Plus {
                         damage: heal_per_enemy * heal_interval,
                         damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,
                         damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION,
-                        ability: item
                     });
-                    caster.Heal(actual_damage, caster);
+                    caster.Heal(actual_damage, item);
                     valid_enemies = valid_enemies + 1;
                 }
             }
@@ -289,28 +284,28 @@ export class modifier_item_imba_hellblade_unique extends BaseModifier_Plus {
                 if (target.IsMagicImmune()) {
                     return undefined;
                 }
-                let modifiers = this.caster.FindAllModifiers();
-                for (const [_, modifier] of ipairs(modifiers)) {
-                    if (modifier.IsDebuff && modifier.IsPurgable && modifier.ApplyHorizontalMotionController == undefined && modifier.ApplyVerticalMotionController == undefined && modifier.GetName() != "modifier_item_imba_spirit_vessel_damage") {
+                let modifiers = this.caster.FindAllModifiers() as IBaseModifier_Plus[];
+                for (const [_, modifier] of GameFunc.iPair(modifiers)) {
+                    if (modifier.IsDebuff && modifier.IsPurgable && modifier.IsMotionBuff() == false && modifier.GetName() != "modifier_item_imba_spirit_vessel_damage") {
                         if (modifier.IsDebuff() && modifier.IsPurgable()) {
                             debuff_found = true;
                             return;
                         }
                     }
                     let modifier_name = modifier.GetName();
-                    if (!debuff_found) {
-                        if (IsVanillaDebuff(modifier_name)) {
-                            debuff_found = true;
-                        }
-                    }
-                    if (!debuff_found) {
-                        for (const [_, modifier_name_in_list] of ipairs(DISPELLABLE_DEBUFF_LIST)) {
-                            if (modifier_name == modifier_name_in_list) {
-                                debuff_found = true;
-                                return;
-                            }
-                        }
-                    }
+                    // if (!debuff_found) {
+                    //     if (IsVanillaDebuff(modifier_name)) {
+                    //         debuff_found = true;
+                    //     }
+                    // }
+                    // if (!debuff_found) {
+                    //     for (const [_, modifier_name_in_list] of GameFunc.iPair(DISPELLABLE_DEBUFF_LIST)) {
+                    //         if (modifier_name == modifier_name_in_list) {
+                    //             debuff_found = true;
+                    //             return;
+                    //         }
+                    //     }
+                    // }
                     if (debuff_found) {
                         return;
                     }
@@ -320,24 +315,24 @@ export class modifier_item_imba_hellblade_unique extends BaseModifier_Plus {
                         let random_modifier_index = math.random(1, GameFunc.GetCount(modifiers));
                         let modifier = modifiers[random_modifier_index];
                         let modifier_name = modifier.GetName();
-                        if (modifier.IsDebuff && modifier.IsPurgable && modifier.ApplyHorizontalMotionController == undefined && modifier.ApplyVerticalMotionController == undefined) {
+                        if (modifier.IsDebuff && modifier.IsPurgable && modifier.IsMotionBuff() == false) {
                             if (modifier.IsDebuff() && modifier.IsPurgable()) {
                                 is_valid_debuff = true;
                             }
                         }
-                        if (!is_valid_debuff) {
-                            if (IsVanillaDebuff(modifier_name)) {
-                                is_valid_debuff = true;
-                            }
-                        }
-                        if (!is_valid_debuff) {
-                            for (const [_, modifier_name_in_list] of ipairs(DISPELLABLE_DEBUFF_LIST)) {
-                                if (modifier_name == modifier_name_in_list) {
-                                    is_valid_debuff = true;
-                                    return;
-                                }
-                            }
-                        }
+                        // if (!is_valid_debuff) {
+                        //     if (IsVanillaDebuff(modifier_name)) {
+                        //         is_valid_debuff = true;
+                        //     }
+                        // }
+                        // if (!is_valid_debuff) {
+                        //     for (const [_, modifier_name_in_list] of GameFunc.iPair(DISPELLABLE_DEBUFF_LIST)) {
+                        //         if (modifier_name == modifier_name_in_list) {
+                        //             is_valid_debuff = true;
+                        //             return;
+                        //         }
+                        //     }
+                        // }
                         if (is_valid_debuff) {
                             let modifier_duration = modifier.GetRemainingTime();
                             this.caster.RemoveModifierByName(modifier_name);
@@ -346,7 +341,7 @@ export class modifier_item_imba_hellblade_unique extends BaseModifier_Plus {
                             let modifier_class = modifier.GetClass();
                             if (modifier_ability != undefined) {
                                 if (modifier_class == this.datadrive_baseclass) {
-                                    modifier_ability.ApplyDataDrivenModifier(this.caster, target, modifier_name, {
+                                    (modifier_ability as any as CDOTA_Item_DataDriven).ApplyDataDrivenModifier(this.caster, target, modifier_name, {
                                         duration: modifier_duration
                                     });
                                 } else {

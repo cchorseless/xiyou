@@ -68,8 +68,8 @@ export class modifier_imba_gyrocopter_rocket_barrage extends BaseModifier_Plus {
         this.rocket_damage = this.GetAbilityPlus().GetTalentSpecialValueFor("rocket_damage");
         this.damage_type = this.GetAbilityPlus().GetAbilityDamageType();
         this.weapons = {
-            1: "attach_attack1",
-            2: "attach_attack2"
+            "1": "attach_attack1",
+            "2": "attach_attack2"
         }
         this.StartIntervalThink(1 / this.rockets_per_second);
     }
@@ -128,7 +128,7 @@ export class modifier_imba_gyrocopter_rocket_barrage extends BaseModifier_Plus {
             } else {
                 this.enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
                 if (GameFunc.GetCount(this.enemies) >= 1) {
-                    for (const [_, enemy] of ipairs(this.enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(this.enemies)) {
                         enemy.EmitSound("Hero_Gyrocopter.Rocket_Barrage.Impact");
                         this.barrage_particle = ResHelper.CreateParticleEx("particles/econ/items/gyrocopter/hero_gyrocopter_gyrotechnics/gyro_rocket_barrage.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
                         ParticleManager.SetParticleControlEnt(this.barrage_particle, 0, this.GetParentPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.weapons[RandomInt(1, GameFunc.GetCount(this.weapons))], this.GetParentPlus().GetAbsOrigin(), true);
@@ -243,11 +243,11 @@ export class imba_gyrocopter_homing_missile extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_gyrocopter") {
             if (!this.responses) {
                 this.responses = {
-                    1: "gyrocopter_gyro_homing_missile_fire_02",
-                    2: "gyrocopter_gyro_homing_missile_fire_03",
-                    3: "gyrocopter_gyro_homing_missile_fire_04",
-                    4: "gyrocopter_gyro_homing_missile_fire_06",
-                    5: "gyrocopter_gyro_homing_missile_fire_07"
+                    "1": "gyrocopter_gyro_homing_missile_fire_02",
+                    "2": "gyrocopter_gyro_homing_missile_fire_03",
+                    "3": "gyrocopter_gyro_homing_missile_fire_04",
+                    "4": "gyrocopter_gyro_homing_missile_fire_06",
+                    "5": "gyrocopter_gyro_homing_missile_fire_07"
                 }
             }
             EmitSoundOnClient(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))], this.GetCasterPlus().GetPlayerOwner());
@@ -510,8 +510,8 @@ export class modifier_imba_gyrocopter_homing_missile extends BaseModifier_Plus {
             if (this.target.IsNull() || !this.target.IsAlive()) {
                 let nearby_targets = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.target.GetAbsOrigin(), undefined, 700, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false);
                 if (GameFunc.GetCount(nearby_targets) >= 1) {
-                    this.target = nearby_targets[1];
-                    this.target = nearby_targets[1];
+                    this.target = nearby_targets[0];
+                    this.target = nearby_targets[0];
                     ParticleManager.DestroyParticle(this.target_particle, false);
                     ParticleManager.ReleaseParticleIndex(this.target_particle);
                     this.target_particle = ParticleManager.CreateParticleForTeam("particles/units/heroes/hero_gyrocopter/gyro_guided_missile_target.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.target, this.GetCasterPlus().GetTeamNumber());
@@ -550,7 +550,7 @@ export class modifier_imba_gyrocopter_homing_missile extends BaseModifier_Plus {
             }
         }
         if (this.bAutoCast == 1) {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetParentPlus().GetHullRadius(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetParentPlus().GetHullRadius(), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false))) {
                 this.target = enemy;
                 return;
             }
@@ -573,12 +573,12 @@ export class modifier_imba_gyrocopter_homing_missile extends BaseModifier_Plus {
                 if (!this.target.IsAlive() && this.GetCasterPlus().GetName() == "npc_dota_hero_gyrocopter") {
                     if (!this.responses) {
                         this.responses = {
-                            1: "gyrocopter_gyro_homing_missile_impact_01",
-                            2: "gyrocopter_gyro_homing_missile_impact_02",
-                            3: "gyrocopter_gyro_homing_missile_impact_05",
-                            4: "gyrocopter_gyro_homing_missile_impact_06",
-                            5: "gyrocopter_gyro_homing_missile_impact_07",
-                            6: "gyrocopter_gyro_homing_missile_impact_08"
+                            "1": "gyrocopter_gyro_homing_missile_impact_01",
+                            "2": "gyrocopter_gyro_homing_missile_impact_02",
+                            "3": "gyrocopter_gyro_homing_missile_impact_05",
+                            "4": "gyrocopter_gyro_homing_missile_impact_06",
+                            "5": "gyrocopter_gyro_homing_missile_impact_07",
+                            "6": "gyrocopter_gyro_homing_missile_impact_08"
                         }
                     }
                     EmitSoundOnClient(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))], this.GetCasterPlus().GetPlayerOwner());
@@ -592,7 +592,7 @@ export class modifier_imba_gyrocopter_homing_missile extends BaseModifier_Plus {
             let blast_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_jakiro/jakiro_liquid_fire_explosion.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.target);
             ParticleManager.SetParticleControl(blast_particle, 1, Vector(this.GetParentPlus().GetIdealSpeed() * this.propulsion_speed_pct * 0.01, this.GetParentPlus().GetIdealSpeed() * this.propulsion_speed_pct * 0.01, this.GetParentPlus().GetIdealSpeed() * this.propulsion_speed_pct * 0.01));
             ParticleManager.ReleaseParticleIndex(blast_particle);
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.target.GetAbsOrigin(), undefined, (this.GetParentPlus().GetIdealSpeed() * this.propulsion_speed_pct * 0.01) + (math.max(this.GetElapsedTime() - this.pre_flight_time, 0) * this.propulsion_duration_pct * 0.01), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.target.GetAbsOrigin(), undefined, (this.GetParentPlus().GetIdealSpeed() * this.propulsion_speed_pct * 0.01) + (math.max(this.GetElapsedTime() - this.pre_flight_time, 0) * this.propulsion_duration_pct * 0.01), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                 if (enemy != this.target) {
                     enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_stunned", {
                         duration: this.stun_duration * (1 - enemy.GetStatusResistance())
@@ -802,8 +802,8 @@ export class modifier_imba_gyrocopter_flak_cannon extends BaseModifier_Plus {
             return;
         }
         this.weapons = {
-            1: "attach_attack1",
-            2: "attach_attack2"
+            "1": "attach_attack1",
+            "2": "attach_attack2"
         }
         this.SetStackCount(this.max_attacks);
     }
@@ -816,7 +816,7 @@ export class modifier_imba_gyrocopter_flak_cannon extends BaseModifier_Plus {
     CC_OnAttack(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && !keys.no_attack_cooldown) {
             this.GetParentPlus().EmitSound("Hero_Gyrocopter.FlackCannon");
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_ANY_ORDER, false))) {
                 if (enemy != keys.target && !enemy.IsCourier()) {
                     this.GetParentPlus().AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_gyrocopter_flak_cannon_speed_handler", {
                         projectile_speed: this.projectile_speed
@@ -874,7 +874,7 @@ export class modifier_imba_gyrocopter_flak_cannon_side_gunner extends BaseModifi
     }
     OnIntervalThink(): void {
         if (this.GetParentPlus().HasScepter() && !this.GetParentPlus().IsOutOfGame() && !this.GetParentPlus().IsInvisible() && !this.GetParentPlus().PassivesDisabled() && this.GetParentPlus().IsAlive()) {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("scepter_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_FARTHEST, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("scepter_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE, FindOrder.FIND_FARTHEST, false))) {
                 if (!enemy.IsCourier()) {
                     this.GetParentPlus().PerformAttack(enemy, false, false, true, true, true, false, false);
                     return;
@@ -1168,11 +1168,11 @@ export class imba_gyrocopter_call_down extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_gyrocopter") {
             if (!this.responses) {
                 this.responses = {
-                    1: "gyrocopter_gyro_call_down_03",
-                    2: "gyrocopter_gyro_call_down_04",
-                    3: "gyrocopter_gyro_call_down_05",
-                    4: "gyrocopter_gyro_call_down_06",
-                    5: "gyrocopter_gyro_call_down_09"
+                    "1": "gyrocopter_gyro_call_down_03",
+                    "2": "gyrocopter_gyro_call_down_04",
+                    "3": "gyrocopter_gyro_call_down_05",
+                    "4": "gyrocopter_gyro_call_down_06",
+                    "5": "gyrocopter_gyro_call_down_09"
                 }
             }
             EmitSoundOnClient(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))], this.GetCasterPlus().GetPlayerOwner());
@@ -1244,7 +1244,7 @@ export class modifier_imba_gyrocopter_call_down_thinker extends BaseModifier_Plu
     OnIntervalThink(): void {
         EmitSoundOnLocationWithCaster(this.GetParentPlus().GetAbsOrigin(), "Hero_Gyrocopter.CallDown.Damage", this.GetCasterPlus());
         if (!this.first_missile_impact) {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                 enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_gyrocopter_call_down_slow", {
                     duration: this.slow_duration_first * (1 - enemy.GetStatusResistance()),
                     slow: this.slow_first
@@ -1263,7 +1263,7 @@ export class modifier_imba_gyrocopter_call_down_thinker extends BaseModifier_Plu
             }
             this.first_missile_impact = true;
         } else if (!this.second_missile_impact) {
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                 enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_gyrocopter_call_down_slow", {
                     duration: this.slow_duration_second * (1 - enemy.GetStatusResistance()),
                     slow: this.slow_second

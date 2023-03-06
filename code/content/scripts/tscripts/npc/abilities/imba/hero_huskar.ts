@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus, BaseOrbAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -22,7 +23,7 @@ export class imba_huskar_inner_fire extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(particle, 3, this.GetCasterPlus().GetAbsOrigin());
         ParticleManager.ReleaseParticleIndex(particle);
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let damageTable = {
                 victim: enemy,
                 damage: damage,
@@ -186,7 +187,7 @@ export class modifier_imba_huskar_inner_fire_raze_land_aura extends BaseModifier
     OnIntervalThink(): void {
         GridNav.DestroyTreesAroundPoint(this.GetParentPlus().GetOrigin(), this.radius, true);
         let wards = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_OTHER, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, ward] of ipairs(wards)) {
+        for (const [_, ward] of GameFunc.iPair(wards)) {
             if (ward.GetUnitName() == "npc_dota_observer_wards" || ward.GetUnitName() == "npc_dota_sentry_wards") {
                 ward.Kill(this.GetAbilityPlus(), this.GetCasterPlus());
             }
@@ -863,7 +864,7 @@ export class modifier_imba_huskar_life_break_sac_dagger extends BaseModifier_Plu
         if (this.counter >= this.damage_interval) {
             this.counter = 0;
             let enemies = FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetOrigin(), undefined, this.contact_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damageTable: ApplyDamageOptions = {
                     victim: enemy,
                     damage: this.damage * this.damage_interval * 0.5,

@@ -169,7 +169,7 @@ export class imba_sly_king_frost_gale extends BaseAbility_Plus {
             this.tempdata[index] = []
             let travel_distance;
             caster.EmitSound("Hero_Venomancer.VenomousGale");
-            for (let i = 1; i <= projectile_count; i += 1) {
+            for (let i = 0; i < projectile_count; i++) {
                 let angle = 360 - (360 / projectile_count) * i;
                 let velocity = GFuncVector.RotateVector2D(direction, angle, true);
                 travel_distance = this.GetSpecialValueFor("cast_range") + GPropertyCalculate.GetCastRangeBonus(caster);
@@ -204,7 +204,7 @@ export class imba_sly_king_frost_gale extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         if (target) {
             let was_hit = false;
-            for (const [_, stored_target] of ipairs(this.tempdata[ExtraData.index])) {
+            for (const [_, stored_target] of GameFunc.iPair(this.tempdata[ExtraData.index])) {
                 if (target == stored_target) {
                     was_hit = true;
                     break;
@@ -657,7 +657,7 @@ export class modifier_imba_winterbringer_pulse extends BaseModifier_Plus {
                 EmitSoundOn(this.sound_wave_1, this.GetCasterPlus());
             }
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.pos, undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let damageTable = {
                     victim: enemy,
                     attacker: this.GetCasterPlus(),
@@ -671,7 +671,7 @@ export class modifier_imba_winterbringer_pulse extends BaseModifier_Plus {
                 });
             }
             enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.pos, undefined, this.pull_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let distance = (enemy.GetAbsOrigin() - this.pos as Vector).Length2D();
                 let direction = (enemy.GetAbsOrigin() - this.pos as Vector).Normalized();
                 if ((distance - this.pull_speed) > 50) {

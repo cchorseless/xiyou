@@ -25,7 +25,7 @@ export class imba_batrider_sticky_napalm extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(this.napalm_impact_particle);
         this.napalm_impact_particle = undefined;
         this.enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetCursorPosition(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(this.enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(this.enemies)) {
             enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_batrider_sticky_napalm", {
                 duration: this.GetSpecialValueFor("duration") * (1 - enemy.GetStatusResistance())
             });
@@ -265,7 +265,7 @@ export class imba_batrider_flamebreak extends BaseAbility_Plus {
                 ability: this
             }
         }
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             this.initial_damage_table.victim = enemy;
             ApplyDamage(this.initial_damage_table);
             let v = GFuncVector.AsVector(enemy.GetAbsOrigin() - location).Normalized()
@@ -347,7 +347,7 @@ export class imba_batrider_firefly extends BaseAbility_Plus {
     }
     OnOwnerDied(): void {
         let firefly_modifiers = this.GetCasterPlus().FindAllModifiersByName("modifier_imba_batrider_firefly") as modifier_imba_batrider_firefly[];
-        for (const [_, mod] of ipairs(firefly_modifiers)) {
+        for (const [_, mod] of GameFunc.iPair(firefly_modifiers)) {
             if (!mod.firefly_thinker) {
                 mod.Destroy();
             } else {
@@ -389,11 +389,11 @@ export class imba_batrider_firefly extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_batrider") {
             if (!this.responses) {
                 this.responses = {
-                    1: "batrider_bat_ability_firefly_01",
-                    2: "batrider_bat_ability_firefly_04",
-                    3: "batrider_bat_ability_firefly_07",
-                    4: "batrider_bat_ability_firefly_08",
-                    5: "batrider_bat_ability_firefly_09"
+                    "1": "batrider_bat_ability_firefly_01",
+                    "2": "batrider_bat_ability_firefly_04",
+                    "3": "batrider_bat_ability_firefly_07",
+                    "4": "batrider_bat_ability_firefly_08",
+                    "5": "batrider_bat_ability_firefly_09"
                 }
             }
             this.GetCasterPlus().EmitSound(GFuncRandom.RandomOne(Object.values(this.responses)));
@@ -490,7 +490,7 @@ export class modifier_imba_batrider_firefly extends BaseModifier_Plus {
                     DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY,
                     DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC,
                     DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(this.enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(this.enemies)) {
                     if (!this.damaged_enemies.includes(enemy)) {
                         this.damage_table.victim = enemy;
                         this.firefly_debuff_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_batrider/batrider_firefly_debuff.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy);
@@ -500,9 +500,9 @@ export class modifier_imba_batrider_firefly extends BaseModifier_Plus {
                         if (enemy.IsRealHero() && !enemy.IsAlive() && RollPercentage(50)) {
                             if (!this.responses) {
                                 this.responses = {
-                                    1: "batrider_bat_ability_firefly_02",
-                                    2: "batrider_bat_ability_firefly_05",
-                                    3: "batrider_bat_ability_firefly_06"
+                                    "1": "batrider_bat_ability_firefly_02",
+                                    "2": "batrider_bat_ability_firefly_05",
+                                    "3": "batrider_bat_ability_firefly_06"
                                 }
                             }
                             this.GetCasterPlus().EmitSound(GFuncRandom.RandomOne(Object.values(this.responses)));
@@ -669,7 +669,7 @@ export class imba_batrider_flaming_lasso extends BaseAbility_Plus {
         });
         if (this.GetCasterPlus().HasScepter()) {
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, this.GetSpecialValueFor("grab_radius_scepter"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != target && enemy.IsConsideredHero()) {
                     enemy.AddNewModifier(target, this, "modifier_imba_batrider_flaming_lasso", {
                         duration: this.GetSpecialValueFor("duration") * (1 - enemy.GetStatusResistance()),

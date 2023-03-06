@@ -1,89 +1,84 @@
 
-    import { AI_ability } from "../../../ai/AI_ability";
-    import { GameFunc } from "../../../GameFunc";
-    import { ResHelper } from "../../../helper/ResHelper";
-    import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
-    import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
-    import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
-    import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
-    import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
-    @registerAbility()
+import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
+import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
+import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
+@registerAbility()
 export class item_imba_stonework_pendant extends BaseItem_Plus {
-GetIntrinsicModifierName():string {
-    return "modifier_item_imba_stonework_pendant";
-}
+    GetIntrinsicModifierName(): string {
+        return "modifier_item_imba_stonework_pendant";
+    }
 }
 @registerModifier()
 export class modifier_item_imba_stonework_pendant extends BaseModifier_Plus {
-public spell_lifesteal : any; 
-public mana_to_hp_pct : number; 
-public mana_to_hp_damage : number; 
-public flBonusHP : any; 
-public flBonusHPRegen : any; 
-public mana_pct : number; 
-public mana_raw : any; 
-IsHidden():boolean {
-    return true;
-}
-IsPurgable():boolean {
-    return false;
-}
-RemoveOnDeath():boolean {
-    return false;
-}
-GetAttributes():DOTAModifierAttribute_t {
-    return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE;
-}
-BeCreated(kv:any):void {
-    if (IsServer()) {
-        if (!this.GetItemPlus()) {
-            this.Destroy();
+    public spell_lifesteal: any;
+    public mana_to_hp_pct: number;
+    public mana_to_hp_damage: number;
+    public flBonusHP: any;
+    public flBonusHPRegen: any;
+    public mana_pct: number;
+    public mana_raw: any;
+    IsHidden(): boolean {
+        return true;
+    }
+    IsPurgable(): boolean {
+        return false;
+    }
+    RemoveOnDeath(): boolean {
+        return false;
+    }
+    GetAttributes(): DOTAModifierAttribute_t {
+        return DOTAModifierAttribute_t.MODIFIER_ATTRIBUTE_MULTIPLE;
+    }
+    BeCreated(kv: any): void {
+        if (IsServer()) {
+            if (!this.GetItemPlus()) {
+                this.Destroy();
+            }
         }
-    }
-    this.spell_lifesteal = this.GetItemPlus().GetSpecialValueFor("spell_lifesteal");
-    this.mana_to_hp_pct = (100 + this.GetItemPlus().GetSpecialValueFor("mana_to_hp_pct")) / 100;
-    this.mana_to_hp_damage = this.GetItemPlus().GetSpecialValueFor("mana_to_hp_damage");
-    this.flBonusHP = this.GetParentPlus().GetMaxMana() * this.mana_to_hp_pct;
-    this.flBonusHPRegen = this.GetParentPlus().GetManaRegen() * this.mana_to_hp_pct;
-    this.StartIntervalThink(FrameTime());
-    if (!IsServer()) {
-        return;
-    }
-    this.mana_pct = this.GetParentPlus().GetManaPercent();
-    this.mana_raw = this.GetParentPlus().GetMana();
-}
-OnIntervalThink():void {
-    this.flBonusHP = this.GetParentPlus().GetMaxMana() * this.mana_to_hp_pct;
-    this.flBonusHPRegen = this.GetParentPlus().GetManaRegen() * this.mana_to_hp_pct;
-    if (!IsServer()) {
-        return;
-    }
-    if (this.GetParentPlus().GetManaPercent() < this.mana_pct && this.GetParentPlus().GetMana() < this.mana_raw) {
-        this.GetParentPlus().SetHealth(math.max(this.GetParentPlus().GetHealth() - (this.mana_raw - this.GetParentPlus().GetMana()) * this.mana_to_hp_damage, 1));
-        if (this.GetParentPlus().GetHealth() <= 1) {
-            this.GetParentPlus().Kill(this.GetItemPlus(), this.GetParentPlus());
+        this.spell_lifesteal = this.GetItemPlus().GetSpecialValueFor("spell_lifesteal");
+        this.mana_to_hp_pct = (100 + this.GetItemPlus().GetSpecialValueFor("mana_to_hp_pct")) / 100;
+        this.mana_to_hp_damage = this.GetItemPlus().GetSpecialValueFor("mana_to_hp_damage");
+        this.flBonusHP = this.GetParentPlus().GetMaxMana() * this.mana_to_hp_pct;
+        this.flBonusHPRegen = this.GetParentPlus().GetManaRegen() * this.mana_to_hp_pct;
+        this.StartIntervalThink(FrameTime());
+        if (!IsServer()) {
+            return;
         }
-        this.GetParentPlus().SetMana(math.min(math.max(this.mana_raw, 0), this.GetParentPlus().GetMaxMana()));
+        this.mana_pct = this.GetParentPlus().GetManaPercent();
+        this.mana_raw = this.GetParentPlus().GetMana();
     }
-    this.mana_raw = this.GetParentPlus().GetMana();
-    this.mana_pct = this.GetParentPlus().GetManaPercent();
-}
-/** DeclareFunctions():modifierfunction[] {
-    let funcs = {
-        1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
-        2: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT
+    OnIntervalThink(): void {
+        this.flBonusHP = this.GetParentPlus().GetMaxMana() * this.mana_to_hp_pct;
+        this.flBonusHPRegen = this.GetParentPlus().GetManaRegen() * this.mana_to_hp_pct;
+        if (!IsServer()) {
+            return;
+        }
+        if (this.GetParentPlus().GetManaPercent() < this.mana_pct && this.GetParentPlus().GetMana() < this.mana_raw) {
+            this.GetParentPlus().SetHealth(math.max(this.GetParentPlus().GetHealth() - (this.mana_raw - this.GetParentPlus().GetMana()) * this.mana_to_hp_damage, 1));
+            if (this.GetParentPlus().GetHealth() <= 1) {
+                this.GetParentPlus().Kill(this.GetItemPlus(), this.GetParentPlus());
+            }
+            this.GetParentPlus().SetMana(math.min(math.max(this.mana_raw, 0), this.GetParentPlus().GetMaxMana()));
+        }
+        this.mana_raw = this.GetParentPlus().GetMana();
+        this.mana_pct = this.GetParentPlus().GetManaPercent();
     }
-    return Object.values(funcs);
-} */
-@registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
-CC_GetModifierHealthBonus( /** params */ ):number {
-    return this.flBonusHP;
-}
-@registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
-CC_GetModifierConstantHealthRegen( /** params */ ):number {
-    return this.flBonusHPRegen;
-}
-GetModifierSpellLifesteal() {
-    return this.spell_lifesteal;
-}
+    /** DeclareFunctions():modifierfunction[] {
+        let funcs = {
+            1: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS,
+            2: GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT
+        }
+        return Object.values(funcs);
+    } */
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_BONUS)
+    CC_GetModifierHealthBonus( /** params */): number {
+        return this.flBonusHP;
+    }
+    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.HEALTH_REGEN_CONSTANT)
+    CC_GetModifierConstantHealthRegen( /** params */): number {
+        return this.flBonusHPRegen;
+    }
+    GetModifierSpellLifesteal() {
+        return this.spell_lifesteal;
+    }
 }

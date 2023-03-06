@@ -143,7 +143,7 @@ export class imba_oracle_fortunes_end extends BaseAbility_Plus {
         if (target.HasModifier("modifier_imba_oracle_fates_edict_alter")) {
             target.RemoveModifierByName("modifier_imba_oracle_fates_edict_alter");
         }
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             this.damage_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_oracle/oracle_fortune_dmg.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy);
             ParticleManager.SetParticleControl(this.damage_particle, 1, target.GetAbsOrigin());
             ParticleManager.SetParticleControl(this.damage_particle, 3, enemy.GetAbsOrigin());
@@ -510,29 +510,29 @@ export class imba_oracle_purifying_flames extends BaseAbility_Plus {
                 if (RollPercentage(30)) {
                     if (!this.responses_allied) {
                         this.responses_allied = {
-                            1: "oracle_orac_purifyingflames_01",
-                            2: "oracle_orac_purifyingflames_02",
-                            3: "oracle_orac_purifyingflames_03",
-                            4: "oracle_orac_purifyingflames_04",
-                            5: "oracle_orac_purifyingflames_05",
-                            6: "oracle_orac_purifyingflames_08",
-                            7: "oracle_orac_purifyingflames_09",
-                            8: "oracle_orac_purifyingflames_11"
+                            "1": "oracle_orac_purifyingflames_01",
+                            "2": "oracle_orac_purifyingflames_02",
+                            "3": "oracle_orac_purifyingflames_03",
+                            "4": "oracle_orac_purifyingflames_04",
+                            "5": "oracle_orac_purifyingflames_05",
+                            "6": "oracle_orac_purifyingflames_08",
+                            "7": "oracle_orac_purifyingflames_09",
+                            "8": "oracle_orac_purifyingflames_11"
                         }
                     }
-                    this.GetCasterPlus().EmitSound(this.responses_allied[RandomInt(1, GameFunc.GetCount(this.responses_allied))]);
+                    this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses_allied));
                 }
             } else {
                 if (RollPercentage(25)) {
                     if (!this.responses_enemy) {
                         this.responses_enemy = {
-                            1: "oracle_orac_purifyingflames_06",
-                            2: "oracle_orac_purifyingflames_07",
-                            3: "oracle_orac_purifyingflames_10",
-                            4: "oracle_orac_purifyingflames_12"
+                            "1": "oracle_orac_purifyingflames_06",
+                            "2": "oracle_orac_purifyingflames_07",
+                            "3": "oracle_orac_purifyingflames_10",
+                            "4": "oracle_orac_purifyingflames_12"
                         }
                     }
-                    this.GetCasterPlus().EmitSound(this.responses_enemy[RandomInt(1, GameFunc.GetCount(this.responses_enemy))]);
+                    this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses_enemy));
                 }
             }
         }
@@ -736,15 +736,15 @@ export class imba_oracle_false_promise_alter extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_oracle" && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && RollPercentage(50)) {
             if (!this.responses) {
                 this.responses = {
-                    1: "oracle_orac_falsepromise_01",
-                    2: "oracle_orac_falsepromise_02",
-                    3: "oracle_orac_falsepromise_03",
-                    4: "oracle_orac_falsepromise_04",
-                    5: "oracle_orac_falsepromise_06",
-                    6: "oracle_orac_falsepromise_11"
+                    "1": "oracle_orac_falsepromise_01",
+                    "2": "oracle_orac_falsepromise_02",
+                    "3": "oracle_orac_falsepromise_03",
+                    "4": "oracle_orac_falsepromise_04",
+                    "5": "oracle_orac_falsepromise_06",
+                    "6": "oracle_orac_falsepromise_11"
                 }
             }
-            this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+            this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
         }
         this.false_promise_cast_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_oracle/oracle_false_promise_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
         ParticleManager.SetParticleControl(this.false_promise_cast_particle, 2, this.GetCasterPlus().GetAbsOrigin());
@@ -787,15 +787,15 @@ export class imba_oracle_false_promise extends BaseAbility_Plus {
         if (this.GetCasterPlus().GetName() == "npc_dota_hero_oracle" && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && RollPercentage(50)) {
             if (!this.responses) {
                 this.responses = {
-                    1: "oracle_orac_falsepromise_01",
-                    2: "oracle_orac_falsepromise_02",
-                    3: "oracle_orac_falsepromise_03",
-                    4: "oracle_orac_falsepromise_04",
-                    5: "oracle_orac_falsepromise_06",
-                    6: "oracle_orac_falsepromise_11"
+                    "1": "oracle_orac_falsepromise_01",
+                    "2": "oracle_orac_falsepromise_02",
+                    "3": "oracle_orac_falsepromise_03",
+                    "4": "oracle_orac_falsepromise_04",
+                    "5": "oracle_orac_falsepromise_06",
+                    "6": "oracle_orac_falsepromise_11"
                 }
             }
-            this.GetCasterPlus().EmitSound(this.responses[RandomInt(1, GameFunc.GetCount(this.responses))]);
+            this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
         }
         this.false_promise_cast_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_oracle/oracle_false_promise_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
         ParticleManager.SetParticleControl(this.false_promise_cast_particle, 2, this.GetCasterPlus().GetAbsOrigin());
@@ -904,11 +904,11 @@ export class modifier_imba_oracle_false_promise_timer extends BaseModifier_Plus 
             this.GetParentPlus().EmitSound("Hero_Oracle.FalsePromise.Healed");
             if (this.GetCasterPlus().GetName() == "npc_dota_hero_oracle" && RollPercentage(25)) {
                 this.responses = {
-                    1: "oracle_orac_falsepromise_14",
-                    2: "oracle_orac_falsepromise_15",
-                    3: "oracle_orac_falsepromise_17",
-                    4: "oracle_orac_falsepromise_18",
-                    5: "oracle_orac_falsepromise_19"
+                    "1": "oracle_orac_falsepromise_14",
+                    "2": "oracle_orac_falsepromise_15",
+                    "3": "oracle_orac_falsepromise_17",
+                    "4": "oracle_orac_falsepromise_18",
+                    "5": "oracle_orac_falsepromise_19"
                 }
                 this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
             }
@@ -930,7 +930,7 @@ export class modifier_imba_oracle_false_promise_timer extends BaseModifier_Plus 
                 divine_favor_duration = divine_favor_modifier.GetRemainingTime();
                 divine_favor_modifier.Destroy();
             }
-            for (const [_, instance] of ipairs(this.damage_instances)) {
+            for (const [_, instance] of GameFunc.iPair(this.damage_instances)) {
                 if (this.heal_counter > 0) {
                     if (this.heal_counter < instance.damage) {
                         instance.damage = instance.damage - this.heal_counter;
@@ -951,22 +951,22 @@ export class modifier_imba_oracle_false_promise_timer extends BaseModifier_Plus 
             if (this.GetCasterPlus().GetName() == "npc_dota_hero_oracle") {
                 if (!this.GetParentPlus().IsAlive() && RollPercentage(15)) {
                     this.responses = {
-                        1: "oracle_orac_falsepromise_05",
-                        2: "oracle_orac_falsepromise_07",
-                        3: "oracle_orac_falsepromise_08",
-                        4: "oracle_orac_falsepromise_09",
-                        5: "oracle_orac_falsepromise_10",
-                        6: "oracle_orac_falsepromise_12",
-                        7: "oracle_orac_falsepromise_13",
-                        8: "oracle_failure_01"
+                        "1": "oracle_orac_falsepromise_05",
+                        "2": "oracle_orac_falsepromise_07",
+                        "3": "oracle_orac_falsepromise_08",
+                        "4": "oracle_orac_falsepromise_09",
+                        "5": "oracle_orac_falsepromise_10",
+                        "6": "oracle_orac_falsepromise_12",
+                        "7": "oracle_orac_falsepromise_13",
+                        "8": "oracle_failure_01"
                     }
                 } else if (this.GetParentPlus().GetHealth() >= 100) {
                     this.responses = {
-                        1: "oracle_orac_falsepromise_14",
-                        2: "oracle_orac_falsepromise_15",
-                        3: "oracle_orac_falsepromise_17",
-                        4: "oracle_orac_falsepromise_18",
-                        5: "oracle_orac_falsepromise_19"
+                        "1": "oracle_orac_falsepromise_14",
+                        "2": "oracle_orac_falsepromise_15",
+                        "3": "oracle_orac_falsepromise_17",
+                        "4": "oracle_orac_falsepromise_18",
+                        "5": "oracle_orac_falsepromise_19"
                     }
                 }
                 if (this.responses) {
@@ -1167,7 +1167,7 @@ export class modifier_imba_oracle_false_promise_timer_alter_targets extends Base
             divine_favor_duration = divine_favor_modifier.GetRemainingTime();
             divine_favor_modifier.Destroy();
         }
-        for (const [_, instance] of ipairs(this.damage_instances)) {
+        for (const [_, instance] of GameFunc.iPair(this.damage_instances)) {
             ApplyDamage(instance);
         }
         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, this.GetParentPlus(), this.damage_counter, undefined);
@@ -1186,7 +1186,7 @@ export class modifier_imba_oracle_false_promise_timer_alter_targets extends Base
     CC_OnHealReceived(keys: ModifierHealEvent): void {
         if (keys.unit == this.GetParentPlus() && this.GetRemainingTime() >= 0) {
             let heal_split_amount = (keys.gain * this.alter_heal_pct * 0.01) / GameFunc.GetCount(this.damage_instances);
-            for (let instance = 1; instance <= GameFunc.GetCount(this.damage_instances); instance += 1) {
+            for (let instance = 0; instance < GameFunc.GetCount(this.damage_instances); instance++) {
                 this.damage_instances[instance].damage = this.damage_instances[instance].damage - heal_split_amount;
             }
             this.damage_counter = this.damage_counter - (keys.gain * this.alter_heal_pct * 0.01);

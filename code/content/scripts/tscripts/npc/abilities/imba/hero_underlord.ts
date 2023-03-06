@@ -104,7 +104,7 @@ export class modifier_imba_abyssal_underlord_firestorm_thinker extends BaseModif
             return;
         }
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             this.damageTable.victim = enemy;
             ApplyDamage(this.damageTable);
             let modifier_name = "modifier_imba_abyssal_underlord_firestorm";
@@ -354,7 +354,7 @@ export class modifier_imba_abyssal_underlord_pit_of_malice_thinker extends BaseM
     }
     OnIntervalThink(): void {
         let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let modifier = enemy.FindModifierByNameAndCaster("modifier_imba_abyssal_underlord_pit_of_malice_cooldown", this.GetCasterPlus());
             if (!modifier) {
                 enemy.AddNewModifier(this.caster, this.GetAbilityPlus(), "modifier_imba_abyssal_underlord_pit_of_malice", {
@@ -544,7 +544,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura_active extends BaseMod
         let mod = this.GetParentPlus().findBuff<modifier_imba_abyssal_underlord_atrophy_aura>("modifier_imba_abyssal_underlord_atrophy_aura");
         if (mod) {
             this.SetStackCount(mod.GetStackCount() * this.GetSpecialValueFor("active_bonus_damage_pct") / 100);
-            for (const [k, v] of ipairs(this.GetParentPlus().FindAllModifiersByName("modifier_imba_abyssal_underlord_atrophy_aura_stack"))) {
+            for (const [k, v] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName("modifier_imba_abyssal_underlord_atrophy_aura_stack"))) {
                 v.Destroy();
             }
         } else {
@@ -962,7 +962,7 @@ export class imba_abyssal_underlord_dark_rift extends BaseAbility_Plus {
         if (!target) {
             let targets = FindUnitsInRadius(caster.GetTeamNumber(), point, undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_CLOSEST, false);
             if (GameFunc.GetCount(targets) > 0) {
-                target = targets[1];
+                target = targets[0];
             }
         }
         if (!target) {
@@ -1032,7 +1032,7 @@ export class modifier_imba_abyssal_underlord_dark_rift extends BaseModifier_Plus
         this.PlayEffects3();
         let targets = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, 0, false);
         let point = this.GetParentPlus().GetOrigin();
-        for (const [_, target] of ipairs(targets)) {
+        for (const [_, target] of GameFunc.iPair(targets)) {
             ProjectileManager.ProjectileDodge(target);
             FindClearSpaceForUnit(target, point, true);
         }

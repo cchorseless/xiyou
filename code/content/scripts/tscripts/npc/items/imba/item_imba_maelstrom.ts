@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -13,7 +14,7 @@ export class modifier_item_imba_chain_lightning extends BaseModifier_Plus {
     public chain_delay: number;
     public starting_unit_entindex: any;
     public current_unit: any;
-    public units_affected: any;
+    public units_affected: IBaseNpc_Plus[];
     public unit_counter: number;
     public zapped: any;
     public zap_particle: any;
@@ -58,15 +59,15 @@ export class modifier_item_imba_chain_lightning extends BaseModifier_Plus {
             this.Destroy();
             return;
         }
-        this.units_affected = {}
+        this.units_affected = []
         this.unit_counter = 0;
         this.OnIntervalThink();
         this.StartIntervalThink(this.chain_delay);
     }
     OnIntervalThink(): void {
         this.zapped = false;
-        for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.current_unit.GetAbsOrigin(), undefined, this.chain_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false))) {
-            if (!this.units_affected[enemy]) {
+        for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.current_unit.GetAbsOrigin(), undefined, this.chain_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false))) {
+            if (!this.units_affected.includes(enemy)) {
                 enemy.EmitSound("Item.Maelstrom.Chain_Lightning.Jump");
                 this.zap_particle = ResHelper.CreateParticleEx("particles/items_fx/chain_lightning.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.current_unit, this.GetCasterPlus());
                 if (this.unit_counter == 0) {
@@ -79,7 +80,7 @@ export class modifier_item_imba_chain_lightning extends BaseModifier_Plus {
                 ParticleManager.ReleaseParticleIndex(this.zap_particle);
                 this.unit_counter = this.unit_counter + 1;
                 this.current_unit = enemy;
-                this.units_affected[this.current_unit] = true;
+                this.units_affected.push(this.current_unit);
                 this.zapped = true;
                 ApplyDamage({
                     victim: enemy,
@@ -202,9 +203,9 @@ export class modifier_item_imba_static_charge extends BaseModifier_Plus {
                 });
             }
             let unit_count = 0;
-            for (const [_, enemy] of ipairs(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.static_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false))) {
+            for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.static_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false))) {
                 if (enemy != keys.attacker) {
-                    static_particle = ResHelper.CreateParticleEx("particles/item/mjollnir/static_lightning_bolt.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy, this.GetCasterPlus());
+                    let static_particle = ResHelper.CreateParticleEx("particles/item/mjollnir/static_lightning_bolt.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy, this.GetCasterPlus());
                     ParticleManager.SetParticleControlEnt(static_particle, 0, enemy, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", enemy.GetAbsOrigin(), true);
                     ParticleManager.SetParticleControlEnt(static_particle, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetParentPlus().GetAbsOrigin(), true);
                     ParticleManager.ReleaseParticleIndex(static_particle);
@@ -284,7 +285,7 @@ export class item_imba_maelstrom extends BaseItem_Plus {
     }
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
         if (this.GetName() == "item_imba_jarnbjorn") {
-            return super.GetBehavior() + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AOE;
+            return super.GetBehaviorInt() + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AOE;
         } else {
             return super.GetBehavior();
         }
@@ -293,7 +294,7 @@ export class item_imba_maelstrom extends BaseItem_Plus {
         if (IsClient()) {
             return super.GetCastRange(location, target);
         } else {
-            if ((this.GetName() == "item_imba_jarnbjorn" && this.GetCursorTarget() && (this.GetCursorTarget().CutDown || !this.GetCursorTarget().IsCreep)) || this.bTargetingTree) {
+            if ((this.GetName() == "item_imba_jarnbjorn" && this.GetCursorTarget() && ((this.GetCursorTarget() as any as CDOTA_MapTree).CutDown || !this.GetCursorTarget().IsCreep)) || this.bTargetingTree) {
                 this.bTargetingTree = true;
                 return this.GetSpecialValueFor("chop_tree_cast_range");
             } else {
@@ -302,7 +303,7 @@ export class item_imba_maelstrom extends BaseItem_Plus {
         }
     }
     GetCooldown(level: number): number {
-        if (IsServer() && this.GetName() == "item_imba_jarnbjorn" && this.GetCursorTarget() && (this.GetCursorTarget().CutDown || !this.GetCursorTarget().IsCreep)) {
+        if (IsServer() && this.GetName() == "item_imba_jarnbjorn" && this.GetCursorTarget() && ((this.GetCursorTarget() as any as CDOTA_MapTree).CutDown || !this.GetCursorTarget().IsCreep)) {
             return this.GetSpecialValueFor("chop_tree_cooldown");
         } else {
             return super.GetCooldown(level);
@@ -310,13 +311,13 @@ export class item_imba_maelstrom extends BaseItem_Plus {
     }
     OnSpellStart(): void {
         this.bTargetingTree = false;
-        let target = this.GetCursorTarget() as any as CDOTA_MapTree;
+        let target = this.GetCursorTarget();
         if (this.GetName() == "item_imba_mjollnir" || this.GetName() == "item_imba_jarnbjorn") {
             if (this.GetName() == "item_imba_jarnbjorn" && target.GetUnitName == undefined) {
-                if (target.CutDown) {
-                    target.CutDown(-1);
+                if ((target as any as CDOTA_MapTree).CutDown) {
+                    (target as any as CDOTA_MapTree).CutDown(-1);
                 } else {
-                    target.Kill();
+                    target.ForceKill(false);
                 }
                 GridNav.DestroyTreesAroundPoint(target.GetAbsOrigin(), this.GetSpecialValueFor("chop_tree_radius"), true);
             } else {
@@ -399,7 +400,7 @@ export class modifier_item_imba_maelstrom extends BaseModifier_Plus {
         let maelstroms = 0;
         let mjollnirs = 0;
         let jarnbjorns = 0;
-        for (const [_, mod] of ipairs(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
+        for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
             if (mod.GetItemPlus().GetName() == "item_imba_maelstrom") {
                 mod.GetItemPlus().SetSecondaryCharges(maelstroms + 1);
                 maelstroms = maelstroms + 1;
@@ -419,7 +420,7 @@ export class modifier_item_imba_maelstrom extends BaseModifier_Plus {
         let maelstroms = 0;
         let mjollnirs = 0;
         let jarnbjorns = 0;
-        for (const [_, mod] of ipairs(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
+        for (const [_, mod] of GameFunc.iPair(this.GetParentPlus().FindAllModifiersByName(this.GetName()))) {
             if (mod.GetItemPlus().GetName() == "item_imba_maelstrom") {
                 mod.GetItemPlus().SetSecondaryCharges(maelstroms + 1);
                 maelstroms = maelstroms + 1;
@@ -448,7 +449,7 @@ export class modifier_item_imba_maelstrom extends BaseModifier_Plus {
         });
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
-    CC_GetModifierPreAttack_BonusDamage( /** keys */): number {
+    CC_GetModifierPreAttack_BonusDamage(keys?: any /** keys */): number {
         if (IsServer() && keys.target && !keys.target.IsHero() && !keys.target.IsOther() && !keys.target.IsBuilding() && !string.find(keys.target.GetUnitName(), "npc_dota_lone_druid_bear") && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && this.GetParentPlus().FindItemInInventory("item_imba_jarnbjorn") == this.GetItemPlus()) {
             if (!this.GetParentPlus().IsRangedAttacker()) {
                 return this.bonus_damage + this.quelling_bonus;
@@ -467,10 +468,7 @@ export class modifier_item_imba_maelstrom extends BaseModifier_Plus {
     CC_GetModifierConstantHealthRegen(): number {
         return this.bonus_health_regen;
     }
-    @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
-    CC_GetModifierConstantManaRegen(): number {
-        return this.bonus_mana_regen;
-    }
+
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANA_REGEN_CONSTANT)
     CC_GetModifierConstantManaRegen(): number {
         return this.bonus_mana_regen;
@@ -492,13 +490,13 @@ export class modifier_item_imba_maelstrom extends BaseModifier_Plus {
             this.StartIntervalThink(this.chain_cooldown);
         }
         if (this.GetItemPlus().GetName() == "item_imba_jarnbjorn" && keys.attacker == this.GetParentPlus() && !this.GetParentPlus().IsRangedAttacker() && this.GetParentPlus().IsAlive() && !this.GetParentPlus().IsIllusion() && !keys.target.IsBuilding() && !keys.target.IsOther() && this.GetParentPlus().GetTeamNumber() != keys.target.GetTeamNumber()) {
-            DoCleaveAttack(this.GetParentPlus(), keys.target, ability, keys.damage * this.cleave_damage_percent * 0.01, this.cleave_starting_width, this.cleave_ending_width, this.cleave_distance, "particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave.vpcf");
+            DoCleaveAttack(this.GetParentPlus(), keys.target, keys.inflictor, keys.damage * this.cleave_damage_percent * 0.01, this.cleave_starting_width, this.cleave_ending_width, this.cleave_distance, "particles/econ/items/sven/sven_ti7_sword/sven_ti7_sword_spell_great_cleave.vpcf");
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)
     CC_OnOrder(keys: ModifierUnitEvent): void {
         if (keys.unit == this.GetParentPlus() && this.GetItemPlus().GetName() == "item_imba_jarnbjorn") {
-            this.GetItemPlus().bTargetingTree = false;
+            this.GetItemPlus<item_imba_maelstrom>().bTargetingTree = false;
         }
     }
 }

@@ -6,13 +6,24 @@ export module GameFunc {
 
     export function Pair<T>(obj: { [k: string]: T }): [string, T][] {
         let arr: [string, T][] = [];
-        for (const key in obj) {
+        let keys = Object.keys(obj);
+        keys.sort();
+        for (const key of keys) {
             const element = obj[key];
             arr.push([key, element]);
         }
         return arr;
-
     }
+
+    export function iPair<T>(obj: T[]): [number, T][] {
+        let arr: [number, T][] = [];
+        for (let i = 0, len = obj.length; i < len; i++) {
+            const element = obj[i];
+            arr.push([i, element]);
+        }
+        return arr;
+    }
+
 
     export function GetCount(obj: any[]): number {
         return obj.length
@@ -134,6 +145,38 @@ export module GameFunc {
 
 export module FuncEntity {
 
+    export function Custom_HasAnyAvailableInventorySpace(unit: IBaseNpc_Plus) {
+        if (unit.IsHero()) {
+            return unit.HasAnyAvailableInventorySpace();
+        }
+        else {
+            for (let i = DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_1; i <= DOTAScriptInventorySlot_t.DOTA_ITEM_SLOT_9; i += 1) {
+                let item = unit.GetItemInSlot(i);
+                if (!item) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+    export function Custom_IsTree(unit: IBaseNpc_Plus) {
+        if (Custom_IsRegularTree(unit) || Custom_IsTempTree(unit)) {
+            return true;
+        }
+        return false;
+    }
+    export function Custom_IsRegularTree(unit: IBaseNpc_Plus) {
+        if ((unit as any as CDOTA_MapTree).CutDown) {
+            return true;
+        }
+        return false;
+    }
+    export function Custom_IsTempTree(unit: IBaseNpc_Plus) {
+        if (unit.GetClassname() == "dota_temp_tree") {
+            return true;
+        }
+        return false;
+    }
 
 
     export function Blink(unit: IBaseNpc_Plus, position: Vector, bTeamOnlyParticle: boolean, bPlaySound = true) {

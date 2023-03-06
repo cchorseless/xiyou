@@ -110,8 +110,8 @@ export class imba_skywrath_mage_arcane_bolt extends BaseAbility_Plus {
         let ability = this;
         let target = this.GetCursorTarget();
         let cast_responses = {
-            1: "skywrath_mage_drag_arcanebolt_02",
-            2: "skywrath_mage_drag_arcanebolt_03"
+            "1": "skywrath_mage_drag_arcanebolt_02",
+            "2": "skywrath_mage_drag_arcanebolt_03"
         }
         let rare_cast_response = "skywrath_mage_drag_arcanebolt_01";
         let sound_cast = "Hero_SkywrathMage.ArcaneBolt.Cast";
@@ -135,7 +135,7 @@ export class imba_skywrath_mage_arcane_bolt extends BaseAbility_Plus {
             if (scepter) {
                 extra_bolts = extra_bolts + 1;
             }
-            for (const [_, enemy_hero] of ipairs(enemy_heroes)) {
+            for (const [_, enemy_hero] of GameFunc.iPair(enemy_heroes)) {
                 if (enemy_hero != target) {
                     LaunchArcaneBolt(caster, ability, enemy_hero);
                     counter = counter + 1;
@@ -145,7 +145,7 @@ export class imba_skywrath_mage_arcane_bolt extends BaseAbility_Plus {
                 }
             }
             let enemy_creeps = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, scepter_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, target_flags, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy_creep] of ipairs(enemy_creeps)) {
+            for (const [_, enemy_creep] of GameFunc.iPair(enemy_creeps)) {
                 if (enemy_creep != target) {
                     LaunchArcaneBolt(caster, ability, enemy_creep);
                     counter = counter + 1;
@@ -285,16 +285,16 @@ export class imba_skywrath_mage_concussive_shot extends BaseAbility_Plus {
             let cast_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_skywrath_mage/skywrath_mage_concussive_shot_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
             ParticleManager.SetParticleControl(cast_particle, 0, caster.GetAbsOrigin());
             ParticleManager.SetParticleControl(cast_particle, 1, enemies[0].GetAbsOrigin());
-            ParticleManager.SetParticleControlEnt(cast_particle, 2, enemies[0], ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", enemies[1].GetAbsOrigin(), true);
+            ParticleManager.SetParticleControlEnt(cast_particle, 2, enemies[0], ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", enemies[0].GetAbsOrigin(), true);
             ParticleManager.ReleaseParticleIndex(cast_particle);
-            if ((enemies[1].GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetSpecialValueFor("search_radius")) {
+            if ((enemies[0].GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetSpecialValueFor("search_radius")) {
                 LaunchConcussiveShot(caster, caster, ability, enemies[0], true, max_bounces);
             } else {
                 LaunchConcussiveShot(caster, caster, ability, enemies[0], true, max_bounces, false);
             }
             if (caster.HasTalent("special_bonus_imba_skywrath_mage_8")) {
-                for (const [_, enemy] of ipairs(enemies)) {
-                    if (enemy != enemies[1]) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
+                    if (enemy != enemies[0]) {
                         LaunchConcussiveShot(caster, caster, ability, enemy, true, max_bounces);
                     }
                 }
@@ -305,13 +305,13 @@ export class imba_skywrath_mage_concussive_shot extends BaseAbility_Plus {
                 EmitSoundOn(sound_cast, caster);
                 let cast_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_skywrath_mage/skywrath_mage_concussive_shot_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
                 ParticleManager.SetParticleControl(cast_particle, 0, caster.GetAbsOrigin());
-                ParticleManager.SetParticleControl(cast_particle, 1, basic_units[1].GetAbsOrigin());
-                ParticleManager.SetParticleControlEnt(cast_particle, 2, basic_units[1], ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", basic_units[1].GetAbsOrigin(), true);
+                ParticleManager.SetParticleControl(cast_particle, 1, basic_units[0].GetAbsOrigin());
+                ParticleManager.SetParticleControlEnt(cast_particle, 2, basic_units[0], ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", basic_units[0].GetAbsOrigin(), true);
                 ParticleManager.ReleaseParticleIndex(cast_particle);
-                if ((basic_units[1].GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetSpecialValueFor("search_radius")) {
-                    LaunchConcussiveShot(caster, caster, ability, basic_units[1], true, max_bounces);
+                if ((basic_units[0].GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D() <= this.GetSpecialValueFor("search_radius")) {
+                    LaunchConcussiveShot(caster, caster, ability, basic_units[0], true, max_bounces);
                 } else {
-                    LaunchConcussiveShot(caster, caster, ability, basic_units[1], true, max_bounces, false);
+                    LaunchConcussiveShot(caster, caster, ability, basic_units[0], true, max_bounces, false);
                 }
             } else {
                 let particle_fail_fx = ResHelper.CreateParticleEx("particles/units/heroes/hero_skywrath_mage/skywrath_mage_concussive_shot_failure.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
@@ -322,8 +322,8 @@ export class imba_skywrath_mage_concussive_shot extends BaseAbility_Plus {
             }
         }
         if (scepter) {
-            for (const [_, enemy_hero] of ipairs(enemies)) {
-                if (enemy_hero != enemies[1] && !enemy_hero.IsMagicImmune()) {
+            for (const [_, enemy_hero] of GameFunc.iPair(enemies)) {
+                if (enemy_hero != enemies[0] && !enemy_hero.IsMagicImmune()) {
                     if ((enemy_hero.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Length2D() <= ability.GetSpecialValueFor("scepter_search_radius")) {
                         LaunchConcussiveShot(caster, caster, ability, enemy_hero, true, max_bounces);
                     } else {
@@ -332,8 +332,8 @@ export class imba_skywrath_mage_concussive_shot extends BaseAbility_Plus {
                     return undefined;
                 }
             }
-            for (const [_, enemy_creep] of ipairs(basic_units)) {
-                if (enemy_creep != basic_units[1] && !enemy_creep.IsMagicImmune()) {
+            for (const [_, enemy_creep] of GameFunc.iPair(basic_units)) {
+                if (enemy_creep != basic_units[0] && !enemy_creep.IsMagicImmune()) {
                     if ((enemy_creep.GetAbsOrigin() - caster.GetAbsOrigin() as Vector).Length2D() <= ability.GetSpecialValueFor("scepter_search_radius")) {
                         LaunchConcussiveShot(caster, caster, ability, enemy_creep, true, max_bounces);
                     } else {
@@ -369,7 +369,7 @@ export class imba_skywrath_mage_concussive_shot extends BaseAbility_Plus {
         }
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, impact_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         let final_damage = undefined;
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (!enemy.IsMagicImmune()) {
                 if (enemy.IsCreep()) {
                     final_damage = damage * this.GetSpecialValueFor("creep_damage_pct") * 0.01;
@@ -398,10 +398,10 @@ export class imba_skywrath_mage_concussive_shot extends BaseAbility_Plus {
                 }
                 bounces_left = bounces_left - 1;
                 let enemy_target;
-                if (enemies[1] == target) {
+                if (enemies[0] == target) {
                     enemy_target = enemies[2];
                 } else {
-                    enemy_target = enemies[1];
+                    enemy_target = enemies[0];
                 }
                 LaunchConcussiveShot(caster, target, ability, enemy_target, false, bounces_left);
             });
@@ -463,7 +463,7 @@ export class imba_skywrath_mage_ancient_seal extends BaseAbility_Plus {
         let ability = this;
         let target = this.GetCursorTarget();
         let cast_response = {
-            1: "skywrath_mage_drag_ancient_seal_01, skywrath_mage_drag_ancient_seal_03"
+            "1": "skywrath_mage_drag_ancient_seal_01, skywrath_mage_drag_ancient_seal_03"
         }
         let rare_cast_response = "skywrath_mage_drag_ancient_seal_02";
         let sound_cast = "Hero_SkywrathMage.AncientSeal.Target";
@@ -483,14 +483,14 @@ export class imba_skywrath_mage_ancient_seal extends BaseAbility_Plus {
         ApplyAncientSeal(caster, ability, target);
         if (scepter) {
             let enemy_heroes = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, scepter_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy_hero] of ipairs(enemy_heroes)) {
+            for (const [_, enemy_hero] of GameFunc.iPair(enemy_heroes)) {
                 if (enemy_hero != target) {
                     ApplyAncientSeal(caster, ability, enemy_hero);
                     return undefined;
                 }
             }
             let enemy_creeps = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, scepter_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy_creep] of ipairs(enemy_creeps)) {
+            for (const [_, enemy_creep] of GameFunc.iPair(enemy_creeps)) {
                 if (enemy_creep != target) {
                     ApplyAncientSeal(caster, ability, enemy_creep);
                     return undefined;
@@ -686,7 +686,7 @@ export class imba_skywrath_mage_mystic_flare extends BaseAbility_Plus {
         ExecuteMysticFlare(caster, ability, target_point);
         if (scepter) {
             let enemy_heroes = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, scepter_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy_hero] of ipairs(enemy_heroes)) {
+            for (const [_, enemy_hero] of GameFunc.iPair(enemy_heroes)) {
                 let distance = (enemy_hero.GetAbsOrigin() - target_point as Vector).Length2D();
                 if (distance > damage_radius) {
                     EmitSoundOnLocationWithCaster(enemy_hero.GetAbsOrigin(), "Hero_SkywrathMage.MysticFlare.Scepter", this.GetCasterPlus());
@@ -695,7 +695,7 @@ export class imba_skywrath_mage_mystic_flare extends BaseAbility_Plus {
                 }
             }
             let enemy_creeps = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, scepter_search_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy_creep] of ipairs(enemy_creeps)) {
+            for (const [_, enemy_creep] of GameFunc.iPair(enemy_creeps)) {
                 let distance = (enemy_creep.GetAbsOrigin() - target_point as Vector).Length2D();
                 if ((distance - 50) > damage_radius) {
                     EmitSoundOnLocationWithCaster(enemy_creep.GetAbsOrigin(), "Hero_SkywrathMage.MysticFlare.Scepter", this.GetCasterPlus());
@@ -787,7 +787,7 @@ export class modifier_imba_mystic_flare extends BaseModifier_Plus {
                     }
                     this.explosion_damage = this.caster_int * ((this.int_as_damage_pct + this.int_increase_per_stack * this.wrath_stacks) * 0.01);
                     let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent_loc, undefined, this.explosion_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         if (!enemy.IsMagicImmune()) {
                             let damageTable = {
                                 victim: enemy,
@@ -810,7 +810,7 @@ export class modifier_imba_mystic_flare extends BaseModifier_Plus {
             if (GameFunc.GetCount(enemies) != 0) {
                 this.instance_damage = this.damage_per_interval / GameFunc.GetCount(enemies);
             }
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsMagicImmune()) {
                     enemy.EmitSound("Hero_SkywrathMage.MysticFlare.Target");
                     let damageTable = {
@@ -825,7 +825,7 @@ export class modifier_imba_mystic_flare extends BaseModifier_Plus {
             }
             if (GameFunc.GetCount(enemies) <= 0) {
                 let basic_units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.damage_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(basic_units)) {
+                for (const [_, enemy] of GameFunc.iPair(basic_units)) {
                     enemy.EmitSound("Hero_SkywrathMage.MysticFlare.Target");
                     ApplyDamage({
                         victim: enemy,

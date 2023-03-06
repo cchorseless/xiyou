@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -22,7 +23,7 @@ export class item_imba_arcane_boots extends BaseItem_Plus {
             let arcane_pfx = ResHelper.CreateParticleEx("particles/items_fx/arcane_boots.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
             ParticleManager.ReleaseParticleIndex(arcane_pfx);
             let nearby_allies = FindUnitsInRadius(this.GetCasterPlus().GetTeam(), this.GetCasterPlus().GetAbsOrigin(), undefined, replenish_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MANA_ONLY, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, ally] of ipairs(nearby_allies)) {
+            for (const [_, ally] of GameFunc.iPair(nearby_allies)) {
                 ally.GiveMana(replenish_mana);
                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_MANA_ADD, ally, replenish_mana, undefined);
                 let arcane_target_pfx = ResHelper.CreateParticleEx("particles/items_fx/arcane_boots_recipient.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, ally);

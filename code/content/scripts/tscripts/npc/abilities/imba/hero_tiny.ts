@@ -213,7 +213,7 @@ export class modifier_imba_tiny_tree extends BaseModifier_Plus {
                     damage_table.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL;
                     damage_table.damage = caster.GetAttackDamage() * (splash_damage / 100);
                     let enemies = FindUnitsInRadius(caster.GetTeam(), caster.GetAbsOrigin() + splash_distance as Vector, undefined, splash_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         if (enemy != keys.target) {
                             damage_table.victim = enemy;
                             ApplyDamage(damage_table);
@@ -410,7 +410,7 @@ export class imba_tiny_tree_throw extends BaseAbility_Plus {
             damage_table.damage_type = DAMAGE_TYPES.DAMAGE_TYPE_PHYSICAL;
             damage_table.damage = caster.GetAttackDamage() * (ExtraData.splash_damage / 100);
             let enemies = FindUnitsInRadius(caster.GetTeam(), hit_location, undefined, ExtraData.splash_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != target) {
                     damage_table.victim = enemy;
                     ApplyDamage(damage_table);
@@ -644,7 +644,7 @@ export class imba_tiny_avalanche extends BaseAbility_Plus {
         let ticks = 1 / this.GetSpecialValueFor("tick_interval");
         velocity.z = 0;
         let wearables = caster.GetChildren();
-        for (const [_, wearable] of ipairs(wearables)) {
+        for (const [_, wearable] of GameFunc.iPair(wearables)) {
             if (wearable.GetClassname() == "dota_item_wearable") {
                 if (wearable.GetModelName().includes("tree")) {
                 }
@@ -701,7 +701,7 @@ export class imba_tiny_avalanche extends BaseAbility_Plus {
         this.AddTimer(0, () => {
             let damage = this.GetTalentSpecialValueFor("avalanche_damage") / this.GetSpecialValueFor("tick_count");
             let enemies_tick = FindUnitsInRadius(caster.GetTeamNumber(), hitLoc, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
-            for (const [_, enemy] of ipairs(enemies_tick)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies_tick)) {
                 if (enemy.HasModifier("modifier_tiny_toss_movement")) {
                     damage = damage * toss_mult;
                 }
@@ -849,7 +849,7 @@ export class imba_tiny_toss extends BaseAbility_Plus {
         let duration = this.GetSpecialValueFor("duration");
         if (!hTarget) {
             let targets = FindUnitsInRadius(caster.GetTeamNumber(), this.tossPosition, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 1, false);
-            for (const [_, target] of ipairs(targets)) {
+            for (const [_, target] of GameFunc.iPair(targets)) {
                 hTarget = target;
                 return;
             }
@@ -869,12 +869,12 @@ export class imba_tiny_toss extends BaseAbility_Plus {
             damage: this.GetSpecialValueFor("toss_damage")
         }
         let tossVictims = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetAbsOrigin(), undefined, this.GetSpecialValueFor("grab_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_CHECK_DISABLE_HELP, 1, false);
-        for (const [_, victim] of ipairs(tossVictims)) {
+        for (const [_, victim] of GameFunc.iPair(tossVictims)) {
             if ((PlayerResource.IsDisableHelpSetForPlayerID(victim.GetPlayerOwnerID(), this.GetCasterPlus().GetPlayerOwnerID()))) {
                 table.remove(tossVictims, _);
             }
         }
-        for (const [_, victim] of ipairs(tossVictims)) {
+        for (const [_, victim] of GameFunc.iPair(tossVictims)) {
             if (victim != caster) {
                 victim.AddNewModifier(caster, this, "modifier_tiny_toss_movement", kv);
                 if (!this.GetCasterPlus().HasTalent("special_bonus_imba_tiny_7")) {
@@ -1001,7 +1001,7 @@ export class modifier_tiny_toss_movement extends BaseModifierMotionBoth_Plus {
             }
             GridNav.DestroyTreesAroundPoint(this.vLastKnownTargetPos, radius, true);
             let victims = FindUnitsInRadius(caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, 0, 1, false);
-            for (const [_, victim] of ipairs(victims)) {
+            for (const [_, victim] of GameFunc.iPair(victims)) {
                 let damage = this.damage;
                 if (victim == this.parent) {
                     let damage_multiplier = 1 + this.ability.GetSpecialValueFor("bonus_damage_pct") / 100;
@@ -1230,7 +1230,7 @@ export class modifier_tiny_toss_scepter_bounce extends BaseModifierMotionVertica
             let damage = this.toss_damage * this.scepter_bounce_damage_pct * 0.01;
             let radius = this.GetSpecialValueFor("radius") + this.caster.findBuff<modifier_imba_tiny_rolling_stone>("modifier_imba_tiny_rolling_stone").GetStackCount() * this.caster.findAbliityPlus<imba_tiny_grow>("imba_tiny_grow").GetSpecialValueFor("rolling_stones_aoe");
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 ApplyDamage({
                     victim: enemy,
                     attacker: this.caster,
@@ -1308,7 +1308,7 @@ export class modifier_imba_tiny_craggy_exterior_passive extends BaseModifier_Plu
                             ParticleManager.ReleaseParticleIndex(avalanche);
                         });
                         let craggy_targets = FindUnitsInRadius(caster.GetTeamNumber(), params.attacker.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, 0, 0, false);
-                        for (const [_, target] of ipairs(craggy_targets)) {
+                        for (const [_, target] of GameFunc.iPair(craggy_targets)) {
                             ApplyDamage({
                                 victim: target,
                                 attacker: caster,

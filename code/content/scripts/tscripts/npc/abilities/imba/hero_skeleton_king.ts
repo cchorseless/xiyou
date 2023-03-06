@@ -87,13 +87,13 @@ export class imba_wraith_king_wraithfire_blast extends BaseAbility_Plus {
         let target = this.GetCursorTarget();
         let sound_cast = "Hero_SkeletonKing.Hellfire_Blast";
         let cast_response = {
-            1: "skeleton_king_wraith_ability_hellfire_05",
-            2: "skeleton_king_wraith_ability_hellfire_06",
-            3: "skeleton_king_wraith_ability_hellfire_07"
+            "1": "skeleton_king_wraith_ability_hellfire_05",
+            "2": "skeleton_king_wraith_ability_hellfire_06",
+            "3": "skeleton_king_wraith_ability_hellfire_07"
         }
         let rare_cast_response = {
-            1: "skeleton_king_wraith_ability_hellfire_03",
-            2: "skeleton_king_wraith_ability_hellfire_04"
+            "1": "skeleton_king_wraith_ability_hellfire_03",
+            "2": "skeleton_king_wraith_ability_hellfire_04"
         }
         let particle_warmup = "particles/units/heroes/hero_skeletonking/skeletonking_hellfireblast_warmup.vpcf";
         if (RollPercentage(5)) {
@@ -151,7 +151,7 @@ export class imba_wraith_king_wraithfire_blast extends BaseAbility_Plus {
             });
             if (extra_data.bTalent == 0) {
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, secondary_targets_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, enemy] of ipairs(enemies)) {
+                for (const [_, enemy] of GameFunc.iPair(enemies)) {
                     if (enemy != target) {
                         LaunchWraithblastProjectile(caster, ability, target, enemy, 0);
                     }
@@ -346,7 +346,7 @@ export class modifier_imba_wraithfire_blast_debuff_talent extends BaseModifier_P
         let base_dmg = caster.GetTalentValue("special_bonus_imba_skeleton_king_3", "base_damge_per_sec");
         let additional_dmg = caster.GetTalentValue("special_bonus_imba_skeleton_king_3", "add_target_dmg");
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, enemy] of ipairs(enemies)) {
+        for (const [_, enemy] of GameFunc.iPair(enemies)) {
             let modifier = enemy.FindModifierByNameAndCaster("modifier_imba_wraithfire_blast_debuff", this.GetCasterPlus());
             if (modifier && enemy != target) {
                 num = num + 1;
@@ -354,7 +354,7 @@ export class modifier_imba_wraithfire_blast_debuff_talent extends BaseModifier_P
         }
         let damage = base_dmg + num * additional_dmg;
         let damage_targets = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-        for (const [_, damage_target] of ipairs(damage_targets)) {
+        for (const [_, damage_target] of GameFunc.iPair(damage_targets)) {
             let damageTable = {
                 victim: damage_target,
                 attacker: caster,
@@ -540,7 +540,7 @@ export class modifier_imba_vampiric_aura_buff extends BaseModifier_Plus {
                 }
                 this.AddTimer(this.heal_delay, () => {
                     let casters = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, caster] of ipairs(casters)) {
+                    for (const [_, caster] of GameFunc.iPair(casters)) {
                         if (caster.GetUnitName() == this.caster.GetUnitName() && attacker.GetUnitName() != this.caster.GetUnitName()) {
                             if (heal_amount > 0 && caster != attacker) {
                                 let particle_lifesteal_fx = ResHelper.CreateParticleEx(this.particle_lifesteal, ParticleAttachment_t.PATTACH_CUSTOMORIGIN_FOLLOW, caster, this.caster);
@@ -573,7 +573,7 @@ export class modifier_imba_vampiric_aura_buff extends BaseModifier_Plus {
                         return undefined;
                     }
                     let casters = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, caster] of ipairs(casters)) {
+                    for (const [_, caster] of GameFunc.iPair(casters)) {
                         if (caster.GetUnitName() == this.caster.GetUnitName() && attacker.GetUnitName() != this.caster.GetUnitName()) {
                             if (heal_amount > 0 && caster != attacker) {
                                 let particle_lifesteal_fx = ResHelper.CreateParticleEx(this.particle_lifesteal, ParticleAttachment_t.PATTACH_CUSTOMORIGIN_FOLLOW, caster, this.caster);
@@ -613,9 +613,9 @@ export class imba_wraith_king_mortal_strike extends BaseAbility_Plus {
         if (this.caster.HasModifier("modifier_imba_mortal_strike")) {
             let skeleton: IBaseNpc_Plus = undefined;
             let skeleton_modifier = this.caster.findBuff<modifier_imba_mortal_strike>("modifier_imba_mortal_strike");
-            for (let unit = 0; unit <= skeleton_modifier.GetStackCount() - 1; unit += 1) {
+            for (let unit = 0; unit <= skeleton_modifier.GetStackCount() - 1; unit++) {
                 this.GetCasterPlus().SetContextThink(DoUniqueString(this.GetName()), () => {
-                    for (let units_per_charge = 1; units_per_charge <= this.skeletons_per_charge; units_per_charge += 1) {
+                    for (let units_per_charge = 1; units_per_charge <= this.skeletons_per_charge; units_per_charge++) {
                         skeleton = BaseNpc_Plus.CreateUnitByName("npc_dota_wraith_king_skeleton_warrior", this.caster.GetAbsOrigin() + RandomVector(100) as Vector, this.caster.GetTeamNumber(), true, this.caster, this.caster);
                         skeleton.AddNewModifier(this.caster, this, "modifier_kill", {
                             duration: this.skeleton_duration
@@ -817,7 +817,7 @@ export class modifier_imba_mortal_strike extends BaseModifier_Plus {
                     duration: this.bonus_health_duration
                 });
                 if (modifier_health_handler) {
-                    for (let i = 1; i <= new_stacks; i += 1) {
+                    for (let i = 0; i < new_stacks; i++) {
                         modifier_health_handler.IncrementStackCount();
                         modifier_health_handler.ForceRefresh();
                     }
@@ -832,7 +832,7 @@ export class modifier_imba_mortal_strike extends BaseModifier_Plus {
                         let modifier_strength_handler = this.caster.FindModifierByName(this.modifier_strength);
                         if (modifier_strength_handler) {
                             let strength_per_crit = this.caster.GetTalentValue("special_bonus_imba_skeleton_king_8");
-                            for (let i = 1; i <= strength_per_crit; i += 1) {
+                            for (let i = 0; i < strength_per_crit; i++) {
                                 modifier_strength_handler.IncrementStackCount();
                                 modifier_strength_handler.ForceRefresh();
                             }
@@ -1054,7 +1054,7 @@ export class imba_wraith_king_reincarnation extends BaseAbility_Plus {
                 let wraithfire_blast = BuffInfo.caster.findAbliityPlus<imba_wraith_king_wraithfire_blast>("imba_wraith_king_wraithfire_blast");
                 if (wraithfire_blast && wraithfire_blast.IsTrained()) {
                     let enemies = FindUnitsInRadius(BuffInfo.caster.GetTeamNumber(), unit.GetAbsOrigin(), undefined, 900, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                    for (const [_, enemy] of ipairs(enemies)) {
+                    for (const [_, enemy] of GameFunc.iPair(enemies)) {
                         LaunchWraithblastProjectile(BuffInfo.caster, wraithfire_blast, unit, enemy, 1, true);
                     }
                 }
@@ -1128,7 +1128,7 @@ export class modifier_imba_reincarnation extends BaseModifier_Plus {
             }
             if (this.GetAbilityPlus().GetAutoCastState() && this.GetAbilityPlus().IsCooldownReady()) {
                 let units = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.caster.GetTalentValue("special_bonus_imba_skeleton_king_5"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (const [_, unit] of ipairs(units)) {
+                for (const [_, unit] of GameFunc.iPair(units)) {
                     if (unit != this.caster) {
                         unit.AddNewModifier(this.caster, this.ability, "modifier_imba_reincarnation", {});
                     }

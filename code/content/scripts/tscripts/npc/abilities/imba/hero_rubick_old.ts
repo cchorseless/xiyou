@@ -245,7 +245,7 @@ export class modifier_imba_telekinesis extends BaseModifierMotionBoth_Plus {
             ParticleManager.SetParticleControl(landing_pfx, 1, parent_pos);
             ParticleManager.ReleaseParticleIndex(landing_pfx);
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), parent_pos, undefined, impact_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-            for (const [_, enemy] of ipairs(enemies)) {
+            for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (enemy != parent) {
                     enemy.AddNewModifier(caster, ability, "modifier_stunned", {
                         duration: impact_stun_duration * (1 - enemy.GetStatusResistance())
@@ -429,12 +429,12 @@ export class modifier_imba_rubick_spell_steal_controller extends BaseModifier_Pl
             return;
         }
         let target = keys.target;
-        for (const [_, ex_talent] of ipairs(this.talent_ability)) {
+        for (const [_, ex_talent] of GameFunc.iPair(this.talent_ability)) {
             if (!ex_talent.IsNull()) {
                 rubick.RemoveAbility(ex_talent.GetAbilityName());
             }
         }
-        for (let i = 0; i <= 23; i += 1) {
+        for (let i = 0; i <= 23; i++) {
             let talent = target.GetAbilityByIndex(i);
             if (talent != undefined) {
                 let name = talent.GetAbilityName();
@@ -446,12 +446,12 @@ export class modifier_imba_rubick_spell_steal_controller extends BaseModifier_Pl
                 }
             }
         }
-        for (let i = 0; i <= 23; i += 1) {
+        for (let i = 0; i <= 23; i++) {
             let talent = rubick.GetAbilityByIndex(i);
             if (talent != undefined) {
                 let name = talent.GetAbilityName();
                 if (string.find(name, "special_bonus_")) {
-                    for (const [_, ex_talent] of ipairs(this.talent_ability)) {
+                    for (const [_, ex_talent] of GameFunc.iPair(this.talent_ability)) {
                         if (!ex_talent.IsNull() && talent == ex_talent) {
                             ex_talent.SetLevel(1);
                         }

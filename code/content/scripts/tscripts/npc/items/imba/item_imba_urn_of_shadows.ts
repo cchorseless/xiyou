@@ -99,7 +99,7 @@ export class modifier_imba_urn_of_shadows_passive extends BaseModifier_Plus {
         let parent = this.GetParentPlus();
         this.AddTimer(0.75, () => {
             if (!parent.IsNull() && parent.HasItemInInventory("item_imba_black_queen_cape") || parent.HasItemInInventory("item_imba_spirit_vessel")) {
-                for (let itemSlot = 0; itemSlot <= 5; itemSlot += 1) {
+                for (let itemSlot = 0; itemSlot <= 5; itemSlot++) {
                     if (parent.GetItemInSlot) {
                         let item = parent.GetItemInSlot(itemSlot);
                         if (item && (item.GetName() == "item_imba_black_queen_cape" || item.GetName() == "item_imba_spirit_vessel")) {
@@ -155,9 +155,9 @@ export class modifier_imba_urn_of_shadows_passive extends BaseModifier_Plus {
         let allies_in_vicinity = FindUnitsInRadius(this.parent.GetTeamNumber(), target.GetAbsOrigin(), undefined, this.soultrap_range, team_filter, type_filter, flag_filter, FindOrder.FIND_CLOSEST, false);
         let our_distance = (this.parent.GetAbsOrigin() - target.GetAbsOrigin() as Vector).Length2D();
         if (GameFunc.GetCount(allies_in_vicinity) > 1) {
-            for (const [_, ally] of ipairs(allies_in_vicinity)) {
+            for (const [_, ally] of GameFunc.iPair(allies_in_vicinity)) {
                 if (ally != this.parent) {
-                    for (let i = 0; i <= 5; i += 1) {
+                    for (let i = 0; i <= 5; i++) {
                         let item = ally.GetItemInSlot(i);
                         if (item) {
                             if ((item.GetName() == urn_item_name || item.GetName() == "item_imba_spirit_vessel") && (item.GetPurchaser() == ally)) {
@@ -172,7 +172,7 @@ export class modifier_imba_urn_of_shadows_passive extends BaseModifier_Plus {
                 }
             }
         }
-        for (let i = 0; i <= 5; i += 1) {
+        for (let i = 0; i <= 5; i++) {
             let item = this.parent.GetItemInSlot(i);
             if (item) {
                 if (item.GetName() == urn_item_name) {
