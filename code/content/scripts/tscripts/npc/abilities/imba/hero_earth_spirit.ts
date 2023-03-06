@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -384,11 +385,11 @@ export class modifier_imba_earths_mark extends BaseModifier_Plus {
     } */
     BeCreated(p_0: any,): void {
         this.caster = this.GetCasterPlus();
+        let stone_caller = this.caster.findAbliityPlus<imba_earth_spirit_stone_caller>("imba_earth_spirit_stone_caller");
+        this.duration = stone_caller.GetSpecialValueFor("earths_mark_duration") * (1 - this.GetParentPlus().GetStatusResistance());
+        this.SetDuration(this.duration, true);
+        this.SetStackCount(1);
         if (IsServer()) {
-            let stone_caller = this.GetCasterPlus().findAbliityPlus<imba_earth_spirit_stone_caller>("imba_earth_spirit_stone_caller");
-            this.duration = stone_caller.GetSpecialValueFor("earths_mark_duration") * (1 - this.GetParentPlus().GetStatusResistance());
-            this.SetDuration(this.duration, true);
-            this.SetStackCount(1);
             if (this.caster.HasTalent("special_bonus_imba_earth_spirit_7") || this.caster.HasTalent("special_bonus_imba_earth_spirit_8")) {
                 this.StartIntervalThink(FrameTime() * 3);
             }
@@ -935,7 +936,7 @@ export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
                 this.caster.RemoveGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_2_ES_ROLL_START);
                 this.caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_2_ES_ROLL);
                 if (this.caster.HasTalent("special_bonus_imba_earth_spirit_2")) {
-                    ProjectileManager.ProjectileDodge(this.caster);
+                    ProjectileHelper.ProjectileDodgePlus(this.caster);
                 }
             });
             this.ability.SetActivated(false);

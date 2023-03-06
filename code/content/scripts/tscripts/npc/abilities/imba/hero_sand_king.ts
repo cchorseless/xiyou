@@ -1,6 +1,7 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -45,7 +46,7 @@ export class imba_sandking_burrowstrike extends BaseAbility_Plus {
         burrow_radius = burrow_radius + caster.GetTalentValue("special_bonus_imba_sand_king_1");
         EmitSoundOn(cast_responses, caster);
         EmitSoundOn(sound_cast, caster);
-        ProjectileManager.ProjectileDodge(caster);
+        ProjectileHelper.ProjectileDodgePlus(caster);
         let distance = (caster.GetAbsOrigin() - target_point as Vector).Length2D();
         let direction = (target_point - caster.GetAbsOrigin() as Vector).Normalized();
         let particle_burrow_fx = ResHelper.CreateParticleEx(particle_burrow, ParticleAttachment_t.PATTACH_WORLDORIGIN, caster);

@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -878,7 +879,7 @@ export class imba_spirit_breaker_nether_strike extends BaseAbility_Plus {
         }
         let start_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_spirit_breaker/spirit_breaker_nether_strike_begin.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
         FindClearSpaceForUnit(this.GetCasterPlus(), target.GetAbsOrigin() + ((target.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * (54)) as Vector, false);
-        ProjectileManager.ProjectileDodge(this.GetCasterPlus());
+        ProjectileHelper.ProjectileDodgePlus(this.GetCasterPlus());
         ParticleManager.SetParticleControl(start_particle, 2, this.GetCasterPlus().GetAbsOrigin());
         ParticleManager.ReleaseParticleIndex(start_particle);
         let end_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_spirit_breaker/spirit_breaker_nether_strike_end.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());

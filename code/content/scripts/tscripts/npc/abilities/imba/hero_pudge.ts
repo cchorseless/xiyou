@@ -1,6 +1,7 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { AoiHelper } from "../../../helper/AoiHelper";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -1108,7 +1109,7 @@ export class imba_pudge_dismember extends BaseAbility_Plus {
             this.GetCasterPlus().SwapAbilities("imba_pudge_flesh_heap", "imba_pudge_eject", false, true);
             this.swallowed_target = target;
             target.Purge(false, true, false, true, true);
-            ProjectileManager.ProjectileDodge(target);
+            ProjectileHelper.ProjectileDodgePlus(target);
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_dismember_scepter", {});
             return;
         }

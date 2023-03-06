@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -804,7 +805,7 @@ export class modifier_imba_ball_lightning extends BaseModifier_Plus {
             return;
         }
         this.GetCasterPlus().StopSound("Hero_StormSpirit.BallLightning.Loop");
-        ProjectileManager.ProjectileDodge(this.GetParentPlus());
+        ProjectileHelper.ProjectileDodgePlus(this.GetParentPlus());
     }
     GetEffectAttachType(): ParticleAttachment_t {
         return ParticleAttachment_t.PATTACH_ROOTBONE_FOLLOW;

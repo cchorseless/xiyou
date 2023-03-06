@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -172,7 +173,7 @@ export class imba_faceless_void_time_walk extends BaseAbility_Plus {
         let aoe_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_faceless_void/faceless_void_time_walk_slow.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
         ParticleManager.SetParticleControl(aoe_pfx, 1, Vector(slow_radius, 0, 0));
         ParticleManager.ReleaseParticleIndex(aoe_pfx);
-        ProjectileManager.ProjectileDodge(caster);
+        ProjectileHelper.ProjectileDodgePlus(caster);
     }
     OnOwnerSpawned(): void {
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_faceless_void_9") && !this.GetCasterPlus().HasModifier("modifier_special_bonus_imba_faceless_void_9")) {

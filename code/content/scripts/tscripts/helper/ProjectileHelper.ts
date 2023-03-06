@@ -88,6 +88,15 @@ declare global {
     type GLineProjectile = ProjectileHelper.LineProjectiles.LineProjectile;
 }
 export module ProjectileHelper {
+
+    export function ProjectileDodgePlus(unit: IBaseNpc_Plus) {
+        if (unit) {
+            unit.TempData().dodged = true;
+        }
+        ProjectileManager.ProjectileDodge(unit);
+    }
+
+
     export enum ELineProjectBehavior {
         PROJECTILES_NOTHING = 0,
         PROJECTILES_DESTROY = 1,
@@ -704,12 +713,6 @@ export module ProjectileHelper {
     }
 
     export function Init() {
-        let oldProjectileDodge = ProjectileManager.ProjectileDodge;
-        ProjectileManager.ProjectileDodge = (unit) => {
-            if (unit) {
-                unit.TempData().dodged = true;
-            }
-            oldProjectileDodge(unit);
-        }
+
     }
 }

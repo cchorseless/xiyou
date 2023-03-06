@@ -519,7 +519,16 @@ export class modifier_imba_enchantress_natures_attendants extends BaseModifier_P
         if (this.ability.type) {
             this.SetStackCount(this.ability.type);
         }
-        this.particle_name = "particles/units/heroes/hero_enchantress/enchantress_natures_attendants_lvl" + this.level + ".vpcf";
+        let cout3 = "particles/units/heroes/hero_enchantress/enchantress_natures_attendants_count3.vpcf";
+        let cout8 = "particles/units/heroes/hero_enchantress/enchantress_natures_attendants_count8.vpcf";
+        let cout14 = "particles/units/heroes/hero_enchantress/enchantress_natures_attendants_count14.vpcf";
+        this.particle_name = cout3;
+        if (this.level == 2) {
+            this.particle_name = cout8;
+        }
+        else if (this.level >= 3) {
+            this.particle_name = cout14;
+        }
         this.particle = ResHelper.CreateParticleEx(this.particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);
         for (let wisp = 3; wisp <= 3 + (this.level * 2); wisp++) {
             ParticleManager.SetParticleControlEnt(this.particle, wisp, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);
@@ -558,7 +567,7 @@ export class modifier_imba_enchantress_natures_attendants extends BaseModifier_P
             }
         } else {
             for (let wisp = 0; wisp < this.wisp_count; wisp++) {
-                let selected_unit = RandomInt(1, GameFunc.GetCount(hurt_allies));
+                let selected_unit = RandomInt(0, GameFunc.GetCount(hurt_allies) - 1);
                 ParticleManager.SetParticleControlEnt(this.particle, math.min(wisp + 2, 3 + (this.level * 2)), hurt_allies[selected_unit], ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", hurt_allies[selected_unit].GetAbsOrigin(), true);
                 hurt_allies[selected_unit].Heal(this.heal, this.ability);
                 if (this.GetStackCount() == 2) {

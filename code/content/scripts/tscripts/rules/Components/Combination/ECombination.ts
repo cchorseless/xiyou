@@ -112,7 +112,7 @@ export class ECombination extends ET.Entity {
             let index = this.combination[c].indexOf(entity);
             this.combination[c].splice(index, 1);
         }
-        if (this.combination[c].length == 0) {
+        if (this.combination[c] && this.combination[c].length == 0) {
             delete this.combination[c];
         }
         this.checkActive();

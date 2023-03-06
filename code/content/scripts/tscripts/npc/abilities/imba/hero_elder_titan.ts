@@ -197,14 +197,14 @@ export class imba_elder_titan_ancestral_spirit extends BaseAbility_Plus {
         astral_spirit.TempData().basemovespeed = spirit_movespeed;
         if (!astral_spirit.IsNull()) {
             if (caster.findAbliityPlus<imba_elder_titan_echo_stomp>("imba_elder_titan_echo_stomp") != undefined) {
-                astral_spirit.findAbliityPlus<imba_elder_titan_echo_stomp_spirit>("imba_elder_titan_echo_stomp_spirit").SetLevel(caster.FindAbilityByName("imba_elder_titan_echo_stomp").GetLevel());
+                astral_spirit.findAbliityPlus<imba_elder_titan_echo_stomp_spirit>("imba_elder_titan_echo_stomp_spirit")?.SetLevel(caster.FindAbilityByName("imba_elder_titan_echo_stomp").GetLevel());
             }
             if (caster.findAbliityPlus<imba_elder_titan_return_spirit>("imba_elder_titan_return_spirit") != undefined) {
-                astral_spirit.findAbliityPlus<imba_elder_titan_return_spirit>("imba_elder_titan_return_spirit").SetHidden(false);
-                astral_spirit.findAbliityPlus<imba_elder_titan_return_spirit>("imba_elder_titan_return_spirit").SetLevel(caster.FindAbilityByName("imba_elder_titan_return_spirit").GetLevel());
+                astral_spirit.findAbliityPlus<imba_elder_titan_return_spirit>("imba_elder_titan_return_spirit")?.SetHidden(false);
+                astral_spirit.findAbliityPlus<imba_elder_titan_return_spirit>("imba_elder_titan_return_spirit")?.SetLevel(caster.FindAbilityByName("imba_elder_titan_return_spirit").GetLevel());
             }
             if (caster.findAbliityPlus<imba_elder_titan_natural_order>("imba_elder_titan_natural_order") != undefined) {
-                astral_spirit.findAbliityPlus<imba_elder_titan_natural_order>("imba_elder_titan_natural_order").SetLevel(caster.FindAbilityByName("imba_elder_titan_natural_order").GetLevel());
+                astral_spirit.findAbliityPlus<imba_elder_titan_natural_order>("imba_elder_titan_natural_order")?.SetLevel(caster.FindAbilityByName("imba_elder_titan_natural_order").GetLevel());
             }
         }
     }

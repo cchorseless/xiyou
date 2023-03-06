@@ -1,6 +1,7 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { AnimationHelper } from "../../../helper/AnimationHelper";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -156,7 +157,7 @@ export class imba_chaos_knight_phantasm extends BaseAbility_Plus {
         let unit = this.GetCursorTarget() || this.GetCasterPlus();
         unit.EmitSound("Hero_ChaosKnight.Phantasm");
         unit.Purge(false, true, false, false, false);
-        ProjectileManager.ProjectileDodge(unit);
+        ProjectileHelper.ProjectileDodgePlus(unit);
         unit.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_chaos_knight_phantasm_cast", {
             duration: this.GetSpecialValueFor("invuln_duration")
         });

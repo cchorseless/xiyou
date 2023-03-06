@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -305,7 +306,7 @@ export class modifier_imba_puck_phase_shift extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        ProjectileManager.ProjectileDodge(this.GetParentPlus());
+        ProjectileHelper.ProjectileDodgePlus(this.GetParentPlus());
         let phase_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_puck/puck_phase_shift.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetParentPlus());
         ParticleManager.SetParticleControl(phase_particle, 0, this.GetParentPlus().GetAbsOrigin());
         this.AddParticle(phase_particle, false, false, -1, false, false);
@@ -393,7 +394,7 @@ export class imba_puck_ethereal_jaunt extends BaseAbility_Plus {
             let jaunt_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_puck/puck_illusory_orb_blink_out.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
             ParticleManager.ReleaseParticleIndex(jaunt_particle);
             FindClearSpaceForUnit(this.GetCasterPlus(), EntIndexToHScript(this.orb_ability.orbs[GameFunc.GetCount(this.orb_ability.orbs)]).GetAbsOrigin(), true);
-            ProjectileManager.ProjectileDodge(this.GetCasterPlus());
+            ProjectileHelper.ProjectileDodgePlus(this.GetCasterPlus());
             if (this.GetCasterPlus().GetName().includes("puck") && (!this.GetCasterPlus().findBuffStack("modifier_imba_puck_illusory_orb", this.GetCasterPlus()) || this.GetCasterPlus().findBuffStack("modifier_imba_puck_illusory_orb", this.GetCasterPlus()) <= 0)) {
                 this.GetCasterPlus().EmitSound("puck_puck_ability_orb_0" + RandomInt(1, 3));
             }

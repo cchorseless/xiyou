@@ -866,7 +866,7 @@ export class modifier_imba_crystal_maiden_brilliance_aura extends BaseModifier_P
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.MANACOST_PERCENTAGE_STACKING)
     CC_GetModifierPercentageManacostStacking(): number {
-        return this.GetCasterPlus().GetTalentValue("special_bonus_imba_crystal_maiden_brilliance_aura_manacost_reduction") || 0;
+        return this.caster.GetTalentValue("special_bonus_imba_crystal_maiden_brilliance_aura_manacost_reduction") || 0;
     }
     IsHidden(): boolean {
         return false;
@@ -877,6 +877,7 @@ export class modifier_imba_crystal_maiden_brilliance_aura extends BaseModifier_P
     IsPurgable(): boolean {
         return false;
     }
+
 }
 @registerAbility()
 export class imba_crystal_maiden_freezing_field extends BaseAbility_Plus {

@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -350,7 +351,7 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
         for (const [_, unit] of GameFunc.iPair(affected_units)) {
             if (unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID() && (unit == this.GetCasterPlus() || unit.IsIllusion())) {
                 unit.Purge(false, true, false, false, false);
-                ProjectileManager.ProjectileDodge(unit);
+                ProjectileHelper.ProjectileDodgePlus(unit);
                 if (!this.first_unit) {
                     this.first_unit = unit.entindex();
                     this.new_pos = this.GetCursorPosition();

@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -279,7 +280,7 @@ export class modifier_imba_swashbuckle_slashes extends BaseModifier_Plus {
                 return undefined;
             }
             if (this.GetCasterPlus().HasTalent("special_bonus_imba_pangolier_2")) {
-                ProjectileManager.ProjectileDodge(this.GetCasterPlus());
+                ProjectileHelper.ProjectileDodgePlus(this.GetCasterPlus());
             }
             this.slash_particle[this.executed_strikes] = ResHelper.CreateParticleEx(this.particle, ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined);
             ParticleManager.SetParticleControl(this.slash_particle[this.executed_strikes], 0, this.GetCasterPlus().GetAbsOrigin());

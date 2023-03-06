@@ -1,6 +1,7 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { EventHelper } from "../../../helper/EventHelper";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -1033,7 +1034,7 @@ export class modifier_imba_abyssal_underlord_dark_rift extends BaseModifier_Plus
         let targets = FindUnitsInRadius(caster.GetTeamNumber(), caster.GetOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, 0, false);
         let point = this.GetParentPlus().GetOrigin();
         for (const [_, target] of GameFunc.iPair(targets)) {
-            ProjectileManager.ProjectileDodge(target);
+            ProjectileHelper.ProjectileDodgePlus(target);
             FindClearSpaceForUnit(target, point, true);
         }
         let ability = this.GetCasterPlus().findAbliityPlus<imba_abyssal_underlord_cancel_dark_rift>("imba_abyssal_underlord_cancel_dark_rift");

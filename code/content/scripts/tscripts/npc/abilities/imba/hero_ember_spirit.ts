@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -641,13 +642,13 @@ export class imba_ember_spirit_sleight_of_fist extends BaseAbility_Plus {
                 let bonus_targets = caster.findAbliityPlus("special_bonus_ember_sleight_extra_targets").GetSpecialValueFor("bonus_targets");
                 for (let i = 0; i < bonus_targets; i++) {
                     if (sleight_targets[i]) {
-                        sleight_targets[GameFunc.GetCount(sleight_targets) + 1] = sleight_targets[i];
+                        sleight_targets.push(sleight_targets[i]);
                     }
                 }
             }
             if (GameFunc.GetCount(sleight_targets) >= 1) {
                 let previous_position = caster.GetAbsOrigin();
-                let current_count = 1;
+                let current_count = 0;
                 let current_target = EntIndexToHScript(sleight_targets[current_count]) as IBaseNpc_Plus;
                 caster.AddNewModifier(caster, this, "modifier_imba_sleight_of_fist_caster", {});
                 this.AddTimer(FrameTime(), () => {
@@ -666,13 +667,13 @@ export class imba_ember_spirit_sleight_of_fist extends BaseAbility_Plus {
                         }
                     }
                     current_count = current_count + 1;
-                    if (GameFunc.GetCount(sleight_targets) >= current_count && caster.HasModifier("modifier_imba_sleight_of_fist_caster")) {
+                    if (GameFunc.GetCount(sleight_targets) > current_count && caster.HasModifier("modifier_imba_sleight_of_fist_caster")) {
                         previous_position = current_target.GetAbsOrigin();
                         current_target = EntIndexToHScript(sleight_targets[current_count]) as IBaseNpc_Plus;
                         if (!(current_target.IsInvisible() && !caster.CanEntityBeSeenByMyTeam(current_target)) && !current_target.IsAttackImmune()) {
                             return attack_interval;
                         } else {
-                            return 0;
+                            return;
                         }
                     } else {
                         this.AddTimer(attack_interval - FrameTime(), () => {
@@ -889,7 +890,7 @@ export class imba_ember_spirit_activate_fire_remnant extends BaseAbility_Plus {
                         caster.RemoveModifierByName("modifier_imba_fire_remnant_timer");
                     }
                 }
-                ProjectileManager.ProjectileDodge(caster);
+                ProjectileHelper.ProjectileDodgePlus(caster);
                 caster.RemoveModifierByName("modifier_imba_sleight_of_fist_caster");
                 FindClearSpaceForUnit(caster, closest_remnant_position, true);
                 caster.EmitSound("Hero_EmberSpirit.FireRemnant.Stop");

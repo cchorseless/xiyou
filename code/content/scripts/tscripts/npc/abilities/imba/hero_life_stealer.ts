@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -651,7 +652,7 @@ export class imba_life_stealer_infest extends BaseAbility_Plus {
         ParticleManager.SetParticleControlEnt(infest_particle, 1, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin(), true);
         ParticleManager.ReleaseParticleIndex(infest_particle);
         this.GetCasterPlus().Purge(true, true, false, false, false);
-        ProjectileManager.ProjectileDodge(this.GetCasterPlus());
+        ProjectileHelper.ProjectileDodgePlus(this.GetCasterPlus());
         let infest_modifier = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_life_stealer_infest", {
             target_ent: target.entindex()
         }) as modifier_imba_life_stealer_infest;
@@ -1254,7 +1255,7 @@ export class imba_life_stealer_assimilate extends BaseAbility_Plus {
                 ParticleManager.SetParticleControlEnt(infest_particle, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);
                 ParticleManager.ReleaseParticleIndex(infest_particle);
                 target.Purge(false, true, false, true, true);
-                ProjectileManager.ProjectileDodge(target);
+                ProjectileHelper.ProjectileDodgePlus(target);
                 let assimilate_effect_modifier = this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_life_stealer_assimilate_effect", {}) as modifier_imba_life_stealer_assimilate_effect;
                 let assimilate_modifier = target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_life_stealer_assimilate", {}) as modifier_imba_life_stealer_assimilate;
                 if (assimilate_effect_modifier) {

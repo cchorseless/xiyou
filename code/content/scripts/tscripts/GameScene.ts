@@ -8,7 +8,6 @@ import { GameRulesExt } from "./GameRulesExt";
 import { EventHelper } from "./helper/EventHelper";
 import { LogHelper } from "./helper/LogHelper";
 import { NetTablesHelper } from "./helper/NetTablesHelper";
-import { ProjectileHelper } from "./helper/ProjectileHelper";
 import { Enum_MODIFIER_EVENT, EventDataType, IBuffEventData, modifier_event } from "./npc/propertystat/modifier_event";
 import { modifier_property } from "./npc/propertystat/modifier_property";
 import { BattleSystemComponent } from "./rules/System/BattleSystemComponent";
@@ -69,7 +68,6 @@ export class GameScene {
     static init() {
         this.addEvent();
         GPlayerEntityRoot.Init()
-        ProjectileHelper.Init();
         this.Scene.AddComponent(BattleSystemComponent);
         this.Scene.AddComponent(GameServiceSystemComponent);
         this.Scene.AddComponent(MapSystemComponent);

@@ -800,7 +800,8 @@ export class modifier_imba_enigma_black_hole_thinker extends BaseModifier_Plus {
         if (this.GetCasterPlus().HasShard()) {
             actual_vision = this.pull_radius;
         }
-        this.particle = ResHelper.CreateParticleEx("particles/hero/enigma/enigma_blackhole_scaleable.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined, this.GetCasterPlus());
+
+        this.particle = ResHelper.CreateParticleEx("particles/econ/items/enigma/enigma_world_chasm/enigma_blackhole_ti5.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, undefined, this.GetCasterPlus());
         ParticleManager.SetParticleControl(this.particle, 0, Vector(this.GetParentPlus().GetAbsOrigin().x, this.GetParentPlus().GetAbsOrigin().y, this.GetParentPlus().GetAbsOrigin().z + 64));
         ParticleManager.SetParticleControl(this.particle, 10, Vector(this.radius, actual_vision, 0));
         for (let i = DOTATeam_t.DOTA_TEAM_FIRST; i <= DOTATeam_t.DOTA_TEAM_CUSTOM_MAX; i++) {

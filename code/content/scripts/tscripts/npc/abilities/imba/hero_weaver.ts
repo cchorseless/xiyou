@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -500,7 +501,7 @@ export class modifier_imba_weaver_geminate_attack_delay extends BaseModifier_Plu
             FindClearSpaceForUnit(this.GetParentPlus(), new_position, false);
             this.GetParentPlus().SetForwardVector((this.GetCasterPlus().GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Normalized());
             GridNav.DestroyTreesAroundPoint(this.GetParentPlus().GetAbsOrigin(), this.GetParentPlus().GetHullRadius(), true);
-            ProjectileManager.ProjectileDodge(this.GetParentPlus());
+            ProjectileHelper.ProjectileDodgePlus(this.GetParentPlus());
         }
         if (params && params.delay) {
             this.StartIntervalThink(params.delay);
@@ -560,7 +561,7 @@ export class imba_weaver_time_lapse extends BaseAbility_Plus {
                 ParticleManager.SetParticleControl(time_lapse_particle, 0, this.GetCasterPlus().GetAbsOrigin());
                 ParticleManager.SetParticleControl(time_lapse_particle, 2, this.intrinsic_modifier.instances_position[0]);
                 ParticleManager.ReleaseParticleIndex(time_lapse_particle);
-                ProjectileManager.ProjectileDodge(this.GetCasterPlus());
+                ProjectileHelper.ProjectileDodgePlus(this.GetCasterPlus());
                 this.GetCasterPlus().Purge(false, true, false, true, true);
                 this.GetCasterPlus().Stop();
                 this.GetCasterPlus().CreateIllusion(this.GetCasterPlus(), {
@@ -584,7 +585,7 @@ export class imba_weaver_time_lapse extends BaseAbility_Plus {
                 ParticleManager.SetParticleControl(time_lapse_particle, 0, this.GetCursorTarget().GetAbsOrigin());
                 ParticleManager.SetParticleControl(time_lapse_particle, 2, target_modifier.instances_position[0]);
                 ParticleManager.ReleaseParticleIndex(time_lapse_particle);
-                ProjectileManager.ProjectileDodge(this.GetCursorTarget());
+                ProjectileHelper.ProjectileDodgePlus(this.GetCursorTarget());
                 let target = this.GetCursorTarget() as IBaseNpc_Plus;
                 this.GetCursorTarget().Purge(false, true, false, true, true);
                 this.GetCasterPlus().CreateIllusion(target, {

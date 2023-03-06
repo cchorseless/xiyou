@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -8,6 +9,7 @@ import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_event";
 
 function SetArrowAttackProjectile(caster: IBaseNpc_Plus, searing_arrows: boolean) {
+
     let skadi_modifier = "modifier_item_imba_skadi";
     let deso_modifier = "modifier_item_imba_desolator";
     let morbid_modifier = "modifier_imba_morbid_mask";
@@ -196,7 +198,7 @@ export class modifier_imba_strafe_aspd extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        ProjectileManager.ProjectileDodge(this.GetParentPlus());
+        ProjectileHelper.ProjectileDodgePlus(this.GetParentPlus());
     }
     IsHidden(): boolean {
         return false;
@@ -526,13 +528,12 @@ export class imba_clinkz_searing_arrows extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let ability = this;
         let target = this.GetCursorTarget();
-        let particle_projectile = "particles/hero/clinkz/searing_flames_active/clinkz_searing_arrow.vpcf";
+        let particle_projectile = "particles/units/heroes/hero_clinkz/clinkz_searing_arrow.vpcf";
         let sound_cast = "Hero_Clinkz.SearingArrows";
         let projectile_speed = ability.GetSpecialValueFor("projectile_speed");
         let vision_radius = ability.GetSpecialValueFor("vision_radius");
         EmitSoundOn(sound_cast, caster);
-        let searing_arrow_active;
-        searing_arrow_active = {
+        let searing_arrow_active: CreateTrackingProjectileOptions = {
             Target: target,
             Source: caster,
             Ability: ability,
@@ -572,18 +573,17 @@ export class imba_clinkz_searing_arrows extends BaseAbility_Plus {
     OnProjectileHit(target: CDOTA_BaseNPC | undefined, location: Vector): boolean | void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            let ability = this;
             let sound_hit = "Hero_Clinkz.SearingArrows.Impact";
             let modifier_active = "modifier_imba_searing_arrows_active";
-            let active_duration = ability.GetSpecialValueFor("active_duration");
+            let active_duration = this.GetSpecialValueFor("active_duration");
             if (target.GetTeam() != caster.GetTeam()) {
-                if (target.TriggerSpellAbsorb(ability)) {
-                    return undefined;
+                if (target.TriggerSpellAbsorb(this)) {
+                    return;
                 }
             }
             EmitSoundOn(sound_hit, target);
             caster.PerformAttack(target, false, true, true, false, false, false, true);
-            target.AddNewModifier(caster, ability, modifier_active, {
+            target.AddNewModifier(caster, this, modifier_active, {
                 duration: active_duration * (1 - target.GetStatusResistance())
             });
         }
@@ -691,7 +691,7 @@ export class modifier_imba_searing_arrows_active extends BaseModifier_Plus {
         return true;
     }
     BeCreated(p_0: any,): void {
-        this.particle_flame = "particles/hero/clinkz/searing_flames_active/burn_effect.vpcf";
+        this.particle_flame = "particles/units/heroes/hero_clinkz/clinkz_searing_arrow_launch.vpcf";
         this.vision_radius = this.GetSpecialValueFor("vision_radius");
         this.active_tick_interval = this.GetSpecialValueFor("active_tick_interval");
         this.armor_burn_per_stack = this.GetSpecialValueFor("armor_burn_per_stack");

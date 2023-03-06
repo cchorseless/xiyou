@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -1190,7 +1191,7 @@ export class imba_scaldris_ice_floes extends BaseAbility_Plus {
                         dps: this.GetSpecialValueFor("dps")
                     });
                 }
-                ProjectileManager.ProjectileDodge(caster);
+                ProjectileHelper.ProjectileDodgePlus(caster);
                 FindClearSpaceForUnit(caster, location, true);
             }
         }

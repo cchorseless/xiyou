@@ -1,6 +1,7 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { NetTablesHelper } from "../../../helper/NetTablesHelper";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifierMotionVertical_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -312,7 +313,7 @@ export class imba_phantom_assassin_phantom_strike extends BaseAbility_Plus {
                 FindClearSpaceForUnit(this.caster, blink_point, true);
             });
             this.caster.SetForwardVector(direction);
-            ProjectileManager.ProjectileDodge(this.caster);
+            ProjectileHelper.ProjectileDodgePlus(this.caster);
             let blink_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_phantom_assassin/phantom_assassin_phantom_strike_end.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.caster, this.caster);
             ParticleManager.ReleaseParticleIndex(blink_pfx);
             this.target.EmitSound("Hero_PhantomAssassin.Strike.End");
@@ -415,7 +416,7 @@ export class imba_phantom_assassin_blur extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         if (IsServer()) {
-            ProjectileManager.ProjectileDodge(this.GetCasterPlus());
+            ProjectileHelper.ProjectileDodgePlus(this.GetCasterPlus());
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_blur_smoke", {
                 duration: this.GetSpecialValueFor("duration")
             });

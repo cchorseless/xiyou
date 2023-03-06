@@ -689,6 +689,9 @@ function createImbaAbility() {
     }
     fs.writeFileSync(imbaabilityOutPath, xlsx.build(sheets));
 }
+
+
+
 const imbanpcpath = imbabasepath + "npc_heroes_custom.txt";
 const imbanpcexcelPath = "excels/abilities/npcability.xlsx";
 function createImbaNpc() {
@@ -1053,8 +1056,113 @@ function createImbaItem() {
     }
     fs.writeFileSync(imba_itemexcel_Path, xlsx.build(sheets));
 }
+function createImbaAbility2() {
+    const exkey = ["LinkedSpecialBonus", "RequiresScepter", "var_type", "CalculateSpellDamageTooltip"]
+    const imbastr = fs.readFileSync("game/scripts/npc/abilities/imba_abilities.kv", "utf8");
+    let imbaobj = keyvalues.decode(imbastr).imbaAbility;
+    let oldSpecial = {};
+    let newSpecial = {};
+    for (let k in imbaobj) {
+        oldSpecial[k] = {};
+        if (imbaobj[k].AbilitySpecial) {
+            for (let kk in imbaobj[k].AbilitySpecial) {
+                for (let kkk in imbaobj[k].AbilitySpecial[kk]) {
+                    oldSpecial[k][kkk] = imbaobj[k].AbilitySpecial[kk][kkk];
+                }
+            }
+        }
+    }
 
+    const abilitystr = fs.readFileSync(imbaabilitypath, "utf8");
+    const lines = abilitystr.split("\n");
+    let abilitys = [];
+    for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith("#base")) {
+            let _kvpath = imbabasepath + lines[i].substring(6);
+            if (fs.existsSync(_kvpath)) {
+                abilitys.push(fs.readFileSync(_kvpath, "utf8"));
+            }
+        }
+        if (lines[i].includes("DOTAAbilities")) {
+            let newlines = lines.slice(i, lines.length - 1);
+            abilitys.push(newlines.join("\n"));
+            break;
+        }
+    }
 
+    const _str_start = "_";
+    const excludehero = ["npc_dota_hero_base"];
+    if (!fs.existsSync(imbakvtmpPath)) {
+        return;
+    }
+    let sheets = xlsx.parse(imbakvtmpPath);
+    let sheet = sheets[0];
+    let rows = sheet.data;
+    let nrows = rows.length;
+
+    //空两行
+    rows.push([]);
+    for (let str of abilitys) {
+        let obj = keyvalues.decode(str);
+        let info_ability = obj.DOTAAbilities;
+        if (!info_ability) { continue; }
+        for (let abilityname in info_ability) {
+            if (abilityname.includes(_str_start) && excludehero.indexOf(abilityname) == -1) {
+                if (oldSpecial[abilityname] == null) { continue; }
+                let abilityinfo = info_ability[abilityname];
+                if (abilityinfo.AbilitySpecial) {
+                    for (let kk in abilityinfo.AbilitySpecial) {
+                        for (let kkk in abilityinfo.AbilitySpecial[kk]) {
+                            if (oldSpecial[abilityname][kkk] == null && !exkey.includes(kkk)) {
+                                newSpecial[abilityname] = newSpecial[abilityname] || {};
+                                newSpecial[abilityname][kkk] = abilityinfo.AbilitySpecial[kk][kkk];
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+    for (let k in newSpecial) {
+        let newRow = [k];
+        for (let kk in newSpecial[k]) {
+            newRow.push(kk);
+            newRow.push(newSpecial[k][kk]);
+        }
+        rows.push(newRow);
+        console.log(k);
+    }
+    fs.writeFileSync(imbakvtmpPath, xlsx.build(sheets));
+}
+
+function temp() {
+    let sheets = xlsx.parse(imbakvtmpPath);
+    let sheet = sheets[0];
+    let rows = sheet.data;
+    let nrows = rows.length;
+    let sheet2s = xlsx.parse(imbaabilityOutPath);
+    let sheet2 = sheet2s[0];
+    let rows2 = sheet2.data;
+    let nrows2 = rows2.length;
+
+    let kv = {};
+    for (let i = 1; i < nrows2; i++) {
+        kv[rows2[i][0]] = i;
+    }
+
+    for (let i = 1; i < nrows; i++) {
+        if (rows[i][0] == null) { continue; }
+        let abilityname = rows[i][0];
+        let index = kv[abilityname];
+        for (let j = 1; j < rows[i].length; j++) {
+            let k = rows[i][j];
+            rows2[index].push(k);
+        }
+    }
+    fs.writeFileSync(imbaabilityOutPath, xlsx.build(sheet2s));
+
+}
 
 (async () => {
     // var args = process.argv.splice(2);
@@ -1065,7 +1173,7 @@ function createImbaItem() {
     // createSound();
     // createImbaNpc();
     // addkvvaluetoexcel();
-    // createImbaItem()
+    temp()
 })().catch((error) => {
     console.error(error);
     process.exit(1);

@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -231,7 +232,7 @@ export class imba_antimage_blink extends BaseAbility_Plus {
             if (distance.Length2D() > this.blink_range) {
                 target_point = (caster_position + GFuncVector.AsVector(target_point - caster_position).Normalized() * this.blink_range) as Vector;
             }
-            ProjectileManager.ProjectileDodge(caster);
+            ProjectileHelper.ProjectileDodgePlus(caster);
             let blink_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_antimage/antimage_blink_start.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
             ParticleManager.ReleaseParticleIndex(blink_pfx);
             caster.EmitSound("Hero_Antimage.Blink_out");

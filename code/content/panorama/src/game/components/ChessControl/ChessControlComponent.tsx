@@ -52,7 +52,6 @@ export class ChessControlComponent extends ET.Component {
                     //         // this.OnPlayerSelectUnit();
                     //     });
                     //     return CONTINUE_EVENT;
-                    GLogHelper.print(222222, this.IS_CURSOR_HERO_ICON_SHOWING)
                     if (this.IS_CURSOR_HERO_ICON_SHOWING) {
                         this.Jump_cursor_hero();
                         return CONSUME_EVENT;

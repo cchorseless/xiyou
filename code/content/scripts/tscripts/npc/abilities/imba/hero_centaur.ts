@@ -338,7 +338,8 @@ export class imba_centaur_return extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         if (IsServer()) {
-            this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_return_bonus_damage", {
+            this.GetCasterPlus().AddNewModifier(
+                this.GetCasterPlus(), this, "modifier_imba_return_bonus_damage", {
                 duration: this.GetSpecialValueFor("duration")
             }).SetStackCount(this.GetCasterPlus().findBuff<modifier_imba_return_passive>("modifier_imba_return_passive").GetStackCount());
             this.GetCasterPlus().findBuff<modifier_imba_return_passive>("modifier_imba_return_passive").SetStackCount(0);
@@ -525,12 +526,12 @@ export class modifier_imba_return_bonus_damage extends BaseModifier_Plus {
     }
     GetEffectAttachType(): ParticleAttachment_t {
         if (this.attach_attack1 == null) {
-            this.attach_attack1 = this.GetParentPlus().ScriptLookupAttachment("attach_attack1")
+            return this.attach_attack1
         }
-        return this.attach_attack1;
     }
     BeCreated(p_0: any,): void {
         this.bonus_damage = this.GetSpecialValueFor("bonus_damage");
+        this.attach_attack1 = this.GetParentPlus().ScriptLookupAttachment("attach_attack1")
     }
     /** DeclareFunctions():modifierfunction[] {
         return Object.values({

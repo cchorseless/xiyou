@@ -324,6 +324,7 @@ export class BaseModifier {
                 if (funcName && (this as any)[funcName] == null) {
                     // 注册回调函数
                     (this as any)[funcName] = (event?: any) => {
+                        if (this.__safedestroyed__) { return }
                         return PropertyCalculate.RunModifierFunc(buff, params, event);
                     };
                 }
@@ -334,7 +335,7 @@ export class BaseModifier {
     /**唯一识别ID */
     public UUID: string;
     public OnCreated(params: object) {
-        this.__destroyed = false;
+        this.__safedestroyed__ = false;
         if (this.UUID == null) {
             this.UUID = GGenerateUUID() + this.GetName();
         }
@@ -350,16 +351,15 @@ export class BaseModifier {
         return false;
     }
     public OnRefresh(params: object) {
-        this.__destroyed = false;
+        this.__safedestroyed__ = false;
         (params as IModifierTable).IsOnCreated = false;
         (params as IModifierTable).IsOnRefresh = true;
         this.Init(params);
         this.BeRefresh && this.BeRefresh(params);
     }
-    __destroyed: boolean = true;
     public OnDestroy() {
-        if (this.__destroyed) { return; }
-        this.__destroyed = true;
+        if (this.__safedestroyed__) { return; }
+        this.__safedestroyed__ = true;
         this.BeDestroy && this.BeDestroy();
         PropertyCalculate.RegModifiersInfo(this, false);
         GGameCache.RegBuff(this, false);
@@ -368,7 +368,7 @@ export class BaseModifier {
         this.__AllRegisterEvent = null;
         // 计时器处理
         GTimerHelper.ClearAll(this);
-        this.StartIntervalThink(-1);
+        // this.StartIntervalThink(-1);
     }
     /**重载 
      * @Both

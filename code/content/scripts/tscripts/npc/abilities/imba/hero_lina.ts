@@ -824,7 +824,7 @@ export class modifier_imba_fiery_soul_blaze_burn extends BaseModifier_Plus {
         this.parent = this.GetParentPlus();
         this.ability = this.GetAbilityPlus();
         this.tick = this.caster.GetTalentValue("special_bonus_imba_lina_5", "tick");
-        this.particle_flame = "particles/hero/clinkz/searing_flames_active/burn_effect.vpcf";
+        this.particle_flame = "particles/units/heroes/hero_clinkz/clinkz_searing_arrow_launch.vpcf";
         if (IsServer()) {
             this.particle_flame_fx = ResHelper.CreateParticleEx(this.particle_flame, ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.parent, this.caster);
             ParticleManager.SetParticleControlEnt(this.particle_flame_fx, 0, this.parent, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.parent.GetAbsOrigin(), true);

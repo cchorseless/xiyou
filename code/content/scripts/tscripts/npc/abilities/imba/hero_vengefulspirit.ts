@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -1195,9 +1196,9 @@ export class imba_vengefulspirit_nether_swap extends BaseAbility_Plus {
             }
             caster.EmitSound("Hero_VengefulSpirit.NetherSwap");
             target.EmitSound("Hero_VengefulSpirit.NetherSwap");
-            ProjectileManager.ProjectileDodge(caster);
+            ProjectileHelper.ProjectileDodgePlus(caster);
             if (target.GetTeamNumber() == caster.GetTeamNumber()) {
-                ProjectileManager.ProjectileDodge(target);
+                ProjectileHelper.ProjectileDodgePlus(target);
             }
             let caster_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_vengeful/vengeful_nether_swap.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
             ParticleManager.SetParticleControlEnt(caster_pfx, 0, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", caster.GetAbsOrigin(), true);
@@ -1343,7 +1344,7 @@ export class imba_vengefulspirit_swap_back extends BaseAbility_Plus {
             let ability_handle = caster.findAbliityPlus<imba_vengefulspirit_nether_swap>("imba_vengefulspirit_nether_swap");
             let tree_radius = ability_handle.GetSpecialValueFor("tree_radius");
             caster.EmitSound("Hero_VengefulSpirit.NetherSwap");
-            ProjectileManager.ProjectileDodge(caster);
+            ProjectileHelper.ProjectileDodgePlus(caster);
             let swap_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_vengeful/vengeful_nether_swap.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
             ParticleManager.SetParticleControl(swap_pfx, 0, caster.GetAbsOrigin());
             ParticleManager.SetParticleControlEnt(swap_pfx, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", caster.GetAbsOrigin(), true);

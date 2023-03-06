@@ -80,6 +80,7 @@ export class BattleUnitEntityRoot extends BaseEntityRoot {
         npc.StartGesture(GameActivity_t.ACT_DOTA_DIE);
     }
 
+
     IsFriendly() {
         let domain = this.GetDomain<IBaseNpc_Plus>();
         return domain.GetTeamNumber() == DOTATeam_t.DOTA_TEAM_GOODGUYS;

@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
@@ -422,7 +423,7 @@ export class imba_queenofpain_blink extends BaseAbility_Plus {
                     scream.OnSpellStart(scream_damage_pct);
                 }
             }
-            ProjectileManager.ProjectileDodge(caster);
+            ProjectileHelper.ProjectileDodgePlus(caster);
             caster.EmitSound("Hero_QueenOfPain.Blink_in");
             let blink_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_queenofpain/queen_blink_start.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, caster);
             ParticleManager.SetParticleControl(blink_pfx, 0, caster_pos);

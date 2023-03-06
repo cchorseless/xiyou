@@ -1,4 +1,5 @@
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -678,7 +679,7 @@ export class imba_windranger_advancement extends BaseAbility_Plus {
     }
 
     OnSpellStart(): void {
-        ProjectileManager.ProjectileDodge(this.GetCasterPlus());
+        ProjectileHelper.ProjectileDodgePlus(this.GetCasterPlus());
         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_generic_motion_controller", {
             distance: this.GetSpecialValueFor("advancement_distance"),
             direction_x: this.GetCasterPlus().GetForwardVector().x,

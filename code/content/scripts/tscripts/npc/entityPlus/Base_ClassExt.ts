@@ -355,7 +355,7 @@ CBaseAbility.SetDefaultSpecialValue = function (s: string, default_V: number | n
 
 CBaseAbility.GetSpecialValueFor = function (s: string, default_V = 0): number {
     let r = this.GetSpecialValueFor_Engine(s);
-    if (r && r != 0) {
+    if (r && r != null) {
         return r
     }
     else if (this.__DefaultSpecialValue__ && this.__DefaultSpecialValue__[s] && this.__DefaultSpecialValue__[s] != null) {
@@ -683,7 +683,7 @@ if (IsClient()) {
 
 declare global {
     interface CDOTA_Buff {
-        __destroyed: boolean;
+        __safedestroyed__: boolean;
         /**
          * @both
          * @param fInterval 
@@ -801,22 +801,26 @@ declare global {
 }
 
 CDOTA_Buff.IsNull = function () {
-    return this.__destroyed;
+    return this.__safedestroyed__;
 }
 CDOTA_Buff.AddTimer = function (fInterval: number, fCallback: () => number | void, _isIgnorePauseTime = false) {
     GTimerHelper.AddTimer(fInterval, GHandler.create(this, () => { return fCallback() }), _isIgnorePauseTime);
 }
 CDOTA_Buff.GetAbilityPlus = function () {
+    if (!IsValid(this)) { return };
     return this.GetAbility() as IBaseAbility_Plus;
 }
 CDOTA_Buff.GetItemPlus = function () {
+    if (!IsValid(this)) { return };
     return this.GetAbility() as IBaseItem_Plus;
 }
 CDOTA_Buff.GetCasterPlus = function () {
+    if (!IsValid(this)) { return };
     return this.GetCaster() as IBaseNpc_Plus;
 }
 
 CDOTA_Buff.GetParentPlus = function () {
+    if (!IsValid(this)) { return };
     return this.GetParent() as IBaseNpc_Plus;
 }
 
@@ -1248,7 +1252,7 @@ BaseNPC.IsFriendly = function (hTarget: CDOTA_BaseNPC) {
 };
 
 BaseNPC.HasTalent = function (sTalentName: string): IBaseAbility_Plus {
-    if (this == null) return;
+    if (!IsValid(this)) return;
     let hTalent = this.FindAbilityByName(sTalentName);
     // switch (typeof sTalentName) {
     //     case "string":
@@ -1261,6 +1265,7 @@ BaseNPC.HasTalent = function (sTalentName: string): IBaseAbility_Plus {
 }
 
 BaseNPC.GetTalentValue = function (sTalentName: string, sSpecialName: string = "value", default_V: number = 0): number {
+    if (!IsValid(this)) return default_V;
     let hTalent = this.HasTalent(sTalentName);
     if (hTalent) {
         return hTalent.GetSpecialValueFor(sSpecialName);
@@ -1269,26 +1274,32 @@ BaseNPC.GetTalentValue = function (sTalentName: string, sSpecialName: string = "
 }
 
 BaseNPC.IsRealUnit = function () {
+    if (!IsValid(this)) return false;
     return !(this.IsIllusion() || this.IsSummoned());
 }
 
 BaseNPC.GetIntellect = function () {
+    if (!IsValid(this)) return 0;
     return PropertyCalculate.GetIntellect(this)
 }
 
 BaseNPC.GetStrength = function () {
+    if (!IsValid(this)) return 0;
     return PropertyCalculate.GetStrength(this)
 }
 
 BaseNPC.GetAgility = function () {
+    if (!IsValid(this)) return 0;
     return PropertyCalculate.GetAgility(this)
 }
 
 BaseNPC.GetAllStats = function () {
+    if (!IsValid(this)) return 0;
     return this.GetIntellect() + this.GetStrength() + this.GetAgility();
 }
 
 BaseNPC.GetPrimaryStatValue = function () {
+    if (!IsValid(this)) return 0;
     const Primary = this.GetPrimaryAttribute();
     if (Primary == Attributes.DOTA_ATTRIBUTE_AGILITY) {
         return this.GetAgility()

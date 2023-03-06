@@ -59,6 +59,7 @@ export module PropertyCalculate {
     }
 
     export function RunModifierFunc<T extends IBaseModifier_Plus>(buff: T, params: modifierfunction, event: any) {
+        if (buff.__safedestroyed__) { return }
         let _r = 0;
         let _r_ = "";
         let _Property = buff.__AllRegisterProperty;
@@ -86,7 +87,7 @@ export module PropertyCalculate {
         }
         if (_Function && _Function[params_key]) {
             _Function[params_key].forEach((func) => {
-                if ((buff as any)[func] == null || type((buff as any)[func]) != 'function') { return }
+                if (buff.__safedestroyed__ || (buff as any)[func] == null || type((buff as any)[func]) != 'function') { return }
                 let r = event == null ? (buff as any)[func]() : (buff as any)[func](event);
                 if (r != null) {
                     switch (typeof r) {
@@ -129,7 +130,7 @@ export module PropertyCalculate {
         for (let ModifierName in info) {
             let allM: Array<IModifier_Plus> = info[ModifierName];
             for (let m of allM) {
-                if (m.__destroyed) { continue; }
+                if (m.__safedestroyed__) { continue; }
                 let _Property = m.__AllRegisterProperty
                 let _Function = m.__AllRegisterFunction
                 while (k.length > 0) {

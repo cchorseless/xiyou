@@ -1,5 +1,6 @@
 
 import { GameFunc } from "../../../GameFunc";
+import { ProjectileHelper } from "../../../helper/ProjectileHelper";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifierMotionHorizontal_Plus, BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -263,7 +264,7 @@ export class modifier_item_imba_gungnir_force_ally extends BaseModifierMotionHor
                 this.attacked_target[enemy.entindex() + ""] = enemy.entindex();
             }
         }
-        ProjectileManager.ProjectileDodge(this.GetParentPlus());
+        ProjectileHelper.ProjectileDodgePlus(this.GetParentPlus());
         return true;
     }
     HorizontalMotion(unit: IBaseNpc_Plus, time: number) {
