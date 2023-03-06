@@ -252,7 +252,7 @@ export class modifier_imba_split_earth_empowered_split extends BaseModifier_Plus
         }
         let stacks = this.GetStackCount();
         if (stacks > prev_stacks) {
-            table.insert(this.stack_table, GameRules.GetGameTime());
+            this.stack_table.push(GameRules.GetGameTime());
             this.ForceRefresh();
         }
     }
@@ -265,7 +265,7 @@ export class modifier_imba_split_earth_empowered_split extends BaseModifier_Plus
                     this.Destroy();
                     return;
                 } else {
-                    table.remove(this.stack_table, 1);
+                    this.stack_table.shift();
                     this.DecrementStackCount();
                 }
             } else {
@@ -616,7 +616,7 @@ export class imba_leshrac_lightning_storm extends BaseAbility_Plus {
             if (remaining_jumps > 0) {
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
                 for (const [_, enemy] of GameFunc.iPair(enemies)) {
-                    if (!enemies_table[enemy.entindex()] && enemy != target) {
+                    if (!enemies_table.includes(enemy.entindex()) && enemy != target) {
                         target = enemy;
                         return jump_delay;
                     }
@@ -841,7 +841,7 @@ export class modifier_imba_leshrac_lightning_storm_lightning_rider extends BaseM
         }
         let stacks = this.GetStackCount();
         if (stacks > prev_stacks) {
-            table.insert(this.stack_table, GameRules.GetGameTime());
+            this.stack_table.push(GameRules.GetGameTime());
             this.ForceRefresh();
         }
     }

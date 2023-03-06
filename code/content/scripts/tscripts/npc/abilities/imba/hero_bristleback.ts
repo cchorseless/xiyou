@@ -282,7 +282,7 @@ export class modifier_imba_bristleback_quillspray_thinker extends BaseModifier_P
     public quill_stack_duration: number;
     public max_damage: number;
     public particle: any;
-    public hit_enemies: any;
+    public hit_enemies: IBaseNpc_Plus[];
     BeCreated(p_0: any,): void {
         this.ability = this.GetAbilityPlus();
         this.caster = this.GetCasterPlus();
@@ -299,7 +299,7 @@ export class modifier_imba_bristleback_quillspray_thinker extends BaseModifier_P
         ParticleManager.SetParticleControl(this.particle, 60, Vector(RandomInt(0, 255), RandomInt(0, 255), RandomInt(0, 255)));
         ParticleManager.SetParticleControl(this.particle, 61, Vector(1, 0, 0));
         this.AddParticle(this.particle, false, false, -1, false, false);
-        this.hit_enemies = {}
+        this.hit_enemies = []
         this.StartIntervalThink(FrameTime());
     }
     OnIntervalThink(): void {
@@ -338,7 +338,7 @@ export class modifier_imba_bristleback_quillspray_thinker extends BaseModifier_P
                 enemy.AddNewModifier(this.caster, this.ability, "modifier_imba_bristleback_quill_spray", {
                     duration: this.quill_stack_duration * (1 - enemy.GetStatusResistance())
                 });
-                table.insert(this.hit_enemies, enemy);
+                this.hit_enemies.push(enemy);
                 if (!enemy.IsAlive() && enemy.IsRealUnit() && (enemy.IsReincarnating && !enemy.IsReincarnating())) {
                     this.caster.EmitSound("bristleback_bristle_quill_spray_0" + math.random(1, 6));
                 }
@@ -605,7 +605,7 @@ export class modifier_imba_bristleback_warpath extends BaseModifier_Plus {
     public stack_duration: number;
     public max_stacks: number;
     public counter: number;
-    public particle_table: any;
+    public particle_table: ParticleID[];
     IsHidden(): boolean {
         if (this.GetStackCount() >= 1) {
             return false;
@@ -630,7 +630,7 @@ export class modifier_imba_bristleback_warpath extends BaseModifier_Plus {
         this.stack_duration = this.ability.GetSpecialValueFor("stack_duration");
         this.max_stacks = this.ability.GetSpecialValueFor("max_stacks");
         this.counter = this.counter || 0;
-        this.particle_table = this.particle_table || {}
+        this.particle_table = this.particle_table || []
         if (!IsServer()) {
             return;
         }
@@ -680,7 +680,7 @@ export class modifier_imba_bristleback_warpath extends BaseModifier_Plus {
                 let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_bristleback/bristleback_warpath.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.GetParentPlus());
                 ParticleManager.SetParticleControlEnt(particle, 3, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.GetCasterPlus().GetAbsOrigin(), true);
                 ParticleManager.SetParticleControlEnt(particle, 4, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", this.GetCasterPlus().GetAbsOrigin(), true);
-                table.insert(this.particle_table, particle);
+                this.particle_table.push(particle)
             }
             this.SetDuration(this.stack_duration, true);
             this.AddTimer(this.stack_duration, () => {
@@ -690,7 +690,7 @@ export class modifier_imba_bristleback_warpath extends BaseModifier_Plus {
                     if (GameFunc.GetCount(this.particle_table) > 0) {
                         ParticleManager.DestroyParticle(this.particle_table[0], false);
                         ParticleManager.ReleaseParticleIndex(this.particle_table[0]);
-                        table.remove(this.particle_table, 1);
+                        this.particle_table.shift()
                     }
                 }
             });

@@ -1234,9 +1234,9 @@ export class imba_lich_chain_frost extends BaseAbility_Plus {
                     return undefined;
                 }
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, bounce_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
-                for (let i = GameFunc.GetCount(enemies); i >= 1; i += -1) {
-                    if (enemies[i] != undefined && (target == enemies[i] || enemies[i].GetName() == "npc_dota_unit_undying_zombie")) {
-                        table.remove(enemies, i);
+                for (let i = GameFunc.GetCount(enemies) - 1; i >= 0; i--) {
+                    if (enemies[i] != undefined && (target == enemies[i] || enemies[i].GetName().includes("undying_zombie"))) {
+                        enemies.splice(i, 1);
                     }
                 }
                 if (GameFunc.GetCount(enemies) <= 0) {

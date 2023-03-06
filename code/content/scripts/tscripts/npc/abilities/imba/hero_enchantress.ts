@@ -549,7 +549,7 @@ export class modifier_imba_enchantress_natures_attendants extends BaseModifier_P
         let allies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, ally] of GameFunc.iPair(allies)) {
             if (ally.GetHealthPercent() < 100) {
-                table.insert(hurt_allies, ally);
+                hurt_allies.push(ally);
             }
         }
         if (GameFunc.GetCount(hurt_allies) == 0) {
@@ -776,7 +776,7 @@ export class modifier_imba_enchantress_impetus extends BaseModifier_Plus {
     public impetus_orb: any;
     public base_attack: any;
     public impetus_attack: any;
-    public attack_queue: any;
+    public attack_queue: boolean[];
     public impetus_start: any;
     public impetus_damage: string;
     public distance_damage_pct: number;
@@ -792,7 +792,7 @@ export class modifier_imba_enchantress_impetus extends BaseModifier_Plus {
         this.impetus_orb = false;
         this.base_attack = "particles/units/heroes/hero_enchantress/enchantress_base_attack.vpcf";
         this.impetus_attack = "particles/units/heroes/hero_enchantress/enchantress_impetus.vpcf";
-        this.attack_queue = {}
+        this.attack_queue = [];
         this.impetus_start = "Hero_Enchantress.Impetus";
         this.impetus_damage = "Hero_Enchantress.ImpetusDamage";
         this.distance_damage_pct = this.ability.GetSpecialValueFor("distance_damage_pct");
@@ -852,12 +852,12 @@ export class modifier_imba_enchantress_impetus extends BaseModifier_Plus {
         }
         if (keys.attacker == this.caster) {
             if (!this.caster.IsIllusion() && this.ability.IsFullyCastable() && !this.caster.IsSilenced() && !keys.target.IsBuilding() && !keys.target.IsOther() && (this.ability.GetAutoCastState() || this.impetus_orb)) {
-                table.insert(this.attack_queue, true);
+                this.attack_queue.push(true);
                 this.ability.UseResources(true, false, false);
                 this.caster.EmitSound(this.impetus_start);
                 this.impetus_orb = false;
             } else {
-                table.insert(this.attack_queue, false);
+                this.attack_queue.push(false);
             }
         }
     }
@@ -905,7 +905,7 @@ export class modifier_imba_enchantress_impetus extends BaseModifier_Plus {
                     });
                 }
             }
-            table.remove(this.attack_queue, 1);
+            this.attack_queue.shift();
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_FAIL)
@@ -914,7 +914,7 @@ export class modifier_imba_enchantress_impetus extends BaseModifier_Plus {
             return;
         }
         if (keys.attacker == this.caster && GameFunc.GetCount(this.attack_queue) > 0) {
-            table.remove(this.attack_queue, 1);
+            this.attack_queue.shift();
         }
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_ORDER)

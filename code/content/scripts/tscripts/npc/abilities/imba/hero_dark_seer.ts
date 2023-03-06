@@ -79,7 +79,7 @@ export class imba_dark_seer_vacuum extends BaseAbility_Plus {
                     if (!wormhole_ability.enemy_tracker) {
                         wormhole_ability.enemy_tracker = []
                     }
-                    table.insert(wormhole_ability.enemy_tracker, enemy);
+                    wormhole_ability.enemy_tracker.push(enemy);
                 }
             }
         }
@@ -375,7 +375,9 @@ export class modifier_imba_dark_seer_vacuum_entry_portal extends BaseModifier_Pl
     public teleport_radius: number;
     public entry_particle: any;
     public exit_portal: any;
-    public ported_units: any;
+    public ported_units: {
+        [k: string]: boolean
+    };
     public enemy_tracker: EntityIndex[];
     public camera_tracker: any;
     BeCreated(keys: any): void {
@@ -405,7 +407,7 @@ export class modifier_imba_dark_seer_vacuum_entry_portal extends BaseModifier_Pl
         }
         let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.teleport_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
         for (const [_, unit] of GameFunc.iPair(units)) {
-            if (this.GetElapsedTime() >= 0.1 && !this.ported_units[unit.entindex()] && !unit.HasModifier("modifier_imba_dark_seer_wormhole") && (unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() || !AoiHelper.IsNearFountain(this.exit_portal.GetAbsOrigin(), 1700))) {
+            if (this.GetElapsedTime() >= 0.1 && !this.ported_units[unit.entindex() + ""] && !unit.HasModifier("modifier_imba_dark_seer_wormhole") && (unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() || !AoiHelper.IsNearFountain(this.exit_portal.GetAbsOrigin(), 1700))) {
                 if (unit.IsRealUnit()) {
                     EmitSoundOnLocationWithCaster(unit.GetAbsOrigin(), "Wormhole.Disappear", this.GetCasterPlus());
                 } else {
@@ -423,7 +425,7 @@ export class modifier_imba_dark_seer_vacuum_entry_portal extends BaseModifier_Pl
                 } else {
                     EmitSoundOnLocationWithCaster(unit.GetAbsOrigin(), "Wormhole.CreepAppear", this.GetCasterPlus());
                 }
-                this.ported_units[unit.entindex()] = true;
+                this.ported_units[unit.entindex() + ""] = true;
             }
         }
     }

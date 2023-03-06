@@ -399,7 +399,7 @@ export class imba_skywrath_mage_concussive_shot extends BaseAbility_Plus {
                 bounces_left = bounces_left - 1;
                 let enemy_target;
                 if (enemies[0] == target) {
-                    enemy_target = enemies[2];
+                    enemy_target = enemies[1];
                 } else {
                     enemy_target = enemies[0];
                 }

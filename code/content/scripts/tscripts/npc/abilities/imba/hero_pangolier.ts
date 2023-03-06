@@ -94,7 +94,7 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
     public dash_time: number;
     public direction: any;
     public frametime: number;
-    public enemies_hit: any;
+    public enemies_hit: IBaseNpc_Plus[];
     BeCreated(p_0: any,): void {
         this.attack_modifier = "modifier_imba_swashbuckle_slashes";
         this.dash_particle = "particles/units/heroes/hero_pangolier/pangolier_swashbuckler_dash.vpcf";
@@ -156,7 +156,7 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
             return false;
         }
         if (this.GetCasterPlus().HasTalent("special_bonus_imba_pangolier_1")) {
-            this.enemies_hit = this.enemies_hit || {}
+            this.enemies_hit = this.enemies_hit || [];
             let direction = this.GetCasterPlus().GetForwardVector();
             let caster_loc = this.GetCasterPlus().GetAbsOrigin();
             let target_loc = caster_loc + direction * this.talent_radius as Vector;
@@ -173,7 +173,7 @@ export class modifier_imba_swashbuckle_dash extends BaseModifierMotionHorizontal
                     EmitSoundOn(this.hit_sound, enemy);
                     if (!enemy.IsAttackImmune()) {
                         this.GetCasterPlus().PerformAttack(enemy, true, true, true, true, false, false, true);
-                        table.insert(this.enemies_hit, enemy);
+                        this.enemies_hit.push(enemy);
                     }
                 }
             }
@@ -402,7 +402,7 @@ export class modifier_imba_swashbuckle_buff extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_pangolier_shield_crash extends BaseAbility_Plus {
-    public slash_particles: any;
+    public slash_particles: ParticleID[];
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -463,13 +463,13 @@ export class imba_pangolier_shield_crash extends BaseAbility_Plus {
                 swashbuckle_damage = this.GetCasterPlus().GetAverageTrueAttackDamage(this.GetCasterPlus()) / (100 / this.GetCasterPlus().GetTalentValue("special_bonus_imba_pangolier_8"));
             }
             if (!this.slash_particles) {
-                this.slash_particles = {}
+                this.slash_particles = [];
             }
             for (const particle of (this.slash_particles)) {
                 ParticleManager.DestroyParticle(particle, false);
                 ParticleManager.ReleaseParticleIndex(particle);
             }
-            this.slash_particles = {}
+            this.slash_particles = []
             for (let pulses = 0; pulses <= 1; pulses++) {
                 this.AddTimer(0.1 * pulses, () => {
                     let hit_enemies: IBaseNpc_Plus[] = []
@@ -477,7 +477,7 @@ export class imba_pangolier_shield_crash extends BaseAbility_Plus {
                         let direction = RotatePosition(Vector(0, 0, 0), QAngle(0, 90 * slash, 0), this.GetCasterPlus().GetForwardVector());
                         let slash_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_pangolier/pangolier_swashbuckler.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
                         ParticleManager.SetParticleControl(slash_particle, 1, direction);
-                        table.insert(this.slash_particles, slash_particle);
+                        this.slash_particles.push(slash_particle);
                         EmitSoundOnLocationWithCaster(this.GetCasterPlus().GetAbsOrigin(), "Hero_Pangolier.Swashbuckle", this.GetCasterPlus());
                         let enemies = FindUnitsInLine(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetAbsOrigin() + (direction * swashbuckle_range) as Vector, undefined, swashbuckle_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ATTACK_IMMUNE);
                         for (const [_, enemy] of GameFunc.iPair(enemies)) {
@@ -501,7 +501,7 @@ export class imba_pangolier_shield_crash extends BaseAbility_Plus {
                                 ParticleManager.DestroyParticle(particle, false);
                                 ParticleManager.ReleaseParticleIndex(particle);
                             }
-                            this.slash_particles = {}
+                            this.slash_particles = []
                         });
                     }
                 });
@@ -556,13 +556,13 @@ export class modifier_imba_shield_crash_buff extends BaseModifier_Plus {
                 ParticleManager.SetParticleControlEnt(this.buff_particles[0], 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, Vector(0, 0, 0), false);
                 this.AddParticle(this.buff_particles[0], false, false, -1, true, false);
                 if (this.stacks >= 3) {
-                    this.buff_particles[2] = ResHelper.CreateParticleEx(this.particle_2, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
-                    ParticleManager.SetParticleControlEnt(this.buff_particles[2], 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, Vector(0, 0, 0), false);
-                    this.AddParticle(this.buff_particles[2], false, false, -1, true, false);
+                    this.buff_particles[1] = ResHelper.CreateParticleEx(this.particle_2, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
+                    ParticleManager.SetParticleControlEnt(this.buff_particles[1], 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, Vector(0, 0, 0), false);
+                    this.AddParticle(this.buff_particles[1], false, false, -1, true, false);
                     if (this.stacks >= 4) {
-                        this.buff_particles[3] = ResHelper.CreateParticleEx(this.particle_3, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
-                        ParticleManager.SetParticleControlEnt(this.buff_particles[3], 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, Vector(0, 0, 0), false);
-                        this.AddParticle(this.buff_particles[3], false, false, -1, true, false);
+                        this.buff_particles[2] = ResHelper.CreateParticleEx(this.particle_3, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
+                        ParticleManager.SetParticleControlEnt(this.buff_particles[2], 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, Vector(0, 0, 0), false);
+                        this.AddParticle(this.buff_particles[2], false, false, -1, true, false);
                     }
                 }
             }
@@ -754,7 +754,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
     public slashing_sound: any;
     public hit_sound: any;
     public hero_attacks: any;
-    public attackers: any;
+    public attackers: IBaseNpc_Plus[];
     public counter_range: number;
     public counter_damage: number;
     public start_radius: number;
@@ -766,7 +766,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
             this.slashing_sound = "Hero_Pangolier.Swashbuckle";
             this.hit_sound = "Hero_Pangolier.Swashbuckle.Damage";
             this.hero_attacks = 0;
-            this.attackers = this.attackers || {}
+            this.attackers = this.attackers || []
             this.counter_range = this.swashbuckle.GetSpecialValueFor("range");
             this.counter_damage = this.swashbuckle.GetSpecialValueFor("damage");
             this.start_radius = this.swashbuckle.GetSpecialValueFor("start_radius");
@@ -810,15 +810,15 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
             let target = keys.target;
             if (target == this.GetCasterPlus() && attacker.IsRealUnit()) {
                 if (this.GetCasterPlus().HasModifier("modifier_pangolier_gyroshell")) {
-                    return undefined;
+                    return;
                 }
                 let stacks = this.GetCasterPlus().findBuffStack("modifier_imba_shield_crash_block", this.GetCasterPlus());
                 if (stacks == 0) {
-                    this.attackers = {}
-                    return undefined;
+                    this.attackers = []
+                    return;
                 }
                 attacker.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_shield_crash_block_miss", {});
-                table.insert(this.attackers, attacker);
+                this.attackers.push(attacker);
                 this.hero_attacks = this.hero_attacks + 1;
             }
         }
@@ -903,7 +903,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
                     attacker.RemoveModifierByName("modifier_imba_shield_crash_block_miss");
                     for (const [k, v] of GameFunc.iPair(this.attackers)) {
                         if (v == attacker) {
-                            table.remove(this.attackers, k);
+                            this.attackers.splice(k, 1);
                         }
                     }
                 }
@@ -1343,7 +1343,7 @@ export class modifier_imba_gyroshell_impact_check extends BaseModifier_Plus {
                                 enemy.TempData().hit_times += 1;
                             } else {
                                 enemy.TempData().hit_times = 1;
-                                table.insert(this.targets, enemy);
+                                this.targets.push(enemy);
                             }
                         }
                     }

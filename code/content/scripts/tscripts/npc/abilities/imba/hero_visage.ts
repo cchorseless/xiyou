@@ -607,7 +607,7 @@ export class modifier_imba_visage_stone_form_self_cast extends BaseModifier_Plus
 @registerAbility()
 export class imba_visage_summon_familiars extends BaseAbility_Plus {
     public responses: { [K: string]: string };
-    public familiar_table: any;
+    public familiar_table: EntityIndex[];
     GetAssociatedPrimaryAbilities(): string {
         return "imba_visage_stone_form_self_cast";
     }
@@ -650,7 +650,7 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
                 }
             }
         }
-        this.familiar_table = {}
+        this.familiar_table = []
         let familiar = undefined;
         let spawn_location: Vector = undefined;
         let stone_form_ability = undefined;
@@ -676,7 +676,7 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
             familiar.SetBaseMoveSpeed(this.GetTalentSpecialValueFor("familiar_speed"));
             familiar.SetBaseDamageMin(this.GetTalentSpecialValueFor("familiar_attack_damage"));
             familiar.SetBaseDamageMax(this.GetTalentSpecialValueFor("familiar_attack_damage"));
-            table.insert(this.familiar_table, familiar.entindex());
+            this.familiar_table.push(familiar.entindex());
         }
     }
     OnOwnerSpawned(): void {

@@ -307,7 +307,7 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
             this.illusion_1.SetHealth(this.GetCasterPlus().GetHealth());
             this.illusion_1.findBuff("modifier_illusion").SetDuration(this.GetSpecialValueFor("illusion_duration") + this.GetSpecialValueFor("delay"), true);
         }
-        table.insert(affected_units, this.illusion_1);
+        affected_units.push(this.illusion_1);
         if (!this.illusion_2 || this.illusion_2.IsNull() || !this.illusion_2.IsAlive()) {
             this.illusion_2 = this.GetCasterPlus().CreateIllusion(this.GetCasterPlus(), {
                 outgoing_damage: this.GetSpecialValueFor("illusion_2_damage_out_pct"),
@@ -324,7 +324,7 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
             this.illusion_2.SetHealth(this.GetCasterPlus().GetHealth());
             this.illusion_2.findBuff("modifier_illusion").SetDuration(this.GetSpecialValueFor("illusion_duration") + this.GetSpecialValueFor("delay"), true);
         }
-        table.insert(affected_units, this.illusion_2);
+        affected_units.push(this.illusion_2);
         if (this.illusion_3 && !this.illusion_3.IsNull() && this.illusion_3.IsAlive()) {
             this.illusion_3.ForceKill(false);
         }
@@ -346,7 +346,7 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
                 return;
             }
         }
-        table.insert(affected_units, this.illusion_3);
+        affected_units.push(this.illusion_3);
         for (const [_, unit] of GameFunc.iPair(affected_units)) {
             if (unit.GetPlayerOwnerID() == this.GetCasterPlus().GetPlayerOwnerID() && (unit == this.GetCasterPlus() || unit.IsIllusion())) {
                 unit.Purge(false, true, false, false, false);
@@ -823,7 +823,7 @@ export class modifier_imba_phantom_lancer_juxtapose extends BaseModifier_Plus {
     public directional_vectors: any;
     public owner: IBaseNpc_Plus;
     public spawn_particle: any;
-    public confusion_positions: any;
+    public confusion_positions: Vector[];
     IsHidden(): boolean {
         return true;
     }
@@ -885,12 +885,12 @@ export class modifier_imba_phantom_lancer_juxtapose extends BaseModifier_Plus {
                     ParticleManager.ReleaseParticleIndex(this.spawn_particle);
                     illusion.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_phantom_lancer_juxtapose_illusion", {});
                     illusion.SetAggroTarget(keys.target);
-                    table.insert(this.owner.TempData().juxtapose_table, illusion.entindex());
+                    this.owner.TempData<EntityIndex[]>().juxtapose_table.push(illusion.entindex());
                 }
                 if (this.owner.findAbliityPlus<imba_phantom_lancer_juxtapose>("imba_phantom_lancer_juxtapose") && this.owner.FindAbilityByName("imba_phantom_lancer_juxtapose").GetToggleState() && this.owner.FindAbilityByName("imba_phantom_lancer_juxtapose").IsCooldownReady()) {
-                    this.confusion_positions = {}
+                    this.confusion_positions = []
                     for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.owner.findAbliityPlus<imba_phantom_lancer_juxtapose>("imba_phantom_lancer_juxtapose").GetSpecialValueFor("confusion_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
-                        table.insert(this.confusion_positions, unit.GetAbsOrigin());
+                        this.confusion_positions.push(unit.GetAbsOrigin());
                     }
                     for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.owner.findAbliityPlus<imba_phantom_lancer_juxtapose>("imba_phantom_lancer_juxtapose").GetSpecialValueFor("confusion_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false))) {
                         FindClearSpaceForUnit(unit, this.confusion_positions[_], true);

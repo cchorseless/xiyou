@@ -347,8 +347,8 @@ export class modifier_storegga_arm_slam extends BaseModifier_Plus {
             let vLocation2 = this.GetParentPlus().GetAttachmentOrigin(attach2);
             vLocation2 = GetGroundPosition(vLocation2, this.GetParentPlus());
             let Locations = [] as Vector[]
-            table.insert(Locations, vLocation1);
-            table.insert(Locations, vLocation2);
+            Locations.push(vLocation1);
+            Locations.push(vLocation2);
             for (const [_, vPos] of GameFunc.iPair(Locations)) {
                 let nFXIndex = ResHelper.CreateParticleEx("particles/test_particle/ogre_melee_smash.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetCasterPlus());
                 ParticleManager.SetParticleControl(nFXIndex, 0, vPos);
@@ -416,7 +416,7 @@ export class modifier_storegga_arm_slam extends BaseModifier_Plus {
         return false;
     }
     AddHitTarget(hTarget: IBaseNpc_Plus) {
-        table.insert(this.hHitTargets, hTarget);
+        this.hHitTargets.push(hTarget);
     }
 }
 @registerModifier()
@@ -489,8 +489,8 @@ export class modifier_storegga_avalanche_thinker extends BaseModifier_Plus {
                 vDir: vNewAvalancheDir2,
                 nFX: nFXIndex2
             }
-            table.insert(this.Avalanches, Avalanche1);
-            table.insert(this.Avalanches, Avalanche2);
+            this.Avalanches.push(Avalanche1);
+            this.Avalanches.push(Avalanche2);
             for (const [_, ava] of GameFunc.iPair(this.Avalanches)) {
                 let vNewPos = ava.vCurPos + ava.vDir * this.movement;
                 ava.vCurPos = vNewPos;

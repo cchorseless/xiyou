@@ -680,7 +680,7 @@ export class modifier_imba_slark_essence_shift extends BaseModifier_Plus {
         if (this.GetAbilityPlus().IsTrained() && keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && !this.GetParentPlus().IsIllusion() && /** (keys.target.IsRealUnit() || keys.target.IsClone()) && **/ !keys.target.IsTempestDouble() && keys.attacker.GetTeam() != keys.target.GetTeam()) {
             this.shift_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_slark/slark_essence_shift.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, keys.target);
             ParticleManager.ReleaseParticleIndex(this.shift_particle);
-            table.insert(this.stack_table, {
+            this.stack_table.push({
                 apply_game_time: GameRules.GetDOTATime(true, true),
                 duration: this.GetAbilityPlus().GetTalentSpecialValueFor("duration")
             });
@@ -734,7 +734,7 @@ export class modifier_imba_slark_essence_shift_debuff_counter extends BaseModifi
         if (!this.stack_table) {
             this.stack_table = []
         }
-        table.insert(this.stack_table, {
+        this.stack_table.push({
             apply_game_time: GameRules.GetDOTATime(true, true),
             duration: this.GetAbilityPlus().GetTalentSpecialValueFor("duration")
         });
@@ -770,7 +770,7 @@ export class modifier_imba_slark_essence_shift_debuff_counter extends BaseModifi
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && (keys.target.IsRealUnit() || keys.target.IsClone()) && !keys.target.IsTempestDouble()) {
-            table.insert(this.stack_table, {
+            this.stack_table.push({
                 apply_game_time: GameRules.GetDOTATime(true, true),
                 duration: this.GetAbilityPlus().GetTalentSpecialValueFor("duration")
             });

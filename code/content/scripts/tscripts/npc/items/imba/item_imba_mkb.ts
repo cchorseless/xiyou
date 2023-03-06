@@ -26,7 +26,7 @@ export class modifier_item_imba_javelin extends BaseModifier_Plus {
     public bonus_chance: number;
     public bonus_chance_damage: number;
     public pierce_proc: any;
-    public pierce_records: any;
+    public pierce_records: number[];
     IsHidden(): boolean {
         return true;
     }
@@ -52,7 +52,7 @@ export class modifier_item_imba_javelin extends BaseModifier_Plus {
         this.bonus_chance = this.ability.GetSpecialValueFor("bonus_chance");
         this.bonus_chance_damage = this.ability.GetSpecialValueFor("bonus_chance_damage");
         this.pierce_proc = false;
-        this.pierce_records = {}
+        this.pierce_records = []
     }
     BeDestroy(): void {
         if (!IsServer()) {
@@ -84,7 +84,7 @@ export class modifier_item_imba_javelin extends BaseModifier_Plus {
     CC_GetModifierProcAttack_BonusDamage_Magical(keys: ModifierAttackEvent): number {
         for (const [_, record] of GameFunc.iPair(this.pierce_records)) {
             if (record == keys.record) {
-                table.remove(this.pierce_records, _);
+                this.pierce_records.splice(_, 1);
                 if (!this.parent.IsIllusion() && !keys.target.IsBuilding()) {
                     this.parent.EmitSound("DOTA_Item.MKB.proc");
                     SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, keys.target, this.bonus_chance_damage, undefined);
@@ -97,7 +97,7 @@ export class modifier_item_imba_javelin extends BaseModifier_Plus {
     CC_OnAttackRecord(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.parent) {
             if (this.pierce_proc) {
-                table.insert(this.pierce_records, keys.record);
+                this.pierce_records.push(keys.record);
                 this.pierce_proc = false;
             }
             if ((!keys.target.IsMagicImmune() || this.GetName() == "modifier_item_imba_monkey_king_bar") && GFuncRandom.PRD(this.bonus_chance, this)) {

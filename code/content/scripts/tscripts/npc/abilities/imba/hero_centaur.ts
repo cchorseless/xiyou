@@ -40,7 +40,7 @@ export class modifier_imba_thick_hide extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_centaur_hoof_stomp extends BaseAbility_Plus {
-    public enemy_entindex_table: any;
+    public enemy_entindex_table: { [k: string]: boolean };
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -59,7 +59,7 @@ export class imba_centaur_hoof_stomp extends BaseAbility_Plus {
         ParticleManager.ReleaseParticleIndex(particle_stomp_fx);
         this.enemy_entindex_table = {}
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
-            this.enemy_entindex_table[enemy.entindex()] = true;
+            this.enemy_entindex_table[enemy.entindex() + ""] = true;
             if (!enemy.IsMagicImmune()) {
                 enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_stunned", {
                     duration: this.GetSpecialValueFor("stun_duration") * (1 - enemy.GetStatusResistance())
@@ -165,7 +165,7 @@ export class modifier_imba_hoof_stomp_arena_thinker_debuff extends BaseModifier_
         return "modifier_imba_hoof_stomp_arena_debuff";
     }
     GetAuraEntityReject(target: CDOTA_BaseNPC): boolean {
-        return this.enemy_entindex_table && !this.enemy_entindex_table[target.entindex()] && target.IsMagicImmune();
+        return this.enemy_entindex_table && !this.enemy_entindex_table[target.entindex() + ""] && target.IsMagicImmune();
     }
 }
 @registerModifier()

@@ -124,7 +124,7 @@ export class modifier_imba_sadist_stack extends BaseModifier_Plus {
             if (GameFunc.GetCount(this.stacks_table) > 0) {
                 for (let i = this.stacks_table.length - 1; i >= 0; i--) {
                     if (this.stacks_table[i] + this.regen_duration < GameRules.GetGameTime()) {
-                        table.remove(this.stacks_table, i);
+                        this.stacks_table.splice(i, 1);
                     }
                 }
                 if (GameFunc.GetCount(this.stacks_table) == 0) {
@@ -139,7 +139,7 @@ export class modifier_imba_sadist_stack extends BaseModifier_Plus {
     }
     BeRefresh(p_0: any,): void {
         if (IsServer()) {
-            table.insert(this.stacks_table, GameRules.GetGameTime());
+            this.stacks_table.push(GameRules.GetGameTime());
         }
     }
     IsHidden(): boolean {

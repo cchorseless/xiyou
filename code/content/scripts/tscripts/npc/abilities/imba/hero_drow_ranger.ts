@@ -936,7 +936,7 @@ export class modifier_imba_trueshot extends BaseModifier_Plus {
         if (IsServer()) {
             let drow_agility = this.caster.GetAgility();
             if (this.parent.IsRealUnit()) {
-                this.parent.CalculateStatBonus(true);
+                // this.parent.CalculateStatBonus(true);
             }
             // CustomNetTables.SetTableValue("player_table", "precision_aura_drow_agility" + tostring(this.parent.GetPlayerOwnerID()), {
             //     precision_aura_drow_agility: drow_agility
@@ -1062,7 +1062,7 @@ export class imba_drow_ranger_multishot extends BaseAbility_Plus {
         if (!this.targets_hit[ExtraData.volley_index]) {
             this.targets_hit[ExtraData.volley_index] = {}
         }
-        if (target && !this.targets_hit[ExtraData.volley_index][target.entindex()]) {
+        if (target && !this.targets_hit[ExtraData.volley_index][target.entindex() + ""]) {
             target.EmitSound("Hero_DrowRanger.ProjectileImpact");
             if (this.GetCasterPlus().HasAbility("imba_drow_ranger_frost_arrows_723") && this.GetCasterPlus().findAbliityPlus<imba_drow_ranger_frost_arrows_723>("imba_drow_ranger_frost_arrows_723").IsTrained()) {
                 if (!target.IsMagicImmune()) {
@@ -1082,7 +1082,7 @@ export class imba_drow_ranger_multishot extends BaseAbility_Plus {
                 attacker: this.GetCasterPlus(),
                 ability: this
             });
-            this.targets_hit[ExtraData.volley_index][target.entindex()] = true;
+            this.targets_hit[ExtraData.volley_index][target.entindex() + ""] = true;
             return true;
         }
     }

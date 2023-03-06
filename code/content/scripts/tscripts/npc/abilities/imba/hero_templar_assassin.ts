@@ -1016,7 +1016,7 @@ export class imba_templar_assassin_psionic_trap extends BaseAbility_Plus {
                 trap.findAbliityPlus<imba_templar_assassin_self_trap>("imba_templar_assassin_self_trap").SetHidden(false);
                 trap.findAbliityPlus<imba_templar_assassin_self_trap>("imba_templar_assassin_self_trap").SetLevel(this.GetLevel());
             }
-            table.insert(this.counter_modifier.trap_table, trap_modifier);
+            this.counter_modifier.trap_table.push(trap_modifier as any);
             if (GameFunc.GetCount(this.counter_modifier.trap_table) > this.GetTalentSpecialValueFor("max_traps")) {
                 if (this.counter_modifier.trap_table[0].GetParentPlus()) {
                     this.counter_modifier.trap_table[0].GetParentPlus().ForceKill(false);
@@ -1147,7 +1147,7 @@ export class modifier_imba_templar_assassin_psionic_trap extends BaseModifier_Pl
         if (this.trap_counter_modifier && this.trap_counter_modifier.trap_table) {
             for (let trap_modifier = 0; trap_modifier < GameFunc.GetCount(this.trap_counter_modifier.trap_table); trap_modifier++) {
                 if (this.trap_counter_modifier.trap_table[trap_modifier] == this) {
-                    table.remove(this.trap_counter_modifier.trap_table, trap_modifier);
+                    this.trap_counter_modifier.trap_table.splice(trap_modifier, 1);
                     if (this.GetCasterPlus().HasModifier("modifier_imba_templar_assassin_psionic_trap_counter")) {
                         this.GetCasterPlus().findBuff<modifier_imba_templar_assassin_psionic_trap_counter>("modifier_imba_templar_assassin_psionic_trap_counter").DecrementStackCount();
                     }
@@ -1217,7 +1217,7 @@ export class modifier_imba_templar_assassin_psionic_trap extends BaseModifier_Pl
 }
 @registerModifier()
 export class modifier_imba_templar_assassin_psionic_trap_counter extends BaseModifier_Plus {
-    public trap_table: any;
+    public trap_table: modifier_imba_templar_assassin_psionic_trap[];
     GetTexture(): string {
         return "templar_assassin_psionic_trap";
     }
@@ -1225,7 +1225,7 @@ export class modifier_imba_templar_assassin_psionic_trap_counter extends BaseMod
         if (!IsServer()) {
             return;
         }
-        this.trap_table = {}
+        this.trap_table = []
         this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_templar_assassin_psionic_trap_handler", {});
     }
     BeDestroy(): void {

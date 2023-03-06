@@ -82,7 +82,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             if (enemy.IsClone() || enemy.IsTempestDouble() || enemy.GetName().includes("meepo") || enemy.GetName().includes("arc_warden")) {
-                table.insert(clone_owner_units, enemy);
+                clone_owner_units.push(enemy);
             } else {
                 if (enemy.IsRealUnit() && !enemy.IsIllusion()) {
                     enemy.EmitSound("Hero_Undying.Decay.Target");
@@ -101,13 +101,13 @@ export class imba_undying_decay extends BaseAbility_Plus {
         let repeat_needed = true;
         if (GameFunc.GetCount(clone_owner_units) > 0) {
             while (repeat_needed) {
-                let selected_unit = table.remove(clone_owner_units, RandomInt(1, GameFunc.GetCount(clone_owner_units)));
+                let selected_unit = GFuncRandom.RandomRemove(clone_owner_units);
                 this.DecayBuffCaster();
                 this.DecayDebuffEnemy(selected_unit);
-                for (let i = 0; i < GameFunc.GetCount(clone_owner_units); i++) {
-                    if (clone_owner_units[i] && selected_unit && clone_owner_units[i].GetName() == selected_unit.GetName()) {
-                        this.DealDamageEnemy(clone_owner_units[i]);
-                        clone_owner_units[i] = undefined;
+                for (let [i, v] of GameFunc.iPair(clone_owner_units)) {
+                    if (v && selected_unit && v.GetName() == selected_unit.GetName()) {
+                        this.DealDamageEnemy(v);
+                        clone_owner_units.splice(i, 1);
                     }
                 }
                 if (GameFunc.GetCount(clone_owner_units) == 0) {
@@ -233,7 +233,7 @@ export class modifier_imba_undying_decay_buff extends BaseModifier_Plus {
         }
         let stacks = this.GetStackCount();
         if (stacks > prev_stacks) {
-            table.insert(this.stack_table, GameRules.GetGameTime());
+            this.stack_table.push(GameRules.GetGameTime());
             if (this.caster.HasScepter()) {
                 this.strength_gain = this.str_steal_scepter;
             } else {
@@ -325,7 +325,7 @@ export class modifier_imba_undying_decay_debuff extends BaseModifier_Plus {
         }
         let stacks = this.GetStackCount();
         if (stacks > prev_stacks) {
-            table.insert(this.stack_table, GameRules.GetGameTime());
+            this.stack_table.push(GameRules.GetGameTime());
             if (this.caster.HasScepter()) {
                 this.strength_reduction = this.str_steal_scepter;
             } else {
@@ -551,7 +551,7 @@ export class modifier_imba_undying_soul_rip_soul_injection_buff extends BaseModi
         }
         let stacks = this.GetStackCount();
         if (stacks > prev_stacks) {
-            table.insert(this.stack_table, GameRules.GetGameTime());
+            this.stack_table.push(GameRules.GetGameTime());
             this.ForceRefresh();
         }
     }
@@ -631,7 +631,7 @@ export class modifier_imba_undying_soul_rip_soul_injection_debuff extends BaseMo
         }
         let stacks = this.GetStackCount();
         if (stacks > prev_stacks) {
-            table.insert(this.stack_table, GameRules.GetGameTime());
+            this.stack_table.push(GameRules.GetGameTime());
             this.ForceRefresh();
         }
     }
@@ -1144,7 +1144,7 @@ export class modifier_imba_undying_zombie_deathlust_debuff extends BaseModifier_
         }
         let stacks = this.GetStackCount();
         if (stacks > prev_stacks) {
-            table.insert(this.stack_table, GameRules.GetGameTime());
+            this.stack_table.push(GameRules.GetGameTime());
             this.ForceRefresh();
         }
     }

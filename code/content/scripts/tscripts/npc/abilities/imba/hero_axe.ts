@@ -83,13 +83,13 @@ export class imba_axe_berserkers_call extends BaseAbility_Plus {
         if (!this.called_targets) {
             this.called_targets = {}
         }
-        this.called_targets[target.entindex()] = target;
+        this.called_targets[target.entindex() + ""] = target;
     }
     RemoveCalledTarget(target: IBaseNpc_Plus) {
         if (!this.called_targets) {
             return;
         }
-        delete this.called_targets[target.entindex()];
+        delete this.called_targets[target.entindex() + ""];
     }
     GetCalledUnits() {
         if (!this.called_targets) {

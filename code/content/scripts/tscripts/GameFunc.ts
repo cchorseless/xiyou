@@ -867,6 +867,12 @@ export module FuncRandom {
     export function RandomOne<T>(arr: Array<T>): T {
         return RandomArray(arr, 1, false)[0];
     }
+
+    export function RandomRemove<T>(arr: Array<T>): T {
+        let len = arr.length;
+        RandomInt(0, len - 1)
+        return arr.splice(len, 1)[0];
+    }
     /**
      * 随机数组 TODO 优化算法，count与数组长度接近，需要反向删选
      * @param arr

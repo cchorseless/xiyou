@@ -554,9 +554,10 @@ export class modifier_imba_blur_speed extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             if (GameFunc.GetCount(this.stacks_table) > 0) {
-                for (let i = GameFunc.GetCount(this.stacks_table); i >= 1; i += -1) {
+                for (let i = GameFunc.GetCount(this.stacks_table) - 1; i >= 0; i--) {
                     if (this.stacks_table[i] + this.speed_bonus_duration < GameRules.GetGameTime()) {
-                        table.remove(this.stacks_table, i);
+                        this.stacks_table.slice(i, 1);
+
                     }
                 }
                 if (GameFunc.GetCount(this.stacks_table) == 0) {
@@ -572,7 +573,7 @@ export class modifier_imba_blur_speed extends BaseModifier_Plus {
     }
     BeRefresh(p_0: any,): void {
         if (IsServer()) {
-            table.insert(this.stacks_table, GameRules.GetGameTime());
+            this.stacks_table.push(GameRules.GetGameTime());
         }
     }
     IsHidden(): boolean {
@@ -856,9 +857,9 @@ export class modifier_imba_coup_de_grace_crit extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             if (GameFunc.GetCount(this.stacks_table) > 0) {
-                for (let i = GameFunc.GetCount(this.stacks_table); i >= 1; i += -1) {
+                for (let i = GameFunc.GetCount(this.stacks_table) - 1; i >= 0; i--) {
                     if (this.stacks_table[i] + this.crit_increase_duration < GameRules.GetGameTime()) {
-                        table.remove(this.stacks_table, i);
+                        this.stacks_table.splice(i, 1)
                     }
                 }
                 if (GameFunc.GetCount(this.stacks_table) == 0) {
@@ -874,7 +875,7 @@ export class modifier_imba_coup_de_grace_crit extends BaseModifier_Plus {
     }
     BeRefresh(p_0: any,): void {
         if (IsServer()) {
-            table.insert(this.stacks_table, GameRules.GetGameTime());
+            this.stacks_table.push(GameRules.GetGameTime());
         }
     }
     IsHidden(): boolean {
@@ -978,7 +979,7 @@ export class modifier_phantom_assassin_arcana extends BaseModifier_Plus {
                 }).SetStackCount(params.target.entindex());
             });
             gravestone.TempData().epitaph_number = RandomInt(1, 13);
-            gravestone.TempData().victim_id = params.target.GetPlayerID();
+            gravestone.TempData().victim_id = (params.target as IBaseNpc_Plus).GetPlayerID();
             for (let i = 0; i <= PlayerResource.GetPlayerCount() - 1; i++) {
                 gravestone.SetControllableByPlayer(i as PlayerID, false);
             }

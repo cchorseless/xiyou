@@ -874,7 +874,7 @@ export class imba_tidehunter_ravage extends BaseAbility_Plus {
                             }
                             enemy.RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);
                         });
-                        table.insert(hit_units, enemy);
+                        hit_units.push(enemy);
                     }
                 }
                 if (ring < 5) {

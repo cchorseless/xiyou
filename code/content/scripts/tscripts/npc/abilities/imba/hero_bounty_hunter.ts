@@ -74,7 +74,7 @@ export class imba_bounty_hunter_shuriken_toss extends BaseAbility_Plus {
         }
         ProjectileManager.CreateTrackingProjectile(shuriken_projectile);
     }
-    OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, extradata: any): boolean | void {
+    OnProjectileHit_ExtraData(target: IBaseNpc_Plus | undefined, location: Vector, extradata: any): boolean | void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let ability = this;
@@ -477,8 +477,8 @@ export class modifier_imba_jinada_buff_crit extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (IsServer()) {
-            let attacker = keys.attacker;
-            let target = keys.target;
+            let attacker = keys.attacker as IBaseNpc_Plus;
+            let target = keys.target as IBaseNpc_Plus;
             if (!attacker.IsRealUnit()) {
                 return undefined;
             }

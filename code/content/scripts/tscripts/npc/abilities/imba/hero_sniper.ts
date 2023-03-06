@@ -833,8 +833,8 @@ export class modifier_imba_take_aim_range extends BaseModifier_Plus {
 export class imba_sniper_assassinate extends BaseAbility_Plus {
     public bAutoCast: any;
     public timer: ITimerTask;
-    public enemy_table: any;
-    public enemies_hit: any;
+    public enemy_table: IBaseNpc_Plus[];
+    public enemies_hit: string[];
     public enemy_died: any;
     public meme_cooldown: number;
     IsHiddenWhenStolen(): boolean {
@@ -905,7 +905,7 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
             caster.StartGestureWithPlaybackRate(GameActivity_t.ACT_DOTA_CAST_ABILITY_4, playback_rate);
         }
         if (!this.enemy_table) {
-            this.enemy_table = {}
+            this.enemy_table = []
         }
         let targets = [this.GetCursorTarget()]
         EmitSoundOn(GFuncRandom.RandomValue(cast_response), caster);
@@ -913,7 +913,7 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
             target.AddNewModifier(caster, ability, modifier_cross, {
                 duration: sight_duration
             });
-            table.insert(this.enemy_table, target);
+            this.enemy_table.push(target);
         }
         return true;
     }
@@ -939,7 +939,7 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
         let ability = this;
         let projectiles = ability.GetSpecialValueFor("projectiles");
         let targets = [this.GetCursorTarget()]
-        this.enemies_hit = {}
+        this.enemies_hit = [];
         this.enemy_died = false;
         if (caster.HasTalent("special_bonus_imba_sniper_6") && this.bAutoCast) {
             projectiles = caster.GetTalentValue("special_bonus_imba_sniper_6", "total_projectiles");
@@ -1054,7 +1054,7 @@ export class imba_sniper_assassinate extends BaseAbility_Plus {
                 return;
             }
         }
-        table.insert(this.enemies_hit, target_key);
+        this.enemies_hit.push(target_key);
         if (target.TempData().primary_assassination_target) {
             if (target.GetTeam() != caster.GetTeam()) {
                 if (target.TriggerSpellAbsorb(this)) {

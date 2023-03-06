@@ -59,7 +59,7 @@ function CastShadowRazeOnPoint(caster: IBaseNpc_Plus, ability: IBaseAbility_Plus
                     }
                 }
                 if (!enemy_marked) {
-                    table.insert(ability.enemies_hit, enemy);
+                    ability.enemies_hit.push(enemy);
                 }
                 if (!enemy_marked) {
                     ApplyShadowRazeDamage(caster, ability, enemy);
@@ -499,8 +499,8 @@ export class modifier_shadow_raze_combo extends BaseModifier_Plus {
             this.ability = this.GetAbilityPlus();
             this.razes = {}
             this.razes[0] = "imba_nevermore_shadowraze_close";
-            this.razes[2] = "imba_nevermore_shadowraze_medium";
-            this.razes[3] = "imba_nevermore_shadowraze_far";
+            this.razes[1] = "imba_nevermore_shadowraze_medium";
+            this.razes[2] = "imba_nevermore_shadowraze_far";
             this.modifier_prevention = "modifier_shadow_raze_prevention";
             this.combo_prevention_duration = this.ability.GetSpecialValueFor("combo_prevention_duration");
             this.combo_threshold = this.ability.GetSpecialValueFor("combo_threshold");
@@ -804,9 +804,9 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
                 }
             }
             if (GameFunc.GetCount(this.soul_table) > this.total_max_souls) {
-                for (let i = GameFunc.GetCount(this.soul_table) - 1; i > (this.total_max_souls + 1); i += -1) {
+                for (let i = GameFunc.GetCount(this.soul_table) - 1; i > (this.total_max_souls + 1); i--) {
                     if (this.soul_table[i] + this.temporary_soul_duration < GameRules.GetGameTime()) {
-                        table.remove(this.soul_table, i);
+                        this.soul_table.splice(i, 1);
                         this.DecrementStackCount();
                     }
                 }
@@ -828,7 +828,7 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
                 if (stacks > this.total_max_souls) {
                     this.SetDuration(this.temporary_soul_duration, true);
                 }
-                table.insert(this.soul_table, GameRules.GetGameTime());
+                this.soul_table.push(GameRules.GetGameTime());
             }
         }
     }
@@ -1429,8 +1429,8 @@ export class modifier_imba_reqiuem_harvest extends BaseModifier_Plus {
             this.ability = this.GetAbilityPlus();
             this.razes = {}
             this.razes[0] = "imba_nevermore_shadowraze_close";
-            this.razes[2] = "imba_nevermore_shadowraze_medium";
-            this.razes[3] = "imba_nevermore_shadowraze_far";
+            this.razes[1] = "imba_nevermore_shadowraze_medium";
+            this.razes[2] = "imba_nevermore_shadowraze_far";
             for (let i = 0; i < GameFunc.GetCount(this.razes); i++) {
                 if (this.caster.HasAbility(this.razes[i])) {
                     let raze_handler = this.caster.FindAbilityByName(this.razes[i]);

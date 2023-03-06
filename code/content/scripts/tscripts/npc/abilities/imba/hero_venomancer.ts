@@ -249,14 +249,14 @@ export class modifier_imba_toxicity extends BaseModifier_Plus {
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 let debuff = enemy.FindModifierByNameAndCaster("modifier_imba_toxicity_debuff", caster);
                 let poisons: IBaseModifier_Plus[] = []
-                table.insert(poisons, enemy.FindModifierByNameAndCaster("modifier_imba_venomous_gale", caster));
-                table.insert(poisons, enemy.FindModifierByNameAndCaster("modifier_imba_poison_sting_debuff", caster));
-                table.insert(poisons, enemy.FindModifierByNameAndCaster("modifier_imba_poison_sting_debuff_ward", caster));
-                table.insert(poisons, enemy.FindModifierByNameAndCaster("modifier_imba_poison_sting_v2_ward", caster));
+                poisons.push(enemy.FindModifierByNameAndCaster("modifier_imba_venomous_gale", caster) as IBaseModifier_Plus);
+                poisons.push(enemy.FindModifierByNameAndCaster("modifier_imba_poison_sting_debuff", caster) as IBaseModifier_Plus);
+                poisons.push(enemy.FindModifierByNameAndCaster("modifier_imba_poison_sting_debuff_ward", caster) as IBaseModifier_Plus);
+                poisons.push(enemy.FindModifierByNameAndCaster("modifier_imba_poison_sting_v2_ward", caster) as IBaseModifier_Plus);
                 let novas = enemy.FindAllModifiersByName("modifier_imba_poison_nova");
                 for (const [_, nova] of GameFunc.iPair(novas)) {
                     if (nova.GetCasterPlus() == this.GetCasterPlus()) {
-                        table.insert(poisons, nova);
+                        poisons.push(nova as IBaseModifier_Plus);
                     }
                 }
                 if (!caster.PassivesDisabled()) {
@@ -314,7 +314,7 @@ export class modifier_imba_toxicity_debuff extends BaseModifier_Plus {
 @registerAbility()
 export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
     public bWardCaster: any;
-    tempdata: { [k: string]: any } = {}
+    tempdata: { [k: string]: IBaseNpc_Plus[] } = {}
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -392,7 +392,7 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
             direction = (target_loc - caster_loc as Vector).Normalized();
         }
         let index = DoUniqueString("index");
-        this.tempdata[index] = {}
+        this.tempdata[index] = []
         let travel_distance;
         caster.EmitSound("Hero_Venomancer.VenomousGale");
         let projectile_count = 1;
@@ -473,13 +473,13 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
             for (const [_, stored_target] of GameFunc.iPair(this.tempdata[ExtraData.index])) {
                 if (target == stored_target) {
                     was_hit = true;
-                    return;
+                    break;
                 }
             }
             if (was_hit) {
-                return undefined;
+                return;
             } else {
-                table.insert(this.tempdata[ExtraData.index], target);
+                this.tempdata[ExtraData.index].push(target);
             }
             ApplyDamage({
                 victim: target,
@@ -498,10 +498,10 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
                     this.GetCasterPlus().findAbliityPlus<imba_venomancer_plague_ward_v2>("imba_venomancer_plague_ward_v2").OnSpellStart(RotatePosition(target.GetAbsOrigin(), QAngle(0, (360 / this.GetCasterPlus().GetTalentValue("special_bonus_imba_venomancer_venomous_gale_plague_wards")) * num, 0), starting_position));
                 }
             }
-        } else {
-            this.tempdata[ExtraData.index]["count"] = this.tempdata[ExtraData.index]["count"] || 0;
-            this.tempdata[ExtraData.index]["count"] = this.tempdata[ExtraData.index]["count"] + 1;
-            if (this.tempdata[ExtraData.index]["count"] == ExtraData.projectile_count) {
+        }
+        else {
+            this.tempdata[ExtraData.index].push(null);
+            if (this.tempdata[ExtraData.index].length == ExtraData.projectile_count) {
                 if ((GameFunc.GetCount(this.tempdata[ExtraData.index]) > 0) && (caster.GetName().includes("venomancer"))) {
                     caster.EmitSound("venomancer_venm_cast_0" + math.random(1, 2));
                 }
@@ -952,7 +952,7 @@ export class imba_venomancer_plague_ward extends BaseAbility_Plus {
                     plague_ward.SetHealth(plague_hp);
                     plague_ward.SetBaseDamageMin(plague_damage);
                     plague_ward.SetBaseDamageMax(plague_damage);
-                    table.insert(mod_ward.ward_list, plague_ward);
+                    mod_ward.ward_list.push(plague_ward);
                 }
             }
         }
@@ -960,7 +960,7 @@ export class imba_venomancer_plague_ward extends BaseAbility_Plus {
 }
 @registerModifier()
 export class modifier_imba_plague_ward extends BaseModifier_Plus {
-    ward_list: any[]
+    ward_list: IBaseNpc_Plus[]
     IsDebuff(): boolean {
         return false;
     }
@@ -997,9 +997,9 @@ export class modifier_imba_plague_ward extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(params: ModifierInstanceEvent): void {
         if (IsServer()) {
-            for (let i = 0; i < GameFunc.GetCount(this.ward_list); i++) {
+            for (let [i, v] of GameFunc.iPair(this.ward_list)) {
                 if (params.unit == this.ward_list[i]) {
-                    table.remove(this.ward_list, i);
+                    this.ward_list.splice(i, 1)
                 }
                 if (GameFunc.GetCount(this.ward_list) == 0) {
                     this.Destroy();
@@ -1090,7 +1090,7 @@ export class modifier_imba_poison_nova_ring extends BaseModifier_Plus {
     public contagion_radius: number;
     public contagion_min_duration: number;
     public cast_location: any;
-    public hit_enemies: any;
+    public hit_enemies: { [k: string]: boolean };
     public nova_particle: any;
     IsHidden(): boolean {
         return true;
@@ -1129,7 +1129,7 @@ export class modifier_imba_poison_nova_ring extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.cast_location, undefined, math.min(this.start_radius + (this.GetElapsedTime() * this.speed), this.radius), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false))) {
-            if (!this.hit_enemies[enemy.entindex()]) {
+            if (!this.hit_enemies[enemy.entindex() + ""]) {
                 enemy.EmitSound("Hero_Venomancer.PoisonNovaImpact");
                 enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_poison_nova", {
                     duration: this.duration + 2 * FrameTime(),
@@ -1141,7 +1141,7 @@ export class modifier_imba_poison_nova_ring extends BaseModifier_Plus {
                     contagion_min_duration: this.contagion_min_duration,
                     index: this.index
                 });
-                this.hit_enemies[enemy.entindex()] = true;
+                this.hit_enemies[enemy.entindex() + ""] = true;
             }
         }
     }

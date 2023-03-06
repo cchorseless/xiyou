@@ -279,7 +279,8 @@ export class modifier_imba_magnetize_debuff_immune extends BaseModifier_Plus {
 @registerAbility()
 export class imba_magnataur_shockwave extends BaseAbility_Plus {
     public swing_fx: any;
-    tempdata: { [k: string]: any } = {};
+    tempdata: { [k: string]: IBaseNpc_Plus[] } = {};
+    tempcount: { [k: string]: number } = {};
     GetCastRange(p_0: Vector, p_1: CDOTA_BaseNPC | undefined,): number {
         if (!this.GetCasterPlus().HasScepter()) {
             return this.GetSpecialValueFor("cast_range");
@@ -341,8 +342,8 @@ export class imba_magnataur_shockwave extends BaseAbility_Plus {
             let radius = this.GetSpecialValueFor("radius");
             let direction = (target_loc - caster_loc as Vector).Normalized();
             let index = "hit_targets_" + tostring(GameRules.GetDOTATime(true, true));
-            this.tempdata[index] = {}
-            this.tempdata[index + "_counter"] = secondary_occurance;
+            this.tempdata[index] = []
+            this.tempcount[index + "_counter"] = secondary_occurance;
             this.AddTimer(15, () => {
                 this.tempdata[index] = undefined;
                 this.tempdata[index + "_counter"] = undefined;
@@ -554,9 +555,9 @@ export class imba_magnataur_shockwave extends BaseAbility_Plus {
                                 damage_type: this.GetAbilityDamageType()
                             });
                         }
-                        table.insert(this.tempdata[ExtraData.index], target);
-                        if ((this.tempdata[ExtraData.index + "_counter"] > 0) && target.HasModifier("modifier_imba_polarize_debuff") && target.IsRealUnit()) {
-                            this.tempdata[ExtraData.index + "_counter"] = this.tempdata[ExtraData.index + "_counter"] - 1;
+                        this.tempdata[ExtraData.index].push(target);
+                        if ((this.tempcount[ExtraData.index + "_counter"] > 0) && target.HasModifier("modifier_imba_polarize_debuff") && target.IsRealUnit()) {
+                            this.tempcount[ExtraData.index + "_counter"] = this.tempcount[ExtraData.index + "_counter"] - 1;
                             let start_angle;
                             let interval_angle = 0;
                             let direction = Vector(ExtraData.direction_x, ExtraData.direction_y, 0);

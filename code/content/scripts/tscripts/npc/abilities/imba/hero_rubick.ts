@@ -407,7 +407,7 @@ export class imba_rubick_fade_bolt extends BaseAbility_Plus {
             EmitSoundOn("Hero_Rubick.FadeBolt.Cast", this.GetCasterPlus());
             this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_3);
             this.AddTimer(0, () => {
-                table.insert(entities_damaged, current_target);
+                entities_damaged.push(current_target);
                 let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), current_target.GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius"), this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST, false);
                 if (previous_unit != this.GetCasterPlus()) {
                     let damage_increase = this.GetSpecialValueFor("jump_damage_bonus_pct") * (damage / 100);
@@ -1171,7 +1171,7 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
                 // for (const [k, v] of GameFunc.iPair(talent.GetAbilityKeyValues())) {
                 //     if (k == "LinkedAbility") {
                 //         if ((primary && v["01"] == primary.GetAbilityName()) || (secondary && v["01"] == secondary.GetAbilityName())) {
-                //             table.insert(linked_talents, talent.GetAbilityName());
+                //             linked_talents.push( talent.GetAbilityName());
                 //         }
                 //     }
                 // }
@@ -1197,7 +1197,7 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
             newData.primarySpell = primary;
             newData.secondarySpell = secondary;
             newData.linkedTalents = linked_talents;
-            table.insert(this.heroesData, newData);
+            this.heroesData.push(newData);
         }
     }
     GetLastSpell(hHero: IBaseNpc_Plus) {

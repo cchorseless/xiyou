@@ -1096,7 +1096,7 @@ export class modifier_imba_oracle_false_promise_timer_alter extends BaseModifier
                 if (bit.band(keys.damage_flags, DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION) != DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION) {
                     damage_flags = damage_flags + DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NO_SPELL_AMPLIFICATION;
                 }
-                table.insert(alter_targets_modifier.damage_instances, {
+                alter_targets_modifier.damage_instances.push({
                     victim: keys.unit,
                     damage: keys.damage,
                     damage_type: DAMAGE_TYPES.DAMAGE_TYPE_PURE,

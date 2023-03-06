@@ -230,7 +230,7 @@ export class modifier_manta_invulnerable extends BaseModifier_Plus {
                 }
             }
             if (unit.IsIllusion()) {
-                table.insert(this.GetItemPlus<item_imba_manta>().manta_illusions, unit);
+                this.GetItemPlus<item_imba_manta>().manta_illusions.push(unit);
             }
         }
     }

@@ -270,7 +270,8 @@ export class modifier_imba_rancor_ally_aura extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_vengefulspirit_magic_missile extends BaseAbility_Plus {
-    tempdata: { [k: string]: any } = {}
+    tempdata: { [k: string]: IBaseNpc_Plus[] } = {}
+    tempcount: { [k: string]: number } = {}
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -317,9 +318,9 @@ export class imba_vengefulspirit_magic_missile extends BaseAbility_Plus {
             } else {
                 index = DoUniqueString("projectile");
                 let proj_index = "projectile_" + index;
-                this.tempdata[index] = 0;
+                this.tempcount[index] = 0;
                 this.tempdata[proj_index] = []
-                table.insert(this.tempdata[proj_index], target);
+                this.tempdata[proj_index].push(target);
             }
             if (reduce_pct) {
                 damage = math.ceil(damage - (damage * (reduce_pct / 100)));
@@ -390,7 +391,7 @@ export class imba_vengefulspirit_magic_missile extends BaseAbility_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             let proj_index = "projectile_" + ExtraData.index;
-            this.tempdata[ExtraData.index] = this.tempdata[ExtraData.index] + 1;
+            this.tempcount[ExtraData.index] += 1;
             if (target) {
                 if (GameFunc.GetCount(this.tempdata[proj_index]) == 1) {
                     if (target.TriggerSpellAbsorb(this)) {
@@ -422,18 +423,18 @@ export class imba_vengefulspirit_magic_missile extends BaseAbility_Plus {
                     }
                 }
                 if (!already_hit) {
-                    table.insert(valid_targets, enemy);
+                    valid_targets.push(enemy);
                 }
             }
             let target_missiles = math.min(GameFunc.GetCount(valid_targets), ExtraData.split_amount);
             if (target) {
                 for (let i = 0; i < target_missiles; i++) {
                     this.OnSpellStart(valid_targets[i], ExtraData.split_reduce_pct, target, ExtraData.index);
-                    table.insert(this.tempdata[proj_index], valid_targets[i]);
+                    this.tempdata[proj_index].push(valid_targets[i]);
                 }
             }
-            if (this.tempdata[ExtraData.index] == GameFunc.GetCount(this.tempdata[proj_index])) {
-                this.tempdata[ExtraData.index] = undefined;
+            if (this.tempcount[ExtraData.index] == GameFunc.GetCount(this.tempdata[proj_index])) {
+                this.tempcount[ExtraData.index] = undefined;
                 this.tempdata[proj_index] = undefined;
             }
         }

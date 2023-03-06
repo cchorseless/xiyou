@@ -8,7 +8,7 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 @registerAbility()
 export class imba_puck_illusory_orb extends BaseAbility_Plus {
     public jaunt_ability: any;
-    public orbs: any;
+    public orbs: EntityIndex[];
     public talent_cast_range_increases: number;
     GetAssociatedSecondaryAbilities(): string {
         return "imba_puck_ethereal_jaunt";
@@ -31,7 +31,7 @@ export class imba_puck_illusory_orb extends BaseAbility_Plus {
             }
         }
         if (!this.orbs) {
-            this.orbs = {}
+            this.orbs = []
         }
         this.talent_cast_range_increases = 0;
         for (let ability = 0; ability <= 23; ability++) {
@@ -85,7 +85,7 @@ export class imba_puck_illusory_orb extends BaseAbility_Plus {
             }
         }
         let projectile = ProjectileManager.CreateLinearProjectile(projectile_info);
-        table.insert(this.orbs, orb_thinker.entindex());
+        this.orbs.push(orb_thinker.entindex());
     }
     OnProjectileHit_ExtraData(target: CDOTA_BaseNPC | undefined, location: Vector, data: any): boolean | void {
         if (!IsServer()) {
@@ -104,7 +104,7 @@ export class imba_puck_illusory_orb extends BaseAbility_Plus {
             ApplyDamage(damageTable);
         } else {
             if (data.orb_thinker) {
-                table.remove(this.orbs, 1);
+                this.orbs.shift();
                 EntIndexToHScript(data.orb_thinker).StopSound("Hero_Puck.Illusory_Orb");
                 EntIndexToHScript(data.orb_thinker).RemoveSelf();
             }

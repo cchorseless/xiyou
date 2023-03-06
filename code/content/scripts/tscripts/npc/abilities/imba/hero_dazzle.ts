@@ -454,7 +454,7 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
     public shallowDamageInstances: any;
     public shallow_grave_particle: any;
     public gravely: any;
-    public targetsHit: any;
+    public targetsHit: EntityIndex[];
     public triggered_meme_count: boolean;
     IsPurgable(): boolean {
         return false;
@@ -504,8 +504,8 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
                 let ability = this.GetAbilityPlus();
                 let caster = ability.GetCaster();
                 if (caster.HasTalent("special_bonus_imba_dazzle_3")) {
-                    this.targetsHit = {}
-                    table.insert(this.targetsHit, parent.entindex(), true);
+                    this.targetsHit = []
+                    this.targetsHit.push(parent.entindex());
                     EmitSoundOn("Hero_Dazzle.Shadow_Wave", this.GetCasterPlus());
                     this.ShadowWave(ability, caster, parent, this.shallowDamage / 2);
                 }
@@ -525,10 +525,10 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
                 let current_time = GameRules.GetGameTime();
                 for (let i = shallow_grave_meme_table.length - 1; i >= 0; i--) {
                     if (current_time - 30 > shallow_grave_meme_table[i]) {
-                        table.remove(shallow_grave_meme_table, i);
+                        shallow_grave_meme_table.splice(i, 1);
                     }
                 }
-                table.insert(shallow_grave_meme_table, current_time);
+                shallow_grave_meme_table.push(current_time);
                 if (shallow_grave_meme_table.length > 3) {
                     parent.TempData().time_of_triggered_rare_shallow_grave_meme = parent.TempData().time_of_triggered_rare_shallow_grave_meme || 0;
                     parent.TempData().time_of_triggered_shallow_grave_meme = parent.TempData().time_of_triggered_shallow_grave_meme || 0;
@@ -563,16 +563,16 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
         let creepTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let newTarget: IBaseNpc_Plus;
         for (const [_, hero] of GameFunc.iPair(heroTable)) {
-            if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit[hero.entindex()]) {
-                table.insert(this.targetsHit, hero.entindex(), true);
+            if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit.includes(hero.entindex())) {
+                this.targetsHit.push(hero.entindex());
                 newTarget = hero;
                 return;
             }
         }
         if (!newTarget) {
             for (const [_, hero] of GameFunc.iPair(heroTable)) {
-                if (!this.targetsHit[hero.entindex()]) {
-                    table.insert(this.targetsHit, hero.entindex(), true);
+                if (!this.targetsHit.includes(hero.entindex())) {
+                    this.targetsHit.push(hero.entindex());
                     newTarget = hero;
                     return;
                 }
@@ -580,8 +580,8 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
         }
         if (!newTarget) {
             for (const [_, creep] of GameFunc.iPair(creepTable)) {
-                if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit[creep.entindex()]) {
-                    table.insert(this.targetsHit, creep.entindex(), true);
+                if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit.includes(creep.entindex())) {
+                    this.targetsHit.push(creep.entindex());
                     newTarget = creep;
                     return;
                 }
@@ -589,8 +589,8 @@ export class modifier_imba_dazzle_shallow_grave extends BaseModifier_Plus {
         }
         if (!newTarget) {
             for (const [_, creep] of GameFunc.iPair(creepTable)) {
-                if (!this.targetsHit[creep.entindex()]) {
-                    table.insert(this.targetsHit, creep.entindex(), true);
+                if (!this.targetsHit.includes(creep.entindex())) {
+                    this.targetsHit.push(creep.entindex());
                     newTarget = creep;
                     return;
                 }
@@ -713,10 +713,11 @@ export class modifier_imba_dazzle_nothl_protection extends BaseModifier_Plus {
                             let current_time = GameRules.GetGameTime();
                             for (let i = shallow_grave_meme_table.length - 1; i >= 0; i--) {
                                 if (current_time - 30 > shallow_grave_meme_table[i]) {
-                                    table.remove(shallow_grave_meme_table, i);
+                                    shallow_grave_meme_table.splice(i, 1);
+
                                 }
                             }
-                            table.insert(shallow_grave_meme_table, current_time);
+                            shallow_grave_meme_table.push(current_time);
                             if (GameFunc.GetCount(shallow_grave_meme_table) > 3) {
                                 parent.TempData().time_of_triggered_rare_shallow_grave_meme = parent.TempData().time_of_triggered_rare_shallow_grave_meme || 0;
                                 parent.TempData().time_of_triggered_shallow_grave_meme = parent.TempData().time_of_triggered_shallow_grave_meme || 0;
@@ -930,7 +931,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
     public shallowDamageInstances: any;
     public triggered: any;
     public shallow_wave_damage_pct: number;
-    public targetsHit: any;
+    public targetsHit: EntityIndex[];
     public triggered_meme_count: boolean;
     IsPurgable(): boolean {
         return false;
@@ -975,8 +976,8 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
                 }
                 if (caster.HasTalent("special_bonus_imba_dazzle_3")) {
                     this.shallow_wave_damage_pct = caster.GetTalentValue("special_bonus_imba_dazzle_3", "shallow_wave_damage_pct");
-                    this.targetsHit = {}
-                    table.insert(this.targetsHit, parent.entindex(), true);
+                    this.targetsHit = []
+                    this.targetsHit.push(parent.entindex());
                     EmitSoundOn("Hero_Dazzle.Shadow_Wave", this.GetCasterPlus());
                     this.ShadowWave(ability, caster, parent, this.shallowDamage / this.shallow_wave_damage_pct);
                 }
@@ -999,10 +1000,11 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
                     let current_time = GameRules.GetGameTime();
                     for (let i = GameFunc.GetCount(shallow_grave_meme_table) - 1; i >= 0; i--) {
                         if (current_time - 30 > shallow_grave_meme_table[i]) {
-                            table.remove(shallow_grave_meme_table, i);
+                            shallow_grave_meme_table.splice(i, 1);
+
                         }
                     }
-                    table.insert(shallow_grave_meme_table, current_time);
+                    shallow_grave_meme_table.push(current_time);
                     if (GameFunc.GetCount(shallow_grave_meme_table) > 3) {
                         parent.TempData().time_of_triggered_rare_shallow_grave_meme = parent.TempData().time_of_triggered_rare_shallow_grave_meme || 0;
                         parent.TempData().time_of_triggered_shallow_grave_meme = parent.TempData().time_of_triggered_shallow_grave_meme || 0;
@@ -1045,16 +1047,16 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
         let creepTable = FindUnitsInRadius(caster.GetTeamNumber(), oldTarget.GetAbsOrigin(), undefined, bounceDistance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
         let newTarget: IBaseNpc_Plus;
         for (const [_, hero] of GameFunc.iPair(heroTable)) {
-            if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit[hero.entindex()]) {
-                table.insert(this.targetsHit, hero.entindex(), true);
+            if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit.includes(hero.entindex())) {
+                this.targetsHit.push(hero.entindex());
                 newTarget = hero;
                 return;
             }
         }
         if (!newTarget) {
             for (const [_, hero] of GameFunc.iPair(heroTable)) {
-                if (!this.targetsHit[hero.entindex()]) {
-                    table.insert(this.targetsHit, hero.entindex(), true);
+                if (!this.targetsHit.includes(hero.entindex())) {
+                    this.targetsHit.push(hero.entindex());
                     newTarget = hero;
                     return;
                 }
@@ -1062,8 +1064,8 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
         }
         if (!newTarget) {
             for (const [_, creep] of GameFunc.iPair(creepTable)) {
-                if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit[creep.entindex()]) {
-                    table.insert(this.targetsHit, creep.entindex(), true);
+                if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit.includes(creep.entindex())) {
+                    this.targetsHit.push(creep.entindex());
                     newTarget = creep;
                     return;
                 }
@@ -1071,8 +1073,8 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
         }
         if (!newTarget) {
             for (const [_, creep] of GameFunc.iPair(creepTable)) {
-                if (!this.targetsHit[creep.entindex()]) {
-                    table.insert(this.targetsHit, creep.entindex(), true);
+                if (!this.targetsHit.includes(creep.entindex())) {
+                    this.targetsHit.push(creep.entindex());
                     newTarget = creep;
                     return;
                 }
@@ -1090,7 +1092,7 @@ export class modifier_imba_dazzle_nothl_protection_aura_talent extends BaseModif
 @registerAbility()
 export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
     public talentWaveDelayed: { [k: string]: any };
-    public targetsHit: any;
+    public targetsHit: EntityIndex[];
     GetAbilityTextureName(): string {
         return "dazzle_shadow_wave";
     }
@@ -1159,12 +1161,12 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
                 ParticleManager.SetParticleControlEnt(waveParticle, 1, target, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", target.GetAbsOrigin(), true);
                 ParticleManager.ReleaseParticleIndex(waveParticle);
             } else {
-                this.targetsHit = {}
-                table.insert(this.targetsHit, caster.entindex(), true);
+                this.targetsHit = []
+                this.targetsHit.push(caster.entindex());
                 this.WaveHit(caster, true);
                 this.WaveBounce(target, isAlly);
                 if (target != caster) {
-                    table.insert(this.targetsHit, target.entindex(), true);
+                    this.targetsHit.push(target.entindex());
                 }
                 EmitSoundOn("Hero_Dazzle.Shadow_Wave", this.GetCasterPlus());
                 let waveParticle = ResHelper.CreateParticleEx("particles/units/heroes/hero_dazzle/dazzle_shadow_wave.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, caster);
@@ -1196,16 +1198,16 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
             let heroTable = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, bounceDistance, targetTeam, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
             let creepTable = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, bounceDistance, targetTeam, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
             for (const [_, hero] of GameFunc.iPair(heroTable)) {
-                if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit[hero.entindex()]) {
-                    table.insert(this.targetsHit, hero.entindex(), true);
+                if (hero.GetHealth() < hero.GetMaxHealth() && !this.targetsHit.includes(hero.entindex())) {
+                    this.targetsHit.push(hero.entindex());
                     newTarget = hero;
                     return;
                 }
             }
             if (!newTarget) {
                 for (const [_, hero] of GameFunc.iPair(heroTable)) {
-                    if (!this.targetsHit[hero.entindex()]) {
-                        table.insert(this.targetsHit, hero.entindex(), true);
+                    if (!this.targetsHit.includes(hero.entindex())) {
+                        this.targetsHit.push(hero.entindex());
                         newTarget = hero;
                         return;
                     }
@@ -1213,8 +1215,8 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
             }
             if (!newTarget) {
                 for (const [_, creep] of GameFunc.iPair(creepTable)) {
-                    if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit[creep.entindex()]) {
-                        table.insert(this.targetsHit, creep.entindex(), true);
+                    if (creep.GetHealth() < creep.GetMaxHealth() && !this.targetsHit.includes(creep.entindex())) {
+                        this.targetsHit.push(creep.entindex());
                         newTarget = creep;
                         return;
                     }
@@ -1222,8 +1224,8 @@ export class imba_dazzle_shadow_wave extends BaseAbility_Plus {
             }
             if (!newTarget) {
                 for (const [_, creep] of GameFunc.iPair(creepTable)) {
-                    if (!this.targetsHit[creep.entindex()]) {
-                        table.insert(this.targetsHit, creep.entindex(), true);
+                    if (!this.targetsHit.includes(creep.entindex())) {
+                        this.targetsHit.push(creep.entindex());
                         newTarget = creep;
                         return;
                     }

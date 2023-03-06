@@ -267,8 +267,8 @@ export class imba_brewmaster_cinder_brew extends BaseAbility_Plus {
     }
     OnProjectileThinkHandle(projectileHandle: ProjectileID): void {
         for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), ProjectileManager.GetLinearProjectileLocation(projectileHandle), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
-            if (this.projectiles[projectileHandle]["destination"] && ((this.projectiles[projectileHandle]["destination"] - ProjectileManager.GetLinearProjectileLocation(projectileHandle)) * Vector(1, 1, 0) as Vector).Length2D() <= this.GetSpecialValueFor("radius") && ((unit.GetAbsOrigin() - ProjectileManager.GetLinearProjectileLocation(projectileHandle)) * Vector(1, 1, 0) as Vector).Length2D() <= this.GetSpecialValueFor("radius") && !this.projectiles[projectileHandle][unit.entindex()]) {
-                this.projectiles[projectileHandle][unit.entindex()] = true;
+            if (this.projectiles[projectileHandle]["destination"] && ((this.projectiles[projectileHandle]["destination"] - ProjectileManager.GetLinearProjectileLocation(projectileHandle)) * Vector(1, 1, 0) as Vector).Length2D() <= this.GetSpecialValueFor("radius") && ((unit.GetAbsOrigin() - ProjectileManager.GetLinearProjectileLocation(projectileHandle)) * Vector(1, 1, 0) as Vector).Length2D() <= this.GetSpecialValueFor("radius") && !this.projectiles[projectileHandle][unit.entindex() + ""]) {
+                this.projectiles[projectileHandle][unit.entindex() + ""] = true;
                 if (unit.IsRealUnit()) {
                     unit.EmitSound("Hero_Brewmaster.CinderBrew.Target");
                 } else {
@@ -291,8 +291,8 @@ export class imba_brewmaster_cinder_brew extends BaseAbility_Plus {
         if (!target && location) {
             EmitSoundOnLocationWithCaster(location, "Hero_Brewmaster.CinderBrew", this.GetCasterPlus());
             for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
-                if (!this.projectiles[projectileHandle][unit.entindex()]) {
-                    this.projectiles[projectileHandle][unit.entindex()] = true;
+                if (!this.projectiles[projectileHandle][unit.entindex() + ""]) {
+                    this.projectiles[projectileHandle][unit.entindex() + ""] = true;
                     if (unit.IsRealUnit()) {
                         unit.EmitSound("Hero_Brewmaster.CinderBrew.Target");
                     } else {
@@ -981,7 +981,7 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
                     if (bNoneAlive) {
                         this.parent.RemoveModifierByName("modifier_imba_brewmaster_primal_split_duration");
                         if (keys.attacker != this.GetParentPlus()) {
-                            this.parent.Kill(this.GetAbilityPlus(), keys.attacker);
+                            // this.parent.Kill(this.GetAbilityPlus(), keys.attacker);
                         }
                     }
                 }

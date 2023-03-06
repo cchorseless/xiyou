@@ -50,7 +50,7 @@ export class item_imba_dagon extends BaseItem_Plus {
                         search_sources[GameFunc.GetCount(search_sources) + 1] = potential_target;
                     }
                 }
-                table.remove(search_sources, potential_source_index);
+                search_sources.splice(potential_source_index, 1);
             }
         }
     }

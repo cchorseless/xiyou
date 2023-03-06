@@ -189,7 +189,7 @@ export class modifier_imba_keeper_of_the_light_illuminate extends BaseModifier_P
     public direction_angle: any;
     public channel_time: number;
     public particle: any;
-    public hit_targets: any;
+    public hit_targets: IBaseNpc_Plus[];
     BeCreated(params: any): void {
         if (!IsServer()) {
             return;
@@ -209,7 +209,7 @@ export class modifier_imba_keeper_of_the_light_illuminate extends BaseModifier_P
         ParticleManager.SetParticleControl(this.particle, 1, this.direction * this.speed as Vector);
         ParticleManager.SetParticleControl(this.particle, 3, this.parent.GetAbsOrigin());
         this.AddParticle(this.particle, false, false, -1, false, false);
-        this.hit_targets = {}
+        this.hit_targets = []
         this.OnIntervalThink();
         this.StartIntervalThink(FrameTime());
     }
@@ -225,7 +225,7 @@ export class modifier_imba_keeper_of_the_light_illuminate extends BaseModifier_P
             let target_angle = math.deg(math.atan2((target_pos.x - this.parent.GetAbsOrigin().x), target_pos.y - this.parent.GetAbsOrigin().y));
             let difference = math.abs(this.direction_angle - target_angle);
             if (difference <= 90 || difference >= 270) {
-                table.insert(valid_targets, target);
+                valid_targets.push(target);
             }
         }
         for (const [_, target] of GameFunc.iPair(valid_targets)) {
@@ -270,7 +270,7 @@ export class modifier_imba_keeper_of_the_light_illuminate extends BaseModifier_P
                 let particle = ResHelper.CreateParticleEx(particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
                 ParticleManager.SetParticleControl(particle, 1, target.GetAbsOrigin());
                 ParticleManager.ReleaseParticleIndex(particle);
-                table.insert(this.hit_targets, target);
+                this.hit_targets.push(target);
             }
         }
         this.parent.SetAbsOrigin(this.parent.GetAbsOrigin() + (this.direction * this.speed * FrameTime()) as Vector);

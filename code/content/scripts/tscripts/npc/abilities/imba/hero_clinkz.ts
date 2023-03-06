@@ -1265,7 +1265,7 @@ export class imba_clinkz_death_pact extends BaseAbility_Plus {
         if (modifier_stacks) {
             modifier_stacks.SetStackCount(pact_stacks);
         }
-        caster.CalculateStatBonus(true);
+        // caster.CalculateStatBonus(true);
         if (caster.HasTalent("special_bonus_imba_clinkz_8") && caster.GetTeamNumber() != target.GetTeamNumber()) {
             let mark_duration = caster.GetTalentValue("special_bonus_imba_clinkz_8", "mark_duration");
             target.AddNewModifier(caster, ability, modifier_talent_debuff_mark, {

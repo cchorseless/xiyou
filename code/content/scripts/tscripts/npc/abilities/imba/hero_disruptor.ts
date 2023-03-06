@@ -236,13 +236,13 @@ export class modifier_imba_thunder_strike_debuff extends BaseModifier_Plus {
                         if (GameFunc.GetCount(targets_hit) == max_targets) {
                             return;
                         }
-                        table.remove(search_sources, potential_source_index);
+                        search_sources.splice(potential_source_index, 1)
                         source_removed = true;
                         return;
                     }
                 }
                 if (!source_removed) {
-                    table.remove(search_sources, potential_source_index);
+                    search_sources.splice(potential_source_index, 1)
                 }
             }
         }
@@ -575,7 +575,7 @@ export class modifier_imba_glimpse extends BaseModifier_Plus {
             this.possible_positions = this.backtrack_time / 0.1;
             this.vPositions = [];
             for (let i = 0; i < this.possible_positions; i++) {
-                table.insert(this.vPositions, this.GetParentPlus().GetOrigin());
+                this.vPositions.push(this.GetParentPlus().GetOrigin());
             }
             this.flExpireTime = -1;
             this.StartIntervalThink(this.interval);

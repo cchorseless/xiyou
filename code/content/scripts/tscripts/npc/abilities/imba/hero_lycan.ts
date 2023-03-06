@@ -1244,12 +1244,12 @@ export class modifier_imba_summoned_wolf_wicked_crunch_debuff extends BaseModifi
             if (!params.lycan_attack) {
                 this.stacks_table = []
                 if (!params.lycan_attack) {
-                    table.insert(this.stacks_table, GameRules.GetGameTime());
+                    this.stacks_table.push(GameRules.GetGameTime());
                 }
                 this.StartIntervalThink(0.1);
                 this.owner = this.caster.GetOwnerEntity();
                 if (this.owner.HasTalent("special_bonus_imba_lycan_6") && !params.lycan_attack) {
-                    table.insert(this.stacks_table, GameRules.GetGameTime());
+                    this.stacks_table.push(GameRules.GetGameTime());
                 }
             }
         }
@@ -1268,20 +1268,20 @@ export class modifier_imba_summoned_wolf_wicked_crunch_debuff extends BaseModifi
                 this.max_stacks = this.max_stacks * this.owner.GetTalentValue("special_bonus_imba_lycan_6") * 0.01;
             }
             if (!params.lycan_attack) {
-                table.insert(this.stacks_table, GameRules.GetGameTime());
+                this.stacks_table.push(GameRules.GetGameTime());
                 if (GameFunc.GetCount(this.stacks_table) > this.max_stacks) {
-                    table.remove(this.stacks_table, 1);
+                    this.stacks_table.shift();
                 }
                 if (this.owner.HasTalent("special_bonus_imba_lycan_6")) {
-                    table.insert(this.stacks_table, GameRules.GetGameTime());
+                    this.stacks_table.push(GameRules.GetGameTime());
                 }
                 if (GameFunc.GetCount(this.stacks_table) > this.max_stacks) {
-                    table.remove(this.stacks_table, 1);
+                    this.stacks_table.shift();
                 }
             } else {
-                for (let i = 0; i < GameFunc.GetCount(this.stacks_table); i++) {
-                    table.remove(this.stacks_table, i);
-                    table.insert(this.stacks_table, GameRules.GetGameTime());
+                for (let [i, v] of GameFunc.iPair(this.stacks_table)) {
+                    this.stacks_table.splice(i, 1);
+                    this.stacks_table.push(GameRules.GetGameTime());
                 }
             }
         }
@@ -1292,11 +1292,11 @@ export class modifier_imba_summoned_wolf_wicked_crunch_debuff extends BaseModifi
     OnIntervalThink(): void {
         if (IsServer()) {
             if (GameFunc.GetCount(this.stacks_table) > 0) {
-                for (let i = 0; i < GameFunc.GetCount(this.stacks_table); i++) {
+                for (let [i, j] of GameFunc.iPair(this.stacks_table)) {
                     if (this.stacks_table[i]) {
                         if (this.stacks_table[i] + this.duration < GameRules.GetGameTime()) {
                             if (this.stacks_table) {
-                                table.remove(this.stacks_table, i);
+                                this.stacks_table.splice(i, 1);
                             }
                         }
                     } else {
@@ -1382,12 +1382,12 @@ export class modifier_imba_summoned_wolf_wicked_crunch_damage extends BaseModifi
             if (!params.lycan_attack) {
                 this.stacks_table = []
                 if (!params.lycan_attack) {
-                    table.insert(this.stacks_table, GameRules.GetGameTime());
+                    this.stacks_table.push(GameRules.GetGameTime());
                 }
                 this.StartIntervalThink(0.1);
                 this.owner = this.caster.GetOwnerEntity();
                 if (this.owner.HasTalent("special_bonus_imba_lycan_6") && !params.lycan_attack) {
-                    table.insert(this.stacks_table, GameRules.GetGameTime());
+                    this.stacks_table.push(GameRules.GetGameTime());
                 }
             }
         }
@@ -1402,27 +1402,27 @@ export class modifier_imba_summoned_wolf_wicked_crunch_damage extends BaseModifi
             if (this.owner.HasTalent("special_bonus_imba_lycan_6")) {
                 this.max_stacks = this.max_stacks * this.owner.GetTalentValue("special_bonus_imba_lycan_6") * 0.01;
             }
-            table.insert(this.stacks_table, GameRules.GetGameTime());
+            this.stacks_table.push(GameRules.GetGameTime());
             if (GameFunc.GetCount(this.stacks_table) > this.max_stacks) {
-                table.remove(this.stacks_table, 1);
+                this.stacks_table.shift()
             }
             this.owner = this.caster.GetOwnerEntity();
             if (this.owner.HasTalent("special_bonus_imba_lycan_6") && this.GetStackCount() < this.max_stacks) {
-                table.insert(this.stacks_table, GameRules.GetGameTime());
+                this.stacks_table.push(GameRules.GetGameTime());
             }
             if (GameFunc.GetCount(this.stacks_table) > this.max_stacks) {
-                table.remove(this.stacks_table, 1);
+                this.stacks_table.shift()
             }
         }
     }
     OnIntervalThink(): void {
         if (IsServer()) {
             if (GameFunc.GetCount(this.stacks_table) > 0) {
-                for (let i = 0; i < GameFunc.GetCount(this.stacks_table); i++) {
+                for (let [i, j] of GameFunc.iPair(this.stacks_table)) {
                     if (this.stacks_table[i]) {
                         if (this.stacks_table[i] + this.duration < GameRules.GetGameTime()) {
                             if (this.stacks_table) {
-                                table.remove(this.stacks_table, i);
+                                this.stacks_table.splice(i, 1);
                             }
                         }
                     } else {

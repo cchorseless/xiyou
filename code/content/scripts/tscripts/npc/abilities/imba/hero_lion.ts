@@ -6,7 +6,7 @@ import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_P
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
 @registerAbility()
 export class imba_lion_earth_spike extends BaseAbility_Plus {
-    tempdata: { [k: string]: any[] } = {};
+    tempdata: { [k: string]: IBaseNpc_Plus[] } = {};
     GetAbilityTextureName(): string {
         return "lion_impale";
     }
@@ -101,7 +101,7 @@ export class imba_lion_earth_spike extends BaseAbility_Plus {
                 return;
             }
         }
-        table.insert(this.tempdata[hit_targets_index], target);
+        this.tempdata[hit_targets_index].push(target);
         travel_distance = travel_distance + GPropertyCalculate.GetCastRangeBonus(caster);
         let target_position = target.GetAbsOrigin();
         target_position.z = 0;
@@ -141,7 +141,7 @@ export class imba_lion_earth_spike extends BaseAbility_Plus {
                         }
                     }
                     if (enemy != target && !hit_by_earth_spikes && !earth_spikes_incoming) {
-                        table.insert(this.tempdata[incoming_targets_index], enemy);
+                        this.tempdata[incoming_targets_index].push(enemy);
                         bounces_left = bounces_left - 1;
                         let direction = (enemy.GetAbsOrigin() - target.GetAbsOrigin() as Vector).Normalized();
                         caster.EmitSound(sound_cast);
@@ -906,7 +906,7 @@ export class imba_lion_finger_of_death extends BaseAbility_Plus {
             let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, enemies_frog_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
                 if (!enemy.IsMagicImmune() && !enemy.HasModifier(modifier_hex)) {
-                    table.insert(finger_scepter_enemies, enemy);
+                    finger_scepter_enemies.push(enemy);
                 }
             }
             enemies = FindUnitsInRadius(caster.GetTeamNumber(), target.GetAbsOrigin(), undefined, scepter_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS, FindOrder.FIND_ANY_ORDER, false);

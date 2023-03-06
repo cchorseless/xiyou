@@ -757,7 +757,7 @@ export class imba_shadow_shaman_mass_serpent_ward extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(spawn_particle_fx, 0, target_point);
         let formation_vectors: Vector[] = []
         for (let i = 0; i < ward_count; i++) {
-            table.insert(formation_vectors, Vector(math.cos(math.rad(((360 / ward_count) * i))), math.sin(math.rad(((360 / ward_count) * i))), 0) * 150);
+            formation_vectors.push(Vector(math.cos(math.rad(((360 / ward_count) * i))), math.sin(math.rad(((360 / ward_count) * i))), 0) * 150 as Vector);
         }
         let find_clear_space = true;
         let npc_owner = caster;

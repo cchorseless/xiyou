@@ -852,7 +852,7 @@ export class modifier_imba_invoker_sun_strike_thinker extends BaseModifier_Plus 
     public incinerate_duration: number;
     public mini_beam_radius: number;
     public bCataclysm: any;
-    public sun_strike_points: any;
+    public sun_strike_points: Vector[];
     public target_point: any;
     public cataclysm_point: any;
     BeCreated(kv: any): void {
@@ -868,7 +868,7 @@ export class modifier_imba_invoker_sun_strike_thinker extends BaseModifier_Plus 
         this.incinerate_duration = this.GetSpecialValueFor("incinerate_duration");
         this.mini_beam_radius = this.GetSpecialValueFor("incinerate_beam_radius");
         this.bCataclysm = kv.bCataclysm;
-        this.sun_strike_points = {}
+        this.sun_strike_points = [];
         if ((kv.target_point_x && kv.target_point_y && kv.target_point_z)) {
             this.target_point = Vector(kv.target_point_x, kv.target_point_y, kv.target_point_z);
         }
@@ -884,7 +884,7 @@ export class modifier_imba_invoker_sun_strike_thinker extends BaseModifier_Plus 
                 ParticleManager.SetParticleControl(sun_strike_beam, 0, this.target_point);
                 ParticleManager.SetParticleControl(sun_strike_beam, 1, Vector(this.area_of_effect, 0, 0));
                 this.AddParticle(sun_strike_beam, false, false, -1, false, false);
-                table.insert(this.sun_strike_points, this.target_point);
+                this.sun_strike_points.push(this.target_point);
             } else {
             }
         } else {
@@ -904,7 +904,7 @@ export class modifier_imba_invoker_sun_strike_thinker extends BaseModifier_Plus 
                         ParticleManager.SetParticleControl(sun_strike_beam, 0, this.cataclysm_point);
                         ParticleManager.SetParticleControl(sun_strike_beam, 1, Vector(this.area_of_effect, 0, 0));
                         this.AddParticle(sun_strike_beam, false, false, -1, false, false);
-                        table.insert(this.sun_strike_points, this.cataclysm_point);
+                        this.sun_strike_points.push(this.cataclysm_point);
                     }
                 }
             }
@@ -1879,7 +1879,7 @@ export class imba_invoker_forge_spirit extends BaseAbility_Plus {
             let updated_spirit_array: IBaseNpc_Plus[] = []
             for (const spirit of (this.forged_spirits)) {
                 if (!spirit.IsNull()) {
-                    table.insert(updated_spirit_array, spirit);
+                    updated_spirit_array.push(spirit);
                 }
             }
             this.forged_spirits = updated_spirit_array;
@@ -1919,7 +1919,7 @@ export class imba_invoker_forge_spirit extends BaseAbility_Plus {
                 forged_spirit.SetBaseMaxHealth(spirit_hp);
                 forged_spirit.SetPhysicalArmorBaseValue(spirit_armor);
                 forged_spirit.SetControllableByPlayer(caster.GetPlayerID(), true);
-                table.insert(this.forged_spirits, forged_spirit);
+                this.forged_spirits.push(forged_spirit);
             }
         }
     }

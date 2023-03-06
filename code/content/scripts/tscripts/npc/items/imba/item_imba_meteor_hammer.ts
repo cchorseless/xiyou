@@ -188,7 +188,7 @@ export class modifier_item_imba_meteor_hammer_burn extends BaseModifier_Plus {
     public impact_damage_buildings: number;
     public impact_damage_units: number;
     public spell_reduction_pct: number;
-    public affectedUnits: any;
+    public affectedUnits: IBaseNpc_Plus[];
     public burn_dps: any;
     public damageTable: ApplyDamageOptions;
     GetEffectName(): string {
@@ -223,8 +223,8 @@ export class modifier_item_imba_meteor_hammer_burn extends BaseModifier_Plus {
         this.impact_damage_buildings = this.ability.GetSpecialValueFor("impact_damage_buildings");
         this.impact_damage_units = this.ability.GetSpecialValueFor("impact_damage_units");
         this.spell_reduction_pct = this.ability.GetSpecialValueFor("spell_reduction_pct");
-        this.affectedUnits = {}
-        table.insert(this.affectedUnits, this.parent);
+        this.affectedUnits = []
+        this.affectedUnits.push(this.parent);
         this.burn_dps = this.burn_dps_units;
         if (this.parent.IsBuilding()) {
             this.burn_dps = this.burn_dps_buildings;

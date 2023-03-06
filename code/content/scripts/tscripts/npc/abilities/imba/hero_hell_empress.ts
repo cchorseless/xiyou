@@ -284,7 +284,7 @@ export class modifier_imba_hurl_through_hell extends BaseModifier_Plus {
             ]
 
             for (let i = 0; i < this.debuff_amount; i++) {
-                parent.AddNewModifier(caster, ability, table.remove(debuff_table, RandomInt(0, GameFunc.GetCount(debuff_table))),
+                parent.AddNewModifier(caster, ability, GFuncRandom.RandomRemove(debuff_table),
                     {
                         duration: this.debuff_duration
                     });

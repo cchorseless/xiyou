@@ -419,7 +419,7 @@ export class modifier_imba_sacred_arrow_stun extends BaseModifier_Plus {
     public parent: IBaseNpc_Plus;
     public modifier_arrow_stun: any;
     public modifier_haste: any;
-    public attackers_table: any;
+    public attackers_table: IBaseNpc_Plus[];
     public on_prow_crit_damage: number;
     BeCreated(p_0: any,): void {
         if (IsServer()) {
@@ -428,7 +428,7 @@ export class modifier_imba_sacred_arrow_stun extends BaseModifier_Plus {
             this.parent = this.GetParentPlus();
             this.modifier_arrow_stun = "modifier_imba_sacred_arrow_stun";
             this.modifier_haste = "modifier_imba_sacred_arrow_haste";
-            this.attackers_table = {}
+            this.attackers_table = []
             this.on_prow_crit_damage = this.ability.GetSpecialValueFor("on_prow_crit_damage");
         }
     }
@@ -488,7 +488,7 @@ export class modifier_imba_sacred_arrow_stun extends BaseModifier_Plus {
                         }
                     }
                 }
-                table.insert(this.attackers_table, attacker);
+                this.attackers_table.push(attacker);
             }
         }
     }

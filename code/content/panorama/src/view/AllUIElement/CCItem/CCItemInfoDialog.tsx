@@ -170,17 +170,17 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
         let iBehavior = iItemIndex != -1 ? Abilities.GetBehavior(iItemIndex) : AbilityHelper.SBehavior2IBehavior(tData.AbilityBehavior || "");
         let sCastType = AbilityHelper.getCastType(iBehavior);
         dialogVariables['casttype'] = $.Localize("#" + sCastType);
-        let iTeam = iItemIndex != -1 ? Abilities.GetAbilityTargetTeam(iItemIndex) : AbilityHelper.STeam2ITeam(tData.AbilityUnitTargetTeam || "");
-        let iType = iItemIndex != -1 ? Abilities.GetAbilityTargetType(iItemIndex) : AbilityHelper.SType2IType(tData.AbilityUnitTargetType || "");
+        let iTeam = iItemIndex != -1 ? Abilities.GetAbilityTargetTeam(iItemIndex) : AbilityHelper.STeam2ITeam(tData.AbilityUnitTargetTeam as string|| "");
+        let iType = iItemIndex != -1 ? Abilities.GetAbilityTargetType(iItemIndex) : AbilityHelper.SType2IType(tData.AbilityUnitTargetType as string|| "");
         let sTargetType = AbilityHelper.getTargetType(iTeam, iType);
         dialogVariables['targettype'] = $.Localize("#" + sTargetType);
-        let iDamageType = iItemIndex != -1 ? Abilities.GetAbilityDamageType(iItemIndex) : AbilityHelper.SDamageType2IDamageType(tData.AbilityUnitDamageType || "");
+        let iDamageType = iItemIndex != -1 ? Abilities.GetAbilityDamageType(iItemIndex) : AbilityHelper.SDamageType2IDamageType(tData.AbilityUnitDamageType as string|| "");
         let sDamageType = AbilityHelper.getDamageType(iDamageType);
         dialogVariables['damagetype'] = $.Localize("#" + sDamageType);
-        let sSpellImmunity = AbilityHelper.getSpellImmunity(tData.SpellImmunityType || "");
+        let sSpellImmunity = AbilityHelper.getSpellImmunity(tData.SpellImmunityType as string || "");
         dialogVariables['spellimmunity'] = $.Localize("#" + sSpellImmunity);
         let sSpellDispellableType = tData.SpellDispellableType || "";
-        let sDispelType = AbilityHelper.getDispelType(sSpellDispellableType);
+        let sDispelType = AbilityHelper.getDispelType(sSpellDispellableType as string);
         dialogVariables['dispeltype'] = $.Localize("#" + sDispelType);
 
         let ScepterUpgradable = (tData.HasScepterUpgrade ? tData.HasScepterUpgrade == "1" : false) && Entities.HasScepter(castentityindex);
@@ -208,7 +208,7 @@ export class CCItemInfoDialog extends CCPanel<ICCItemInfoDialog> {
             let sValueDescription = "#DOTA_Tooltip_ability_" + itemname + "_" + sValueName;
             switch (sValueName) {
                 case "abilitydamage":
-                    var aValues = AbilityHelper.StringToValues(tData.AbilityDamage || "");
+                    var aValues = AbilityHelper.StringToValues(tData.AbilityDamage as string || "");
                     sValueDescription = "AbilityDamage";
                     if (aValues.length == 0 || (aValues.length == 1 && aValues[0] == 0)) sValueDescription = "";
                     break;

@@ -240,7 +240,7 @@ export class modifier_imba_silencer_glaives_of_wisdom_buff extends BaseModifier_
         }
         let stacks = this.GetStackCount();
         if (stacks > prev_stacks) {
-            table.insert(this.stack_table, GameRules.GetGameTime());
+            this.stack_table.push(GameRules.GetGameTime());
             this.ForceRefresh();
             // this.GetParentPlus().CalculateStatBonus(true);
         }
@@ -254,7 +254,7 @@ export class modifier_imba_silencer_glaives_of_wisdom_buff extends BaseModifier_
                     this.Destroy();
                     return;
                 } else {
-                    table.remove(this.stack_table, 1);
+                    this.stack_table.shift();
                     this.DecrementStackCount();
                 }
             } else {
@@ -302,7 +302,7 @@ export class modifier_imba_silencer_glaives_of_wisdom_debuff extends BaseModifie
         }
         let stacks = this.GetStackCount();
         if (stacks > prev_stacks) {
-            table.insert(this.stack_table, GameRules.GetGameTime());
+            this.stack_table.push(GameRules.GetGameTime());
             this.ForceRefresh();
             // this.GetParentPlus().CalculateStatBonus(true);
         }
@@ -316,7 +316,7 @@ export class modifier_imba_silencer_glaives_of_wisdom_debuff extends BaseModifie
                     this.Destroy();
                     return;
                 } else {
-                    table.remove(this.stack_table, 1);
+                    this.stack_table.shift();
                     this.DecrementStackCount();
                 }
             } else {
@@ -680,7 +680,7 @@ export class modifier_imba_silencer_glaives_int_damage extends BaseModifier_Plus
                     int_taken = -(1 - this.target_intelligence);
                 }
                 this.total_int_reduced = this.total_int_reduced + int_taken;
-                target.CalculateStatBonus(true);
+                // target.CalculateStatBonus(true);
             }
         }
     }
@@ -1113,7 +1113,7 @@ export class modifier_imba_silencer_arcane_supremacy extends BaseModifier_Plus {
                     }
                     if (stealType) {
                         let enemy_min_int = 1;
-                        let enemy_intelligence = params.unit.GetBaseIntellect();
+                        let enemy_intelligence = GPropertyCalculate.GetBaseIntellect(params.unit)
                         let enemy_intelligence_taken = 0;
                         let steal_amount = this.steal_amount;
                         if (stealType == "underUlt") {
@@ -1125,11 +1125,11 @@ export class modifier_imba_silencer_arcane_supremacy extends BaseModifier_Plus {
                             } else {
                                 enemy_intelligence_taken = -(enemy_min_int - enemy_intelligence);
                             }
-                            params.unit.SetBaseIntellect(enemy_intelligence - enemy_intelligence_taken);
-                            params.unit.CalculateStatBonus(true);
-                            this.caster.SetBaseIntellect(this.caster.GetBaseIntellect() + enemy_intelligence_taken);
+                            // params.unit.SetBaseIntellect(enemy_intelligence - enemy_intelligence_taken);
+                            // params.unit.CalculateStatBonus(true);
+                            // this.caster.SetBaseIntellect(this.caster.GetBaseIntellect() + enemy_intelligence_taken);
                             this.SetStackCount(this.GetStackCount() + enemy_intelligence_taken);
-                            this.caster.CalculateStatBonus(true);
+                            // this.caster.CalculateStatBonus(true);
                             let life_time = 2.0;
                             let digits = string.len(math.floor(enemy_intelligence_taken) + "") + 1;
                             let numParticle = ResHelper.CreateParticleEx("particles/msg_fx/msg_miss.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.caster);

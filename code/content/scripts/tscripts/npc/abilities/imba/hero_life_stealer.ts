@@ -123,9 +123,9 @@ export class modifier_imba_life_stealer_rage_insanity extends BaseModifier_Plus 
                 this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_life_stealer_rage_insanity_active", {
                     duration: this.active_duration * (1 - this.GetParentPlus().GetStatusResistance()),
                     active_range: this.active_range,
-                    target_entindex: enemies[2].entindex()
+                    target_entindex: enemies[1].entindex()
                 });
-                enemies[2].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_life_stealer_rage_insanity_target", {
+                enemies[1].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_life_stealer_rage_insanity_target", {
                     duration: this.active_duration * (1 - this.GetParentPlus().GetStatusResistance())
                 });
             } else {
@@ -182,10 +182,10 @@ export class modifier_imba_life_stealer_rage_insanity_active extends BaseModifie
         if (!this.target || !this.target.IsAlive()) {
             let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.active_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_CLOSEST, false);
             if (GameFunc.GetCount(enemies) >= 2) {
-                let insanity_target_modifier = enemies[2].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_life_stealer_rage_insanity_target", {
+                let insanity_target_modifier = enemies[1].AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_life_stealer_rage_insanity_target", {
                     duration: this.GetRemainingTime()
                 });
-                this.target = enemies[2];
+                this.target = enemies[1];
                 this.GetParentPlus().MoveToTargetToAttack(this.target);
                 this.GetParentPlus().SetForceAttackTargetAlly(this.target);
             } else {
@@ -499,7 +499,7 @@ export class modifier_imba_life_stealer_open_wounds extends BaseModifier_Plus {
         ParticleManager.ReleaseParticleIndex(impact_particle);
         this.slow_steps = []
         for (let step = 0; step <= this.GetSpecialValueFor("duration") - 1; step++) {
-            table.insert(this.slow_steps, this.GetAbilityPlus().GetLevelSpecialValueFor("slow_steps", step));
+            this.slow_steps.push(this.GetAbilityPlus().GetLevelSpecialValueFor("slow_steps", step));
         }
         this.SetStackCount(this.slow_steps[math.floor(this.GetElapsedTime()) + 1]);
         this.StartIntervalThink(0.1);

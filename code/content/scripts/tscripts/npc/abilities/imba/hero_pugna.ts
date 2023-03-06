@@ -739,7 +739,7 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
                 if (GameFunc.GetCount(creeps) == 1) {
                     return undefined;
                 }
-                target = creeps[2];
+                target = creeps[1];
                 target_point = target.GetAbsOrigin();
                 ability_range = ability.GetCastRange(ward.GetAbsOrigin(), target);
             }
@@ -755,7 +755,7 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
                     target_point = target.GetAbsOrigin();
                     ability_range = ability.GetCastRange(ward.GetAbsOrigin(), target);
                 } else {
-                    target = allies[2];
+                    target = allies[1];
                     target_point = target.GetAbsOrigin();
                     ability_range = ability.GetCastRange(ward.GetAbsOrigin(), target);
                 }
@@ -787,7 +787,7 @@ export class modifier_imba_nether_ward_degen extends BaseModifier_Plus {
                 if (GameFunc.GetCount(enemies) > 0) {
                     if (enemies[0].findAbliityPlus("imba_sven_storm_bolt")) {
                         if (GameFunc.GetCount(enemies) > 1) {
-                            target = enemies[2];
+                            target = enemies[1];
                         } else {
                             return;
                         }

@@ -39,8 +39,8 @@ export class imba_warlock_fatal_bonds extends BaseAbility_Plus {
                     let bond_modifier = enemy.AddNewModifier(caster, ability, modifier_bonds, {
                         duration: duration * (1 - enemy.GetStatusResistance())
                     });
-                    table.insert(modifier_table, bond_modifier);
-                    table.insert(bond_table, enemy);
+                    modifier_table.push(bond_modifier as modifier_imba_fatal_bonds);
+                    bond_table.push(enemy);
                     linked_units.push(enemy.GetEntityIndex());;
                     if (enemy == target) {
                         let particle_hit_fx = ResHelper.CreateParticleEx("particles/units/heroes/hero_warlock/warlock_fatal_bonds_hit_parent.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN_FOLLOW, caster, caster);
@@ -125,9 +125,9 @@ export class modifier_imba_fatal_bonds extends BaseModifier_Plus {
             if (enemy != this.GetParentPlus()) {
                 let bond_modifiers = enemy.FindAllModifiersByName("modifier_imba_fatal_bonds") as modifier_imba_fatal_bonds[];
                 for (const modifier of (bond_modifiers)) {
-                    for (let num = GameFunc.GetCount((modifier.bond_table)); num >= 0; num += -1) {
+                    for (let num = GameFunc.GetCount((modifier.bond_table)) - 1; num >= 0; num--) {
                         if ((modifier.bond_table)[num] == this.GetParentPlus()) {
-                            table.remove(modifier.bond_table, num);
+                            modifier.bond_table.splice(num, 1);
                             return;
                         }
                     }
@@ -818,8 +818,8 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
     public scepter_damage_transfer_pct: number;
     public scepter_damage_per_demon_pct: number;
     public scepter_demon_count: number;
-    public demon_table: any;
-    public particle_table: any;
+    public demon_table: IBaseNpc_Plus[];
+    public particle_table: ParticleID[];
     IsPurgable(): boolean {
         return false;
     }
@@ -838,8 +838,8 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
         this.scepter_damage_transfer_pct = this.ability.GetSpecialValueFor("scepter_damage_transfer_pct");
         this.scepter_damage_per_demon_pct = this.ability.GetSpecialValueFor("scepter_damage_per_demon_pct");
         this.scepter_demon_count = this.ability.GetSpecialValueFor("scepter_demon_count");
-        this.demon_table = {}
-        this.particle_table = {}
+        this.demon_table = []
+        this.particle_table = []
         if (IsServer()) {
             this.AddTimer(FrameTime(), () => {
                 if (GameFunc.GetCount(this.demon_table) < this.scepter_demon_count) {
@@ -921,7 +921,7 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
     CC_OnDeath(keys: ModifierInstanceEvent): void {
         if (IsServer()) {
             let unit = keys.unit;
-            for (let i = 0; i < GameFunc.GetCount(this.demon_table); i++) {
+            for (let [i, v] of GameFunc.iPair(this.demon_table)) {
                 if (unit == this.demon_table[i]) {
                     this.DecrementStackCount();
                     if (!this.particle_table[i]) {
@@ -929,8 +929,8 @@ export class modifier_imba_rain_of_chaos_demon_link extends BaseModifier_Plus {
                     }
                     ParticleManager.DestroyParticle(this.particle_table[i], false);
                     ParticleManager.ReleaseParticleIndex(this.particle_table[i]);
-                    table.remove(this.demon_table, i);
-                    table.remove(this.particle_table, i);
+                    this.demon_table.splice(i, 1)
+                    this.particle_table.splice(i, 1)
                 }
                 if (GameFunc.GetCount(this.demon_table) == 0) {
                     this.Destroy();

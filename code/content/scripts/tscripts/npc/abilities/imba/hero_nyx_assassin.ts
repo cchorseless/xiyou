@@ -860,7 +860,7 @@ export class modifier_imba_spiked_carapace extends BaseModifier_Plus {
     public damage_reflection_pct: number;
     public particle_spikes_fx: any;
     public reflect_all_damage: boolean = false;;
-    public enemiesHit: any;
+    public enemiesHit: { [k: string]: boolean };
     GetStatusEffectName(): string {
         if (this.GetStackCount() == 1) {
             return "particles/econ/items/nyx_assassin/nyx_ti9_immortal/status_effect_nyx_ti9_carapace.vpcf";
@@ -963,12 +963,12 @@ export class modifier_imba_spiked_carapace extends BaseModifier_Plus {
                 }
                 if (!keys.attacker.IsMagicImmune() && !keys.attacker.IsInvulnerable()) {
                     let skip_damage = false;
-                    if (!this.reflect_all_damage && this.enemiesHit[keys.attacker.entindex()]) {
+                    if (!this.reflect_all_damage && this.enemiesHit[keys.attacker.entindex() + ""]) {
                         skip_damage = true;
                     }
                     if (!skip_damage) {
                         if (this.enemiesHit != undefined) {
-                            this.enemiesHit[keys.attacker.entindex()] = true;
+                            this.enemiesHit[keys.attacker.entindex() + ""] = true;
                         }
                         ApplyDamage({
                             victim: keys.attacker,

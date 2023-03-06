@@ -848,7 +848,7 @@ export class modifier_imba_juggernaut_blade_dance_empowered_slice extends BaseMo
                     }
                     this.attack_count = this.attack_count - 1;
                     if (this.enemies_hit) {
-                        table.insert(this.enemies_hit, enemy);
+                        this.enemies_hit.push(enemy);
                     }
                 }
             }
@@ -1604,9 +1604,9 @@ export class modifier_imba_omni_slash_caster extends BaseModifier_Plus {
             order = FindOrder.FIND_CLOSEST;
         }
         this.nearby_enemies = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.bounce_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, order, false);
-        for (let count = GameFunc.GetCount(this.nearby_enemies); count >= 1; count += -1) {
+        for (let count = GameFunc.GetCount(this.nearby_enemies) - 1; count >= 0; count--) {
             if (this.nearby_enemies[count] && (this.nearby_enemies[count].GetName() == "npc_dota_unit_undying_zombie" || this.nearby_enemies[count].GetName() == "npc_dota_elder_titan_ancestral_spirit")) {
-                table.remove(this.nearby_enemies, count);
+                this.nearby_enemies.splice(count, 1);
             }
         }
         if (GameFunc.GetCount(this.nearby_enemies) >= 1) {

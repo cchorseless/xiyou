@@ -321,7 +321,7 @@ export class modifier_imba_void_spirit_resonant_pulse_ring extends BaseModifier_
     public radius: number;
     public thickness: any;
     public damage_type: number;
-    public hit_enemies: any;
+    public hit_enemies: { [k: string]: boolean };
     public ring_size: any;
     public center: any;
     public thinker_entindex: any;
@@ -364,7 +364,7 @@ export class modifier_imba_void_spirit_resonant_pulse_ring extends BaseModifier_
         }
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.center, undefined, this.ring_size, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             let distance = GFuncVector.CalculateDistance(enemy, this.center);
-            if (!this.hit_enemies[enemy.entindex()] && distance < this.ring_size + this.thickness && distance > this.ring_size - this.thickness) {
+            if (!this.hit_enemies[enemy.entindex() + ""] && distance < this.ring_size + this.thickness && distance > this.ring_size - this.thickness) {
                 enemy.EmitSound("Hero_VoidSpirit.Pulse.Target");
                 this.impact_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_void_spirit/pulse/void_spirit_pulse_impact.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy);
                 ParticleManager.SetParticleControlEnt(this.impact_particle, 1, enemy, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", enemy.GetAbsOrigin(), true);
@@ -420,7 +420,7 @@ export class modifier_imba_void_spirit_resonant_pulse_ring extends BaseModifier_
                         ExtraData: {}
                     });
                 }
-                this.hit_enemies[enemy.entindex()] = true;
+                this.hit_enemies[enemy.entindex() + ""] = true;
                 enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_void_spirit_resonant_pulse_equal_exchange", {
                     duration: this.equal_exchange_duration * (1 - enemy.GetStatusResistance())
                 });
@@ -762,7 +762,7 @@ export class modifier_imba_void_spirit_aether_remnant_helper_buff extends BaseMo
             return;
         }
         this.stack_table = []
-        table.insert(this.stack_table, GameRules.GetDOTATime(true, true));
+        this.stack_table.push(GameRules.GetDOTATime(true, true));
         this.IncrementStackCount();
         this.StartIntervalThink(FrameTime());
     }
@@ -770,7 +770,7 @@ export class modifier_imba_void_spirit_aether_remnant_helper_buff extends BaseMo
         if (!IsServer()) {
             return;
         }
-        table.insert(this.stack_table, GameRules.GetDOTATime(true, true));
+        this.stack_table.push(GameRules.GetDOTATime(true, true));
         this.IncrementStackCount();
     }
     OnIntervalThink(): void {

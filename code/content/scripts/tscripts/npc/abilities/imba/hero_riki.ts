@@ -676,7 +676,7 @@ export class imba_riki_blink_strike extends BaseAbility_Plus {
                 this.hCaster.AddNewModifier(this.hCaster, this, "modifier_imba_blink_strike_cmd", {
                     duration: jump_duration
                 });
-                table.insert(tMarkedTargets, hTarget);
+                tMarkedTargets.push(hTarget);
                 for (let i = 0; i < (GameFunc.GetCount(tMarkedTargets) - 1); i++) {
                     this.AddTimer(i * jump_interval_time, () => {
                         this.DoJumpAttack(tMarkedTargets[i], tMarkedTargets[(i + 1)]);
@@ -1772,7 +1772,7 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
                             if (!martyrs_mark_targets) {
                                 martyrs_mark_targets = []
                             }
-                            table.insert(martyrs_mark_targets, unit);
+                            martyrs_mark_targets.push(unit);
                         }
                     }
                 }
@@ -1809,7 +1809,7 @@ export class modifier_imba_riki_tricks_of_the_trade_secondary extends BaseModifi
                         this.StartIntervalThink((1 / aps) * (1 / (this.GetSpecialValueFor("martyr_aspd_pct") * 0.01)));
                         return;
                     }
-                    table.insert(martyrs_mark_checklist, martyrs_mark_target);
+                    martyrs_mark_checklist.push(martyrs_mark_target);
                 }
             }
             for (const [_, unit] of GameFunc.iPair(targets)) {

@@ -177,7 +177,7 @@ export class modifier_imba_berserkers_rage_melee extends BaseModifier_Plus {
                 let ability = this.GetAbilityPlus();
                 if (parent.HasTalent("special_bonus_imba_troll_warlord_9")) {
                     if (!this.bash_talent) {
-                        table.insert(GameServiceConfig.IMBA_DISABLED_SKULL_BASHER, "troll_warlord");
+                        GameServiceConfig.IMBA_DISABLED_SKULL_BASHER.push("troll_warlord");
                         this.bash_talent = true;
                     }
                     if (GFuncRandom.PRD(ability.GetSpecialValueFor("ensnare_chance"), ability)) {
@@ -334,7 +334,7 @@ export class modifier_imba_berserkers_rage_slow extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_troll_warlord_whirling_axes_ranged extends BaseAbility_Plus {
-    tempdata: { [key: string]: any } = {};
+    tempdata: { [key: string]: any[] } = {};
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -398,7 +398,7 @@ export class imba_troll_warlord_whirling_axes_ranged extends BaseAbility_Plus {
                 caster.EmitSound("troll_warlord_troll_whirlingaxes_0" + math.random(1, 6));
             }
             let index = DoUniqueString("index");
-            this.tempdata[index] = {}
+            this.tempdata[index] = []
             let start_angle;
             let interval_angle = 0;
             if (axe_count == 1) {
@@ -452,7 +452,7 @@ export class imba_troll_warlord_whirling_axes_ranged extends BaseAbility_Plus {
             if (was_hit) {
                 return undefined;
             }
-            table.insert(this.tempdata[ExtraData.index], target);
+            this.tempdata[ExtraData.index].push(target);
             ApplyDamage({
                 victim: target,
                 attacker: caster,
@@ -468,9 +468,8 @@ export class imba_troll_warlord_whirling_axes_ranged extends BaseAbility_Plus {
             });
             target.EmitSound("Hero_TrollWarlord.WhirlingAxes.Target");
         } else {
-            this.tempdata[ExtraData.index]["count"] = this.tempdata[ExtraData.index]["count"] || 0;
-            this.tempdata[ExtraData.index]["count"] = this.tempdata[ExtraData.index]["count"] + 1;
-            if (this.tempdata[ExtraData.index]["count"] == ExtraData.axe_count) {
+            this.tempdata[ExtraData.index].push(null);
+            if (this.tempdata[ExtraData.index].length == ExtraData.axe_count) {
                 this.tempdata[ExtraData.index] = undefined;
             }
         }
@@ -524,7 +523,7 @@ export class modifier_imba_whirling_axes_ranged extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_troll_warlord_whirling_axes_melee extends BaseAbility_Plus {
-    tempdata: { [k: string]: any } = {};
+    tempdata: { [k: string]: IBaseNpc_Plus[] } = {};
     IsHiddenWhenStolen(): boolean {
         return false;
     }
@@ -573,10 +572,10 @@ export class imba_troll_warlord_whirling_axes_melee extends BaseAbility_Plus {
             let axe_loc: Vector[] = []
             let axe_random: number[] = []
             for (let i = 0; i < 10; i++) {
-                table.insert(axe_pfx, ResHelper.CreateParticleEx("particles/units/heroes/hero_troll_warlord/troll_warlord_whirling_axe_melee.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, caster));
+                axe_pfx.push(ResHelper.CreateParticleEx("particles/units/heroes/hero_troll_warlord/troll_warlord_whirling_axe_melee.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, caster));
                 ParticleManager.SetParticleControl(axe_pfx[i], 1, caster_loc);
                 ParticleManager.SetParticleControl(axe_pfx[i], 4, Vector(whirl_duration, 0, 0));
-                table.insert(axe_random, math.random() * 0.9 + 1.8);
+                axe_random.push(math.random() * 0.9 + 1.8);
             }
             let counter = 0;
             caster.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_2);
@@ -624,7 +623,7 @@ export class imba_troll_warlord_whirling_axes_melee extends BaseAbility_Plus {
             if (was_hit) {
                 return;
             } else {
-                table.insert(this.tempdata[index], enemy);
+                this.tempdata[index].push(enemy);
             }
             ApplyDamage({
                 victim: enemy,

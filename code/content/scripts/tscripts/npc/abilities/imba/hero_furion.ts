@@ -115,7 +115,7 @@ export class modifier_imba_furion_wrath_of_nature_thinker extends BaseModifier_P
     public treant_bonus_damage: number;
     public treant_bonus_damage_hero: number;
     public damage_type: number;
-    public hit_enemies: any;
+    public hit_enemies: { [key: string]: boolean };
     public counter: number;
     public position: any;
     public target: IBaseNpc_Plus;
@@ -193,7 +193,7 @@ export class modifier_imba_furion_wrath_of_nature_thinker extends BaseModifier_P
                         ability: this.GetAbilityPlus()
                     });
                 }
-                this.hit_enemies[enemy.entindex()] = true;
+                this.hit_enemies[enemy.entindex() + ""] = true;
             }
             return;
         }
@@ -202,7 +202,7 @@ export class modifier_imba_furion_wrath_of_nature_thinker extends BaseModifier_P
     OnIntervalThink(): void {
         this.bFoundTarget = false;
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.position, undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_CLOSEST, false))) {
-            if (!this.hit_enemies[enemy.entindex()]) {
+            if (!this.hit_enemies[enemy.entindex() + ""]) {
                 this.bFoundTarget = true;
                 this.counter = this.counter + 1;
                 this.wrath_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_furion/furion_wrath_of_nature.vpcf", ParticleAttachment_t.PATTACH_POINT_FOLLOW, enemy);
@@ -244,7 +244,7 @@ export class modifier_imba_furion_wrath_of_nature_thinker extends BaseModifier_P
                         ability: this.GetAbilityPlus()
                     });
                 }
-                this.hit_enemies[enemy.entindex()] = true;
+                this.hit_enemies[enemy.entindex() + ""] = true;
                 if (!enemy.IsAlive()) {
                     this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_furion_wrath_of_nature_damage_counter", {
                         duration: this.kill_damage_duration

@@ -185,7 +185,7 @@ export class modifier_item_imba_lance_of_longinus_force_ally extends BaseModifie
     public pfx: any;
     public angle: any;
     public distance: number;
-    public attacked_target: any;
+    public attacked_target: { [k: string]: EntityIndex };
     public god_piercing_radius: number;
     public average_attack_damage: number;
     IsDebuff(): boolean {
@@ -245,9 +245,9 @@ export class modifier_item_imba_lance_of_longinus_force_ally extends BaseModifie
         let attacker = this.GetParentPlus();
         let enemies = FindUnitsInRadius(attacker.GetTeamNumber(), attacker.GetAbsOrigin(), undefined, this.god_piercing_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            if (!this.attacked_target[enemy.entindex()]) {
+            if (!this.attacked_target[enemy.entindex() + ""]) {
                 attacker.PerformAttack(enemy, true, true, true, true, true, false, true);
-                this.attacked_target[enemy.entindex()] = enemy.entindex();
+                this.attacked_target[enemy.entindex() + ""] = enemy.entindex();
                 if (enemy.IsRealUnit()) {
                     let god_piercing_modifier = attacker.AddNewModifier(this.GetCasterPlus(), this.GetItemPlus(), "modifier_item_imba_lance_of_longinus_god_piercing_ally", {
                         duration: this.GetItemPlus().GetSpecialValueFor("god_piercing_duration")

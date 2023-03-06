@@ -97,7 +97,7 @@ export class modifier_imba_lifesteal_boots_buff extends BaseModifier_Plus {
     public ms_limit: any;
     public drain_damage: number;
     public drain_radius: number;
-    public drained_units: any;
+    public drained_units: { [k: string]: EntityIndex };
     IsHidden(): boolean {
         return false;
     }
@@ -133,7 +133,7 @@ export class modifier_imba_lifesteal_boots_buff extends BaseModifier_Plus {
         if (IsServer()) {
             let enemies = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.drain_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
             for (const [_, enemy] of GameFunc.iPair(enemies)) {
-                if (!this.drained_units[enemy.entindex()]) {
+                if (!this.drained_units[enemy.entindex() + ""]) {
                     let damageTable = {
                         victim: enemy,
                         damage: this.drain_damage,
@@ -149,7 +149,7 @@ export class modifier_imba_lifesteal_boots_buff extends BaseModifier_Plus {
                     if (actual_damage > 0) {
                         this.caster.Heal(actual_damage, this.GetItemPlus());
                     }
-                    this.drained_units[enemy.entindex()] = enemy.entindex();
+                    this.drained_units[enemy.entindex() + ""] = enemy.entindex();
                 }
             }
         }

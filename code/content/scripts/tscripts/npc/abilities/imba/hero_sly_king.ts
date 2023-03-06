@@ -145,7 +145,7 @@ export class modifier_imba_burrowblast_burrow extends BaseModifier_Plus {
 }
 @registerAbility()
 export class imba_sly_king_frost_gale extends BaseAbility_Plus {
-    tempdata: { [k: string]: any } = {}
+    tempdata: { [k: string]: IBaseNpc_Plus[] } = {}
     GetCastRange(p_0: Vector, p_1: CDOTA_BaseNPC | undefined,): number {
         return this.GetSpecialValueFor("cast_range");
     }
@@ -213,7 +213,7 @@ export class imba_sly_king_frost_gale extends BaseAbility_Plus {
             if (was_hit) {
                 return;
             } else {
-                table.insert(this.tempdata[ExtraData.index], target);
+                this.tempdata[ExtraData.index].push(target);
             }
             target.AddNewModifier(caster, this, "modifier_imba_frost_gale_setin", {
                 duration: ExtraData.duration
@@ -221,9 +221,8 @@ export class imba_sly_king_frost_gale extends BaseAbility_Plus {
             target.EmitSound("Hero_Venomancer.VenomousGaleImpact");
         }
         else {
-            this.tempdata[ExtraData.index + "count"] = this.tempdata[ExtraData.index + "count"] || 0;
-            this.tempdata[ExtraData.index + "count"] += 1;
-            if (this.tempdata[ExtraData.index + "count"] == ExtraData.projectile_count) {
+            this.tempdata[ExtraData.index].push(null);
+            if (this.tempdata[ExtraData.index].length == ExtraData.projectile_count) {
                 if ((GameFunc.GetCount(this.tempdata[ExtraData.index]) > 0) && (caster.GetName().includes("venomancer"))) {
                     caster.EmitSound("venomancer_venm_cast_0" + math.random(1, 2));
                 }

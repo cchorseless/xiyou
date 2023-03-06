@@ -618,9 +618,9 @@ export class imba_weaver_time_lapse extends BaseAbility_Plus {
 @registerModifier()
 export class modifier_imba_weaver_time_lapse_aura extends BaseModifier_Plus {
     public lapsed_time: number;
-    public instances_health: any;
-    public instances_mana: any;
-    public instances_position: any;
+    public instances_health: number[];
+    public instances_mana: number[];
+    public instances_position: Vector[];
     public interval: number;
     public total_saved_points: any;
     IsHidden(): boolean {
@@ -631,9 +631,9 @@ export class modifier_imba_weaver_time_lapse_aura extends BaseModifier_Plus {
             return;
         }
         this.lapsed_time = 5;
-        this.instances_health = {}
-        this.instances_mana = {}
-        this.instances_position = {}
+        this.instances_health = []
+        this.instances_mana = []
+        this.instances_position = []
         this.interval = 0.1;
         this.total_saved_points = this.lapsed_time / this.interval;
         this.OnIntervalThink();
@@ -641,13 +641,13 @@ export class modifier_imba_weaver_time_lapse_aura extends BaseModifier_Plus {
     }
     OnIntervalThink(): void {
         if (this.GetParentPlus().IsAlive()) {
-            table.insert(this.instances_health, this.GetParentPlus().GetHealth());
-            table.insert(this.instances_mana, this.GetParentPlus().GetMana());
-            table.insert(this.instances_position, this.GetParentPlus().GetAbsOrigin());
+            this.instances_health.push(this.GetParentPlus().GetHealth());
+            this.instances_mana.push(this.GetParentPlus().GetMana());
+            this.instances_position.push(this.GetParentPlus().GetAbsOrigin());
             if (GameFunc.GetCount(this.instances_health) >= this.total_saved_points) {
-                table.remove(this.instances_health, 1);
-                table.remove(this.instances_mana, 1);
-                table.remove(this.instances_position, 1);
+                this.instances_health.shift();
+                this.instances_mana.shift();
+                this.instances_position.shift();
             }
         }
     }
@@ -679,9 +679,9 @@ export class modifier_imba_weaver_time_lapse_aura extends BaseModifier_Plus {
 @registerModifier()
 export class modifier_imba_weaver_time_lapse extends BaseModifier_Plus {
     public lapsed_time: number;
-    public instances_health: any;
-    public instances_mana: any;
-    public instances_position: any;
+    public instances_health: number[];
+    public instances_mana: number[];
+    public instances_position: Vector[];
     public interval: number;
     public total_saved_points: any;
     IsHidden(): boolean {
@@ -692,22 +692,22 @@ export class modifier_imba_weaver_time_lapse extends BaseModifier_Plus {
             return;
         }
         this.lapsed_time = 5;
-        this.instances_health = {}
-        this.instances_mana = {}
-        this.instances_position = {}
+        this.instances_health = []
+        this.instances_mana = []
+        this.instances_position = []
         this.interval = 0.1;
         this.total_saved_points = this.lapsed_time / this.interval;
         this.OnIntervalThink();
         this.StartIntervalThink(this.interval);
     }
     OnIntervalThink(): void {
-        table.insert(this.instances_health, this.GetParentPlus().GetHealth());
-        table.insert(this.instances_mana, this.GetParentPlus().GetMana());
-        table.insert(this.instances_position, this.GetParentPlus().GetAbsOrigin());
+        this.instances_health.push(this.GetParentPlus().GetHealth());
+        this.instances_mana.push(this.GetParentPlus().GetMana());
+        this.instances_position.push(this.GetParentPlus().GetAbsOrigin());
         if (GameFunc.GetCount(this.instances_health) >= this.total_saved_points) {
-            table.remove(this.instances_health, 1);
-            table.remove(this.instances_mana, 1);
-            table.remove(this.instances_position, 1);
+            this.instances_health.shift();
+            this.instances_mana.shift();
+            this.instances_position.shift();
         }
     }
 }

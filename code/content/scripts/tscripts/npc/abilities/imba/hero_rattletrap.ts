@@ -856,7 +856,7 @@ export class modifier_imba_rattletrap_rocket_flare_critical extends BaseModifier
 @registerAbility()
 export class imba_rattletrap_hookshot extends BaseAbility_Plus {
     public direction: any;
-    public shish_kabob: any;
+    public shish_kabob: EntityIndex[];
     public razor_wind: any;
     public projectile: any;
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
@@ -915,7 +915,7 @@ export class imba_rattletrap_hookshot extends BaseAbility_Plus {
         }
         if (this.GetAutoCastState()) {
             linear_projectile.ExtraData.autocast = true;
-            this.shish_kabob = {}
+            this.shish_kabob = []
         }
         this.razor_wind = {}
         this.projectile = ProjectileManager.CreateLinearProjectile(linear_projectile);
@@ -980,7 +980,7 @@ export class imba_rattletrap_hookshot extends BaseAbility_Plus {
                     return true;
                 } else {
                     hTarget.EmitSound("Hero_Rattletrap.Hookshot.Impact");
-                    table.insert(this.shish_kabob, hTarget.GetEntityIndex());
+                    this.shish_kabob.push(hTarget.GetEntityIndex());
                     ParticleManager.SetParticleControlEnt(ExtraData.hookshot_particle, 1, hTarget, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, "attach_hitloc", hTarget.GetAbsOrigin(), true);
                 }
                 if (hTarget.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {

@@ -665,7 +665,7 @@ export class modifier_imba_pudge_meat_hook_caster_root extends BaseModifier_Plus
             for (const [_, check] of GameFunc.Pair(disable_items)) {
                 if (item && item.GetAbilityName() == check) {
                     item.SetActivated(false);
-                    table.insert(this.disable, item);
+                    this.disable.push(item as IBaseItem_Plus);
                     return;
                 }
             }

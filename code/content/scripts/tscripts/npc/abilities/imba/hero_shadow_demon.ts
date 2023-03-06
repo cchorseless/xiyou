@@ -976,7 +976,7 @@ export class imba_shadow_demon_shadow_poison_release extends BaseAbility_Plus {
             if (enemy.HasModifier(modifier_poison)) {
                 modifier_poison_handle = enemy.FindModifierByName(modifier_poison);
                 if (modifier_poison_handle) {
-                    table.insert(debuffed_enemies, enemy);
+                    debuffed_enemies.push(enemy);
                     stacks = modifier_poison_handle.GetStackCount();
                     if (stacks > highest_stack) {
                         highest_stack = stacks;
@@ -1282,7 +1282,7 @@ export class modifier_imba_demonic_purge_elated_demon_buff extends BaseModifier_
         }
         let stacks = this.GetStackCount();
         if (stacks > prev_stacks) {
-            table.insert(this.stack_table, GameRules.GetGameTime());
+            this.stack_table.push(GameRules.GetGameTime());
             this.ForceRefresh();
         }
     }
@@ -1295,7 +1295,7 @@ export class modifier_imba_demonic_purge_elated_demon_buff extends BaseModifier_
                     this.Destroy();
                     return;
                 } else {
-                    table.remove(this.stack_table, 1);
+                    this.stack_table.shift();
                     this.DecrementStackCount();
                 }
             } else {

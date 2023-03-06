@@ -105,7 +105,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
                     if (!clone_owner_units[enemy.GetPlayerOwner().entindex() + ""]) {
                         clone_owner_units[enemy.GetPlayerOwner().entindex() + ""] = []
                     }
-                    table.insert(clone_owner_units[enemy.GetPlayerOwner().entindex() + ""], enemy.entindex());
+                    clone_owner_units[enemy.GetPlayerOwner().entindex() + ""].push(enemy.entindex());
                 }
             } else {
                 if (enemy.IsRealUnit() && !enemy.IsIllusion()) {
@@ -120,8 +120,8 @@ export class imba_undying_decay extends BaseAbility_Plus {
                     });
                     debuff_modifier = enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_undying_decay_debuff", {
                         duration: this.GetTalentSpecialValueFor("decay_duration") * (1 - enemy.GetStatusResistance())
-                    });
-                    table.insert(this.debuff_modifier_table, debuff_modifier);
+                    }) as modifier_imba_undying_decay_debuff;
+                    this.debuff_modifier_table.push(debuff_modifier);
                     this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_undying_decay_buff_counter", {
                         duration: this.GetTalentSpecialValueFor("decay_duration")
                     });
@@ -152,8 +152,8 @@ export class imba_undying_decay extends BaseAbility_Plus {
                 });
                 debuff_modifier = enemy.AddNewModifier(selected_unit, this, "modifier_imba_undying_decay_debuff", {
                     duration: this.GetTalentSpecialValueFor("decay_duration") * (1 - enemy.GetStatusResistance())
-                });
-                table.insert(this.debuff_modifier_table, debuff_modifier);
+                }) as modifier_imba_undying_decay_debuff;
+                this.debuff_modifier_table.push(debuff_modifier);
                 this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_undying_decay_buff_counter", {
                     duration: this.GetTalentSpecialValueFor("decay_duration")
                 });

@@ -166,10 +166,10 @@ export class modifier_imba_earth_spirit_remnant_handler extends BaseModifier_Plu
                 this.overdrawTimer = this.overdrawTimer - FrameTime() * 3;
             }
             let length = GameFunc.GetCount(this.remnants);
-            for (let i = 0; i < length; i++) {
-                if (this.remnants[length - i + 1]) {
-                    if (!EntIndexToHScript(this.remnants[length - i + 1])) {
-                        table.remove(this.remnants, length - i + 1);
+            for (let i = length - 1; i >= 0; i--) {
+                if (this.remnants[i]) {
+                    if (!EntIndexToHScript(this.remnants[i])) {
+                        this.remnants.splice(i, 1);
                     }
                 }
             }
@@ -189,7 +189,7 @@ export class modifier_imba_earth_spirit_remnant_handler extends BaseModifier_Plu
                 this.overdrawTimer = this.overdrawCooldown;
                 this.SetDuration(this.overdrawCooldown, true);
             }
-            table.insert(this.remnants, remnantID);
+            this.remnants.push(remnantID);
         }
     }
     KillRemnant(remnantID: EntityIndex) {

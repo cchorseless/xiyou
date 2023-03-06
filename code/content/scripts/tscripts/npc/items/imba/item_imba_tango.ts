@@ -174,7 +174,7 @@ export class modifier_imba_tango extends BaseModifier_Plus {
                     this.Destroy();
                     return;
                 } else {
-                    table.remove(this.stack_table, 1);
+                    this.stack_table.shift();
                     this.DecrementStackCount();
                     // if (this.parent.CalculateStatBonus) {
                     //     this.parent.CalculateStatBonus(true);
@@ -191,7 +191,7 @@ export class modifier_imba_tango extends BaseModifier_Plus {
         }
         let stacks = this.GetStackCount();
         if (stacks > prev_stacks) {
-            table.insert(this.stack_table, GameRules.GetGameTime());
+            this.stack_table.push(GameRules.GetGameTime());
         }
     }
 }

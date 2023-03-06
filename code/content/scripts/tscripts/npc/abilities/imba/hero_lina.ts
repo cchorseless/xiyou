@@ -915,9 +915,9 @@ export class imba_lina_laguna_blade extends BaseAbility_Plus {
                     });
                 }
                 let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_loc, undefined, bounce_range, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
-                for (let i = 0; i < GameFunc.GetCount(enemies); i++) {
-                    if (enemies[i] == target) {
-                        table.remove(enemies, i);
+                for (let [i, v] of GameFunc.iPair(enemies)) {
+                    if (v == target) {
+                        enemies.splice(i, 1);
                     }
                 }
                 this.AddTimer(bounce_delay, () => {

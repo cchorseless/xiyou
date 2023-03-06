@@ -239,7 +239,7 @@ export class modifier_item_imba_diffusal_2 extends BaseModifier_Plus {
                 for (const [_, modifier] of GameFunc.iPair(keys.target.FindAllModifiers() as IBaseModifier_Plus[])) {
                     if (modifier.IsDebuff && modifier.IsPurgable) {
                         if (!modifier.IsDebuff() && modifier.IsPurgable()) {
-                            table.insert(purgable_buffs, modifier);
+                            purgable_buffs.push(modifier);
                         }
                     }
                 }

@@ -675,7 +675,7 @@ export class modifier_sohei_momentum_knockback extends BaseModifierMotionHorizon
         let targets = FindUnitsInRadius(caster.GetTeamNumber(), tickOrigin, undefined, this.collision_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
         let secondary_target = targets[0];
         if (secondary_target == parent) {
-            secondary_target = targets[2];
+            secondary_target = targets[1];
         }
         let spell = this.GetAbilityPlus();
         if (secondary_target) {

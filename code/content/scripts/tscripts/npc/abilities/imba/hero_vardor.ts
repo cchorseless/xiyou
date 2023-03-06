@@ -1012,11 +1012,11 @@ export class modifier_vardor_mental_thrusts_debuff extends BaseModifier_Plus {
         }
         let stacks = this.GetStackCount();
         if (stacks > prev_stacks) {
-            table.insert(this.stack_table, GameRules.GetGameTime());
+            this.stack_table.push(GameRules.GetGameTime());
             this.ForceRefresh();
         }
         if (this.parent.IsRealUnit()) {
-            this.parent.CalculateStatBonus(true);
+            // this.parent.CalculateStatBonus(true);
         }
     }
     OnIntervalThink(): void {
@@ -1143,11 +1143,11 @@ export class vardor_celestial_rain_of_yari extends BaseAbility_Plus {
                 new_point = target_point + distance_from_center * direction as Vector;
                 new_point = RotatePosition(target_point, angle, new_point);
                 new_point = GetGroundPosition(new_point, undefined);
-                table.insert(yari_drop_points, new_point);
+                yari_drop_points.push(new_point);
             }
         }
         this.AddTimer(yari_fall_delay, () => {
-            let point = table.remove(yari_drop_points, 1);
+            let point = yari_drop_points.shift();
             piercing_shot_ability.PierceTargetLocation(point, false);
             if (next(yari_drop_points) != undefined) {
                 return yari_fall_delay;

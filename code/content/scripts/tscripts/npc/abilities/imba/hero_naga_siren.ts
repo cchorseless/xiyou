@@ -174,7 +174,7 @@ export class imba_naga_siren_ensnare extends BaseAbility_Plus {
         if (mirror_image && mirror_image.illusions) {
             for (const illusion of (mirror_image.illusions)) {
                 if (IsValidEntity(illusion) && illusion.IsAlive()) {
-                    table.insert(this.naga_sirens, illusion);
+                    this.naga_sirens.push(illusion);
                     illusion.StartGesture(GameActivity_t.ACT_DOTA_CAST_ABILITY_2);
                 }
             }
@@ -309,11 +309,11 @@ export class modifier_imba_naga_siren_rip_tide extends BaseModifier_Plus {
         if (params.attacker == this.GetParentPlus() && GFuncRandom.PRD(this.GetSpecialValueFor("chance") + this.GetCasterPlus().GetTalentValue("special_bonus_imba_naga_siren_rip_tide_proc_chance"), this)) {
             let caster_table: IBaseNpc_Plus[] = []
             let victim_table: EntityIndex[] = []
-            table.insert(caster_table, this.GetCasterPlus());
+            caster_table.push(this.GetCasterPlus());
             let units: IBaseNpc_Plus[] = this.GetCasterPlus().GetAdditionalOwnedUnitsPlus();
             for (const unit of (units)) {
                 if (unit.GetUnitName() == this.GetCasterPlus().GetUnitName() && unit.IsIllusion()) {
-                    table.insert(caster_table, unit);
+                    caster_table.push(unit);
                 }
             }
             for (const [_, tide_caster] of GameFunc.iPair(caster_table)) {

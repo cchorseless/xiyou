@@ -892,9 +892,9 @@ export class modifier_imba_mortal_strike_buff extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             if (GameFunc.GetCount(this.stacks_table) > 0) {
-                for (let i = GameFunc.GetCount(this.stacks_table); i >= 1; i += -1) {
+                for (let i = GameFunc.GetCount(this.stacks_table) - 1; i >= 0; i--) {
                     if (this.stacks_table[i] + this.bonus_health_duration < GameRules.GetGameTime()) {
-                        table.remove(this.stacks_table, i);
+                        this.stacks_table.splice(i, 1);
                     }
                 }
                 if (GameFunc.GetCount(this.stacks_table) == 0) {
@@ -910,7 +910,7 @@ export class modifier_imba_mortal_strike_buff extends BaseModifier_Plus {
     }
     BeRefresh(p_0: any,): void {
         if (IsServer()) {
-            table.insert(this.stacks_table, GameRules.GetGameTime());
+            this.stacks_table.push(GameRules.GetGameTime());
         }
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -958,9 +958,9 @@ export class modifier_imba_mortal_strike_buff_talent extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             if (GameFunc.GetCount(this.stacks_table) > 0) {
-                for (let i = GameFunc.GetCount(this.stacks_table); i >= 1; i += -1) {
+                for (let i = GameFunc.GetCount(this.stacks_table) - 1; i >= 0; i--) {
                     if (this.stacks_table[i] + this.bonus_health_duration < GameRules.GetGameTime()) {
-                        table.remove(this.stacks_table, i);
+                        this.stacks_table.splice(i, 1);
                     }
                 }
                 if (GameFunc.GetCount(this.stacks_table) == 0) {
@@ -976,7 +976,7 @@ export class modifier_imba_mortal_strike_buff_talent extends BaseModifier_Plus {
     }
     BeRefresh(p_0: any,): void {
         if (IsServer()) {
-            table.insert(this.stacks_table, GameRules.GetGameTime());
+            this.stacks_table.push(GameRules.GetGameTime());
         }
     }
     /** DeclareFunctions():modifierfunction[] {

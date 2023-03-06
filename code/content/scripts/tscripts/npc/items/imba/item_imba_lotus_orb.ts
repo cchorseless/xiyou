@@ -50,11 +50,12 @@ export class modifier_item_imba_lotus_orb_passive extends BaseModifier_Plus {
         this.StartIntervalThink(FrameTime());
     }
     OnIntervalThink(): void {
-        for (let i = GameFunc.GetCount(this.GetParentPlus().TempData().tOldSpells); i >= 1; i += -1) {
-            let hSpell = this.GetParentPlus().TempData().tOldSpells[i];
+        let tOldSpells = this.GetParentPlus().TempData<IBaseAbility_Plus[]>().tOldSpells;
+        for (let i = GameFunc.GetCount(tOldSpells) - 1; i >= 0; i--) {
+            let hSpell = tOldSpells[i];
             if (hSpell.NumModifiersUsingAbility() == 0 && !hSpell.IsChanneling()) {
                 hSpell.RemoveSelf();
-                table.remove(this.GetParentPlus().TempData().tOldSpells, i);
+                tOldSpells.splice(i, 1);
             }
         }
     }
@@ -207,7 +208,7 @@ export class modifier_item_imba_lotus_orb_active extends BaseModifier_Plus {
                 ability.SetHidden(true);
                 ability.spell_shield_reflect = true;
                 ability.SetRefCountsModifiers(true);
-                table.insert(this.GetParentPlus().TempData().tOldSpells, ability);
+                this.GetParentPlus().TempData<IBaseItem_Plus[]>().tOldSpells.push(ability);
             }
             ability.SetLevel(params.ability.GetLevel());
             this.GetParentPlus().SetCursorCastTarget(target);

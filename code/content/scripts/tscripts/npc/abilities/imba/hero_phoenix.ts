@@ -1773,7 +1773,7 @@ export class modifier_imba_phoenix_supernova_caster_dummy extends BaseModifier_P
                 let ability = this.GetParentPlus().GetAbilityByIndex(slot);
                 if (ability && ability.IsActivated() && (!this.GetParentPlus().HasScepter() || (this.GetParentPlus().HasScepter() && ability.GetName() != "imba_phoenix_sun_ray"))) {
                     ability.SetActivated(false);
-                    table.insert(this.abilities, ability);
+                    this.abilities.push(ability as IBaseAbility_Plus);
                 }
             }
         }

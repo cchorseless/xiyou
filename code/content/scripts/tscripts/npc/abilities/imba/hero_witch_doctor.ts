@@ -126,7 +126,7 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
                     for (const [_, unit] of GameFunc.iPair(enemies)) {
                         if (hTarget) {
                             if ((unit != hTarget) && (!unit.IsOther()) && ((this.tempdata["split_" + ExtraData.index] >= 1) || GameFunc.GetCount(tJumpTargets) == 0)) {
-                                table.insert(tJumpTargets, unit);
+                                tJumpTargets.push(unit);
                                 if (GameFunc.GetCount(tJumpTargets) == 2) {
                                     this.tempdata[ExtraData.index] = this.tempdata[ExtraData.index] + 1;
                                     return;
@@ -139,7 +139,7 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
                         for (const [_, unit] of GameFunc.iPair(allies)) {
                             if (hTarget) {
                                 if ((unit != hTarget) && (!unit.IsOther())) {
-                                    table.insert(tJumpTargets, unit);
+                                    tJumpTargets.push(unit);
                                     return;
                                 }
                             }

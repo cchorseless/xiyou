@@ -228,7 +228,7 @@ export class modifier_imba_chaos_knight_phantasm_cast extends BaseModifier_Plus 
         }, this.images_count);
         for (const [_, illusion] of GameFunc.iPair(this.phantasm_illusions)) {
             illusion.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_chaos_knight_phantasm_illusion", {});
-            table.insert(ability.phantasm_illusions, illusion);
+            ability.phantasm_illusions.push(illusion);
         }
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {

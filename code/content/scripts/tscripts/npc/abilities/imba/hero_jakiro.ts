@@ -1197,8 +1197,8 @@ export class modifier_imba_macropyre_thinker extends BaseModifier_Plus {
                 ParticleManager.SetParticleControl(macropyre_pfx, 3, start_pos);
                 this.AddParticle(macropyre_pfx, false, false, -1, false, false);
                 for (let i = 0; i <= math.floor(path_length / path_radius); i++) {
-                    let thinker_pos = start_pos + i * path_radius * (end_pos - start_pos as Vector).Normalized();
-                    table.insert(this.thinker_pos_list, thinker_pos);
+                    let thinker_pos = start_pos + i * path_radius * (end_pos - start_pos as Vector).Normalized() as Vector;
+                    this.thinker_pos_list.push(thinker_pos);
                 }
             }
             this.OnIntervalThink();
@@ -1235,7 +1235,7 @@ export class modifier_imba_macropyre_thinker extends BaseModifier_Plus {
                     for (const enemy of (enemies)) {
                         if (!unique_enemy_set.includes(enemy)) {
                             unique_enemy_set.push(enemy);
-                            table.insert(unique_enemy_list, enemy);
+                            unique_enemy_list.push(enemy);
                         }
                     }
                 }

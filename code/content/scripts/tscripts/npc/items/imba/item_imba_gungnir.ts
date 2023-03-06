@@ -79,7 +79,7 @@ export class modifier_item_imba_gungnir extends BaseModifier_Plus {
     public bonus_chance_damage: number;
     public bonus_attack_speed: number;
     public pierce_proc: any;
-    public pierce_records: any;
+    public pierce_records: number[];
     IsHidden(): boolean {
         return true;
     }
@@ -112,7 +112,7 @@ export class modifier_item_imba_gungnir extends BaseModifier_Plus {
         this.bonus_chance_damage = this.ability.GetSpecialValueFor("bonus_chance_damage");
         this.bonus_attack_speed = this.ability.GetSpecialValueFor("bonus_attack_speed");
         this.pierce_proc = true;
-        this.pierce_records = {}
+        this.pierce_records = []
     }
     /** DeclareFunctions():modifierfunction[] {
         let decFuncs = {
@@ -169,7 +169,7 @@ export class modifier_item_imba_gungnir extends BaseModifier_Plus {
         }
         for (const [_, record] of GameFunc.iPair(this.pierce_records)) {
             if (record == keys.record) {
-                table.remove(this.pierce_records, _);
+                this.pierce_records.splice(_, 1);
                 if (!this.parent.IsIllusion() && this.GetStackCount() == 1 && !keys.target.IsBuilding()) {
                     return this.bonus_chance_damage;
                 }
@@ -180,7 +180,7 @@ export class modifier_item_imba_gungnir extends BaseModifier_Plus {
     CC_OnAttackRecord(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.parent) {
             if (this.pierce_proc) {
-                table.insert(this.pierce_records, keys.record);
+                this.pierce_records.push(keys.record);
                 this.pierce_proc = false;
             }
             if (GFuncRandom.PRD(this.bonus_chance, this)) {
@@ -204,7 +204,7 @@ export class modifier_item_imba_gungnir_force_ally extends BaseModifierMotionHor
     public pfx: any;
     public angle: any;
     public distance: number;
-    public attacked_target: any;
+    public attacked_target: { [k: string]: EntityIndex };
     public god_piercing_radius: number;
     IsDebuff(): boolean {
         return false;
@@ -258,9 +258,9 @@ export class modifier_item_imba_gungnir_force_ally extends BaseModifierMotionHor
         let attacker = this.GetParentPlus();
         let enemies = FindUnitsInRadius(attacker.GetTeamNumber(), attacker.GetAbsOrigin(), undefined, this.god_piercing_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            if (!this.attacked_target[enemy.entindex()]) {
+            if (!this.attacked_target[enemy.entindex() + ""]) {
                 attacker.PerformAttack(enemy, true, true, true, true, true, false, false);
-                this.attacked_target[enemy.entindex()] = enemy.entindex();
+                this.attacked_target[enemy.entindex() + ""] = enemy.entindex();
             }
         }
         ProjectileManager.ProjectileDodge(this.GetParentPlus());

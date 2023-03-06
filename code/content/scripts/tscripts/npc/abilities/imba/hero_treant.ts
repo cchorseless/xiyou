@@ -915,7 +915,7 @@ export class imba_treant_overgrowth extends BaseAbility_Plus {
                     overgrowth_eyes_enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), ent.GetAbsOrigin(), undefined, this.GetTalentSpecialValueFor("eyes_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NO_INVIS, FindOrder.FIND_ANY_ORDER, false);
                     enemies_hit = enemies_hit + GameFunc.GetCount(overgrowth_eyes_enemies);
                     for (const [_, enemy] of GameFunc.iPair(overgrowth_eyes_enemies)) {
-                        if (!enemies_hit_table[enemy.entindex()]) {
+                        if (!enemies_hit_table.includes(enemy.entindex())) {
                             enemy.Stop();
                             enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_treant_overgrowth", {
                                 duration: this.GetSpecialValueFor("duration") * (1 - enemy.GetStatusResistance())

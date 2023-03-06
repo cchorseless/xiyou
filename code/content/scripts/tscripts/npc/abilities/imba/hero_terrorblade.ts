@@ -582,7 +582,7 @@ export class modifier_imba_terrorblade_metamorphosis_fear_thinker extends BaseMo
     public speed: number;
     public spawn_delay: number;
     public bLaunched: any;
-    public feared_units: any;
+    public feared_units: { [k: string]: boolean };
     public fear_modifier: any;
     BeCreated(p_0: any,): void {
         if (!this.GetAbilityPlus()) {
@@ -613,7 +613,7 @@ export class modifier_imba_terrorblade_metamorphosis_fear_thinker extends BaseMo
             this.StartIntervalThink(FrameTime());
         } else {
             for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, math.min(this.speed * (this.GetElapsedTime() - this.spawn_delay), this.radius), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
-                if (!this.feared_units[enemy.entindex()] && (enemy.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() >= math.min(this.speed * (this.GetElapsedTime() - this.spawn_delay), this.radius) - 50) {
+                if (!this.feared_units[enemy.entindex() + ""] && (enemy.GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).Length2D() >= math.min(this.speed * (this.GetElapsedTime() - this.spawn_delay), this.radius) - 50) {
                     enemy.EmitSound("Hero_Terrorblade.Metamorphosis.Fear");
                     this.fear_modifier = enemy.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_terrorblade_fear", {
                         duration: this.fear_duration
@@ -621,7 +621,7 @@ export class modifier_imba_terrorblade_metamorphosis_fear_thinker extends BaseMo
                     if (this.fear_modifier) {
                         this.fear_modifier.SetDuration(this.fear_duration * (1 - enemy.GetStatusResistance()), true);
                     }
-                    this.feared_units[enemy.entindex()] = true;
+                    this.feared_units[enemy.entindex() + ""] = true;
                 }
             }
         }

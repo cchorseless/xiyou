@@ -1164,7 +1164,7 @@ export class modifier_imba_broodmother_poison_sting_debuff extends BaseModifier_
     public movement_speed: number;
     public scale: any;
     public hero_scale: any;
-    public spiders: any;
+    public spiders: EntityIndex[];
     public damage_type: number;
     IgnoreTenacity() {
         return true;
@@ -1177,8 +1177,8 @@ export class modifier_imba_broodmother_poison_sting_debuff extends BaseModifier_
         this.movement_speed = this.GetSpecialValueFor("movement_speed") - this.GetCasterPlus().findBuffStack("modifier_imba_broodmother_poison_sting", this.GetCasterPlus());
         this.scale = this.GetSpecialValueFor("scale");
         this.hero_scale = this.GetSpecialValueFor("hero_scale");
-        this.spiders = {}
-        this.spiders[this.GetCasterPlus().entindex()] = true;
+        this.spiders = []
+        this.spiders.push(this.GetCasterPlus().entindex())
         if (!IsServer()) {
             return;
         }
@@ -1186,8 +1186,8 @@ export class modifier_imba_broodmother_poison_sting_debuff extends BaseModifier_
         this.StartIntervalThink(1);
     }
     BeRefresh(p_0: any,): void {
-        if (!this.spiders[this.GetCasterPlus().entindex()]) {
-            this.spiders[this.GetCasterPlus().entindex()] = true;
+        if (!this.spiders.includes(this.GetCasterPlus().entindex())) {
+            this.spiders.push(this.GetCasterPlus().entindex())
         }
         this.damage_per_second = math.max(this.GetSpecialValueFor("damage_per_second") + this.GetCasterPlus().findBuffStack("modifier_imba_broodmother_poison_sting", this.GetCasterPlus()), this.damage_per_second);
         this.movement_speed = math.min(this.GetSpecialValueFor("movement_speed") - this.GetCasterPlus().findBuffStack("modifier_imba_broodmother_poison_sting", this.GetCasterPlus()), this.movement_speed);

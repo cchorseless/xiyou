@@ -1200,7 +1200,7 @@ export class modifier_imba_x_marks_the_spot extends BaseModifier_Plus {
             this.sec_duration = params.sec_duration;
             this.position_id = params.position_id || 0;
             if (this.position_id == 0) {
-                table.insert(ability.positions, this.position);
+                ability.positions.push(this.position);
                 this.position_id = GameFunc.GetCount(ability.positions);
             }
             EmitSoundOn("Ability.XMarksTheSpot.Target", caster);
