@@ -41,7 +41,7 @@ export class modifier_imba_echo_sabre extends BaseModifier_Plus {
         }
         let item = this.GetItemPlus();
         this.parent = this.GetParentPlus();
-        if (this.parent.IsHero() && item) {
+        if (this.parent.IsRealUnit() && item) {
             this.bonus_intellect = item.GetSpecialValueFor("bonus_intellect");
             this.bonus_strength = item.GetSpecialValueFor("bonus_strength");
             this.bonus_attack_speed = item.GetSpecialValueFor("bonus_attack_speed");
@@ -121,7 +121,7 @@ export class modifier_imba_echo_sabre_passive extends BaseModifier_Plus {
         }
         let item = this.GetItemPlus();
         this.parent = this.GetParentPlus();
-        if (this.parent.IsHero() && item) {
+        if (this.parent.IsRealUnit() && item) {
             this.bonus_intellect = item.GetSpecialValueFor("bonus_intellect");
             this.bonus_strength = item.GetSpecialValueFor("bonus_strength");
             this.bonus_attack_speed = item.GetSpecialValueFor("bonus_attack_speed");
@@ -216,7 +216,7 @@ export class modifier_imba_reverb_rapier_passive extends BaseModifier_Plus {
         }
         let item = this.GetItemPlus();
         this.parent = this.GetParentPlus();
-        if (this.parent.IsHero() && item) {
+        if (this.parent.IsRealUnit() && item) {
             this.bonus_intellect = item.GetSpecialValueFor("bonus_intellect");
             this.bonus_strength = item.GetSpecialValueFor("bonus_strength");
             this.bonus_attack_speed = item.GetSpecialValueFor("bonus_attack_speed");

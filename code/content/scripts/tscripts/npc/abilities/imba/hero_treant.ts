@@ -158,7 +158,7 @@ export class modifier_imba_treant_natures_grasp_damage extends BaseModifier_Plus
         }
         this.interval = 0.25;
         this.damage_per_tick = this.damage_per_second * this.interval;
-        if (!this.GetParentPlus().IsHero()) {
+        if (!this.GetParentPlus().IsRealUnit()) {
             this.damage_per_tick = this.damage_per_tick * 0.5;
         }
         this.SetStackCount(this.movement_slow * (-1));
@@ -215,7 +215,7 @@ export class modifier_imba_treant_natures_grasp_damage_bonus extends BaseModifie
         }
         this.interval = 0.25;
         this.damage_per_tick = this.damage_per_second * this.interval;
-        if (!this.GetParentPlus().IsHero()) {
+        if (!this.GetParentPlus().IsRealUnit()) {
             this.damage_per_tick = this.damage_per_tick * 0.5;
         }
         this.SetStackCount(this.movement_slow * (-1));

@@ -15,7 +15,7 @@ export class imba_visage_grave_chill extends BaseAbility_Plus {
         }
         this.GetCasterPlus().EmitSound("Hero_Visage.GraveChill.Cast");
         target.EmitSound("Hero_Visage.GraveChill.Target");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_visage" && RollPercentage(25)) {
+        if (this.GetCasterPlus().GetName().includes("visage") && RollPercentage(25)) {
             let responses = {
                 "1": "visage_visa_gravechill_04",
                 "2": "visage_visa_gravechill_05",
@@ -65,7 +65,7 @@ export class modifier_imba_visage_grave_chill_buff extends BaseModifier_Plus {
         }
         let chill_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_visage/visage_grave_chill_caster.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
         ParticleManager.SetParticleControlEnt(chill_particle, 1, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.GetParentPlus().GetAbsOrigin(), true);
-        if (this.GetParentPlus().GetName() == "npc_dota_hero_visage" && !this.GetParentPlus().HasModifier("modifier_imba_visage_become_familiar")) {
+        if (this.GetParentPlus().GetName().includes("visage") && !this.GetParentPlus().HasModifier("modifier_imba_visage_become_familiar")) {
             ParticleManager.SetParticleControlEnt(chill_particle, 2, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_tail_tip", this.GetParentPlus().GetAbsOrigin(), true);
             ParticleManager.SetParticleControlEnt(chill_particle, 3, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_wingtipL", this.GetParentPlus().GetAbsOrigin(), true);
             ParticleManager.SetParticleControlEnt(chill_particle, 4, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_wingtipR", this.GetParentPlus().GetAbsOrigin(), true);
@@ -158,7 +158,7 @@ export class imba_visage_soul_assumption extends BaseAbility_Plus {
     OnSpellStart(): void {
         let target = this.GetCursorTarget();
         this.GetCasterPlus().EmitSound("Hero_Visage.SoulAssumption.Cast");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_visage") {
+        if (this.GetCasterPlus().GetName().includes("visage")) {
             if (RollPercentage(10)) {
                 let responses_rare = {
                     "1": "visage_visa_soulassumption01",
@@ -623,7 +623,7 @@ export class imba_visage_summon_familiars extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Visage.SummonFamiliars.Cast");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_visage") {
+        if (this.GetCasterPlus().GetName().includes("visage")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "visage_visa_summon_03",

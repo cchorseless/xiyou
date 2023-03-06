@@ -120,7 +120,7 @@ export class modifier_earthshaker_fissure_lua_prevent_movement extends BaseModif
     }
     BeCreated(p_0: any,): void {
         if (IsServer()) {
-            if (!this.GetParentPlus().IsHero() && !this.GetParentPlus().IsControllableByAnyPlayer()) {
+            if (!this.GetParentPlus().IsRealUnit() && !this.GetParentPlus().IsControllableByAnyPlayer()) {
                 this.movement_capability = 0;
                 if (this.GetParentPlus().HasGroundMovementCapability()) {
                     this.movement_capability = 1;
@@ -616,7 +616,7 @@ export class imba_earthshaker_echo_slam extends BaseAbility_Plus {
             this.GetCasterPlus().EmitSound("Hero_EarthShaker.EchoSlamSmall");
         }
         this.AddTimer(0.5, () => {
-            if (this.GetCasterPlus().GetName() == "npc_dota_hero_earthshaker") {
+            if (this.GetCasterPlus().GetName().includes("earthshaker")) {
                 if (GameFunc.GetCount(hero_enemies) == 2) {
                     let random_response = RandomInt(1, 4);
                     if (random_response >= 3) {

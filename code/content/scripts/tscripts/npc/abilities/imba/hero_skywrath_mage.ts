@@ -181,7 +181,7 @@ export class imba_skywrath_mage_arcane_bolt extends BaseAbility_Plus {
         AddFOWViewer(caster.GetTeamNumber(), location, vision_radius, impact_vision_duration, false);
         EmitSoundOn(sound_impact, caster);
         let intelligence = 0;
-        if (caster.IsHero()) {
+        if (caster.IsRealUnit()) {
             intelligence = caster.GetIntellect();
         }
         let stacks = 0;
@@ -201,7 +201,7 @@ export class imba_skywrath_mage_arcane_bolt extends BaseAbility_Plus {
             ability: ability
         }
         ApplyDamage(damageTable);
-        if (target.IsHero()) {
+        if (target.IsRealUnit()) {
             if (!caster.HasModifier(modifier_wrath)) {
                 caster.AddNewModifier(caster, ability, modifier_wrath, {
                     duration: arcane_wrath_duration

@@ -327,7 +327,7 @@ export class imba_vengefulspirit_magic_missile extends BaseAbility_Plus {
                 split_reduce_pct = reduce_pct + (reduce_pct * (split_reduce_pct / 100));
             } else {
                 caster.EmitSound("Hero_VengefulSpirit.MagicMissile");
-                if ((math.random(1, 100) <= 5) && (caster.GetName() == "npc_dota_hero_vengefulspirit")) {
+                if ((math.random(1, 100) <= 5) && (caster.GetName().includes("vengefulspirit"))) {
                     caster.EmitSound("vengefulspirit_vng_cast_05");
                 }
             }
@@ -484,7 +484,7 @@ export class imba_vengefulspirit_wave_of_terror extends BaseAbility_Plus {
             let vision_duration = this.GetSpecialValueFor("vision_duration");
             let dummy = CreateModifierThinker(this.GetCasterPlus(), this, undefined, {}, this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetTeamNumber(), false);
             dummy.EmitSound("Hero_VengefulSpirit.WaveOfTerror");
-            if (caster.GetName() == "npc_dota_hero_vengefulspirit") {
+            if (caster.GetName().includes("vengefulspirit")) {
                 caster.EmitSound("vengefulspirit_vng_ability_0" + math.random(1, 9));
             }
             let direction = (target_loc - caster_loc as Vector).Normalized();
@@ -1141,7 +1141,7 @@ export class imba_vengefulspirit_nether_swap extends BaseAbility_Plus {
         if (target != undefined && target == this.GetCasterPlus()) {
             return UnitFilterResult.UF_FAIL_OTHER;
         }
-        if (target != undefined && (!target.IsHero()) && (!this.GetCasterPlus().HasScepter())) {
+        if (target != undefined && (!target.IsRealUnit()) && (!this.GetCasterPlus().HasScepter())) {
             return UnitFilterResult.UF_FAIL_CREEP;
         }
         return UnitFilter(target, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, this.GetCasterPlus().GetTeamNumber());

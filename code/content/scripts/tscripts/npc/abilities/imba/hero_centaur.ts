@@ -49,7 +49,7 @@ export class imba_centaur_hoof_stomp extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Centaur.HoofStomp");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_centaur" && RandomInt(1, 100) <= 50) {
+        if (this.GetCasterPlus().GetName().includes("centaur") && RandomInt(1, 100) <= 50) {
             EmitSoundOn("centaur_cent_hoof_stomp_0" + RandomInt(1, 2), this.GetCasterPlus());
         }
         let particle_stomp_fx = ResHelper.CreateParticleEx("particles/units/heroes/hero_centaur/centaur_warstomp.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
@@ -72,7 +72,7 @@ export class imba_centaur_hoof_stomp extends BaseAbility_Plus {
                     attacker: this.GetCasterPlus(),
                     ability: this
                 });
-                if (enemy.IsRealHero() && !enemy.IsAlive() && this.GetCasterPlus().GetName() == "npc_dota_hero_centaur" && RollPercentage(25)) {
+                if (enemy.IsRealHero() && !enemy.IsAlive() && this.GetCasterPlus().GetName().includes("centaur") && RollPercentage(25)) {
                     EmitSoundOn("centaur_cent_hoof_stomp_0" + RandomInt(4, 5), this.GetCasterPlus());
                 }
             }
@@ -458,7 +458,7 @@ export class modifier_imba_return_passive extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (this.GetParentPlus() == keys.target && this.GetParentPlus() == this.GetCasterPlus() && this.GetStackCount() < this.GetSpecialValueFor("max_stacks") && !this.GetParentPlus().HasModifier("modifier_imba_return_bonus_damage")) {
-            if (keys.attacker.IsHero() || keys.attacker.IsTower()) {
+            if (keys.attacker.IsRealUnit() || keys.attacker.IsTower()) {
                 this.IncrementStackCount();
             }
         }
@@ -613,7 +613,7 @@ export class modifier_imba_stampede_haste extends BaseModifier_Plus {
         this.tree_destruction_radius = this.ability.GetSpecialValueFor("tree_destruction_radius");
         this.nether_ward_damage = this.ability.GetSpecialValueFor("nether_ward_damage");
         if (IsServer()) {
-            if (this.caster.IsHero()) {
+            if (this.caster.IsRealUnit()) {
                 this.trample_damage = this.caster.GetStrength() * (this.strength_damage * 0.01);
             } else {
                 this.trample_damage = this.nether_ward_damage;

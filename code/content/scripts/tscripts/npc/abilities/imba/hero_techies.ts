@@ -544,7 +544,7 @@ export class imba_techies_stasis_trap extends BaseAbility_Plus {
             if (target.GetTeamNumber() != caster.GetTeamNumber()) {
                 return UnitFilterResult.UF_FAIL_ENEMY;
             }
-            if (target.IsHero()) {
+            if (target.IsRealUnit()) {
                 return UnitFilterResult.UF_FAIL_HERO;
             }
             if (target.IsBuilding()) {

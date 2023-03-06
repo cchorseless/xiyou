@@ -954,7 +954,7 @@ export class modifier_imba_rolling_boulder extends BaseModifier_Plus {
                     let RemnantFinder = FindUnitsInRadius(this.caster.GetTeamNumber(), this.caster.GetAbsOrigin(), undefined, this.hitRadius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FindOrder.FIND_CLOSEST, false);
                     for (const [_, r] of GameFunc.iPair(RemnantFinder)) {
                         if (r.HasModifier("modifier_imba_stone_remnant")) {
-                            if (r.IsHero()) {
+                            if (r.IsRealUnit()) {
                                 this.enchanted_hero = r;
                             }
                             let remnantModifier = r.findBuff<modifier_imba_stone_remnant>("modifier_imba_stone_remnant");
@@ -1440,7 +1440,7 @@ export class modifier_imba_magnetize extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             this.counter = this.counter + 1;
-            if ((this.GetParentPlus().IsHero() || this.GetParentPlus().IsCreep()) && this.counter % 2 == 1) {
+            if ((this.GetParentPlus().IsRealUnit() || this.GetParentPlus().IsCreep()) && this.counter % 2 == 1) {
                 this.overhead_particle = ParticleManager.CreateParticleForTeam("particles/units/heroes/hero_visage/visage_stoneform_overhead_timer.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.GetParentPlus(), this.GetCasterPlus().GetTeamNumber());
                 ParticleManager.SetParticleControl(this.overhead_particle, 1, Vector(0, math.ceil(this.GetRemainingTime()), 0));
                 ParticleManager.SetParticleControl(this.overhead_particle, 2, Vector(1, 0, 0));
@@ -1465,7 +1465,7 @@ export class modifier_imba_magnetize extends BaseModifier_Plus {
                 ability: this.GetAbilityPlus()
             });
             EmitSoundOn("Hero_EarthSpirit.Magnetize.Debris", this.parent);
-            if (this.parent.IsHero()) {
+            if (this.parent.IsRealUnit()) {
                 EmitSoundOn("Hero_EarthSpirit.Magnetize.Target.Tick", this.parent);
             }
             let tickParticle = ResHelper.CreateParticleEx("particles/units/heroes/hero_earth_spirit/espirit_magnetize_target.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);

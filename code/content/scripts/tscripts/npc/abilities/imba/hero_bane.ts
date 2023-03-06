@@ -24,7 +24,7 @@ export class imba_bane_enfeeble_723 extends BaseAbility_Plus {
         return DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_UNIT_TARGET + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK;
     }
     GetCastAnimation(): GameActivity_t {
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_bane") {
+        if (this.GetCasterPlus().GetName().includes("bane")) {
             return GameActivity_t.ACT_DOTA_ENFEEBLE;
         } else {
             return GameActivity_t.ACT_DOTA_CAST_ABILITY_1;
@@ -35,7 +35,7 @@ export class imba_bane_enfeeble_723 extends BaseAbility_Plus {
         if (!target.TriggerSpellAbsorb(this)) {
             this.GetCasterPlus().EmitSound("Hero_Bane.Enfeeble.Cast");
             target.EmitSound("Hero_Bane.Enfeeble");
-            if (this.GetCasterPlus().GetName() == "npc_dota_hero_bane" && RollPercentage(75)) {
+            if (this.GetCasterPlus().GetName().includes("bane") && RollPercentage(75)) {
                 this.GetCasterPlus().EmitSound("bane_bane_ability_enfeeble_" + string.format("%02d", RandomInt(1, 14)));
             }
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_bane_enfeeble_723_effect", {
@@ -196,7 +196,7 @@ export class imba_bane_fiends_grip_723 extends BaseAbility_Plus {
     OnSpellStart(): void {
         this.target = this.GetCursorTarget();
         if (!this.target.TriggerSpellAbsorb(this)) {
-            if (this.GetCasterPlus().GetName() == "npc_dota_hero_bane") {
+            if (this.GetCasterPlus().GetName().includes("bane")) {
                 this.GetCasterPlus().EmitSound("bane_bane_ability_fiendsgrip_" + string.format("%02d", RandomInt(1, 7)));
             }
             if (!this.GetCasterPlus().HasTalent("special_bonus_imba_bane_3")) {
@@ -676,7 +676,7 @@ export class modifier_imba_brain_sap_mana extends BaseModifier_Plus {
     BeCreated(p_0: any,): void {
         if (IsServer()) {
             let parent = this.GetParentPlus();
-            if (parent.IsHero()) {
+            if (parent.IsRealUnit()) {
                 this.int_loss = -(parent.GetIntellect());
             }
             this.previous_mana = parent.GetMana();

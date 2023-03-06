@@ -35,7 +35,7 @@ export class imba_spirit_breaker_charge_of_darkness extends BaseAbility_Plus {
         }
         this.GetCasterPlus().Interrupt();
         this.GetCasterPlus().EmitSound("Hero_Spirit_Breaker.ChargeOfDarkness");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_spirit_breaker" && RollPercentage(10)) {
+        if (this.GetCasterPlus().GetName().includes("spirit_breaker") && RollPercentage(10)) {
             let responses = {
                 "1": "spirit_breaker_spir_ability_charge_02",
                 "2": "spirit_breaker_spir_ability_charge_14",
@@ -148,7 +148,7 @@ export class modifier_imba_spirit_breaker_charge_of_darkness extends BaseModifie
         let greater_bash_ability = this.GetCasterPlus().findAbliityPlus<imba_spirit_breaker_greater_bash>("imba_spirit_breaker_greater_bash");
         let enemies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin() + (this.GetParentPlus().GetForwardVector() * 20) as Vector, undefined, this.bash_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_CLOSEST, false);
         for (const enemy of (enemies as IBaseNpc_Plus[])) {
-            if (this.GetAbilityPlus().GetAutoCastState() && !this.clothesline_target && enemy != this.target && !enemy.IsRoshan() && enemy.IsHero()) {
+            if (this.GetAbilityPlus().GetAutoCastState() && !this.clothesline_target && enemy != this.target && !enemy.IsRoshan() && enemy.IsRealUnit()) {
                 this.clothesline_target = enemy;
                 enemy.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_spirit_breaker_charge_of_darkness_clothesline", {
                     duration: this.clothesline_duration * (1 - enemy.GetStatusResistance())
@@ -549,7 +549,7 @@ export class imba_spirit_breaker_bulldoze extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Spirit_Breaker.Bulldoze.Cast");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_spirit_breaker" && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetName().includes("spirit_breaker") && RollPercentage(50)) {
             let responses = {
                 "1": "spirit_breaker_spir_ability_charge_03",
                 "2": "spirit_breaker_spir_ability_charge_05",

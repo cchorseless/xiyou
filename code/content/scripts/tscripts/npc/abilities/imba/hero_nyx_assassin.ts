@@ -906,7 +906,7 @@ export class modifier_imba_spiked_carapace extends BaseModifier_Plus {
                         if (!this.caster.HasModifier(this.modifier_vendetta)) {
                             this.caster.AddNewModifier(this.caster, this.vendetta_ability, this.modifier_vendetta, {});
                         }
-                        if (enemy.IsHero()) {
+                        if (enemy.IsRealUnit()) {
                             let modifier_vendetta_handler = this.caster.FindModifierByName(this.modifier_vendetta);
                             if (modifier_vendetta_handler) {
                                 modifier_vendetta_handler.SetStackCount(modifier_vendetta_handler.GetStackCount() + this.burrowed_vendetta_stacks);
@@ -954,7 +954,7 @@ export class modifier_imba_spiked_carapace extends BaseModifier_Plus {
                     if (!this.GetCasterPlus().HasModifier(this.modifier_vendetta)) {
                         this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this.vendetta_ability, this.modifier_vendetta, {});
                     }
-                    if (keys.attacker.IsHero()) {
+                    if (keys.attacker.IsRealUnit()) {
                         let modifier_vendetta_handler = this.GetCasterPlus().FindModifierByName(this.modifier_vendetta);
                         if (modifier_vendetta_handler) {
                             modifier_vendetta_handler.SetStackCount(modifier_vendetta_handler.GetStackCount() + (damage * this.damage_to_vendetta_pct * 0.01));
@@ -1167,7 +1167,7 @@ export class modifier_imba_vendetta extends BaseModifier_Plus {
             let attacker = keys.attacker;
             let target = keys.target;
             if (attacker == this.caster) {
-                if (!target.IsHero() && !target.IsCreep()) {
+                if (!target.IsRealUnit() && !target.IsCreep()) {
                     this.Destroy();
                     return undefined;
                 }

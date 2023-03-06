@@ -175,7 +175,7 @@ export class imba_abaddon_death_coil extends BaseAbility_Plus {
                 over_channel_particle = ResHelper.CreateParticleEx("particles/dev/library/base_dust_hit_smoke.vpcf", ParticleAttachment_t.PATTACH_POINT, target);
                 ParticleManager.ReleaseParticleIndex(over_channel_particle);
             }
-            if (!special_cast && caster.GetName() == "npc_dota_hero_abaddon") {
+            if (!special_cast && caster.GetName().includes("abaddon")) {
                 this.AddTimer(0.4, () => {
                     if (this.killed) {
                         let responses = [

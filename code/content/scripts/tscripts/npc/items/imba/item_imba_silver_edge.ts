@@ -194,7 +194,7 @@ export class modifier_item_imba_silver_edge_passive extends BaseModifier_Plus {
             this.echo_ready = true;
         }
         this.slow_duration = this.GetItemPlus().GetSpecialValueFor("slow_duration");
-        if (this.GetParentPlus().IsHero() && this.GetItemPlus()) {
+        if (this.GetParentPlus().IsRealUnit() && this.GetItemPlus()) {
             this.CheckUnique(true);
         }
     }

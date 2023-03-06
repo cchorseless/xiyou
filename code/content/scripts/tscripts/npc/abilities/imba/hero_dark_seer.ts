@@ -238,7 +238,7 @@ export class imba_dark_seer_wormhole extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().GetName() != "npc_dota_hero_dark_seer") {
+        if (!this.GetCasterPlus().GetName().includes("dark_seer")) {
             this.SetHidden(true);
         }
     }
@@ -406,7 +406,7 @@ export class modifier_imba_dark_seer_vacuum_entry_portal extends BaseModifier_Pl
         let units = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.teleport_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
         for (const [_, unit] of GameFunc.iPair(units)) {
             if (this.GetElapsedTime() >= 0.1 && !this.ported_units[unit.entindex()] && !unit.HasModifier("modifier_imba_dark_seer_wormhole") && (unit.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() || !AoiHelper.IsNearFountain(this.exit_portal.GetAbsOrigin(), 1700))) {
-                if (unit.IsHero()) {
+                if (unit.IsRealUnit()) {
                     EmitSoundOnLocationWithCaster(unit.GetAbsOrigin(), "Wormhole.Disappear", this.GetCasterPlus());
                 } else {
                     EmitSoundOnLocationWithCaster(unit.GetAbsOrigin(), "Wormhole.CreepDisappear", this.GetCasterPlus());
@@ -418,7 +418,7 @@ export class modifier_imba_dark_seer_vacuum_entry_portal extends BaseModifier_Pl
                         duration: FrameTime()
                     });
                 }
-                if (unit.IsHero()) {
+                if (unit.IsRealUnit()) {
                     EmitSoundOnLocationWithCaster(unit.GetAbsOrigin(), "Wormhole.Appear", this.GetCasterPlus());
                 } else {
                     EmitSoundOnLocationWithCaster(unit.GetAbsOrigin(), "Wormhole.CreepAppear", this.GetCasterPlus());
@@ -475,7 +475,7 @@ export class imba_dark_seer_ion_shell extends BaseAbility_Plus {
             return;
         }
         this.GetCursorTarget().EmitSound("Hero_Dark_Seer.Ion_Shield_Start");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_dark_seer" && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetName().includes("dark_seer") && RollPercentage(50)) {
             this.GetCasterPlus().EmitSound("dark_seer_dkseer_ability_surge_0" + math.random(1, 2));
         }
         if (this.GetAutoCastState() && this.GetCursorTarget().GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {

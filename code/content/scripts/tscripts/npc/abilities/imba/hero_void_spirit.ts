@@ -733,7 +733,7 @@ export class modifier_imba_void_spirit_aether_remnant_helper extends BaseModifie
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_TAKEDAMAGE)
     CC_OnTakeDamage(keys: ModifierInstanceEvent): void {
-        if (keys.inflictor && keys.inflictor.GetName() == "void_spirit_aether_remnant" && keys.attacker == this.GetParentPlus() && keys.unit.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && keys.unit.IsHero()) {
+        if (keys.inflictor && keys.inflictor.GetName() == "void_spirit_aether_remnant" && keys.attacker == this.GetParentPlus() && keys.unit.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && keys.unit.IsRealUnit()) {
             this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), keys.inflictor, "modifier_imba_void_spirit_aether_remnant_helper_buff", {
                 duration: this.GetSpecialValueFor("swiftness_duration")
             });
@@ -955,7 +955,7 @@ export class imba_void_spirit_astral_step extends BaseAbility_Plus {
             enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_void_spirit_astral_step_debuff", {
                 duration: this.GetSpecialValueFor("pop_damage_delay") * (1 - enemy.GetStatusResistance())
             });
-            if (enemy.IsHero() && !bHeroHit) {
+            if (enemy.IsRealUnit() && !bHeroHit) {
                 bHeroHit = true;
             }
         }

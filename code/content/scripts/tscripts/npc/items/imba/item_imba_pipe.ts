@@ -25,7 +25,7 @@ export class item_imba_pipe extends BaseItem_Plus {
             unit.AddNewModifier(caster, this, "modifier_item_imba_hood_of_defiance_barrier", {
                 duration: duration
             });
-            if (unit.IsHero()) {
+            if (unit.IsRealUnit()) {
                 unit.AddNewModifier(caster, this, "modifier_imba_pipe_active_bonus", {
                     duration: duration,
                     unreducable_magic_resist: unreducable_magic_resist

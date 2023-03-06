@@ -285,7 +285,7 @@ export class modifier_imba_boar_poison extends BaseModifier_Plus {
             let ability = this.GetAbilityPlus();
             let duration = ability.GetSpecialValueFor("duration");
             if ((parent == params.attacker)) {
-                if ((target.IsCreep() || target.IsHero()) && !target.IsBuilding()) {
+                if ((target.IsCreep() || target.IsRealUnit()) && !target.IsBuilding()) {
                     target.AddNewModifier(parent, ability, "modifier_imba_boar_poison_debuff", {
                         duration: duration * (1 - target.GetStatusResistance())
                     });

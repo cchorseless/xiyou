@@ -27,7 +27,7 @@ export class imba_terrorblade_reflection extends BaseAbility_Plus {
         }
         let spawn_range = 108;
         let slow_modifier = undefined;
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_terrorblade") {
+        if (this.GetCasterPlus().GetName().includes("terrorblade")) {
             if (RollPercentage(1)) {
                 if (this.GetCasterPlus().HasModifier("modifier_imba_terrorblade_metamorphosis")) {
                     EmitSoundOnClient("terrorblade_terr_morph_reflection_01", this.GetCasterPlus().GetPlayerOwner());
@@ -205,7 +205,7 @@ export class imba_terrorblade_conjure_image extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().EmitSound("Hero_Terrorblade.ConjureImage");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_terrorblade") {
+        if (this.GetCasterPlus().GetName().includes("terrorblade")) {
             if (RollPercentage(2)) {
                 if (this.GetCasterPlus().HasModifier("modifier_imba_terrorblade_metamorphosis")) {
                     EmitSoundOnClient("terrorblade_terr_morph_conjureimage_03", this.GetCasterPlus().GetPlayerOwner());
@@ -320,7 +320,7 @@ export class imba_terrorblade_metamorphosis extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().EmitSound("Hero_Terrorblade.Metamorphosis");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_terrorblade") {
+        if (this.GetCasterPlus().GetName().includes("terrorblade")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "terrorblade_terr_morph_metamorphosis_01",
@@ -485,7 +485,7 @@ export class modifier_imba_terrorblade_metamorphosis extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.ATTACK_RANGE_BONUS)
     CC_GetModifierAttackRangeBonus(): number {
-        if (this.GetParentPlus().GetName() != "npc_dota_hero_rubick") {
+        if (!this.GetParentPlus().GetName().includes("rubick")) {
             return this.bonus_range;
         }
     }
@@ -786,7 +786,7 @@ export class imba_terrorblade_sunder extends BaseAbility_Plus {
         let target_health_percent = target.GetHealthPercent();
         this.GetCasterPlus().EmitSound("Hero_Terrorblade.Sunder.Cast");
         target.EmitSound("Hero_Terrorblade.Sunder.Target");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_terrorblade") {
+        if (this.GetCasterPlus().GetName().includes("terrorblade")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "terrorblade_terr_demonattack_08",

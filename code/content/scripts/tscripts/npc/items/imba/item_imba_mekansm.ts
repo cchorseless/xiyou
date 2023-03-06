@@ -26,7 +26,7 @@ function GreavesActivate(caster: IBaseNpc_Plus, ability: IBaseItem_Plus,
         let particle_name = "particles/items3_fx/warmage_mana_nonhero.vpcf";
         let particle_name_hero = "particles/items3_fx/warmage_recipient.vpcf";
         let particle_target = particle_name;
-        if (ally.IsHero()) {
+        if (ally.IsRealUnit()) {
             particle_target = particle_name_hero;
         }
         let target_pfx = ParticleManager.CreateParticle(particle_target, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, ally);
@@ -34,7 +34,7 @@ function GreavesActivate(caster: IBaseNpc_Plus, ability: IBaseItem_Plus,
         ally.AddNewModifier(caster, ability, "modifier_item_imba_guardian_greaves_heal", {
             duration: heal_duration
         });
-        if (caster.GetUnitName() == "npc_dota_hero_meepo") {
+        if (caster.GetUnitName().includes("meepo")) {
             let enemyList: IBaseNpc_Plus[] = [];
             // for (const [_, hero] of pairs(HeroList.GetAllHeroes())) {
             for (const hero of (enemyList)) {

@@ -66,7 +66,7 @@ export class modifier_imba_shotgun_passive extends BaseModifier_Plus {
         }
         this.item = this.GetItemPlus();
         this.parent = this.GetParentPlus();
-        if (this.parent.IsHero() && this.item) {
+        if (this.parent.IsRealUnit() && this.item) {
             this.bonus_damage = this.item.GetSpecialValueFor("bonus_damage");
             this.bonus_as = this.item.GetSpecialValueFor("bonus_as");
             this.bonus_agi = this.item.GetSpecialValueFor("bonus_agi");
@@ -256,7 +256,7 @@ export class modifier_imba_starfury_passive extends BaseModifier_Plus {
         }
         this.item = this.GetItemPlus();
         this.parent = this.GetParentPlus();
-        if (this.parent.IsHero() && this.item) {
+        if (this.parent.IsRealUnit() && this.item) {
             this.bonus_damage = this.item.GetSpecialValueFor("bonus_damage");
             this.bonus_as = this.item.GetSpecialValueFor("bonus_as");
             this.bonus_agi = this.item.GetSpecialValueFor("bonus_agi");

@@ -1318,7 +1318,7 @@ export class imba_obsidian_destroyer_sanity_eclipse extends BaseAbility_Plus {
                     let max_mana = enemy.GetMaxMana();
                     let mana_burn = max_mana * (max_mana_burn_pct * 0.01);
                     if (caster.HasTalent("special_bonus_imba_obsidian_destroyer_6")) {
-                        if (enemy.IsHero() && enemy.GetIntellect() < caster_int * caster.GetTalentValue("special_bonus_imba_obsidian_destroyer_6") * 0.01) {
+                        if (enemy.IsRealUnit() && enemy.GetIntellect() < caster_int * caster.GetTalentValue("special_bonus_imba_obsidian_destroyer_6") * 0.01) {
                             mana_burn = max_mana * (caster.GetTalentValue("special_bonus_imba_obsidian_destroyer_6", "mana_burn") * 0.01);
                         }
                     }
@@ -1328,7 +1328,7 @@ export class imba_obsidian_destroyer_sanity_eclipse extends BaseAbility_Plus {
                     enemy.Kill(ability, caster);
                 } else {
                     let enemy_int;
-                    if (enemy.IsHero()) {
+                    if (enemy.IsRealUnit()) {
                         enemy_int = enemy.GetIntellect();
                     } else {
                         enemy_int = 0;
@@ -1372,7 +1372,7 @@ export class imba_obsidian_destroyer_sanity_eclipse extends BaseAbility_Plus {
                         ParticleManager.SetParticleControl(particle_damage_fx, 0, enemy.GetAbsOrigin());
                         ParticleManager.ReleaseParticleIndex(particle_damage_fx);
                     }
-                    if (enemy.IsHero() && int_steal_count > 0) {
+                    if (enemy.IsRealUnit() && int_steal_count > 0) {
                         ApplyIntelligenceSteal(caster, ability, enemy, int_steal_count, int_steal_duration);
                     }
                     if (scepter && prison_ability && !enemy.HasModifier(modifier_prison)) {

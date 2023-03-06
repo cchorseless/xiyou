@@ -1800,7 +1800,7 @@ export class modifier_imba_phoenix_supernova_caster_dummy extends BaseModifier_P
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().GetUnitName() == "npc_imba_hero_phoenix" || this.GetCasterPlus().GetUnitName() == "npc_dota_hero_phoenix") {
+        if (this.GetCasterPlus().GetUnitName().includes("phoenix") || this.GetCasterPlus().GetUnitName().includes("phoenix")) {
             this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_INTRO);
         }
         if (this.GetCasterPlus() == this.GetParentPlus()) {

@@ -33,7 +33,7 @@ export class imba_witch_doctor_paralyzing_cask extends BaseAbility_Plus {
             let index = DoUniqueString("index");
             this.tempdata["split_" + index] = this.GetSpecialValueFor("split_amount");
             this.tempdata[index] = 1;
-            if ((this.GetCasterPlus().GetName() == "npc_dota_hero_witch_doctor")) {
+            if ((this.GetCasterPlus().GetName().includes("witch_doctor"))) {
                 this.GetCasterPlus().EmitSound("witchdoctor_wdoc_ability_cask_0" + math.random(1, 8));
             }
             let projectile = {
@@ -237,7 +237,7 @@ export class imba_witch_doctor_voodoo_restoration extends BaseAbility_Plus {
             EmitSoundOn("Hero_WitchDoctor.Voodoo_Restoration", this.GetCasterPlus());
             EmitSoundOn("Hero_WitchDoctor.Voodoo_Restoration.Loop", this.GetCasterPlus());
             this.GetCasterPlus().AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_voodoo_restoration", {});
-            if ((!imba_witch_doctor_voodoo_restoration.VOODOO) && (this.GetCasterPlus().GetName() == "npc_dota_hero_witch_doctor")) {
+            if ((!imba_witch_doctor_voodoo_restoration.VOODOO) && (this.GetCasterPlus().GetName().includes("witch_doctor"))) {
                 imba_witch_doctor_voodoo_restoration.VOODOO = true;
                 this.GetCasterPlus().EmitSound("witchdoctor_wdoc_ability_voodoo_0" + math.random(1, 5));
                 this.AddTimer(10, () => {
@@ -612,7 +612,7 @@ export class modifier_imba_maledict extends BaseModifier_Plus {
     }
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(params: ModifierInstanceEvent): void {
-        if ((!modifier_imba_maledict.MALEDICT_KILL) && (this.GetParentPlus() == params.unit) && this.GetCasterPlus().GetName() == "npc_dota_hero_witch_doctor") {
+        if ((!modifier_imba_maledict.MALEDICT_KILL) && (this.GetParentPlus() == params.unit) && this.GetCasterPlus().GetName().includes("witch_doctor")) {
             modifier_imba_maledict.MALEDICT_KILL = true;
             this.GetCasterPlus().EmitSound("witchdoctor_wdoc_ability_maledict_0" + math.random(1, 4));
             this.AddTimer(30, () => {
@@ -629,7 +629,7 @@ export class modifier_imba_maledict extends BaseModifier_Plus {
         if (newHP > this.healthComparator) {
             return;
         }
-        if ((!modifier_imba_maledict.MALEDICT_POP) && (maxHP_pct < 0.2) && (this.soundcount == 2) && (this.GetCasterPlus().GetName() == "npc_dota_hero_witch_doctor")) {
+        if ((!modifier_imba_maledict.MALEDICT_POP) && (maxHP_pct < 0.2) && (this.soundcount == 2) && (this.GetCasterPlus().GetName().includes("witch_doctor"))) {
             modifier_imba_maledict.MALEDICT_POP = true;
             this.GetCasterPlus().EmitSound("witchdoctor_wdoc_killspecial_0" + math.random(1, 3));
             this.AddTimer(30, () => {

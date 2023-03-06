@@ -44,7 +44,7 @@
 //     let cleave_stacks = caster.findBuffStack(modifier_cleave, caster);
 //     cleave_damage = cleave_damage * cleave_stacks;
 //     quelling_bonus = quelling_bonus * cleave_stacks;
-//     if (!(target.IsHero() || target.IsBuilding() || target.IsRoshan())) {
+//     if (!(target.IsRealUnit() || target.IsBuilding() || target.IsRoshan())) {
 //         ApplyDamage({
 //             attacker: caster,
 //             victim: target,

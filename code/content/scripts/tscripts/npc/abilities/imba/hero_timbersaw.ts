@@ -10,7 +10,7 @@ export class imba_timbersaw_whirling_death extends BaseAbility_Plus {
     public responses: any;
     public dendrophobia_modifier: any;
     OnSpellStart(): void {
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_shredder" && RollPercentage(15)) {
+        if (this.GetCasterPlus().GetName().includes("shredder") && RollPercentage(15)) {
             if (!this.responses) {
                 this.responses = {
                     "1": "shredder_timb_whirlingdeath_03",
@@ -47,7 +47,7 @@ export class imba_timbersaw_whirling_death extends BaseAbility_Plus {
         GridNav.DestroyTreesAroundPoint(this.GetCasterPlus().GetAbsOrigin(), this.GetSpecialValueFor("whirling_radius"), false);
         let hero_check = false;
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("whirling_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
-            if (enemy.IsHero() && enemy.GetPrimaryStatValue) {
+            if (enemy.IsRealUnit() && enemy.GetPrimaryStatValue) {
                 enemy.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_timbersaw_whirling_death_debuff", {
                     duration: this.GetSpecialValueFor("duration") * (1 - enemy.GetStatusResistance()),
                     blood_oil_convert_pct: this.GetSpecialValueFor("blood_oil_convert_pct"),
@@ -267,7 +267,7 @@ export class imba_timbersaw_timber_chain extends BaseAbility_Plus {
             ExtraData: ExtraData
         });
         this.projectiles[timber_projectile] = ExtraData;
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_shredder") {
+        if (this.GetCasterPlus().GetName().includes("shredder")) {
             if (this.GetCasterPlus().GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON)) {
                 this.GetCasterPlus().GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_WEAPON).AddEffects(EntityEffects.EF_NODRAW);
             }
@@ -349,7 +349,7 @@ export class imba_timbersaw_timber_chain extends BaseAbility_Plus {
         if (!target) {
             this.CreateVisibilityNode(location, 400, 0.1);
             this.GetCasterPlus().EmitSound("Hero_Shredder.TimberChain.Retract");
-            if (this.GetCasterPlus().GetName() == "npc_dota_hero_shredder") {
+            if (this.GetCasterPlus().GetName().includes("shredder")) {
                 if (!this.responses) {
                     this.responses = {
                         ["shredder_timb_failure_01"]: 0,
@@ -635,7 +635,7 @@ export class modifier_imba_timbersaw_reactive_armor extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_shredder") {
+        if (this.GetCasterPlus().GetName().includes("shredder")) {
             this.reactive_particle_1 = ResHelper.CreateParticleEx("particles/units/heroes/hero_shredder/shredder_armor_lyr1.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
             ParticleManager.SetParticleControlEnt(this.reactive_particle_1, 0, this.GetParentPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_armor", this.GetParentPlus().GetAbsOrigin(), true);
             ParticleManager.SetParticleControl(this.reactive_particle_1, 2, Vector(0, 0, 0));
@@ -837,7 +837,7 @@ export class imba_timbersaw_chakram extends BaseAbility_Plus {
             this.projectiles = {}
         }
         this.GetCasterPlus().EmitSound("Hero_Shredder.Chakram.Cast");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_shredder") {
+        if (this.GetCasterPlus().GetName().includes("shredder")) {
             if (!this.responses) {
                 this.responses = {
                     ["shredder_timb_chakram_02"]: 0,
@@ -1063,7 +1063,7 @@ export class imba_timbersaw_chakram_2 extends BaseAbility_Plus {
             this.projectiles = {}
         }
         this.GetCasterPlus().EmitSound("Hero_Shredder.Chakram.Cast");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_shredder") {
+        if (this.GetCasterPlus().GetName().includes("shredder")) {
             if (!this.responses) {
                 this.responses = {
                     ["shredder_timb_chakram_02"]: 0,
@@ -1523,7 +1523,7 @@ export class imba_timbersaw_return_chakram extends BaseAbility_Plus {
         return false;
     }
     OnSpellStart(): void {
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_shredder") {
+        if (this.GetCasterPlus().GetName().includes("shredder")) {
             if (!this.responses) {
                 this.responses = {
                     ["shredder_timb_chakramreturn_03"]: 0,
@@ -1593,7 +1593,7 @@ export class imba_timbersaw_return_chakram_2 extends BaseAbility_Plus {
         return false;
     }
     OnSpellStart(): void {
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_shredder") {
+        if (this.GetCasterPlus().GetName().includes("shredder")) {
             if (!this.responses) {
                 this.responses = {
                     ["shredder_timb_chakramreturn_03"]: 0,

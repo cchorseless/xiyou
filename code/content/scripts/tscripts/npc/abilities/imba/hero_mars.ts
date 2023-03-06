@@ -106,7 +106,7 @@ export class imba_mars_spear extends BaseAbility_Plus {
             damage_flags: DOTADamageFlag_t.DOTA_DAMAGE_FLAG_NONE
         }
         ApplyDamage(damageTable);
-        if ((!target.IsHero()) || this.projectiles[iProjectileHandle].unit) {
+        if ((!target.IsRealUnit()) || this.projectiles[iProjectileHandle].unit) {
             let direction = this.projectiles[iProjectileHandle].direction;
             let proj_angle = VectorToAngles(direction).y;
             let unit_angle = VectorToAngles(target.GetOrigin() - location as Vector).y;

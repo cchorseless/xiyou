@@ -787,7 +787,7 @@ export class modifier_imba_mortal_strike extends BaseModifier_Plus {
                         this.mortal_critical_strike = false;
                     });
                     this.caster.EmitSound("Hero_SkeletonKing.CriticalStrike");
-                    if (target.IsHero()) {
+                    if (target.IsRealUnit()) {
                         return this.crit_damage_heroes;
                     } else {
                         return this.crit_damage_creeps;

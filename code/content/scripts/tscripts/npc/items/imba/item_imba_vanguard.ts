@@ -105,7 +105,7 @@ export class modifier_item_imba_poor_mans_shield extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PHYSICAL_CONSTANT_BLOCK)
     CC_GetModifierPhysical_ConstantBlock(keys: ModifierAttackEvent): number {
-        if (keys.attacker.IsHero() && this.GetItemPlus() && this.GetItemPlus().IsCooldownReady()) {
+        if (keys.attacker.IsRealUnit() && this.GetItemPlus() && this.GetItemPlus().IsCooldownReady()) {
             this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetItemPlus(), "modifier_item_imba_poor_mans_shield_active", {
                 duration: this.bonus_block_duration
             });

@@ -628,7 +628,7 @@ export class imba_templar_assassin_trap extends BaseAbility_Plus {
             }
             if (index) {
                 this.GetCasterPlus().EmitSound("Hero_TemplarAssassin.Trap.Trigger");
-                if (this.GetCasterPlus().GetName() == "npc_dota_hero_templar_assassin" && RollPercentage(50)) {
+                if (this.GetCasterPlus().GetName().includes("templar_assassin") && RollPercentage(50)) {
                     if (RollPercentage(50)) {
                         this.GetCasterPlus().EmitSound("templar_assassin_temp_psionictrap_05");
                     } else {
@@ -1001,7 +1001,7 @@ export class imba_templar_assassin_psionic_trap extends BaseAbility_Plus {
         if (this.counter_modifier && this.counter_modifier.trap_table) {
             this.GetCasterPlus().EmitSound("Hero_TemplarAssassin.Trap.Cast");
             EmitSoundOnLocationWithCaster(this.GetCursorPosition(), "Hero_TemplarAssassin.Trap", this.GetCasterPlus());
-            if (this.GetCasterPlus().GetName() == "npc_dota_hero_templar_assassin") {
+            if (this.GetCasterPlus().GetName().includes("templar_assassin")) {
                 if (RollPercentage(1)) {
                     this.GetCasterPlus().EmitSound("templar_assassin_temp_psionictrap_04");
                 } else if (RollPercentage(50)) {

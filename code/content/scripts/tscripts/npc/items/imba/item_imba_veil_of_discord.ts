@@ -100,7 +100,7 @@ export class modifier_veil_passive extends BaseModifier_Plus {
         if (IsServer()) {
             this.GetParentPlus().AddNewModifier(this.GetParentPlus(), ability, "modifier_veil_buff_aura", {});
         }
-        if (this.GetParentPlus().IsHero() && ability) {
+        if (this.GetParentPlus().IsRealUnit() && ability) {
             this.bonus_all_stats = ability.GetSpecialValueFor("bonus_all_stats");
             this.CheckUnique(true);
         }

@@ -329,7 +329,7 @@ export class imba_kunkka_torrent extends BaseAbility_Plus {
                         ParticleManager.ReleaseParticleIndex(bubbles_sec_pfc);
                     }
                     let enemies = FindUnitsInRadius(caster.GetTeam(), target, undefined, radius, target_team, target_type, target_flags, 0, false);
-                    if ((GameFunc.GetCount(enemies) > 0) && (caster.GetName() == "npc_dota_hero_kunkka")) {
+                    if ((GameFunc.GetCount(enemies) > 0) && (caster.GetName().includes("kunkka"))) {
                         if (math.random(1, 10) < 3) {
                             caster.EmitSound("kunkka_kunk_ability_torrent_0" + math.random(1, 4));
                         }
@@ -659,7 +659,7 @@ export class modifier_imba_kunkka_torrent_talent_thinker extends BaseModifier_Pl
                 let radius = this.sec_torrent_radius;
                 let tick_interval = stun_duration / this.tick_count;
                 let enemies = FindUnitsInRadius(this.caster.GetTeam(), random_vector, undefined, radius, this.ability.GetAbilityTargetTeam(), this.ability.GetAbilityTargetType(), this.ability.GetAbilityTargetFlags(), 0, false);
-                if ((GameFunc.GetCount(enemies) > 0) && (this.caster.GetName() == "npc_dota_hero_kunkka")) {
+                if ((GameFunc.GetCount(enemies) > 0) && (this.caster.GetName().includes("kunkka"))) {
                     if (math.random(1, 10) < 3) {
                         this.caster.EmitSound("kunkka_kunk_ability_torrent_0" + math.random(1, 4));
                     }
@@ -1222,7 +1222,7 @@ export class modifier_imba_x_marks_the_spot extends BaseModifier_Plus {
             EmitSoundOn("Ability.XMarksTheSpot.Return", parent);
             ParticleManager.DestroyParticle(this.x_pfx, false);
             ParticleManager.ReleaseParticleIndex(this.x_pfx);
-            if ((math.random(1, 5) < 2) && (caster.GetName() == "npc_dota_hero_kunkka")) {
+            if ((math.random(1, 5) < 2) && (caster.GetName().includes("kunkka"))) {
                 caster.EmitSound("kunkka_kunk_ability_xmark_0" + math.random(1, 5));
             }
             if (!(parent.IsMagicImmune() || parent.IsInvulnerable())) {
@@ -1432,7 +1432,7 @@ export class imba_kunkka_ghostship extends BaseAbility_Plus {
             let boat_direction: Vector;
             let crash_pos: Vector;
             let travel_time: number;
-            if (caster.GetName() == "npc_dota_hero_kunkka") {
+            if (caster.GetName().includes("kunkka")) {
                 caster.EmitSound("kunkka_kunk_ability_ghostshp_0" + math.random(1, 3));
             }
             if (scepter) {
@@ -1543,7 +1543,7 @@ export class imba_kunkka_ghostship extends BaseAbility_Plus {
                     ParticleManager.ReleaseParticleIndex(crash_pfx);
                     EmitSoundOnLocationWithCaster(crash_pos, "Ability.Ghostship.crash", caster);
                     let enemies = FindUnitsInRadius(caster.GetTeam(), crash_pos, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, this.GetAbilityTargetType(), 0, 0, false);
-                    if ((!(GameFunc.GetCount(enemies) > 0)) && (caster.GetName() == "npc_dota_hero_kunkka")) {
+                    if ((!(GameFunc.GetCount(enemies) > 0)) && (caster.GetName().includes("kunkka"))) {
                         if (math.random(1, 2) == 1) {
                             caster.EmitSound("kunkka_kunk_ability_failure_0" + math.random(1, 2));
                         }

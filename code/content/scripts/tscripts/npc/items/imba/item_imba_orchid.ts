@@ -60,7 +60,7 @@ export class modifier_item_imba_orchid extends BaseModifier_Plus {
         }
         this.item = this.GetItemPlus();
         this.parent = this.GetParentPlus();
-        if (this.parent.IsHero() && this.item) {
+        if (this.parent.IsRealUnit() && this.item) {
             this.bonus_intellect = this.item.GetSpecialValueFor("bonus_intellect");
             this.bonus_attack_speed = this.item.GetSpecialValueFor("bonus_attack_speed");
             this.bonus_damage = this.item.GetSpecialValueFor("bonus_damage");
@@ -229,7 +229,7 @@ export class modifier_item_imba_bloodthorn extends BaseModifier_Plus {
         }
         this.item = this.GetItemPlus();
         this.parent = this.GetParentPlus();
-        if (this.parent.IsHero() && this.item) {
+        if (this.parent.IsRealUnit() && this.item) {
             this.bonus_intellect = this.item.GetSpecialValueFor("bonus_intellect");
             this.bonus_attack_speed = this.item.GetSpecialValueFor("bonus_attack_speed");
             this.bonus_damage = this.item.GetSpecialValueFor("bonus_damage");

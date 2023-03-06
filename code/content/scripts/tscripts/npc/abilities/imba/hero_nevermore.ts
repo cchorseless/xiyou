@@ -860,7 +860,7 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
                     return undefined;
                 }
                 if (this.caster.HasTalent("special_bonus_imba_nevermore_4")) {
-                    if (target.GetTeamNumber() != this.caster.GetTeamNumber() && target.IsCreep() || target.IsHero()) {
+                    if (target.GetTeamNumber() != this.caster.GetTeamNumber() && target.IsCreep() || target.IsRealUnit()) {
                         let particle_lifesteal = "particles/generic_gameplay/generic_lifesteal.vpcf";
                         if (this.caster.IsRealHero()) {
                             let damage = keys.damage;
@@ -992,13 +992,13 @@ export class modifier_imba_necromastery_souls extends BaseModifier_Plus {
     }
     IsGinger(unit: IBaseNpc_Plus) {
         let ginger_hero_names = {
-            "1": "npc_dota_hero_enchantress",
-            "2": "npc_dota_hero_lina",
-            "3": "npc_dota_hero_windrunner"
+            "1": "enchantress",
+            "2": "lina",
+            "3": "windrunner"
         }
         let unit_name = unit.GetName();
         for (const [_, name] of GameFunc.Pair(ginger_hero_names)) {
-            if (name == unit_name) {
+            if (unit_name.includes(name)) {
                 return true;
             }
         }

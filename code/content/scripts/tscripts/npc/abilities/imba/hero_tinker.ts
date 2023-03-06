@@ -51,7 +51,7 @@ export class imba_tinker_rearm extends BaseAbility_Plus {
     OnSpellStart(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            if (caster.GetName() == "npc_dota_hero_tinker") {
+            if (caster.GetName().includes("tinker")) {
                 caster.EmitSound("tinker_tink_ability_rearm_0" + math.random(1, 9));
             }
             if (caster.HasTalent("special_bonus_imba_tinker_8")) {
@@ -338,7 +338,7 @@ export class imba_tinker_laser extends BaseAbility_Plus {
             if (target.TriggerSpellAbsorb(this)) {
                 return undefined;
             }
-            if (RollPercentage(15) && (caster.GetName() == "npc_dota_hero_tinker")) {
+            if (RollPercentage(15) && (caster.GetName().includes("tinker"))) {
                 caster.EmitSound("tinker_tink_ability_laser_0" + math.random(1, 4));
             }
             caster.EmitSound("Hero_Tinker.Laser");
@@ -497,7 +497,7 @@ export class imba_tinker_heat_seeking_missile extends BaseAbility_Plus {
             let mini_vision_duration = this.GetTalentSpecialValueFor("mini_vision_duration");
             let mini_speed = this.GetSpecialValueFor("mini_speed");
             let mini_missile_count = this.GetSpecialValueFor("mini_missile_count");
-            if ((math.random(1, 100) <= 50) && (caster.GetName() == "npc_dota_hero_tinker")) {
+            if ((math.random(1, 100) <= 50) && (caster.GetName().includes("tinker"))) {
                 caster.EmitSound("tinker_tink_ability_heatseekingmissile_0" + math.random(1, 4));
             }
             caster.EmitSound("Hero_Tinker.Heat-Seeking_Missile");
@@ -819,7 +819,7 @@ export class imba_tinker_march_of_the_machines extends BaseAbility_Plus {
                     unlock_drone = true;
                 }
             }
-            if ((math.random(1, 100) <= 80) && (caster.GetName() == "npc_dota_hero_tinker")) {
+            if ((math.random(1, 100) <= 80) && (caster.GetName().includes("tinker"))) {
                 let sound_random = math.random(1, 11);
                 if (sound_random <= 9) {
                     caster.EmitSound("tinker_tink_ability_marchofthemachines_0" + sound_random);

@@ -11,7 +11,7 @@ export class imba_gyrocopter_rocket_barrage extends BaseAbility_Plus {
     public responses: string[];
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Gyrocopter.Rocket_Barrage");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_gyrocopter" && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetName().includes("gyrocopter") && RollPercentage(75)) {
             if (!this.responses) {
                 this.responses = ["gyrocopter_gyro_rocket_barrage_01", "gyrocopter_gyro_rocket_barrage_02", "gyrocopter_gyro_rocket_barrage_04"];
             }
@@ -240,7 +240,7 @@ export class imba_gyrocopter_homing_missile extends BaseAbility_Plus {
                 }
             }
         }
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_gyrocopter") {
+        if (this.GetCasterPlus().GetName().includes("gyrocopter")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "gyrocopter_gyro_homing_missile_fire_02",
@@ -570,7 +570,7 @@ export class modifier_imba_gyrocopter_homing_missile extends BaseModifier_Plus {
                     attacker: this.GetCasterPlus(),
                     ability: this.GetAbilityPlus()
                 });
-                if (!this.target.IsAlive() && this.GetCasterPlus().GetName() == "npc_dota_hero_gyrocopter") {
+                if (!this.target.IsAlive() && this.GetCasterPlus().GetName().includes("gyrocopter")) {
                     if (!this.responses) {
                         this.responses = {
                             "1": "gyrocopter_gyro_homing_missile_impact_01",
@@ -678,7 +678,7 @@ export class modifier_imba_gyrocopter_homing_missile extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACKED)
     CC_OnAttacked(keys: ModifierAttackEvent): void {
         if (keys.target == this.GetParentPlus()) {
-            if (keys.attacker.IsHero() || keys.attacker.IsIllusion()) {
+            if (keys.attacker.IsRealUnit() || keys.attacker.IsIllusion()) {
                 this.GetParentPlus().SetHealth(this.GetParentPlus().GetHealth() - this.hero_damage);
             } else if (keys.attacker.IsBuilding()) {
                 this.GetParentPlus().SetHealth(this.GetParentPlus().GetHealth() - (this.hero_damage / 2));
@@ -1165,7 +1165,7 @@ export class imba_gyrocopter_call_down extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Gyrocopter.CallDown.Fire");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_gyrocopter") {
+        if (this.GetCasterPlus().GetName().includes("gyrocopter")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "gyrocopter_gyro_call_down_03",
@@ -1257,7 +1257,7 @@ export class modifier_imba_gyrocopter_call_down_thinker extends BaseModifier_Plu
                     attacker: this.GetCasterPlus(),
                     ability: this.GetAbilityPlus()
                 });
-                if (this.GetCasterPlus().GetName() == "npc_dota_hero_gyrocopter" && (enemy.IsRealHero() || enemy.IsClone()) && !enemy.IsAlive()) {
+                if (this.GetCasterPlus().GetName().includes("gyrocopter") && (enemy.IsRealHero() || enemy.IsClone()) && !enemy.IsAlive()) {
                     EmitSoundOnClient("gyrocopter_gyro_call_down_1" + RandomInt(1, 2), this.GetCasterPlus().GetPlayerOwner());
                 }
             }
@@ -1276,7 +1276,7 @@ export class modifier_imba_gyrocopter_call_down_thinker extends BaseModifier_Plu
                     attacker: this.GetCasterPlus(),
                     ability: this.GetAbilityPlus()
                 });
-                if (this.GetCasterPlus().GetName() == "npc_dota_hero_gyrocopter" && (enemy.IsRealHero() || enemy.IsClone()) && !enemy.IsAlive()) {
+                if (this.GetCasterPlus().GetName().includes("gyrocopter") && (enemy.IsRealHero() || enemy.IsClone()) && !enemy.IsAlive()) {
                     EmitSoundOnClient("gyrocopter_gyro_call_down_1" + RandomInt(1, 2), this.GetCasterPlus().GetPlayerOwner());
                 }
             }

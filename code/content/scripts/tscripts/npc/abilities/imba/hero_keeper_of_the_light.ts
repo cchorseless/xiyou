@@ -143,7 +143,7 @@ export class modifier_imba_keeper_of_the_light_illuminate_self_thinker extends B
         if (this.spirit) {
             this.spirit.RemoveSelf();
         }
-        if (this.caster.GetName() == "npc_dota_hero_keeper_of_the_light") {
+        if (this.caster.GetName().includes("keeper_of_the_light")) {
             if (RollPercentage(5)) {
                 this.caster.EmitSound("keeper_of_the_light_keep_illuminate_06");
             } else if (RollPercentage(50)) {
@@ -257,14 +257,14 @@ export class modifier_imba_keeper_of_the_light_illuminate extends BaseModifier_P
                     }
                 } else if (GameRules.IsDaytime() && this.caster.HasScepter()) {
                     target.Heal(damage, this.ability);
-                    if (target.IsHero()) {
+                    if (target.IsRealUnit()) {
                         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, target, damage, undefined);
                     }
                 }
                 target.EmitSound("Hero_KeeperOfTheLight.Illuminate.Target");
                 target.EmitSound("Hero_KeeperOfTheLight.Illuminate.Target.Secondary");
                 let particle_name = "particles/units/heroes/hero_keeper_of_the_light/keeper_of_the_light_illuminate_impact_small.vpcf";
-                if (target.IsHero()) {
+                if (target.IsRealUnit()) {
                     particle_name = "particles/units/heroes/hero_keeper_of_the_light/keeper_of_the_light_illuminate_impact.vpcf";
                 }
                 let particle = ResHelper.CreateParticleEx(particle_name, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);
@@ -366,7 +366,7 @@ export class imba_keeper_of_the_light_blinding_light extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.caster.GetName() == "npc_dota_hero_keeper_of_the_light" && RollPercentage(15)) {
+        if (this.caster.GetName().includes("keeper_of_the_light") && RollPercentage(15)) {
             this.caster.EmitSound("keeper_of_the_light_keep_illuminate_02");
         }
         let counter = 1;
@@ -554,7 +554,7 @@ export class imba_keeper_of_the_light_chakra_magic extends BaseAbility_Plus {
             ParticleManager.SetParticleControlEnt(this.particle, 0, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.caster.GetAbsOrigin(), true);
             ParticleManager.SetParticleControl(this.particle, 1, this.target.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(this.particle);
-            if (this.caster.GetName() == "npc_dota_hero_keeper_of_the_light") {
+            if (this.caster.GetName().includes("keeper_of_the_light")) {
                 if (RollPercentage(15)) {
                     this.caster.EmitSound("keeper_of_the_light_keep_chakramagic_02");
                 } else if (RollPercentage(25)) {
@@ -570,7 +570,7 @@ export class imba_keeper_of_the_light_chakra_magic extends BaseAbility_Plus {
                 }
             }
             this.target.GiveMana(this.mana_restore);
-            if (this.target.IsHero()) {
+            if (this.target.IsRealUnit()) {
                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_MANA_ADD, this.target, this.mana_restore, undefined);
             }
             for (let abilities = 0; abilities <= 23; abilities++) {
@@ -594,7 +594,7 @@ export class imba_keeper_of_the_light_chakra_magic extends BaseAbility_Plus {
             ParticleManager.SetParticleControlEnt(this.particle, 0, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", this.caster.GetAbsOrigin(), true);
             ParticleManager.SetParticleControl(this.particle, 1, this.target.GetAbsOrigin());
             ParticleManager.ReleaseParticleIndex(this.particle);
-            if (this.caster.GetName() == "npc_dota_hero_keeper_of_the_light") {
+            if (this.caster.GetName().includes("keeper_of_the_light")) {
                 if (RollPercentage(50)) {
                     this.caster.EmitSound("keeper_of_the_light_keep_manaleak_0" + math.random(1, 5));
                 }
@@ -605,7 +605,7 @@ export class imba_keeper_of_the_light_chakra_magic extends BaseAbility_Plus {
             if (this.caster.HasTalent("special_bonus_imba_keeper_of_the_light_flow_inhibition")) {
                 let inhibition_multiplier = this.caster.GetTalentValue("special_bonus_imba_keeper_of_the_light_flow_inhibition");
                 this.target.ReduceMana(this.mana_restore * inhibition_multiplier);
-                if (this.target.IsHero()) {
+                if (this.target.IsRealUnit()) {
                     SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_MANA_LOSS, this.target, this.mana_restore * inhibition_multiplier, undefined);
                 }
                 for (let abilities = 0; abilities <= 23; abilities++) {
@@ -917,7 +917,7 @@ export class imba_keeper_of_the_light_will_o_wisp extends BaseAbility_Plus {
         });
         ignis_fatuus.SetMaximumGoldBounty(this.bounty);
         ignis_fatuus.SetMinimumGoldBounty(this.bounty);
-        if (this.caster.GetName() == "npc_dota_hero_keeper_of_the_light") {
+        if (this.caster.GetName().includes("keeper_of_the_light")) {
             let response = math.random(1, 5);
             if (response >= 4) {
                 response = (response + 1);

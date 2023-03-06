@@ -622,7 +622,7 @@ export class modifier_imba_slithereen_crush_royal_break extends BaseModifier_Plu
             let parent = this.GetParentPlus();
             let attacker = keys.attacker;
             let target = keys.target;
-            if (attacker.IsHero() && attacker.GetTeamNumber() != target.GetTeamNumber() && parent == target) {
+            if (attacker.IsRealUnit() && attacker.GetTeamNumber() != target.GetTeamNumber() && parent == target) {
                 let stacks = this.GetStackCount();
                 if (stacks > 1) {
                     this.DecrementStackCount();
@@ -785,7 +785,7 @@ export class modifier_imba_bash_of_the_deep_attack extends BaseModifier_Plus {
                 if (!smack_target) {
                     if (GFuncRandom.PRD(bash_chance_pct, this)) {
                         EmitSoundOn(sound_bash, target);
-                        if (target.IsHero() || target.IsBuilding()) {
+                        if (target.IsRealUnit() || target.IsBuilding()) {
                             target.AddNewModifier(caster, ability, modifier_stun, {
                                 duration: hero_stun_duration * (1 - target.GetStatusResistance())
                             });
@@ -923,7 +923,7 @@ export class imba_slardar_corrosive_haze extends BaseAbility_Plus {
                 return undefined;
             }
         }
-        if (target.GetUnitName() == "npc_dota_hero_riki") {
+        if (target.GetUnitName().includes("riki")) {
             if (RollPercentage(35)) {
                 let cast_response_roll = RandomInt(9, 14);
                 if (cast_response_roll < 10) {

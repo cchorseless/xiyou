@@ -87,7 +87,7 @@ export class item_imba_witchblade extends BaseItem_Plus {
         target.AddNewModifier(this.GetCasterPlus(), this, "modifier_item_imba_witchblade_slow", {
             duration: this.purge_slow_duration * (1 - target.GetStatusResistance())
         });
-        if (!target.IsHero() && !target.IsRoshan() && !target.IsConsideredHero()) {
+        if (!target.IsRealUnit() && !target.IsRoshan() && !target.IsConsideredHero()) {
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_rooted", {
                 duration: this.GetSpecialValueFor("purge_root_duration") * (1 - target.GetStatusResistance())
             });

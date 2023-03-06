@@ -168,7 +168,7 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
             }
         }
         this.hook_go = ProjectileManager.CreateLinearProjectile(projectile_info);
-        if (this.GetCasterPlus() && this.GetCasterPlus().IsHero()) {
+        if (this.GetCasterPlus() && this.GetCasterPlus().IsRealUnit()) {
             let hHook = this.GetCasterPlus().TempData().hook_wearable;
             if (hHook != undefined && !hHook.IsNull()) {
                 hHook.AddEffects(EntityEffects.EF_NODRAW);
@@ -360,7 +360,7 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
             if (!target || !target.IsNull || target.IsNull()) {
                 this.GetCasterPlus().StopSound("Hero_Pudge.AttackHookExtend");
                 this.GetCasterPlus().FadeGesture(GameActivity_t.ACT_DOTA_CHANNEL_ABILITY_1);
-                if (this.GetCasterPlus() && this.GetCasterPlus().IsHero()) {
+                if (this.GetCasterPlus() && this.GetCasterPlus().IsRealUnit()) {
                     let hHook = this.GetCasterPlus().TempData().hook_wearable;
                     if (hHook != undefined && !hHook.IsNull()) {
                         hHook.RemoveEffects(EntityEffects.EF_NODRAW);
@@ -387,7 +387,7 @@ export class imba_pudge_meat_hook extends BaseAbility_Plus {
                 target.StopSound("Hero_Pudge.AttackHookRetract");
             }
             this.GetCasterPlus().FadeGesture(GameActivity_t.ACT_DOTA_CHANNEL_ABILITY_1);
-            if (this.GetCasterPlus() && this.GetCasterPlus().IsHero()) {
+            if (this.GetCasterPlus() && this.GetCasterPlus().IsRealUnit()) {
                 let hHook = this.GetCasterPlus().TempData().hook_wearable;
                 if (hHook != undefined && !hHook.IsNull()) {
                     hHook.RemoveEffects(EntityEffects.EF_NODRAW);
@@ -1171,7 +1171,7 @@ export class modifier_imba_pudge_dismember_handler extends BaseModifier_Plus {
             return;
         }
         if (keys.ability == this.GetAbilityPlus()) {
-            if (keys.target.IsHero()) {
+            if (keys.target.IsRealUnit()) {
                 this.GetCasterPlus().SetModifierStackCount("modifier_imba_pudge_dismember_handler", this.GetCasterPlus(), this.GetAbilityPlus().GetTalentSpecialValueFor("hero_duration") * (1 - keys.target.GetStatusResistance()) * 100);
             } else {
                 this.GetCasterPlus().SetModifierStackCount("modifier_imba_pudge_dismember_handler", this.GetCasterPlus(), this.GetAbilityPlus().GetTalentSpecialValueFor("creep_duration") * (1 - keys.target.GetStatusResistance()) * 100);

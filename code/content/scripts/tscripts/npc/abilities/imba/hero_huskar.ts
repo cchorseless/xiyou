@@ -677,7 +677,7 @@ export class modifier_imba_huskar_life_break extends BaseModifierMotionHorizonta
             if (this.target.TriggerSpellAbsorb(this.ability)) {
                 return undefined;
             }
-            if (this.parent.GetName() == "npc_dota_hero_huskar") {
+            if (this.parent.GetName().includes("huskar")) {
                 this.parent.StartGesture(GameActivity_t.ACT_DOTA_CAST_LIFE_BREAK_END);
             }
             this.target.EmitSound("Hero_Huskar.Life_Break.Impact");

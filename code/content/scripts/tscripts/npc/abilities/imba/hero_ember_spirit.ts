@@ -10,7 +10,7 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 function FindActiveRemnants(caster: IBaseNpc_Plus) {
     let remnants = Entities.FindAllByModel("models/heroes/ember_spirit/ember_spirit.vmdl") as IBaseNpc_Plus[];
     remnants = remnants.filter((npc) => {
-        return npc.IsAlive() && !npc.IsHero() && npc.GetOwner() == caster && npc.HasModifier("modifier_imba_fire_remnant_state");
+        return npc.IsAlive() && !npc.IsRealUnit() && npc.GetOwner() == caster && npc.HasModifier("modifier_imba_fire_remnant_state");
     });
     return remnants;
 }

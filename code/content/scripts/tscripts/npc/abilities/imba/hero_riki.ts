@@ -322,7 +322,7 @@ export class imba_riki_smoke_screen_723 extends BaseAbility_Plus {
         return this.GetSpecialValueFor("radius");
     }
     OnUpgrade(): void {
-        if (this.GetCasterPlus().HasAbility("imba_riki_blink_strike_723") && this.GetCasterPlus().findAbliityPlus<imba_riki_blink_strike_723>("imba_riki_blink_strike_723").GetLevel() == 1 && !this.bUpgradeResponse && this.GetCasterPlus().GetName() == "npc_dota_hero_riki") {
+        if (this.GetCasterPlus().HasAbility("imba_riki_blink_strike_723") && this.GetCasterPlus().findAbliityPlus<imba_riki_blink_strike_723>("imba_riki_blink_strike_723").GetLevel() == 1 && !this.bUpgradeResponse && this.GetCasterPlus().GetName().includes("riki")) {
             this.GetCasterPlus().EmitSound("riki_riki_ability_invis_04");
             this.bUpgradeResponse = true;
         }
@@ -336,7 +336,7 @@ export class imba_riki_smoke_screen_723 extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Riki.Smoke_Screen");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_riki") {
+        if (this.GetCasterPlus().GetName().includes("riki")) {
             if (RollPercentage(15)) {
                 if (!this.uncommon_responses) {
                     this.uncommon_responses = {
@@ -1023,7 +1023,7 @@ export class modifier_imba_blink_strike_cmd extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     CC_GetActivityTranslationModifiers(): string {
-        // if (this.GetParentPlus().GetName() == "npc_dota_hero_riki") {
+        // if (this.GetParentPlus().GetName() .includes("riki")) {
         //     return "backstab";
         // }
         // return 0;
@@ -1403,7 +1403,7 @@ export class modifier_imba_riki_backstab_translation extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     CC_GetActivityTranslationModifiers(): string {
-        // if (this.GetParentPlus().GetName() == "npc_dota_hero_riki") {
+        // if (this.GetParentPlus().GetName() .includes("riki")) {
         //     return "backstab";
         // }
         return "backstab";

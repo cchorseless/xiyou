@@ -16,7 +16,7 @@ export class item_imba_power_treads_2 extends BaseItem_Plus {
     OnSpellStart(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            // if (!caster.IsHero() || caster.IsClone()) {
+            // if (!caster.IsRealUnit() || caster.IsClone()) {
             //     return;
             // }
             let modifiers = caster.FindAllModifiersByName("modifier_imba_power_treads_2");
@@ -82,7 +82,7 @@ export class modifier_imba_power_treads_2 extends BaseModifier_Plus {
             if (this.GetParentPlus().IsClone()) {
                 return;
             }
-            if (this.GetParentPlus().IsHero()) {
+            if (this.GetParentPlus().IsRealUnit()) {
                 let ability = this.GetItemPlus();
                 let parent = this.GetParentPlus();
                 if (parent.IsRealHero()) {
@@ -170,7 +170,7 @@ export class modifier_imba_power_treads_2 extends BaseModifier_Plus {
             return;
         }
         let parent = this.GetParentPlus();
-        if (!parent.IsHero() || parent.IsClone()) {
+        if (!parent.IsRealUnit() || parent.IsClone()) {
             return;
         }
         let ability = this.GetItemPlus();
@@ -184,7 +184,7 @@ export class modifier_imba_power_treads_2 extends BaseModifier_Plus {
         }
         let ability = this.GetItemPlus();
         let parent = this.GetParentPlus();
-        if (!parent.IsHero() || parent.IsClone()) {
+        if (!parent.IsRealUnit() || parent.IsClone()) {
             return;
         }
         let stat_bonus = ability.GetSpecialValueFor("bonus_stat");
@@ -196,7 +196,7 @@ export class modifier_imba_power_treads_2 extends BaseModifier_Plus {
             return;
         }
         let parent = this.GetParentPlus();
-        if (!parent.IsHero() || parent.IsClone()) {
+        if (!parent.IsRealUnit() || parent.IsClone()) {
             return;
         }
         let ability = this.GetItemPlus();

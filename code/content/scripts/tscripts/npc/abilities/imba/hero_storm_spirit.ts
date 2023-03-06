@@ -722,7 +722,7 @@ export class imba_storm_spirit_ball_lightning extends BaseAbility_Plus {
                 "22": "stormspirit_ss_ability_lightning_31",
                 "23": "stormspirit_ss_ability_lightning_32"
             }
-            // if (caster.GetName() == "npc_dota_hero_storm_spirit") {
+            // if (caster.GetName() .includes("storm_spirit")) {
             // }
             caster.EmitCasterSound(Object.values(responses), 100, ResHelper.EDOTA_CAST_SOUND.FLAG_BOTH_TEAMS, undefined, undefined);
 

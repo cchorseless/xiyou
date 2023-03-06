@@ -264,7 +264,7 @@ export class modifier_imba_urn_of_shadows_active_ally extends BaseModifier_Plus 
         if (!IsServer()) {
             return undefined;
         }
-        if ((params.unit != this.GetParentPlus()) || (!params.attacker.IsHero())) {
+        if ((params.unit != this.GetParentPlus()) || (!params.attacker.IsRealUnit())) {
             return undefined;
         }
         if (params.damage > 0) {

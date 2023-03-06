@@ -22,7 +22,7 @@ export class imba_brewmaster_thunder_clap extends BaseAbility_Plus {
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, this.GetSpecialValueFor("radius") + this.GetSpecialValueFor("debris_buffer_radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             if (GFuncVector.AsVector((enemy.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin()) * Vector(1, 1, 0)).Length2D() <= this.GetSpecialValueFor("radius")) {
                 enemy.EmitSound("Hero_Brewmaster.ThunderClap.Target");
-                if (this.GetCasterPlus().GetName() == "npc_dota_hero_brewmaster" && RollPercentage(75)) {
+                if (this.GetCasterPlus().GetName().includes("brewmaster") && RollPercentage(75)) {
                     if (!this.responses) {
                         this.responses = {
                             "1": "brewmaster_brew_ability_thunderclap_01",
@@ -34,7 +34,7 @@ export class imba_brewmaster_thunder_clap extends BaseAbility_Plus {
                     }
                     this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(this.responses));
                 }
-                if (enemy.IsHero()) {
+                if (enemy.IsRealUnit()) {
                     slow_duration = this.GetTalentSpecialValueFor("duration");
                 } else {
                     slow_duration = this.GetTalentSpecialValueFor("duration_creeps");
@@ -219,7 +219,7 @@ export class imba_brewmaster_cinder_brew extends BaseAbility_Plus {
         let brew_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_brewmaster/brewmaster_cinder_brew_cast.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
         ParticleManager.SetParticleControl(brew_particle, 1, this.GetCursorPosition());
         ParticleManager.ReleaseParticleIndex(brew_particle);
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_brewmaster") {
+        if (this.GetCasterPlus().GetName().includes("brewmaster")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "brewmaster_brew_ability_drukenhaze_01",
@@ -269,7 +269,7 @@ export class imba_brewmaster_cinder_brew extends BaseAbility_Plus {
         for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), ProjectileManager.GetLinearProjectileLocation(projectileHandle), undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
             if (this.projectiles[projectileHandle]["destination"] && ((this.projectiles[projectileHandle]["destination"] - ProjectileManager.GetLinearProjectileLocation(projectileHandle)) * Vector(1, 1, 0) as Vector).Length2D() <= this.GetSpecialValueFor("radius") && ((unit.GetAbsOrigin() - ProjectileManager.GetLinearProjectileLocation(projectileHandle)) * Vector(1, 1, 0) as Vector).Length2D() <= this.GetSpecialValueFor("radius") && !this.projectiles[projectileHandle][unit.entindex()]) {
                 this.projectiles[projectileHandle][unit.entindex()] = true;
-                if (unit.IsHero()) {
+                if (unit.IsRealUnit()) {
                     unit.EmitSound("Hero_Brewmaster.CinderBrew.Target");
                 } else {
                     unit.EmitSound("Hero_Brewmaster.CinderBrew.Target.Creep");
@@ -293,7 +293,7 @@ export class imba_brewmaster_cinder_brew extends BaseAbility_Plus {
             for (const [_, unit] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), location, undefined, this.GetSpecialValueFor("radius"), DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false))) {
                 if (!this.projectiles[projectileHandle][unit.entindex()]) {
                     this.projectiles[projectileHandle][unit.entindex()] = true;
-                    if (unit.IsHero()) {
+                    if (unit.IsRealUnit()) {
                         unit.EmitSound("Hero_Brewmaster.CinderBrew.Target");
                     } else {
                         unit.EmitSound("Hero_Brewmaster.CinderBrew.Target.Creep");
@@ -633,7 +633,7 @@ export class imba_brewmaster_primal_split extends BaseAbility_Plus {
         }
     }
     OnAbilityPhaseStart(): boolean {
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_brewmaster") {
+        if (this.GetCasterPlus().GetName().includes("brewmaster")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "brewmaster_brew_ability_primalsplit_06",
@@ -893,9 +893,9 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
         if (!IsServer()) {
             return;
         }
-        if (this.GetParentPlus().IsHero()) {
+        if (this.GetParentPlus().IsRealUnit()) {
             this.GetParentPlus().EmitSound("Hero_Brewmaster.PrimalSplit.Return");
-            if (this.GetRemainingTime() <= 0 && this.GetCasterPlus().GetName() == "npc_dota_hero_brewmaster") {
+            if (this.GetRemainingTime() <= 0 && this.GetCasterPlus().GetName().includes("brewmaster")) {
                 if (!this.responses) {
                     this.responses = [
                         "brewmaster_brew_ability_primalsplit_10",
@@ -915,12 +915,12 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
         return {
-            [modifierstate.MODIFIER_STATE_INVULNERABLE]: this.GetParentPlus().IsHero(),
-            [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: this.GetParentPlus().IsHero(),
-            [modifierstate.MODIFIER_STATE_STUNNED]: this.GetParentPlus().IsHero(),
-            [modifierstate.MODIFIER_STATE_NOT_ON_MINIMAP]: this.GetParentPlus().IsHero(),
-            [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: this.GetParentPlus().IsHero() || this.GetCasterPlus().HasScepter() || this.GetParentPlus().GetName() == "npc_dota_brewmaster_fire",
-            [modifierstate.MODIFIER_STATE_UNSELECTABLE]: this.GetParentPlus().IsHero()
+            [modifierstate.MODIFIER_STATE_INVULNERABLE]: this.GetParentPlus().IsRealUnit(),
+            [modifierstate.MODIFIER_STATE_OUT_OF_GAME]: this.GetParentPlus().IsRealUnit(),
+            [modifierstate.MODIFIER_STATE_STUNNED]: this.GetParentPlus().IsRealUnit(),
+            [modifierstate.MODIFIER_STATE_NOT_ON_MINIMAP]: this.GetParentPlus().IsRealUnit(),
+            [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: this.GetParentPlus().IsRealUnit() || this.GetCasterPlus().HasScepter() || this.GetParentPlus().GetName() == "npc_dota_brewmaster_fire",
+            [modifierstate.MODIFIER_STATE_UNSELECTABLE]: this.GetParentPlus().IsRealUnit()
         };
     }
     /** DeclareFunctions():modifierfunction[] {
@@ -934,7 +934,7 @@ export class modifier_imba_brewmaster_primal_split_duration extends BaseModifier
     } */
     @registerEvent(Enum_MODIFIER_EVENT.ON_DEATH)
     CC_OnDeath(keys: ModifierInstanceEvent): void {
-        if (keys.unit == this.GetParentPlus() && !this.GetParentPlus().IsHero()) {
+        if (keys.unit == this.GetParentPlus() && !this.GetParentPlus().IsRealUnit()) {
             if (this.GetParentPlus().GetName() == "npc_dota_brewmaster_earth") {
                 this.death_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_brewmaster/brewmaster_earth_death.vpcf", ParticleAttachment_t.PATTACH_WORLDORIGIN, this.GetParentPlus());
             } else if (this.GetParentPlus().GetName() == "npc_dota_brewmaster_storm") {

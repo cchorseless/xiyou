@@ -38,7 +38,7 @@ export class modifier_imba_item_nether_wand_passive extends BaseModifier_Plus {
         }
         this.item = this.GetItemPlus();
         this.parent = this.GetParentPlus();
-        if (this.parent.IsHero() && this.item) {
+        if (this.parent.IsRealUnit() && this.item) {
             this.spell_amp = this.item.GetSpecialValueFor("spell_amp");
         }
         if (!IsServer()) {

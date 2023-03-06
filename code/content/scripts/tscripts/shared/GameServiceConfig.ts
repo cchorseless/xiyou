@@ -45,10 +45,11 @@ export module GameServiceConfig {
     export const MEME_SOUNDS_CHANCE = 50;
     export const IMBA_DAMAGE_EFFECTS_DISTANCE_CUTOFF = 2500	//Range at which most on-damage effects no longer trigger
 
+    // todo
     export const IMBA_DISABLED_SKULL_BASHER = [
-        "npc_dota_hero_faceless_void",
-        "npc_dota_hero_spirit_breaker",
-        "npc_dota_hero_slardar",
+        "faceless_void",
+        "spirit_breaker",
+        "slardar",
     ];
     export const IMBA_EtherealAbilities = [
         "modifier_imba_ghost_shroud_active",

@@ -224,7 +224,7 @@ export class imba_sly_king_frost_gale extends BaseAbility_Plus {
             this.tempdata[ExtraData.index + "count"] = this.tempdata[ExtraData.index + "count"] || 0;
             this.tempdata[ExtraData.index + "count"] += 1;
             if (this.tempdata[ExtraData.index + "count"] == ExtraData.projectile_count) {
-                if ((GameFunc.GetCount(this.tempdata[ExtraData.index]) > 0) && (caster.GetName() == "npc_dota_hero_venomancer")) {
+                if ((GameFunc.GetCount(this.tempdata[ExtraData.index]) > 0) && (caster.GetName().includes("venomancer"))) {
                     caster.EmitSound("venomancer_venm_cast_0" + math.random(1, 2));
                 }
                 delete this.tempdata[ExtraData.index];

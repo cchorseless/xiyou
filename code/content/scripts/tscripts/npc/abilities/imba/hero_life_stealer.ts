@@ -409,7 +409,7 @@ export class modifier_imba_life_stealer_feast_banquet extends BaseModifier_Plus 
         }
         if (keys.target == this.GetParentPlus()) {
             let damage_amount = math.min(this.health_increments, this.GetParentPlus().GetHealth());
-            if (keys.attacker.IsHero()) {
+            if (keys.attacker.IsRealUnit()) {
                 damage_amount = math.min(this.health_increments * this.hero_attack_multiplier, this.GetParentPlus().GetHealth());
             }
             this.GetParentPlus().SetHealth(this.GetParentPlus().GetHealth() - damage_amount);
@@ -453,7 +453,7 @@ export class imba_life_stealer_open_wounds extends BaseAbility_Plus {
         }
         this.GetCasterPlus().EmitSound("Hero_LifeStealer.OpenWounds.Cast");
         target.EmitSound("Hero_LifeStealer.OpenWounds");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_life_stealer" && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetName().includes("life_stealer") && RollPercentage(75)) {
             if (!this.responses) {
                 this.responses = {
                     ["life_stealer_lifest_ability_openwound_01"]: 0,
@@ -620,7 +620,7 @@ export class imba_life_stealer_infest extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().EmitSound("Hero_LifeStealer.Infest");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_life_stealer" && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetName().includes("life_stealer") && RollPercentage(75)) {
             if (!this.responses) {
                 this.responses = {
                     ["life_stealer_lifest_ability_infest_cast_01"]: 0,
@@ -660,7 +660,7 @@ export class imba_life_stealer_infest extends BaseAbility_Plus {
             infest_modifier.infest_effect_modifier = infest_effect_modifier;
             infest_effect_modifier.infest_modifier = infest_modifier;
         }
-        if (this.GetName() == "imba_life_stealer_infest_723" && (!target.IsHero() || (target.IsHero() && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber())) && !target.IsBuilding() && !target.IsOther() && !target.IsRoshan()) {
+        if (this.GetName() == "imba_life_stealer_infest_723" && (!target.IsRealUnit() || (target.IsRealUnit() && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber())) && !target.IsBuilding() && !target.IsOther() && !target.IsRoshan()) {
             target.Heal(this.GetSpecialValueFor("bonus_health"), this);
             SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, this.GetCasterPlus(), this.GetSpecialValueFor("bonus_health"), undefined);
         }
@@ -706,7 +706,7 @@ export class imba_life_stealer_infest extends BaseAbility_Plus {
         if (consume_ability) {
             this.GetCasterPlus().SwapAbilities(this.GetName(), consume_ability.GetName(), false, true);
         }
-        if (this.GetCasterPlus().HasAbility("imba_life_stealer_rage_723") && this.GetCasterPlus().HasScepter() && this.GetName() == "imba_life_stealer_infest_723" && (!target.IsHero() || (target.IsHero() && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber())) && !target.IsBuilding() && !target.IsOther() && !target.IsRoshan()) {
+        if (this.GetCasterPlus().HasAbility("imba_life_stealer_rage_723") && this.GetCasterPlus().HasScepter() && this.GetName() == "imba_life_stealer_infest_723" && (!target.IsRealUnit() || (target.IsRealUnit() && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber())) && !target.IsBuilding() && !target.IsOther() && !target.IsRoshan()) {
             let rage_ability = this.GetCasterPlus().findAbliityPlus("imba_life_stealer_rage_723");
             target.EmitSound("Hero_LifeStealer.Rage");
             target.Purge(false, true, false, false, false);
@@ -815,7 +815,7 @@ export class modifier_imba_life_stealer_infest extends BaseModifier_Plus {
             [modifierstate.MODIFIER_STATE_NO_UNIT_COLLISION]: true,
             [modifierstate.MODIFIER_STATE_UNSELECTABLE]: true
         }
-        if (!this.infest_effect_modifier || this.infest_effect_modifier.GetParent().GetTeamNumber() == this.GetParentPlus().GetTeamNumber() || !this.infest_effect_modifier.GetParent().IsHero()) {
+        if (!this.infest_effect_modifier || this.infest_effect_modifier.GetParent().GetTeamNumber() == this.GetParentPlus().GetTeamNumber() || !this.infest_effect_modifier.GetParent().IsRealUnit()) {
             state[modifierstate.MODIFIER_STATE_COMMAND_RESTRICTED] = true;
         } else {
             state[modifierstate.MODIFIER_STATE_MUTED] = true;
@@ -854,7 +854,7 @@ export class modifier_imba_life_stealer_infest_effect extends BaseModifier_Plus 
     public caster_tick_count: number;
     public consume_ability: any;
     IsHidden(): boolean {
-        return this.GetCasterPlus().GetTeamNumber() == this.GetParentPlus().GetTeamNumber() || !this.GetParentPlus().IsHero();
+        return this.GetCasterPlus().GetTeamNumber() == this.GetParentPlus().GetTeamNumber() || !this.GetParentPlus().IsRealUnit();
     }
     IsPurgable(): boolean {
         return false;
@@ -892,7 +892,7 @@ export class modifier_imba_life_stealer_infest_effect extends BaseModifier_Plus 
             infest_overhead_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_life_stealer/life_stealer_infested_unit.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.GetParentPlus(), this.GetCasterPlus());
         }
         this.AddParticle(infest_overhead_particle, false, false, -1, true, false);
-        if (this.GetCasterPlus().GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && this.GetParentPlus().IsHero()) {
+        if (this.GetCasterPlus().GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && this.GetParentPlus().IsRealUnit()) {
             this.consume_ability = this.GetCasterPlus().findAbliityPlus<imba_life_stealer_consume>("imba_life_stealer_consume");
             if (this.consume_ability) {
                 this.consume_ability.SetActivated(false);
@@ -928,7 +928,7 @@ export class modifier_imba_life_stealer_infest_effect extends BaseModifier_Plus 
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && this.GetParentPlus().IsHero()) {
+        if (this.GetCasterPlus().GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && this.GetParentPlus().IsRealUnit()) {
             if (this.infest_modifier) {
                 this.infest_modifier.SetStackCount(this.GetStackCount());
             }
@@ -959,7 +959,7 @@ export class modifier_imba_life_stealer_infest_effect extends BaseModifier_Plus 
         }
     }
     CheckState(): Partial<Record<modifierstate, boolean>> {
-        if (this.GetCasterPlus().GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && (this.GetParentPlus().IsHero() || this.GetParentPlus().IsBuilding() || this.GetParentPlus().IsOther())) {
+        if (this.GetCasterPlus().GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && (this.GetParentPlus().IsRealUnit() || this.GetParentPlus().IsBuilding() || this.GetParentPlus().IsOther())) {
             return {
                 [modifierstate.MODIFIER_STATE_SPECIALLY_DENIABLE]: true
             };
@@ -1168,7 +1168,7 @@ export class imba_life_stealer_consume extends BaseAbility_Plus {
         }
     }
     OnSpellStart(): void {
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_life_stealer") {
+        if (this.GetCasterPlus().GetName().includes("life_stealer")) {
             this.GetCasterPlus().EmitSound("life_stealer_lifest_ability_infest_burst_01");
         }
         let infest_modifier = this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_life_stealer_infest", this.GetCasterPlus()) as modifier_imba_life_stealer_infest;
@@ -1187,7 +1187,7 @@ export class imba_life_stealer_consume extends BaseAbility_Plus {
                         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, caster, infest_effect_modifier_parent.GetHealth(), undefined);
                     }
                     infest_effect_modifier_parent.Kill(this, caster);
-                    if (caster.GetName() == "npc_dota_hero_life_stealer") {
+                    if (caster.GetName().includes("life_stealer")) {
                         if (RollPercentage(5)) {
                             let rare_responses = {
                                 "1": "life_stealer_lifest_ability_infest_burst_06",

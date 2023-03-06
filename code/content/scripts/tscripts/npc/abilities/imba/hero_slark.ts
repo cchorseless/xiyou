@@ -12,7 +12,7 @@ export class imba_slark_dark_pact extends BaseAbility_Plus {
         return "modifier_imba_slark_dark_pact_thinker";
     }
     GetBehavior(): DOTA_ABILITY_BEHAVIOR | Uint64 {
-        if (this.GetCasterPlus().IsHero()) {
+        if (this.GetCasterPlus().IsRealUnit()) {
             return tonumber(tostring(super.GetBehavior())) + DOTA_ABILITY_BEHAVIOR.DOTA_ABILITY_BEHAVIOR_AUTOCAST;
         } else {
             return super.GetBehavior();
@@ -318,7 +318,7 @@ export class imba_slark_pounce extends BaseAbility_Plus {
         this.GetCasterPlus().EmitSound("Hero_Slark.Pounce.Cast");
         let pounce_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_slark/slark_pounce_start.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus());
         ParticleManager.ReleaseParticleIndex(pounce_particle);
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_slark") {
+        if (this.GetCasterPlus().GetName().includes("slark")) {
             this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_SLARK_POUNCE);
         }
         if (!this.GetCasterPlus().HasModifier("modifier_imba_slark_pounce")) {
@@ -418,7 +418,7 @@ export class modifier_imba_slark_pounce extends BaseModifierMotionBoth_Plus {
         }
         this.GetParentPlus().RemoveHorizontalMotionController(this);
         this.GetParentPlus().RemoveVerticalMotionController(this);
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_slark") {
+        if (this.GetCasterPlus().GetName().includes("slark")) {
             this.GetCasterPlus().FadeGesture(GameActivity_t.ACT_DOTA_SLARK_POUNCE);
         }
         GridNav.DestroyTreesAroundPoint(this.GetParentPlus().GetAbsOrigin(), 100, true);
@@ -430,7 +430,7 @@ export class modifier_imba_slark_pounce extends BaseModifierMotionBoth_Plus {
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetParentPlus().GetTeamNumber(), this.GetParentPlus().GetAbsOrigin(), undefined, this.pounce_radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS, FindOrder.FIND_CLOSEST, false))) {
             if (enemy.IsRealHero() || enemy.IsClone() || enemy.IsTempestDouble()) {
                 enemy.EmitSound("Hero_Slark.Pounce.Impact");
-                if (this.GetParentPlus().GetName() == "npc_dota_hero_slark") {
+                if (this.GetParentPlus().GetName().includes("slark")) {
                     this.GetParentPlus().EmitSound("slark_slark_pounce_0" + RandomInt(1, 6));
                 }
                 enemy.AddNewModifier(this.GetParentPlus(), this.GetAbilityPlus(), "modifier_imba_slark_pounce_leash", {
@@ -887,7 +887,7 @@ export class imba_slark_shadow_dance extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Slark.ShadowDance");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_slark" && RollPercentage(30)) {
+        if (this.GetCasterPlus().GetName().includes("slark") && RollPercentage(30)) {
             if (!this.responses) {
                 this.responses = {
                     "1": "slark_slark_dark_pact_05",

@@ -630,7 +630,7 @@ export class modifier_imba_searing_arrows_passive extends BaseModifier_Plus {
             if (this.GetAbilityPlus().IsStolen()) {
                 return undefined;
             }
-            if (!target.IsHero() && !target.IsBuilding() && !target.IsCreep()) {
+            if (!target.IsRealUnit() && !target.IsBuilding() && !target.IsCreep()) {
                 SetArrowAttackProjectile(this.GetCasterPlus(), false);
                 return undefined;
             }
@@ -1136,7 +1136,7 @@ export class imba_clinkz_death_pact extends BaseAbility_Plus {
             if (target.GetUnitName() == "npc_imba_clinkz_spirits") {
                 return UnitFilterResult.UF_FAIL_CUSTOM;
             }
-            if (target.IsConsideredHero() && !target.IsHero()) {
+            if (target.IsConsideredHero() && !target.IsRealUnit()) {
                 return UnitFilterResult.UF_FAIL_CONSIDERED_HERO;
             }
             let nResult = UnitFilter(target, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), this.GetCasterPlus().GetTeamNumber());
@@ -1179,7 +1179,7 @@ export class imba_clinkz_death_pact extends BaseAbility_Plus {
                 return undefined;
             }
         }
-        if (RollPercentage(50) && caster.IsHero()) {
+        if (RollPercentage(50) && caster.IsRealUnit()) {
             EmitSoundOn(cast_response, caster);
         }
         EmitSoundOn(sound_cast, caster);
@@ -1196,7 +1196,7 @@ export class imba_clinkz_death_pact extends BaseAbility_Plus {
         let modifier_stacks;
         let Clinkz_team = caster.GetTeamNumber();
         let target_team = target.GetTeamNumber();
-        if (target.IsHero()) {
+        if (target.IsRealUnit()) {
             let current_hp = target.GetHealth();
             let damage = current_hp * (hero_current_hp_damage_pct * 0.01);
             let damageTable: ApplyDamageOptions = {
@@ -1256,7 +1256,7 @@ export class imba_clinkz_death_pact extends BaseAbility_Plus {
                 duration: duration
             });
         }
-        if (!caster.IsHero()) {
+        if (!caster.IsRealUnit()) {
             return undefined;
         }
         caster.AddNewModifier(caster, ability, modifier_pact, {
@@ -1423,7 +1423,7 @@ export class modifier_imba_death_pact_spirit_aura extends BaseModifier_Plus {
         let attacker = keys.attacker as IBaseNpc_Plus;
         let modifier_spirited_aura = "modifier_imba_death_pact_spirit_aura";
         if (target == this.GetParentPlus()) {
-            if (attacker.IsHero() || attacker.IsTower() || attacker.IsRoshan()) {
+            if (attacker.IsRealUnit() || attacker.IsTower() || attacker.IsRoshan()) {
                 if (this.GetParentPlus().GetHealth() <= 1) {
                     this.GetParentPlus().Kill(this.GetAbilityPlus(), attacker);
                 } else {

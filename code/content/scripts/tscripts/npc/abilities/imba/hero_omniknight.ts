@@ -486,7 +486,7 @@ export class imba_omniknight_heavenly_grace extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Omniknight.Repel");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_omniknight") {
+        if (this.GetCasterPlus().GetName().includes("omniknight")) {
             if (this.GetCursorTarget() != this.GetCasterPlus()) {
                 this.GetCasterPlus().EmitSound("omniknight_omni_ability_repel_0" + math.random(1, 6));
             } else {
@@ -640,7 +640,7 @@ export class modifier_imba_hammer_of_virtue extends BaseModifier_Plus {
                 if (this.caster.PassivesDisabled()) {
                     return undefined;
                 }
-                if (!target.IsHero() && !target.IsCreep()) {
+                if (!target.IsRealUnit() && !target.IsCreep()) {
                     return undefined;
                 }
                 this.particle_hit_fx = ResHelper.CreateParticleEx(this.particle_hit, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, target);

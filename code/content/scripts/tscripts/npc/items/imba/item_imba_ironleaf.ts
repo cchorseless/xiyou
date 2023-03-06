@@ -338,7 +338,7 @@ export class modifier_imba_ironleaf_boots_meditate extends BaseModifier_Plus {
                 }
                 let stacks = this.GetStackCount();
                 let meditate_stacks_loss;
-                if (attacker.IsHero()) {
+                if (attacker.IsRealUnit()) {
                     meditate_stacks_loss = this.meditate_stacks_loss_hero;
                 } else {
                     meditate_stacks_loss = this.meditate_stacks_loss_creep;

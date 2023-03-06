@@ -367,7 +367,7 @@ export class modifier_imba_faceless_void_time_walk_cast extends BaseModifierMoti
                         this.ms_stolen = this.ms_stolen + enemy.GetMoveSpeedModifier(enemy.GetBaseMoveSpeed(), false) * ms_steal;
                         chronocharges = chronocharges + 1;
                     }
-                    if (enemy.IsHero()) {
+                    if (enemy.IsRealUnit()) {
                         let particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_faceless_void/faceless_void_backtrack02.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, enemy);
                         ParticleManager.SetParticleControl(particle, 0, enemy.GetAbsOrigin());
                         ParticleManager.ReleaseParticleIndex(particle);
@@ -792,7 +792,7 @@ export class modifier_imba_faceless_void_time_lock extends BaseModifier_Plus {
                         if (attacker.HasTalent("special_bonus_imba_faceless_void_5")) {
                             attacker.findAbliityPlus<imba_faceless_void_chronosphere>("imba_faceless_void_chronosphere").OnSpellStart(true, target.GetAbsOrigin());
                         }
-                        if (target.IsHero()) {
+                        if (target.IsRealUnit()) {
                             target.AddNewModifier(parent, ability, "modifier_imba_faceless_void_time_lock_stun", {
                                 duration: bashDuration * (1 - target.GetStatusResistance())
                             });
@@ -832,7 +832,7 @@ export class modifier_imba_faceless_void_time_lock extends BaseModifier_Plus {
                                 if (attacker.HasTalent("special_bonus_imba_faceless_void_5")) {
                                     attacker.findAbliityPlus<imba_faceless_void_chronosphere>("imba_faceless_void_chronosphere").OnSpellStart(true, enemy.GetAbsOrigin());
                                 }
-                                if (target.IsHero()) {
+                                if (target.IsRealUnit()) {
                                     target.AddNewModifier(parent, ability, "modifier_imba_faceless_void_time_lock_stun", {
                                         duration: bashDuration * (1 - target.GetStatusResistance())
                                     });
@@ -1026,7 +1026,7 @@ export class modifier_imba_faceless_void_chronosphere_aura extends BaseModifier_
         return this.total_radius;
     }
     GetAuraEntityReject(target: CDOTA_BaseNPC): boolean {
-        if (target != this.GetCasterPlus() && target.GetName() == "npc_dota_hero_faceless_void") {
+        if (target != this.GetCasterPlus() && target.GetName().includes("faceless_void")) {
             return true;
         }
     }

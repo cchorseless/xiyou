@@ -467,7 +467,7 @@ export class modifier_imba_abyssal_underlord_pit_of_malice extends BaseModifier_
         this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_abyssal_underlord_pit_of_malice_cooldown", {
             duration: interval
         });
-        let hero = this.GetParentPlus().IsHero();
+        let hero = this.GetParentPlus().IsRealUnit();
         let sound_cast = "Hero_AbyssalUnderlord.Pit.TargetHero";
         if (!hero) {
             sound_cast = "Hero_AbyssalUnderlord.Pit.Target";
@@ -678,7 +678,7 @@ export class modifier_imba_abyssal_underlord_atrophy_aura extends BaseModifier_P
         if (!params.unit.FindModifierByNameAndCaster("modifier_imba_abyssal_underlord_atrophy_aura_debuff", parent)) {
             return;
         }
-        let hero = params.unit.IsHero();
+        let hero = params.unit.IsRealUnit();
         let bonus;
         if (hero) {
             bonus = this.hero_bonus;

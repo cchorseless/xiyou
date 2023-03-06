@@ -537,7 +537,7 @@ export class modifier_imba_upheaval_debuff extends BaseModifier_Plus {
         this.parent = this.GetParentPlus();
         this.particle_debuff_hero = "particles/units/heroes/hero_warlock/warlock_upheaval_debuff.vpcf";
         this.particle_debuff_creep = "particles/units/heroes/hero_warlock/warlock_upheaval_debuff_creep.vpcf";
-        if (this.parent.IsHero()) {
+        if (this.parent.IsRealUnit()) {
             this.particle_debuff_hero_fx = ResHelper.CreateParticleEx(this.particle_debuff_hero, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);
             ParticleManager.SetParticleControl(this.particle_debuff_hero_fx, 0, this.parent.GetAbsOrigin());
             ParticleManager.SetParticleControl(this.particle_debuff_hero_fx, 1, this.parent.GetAbsOrigin());
@@ -1018,7 +1018,7 @@ export class modifier_imba_flaming_fists extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROCATTACK_BONUS_DAMAGE_PURE)
     CC_GetModifierProcAttack_BonusDamage_Pure(keys: ModifierAttackEvent): number {
         let target = keys.target;
-        if (!target.IsHero() && !target.IsCreep()) {
+        if (!target.IsRealUnit() && !target.IsCreep()) {
             return undefined;
         }
         if (this.caster.PassivesDisabled()) {
@@ -1032,7 +1032,7 @@ export class modifier_imba_flaming_fists extends BaseModifier_Plus {
             let target = keys.target;
             let attacker = keys.attacker;
             if (this.caster == attacker) {
-                if (!target.IsHero() && !target.IsCreep()) {
+                if (!target.IsRealUnit() && !target.IsCreep()) {
                     return undefined;
                 }
                 if (this.caster.PassivesDisabled()) {

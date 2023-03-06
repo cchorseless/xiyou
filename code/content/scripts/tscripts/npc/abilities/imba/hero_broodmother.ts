@@ -1139,7 +1139,7 @@ export class modifier_imba_broodmother_poison_sting extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && !keys.target.IsBuilding()) {
-            if (keys.target.IsHero()) {
+            if (keys.target.IsRealUnit()) {
                 keys.target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_broodmother_poison_sting_debuff", {
                     duration: this.duration_hero * (1 - keys.target.GetStatusResistance())
                 });
@@ -1424,7 +1424,7 @@ export class modifier_imba_broodmother_spiderking_poison_sting extends BaseModif
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_LANDED)
     CC_OnAttackLanded(keys: ModifierAttackEvent): void {
         if (keys.attacker == this.GetParentPlus() && !this.GetParentPlus().PassivesDisabled() && !keys.target.IsBuilding()) {
-            if (keys.target.IsHero()) {
+            if (keys.target.IsRealUnit()) {
                 keys.target.AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_broodmother_spiderking_poison_sting_debuff", {
                     duration: this.duration_hero * (1 - keys.target.GetStatusResistance())
                 });

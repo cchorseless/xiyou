@@ -276,7 +276,7 @@ export class modifier_ghost_revenant_miasma extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PROVIDES_FOW_POSITION)
     CC_GetModifierProvidesFOWVision(): 0 | 1 {
         let parent = this.GetParentPlus();
-        if (!parent.IsHero()) {
+        if (!parent.IsRealUnit()) {
             return 0;
         }
         let invisModifiers = {

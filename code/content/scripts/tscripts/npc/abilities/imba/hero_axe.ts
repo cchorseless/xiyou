@@ -490,7 +490,7 @@ export class modifier_imba_battle_hunger_debuff_dot extends BaseModifier_Plus {
     @registerEvent(Enum_MODIFIER_EVENT.ON_ATTACK_START)
     CC_OnAttackStart(keys: ModifierAttackEvent): void {
         if (IsServer()) {
-            if (keys.attacker == this.parent && this.parent.IsHero() && keys.target != this.caster) {
+            if (keys.attacker == this.parent && this.parent.IsRealUnit() && keys.target != this.caster) {
                 if (!this.cmd_restricted && GFuncRandom.PRD(this.maddening_chance_pct, this)) {
                     let targets = FindUnitsInRadius(this.parent.GetTeamNumber(), this.parent.GetAbsOrigin(), undefined, this.parent.Script_GetAttackRange() + this.maddening_buffer_distance, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FindOrder.FIND_ANY_ORDER, false);
                     if (GameFunc.GetCount(targets) <= 2) {
@@ -883,7 +883,7 @@ export class imba_axe_culling_blade extends BaseAbility_Plus {
                     duration: this.speed_duration
                 });
             }
-            if ((this.target.IsHero())) {
+            if ((this.target.IsRealUnit())) {
                 this.EndCooldown();
                 if (dunk_modifier) {
                     dunk_modifier.ForceRefresh();

@@ -1,4 +1,5 @@
 
+import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
 import { BaseItem_Plus } from "../../entityPlus/BaseItem_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
@@ -12,7 +13,7 @@ export class item_imba_hand_of_midas extends BaseItem_Plus {
             if (target.GetTeamNumber() == caster.GetTeamNumber()) {
                 return UnitFilterResult.UF_FAIL_FRIENDLY;
             }
-            if (target.IsHero()) {
+            if (target.IsRealUnit()) {
                 return UnitFilterResult.UF_FAIL_HERO;
             }
             if (target.IsOther()) {
@@ -45,23 +46,25 @@ export class item_imba_hand_of_midas extends BaseItem_Plus {
         let caster = this.GetCasterPlus();
         let caster_name = caster.GetUnitName();
         let animal_heroes: { [k: string]: boolean } = {
-            ["npc_dota_hero_brewmaster"]: true,
-            ["npc_dota_hero_magnataur"]: true,
-            ["npc_dota_hero_lone_druid"]: true,
-            ["npc_dota_lone_druid_bear1"]: true,
-            ["npc_dota_lone_druid_bear2"]: true,
-            ["npc_dota_lone_druid_bear3"]: true,
-            ["npc_dota_lone_druid_bear4"]: true,
-            ["npc_dota_lone_druid_bear5"]: true,
-            ["npc_dota_lone_druid_bear6"]: true,
-            ["npc_dota_lone_druid_bear7"]: true,
-            ["npc_dota_hero_broodmother"]: true,
-            ["npc_dota_hero_lycan"]: true,
-            ["npc_dota_hero_ursa"]: true,
-            ["npc_dota_hero_malfurion"]: true
+            ["brewmaster"]: true,
+            ["magnataur"]: true,
+            ["lone_druid"]: true,
+            ["lone_druid_bear1"]: true,
+            ["lone_druid_bear2"]: true,
+            ["lone_druid_bear3"]: true,
+            ["lone_druid_bear4"]: true,
+            ["lone_druid_bear5"]: true,
+            ["lone_druid_bear6"]: true,
+            ["lone_druid_bear7"]: true,
+            ["broodmother"]: true,
+            ["lycan"]: true,
+            ["ursa"]: true,
+            ["malfurion"]: true
         }
-        if (animal_heroes[caster_name]) {
-            return "item_paw_of_midas";
+        for (let [k, v] of GameFunc.Pair(animal_heroes)) {
+            if (caster_name.includes(k)) {
+                return "item_paw_of_midas";
+            }
         }
         return "imba_hand_of_midas";
     }
@@ -87,7 +90,7 @@ export class item_imba_hand_of_midas extends BaseItem_Plus {
         target.SetMinimumGoldBounty(0);
         target.SetMaximumGoldBounty(0);
         target.Kill(ability, caster);
-        if (!caster.IsHero()) {
+        if (!caster.IsRealUnit()) {
             caster = caster.GetPlayerOwner().GetAssignedHero();
         }
         // caster.AddExperience(bonus_xp, false, false);

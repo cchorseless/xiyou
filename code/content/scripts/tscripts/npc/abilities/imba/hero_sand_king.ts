@@ -127,7 +127,7 @@ export class imba_sandking_burrowstrike extends BaseAbility_Plus {
         target.AddNewModifier(caster, ability, modifier_stun, {
             duration: stun_duration * (1 - target.GetStatusResistance())
         });
-        if (target.IsHero() && !target.IsIllusion() && poison_duration && poison_duration > 0 && !target.HasModifier(modifier_poison)) {
+        if (target.IsRealUnit() && !target.IsIllusion() && poison_duration && poison_duration > 0 && !target.HasModifier(modifier_poison)) {
             target.AddNewModifier(caster, caustic_ability, modifier_poison, {
                 duration: poison_duration
             });

@@ -523,7 +523,7 @@ export class modifier_imba_rubick_fade_bolt extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
-        if (this.GetParentPlus().IsHero() || (this.GetParentPlus().IsRoshan && this.GetParentPlus().IsRoshan())) {
+        if (this.GetParentPlus().IsRealUnit() || (this.GetParentPlus().IsRoshan && this.GetParentPlus().IsRoshan())) {
             return this.hero_attack_damage_reduction;
         } else {
             return this.creep_attack_damage_reduction;
@@ -1234,12 +1234,12 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
             this.GetCasterPlus().RemoveAbility("monkey_king_primal_spring");
         }
         this.ForgetSpell();
-        if (this.CurrentSpellOwner == "npc_dota_hero_phoenix") {
+        if (this.CurrentSpellOwner.includes("phoenix")) {
             if (secondarySpell.GetAbilityName() == "imba_phoenix_icarus_dive_stop") {
                 secondarySpell.SetHidden(true);
             }
             this.GetCasterPlus().AddAbility("imba_phoenix_sun_ray_stop");
-        } else if (this.CurrentSpellOwner == "npc_dota_hero_storm_spirit") {
+        } else if (this.CurrentSpellOwner.includes("storm_spirit")) {
             this.vortex = this.GetCasterPlus().AddAbility("imba_storm_spirit_electric_vortex");
             this.vortex.SetLevel(4);
             this.vortex.SetStolen(true);
@@ -1303,12 +1303,12 @@ export class imba_rubick_spellsteal extends BaseAbility_Plus {
     ForgetSpell() {
         if (this.CurrentSpellOwner != undefined) {
             for (let i = 0; i <= this.GetCasterPlus().GetModifierCount() - 1; i++) {
-                if (string.find(this.GetCasterPlus().GetModifierNameByIndex(i), string.gsub(this.CurrentSpellOwner, "npc_dota_hero_", "")[0])) {
+                if (string.find(this.GetCasterPlus().GetModifierNameByIndex(i), this.CurrentSpellOwner.replace("npc_dota_hero_", ""))) {
                     this.GetCasterPlus().RemoveModifierByName(this.GetCasterPlus().GetModifierNameByIndex(i));
                 }
             }
             for (let i = 0; i <= this.GetCasterPlus().GetAbilityCount() - 1; i++) {
-                let talent = this.GetCasterPlus().FindAbilityByName("special_bonus_imba_" + string.gsub(this.CurrentSpellOwner, "npc_dota_hero_", "")[0] + "_" + i);
+                let talent = this.GetCasterPlus().FindAbilityByName("special_bonus_imba_" + this.CurrentSpellOwner.replace("npc_dota_hero_", "") + "_" + i);
                 if (talent) {
                     this.GetCasterPlus().RemoveAbility(talent.GetAbilityName());
                 }

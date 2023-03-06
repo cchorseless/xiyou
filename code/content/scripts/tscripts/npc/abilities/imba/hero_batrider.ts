@@ -177,7 +177,7 @@ export class modifier_imba_batrider_sticky_napalm extends BaseModifier_Plus {
             this.damage_debuff_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_batrider/batrider_napalm_damage_debuff.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetParentPlus());
             ParticleManager.ReleaseParticleIndex(this.damage_debuff_particle);
             this.damage_debuff_particle = undefined;
-            if (this.GetParentPlus().IsHero()) {
+            if (this.GetParentPlus().IsRealUnit()) {
                 this.damage_table.damage = this.damage * this.GetStackCount();
             } else {
                 this.damage_table.damage = this.damage * 0.5 * this.GetStackCount();
@@ -330,7 +330,7 @@ export class modifier_imba_batrider_flamebreak_damage extends BaseModifier_Plus 
     OnIntervalThink(): void {
         ApplyDamage(this.damage_table);
         SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, this.GetParentPlus(), this.damage_per_second, undefined);
-        if (this.GetParentPlus().IsRealHero() && !this.GetParentPlus().IsAlive() && this.GetCasterPlus().GetName() == "npc_dota_hero_batrider" && RollPercentage(50)) {
+        if (this.GetParentPlus().IsRealHero() && !this.GetParentPlus().IsAlive() && this.GetCasterPlus().GetName().includes("batrider") && RollPercentage(50)) {
             this.GetCasterPlus().EmitSound("batrider_bat_ability_firefly_0" + RandomInt(1, 6));
         }
     }
@@ -386,7 +386,7 @@ export class imba_batrider_firefly extends BaseAbility_Plus {
             this.methane_boost_ability.SetActivated(true);
         }
         this.GetCasterPlus().EmitSound("Hero_Batrider.Firefly.Cast");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_batrider") {
+        if (this.GetCasterPlus().GetName().includes("batrider")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "batrider_bat_ability_firefly_01",
@@ -655,7 +655,7 @@ export class imba_batrider_flaming_lasso extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().EmitSound("Hero_Batrider.FlamingLasso.Cast");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_batrider") {
+        if (this.GetCasterPlus().GetName().includes("batrider")) {
             let random_int = RandomInt(1, 11);
             if (random_int <= 9) {
                 this.GetCasterPlus().EmitSound("batrider_bat_ability_lasso_0" + random_int);
@@ -736,7 +736,7 @@ export class modifier_imba_batrider_flaming_lasso extends BaseModifier_Plus {
         }
         this.GetParentPlus().EmitSound("Hero_Batrider.FlamingLasso.Loop");
         this.lasso_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_batrider/batrider_flaming_lasso.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetParentPlus());
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_batrider") {
+        if (this.GetCasterPlus().GetName().includes("batrider")) {
             ParticleManager.SetParticleControlEnt(this.lasso_particle, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "lasso_attack", this.GetCasterPlus().GetAbsOrigin(), true);
         } else {
             ParticleManager.SetParticleControlEnt(this.lasso_particle, 0, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);

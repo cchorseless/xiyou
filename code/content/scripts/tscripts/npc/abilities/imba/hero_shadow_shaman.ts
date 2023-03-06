@@ -18,7 +18,7 @@ export class imba_shadow_shaman_ether_shock extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().EmitSound("Hero_ShadowShaman.EtherShock");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_shadow_shaman" && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetName().includes("shadow_shaman") && RollPercentage(75)) {
             this.GetCasterPlus().EmitSound("shadowshaman_shad_ability_ether_0" + RandomInt(1, 4));
         }
         let enemies = AoiHelper.FindUnitsInBicycleChain(this.GetCasterPlus().GetTeamNumber(), target.GetAbsOrigin(), this.GetCasterPlus().GetAbsOrigin(), this.GetCasterPlus().GetAbsOrigin() + ((target.GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Normalized() * (this.GetSpecialValueFor("end_distance") + GPropertyCalculate.GetCastRangeBonus(this.GetCasterPlus())) as Vector) as Vector, this.GetSpecialValueFor("start_radius"), this.GetSpecialValueFor("end_radius"), undefined, this.GetAbilityTargetTeam(), this.GetAbilityTargetType(), this.GetAbilityTargetFlags(), FindOrder.FIND_CLOSEST, false);
@@ -176,7 +176,7 @@ export class imba_shadow_shaman_voodoo extends BaseAbility_Plus {
                 if (target.IsIllusion() && !GFuncEntity.Custom_bIsStrongIllusion(target)) {
                     target.Kill(this, this.GetCasterPlus());
                 } else {
-                    if (this.GetCasterPlus().GetName() == "npc_dota_hero_shadow_shaman" && RollPercentage(75)) {
+                    if (this.GetCasterPlus().GetName().includes("shadow_shaman") && RollPercentage(75)) {
                         this.GetCasterPlus().EmitSound("shadowshaman_shad_ability_voodoo_0" + RandomInt(1, 4));
                     }
                     target.AddNewModifier(this.GetCasterPlus(), this, "modifier_imba_shadow_shaman_voodoo", {
@@ -471,7 +471,7 @@ export class imba_shadow_shaman_shackles extends BaseAbility_Plus {
         if (target.GetTeamNumber() != this.GetCasterPlus().GetTeamNumber()) {
             if (!target.TriggerSpellAbsorb(this)) {
                 this.GetCasterPlus().EmitSound("Hero_ShadowShaman.Shackles.Cast");
-                if (this.GetCasterPlus().GetName() == "npc_dota_hero_shadow_shaman" && RollPercentage(75)) {
+                if (this.GetCasterPlus().GetName().includes("shadow_shaman") && RollPercentage(75)) {
                     let responses = {
                         "1": "shadowshaman_shad_ability_shackle_01",
                         "2": "shadowshaman_shad_ability_shackle_02",

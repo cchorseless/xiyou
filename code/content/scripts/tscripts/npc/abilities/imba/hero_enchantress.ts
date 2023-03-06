@@ -271,7 +271,7 @@ export class imba_enchantress_enchant extends BaseAbility_Plus {
             if (this.GetCasterPlus().HasAbility("imba_enchantress_untouchable") && this.GetCasterPlus().findAbliityPlus<imba_enchantress_untouchable>("imba_enchantress_untouchable").IsTrained()) {
                 this.target.AddNewModifier(this.caster, this.GetCasterPlus().findAbliityPlus<imba_enchantress_untouchable>("imba_enchantress_untouchable"), "modifier_imba_enchantress_untouchable", {});
             }
-            if (this.caster.GetName() == "npc_dota_hero_enchantress") {
+            if (this.caster.GetName().includes("enchantress")) {
                 this.caster.EmitSound("enchantress_ench_ability_enchant_0" + math.random(1, 3));
             }
         } else {
@@ -279,7 +279,7 @@ export class imba_enchantress_enchant extends BaseAbility_Plus {
             this.target.AddNewModifier(this.caster, this, "modifier_imba_enchantress_enchant_slow", {
                 duration: this.tooltip_duration * (1 - this.target.GetStatusResistance())
             });
-            if (this.caster.GetName() == "npc_dota_hero_enchantress") {
+            if (this.caster.GetName().includes("enchantress")) {
                 this.caster.EmitSound("enchantress_ench_ability_enchant_0" + math.random(4, 6));
             }
         }
@@ -449,7 +449,7 @@ export class imba_enchantress_natures_attendants extends BaseAbility_Plus {
         this.caster.AddNewModifier(this.caster, this, "modifier_imba_enchantress_natures_attendants", {
             duration: this.duration
         });
-        if (this.caster.GetName() == "npc_dota_hero_enchantress") {
+        if (this.caster.GetName().includes("enchantress")) {
             this.caster.EmitSound("enchantress_ench_ability_nature_0" + math.random(1, 6));
         }
     }
@@ -967,7 +967,7 @@ export class modifier_imba_enchantress_impetus_huntmastery_timer extends BaseMod
                     impetus_modifier.IncrementStackCount();
                 }
             }
-            if (this.GetCasterPlus().GetName() == "npc_dota_hero_enchantress") {
+            if (this.GetCasterPlus().GetName().includes("enchantress")) {
                 this.GetCasterPlus().EmitSound("enchantress_ench_ability_impetus_0" + math.random(1, 7));
             }
         }

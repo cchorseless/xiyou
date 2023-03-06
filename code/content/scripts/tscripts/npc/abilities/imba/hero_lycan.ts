@@ -32,7 +32,7 @@ export class imba_lycan_summon_wolves extends BaseAbility_Plus {
                 }
             }
         }
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_lycan") {
+        if (this.GetCasterPlus().GetName().includes("lycan")) {
             EmitSoundOn("lycan_lycan_ability_summon_0" + RandomInt(1, 6), this.GetCasterPlus());
         }
         EmitSoundOn("Hero_Lycan.SummonWolves", this.GetCasterPlus());

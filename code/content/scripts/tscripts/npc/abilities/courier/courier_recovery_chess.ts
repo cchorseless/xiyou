@@ -42,7 +42,7 @@ export class courier_recovery_chess extends BaseAbility_Plus {
         }
         let target = this.GetCursorTarget() as IBaseNpc_Plus;
         let gold_return = this.GetSpecialValueFor("gold_return");
-        caster.ETRoot.As<IPlayerEntityRoot>().BuildingManager().sellBuilding(target.ETRoot.As<IBuildingEntityRoot>());
+        GGameScene.GetPlayer(caster.ETRoot.BelongPlayerid).BuildingManager().sellBuilding(target.ETRoot.As<IBuildingEntityRoot>());
     }
 
     ProcsMagicStick() {

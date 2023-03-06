@@ -278,7 +278,7 @@ export class imba_lina_dragon_slave extends BaseAbility_Plus {
             target.RemoveModifierByName("modifier_imba_blazing_fire");
             if (ability_laguna && !ability_laguna.IsCooldownReady()) {
                 let cdr;
-                if (target.IsHero() && !target.IsIllusion()) {
+                if (target.IsRealUnit() && !target.IsIllusion()) {
                     cdr = ExtraData.cdr_hero;
                 } else {
                     cdr = ExtraData.cdr_units;
@@ -321,7 +321,7 @@ export class imba_lina_light_strike_array extends BaseAbility_Plus {
             let rings_distance = this.GetSpecialValueFor("rings_distance");
             let direction = (target_loc - caster_loc as Vector).Normalized();
             caster.EmitSound("Ability.PreLightStrikeArray");
-            if ((math.random(1, 5) < 2) && (caster.GetName() == "npc_dota_hero_lina")) {
+            if ((math.random(1, 5) < 2) && (caster.GetName().includes("lina"))) {
                 caster.EmitSound("lina_lina_ability_lightstrike_0" + math.random(1, 6));
             }
             this.CreateStrike(target_loc, 0, cast_delay, radius, damage, stun_duration);

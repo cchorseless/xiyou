@@ -687,7 +687,7 @@ export class imba_antimage_mana_void extends BaseAbility_Plus {
                     }
                 }
                 for (const [_, enemy] of GameFunc.iPair(nearby_enemies)) {
-                    if (caster.HasScepter() && enemy.IsHero()) {
+                    if (caster.HasScepter() && enemy.IsRealUnit()) {
                         enemy.AddNewModifier(caster, this, "modifier_imba_mana_void_scepter", {});
                         this.AddTimer(mana_void_ministun, () => {
                             if (enemy.IsAlive()) {

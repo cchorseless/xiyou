@@ -66,7 +66,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
         let flesh_golem_modifier = "modifier_imba_undying_flesh_golem";
         let radius = ability.GetSpecialValueFor("radius");
         caster.EmitSound(cast_sound);
-        if (caster.GetName() == "npc_dota_hero_undying" && RollPercentage(50)) {
+        if (caster.GetName().includes("undying") && RollPercentage(50)) {
             if (caster.HasModifier(flesh_golem_modifier)) {
                 EmitSoundOnClient(GFuncRandom.RandomValue(responses_big), caster.GetPlayerOwner());
             } else {
@@ -81,10 +81,10 @@ export class imba_undying_decay extends BaseAbility_Plus {
         let clone_owner_units: IBaseNpc_Plus[] = []
         let enemies = FindUnitsInRadius(caster.GetTeamNumber(), target_point, undefined, radius, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_NONE, FindOrder.FIND_ANY_ORDER, false);
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            if (enemy.IsClone() || enemy.IsTempestDouble() || enemy.GetName() == "npc_dota_hero_meepo" || enemy.GetName() == "npc_dota_hero_arc_warden") {
+            if (enemy.IsClone() || enemy.IsTempestDouble() || enemy.GetName().includes("meepo") || enemy.GetName().includes("arc_warden")) {
                 table.insert(clone_owner_units, enemy);
             } else {
-                if (enemy.IsHero() && !enemy.IsIllusion()) {
+                if (enemy.IsRealUnit() && !enemy.IsIllusion()) {
                     enemy.EmitSound("Hero_Undying.Decay.Target");
                     caster.EmitSound("Hero_Undying.Decay.Transfer");
                     let strength_transfer_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_undying/undying_decay_strength_xfer.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy);
@@ -408,7 +408,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
         let soul_injection_duration = ability.GetSpecialValueFor("soul_injection_duration");
         let tombstone_heal = ability.GetSpecialValueFor("tombstone_heal");
         caster.EmitSound(cast_sound);
-        if (caster.GetName() == "npc_dota_hero_undying" && RollPercentage(50)) {
+        if (caster.GetName().includes("undying") && RollPercentage(50)) {
             if (this.GetCasterPlus().HasModifier(flesh_golem_modifier)) {
                 EmitSoundOnClient(GFuncRandom.RandomValue(responses_big), caster.GetPlayerOwner());
             } else {

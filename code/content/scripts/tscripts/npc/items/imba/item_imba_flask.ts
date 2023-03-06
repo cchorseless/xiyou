@@ -84,7 +84,7 @@ export class modifier_imba_flask extends BaseModifier_Plus {
         if (damage_flags == DOTADamageFlag_t.DOTA_DAMAGE_FLAG_HPLOSS) {
             return undefined;
         }
-        if ((attacker.GetTeamNumber() == target.GetOpposingTeamNumber() && attacker.IsHero()) || (attacker.GetTeamNumber() == target.GetOpposingTeamNumber() && attacker.GetPlayerOwner() != undefined) || attacker.GetTeamNumber() == target.GetTeamNumber() || attacker.IsRoshan()) {
+        if ((attacker.GetTeamNumber() == target.GetOpposingTeamNumber() && attacker.IsRealUnit()) || (attacker.GetTeamNumber() == target.GetOpposingTeamNumber() && attacker.GetPlayerOwner() != undefined) || attacker.GetTeamNumber() == target.GetTeamNumber() || attacker.IsRoshan()) {
             if (this.GetStackCount() == 1) {
                 this.Destroy();
             } else {

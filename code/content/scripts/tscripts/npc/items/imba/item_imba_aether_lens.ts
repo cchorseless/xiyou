@@ -40,7 +40,7 @@ export class modifier_imba_aether_lens_passive extends BaseModifier_Plus {
         }
         let item = this.GetItemPlus();
         this.parent = this.GetParentPlus();
-        if (this.parent.IsHero() && item) {
+        if (this.parent.IsRealUnit() && item) {
             this.bonus_mana = item.GetSpecialValueFor("bonus_mana");
             this.bonus_mana_regen = item.GetSpecialValueFor("bonus_mana_regen");
             this.cast_range_bonus = item.GetSpecialValueFor("cast_range_bonus");

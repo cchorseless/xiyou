@@ -132,7 +132,7 @@ export class modifier_item_imba_iron_talon extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if ((this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_iron_talon")[0] == this) && keys.target && !keys.target.IsHero() && !keys.target.IsOther() && !keys.target.IsBuilding() && !string.find(keys.target.GetUnitName(), "npc_dota_lone_druid_bear") && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
+        if ((this.GetParentPlus().FindAllModifiersByName("modifier_item_imba_iron_talon")[0] == this) && keys.target && !keys.target.IsRealUnit() && !keys.target.IsOther() && !keys.target.IsBuilding() && !string.find(keys.target.GetUnitName(), "npc_dota_lone_druid_bear") && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber()) {
             if (this.GetParentPlus().HasItemInInventory("item_quelling_blade")) {
                 return this.GetStackCount();
             } else if (!this.GetParentPlus().IsRangedAttacker()) {

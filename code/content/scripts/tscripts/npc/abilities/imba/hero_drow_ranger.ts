@@ -136,7 +136,7 @@ export class modifier_imba_frost_arrows_thinker extends BaseModifier_Plus {
     }
     ApplyFrostAttack(target: IBaseNpc_Plus) {
         let duration;
-        if (target.IsHero()) {
+        if (target.IsRealUnit()) {
             duration = this.hero_duration;
         } else {
             duration = this.creep_duration;
@@ -483,7 +483,7 @@ export class modifier_imba_deadeye_aura extends BaseModifier_Plus {
                 return false;
             }
             if (this.caster.HasTalent("special_bonus_imba_drow_ranger_7")) {
-                if (target.IsHero()) {
+                if (target.IsRealUnit()) {
                     return false;
                 }
             }
@@ -866,7 +866,7 @@ export class modifier_imba_trueshot_aura extends BaseModifier_Plus {
         this.modifier_active = "modifier_imba_trueshot_active";
     }
     GetAuraEntityReject(target: CDOTA_BaseNPC): boolean {
-        if (target.IsHero()) {
+        if (target.IsRealUnit()) {
             return false;
         }
         if (this.caster.HasModifier(this.modifier_active)) {
@@ -935,7 +935,7 @@ export class modifier_imba_trueshot extends BaseModifier_Plus {
     OnIntervalThink(): void {
         if (IsServer()) {
             let drow_agility = this.caster.GetAgility();
-            if (this.parent.IsHero()) {
+            if (this.parent.IsRealUnit()) {
                 this.parent.CalculateStatBonus(true);
             }
             // CustomNetTables.SetTableValue("player_table", "precision_aura_drow_agility" + tostring(this.parent.GetPlayerOwnerID()), {
@@ -965,7 +965,7 @@ export class modifier_imba_trueshot extends BaseModifier_Plus {
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
     CC_GetModifierBonusStats_Agility(): number {
         if (this.caster.HasModifier(this.modifier_active)) {
-            if (this.parent.IsHero()) {
+            if (this.parent.IsRealUnit()) {
                 if (this.parent != this.caster) {
                     let drow_agility = this.caster.GetAgility()
                     let bonus_agility = drow_agility * (this.active_bonus_agi_pct / 100);
@@ -1429,7 +1429,7 @@ export class modifier_imba_markmanship_aura extends BaseModifier_Plus {
         this.ability = this.GetAbilityPlus();
     }
     // GetAuraEntityReject(target: CDOTA_BaseNPC): boolean {
-    //     if (target.IsHero() && !target.IsIllusion()) {
+    //     if (target.IsRealUnit() && !target.IsIllusion()) {
     //         return false;
     //     }
     //     return true;
@@ -1913,7 +1913,7 @@ export class modifier_imba_drow_ranger_trueshot_720 extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetAbilityPlus() && this.GetAbilityPlus().IsTrained() && !this.GetCasterPlus().PassivesDisabled() && (hEntity.IsHero() || (hEntity.IsRangedAttacker() && this.activation_counter != undefined && this.activation_counter > 0))) {
+        if (this.GetAbilityPlus() && this.GetAbilityPlus().IsTrained() && !this.GetCasterPlus().PassivesDisabled() && (hEntity.IsRealUnit() || (hEntity.IsRangedAttacker() && this.activation_counter != undefined && this.activation_counter > 0))) {
             return false;
         } else {
             return true;

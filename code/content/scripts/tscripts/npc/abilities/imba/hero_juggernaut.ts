@@ -1320,7 +1320,7 @@ export class imba_juggernaut_omni_slash extends BaseAbility_Plus {
         let rand = math.random;
         let im_the_juggernaut_lich = 10;
         let ryujinnokenwokurae = 10;
-        if (caster.GetName() == "npc_dota_hero_juggernaut") {
+        if (caster.GetName().includes("juggernaut")) {
             if (RollPercentage(im_the_juggernaut_lich)) {
                 caster.EmitSound("juggernaut_jug_rare_17");
             } else if (RollPercentage(im_the_juggernaut_lich)) {

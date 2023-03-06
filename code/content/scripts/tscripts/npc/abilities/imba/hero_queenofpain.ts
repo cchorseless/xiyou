@@ -151,7 +151,7 @@ export class imba_queenofpain_shadow_strike extends BaseAbility_Plus {
         } else {
             target = this.GetCursorTarget();
             caster.EmitSound("Hero_QueenOfPain.ShadowStrike");
-            if ((math.random(1, 100) <= 15) && (caster.GetName() == "npc_dota_hero_queenofpain")) {
+            if ((math.random(1, 100) <= 15) && (caster.GetName().includes("queenofpain"))) {
                 caster.EmitSound("queenofpain_pain_ability_shadowstrike_0" + math.random(1, 4));
             }
         }
@@ -328,7 +328,7 @@ export class modifier_imba_shadow_strike_debuff extends BaseModifier_Plus {
                 });
                 SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_BONUS_POISON_DAMAGE, parent, this.damage_per_interval, undefined);
                 let caster = this.GetCasterPlus();
-                if (caster.HasAbility("imba_queenofpain_scream_of_pain") && caster.HasTalent("special_bonus_imba_queenofpain_6") && parent.IsHero()) {
+                if (caster.HasAbility("imba_queenofpain_scream_of_pain") && caster.HasTalent("special_bonus_imba_queenofpain_6") && parent.IsRealUnit()) {
                     let scream = caster.findAbliityPlus<imba_queenofpain_scream_of_pain>("imba_queenofpain_scream_of_pain");
                     scream.OnSpellStart(caster.GetTalentValue("special_bonus_imba_queenofpain_6", "damage_pct"), parent, 1);
                     if (scream.GetLevel() >= 1) {
@@ -572,7 +572,7 @@ export class imba_queenofpain_scream_of_pain extends BaseAbility_Plus {
                     damage_threshold: ExtraData.damage
                 });
                 if (target.IsAlive() == false) {
-                    if ((math.random(1, 100) <= 15) && (caster.GetName() == "npc_dota_hero_queenofpain")) {
+                    if ((math.random(1, 100) <= 15) && (caster.GetName().includes("queenofpain"))) {
                         caster.EmitSound("queenofpain_pain_ability_screamofpain_0" + math.random(1, 4));
                     }
                 }
@@ -804,7 +804,7 @@ export class imba_queenofpain_sonic_wave extends BaseAbility_Plus {
                 });
             }
             if (target.IsAlive() == false) {
-                if ((math.random(1, 100) <= 15) && (this.GetCasterPlus().GetName() == "npc_dota_hero_queenofpain")) {
+                if ((math.random(1, 100) <= 15) && (this.GetCasterPlus().GetName().includes("queenofpain"))) {
                     this.GetCasterPlus().EmitSound("queenofpain_pain_ability_sonicwave_0" + math.random(1, 4));
                 }
             }

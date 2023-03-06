@@ -27,9 +27,12 @@ GameRules.IsDaytimePlus = () => {
 
 export class GameRulesExt {
     static Init() {
+    }
+
+    static StartGame() {
         if (IsServer) {
             GTimerHelper.AddTimer(1, GHandler.create(this, () => {
-                let is_day = GameRules.IsDaytime();
+                let is_day = GameRules.IsDaytime && GameRules.IsDaytime() || true;
                 NetTablesHelper.SetDotaEntityData("isdaytime", {
                     is_day: is_day
                 });
@@ -37,6 +40,5 @@ export class GameRulesExt {
             }));
         }
     }
-
 
 }

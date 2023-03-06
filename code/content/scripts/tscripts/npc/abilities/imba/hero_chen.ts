@@ -12,7 +12,7 @@ export class imba_chen_penitence extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_chen" && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetName().includes("centchenaur") && RollPercentage(50)) {
             this.GetCasterPlus().EmitSound("chen_chen_ability_penit_0" + RandomInt(2, 3));
         }
         this.GetCasterPlus().EmitSound("Hero_Chen.PenitenceCast");
@@ -150,7 +150,7 @@ export class imba_chen_divine_favor extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_chen") {
+        if (this.GetCasterPlus().GetName().includes("centchenaur")) {
             if (RollPercentage(50)) {
                 if (!this.responses) {
                     this.responses = {
@@ -215,7 +215,7 @@ export class modifier_imba_chen_divine_favor extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
-        if (!this.GetParentPlus().IsHero()) {
+        if (!this.GetParentPlus().IsRealUnit()) {
             return this.damage_bonus * this.creep_damage_mult;
         } else {
             return this.damage_bonus;
@@ -293,7 +293,7 @@ export class modifier_imba_chen_divine_favor_aura_buff extends BaseModifier_Plus
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(): number {
-        if (!this.GetParentPlus().IsHero()) {
+        if (!this.GetParentPlus().IsRealUnit()) {
             return this.damage_bonus_aura * this.army_damage_multiplier;
         } else {
             return this.damage_bonus_aura;
@@ -353,7 +353,7 @@ export class imba_chen_holy_persuasion extends BaseAbility_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.GetLevel() == this.GetMaxLevel() && this.GetCasterPlus().GetName() == "npc_dota_hero_chen") {
+        if (this.GetLevel() == this.GetMaxLevel() && this.GetCasterPlus().GetName().includes("chen")) {
             this.GetCasterPlus().EmitSound("chen_chen_item_04");
         }
     }
@@ -918,7 +918,7 @@ export class imba_chen_hand_of_god extends BaseAbility_Plus {
         }
         let allies = FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED, FindOrder.FIND_ANY_ORDER, false) as IBaseNpc_Plus[];
         let voiceline = undefined;
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_chen") {
+        if (this.GetCasterPlus().GetName().includes("chen")) {
             voiceline = "chen_chen_ability_handgod_0" + RandomInt(1, 3);
         }
         for (const [_, ally] of GameFunc.iPair(allies)) {
@@ -944,7 +944,7 @@ export class imba_chen_hand_of_god extends BaseAbility_Plus {
                         overheal_amount: overheal_amount
                     });
                 }
-                if (ally.IsHero()) {
+                if (ally.IsRealUnit()) {
                     SendOverheadEventMessage(undefined, DOTA_OVERHEAD_ALERT.OVERHEAD_ALERT_HEAL, ally, this.GetTalentSpecialValueFor("heal_amount"), undefined);
                 }
                 ally.Heal(this.GetTalentSpecialValueFor("heal_amount"), this);

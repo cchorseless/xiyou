@@ -145,7 +145,7 @@ export class imba_puck_waning_rift extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Puck.Waning_Rift");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_puck") {
+        if (this.GetCasterPlus().GetName().includes("puck")) {
             this.GetCasterPlus().EmitSound("puck_puck_ability_rift_0" + RandomInt(1, 3));
         }
         let rift_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_puck/puck_waning_rift.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
@@ -260,7 +260,7 @@ export class imba_puck_phase_shift extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Puck.Phase_Shift");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_puck") {
+        if (this.GetCasterPlus().GetName().includes("puck")) {
             this.GetCasterPlus().EmitSound("puck_puck_ability_phase_0" + RandomInt(1, 7));
         }
         if (this.GetAutoCastState()) {
@@ -394,7 +394,7 @@ export class imba_puck_ethereal_jaunt extends BaseAbility_Plus {
             ParticleManager.ReleaseParticleIndex(jaunt_particle);
             FindClearSpaceForUnit(this.GetCasterPlus(), EntIndexToHScript(this.orb_ability.orbs[GameFunc.GetCount(this.orb_ability.orbs)]).GetAbsOrigin(), true);
             ProjectileManager.ProjectileDodge(this.GetCasterPlus());
-            if (this.GetCasterPlus().GetName() == "npc_dota_hero_puck" && (!this.GetCasterPlus().findBuffStack("modifier_imba_puck_illusory_orb", this.GetCasterPlus()) || this.GetCasterPlus().findBuffStack("modifier_imba_puck_illusory_orb", this.GetCasterPlus()) <= 0)) {
+            if (this.GetCasterPlus().GetName().includes("puck") && (!this.GetCasterPlus().findBuffStack("modifier_imba_puck_illusory_orb", this.GetCasterPlus()) || this.GetCasterPlus().findBuffStack("modifier_imba_puck_illusory_orb", this.GetCasterPlus()) <= 0)) {
                 this.GetCasterPlus().EmitSound("puck_puck_ability_orb_0" + RandomInt(1, 3));
             }
             if (this.GetCasterPlus().FindModifierByNameAndCaster("modifier_imba_puck_illusory_orb", this.GetCasterPlus())) {
@@ -411,7 +411,7 @@ export class imba_puck_dream_coil extends BaseAbility_Plus {
     OnSpellStart(refreshDuration = 0): void {
         EmitSoundOnLocationWithCaster(this.GetCursorPosition(), "Hero_Puck.Dream_Coil", this.GetCasterPlus());
         if (!refreshDuration) {
-            if (this.GetCasterPlus().GetName() == "npc_dota_hero_puck") {
+            if (this.GetCasterPlus().GetName().includes("puck")) {
                 this.GetCasterPlus().EmitSound("puck_puck_ability_dreamcoil_0" + RandomInt(1, 2));
             }
         }

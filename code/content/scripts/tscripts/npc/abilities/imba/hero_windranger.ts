@@ -123,7 +123,7 @@ export class imba_windranger_shackleshot extends BaseAbility_Plus {
                     next_target = this.SearchForShackleTarget(next_target, VectorToAngles(next_target.GetAbsOrigin() - Vector(ExtraData.location_x, ExtraData.location_y, ExtraData.location_z) as Vector).y, shackled_targets, targets);
                     if (next_target) {
                         shackled_targets.push(next_target);
-                        if (targets == 0 && this.GetCasterPlus().GetName() == "npc_dota_hero_windrunner" && RollPercentage(35)) {
+                        if (targets == 0 && this.GetCasterPlus().GetName().includes("windrunner") && RollPercentage(35)) {
                             if (!this.responses) {
                                 this.responses = {
                                     "1": "windrunner_wind_ability_shackleshot_05",
@@ -463,7 +463,7 @@ export class imba_windranger_windrun extends BaseAbility_Plus {
 
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Ability.Windrun");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_windrunner" && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetName().includes("windrunner") && RollPercentage(75)) {
             if (!this.responses) {
                 this.responses = {
                     "1": "windrunner_wind_spawn_04",

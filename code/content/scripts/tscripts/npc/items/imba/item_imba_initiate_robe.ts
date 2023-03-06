@@ -44,7 +44,7 @@ export class modifier_imba_initiate_robe_passive extends BaseModifier_Plus {
         if (IsServer()) {
             let item = this.GetItemPlus();
             this.parent = this.GetParentPlus();
-            if (this.parent.IsHero() && item) {
+            if (this.parent.IsRealUnit() && item) {
                 this.shield_pfx = undefined;
                 this.CheckUnique(true);
                 this.mana_pct = this.GetParentPlus().GetManaPercent();

@@ -978,7 +978,7 @@ export class imba_night_stalker_crippling_fear_720 extends BaseAbility_Plus {
                 duration: this.duration_night
             });
         }
-        if (this.caster.GetName() == "npc_dota_hero_night_stalker" && RollPercentage(75)) {
+        if (this.caster.GetName().includes("night_stalker") && RollPercentage(75)) {
             this.caster.EmitSound("night_stalker_nstalk_ability_cripfear_0" + RandomInt(1, 3));
         }
         this.target.EmitSound("Hero_Nightstalker.Trickling_Fear");

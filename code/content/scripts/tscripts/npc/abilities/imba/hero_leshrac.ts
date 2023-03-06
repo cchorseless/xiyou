@@ -781,7 +781,7 @@ export class modifier_imba_leshrac_lightning_storm_scepter_thinker extends BaseM
         let enemy_found = false;
         let chosen_enemy;
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
-            if (enemy.IsHero()) {
+            if (enemy.IsRealUnit()) {
                 enemy_found = true;
                 chosen_enemy = enemy;
                 return;

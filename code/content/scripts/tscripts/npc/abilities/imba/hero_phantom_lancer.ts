@@ -47,7 +47,7 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
     OnSpellStart(): void {
         let target = this.GetCursorTarget();
         this.GetCasterPlus().EmitSound("Hero_PhantomLancer.SpiritLance.Throw");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_phantom_lancer") {
+        if (this.GetCasterPlus().GetName().includes("phantom_lancer")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "phantom_lancer_plance_ability_spiritlance_01",
@@ -138,7 +138,7 @@ export class imba_phantom_lancer_spirit_lance extends BaseAbility_Plus {
         } else {
             if (!this.GetCasterPlus().IsIllusion()) {
                 let illusion_type = target;
-                if (!target.IsHero()) {
+                if (!target.IsRealUnit()) {
                     illusion_type = this.GetCasterPlus();
                 }
                 let illusions = this.GetCasterPlus().CreateIllusion(illusion_type, {
@@ -267,7 +267,7 @@ export class imba_phantom_lancer_doppelwalk extends BaseAbility_Plus {
         ParticleManager.SetParticleControl(doppleganger_particle, 2, Vector(this.GetSpecialValueFor("target_aoe"), this.GetSpecialValueFor("target_aoe"), this.GetSpecialValueFor("target_aoe")));
         ParticleManager.SetParticleControl(doppleganger_particle, 3, Vector(this.GetSpecialValueFor("delay"), 0, 0));
         ParticleManager.ReleaseParticleIndex(doppleganger_particle);
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_phantom_lancer") {
+        if (this.GetCasterPlus().GetName().includes("phantom_lancer")) {
             if (RollPercentage(5)) {
                 if (!this.rare_responses) {
                     this.rare_responses = {

@@ -450,7 +450,7 @@ export class modifier_item_imba_maelstrom extends BaseModifier_Plus {
     } */
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.PREATTACK_BONUS_DAMAGE)
     CC_GetModifierPreAttack_BonusDamage(keys?: any /** keys */): number {
-        if (IsServer() && keys.target && !keys.target.IsHero() && !keys.target.IsOther() && !keys.target.IsBuilding() && !string.find(keys.target.GetUnitName(), "npc_dota_lone_druid_bear") && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && this.GetParentPlus().FindItemInInventory("item_imba_jarnbjorn") == this.GetItemPlus()) {
+        if (IsServer() && keys.target && !keys.target.IsRealUnit() && !keys.target.IsOther() && !keys.target.IsBuilding() && !string.find(keys.target.GetUnitName(), "npc_dota_lone_druid_bear") && keys.target.GetTeamNumber() != this.GetParentPlus().GetTeamNumber() && this.GetParentPlus().FindItemInInventory("item_imba_jarnbjorn") == this.GetItemPlus()) {
             if (!this.GetParentPlus().IsRangedAttacker()) {
                 return this.bonus_damage + this.quelling_bonus;
             } else {

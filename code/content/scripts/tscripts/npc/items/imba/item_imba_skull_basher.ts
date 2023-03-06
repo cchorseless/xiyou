@@ -68,7 +68,8 @@ export class modifier_imba_skull_basher extends BaseModifier_Plus {
             this.GetItemPlus().UseResources(false, false, true);
             if (!GameServiceConfig.IMBA_DISABLED_SKULL_BASHER.includes(keys.attacker.GetUnitName())) {
                 keys.target.EmitSound("DOTA_Item.SkullBasher");
-                keys.target.AddNewModifier(this.GetCasterPlus(), this.GetItemPlus(), "modifier_imba_skull_basher_bash", {
+                keys.target.AddNewModifier(this.GetCasterPlus(), this.GetItemPlus(),
+                    "modifier_imba_skull_basher_bash", {
                     duration: this.GetItemPlus().GetSpecialValueFor("stun_duration") * (1 - keys.target.GetStatusResistance())
                 });
             }

@@ -64,7 +64,7 @@ export class imba_oracle_fortunes_end extends BaseAbility_Plus {
         }
         this.autocast_state = this.GetAutoCastState();
         this.GetCasterPlus().EmitSound(this.channel_sound);
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_oracle" && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetName().includes("oracle") && RollPercentage(50)) {
             this.GetCasterPlus().EmitSound("oracle_orac_fortunesend_0" + RandomInt(1, 6));
         }
         if (this.fortunes_particle) {
@@ -304,7 +304,7 @@ export class imba_oracle_fates_edict extends BaseAbility_Plus {
     ApplyFatesEdict(target: IBaseNpc_Plus, cast_sound: string, modifier_name: string) {
         this.GetCasterPlus().EmitSound(cast_sound);
         target.EmitSound("Hero_Oracle.FatesEdict");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_oracle" && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetName().includes("oracle") && RollPercentage(50)) {
             if (target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber()) {
                 if (target != this.GetCasterPlus()) {
                     this.GetCasterPlus().EmitSound("oracle_orac_fatesedict_0" + RandomInt(1, 6));
@@ -505,7 +505,7 @@ export class imba_oracle_purifying_flames extends BaseAbility_Plus {
         }
         this.target.EmitSound(this.damage_sound);
         this.target.EmitSound("Hero_Oracle.PurifyingFlames");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_oracle") {
+        if (this.GetCasterPlus().GetName().includes("oracle")) {
             if (this.target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber()) {
                 if (RollPercentage(30)) {
                     if (!this.responses_allied) {
@@ -733,7 +733,7 @@ export class imba_oracle_false_promise_alter extends BaseAbility_Plus {
     ApplyFalsePromise(target: IBaseNpc_Plus) {
         target.EmitSound("Hero_Oracle.FalsePromise.Target");
         EmitSoundOnClient("Hero_Oracle.FalsePromise.FP", target.GetPlayerOwner());
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_oracle" && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetName().includes("oracle") && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && RollPercentage(50)) {
             if (!this.responses) {
                 this.responses = {
                     "1": "oracle_orac_falsepromise_01",
@@ -784,7 +784,7 @@ export class imba_oracle_false_promise extends BaseAbility_Plus {
     ApplyFalsePromise(target: IBaseNpc_Plus) {
         target.EmitSound("Hero_Oracle.FalsePromise.Target");
         EmitSoundOnClient("Hero_Oracle.FalsePromise.FP", target.GetPlayerOwner());
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_oracle" && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetName().includes("oracle") && target.GetTeamNumber() == this.GetCasterPlus().GetTeamNumber() && RollPercentage(50)) {
             if (!this.responses) {
                 this.responses = {
                     "1": "oracle_orac_falsepromise_01",
@@ -902,7 +902,7 @@ export class modifier_imba_oracle_false_promise_timer extends BaseModifier_Plus 
         }
         if (this.damage_counter < this.heal_counter) {
             this.GetParentPlus().EmitSound("Hero_Oracle.FalsePromise.Healed");
-            if (this.GetCasterPlus().GetName() == "npc_dota_hero_oracle" && RollPercentage(25)) {
+            if (this.GetCasterPlus().GetName().includes("oracle") && RollPercentage(25)) {
                 this.responses = {
                     "1": "oracle_orac_falsepromise_14",
                     "2": "oracle_orac_falsepromise_15",
@@ -948,7 +948,7 @@ export class modifier_imba_oracle_false_promise_timer extends BaseModifier_Plus 
                     duration: divine_favor_duration
                 });
             }
-            if (this.GetCasterPlus().GetName() == "npc_dota_hero_oracle") {
+            if (this.GetCasterPlus().GetName().includes("oracle")) {
                 if (!this.GetParentPlus().IsAlive() && RollPercentage(15)) {
                     this.responses = {
                         "1": "oracle_orac_falsepromise_05",

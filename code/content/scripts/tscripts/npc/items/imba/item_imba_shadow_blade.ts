@@ -143,7 +143,7 @@ export class modifier_item_imba_shadow_blade_passive extends BaseModifier_Plus {
             }
         }
         let ability = this.GetItemPlus();
-        if (this.GetParentPlus().IsHero() && ability) {
+        if (this.GetParentPlus().IsRealUnit() && ability) {
             this.attack_damage_bonus = ability.GetSpecialValueFor("bonus_damage");
             this.attack_speed_bonus = ability.GetSpecialValueFor("bonus_attack_speed");
             this.CheckUnique(true);

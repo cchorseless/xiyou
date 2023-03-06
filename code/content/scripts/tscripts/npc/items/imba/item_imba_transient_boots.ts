@@ -114,7 +114,7 @@ export class modifier_item_imba_transient_boots extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if ((keys.attacker == this.parent && keys.target.IsHero()) || keys.target == this.parent) {
+        if ((keys.attacker == this.parent && keys.target.IsRealUnit()) || keys.target == this.parent) {
             this.parent.AddNewModifier(this.parent, this.ability, "modifier_item_imba_transient_boots_break", {
                 duration: this.break_time * this.ability.GetEffectiveCooldown(this.ability.GetLevel()) / this.ability.GetCooldown(this.ability.GetLevel())
             });

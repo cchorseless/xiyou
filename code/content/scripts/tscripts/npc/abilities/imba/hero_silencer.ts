@@ -1067,7 +1067,7 @@ export class modifier_imba_silencer_arcane_supremacy extends BaseModifier_Plus {
         if (!IsServer()) {
             return;
         }
-        if (this.caster.GetUnitName() == "npc_dota_hero_silencer") {
+        if (this.caster.GetUnitName().includes("silencer")) {
             this.StartIntervalThink(FrameTime());
         } else {
             print("Arcane Supremacy was stolen. Do not enter think function.");
@@ -1102,7 +1102,7 @@ export class modifier_imba_silencer_arcane_supremacy extends BaseModifier_Plus {
         if (IsServer()) {
             this.steal_amount = this.GetAbilityPlus().GetTalentSpecialValueFor("int_steal_amount");
             this.global_silence_steal = this.GetAbilityPlus().GetTalentSpecialValueFor("global_silence_steal");
-            if (this.caster.GetUnitName() == "npc_dota_hero_silencer" && this.caster.IsRealHero()) {
+            if (this.caster.GetUnitName().includes("silencer") && this.caster.IsRealHero()) {
                 if (params.unit.IsRealHero() && params.unit != this.caster && params.unit.GetTeam() != this.caster.GetTeam()/** && !params.reincarnate */) {
                     let stealType = undefined;
                     let distance = (this.caster.GetAbsOrigin() - params.unit.GetAbsOrigin() as Vector).Length2D();
@@ -1364,7 +1364,7 @@ export class imba_silencer_global_silence_v2 extends BaseAbility_Plus {
         let hero_silence_particle = undefined;
         for (const [_, enemy] of GameFunc.iPair(FindUnitsInRadius(this.GetCasterPlus().GetTeamNumber(), this.GetCasterPlus().GetAbsOrigin(), undefined, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FindOrder.FIND_ANY_ORDER, false))) {
             if (!enemy.IsCourier || !enemy.IsCourier()) {
-                if (enemy.IsHero()) {
+                if (enemy.IsRealUnit()) {
                     hero_silence_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_silencer/silencer_global_silence_hero.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy);
                     ParticleManager.SetParticleControlEnt(hero_silence_particle, 1, enemy, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", enemy.GetAbsOrigin(), true);
                     ParticleManager.ReleaseParticleIndex(hero_silence_particle);

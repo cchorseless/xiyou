@@ -1,6 +1,7 @@
 
 import { GameFunc } from "../../../GameFunc";
 import { ResHelper } from "../../../helper/ResHelper";
+import { GameServiceConfig } from "../../../shared/GameServiceConfig";
 import { BaseAbility_Plus } from "../../entityPlus/BaseAbility_Plus";
 import { BaseModifier_Plus, registerProp } from "../../entityPlus/BaseModifier_Plus";
 import { registerAbility, registerModifier } from "../../entityPlus/Base_Plus";
@@ -55,7 +56,7 @@ export class imba_troll_warlord_berserkers_rage extends BaseAbility_Plus {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
             caster.EmitSound("Hero_TrollWarlord.BerserkersRage.Toggle");
-            if (RollPercentage(25) && (caster.GetName() == "npc_dota_hero_troll_warlord") && !caster.TempData().beserk_sound) {
+            if (RollPercentage(25) && (caster.GetName().includes("troll_warlord")) && !caster.TempData().beserk_sound) {
                 caster.EmitSound("troll_warlord_troll_beserker_0" + math.random(1, 4));
                 caster.TempData().beserk_sound = true;
                 this.AddTimer(10, () => {
@@ -176,7 +177,7 @@ export class modifier_imba_berserkers_rage_melee extends BaseModifier_Plus {
                 let ability = this.GetAbilityPlus();
                 if (parent.HasTalent("special_bonus_imba_troll_warlord_9")) {
                     if (!this.bash_talent) {
-                        // table.insert(IMBA_DISABLED_SKULL_BASHER, "npc_dota_hero_troll_warlord");
+                        table.insert(GameServiceConfig.IMBA_DISABLED_SKULL_BASHER, "troll_warlord");
                         this.bash_talent = true;
                     }
                     if (GFuncRandom.PRD(ability.GetSpecialValueFor("ensnare_chance"), ability)) {
@@ -213,7 +214,7 @@ export class modifier_imba_berserkers_rage_melee extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.TRANSLATE_ACTIVITY_MODIFIERS)
     CC_GetActivityTranslationModifiers(): string {
-        // if (this.GetParentPlus().GetName() == "npc_dota_hero_troll_warlord") {
+        // if (this.GetParentPlus().GetName() .includes("troll_warlord")) {
         return "melee";
         // }
         // return 0;
@@ -393,7 +394,7 @@ export class imba_troll_warlord_whirling_axes_ranged extends BaseAbility_Plus {
             axe_count = axe_count + caster.GetTalentValue("special_bonus_imba_troll_warlord_7", "axe_count_increase");
             axe_spread = axe_spread + caster.GetTalentValue("special_bonus_imba_troll_warlord_7", "axe_spread_increase");
             caster.EmitSound("Hero_TrollWarlord.WhirlingAxes.Ranged");
-            if ((math.random(1, 100) <= 25) && (caster.GetName() == "npc_dota_hero_troll_warlord")) {
+            if ((math.random(1, 100) <= 25) && (caster.GetName().includes("troll_warlord"))) {
                 caster.EmitSound("troll_warlord_troll_whirlingaxes_0" + math.random(1, 6));
             }
             let index = DoUniqueString("index");
@@ -563,7 +564,7 @@ export class imba_troll_warlord_whirling_axes_melee extends BaseAbility_Plus {
             let whirl_duration = this.GetSpecialValueFor("whirl_duration");
             let direction = caster.GetForwardVector();
             caster.EmitSound("Hero_TrollWarlord.WhirlingAxes.Melee");
-            if ((math.random(1, 100) <= 25) && (caster.GetName() == "npc_dota_hero_troll_warlord")) {
+            if ((math.random(1, 100) <= 25) && (caster.GetName().includes("troll_warlord"))) {
                 caster.EmitSound("troll_warlord_troll_whirlingaxes_0" + math.random(1, 6));
             }
             let index = DoUniqueString("index");
@@ -706,7 +707,7 @@ export class imba_troll_warlord_fervor extends BaseAbility_Plus {
     OnUpgrade(): void {
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            if ((math.random(1, 100) <= 25) && (caster.GetName() == "npc_dota_hero_troll_warlord")) {
+            if ((math.random(1, 100) <= 25) && (caster.GetName().includes("troll_warlord"))) {
                 caster.EmitSound("troll_warlord_troll_fervor_0" + math.random(1, 6));
             }
         }

@@ -1020,7 +1020,7 @@ export class modifier_imba_kinetic_field_barrier extends BaseModifier_Plus {
             let edge_damage_creep = ability.GetSpecialValueFor("edge_damage_creep");
             let cooldown_reduction = ability.GetSpecialValueFor("cooldown_reduction");
             let damageTable;
-            if (target.IsHero()) {
+            if (target.IsRealUnit()) {
                 damageTable = {
                     victim: target,
                     attacker: caster,

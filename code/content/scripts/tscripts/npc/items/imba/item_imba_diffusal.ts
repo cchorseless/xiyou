@@ -22,7 +22,7 @@ export class item_imba_diffusal_blade extends BaseItem_Plus {
         target.AddNewModifier(this.GetCasterPlus(), this, "modifier_item_imba_diffusal_blade_slow", {
             duration: this.GetSpecialValueFor("purge_slow_duration") * (1 - target.GetStatusResistance())
         });
-        if (!target.IsHero() && !target.IsRoshan() && !target.IsConsideredHero()) {
+        if (!target.IsRealUnit() && !target.IsRoshan() && !target.IsConsideredHero()) {
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_rooted", {
                 duration: this.GetSpecialValueFor("purge_root_duration") * (1 - target.GetStatusResistance())
             });
@@ -172,7 +172,7 @@ export class item_imba_diffusal_blade_2 extends BaseItem_Plus {
             target.AddNewModifier(this.GetCasterPlus(), this, "modifier_item_imba_diffusal_blade_2_slow", {
                 duration: this.GetSpecialValueFor("purge_slow_duration") * (1 - target.GetStatusResistance())
             });
-            if (!target.IsHero() && !target.IsRoshan() && !target.IsConsideredHero()) {
+            if (!target.IsRealUnit() && !target.IsRoshan() && !target.IsConsideredHero()) {
                 target.AddNewModifier(this.GetCasterPlus(), this, "modifier_rooted", {
                     duration: this.GetSpecialValueFor("purge_root_duration") * (1 - target.GetStatusResistance())
                 });

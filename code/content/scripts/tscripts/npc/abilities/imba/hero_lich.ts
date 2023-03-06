@@ -384,7 +384,7 @@ export class imba_lich_frost_nova extends BaseAbility_Plus {
         for (const [_, enemy] of GameFunc.iPair(enemies)) {
             this.AddTimer(FrameTime(), () => {
                 if (!enemy.IsAlive() && enemy.IsRealHero()) {
-                    if (enemy.GetUnitName() == "npc_dota_hero_crystal_maiden") {
+                    if (enemy.GetUnitName().includes("crystal_maiden")) {
                         if (RollPercentage(25)) {
                             EmitSoundOn(cm_kill_response, caster);
                         } else if (RollPercentage(20)) {
@@ -882,7 +882,7 @@ export class modifier_imba_frost_armor_auto_cast extends BaseModifier_Plus {
         if (this.caster.GetTeamNumber() != target.GetTeamNumber()) {
             return undefined;
         }
-        if (!target.IsHero() && !target.IsBuilding()) {
+        if (!target.IsRealUnit() && !target.IsBuilding()) {
             return undefined;
         }
         if (this.caster == target) {
@@ -1395,7 +1395,7 @@ export class modifier_imba_chain_frost_talent_buff extends BaseModifier_Plus {
         let unit = keys.unit;
         let attacker = keys.attacker;
         if (this.parent == unit) {
-            if (!attacker.IsHero()) {
+            if (!attacker.IsRealUnit()) {
                 return undefined;
             }
             let distance = (unit.GetAbsOrigin() - attacker.GetAbsOrigin() as Vector).Length2D();
@@ -1472,7 +1472,7 @@ export class modifier_imba_lich_frost_shield extends BaseModifier_Plus {
         this.AddParticle(this.particle, false, false, -1, false, false);
         this.particle2 = ResHelper.CreateParticleEx("particles/units/heroes/hero_lich/lich_frost_armor.vpcf", ParticleAttachment_t.PATTACH_OVERHEAD_FOLLOW, this.parent);
         this.AddParticle(this.particle2, false, false, -1, false, false);
-        if (this.caster.GetName() == "npc_dota_hero_lich" && RollPercentage(60)) {
+        if (this.caster.GetName().includes("lich") && RollPercentage(60)) {
             this.caster.EmitSound("lich_lich_ability_armor_0" + math.random(1, 5));
         }
         this.StartIntervalThink(this.interval);
@@ -1613,7 +1613,7 @@ export class imba_lich_sinister_gaze extends BaseAbility_Plus {
             this.caster.Interrupt();
             return;
         }
-        if (this.caster.GetName() == "npc_dota_hero_lich" && RollPercentage(40)) {
+        if (this.caster.GetName().includes("lich") && RollPercentage(40)) {
             this.caster.EmitSound("lich_lich_ability_ritual_0" + math.random(2, 5));
         }
         this.duration = this.GetSpecialValueFor("duration");
@@ -1810,7 +1810,7 @@ export class modifier_imba_lich_sinister_gaze extends BaseModifier_Plus {
             this.current_mana = 0;
         }
         this.mana_per_interval = (this.current_mana * this.mana_drain * 0.01) / (this.duration / this.interval);
-        if (this.caster.GetName() == "npc_dota_hero_lich") {
+        if (this.caster.GetName().includes("lich")) {
             this.particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_lich/lich_gaze.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.parent);
             ParticleManager.SetParticleControlEnt(this.particle, 0, this.parent, ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, undefined, this.parent.GetAbsOrigin(), true);
             ParticleManager.SetParticleControlEnt(this.particle, 2, this.caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_portrait", this.caster.GetAbsOrigin(), true);

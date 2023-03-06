@@ -683,7 +683,7 @@ export class modifier_imba_crystal_maiden_frostbite_passive_ready extends BaseMo
             let attacker = keys.attacker;
             let unit = keys.unit;
             let cooldown = this.GetSpecialValueFor("duration_passive_recharge");
-            if (unit == this.caster && attacker.GetTeam() != unit.GetTeam() && attacker.IsHero() && !attacker.IsMagicImmune()) {
+            if (unit == this.caster && attacker.GetTeam() != unit.GetTeam() && attacker.IsRealUnit() && !attacker.IsMagicImmune()) {
                 if (this.caster.PassivesDisabled()) {
                     return undefined;
                 }

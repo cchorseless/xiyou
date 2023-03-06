@@ -249,7 +249,7 @@ export class modifier_imba_black_queen_cape_active_heal extends BaseModifier_Plu
         if (!IsServer()) {
             return undefined;
         }
-        if ((params.unit != this.GetParentPlus()) || (!params.attacker.IsHero())) {
+        if ((params.unit != this.GetParentPlus()) || (!params.attacker.IsRealUnit())) {
             return undefined;
         }
         if (this.GetParentPlus().HasModifier(this.bkb_modifier)) {

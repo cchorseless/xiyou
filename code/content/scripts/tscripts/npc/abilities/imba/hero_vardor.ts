@@ -529,7 +529,7 @@ export class modifier_vardor_piercing_shot_target_debuff extends BaseModifier_Pl
         this.damage_per_tick = this.damage_over_time_target * this.think_interval;
         if (IsServer()) {
             let particleName = "particles/hero/vardor/vardor_piercing_shot_debuff.vpcf";
-            if (this.parent.IsHero()) {
+            if (this.parent.IsRealUnit()) {
                 particleName = "particles/hero/vardor/vardor_piercing_shot_debuff_hero.vpcf";
             }
             this.debuffParticle = ResHelper.CreateParticleEx(particleName, ParticleAttachment_t.PATTACH_POINT_FOLLOW, this.parent);
@@ -1015,7 +1015,7 @@ export class modifier_vardor_mental_thrusts_debuff extends BaseModifier_Plus {
             table.insert(this.stack_table, GameRules.GetGameTime());
             this.ForceRefresh();
         }
-        if (this.parent.IsHero()) {
+        if (this.parent.IsRealUnit()) {
             this.parent.CalculateStatBonus(true);
         }
     }
@@ -1058,7 +1058,7 @@ export class modifier_vardor_mental_thrusts_debuff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_STRENGTH_BONUS)
     CC_GetModifierBonusStats_Strength(): number {
-        if (!this.parent.IsHero()) {
+        if (!this.parent.IsRealUnit()) {
             return;
         }
         if (this.parent.GetPrimaryAttribute() == Attributes.DOTA_ATTRIBUTE_STRENGTH) {
@@ -1068,7 +1068,7 @@ export class modifier_vardor_mental_thrusts_debuff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_AGILITY_BONUS)
     CC_GetModifierBonusStats_Agility(): number {
-        if (!this.parent.IsHero()) {
+        if (!this.parent.IsRealUnit()) {
             return;
         }
         if (this.parent.GetPrimaryAttribute() == Attributes.DOTA_ATTRIBUTE_AGILITY) {
@@ -1078,7 +1078,7 @@ export class modifier_vardor_mental_thrusts_debuff extends BaseModifier_Plus {
     }
     @registerProp(GPropertyConfig.EMODIFIER_PROPERTY.STATS_INTELLECT_BONUS)
     CC_GetModifierBonusStats_Intellect(): number {
-        if (!this.parent.IsHero()) {
+        if (!this.parent.IsRealUnit()) {
             return;
         }
         if (this.parent.GetPrimaryAttribute() == Attributes.DOTA_ATTRIBUTE_INTELLECT) {

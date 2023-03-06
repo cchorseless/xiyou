@@ -35,7 +35,7 @@ export class imba_luna_lucent_beam extends BaseAbility_Plus {
         }
         this.GetCasterPlus().EmitSound("Hero_Luna.LucentBeam.Cast");
         this.GetCursorTarget().EmitSound("Hero_Luna.LucentBeam.Target");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_luna" && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetName().includes("luna") && RollPercentage(50)) {
             let responses = {
                 "1": "luna_luna_ability_lucentbeam_01",
                 "2": "luna_luna_ability_lucentbeam_02",
@@ -526,7 +526,7 @@ export class imba_luna_eclipse extends BaseAbility_Plus {
         } else {
             this.GetCasterPlus().EmitSound("Hero_Luna.Eclipse.Cast");
         }
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_luna") {
+        if (this.GetCasterPlus().GetName().includes("luna")) {
             let responses = {
                 "1": "luna_luna_ability_eclipse_01",
                 "2": "luna_luna_ability_eclipse_02",

@@ -13,7 +13,7 @@ export class imba_weaver_the_swarm extends BaseAbility_Plus {
             this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
         }
         this.GetCasterPlus().EmitSound("Hero_Weaver.Swarm.Cast");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_weaver" && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetName().includes("weaver") && RollPercentage(75)) {
             this.GetCasterPlus().EmitSound("weaver_weav_ability_swarm_0" + RandomInt(1, 6));
         }
         let start_pos: Vector = undefined;
@@ -174,7 +174,7 @@ export class modifier_imba_weaver_the_swarm_unit extends BaseModifier_Plus {
             return;
         }
         if (keys.target == this.GetParentPlus()) {
-            if (keys.attacker.IsHero()) {
+            if (keys.attacker.IsRealUnit()) {
                 this.GetParentPlus().SetHealth(this.GetParentPlus().GetHealth() - (this.health_increments * this.hero_attack_multiplier));
             } else {
                 this.GetParentPlus().SetHealth(this.GetParentPlus().GetHealth() - this.health_increments);

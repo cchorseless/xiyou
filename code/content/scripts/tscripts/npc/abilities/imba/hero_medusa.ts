@@ -297,7 +297,7 @@ export class imba_medusa_mystic_snake extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().EmitSound("Hero_Medusa.MysticSnake.Cast");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_medusa" && RollPercentage(75)) {
+        if (this.GetCasterPlus().GetName().includes("medusa") && RollPercentage(75)) {
             let random_response = RandomInt(1, 6);
             if (random_response >= 2) {
                 random_response = random_response + 1;
@@ -595,7 +595,7 @@ export class imba_medusa_mana_shield extends BaseAbility_Plus {
         }
         if (this.GetToggleState()) {
             this.GetCasterPlus().EmitSound("Hero_Medusa.ManaShield.On");
-            if (this.GetCasterPlus().GetName() == "npc_dota_hero_medusa" && RollPercentage(20)) {
+            if (this.GetCasterPlus().GetName().includes("medusa") && RollPercentage(20)) {
                 if (!this.responses) {
                     this.responses = {
                         ["medusa_medus_manashield_02"]: 0,
@@ -841,7 +841,7 @@ export class modifier_imba_medusa_stone_gaze_facing extends BaseModifier_Plus {
             return;
         }
         if (math.abs(AngleDiff(VectorToAngles(this.GetParentPlus().GetForwardVector()).y, VectorToAngles(this.GetCasterPlus().GetAbsOrigin() - this.GetParentPlus().GetAbsOrigin() as Vector).y)) <= this.vision_cone * 1000 && (this.GetParentPlus().GetAbsOrigin() - this.GetCasterPlus().GetAbsOrigin() as Vector).Length2D() <= this.radius && this.GetCasterPlus().IsAlive()) {
-            if (this.play_sound && this.GetParentPlus().IsHero()) {
+            if (this.play_sound && this.GetParentPlus().IsRealUnit()) {
                 this.GetParentPlus().EmitSound("Hero_Medusa.StoneGaze.Target");
                 this.play_sound = false;
             }
@@ -849,7 +849,7 @@ export class modifier_imba_medusa_stone_gaze_facing extends BaseModifier_Plus {
             ParticleManager.SetParticleControlEnt(this.particle, 1, this.GetCasterPlus(), ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_hitloc", this.GetCasterPlus().GetAbsOrigin(), true);
             this.counter = this.counter + this.tick_interval;
             if (this.counter >= this.face_duration) {
-                if (this.GetParentPlus().IsHero()) {
+                if (this.GetParentPlus().IsRealUnit()) {
                     this.GetParentPlus().EmitSound("Hero_Medusa.StoneGaze.Stun");
                 }
                 this.GetParentPlus().AddNewModifier(this.GetCasterPlus(), this.GetAbilityPlus(), "modifier_imba_medusa_stone_gaze_stone", {

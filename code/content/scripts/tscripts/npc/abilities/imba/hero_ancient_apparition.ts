@@ -136,7 +136,7 @@ export class modifier_imba_ancient_apparition_cold_feet_freeze extends BaseModif
             return;
         }
         this.GetParentPlus().EmitSound("Hero_Ancient_Apparition.ColdFeetFreeze");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_ancient_apparition") {
+        if (this.GetCasterPlus().GetName().includes("ancient_apparition")) {
             this.GetCasterPlus().EmitSound("ancient_apparition_appa_ability_coldfeet_0" + RandomInt(2, 4));
         }
     }
@@ -186,7 +186,7 @@ export class imba_ancient_apparition_ice_vortex extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Ancient_Apparition.IceVortexCast");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_ancient_apparition") {
+        if (this.GetCasterPlus().GetName().includes("ancient_apparition")) {
             if (!this.responses) {
                 this.responses = {
                     "ancient_apparition_appa_ability_vortex_01": 0,

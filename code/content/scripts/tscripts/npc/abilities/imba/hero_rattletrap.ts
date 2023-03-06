@@ -19,7 +19,7 @@ export class imba_rattletrap_battery_assault extends BaseAbility_Plus {
             return;
         }
         this.GetCasterPlus().StartGesture(GameActivity_t.ACT_DOTA_RATTLETRAP_BATTERYASSAULT);
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_rattletrap") {
+        if (this.GetCasterPlus().GetName().includes("rattletrap")) {
             let random_response = RandomInt(3, 18);
             if (random_response <= 9) {
                 this.GetCasterPlus().EmitSound("rattletrap_ratt_ability_batt_0" + random_response);
@@ -270,7 +270,7 @@ export class imba_rattletrap_power_cogs extends BaseAbility_Plus {
         }
         let deploy_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_rattletrap/rattletrap_cog_deploy.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN, this.GetCasterPlus());
         ParticleManager.ReleaseParticleIndex(deploy_particle);
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_rattletrap" && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetName().includes("rattletrap") && RollPercentage(50)) {
             let responses = {
                 "1": "rattletrap_ratt_ability_cogs_01",
                 "2": "rattletrap_ratt_ability_cogs_02",
@@ -668,7 +668,7 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
         if (this.GetCursorPosition() == this.GetCasterPlus().GetAbsOrigin()) {
             this.GetCasterPlus().SetCursorPosition(this.GetCursorPosition() + this.GetCasterPlus().GetForwardVector() as Vector);
         }
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_rattletrap") {
+        if (this.GetCasterPlus().GetName().includes("rattletrap")) {
             this.GetCasterPlus().EmitSound("rattletrap_ratt_ability_flare_0" + RandomInt(1, 7));
             let caster = this.GetCasterPlus();
             if (caster.GetTogglableWearablePlus(DOTASlotType_t.DOTA_LOADOUT_TYPE_MISC)) {
@@ -805,7 +805,7 @@ export class imba_rattletrap_rocket_flare extends BaseAbility_Plus {
                 ability: this
             }
             ApplyDamage(damageTable);
-            if (!enemy.IsAlive() && this.GetCasterPlus().GetName() == "npc_dota_hero_rattletrap" && travel_distance >= 6000) {
+            if (!enemy.IsAlive() && this.GetCasterPlus().GetName().includes("rattletrap") && travel_distance >= 6000) {
                 let random_response = RandomInt(8, 12);
                 if (random_response <= 9) {
                     this.GetCasterPlus().EmitSound("rattletrap_ratt_ability_flare_0" + random_response);
@@ -1047,7 +1047,7 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
         if (this.ApplyHorizontalMotionController() == false || (this.GetCasterPlus().GetAbsOrigin() - this.target.GetAbsOrigin() as Vector).Length2D() <= this.latch_radius) {
             this.Destroy();
             return;
-        } else if (this.GetCasterPlus().GetName() == "npc_dota_hero_rattletrap") {
+        } else if (this.GetCasterPlus().GetName().includes("rattletrap")) {
             let responses = {
                 "1": "rattletrap_ratt_ability_batt_06",
                 "2": "rattletrap_ratt_ability_batt_07",
@@ -1109,15 +1109,15 @@ export class modifier_imba_rattletrap_hookshot extends BaseModifierMotionHorizon
         this.GetParentPlus().RemoveHorizontalMotionController(this);
         this.GetCasterPlus().StopSound("Hero_Rattletrap.Hookshot.Retract");
         this.GetCasterPlus().EmitSound("Hero_Rattletrap.Hookshot.Damage");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_rattletrap" && (this.GetCasterPlus().GetAbsOrigin() - this.target.GetAbsOrigin() as Vector).Length2D() <= this.latch_radius && RollPercentage(15)) {
-            if (this.target.GetName() == "npc_dota_hero_pudge") {
+        if (this.GetCasterPlus().GetName().includes("rattletrap") && (this.GetCasterPlus().GetAbsOrigin() - this.target.GetAbsOrigin() as Vector).Length2D() <= this.latch_radius && RollPercentage(15)) {
+            if (this.target.GetName().includes("pudge")) {
                 let responses = {
                     "1": "rattletrap_ratt_ability_hook_08",
                     "2": "rattletrap_ratt_ability_hook_11",
                     "3": "rattletrap_ratt_ability_hook_12"
                 }
                 this.GetCasterPlus().EmitSound(GFuncRandom.RandomValue(responses));
-            } else if (this.target.GetName() == "npc_dota_hero_tinker") {
+            } else if (this.target.GetName().includes("tinker")) {
                 this.GetCasterPlus().EmitSound("rattletrap_ratt_ability_hook_13");
             } else {
                 this.GetCasterPlus().EmitSound("rattletrap_ratt_ability_hook_0" + RandomInt(4, 5));

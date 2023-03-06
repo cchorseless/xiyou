@@ -329,7 +329,7 @@ export class imba_enigma_demonic_conversion extends BaseAbility_Plus {
         }
         let location = target.GetAbsOrigin();
         EmitSoundOn("Hero_Enigma.Demonic_Conversion", target);
-        if (!target.IsHero()) {
+        if (!target.IsRealUnit()) {
             target.Kill(this, caster);
             target = undefined;
         }

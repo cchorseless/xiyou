@@ -23,7 +23,7 @@ export class imba_alchemist_acid_spray extends BaseAbility_Plus {
         let caster = this.GetCasterPlus();
         let point = this.GetCursorPosition();
         let team_id = caster.GetTeamNumber();
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_alchemist") {
+        if (this.GetCasterPlus().GetName().includes("alchemist")) {
             let cast_responses = {
                 "1": "alchemist_alch_ability_acid_01",
                 "2": "alchemist_alch_ability_acid_02",
@@ -213,7 +213,7 @@ export class modifier_imba_acid_spray_handler extends BaseModifier_Plus {
                     let drop_chance_hero = caster.GetTalentValue("special_bonus_imba_alchemist_4", "drop_chance_percentage_hero");
                     let drop_chance_creep = caster.GetTalentValue("special_bonus_imba_alchemist_4", "drop_chance_percentage_creep");
                     let drop_chance;
-                    if (params.unit.IsHero()) {
+                    if (params.unit.IsRealUnit()) {
                         drop_chance = drop_chance_hero;
                     } else {
                         drop_chance = drop_chance_creep;
@@ -940,7 +940,7 @@ export class modifier_imba_goblins_greed_passive extends BaseModifier_Plus {
         if (caster == attacker && !unit.IsBuilding() && !unit.IsIllusion() && !unit.IsTempestDouble() && caster.GetTeamNumber() != unit.GetTeamNumber() && unit.GetGoldBounty) {
             let stacks = this.GetStackCount();
             let hero_multiplier = 1;
-            if (unit.IsHero()) {
+            if (unit.IsRealUnit()) {
                 hero_multiplier = ability.GetSpecialValueFor("hero_multiplier");
             }
             let playerroot = GGameScene.GetPlayer(caster.GetPlayerID());
@@ -1112,7 +1112,7 @@ export class modifier_imba_chemical_rage_handler extends BaseModifier_Plus {
         this.transformation_time = this.GetSpecialValueFor("transformation_time");
         if (IsServer()) {
             let caster = this.GetCasterPlus();
-            if (caster.GetUnitName() == "npc_dota_hero_alchemist") {
+            if (caster.GetUnitName().includes("alchemist")) {
                 caster.StartGesture(GameActivity_t.ACT_DOTA_ALCHEMIST_CHEMICAL_RAGE_START);
             }
             this.SetDuration(this.transformation_time, false);

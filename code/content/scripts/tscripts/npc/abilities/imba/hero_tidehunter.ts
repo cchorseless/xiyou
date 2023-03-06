@@ -149,7 +149,7 @@ export class imba_tidehunter_gush extends BaseAbility_Plus {
                         ability: this
                     }
                     ApplyDamage(damageTable);
-                    if (this.GetCasterPlus().GetName() == "npc_dota_hero_tidehunter" && target.IsRealHero() && !target.IsAlive() && RollPercentage(25)) {
+                    if (this.GetCasterPlus().GetName().includes("tidehunter") && target.IsRealHero() && !target.IsAlive() && RollPercentage(25)) {
                         this.GetCasterPlus().EmitSound("tidehunter_tide_ability_gush_0" + RandomInt(1, 2));
                     }
                 }
@@ -752,7 +752,7 @@ export class modifier_imba_tidehunter_ravage_creeping_wave extends BaseModifier_
                     ability: ability
                 }
                 ApplyDamage(damageTable);
-                if (caster.GetName() == "npc_dota_hero_tidehunter" && !enemy.IsAlive() && enemy.IsRealHero() && RollPercentage(25)) {
+                if (caster.GetName().includes("tidehunter") && !enemy.IsAlive() && enemy.IsRealHero() && RollPercentage(25)) {
                     caster.EmitSound("tidehunter_tide_ability_ravage_0" + RandomInt(1, 2));
                 }
             });
@@ -869,7 +869,7 @@ export class imba_tidehunter_ravage extends BaseAbility_Plus {
                                 ability: this
                             }
                             ApplyDamage(damageTable);
-                            if (!enemy.IsAlive() && enemy.IsHero() && RollPercentage(25) && caster.GetName() == "npc_dota_hero_tidehunter") {
+                            if (!enemy.IsAlive() && enemy.IsRealUnit() && RollPercentage(25) && caster.GetName().includes("tidehunter")) {
                                 caster.EmitSound(kill_responses + RandomInt(1, 2));
                             }
                             enemy.RemoveGesture(GameActivity_t.ACT_DOTA_FLAIL);

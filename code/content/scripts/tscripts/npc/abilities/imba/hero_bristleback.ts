@@ -101,7 +101,7 @@ export class imba_bristleback_viscous_nasal_goo extends BaseAbility_Plus {
             }
             ProjectileManager.CreateTrackingProjectile(projectile);
         }
-        if (this.caster.GetName() == "npc_dota_hero_bristleback" && RollPercentage(40)) {
+        if (this.caster.GetName().includes("bristleback") && RollPercentage(40)) {
             this.caster.EmitSound("bristleback_bristle_nasal_goo_0" + math.random(1, 7));
         }
     }

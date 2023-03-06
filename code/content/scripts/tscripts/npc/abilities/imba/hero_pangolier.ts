@@ -808,7 +808,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
         if (IsServer()) {
             let attacker = keys.attacker;
             let target = keys.target;
-            if (target == this.GetCasterPlus() && attacker.IsHero()) {
+            if (target == this.GetCasterPlus() && attacker.IsRealUnit()) {
                 if (this.GetCasterPlus().HasModifier("modifier_pangolier_gyroshell")) {
                     return undefined;
                 }
@@ -828,7 +828,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
         if (IsServer()) {
             let attacker = keys.attacker;
             let target = keys.target;
-            if (target == this.GetCasterPlus() && attacker.IsHero()) {
+            if (target == this.GetCasterPlus() && attacker.IsRealUnit()) {
                 if (this.GetCasterPlus().HasModifier("modifier_pangolier_gyroshell")) {
                     return undefined;
                 }
@@ -898,7 +898,7 @@ export class modifier_imba_shield_crash_block extends BaseModifier_Plus {
         if (IsServer()) {
             let attacker = keys.attacker;
             let target = keys.target;
-            if (target == this.GetCasterPlus() && attacker.IsHero()) {
+            if (target == this.GetCasterPlus() && attacker.IsRealUnit()) {
                 if (attacker.HasModifier("modifier_imba_shield_crash_block_miss")) {
                     attacker.RemoveModifierByName("modifier_imba_shield_crash_block_miss");
                     for (const [k, v] of GameFunc.iPair(this.attackers)) {

@@ -1971,7 +1971,7 @@ export class modifier_imba_invoker_forge_spirit extends BaseModifier_Plus {
         if (IsServer()) {
             let attacker = kv.attacker;
             let target = kv.target;
-            if (attacker == this.parent && target.IsHero() || target.IsIllusion()) {
+            if (attacker == this.parent && target.IsRealUnit() || target.IsIllusion()) {
                 if (attacker.GetMana() >= this.melt_strike_mana_cost) {
                     if (target.HasModifier("modifier_imba_forged_spirit_melting_strike")) {
                         let debuff_count = target.findBuffStack("modifier_imba_forged_spirit_melting_strike", this.caster);
@@ -2476,7 +2476,7 @@ export class modifier_imba_invoker_emp extends BaseModifier_Plus {
             let nearby_enemy_units = FindUnitsInRadius(this.caster.GetTeam(), this.target_point, undefined, this.area_of_effect, DOTA_UNIT_TARGET_TEAM.DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_TYPE.DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAGS.DOTA_UNIT_TARGET_FLAG_MANA_ONLY, FindOrder.FIND_ANY_ORDER, false);
             let enemy_heroes_hit = 0;
             for (const [i, individual_enemy] of GameFunc.iPair(nearby_enemy_units)) {
-                if (this.OnHit(this.caster, this.ability, individual_enemy, this.mana_burned, this.after_shock_duration, this.damage_per_mana_pct, this.mana_gain_per_mana_pct) && individual_enemy.IsHero()) {
+                if (this.OnHit(this.caster, this.ability, individual_enemy, this.mana_burned, this.after_shock_duration, this.damage_per_mana_pct, this.mana_gain_per_mana_pct) && individual_enemy.IsRealUnit()) {
                     enemy_heroes_hit = enemy_heroes_hit + 1;
                 }
             }

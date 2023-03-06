@@ -6,13 +6,11 @@ import { Enum_MODIFIER_EVENT, registerEvent } from "../../propertystat/modifier_
 @registerAbility()
 export class item_imba_blade_mail extends BaseItem_Plus {
     GetAbilityTextureName(): string {
-        let uniqueBM: { [k: string]: string } = {
-            npc_dota_hero_axe: "axe"
-        }
+
         if (this.GetLevel() == 2) {
             return "item_bladestorm_mail";
-        } else if (uniqueBM[this.GetCasterPlus().GetName()]) {
-            return "imba_blade_mail_" + uniqueBM[this.GetCasterPlus().GetName()];
+        } else if (this.GetCasterPlus().GetName().includes("axe")) {
+            return "imba_blade_mail_axe";
         } else {
             return "item_blade_mail";
         }

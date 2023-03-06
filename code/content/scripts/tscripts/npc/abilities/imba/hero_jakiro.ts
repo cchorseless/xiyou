@@ -864,7 +864,7 @@ export class imba_jakiro_liquid_fire extends BaseAbility_Plus {
     OnAbilityPhaseStart(): boolean {
         let caster = this.GetCasterPlus();
         caster.StartGesture(GameActivity_t.ACT_DOTA_ATTACK);
-        if (caster.GetUnitName() == "npc_dota_hero_jakiro") {
+        if (caster.GetUnitName().includes("jakiro")) {
             caster.AddNewModifier(caster, this, "modifier_imba_liquid_fire_animate", {});
         }
         return true;
@@ -1002,7 +1002,7 @@ export class modifier_imba_liquid_fire_caster extends BaseModifier_Plus {
             let attacker = keys.attacker;
             if (caster == attacker) {
                 if (!ability.IsHidden() && !target.IsMagicImmune() && ability.GetAutoCastState() && ability.IsCooldownReady()) {
-                    if (caster.GetUnitName() == "npc_dota_hero_jakiro") {
+                    if (caster.GetUnitName().includes("jakiro")) {
                         caster.AddNewModifier(caster, this.ability, "modifier_imba_liquid_fire_animate", {});
                     }
                     caster.SetRangedProjectileName("particles/units/heroes/hero_jakiro/jakiro_base_attack_fire.vpcf");

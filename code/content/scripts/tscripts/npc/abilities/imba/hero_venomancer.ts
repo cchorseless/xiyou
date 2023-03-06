@@ -106,7 +106,7 @@ export class imba_venomancer_plague_ward_v2 extends BaseAbility_Plus {
         } else if (this.GetCasterPlus().GetOwnerPlus() && this.GetCasterPlus().GetOwnerPlus().GetPlayerID) {
             plague_ward.SetControllableByPlayer(this.GetCasterPlus().GetOwnerPlus().GetPlayerID(), true);
         }
-        if (!talent_spawn_location && this.GetCasterPlus().GetName() == "npc_dota_hero_venomancer" && RollPercentage(25)) {
+        if (!talent_spawn_location && this.GetCasterPlus().GetName().includes("venomancer") && RollPercentage(25)) {
             if (!this.responses) {
                 this.responses = {
                     "venomancer_venm_ability_ward_01": 0,
@@ -502,7 +502,7 @@ export class imba_venomancer_venomous_gale extends BaseAbility_Plus {
             this.tempdata[ExtraData.index]["count"] = this.tempdata[ExtraData.index]["count"] || 0;
             this.tempdata[ExtraData.index]["count"] = this.tempdata[ExtraData.index]["count"] + 1;
             if (this.tempdata[ExtraData.index]["count"] == ExtraData.projectile_count) {
-                if ((GameFunc.GetCount(this.tempdata[ExtraData.index]) > 0) && (caster.GetName() == "npc_dota_hero_venomancer")) {
+                if ((GameFunc.GetCount(this.tempdata[ExtraData.index]) > 0) && (caster.GetName().includes("venomancer"))) {
                     caster.EmitSound("venomancer_venm_cast_0" + math.random(1, 2));
                 }
                 this.tempdata[ExtraData.index] = undefined;
@@ -905,7 +905,7 @@ export class imba_venomancer_plague_ward extends BaseAbility_Plus {
             ParticleManager.SetParticleControlEnt(spawn_fx, 0, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack1", caster.GetAbsOrigin(), true);
             ParticleManager.SetParticleControlEnt(spawn_fx, 1, caster, ParticleAttachment_t.PATTACH_POINT_FOLLOW, "attach_attack2", caster.GetAbsOrigin(), true);
             ParticleManager.ReleaseParticleIndex(spawn_fx);
-            if ((math.random(1, 100) <= 20) && (caster.GetName() == "npc_dota_hero_venomancer")) {
+            if ((math.random(1, 100) <= 20) && (caster.GetName().includes("venomancer"))) {
                 caster.EmitSound("venomancer_venm_ability_ward_0" + math.random(1, 6));
             }
             let ability_gale = caster.findAbliityPlus<imba_venomancer_venomous_gale>("imba_venomancer_venomous_gale");

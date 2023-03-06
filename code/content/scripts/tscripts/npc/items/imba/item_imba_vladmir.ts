@@ -87,12 +87,12 @@ export class modifier_item_imba_vladmir_aura extends BaseModifier_Plus {
         this.hp_regen_aura = this.GetItemPlus().GetSpecialValueFor("hp_regen_aura");
         this.mana_regen_aura = this.GetItemPlus().GetSpecialValueFor("mana_regen_aura");
         this.vampiric_aura = this.GetItemPlus().GetSpecialValueFor("vampiric_aura");
-        if (IsServer() && this.GetParentPlus().IsHero()) {
+        if (IsServer() && this.GetParentPlus().IsRealUnit()) {
             GFuncEntity.ChangeAttackProjectileImba(this.GetParentPlus());
         }
     }
     BeDestroy(): void {
-        if (IsServer() && this.GetParentPlus().IsHero()) {
+        if (IsServer() && this.GetParentPlus().IsRealUnit()) {
             GFuncEntity.ChangeAttackProjectileImba(this.GetParentPlus());
         }
     }
@@ -234,12 +234,12 @@ export class modifier_item_imba_vladmir_blood_aura extends BaseModifier_Plus {
         this.hp_regen_aura = this.GetItemPlus().GetSpecialValueFor("hp_regen_aura");
         this.mana_regen_aura = this.GetItemPlus().GetSpecialValueFor("mana_regen_aura");
         this.vampiric_aura = this.GetItemPlus().GetSpecialValueFor("vampiric_aura");
-        if (IsServer() && this.GetParentPlus().IsHero()) {
+        if (IsServer() && this.GetParentPlus().IsRealUnit()) {
             GFuncEntity.ChangeAttackProjectileImba(this.GetParentPlus());
         }
     }
     BeDestroy(): void {
-        if (IsServer() && this.GetParentPlus().IsHero()) {
+        if (IsServer() && this.GetParentPlus().IsRealUnit()) {
             let parent = this.GetParentPlus();
             GFuncEntity.ChangeAttackProjectileImba(parent);
         }

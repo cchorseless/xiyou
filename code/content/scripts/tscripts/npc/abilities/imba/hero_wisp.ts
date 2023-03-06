@@ -1445,7 +1445,7 @@ export class imba_wisp_relocate extends BaseAbility_Plus {
                     this.GetCasterPlus().SwapAbilities("imba_wisp_relocate", "imba_wisp_relocate_break", false, true);
                     let break_ability = this.GetCasterPlus().findAbliityPlus<imba_wisp_relocate_break>("imba_wisp_relocate_break");
                     break_ability.SetLevel(1);
-                    if (this.GetCasterPlus().HasModifier("modifier_imba_wisp_tether") && tether_ability.target.IsHero()) {
+                    if (this.GetCasterPlus().HasModifier("modifier_imba_wisp_tether") && tether_ability.target.IsRealUnit()) {
                         this.ally = tether_ability.target;
                     } else {
                         this.ally = undefined;
@@ -1520,7 +1520,7 @@ export class modifier_imba_wisp_relocate extends BaseModifier_Plus {
             let teleport_out_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_wisp/wisp_relocate_marker_endpoint.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, this.GetCasterPlus(), this.GetCasterPlus());
             ParticleManager.DestroyParticle(teleport_out_pfx, false);
             ParticleManager.ReleaseParticleIndex(teleport_out_pfx);
-            if (caster.HasModifier("modifier_imba_wisp_tether") && ally != undefined && ally.IsHero()) {
+            if (caster.HasModifier("modifier_imba_wisp_tether") && ally != undefined && ally.IsRealUnit()) {
                 this.ally_teleport_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_wisp/wisp_relocate_teleport.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, ally, caster);
                 ParticleManager.SetParticleControl(this.ally_teleport_pfx, 0, ally.GetAbsOrigin());
                 FindClearSpaceForUnit(ally, ability.relocate_target_point + Vector(100, 0, 0), true);
@@ -1554,7 +1554,7 @@ export class modifier_imba_wisp_relocate extends BaseModifier_Plus {
             this.GetCasterPlus().SetAbsOrigin(this.return_point);
             this.GetCasterPlus().Interrupt();
             let tether_ability = this.GetCasterPlus().findAbliityPlus<imba_wisp_tether>("imba_wisp_tether");
-            if (this.GetCasterPlus().HasModifier("modifier_imba_wisp_tether") && tether_ability.target != undefined && tether_ability.target.IsHero() && this.GetCasterPlus().IsAlive()) {
+            if (this.GetCasterPlus().HasModifier("modifier_imba_wisp_tether") && tether_ability.target != undefined && tether_ability.target.IsRealUnit() && this.GetCasterPlus().IsAlive()) {
                 tether_ability.target.SetAbsOrigin(this.return_point + Vector(100, 0, 0));
                 this.ally_teleport_pfx = ResHelper.CreateParticleEx("particles/units/heroes/hero_wisp/wisp_relocate_teleport.vpcf", ParticleAttachment_t.PATTACH_CUSTOMORIGIN, tether_ability.target, this.GetCasterPlus());
                 ParticleManager.SetParticleControlEnt(this.ally_teleport_pfx, 0, tether_ability.target, ParticleAttachment_t.PATTACH_POINT, "attach_hitloc", tether_ability.target.GetAbsOrigin(), true);

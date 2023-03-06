@@ -57,7 +57,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
     OnSpellStart(): void {
         this.scepter_updated = this.GetCasterPlus().HasScepter();
         this.GetCasterPlus().EmitSound("Hero_Undying.Decay.Cast");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_undying" && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetName().includes("undying") && RollPercentage(50)) {
             if (!this.responses) {
                 this.responses = {
                     "1": "undying_undying_decay_03",
@@ -108,7 +108,7 @@ export class imba_undying_decay extends BaseAbility_Plus {
                     table.insert(clone_owner_units[enemy.GetPlayerOwner().entindex() + ""], enemy.entindex());
                 }
             } else {
-                if (enemy.IsHero() && !enemy.IsIllusion()) {
+                if (enemy.IsRealUnit() && !enemy.IsIllusion()) {
                     enemy.EmitSound("Hero_Undying.Decay.Target");
                     this.GetCasterPlus().EmitSound("Hero_Undying.Decay.Transfer");
                     strength_transfer_particle = ResHelper.CreateParticleEx("particles/units/heroes/hero_undying/undying_decay_strength_xfer.vpcf", ParticleAttachment_t.PATTACH_ABSORIGIN_FOLLOW, enemy);
@@ -356,7 +356,7 @@ export class imba_undying_soul_rip extends BaseAbility_Plus {
     }
     OnSpellStart(): void {
         this.GetCasterPlus().EmitSound("Hero_Undying.SoulRip.Cast");
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_undying" && RollPercentage(50)) {
+        if (this.GetCasterPlus().GetName().includes("undying") && RollPercentage(50)) {
             if (!this.responses) {
                 this.responses = {
                     "1": "undying_undying_soulrip_02",
@@ -535,7 +535,7 @@ export class imba_undying_tombstone extends BaseAbility_Plus {
             position = deathPosition;
         }
         EmitSoundOnLocationWithCaster(position, "Hero_Undying.Tombstone", this.GetCasterPlus());
-        if (this.GetCasterPlus().GetName() == "npc_dota_hero_undying") {
+        if (this.GetCasterPlus().GetName().includes("undying")) {
             if (!this.responses) {
                 this.responses = {
                     "1": "undying_undying_tombstone_01",
